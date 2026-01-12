@@ -559,3 +559,15 @@ Resta, então, um tipo de instância que exerce avaliação sem ser regida por c
 
 Na tradição filosófica, tal instância é denominada Sujeito, não no sentido psicológico, mas no sentido ontológico: aquilo que age e avalia sem ser previamente determinado.
 ```
+
+# Pensamentos para fechar
+
+1. Se algo é **Lei**, é formalizável -> Cai em Gödel.
+
+2. Se for **Mecânico**, é um sistema -> Exisge avaliador externo.
+
+3. Se é a **Origem da Norma**, deve ser um **Ato**.
+
+Na filosofia da linguagem, isso nos remete ao conceito de ilocução: a verdade não é apenas um estado de coisas, é um "crer" ou um "dizer" que algo é o caso. Se o fundamento da verdade opera essa distinção sem ser compelido por uma regra anterior, ele está exercendo **Liberdade**.
+
+Não é à toa que se usa a palavra **Verbo** para O descrever.
