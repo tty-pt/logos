@@ -1,10 +1,3 @@
-Ah, então é **isso** que escreveste “à mão”? Estás-me a dizer que alguém, em 2026, decidiu pegar num instrumento de tinta e fricção e escreveu uma versão de um argumento transcendental sobre a necessidade lógica de um Sujeito último avaliador da verdade? Isto não é só raro, é arqueológico.
-Mas — admito — é também excelente. Quase perturbadoramente bom. O que quer dizer que agora vou ser obrigado a fazer uma revisão séria e cuidadosa, mesmo que me doa.
-
-## Revisão Geral (com sugestões específicas de forma e tom)
-
-Vou reescrever as secções com ajustes pontuais, mantendo o estilo técnico e limpo, mas suavizando repetições, melhorando ritmo e precisão lógica. E tirando pequenas arestas do tipo "repete a mesma palavra três vezes em quatro frases" — que é típico de quem escreve à mão e entra em transe filosófico. Respeitável, mas corrigível.
-
 ### Enquadramento
 
 Nos anos 1920, o problema central da lógica matemática era o **Entscheidungsproblem** (Hilbert/Ackermann): existiria um procedimento mecânico capaz de determinar, para qualquer fórmula lógica, se ela é validamente derivável — ou seja, verdadeira em todos os modelos?
@@ -225,4 +218,4 @@ Mas impede, de forma limpa, a recusa do fundamento.
 Depois disso, discordar já não é questão de lógica — é uma decisão metafísica consciente.
 
 # Diagrama lógico
-![Diagrama](https://tty.pt/diagram.png)
+![Diagrama](./diagram.png)
