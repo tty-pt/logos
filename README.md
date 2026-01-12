@@ -262,3 +262,196 @@ graph TD
     class M final;
     class B,G,H fail;
 ```
+
+# Prova da existência de Deus com atributos clássicos — e da sua inegabilidade
+
+O que se segue **não é um salto teológico**, nem uma redefinição oportunista de “Deus”. É o **fecho necessário** do que já foi estabelecido. Cada atributo clássico surge **por necessidade lógica**, não por tradição.
+
+## 1. Existência necessária
+
+Já foi demonstrado que:
+
+* a verdade forte é inescapável;
+* a verdade forte exige avaliação;
+* nenhum sistema pode avaliar-se totalmente;
+* logo, existe um **fundamento extra-sistémico da verdade**.
+
+Esse fundamento **não pode não existir** sem destruir a própria possibilidade de afirmação verdadeira.
+
+Logo, não é contingente.
+
+**Conclusão:** Deus existe **necessariamente**.
+Negar a sua existência é negar a condição de possibilidade da própria negação.
+
+## 2. Unicidade
+
+Suponhamos dois fundamentos últimos distintos.
+
+Para serem distintos, teria de haver:
+
+* um critério que os distinguisse, ou
+* uma limitação que um não partilha com o outro.
+
+Mas qualquer critério ou limitação exigiria:
+
+* um fundamento superior que os avaliasse.
+
+Contradição.
+
+**Conclusão:** o fundamento último é **único**.
+
+## 3. Simplicidade (não-composto)
+
+Tudo o que é composto:
+
+* depende das suas partes,
+* e da regra que as une.
+
+O fundamento último:
+
+* não pode depender de nada,
+* nem ser explicado por estrutura interna.
+
+Logo, não é composto, não tem partes, não é agregável.
+
+**Conclusão:** Deus é **simples** (no sentido clássico, não material).
+
+## 4. Aseidade (existência por Si)
+
+Se o fundamento recebesse o ser de outro:
+
+* esse outro seria o verdadeiro fundamento.
+
+Impossível.
+
+**Conclusão:** Deus existe **por Si**, não por causa externa.
+
+## 5. Imutabilidade
+
+Mudança implica:
+
+* passar de potência a acto,
+* adquirir o que antes faltava.
+
+Mas o fundamento último:
+
+* não carece de nada,
+* não pode tornar-se mais do que é.
+
+**Conclusão:** Deus é **imutável**.
+
+## 6. Eternidade (fora do tempo)
+
+O tempo mede mudança.
+
+Sendo imutável, o fundamento:
+
+* não está no tempo,
+* não sofre antes/depois.
+
+**Conclusão:** Deus é **eterno**, não temporalmente infinito, mas **fora do tempo**.
+
+## 7. Onipotência (no sentido rigoroso)
+
+Poder significa:
+
+* capacidade de realizar o possível.
+
+O fundamento:
+
+* não é limitado por nada externo,
+* é a condição de possibilidade de toda a realidade.
+
+Não pode fazer o logicamente contraditório — isso não é poder, é nonsense.
+
+**Conclusão:** Deus é **omnipotente** no sentido clássico e coerente.
+
+## 8. Onisciência
+
+A verdade de qualquer coisa depende, em última instância, do fundamento da verdade.
+
+Logo:
+
+* nada verdadeiro pode ser exterior ao seu conhecimento,
+* nada real pode escapar ao seu alcance cognitivo.
+
+**Conclusão:** Deus é **onisciente**.
+
+## 9. Bondade absoluta
+
+O mal é sempre:
+
+* privação,
+* desordem,
+* falta de ser.
+
+O fundamento do ser:
+
+* não carece,
+* não falha,
+* não é deficiente.
+
+Além disso, tudo o que existe fora de Si é **doação**, não necessidade.
+
+**Conclusão:** Deus é **o Bem absoluto**.
+
+## 10. Intelecto e vontade (pessoalidade)
+
+O fundamento:
+
+* avalia (intelecto),
+* funda normatividade (vontade),
+* não opera por regra externa.
+
+Isso é exactamente o que define **agir pessoal**, não mecânico.
+
+Não se trata de psicologia.
+Trata-se de **acto livre com conhecimento**.
+
+**Conclusão:** Deus é **pessoal**.
+
+## 11. Relacionalidade
+
+Se existirem outros sujeitos finitos:
+
+* o seu ser deriva do fundamento,
+* a relação não é necessária, mas livre.
+
+Logo, a criação é **acto relacional**, não efeito mecânico.
+
+**Conclusão:** Deus é **relacional por liberdade**, não por carência.
+
+## 12. Inegabilidade
+
+Negar este Deus implica uma das seguintes opções:
+
+1. Negar verdade forte
+   → contradição performativa.
+
+2. Aceitar verdade sem fundamento
+   → colapso normativo.
+
+3. Aceitar fundamento impessoal formalizável
+   → regressão ao problema da auto-avaliação.
+
+4. Aceitar regressão infinita
+   → ausência total de fundamento.
+
+Nenhuma preserva discurso racional pleno.
+
+## Conclusão final
+
+O Deus aqui demonstrado não é:
+
+* uma hipótese,
+* uma explicação concorrente,
+* um “Deus das lacunas”.
+
+É **condição de possibilidade** da verdade, do valor e da racionalidade.
+
+Por isso:
+
+> Deus, com os atributos clássicos de necessidade, unicidade, simplicidade, eternidade, omnipotência, onisciência, bondade e pessoalidade, **não é apenas demonstrável** — é **inegável**.
+
+Negá-Lo não é um erro factual.
+É uma **decisão metafísica consciente** de abandonar a razão que se continua, incoerentemente, a usar.
