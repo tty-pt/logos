@@ -219,3 +219,46 @@ Depois disso, discordar já não é questão de lógica — é uma decisão meta
 
 # Diagrama lógico
 ![Diagrama](./diagram.png)
+
+```mermaid
+graph TD
+    %% Definição de Estilos para clareza visual
+    classDef base fill:#f5f5f5,stroke:#333,stroke-width:1px;
+    classDef logic fill:#d4e6f1,stroke:#2980b9,stroke-width:2px;
+    classDef ontology fill:#d5f5e3,stroke:#27ae60,stroke-width:2px;
+    classDef final fill:#2c3e50,stroke:#f1c40f,stroke-width:4px,color:#fff;
+    classDef fail fill:#fadbd8,stroke:#c0392b,stroke-dasharray: 5 5;
+
+    %% O Início
+    Start([Qualquer Afirmação Racional]) -->|Tenta descrever a realidade| A{Existe Verdade Forte?}
+    
+    %% Passo 1: A Armadilha da Negação
+    A -- "Não" --> B[Contradição Performativa]
+    B -->|Negar é afirmar uma verdade| A
+    
+    %% Passo 2 e 3: A Lógica
+    A -- "Sim" --> C[Verdade exige AVALIAÇÃO]
+    C -->|Distinção Verdadeiro/Falso| D[Sistemas Lógicos são Fechados]
+    D -->|Teorema da Incompletude| E(Necessidade de Ponto Exterior)
+
+    %% Passo 4: A Natureza do Fundamento
+    E --> F{O que é esse Ponto?}
+    F -- "Objeto ou Lei?" --> G[Objeto: É avaliado, não avalia]
+    G -.->|Falha como fundamento| H[Regressão Infinita]
+    
+    F -- "Única opção lógica" --> I[SUJEITO]
+    
+    %% Passo 5, 6 e 7: Os Atributos Divinos
+    I -->|Não condicionado| J[LIVRE]
+    I -->|Fonte de dever/norma| K[Fonte de VALOR]
+    
+    J & K --> L[O Bem Absoluto é RELACIONAL]
+    L -->|Doação / Amor Ontológico| M((DEUS))
+
+    %% Aplicação dos Estilos
+    class Start,A base;
+    class C,D,E,F logic;
+    class I,J,K,L ontology;
+    class M final;
+    class B,G,H fail;
+```
