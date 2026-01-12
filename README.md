@@ -49,6 +49,10 @@ Ou seja, a expressão “q = ¬q” é sempre **falsa**.
 
 Este padrão formal antecipa o que ocorre **no discurso racional**, quando se nega a existência da verdade forte. É uma estrutura que se desfaz ao tentar aplicar-se a si própria.
 
+Verdade forte = estatuto normativo que distingue acerto real de mera aceitação, independentemente de práticas, consenso ou sucesso instrumental.
+
+Não se trata de verdade como predicado semântico (“corresponde a um modelo”), mas como autoridade racional (“conta como correto”).
+
 ### Sobre a auto-contradição performativa
 
 Uma **contradição performativa** ocorre quando alguém **afirma** algo cuja estrutura interna **nega** o próprio ato de afirmar.
@@ -80,35 +84,18 @@ Se formos consistentes, temos de assumir:
 
 Mesmo que se defina um “super-sistema” que inclua todos os outros avaliadores, ele ainda é um sistema — e exige critério exterior.
 
+```
+Definição (Sujeito mínimo):
+Chama-se Sujeito qualquer instância que:
+
+exerce avaliação normativa;
+
+não deriva essa autoridade de regra externa;
+
+não é objeto de avaliação superior.
+```
+
 ---
-
-### Sujeito no sentido forte
-
-Esse Avaliador é **necessário**, como demonstrado.
-Não é contingente. É **pura causa**, e portanto **livre**: nada o condiciona, nada o limita, nada o contém.
-
-É **Sujeito** no sentido forte.
-
-Na lógica formal:
-
-* um **objeto** de avaliação é algo inscrito num sistema;
-* um **avaliador** é o que está fora, e estabelece o critério de verdade.
-
-Ao usarmos a palavra *Sujeito*, não falamos de consciência psicológica nem de alguma propriedade emergente de sistemas complexos.
-
-(Essa tese, aliás, seria equivalente a tentar somar números negativos e esperar obter um número positivo por mágica.)
-
-Falamos de Alguém que **realmente merece** o nome de Sujeito:
-livre, incondicionado, e **exterior a todos os sistemas**.
-
-### Bom, Pessoal e Relacional
-
-Como fundamento da Verdade e do Valor, este Sujeito é, por definição, **Bom**.
-
-Tudo o que existe fora de Si é **doação**: expressão livre de um Ser necessário.
-E se existirem outros sujeitos (como é razoável supor, embora não se prove aqui), então Ele partilha a sua essência com eles — sendo, por isso, também **pessoal** e **relacional**.
-
-Ou seja, a estrutura da Verdade e do Valor conduz, de forma natural, às características tradicionalmente atribuídas a Deus — **sem saltos retóricos, sem apelos emocionais, sem hipóteses ad hoc**.
 
 ## Objecções sofisticadas — e porque não resolvem o problema
 
@@ -168,7 +155,27 @@ O problema é que uma estrutura impessoal necessária continua a funcionar segun
 
 Se não podem ser formalizadas, então já não estamos a falar de uma estrutura no sentido forte, mas de algo que **exerce avaliação sem ser redutível a regras**.
 
-Nesse ponto, a diferença entre “estrutura impessoal” e “avaliador” torna-se nominal. O papel ontológico é o mesmo.
+Um fundamento normativo impessoal só difere de um avaliador se operar inteiramente segundo propriedades fixas.
+
+Se assim for, ele é, em princípio, formalizável — e reincide no problema da auto-avaliação.
+
+Se não for formalizável, então exerce discriminação normativa sem regra externa. Nesse ponto, a recusa do termo avaliador não descreve uma diferença ontológica, mas apenas uma preferência terminológica.
+
+Sobre a impossibilidade de normatividade impessoal última
+
+Um critério normativo último não apenas classifica ocorrências; ele estabelece autoridade. Distinguir o correto do incorreto não é um acto meramente descritivo, mas um acto de validação.
+
+Qualquer instância que desempenhe essa função deve satisfazer simultaneamente duas condições:
+
+Capacidade de discriminação não derivada — o critério não pode ser aplicado em virtude de uma regra superior, sob pena de regressão;
+
+Autoridade não transmissiva — o estatuto normativo não pode ser herdado de outro fundamento.
+
+Uma “estrutura impessoal” opera exclusivamente segundo propriedades fixas. Mas propriedades fixas só exercem normatividade se forem interpretadas como normativas — e essa interpretação já pressupõe um acto avaliativo anterior.
+
+Assim, uma estrutura impessoal pode veicular normatividade, mas não fundá-la. Fundar normatividade exige um acto originário de validação que não decorre de propriedades, regras ou leis — mas que as institui.
+
+Nesse sentido rigoroso, o fundamento normativo último não é apenas extra-sistémico, mas agente: não porque possua psicologia, mas porque exerce autoridade sem derivação. Chamar-lhe “Sujeito” não acrescenta conteúdo teológico; apenas nomeia a função ontológica mínima que ele já desempenha.
 
 ### 6. “Nada disto exige pessoalidade ou relacionalidade”
 
@@ -181,9 +188,27 @@ Mas o argumento não pretende deduzir todas as propriedades do fundamento. Prete
 * não é produto de regras,
 * e não é condicionado por nada externo.
 
-Chamar a isso “Sujeito” não é uma metáfora psicológica, mas uma descrição mínima do papel que desempenha. A questão da pessoalidade plena surge depois, como desenvolvimento metafísico — não como premissa escondida.
+“Até este ponto, a conclusão é estritamente negativa: o fundamento último da verdade não é sistema, não é objeto e não é redutível a regras formais.
 
-Conclusão desta secção (revista)
+A designação desse fundamento como Sujeito não é uma dedução lógica adicional, mas a identificação ontológica mínima compatível com o papel já demonstrado: avaliar sem ser avaliado, fundar sem ser fundado, agir sem regra externa.”
+
+### 7. Objecção adicional: “A normatividade é um facto bruto”
+
+Resposta:
+Um facto bruto pode descrever regularidades, mas não instituir autoridade.
+
+Um “facto” só é normativo se contar como razão.
+Contar como razão não é uma propriedade descritiva — é um estatuto conferido.
+
+Se a normatividade fosse um facto bruto:
+
+ou seria normativamente vinculativa → exige critério de validade;
+
+ou não vinculativa → deixa de ser normatividade.
+
+Logo, “facto normativo bruto” é uma contradição categorial: ou é bruto e não normativo, ou normativo e não bruto.
+
+## Conclusão desta secção
 
 As objecções mais sofisticadas não falham por erro técnico, mas por concessão estrutural. Cada uma tenta preservar a racionalidade local sacrificando algo essencial: totalidade, normatividade, ou fundamento. O que nenhuma consegue fazer é manter, ao mesmo tempo, a prática racional da afirmação e a negação da verdade forte.
 
@@ -191,31 +216,86 @@ Isso é decisivo.
 
 Não é coerente dizer simplesmente que “a verdade não é fundamentável” — porque essa própria afirmação se apresenta como verdadeira em sentido forte. Não é proposta como uma convenção local, um sucesso pragmático ou uma regra provisória, mas como uma descrição correta da realidade racional.
 
-Ou seja:
-negar a verdade forte exige aquilo que se pretende negar.
+Recorremos ao princípio da Normatividade Forte:
+Toda afirmação racional que se apresenta como válida para além de um contexto local pressupõe um critério de verdade que não depende apenas de práticas, consenso ou sucesso pragmático.
 
-A posição “não existe verdade forte” não é uma alternativa neutra ao argumento; é uma contradição performativa. Ela só pode ser afirmada assumindo, no próprio acto de afirmá-la, um critério de verdade que não reconhece como legítimo.
+Negar este princípio não gera contradição formal, mas implica abdicar da pretensão de validade racional forte - inclusive para a própria negação.
 
 Assim, o dilema inicial revela-se assimétrico:
 
-Não é possível abandonar a verdade forte sem abandonar a própria inteligibilidade do discurso racional.
+Qualquer afirmação que pretenda validade transcontextual — isto é, que se apresente como correta independentemente de práticas locais — já pressupõe uma distinção normativa entre acerto e erro que não pode ser reduzida a consenso, utilidade ou estabilidade prática sem perda semântica. Negar essa normatividade não gera contradição formal, mas dissolve a própria pretensão de correção que o discurso continua a exercer.
 
 Logo, a verdade forte não é opcional; é condição de possibilidade de qualquer afirmação significativa — incluindo as críticas a este argumento.
 
 Uma vez reconhecida a necessidade da verdade forte, o resto segue-se com rigor:
 
-nenhum sistema pode fundamentar totalmente o seu próprio critério de verdade;
+O resultado de Gödel e dos esquemas de diagonalização não mostra apenas um limite epistémico (o que pode ser provado), mas um limite estrutural: o critério último de correção não pode ser totalmente especificado por meios internos ao sistema que ele avalia. Trata-se, portanto, de uma dependência semântica e normativa, não meramente metodológica.
 
 nenhuma regressão infinita fornece fundamento;
 
-logo, o critério último da verdade tem de ser extra-sistémico.
+Um critério de verdade não é apenas uma condição de ocorrência, mas uma instância de discriminação normativa: ele distingue o que conta como correto do que não conta. Qualquer entidade que desempenhe esse papel não pode ser puramente descritiva; ela exerce função avaliativa.
 
 Chamar a esse fundamento “Avaliador”, “Fundamento”, ou “Sujeito” não é uma escolha retórica, mas ontológica: trata-se de algo que avalia sem ser avaliado, que funda sem ser fundado, e que não opera segundo regras que lhe sejam externas.
 
 O argumento não força uma teologia.
 Mas impede, de forma limpa, a recusa do fundamento.
 
+A partir deste ponto, a discordância já não incide sobre a validade interna das inferências, mas sobre a disposição de aceitar ou recusar os compromissos ontológicos exigidos pela normatividade racional forte.
 Depois disso, discordar já não é questão de lógica — é uma decisão metafísica consciente.
+
+# Princípio de suficiência ontológica mínima
+
+Sempre que uma função explanatória é demonstrada como necessária, a ontologia mínima adequada é aquela que:
+
+(i) é suficiente para desempenhar essa função,
+
+(ii) não introduz entidades ou propriedades redundantes,
+
+(iii) não reintroduz, sob outra forma, o problema que pretende resolver.
+
+No presente caso, a função necessária é clara: fundar a distinção normativa entre verdadeiro e falso sem recorrer a critérios externos ou regras prévias.
+
+Postular um fundamento que:
+
+seja objeto,
+
+seja estrutura impessoal,
+
+ou seja conjunto de propriedades necessárias,
+
+falha o critério (iii), pois cada uma dessas opções ou exige validação externa ou reincide na formalização que o argumento já excluiu.
+
+A identificação do fundamento como Sujeito não acrescenta propriedades supérfluas; pelo contrário, remove todas as que se revelaram insuficientes. Trata-se, portanto, não de um enriquecimento metafísico, mas de uma redução ontológica orientada pela função.
+
+À luz deste princípio, resta agora identificar que tipo de entidade satisfaz minimamente essas condições sem reintroduzir os problemas já excluídos.
+
+### Sujeito no sentido forte
+
+Esse Avaliador é **necessário**, como demonstrado.
+Não é condicionado por nada externo e, nesse sentido rigoroso, é livre.
+
+É **Sujeito** no sentido forte.
+
+Na lógica formal:
+
+* um **objeto** de avaliação é algo inscrito num sistema;
+* um **avaliador** é o que está fora, e estabelece o critério de verdade.
+
+Ao usarmos a palavra *Sujeito*, não falamos de consciência psicológica nem de alguma propriedade emergente de sistemas complexos.
+
+(Essa tese, aliás, seria equivalente a tentar somar números negativos e esperar obter um número positivo por mágica.)
+
+Falamos de Alguém que **realmente merece** o nome de Sujeito:
+livre, incondicionado, e **exterior a todos os sistemas**.
+
+### Bom, Pessoal e Relacional
+
+Se o fundamento da verdade é também o fundamento da normatividade, então ele não pode ser axiologicamente neutro. A neutralidade já seria uma posição normativa. Nesse sentido preciso — e apenas nesse — o fundamento é identificável com o Bem.
+
+Tudo o que existe fora de Si é **doação**: expressão livre de um Ser necessário.
+E se existirem outros sujeitos (como é razoável supor, embora não se prove aqui), então Ele partilha a sua essência com eles — sendo, por isso, também **pessoal** e **relacional**.
+
+Ou seja, a estrutura da Verdade e do Valor conduz, de forma natural, às características tradicionalmente atribuídas a Deus — **sem saltos retóricos, sem apelos emocionais, sem hipóteses ad hoc**.
 
 # Diagrama lógico
 ![Diagrama](./diagram.png)
@@ -263,9 +343,10 @@ graph TD
     class B,G,H fail;
 ```
 
-# Prova da existência de Deus com atributos clássicos — e da sua inegabilidade
+# Atributos clássicos.
+Esta prova não se apresenta negável sem abdicação explícita da normatividade racional forte.
 
-O que se segue **não é um salto teológico**, nem uma redefinição oportunista de “Deus”. É o **fecho necessário** do que já foi estabelecido. Cada atributo clássico surge **por necessidade lógica**, não por tradição.
+**Não é um salto teológico**, nem uma redefinição oportunista de “Deus”. É o **fecho necessário** do que já foi estabelecido. Cada atributo clássico surge **por necessidade lógica**, não por tradição.
 
 ## 1. Existência necessária
 
@@ -280,7 +361,7 @@ Esse fundamento **não pode não existir** sem destruir a própria possibilidade
 
 Logo, não é contingente.
 
-**Conclusão:** Deus existe **necessariamente**.
+**Logo,** existe necessariamente uma instância que satisfaz exatamente os atributos tradicionalmente designados por ‘Deus’.
 Negar a sua existência é negar a condição de possibilidade da própria negação.
 
 ## 2. Unicidade
@@ -451,7 +532,30 @@ O Deus aqui demonstrado não é:
 
 Por isso:
 
-> Deus, com os atributos clássicos de necessidade, unicidade, simplicidade, eternidade, omnipotência, onisciência, bondade e pessoalidade, **não é apenas demonstrável** — é **inegável**.
+> Deus, com os atributos clássicos de necessidade, unicidade, simplicidade, eternidade, omnipotência, onisciência, bondade e pessoalidade, **não é apenas demonstrável** — é **extremamente convincente**.
 
-Negá-Lo não é um erro factual.
-É uma **decisão metafísica consciente** de abandonar a razão que se continua, incoerentemente, a usar.
+De qualquer forma, o que se mostra aqui não é que a negação de Deus seja logicamente impossível, mas que ela não pode ser mantida sem custo: exige a renúncia explícita à verdade forte e à normatividade racional plena.
+
+Nesse sentido preciso — e apenas nesse — o fundamento último não é refutável a partir de dentro do discurso racional que continua a operar com pretensões de verdade.
+
+A partir deste ponto, a discordância já não incide sobre inferências lógicas, mas sobre a disposição de assumir ou não os compromissos ontológicos exigidos pela normatividade racional forte.
+
+# Forma lógica do argumento
+
+```
+Se:
+existe verdade forte;
+verdade forte exige critério último;
+nenhum sistema formal pode fornecer tal critério;
+
+então:
+existe um fundamento extra-sistémico da verdade.
+
+Se, adicionalmente:
+4. esse fundamento não opera por regras externas;
+
+então:
+Resta, então, um tipo de instância que exerce avaliação sem ser regida por critérios externos — isto é, uma fonte originária de normatividade.
+
+Na tradição filosófica, tal instância é denominada Sujeito, não no sentido psicológico, mas no sentido ontológico: aquilo que age e avalia sem ser previamente determinado.
+```
