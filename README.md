@@ -1,16 +1,16 @@
-### Enquadramento
+## Enquadramento
 
-Nos anos 1920, o problema central da lógica matemática era o **Entscheidungsproblem** (Hilbert/Ackermann): existiria um procedimento mecânico capaz de determinar, para qualquer fórmula lógica, se ela é validamente derivável — ou seja, verdadeira em todos os modelos?
+Nos anos 1920, um dos problemas centrais da lógica matemática era o **Entscheidungsproblem** (Hilbert/Ackermann): existiria um procedimento mecânico capaz de determinar, para qualquer fórmula lógica, se ela é validamente derivável — isto é, verdadeira em todos os modelos?
 
-Em 1936, **Church** e **Turing**, por vias distintas, demonstram que tal algoritmo geral **não pode existir**.
+Em 1936, **Church** e **Turing**, por vias distintas, mostraram que tal algoritmo geral **não pode existir**.
 
-A pergunta “**este programa pára ou não pára?**” cristaliza-se mais tarde como o exemplo mais direto — e devastador — desse limite.
+A pergunta “**este programa pára ou não pára?**” cristaliza-se mais tarde como o exemplo mais directo — e mais destrutivo — desse limite.
 
-O termo **“halting problem”**, na sua formulação moderna, só se estabiliza posteriormente, sendo geralmente atribuído a **Martin Davis** (1958). Estudos históricos mostram que Turing não usou esse nome, nem lhe atribuiu centralidade especial.
+A designação **“halting problem”**, na formulação moderna, estabiliza apenas depois, sendo frequentemente associada a **Martin Davis** (1958). Estudos históricos indicam que Turing não usou essa expressão, nem lhe atribuiu centralidade especial.
 
-### O problema
+## O problema
 
-A formulação de **Strachey** (1965) assemelha-se a este pseudocódigo:
+A formulação de **Strachey** (1965) pode ser representada assim:
 
 ```python
 Q(P):
@@ -20,228 +20,190 @@ Q(P):
         return
 ```
 
-Aqui, `Q(P)` entra em loop infinito **se e só se** `P` termina. Assim, se `P` termina ao receber `P` como entrada, `Q(P)` não termina. A contradição emerge quando se tenta aplicar `Q` a si mesmo.
+Aqui, `Q(P)` entra em ciclo infinito **se e só se** `P` termina. A tensão surge quando se tenta aplicar `Q` a si próprio.
 
-Para simplificar, pensemos assim:
+Para simplificar, consideremos um procedimento `P` que, dado um argumento, devolve sempre um valor binário: **sim** ou **não**.
 
-Consideremos um procedimento `P` que, dado um argumento, **retorna sempre** um valor binário: **sim** ou **não**.
-
-Definimos então `Q` como a inversão do resultado de `P` aplicado a si mesmo:
+Definimos `Q` como a inversão do resultado de `P` aplicado a si mesmo:
 
 ```python
 Q(P):
     return not P(P)
 ```
 
-Ou seja, `Q(P)` devolve o **contrário** de `P(P)`.
-Se `P(P)` devolve **sim**, então `Q(P)` devolve **não** — e vice-versa.
+Isto é: `Q(P)` devolve o contrário de `P(P)`. Se `P(P)` devolve **sim**, então `Q(P)` devolve **não**; e vice-versa.
 
-Mas o que acontece ao aplicarmos `Q` a si próprio?
+O que acontece ao aplicarmos `Q` a si próprio?
 
-Isso nos dá:
+Temos:
 
 **Q(Q) = ¬Q(Q)**
 
-Uma proposição que se afirma igual ao seu próprio oposto — o que é logicamente impossível.
+Uma proposição que se identifica com a sua negação — o que é logicamente impossível. Em particular, “q = ¬q” é sempre **falsa**.
 
-Ou seja, a expressão “q = ¬q” é sempre **falsa**.
-(Q(Q)) é uma estrutura que se autonega. Implode. A sua própria regra, quando auto-aplicada, destrói o valor que pretendia estabelecer.
+Trata-se de uma estrutura em que uma regra, ao ser auto-aplicada, destrói o valor que pretende fixar.
 
-Este padrão formal antecipa o que ocorre **no discurso racional**, quando se nega a existência da verdade forte. É uma estrutura que se desfaz ao tentar aplicar-se a si própria.
+Este padrão antecipa o que ocorre no discurso racional quando se nega a **verdade forte**: a posição desfaz-se ao tentar aplicar-se a si própria.
 
-Verdade forte = estatuto normativo que distingue acerto real de mera aceitação, independentemente de práticas, consenso ou sucesso instrumental.
+**Verdade forte**: estatuto normativo que distingue acerto real de mera aceitação, independentemente de práticas, consenso ou sucesso instrumental. Não é “verdade” como predicado semântico (“corresponde a um modelo”), mas como **autoridade racional** (“conta como correcto”).
 
-Não se trata de verdade como predicado semântico (“corresponde a um modelo”), mas como autoridade racional (“conta como correto”).
+## Sobre a auto-contradição performativa
 
-### Sobre a auto-contradição performativa
+Há **contradição performativa** quando alguém afirma algo cuja estrutura nega o próprio acto de afirmar.
 
-Uma **contradição performativa** ocorre quando alguém **afirma** algo cuja estrutura interna **nega** o próprio ato de afirmar.
+Exemplo: dizer “**não existe verdade forte**” é, na prática, apresentar essa frase **como** verdadeira em sentido forte — sob pena de não haver razão para a tomar como válida.
 
-Por exemplo: ao dizer “**não existe verdade forte**”, a pessoa está implicitamente a apresentar essa afirmação **como se fosse** verdade forte — negando, na forma, o conteúdo que propõe.
-
-É precisamente esse tipo de impasse que Gödel demonstra:
-Em qualquer sistema formal suficientemente expressivo, **a auto-avaliação total falha**.
+É um impasse do mesmo tipo que Gödel torna inevitável em sistemas formais suficientemente expressivos: **a auto-avaliação total falha**.
 
 Um sistema não pode ser simultaneamente:
 
-* completo (produz todas as verdades),
-* consistente (não gera contradições),
-* e auto-validado (fundar-se a si mesmo sem depender de critério externo).
+* **completo** (gerar todas as verdades),
+* **consistente** (não gerar contradições),
+* e **auto-validado** (fundar-se integralmente a si próprio).
 
-Logo, **o critério de avaliação do sistema tem de estar fora dele**.
+Logo, o critério último de avaliação tem de estar **fora** do sistema.
 
-### Sobre a impossibilidade de regressão infinita
+## Sobre a impossibilidade de regressão infinita
 
-Pode-se tentar salvar o sistema com um “avaliador externo”.
+Pode tentar-se salvar o esquema com um “avaliador externo”.
 
-Mas se esse avaliador, por sua vez, estiver dentro de outro sistema que o valida, o problema reaparece.
+Mas, se esse avaliador estiver integrado noutro sistema que o valida, o problema reaparece. Forma-se uma cadeia de sistemas que se justificam mutuamente, sem produzir fundamento: apenas **adiamento indefinido**.
 
-Estamos perante uma **cadeia de sistemas**, cada um tentando fundamentar o anterior. Mas isso não resolve: apenas **adiamos indefinidamente** o problema do fundamento.
+Se formos consequentes, segue-se:
 
-Se formos consistentes, temos de assumir:
+> Para haver verdade forte, tem de existir um avaliador **exterior a qualquer sistema**.
 
-> Para que haja verdade forte, tem de haver um avaliador **exterior a todo e qualquer sistema**.
+Mesmo um “super-sistema” que contenha todos os avaliadores continua a ser um sistema — e volta a exigir critério exterior.
 
-Mesmo que se defina um “super-sistema” que inclua todos os outros avaliadores, ele ainda é um sistema — e exige critério exterior.
-
-```
-Definição (Sujeito mínimo):
+## Definição (Sujeito mínimo)
 Chama-se Sujeito qualquer instância que:
 
-exerce avaliação normativa;
+1. exerce avaliação normativa;
+2. não deriva essa autoridade de regra externa;
+3. não é objecto de avaliação superior.
 
-não deriva essa autoridade de regra externa;
+### Nota terminológica (sobre “Sujeito”).
 
-não é objeto de avaliação superior.
-```
+O termo Sujeito é aqui usado em sentido estritamente ontológico, não psicológico nem fenomenológico. A sua acepção remete à tradição clássica do ὑποκείμενον (hypokeímenon): aquilo que “jaz por baixo”, o que está sub-posto, o que suporta e padece determinações.
 
----
+Neste sentido original — anterior à reinterpretação moderna de matriz cartesiana — o Sujeito não é primariamente um “eu” representacional ou um centro de consciência, mas aquilo que se encontra na base, como condição de possibilidade da determinação, da afecção e da atribuição normativa.
 
-## Objecções sofisticadas — e porque não resolvem o problema
+A oposição clássica entre subjectum e objectum não designa, assim, dois pólos simétricos, mas uma relação ontológica assimétrica: o objeto é o que é posto diante; o sujeito é o que está por baixo, sustentando e possibilitando a própria relação. É neste sentido — e apenas neste — que o termo Sujeito deve ser entendido ao longo do argumento.
 
-As objecções mais interessantes a este argumento não são superficiais. Pelo contrário: partem de leituras sérias da lógica, da filosofia da linguagem e da epistemologia contemporânea. Ainda assim, nenhuma consegue evitar a conclusão central. Vejamos porquê.
+## Objecções sofisticadas — e por que não resolvem
 
-### 1. “A auto-referência só é problemática em sistemas que exigem totalidade”
+As melhores objecções não são superficiais: assentam em lógica, filosofia da linguagem e epistemologia contemporânea. Ainda assim, nenhuma evita a conclusão central.
 
-Esta objecção reconhece o ponto técnico: a contradição surge quando um sistema pretende **decidir todos os casos**, incluindo os que se aplicam a si próprio. A proposta, então, é abdicar dessa exigência de totalidade.
+### 1) “A auto-referência só é problemática quando se exige totalidade”
 
-A resposta é simples e decisiva:
-ao abdicar da totalidade, abdica-se precisamente daquilo que está em causa.
+Segundo esta objecção, a contradição surge quando o sistema pretende decidir **todos** os casos, incluindo os auto-aplicáveis. Propõe-se, então, renunciar à totalidade.
 
-Um critério de verdade que falha **em princípio** nos casos-limite não é um critério último. Pode ser útil, operativo, até extremamente poderoso — mas não funda a distinção entre verdadeiro e falso *enquanto tal*. Apenas a gere parcialmente.
+Mas ao renunciar à totalidade renuncia-se ao que está em causa: um critério último.
 
-Esta objecção é coerente, mas concede o ponto central: **não existe verdade forte auto-fundada dentro de um sistema**.
+Um critério que falha **em princípio** nos casos-limite pode ser útil e poderoso, mas não funda a distinção entre verdadeiro e falso **enquanto tal**; administra-a apenas parcialmente.
 
-### 2. “A verdade é definida semanticamente, não decidida formalmente”
+Esta objecção é coerente — e concede o ponto: **não há verdade forte auto-fundada dentro de um sistema**.
 
-Aqui invoca-se a distinção clássica entre verdade semântica e decidibilidade sintáctica, muitas vezes com referência a teorias da verdade hierárquicas (à maneira de Tarski).
+### 2) “A verdade é semântica, não decidibilidade formal”
 
-Mas o problema não é confundirmos verdade com prova. O problema é outro:
-**quem valida a adequação da semântica?**
+Invoca-se a distinção entre verdade semântica e decidibilidade sintáctica (por exemplo, em moldes tarskianos). Mas o problema não é confundir “verdade” com “prova”.
 
-Uma hierarquia de linguagens evita paradoxos locais, mas não elimina a exigência de um critério último que legitime a hierarquia como um todo. A pergunta reaparece inevitavelmente:
+A pergunta é: **quem legitima a semântica?**
 
-> Por que razão esta estrutura semântica — e não outra — é a que corresponde à verdade?
+Hierarquias de linguagem evitam paradoxos locais, mas não eliminam a exigência de um critério último que valide a hierarquia como um todo:
 
-Enquanto essa pergunta fizer sentido, o sistema não se funda a si próprio. A hierarquia organiza o problema; não o resolve.
+> Por que razão esta estrutura semântica — e não outra — corresponde à verdade?
 
-### 3. “O fundamento pode ser pragmático ou intersubjectivo”
+Enquanto esta pergunta fizer sentido, o sistema não se funda a si próprio. A hierarquia organiza o problema; não o encerra.
 
-Segundo esta abordagem, a verdade não exige um avaliador último, mas apenas práticas estáveis de justificação, consenso racional ou sucesso pragmático.
+### 3) “O fundamento pode ser pragmático ou intersubjectivo”
 
-Isto funciona bem para explicar **como usamos** o conceito de verdade. Não explica **o que legitima** esse uso.
+Práticas estáveis, consenso racional ou sucesso pragmático explicam bem **como usamos** “verdade”. Não explicam **o que legitima** esse uso.
 
-Práticas podem divergir, consensos podem falhar, êxitos podem ser ilusórios. Chamar “verdade” ao que resulta dessas dinâmicas é possível — mas apenas se já se pressupõe um critério pelo qual práticas, consensos e êxitos são avaliados como adequados ou inadequados.
+Práticas divergem, consensos falham, êxitos iludem. Chamar “verdade” ao que resulta dessas dinâmicas é possível — mas só se já se pressupõe um critério pelo qual essas dinâmicas contam como adequadas ou inadequadas.
 
-Sem esse critério, o termo “verdade” perde força normativa e torna-se descritivo. O argumento não é derrotado; é contornado ao preço de redefinir o conceito.
+Sem esse critério, “verdade” perde força normativa e torna-se descritivo. A objecção contorna o argumento ao preço de redefinir o conceito.
 
-### 4. “A regressão infinita é aceitável; não precisamos de um ponto final”
+### 4) “A regressão infinita é aceitável; não precisamos de ponto final”
 
-Alguns filósofos aceitam regressões infinitas como estruturalmente legítimas. Não há contradição formal em tal regressão.
+Uma regressão infinita pode ser formalmente consistente.
 
-O problema aqui não é formal, mas fundacional.
+O problema aqui é fundacional: uma cadeia infinita diz apenas que cada justificação remete para outra, mas nunca explica por que razão o conjunto tem autoridade justificativa.
 
-Uma cadeia infinita de justificações explica **como algo é sempre justificado por outra coisa**, mas nunca explica **por que razão o conjunto inteiro tem autoridade justificativa**.
+Se nenhuma instância da cadeia é fundante, nenhuma transmite fundamento. Aceitar a regressão equivale a aceitar ausência de fundamento — o que volta a negar a verdade forte.
 
-Se nenhuma instância da cadeia possui estatuto fundante, então nenhuma a transmite. A regressão pode ser logicamente consistente, mas permanece epistemicamente vazia.
+### 5) “O avaliador último pode ser uma estrutura impessoal necessária”
 
-Aceitá-la equivale a aceitar que não há fundamento — o que volta a negar a verdade forte.
+Concede-se a exterioridade ao sistema, mas recusa-se o termo “Sujeito”.
 
-### 5. “O avaliador último pode ser uma estrutura impessoal necessária”
+Se essa estrutura opera por propriedades fixas suficientes para fundamentar a verdade, então é formalizável — e regressa-se ao problema da auto-avaliação.
 
-Esta é talvez a objecção mais forte. Concede a necessidade de algo extra-sistémico, mas recusa chamá-lo “Sujeito”.
+Se não é formalizável, então exerce discriminação normativa sem regra externa. Nesse ponto, a recusa de “avaliador” é terminológica, não ontológica.
 
-O problema é que uma estrutura impessoal necessária continua a funcionar segundo propriedades fixas. Se essas propriedades são suficientes para fundamentar a verdade, então podem, em princípio, ser formalizadas — e voltamos ao problema da auto-avaliação.
+#### Sobre a impossibilidade de normatividade última impessoal
 
-Se não podem ser formalizadas, então já não estamos a falar de uma estrutura no sentido forte, mas de algo que **exerce avaliação sem ser redutível a regras**.
+Um critério último não apenas classifica: **confere autoridade**. Distinguir correcto/incorreto não é descrição; é validação.
 
-Um fundamento normativo impessoal só difere de um avaliador se operar inteiramente segundo propriedades fixas.
+Para exercer essa função, é preciso:
 
-Se assim for, ele é, em princípio, formalizável — e reincide no problema da auto-avaliação.
+1. **discriminação não derivada** (sem regra superior, sob pena de regressão);
+2. **autoridade não herdada** (sem fundamento anterior).
 
-Se não for formalizável, então exerce discriminação normativa sem regra externa. Nesse ponto, a recusa do termo avaliador não descreve uma diferença ontológica, mas apenas uma preferência terminológica.
+Uma “estrutura impessoal” opera por propriedades fixas. Mas propriedades só são normativas se **contarem** como normativas — e isso já pressupõe um acto avaliativo.
 
-Sobre a impossibilidade de normatividade impessoal última
+Logo, uma estrutura impessoal pode transportar normatividade, mas não a pode fundar. Fundar normatividade implica um acto originário de validação que não decorre de regras — mas as institui.
 
-Um critério normativo último não apenas classifica ocorrências; ele estabelece autoridade. Distinguir o correto do incorreto não é um acto meramente descritivo, mas um acto de validação.
+Chamar-lhe “Sujeito” não acrescenta psicologia nem teologia: nomeia apenas a função mínima já exigida.
 
-Qualquer instância que desempenhe essa função deve satisfazer simultaneamente duas condições:
+### 6) “Nada disto exige pessoalidade ou relacionalidade”
 
-Capacidade de discriminação não derivada — o critério não pode ser aplicado em virtude de uma regra superior, sob pena de regressão;
+Não exige no sentido dedutivo estrito.
 
-Autoridade não transmissiva — o estatuto normativo não pode ser herdado de outro fundamento.
+O argumento não pretende derivar todas as propriedades do fundamento; pretende mostrar que ele não é:
 
-Uma “estrutura impessoal” opera exclusivamente segundo propriedades fixas. Mas propriedades fixas só exercem normatividade se forem interpretadas como normativas — e essa interpretação já pressupõe um acto avaliativo anterior.
+* objecto,
+* sistema,
+* produto de regras,
+* nem condicionado por algo externo.
 
-Assim, uma estrutura impessoal pode veicular normatividade, mas não fundá-la. Fundar normatividade exige um acto originário de validação que não decorre de propriedades, regras ou leis — mas que as institui.
+Até aqui a conclusão é negativa. “Sujeito” surge como identificação ontológica mínima compatível com o papel demonstrado: avaliar sem ser avaliado, fundar sem ser fundado.
 
-Nesse sentido rigoroso, o fundamento normativo último não é apenas extra-sistémico, mas agente: não porque possua psicologia, mas porque exerce autoridade sem derivação. Chamar-lhe “Sujeito” não acrescenta conteúdo teológico; apenas nomeia a função ontológica mínima que ele já desempenha.
+### 7) “A normatividade é um facto bruto”
 
-### 6. “Nada disto exige pessoalidade ou relacionalidade”
+Um facto bruto pode descrever regularidades; não institui autoridade.
 
-Correcto: não *exige* no sentido dedutivo estrito.
+Um “facto” só é normativo se **contar como razão**. “Contar como razão” não é descritivo; é estatuto conferido.
 
-Mas o argumento não pretende deduzir todas as propriedades do fundamento. Pretende mostrar que:
+Se a normatividade fosse facto bruto:
 
-* o fundamento não é objeto,
-* não é sistema,
-* não é produto de regras,
-* e não é condicionado por nada externo.
+* ou vinculava (exigindo critério de validade),
+* ou não vinculava (deixando de ser normatividade).
 
-“Até este ponto, a conclusão é estritamente negativa: o fundamento último da verdade não é sistema, não é objeto e não é redutível a regras formais.
-
-A designação desse fundamento como Sujeito não é uma dedução lógica adicional, mas a identificação ontológica mínima compatível com o papel já demonstrado: avaliar sem ser avaliado, fundar sem ser fundado, agir sem regra externa.”
-
-### 7. Objecção adicional: “A normatividade é um facto bruto”
-
-Resposta:
-Um facto bruto pode descrever regularidades, mas não instituir autoridade.
-
-Um “facto” só é normativo se contar como razão.
-Contar como razão não é uma propriedade descritiva — é um estatuto conferido.
-
-Se a normatividade fosse um facto bruto:
-
-ou seria normativamente vinculativa → exige critério de validade;
-
-ou não vinculativa → deixa de ser normatividade.
-
-Logo, “facto normativo bruto” é uma contradição categorial: ou é bruto e não normativo, ou normativo e não bruto.
+Portanto, “facto normativo bruto” é uma confusão categorial: ou é bruto e não normativo, ou normativo e não bruto.
 
 ## Conclusão desta secção
 
-As objecções mais sofisticadas não falham por erro técnico, mas por concessão estrutural. Cada uma tenta preservar a racionalidade local sacrificando algo essencial: totalidade, normatividade, ou fundamento. O que nenhuma consegue fazer é manter, ao mesmo tempo, a prática racional da afirmação e a negação da verdade forte.
+As objecções mais fortes não falham por erro técnico, mas por concessão estrutural: salvam racionalidade local sacrificando totalidade, normatividade ou fundamento.
 
-Isso é decisivo.
+Nenhuma consegue manter, simultaneamente, a prática racional da afirmação e a negação da verdade forte.
 
-Não é coerente dizer simplesmente que “a verdade não é fundamentável” — porque essa própria afirmação se apresenta como verdadeira em sentido forte. Não é proposta como uma convenção local, um sucesso pragmático ou uma regra provisória, mas como uma descrição correta da realidade racional.
+Não é coerente dizer simplesmente “a verdade não é fundamentável” como tese transcontextual, porque isso se apresenta como verdadeiro em sentido forte. Se não o fizer, abdica-se precisamente da pretensão que se quer manter.
 
-Recorremos ao princípio da Normatividade Forte:
-Toda afirmação racional que se apresenta como válida para além de um contexto local pressupõe um critério de verdade que não depende apenas de práticas, consenso ou sucesso pragmático.
+**Princípio de Normatividade Forte:** toda afirmação racional que se apresenta como válida para além de um contexto local pressupõe um critério de verdade que não depende apenas de práticas, consenso ou sucesso pragmático.
 
-Negar este princípio não gera contradição formal, mas implica abdicar da pretensão de validade racional forte - inclusive para a própria negação.
+Negar este princípio não gera contradição formal; dissolve a pretensão de validade racional forte, inclusive para a própria negação.
 
-Assim, o dilema inicial revela-se assimétrico:
+Assim, o dilema é assimétrico: qualquer afirmação com pretensão transcontextual já pressupõe a distinção normativa entre acerto e erro que não pode ser reduzida a consenso, utilidade ou estabilidade sem perda de sentido.
 
-Qualquer afirmação que pretenda validade transcontextual — isto é, que se apresente como correta independentemente de práticas locais — já pressupõe uma distinção normativa entre acerto e erro que não pode ser reduzida a consenso, utilidade ou estabilidade prática sem perda semântica. Negar essa normatividade não gera contradição formal, mas dissolve a própria pretensão de correção que o discurso continua a exercer.
+A verdade forte não é opcional: é condição de possibilidade do discurso com pretensão de correcção — incluindo as críticas a este argumento.
 
-Logo, a verdade forte não é opcional; é condição de possibilidade de qualquer afirmação significativa — incluindo as críticas a este argumento.
+O resultado de Gödel e os esquemas de diagonalização não assinalam apenas um limite epistémico — isto é, do que pode ser provado. Revelam um limite estrutural: o critério último de correcção não pode ser totalmente especificado por meios internos ao sistema que avalia. Trata-se de dependência semântica e normativa, não meramente metodológica.
 
-Uma vez reconhecida a necessidade da verdade forte, o resto segue-se com rigor:
+Nenhuma regressão infinita fornece fundamento. Um critério de verdade é instância de discriminação normativa: determina o que conta como correcto. Quem desempenha esse papel não pode ser puramente descritivo.
 
-O resultado de Gödel e dos esquemas de diagonalização não mostra apenas um limite epistémico (o que pode ser provado), mas um limite estrutural: o critério último de correção não pode ser totalmente especificado por meios internos ao sistema que ele avalia. Trata-se, portanto, de uma dependência semântica e normativa, não meramente metodológica.
+Chamar a esse fundamento “Avaliador”, “Fundamento” ou “Sujeito” não é retórica: é a nomeação da função ontológica mínima — avaliar sem ser avaliado, fundar sem ser fundado, sem operar por regra exterior.
 
-nenhuma regressão infinita fornece fundamento;
-
-Um critério de verdade não é apenas uma condição de ocorrência, mas uma instância de discriminação normativa: ele distingue o que conta como correto do que não conta. Qualquer entidade que desempenhe esse papel não pode ser puramente descritiva; ela exerce função avaliativa.
-
-Chamar a esse fundamento “Avaliador”, “Fundamento”, ou “Sujeito” não é uma escolha retórica, mas ontológica: trata-se de algo que avalia sem ser avaliado, que funda sem ser fundado, e que não opera segundo regras que lhe sejam externas.
-
-O argumento não força uma teologia.
-Mas impede, de forma limpa, a recusa do fundamento.
-
-A partir deste ponto, a discordância já não incide sobre a validade interna das inferências, mas sobre a disposição de aceitar ou recusar os compromissos ontológicos exigidos pela normatividade racional forte.
-Depois disso, discordar já não é questão de lógica — é uma decisão metafísica consciente.
+O argumento não impõe teologia, mas impede uma recusa limpa do fundamento: a partir daqui, a discordância já não é sobre as inferências internas, mas sobre aceitar ou recusar os compromissos ontológicos que a normatividade racional forte exige.
 
 # Princípio de suficiência ontológica mínima
 
@@ -290,63 +252,22 @@ livre, incondicionado, e **exterior a todos os sistemas**.
 
 ### Bom, Pessoal e Relacional
 
-Se o fundamento da verdade é também o fundamento da normatividade, então ele não pode ser axiologicamente neutro. A neutralidade já seria uma posição normativa. Nesse sentido preciso — e apenas nesse — o fundamento é identificável com o Bem.
+Se o fundamento da verdade é também o fundamento da normatividade, então não pode ser axiologicamente neutro. A neutralidade já constituiria uma posição normativa entre outras.
 
-Tudo o que existe fora de Si é **doação**: expressão livre de um Ser necessário.
-E se existirem outros sujeitos (como é razoável supor, embora não se prove aqui), então Ele partilha a sua essência com eles — sendo, por isso, também **pessoal** e **relacional**.
+Nesse sentido estrito — e apenas nesse — o fundamento identifica-se com o Bem: não como um valor entre valores, mas como a condição de possibilidade de qualquer valoração. Não se trata de uma propriedade acrescentada, mas de uma consequência directa da função já demonstrada: fundar a distinção entre o que conta como correcto e o que não conta.
 
-Ou seja, a estrutura da Verdade e do Valor conduz, de forma natural, às características tradicionalmente atribuídas a Deus — **sem saltos retóricos, sem apelos emocionais, sem hipóteses ad hoc**.
+A partir deste ponto, o argumento não introduz novas premissas lógicas, mas desenvolve consequências ontológicas. Se existirem outros sujeitos finitos (o que é plausível, embora não demonstrado aqui), então a relação entre eles e o fundamento não pode ser necessária nem mecânica. Uma relação necessária seria mera extensão estrutural; uma relação mecânica, simples efeito causal.
 
-# Diagrama lógico
-![Diagrama](./diagram.png)
+Se, pelo contrário, a relação não é imposta por necessidade externa, então é livre. Nesse caso, o fundamento não apenas avalia e normatiza, mas estabelece relação sem carência — por excesso ontológico, não por dependência.
 
-```mermaid
-graph TD
-    %% Definição de Estilos para clareza visual
-    classDef base fill:#f5f5f5,stroke:#333,stroke-width:1px;
-    classDef logic fill:#d4e6f1,stroke:#2980b9,stroke-width:2px;
-    classDef ontology fill:#d5f5e3,stroke:#27ae60,stroke-width:2px;
-    classDef final fill:#2c3e50,stroke:#f1c40f,stroke-width:4px,color:#fff;
-    classDef fail fill:#fadbd8,stroke:#c0392b,stroke-dasharray: 5 5;
+É nesse sentido rigoroso que o fundamento pode ser dito **pessoal** e **relacional**: não por analogia psicológica, nem por projecção antropomórfica, mas porque exerce autoridade normativa e estabelece relação sem ser determinado por regras, leis ou estruturas que lhe sejam exteriores.
 
-    %% O Início
-    Start([Qualquer Afirmação Racional]) -->|Tenta descrever a realidade| A{Existe Verdade Forte?}
-    
-    %% Passo 1: A Armadilha da Negação
-    A -- "Não" --> B[Contradição Performativa]
-    B -->|Negar é afirmar uma verdade| A
-    
-    %% Passo 2 e 3: A Lógica
-    A -- "Sim" --> C[Verdade exige AVALIAÇÃO]
-    C -->|Distinção Verdadeiro/Falso| D[Sistemas Lógicos são Fechados]
-    D -->|Teorema da Incompletude| E(Necessidade de Ponto Exterior)
-
-    %% Passo 4: A Natureza do Fundamento
-    E --> F{O que é esse Ponto?}
-    F -- "Objeto ou Lei?" --> G[Objeto: É avaliado, não avalia]
-    G -.->|Falha como fundamento| H[Regressão Infinita]
-    
-    F -- "Única opção lógica" --> I[SUJEITO]
-    
-    %% Passo 5, 6 e 7: Os Atributos Divinos
-    I -->|Não condicionado| J[LIVRE]
-    I -->|Fonte de dever/norma| K[Fonte de VALOR]
-    
-    J & K --> L[O Bem Absoluto é RELACIONAL]
-    L -->|Doação / Amor Ontológico| M((DEUS))
-
-    %% Aplicação dos Estilos
-    class Start,A base;
-    class C,D,E,F logic;
-    class I,J,K,L ontology;
-    class M final;
-    class B,G,H fail;
-```
+Assim, a passagem do Sujeito ao Bem, e do Bem à pessoalidade e relacionalidade, não constitui um salto retórico nem uma adição teológica. É o desdobramento mínimo compatível com o papel ontológico já estabelecido.
 
 # Atributos clássicos.
-Esta prova não se apresenta negável sem abdicação explícita da normatividade racional forte.
+A prova apresentada não se deixa negar sem abdicação explícita da normatividade racional forte.
 
-**Não é um salto teológico**, nem uma redefinição oportunista de “Deus”. É o **fecho necessário** do que já foi estabelecido. Cada atributo clássico surge **por necessidade lógica**, não por tradição.
+Não se trata de um salto teológico nem de uma redefinição oportunista de 'Deus' (entendido aqui como o fundamento último da verdade e da normatividade). O que se segue é o **desdobramento necessário** das propriedades exigidas por um fundamento último da verdade e da normatividade. Cada atributo clássico surge por necessidade lógica decorrente do papel já demonstrado — não por herança doutrinal nem por tradição conceptual.
 
 ## 1. Existência necessária
 
@@ -359,10 +280,9 @@ Já foi demonstrado que:
 
 Esse fundamento **não pode não existir** sem destruir a própria possibilidade de afirmação verdadeira.
 
-Logo, não é contingente.
+Não é, portanto, contingente.
 
-**Logo,** existe necessariamente uma instância que satisfaz exatamente os atributos tradicionalmente designados por ‘Deus’.
-Negar a sua existência é negar a condição de possibilidade da própria negação.
+Existe, assim, necessariamente uma instância que satisfaz exactamente os atributos tradicionalmente designados por ‘Deus’.
 
 ## 2. Unicidade
 
@@ -443,7 +363,7 @@ O fundamento:
 * não é limitado por nada externo,
 * é a condição de possibilidade de toda a realidade.
 
-Não pode fazer o logicamente contraditório — isso não é poder, é nonsense.
+Não pode fazer o logicamente contraditório — isso não é poder, é destituído de sentido.
 
 **Conclusão:** Deus é **omnipotente** no sentido clássico e coerente.
 
@@ -562,12 +482,58 @@ Na tradição filosófica, tal instância é denominada Sujeito, não no sentido
 
 # Pensamentos para fechar
 
-1. Se algo é **Lei**, é formalizável -> Cai em Gödel.
+1. Se algo é **Lei**, é formalizável e, por isso, recai no limite demonstrado por Gödel.
 
-2. Se for **Mecânico**, é um sistema -> Exisge avaliador externo.
+2. Se for **mecânico**, é um sistema e, como tal, exige avaliador externo.
 
 3. Se é a **Origem da Norma**, deve ser um **Ato**.
 
 Na filosofia da linguagem, isso nos remete ao conceito de ilocução: a verdade não é apenas um estado de coisas, é um "crer" ou um "dizer" que algo é o caso. Se o fundamento da verdade opera essa distinção sem ser compelido por uma regra anterior, ele está exercendo **Liberdade**.
 
 Não é à toa que se usa a palavra **Verbo** para O descrever.
+
+O argumento não pretende provar a existência de Deus a partir de premissas teológicas, mas mostrar que a negação de um fundamento último da normatividade racional tem custos conceptuais que devem ser assumidos explicitamente.
+
+# Diagrama lógico
+```mermaid
+graph TD
+    %% Definição de Estilos para clareza visual
+    classDef base fill:#f5f5f5,stroke:#333,stroke-width:1px;
+    classDef logic fill:#d4e6f1,stroke:#2980b9,stroke-width:2px;
+    classDef ontology fill:#d5f5e3,stroke:#27ae60,stroke-width:2px;
+    classDef final fill:#2c3e50,stroke:#f1c40f,stroke-width:4px,color:#fff;
+    classDef fail fill:#fadbd8,stroke:#c0392b,stroke-dasharray: 5 5;
+
+    %% O Início
+    Start([Qualquer Afirmação Racional]) -->|Tenta descrever a realidade| A{Existe Verdade Forte?}
+    
+    %% Passo 1: A Armadilha da Negação
+    A -- "Não" --> B[Contradição Performativa]
+    B -->|Negar é afirmar uma verdade| A
+    
+    %% Passo 2 e 3: A Lógica
+    A -- "Sim" --> C[Verdade exige AVALIAÇÃO]
+    C -->|Distinção Verdadeiro/Falso| D[Sistemas Lógicos são Fechados]
+    D -->|Teorema da Incompletude| E(Necessidade de Ponto Exterior)
+
+    %% Passo 4: A Natureza do Fundamento
+    E --> F{O que é esse Ponto?}
+    F -- "Objeto ou Lei?" --> G[Objeto: É avaliado, não avalia]
+    G -.->|Falha como fundamento| H[Regressão Infinita]
+    
+    F -- "Única opção lógica" --> I[SUJEITO]
+    
+    %% Passo 5, 6 e 7: Os Atributos Divinos
+    I -->|Não condicionado| J[LIVRE]
+    I -->|Fonte de dever/norma| K[Fonte de VALOR]
+    
+    J & K --> L[O Bem Absoluto é RELACIONAL]
+    L -->|Doação / Amor Ontológico| M((DEUS))
+
+    %% Aplicação dos Estilos
+    class Start,A base;
+    class C,D,E,F logic;
+    class I,J,K,L ontology;
+    class M final;
+    class B,G,H fail;
+```
