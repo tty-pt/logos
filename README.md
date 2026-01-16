@@ -491,3 +491,6 @@ graph TD
     class M final;
     class B,G,H fail;
 ```
+
+# Vídeo explicativo
+[Aqui disponível](https://tty.pt/maquina.mp4)
