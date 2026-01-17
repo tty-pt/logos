@@ -22,13 +22,13 @@ Ao aplicar `Q` a si próprio, obtemos imediatamente:
 
 **Q(Q) = ¬Q(Q)**
 
+> **Nota técnica**: Não se trata de um programa executável nem de uma definição computacional literal, mas de um **esquema de diagonalização**. A expressão `Q(Q) = ¬Q(Q)` representa a fixação semântica do ponto diagonal onde uma função supostamente decisora é aplicada ao seu próprio índice. Não descreve um processo computável, mas explicita a impossibilidade estrutural de auto-decisão total.
+
 Uma equação que se desfaz em contradição lógica pura.
 
 O paradoxo não é o ponto central; é apenas o sintoma. O que ele expõe é um limite estrutural profundo: **nenhum sistema pode estabelecer, a partir de si mesmo, o critério normativo que o julga**.
 
 Esse mesmo padrão ressurge sempre que o discurso racional tenta negar a existência de **verdade forte**.
-
-Por “verdade forte” entende-se aqui aquilo que conta como correcto independentemente de aceitação, consenso, prática ou sucesso instrumental.
 
 ## Sobre a auto-contradição performativa
 
@@ -40,11 +40,12 @@ Trata-se do mesmo impasse estrutural identificado por Gödel: a auto-avaliação
 
 Gödel não é aqui invocado como teorema técnico estrito, mas como instância paradigmática de um limite estrutural: a impossibilidade de auto-fundação normativa total.
 
-O argumento não depende de incompletude matemática, mas da impossibilidade de auto-legitimação normativa.
-
-Gödel serve aqui como paradigma desse impasse: nenhum sistema pode ser simultaneamente completo, consistente e auto-fundado. O argumento não depende da incompletude matemática estrita, mas da impossibilidade de auto-legitimação normativa total.
+> **Nota semântica (Tarski)**
+> O limite aqui explorado não é apenas o da prova formal ou da decidibilidade (Gödel/Church/Turing), mas o da própria **definição de verdade**. Como mostrou **Alfred Tarski**, a noção de verdade de uma linguagem não é definível nessa mesma linguagem: exige sempre um **meta-nível semântico exterior**. Este resultado fixa, em termos semânticos, o mesmo padrão estrutural: a verdade não se funda a partir de dentro do sistema que a exprime.
 
 Conclusão: o critério último de avaliação tem de residir **fora** do sistema.
+
+> Um conceito meramente deflacionário de verdade é suficiente para descrever usos linguísticos locais, mas é **insuficiente para explicar erro racional, desacordo genuíno ou crítica transcontextual**. Sempre que se distingue entre uso correcto e incorrecto — e não apenas entre uso aceite e rejeitado — já se pressupõe normatividade não-redutível. É esse excedente normativo que aqui se designa por verdade forte.
 
 ## Sobre a impossibilidade de regressão infinita
 
@@ -54,10 +55,6 @@ Mas, se esse avaliador estiver integrado noutro sistema que o valida, o problema
 
 Se formos consequentes, segue-se:
 
-> Para haver verdade forte, tem de existir um avaliador **exterior a qualquer sistema**.
-
-Mesmo um “super-sistema” continua a exigir critério exterior.
-
 ## Definição (Sujeito mínimo)
 Designamos por **Sujeito** a instância mínima que satisfaz simultaneamente quatro condições irredutíveis:
 
@@ -66,10 +63,24 @@ Designamos por **Sujeito** a instância mínima que satisfaz simultaneamente qua
 3. Não estar sujeito a qualquer avaliação superior;
 4. Não se reduzir a propriedades, estruturas, leis ou funções formais.
 
+Qualquer instância que satisfaça estas quatro condições exerce, funcionalmente, aquilo que na tradição ontológica se denomina **Sujeito**. Recusar o termo mantendo a função é mera substituição lexical sem ganho explanatório.
+
 Estas condições não descrevem uma entidade empírica, mas uma função ontológica mínima exigida pela normatividade racional.
 
-### Nota Terminológica (sobre “Sujeito”)
-O termo "Sujeito" é aqui usado em sentido estritamente ontológico, não psicológico nem fenomenológico. Remete à tradição clássica do ὑποκείμενον (hypokeímenon: termo grego antigo que significa 'aquilo que subjaz', como base que sustenta determinações, sem conotações de 'eu' consciente moderno). Nesta acepção original — anterior à reinterpretação cartesiana — o Sujeito não é um centro de consciência representacional, mas a condição de possibilidade da determinação normativa. A oposição entre *subjectum* e *objectum* é assimétrica: o objecto é posto; o Sujeito sustenta a relação. É nesse sentido arcaico que usamos o termo.
+> **Nota Terminológica (sobre “Sujeito”)**
+> O termo "Sujeito" é aqui usado em sentido estritamente ontológico, não psicológico nem fenomenológico. Remete à tradição clássica do *ὑποκείμενον* (hypokeímenon: termo grego antigo que significa 'aquilo que subjaz', como base que sustenta determinações, sem conotações de 'eu' consciente moderno). Nesta acepção original — anterior à reinterpretação cartesiana — o Sujeito não é consciência representacional, mas condição de possibilidade da determinação normativa. A oposição entre *subjectum* e *objectum* é assimétrica: o objecto é posto; o Sujeito sustenta a relação. É nesse sentido arcaico que usamos o termo.
+
+## Nota fundamental: verdade material e normatividade
+
+O argumento não diz apenas respeito à validade discursiva ou à coerência interna de sistemas racionais. O que está em causa é a possibilidade de **verdade material** — isto é, de afirmações serem verdadeiras ou falsas **em virtude de como a realidade é**, e não apenas em virtude de uso, aceitação ou sucesso prático.
+
+A verdade material exige mais do que regularidade causal ou eficácia instrumental. Exige a possibilidade de **erro real**: a possibilidade de que uma afirmação falhe *mesmo que seja aceite*, *mesmo que funcione*, *mesmo que esteja estabilizada numa prática*. Sem essa possibilidade, “verdade” colapsa em utilidade ou consenso.
+
+Ora, a distinção entre acerto material e erro material **é normativa**: implica um critério pelo qual *corresponder ao real* conta como correcto, e *não corresponder* conta como incorrecto. Essa distinção não pode ser fornecida por factos brutos, causalidade, emergência ou práticas, pois todas essas descrições já pressupõem a diferença entre descrever correctamente e descrever incorrectamente.
+
+Assim, a verdade material **pressupõe normatividade forte**. Negar normatividade forte não conduz a uma versão alternativa de verdade material; conduz à sua dissolução.
+
+É este ponto que fixa o alcance ontológico do argumento: não se trata apenas de justificar discursos, mas de tornar inteligível a própria ideia de que o mundo pode tornar uma afirmação verdadeira ou falsa.
 
 ## Objecções sofisticadas — e por que não resolvem
 
@@ -109,8 +120,6 @@ Sem esse critério, “verdade” perde força normativa e torna-se descritivo. 
 
 O problema aqui é fundacional: uma cadeia infinita diz apenas que cada justificação remete para outra, mas nunca explica por que razão o conjunto tem autoridade justificativa.
 
-Se nenhuma instância da cadeia é fundante, nenhuma transmite fundamento. Aceitar a regressão equivale a admitir ausência de fundamento.
-
 ### 5) “O avaliador último pode ser uma estrutura impessoal necessária”
 
 Concede-se a exterioridade ao sistema, mas recusa-se o termo “Sujeito”.
@@ -124,13 +133,6 @@ Se não é formalizável, então exerce discriminação normativa sem regra exte
 ### 6) “Nada disto exige pessoalidade ou relacionalidade”
 
 Não exige no sentido dedutivo estrito.
-
-O argumento não pretende derivar todas as propriedades do fundamento; pretende mostrar que ele não é:
-
-* objecto,
-* sistema,
-* produto de regras,
-* nem condicionado por algo externo.
 
 Até aqui a conclusão é negativa. “Sujeito” surge como identificação ontológica mínima compatível com o papel demonstrado: avaliar sem ser avaliado, fundar sem ser fundado.
 
@@ -147,6 +149,9 @@ Se a normatividade fosse facto bruto:
 
 Portanto, “facto normativo bruto” é uma confusão categorial: ou é bruto e não normativo, ou normativo e não bruto.
 
+> **Nota sobre o quietismo**
+> O quietismo não resolve o problema; limita-se a **suspender a pergunta**. Essa suspensão é existencialmente legítima, mas é incompatível com qualquer discurso que ainda pretenda validade racional, crítica filosófica ou justificação teórica. O argumento aplica-se apenas a quem permanece no jogo da razão normativa — e é precisamente aí que o quietismo deixa de oferecer resposta.
+
 ### Conclusão desta secção
 
 As objecções mais fortes falham por concessão estrutural: salvam racionalidade local ao custo de totalidade, normatividade ou fundamento. Nenhuma preserva simultaneamente a afirmação racional forte e a negação da verdade forte — afirmar que “a verdade não é fundamentável” (com pretensão transcontextual) já a trata como verdadeira em sentido forte, ou abdica-se imediatamente da validade.
@@ -157,11 +162,7 @@ Negar esse princípio não gera uma contradição formal, mas dissolve a própri
 
 Assim, o dilema é assimétrico: qualquer afirmação com pretensão transcontextual já pressupõe a distinção normativa entre acerto e erro que não pode ser reduzida a consenso, utilidade ou estabilidade sem perda de sentido.
 
-A verdade forte não é opcional: constitui a condição de possibilidade de qualquer discurso que pretenda correcção — incluindo as críticas dirigidas a este próprio argumento.
-
 Gödel e os esquemas de diagonalização revelam um limite estrutural: o critério último de correcção não pode ser especificado internamente ao sistema avaliado — trata-se de dependência normativa e semântica, não apenas metodológica. Nenhuma regressão infinita fornece fundamento real, pois o critério de verdade exige discriminação normativa não-descritiva. Chamar-lhe “Sujeito” não é retórica: é a nomeação mínima da função de avaliar sem ser avaliado.
-
-O argumento não exige teologia, mas impossibilita uma recusa limpa do fundamento: a partir daqui, a discordância já não é sobre as inferências internas, mas sobre aceitar ou recusar os compromissos ontológicos que a normatividade racional forte exige.
 
 ## Princípio de suficiência ontológica mínima
 
@@ -202,6 +203,9 @@ Ao usarmos a palavra *Sujeito*, não falamos de consciência psicológica nem de
 
 (Tal tese equivaleria a somar números negativos e esperar obter um número positivo por mera magia — uma impossibilidade categorial.)
 
+> **Nota ontológica (autoridade)**
+> Avaliar normativamente não é apenas discriminar entre estados possíveis; é **atribuir autoridade** à distinção entre correcto e incorrecto. Autoridade não é um facto bruto nem uma estrutura impessoal: não descreve, **vincula**. Tudo o que vincula sem regra externa exerce autoridade em sentido próprio — e autoridade é sempre exercida por alguém, ainda que não psicológico, temporal ou empírico. Uma instância verdadeiramente última não pode ser impessoal sem regressar à formalização já excluída.
+
 Falamos de Alguém que **realmente merece** o nome de Sujeito:
 livre, incondicionado e **exterior a todos os sistemas**.
 
@@ -213,6 +217,8 @@ A partir deste ponto, o argumento desenvolve consequências ontológicas. Se exi
 É nesse sentido que o fundamento é pessoal e relacional: exerce autoridade normativa e estabelece relação sem determinação externa.
 
 ## Atributos clássicos
+Os atributos aqui derivados não constituem propriedades acrescentadas ao fundamento, mas **negações formais de modos de dependência** incompatíveis com a função fundacional já demonstrada. Cada atributo resulta da exclusão de alternativas que reintroduziriam composição, limitação ou dependência externa.
+
 Esta demonstração não pode ser negada sem que se abdique explicitamente da normatividade racional forte.
 
 Não estamos aqui a fazer teologia, mas a extrair consequências ontológicas rigorosas. Segue-se o **desdobramento lógico inevitável** das propriedades que qualquer fundamento último da verdade e da normatividade tem necessariamente de possuir — independentemente de herança doutrinal ou tradição conceptual.
@@ -278,6 +284,8 @@ Se existirem sujeitos finitos, o seu ser deriva do fundamento e a relação não
 Negar este Deus implica: negar verdade forte (contradição performativa), aceitar verdade sem fundamento (colapso normativo), fundamento impessoal formalizável (regressão à auto-avaliação) ou regressão infinita (ausência de fundamento). Nenhuma opção preserva discurso racional pleno.
 
 **Conclusão:** A negação não é sustentável sem abdicação da racionalidade forte.
+
+> A negação deste fundamento é psicologicamente possível e logicamente formulável, mas perde estatuto racional vinculativo. Quem a adopta abdica, nesse mesmo acto, da pretensão de que a sua posição deva ser aceite como correcta — inclusive por si próprio enquanto agente racional.
 
 ### Conclusão final
 O Deus aqui demonstrado não é um "Deus das lacunas", mas a condição de possibilidade da verdade, valor e racionalidade. Assim, com atributos clássicos como necessidade, unicidade, simplicidade, eternidade, omnipotência, onisciência, bondade e pessoalidade, não é apenas demonstrável — é **racionalmente vinculativo** para quem valoriza a normatividade plena.
@@ -384,6 +392,26 @@ Mas as derivações são rigorosas: distinção entre múltiplos exige critério
 Admite-se que negação tem custos (racionalidade enfraquecida), mas alega-se que não é impossível — nihilistas ou absurdistas pagam e prosseguem. Propõe-se reformulação: discriminação inerente à realidade sem Sujeito.
 
 Contudo, esses custos tornam a negação insustentável para discurso racional: Camus afirma sentido na rebelião enquanto nega sentido último — auto-refutação performativa. A reformulação (“estrutura da possibilidade”) renomeia o Sujeito: se impessoal e formalizável, regressa a auto-avaliação; se não, é instância ontológica que avalia sem ser avaliada. Falha por não oferecer escape viável — reformula o dilema sem resolvê-lo.
+
+Aqui está um **novo ponto**, coerente com o resto da secção, sem alterar tom nem pressupostos. Podes inseri-lo como **6)**.
+
+### 6) “Podemos abdicar de normatividade forte sem perder verdade material”
+
+Esta objecção afirma que é possível rejeitar normatividade forte — entendida como validade transcontextual — e ainda assim preservar **verdade material**, no sentido de correspondência com a realidade. Alega-se que basta haver mundo, causalidade e práticas epistémicas eficazes para que algumas afirmações sejam verdadeiras *porque as coisas são assim*, sem necessidade de um critério normativo último.
+
+Esta objecção falha por confundir **correspondência factual** com **estatuto de verdade**.
+
+A correspondência material (“o mundo é assim”) só conta como verdade **se** houver distinção normativa entre acerto e erro — isto é, se houver critério pelo qual *essa* correspondência é correcta e *outras* não o são. Sem normatividade forte, a noção de “corresponder ao real” degrada-se em mera regularidade causal ou sucesso prático: explica *porque funciona*, não *porque é verdadeiro*.
+
+Mais decisivamente: a própria tese “a verdade material não exige normatividade forte” apresenta-se como uma afirmação **sobre como a realidade é**, não como um uso local ou convenção prática. Ou seja, reivindica estatuto de verdade material precisamente no acto de negar as condições que tornam esse estatuto possível. Trata-se de uma incoerência ontológica: a posição usa verdade material enquanto elimina os critérios que a distinguem de mera utilidade ou aceitação.
+
+Sem normatividade forte:
+
+* não há erro material genuíno, apenas falha instrumental;
+* não há falsidade do mundo, apenas inadequação contextual;
+* não há razão para privilegiar “corresponde” sobre “funciona”.
+
+Portanto, a objecção não preserva verdade material; **dissolve-a**. Não é uma alternativa estável, mas uma eliminação encoberta do próprio conceito que pretende salvar.
 
 ### Conclusão desta secção
 
