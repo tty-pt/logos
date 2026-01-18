@@ -64,10 +64,6 @@ Aqui ficamos com uma expressão iguala *algo* ao seu contrário, o que é claram
 
 No caso do mentiroso, o critério é **verdade/falsidade**. No caso do halting problem, o critério é **pára/não pára**. Em ambos os casos, quando a função avaliadora é aplicada ao seu **próprio índice**, surge uma contradição.
 
-> **Nota metodológica** — O argumento não opera ao nível da contradição lógico-formal, mas ao nível da **necessidade transcendental**: investiga as condições sem as quais avaliação racional, crítica válida e distinção normativa vinculativa não são possíveis.
-> A sua negação não gera, em geral, contradição sintáctica imediata, mas **incoerência performativa**, pois o próprio acto de negar já pressupõe a autoridade normativa cuja possibilidade se contesta.
-> Trata-se, portanto, de uma necessidade **ontológico-discursiva**, isto é, daquilo que tem de ser o caso para que o discurso racional enquanto tal seja possível.
-
 ## Sobre a Verdade Forte
 Da mesma forma que **Epimenides** disse que *"Todos os cretenses são mentirosos"* (apesar de não ter dito *"Todos os cretenses só dizem mentiras"*, sendo ele próprio de Creta. A negação contemporânea da normatividade última manifesta-se na proposição: **'Não existe Verdade Forte (absoluta)'**. Esta afirmação não é apenas um erro de facto, mas uma **aporia performativa**: para que a negação seja inteligível e vinculativa, ela teria de habitar a própria 'Verdade Forte' que pretende abolir. O proferimento tenta suicidar a sua própria condição de validade.
 
@@ -87,8 +83,6 @@ Postula-se pois, pela mesma razão que **Existe Verdade Forte** é verdade neces
 
 ## Sobre o fundamento da verdade
 > O termo “necessário” é aqui usado num sentido estrito: aquilo cuja negação implica **contradição performativa** ou impossibilidade de discurso normativo coerente. Não se trata de necessidade psicológica nem meramente formal, mas de necessidade ontológica mínima exigida pela possibilidade de avaliação racional.
-
-> Chegados aqui, convém fazer o que raramente se faz: **parar de fingir que o sistema se sustenta sozinho**. Todo o sistema que avalia — seja lógico, matemático ou discursivo — pressupõe algo que **não é avaliado por ele**, sob pena de regressão infinita (que não providencia fundamento, apenas evita a questão) ou colapso paradoxal. Isto não é uma falha acidental; é uma condição estrutural.
 
 O fundamento da verdade de um sistema tem que ser externo a esse sistema. A auto-fundação não é sustentável.
 
@@ -163,12 +157,12 @@ Qualquer instância que exerça avaliação normativa vinculativa, sem derivar e
 
 Designamos por **Sujeito** o *locus* da **Agência Normativa Não-Derivada**. Esta função não descreve uma psique ou um ego empírico, mas a **necessidade transcendental de um Avaliador que não é passível de avaliação**. Na gramática do ser, se o objeto é o que é 'posto' (), o Sujeito é o que 'sustenta' () a validade do que é posto. Recusar o termo enquanto se aceita a função é um nominalismo irrelevante; o compromisso ontológico com uma Agência Transcedental já foi consumado pela lógica do argumento.
 
-> **Nota Terminológica (sobre “Sujeito”)**
-> O termo "Sujeito" é aqui usado em sentido estritamente ontológico, não psicológico nem fenomenológico. Remete à tradição clássica do *ὑποκείμενον* (hypokeímenon: termo grego antigo que significa 'aquilo que subjaz', como base que sustenta determinações, sem conotações de 'eu' consciente moderno). Nesta acepção original — anterior à reinterpretação cartesiana — o Sujeito não é consciência representacional, mas condição de possibilidade da determinação normativa. A oposição entre *subjectum* e *objectum* é assimétrica: o objecto é posto; o Sujeito sustenta a relação. É nesse sentido arcaico que usamos o termo.
->
-> “Sujeito” não designa aqui consciência psicológica ou ego empírico, mas a função ontológica mínima que exerce autoridade normativa não derivada (cf. o ὑποκείμενον em Aristóteles, Metafísica, Ζ).
+### Nota Terminológica sobre “Sujeito”
+O termo "Sujeito" é aqui usado em sentido estritamente ontológico, não psicológico nem fenomenológico. Remete à tradição clássica do *ὑποκείμενον* (hypokeímenon: termo grego antigo que significa 'aquilo que subjaz', como base que sustenta determinações, sem conotações de 'eu' consciente moderno). Nesta acepção original — anterior à reinterpretação cartesiana — o Sujeito não é consciência representacional, mas condição de possibilidade da determinação normativa. A oposição entre *subjectum* e *objectum* é assimétrica: o objecto é posto; o Sujeito sustenta a relação. É nesse sentido arcaico que usamos o termo.
 
-> Os atributos positivos que se seguem não são propriedades adicionadas arbitrariamente, mas **formulações afirmativas das exclusões lógicas previamente estabelecidas**. Cada atributo corresponde à negação de uma forma de dependência, limitação ou contingência. Não se trata de acumulação ontológica, mas de depuração lógica.
+“Sujeito” não designa aqui consciência psicológica ou ego empírico, mas a função ontológica mínima que exerce autoridade normativa não derivada (cf. o ὑποκείμενον em Aristóteles, Metafísica, Ζ).
+
+Os atributos positivos que se seguem não são propriedades adicionadas arbitrariamente, mas **formulações afirmativas das exclusões lógicas previamente estabelecidas**. Cada atributo corresponde à negação de uma forma de dependência, limitação ou contingência. Não se trata de acumulação ontológica, mas de depuração lógica.
 
 ## Conclusão
 
@@ -232,10 +226,10 @@ Em ambos os casos, o erro só parece plausível enquanto se ignora o nível tran
 
 Quem renuncia ao fundamento último renuncia à capacidade de distinguir o argumento do ruído, a crítica da força, e a verdade do delírio. Fora desta estrutura, o discurso não se torna 'livre' ou 'plural' — torna-se estritamente **impossível**."
 
-> **Em suma, o argumento repousa sobre uma Tríade de Necessidade:**
-> 1. **Lógica:** A auto-referência total sem fundamento externo gera paradoxo ().
-> 2. **Transcendental:** A normatividade exige uma autoridade que não seja um objeto avaliado.
-> 3. **Ontológica:** O fundamento desta autoridade tem de ser um Sujeito Livre e Necessário ( ).
+**Em suma, o argumento repousa sobre uma Tríade de Necessidade:**
+1. **Lógica:** A auto-referência total sem fundamento externo gera paradoxo.
+2. **Transcendental:** A normatividade exige uma autoridade que não seja um objeto avaliado.
+3. **Ontológica:** O fundamento desta autoridade tem de ser um Sujeito Livre e Necessário.
 
 ## Diagrama lógico
 ```mermaid
