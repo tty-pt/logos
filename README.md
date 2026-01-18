@@ -239,14 +239,7 @@ a segunda confunde **nomeação funcional** com **acréscimo ontológico**.
 
 Em ambos os casos, o erro só parece plausível enquanto se ignora o nível transcendental em que o argumento opera.
 
-## Abdicar da validade geral não é uma posição neutra, mas uma renúncia ao estatuto racional.
-Aqueles que não querem ver, fecham os olhos. Os que não querem ouvir, tapam os ouvidos. Os que não querem entender, selam o entendimento. Seja com desvios de atenção, ou anestesia.
-
-Mas aquilo que não se usa, não se mantém. E abdicar do fundamento do que é Ser Sujeito, é querer abdicar de Ser Sujeito.
-
-Pode até parecer mais confortável, ser um tronco inerte na corrente. Mas, (e isto postulo sem recorrer a formalidade lógica, mas fé), será provado não ser uma opção, no final de contas.
-
-Em verdade, em verdade vos digo.
+## Abdicar da validade geral não é uma posição alternativa dentro do discurso racional, mas a saída explícita dele.
 
 ## Diagrama lógico
 ```mermaid
