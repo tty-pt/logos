@@ -64,12 +64,9 @@ Aqui ficamos com uma expressão iguala *algo* ao seu contrário, o que é claram
 
 No caso do mentiroso, o critério é **verdade/falsidade**. No caso do halting problem, o critério é **pára/não pára**. Em ambos os casos, quando a função avaliadora é aplicada ao seu **próprio índice**, surge uma contradição.
 
-# Nota metodológica sobre o tipo de necessidade envolvida
-O presente argumento não opera ao nível da contradição lógico-formal (do tipo p ∧ ¬p), mas ao nível da **necessidade transcendental**: investiga as condições sem as quais **avaliação racional, crítica válida e distinção normativa** não são possíveis.
-
-A negação das conclusões aqui derivadas não produz, em geral, uma contradição sintáctica imediata, mas produz **incoerência performativa**: o acto de negar pressupõe exactamente o tipo de autoridade normativa cuja possibilidade está em causa.
-
-Assim, a necessidade envolvida não é psicológica, empírica ou meramente formal, mas **ontológica-discursiva**: aquilo que tem de ser o caso para que o discurso racional enquanto tal seja possível.
+> **Nota metodológica** — O argumento não opera ao nível da contradição lógico-formal, mas ao nível da **necessidade transcendental**: investiga as condições sem as quais avaliação racional, crítica válida e distinção normativa vinculativa não são possíveis.
+> A sua negação não gera, em geral, contradição sintáctica imediata, mas **incoerência performativa**, pois o próprio acto de negar já pressupõe a autoridade normativa cuja possibilidade se contesta.
+> Trata-se, portanto, de uma necessidade **ontológico-discursiva**, isto é, daquilo que tem de ser o caso para que o discurso racional enquanto tal seja possível.
 
 ## Sobre a Verdade Forte
 Da mesma forma que **Epimenides** disse que *"Todos os cretenses são mentirosos"*, sendo ele próprio de Creta. Também um homem moderno pode formular coisas como:
@@ -86,16 +83,11 @@ O que implica que o contrário da afirmação (neste caso *"existe verdade objec
 
 Postula-se, pela mesma razão que **Existe Verdade Forte** é verdade necessária.
 
-> **Nota**: Qualquer crítica a esta conclusão que pretenda validade geral (isto é, que se aplique a todos os casos e não apenas como opinião local) já pressupõe exatamente o tipo de verdade necessária que aqui se demonstra, invalidando-se a si própria no ato da formulação.
->
-> Enquanto este tipo de afirmações possam *parecer* humildes e tolerantes, são na verdade afirmações que se **auto-invalidam**.
->
-> Importa notar que a distinção verdadeiro/falso já é uma **distinção normativa mínima**: algo deve ser afirmado e algo rejeitado. Logo, qualquer fundamento da verdade é, por necessidade lógica, também fundamento da normatividade. Não existe verdade objetiva semanticamente neutra; toda verdade implica um critério de correção.
+> **Nota** — Qualquer crítica a esta conclusão que pretenda validade geral já pressupõe exatamente o tipo de verdade necessária aqui demonstrada, invalidando-se performativamente no próprio acto de formulação.
+> Além disso, a distinção verdadeiro/falso é já uma **distinção normativa mínima** — algo deve ser afirmado e algo rejeitado — pelo que todo fundamento da verdade é, por necessidade lógica, também fundamento da normatividade, não existindo verdade objectiva semanticamente neutra.
 
-> **Nota aclaratória**
-> A expressão “Verdade Forte” não designa aqui uma teoria semântica específica (correspondência, coerência, pragmatismo, etc.), mas a impossibilidade de eliminar a distinção normativa verdadeiro/falso sem incoerência performativa.
-> 
-> O argumento não depende de como a verdade é analisada, mas do facto de que **qualquer análise já pressupõe um critério normativo de correção.**
+> **Nota aclaratória** — “Verdade Forte” não designa uma teoria semântica específica, mas a impossibilidade de eliminar a distinção normativa verdadeiro/falso sem incoerência performativa.
+> O argumento é independente de qualquer análise particular da verdade, pois **toda análise já pressupõe um critério normativo de correção**.
 
 ## Sobre o fundamento da verdade
 > O termo “necessário” é aqui usado num sentido estrito: aquilo cuja negação implica **contradição performativa** ou impossibilidade de discurso normativo coerente. Não se trata de necessidade psicológica nem meramente formal, mas de necessidade ontológica mínima exigida pela possibilidade de avaliação racional.
@@ -211,61 +203,19 @@ O que a tradição filosófica clássica denomina “Deus” não é aqui introd
 Recusar essa designação não altera o compromisso ontológico assumido, desde que a função normativa última aqui identificada seja mantida.
 
 ## Sobre a Alegada Falibilidade do Argumento
-Todas as objeções que pretendem validade geral sem abdicar da normatividade — apesar de variarem no vocabulário e na sofisticação aparente — reduzem-se estruturalmente a **três estratégias falhadas**, nenhuma das quais consegue escapar àquilo que o próprio argumento demonstra como necessário. Não são objeções independentes; são variações do mesmo erro categorial.
 
-### 1. A objeção do “há alternativas normativas impessoais”
+Todas as objeções que pretendem validade geral sem abdicar da normatividade — apesar de variarem no vocabulário — reduzem-se, em última análise, a **uma única estratégia**: a alegação de que a conclusão **não é logicamente necessária**. As restantes objeções não são independentes, mas **variações derivadas** dessa mesma confusão de níveis.
 
-Esta objeção afirma, explicitamente ou por implicação, que a normatividade pode emergir de **estruturas, práticas, sistemas inferenciais ou regularidades constitutivas**, sem requerer um fundamento último dotado de autoridade não derivada.
+### A objeção central: “não é logicamente necessário”
 
-O problema é simples e fatal:
-essas “alternativas” **não explicam normatividade**, apenas **deslocam-na**.
+Esta objeção sustenta que, mesmo concedendo os limites da auto-referência e da auto-fundação, **não é dedutivamente forçado** concluir a existência de um fundamento último com as características derivadas.
 
-* Estruturas **descrevem** relações.
-* Práticas **instituem** hábitos.
-* Regras **operam** dentro de domínios.
+O erro aqui é técnico e decisivo:
+o argumento **não opera ao nível da dedução lógico-formal**, mas ao nível **transcendental**.
 
-Nenhuma dessas coisas possui, por si só, o poder de **obrigar racionalmente**.
-Elas só funcionam **sob a condição já pressuposta** de que *se deve* seguir a estrutura, *se deve* aceitar a prática, *se deve* respeitar a regra.
+A questão não é o que pode ser formalmente derivado a partir de premissas neutras, mas:
 
-Logo, tais propostas **presumem exatamente aquilo que dizem dispensar**:
-um critério de correção não derivado que torne válida a obediência normativa.
-
-Não se trata de uma lacuna empírica, mas de uma **falha ontológica**:
-confundir **condições de funcionamento** com **condições de validade**.
-
-### 2. A objeção do “salto ilegítimo para o Sujeito”
-
-Esta objeção sustenta que a introdução do **Sujeito** constitui um acréscimo ontológico arbitrário, uma personalização indevida de algo que poderia permanecer impessoal.
-
-Mas esta crítica confunde **nomeação funcional** com **postulação gratuita**.
-
-O argumento não acrescenta um Sujeito — ele **torna explícita** uma função que já estava implicitamente exigida desde o primeiro passo:
-a função de **avaliar normativamente com autoridade não derivada**.
-
-Se:
-
-* há distinção correta/incorreta,
-* essa distinção não é relativa,
-* não deriva de regras superiores,
-* e não é validável por instância externa,
-
-então **há algo que exerce autoridade avaliativa por si mesmo**.
-
-Recusar o termo “Sujeito” mantendo a função não elimina o compromisso ontológico — apenas o **oculta sob vocabulário neutro**.
-Isso não é parcimónia; é **evasão semântica**.
-
-Negar simultaneamente o Sujeito *e* a função dissolve o próprio estatuto da objeção enquanto crítica racional, pois já não há critério pelo qual ela poderia ser correta.
-
-### 3. A objeção do “não é logicamente necessário”
-
-Esta é a objeção mais comum e a mais fraca. Afirma que, mesmo concedendo os limites da auto-referência, **não é logicamente forçado** concluir um fundamento último com as características derivadas.
-
-Mas aqui ocorre um erro técnico decisivo:
-o argumento **não opera ao nível da dedução formal**, mas ao nível **transcendental**.
-
-Não se pergunta “o que se pode imaginar?”, mas:
-
-> **O que tem de ser o caso para que avaliação racional, crítica válida e objeção universal sejam possíveis?**
+> **O que tem de ser o caso para que avaliação racional, crítica válida e objeção com pretensão universal sejam possíveis?**
 
 Qualquer tentativa de negar a conclusão:
 
@@ -273,32 +223,30 @@ Qualquer tentativa de negar a conclusão:
 * distingue correto/incorreto,
 * e exige que a sua negação seja racionalmente vinculativa.
 
-Logo, **já exerce exatamente o tipo de normatividade** cuja possibilidade está em questão.
+Ao fazê-lo, **já exerce exatamente o tipo de normatividade** cuja possibilidade está em causa no argumento.
 
-Se a objeção for apenas local, contingente ou atitudinal, ela não refuta o argumento — apenas abdica de qualquer pretensão racional.
-Se pretender validade geral, **confirma performativamente** a necessidade do fundamento.
+Se a objeção abdicar dessa pretensão — tornando-se local, contingente ou meramente atitudinal — deixa de ser objeção racional.
+Se a mantiver, **confirma performativamente** a necessidade do fundamento que pretende negar.
 
 Não existe terceira via estável.
 
-### Síntese Final
+### Nota sobre as objeções derivadas
 
-Todas as objeções falham pelo mesmo motivo estrutural:
+As alegadas “alternativas normativas impessoais” e a crítica do “salto ilegítimo para o Sujeito” não introduzem dificuldades adicionais. Ambas pressupõem precisamente aquilo que a objeção central tenta negar: a possibilidade de normatividade vinculativa com validade geral.
 
-> tentam negar o fundamento último **usando** os recursos que só são possíveis **se esse fundamento existir**.
+A primeira confunde **condições de funcionamento** com **condições de validade**;
+a segunda confunde **nomeação funcional** com **acréscimo ontológico**.
 
-Ou:
+Em ambos os casos, o erro só parece plausível enquanto se ignora o nível transcendental em que o argumento opera.
 
-* substituem autoridade por regularidade,
-* confundem descrição com prescrição,
-* ou exigem validade universal enquanto negam a sua própria possibilidade.
+## Abdicar da validade geral não é uma posição neutra, mas uma renúncia ao estatuto racional.
+Aqueles que não querem ver, fecham os olhos. Os que não querem ouvir, tapam os ouvidos. Os que não querem entender, selam o entendimento. Seja com desvios de atenção, ou anestesia.
 
-Nenhuma escapa à regressão, à circularidade ou à auto-invalidade performativa.
+Mas aquilo que não se usa, não se mantém. E abdicar do fundamento do que é Ser Sujeito, é querer abdicar de Ser Sujeito.
 
-Assim, o argumento não é enfraquecido pelas objeções —
-ele **explica por que elas surgem**, **por que parecem plausíveis** e **por que não podem, em princípio, ser conclusivas**.
+Pode até parecer mais confortável, ser um tronco inerte na corrente. Mas, (e isto postulo sem recorrer a formalidade lógica, mas fé), será provado não ser uma opção, no final de contas.
 
-O fundamento último não é uma hipótese opcional, nem um adorno metafísico:
-é a **condição de possibilidade de qualquer crítica que pretenda ser mais do que ruído**.
+Em verdade, em verdade vos digo.
 
 ## Diagrama lógico
 ```mermaid
