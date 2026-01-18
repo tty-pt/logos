@@ -69,19 +69,15 @@ No caso do mentiroso, o critério é **verdade/falsidade**. No caso do halting p
 > Trata-se, portanto, de uma necessidade **ontológico-discursiva**, isto é, daquilo que tem de ser o caso para que o discurso racional enquanto tal seja possível.
 
 ## Sobre a Verdade Forte
-Da mesma forma que **Epimenides** disse que *"Todos os cretenses são mentirosos"*, sendo ele próprio de Creta. Também um homem moderno pode formular coisas como:
-
-**Não Existe Verdade Forte**.
-
-> Sim, é verdade que não disse o que seria uma forma mais equivalente ao paradoxo *"Todos os cretenses mentem sempre"*.
+Da mesma forma que **Epimenides** disse que *"Todos os cretenses são mentirosos"* (apesar de não ter dito *"Todos os cretenses só dizem mentiras"*, sendo ele próprio de Creta. A negação contemporânea da normatividade última manifesta-se na proposição: **'Não existe Verdade Forte (absoluta)'**. Esta afirmação não é apenas um erro de facto, mas uma **aporia performativa**: para que a negação seja inteligível e vinculativa, ela teria de habitar a própria 'Verdade Forte' que pretende abolir. O proferimento tenta suicidar a sua própria condição de validade.
 
 O problema aqui é que a frase também se afirma sobre si própria. Isto é, se não existe verdade, então a própria frase não o pode ser. É a chamada contradição performativa, e uma outra forma (implícita) do **Paradoxo do mentiroso**.
 
-De forma coloquial, também pode afirmar: **A verdade é subjectiva** (ou *toda a verdade é subjectiva*). Mas sendo rigorosos, podemos observar que isto implicaria, se literal, a existência de sujeitos numa base objectiva, e seria mais uma forma deste **paradoxo**.
+De forma coloquial, afirma-se: **A verdade é subjetiva**. Contudo, o erro lógico é duplo: primeiro, a afirmação pretende ser uma verdade *objetiva* sobre a subjetividade; segundo, ela tenta localizar a autoridade normativa no indivíduo empírico. Ora, o indivíduo, enquanto objeto biológico ou psicológico, é um sistema avaliado por leis (física, biologia, psicologia). Ao dizer que a verdade é subjetiva, o falante tenta atribuir ao 'eu' a função de Sujeito Ontológico (o que avalia) enquanto o mantém como objeto (o que é avaliado), resultando no mesmo colapso auto-referencial.
 
 O que implica que o contrário da afirmação (neste caso *"existe verdade objectiva"*) é verdade necessária.
 
-Postula-se, pela mesma razão que **Existe Verdade Forte** é verdade necessária.
+Postula-se pois, pela mesma razão que **Existe Verdade Forte** é verdade necessária.
 
 > **Nota** — Qualquer crítica a esta conclusão que pretenda validade geral já pressupõe exatamente o tipo de verdade necessária aqui demonstrada, invalidando-se performativamente no próprio acto de formulação.
 > Além disso, a distinção verdadeiro/falso é já uma **distinção normativa mínima** — algo deve ser afirmado e algo rejeitado — pelo que todo fundamento da verdade é, por necessidade lógica, também fundamento da normatividade, não existindo verdade objectiva semanticamente neutra.
@@ -98,7 +94,7 @@ O fundamento da verdade de um sistema tem que ser externo a esse sistema. A auto
 
 > A hipótese de um “facto bruto” último não resolve o problema do fundamento. Um facto bruto pode interromper perguntas causais, mas não **fundamenta normatividade**. Um fundamento que não explica por que a avaliação é válida não a funda — apenas suspende a exigência racional, o que equivale a abdicar da própria noção de fundamento.
 
-Aqui questiona-se: **não são sistemas que regem o mundo material?**. E responde-se: **não no sentido em que o fundam**, porque aí caímos no erro de um **sistema não poder fundar-se a si mesmo**. Mas sim num outro sentido - **são sistemas que determinam o funcionamento do mundo material**.
+Aqui questiona-se: **não são sistemas que regem o mundo material?**. E responde-se: regem-no enquanto **mecanismos de funcionamento**, mas não enquanto **fundamentos de validade**. Um sistema físico descreve a regularidade de um processo; ele não fundamenta a 'correção' da sua própria existência nem a obrigatoriedade da sua inteligibilidade. Confundir a *regularidade descritiva* (o modo como as coisas funcionam) com a *soberania normativa* (o porquê de o sistema ser verdadeiro) é um erro categorial: o funcionamento é um **dado**, o fundamento é uma **condição**.
 
 Isto implica que **há fundamento que o transcende**, e é, sem sombra de dúvida, **incontornável sem cair no absurdo**. Isto é, **tem de haver fundamento último externo a todo e qualquer sistema.**
 
@@ -140,39 +136,33 @@ Apenas por necessidade lógica, pretendemos derivar as caracterísitcas necessá
 ### 17) Não pode ser probabilístico
 > Probabilidade pressupõe espaço de possibilidades já estruturado, que o fundamento deve preceder para evitar circularidade.
 ### 18) Não pode ser temporalmente situado
-> Situação temporal implica antes/depois e condições de ocorrência, violando a eternidade necessária para fundar o tempo.
+> A situação temporal implica sucessão e submissão à causalidade (antes/depois). Se o fundamento estivesse no tempo, ele seria condicionado pelo momento da sua ocorrência, exigindo uma explicação para a sua génese. O fundamento deve possuir **anterioridade ontológica (atemporalidade)**, sendo a condição de possibilidade da própria sucessão temporal, e não um evento dentro dela.
 ### 19) Não pode falhar
 > Falha pressupõe norma externa em relação à qual algo falha, contradizendo a superioridade do fundamento.
 ### 20) Não pode não ser livre
 > Exatamente por não poder ser determinado por algo externo, evitando dependência e mantendo autoridade inerente.
 
 > Normatividade não é mera estrutura descritiva, mas **autoridade prescritiva**. Estruturas descrevem regularidades; autoridade discrimina o que deve ou não deve ser afirmado. Prescrição sem fonte de autoridade é um erro categorial. Logo, um fundamento normativo último não pode ser impessoal sem perder precisamente aquilo que pretende fundar.
+
 ### 21) Não pode ser impessoal
-> O fundamento precisa ser a fonte de normatividade (não só o espaço onde normas ‘estão’), e fonte implica posse de autoridade não derivada. Autoridade não derivada é um modo de ser que é melhor descrito como sujeito.
+> A impessoalidade é a categoria do **objeto subordinado**; define-se pela reatividade a leis externas e pela inércia normativa. Um fundamento impessoal (como uma 'lei da natureza' ou um 'facto bruto') possui **poder causal**, mas carece de **autoridade normativa**. Factos apenas *são*; a Verdade *exige*. Como a exigência de correção não pode emanar da passividade de um objeto, o fundamento tem de ser a instância ativa da distinção — o que define a função ontológica de **Sujeito Originário**."
 
 ## Sobre a impossibilidade de normatividade sem autoridade não derivada
-Qualquer critério normativo exige algo que **autorize** a sua aplicação.
-- Regras não se autorizam a si próprias.
-- Estruturas não obrigam.
-- Factos não prescrevem.
+Normatividade não se reduz a regularidade descritiva, coerência estrutural ou conformidade factual. A distinção correcto/incorreto, quando dotada de validade geral, envolve **vinculação racional**: não apenas descreve critérios de correção, mas determina o que conta como razão suficiente para aceitar ou rejeitar uma posição.
 
-> **Nota** — Normatividade não consiste apenas em critérios de validade, mas em **vinculação racional**. Regras, estruturas ou factos podem descrever correção, mas não explicam **por que** alguém está obrigado a segui-los. A obrigatoriedade não é redutível à forma lógica da regra (cf. Immanuel Kant, Crítica da Razão Prática).
+Regras, estruturas formais, factos empíricos ou padrões emergentes podem especificar condições de validade, mas não explicam por que essas condições são **racionalmente obrigatórias**. A forma lógica de uma regra não gera, por si só, autoridade normativa; do mesmo modo, a existência de um facto não impõe obrigação racional de aceitá-lo como critério último. **A normatividade não é uma propriedade emergente da complexidade.** Um milhão de factos brutos continuam a ser apenas 'dados' passivos; nenhum salto quantitativo de informação produz a qualidade da *vinculação*. Confundir funcionamento normativo com fundamento da normatividade é um erro categorial.
 
-Logo, se existe distinção correcta/incorreta com validade geral, então existe uma instância cuja autoridade **não deriva** de nenhum critério externo **e não é validável por instância superior**.
+Se existe distinção correcto/incorreto com pretensão de validade geral, então existe uma **fonte de normatividade** cuja autoridade não deriva de qualquer regra, estrutura ou critério externo, nem está sujeita a avaliação superior. Essa fonte não pode consistir apenas em entidades ou descrições impessoais, pois nenhuma delas explica a vinculatividade racional do critério que enunciam. O que aqui se afirma não é a introdução de uma entidade adicional, mas a identificação de uma **condição de possibilidade** da normatividade enquanto tal.
 
-> A autoridade normativa não é uma propriedade flutuante de estruturas, mas algo que **se exerce**; falar de normatividade vinculativa sem instância que a exerça é um erro categorial.
-
-Qualquer instância que satisfaça estas condições exerce funcionalmente aquilo que a tradição ontológica denomina Sujeito. O termo não acrescenta propriedades; apenas nomeia a função já demonstrada como necessária.
+Qualquer fundamento que satisfaça estas condições exerce funcionalmente o papel mínimo exigido para que a avaliação normativa com validade geral seja possível. A designação tradicional dessa função ontológica será introduzida apenas posteriormente; neste ponto, o argumento limita-se a estabelecer a sua necessidade estrutural.
 
 ## Definição (Sujeito mínimo)
+Qualquer instância que exerça avaliação normativa vinculativa, sem derivar essa autoridade e sem estar subordinada a outra, desempenha funcionalmente aquilo que a tradição ontológica denomina **Sujeito** — não no sentido psicológico ou fenomenológico, mas como função ontológica mínima de autoridade normativa. Introduzir o termo não acrescenta conteúdo; apenas nomeia uma função cuja necessidade já foi logicamente estabelecida. Recusar o nome não elimina a função, apenas a disfarça.
+
 > A introdução do termo ‘Sujeito’ não adiciona conteúdo ontológico ao argumento, mas apenas nomeia a função mínima já implicitamente exigida pelas características do fundamento.
-Designamos por **Sujeito** a instância mínima que satisfaz simultaneamente quatro condições irredutíveis:
-1. Exercer **avaliação normativa** (discriminar o correcto do incorrecto);
-2. Não derivar a sua autoridade de qualquer regra ou critério externo;
-3. Não estar sujeito a qualquer avaliação superior;
-4. Não se reduzir a propriedades, estruturas, leis ou funções formais.
-Qualquer instância que satisfaça estas quatro condições exerce, funcionalmente, aquilo que na tradição ontológica se denomina **Sujeito**. Recusar o termo mantendo a função é mera substituição lexical sem ganho explanatório.
-Estas condições não descrevem uma entidade empírica, mas uma função ontológica mínima exigida pela normatividade racional.
+
+Designamos por **Sujeito** o *locus* da **Agência Normativa Não-Derivada**. Esta função não descreve uma psique ou um ego empírico, mas a **necessidade transcendental de um Avaliador que não é passível de avaliação**. Na gramática do ser, se o objeto é o que é 'posto' (), o Sujeito é o que 'sustenta' () a validade do que é posto. Recusar o termo enquanto se aceita a função é um nominalismo irrelevante; o compromisso ontológico com uma Agência Transcedental já foi consumado pela lógica do argumento.
+
 > **Nota Terminológica (sobre “Sujeito”)**
 > O termo "Sujeito" é aqui usado em sentido estritamente ontológico, não psicológico nem fenomenológico. Remete à tradição clássica do *ὑποκείμενον* (hypokeímenon: termo grego antigo que significa 'aquilo que subjaz', como base que sustenta determinações, sem conotações de 'eu' consciente moderno). Nesta acepção original — anterior à reinterpretação cartesiana — o Sujeito não é consciência representacional, mas condição de possibilidade da determinação normativa. A oposição entre *subjectum* e *objectum* é assimétrica: o objecto é posto; o Sujeito sustenta a relação. É nesse sentido arcaico que usamos o termo.
 >
@@ -198,7 +188,7 @@ A partir deste fundamento mínimo, e analisando o que ele **não pode ser** sem 
 Estas derivações não introduzem novos princípios, mas explicitam consequências lógicas da ultimidade já estabelecida.
 
 ### Terceira parte
-O que a tradição filosófica clássica denomina “Deus” não é aqui introduzido como hipótese teológica adicional, mas como **designação histórica** para o tipo de fundamento cuja existência foi demonstrada como necessária.
+A identificação deste fundamento como **Deus** não constitui um salto fideísta, mas uma **identidade semântica necessária**. No léxico da Ontologia Fundamental, o 'Sujeito absoluto, necessário, simples e fonte de toda a normatividade' é a definição exaustiva de Divindade. A relutância em usar o termo não altera a estrutura da realidade revelada: quem aceita a necessidade de um fundamento último e pessoal para a verdade, já está a descrever aquilo que a tradição denomina.
 
 Recusar essa designação não altera o compromisso ontológico assumido, desde que a função normativa última aqui identificada seja mantida.
 
@@ -225,10 +215,8 @@ Qualquer tentativa de negar a conclusão:
 
 Ao fazê-lo, **já exerce exatamente o tipo de normatividade** cuja possibilidade está em causa no argumento.
 
-Se a objeção abdicar dessa pretensão — tornando-se local, contingente ou meramente atitudinal — deixa de ser objeção racional.
-Se a mantiver, **confirma performativamente** a necessidade do fundamento que pretende negar.
 
-Não existe terceira via estável.
+Se a objeção abdicar dessa pretensão — tornando-se local, contingente ou meramente atitudinal — deixa de ser objeção racional e passa a ser apenas ruído subjetivo. Se a mantiver, **ela confessa a sua dependência**: o crítico tenta usar a autoridade da lógica para negar a autoridade do fundamento da lógica. É uma tentativa de suicídio intelectual: o crítico só consegue formular a negação porque o fundamento que ele nega lhe fornece os instrumentos de validade para o fazer. Não existe terceira via estável.
 
 ### Nota sobre as objeções derivadas
 
@@ -239,7 +227,15 @@ a segunda confunde **nomeação funcional** com **acréscimo ontológico**.
 
 Em ambos os casos, o erro só parece plausível enquanto se ignora o nível transcendental em que o argumento opera.
 
-## Abdicar da validade geral não é uma posição alternativa dentro do discurso racional, mas a saída explícita dele.
+## Abdicar da validade geral (Verdade Forte) não é uma opção intelectual
+> é o silenciamento da razão.
+
+Quem renuncia ao fundamento último renuncia à capacidade de distinguir o argumento do ruído, a crítica da força, e a verdade do delírio. Fora desta estrutura, o discurso não se torna 'livre' ou 'plural' — torna-se estritamente **impossível**."
+
+> **Em suma, o argumento repousa sobre uma Tríade de Necessidade:**
+> 1. **Lógica:** A auto-referência total sem fundamento externo gera paradoxo ().
+> 2. **Transcendental:** A normatividade exige uma autoridade que não seja um objeto avaliado.
+> 3. **Ontológica:** O fundamento desta autoridade tem de ser um Sujeito Livre e Necessário ( ).
 
 ## Diagrama lógico
 ```mermaid
