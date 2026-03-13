@@ -1,8 +1,6 @@
 # Aquilo que Avalia sem Ser Avaliado
 > Este argumento opera ao **nível meta-ontológico**: não discute verdades dentro de sistemas formais, mas as **condições de possibilidade de qualquer sistema avaliativo**.
 
-A demonstração procede em cinco movimentos: (1) analisa paradoxos históricos de auto-referência para identificar o padrão comum; (2) mostra que este padrão não é um defeito técnico de certos sistemas; (3) deriva as características do fundamento último; (4) responde às objeções; (5) extrai as consequências ontológicas. Comecemos pela genealogia do problema.
-
 ### Mapa do argumento
 
 O texto que se segue desenvolve-se em cinco movimentos: (1) estabelece-se o padrão lógico da auto-referência através dos paradoxos clássicos; (2) demonstra-se que este padrão se aplica à própria negação de uma verdade normativa última; (3) deriva-se por necessidade transcendental as características do fundamento que torna a avaliação possível; (4) responde-se às objeções mais frequentes; (5) extraem-se as consequências ontológicas da argumentação.

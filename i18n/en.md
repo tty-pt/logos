@@ -2,8 +2,6 @@
 
 > This argument operates at the **meta-ontological level**: it does not discuss truths within formal systems, but the **conditions of possibility of any evaluative system**.
 
-The demonstration proceeds in five movements: (1) analyzes historical paradoxes of self-reference to identify the common pattern; (2) shows that this pattern is not a technical defect of certain systems; (3) derives the characteristics of the ultimate foundation; (4) responds to objections; (5) extracts the ontological consequences. Let us begin with the genealogy of the problem.
-
 ### Argument Map
 
 The text that follows develops in five movements: (1) the logical pattern of self-reference is established through classical paradoxes; (2) it is demonstrated that this pattern applies to the very negation of an ultimate normative truth; (3) the characteristics of the foundation that makes evaluation possible are derived through transcendental necessity; (4) the most frequent objections are answered; (5) the ontological consequences of the argumentation are extracted.
