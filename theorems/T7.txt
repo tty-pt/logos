@@ -1,0 +1,110 @@
+T7 — REALIDADE NECESSÁRIA
+
+Depende de: T3, T6, §22, §24a + AXIOM SEM AxGlobalGround (ver nota 9 abaixo)
+
+Verificado em: formal/Logos/Modal.lean (T7_necessaryReality), GAPMAP.md C18.
+
+Enunciado:
+
+A verdade necessária implica a existência de realidade necessária:
+
+□True(τ) → ∃r □Exists(r).
+
+Definição:
+
+NecessaryReality(r) := □Exists(r).
+
+Demonstração:
+
+1. De §22 temos uma verdade necessária:
+
+∃p □True(p).
+
+Seja τ tal que □True(τ).
+
+2. O significado de □True(τ) é:
+
+em todo mundo possível w, True(τ, w).
+
+A verdade de τ não depende de qual particular contingente exista,
+nem de que o sujeito presente exista, nem de que qualquer sujeito contingente exista.
+
+3. De T6 temos:
+
+Truth ≠ WillOfAgent.
+
+O sujeito contingente não é a medida da verdade.
+A verdade não é criada pelo ato de afirmar.
+
+Logo, nenhum sujeito contingente pode ser o fundamento de □True(τ).
+
+4. De §24a (Princípio do Truth-Maker, derivado de T3, §8, T6):
+
+True(p) → ∃r Ground(r, p).
+
+Toda verdade tem um fundamento na realidade.
+
+5. Suponhamos, por redução ao absurdo:
+
+∀r ¬□Exists(r),
+
+ou seja, toda a realidade é contingente.
+
+6. Então, para cada entidade contingente r,
+existe um mundo possível w_r onde ¬Exists(r, w_r).
+
+Mas □True(τ) implica True(τ, w_r).
+
+Logo, a verdade de τ em w_r não pode ser fundamentada em r.
+
+Isto vale para toda entidade contingente.
+
+Portanto, a verdade necessária de τ não é fundamentada
+em nenhuma entidade contingente.
+
+7. Mas, por (4), toda verdade tem um fundamento na realidade.
+
+Se nenhuma entidade contingente fundamenta τ,
+então algo não contingente fundamenta τ:
+
+∃r ¬Contingent(r).
+
+8. Logo:
+
+∃r □Exists(r).
+
+Portanto:
+
+há realidade necessária.
+
+Consequência:
+
+A negação "não existe realidade necessária" é incoerente:
+ao afirmar a verdade necessária de alguma proposição,
+o agente utiliza um conceito de verdade que exige fundamento,
+e esse fundamento não pode ser qualquer entidade contingente.
+
+A cadeia seguinte fica:
+
+NecessaryTruth
+→ NecessaryReality
+→ PersonalGround (T8)
+→ Freedom
+→ Good
+→ Love
+→ EternalRelation
+→ Trinity.
+
+9. NOTA FORMAL — AXIOM SEM AxGlobalGround
+
+A demonstração acima (passos 5–7) esconde a troca
+∀w∃r Ground(r,τ,w) → ∃r∀w Ground(r,τ,w), a qual não é derivável dos
+restantes axiomas. Na formalização ela é declarada como:
+
+AxGlobalGround: toda fórmula verdadeira em todos os mundos é fundamentada
+por uma única entidade existente em todos os mundos.
+
+Com ela, T7 é teorema genuíno (PROVEN↑); sem ela, T7 fica BLOCKED
+exactamente neste lema. A sua negação não se autorrefuta: é uma escolha
+modal declarada, nunca um teorema transcendental. Modelo de consistência:
+semântica tarskiana de dois valores (formal/DESIGN.md D4).

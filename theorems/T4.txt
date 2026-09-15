@@ -1,0 +1,25 @@
+T4 — O SUJEITO É AGENTE
+
+Depende de: T1
+
+12. O ato de afirmar é realizado por um sujeito:
+
+A(s,p) → Agent(s).
+
+Logo:
+
+∃s∃p A(s,p)
+
+implica:
+
+∃s Agent(s).
+
+Já temos de T1:
+
+∃s Exists(s).
+
+Portanto:
+
+∃s [Exists(s) ∧ Agent(s)].
+
+Há pelo menos um agente existente envolvido no raciocínio presente.

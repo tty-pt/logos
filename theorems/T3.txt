@@ -1,0 +1,102 @@
+T3 — PRIMEIRO GRANDE RESULTADO: TRUE ≠ FALSE
+
+Depende de: T1, T2
+
+4. O ABSOLUTO "NADA É VERDADEIRO"
+
+Considere:
+
+N_T := "nenhuma proposição é verdadeira".
+
+Formalmente:
+
+N_T := ∀p ¬True(p).
+
+Suponhamos:
+
+True(N_T).
+
+Como N_T é uma proposição verdadeira:
+
+∃p True(p).
+
+Mas o próprio conteúdo de N_T implica:
+
+¬∃p True(p).
+
+Logo:
+
+⊥.
+
+Portanto:
+
+¬True(N_T).
+
+Assim:
+
+∃p True(p).
+
+Ou seja:
+não é possível que nenhuma proposição seja verdadeira.
+
+5. O ABSOLUTO "NADA É FALSO"
+
+Considere:
+
+N_F := "nenhuma proposição é falsa".
+
+Formalmente:
+
+N_F := ∀p True(p).
+
+Considere a contradição:
+
+⊥.
+
+Pela não-contradição:
+
+¬⊥.
+
+Portanto existe uma proposição falsa:
+
+∃p False(p).
+
+Logo:
+
+¬N_F.
+
+Assim:
+
+∃p False(p).
+
+6. RESULTADO
+
+Temos:
+
+∃p True(p)
+
+e:
+
+∃q False(q).
+
+Logo:
+
+∃p∃q [True(p) ∧ False(q)].
+
+Portanto:
+
+True ≠ False.
+
+Assim:
+é impossível que tudo seja verdadeiro;
+é impossível que tudo seja falso;
+é necessário que haja verdade e falsidade.
+
+7. NOTA FORMAL (verificado em formal/Logos/Core.lean, GAPMAP.md C1–C12)
+
+A derivação usa: (i) predicado de verdade primitivo e estratificado T com o
+axioma Schema-T (T p ↔ p), o que bloqueia o paradoxo do mentiroso;
+(ii) lógica clássica (bivalência) no passo ¬∀p¬Tp ⇒ ∃pTp.
+Impressão de axiomas (Lean #print axioms): greatResult depende apenas de
+{T, tschema}; someTrue acresce {propext, Classical.choice, Quot.sound}.
+sorryAx: 0 em todo o módulo.

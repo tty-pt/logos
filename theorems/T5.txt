@@ -1,0 +1,25 @@
+T5 — DA AGÊNCIA À PESSOA
+
+Depende de: T4
+
+Definimos:
+
+Person(s) := Agent(s) ∧ Rational(s) ∧ Intentional(s).
+
+O sujeito do ato racional satisfaz:
+
+- Agent(s): demonstrado em T4
+- Rational(s): o ato é racional por hipótese (é o ato de raciocinar)
+- Intentional(s): o ato possui conteúdo direcionado — Means(s,p)
+
+Portanto:
+
+Person(s).
+
+Logo:
+
+∃s Person(s).
+
+Nesta formulação, "pessoa" não foi adicionada como axioma;
+foi definida como a estrutura mínima do agente racional-intencional
+que já apareceu no próprio ato.

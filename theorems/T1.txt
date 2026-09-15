@@ -1,0 +1,36 @@
+T1 — O SUJEITO DO ATO EXISTE
+
+Depende de: Axioma performativo (§1)
+
+O ponto de partida é o ato presente de raciocinar:
+
+A(s,p)
+
+onde:
+s = sujeito do ato
+p = conteúdo do ato
+
+O próprio ato não precisa ser inferido de uma premissa externa.
+A(s,p) é o dado performativo do raciocínio em curso.
+
+Por definição de um ato relacional:
+
+A(s,p) → Exists(s)
+
+e:
+
+A(s,p) → Content(p).
+
+Logo:
+
+∃s∃p A(s,p)
+
+implica:
+
+∃s Exists(s).
+
+Portanto:
+
+∃s Exists(s)
+
+Há pelo menos um sujeito que existe enquanto agente do ato racional presente.

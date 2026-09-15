@@ -1,0 +1,17 @@
+T2 — EXISTE CONTEÚDO PROPOSICIONAL
+
+Depende de: Axioma performativo (§1)
+
+Temos:
+
+A(s,p)
+
+Segue:
+
+Content(p).
+
+Portanto:
+
+∃p Content(p).
+
+Não existe uma afirmação sem algo que seja afirmado.

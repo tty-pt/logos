@@ -1,0 +1,87 @@
+T8 — FUNDAMENTO PESSOAL
+
+Depende de: T3, T5, T7, §24b + AXIOMES META AxPersonalGround, AxGroundBearing (ver nota final)
+
+Verificado em: formal/Logos/GroundPerson.lean (T8_personalGround), GAPMAP.md C32.
+
+Enunciado:
+
+A realidade necessária é pessoal:
+
+∀f∃x [N(x) ∧ G(x, f)]
+
+onde toda feature pessoal do acto racional é fundamentada em realidade necessária.
+
+Definições:
+
+P(f, a) := feature pessoal f está presente no acto racional a
+L(g, a) := feature lógica g está presente no acto racional a
+N(x) := □Exists(x)
+G(x, y) := x fundamenta y
+R(a) := a é um acto racional
+
+Premissas (todas demonstradas):
+
+P1: ∀a [R(a) → ∃f P(f, a)]
+    — T5: todo acto racional tem features pessoais
+
+P2: ∀a [R(a) → ∃g L(g, a)]
+    — T3: todo acto racional tem features lógicas
+
+P3: ∀a∀f∀g [R(a) → (P(f, a) ↔ L(g, a))]
+    — §24b (derivado): inseparabilidade, demonstrada de T2, T3, T5, §8, §9, §11
+
+P4: N(NecessaryReality) ∧ G(NecessaryReality, g)
+    para toda feature lógica g
+    — T7: features lógicas são fundamentadas em realidade necessária
+
+Demonstração (reductio ad absurdum):
+
+1. Suponhamos: ∃f ¬∃x [N(x) ∧ G(x, f)]
+2. Para essa f, o fundamento não é necessário
+3. Logo ∃C [G(C, f) ∧ ¬N(C)]
+   — f é fundamentada em algo contingente
+4. Como ¬N(C), existe mundo possível w tal que ¬Exists(C, w)
+5. Em w, G(C, f) não vale
+   — o fundamento não existe
+6. Logo P(f, a) não vale para nenhum acto racional em w
+   — sem fundamento, a feature não se mantém
+7. Mas por P4, L(g, a) vale em w para toda feature lógica g
+   — realidade necessária existe em todo mundo
+8. Então em w: L(g, a) vale mas P(f, a) não vale
+9. Isto contradiz P3: P(f, a) ↔ L(g, a)
+10. ⊥
+11. Portanto: ¬¬∀f∃x [N(x) ∧ G(x, f)]
+
+Consequência:
+
+∃r [□Exists(r) ∧ Personal(r)].
+
+A realidade necessária é pessoal.
+
+A cadeia seguinte fica:
+
+NecessaryTruth
+→ NecessaryReality (T7)
+→ PersonalGround (T8)
+→ Freedom
+→ Good
+→ Love
+→ EternalRelation
+→ Trinity.
+
+NOTA FORMAL — o passo "o fundamento é pessoal" é AXIOM, não dedução.
+
+A tentativa de derivar ∃r[□Exists(r) ∧ Personal(r)] apenas de T1–T7 falha
+em dois pontos exactos (formal/DESIGN.md D9): (a) nada transfere a
+*necessidade* para o fundamento do conteúdo contingente do acto presente;
+(b) "fundamentar" não implica "realizar". Declaram-se por isso:
+
+(a) AxPersonalGround (META): as features pessoais presentes no acto
+racional são fundamentadas pela realidade necessária — é o conteúdo que o
+poema acrescenta para além da dedução;
+(b) AxGroundBearing (META): o fundamento realiza o que funda (realismo
+mínimo não-redutivo).
+
+Com (a)(b), T8 é teorema genuíno (PROVEN↑); sem elas fica BLOCKED nos dois
+lemas formais registados em D9.

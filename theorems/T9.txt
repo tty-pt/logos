@@ -1,0 +1,25 @@
+T9 — ALTERNATIVAS INCOMPATÍVEIS (novo: o lema que faltava ao §13)
+
+Depende de: T3 (+ bivalência clássica)
+
+Verificado em: formal/Logos/Alternatives.lean
+(T9_incompatibleAlternatives), GAPMAP.md C26–C27.
+Impressão de axiomas: {T, tschema} apenas. sorryAx: 0.
+
+Enunciado:
+
+Há pelo menos dois conteúdos incompatíveis, um verdadeiro e um falso:
+
+∃p∃q [Incompatible(p,q) ∧ True(p) ∧ False(q)]
+
+onde Incompatible(p,q) := ¬(p ∧ q).
+
+Demonstração (a que faltava no §13 da base):
+
+De T3 temos True(p₀) e False(q₀) com testemunhas explícitas
+(p₀ := True, q₀ := False, via Schema-T). Pela bivalência, ¬True(q₀).
+Em geral, qualquer conteúdo verdadeiro p e a sua negação ¬p formam um
+par incompatível (incompatible_with_negation).
+
+Assim o campo mínimo da escolha racional (§13–§14) é não-vazio — e de
+forma construtiva, sem axiomas de escolha.

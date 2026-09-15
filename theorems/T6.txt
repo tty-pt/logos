@@ -1,0 +1,45 @@
+T6 — A VERDADE TRANSCENDE A VONTADE INDIVIDUAL
+
+Depende de: T3
+
+Temos:
+
+A(s,p)
+
+e é possível:
+
+False(p).
+
+Portanto:
+
+A(s,p) ∧ False(p)
+
+é possível.
+
+Logo:
+
+Truth(p)
+
+não é equivalente a:
+
+A(s,p).
+
+Assim:
+o agente não é a medida da verdade.
+
+Consequência:
+
+Truth ≠ WillOfAgent.
+
+O sujeito pode afirmar algo falso.
+A verdade não é criada simplesmente pelo ato de afirmar.
+Existe uma norma objectiva para o ato racional:
+
+Correct(A(s,p)) ↔ True(p).
+Incorrect(A(s,p)) ↔ False(p).
+
+Portanto:
+
+Correct ≠ Incorrect.
+
+A realidade racional contém distinções normativas objectivas.

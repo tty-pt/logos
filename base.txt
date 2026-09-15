@@ -1,0 +1,819 @@
+Γ — ARGUMENTO TRANSCENDENTAL
+Do ato de raciocinar à estrutura necessária da realidade
+
+0. OBJECTIVO
+
+Construir uma única cadeia de dedução transcendental que comece no ato presente de afirmar, negar, duvidar e raciocinar e extraia dele o máximo de consequências inevitáveis.
+
+A distinção fundamental é:
+
+premissa arbitrariamente assumida ≠ condição cuja negação destrói o próprio ato de a negar
+
+O objetivo de Γ é trabalhar apenas com a segunda espécie tanto quanto possível.
+
+A conclusão máxima será apresentada em camadas:
+
+inegável performativamente
+→ inegável logicamente
+→ transcendentalmente necessário
+→ metafisicamente necessário, se a ponte correspondente for demonstrada.
+
+Nenhuma passagem deve ser chamada "dedução pura" se depender de conteúdo que ainda não foi justificado.
+
+1. O PONTO DE PARTIDA
+
+Estamos a considerar uma proposição.
+
+Portanto ocorre um ato do tipo:
+
+A(s,p)
+
+onde:
+
+s = sujeito do ato
+p = conteúdo do ato.
+
+O próprio ato não precisa ser inferido de uma premissa externa:
+
+A(s,p)
+
+é o dado performativo do raciocínio em curso.
+
+Teoremas: ver theorems/T1.txt, theorems/T2.txt
+
+2. T1 — O SUJEITO DO ATO EXISTE → theorems/T1.txt
+
+3. T2 — EXISTE CONTEÚDO PROPOSICIONAL → theorems/T2.txt
+
+4. O ABSOLUTO "NADA É VERDADEIRO"
+
+Considere:
+
+N_T := "nenhuma proposição é verdadeira".
+
+Formalmente:
+
+N_T := ∀p ¬True(p).
+
+Suponhamos:
+
+True(N_T).
+
+Como N_T é uma proposição verdadeira:
+
+∃p True(p).
+
+Mas o próprio conteúdo de N_T implica:
+
+¬∃p True(p).
+
+Logo:
+
+⊥.
+
+Portanto:
+
+¬True(N_T).
+
+Assim:
+
+∃p True(p).
+
+Ou seja:
+
+não é possível que nenhuma proposição seja verdadeira.
+
+5. O ABSOLUTO "NADA É FALSO"
+
+Considere:
+
+N_F := "nenhuma proposição é falsa".
+
+Formalmente:
+
+N_F := ∀p True(p).
+
+Considere a contradição:
+
+⊥.
+
+Pela não-contradição:
+
+¬⊥.
+
+Portanto existe uma proposição falsa:
+
+∃p False(p).
+
+Logo:
+
+¬N_F.
+
+Assim:
+
+∃p False(p).
+
+Nota formal (verificado em formal/Logos/Core.lean, GAPMAP.md C1–C12):
+a autorrefutação usa um predicado de verdade primitivo e estratificado T
+com o axioma Schema-T (T p ↔ p) — o que bloqueia o paradoxo do mentiroso —
+e lógica clássica (bivalência) no passo ¬∀p¬Tp ⇒ ∃pTp.
+Sem estas duas peças explícitas, a derivação não é válida.
+
+6. T3 — PRIMEIRO GRANDE RESULTADO → theorems/T3.txt
+
+7. VERDADE NÃO É VONTADE
+
+Temos:
+
+A(s,p).
+
+Mas:
+
+A(s,p) ↛ True(p).
+
+Portanto um sujeito pode afirmar algo falso.
+
+Logo:
+
+afirmação ≠ verdade.
+
+A verdade não é criada simplesmente pelo ato de um sujeito a afirmar.
+
+Assim:
+
+Truth ≠ WillOfAgent.
+
+8. CORREÇÃO OBJECTIVA
+
+Definimos:
+
+Correct(A(s,p)) ↔ True(p).
+
+e:
+
+Incorrect(A(s,p)) ↔ False(p).
+
+Logo:
+
+Correct(A(s,p)) → ¬Incorrect(A(s,p))
+
+e:
+
+Incorrect(A(s,p)) → ¬Correct(A(s,p)).
+
+Portanto:
+
+Correct ≠ Incorrect.
+
+Existe uma norma objetiva para o ato racional:
+
+um ato de afirmação pode estar objectivamente correcto ou incorrecto.
+
+9. CONSEQUÊNCIA LÓGICA
+
+Considere:
+
+p₁, …, pₙ ⊢ q.
+
+A validade desta inferência significa:
+
+(True(p₁) ∧ … ∧ True(pₙ)) → True(q).
+
+Logo existe uma relação objectiva:
+
+Consequence(p₁, …, pₙ ; q).
+
+Portanto:
+
+as relações de consequência não são uma preferência privada do agente.
+
+A racionalidade contém uma norma objectiva:
+
+algumas transições de pensamento preservam a verdade e outras não.
+
+10. SIGNIFICADO LÓGICO
+
+Uma proposição possui significado lógico quando há uma diferença entre:
+
+condição de verdade
+
+e:
+
+condição de falsidade.
+
+Definimos:
+
+Meaning_L(p) := True(p) ∨ False(p).
+
+Pela bivalência:
+
+∀p [True(p) ∨ False(p)].
+
+Logo:
+
+∀p Meaning_L(p).
+
+Portanto:
+
+∃p Meaning_L(p).
+
+Há necessariamente significado lógico.
+
+11. SIGNIFICADO INTENCIONAL
+
+Distinguimos:
+
+Meaning_L(p)
+
+de:
+
+Meaning_I(p).
+
+Definimos:
+
+Meaning_I(p) := ∃s Means(s,p).
+
+Então:
+
+Meaning_I(p) → ∃s Means(s,p).
+
+E, pela própria estrutura da relação:
+
+Means(s,p) → Agent(s).
+
+Portanto:
+
+Meaning_I(p) → ∃s Agent(s).
+
+Significar intencionalmente implica necessariamente alguém que significa.
+
+12. T4 — O SUJEITO É AGENTE → theorems/T4.txt
+
+13. AGÊNCIA E ALTERNATIVAS
+
+Considere dois conteúdos incompatíveis:
+
+p
+
+e:
+
+q
+
+tal que:
+
+p → ¬q.
+
+Um agente racional pode estar perante:
+
+A(s,p)
+
+ou:
+
+A(s,q).
+
+Para que a avaliação racional faça sentido, tem de existir uma distinção entre os conteúdos possíveis do ato.
+
+Assim:
+
+há alternativas representáveis ao nível do pensamento.
+
+Isto é uma forma mínima de agência racional.
+
+Teorema: ver theorems/T9.txt (T9 — a existência de alternativas
+incompatíveis, apenas afirmada aqui, é derivada de T3).
+
+14. ESCOLHA RACIONAL
+
+Definimos:
+
+Choose(s,p,q)
+
+como o ato pelo qual s, perante alternativas incompatíveis, determina qual proposição adota.
+
+Então:
+
+Choose(s,p,q) → Agent(s).
+
+E:
+
+Choose(s,p,q) → Possible(p) ∧ Possible(q).
+
+Portanto:
+
+Choice → Agency ∧ Alternatives.
+
+A existência de agência racional contém uma estrutura mínima de seleção entre possibilidades.
+
+15. LIBERDADE
+
+Não se deve confundir:
+
+Choice
+
+com:
+
+FreeWill.
+
+Para obter liberdade metafísica forte seria necessário demonstrar:
+
+FreeWill(s,p)
+↔
+◇Choose(s,p)
+∧
+◇Choose(s,¬p).
+
+Esta passagem não é uma simples tautologia.
+
+Mas a estrutura anterior já exclui uma concepção em que:
+
+raciocínio
+
+seja apenas uma cadeia de símbolos sem sujeito.
+
+Há agência racional real no ato presente.
+
+16. RELAÇÃO
+
+Uma relação exige pelo menos dois pólos:
+
+R(a,b).
+
+Logo:
+
+R(a,b) → a ∧ b.
+
+No caso de um ato intencional:
+
+Means(s,p)
+
+tem:
+
+s
+
+como sujeito e:
+
+p
+
+como conteúdo.
+
+Portanto:
+
+a intencionalidade é estruturalmente relacional.
+
+17. T5 — DA AGÊNCIA À PESSOA → theorems/T5.txt
+
+18. O CONTEÚDO NÃO É O AGENTE
+
+Temos:
+
+Means(s,p).
+
+O sujeito é:
+
+s.
+
+O conteúdo é:
+
+p.
+
+A relação possui dois papéis distintos.
+
+Logo:
+
+s ≠ p
+
+no sentido dos papéis estruturais exercidos na relação.
+
+Portanto:
+
+sujeito e conteúdo pertencem a papéis logicamente distintos.
+
+19. T6 — A VERDADE TRANSCENDE A VONTADE INDIVIDUAL → theorems/T6.txt
+
+20. NORMATIVIDADE
+
+Temos:
+
+True(p)
+→
+Correct(A(s,p)).
+
+E:
+
+False(p)
+→
+Incorrect(A(s,p)).
+
+Assim:
+
+Truth → Correctness.
+
+e:
+
+Falsehood → Incorrectness.
+
+Logo:
+
+a realidade racional contém distinções normativas.
+
+21. TELEOLOGIA MÍNIMA
+
+Considere uma acção:
+
+Act(s,a).
+
+Uma avaliação normativa pode assumir a forma:
+
+Good(a)
+
+ou:
+
+Bad(a).
+
+Se existe uma norma objectiva:
+
+Ought(a),
+
+então a acção possui uma direção normativa.
+
+Definimos:
+
+Goal(a,g)
+
+como "a está orientado para g".
+
+Então:
+
+Ought(a) → ∃g Goal(a,g).
+
+Portanto:
+
+Normativity → Direction → Teleology.
+
+Existe uma estrutura mínima de orientação para um fim.
+
+22. VERDADE NECESSÁRIA
+
+Considere:
+
+τ := p ∨ ¬p.
+
+Pela lógica clássica:
+
+⊢ τ.
+
+E isto vale em toda interpretação admissível:
+
+⊨ τ.
+
+Logo:
+
+□τ.
+
+Portanto:
+
+∃p □True(p).
+
+Existe verdade logicamente necessária.
+
+Verificado em dois níveis: formal/Logos/Semantics.lean (semântica clássica
+de mundos, sem axiomas novos) e formal/Logos/Truthmaker.lean (nível
+truthmaker, sob os axiomas de composição AxOr/AxAnd/AxNot — escolha
+semântica declarada, ver formal/GAPMAP.md C13–C17).
+
+23. FALSIDADE NECESSÁRIA
+
+Considere:
+
+ρ := p ∧ ¬p.
+
+Pela não-contradição:
+
+⊢ ¬ρ.
+
+Logo:
+
+⊨ ¬ρ.
+
+Portanto:
+
+□False(ρ).
+
+Assim:
+
+∃q □False(q).
+
+24. VERDADE NECESSÁRIA NÃO DEPENDE DESTE SUJEITO
+
+Temos um sujeito contingente s e uma verdade necessária τ:
+
+Exists(s)
+
+e:
+
+□True(τ).
+
+A verdade de τ não depende da existência particular de s.
+
+Logo:
+
+a condição de verdade necessária não pode ser reduzida ao sujeito contingente que a reconhece.
+
+24a. FUNDAMENTO DA VERDADE (Princípio do Truth-Maker)
+
+Enunciado:
+
+True(p) → ∃r Ground(r, p).
+
+Toda verdade tem um fundamento na realidade.
+
+Demonstração (reductio):
+
+1. De T3 temos:
+
+True ≠ False.
+
+2. De §8 temos:
+
+True(p) ↔ Correct(A(s,p))
+
+e:
+
+False(p) ↔ Incorrect(A(s,p))
+
+e:
+
+Correct ≠ Incorrect.
+
+3. De T6 temos:
+
+Truth ≠ WillOfAgent.
+
+A distinção Correct ≠ Incorrect é objectiva —
+não depende de nenhum sujeito.
+
+4. Logo, a distinção Correct ≠ Incorrect mantém-se
+mesmo que nenhum sujeito exista.
+
+5. Se a distinção se mantém sem sujeitos,
+ela se mantém em virtude da realidade.
+
+6. Pela lei da identidade:
+se a realidade fosse idêntica nos dois casos
+(Correct e Incorrect),
+não haveria distinção.
+
+7. Mas a distinção existe (passo 3).
+
+8. Logo, a realidade difere nos dois casos.
+
+9. Se a realidade difere, algo na realidade
+faz a diferença.
+
+10. Esse algo é o fundamento:
+
+∃r Ground(r, p).
+
+11. Portanto:
+
+True(p) → ∃r Ground(r, p).
+
+Consequência:
+
+A negação "a verdade não tem fundamento" é incoerente:
+pressupõe uma distinção objectiva (True ≠ False)
+cuja objectividade exige que a realidade difira,
+o que exige um fundamento.
+
+Nota formal: no nível semântico este princípio é lema por definição de
+verdade-como-fundamentação (formal/Truthmaker.groundPrinciple, GAPMAP.md
+C15). A sua imagem ao nível proposicional (GroundPrincipleProp) é axioma
+SEM declarado (ver formal/Logos/GroundPerson.lean).
+
+Teorema: ver theorems/T7.txt
+
+24b. INSEPARABILIDADE PESSOAL-LÓGICA
+
+Enunciado:
+
+No acto racional, features pessoais e lógicas são inseparáveis:
+
+∀a∀f∀g [R(a) → (P(f, a) ↔ L(g, a))]
+
+onde:
+
+P(f, a) := feature pessoal f está presente no acto racional a
+L(g, a) := feature lógica g está presente no acto racional a
+R(a) := a é um acto racional
+
+Demonstração:
+
+Direita para esquerda (P → L):
+
+1. P(f, a) → o acto tem racionalidade [T5: Person = Agent ∧ Rational ∧ Intentional]
+
+2. racionalidade → o acto segue normas [§8: Correct ≠ Incorrect]
+
+3. normas → verdade e consequência existem [§8, §9]
+
+4. verdade e consequência → features lógicas presentes
+
+5. Logo: P(f, a) → ∃g L(g, a)
+
+Esquerda para direita (L → P):
+
+1. L(g, a) → o acto envolve verdade
+
+2. envolve verdade → o acto é sobre algo [intencionalidade]
+
+3. intencionalidade → ∃s Means(s,p) [§11]
+
+4. Means(s,p) → Person(s) [T5]
+
+5. Logo: L(g, a) → ∃f P(f, a)
+
+Portanto:
+
+P(f, a) ↔ L(g, a)
+
+Consequência:
+
+Não existe acto racional com features lógicas mas sem pessoais,
+nem com pessoais mas sem lógicas.
+São aspectos inseparáveis do mesmo acto.
+
+Teorema: ver theorems/T8.txt
+
+25. RESULTADO TRANSCENDENTAL
+
+O ato racional presente implica:
+
+1. sujeito;
+2. existência;
+3. conteúdo;
+4. verdade/falsidade;
+5. distinção objectiva;
+6. correcção/incorrecção;
+7. normatividade racional;
+8. consequência lógica;
+9. significado;
+10. intencionalidade;
+11. agência;
+12. alternativas;
+13. escolha racional;
+14. pessoa, sob a definição estrutural adoptada;
+15. teleologia mínima;
+16. verdades necessárias;
+17. realidade necessária;
+18. realidade necessária é pessoal.
+
+Em forma condensada:
+
+Act
+→ Subject
+→ Existence
+→ Content
+→ Truth/Falsehood
+→ Objective Distinction
+→ Correctness
+→ Normativity
+→ Meaning
+→ Intentionality
+→ Agency
+→ Person
+→ Choice
+→ Teleological Structure
+→ Necessary Truth
+→ Necessary Reality
+→ Personal Ground.
+
+26. O QUE FOI EXCLUÍDO POR IMPOSSIBILIDADE DE NEGAÇÃO
+
+Não pode ser coerentemente mantido:
+
+"Nada é certo."
+
+"Nada é errado."
+
+"Não existe conteúdo."
+
+"Não existe sujeito do ato presente."
+
+"Não existe qualquer distinção entre verdade e falsidade."
+
+"Todas as afirmações são igualmente correctas."
+
+"Não existem relações objectivas de consequência lógica."
+
+"Não existe realidade necessária."
+
+"A verdade não tem fundamento na realidade."
+
+O acto racional tem aspectos pessoais e lógicos separáveis.
+
+Ao afirmar ou negar racionalmente qualquer uma destas posições, o agente utiliza parcialmente a estrutura que a posição tenta eliminar.
+
+27. RESULTADO MÁXIMO DESTA FASE
+
+Temos:
+
+∃s [Exists(s) ∧ Agent(s) ∧ Person(s)]
+
+e:
+
+∃p □True(p)
+
+e:
+
+∃q □False(q)
+
+e:
+
+∃r [□Exists(r) ∧ Personal(r)]
+
+juntamente com:
+
+True ≠ False
+
+Correct ≠ Incorrect
+
+Truth ≠ WillOfAgent
+
+e os lemas derivados:
+
+True(p) → ∃r Ground(r, p)  [§24a: toda verdade tem fundamento]
+
+P(f, a) ↔ L(g, a)  [§24b: inseparabilidade pessoal-lógica]
+
+Portanto:
+
+há uma realidade racional presente;
+há um sujeito dessa realidade;
+há conteúdo objectivo;
+há verdade e falsidade;
+há normatividade objectiva;
+há significado;
+há agência;
+há uma pessoa no sentido estrutural definido;
+há verdades necessárias que não dependem da existência contingente deste sujeito;
+há realidade necessária;
+há realidade necessária que é pessoal.
+
+(Nota formal: os dois últimos itens são PROVEN↑ — teoremas sob axiomas
+declarados: AxGlobalGround (SEM) para a realidade necessária, mais
+AxPersonalGround e AxGroundBearing (META) para o passo "pessoal".
+Ver theorems/T7.txt, theorems/T8.txt e formal/GAPMAP.md C18, C32.)
+
+28. LIMITE DA FASE PURAMENTE DEDUTIVA
+
+A cadeia seguinte ainda precisa de demonstração:
+
+PersonalGround (PROVEN↑ — ver nota abaixo)
+→ Freedom
+→ Good
+→ Love
+→ EternalRelation
+→ Trinity.
+
+Nenhuma destas passagens deve ser simplesmente assumida.
+
+Nota formal (formal/GAPMAP.md, formal/DESIGN.md D9): PersonalGround é
+teorema apenas sob três pontes declaradas — AxGlobalGround (SEM, a troca de
+quantificadores ∀w∃r → ∃r∀w de T7), AxPersonalGround e AxGroundBearing
+(META, o preço do passo "pessoal" de T8). Sem elas, T7 fica BLOCKED no lema
+da troca, e T8 fica BLOCKED nos dois lemas formais registados em D9.
+
+O objectivo seguinte é demonstrar cada uma delas pelo mesmo método transcendental:
+
+se a negação de uma proposição destrói as condições necessárias do próprio ato racional que a nega, então a proposição pode ser elevada a teorema transcendental.
+
+29. FORMA FINAL
+
+A grande cadeia de Γ é:
+
+Ato racional presente
+→ sujeito existente
+→ conteúdo
+→ verdade/falsidade
+→ distinção objectiva
+→ correcção/incorrecção
+→ normatividade
+→ significado
+→ intencionalidade
+→ agência
+→ pessoa
+→ escolha
+→ orientação teleológica
+→ verdade necessária
+→ realidade necessária
+→ fundamento pessoal.
+
+A tese não é:
+
+"estas coisas parecem razoáveis".
+
+A tese é:
+
+"a tentativa de negar determinadas estruturas pressupõe ou utiliza as próprias estruturas negadas."
+
+Portanto, quanto mais fundo a dedução conseguir levar esta forma de redução transcendental, maior será a parte da estrutura da realidade que pode ser estabelecida sem uma hipótese metafísica arbitrária.
