@@ -94,9 +94,12 @@ Assim:
 
 7. NOTA FORMAL (verificado em formal/Logos/Core.lean, GAPMAP.md C1–C12)
 
-A derivação usa: (i) predicado de verdade primitivo e estratificado T com o
-axioma Schema-T (T p ↔ p), o que bloqueia o paradoxo do mentiroso;
+A derivação usa: (i) a verdade como *definição* `T p := p` (E0, 2026-09-15 —
+o antigo Schema-T (T p ↔ p) é agora teorema, `Iff.rfl`; o paradoxo do
+mentiroso continua bloqueado, pois nenhuma proposição autorreferente é
+assumida);
 (ii) lógica clássica (bivalência) no passo ¬∀p¬Tp ⇒ ∃pTp.
-Impressão de axiomas (Lean #print axioms): greatResult depende apenas de
-{T, tschema}; someTrue acresce {propext, Classical.choice, Quot.sound}.
+Impressão de axiomas (Lean #print axioms): greatResult, nothingTrueRefutes,
+notNothingTrue, notEverythingTrue, rightWrongDistinction *não dependem de
+nenhum axioma*; someTrue acresce {propext, Classical.choice, Quot.sound}.
 sorryAx: 0 em todo o módulo.

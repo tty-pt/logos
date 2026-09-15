@@ -1,0 +1,47 @@
+T14 — RELAÇÃO ETERNA (o "Amar é escolhido e necessário", poema)
+
+Depende de: T12_directedPair (T12 + AxPersonsAffect) + AXIOM SEM
+AxPersonStability
+
+Verificado em: formal/Logos/Love.lean (T14_eternalRelation, T14_world,
+T14_square, T14_content), GAPMAP.md C42–C45, DESIGN.md D13/D14b/D-C4.
+2026-09-15 (nó): T14_eternalRelation é agora construído sobre o nó
+T12_directedPair (GAPMAP C47) — direção e estabilidade vivem no mesmo par.
+2026-09-15 (A3-refactor): a distinção ajuda/prejudica deixou de ser formal —
+Helps e Harms são projeções definidas (:= Affects); a relação primitiva
+é Affects (cada pegada lê {Affects}, não {Helps, Harms}).
+Impressão de axiomas (pós-chooses-def/A3-refactor, 2026-09-15): {AxTwoSubjects, AxPersonsAffect,
+AxPersonStability} + predicados de base
+(Subject/Agent/Rational/Means, ExistsAt) + {Affects} — Affects é agora a
+relação primitiva única (A3-refactor: Helps/Harms := Affects passam a
+projeções definidas, já não axiom); {T, tschema} dissolvidos (E0),
+`Entity`/`EntityOf` dissolvidos
+(C2: Entity := Subject, EntityOf := id); Loves é definido := Affects; a ponte
+FAITH foi dissolvida; sorryAx: 0.
+
+Enunciado (forma de base, com relata necessários):
+
+∃s₁∃s₂ [Person(s₁) ∧ Person(s₂) ∧ s₁ ≠ s₂ ∧ Loves(s₁,s₂) ∧
+        NecessarySubject(s₁) ∧ NecessarySubject(s₂)]
+
+onde NecessarySubject(s) := ∀w ExistsAt(w, s) — os amantes (C2: cada sujeito
+é já uma entidade, EntityOf := id) existem em todos os mundos. Forma modal
+honesta (NecessityPH, mundo-ancorada — não o alias degenerado):
+
+∀w ∃s₁∃s₂ [Person(s₁) ∧ Person(s₂) ∧ s₁ ≠ s₂ ∧ Loves(s₁,s₂) ∧
+           ExistsAt(w, s₁) ∧ ExistsAt(w, s₂)]
+
+Pela cláusula T do alias □ (Necessity), há ainda a imagem □(∃ par que se ama)
+(T14_square) — mantém a silhueta do enunciado antigo como teorema.
+
+HONESTIDADE (§28/§29 — do que foi feito teorema):
+Com C4, o "eterno" deixou de ser uma axiom FAITH sobre a relação. A relação
+é estrutural (Loves := Affects, "um ajuda/não prejudica o outro"); a
+existência do par vem das pontes C3-I; e a eternidade vem da ponte
+AxPersonStability — "de alguma forma", cada pessoa persiste em todos os
+mundos. Cada uma destas pontes foi sujeita à exclusão e falhou (spikes em
+/tmp/opencode): a negação não destrói o ato de a negar; são declaradas e
+assinaladas. A componente "escolhido" depende ainda de F1 (liberdade,
+DEFERRED). A poema diz "de alguma forma" — e essa indecisão é exatamente o
+que a formalização preserva: agora localizada na ponte de estabilidade, não
+num operador modal sobre a relação.

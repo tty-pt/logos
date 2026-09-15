@@ -22,9 +22,12 @@ namespace Logos.Modal
 open Logos.Semantics (Form World)
 open Logos.Truthmaker (Entity Ground ExistsAt TrueAt NecessarilyTrue)
 
-/-- The present world (SEM): the performed actuality of the reasoning act,
-    carried into the semantic level. Mirror of the performative datum of §1. -/
-axiom actualWorld : World
+/-- The present world (SEM, definitional): the performed actuality of the
+    reasoning act needs only *some* fixed world in T7 (`Ground e τ` is invoked
+    at it and nothing depends on which world it is). Modeled as the
+    always-true valuation (precedent: `Necessity.someWorld`). No longer an
+    axiom: `def actualWorld` shrinks the C18–C20 footprints. -/
+def actualWorld : World := fun _ => Logos.Semantics.TV.t
 
 /-- An entity is necessary iff it exists in every world. -/
 def NecessaryEntity (e : Entity) : Prop := ∀ w : World, ExistsAt w e
@@ -36,7 +39,7 @@ def Contingent (e : Entity) : Prop := ¬ NecessaryEntity e
     single entity that exists in every world.
 
     This is the `∀w∃r … → ∃r∀w …` move of the informal T7. It is NOT
-    derivable from `groundPrinciple` (the swap is invalid in general); it is
+    derivable from `groundPrinciple_atom` (the swap is invalid in general); it is
     the declared modal price of the argument. Its negation does not destroy
     the act of denying it, so it stays a semantic axiom, never promoted to
     "transcendental theorem". -/
@@ -45,8 +48,8 @@ axiom AxGlobalGround :
 
 /-- T7 — necessary truth forces necessary reality (base.txt T7).
 
-    PROVEN↑ {Core.{T,tschema}, Truthmaker.{Entity,Ground,ExistsAt,AxOr,AxAnd,AxNot},
-             Semantics.{Form,World}, ExistsAt-witness...}, AxGlobalGround}. -/
+    PROVEN↑ {Truthmaker.{Subject,Ground,ExistsAt},
+             Semantics.{Form,World}, AxGlobalGround} (E0: no `T`; C2: carrier is `Subject`). -/
 theorem T7_necessaryReality {τ : Form} (hτ : NecessarilyTrue τ) :
     ∃ e : Entity, NecessaryEntity e ∧ Ground e τ := by
   obtain ⟨e, he⟩ := AxGlobalGround τ hτ

@@ -1,0 +1,42 @@
+T10 — OS ABSOLUTOS NÃO PODEM COEXISTIR (a asserção p1/p2 do poema)
+
+Depende de: T3 (C2, C6)
+
+Verificado em: formal/Logos/Core.lean (negatedAbsolutes,
+someTruthAndSomeFalsehood) e formal/Logos/Semantics.lean
+(bothNecessarilyTrueAndFalse), GAPMAP.md C35–C36.
+Impressão de axiomas (E0, 2026-09-15): negatedAbsolutes e rightWrongDistinction
+não dependem de nenhum axioma; CL (classical meta-logic) só no conteúdo
+mundano (bothNecessarilyTrueAndFalse); sorryAx: 0.
+
+Enunciado do poema:
+
+p1: "nada é certo" refuta-se a si próprio → p1 é falso.
+p2: "nada é errado" refuta-se a si próprio → p2 é falso.
+p1 ∨ p2 é ainda uma contradição;
+¬(p1 ∨ p2) é a verdade necessária.
+
+Formalização:
+
+¬(N_T ∨ N_F)   [negatedAbsolutes: C2 ∧ C6 por lógica clássica]
+
+equivalentemente:
+
+(∃p T p) ∧ (∃q IsFalse q)   [someTruthAndSomeFalsehood: C3 ∧ C7]
+
+E ao nível dos mundos (necessidade genuína):
+
+∃τ NecessarilyTrue(τ) ∧ ∃ρ NecessarilyFalse(ρ)
+[bothNecessarilyTrueAndFalse: testemunhas τ = φ ∨ ¬φ, ρ = φ ∧ ¬φ]
+
+E o operador proposicional (C1, 2026-09-15):
+
+"¬N_T ∧ ¬N_F é necessário" deixou de ser axioma modal: com a filosofia
+identidade-modelo (alias `Necessity p := ∀w p`), necDistinction é TEOREMA
+com a mesma impressão que rightWrongDistinction — nenhuma (E0).
+GAPMAP.md C38 e a antiga entrada FAITH-1 ficam PROVEN/DISSOLVIDA.
+
+Portanto:
+
+"há certo, e há errado" é uma verdade que o próprio ato de a negar
+já exercita (o negador usa a distinção que tenta apagar).

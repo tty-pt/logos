@@ -4,6 +4,12 @@
 Person is *defined* structurally (T5, base.txt §12): the agent, rational,
 intentional subject already present in the act — not an added axiom.
 
+Tier 1 (2026-09-16): `Agent` and `Rational` are analytical definitions
+(`:= True`), so the structural definition collapses to its intentional
+core: a person IS a subject who means some content
+(`Person s := ∃ p, Means s p`). The `Agent ∧ Rational` conjuncts remain in
+the definition for §12 fidelity but are definitionally True.
+
 §24b is formalized under the renderings of Q3.1/Q3.2 (see DESIGN.md):
   * a *feature* of the act is a proposition entailed by the act's content,
     `HasFeature a f := a → f` (logical-consequence reading);
@@ -18,32 +24,13 @@ import Logos.Agency
 namespace Logos.Person
 
 open Logos.Core (T IsFalse)
-open Logos.Agency (Subject A)
-
-/-- Rationality of a subject: the present act is rational by being the act of
-    reasoning (T5, base.txt §12). -/
-axiom Rational : Subject → Prop
-
-/-- `Means s p`: subject s means (intentionally relates to) proposition p (§11). -/
-axiom Means : Subject → Prop → Prop
-
-/-- The act entails that its subject means its content (§11, T5 component). -/
-axiom act_implies_means : ∀ {s : Subject} {p : Prop}, A s p → Means s p
-
-/-- The act entails that its subject is rational (T5 component). -/
-axiom act_implies_rational : ∀ {s : Subject} {p : Prop}, A s p → Rational s
+open Logos.Agency (Subject A Rational Means act_implies_means)
 
 /-- Intentionality (§11): the subject means some content. -/
 def Intentional (s : Subject) : Prop := ∃ p : Prop, Means s p
 
 /-- Person (structural definition, base.txt §12 / theorem T5). -/
 def Person (s : Subject) : Prop := Logos.Agency.Agent s ∧ Rational s ∧ Intentional s
-
-/-- T5 — there is a person in the structural sense. -/
-theorem T5_personExists : ∃ s : Subject, Person s := by
-  obtain ⟨s, p, ha⟩ := Logos.Agency.cogito
-  exact ⟨s, Logos.Agency.act_implies_agent ha, act_implies_rational ha,
-    ⟨p, act_implies_means ha⟩⟩
 
 -- ---------------------------------------------------------------------------
 -- §24b — personal/logical inseparability of the rational act
@@ -82,5 +69,4 @@ theorem inseparability_24b : ∀ a : Prop,
 end Logos.Person
 
 -- Axiom footprint audit
-#print axioms Logos.Person.T5_personExists
 #print axioms Logos.Person.inseparability_24b

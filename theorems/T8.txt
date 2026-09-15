@@ -1,6 +1,6 @@
 T8 — FUNDAMENTO PESSOAL
 
-Depende de: T3, T5, T7, §24b + AXIOMES META AxPersonalGround, AxGroundBearing (ver nota final)
+Depende de: T3, T5, T7, §24b + AXIOMA META AxPersonalGround (ver nota final)
 
 Verificado em: formal/Logos/GroundPerson.lean (T8_personalGround), GAPMAP.md C32.
 
@@ -75,13 +75,16 @@ NOTA FORMAL — o passo "o fundamento é pessoal" é AXIOM, não dedução.
 A tentativa de derivar ∃r[□Exists(r) ∧ Personal(r)] apenas de T1–T7 falha
 em dois pontos exactos (formal/DESIGN.md D9): (a) nada transfere a
 *necessidade* para o fundamento do conteúdo contingente do acto presente;
-(b) "fundamentar" não implica "realizar". Declaram-se por isso:
+(b) "fundamentar" não implica "realizar".
 
-(a) AxPersonalGround (META): as features pessoais presentes no acto
-racional são fundamentadas pela realidade necessária — é o conteúdo que o
-poema acrescenta para além da dedução;
-(b) AxGroundBearing (META): o fundamento realiza o que funda (realismo
-mínimo não-redutivo).
+Estado A1/B2 (2026-09-15):
+(b) foi DISSOLVIDO: `Realizes := GroundProp` (definição, não axioma) — o
+realismo mínimo não-redutivo passou a ser um baptismo, e AxGroundBearing é
+agora teorema por rfl; desapareceu da impressão de axiomas de T8.
 
-Com (a)(b), T8 é teorema genuíno (PROVEN↑); sem elas fica BLOCKED nos dois
-lemas formais registados em D9.
+(a) AxPersonalGround (META) permanece o único AXIOMA desta fase: as features
+pessoais presentes no acto racional são fundamentadas pela realidade
+necessária — é o conteúdo que o poema acrescenta para além da dedução.
+
+Com (a), T8 é teorema genuíno (PROVEN↑); sem ele fica BLOCKED no lema formal
+registado em D9.

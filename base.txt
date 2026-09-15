@@ -114,10 +114,12 @@ Assim:
 ∃p False(p).
 
 Nota formal (verificado em formal/Logos/Core.lean, GAPMAP.md C1–C12):
-a autorrefutação usa um predicado de verdade primitivo e estratificado T
-com o axioma Schema-T (T p ↔ p) — o que bloqueia o paradoxo do mentiroso —
-e lógica clássica (bivalência) no passo ¬∀p¬Tp ⇒ ∃pTp.
-Sem estas duas peças explícitas, a derivação não é válida.
+a autorrefutação usa a verdade como *definição* `T p := p` (E0, 2026-09-15 —
+o antigo predicado primitivo + axioma Schema-T foi tornado definicional; o
+Schema-T é agora teorema e o paradoxo do mentiroso continua bloqueado, pois
+nenhuma proposição autorreferente é assumida) e lógica clássica (bivalência)
+no passo ¬∀p¬Tp ⇒ ∃pTp. Sem estas duas peças explícitas, a derivação não é
+válida.
 
 6. T3 — PRIMEIRO GRANDE RESULTADO → theorems/T3.txt
 
@@ -332,6 +334,22 @@ seja apenas uma cadeia de símbolos sem sujeito.
 
 Há agência racional real no ato presente.
 
+(Nota formal: o campo estrutural da escolha — que há conteúdos incompatíveis
+entre os quais a pessoa pode representar a adopção — é teorema
+formalizado: formal/Choice.lean T11_choiceField (PROVEN, funde T5 + T9).
+Pelo batch choice-realism (2026-09-16), a própria escolha é agora real:
+Chooses(s,p,q) := A(s,p) ∧ Incompatible(p,q) (definição — antes era um
+placeholder vazio, o que fazia a escolha irrepresentável); person_chooses
+(sujeito ⇒ escolha, {Means, Subject}), choiceExists, noChoice_selfRefutes
+(negar a escolha é uma escolha) e JUDGE_COMMITTED/judge_commits (sem certo e
+errado não há escolha) são teoremas kernel-verificados — GAPMAP.md C49–C56,
+F1a PROVEN↑. A forma modal forte de liberdade (FreeWill: ◇Choose ∧ ◇Choose¬,
+abaixo) é DEFERRED — GAPMAP.md F1b, semântica modal da escolha em falta (um
+sujeito pode significar p sem ser capaz, a nível modal, de significar ¬p).
+Cautela (C1): o alias `Dia` prop-level é a dupla negação clássica sob o modelo
+identidade; a liberdade modal futura deve ser construída sobre `NecessityPH`
+(nível-mundos), não sobre o alias degenerado.)
+
 16. RELAÇÃO
 
 Uma relação exige pelo menos dois pólos:
@@ -452,6 +470,9 @@ Normativity → Direction → Teleology.
 
 Existe uma estrutura mínima de orientação para um fim.
 
+(Nota formal: §21 — teleologia — permanece DEFERRED / GAPMAP.md F2.
+Nenhum teorema formal neste módulo.)
+
 22. VERDADE NECESSÁRIA
 
 Considere:
@@ -478,8 +499,8 @@ Existe verdade logicamente necessária.
 
 Verificado em dois níveis: formal/Logos/Semantics.lean (semântica clássica
 de mundos, sem axiomas novos) e formal/Logos/Truthmaker.lean (nível
-truthmaker, sob os axiomas de composição AxOr/AxAnd/AxNot — escolha
-semântica declarada, ver formal/GAPMAP.md C13–C17).
+truthmaker, com cláusulas de composição tarskianas — TEOREMAS por definição,
+TrueAt estrutural, A2 2026-09-16; ver formal/GAPMAP.md C15–C17).
 
 23. FALSIDADE NECESSÁRIA
 
@@ -521,11 +542,14 @@ a condição de verdade necessária não pode ser reduzida ao sujeito contingent
 
 24a. FUNDAMENTO DA VERDADE (Princípio do Truth-Maker)
 
-Enunciado:
+Enunciado (formal: restrito a átomos):
 
 True(p) → ∃r Ground(r, p).
 
-Toda verdade tem um fundamento na realidade.
+Toda verdade atómica tem um fundamento na realidade; a verdade
+composta é composicional (cláusulas Tarskianas — TEOREMAS por
+definição no nível truthmaker, A2 2026-09-16). Que um composto
+tenha fundamento (Ground(r, p ∧ q), etc.) não é afirmado nem negado.
 
 Demonstração (reductio):
 
@@ -585,10 +609,14 @@ pressupõe uma distinção objectiva (True ≠ False)
 cuja objectividade exige que a realidade difira,
 o que exige um fundamento.
 
-Nota formal: no nível semântico este princípio é lema por definição de
-verdade-como-fundamentação (formal/Truthmaker.groundPrinciple, GAPMAP.md
-C15). A sua imagem ao nível proposicional (GroundPrincipleProp) é axioma
-SEM declarado (ver formal/Logos/GroundPerson.lean).
+Nota formal: neste nível a verdade é definida estruturalmente
+(formal/Truthmaker.TrueAt, A2 2026-09-16): átomos exigem
+fundamentação existencial — `groundPrinciple_atom` (formal/Truthmaker,
+GAPMAP.md C15) é teorema por definição; os conectivos são composicionais
+(cláusulas TEOREMAS por definição, C16–C17 — `Iff.rfl`). Não há
+correspondência provável `TrueAt = Satisfies` em geral (Ground/ExistsAt
+permanecem VOCAB livres). A imagem ao nível proposicional
+(GroundPrincipleProp) é axioma SEM declarado (ver formal/Logos/GroundPerson.lean).
 
 Teorema: ver theorems/T7.txt
 
@@ -665,7 +693,11 @@ O ato racional presente implica:
 15. teleologia mínima;
 16. verdades necessárias;
 17. realidade necessária;
-18. realidade necessária é pessoal.
+18. realidade necessária é pessoal;
+19. o campo da escolha racional não-vazio (T9 + T11);
+20. mais do que uma pessoa (T12);
+21. há quem se possa amar (T13);
+22. relação eterna de amor (T14).
 
 Em forma condensada:
 
@@ -686,6 +718,25 @@ Act
 → Necessary Truth
 → Necessary Reality
 → Personal Ground.
+
+Do poema (avaliado pela mesma disciplina, ver theorems/T10–T14.txt):
+
+Certo e errado necessários (T10)
+→ campo da escolha (T11)
+→ mais do que uma pessoa (T12)
+→ quem se possa amar (T13)
+→ relação eterna de amor (T14).
+
+(Nota formal §25: T12–T14 são PROVEN↑ sob pontes declaradas e assinaladas —
+AxTwoSubjects (META, pluralidade) e AxPersonsAffect (SEM, afetividade) para o
+par, AxPersonStability (SEM) para a eternidade — a ponte FAITH AxEternalLove e
+a axiom Loves foram dissolvidas em C4 (Loves := Affects, relação estrutural);
+Affects é a relação primitiva única (A3-refactor, 2026-09-15: Helps/Harms :=
+Affects passam a projeções definidas — a distinção ajuda/prejudica sobrevive
+só no plano conceptual);
+T11 é PROVEN; T10 é PROVEN no nível proposicional e a sua necessidade
+(necDistinction) é agora teorema (C1, 2026-09-15: o operador modal foi
+dissolvido em alias identidade-modelo; FAITH-1 removida). Ver formal/GAPMAP.md C35–C46.)
 
 26. O QUE FOI EXCLUÍDO POR IMPOSSIBILIDADE DE NEGAÇÃO
 
@@ -712,6 +763,15 @@ Não pode ser coerentemente mantido:
 O acto racional tem aspectos pessoais e lógicos separáveis.
 
 Ao afirmar ou negar racionalmente qualquer uma destas posições, o agente utiliza parcialmente a estrutura que a posição tenta eliminar.
+
+(Nota formal §26: "Não existe sujeito do ato presente" tem agora registo formal
+kernel-checked — noSubject_selfRefutes: ¬(∃s : Subject) ⇒ False (negar um
+sujeito é, ele próprio, um ato/escolha de um sujeito; a escolha existente
+fornece a testemunha). PROVEN↑ sob {AxTwoSubjects, Means, Subject}; o ato é
+derivado (cogito_from_T12, axiom-free — A1 eliminou o axioma cogito em
+2026-09-16), e a âncora última é AxTwoSubjects —
+a ponte META assinalada. O núcleo lógico puro da mera sort vazia é consistente:
+"sem sujeito" só se refuta dado o ato residente na teoria. Ver formal/GAPMAP.md C57.)
 
 27. RESULTADO MÁXIMO DESTA FASE
 
@@ -741,7 +801,7 @@ Truth ≠ WillOfAgent
 
 e os lemas derivados:
 
-True(p) → ∃r Ground(r, p)  [§24a: toda verdade tem fundamento]
+True(p) → ∃r Ground(r, p)  [§24a: toda verdade ATÓMICA tem fundamento; a composta é composicional]
 
 P(f, a) ↔ L(g, a)  [§24b: inseparabilidade pessoal-lógica]
 
@@ -757,31 +817,77 @@ há agência;
 há uma pessoa no sentido estrutural definido;
 há verdades necessárias que não dependem da existência contingente deste sujeito;
 há realidade necessária;
-há realidade necessária que é pessoal.
+há realidade necessária que é pessoal;
+há mais do que uma pessoa (T12);
+há quem se possa amar (T13);
+há uma relação eterna de amor, sob a ponte assinalada (T14).
 
-(Nota formal: os dois últimos itens são PROVEN↑ — teoremas sob axiomas
+(Nota formal: os itens 17 e 18 são PROVEN↑ — teoremas sob axiomas
 declarados: AxGlobalGround (SEM) para a realidade necessária, mais
-AxPersonalGround e AxGroundBearing (META) para o passo "pessoal".
-Ver theorems/T7.txt, theorems/T8.txt e formal/GAPMAP.md C18, C32.)
+AxPersonalGround (META) para o passo "pessoal" (AxGroundBearing foi
+dissolvido em B2, 2026-09-15: Realizes := GroundProp).
+Ver theorems/T7.txt, theorems/T8.txt e formal/GAPMAP.md C18, C32.
+Os itens 19–22 são o acréscimo do poema — ver a nota formal do §25.)
 
 28. LIMITE DA FASE PURAMENTE DEDUTIVA
 
-A cadeia seguinte ainda precisa de demonstração:
+A cadeia do poema avançou. Estado formal (theorems/T10–T14.txt):
 
-PersonalGround (PROVEN↑ — ver nota abaixo)
-→ Freedom
-→ Good
-→ Love
-→ EternalRelation
-→ Trinity.
+T10 (certo e errado necessários) — PROVEN; a sua necessidade (necDistinction)
+  é teorema desde C1 (o modal prop-level é agora alias definições).
+T11 (campo da escolha) — PROVEN. Pelo batch choice-realism (2026-09-16) a
+  própria escolha é real e teoremática: person_chooses (sujeito ⇒ escolha),
+  choiceExists, noChoice_selfRefutes (negar a escolha é uma escolha),
+JUDGE_COMMITTED/judge_commits (sem certo e errado não há escolha) — ver
+   theorems/T11.txt e formal/GAPMAP.md C49–C57.
+T12 (mais do que uma pessoa) — PROVEN↑ sob AxTwoSubjects (META, pluralidade;
+  a antiga ponte AxValueInterpersonal foi dividida em C3-I e o seu enunciado
+  recuperado como teorema valueInterpersonal_of_split).
+T13 (quem se possa amar) — PROVEN↑ (via T12).
+T14 (relação eterna de amor) — PROVEN↑ sob AxPersonsAffect (SEM) +
+  AxPersonStability (SEM); a relação é estrutural (Loves := Affects, C4) e a
+  ponte FAITH AxEternalLove foi dissolvida.
+
+Nota (cogito-rethinking, 2026-09-15): Exists e Content deixaram de ser
+axiomas — são definições analíticas (Exists(s) := True; Content(p) := True), e
+o cogito (A(s,p)) demonstrou-se derivável de T12 (Plurality.cogito_from_T12,
+sob AxTwoSubjects): a negação do cogito refuta-se a si mesma, tal como o
+absoluto "nada é verdadeiro" (§4). T2 ficou axiom-free (footprint `{}`).
+
+Nota (A1, 2026-09-16): o axioma cogito foi ELIMINADO — o ato é apenas teorema
+(cogito_from_T12, derivado sob AxTwoSubjects). T1/T4/T5 migraram para
+Plurality como projeções de T12 (Plurality.T1_subjectExists,
+Plurality.T4_agentExists, Plurality.T5_personExists); todos os footprints
+{cogito, Means, Subject} passaram a {AxTwoSubjects, Means, Subject}.
+Axiomas 16 → 15. O selo TRANS deixa de existir.
+
+Nota (Tier1, 2026-09-16): Agent e Rational deixaram também de ser axiomas —
+são definições analíticas (Agent(s) := True; Rational(s) := True) e o ato é o
+ato de significar: A(s,p) := Means(s,p). Axiomas 18 → 16. Subject permanece
+axioma, mas como sort puro (uma definição indutiva vazia refutaria ∃s,
+tornando o sistema inconsistente; Bool/fin 2/ℕ/Unit esconderiam cardinalidade)
+— IM_STUPID.md §5.
+
+Ainda precisam de demonstração:
+
+Freedom (FreeWill, modal bipolar) — DEFERRED/F1b, a semântica modal da escolha
+  (◇Choose ∧ ◇Choose¬ a nível-mundos, sobre NecessityPH) em falta; a
+  *existência* da escolha (F1a) está demonstrada (ver T11).
+Good (o bem como objeto moral da relação) — DEFERRED/F2, passo de
+  normatividade lógica (§20) a bem, em conexão com T12/T13.
+Trinity — DEFERRED, sem argumento (§28/§29).
 
 Nenhuma destas passagens deve ser simplesmente assumida.
 
-Nota formal (formal/GAPMAP.md, formal/DESIGN.md D9): PersonalGround é
-teorema apenas sob três pontes declaradas — AxGlobalGround (SEM, a troca de
-quantificadores ∀w∃r → ∃r∀w de T7), AxPersonalGround e AxGroundBearing
-(META, o preço do passo "pessoal" de T8). Sem elas, T7 fica BLOCKED no lema
-da troca, e T8 fica BLOCKED nos dois lemas formais registados em D9.
+Nota formal (formal/GAPMAP.md, formal/DESIGN.md D9, D14): PersonalGround é
+teorema apenas sob duas pontes declaradas — AxGlobalGround (SEM, a troca de
+quantificadores ∀w∃r → ∃r∀w de T7) e AxPersonalGround (META, o preço do
+passo "pessoal" de T8; a terceira ponte, AxGroundBearing, foi dissolvida em
+B2). A pluralidade e o amor são teoremas
+apenas sob AxTwoSubjects (META), AxPersonsAffect (SEM) e AxPersonStability
+(SEM). Cada negação destas pontes não destrói o ato de a negar — por isso são
+pontes declaradas, nunca "dedução pura" (spikes de exclusão registados em
+formal/DESIGN.md D14b; lema em falta: ALONE_EXCLUDED).
 
 O objectivo seguinte é demonstrar cada uma delas pelo mesmo método transcendental:
 

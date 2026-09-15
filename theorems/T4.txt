@@ -1,10 +1,16 @@
 T4 — O SUJEITO É AGENTE
 
-Depende de: T1
+Depende de: T12 (batch Tier1, 2026-09-16: agência é analítica)
 
 12. O ato de afirmar é realizado por um sujeito:
 
 A(s,p) → Agent(s).
+
+(Nota formal: com o colapso Tier1 — A(s,p) := Means(s,p) e
+Agent(s) := True — esta passagem é uma tautologia definicional.
+A1 (2026-09-16): o axioma cogito foi eliminado e T4_agentExists é agora
+teorema de Plurality (projeção de T12) de footprint
+{AxTwoSubjects, Means, Subject}; ver formal/GAPMAP.md C23.)
 
 Logo:
 

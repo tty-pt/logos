@@ -1,17 +1,23 @@
 T2 — EXISTE CONTEÚDO PROPOSICIONAL
 
-Depende de: Axioma performativo (§1)
+Depende de: Definição analítica (§2, cogito-rethinking 2026-09-15)
 
-Temos:
+Content é agora uma definição analítica:
 
-A(s,p)
+Content(p) := True
 
-Segue:
+(já não um axioma — todo o conteúdo proposicional é conteúdo de ato
+por definição; a axiomática era apenas a opacidade desnecessária).
 
-Content(p).
+Temos, para qualquer p:
+
+Content(p)
 
 Portanto:
 
 ∃p Content(p).
+
+(Lean: `Agency.T2_contentExists` com footprint `{}` — o teste é o próprio
+`True`; o cogito já não é necessário.)
 
 Não existe uma afirmação sem algo que seja afirmado.

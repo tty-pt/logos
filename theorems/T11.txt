@@ -1,0 +1,46 @@
+T11 — CAMPO DA ESCOLHA RACIONAL (revive §13–§15 com a definição de liberdade)
+
+Depende de: T5, T9; definições §14–§15
+
+Verificado em: formal/Logos/Choice.lean (T11_choiceField, person_chooses,
+choiceExists, noChoice_selfRefutes, JUDGE_COMMITTED), formal/Logos/Order.lean
+(judge_commits), GAPMAP.md C39–C56.
+Impressão de axiomas: T11_choiceField — a de T5 ({AxTwoSubjects, Means, Subject});
+person_chooses — {Means, Subject} (sem cogito); choiceExists /
+noChoice_selfRefutes / JUDGE_COMMITTED — {AxTwoSubjects, Means, Subject};
+judge_commits — CL + {AxTwoSubjects, Means, Subject};
+incompatible_self_negation — nenhuma ({}). sorryAx: 0.
+
+Enunciado:
+
+Há uma pessoa (T5) e há conteúdos incompatíveis (T9); logo o campo mínimo da
+escolha racional (§13–§14) está não-vazio para essa pessoa:
+
+∃s Person(s) ∧ ∃p∃q Incompatible(p,q).
+
+Definições formalizadas (batch choice-realism, 2026-09-16):
+
+Chooses(s,p,q)   := A(s,p) ∧ Incompatible(p,q)  — o sujeito s adota p contra o
+                    conteúdo incompatível q (§14); ESTA É AGORA UMA DEFINIÇÃO
+                    REAL (antes era o placeholder vazio ":= False", que tornava
+                    a escolha irrepresentável — os "gaps" abaixo eram falsos).
+CanChoose(s,p)   := Dia(∃q Chooses(s,p,q))
+FreeWill(s,p)    := CanChoose(s,p) ∧ CanChoose(s,¬p)        [§15, definição]
+
+Teoremas kernel-verificados (a cadeia §2 de IM_STUPID.md fecha para a
+existência da escolha):
+
+- person_chooses: Person(s) ⇒ ∃p∃q Chooses(s,p,q) —  sujeito ⇒ escolha.
+- choiceExists: ∃s∃p∃q Chooses(s,p,q) —  a escolha é real (via T5).
+- noChoice_selfRefutes: ¬(∃s∃p∃q Chooses(s,p,q)) ⇒ False —  negar a escolha
+  é uma escolha (transcendental).
+- JUDGE_COMMITTED e judge_commits: sem certo e errado não há escolha —
+  o juiz (§8) é um escolhedor.
+
+LIMITE (F1b, por provar — o único resíduo genuíno):
+A tese bipolar completa §15 — ◇Choose ∧ ◇Choose¬ a nível de mundos
+(sobre NecessityPH) — não está demonstrada: um sujeito pode significar p sem
+ser capaz, a nível modal, de significar ¬p. A passagem §15 "não é uma simples
+tautologia" permanece DEFERRED; GAPMAP.md F1b regista os lemas em falta.
+CanChoose já é escolha real (canChoose_unfold), pelo que F1b é exatamente a
+afirmação modal, não uma lacuna de vocabulário.

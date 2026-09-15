@@ -1,6 +1,7 @@
 T5 — DA AGÊNCIA À PESSOA
 
-Depende de: T4
+Depende de: T12 (Tier1: Agent/Rational são agora definições analíticas;
+A1, 2026-09-16: T5 é projeção de T12 em Plurality)
 
 Definimos:
 
@@ -8,13 +9,26 @@ Person(s) := Agent(s) ∧ Rational(s) ∧ Intentional(s).
 
 O sujeito do ato racional satisfaz:
 
-- Agent(s): demonstrado em T4
-- Rational(s): o ato é racional por hipótese (é o ato de raciocinar)
+- Agent(s): definição analítica desde o batch Tier1 (2026-09-16) —
+  com A(s,p) := Means(s,p), todo o sujeito encontrado no ato é agente por
+  definição; T4 é teorema trivial.
+- Rational(s): idem — definição analítica (Rational(s) := True); o ato de
+  significar é racional por hipótese.
 - Intentional(s): o ato possui conteúdo direcionado — Means(s,p)
 
 Portanto:
 
 Person(s).
+
+(Nota formal: com o colapso Tier1, Person colapsa conceptualmente à pessoa
+intencional — o sujeito que significa: Person(s) ⇔ ∃p Means(s,p). A forma
+conjuntiva mantém-se por estabilidade.
+A1 (2026-09-16): o axioma cogito foi eliminado; o antigo
+`Person.T5_personExists` (que o usava) foi removido e T5 é agora teorema de
+Plurality como projeção de T12 (`Plurality.T5_personExists`) com footprint
+{AxTwoSubjects, Means, Subject} — os antigos predicados de espécie
+{Agent, Rational} desapareceram de todas as footprints.
+Ver formal/GAPMAP.md C24 e formal/DESIGN.md D-Tier1.)
 
 Logo:
 

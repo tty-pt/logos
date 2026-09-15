@@ -50,25 +50,29 @@ open Logos.Core (T IsFalse)
 open Logos.Semantics (Form World)
 open Logos.Truthmaker (Entity Ground ExistsAt TrueAt)
 open Logos.Modal (NecessaryEntity)
-open Logos.Agency (Subject A)
-open Logos.Person (Means)
+open Logos.Agency (Subject A Means)
 
 
 /-- Prop-level grounding (the §24a image at the level of propositional
     features): `GroundProp e f` — entity e grounds the *feature* f. -/
-axiom Realizes : Entity → Prop → Prop
 axiom GroundProp : Entity → Prop → Prop
+
+/-- `Realizes e f`: e realizes the feature f it grounds. Defined (B2,
+    2026-09-15) as `GroundProp` itself — minimal non-reductive realism is a
+    *rename*, not a separate assumption; the former `AxGroundBearing` axiom is
+    now an `rfl`-level theorem. -/
+def Realizes (e : Entity) (f : Prop) : Prop := GroundProp e f
 
 /-- GroundPrincipleProp (SEM): every true proposition of the present rational
     level has a grounding entity. Prop-level reflection of
-    `Truthmaker.groundPrinciple`. -/
+    `Truthmaker.groundPrinciple_atom`. -/
 axiom GroundPrincipleProp : ∀ {f : Prop}, T f → ∃ e : Entity, GroundProp e f
 
-/-- AxGroundBearing (META): a ground *bears* what it grounds — the minimal
-    non-reductive realism that lets grounded features be features of the
-    ground. Price: features grounded in reality are (not merely caused by,
-    but) realized by it. -/
-axiom AxGroundBearing : ∀ {e : Entity} {f : Prop}, GroundProp e f → Realizes e f
+/-- AxGroundBearing (now a theorem, B2): a ground *bears* what it grounds —
+    the minimal non-reductive realism that lets grounded features be features
+    of the ground, i.e. `Realizes` unfolded. -/
+theorem AxGroundBearing {e : Entity} {f : Prop} : GroundProp e f → Realizes e f :=
+  fun h => h
 
 /-- A feature present in the present rational act on its personal side:
     it is the content *meant* by the acting subject. -/

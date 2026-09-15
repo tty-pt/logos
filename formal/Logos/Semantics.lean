@@ -85,8 +85,25 @@ theorem nonContradiction (φ : Form) : NecessarilyFalse (Form.and φ (Form.not �
   intro h
   exact h.2 h.1
 
+-- ---------------------------------------------------------------------------
+-- P2 of poem.txt — "há certo e há errado" at the world level
+-- ---------------------------------------------------------------------------
+
+/-- There is a necessarily-true content AND a necessarily-false one
+    (the poem's "há certo E há errado" where "errado" is level-1 falsity),
+    witnessed by the excluded-middle tautology and the non-contradiction
+    anti-tautology, respectively. -/
+theorem bothNecessarilyTrueAndFalse :
+    (∃ τ : Form, NecessarilyTrue τ) ∧ (∃ ρ : Form, NecessarilyFalse ρ) := by
+  constructor
+  · exact ⟨Form.or (Form.atom 0) (Form.not (Form.atom 0)),
+      lawExcludedMiddle (Form.atom 0)⟩
+  · exact ⟨Form.and (Form.atom 0) (Form.not (Form.atom 0)),
+      nonContradiction (Form.atom 0)⟩
+
 end Logos.Semantics
 
 -- Axiom footprint audit
 #print axioms Logos.Semantics.lawExcludedMiddle
 #print axioms Logos.Semantics.nonContradiction
+#print axioms Logos.Semantics.bothNecessarilyTrueAndFalse

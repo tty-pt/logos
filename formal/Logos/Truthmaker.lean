@@ -1,38 +1,59 @@
 /-
 # Logos.Truthmaker — Level 1b: truthmaker semantics (base.txt §24a, §22–§23)
 
-Truth is *defined* as being-made-true: `φ is true in w` iff some entity
-exists in `w` and grounds `φ`. On that definition the truth-maker principle
-of §24a is a lemma, not a hidden assumption:
+Truth is *defined* as being-made-true. Since A2 (2026-09-16) the
+definition is structural: an **atom** is true in `w` iff some entity exists
+in `w` and grounds it; the connectives are Tarskian-compositional **by
+definition** (mirroring `Semantics.Satisfies`). The former SEM axioms
+`AxOr`/`AxAnd`/`AxNot` become `Iff.rfl` theorems of this definition, and
+`lawExcludedMiddle`/`nonContradiction` are re-proved by definitional
+reduction. The truth-maker principle of §24a holds **atom-only**
+(`groundPrinciple_atom`); the old formula-level version (`groundPrinciple`)
+is deliberately dropped — composite truth is compositional (`Ground e (or …)`
+is neither asserted nor denied; only atoms carry existential grounding).
 
-    groundPrinciple : TrueAt w φ → ∃ e, ExistsAt w e ∧ Ground e φ
+Consistency model (SEM, D6/Q1): the "face-value" model. Since C2
+(2026-09-15) the carrier is *defined*, not primitive: `Entity := Subject`
+(the Q2/D11 identification becomes definitional), so `EntityOf` is the
+identity. `Ground`/`ExistsAt` remain the two real semantics axioms. There is
+no provable `TrueAt = Satisfies` ∈-correspondence in general — the
+entity-vocabulary is untouched by the semantics.
 
-Consistency model (SEM, D6/Q1): the "face-value" model with
-`Entity := Form`, `ExistsAt w e := (eval w e = t)`, `Ground e φ := (e = φ)`.
-There `TrueAt w φ ↔ eval w φ = t`, and the connective axioms below follow
-from the classical satisfaction clauses of `Logos.Semantics`. Hence the
-axiom system is satisfied by an ordinary Tarskian model.
+Import note: `Logos.Truthmaker` imports `Logos.Agency` (no cycle; Agency
+imports only Core).
 -/
 
 import Logos.Core
 import Logos.Semantics
+import Logos.Agency
 
 namespace Logos.Truthmaker
 
 open Logos.Semantics (Form World)
+open Logos.Agency (Subject)
 
 /-- Grounding entities (truthmakers). World-rigid: what an entity *grounds*
-    does not vary across worlds; only its existence does (D6). -/
-axiom Entity : Type
+    does not vary across worlds; only its existence does (D6).
+    Defined (C2, 2026-09-15): the carrier is the subject type itself — the
+    Q2/D11 identification (`Entity := Subject`) made definitional. -/
+def Entity : Type := Subject
 
 /-- `Ground e φ`: entity `e` grounds formula `φ`. -/
-axiom Ground : Entity → Form → Prop
+axiom Ground : Subject → Form → Prop
 
 /-- `ExistsAt w e`: entity `e` exists in world `w`. -/
-axiom ExistsAt : World → Entity → Prop
+axiom ExistsAt : World → Subject → Prop
 
-/-- Truth as truthmaking: φ is true in w iff some entity grounding it exists there. -/
-def TrueAt (w : World) (φ : Form) : Prop := ∃ e : Entity, ExistsAt w e ∧ Ground e φ
+/-- Truth as truthmaking, structurally defined (A2, 2026-09-16): an atom is
+    true in `w` iff some entity grounding it exists there; the connectives are
+    Tarskian-compositional by definition. The former axioms AxOr/AxAnd/AxNot
+    became `Iff.rfl` theorems of this definition. -/
+def TrueAt (w : World) : Form → Prop
+  | Form.atom n => ∃ e : Entity, ExistsAt w e ∧ Ground e (Form.atom n)
+  | Form.not φ   => ¬ TrueAt w φ
+  | Form.and φ ψ => TrueAt w φ ∧ TrueAt w ψ
+  | Form.or φ ψ  => TrueAt w φ ∨ TrueAt w ψ
+  | Form.imp φ ψ => TrueAt w φ → TrueAt w ψ
 
 /-- Necessarily true: made true in every world. -/
 def NecessarilyTrue (φ : Form) : Prop := ∀ w : World, TrueAt w φ
@@ -40,37 +61,49 @@ def NecessarilyTrue (φ : Form) : Prop := ∀ w : World, TrueAt w φ
 /-- Necessarily false: made true in no world. -/
 def NecessarilyFalse (φ : Form) : Prop := ∀ w : World, ¬ TrueAt w φ
 
-/-- §24a — the truth-maker principle, unfolding the definition of truth. -/
-theorem groundPrinciple (w : World) (φ : Form) :
-    TrueAt w φ → ∃ e : Entity, ExistsAt w e ∧ Ground e φ := fun h => h
+/-- §24a — the truth-maker principle, atom-restricted (A2): the truth of an
+    atom in any world entails a grounder existing there. (The former
+    formula-level `groundPrinciple` is deliberately dropped: composite truth
+    is compositional and carries no existential grounding claim — see
+    DETAILS.md §6.1/§6.3.) -/
+theorem groundPrinciple_atom (w : World) (n : Nat) :
+    TrueAt w (Form.atom n) → ∃ e : Entity, ExistsAt w e ∧ Ground e (Form.atom n) :=
+  fun h => h
 
--- Semantic bridge axioms for the connectives (SEM; see consistency model above).
+-- Truthmaker clauses for the connectives (definitional; former SEM axioms AxOr/AxAnd/AxNot, demoted to theorems by A2).
 
-/-- A disjunction is true iff one of its disjuncts is made true. -/
-axiom AxOr : ∀ {w : World} {φ ψ : Form}, TrueAt w (Form.or φ ψ) ↔ TrueAt w φ ∨ TrueAt w ψ
+/-- truthmaker clause for disjunction (former axiom AxOr; now proved). -/
+theorem sat_ground_or {w : World} {φ ψ : Form} :
+    TrueAt w (Form.or φ ψ) ↔ TrueAt w φ ∨ TrueAt w ψ := Iff.rfl
 
-/-- A conjunction is true iff both conjuncts are made true. -/
-axiom AxAnd : ∀ {w : World} {φ ψ : Form}, TrueAt w (Form.and φ ψ) ↔ TrueAt w φ ∧ TrueAt w ψ
+/-- truthmaker clause for conjunction (former axiom AxAnd; now proved). -/
+theorem sat_ground_and {w : World} {φ ψ : Form} :
+    TrueAt w (Form.and φ ψ) ↔ TrueAt w φ ∧ TrueAt w ψ := Iff.rfl
 
-/-- A negation is true iff its prejacent is not made true. -/
-axiom AxNot : ∀ {w : World} {φ : Form}, TrueAt w (Form.not φ) ↔ ¬ TrueAt w φ
+/-- truthmaker clause for negation (former axiom AxNot; now proved). -/
+theorem sat_ground_not {w : World} {φ : Form} :
+    TrueAt w (Form.not φ) ↔ ¬ TrueAt w φ := Iff.rfl
 
-/-- §22, at the truthmaker level: the excluded middle is always made true. -/
+/-- truthmaker clause for implication. -/
+theorem sat_ground_imp {w : World} {φ ψ : Form} :
+    TrueAt w (Form.imp φ ψ) ↔ (TrueAt w φ → TrueAt w ψ) := Iff.rfl
+
+/-- §22, at the truthmaker level: the excluded middle is always made true.
+    PROVEN (A2), classical only (`CL`). -/
 theorem lawExcludedMiddle (φ : Form) : NecessarilyTrue (Form.or φ (Form.not φ)) := by
   intro w
-  rw [AxOr, AxNot]
   exact Classical.em (TrueAt w φ)
 
-/-- §23, at the truthmaker level: a contradiction is made true in no world. -/
+/-- §23, at the truthmaker level: a contradiction is made true in no world.
+    PROVEN (A2). -/
 theorem nonContradiction (φ : Form) : NecessarilyFalse (Form.and φ (Form.not φ)) := by
   intro w
-  rw [AxAnd, AxNot]
   intro h
   exact h.2 h.1
 
 end Logos.Truthmaker
 
 -- Axiom footprint audit
-#print axioms Logos.Truthmaker.groundPrinciple
+#print axioms Logos.Truthmaker.groundPrinciple_atom
 #print axioms Logos.Truthmaker.lawExcludedMiddle
 #print axioms Logos.Truthmaker.nonContradiction

@@ -12,21 +12,21 @@ Conventions (see AGENTS.md):
 
 ## The one premise of the system
 
-`T : Prop → Prop` is a *primitive* truth predicate and `tschema` is the
-T-schema restricted to exactly the stratification we need.
+`T : Prop → Prop` is a *definition* (E0, 2026-09-15): the identity
+`def T p := p`. This is the D2 consistency model (T as identity on
+`{True, False}`) made definitional. The T-schema `tschema : T p ↔ p` then
+becomes a theorem (`Iff.rfl`). No self-referential fixed point is derivable:
+Lean's `Prop` has no such proposition assumed to exist, so the liar cannot
+form — the exact requirement of a stratified theory of truth (Tarski/Gödel).
 
-Consistency model (SEM): interpret `T` as the identity on `{True, False}` in
-the boolean model of `Prop`. Then `tschema` holds trivially, and no fixed
-point `p = ¬ T p` (the liar) is derivable, because we assume no such
-proposition exists — self-reference is blocked at the door, which is exactly
-what a stratified theory of truth requires (Tarski/Gödel).
-
-Why a primitive predicate and not an axiom-free `def T p := p`:
-the second would make `tschema` definitional and shrink the footprint to
-`.{Classical.choice}`, but it would erase the semantic gap between "p" and
-"T p" that the normative layer (§8 Correct/Incorrect, §24a ground) needs.
-The plan records this as decision D4; the axom-free variant remains the
-documented fallback.
+Why `p` and not a primitive predicate: the former hypothesis `tschema` was
+the *single vulnerable premise* a skeptic could deny without destroying the
+act of denying (§29 criterion). Making it a definition removes the attack
+surface: the self-refutation core (¬N_T ∧ ¬N_F, "há certo e há errado")
+now rests on pure classical logic (§10 bivalence). The world-level
+truthmaker semantics (`Logos.Semantics`/`Truthmaker`) are independent of
+`T` and carry the genuine modality. The earlier `#print axioms` rows
+read `{T, tschema}`; they now read `CL` or `{}` (see GAPMAP.md).
 
 N_T is the absolute "nothing is true"; N_F is "nothing is false"
 (under bivalence, falsity = untruth, so N_F := ∀p, T p).
@@ -34,11 +34,13 @@ N_T is the absolute "nothing is true"; N_F is "nothing is false"
 
 namespace Logos.Core
 
-/-- Primitive truth predicate: `T p` reads "proposition p is true". -/
-axiom T : Prop → Prop
+/-- Truth, *defined* as identity (E0, 2026-09-15): `T p` is `p` itself.
+    The proposition/truth gap of the old primitive is made definitional —
+    the D2 consistency model adopted as the definition. -/
+def T (p : Prop) : Prop := p
 
-/-- T-schema (stratified): `T p ↔ p` for every proposition `p`. -/
-axiom tschema : ∀ p : Prop, T p ↔ p
+/-- T-schema (theorem under E0): `T p ↔ p` unfolds to the identity. -/
+theorem tschema (p : Prop) : T p ↔ p := Iff.rfl
 
 /-- N_T := "no proposition is true". -/
 def N_T : Prop := ∀ p : Prop, ¬ T p
@@ -101,6 +103,30 @@ theorem someFalse : ∃ q : Prop, IsFalse q := by
 /-- ¬(∀p ¬T p) with the witness spelled out: `False` is false. -/
 theorem atomicWitnessFalsehood : IsFalse False :=
   fun hTf => (tschema False).1 hTf
+
+-- ---------------------------------------------------------------------------
+-- P1/P2 of poem.txt — the two absolutes cannot stand together
+-- ---------------------------------------------------------------------------
+
+/-- `¬(N_T ∨ N_F)`: it is not the case that (either nothing is true or nothing
+    is false) — the poem's "p1 ∨ p2 is a contradiction"; classically from
+    `notNothingTrue` (C2) and `notEverythingTrue` (C6). -/
+theorem negatedAbsolutes : ¬ (N_T ∨ N_F) := by
+  intro h
+  cases h with
+  | inl hT => exact notNothingTrue hT
+  | inr hF => exact notEverythingTrue hF
+
+/-- Both sides of the distinction are non-empty: there is truth AND there is
+    falsehood ("há certo e há errado"), from C3 and C7. -/
+theorem someTruthAndSomeFalsehood : (∃ p : Prop, T p) ∧ (∃ q : Prop, IsFalse q) :=
+  ⟨someTrue, someFalse⟩
+
+/-- Right AND wrong both obtain: `¬N_T ∧ ¬N_F`, classically from
+    `¬(N_T ∨ N_F)` — the direct witness for the poem's P2 conclusion
+    "há certo e há errado". -/
+theorem rightWrongDistinction : ¬ N_T ∧ ¬ N_F :=
+  ⟨notNothingTrue, notEverythingTrue⟩
 
 -- ---------------------------------------------------------------------------
 -- §6 — T3: the first great result

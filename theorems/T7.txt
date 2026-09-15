@@ -38,11 +38,18 @@ A verdade não é criada pelo ato de afirmar.
 
 Logo, nenhum sujeito contingente pode ser o fundamento de □True(τ).
 
-4. De §24a (Princípio do Truth-Maker, derivado de T3, §8, T6):
+4. De §24a (Princípio do Truth-Maker; desde A2 2026-09-16 restrito
+a átomos — a verdade composta é composicional, cláusulas Tarskianas
+TEOREMAS por definição):
 
-True(p) → ∃r Ground(r, p).
+True(p) → ∃r Ground(r, p).  [p atómico]
 
-Toda verdade tem um fundamento na realidade.
+Toda verdade atómica tem um fundamento na realidade.
+
+Para a própria tautologia τ := φ ∨ ¬φ, o fundamento de τ *como um todo*
+provém do axioma declarado AxGlobalGround (ver nota formal 9): a
+sua verdade é composicional; a fundamentação unitária da fórmula
+é a ponte modal SEM.
 
 5. Suponhamos, por redução ao absurdo:
 
@@ -62,7 +69,8 @@ Isto vale para toda entidade contingente.
 Portanto, a verdade necessária de τ não é fundamentada
 em nenhuma entidade contingente.
 
-7. Mas, por (4), toda verdade tem um fundamento na realidade.
+7. Mas, por (4) e por AxGlobalGround, a verdade necessária de τ tem
+um fundamento não-contingente.
 
 Se nenhuma entidade contingente fundamenta τ,
 então algo não contingente fundamenta τ:
