@@ -848,6 +848,18 @@ T14 (relação eterna de amor) — PROVEN↑ sob AxPersonsAffect (SEM) +
   AxPersonStability (SEM); a relação é estrutural (Loves := Affects, C4) e a
   ponte FAITH AxEternalLove foi dissolvida.
 
+Nota (M5, 2026-09-16): o dado "há certo E há errado" — "Strong Truth Exists" —
+foi tornado registo axiom-free residente como corolário nomeado
+(strongTruthExists : ∃τ, NecessariamenteVerdadeiro τ, footprint `{CL}`, sem
+Cogito; o teorema fonte é Semantics.bothNecessarilyTrueAndFalse, C37).
+Axiomas livres no corpus: 14. O sujeito que escolhe, porém, não desce de
+axioma: a sonda M5 sem Cogito fica bloqueada no muro do truthmaker atómico
+(groundPrinciple_atom só dispara sobre átomos verdadeiros; a verdade forçada
+por {CL} é uma disjunção — excluído do meio — nunca um átomo; o lema exato em
+falta é ∀w, TrueAt w (atomo 0), improvável sobre mundos {CL}). Cogito
+permanece FORÇADO (ladder 11), nunca derivado. Ver formal/GAPMAP.md C59 e o
+milestone M5, formal/PLAN.md, formal/Spikes/Spike_M5_*.
+
 Nota (cogito-rethinking, 2026-09-15): Exists e Content deixaram de ser
 axiomas — são definições analíticas (Exists(s) := True; Content(p) := True), e
 o cogito (A(s,p)) demonstrou-se derivável de T12 (Plurality.cogito_from_T12,

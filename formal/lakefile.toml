@@ -8,3 +8,8 @@ name = "Logos"
 [[lean_exe]]
 name = "logos"
 root = "Main"
+
+[[require]]
+name = "LeanDepViz"
+git = "https://github.com/cameronfreer/LeanDepViz.git"
+rev = "main"

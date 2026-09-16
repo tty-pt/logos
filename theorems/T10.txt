@@ -29,6 +29,13 @@ E ao nível dos mundos (necessidade genuína):
 ∃τ NecessarilyTrue(τ) ∧ ∃ρ NecessarilyFalse(ρ)
 [bothNecessarilyTrueAndFalse: testemunhas τ = φ ∨ ¬φ, ρ = φ ∧ ¬φ]
 
+E o registo axiom-free residente (M5, 2026-09-16): o corolário nomeado
+strongTruthExists : ∃τ NecessarilyTrue(τ) — footprint `{CL}`, sem Cogito,
+proveniente de C37 — é o dado "Strong Truth Exists" (§27) tornado teorema
+livre de axiomas (GAPMAP.md C59; prova de spike em
+formal/Spikes/Spike_M5_StrongTruth.lean, fora do barrel).
+Axiomas livres no corpus: 14.
+
 E o operador proposicional (C1, 2026-09-15):
 
 "¬N_T ∧ ¬N_F é necessário" deixou de ser axioma modal: com a filosofia

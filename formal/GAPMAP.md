@@ -56,6 +56,7 @@ clauses are now **PROVEN theorems** (structural `TrueAt`, C15–C17).
 | ID | Prose | Lean theorem | Status | Axiom footprint |
 |----|-------|--------------|--------|-----------------|
 | C58 | §1 fnd | `Agency.noCogito_selfRefutes : (¬∃s p, A s p) → False` — **SUBJECT IS FORCED** | PROVEN↑ | `{Cogito, Means, Subject}` (FORCED foundation; the denial is itself an act) |
+| C59 | §27 | **M5** `Spike_M5.strongTruthExists : ∃ τ : Semantics.Form, Semantics.NecessarilyTrue τ` — "Strong Truth Exists" resident axiom-free ("há certo E há errado"; spike-only, outside barrel) | PROVEN (spike) | **`{CL}` — no Cogito** (14th axiom-free theorem; C37 lever) |
 | C21 | §1/T1 | `Plurality.T1_subjectExists` (re-homed from Agency by A1) | PROVEN↑ | `{Cogito, Means, Subject}` (kind-preds `Agent`/`Rational` are now defs; A1: content re-homed here; M0: re-anchored on the forced foundation `Cogito`, not on `T12`) |
 | C22 | T2 | `Agency.T2_contentExists` | PROVEN | **`{}`** — `Content _ := True` (def), `True` witnesses content; cogito not needed (was `{cogito}` + 6 kind-preds) |
 | C23 | T4 | `Plurality.T4_agentExists` (re-homed from Agency by A1) | PROVEN↑ | as C21 (`Agent` is `:= True`, def — agent existence is analytic) |
@@ -328,7 +329,8 @@ Summary counts (post M0+M1, measured 2026-09-16):
   C12–C16; C13/C14 also need `propext`; everything else `{}`; after A2, C15
   and C17 are axiom-light — C17 measured `{Subject, ExistsAt, Ground}` with
   **no propext**, C15 is definitional), C22,
-  C26–C27, C31, C35–C38, C50, C56 (all `{}`; C37 keeps `CL`) — **13 axiom-free**.
+  C26–C27, C31, C35–C38, C50, C56 (all `{}`; C37 keeps `CL`) — **13 axiom-free**. M5
+  (2026-09-16) adds C59 (`strongTruthExists`, `{CL}`) → **14 axiom-free**.
 - **PROVEN↑** (under flagged SEM/META/foundation + vocabulary): C58 (`Cogito`
   FORCED foundation + `{Cogito, Means, Subject}`), C18–C20,
   C21, C23–C25, C28–C30, C32–C34, C39–C49, C51–C55, C57.
@@ -492,3 +494,15 @@ Executed in `Truthmaker.lean`:
   at `Cogito` (no plurality), so they are plurality-free surface for future
   plurality spikes; the ban on plurality-from-plurality is preserved (nothing
   derives `AxTwoSubjects` from itself).
+- **M5 — "Strong Truth Exists" resident; choosing subject stays FORCED (spike
+  verdict BLOCKED, presumably permanent).** `Strexp` `Spike_M5_StrongTruth.lean`
+  (outside barrel) proves `strongTruthExists : ∃ τ, NecessarilyTrue τ` on the
+  axiom-free `{Core, Semantics}` surface — **C59, footprint `{CL}`, no Cogito**,
+  the "há certo E há errado" datum of en.md §27/poem.txt, from C37. Axiom-free
+  theorems: 13 → 14. `Spike_M5_ChoosingSubject.lean` is the honest probe at
+  `∃ s p q, Chooses s p q` WITHOUT Cogito: stopped at the **atom-wall**
+  (`groundPrinciple_atom` is atom-only; the {CL}-forced strong truth is the
+  necessitated disjunction `Form.or (atom 0) (Form.not (atom 0))`, never a true
+  atom; exact missing lemma `∀ w, TrueAt w (Form.atom 0)` is not provable on
+  {CL}worlds). `Cogito` **stays FORCED, ladder 11**; NOT demoted. M5 verdict:
+  the transcendental datum is axiom-free, the choosing subject is not.

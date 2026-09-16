@@ -1,6 +1,16 @@
 {"version": "1.2.0",
  "packagesDir": ".lake/packages",
- "packages": [],
+ "packages":
+ [{"url": "https://github.com/cameronfreer/LeanDepViz.git",
+   "type": "git",
+   "subDir": null,
+   "scope": "",
+   "rev": "7859d91f89b37c9193d9a09709a58be6d98f94d6",
+   "name": "LeanDepViz",
+   "manifestFile": "lake-manifest.json",
+   "inputRev": "main",
+   "inherited": false,
+   "configFile": "lakefile.lean"}],
  "name": "Logos",
  "lakeDir": ".lake",
  "fixedToolchain": false}

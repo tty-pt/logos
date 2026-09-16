@@ -20,6 +20,30 @@ Whenever the formalization changes:
 Concrete practice: after each milestone, re-read the affected prose files and patch them so the
 prose and the Lean theorem ledger agree (see `formal/GAPMAP.md`).
 
+## DEDUCTION.md (auto-generated map)
+
+`DEDUCTION.md` (repo root) is the generated visualization of the deduction: Lean kernel graph
+(LeanDepViz) cross-referenced with the curated `formal/GAPMAP.md` ledger. **Never edit it by hand.**
+
+Regeneration (after any Lean/GAPMAP change):
+
+```sh
+export PATH="$HOME/.elan/bin:$PATH"
+cd formal && lake exe depviz --roots Logos --json-out depgraph.json --dot-out depgraph.dot
+cd .. && python3 scripts/build_deduction.py
+```
+
+- `formal/depgraph.json`/`.dot` are produced by the LeanDepViz dep (see `formal/lakefile.toml`),
+  rebuilt with `lake build depviz` after a toolchain/dependency change.
+- The script is stdlib-only; it parses `formal/Logos/*.lean` (declarations + line numbers),
+  `formal/GAPMAP.md` (claims, statuses, footprints, tags), and `depgraph.json` (nodes, axiom
+  footprints, edges), and renders `DEDUCTION.md` in Portuguese.
+- Statements are displayed in logic symbols (`scripts` `humanise()`); the per-step English
+  sentences live in `scripts/glosses.json` (key: full Lean name, fallback: claim id).
+  Claims/axioms without a gloss are flagged in the consistency section — author the
+  sentence, don't leave the row bare.
+- `lake`/`lean` are not on PATH by default: export `$HOME/.elan/bin` first.
+
 ## Language
 
 - Lean code: comments in **English**.
