@@ -50,7 +50,9 @@ def CarriesPersonalFeature (a : Prop) : Prop :=
 def CarriesLogicalFeature (a : Prop) : Prop :=
   ∃ p : Prop, HasFeature a p ∧ (T p ∨ IsFalse p)
 
-/-- §24b — in every rational act, personal and logical features coincide. -/
+/--Every rational act carries a personal feature exactly when it carries a logical feature: personhood and logic travel together.
+
+ §24b — in every rational act, personal and logical features coincide. -/
 theorem inseparability_24b : ∀ a : Prop,
     RationalAct a → (CarriesPersonalFeature a ↔ CarriesLogicalFeature a) := by
   intro a hra

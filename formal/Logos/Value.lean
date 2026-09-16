@@ -90,7 +90,9 @@ theorem alone_no_other_affects {s : Subject} (ha : Alone s) : ¬ OtherAffects s 
   obtain ⟨t, hne, _⟩ := h
   exact hne (ha t)
 
-/-- P6, whole — a lone subject helps no other AND harms no other. -/
+/--A lone subject neither helps nor harms anyone else.
+
+ P6, whole — a lone subject helps no other AND harms no other. -/
 theorem alone_no_other_help_harm {s : Subject} (ha : Alone s) :
     (¬ ∃ t : Subject, t ≠ s ∧ Helps s t) ∧ (¬ ∃ t : Subject, t ≠ s ∧ Harms s t) := by
   constructor
@@ -101,7 +103,9 @@ theorem alone_no_other_help_harm {s : Subject} (ha : Alone s) :
     obtain ⟨t, hne, hh⟩ := h
     exact hne (ha t)
 
-/-- AxTwoSubjects (META; poem P5/P7, failure traces in DESIGN.md D14 and
+/--The plurality bridge: right-and-wrong demands two distinct persons.
+
+ AxTwoSubjects (META; poem P5/P7, failure traces in DESIGN.md D14 and
     spike x2_spikeA): the *reality* of right-and-wrong demands that there be
     at least two distinct persons. Narrower than the former single bridge
     `AxValueInterpersonal` (plurality only; affectivity is AxPersonsAffect).
@@ -123,7 +127,9 @@ theorem AxPersonsAffect (s₁ s₂ : Subject) (_hs₁ : Person s₁) (_hs₂ : P
     (hne : s₁ ≠ s₂) : Affects s₁ s₂ ∨ Affects s₂ s₁ :=
   Or.inl hne
 
-/-- Recovery theorem: the exact statement of the deleted `AxValueInterpersonal`
+/--Right-and-wrong yields two distinct persons who bear on each other.
+
+ Recovery theorem: the exact statement of the deleted `AxValueInterpersonal`
     (line 70-73, 2026-09-14) is a theorem of the split — no strength lost. -/
 theorem valueInterpersonal_of_split :
     (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) →

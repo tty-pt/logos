@@ -37,7 +37,6 @@ LEAN_DIR = FORMAL / "Logos"
 GAPMAP_PATH = FORMAL / "GAPMAP.md"
 DEPGRAPH_PATH = FORMAL / "depgraph.json"
 OUT_PATH = ROOT / "DEDUCTION.md"
-GLOSSES_PATH = ROOT / "scripts" / "glosses.json"
 
 CONT_CHARS = ("-", ",", "→", "∧", "∨", "↔", ":", "(", "{", "[", "=", "+")
 
@@ -76,7 +75,13 @@ def strip_block_comments(text: str) -> str:
 def parse_lean_sources() -> dict:
     """Return {fullName: info} for every user-authored declaration.
 
-    info keys: kind, file (basename), line, statement, doc, module, name.
+    info keys: kind, file (basename), line, statement, doc, stringValue,
+    module, name.
+
+    Docstrings (`/-- ... -/`) are read from the RAW line, *before* comment
+    stripping: the meaning attached to a declaration is the first paragraph of
+    its doc comment (see `_doc_for`). For `def NAME : String := "…"` stubs the
+    literal value is captured as `stringValue`.
     """
     decls = {}
 
@@ -85,67 +90,85 @@ def parse_lean_sources() -> dict:
         # namespace tracking (files use a single `namespace Logos.X` block)
         namespaces: list[str] = []
         cur_doc = ""  # most recent /-- ... -/ doc block
+        i, n = 0, len(lines)
 
-        for ln, raw in enumerate(lines, start=1):
+        while i < n:
+            raw = lines[i]
+            ln = i + 1
+            ls = raw.lstrip()
+
+            # doc block? /-- <doc> -/ may span several lines. Must check the
+            # RAW line: strip_block_comments would erase it first.
+            if ls.startswith("/--"):
+                dpos = raw.find("/--")
+                end = raw.find("-/", dpos + 3)
+                if end >= 0:  # single-line /-- ... -/
+                    cur_doc = raw[dpos + 3:end].strip()
+                    i += 1
+                    continue
+                # multi-line doc: consume until the closing line with -/
+                collected = [raw[dpos + 3:].strip()]
+                j = i + 1
+                while j < n:
+                    nxt = lines[j]
+                    end2 = nxt.find("-/")
+                    if end2 >= 0:
+                        collected.append(nxt[:end2].strip())
+                        j += 1
+                        break
+                    collected.append(nxt.strip())
+                    j += 1
+                cur_doc = "\n".join(collected)
+                i = j
+                continue
+
             text = strip_block_comments(raw)
             stripped = text.strip()
 
             m = re.match(r"^namespace\s+([\w.]+)\s*$", stripped)
             if m:
                 namespaces.append(m.group(1))
+                i += 1
                 continue
             m = re.match(r"^end(?:\s+([\w.]+))?\s*$", stripped)
             if m:
                 if namespaces:
                     namespaces.pop()
+                i += 1
                 continue
 
-            # doc block? /-- <doc> -/ may span several lines
-            if stripped.startswith("/--"):
-                end = raw.find("-/", 6)
-                if end >= 0:
-                    cur_doc = raw[6:end].strip()
-                else:  # multi-line doc: capture until -/ appears in closing line
-                    collected = [raw[6:].strip()]
-                    for ln2 in range(ln, len(lines)):
-                        nxt = lines[ln2]
-                        end2 = nxt.find("-/")
-                        if end2 >= 0:
-                            collected.append(nxt[:end2].strip())
-                            break
-                        collected.append(nxt.strip())
-                    cur_doc = " ".join(c for c in collected if c)
-                    # multi-line doc handled inline below (lines consumed)
-                m2 = re.match(DECL_RE, stripped[6:] if False else "")
-            elif stripped.startswith("--"):
-                cur_doc = stripped[2:].strip()
+            m2 = re.match(DECL_RE, stripped)
+            if not m2:
+                i += 1
                 continue
-            else:
-                m2 = re.match(DECL_RE, stripped)
-                if not m2:
-                    continue
-                kind, rest = m2.group(1), m2.group(2).strip()
-                # name = first identifier token before ':'/'('/whitespace
-                name_m = re.match(r"([\w.]+)", rest)
-                if not name_m:
-                    continue
-                name = name_m.group(1)
-                ns = ".".join(namespaces)
-                full = f"{ns}.{name}" if ns else name
-                stmt, end_line = _capture_statement(lines, ln, kind)
-                # record with consumed end_line for doc association
-                decls[full] = {
-                    "kind": kind,
-                    "name": name,
-                    "module": ns,
-                    "file": path.name,
-                    "line": ln,
-                    "end_line": end_line,
-                    "statement": stmt,
-                    "doc": _doc_for(cur_doc),
-                }
-                cur_doc = ""
-        pass
+            kind, rest = m2.group(1), m2.group(2).strip()
+            # name = first identifier token before ':'/'('/whitespace
+            name_m = re.match(r"([\w.]+)", rest)
+            if not name_m:
+                i += 1
+                continue
+            name = name_m.group(1)
+            ns = ".".join(namespaces)
+            full = f"{ns}.{name}" if ns else name
+            stmt, end_line = _capture_statement(lines, ln, kind)
+            string_value = ""
+            if kind == "def":
+                sv = re.match(r'^def\s+\S+\s*:\s*String\s*:=\s*"([^"]*)"\s*$', raw.strip())
+                if sv:
+                    string_value = sv.group(1)
+            decls[full] = {
+                "kind": kind,
+                "name": name,
+                "module": ns,
+                "file": path.name,
+                "line": ln,
+                "end_line": end_line,
+                "statement": stmt,
+                "doc": _doc_for(cur_doc),
+                "stringValue": string_value,
+            }
+            cur_doc = ""
+            i = end_line
 
     return decls
 
@@ -354,11 +377,11 @@ def resolve(lean_ref: str, decls: dict, node_map: dict, level_key: str = "") -> 
 # ---------------------------------------------------------------------------
 
 STATUS_BADGE = {
-    "PROVEN": "**PROVEN**",
-    "PROVEN↑": "**PROVEN ↑**",
-    "AXIOM": "**AXIOM**",
-    "BLOCKED": "**BLOCKED**",
-    "DEFERRED": "**DEFERRED**",
+    "PROVEN": "✔",
+    "PROVEN↑": "⚠",
+    "AXIOM": "◆",
+    "BLOCKED": "✖",
+    "DEFERRED": "➖",
 }
 
 AXIOM_TAGS = {
@@ -374,6 +397,49 @@ AXIOM_TAGS = {
     "GroundPrincipleProp": ("SEM", "reflection of the §24a principle at Prop"),
     "AxPersonalGround": ("META", "the 'personal' price of T8 (D9)"),
 }
+
+# Axioms that are mere architectural vocabulary (pure sorts / relations).
+# A theorem whose whole kernel footprint lies inside this set is displayed ✔
+# ("PROVEN", justified): the "axioms" are the constants the statement itself
+# talks about, not assumptions the proof uses (e.g. C15/C60 — the denial of
+# atom-grounding refutes itself by definition, RAA). Substantive axioms below.
+VOCAB_CONSTS = {"Subject", "Means", "Ground", "ExistsAt", "GroundProp"}
+SUBSTANTIVE_AXIOMS = {"Cogito", "AxGlobalGround", "AxTwoSubjects",
+                      "AxPersonStability", "AxPersonalGround", "GroundPrincipleProp"}
+
+
+def expand_footprint(cid: str, fp_by_id: dict, seen=None) -> str:
+    """Resolve an inherited GAPMAP footprint (`as C18`, `via C40`) recursively
+    to the concrete axiom set. The curated ledger is the source of truth (from
+    `#print axioms`); depviz `customAxioms` undercounts transitively."""
+    seen = seen or set()
+    fp = fp_by_id.get(cid, "")
+    m = re.fullmatch(r"\s*(?:as|via)\s+(C\d+)\b.*", fp)
+    if m and m.group(1) not in seen:
+        return expand_footprint(m.group(1), fp_by_id, seen | {cid})
+    return fp
+
+
+def curated_footprint(c: dict) -> str:
+    return c.get("_curated_fp", c.get("footprint") or "")
+
+
+def vocab_only_footprint(c: dict, node_map: dict) -> bool:
+    """True when a claim's curated (expanded) footprint carries no substantive
+    axiom: only vocabulary constants (or `CL`/`{}`). Such theorems display ✔ —
+    axiom-free modulo the vocabulary its own statement talks about (e.g.
+    C15/C60, where the denial refutes itself by definition — RAA; and the
+    analytic Level-2 steps C25/C49/C51/C56). Substantive SEM/META/foundation
+    axioms (Cogito, AxGlobalGround, …) keep a claim ⚠."""
+    full = c.get("_full")
+    if not full or full not in node_map:
+        return False
+    fp = curated_footprint(c)
+    if not fp:
+        return False
+    if any(re.search(r"\b" + re.escape(a) + r"\b", fp) for a in SUBSTANTIVE_AXIOMS):
+        return False
+    return True
 
 
 def le_line(file: str, line: int) -> str:
@@ -407,12 +473,19 @@ def render_index(sections, level_titles, claims_by_id, decls, node_map, graph):
     ap("")
     ap("| Token | Significado |")
     ap("|---|---|")
-    ap("| **PROVEN** | teorema verificado pelo kernel, footprint vazio (até `CL`) |")
-    ap("| **PROVEN ↑** | teorema verificado sob axiomas assinalados |")
-    ap("| **AXIOM** | declaração (`axiom`) — não derivada |")
-    ap("| **BLOCKED** | em falta um lema nomeado (ver **Em aberto**) |")
-    ap("| **DEFERRED** | fora do âmbito deste marco |")
+    ap("| `✔` | teorema verificado pelo kernel, footprint vazio (até `CL`) |")
+    ap("| `⚠` | teorema verificado sob axiomas — quais, no próprio passo (`Segue de: … e do axioma …`) |")
+    ap("| `◆` | declaração (`axiom`) — não derivada |")
+    ap("| `✖` | em falta um lema nomeado (ver **Deferred / blocked**) |")
+    ap("| `➖` | fora do âmbito deste marco |")
+    ap("| `→` | dissolvido numa entrada já apresentada (`Vide …`) |")
     ap("| `CL` | meta-lógica clássica `{propext, Classical.choice, Quot.sound}` (D1) |")
+    ap("| `✔` (só vocabulário) | teorema **axiom-free módulo vocabulário**: a pegada curada só contém vocábulos que o próprio enunciado menciona (`Subject`, `Means`, `Ground`, `ExistsAt`, `GroundProp`), sem axioma substantivo (SEM/META/foundation). Ex.: C15/C60 (a negação refuta-se por definição — RAA), C25/C49/C51/C56/C62 (analíticos), C16/C17. Inventário e justificação em [`VOCAB.md`](VOCAB.md); ver **Relatório de consistência** |")
+    ap("| `An` | axioma exibido em bloco próprio (`### A1 ◆ …`) no 1.º passo que o usa; as linhas `Segue …` referenciam-no por `A#` |")
+    ap("")
+    ap("O estatuto exibido é o **medido** no kernel (verificação Lean via "
+       "`depgraph.json`); o ledger curado `GAPMAP.md` pode divergir — as "
+       "divergências ficam no **Relatório de consistência**.")
     ap("")
     ap("Etiquetas de axioma (justificação / preço):")
     ap("")
@@ -424,14 +497,17 @@ def render_index(sections, level_titles, claims_by_id, decls, node_map, graph):
     ap("| `VOCAB` | vocabulário primitivo (postulado de sort pura / relação) |")
     ap("")
     ap("Notação formal: cada passo mostra o *enunciado* em símbolos lógicos "
-       "(traduzido do Lean), uma frase em inglês com o significado, o "
-       "ficheiro/hiperligação para a linha Lean exata, e a pegada de axiomas "
-       "medida pelo kernel (`depgraph.json`) ao lado da pegada semântica "
-       "curada no GAPMAP.")
+       "(traduzido do Lean), uma frase em inglês com o significado e a "
+       "linha `Segue de:` — os teoremas-passo a partir dos quais decorre e "
+       "o(s) axioma(s) do seu pé de kernel (`… e do axioma **A1** / … e dos "
+       "axiomas **A1**, **A2**`, com `A#` definido no bloco do próprio axioma). "
+       "As referências de código (ficheiro:linha, pegadas "
+       "raw, dependências naïve Lean) ficam todas no **Anexo: código por passo**.")
     ap("")
     ap("---")
     ap("")
-    ap("## Leitura da notação")
+    ap("<details>")
+    ap("<summary>Leitura da notação (símbolos ↔ Lean) →</summary>")
     ap("")
     ap("Cada passo é o teorema Lean real, escrito em símbolos. Os símbolos e "
        "os predicados-tipo usados:")
@@ -462,6 +538,8 @@ def render_index(sections, level_titles, claims_by_id, decls, node_map, graph):
     ap("O **significado** de cada passo é dado em inglês a seguir ao seu "
        "enunciado (o original Lean está numa hiperligação).")
     ap("")
+    ap("</details>")
+    ap("")
     ap("---")
     ap("")
     ap("## Visão global do argumento")
@@ -488,7 +566,9 @@ def render_index(sections, level_titles, claims_by_id, decls, node_map, graph):
     return L
 
 
-def render_levels(sections, claims_by_id, decls, node_map, graph):
+def render_levels(sections, claims_by_id, decls, node_map, graph, already=None,
+                  by_full=None, ax_id=None, ax_shown=None, axiom_full=None,
+                  glosses=None):
     L = []
     ap = L.append
     for sec in sections:
@@ -500,73 +580,77 @@ def render_levels(sections, claims_by_id, decls, node_map, graph):
             continue
         ap(f"## {title}")
         ap("")
-        # at-a-glance table
-        ap("| ID | Prosa | Enunciado (Lógica) | Status | Axiomas (kernel) |")
-        ap("|---|---|---|---|---|")
         for c in claims:
-            name = c.get("_full") or "—"
-            stmt = "—"
-            if name and name in decls:
-                stmt = short_stmt(humanise(decls[name]["statement"]))
-            kern = "—"
-            if name and name in node_map:
-                ks = node_map[name].get("customAxioms", [])
-                kern = ", ".join(k.rsplit(".", 1)[-1] for k in ks) if ks else "{}"
-            ap(f"| {c['id']} | {c['prose']} | `{stmt[:90]}` | {STATUS_BADGE.get(c['status'], c['status'])} | {kern} |")
-        ap("")
-        ap("<details>")
-        ap("<summary>Passos em detalhe →</summary>")
-        ap("")
-        for c in claims:
-            block = render_claim_detail(c, claims_by_id, decls, node_map, graph)
+            full = c.get("_full")
+            if full and full in decls:
+                for line in axiom_intro(full, ax_id, ax_shown, decls, node_map,
+                                        glosses, axiom_full):
+                    ap(line)
+            block = render_claim_detail(c, claims_by_id, decls, node_map, graph,
+                                        by_full=by_full, already=already, ax_id=ax_id)
             ap("\n".join(block))
-        ap("</details>")
         ap("")
         ap("---")
         ap("")
     return L
 
 
-def render_claim_detail(c, claims_by_id, decls, node_map, graph):
-    """One compact block per claim: formal notation, source link, axioms, deps."""
+def render_claim_detail(c, claims_by_id, decls, node_map, graph,
+                        by_full=None, already=None, ax_id=None):
+    """Philosopher-facing block: formal statement, EN meaning, claim-level
+    provenance. No code references — those live in the code annex."""
     L = []
     ap = L.append
     full = c.get("_full")
     status = STATUS_BADGE.get(c["status"], c["status"])
-    t_refs = ", ".join(f"[{t}](theorems/{t}.txt)" for t in find_t_refs(c["prose"]))
-    prose_link = render_prose_link(c["prose"])
-
-    ap(f"### {c['id']} · {status}")
     gloss = c.get("_gloss")
+    italic = f"_{gloss}_" if gloss else ""
+
     if full and full in decls:
         d = decls[full]
-        ap(f"`{humanise(trim_stmt(d['statement']))}`")
-        if gloss:
-            ap(f"*Significado (EN):* {gloss}")
-        ap("")
-        ap(f"- **Formal (Lean):** {le_line(d['file'], d['line'])} (`{full}`)")
-        if c.get("prose"):
-            ap(f"- **Prosa:** {prose_link}" + (f" · {t_refs}" if t_refs else ""))
-        kern = node_map.get(full, {}).get("customAxioms", [])
-        kern_s = ", ".join(k.rsplit(".", 1)[-1] for k in kern) if kern else "{}"
-        g = c.get("footprint") or "—"
-        ap(f"- **Axiomas — kernel:** `{kern_s}` · **GAPMAP:** `{g}`")
-        if d.get("doc"):
-            ap(f"- {first_sentence(d['doc'])}")
-        deps = graph["in"].get(full, set())       # declarations this uses
-        if deps:
-            ap("- **Depende de:** " + dep_list(deps, claims_by_id, decls))
-        rds = graph["out"].get(full, set())       # declarations that use this
-        ap("- **Usado por:** " + dep_list(rds, claims_by_id, decls))
+        # repeated from an earlier section -> one-line cross-reference
+        if already and full in already:
+            ap(f"### {c['id']} · →")
+            ap(f"*Vide **{already[full]}** (passo já apresentado).*")
+            ap("")
+            return L
+        if already is not None:
+            already[full] = c["id"]
+        ap(f"### {c['id']} · {badge_for(c, decls, node_map)}")
+        d = decls[full]
+        raw = d["statement"]
+        if d["kind"] == "theorem":
+            raw = strip_theorem_head(raw)
+        formal = f"`{short_stmt(humanise(trim_stmt(raw)))}`"
+        if italic:
+            ap(f"{formal} — {italic}")
+        else:
+            ap(formal)
+        segs = []
+        if full in graph["in"] and d["kind"] != "axiom":
+            preds = []
+            for fd in graph["in"][full]:
+                if fd in decls and decls[fd]["kind"] == "axiom":
+                    continue
+                for i in (by_full or {}).get(fd, []):
+                    if i not in preds:
+                        preds.append(i)
+            preds.sort()
+            seg = segue_text(preds, axiom_refs_sorted(kernel_axiom_names(full, node_map), ax_id))
+            if seg:
+                if vocab_only_footprint(c, node_map):
+                    seg += " (vocabulário do enunciado)"
+                segs.append(seg)
+        prose = c.get("prose")
+        if prose:
+            t_refs = " · ".join(f"[{t}](theorems/{t}.txt)" for t in find_t_refs(prose))
+            segs.append(render_prose_link(prose) + (f" · {t_refs}" if t_refs else ""))
+        if segs:
+            ap(" — ".join(segs))
     else:
-        ap(f"- **Prosa:** {prose_link}".rstrip("·"))
-        ap(f"- **Estado:** {status}")
-        if gloss:
-            ap(f"*Significado (EN):* {gloss}")
-        if c.get("footprint"):
-            ap(f"- **Pegada GAPMAP:** `{c['footprint']}`")
-        if c.get("note"):
-            ap(f"- **Nota:** {first_sentence(c['note'])}")
+        ap(f"### {c['id']} · {badge_for(c, decls, node_map)}")
+        if italic:
+            ap(italic)
     ap("")
     return L
 
@@ -597,13 +681,13 @@ def dep_list(fullnames, claims_by_id, decls):
     return ", ".join(pieces) if pieces else "—"
 
 
-def render_axiom_inventory(node_map, claims_by_id, glosses):
+def render_axiom_inventory(node_map, claims_by_id, glosses, ax_id=None):
     L = []
     ap = L.append
     ap("## Inventário de axiomas (11 declarações)")
     ap("")
-    ap("| Axioma | Tag | Justificação / preço | Significado (EN) | Depende dele (claims) |")
-    ap("|---|---|---|---|---|")
+    ap("| Axioma | Nº | Tag | Justificação / preço | Significado (EN) | Depende dele (claims) |")
+    ap("|---|---|---|---|---|---|")
     axioms = sorted(node_map.values(), key=lambda n: n["fullName"])
     for n in axioms:
         if n["kind"] != "axiom":
@@ -614,7 +698,8 @@ def render_axiom_inventory(node_map, claims_by_id, glosses):
         deps = [c["id"] for f, c in claims_by_id.items()
                 if n["fullName"] in node_map.get(f, {}).get("customAxioms", [])]
         deps_txt = ", ".join(sorted(set(deps))) if deps else "—"
-        ap(f"| `{base}` | `{tag}` | {why} | {gl or '—'} | {deps_txt} |")
+        nid = ax_id.get(base, "—")
+        ap(f"| `{base}` | {nid} | `{tag}` | {why} | {gl or '—'} | {deps_txt} |")
     ap("")
     ap("Detalhe do kernel:")
     ap("")
@@ -626,7 +711,9 @@ def render_axiom_inventory(node_map, claims_by_id, glosses):
     return L
 
 
-def render_faith_deferred(sections, claims_by_id, decls, node_map, graph):
+def render_faith_deferred(sections, claims_by_id, decls, node_map, graph, already=None,
+                          by_full=None, ax_id=None, ax_shown=None, axiom_full=None,
+                          glosses=None):
     """Deferred / blocked / faith sections: summary table + detail blocks."""
     L = []
     ap = L.append
@@ -646,13 +733,15 @@ def render_faith_deferred(sections, claims_by_id, decls, node_map, graph):
             note = c.get("note") or ""
             ap(f"| {c['id']} | {c['prose']} | {STATUS_BADGE.get(c['status'], c['status'])} | {note} |")
         ap("")
-        ap("<details>")
-        ap("<summary>Passos em detalhe →</summary>")
-        ap("")
         for c in claims:
-            block = render_claim_detail(c, claims_by_id, decls, node_map, graph)
+            full = c.get("_full")
+            if full and full in decls:
+                for line in axiom_intro(full, ax_id, ax_shown, decls, node_map,
+                                        glosses, axiom_full):
+                    ap(line)
+            block = render_claim_detail(c, claims_by_id, decls, node_map, graph,
+                                        by_full=by_full, already=already, ax_id=ax_id)
             ap("\n".join(block))
-        ap("</details>")
         ap("")
         ap("---")
     return L
@@ -693,6 +782,43 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
     extra = kern_axioms - known
     ap(f"- Axiomas declarados no kernel: **{len(kern_axioms)}**" +
        (f" · **fora do inventário esperado:** {', '.join(sorted(extra))}" if extra else ""))
+    # steps whose measured kernel footprint is nonempty -> displayed badge
+    under_ax = [c for c in all_claims if c.get("_full")
+                and c["_full"] in node_map and kernel_axiom_names(c["_full"], node_map)]
+    sub = [c for c in under_ax
+           if any(k in ("Cogito", "AxTwoSubjects", "AxPersonStability",
+                        "AxGlobalGround", "AxPersonalGround", "GroundPrincipleProp")
+                  for k in kernel_axiom_names(c["_full"], node_map))]
+    vocab_only = [c for c in under_ax if vocab_only_footprint(c, node_map)]
+    if under_ax:
+        ap(f"- Steps no kernel **sob axiomas**: **{len(under_ax)}** "
+           f"({len(sub)} com axioma substantivo, {len(under_ax) - len(sub)} só vocabulário)")
+    if vocab_only:
+        ap(f"- **Exibidos ✔ por só-vocabulário** (pegada curada sem axioma "
+           f"substantivo: axiom-free módulo os vocábulos do próprio enunciado; "
+           f"em C15/C60 a negação refuta-se por definição — RAA): "
+           f"{', '.join(sorted(c['id'] for c in vocab_only))}")
+    # GAPMAP status vs kernel-measured footer divergence (what the map displays)
+    status_div = []
+    for c in all_claims:
+        full = c.get("_full")
+        if not full or full not in node_map:
+            continue
+        st = (c.get("status") or "").strip()
+        if st not in ("PROVEN", "PROVEN↑"):
+            continue
+        kern = kernel_axiom_names(full, node_map)
+        if kern and st == "PROVEN":
+            if vocab_only_footprint(c, node_map):
+                continue  # justified flip: vocabulary of the statement only
+            status_div.append((c["id"], "PROVEN", kern))
+        elif not kern and st == "PROVEN↑":
+            status_div.append((c["id"], "PROVEN↑", []))
+    if status_div:
+        ap("- **Divergências de estatuto GAPMAP ↔ kernel** (o mapa mostra o estatuto **medido**):")
+        for cid, st, ks in status_div:
+            ks = "{}" if not ks else "{" + ", ".join(ks) + "}"
+            ap(f"  - `{cid}` GAPMAP `{st}` vs kernel `{ks}`")
     # kernel vs GAPMAP footprint divergences (informational; CL is kernel-blind)
     ax_vocab = ("Cogito", "Subject", "Means", "Ground", "ExistsAt", "AxGlobalGround",
                 "AxTwoSubjects", "AxPersonStability", "GroundProp", "GroundPrincipleProp",
@@ -719,12 +845,49 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
     return L
 
 
+def render_code_annex(sections, claims_by_id, decls, node_map, graph):
+    """Per-claim code references: Lean decl, file:line, kernel footprint,
+    GAPMAP footprint, Lean dependencies and usage. Everything technical the
+    philosopher-facing map intentionally omits."""
+    L = []
+    ap = L.append
+    ap("## Anexo: código por passo")
+    ap("")
+    ap("<details>")
+    ap("<summary>Declaração Lean, ficheiro:linha, pegadas e dependências de código, por passo →</summary>")
+    ap("")
+    ap("| ID | Declaração Lean | Ficheiro#L | Axiomas (kernel) | Pegada GAPMAP | Depende (Lean) | Usado por |")
+    ap("|---|---|---|---|---|---|---|")
+    for sec in sections:
+        for c in sec["claims"]:
+            cid = c["id"]
+            g = c.get("footprint") or "—"
+            full = c.get("_full")
+            if not full or full not in decls:
+                lr = c.get("lean_ref") or "—"
+                ap(f"| {cid} | — | — | — | {g} | {lr} | — |")
+                continue
+            d = decls[full]
+            kern = ", ".join(k.rsplit(".", 1)[-1]
+                             for k in node_map.get(full, {}).get("customAxioms", []))
+            kern = kern or "{}"
+            deps = dep_list(graph["in"].get(full, set()), claims_by_id, decls)
+            rds = dep_list(graph["out"].get(full, set()), claims_by_id, decls)
+            ap(f"| {cid} | `{full}` | {le_line(d['file'], d['line'])} | `{kern}` | {g} | {deps} | {rds} |")
+    ap("")
+    ap("</details>")
+    ap("")
+    ap("---")
+    return L
+
+
 def render_appendix(sections, decls, node_map, claims_by_id, graph, level_map):
     L = []
     ap = L.append
     ap("## Índice de declarações do kernel")
     ap("")
-    ap("Todos os teoremas/defs user-authored, por módulo, com linha e axiomas de kernel.")
+    ap("<details>")
+    ap("<summary>Todos os teoremas/defs user-authored, por módulo (linha e axiomas de kernel) →</summary>")
     ap("")
     for mod in sorted(set(d["module"] for d in decls.values())):
         dcl = {f: d for f, d in decls.items() if d["module"] == mod}
@@ -741,6 +904,9 @@ def render_appendix(sections, decls, node_map, claims_by_id, graph, level_map):
             cid = f"→ {cl['id']}" if cl else ""
             ap(f"| `{d['name']}` | {d['kind']} | [L{d['line']}](formal/Logos/{d['file']}#L{d['line']}) | `{humanise(trim_stmt(d['statement']))[:80]}` | {ax} {cid} |")
         ap("")
+    ap("</details>")
+    ap("")
+    ap("---")
     return L
 
 
@@ -775,6 +941,194 @@ def render_prose_link(prose: str) -> str:
     if re.match(r"^[\dT]", prose):  # section-ish ref like "T3 …" or "13–15 …"
         return f"[§{prose.strip()}](base.txt)"
     return f"[{prose.strip()}](base.txt)"
+
+
+def strip_theorem_head(s: str) -> str:
+    """Drop `Name (binder)* :` from a theorem statement, keeping the body.
+    Binder groups may nest (e.g. `(h : Necessity (p → q))`)."""
+    s = s.strip()
+    for p in ("theorem ", "axiom ", "def ", "abbrev ", "inductive ",
+              "structure "):
+        if s.startswith(p):
+            s = s[len(p):]
+            break
+    m = re.match(r"^[A-Za-z_][A-Za-z0-9_.]*\s+", s)
+    if not m:
+        return s
+    i = m.end()
+    depth = 0
+    seen = False
+    j = i
+    while j < len(s):
+        c = s[j]
+        if c in "({[":
+            depth += 1
+            seen = True
+        elif c in ")}]":
+            depth -= 1
+            if depth == 0 and seen:
+                k = j + 1
+                while k < len(s) and s[k] == " ":
+                    k += 1
+                if k < len(s) and s[k] == ":":
+                    return s[k + 1:].strip()
+                j = k
+                continue
+        elif not seen:
+            if c == ":":
+                return s[j + 1:].strip()
+            return s
+        j += 1
+    return s
+
+
+def kernel_axiom_names(full: str, node_map: dict) -> list:
+    """Sorted short names of the kernel-measured axiom footprint of a decl."""
+    n = node_map.get(full)
+    if not n:
+        return []
+    return sorted({k.rsplit(".", 1)[-1] for k in n.get("customAxioms", [])})
+
+
+def kernel_axiom_text(full: str, node_map: dict) -> str:
+    """Axiom names + tags, e.g. `Ground` (VOCAB), `Subject` (VOCAB)."""
+    tags = [f"`{a}` ({AXIOM_TAGS[a][0]})" if a in AXIOM_TAGS else f"`{a}`"
+            for a in kernel_axiom_names(full, node_map)]
+    return ", ".join(tags)
+
+
+def badge_for(c: dict, decls: dict, node_map: dict) -> str:
+    """Display status, recomputed from the kernel-measured footprint (the
+    'real' one) for PROVEN/PROVEN↑ only. Non-derived markers (AXIOM, →
+    dissolved, DEFERRED, BLOCKED) keep their GAPMAP meaning; divergences are
+    audited in the consistency report."""
+    st = (c.get("status") or "").strip()
+    full = c.get("_full")
+    if st not in ("PROVEN", "PROVEN↑"):
+        return STATUS_BADGE.get(st, st or "?")
+    if not full or full not in node_map:
+        return STATUS_BADGE.get(st, st)
+    if kernel_axiom_names(full, node_map):
+        if vocab_only_footprint(c, node_map):
+            # footprint = the statement's own vocabulary only; no substantive
+            # axiom (e.g. C15/C60 — RAA by definition). Displayed PROVEN.
+            return STATUS_BADGE["PROVEN"]
+        return STATUS_BADGE["PROVEN↑"]
+    return STATUS_BADGE["PROVEN"]
+
+
+AXIOM_TITLES = {
+    "Cogito": "The choosing subject exists",
+    "Subject": "The pure sort of subjects",
+    "Means": "The meaning-act relation",
+    "Ground": "The truthmaker relation",
+    "ExistsAt": "Existence in a world",
+    "AxGlobalGround": "Necessary truth is grounded",
+    "AxTwoSubjects": "Right-and-wrong needs two persons",
+    "AxPersonStability": "Persons persist across worlds",
+    "GroundProp": "Grounding between entity and proposition",
+    "GroundPrincipleProp": "The §24a principle at Prop level",
+    "AxPersonalGround": "The personal price of T8",
+}
+
+
+def build_ax_id(sections, node_map):
+    """A1..An in doc order of first use by a claim."""
+    ax_id = {}
+    for sec in sections:
+        for c in sec["claims"]:
+            full = c.get("_full")
+            if not full or full not in node_map:
+                continue
+            for base in kernel_axiom_names(full, node_map):
+                if base in AXIOM_TAGS and base not in ax_id:
+                    ax_id[base] = f"A{len(ax_id) + 1}"
+    return ax_id
+
+
+def axiom_full_map(node_map):
+    return {n["fullName"].rsplit(".", 1)[-1]: n["fullName"]
+            for n in node_map.values() if n.get("kind") == "axiom"}
+
+
+def axiom_ref(base, ax_id):
+    if ax_id and base in ax_id:
+        return f"**{ax_id[base]}**"
+    return f"`{base}`"
+
+
+def axiom_refs_sorted(bases, ax_id):
+    """Kernel-footprint axiom refs ordered by A# (unmapped raws last)."""
+    def key(b):
+        if ax_id and b in ax_id:
+            return (0, int(ax_id[b][1:]))
+        return (1, b)
+    return [axiom_ref(b, ax_id) for b in sorted(bases, key=key)]
+
+
+def axiom_intro(full, ax_id, ax_shown, decls, node_map, glosses, axiom_full):
+    """Titled axiom block (`### A1 ◆ …`) immediately before the step that
+    first uses it; each axiom appears exactly once in the whole doc."""
+    L = []
+    base_new = []
+    for base in kernel_axiom_names(full, node_map):
+        if base in ax_id and base not in ax_shown:
+            base_new.append(base)
+            ax_shown.add(base)
+    for base in sorted(base_new, key=lambda b: int(ax_id[b][1:])):
+        fullname = axiom_full.get(base) or base
+        d = decls.get(fullname, {})
+        stmt = short_stmt(humanise(trim_stmt(d["statement"] or ""))) if d.get("statement") else ""
+        gloss = glosses.get(fullname, "") or AXIOM_TAGS.get(base, ("", ""))[1]
+        L.append(f"### {ax_id[base]} ◆ {AXIOM_TITLES.get(base, base)}")
+        if stmt:
+            L.append(f"`{trim_stmt(stmt)}`" + (f" — _{gloss}_" if gloss else ""))
+        elif gloss:
+            L.append(f"_{gloss}_")
+        L.append("")
+    return L
+
+
+def segue_text(claims: list, ax_refs: list) -> str:
+    """"Segue de: **C16**, **C18** e do axioma **A3**" — the provenance
+    line names the theorems and the kernel axiom footprint together."""
+    cj = ", ".join(f"**{c}**" for c in claims)
+    if len(ax_refs) == 1:
+        ax = f"do axioma {ax_refs[0]}"
+    elif len(ax_refs) > 1:
+        ax = "dos axiomas " + ", ".join(ax_refs)
+    else:
+        ax = ""
+    if cj and ax:
+        return "Segue de: " + cj + " e " + ax
+    if cj:
+        return "Segue de: " + cj
+    if ax:
+        return "Segue " + ax
+    return ""
+
+
+def axiom_tag_text(fp: str) -> str:
+    """Philosophical rendering of a GAPMAP footprint: axiom names + tags."""
+    fp = fp.replace("**", "").strip()
+    if not fp:
+        return "—"
+    excluded = [a for a in AXIOM_TAGS if re.search(rf"\bno\s+{re.escape(a)}\b", fp)]
+    notes = [f"sem `{a}`" for a in excluded]
+    for a in excluded:
+        fp = re.sub(rf"\bno\s+{re.escape(a)}\b", "", fp)
+    names = sorted({a for a in AXIOM_TAGS if re.search(rf"\b{re.escape(a)}\b", fp)})
+    bits = [f"`{a}` ({AXIOM_TAGS[a][0]})" for a in names]
+    for a in names:
+        fp = re.sub(rf"\b{re.escape(a)}\b", "", fp)
+    extra = re.sub(r"\([^)]*\)", "", fp).strip(" ,{}–—").strip()
+    if extra == "CL":
+        bits.insert(0, "`CL`")
+        extra = ""
+    out = ", ".join(bits + notes)
+    if extra:
+        out = (out + " · " if out else "") + extra
+    return out or "—"
 
 
 # ---------------------------------------------------------------------------
@@ -983,11 +1337,28 @@ def main():
     node_map = graph["node_map"]
     print(f"  {len(node_map)} kernel nodes, {sum(len(v) for v in graph['out'].values())} edges")
 
-    print("loading glosses (EN)…")
-    glosses = {}
-    if GLOSSES_PATH.exists():
-        glosses = json.loads(GLOSSES_PATH.read_text(encoding="utf-8"))
-    print(f"  {len(glosses)} Entradas de significado carregadas")
+    print("resolving meanings (EN) from declarations…")
+    glosses = {f: info["doc"] for f, info in decls.items() if info.get("doc")}
+    for f, info in decls.items():
+        if info.get("stringValue"):
+            glosses[f] = info["stringValue"]
+    # claim-only meanings: mini stub module Logos/ClaimMeanings.lean
+    claim_stub = {
+        "C59": "Logos.ClaimMeanings.C59",
+        "F2": "Logos.ClaimMeanings.F2",
+        "F3": "Logos.ClaimMeanings.F3",
+        "F4": "Logos.ClaimMeanings.F4",
+        "F5": "Logos.ClaimMeanings.F5",
+        "F6": "Logos.ClaimMeanings.F6",
+        "F8": "Logos.ClaimMeanings.F8",
+        "F9": "Logos.ClaimMeanings.F9",
+        "Q7.2": "Logos.ClaimMeanings.Q7_2",
+    }
+    for cid, full in claim_stub.items():
+        info = decls.get(full)
+        if info:
+            glosses[cid] = info.get("stringValue") or info.get("doc") or ""
+    print(f"  {len(glosses)} meanings resolved from code")
 
     print("resolving claims → kernel declarations…")
     claims_by_id = {}
@@ -1015,13 +1386,37 @@ def main():
         if c.get("_full"):
             claims_by_id.setdefault(c["_full"], c)
 
+    by_full = {}  # fullname -> claim ids that resolve to it
+    for c in all_claims:
+        if c.get("_full"):
+            by_full.setdefault(c["_full"], []).append(c["id"])
+
+    # curated footprints, `as/via Cxx` resolved to the concrete axiom set
+    fp_by_id = {c["id"]: (c.get("footprint") or "") for c in all_claims}
+    for c in all_claims:
+        c["_curated_fp"] = expand_footprint(c["id"], fp_by_id)
+
     print("rendering DEDUCTION.md…")
     lines = []
+    print("assigning axiom ids A1..An…")
+    ax_id = build_ax_id(sections, graph["node_map"])
+    axiom_full = axiom_full_map(graph["node_map"])
+    ax_shown: set = set()
+    print(f"  {len(ax_id)} axioms named in the flow")
+
+    already = {}  # fullname -> first claim id that detailed it (dedupe repeats)
     lines += render_index(sections, None, claims_by_id, decls, node_map, graph)
-    lines += render_levels(sections, claims_by_id, decls, node_map, graph)
-    lines += render_faith_deferred(sections, claims_by_id, decls, node_map, graph)
-    lines += render_axiom_inventory(node_map, claims_by_id, glosses)
+    lines += render_levels(sections, claims_by_id, decls, node_map, graph,
+                           already=already, by_full=by_full, ax_id=ax_id,
+                           ax_shown=ax_shown, axiom_full=axiom_full,
+                           glosses=glosses)
+    lines += render_faith_deferred(sections, claims_by_id, decls, node_map, graph,
+                                   already=already, by_full=by_full, ax_id=ax_id,
+                                   ax_shown=ax_shown, axiom_full=axiom_full,
+                                   glosses=glosses)
+    lines += render_axiom_inventory(node_map, claims_by_id, glosses, ax_id=ax_id)
     lines += render_consistency(sections, decls, node_map, claims_by_id, graph, None, glosses)
+    lines += render_code_annex(sections, claims_by_id, decls, node_map, graph)
     lines += render_appendix(sections, decls, node_map, claims_by_id, graph, None)
 
     body = "\n".join(lines).rstrip() + "\n"

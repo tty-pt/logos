@@ -1,6 +1,6 @@
 T6 — A VERDADE TRANSCENDE A VONTADE INDIVIDUAL
 
-Depende de: T3
+Depende de: T3; definições §8 (Formal.Order, 2026-09-16); GAPMAP.md C30/C62
 
 Temos:
 

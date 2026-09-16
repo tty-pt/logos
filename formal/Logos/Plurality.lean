@@ -42,7 +42,9 @@ def EntityOf : Subject → Entity := fun s => s
 /-- A subject is necessary iff its entity-correlate exists in every world. -/
 def NecessarySubject (s : Subject) : Prop := ∀ w : World, ExistsAt w (EntityOf s)
 
-/-- T12 — there is more than one person (poem P5/P7; PROVEN↑ under
+/--There are at least two distinct persons.
+
+ T12 — there is more than one person (poem P5/P7; PROVEN↑ under
     `AxTwoSubjects`). -/
 theorem T12_twoPersons :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ :=
@@ -53,7 +55,9 @@ theorem T12_twoPersons :
 theorem notAlone : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ :=
   T12_twoPersons
 
-/-- cogito, RESTATED AS A COROLLARY OF THE FORCED FOUNDATION (M0,
+/--From two distinct persons the acting subject follows: someone acts on something.
+
+ cogito, RESTATED AS A COROLLARY OF THE FORCED FOUNDATION (M0,
     FORCED_SUBJECT.md, 2026-09-16): the present act is *given*, not derived
     from plurality. `cogito_from_T12` survives as a corollary of
     `Agency.Cogito` — the former T12-derivation is conserved but re-classified:
@@ -63,27 +67,35 @@ theorem notAlone : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁
 theorem cogito_from_T12 : ∃ s : Subject, ∃ p : Prop, Logos.Agency.A s p :=
   Logos.Agency.Cogito
 
-/-- T1 — the subject of the present act exists (M0 re-anchor, 2026-09-16):
+/--At least one subject exists.
+
+ T1 — the subject of the present act exists (M0 re-anchor, 2026-09-16):
     corollary of the forced foundation, not of the pair. -/
 theorem T1_subjectExists : ∃ s : Subject, Logos.Agency.Exists s := by
   obtain ⟨s, _, _⟩ := Logos.Agency.Cogito
   exact ⟨s, trivial⟩
 
-/-- T4 — the subject is an agent (M0 re-anchor; `Agent` is analytical
+/--At least one agent exists: someone who acts.
+
+ T4 — the subject is an agent (M0 re-anchor; `Agent` is analytical
     `:= True`). -/
 theorem T4_agentExists :
     ∃ s : Subject, Logos.Agency.Exists s ∧ Logos.Agency.Agent s := by
   obtain ⟨s, _, _⟩ := Logos.Agency.Cogito
   exact ⟨s, trivial, trivial⟩
 
-/-- T5 — there is a person (M0 re-anchor): from the forced act the witness
+/--At least one person exists.
+
+ T5 — there is a person (M0 re-anchor): from the forced act the witness
     subjects own personhood trivially — `Agent`/`Rational` are analytical
     `:= True` and the act's own content witnesses `Intentional`. -/
 theorem T5_personExists : ∃ s : Subject, Person s := by
   obtain ⟨s, p, hmp⟩ := Logos.Agency.Cogito
   exact ⟨s, trivial, trivial, p, hmp⟩
 
-/-- T12, directed form (chain node C47; M1 2026-09-16): the two-person pair can
+/--There are two distinct persons where one bears on the other.
+
+ T12, directed form (chain node C47; M1 2026-09-16): the two-person pair can
     be oriented so that affectivity flows named-forward — under A3
     (`Affects s t := s ≠ t`) distinctness IS the forward direction, so the
     directed pair is `T12_twoPersons` itself wearing its own inequality.

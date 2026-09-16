@@ -52,7 +52,9 @@ namespace Logos.Agency
 
 open Logos.Core (T)
 
-/-- Subjects: that which performs acts of reasoning. -/
+/--Vocabulary: the pure sort of subjects — neither empty, nor 'exactly two', nor infinite.
+
+ Subjects: that which performs acts of reasoning. -/
 axiom Subject : Type
 
 /-- Existence predicate: `Exists s` (propositional form of "s exists").
@@ -78,7 +80,9 @@ def Agent (_s : Subject) : Prop := True
     being the act of reasoning. -/
 def Rational (_s : Subject) : Prop := True
 
-/-- `Means s p`: subject s means (intentionally relates to) proposition p
+/--Vocabulary: the meaning-act relation — a subject means a proposition.
+
+ `Means s p`: subject s means (intentionally relates to) proposition p
     (base.txt §11, T5 component; moved here in B1, same reason). -/
 axiom Means : Subject → Prop → Prop
 
@@ -88,7 +92,9 @@ axiom Means : Subject → Prop → Prop
     collapse and the act IS the intentional relation `Means s p`. -/
 def A (s : Subject) (p : Prop) : Prop := Means s p
 
-/-- THE FORCED FOUNDATION (TRANS; SUBJECT IS FORCED, M0 2026-09-16): a
+/--Some subject acts on some content: the choosing subject exists. Its denial refutes itself, so it is a forced foundation, not a price.
+
+ THE FORCED FOUNDATION (TRANS; SUBJECT IS FORCED, M0 2026-09-16): a
     choosing subject exists — there is a present meaning-act of a subject.
 
     NOT A PRICE. A price is an axiom whose negation is consistent with the
@@ -101,7 +107,9 @@ def A (s : Subject) (p : Prop) : Prop := Means s p
     given; everything downstream is derived from it. Footprint: {Means, Subject}. -/
 axiom Cogito : ∃ s : Subject, ∃ p : Prop, A s p
 
-/-- Denying the choosing subject is itself an act, hence a meaning-act of a
+/--Denying 'some subject acts on some content' refutes itself — the denial is itself an act: the subject is forced.
+
+ Denying the choosing subject is itself an act, hence a meaning-act of a
     subject — the denial contradicts itself. Kernel-checked.
 
     This is the formalization of "SUBJECT IS FORCED": `¬ (∃ s p, A s p)`
@@ -140,7 +148,9 @@ theorem act_implies_means : ∀ {s : Subject} {p : Prop}, A s p → Means s p :=
   intro s p h
   exact h
 
-/-- T2 — there is propositional content. Now axiom-free: `Content` is the
+/--At least one content exists: every proposition is admissible content.
+
+ T2 — there is propositional content. Now axiom-free: `Content` is the
     analytical definition `Content _ := True`, so `True` itself witnesses
     content (cogito no longer needed). -/
 theorem T2_contentExists : ∃ p : Prop, Content p :=

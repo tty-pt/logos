@@ -35,7 +35,9 @@ def NecessaryEntity (e : Entity) : Prop := ∀ w : World, ExistsAt w e
 /-- An entity is contingent iff it is not necessary. -/
 def Contingent (e : Entity) : Prop := ¬ NecessaryEntity e
 
-/-- AxGlobalGround (SEM): a formula true in every world is grounded by a
+/--A formula true in every world is grounded by a single entity existing in every world (the quantifier swap).
+
+ AxGlobalGround (SEM): a formula true in every world is grounded by a
     single entity that exists in every world.
 
     This is the `∀w∃r … → ∃r∀w …` move of the informal T7. It is NOT
@@ -46,7 +48,9 @@ def Contingent (e : Entity) : Prop := ¬ NecessaryEntity e
 axiom AxGlobalGround :
   ∀ (φ : Form), NecessarilyTrue φ → ∃ e : Entity, ∀ w : World, ExistsAt w e ∧ Ground e φ
 
-/-- T7 — necessary truth forces necessary reality (base.txt T7).
+/--Necessary truth forces necessary reality: whatever is true in every world is grounded by an entity existing in every world.
+
+ T7 — necessary truth forces necessary reality (base.txt T7).
 
     PROVEN↑ {Truthmaker.{Subject,Ground,ExistsAt},
              Semantics.{Form,World}, AxGlobalGround} (E0: no `T`; C2: carrier is `Subject`). -/
@@ -55,13 +59,17 @@ theorem T7_necessaryReality {τ : Form} (hτ : NecessarilyTrue τ) :
   obtain ⟨e, he⟩ := AxGlobalGround τ hτ
   exact ⟨e, fun w => (he w).1, (he actualWorld).2⟩
 
-/-- T7 instantiated on the excluded-middle tautology: the existential
+/--There is a necessary reality grounded on the indubitable: some entity existing in every world grounds 'φ or not-φ'.
+
+ T7 instantiated on the excluded-middle tautology: the existential
     "there is a necessary reality grounded on the un-doubtable" holds. -/
 theorem T7_excludedMiddleInstance (φ : Form) :
     ∃ e : Entity, NecessaryEntity e ∧ Ground e (Form.or φ (Form.not φ)) :=
   T7_necessaryReality (Logos.Truthmaker.lawExcludedMiddle φ)
 
-/-- The reductio shape of the prose: if every entity were contingent, no
+/--If every entity were contingent, nothing could be true in every world.
+
+ The reductio shape of the prose: if every entity were contingent, no
     formula could be necessarily true. -/
 theorem noNecessaryTruthIfAllContingent :
     (∀ e : Entity, Contingent e) → ∀ φ : Form, ¬ NecessarilyTrue φ := by

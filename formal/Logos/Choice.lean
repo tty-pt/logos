@@ -59,14 +59,33 @@ open Logos.Necessity (Dia Necessity)
     "some choice exists" unrepresentable. -/
 def Chooses (s : Subject) (p : Prop) (q : Prop) : Prop := A s p ∧ Incompatible p q
 
-/-- A proposition and its own negation are always incompatible options
+/--Every proposition is incompatible with its own negation.
+
+ A proposition and its own negation are always incompatible options
     (`¬(p ∧ ¬p)`, pure logic, footprint `{}`) — the field around any
     meaning-act is non-empty. -/
 theorem incompatible_self_negation (p : Prop) : Incompatible p (¬ p) := by
   intro h
   exact h.2 h.1
 
-/-- No meaning without a subject (analytic): the intentional relation
+/-- `Meaning_I p`: intentional meaning — some subject means `p` (base.txt §11).
+    The subject is a constituent of the definition: there is no intentional
+    meaning outside a `Means : Subject → Prop → Prop` relatum. -/
+def Meaning_I (p : Prop) : Prop := ∃ s : Subject, Means s p
+
+/--Meaning needs a subject: intentional meaning contains its subject by definition.
+
+ The subject of a meaning is a constituent of `Meaning_I`, so asserting
+    that something is meant while denying that any subject means it is a
+    contradiction — footprint `{}`, for every model. (The bare relational form
+    `Means s p → ∃t, Means t p` is `meaning_needs_subject` just below.) -/
+theorem meaning_I_needs_subject {p : Prop} (h : Meaning_I p) :
+    ∃ s : Subject, Means s p :=
+  h
+
+/--Meaning needs a subject: whatever is meant is meant by someone.
+
+ No meaning without a subject (analytic): the intentional relation
     `Means : Subject → Prop → Prop` only exists relata-subjected, so the
     subject of any meaning is itself the witness. -/
 theorem meaning_needs_subject {s : Subject} {p : Prop} (hm : Means s p) :
@@ -100,7 +119,9 @@ theorem canChoose_unfold {s : Subject} {p : Prop} :
 def FreeWill (s : Subject) (p : Prop) : Prop :=
   CanChoose s p ∧ CanChoose s (¬ p)
 
-/-- T11 — the minimal field of rational choice is non-empty for a person:
+/--There is a field of choice: some person with two incompatible alternatives.
+
+ T11 — the minimal field of rational choice is non-empty for a person:
     a person exists (T5) and two incompatible contents exist (T9). The act
     of choosing among them (§14) is thereby *representable*; the modal
     possibility of each choice (FreeWill) is F1. -/
@@ -110,7 +131,9 @@ theorem T11_choiceField :
   obtain ⟨p, q, hpq, _⟩ := Logos.Alternatives.T9_incompatibleAlternatives
   exact ⟨s, hs, p, q, hpq⟩
 
-/-- A person cannot exist without choice: each person (meaning-subject)
+/--Any person chooses: a person always has two incompatible alternatives to choose between.
+
+ A person cannot exist without choice: each person (meaning-subject)
     chooses its content against its own negation. Kernel-checked — the
     chain's "subject ⇒ choice" (IM_STUPID.md), previously mislabeled a gap. -/
 theorem person_chooses {s : Subject} (hs : Person s) : ∃ p q : Prop, Chooses s p q := by
@@ -118,28 +141,53 @@ theorem person_chooses {s : Subject} (hs : Person s) : ∃ p q : Prop, Chooses s
   obtain ⟨p, hmp⟩ := hIn
   exact ⟨p, ¬ p, hmp, incompatible_self_negation p⟩
 
-/-- Choice is real: some subject chooses some content over some incompatible
+/--Choice exists: some subject chooses between two incompatible alternatives.
+
+ Choice is real: some subject chooses some content over some incompatible
     alternative (from T5 — a person exists). -/
 theorem choiceExists : ∃ s : Subject, ∃ p q : Prop, Chooses s p q := by
   obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists
   obtain ⟨p, q, hch⟩ := person_chooses hs
   exact ⟨s, p, q, hch⟩
 
-/-- Denying choice refutes itself: the denial is itself an act, and any act
+/--Denying choice refutes itself: the denial is itself a choice.
+
+ Denying choice refutes itself: the denial is itself an act, and any act
     is a choice — so `¬(∃s p q, Chooses s p q)` implies `False`, exactly as
     N_T and ¬cogito refute themselves. -/
 theorem noChoice_selfRefutes : (¬ ∃ s : Subject, ∃ p q : Prop, Chooses s p q) → False := by
   intro h
   exact h choiceExists
 
-/-- "No right and wrong without choice" (right/wrong ⇒ choice): whenever the
+/--Right-and-wrong commits a chooser: where there is truth and error, someone has chosen.
+
+ "No right and wrong without choice" (right/wrong ⇒ choice): whenever the
     distinction holds, some choosing subject exists. Under F1a this is a
     theorem (choice exists already from the act-datum), not a priced bridge. -/
 theorem JUDGE_COMMITTED :
     (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) → ∃ s : Subject, ∃ p q : Prop, Chooses s p q :=
   fun _ => choiceExists
 
-/-- Denying that a subject exists refutes itself: the denial is itself an
+/--Right-and-wrong implies someone who means (poem P3, line 18 "há certo e há
+ errado → há significado → há alguém para quem algo significar").
+
+ `JUDGE_COMMITTED` (C54) composes with `rightWrongDistinction` (C36,
+    axiom-free — "há certo e há errado" is PROVEN) to yield a chooser; every
+    choice is a meaning-act (`Chooses` unfolds to `A s p`; Tier-1 collapse
+    `A := Means`), so some subject means some content. Footprint
+    `{Cogito, Means, Subject}` — the only substantive element is the FORCED
+    foundation (the act-datum), which the "há certo e há errado" premises
+    already embody performatively. The shorter analytic half ("significado →
+    sujeito") is `meaning_needs_subject` (C49, vocab-only). -/
+theorem rightWrong_implies_someone_means :
+    (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) → ∃ s : Subject, ∃ p : Prop, Means s p := by
+  intro h
+  obtain ⟨s, p, q, hch⟩ := JUDGE_COMMITTED h
+  exact ⟨s, p, hch.1⟩
+
+/--Denying 'a subject exists' refutes itself: the denial is itself an act.
+
+ Denying that a subject exists refutes itself: the denial is itself an
     act/choice of a subject — and `choiceExists` (every act is a choice,
     every choice has a subject, `Chooses` holds at a meaning-act `A s p`)
     supplies the resident witness. Formal record of §26 "não existe sujeito
@@ -159,9 +207,11 @@ end Logos.Choice
 -- Axiom footprint audit
 #print axioms Logos.Choice.T11_choiceField
 #print axioms Logos.Choice.incompatible_self_negation
+#print axioms Logos.Choice.meaning_I_needs_subject
 #print axioms Logos.Choice.meaning_needs_subject
 #print axioms Logos.Choice.person_chooses
 #print axioms Logos.Choice.choiceExists
 #print axioms Logos.Choice.noChoice_selfRefutes
 #print axioms Logos.Choice.noSubject_selfRefutes
 #print axioms Logos.Choice.JUDGE_COMMITTED
+#print axioms Logos.Choice.rightWrong_implies_someone_means

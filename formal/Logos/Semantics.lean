@@ -70,14 +70,18 @@ theorem sat_or : Satisfies w (Form.or φ ψ) ↔ Satisfies w φ ∨ Satisfies w 
 
 theorem sat_imp : Satisfies w (Form.imp φ ψ) ↔ (Satisfies w φ → Satisfies w ψ) := Iff.rfl
 
-/-- §22 — the excluded middle is necessary: `⊨ □(φ ∨ ¬φ)`. -/
+/--In every world, 'φ or not-φ' is true.
+
+ §22 — the excluded middle is necessary: `⊨ □(φ ∨ ¬φ)`. -/
 theorem lawExcludedMiddle (φ : Form) : NecessarilyTrue (Form.or φ (Form.not φ)) := by
   intro w
   unfold TrueAt
   rw [sat_or, sat_not]
   exact Classical.em (Satisfies w φ)
 
-/-- §23 — non-contradiction is impossible: `⊨ □¬(φ ∧ ¬φ)` world-wise falsity. -/
+/--In every world, 'φ and not-φ' cannot be true.
+
+ §23 — non-contradiction is impossible: `⊨ □¬(φ ∧ ¬φ)` world-wise falsity. -/
 theorem nonContradiction (φ : Form) : NecessarilyFalse (Form.and φ (Form.not φ)) := by
   intro w
   unfold FalseAt
@@ -89,7 +93,9 @@ theorem nonContradiction (φ : Form) : NecessarilyFalse (Form.and φ (Form.not �
 -- P2 of poem.txt — "há certo e há errado" at the world level
 -- ---------------------------------------------------------------------------
 
-/-- There is a necessarily-true content AND a necessarily-false one
+/--In every world there is necessarily-true content and necessarily-false content.
+
+ There is a necessarily-true content AND a necessarily-false one
     (the poem's "há certo E há errado" where "errado" is level-1 falsity),
     witnessed by the excluded-middle tautology and the non-contradiction
     anti-tautology, respectively. -/

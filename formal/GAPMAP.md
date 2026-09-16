@@ -36,7 +36,8 @@ axiom-free: its negation-free content rests on classical logic only.
 |----|-------|--------------|--------|-----------------|
 | C13 | §22 | `Semantics.lawExcludedMiddle` | PROVEN | `CL` |
 | C14 | §23 | `Semantics.nonContradiction` | PROVEN | `{propext}` |
-| C15 | §24a | `Truthmaker.groundPrinciple_atom` | PROVEN | `{Subject, ExistsAt, Ground}` (atom-only structural TrueAt, A2; C2: `Entity := Subject`) |
+| C15 | §24a | `Truthmaker.groundPrinciple_atom` | PROVEN | `{Subject, ExistsAt, Ground}` (VOCAB — footprint is the statement's own vocabulary; proof is a definitional collapse, `P → P`; see C60) |
+| C60 | §24a (RAA) | `Truthmaker.noGround_selfRefutes` | PROVEN | `{Subject, ExistsAt, Ground}` (VOCAB — denial refutes itself by definition: `TrueAt w (atom n)` unfolds to `∃e, ExistsAt w e ∧ Ground e (atom n)`, so the denial is `∃e… ∧ ¬∃e…`; companion of C15) |
 | C16 | §22 | `Truthmaker.lawExcludedMiddle` | PROVEN↑ | `CL + {Subject, ExistsAt, Ground}` (A2: AxOr/AxNot dropped) |
 | C17 | §23 | `Truthmaker.nonContradiction` | PROVEN | `{Subject, ExistsAt, Ground}` (A2: AxAnd/AxNot dropped; no propext) |
 | C18 | T7 | `Modal.T7_necessaryReality` | PROVEN↑ | `{AxGlobalGround, Subject, ExistsAt, Ground}` |
@@ -61,12 +62,12 @@ clauses are now **PROVEN theorems** (structural `TrueAt`, C15–C17).
 | C22 | T2 | `Agency.T2_contentExists` | PROVEN | **`{}`** — `Content _ := True` (def), `True` witnesses content; cogito not needed (was `{cogito}` + 6 kind-preds) |
 | C23 | T4 | `Plurality.T4_agentExists` (re-homed from Agency by A1) | PROVEN↑ | as C21 (`Agent` is `:= True`, def — agent existence is analytic) |
 | C24 | T5 | `Plurality.T5_personExists` (re-homed from Person by A1) | PROVEN↑ | as C21 (was `Person.T5_personExists`, on the deleted `cogito` axiom) |
-| C25 | §24b | `Person.inseparability_24b` | PROVEN↑ | `CL + {Means, Subject}` (no cogito) |
+| C25 | §24b | `Person.inseparability_24b` | PROVEN | `CL + {Means, Subject}` (vocab-only — no substantive axiom; see VOCAB.md) |
 | C26 | **T9 (new)** | `Alternatives.T9_incompatibleAlternatives` | PROVEN | `{}` (E0) |
 | C27 | §13 | `Alternatives.incompatible_with_negation` | PROVEN | `{}` (E0) |
 | C28 | T6 | `Order.T6_fallibility` | PROVEN↑ | `{Cogito, Means, Subject}` (M0: from the forced foundation, not the pair) |
 | C29 | T6 | `Order.T6_truthTranscendsWill` | PROVEN↑ | as C28 |
-| C30 | §8 | `Order.correctness_distinct` | PROVEN↑ | `CL + {Cogito, Means, Subject}` (M0) |
+| C30 | §8 | `Order.correctness_distinct` | PROVEN↑ | `CL + {Cogito, Means, Subject}` (M0; defs now act-relative §8 `Correct s p := A s p ∧ T p`) |
 | C31 | §9 | `Order.consequence_preserves_truth` | PROVEN | `{}` (E0) |
 | C32 | T8 | `GroundPerson.T8_personalGround` | PROVEN↑ | `{AxPersonalGround, GroundProp, Means, Subject, ExistsAt}` (no cogito) |
 | C33 | T8 | `GroundPerson.present_feature_is_grounded` | PROVEN↑ | `{GroundProp, GroundPrincipleProp, Means, Subject}` |
@@ -119,14 +120,14 @@ theorems.
 | C40 | P5/P7 | `Plurality.T12_twoPersons` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` |
 | C41 | P7 | `Love.T13_someoneLovable` | PROVEN↑ | via C40 |
 | C48 | P1/§1 | `Plurality.cogito_from_T12` | PROVEN↑ | `{Cogito, Means, Subject}` (cogito *as corollary*: the forced datum; former A1 derivation re-classified — datum is the foundation, not a theorem of plurality; M0, `FORCED_SUBJECT.md`) |
-| C49 | §13/IM_STUPID | `Choice.meaning_needs_subject` | PROVEN↑ | `{Means, Subject}` (analytic; vocabulary only) |
+| C49 | §13/IM_STUPID | `Choice.meaning_needs_subject` + `Choice.meaning_I_needs_subject` (definitional form: `Meaning_I p → ∃s, Means s p`) | PROVEN | `{Means, Subject}` (analytic; vocab-only — no substantive axiom; see VOCAB.md) |
 | C50 | §14 | `Choice.incompatible_self_negation` | PROVEN | **`{}`** (pure logic — the field around any meaning-act, 11th axiom-free theorem) |
-| C51 | §14/IM_STUPID | `Choice.person_chooses : Person s → ∃p q, Chooses s p q` — **subject ⇒ choice** (was mislabeled "OPEN" gap) | PROVEN↑ | `{Means, Subject}` (no cogito) |
+| C51 | §14/IM_STUPID | `Choice.person_chooses : Person s → ∃p q, Chooses s p q` — **subject ⇒ choice** (was mislabeled "OPEN" gap) | PROVEN | `{Means, Subject}` (vocab-only — no cogito, no substantive axiom; see VOCAB.md) |
 | C52 | §14 | `Choice.choiceExists` | PROVEN↑ | `{Cogito, Means, Subject}` (choice is real, from T5 — now `Plurality.T5_personExists`, M0 re-anchor) |
 | C53 | §14 | `Choice.noChoice_selfRefutes : (¬∃s p q, Chooses s p q) → False` | PROVEN↑ | `{Cogito, Means, Subject}` — denying choice is itself an act = a choice |
 | C54 | IM_STUPID §2 | `Choice.JUDGE_COMMITTED : (¬N_T ∧ ¬N_F) → ∃s p q, Chooses s p q` — **right/wrong ⇒ choice** | PROVEN↑ | `{Cogito, Means, Subject}` (premise unused: choice already holds via C52) |
-| C55 | §8/§14 | `Order.judge_commits : ∃s p q, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ Chooses s p q` — the judge IS a chooser | PROVEN↑ | `CL + {Cogito, Means, Subject}` |
-| C56 | P6 | `Value.alone_no_other_help_harm` | PROVEN | `{Subject}` (M1: `Affects` is now the A3 definition `s ≠ t`, so the P6 lemma loses its axiom — measured) |
+| C55 | §8/§14 | `Order.judge_commits : ∃s p q, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ Chooses s p q` — the judge IS a chooser | PROVEN↑ | `CL + {Cogito, Means, Subject}` (defs act-relative §8) |
+| C56 | P6 | `Value.alone_no_other_help_harm` | PROVEN | `{Subject}` (vocab-only; M1: `Affects` is now the A3 definition `s ≠ t`, so the P6 lemma loses its axiom — measured; see VOCAB.md) |
 | C57 | §26 | `Choice.noSubject_selfRefutes : (¬∃_s : Subject, True) → False` — **a subject exists is un-denyable**: the denial is itself an act/choice of a subject; `choiceExists` (C52) supplies the resident witness | PROVEN↑ | `{Cogito, Means, Subject}` — formal record of §26 "não existe sujeito do ato presente"; the act-datum is the *forced foundation* `Cogito` (M0), never a consequence of the plurality bridge |
 | C42 | P8 | `Love.T14_eternalRelation` | PROVEN↑ | `{AxTwoSubjects, AxPersonStability, ExistsAt, Means, Subject}` (M1: `Affects := s ≠ t` def + `AxPersonsAffect` theorem — both words vanish from the footprint) |
 | C43 | P8 | `Love.T14_content` | PROVEN↑ | as C42 |
@@ -134,6 +135,8 @@ theorems.
 | C45 | P8 | `Love.T14_square` (alias `Necessity`) | PROVEN↑ | as C42 (image of the old statement shape) |
 | C46 | P5 | `Value.valueInterpersonal_of_split` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (recovery theorem: exact old statement; M1: `Affects`/`AxPersonsAffect` gone) |
 | C47 | P5/P7 | `Plurality.T12_directedPair` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (chain node — M1: distinctness is already the forward direction under A3, so the pair wears its own inequality; T14 built on this node) |
+| C61 | P3 | `Choice.rightWrong_implies_someone_means` — "há certo e há errado → há alguém para quem algo significar" (the full conditional of poem L18) | PROVEN↑ | `{Cogito, Means, Subject}` (`JUDGE_COMMITTED` C54 ∘ `rightWrongDistinction` C36 — pays only the FORCED foundation; the analytic half "significado → sujeito" is C49) |
+| C62 | P3 | `Order.rightWrong_implies_meaning` (+ `Order.rightDistinctWrong_implies_meaning`) — "direito e errado precisam de significado": `Correct`/`Incorrect` são agora ato-relativos (forma literal §8 `Correct(A(s,p))`), logo right/wrong desdobra-se num ato `Means`; `Order.rightWrongDistinction_implies_meaning` fecha o condicional poético completo com o passo forçado explícito (que é o C61 `Cogito`/CL) | PROVEN | `{Means, Subject}` (vocab-only — projeção pura das definições §8; **sem axioma substantivo**; o modelo vazio já não satisfaz o antecedente; ver VOCAB.md/BRIDGE.md) |
 
 Declared (Level 3): **M1 (A3, 2026-09-16): `Affects` is now a structural
 DEFINITION (`Affects s t := s ≠ t`), no longer the primitive value axiom, and
@@ -329,15 +332,25 @@ Summary counts (post M0+M1, measured 2026-09-16):
   C12–C16; C13/C14 also need `propext`; everything else `{}`; after A2, C15
   and C17 are axiom-light — C17 measured `{Subject, ExistsAt, Ground}` with
   **no propext**, C15 is definitional), C22,
-  C26–C27, C31, C35–C38, C50, C56 (all `{}`; C37 keeps `CL`) — **13 axiom-free**. M5
+  C26–C27, C31, C35–C38, C50 (all `{}`; C37 keeps `CL`) — **13 axiom-free**. M5
   (2026-09-16) adds C59 (`strongTruthExists`, `{CL}`) → **14 axiom-free**.
+  C60 (`noGround_selfRefutes`, VOCAB-only — the RAA companion of C15) → **15 axiom-free**.
+  Vocab-only PROVEN (no substantive axiom; footprint = the statement's own
+  vocabulary, see VOCAB.md): C25 (`CL + {Means, Subject}`), C49/C51/C62
+  (`{Means, Subject}`), C56 (`{Subject}`) — promoted from `PROVEN↑`,
+  2026-09-16 per the vocab-only display rule. C62 (`rightWrong_implies_meaning`,
+  `{Means, Subject}`) is the pure bridge: with the §8 act-relative
+  `Correct`/`Incorrect`, right/wrong unfold to a `Means`-act, so the empty
+  model no longer satisfies the antecedent; the bare-distinction form
+  `rightWrongDistinction_implies_meaning` keeps the forced step `Cogito`.
 - **PROVEN↑** (under flagged SEM/META/foundation + vocabulary): C58 (`Cogito`
   FORCED foundation + `{Cogito, Means, Subject}`), C18–C20,
-  C21, C23–C25, C28–C30, C32–C34, C39–C49, C51–C55, C57.
+  C21, C23–C24, C28–C30, C32–C34, C39–C48, C52–C55, C57, C61.
   (`Cogito` is the sole forced-foundation axiom (TRANS, M0 — `FORCED_SUBJECT.md`);
   `{Cogito, Means, Subject}` replaces the former `{AxTwoSubjects, Means, Subject}`
   on all transcendental-chain theorems C21/C23/C24/C28–C30/C39/C48/C52–C55/C57
-  (measured 2026-09-16). `AxGlobalGround`/`AxPersonalGround` are the two META
+  (measured 2026-09-16). C61 is `JUDGE_COMMITTED ∘ rightWrongDistinction`,
+  paying only `Cogito`. `AxGlobalGround`/`AxPersonalGround` are the two META
   prices; `actualWorld` is a def;
   `Exists`/`Content`/`Agent`/`Rational` are analytical defs; `Affects` is the A3
   definition `s ≠ t`; `AxPersonsAffect` is a theorem.)
@@ -445,6 +458,11 @@ Executed in `Truthmaker.lean`:
   free VOCAB); `Ground e (or …)` neither asserted nor denied.
 - Measured footprints (`#print axioms`, scratch `/tmp/opencode/aud.lean`):
   `groundPrinciple_atom` = `{Subject, ExistsAt, Ground}`;
+  `noGround_selfRefutes` = `{Subject, ExistsAt, Ground}` (C60 — the denial
+  of atom-grounding refutes itself by definition: `TrueAt w (atom n)` unfolds
+  to the existential clause, so the denial is `∃e… ∧ ¬∃e…`; RAA, no
+  substantive axiom — this is also the justification for C15 being PROVEN,
+  not a price);
   `lawExcludedMiddle` = `CL + {Subject, ExistsAt, Ground}`;
   `nonContradiction` = `{Subject, ExistsAt, Ground}` (**no propext** — the
   re-proof avoids `rw` on `Iff`); `T7_necessaryReality`/`T7_excludedMiddleInstance`/

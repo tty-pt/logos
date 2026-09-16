@@ -39,9 +39,11 @@ cd .. && python3 scripts/build_deduction.py
   `formal/GAPMAP.md` (claims, statuses, footprints, tags), and `depgraph.json` (nodes, axiom
   footprints, edges), and renders `DEDUCTION.md` in Portuguese.
 - Statements are displayed in logic symbols (`scripts` `humanise()`); the per-step English
-  sentences live in `scripts/glosses.json` (key: full Lean name, fallback: claim id).
+  sentences live in **code**: as the first paragraph of the `/-- … -/` docstring directly
+  above each axiom/theorem/def in `formal/Logos/*.lean`, and as `def NAME : String := "…"`
+  values in `formal/Logos/ClaimMeanings.lean` for claims with no kernel declaration.
   Claims/axioms without a gloss are flagged in the consistency section — author the
-  sentence, don't leave the row bare.
+  sentence in the Lean source, don't leave the row bare.
 - `lake`/`lean` are not on PATH by default: export `$HOME/.elan/bin` first.
 
 ## Language

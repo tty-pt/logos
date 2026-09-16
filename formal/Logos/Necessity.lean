@@ -85,7 +85,9 @@ theorem necMP {p q : Prop} (hpq : Necessity (p → q)) (hp : Necessity p) :
 /-- World-indexed proposition. -/
 abbrev WProp : Type := World → Prop
 
-/-- Necessity at the world level (C1): a world-indexed proposition holds in
+/--World-level necessity: a claim about worlds holds if it holds in every world.
+
+ Necessity at the world level (C1): a world-indexed proposition holds in
     every world. This is the modality the object-language semantics actually
     supports (it is `Semantics.NecessarilyTrue` lifted to arbitrary
     world-indexed propositions). -/
@@ -107,7 +109,9 @@ theorem nec4PH {P : WProp} : NecessityPH P → NecessityPH (fun _ => NecessityPH
   intro hP w
   exact hP
 
-/-- Necessity of the distinction (poem P2), as a theorem (C1): under the
+/--The distinction between right and wrong is necessary: it is false that nothing is true, and false that everything is true.
+
+ Necessity of the distinction (poem P2), as a theorem (C1): under the
     identity-model alias this is exactly the proven Prose-result
     `¬N_T ∧ ¬N_F`. Its intended reading is the world-level content
     (see module header). -/

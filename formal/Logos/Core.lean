@@ -55,19 +55,25 @@ def IsFalse (p : Prop) : Prop := ¬ T p
 -- §4 — T3, half 1: N_T refutes itself
 -- ---------------------------------------------------------------------------
 
-/-- `T(N_T)` cannot hold: assuming it forces both `N_T` and `¬ T N_T`. -/
+/--It cannot be true that nothing is true: asserting 'nothing is true' would itself be a true proposition.
+
+ `T(N_T)` cannot hold: assuming it forces both `N_T` and `¬ T N_T`. -/
 theorem nothingTrueRefutes : ¬ T N_T := by
   intro hTrue
   have hN : N_T := (tschema N_T).1 hTrue
   exact hN N_T hTrue
 
-/-- ¬(∀p ¬T p): it is not the case that nothing is true (classical step §4). -/
+/--It is false that nothing is true: some proposition is true.
+
+ ¬(∀p ¬T p): it is not the case that nothing is true (classical step §4). -/
 theorem notNothingTrue : ¬ N_T := by
   intro hN
   have hT : T N_T := (tschema N_T).2 hN
   exact nothingTrueRefutes hT
 
-/-- There is at least one true proposition. -/
+/--Some proposition is true.
+
+ There is at least one true proposition. -/
 theorem someTrue : ∃ p : Prop, T p := by
   apply Classical.byContradiction
   intro hno
@@ -75,26 +81,33 @@ theorem someTrue : ∃ p : Prop, T p := by
   exact notNothingTrue hall
 
 -- An explicit witness exists (D8: non-vacuity): `True` itself is true.
+/-- The proposition True is itself true. -/
 theorem atomicTruthWitnessed : T True := (tschema True).2 trivial
 
 -- ---------------------------------------------------------------------------
 -- §5 — T3, half 2: N_F refutes itself
 -- ---------------------------------------------------------------------------
 
-/-- `T(N_F)` cannot hold: `∀p T p` applied to the proposition `False`. -/
+/--It cannot be true that nothing is false: if it were, the falsehood False would be true.
+
+ `T(N_F)` cannot hold: `∀p T p` applied to the proposition `False`. -/
 theorem nothingFalseRefutes : ¬ T N_F := by
   intro hTrue
   have hN : N_F := (tschema N_F).1 hTrue
   have hTf : T False := hN False
   exact (tschema False).1 hTf
 
-/-- ¬(∀p T p): it is not the case that everything is true. -/
+/--It is false that everything is true: some proposition is false.
+
+ ¬(∀p T p): it is not the case that everything is true. -/
 theorem notEverythingTrue : ¬ N_F := by
   intro hN
   have hT : T N_F := (tschema N_F).2 hN
   exact nothingFalseRefutes hT
 
-/-- There is at least one false proposition. -/
+/--Some proposition is false.
+
+ There is at least one false proposition. -/
 theorem someFalse : ∃ q : Prop, IsFalse q := by
   refine ⟨False, ?_⟩
   intro hTf
@@ -108,7 +121,9 @@ theorem atomicWitnessFalsehood : IsFalse False :=
 -- P1/P2 of poem.txt — the two absolutes cannot stand together
 -- ---------------------------------------------------------------------------
 
-/-- `¬(N_T ∨ N_F)`: it is not the case that (either nothing is true or nothing
+/--It is neither the case that nothing is true, nor that nothing is false.
+
+ `¬(N_T ∨ N_F)`: it is not the case that (either nothing is true or nothing
     is false) — the poem's "p1 ∨ p2 is a contradiction"; classically from
     `notNothingTrue` (C2) and `notEverythingTrue` (C6). -/
 theorem negatedAbsolutes : ¬ (N_T ∨ N_F) := by
@@ -122,7 +137,9 @@ theorem negatedAbsolutes : ¬ (N_T ∨ N_F) := by
 theorem someTruthAndSomeFalsehood : (∃ p : Prop, T p) ∧ (∃ q : Prop, IsFalse q) :=
   ⟨someTrue, someFalse⟩
 
-/-- Right AND wrong both obtain: `¬N_T ∧ ¬N_F`, classically from
+/--Right and wrong both obtain: it is false that nothing is true, and false that everything is true.
+
+ Right AND wrong both obtain: `¬N_T ∧ ¬N_F`, classically from
     `¬(N_T ∨ N_F)` — the direct witness for the poem's P2 conclusion
     "há certo e há errado". -/
 theorem rightWrongDistinction : ¬ N_T ∧ ¬ N_F :=
@@ -132,12 +149,16 @@ theorem rightWrongDistinction : ¬ N_T ∧ ¬ N_F :=
 -- §6 — T3: the first great result
 -- ---------------------------------------------------------------------------
 
-/-- T3 — truth and falsehood are both necessarily instantiated, hence
+/--Truth and falsehood both obtain: some proposition is true and some proposition is false.
+
+ T3 — truth and falsehood are both necessarily instantiated, hence
     `T ≠ F` as statuses: `∃p, T p` and `∃q, ¬ T q`. -/
 theorem greatResult : ∃ p q : Prop, T p ∧ IsFalse q := by
   exact ⟨True, False, atomicTruthWitnessed, atomicWitnessFalsehood⟩
 
-/-- No proposition is both true and false (non-contradiction for T). -/
+/--No proposition is both true and false.
+
+ No proposition is both true and false (non-contradiction for T). -/
 theorem noBothTrueAndFalse : ∀ p : Prop, ¬ (T p ∧ IsFalse p) := by
   intro p h
   exact h.2 h.1
@@ -146,16 +167,22 @@ theorem noBothTrueAndFalse : ∀ p : Prop, ¬ (T p ∧ IsFalse p) := by
 -- §10 — logical meaning: bivalence is available (classical meta-logic)
 -- ---------------------------------------------------------------------------
 
-/-- §22 — every instance of the excluded middle is a necessary truth (level 0:
+/--For every proposition p, 'p or not-p' is true.
+
+ §22 — every instance of the excluded middle is a necessary truth (level 0:
     the modality □ in §22 lives at level 1, see Logos.Modal). -/
 theorem excludedMiddle : ∀ p : Prop, T (p ∨ ¬ p) := fun p =>
   (tschema (p ∨ ¬ p)).2 (Classical.em p)
 
-/-- §23 — every instance of non-contradiction is true: `□False(ρ)`. -/
+/--For every proposition p, 'not (p and not-p)' is true.
+
+ §23 — every instance of non-contradiction is true: `□False(ρ)`. -/
 theorem nonContradiction : ∀ p : Prop, T (¬ (p ∧ ¬ p)) := fun p =>
   (tschema (¬ (p ∧ ¬ p))).2 (fun h => h.2 h.1)
 
-/-- Bivalence, §10: each proposition is true or false (is false iff not true). -/
+/--Every proposition is either true or false.
+
+ Bivalence, §10: each proposition is true or false (is false iff not true). -/
 theorem bivalence : ∀ p : Prop, T p ∨ IsFalse p := by
   intro p
   by_cases hp : T p

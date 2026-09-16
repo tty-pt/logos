@@ -16,7 +16,9 @@ open Logos.Core (T IsFalse tschema)
 /-- `p` and `q` are incompatible contents. -/
 def Incompatible (p q : Prop) : Prop := ¬ (p ∧ q)
 
-/-- T9 — there are at least two incompatible contents, one true and one false:
+/--There are two incompatible alternatives, one of them true and the other false.
+
+ T9 — there are at least two incompatible contents, one true and one false:
     the minimal field of rational choice of §13 is non-empty, and it is
     present constructively (no choice axioms). -/
 theorem T9_incompatibleAlternatives :
@@ -27,7 +29,9 @@ theorem T9_incompatibleAlternatives :
   · exact Logos.Core.atomicTruthWitnessed
   · exact Logos.Core.atomicWitnessFalsehood
 
-/-- General form: any true content and its own negation are incompatible. -/
+/--Every true proposition is incompatible with its own negation.
+
+ General form: any true content and its own negation are incompatible. -/
 theorem incompatible_with_negation {p : Prop} (hp : T p) :
     Incompatible p (¬ p) ∧ T p ∧ IsFalse (¬ p) := by
   refine ⟨fun h => h.2 h.1, hp, ?_⟩

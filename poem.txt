@@ -45,3 +45,45 @@ Há de chegar o fim da dúvida. Salvem-se muitos, para que sejam livres nesse di
 
 Deus vos abençoe, e vos dê a segurança e a paz que o mundo não pode ver.
 [14/09, 23:11] quirinpa: (se não tiver vida nos olhos)
+
+---
+
+Nota formal (registo de estatuto, 2026-09-16 — não faz parte do poema;
+sincroniza poem.txt com formal/GAPMAP.md e VOCAB.md). Legenda: ✔ =
+axiom-free módulo vocabulário (sem axioma substantivo); FORÇADO = dado
+performativo (a negação refuta-se a si mesma); PROVEN↑ = teorema sob ponte
+declarada.
+
+- L12–16 (P1–P2): "nada é certo"/"nada é errado" refutam-se; "~(p1∨p2) = ~p1 ∧
+  ~p2 = verdade necessária" → PROVEN: C35–C38 (`negatedAbsolutes`,
+  `rightWrongDistinction`, `bothNecessarilyTrueAndFalse`, `necDistinction`);
+  "há certo E há errado" também em C59 (`strongTruthExists`, `{CL}`).
+- L18 (P3): "há certo e há errado → há significado → há alguém para quem algo
+  significar" → as duas metades: "significado → sujeito" é PROVEN (vocab-only)
+  ✔: C49 (`meaning_needs_subject` + `meaning_I_needs_subject`, `{Means, Subject}`);
+  "direito e errado → significado" é PROVEN (vocab-only) ✔: C62
+  (`Order.rightWrong_implies_meaning`, `{Means, Subject}` — `Correct`/`Incorrect`
+  são atos de significar, §8 literal, negação = contradição por definição). A
+  implicação completa (da distinção objectiva + ato) é PROVEN↑: C61
+  (`Choice.rightWrong_implies_someone_means`) e
+  `Order.rightWrongDistinction_implies_meaning`, `CL + {Cogito, Means, Subject}`
+  — paga só o fundamento FORÇADO.
+- L20 (P4): "para haver alguém é preciso haver escolha" → PROVEN (vocab-only)
+  ✔: C51 (`person_chooses`, `{Means, Subject}`). "Escolha com significado →
+  mais do que uma pessoa" permanece PROVEN↑: C40 (T12) sob `AxTwoSubjects`
+  (META).
+- L22 (P5): "um Ser sózinho … não ajuda nem prejudica ninguém" → PROVEN
+  (vocab-only) ✔: C56 (`alone_no_other_help_harm`, `{Subject}`; o antigo preço
+  `AxPersonsAffect` foi dissolvido em M1). "Tem de haver este Ser, e o certo e
+  o errado também têm de haver" → C58 (`Cogito`, FORÇADO) + C37/C38. "Tem de
+  haver quem se possa Amar" → PROVEN↑ C41 (via C40).
+- L24 (P6): "não é impessoal, e não é sózinho" → C40/C41; "Amar é escolhido e
+  também é necessário (de alguma forma)" → PROVEN↑ C42–C45 (T14) sob
+  `AxTwoSubjects` + `AxPersonStability` (SEM).
+- L26–30: "este mundo é necessário? Não" — negação não reivindicada (sem
+  demonstração); "a criação existe / há propósito" — zona de fé (F9,
+  DEFERRED); "existe este Ser Pessoal" — PROVEN↑ C32 (T8, `AxPersonalGround`).
+- L38 ("Eu Escolho! Escolho admitir que: Sou"): o ato de escolher/admitir é o
+  próprio dado performativo — C58 (`Agency.Cogito`, FORÇADO); negá-lo
+  refuta-se (`noCogito_selfRefutes`, C58) e negar o sujeito também
+  (`noSubject_selfRefutes`, C57).

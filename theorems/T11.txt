@@ -3,13 +3,24 @@ T11 — CAMPO DA ESCOLHA RACIONAL (revive §13–§15 com a definição de liber
 Depende de: T5, T9; definições §14–§15
 
 Verificado em: formal/Logos/Choice.lean (T11_choiceField, person_chooses,
-choiceExists, noChoice_selfRefutes, JUDGE_COMMITTED), formal/Logos/Order.lean
-(judge_commits), GAPMAP.md C39–C56.
-Impressão de axiomas: T11_choiceField — a de T5 ({AxTwoSubjects, Means, Subject});
-person_chooses — {Means, Subject} (sem cogito); choiceExists /
-noChoice_selfRefutes / JUDGE_COMMITTED — {AxTwoSubjects, Means, Subject};
-judge_commits — CL + {AxTwoSubjects, Means, Subject};
+choiceExists, noChoice_selfRefutes, JUDGE_COMMITTED,
+rightWrong_implies_someone_means, meaning_I_needs_subject),
+formal/Logos/Order.lean (judge_commits, rightWrong_implies_meaning,
+rightDistinctWrong_implies_meaning, rightWrongDistinction_implies_meaning),
+GAPMAP.md C39–C62.
+Impressão de axiomas: T11_choiceField — a de T5 ({Cogito, Means, Subject}, M0);
+person_chooses — {Means, Subject} (só vocabulário, PROVEN);
+rightWrong_implies_meaning / rightDistinctWrong_implies_meaning — {Means, Subject}
+(só vocabulário, PROVEN, C62, sem axioma substantivo);
+meaning_I_needs_subject — {Means, Subject} (só vocabulário, PROVEN, C49);
+choiceExists / noChoice_selfRefutes / JUDGE_COMMITTED — {Cogito, Means, Subject};
+judge_commits / rightWrongDistinction_implies_meaning — CL + {Cogito, Means, Subject};
 incompatible_self_negation — nenhuma ({}). sorryAx: 0.
+
+Definições §8 (2026-09-16, versão literal Correct(A(s,p))):
+Correct(s,p)   := A(s,p) ∧ T(p);
+Incorrect(s,p) := A(s,p) ∧ IsFalse(p);
+Meaning_I(p)   := ∃s Means(s,p).
 
 Enunciado:
 
@@ -31,6 +42,18 @@ Teoremas kernel-verificados (a cadeia §2 de IM_STUPID.md fecha para a
 existência da escolha):
 
 - person_chooses: Person(s) ⇒ ∃p∃q Chooses(s,p,q) —  sujeito ⇒ escolha.
+- rightWrong_implies_meaning / rightDistinctWrong_implies_meaning (§8/poem P3):
+  (∃s∃p Correct(s,p)) ∨/∧ (∃s∃p Incorrect(s,p)) ⇒ ∃p Meaning_I(p) — "direito e
+  errado precisam de significado": Correct/Incorrect são atos de significar
+  (A(s,p) ∧ …), logo a negação é contradição por definição, em qualquer modelo,
+  inclusive o vazio. Só vocabulário, {Means, Subject} (C62); nada substantivo.
+- rightWrongDistinction_implies_meaning: a forma completa do condicional poético
+  (¬N_T ∧ ¬N_F ⇒ ∃p Meaning_I(p)), com o passo forçado explícito (Cogito);
+  CL + {Cogito, Means, Subject}.
+- rightWrong_implies_someone_means (§25/poem P3): ¬N_T ∧ ¬N_F ⇒ ∃s∃p Means(s,p)
+  — "há certo e errado ⇒ há alguém para quem algo significar" (C61,
+  {Cogito, Means, Subject}); a metade "significado ⇒ sujeito" é analítica
+  meaning_needs_subject / meaning_I_needs_subject (C49, {Means, Subject}).
 - choiceExists: ∃s∃p∃q Chooses(s,p,q) —  a escolha é real (via T5).
 - noChoice_selfRefutes: ¬(∃s∃p∃q Chooses(s,p,q)) ⇒ False —  negar a escolha
   é uma escolha (transcendental).
