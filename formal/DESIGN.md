@@ -66,6 +66,22 @@ here. The TRANS tag retires from the ledger — no TRANS axioms remain. Every
 former `{cogito, Means, Subject}` footprint now reads
 `{AxTwoSubjects, Means, Subject}` (project-wide "Path B"; C57).
 
+Amended by M0/M1 (2026-09-16, `FORCED_SUBJECT.md` — COMPLETED).
+**The flow is forced, not derived.** The user's ruling (§0 of
+FORCED_SUBJECT.md): plurality cannot witness the act-datum, because the very
+attempt to *deny* the act is an act (R0.1–R0.2). So `Agency.Cogito`
+(`axiom Cogito : ∃ s p, A s p`) is **redeclared as the FORCED foundation**
+(TRANS/FORCED; its negation refutes itself, `noCogito_selfRefutes`). The
+A1-re-homed existence names switch from "produced by T12" back to
+"projection of `Cogito`" — `Plurality.cogito_from_T12` becomes a corollary,
+not the anchor. Every `{AxTwoSubjects, …}` footprint on the transcendental
+chain is now `{Cogito, …}` (measured: C48, C21/C23/C24, C28/C29/C30,
+C39, C52–C55, C57). Axiom inventory goes **12 → 11**:
++Cogito (forced), −Affects (→ def), −AxPersonsAffect (→ theorem). The
+"lone-subject countermodel is the price of AxTwoSubjects" story is kept —
+but it is now the price of *plurality* (M2 spike),
+not of the act-datum.
+
 ## D4 — Truthmaker semantics: §24a atom-only, structural `TrueAt` (A2)
 
 Since A2 (2026-09-16):
@@ -414,15 +430,20 @@ world-rigid `Ground`. Level-1 face-value model (D4, updated): `Subject := Form`,
 `ExistsAt := Satisfies`, `Ground := eq` — T7's witness is `e := φ` itself.
 `Entity`/`EntityOf` leave every Level-1 and T8/T14 footprint (T14 family 13 → 10).
 
-## D-A3 — Affect bundle: `Affects := Helps ∨ Harms` (Value.lean)
+## D-A3 — Affect bundle: `Affects := ?` (Value.lean)
 
-`axiom Affects` + `help_affects` + `harm_affects` become: `Helps`/`Harms` stay
-the two primitive value predicates; `def Affects s t := Helps s t ∨ Harms s t`
-(faithful to P6: an act that "não ajuda nem prejudica ninguém" affects no
-other); `help_affects`/`harm_affects` degenerate into `Or.inl`/`Or.inr`
-theorems — the B1-bundle move applied to affectivity. `AxPersonsAffect` is
-restated over the bundle; footprints unfolding it now print `Helps`/`Harms`
-instead of `Affects`. Net: −3 axiom declarations, same content.
+`axiom Affects` + `help_affects` + `harm_affects` → three SEPARATE axioms
+defined away. **M1 (2026-09-16, `FORCED_SUBJECT.md` — COMPLETED):** the
+definition is now real — `def Affects s t := s ≠ t` (S1 × C3-II: a subject
+bears on what is *other*; the lone subject affects nothing, P1–P2).
+`Helps`/`Harms` are projections (`Helps := Affects`, `Harms := Affects`);
+`AxPersonsAffect` is a **theorem** (distinct – persons affect, `Or.inl hne`).
+Axiom inventory **−1** (`Affects`) and **−1** (`AxPersonsAffect`); all
+value-chain footprints drop both (measured C42–C47, C56). SEM tag retires for
+these two; `Affects` and `AxPersonsAffect` cease to be axiom declarations.
+The "Amar é escolhido" prose price (F1) is untouched (choice, not
+affectivity, carries it). Design note D-A3's "straightforward but S1-priced"
+wording is superseded by the definitional collapse (A3/M1).
 
 **D-A3-r (A3-refactor, Chooses-def batch, 2026-09-15):** the direction is now
 reversed — `Affects` is the *single primitive* value relation
@@ -500,6 +521,24 @@ D-cogito-rethinking (2026-09-15):
    The "present act" datum is now a derived consequence of the plurality
    bridge + logical distinction (Level 0 + one META bridge), not an
    irreducible assumption. This is a strict strengthening.
+
+Cost: three axioms removed in cogito-rethinking (−2 declarations: Exists/Content;
+then −1 more in A1: cogito itself), two theorems added (C48 + T1/T4/T5 re-homed).
+The philosophical price: the footprint transitively contains `AxTwoSubjects` via
+the plurality bridge — this is the existing META cost, now visible as the
+sole source of the act-datum.
+
+5. **(M0, 2026-09-16, `FORCED_SUBJECT.md` — the correction that retirement
+   needed).** Item 4 was the bug. The act-datum is **not** a consequence of
+   plurality: to deny it IS the act, so it cannot be witnessed by the
+   plurality bridge (it precedes the bridge — R0.1–R0.2, forced foundation).
+   `Agency.Cogito` is **redeclared** (TRANS/FORCED), `noCogito_selfRefutes`
+   is re-proved kernel-checked, and every former "projection off T12" name on
+   the act-chain is re-pointed at `Cogito`: `Plurality.cogito_from_T12`
+   becomes a corollary (C48), no longer the anchor; the A1-era footprint flip
+   `{AxTwoSubjects,…} → {Cogito,…}` (measured). The corpus's plurality
+   theorems (T12/T5/T11/Choice/Order/Love) keep `AxTwoSubjects` exactly where
+   plurality is genuinely in play — the M2/M3 spike prices, not the datum's.
 
 Cost: three axioms removed in cogito-rethinking (−2 declarations: Exists/Content;
 then −1 more in A1: cogito itself), two theorems added (C48 + T1/T4/T5 re-homed).

@@ -12,13 +12,13 @@ entity-correlate), decided to close the Subject/Entity gap so the love layer
 can attach necessity to the relata (T14).
 
 A1 (2026-09-16): the existence theorems `T1_subjectExists`, `T4_agentExists`
-(former Agency) and `T5_personExists` (former Person) live HERE as T12
-projections. The former `axiom cogito` (Agency) is deleted; its existence
-content is resident in `cogito_from_T12` below, and these are its corollaries.
-Reason: the `∃ s` witness cannot be manufactured in early modules (the cycle
-`Plurality → Value → Person → Agency` blocks imports), so the existence
-content moves to where `T12_twoPersons` supplies the witness.
--/
+(former Agency) and `T5_personExists` (former Person) live HERE, and M0
+(2026-09-16, FORCED_SUBJECT.md) re-anchors all of them — plus
+`cogito_from_T12` — on the *forced foundation* `Agency.Cogito`, NOT on the
+plurality bridge. A1's cycle reason (`Plurality → Value → Person → Agency`)
+is respected by importing only the foundation, never proving from T12.
+Only `T12_twoPersons`, `notAlone`, and `T12_directedPair` still stand on
+`AxTwoSubjects` — they are the genuine plurality claims. -/
 
 import Logos.Core
 import Logos.Agency
@@ -53,53 +53,46 @@ theorem T12_twoPersons :
 theorem notAlone : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ :=
   T12_twoPersons
 
-/-- cogito, RESTATED AS A THEOREM (cogito-rethinking, 2026-09-15): the former
-    performative datum is derivable. From T12 (two persons, `AxTwoSubjects`)
-    take one person; `Intentional` gives a content it means, and under the
-    Tier-1 collapse (`A s p := Means s p`, `Exists`/`Content`/`Agent`/`Rational`
-    all analytical `:= True`) the meaning-act alone fills the act. The denial
-    of cogito is therefore refuted by this theorem — exactly as N_T is refuted
-    by `Core.notNothingTrue` ("there is no wrong" refutes itself). Only the
-    plurality bridge + kind-predicates remain: the price of having the act's
-    existence *derived* rather than declared. -/
-theorem cogito_from_T12 : ∃ s : Subject, ∃ p : Prop, Logos.Agency.A s p := by
-  obtain ⟨s, t, hs, ht, hne⟩ := T12_twoPersons
-  obtain ⟨p, hmp⟩ := hs.2.2
-  exact ⟨s, p, hmp⟩
+/-- cogito, RESTATED AS A COROLLARY OF THE FORCED FOUNDATION (M0,
+    FORCED_SUBJECT.md, 2026-09-16): the present act is *given*, not derived
+    from plurality. `cogito_from_T12` survives as a corollary of
+    `Agency.Cogito` — the former T12-derivation is conserved but re-classified:
+    plurality also forces the datum, the datum is not *grounded* on plurality.
+    Its denial is refuted by `Agency.noCogito_selfRefutes`, not (any longer)
+    by a detour through two persons. -/
+theorem cogito_from_T12 : ∃ s : Subject, ∃ p : Prop, Logos.Agency.A s p :=
+  Logos.Agency.Cogito
 
-/-- T1 — the subject of the present act exists (re-homed from Agency by A1,
-    2026-09-16): a corollary of T12 (a person exists, hence a subject exists).
-    The former `axiom cogito` is deleted; its existence content lives here. -/
+/-- T1 — the subject of the present act exists (M0 re-anchor, 2026-09-16):
+    corollary of the forced foundation, not of the pair. -/
 theorem T1_subjectExists : ∃ s : Subject, Logos.Agency.Exists s := by
-  obtain ⟨s, _, _, _, _⟩ := T12_twoPersons
+  obtain ⟨s, _, _⟩ := Logos.Agency.Cogito
   exact ⟨s, trivial⟩
 
-/-- T4 — the subject is an agent (re-homed from Agency by A1; `Agent` is
-    analytical `:= True`). -/
+/-- T4 — the subject is an agent (M0 re-anchor; `Agent` is analytical
+    `:= True`). -/
 theorem T4_agentExists :
     ∃ s : Subject, Logos.Agency.Exists s ∧ Logos.Agency.Agent s := by
-  obtain ⟨s, _, _, _, _⟩ := T12_twoPersons
+  obtain ⟨s, _, _⟩ := Logos.Agency.Cogito
   exact ⟨s, trivial, trivial⟩
 
-/-- T5 — there is a person (re-homed from Person by A1; formerly
-    `Person.T5_personExists`, which used the deleted `cogito` axiom). -/
+/-- T5 — there is a person (M0 re-anchor): from the forced act the witness
+    subjects own personhood trivially — `Agent`/`Rational` are analytical
+    `:= True` and the act's own content witnesses `Intentional`. -/
 theorem T5_personExists : ∃ s : Subject, Person s := by
-  obtain ⟨s, _, hs, _, _⟩ := T12_twoPersons
-  exact ⟨s, hs⟩
+  obtain ⟨s, p, hmp⟩ := Logos.Agency.Cogito
+  exact ⟨s, trivial, trivial, p, hmp⟩
 
-/-- T12, directed form (chain node C47): the two-person pair can be oriented
-    so that affectivity flows named-forward — the C3-I bridge `AxPersonsAffect`
-    decides the direction by cases. Adds a named step between T12 and the
-    love layer: direction + stability must hold of the *same* pair, so T14 is
-    built on this pair rather than on a lone stability-only node (rejected:
-    direction and stability would then be unconnected). -/
+/-- T12, directed form (chain node C47; M1 2026-09-16): the two-person pair can
+    be oriented so that affectivity flows named-forward — under A3
+    (`Affects s t := s ≠ t`) distinctness IS the forward direction, so the
+    directed pair is `T12_twoPersons` itself wearing its own inequality.
+    Direction + stability still must hold of the *same* pair, so T14 is
+    built on this pair (rejected: direction and stability unconnected). -/
 theorem T12_directedPair :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Affects s₁ s₂ := by
   obtain ⟨p, q, hp, hq, hne⟩ := T12_twoPersons
-  have hA : Affects p q ∨ Affects q p := AxPersonsAffect p q hp hq hne
-  cases hA with
-  | inl hpq => exact ⟨p, q, hp, hq, hne, hpq⟩
-  | inr hqp => exact ⟨q, p, hq, hp, hne.symm, hqp⟩
+  exact ⟨p, q, hp, hq, hne, hne⟩
 
 end Logos.Plurality
 

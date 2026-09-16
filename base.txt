@@ -767,11 +767,11 @@ Ao afirmar ou negar racionalmente qualquer uma destas posições, o agente utili
 (Nota formal §26: "Não existe sujeito do ato presente" tem agora registo formal
 kernel-checked — noSubject_selfRefutes: ¬(∃s : Subject) ⇒ False (negar um
 sujeito é, ele próprio, um ato/escolha de um sujeito; a escolha existente
-fornece a testemunha). PROVEN↑ sob {AxTwoSubjects, Means, Subject}; o ato é
-derivado (cogito_from_T12, axiom-free — A1 eliminou o axioma cogito em
-2026-09-16), e a âncora última é AxTwoSubjects —
-a ponte META assinalada. O núcleo lógico puro da mera sort vazia é consistente:
-"sem sujeito" só se refuta dado o ato residente na teoria. Ver formal/GAPMAP.md C57.)
+fornece a testemunha). PROVEN↑ sob {Cogito, Means, Subject}; o ato é o
+**fundamento forçado** — a sua negação refuta-se a si mesma (noCogito_selfRefutes,
+M0, 2026-09-16) — não um teorema derivado da pluralidade. A âncora última
+não é mais AxTwoSubjects mas o próprio Cogito, o dado TRANS/FORÇADO que o
+datum do ato exige. Ver formal/GAPMAP.md C58.)
 
 27. RESULTADO MÁXIMO DESTA FASE
 

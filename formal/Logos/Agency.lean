@@ -2,10 +2,15 @@
 # Logos.Agency — Level 2a: the act, its subject, its content (base.txt §1–§2, T1–T2, T4)
 
 The performative datum of §1 (the present act of reasoning is *given*, not
-inferred) is no longer declared here. A1 (2026-09-16): the former
-`axiom cogito` (tagged TRANS) is deleted — it was already derivable from
-`Plurality.cogito_from_T12`, and its existence content now lives in
-Plurality (see below).
+inferred) is THE FORCED FOUNDATION of the system (SUBJECT IS FORCED; batch
+M0 of `FORCED_SUBJECT.md`, 2026-09-16). A1 had moved the datum into
+Plurality as `cogito_from_T12`, derived under the plurality bridge
+`AxTwoSubjects`. That made choosing-subject existence a *conditional
+consequence* of plurality — the bug the M0 batch fixes: the existence of a
+choosing subject is not optional. It is restored HERE, in Agency, as the
+unconditioned TRANS axiom `Cogito`. Its denial self-refutes
+(`noCogito_selfRefutes`); the walls that forbid a derivation are recorded in
+`FORCED_SUBJECT.md` §1 (empty model + carrier smuggling).
 
 Design decision B1 (D-batch "act bundle", 2026-09-15): `A s p` is a *defined*
 relation, not a primitive. The act is — by the meaning rules of the system
@@ -29,17 +34,16 @@ is a meaning-act. Consequences:
   * T2 is a projection of the collapse (axiom-free);
   * the remaining primitives `Subject` and `Means` stay opaque (declared, not
     derived): `Subject` is a pure-sort postulate (its inhabitants are the
-    claimed persons of T12 / `cogito_from_T12`; any carrier definition would
+    persons of `Cogito`; any carrier definition would
     smuggle content — `Bool`/`fin 2` asserts exactly-two, `ℕ` asserts
     infinity, an empty `inductive` refutes `∃ s` and breaks the act-datum),
     and `Means` is the genuine intentional relation.
 
-The act-datum (`∃ s p, A s p`) is resident via `Plurality.cogito_from_T12`
-(derived under the ultimate anchor `AxTwoSubjects`). Agency cannot import
-Plurality (cycle `Plurality → Value → Person → Agency`), so the existence
-theorems that used to stand on the axiom live in Plurality as T12 projections:
-`Plurality.T1_subjectExists`, `Plurality.T4_agentExists`,
-`Plurality.T5_personExists`. Only `T2_contentExists` remains here (axiom-free).
+The act-datum (`∃ s p, A s p`) is resident HERE as the forced foundation
+`Cogito` (TRANS). `Agency` imports only Core, so no import cycle blocks it.
+The existence theorems that A1 moved into Plurality are re-anchored there on
+`Cogito` (no longer on `T12`/`AxTwoSubjects`). `T2_contentExists` remains
+axiom-free.
 -/
 
 import Logos.Core
@@ -84,6 +88,29 @@ axiom Means : Subject → Prop → Prop
     collapse and the act IS the intentional relation `Means s p`. -/
 def A (s : Subject) (p : Prop) : Prop := Means s p
 
+/-- THE FORCED FOUNDATION (TRANS; SUBJECT IS FORCED, M0 2026-09-16): a
+    choosing subject exists — there is a present meaning-act of a subject.
+
+    NOT A PRICE. A price is an axiom whose negation is consistent with the
+    rest of the theory (e.g. `AxTwoSubjects` has the lone-subject model).
+    `Cogito`'s negation is refuted by `noCogito_selfRefutes` below — denying
+    the act *is* an act, of a subject — and the Walls forbid any derivation
+    (`FORCED_SUBJECT.md` §1): the empty model satisfies the whole vocabulary
+    (Gödel/Tarski wall: the object theory cannot see the denial as an act),
+    and every non-empty carrier smuggles a cardinality. The act is the first
+    given; everything downstream is derived from it. Footprint: {Means, Subject}. -/
+axiom Cogito : ∃ s : Subject, ∃ p : Prop, A s p
+
+/-- Denying the choosing subject is itself an act, hence a meaning-act of a
+    subject — the denial contradicts itself. Kernel-checked.
+
+    This is the formalization of "SUBJECT IS FORCED": `¬ (∃ s p, A s p)`
+    proves `False` with the minimal possible axiomatic surface
+    {Means, Subject, Cogito} — no plurality, no SEM/META bridge. -/
+theorem noCogito_selfRefutes :
+    (¬ ∃ s : Subject, ∃ p : Prop, A s p) → False :=
+  fun h => h Cogito
+
 /-- An act entails a subject that exists (relational act, §1/T1).
     Analytic (Tier 1): `Exists _ := True`. -/
 theorem act_implies_exists : ∀ {s : Subject} {p : Prop}, A s p → Exists s := by
@@ -123,3 +150,4 @@ end Logos.Agency
 
 -- Axiom footprint audit
 #print axioms Logos.Agency.T2_contentExists
+#print axioms Logos.Agency.noCogito_selfRefutes

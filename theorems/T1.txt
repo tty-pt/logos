@@ -1,6 +1,7 @@
 T1 — O SUJEITO DO ATO EXISTE
 
-Depende de: T12 (A1, 2026-09-16: o ato-dado é derivado — `Plurality.cogito_from_T12`)
+Depende de: Cogito (M0, 2026-09-16 — o dado do ato é FUNDAMENTO FORÇADO, não
+derivado da pluralidade; registo formal pró-forma GAPMAP C58).
 
 O ponto de partida é o ato presente de raciocinar:
 
@@ -31,20 +32,21 @@ implica:
 
 Portanto:
 
-∃s Exists(s)
+∃s Exists(s).
 
-(Nota formal: `Exists` é a definição analítica `Exists(s) := True`, e o cogito
-é *derivável* — `Plurality.cogito_from_T12` (de T12, sob AxTwoSubjects).
-A1 (2026-09-16): o axioma cogito foi ELIMINADO; T1 é agora teorema de
-Plurality, projeção de T12 (`Plurality.T1_subjectExists`). Batch Tier1
-(2026-09-16): com `A(s,p) := Means(s,p)` e `Agent/Rational := True`,
-T1 é teorema trivial; footprint {AxTwoSubjects, Means, Subject} — ver
-formal/GAPMAP.md C21.)
+(Nota formal T1 vs. o ledger: com o colapso Tier1 (A(s,p) := Means s p) e
+M0 (FORCED_SUBJECT.md), `Plurality.T1_subjectExists` é teorema trivial —
+projeção do fundamento forçado `Agency.Cogito` (∃ s p, A s p). Footprint
+medido {Cogito, Means, Subject}. O ato-dado NÃO é derivado da pluralidade:
+é o fundamento; a pluralidade (T12, AxTwoSubjects) é uma ponte META
+separada. Ver formal/GAPMAP.md C21.)
 
 (Nota formal §26 un-denyable: para além de T1, a própria negação
 "não existe sujeito" refuta-se a si mesma — `noSubject_selfRefutes`:
 ¬(∃s : Subject) ⇒ False (a negação é ato/escolha de um sujeito; a escolha
-existente dá a testemunha). PROVEN↑ {AxTwoSubjects, Means, Subject}, registo
-formal de base.txt §26; ver formal/GAPMAP.md C57.)
+existente dá a testemunha). PROVEN↑ {Cogito, Means, Subject}, registo
+formal de base.txt §26; ver formal/GAPMAP.md C57. E, mais fundo, a negação
+do próprio Cogito refuta-se: `noCogito_selfRefutes` — negar o ato é ele
+próprio um ato (M0, GAPMAP C58 / FORCED_SUBJECT.md).)
 
 Há pelo menos um sujeito que existe enquanto agente do ato racional presente.

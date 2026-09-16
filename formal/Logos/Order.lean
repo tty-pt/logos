@@ -37,9 +37,10 @@ def Incorrect (_s : Subject) (p : Prop) : Prop := IsFalse p
 def Fallible (_s : Subject) (p : Prop) : Prop := IsFalse p
 
 /-- Fallibility (T6 premise): some subject can be in error about some false
-    content. Proven (A1): from `Core.someFalse` (there is a false content,
-    PROVEN footing `{}` under E0) and `cogito_from_T12` (the present subject,
-    derived under `AxTwoSubjects` after A1).
+    content. Proven (M0 forced-subject batch, 2026-09-16): from
+    `Core.someFalse` (there is a false content, PROVEN footing `{}` under E0)
+    and `cogito_from_T12` (the present subject, corollary of the forced
+    foundation `Agency.Cogito`).
     The former axiom is dissolved. -/
 theorem fallible_false : ∃ s : Subject, ∃ p : Prop, Fallible s p ∧ IsFalse p := by
   obtain ⟨s, _, _⟩ := Logos.Plurality.cogito_from_T12
@@ -69,8 +70,8 @@ theorem correctness_distinct : ¬ (∀ s : Subject, ∀ p : Prop, Correct s p �
 /-- "There is no right and wrong without choice" (IM_STUPID.md §1–§2): the
     judgment act — a subject asserting a content that is correct-or-incorrect
     (§8) — IS a choice against the incompatible alternative `¬p`. From
-    `cogito_from_T12` (a meaning-act with content p; derived under
-    `AxTwoSubjects` after A1) + bivalence (p is right-or-wrong)
+    `cogito_from_T12` (a meaning-act with content p; corollary of the forced
+    foundation `Agency.Cogito`, M0 2026-09-16) + bivalence (p is right-or-wrong)
     + `Incompatible p (¬p)` (pure logic). The former "gap" F1a is now a
     theorem, kernel-checked. -/
 theorem judge_commits :

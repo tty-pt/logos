@@ -4,22 +4,35 @@
 P6 of the poem: "um Ser sózinho pode agir de uma forma ou de outra, não ajuda
 nem prejudica ninguém." Formal content:
 
-  * `Affects` is the *single primitive* relation from one subject to another;
-    `Helps`/`Harms` are its definitional projections (A3-refactor);
+  * `Affects` is now a *structural definition* (A3, M1 batch of
+    `FORCED_SUBJECT.md`, 2026-09-15→16): bearing = distinctness
+    (`Affects s t := s ≠ t`); `Helps`/`Harms` are its definitional
+    projections; faithful to P6 ("não ajuda nem prejudica ninguém" — the lone
+    subject affects no other);
   * lemma `alone_no_other_help_harm`: a lone subject helps/harms no *other*
-    subject (an other = a t with t ≠ s).
+    subject (an other = a t with t ≠ s). Now carries no `Affects` axiom.
 
 The poem's *leap* (P5, "para haver escolha com significado, é preciso mais do
 que uma pessoa") — the reality of right-and-wrong is *interpersonal* — is NOT
 derivable from the axioms alone (failure traces in DESIGN.md D14 + C3-I spike;
 the named missing lemma is `ALONE_EXCLUDED : ¬ ∃ s, Person s ∧ Alone s`). The
-former single bridge `AxValueInterpersonal` is split (C3-I, 2026-09-15) into
-two narrower priced bridges: the **plurality-claim** `AxTwoSubjects` (META: from
-right-and-wrong to two distinct persons) and the **affectivity meaning-postulate**
-`AxPersonsAffect` (SEM: distinct persons, by definition, bear on each other).
+former single bridge `AxValueInterpersonal` was split (C3-I, 2026-09-15) into
+plurality (`AxTwoSubjects`, META) + affectivity (`AxPersonsAffect`, SEM); M1
+(2026-09-16) folds the SEM half: `AxPersonsAffect` is now a **theorem** of A3.
+Only the **plurality-claim** `AxTwoSubjects` (META: from right-and-wrong to two
+distinct persons) stays declared — the leap's price is isolated at its only
+honest site: a second distinct person. `valueInterpersonal_of_split` recovers
+the exact old statement, so no strength is lost. Priced, never pure deduction
+(§29).
+
+The poem's *leap* (P5, "para haver escolha com significado, é preciso mais do
+que uma pessoa") — the reality of right-and-wrong is *interpersonal* — is NOT
+derivable from the axioms alone (failure traces in DESIGN.md D14 + C3-I spike;
+the named missing lemma is `ALONE_EXCLUDED : ¬ ∃ s, Person s ∧ Alone s`). Only the
+**plurality-claim** `AxTwoSubjects` (META: from right-and-wrong to two distinct
+persons) remains declared — M1 folds the affectivity half into A3.
 `valueInterpersonal_of_split` recovers the exact old statement, so no strength
-is lost. Neither bridge's negation destroys the act of denying it: both stay
-priced, never pure deduction (§29).
+is lost. Priced, never pure deduction (§29).
 -/
 
 import Logos.Core
@@ -31,11 +44,21 @@ namespace Logos.Value
 open Logos.Agency (Subject)
 open Logos.Person (Person)
 
-/-- `Affects s t`: what `s` does bears on `t`. NOW the single primitive value
-    relation (A3-refactor): `Helps`/`Harms` are its definitional *projections*
-    (see below), faithful to P6 ("não ajuda nem prejudica ninguém" — the lone
-    subject affects no other). -/
-axiom Affects : Subject → Subject → Prop
+/-- `Affects s t`: what `s` does bears on `t`. NOW a structural DEFINITION
+    (A3, batch M1 of `FORCED_SUBJECT.md`, 2026-09-16): bearing = distinctness —
+    a subject bears on what is *other*; the lone subject bears on nothing
+    (P6: "não ajuda nem prejudica ninguém"). `Helps`/`Harms` are its
+    definitional *projections* (see below).
+
+    This is a SEM *position*, recorded and owned (same class as A2's structural
+    `TrueAt`): it defines the minimal structural content of affectivity, it
+    does not pretend to *derive* it. The former two-declaration swing
+    (`axiom Affects` + `axiom AxPersonsAffect`) collapses to zero.
+
+    Prose price: "Amar é escolhido" now rests entirely on `FreeWill` (F1,
+    DEFERRED); `Loves := Affects` in Love.lean reads as the directed
+    constitutive bearing of one subject on a *distinct* one. -/
+def Affects (s t : Subject) : Prop := s ≠ t
 
 /-- `Helps s t`: `s` benefits `t` — definitional projection of `Affects`
     (the helps-direction). -/
@@ -89,14 +112,16 @@ axiom AxTwoSubjects :
     (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) →
       ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂
 
-/-- AxPersonsAffect (SEM meaning-postulate; poem P5/P7): distinct persons
-    necessarily bear on each other — affectivity in at least one direction.
-    Universal statement, asserts no existence. Consistency model: two-subject
-    boolean structure {present, other} with a mandatory directed affects edge.
-    Exclusion attempt recorded in /tmp/opencode/x2_spikeB.lean: `Affects` has
-    no introduction rule, so the claim is unprovable from the theory. -/
-axiom AxPersonsAffect : ∀ s₁ s₂ : Subject, Person s₁ → Person s₂ → s₁ ≠ s₂ →
-    (Affects s₁ s₂ ∨ Affects s₂ s₁)
+/-- AxPersonsAffect (theorem of A3, M1 2026-09-16; formerly a SEM
+    meaning-postulate): distinct persons necessarily bear on each other in at
+    least one direction — because bearing IS distinctness, `hne : s₁ ≠ s₂`
+    is the left disjunct itself. This formerly stood as a declared axiom
+    (`axiom` with no introduction rule; exclusion attempt in
+    /tmp/opencode/x2_spikeB.lean); the A3 definition supplies the missing
+    introduction rule. -/
+theorem AxPersonsAffect (s₁ s₂ : Subject) (_hs₁ : Person s₁) (_hs₂ : Person s₂)
+    (hne : s₁ ≠ s₂) : Affects s₁ s₂ ∨ Affects s₂ s₁ :=
+  Or.inl hne
 
 /-- Recovery theorem: the exact statement of the deleted `AxValueInterpersonal`
     (line 70-73, 2026-09-14) is a theorem of the split — no strength lost. -/

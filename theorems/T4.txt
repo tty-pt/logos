@@ -6,11 +6,12 @@ Depende de: T12 (batch Tier1, 2026-09-16: agência é analítica)
 
 A(s,p) → Agent(s).
 
-(Nota formal: com o colapso Tier1 — A(s,p) := Means(s,p) e
-Agent(s) := True — esta passagem é uma tautologia definicional.
-A1 (2026-09-16): o axioma cogito foi eliminado e T4_agentExists é agora
-teorema de Plurality (projeção de T12) de footprint
-{AxTwoSubjects, Means, Subject}; ver formal/GAPMAP.md C23.)
+(Nota formal: com o colapso Tier1 — A(s,p) := Means(s,p) e Agent(s) := True —
+esta passagem é uma tautologia definicional.
+M0 (2026-09-16, FORCED_SUBJECT.md): o dado do ato é o fundamento forçado
+`Cogito` (∃ s p, A s p, TRANS/FORÇADO — a sua negação refuta-se a si mesma).
+`Plurality.T4_agentExists` é teorema trivial, projeção de Cogito; footprint
+medido {Cogito, Means, Subject}. Ver formal/GAPMAP.md C23.)
 
 Logo:
 

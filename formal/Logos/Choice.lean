@@ -143,12 +143,12 @@ theorem JUDGE_COMMITTED :
     act/choice of a subject — and `choiceExists` (every act is a choice,
     every choice has a subject, `Chooses` holds at a meaning-act `A s p`)
     supplies the resident witness. Formal record of §26 "não existe sujeito
-    do ato presente". Footprint `{AxTwoSubjects, Means, Subject}` — the
-    refutation needs the act-datum resident in the theory; the pure-logical
+    do ato presente". Footprint `{Cogito, Means, Subject}` — the
+    refutation needs the act-datum resident in the theory (forced foundation
+    `Agency.Cogito`, M0/forced-subject batch 2026-09-16); the pure-logical
     shell of a bare sort (`axiom Subject : Type`, empty model) is consistent,
-    so the denial is refutable only given the act. The act-datum is derived
-    (`cogito_from_T12`, A1 2026-09-16) under the ultimate anchor
-    `AxTwoSubjects`. -/
+    so the denial is refutable only given the act. M0 fix: the act-datum is
+    the *forced foundation*, never a consequence of the plurality bridge. -/
 theorem noSubject_selfRefutes : (¬ ∃ _s : Subject, True) → False := by
   intro h
   obtain ⟨s, _⟩ := choiceExists
