@@ -431,7 +431,8 @@ _META_SHORTS = {n.rsplit(".", 1)[-1] for n in META_LOGIC}
 TAG_VOCAB = "VOCAB"   # relation/sort the statement itself talks about
 TAG_SEM = "SEM"       # semantic choice, consistency-model recorded
 TAG_META = "META"     # metaphysical bridge, price explicit
-KNOWN_TAGS = {TAG_VOCAB, TAG_SEM, TAG_META}
+TAG_TRANS = "TRANS"   # transcendental / performative datum
+KNOWN_TAGS = {TAG_VOCAB, TAG_SEM, TAG_META, TAG_TRANS}
 
 # Set in `main()` once the sources are parsed; read by the render helpers so
 # the derivation machinery needs no parameter threading.
@@ -442,7 +443,7 @@ _REGISTRY: dict = {}   # axiom base name -> {"tag", "gloss", "full"}
 # footprint check spots stale GAPMAP transcriptions after a demotion (a cell
 # still listing them as footprint members). Never used for status. Update in
 # the demotion batch itself.
-RETIRED_AXIOMS = {"ExistsAt", "AxPersonStability", "AxGlobalGround", "AxTwoSubjects"}
+RETIRED_AXIOMS = {"ExistsAt", "AxPersonStability"}
 
 
 def _short(name: str) -> str:
@@ -466,7 +467,7 @@ def footprint_parts(full: str) -> tuple[list, list, list]:
             if r is None:
                 raise SystemExit(f"FATAL: axiom `{a}` in footprint of `{full}` "
                                  f"has no registry tag (Tag: line missing in Lean)")
-            (subst if r["tag"] in (TAG_SEM, TAG_META) else vocab).append(base)
+            (subst if r["tag"] in (TAG_SEM, TAG_META, TAG_TRANS) else vocab).append(base)
         elif _short(a) in _META_SHORTS:
             cl.append(a)
         else:
@@ -475,9 +476,9 @@ def footprint_parts(full: str) -> tuple[list, list, list]:
 
 
 def is_vocab_only(full: str) -> bool:
-    """True when a claim's kernel footprint carries vocabulary constants of
-    the statement itself and no substantive axiom (e.g. C15/C60 — the denial
-    of atom-grounding refutes itself by definition, RAA). Displays ✔."""
+    """True when a claim's kernel footprint carries only declared vocabulary
+    axioms (VOCAB) of the statement itself and no substantive axiom (SEM/META/TRANS).
+    The theorem is axiom-free modulo the declared vocabulary. Displays ✔."""
     subst, vocab, _ = footprint_parts(full)
     return bool(vocab) and not subst
 
@@ -557,7 +558,9 @@ def render_index(sections, level_titles, claims_by_id, decls, node_map, graph):
     ap("")
     ap("- **Fonte Lean:** `formal/Logos/*.lean` (kernel-checked, `lake build` verde, sorryAx 0)")
     ap("- **Pegadas do kernel:** `formal/axiom_audit.json` (`#print axioms` por declaração — "
-       "a pegada axiomática transitiva exata, meta-lógica incluída)")
+       "a pegada axiomática transitiva exata no kernel, meta-lógica incluída. Nota metodológica: "
+       "a auditoria do kernel reporta dependências formais estritas; não certifica independentemente "
+       "que as definições constitutivas não codifiquem compromissos substantivos)")
     ap("- **Tipos de axioma:** a linha `Tag:` (`VOCAB`/`SEM`/`META`) na docstring Lean de cada axioma")
     ap("- **Grafo de dependências:** `formal/depgraph.json` (LeanDepViz, kernel)")
     ap("- **Ledger GAPMAP:** [`formal/GAPMAP.md`](formal/GAPMAP.md) (IDs, refs de prosa, "
@@ -579,7 +582,7 @@ def render_index(sections, level_titles, claims_by_id, decls, node_map, graph):
     ap("| `➖` | fora do âmbito deste marco |")
     ap("| `→` | dissolvido numa entrada já apresentada (`Vide …`) |")
     ap("| `CL` | meta-lógica clássica `{propext, Classical.choice, Quot.sound}` (D1, reportada pelo kernel) |")
-    ap("| `✔` (só vocabulário) | teorema **axiom-free módulo vocabulário**: a pegada do kernel só contém vocábulos que o próprio enunciado menciona (`Ground`, `ExistsAt`, `GroundProp`), sem axioma substantivo (SEM/META). Ex.: C15/C60 (a negação refuta-se por definição — RAA), C25/C49/C51/C56/C62 (analíticos), C16/C17. Inventário e justificação em [`VOCAB.md`](VOCAB.md); ver **Relatório de consistência** |")
+    ap("| `✔` (só vocabulário) | teorema **axiom-free módulo o vocabulário primitivo declarado**: a pegada do kernel só contém vocábulos (`VOCAB`) que o próprio enunciado menciona, sem axioma substantivo (`SEM`/`META`/`TRANS`). Nota: `#print axioms` reporta apenas dependências formais do kernel; não certifica por si só que as definições não codifiquem compromissos constitutivos substantivos. Ex.: C25, C49, C51, C56, C62 (passos analíticos módulo vocabulário primitivo de agência/escolha). Inventário e justificação em [`VOCAB.md`](VOCAB.md); ver **Relatório de consistência** |")
     ap("| `An` | axioma exibido em bloco próprio (`### A1 ◆ …`) no 1.º passo que o usa; as linhas `Segue …` referenciam-no por `A#` |")
     ap("")
     ap("O estatuto de cada passo é **derivado** — função de (tipo do nó no kernel, "
@@ -879,23 +882,106 @@ def derived_for(c: dict, node_map: dict) -> str | None:
     return "PROVEN↑" if subst else "PROVEN"
 
 
+def classify_claims(all_claims: list[dict], decls: dict, node_map: dict) -> dict[str, list[dict]]:
+    """Partition claims into FOUND, RETIRED_BLOCKED, and MISSING (3-way distinction).
+
+    FOUND: kernel declaration resolved in decls.
+    RETIRED_BLOCKED: explicitly known not to be a current theorem (status is BLOCKED or DEFERRED,
+      or claim has no kernel declaration and is not claimed to be proven).
+    MISSING: GAPMAP claim refers to a declaration that cannot be found in kernel
+      declarations (e.g. C59 referencing Spike_M5.strongTruthExists).
+    """
+    found = [c for c in all_claims if c.get("_full") and c["_full"] in decls]
+    missing = [c for c in all_claims if not (c.get("_full") and c["_full"] in decls)
+               and _clean_status((c.get("status") or "").strip()) in ("PROVEN", "PROVEN↑")]
+    retired_blocked = [c for c in all_claims if c not in found and c not in missing]
+    return {
+        "FOUND": found,
+        "RETIRED_BLOCKED": retired_blocked,
+        "MISSING": missing,
+    }
+
+
+def compute_detailed_badges(all_claims: list[dict], decls: dict, node_map: dict) -> dict[str, str]:
+    """Compute the displayed status badge for each claim as emitted in DEDUCTION.md."""
+    already_seen = {}
+    detailed_badges = {}
+    for c in all_claims:
+        full = c.get("_full")
+        if full and full in decls:
+            if full in already_seen:
+                detailed_badges[c["id"]] = "→"
+            else:
+                already_seen[full] = c["id"]
+                detailed_badges[c["id"]] = badge_for(c, decls, node_map)
+        else:
+            detailed_badges[c["id"]] = badge_for(c, decls, node_map)
+    return detailed_badges
+
+
+def verify_gloss_relations(all_claims: list[dict], decls: dict, graph: dict):
+    """Ensure that prose glosses do not claim relations (like active loving)
+    unless that relation actually occurs in the formal statement or kernel dependencies."""
+    errors = []
+    love_relation_re = re.compile(r"\b(?:someone who loves|loves\s+[a-z]|loving\b)", re.IGNORECASE)
+
+    for c in all_claims:
+        gloss = c.get("_gloss") or ""
+        full = c.get("_full")
+        if not gloss:
+            continue
+
+        if love_relation_re.search(gloss):
+            has_love = False
+            if full and full in decls:
+                stmt = decls[full].get("statement", "")
+                if "Loves" in stmt or "love_" in full or "Love." in full:
+                    has_love = True
+                else:
+                    for dep in graph.get("in", {}).get(full, ()):
+                        if "Love." in dep or "Loves" in dep:
+                            has_love = True
+                            break
+            if not has_love:
+                errors.append(
+                    f"Claim {c['id']} gloss describes love relation ('{gloss}') "
+                    f"but declaration '{full}' does not contain Loves relation in statement or dependencies."
+                )
+
+    if errors:
+        raise AssertionError("Gloss relation consistency verification failed:\n" + "\n".join(errors))
+
+
 def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_info, glosses):
     L = []
     ap = L.append
     ap("## Relatório de consistência (kernel ↔ GAPMAP)")
     ap("")
     all_claims = [c for s in sections for c in s["claims"]]
-    ap(f"- Claims do GAPMAP com teorema localizado no kernel: "
-       f"**{len([c for c in all_claims if c.get('_full')])}** / {len(all_claims)}")
+
+    # 3-way claim classification
+    claims_class = classify_claims(all_claims, decls, node_map)
+    found_claims = claims_class["FOUND"]
+    retired_blocked = claims_class["RETIRED_BLOCKED"]
+    missing_claims = claims_class["MISSING"]
+
+    ap(f"- Claims do GAPMAP com teorema localizado no kernel (FOUND): "
+       f"**{len(found_claims)}** / {len(all_claims)}")
     glossed = [c for c in all_claims if c.get("_gloss")]
     ap(f"- Steps com **significado em inglês**: **{len(glossed)}** / {len(all_claims)}"
        + ("" if len(glossed) == len(all_claims)
           else f" · **sem gloss:** {', '.join(c['id'] for c in all_claims if not c.get('_gloss'))}"))
-    unresolved = [c for c in all_claims if c.get("lean_ref") and not c.get("_full")]
-    if unresolved:
-        ap("- **Claims sem teorema localizado** (sem dedução no kernel do mapa):")
-        for c in unresolved:
+
+    if missing_claims:
+        ap(f"- **Claims com teorema em falta (MISSING — teorema referenciado não localizado no kernel) ({len(missing_claims)}):**")
+        for c in missing_claims:
             ap(f"  - `{c['id']}` ref `{c['lean_ref']}` — {c['prose']}")
+
+    if retired_blocked:
+        ap(f"- **Claims retirados / bloqueados (RETIRED/BLOCKED — fora da dedução ativa) ({len(retired_blocked)}):**")
+        for c in retired_blocked:
+            ap(f"  - `{c['id']}` (`{c['status']}`) ref `{c['lean_ref'] or '—'}` — {c['prose']}")
+
     kern_theorems = {f for f, n in decls.items() if n["kind"] in ("theorem", "example")}
     covered = {c.get("_full") for c in all_claims if c.get("_full")}
     missing = sorted(f for f in kern_theorems - covered if f in node_map)
@@ -904,15 +990,38 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
            + ", ".join(f.replace("Logos.", "") for f in missing))
     else:
         ap("- Todos os teoremas do kernel têm claim (ou ref mapeada).")
-    # --- derived status -----------------------------------------------------
-    kern_claims = [c for c in all_claims if c.get("_full")]
-    steps = [c for c in kern_claims if derived_for(c, node_map)]
+
+    # --- detailed claims accounting & reconciliation assertion ----------------
+    detailed_badges = compute_detailed_badges(all_claims, decls, node_map)
+    cnt_prov = sum(1 for b in detailed_badges.values() if b == "✔")
+    cnt_up = sum(1 for b in detailed_badges.values() if b == "⚠")
+    cnt_ax = sum(1 for b in detailed_badges.values() if b == "◆")
+    cnt_repeat = sum(1 for b in detailed_badges.values() if b == "→")
+    cnt_blocked = sum(1 for b in detailed_badges.values() if b == "✖")
+    cnt_deferred = sum(1 for b in detailed_badges.values() if b == "➖")
+    cnt_other = sum(1 for b in detailed_badges.values() if b not in ("✔", "⚠", "◆", "→", "✖", "➖"))
+
+    # Reconcile assertion
+    total_detailed = cnt_prov + cnt_up + cnt_ax + cnt_repeat + cnt_blocked + cnt_deferred + cnt_other
+    assert total_detailed == len(all_claims), (
+        f"Reconciliation error: detailed claims ({total_detailed}) != total claims ({len(all_claims)})"
+    )
+
+    steps = [c for c in found_claims if derived_for(c, node_map)]
     derived = [derived_for(c, node_map) for c in steps]
-    n_prov = sum(1 for d in derived if d == "PROVEN")
-    n_up = sum(1 for d in derived if d == "PROVEN↑")
-    n_ax = sum(1 for d in derived if d == "AXIOM")
+    n_prov_decl = sum(1 for d in derived if d == "PROVEN")
+    n_up_decl = sum(1 for d in derived if d == "PROVEN↑")
+    n_ax_decl = sum(1 for d in derived if d == "AXIOM")
+
     ap(f"- **Estatuto derivado do kernel** (#print axioms + `Tag:` dos axiomas): "
-       f"**{n_prov} ✔** · **{n_up} ⚠** · **{n_ax} ◆**")
+       f"**{cnt_prov} ✔** · **{cnt_up} ⚠** · **{cnt_ax} ◆** (passos únicos detalhados no mapa)")
+    ap(f"- **Inventário reconciliado de claims ({len(all_claims)} no total):** "
+       f"{cnt_prov + cnt_up} passos únicos ativos ({cnt_prov} ✔ + {cnt_up} ⚠) · "
+       f"{cnt_repeat} repetidos / dissolvidos (→) · "
+       f"{cnt_blocked} bloqueados / em falta (✖) · "
+       f"{cnt_deferred} diferidos (➖)"
+       + (f" · {cnt_other} outros ({', '.join(b for b in detailed_badges.values() if b not in ('✔', '⚠', '◆', '→', '✖', '➖'))})" if cnt_other else ""))
+
     status_div = []
     for c in steps:
         st = _clean_status((c.get("status") or "").strip())
@@ -926,6 +1035,7 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
             ap(f"  - `{cid}` GAPMAP `{st}` vs derivado `{dv}`")
     else:
         ap("- Estatuto GAPMAP × derivado: **sem divergências** (transcrição verificada).")
+
     # --- footprint transcription check -------------------------------------
     subst_claims = [c for c in steps if derived_for(c, node_map) == "PROVEN↑"]
     if subst_claims:
@@ -933,9 +1043,8 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
            f"({len(subst_claims)}): " + ", ".join(sorted(c["id"] for c in subst_claims)))
     vocab_only = [c for c in steps if is_vocab_only(c["_full"])]
     if vocab_only:
-        ap(f"- **Exibidos ✔ por só-vocabulário** (pegada do kernel só com os "
-           f"vocábulos do próprio enunciado — SEM/META nenhum; em C15/C60 a "
-           f"negação refuta-se por definição, RAA): "
+        ap(f"- **Exibidos ✔ por só-vocabulário (axiom-free módulo vocabulário declarado)** "
+           f"(pegada do kernel só com vocábulos VOCAB do próprio enunciado — SEM/META/TRANS nenhum): "
            f"{', '.join(sorted(c['id'] for c in vocab_only))}")
     ax_vocab = sorted(_REGISTRY)
     divs = []
@@ -969,7 +1078,7 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
         ap("- Pegada kernel × GAPMAP: **sem divergências**.")
     # --- tool fidelity: depviz closure vs audit ------------------------------
     fid = []
-    for c in kern_claims:
+    for c in found_claims:
         full = c["_full"]
         au = {a for a in audit_footprint(full) if a.startswith("Logos.")}
         cl = _closure_axioms(full, graph, node_map)
@@ -1147,10 +1256,14 @@ def badge_for(c: dict, decls: dict, node_map: dict) -> str:
     (node kind + audited axiom set + declared axiom tags). Curator cross-refs
     (deferred/blocked/faith/dissolved rows, and claims with no kernel node)
     have no deduction to analyze and keep their curated marker."""
-    if derived_for(c, node_map) is None:
-        st = (c.get("status") or "").strip()
-        return STATUS_BADGE.get(st, st or "?")
-    return STATUS_BADGE[derived_for(c, node_map)]
+    dv = derived_for(c, node_map)
+    if dv is not None:
+        return STATUS_BADGE[dv]
+    st = _clean_status((c.get("status") or "").strip())
+    if st in ("PROVEN", "PROVEN↑"):
+        # Unresolved claim claimed to be proven -> MISSING from kernel
+        return STATUS_BADGE["BLOCKED"]  # "✖"
+    return STATUS_BADGE.get(st, st or "?")
 
 
 def build_ax_id(sections, node_map):
@@ -1511,6 +1624,9 @@ def main():
     fp_by_id = {c["id"]: (c.get("footprint") or "") for c in all_claims}
     for c in all_claims:
         c["_curated_fp"] = expand_footprint(c["id"], fp_by_id)
+
+    print("verifying gloss relation consistency…")
+    verify_gloss_relations(all_claims, decls, graph)
 
     print("rendering DEDUCTION.md…")
     lines = []

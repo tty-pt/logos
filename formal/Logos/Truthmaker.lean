@@ -30,7 +30,7 @@ import Logos.Agency
 
 namespace Logos.Truthmaker
 
-open Logos.Semantics (Form World)
+open Logos.Semantics (Form World Satisfies)
 open Logos.Agency (Subject)
 
 /-- Grounding entities (truthmakers). World-rigid: what an entity *grounds*
@@ -63,64 +63,52 @@ def ExistsAt (w : World) : Entity → Prop
   | Entity.ofSubject _ => True
   | Entity.ofAtom n => w n = Logos.Semantics.TV.t
 
-/-- Truth as truthmaking, structurally defined (A2, 2026-09-16): an atom is
-    true in `w` iff some entity grounding it exists there; the connectives are
-    Tarskian-compositional by definition. The former axioms AxOr/AxAnd/AxNot
-    became `Iff.rfl` theorems of this definition. -/
-def TrueAt (w : World) : Form → Prop
-  | Form.atom n => ∃ e : Entity, ExistsAt w e ∧ Ground e (Form.atom n)
-  | Form.not φ   => ¬ TrueAt w φ
-  | Form.and φ ψ => TrueAt w φ ∧ TrueAt w ψ
-  | Form.or φ ψ  => TrueAt w φ ∨ TrueAt w ψ
-  | Form.imp φ ψ => TrueAt w φ → TrueAt w ψ
+/-- Truth at a world, defined by standard Tarskian semantic satisfaction,
+    independent of existential grounding (2026-09-17). -/
+def TrueAt (w : World) (φ : Form) : Prop := Satisfies w φ
 
-/-- Necessarily true: made true in every world. -/
+/-- Necessarily true: satisfied in every world. -/
 def NecessarilyTrue (φ : Form) : Prop := ∀ w : World, TrueAt w φ
 
-/-- Necessarily false: made true in no world. -/
+/-- Necessarily false: satisfied in no world. -/
 def NecessarilyFalse (φ : Form) : Prop := ∀ w : World, ¬ TrueAt w φ
+
+/--Tag: SEM
+The truthmaker principle: truth is grounded in reality.
+
+ If a formula is satisfied at world `w`, there is some entity `e` existing in `w` that grounds it.
+ This is a substantive semantic bridge (`Tag: SEM`), not a definitional collapse. -/
+axiom Truthmaker : ∀ (w : World) (φ : Form),
+  Satisfies w φ → ∃ e : Entity, ExistsAt w e ∧ Ground e φ
 
 /--Every atomic truth is grounded: where an atom is true, an entity exists there that grounds it.
 
- §24a — the truth-maker principle, atom-restricted (A2): the truth of an
-    atom in any world entails a grounder existing there. (The former
-    formula-level `groundPrinciple` is deliberately dropped: composite truth
-    is compositional and carries no existential grounding claim — see
-    DETAILS.md §6.1/§6.3.) The proof needs no substantive axiom: it is a
-    definitional collapse — `TrueAt w (atom n)` *is* the existential
-    ground-clause, so the principle is `P → P`; denying it refutes itself
-    (`noGround_selfRefutes` below, GAPMAP.md C60). -/
+ §24a — the truth-maker principle, atom-restricted.
+    Derived under the substantive semantic bridge `Truthmaker`. -/
 theorem groundPrinciple_atom (w : World) (n : Nat) :
-    TrueAt w (Form.atom n) → ∃ e : Entity, ExistsAt w e ∧ Ground e (Form.atom n) := by
-  intro ht
-  change ∃ e : Entity, ExistsAt w e ∧ Ground e (Form.atom n) at ht
-  exact ht
+    TrueAt w (Form.atom n) → ∃ e : Entity, ExistsAt w e ∧ Ground e (Form.atom n) :=
+  Truthmaker w (Form.atom n)
 
-/--The denial that atomic truth is grounded refutes itself: where an atom is true, no world lacks a grounder for it.
+/--The denial that atomic truth is grounded refutes itself under the Truthmaker bridge.
 
- §24a — RAA form of the truth-maker principle. Unfolding `TrueAt w (atom n)`,
-    the denial is `(∃e, ExistsAt w e ∧ Ground e (atom n)) ∧ ¬(∃e, …)` — a
-    contradiction by definition. No substantive axiom: the kernel footprint is
-    only the vocabulary constants the statement itself mentions (GAPMAP.md
-    C60 / C15 justification). -/
+ §24a — RAA form of the truth-maker principle. -/
 theorem noGround_selfRefutes :
     ¬ (∃ (w : World) (n : Nat), TrueAt w (Form.atom n) ∧
         ¬ (∃ e : Entity, ExistsAt w e ∧ Ground e (Form.atom n))) := by
   rintro ⟨w, n, ht, hn⟩
-  change ∃ e : Entity, ExistsAt w e ∧ Ground e (Form.atom n) at ht
-  exact hn ht
+  exact hn (Truthmaker w (Form.atom n) ht)
 
--- Truthmaker clauses for the connectives (definitional; former SEM axioms AxOr/AxAnd/AxNot, demoted to theorems by A2).
+-- Truthmaker clauses for the connectives (definitional via Semantics.Satisfies).
 
-/-- truthmaker clause for disjunction (former axiom AxOr; now proved). -/
+/-- truthmaker clause for disjunction. -/
 theorem sat_ground_or {w : World} {φ ψ : Form} :
     TrueAt w (Form.or φ ψ) ↔ TrueAt w φ ∨ TrueAt w ψ := Iff.rfl
 
-/-- truthmaker clause for conjunction (former axiom AxAnd; now proved). -/
+/-- truthmaker clause for conjunction. -/
 theorem sat_ground_and {w : World} {φ ψ : Form} :
     TrueAt w (Form.and φ ψ) ↔ TrueAt w φ ∧ TrueAt w ψ := Iff.rfl
 
-/-- truthmaker clause for negation (former axiom AxNot; now proved). -/
+/-- truthmaker clause for negation. -/
 theorem sat_ground_not {w : World} {φ : Form} :
     TrueAt w (Form.not φ) ↔ ¬ TrueAt w φ := Iff.rfl
 
@@ -142,8 +130,8 @@ theorem lawExcludedMiddle (φ : Form) : NecessarilyTrue (Form.or φ (Form.not φ
     PROVEN (A2). -/
 theorem nonContradiction (φ : Form) : NecessarilyFalse (Form.and φ (Form.not φ)) := by
   intro w
-  intro h
-  exact h.2 h.1
+  rintro ⟨h1, h2⟩
+  exact h2 h1
 
 end Logos.Truthmaker
 

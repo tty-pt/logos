@@ -133,21 +133,28 @@ def FreeWill (s : Subject) (p : Prop) : Prop :=
 
 /--There is a field of choice: some person with two incompatible alternatives.
 
- T11 — the minimal field of rational choice is non-empty for a person:
-    a person exists (T5) and two incompatible contents exist (T9). The act
-    of choosing among them (§14) is thereby *representable*; the modal
-    possibility of each choice (FreeWill) is F1. -/
-theorem T11_choiceField :
+  T11 (C39) — the minimal field of rational choice is non-empty for a person:
+    derived from an intentional act datum (C68 → C24 → C39).
+    Footprint: `{Means, Subject}` (VOCAB only; decoupled from AxTwoSubjects). -/
+theorem T11_choiceField (h : ∃ s : Subject, ∃ p : Prop, A s p) :
     ∃ s : Subject, Person s ∧ ∃ p q : Prop, Incompatible p q := by
-  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists
+  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists h
+  obtain ⟨p, q, hpq, _⟩ := Logos.Alternatives.T9_incompatibleAlternatives
+  exact ⟨s, hs, p, q, hpq⟩
+
+/-- Plurality form of T11: choice field derived from demonstrated plurality under AxTwoSubjects. -/
+theorem T11_choiceField_from_plurality :
+    ∃ s : Subject, Person s ∧ ∃ p q : Prop, Incompatible p q := by
+  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists_from_plurality
   obtain ⟨p, q, hpq, _⟩ := Logos.Alternatives.T9_incompatibleAlternatives
   exact ⟨s, hs, p, q, hpq⟩
 
 /--Any person chooses: a person always has two incompatible alternatives to choose between.
 
- A person cannot exist without choice: each person (meaning-subject)
-    chooses its content against its own negation. Kernel-checked — the
-    chain's "subject ⇒ choice" (IM_STUPID.md), previously mislabeled a gap. -/
+  Audit notice: This theorem is CONSTITUTIVE of the ontology's definition of `Chooses`
+    (`Chooses s p q := Means s p ∧ ¬(p ∧ q)`), where intentional meaning of `p` against
+    its own logical negation `¬p` is defined as a minimal choice. It does NOT derive
+    libertarian free will (which remains blocked by `CountermodelNoFreeWill`). -/
 theorem person_chooses {s : Subject} (hs : Person s) : ∃ p q : Prop, Chooses s p q := by
   obtain ⟨_hAg, _hRa, hIn⟩ := hs
   obtain ⟨p, hmp⟩ := hIn
@@ -155,156 +162,82 @@ theorem person_chooses {s : Subject} (hs : Person s) : ∃ p q : Prop, Chooses s
 
 /--Choice exists: some subject chooses between two incompatible alternatives.
 
- Choice is real: some subject chooses some content over some incompatible
-    alternative (from T5 — a person exists). -/
-theorem choiceExists : ∃ s : Subject, ∃ p q : Prop, Chooses s p q := by
-  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists
+  C52 — Choice is real: derived from an intentional act datum (C68 → C52).
+    Footprint: `{Means, Subject}` (VOCAB only). -/
+theorem choiceExists (h : ∃ s : Subject, ∃ p : Prop, A s p) :
+    ∃ s : Subject, ∃ p q : Prop, Chooses s p q := by
+  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists h
   obtain ⟨p, q, hch⟩ := person_chooses hs
   exact ⟨s, p, q, hch⟩
 
-/--Denying choice refutes itself: the denial is itself a choice.
+/-- Choice exists, derived from demonstrated plurality under AxTwoSubjects. -/
+theorem choiceExists_from_plurality : ∃ s : Subject, ∃ p q : Prop, Chooses s p q := by
+  obtain ⟨s₁, _, hp₁, _, _⟩ := Logos.Plurality.T12_twoPersons
+  obtain ⟨p, q, hch⟩ := person_chooses hp₁
+  exact ⟨s₁, p, q, hch⟩
 
- Denying choice refutes itself: the denial is itself an act, and any act
-    is a choice — so `¬(∃s p q, Chooses s p q)` implies `False`, exactly as
-    N_T and ¬cogito refute themselves. -/
-theorem noChoice_selfRefutes : (¬ ∃ s : Subject, ∃ p q : Prop, Chooses s p q) → False := by
-  intro h
-  exact h choiceExists
+/-- Radical nihilist thesis regarding choice: no choice occurs. -/
+def NoChoice : Prop := ¬ ∃ s : Subject, ∃ p q : Prop, Chooses s p q
+
+/-- Denying choice is itself an act of choice:
+    asserting NoChoice chooses NoChoice against its own logical negation. -/
+theorem asserting_no_choice_is_choice (speaker : Subject)
+    (h : Logos.Agency.Asserts speaker NoChoice) :
+    ∃ s : Subject, ∃ p q : Prop, Chooses s p q :=
+  ⟨speaker, NoChoice, ¬ NoChoice, h.1, incompatible_self_negation NoChoice⟩
+
+/-- C53: Genuine performative retorsion — asserting that no choice exists refutes itself.
+    The performance of the assertion chooses NoChoice over ¬NoChoice.
+    Footprint: `{Means, Subject}` (VOCAB only; zero AxTwoSubjects). -/
+theorem noChoice_selfRefutes (speaker : Subject)
+    (h : Logos.Agency.Asserts speaker NoChoice) : False :=
+  h.2 (asserting_no_choice_is_choice speaker h)
+
+/-- Static contradiction with an established choice witness (honest restatement of former C53). -/
+theorem noChoice_contradicts_choice
+    (hChoice : ∃ s : Subject, ∃ p q : Prop, Chooses s p q) (hNo : NoChoice) : False :=
+  hNo hChoice
 
 /--Right-and-wrong commits a chooser: where there is truth and error, someone has chosen.
 
- "No right and wrong without choice" (right/wrong ⇒ choice): whenever the
-    distinction holds, some choosing subject exists. Under F1a this is a
-    theorem (choice exists already from the act-datum), not a priced bridge. -/
-theorem JUDGE_COMMITTED :
-    (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) → ∃ s : Subject, ∃ p q : Prop, Chooses s p q :=
-  fun _ => choiceExists
+  C54: "No right and wrong without choice" (right/wrong ⇒ choice): whenever the
+    distinction holds, some choosing subject exists via AxTwoSubjects (poem P5).
+    Operative derivation passing `h` to `AxTwoSubjects h`. -/
+theorem JUDGE_COMMITTED (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
+    ∃ s : Subject, ∃ p q : Prop, Chooses s p q := by
+  obtain ⟨s₁, _, hp₁, _, _⟩ := Logos.Value.AxTwoSubjects h
+  obtain ⟨p, q, hch⟩ := person_chooses hp₁
+  exact ⟨s₁, p, q, hch⟩
+
+/-- Performative judgment commits a chooser: asserting right-and-wrong is an act of choice. -/
+theorem judge_asserting_rightWrong_commits_chooser (speaker : Subject)
+    (h : Logos.Agency.Asserts speaker (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F)) :
+    ∃ s : Subject, ∃ p q : Prop, Chooses s p q :=
+  ⟨speaker, (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F), ¬ (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F),
+   h.1, incompatible_self_negation _⟩
 
 /--Right-and-wrong implies someone who means (poem P3, line 18 "há certo e há
  errado → há significado → há alguém para quem algo significar").
 
- `JUDGE_COMMITTED` (C54) composes with `rightWrongDistinction` (C36,
-    axiom-free — "há certo e há errado" is PROVEN) to yield a chooser; every
-    choice is a meaning-act (`Chooses` unfolds to `A s p`; Tier-1 collapse
-    `A := Means`), so some subject means some content. Footprint `{}` —
-    the act-datum is now the exhibited theorem `Agency.Cogito`
-    (definitional subject, 2026-09-17), which the "há certo e há errado"
-    premises already embody performatively. The shorter analytic half
-    ("significado → sujeito") is `meaning_needs_subject` (C49, vocab-only). -/
-theorem rightWrong_implies_someone_means :
-    (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) → ∃ s : Subject, ∃ p : Prop, Means s p := by
-  intro h
-  obtain ⟨s, p, q, hch⟩ := JUDGE_COMMITTED h
+ C61: `JUDGE_COMMITTED` (C54) composes with `rightWrongDistinction` (C36)
+    to yield a chooser; every choice is a meaning-act (`Chooses` unfolds to `A s p`),
+    so some subject means some content. -/
+theorem rightWrong_implies_someone_means (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
+    ∃ s : Subject, ∃ p : Prop, Means s p := by
+  obtain ⟨s, p, _, hch⟩ := JUDGE_COMMITTED h
   exact ⟨s, p, hch.1⟩
 
-/--Denying 'a subject exists' refutes itself: the denial is itself an act.
+/-- C57: Retorsion — asserting that no actual subject exists refutes itself.
+    Delegated to Agency's genuine performative retorsion. Footprint: `{Means, Subject}`. -/
+theorem noSubject_selfRefutes (speaker : Subject)
+    (h : Logos.Agency.Asserts speaker Logos.Agency.NoSubject) : False :=
+  Logos.Agency.noSubject_performative_selfRefutes speaker h
 
- Denying that a subject exists refutes itself: the denial is itself an
-    act/choice of a subject — and `choiceExists` (every act is a choice,
-    every choice has a subject, `Chooses` holds at a meaning-act `A s p`)
-    supplies the resident witness. Formal record of §26 "não existe sujeito
-    do ato presente". Footprint `{}` — the refutation needs the act-datum
-    resident in the theory, now the exhibited theorem `Agency.Cogito`
-    (definitional subject, 2026-09-17); the pure-logical shell of a bare
-    sort (empty model) is consistent, so the denial is refutable only given
-    the exhibited act. -/
-theorem noSubject_selfRefutes : (¬ ∃ _s : Subject, True) → False := by
-  intro h
-  obtain ⟨s, _⟩ := choiceExists
-  exact h ⟨s, True.intro⟩
-
--- ---------------------------------------------------------------------------
--- F1b — the freedom split (2026-09-17): the paradox resolved
---   "could not have chosen otherwise" cannot be asserted of the performer.
--- ---------------------------------------------------------------------------
-
-/-- The silent origin means every content: `Means (inl ()) p` for every `p`
-    (witness `⟨p, p, rfl⟩` — the origin initiates a movement positing `p`). -/
-private theorem means_origin (p : Prop) : Means (Sum.inl ()) p :=
-  ⟨p, p, rfl⟩
-
-/-- A posited content means only itself: `Means (inr q) p` requires `q = p`. -/
-private theorem means_posited_is_self (q p : Prop) (hm : Means (Sum.inr q) p) : q = p := by
-  unfold Means at hm
-  obtain ⟨w, w', hww⟩ := hm
-  exact hww.1
-
-/-- The origin can choose `p`: `CanChoose (inl ()) p` holds constructively —
-    the origin's choice of `p` against `¬p` is real, witnessed by the
-    meaning-act; `CanChoose` reduces to `¬∀w ¬⋯`, refuted at `someWorld`.
-    Not via `canChoose_unfold` (which would cost `CL`). -/
-private theorem canChoose_origin (p : Prop) : CanChoose (Sum.inl ()) p := by
-  unfold CanChoose Dia
-  intro hnec
-  exact hnec someWorld ⟨¬ p, ⟨means_origin p, incompatible_self_negation p⟩⟩
-
-/--The silent origin always could have chosen otherwise: it can choose p and can choose ¬p.
-
-  `FreeWill (inl ()) p` for every `p`, kernel-checked, footprint `{}`.
-    The freedom paradox-resolution (2026-09-17): the act's own subject — the
-    origin, the `T5_personExists`/`Cogito` witness that `JUDGE_COMMITTED`
-    commits to right-and-wrong — can both choose `p` and choose its
-    negation. "Could not have chosen otherwise" is therefore false of the
-    performer. GAPMAP F1b-weak. -/
-theorem freeWillOrigin (p : Prop) : FreeWill (Sum.inl ()) p :=
-  ⟨canChoose_origin p, canChoose_origin (¬ p)⟩
-
-/-- A posited content that can choose `p` must be `p` itself (the only
-    content `inr q` ever means). Double negation: `CL`. -/
-private theorem canChoose_posited_is_self (q p : Prop) :
-    CanChoose (Sum.inr q) p → q = p := by
-  intro hc
-  apply Classical.byContradiction
-  intro hne
-  unfold CanChoose Dia at hc
-  exact hc (fun w hx => by
-    obtain ⟨q', hch⟩ := hx
-    exact hne (means_posited_is_self q p hch.1))
-
-/--A posited content cannot choose otherwise: `¬ FreeWill (Sum.inr q) p` for every `p`.
-
-  The self-posited contents are provably NOT free — `inr q` can only mean
-    `q` itself (`Means (inr q) p` iff `q = p`), so both-ways capacity would
-    force `q = p ∧ q = ¬p`, impossible (`p ≠ ¬p`). Footprint `CL` (double
-    negation on the `CanChoose → q = p` extraction). Not a paradox: these
-    subjects are never the judge that right-and-wrong commits (that witness
-    is the free origin) — exactly why "a subject that could not have chosen
-    otherwise" never contradicts the undeniable right/wrong. GAPMAP F1b-weak. -/
-theorem noFreeWillPosited (q p : Prop) : ¬ FreeWill (Sum.inr q) p := by
-  intro hFW
-  have hsf : q = p := canChoose_posited_is_self q p hFW.1
-  have hsc : q = ¬ p := canChoose_posited_is_self q (¬ p) hFW.2
-  have hpneg : p = ¬ p := hsf.symm.trans hsc
-  have hiff : p ↔ ¬ p := by
-    constructor
-    · intro hp
-      exact hpneg ▸ hp
-    · intro hnp
-      exact hpneg.symm ▸ hnp
-  have hnp : ¬ p := fun hp => (hiff.mp hp) hp
-  have hp : p := hiff.mpr hnp
-  exact (hiff.mp hp) hp
-
-/--Denying that you could have chosen otherwise refutes itself: the denial is an act of the free origin.
-
-  `¬ FreeWill (inl ()) p → False`, kernel-checked `{}` from `freeWillOrigin`.
-    The agent that asserts "I could not have chosen otherwise" is the origin
-    of the present act — the cogito witness — and its assertion is itself a
-    both-ways capacity the denial disowns. This dissolves the freedom
-    paradox: the determinist alternative cannot be asserted performatively.
-    GAPMAP F1b-weak. -/
-theorem originFreedomSelfRefutes (p : Prop) : (¬ FreeWill (Sum.inl ()) p) → False := by
-  intro h
-  exact h (freeWillOrigin p)
-
-/--The chooser that right-and-wrong commits is free: some person can choose both ways.
-
-  `JUDGE_COMMITTED`'s judge is the origin (`T5_personExists`'s witness is
-    `inl ()`), and the origin is free (`freeWillOrigin`) — so choice-in-the-
-    freedom-sense exists for the very subject the undeniable right/wrong
-    commits. Kernel-checked, footprint `{}`. GAPMAP F1b-weak. -/
-theorem judgeIsFree : ∃ s : Subject, Person s ∧ ∃ p : Prop, FreeWill s p :=
-  ⟨Sum.inl (), ⟨trivial, trivial, ⟨True, means_origin True⟩⟩, True, freeWillOrigin True⟩
+/-- Static contradiction: NoSubject contradicts an established actual subject witness. -/
+theorem noSubject_contradicts_subject
+    (hSubj : ∃ s : Subject, Logos.Agency.SubjectExists s)
+    (hNo : Logos.Agency.NoSubject) : False :=
+  hNo hSubj
 
 end Logos.Choice
 
@@ -319,7 +252,3 @@ end Logos.Choice
 #print axioms Logos.Choice.noSubject_selfRefutes
 #print axioms Logos.Choice.JUDGE_COMMITTED
 #print axioms Logos.Choice.rightWrong_implies_someone_means
-#print axioms Logos.Choice.freeWillOrigin
-#print axioms Logos.Choice.noFreeWillPosited
-#print axioms Logos.Choice.originFreedomSelfRefutes
-#print axioms Logos.Choice.judgeIsFree

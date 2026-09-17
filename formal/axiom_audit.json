@@ -1,51 +1,221 @@
 {
- "Logos.Agency.A": [],
- "Logos.Agency.Agent": [],
- "Logos.Agency.Cogito": [],
+ "Logos.Agency.A": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.Act": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.Agent": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.AnActualSubjectExists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.Asserts": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.Cogito": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Agency.Content": [],
- "Logos.Agency.Exists": [],
- "Logos.Agency.Initiates": [],
- "Logos.Agency.Means": [],
- "Logos.Agency.Rational": [],
- "Logos.Agency.State": [],
- "Logos.Agency.Subject": [],
+ "Logos.Agency.Exists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.Means": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.NoAct": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.NoSubject": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.NoSubjectSort": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.Rational": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.Subject": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.SubjectExists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.T1_subjectExists_of_act": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Agency.T2_contentExists": [],
- "Logos.Agency.act_implies_agent": [],
- "Logos.Agency.act_implies_content": [],
- "Logos.Agency.act_implies_exists": [],
- "Logos.Agency.act_implies_means": [],
- "Logos.Agency.act_implies_rational": [],
- "Logos.Agency.noCogito_selfRefutes": [],
+ "Logos.Agency.act_exists_of_assert": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.act_implies_agent": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.act_implies_content": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.act_implies_exists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.act_implies_means": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.act_implies_rational": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.act_of_asserting_no_act": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.act_requires_subject": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.an_actual_subject_exists_of_act": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.assertion_is_act": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.noCogito_selfRefutes": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.noSubjectSort_selfRefutes": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.noSubject_performative_selfRefutes": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.noSubject_selfRefutes": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.subject_exists_of_act": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.subject_exists_of_assert": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Alternatives.Incompatible": [],
  "Logos.Alternatives.T9_incompatibleAlternatives": [],
  "Logos.Alternatives.incompatible_with_negation": [],
- "Logos.Choice.CanChoose": [],
- "Logos.Choice.Chooses": [],
- "Logos.Choice.FreeWill": [],
- "Logos.Choice.JUDGE_COMMITTED": [],
- "Logos.Choice.Meaning_I": [],
- "Logos.Choice.T11_choiceField": [],
+ "Logos.Choice.CanChoose": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.Chooses": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.FreeWill": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.JUDGE_COMMITTED": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Choice.Meaning_I": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.NoChoice": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.T11_choiceField": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.T11_choiceField_from_plurality": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Choice.asserting_no_choice_is_choice": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Choice.canChoose_unfold": [
   "propext",
   "Classical.choice",
-  "Quot.sound"
+  "Quot.sound",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
  ],
- "Logos.Choice.choiceExists": [],
- "Logos.Choice.freeWillOrigin": [],
+ "Logos.Choice.choiceExists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.choiceExists_from_plurality": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
  "Logos.Choice.incompatible_self_negation": [],
- "Logos.Choice.judgeIsFree": [],
- "Logos.Choice.meaning_I_needs_subject": [],
- "Logos.Choice.meaning_needs_subject": [],
- "Logos.Choice.noChoice_selfRefutes": [],
- "Logos.Choice.noFreeWillPosited": [
-  "propext",
-  "Classical.choice",
-  "Quot.sound"
+ "Logos.Choice.judge_asserting_rightWrong_commits_chooser": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
  ],
- "Logos.Choice.noSubject_selfRefutes": [],
- "Logos.Choice.originFreedomSelfRefutes": [],
- "Logos.Choice.person_chooses": [],
- "Logos.Choice.rightWrong_implies_someone_means": [],
+ "Logos.Choice.meaning_I_needs_subject": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.meaning_needs_subject": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.noChoice_contradicts_choice": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.noChoice_selfRefutes": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.noSubject_contradicts_subject": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.noSubject_selfRefutes": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.person_chooses": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.rightWrong_implies_someone_means": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
  "Logos.Core.IsFalse": [],
  "Logos.Core.N_F": [],
  "Logos.Core.N_T": [],
@@ -84,134 +254,313 @@
  ],
  "Logos.Core.tschema": [],
  "Logos.GroundPerson.AxGroundBearing": [
+  "Logos.Agency.Subject",
   "Logos.GroundPerson.GroundProp"
  ],
  "Logos.GroundPerson.AxPersonalGround": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
   "Logos.GroundPerson.AxPersonalGround",
   "Logos.GroundPerson.GroundProp"
  ],
  "Logos.GroundPerson.GroundPrincipleProp": [
+  "Logos.Agency.Subject",
   "Logos.GroundPerson.GroundPrincipleProp",
   "Logos.GroundPerson.GroundProp"
  ],
  "Logos.GroundPerson.GroundProp": [
+  "Logos.Agency.Subject",
   "Logos.GroundPerson.GroundProp"
  ],
- "Logos.GroundPerson.IsInitiatingPersonalEntity": [],
- "Logos.GroundPerson.IsPresentPersonalFeature": [],
+ "Logos.GroundPerson.IsPresentPersonalFeature": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.GroundPerson.Personal": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
   "Logos.GroundPerson.GroundProp"
  ],
- "Logos.GroundPerson.PersonalUltimateGround": [],
  "Logos.GroundPerson.Realizes": [
+  "Logos.Agency.Subject",
   "Logos.GroundPerson.GroundProp"
  ],
- "Logos.GroundPerson.StandsInBenevolentLove": [],
  "Logos.GroundPerson.T8_personalGround": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
   "Logos.GroundPerson.AxPersonalGround",
   "Logos.GroundPerson.GroundProp"
  ],
- "Logos.GroundPerson.necessary_initiating_person_exists": [],
  "Logos.GroundPerson.necessary_truth_has_necessary_grounder": [
+  "Logos.Agency.Subject",
+  "Logos.Modal.AxGlobalGround",
   "Logos.Truthmaker.Ground"
  ],
- "Logos.GroundPerson.personal_ultimate_ground_exists": [],
  "Logos.GroundPerson.present_feature_is_grounded": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
   "Logos.GroundPerson.GroundPrincipleProp",
   "Logos.GroundPerson.GroundProp"
  ],
+ "Logos.HostileSemantics.ActOntology.Act": [],
+ "Logos.HostileSemantics.ActOntology.Entity": [],
+ "Logos.HostileSemantics.ActOntology.Person": [],
+ "Logos.HostileSemantics.ActOntology.Subject": [],
+ "Logos.HostileSemantics.ActOntology.casesOn": [],
+ "Logos.HostileSemantics.ActOntology.ctorIdx": [],
+ "Logos.HostileSemantics.ActOntology.mk.inj": [],
+ "Logos.HostileSemantics.ActOntology.mk.injEq": [
+  "propext"
+ ],
+ "Logos.HostileSemantics.ActOntology.mk.noConfusion": [],
+ "Logos.HostileSemantics.ActOntology.mk.sizeOf_spec": [],
+ "Logos.HostileSemantics.ActOntology.noConfusion": [],
+ "Logos.HostileSemantics.ActOntology.noConfusionType": [],
+ "Logos.HostileSemantics.ActOntology.recOn": [],
+ "Logos.HostileSemantics.CoreSignature.A": [],
+ "Logos.HostileSemantics.CoreSignature.Chooses": [],
+ "Logos.HostileSemantics.CoreSignature.FreeWill": [],
+ "Logos.HostileSemantics.CoreSignature.Means": [],
+ "Logos.HostileSemantics.CoreSignature.Person": [],
+ "Logos.HostileSemantics.CoreSignature.Subject": [],
+ "Logos.HostileSemantics.CoreSignature.casesOn": [],
+ "Logos.HostileSemantics.CoreSignature.ctorIdx": [],
+ "Logos.HostileSemantics.CoreSignature.mk.inj": [],
+ "Logos.HostileSemantics.CoreSignature.mk.injEq": [
+  "propext"
+ ],
+ "Logos.HostileSemantics.CoreSignature.mk.noConfusion": [],
+ "Logos.HostileSemantics.CoreSignature.mk.sizeOf_spec": [],
+ "Logos.HostileSemantics.CoreSignature.noConfusion": [],
+ "Logos.HostileSemantics.CoreSignature.noConfusionType": [],
+ "Logos.HostileSemantics.CoreSignature.recOn": [],
+ "Logos.HostileSemantics.CountermodelActWithoutSubject.Act": [],
+ "Logos.HostileSemantics.CountermodelActWithoutSubject.ConstitutiveAct": [],
+ "Logos.HostileSemantics.CountermodelActWithoutSubject.Entity": [],
+ "Logos.HostileSemantics.CountermodelActWithoutSubject.Person": [],
+ "Logos.HostileSemantics.CountermodelActWithoutSubject.Subject": [],
+ "Logos.HostileSemantics.CountermodelActWithoutSubject.act_occurs": [],
+ "Logos.HostileSemantics.CountermodelActWithoutSubject.act_without_subject": [],
+ "Logos.HostileSemantics.CountermodelActWithoutSubject.countermodel_violates_constitutive_act": [],
+ "Logos.HostileSemantics.CountermodelActWithoutSubject.no_person": [],
+ "Logos.HostileSemantics.CountermodelActWithoutSubject.no_subject": [],
+ "Logos.HostileSemantics.CountermodelActWithoutSubject.subject_of_constitutive_act": [],
+ "Logos.HostileSemantics.CountermodelImpersonalUltimateGround.Entity": [],
+ "Logos.HostileSemantics.CountermodelImpersonalUltimateGround.GroundEntity": [],
+ "Logos.HostileSemantics.CountermodelImpersonalUltimateGround.Personal": [],
+ "Logos.HostileSemantics.CountermodelImpersonalUltimateGround.UltimateGround": [],
+ "Logos.HostileSemantics.CountermodelImpersonalUltimateGround.no_personal_ultimate": [],
+ "Logos.HostileSemantics.CountermodelImpersonalUltimateGround.ultimate_exists": [],
+ "Logos.HostileSemantics.CountermodelImpersonalUltimateGround.ultimate_not_entails_personal": [],
+ "Logos.HostileSemantics.CountermodelInfiniteGroundChain.Entity": [],
+ "Logos.HostileSemantics.CountermodelInfiniteGroundChain.GroundEntity": [],
+ "Logos.HostileSemantics.CountermodelInfiniteGroundChain.UltimateGround": [],
+ "Logos.HostileSemantics.CountermodelInfiniteGroundChain.asymmetric": [
+  "propext"
+ ],
+ "Logos.HostileSemantics.CountermodelInfiniteGroundChain.infinite_chain_has_no_ultimate": [
+  "propext"
+ ],
+ "Logos.HostileSemantics.CountermodelInfiniteGroundChain.irreflexive": [
+  "propext"
+ ],
+ "Logos.HostileSemantics.CountermodelInfiniteGroundChain.no_ultimate": [
+  "propext"
+ ],
+ "Logos.HostileSemantics.CountermodelInfiniteGroundChain.transitive": [
+  "propext"
+ ],
+ "Logos.HostileSemantics.CountermodelNoFreeWill.A": [],
+ "Logos.HostileSemantics.CountermodelNoFreeWill.FreeWill": [],
+ "Logos.HostileSemantics.CountermodelNoFreeWill.S": [],
+ "Logos.HostileSemantics.CountermodelNoFreeWill.act_does_not_imply_freewill": [],
+ "Logos.HostileSemantics.CountermodelNoFreeWill.act_occurs": [],
+ "Logos.HostileSemantics.CountermodelNoFreeWill.no_free_will": [],
+ "Logos.HostileSemantics.CountermodelNoPerson.A": [],
+ "Logos.HostileSemantics.CountermodelNoPerson.Person": [],
+ "Logos.HostileSemantics.CountermodelNoPerson.S": [],
+ "Logos.HostileSemantics.CountermodelNoPerson.act_does_not_imply_person": [],
+ "Logos.HostileSemantics.CountermodelNoPerson.act_occurs": [],
+ "Logos.HostileSemantics.CountermodelNoPerson.no_person": [],
+ "Logos.HostileSemantics.CountermodelPluralityWithoutLove.Loves": [],
+ "Logos.HostileSemantics.CountermodelPluralityWithoutLove.Person": [],
+ "Logos.HostileSemantics.CountermodelPluralityWithoutLove.Subject": [],
+ "Logos.HostileSemantics.CountermodelPluralityWithoutLove.no_love": [],
+ "Logos.HostileSemantics.CountermodelPluralityWithoutLove.plurality_not_entails_love": [],
+ "Logos.HostileSemantics.CountermodelPluralityWithoutLove.two_persons_exist": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.Entity": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.EntityExistsAt": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.EntityOf": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessaryEntity": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessarySubject": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessityLift.Entity": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessityLift.EntityOf": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessityLift.NecessaryEntity": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessityLift.NecessarySubject": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessityLift.Subject": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessityLift.casesOn": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessityLift.ctorIdx": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessityLift.mk.inj": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessityLift.mk.injEq": [
+  "propext"
+ ],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessityLift.mk.noConfusion": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessityLift.mk.sizeOf_spec": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessityLift.noConfusion": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessityLift.noConfusionType": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.NecessityLift.recOn": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.Subject": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.SubjectExistsAt": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.World": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.necessary_subject_is_necessary": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.no_necessary_entity": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.not_holds_of_arbitrary_signature": [],
+ "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity.subject_necessity_not_entails_entity_necessity": [],
+ "Logos.HostileSemantics.CountermodelSubjectWithoutPerson.Act": [],
+ "Logos.HostileSemantics.CountermodelSubjectWithoutPerson.Entity": [],
+ "Logos.HostileSemantics.CountermodelSubjectWithoutPerson.Person": [],
+ "Logos.HostileSemantics.CountermodelSubjectWithoutPerson.Subject": [],
+ "Logos.HostileSemantics.CountermodelSubjectWithoutPerson.act_and_subject_without_person": [],
+ "Logos.HostileSemantics.CountermodelSubjectWithoutPerson.act_occurs": [],
+ "Logos.HostileSemantics.CountermodelSubjectWithoutPerson.constitutive_act_holds": [],
+ "Logos.HostileSemantics.CountermodelSubjectWithoutPerson.no_person": [],
+ "Logos.HostileSemantics.CountermodelSubjectWithoutPerson.subject_exists": [],
+ "Logos.HostileSemantics.CountermodelSubjectWithoutPerson.subject_without_person": [],
+ "Logos.HostileSemantics.CountermodelWorldwiseTruthmaking.Entity": [],
+ "Logos.HostileSemantics.CountermodelWorldwiseTruthmaking.ExistsAt": [],
+ "Logos.HostileSemantics.CountermodelWorldwiseTruthmaking.Ground": [],
+ "Logos.HostileSemantics.CountermodelWorldwiseTruthmaking.World": [],
+ "Logos.HostileSemantics.CountermodelWorldwiseTruthmaking.no_uniform_ground": [],
+ "Logos.HostileSemantics.CountermodelWorldwiseTruthmaking.worldwise_not_entails_uniform_ground": [],
+ "Logos.HostileSemantics.CountermodelWorldwiseTruthmaking.worldwise_truthmaking": [],
+ "Logos.HostileSemantics.FreeWillExistence": [],
+ "Logos.HostileSemantics.PersonExistence": [],
+ "Logos.HostileSemantics.PropositionalPersonhood.CountermodelContentWithoutPerson.Means": [],
+ "Logos.HostileSemantics.PropositionalPersonhood.CountermodelContentWithoutPerson.Person": [],
+ "Logos.HostileSemantics.PropositionalPersonhood.CountermodelContentWithoutPerson.S": [],
+ "Logos.HostileSemantics.PropositionalPersonhood.CountermodelContentWithoutPerson.content_does_not_imply_personhood": [],
+ "Logos.HostileSemantics.PropositionalPersonhood.CountermodelContentWithoutPerson.content_exists": [],
+ "Logos.HostileSemantics.PropositionalPersonhood.CountermodelContentWithoutPerson.every_content_meant": [],
+ "Logos.HostileSemantics.PropositionalPersonhood.CountermodelContentWithoutPerson.no_person": [],
+ "Logos.HostileSemantics.PropositionalPersonhood.TripartiteVerdict": [
+  "propext"
+ ],
+ "Logos.HostileSemantics.TwoPersons": [],
+ "Logos.HostileSemantics.UnitPluralityCountermodel.A": [],
+ "Logos.HostileSemantics.UnitPluralityCountermodel.Person": [],
+ "Logos.HostileSemantics.UnitPluralityCountermodel.S": [],
+ "Logos.HostileSemantics.UnitPluralityCountermodel.act_occurs": [],
+ "Logos.HostileSemantics.UnitPluralityCountermodel.agency_does_not_imply_plurality": [],
+ "Logos.HostileSemantics.UnitPluralityCountermodel.no_plurality": [],
+ "Logos.HostileSemantics.UnitPluralityCountermodel.person_exists": [],
+ "Logos.HostileSemantics.act_exists_of_act": [],
+ "Logos.HostileSemantics.not_entails_content_person": [],
+ "Logos.HostileSemantics.not_entails_freewill": [],
+ "Logos.HostileSemantics.not_entails_person": [],
+ "Logos.HostileSemantics.not_entails_plurality": [],
+ "Logos.HostileSemantics.subject_exists_of_act": [],
+ "Logos.HostileSemantics.Γ_act": [],
+ "Logos.HostileSemantics.Γ_means": [],
+ "Logos.HostileSemantics.Γ_person": [],
  "Logos.Initiation.Branches": [],
- "Logos.Initiation.Cogito_Init": [],
- "Logos.Initiation.InitiatingPerson": [],
  "Logos.Initiation.IsTransfer": [],
- "Logos.Initiation.Moves": [],
- "Logos.Initiation.Originates": [],
  "Logos.Initiation.branches_not_transfer": [],
- "Logos.Initiation.noInitiation_selfRefutes": [],
- "Logos.Initiation.no_content_is_initiating_person": [],
- "Logos.Initiation.origin_branches": [],
- "Logos.Initiation.origin_is_initiating_person": [],
- "Logos.Initiation.origin_not_transfer": [],
- "Logos.Initiation.originates_not_transfer": [],
- "Logos.Initiation.person_iff_originates": [],
- "Logos.Initiation.posited_is_transfer": [],
- "Logos.Initiation.posited_not_branch": [],
- "Logos.Initiation.posited_not_initiating_person": [],
- "Logos.Love.AxPersonStability": [],
- "Logos.Love.Lovable": [],
- "Logos.Love.Loves": [],
- "Logos.Love.T13_someoneLovable": [],
- "Logos.Love.T14_canonicalRigid": [],
- "Logos.Love.T14_content": [],
- "Logos.Love.T14_eternalRelation": [],
- "Logos.Love.T14_square": [],
- "Logos.Love.T14_world": [],
- "Logos.Love.canonicalNecessaryPerson": [],
- "Logos.Love.love_affects": [],
- "Logos.Love.love_helps": [],
- "Logos.Love.love_not_harms": [],
- "Logos.Love.loves_of_helps": [],
- "Logos.Love.necessaryPersonExists": [],
+ "Logos.Love.AxPersonStability": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Love.Lovable": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Love.Loves": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Love.T13_someoneLovable": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Love.T14_content": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Love.T14_eternalRelation": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Love.T14_square": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Love.T14_world": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Love.love_affects": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Love.love_helps": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Love.love_not_harms": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Love.loves_of_helps": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Love.necessaryPersonExists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Love.necessary_entity_exists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Modal.AxGlobalGround": [
+  "Logos.Agency.Subject",
+  "Logos.Modal.AxGlobalGround",
   "Logos.Truthmaker.Ground"
  ],
- "Logos.Modal.Contingent": [],
- "Logos.Modal.EntityInitiates": [],
- "Logos.Modal.EntityIsDerived": [],
- "Logos.Modal.EntityMeans": [],
- "Logos.Modal.GroundEntity": [],
- "Logos.Modal.GroundInitiation": [],
- "Logos.Modal.IsAtomEntity": [],
- "Logos.Modal.IsSubjectEntity": [],
- "Logos.Modal.NecessaryEntity": [],
+ "Logos.Modal.Contingent": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Modal.NecessaryEntity": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Modal.T7_excludedMiddleInstance": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Subject",
+  "Logos.Modal.AxGlobalGround",
+  "Logos.Truthmaker.Ground"
+ ],
  "Logos.Modal.T7_necessaryReality": [
+  "Logos.Agency.Subject",
+  "Logos.Modal.AxGlobalGround",
   "Logos.Truthmaker.Ground"
  ],
- "Logos.Modal.UltimateGround": [],
- "Logos.Modal.UltimateGroundInit": [],
  "Logos.Modal.actualWorld": [],
- "Logos.Modal.atom_is_derived": [],
- "Logos.Modal.contingent_atom": [],
- "Logos.Modal.contingent_entity_exists": [],
- "Logos.Modal.contingent_ground": [],
- "Logos.Modal.contingent_non_subject_exists": [],
- "Logos.Modal.emptyWorld": [],
- "Logos.Modal.emptyWorld_no_atom": [],
- "Logos.Modal.entity_in_emptyWorld_is_subject": [],
- "Logos.Modal.groundEntity_asymmetric": [],
- "Logos.Modal.groundEntity_irreflexive": [],
- "Logos.Modal.groundEntity_transitive": [],
- "Logos.Modal.groundInitiation_asymmetric": [],
- "Logos.Modal.groundInitiation_irreflexive": [],
- "Logos.Modal.groundInitiation_transitive": [],
- "Logos.Modal.ground_all_distinct_exists": [],
- "Logos.Modal.modal_rigidity_of_ground": [
-  "Logos.Truthmaker.Ground"
+ "Logos.Modal.necessary_entity_exists_of_necessary_subject": [
+  "Logos.Agency.Subject"
  ],
- "Logos.Modal.necessary_entity_exists": [],
  "Logos.Modal.noNecessaryTruthIfAllContingent": [
+  "Logos.Agency.Subject",
+  "Logos.Modal.AxGlobalGround",
   "Logos.Truthmaker.Ground"
  ],
- "Logos.Modal.not_subject_ofAtom": [],
- "Logos.Modal.origin_grounds_all_distinct": [],
- "Logos.Modal.origin_grounds_all_distinct_init": [],
- "Logos.Modal.origin_grounds_atom": [],
- "Logos.Modal.origin_grounds_posited": [],
- "Logos.Modal.origin_initiates": [],
- "Logos.Modal.origin_is_necessary": [],
- "Logos.Modal.origin_not_grounded": [],
- "Logos.Modal.origin_ungrounded": [],
- "Logos.Modal.origin_ungrounded_init": [],
- "Logos.Modal.posited_is_derived": [],
- "Logos.Modal.prop_neq_not": [],
- "Logos.Modal.subject_is_necessary": [],
- "Logos.Modal.substantive_grounding_witness": [],
- "Logos.Modal.transcendental_quantifier_swap": [
-  "Logos.Truthmaker.Ground"
+ "Logos.Modal.subject_nec_entity_nec": [
+  "Logos.Agency.Subject"
  ],
- "Logos.Modal.ultimateGroundInit_exists": [],
- "Logos.Modal.ultimateGround_exists": [],
- "Logos.Modal.ungrounded_necessary_entity_exists": [],
+ "Logos.Modal.subject_nec_entity_nec_iff": [
+  "Logos.Agency.Subject"
+ ],
  "Logos.Necessity.Dia": [],
  "Logos.Necessity.Necessity": [],
  "Logos.Necessity.NecessityPH": [],
@@ -228,60 +577,195 @@
  "Logos.Necessity.necTPH": [],
  "Logos.Necessity.nec_apply": [],
  "Logos.Necessity.someWorld": [],
- "Logos.Order.Correct": [],
- "Logos.Order.Fallible": [],
- "Logos.Order.Incorrect": [],
- "Logos.Order.NoAct": [],
- "Logos.Order.T6_fallibility": [],
- "Logos.Order.T6_truthTranscendsWill": [],
+ "Logos.Order.Correct": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Order.Fallible": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Order.Incorrect": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Order.NoAct": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Order.T6_fallibility": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Order.T6_truthTranscendsWill": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
  "Logos.Order.consequence_preserves_truth": [],
  "Logos.Order.correctness_distinct": [
   "propext",
   "Classical.choice",
-  "Quot.sound"
+  "Quot.sound",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
  ],
- "Logos.Order.fallible_false": [],
+ "Logos.Order.fallible_false": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
  "Logos.Order.judge_commits": [
   "propext",
   "Classical.choice",
-  "Quot.sound"
+  "Quot.sound",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
  ],
- "Logos.Order.judgment_implies_act": [],
- "Logos.Order.judgment_implies_cogito": [],
- "Logos.Order.judgment_of_no_act_is_incorrect": [],
- "Logos.Order.judgment_of_no_act_proves_act": [],
- "Logos.Order.no_correct_judgment_of_no_act": [],
- "Logos.Order.rightDistinctWrong_implies_meaning": [],
+ "Logos.Order.judgment_implies_act": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Order.judgment_implies_cogito": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Order.judgment_of_no_act_is_incorrect": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Order.judgment_of_no_act_proves_act": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Order.no_correct_judgment_of_no_act": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Order.rightDistinctWrong_implies_meaning": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Order.rightWrongDistinction_implies_meaning": [
   "propext",
   "Classical.choice",
-  "Quot.sound"
+  "Quot.sound",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
  ],
- "Logos.Order.rightWrong_implies_meaning": [],
+ "Logos.Order.rightWrong_implies_meaning": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Person.CarriesLogicalFeature": [],
- "Logos.Person.CarriesPersonalFeature": [],
+ "Logos.Person.CarriesPersonalFeature": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Person.HasFeature": [],
- "Logos.Person.Intentional": [],
- "Logos.Person.Person": [],
- "Logos.Person.RationalAct": [],
- "Logos.Person.contentOf": [],
- "Logos.Person.everyContentIsAPerson": [],
+ "Logos.Person.Intentional": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Person.Person": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Person.RationalAct": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Person.inseparability_24b": [
   "propext",
   "Classical.choice",
-  "Quot.sound"
+  "Quot.sound",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
  ],
- "Logos.Person.positedDistinct": [],
- "Logos.Person.twoPersonsFromSubject": [],
- "Logos.Plurality.EntityOf": [],
- "Logos.Plurality.NecessarySubject": [],
- "Logos.Plurality.T12_directedPair": [],
- "Logos.Plurality.T12_twoPersons": [],
- "Logos.Plurality.T1_subjectExists": [],
- "Logos.Plurality.T4_agentExists": [],
- "Logos.Plurality.T5_personExists": [],
- "Logos.Plurality.cogito_from_T12": [],
- "Logos.Plurality.notAlone": [],
+ "Logos.Person.person_exists_of_act": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Person.person_exists_of_assert": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Person.person_of_act": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Person.person_of_subject": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Plurality.EntityOf": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Plurality.NecessarySubject": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Plurality.T12_directedPair": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Plurality.T12_twoPersons": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Plurality.T1_of_assert": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Plurality.T1_subjectExists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Plurality.T1_subjectExists_from_plurality": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Plurality.T4_agentExists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Plurality.T4_agentExists_from_plurality": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Plurality.T4_of_assert": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Plurality.T5_of_assert": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Plurality.T5_personExists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Plurality.T5_personExists_from_plurality": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Plurality.cogito_from_T12": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Plurality.notAlone": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
  "Logos.Semantics.FalseAt": [],
  "Logos.Semantics.Form.and.elim": [],
  "Logos.Semantics.Form.and.inj": [],
@@ -371,83 +855,147 @@
  "Logos.Semantics.sat_imp": [],
  "Logos.Semantics.sat_not": [],
  "Logos.Semantics.sat_or": [],
- "Logos.Truthmaker.Entity.casesOn": [],
- "Logos.Truthmaker.Entity.ctorElim": [],
- "Logos.Truthmaker.Entity.ctorElimType": [],
- "Logos.Truthmaker.Entity.ctorIdx": [],
- "Logos.Truthmaker.Entity.noConfusion": [],
- "Logos.Truthmaker.Entity.noConfusionType": [],
- "Logos.Truthmaker.Entity.ofAtom.elim": [],
- "Logos.Truthmaker.Entity.ofAtom.inj": [],
+ "Logos.Truthmaker.Entity.casesOn": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Truthmaker.Entity.ctorElim": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Truthmaker.Entity.ctorElimType": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Truthmaker.Entity.ctorIdx": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Truthmaker.Entity.noConfusion": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Truthmaker.Entity.noConfusionType": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Truthmaker.Entity.ofAtom.elim": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Truthmaker.Entity.ofAtom.inj": [
+  "Logos.Agency.Subject"
+ ],
  "Logos.Truthmaker.Entity.ofAtom.injEq": [
-  "propext"
+  "propext",
+  "Logos.Agency.Subject"
  ],
- "Logos.Truthmaker.Entity.ofAtom.noConfusion": [],
- "Logos.Truthmaker.Entity.ofAtom.sizeOf_spec": [],
- "Logos.Truthmaker.Entity.ofSubject.elim": [],
- "Logos.Truthmaker.Entity.ofSubject.inj": [],
+ "Logos.Truthmaker.Entity.ofAtom.noConfusion": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Truthmaker.Entity.ofAtom.sizeOf_spec": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Truthmaker.Entity.ofSubject.elim": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Truthmaker.Entity.ofSubject.inj": [
+  "Logos.Agency.Subject"
+ ],
  "Logos.Truthmaker.Entity.ofSubject.injEq": [
-  "propext"
+  "propext",
+  "Logos.Agency.Subject"
  ],
- "Logos.Truthmaker.Entity.ofSubject.noConfusion": [],
- "Logos.Truthmaker.Entity.ofSubject.sizeOf_spec": [],
- "Logos.Truthmaker.Entity.recOn": [],
- "Logos.Truthmaker.EntityOf": [],
- "Logos.Truthmaker.ExistsAt": [],
+ "Logos.Truthmaker.Entity.ofSubject.noConfusion": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Truthmaker.Entity.ofSubject.sizeOf_spec": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Truthmaker.Entity.recOn": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Truthmaker.EntityOf": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Truthmaker.ExistsAt": [
+  "Logos.Agency.Subject"
+ ],
  "Logos.Truthmaker.Ground": [
+  "Logos.Agency.Subject",
   "Logos.Truthmaker.Ground"
  ],
- "Logos.Truthmaker.NecessarilyFalse": [
-  "Logos.Truthmaker.Ground"
- ],
- "Logos.Truthmaker.NecessarilyTrue": [
-  "Logos.Truthmaker.Ground"
- ],
- "Logos.Truthmaker.TrueAt": [
-  "Logos.Truthmaker.Ground"
+ "Logos.Truthmaker.NecessarilyFalse": [],
+ "Logos.Truthmaker.NecessarilyTrue": [],
+ "Logos.Truthmaker.TrueAt": [],
+ "Logos.Truthmaker.Truthmaker": [
+  "Logos.Agency.Subject",
+  "Logos.Truthmaker.Ground",
+  "Logos.Truthmaker.Truthmaker"
  ],
  "Logos.Truthmaker.groundPrinciple_atom": [
-  "Logos.Truthmaker.Ground"
+  "Logos.Agency.Subject",
+  "Logos.Truthmaker.Ground",
+  "Logos.Truthmaker.Truthmaker"
  ],
- "Logos.Truthmaker.instCoeSubjectEntity": [],
+ "Logos.Truthmaker.instCoeSubjectEntity": [
+  "Logos.Agency.Subject"
+ ],
  "Logos.Truthmaker.lawExcludedMiddle": [
   "propext",
   "Classical.choice",
-  "Quot.sound",
-  "Logos.Truthmaker.Ground"
+  "Quot.sound"
  ],
  "Logos.Truthmaker.noGround_selfRefutes": [
-  "Logos.Truthmaker.Ground"
+  "Logos.Agency.Subject",
+  "Logos.Truthmaker.Ground",
+  "Logos.Truthmaker.Truthmaker"
  ],
- "Logos.Truthmaker.nonContradiction": [
-  "Logos.Truthmaker.Ground"
+ "Logos.Truthmaker.nonContradiction": [],
+ "Logos.Truthmaker.sat_ground_and": [],
+ "Logos.Truthmaker.sat_ground_imp": [],
+ "Logos.Truthmaker.sat_ground_not": [],
+ "Logos.Truthmaker.sat_ground_or": [],
+ "Logos.Value.Affects": [
+  "Logos.Agency.Subject"
  ],
- "Logos.Truthmaker.sat_ground_and": [
-  "Logos.Truthmaker.Ground"
+ "Logos.Value.Alone": [
+  "Logos.Agency.Subject"
  ],
- "Logos.Truthmaker.sat_ground_imp": [
-  "Logos.Truthmaker.Ground"
+ "Logos.Value.AxPersonsAffect": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
  ],
- "Logos.Truthmaker.sat_ground_not": [
-  "Logos.Truthmaker.Ground"
+ "Logos.Value.AxTwoSubjects": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
  ],
- "Logos.Truthmaker.sat_ground_or": [
-  "Logos.Truthmaker.Ground"
+ "Logos.Value.Harms": [
+  "Logos.Agency.Subject"
  ],
- "Logos.Value.Affects": [],
- "Logos.Value.Alone": [],
- "Logos.Value.AxPersonsAffect": [],
- "Logos.Value.Harms": [],
- "Logos.Value.Helps": [],
- "Logos.Value.OtherAffects": [],
- "Logos.Value.aloneExcluded": [],
- "Logos.Value.alone_no_other_affects": [],
- "Logos.Value.alone_no_other_help_harm": [],
- "Logos.Value.harm_affects": [],
- "Logos.Value.help_affects": [],
- "Logos.Value.help_not_harm": [],
- "Logos.Value.neverAlone": [],
- "Logos.Value.otherSubject": [],
- "Logos.Value.otherSubject_ne": [],
- "Logos.Value.valueInterpersonal_of_split": []
+ "Logos.Value.Helps": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Value.OtherAffects": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Value.aloneExcluded": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Value.alone_no_other_affects": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Value.alone_no_other_help_harm": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Value.harm_affects": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Value.help_affects": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Value.help_not_harm": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Value.valueInterpersonal_of_split": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ]
 }

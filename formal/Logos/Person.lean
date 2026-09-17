@@ -16,6 +16,11 @@ the definition for §12 fidelity but are definitionally True.
   * a *personal* feature is one that a subject *means*, `Means s f`;
   * a *logical* feature is one that is true or false (bivalence, §10).
 On these readings the inseparability becomes a theorem.
+
+Under hostile semantics, propositional content does NOT imply personhood,
+and a single act does not entail plurality. The pseudo-theorems
+`twoPersonsFromSubject`, `everyContentIsAPerson`, and `positedDistinct`
+are retired as conflations of definitions with proofs.
 -/
 
 import Logos.Core
@@ -31,6 +36,37 @@ def Intentional (s : Subject) : Prop := ∃ p : Prop, Means s p
 
 /-- Person (structural definition, base.txt §12 / theorem T5). -/
 def Person (s : Subject) : Prop := Logos.Agency.Agent s ∧ Rational s ∧ Intentional s
+
+/-- Arrow 2 (Case A: Merely Definitional under §12 structural definition):
+    Bridge from subject actuality to personhood.
+
+    Audit notice: This implication is DEFINITIONAL, not an independent metaphysical
+    discovery. Under the §12 structural definition of Person
+    (`Person s := Agent s ∧ Rational s ∧ Intentional s`), with `Agent` and `Rational`
+    analytically defined as `True`, personhood collapses to intentional agency
+    (`∃ p, Means s p`), which is identical to `SubjectExists s`.
+
+    Under hostile semantics where Person is an independent substantive predicate (requiring
+    moral responsibility, reflective self-consciousness, or robust deliberative rationality),
+    this implication does NOT follow, as proved by `CountermodelSubjectWithoutPerson`.
+    In Logos, it is maintained strictly as a definitional consequence of §12. -/
+theorem person_of_subject {s : Subject} (h : Logos.Agency.SubjectExists s) : Person s :=
+  ⟨trivial, trivial, h⟩
+
+/-- An act directly yields a person. -/
+theorem person_of_act {s : Subject} {p : Prop} (h : Logos.Agency.Act s p) : Person s :=
+  person_of_subject ⟨p, h⟩
+
+/-- The existence of an act entails that a person exists. -/
+theorem person_exists_of_act (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
+    ∃ s : Subject, Person s := by
+  obtain ⟨s, p, ha⟩ := h
+  exact ⟨s, person_of_act ha⟩
+
+/-- An assertion entails that a person exists. -/
+theorem person_exists_of_assert {s : Subject} {p : Prop} (h : Logos.Agency.Asserts s p) :
+    ∃ s' : Subject, Person s' :=
+  ⟨s, person_of_act (Logos.Agency.assertion_is_act h)⟩
 
 -- ---------------------------------------------------------------------------
 -- §24b — personal/logical inseparability of the rational act
@@ -68,58 +104,11 @@ theorem inseparability_24b : ∀ a : Prop,
     rw [heq]
     exact ⟨q, id, s, act_implies_means ha⟩
 
--- ---------------------------------------------------------------------------
--- Plurality from the definitional subject (addressee, 2026-09-17)
--- ---------------------------------------------------------------------------
-
-/-- The content of a subject: the posited proposition of `Sum.inr q`, any
-    proposition when the subject is the silent origin. -/
-def contentOf : Subject → Prop
-  | Sum.inl _ => True
-  | Sum.inr q => q
-
-/--The canonical pair: the origin and the addressee are two distinct persons.
-
-  `twoPersonsFromSubject` — there are two distinct persons by WHAT A SUBJECT IS
-    alone (definitional subject, 2026-09-17): the silent origin
-    `Sum.inl ()` and the self-posited content `Sum.inr True` are both persons
-    (`Person (Sum.inr True)` because `Means (Sum.inr True) True`) and are
-    distinct by constructors. No plurality axiom: the addressee — the one for
-    whom something signifies — is a person by the definition of person.
-    Discharges the former bridge `AxTwoSubjects`. Footprint: `{}`. -/
-theorem twoPersonsFromSubject :
-    ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ := by
-  refine ⟨Sum.inl (), Sum.inr True, ?_, ?_, ?_⟩
-  · exact ⟨trivial, trivial, ⟨True, ⟨True, ⟨True, rfl⟩⟩⟩⟩
-  · exact ⟨trivial, trivial, ⟨True, ⟨True, ⟨True, ⟨rfl, rfl⟩⟩⟩⟩⟩
-  · intro h
-    cases h
-
-/--Every content, raised to a subject, is a person.
-
-  The plenum seed: `∀ p : Prop, Person (Sum.inr p)` — every posited content
-    posits itself, so is intentional, so is a person. Distinctness of such
-    persons is kernel-visible only for *incompatible* contents (equality of
-    propositions is `propext`-collapsed), hence `positedDistinct` below for
-    `True`/`False`. Footprint: `{}`. -/
-theorem everyContentIsAPerson : ∀ p : Prop, Person (Sum.inr p) := by
-  intro p
-  exact ⟨trivial, trivial, ⟨p, ⟨True, ⟨p, ⟨rfl, rfl⟩⟩⟩⟩⟩
-
-/--The two extreme contents are two distinct persons.
-
-  `positedDistinct`: `Sum.inr True` and `Sum.inr False` are distinct because
-    their contents are (incompatibility is the kernel-visible distinctness
-    of propositions). Footprint: `{}`. -/
-theorem positedDistinct : (Sum.inr True : Subject) ≠ Sum.inr False := by
-  intro h
-  have hTF : True = False := congrArg contentOf h
-  exact cast hTF True.intro
-
 end Logos.Person
 
 -- Axiom footprint audit
 #print axioms Logos.Person.inseparability_24b
-#print axioms Logos.Person.twoPersonsFromSubject
-#print axioms Logos.Person.everyContentIsAPerson
-#print axioms Logos.Person.positedDistinct
+#print axioms Logos.Person.person_of_subject
+#print axioms Logos.Person.person_of_act
+#print axioms Logos.Person.person_exists_of_act
+#print axioms Logos.Person.person_exists_of_assert

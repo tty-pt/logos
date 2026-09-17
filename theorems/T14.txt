@@ -1,34 +1,25 @@
 T14 — RELAÇÃO ETERNA (o "Amar é escolhido e necessário", poema)
 
-Depende de: T12_directedPair (T12, derivado) + esse est agere
-(AxPersonStability é teorema). PROVEN (plurality-discharge, 2026-09-17 —
-a ponte META AxTwoSubjects foi RETIRED).
+Depende de: T12_directedPair (T12, sob ponte META AxTwoSubjects) + esse est agere
+(AxPersonStability é teorema). PROVEN↑ sob `{AxTwoSubjects, Means, Subject}`.
 
 Verificado em: formal/Logos/Love.lean (T14_eternalRelation, T14_world,
-T14_square, T14_content, T14_canonicalRigid), GAPMAP.md C42–C45/C76,
-DESIGN.md D13/D14b/D-C4. Pegada: `{}`.
-2026-09-17 (plurality-discharge): o par é agora *explícito e rígido* —
-T14_canonicalRigid (C76): a ORIGEM `Sum.inl ()` e o DESTINATÁRIO
-`Sum.inr True` amam-se e existem em *todos* os mundos, o MESMO par em cada
-mundo. Mais forte do que a velha forma existencial {AxTwoSubjects}: "Amar é …
-necessário (de alguma forma)" tornou-se literal. O segundo amante não é um
-segundo origem silencioso (há um só `inl`); é o conteúdo tornado sujeito — o
-destinatário. 2026-09-15 (nó): T14_eternalRelation construído sobre
-T12_directedPair (GAPMAP C47) — direção e estabilidade vivem no mesmo par.
-2026-09-17 (amor benevolente): Loves é definido como benevolência direcionada
-(Helps s t ∧ ¬ Harms s t, GAPMAP C86); o prejuízo não tem realidade ontológica no
-fundamento (Harms s t := False), de modo que ajuda exclui prejuízo
-(help_not_harm, C85). Amar é efetivamente ajudar sem prejudicar
-(love_helps, love_not_harms).
-Impressão de axiomas (pós-plurality-discharge, 2026-09-17): `{}` —
-Affects, Helps/Harms, Loves são todas definições analíticas
-(Affects s t := s ≠ t; Helps := Affects; Harms := False; Loves s t := Helps s t ∧ ¬ Harms s t);
-AxPersonsAffect é teorema (M1, A3); help_not_harm é teorema (C85);
-AxPersonStability é teorema (esse est agere);
-Subject/State/Initiates são definições; ExistsAt é definição (ser é agir);
-Entity/EntityOf dissolvidos (C2); {T, tschema} dissolvidos (E0); a ponte
-FAITH foi dissolvida; AxTwoSubjects RETIRED
-(plurality-discharge 2026-09-17); sorryAx: 0.
+T14_square, T14_content), GAPMAP.md C42–C45,
+DESIGN.md D13/D14b/D-C4. Pegada: `{AxTwoSubjects, Means, Subject}`.
+
+O par de amantes decorre de T12 (que se apoia na ponte META `AxTwoSubjects`)
+e a sua persistência em cada mundo decorre da persistência das pessoas (AxPersonStability).
+Amor benevolente: `Loves s t` é definido como ajuda sem prejuízo
+(`Helps s t ∧ ¬ Harms s t`, GAPMAP C86); o prejuízo não tem realidade ontológica
+no fundamento (`Harms s t := False`), de modo que ajuda exclui prejuízo
+(`help_not_harm`, C85).
+
+Sob semântica hostil, o contramodelo `CountermodelPluralityWithoutLove`
+(em `formal/Logos/HostileSemantics.lean`) comprova que a mera existência de duas
+pessoas distintas não implica logicamente amor sem a estrutura relacional de benevolência.
+Com a ponte `AxTwoSubjects` e as definições analíticas de afeto/ajuda,
+`T14_eternalRelation` é provado no kernel com pegada `{AxTwoSubjects, Means, Subject}`.
+sorryAx: 0.
 
 Enunciado (forma de base, com relata necessários):
 
@@ -44,22 +35,15 @@ honesta (NecessityPH, mundo-ancorada — não o alias degenerado):
 ∀w ∃s₁∃s₂ [Person(s₁) ∧ Person(s₂) ∧ s₁ ≠ s₂ ∧ Loves(s₁,s₂) ∧
            ExistsAt(w, s₁) ∧ ExistsAt(w, s₂)]
 
-Forma canónica rígida (2026-09-17, C76 — o MESMO par em todo o mundo):
-
-Person(origem) ∧ Person(destinatário) ∧ Loves(origem, destinatário) ∧
-∀w [ExistsAt(w, origem) ∧ ExistsAt(w, destinatário)]
-
 Pela cláusula T do alias □ (Necessity), há ainda a imagem □(∃ par que se ama)
-(T14_square) — mantém a silhueta do enunciado antigo como teorema.
+(T14_square) — mantém a silhueta do enunciado modal como teorema.
 
-HONESTIDADE (§28/§29 — do que foi feito teorema):
-Com C4, o "eterno" deixou de ser uma axiom FAITH sobre a relação. A relação
-é estrutural (Loves := Affects, "um ajuda/não prejudica o outro"); a
-existência do par E a sua eternidade são agora teoremas `{}`: a pluralidade
-vem da definição de sujeito (C73/C74 — a ponte META AxTwoSubjects foi
-RETIRED e o seu lema em falta ALONE_EXCLUDED é o teorema C74), e a
-persistência vem de esse est agere (Person → Intentional → Means;
-persistir é agir). A componente "escolhido" depende ainda de F1 (liberdade,
-DEFERRED). A poema diz "de alguma forma" — e essa indecisão vive agora na
-leitura de "existir" (ser é agir, índice de mundo vazio por princípio), não
-num operador modal sobre a relação.
+HONESTIDADE (§28/§29 — estatuto epistémico de T14):
+A relação é estrutural (Loves := Helps ∧ ¬Harms, benevolência mútua);
+a existência do par apoia-se honestamente na ponte metafísica de pluralidade
+`AxTwoSubjects` (pois uma agência isolada não implica pluralidade, conforme
+provado pelo contramodelo `UnitPluralityCountermodel`), e a persistência
+em todos os mundos vem da estabilidade das pessoas (AxPersonStability).
+A componente "escolhido" depende ainda de F1 (liberdade, DEFERRED).
+O passo do poema é assim preservado com clareza entre o que é dedução
+formal e o que são pontes metafísicas declaradas.

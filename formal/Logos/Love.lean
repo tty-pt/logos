@@ -22,6 +22,7 @@ import Logos.Person
 import Logos.Value
 import Logos.Plurality
 import Logos.Necessity
+import Logos.Modal
 
 namespace Logos.Love
 
@@ -30,7 +31,8 @@ open Logos.Person (Person)
 open Logos.Plurality (EntityOf NecessarySubject)
 open Logos.Value (Affects AxPersonsAffect Helps Harms help_not_harm help_affects)
 open Logos.Semantics (World)
-open Logos.Truthmaker (ExistsAt)
+open Logos.Truthmaker (ExistsAt Entity)
+open Logos.Modal (NecessaryEntity)
 open Logos.Necessity (Necessity NecessityPH)
 
 /--Love is directed benevolence: helping the other and willing no harm.
@@ -72,7 +74,7 @@ theorem loves_of_helps : ∀ {s t : Subject}, Helps s t → Loves s t := by
     possa Amar"). -/
 def Lovable (t : Subject) : Prop := ∃ s : Subject, s ≠ t ∧ Person s
 
-/--There is someone lovable and someone who loves: both are persons and distinct.
+/--There are two distinct persons, both lovable.
 
  T13 — there is someone able to be loved (poem P7; PROVEN from T12):
     each member of the two-person pair is lovable by the other. -/
@@ -102,56 +104,36 @@ theorem AxPersonStability : ∀ s : Subject, Person s → NecessarySubject s := 
   an entity that is both a Person and a NecessarySubject.
   Axiom footprint: `{}` (pure logic, no axioms). -/
 theorem necessaryPersonExists : ∃ s : Subject, Person s ∧ NecessarySubject s := by
-  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists
+  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists_from_plurality
   exact ⟨s, hs, AxPersonStability s hs⟩
 
-/--The canonical origin is a necessary person.
+/--There exists a necessary entity: the entity-correlate of the performing person exists in every world.
 
-  Exhibited directly by `Sum.inl ()`, the silent origin. Footprint: `{}`. -/
-theorem canonicalNecessaryPerson : Person (Sum.inl ()) ∧ NecessarySubject (Sum.inl ()) := by
-  have hp : Person (Sum.inl ()) := ⟨trivial, trivial, ⟨True, ⟨True, ⟨True, rfl⟩⟩⟩⟩
-  exact ⟨hp, AxPersonStability (Sum.inl ()) hp⟩
+ E5 / C92 — from the demonstrated person (C24, `T5_personExists`) and its
+    persistence (`AxPersonStability`, esse est agere) with the subject→entity
+    lift (`Modal.subject_nec_entity_nec`, C91), some entity exists in every
+    world. This does NOT close T7: it is the performing person's correlate,
+    not a uniform ground of necessary truths (that stays
+    `AxGlobalGround`-priced, C18). Footprint: `{Means, Subject}` (VOCAB only;
+    no AxTwoSubjects, no SEM/META). -/
+theorem necessary_entity_exists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
+    ∃ e : Entity, NecessaryEntity e := by
+  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists h
+  exact ⟨EntityOf s, Logos.Modal.subject_nec_entity_nec s (AxPersonStability s hs)⟩
 
 /--Two distinct persons stand in an eternal love-relation, and both persist in every world.
 
- T14 — the eternal love-relation (PROVEN, definitional subject +
-    esse est agere, 2026-09-17): a pair of distinct persons who love each
+ T14 — the eternal love-relation: a pair of distinct persons who love each
     other, both of whose entity-correlates exist in *every* world — the poem's
     "Amar é escolhido e também é necessário (de alguma forma)". Built on the
     directed pair `Plurality.T12_directedPair` (C47): direction and stability
-    live on the *same* pair. Formerly `PROVEN↑` under the META plurality
-    bridge `AxTwoSubjects` (retired); see `T14_canonicalRigid` for the
-    world-rigid canonical form. -/
+    live on the *same* pair. Footprint: `{AxTwoSubjects}`. -/
 theorem T14_eternalRelation :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
       Loves s₁ s₂ ∧ NecessarySubject s₁ ∧ NecessarySubject s₂ := by
   obtain ⟨p, q, hp, hq, hne, ha⟩ := Logos.Plurality.T12_directedPair
   have hl : Loves p q := loves_of_helps ha
   exact ⟨p, q, hp, hq, hne, hl, AxPersonStability p hp, AxPersonStability q hq⟩
-
-/--The canonical eternal relation: the origin and the addressee love each other, and persist, in every world.
-
- T14, canonical + world-rigid (plurality-discharge, 2026-09-17): with the
-    pair made explicit — the origin `Sum.inl ()` and the addressee
-    `Sum.inr True` — the *same* pair stands in love in *every* world, and both
-    relata exist in every world. Stronger than the existential
-    `T14_eternalRelation` (formerly `{AxTwoSubjects}`): "Amar … é necessário
-    (de alguma forma)" is here literal — loving relata rigid across worlds,
-    with no price. The origin loves the addressee (`Sum.inl () ≠ Sum.inr True`),
-    which is enough for the poem's directed bearing. Footprint: `{}`. -/
-theorem T14_canonicalRigid :
-    Person (Sum.inl ()) ∧ Person (Sum.inr True) ∧
-      Loves (Sum.inl ()) (Sum.inr True) ∧
-      (∀ w : World,
-        ExistsAt w (EntityOf (Sum.inl ())) ∧ ExistsAt w (EntityOf (Sum.inr True))) := by
-  refine ⟨?_, ?_, ?_, ?_⟩
-  · exact ⟨trivial, trivial, ⟨True, ⟨True, ⟨True, rfl⟩⟩⟩⟩
-  · exact ⟨trivial, trivial, ⟨True, ⟨True, ⟨True, ⟨rfl, rfl⟩⟩⟩⟩⟩
-  · refine ⟨?_, fun h => h⟩
-    intro h
-    cases h
-  · intro _w
-    exact ⟨trivial, trivial⟩
 
 /--In every world, two distinct persons stand in a love-relation.
 
@@ -193,10 +175,9 @@ end Logos.Love
 #print axioms Logos.Love.love_affects
 #print axioms Logos.Love.loves_of_helps
 #print axioms Logos.Love.necessaryPersonExists
-#print axioms Logos.Love.canonicalNecessaryPerson
 #print axioms Logos.Love.T13_someoneLovable
 #print axioms Logos.Love.T14_eternalRelation
-#print axioms Logos.Love.T14_canonicalRigid
 #print axioms Logos.Love.T14_world
 #print axioms Logos.Love.T14_square
 #print axioms Logos.Love.T14_content
+#print axioms Logos.Love.necessary_entity_exists

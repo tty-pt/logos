@@ -1,27 +1,20 @@
 /-
 # Logos.Plurality — more than one person (poem P5/P7; theorem T12)
 
-T12 — there are at least two distinct persons. From the definitional subject
-alone (plurality-discharge, 2026-09-17): the canonical pair (the origin
-`Sum.inl ()` and the addressee `Sum.inr True`) is exhibited by
-`Person.twoPersonsFromSubject` with no axiom — the former META bridge
-`AxTwoSubjects` is retired (its content moved into the definition of a
-subject) and the M2 lone-subject countermodel is superseded. Affectivity
-between distinct persons is the theorem `AxPersonsAffect` (A3).
+T12 — there are at least two distinct persons.
+Reconstructed under hostile semantics: agency and personhood do not entail
+plurality by logic alone (settled by the Unit countermodel in `HostileSemantics`).
+Plurality is therefore derived under the explicit META bridge `AxTwoSubjects`.
 
 Also hosts the Q2 bridge `EntityOf : Subject → Entity` (each person has an
 entity-correlate), decided to close the Subject/Entity gap so the love layer
 can attach necessity to the relata (T14).
 
-A1 (2026-09-16): the existence theorems `T1_subjectExists`, `T4_agentExists`
-(former Agency) and `T5_personExists` (former Person) live HERE; M0
-(2026-09-16, FORCED_SUBJECT.md) re-anchored all of them — plus
-`cogito_from_T12` — on `Agency.Cogito`, NOT on the plurality bridge, and the
-definitional-subject batch (2026-09-17) made `Cogito` itself a theorem.
-A1's cycle reason (`Plurality → Value → Person → Agency`)
-is respected by importing only the foundation, never proving from T12.
+The existence theorems `T1_subjectExists`, `T4_agentExists`, and `T5_personExists`
+are anchored directly on the performative foundation `Agency.Cogito`.
 `T12_twoPersons`, `notAlone`, and `T12_directedPair` are the genuine plurality
-claims, all now PROVEN `{}`. -/
+claims, standing honestly on `{AxTwoSubjects}`.
+-/
 
 import Logos.Core
 import Logos.Agency
@@ -35,7 +28,7 @@ open Logos.Agency (Subject)
 open Logos.Person (Person)
 open Logos.Truthmaker (Entity ExistsAt)
 open Logos.Semantics (World)
-open Logos.Value (Affects AxPersonsAffect)
+open Logos.Value (AxTwoSubjects Affects AxPersonsAffect)
 
 /-- Q2 bridge: canonical embedding of subjects into the general entity type. -/
 def EntityOf : Subject → Entity := Logos.Truthmaker.EntityOf
@@ -45,65 +38,89 @@ def NecessarySubject (s : Subject) : Prop := ∀ w : World, ExistsAt w (EntityOf
 
 /--There are at least two distinct persons.
 
-  T12 — there is more than one person (poem P5/P7; PROVEN, definitional
-    subject, 2026-09-17): the canonical pair of
-    `Person.twoPersonsFromSubject` — the origin and the addressee — with no
-    axiom. Formerly PROVEN↑ under the META bridge `AxTwoSubjects` (retired). -/
+  T12 — there is more than one person (poem P5/P7; PROVEN↑ under `AxTwoSubjects`):
+    the reality of right-and-wrong demands plurality. A single act does not entail
+    plurality (settled by the Unit countermodel in HostileSemantics). Footprint: `{AxTwoSubjects}`. -/
 theorem T12_twoPersons :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ :=
-  Logos.Person.twoPersonsFromSubject
+  AxTwoSubjects Logos.Core.rightWrongDistinction
 
 /-- "Not alone": some pair of distinct persons exists (the same result,
     restated in the poem's vocabulary). -/
 theorem notAlone : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ :=
   T12_twoPersons
 
-/--The acting subject is exhibited: someone acts on something.
+/--The acting subject is exhibited from plurality: someone acts on something.
 
- cogito, RESTATED AS A COROLLARY OF THE THEOREM (definitional subject,
-    2026-09-17): the present act is exhibited, not postulated and not derived
-    from plurality. `cogito_from_T12` is a corollary of `Agency.Cogito` —
-    the former T12-derivation is conserved but re-classified: plurality also
-    forces the datum, the datum is not *grounded* on plurality. Its denial
-    is refuted by `Agency.noCogito_selfRefutes`, not (any longer) by a
-    detour through two persons. -/
-theorem cogito_from_T12 : ∃ s : Subject, ∃ p : Prop, Logos.Agency.A s p :=
-  Logos.Agency.Cogito
+ cogito, RESTATED AS A COROLLARY OF PLURALITY: from the demonstrated
+    pair of persons, an act occurs. -/
+theorem cogito_from_T12 : ∃ s : Subject, ∃ p : Prop, Logos.Agency.A s p := by
+  obtain ⟨s₁, _, ⟨_, _, p, hmp⟩, _, _⟩ := T12_twoPersons
+  exact ⟨s₁, p, hmp⟩
 
-/--At least one subject exists.
+/--At least one subject exists: derived from the performative act-datum.
 
- T1 — the subject of the present act exists (definitional subject,
-    2026-09-17): corollary of the exhibited act, not of the pair. -/
-theorem T1_subjectExists : ∃ s : Subject, Logos.Agency.Exists s := by
-  obtain ⟨s, _, _⟩ := Logos.Agency.Cogito
-  exact ⟨s, trivial⟩
+  T1 (C21) — the subject of the present act exists:
+  derived from the existence of an intentional act (C68) via the constitutive rule
+  `act_requires_subject` (Case B). Footprint: `{Means, Subject}` (VOCAB only; decoupled from AxTwoSubjects). -/
+theorem T1_subjectExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
+    ∃ s : Subject, Logos.Agency.SubjectExists s :=
+  Logos.Agency.subject_exists_of_act h
 
 /--At least one agent exists: someone who acts.
 
- T4 — the subject is an agent (definitional subject; `Agent` is analytical
-    `:= True`). -/
-theorem T4_agentExists :
-    ∃ s : Subject, Logos.Agency.Exists s ∧ Logos.Agency.Agent s := by
-  obtain ⟨s, _, _⟩ := Logos.Agency.Cogito
-  exact ⟨s, trivial, trivial⟩
+  T4 (C23) — the subject is an agent (`Agent` is analytical `:= True`):
+  derived from the existence of an intentional act (C68 → C21). Footprint: `{Means, Subject}`. -/
+theorem T4_agentExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
+    ∃ s : Subject, Logos.Agency.SubjectExists s ∧ Logos.Agency.Agent s := by
+  obtain ⟨s, hs⟩ := T1_subjectExists h
+  exact ⟨s, hs, trivial⟩
 
-/--At least one person exists.
+/--At least one person exists: derived from the performative act-datum.
 
- T5 — there is a person (definitional subject): from the exhibited act the
-    witness subjects own personhood trivially — `Agent`/`Rational` are
-    analytical `:= True` and the act's own content witnesses `Intentional`. -/
-theorem T5_personExists : ∃ s : Subject, Person s := by
-  obtain ⟨s, p, hmp⟩ := Logos.Agency.Cogito
-  exact ⟨s, trivial, trivial, p, hmp⟩
+  T5 (C24) — there is a person:
+  derived from the existence of an intentional act (C68 → C21 → C24) via §12 definitional
+  collapse (Case A under §12). Footprint: `{Means, Subject}` (VOCAB only; decoupled from AxTwoSubjects). -/
+theorem T5_personExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
+    ∃ s : Subject, Person s :=
+  Logos.Person.person_exists_of_act h
+
+/-- T1 derived from a performative assertion. -/
+theorem T1_of_assert {s : Subject} {p : Prop} (h : Logos.Agency.Asserts s p) :
+    ∃ s' : Subject, Logos.Agency.SubjectExists s' :=
+  Logos.Agency.subject_exists_of_assert h
+
+/-- T4 derived from a performative assertion. -/
+theorem T4_of_assert {s : Subject} {p : Prop} (h : Logos.Agency.Asserts s p) :
+    ∃ s' : Subject, Logos.Agency.SubjectExists s' ∧ Logos.Agency.Agent s' :=
+  ⟨s, Logos.Agency.act_requires_subject s p (Logos.Agency.assertion_is_act h), trivial⟩
+
+/-- T5 derived from a performative assertion. -/
+theorem T5_of_assert {s : Subject} {p : Prop} (h : Logos.Agency.Asserts s p) :
+    ∃ s' : Subject, Person s' :=
+  Logos.Person.person_exists_of_assert h
+
+/-- Corollary of plurality: from two distinct persons, a subject exists. -/
+theorem T1_subjectExists_from_plurality : ∃ s : Subject, Logos.Agency.SubjectExists s := by
+  obtain ⟨s₁, _, ⟨_, _, p, hmp⟩, _, _⟩ := T12_twoPersons
+  exact ⟨s₁, p, hmp⟩
+
+/-- Corollary of plurality: from two distinct persons, an agent exists. -/
+theorem T4_agentExists_from_plurality :
+    ∃ s : Subject, Logos.Agency.SubjectExists s ∧ Logos.Agency.Agent s := by
+  obtain ⟨s₁, _, ⟨_, _, p, hmp⟩, _, _⟩ := T12_twoPersons
+  exact ⟨s₁, ⟨p, hmp⟩, trivial⟩
+
+/-- Corollary of plurality: from two distinct persons, a person exists. -/
+theorem T5_personExists_from_plurality : ∃ s : Subject, Person s := by
+  obtain ⟨s₁, _, hp₁, _, _⟩ := T12_twoPersons
+  exact ⟨s₁, hp₁⟩
 
 /--There are two distinct persons where one bears on the other.
 
- T12, directed form (chain node C47; M1 2026-09-16): the two-person pair can
+ T12, directed form (chain node C47): the two-person pair can
     be oriented so that affectivity flows named-forward — under A3
-    (`Affects s t := s ≠ t`) distinctness IS the forward direction, so the
-    directed pair is `T12_twoPersons` itself wearing its own inequality.
-    Direction + stability still must hold of the *same* pair, so T14 is
-    built on this pair (rejected: direction and stability unconnected). -/
+    (`Affects s t := s ≠ t`) distinctness IS the forward direction. -/
 theorem T12_directedPair :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Affects s₁ s₂ := by
   obtain ⟨p, q, hp, hq, hne⟩ := T12_twoPersons

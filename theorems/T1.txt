@@ -1,53 +1,66 @@
 T1 — O SUJEITO DO ATO EXISTE
 
-Depende de: Cogito (teorema, 2026-09-17 — o dado do ato é EXIBIDO, não
-derivado da pluralidade; registo formal GAPMAP C68).
+Depende de: Retorção performativa do Cogito (`Agency.noCogito_selfRefutes` / `Agency.subject_exists_of_assert`, GAPMAP C58/C68)
+e derivação constitutiva do ato presente (`Plurality.T1_subjectExists`, GAPMAP C21, pegada estrita `{Means, Subject}`).
+Desacoplado de `AxTwoSubjects`.
 
 O ponto de partida é o ato presente de raciocinar:
 
-A(s,p)
+Act(s,p)
 
 onde:
 s = sujeito do ato
 p = conteúdo do ato
 
-O próprio ato não precisa ser inferido de uma premissa externa.
-A(s,p) é o dado performativo do raciocínio em curso.
+O próprio ato não precisa ser inferido de uma premissa externa arbitrária:
+a negação de que ocorra qualquer ato (`NoAct := ¬ ∃ s p, Act s p`) é auto-refutante
+quando asserida (`Asserts speaker NoAct ⊢ False`, C58). A dedução opera em 4 passos estritos:
+1. A ocorrência de uma asserção é um ato (`assertion_is_act : Asserts s p → Act s p`).
+2. Portanto um ato existe (`act_exists_of_assert : Asserts s p → ∃ s' p', Act s' p'`).
+3. Portanto um sujeito existe (`subject_exists_of_assert : Asserts s p → ∃ s', SubjectExists s'`).
+4. Portanto NoAct é performativamente auto-refutante (`noCogito_selfRefutes`).
 
-Por definição de um ato relacional:
+Por regra constitutiva de um ato intrinsecamente indexado:
 
-A(s,p) → Exists(s)
+Act(s,p) → SubjectExists(s)  [Exists(s)]
 
 e:
 
-A(s,p) → Content(p).
+Act(s,p) → Content(p).
 
 Logo:
 
-∃s∃p A(s,p)
+∃s∃p Act(s,p)
 
 implica:
 
-∃s Exists(s).
+∃s SubjectExists(s).
 
 Portanto:
 
-∃s Exists(s).
+∃s SubjectExists(s).
 
-(Nota formal T1 vs. o ledger: com o colapso Tier1 (A(s,p) := Means s p) e
-o batch definitional-subject (2026-09-17), `Plurality.T1_subjectExists` é teorema trivial —
-projeção do ato exibido `Agency.Cogito` (∃ s p, A s p). Footprint
-medido `{}`. O ato-dado NÃO é derivado da pluralidade:
-é o fundamento exibido; a pluralidade (T12, núcleo canónico origem+destinatário,
-2026-09-17) é teorema `{}` independente — a ponte META AxTwoSubjects foi
-RETIRED no plurality-discharge. Ver formal/GAPMAP.md C21/C73.)
+(Nota formal T1 vs. o ledger e semântica hostil:
+A ontologia distingue estritamente três níveis:
+1. Nível de Sorte/Tipo: `Subject : Type` — o domínio não-interpretado de candidatos a agentes (axioma VOCAB).
+2. Nível de Predicado de Atualidade: `SubjectExists (s : Subject) : Prop := ∃ p, Act s p` — afirma que s é sujeito atuante.
+3. Nível Proposicional Existencial: `∃ s, SubjectExists s` — a proposição de que existe pelo menos um sujeito atualizado.
 
-(Nota formal §26 un-denyable: para além de T1, a própria negação
-"não existe sujeito" refuta-se a si mesma — `noSubject_selfRefutes`:
-¬(∃s : Subject) ⇒ False (a negação é ato/escolha de um sujeito; a escolha
-existente dá a testemunha). PROVEN `{}`, registo
-formal de base.txt §26; ver formal/GAPMAP.md C57. E, mais fundo, a negação
-do próprio Cogito refuta-se por exibição: `noCogito_selfRefutes` — a origem
-silenciosa é exibida, nenhum axioma citado (definitional-subject, GAPMAP C58).)
+Um ato não pode existir sem um sujeito que o efetive: a regra constitutiva
+`act_requires_subject : Act s p → SubjectExists s` (Caso B) vincula a atualidade do sujeito
+à sua agência no ato. Sob semântica hostil desprovida desta regra constitutiva, um modelo de ato
+sem sujeito é matematicamente viável (`HostileSemantics.CountermodelActWithoutSubject` —
+formalizando a objeção de Lichtenberg do "es denkt" / evento anónimo). Contudo, sob a regra
+constitutiva de `Act` em Logos, tal contramodelo torna-se impossível por contradição estrita
+no kernel (`countermodel_violates_constitutive_act`).
+`Agency.noCogito_selfRefutes` (C58) opera por retorção performativa com pegada estrita
+`{Means, Subject}`, derivando a existência do sujeito (`Plurality.T1_of_assert`)
+diretamente da asserção presente sem recorrer ao axioma metafísico `AxTwoSubjects`.
+Ver formal/GAPMAP.md C21, C58, C68.)
+
+(Nota formal §26: a própria negação "não existe sujeito" refuta-se por retorção performativa genuína:
+`noSubject_selfRefutes` (formal/Logos/Agency.lean e Choice.lean, C57), com pegada estrita `{Means, Subject}`:
+asserir que não existe sujeito é um ato intencional do falante que prova constitutivamente a existência do sujeito falante.
+E, na base, a negação do ato refuta-se estritamente: `noCogito_selfRefutes` (C58) sob `{Means, Subject}`.)
 
 Há pelo menos um sujeito que existe enquanto agente do ato racional presente.

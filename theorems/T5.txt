@@ -1,7 +1,6 @@
 T5 — DA AGÊNCIA À PESSOA
 
-Depende de: T12 (Tier1: Agent/Rational são agora definições analíticas;
-A1, 2026-09-16: T5 é projeção de T12 em Plurality)
+Depende de: T1 e ato presente (C68 → C21 → C24; pegada estrita `{Means, Subject}`; desacoplado de `AxTwoSubjects`).
 
 Definimos:
 
@@ -20,22 +19,21 @@ Portanto:
 
 Person(s).
 
-(Nota formal: com o colapso Tier1, Person colapsa conceptualmente à pessoa
-intencional — o sujeito que significa: Person(s) ⇔ ∃p Means(s,p). A forma
-conjuntiva mantém-se por estabilidade.
-A1 (2026-09-16): o axioma cogito foi eliminado; o antigo
-`Person.T5_personExists` (que o usava) foi removido e T5 é agora teorema de
-Plurality como projeção de T12 (`Plurality.T5_personExists`) — os antigos
-predicados de espécie {Agent, Rational} desapareceram de todas as footprints;
-M0 re-ancorou-o no Cogito forçado; o batch definitional-subject (2026-09-17)
-exibe o Cogito como teorema, footprint `{}`.
-Ver formal/GAPMAP.md C24 e formal/DESIGN.md D-Tier1.
-Audit de definições (2026-09-17, C80–C82): a pessoa iniciadora genuína exige
-ramificação (`InitiatingPerson(s) := Person(s) ∧ Branches(Moves(s))`). Os conteúdos
-proposicionais postos não ramificam e são transferências determinísticas
-(`posited_is_transfer`), pelo que nenhum conteúdo é pessoa iniciadora
-(`no_content_is_initiating_person`); a origem silenciosa ramifica genuinamente
-(`origin_branches`, `{}`) e é pessoa iniciadora.)
+(Nota formal: com o colapso Tier-1, Person colapsa à pessoa intencional:
+`Person(s) := Agent s ∧ Rational s ∧ Intentional s`, onde `Intentional s := ∃ p, Means s p`.
+No kernel, `Person.person_of_subject` deriva que todo o sujeito atualizado de um ato
+é definicionalmente uma pessoa (`person_of_act : Act s p → Person s`).
+A partir da asserção performativa explícita `h : Asserts s p`,
+`Person.person_exists_of_assert` e `Plurality.T5_of_assert` derivam a pessoa com pegada estrita `{Means, Subject}`.
+
+CLASSIFICAÇÃO ONTOLÓGICA:
+- No sistema formal de Logos: a passagem `Subject → Person` é do Caso A (Meramente Definicional),
+  uma vez que decorre estritamente da redução estrutural de §12 (onde `Agent := True` e `Rational := True`),
+  colapsando `Person s` a `SubjectExists s`. Não deve ser apresentada como descoberta metafísica independente.
+- Sob semântica hostil substantiva: é do Caso D (Não se segue / Bloqueada), conforme demonstrado
+  pelo contramodelo `HostileSemantics.CountermodelSubjectWithoutPerson` (onde um sujeito atua, mas não possui
+  estatuto de pessoa substantiva com deliberação moral ou livre reflexão).
+Ver formal/GAPMAP.md C24.)
 
 Logo:
 

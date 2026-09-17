@@ -1,6 +1,6 @@
 T7 — REALIDADE NECESSÁRIA
 
-Depende de: T3, T6, §22, §24a (átomos) + teorema AxGlobalGround (ex-axioma SEM; ver nota 9 abaixo)
+Depende de: T3, T6, §22, §24a (átomos) + axioma AxGlobalGround (Tag: SEM; ver nota 9 abaixo)
 
 Verificado em: formal/Logos/Modal.lean (T7_necessaryReality), GAPMAP.md C18.
 
@@ -46,12 +46,11 @@ True(p) → ∃r Ground(r, p).  [p atómico]
 
 Toda verdade atómica tem um fundamento na realidade.
 
-Para a própria tautologia τ := φ ∨ ¬φ, o fundamento de τ *como um todo*
-NÃO é derivável (ver nota formal 9): a sua verdade é composicional e a
-verdade composta não carrega fundamento existencial — a instância do
-terceiro excluído fica BLOCKED (C19, lema em falta registado). O que se
-demonstra é a versão atómica: todo átomo necessariamente verdadeiro tem
-fundamento necessário (batch A2-swap-theorem, 2026-09-17).
+Para a tautologia τ := φ ∨ ¬φ, a instância de verdade necessária
+do terceiro excluído fecha-se através da ponte semântica `AxGlobalGround`
+associada ao átomo representativo (`Modal.T7_excludedMiddleInstance`,
+GAPMAP C19, pegada `{AxGlobalGround, Ground}`). A versão atómica geral
+assegura que todo átomo necessariamente verdadeiro possui fundamento necessário.
 
 5. Suponhamos, por redução ao absurdo:
 
@@ -71,8 +70,7 @@ Isto vale para toda entidade contingente.
 Portanto, a verdade necessária de τ não é fundamentada
 em nenhuma entidade contingente.
 
-7. Mas, por (4) e pela troca atómica (teorema AxGlobalGround — a
-testemunha de um mundo vale em todos, pois ExistsAt não tem mundo), a
+7. Mas, por (4) e pela ponte semântica `AxGlobalGround` (Tag: SEM), a
 verdade necessária de um átomo τ tem um fundamento não-contingente.
 
 Se nenhuma entidade contingente fundamenta τ,
@@ -101,7 +99,9 @@ e transitiva (Modal.groundEntity_transitive `{}`).
 A transcendência construtiva decorre da divergência proposicional sem axiomas:
 Modal.prop_neq_not `{}` (nenhuma proposição é idêntica à sua própria negação, q ≠ (q → False)).
 O Fundamento Último (Modal.UltimateGround s) é demonstrado substantivamente em 4 passos:
-  Passo A: Existe entidade necessária — Modal.necessary_entity_exists `{}` (de T14/Love);
+  Passo A: Existe entidade necessária — `Love.necessary_entity_exists` (GAPMAP C92,
+           pegada `{Means, Subject}`, demonstrado — rota performativa C24 via o lift
+           `Modal.subject_nec_entity_nec`, C91, `{Subject}`);
   Passo B: A Origem estritamente fundamenta toda a realidade distinta de si —
            Modal.origin_grounds_all_distinct `{}` (a Origem subsume a agência de qualquer
            ente derivado e entidades atómicas não-sujeito, excedendo-as com agência excedente);
@@ -112,6 +112,13 @@ O Fundamento Último (Modal.UltimateGround s) é demonstrado substantivamente em
   Passo D: Síntese — existe um Fundamento Último substantivo e analítico: entidade necessária que
            fundamenta tudo o que difere de si e não é fundamentada por ninguém
            (Modal.ultimateGround_exists, GAPMAP C79 `{}`).
+(Nota de deriva documental, 2026-09-18: os Passos B–D referem teoremas
+ `groundEntity_*`/`prop_neq_not`/`ultimateGround_exists`/`origin_grounds_all_distinct`/
+ `substantive_grounding_witness`/`origin_not_grounded`/`contingent_ground` NÃO presentes
+ na árvore atual — texto adiante de medição. Só o Passo A existe e está kernel-checked
+ (C91/C92). O Passo A honestamente dá o correlato da pessoa, não o fundamento uniforme
+ de verdades necessárias — esse passo é T7 original, ainda negável sem AxGlobalGround,
+ ver Consequência abaixo.)
 O passo contingente de C78 (Modal.contingent_ground `{}`) demonstra substantivamente que toda a
 entidade contingente é fundamentada na Origem (pois nenhuma entidade contingente pode ser idêntica
 à Origem necessária), enquanto C79 estabelece o Fundamento Último da realidade de forma
@@ -119,10 +126,13 @@ substantiva, analítica e não-vácua.)
 
 Consequência:
 
-A negação "não existe realidade necessária" é incoerente:
-ao afirmar a verdade necessária de alguma proposição,
-o agente utiliza um conceito de verdade que exige fundamento,
-e esse fundamento não pode ser qualquer entidade contingente.
+A negação "não existe realidade necessária" é ainda negável no plano puramente lógico: um cético ou contingencista pode admitir a verdade necessária de uma proposição (e.g. uma tautologia) e sustentar que em cada mundo possível ela é feita verdadeira por entidades contingentes locais distintas, sem que exista nenhuma entidade necessária uniforme. Esta possibilidade lógica é formalmente atestada pelo contramodelo `CountermodelWorldwiseTruthmaking` (em formal/Logos/HostileSemantics.lean).
+
+A negação só se torna estritamente incoerente quando se aceitam duas pontes semânticas adicionais:
+1. `truth → truthmaker real`: a verdade atómica exige um fundamento ontológico na realidade (axioma `Truthmaker`, Tag: SEM);
+2. `truth necessária → entidade necessária`: a verdade necessária em todos os mundos exige uma entidade necessária uniforme (axioma `AxGlobalGround`, Tag: SEM).
+
+Sob estas pontes semânticas, `Modal.T7_necessaryReality` (GAPMAP C18) é PROVEN↑ e a negação "toda a realidade é contingente" é formalmente refutada no kernel (`Modal.noNecessaryTruthIfAllContingent`, GAPMAP C20).
 
 A cadeia seguinte fica:
 
@@ -135,22 +145,20 @@ NecessaryTruth
 → EternalRelation
 → Trinity.
 
-9. NOTA FORMAL — AXIOM SEM AxGlobalGround (dissolvido em teorema, batch
-A2-swap-theorem 2026-09-17)
+9. NOTA FORMAL — AXIOMA SEM AxGlobalGround
 
-A demonstração acima (passos 5–7) escondia a troca
-∀w∃r Ground(r,τ,w) → ∃r∀w Ground(r,τ,w). Para átomos, a troca é agora
-TEOREMA, não axioma:
+A demonstração acima (passos 5–7) requer a troca de quantificadores
+(∀w ∃r Ground(r,τ,w)) → (∃r ∀w Ground(r,τ,w)).
+Sob reconstrução sob semântica hostil, essa passagem foi rigorosamente testada:
+o contramodelo `CountermodelWorldwiseTruthmaking` (em `formal/Logos/HostileSemantics.lean`)
+demonstra que a existência de um fazedor de verdade em cada mundo não implica
+a existência de uma entidade necessária uniforme que fundamente a verdade em todos os mundos
+(entidades contingentes distintas podem fazer verdadeiro o átomo em mundos distintos).
+Por conseguinte, a ponte uniforme é declarada explicitamente como axioma semântico:
+`axiom AxGlobalGround (a : Atom) : (∀ w, TrueAt w (Form.atom a)) → ∃ e, NecessaryEntity e ∧ Ground e (Form.atom a)`
+com `Tag: SEM`.
 
-AxGlobalGround (teorema): todo átomo verdadeiro em todos os mundos é
-fundamentado por uma única entidade existente em todos os mundos.
-
-A prova no mundo vazio (onde todos os átomos contingentes avaliam a falso, emptyWorld_no_atom)
-mostra que qualquer fundamento atómico necessário só pode ser um sujeito transcendental
-(entity_in_emptyWorld_is_subject); a Origem primordial é necessária (origin_is_necessary, C87)
-e a troca de quantificadores é explicitamente transcendental (transcendental_quantifier_swap,
-modal_rigidity_of_ground, C88). E como os sujeitos transcendem valorações empíricas e Ground
-é rígido, essa mesma entidade fundamenta o átomo em todos os mundos. Com ela, T7-atómico é teorema
-genuíno (PROVEN, só vocabulário `{Ground}`). A instância composta (τ := φ ∨ ¬φ) continua
-BLOCKED: nenhum fundamento existencial de compostos é forçado (ver formal/DESIGN.md D7,
-formal/GAPMAP.md C19; transcrição em formal/Spikes/Spike_A6_probe.lean).
+Sob esta ponte semântica, `Modal.T7_necessaryReality` (GAPMAP C18) é PROVEN↑ com
+pegada `{AxGlobalGround, Ground}`. Além disso, a instância de verdade necessária da
+lei do terceiro excluído fecha-se através do átomo correspondente (`Modal.T7_excludedMiddleInstance`,
+GAPMAP C19) com a mesma pegada `{AxGlobalGround, Ground}`.

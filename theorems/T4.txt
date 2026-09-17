@@ -1,17 +1,17 @@
 T4 — O SUJEITO É AGENTE
 
-Depende de: T12 (batch Tier1, 2026-09-16: agência é analítica)
+Depende de: T1 e ato presente (C68 → C21 → C23; pegada estrita `{Means, Subject}`; agência é analítica).
+Desacoplado de `AxTwoSubjects`.
 
 12. O ato de afirmar é realizado por um sujeito:
 
 A(s,p) → Agent(s).
 
-(Nota formal: com o colapso Tier1 — A(s,p) := Means(s,p) e Agent(s) := True —
-esta passagem é uma tautologia definicional.
-Batch definitional-subject (2026-09-17): o dado do ato é o teorema exibido
-`Cogito` (∃ s p, A s p — a origem silenciosa sustenta todo o posar).
-`Plurality.T4_agentExists` é teorema trivial, projeção de Cogito; footprint
-medido `{}`. Ver formal/GAPMAP.md C23.)
+(Nota formal: com a identificação Tier-1 — A(s,p) := Means(s,p) e Agent(s) := True —
+esta passagem é analítica.
+No kernel, `Plurality.T4_agentExists` deriva a existência do agente a partir do
+ato performativo presente (pegada estrita `{Means, Subject}`).
+Ver formal/GAPMAP.md C23.)
 
 Logo:
 

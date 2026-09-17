@@ -15,3 +15,4 @@ import Logos.Choice
 import Logos.Value
 import Logos.Plurality
 import Logos.Love
+import Logos.HostileSemantics

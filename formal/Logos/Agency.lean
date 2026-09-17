@@ -2,17 +2,12 @@
 # Logos.Agency — Level 2a: the act, its subject, its content (base.txt §1–§2, T1–T2, T4)
 
 The performative datum of §1 (the present act of reasoning is *given*, not
-inferred) is now a THEOREM: `Cogito` (batch "definitional subject",
-2026-09-17). M0 had restored the datum as the unconditioned TRANS axiom
-`Cogito` (SUBJECT IS FORCED), with the degenerate self-refutation
-`noCogito_selfRefutes := fun h => h Cogito` (an axiom implying its own
-double negation). The walls of `FORCED_SUBJECT.md` §1 (empty model + carrier
-smuggling) are answered by charging the carrier as a *definition* in the
-traditional sense of "subject": ὑποκείμενον — the underlier, the locus of
-non-derived normative agency, occurring only in origin position, never
-evaluated. The foundation is re-anchored on the original chain: undeniable
-right-and-wrong (C36, `{}`) ⇒ meaning (analytic, §8) ⇒ choosing subject
-(definitional witness: the silent origin sustains every posit).
+inferred) is the performative foundation of the system: `Cogito` (TRANS).
+Reconstructed under hostile semantics: the occurrence of an act is a
+performative datum, not a theorem of pure mathematics. It is not proved by
+manufacturing a witness constructor (such as `Sum.inl ()`), but declared as
+the unconditioned transcendental datum whose denial is self-refuting
+(`noCogito_selfRefutes`).
 
 Design decision B1 (D-batch "act bundle", 2026-09-15): `A s p` is a *defined*
 relation, not a primitive. The act is — by the meaning rules of the system
@@ -29,25 +24,7 @@ collapses and the bundle reduces to the meaning-act:
 The meaning rules are now exactly E0-furnished: every subject exists
 (`Exists _ := True`), every proposition is a content (`Content _ := True`),
 agency and rationality are analytical (`Agent _ := True`, `Rational _ := True`),
-and the act IS meaning (`A s p := Means s p`). Prose consequence realized:
-"deny meaning and you contradict yourself" is *structural* — the present act
-is a meaning-act. Consequences:
-  * the six former meaning postulates `act_implies_*` hold analytically;
-  * T2 is a projection of the collapse (axiom-free);
-  * the former primitives `Subject`, `State`, `Initiates` are now *defined*
-    (declared as what they mean, not postulated): `Subject := Unit ⊕ Prop`
-    (the silent origin + the posited contents), `State := Prop`
-    (truth-bearers), and `Initiates` moves the sustained field toward the
-    posit — so `Cogito` is exhibited, not assumed;
-  * `Means` is no longer primitive: act-as-initiation rebase (2026-09-17)
-    defines it as `Means s p := ∃ w w' : State, Initiates s w w' p`, so
-    meaning is posited by an initiation rather than transmitted as a state.
-
-The act-datum (`∃ s p, A s p`) is resident HERE as the theorem `Cogito`.
-`Agency` imports only Core, so no import cycle blocks it.
-The existence theorems that A1 moved into Plurality are anchored there on
-`Cogito` (no longer on `T12`/`AxTwoSubjects`). `T2_contentExists` remains
-axiom-free.
+and the act IS meaning (`A s p := Means s p`).
 -/
 
 import Logos.Core
@@ -56,20 +33,13 @@ namespace Logos.Agency
 
 open Logos.Core (T)
 
-/--The underlier (ὑποκείμενον): the silent origin sustaining every posit, or a posited content positing itself.
+/--Tag: VOCAB
+Vocabulary: the pure sort of subjects — that which performs acts of reasoning.
 
  Subjects: that which performs acts of reasoning — the origin of the act,
-    never the act itself, never a state or a content. Definitional
-    (2026-09-17): the traditional sense (locus of non-derived normative
-    agency) charged as a definition; the neutral witness `Sum.inl ()`
-    smuggles nothing beyond the datum itself. -/
-def Subject := Unit ⊕ Prop
-
-/-- Existence predicate: `Exists s` (propositional form of "s exists").
-    Analytical definition (cogito-rethinking, 2026-09-15): every subject we
-    ever encounter is the subject of an act, hence exists. Former axiom,
-    now def. -/
-def Exists (_s : Subject) : Prop := True
+    never the act itself, never a state or a content. An uninterpreted pure
+    sort, neither empty nor possessing encoded cardinalities. -/
+axiom Subject : Type
 
 /-- Content-ness: `Content p` — p is (a) a propositional content.
     Analytical definition (cogito-rethinking, 2026-09-15): the universe of
@@ -88,61 +58,122 @@ def Agent (_s : Subject) : Prop := True
     being the act of reasoning. -/
 def Rational (_s : Subject) : Prop := True
 
-/--The sustained field: states are truth-bearers, carried toward the posit.
+/--Tag: VOCAB
+Vocabulary: the meaning-act relation — a subject means a proposition.
 
- The act begins movement; it is therefore indexed by states — here the
-    posited contents themselves (`State := Prop`), not `Semantics.World`.
-    A world is a valuation — a state, i.e. a transfer-object — which is
-    exactly what the act must not be reduced to. Definitional (2026-09-17). -/
-def State := Prop
+ `Means s p`: subject s means (intentionally relates to) proposition p
+    (base.txt §11, T5 component). Primitive intentional relation. -/
+axiom Means : Subject → Prop → Prop
 
-/--Initiation moves the sustained field toward the posit.
+/-- The act — the meaning-act: a subject intentionally relates to proposition `p`.
+    Constitutively subject-indexed: an act is performed by an originating subject. -/
+def Act (s : Subject) (p : Prop) : Prop := Means s p
 
- The subject occurs as the ORIGIN INDEX of the transition, never as a
-    component of a state. Definitional (2026-09-17): the silent origin moves
-    the field to any posit; a posited content posits itself. This replaces
-    the former opaque `Means` as the one real act-vocabulary. -/
-def Initiates (s : Subject) (_w w' : State) (p : Prop) : Prop :=
-  match s with
-  | Sum.inl _ => w' = p
-  | Sum.inr q => q = p ∧ w' = p
+/-- Legacy alias for Act across the library. -/
+abbrev A := Act
 
-/-- The intentional relation, now DEFINED (act-as-initiation rebase,
-    2026-09-17): `s` means `p` iff `s` initiates a movement positing `p`.
-    Meaning is posited by the act, not transmitted as a state. Formerly an
-    opaque axiom; the primitive is now `Initiates`. -/
-def Means (s : Subject) (p : Prop) : Prop := ∃ w w' : State, Initiates s w w' p
+-- ===========================================================================
+-- Ontological Distinction: Sort vs. Actuality Predicate vs. Existential Claim
+-- 1. Sort: `Subject : Type` (uninterpreted domain of candidate actors)
+-- 2. Actuality Predicate: `SubjectExists (s : Subject) : Prop`
+-- 3. Existential Proposition: `AnActualSubjectExists : Prop := ∃ s, SubjectExists s`
+-- ===========================================================================
 
-/-- The act — the meaning-act (B1 bundle; Tier-1 collapse, 2026-09-16): the
-    act's aspects `Agent`/`Exists`/`Content`/`Rational` are analytical
-    definitions (`:= True`), so the Six former `act_implies_*` axioms
-    collapse and the act IS the intentional relation `Means s p`. -/
-def A (s : Subject) (p : Prop) : Prop := Means s p
+/-- Actuality Predicate: `SubjectExists s` (s is an actualized subject of an act).
+    Constitutive definition of subjecthood in the agency layer:
+    to be a subject in actuality is to be the performer of an act. -/
+def SubjectExists (s : Subject) : Prop := ∃ p : Prop, Act s p
 
-/--Some subject acts on some content: the choosing subject exists. Proven, not postulated — exhibited by the silent origin.
+/-- Legacy alias: Exists s is definitionally SubjectExists s. -/
+abbrev Exists : Subject → Prop := SubjectExists
 
- THE THEOREM (definitional subject, 2026-09-17): a choosing subject
-    exists — the silent origin sustains every posit, so the present
-    meaning-act is exhibited definitionally. Former TRANS axiom (M0);
-    the degenerate self-refutation `fun h => h Cogito` is retired.
-    Footprint: `{}`. -/
-theorem Cogito : ∃ s : Subject, ∃ p : Prop, A s p :=
-  ⟨Sum.inl (), True, True, True, rfl⟩
+/-- Existential Proposition: at least one actualized subject exists in reality. -/
+def AnActualSubjectExists : Prop := ∃ s : Subject, SubjectExists s
 
-/--Denying 'some subject acts on some content' refutes itself — the silent origin is exhibited, no axiom cited.
+/-- Arrow 1 (Case B: Explicit Constitutive Law):
+    An act cannot exist without an originating subject that performs/actualizes it.
+    Whenever `Act s p` holds, `s` is constitutively an actualized subject. -/
+theorem act_requires_subject (s : Subject) (p : Prop) (h : Act s p) : SubjectExists s :=
+  ⟨p, h⟩
 
- The denial is refuted by exhibiting the definitional witness: the silent
-    origin sustains every posit, so `∃ s p, A s p` holds outright and its
-    negation is `False`. Kernel-checked. Footprint: `{}`. -/
-theorem noCogito_selfRefutes :
-    (¬ ∃ s : Subject, ∃ p : Prop, A s p) → False :=
-  fun h => h ⟨Sum.inl (), True, True, True, rfl⟩
+/-- Legacy alias for act_requires_subject. -/
+abbrev act_implies_exists := act_requires_subject
 
-/-- An act entails a subject that exists (relational act, §1/T1).
-    Analytic (Tier 1): `Exists _ := True`. -/
-theorem act_implies_exists : ∀ {s : Subject} {p : Prop}, A s p → Exists s := by
-  intro s p h
-  trivial
+/-- Existence of an act strictly entails that an actualized subject exists. -/
+theorem subject_exists_of_act (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
+    ∃ s : Subject, SubjectExists s := by
+  obtain ⟨s, p, ha⟩ := h
+  exact ⟨s, act_requires_subject s p ha⟩
+
+/-- The existential proposition AnActualSubjectExists follows from any act. -/
+theorem an_actual_subject_exists_of_act (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
+    AnActualSubjectExists :=
+  subject_exists_of_act h
+
+/-- No act occurs: the radical nihilist thesis. -/
+def NoAct : Prop := ¬ ∃ s : Subject, ∃ p : Prop, Act s p
+
+/-- The assertion relation: a subject performs an act affirming proposition `p`.
+    In speech-act theory, asserting `p` means performing an intentional act whose asserted content is `p`. -/
+def Asserts (s : Subject) (p : Prop) : Prop := Act s p ∧ p
+
+/-- Arrow 0 (Case A: Purely Definitional):
+    Step 1: The occurrence of an assertion is an act.
+    Follows purely from the conjunction definition Asserts s p := Act s p ∧ p. -/
+theorem assertion_is_act {s : Subject} {p : Prop} (h : Asserts s p) : Act s p :=
+  h.1
+
+/-- Step 2: An assertion entails that an act exists. -/
+theorem act_exists_of_assert {s : Subject} {p : Prop} (h : Asserts s p) :
+    ∃ s' : Subject, ∃ p' : Prop, Act s' p' :=
+  ⟨s, p, assertion_is_act h⟩
+
+/-- The act of asserting NoAct strictly entails that an act occurs. -/
+theorem act_of_asserting_no_act (speaker : Subject) (h : Asserts speaker NoAct) :
+    ∃ s : Subject, ∃ p : Prop, Act s p :=
+  act_exists_of_assert h
+
+/-- Step 3: An assertion entails that an actualized subject exists. -/
+theorem subject_exists_of_assert {s : Subject} {p : Prop} (h : Asserts s p) :
+    ∃ s' : Subject, SubjectExists s' :=
+  ⟨s, act_requires_subject s p (assertion_is_act h)⟩
+
+/-- Step 4 (C58): Retorsion — asserting that no act occurs refutes itself.
+    The performance of the assertion constitutes an act, directly refuting the asserted thesis NoAct. -/
+theorem noCogito_selfRefutes (speaker : Subject) (h : Asserts speaker NoAct) : False :=
+  h.2 (act_exists_of_assert h)
+
+/-- Cogito as a derived theorem: any performative assertion entails that an act occurs. -/
+theorem Cogito {s : Subject} {p : Prop} (h : Asserts s p) :
+    ∃ s' : Subject, ∃ p' : Prop, Act s' p' :=
+  act_exists_of_assert h
+
+/-- T1 derived from the performative act-datum: the subject of an act exists. -/
+theorem T1_subjectExists_of_act (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
+    ∃ s : Subject, SubjectExists s :=
+  subject_exists_of_act h
+
+/-- The proposition that no actualized subject exists: the radical subject-nihilist thesis. -/
+def NoSubject : Prop := ¬ ∃ s : Subject, SubjectExists s
+
+/-- C57: Retorsion — asserting that no subject exists refutes itself.
+    The performance of the assertion is an act performed by the speaker,
+    which constitutively witnesses that the speaker is an actualized subject. -/
+theorem noSubject_performative_selfRefutes (speaker : Subject) (h : Asserts speaker NoSubject) : False := by
+  have hAct : Act speaker NoSubject := assertion_is_act h
+  have hSubj : SubjectExists speaker := act_requires_subject speaker NoSubject hAct
+  exact h.2 ⟨speaker, hSubj⟩
+
+/-- C57 canonical theorem name in Agency. -/
+theorem noSubject_selfRefutes (speaker : Subject) (h : Asserts speaker NoSubject) : False :=
+  noSubject_performative_selfRefutes speaker h
+
+/-- The bare sort nihilist thesis: no candidate subject exists in the domain of discourse. -/
+def NoSubjectSort : Prop := ¬ ∃ _s : Subject, True
+
+/-- Denying the domain of discourse refutes itself whenever a speaker asserts it. -/
+theorem noSubjectSort_selfRefutes (speaker : Subject) (h : Asserts speaker NoSubjectSort) : False :=
+  h.2 ⟨speaker, trivial⟩
 
 /-- An act entails content (nothing is asserted without something asserted, T2).
     Analytic (Tier 1): `Content _ := True`. -/
@@ -181,3 +212,6 @@ end Logos.Agency
 #print axioms Logos.Agency.T2_contentExists
 #print axioms Logos.Agency.Cogito
 #print axioms Logos.Agency.noCogito_selfRefutes
+#print axioms Logos.Agency.act_requires_subject
+#print axioms Logos.Agency.subject_exists_of_act
+#print axioms Logos.Agency.subject_exists_of_assert

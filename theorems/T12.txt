@@ -1,40 +1,34 @@
 T12 — MAIS DO QUE UMA PESSOA (o passo central do poema)
 
-Depende de: a definição de sujeito (Unit ⊕ Prop, 2026-09-17) — preço
-nenhum. PROVEN (plurality-discharge, 2026-09-17); a antiga ponte META
-AXIom AxTwoSubjects foi RETIRED (formal/Logos/Value.lean).
+Depende de: axioma metafísico AxTwoSubjects (Tag: META) + T3 (rightWrongDistinction)
 
-Verificado em: formal/Logos/Person.lean (Person.twoPersonsFromSubject,
-GAPMAP.md C73) e formal/Logos/Plurality.lean (T12_twoPersons, C40),
-formal/Logos/Value.lean (neverAlone/aloneExcluded, C74). Pegada: `{}`.
-2026-09-17 (plurality-discharge): o par canónico — a origem `Sum.inl ()` e o
-destinatário `Sum.inr True` — é um teorema `{}`; ALONE_EXCLUDED é o teorema
-`Value.aloneExcluded` (nenhum sujeito está sózinho: `otherSubject s ≠ s`);
-o modelo da solidão de M2 foi construído sobre o antigo `Subject` axiomático
-e fica SUPERADO. O passo do poema deixa de ser uma ponte paga e passa a ser
-descoberta: o outro é o conteúdo tornado sujeito — "alguém para quem
-significar".
-2026-09-15 (PLC, nó de cadeia): T12_directedPair (GAPMAP C47, DESIGN.md
-D-C47) — o par T12 orientado, com afetividade dirigida; é sobre este nó que
-T14 é construído. (Pré-2026-09-17, T12 e derivados liam {AxTwoSubjects};
-A3/A1/cogito-rethinking não mudaram de conteúdo.)
+Verificado em: formal/Logos/Plurality.lean (T12_twoPersons, C40; T12_directedPair, C47),
+formal/Logos/Value.lean (AxTwoSubjects, C40), GAPMAP.md C40, C47, C73, C74.
+Pegada: `{AxTwoSubjects, Means, Subject}`.
 
 Enunciado:
 
-Do que é um sujeito (a definição de 2026-09-17) segue:
+Da inegabilidade da distinção entre certo e errado e da ponte metafísica AxTwoSubjects segue:
 
 ∃s₁∃s₂ [Person(s₁) ∧ Person(s₂) ∧ s₁ ≠ s₂].
 
-"não é sózinho" (poema). Testemunhas canónicas: a origem `Sum.inl ()` e o
-destinatário `Sum.inr True` (conteúdo auto-posto — Person por
-`Means (Sum.inr True) True`; distintos por construtores). C73–C74.
+"não é sózinho" (poema).
 
-PORQUE AQUI NÃO HÁ PREÇO (nota formal, plurality-discharge 2026-09-17):
-a pluralidade tornou-se matemática — o sujeito definicional tem ≥2
-habitantes, ambos pessoas — e o lema em falta que justificava a ponte
-(ALONE_EXCLUDED) é agora um teorema. O "outro" do poema é o *destinatário*
-(para quem um ato significa), não um segundo origem silencioso: há um só
-`inl`; qualquer releitura `Index ⊕ Prop` é indistinguível em `Means`
-(veredicto Track-B, DESIGN.md D14). O salto interpessoal não se perdeu nem se
-fingiu — localizou-se na definição de sujeito (2026-09-17), exatamente como
-cogito e esse-est-agere.
+NOTA FORMAL — O PREÇO METAFÍSICO DA PLURALIDADE (reconstrução sob semântica hostil):
+
+A tentativa de derivar a pluralidade a custo zero (através de uma definição codificada
+`Subject := Unit ⊕ Prop` onde conteúdos proposicionais seriam "pessoas por construtor")
+foi formalmente refutada sob semântica hostil:
+1. O contramodelo `UnitPluralityCountermodel` (e o teorema de separação
+   `not_entails_plurality` em `formal/Logos/HostileSemantics.lean`) demonstra
+   que um único sujeito que atua e é pessoa satisfaz toda a teoria da agência
+   sem que existam dois sujeitos distintos.
+2. O contramodelo `CountermodelContentWithoutPerson` (e o teorema
+   `not_entails_content_person`) prova que conteúdos proposicionais significados
+   não são pessoas por mera existência lógica.
+
+Por conseguinte, a passagem para além da solidão solitária ("não é sózinho")
+não é um truque definicional, mas uma ponte metafísica explícita:
+`axiom AxTwoSubjects : (¬ N_T ∧ ¬ N_F) → ∃ s₁ s₂, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` (`Tag: META`).
+O passo do poema é assim preservado com toda a sua gravidade ontológica:
+a pluralidade de pessoas é afirmada como exigência metafísica real da ordem do certo e do errado.

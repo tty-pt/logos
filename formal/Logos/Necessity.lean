@@ -109,12 +109,10 @@ theorem nec4PH {P : WProp} : NecessityPH P → NecessityPH (fun _ => NecessityPH
   intro hP w
   exact hP
 
-/--The distinction between right and wrong is necessary: it is false that nothing is true, and false that everything is true.
+/-- The distinction between right and wrong under the identity-model alias.
 
- Necessity of the distinction (poem P2), as a theorem (C1): under the
-    identity-model alias this is exactly the proven Prose-result
-    `¬N_T ∧ ¬N_F`. Its intended reading is the world-level content
-    (see module header). -/
+ NOTE: `Necessity p` is an identity alias (`Necessity p ↔ p`), not genuine metaphysical necessity.
+ The genuine world-level modal theorem is `Semantics.bothNecessarilyTrueAndFalse` (C37). -/
 theorem necDistinction : Necessity (¬ N_T ∧ ¬ N_F) :=
   fun _w => rightWrongDistinction
 
