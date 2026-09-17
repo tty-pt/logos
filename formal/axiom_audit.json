@@ -1,0 +1,409 @@
+{
+ "Logos.Agency.A": [],
+ "Logos.Agency.Agent": [],
+ "Logos.Agency.Cogito": [],
+ "Logos.Agency.Content": [],
+ "Logos.Agency.Exists": [],
+ "Logos.Agency.Initiates": [],
+ "Logos.Agency.Means": [],
+ "Logos.Agency.Rational": [],
+ "Logos.Agency.State": [],
+ "Logos.Agency.Subject": [],
+ "Logos.Agency.T2_contentExists": [],
+ "Logos.Agency.act_implies_agent": [],
+ "Logos.Agency.act_implies_content": [],
+ "Logos.Agency.act_implies_exists": [],
+ "Logos.Agency.act_implies_means": [],
+ "Logos.Agency.act_implies_rational": [],
+ "Logos.Agency.noCogito_selfRefutes": [],
+ "Logos.Alternatives.Incompatible": [],
+ "Logos.Alternatives.T9_incompatibleAlternatives": [],
+ "Logos.Alternatives.incompatible_with_negation": [],
+ "Logos.Choice.CanChoose": [],
+ "Logos.Choice.Chooses": [],
+ "Logos.Choice.FreeWill": [],
+ "Logos.Choice.JUDGE_COMMITTED": [],
+ "Logos.Choice.Meaning_I": [],
+ "Logos.Choice.T11_choiceField": [],
+ "Logos.Choice.canChoose_unfold": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.Choice.choiceExists": [],
+ "Logos.Choice.incompatible_self_negation": [],
+ "Logos.Choice.meaning_I_needs_subject": [],
+ "Logos.Choice.meaning_needs_subject": [],
+ "Logos.Choice.noChoice_selfRefutes": [],
+ "Logos.Choice.noSubject_selfRefutes": [],
+ "Logos.Choice.person_chooses": [],
+ "Logos.Choice.rightWrong_implies_someone_means": [],
+ "Logos.Core.IsFalse": [],
+ "Logos.Core.N_F": [],
+ "Logos.Core.N_T": [],
+ "Logos.Core.T": [],
+ "Logos.Core.atomicTruthWitnessed": [],
+ "Logos.Core.atomicWitnessFalsehood": [],
+ "Logos.Core.bivalence": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.Core.excludedMiddle": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.Core.greatResult": [],
+ "Logos.Core.negatedAbsolutes": [],
+ "Logos.Core.noBothTrueAndFalse": [],
+ "Logos.Core.nonContradiction": [],
+ "Logos.Core.notEverythingTrue": [],
+ "Logos.Core.notNothingTrue": [],
+ "Logos.Core.nothingFalseRefutes": [],
+ "Logos.Core.nothingTrueRefutes": [],
+ "Logos.Core.rightWrongDistinction": [],
+ "Logos.Core.someFalse": [],
+ "Logos.Core.someTrue": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.Core.someTruthAndSomeFalsehood": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.Core.tschema": [],
+ "Logos.GroundPerson.AxGroundBearing": [
+  "Logos.GroundPerson.GroundProp"
+ ],
+ "Logos.GroundPerson.AxPersonalGround": [
+  "Logos.GroundPerson.AxPersonalGround",
+  "Logos.GroundPerson.GroundProp",
+  "Logos.Truthmaker.ExistsAt"
+ ],
+ "Logos.GroundPerson.GroundPrincipleProp": [
+  "Logos.GroundPerson.GroundPrincipleProp",
+  "Logos.GroundPerson.GroundProp"
+ ],
+ "Logos.GroundPerson.GroundProp": [
+  "Logos.GroundPerson.GroundProp"
+ ],
+ "Logos.GroundPerson.IsPresentPersonalFeature": [],
+ "Logos.GroundPerson.Personal": [
+  "Logos.GroundPerson.GroundProp"
+ ],
+ "Logos.GroundPerson.Realizes": [
+  "Logos.GroundPerson.GroundProp"
+ ],
+ "Logos.GroundPerson.T8_personalGround": [
+  "Logos.GroundPerson.AxPersonalGround",
+  "Logos.GroundPerson.GroundProp",
+  "Logos.Truthmaker.ExistsAt"
+ ],
+ "Logos.GroundPerson.necessary_truth_has_necessary_grounder": [
+  "Logos.Modal.AxGlobalGround",
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.GroundPerson.present_feature_is_grounded": [
+  "Logos.GroundPerson.GroundPrincipleProp",
+  "Logos.GroundPerson.GroundProp"
+ ],
+ "Logos.Initiation.Branches": [],
+ "Logos.Initiation.Cogito_Init": [],
+ "Logos.Initiation.IsTransfer": [],
+ "Logos.Initiation.Moves": [],
+ "Logos.Initiation.Originates": [],
+ "Logos.Initiation.branches_not_transfer": [],
+ "Logos.Initiation.noInitiation_selfRefutes": [],
+ "Logos.Initiation.originates_not_transfer": [],
+ "Logos.Initiation.person_iff_originates": [],
+ "Logos.Love.AxPersonStability": [
+  "Logos.Love.AxPersonStability",
+  "Logos.Truthmaker.ExistsAt"
+ ],
+ "Logos.Love.Lovable": [],
+ "Logos.Love.Loves": [],
+ "Logos.Love.T13_someoneLovable": [
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Love.T14_content": [
+  "Logos.Love.AxPersonStability",
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Love.T14_eternalRelation": [
+  "Logos.Love.AxPersonStability",
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Love.T14_square": [
+  "Logos.Love.AxPersonStability",
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Love.T14_world": [
+  "Logos.Love.AxPersonStability",
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Modal.AxGlobalGround": [
+  "Logos.Modal.AxGlobalGround",
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Modal.Contingent": [
+  "Logos.Truthmaker.ExistsAt"
+ ],
+ "Logos.Modal.NecessaryEntity": [
+  "Logos.Truthmaker.ExistsAt"
+ ],
+ "Logos.Modal.T7_excludedMiddleInstance": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Modal.AxGlobalGround",
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Modal.T7_necessaryReality": [
+  "Logos.Modal.AxGlobalGround",
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Modal.actualWorld": [],
+ "Logos.Modal.noNecessaryTruthIfAllContingent": [
+  "Logos.Modal.AxGlobalGround",
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Necessity.Dia": [],
+ "Logos.Necessity.Necessity": [],
+ "Logos.Necessity.NecessityPH": [],
+ "Logos.Necessity.WProp": [],
+ "Logos.Necessity.dia_def": [],
+ "Logos.Necessity.nec4": [],
+ "Logos.Necessity.nec4PH": [],
+ "Logos.Necessity.necDistinction": [],
+ "Logos.Necessity.necDistinction_content": [],
+ "Logos.Necessity.necK": [],
+ "Logos.Necessity.necKPH": [],
+ "Logos.Necessity.necMP": [],
+ "Logos.Necessity.necT": [],
+ "Logos.Necessity.necTPH": [],
+ "Logos.Necessity.nec_apply": [],
+ "Logos.Necessity.someWorld": [],
+ "Logos.Order.Correct": [],
+ "Logos.Order.Fallible": [],
+ "Logos.Order.Incorrect": [],
+ "Logos.Order.T6_fallibility": [],
+ "Logos.Order.T6_truthTranscendsWill": [],
+ "Logos.Order.consequence_preserves_truth": [],
+ "Logos.Order.correctness_distinct": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.Order.fallible_false": [],
+ "Logos.Order.judge_commits": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.Order.rightDistinctWrong_implies_meaning": [],
+ "Logos.Order.rightWrongDistinction_implies_meaning": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.Order.rightWrong_implies_meaning": [],
+ "Logos.Person.CarriesLogicalFeature": [],
+ "Logos.Person.CarriesPersonalFeature": [],
+ "Logos.Person.HasFeature": [],
+ "Logos.Person.Intentional": [],
+ "Logos.Person.Person": [],
+ "Logos.Person.RationalAct": [],
+ "Logos.Person.inseparability_24b": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.Plurality.EntityOf": [],
+ "Logos.Plurality.NecessarySubject": [
+  "Logos.Truthmaker.ExistsAt"
+ ],
+ "Logos.Plurality.T12_directedPair": [
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Plurality.T12_twoPersons": [
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Plurality.T1_subjectExists": [],
+ "Logos.Plurality.T4_agentExists": [],
+ "Logos.Plurality.T5_personExists": [],
+ "Logos.Plurality.cogito_from_T12": [],
+ "Logos.Plurality.notAlone": [
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Semantics.FalseAt": [],
+ "Logos.Semantics.Form.and.elim": [],
+ "Logos.Semantics.Form.and.inj": [],
+ "Logos.Semantics.Form.and.injEq": [
+  "propext"
+ ],
+ "Logos.Semantics.Form.and.noConfusion": [],
+ "Logos.Semantics.Form.and.sizeOf_spec": [],
+ "Logos.Semantics.Form.atom.elim": [],
+ "Logos.Semantics.Form.atom.inj": [],
+ "Logos.Semantics.Form.atom.injEq": [
+  "propext"
+ ],
+ "Logos.Semantics.Form.atom.noConfusion": [],
+ "Logos.Semantics.Form.atom.sizeOf_spec": [],
+ "Logos.Semantics.Form.below": [],
+ "Logos.Semantics.Form.brecOn": [],
+ "Logos.Semantics.Form.brecOn.eq": [],
+ "Logos.Semantics.Form.brecOn.go": [],
+ "Logos.Semantics.Form.casesOn": [],
+ "Logos.Semantics.Form.ctorElim": [],
+ "Logos.Semantics.Form.ctorElimType": [],
+ "Logos.Semantics.Form.ctorIdx": [],
+ "Logos.Semantics.Form.imp.elim": [],
+ "Logos.Semantics.Form.imp.inj": [],
+ "Logos.Semantics.Form.imp.injEq": [
+  "propext"
+ ],
+ "Logos.Semantics.Form.imp.noConfusion": [],
+ "Logos.Semantics.Form.imp.sizeOf_spec": [],
+ "Logos.Semantics.Form.noConfusion": [],
+ "Logos.Semantics.Form.noConfusionType": [],
+ "Logos.Semantics.Form.not.elim": [],
+ "Logos.Semantics.Form.not.inj": [],
+ "Logos.Semantics.Form.not.injEq": [
+  "propext"
+ ],
+ "Logos.Semantics.Form.not.noConfusion": [],
+ "Logos.Semantics.Form.not.sizeOf_spec": [],
+ "Logos.Semantics.Form.or.elim": [],
+ "Logos.Semantics.Form.or.inj": [],
+ "Logos.Semantics.Form.or.injEq": [
+  "propext"
+ ],
+ "Logos.Semantics.Form.or.noConfusion": [],
+ "Logos.Semantics.Form.or.sizeOf_spec": [],
+ "Logos.Semantics.Form.recOn": [],
+ "Logos.Semantics.NecessarilyFalse": [],
+ "Logos.Semantics.NecessarilyTrue": [],
+ "Logos.Semantics.Satisfies": [],
+ "Logos.Semantics.TV.casesOn": [],
+ "Logos.Semantics.TV.ctorElim": [],
+ "Logos.Semantics.TV.ctorElimType": [],
+ "Logos.Semantics.TV.ctorIdx": [],
+ "Logos.Semantics.TV.f.elim": [],
+ "Logos.Semantics.TV.f.sizeOf_spec": [],
+ "Logos.Semantics.TV.noConfusion": [],
+ "Logos.Semantics.TV.noConfusionType": [],
+ "Logos.Semantics.TV.ofNat": [],
+ "Logos.Semantics.TV.ofNat_ctorIdx": [],
+ "Logos.Semantics.TV.recOn": [],
+ "Logos.Semantics.TV.t.elim": [],
+ "Logos.Semantics.TV.t.sizeOf_spec": [],
+ "Logos.Semantics.TrueAt": [],
+ "Logos.Semantics.World": [],
+ "Logos.Semantics.bothNecessarilyTrueAndFalse": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.Semantics.instDecidableEqForm": [],
+ "Logos.Semantics.instDecidableEqForm.decEq": [],
+ "Logos.Semantics.instDecidableEqTV": [],
+ "Logos.Semantics.instReprForm": [],
+ "Logos.Semantics.instReprForm.repr": [],
+ "Logos.Semantics.instReprTV": [],
+ "Logos.Semantics.instReprTV.repr": [],
+ "Logos.Semantics.lawExcludedMiddle": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.Semantics.nonContradiction": [
+  "propext"
+ ],
+ "Logos.Semantics.sat_and": [],
+ "Logos.Semantics.sat_imp": [],
+ "Logos.Semantics.sat_not": [],
+ "Logos.Semantics.sat_or": [],
+ "Logos.Truthmaker.Entity": [],
+ "Logos.Truthmaker.ExistsAt": [
+  "Logos.Truthmaker.ExistsAt"
+ ],
+ "Logos.Truthmaker.Ground": [
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Truthmaker.NecessarilyFalse": [
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Truthmaker.NecessarilyTrue": [
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Truthmaker.TrueAt": [
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Truthmaker.groundPrinciple_atom": [
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Truthmaker.lawExcludedMiddle": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Truthmaker.noGround_selfRefutes": [
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Truthmaker.nonContradiction": [
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Truthmaker.sat_ground_and": [
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Truthmaker.sat_ground_imp": [
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Truthmaker.sat_ground_not": [
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Truthmaker.sat_ground_or": [
+  "Logos.Truthmaker.ExistsAt",
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Value.Affects": [],
+ "Logos.Value.Alone": [],
+ "Logos.Value.AxPersonsAffect": [],
+ "Logos.Value.AxTwoSubjects": [
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Value.Harms": [],
+ "Logos.Value.Helps": [],
+ "Logos.Value.OtherAffects": [],
+ "Logos.Value.alone_no_other_affects": [],
+ "Logos.Value.alone_no_other_help_harm": [],
+ "Logos.Value.harm_affects": [],
+ "Logos.Value.help_affects": [],
+ "Logos.Value.valueInterpersonal_of_split": [
+  "Logos.Value.AxTwoSubjects"
+ ]
+}

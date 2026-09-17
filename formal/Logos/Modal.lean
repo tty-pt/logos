@@ -35,7 +35,9 @@ def NecessaryEntity (e : Entity) : Prop := ∀ w : World, ExistsAt w e
 /-- An entity is contingent iff it is not necessary. -/
 def Contingent (e : Entity) : Prop := ¬ NecessaryEntity e
 
-/--A formula true in every world is grounded by a single entity existing in every world (the quantifier swap).
+/--Tag: SEM
+
+ A formula true in every world is grounded by a single entity existing in every world (the quantifier swap).
 
  AxGlobalGround (SEM): a formula true in every world is grounded by a
     single entity that exists in every world.

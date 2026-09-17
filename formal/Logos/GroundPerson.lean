@@ -53,7 +53,9 @@ open Logos.Modal (NecessaryEntity)
 open Logos.Agency (Subject A Means)
 
 
-/--Vocabulary: the grounding relation between an entity and a proposition.
+/--Tag: VOCAB
+
+ The grounding relation between an entity and a proposition.
 
  Prop-level grounding (the §24a image at the level of propositional
     features): `GroundProp e f` — entity e grounds the *feature* f. -/
@@ -65,7 +67,9 @@ axiom GroundProp : Entity → Prop → Prop
     now an `rfl`-level theorem. -/
 def Realizes (e : Entity) (f : Prop) : Prop := GroundProp e f
 
-/--The §24a atom-grounding principle reflected at the level of propositions.
+/--Tag: SEM
+
+ The §24a atom-grounding principle reflected at the level of propositions.
 
  GroundPrincipleProp (SEM): every true proposition of the present rational
     level has a grounding entity. Prop-level reflection of
@@ -86,7 +90,9 @@ def IsPresentPersonalFeature (f : Prop) : Prop :=
 /-- A reality is *personal* if it realizes some present personal feature. -/
 def Personal (e : Entity) : Prop := ∃ f : Prop, Realizes e f ∧ IsPresentPersonalFeature f
 
-/--The personal price of T8: what is grounded about a person is grounded in a personal way.
+/--Tag: META
+
+ The personal price of T8: what is grounded about a person is grounded in a personal way.
 
  AxPersonalGround (META): the *necessary* reality grounds the personal
     features present in the rational act.  This is the declared bridge of the

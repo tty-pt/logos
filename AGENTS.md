@@ -22,25 +22,38 @@ prose and the Lean theorem ledger agree (see `formal/GAPMAP.md`).
 
 ## DEDUCTION.md (auto-generated map)
 
-`DEDUCTION.md` (repo root) is the generated visualization of the deduction: Lean kernel graph
-(LeanDepViz) cross-referenced with the curated `formal/GAPMAP.md` ledger. **Never edit it by hand.**
+`DEDUCTION.md` (repo root) is the generated visualization of the deduction. Statuses
+are **derived, never transcribed**: each step's badge is a pure function of (kernel node
+kind, audited `#print axioms` footprint, declared axiom `Tag:`). The GAPMAP status/footprint
+cells are checked against the derived values, never used as their source. **Never edit it by hand.**
 
 Regeneration (after any Lean/GAPMAP change):
 
 ```sh
 export PATH="$HOME/.elan/bin:$PATH"
 cd formal && lake exe depviz --roots Logos --json-out depgraph.json --dot-out depgraph.dot
-cd .. && python3 scripts/build_deduction.py
+cd .. && python3 scripts/audit_footprints.py && python3 scripts/build_deduction.py
 ```
 
 - `formal/depgraph.json`/`.dot` are produced by the LeanDepViz dep (see `formal/lakefile.toml`),
   rebuilt with `lake build depviz` after a toolchain/dependency change.
+- `formal/axiom_audit.json` is produced by `scripts/audit_footprints.py`: a temp
+  `import Logos` module with a `#print axioms` line per declaration is run through
+  `lake env lean`, giving the exact transitive kernel axiom set (incl. CL) for every
+  node. The graph's own `customAxioms` field undercounts transitively and is used
+  only for the dependency edges, never for footprints.
 - The script is stdlib-only; it parses `formal/Logos/*.lean` (declarations + line numbers),
-  `formal/GAPMAP.md` (claims, statuses, footprints, tags), and `depgraph.json` (nodes, axiom
-  footprints, edges), and renders `DEDUCTION.md` in Portuguese.
+  `formal/GAPMAP.md` (claim IDs, prose refs), `axiom_audit.json` (authoritative
+  footprints), and `depgraph.json` (nodes with kinds, edges), and renders
+  `DEDUCTION.md` in Portuguese.
+- Each axiom carries its type on the first line of its `/-- … -/` docstring —
+  `Tag: VOCAB` (vocabulary of the statement itself), `Tag: SEM` (semantic choice),
+  `Tag: META` (metaphysical bridge) — closed vocabulary; an untagged or mistyped
+  axiom is a regeneration error, not a note.
 - Statements are displayed in logic symbols (`scripts` `humanise()`); the per-step English
   sentences live in **code**: as the first paragraph of the `/-- … -/` docstring directly
-  above each axiom/theorem/def in `formal/Logos/*.lean`, and as `def NAME : String := "…"`
+  above each axiom/theorem/def in `formal/Logos/*.lean` (after the `Tag:` line for
+  axioms), and as `def NAME : String := "…"`
   values in `formal/Logos/ClaimMeanings.lean` for claims with no kernel declaration.
   Claims/axioms without a gloss are flagged in the consistency section — author the
   sentence in the Lean source, don't leave the row bare.

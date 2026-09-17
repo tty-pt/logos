@@ -38,12 +38,16 @@ open Logos.Agency (Subject)
     Q2/D11 identification (`Entity := Subject`) made definitional. -/
 def Entity : Type := Subject
 
-/--Vocabulary: the truthmaker relation — an entity grounding a formula.
+/--Tag: VOCAB
+
+ The truthmaker relation — an entity grounding a formula.
 
  `Ground e φ`: entity `e` grounds formula `φ`. -/
 axiom Ground : Subject → Form → Prop
 
-/--Vocabulary: existence-in-a-world — an entity existing at a world.
+/--Tag: VOCAB
+
+ Existence-in-a-world — an entity existing at a world.
 
  `ExistsAt w e`: entity `e` exists in world `w`. -/
 axiom ExistsAt : World → Subject → Prop

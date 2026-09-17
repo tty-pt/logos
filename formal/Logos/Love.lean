@@ -52,7 +52,9 @@ theorem T13_someoneLovable :
     ⟨q, hne.symm, hq⟩,
     ⟨p, hne, hp⟩⟩
 
-/--Persons persist across worlds: whoever is a person exists in every world — the poem's 'somehow'.
+/--Tag: SEM
+
+ Persons persist across worlds: whoever is a person exists in every world — the poem's 'somehow'.
 
  AxPersonStability (SEM; poem P8 "de alguma forma", DESIGN.md D-C4): every
     person's entity-correlate exists in every world — persons are NOT

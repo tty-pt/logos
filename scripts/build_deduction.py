@@ -1,23 +1,37 @@
 #!/usr/bin/env python3
 """build_deduction.py — Γ / Logos deduction map generator.
 
-Merges three sources of truth:
+Merges four sources of truth:
 
-  1. formal/depgraph.json   — LeanDepViz kernel graph: every declaration
-                              (theorem/def/axiom) with its transitive axioms
-                              and its direct dependency edges.
-  2. formal/GAPMAP.md       — the curated theorem ledger: claim IDs, prose
-                              references, statuses, axiom footprints and tags.
-  3. formal/Logos/*.lean    — the source: exact declaration line numbers and
-                              formal statements (used for hyperlinks).
+  1. formal/depgraph.json    — LeanDepViz kernel graph: declarations, kinds,
+                               direct dependency edges (the deduction chain).
+  2. formal/axiom_audit.json — `#print axioms` per declaration (written by
+                               scripts/audit_footprints.py): the exact,
+                               transitive kernel axiom set, meta-logic
+                               included ({propext, Classical.choice,
+                               Quot.sound} = CL). This is the authoritative
+                               footprint: the graph's node `customAxioms`
+                               undercounts transitively.
+  3. formal/Logos/*.lean     — the source: declaration line numbers, formal
+                               statements, EN meanings, and each axiom's
+                               `Tag:` (VOCAB/SEM/META) on its docstring.
+  4. formal/GAPMAP.md        — the claim ledger: IDs, prose references, and
+                               the curator transcription of status/footprint,
+                               checked (never trusted) against the kernel.
+
+STATUS IS DERIVED, NEVER TRANSCRIBED: for a claim resolved to a kernel node,
+the badge is a pure function of (node kind, audited axiom set, declared axiom
+tags). GAPMAP statuses only govern claims with no kernel node (blocked /
+deferred / faith / spike) — where no deduction exists to analyze.
 
 Output: DEDUCTION.md at the repository root: the deduction chain, level by
-level, each claim with its formal notation, its status, its axiom footprint,
-its dependencies and dependents, plus an axiom inventory and a consistency
-report (GAPMAP vs. kernel graph).
+level, each claim with its formal notation, its derived status, its axiom
+footprint, its dependencies and dependents, plus an axiom inventory and a
+consistency report.
 
-Regenerate after any GAPMAP / Lean source change:
+Regenerate after any Lean / GAPMAP change:
 
+    python3 scripts/audit_footprints.py   # kernel footprints (writes axiom_audit.json)
     python3 scripts/build_deduction.py
 
 Stdlib only. UTF-8 required.
@@ -165,6 +179,7 @@ def parse_lean_sources() -> dict:
                 "end_line": end_line,
                 "statement": stmt,
                 "doc": _doc_for(cur_doc),
+                "tag": _tag_for(cur_doc),
                 "stringValue": string_value,
             }
             cur_doc = ""
@@ -173,10 +188,26 @@ def parse_lean_sources() -> dict:
     return decls
 
 
+TAG_RE = re.compile(r"^Tag:\s*([A-Za-z_][A-Za-z0-9_]*)\s*$", re.M)
+
+
+def _tag_for(doc: str) -> str:
+    """Axiom-type tag declared on the docstring's `Tag:` line (VOCAB/SEM/META)."""
+    m = TAG_RE.search(doc or "")
+    return m.group(1) if m else ""
+
+
 def _doc_for(doc: str) -> str:
-    """First paragraph of a doc comment, trimmed to ~260 chars."""
+    """First paragraph of a doc comment, trimmed to ~260 chars.
+
+    A leading `Tag: VOCAB` line (mechanical, for the axiom registry) is
+    dropped and never becomes part of the meaning.
+    """
     if not doc:
         return ""
+    m = re.match(r"^Tag:\s*[A-Za-z_][A-Za-z0-9_]*\s*\n?", doc)
+    if m:
+        doc = doc[m.end():]
     para = doc
     # cut at first blank-line-equivalent marker like a double newline or '-\n'
     for sep in ("\n\n", "-\n", ".\n"):
@@ -384,27 +415,102 @@ STATUS_BADGE = {
     "DEFERRED": "➖",
 }
 
-AXIOM_TAGS = {
-    "Ground": ("VOCAB", "truthmaker relation"),
-    "ExistsAt": ("VOCAB", "existence-in-world"),
-    "AxGlobalGround": ("SEM", "T7 quantifier swap  ∀w∃r → ∃r∀w"),
-    "AxTwoSubjects": ("META", "plurality bridge (right-and-wrong needs two persons)"),
-    "AxPersonStability": ("SEM", "world-persistence of persons (T14)"),
-    "GroundProp": ("VOCAB", "grounding between entity and proposition"),
-    "GroundPrincipleProp": ("SEM", "reflection of the §24a principle at Prop"),
-    "AxPersonalGround": ("META", "the 'personal' price of T8 (D9)"),
-}
+# ---------------------------------------------------------------------------
+# Axiom registry — derived from the Lean source (each axiom's `Tag:` line),
+# NOT from a script-side hardcode. The badge is a pure function of (node kind,
+# audited kernel footprint, declared tag).
+# ---------------------------------------------------------------------------
 
-# Axioms that are mere architectural vocabulary (relations the statements
-# talk about). A theorem whose whole kernel footprint lies inside this set
-# is displayed ✔ ("PROVEN", justified): the "axioms" are the constants the
-# statement itself talks about, not assumptions the proof uses (e.g. C15/C60
-# — the denial of atom-grounding refutes itself by definition, RAA).
-# Substantive axioms below. (Former members Subject/State/Initiates/Cogito
-# became definitions/theorem in the definitional-subject batch, 2026-09-17.)
-VOCAB_CONSTS = {"Ground", "ExistsAt", "GroundProp"}
-SUBSTANTIVE_AXIOMS = {"AxGlobalGround", "AxTwoSubjects",
-                      "AxPersonStability", "AxPersonalGround", "GroundPrincipleProp"}
+AUDIT_PATH = FORMAL / "axiom_audit.json"
+
+# D1 — classical meta-logic (kernel-level, indistinguishable per-declaration
+# from the audit output and not part of the deduction's own axioms).
+META_LOGIC = {"propext", "Classical.choice", "Quot.sound"}
+_META_SHORTS = {n.rsplit(".", 1)[-1] for n in META_LOGIC}
+
+TAG_VOCAB = "VOCAB"   # relation/sort the statement itself talks about
+TAG_SEM = "SEM"       # semantic choice, consistency-model recorded
+TAG_META = "META"     # metaphysical bridge, price explicit
+KNOWN_TAGS = {TAG_VOCAB, TAG_SEM, TAG_META}
+
+# Set in `main()` once the sources are parsed; read by the render helpers so
+# the derivation machinery needs no parameter threading.
+_AUDIT: dict = {}      # decl fullName -> [axiom names] (#print axioms)
+_REGISTRY: dict = {}   # axiom base name -> {"tag", "gloss", "full"}
+
+
+def _short(name: str) -> str:
+    """Bare identifier for CL classification (`Init.Core.propext` → propext)."""
+    return name.rsplit(".", 1)[-1]
+
+
+def audit_footprint(full: str) -> list:
+    """Exact, transitive kernel axiom set of a declaration (empty if the decl
+    is not an audited kernel node)."""
+    return _AUDIT.get(full) or []
+
+
+def footprint_parts(full: str) -> tuple[list, list, list]:
+    """Split the audited kernel footprint → (substantive, vocab, cl)."""
+    subst, vocab, cl = [], [], []
+    for a in audit_footprint(full):
+        if a.startswith("Logos."):
+            base = a.rsplit(".", 1)[-1]
+            r = _REGISTRY.get(base)
+            if r is None:
+                raise SystemExit(f"FATAL: axiom `{a}` in footprint of `{full}` "
+                                 f"has no registry tag (Tag: line missing in Lean)")
+            (subst if r["tag"] in (TAG_SEM, TAG_META) else vocab).append(base)
+        elif _short(a) in _META_SHORTS:
+            cl.append(a)
+        else:
+            raise SystemExit(f"FATAL: unrecognized axiom `{a}` in footprint of `{full}`")
+    return sorted(set(subst)), sorted(set(vocab)), sorted(cl)
+
+
+def is_vocab_only(full: str) -> bool:
+    """True when a claim's kernel footprint carries vocabulary constants of
+    the statement itself and no substantive axiom (e.g. C15/C60 — the denial
+    of atom-grounding refutes itself by definition, RAA). Displays ✔."""
+    subst, vocab, _ = footprint_parts(full)
+    return bool(vocab) and not subst
+
+
+def kernel_fp_text(full: str) -> str:
+    """Rendered kernel footprint: Logos axiom bases + `CL` for meta-logic."""
+    subst, vocab, cl = footprint_parts(full)
+    names = subst + vocab + (["CL"] if cl else [])
+    return "{" + ", ".join(names) + "}" if names else "{}"
+
+
+def load_axiom_registry(decls: dict, node_map: dict) -> dict:
+    """{axiom base name: {tag, gloss, full}} from the Lean docstrings.
+
+    Every axiom node must carry a `Tag:` line from a closed vocabulary, or
+    the generation FAILS — a footprint's badge depends on the tag, so an
+    untagged/mistyped axiom is a hard error, not a note."""
+    registry = {}
+    for full, n in sorted(node_map.items()):
+        if n.get("kind") != "axiom":
+            continue
+        d = decls.get(full)
+        if d is None:
+            raise SystemExit(f"FATAL: axiom node `{full}` not found in parsed Lean decls")
+        tag = (d.get("tag") or "").strip()
+        if tag not in KNOWN_TAGS:
+            raise SystemExit(f"FATAL: axiom `{full}` has no valid `Tag:` line on its "
+                             f"docstring (got {tag!r}; expected one of {sorted(KNOWN_TAGS)})")
+        registry[full.rsplit(".", 1)[-1]] = {
+            "tag": tag, "gloss": d.get("doc") or "", "full": full,
+        }
+    return registry
+
+
+def load_audit() -> dict:
+    if not AUDIT_PATH.exists():
+        raise SystemExit(f"ERROR: {AUDIT_PATH} missing. Run "
+                         "`python3 scripts/audit_footprints.py` first (see AGENTS.md).")
+    return json.loads(AUDIT_PATH.read_text(encoding="utf-8"))
 
 
 def expand_footprint(cid: str, fp_by_id: dict, seen=None) -> str:
@@ -420,25 +526,9 @@ def expand_footprint(cid: str, fp_by_id: dict, seen=None) -> str:
 
 
 def curated_footprint(c: dict) -> str:
+    """GAPMAP footprint transcription (kept for the annex / consistency check
+    only — the badge never consults it)."""
     return c.get("_curated_fp", c.get("footprint") or "")
-
-
-def vocab_only_footprint(c: dict, node_map: dict) -> bool:
-    """True when a claim's curated (expanded) footprint carries no substantive
-    axiom: only vocabulary constants (or `CL`/`{}`). Such theorems display ✔ —
-    axiom-free modulo the vocabulary its own statement talks about (e.g.
-    C15/C60, where the denial refutes itself by definition — RAA; and the
-    analytic Level-2 steps C25/C49/C51/C56). Substantive SEM/META
-    axioms (AxGlobalGround, …) keep a claim ⚠."""
-    full = c.get("_full")
-    if not full or full not in node_map:
-        return False
-    fp = curated_footprint(c)
-    if not fp:
-        return False
-    if any(re.search(r"\b" + re.escape(a) + r"\b", fp) for a in SUBSTANTIVE_AXIOMS):
-        return False
-    return True
 
 
 def le_line(file: str, line: int) -> str:
@@ -460,11 +550,15 @@ def render_index(sections, level_titles, claims_by_id, decls, node_map, graph):
        "(regra de sincronização em `AGENTS.md`).")
     ap("")
     ap("- **Fonte Lean:** `formal/Logos/*.lean` (kernel-checked, `lake build` verde, sorryAx 0)")
-    ap("- **Ledger curado:** [`formal/GAPMAP.md`](formal/GAPMAP.md) (status, refs de prosa, tags de axioma)")
+    ap("- **Pegadas do kernel:** `formal/axiom_audit.json` (`#print axioms` por declaração — "
+       "a pegada axiomática transitiva exata, meta-lógica incluída)")
+    ap("- **Tipos de axioma:** a linha `Tag:` (`VOCAB`/`SEM`/`META`) na docstring Lean de cada axioma")
     ap("- **Grafo de dependências:** `formal/depgraph.json` (LeanDepViz, kernel)")
+    ap("- **Ledger GAPMAP:** [`formal/GAPMAP.md`](formal/GAPMAP.md) (IDs, refs de prosa, "
+       "transcrição de estatuto/pegada — *verificada*, nunca usada como fonte)")
     ap("- **Prosa:** [`base.txt`](base.txt) (argumento §0–§29) · [`poem.txt`](poem.txt) (P1–P10) · [`theorems/`](theorems/)")
     ap("")
-    ap("Regeneração: `python3 scripts/build_deduction.py`")
+    ap("Regeneração: `python3 scripts/audit_footprints.py && python3 scripts/build_deduction.py`")
     ap("")
     ap("---")
     ap("")
@@ -472,36 +566,36 @@ def render_index(sections, level_titles, claims_by_id, decls, node_map, graph):
     ap("")
     ap("| Token | Significado |")
     ap("|---|---|")
-    ap("| `✔` | teorema verificado pelo kernel, footprint vazio (até `CL`) |")
-    ap("| `⚠` | teorema verificado sob axiomas — quais, no próprio passo (`Segue de: … e do axioma …`) |")
+    ap("| `✔` | teorema verificado pelo kernel, pegada sem axioma substantivo (vazia, `CL` ou só vocabulário) |")
+    ap("| `⚠` | teorema verificado sob axiomas substantivos — quais, no próprio passo (`Segue de: … e do axioma …`) |")
     ap("| `◆` | declaração (`axiom`) — não derivada |")
     ap("| `✖` | em falta um lema nomeado (ver **Deferred / blocked**) |")
     ap("| `➖` | fora do âmbito deste marco |")
     ap("| `→` | dissolvido numa entrada já apresentada (`Vide …`) |")
-    ap("| `CL` | meta-lógica clássica `{propext, Classical.choice, Quot.sound}` (D1) |")
-    ap("| `✔` (só vocabulário) | teorema **axiom-free módulo vocabulário**: a pegada curada só contém vocábulos que o próprio enunciado menciona (`Ground`, `ExistsAt`, `GroundProp`), sem axioma substantivo (SEM/META). Ex.: C15/C60 (a negação refuta-se por definição — RAA), C25/C49/C51/C56/C62 (analíticos), C16/C17. Inventário e justificação em [`VOCAB.md`](VOCAB.md); ver **Relatório de consistência** |")
+    ap("| `CL` | meta-lógica clássica `{propext, Classical.choice, Quot.sound}` (D1, reportada pelo kernel) |")
+    ap("| `✔` (só vocabulário) | teorema **axiom-free módulo vocabulário**: a pegada do kernel só contém vocábulos que o próprio enunciado menciona (`Ground`, `ExistsAt`, `GroundProp`), sem axioma substantivo (SEM/META). Ex.: C15/C60 (a negação refuta-se por definição — RAA), C25/C49/C51/C56/C62 (analíticos), C16/C17. Inventário e justificação em [`VOCAB.md`](VOCAB.md); ver **Relatório de consistência** |")
     ap("| `An` | axioma exibido em bloco próprio (`### A1 ◆ …`) no 1.º passo que o usa; as linhas `Segue …` referenciam-no por `A#` |")
     ap("")
-    ap("O estatuto exibido é o **medido** no kernel (verificação Lean via "
-       "`depgraph.json`); o ledger curado `GAPMAP.md` pode divergir — as "
-       "divergências ficam no **Relatório de consistência**.")
+    ap("O estatuto de cada passo é **derivado** — função de (tipo do nó no kernel, "
+       "pegada `#print axioms`, `Tag:` declarada dos axiomas) — e não transcrito do "
+       "ledger. A transcrição GAPMAP é auto-verificada contra o derivado; o que "
+       "diverge aparece como **erro de ledger** no **Relatório de consistência**.")
     ap("")
-    ap("Etiquetas de axioma (justificação / preço):")
+    ap("Etiquetas de axioma (o `Tag:` declarado na docstring Lean de cada axioma):")
     ap("")
     ap("| Tag | Significado |")
     ap("|---|---|")
-    ap("| `TRANS` | axiom performativo/transcendental — a negação refuta-se a si mesma |")
     ap("| `SEM` | escolha semântica, com modelo de consistência registado |")
     ap("| `META` | ponte metafísica, com o preço tornado explícito |")
-    ap("| `VOCAB` | vocabulário primitivo (postulado de sort pura / relação) |")
+    ap("| `VOCAB` | vocabulário primitivo (relação que o próprio enunciado menciona) |")
     ap("")
     ap("Notação formal: cada passo mostra o *enunciado* em símbolos lógicos "
        "(traduzido do Lean), uma frase em inglês com o significado e a "
        "linha `Segue de:` — os teoremas-passo a partir dos quais decorre e "
        "o(s) axioma(s) do seu pé de kernel (`… e do axioma **A1** / … e dos "
        "axiomas **A1**, **A2**`, com `A#` definido no bloco do próprio axioma). "
-       "As referências de código (ficheiro:linha, pegadas "
-       "raw, dependências naïve Lean) ficam todas no **Anexo: código por passo**.")
+       "As referências de código (ficheiro:linha, pegadas `#print axioms`, "
+       "dependências e usos no grafo) ficam todas no **Anexo: código por passo**.")
     ap("")
     ap("---")
     ap("")
@@ -637,7 +731,7 @@ def render_claim_detail(c, claims_by_id, decls, node_map, graph,
             preds.sort()
             seg = segue_text(preds, axiom_refs_sorted(kernel_axiom_names(full, node_map), ax_id))
             if seg:
-                if vocab_only_footprint(c, node_map):
+                if is_vocab_only(full):
                     seg += " (vocabulário do enunciado)"
                 segs.append(seg)
         prose = c.get("prose")
@@ -660,7 +754,7 @@ def dep_list(fullnames, claims_by_id, decls):
         return "—"
     pieces = []
     for f in sorted(fullnames):
-        if f not in decls and f not in AXIOM_TAGS and f.rsplit(".", 1)[-1] not in AXIOM_TAGS:
+        if f not in decls and f.rsplit(".", 1)[-1] not in _REGISTRY:
             continue  # kernel-generated (recOn, injEq, ...)
         cl = claims_by_id.get(f)
         if cl:
@@ -668,12 +762,8 @@ def dep_list(fullnames, claims_by_id, decls):
             pieces.append(f"**{cl['id']}** `{cln}`")
             continue
         base = f.rsplit(".", 1)[-1]
-        if base in AXIOM_TAGS and not f.startswith(("Logos.", "axion")):
-            pass
-        if not f.startswith("Logos.") and base:
-            f = f"Logos.{f}" if "." not in f else f
-        if base in AXIOM_TAGS:
-            tag = AXIOM_TAGS[base][0]
+        if base in _REGISTRY:
+            tag = _REGISTRY[base]["tag"]
             pieces.append(f"axiom `{base}` ({tag})")
         else:
             pieces.append(f"`{f.replace('Logos.', '') if f.startswith('Logos.') else f}`")
@@ -686,20 +776,21 @@ def render_axiom_inventory(node_map, claims_by_id, glosses, ax_id=None):
     n_axioms = sum(1 for n in node_map.values() if n["kind"] == "axiom")
     ap(f"## Inventário de axiomas ({n_axioms} declarações)")
     ap("")
-    ap("| Axioma | Nº | Tag | Justificação / preço | Significado (EN) | Depende dele (claims) |")
-    ap("|---|---|---|---|---|---|")
+    ap("| Axioma | Nº | Tag | Significado (EN) / preço | Depende dele (claims) |")
+    ap("|---|---|---|---|---|")
     axioms = sorted(node_map.values(), key=lambda n: n["fullName"])
     for n in axioms:
         if n["kind"] != "axiom":
             continue
         base = n["fullName"].rsplit(".", 1)[-1]
-        tag, why = AXIOM_TAGS.get(base, ("?", ""))
-        gl = glosses.get(n["fullName"], "")
+        r = _REGISTRY.get(base, {"tag": "?", "gloss": "—"})
+        tag = r["tag"]
+        why = r["gloss"] or "—"
         deps = [c["id"] for f, c in claims_by_id.items()
-                if n["fullName"] in node_map.get(f, {}).get("customAxioms", [])]
+                if any(a.rsplit(".", 1)[-1] == base for a in audit_footprint(f))]
         deps_txt = ", ".join(sorted(set(deps))) if deps else "—"
         nid = ax_id.get(base, "—")
-        ap(f"| `{base}` | {nid} | `{tag}` | {why} | {gl or '—'} | {deps_txt} |")
+        ap(f"| `{base}` | {nid} | `{tag}` | {why} | {deps_txt} |")
     ap("")
     ap("Detalhe do kernel:")
     ap("")
@@ -747,10 +838,45 @@ def render_faith_deferred(sections, claims_by_id, decls, node_map, graph, alread
     return L
 
 
+def _closure_axioms(full: str, graph: dict, node_map: dict) -> set:
+    """Transitive Logos-axiom set reachable over the graph's dependency edges
+    (in-edges), for tool-fidelity cross-checking against the audit."""
+    seen = {full}
+    stack = [full]
+    ax = set()
+    while stack:
+        x = stack.pop()
+        n = node_map.get(x)
+        if n and n.get("kind") == "axiom":
+            ax.add(x)
+            continue
+        for t in graph["in"].get(x, ()):
+            if t.startswith("Logos.") and t not in seen:
+                seen.add(t)
+                stack.append(t)
+    return ax
+
+
+def derived_for(c: dict, node_map: dict) -> str | None:
+    """The kernel-derived status of a claim, or None when no deduction exists
+    to analyze (no kernel node, or the row is a curator cross-reference:
+    deferred / blocked / faith / dissolved — only PROVEN/PROVEN↑/AXIOM rows
+    are steps of the deduction)."""
+    if _clean_status((c.get("status") or "").strip()) not in ("PROVEN", "PROVEN↑", "AXIOM"):
+        return None
+    full = c.get("_full")
+    if not full or full not in node_map:
+        return None
+    if node_map[full]["kind"] == "axiom":
+        return "AXIOM"
+    subst, _, _ = footprint_parts(full)
+    return "PROVEN↑" if subst else "PROVEN"
+
+
 def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_info, glosses):
     L = []
     ap = L.append
-    ap("## Relatório de consistência (GAPMAP ↔ kernel)")
+    ap("## Relatório de consistência (kernel ↔ GAPMAP)")
     ap("")
     all_claims = [c for s in sections for c in s["claims"]]
     ap(f"- Claims do GAPMAP com teorema localizado no kernel: "
@@ -761,9 +887,9 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
           else f" · **sem gloss:** {', '.join(c['id'] for c in all_claims if not c.get('_gloss'))}"))
     unresolved = [c for c in all_claims if c.get("lean_ref") and not c.get("_full")]
     if unresolved:
-        ap("- **Claims sem teorema localizado:**")
+        ap("- **Claims sem teorema localizado** (sem dedução no kernel do mapa):")
         for c in unresolved:
-            ap(f"  - `{c['id']}` ref `{c['lean_ref']}` — {c['prose']} (sem ref Lean ou def/fórmula s/ nível kernel)")
+            ap(f"  - `{c['id']}` ref `{c['lean_ref']}` — {c['prose']}")
     kern_theorems = {f for f, n in decls.items() if n["kind"] in ("theorem", "example")}
     covered = {c.get("_full") for c in all_claims if c.get("_full")}
     missing = sorted(f for f in kern_theorems - covered if f in node_map)
@@ -772,75 +898,85 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
            + ", ".join(f.replace("Logos.", "") for f in missing))
     else:
         ap("- Todos os teoremas do kernel têm claim (ou ref mapeada).")
-    kern_axioms = {n["fullName"] for n in node_map.values() if n["kind"] == "axiom"}
-    known = {"Logos." + m + "." + a for m, a in [(x, a) for x, a in
-             [("Truthmaker", "Ground"), ("Truthmaker", "ExistsAt"),
-              ("Modal", "AxGlobalGround"), ("Value", "AxTwoSubjects"),
-              ("Love", "AxPersonStability"), ("GroundPerson", "GroundProp"),
-              ("GroundPerson", "GroundPrincipleProp"), ("GroundPerson", "AxPersonalGround")]]}
-    extra = kern_axioms - known
-    ap(f"- Axiomas declarados no kernel: **{len(kern_axioms)}**" +
-       (f" · **fora do inventário esperado:** {', '.join(sorted(extra))}" if extra else ""))
-    # steps whose measured kernel footprint is nonempty -> displayed badge
-    under_ax = [c for c in all_claims if c.get("_full")
-                and c["_full"] in node_map and kernel_axiom_names(c["_full"], node_map)]
-    sub = [c for c in under_ax
-           if any(k in ("AxTwoSubjects", "AxPersonStability",
-                        "AxGlobalGround", "AxPersonalGround", "GroundPrincipleProp")
-                  for k in kernel_axiom_names(c["_full"], node_map))]
-    vocab_only = [c for c in under_ax if vocab_only_footprint(c, node_map)]
-    if under_ax:
-        ap(f"- Steps no kernel **sob axiomas**: **{len(under_ax)}** "
-           f"({len(sub)} com axioma substantivo, {len(under_ax) - len(sub)} só vocabulário)")
-    if vocab_only:
-        ap(f"- **Exibidos ✔ por só-vocabulário** (pegada curada sem axioma "
-           f"substantivo: axiom-free módulo os vocábulos do próprio enunciado; "
-           f"em C15/C60 a negação refuta-se por definição — RAA): "
-           f"{', '.join(sorted(c['id'] for c in vocab_only))}")
-    # GAPMAP status vs kernel-measured footer divergence (what the map displays)
+    # --- derived status -----------------------------------------------------
+    kern_claims = [c for c in all_claims if c.get("_full")]
+    steps = [c for c in kern_claims if derived_for(c, node_map)]
+    derived = [derived_for(c, node_map) for c in steps]
+    n_prov = sum(1 for d in derived if d == "PROVEN")
+    n_up = sum(1 for d in derived if d == "PROVEN↑")
+    n_ax = sum(1 for d in derived if d == "AXIOM")
+    ap(f"- **Estatuto derivado do kernel** (#print axioms + `Tag:` dos axiomas): "
+       f"**{n_prov} ✔** · **{n_up} ⚠** · **{n_ax} ◆**")
     status_div = []
-    for c in all_claims:
-        full = c.get("_full")
-        if not full or full not in node_map:
-            continue
-        st = (c.get("status") or "").strip()
-        if st not in ("PROVEN", "PROVEN↑"):
-            continue
-        kern = kernel_axiom_names(full, node_map)
-        if kern and st == "PROVEN":
-            if vocab_only_footprint(c, node_map):
-                continue  # justified flip: vocabulary of the statement only
-            status_div.append((c["id"], "PROVEN", kern))
-        elif not kern and st == "PROVEN↑":
-            status_div.append((c["id"], "PROVEN↑", []))
+    for c in steps:
+        st = _clean_status((c.get("status") or "").strip())
+        dv = derived_for(c, node_map)
+        if st != dv:
+            status_div.append((c["id"], st, dv))
     if status_div:
-        ap("- **Divergências de estatuto GAPMAP ↔ kernel** (o mapa mostra o estatuto **medido**):")
-        for cid, st, ks in status_div:
-            ks = "{}" if not ks else "{" + ", ".join(ks) + "}"
-            ap(f"  - `{cid}` GAPMAP `{st}` vs kernel `{ks}`")
-    # kernel vs GAPMAP footprint divergences (informational; CL is kernel-blind)
-    ax_vocab = ("Ground", "ExistsAt", "AxGlobalGround",
-                "AxTwoSubjects", "AxPersonStability", "GroundProp", "GroundPrincipleProp",
-                "AxPersonalGround")
+        ap(f"- **Divergências de estatuto GAPMAP × derivado ({len(status_div)} — "
+           f"corrigir o ledger GAPMAP):**")
+        for cid, st, dv in status_div:
+            ap(f"  - `{cid}` GAPMAP `{st}` vs derivado `{dv}`")
+    else:
+        ap("- Estatuto GAPMAP × derivado: **sem divergências** (transcrição verificada).")
+    # --- footprint transcription check -------------------------------------
+    subst_claims = [c for c in steps if derived_for(c, node_map) == "PROVEN↑"]
+    if subst_claims:
+        ap(f"- **Steps ⚠ sob axioma substantivo (SEM/META)** "
+           f"({len(subst_claims)}): " + ", ".join(sorted(c["id"] for c in subst_claims)))
+    vocab_only = [c for c in steps if is_vocab_only(c["_full"])]
+    if vocab_only:
+        ap(f"- **Exibidos ✔ por só-vocabulário** (pegada do kernel só com os "
+           f"vocábulos do próprio enunciado — SEM/META nenhum; em C15/C60 a "
+           f"negação refuta-se por definição, RAA): "
+           f"{', '.join(sorted(c['id'] for c in vocab_only))}")
+    ax_vocab = sorted(_REGISTRY)
     divs = []
     for c in all_claims:
         full = c.get("_full")
-        fp = c.get("footprint") or ""
-        fps = fp.strip()
+        fps = (c.get("footprint") or "").strip()
         if not full or full not in node_map or fps in ("—", ""):
             continue
         if fps.startswith("as ") or " as " in fps or fps.startswith("via "):
-            continue  # footprint inherited from another claim; not comparable
-        kern = {k.rsplit(".", 1)[-1] for k in node_map[full].get("customAxioms", [])}
-        gap = {a for a in ax_vocab if re.search(r"\b" + re.escape(a) + r"\b", fp)}
+            continue  # inherited transcription; not independently verifiable
+        subst, vocab, _ = footprint_parts(full)
+        kern = set(subst) | set(vocab)
+        gap = {a for a in ax_vocab if re.search(r"\b" + re.escape(a) + r"\b", fps)}
         if kern != gap:
             ks = "{" + ", ".join(sorted(kern)) + "}"
             gs = "{" + ", ".join(sorted(gap)) + "}"
             divs.append((c["id"], ks, gs))
     if divs:
-        ap(f"- **Divergências kernel × GAPMAP** (pegada medida vs. curada, {len(divs)} — a verificar na próxima sincronização):")
+        ap(f"- **Divergências de pegada kernel × GAPMAP** "
+           f"({len(divs)} — corrigir o ledger GAPMAP):")
         for cid, ks, gs in divs:
             ap(f"  - `{cid}` kernel `{ks}` vs GAPMAP `{gs}`")
+    else:
+        ap("- Pegada kernel × GAPMAP: **sem divergências**.")
+    # --- tool fidelity: depviz closure vs audit ------------------------------
+    fid = []
+    for c in kern_claims:
+        full = c["_full"]
+        au = {a for a in audit_footprint(full) if a.startswith("Logos.")}
+        cl = _closure_axioms(full, graph, node_map)
+        cl.discard(full)
+        if au != cl:
+            fid.append((c["id"], sorted(a.rsplit(".", 1)[-1] for a in au),
+                        sorted(a.rsplit(".", 1)[-1] for a in cl)))
+    if fid:
+        ap(f"- **Grafo (closure) × audição (#print axioms) divergem em "
+           f"{len(fid)} claims** (subconta transitiva do depviz — toolchain, "
+           f"não ledger; a audição manda):")
+        for cid, au, cl in fid:
+            ap(f"  - `{cid}` audição `{{{', '.join(au)}}}` vs grafo `{{{', '.join(cl)}}}`")
+    # --- axiom registry / coverage ------------------------------------------
+    kern_axioms = {n["fullName"] for n in node_map.values() if n["kind"] == "axiom"}
+    known = {r["full"] for r in _REGISTRY.values()}
+    extra = kern_axioms - known
+    ap(f"- Axiomas declarados no kernel: **{len(kern_axioms)}**"
+       + (f" · **fora do registo (sem `Tag:`):** {', '.join(sorted(extra))}" if extra else "")
+       + " — **todos com `Tag:` na docstring Lean**" if not extra else "")
     return L
 
 
@@ -867,9 +1003,7 @@ def render_code_annex(sections, claims_by_id, decls, node_map, graph):
                 ap(f"| {cid} | — | — | — | {g} | {lr} | — |")
                 continue
             d = decls[full]
-            kern = ", ".join(k.rsplit(".", 1)[-1]
-                             for k in node_map.get(full, {}).get("customAxioms", []))
-            kern = kern or "{}"
+            kern = kernel_fp_text(full)
             deps = dep_list(graph["in"].get(full, set()), claims_by_id, decls)
             rds = dep_list(graph["out"].get(full, set()), claims_by_id, decls)
             ap(f"| {cid} | `{full}` | {le_line(d['file'], d['line'])} | `{kern}` | {g} | {deps} | {rds} |")
@@ -898,7 +1032,7 @@ def render_appendix(sections, decls, node_map, claims_by_id, graph, level_map):
         ap("|---|---|---|---|---|")
         for full in sorted(dcl):
             d = dcl[full]
-            ax = ", ".join(k.rsplit(".", 1)[-1] for k in node_map.get(full, {}).get("customAxioms", [])) if node_map.get(full) else "—"
+            ax = kernel_fp_text(full) if full in _AUDIT else "—"
             cl = claims_by_id.get(full)
             cid = f"→ {cl['id']}" if cl else ""
             ap(f"| `{d['name']}` | {d['kind']} | [L{d['line']}](formal/Logos/{d['file']}#L{d['line']}) | `{humanise(trim_stmt(d['statement']))[:80]}` | {ax} {cid} |")
@@ -982,50 +1116,28 @@ def strip_theorem_head(s: str) -> str:
 
 
 def kernel_axiom_names(full: str, node_map: dict) -> list:
-    """Sorted short names of the kernel-measured axiom footprint of a decl."""
-    n = node_map.get(full)
-    if not n:
-        return []
-    return sorted({k.rsplit(".", 1)[-1] for k in n.get("customAxioms", [])})
+    """Sorted short names of the audited kernel axiom footprint (Logos axioms
+    only; meta-logic `CL` is handled by `footprint_parts`)."""
+    subst, vocab, _ = footprint_parts(full)
+    return sorted(set(subst) | set(vocab))
 
 
 def kernel_axiom_text(full: str, node_map: dict) -> str:
     """Axiom names + tags, e.g. `Ground` (VOCAB), `AxTwoSubjects` (META)."""
-    tags = [f"`{a}` ({AXIOM_TAGS[a][0]})" if a in AXIOM_TAGS else f"`{a}`"
+    tags = [f"`{a}` ({_REGISTRY[a]['tag']})" if a in _REGISTRY else f"`{a}`"
             for a in kernel_axiom_names(full, node_map)]
     return ", ".join(tags)
 
 
 def badge_for(c: dict, decls: dict, node_map: dict) -> str:
-    """Display status, recomputed from the kernel-measured footprint (the
-    'real' one) for PROVEN/PROVEN↑ only. Non-derived markers (AXIOM, →
-    dissolved, DEFERRED, BLOCKED) keep their GAPMAP meaning; divergences are
-    audited in the consistency report."""
-    st = (c.get("status") or "").strip()
-    full = c.get("_full")
-    if st not in ("PROVEN", "PROVEN↑"):
+    """Display status, DERIVED from the kernel for every step of the deduction
+    (node kind + audited axiom set + declared axiom tags). Curator cross-refs
+    (deferred/blocked/faith/dissolved rows, and claims with no kernel node)
+    have no deduction to analyze and keep their curated marker."""
+    if derived_for(c, node_map) is None:
+        st = (c.get("status") or "").strip()
         return STATUS_BADGE.get(st, st or "?")
-    if not full or full not in node_map:
-        return STATUS_BADGE.get(st, st)
-    if kernel_axiom_names(full, node_map):
-        if vocab_only_footprint(c, node_map):
-            # footprint = the statement's own vocabulary only; no substantive
-            # axiom (e.g. C15/C60 — RAA by definition). Displayed PROVEN.
-            return STATUS_BADGE["PROVEN"]
-        return STATUS_BADGE["PROVEN↑"]
-    return STATUS_BADGE["PROVEN"]
-
-
-AXIOM_TITLES = {
-    "Ground": "The truthmaker relation",
-    "ExistsAt": "Existence in a world",
-    "AxGlobalGround": "Necessary truth is grounded",
-    "AxTwoSubjects": "Right-and-wrong needs two persons",
-    "AxPersonStability": "Persons persist across worlds",
-    "GroundProp": "Grounding between entity and proposition",
-    "GroundPrincipleProp": "The §24a principle at Prop level",
-    "AxPersonalGround": "The personal price of T8",
-}
+    return STATUS_BADGE[derived_for(c, node_map)]
 
 
 def build_ax_id(sections, node_map):
@@ -1037,7 +1149,7 @@ def build_ax_id(sections, node_map):
             if not full or full not in node_map:
                 continue
             for base in kernel_axiom_names(full, node_map):
-                if base in AXIOM_TAGS and base not in ax_id:
+                if base in _REGISTRY and base not in ax_id:
                     ax_id[base] = f"A{len(ax_id) + 1}"
     return ax_id
 
@@ -1064,7 +1176,8 @@ def axiom_refs_sorted(bases, ax_id):
 
 def axiom_intro(full, ax_id, ax_shown, decls, node_map, glosses, axiom_full):
     """Titled axiom block (`### A1 ◆ …`) immediately before the step that
-    first uses it; each axiom appears exactly once in the whole doc."""
+    first uses it; each axiom appears exactly once in the whole doc. The
+    title is the axiom's own docstring meaning; the tag is its declared type."""
     L = []
     base_new = []
     for base in kernel_axiom_names(full, node_map):
@@ -1072,13 +1185,15 @@ def axiom_intro(full, ax_id, ax_shown, decls, node_map, glosses, axiom_full):
             base_new.append(base)
             ax_shown.add(base)
     for base in sorted(base_new, key=lambda b: int(ax_id[b][1:])):
-        fullname = axiom_full.get(base) or base
+        r = _REGISTRY.get(base, {"tag": "?", "gloss": "", "full": base})
+        fullname = r.get("full") or axiom_full.get(base) or base
         d = decls.get(fullname, {})
         stmt = short_stmt(humanise(trim_stmt(d["statement"] or ""))) if d.get("statement") else ""
-        gloss = glosses.get(fullname, "") or AXIOM_TAGS.get(base, ("", ""))[1]
-        L.append(f"### {ax_id[base]} ◆ {AXIOM_TITLES.get(base, base)}")
+        gloss = glosses.get(fullname, "") or r.get("gloss", "")
+        title = gloss.split(".")[0] if gloss else base
+        L.append(f"### {ax_id[base]} ◆ {title} · `{r.get('tag', '?')}`")
         if stmt:
-            L.append(f"`{trim_stmt(stmt)}`" + (f" — _{gloss}_" if gloss else ""))
+            L.append(f"`{trim_stmt(stmt)}`" + (f" — _{gloss}_" if gloss and gloss != title else ""))
         elif gloss:
             L.append(f"_{gloss}_")
         L.append("")
@@ -1104,29 +1219,8 @@ def segue_text(claims: list, ax_refs: list) -> str:
     return ""
 
 
-def axiom_tag_text(fp: str) -> str:
-    """Philosophical rendering of a GAPMAP footprint: axiom names + tags."""
-    fp = fp.replace("**", "").strip()
-    if not fp:
-        return "—"
-    excluded = [a for a in AXIOM_TAGS if re.search(rf"\bno\s+{re.escape(a)}\b", fp)]
-    notes = [f"sem `{a}`" for a in excluded]
-    for a in excluded:
-        fp = re.sub(rf"\bno\s+{re.escape(a)}\b", "", fp)
-    names = sorted({a for a in AXIOM_TAGS if re.search(rf"\b{re.escape(a)}\b", fp)})
-    bits = [f"`{a}` ({AXIOM_TAGS[a][0]})" for a in names]
-    for a in names:
-        fp = re.sub(rf"\b{re.escape(a)}\b", "", fp)
-    extra = re.sub(r"\([^)]*\)", "", fp).strip(" ,{}–—").strip()
-    if extra == "CL":
-        bits.insert(0, "`CL`")
-        extra = ""
-    out = ", ".join(bits + notes)
-    if extra:
-        out = (out + " · " if out else "") + extra
-    return out or "—"
-
-
+# ---------------------------------------------------------------------------
+# Logic-symbol rendering ("humanise")
 # ---------------------------------------------------------------------------
 # Logic-symbol rendering ("humanise")
 # ---------------------------------------------------------------------------
@@ -1313,6 +1407,7 @@ def restore_cur(cur=""):
 
 
 def main():
+    global _AUDIT, _REGISTRY
     if not DEPGRAPH_PATH.exists():
         print(f"ERROR: {DEPGRAPH_PATH} missing. Run:\n"
               "  cd formal && lake exe depviz --roots Logos --json-out depgraph.json --dot-out depgraph.dot",
@@ -1323,6 +1418,10 @@ def main():
     decls = parse_lean_sources()
     print(f"  {len(decls)} declarations in {len(set(d['file'] for d in decls.values()))} files")
 
+    print("loading #print axioms audit…")
+    _AUDIT = load_audit()
+    print(f"  {len(_AUDIT)} footprints audited by the kernel")
+
     print("parsing GAPMAP…")
     sections = parse_gapmap()
     all_claims = [c for s in sections for c in s["claims"]]
@@ -1332,6 +1431,11 @@ def main():
     graph = load_depgraph()
     node_map = graph["node_map"]
     print(f"  {len(node_map)} kernel nodes, {sum(len(v) for v in graph['out'].values())} edges")
+
+    print("loading axiom registry (Tag: from Lean docstrings)…")
+    _REGISTRY = load_axiom_registry(decls, node_map)
+    print(f"  {len(_REGISTRY)} axioms tagged: "
+          + ", ".join(f"{b}({r['tag']})" for b, r in sorted(_REGISTRY.items())))
 
     print("resolving meanings (EN) from declarations…")
     glosses = {f: info["doc"] for f, info in decls.items() if info.get("doc")}

@@ -103,7 +103,9 @@ theorem alone_no_other_help_harm {s : Subject} (ha : Alone s) :
     obtain ⟨t, hne, hh⟩ := h
     exact hne (ha t)
 
-/--The plurality bridge: right-and-wrong demands two distinct persons.
+/--Tag: META
+
+ The plurality bridge: right-and-wrong demands two distinct persons.
 
  AxTwoSubjects (META; poem P5/P7, failure traces in DESIGN.md D14 and
     spike x2_spikeA): the *reality* of right-and-wrong demands that there be
