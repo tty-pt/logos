@@ -1,4 +1,4 @@
-# GAPMAP.md — theorem ledger of Γ (generated from `#print axioms`, 2026-09-17, post act-as-initiation rebase)
+# GAPMAP.md — theorem ledger of Γ (generated from `#print axioms`, 2026-09-17, post esse-est-agere)
 
 Statuses: `PROVEN` (theorem, kernel-checked) · `PROVEN↑` (theorem under
 flagged axioms) · `AXIOM` (declared) · `BLOCKED` (missing lemma named) ·
@@ -26,6 +26,27 @@ Former `{Cogito, Initiates, State, Subject}` footprints below are now `{}`
 (measured, §Annex), `CL` where `by_cases` is used. (Prior batch, same day:
 act-as-initiation rebase — `axiom Means` → def `Means s p := ∃ w w',
 Initiates s w w' p`; `A s p := Means s p` unchanged.)
+
+## Batch esse-est-agere (2026-09-17) — existence as agency; `AxPersonStability` becomes a theorem
+
+The M3 wall (`PERSON_PERSISTS`: no rule from `Person`/`Means` to `ExistsAt`)
+is answered by supplying the rule as a definition: `axiom ExistsAt` → **def**
+`ExistsAt _w s := ∃ p, A s p` (to be is to act; the world-index is vacuous by
+principle — `Means` takes no `World` parameter, so agency is not
+world-located — while the existential does the real work: only actors exist).
+`Person s` unfolds definitionally to `∃ p, Means s p` (via `Intentional`;
+kind-preds `:= True`; `A := Means`), so `AxPersonStability : ∀ s, Person s →
+NecessarySubject s` is now a **theorem** (**`{}`**, name kept per M1
+precedent). Measured (`#print axioms`): T14 family (C42–C45) → `{AxTwoSubjects}`;
+C18/C34 → `{AxGlobalGround, Ground}`; C15/C16/C17/C60 → `{Ground}`;
+C32 → `{AxPersonalGround, GroundProp}`; `Cogito` still `{}`.
+**Axiom inventory 8 → 6 declarations** (−`ExistsAt`, −`AxPersonStability`);
+substantive axioms unchanged in kind (SEM/META only). M2 (`ALONE_EXCLUDED`)
+is untouched: `Alone` never mentions `ExistsAt`, and the M2 countermodel
+doesn't interpret it — this batch proves *persistence*, not plurality.
+Honestly recorded costs: the world-index is vacuous (declared, not hidden);
+`T14_world` is trivially witnessed (same act in all worlds); T7/T8
+"necessary" turns agent-flavored (grounded by an acting subject).
 
 ## Level 0 — performative core (`Logos.Core`)
 
@@ -55,16 +76,17 @@ axiom-free: its negation-free content rests on classical logic only.
 |----|-------|--------------|--------|-----------------|
 | C13 | §22 | `Semantics.lawExcludedMiddle` | PROVEN | `CL` |
 | C14 | §23 | `Semantics.nonContradiction` | PROVEN | `{propext}` |
-| C15 | §24a | `Truthmaker.groundPrinciple_atom` | PROVEN | `{ExistsAt, Ground}` (VOCAB — footprint is the statement's own vocabulary; proof is a definitional collapse, `P → P`; see C60) |
-| C60 | §24a (RAA) | `Truthmaker.noGround_selfRefutes` | PROVEN | `{ExistsAt, Ground}` (VOCAB — denial refutes itself by definition: `TrueAt w (atom n)` unfolds to `∃e, ExistsAt w e ∧ Ground e (atom n)`, so the denial is `∃e… ∧ ¬∃e…`; companion of C15) |
-| C16 | §22 | `Truthmaker.lawExcludedMiddle` | PROVEN | `CL + {ExistsAt, Ground}` (A2: AxOr/AxNot dropped) |
-| C17 | §23 | `Truthmaker.nonContradiction` | PROVEN | `{ExistsAt, Ground}` (A2: AxAnd/AxNot dropped; no propext) |
-| C18 | T7 | `Modal.T7_necessaryReality` | PROVEN↑ | `{AxGlobalGround, ExistsAt, Ground}` |
+| C15 | §24a | `Truthmaker.groundPrinciple_atom` | PROVEN | `{Ground}` (VOCAB — footprint is the statement's own vocabulary; proof is a definitional collapse, `P → P`; see C60; esse-est-agere batch drops `ExistsAt`, now a def) |
+| C60 | §24a (RAA) | `Truthmaker.noGround_selfRefutes` | PROVEN | `{Ground}` (VOCAB — denial refutes itself by definition: `TrueAt w (atom n)` unfolds to `∃e, ExistsAt w e ∧ Ground e (atom n)` with `ExistsAt` now agency itself, so the denial is `∃e… ∧ ¬∃e…`; companion of C15) |
+| C16 | §22 | `Truthmaker.lawExcludedMiddle` | PROVEN | `CL + {Ground}` (A2: AxOr/AxNot dropped; esse-est-agere drops `ExistsAt`) |
+| C17 | §23 | `Truthmaker.nonContradiction` | PROVEN | `{Ground}` (A2: AxAnd/AxNot dropped; no propext; esse-est-agere drops `ExistsAt`) |
+| C18 | T7 | `Modal.T7_necessaryReality` | PROVEN↑ | `{AxGlobalGround, Ground}` (esse-est-agere drops `ExistsAt`) |
 | C19 | T7 | `Modal.T7_excludedMiddleInstance` | PROVEN↑ | as C18 |
 | C20 | T7 | `Modal.noNecessaryTruthIfAllContingent` | PROVEN↑ | as C18 |
 
-Declared (Level 1): `Ground` (world-rigid, D6; now over `Subject`), `ExistsAt`
-(SEM, D4); `actualWorld` (def, SEM —
+Declared (Level 1): `Ground` (world-rigid, D6; now over `Subject`) is the one
+remaining semantics axiom; `ExistsAt` is now the agency *definition*
+(esse est agere, 2026-09-17 — was VOCAB/SEM axiom, D4); `actualWorld` (def, SEM —
 shrinks C18–C20; was axiom); `AxGlobalGround` (SEM, D7 — the named quantifier
 swap). `Entity := Subject` is a *definition* (C2, 2026-09-15 — the Q2/D11
 identification, no longer an axiom); `EntityOf` is the identity (dissolved).
@@ -89,7 +111,7 @@ clauses are now **PROVEN theorems** (structural `TrueAt`, C15–C17).
 | C29 | T6 | `Order.T6_truthTranscendsWill` | PROVEN | as C28 |
 | C30 | §8 | `Order.correctness_distinct` | PROVEN | `CL` (defs act-relative §8 `Correct s p := A s p ∧ T p`) |
 | C31 | §9 | `Order.consequence_preserves_truth` | PROVEN | `{}` (E0) |
-| C32 | T8 | `GroundPerson.T8_personalGround` | PROVEN↑ | `{AxPersonalGround, GroundProp, ExistsAt}` |
+| C32 | T8 | `GroundPerson.T8_personalGround` | PROVEN↑ | `{AxPersonalGround, GroundProp}` (esse-est-agere drops `ExistsAt`) |
 | C33 | T8 | `GroundPerson.present_feature_is_grounded` | PROVEN↑ | `{GroundProp, GroundPrincipleProp}` |
 | C34 | T8 | `GroundPerson.necessary_truth_has_necessary_grounder` | PROVEN↑ | as C18 |
 
@@ -116,6 +138,10 @@ the bundled act IS the meaning-act (an initiation positing content); the
 `GroundProp`, `GroundPrincipleProp` (SEM reflection of §24a);
 `AxPersonalGround` (META, D9 — the remaining price of "personal").
 `Realizes := GroundProp` (def, B2) — `AxGroundBearing` dissolved (was META).
+**THEOREM (esse est agere, 2026-09-17):** `AxPersonStability : ∀ s, Person s →
+NecessarySubject s` — persons persist, proven from `Person → Intentional →
+Means` with `ExistsAt` as agency itself (M3 PERSON_PERSISTS dissolved; name
+kept per M1 precedent). T14 now stands on `AxTwoSubjects` alone.
 
 ## Deferred / blocked
 
@@ -126,7 +152,7 @@ the bundled act IS the meaning-act (an initiation positing content); the
 | F2 | §21 teleology (`Ought → Goal`) | DEFERRED | deontic layer (normativity → telos) |
 | F3 | §28 Good (`§20 → bem`) | DEFERRED | moral good from logical normativity not yet derived |
 | F4 | §28 Love | PROVEN↑ | T13 under AxTwoSubjects (C3-I) |
-| F5 | §28 EternalRelation | PROVEN↑ | T14 under C3-I bridges + AxPersonStability |
+| F5 | §28 EternalRelation | PROVEN↑ | T14 under C3-I bridges + AxPersonStability (now a theorem, esse-est-agere) |
 | F6 | §28 Trinity | DEFERRED | no argument exists yet (§28/§29) |
 | Q7.2 | weaker `AxGlobalGround` | DEFERRED | research sub-question (DESIGN.md) |
 
@@ -151,7 +177,7 @@ the bundled act IS the meaning-act (an initiation positing content); the
 | C55 | §8/§14 | `Order.judge_commits : ∃s p q, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ Chooses s p q` — the judge IS a chooser | PROVEN | `CL` (defs act-relative §8) |
 | C56 | P6 | `Value.alone_no_other_help_harm` | PROVEN | `{}` (M1: `Affects` is now the A3 definition `s ≠ t`, so the P6 lemma loses its axiom — measured; see VOCAB.md) |
 | C57 | §26 | `Choice.noSubject_selfRefutes : (¬∃_s : Subject, True) → False` — **a subject exists is un-denyable**: the denial is itself an act/choice of a subject; `choiceExists` (C52) supplies the resident witness | PROVEN | `{}` — formal record of §26 "não existe sujeito do ato presente"; the act-datum is the exhibited theorem `Cogito`, never a consequence of the plurality bridge |
-| C42 | P8 | `Love.T14_eternalRelation` | PROVEN↑ | `{AxPersonStability, ExistsAt, AxTwoSubjects}` (M1: `Affects := s ≠ t` def + `AxPersonsAffect` theorem — both words vanish from the footprint) |
+| C42 | P8 | `Love.T14_eternalRelation` | PROVEN↑ | `{AxTwoSubjects}` (M1: `Affects := s ≠ t` def + `AxPersonsAffect` theorem vanish; esse-est-agere: `AxPersonStability` is now a theorem and `ExistsAt` a def — both words vanish) |
 | C43 | P8 | `Love.T14_content` | PROVEN↑ | as C42 |
 | C44 | P8 | `Love.T14_world` (`NecessityPH`) | PROVEN↑ | as C42 (world-anchored honest □) |
 | C45 | P8 | `Love.T14_square` (alias `Necessity`) | PROVEN↑ | as C42 (image of the old statement shape) |
@@ -168,8 +194,10 @@ distinct — `Or.inl hne`). `Helps`/`Harms` are its definitional projections
 `Entity`/`EntityOf` dissolved (C2). The only declared interpersonal bridge is
 the plurality claim `AxTwoSubjects`
 (META, right-and-wrong demands two distinct persons).
-`AxPersonStability` (SEM, world-persistence of persons) stays declared (M3
-spike BLOCKED — the necessary relata is not connected to the act's subject).
+`AxPersonStability` was the SEM bridge for world-persistence of persons (M3
+spike BLOCKED) — **now a theorem** (esse est agere, 2026-09-17): `Person →
+Intentional → Means` with `ExistsAt` as agency. T14 stands on `AxTwoSubjects`
+alone.
 `Loves` is a *definition* (`:= Affects`, C4), no longer an axiom;
 `AxValueInterpersonal` and `AxEternalLove` are dissolved (split / replaced).
 M2 spike (`formal/Spikes/Spike_A4_2.lean`): `ALONE_EXCLUDED` BLOCKED — the
@@ -203,7 +231,7 @@ definitional underlier supplies the witness, so `Cogito_Init` is derived
 | ID | Poem | Status | Note |
 |----|------|--------|------|
 | FAITH-1 | P2 necessity | → PROVEN | dissolved in C1: `necDistinction` is now a theorem (C38); world content = C37 |
-| FAITH-2 | P8 eternal love | → PROVEN↑ | dissolved in C4: replaced by `AxPersonStability` (SEM) + C3-I bridges; T14 is a theorem under them |
+| FAITH-2 | P8 eternal love | → PROVEN↑ | dissolved in C4: replaced by `AxPersonStability` + C3-I bridges (stability now a theorem, esse-est-agere); T14 is a theorem under `AxTwoSubjects` |
 | F7 | §15 the bipolar half of freedom | DEFERRED | = F1b — must be built on `NecessityPH` (world-level), not the degenerate alias |
 | F8 | Trinity | DEFERRED | not attempted (§28/§29) |
 | F9 | Incarnation / creation | DEFERRED | poem P10, faith datum |
@@ -248,7 +276,8 @@ definitional underlier supplies the witness, so `Cogito_Init` is derived
   `NecessarySubject` relata; `T14_world` with `NecessityPH`; `T14_square` the
   alias-□ image; `T14_content`). FAITH-2 dissolves. Loves is no longer an axiom.
   Exclusion spike x2_spikeD stuck: `Person` structure (T5) gives no fact about
-  world-persistence of the entity-correlate.
+  world-persistence of the entity-correlate. (Superseded 2026-09-17 by
+  esse-est-agere: `AxPersonStability` is now a theorem, `ExistsAt` a def.)
 
 ## Batch E0/C2/A3 + transcendental spikes (2026-09-15) — honest info-line cut
 
@@ -266,7 +295,9 @@ output: **220 → 180 printed axiom-entries (−18 %)**; 222 → 198 output line
 - **C2** (`Entity := Subject`, `EntityOf := id`; `Truthmaker.lean`,
   `Plurality.lean`): the Q2/D11 identification made definitional
   (`Truthmaker` imports `Agency`, no cycle). `Ground`/`ExistsAt` stay the two
-  real semantics axioms, now over `Subject`. `{Entity, EntityOf}` leave every
+  real semantics axioms, now over `Subject`. (Superseded 2026-09-17 by
+  esse-est-agere: `ExistsAt` is now the agency def; `Ground` alone remains.)
+  `{Entity, EntityOf}` leave every
   Level-1 and T8/T14 block (T14 family: 13 → 10 entries each).
 - **A3** (`Affects := Helps ∨ Harms`, `Value.lean`): faithful to P6; bundle
   mirrors B1. `help_affects`/`harm_affects` become projection theorems.
@@ -291,7 +322,8 @@ its footprint stays `CL`.
   fun _ => Logos.Semantics.TV.t` (precedent: `Necessity.someWorld`). T7
   invokes `Ground e τ` at *some* fixed world; nothing depends on which, so the
   "present world" is a modeled choice, not a datum. Axiom count 23 → 22;
-  C18–C20 lose `actualWorld` (now `{AxGlobalGround, Subject, ExistsAt, Ground}`).
+  C18–C20 lose `actualWorld` (now `{AxGlobalGround, Subject, ExistsAt, Ground}` —
+  at batch time; esse-est-agere drops `Subject` (def) and `ExistsAt` (def)).
   No proof-body changes.
 - **T12_directedPair** (`Plurality.lean`, **C47**): the T12 pair oriented so
   affectivity flows named-forward — `AxPersonsAffect` decides direction by
@@ -365,14 +397,16 @@ contradicts itself. RETHINKING-COGITO.md records the parallel in full.
   the *derivability* is now proven, so cogito's status is "axiom, proved
   redundant" rather than "irreducible datum" — a strict strengthening.
 
-Summary counts (definitional subject, measured 2026-09-17):
+Summary counts (esse-est-agere, measured 2026-09-17):
 
-- **PROVEN** (no axioms beyond `CL` where marked) — **40 axiom-free** (`{}`):
+- **PROVEN** (no axioms beyond `CL` where marked) — **41 axiom-free** (`{}`):
   C1, C2, C4–C9, C11, C21–C24, C26–C29, C31, C35, C36, C38, C39,
-  C48–C54, C56–C58, C61–C68 (C62: pure bridges `{}`; full conditional `CL`).
-  `CL`-only: C3, C10, C12–C14, C25, C30, C37, C55, C59 (spike).
-  Vocab-only (`{ExistsAt, Ground}` — the statement's own vocabulary, see
-  VOCAB.md): C15, C17, C60 (denial refutes itself by definition — RAA).
+  C48–C54, C56–C58, C61–C68 (C62: pure bridges `{}`; full conditional `CL`),
+  F1a (choice-existence resolves to a kernel step).
+  `CL`-only: C3, C10, C12–C14, C25, C30, C37, C55 (+ C59 spike, outside barrel).
+  Vocab-only (`{Ground}` — the statement's own vocabulary): C15, C16, C17,
+  C60 (denial refutes itself by definition — RAA; esse-est-agere drops
+  `ExistsAt`, now a def).
   C62 (`rightWrong_implies_meaning`) is the pure bridge: with the §8
   act-relative `Correct`/`Incorrect`, right/wrong unfold to a `Means`-act;
   the bare-distinction form `rightWrongDistinction_implies_meaning` is `CL`.
@@ -382,7 +416,7 @@ Summary counts (definitional subject, measured 2026-09-17):
   degenerate `fun h => h Cogito` with it. `AxGlobalGround`/`AxPersonalGround`
   are the two META prices; `actualWorld` is a def;
   `Exists`/`Content`/`Agent`/`Rational` are analytical defs; `Affects` is the A3
-  definition `s ≠ t`; `AxPersonsAffect` is a theorem.)
+  definition `s ≠ t`; `AxPersonsAffect` and now `AxPersonStability` are theorems.)
 - FAITH layer: **empty** (FAITH-1 → C38, FAITH-2 → C4); no claims live at the faith boundary.
 - Axioms dissolved (all batches): `T`, `tschema`, `Entity`,
   `EntityOf`, `help_affects`, `harm_affects`; `Affects` (axiom → def, M1);
@@ -391,12 +425,13 @@ Summary counts (definitional subject, measured 2026-09-17):
   `AxOr`/`AxAnd`/`AxNot` (axioms → theorems via A2);
   `AxPersonsAffect` (axiom → theorem, M1 via A3);
   `Subject`/`State`/`Initiates` (axioms → defs, definitional subject);
-  `Cogito` (axiom → theorem, definitional subject).
+  `Cogito` (axiom → theorem, definitional subject);
+  `ExistsAt` (axiom → def, esse est agere);
+  `AxPersonStability` (axiom → theorem, esse est agere).
   A1 removed `cogito`; M0 restored it as the FORCED foundation (+1);
   the definitional-subject batch proves it (−1).
-  Net inventory: **8 declarations** + `CL`:
-  `Ground`, `ExistsAt`, `AxGlobalGround`,
-  `AxTwoSubjects`, `AxPersonStability`,
+  Net inventory: **6 declarations** + `CL`:
+  `Ground`, `AxGlobalGround`, `AxTwoSubjects`,
   `GroundProp`, `GroundPrincipleProp`, `AxPersonalGround`.
 - `sorryAx` count across all modules: **0**.
 - Verification: `lake build` green (36 jobs, seconds, Lean core only); zero
@@ -491,7 +526,9 @@ Executed in `Truthmaker.lean`:
   composicional (Tarskiana)". The atom-clause is not a new belief: it is the
   face-value model already in DESIGN D4-D5 and `Semantics.Satisfies`.
   Honesty limits: no `TrueAt = Satisfies` ∈-theorem (Ground/ExistsAt remain
-  free VOCAB); `Ground e (or …)` neither asserted nor denied.
+  free VOCAB); `Ground e (or …)` neither asserted nor denied. (Superseded
+  2026-09-17 by esse-est-agere for the `ExistsAt` half: existence is now
+  agency itself; `Ground` alone stays free VOCAB.)
 - Measured footprints (`#print axioms`, scratch `/tmp/opencode/aud.lean`;
   at batch time — `Subject` since demoted to a definition):
   `groundPrinciple_atom` = `{Subject, ExistsAt, Ground}`;
@@ -504,7 +541,8 @@ Executed in `Truthmaker.lean`:
   `nonContradiction` = `{Subject, ExistsAt, Ground}` (**no propext** — the
   re-proof avoids `rw` on `Iff`); `T7_necessaryReality`/`T7_excludedMiddleInstance`/
   `noNecessaryTruthIfAllContingent` unchanged from before.
-  (2026-09-17: `Subject` demoted — drop it from all four.)
+  (2026-09-17: `Subject` demoted — drop it from all four; esse-est-agere
+  also drops `ExistsAt` — now `{Ground}`, `CL + {Ground}`, `{Ground}`.)
 - Measured totals: axiom declarations **15 → 12**; `#print axioms` statements
   stay **47** (Truthmaker audit still 3); `sorryAx: 0`; `lake build` green,
   zero warnings.
@@ -544,7 +582,9 @@ as it stood.)
   * M3 `Spike_PersonStability.lean`: `PERSON_PERSISTS` — a necessary relata
     `e₀` exists (T8 content) but `Realizes e₀ f` does not identify it with the
     act's subject; `NecessarySubject s` needs `ExistsAt w s` and no rule links
-    `Means` to `ExistsAt`; `AxPersonStability` stays priced (SEM).
+    `Means` to `ExistsAt`; `AxPersonStability` stays priced (SEM). (Superseded
+    2026-09-17 by esse-est-agere: the rule is supplied by definition —
+    `AxPersonStability` is now a theorem, `ExistsAt` a def.)
   * M4 `Spike_A6_probe.lean`: weaker `AxGlobalMirror` derives T7-**atom**
     (kernel-checked, no `AxGlobalGround`) but cannot cover the compound
     excluded-middle instance (A2 structural TrueAt has no existential ground

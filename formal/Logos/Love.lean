@@ -52,18 +52,19 @@ theorem T13_someoneLovable :
     ⟨q, hne.symm, hq⟩,
     ⟨p, hne, hp⟩⟩
 
-/--Tag: SEM
+/--Persons persist across worlds: whoever is a person exists in every world — the poem's 'somehow'.
 
- Persons persist across worlds: whoever is a person exists in every world — the poem's 'somehow'.
-
- AxPersonStability (SEM; poem P8 "de alguma forma", DESIGN.md D-C4): every
-    person's entity-correlate exists in every world — persons are NOT
-    world-contingent. This carries the *eternal* half of T14, attached to the
-    relata rather than declared directly over a relation (C4). Exclusion
-    attempt recorded in /tmp/opencode/x2_spikeD.lean: Person's agency structure
-    (T5) gives no fact about which worlds the correlate inhabits, so the claim
-    is underivable; declared as a priced bridge. -/
-axiom AxPersonStability : ∀ s : Subject, Person s → NecessarySubject s
+ THEOREM (esse est agere, 2026-09-17): `Person s` unfolds definitionally to
+    `∃ p, Means s p` (via `Intentional`; kind-preds are `:= True`), and
+    `ExistsAt` is now agency itself — so persistence follows with no axiom
+    (the M3 PERSON_PERSISTS wall dissolves: the missing Means→ExistsAt rule
+    is supplied by definition). Former SEM bridge (C4; poem P8 "de alguma
+    forma", DESIGN.md D-C4). Footprint: `{}`. -/
+theorem AxPersonStability : ∀ s : Subject, Person s → NecessarySubject s := by
+  intro s hs _
+  obtain ⟨_, _, hI⟩ := hs
+  obtain ⟨p, hm⟩ := hI
+  exact ⟨p, hm⟩
 
 /--Two distinct persons stand in an eternal love-relation, and both persist in every world.
 

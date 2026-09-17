@@ -53,9 +53,10 @@ subjacente — origem silenciosa + conteúdos posados), `State := Prop`,
 `Cogito` é agora **teorema** (`{}`, testemunha `Sum.inl ()`) e lê-se como
 fundamento-iniciação (`Cogito_Init`); `Means`/`A` são definições —
 `Means s p := ∃w w', Initiates(s,w,w',p)` e `A s p := Means s p`
-(§8, Tier-1). O inventário de axiomas passa de 12 a 8 declarações
-(definicional: `−Cogito`, `−Subject`, `−State`, `−Initiates`); axiomas
-substantivos inalterados (só SEM/META). Ver
+(§8, Tier-1). O inventário de axiomas passa de 12 a 6 declarações
+(definicional: `−Cogito`, `−Subject`, `−State`, `−Initiates`; esse est agere:
+`−ExistsAt`, `−AxPersonStability` — este último tornado teorema); axiomas
+substantivos inalterados em género (só SEM/META). Ver
 THOUGHTS.md §5–§7 e TASK.md.
 
 2. T1 — O SUJEITO DO ATO EXISTE → theorems/T1.txt
@@ -656,11 +657,13 @@ Nota formal: neste nível a verdade é definida estruturalmente
 (formal/Truthmaker.TrueAt, A2 2026-09-16): átomos exigem
 fundamentação existencial — `groundPrinciple_atom` (formal/Truthmaker,
 GAPMAP.md C15) é teorema por definição, **não-axiomático**
-(footprint = só vocabulário do próprio enunciado, `{Subject, ExistsAt, Ground}`;
+(footprint = só vocabulário do próprio enunciado, `{Ground}` — `Subject` e
+`ExistsAt` são defs (definitional-subject, esse-est-agere);
 C15 exibido ✔ no mapa; ver GAPMAP.md C15/C60); os conectivos são composicionais
 (cláusulas TEOREMAS por definição, C16–C17 — `Iff.rfl`). Não há
-correspondência provável `TrueAt = Satisfies` em geral (Ground/ExistsAt
-permanecem VOCAB livres). A imagem ao nível proposicional
+correspondência provável `TrueAt = Satisfies` em geral (Ground
+permanece VOCAB livre; ExistsAt é agora a definição de agência — esse est
+agere). A imagem ao nível proposicional
 (GroundPrincipleProp) é axioma SEM declarado (ver formal/Logos/GroundPerson.lean).
 
 Teorema: ver theorems/T7.txt
@@ -773,9 +776,10 @@ Certo e errado necessários (T10)
 → relação eterna de amor (T14).
 
 (Nota formal §25: T12–T14 são PROVEN↑ sob pontes declaradas e assinaladas —
-AxTwoSubjects (META, pluralidade) e AxPersonsAffect (SEM, afetividade) para o
-par, AxPersonStability (SEM) para a eternidade — a ponte FAITH AxEternalLove e
-a axiom Loves foram dissolvidas em C4 (Loves := Affects, relação estrutural);
+AxTwoSubjects (META, pluralidade) para o par e a eternidade; a persistência
+(AxPersonStability) é agora teorema (esse est agere) — a ponte FAITH AxEternalLove e
+a axiom Loves foram dissolvidas em C4 (Loves := Affects, relação estrutural),
+AxPersonsAffect dissolvido em M1;
 Affects é a relação primitiva única (A3-refactor, 2026-09-15: Helps/Harms :=
 Affects passam a projeções definidas — a distinção ajuda/prejudica sobrevive
 só no plano conceptual);
@@ -800,8 +804,8 @@ prejudica ninguém" é C56 (`alone_no_other_help_harm`, `{}`; o antigo preço
 AxPersonsAffect foi dissolvido em M1), "tem de
 haver este Ser, e o certo e o errado" é C68 (Cogito teorema) + C37/C38, e "tem
 de haver quem se possa Amar" é C41 (via T12); L24 (P6) "Amar é escolhido e
-também é necessário (de alguma forma)" é C42–C45 (T14, AxTwoSubjects +
-AxPersonStability); L38 ("Escolho admitir que: Sou") é o próprio dado
+também é necessário (de alguma forma)" é C42–C45 (T14, AxTwoSubjects — a
+persistência AxPersonStability é agora teorema); L38 ("Escolho admitir que: Sou") é o próprio dado
 performativo C68 — a sua negação refuta-se por exibição (noCogito_selfRefutes). Ficam fora
 da demonstração as linhas 26–30: "este mundo é necessário? Não" é uma negação
 não reivindicada, e "a criação existe / há propósito" pertence à zona de fé
@@ -915,9 +919,10 @@ T12 (mais do que uma pessoa) — PROVEN↑ sob AxTwoSubjects (META, pluralidade;
   a antiga ponte AxValueInterpersonal foi dividida em C3-I e o seu enunciado
   recuperado como teorema valueInterpersonal_of_split).
 T13 (quem se possa amar) — PROVEN↑ (via T12).
-T14 (relação eterna de amor) — PROVEN↑ sob AxPersonsAffect (SEM) +
-  AxPersonStability (SEM); a relação é estrutural (Loves := Affects, C4) e a
-  ponte FAITH AxEternalLove foi dissolvida.
+T14 (relação eterna de amor) — PROVEN↑ sob AxTwoSubjects (META); a
+  persistência (AxPersonStability) é agora teorema (esse est agere); a relação
+  é estrutural (Loves := Affects, C4), a ponte FAITH AxEternalLove foi
+  dissolvida e AxPersonsAffect dissolvido em M1.
 
 Nota (M5, 2026-09-16): o dado "há certo E há errado" — "Strong Truth Exists" —
 foi tornado registo axiom-free residente como corolário nomeado
@@ -972,10 +977,10 @@ Nota formal (formal/GAPMAP.md, formal/DESIGN.md D9, D14): PersonalGround é
 teorema apenas sob duas pontes declaradas — AxGlobalGround (SEM, a troca de
 quantificadores ∀w∃r → ∃r∀w de T7) e AxPersonalGround (META, o preço do
 passo "pessoal" de T8). A pluralidade e o amor são teoremas
-apenas sob AxTwoSubjects (META) e AxPersonStability
-(SEM). Cada negação destas pontes não destrói o ato de a negar — por isso são
-pontes declaradas, nunca "dedução pura" (spikes de exclusão registados em
-formal/DESIGN.md D14b; lema em falta: ALONE_EXCLUDED).
+apenas sob AxTwoSubjects (META); a persistência (AxPersonStability) é agora
+teorema (esse est agere). Cada negação destas pontes não destrói o ato de a
+negar — por isso são pontes declaradas, nunca "dedução pura" (spikes de
+exclusão registados em formal/DESIGN.md D14b; lema em falta: ALONE_EXCLUDED).
 
 O objectivo seguinte é demonstrar cada uma delas pelo mesmo método transcendental:
 

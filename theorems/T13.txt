@@ -20,5 +20,5 @@ A realidade necessária não é impessoal (T8) e há quem se possa amar (T13).
 Juntos: "não é impessoal, e não é sózinho".
 
 NOTA (o salto em aberto, §28/§29):
-Que esse amor seja *atual* e *eterno* é a T14, sob as pontes C3-I +
-AxPersonStability (SEM) — ver theorems/T14.txt.
+Que esse amor seja *atual* e *eterno* é a T14, sob a ponte C3-I
+(AxPersonStability agora teorema — esse est agere) — ver theorems/T14.txt.

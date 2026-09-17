@@ -157,42 +157,39 @@ Segue de: **C4** — [T3 §6](base.txt) · [T3](theorems/T3.txt)
 `¬◇(φ ∧ ¬φ)` — _In every world, 'φ and not-φ' cannot be true._
 [§23](base.txt)
 
-### A1 ◆ Existence-in-a-world — an entity existing at a world · `VOCAB`
-`ExistsAt : World → Subject → Prop` — _Existence-in-a-world — an entity existing at a world._
-
-### A2 ◆ The truthmaker relation — an entity grounding a formula · `VOCAB`
+### A1 ◆ The truthmaker relation — an entity grounding a formula · `VOCAB`
 `Ground : Subject → Form → Prop` — _The truthmaker relation — an entity grounding a formula._
 
 ### C15 · ✔
 `w ⊨ atom n → ∃ e : Entity, ExistsAt w e ∧ Ground e atom n` — _Every atomic truth is grounded: where an atom is true, an entity exists there that grounds it._
-Segue dos axiomas **A1**, **A2** (vocabulário do enunciado) — [§24a](base.txt)
+Segue do axioma **A1** (vocabulário do enunciado) — [§24a](base.txt)
 
 ### C60 · ✔
 `¬ (∃ (w : World) (n : Nat), w ⊨ atom n ∧ ¬ (∃ e : Entity, ExistsAt w e ∧ Ground e atom n))` — _The denial that atomic truth is grounded refutes itself: where an atom is true, no world lacks a grounder for it._
-Segue dos axiomas **A1**, **A2** (vocabulário do enunciado) — [§24a (RAA)](base.txt)
+Segue do axioma **A1** (vocabulário do enunciado) — [§24a (RAA)](base.txt)
 
 ### C16 · ✔
 `□(φ ∨ ¬φ)` — _In every world, 'φ or not-φ' is true — composite truth is Tarskian-compositional._
-Segue dos axiomas **A1**, **A2** (vocabulário do enunciado) — [§22](base.txt)
+Segue do axioma **A1** (vocabulário do enunciado) — [§22](base.txt)
 
 ### C17 · ✔
 `¬◇(φ ∧ ¬φ)` — _In every world, 'φ and not-φ' cannot be true._
-Segue dos axiomas **A1**, **A2** (vocabulário do enunciado) — [§23](base.txt)
+Segue do axioma **A1** (vocabulário do enunciado) — [§23](base.txt)
 
-### A3 ◆ A formula true in every world is grounded by a single entity existing in every world (the quantifier swap) · `SEM`
+### A2 ◆ A formula true in every world is grounded by a single entity existing in every world (the quantifier swap) · `SEM`
 `AxGlobalGround : ∀ (φ : Form), □ φ → ∃ e : Entity, ∀ w : World, ExistsAt w e ∧ Ground e φ` — _A formula true in every world is grounded by a single entity existing in every world (the quantifier swap)._
 
 ### C18 · ⚠
 `∃ e : Entity, NecessaryEntity e ∧ Ground e τ` — _Necessary truth forces necessary reality: whatever is true in every world is grounded by an entity existing in every world._
-Segue dos axiomas **A1**, **A2**, **A3** — [§T7](base.txt) · [T7](theorems/T7.txt)
+Segue dos axiomas **A1**, **A2** — [§T7](base.txt) · [T7](theorems/T7.txt)
 
 ### C19 · ⚠
 `∃ e : Entity, NecessaryEntity e ∧ Ground e (φ ∨ ¬φ)` — _There is a necessary reality grounded on the indubitable: some entity existing in every world grounds 'φ or not-φ'._
-Segue de: **C16**, **C18** e dos axiomas **A1**, **A2**, **A3** — [§T7](base.txt) · [T7](theorems/T7.txt)
+Segue de: **C16**, **C18** e dos axiomas **A1**, **A2** — [§T7](base.txt) · [T7](theorems/T7.txt)
 
 ### C20 · ⚠
 `(∀ e : Entity, Contingent e) → ∀ φ : Form, ¬ □ φ` — _If every entity were contingent, nothing could be true in every world._
-Segue de: **C18** e dos axiomas **A1**, **A2**, **A3** — [§T7](base.txt) · [T7](theorems/T7.txt)
+Segue de: **C18** e dos axiomas **A1**, **A2** — [§T7](base.txt) · [T7](theorems/T7.txt)
 
 
 ---
@@ -254,26 +251,26 @@ Segue de: **C48** — [§8](base.txt)
 `T q` — _Consequence preserves truth: whatever two true premises jointly imply is true._
 [§9](base.txt)
 
-### A4 ◆ The personal price of T8: what is grounded about a person is grounded in a personal way · `META`
+### A3 ◆ The personal price of T8: what is grounded about a person is grounded in a personal way · `META`
 `AxPersonalGround : ∀ {f : Prop}, IsPresentPersonalFeature f → ∃ e : Entity, NecessaryEntity e ∧ GroundProp e f` — _The personal price of T8: what is grounded about a person is grounded in a personal way._
 
-### A5 ◆ The grounding relation between an entity and a proposition · `VOCAB`
+### A4 ◆ The grounding relation between an entity and a proposition · `VOCAB`
 `GroundProp : Entity → Prop → Prop` — _The grounding relation between an entity and a proposition._
 
 ### C32 · ⚠
 `∃ e : Entity, NecessaryEntity e ∧ Personal e` — _Every present personal feature is grounded by a necessary, personal entity._
-Segue dos axiomas **A1**, **A4**, **A5** — [§T8](base.txt) · [T8](theorems/T8.txt)
+Segue dos axiomas **A3**, **A4** — [§T8](base.txt) · [T8](theorems/T8.txt)
 
-### A6 ◆ The §24a atom-grounding principle reflected at the level of propositions · `SEM`
+### A5 ◆ The §24a atom-grounding principle reflected at the level of propositions · `SEM`
 `GroundPrincipleProp : ∀ {f : Prop}, T f → ∃ e : Entity, GroundProp e f` — _The §24a atom-grounding principle reflected at the level of propositions._
 
 ### C33 · ⚠
 `∃ e : Entity, GroundProp e f` — _Every true present personal feature has a ground._
-Segue dos axiomas **A5**, **A6** — [§T8](base.txt) · [T8](theorems/T8.txt)
+Segue dos axiomas **A4**, **A5** — [§T8](base.txt) · [T8](theorems/T8.txt)
 
 ### C34 · ⚠
 `∃ e : Entity, NecessaryEntity e` — _Every necessary truth has a necessary grounder._
-Segue de: **C18** e dos axiomas **A1**, **A2**, **A3** — [§T8](base.txt) · [T8](theorems/T8.txt)
+Segue de: **C18** e dos axiomas **A1**, **A2** — [§T8](base.txt) · [T8](theorems/T8.txt)
 
 
 ---
@@ -300,16 +297,16 @@ Segue de: **C36** — [P2](poem.txt)
 `∃ s : Subject, Person s ∧ ∃ p q : Prop, Incompatible p q` — _There is a field of choice: some person with two incompatible alternatives._
 Segue de: **C24**, **C26** — [P4](poem.txt)
 
-### A7 ◆ The plurality bridge: right-and-wrong demands two distinct persons · `META`
+### A6 ◆ The plurality bridge: right-and-wrong demands two distinct persons · `META`
 `AxTwoSubjects : (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) → ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` — _The plurality bridge: right-and-wrong demands two distinct persons._
 
 ### C40 · ⚠
 `∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` — _There are at least two distinct persons._
-Segue de: **C36** e do axioma **A7** — [P5/P7](poem.txt)
+Segue de: **C36** e do axioma **A6** — [P5/P7](poem.txt)
 
 ### C41 · ⚠
 `∃ s t : Subject, Person s ∧ Person t ∧ s ≠ t ∧ Lovable s ∧ Lovable t` — _There is someone lovable and someone who loves: both are persons and distinct._
-Segue de: **C40** e do axioma **A7** — [P7](poem.txt)
+Segue de: **C40** e do axioma **A6** — [P7](poem.txt)
 
 ### C48 · ✔
 `∃ s : Subject, ∃ p : Prop, Logos.Agency.A s p` — _The acting subject is exhibited: someone acts on something._
@@ -351,32 +348,29 @@ Segue de: **C48**, **C50** — [§8/§14](base.txt)
 `(¬ ∃ _s : Subject, True) → False` — _Denying 'a subject exists' refutes itself: the denial is itself an act._
 Segue de: **C52** — [§26](base.txt)
 
-### A8 ◆ Persons persist across worlds: whoever is a person exists in every world — the poem's 'somehow' · `SEM`
-`AxPersonStability : ∀ s : Subject, Person s → NecessarySubject s` — _Persons persist across worlds: whoever is a person exists in every world — the poem's 'somehow'._
-
 ### C42 · ⚠
 `∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves s₁ s₂ ∧ NecessarySubject s₁ ∧ NecessarySubject s₂` — _Two distinct persons stand in an eternal love-relation, and both persist in every world._
-Segue de: **C47** e dos axiomas **A1**, **A7**, **A8** — [P8](poem.txt)
+Segue de: **C47** e do axioma **A6** — [P8](poem.txt)
 
 ### C43 · ⚠
 `∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves s₁ s₂` — _Two distinct persons stand in a love-relation._
-Segue de: **C42** e dos axiomas **A1**, **A7**, **A8** — [P8](poem.txt)
+Segue de: **C42** e do axioma **A6** — [P8](poem.txt)
 
 ### C44 · ⚠
 `∀ w, ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves s₁ s₂ ∧ ExistsAt _w (EntityOf s₁) ∧ ExistsAt _w (EntityOf s₂)` — _In every world, two distinct persons stand in a love-relation._
-Segue de: **C42**, **F1b**, **F7** e dos axiomas **A1**, **A7**, **A8** — [P8](poem.txt)
+Segue de: **C42** e do axioma **A6** — [P8](poem.txt)
 
 ### C45 · ⚠
 `□(∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves s₁ s₂)` — _Necessarily, two distinct persons stand in a love-relation._
-Segue de: **C42** e dos axiomas **A1**, **A7**, **A8** — [P8](poem.txt)
+Segue de: **C42** e do axioma **A6** — [P8](poem.txt)
 
 ### C46 · ⚠
 `(¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) → ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ (Affects s₁ s₂ ∨ Affects s₂ s₁)` — _Right-and-wrong yields two distinct persons who bear on each other._
-Segue do axioma **A7** — [P5](poem.txt)
+Segue do axioma **A6** — [P5](poem.txt)
 
 ### C47 · ⚠
 `∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Affects s₁ s₂` — _There are two distinct persons where one bears on the other._
-Segue de: **C40** e do axioma **A7** — [P5/P7](poem.txt)
+Segue de: **C40** e do axioma **A6** — [P5/P7](poem.txt)
 
 ### C61 · ✔
 `(¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) → ∃ s : Subject, ∃ p : Prop, Means s p` — _Right-and-wrong implies someone who means (poem P3, line 18 "há certo e há errado → há significado → há alguém para quem algo significar")._
@@ -423,7 +417,7 @@ Segue de: **C66** — [§1 fnd](base.txt)
 | F2 | §21 teleology (`Ought → Goal`) | ➖ | deontic layer (normativity → telos) |
 | F3 | §28 Good (`§20 → bem`) | ➖ | moral good from logical normativity not yet derived |
 | F4 | §28 Love | ⚠ | T13 under AxTwoSubjects (C3-I) |
-| F5 | §28 EternalRelation | ⚠ | T14 under C3-I bridges + AxPersonStability |
+| F5 | §28 EternalRelation | ⚠ | T14 under C3-I bridges + AxPersonStability (now a theorem, esse-est-agere) |
 | F6 | §28 Trinity | ➖ | no argument exists yet (§28/§29) |
 | Q7.2 | weaker `AxGlobalGround` | ➖ | research sub-question (DESIGN.md) |
 
@@ -459,7 +453,7 @@ _Research question, deferred: can the global-grounding axiom be weakened?_
 | ID | Prosa | Status | Nota / lema em falta |
 |---|---|---|---|
 | FAITH-1 | P2 necessity | → | dissolved in C1: necDistinction is now a theorem (C38); world content = C37 |
-| FAITH-2 | P8 eternal love | → | dissolved in C4: replaced by AxPersonStability (SEM) + C3-I bridges; T14 is a theorem under them |
+| FAITH-2 | P8 eternal love | → | dissolved in C4: replaced by AxPersonStability + C3-I bridges (stability now a theorem, esse-est-agere); T14 is a theorem under AxTwoSubjects |
 | F7 | §15 the bipolar half of freedom | ➖ | = F1b — must be built on NecessityPH (world-level), not the degenerate alias |
 | F8 | Trinity | ➖ | not attempted (§28/§29) |
 | F9 | Incarnation / creation | ➖ | poem P10, faith datum |
@@ -468,7 +462,7 @@ _Research question, deferred: can the global-grounding axiom be weakened?_
 *Vide **C38** (passo já apresentado).*
 
 ### FAITH-2 · →
-`AxPersonStability : ∀ s : Subject, Person s → NecessarySubject s` — _Persons persist across worlds: whoever is a person exists in every world — the poem's 'somehow'._
+`∀ s : Subject, Person s → NecessarySubject s` — _Persons persist across worlds: whoever is a person exists in every world — the poem's 'somehow'._
 [P8 eternal love](poem.txt)
 
 ### F7 · →
@@ -482,27 +476,23 @@ _Incarnation and creation are faith data from the poem, deferred._
 
 
 ---
-## Inventário de axiomas (8 declarações)
+## Inventário de axiomas (6 declarações)
 
 | Axioma | Nº | Tag | Significado (EN) / preço | Depende dele (claims) |
 |---|---|---|---|---|
-| `AxPersonalGround` | A4 | `META` | The personal price of T8: what is grounded about a person is grounded in a personal way. | C32 |
-| `GroundPrincipleProp` | A6 | `SEM` | The §24a atom-grounding principle reflected at the level of propositions. | C33 |
-| `GroundProp` | A5 | `VOCAB` | The grounding relation between an entity and a proposition. | C32, C33 |
-| `AxPersonStability` | A8 | `SEM` | Persons persist across worlds: whoever is a person exists in every world — the poem's 'somehow'. | C42, C43, C44, C45, FAITH-2 |
-| `AxGlobalGround` | A3 | `SEM` | A formula true in every world is grounded by a single entity existing in every world (the quantifier swap). | C18, C19, C20, C34 |
-| `ExistsAt` | A1 | `VOCAB` | Existence-in-a-world — an entity existing at a world. | C15, C16, C17, C18, C19, C20, C32, C34, C42, C43, C44, C45, C60, FAITH-2 |
-| `Ground` | A2 | `VOCAB` | The truthmaker relation — an entity grounding a formula. | C15, C16, C17, C18, C19, C20, C34, C60 |
-| `AxTwoSubjects` | A7 | `META` | The plurality bridge: right-and-wrong demands two distinct persons. | C40, C41, C42, C43, C44, C45, C46, C47 |
+| `AxPersonalGround` | A3 | `META` | The personal price of T8: what is grounded about a person is grounded in a personal way. | C32 |
+| `GroundPrincipleProp` | A5 | `SEM` | The §24a atom-grounding principle reflected at the level of propositions. | C33 |
+| `GroundProp` | A4 | `VOCAB` | The grounding relation between an entity and a proposition. | C32, C33 |
+| `AxGlobalGround` | A2 | `SEM` | A formula true in every world is grounded by a single entity existing in every world (the quantifier swap). | C18, C19, C20, C34 |
+| `Ground` | A1 | `VOCAB` | The truthmaker relation — an entity grounding a formula. | C15, C16, C17, C18, C19, C20, C34, C60 |
+| `AxTwoSubjects` | A6 | `META` | The plurality bridge: right-and-wrong demands two distinct persons. | C40, C41, C42, C43, C44, C45, C46, C47 |
 
 Detalhe do kernel:
 
 - `Logos.GroundPerson.AxPersonalGround`
 - `Logos.GroundPerson.GroundPrincipleProp`
 - `Logos.GroundPerson.GroundProp`
-- `Logos.Love.AxPersonStability`
 - `Logos.Modal.AxGlobalGround`
-- `Logos.Truthmaker.ExistsAt`
 - `Logos.Truthmaker.Ground`
 - `Logos.Value.AxTwoSubjects`
 
@@ -519,11 +509,10 @@ Detalhe do kernel:
 - **Steps ⚠ sob axioma substantivo (SEM/META)** (14): C18, C19, C20, C32, C33, C34, C40, C41, C42, C43, C44, C45, C46, C47
 - **Exibidos ✔ por só-vocabulário** (pegada do kernel só com os vocábulos do próprio enunciado — SEM/META nenhum; em C15/C60 a negação refuta-se por definição, RAA): C15, C16, C17, C60
 - Pegada kernel × GAPMAP: **sem divergências**.
-- **Grafo (closure) × audição (#print axioms) divergem em 3 claims** (subconta transitiva do depviz — toolchain, não ledger; a audição manda):
-  - `C16` audição `{ExistsAt, Ground}` vs grafo `{}`
-  - `C17` audição `{ExistsAt, Ground}` vs grafo `{}`
-  - `FAITH-2` audição `{AxPersonStability, ExistsAt}` vs grafo `{}`
-- Axiomas declarados no kernel: **8** — **todos com `Tag:` na docstring Lean**
+- **Grafo (closure) × audição (#print axioms) divergem em 2 claims** (subconta transitiva do depviz — toolchain, não ledger; a audição manda):
+  - `C16` audição `{Ground}` vs grafo `{}`
+  - `C17` audição `{Ground}` vs grafo `{}`
+- Axiomas declarados no kernel: **6** — **todos com `Tag:` na docstring Lean**
 ## Anexo: código por passo
 
 <details>
@@ -545,13 +534,13 @@ Detalhe do kernel:
 | C12 | `Logos.Core.bivalence` | [Core.lean#L186](formal/Logos/Core.lean#L186) | `{CL}` | CL | `Core.IsFalse`, `Core.T` | — |
 | C13 | `Logos.Semantics.lawExcludedMiddle` | [Semantics.lean#L76](formal/Logos/Semantics.lean#L76) | `{CL}` | CL | `Semantics.Form`, `Semantics.NecessarilyTrue`, `Semantics.Satisfies`, `Semantics.TrueAt`, `Semantics.World`, `Semantics.sat_not`, `Semantics.sat_or` | **C37** `bothNecessarilyTrueAndFalse` |
 | C14 | `Logos.Semantics.nonContradiction` | [Semantics.lean#L85](formal/Logos/Semantics.lean#L85) | `{CL}` | {propext} | `Semantics.FalseAt`, `Semantics.Form`, `Semantics.NecessarilyFalse`, `Semantics.Satisfies`, `Semantics.World`, `Semantics.sat_and`, `Semantics.sat_not` | **C37** `bothNecessarilyTrueAndFalse` |
-| C15 | `Logos.Truthmaker.groundPrinciple_atom` | [Truthmaker.lean#L82](formal/Logos/Truthmaker.lean#L82) | `{ExistsAt, Ground}` | {ExistsAt, Ground} (VOCAB — footprint is the statement's own vocabulary; proof is a definitional collapse, P → P; see C60) | `Semantics.World`, `Truthmaker.Entity`, axiom `ExistsAt` (VOCAB), axiom `Ground` (VOCAB), `Truthmaker.TrueAt` | — |
-| C60 | `Logos.Truthmaker.noGround_selfRefutes` | [Truthmaker.lean#L95](formal/Logos/Truthmaker.lean#L95) | `{ExistsAt, Ground}` | {ExistsAt, Ground} (VOCAB — denial refutes itself by definition: TrueAt w (atom n) unfolds to ∃e, ExistsAt w e ∧ Ground e (atom n), so the denial is ∃e… ∧ ¬∃e…; companion of C15) | `Semantics.World`, `Truthmaker.Entity`, axiom `ExistsAt` (VOCAB), axiom `Ground` (VOCAB), `Truthmaker.TrueAt` | — |
-| C16 | `Logos.Truthmaker.lawExcludedMiddle` | [Truthmaker.lean#L124](formal/Logos/Truthmaker.lean#L124) | `{ExistsAt, Ground, CL}` | CL + {ExistsAt, Ground} (A2: AxOr/AxNot dropped) | `Semantics.Form`, `Semantics.World`, `Truthmaker.NecessarilyTrue`, `Truthmaker.TrueAt` | **C19** `T7_excludedMiddleInstance` |
-| C17 | `Logos.Truthmaker.nonContradiction` | [Truthmaker.lean#L132](formal/Logos/Truthmaker.lean#L132) | `{ExistsAt, Ground}` | {ExistsAt, Ground} (A2: AxAnd/AxNot dropped; no propext) | `Semantics.Form`, `Semantics.World`, `Truthmaker.NecessarilyFalse`, `Truthmaker.TrueAt` | — |
-| C18 | `Logos.Modal.T7_necessaryReality` | [Modal.lean#L59](formal/Logos/Modal.lean#L59) | `{AxGlobalGround, ExistsAt, Ground}` | {AxGlobalGround, ExistsAt, Ground} | axiom `AxGlobalGround` (SEM), `Modal.NecessaryEntity`, `Modal.actualWorld`, `Semantics.Form`, `Semantics.World`, `Truthmaker.Entity`, axiom `ExistsAt` (VOCAB), axiom `Ground` (VOCAB), `Truthmaker.NecessarilyTrue` | **C34** `necessary_truth_has_necessary_grounder`, **C19** `T7_excludedMiddleInstance`, **C20** `noNecessaryTruthIfAllContingent` |
-| C19 | `Logos.Modal.T7_excludedMiddleInstance` | [Modal.lean#L68](formal/Logos/Modal.lean#L68) | `{AxGlobalGround, ExistsAt, Ground, CL}` | as C18 | `Modal.NecessaryEntity`, **C18** `T7_necessaryReality`, `Semantics.Form`, `Truthmaker.Entity`, axiom `Ground` (VOCAB), **C16** `lawExcludedMiddle` | — |
-| C20 | `Logos.Modal.noNecessaryTruthIfAllContingent` | [Modal.lean#L76](formal/Logos/Modal.lean#L76) | `{AxGlobalGround, ExistsAt, Ground}` | as C18 | `Modal.Contingent`, `Modal.NecessaryEntity`, **C18** `T7_necessaryReality`, `Semantics.Form`, `Truthmaker.Entity`, axiom `Ground` (VOCAB), `Truthmaker.NecessarilyTrue` | — |
+| C15 | `Logos.Truthmaker.groundPrinciple_atom` | [Truthmaker.lean#L86](formal/Logos/Truthmaker.lean#L86) | `{Ground}` | {Ground} (VOCAB — footprint is the statement's own vocabulary; proof is a definitional collapse, P → P; see C60; esse-est-agere batch drops ExistsAt, now a def) | `Semantics.World`, `Truthmaker.Entity`, `Truthmaker.ExistsAt`, axiom `Ground` (VOCAB), `Truthmaker.TrueAt` | — |
+| C60 | `Logos.Truthmaker.noGround_selfRefutes` | [Truthmaker.lean#L99](formal/Logos/Truthmaker.lean#L99) | `{Ground}` | {Ground} (VOCAB — denial refutes itself by definition: TrueAt w (atom n) unfolds to ∃e, ExistsAt w e ∧ Ground e (atom n) with ExistsAt now agency itself, so the denial is ∃e… ∧ ¬∃e…; companion of C15) | `Semantics.World`, `Truthmaker.Entity`, `Truthmaker.ExistsAt`, axiom `Ground` (VOCAB), `Truthmaker.TrueAt` | — |
+| C16 | `Logos.Truthmaker.lawExcludedMiddle` | [Truthmaker.lean#L128](formal/Logos/Truthmaker.lean#L128) | `{Ground, CL}` | CL + {Ground} (A2: AxOr/AxNot dropped; esse-est-agere drops ExistsAt) | `Semantics.Form`, `Semantics.World`, `Truthmaker.NecessarilyTrue`, `Truthmaker.TrueAt` | **C19** `T7_excludedMiddleInstance` |
+| C17 | `Logos.Truthmaker.nonContradiction` | [Truthmaker.lean#L136](formal/Logos/Truthmaker.lean#L136) | `{Ground}` | {Ground} (A2: AxAnd/AxNot dropped; no propext; esse-est-agere drops ExistsAt) | `Semantics.Form`, `Semantics.World`, `Truthmaker.NecessarilyFalse`, `Truthmaker.TrueAt` | — |
+| C18 | `Logos.Modal.T7_necessaryReality` | [Modal.lean#L59](formal/Logos/Modal.lean#L59) | `{AxGlobalGround, Ground}` | {AxGlobalGround, Ground} (esse-est-agere drops ExistsAt) | axiom `AxGlobalGround` (SEM), `Modal.NecessaryEntity`, `Modal.actualWorld`, `Semantics.Form`, `Semantics.World`, `Truthmaker.Entity`, `Truthmaker.ExistsAt`, axiom `Ground` (VOCAB), `Truthmaker.NecessarilyTrue` | **C34** `necessary_truth_has_necessary_grounder`, **C19** `T7_excludedMiddleInstance`, **C20** `noNecessaryTruthIfAllContingent` |
+| C19 | `Logos.Modal.T7_excludedMiddleInstance` | [Modal.lean#L68](formal/Logos/Modal.lean#L68) | `{AxGlobalGround, Ground, CL}` | as C18 | `Modal.NecessaryEntity`, **C18** `T7_necessaryReality`, `Semantics.Form`, `Truthmaker.Entity`, axiom `Ground` (VOCAB), **C16** `lawExcludedMiddle` | — |
+| C20 | `Logos.Modal.noNecessaryTruthIfAllContingent` | [Modal.lean#L76](formal/Logos/Modal.lean#L76) | `{AxGlobalGround, Ground}` | as C18 | `Modal.Contingent`, `Modal.NecessaryEntity`, **C18** `T7_necessaryReality`, `Semantics.Form`, `Truthmaker.Entity`, axiom `Ground` (VOCAB), `Truthmaker.NecessarilyTrue` | — |
 | C58 | `Logos.Agency.noCogito_selfRefutes` | [Agency.lean#L137](formal/Logos/Agency.lean#L137) | `{}` | {} (the silent origin is exhibited definitionally; no axiom cited) | `Agency.A`, `Agency.Initiates`, `Agency.State`, `Agency.Subject` | — |
 | C68 | `Logos.Agency.Cogito` | [Agency.lean#L129](formal/Logos/Agency.lean#L129) | `{}` | {} (witness Sum.inl (): the silent origin sustains every posit; definitional subject, 2026-09-17) | `Agency.A`, `Agency.Initiates`, `Agency.State`, `Agency.Subject` | **C66** `Cogito_Init`, **C21** `T1_subjectExists`, **C23** `T4_agentExists`, **C24** `T5_personExists`, **C48** `cogito_from_T12` |
 | C59 | — | — | — | **{CL}** (C37 lever) | Spike_M5.strongTruthExists | — |
@@ -566,9 +555,9 @@ Detalhe do kernel:
 | C29 | `Logos.Order.T6_truthTranscendsWill` | [Order.lean#L99](formal/Logos/Order.lean#L99) | `{}` | as C28 | `Agency.Subject`, `Core.IsFalse`, `Core.T`, `Order.Fallible`, `Order.fallible_false` | — |
 | C30 | `Logos.Order.correctness_distinct` | [Order.lean#L107](formal/Logos/Order.lean#L107) | `{CL}` | CL (defs act-relative §8 Correct s p := A s p ∧ T p) | `Agency.A`, `Agency.Subject`, `Core.IsFalse`, `Core.T`, `Order.Correct`, `Order.Incorrect`, **C48** `cogito_from_T12` | — |
 | C31 | `Logos.Order.consequence_preserves_truth` | [Order.lean#L146](formal/Logos/Order.lean#L146) | `{}` | {} (E0) | `Core.T`, `Core.tschema` | — |
-| C32 | `Logos.GroundPerson.T8_personalGround` | [GroundPerson.lean#L108](formal/Logos/GroundPerson.lean#L108) | `{AxPersonalGround, ExistsAt, GroundProp}` | {AxPersonalGround, GroundProp, ExistsAt} | `GroundPerson.AxGroundBearing`, axiom `AxPersonalGround` (META), axiom `GroundProp` (VOCAB), `GroundPerson.IsPresentPersonalFeature`, `GroundPerson.Personal`, `GroundPerson.Realizes`, `Modal.NecessaryEntity`, `Truthmaker.Entity` | — |
+| C32 | `Logos.GroundPerson.T8_personalGround` | [GroundPerson.lean#L108](formal/Logos/GroundPerson.lean#L108) | `{AxPersonalGround, GroundProp}` | {AxPersonalGround, GroundProp} (esse-est-agere drops ExistsAt) | `GroundPerson.AxGroundBearing`, axiom `AxPersonalGround` (META), axiom `GroundProp` (VOCAB), `GroundPerson.IsPresentPersonalFeature`, `GroundPerson.Personal`, `GroundPerson.Realizes`, `Modal.NecessaryEntity`, `Truthmaker.Entity` | — |
 | C33 | `Logos.GroundPerson.present_feature_is_grounded` | [GroundPerson.lean#L118](formal/Logos/GroundPerson.lean#L118) | `{GroundPrincipleProp, GroundProp}` | {GroundProp, GroundPrincipleProp} | `Core.T`, axiom `GroundPrincipleProp` (SEM), axiom `GroundProp` (VOCAB), `GroundPerson.IsPresentPersonalFeature`, `Truthmaker.Entity` | — |
-| C34 | `Logos.GroundPerson.necessary_truth_has_necessary_grounder` | [GroundPerson.lean#L125](formal/Logos/GroundPerson.lean#L125) | `{AxGlobalGround, ExistsAt, Ground}` | as C18 | `Modal.NecessaryEntity`, **C18** `T7_necessaryReality`, `Semantics.Form`, `Truthmaker.Entity`, axiom `Ground` (VOCAB), `Truthmaker.NecessarilyTrue` | — |
+| C34 | `Logos.GroundPerson.necessary_truth_has_necessary_grounder` | [GroundPerson.lean#L125](formal/Logos/GroundPerson.lean#L125) | `{AxGlobalGround, Ground}` | as C18 | `Modal.NecessaryEntity`, **C18** `T7_necessaryReality`, `Semantics.Form`, `Truthmaker.Entity`, axiom `Ground` (VOCAB), `Truthmaker.NecessarilyTrue` | — |
 | F1a | `Logos.Choice.person_chooses` | [Choice.lean#L139](formal/Logos/Choice.lean#L139) | `{}` | — | `Agency.A`, `Agency.Agent`, `Agency.Means`, `Agency.Rational`, `Agency.Subject`, `Alternatives.Incompatible`, `Choice.Chooses`, **C50** `incompatible_self_negation`, `Person.Intentional`, `Person.Person` | **C52** `choiceExists` |
 | F1b | `Logos.Necessity.NecessityPH` | [Necessity.lean#L94](formal/Logos/Necessity.lean#L94) | `{}` | — | `Necessity.WProp`, `Semantics.World` | **C44** `T14_world`, `Necessity.nec4PH`, `Necessity.necKPH`, `Necessity.necTPH` |
 | F2 | — | — | — | — | — | — |
@@ -594,10 +583,10 @@ Detalhe do kernel:
 | C55 | `Logos.Order.judge_commits` | [Order.lean#L123](formal/Logos/Order.lean#L123) | `{CL}` | CL (defs act-relative §8) | `Agency.A`, `Agency.Subject`, `Alternatives.Incompatible`, `Choice.Chooses`, **C50** `incompatible_self_negation`, `Core.IsFalse`, `Core.T`, `Order.Correct`, `Order.Incorrect`, **C48** `cogito_from_T12` | `Order.rightWrongDistinction_implies_meaning` |
 | C56 | `Logos.Value.alone_no_other_help_harm` | [Value.lean#L96](formal/Logos/Value.lean#L96) | `{}` | {} (M1: Affects is now the A3 definition s ≠ t, so the P6 lemma loses its axiom — measured; see VOCAB.md) | `Agency.Subject`, `Value.Alone`, `Value.Harms`, `Value.Helps` | — |
 | C57 | `Logos.Choice.noSubject_selfRefutes` | [Choice.lean#L199](formal/Logos/Choice.lean#L199) | `{}` | {} — formal record of §26 "não existe sujeito do ato presente"; the act-datum is the exhibited theorem Cogito, never a consequence of the plurality bridge | `Agency.Subject`, `Choice.Chooses`, **C52** `choiceExists` | — |
-| C42 | `Logos.Love.T14_eternalRelation` | [Love.lean#L76](formal/Logos/Love.lean#L76) | `{AxPersonStability, AxTwoSubjects, ExistsAt}` | {AxPersonStability, ExistsAt, AxTwoSubjects} (M1: Affects := s ≠ t def + AxPersonsAffect theorem — both words vanish from the footprint) | `Agency.Subject`, **FAITH-2** `AxPersonStability`, `Love.Loves`, `Person.Person`, `Plurality.NecessarySubject`, **C47** `T12_directedPair`, `Value.Affects` | **C43** `T14_content`, **C45** `T14_square`, **C44** `T14_world` |
-| C43 | `Logos.Love.T14_content` | [Love.lean#L110](formal/Logos/Love.lean#L110) | `{AxPersonStability, AxTwoSubjects, ExistsAt}` | as C42 | `Agency.Subject`, `Love.Loves`, **C42** `T14_eternalRelation`, `Person.Person`, `Plurality.NecessarySubject` | — |
-| C44 | `Logos.Love.T14_world` | [Love.lean#L88](formal/Logos/Love.lean#L88) | `{AxPersonStability, AxTwoSubjects, ExistsAt}` | as C42 (world-anchored honest □) | `Agency.Subject`, `Love.Loves`, **C42** `T14_eternalRelation`, **F7** `NecessityPH`, `Person.Person`, `Plurality.EntityOf`, `Plurality.NecessarySubject`, `Semantics.World`, axiom `ExistsAt` (VOCAB) | — |
-| C45 | `Logos.Love.T14_square` | [Love.lean#L100](formal/Logos/Love.lean#L100) | `{AxPersonStability, AxTwoSubjects, ExistsAt}` | as C42 (image of the old statement shape) | `Agency.Subject`, `Love.Loves`, **C42** `T14_eternalRelation`, `Necessity.Necessity`, `Person.Person`, `Plurality.NecessarySubject`, `Semantics.World` | — |
+| C42 | `Logos.Love.T14_eternalRelation` | [Love.lean#L77](formal/Logos/Love.lean#L77) | `{AxTwoSubjects}` | {AxTwoSubjects} (M1: Affects := s ≠ t def + AxPersonsAffect theorem vanish; esse-est-agere: AxPersonStability is now a theorem and ExistsAt a def — both words vanish) | `Agency.Subject`, **FAITH-2** `AxPersonStability`, `Love.Loves`, `Person.Person`, `Plurality.NecessarySubject`, **C47** `T12_directedPair`, `Value.Affects` | **C43** `T14_content`, **C45** `T14_square`, **C44** `T14_world` |
+| C43 | `Logos.Love.T14_content` | [Love.lean#L111](formal/Logos/Love.lean#L111) | `{AxTwoSubjects}` | as C42 | `Agency.Subject`, `Love.Loves`, **C42** `T14_eternalRelation`, `Person.Person`, `Plurality.NecessarySubject` | — |
+| C44 | `Logos.Love.T14_world` | [Love.lean#L89](formal/Logos/Love.lean#L89) | `{AxTwoSubjects}` | as C42 (world-anchored honest □) | `Agency.Subject`, `Love.Loves`, **C42** `T14_eternalRelation`, **F7** `NecessityPH`, `Person.Person`, `Plurality.EntityOf`, `Plurality.NecessarySubject`, `Semantics.World`, `Truthmaker.ExistsAt` | — |
+| C45 | `Logos.Love.T14_square` | [Love.lean#L101](formal/Logos/Love.lean#L101) | `{AxTwoSubjects}` | as C42 (image of the old statement shape) | `Agency.Subject`, `Love.Loves`, **C42** `T14_eternalRelation`, `Necessity.Necessity`, `Person.Person`, `Plurality.NecessarySubject`, `Semantics.World` | — |
 | C46 | `Logos.Value.valueInterpersonal_of_split` | [Value.lean#L136](formal/Logos/Value.lean#L136) | `{AxTwoSubjects}` | {AxTwoSubjects} (recovery theorem: exact old statement; M1: Affects/AxPersonsAffect gone) | `Agency.Subject`, `Core.N_F`, `Core.N_T`, `Person.Person`, `Value.Affects`, `Value.AxPersonsAffect`, axiom `AxTwoSubjects` (META) | — |
 | C47 | `Logos.Plurality.T12_directedPair` | [Plurality.lean#L105](formal/Logos/Plurality.lean#L105) | `{AxTwoSubjects}` | {AxTwoSubjects} (chain node — M1: distinctness is already the forward direction under A3, so the pair wears its own inequality; T14 built on this node) | `Agency.Subject`, `Person.Person`, **C40** `T12_twoPersons`, `Value.Affects` | **C42** `T14_eternalRelation` |
 | C61 | `Logos.Choice.rightWrong_implies_someone_means` | [Choice.lean#L182](formal/Logos/Choice.lean#L182) | `{}` | {} (JUDGE_COMMITTED C54 ∘ rightWrongDistinction C36; the analytic half "significado → sujeito" is C49) | `Agency.A`, `Agency.Means`, `Agency.Subject`, `Alternatives.Incompatible`, `Choice.Chooses`, **C54** `JUDGE_COMMITTED`, `Core.N_F`, `Core.N_T` | — |
@@ -608,7 +597,7 @@ Detalhe do kernel:
 | C66 | `Logos.Initiation.Cogito_Init` | [Initiation.lean#L63](formal/Logos/Initiation.lean#L63) | `{}` | {} (relabel of the exhibited Cogito) | `Agency.A`, **C68** `Cogito`, `Agency.Initiates`, `Agency.State`, `Agency.Subject`, `Initiation.Originates` | **C67** `noInitiation_selfRefutes` |
 | C67 | `Logos.Initiation.noInitiation_selfRefutes` | [Initiation.lean#L70](formal/Logos/Initiation.lean#L70) | `{}` | {} (mirror of C58) | `Agency.Subject`, **C66** `Cogito_Init`, `Initiation.Originates` | — |
 | FAITH-1 | `Logos.Necessity.necDistinction` | [Necessity.lean#L118](formal/Logos/Necessity.lean#L118) | `{}` | — | `Core.N_F`, `Core.N_T`, **C36** `rightWrongDistinction`, `Necessity.Necessity`, `Semantics.World` | `Necessity.necDistinction_content` |
-| FAITH-2 | `Logos.Love.AxPersonStability` | [Love.lean#L66](formal/Logos/Love.lean#L66) | `{AxPersonStability, ExistsAt}` | — | `Agency.Subject`, `Person.Person`, `Plurality.NecessarySubject` | **C42** `T14_eternalRelation` |
+| FAITH-2 | `Logos.Love.AxPersonStability` | [Love.lean#L63](formal/Logos/Love.lean#L63) | `{}` | — | `Agency.A`, `Agency.Agent`, `Agency.Means`, `Agency.Rational`, `Agency.Subject`, `Person.Intentional`, `Person.Person`, `Plurality.EntityOf`, `Plurality.NecessarySubject`, `Semantics.World`, `Truthmaker.ExistsAt` | **C42** `T14_eternalRelation` |
 | F7 | `Logos.Necessity.NecessityPH` | [Necessity.lean#L94](formal/Logos/Necessity.lean#L94) | `{}` | — | `Necessity.WProp`, `Semantics.World` | **C44** `T14_world`, `Necessity.nec4PH`, `Necessity.necKPH`, `Necessity.necTPH` |
 | F8 | — | — | — | — | — | — |
 | F9 | — | — | — | — | — | — |
@@ -716,14 +705,14 @@ Detalhe do kernel:
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
 | `AxGroundBearing` | theorem | [L82](formal/Logos/GroundPerson.lean#L82) | `theorem AxGroundBearing {e : Entity} {f : Prop} : GroundProp e f → Realizes e f` | {GroundProp}  |
-| `AxPersonalGround` | axiom | [L101](formal/Logos/GroundPerson.lean#L101) | `axiom AxPersonalGround : ∀ {f : Prop}, IsPresentPersonalFeature f → ∃ e : Entity` | {AxPersonalGround, ExistsAt, GroundProp}  |
+| `AxPersonalGround` | axiom | [L101](formal/Logos/GroundPerson.lean#L101) | `axiom AxPersonalGround : ∀ {f : Prop}, IsPresentPersonalFeature f → ∃ e : Entity` | {AxPersonalGround, GroundProp}  |
 | `GroundPrincipleProp` | axiom | [L77](formal/Logos/GroundPerson.lean#L77) | `axiom GroundPrincipleProp : ∀ {f : Prop}, T f → ∃ e : Entity, GroundProp e f` | {GroundPrincipleProp, GroundProp}  |
 | `GroundProp` | axiom | [L62](formal/Logos/GroundPerson.lean#L62) | `axiom GroundProp : Entity → Prop → Prop` | {GroundProp}  |
 | `IsPresentPersonalFeature` | def | [L87](formal/Logos/GroundPerson.lean#L87) | `def IsPresentPersonalFeature (f : Prop) : Prop` | {}  |
 | `Personal` | def | [L91](formal/Logos/GroundPerson.lean#L91) | `def Personal (e : Entity) : Prop` | {GroundProp}  |
 | `Realizes` | def | [L68](formal/Logos/GroundPerson.lean#L68) | `def Realizes (e : Entity) (f : Prop) : Prop` | {GroundProp}  |
-| `T8_personalGround` | theorem | [L108](formal/Logos/GroundPerson.lean#L108) | `theorem T8_personalGround {f : Prop} (hf : IsPresentPersonalFeature f) : ∃ e : E` | {AxPersonalGround, ExistsAt, GroundProp} → C32 |
-| `necessary_truth_has_necessary_grounder` | theorem | [L125](formal/Logos/GroundPerson.lean#L125) | `theorem necessary_truth_has_necessary_grounder {τ : Form} (hτ : Logos.Truthmaker` | {AxGlobalGround, ExistsAt, Ground} → C34 |
+| `T8_personalGround` | theorem | [L108](formal/Logos/GroundPerson.lean#L108) | `theorem T8_personalGround {f : Prop} (hf : IsPresentPersonalFeature f) : ∃ e : E` | {AxPersonalGround, GroundProp} → C32 |
+| `necessary_truth_has_necessary_grounder` | theorem | [L125](formal/Logos/GroundPerson.lean#L125) | `theorem necessary_truth_has_necessary_grounder {τ : Form} (hτ : Logos.Truthmaker` | {AxGlobalGround, Ground} → C34 |
 | `present_feature_is_grounded` | theorem | [L118](formal/Logos/GroundPerson.lean#L118) | `theorem present_feature_is_grounded {f : Prop} (ht : T f) (_hf : IsPresentPerson` | {GroundPrincipleProp, GroundProp} → C33 |
 
 ### `Logos.Initiation`
@@ -744,26 +733,26 @@ Detalhe do kernel:
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `AxPersonStability` | axiom | [L66](formal/Logos/Love.lean#L66) | `axiom AxPersonStability : ∀ s : Subject, Person s → NecessarySubject s` | {AxPersonStability, ExistsAt} → FAITH-2 |
+| `AxPersonStability` | theorem | [L63](formal/Logos/Love.lean#L63) | `theorem AxPersonStability : ∀ s : Subject, Person s → NecessarySubject s` | {} → FAITH-2 |
 | `Lovable` | def | [L42](formal/Logos/Love.lean#L42) | `def Lovable (t : Subject) : Prop` | {}  |
 | `Loves` | def | [L38](formal/Logos/Love.lean#L38) | `def Loves (s t : Subject) : Prop` | {}  |
 | `T13_someoneLovable` | theorem | [L48](formal/Logos/Love.lean#L48) | `theorem T13_someoneLovable : ∃ s t : Subject, Person s ∧ Person t ∧ s ≠ t ∧ Lova` | {AxTwoSubjects} → C41 |
-| `T14_content` | theorem | [L110](formal/Logos/Love.lean#L110) | `theorem T14_content : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves` | {AxPersonStability, AxTwoSubjects, ExistsAt} → C43 |
-| `T14_eternalRelation` | theorem | [L76](formal/Logos/Love.lean#L76) | `theorem T14_eternalRelation : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` | {AxPersonStability, AxTwoSubjects, ExistsAt} → C42 |
-| `T14_square` | theorem | [L100](formal/Logos/Love.lean#L100) | `theorem T14_square : □(∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Love` | {AxPersonStability, AxTwoSubjects, ExistsAt} → C45 |
-| `T14_world` | theorem | [L88](formal/Logos/Love.lean#L88) | `theorem T14_world : ∀ w, ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Lo` | {AxPersonStability, AxTwoSubjects, ExistsAt} → C44 |
+| `T14_content` | theorem | [L111](formal/Logos/Love.lean#L111) | `theorem T14_content : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves` | {AxTwoSubjects} → C43 |
+| `T14_eternalRelation` | theorem | [L77](formal/Logos/Love.lean#L77) | `theorem T14_eternalRelation : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` | {AxTwoSubjects} → C42 |
+| `T14_square` | theorem | [L101](formal/Logos/Love.lean#L101) | `theorem T14_square : □(∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Love` | {AxTwoSubjects} → C45 |
+| `T14_world` | theorem | [L89](formal/Logos/Love.lean#L89) | `theorem T14_world : ∀ w, ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Lo` | {AxTwoSubjects} → C44 |
 
 ### `Logos.Modal`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `AxGlobalGround` | axiom | [L50](formal/Logos/Modal.lean#L50) | `axiom AxGlobalGround : ∀ (φ : Form), □ φ → ∃ e : Entity, ∀ w : World, ExistsAt w` | {AxGlobalGround, ExistsAt, Ground}  |
-| `Contingent` | def | [L36](formal/Logos/Modal.lean#L36) | `def Contingent (e : Entity) : Prop` | {ExistsAt}  |
-| `NecessaryEntity` | def | [L33](formal/Logos/Modal.lean#L33) | `def NecessaryEntity (e : Entity) : Prop` | {ExistsAt}  |
-| `T7_excludedMiddleInstance` | theorem | [L68](formal/Logos/Modal.lean#L68) | `theorem T7_excludedMiddleInstance (φ : Form) : ∃ e : Entity, NecessaryEntity e ∧` | {AxGlobalGround, ExistsAt, Ground, CL} → C19 |
-| `T7_necessaryReality` | theorem | [L59](formal/Logos/Modal.lean#L59) | `theorem T7_necessaryReality {τ : Form} (hτ : □ τ) : ∃ e : Entity, NecessaryEntit` | {AxGlobalGround, ExistsAt, Ground} → C18 |
+| `AxGlobalGround` | axiom | [L50](formal/Logos/Modal.lean#L50) | `axiom AxGlobalGround : ∀ (φ : Form), □ φ → ∃ e : Entity, ∀ w : World, ExistsAt w` | {AxGlobalGround, Ground}  |
+| `Contingent` | def | [L36](formal/Logos/Modal.lean#L36) | `def Contingent (e : Entity) : Prop` | {}  |
+| `NecessaryEntity` | def | [L33](formal/Logos/Modal.lean#L33) | `def NecessaryEntity (e : Entity) : Prop` | {}  |
+| `T7_excludedMiddleInstance` | theorem | [L68](formal/Logos/Modal.lean#L68) | `theorem T7_excludedMiddleInstance (φ : Form) : ∃ e : Entity, NecessaryEntity e ∧` | {AxGlobalGround, Ground, CL} → C19 |
+| `T7_necessaryReality` | theorem | [L59](formal/Logos/Modal.lean#L59) | `theorem T7_necessaryReality {τ : Form} (hτ : □ τ) : ∃ e : Entity, NecessaryEntit` | {AxGlobalGround, Ground} → C18 |
 | `actualWorld` | def | [L30](formal/Logos/Modal.lean#L30) | `def actualWorld : World` | {}  |
-| `noNecessaryTruthIfAllContingent` | theorem | [L76](formal/Logos/Modal.lean#L76) | `theorem noNecessaryTruthIfAllContingent : (∀ e : Entity, Contingent e) → ∀ φ : F` | {AxGlobalGround, ExistsAt, Ground} → C20 |
+| `noNecessaryTruthIfAllContingent` | theorem | [L76](formal/Logos/Modal.lean#L76) | `theorem noNecessaryTruthIfAllContingent : (∀ e : Entity, Contingent e) → ∀ φ : F` | {AxGlobalGround, Ground} → C20 |
 
 ### `Logos.Necessity`
 
@@ -820,7 +809,7 @@ Detalhe do kernel:
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
 | `EntityOf` | def | [L41](formal/Logos/Plurality.lean#L41) | `def EntityOf : Subject → Entity` | {}  |
-| `NecessarySubject` | def | [L44](formal/Logos/Plurality.lean#L44) | `def NecessarySubject (s : Subject) : Prop` | {ExistsAt}  |
+| `NecessarySubject` | def | [L44](formal/Logos/Plurality.lean#L44) | `def NecessarySubject (s : Subject) : Prop` | {}  |
 | `T12_directedPair` | theorem | [L105](formal/Logos/Plurality.lean#L105) | `theorem T12_directedPair : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ ` | {AxTwoSubjects} → C47 |
 | `T12_twoPersons` | theorem | [L50](formal/Logos/Plurality.lean#L50) | `theorem T12_twoPersons : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` | {AxTwoSubjects} → C40 |
 | `T1_subjectExists` | theorem | [L75](formal/Logos/Plurality.lean#L75) | `theorem T1_subjectExists : ∃ s : Subject, Logos.Agency.Exists s` | {} → C21 |
@@ -853,20 +842,20 @@ Detalhe do kernel:
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `Entity` | def | [L39](formal/Logos/Truthmaker.lean#L39) | `def Entity : Type` | {}  |
-| `ExistsAt` | axiom | [L53](formal/Logos/Truthmaker.lean#L53) | `axiom ExistsAt : World → Subject → Prop` | {ExistsAt}  |
-| `Ground` | axiom | [L46](formal/Logos/Truthmaker.lean#L46) | `axiom Ground : Subject → Form → Prop` | {Ground}  |
-| `NecessarilyFalse` | def | [L70](formal/Logos/Truthmaker.lean#L70) | `def ¬◇(φ : Form) : Prop` | {ExistsAt, Ground}  |
-| `NecessarilyTrue` | def | [L67](formal/Logos/Truthmaker.lean#L67) | `def □(φ : Form) : Prop` | {ExistsAt, Ground}  |
-| `TrueAt` | def | [L59](formal/Logos/Truthmaker.lean#L59) | `def TrueAt (w : World) : Form → Prop | atom n => ∃ e : Entity, ExistsAt w e ∧ Gr` | {ExistsAt, Ground}  |
-| `groundPrinciple_atom` | theorem | [L82](formal/Logos/Truthmaker.lean#L82) | `theorem groundPrinciple_atom (w : World) (n : Nat) : w ⊨ atom n → ∃ e : Entity, ` | {ExistsAt, Ground} → C15 |
-| `lawExcludedMiddle` | theorem | [L124](formal/Logos/Truthmaker.lean#L124) | `theorem lawExcludedMiddle (φ : Form) : □(φ ∨ ¬φ)` | {ExistsAt, Ground, CL} → C16 |
-| `noGround_selfRefutes` | theorem | [L95](formal/Logos/Truthmaker.lean#L95) | `theorem noGround_selfRefutes : ¬ (∃ (w : World) (n : Nat), w ⊨ atom n ∧ ¬ (∃ e :` | {ExistsAt, Ground} → C60 |
-| `nonContradiction` | theorem | [L132](formal/Logos/Truthmaker.lean#L132) | `theorem nonContradiction (φ : Form) : ¬◇(φ ∧ ¬φ)` | {ExistsAt, Ground} → C17 |
-| `sat_ground_and` | theorem | [L109](formal/Logos/Truthmaker.lean#L109) | `theorem sat_ground_and {w : World} {φ ψ : Form} : w ⊨ (φ ∧ ψ) ↔ w ⊨ φ ∧ w ⊨ ψ` | {ExistsAt, Ground}  |
-| `sat_ground_imp` | theorem | [L117](formal/Logos/Truthmaker.lean#L117) | `theorem sat_ground_imp {w : World} {φ ψ : Form} : w ⊨ (φ → ψ) ↔ (w ⊨ φ → w ⊨ ψ)` | {ExistsAt, Ground}  |
-| `sat_ground_not` | theorem | [L113](formal/Logos/Truthmaker.lean#L113) | `theorem sat_ground_not {w : World} {φ : Form} : w ⊨ ¬φ ↔ ¬ w ⊨ φ` | {ExistsAt, Ground}  |
-| `sat_ground_or` | theorem | [L105](formal/Logos/Truthmaker.lean#L105) | `theorem sat_ground_or {w : World} {φ ψ : Form} : w ⊨ (φ ∨ ψ) ↔ w ⊨ φ ∨ w ⊨ ψ` | {ExistsAt, Ground}  |
+| `Entity` | def | [L40](formal/Logos/Truthmaker.lean#L40) | `def Entity : Type` | {}  |
+| `ExistsAt` | def | [L57](formal/Logos/Truthmaker.lean#L57) | `def ExistsAt (_w : World) (s : Subject) : Prop` | {}  |
+| `Ground` | axiom | [L47](formal/Logos/Truthmaker.lean#L47) | `axiom Ground : Subject → Form → Prop` | {Ground}  |
+| `NecessarilyFalse` | def | [L74](formal/Logos/Truthmaker.lean#L74) | `def ¬◇(φ : Form) : Prop` | {Ground}  |
+| `NecessarilyTrue` | def | [L71](formal/Logos/Truthmaker.lean#L71) | `def □(φ : Form) : Prop` | {Ground}  |
+| `TrueAt` | def | [L63](formal/Logos/Truthmaker.lean#L63) | `def TrueAt (w : World) : Form → Prop | atom n => ∃ e : Entity, ExistsAt w e ∧ Gr` | {Ground}  |
+| `groundPrinciple_atom` | theorem | [L86](formal/Logos/Truthmaker.lean#L86) | `theorem groundPrinciple_atom (w : World) (n : Nat) : w ⊨ atom n → ∃ e : Entity, ` | {Ground} → C15 |
+| `lawExcludedMiddle` | theorem | [L128](formal/Logos/Truthmaker.lean#L128) | `theorem lawExcludedMiddle (φ : Form) : □(φ ∨ ¬φ)` | {Ground, CL} → C16 |
+| `noGround_selfRefutes` | theorem | [L99](formal/Logos/Truthmaker.lean#L99) | `theorem noGround_selfRefutes : ¬ (∃ (w : World) (n : Nat), w ⊨ atom n ∧ ¬ (∃ e :` | {Ground} → C60 |
+| `nonContradiction` | theorem | [L136](formal/Logos/Truthmaker.lean#L136) | `theorem nonContradiction (φ : Form) : ¬◇(φ ∧ ¬φ)` | {Ground} → C17 |
+| `sat_ground_and` | theorem | [L113](formal/Logos/Truthmaker.lean#L113) | `theorem sat_ground_and {w : World} {φ ψ : Form} : w ⊨ (φ ∧ ψ) ↔ w ⊨ φ ∧ w ⊨ ψ` | {Ground}  |
+| `sat_ground_imp` | theorem | [L121](formal/Logos/Truthmaker.lean#L121) | `theorem sat_ground_imp {w : World} {φ ψ : Form} : w ⊨ (φ → ψ) ↔ (w ⊨ φ → w ⊨ ψ)` | {Ground}  |
+| `sat_ground_not` | theorem | [L117](formal/Logos/Truthmaker.lean#L117) | `theorem sat_ground_not {w : World} {φ : Form} : w ⊨ ¬φ ↔ ¬ w ⊨ φ` | {Ground}  |
+| `sat_ground_or` | theorem | [L109](formal/Logos/Truthmaker.lean#L109) | `theorem sat_ground_or {w : World} {φ ψ : Form} : w ⊨ (φ ∨ ψ) ↔ w ⊨ φ ∨ w ⊨ ψ` | {Ground}  |
 
 ### `Logos.Value`
 

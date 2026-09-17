@@ -78,7 +78,7 @@ declarada (só SEM/META).
   haver quem se possa Amar" → PROVEN↑ C41 (via C40).
 - L24 (P6): "não é impessoal, e não é sózinho" → C40/C41; "Amar é escolhido e
   também é necessário (de alguma forma)" → PROVEN↑ C42–C45 (T14) sob
-  `AxTwoSubjects` + `AxPersonStability` (SEM).
+  `AxTwoSubjects` (`AxPersonStability` agora teorema — esse est agere).
 - L26–30: "este mundo é necessário? Não" — negação não reivindicada (sem
   demonstração); "a criação existe / há propósito" — zona de fé (F9,
   DEFERRED); "existe este Ser Pessoal" — PROVEN↑ C32 (T8, `AxPersonalGround`).

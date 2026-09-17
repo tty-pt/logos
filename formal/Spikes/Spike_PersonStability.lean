@@ -18,6 +18,11 @@ worlds. `NecessarySubject s` needs `∀ w, ExistsAt w s`, and `Person` (=
 `AxPersonStability` stands (designated countermodel: persons contingent, one
 necessary non-personal subject).
 
+SUPERSEDED 2026-09-17 by esse-est-agere (transcript preserved): `ExistsAt`
+is now the agency definition, supplying the missing Means→ExistsAt rule, so
+`AxPersonStability` is a `{}` theorem in `Logos.Love` and this spike's target
+is proven. The `sorry` below remains as the historical record of the wall.
+
 Not part of the library build. The `sorry` is a tagged SPIKE-MARKER.
 -/
 

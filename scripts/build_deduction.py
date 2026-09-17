@@ -438,6 +438,12 @@ KNOWN_TAGS = {TAG_VOCAB, TAG_SEM, TAG_META}
 _AUDIT: dict = {}      # decl fullName -> [axiom names] (#print axioms)
 _REGISTRY: dict = {}   # axiom base name -> {"tag", "gloss", "full"}
 
+# Axioms demoted to def/theorem by recorded batches, kept ONLY so the
+# footprint check spots stale GAPMAP transcriptions after a demotion (a cell
+# still listing them as footprint members). Never used for status. Update in
+# the demotion batch itself.
+RETIRED_AXIOMS = {"ExistsAt", "AxPersonStability"}
+
 
 def _short(name: str) -> str:
     """Bare identifier for CL classification (`Init.Core.propext` → propext)."""
@@ -942,7 +948,14 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
             continue  # inherited transcription; not independently verifiable
         subst, vocab, _ = footprint_parts(full)
         kern = set(subst) | set(vocab)
-        gap = {a for a in ax_vocab if re.search(r"\b" + re.escape(a) + r"\b", fps)}
+        # transcribed axiom names: registry + retired-demotion names matched
+        # in the footprint-proper part (before any prose parenthesis — notes
+        # like "drops `ExistsAt`" must NOT count). Prose mentions of
+        # defs/theorems (`Content`, `Cogito`) never match: only axiom names
+        # can be footprint members.
+        proper = fps.split("(", 1)[0]
+        gap = {a for a in (set(ax_vocab) | RETIRED_AXIOMS)
+               if re.search(r"\b" + re.escape(a) + r"\b", proper)}
         if kern != gap:
             ks = "{" + ", ".join(sorted(kern)) + "}"
             gs = "{" + ", ".join(sorted(gap)) + "}"
@@ -1486,9 +1499,11 @@ def main():
         if c.get("_full"):
             claims_by_id.setdefault(c["_full"], c)
 
-    by_full = {}  # fullname -> claim ids that resolve to it
+    by_full = {}  # fullname -> step-claim ids that resolve to it (steps only:
+    # curator cross-refs never name a deduction premise — those fall back to
+    # the raw Lean declaration name in `Segue de:` lines)
     for c in all_claims:
-        if c.get("_full"):
+        if c.get("_full") and derived_for(c, node_map) is not None:
             by_full.setdefault(c["_full"], []).append(c["id"])
 
     # curated footprints, `as/via Cxx` resolved to the concrete axiom set

@@ -275,7 +275,7 @@ be excluded:
 
 - spike x2_spikeA: `AxTwoSubjects` (plurality) — stuck at `ALONE_EXCLUDED`;
 - spike x2_spikeB: `AxPersonsAffect` (affectivity) — `Affects` has no intro rule;
-- spike x2_spikeD: `AxPersonStability` (persistence) — `Person` (T5) gives no world-coverage.
+- spike x2_spikeD: `AxPersonStability` (persistence) — `Person` (T5) gives no world-coverage. (Superseded 2026-09-17 by esse-est-agere: the rule is supplied by definition; `AxPersonStability` is now a theorem.)
 
 ### 2.0 retries (E0/C2/A3 campaign, 2026-09-15, `/tmp/opencode/x3_spikeB{1,2,3}.lean`)
 
@@ -294,7 +294,9 @@ be excluded:
   has *no introduction rule* from `Person` (act datum is world-local; Form-level
   necessity is disconnected from subject-world-existence). **Stuck.**
   Named missing lemma: `PERSON_PERSISTS : ∀ s, Person s → ∀ w, ExistsAt w s`;
-  `AxPersonStability` stays the priced SEM bridge.
+  `AxPersonStability` stays the priced SEM bridge. (Superseded 2026-09-17 by
+  esse-est-agere: `ExistsAt _w s := ∃ p, A s p` supplies the rule —
+  `AxPersonStability` is now a `{}` theorem; see D-esse-est-agere.)
 
 ## D14 — Plurality failure trace and poem mapping (Value.lean, Plurality.lean)
 Attempting `∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` from
@@ -428,6 +430,9 @@ faith bridge `AxEternalLove`. Appendix C4 (2026-09-15):
   no fact about which worlds its entity-correlate inhabits. Consistency model
   note: interpret `World` as the set of worlds where persons' correlates exist
   (i.e. the "de alguma forma" is *modeled in*, not argued for).
+  (Amended 2026-09-17 by esse-est-agere: the bridge is now a theorem —
+  see D-esse-est-agere. The "de alguma forma" lives in the agency reading
+  of existence, not in a postulate.)
 - **Resulting theorem set**: `T14_eternalRelation` (pair + `NecessarySubject`
   relata), `T14_world` (`NecessityPH` — the honest world-level □), `T14_square`
   (alias-□ image of the old statement), `T14_content`. Footprint drops
@@ -678,3 +683,32 @@ AxPersonsAffect, AxPersonStability}` + vocabulary + `{ExistsAt, Affects}`).
   `subst h` with `h : a = q` eliminated the wrong-side variable — fixed with
   explicit directional `rw [heq]`; application `hnt (h s p).1 hf` parses as
   `(hnt (h s p).1) hf` — needs `hnt ((h s p).1 hf)`.
+
+## D-esse-est-agere — existence as agency; persistence proven (Truthmaker.lean, Love.lean)
+
+The M3 wall (`PERSON_PERSISTS`: `Person`/`Means` has no introduction rule
+into `ExistsAt`) is answered by supplying the rule as a definition —
+*esse est agere*, to be is to act:
+
+- **Definitional choice**: `def ExistsAt (_w : World) (s : Subject) : Prop :=
+  ∃ p : Prop, A s p` (arity kept, so all 18 use-sites still elaborate with
+  zero proof-body changes). The world-index is vacuous **by principle**:
+  `Means` takes no `World` parameter, so agency is not world-located; the
+  existential does the real work (only actors exist). This is not the
+  degenerate `Necessity p := p` alias: `∃ p, A s p` is substantive, and the
+  alternative (free relation) makes persistence unprovable in principle.
+- **Why not the rejected variants**: defining *truth* from agency was
+  rejected (§4.3, breaks D2/T-purity) — existence is a different move and `T`
+  is untouched. The §4.12 `ExistsAt := Satisfies` sketch rested on D-Tier1
+  (subjects as formulas), itself superseded by `Subject := Unit ⊕ Prop`.
+- **Result**: `AxPersonStability` (name kept, M1 precedent) is now a theorem
+  with footprint `{}` (`Person → Intentional → Means`, `w` discarded).
+  Measured: T14 family → `{AxTwoSubjects}`; C18/C34 → `{AxGlobalGround,
+  Ground}`; C15/C16/C17/C60 → `{Ground}`. Inventory 8 → 6.
+- **Untouched**: M2 (`Alone` never mentions `ExistsAt`; its countermodel
+  doesn't interpret it) — this batch proves *persistence*, not plurality.
+  `Ground` stays the one free VOCAB relation.
+- **Honestly recorded costs**: `T14_world` is trivially witnessed (same act
+  in all worlds); T7/T8 "necessary" turns agent-flavored (grounded by an
+  acting subject); the "de alguma forma" now lives in the agency reading
+  of existence rather than in a postulate.

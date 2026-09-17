@@ -80,8 +80,7 @@
  ],
  "Logos.GroundPerson.AxPersonalGround": [
   "Logos.GroundPerson.AxPersonalGround",
-  "Logos.GroundPerson.GroundProp",
-  "Logos.Truthmaker.ExistsAt"
+  "Logos.GroundPerson.GroundProp"
  ],
  "Logos.GroundPerson.GroundPrincipleProp": [
   "Logos.GroundPerson.GroundPrincipleProp",
@@ -99,12 +98,10 @@
  ],
  "Logos.GroundPerson.T8_personalGround": [
   "Logos.GroundPerson.AxPersonalGround",
-  "Logos.GroundPerson.GroundProp",
-  "Logos.Truthmaker.ExistsAt"
+  "Logos.GroundPerson.GroundProp"
  ],
  "Logos.GroundPerson.necessary_truth_has_necessary_grounder": [
   "Logos.Modal.AxGlobalGround",
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.GroundPerson.present_feature_is_grounded": [
@@ -120,63 +117,44 @@
  "Logos.Initiation.noInitiation_selfRefutes": [],
  "Logos.Initiation.originates_not_transfer": [],
  "Logos.Initiation.person_iff_originates": [],
- "Logos.Love.AxPersonStability": [
-  "Logos.Love.AxPersonStability",
-  "Logos.Truthmaker.ExistsAt"
- ],
+ "Logos.Love.AxPersonStability": [],
  "Logos.Love.Lovable": [],
  "Logos.Love.Loves": [],
  "Logos.Love.T13_someoneLovable": [
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Love.T14_content": [
-  "Logos.Love.AxPersonStability",
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Love.T14_eternalRelation": [
-  "Logos.Love.AxPersonStability",
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Love.T14_square": [
-  "Logos.Love.AxPersonStability",
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Love.T14_world": [
-  "Logos.Love.AxPersonStability",
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Modal.AxGlobalGround": [
   "Logos.Modal.AxGlobalGround",
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
- "Logos.Modal.Contingent": [
-  "Logos.Truthmaker.ExistsAt"
- ],
- "Logos.Modal.NecessaryEntity": [
-  "Logos.Truthmaker.ExistsAt"
- ],
+ "Logos.Modal.Contingent": [],
+ "Logos.Modal.NecessaryEntity": [],
  "Logos.Modal.T7_excludedMiddleInstance": [
   "propext",
   "Classical.choice",
   "Quot.sound",
   "Logos.Modal.AxGlobalGround",
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Modal.T7_necessaryReality": [
   "Logos.Modal.AxGlobalGround",
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Modal.actualWorld": [],
  "Logos.Modal.noNecessaryTruthIfAllContingent": [
   "Logos.Modal.AxGlobalGround",
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Necessity.Dia": [],
@@ -231,9 +209,7 @@
   "Quot.sound"
  ],
  "Logos.Plurality.EntityOf": [],
- "Logos.Plurality.NecessarySubject": [
-  "Logos.Truthmaker.ExistsAt"
- ],
+ "Logos.Plurality.NecessarySubject": [],
  "Logos.Plurality.T12_directedPair": [
   "Logos.Value.AxTwoSubjects"
  ],
@@ -337,57 +313,44 @@
  "Logos.Semantics.sat_not": [],
  "Logos.Semantics.sat_or": [],
  "Logos.Truthmaker.Entity": [],
- "Logos.Truthmaker.ExistsAt": [
-  "Logos.Truthmaker.ExistsAt"
- ],
+ "Logos.Truthmaker.ExistsAt": [],
  "Logos.Truthmaker.Ground": [
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Truthmaker.NecessarilyFalse": [
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Truthmaker.NecessarilyTrue": [
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Truthmaker.TrueAt": [
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Truthmaker.groundPrinciple_atom": [
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Truthmaker.lawExcludedMiddle": [
   "propext",
   "Classical.choice",
   "Quot.sound",
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Truthmaker.noGround_selfRefutes": [
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Truthmaker.nonContradiction": [
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Truthmaker.sat_ground_and": [
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Truthmaker.sat_ground_imp": [
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Truthmaker.sat_ground_not": [
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Truthmaker.sat_ground_or": [
-  "Logos.Truthmaker.ExistsAt",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Value.Affects": [],

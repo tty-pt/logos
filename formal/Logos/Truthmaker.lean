@@ -15,7 +15,8 @@ is neither asserted nor denied; only atoms carry existential grounding).
 Consistency model (SEM, D6/Q1): the "face-value" model. Since C2
 (2026-09-15) the carrier is *defined*, not primitive: `Entity := Subject`
 (the Q2/D11 identification becomes definitional), so `EntityOf` is the
-identity. `Ground`/`ExistsAt` remain the two real semantics axioms. There is
+identity. `Ground` remains the one real semantics axiom; `ExistsAt` is now the
+agency definition (esse est agere, 2026-09-17). There is
 no provable `TrueAt = Satisfies` ∈-correspondence in general — the
 entity-vocabulary is untouched by the semantics.
 
@@ -30,7 +31,7 @@ import Logos.Agency
 namespace Logos.Truthmaker
 
 open Logos.Semantics (Form World)
-open Logos.Agency (Subject)
+open Logos.Agency (Subject A)
 
 /-- Grounding entities (truthmakers). World-rigid: what an entity *grounds*
     does not vary across worlds; only its existence does (D6).
@@ -45,12 +46,15 @@ def Entity : Type := Subject
  `Ground e φ`: entity `e` grounds formula `φ`. -/
 axiom Ground : Subject → Form → Prop
 
-/--Tag: VOCAB
+/--Existence as agency (esse est agere): an entity exists in a world iff it acts.
 
- Existence-in-a-world — an entity existing at a world.
-
- `ExistsAt w e`: entity `e` exists in world `w`. -/
-axiom ExistsAt : World → Subject → Prop
+ `ExistsAt w e`: entity `e` exists in world `w`. Definitional (batch
+    esse-est-agere, 2026-09-17): to be is to act — `∃ p, A e p`. The
+    world-index is vacuous by principle: `Means` takes no `World` parameter,
+    so agency is not world-located; the existential does the real work (only
+    actors exist). Former VOCAB axiom, now def — this supplies the missing
+    Means→ExistsAt rule (M3 PERSON_PERSISTS), dissolving `AxPersonStability`. -/
+def ExistsAt (_w : World) (s : Subject) : Prop := ∃ p : Prop, A s p
 
 /-- Truth as truthmaking, structurally defined (A2, 2026-09-16): an atom is
     true in `w` iff some entity grounding it exists there; the connectives are
