@@ -25,9 +25,10 @@ intencional — o sujeito que significa: Person(s) ⇔ ∃p Means(s,p). A forma
 conjuntiva mantém-se por estabilidade.
 A1 (2026-09-16): o axioma cogito foi eliminado; o antigo
 `Person.T5_personExists` (que o usava) foi removido e T5 é agora teorema de
-Plurality como projeção de T12 (`Plurality.T5_personExists`) com footprint
-{AxTwoSubjects, Means, Subject} — os antigos predicados de espécie
-{Agent, Rational} desapareceram de todas as footprints.
+Plurality como projeção de T12 (`Plurality.T5_personExists`) — os antigos
+predicados de espécie {Agent, Rational} desapareceram de todas as footprints;
+M0 re-ancorou-o no Cogito forçado; o batch definitional-subject (2026-09-17)
+exibe o Cogito como teorema, footprint `{}`.
 Ver formal/GAPMAP.md C24 e formal/DESIGN.md D-Tier1.)
 
 Logo:

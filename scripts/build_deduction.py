@@ -385,9 +385,6 @@ STATUS_BADGE = {
 }
 
 AXIOM_TAGS = {
-    "Cogito": ("TRANS", "forced foundation — SUBJECT IS FORCED (M0)"),
-    "Subject": ("VOCAB", "pure-sort postulate"),
-    "Means": ("VOCAB", "intentional relation"),
     "Ground": ("VOCAB", "truthmaker relation"),
     "ExistsAt": ("VOCAB", "existence-in-world"),
     "AxGlobalGround": ("SEM", "T7 quantifier swap  ∀w∃r → ∃r∀w"),
@@ -398,13 +395,15 @@ AXIOM_TAGS = {
     "AxPersonalGround": ("META", "the 'personal' price of T8 (D9)"),
 }
 
-# Axioms that are mere architectural vocabulary (pure sorts / relations).
-# A theorem whose whole kernel footprint lies inside this set is displayed ✔
-# ("PROVEN", justified): the "axioms" are the constants the statement itself
-# talks about, not assumptions the proof uses (e.g. C15/C60 — the denial of
-# atom-grounding refutes itself by definition, RAA). Substantive axioms below.
-VOCAB_CONSTS = {"Subject", "Means", "Ground", "ExistsAt", "GroundProp"}
-SUBSTANTIVE_AXIOMS = {"Cogito", "AxGlobalGround", "AxTwoSubjects",
+# Axioms that are mere architectural vocabulary (relations the statements
+# talk about). A theorem whose whole kernel footprint lies inside this set
+# is displayed ✔ ("PROVEN", justified): the "axioms" are the constants the
+# statement itself talks about, not assumptions the proof uses (e.g. C15/C60
+# — the denial of atom-grounding refutes itself by definition, RAA).
+# Substantive axioms below. (Former members Subject/State/Initiates/Cogito
+# became definitions/theorem in the definitional-subject batch, 2026-09-17.)
+VOCAB_CONSTS = {"Ground", "ExistsAt", "GroundProp"}
+SUBSTANTIVE_AXIOMS = {"AxGlobalGround", "AxTwoSubjects",
                       "AxPersonStability", "AxPersonalGround", "GroundPrincipleProp"}
 
 
@@ -429,8 +428,8 @@ def vocab_only_footprint(c: dict, node_map: dict) -> bool:
     axiom: only vocabulary constants (or `CL`/`{}`). Such theorems display ✔ —
     axiom-free modulo the vocabulary its own statement talks about (e.g.
     C15/C60, where the denial refutes itself by definition — RAA; and the
-    analytic Level-2 steps C25/C49/C51/C56). Substantive SEM/META/foundation
-    axioms (Cogito, AxGlobalGround, …) keep a claim ⚠."""
+    analytic Level-2 steps C25/C49/C51/C56). Substantive SEM/META
+    axioms (AxGlobalGround, …) keep a claim ⚠."""
     full = c.get("_full")
     if not full or full not in node_map:
         return False
@@ -480,7 +479,7 @@ def render_index(sections, level_titles, claims_by_id, decls, node_map, graph):
     ap("| `➖` | fora do âmbito deste marco |")
     ap("| `→` | dissolvido numa entrada já apresentada (`Vide …`) |")
     ap("| `CL` | meta-lógica clássica `{propext, Classical.choice, Quot.sound}` (D1) |")
-    ap("| `✔` (só vocabulário) | teorema **axiom-free módulo vocabulário**: a pegada curada só contém vocábulos que o próprio enunciado menciona (`Subject`, `Means`, `Ground`, `ExistsAt`, `GroundProp`), sem axioma substantivo (SEM/META/foundation). Ex.: C15/C60 (a negação refuta-se por definição — RAA), C25/C49/C51/C56/C62 (analíticos), C16/C17. Inventário e justificação em [`VOCAB.md`](VOCAB.md); ver **Relatório de consistência** |")
+    ap("| `✔` (só vocabulário) | teorema **axiom-free módulo vocabulário**: a pegada curada só contém vocábulos que o próprio enunciado menciona (`Ground`, `ExistsAt`, `GroundProp`), sem axioma substantivo (SEM/META). Ex.: C15/C60 (a negação refuta-se por definição — RAA), C25/C49/C51/C56/C62 (analíticos), C16/C17. Inventário e justificação em [`VOCAB.md`](VOCAB.md); ver **Relatório de consistência** |")
     ap("| `An` | axioma exibido em bloco próprio (`### A1 ◆ …`) no 1.º passo que o usa; as linhas `Segue …` referenciam-no por `A#` |")
     ap("")
     ap("O estatuto exibido é o **medido** no kernel (verificação Lean via "
@@ -527,7 +526,7 @@ def render_index(sections, level_titles, claims_by_id, decls, node_map, graph):
     ap("| `T p` | `T p` (`def T p := p`) | \"p é verdadeiro\" — a verdade é a identidade (E0) |")
     ap("| `IsFalse p` | `IsFalse p` | \"p é falso\" (`:= ¬ T p`) |")
     ap("| `N_T` ≡ `N_F` | `N_T` · `N_F` | absolutos: \"nada é verdadeiro\" · \"tudo é verdadeiro\" |")
-    ap("| `A s p` · `Means s p` | `A s p` (`:= Means s p`) | o acto de um sujeito s sobre um conteúdo p |")
+    ap("| `A s p` · `Means s p` | `A s p` (`:= Means s p`) · `Means s p` (`:= ∃ w w', Initiates s w w' p`) | o acto de um sujeito s sobre um conteúdo p — a iniciação de um movimento |")
     ap("| `Subject` · `Person s` | `Subject` · `Person s` | sort de sujeitos · \"s é pessoa\" |")
     ap("| `Chooses s p q` | `Chooses s p q` | o sujeito s escolhe entre as alternativas p e q |")
     ap("| `Ground e τ` · `ExistsAt w e` | `Ground e τ` · `ExistsAt w e` | a entidade e fundamenta τ · e existe no mundo w |")
@@ -547,7 +546,7 @@ def render_index(sections, level_titles, claims_by_id, decls, node_map, graph):
     ap("```text")
     ap("§0  premissa arbitrária ≠ condição cuja negação destrói o ato de a negar")
     ap("      │")
-    ap("§1  A(s,p)  (ato presente, DADO performativo — FORCED foundation `Cogito`)")
+    ap("§1  A(s,p)  (ato presente, EXIBIDO — teorema `Cogito`, sem axiomas)")
     ap("      │  T1 sujeito · T2 conteúdo · §4–§5 absolutos N_T/N_F refutam-se")
     ap("      │  T3 verdade-e-erro §6 · §7–§21 verdade/vontade/correção/consequência")
     ap("      ├──→ §22–§23 necessidade (excluded middle / não-contradição)")
@@ -684,7 +683,8 @@ def dep_list(fullnames, claims_by_id, decls):
 def render_axiom_inventory(node_map, claims_by_id, glosses, ax_id=None):
     L = []
     ap = L.append
-    ap("## Inventário de axiomas (11 declarações)")
+    n_axioms = sum(1 for n in node_map.values() if n["kind"] == "axiom")
+    ap(f"## Inventário de axiomas ({n_axioms} declarações)")
     ap("")
     ap("| Axioma | Nº | Tag | Justificação / preço | Significado (EN) | Depende dele (claims) |")
     ap("|---|---|---|---|---|---|")
@@ -774,8 +774,7 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
         ap("- Todos os teoremas do kernel têm claim (ou ref mapeada).")
     kern_axioms = {n["fullName"] for n in node_map.values() if n["kind"] == "axiom"}
     known = {"Logos." + m + "." + a for m, a in [(x, a) for x, a in
-             [("Agency", "Cogito"), ("Agency", "Subject"), ("Agency", "Means"),
-              ("Truthmaker", "Ground"), ("Truthmaker", "ExistsAt"),
+             [("Truthmaker", "Ground"), ("Truthmaker", "ExistsAt"),
               ("Modal", "AxGlobalGround"), ("Value", "AxTwoSubjects"),
               ("Love", "AxPersonStability"), ("GroundPerson", "GroundProp"),
               ("GroundPerson", "GroundPrincipleProp"), ("GroundPerson", "AxPersonalGround")]]}
@@ -786,7 +785,7 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
     under_ax = [c for c in all_claims if c.get("_full")
                 and c["_full"] in node_map and kernel_axiom_names(c["_full"], node_map)]
     sub = [c for c in under_ax
-           if any(k in ("Cogito", "AxTwoSubjects", "AxPersonStability",
+           if any(k in ("AxTwoSubjects", "AxPersonStability",
                         "AxGlobalGround", "AxPersonalGround", "GroundPrincipleProp")
                   for k in kernel_axiom_names(c["_full"], node_map))]
     vocab_only = [c for c in under_ax if vocab_only_footprint(c, node_map)]
@@ -820,7 +819,7 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
             ks = "{}" if not ks else "{" + ", ".join(ks) + "}"
             ap(f"  - `{cid}` GAPMAP `{st}` vs kernel `{ks}`")
     # kernel vs GAPMAP footprint divergences (informational; CL is kernel-blind)
-    ax_vocab = ("Cogito", "Subject", "Means", "Ground", "ExistsAt", "AxGlobalGround",
+    ax_vocab = ("Ground", "ExistsAt", "AxGlobalGround",
                 "AxTwoSubjects", "AxPersonStability", "GroundProp", "GroundPrincipleProp",
                 "AxPersonalGround")
     divs = []
@@ -991,7 +990,7 @@ def kernel_axiom_names(full: str, node_map: dict) -> list:
 
 
 def kernel_axiom_text(full: str, node_map: dict) -> str:
-    """Axiom names + tags, e.g. `Ground` (VOCAB), `Subject` (VOCAB)."""
+    """Axiom names + tags, e.g. `Ground` (VOCAB), `AxTwoSubjects` (META)."""
     tags = [f"`{a}` ({AXIOM_TAGS[a][0]})" if a in AXIOM_TAGS else f"`{a}`"
             for a in kernel_axiom_names(full, node_map)]
     return ", ".join(tags)
@@ -1018,9 +1017,6 @@ def badge_for(c: dict, decls: dict, node_map: dict) -> str:
 
 
 AXIOM_TITLES = {
-    "Cogito": "The choosing subject exists",
-    "Subject": "The pure sort of subjects",
-    "Means": "The meaning-act relation",
     "Ground": "The truthmaker relation",
     "ExistsAt": "Existence in a world",
     "AxGlobalGround": "Necessary truth is grounded",

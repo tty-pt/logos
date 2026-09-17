@@ -12,10 +12,11 @@ entity-correlate), decided to close the Subject/Entity gap so the love layer
 can attach necessity to the relata (T14).
 
 A1 (2026-09-16): the existence theorems `T1_subjectExists`, `T4_agentExists`
-(former Agency) and `T5_personExists` (former Person) live HERE, and M0
-(2026-09-16, FORCED_SUBJECT.md) re-anchors all of them — plus
-`cogito_from_T12` — on the *forced foundation* `Agency.Cogito`, NOT on the
-plurality bridge. A1's cycle reason (`Plurality → Value → Person → Agency`)
+(former Agency) and `T5_personExists` (former Person) live HERE; M0
+(2026-09-16, FORCED_SUBJECT.md) re-anchored all of them — plus
+`cogito_from_T12` — on `Agency.Cogito`, NOT on the plurality bridge, and the
+definitional-subject batch (2026-09-17) made `Cogito` itself a theorem.
+A1's cycle reason (`Plurality → Value → Person → Agency`)
 is respected by importing only the foundation, never proving from T12.
 Only `T12_twoPersons`, `notAlone`, and `T12_directedPair` still stand on
 `AxTwoSubjects` — they are the genuine plurality claims. -/
@@ -55,29 +56,29 @@ theorem T12_twoPersons :
 theorem notAlone : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ :=
   T12_twoPersons
 
-/--From two distinct persons the acting subject follows: someone acts on something.
+/--The acting subject is exhibited: someone acts on something.
 
- cogito, RESTATED AS A COROLLARY OF THE FORCED FOUNDATION (M0,
-    FORCED_SUBJECT.md, 2026-09-16): the present act is *given*, not derived
-    from plurality. `cogito_from_T12` survives as a corollary of
-    `Agency.Cogito` — the former T12-derivation is conserved but re-classified:
-    plurality also forces the datum, the datum is not *grounded* on plurality.
-    Its denial is refuted by `Agency.noCogito_selfRefutes`, not (any longer)
-    by a detour through two persons. -/
+ cogito, RESTATED AS A COROLLARY OF THE THEOREM (definitional subject,
+    2026-09-17): the present act is exhibited, not postulated and not derived
+    from plurality. `cogito_from_T12` is a corollary of `Agency.Cogito` —
+    the former T12-derivation is conserved but re-classified: plurality also
+    forces the datum, the datum is not *grounded* on plurality. Its denial
+    is refuted by `Agency.noCogito_selfRefutes`, not (any longer) by a
+    detour through two persons. -/
 theorem cogito_from_T12 : ∃ s : Subject, ∃ p : Prop, Logos.Agency.A s p :=
   Logos.Agency.Cogito
 
 /--At least one subject exists.
 
- T1 — the subject of the present act exists (M0 re-anchor, 2026-09-16):
-    corollary of the forced foundation, not of the pair. -/
+ T1 — the subject of the present act exists (definitional subject,
+    2026-09-17): corollary of the exhibited act, not of the pair. -/
 theorem T1_subjectExists : ∃ s : Subject, Logos.Agency.Exists s := by
   obtain ⟨s, _, _⟩ := Logos.Agency.Cogito
   exact ⟨s, trivial⟩
 
 /--At least one agent exists: someone who acts.
 
- T4 — the subject is an agent (M0 re-anchor; `Agent` is analytical
+ T4 — the subject is an agent (definitional subject; `Agent` is analytical
     `:= True`). -/
 theorem T4_agentExists :
     ∃ s : Subject, Logos.Agency.Exists s ∧ Logos.Agency.Agent s := by
@@ -86,9 +87,9 @@ theorem T4_agentExists :
 
 /--At least one person exists.
 
- T5 — there is a person (M0 re-anchor): from the forced act the witness
-    subjects own personhood trivially — `Agent`/`Rational` are analytical
-    `:= True` and the act's own content witnesses `Intentional`. -/
+ T5 — there is a person (definitional subject): from the exhibited act the
+    witness subjects own personhood trivially — `Agent`/`Rational` are
+    analytical `:= True` and the act's own content witnesses `Intentional`. -/
 theorem T5_personExists : ∃ s : Subject, Person s := by
   obtain ⟨s, p, hmp⟩ := Logos.Agency.Cogito
   exact ⟨s, trivial, trivial, p, hmp⟩

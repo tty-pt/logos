@@ -10,17 +10,18 @@ T12_directedPair (GAPMAP C47) — direção e estabilidade vivem no mesmo par.
 2026-09-15 (A3-refactor): a distinção ajuda/prejudica deixou de ser formal —
 Helps e Harms são projeções definidas (:= Affects); a relação primitiva
 é Affects (cada pegada lê {Affects}, não {Helps, Harms}).
-Impressão de axiomas (pós-M1/A3-def, 2026-09-16): {AxTwoSubjects,
+Impressão de axiomas (pós-definitional-subject, 2026-09-17): {AxTwoSubjects,
 AxPersonStability} + predicados de base
-(Subject/Agent/Rational/Means, ExistsAt) — Affects, Helps/Harms, Loves são
+(ExistsAt) — Affects, Helps/Harms, Loves são
 todas definições analíticas (Affects s t := s ≠ t; Helps := Affects, Harms :=
 Affects; Loves := Affects); AxPersonsAffect deixou de ser axioma (é agora
 teorema — M1, A3 refactor: com Affects := s ≠ t, a passagem é trivial);
+Subject/State/Initiates são definições (o subjacente, o campo, a iniciação);
 Entity/EntityOf dissolvidos
 (C2: Entity := Subject, EntityOf := id); {T, tschema} dissolvidos (E0); a
 ponte FAITH foi dissolvida; sorryAx: 0.
-(Pós-M1 footprint medido dos T14_*: {AxTwoSubjects, AxPersonStability, Means,
-Subject, ExistsAt} — sem {Affects}, sem {AxPersonsAffect}. Ver formal/GAPMAP.md C42–C45.)
+(Footprint medido dos T14_*: {AxTwoSubjects, AxPersonStability,
+ExistsAt} — sem {Affects}, sem {AxPersonsAffect}. Ver formal/GAPMAP.md C42–C45.)
 
 Enunciado (forma de base, com relata necessários):
 

@@ -7,6 +7,7 @@ import Logos.Truthmaker
 import Logos.Modal
 import Logos.Agency
 import Logos.Person
+import Logos.Initiation
 import Logos.Alternatives
 import Logos.Order
 import Logos.GroundPerson

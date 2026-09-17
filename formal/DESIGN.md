@@ -355,6 +355,35 @@ though the conjunct form is retained. The `axiom` inventory loses
 `Agent`/`Rational` (−2), 16 declarations remain (then 15 after A1
 cogito-removal, 2026-09-16).
 
+## D-ActInitiation — the act is the initiation of movement, not its transfer (Agency.lean, Initiation.lean)
+
+User correction (2026-09-17): a subject is one who acts, not the act itself;
+an act is the *initiation* of movement, not its transfer (a transfer is a
+function of the prior state; an initiation is not). Resident rebase:
+
+- `Means` ceases to be primitive: **`def Means s p := ∃ w w' : State,
+  Initiates s w w' p`**, over the new vocabulary `State` (abstract state sort
+  — deliberately NOT `Semantics.World`, which is a valuation = a state = a
+  transfer-object) and `Initiates : Subject → State → State → Prop → Prop`.
+  `A s p := Means s p` unchanged; `Cogito` unchanged.
+- `Initiation.lean` (barrel): `branches_not_transfer : Branches R → ¬
+  IsTransfer R` (**footprint `{}`** — an initiation with genuine alternatives
+  is not the graph of a function); `originates_not_transfer` and
+  `person_iff_originates` (`{Initiates, State, Subject}`, vocab-only);
+  `Cogito_Init` / `noInitiation_selfRefutes` (`{Cogito, Initiates, State,
+  Subject}`).
+- **The subject stays the forced posit `Cogito`**: the soundness obstruction
+  (empty model satisfies the static vocabulary yet falsifies `∃p Meaning_I p`)
+  forbids a derivation, so the datum is merely *relabeled* as the
+  initiation-foundation. Cost: vocabulary +1 (`−Means`, `+State`, `+Initiates`);
+  axiom inventory **11 → 12 declarations**, substantive unchanged.
+- Current `Person` (T5) reading: `Intentional s := ∃ p, Means s p`, now
+  unfolding to `∃ w w' p, Initiates s w w' p` — the person is the *origin* of
+  an initiation (`person_iff_originates`).
+- (Superseded 2026-09-17, definitional-subject batch: `Subject`/`State`/
+  `Initiates` are definitions, `Cogito` a theorem `{}`; inventory 12 → 8.
+  See `formal/GAPMAP.md`.)
+
 ## D-A1 — Fallibility (Order.lean)
 
 `Fallible s p` was declared axiom, deliberately opaque. Its only consistent

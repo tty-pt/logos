@@ -174,11 +174,11 @@ theorem JUDGE_COMMITTED :
  `JUDGE_COMMITTED` (C54) composes with `rightWrongDistinction` (C36,
     axiom-free — "há certo e há errado" is PROVEN) to yield a chooser; every
     choice is a meaning-act (`Chooses` unfolds to `A s p`; Tier-1 collapse
-    `A := Means`), so some subject means some content. Footprint
-    `{Cogito, Means, Subject}` — the only substantive element is the FORCED
-    foundation (the act-datum), which the "há certo e há errado" premises
-    already embody performatively. The shorter analytic half ("significado →
-    sujeito") is `meaning_needs_subject` (C49, vocab-only). -/
+    `A := Means`), so some subject means some content. Footprint `{}` —
+    the act-datum is now the exhibited theorem `Agency.Cogito`
+    (definitional subject, 2026-09-17), which the "há certo e há errado"
+    premises already embody performatively. The shorter analytic half
+    ("significado → sujeito") is `meaning_needs_subject` (C49, vocab-only). -/
 theorem rightWrong_implies_someone_means :
     (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) → ∃ s : Subject, ∃ p : Prop, Means s p := by
   intro h
@@ -191,12 +191,11 @@ theorem rightWrong_implies_someone_means :
     act/choice of a subject — and `choiceExists` (every act is a choice,
     every choice has a subject, `Chooses` holds at a meaning-act `A s p`)
     supplies the resident witness. Formal record of §26 "não existe sujeito
-    do ato presente". Footprint `{Cogito, Means, Subject}` — the
-    refutation needs the act-datum resident in the theory (forced foundation
-    `Agency.Cogito`, M0/forced-subject batch 2026-09-16); the pure-logical
-    shell of a bare sort (`axiom Subject : Type`, empty model) is consistent,
-    so the denial is refutable only given the act. M0 fix: the act-datum is
-    the *forced foundation*, never a consequence of the plurality bridge. -/
+    do ato presente". Footprint `{}` — the refutation needs the act-datum
+    resident in the theory, now the exhibited theorem `Agency.Cogito`
+    (definitional subject, 2026-09-17); the pure-logical shell of a bare
+    sort (empty model) is consistent, so the denial is refutable only given
+    the exhibited act. -/
 theorem noSubject_selfRefutes : (¬ ∃ _s : Subject, True) → False := by
   intro h
   obtain ⟨s, _⟩ := choiceExists

@@ -8,10 +8,10 @@ A(s,p) → Agent(s).
 
 (Nota formal: com o colapso Tier1 — A(s,p) := Means(s,p) e Agent(s) := True —
 esta passagem é uma tautologia definicional.
-M0 (2026-09-16, FORCED_SUBJECT.md): o dado do ato é o fundamento forçado
-`Cogito` (∃ s p, A s p, TRANS/FORÇADO — a sua negação refuta-se a si mesma).
+Batch definitional-subject (2026-09-17): o dado do ato é o teorema exibido
+`Cogito` (∃ s p, A s p — a origem silenciosa sustenta todo o posar).
 `Plurality.T4_agentExists` é teorema trivial, projeção de Cogito; footprint
-medido {Cogito, Means, Subject}. Ver formal/GAPMAP.md C23.)
+medido `{}`. Ver formal/GAPMAP.md C23.)
 
 Logo:
 

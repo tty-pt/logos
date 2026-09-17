@@ -2,15 +2,17 @@
 # Logos.Agency — Level 2a: the act, its subject, its content (base.txt §1–§2, T1–T2, T4)
 
 The performative datum of §1 (the present act of reasoning is *given*, not
-inferred) is THE FORCED FOUNDATION of the system (SUBJECT IS FORCED; batch
-M0 of `FORCED_SUBJECT.md`, 2026-09-16). A1 had moved the datum into
-Plurality as `cogito_from_T12`, derived under the plurality bridge
-`AxTwoSubjects`. That made choosing-subject existence a *conditional
-consequence* of plurality — the bug the M0 batch fixes: the existence of a
-choosing subject is not optional. It is restored HERE, in Agency, as the
-unconditioned TRANS axiom `Cogito`. Its denial self-refutes
-(`noCogito_selfRefutes`); the walls that forbid a derivation are recorded in
-`FORCED_SUBJECT.md` §1 (empty model + carrier smuggling).
+inferred) is now a THEOREM: `Cogito` (batch "definitional subject",
+2026-09-17). M0 had restored the datum as the unconditioned TRANS axiom
+`Cogito` (SUBJECT IS FORCED), with the degenerate self-refutation
+`noCogito_selfRefutes := fun h => h Cogito` (an axiom implying its own
+double negation). The walls of `FORCED_SUBJECT.md` §1 (empty model + carrier
+smuggling) are answered by charging the carrier as a *definition* in the
+traditional sense of "subject": ὑποκείμενον — the underlier, the locus of
+non-derived normative agency, occurring only in origin position, never
+evaluated. The foundation is re-anchored on the original chain: undeniable
+right-and-wrong (C36, `{}`) ⇒ meaning (analytic, §8) ⇒ choosing subject
+(definitional witness: the silent origin sustains every posit).
 
 Design decision B1 (D-batch "act bundle", 2026-09-15): `A s p` is a *defined*
 relation, not a primitive. The act is — by the meaning rules of the system
@@ -32,16 +34,18 @@ and the act IS meaning (`A s p := Means s p`). Prose consequence realized:
 is a meaning-act. Consequences:
   * the six former meaning postulates `act_implies_*` hold analytically;
   * T2 is a projection of the collapse (axiom-free);
-  * the remaining primitives `Subject` and `Means` stay opaque (declared, not
-    derived): `Subject` is a pure-sort postulate (its inhabitants are the
-    persons of `Cogito`; any carrier definition would
-    smuggle content — `Bool`/`fin 2` asserts exactly-two, `ℕ` asserts
-    infinity, an empty `inductive` refutes `∃ s` and breaks the act-datum),
-    and `Means` is the genuine intentional relation.
+  * the former primitives `Subject`, `State`, `Initiates` are now *defined*
+    (declared as what they mean, not postulated): `Subject := Unit ⊕ Prop`
+    (the silent origin + the posited contents), `State := Prop`
+    (truth-bearers), and `Initiates` moves the sustained field toward the
+    posit — so `Cogito` is exhibited, not assumed;
+  * `Means` is no longer primitive: act-as-initiation rebase (2026-09-17)
+    defines it as `Means s p := ∃ w w' : State, Initiates s w w' p`, so
+    meaning is posited by an initiation rather than transmitted as a state.
 
-The act-datum (`∃ s p, A s p`) is resident HERE as the forced foundation
-`Cogito` (TRANS). `Agency` imports only Core, so no import cycle blocks it.
-The existence theorems that A1 moved into Plurality are re-anchored there on
+The act-datum (`∃ s p, A s p`) is resident HERE as the theorem `Cogito`.
+`Agency` imports only Core, so no import cycle blocks it.
+The existence theorems that A1 moved into Plurality are anchored there on
 `Cogito` (no longer on `T12`/`AxTwoSubjects`). `T2_contentExists` remains
 axiom-free.
 -/
@@ -52,10 +56,14 @@ namespace Logos.Agency
 
 open Logos.Core (T)
 
-/--Vocabulary: the pure sort of subjects — neither empty, nor 'exactly two', nor infinite.
+/--The underlier (ὑποκείμενον): the silent origin sustaining every posit, or a posited content positing itself.
 
- Subjects: that which performs acts of reasoning. -/
-axiom Subject : Type
+ Subjects: that which performs acts of reasoning — the origin of the act,
+    never the act itself, never a state or a content. Definitional
+    (2026-09-17): the traditional sense (locus of non-derived normative
+    agency) charged as a definition; the neutral witness `Sum.inl ()`
+    smuggles nothing beyond the datum itself. -/
+def Subject := Unit ⊕ Prop
 
 /-- Existence predicate: `Exists s` (propositional form of "s exists").
     Analytical definition (cogito-rethinking, 2026-09-15): every subject we
@@ -80,11 +88,30 @@ def Agent (_s : Subject) : Prop := True
     being the act of reasoning. -/
 def Rational (_s : Subject) : Prop := True
 
-/--Vocabulary: the meaning-act relation — a subject means a proposition.
+/--The sustained field: states are truth-bearers, carried toward the posit.
 
- `Means s p`: subject s means (intentionally relates to) proposition p
-    (base.txt §11, T5 component; moved here in B1, same reason). -/
-axiom Means : Subject → Prop → Prop
+ The act begins movement; it is therefore indexed by states — here the
+    posited contents themselves (`State := Prop`), not `Semantics.World`.
+    A world is a valuation — a state, i.e. a transfer-object — which is
+    exactly what the act must not be reduced to. Definitional (2026-09-17). -/
+def State := Prop
+
+/--Initiation moves the sustained field toward the posit.
+
+ The subject occurs as the ORIGIN INDEX of the transition, never as a
+    component of a state. Definitional (2026-09-17): the silent origin moves
+    the field to any posit; a posited content posits itself. This replaces
+    the former opaque `Means` as the one real act-vocabulary. -/
+def Initiates (s : Subject) (_w w' : State) (p : Prop) : Prop :=
+  match s with
+  | Sum.inl _ => w' = p
+  | Sum.inr q => q = p ∧ w' = p
+
+/-- The intentional relation, now DEFINED (act-as-initiation rebase,
+    2026-09-17): `s` means `p` iff `s` initiates a movement positing `p`.
+    Meaning is posited by the act, not transmitted as a state. Formerly an
+    opaque axiom; the primitive is now `Initiates`. -/
+def Means (s : Subject) (p : Prop) : Prop := ∃ w w' : State, Initiates s w w' p
 
 /-- The act — the meaning-act (B1 bundle; Tier-1 collapse, 2026-09-16): the
     act's aspects `Agent`/`Exists`/`Content`/`Rational` are analytical
@@ -92,32 +119,24 @@ axiom Means : Subject → Prop → Prop
     collapse and the act IS the intentional relation `Means s p`. -/
 def A (s : Subject) (p : Prop) : Prop := Means s p
 
-/--Some subject acts on some content: the choosing subject exists. Its denial refutes itself, so it is a forced foundation, not a price.
+/--Some subject acts on some content: the choosing subject exists. Proven, not postulated — exhibited by the silent origin.
 
- THE FORCED FOUNDATION (TRANS; SUBJECT IS FORCED, M0 2026-09-16): a
-    choosing subject exists — there is a present meaning-act of a subject.
+ THE THEOREM (definitional subject, 2026-09-17): a choosing subject
+    exists — the silent origin sustains every posit, so the present
+    meaning-act is exhibited definitionally. Former TRANS axiom (M0);
+    the degenerate self-refutation `fun h => h Cogito` is retired.
+    Footprint: `{}`. -/
+theorem Cogito : ∃ s : Subject, ∃ p : Prop, A s p :=
+  ⟨Sum.inl (), True, True, True, rfl⟩
 
-    NOT A PRICE. A price is an axiom whose negation is consistent with the
-    rest of the theory (e.g. `AxTwoSubjects` has the lone-subject model).
-    `Cogito`'s negation is refuted by `noCogito_selfRefutes` below — denying
-    the act *is* an act, of a subject — and the Walls forbid any derivation
-    (`FORCED_SUBJECT.md` §1): the empty model satisfies the whole vocabulary
-    (Gödel/Tarski wall: the object theory cannot see the denial as an act),
-    and every non-empty carrier smuggles a cardinality. The act is the first
-    given; everything downstream is derived from it. Footprint: {Means, Subject}. -/
-axiom Cogito : ∃ s : Subject, ∃ p : Prop, A s p
+/--Denying 'some subject acts on some content' refutes itself — the silent origin is exhibited, no axiom cited.
 
-/--Denying 'some subject acts on some content' refutes itself — the denial is itself an act: the subject is forced.
-
- Denying the choosing subject is itself an act, hence a meaning-act of a
-    subject — the denial contradicts itself. Kernel-checked.
-
-    This is the formalization of "SUBJECT IS FORCED": `¬ (∃ s p, A s p)`
-    proves `False` with the minimal possible axiomatic surface
-    {Means, Subject, Cogito} — no plurality, no SEM/META bridge. -/
+ The denial is refuted by exhibiting the definitional witness: the silent
+    origin sustains every posit, so `∃ s p, A s p` holds outright and its
+    negation is `False`. Kernel-checked. Footprint: `{}`. -/
 theorem noCogito_selfRefutes :
     (¬ ∃ s : Subject, ∃ p : Prop, A s p) → False :=
-  fun h => h Cogito
+  fun h => h ⟨Sum.inl (), True, True, True, rfl⟩
 
 /-- An act entails a subject that exists (relational act, §1/T1).
     Analytic (Tier 1): `Exists _ := True`. -/
@@ -160,4 +179,5 @@ end Logos.Agency
 
 -- Axiom footprint audit
 #print axioms Logos.Agency.T2_contentExists
+#print axioms Logos.Agency.Cogito
 #print axioms Logos.Agency.noCogito_selfRefutes

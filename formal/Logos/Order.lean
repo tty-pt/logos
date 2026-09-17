@@ -74,10 +74,10 @@ theorem rightDistinctWrong_implies_meaning
 def Fallible (_s : Subject) (p : Prop) : Prop := IsFalse p
 
 /-- Fallibility (T6 premise): some subject can be in error about some false
-    content. Proven (M0 forced-subject batch, 2026-09-16): from
+    content. Proven (definitional subject, 2026-09-17): from
     `Core.someFalse` (there is a false content, PROVEN footing `{}` under E0)
-    and `cogito_from_T12` (the present subject, corollary of the forced
-    foundation `Agency.Cogito`).
+    and `cogito_from_T12` (the present subject, corollary of the exhibited
+    `Agency.Cogito`).
     The former axiom is dissolved. -/
 theorem fallible_false : ∃ s : Subject, ∃ p : Prop, Fallible s p ∧ IsFalse p := by
   obtain ⟨s, _, _⟩ := Logos.Plurality.cogito_from_T12
@@ -113,11 +113,11 @@ theorem correctness_distinct : ¬ (∀ s : Subject, ∀ p : Prop, Correct s p �
 
 /--The judge is a chooser: whoever judges acts and chooses, correctly or incorrectly.
 
- "There is no right and wrong without choice" (IM_STUPID.md §1–§2): the
-    judgment act — a subject asserting a content that is correct-or-incorrect
-    (§8) — IS a choice against the incompatible alternative `¬p`. From
-    `cogito_from_T12` (a meaning-act with content p; corollary of the forced
-    foundation `Agency.Cogito`, M0 2026-09-16) + bivalence (p is right-or-wrong)
+  "There is no right and wrong without choice" (IM_STUPID.md §1–§2): the
+     judgment act — a subject asserting a content that is correct-or-incorrect
+     (§8) — IS a choice against the incompatible alternative `¬p`. From
+     `cogito_from_T12` (a meaning-act with content p; corollary of the
+     exhibited `Agency.Cogito`, 2026-09-17) + bivalence (p is right-or-wrong)
     + `Incompatible p (¬p)` (pure logic). The former "gap" F1a is now a
     theorem, kernel-checked. -/
 theorem judge_commits :
@@ -127,9 +127,9 @@ theorem judge_commits :
   · exact ⟨s, p, ¬ p, ha, Or.inl ⟨ha, hT⟩, ha, incompatible_self_negation p⟩
   · exact ⟨s, p, ¬ p, ha, Or.inr ⟨ha, hT⟩, ha, incompatible_self_negation p⟩
 
-/--The full poetic conditional, with the forced step made explicit: the bare
+/--The full poetic conditional, with the exhibited step made explicit: the bare
  distinction `¬N_T ∧ ¬N_F` forces an actual judging act (`judge_commits`,
- paying only the FORCED datum `Cogito`), after which the *pure* bridge
+ paying only the exhibited `Cogito`), after which the *pure* bridge
  `rightWrong_implies_meaning` (vocab-only) yields meaning. -/
 theorem rightWrongDistinction_implies_meaning
     (_h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :

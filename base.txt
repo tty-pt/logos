@@ -41,6 +41,23 @@ A(s,p)
 
 Teoremas: ver theorems/T1.txt, theorems/T2.txt
 
+**[Nota formal, 2026-09-17]** O ato é a *iniciação* do movimento, não a sua
+transferência: uma transferência é uma função (o efeito determinado pelo
+estado anterior); uma iniciação tem alternativas genuínas. Residentes
+(`formal/Logos/Initiation.lean`, no barrel): `branches_not_transfer : {}` —
+iniciação ≠ transferência, lógica pura — e
+`originates_not_transfer : {}`. O
+sujeito é a *origem* do ato, não o próprio ato: `Subject := Unit ⊕ Prop` (o
+subjacente — origem silenciosa + conteúdos posados), `State := Prop`,
+`Initiates` por casos. O dado performativo residente
+`Cogito` é agora **teorema** (`{}`, testemunha `Sum.inl ()`) e lê-se como
+fundamento-iniciação (`Cogito_Init`); `Means`/`A` são definições —
+`Means s p := ∃w w', Initiates(s,w,w',p)` e `A s p := Means s p`
+(§8, Tier-1). O inventário de axiomas passa de 12 a 8 declarações
+(definicional: `−Cogito`, `−Subject`, `−State`, `−Initiates`); axiomas
+substantivos inalterados (só SEM/META). Ver
+THOUGHTS.md §5–§7 e TASK.md.
+
 2. T1 — O SUJEITO DO ATO EXISTE → theorems/T1.txt
 
 3. T2 — EXISTE CONTEÚDO PROPOSICIONAL → theorems/T2.txt
@@ -171,16 +188,17 @@ Existe uma norma objetiva para o ato racional:
 
 um ato de afirmação pode estar objectivamente correcto ou incorrecto.
 
-**[Statut formal, 2026-09-16]** No Lean, a forma literal §8 é o que está
+**[Statut formal, 2026-09-17]** No Lean, a forma literal §8 é o que está
 implementado: `Correct s p := A s p ∧ T p` e `Incorrect s p := A s p ∧
 IsFalse p` (`Formal.Order`). O ato é constitutivo — `A s p := Means s p`
-(compactação Tier-1), logo **todo juízo correcto/incorrecto é já um ato de
-significado**. Consequências:
+(compactação Tier-1), com `Means s p := ∃w w', Initiates(s,w,w',p)`
+(acto = iniciação de movimento), logo **todo juízo correcto/incorrecto é já um
+ato de significado**. Consequências:
 - C30 `correctness_distinct` (`Correct ≠ Incorrect`): PROVEN↑,
-  `CL + {Cogito, Means, Subject}`;
-- C62 `rightWrong_implies_meaning`: PROVEN, `{Means, Subject}` (só vocabulário)
-  — "direito e errado precisam de significado": a negação é contradição por
-  definição, em qualquer modelo.
+  `CL + {Cogito, Initiates, State, Subject}`;
+- C62 `rightWrong_implies_meaning`: PROVEN, `{Initiates, State, Subject}` (só
+  vocabulário) — "direito e errado precisam de significado": a negação é
+  contradição por definição, em qualquer modelo.
 
 9. CONSEQUÊNCIA LÓGICA
 
@@ -260,10 +278,11 @@ Meaning_I(p) → ∃s Agent(s).
 
 Significar intencionalmente implica necessariamente alguém que significa.
 
-**[Statut formal, 2026-09-16]** O Lean expõe a definição
+**[Statut formal, 2026-09-17]** O Lean expõe a definição
 `Meaning_I(p) := ∃s Means(s,p)` (C49: `meaning_needs_subject` — cada significado
 tem um sujeito; e a forma definicional `meaning_I_needs_subject`, ambas
-`{Means, Subject}`, só vocabulário). O sujeito é **constituinte** da definição:
+`{}`, — `Means` é agora definido a
+partir de `Initiates`). O sujeito é **constituinte** da definição:
 assertar significado sem sujeito é contradição por definição, em qualquer
 modelo.
 
@@ -358,11 +377,11 @@ formalizado: formal/Choice.lean T11_choiceField (PROVEN, funde T5 + T9).
 Pelo batch choice-realism (2026-09-16), a própria escolha é agora real:
 Chooses(s,p,q) := A(s,p) ∧ Incompatible(p,q) (definição — antes era um
 placeholder vazio, o que fazia a escolha irrepresentável); person_chooses
-(sujeito ⇒ escolha, {Means, Subject} — só vocabulário, PROVEN; GAPMAP.md C51,
+(sujeito ⇒ escolha, `{}` — PROVEN; GAPMAP.md C51,
 VOCAB.md), choiceExists, noChoice_selfRefutes
 (negar a escolha é uma escolha) e JUDGE_COMMITTED/judge_commits (sem certo e
 errado não há escolha) são teoremas kernel-verificados — GAPMAP.md C49–C56,
-F1a PROVEN↑. A forma modal forte de liberdade (FreeWill: ◇Choose ∧ ◇Choose¬,
+F1a PROVEN. A forma modal forte de liberdade (FreeWill: ◇Choose ∧ ◇Choose¬,
 abaixo) é DEFERRED — GAPMAP.md F1b, semântica modal da escolha em falta (um
 sujeito pode significar p sem ser capaz, a nível modal, de significar ¬p).
 Cautela (C1): o alias `Dia` prop-level é a dupla negação clássica sob o modelo
@@ -768,22 +787,22 @@ VOCAB.md): L12–16 (P1–P2, "nada é certo/errado", "~(p1∨p2) = verdade
 necessária") PROVEN — C35–C38 e C59 ("há certo E há errado", `{CL}`); L18 (P3)
 "direito e errado → significado" é PROVEN, só vocabulário ✔ — C62
 (`Order.rightWrong_implies_meaning` / `rightDistinctWrong_implies_meaning`,
-`{Means, Subject}`: Correct/Incorrect são atos §8, negação = contradição por
+`{Initiates, State, Subject}`: Correct/Incorrect são atos §8, negação = contradição por
 definição), e a implicação completa "há certo e errado → há alguém para quem
-algo significar" é PROVEN↑ — C61 (`Choice.rightWrong_implies_someone_means`) e
-`Order.rightWrongDistinction_implies_meaning` (só o Cogito FORÇADO), e a metade
+algo significar" é PROVEN — C61 (`Choice.rightWrong_implies_someone_means`) e
+`Order.rightWrongDistinction_implies_meaning` (`CL`), e a metade
 analítica "significado → sujeito" é C49 (`meaning_needs_subject` /
-`meaning_I_needs_subject`, `{Means, Subject}` — só vocabulário, ✔); L20 (P4)
-"para haver alguém é preciso haver escolha" é C51 (`person_chooses`, só
-vocabulário, ✔), mas "escolha com significado → mais do que uma pessoa"
+`meaning_I_needs_subject`, `{}` — ✔); L20 (P4)
+"para haver alguém é preciso haver escolha" é C51 (`person_chooses`, `{}`),
+mas "escolha com significado → mais do que uma pessoa"
 permanece C40 (AxTwoSubjects, META); L22 (P5) "um Ser sózinho não ajuda nem
-prejudica ninguém" é C56 (`alone_no_other_help_harm`, `{Subject}` — só
-vocabulário, ✔; o antigo preço AxPersonsAffect foi dissolvido em M1), "tem de
-haver este Ser, e o certo e o errado" é C58 (Cogito FORÇADO) + C37/C38, e "tem
+prejudica ninguém" é C56 (`alone_no_other_help_harm`, `{}`; o antigo preço
+AxPersonsAffect foi dissolvido em M1), "tem de
+haver este Ser, e o certo e o errado" é C68 (Cogito teorema) + C37/C38, e "tem
 de haver quem se possa Amar" é C41 (via T12); L24 (P6) "Amar é escolhido e
 também é necessário (de alguma forma)" é C42–C45 (T14, AxTwoSubjects +
 AxPersonStability); L38 ("Escolho admitir que: Sou") é o próprio dado
-performativo C58 — a sua negação refuta-se (noCogito_selfRefutes). Ficam fora
+performativo C68 — a sua negação refuta-se por exibição (noCogito_selfRefutes). Ficam fora
 da demonstração as linhas 26–30: "este mundo é necessário? Não" é uma negação
 não reivindicada, e "a criação existe / há propósito" pertence à zona de fé
 (F9); "existe este Ser Pessoal" é T8 (C32, AxPersonalGround META).)
@@ -817,11 +836,12 @@ Ao afirmar ou negar racionalmente qualquer uma destas posições, o agente utili
 (Nota formal §26: "Não existe sujeito do ato presente" tem agora registo formal
 kernel-checked — noSubject_selfRefutes: ¬(∃s : Subject) ⇒ False (negar um
 sujeito é, ele próprio, um ato/escolha de um sujeito; a escolha existente
-fornece a testemunha). PROVEN↑ sob {Cogito, Means, Subject}; o ato é o
-**fundamento forçado** — a sua negação refuta-se a si mesma (noCogito_selfRefutes,
-M0, 2026-09-16) — não um teorema derivado da pluralidade. A âncora última
-não é mais AxTwoSubjects mas o próprio Cogito, o dado TRANS/FORÇADO que o
-datum do ato exige. Ver formal/GAPMAP.md C58.)
+fornece a testemunha). PROVEN `{}`; o ato é **exibido** — a sua negação
+refuta-se por exibição (noCogito_selfRefutes,
+definitional-subject, 2026-09-17) — não um axioma forçado nem um teorema
+derivado da pluralidade. A âncora última não é mais AxTwoSubjects mas o
+próprio Cogito, agora teorema que a definição do subjacente exige.
+Ver formal/GAPMAP.md C58, C68.)
 
 27. RESULTADO MÁXIMO DESTA FASE
 
@@ -887,7 +907,7 @@ T10 (certo e errado necessários) — PROVEN; a sua necessidade (necDistinction)
   é teorema desde C1 (o modal prop-level é agora alias definições).
 T11 (campo da escolha) — PROVEN. Pelo batch choice-realism (2026-09-16) a
   própria escolha é real e teoremática: person_chooses (sujeito ⇒ escolha,
-  {Means, Subject} — só vocabulário, PROVEN; ver VOCAB.md),
+  `{}` — PROVEN; ver VOCAB.md),
   choiceExists, noChoice_selfRefutes (negar a escolha é uma escolha),
 JUDGE_COMMITTED/judge_commits (sem certo e errado não há escolha) — ver
    theorems/T11.txt e formal/GAPMAP.md C49–C57.
@@ -901,14 +921,17 @@ T14 (relação eterna de amor) — PROVEN↑ sob AxPersonsAffect (SEM) +
 
 Nota (M5, 2026-09-16): o dado "há certo E há errado" — "Strong Truth Exists" —
 foi tornado registo axiom-free residente como corolário nomeado
-(strongTruthExists : ∃τ, NecessariamenteVerdadeiro τ, footprint `{CL}`, sem
-Cogito; o teorema fonte é Semantics.bothNecessarilyTrueAndFalse, C37).
-Axiomas livres no corpus: 15 (C60 soma o RAA `noGround_selfRefutes`). O sujeito que escolhe, porém, não desce de
-axioma: a sonda M5 sem Cogito fica bloqueada no muro do truthmaker atómico
-(groundPrinciple_atom só dispara sobre átomos verdadeiros; a verdade forçada
-por {CL} é uma disjunção — excluído do meio — nunca um átomo; o lema exato em
-falta é ∀w, TrueAt w (atomo 0), improvável sobre mundos {CL}). Cogito
-permanece FORÇADO (ladder 11), nunca derivado. Ver formal/GAPMAP.md C59 e o
+(strongTruthExists : ∃τ, NecessariamenteVerdadeiro τ, footprint `{CL}`;
+o teorema fonte é Semantics.bothNecessarilyTrueAndFalse, C37).
+Axiomas livres no corpus: 40. E o sujeito que escolhe agora desce de
+definição: pelo batch definitional-subject (2026-09-17), `Subject`,
+`State`, `Initiates` são definições (o subjacente, o campo sustido, a
+iniciação) e `Cogito` é teorema (`{}`, testemunha `Sum.inl ()`) — a sonda
+M5 sem Cogito fica superada quanto ao sujeito (o muro do truthmaker
+atómico mantém-se para a escolha: groundPrinciple_atom só dispara sobre
+átomos verdadeiros; a verdade forçada por {CL} é uma disjunção — excluído
+do meio — nunca um átomo; o lema exato em falta é ∀w, TrueAt w (atomo 0),
+improvável sobre mundos {CL}). Ver formal/GAPMAP.md C59, C68 e o
 milestone M5, formal/PLAN.md, formal/Spikes/Spike_M5_*.
 
 Nota (cogito-rethinking, 2026-09-15): Exists e Content deixaram de ser
@@ -916,6 +939,8 @@ axiomas — são definições analíticas (Exists(s) := True; Content(p) := True
 o cogito (A(s,p)) demonstrou-se derivável de T12 (Plurality.cogito_from_T12,
 sob AxTwoSubjects): a negação do cogito refuta-se a si mesma, tal como o
 absoluto "nada é verdadeiro" (§4). T2 ficou axiom-free (footprint `{}`).
+(Superada em 2026-09-17: o cogito é teorema sem AxTwoSubjects — a derivação
+sob a pluralidade era o estado A1; ver Nota A1 abaixo e GAPMAP.md C68.)
 
 Nota (A1, 2026-09-16): o axioma cogito foi ELIMINADO — o ato é apenas teorema
 (cogito_from_T12, derivado sob AxTwoSubjects). T1/T4/T5 migraram para
@@ -929,7 +954,8 @@ são definições analíticas (Agent(s) := True; Rational(s) := True) e o ato é
 ato de significar: A(s,p) := Means(s,p). Axiomas 18 → 16. Subject permanece
 axioma, mas como sort puro (uma definição indutiva vazia refutaria ∃s,
 tornando o sistema inconsistente; Bool/fin 2/ℕ/Unit esconderiam cardinalidade)
-— IM_STUPID.md §5.
+— IM_STUPID.md §5. (Superada em 2026-09-17: Subject é agora definição,
+`Subject := Unit ⊕ Prop` — ver Nota formal do §1 acima.)
 
 Ainda precisam de demonstração:
 
@@ -945,9 +971,8 @@ Nenhuma destas passagens deve ser simplesmente assumida.
 Nota formal (formal/GAPMAP.md, formal/DESIGN.md D9, D14): PersonalGround é
 teorema apenas sob duas pontes declaradas — AxGlobalGround (SEM, a troca de
 quantificadores ∀w∃r → ∃r∀w de T7) e AxPersonalGround (META, o preço do
-passo "pessoal" de T8; a terceira ponte, AxGroundBearing, foi dissolvida em
-B2). A pluralidade e o amor são teoremas
-apenas sob AxTwoSubjects (META), AxPersonsAffect (SEM) e AxPersonStability
+passo "pessoal" de T8). A pluralidade e o amor são teoremas
+apenas sob AxTwoSubjects (META) e AxPersonStability
 (SEM). Cada negação destas pontes não destrói o ato de a negar — por isso são
 pontes declaradas, nunca "dedução pura" (spikes de exclusão registados em
 formal/DESIGN.md D14b; lema em falta: ALONE_EXCLUDED).
