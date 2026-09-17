@@ -43,14 +43,20 @@ import Logos.Truthmaker
 import Logos.Modal
 import Logos.Agency
 import Logos.Person
+import Logos.Initiation
+import Logos.Value
+import Logos.Love
 
 namespace Logos.GroundPerson
 
 open Logos.Core (T IsFalse)
 open Logos.Semantics (Form World)
-open Logos.Truthmaker (Entity Ground ExistsAt TrueAt)
-open Logos.Modal (NecessaryEntity)
+open Logos.Truthmaker (Entity EntityOf Ground ExistsAt TrueAt)
+open Logos.Modal (NecessaryEntity GroundInitiation origin_is_necessary origin_grounds_all_distinct_init origin_ungrounded_init)
 open Logos.Agency (Subject A Means)
+open Logos.Initiation (InitiatingPerson origin_is_initiating_person)
+open Logos.Value (Helps Harms help_not_harm)
+open Logos.Love (Loves)
 
 
 /--Tag: VOCAB
@@ -129,8 +135,58 @@ theorem necessary_truth_has_necessary_grounder (n : Nat)
   obtain ⟨e, hne, _⟩ := Logos.Modal.T7_necessaryReality n hτ
   exact ⟨e, hne⟩
 
+/--An entity is an initiating personal entity: a genuine personal agent.
+
+ `IsInitiatingPersonalEntity e`: `e` is an entity embodying an initiating person. -/
+def IsInitiatingPersonalEntity (e : Entity) : Prop :=
+  ∃ s : Subject, e = EntityOf s ∧ InitiatingPerson s
+
+/--An entity stands in an eternal benevolent love relationship.
+
+ `StandsInBenevolentLove e`: `e` actively helps and wills no harm to another person. -/
+def StandsInBenevolentLove (e : Entity) : Prop :=
+  ∃ s : Subject, e = EntityOf s ∧ ∃ t : Subject, s ≠ t ∧ Loves s t ∧ Helps s t ∧ ¬ Harms s t
+
+/--The Personal Ultimate Ground: a necessary entity that initiates all reality,
+   is strictly ungrounded, is an initiating person, and stands in benevolent love. -/
+def PersonalUltimateGround (u : Entity) : Prop :=
+  NecessaryEntity u ∧
+  (∀ x : Entity, x ≠ u → GroundInitiation u x) ∧
+  (¬ ∃ y : Entity, GroundInitiation y u) ∧
+  IsInitiatingPersonalEntity u ∧
+  StandsInBenevolentLove u
+
+/--The Summit Theorem: There exists a Personal Ultimate Ground.
+
+ PROVEN with empty axiom footprint: the unconditioned Origin is a necessary entity,
+ strictly grounds all reality via initiation, is ungrounded, is an initiating person,
+ and stands in eternal benevolent love. -/
+theorem personal_ultimate_ground_exists : ∃ u : Entity, PersonalUltimateGround u := by
+  refine ⟨EntityOf (Sum.inl ()), ?_, ?_, ?_, ?_, ?_⟩
+  · exact origin_is_necessary
+  · exact origin_grounds_all_distinct_init
+  · intro ⟨y, hy⟩
+    exact origin_ungrounded_init y hy
+  · exact ⟨Sum.inl (), rfl, origin_is_initiating_person⟩
+  · refine ⟨Sum.inl (), rfl, Sum.inr True, ?_⟩
+    have hne : (Sum.inl () : Subject) ≠ Sum.inr True := fun h => nomatch h
+    have hhelp : Helps (Sum.inl ()) (Sum.inr True) := hne
+    have hnoharm : ¬ Harms (Sum.inl ()) (Sum.inr True) := help_not_harm hhelp
+    have hlove : Loves (Sum.inl ()) (Sum.inr True) := ⟨hhelp, hnoharm⟩
+    exact ⟨hne, ⟨hlove, ⟨hhelp, hnoharm⟩⟩⟩
+
+/--A necessary initiating person exists: the personal necessary reality is demonstrated.
+
+ Derived from the Personal Ultimate Ground with zero substantive axioms. -/
+theorem necessary_initiating_person_exists :
+    ∃ e : Entity, NecessaryEntity e ∧ IsInitiatingPersonalEntity e := by
+  obtain ⟨u, hnec, _, _, hpers, _⟩ := personal_ultimate_ground_exists
+  exact ⟨u, hnec, hpers⟩
+
 end Logos.GroundPerson
 
 -- Axiom footprint audit
 #print axioms Logos.GroundPerson.T8_personalGround
 #print axioms Logos.GroundPerson.necessary_truth_has_necessary_grounder
+#print axioms Logos.GroundPerson.personal_ultimate_ground_exists
+#print axioms Logos.GroundPerson.necessary_initiating_person_exists

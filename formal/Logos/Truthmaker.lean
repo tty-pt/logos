@@ -31,30 +31,37 @@ import Logos.Agency
 namespace Logos.Truthmaker
 
 open Logos.Semantics (Form World)
-open Logos.Agency (Subject A)
+open Logos.Agency (Subject)
 
 /-- Grounding entities (truthmakers). World-rigid: what an entity *grounds*
     does not vary across worlds; only its existence does (D6).
-    Defined (C2, 2026-09-15): the carrier is the subject type itself — the
-    Q2/D11 identification (`Entity := Subject`) made definitional. -/
-def Entity : Type := Subject
+    The general ontological type: subjects (capable of agency) are embedded
+    via `Entity.ofSubject`, while non-agent worldly entities (such as atomic
+    facts/states) are represented via `Entity.ofAtom`. -/
+inductive Entity : Type
+  | ofSubject (s : Subject) : Entity
+  | ofAtom (n : Nat) : Entity
+
+/-- The canonical embedding of subjects into entities (Q2 bridge). -/
+def EntityOf (s : Subject) : Entity := Entity.ofSubject s
+
+instance : Coe Subject Entity := ⟨EntityOf⟩
 
 /--Tag: VOCAB
 
  The truthmaker relation — an entity grounding a formula.
 
  `Ground e φ`: entity `e` grounds formula `φ`. -/
-axiom Ground : Subject → Form → Prop
+axiom Ground : Entity → Form → Prop
 
-/--Existence as agency (esse est agere): an entity exists in a world iff it acts.
+/--Existence of an entity in a world, defined independently of agency.
 
- `ExistsAt w e`: entity `e` exists in world `w`. Definitional (batch
-    esse-est-agere, 2026-09-17): to be is to act — `∃ p, A e p`. The
-    world-index is vacuous by principle: `Means` takes no `World` parameter,
-    so agency is not world-located; the existential does the real work (only
-    actors exist). Former VOCAB axiom, now def — this supplies the missing
-    Means→ExistsAt rule (M3 PERSON_PERSISTS), dissolving `AxPersonStability`. -/
-def ExistsAt (_w : World) (s : Subject) : Prop := ∃ p : Prop, A s p
+ `ExistsAt w e`: entity `e` exists in world `w`.
+ Subjects exist across all worlds; atomic entities exist at worlds where
+ their corresponding valuation evaluates to true. -/
+def ExistsAt (w : World) : Entity → Prop
+  | Entity.ofSubject _ => True
+  | Entity.ofAtom n => w n = Logos.Semantics.TV.t
 
 /-- Truth as truthmaking, structurally defined (A2, 2026-09-16): an atom is
     true in `w` iff some entity grounding it exists there; the connectives are

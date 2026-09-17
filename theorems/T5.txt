@@ -29,7 +29,13 @@ Plurality como projeção de T12 (`Plurality.T5_personExists`) — os antigos
 predicados de espécie {Agent, Rational} desapareceram de todas as footprints;
 M0 re-ancorou-o no Cogito forçado; o batch definitional-subject (2026-09-17)
 exibe o Cogito como teorema, footprint `{}`.
-Ver formal/GAPMAP.md C24 e formal/DESIGN.md D-Tier1.)
+Ver formal/GAPMAP.md C24 e formal/DESIGN.md D-Tier1.
+Audit de definições (2026-09-17, C80–C82): a pessoa iniciadora genuína exige
+ramificação (`InitiatingPerson(s) := Person(s) ∧ Branches(Moves(s))`). Os conteúdos
+proposicionais postos não ramificam e são transferências determinísticas
+(`posited_is_transfer`), pelo que nenhum conteúdo é pessoa iniciadora
+(`no_content_is_initiating_person`); a origem silenciosa ramifica genuinamente
+(`origin_branches`, `{}`) e é pessoa iniciadora.)
 
 Logo:
 

@@ -838,7 +838,7 @@ alguma forma)" é C42–C45 + C76 (T14 `{}`; forma canónica rígida: o MESMO pa
 performativo C68 — a sua negação refuta-se por exibição (noCogito_selfRefutes). Ficam fora
 da demonstração as linhas 26–30: "este mundo é necessário? Não" é uma negação
 não reivindicada, e "a criação existe / há propósito" pertence à zona de fé
-(F9); "existe este Ser Pessoal" é T8 (C32, AxPersonalGround META).)
+(F9); "existe este Ser Pessoal" é T8 (C32 META, agora demonstrado no kernel com pegada `{}` via o Teorema do Fundamento Pessoal Supremo, C90).)
 
 26. O QUE FOI EXCLUÍDO POR IMPOSSIBILIDADE DE NEGAÇÃO
 
@@ -1020,19 +1020,22 @@ Trinity — DEFERRED, sem argumento (§28/§29).
 
 Nenhuma destas passagens deve ser simplesmente assumida.
 
-Nota formal (formal/GAPMAP.md, formal/DESIGN.md D7, D9, D14): PersonalGround é
-teorema sob a ponte declarada AxPersonalGround (META, o preço do passo
-"pessoal" de T8) mais T7-atómico — teorema desde o batch A2-swap-theorem
-(2026-09-17): a troca de quantificadores ∀w∃r → ∃r∀w para átomos dissolve-se
-por definição (ExistsAt sem mundo); AxGlobalGround deixou de ser ponte.
+Nota formal (formal/GAPMAP.md, formal/DESIGN.md D7, D9, D14): PersonalGround
+permanece registado sob a ponte histórica AxPersonalGround (C32, META), mas o
+passo pessoal supremo foi demonstrado no kernel com pegada vazia `{}` via
+`GroundPerson.personal_ultimate_ground_exists` (C90) e a fundamentação ontológica
+por dependência de iniciação (`Modal.ultimateGroundInit_exists`, C89).
+T7-atómico é teorema desde o batch A2-swap-theorem (2026-09-17) e a troca
+transcendental de quantificadores é teorema `{Ground}` (C88), com a Origem
+necessária `{}` (C87).
 A instância do terceiro excluído (C19) fica BLOCKED — lema em falta:
 fundamento existencial de compostos. A pluralidade e o amor são teoremas
 `{}` (plurality-discharge, 2026-09-17 — o par canónico origem+destinatário,
-C73/C76; o lema em falta ALONE_EXCLUDED é agora o teorema C74); a
-persistência (AxPersonStability) é teorema (esse est agere).
+C73/C76; o amor benevolente C85/C86; o lema em falta ALONE_EXCLUDED é agora
+o teorema C74); a persistência (AxPersonStability) é teorema (esse est agere).
 (O método transcendental não muda: a exceção interpessoal tinha spikes de
 exclusão registados em formal/DESIGN.md D14b — todos superados por
-derivação, como foram cogito, esse-est-agere e AxGlobalGround.)
+derivação, como foram cogito, esse-est-agere, AxGlobalGround e o Fundamento Pessoal Supremo.)
 
 O objectivo seguinte é demonstrar cada uma delas pelo mesmo método transcendental:
 

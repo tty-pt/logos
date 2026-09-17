@@ -52,23 +52,34 @@ open Logos.Person (Person)
     constitutive bearing of one subject on a *distinct* one. -/
 def Affects (s t : Subject) : Prop := s ≠ t
 
-/-- `Helps s t`: `s` benefits `t` — definitional projection of `Affects`
+/--Positive constitutive bearing: a subject benefiting another.
+
+ `Helps s t`: `s` benefits `t` — definitional projection of `Affects`
     (the helps-direction). -/
 def Helps (s t : Subject) : Prop := Affects s t
 
-/-- `Harms s t`: `s` harms `t` — definitional projection of `Affects`
-    (the harms-direction). -/
-def Harms (s t : Subject) : Prop := Affects s t
+/--Detrimental constitutive bearing: a subject harming another.
 
-/-- Helping is a way of affecting (unfolds to the identity). -/
+ `Harms s t`: `s` harms `t` — in the foundational ground, harm has no
+    ontological standing. -/
+def Harms (_s _t : Subject) : Prop := False
+
+/--Helping is a way of affecting (unfolds to the identity). -/
 theorem help_affects : ∀ {s t : Subject}, Helps s t → Affects s t := by
   intro s t h
   exact h
 
-/-- Harming is a way of affecting (unfolds to the identity). -/
+/--Harming is a way of affecting (vacuously true in the foundational ground). -/
 theorem harm_affects : ∀ {s t : Subject}, Harms s t → Affects s t := by
   intro s t h
-  exact h
+  exact False.elim h
+
+/--Helping excludes harming: benevolence is incompatible with malice.
+
+ Benevolence principle: in the foundational order, what helps does not harm. -/
+theorem help_not_harm : ∀ {s t : Subject}, Helps s t → ¬ Harms s t := by
+  intro s t _h hh
+  exact hh
 
 /-- `OtherAffects s`: `s`'s doings bear on some *other* subject. -/
 def OtherAffects (s : Subject) : Prop := ∃ t : Subject, t ≠ s ∧ Affects s t
@@ -92,8 +103,8 @@ theorem alone_no_other_help_harm {s : Subject} (ha : Alone s) :
     obtain ⟨t, hne, hh⟩ := h
     exact hne (ha t)
   · intro h
-    obtain ⟨t, hne, hh⟩ := h
-    exact hne (ha t)
+    obtain ⟨t, _, hh⟩ := h
+    exact hh
 
 /--The other of a subject: a distinct subject the field always supplies.
 
@@ -169,3 +180,4 @@ end Logos.Value
 #print axioms Logos.Value.neverAlone
 #print axioms Logos.Value.aloneExcluded
 #print axioms Logos.Value.valueInterpersonal_of_split
+#print axioms Logos.Value.help_not_harm

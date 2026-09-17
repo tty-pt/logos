@@ -88,6 +88,35 @@ Portanto:
 
 há realidade necessária.
 
+(Adenda formal 2026-09-17 — Teorema do Fundamento Último Substantivo e Analítico):
+A fundamentação ontológica entre entidades (`GroundEntity s x`) é definida analiticamente
+a partir da capacidade intencional da agência (subsunção e transcendência intencional),
+onde `Entity` é o tipo ontológico geral (distinguindo sujeitos de entidades não-sujeito):
+  GroundEntity s x := s ≠ x ∧ (∀ p, EntityMeans x p → EntityMeans s p) ∧ (∃ p, EntityMeans s p ∧ ¬ EntityMeans x p).
+Ou seja, `s` fundamenta `x` sse `s` sustenta toda a capacidade intencional de `x` e transcende
+estritamente a agência de `x` (entidades não-sujeito têm capacidade intencional nula).
+A relação forma uma ordem parcial estrita:
+irreflexiva (Modal.groundEntity_irreflexive `{}`), assimétrica (Modal.groundEntity_asymmetric `{}`)
+e transitiva (Modal.groundEntity_transitive `{}`).
+A transcendência construtiva decorre da divergência proposicional sem axiomas:
+Modal.prop_neq_not `{}` (nenhuma proposição é idêntica à sua própria negação, q ≠ (q → False)).
+O Fundamento Último (Modal.UltimateGround s) é demonstrado substantivamente em 4 passos:
+  Passo A: Existe entidade necessária — Modal.necessary_entity_exists `{}` (de T14/Love);
+  Passo B: A Origem estritamente fundamenta toda a realidade distinta de si —
+           Modal.origin_grounds_all_distinct `{}` (a Origem subsume a agência de qualquer
+           ente derivado e entidades atómicas não-sujeito, excedendo-as com agência excedente);
+           Testemunha substantiva não-vazia: Modal.substantive_grounding_witness `{}`;
+  Passo C: A Origem é estritamente infundamentada — Modal.origin_not_grounded `{}`:
+           como a Origem possui agência universal (inicia qualquer posit), nenhuma entidade
+           pode transcender a sua agência, refutando qualquer fundamentador de modo substantivo;
+  Passo D: Síntese — existe um Fundamento Último substantivo e analítico: entidade necessária que
+           fundamenta tudo o que difere de si e não é fundamentada por ninguém
+           (Modal.ultimateGround_exists, GAPMAP C79 `{}`).
+O passo contingente de C78 (Modal.contingent_ground `{}`) demonstra substantivamente que toda a
+entidade contingente é fundamentada na Origem (pois nenhuma entidade contingente pode ser idêntica
+à Origem necessária), enquanto C79 estabelece o Fundamento Último da realidade de forma
+substantiva, analítica e não-vácua.)
+
 Consequência:
 
 A negação "não existe realidade necessária" é incoerente:
@@ -116,9 +145,12 @@ TEOREMA, não axioma:
 AxGlobalGround (teorema): todo átomo verdadeiro em todos os mundos é
 fundamentado por uma única entidade existente em todos os mundos.
 
-A prova usa §24a num mundo qualquer e reutiliza a testemunha em todos —
-válido porque ExistsAt é sem-mundo por definição (esse est agere) e Ground
-é rígido. Com ela, T7-atómico é teorema genuíno (PROVEN, só vocabulário
-`{Ground}`). A instância composta (τ := φ ∨ ¬φ) continua BLOCKED: nenhum
-fundamento existencial de compostos é forçado (ver formal/DESIGN.md D7,
+A prova no mundo vazio (onde todos os átomos contingentes avaliam a falso, emptyWorld_no_atom)
+mostra que qualquer fundamento atómico necessário só pode ser um sujeito transcendental
+(entity_in_emptyWorld_is_subject); a Origem primordial é necessária (origin_is_necessary, C87)
+e a troca de quantificadores é explicitamente transcendental (transcendental_quantifier_swap,
+modal_rigidity_of_ground, C88). E como os sujeitos transcendem valorações empíricas e Ground
+é rígido, essa mesma entidade fundamenta o átomo em todos os mundos. Com ela, T7-atómico é teorema
+genuíno (PROVEN, só vocabulário `{Ground}`). A instância composta (τ := φ ∨ ¬φ) continua
+BLOCKED: nenhum fundamento existencial de compostos é forçado (ver formal/DESIGN.md D7,
 formal/GAPMAP.md C19; transcrição em formal/Spikes/Spike_A6_probe.lean).

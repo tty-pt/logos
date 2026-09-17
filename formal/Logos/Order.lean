@@ -147,6 +147,49 @@ theorem consequence_preserves_truth {p₁ p₂ q : Prop}
     (himp : p₁ → p₂ → q) (h1 : T p₁) (h2 : T p₂) : T q := by
   exact (tschema q).2 (himp ((tschema p₁).1 h1) ((tschema p₂).1 h2))
 
+/-- The proposition asserting that no reasoning act occurs. -/
+def NoAct : Prop := ¬ ∃ s : Subject, ∃ p : Prop, A s p
+
+/-- The Cartesian Retortion (half 1): no subject can ever correctly judge that no act occurs.
+    The very occurrence of the judgment contradicts its truth-claim. -/
+theorem no_correct_judgment_of_no_act (s : Subject) : ¬ Correct s NoAct := by
+  intro hc
+  have hex : ∃ s' p', A s' p' := ⟨s, NoAct, hc.1⟩
+  exact hc.2 hex
+
+/-- The Cartesian Retortion (half 2): whoever judges that no act occurs is necessarily incorrect.
+    Error is the only possible status of the denial of the act. -/
+theorem judgment_of_no_act_is_incorrect (s : Subject)
+    (h : Correct s NoAct ∨ Incorrect s NoAct) : Incorrect s NoAct := by
+  cases h with
+  | inl hc => exact False.elim (no_correct_judgment_of_no_act s hc)
+  | inr hi => exact hi
+
+/-- An objective judgment (correct or incorrect) implies that the reasoning act occurs. -/
+theorem judgment_implies_act {s : Subject} {p : Prop} (h : Correct s p ∨ Incorrect s p) : A s p := by
+  cases h with
+  | inl hc => exact hc.1
+  | inr hi => exact hi.1
+
+/-- The Retorsive Cogito: even the skeptic's denial that any act occurs strictly witnesses
+    that an act occurs. The act cannot be denied without providing the witness that refutes the denial. -/
+theorem judgment_of_no_act_proves_act (s : Subject)
+    (h : Correct s NoAct ∨ Incorrect s NoAct) : ∃ s' : Subject, ∃ p' : Prop, A s' p' :=
+  ⟨s, NoAct, judgment_implies_act h⟩
+
+/-- Any objective judgment of right or wrong strictly entails that an act of reasoning occurs. -/
+theorem judgment_implies_cogito
+    (h : (∃ s : Subject, ∃ p : Prop, Correct s p) ∨
+         (∃ s : Subject, ∃ p : Prop, Incorrect s p)) :
+    ∃ s : Subject, ∃ p : Prop, A s p := by
+  cases h with
+  | inl hc =>
+      obtain ⟨s, p, hc⟩ := hc
+      exact ⟨s, p, hc.1⟩
+  | inr hi =>
+      obtain ⟨s, p, hi⟩ := hi
+      exact ⟨s, p, hi.1⟩
+
 end Logos.Order
 
 -- Axiom footprint audit
@@ -158,3 +201,8 @@ end Logos.Order
 #print axioms Logos.Order.rightWrong_implies_meaning
 #print axioms Logos.Order.rightDistinctWrong_implies_meaning
 #print axioms Logos.Order.rightWrongDistinction_implies_meaning
+#print axioms Logos.Order.no_correct_judgment_of_no_act
+#print axioms Logos.Order.judgment_of_no_act_is_incorrect
+#print axioms Logos.Order.judgment_implies_act
+#print axioms Logos.Order.judgment_of_no_act_proves_act
+#print axioms Logos.Order.judgment_implies_cogito

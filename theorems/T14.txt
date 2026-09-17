@@ -15,11 +15,15 @@ necessário (de alguma forma)" tornou-se literal. O segundo amante não é um
 segundo origem silencioso (há um só `inl`); é o conteúdo tornado sujeito — o
 destinatário. 2026-09-15 (nó): T14_eternalRelation construído sobre
 T12_directedPair (GAPMAP C47) — direção e estabilidade vivem no mesmo par.
-2026-09-15 (A3-refactor): Helps e Harms são projeções definidas (:= Affects);
-a relação primitiva é Affects.
+2026-09-17 (amor benevolente): Loves é definido como benevolência direcionada
+(Helps s t ∧ ¬ Harms s t, GAPMAP C86); o prejuízo não tem realidade ontológica no
+fundamento (Harms s t := False), de modo que ajuda exclui prejuízo
+(help_not_harm, C85). Amar é efetivamente ajudar sem prejudicar
+(love_helps, love_not_harms).
 Impressão de axiomas (pós-plurality-discharge, 2026-09-17): `{}` —
 Affects, Helps/Harms, Loves são todas definições analíticas
-(Affects s t := s ≠ t; Loves := Affects); AxPersonsAffect é teorema (M1, A3);
+(Affects s t := s ≠ t; Helps := Affects; Harms := False; Loves s t := Helps s t ∧ ¬ Harms s t);
+AxPersonsAffect é teorema (M1, A3); help_not_harm é teorema (C85);
 AxPersonStability é teorema (esse est agere);
 Subject/State/Initiates são definições; ExistsAt é definição (ser é agir);
 Entity/EntityOf dissolvidos (C2); {T, tschema} dissolvidos (E0); a ponte

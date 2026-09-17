@@ -158,7 +158,7 @@ Segue de: **C4** — [T3 §6](base.txt) · [T3](theorems/T3.txt)
 [§23](base.txt)
 
 ### A1 ◆ The truthmaker relation — an entity grounding a formula · `VOCAB`
-`Ground : Subject → Form → Prop` — _The truthmaker relation — an entity grounding a formula._
+`Ground : Entity → Form → Prop` — _The truthmaker relation — an entity grounding a formula._
 
 ### C15 · ✔
 `w ⊨ atom n → ∃ e : Entity, ExistsAt w e ∧ Ground e atom n` — _Every atomic truth is grounded: where an atom is true, an entity exists there that grounds it._
@@ -186,6 +186,26 @@ _There is a necessary reality grounded on the indubitable: some entity existing 
 ### C20 · ✔
 `(∀ e : Entity, Contingent e) → ∀ n : Nat, ¬ □atom n` — _If every entity were contingent, no atom could be true in every world._
 Segue de: **C18** e do axioma **A1** (vocabulário do enunciado) — [§T7](base.txt) · [T7](theorems/T7.txt)
+
+### C78 · ✔
+`GroundEntity (EntityOf (Sum.inl ())) x` — _Every contingent entity is grounded in the silent origin (C78)._
+[§T7](base.txt) · [T7](theorems/T7.txt)
+
+### C79 · ✔
+`∃ s : Entity, UltimateGround s` — _Step D: An Ultimate Ground exists: there is a necessary entity that strictly grounds all entities distinct from itself and is not grounded by any entity._
+[§T7](base.txt) · [T7](theorems/T7.txt)
+
+### C87 · ✔
+`NecessaryEntity (EntityOf (Sum.inl ()))` — _The Primordial Origin is a necessary entity._
+[§T7](base.txt) · [T7](theorems/T7.txt)
+
+### C88 · ✔
+`∃ s : Subject, NecessaryEntity (EntityOf s) ∧ Ground (EntityOf s) atom n` — _Transcendental Quantifier Swap: a necessary atom forces a necessary subject grounder._
+Segue do axioma **A1** (vocabulário do enunciado) — [§T7](base.txt) · [T7](theorems/T7.txt)
+
+### C89 · ✔
+`∃ u : Entity, UltimateGroundInit u` — _The Ultimate Ground exists under genuine initiation grounding._
+[§T7](base.txt) · [T7](theorems/T7.txt)
 
 
 ---
@@ -247,6 +267,14 @@ Segue de: **C48** — [§8](base.txt)
 `T q` — _Consequence preserves truth: whatever two true premises jointly imply is true._
 [§9](base.txt)
 
+### C83 · ✔
+`¬ Correct s NoAct` — _The Cartesian Retortion (half 1): no subject can ever correctly judge that no act occurs_
+[§8](base.txt)
+
+### C84 · ✔
+`∃ s' : Subject, ∃ p' : Prop, A s' p'` — _The Retorsive Cogito: even the skeptic's denial that any act occurs strictly witnesses that an act occurs. The act cannot be denied without providing the witness that refutes the denial._
+[§1/§8](base.txt)
+
 ### A2 ◆ The personal price of T8: what is grounded about a person is grounded in a personal way · `META`
 `AxPersonalGround : ∀ {f : Prop}, IsPresentPersonalFeature f → ∃ e : Entity, NecessaryEntity e ∧ GroundProp e f` — _The personal price of T8: what is grounded about a person is grounded in a personal way._
 
@@ -267,6 +295,10 @@ Segue dos axiomas **A3**, **A4** — [§T8](base.txt) · [T8](theorems/T8.txt)
 ### C34 · ✔
 `∃ e : Entity, NecessaryEntity e` — _Every necessary atomic truth has a necessary grounder._
 Segue de: **C18** e do axioma **A1** (vocabulário do enunciado) — [§T8](base.txt) · [T8](theorems/T8.txt)
+
+### C90 · ✔
+`∃ u : Entity, PersonalUltimateGround u` — _The Summit Theorem: There exists a Personal Ultimate Ground._
+Segue de: **C82**, **C85**, **C87** — [§T8](base.txt) · [T8](theorems/T8.txt)
 
 
 ---
@@ -409,6 +441,14 @@ Segue de: **C69**, **F7** — [§15/F1b](base.txt)
 `∃ s : Subject, Person s ∧ NecessarySubject s` — _There exists a necessary person: someone who is a person and persists in every world._
 Segue de: **C24** — [P5/P8](poem.txt)
 
+### C85 · ✔
+`∀ {s t : Subject}, Helps s t → ¬ Harms s t` — _Helping excludes harming: benevolence is incompatible with malice._
+[P6](poem.txt)
+
+### C86 · ✔
+`∀ {s t : Subject}, Loves s t → Helps s t` — _Love implies positive help: the lover benefits the beloved._
+[P6/P8](poem.txt)
+
 
 ---
 
@@ -433,6 +473,18 @@ Segue de: **C68** — [§1 fnd](base.txt)
 ### C67 · ✔
 `(¬ ∃ s : Subject, Originates s) → False` — _Denying that any subject originates an act refutes itself: the origin is exhibited, no axiom cited._
 Segue de: **C66** — [§1 fnd](base.txt)
+
+### C80 · ✔
+`¬ Branches (Moves (Sum.inr q))` — _Posited contents do not branch: a proposition posited by definition moves deterministically._
+[§1](base.txt)
+
+### C81 · ✔
+`Branches (Moves (Sum.inl ()))` — _The silent origin genuinely branches: its initiation is not a transfer._
+[§1](base.txt)
+
+### C82 · ✔
+`InitiatingPerson (Sum.inl ())` — _The silent origin is a genuine initiating person._
+Segue de: **C81** — [§1/§12](base.txt)
 
 
 ---
@@ -468,7 +520,7 @@ _Moral good from logical normativity is deferred: not yet derived._
 _The Trinity is deferred: no argument exists yet._
 
 ### Q7.2 · ANSWERED
-`ExistsAt (_w : World) (s : Subject) : Prop` — _Existence as agency (esse est agere): an entity exists in a world iff it acts._
+`ExistsAt (w : World) : Entity → Prop | Entity.ofSubject _ => True` — _Existence of an entity in a world, defined independently of agency._
 [weaker `AxGlobalGround`](base.txt)
 
 
@@ -508,7 +560,7 @@ _Incarnation and creation are faith data from the poem, deferred._
 | `AxPersonalGround` | A2 | `META` | The personal price of T8: what is grounded about a person is grounded in a personal way. | C32 |
 | `GroundPrincipleProp` | A4 | `SEM` | The §24a atom-grounding principle reflected at the level of propositions. | C33 |
 | `GroundProp` | A3 | `VOCAB` | The grounding relation between an entity and a proposition. | C32, C33 |
-| `Ground` | A1 | `VOCAB` | The truthmaker relation — an entity grounding a formula. | C15, C16, C17, C18, C20, C34, C60 |
+| `Ground` | A1 | `VOCAB` | The truthmaker relation — an entity grounding a formula. | C15, C16, C17, C18, C20, C34, C60, C88 |
 
 Detalhe do kernel:
 
@@ -520,16 +572,16 @@ Detalhe do kernel:
 ---
 ## Relatório de consistência (kernel ↔ GAPMAP)
 
-- Claims do GAPMAP com teorema localizado no kernel: **82** / 89
-- Steps com **significado em inglês**: **89** / 89
+- Claims do GAPMAP com teorema localizado no kernel: **95** / 102
+- Steps com **significado em inglês**: **102** / 102
 - **Claims sem teorema localizado** (sem dedução no kernel do mapa):
   - `C19` ref `Modal.T7_excludedMiddleInstance` — T7
   - `C59` ref `Spike_M5.strongTruthExists` — §27
-- Teoremas no kernel **sem claim** no GAPMAP (42): Agency.act_implies_agent, Agency.act_implies_content, Agency.act_implies_exists, Agency.act_implies_means, Agency.act_implies_rational, Choice.canChoose_unfold, Choice.meaning_I_needs_subject, Core.atomicWitnessFalsehood, Core.someTruthAndSomeFalsehood, Core.tschema, GroundPerson.AxGroundBearing, Love.canonicalNecessaryPerson, Modal.AxGlobalGround, Necessity.dia_def, Necessity.nec4, Necessity.nec4PH, Necessity.necDistinction_content, Necessity.necK, Necessity.necKPH, Necessity.necMP, Necessity.necT, Necessity.necTPH, Necessity.nec_apply, Order.fallible_false, Order.rightDistinctWrong_implies_meaning, Order.rightWrongDistinction_implies_meaning, Person.positedDistinct, Plurality.notAlone, Semantics.sat_and, Semantics.sat_imp, Semantics.sat_not, Semantics.sat_or, Truthmaker.sat_ground_and, Truthmaker.sat_ground_imp, Truthmaker.sat_ground_not, Truthmaker.sat_ground_or, Value.AxPersonsAffect, Value.alone_no_other_affects, Value.harm_affects, Value.help_affects, Value.neverAlone, Value.otherSubject_ne
-- **Estatuto derivado do kernel** (#print axioms + `Tag:` dos axiomas): **77 ✔** · **2 ⚠** · **0 ◆**
+- Teoremas no kernel **sem claim** no GAPMAP (82): Agency.act_implies_agent, Agency.act_implies_content, Agency.act_implies_exists, Agency.act_implies_means, Agency.act_implies_rational, Choice.canChoose_unfold, Choice.meaning_I_needs_subject, Core.atomicWitnessFalsehood, Core.someTruthAndSomeFalsehood, Core.tschema, GroundPerson.AxGroundBearing, GroundPerson.necessary_initiating_person_exists, Initiation.no_content_is_initiating_person, Initiation.origin_not_transfer, Initiation.posited_is_transfer, Initiation.posited_not_initiating_person, Love.canonicalNecessaryPerson, Love.love_affects, Love.love_not_harms, Love.loves_of_helps, Modal.AxGlobalGround, Modal.atom_is_derived, Modal.contingent_atom, Modal.contingent_entity_exists, Modal.contingent_non_subject_exists, Modal.emptyWorld_no_atom, Modal.entity_in_emptyWorld_is_subject, Modal.groundEntity_asymmetric, Modal.groundEntity_irreflexive, Modal.groundEntity_transitive, Modal.groundInitiation_asymmetric, Modal.groundInitiation_irreflexive, Modal.groundInitiation_transitive, Modal.ground_all_distinct_exists, Modal.modal_rigidity_of_ground, Modal.necessary_entity_exists, Modal.not_subject_ofAtom, Modal.origin_grounds_all_distinct, Modal.origin_grounds_all_distinct_init, Modal.origin_grounds_atom, Modal.origin_grounds_posited, Modal.origin_initiates, Modal.origin_not_grounded, Modal.origin_ungrounded, Modal.origin_ungrounded_init, Modal.posited_is_derived, Modal.prop_neq_not, Modal.subject_is_necessary, Modal.substantive_grounding_witness, Modal.ungrounded_necessary_entity_exists, Necessity.dia_def, Necessity.nec4, Necessity.nec4PH, Necessity.necDistinction_content, Necessity.necK, Necessity.necKPH, Necessity.necMP, Necessity.necT, Necessity.necTPH, Necessity.nec_apply, Order.fallible_false, Order.judgment_implies_act, Order.judgment_implies_cogito, Order.judgment_of_no_act_is_incorrect, Order.rightDistinctWrong_implies_meaning, Order.rightWrongDistinction_implies_meaning, Person.positedDistinct, Plurality.notAlone, Semantics.sat_and, Semantics.sat_imp, Semantics.sat_not, Semantics.sat_or, Truthmaker.sat_ground_and, Truthmaker.sat_ground_imp, Truthmaker.sat_ground_not, Truthmaker.sat_ground_or, Value.AxPersonsAffect, Value.alone_no_other_affects, Value.harm_affects, Value.help_affects, Value.neverAlone, Value.otherSubject_ne
+- **Estatuto derivado do kernel** (#print axioms + `Tag:` dos axiomas): **90 ✔** · **2 ⚠** · **0 ◆**
 - Estatuto GAPMAP × derivado: **sem divergências** (transcrição verificada).
 - **Steps ⚠ sob axioma substantivo (SEM/META)** (2): C32, C33
-- **Exibidos ✔ por só-vocabulário** (pegada do kernel só com os vocábulos do próprio enunciado — SEM/META nenhum; em C15/C60 a negação refuta-se por definição, RAA): C15, C16, C17, C18, C20, C34, C60
+- **Exibidos ✔ por só-vocabulário** (pegada do kernel só com os vocábulos do próprio enunciado — SEM/META nenhum; em C15/C60 a negação refuta-se por definição, RAA): C15, C16, C17, C18, C20, C34, C60, C88
 - Pegada kernel × GAPMAP: **sem divergências**.
 - **Grafo (closure) × audição (#print axioms) divergem em 2 claims** (subconta transitiva do depviz — toolchain, não ledger; a audição manda):
   - `C16` audição `{Ground}` vs grafo `{}`
@@ -556,20 +608,25 @@ Detalhe do kernel:
 | C12 | `Logos.Core.bivalence` | [Core.lean#L186](formal/Logos/Core.lean#L186) | `{CL}` | CL | `Core.IsFalse`, `Core.T` | — |
 | C13 | `Logos.Semantics.lawExcludedMiddle` | [Semantics.lean#L76](formal/Logos/Semantics.lean#L76) | `{CL}` | CL | `Semantics.Form`, `Semantics.NecessarilyTrue`, `Semantics.Satisfies`, `Semantics.TrueAt`, `Semantics.World`, `Semantics.sat_not`, `Semantics.sat_or` | **C37** `bothNecessarilyTrueAndFalse` |
 | C14 | `Logos.Semantics.nonContradiction` | [Semantics.lean#L85](formal/Logos/Semantics.lean#L85) | `{CL}` | {propext} | `Semantics.FalseAt`, `Semantics.Form`, `Semantics.NecessarilyFalse`, `Semantics.Satisfies`, `Semantics.World`, `Semantics.sat_and`, `Semantics.sat_not` | **C37** `bothNecessarilyTrueAndFalse` |
-| C15 | `Logos.Truthmaker.groundPrinciple_atom` | [Truthmaker.lean#L86](formal/Logos/Truthmaker.lean#L86) | `{Ground}` | {Ground} (VOCAB — footprint is the statement's own vocabulary; proof is a definitional collapse, P → P; see C60; esse-est-agere batch drops ExistsAt, now a def) | `Semantics.World`, `Truthmaker.Entity`, **Q7.2** `ExistsAt`, axiom `Ground` (VOCAB), `Truthmaker.TrueAt` | `Modal.AxGlobalGround` |
-| C60 | `Logos.Truthmaker.noGround_selfRefutes` | [Truthmaker.lean#L99](formal/Logos/Truthmaker.lean#L99) | `{Ground}` | {Ground} (VOCAB — denial refutes itself by definition: TrueAt w (atom n) unfolds to ∃e, ExistsAt w e ∧ Ground e (atom n) with ExistsAt now agency itself, so the denial is ∃e… ∧ ¬∃e…; companion of C15) | `Semantics.World`, `Truthmaker.Entity`, **Q7.2** `ExistsAt`, axiom `Ground` (VOCAB), `Truthmaker.TrueAt` | — |
-| C16 | `Logos.Truthmaker.lawExcludedMiddle` | [Truthmaker.lean#L128](formal/Logos/Truthmaker.lean#L128) | `{Ground, CL}` | CL + {Ground} (A2: AxOr/AxNot dropped; esse-est-agere drops ExistsAt) | `Semantics.Form`, `Semantics.World`, `Truthmaker.NecessarilyTrue`, `Truthmaker.TrueAt` | — |
-| C17 | `Logos.Truthmaker.nonContradiction` | [Truthmaker.lean#L136](formal/Logos/Truthmaker.lean#L136) | `{Ground}` | {Ground} (A2: AxAnd/AxNot dropped; no propext; esse-est-agere drops ExistsAt) | `Semantics.Form`, `Semantics.World`, `Truthmaker.NecessarilyFalse`, `Truthmaker.TrueAt` | — |
-| C18 | `Logos.Modal.T7_necessaryReality` | [Modal.lean#L69](formal/Logos/Modal.lean#L69) | `{Ground}` | {Ground} (VOCAB — batch A2-swap-theorem: AxGlobalGround axiom → theorem) | `Modal.AxGlobalGround`, `Modal.NecessaryEntity`, `Modal.actualWorld`, `Semantics.World`, `Truthmaker.Entity`, **Q7.2** `ExistsAt`, axiom `Ground` (VOCAB), `Truthmaker.NecessarilyTrue` | **C34** `necessary_truth_has_necessary_grounder`, **C20** `noNecessaryTruthIfAllContingent` |
+| C15 | `Logos.Truthmaker.groundPrinciple_atom` | [Truthmaker.lean#L93](formal/Logos/Truthmaker.lean#L93) | `{Ground}` | {Ground} (VOCAB — footprint is the statement's own vocabulary; proof is a definitional collapse, P → P; see C60; esse-est-agere batch drops ExistsAt, now a def) | `Semantics.World`, `Truthmaker.Entity`, **Q7.2** `ExistsAt`, axiom `Ground` (VOCAB), `Truthmaker.TrueAt` | — |
+| C60 | `Logos.Truthmaker.noGround_selfRefutes` | [Truthmaker.lean#L106](formal/Logos/Truthmaker.lean#L106) | `{Ground}` | {Ground} (VOCAB — denial refutes itself by definition: TrueAt w (atom n) unfolds to ∃e, ExistsAt w e ∧ Ground e (atom n) with ExistsAt now agency itself, so the denial is ∃e… ∧ ¬∃e…; companion of C15) | `Semantics.World`, `Truthmaker.Entity`, **Q7.2** `ExistsAt`, axiom `Ground` (VOCAB), `Truthmaker.TrueAt` | — |
+| C16 | `Logos.Truthmaker.lawExcludedMiddle` | [Truthmaker.lean#L135](formal/Logos/Truthmaker.lean#L135) | `{Ground, CL}` | CL + {Ground} (A2: AxOr/AxNot dropped; esse-est-agere drops ExistsAt) | `Semantics.Form`, `Semantics.World`, `Truthmaker.NecessarilyTrue`, `Truthmaker.TrueAt` | — |
+| C17 | `Logos.Truthmaker.nonContradiction` | [Truthmaker.lean#L143](formal/Logos/Truthmaker.lean#L143) | `{Ground}` | {Ground} (A2: AxAnd/AxNot dropped; no propext; esse-est-agere drops ExistsAt) | `Semantics.Form`, `Semantics.World`, `Truthmaker.NecessarilyFalse`, `Truthmaker.TrueAt` | — |
+| C18 | `Logos.Modal.T7_necessaryReality` | [Modal.lean#L427](formal/Logos/Modal.lean#L427) | `{Ground}` | {Ground} (VOCAB — batch A2-swap-theorem: AxGlobalGround axiom → theorem) | `Modal.AxGlobalGround`, `Modal.NecessaryEntity`, `Modal.actualWorld`, `Semantics.World`, `Truthmaker.Entity`, **Q7.2** `ExistsAt`, axiom `Ground` (VOCAB), `Truthmaker.NecessarilyTrue` | **C34** `necessary_truth_has_necessary_grounder`, **C20** `noNecessaryTruthIfAllContingent` |
 | C19 | — | — | — | missing lemma ∃ e, Ground e (or θ (not θ)) given EM-necessity — no existential compound ground is forced by structural TrueAt (transcript: formal/Spikes/Spike_A6_probe.lean) | Modal.T7_excludedMiddleInstance | — |
-| C20 | `Logos.Modal.noNecessaryTruthIfAllContingent` | [Modal.lean#L78](formal/Logos/Modal.lean#L78) | `{Ground}` | {Ground} (VOCAB — as C18) | `Modal.Contingent`, `Modal.NecessaryEntity`, **C18** `T7_necessaryReality`, `Truthmaker.Entity`, axiom `Ground` (VOCAB), `Truthmaker.NecessarilyTrue` | — |
+| C20 | `Logos.Modal.noNecessaryTruthIfAllContingent` | [Modal.lean#L456](formal/Logos/Modal.lean#L456) | `{Ground}` | {Ground} (VOCAB — as C18) | `Modal.Contingent`, `Modal.NecessaryEntity`, **C18** `T7_necessaryReality`, `Truthmaker.Entity`, axiom `Ground` (VOCAB), `Truthmaker.NecessarilyTrue` | — |
+| C78 | `Logos.Modal.contingent_ground` | [Modal.lean#L259](formal/Logos/Modal.lean#L259) | `{}` | {} (pure constructive logic: contingent entities are distinct from the necessary origin, hence grounded by universal subsumption) | `Modal.Contingent`, `Modal.GroundEntity`, `Modal.origin_grounds_all_distinct`, `Modal.subject_is_necessary`, `Truthmaker.Entity`, `Truthmaker.EntityOf` | — |
+| C79 | `Logos.Modal.ultimateGround_exists` | [Modal.lean#L278](formal/Logos/Modal.lean#L278) | `{}` | {} (pure constructive logic, zero axioms) | `Modal.GroundEntity`, `Modal.NecessaryEntity`, `Modal.UltimateGround`, `Modal.origin_grounds_all_distinct`, `Modal.origin_not_grounded`, `Modal.subject_is_necessary`, `Truthmaker.Entity`, `Truthmaker.EntityOf` | — |
+| C87 | `Logos.Modal.origin_is_necessary` | [Modal.lean#L75](formal/Logos/Modal.lean#L75) | `{}` | {} | `Modal.NecessaryEntity`, `Modal.subject_is_necessary`, `Truthmaker.EntityOf` | **C90** `personal_ultimate_ground_exists` |
+| C88 | `Logos.Modal.transcendental_quantifier_swap` | [Modal.lean#L435](formal/Logos/Modal.lean#L435) | `{Ground}` | {Ground} | `Agency.Subject`, `Modal.NecessaryEntity`, `Modal.emptyWorld`, `Modal.subject_is_necessary`, `Truthmaker.Entity`, `Truthmaker.EntityOf`, **Q7.2** `ExistsAt`, axiom `Ground` (VOCAB), `Truthmaker.NecessarilyTrue`, `Truthmaker.TrueAt` | `Modal.modal_rigidity_of_ground` |
+| C89 | `Logos.Modal.ultimateGroundInit_exists` | [Modal.lean#L397](formal/Logos/Modal.lean#L397) | `{}` | {} | `Modal.GroundInitiation`, `Modal.NecessaryEntity`, `Modal.UltimateGroundInit`, `Modal.origin_grounds_all_distinct_init`, `Modal.origin_ungrounded_init`, `Modal.subject_is_necessary`, `Truthmaker.Entity`, `Truthmaker.EntityOf` | — |
 | C58 | `Logos.Agency.noCogito_selfRefutes` | [Agency.lean#L137](formal/Logos/Agency.lean#L137) | `{}` | {} (the silent origin is exhibited definitionally; no axiom cited) | `Agency.A`, `Agency.Initiates`, `Agency.State`, `Agency.Subject` | — |
 | C68 | `Logos.Agency.Cogito` | [Agency.lean#L129](formal/Logos/Agency.lean#L129) | `{}` | {} (witness Sum.inl (): the silent origin sustains every posit; definitional subject, 2026-09-17) | `Agency.A`, `Agency.Initiates`, `Agency.State`, `Agency.Subject` | **C66** `Cogito_Init`, **C21** `T1_subjectExists`, **C23** `T4_agentExists`, **C24** `T5_personExists`, **C48** `cogito_from_T12` |
 | C59 | — | — | — | **{CL}** (C37 lever) | Spike_M5.strongTruthExists | — |
-| C21 | `Logos.Plurality.T1_subjectExists` | [Plurality.lean#L79](formal/Logos/Plurality.lean#L79) | `{}` | {} (kind-preds Agent/Rational are defs; datum now the exhibited theorem Cogito) | `Agency.A`, **C68** `Cogito`, `Agency.Exists`, `Agency.Subject` | — |
+| C21 | `Logos.Plurality.T1_subjectExists` | [Plurality.lean#L77](formal/Logos/Plurality.lean#L77) | `{}` | {} (kind-preds Agent/Rational are defs; datum now the exhibited theorem Cogito) | `Agency.A`, **C68** `Cogito`, `Agency.Exists`, `Agency.Subject` | — |
 | C22 | `Logos.Agency.T2_contentExists` | [Agency.lean#L175](formal/Logos/Agency.lean#L175) | `{}` | **{}** — Content _ := True (def), True witnesses content; cogito not needed (was {cogito} + 6 kind-preds) | `Agency.Content` | — |
-| C23 | `Logos.Plurality.T4_agentExists` | [Plurality.lean#L87](formal/Logos/Plurality.lean#L87) | `{}` | {} (as C21; Agent is := True, def — agent existence is analytic) | `Agency.A`, `Agency.Agent`, **C68** `Cogito`, `Agency.Exists`, `Agency.Subject` | — |
-| C24 | `Logos.Plurality.T5_personExists` | [Plurality.lean#L97](formal/Logos/Plurality.lean#L97) | `{}` | {} (as C21) | `Agency.A`, `Agency.Agent`, **C68** `Cogito`, `Agency.Means`, `Agency.Rational`, `Agency.Subject`, `Person.Intentional`, `Person.Person` | **C39** `T11_choiceField`, **C52** `choiceExists`, **C77** `necessaryPersonExists` |
+| C23 | `Logos.Plurality.T4_agentExists` | [Plurality.lean#L85](formal/Logos/Plurality.lean#L85) | `{}` | {} (as C21; Agent is := True, def — agent existence is analytic) | `Agency.A`, `Agency.Agent`, **C68** `Cogito`, `Agency.Exists`, `Agency.Subject` | — |
+| C24 | `Logos.Plurality.T5_personExists` | [Plurality.lean#L95](formal/Logos/Plurality.lean#L95) | `{}` | {} (as C21) | `Agency.A`, `Agency.Agent`, **C68** `Cogito`, `Agency.Means`, `Agency.Rational`, `Agency.Subject`, `Person.Intentional`, `Person.Person` | **C39** `T11_choiceField`, **C52** `choiceExists`, **C77** `necessaryPersonExists` |
 | C25 | `Logos.Person.inseparability_24b` | [Person.lean#L56](formal/Logos/Person.lean#L56) | `{CL}` | CL (vocab-only — no substantive axiom; see VOCAB.md) | `Agency.A`, `Agency.Means`, `Agency.Subject`, `Agency.act_implies_means`, `Core.IsFalse`, `Core.T`, `Person.CarriesLogicalFeature`, `Person.CarriesPersonalFeature`, `Person.HasFeature`, `Person.RationalAct` | — |
 | C26 | `Logos.Alternatives.T9_incompatibleAlternatives` | [Alternatives.lean#L24](formal/Logos/Alternatives.lean#L24) | `{}` | {} (E0) | `Alternatives.Incompatible`, `Core.IsFalse`, `Core.T`, **C4** `atomicTruthWitnessed`, `Core.atomicWitnessFalsehood` | **C39** `T11_choiceField` |
 | C27 | `Logos.Alternatives.incompatible_with_negation` | [Alternatives.lean#L35](formal/Logos/Alternatives.lean#L35) | `{}` | {} (E0) | `Alternatives.Incompatible`, `Core.IsFalse`, `Core.T`, `Core.tschema` | — |
@@ -577,24 +634,27 @@ Detalhe do kernel:
 | C29 | `Logos.Order.T6_truthTranscendsWill` | [Order.lean#L99](formal/Logos/Order.lean#L99) | `{}` | as C28 | `Agency.Subject`, `Core.IsFalse`, `Core.T`, `Order.Fallible`, `Order.fallible_false` | — |
 | C30 | `Logos.Order.correctness_distinct` | [Order.lean#L107](formal/Logos/Order.lean#L107) | `{CL}` | CL (defs act-relative §8 Correct s p := A s p ∧ T p) | `Agency.A`, `Agency.Subject`, `Core.IsFalse`, `Core.T`, `Order.Correct`, `Order.Incorrect`, **C48** `cogito_from_T12` | — |
 | C31 | `Logos.Order.consequence_preserves_truth` | [Order.lean#L146](formal/Logos/Order.lean#L146) | `{}` | {} (E0) | `Core.T`, `Core.tschema` | — |
-| C32 | `Logos.GroundPerson.T8_personalGround` | [GroundPerson.lean#L108](formal/Logos/GroundPerson.lean#L108) | `{AxPersonalGround, GroundProp}` | {AxPersonalGround, GroundProp} (esse-est-agere drops ExistsAt) | `GroundPerson.AxGroundBearing`, axiom `AxPersonalGround` (META), axiom `GroundProp` (VOCAB), `GroundPerson.IsPresentPersonalFeature`, `GroundPerson.Personal`, `GroundPerson.Realizes`, `Modal.NecessaryEntity`, `Truthmaker.Entity` | — |
-| C33 | `Logos.GroundPerson.present_feature_is_grounded` | [GroundPerson.lean#L118](formal/Logos/GroundPerson.lean#L118) | `{GroundPrincipleProp, GroundProp}` | {GroundProp, GroundPrincipleProp} | `Core.T`, axiom `GroundPrincipleProp` (SEM), axiom `GroundProp` (VOCAB), `GroundPerson.IsPresentPersonalFeature`, `Truthmaker.Entity` | — |
-| C34 | `Logos.GroundPerson.necessary_truth_has_necessary_grounder` | [GroundPerson.lean#L126](formal/Logos/GroundPerson.lean#L126) | `{Ground}` | {Ground} (VOCAB — as C18) | `Modal.NecessaryEntity`, **C18** `T7_necessaryReality`, `Truthmaker.Entity`, axiom `Ground` (VOCAB), `Truthmaker.NecessarilyTrue` | — |
+| C83 | `Logos.Order.no_correct_judgment_of_no_act` | [Order.lean#L155](formal/Logos/Order.lean#L155) | `{}` | {} | `Agency.A`, `Agency.Subject`, `Core.T`, `Order.Correct`, `Order.NoAct` | `Order.judgment_of_no_act_is_incorrect` |
+| C84 | `Logos.Order.judgment_of_no_act_proves_act` | [Order.lean#L176](formal/Logos/Order.lean#L176) | `{}` | {} | `Agency.A`, `Agency.Subject`, `Order.Correct`, `Order.Incorrect`, `Order.NoAct`, `Order.judgment_implies_act` | — |
+| C32 | `Logos.GroundPerson.T8_personalGround` | [GroundPerson.lean#L114](formal/Logos/GroundPerson.lean#L114) | `{AxPersonalGround, GroundProp}` | {AxPersonalGround, GroundProp} (esse-est-agere drops ExistsAt) | `GroundPerson.AxGroundBearing`, axiom `AxPersonalGround` (META), axiom `GroundProp` (VOCAB), `GroundPerson.IsPresentPersonalFeature`, `GroundPerson.Personal`, `GroundPerson.Realizes`, `Modal.NecessaryEntity`, `Truthmaker.Entity` | — |
+| C33 | `Logos.GroundPerson.present_feature_is_grounded` | [GroundPerson.lean#L124](formal/Logos/GroundPerson.lean#L124) | `{GroundPrincipleProp, GroundProp}` | {GroundProp, GroundPrincipleProp} | `Core.T`, axiom `GroundPrincipleProp` (SEM), axiom `GroundProp` (VOCAB), `GroundPerson.IsPresentPersonalFeature`, `Truthmaker.Entity` | — |
+| C34 | `Logos.GroundPerson.necessary_truth_has_necessary_grounder` | [GroundPerson.lean#L132](formal/Logos/GroundPerson.lean#L132) | `{Ground}` | {Ground} (VOCAB — as C18) | `Modal.NecessaryEntity`, **C18** `T7_necessaryReality`, `Truthmaker.Entity`, axiom `Ground` (VOCAB), `Truthmaker.NecessarilyTrue` | — |
+| C90 | `Logos.GroundPerson.personal_ultimate_ground_exists` | [GroundPerson.lean#L164](formal/Logos/GroundPerson.lean#L164) | `{}` | {} | `Agency.Subject`, `GroundPerson.IsInitiatingPersonalEntity`, `GroundPerson.PersonalUltimateGround`, `GroundPerson.StandsInBenevolentLove`, `Initiation.InitiatingPerson`, **C82** `origin_is_initiating_person`, `Love.Loves`, `Modal.GroundInitiation`, `Modal.NecessaryEntity`, `Modal.origin_grounds_all_distinct_init`, **C87** `origin_is_necessary`, `Modal.origin_ungrounded_init`, `Truthmaker.Entity`, `Truthmaker.EntityOf`, `Value.Harms`, `Value.Helps`, **C85** `help_not_harm` | `GroundPerson.necessary_initiating_person_exists` |
 | F1a | `Logos.Choice.person_chooses` | [Choice.lean#L151](formal/Logos/Choice.lean#L151) | `{}` | — | `Agency.A`, `Agency.Agent`, `Agency.Means`, `Agency.Rational`, `Agency.Subject`, `Alternatives.Incompatible`, `Choice.Chooses`, **C50** `incompatible_self_negation`, `Person.Intentional`, `Person.Person` | **C52** `choiceExists` |
 | F2 | — | — | — | — | — | — |
 | F3 | — | — | — | — | — | — |
-| F4 | `Logos.Love.T13_someoneLovable` | [Love.lean#L50](formal/Logos/Love.lean#L50) | `{}` | — | `Agency.Subject`, `Love.Lovable`, `Person.Person`, **C40** `T12_twoPersons` | — |
-| F5 | `Logos.Love.T14_canonicalRigid` | [Love.lean#L114](formal/Logos/Love.lean#L114) | `{}` | — | `Agency.A`, `Agency.Agent`, `Agency.Initiates`, `Agency.Means`, `Agency.Rational`, `Agency.State`, `Agency.Subject`, `Love.Loves`, `Person.Intentional`, `Person.Person`, `Plurality.EntityOf`, `Semantics.World`, **Q7.2** `ExistsAt` | — |
+| F4 | `Logos.Love.T13_someoneLovable` | [Love.lean#L79](formal/Logos/Love.lean#L79) | `{}` | — | `Agency.Subject`, `Love.Lovable`, `Person.Person`, **C40** `T12_twoPersons` | — |
+| F5 | `Logos.Love.T14_canonicalRigid` | [Love.lean#L142](formal/Logos/Love.lean#L142) | `{}` | — | `Agency.Agent`, `Agency.Initiates`, `Agency.Means`, `Agency.Rational`, `Agency.State`, `Agency.Subject`, `Love.Loves`, `Person.Intentional`, `Person.Person`, `Plurality.EntityOf`, `Semantics.World`, **Q7.2** `ExistsAt`, `Value.Harms`, `Value.Helps` | — |
 | F6 | — | — | — | — | — | — |
-| Q7.2 | `Logos.Truthmaker.ExistsAt` | [Truthmaker.lean#L57](formal/Logos/Truthmaker.lean#L57) | `{}` | — | `Agency.A`, `Agency.Subject`, `Semantics.World` | **FAITH-2** `AxPersonStability`, **C76** `T14_canonicalRigid`, **C44** `T14_world`, `Modal.AxGlobalGround`, `Modal.NecessaryEntity`, **C18** `T7_necessaryReality`, `Plurality.NecessarySubject`, **C15** `groundPrinciple_atom`, **C60** `noGround_selfRefutes` |
+| Q7.2 | `Logos.Truthmaker.ExistsAt` | [Truthmaker.lean#L62](formal/Logos/Truthmaker.lean#L62) | `{}` | — | `Agency.Subject`, `Semantics.TV`, `Semantics.World`, `Truthmaker.Entity` | **C76** `T14_canonicalRigid`, **C44** `T14_world`, `Modal.AxGlobalGround`, `Modal.NecessaryEntity`, **C18** `T7_necessaryReality`, `Modal.contingent_atom`, `Modal.emptyWorld_no_atom`, `Modal.entity_in_emptyWorld_is_subject`, **C88** `transcendental_quantifier_swap`, `Plurality.NecessarySubject`, **C15** `groundPrinciple_atom`, **C60** `noGround_selfRefutes` |
 | C35 | `Logos.Core.negatedAbsolutes` | [Core.lean#L129](formal/Logos/Core.lean#L129) | `{}` | {} (E0) | `Core.N_F`, `Core.N_T`, **C6** `notEverythingTrue`, **C2** `notNothingTrue` | — |
 | C36 | `Logos.Core.rightWrongDistinction` | [Core.lean#L145](formal/Logos/Core.lean#L145) | `{}` | {} (E0) | `Core.N_F`, `Core.N_T`, **C6** `notEverythingTrue`, **C2** `notNothingTrue` | **FAITH-1** `necDistinction` |
 | C37 | `Logos.Semantics.bothNecessarilyTrueAndFalse` | [Semantics.lean#L102](formal/Logos/Semantics.lean#L102) | `{CL}` | CL | `Semantics.Form`, `Semantics.NecessarilyFalse`, `Semantics.NecessarilyTrue`, **C13** `lawExcludedMiddle`, **C14** `nonContradiction` | — |
 | C38 | `Logos.Necessity.necDistinction` | [Necessity.lean#L118](formal/Logos/Necessity.lean#L118) | `{}` | {} (E0; C1: identity-model alias; world content = C37) | `Core.N_F`, `Core.N_T`, **C36** `rightWrongDistinction`, `Necessity.Necessity`, `Semantics.World` | `Necessity.necDistinction_content` |
 | C39 | `Logos.Choice.T11_choiceField` | [Choice.lean#L140](formal/Logos/Choice.lean#L140) | `{}` | {} (choice field exhibited with the act) | `Agency.Subject`, `Alternatives.Incompatible`, **C26** `T9_incompatibleAlternatives`, `Core.IsFalse`, `Core.T`, `Person.Person`, **C24** `T5_personExists` | — |
-| C40 | `Logos.Plurality.T12_twoPersons` | [Plurality.lean#L54](formal/Logos/Plurality.lean#L54) | `{}` | {} (definitional subject, 2026-09-17: canonical pair of Person.twoPersonsFromSubject — origin + addressee; no right/wrong premise, no bridge) | `Agency.Subject`, `Person.Person`, **C73** `twoPersonsFromSubject` | **C41** `T13_someoneLovable`, **C47** `T12_directedPair`, `Plurality.notAlone` |
-| C41 | `Logos.Love.T13_someoneLovable` | [Love.lean#L50](formal/Logos/Love.lean#L50) | `{}` | {} (via C40) | `Agency.Subject`, `Love.Lovable`, `Person.Person`, **C40** `T12_twoPersons` | — |
-| C48 | `Logos.Plurality.cogito_from_T12` | [Plurality.lean#L72](formal/Logos/Plurality.lean#L72) | `{}` | {} (cogito as corollary of the exhibited Cogito; plurality also forces the datum, the datum is not *grounded* on plurality) | `Agency.A`, **C68** `Cogito`, `Agency.Subject` | **C30** `correctness_distinct`, `Order.fallible_false`, **C55** `judge_commits` |
+| C40 | `Logos.Plurality.T12_twoPersons` | [Plurality.lean#L52](formal/Logos/Plurality.lean#L52) | `{}` | {} (definitional subject, 2026-09-17: canonical pair of Person.twoPersonsFromSubject — origin + addressee; no right/wrong premise, no bridge) | `Agency.Subject`, `Person.Person`, **C73** `twoPersonsFromSubject` | **C41** `T13_someoneLovable`, **C47** `T12_directedPair`, `Plurality.notAlone` |
+| C41 | `Logos.Love.T13_someoneLovable` | [Love.lean#L79](formal/Logos/Love.lean#L79) | `{}` | {} (via C40) | `Agency.Subject`, `Love.Lovable`, `Person.Person`, **C40** `T12_twoPersons` | — |
+| C48 | `Logos.Plurality.cogito_from_T12` | [Plurality.lean#L70](formal/Logos/Plurality.lean#L70) | `{}` | {} (cogito as corollary of the exhibited Cogito; plurality also forces the datum, the datum is not *grounded* on plurality) | `Agency.A`, **C68** `Cogito`, `Agency.Subject` | **C30** `correctness_distinct`, `Order.fallible_false`, **C55** `judge_commits` |
 | C49 | `Logos.Choice.meaning_needs_subject` | [Choice.lean#L100](formal/Logos/Choice.lean#L100) | `{}` | {} (analytic; vocab-only — no substantive axiom; see VOCAB.md) | `Agency.Means`, `Agency.Subject` | — |
 | C50 | `Logos.Choice.incompatible_self_negation` | [Choice.lean#L76](formal/Logos/Choice.lean#L76) | `{}` | **{}** (pure logic — the field around any meaning-act) | `Alternatives.Incompatible` | **C51** `person_chooses`, **C55** `judge_commits` |
 | C51 | `Logos.Choice.person_chooses` | [Choice.lean#L151](formal/Logos/Choice.lean#L151) | `{}` | {} (vocab-only — no substantive axiom; see VOCAB.md) | `Agency.A`, `Agency.Agent`, `Agency.Means`, `Agency.Rational`, `Agency.Subject`, `Alternatives.Incompatible`, `Choice.Chooses`, **C50** `incompatible_self_negation`, `Person.Intentional`, `Person.Person` | **C52** `choiceExists` |
@@ -602,14 +662,14 @@ Detalhe do kernel:
 | C53 | `Logos.Choice.noChoice_selfRefutes` | [Choice.lean#L170](formal/Logos/Choice.lean#L170) | `{}` | {} — denying choice is itself an act = a choice | `Agency.Subject`, `Choice.Chooses`, **C52** `choiceExists` | — |
 | C54 | `Logos.Choice.JUDGE_COMMITTED` | [Choice.lean#L179](formal/Logos/Choice.lean#L179) | `{}` | {} (premise unused: choice already holds via C52) | `Agency.Subject`, `Choice.Chooses`, **C52** `choiceExists`, `Core.N_F`, `Core.N_T` | **C61** `rightWrong_implies_someone_means` |
 | C55 | `Logos.Order.judge_commits` | [Order.lean#L123](formal/Logos/Order.lean#L123) | `{CL}` | CL (defs act-relative §8) | `Agency.A`, `Agency.Subject`, `Alternatives.Incompatible`, `Choice.Chooses`, **C50** `incompatible_self_negation`, `Core.IsFalse`, `Core.T`, `Order.Correct`, `Order.Incorrect`, **C48** `cogito_from_T12` | `Order.rightWrongDistinction_implies_meaning` |
-| C56 | `Logos.Value.alone_no_other_help_harm` | [Value.lean#L88](formal/Logos/Value.lean#L88) | `{}` | {} (M1: Affects is now the A3 definition s ≠ t, so the P6 lemma loses its axiom — measured; see VOCAB.md) | `Agency.Subject`, `Value.Alone`, `Value.Harms`, `Value.Helps` | — |
+| C56 | `Logos.Value.alone_no_other_help_harm` | [Value.lean#L99](formal/Logos/Value.lean#L99) | `{}` | {} (M1: Affects is now the A3 definition s ≠ t, so the P6 lemma loses its axiom — measured; see VOCAB.md) | `Agency.Subject`, `Value.Alone`, `Value.Harms`, `Value.Helps` | — |
 | C57 | `Logos.Choice.noSubject_selfRefutes` | [Choice.lean#L211](formal/Logos/Choice.lean#L211) | `{}` | {} — formal record of §26 "não existe sujeito do ato presente"; the act-datum is the exhibited theorem Cogito, never a consequence of the plurality bridge | `Agency.Subject`, `Choice.Chooses`, **C52** `choiceExists` | — |
-| C42 | `Logos.Love.T14_eternalRelation` | [Love.lean#L98](formal/Logos/Love.lean#L98) | `{}` | {} (M1: Affects := s ≠ t def + AxPersonsAffect theorem vanish; esse-est-agere: AxPersonStability is a theorem and ExistsAt a def; plurality-discharge: AxTwoSubjects retired — canonical pair of Person.twoPersonsFromSubject) | `Agency.Subject`, **FAITH-2** `AxPersonStability`, `Love.Loves`, `Person.Person`, `Plurality.NecessarySubject`, **C47** `T12_directedPair`, `Value.Affects` | **C43** `T14_content`, **C45** `T14_square`, **C44** `T14_world` |
-| C43 | `Logos.Love.T14_content` | [Love.lean#L155](formal/Logos/Love.lean#L155) | `{}` | as C42 | `Agency.Subject`, `Love.Loves`, **C42** `T14_eternalRelation`, `Person.Person`, `Plurality.NecessarySubject` | — |
-| C44 | `Logos.Love.T14_world` | [Love.lean#L133](formal/Logos/Love.lean#L133) | `{}` | as C42 (world-anchored honest □) | `Agency.Subject`, `Love.Loves`, **C42** `T14_eternalRelation`, `Necessity.NecessityPH`, `Person.Person`, `Plurality.EntityOf`, `Plurality.NecessarySubject`, `Semantics.World`, **Q7.2** `ExistsAt` | — |
-| C45 | `Logos.Love.T14_square` | [Love.lean#L145](formal/Logos/Love.lean#L145) | `{}` | as C42 (image of the old statement shape) | `Agency.Subject`, `Love.Loves`, **C42** `T14_eternalRelation`, `Necessity.Necessity`, `Person.Person`, `Plurality.NecessarySubject`, `Semantics.World` | — |
-| C46 | `Logos.Value.valueInterpersonal_of_split` | [Value.lean#L156](formal/Logos/Value.lean#L156) | `{}` | {} (recovery theorem: exact old statement; M1: Affects/AxPersonsAffect gone; derived outright from Person.twoPersonsFromSubject) | `Agency.Subject`, `Core.N_F`, `Core.N_T`, `Person.Person`, **C73** `twoPersonsFromSubject`, `Value.Affects`, `Value.AxPersonsAffect` | — |
-| C47 | `Logos.Plurality.T12_directedPair` | [Plurality.lean#L109](formal/Logos/Plurality.lean#L109) | `{}` | {} (chain node — M1: distinctness is already the forward direction under A3, so the pair wears its own inequality; T14 built on this node) | `Agency.Subject`, `Person.Person`, **C40** `T12_twoPersons`, `Value.Affects` | **C42** `T14_eternalRelation` |
+| C42 | `Logos.Love.T14_eternalRelation` | [Love.lean#L125](formal/Logos/Love.lean#L125) | `{}` | {} (M1: Affects := s ≠ t def + AxPersonsAffect theorem vanish; esse-est-agere: AxPersonStability is a theorem and ExistsAt a def; plurality-discharge: AxTwoSubjects retired — canonical pair of Person.twoPersonsFromSubject) | `Agency.Subject`, **FAITH-2** `AxPersonStability`, `Love.Loves`, `Love.loves_of_helps`, `Person.Person`, `Plurality.NecessarySubject`, **C47** `T12_directedPair`, `Value.Affects` | **C43** `T14_content`, **C45** `T14_square`, **C44** `T14_world` |
+| C43 | `Logos.Love.T14_content` | [Love.lean#L184](formal/Logos/Love.lean#L184) | `{}` | as C42 | `Agency.Subject`, `Love.Loves`, **C42** `T14_eternalRelation`, `Person.Person`, `Plurality.NecessarySubject` | — |
+| C44 | `Logos.Love.T14_world` | [Love.lean#L162](formal/Logos/Love.lean#L162) | `{}` | as C42 (world-anchored honest □) | `Agency.Subject`, `Love.Loves`, **C42** `T14_eternalRelation`, `Necessity.NecessityPH`, `Person.Person`, `Plurality.EntityOf`, `Plurality.NecessarySubject`, `Semantics.World`, **Q7.2** `ExistsAt` | — |
+| C45 | `Logos.Love.T14_square` | [Love.lean#L174](formal/Logos/Love.lean#L174) | `{}` | as C42 (image of the old statement shape) | `Agency.Subject`, `Love.Loves`, **C42** `T14_eternalRelation`, `Necessity.Necessity`, `Person.Person`, `Plurality.NecessarySubject`, `Semantics.World` | — |
+| C46 | `Logos.Value.valueInterpersonal_of_split` | [Value.lean#L167](formal/Logos/Value.lean#L167) | `{}` | {} (recovery theorem: exact old statement; M1: Affects/AxPersonsAffect gone; derived outright from Person.twoPersonsFromSubject) | `Agency.Subject`, `Core.N_F`, `Core.N_T`, `Person.Person`, **C73** `twoPersonsFromSubject`, `Value.Affects`, `Value.AxPersonsAffect` | — |
+| C47 | `Logos.Plurality.T12_directedPair` | [Plurality.lean#L107](formal/Logos/Plurality.lean#L107) | `{}` | {} (chain node — M1: distinctness is already the forward direction under A3, so the pair wears its own inequality; T14 built on this node) | `Agency.Subject`, `Person.Person`, **C40** `T12_twoPersons`, `Value.Affects` | **C42** `T14_eternalRelation` |
 | C61 | `Logos.Choice.rightWrong_implies_someone_means` | [Choice.lean#L194](formal/Logos/Choice.lean#L194) | `{}` | {} (JUDGE_COMMITTED C54 ∘ rightWrongDistinction C36; the analytic half "significado → sujeito" is C49) | `Agency.A`, `Agency.Means`, `Agency.Subject`, `Alternatives.Incompatible`, `Choice.Chooses`, **C54** `JUDGE_COMMITTED`, `Core.N_F`, `Core.N_T` | — |
 | C62 | `Logos.Order.rightWrong_implies_meaning` | [Order.lean#L46](formal/Logos/Order.lean#L46) | `{}` | {} (pure bridges; full conditional CL; **sem axioma substantivo**; o modelo vazio já não satisfaz o antecedente; ver VOCAB.md/BRIDGE.md) | `Agency.A`, `Agency.Means`, `Agency.Subject`, `Choice.Meaning_I`, `Core.IsFalse`, `Core.T`, `Order.Correct`, `Order.Incorrect` | `Order.rightDistinctWrong_implies_meaning`, `Order.rightWrongDistinction_implies_meaning` |
 | C69 | `Logos.Choice.freeWillOrigin` | [Choice.lean#L249](formal/Logos/Choice.lean#L249) | `{}` | {} (constructive — the origin means every content; instantiation at someWorld, deliberately not canChoose_unfold) | `Choice.CanChoose`, `Choice.FreeWill` | **C72** `judgeIsFree`, **C71** `originFreedomSelfRefutes` |
@@ -617,17 +677,22 @@ Detalhe do kernel:
 | C71 | `Logos.Choice.originFreedomSelfRefutes` | [Choice.lean#L296](formal/Logos/Choice.lean#L296) | `{}` | {} — the freedom paradox dissolves: the determinist alternative cannot be asserted performatively | `Choice.FreeWill`, **F7** `freeWillOrigin` | — |
 | C72 | `Logos.Choice.judgeIsFree` | [Choice.lean#L306](formal/Logos/Choice.lean#L306) | `{}` | {} (judge = origin via T5_personExists; choice-in-the-freedom-sense exists for the act's subject) | `Agency.Agent`, `Agency.Means`, `Agency.Rational`, `Agency.Subject`, `Choice.FreeWill`, **F7** `freeWillOrigin`, `Person.Intentional`, `Person.Person` | — |
 | C73 | `Logos.Person.twoPersonsFromSubject` | [Person.lean#L90](formal/Logos/Person.lean#L90) | `{}` | {} (plurality-discharge, 2026-09-17: no plurality axiom — AxTwoSubjects retired; Person (Sum.inr True) via Means (Sum.inr True) True; distinctness by constructors) | `Agency.Agent`, `Agency.Initiates`, `Agency.Means`, `Agency.Rational`, `Agency.State`, `Agency.Subject`, `Person.Intentional`, `Person.Person` | **C40** `T12_twoPersons`, **C46** `valueInterpersonal_of_split` |
-| C74 | `Logos.Value.aloneExcluded` | [Value.lean#L135](formal/Logos/Value.lean#L135) | `{}` | {} (kills the M2 lone-subject countermodel; the named missing lemma that justified AxTwoSubjects no longer exists) | `Agency.Subject`, `Person.Person`, `Value.Alone`, `Value.neverAlone` | — |
+| C74 | `Logos.Value.aloneExcluded` | [Value.lean#L146](formal/Logos/Value.lean#L146) | `{}` | {} (kills the M2 lone-subject countermodel; the named missing lemma that justified AxTwoSubjects no longer exists) | `Agency.Subject`, `Person.Person`, `Value.Alone`, `Value.neverAlone` | — |
 | C75 | `Logos.Person.everyContentIsAPerson` | [Person.lean#L105](formal/Logos/Person.lean#L105) | `{}` | {} (honest limit: distinctness of such persons is kernel-visible only for incompatible contents — proposition equality is propext-collapsed) | `Agency.Agent`, `Agency.Initiates`, `Agency.Means`, `Agency.Rational`, `Agency.State`, `Person.Intentional`, `Person.Person` | — |
-| C76 | `Logos.Love.T14_canonicalRigid` | [Love.lean#L114](formal/Logos/Love.lean#L114) | `{}` | {} (stronger than C42: "Amar é … necessário (de alguma forma)" made literal; no stability bridge needed — esse est agere) | `Agency.A`, `Agency.Agent`, `Agency.Initiates`, `Agency.Means`, `Agency.Rational`, `Agency.State`, `Agency.Subject`, `Love.Loves`, `Person.Intentional`, `Person.Person`, `Plurality.EntityOf`, `Semantics.World`, **Q7.2** `ExistsAt` | — |
-| C77 | `Logos.Love.necessaryPersonExists` | [Love.lean#L77](formal/Logos/Love.lean#L77) | `{}` | {} (witnessed by the silent origin Sum.inl (), canonical pair relatum) | `Agency.Subject`, **FAITH-2** `AxPersonStability`, `Person.Person`, `Plurality.NecessarySubject`, **C24** `T5_personExists` | — |
-| C63 | `Logos.Initiation.branches_not_transfer` | [Initiation.lean#L32](formal/Logos/Initiation.lean#L32) | `{}` | **{}** (lógica pura — sem axioma, sem vocabulário) | `Initiation.Branches`, `Initiation.IsTransfer` | **C64** `originates_not_transfer` |
+| C76 | `Logos.Love.T14_canonicalRigid` | [Love.lean#L142](formal/Logos/Love.lean#L142) | `{}` | {} (stronger than C42: "Amar é … necessário (de alguma forma)" made literal; no stability bridge needed — esse est agere) | `Agency.Agent`, `Agency.Initiates`, `Agency.Means`, `Agency.Rational`, `Agency.State`, `Agency.Subject`, `Love.Loves`, `Person.Intentional`, `Person.Person`, `Plurality.EntityOf`, `Semantics.World`, **Q7.2** `ExistsAt`, `Value.Harms`, `Value.Helps` | — |
+| C77 | `Logos.Love.necessaryPersonExists` | [Love.lean#L104](formal/Logos/Love.lean#L104) | `{}` | {} (witnessed by the silent origin Sum.inl (), canonical pair relatum) | `Agency.Subject`, **FAITH-2** `AxPersonStability`, `Person.Person`, `Plurality.NecessarySubject`, **C24** `T5_personExists` | — |
+| C85 | `Logos.Value.help_not_harm` | [Value.lean#L80](formal/Logos/Value.lean#L80) | `{}` | {} | `Agency.Subject`, `Value.Harms`, `Value.Helps` | **C90** `personal_ultimate_ground_exists`, `Love.loves_of_helps` |
+| C86 | `Logos.Love.love_helps` | [Love.lean#L45](formal/Logos/Love.lean#L45) | `{}` | {} | `Agency.Subject`, `Love.Loves`, `Value.Harms`, `Value.Helps` | — |
+| C63 | `Logos.Initiation.branches_not_transfer` | [Initiation.lean#L32](formal/Logos/Initiation.lean#L32) | `{}` | **{}** (lógica pura — sem axioma, sem vocabulário) | `Initiation.Branches`, `Initiation.IsTransfer` | `Initiation.origin_not_transfer`, **C64** `originates_not_transfer` |
 | C64 | `Logos.Initiation.originates_not_transfer` | [Initiation.lean#L47](formal/Logos/Initiation.lean#L47) | `{}` | {} | `Agency.State`, `Agency.Subject`, `Initiation.Branches`, `Initiation.IsTransfer`, `Initiation.Moves`, **C63** `branches_not_transfer` | — |
 | C65 | `Logos.Initiation.person_iff_originates` | [Initiation.lean#L52](formal/Logos/Initiation.lean#L52) | `{}` | {} | `Agency.Agent`, `Agency.Initiates`, `Agency.Means`, `Agency.Rational`, `Agency.State`, `Agency.Subject`, `Initiation.Originates`, `Person.Intentional`, `Person.Person` | — |
 | C66 | `Logos.Initiation.Cogito_Init` | [Initiation.lean#L63](formal/Logos/Initiation.lean#L63) | `{}` | {} (relabel of the exhibited Cogito) | `Agency.A`, **C68** `Cogito`, `Agency.Initiates`, `Agency.State`, `Agency.Subject`, `Initiation.Originates` | **C67** `noInitiation_selfRefutes` |
 | C67 | `Logos.Initiation.noInitiation_selfRefutes` | [Initiation.lean#L70](formal/Logos/Initiation.lean#L70) | `{}` | {} (mirror of C58) | `Agency.Subject`, **C66** `Cogito_Init`, `Initiation.Originates` | — |
+| C80 | `Logos.Initiation.posited_not_branch` | [Initiation.lean#L74](formal/Logos/Initiation.lean#L74) | `{}` | {} | `Agency.Initiates`, `Agency.State`, `Initiation.Branches`, `Initiation.Moves` | `Initiation.posited_not_initiating_person` |
+| C81 | `Logos.Initiation.origin_branches` | [Initiation.lean#L90](formal/Logos/Initiation.lean#L90) | `{}` | {} | `Agency.Initiates`, `Agency.State`, `Initiation.Branches`, `Initiation.Moves` | **C82** `origin_is_initiating_person`, `Initiation.origin_not_transfer` |
+| C82 | `Logos.Initiation.origin_is_initiating_person` | [Initiation.lean#L107](formal/Logos/Initiation.lean#L107) | `{}` | {} | `Agency.Agent`, `Agency.Initiates`, `Agency.Means`, `Agency.Rational`, `Agency.State`, `Initiation.Branches`, `Initiation.InitiatingPerson`, `Initiation.Moves`, **C81** `origin_branches`, `Person.Intentional`, `Person.Person` | **C90** `personal_ultimate_ground_exists`, `Modal.origin_initiates`, `Modal.origin_ungrounded_init` |
 | FAITH-1 | `Logos.Necessity.necDistinction` | [Necessity.lean#L118](formal/Logos/Necessity.lean#L118) | `{}` | — | `Core.N_F`, `Core.N_T`, **C36** `rightWrongDistinction`, `Necessity.Necessity`, `Semantics.World` | `Necessity.necDistinction_content` |
-| FAITH-2 | `Logos.Love.AxPersonStability` | [Love.lean#L65](formal/Logos/Love.lean#L65) | `{}` | — | `Agency.A`, `Agency.Agent`, `Agency.Means`, `Agency.Rational`, `Agency.Subject`, `Person.Intentional`, `Person.Person`, `Plurality.EntityOf`, `Plurality.NecessarySubject`, `Semantics.World`, **Q7.2** `ExistsAt` | **C42** `T14_eternalRelation`, `Love.canonicalNecessaryPerson`, **C77** `necessaryPersonExists` |
+| FAITH-2 | `Logos.Love.AxPersonStability` | [Love.lean#L94](formal/Logos/Love.lean#L94) | `{}` | — | `Agency.Subject`, `Person.Person`, `Plurality.NecessarySubject`, `Semantics.World` | **C42** `T14_eternalRelation`, `Love.canonicalNecessaryPerson`, **C77** `necessaryPersonExists` |
 | F7 | `Logos.Choice.freeWillOrigin` | [Choice.lean#L249](formal/Logos/Choice.lean#L249) | `{}` | — | `Choice.CanChoose`, `Choice.FreeWill` | **C72** `judgeIsFree`, **C71** `originFreedomSelfRefutes` |
 | F8 | — | — | — | — | — | — |
 | F9 | — | — | — | — | — | — |
@@ -739,16 +804,21 @@ Detalhe do kernel:
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `AxGroundBearing` | theorem | [L82](formal/Logos/GroundPerson.lean#L82) | `theorem AxGroundBearing {e : Entity} {f : Prop} : GroundProp e f → Realizes e f` | {GroundProp}  |
-| `AxPersonalGround` | axiom | [L101](formal/Logos/GroundPerson.lean#L101) | `axiom AxPersonalGround : ∀ {f : Prop}, IsPresentPersonalFeature f → ∃ e : Entity` | {AxPersonalGround, GroundProp}  |
-| `GroundPrincipleProp` | axiom | [L77](formal/Logos/GroundPerson.lean#L77) | `axiom GroundPrincipleProp : ∀ {f : Prop}, T f → ∃ e : Entity, GroundProp e f` | {GroundPrincipleProp, GroundProp}  |
-| `GroundProp` | axiom | [L62](formal/Logos/GroundPerson.lean#L62) | `axiom GroundProp : Entity → Prop → Prop` | {GroundProp}  |
-| `IsPresentPersonalFeature` | def | [L87](formal/Logos/GroundPerson.lean#L87) | `def IsPresentPersonalFeature (f : Prop) : Prop` | {}  |
-| `Personal` | def | [L91](formal/Logos/GroundPerson.lean#L91) | `def Personal (e : Entity) : Prop` | {GroundProp}  |
-| `Realizes` | def | [L68](formal/Logos/GroundPerson.lean#L68) | `def Realizes (e : Entity) (f : Prop) : Prop` | {GroundProp}  |
-| `T8_personalGround` | theorem | [L108](formal/Logos/GroundPerson.lean#L108) | `theorem T8_personalGround {f : Prop} (hf : IsPresentPersonalFeature f) : ∃ e : E` | {AxPersonalGround, GroundProp} → C32 |
-| `necessary_truth_has_necessary_grounder` | theorem | [L126](formal/Logos/GroundPerson.lean#L126) | `theorem necessary_truth_has_necessary_grounder (n : Nat) (hτ : Logos.Truthmaker.` | {Ground} → C34 |
-| `present_feature_is_grounded` | theorem | [L118](formal/Logos/GroundPerson.lean#L118) | `theorem present_feature_is_grounded {f : Prop} (ht : T f) (_hf : IsPresentPerson` | {GroundPrincipleProp, GroundProp} → C33 |
+| `AxGroundBearing` | theorem | [L88](formal/Logos/GroundPerson.lean#L88) | `theorem AxGroundBearing {e : Entity} {f : Prop} : GroundProp e f → Realizes e f` | {GroundProp}  |
+| `AxPersonalGround` | axiom | [L107](formal/Logos/GroundPerson.lean#L107) | `axiom AxPersonalGround : ∀ {f : Prop}, IsPresentPersonalFeature f → ∃ e : Entity` | {AxPersonalGround, GroundProp}  |
+| `GroundPrincipleProp` | axiom | [L83](formal/Logos/GroundPerson.lean#L83) | `axiom GroundPrincipleProp : ∀ {f : Prop}, T f → ∃ e : Entity, GroundProp e f` | {GroundPrincipleProp, GroundProp}  |
+| `GroundProp` | axiom | [L68](formal/Logos/GroundPerson.lean#L68) | `axiom GroundProp : Entity → Prop → Prop` | {GroundProp}  |
+| `IsInitiatingPersonalEntity` | def | [L141](formal/Logos/GroundPerson.lean#L141) | `def IsInitiatingPersonalEntity (e : Entity) : Prop` | {}  |
+| `IsPresentPersonalFeature` | def | [L93](formal/Logos/GroundPerson.lean#L93) | `def IsPresentPersonalFeature (f : Prop) : Prop` | {}  |
+| `Personal` | def | [L97](formal/Logos/GroundPerson.lean#L97) | `def Personal (e : Entity) : Prop` | {GroundProp}  |
+| `PersonalUltimateGround` | def | [L152](formal/Logos/GroundPerson.lean#L152) | `def PersonalUltimateGround (u : Entity) : Prop` | {}  |
+| `Realizes` | def | [L74](formal/Logos/GroundPerson.lean#L74) | `def Realizes (e : Entity) (f : Prop) : Prop` | {GroundProp}  |
+| `StandsInBenevolentLove` | def | [L147](formal/Logos/GroundPerson.lean#L147) | `def StandsInBenevolentLove (e : Entity) : Prop` | {}  |
+| `T8_personalGround` | theorem | [L114](formal/Logos/GroundPerson.lean#L114) | `theorem T8_personalGround {f : Prop} (hf : IsPresentPersonalFeature f) : ∃ e : E` | {AxPersonalGround, GroundProp} → C32 |
+| `necessary_initiating_person_exists` | theorem | [L181](formal/Logos/GroundPerson.lean#L181) | `theorem necessary_initiating_person_exists : ∃ e : Entity, NecessaryEntity e ∧ I` | {}  |
+| `necessary_truth_has_necessary_grounder` | theorem | [L132](formal/Logos/GroundPerson.lean#L132) | `theorem necessary_truth_has_necessary_grounder (n : Nat) (hτ : Logos.Truthmaker.` | {Ground} → C34 |
+| `personal_ultimate_ground_exists` | theorem | [L164](formal/Logos/GroundPerson.lean#L164) | `theorem personal_ultimate_ground_exists : ∃ u : Entity, PersonalUltimateGround u` | {} → C90 |
+| `present_feature_is_grounded` | theorem | [L124](formal/Logos/GroundPerson.lean#L124) | `theorem present_feature_is_grounded {f : Prop} (ht : T f) (_hf : IsPresentPerson` | {GroundPrincipleProp, GroundProp} → C33 |
 
 ### `Logos.Initiation`
 
@@ -756,40 +826,96 @@ Detalhe do kernel:
 |---|---|---|---|---|
 | `Branches` | def | [L28](formal/Logos/Initiation.lean#L28) | `def Branches {α β : Type} (R : α → β → Prop) : Prop` | {}  |
 | `Cogito_Init` | theorem | [L63](formal/Logos/Initiation.lean#L63) | `theorem Cogito_Init : ∃ s : Subject, Originates s` | {} → C66 |
+| `InitiatingPerson` | def | [L103](formal/Logos/Initiation.lean#L103) | `def InitiatingPerson (s : Subject) : Prop` | {}  |
 | `IsTransfer` | def | [L24](formal/Logos/Initiation.lean#L24) | `def IsTransfer {α β : Type} (R : α → β → Prop) : Prop` | {}  |
 | `Moves` | def | [L41](formal/Logos/Initiation.lean#L41) | `def Moves (s : Subject) (w w' : State) : Prop` | {}  |
 | `Originates` | def | [L44](formal/Logos/Initiation.lean#L44) | `def Originates (s : Subject) : Prop` | {}  |
 | `branches_not_transfer` | theorem | [L32](formal/Logos/Initiation.lean#L32) | `theorem branches_not_transfer {α β : Type} {R : α → β → Prop} (h : Branches R) :` | {} → C63 |
 | `noInitiation_selfRefutes` | theorem | [L70](formal/Logos/Initiation.lean#L70) | `theorem noInitiation_selfRefutes : (¬ ∃ s : Subject, Originates s) → False` | {} → C67 |
+| `no_content_is_initiating_person` | theorem | [L119](formal/Logos/Initiation.lean#L119) | `theorem no_content_is_initiating_person : ∀ q : Prop, ¬ InitiatingPerson (Sum.in` | {}  |
+| `origin_branches` | theorem | [L90](formal/Logos/Initiation.lean#L90) | `theorem origin_branches : Branches (Moves (Sum.inl ()))` | {} → C81 |
+| `origin_is_initiating_person` | theorem | [L107](formal/Logos/Initiation.lean#L107) | `theorem origin_is_initiating_person : InitiatingPerson (Sum.inl ())` | {} → C82 |
+| `origin_not_transfer` | theorem | [L98](formal/Logos/Initiation.lean#L98) | `theorem origin_not_transfer : ¬ IsTransfer (Moves (Sum.inl ()))` | {}  |
 | `originates_not_transfer` | theorem | [L47](formal/Logos/Initiation.lean#L47) | `theorem originates_not_transfer {s : Subject} (h : Branches (Moves s)) : ¬ IsTra` | {} → C64 |
 | `person_iff_originates` | theorem | [L52](formal/Logos/Initiation.lean#L52) | `theorem person_iff_originates (s : Subject) : Person s ↔ Originates s` | {} → C65 |
+| `posited_is_transfer` | theorem | [L80](formal/Logos/Initiation.lean#L80) | `theorem posited_is_transfer (q : Prop) : IsTransfer (Moves (Sum.inr q))` | {}  |
+| `posited_not_branch` | theorem | [L74](formal/Logos/Initiation.lean#L74) | `theorem posited_not_branch (q : Prop) : ¬ Branches (Moves (Sum.inr q))` | {} → C80 |
+| `posited_not_initiating_person` | theorem | [L113](formal/Logos/Initiation.lean#L113) | `theorem posited_not_initiating_person (q : Prop) : ¬ InitiatingPerson (Sum.inr q` | {}  |
 
 ### `Logos.Love`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `AxPersonStability` | theorem | [L65](formal/Logos/Love.lean#L65) | `theorem AxPersonStability : ∀ s : Subject, Person s → NecessarySubject s` | {} → FAITH-2 |
-| `Lovable` | def | [L44](formal/Logos/Love.lean#L44) | `def Lovable (t : Subject) : Prop` | {}  |
+| `AxPersonStability` | theorem | [L94](formal/Logos/Love.lean#L94) | `theorem AxPersonStability : ∀ s : Subject, Person s → NecessarySubject s` | {} → FAITH-2 |
+| `Lovable` | def | [L73](formal/Logos/Love.lean#L73) | `def Lovable (t : Subject) : Prop` | {}  |
 | `Loves` | def | [L40](formal/Logos/Love.lean#L40) | `def Loves (s t : Subject) : Prop` | {}  |
-| `T13_someoneLovable` | theorem | [L50](formal/Logos/Love.lean#L50) | `theorem T13_someoneLovable : ∃ s t : Subject, Person s ∧ Person t ∧ s ≠ t ∧ Lova` | {} → C41 |
-| `T14_canonicalRigid` | theorem | [L114](formal/Logos/Love.lean#L114) | `theorem T14_canonicalRigid : Person (Sum.inl ()) ∧ Person (Sum.inr True) ∧ Loves` | {} → C76 |
-| `T14_content` | theorem | [L155](formal/Logos/Love.lean#L155) | `theorem T14_content : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves` | {} → C43 |
-| `T14_eternalRelation` | theorem | [L98](formal/Logos/Love.lean#L98) | `theorem T14_eternalRelation : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` | {} → C42 |
-| `T14_square` | theorem | [L145](formal/Logos/Love.lean#L145) | `theorem T14_square : □(∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Love` | {} → C45 |
-| `T14_world` | theorem | [L133](formal/Logos/Love.lean#L133) | `theorem T14_world : ∀ w, ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Lo` | {} → C44 |
-| `canonicalNecessaryPerson` | theorem | [L84](formal/Logos/Love.lean#L84) | `theorem canonicalNecessaryPerson : Person (Sum.inl ()) ∧ NecessarySubject (Sum.i` | {}  |
-| `necessaryPersonExists` | theorem | [L77](formal/Logos/Love.lean#L77) | `theorem necessaryPersonExists : ∃ s : Subject, Person s ∧ NecessarySubject s` | {} → C77 |
+| `T13_someoneLovable` | theorem | [L79](formal/Logos/Love.lean#L79) | `theorem T13_someoneLovable : ∃ s t : Subject, Person s ∧ Person t ∧ s ≠ t ∧ Lova` | {} → C41 |
+| `T14_canonicalRigid` | theorem | [L142](formal/Logos/Love.lean#L142) | `theorem T14_canonicalRigid : Person (Sum.inl ()) ∧ Person (Sum.inr True) ∧ Loves` | {} → C76 |
+| `T14_content` | theorem | [L184](formal/Logos/Love.lean#L184) | `theorem T14_content : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves` | {} → C43 |
+| `T14_eternalRelation` | theorem | [L125](formal/Logos/Love.lean#L125) | `theorem T14_eternalRelation : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` | {} → C42 |
+| `T14_square` | theorem | [L174](formal/Logos/Love.lean#L174) | `theorem T14_square : □(∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Love` | {} → C45 |
+| `T14_world` | theorem | [L162](formal/Logos/Love.lean#L162) | `theorem T14_world : ∀ w, ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Lo` | {} → C44 |
+| `canonicalNecessaryPerson` | theorem | [L111](formal/Logos/Love.lean#L111) | `theorem canonicalNecessaryPerson : Person (Sum.inl ()) ∧ NecessarySubject (Sum.i` | {}  |
+| `love_affects` | theorem | [L59](formal/Logos/Love.lean#L59) | `theorem love_affects : ∀ {s t : Subject}, Loves s t → Affects s t` | {}  |
+| `love_helps` | theorem | [L45](formal/Logos/Love.lean#L45) | `theorem love_helps : ∀ {s t : Subject}, Loves s t → Helps s t` | {} → C86 |
+| `love_not_harms` | theorem | [L52](formal/Logos/Love.lean#L52) | `theorem love_not_harms : ∀ {s t : Subject}, Loves s t → ¬ Harms s t` | {}  |
+| `loves_of_helps` | theorem | [L67](formal/Logos/Love.lean#L67) | `theorem loves_of_helps : ∀ {s t : Subject}, Helps s t → Loves s t` | {}  |
+| `necessaryPersonExists` | theorem | [L104](formal/Logos/Love.lean#L104) | `theorem necessaryPersonExists : ∃ s : Subject, Person s ∧ NecessarySubject s` | {} → C77 |
 
 ### `Logos.Modal`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `AxGlobalGround` | theorem | [L56](formal/Logos/Modal.lean#L56) | `theorem AxGlobalGround (n : Nat) (hnec : □atom n) : ∃ e : Entity, ∀ w : World, E` | {Ground}  |
-| `Contingent` | def | [L40](formal/Logos/Modal.lean#L40) | `def Contingent (e : Entity) : Prop` | {}  |
-| `NecessaryEntity` | def | [L37](formal/Logos/Modal.lean#L37) | `def NecessaryEntity (e : Entity) : Prop` | {}  |
-| `T7_necessaryReality` | theorem | [L69](formal/Logos/Modal.lean#L69) | `theorem T7_necessaryReality (n : Nat) (hnec : □atom n) : ∃ e : Entity, Necessary` | {Ground} → C18 |
-| `actualWorld` | def | [L34](formal/Logos/Modal.lean#L34) | `def actualWorld : World` | {}  |
-| `noNecessaryTruthIfAllContingent` | theorem | [L78](formal/Logos/Modal.lean#L78) | `theorem noNecessaryTruthIfAllContingent : (∀ e : Entity, Contingent e) → ∀ n : N` | {Ground} → C20 |
+| `AxGlobalGround` | theorem | [L413](formal/Logos/Modal.lean#L413) | `theorem AxGlobalGround (n : Nat) (hnec : □atom n) : ∃ e : Entity, ∀ w : World, E` | {Ground}  |
+| `Contingent` | def | [L44](formal/Logos/Modal.lean#L44) | `def Contingent (e : Entity) : Prop` | {}  |
+| `EntityInitiates` | def | [L285](formal/Logos/Modal.lean#L285) | `def EntityInitiates (e : Entity) : Prop` | {}  |
+| `EntityIsDerived` | def | [L293](formal/Logos/Modal.lean#L293) | `def EntityIsDerived (e : Entity) : Prop` | {}  |
+| `EntityMeans` | def | [L120](formal/Logos/Modal.lean#L120) | `def EntityMeans (e : Entity) (p : Prop) : Prop` | {}  |
+| `GroundEntity` | def | [L129](formal/Logos/Modal.lean#L129) | `def GroundEntity (s x : Entity) : Prop` | {}  |
+| `GroundInitiation` | def | [L320](formal/Logos/Modal.lean#L320) | `def GroundInitiation (s x : Entity) : Prop` | {}  |
+| `IsAtomEntity` | def | [L86](formal/Logos/Modal.lean#L86) | `def IsAtomEntity (e : Entity) : Prop` | {}  |
+| `IsSubjectEntity` | def | [L81](formal/Logos/Modal.lean#L81) | `def IsSubjectEntity (e : Entity) : Prop` | {}  |
+| `NecessaryEntity` | def | [L41](formal/Logos/Modal.lean#L41) | `def NecessaryEntity (e : Entity) : Prop` | {}  |
+| `T7_necessaryReality` | theorem | [L427](formal/Logos/Modal.lean#L427) | `theorem T7_necessaryReality (n : Nat) (hnec : □atom n) : ∃ e : Entity, Necessary` | {Ground} → C18 |
+| `UltimateGround` | def | [L268](formal/Logos/Modal.lean#L268) | `def UltimateGround (s : Entity) : Prop` | {}  |
+| `UltimateGroundInit` | def | [L389](formal/Logos/Modal.lean#L389) | `def UltimateGroundInit (u : Entity) : Prop` | {}  |
+| `actualWorld` | def | [L38](formal/Logos/Modal.lean#L38) | `def actualWorld : World` | {}  |
+| `atom_is_derived` | theorem | [L313](formal/Logos/Modal.lean#L313) | `theorem atom_is_derived (n : Nat) : EntityIsDerived (Entity.ofAtom n)` | {}  |
+| `contingent_atom` | theorem | [L52](formal/Logos/Modal.lean#L52) | `theorem contingent_atom (n : Nat) : Contingent (Entity.ofAtom n)` | {}  |
+| `contingent_entity_exists` | theorem | [L59](formal/Logos/Modal.lean#L59) | `theorem contingent_entity_exists : ∃ e : Entity, Contingent e` | {}  |
+| `contingent_ground` | theorem | [L259](formal/Logos/Modal.lean#L259) | `theorem contingent_ground (x : Entity) (hx : Contingent x) : GroundEntity (Entit` | {} → C78 |
+| `contingent_non_subject_exists` | theorem | [L63](formal/Logos/Modal.lean#L63) | `theorem contingent_non_subject_exists : ∃ e : Entity, Contingent e ∧ ¬ ∃ s : Sub` | {}  |
+| `emptyWorld` | def | [L91](formal/Logos/Modal.lean#L91) | `def emptyWorld : World` | {}  |
+| `emptyWorld_no_atom` | theorem | [L96](formal/Logos/Modal.lean#L96) | `theorem emptyWorld_no_atom (n : Nat) : ¬ ExistsAt emptyWorld (Entity.ofAtom n)` | {}  |
+| `entity_in_emptyWorld_is_subject` | theorem | [L103](formal/Logos/Modal.lean#L103) | `theorem entity_in_emptyWorld_is_subject (e : Entity) (he : ExistsAt emptyWorld e` | {}  |
+| `groundEntity_asymmetric` | theorem | [L144](formal/Logos/Modal.lean#L144) | `theorem groundEntity_asymmetric {s x : Entity} : GroundEntity s x → ¬ GroundEnti` | {}  |
+| `groundEntity_irreflexive` | theorem | [L137](formal/Logos/Modal.lean#L137) | `theorem groundEntity_irreflexive (x : Entity) : ¬ GroundEntity x x` | {}  |
+| `groundEntity_transitive` | theorem | [L152](formal/Logos/Modal.lean#L152) | `theorem groundEntity_transitive {a b c : Entity} : GroundEntity a b → GroundEnti` | {}  |
+| `groundInitiation_asymmetric` | theorem | [L333](formal/Logos/Modal.lean#L333) | `theorem groundInitiation_asymmetric {s x : Entity} : GroundInitiation s x → ¬ Gr` | {}  |
+| `groundInitiation_irreflexive` | theorem | [L326](formal/Logos/Modal.lean#L326) | `theorem groundInitiation_irreflexive (x : Entity) : ¬ GroundInitiation x x` | {}  |
+| `groundInitiation_transitive` | theorem | [L347](formal/Logos/Modal.lean#L347) | `theorem groundInitiation_transitive {a b c : Entity} : GroundInitiation a b → Gr` | {}  |
+| `ground_all_distinct_exists` | theorem | [L216](formal/Logos/Modal.lean#L216) | `theorem ground_all_distinct_exists : ∃ s : Entity, NecessaryEntity s ∧ ∀ x : Ent` | {}  |
+| `modal_rigidity_of_ground` | theorem | [L447](formal/Logos/Modal.lean#L447) | `theorem modal_rigidity_of_ground (n : Nat) (hnec : □atom n) : ∃ e : Entity, Nece` | {Ground}  |
+| `necessary_entity_exists` | theorem | [L165](formal/Logos/Modal.lean#L165) | `theorem necessary_entity_exists : ∃ s : Entity, NecessaryEntity s` | {}  |
+| `noNecessaryTruthIfAllContingent` | theorem | [L456](formal/Logos/Modal.lean#L456) | `theorem noNecessaryTruthIfAllContingent : (∀ e : Entity, Contingent e) → ∀ n : N` | {Ground} → C20 |
+| `not_subject_ofAtom` | theorem | [L47](formal/Logos/Modal.lean#L47) | `theorem not_subject_ofAtom (n : Nat) : ¬ ∃ s : Subject, EntityOf s = Entity.ofAt` | {}  |
+| `origin_grounds_all_distinct` | theorem | [L204](formal/Logos/Modal.lean#L204) | `theorem origin_grounds_all_distinct (x : Entity) (hne : x ≠ EntityOf (Sum.inl ()` | {}  |
+| `origin_grounds_all_distinct_init` | theorem | [L361](formal/Logos/Modal.lean#L361) | `theorem origin_grounds_all_distinct_init (x : Entity) (hne : x ≠ EntityOf (Sum.i` | {}  |
+| `origin_grounds_atom` | theorem | [L189](formal/Logos/Modal.lean#L189) | `theorem origin_grounds_atom (n : Nat) : GroundEntity (EntityOf (Sum.inl ())) (En` | {}  |
+| `origin_grounds_posited` | theorem | [L172](formal/Logos/Modal.lean#L172) | `theorem origin_grounds_posited (q : Prop) : GroundEntity (EntityOf (Sum.inl ()))` | {}  |
+| `origin_initiates` | theorem | [L301](formal/Logos/Modal.lean#L301) | `theorem origin_initiates : EntityInitiates (EntityOf (Sum.inl ()))` | {}  |
+| `origin_is_necessary` | theorem | [L75](formal/Logos/Modal.lean#L75) | `theorem origin_is_necessary : NecessaryEntity (EntityOf (Sum.inl ()))` | {} → C87 |
+| `origin_not_grounded` | theorem | [L243](formal/Logos/Modal.lean#L243) | `theorem origin_not_grounded : ¬ ∃ y : Entity, GroundEntity y (EntityOf (Sum.inl ` | {}  |
+| `origin_ungrounded` | theorem | [L234](formal/Logos/Modal.lean#L234) | `theorem origin_ungrounded (y : Entity) : ¬ GroundEntity y (EntityOf (Sum.inl ())` | {}  |
+| `origin_ungrounded_init` | theorem | [L379](formal/Logos/Modal.lean#L379) | `theorem origin_ungrounded_init (y : Entity) : ¬ GroundInitiation y (EntityOf (Su` | {}  |
+| `posited_is_derived` | theorem | [L307](formal/Logos/Modal.lean#L307) | `theorem posited_is_derived (q : Prop) : EntityIsDerived (EntityOf (Sum.inr q))` | {}  |
+| `prop_neq_not` | theorem | [L111](formal/Logos/Modal.lean#L111) | `theorem prop_neq_not (q : Prop) : q ≠ (q → False)` | {}  |
+| `subject_is_necessary` | theorem | [L68](formal/Logos/Modal.lean#L68) | `theorem subject_is_necessary (s : Subject) : NecessaryEntity (EntityOf s)` | {}  |
+| `substantive_grounding_witness` | theorem | [L224](formal/Logos/Modal.lean#L224) | `theorem substantive_grounding_witness : ∃ s x : Entity, s ≠ x ∧ NecessaryEntity ` | {}  |
+| `transcendental_quantifier_swap` | theorem | [L435](formal/Logos/Modal.lean#L435) | `theorem transcendental_quantifier_swap (n : Nat) (hnec : □atom n) : ∃ s : Subjec` | {Ground} → C88 |
+| `ultimateGroundInit_exists` | theorem | [L397](formal/Logos/Modal.lean#L397) | `theorem ultimateGroundInit_exists : ∃ u : Entity, UltimateGroundInit u` | {} → C89 |
+| `ultimateGround_exists` | theorem | [L278](formal/Logos/Modal.lean#L278) | `theorem ultimateGround_exists : ∃ s : Entity, UltimateGround s` | {} → C79 |
+| `ungrounded_necessary_entity_exists` | theorem | [L250](formal/Logos/Modal.lean#L250) | `theorem ungrounded_necessary_entity_exists : ∃ s : Entity, NecessaryEntity s ∧ ¬` | {}  |
 
 ### `Logos.Necessity`
 
@@ -819,12 +945,18 @@ Detalhe do kernel:
 | `Correct` | def | [L29](formal/Logos/Order.lean#L29) | `def Correct (s : Subject) (p : Prop) : Prop` | {}  |
 | `Fallible` | def | [L74](formal/Logos/Order.lean#L74) | `def Fallible (_s : Subject) (p : Prop) : Prop` | {}  |
 | `Incorrect` | def | [L34](formal/Logos/Order.lean#L34) | `def Incorrect (s : Subject) (p : Prop) : Prop` | {}  |
+| `NoAct` | def | [L151](formal/Logos/Order.lean#L151) | `def NoAct : Prop` | {}  |
 | `T6_fallibility` | theorem | [L90](formal/Logos/Order.lean#L90) | `theorem T6_fallibility : ¬ (∀ s : Subject, ∀ p : Prop, Fallible s p → T p)` | {} → C28 |
 | `T6_truthTranscendsWill` | theorem | [L99](formal/Logos/Order.lean#L99) | `theorem T6_truthTranscendsWill : ¬ (∀ s : Subject, ∀ p : Prop, Fallible s p ↔ T ` | {} → C29 |
 | `consequence_preserves_truth` | theorem | [L146](formal/Logos/Order.lean#L146) | `theorem consequence_preserves_truth {p₁ p₂ q : Prop} (himp : p₁ → p₂ → q) (h1 : ` | {} → C31 |
 | `correctness_distinct` | theorem | [L107](formal/Logos/Order.lean#L107) | `theorem correctness_distinct : ¬ (∀ s : Subject, ∀ p : Prop, Correct s p ↔ Incor` | {CL} → C30 |
 | `fallible_false` | theorem | [L82](formal/Logos/Order.lean#L82) | `theorem fallible_false : ∃ s : Subject, ∃ p : Prop, Fallible s p ∧ IsFalse p` | {}  |
 | `judge_commits` | theorem | [L123](formal/Logos/Order.lean#L123) | `theorem judge_commits : ∃ s : Subject, ∃ p q : Prop, A s p ∧ (Correct s p ∨ Inco` | {CL} → C55 |
+| `judgment_implies_act` | theorem | [L169](formal/Logos/Order.lean#L169) | `theorem judgment_implies_act {s : Subject} {p : Prop} (h : Correct s p ∨ Incorre` | {}  |
+| `judgment_implies_cogito` | theorem | [L181](formal/Logos/Order.lean#L181) | `theorem judgment_implies_cogito (h : (∃ s : Subject, ∃ p : Prop, Correct s p) ∨ ` | {}  |
+| `judgment_of_no_act_is_incorrect` | theorem | [L162](formal/Logos/Order.lean#L162) | `theorem judgment_of_no_act_is_incorrect (s : Subject) (h : Correct s NoAct ∨ Inc` | {}  |
+| `judgment_of_no_act_proves_act` | theorem | [L176](formal/Logos/Order.lean#L176) | `theorem judgment_of_no_act_proves_act (s : Subject) (h : Correct s NoAct ∨ Incor` | {} → C84 |
+| `no_correct_judgment_of_no_act` | theorem | [L155](formal/Logos/Order.lean#L155) | `theorem no_correct_judgment_of_no_act (s : Subject) : ¬ Correct s NoAct` | {} → C83 |
 | `rightDistinctWrong_implies_meaning` | theorem | [L62](formal/Logos/Order.lean#L62) | `theorem rightDistinctWrong_implies_meaning (h : (∃ s : Subject, ∃ p : Prop, Corr` | {}  |
 | `rightWrongDistinction_implies_meaning` | theorem | [L134](formal/Logos/Order.lean#L134) | `theorem rightWrongDistinction_implies_meaning (_h : ¬ Logos.Core.N_T ∧ ¬ Logos.C` | {CL}  |
 | `rightWrong_implies_meaning` | theorem | [L46](formal/Logos/Order.lean#L46) | `theorem rightWrong_implies_meaning (h : (∃ s : Subject, ∃ p : Prop, Correct s p)` | {} → C62 |
@@ -849,15 +981,15 @@ Detalhe do kernel:
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `EntityOf` | def | [L43](formal/Logos/Plurality.lean#L43) | `def EntityOf : Subject → Entity` | {}  |
-| `NecessarySubject` | def | [L46](formal/Logos/Plurality.lean#L46) | `def NecessarySubject (s : Subject) : Prop` | {}  |
-| `T12_directedPair` | theorem | [L109](formal/Logos/Plurality.lean#L109) | `theorem T12_directedPair : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ ` | {} → C47 |
-| `T12_twoPersons` | theorem | [L54](formal/Logos/Plurality.lean#L54) | `theorem T12_twoPersons : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` | {} → C40 |
-| `T1_subjectExists` | theorem | [L79](formal/Logos/Plurality.lean#L79) | `theorem T1_subjectExists : ∃ s : Subject, Logos.Agency.Exists s` | {} → C21 |
-| `T4_agentExists` | theorem | [L87](formal/Logos/Plurality.lean#L87) | `theorem T4_agentExists : ∃ s : Subject, Logos.Agency.Exists s ∧ Logos.Agency.Age` | {} → C23 |
-| `T5_personExists` | theorem | [L97](formal/Logos/Plurality.lean#L97) | `theorem T5_personExists : ∃ s : Subject, Person s` | {} → C24 |
-| `cogito_from_T12` | theorem | [L72](formal/Logos/Plurality.lean#L72) | `theorem cogito_from_T12 : ∃ s : Subject, ∃ p : Prop, Logos.Agency.A s p` | {} → C48 |
-| `notAlone` | theorem | [L60](formal/Logos/Plurality.lean#L60) | `theorem notAlone : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` | {}  |
+| `EntityOf` | def | [L41](formal/Logos/Plurality.lean#L41) | `def EntityOf : Subject → Entity` | {}  |
+| `NecessarySubject` | def | [L44](formal/Logos/Plurality.lean#L44) | `def NecessarySubject (s : Subject) : Prop` | {}  |
+| `T12_directedPair` | theorem | [L107](formal/Logos/Plurality.lean#L107) | `theorem T12_directedPair : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ ` | {} → C47 |
+| `T12_twoPersons` | theorem | [L52](formal/Logos/Plurality.lean#L52) | `theorem T12_twoPersons : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` | {} → C40 |
+| `T1_subjectExists` | theorem | [L77](formal/Logos/Plurality.lean#L77) | `theorem T1_subjectExists : ∃ s : Subject, Logos.Agency.Exists s` | {} → C21 |
+| `T4_agentExists` | theorem | [L85](formal/Logos/Plurality.lean#L85) | `theorem T4_agentExists : ∃ s : Subject, Logos.Agency.Exists s ∧ Logos.Agency.Age` | {} → C23 |
+| `T5_personExists` | theorem | [L95](formal/Logos/Plurality.lean#L95) | `theorem T5_personExists : ∃ s : Subject, Person s` | {} → C24 |
+| `cogito_from_T12` | theorem | [L70](formal/Logos/Plurality.lean#L70) | `theorem cogito_from_T12 : ∃ s : Subject, ∃ p : Prop, Logos.Agency.A s p` | {} → C48 |
+| `notAlone` | theorem | [L58](formal/Logos/Plurality.lean#L58) | `theorem notAlone : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` | {}  |
 
 ### `Logos.Semantics`
 
@@ -883,40 +1015,42 @@ Detalhe do kernel:
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `Entity` | def | [L40](formal/Logos/Truthmaker.lean#L40) | `def Entity : Type` | {}  |
-| `ExistsAt` | def | [L57](formal/Logos/Truthmaker.lean#L57) | `def ExistsAt (_w : World) (s : Subject) : Prop` | {} → Q7.2 |
-| `Ground` | axiom | [L47](formal/Logos/Truthmaker.lean#L47) | `axiom Ground : Subject → Form → Prop` | {Ground}  |
-| `NecessarilyFalse` | def | [L74](formal/Logos/Truthmaker.lean#L74) | `def ¬◇(φ : Form) : Prop` | {Ground}  |
-| `NecessarilyTrue` | def | [L71](formal/Logos/Truthmaker.lean#L71) | `def □(φ : Form) : Prop` | {Ground}  |
-| `TrueAt` | def | [L63](formal/Logos/Truthmaker.lean#L63) | `def TrueAt (w : World) : Form → Prop | atom n => ∃ e : Entity, ExistsAt w e ∧ Gr` | {Ground}  |
-| `groundPrinciple_atom` | theorem | [L86](formal/Logos/Truthmaker.lean#L86) | `theorem groundPrinciple_atom (w : World) (n : Nat) : w ⊨ atom n → ∃ e : Entity, ` | {Ground} → C15 |
-| `lawExcludedMiddle` | theorem | [L128](formal/Logos/Truthmaker.lean#L128) | `theorem lawExcludedMiddle (φ : Form) : □(φ ∨ ¬φ)` | {Ground, CL} → C16 |
-| `noGround_selfRefutes` | theorem | [L99](formal/Logos/Truthmaker.lean#L99) | `theorem noGround_selfRefutes : ¬ (∃ (w : World) (n : Nat), w ⊨ atom n ∧ ¬ (∃ e :` | {Ground} → C60 |
-| `nonContradiction` | theorem | [L136](formal/Logos/Truthmaker.lean#L136) | `theorem nonContradiction (φ : Form) : ¬◇(φ ∧ ¬φ)` | {Ground} → C17 |
-| `sat_ground_and` | theorem | [L113](formal/Logos/Truthmaker.lean#L113) | `theorem sat_ground_and {w : World} {φ ψ : Form} : w ⊨ (φ ∧ ψ) ↔ w ⊨ φ ∧ w ⊨ ψ` | {Ground}  |
-| `sat_ground_imp` | theorem | [L121](formal/Logos/Truthmaker.lean#L121) | `theorem sat_ground_imp {w : World} {φ ψ : Form} : w ⊨ (φ → ψ) ↔ (w ⊨ φ → w ⊨ ψ)` | {Ground}  |
-| `sat_ground_not` | theorem | [L117](formal/Logos/Truthmaker.lean#L117) | `theorem sat_ground_not {w : World} {φ : Form} : w ⊨ ¬φ ↔ ¬ w ⊨ φ` | {Ground}  |
-| `sat_ground_or` | theorem | [L109](formal/Logos/Truthmaker.lean#L109) | `theorem sat_ground_or {w : World} {φ ψ : Form} : w ⊨ (φ ∨ ψ) ↔ w ⊨ φ ∨ w ⊨ ψ` | {Ground}  |
+| `Entity` | inductive | [L41](formal/Logos/Truthmaker.lean#L41) | `inductive Entity : Type` | —  |
+| `EntityOf` | def | [L46](formal/Logos/Truthmaker.lean#L46) | `def EntityOf (s : Subject) : Entity` | {}  |
+| `ExistsAt` | def | [L62](formal/Logos/Truthmaker.lean#L62) | `def ExistsAt (w : World) : Entity → Prop | Entity.ofSubject _ => True` | {} → Q7.2 |
+| `Ground` | axiom | [L55](formal/Logos/Truthmaker.lean#L55) | `axiom Ground : Entity → Form → Prop` | {Ground}  |
+| `NecessarilyFalse` | def | [L81](formal/Logos/Truthmaker.lean#L81) | `def ¬◇(φ : Form) : Prop` | {Ground}  |
+| `NecessarilyTrue` | def | [L78](formal/Logos/Truthmaker.lean#L78) | `def □(φ : Form) : Prop` | {Ground}  |
+| `TrueAt` | def | [L70](formal/Logos/Truthmaker.lean#L70) | `def TrueAt (w : World) : Form → Prop | atom n => ∃ e : Entity, ExistsAt w e ∧ Gr` | {Ground}  |
+| `groundPrinciple_atom` | theorem | [L93](formal/Logos/Truthmaker.lean#L93) | `theorem groundPrinciple_atom (w : World) (n : Nat) : w ⊨ atom n → ∃ e : Entity, ` | {Ground} → C15 |
+| `lawExcludedMiddle` | theorem | [L135](formal/Logos/Truthmaker.lean#L135) | `theorem lawExcludedMiddle (φ : Form) : □(φ ∨ ¬φ)` | {Ground, CL} → C16 |
+| `noGround_selfRefutes` | theorem | [L106](formal/Logos/Truthmaker.lean#L106) | `theorem noGround_selfRefutes : ¬ (∃ (w : World) (n : Nat), w ⊨ atom n ∧ ¬ (∃ e :` | {Ground} → C60 |
+| `nonContradiction` | theorem | [L143](formal/Logos/Truthmaker.lean#L143) | `theorem nonContradiction (φ : Form) : ¬◇(φ ∧ ¬φ)` | {Ground} → C17 |
+| `sat_ground_and` | theorem | [L120](formal/Logos/Truthmaker.lean#L120) | `theorem sat_ground_and {w : World} {φ ψ : Form} : w ⊨ (φ ∧ ψ) ↔ w ⊨ φ ∧ w ⊨ ψ` | {Ground}  |
+| `sat_ground_imp` | theorem | [L128](formal/Logos/Truthmaker.lean#L128) | `theorem sat_ground_imp {w : World} {φ ψ : Form} : w ⊨ (φ → ψ) ↔ (w ⊨ φ → w ⊨ ψ)` | {Ground}  |
+| `sat_ground_not` | theorem | [L124](formal/Logos/Truthmaker.lean#L124) | `theorem sat_ground_not {w : World} {φ : Form} : w ⊨ ¬φ ↔ ¬ w ⊨ φ` | {Ground}  |
+| `sat_ground_or` | theorem | [L116](formal/Logos/Truthmaker.lean#L116) | `theorem sat_ground_or {w : World} {φ ψ : Form} : w ⊨ (φ ∨ ψ) ↔ w ⊨ φ ∨ w ⊨ ψ` | {Ground}  |
 
 ### `Logos.Value`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
 | `Affects` | def | [L53](formal/Logos/Value.lean#L53) | `def Affects (s t : Subject) : Prop` | {}  |
-| `Alone` | def | [L77](formal/Logos/Value.lean#L77) | `def Alone (s : Subject) : Prop` | {}  |
-| `AxPersonsAffect` | theorem | [L146](formal/Logos/Value.lean#L146) | `theorem AxPersonsAffect (s₁ s₂ : Subject) (_hs₁ : Person s₁) (_hs₂ : Person s₂) ` | {}  |
-| `Harms` | def | [L61](formal/Logos/Value.lean#L61) | `def Harms (s t : Subject) : Prop` | {}  |
-| `Helps` | def | [L57](formal/Logos/Value.lean#L57) | `def Helps (s t : Subject) : Prop` | {}  |
-| `OtherAffects` | def | [L74](formal/Logos/Value.lean#L74) | `def OtherAffects (s : Subject) : Prop` | {}  |
-| `aloneExcluded` | theorem | [L135](formal/Logos/Value.lean#L135) | `theorem aloneExcluded : ¬ ∃ s : Subject, Person s ∧ Alone s` | {} → C74 |
-| `alone_no_other_affects` | theorem | [L80](formal/Logos/Value.lean#L80) | `theorem alone_no_other_affects {s : Subject} (ha : Alone s) : ¬ OtherAffects s` | {}  |
-| `alone_no_other_help_harm` | theorem | [L88](formal/Logos/Value.lean#L88) | `theorem alone_no_other_help_harm {s : Subject} (ha : Alone s) : (¬ ∃ t : Subject` | {} → C56 |
-| `harm_affects` | theorem | [L69](formal/Logos/Value.lean#L69) | `theorem harm_affects : ∀ {s t : Subject}, Harms s t → Affects s t` | {}  |
-| `help_affects` | theorem | [L64](formal/Logos/Value.lean#L64) | `theorem help_affects : ∀ {s t : Subject}, Helps s t → Affects s t` | {}  |
-| `neverAlone` | theorem | [L125](formal/Logos/Value.lean#L125) | `theorem neverAlone (s : Subject) : ¬ Alone s` | {}  |
-| `otherSubject` | def | [L104](formal/Logos/Value.lean#L104) | `def otherSubject (s : Subject) : Subject` | {}  |
-| `otherSubject_ne` | theorem | [L113](formal/Logos/Value.lean#L113) | `theorem otherSubject_ne (s : Subject) : otherSubject s ≠ s` | {}  |
-| `valueInterpersonal_of_split` | theorem | [L156](formal/Logos/Value.lean#L156) | `theorem valueInterpersonal_of_split : (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) → ∃ ` | {} → C46 |
+| `Alone` | def | [L88](formal/Logos/Value.lean#L88) | `def Alone (s : Subject) : Prop` | {}  |
+| `AxPersonsAffect` | theorem | [L157](formal/Logos/Value.lean#L157) | `theorem AxPersonsAffect (s₁ s₂ : Subject) (_hs₁ : Person s₁) (_hs₂ : Person s₂) ` | {}  |
+| `Harms` | def | [L65](formal/Logos/Value.lean#L65) | `def Harms (_s _t : Subject) : Prop` | {}  |
+| `Helps` | def | [L59](formal/Logos/Value.lean#L59) | `def Helps (s t : Subject) : Prop` | {}  |
+| `OtherAffects` | def | [L85](formal/Logos/Value.lean#L85) | `def OtherAffects (s : Subject) : Prop` | {}  |
+| `aloneExcluded` | theorem | [L146](formal/Logos/Value.lean#L146) | `theorem aloneExcluded : ¬ ∃ s : Subject, Person s ∧ Alone s` | {} → C74 |
+| `alone_no_other_affects` | theorem | [L91](formal/Logos/Value.lean#L91) | `theorem alone_no_other_affects {s : Subject} (ha : Alone s) : ¬ OtherAffects s` | {}  |
+| `alone_no_other_help_harm` | theorem | [L99](formal/Logos/Value.lean#L99) | `theorem alone_no_other_help_harm {s : Subject} (ha : Alone s) : (¬ ∃ t : Subject` | {} → C56 |
+| `harm_affects` | theorem | [L73](formal/Logos/Value.lean#L73) | `theorem harm_affects : ∀ {s t : Subject}, Harms s t → Affects s t` | {}  |
+| `help_affects` | theorem | [L68](formal/Logos/Value.lean#L68) | `theorem help_affects : ∀ {s t : Subject}, Helps s t → Affects s t` | {}  |
+| `help_not_harm` | theorem | [L80](formal/Logos/Value.lean#L80) | `theorem help_not_harm : ∀ {s t : Subject}, Helps s t → ¬ Harms s t` | {} → C85 |
+| `neverAlone` | theorem | [L136](formal/Logos/Value.lean#L136) | `theorem neverAlone (s : Subject) : ¬ Alone s` | {}  |
+| `otherSubject` | def | [L115](formal/Logos/Value.lean#L115) | `def otherSubject (s : Subject) : Subject` | {}  |
+| `otherSubject_ne` | theorem | [L124](formal/Logos/Value.lean#L124) | `theorem otherSubject_ne (s : Subject) : otherSubject s ≠ s` | {}  |
+| `valueInterpersonal_of_split` | theorem | [L167](formal/Logos/Value.lean#L167) | `theorem valueInterpersonal_of_split : (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) → ∃ ` | {} → C46 |
 
 </details>
 

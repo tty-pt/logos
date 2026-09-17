@@ -97,33 +97,46 @@
  "Logos.GroundPerson.GroundProp": [
   "Logos.GroundPerson.GroundProp"
  ],
+ "Logos.GroundPerson.IsInitiatingPersonalEntity": [],
  "Logos.GroundPerson.IsPresentPersonalFeature": [],
  "Logos.GroundPerson.Personal": [
   "Logos.GroundPerson.GroundProp"
  ],
+ "Logos.GroundPerson.PersonalUltimateGround": [],
  "Logos.GroundPerson.Realizes": [
   "Logos.GroundPerson.GroundProp"
  ],
+ "Logos.GroundPerson.StandsInBenevolentLove": [],
  "Logos.GroundPerson.T8_personalGround": [
   "Logos.GroundPerson.AxPersonalGround",
   "Logos.GroundPerson.GroundProp"
  ],
+ "Logos.GroundPerson.necessary_initiating_person_exists": [],
  "Logos.GroundPerson.necessary_truth_has_necessary_grounder": [
   "Logos.Truthmaker.Ground"
  ],
+ "Logos.GroundPerson.personal_ultimate_ground_exists": [],
  "Logos.GroundPerson.present_feature_is_grounded": [
   "Logos.GroundPerson.GroundPrincipleProp",
   "Logos.GroundPerson.GroundProp"
  ],
  "Logos.Initiation.Branches": [],
  "Logos.Initiation.Cogito_Init": [],
+ "Logos.Initiation.InitiatingPerson": [],
  "Logos.Initiation.IsTransfer": [],
  "Logos.Initiation.Moves": [],
  "Logos.Initiation.Originates": [],
  "Logos.Initiation.branches_not_transfer": [],
  "Logos.Initiation.noInitiation_selfRefutes": [],
+ "Logos.Initiation.no_content_is_initiating_person": [],
+ "Logos.Initiation.origin_branches": [],
+ "Logos.Initiation.origin_is_initiating_person": [],
+ "Logos.Initiation.origin_not_transfer": [],
  "Logos.Initiation.originates_not_transfer": [],
  "Logos.Initiation.person_iff_originates": [],
+ "Logos.Initiation.posited_is_transfer": [],
+ "Logos.Initiation.posited_not_branch": [],
+ "Logos.Initiation.posited_not_initiating_person": [],
  "Logos.Love.AxPersonStability": [],
  "Logos.Love.Lovable": [],
  "Logos.Love.Loves": [],
@@ -134,19 +147,71 @@
  "Logos.Love.T14_square": [],
  "Logos.Love.T14_world": [],
  "Logos.Love.canonicalNecessaryPerson": [],
+ "Logos.Love.love_affects": [],
+ "Logos.Love.love_helps": [],
+ "Logos.Love.love_not_harms": [],
+ "Logos.Love.loves_of_helps": [],
  "Logos.Love.necessaryPersonExists": [],
  "Logos.Modal.AxGlobalGround": [
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Modal.Contingent": [],
+ "Logos.Modal.EntityInitiates": [],
+ "Logos.Modal.EntityIsDerived": [],
+ "Logos.Modal.EntityMeans": [],
+ "Logos.Modal.GroundEntity": [],
+ "Logos.Modal.GroundInitiation": [],
+ "Logos.Modal.IsAtomEntity": [],
+ "Logos.Modal.IsSubjectEntity": [],
  "Logos.Modal.NecessaryEntity": [],
  "Logos.Modal.T7_necessaryReality": [
   "Logos.Truthmaker.Ground"
  ],
+ "Logos.Modal.UltimateGround": [],
+ "Logos.Modal.UltimateGroundInit": [],
  "Logos.Modal.actualWorld": [],
+ "Logos.Modal.atom_is_derived": [],
+ "Logos.Modal.contingent_atom": [],
+ "Logos.Modal.contingent_entity_exists": [],
+ "Logos.Modal.contingent_ground": [],
+ "Logos.Modal.contingent_non_subject_exists": [],
+ "Logos.Modal.emptyWorld": [],
+ "Logos.Modal.emptyWorld_no_atom": [],
+ "Logos.Modal.entity_in_emptyWorld_is_subject": [],
+ "Logos.Modal.groundEntity_asymmetric": [],
+ "Logos.Modal.groundEntity_irreflexive": [],
+ "Logos.Modal.groundEntity_transitive": [],
+ "Logos.Modal.groundInitiation_asymmetric": [],
+ "Logos.Modal.groundInitiation_irreflexive": [],
+ "Logos.Modal.groundInitiation_transitive": [],
+ "Logos.Modal.ground_all_distinct_exists": [],
+ "Logos.Modal.modal_rigidity_of_ground": [
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Modal.necessary_entity_exists": [],
  "Logos.Modal.noNecessaryTruthIfAllContingent": [
   "Logos.Truthmaker.Ground"
  ],
+ "Logos.Modal.not_subject_ofAtom": [],
+ "Logos.Modal.origin_grounds_all_distinct": [],
+ "Logos.Modal.origin_grounds_all_distinct_init": [],
+ "Logos.Modal.origin_grounds_atom": [],
+ "Logos.Modal.origin_grounds_posited": [],
+ "Logos.Modal.origin_initiates": [],
+ "Logos.Modal.origin_is_necessary": [],
+ "Logos.Modal.origin_not_grounded": [],
+ "Logos.Modal.origin_ungrounded": [],
+ "Logos.Modal.origin_ungrounded_init": [],
+ "Logos.Modal.posited_is_derived": [],
+ "Logos.Modal.prop_neq_not": [],
+ "Logos.Modal.subject_is_necessary": [],
+ "Logos.Modal.substantive_grounding_witness": [],
+ "Logos.Modal.transcendental_quantifier_swap": [
+  "Logos.Truthmaker.Ground"
+ ],
+ "Logos.Modal.ultimateGroundInit_exists": [],
+ "Logos.Modal.ultimateGround_exists": [],
+ "Logos.Modal.ungrounded_necessary_entity_exists": [],
  "Logos.Necessity.Dia": [],
  "Logos.Necessity.Necessity": [],
  "Logos.Necessity.NecessityPH": [],
@@ -166,6 +231,7 @@
  "Logos.Order.Correct": [],
  "Logos.Order.Fallible": [],
  "Logos.Order.Incorrect": [],
+ "Logos.Order.NoAct": [],
  "Logos.Order.T6_fallibility": [],
  "Logos.Order.T6_truthTranscendsWill": [],
  "Logos.Order.consequence_preserves_truth": [],
@@ -180,6 +246,11 @@
   "Classical.choice",
   "Quot.sound"
  ],
+ "Logos.Order.judgment_implies_act": [],
+ "Logos.Order.judgment_implies_cogito": [],
+ "Logos.Order.judgment_of_no_act_is_incorrect": [],
+ "Logos.Order.judgment_of_no_act_proves_act": [],
+ "Logos.Order.no_correct_judgment_of_no_act": [],
  "Logos.Order.rightDistinctWrong_implies_meaning": [],
  "Logos.Order.rightWrongDistinction_implies_meaning": [
   "propext",
@@ -300,7 +371,28 @@
  "Logos.Semantics.sat_imp": [],
  "Logos.Semantics.sat_not": [],
  "Logos.Semantics.sat_or": [],
- "Logos.Truthmaker.Entity": [],
+ "Logos.Truthmaker.Entity.casesOn": [],
+ "Logos.Truthmaker.Entity.ctorElim": [],
+ "Logos.Truthmaker.Entity.ctorElimType": [],
+ "Logos.Truthmaker.Entity.ctorIdx": [],
+ "Logos.Truthmaker.Entity.noConfusion": [],
+ "Logos.Truthmaker.Entity.noConfusionType": [],
+ "Logos.Truthmaker.Entity.ofAtom.elim": [],
+ "Logos.Truthmaker.Entity.ofAtom.inj": [],
+ "Logos.Truthmaker.Entity.ofAtom.injEq": [
+  "propext"
+ ],
+ "Logos.Truthmaker.Entity.ofAtom.noConfusion": [],
+ "Logos.Truthmaker.Entity.ofAtom.sizeOf_spec": [],
+ "Logos.Truthmaker.Entity.ofSubject.elim": [],
+ "Logos.Truthmaker.Entity.ofSubject.inj": [],
+ "Logos.Truthmaker.Entity.ofSubject.injEq": [
+  "propext"
+ ],
+ "Logos.Truthmaker.Entity.ofSubject.noConfusion": [],
+ "Logos.Truthmaker.Entity.ofSubject.sizeOf_spec": [],
+ "Logos.Truthmaker.Entity.recOn": [],
+ "Logos.Truthmaker.EntityOf": [],
  "Logos.Truthmaker.ExistsAt": [],
  "Logos.Truthmaker.Ground": [
   "Logos.Truthmaker.Ground"
@@ -317,6 +409,7 @@
  "Logos.Truthmaker.groundPrinciple_atom": [
   "Logos.Truthmaker.Ground"
  ],
+ "Logos.Truthmaker.instCoeSubjectEntity": [],
  "Logos.Truthmaker.lawExcludedMiddle": [
   "propext",
   "Classical.choice",
@@ -352,6 +445,7 @@
  "Logos.Value.alone_no_other_help_harm": [],
  "Logos.Value.harm_affects": [],
  "Logos.Value.help_affects": [],
+ "Logos.Value.help_not_harm": [],
  "Logos.Value.neverAlone": [],
  "Logos.Value.otherSubject": [],
  "Logos.Value.otherSubject_ne": [],

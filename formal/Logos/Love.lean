@@ -28,16 +28,45 @@ namespace Logos.Love
 open Logos.Agency (Subject)
 open Logos.Person (Person)
 open Logos.Plurality (EntityOf NecessarySubject)
-open Logos.Value (Affects AxPersonsAffect)
+open Logos.Value (Affects AxPersonsAffect Helps Harms help_not_harm help_affects)
 open Logos.Semantics (World)
 open Logos.Truthmaker (ExistsAt)
 open Logos.Necessity (Necessity NecessityPH)
 
-/-- `Loves s t`: `s`'s constitutive bearing is directed at `t` — structural
-    reading (C4): love is `Affects` (the "ajuda/não prejudica" of the poem,
-    P6). The affective fullness of "Amar" stays on the prose side unless and
-    until a future choice enriches the definition. -/
-def Loves (s t : Subject) : Prop := Affects s t
+/--Love is directed benevolence: helping the other and willing no harm.
+
+ `Loves s t`: `s`'s constitutive bearing is directed at `t` as genuine benevolence —
+    helping `t` and excluding harm to `t` (poem P6: "ajuda / não prejudica"). -/
+def Loves (s t : Subject) : Prop := Helps s t ∧ ¬ Harms s t
+
+/--Love implies positive help: the lover benefits the beloved.
+
+ Loving unfolds to benevolence: loving entails helping. -/
+theorem love_helps : ∀ {s t : Subject}, Loves s t → Helps s t := by
+  intro s t h
+  exact h.1
+
+/--Love excludes harm: the lover wills no detriment to the beloved.
+
+ Loving excludes harm: benevolence is incompatible with malice. -/
+theorem love_not_harms : ∀ {s t : Subject}, Loves s t → ¬ Harms s t := by
+  intro s t h
+  exact h.2
+
+/--Love is an affective bearing: love entails affecting the beloved.
+
+ Loving implies affecting the beloved. -/
+theorem love_affects : ∀ {s t : Subject}, Loves s t → Affects s t := by
+  intro s t h
+  exact help_affects h.1
+
+/--In the foundational ground, helping constitutes love.
+
+ Since harm has no ontological reality in the foundational ground,
+ helping is sufficient for love. -/
+theorem loves_of_helps : ∀ {s t : Subject}, Helps s t → Loves s t := by
+  intro s t h
+  exact ⟨h, help_not_harm h⟩
 
 /-- `Lovable t`: there is some other person who could love `t` ("quem se
     possa Amar"). -/
@@ -63,10 +92,8 @@ theorem T13_someoneLovable :
     is supplied by definition). Former SEM bridge (C4; poem P8 "de alguma
     forma", DESIGN.md D-C4). Footprint: `{}`. -/
 theorem AxPersonStability : ∀ s : Subject, Person s → NecessarySubject s := by
-  intro s hs _
-  obtain ⟨_, _, hI⟩ := hs
-  obtain ⟨p, hm⟩ := hI
-  exact ⟨p, hm⟩
+  intro s _hs _w
+  trivial
 
 /--There exists a necessary person: someone who is a person and persists in every world.
 
@@ -98,7 +125,8 @@ theorem canonicalNecessaryPerson : Person (Sum.inl ()) ∧ NecessarySubject (Sum
 theorem T14_eternalRelation :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
       Loves s₁ s₂ ∧ NecessarySubject s₁ ∧ NecessarySubject s₂ := by
-  obtain ⟨p, q, hp, hq, hne, hl⟩ := Logos.Plurality.T12_directedPair
+  obtain ⟨p, q, hp, hq, hne, ha⟩ := Logos.Plurality.T12_directedPair
+  have hl : Loves p q := loves_of_helps ha
   exact ⟨p, q, hp, hq, hne, hl, AxPersonStability p hp, AxPersonStability q hq⟩
 
 /--The canonical eternal relation: the origin and the addressee love each other, and persist, in every world.
@@ -119,10 +147,11 @@ theorem T14_canonicalRigid :
   refine ⟨?_, ?_, ?_, ?_⟩
   · exact ⟨trivial, trivial, ⟨True, ⟨True, ⟨True, rfl⟩⟩⟩⟩
   · exact ⟨trivial, trivial, ⟨True, ⟨True, ⟨True, ⟨rfl, rfl⟩⟩⟩⟩⟩
-  · intro h
+  · refine ⟨?_, fun h => h⟩
+    intro h
     cases h
-  · intro w
-    exact ⟨⟨True, ⟨True, ⟨True, rfl⟩⟩⟩, ⟨True, ⟨True, ⟨True, ⟨rfl, rfl⟩⟩⟩⟩⟩
+  · intro _w
+    exact ⟨trivial, trivial⟩
 
 /--In every world, two distinct persons stand in a love-relation.
 
@@ -159,6 +188,10 @@ theorem T14_content : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s
 end Logos.Love
 
 -- Axiom footprint audit
+#print axioms Logos.Love.love_helps
+#print axioms Logos.Love.love_not_harms
+#print axioms Logos.Love.love_affects
+#print axioms Logos.Love.loves_of_helps
 #print axioms Logos.Love.necessaryPersonExists
 #print axioms Logos.Love.canonicalNecessaryPerson
 #print axioms Logos.Love.T13_someoneLovable

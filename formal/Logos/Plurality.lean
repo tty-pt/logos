@@ -37,10 +37,8 @@ open Logos.Truthmaker (Entity ExistsAt)
 open Logos.Semantics (World)
 open Logos.Value (Affects AxPersonsAffect)
 
-/-- Q2 bridge, now definitional (C2, 2026-09-15): since `Entity := Subject`
-    (Truthmaker), every subject *is already* an entity — first-person acts and
-    third-person realities identify the same thing. `EntityOf` is the identity. -/
-def EntityOf : Subject → Entity := fun s => s
+/-- Q2 bridge: canonical embedding of subjects into the general entity type. -/
+def EntityOf : Subject → Entity := Logos.Truthmaker.EntityOf
 
 /-- A subject is necessary iff its entity-correlate exists in every world. -/
 def NecessarySubject (s : Subject) : Prop := ∀ w : World, ExistsAt w (EntityOf s)

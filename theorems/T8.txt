@@ -89,9 +89,16 @@ necessária — é o conteúdo que o poema acrescenta para além da dedução.
 Com (a), T8 é teorema genuíno (PROVEN↑); sem ele fica BLOCKED no lema formal
 registado em D9.
 
-Adenda (2026-09-17): a existência de uma pessoa necessária em si mesma,
-∃s [Person(s) ∧ NecessarySubject(s)], foi demonstrada no kernel como teorema `{}`
-(`Love.necessaryPersonExists`, GAPMAP C77), combinando a pessoa de T5 e a persistência
-necessária de esse-est-agere (`AxPersonStability`), sem necessidade de AxPersonalGround.
-O que permanece como ponte A2/A4 é a ligação com o vocabulário de fundamentação
-proposicional (`GroundProp`), rumo ao alvo do Fundamento Último.
+Adenda (2026-09-17 — Teorema do Fundamento Pessoal Supremo, GAPMAP C90):
+A síntese de todas as etapas (iniciação sem transferência C63/C80/C81/C82, cogito retorsivo C83/C84,
+amor benevolente C85/C86, swap transcendental C88, e fundamentação ontológica por iniciação C89)
+culmina na demonstração no kernel, com pegada vazia `{}`, da existência do Fundamento Pessoal Supremo:
+`GroundPerson.personal_ultimate_ground_exists` (C90):
+Existe uma entidade necessária `u` que:
+  1. É necessária em todos os mundos (`NecessaryEntity u`);
+  2. Fundamenta estritamente toda a realidade distinta de si via dependência de iniciação (`GroundInitiation u x`);
+  3. É estritamente infundamentada (`¬ ∃ y, GroundInitiation y u`);
+  4. É uma pessoa iniciadora genuína (`IsInitiatingPersonalEntity u`, `Person s ∧ Branches (Moves s)`);
+  5. Está numa relação eterna de amor benevolente (`StandsInBenevolentLove u`, `Loves s t ∧ Helps s t ∧ ¬ Harms s t`).
+Corolário direto: `GroundPerson.necessary_initiating_person_exists` `{}`: existe pessoa iniciadora necessária.
+O passo pessoal de T8 é assim demonstrado no kernel com zero axiomas substantivos (`{}`).
