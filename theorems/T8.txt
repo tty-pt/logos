@@ -88,3 +88,10 @@ necessária — é o conteúdo que o poema acrescenta para além da dedução.
 
 Com (a), T8 é teorema genuíno (PROVEN↑); sem ele fica BLOCKED no lema formal
 registado em D9.
+
+Adenda (2026-09-17): a existência de uma pessoa necessária em si mesma,
+∃s [Person(s) ∧ NecessarySubject(s)], foi demonstrada no kernel como teorema `{}`
+(`Love.necessaryPersonExists`, GAPMAP C77), combinando a pessoa de T5 e a persistência
+necessária de esse-est-agere (`AxPersonStability`), sem necessidade de AxPersonalGround.
+O que permanece como ponte A2/A4 é a ligação com o vocabulário de fundamentação
+proposicional (`GroundProp`), rumo ao alvo do Fundamento Último.

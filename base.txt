@@ -934,7 +934,7 @@ AxPersonalGround (META) para o passo "pessoal" (AxGroundBearing foi
 dissolvido em B2, 2026-09-15: Realizes := GroundProp).
 Os itens 20–22 (pluralidade, amor, eternidade) são PROVEN `{}` desde a
 plurality-discharge (2026-09-17) — ver theorems/T12–T14.txt e
-formal/GAPMAP.md C40–C47/C73–C76.
+formal/GAPMAP.md C40–C47/C73–C77 (a existência de pessoa necessária é C77).
 Ver theorems/T7.txt, theorems/T8.txt e formal/GAPMAP.md C18, C19, C32.
 Os itens 19–22 são o acréscimo do poema — ver a nota formal do §25.)
 

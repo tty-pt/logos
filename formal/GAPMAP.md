@@ -222,6 +222,7 @@ kept per M1 precedent). T14 now stands on `AxTwoSubjects` alone.
 | C74 | P5 | `Value.aloneExcluded : ¬ ∃ s, Person s ∧ Alone s` — **`ALONE_EXCLUDED` is now a theorem** (`Value.neverAlone : ∀ s, ¬ Alone s`): no subject is alone, the definitional field always supplies an other | PROVEN | `{}` (kills the M2 lone-subject countermodel; the named missing lemma that justified `AxTwoSubjects` no longer exists) |
 | C75 | P7 | `Person.everyContentIsAPerson : ∀ p, Person (Sum.inr p)` (+ `Person.positedDistinct : Sum.inr True ≠ Sum.inr False`) — **the plenum seed**: every content, raised to a subject, is a person; incompatible contents are distinct persons | PROVEN | `{}` (honest limit: distinctness of such persons is kernel-visible only for incompatible contents — proposition equality is `propext`-collapsed) |
 | C76 | P8 | `Love.T14_canonicalRigid` — **the world-rigid canonical pair**: the origin and the addressee love each other and exist in every world (the *same* pair, `∀ w`) | PROVEN | `{}` (stronger than C42: "Amar é … necessário (de alguma forma)" made literal; no stability bridge needed — esse est agere) |
+| C77 | P5/P8 | `Love.necessaryPersonExists` — **the necessary person exists**: from the demonstrated person (`T5_personExists`) and persistence (`AxPersonStability`, esse est agere), there is a person existing in every world | PROVEN | `{}` (witnessed by the silent origin `Sum.inl ()`, canonical pair relatum) |
 
 Declared (Level 3): **M1 (A3, 2026-09-16): `Affects` is now a structural
 DEFINITION (`Affects s t := s ≠ t`), no longer the primitive value axiom, and
@@ -448,7 +449,8 @@ Summary counts (A2-swap-theorem, measured 2026-09-17):
 - **PROVEN** (no axioms beyond `CL` where marked) — **44 axiom-free** (`{}`):
   C1, C2, C4–C9, C11, C21–C24, C26–C29, C31, C35, C36, C38, C39,
   C48–C54, C56–C58, C61–C68 (C62: pure bridges `{}`; full conditional `CL`),
-  C69, C71, C72 (freedom split — the origin's both-ways capacity), F1a
+  C69, C71, C72 (freedom split — the origin's both-ways capacity), C73–C77
+  (definitional plurality, plenum seed, canonical rigid love, necessary person), F1a
   (choice-existence resolves to a kernel step).
   `CL`-only: C3, C10, C12–C14, C25, C30, C37, C55, C70 (+ C59 spike, outside barrel).
   Vocab-only (`{Ground}` — the statement's own vocabulary): C15, C16, C17,

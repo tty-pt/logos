@@ -68,6 +68,23 @@ theorem AxPersonStability : ∀ s : Subject, Person s → NecessarySubject s := 
   obtain ⟨p, hm⟩ := hI
   exact ⟨p, hm⟩
 
+/--There exists a necessary person: someone who is a person and persists in every world.
+
+  The kernel-verified step: from the demonstrated person (`T5_personExists`) and
+  the persistence theorem (`AxPersonStability`, esse est agere), there exists
+  an entity that is both a Person and a NecessarySubject.
+  Axiom footprint: `{}` (pure logic, no axioms). -/
+theorem necessaryPersonExists : ∃ s : Subject, Person s ∧ NecessarySubject s := by
+  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists
+  exact ⟨s, hs, AxPersonStability s hs⟩
+
+/--The canonical origin is a necessary person.
+
+  Exhibited directly by `Sum.inl ()`, the silent origin. Footprint: `{}`. -/
+theorem canonicalNecessaryPerson : Person (Sum.inl ()) ∧ NecessarySubject (Sum.inl ()) := by
+  have hp : Person (Sum.inl ()) := ⟨trivial, trivial, ⟨True, ⟨True, ⟨True, rfl⟩⟩⟩⟩
+  exact ⟨hp, AxPersonStability (Sum.inl ()) hp⟩
+
 /--Two distinct persons stand in an eternal love-relation, and both persist in every world.
 
  T14 — the eternal love-relation (PROVEN, definitional subject +
@@ -142,6 +159,8 @@ theorem T14_content : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s
 end Logos.Love
 
 -- Axiom footprint audit
+#print axioms Logos.Love.necessaryPersonExists
+#print axioms Logos.Love.canonicalNecessaryPerson
 #print axioms Logos.Love.T13_someoneLovable
 #print axioms Logos.Love.T14_eternalRelation
 #print axioms Logos.Love.T14_canonicalRigid
