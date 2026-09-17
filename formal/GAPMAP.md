@@ -1,10 +1,35 @@
-# GAPMAP.md — theorem ledger of Γ (generated from `#print axioms`, 2026-09-17, post esse-est-agere)
+# GAPMAP.md — theorem ledger of Γ (generated from `#print axioms`, 2026-09-17, post A2-swap-theorem)
 
 Statuses: `PROVEN` (theorem, kernel-checked) · `PROVEN↑` (theorem under
 flagged axioms) · `AXIOM` (declared) · `BLOCKED` (missing lemma named) ·
 `DEFERRED` (out of scope of this milestone).
 
 `CL` = `{propext, Classical.choice, Quot.sound}` (classical meta-logic, D1).
+
+## Batch A2-swap-theorem (2026-09-17) — `AxGlobalGround` becomes a theorem (atom-restricted)
+
+The quantifier swap `∀w∃e … ⇒ ∃e∀w …` (D7, SEM) is answered by the
+esse-est-agere deflation: `ExistsAt` is world-vacuous by definition, so the
+witness from any one world works for all worlds definitionally —
+`axiom AxGlobalGround` → **theorem** `AxGlobalGround (n : Nat)
+(hnec : NecessarilyTrue (atom n))` (name kept per M1 precedent; proof:
+`groundPrinciple_atom` at `actualWorld`, same entity reused at every `w`).
+Measured (`#print axioms`): A2-atom, C18, C20, C34 → `{Ground}`
+(vocab-only — the statement's own vocabulary, no SEM/META).
+**Axiom inventory 6 → 5 declarations** (−`AxGlobalGround`); substantive
+axioms unchanged in kind (SEM/META only).
+Restricted to atoms by the M4 wall (structural `TrueAt` carries no
+existential ground for compounds): the excluded-middle instance C19
+(`T7_excludedMiddleInstance`, deleted from the barrel) is recorded
+BLOCKED with its exact missing lemma `∃ e, Ground e (or θ (not θ))`
+given EM-necessity (transcript: `formal/Spikes/Spike_A6_probe.lean` — the
+M4 "stays priced (smaller)" verdict is superseded: nothing stays priced;
+the atom swap needs no axiom at all). T7 (C18), its reductio (C20) and
+the GroundPerson link (C34) are re-scoped to atoms, same proofs. Honestly
+recorded cost: T7's "necessary reality grounded on the indubitable"
+(compound) is no longer derived — the atom ground is. Q7.2 answered: for
+atoms the swap needs no weaker premise (it is definitional); the compound
+instance is a different, unforced claim.
 
 ## Batch definitional-subject (2026-09-17) — `Cogito` becomes a theorem
 
@@ -37,13 +62,15 @@ world-located — while the existential does the real work: only actors exist).
 `Person s` unfolds definitionally to `∃ p, Means s p` (via `Intentional`;
 kind-preds `:= True`; `A := Means`), so `AxPersonStability : ∀ s, Person s →
 NecessarySubject s` is now a **theorem** (**`{}`**, name kept per M1
-precedent). Measured (`#print axioms`): T14 family (C42–C45) → `{AxTwoSubjects}`;
-C18/C34 → `{AxGlobalGround, Ground}`; C15/C16/C17/C60 → `{Ground}`;
-C32 → `{AxPersonalGround, GroundProp}`; `Cogito` still `{}`.
+precedent). Measured (`#print axioms`): T14 family (C42–C45) → `{}`
+  after the plurality-discharge (2026-09-17); C18/C34 → `{AxGlobalGround, Ground}`;
+  C15/C16/C17/C60 → `{Ground}`;
+  C32 → `{AxPersonalGround, GroundProp}`; `Cogito` still `{}`.
 **Axiom inventory 8 → 6 declarations** (−`ExistsAt`, −`AxPersonStability`);
 substantive axioms unchanged in kind (SEM/META only). M2 (`ALONE_EXCLUDED`)
-is untouched: `Alone` never mentions `ExistsAt`, and the M2 countermodel
-doesn't interpret it — this batch proves *persistence*, not plurality.
+was untouched by this batch: `Alone` never mentions `ExistsAt` — this batch
+proved *persistence*, not plurality; M2 was later closed by the
+plurality-discharge (2026-09-17, `neverAlone`/`aloneExcluded`, C74).
 Honestly recorded costs: the world-index is vacuous (declared, not hidden);
 `T14_world` is trivially witnessed (same act in all worlds); T7/T8
 "necessary" turns agent-flavored (grounded by an acting subject).
@@ -80,15 +107,16 @@ axiom-free: its negation-free content rests on classical logic only.
 | C60 | §24a (RAA) | `Truthmaker.noGround_selfRefutes` | PROVEN | `{Ground}` (VOCAB — denial refutes itself by definition: `TrueAt w (atom n)` unfolds to `∃e, ExistsAt w e ∧ Ground e (atom n)` with `ExistsAt` now agency itself, so the denial is `∃e… ∧ ¬∃e…`; companion of C15) |
 | C16 | §22 | `Truthmaker.lawExcludedMiddle` | PROVEN | `CL + {Ground}` (A2: AxOr/AxNot dropped; esse-est-agere drops `ExistsAt`) |
 | C17 | §23 | `Truthmaker.nonContradiction` | PROVEN | `{Ground}` (A2: AxAnd/AxNot dropped; no propext; esse-est-agere drops `ExistsAt`) |
-| C18 | T7 | `Modal.T7_necessaryReality` | PROVEN↑ | `{AxGlobalGround, Ground}` (esse-est-agere drops `ExistsAt`) |
-| C19 | T7 | `Modal.T7_excludedMiddleInstance` | PROVEN↑ | as C18 |
-| C20 | T7 | `Modal.noNecessaryTruthIfAllContingent` | PROVEN↑ | as C18 |
+| C18 | T7 | `Modal.T7_necessaryReality` (atom-restricted: `(n : Nat)`, `NecessarilyTrue (atom n)`) | PROVEN | `{Ground}` (VOCAB — batch A2-swap-theorem: `AxGlobalGround` axiom → theorem) |
+| C19 | T7 | `Modal.T7_excludedMiddleInstance` (deleted from barrel) | BLOCKED | missing lemma `∃ e, Ground e (or θ (not θ))` given EM-necessity — no existential compound ground is forced by structural `TrueAt` (transcript: `formal/Spikes/Spike_A6_probe.lean`) |
+| C20 | T7 | `Modal.noNecessaryTruthIfAllContingent` (atom-restricted: `∀ n`) | PROVEN | `{Ground}` (VOCAB — as C18) |
 
 Declared (Level 1): `Ground` (world-rigid, D6; now over `Subject`) is the one
 remaining semantics axiom; `ExistsAt` is now the agency *definition*
 (esse est agere, 2026-09-17 — was VOCAB/SEM axiom, D4); `actualWorld` (def, SEM —
-shrinks C18–C20; was axiom); `AxGlobalGround` (SEM, D7 — the named quantifier
-swap). `Entity := Subject` is a *definition* (C2, 2026-09-15 — the Q2/D11
+shrinks C18–C20; was axiom); `AxGlobalGround` (theorem, atom-restricted,
+batch A2-swap-theorem — former SEM axiom, D7; the compound EM instance is
+BLOCKED, C19). `Entity := Subject` is a *definition* (C2, 2026-09-15 — the Q2/D11
 identification, no longer an axiom); `EntityOf` is the identity (dissolved).
 A2 (2026-09-16): `AxOr`/`AxAnd`/`AxNot` deleted — the connective truthmaker
 clauses are now **PROVEN theorems** (structural `TrueAt`, C15–C17).
@@ -113,7 +141,7 @@ clauses are now **PROVEN theorems** (structural `TrueAt`, C15–C17).
 | C31 | §9 | `Order.consequence_preserves_truth` | PROVEN | `{}` (E0) |
 | C32 | T8 | `GroundPerson.T8_personalGround` | PROVEN↑ | `{AxPersonalGround, GroundProp}` (esse-est-agere drops `ExistsAt`) |
 | C33 | T8 | `GroundPerson.present_feature_is_grounded` | PROVEN↑ | `{GroundProp, GroundPrincipleProp}` |
-| C34 | T8 | `GroundPerson.necessary_truth_has_necessary_grounder` | PROVEN↑ | as C18 |
+| C34 | T8 | `GroundPerson.necessary_truth_has_necessary_grounder` (atom-restricted: `(n : Nat)`) | PROVEN | `{Ground}` (VOCAB — as C18) |
 
 Declared (Level 2): vocabulary now definitional — `Subject := Unit ⊕ Prop`
 (the underlier: silent origin + posited contents), `State := Prop`
@@ -148,13 +176,14 @@ kept per M1 precedent). T14 now stands on `AxTwoSubjects` alone.
 | ID | Prose | Status | Missing |
 |----|-------|--------|---------|
 | F1a | §13–§15 choice-existence (`∃s p q`, `Chooses s p q`) | PROVEN | `person_chooses`/`choiceExists` `{}` + `judge_commits` `CL` (choice-realism batch, C51–C52/C55) |
-| F1b | §15 bipolar freedom (`FreeWill ↔ ◇Choose ∧ ◇Choose¬`) | DEFERRED | modal choice semantics on `NecessityPH` — a subject may mean `p` without being able to mean `¬p` (T11 is only the structural field) |
+| F1b-weak | §15 freedom of the actor (`FreeWill ↔ ◇Choose ∧ ◇Choose¬`, origin) | PROVEN | `freeWillOrigin`/`judgeIsFree`/`originFreedomSelfRefutes` `{}` (freedom split 2026-09-17: the act's subject — the origin, the judge right/wrong commits — can both choose `p` and choose `¬p`; the "could not have chosen otherwise" denial self-refutes, C69/C71/C72) |
+| F1b-strong | §15 world-level alternativity | BLOCKED | **vocabulary gap** (not a proof gap): no world-varying choice predicate exists — every predicate is world-invariant, so `NecessityPH` over any of them collapses to identity; missing `ChoiceAt : World → Subject → Prop → Prop` (genuinely world-varying; a new SEM/META bridge, deliberately deferred) |
 | F2 | §21 teleology (`Ought → Goal`) | DEFERRED | deontic layer (normativity → telos) |
 | F3 | §28 Good (`§20 → bem`) | DEFERRED | moral good from logical normativity not yet derived |
-| F4 | §28 Love | PROVEN↑ | T13 under AxTwoSubjects (C3-I) |
-| F5 | §28 EternalRelation | PROVEN↑ | T14 under C3-I bridges + AxPersonStability (now a theorem, esse-est-agere) |
+| F4 | §28 Love | PROVEN | `Love.T13_someoneLovable` (C41) under the derived plurality — no bridge (definitional subject, 2026-09-17; old bridge `AxTwoSubjects` retired) |
+| F5 | §28 EternalRelation | PROVEN | T14 under the derived plurality + esse est agere (AxPersonStability theorem); `T14_canonicalRigid` strengthens it to a world-rigid canonical pair |
 | F6 | §28 Trinity | DEFERRED | no argument exists yet (§28/§29) |
-| Q7.2 | weaker `AxGlobalGround` | DEFERRED | research sub-question (DESIGN.md) |
+| Q7.2 | weaker `AxGlobalGround` | ANSWERED | answered by batch A2-swap-theorem: for atoms the swap needs no premise at all (definitional via world-vacuous `ExistsAt`); the compound instance is unforced, not weaken-able (DESIGN.md) |
 
 ## Level 3 — modal, choice, interpersonal value (new: poem chain)
 
@@ -165,8 +194,8 @@ kept per M1 precedent). T14 now stands on `AxTwoSubjects` alone.
 | C37 | P2 | `Semantics.bothNecessarilyTrueAndFalse` | PROVEN | `CL` |
 | C38 | P2 | `Necessity.necDistinction : Necessity (¬ N_T ∧ ¬ N_F)` | PROVEN (was AXIOM) | `{}` (E0; C1: identity-model alias; world content = C37) |
 | C39 | P4 | `Choice.T11_choiceField` | PROVEN | `{}` (choice field exhibited with the act) |
-| C40 | P5/P7 | `Plurality.T12_twoPersons` | PROVEN↑ | `{AxTwoSubjects}` |
-| C41 | P7 | `Love.T13_someoneLovable` | PROVEN↑ | `{AxTwoSubjects}` (via C40) |
+| C40 | P5/P7 | `Plurality.T12_twoPersons` | PROVEN | `{}` (definitional subject, 2026-09-17: canonical pair of `Person.twoPersonsFromSubject` — origin + addressee; no right/wrong premise, no bridge) |
+| C41 | P7 | `Love.T13_someoneLovable` | PROVEN | `{}` (via C40) |
 | C48 | P1/§1 | `Plurality.cogito_from_T12` | PROVEN | `{}` (cogito as corollary of the exhibited `Cogito`; plurality also forces the datum, the datum is not *grounded* on plurality) |
 | C49 | §13/IM_STUPID | `Choice.meaning_needs_subject` + `Choice.meaning_I_needs_subject` (definitional form: `Meaning_I p → ∃s, Means s p`) | PROVEN | `{}` (analytic; vocab-only — no substantive axiom; see VOCAB.md) |
 | C50 | §14 | `Choice.incompatible_self_negation` | PROVEN | **`{}`** (pure logic — the field around any meaning-act) |
@@ -177,33 +206,43 @@ kept per M1 precedent). T14 now stands on `AxTwoSubjects` alone.
 | C55 | §8/§14 | `Order.judge_commits : ∃s p q, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ Chooses s p q` — the judge IS a chooser | PROVEN | `CL` (defs act-relative §8) |
 | C56 | P6 | `Value.alone_no_other_help_harm` | PROVEN | `{}` (M1: `Affects` is now the A3 definition `s ≠ t`, so the P6 lemma loses its axiom — measured; see VOCAB.md) |
 | C57 | §26 | `Choice.noSubject_selfRefutes : (¬∃_s : Subject, True) → False` — **a subject exists is un-denyable**: the denial is itself an act/choice of a subject; `choiceExists` (C52) supplies the resident witness | PROVEN | `{}` — formal record of §26 "não existe sujeito do ato presente"; the act-datum is the exhibited theorem `Cogito`, never a consequence of the plurality bridge |
-| C42 | P8 | `Love.T14_eternalRelation` | PROVEN↑ | `{AxTwoSubjects}` (M1: `Affects := s ≠ t` def + `AxPersonsAffect` theorem vanish; esse-est-agere: `AxPersonStability` is now a theorem and `ExistsAt` a def — both words vanish) |
-| C43 | P8 | `Love.T14_content` | PROVEN↑ | as C42 |
-| C44 | P8 | `Love.T14_world` (`NecessityPH`) | PROVEN↑ | as C42 (world-anchored honest □) |
-| C45 | P8 | `Love.T14_square` (alias `Necessity`) | PROVEN↑ | as C42 (image of the old statement shape) |
-| C46 | P5 | `Value.valueInterpersonal_of_split` | PROVEN↑ | `{AxTwoSubjects}` (recovery theorem: exact old statement; M1: `Affects`/`AxPersonsAffect` gone) |
-| C47 | P5/P7 | `Plurality.T12_directedPair` | PROVEN↑ | `{AxTwoSubjects}` (chain node — M1: distinctness is already the forward direction under A3, so the pair wears its own inequality; T14 built on this node) |
+| C42 | P8 | `Love.T14_eternalRelation` | PROVEN | `{}` (M1: `Affects := s ≠ t` def + `AxPersonsAffect` theorem vanish; esse-est-agere: `AxPersonStability` is a theorem and `ExistsAt` a def; plurality-discharge: `AxTwoSubjects` retired — canonical pair of `Person.twoPersonsFromSubject`) |
+| C43 | P8 | `Love.T14_content` | PROVEN | as C42 |
+| C44 | P8 | `Love.T14_world` (`NecessityPH`) | PROVEN | as C42 (world-anchored honest □) |
+| C45 | P8 | `Love.T14_square` (alias `Necessity`) | PROVEN | as C42 (image of the old statement shape) |
+| C46 | P5 | `Value.valueInterpersonal_of_split` | PROVEN | `{}` (recovery theorem: exact old statement; M1: `Affects`/`AxPersonsAffect` gone; derived outright from `Person.twoPersonsFromSubject`) |
+| C47 | P5/P7 | `Plurality.T12_directedPair` | PROVEN | `{}` (chain node — M1: distinctness is already the forward direction under A3, so the pair wears its own inequality; T14 built on this node) |
 | C61 | P3 | `Choice.rightWrong_implies_someone_means` — "há certo e há errado → há alguém para quem algo significar" (the full conditional of poem L18) | PROVEN | `{}` (`JUDGE_COMMITTED` C54 ∘ `rightWrongDistinction` C36; the analytic half "significado → sujeito" is C49) |
 | C62 | P3 | `Order.rightWrong_implies_meaning` (+ `Order.rightDistinctWrong_implies_meaning`) — "direito e errado precisam de significado": `Correct`/`Incorrect` são agora ato-relativos (forma literal §8 `Correct(A(s,p))`), logo right/wrong desdobra-se num ato `Means`; `Order.rightWrongDistinction_implies_meaning` fecha o condicional poético completo (`CL`) | PROVEN | `{}` (pure bridges; full conditional `CL`; **sem axioma substantivo**; o modelo vazio já não satisfaz o antecedente; ver VOCAB.md/BRIDGE.md) |
+| C69 | §15/F1b | `Choice.freeWillOrigin : FreeWill (Sum.inl ()) p` — **the origin can choose both ways**: the act's subject (the judge right/wrong commits) can choose `p` and can choose `¬p` | PROVEN | `{}` (constructive — the origin means every content; instantiation at `someWorld`, deliberately not `canChoose_unfold`) |
+| C70 | §15/F1b | `Choice.noFreeWillPosited (q p) : ¬ FreeWill (Sum.inr q) p` — **posited contents cannot choose otherwise** (a self-posited `inr q` can only ever mean `q`) | PROVEN | `CL` (double negation on the `CanChoose → q = p` extraction) — no paradox: such subjects are never the judge right/wrong commits (that witness is the free origin) |
+| C71 | §15/F1b | `Choice.originFreedomSelfRefutes : (¬ FreeWill (Sum.inl ()) p) → False` — **"I could not have chosen otherwise" self-refutes**: the denial is itself an act of the free origin | PROVEN | `{}` — the freedom paradox dissolves: the determinist alternative cannot be asserted performatively |
+| C72 | §15/F1b | `Choice.judgeIsFree : ∃ s, Person s ∧ ∃ p, FreeWill s p` — the chooser right/wrong commits is free | PROVEN | `{}` (judge = origin via `T5_personExists`; choice-in-the-freedom-sense exists for the act's subject) |
+| C73 | P5/P7 | `Person.twoPersonsFromSubject` — **the canonical pair, definitional**: the origin `Sum.inl ()` and the addressee `Sum.inr True` are two distinct persons by what a subject is | PROVEN | `{}` (plurality-discharge, 2026-09-17: no plurality axiom — `AxTwoSubjects` retired; `Person (Sum.inr True)` via `Means (Sum.inr True) True`; distinctness by constructors) |
+| C74 | P5 | `Value.aloneExcluded : ¬ ∃ s, Person s ∧ Alone s` — **`ALONE_EXCLUDED` is now a theorem** (`Value.neverAlone : ∀ s, ¬ Alone s`): no subject is alone, the definitional field always supplies an other | PROVEN | `{}` (kills the M2 lone-subject countermodel; the named missing lemma that justified `AxTwoSubjects` no longer exists) |
+| C75 | P7 | `Person.everyContentIsAPerson : ∀ p, Person (Sum.inr p)` (+ `Person.positedDistinct : Sum.inr True ≠ Sum.inr False`) — **the plenum seed**: every content, raised to a subject, is a person; incompatible contents are distinct persons | PROVEN | `{}` (honest limit: distinctness of such persons is kernel-visible only for incompatible contents — proposition equality is `propext`-collapsed) |
+| C76 | P8 | `Love.T14_canonicalRigid` — **the world-rigid canonical pair**: the origin and the addressee love each other and exist in every world (the *same* pair, `∀ w`) | PROVEN | `{}` (stronger than C42: "Amar é … necessário (de alguma forma)" made literal; no stability bridge needed — esse est agere) |
 
 Declared (Level 3): **M1 (A3, 2026-09-16): `Affects` is now a structural
 DEFINITION (`Affects s t := s ≠ t`), no longer the primitive value axiom, and
 `AxPersonsAffect` is a THEOREM of that definition** (distinct persons are
 distinct — `Or.inl hne`). `Helps`/`Harms` are its definitional projections
 (`:= Affects`); `help_affects`/`harm_affects` are `rfl`-theorems;
-`Entity`/`EntityOf` dissolved (C2). The only declared interpersonal bridge is
-the plurality claim `AxTwoSubjects`
-(META, right-and-wrong demands two distinct persons).
-`AxPersonStability` was the SEM bridge for world-persistence of persons (M3
-spike BLOCKED) — **now a theorem** (esse est agere, 2026-09-17): `Person →
-Intentional → Means` with `ExistsAt` as agency. T14 stands on `AxTwoSubjects`
-alone.
+`Entity`/`EntityOf` dissolved (C2). The plurality bridge `AxTwoSubjects`
+(META) is **RETIRED** (plurality-discharge, 2026-09-17): the canonical pair of
+`Person.twoPersonsFromSubject` (C73) is a theorem `{}`, and the M2
+lone-subject consistency model is superseded — `neverAlone`/`aloneExcluded`
+(C74) make solipsism structurally impossible:
+`formal/Spikes/Spike_A4_2.lean` built its witness on the OLD axiomatic
+`Subject`; the definitional `Subject := Unit ⊕ Prop` has ≥2 inhabitants,
+both persons (C73/C75). `AxPersonStability` was the SEM bridge for
+world-persistence of persons (M3 spike BLOCKED) — **now a theorem** (esse est
+agere, 2026-09-17): `Person → Intentional → Means` with `ExistsAt` as agency.
+T14 stands on the derived pair + esse est agere alone.
 `Loves` is a *definition* (`:= Affects`, C4), no longer an axiom;
 `AxValueInterpersonal` and `AxEternalLove` are dissolved (split / replaced).
-M2 spike (`formal/Spikes/Spike_A4_2.lean`): `ALONE_EXCLUDED` BLOCKED — the
-lone-subject consistency witness (`nonempty Unit`, `Me`/`Per`/`Lon` images,
-`lonely_affects_no_other`) is kernel-checked in-file; `AxTwoSubjects` stays as
-a *price justified by a model* (a mathematical result, GAPMAP D14b annex).
+M2 is closed: no consistency model for a single subject exists under the
+definitional field (the price's *model-justification* dies with the price).
 Modal layer is derived (C1): `Necessity: Prop → Prop` is a *definition*
 (identity-model alias) and `NecessityPH : (World → Prop) → Prop` the
 semantics-grounded operator; `necK/necT/nec4` (alias) and `necKPH/necTPH/nec4PH`
@@ -231,8 +270,8 @@ definitional underlier supplies the witness, so `Cogito_Init` is derived
 | ID | Poem | Status | Note |
 |----|------|--------|------|
 | FAITH-1 | P2 necessity | → PROVEN | dissolved in C1: `necDistinction` is now a theorem (C38); world content = C37 |
-| FAITH-2 | P8 eternal love | → PROVEN↑ | dissolved in C4: replaced by `AxPersonStability` + C3-I bridges (stability now a theorem, esse-est-agere); T14 is a theorem under `AxTwoSubjects` |
-| F7 | §15 the bipolar half of freedom | DEFERRED | = F1b — must be built on `NecessityPH` (world-level), not the degenerate alias |
+| FAITH-2 | P8 eternal love | → PROVEN | dissolved in C4: replaced by `AxPersonStability` (theorem, esse-est-agere) + the derived plurality (plurality-discharge: retired `AxTwoSubjects`); T14 is a theorem `{}` (C42–C45, C76) |
+| F7 | §15 the bipolar half of freedom | PROVEN/`{}` (weak) · BLOCKED (strong) | = F1b split (2026-09-17): the origin's both-ways capacity is proven (`freeWillOrigin` `{}`); world-level alternativity blocked on missing world-varying vocabulary (`ChoiceAt`) |
 | F8 | Trinity | DEFERRED | not attempted (§28/§29) |
 | F9 | Incarnation / creation | DEFERRED | poem P10, faith datum |
 
@@ -264,10 +303,14 @@ definitional underlier supplies the witness, so `Cogito_Init` is derived
   Exclusion spikes (x2_spikeA, x2_spikeB) both stuck as designed: named missing
   lemma `ALONE_EXCLUDED : ¬ (∃ s, Person s ∧ Alone s)` — the transcript of the
   spike kernel context is in `/tmp/opencode/x2_spike{A,B}.lean`.
+  (Superseded 2026-09-17 by the plurality-discharge: `ALONE_EXCLUDED` is now
+  the theorem `Value.aloneExcluded` C74, and `AxTwoSubjects` was retired.)
 - **C3-II** (single exclusion attempt, one-shot): tried to derive a second
   subject directly from the denial of `Alone` via `cogito + T6 + P6 + defs`.
   Stuck (x2_spikeC): the one-person scenario is consistent with every theorem;
   the interpersonal bridge is genuinely separate. Record in DESIGN.md D14b.
+  (Superseded 2026-09-17: the one-person scenario is NO LONGER consistent —
+  `neverAlone` (C74) refutes `Alone s` outright.)
 - **C4** (`Loves := Affects`, structural love): `Loves` is redefined as a
   *definition* (`Affects`); `AxEternalLove` (FAITH/META, D14b) is dissolved.
   A new bridge `AxPersonStability : ∀ s, Person s → NecessarySubject s`
@@ -310,6 +353,9 @@ output: **220 → 180 printed axiom-entries (−18 %)**; 222 → 198 output line
   from act-structure); `PERSON_PERSISTS` (no rule from `Person` to `ExistsAt`).
   Named missing lemmas `ALONE_EXCLUDED`, `PERSONS_BEAR`, `PERSON_PERSISTS`;
   the three bridges stay priced (META/SEM/SEM) — no fabricated promotion.
+  (All three superseded 2026-09-17: `ALONE_EXCLUDED` → C74 theorem;
+  `PERSONS_BEAR` → `AxPersonsAffect` theorem of A3; `PERSON_PERSISTS` →
+  esse-est-agere, `AxPersonStability` theorem.)
 
 ## Batch actualWorld-def + T12_directedPair (2026-09-15) — free fortifications
 
@@ -397,26 +443,38 @@ contradicts itself. RETHINKING-COGITO.md records the parallel in full.
   the *derivability* is now proven, so cogito's status is "axiom, proved
   redundant" rather than "irreducible datum" — a strict strengthening.
 
-Summary counts (esse-est-agere, measured 2026-09-17):
+Summary counts (A2-swap-theorem, measured 2026-09-17):
 
-- **PROVEN** (no axioms beyond `CL` where marked) — **41 axiom-free** (`{}`):
+- **PROVEN** (no axioms beyond `CL` where marked) — **44 axiom-free** (`{}`):
   C1, C2, C4–C9, C11, C21–C24, C26–C29, C31, C35, C36, C38, C39,
   C48–C54, C56–C58, C61–C68 (C62: pure bridges `{}`; full conditional `CL`),
-  F1a (choice-existence resolves to a kernel step).
-  `CL`-only: C3, C10, C12–C14, C25, C30, C37, C55 (+ C59 spike, outside barrel).
+  C69, C71, C72 (freedom split — the origin's both-ways capacity), F1a
+  (choice-existence resolves to a kernel step).
+  `CL`-only: C3, C10, C12–C14, C25, C30, C37, C55, C70 (+ C59 spike, outside barrel).
   Vocab-only (`{Ground}` — the statement's own vocabulary): C15, C16, C17,
-  C60 (denial refutes itself by definition — RAA; esse-est-agere drops
-  `ExistsAt`, now a def).
+  C18, C20, C34, C60 (denial refutes itself by definition — RAA;
+  esse-est-agere drops `ExistsAt`, now a def; A2-swap-theorem drops
+  `AxGlobalGround`, now a theorem).
   C62 (`rightWrong_implies_meaning`) is the pure bridge: with the §8
   act-relative `Correct`/`Incorrect`, right/wrong unfold to a `Means`-act;
   the bare-distinction form `rightWrongDistinction_implies_meaning` is `CL`.
 - **PROVEN↑** (under flagged SEM/META only — no foundation axiom remains):
-  C18–C20, C32–C34, C40–C47, F4, F5.
+  C32, C33, C40–C47, F4, F5.
   (`Cogito` is proven — the M0 forced-foundation axiom is retired, its
-  degenerate `fun h => h Cogito` with it. `AxGlobalGround`/`AxPersonalGround`
-  are the two META prices; `actualWorld` is a def;
+  degenerate `fun h => h Cogito` with it. `AxPersonalGround` (META, T8)
+  is the remaining Level-2 price alongside `GroundPrincipleProp` (SEM);
+  `AxTwoSubjects` was **retired** by the plurality-discharge (2026-09-17 —
+  canonical pair C73, `ALONE_EXCLUDED` C74);
+  `actualWorld` is a def;
   `Exists`/`Content`/`Agent`/`Rational` are analytical defs; `Affects` is the A3
-  definition `s ≠ t`; `AxPersonsAffect` and now `AxPersonStability` are theorems.)
+  definition `s ≠ t`; `AxPersonsAffect`, `AxPersonStability` and now
+  `AxGlobalGround` (atom-restricted) are theorems.)
+- **BLOCKED**: C19 (T7 excluded-middle instance — missing lemma `∃ e,
+  Ground e (or θ (not θ))`; transcript in `formal/Spikes/Spike_A6_probe.lean`);
+  F1b-strong (world-level alternativity — **vocabulary gap**, not a proof gap:
+  no world-varying choice predicate exists; missing
+  `ChoiceAt : World → Subject → Prop → Prop`, a new SEM/META bridge,
+  deliberately deferred).
 - FAITH layer: **empty** (FAITH-1 → C38, FAITH-2 → C4); no claims live at the faith boundary.
 - Axioms dissolved (all batches): `T`, `tschema`, `Entity`,
   `EntityOf`, `help_affects`, `harm_affects`; `Affects` (axiom → def, M1);
@@ -427,11 +485,16 @@ Summary counts (esse-est-agere, measured 2026-09-17):
   `Subject`/`State`/`Initiates` (axioms → defs, definitional subject);
   `Cogito` (axiom → theorem, definitional subject);
   `ExistsAt` (axiom → def, esse est agere);
-  `AxPersonStability` (axiom → theorem, esse est agere).
+  `AxPersonStability` (axiom → theorem, esse est agere);
+  `AxGlobalGround` (axiom → theorem, atom-restricted, A2-swap-theorem);
+  `AxTwoSubjects` (axiom → **retired**, plurality-discharge 2026-09-17 — its
+  content moved into the definition of a subject: the canonical pair C73 is
+  a theorem `{}` and `ALONE_EXCLUDED` is C74; the M2 lone-subject model is
+  superseded).
   A1 removed `cogito`; M0 restored it as the FORCED foundation (+1);
   the definitional-subject batch proves it (−1).
-  Net inventory: **6 declarations** + `CL`:
-  `Ground`, `AxGlobalGround`, `AxTwoSubjects`,
+  Net inventory: **4 declarations** + `CL`:
+  `Ground`,
   `GroundProp`, `GroundPrincipleProp`, `AxPersonalGround`.
 - `sorryAx` count across all modules: **0**.
 - Verification: `lake build` green (36 jobs, seconds, Lean core only); zero
@@ -578,7 +641,11 @@ as it stood.)
   * M2 `Spike_A4_2.lean`: `ALONE_EXCLUDED` — the lone-subject consistency
     witness is kernel-checked in-file (single inhabitant refutes the target
     over the whole allowed surface); `AxTwoSubjects` stands as a **price
-    justified by a model**.
+    justified by a model**. (Superseded 2026-09-17 by the plurality-discharge:
+    the witness is built on the OLD axiomatic `Subject`; the definitional
+    `Subject := Unit ⊕ Prop` has ≥2 inhabitants, both persons — C73 — so the
+    lone-subject model is void and `AxTwoSubjects` is retired; `ALONE_EXCLUDED`
+    is now the theorem C74.)
   * M3 `Spike_PersonStability.lean`: `PERSON_PERSISTS` — a necessary relata
     `e₀` exists (T8 content) but `Realizes e₀ f` does not identify it with the
     act's subject; `NecessarySubject s` needs `ExistsAt w s` and no rule links
@@ -589,7 +656,10 @@ as it stood.)
     (kernel-checked, no `AxGlobalGround`) but cannot cover the compound
     excluded-middle instance (A2 structural TrueAt has no existential ground
     for compounds) — `AxGlobalGround` **stays priced (smaller)**; recording
-    only, not adopted.
+    only, not adopted. (Superseded 2026-09-17 by batch A2-swap-theorem:
+    esse-est-agere's world-vacuous `ExistsAt` makes the atom swap itself a
+    theorem — no axiom at all, weaker or otherwise; the compound instance
+    C19 is recorded BLOCKED with its exact missing lemma.)
 - **A4 guard relaxes justifiably:** the six enumerated theorems now bottom out
   at `Cogito` (no plurality), so they are plurality-free surface for future
   plurality spikes; the ban on plurality-from-plurality is preserved (nothing
@@ -608,3 +678,93 @@ as it stood.)
   the transcendental datum is axiom-free, the choosing subject is not.
   (M5 verdict superseded 2026-09-17: the choosing subject IS proven —
   `Agency.Cogito`, `{}`, by definitional exhibition of the underlier.)
+
+## Batch freedom-split (2026-09-17) — the "could not have chosen otherwise" paradox dissolved
+
+Driven by the user: "if you could not have chosen otherwise, then choice does
+not exist in the freedom sense. Which means right and wrong would not exist.
+This is paradoxical. We need to make it clear that it can't be the case."
+
+- **F1b splits in two.** F1b-weak (the performer's both-ways capacity) is
+  PROVEN; F1b-strong (world-level alternativity) is BLOCKED at the **vocabulary**
+  level — not a proof gap like C19.
+- **`freeWillOrigin : FreeWill (Sum.inl ()) p`** (`{}`): the act's own subject —
+  the origin, the witness of `Agency.Cogito`/`Plurality.T5_personExists` that
+  `JUDGE_COMMITTED` commits to right-and-wrong — can choose `p` AND can choose
+  `¬p`. From `Initiates (inl _) _ w' p := w' = p`: the origin means every
+  content, so both choices are real; `CanChoose` reached constructively
+  (instantiation at `someWorld`), deliberately not via the classical
+  `canChoose_unfold`. **C69**.
+- **`noFreeWillPosited : ¬ FreeWill (Sum.inr q) p`** (`CL`): the self-posited
+  contents provably CANNOT choose otherwise — `inr q` can only mean `q`
+  (`Means (inr q) p` iff `q = p`), so both-ways capacity would force
+  `q = p ∧ q = ¬p`, impossible. **No paradox**: these subjects are never the
+  judge right/wrong commits (that witness is the free origin). **C70**.
+- **`originFreedomSelfRefutes : (¬ FreeWill (Sum.inl ()) p) → False`** (`{}`):
+  "I could not have chosen otherwise" — asserted by the origin of the present
+  act — is itself a both-ways act and refutes itself. The determinist
+  alternative cannot be asserted performatively. **C71** — this is the
+  kernel-checked dissolving of the user's paradox.
+- **`judgeIsFree : ∃ s, Person s ∧ ∃ p, FreeWill s p`** (`{}`): the chooser
+  that right/wrong commits is free — choice *does* exist in the freedom sense
+  for the subject the undeniable right/wrong demands. **C72**.
+- Measured (`#print axioms`, in-file audit lines): `freeWillOrigin` `{}`,
+  `noFreeWillPosited` `{propext, Classical.choice, Quot.sound}` = `CL`,
+  `originFreedomSelfRefutes` `{}`, `judgeIsFree` `{}`. `lake build` green
+  (36 jobs), zero warnings. Axiom inventory unchanged: **5 declarations**.
+- **Recorded limitation (F1b-strong, BLOCKED):** a genuine *world-level*
+  alternativity `◇PH Choose ∧ ◇PH Choose¬` requires a world-varying choice
+  predicate; every predicate below `Semantics` is world-invariant, so
+  `NecessityPH` over any of them collapses to identity (`∀ w, P ⟷ P`, world
+  inhabited). The missing vocabulary —
+  `ChoiceAt : World → Subject → Prop → Prop` — is deliberately NOT added
+  (a new SEM/META bridge; not forced by the current chain). This is a
+  *vocabulary* gap, unlike C19's formulable-but-unproven lemma.
+
+## Batch plurality-discharge (2026-09-17) — `AxTwoSubjects` retired; the other is the addressee
+
+Driven by the project's own discovery: under the definitional subject
+(`Subject := Unit ⊕ Prop`, 2026-09-17) two distinct persons are **derivable** —
+the former META price is redundant and is discharged as a demotion, the poem's
+interpersonal step is re-found on the *addressee*, and the eternal relation
+becomes world-rigid.
+
+- **The fact:** `Person (Sum.inr True)` holds (`Means (Sum.inr True) True`),
+  `Sum.inl () ≠ Sum.inr True` by constructors — so
+  `∃ s₁ s₂, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` unconditionally, `{}`. The
+  second person is the *addressee*: a content positing itself — precisely the
+  "alguém para quem significar" of the poem (P5/P7), not a second silent
+  origin (one is all `Unit` can carry; any `Index ⊕ Prop` re-reading is
+  behaviorally identical in `Means` — Track-B verdict: an equal-origin other is
+  not a Λ-relatum, the other is inherently an addressee-content).
+- **`Person.twoPersonsFromSubject`** (canonical pair, **C73**, `{}`): the
+  origin `Sum.inl ()` and the addressee `Sum.inr True`.
+- **`Value.neverAlone`/`Value.aloneExcluded`** (**C74**, `{}`): `∀ s, ¬ Alone s`
+  (`otherSubject s ≠ s`) — so the named missing lemma `ALONE_EXCLUDED`,
+  the *justification* of the bridge, is now a theorem and the M2 lone-subject
+  consistency model (built on the pre-definition `Subject`) is void. The price
+  was always, already, the definition.
+- **Plenum seed (C75, `{}`)**: `everyContentIsAPerson : ∀ p, Person (Sum.inr p)` —
+  every content raised to a subject is a person; `positedDistinct` for the
+  extremes. Honest limit: distinctness is kernel-visible only for *incompatible*
+  contents (proposition equality is `propext`-collapsed) — the plenum is
+  unbounded in content, not in kernel-distinguishable members.
+- **`Love.T14_canonicalRigid`** (**C76**, `{}`): the *same* pair (origin +
+  addressee) loves in every world and both relata exist in every world —
+  "Amar é … necessário (de alguma forma)" literal, strictly stronger than the
+  old existential `{AxTwoSubjects}` form.
+- **Cascade:** `valueInterpersonal_of_split` (C46) no longer needs the
+  right-and-wrong premise; `T12_directedPair` (C47), `T13` (C41), `T14_*`
+  (C42–C45), F4, F5 all → **PROVEN `{}`**.
+- Measured (`#print axioms`, in-file audit lines): every touched node `{}`
+  (no `CL` added). `lake build` green (36 jobs), zero warnings, `sorryAx: 0`.
+- **Axiom inventory 5 → 4 declarations** (+`CL`): `Ground`, `GroundProp`,
+  `GroundPrincipleProp`, `AxPersonalGround`;
+  `AxTwoSubjects` → `RETIRED_AXIOMS` in `scripts/build_deduction.py` and the
+  dissolved list; GAPMAP rows C40–C47/F4/F5 re-transcribed to the derived
+  status (statuses are pure functions of the kernel; these cells now agree).
+- **Philosophical record:** the "leap" was not lost and not faked — it was
+  *located*: the interpersonal step lived in the 2026-09-17 decision that a
+  subject is a self-positing content, and the addressee IS the other the poem
+  needs. The prose registers (base.txt §28, T12–T14) adopt the addressee
+  reading: "o outro é o conteúdo tornado sujeito".

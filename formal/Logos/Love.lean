@@ -8,9 +8,11 @@ T14 (eternal relation): the strong claim — the beloved of the necessary
 person is itself necessary and is loved eternally: the poem's "Amar é
 escolhido e também é necessário (de alguma forma)". Since C4 (2026-09-15)
 the relation itself is *structural*: `Loves := Affects` (directed constitutive
-bearing; the affective fullness stays on the prose side). T14 is now PROVEN↑
-under the C3-I bridges + the priced SEM bridge `AxPersonStability` (every
-person's entity-correlate exists in all worlds — the "de alguma forma"). The
+bearing; the affective fullness stays on the prose side). T14 is PROVEN
+(plurality-discharge, 2026-09-17): the canonical pair (origin + addressee) is
+exhibited with no plurality axiom (`AxTwoSubjects` retired) and
+`AxPersonStability` (esse est agere) is already a theorem — so
+`T14_canonicalRigid` states the *same* pair loving in every world. The
 "chosen" component depends on F1 (freedom, DEFERRED).
 -/
 
@@ -68,17 +70,42 @@ theorem AxPersonStability : ∀ s : Subject, Person s → NecessarySubject s := 
 
 /--Two distinct persons stand in an eternal love-relation, and both persist in every world.
 
- T14 — the eternal love-relation (PROVEN under the C3-I bridges +
-    AxPersonStability): a pair of distinct persons who love each other, both
-    of whose entity-correlates exist in *every* world — the poem's "Amar é
-    escolhido e também é necessário (de alguma forma)". Built on the directed
-    pair `Plurality.T12_directedPair` (C47): direction and stability live on
-    the *same* pair. -/
+ T14 — the eternal love-relation (PROVEN, definitional subject +
+    esse est agere, 2026-09-17): a pair of distinct persons who love each
+    other, both of whose entity-correlates exist in *every* world — the poem's
+    "Amar é escolhido e também é necessário (de alguma forma)". Built on the
+    directed pair `Plurality.T12_directedPair` (C47): direction and stability
+    live on the *same* pair. Formerly `PROVEN↑` under the META plurality
+    bridge `AxTwoSubjects` (retired); see `T14_canonicalRigid` for the
+    world-rigid canonical form. -/
 theorem T14_eternalRelation :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
       Loves s₁ s₂ ∧ NecessarySubject s₁ ∧ NecessarySubject s₂ := by
   obtain ⟨p, q, hp, hq, hne, hl⟩ := Logos.Plurality.T12_directedPair
   exact ⟨p, q, hp, hq, hne, hl, AxPersonStability p hp, AxPersonStability q hq⟩
+
+/--The canonical eternal relation: the origin and the addressee love each other, and persist, in every world.
+
+ T14, canonical + world-rigid (plurality-discharge, 2026-09-17): with the
+    pair made explicit — the origin `Sum.inl ()` and the addressee
+    `Sum.inr True` — the *same* pair stands in love in *every* world, and both
+    relata exist in every world. Stronger than the existential
+    `T14_eternalRelation` (formerly `{AxTwoSubjects}`): "Amar … é necessário
+    (de alguma forma)" is here literal — loving relata rigid across worlds,
+    with no price. The origin loves the addressee (`Sum.inl () ≠ Sum.inr True`),
+    which is enough for the poem's directed bearing. Footprint: `{}`. -/
+theorem T14_canonicalRigid :
+    Person (Sum.inl ()) ∧ Person (Sum.inr True) ∧
+      Loves (Sum.inl ()) (Sum.inr True) ∧
+      (∀ w : World,
+        ExistsAt w (EntityOf (Sum.inl ())) ∧ ExistsAt w (EntityOf (Sum.inr True))) := by
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · exact ⟨trivial, trivial, ⟨True, ⟨True, ⟨True, rfl⟩⟩⟩⟩
+  · exact ⟨trivial, trivial, ⟨True, ⟨True, ⟨True, ⟨rfl, rfl⟩⟩⟩⟩⟩
+  · intro h
+    cases h
+  · intro w
+    exact ⟨⟨True, ⟨True, ⟨True, rfl⟩⟩⟩, ⟨True, ⟨True, ⟨True, ⟨rfl, rfl⟩⟩⟩⟩⟩
 
 /--In every world, two distinct persons stand in a love-relation.
 
@@ -117,6 +144,7 @@ end Logos.Love
 -- Axiom footprint audit
 #print axioms Logos.Love.T13_someoneLovable
 #print axioms Logos.Love.T14_eternalRelation
+#print axioms Logos.Love.T14_canonicalRigid
 #print axioms Logos.Love.T14_world
 #print axioms Logos.Love.T14_square
 #print axioms Logos.Love.T14_content

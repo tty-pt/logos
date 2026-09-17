@@ -69,16 +69,20 @@ declarada (só SEM/META).
   — sem axioma substantivo.
 - L20 (P4): "para haver alguém é preciso haver escolha" → PROVEN
   ✔: C51 (`person_chooses`, `{}`). "Escolha com significado →
-  mais do que uma pessoa" permanece PROVEN↑: C40 (T12) sob `AxTwoSubjects`
-  (META).
+  mais do que uma pessoa" → PROVEN ✔: C40/C73 (plurality-discharge
+  2026-09-17 — o par canónico origem+destinatário é teorema `{}`; a ponte
+  `AxTwoSubjects` foi RETIRED).
 - L22 (P5): "um Ser sózinho … não ajuda nem prejudica ninguém" → PROVEN
   ✔: C56 (`alone_no_other_help_harm`, `{}`; o antigo preço
-  `AxPersonsAffect` foi dissolvido em M1). "Tem de haver este Ser, e o certo e
+  `AxPersonsAffect` foi dissolvido em M1). "Nenhum sujeito está sózinho" →
+  C74 (`neverAlone`/`aloneExcluded`, `{}` — o lema em falta ALONE_EXCLUDED
+  é agora teorema). "Tem de haver este Ser, e o certo e
   o errado também têm de haver" → C68 (`Cogito`, teorema `{}`) + C37/C38. "Tem de
-  haver quem se possa Amar" → PROVEN↑ C41 (via C40).
-- L24 (P6): "não é impessoal, e não é sózinho" → C40/C41; "Amar é escolhido e
-  também é necessário (de alguma forma)" → PROVEN↑ C42–C45 (T14) sob
-  `AxTwoSubjects` (`AxPersonStability` agora teorema — esse est agere).
+  haver quem se possa Amar" → PROVEN ✔ C41/C75 (via C40; cada conteúdo é pessoa).
+- L24 (P6): "não é impessoal, e não é sózinho" → C40/C73/C74; "Amar é escolhido e
+  também é necessário (de alguma forma)" → PROVEN ✔ C42–C45/C76 (T14 `{}`;
+  forma canónica rígida: o MESMO par — origem e destinatário — ama e existe
+  em todos os mundos; `AxPersonStability` teorema — esse est agere).
 - L26–30: "este mundo é necessário? Não" — negação não reivindicada (sem
   demonstração); "a criação existe / há propósito" — zona de fé (F9,
   DEFERRED); "existe este Ser Pessoal" — PROVEN↑ C32 (T8, `AxPersonalGround`).

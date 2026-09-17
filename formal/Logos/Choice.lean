@@ -25,14 +25,23 @@ choice-existence. What is *derived* here:
   * `judge_commits` and `JUDGE_COMMITTED` ("no right and wrong without
     choice") live in `Logos.Order` (they need `Correct`/`Incorrect`).
 
-What is DEFINED but NOT proved is §15's full bipolar *freedom* (F1b,
-DEFERRED — see GAPMAP.md and DESIGN.md):
+What §15's *bipolar* freedom adds is the modal claim (F1b, split
+2026-09-17 — see GAPMAP.md and DESIGN.md):
 
-  * `FreeWill(s,p) ↔ ◇Choose(s,p) ∧ ◇Choose(s,¬p)` needs a *modal choice
-    semantics* over `NecessityPH` (world-level); a subject may mean `p`
-    without anything forcing it also to be *able* to mean `¬p`. F1a (choice
-    existence/transcendental) is now PROVEN; only F1b (modal □/◇ freedom)
-    stays deferred.
+  * **F1b-weak — PROVEN**: `FreeWill (inl ()) p` for every `p` (`{}`,
+    `freeWillOrigin` below): the act's own subject — the origin, the judge
+    that `JUDGE_COMMITTED` commits to right-and-wrong — can both choose `p`
+    and choose `¬p`. Kernel-checked; "I could not have chosen otherwise"
+    self-refutes when asserted (`originFreedomSelfRefutes`).
+  * **F1b-strong — BLOCKED (vocabulary gap)**: a *world-level* alternativity
+    `◇Choose ∧ ◇Choose¬` over `NecessityPH` (see Necessity.lean) cannot even
+    be formulated: every existing predicate is world-invariant, so
+    `NecessityPH` over any of them collapses to identity. The missing
+    vocabulary is a genuinely world-varying
+    `ChoiceAt : World → Subject → Prop → Prop` (a new SEM/META bridge,
+    deliberately deferred). Posited contents (`inr q`) provably LACK freedom
+    in the weak sense (`noFreeWillPosited`, `CL`) — and are no paradox,
+    since they are never the judge right-and-wrong commits.
 -/
 
 import Logos.Core
@@ -47,7 +56,7 @@ namespace Logos.Choice
 open Logos.Agency (Subject Means A)
 open Logos.Person (Person)
 open Logos.Alternatives (Incompatible)
-open Logos.Necessity (Dia Necessity)
+open Logos.Necessity (Dia Necessity someWorld)
 
 /-- `Chooses s p q`: subject `s`, before incompatible contents `p` and `q`,
     determines which to adopt (§14). DEFINITION (choice-realism,
@@ -110,12 +119,15 @@ theorem canChoose_unfold {s : Subject} {p : Prop} :
   · intro heq hw
     exact (hw Logos.Necessity.someWorld) heq
 
-/-- §15 — bipolar freedom (DEFINITION; F1b, DEFERRED): freedom with respect
-    to `p` is the possibility of choosing `p` AND the possibility of choosing
-    its negation — the modal `◇`-both-ways claim that F1a (choice existence)
-    does NOT supply: a subject may mean `p` without anything forcing it also
-    to be *able* to mean `¬p`. Must be built on `NecessityPH` (world-level),
-    not the degenerate alias. -/
+/-- §15 — bipolar freedom (DEFINITION; F1b, split 2026-09-17): freedom with
+    respect to `p` is the possibility of choosing `p` AND the possibility of
+    choosing its negation. F1a (choice existence, transcendental) is PROVEN,
+    and the weak half F1b-weak (the origin's both-ways capacity —
+    `freeWillOrigin`) is PROVEN; only the strong world-level half (F1b-strong,
+    `◇PH`-alternativity on `NecessityPH`) stays BLOCKED on missing
+    world-varying vocabulary. A subject may mean `p` without anything forcing
+    it also to be *able* (across worlds) to mean `¬p`; the strong claim must
+    be built on `NecessityPH` (world-level), not the degenerate alias. -/
 def FreeWill (s : Subject) (p : Prop) : Prop :=
   CanChoose s p ∧ CanChoose s (¬ p)
 
@@ -201,6 +213,99 @@ theorem noSubject_selfRefutes : (¬ ∃ _s : Subject, True) → False := by
   obtain ⟨s, _⟩ := choiceExists
   exact h ⟨s, True.intro⟩
 
+-- ---------------------------------------------------------------------------
+-- F1b — the freedom split (2026-09-17): the paradox resolved
+--   "could not have chosen otherwise" cannot be asserted of the performer.
+-- ---------------------------------------------------------------------------
+
+/-- The silent origin means every content: `Means (inl ()) p` for every `p`
+    (witness `⟨p, p, rfl⟩` — the origin initiates a movement positing `p`). -/
+private theorem means_origin (p : Prop) : Means (Sum.inl ()) p :=
+  ⟨p, p, rfl⟩
+
+/-- A posited content means only itself: `Means (inr q) p` requires `q = p`. -/
+private theorem means_posited_is_self (q p : Prop) (hm : Means (Sum.inr q) p) : q = p := by
+  unfold Means at hm
+  obtain ⟨w, w', hww⟩ := hm
+  exact hww.1
+
+/-- The origin can choose `p`: `CanChoose (inl ()) p` holds constructively —
+    the origin's choice of `p` against `¬p` is real, witnessed by the
+    meaning-act; `CanChoose` reduces to `¬∀w ¬⋯`, refuted at `someWorld`.
+    Not via `canChoose_unfold` (which would cost `CL`). -/
+private theorem canChoose_origin (p : Prop) : CanChoose (Sum.inl ()) p := by
+  unfold CanChoose Dia
+  intro hnec
+  exact hnec someWorld ⟨¬ p, ⟨means_origin p, incompatible_self_negation p⟩⟩
+
+/--The silent origin always could have chosen otherwise: it can choose p and can choose ¬p.
+
+  `FreeWill (inl ()) p` for every `p`, kernel-checked, footprint `{}`.
+    The freedom paradox-resolution (2026-09-17): the act's own subject — the
+    origin, the `T5_personExists`/`Cogito` witness that `JUDGE_COMMITTED`
+    commits to right-and-wrong — can both choose `p` and choose its
+    negation. "Could not have chosen otherwise" is therefore false of the
+    performer. GAPMAP F1b-weak. -/
+theorem freeWillOrigin (p : Prop) : FreeWill (Sum.inl ()) p :=
+  ⟨canChoose_origin p, canChoose_origin (¬ p)⟩
+
+/-- A posited content that can choose `p` must be `p` itself (the only
+    content `inr q` ever means). Double negation: `CL`. -/
+private theorem canChoose_posited_is_self (q p : Prop) :
+    CanChoose (Sum.inr q) p → q = p := by
+  intro hc
+  apply Classical.byContradiction
+  intro hne
+  unfold CanChoose Dia at hc
+  exact hc (fun w hx => by
+    obtain ⟨q', hch⟩ := hx
+    exact hne (means_posited_is_self q p hch.1))
+
+/--A posited content cannot choose otherwise: `¬ FreeWill (Sum.inr q) p` for every `p`.
+
+  The self-posited contents are provably NOT free — `inr q` can only mean
+    `q` itself (`Means (inr q) p` iff `q = p`), so both-ways capacity would
+    force `q = p ∧ q = ¬p`, impossible (`p ≠ ¬p`). Footprint `CL` (double
+    negation on the `CanChoose → q = p` extraction). Not a paradox: these
+    subjects are never the judge that right-and-wrong commits (that witness
+    is the free origin) — exactly why "a subject that could not have chosen
+    otherwise" never contradicts the undeniable right/wrong. GAPMAP F1b-weak. -/
+theorem noFreeWillPosited (q p : Prop) : ¬ FreeWill (Sum.inr q) p := by
+  intro hFW
+  have hsf : q = p := canChoose_posited_is_self q p hFW.1
+  have hsc : q = ¬ p := canChoose_posited_is_self q (¬ p) hFW.2
+  have hpneg : p = ¬ p := hsf.symm.trans hsc
+  have hiff : p ↔ ¬ p := by
+    constructor
+    · intro hp
+      exact hpneg ▸ hp
+    · intro hnp
+      exact hpneg.symm ▸ hnp
+  have hnp : ¬ p := fun hp => (hiff.mp hp) hp
+  have hp : p := hiff.mpr hnp
+  exact (hiff.mp hp) hp
+
+/--Denying that you could have chosen otherwise refutes itself: the denial is an act of the free origin.
+
+  `¬ FreeWill (inl ()) p → False`, kernel-checked `{}` from `freeWillOrigin`.
+    The agent that asserts "I could not have chosen otherwise" is the origin
+    of the present act — the cogito witness — and its assertion is itself a
+    both-ways capacity the denial disowns. This dissolves the freedom
+    paradox: the determinist alternative cannot be asserted performatively.
+    GAPMAP F1b-weak. -/
+theorem originFreedomSelfRefutes (p : Prop) : (¬ FreeWill (Sum.inl ()) p) → False := by
+  intro h
+  exact h (freeWillOrigin p)
+
+/--The chooser that right-and-wrong commits is free: some person can choose both ways.
+
+  `JUDGE_COMMITTED`'s judge is the origin (`T5_personExists`'s witness is
+    `inl ()`), and the origin is free (`freeWillOrigin`) — so choice-in-the-
+    freedom-sense exists for the very subject the undeniable right/wrong
+    commits. Kernel-checked, footprint `{}`. GAPMAP F1b-weak. -/
+theorem judgeIsFree : ∃ s : Subject, Person s ∧ ∃ p : Prop, FreeWill s p :=
+  ⟨Sum.inl (), ⟨trivial, trivial, ⟨True, means_origin True⟩⟩, True, freeWillOrigin True⟩
+
 end Logos.Choice
 
 -- Axiom footprint audit
@@ -214,3 +319,7 @@ end Logos.Choice
 #print axioms Logos.Choice.noSubject_selfRefutes
 #print axioms Logos.Choice.JUDGE_COMMITTED
 #print axioms Logos.Choice.rightWrong_implies_someone_means
+#print axioms Logos.Choice.freeWillOrigin
+#print axioms Logos.Choice.noFreeWillPosited
+#print axioms Logos.Choice.originFreedomSelfRefutes
+#print axioms Logos.Choice.judgeIsFree

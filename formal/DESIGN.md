@@ -81,6 +81,10 @@ C39, C52–C55, C57). Axiom inventory goes **12 → 11**:
 "lone-subject countermodel is the price of AxTwoSubjects" story is kept —
 but it is now the price of *plurality* (M2 spike),
 not of the act-datum.
+(**Superseded 2026-09-17 by the plurality-discharge, D10.sealed: there IS no
+lone-subject model — the definitional field supplies an other for every
+subject (`Value.neverAlone`, C74); `AxTwoSubjects` is retired and the M2
+witness, built on the pre-definition `Subject`, is void.**)
 
 ## D4 — Truthmaker semantics: §24a atom-only, structural `TrueAt` (A2)
 
@@ -151,6 +155,14 @@ does not self-refute, so it stays a *semantic axiom*, never a
 "transcendental theorem". With it, T7 is a genuine theorem; without it,
 T7 is BLOCKED on precisely this lemma.
 
+Amended by batch A2-swap-theorem (2026-09-17): the swap is now a THEOREM
+for atoms — esse-est-agere made `ExistsAt` world-vacuous by definition, so
+the witness from any one world works for all worlds definitionally and no
+swap axiom is needed (`AxGlobalGround` demoted, name kept; T7 re-scoped to
+atoms). The compound excluded-middle instance is a different, unforced
+claim (no existential ground for compounds in structural `TrueAt`) and is
+recorded BLOCKED (C19) with its exact missing lemma — not a priced axiom.
+
 ## D8 — Q3.1/Q3.2: §24b renderings
 
 Features of an act = propositions entailed by its content
@@ -177,11 +189,15 @@ Amended by B2 (2026-09-15): `AxGroundBearing` is dissolved — `Realizes` is
 is the unfolding of the vocabulary, not a separate assumption. T8 is now
 PROVEN↑ under `AxPersonalGround` alone; the remaining failure point is (a).
 
-## Q7.2 (DEFERRED)
+## Q7.2 (ANSWERED by batch A2-swap-theorem, 2026-09-17)
 
 Can `AxGlobalGround` be weakened (e.g. "every contingent ground of a
-necessary truth is mirrored by a necessary ground")? Recorded as research;
-not required for T7 as stated.
+necessary truth is mirrored by a necessary ground")? Answer: for atoms no
+weakening is needed — the swap is a theorem outright (world-vacuous
+`ExistsAt`; M4's `AxGlobalMirror` is superseded, nothing stays priced).
+For compounds the question is moot: no existential compound ground is
+forced, so there is no footprint-preserving replacement — the EM instance
+is recorded BLOCKED (C19), not axiomatized.
 
 ## D10 — Interpersonal value bridge (Value.lean, split C3-I)
 
@@ -204,6 +220,22 @@ Recovery theorem `valueInterpersonal_of_split` recovers the exact old statement
 from the two new bridges: no strength lost. Consistency model for the split:
 the same two-subject boolean {present, other}, but the *contents* of the
 premises are now independent and individually priced.
+
+**(Superceded by the plurality-discharge, 2026-09-17 — D10.sealed.)** The
+definitional subject (`Subject := Unit ⊕ Prop`, 2026-09-17) makes the
+patient-other *derivable*, not priced: `Person.twoPersonsFromSubject` (C73)
+exhibits the canonical pair — the origin `Sum.inl ()` and the **addressee**
+`Sum.inr True` (a content positing itself: the "alguém para quem significar")
+— footprint `{}`. And `Value.neverAlone`/`aloneExcluded` (C74) prove
+`ALONE_EXCLUDED` outright, so the M2 lone-subject consistency model (built on
+the pre-definition `Subject`) is void. The verse "mais do que uma pessoa" was
+always the definition's consequence, not a separate leap; the former bridge
+`AxTwoSubjects` is RETIRED (GAPMAP dissolved list, `RETIRED_AXIOMS` in
+`scripts/build_deduction.py`). Track-B verdict (equal-origin otherhood):
+a second *silent origin* is not a Λ-relatum — `Unit` carries exactly one
+`inl`, any `Index ⊕ Prop` re-reading behaves identically in `Means`, and
+requiring one would redefine (not extend) the subject; the other is
+inherently the addressee-content.
 
 ## D11 — EntityOf bridge (Plurality.lean, Q2 decision)
 
@@ -240,6 +272,33 @@ Future use: freedom (F1b) and the eternal love of T14 must be built on
 `NecessityPH` (world-level), not on the degenerate alias, to preserve
 meaningful modal content.
 
+**(Plurality-discharge, 2026-09-17 — see D10.sealed, D14b):** the eternal
+love of T14 is now PROVEN `{}` on the world-level shape: the canonical pair
+(origin `Sum.inl ()` + addressee `Sum.inr True`) is world-rigid —
+`T14_canonicalRigid` (C76): *the same pair* loves and exists in every world
+(`∀ w`), no stability bridge needed (esse est agere).
+
+### F1b split (2026-09-17, Choice.lean — "could not have chosen otherwise")
+
+F1b separates into a proven weak half and a blocked strong half:
+
+- **F1b-weak — PROVEN**: `freeWillOrigin : FreeWill (inl ()) p` (`{}`) — the
+  act's own subject, the origin that `JUDGE_COMMITTED` commits to right/wrong,
+  can choose `p` AND choose `¬p`. `originFreedomSelfRefutes` (`{}`) makes the
+  determinist denial performatively self-contradictory; `judgeIsFree` (`{}`)
+  states the dissolved paradox; `noFreeWillPosited : ¬ FreeWill (inr q) p`
+  (`CL`) shows the self-posited contents are provably unfree — yet never the
+  right/wrong judge. The paradox is dissolved at kernel level (C69–C72).
+- **F1b-strong — BLOCKED (vocabulary gap)**: a world-level alternativity
+  `◇PH Choose ∧ ◇PH Choose¬` needs a genuinely world-varying choice predicate.
+  Every predicate below `Semantics` is world-invariant — `NecessityPH` applied
+  to any of them collapses to identity (world inhabited) — so the strong
+  sentence cannot be *formulated*, let alone proved. The missing vocabulary is
+  `ChoiceAt : World → Subject → Prop → Prop` (SEM/META bridge, deliberately
+  NOT added — nothing in the current chain forces it). This differs from
+  C19's BLOCKED (formulable but unprovable lemma): F1b-strong is a formulation
+  gap.
+
 ## D13 — Faith boundary scope (Love.lean, T14, C4)
 
 The deductive chain stops at "eternal love-relation" (T14). Trinity,
@@ -274,7 +333,13 @@ C3-I bridges. All three are individually priced and individually failed to
 be excluded:
 
 - spike x2_spikeA: `AxTwoSubjects` (plurality) — stuck at `ALONE_EXCLUDED`;
+  **(superseded 2026-09-17 by the plurality-discharge: `ALONE_EXCLUDED` is
+  now the theorem `Value.aloneExcluded` (C74) and `AxTwoSubjects` is retired
+  (C73 canonical pair); the spike's lone-subject witness was built on the
+  pre-definition `Subject` — see D10.sealed);**
 - spike x2_spikeB: `AxPersonsAffect` (affectivity) — `Affects` has no intro rule;
+  (superseded 2026-09-15 by M1/A3: `Affects := s ≠ t`, so the rule is the
+  definition);
 - spike x2_spikeD: `AxPersonStability` (persistence) — `Person` (T5) gives no world-coverage. (Superseded 2026-09-17 by esse-est-agere: the rule is supplied by definition; `AxPersonStability` is now a theorem.)
 
 ### 2.0 retries (E0/C2/A3 campaign, 2026-09-15, `/tmp/opencode/x3_spikeB{1,2,3}.lean`)
@@ -284,6 +349,10 @@ be excluded:
   `rightWrongDistinction` is axiom-free but *quantification-agnostic* (does
   not construct a relatum); `Means`/`A s p` never name another subject.
   **Stuck.** Lemma stays named; `AxTwoSubjects` stays the priced META bridge.
+  **(Superseded 2026-09-17 by the plurality-discharge, D10.sealed: the
+  definitional field always supplies an other — `Value.neverAlone` (C74)
+  refutes `Alone s` outright; the retries ran on the OLD axiomatic
+  `Subject`.)**
 - **x3_spikeB2** (`PERSONS_BEAR`, from act-structure over the A3 bundle):
   `Helps`/`Harms` have *no introduction rule* from `Agent/Rational/Means`;
   nothing of personhood is directed at another's welfare. **Stuck.**
@@ -323,6 +392,9 @@ Unprovable from the current axioms; the interpersonal step remains separated
 into the priced bridges `AxTwoSubjects` (META) + `AxPersonsAffect` (SEM).
 Any future transcendental defense of T12 must target `ALONE_EXCLUDED`
 directly.
+(**Achieved 2026-09-17 by the plurality-discharge — but by *definition*, not
+transcendental denial: the definitional field supplies the other
+(`Value.neverAlone`, C74) before any argument begins; D10.sealed.**)
 
 ## D-B1 — Act bundle (Agency.lean)
 
@@ -525,6 +597,8 @@ cycle).
   able to mean `¬p`. `FreeWill` remains an unproven definitional interface;
   restoring it is a future priced move (semantic choice for the modal
   choice-alternatives), never a silent revert.
+  (Superseded 2026-09-17 by the F1b split — see note at D12: the weak half is
+  PROVEN, only the world-level alternativity stays blocked on vocabulary.)
 
 ## D-cogito-rethinking — non-cogito refutes itself (Agency.lean, Plurality.lean)
 
@@ -555,6 +629,9 @@ D-cogito-rethinking (2026-09-15):
    The "present act" datum is now a derived consequence of the plurality
    bridge + logical distinction (Level 0 + one META bridge), not an
    irreducible assumption. This is a strict strengthening.
+   (All `{AxTwoSubjects, …}` of this 2026-09-15 note superseded — see
+   D10.sealed and the D3 amendment: plurality is `{}` since the
+   plurality-discharge, 2026-09-17.)
 
 Cost: three axioms removed in cogito-rethinking (−2 declarations: Exists/Content;
 then −1 more in A1: cogito itself), two theorems added (C48 + T1/T4/T5 re-homed).
@@ -641,6 +718,10 @@ the *existence* half (F1a; the bipolar modal half F1b stays deferred). 2026-09-1
   `¬p`; nothing in the current axioms forces world-level possibility of the
   negation. `canChoose_unfold` shows the aliased-◇ scaffolding collapses to
   real choice, so F1b is exactly the modal claim, not a vocabulary gap.
+  (Superseded 2026-09-17 by the F1b split — the weak half PROVEN
+  (`freeWillOrigin`, `{}`); see D12 note. The "not a vocabulary gap" reading
+  gets refined: the *formulable* half is now proven, and the strong world-level
+  half is, precisely, a vocabulary gap — `ChoiceAt` is genuinely missing.)
 - Cost: zero new axioms; `Order.lean` imports `Logos.Choice` (acyclic).
 
 ## D-C47 — Chain node `T12_directedPair` (Plurality.lean)

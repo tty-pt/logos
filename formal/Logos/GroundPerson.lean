@@ -121,10 +121,12 @@ theorem present_feature_is_grounded {f : Prop} (ht : T f) (_hf : IsPresentPerson
 
 -- §24a applied to a *necessary* truth also yields a grounder (linking the
 -- Prop-level and world-level principles: T7 supplies the necessary entity).
-/-- Every necessary truth has a necessary grounder. -/
-theorem necessary_truth_has_necessary_grounder {τ : Form} (hτ : Logos.Truthmaker.NecessarilyTrue τ) :
+-- Atom-restricted with T7 (batch A2-swap-theorem, 2026-09-17).
+/-- Every necessary atomic truth has a necessary grounder. -/
+theorem necessary_truth_has_necessary_grounder (n : Nat)
+    (hτ : Logos.Truthmaker.NecessarilyTrue (Form.atom n)) :
     ∃ e : Entity, NecessaryEntity e := by
-  obtain ⟨e, hne, _⟩ := Logos.Modal.T7_necessaryReality hτ
+  obtain ⟨e, hne, _⟩ := Logos.Modal.T7_necessaryReality n hτ
   exact ⟨e, hne⟩
 
 end Logos.GroundPerson

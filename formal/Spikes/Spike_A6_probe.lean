@@ -38,6 +38,14 @@ is a *different axiom* (atom-restricted coverage), not a footprint-preserving
 replacement. Adopting it is a semantic choice to be rejected or accepted as
 a SEPARATE recorded position.
 
+SUPERSEDED 2026-09-17 by batch A2-swap-theorem (see GAPMAP.md C18–C20):
+esse-est-agere's world-vacuous `ExistsAt` makes the atom swap itself a
+theorem (`Modal.AxGlobalGround`, no axiom at all — weaker or otherwise),
+so the Mirror weakening is moot. What remains is exactly this file's
+compound wall: `T7_excludedMiddle_via_mirror` below is the transcript of
+the BLOCKED C19 instance, whose missing lemma is `∃ e, Ground e (or θ
+(not θ))` given EM-necessity. This file is kept as that transcript.
+
 Not part of the library build (Spikes/ excluded). `sorry` = SPIKE-MARKER.
 -/
 

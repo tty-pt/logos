@@ -442,7 +442,7 @@ _REGISTRY: dict = {}   # axiom base name -> {"tag", "gloss", "full"}
 # footprint check spots stale GAPMAP transcriptions after a demotion (a cell
 # still listing them as footprint members). Never used for status. Update in
 # the demotion batch itself.
-RETIRED_AXIOMS = {"ExistsAt", "AxPersonStability"}
+RETIRED_AXIOMS = {"ExistsAt", "AxPersonStability", "AxGlobalGround", "AxTwoSubjects"}
 
 
 def _short(name: str) -> str:
@@ -653,7 +653,7 @@ def render_index(sections, level_titles, claims_by_id, decls, node_map, graph):
     ap("      ├──→ §24a truthmaker atómico · T7 realidade necessária (AxGlobalGround)")
     ap("      ├──→ §24b pessoa · T8 fundamento pessoal (AxPersonalGround, META)")
     ap("      ├──→ §13–§15 escolha · T11 campo de escolha · T9 alternativas")
-    ap("      └──→ P5/P7 pluralidade (AxTwoSubjects, META) · P7/P8 amor (T13·T14)")
+    ap("      └──→ P5/P7 pluralidade (derivada — par canónico C73, `{}`) · P7/P8 amor (T13·T14)")
     ap("                AxPersonStability (SEM) — 'de alguma forma'")
     ap("```")
     ap("")
@@ -1457,6 +1457,7 @@ def main():
             glosses[f] = info["stringValue"]
     # claim-only meanings: mini stub module Logos/ClaimMeanings.lean
     claim_stub = {
+        "C19": "Logos.ClaimMeanings.C19",
         "C59": "Logos.ClaimMeanings.C59",
         "F2": "Logos.ClaimMeanings.F2",
         "F3": "Logos.ClaimMeanings.F3",

@@ -68,7 +68,58 @@ theorem inseparability_24b : ∀ a : Prop,
     rw [heq]
     exact ⟨q, id, s, act_implies_means ha⟩
 
+-- ---------------------------------------------------------------------------
+-- Plurality from the definitional subject (addressee, 2026-09-17)
+-- ---------------------------------------------------------------------------
+
+/-- The content of a subject: the posited proposition of `Sum.inr q`, any
+    proposition when the subject is the silent origin. -/
+def contentOf : Subject → Prop
+  | Sum.inl _ => True
+  | Sum.inr q => q
+
+/--The canonical pair: the origin and the addressee are two distinct persons.
+
+  `twoPersonsFromSubject` — there are two distinct persons by WHAT A SUBJECT IS
+    alone (definitional subject, 2026-09-17): the silent origin
+    `Sum.inl ()` and the self-posited content `Sum.inr True` are both persons
+    (`Person (Sum.inr True)` because `Means (Sum.inr True) True`) and are
+    distinct by constructors. No plurality axiom: the addressee — the one for
+    whom something signifies — is a person by the definition of person.
+    Discharges the former bridge `AxTwoSubjects`. Footprint: `{}`. -/
+theorem twoPersonsFromSubject :
+    ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ := by
+  refine ⟨Sum.inl (), Sum.inr True, ?_, ?_, ?_⟩
+  · exact ⟨trivial, trivial, ⟨True, ⟨True, ⟨True, rfl⟩⟩⟩⟩
+  · exact ⟨trivial, trivial, ⟨True, ⟨True, ⟨True, ⟨rfl, rfl⟩⟩⟩⟩⟩
+  · intro h
+    cases h
+
+/--Every content, raised to a subject, is a person.
+
+  The plenum seed: `∀ p : Prop, Person (Sum.inr p)` — every posited content
+    posits itself, so is intentional, so is a person. Distinctness of such
+    persons is kernel-visible only for *incompatible* contents (equality of
+    propositions is `propext`-collapsed), hence `positedDistinct` below for
+    `True`/`False`. Footprint: `{}`. -/
+theorem everyContentIsAPerson : ∀ p : Prop, Person (Sum.inr p) := by
+  intro p
+  exact ⟨trivial, trivial, ⟨p, ⟨True, ⟨p, ⟨rfl, rfl⟩⟩⟩⟩⟩
+
+/--The two extreme contents are two distinct persons.
+
+  `positedDistinct`: `Sum.inr True` and `Sum.inr False` are distinct because
+    their contents are (incompatibility is the kernel-visible distinctness
+    of propositions). Footprint: `{}`. -/
+theorem positedDistinct : (Sum.inr True : Subject) ≠ Sum.inr False := by
+  intro h
+  have hTF : True = False := congrArg contentOf h
+  exact cast hTF True.intro
+
 end Logos.Person
 
 -- Axiom footprint audit
 #print axioms Logos.Person.inseparability_24b
+#print axioms Logos.Person.twoPersonsFromSubject
+#print axioms Logos.Person.everyContentIsAPerson
+#print axioms Logos.Person.positedDistinct

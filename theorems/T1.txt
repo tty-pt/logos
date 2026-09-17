@@ -38,8 +38,9 @@ Portanto:
 o batch definitional-subject (2026-09-17), `Plurality.T1_subjectExists` é teorema trivial —
 projeção do ato exibido `Agency.Cogito` (∃ s p, A s p). Footprint
 medido `{}`. O ato-dado NÃO é derivado da pluralidade:
-é o fundamento exibido; a pluralidade (T12, AxTwoSubjects) é uma ponte META
-separada. Ver formal/GAPMAP.md C21.)
+é o fundamento exibido; a pluralidade (T12, núcleo canónico origem+destinatário,
+2026-09-17) é teorema `{}` independente — a ponte META AxTwoSubjects foi
+RETIRED no plurality-discharge. Ver formal/GAPMAP.md C21/C73.)
 
 (Nota formal §26 un-denyable: para além de T1, a própria negação
 "não existe sujeito" refuta-se a si mesma — `noSubject_selfRefutes`:

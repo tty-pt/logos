@@ -1,11 +1,13 @@
 /-
 # Logos.Plurality — more than one person (poem P5/P7; theorem T12)
 
-T12 — from the necessary right/wrong (`Core.rightWrongDistinction`, PROVEN)
-and the META bridge `AxTwoSubjects` (Value), there are at least two
-distinct persons. This is the poem's "tem de haver mais do que uma pessoa"
-and its "não é sózinho". Affectivity between them is the SEM meaning-postulate
-`AxPersonsAffect` (C3-I split of the former `AxValueInterpersonal`).
+T12 — there are at least two distinct persons. From the definitional subject
+alone (plurality-discharge, 2026-09-17): the canonical pair (the origin
+`Sum.inl ()` and the addressee `Sum.inr True`) is exhibited by
+`Person.twoPersonsFromSubject` with no axiom — the former META bridge
+`AxTwoSubjects` is retired (its content moved into the definition of a
+subject) and the M2 lone-subject countermodel is superseded. Affectivity
+between distinct persons is the theorem `AxPersonsAffect` (A3).
 
 Also hosts the Q2 bridge `EntityOf : Subject → Entity` (each person has an
 entity-correlate), decided to close the Subject/Entity gap so the love layer
@@ -18,8 +20,8 @@ A1 (2026-09-16): the existence theorems `T1_subjectExists`, `T4_agentExists`
 definitional-subject batch (2026-09-17) made `Cogito` itself a theorem.
 A1's cycle reason (`Plurality → Value → Person → Agency`)
 is respected by importing only the foundation, never proving from T12.
-Only `T12_twoPersons`, `notAlone`, and `T12_directedPair` still stand on
-`AxTwoSubjects` — they are the genuine plurality claims. -/
+`T12_twoPersons`, `notAlone`, and `T12_directedPair` are the genuine plurality
+claims, all now PROVEN `{}`. -/
 
 import Logos.Core
 import Logos.Agency
@@ -33,7 +35,7 @@ open Logos.Agency (Subject)
 open Logos.Person (Person)
 open Logos.Truthmaker (Entity ExistsAt)
 open Logos.Semantics (World)
-open Logos.Value (AxTwoSubjects Affects AxPersonsAffect)
+open Logos.Value (Affects AxPersonsAffect)
 
 /-- Q2 bridge, now definitional (C2, 2026-09-15): since `Entity := Subject`
     (Truthmaker), every subject *is already* an entity — first-person acts and
@@ -45,11 +47,13 @@ def NecessarySubject (s : Subject) : Prop := ∀ w : World, ExistsAt w (EntityOf
 
 /--There are at least two distinct persons.
 
- T12 — there is more than one person (poem P5/P7; PROVEN↑ under
-    `AxTwoSubjects`). -/
+  T12 — there is more than one person (poem P5/P7; PROVEN, definitional
+    subject, 2026-09-17): the canonical pair of
+    `Person.twoPersonsFromSubject` — the origin and the addressee — with no
+    axiom. Formerly PROVEN↑ under the META bridge `AxTwoSubjects` (retired). -/
 theorem T12_twoPersons :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ :=
-  AxTwoSubjects Logos.Core.rightWrongDistinction
+  Logos.Person.twoPersonsFromSubject
 
 /-- "Not alone": some pair of distinct persons exists (the same result,
     restated in the poem's vocabulary). -/

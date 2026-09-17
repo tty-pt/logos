@@ -31,11 +31,19 @@
   "Quot.sound"
  ],
  "Logos.Choice.choiceExists": [],
+ "Logos.Choice.freeWillOrigin": [],
  "Logos.Choice.incompatible_self_negation": [],
+ "Logos.Choice.judgeIsFree": [],
  "Logos.Choice.meaning_I_needs_subject": [],
  "Logos.Choice.meaning_needs_subject": [],
  "Logos.Choice.noChoice_selfRefutes": [],
+ "Logos.Choice.noFreeWillPosited": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
  "Logos.Choice.noSubject_selfRefutes": [],
+ "Logos.Choice.originFreedomSelfRefutes": [],
  "Logos.Choice.person_chooses": [],
  "Logos.Choice.rightWrong_implies_someone_means": [],
  "Logos.Core.IsFalse": [],
@@ -101,7 +109,6 @@
   "Logos.GroundPerson.GroundProp"
  ],
  "Logos.GroundPerson.necessary_truth_has_necessary_grounder": [
-  "Logos.Modal.AxGlobalGround",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.GroundPerson.present_feature_is_grounded": [
@@ -120,41 +127,22 @@
  "Logos.Love.AxPersonStability": [],
  "Logos.Love.Lovable": [],
  "Logos.Love.Loves": [],
- "Logos.Love.T13_someoneLovable": [
-  "Logos.Value.AxTwoSubjects"
- ],
- "Logos.Love.T14_content": [
-  "Logos.Value.AxTwoSubjects"
- ],
- "Logos.Love.T14_eternalRelation": [
-  "Logos.Value.AxTwoSubjects"
- ],
- "Logos.Love.T14_square": [
-  "Logos.Value.AxTwoSubjects"
- ],
- "Logos.Love.T14_world": [
-  "Logos.Value.AxTwoSubjects"
- ],
+ "Logos.Love.T13_someoneLovable": [],
+ "Logos.Love.T14_canonicalRigid": [],
+ "Logos.Love.T14_content": [],
+ "Logos.Love.T14_eternalRelation": [],
+ "Logos.Love.T14_square": [],
+ "Logos.Love.T14_world": [],
  "Logos.Modal.AxGlobalGround": [
-  "Logos.Modal.AxGlobalGround",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Modal.Contingent": [],
  "Logos.Modal.NecessaryEntity": [],
- "Logos.Modal.T7_excludedMiddleInstance": [
-  "propext",
-  "Classical.choice",
-  "Quot.sound",
-  "Logos.Modal.AxGlobalGround",
-  "Logos.Truthmaker.Ground"
- ],
  "Logos.Modal.T7_necessaryReality": [
-  "Logos.Modal.AxGlobalGround",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Modal.actualWorld": [],
  "Logos.Modal.noNecessaryTruthIfAllContingent": [
-  "Logos.Modal.AxGlobalGround",
   "Logos.Truthmaker.Ground"
  ],
  "Logos.Necessity.Dia": [],
@@ -203,26 +191,24 @@
  "Logos.Person.Intentional": [],
  "Logos.Person.Person": [],
  "Logos.Person.RationalAct": [],
+ "Logos.Person.contentOf": [],
+ "Logos.Person.everyContentIsAPerson": [],
  "Logos.Person.inseparability_24b": [
   "propext",
   "Classical.choice",
   "Quot.sound"
  ],
+ "Logos.Person.positedDistinct": [],
+ "Logos.Person.twoPersonsFromSubject": [],
  "Logos.Plurality.EntityOf": [],
  "Logos.Plurality.NecessarySubject": [],
- "Logos.Plurality.T12_directedPair": [
-  "Logos.Value.AxTwoSubjects"
- ],
- "Logos.Plurality.T12_twoPersons": [
-  "Logos.Value.AxTwoSubjects"
- ],
+ "Logos.Plurality.T12_directedPair": [],
+ "Logos.Plurality.T12_twoPersons": [],
  "Logos.Plurality.T1_subjectExists": [],
  "Logos.Plurality.T4_agentExists": [],
  "Logos.Plurality.T5_personExists": [],
  "Logos.Plurality.cogito_from_T12": [],
- "Logos.Plurality.notAlone": [
-  "Logos.Value.AxTwoSubjects"
- ],
+ "Logos.Plurality.notAlone": [],
  "Logos.Semantics.FalseAt": [],
  "Logos.Semantics.Form.and.elim": [],
  "Logos.Semantics.Form.and.inj": [],
@@ -356,17 +342,16 @@
  "Logos.Value.Affects": [],
  "Logos.Value.Alone": [],
  "Logos.Value.AxPersonsAffect": [],
- "Logos.Value.AxTwoSubjects": [
-  "Logos.Value.AxTwoSubjects"
- ],
  "Logos.Value.Harms": [],
  "Logos.Value.Helps": [],
  "Logos.Value.OtherAffects": [],
+ "Logos.Value.aloneExcluded": [],
  "Logos.Value.alone_no_other_affects": [],
  "Logos.Value.alone_no_other_help_harm": [],
  "Logos.Value.harm_affects": [],
  "Logos.Value.help_affects": [],
- "Logos.Value.valueInterpersonal_of_split": [
-  "Logos.Value.AxTwoSubjects"
- ]
+ "Logos.Value.neverAlone": [],
+ "Logos.Value.otherSubject": [],
+ "Logos.Value.otherSubject_ne": [],
+ "Logos.Value.valueInterpersonal_of_split": []
 }

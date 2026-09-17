@@ -1,6 +1,6 @@
 T7 — REALIDADE NECESSÁRIA
 
-Depende de: T3, T6, §22, §24a + AXIOM SEM AxGlobalGround (ver nota 9 abaixo)
+Depende de: T3, T6, §22, §24a (átomos) + teorema AxGlobalGround (ex-axioma SEM; ver nota 9 abaixo)
 
 Verificado em: formal/Logos/Modal.lean (T7_necessaryReality), GAPMAP.md C18.
 
@@ -47,9 +47,11 @@ True(p) → ∃r Ground(r, p).  [p atómico]
 Toda verdade atómica tem um fundamento na realidade.
 
 Para a própria tautologia τ := φ ∨ ¬φ, o fundamento de τ *como um todo*
-provém do axioma declarado AxGlobalGround (ver nota formal 9): a
-sua verdade é composicional; a fundamentação unitária da fórmula
-é a ponte modal SEM.
+NÃO é derivável (ver nota formal 9): a sua verdade é composicional e a
+verdade composta não carrega fundamento existencial — a instância do
+terceiro excluído fica BLOCKED (C19, lema em falta registado). O que se
+demonstra é a versão atómica: todo átomo necessariamente verdadeiro tem
+fundamento necessário (batch A2-swap-theorem, 2026-09-17).
 
 5. Suponhamos, por redução ao absurdo:
 
@@ -69,8 +71,9 @@ Isto vale para toda entidade contingente.
 Portanto, a verdade necessária de τ não é fundamentada
 em nenhuma entidade contingente.
 
-7. Mas, por (4) e por AxGlobalGround, a verdade necessária de τ tem
-um fundamento não-contingente.
+7. Mas, por (4) e pela troca atómica (teorema AxGlobalGround — a
+testemunha de um mundo vale em todos, pois ExistsAt não tem mundo), a
+verdade necessária de um átomo τ tem um fundamento não-contingente.
 
 Se nenhuma entidade contingente fundamenta τ,
 então algo não contingente fundamenta τ:
@@ -103,16 +106,19 @@ NecessaryTruth
 → EternalRelation
 → Trinity.
 
-9. NOTA FORMAL — AXIOM SEM AxGlobalGround
+9. NOTA FORMAL — AXIOM SEM AxGlobalGround (dissolvido em teorema, batch
+A2-swap-theorem 2026-09-17)
 
-A demonstração acima (passos 5–7) esconde a troca
-∀w∃r Ground(r,τ,w) → ∃r∀w Ground(r,τ,w), a qual não é derivável dos
-restantes axiomas. Na formalização ela é declarada como:
+A demonstração acima (passos 5–7) escondia a troca
+∀w∃r Ground(r,τ,w) → ∃r∀w Ground(r,τ,w). Para átomos, a troca é agora
+TEOREMA, não axioma:
 
-AxGlobalGround: toda fórmula verdadeira em todos os mundos é fundamentada
-por uma única entidade existente em todos os mundos.
+AxGlobalGround (teorema): todo átomo verdadeiro em todos os mundos é
+fundamentado por uma única entidade existente em todos os mundos.
 
-Com ela, T7 é teorema genuíno (PROVEN↑); sem ela, T7 fica BLOCKED
-exactamente neste lema. A sua negação não se autorrefuta: é uma escolha
-modal declarada, nunca um teorema transcendental. Modelo de consistência:
-semântica tarskiana de dois valores (formal/DESIGN.md D4).
+A prova usa §24a num mundo qualquer e reutiliza a testemunha em todos —
+válido porque ExistsAt é sem-mundo por definição (esse est agere) e Ground
+é rígido. Com ela, T7-atómico é teorema genuíno (PROVEN, só vocabulário
+`{Ground}`). A instância composta (τ := φ ∨ ¬φ) continua BLOCKED: nenhum
+fundamento existencial de compostos é forçado (ver formal/DESIGN.md D7,
+formal/GAPMAP.md C19; transcrição em formal/Spikes/Spike_A6_probe.lean).

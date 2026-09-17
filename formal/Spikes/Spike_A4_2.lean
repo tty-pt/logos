@@ -16,6 +16,15 @@ single-inhabitant consistency witness 2 below refutes the target against the
 whole allowed surface. The price `AxTwoSubjects` therefore stands, now
 justified by a model (a mathematical result, not a shrug).
 
+**SUPERSEDED (plurality-discharge, 2026-09-17).** The lone-subject witness
+below is built on the OLD axiomatic `Subject` (a bare sort with a singleton
+inhabitant). The definitional subject (`Subject := Unit ⊕ Prop`, 2026-09-17)
+has ≥2 inhabitants, both persons, and `Value.neverAlone : ∀ s, ¬ Alone s`
+proves the target OUTRIGHT (`Value.aloneExcluded`, C74) — no pair of facts
+can realize a lone-subject model any more. `AxTwoSubjects` is RETIRED (C73
+canonical pair; `Person.twoPersonsFromSubject`); keep this file as the
+historical trace of why the price was once believed, like M3/M5.
+
 This file is NOT part of the Logos library (`Spikes/` is outside the build;
 see `lakefile.toml` + `Logos.lean`). The `sorry` below is a tagged
 SPIKE-MARKER for the exact stuck point — it is not a theory axiom.

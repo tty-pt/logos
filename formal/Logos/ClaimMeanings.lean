@@ -24,6 +24,8 @@ def F8 : String := "The Trinity is not attempted."
 
 def F9 : String := "Incarnation and creation are faith data from the poem, deferred."
 
-def Q7_2 : String := "Research question, deferred: can the global-grounding axiom be weakened?"
+def Q7_2 : String := "Research question, answered: the swap is a theorem for atoms (no axiom needed); the compound instance is unforced."
+
+def C19 : String := "There is a necessary reality grounded on the indubitable: some entity existing in every world grounds 'φ or not-φ' (blocked: no existential compound ground is forced)."
 
 end Logos.ClaimMeanings

@@ -1,13 +1,15 @@
 T11 — CAMPO DA ESCOLHA RACIONAL (revive §13–§15 com a definição de liberdade)
 
-Depende de: T5, T9; definições §14–§15
+Depende de: T5, T9; definições §14–§15; definição de sujeito (origem)
+(definitional-subject 2026-09-17)
 
 Verificado em: formal/Logos/Choice.lean (T11_choiceField, person_chooses,
 choiceExists, noChoice_selfRefutes, JUDGE_COMMITTED,
-rightWrong_implies_someone_means, meaning_I_needs_subject),
+rightWrong_implies_someone_means, meaning_I_needs_subject,
+freeWillOrigin, noFreeWillPosited, originFreedomSelfRefutes, judgeIsFree),
 formal/Logos/Order.lean (judge_commits, rightWrong_implies_meaning,
 rightDistinctWrong_implies_meaning, rightWrongDistinction_implies_meaning),
-GAPMAP.md C39–C62.
+GAPMAP.md C39–C72.
 Impressão de axiomas: T11_choiceField — `{}`; a de T5 (`{}`, definitional-subject);
 person_chooses — `{}` (PROVEN);
 rightWrong_implies_meaning / rightDistinctWrong_implies_meaning — `{}`
@@ -15,7 +17,9 @@ rightWrong_implies_meaning / rightDistinctWrong_implies_meaning — `{}`
 meaning_I_needs_subject — `{}` (PROVEN, C49);
 choiceExists / noChoice_selfRefutes / JUDGE_COMMITTED — `{}`;
 judge_commits / rightWrongDistinction_implies_meaning — `CL`;
-incompatible_self_negation — nenhuma ({}). sorryAx: 0.
+incompatible_self_negation — nenhuma ({}); sorryAx: 0.
+freeWillOrigin — `{}` (C69); noFreeWillPosited — `CL` (C70);
+originFreedomSelfRefutes — `{}` (C71); judgeIsFree — `{}` (C72).
 
 Definições §8 (2026-09-16, versão literal Correct(A(s,p))):
 Correct(s,p)   := A(s,p) ∧ T(p);
@@ -59,10 +63,32 @@ existência da escolha):
 - JUDGE_COMMITTED e judge_commits: sem certo e errado não há escolha —
   o juiz (§8) é um escolhedor.
 
-LIMITE (F1b, por provar — o único resíduo genuíno):
-A tese bipolar completa §15 — ◇Choose ∧ ◇Choose¬ a nível de mundos
-(sobre NecessityPH) — não está demonstrada: um sujeito pode significar p sem
-ser capaz, a nível modal, de significar ¬p. A passagem §15 "não é uma simples
-tautologia" permanece DEFERRED; GAPMAP.md F1b regista os lemas em falta.
-CanChoose já é escolha real (canChoose_unfold), pelo que F1b é exatamente a
-afirmação modal, não uma lacuna de vocabulário.
+FREEDOM — F1b SPLIT (2026-09-17; o paradoxo "não pude escolher de outro modo"
+dissolve-se):
+
+F1b-weak — PROVEN. A origem do ato presente (o sujeito do cogito, a testemunha
+de T5 a que JUDGE_COMMITTED compromete o certo-e-errado) pode escolher os dois
+lados:
+
+- freeWillOrigin: FreeWill(inl(),p) — `{}` (a origem significa todo o
+  conteúdo: Initiates(inl _, w, w', p) := w' = p; CanChoose por instanciação
+  em someWorld, sem o canChoose_unfold clássico). C69.
+- originFreedomSelfRefutes: ¬FreeWill(inl(),p) ⇒ False — "não pude escolher
+  de outro modo" auto-refuta-se: a negação é ela própria um ato da origem
+  livre. C71.
+- judgeIsFree: ∃s Person(s) ∧ ∃p FreeWill(s,p) — a escolha-no-sentido-da-
+  liberdade existe para o sujeito que o certo/errado inegável compromete. C72.
+- noFreeWillPosited: ¬FreeWill(inr q,p) — `CL`: os sujeitos postos
+  provadamente NÃO podem escolher de outro modo (só significam q próprio;
+  bilateralidade forçaria q = p ∧ q = ¬p, impossível). C70 — sem paradoxo:
+  nunca são o juiz a que o certo/errado se compromete.
+
+F1b-strong — BLOCKED (gap de VOCABULÁRIO, não de prova): a alternatividade a
+nível-mundos, ◇PH Choose ∧ ◇PH Choose¬ sobre NecessityPH, exige um predicado
+de escolha genuinamente variável por mundo — ChoiceAt : World → Subject → Prop
+→ Prop. Todo o predicado atual do sistema é invariante ao mundo, logo
+NecessityPH aplicado a qualquer um colapsa em identidade; a ponte (SEM/META)
+é deliberadamente adiada. CanChoose já é escolha real (canChoose_unfold) e a
+bilateralidade do sujeito do ato está demonstrada — o que faltaria a F1b-strong
+não é hoje formulável, não apenas não provado (diferença do BLOCKED de C19).
+GAPMAP.md F1b-weak/F1b-strong, C69–C72.

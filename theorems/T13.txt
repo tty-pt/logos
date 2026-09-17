@@ -1,9 +1,10 @@
 T13 — HÁ QUEM SE POSSA AMAR
 
-Depende de: T12
+Depende de: T12 (derivado, 2026-09-17)
 
-Verificado em: formal/Logos/Love.lean (T13_someoneLovable), GAPMAP.md C40.
-Impressão de axiomas: AxTwoSubjects (META) via T12; sorryAx: 0.
+Verificado em: formal/Logos/Love.lean (T13_someoneLovable), GAPMAP.md C41.
+Pegada: `{}` (plurality-discharge 2026-09-17 — a antiga pegada
+{AxTwoSubjects} via T12 desapareceu; sorryAx: 0).
 
 Enunciado:
 
@@ -12,13 +13,13 @@ Enunciado:
 onde Lovable(t) := ∃s, s ≠ t ∧ Person(s)   ("quem se possa Amar").
 
 Demonstração:
-De T12 obtemos duas pessoas distintas; cada uma é amável pela outra
-(unfolding de Lovable e a distinção do par).
+De T12 obtemos duas pessoas distintas — de facto o par canónico (a origem e
+o destinatário, C73): cada uma é amável pela outra (unfolding de Lovable e a
+distinção do par). Cada conteúdo é pessoa (C75), logo amável.
 
 Consequência (poema):
 A realidade necessária não é impessoal (T8) e há quem se possa amar (T13).
 Juntos: "não é impessoal, e não é sózinho".
 
-NOTA (o salto em aberto, §28/§29):
-Que esse amor seja *atual* e *eterno* é a T14, sob a ponte C3-I
-(AxPersonStability agora teorema — esse est agere) — ver theorems/T14.txt.
+NOTA (2026-09-17): esse amor é *atual* e *eterno* — a T14 é teorema `{}`
+(o par canónico, rígido em todos os mundos, C76) — ver theorems/T14.txt.

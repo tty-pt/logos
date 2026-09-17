@@ -4,13 +4,17 @@
 T7 in the prose runs: necessary truth τ ⇒ τ is grounded in no *contingent*
 entity ⇒ some non-contingent reality grounds τ ⇒ ∃r □Exists(r).
 
-The informal step `∀w ∃r … ⇒ ∃r ∀w …` is **not** a theorem of the axioms
-above: it is exactly the quantifier swap that must be declared. We name it
-`AxGlobalGround` (SEM). Everything else in T7 is then a theorem.
+The informal step `∀w∃r … ⇒ ∃r∀w …` is now a THEOREM for atoms
+(batch A2-swap-theorem, 2026-09-17): `ExistsAt` is world-vacuous by
+definition (esse est agere), so the witness from any one world works for
+all worlds definitionally — no swap axiom is needed. The compound
+excluded-middle instance stays unforced (structural `TrueAt` carries no
+existential ground for compounds; M4 spike) and is recorded BLOCKED with
+its exact missing lemma (GAPMAP.md C19).
 
-Sub-question Q7.2 (DEFERRED, see DESIGN.md): can `AxGlobalGround` be replaced
-by a *weaker* premise, e.g. "every contingent ground of a necessary truth is
-mirrored by a necessary ground"? Recorded, not required for T7 as stated.
+Sub-question Q7.2 (ANSWERED, see DESIGN.md): for atoms the swap needs no
+weaker premise — it is definitional; the compound instance is a different,
+unforced claim, not a footprint-preserving replacement.
 -/
 
 import Logos.Core
@@ -35,52 +39,51 @@ def NecessaryEntity (e : Entity) : Prop := ∀ w : World, ExistsAt w e
 /-- An entity is contingent iff it is not necessary. -/
 def Contingent (e : Entity) : Prop := ¬ NecessaryEntity e
 
-/--Tag: SEM
+/--An atomic formula true in every world is grounded by a single entity existing in every world (the quantifier swap, atom-restricted).
 
- A formula true in every world is grounded by a single entity existing in every world (the quantifier swap).
+ AxGlobalGround (theorem, batch A2-swap-theorem 2026-09-17; former SEM
+    axiom, D7): a necessarily-true atom is grounded by a single entity
+    that exists in every world. Name kept (precedent: `AxPersonStability`).
 
- AxGlobalGround (SEM): a formula true in every world is grounded by a
-    single entity that exists in every world.
+    Proof: `groundPrinciple_atom` at any one world supplies the grounder;
+    `ExistsAt` is world-vacuous by definition (esse est agere) and `Ground`
+    is world-rigid, so the same entity works at every world — the swap
+    dissolves definitionally. Restricted to atoms: structural `TrueAt`
+    carries no existential ground for compounds, so the excluded-middle
+    instance `∃ e, Ground e (or θ (not θ))` stays unforced (recorded
+    BLOCKED, GAPMAP.md C19; M4 transcript in
+    `formal/Spikes/Spike_A6_probe.lean`). -/
+theorem AxGlobalGround (n : Nat) (hnec : NecessarilyTrue (Form.atom n)) :
+    ∃ e : Entity, ∀ w : World, ExistsAt w e ∧ Ground e (Form.atom n) := by
+  obtain ⟨e, he_w, hg_e⟩ :=
+    Logos.Truthmaker.groundPrinciple_atom actualWorld n (hnec actualWorld)
+  exact ⟨e, fun w => ⟨he_w, hg_e⟩⟩
 
-    This is the `∀w∃r … → ∃r∀w …` move of the informal T7. It is NOT
-    derivable from `groundPrinciple_atom` (the swap is invalid in general); it is
-    the declared modal price of the argument. Its negation does not destroy
-    the act of denying it, so it stays a semantic axiom, never promoted to
-    "transcendental theorem". -/
-axiom AxGlobalGround :
-  ∀ (φ : Form), NecessarilyTrue φ → ∃ e : Entity, ∀ w : World, ExistsAt w e ∧ Ground e φ
+/--Atomic necessary truth forces necessary reality: whatever atom is true in every world is grounded by an entity existing in every world.
 
-/--Necessary truth forces necessary reality: whatever is true in every world is grounded by an entity existing in every world.
+ T7 — atomic necessary truth forces necessary reality (base.txt T7,
+    atom-restricted).
 
- T7 — necessary truth forces necessary reality (base.txt T7).
-
-    PROVEN↑ {Truthmaker.{Subject,Ground,ExistsAt},
-             Semantics.{Form,World}, AxGlobalGround} (E0: no `T`; C2: carrier is `Subject`). -/
-theorem T7_necessaryReality {τ : Form} (hτ : NecessarilyTrue τ) :
-    ∃ e : Entity, NecessaryEntity e ∧ Ground e τ := by
-  obtain ⟨e, he⟩ := AxGlobalGround τ hτ
+    PROVEN {Ground}-vocab (batch A2-swap-theorem; former PROVEN↑ under the
+    `AxGlobalGround` axiom). -/
+theorem T7_necessaryReality (n : Nat) (hnec : NecessarilyTrue (Form.atom n)) :
+    ∃ e : Entity, NecessaryEntity e ∧ Ground e (Form.atom n) := by
+  obtain ⟨e, he⟩ := AxGlobalGround n hnec
   exact ⟨e, fun w => (he w).1, (he actualWorld).2⟩
 
-/--There is a necessary reality grounded on the indubitable: some entity existing in every world grounds 'φ or not-φ'.
+/--If every entity were contingent, no atom could be true in every world.
 
- T7 instantiated on the excluded-middle tautology: the existential
-    "there is a necessary reality grounded on the un-doubtable" holds. -/
-theorem T7_excludedMiddleInstance (φ : Form) :
-    ∃ e : Entity, NecessaryEntity e ∧ Ground e (Form.or φ (Form.not φ)) :=
-  T7_necessaryReality (Logos.Truthmaker.lawExcludedMiddle φ)
-
-/--If every entity were contingent, nothing could be true in every world.
-
- The reductio shape of the prose: if every entity were contingent, no
-    formula could be necessarily true. -/
+ The reductio shape of the prose, atom-restricted: if every entity were
+    contingent, no atomic formula could be necessarily true. -/
 theorem noNecessaryTruthIfAllContingent :
-    (∀ e : Entity, Contingent e) → ∀ φ : Form, ¬ NecessarilyTrue φ := by
-  intro hall φ hτ
-  obtain ⟨e, hne, _⟩ := T7_necessaryReality hτ
+    (∀ e : Entity, Contingent e) → ∀ n : Nat, ¬ NecessarilyTrue (Form.atom n) := by
+  intro hall n hτ
+  obtain ⟨e, hne, _⟩ := T7_necessaryReality n hτ
   exact (hall e) hne
 
 end Logos.Modal
 
 -- Axiom footprint audit
+#print axioms Logos.Modal.AxGlobalGround
 #print axioms Logos.Modal.T7_necessaryReality
 #print axioms Logos.Modal.noNecessaryTruthIfAllContingent

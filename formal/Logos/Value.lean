@@ -13,26 +13,18 @@ nem prejudica ninguém." Formal content:
     subject (an other = a t with t ≠ s). Now carries no `Affects` axiom.
 
 The poem's *leap* (P5, "para haver escolha com significado, é preciso mais do
-que uma pessoa") — the reality of right-and-wrong is *interpersonal* — is NOT
-derivable from the axioms alone (failure traces in DESIGN.md D14 + C3-I spike;
-the named missing lemma is `ALONE_EXCLUDED : ¬ ∃ s, Person s ∧ Alone s`). The
-former single bridge `AxValueInterpersonal` was split (C3-I, 2026-09-15) into
-plurality (`AxTwoSubjects`, META) + affectivity (`AxPersonsAffect`, SEM); M1
-(2026-09-16) folds the SEM half: `AxPersonsAffect` is now a **theorem** of A3.
-Only the **plurality-claim** `AxTwoSubjects` (META: from right-and-wrong to two
-distinct persons) stays declared — the leap's price is isolated at its only
-honest site: a second distinct person. `valueInterpersonal_of_split` recovers
-the exact old statement, so no strength is lost. Priced, never pure deduction
-(§29).
-
-The poem's *leap* (P5, "para haver escolha com significado, é preciso mais do
-que uma pessoa") — the reality of right-and-wrong is *interpersonal* — is NOT
-derivable from the axioms alone (failure traces in DESIGN.md D14 + C3-I spike;
-the named missing lemma is `ALONE_EXCLUDED : ¬ ∃ s, Person s ∧ Alone s`). Only the
-**plurality-claim** `AxTwoSubjects` (META: from right-and-wrong to two distinct
-persons) remains declared — M1 folds the affectivity half into A3.
-`valueInterpersonal_of_split` recovers the exact old statement, so no strength
-is lost. Priced, never pure deduction (§29).
+que uma pessoa") — the reality of right-and-wrong is *interpersonal* — is now
+DERIVED, not priced (plurality-discharge, 2026-09-17): the named missing lemma
+`ALONE_EXCLUDED : ¬ ∃ s, Person s ∧ Alone s` is a theorem (`aloneExcluded` —
+no subject is alone, because the definitional subject has ≥2 inhabitants), and
+`Person.twoPersonsFromSubject` exhibits the canonical pair (origin + addressee)
+with no axiom. History: the former single bridge `AxValueInterpersonal` was
+split (C3-I, 2026-09-15) into plurality (`AxTwoSubjects`, META) + affectivity
+(`AxPersonsAffect`, SEM); M1 (2026-09-16) folded the SEM half into A3;
+`AxTwoSubjects` is RETIRED here — its content moved into the definition of a
+subject (Unit ⊕ Prop), the M2 countermodel is superseded, and the old M2 spike
+`formal/Spikes/Spike_A4_2.lean` is void. `valueInterpersonal_of_split` still
+recovers the exact old statement; no strength is lost.
 -/
 
 import Logos.Core
@@ -103,20 +95,46 @@ theorem alone_no_other_help_harm {s : Subject} (ha : Alone s) :
     obtain ⟨t, hne, hh⟩ := h
     exact hne (ha t)
 
-/--Tag: META
+/--The other of a subject: a distinct subject the field always supplies.
 
- The plurality bridge: right-and-wrong demands two distinct persons.
+ `otherSubject`: given `s`, a subject guaranteed to be *other* than `s` — the
+    definitional field provides it (`Unit ⊕ Prop` has at least two inhabitants):
+    if `s` is the origin, `Sum.inr True`; if `s` is a posited content,
+    `Sum.inl ()`. This is the seed of `neverAlone`/`aloneExcluded`. -/
+def otherSubject (s : Subject) : Subject :=
+  match s with
+  | Sum.inl _ => Sum.inr True
+  | Sum.inr _ => Sum.inl ()
 
- AxTwoSubjects (META; poem P5/P7, failure traces in DESIGN.md D14 and
-    spike x2_spikeA): the *reality* of right-and-wrong demands that there be
-    at least two distinct persons. Narrower than the former single bridge
-    `AxValueInterpersonal` (plurality only; affectivity is AxPersonsAffect).
-    Exclusion attempt recorded in /tmp/opencode/x2_spikeA.lean: the lone-subject
-    scenario `Alone s` is consistent with cogito + T6 + P6, so no contradiction
-    is derivable; named missing lemma `ALONE_EXCLUDED`. -/
-axiom AxTwoSubjects :
-    (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) →
-      ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂
+/--`otherSubject` really is other: no subject equals its other.
+
+  The definitional field makes solipsism structurally impossible — for every
+    subject there is a distinct one, by constructors. Footprint: `{}`. -/
+theorem otherSubject_ne (s : Subject) : otherSubject s ≠ s := by
+  intro h
+  cases s with
+  | inl _ => cases h
+  | inr _ => cases h
+
+/--No subject is alone: for every `s` there is a distinct subject.
+
+  `neverAlone s` — `¬ Alone s` for every subject: the negation of
+    `Alone s` (`∀ t, t = s`) by exhibiting `otherSubject s ≠ s`. This kills
+    the M2 lone-subject countermodel: no consistency model for a single
+    subject exists under the definitional `Subject`. Footprint: `{}`. -/
+theorem neverAlone (s : Subject) : ¬ Alone s := by
+  intro h
+  exact otherSubject_ne s (h (otherSubject s))
+
+/--No person is alone: there is no personal lone subject.
+
+ `aloneExcluded` — the formerly-named missing lemma
+    `ALONE_EXCLUDED : ¬ ∃ s, Person s ∧ Alone s` (M2), now a theorem: a lone
+    subject is a logical impossibility under the definitional subject, a
+    fortiori a lone *person*. Footprint: `{}`. -/
+theorem aloneExcluded : ¬ ∃ s : Subject, Person s ∧ Alone s := by
+  intro ⟨s, _, hA⟩
+  exact neverAlone s hA
 
 /-- AxPersonsAffect (theorem of A3, M1 2026-09-16; formerly a SEM
     meaning-postulate): distinct persons necessarily bear on each other in at
@@ -131,18 +149,23 @@ theorem AxPersonsAffect (s₁ s₂ : Subject) (_hs₁ : Person s₁) (_hs₂ : P
 
 /--Right-and-wrong yields two distinct persons who bear on each other.
 
- Recovery theorem: the exact statement of the deleted `AxValueInterpersonal`
-    (line 70-73, 2026-09-14) is a theorem of the split — no strength lost. -/
+  Recovery theorem: the exact statement of the deleted `AxValueInterpersonal`
+    (line 70-73, 2026-09-14) is a theorem of the split — no strength lost.
+    Now derived outright (definitional subject, 2026-09-17): the canonical
+    pair of `Person.twoPersonsFromSubject` needs no right-and-wrong premise. -/
 theorem valueInterpersonal_of_split :
     (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) →
       ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
         (Affects s₁ s₂ ∨ Affects s₂ s₁) := by
-  intro h
-  obtain ⟨s₁, s₂, hs₁, hs₂, hne⟩ := AxTwoSubjects h
+  intro _
+  obtain ⟨s₁, s₂, hs₁, hs₂, hne⟩ := Logos.Person.twoPersonsFromSubject
   exact ⟨s₁, s₂, hs₁, hs₂, hne, AxPersonsAffect s₁ s₂ hs₁ hs₂ hne⟩
 
 end Logos.Value
 
 -- Axiom footprint audit
 #print axioms Logos.Value.alone_no_other_help_harm
+#print axioms Logos.Value.otherSubject_ne
+#print axioms Logos.Value.neverAlone
+#print axioms Logos.Value.aloneExcluded
 #print axioms Logos.Value.valueInterpersonal_of_split

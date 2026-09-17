@@ -382,12 +382,35 @@ placeholder vazio, o que fazia a escolha irrepresentável); person_chooses
 VOCAB.md), choiceExists, noChoice_selfRefutes
 (negar a escolha é uma escolha) e JUDGE_COMMITTED/judge_commits (sem certo e
 errado não há escolha) são teoremas kernel-verificados — GAPMAP.md C49–C56,
-F1a PROVEN. A forma modal forte de liberdade (FreeWill: ◇Choose ∧ ◇Choose¬,
-abaixo) é DEFERRED — GAPMAP.md F1b, semântica modal da escolha em falta (um
-sujeito pode significar p sem ser capaz, a nível modal, de significar ¬p).
+F1a PROVEN. A forma modal de liberdade (FreeWill: ◇Choose ∧ ◇Choose¬,
+abaixo) foi dividida em F1b-weak (PROVEN, 2026-09-17 — a origem do ato pode
+escolher os dois lados, C69/C71/C72) e F1b-strong (BLOCKED — alternatividade
+a nível-mundos, vocabulário dependente do mundo em falta; ver a nota F1b
+split abaixo).
 Cautela (C1): o alias `Dia` prop-level é a dupla negação clássica sob o modelo
 identidade; a liberdade modal futura deve ser construída sobre `NecessityPH`
 (nível-mundos), não sobre o alias degenerado.)
+
+(Nota formal, F1b split 2026-09-17 — o paradoxo da liberdade dissolve-se: se
+"não pude escolher de outro modo" fosse assertável, não haveria escolha no
+sentido da liberdade, e logo não haveria certo nem errado — mas o certo e o
+errado são inegáveis (§4–§6, C36) e comprometem um escolhedor (JUDGE_COMMITTED,
+C54). O teorema fecha a impossibilidade: o sujeito do ato presente — a
+origem, a testemunha de Cogito/T5 a que JUDGE_COMMITTED compromete o
+certo-e-errado — pode escolher p E pode escolher ¬p:
+FreeWill(inl(),p) é teorema `{}` (Choice.freeWillOrigin, C69); a negação
+"não pude escolher de outro modo" auto-refuta-se kernel-verificado
+(originFreedomSelfRefutes, C71, `{}` — a negação é ela própria um ato da
+origem livre) e a escolha-no-sentido-da-liberdade existe para o sujeito que o
+certo/errado inegável compromete (judgeIsFree, C72, `{}`). Os sujeitos postos
+(inr q) provadamente NÃO podem escolher de outro modo (noFreeWillPosited,
+C70, `CL` — só significam q próprio) — mas nunca são o juiz a que o certo/
+errado se compromete. O resíduo genuíno (F1b-strong, BLOCKED — gap de
+vocabulário, não de prova) é a alternatividade a nível-mundos sobre
+NecessityPH: exige um predicado de escolha genuinamente variável por mundo
+(ChoiceAt : World → Subject → Prop → Prop, ponte SEM/META adiada — todo o
+predicado atual é invariante ao mundo, logo NecessityPH colapsa em identidade).
+GAPMAP.md F1b-weak/F1b-strong, C69–C72.)
 
 16. RELAÇÃO
 
@@ -775,17 +798,20 @@ Certo e errado necessários (T10)
 → quem se possa amar (T13)
 → relação eterna de amor (T14).
 
-(Nota formal §25: T12–T14 são PROVEN↑ sob pontes declaradas e assinaladas —
-AxTwoSubjects (META, pluralidade) para o par e a eternidade; a persistência
-(AxPersonStability) é agora teorema (esse est agere) — a ponte FAITH AxEternalLove e
-a axiom Loves foram dissolvidas em C4 (Loves := Affects, relação estrutural),
-AxPersonsAffect dissolvido em M1;
+(Nota formal §25: T12–T14 são PROVEN (plurality-discharge, 2026-09-17) sem
+nenhuma ponte interpessoal — a pluralidade tornou-se matemática: a definição de
+sujeito (Unit ⊕ Prop) dá o par canónico origem+destinatário (C73) e invalida a
+solidão (C74), a antiga ponte META AxTwoSubjects foi RETIRED e o modelo de
+solidão de M2 foi superado; a persistência (AxPersonStability) é teorema
+(esse est agere) — a ponte FAITH AxEternalLove e a axiom Loves foram
+dissolvidas em C4 (Loves := Affects, relação estrutural), AxPersonsAffect
+dissolvido em M1;
 Affects é a relação primitiva única (A3-refactor, 2026-09-15: Helps/Harms :=
 Affects passam a projeções definidas — a distinção ajuda/prejudica sobrevive
 só no plano conceptual);
 T11 é PROVEN; T10 é PROVEN no nível proposicional e a sua necessidade
 (necDistinction) é agora teorema (C1, 2026-09-15: o operador modal foi
-dissolvido em alias identidade-modelo; FAITH-1 removida). Ver formal/GAPMAP.md C35–C46.
+dissolvido em alias identidade-modelo; FAITH-1 removida). Ver formal/GAPMAP.md C35–C47/C73–C76.
 Registo do poema (linhas de poem.txt, com o estado formal atual — GAPMAP.md e
 VOCAB.md): L12–16 (P1–P2, "nada é certo/errado", "~(p1∨p2) = verdade
 necessária") PROVEN — C35–C38 e C59 ("há certo E há errado", `{CL}`); L18 (P3)
@@ -798,14 +824,17 @@ algo significar" é PROVEN — C61 (`Choice.rightWrong_implies_someone_means`) e
 analítica "significado → sujeito" é C49 (`meaning_needs_subject` /
 `meaning_I_needs_subject`, `{}` — ✔); L20 (P4)
 "para haver alguém é preciso haver escolha" é C51 (`person_chooses`, `{}`),
-mas "escolha com significado → mais do que uma pessoa"
-permanece C40 (AxTwoSubjects, META); L22 (P5) "um Ser sózinho não ajuda nem
-prejudica ninguém" é C56 (`alone_no_other_help_harm`, `{}`; o antigo preço
-AxPersonsAffect foi dissolvido em M1), "tem de
-haver este Ser, e o certo e o errado" é C68 (Cogito teorema) + C37/C38, e "tem
-de haver quem se possa Amar" é C41 (via T12); L24 (P6) "Amar é escolhido e
-também é necessário (de alguma forma)" é C42–C45 (T14, AxTwoSubjects — a
-persistência AxPersonStability é agora teorema); L38 ("Escolho admitir que: Sou") é o próprio dado
+e "escolha com significado → mais do que uma pessoa" é PROVEN — C40/C73
+(plurality-discharge: o par canónico origem+destinatário é teorema `{}`); L22
+(P5) "um Ser sózinho não ajuda nem prejudica ninguém" é C56
+(`alone_no_other_help_harm`, `{}`; o antigo preço AxPersonsAffect foi
+dissolvido em M1), e "nenhum sujeito está sózinho" é agora o teorema C74
+(`neverAlone`/`aloneExcluded`, `{}` — o lema em falta ALONE_EXCLUDED deixou
+de existir), "tem de haver este Ser, e o certo e o errado" é C68 (Cogito
+teorema) + C37/C38, e "tem de haver quem se possa Amar" é C41 + C75 (via T12:
+cada conteúdo é pessoa); L24 (P6) "Amar é escolhido e também é necessário (de
+alguma forma)" é C42–C45 + C76 (T14 `{}`; forma canónica rígida: o MESMO par
+— origem e destinatário — ama e existe em todos os mundos); L38 ("Escolho admitir que: Sou") é o próprio dado
 performativo C68 — a sua negação refuta-se por exibição (noCogito_selfRefutes). Ficam fora
 da demonstração as linhas 26–30: "este mundo é necessário? Não" é uma negação
 não reivindicada, e "a criação existe / há propósito" pertence à zona de fé
@@ -894,13 +923,19 @@ há realidade necessária;
 há realidade necessária que é pessoal;
 há mais do que uma pessoa (T12);
 há quem se possa amar (T13);
-há uma relação eterna de amor, sob a ponte assinalada (T14).
+há uma relação eterna de amor (T14).
 
-(Nota formal: os itens 17 e 18 são PROVEN↑ — teoremas sob axiomas
-declarados: AxGlobalGround (SEM) para a realidade necessária, mais
+(Nota formal: o item 17 é PROVEN para verdades atómicas necessárias
+(batch A2-swap-theorem, 2026-09-17: a troca de quantificadores é teorema
+— `AxGlobalGround` deixou de ser axioma); a instância do terceiro
+excluído (C19) fica BLOCKED — sem fundamento existencial forçado para
+compostos (lema em falta registado). O item 18 é PROVEN↑ sob
 AxPersonalGround (META) para o passo "pessoal" (AxGroundBearing foi
 dissolvido em B2, 2026-09-15: Realizes := GroundProp).
-Ver theorems/T7.txt, theorems/T8.txt e formal/GAPMAP.md C18, C32.
+Os itens 20–22 (pluralidade, amor, eternidade) são PROVEN `{}` desde a
+plurality-discharge (2026-09-17) — ver theorems/T12–T14.txt e
+formal/GAPMAP.md C40–C47/C73–C76.
+Ver theorems/T7.txt, theorems/T8.txt e formal/GAPMAP.md C18, C19, C32.
 Os itens 19–22 são o acréscimo do poema — ver a nota formal do §25.)
 
 28. LIMITE DA FASE PURAMENTE DEDUTIVA
@@ -915,12 +950,16 @@ T11 (campo da escolha) — PROVEN. Pelo batch choice-realism (2026-09-16) a
   choiceExists, noChoice_selfRefutes (negar a escolha é uma escolha),
 JUDGE_COMMITTED/judge_commits (sem certo e errado não há escolha) — ver
    theorems/T11.txt e formal/GAPMAP.md C49–C57.
-T12 (mais do que uma pessoa) — PROVEN↑ sob AxTwoSubjects (META, pluralidade;
-  a antiga ponte AxValueInterpersonal foi dividida em C3-I e o seu enunciado
-  recuperado como teorema valueInterpersonal_of_split).
-T13 (quem se possa amar) — PROVEN↑ (via T12).
-T14 (relação eterna de amor) — PROVEN↑ sob AxTwoSubjects (META); a
-  persistência (AxPersonStability) é agora teorema (esse est agere); a relação
+T12 (mais do que uma pessoa) — PROVEN (plurality-discharge, 2026-09-17):
+  a pluralidade tornou-se matemática — a definição de sujeito dá o par canónico
+  (origem + destinatário, C73) e invalida a solidão (C74); a ponte META
+  AxTwoSubjects foi RETIRED e o modelo de solidão de M2 foi superado.
+  (História: a antiga ponte AxValueInterpersonal foi dividida em C3-I e o seu
+  enunciado recuperado como teorema valueInterpersonal_of_split.)
+T13 (quem se possa amar) — PROVEN (via T12); cada conteúdo é pessoa (C75).
+T14 (relação eterna de amor) — PROVEN `{}` (plurality-discharge, 2026-09-17):
+  o par canónico ama e existe em todos os mundos — o MESMO par rígido (C76);
+  a persistência (AxPersonStability) é teorema (esse est agere); a relação
   é estrutural (Loves := Affects, C4), a ponte FAITH AxEternalLove foi
   dissolvida e AxPersonsAffect dissolvido em M1.
 
@@ -953,6 +992,9 @@ Plurality como projeções de T12 (Plurality.T1_subjectExists,
 Plurality.T4_agentExists, Plurality.T5_personExists); todos os footprints
 {cogito, Means, Subject} passaram a {AxTwoSubjects, Means, Subject}.
 Axiomas 16 → 15. O selo TRANS deixa de existir.
+(Superada em 2026-09-17: os footprints {AxTwoSubjects, …} deste período
+deixaram de existir — a pluralidade é teorema `{}` desde o
+plurality-discharge; ver GAPMAP.md C73/C74.)
 
 Nota (Tier1, 2026-09-16): Agent e Rational deixaram também de ser axiomas —
 são definições analíticas (Agent(s) := True; Rational(s) := True) e o ato é o
@@ -964,23 +1006,33 @@ tornando o sistema inconsistente; Bool/fin 2/ℕ/Unit esconderiam cardinalidade)
 
 Ainda precisam de demonstração:
 
-Freedom (FreeWill, modal bipolar) — DEFERRED/F1b, a semântica modal da escolha
-  (◇Choose ∧ ◇Choose¬ a nível-mundos, sobre NecessityPH) em falta; a
-  *existência* da escolha (F1a) está demonstrada (ver T11).
+Freedom (FreeWill, modal bipolar) — a liberdade do sujeito do ato (a origem,
+  bilateral: ◇Choose ∧ ◇Choose¬) está DEMONSTRADA (F1b-weak:
+  freeWillOrigin, judgeIsFree, originFreedomSelfRefutes — C69/C71/C72, `{}`;
+  a *existência* da escolha F1a em T11). A forma forte a nível-mundos
+  (F1b-strong) permanece BLOCKED por falta de vocabulário dependente do mundo
+  (ChoiceAt : World → Subject → Prop → Prop, um predicado de escolha
+  genuinamente variável por mundo — ponte SEM/META adiada; sem ele,
+  NecessityPH aplicado a qualquer predicado atual colapsa em identidade).
 Good (o bem como objeto moral da relação) — DEFERRED/F2, passo de
   normatividade lógica (§20) a bem, em conexão com T12/T13.
 Trinity — DEFERRED, sem argumento (§28/§29).
 
 Nenhuma destas passagens deve ser simplesmente assumida.
 
-Nota formal (formal/GAPMAP.md, formal/DESIGN.md D9, D14): PersonalGround é
-teorema apenas sob duas pontes declaradas — AxGlobalGround (SEM, a troca de
-quantificadores ∀w∃r → ∃r∀w de T7) e AxPersonalGround (META, o preço do
-passo "pessoal" de T8). A pluralidade e o amor são teoremas
-apenas sob AxTwoSubjects (META); a persistência (AxPersonStability) é agora
-teorema (esse est agere). Cada negação destas pontes não destrói o ato de a
-negar — por isso são pontes declaradas, nunca "dedução pura" (spikes de
-exclusão registados em formal/DESIGN.md D14b; lema em falta: ALONE_EXCLUDED).
+Nota formal (formal/GAPMAP.md, formal/DESIGN.md D7, D9, D14): PersonalGround é
+teorema sob a ponte declarada AxPersonalGround (META, o preço do passo
+"pessoal" de T8) mais T7-atómico — teorema desde o batch A2-swap-theorem
+(2026-09-17): a troca de quantificadores ∀w∃r → ∃r∀w para átomos dissolve-se
+por definição (ExistsAt sem mundo); AxGlobalGround deixou de ser ponte.
+A instância do terceiro excluído (C19) fica BLOCKED — lema em falta:
+fundamento existencial de compostos. A pluralidade e o amor são teoremas
+`{}` (plurality-discharge, 2026-09-17 — o par canónico origem+destinatário,
+C73/C76; o lema em falta ALONE_EXCLUDED é agora o teorema C74); a
+persistência (AxPersonStability) é teorema (esse est agere).
+(O método transcendental não muda: a exceção interpessoal tinha spikes de
+exclusão registados em formal/DESIGN.md D14b — todos superados por
+derivação, como foram cogito, esse-est-agere e AxGlobalGround.)
 
 O objectivo seguinte é demonstrar cada uma delas pelo mesmo método transcendental:
 

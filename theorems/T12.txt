@@ -1,36 +1,40 @@
 T12 — MAIS DO QUE UMA PESSOA (o passo central do poema)
 
-Depende de: T10 (certo e errado), AXIOM META AxTwoSubjects, §8
+Depende de: a definição de sujeito (Unit ⊕ Prop, 2026-09-17) — preço
+nenhum. PROVEN (plurality-discharge, 2026-09-17); a antiga ponte META
+AXIom AxTwoSubjects foi RETIRED (formal/Logos/Value.lean).
 
-Verificado em: formal/Logos/Value.lean (AxTwoSubjects) e
-formal/Logos/Plurality.lean (T12_twoPersons), GAPMAP.md C40, DESIGN.md D10/D14.
-2026-09-15 (PLC, nó de cadeia): formal/Logos/Plurality.lean acrescenta
-T12_directedPair (GAPMAP C47, DESIGN.md D-C47) — o par T12 orientado por casos
-sobre AxPersonsAffect, com afetividade dirigida; é sobre este nó que T14 é
-construído (direção e estabilidade partilham o mesmo par), sem custo de
-pegada.
-2026-09-15 (A3-refactor): Affects passou a relação primitiva única (Helps/Harms
-:= Affects, projeções — já não axiom); a pegada do nó lê {Affects}.
-2026-09-15 (cogito-rethinking): Plurality.cogito_from_T12 — o cogito é
-demonstrado como *teorema* a partir deste nó (T12) mais as definições
-analíticas Exists/Content (= True). A negação do cogito refuta-se a si mesma,
-tal como N_T ("nada é verdadeiro"). Ver RETHINKING-COGITO.md. GAPMAP C48.
+Verificado em: formal/Logos/Person.lean (Person.twoPersonsFromSubject,
+GAPMAP.md C73) e formal/Logos/Plurality.lean (T12_twoPersons, C40),
+formal/Logos/Value.lean (neverAlone/aloneExcluded, C74). Pegada: `{}`.
+2026-09-17 (plurality-discharge): o par canónico — a origem `Sum.inl ()` e o
+destinatário `Sum.inr True` — é um teorema `{}`; ALONE_EXCLUDED é o teorema
+`Value.aloneExcluded` (nenhum sujeito está sózinho: `otherSubject s ≠ s`);
+o modelo da solidão de M2 foi construído sobre o antigo `Subject` axiomático
+e fica SUPERADO. O passo do poema deixa de ser uma ponte paga e passa a ser
+descoberta: o outro é o conteúdo tornado sujeito — "alguém para quem
+significar".
+2026-09-15 (PLC, nó de cadeia): T12_directedPair (GAPMAP C47, DESIGN.md
+D-C47) — o par T12 orientado, com afetividade dirigida; é sobre este nó que
+T14 é construído. (Pré-2026-09-17, T12 e derivados liam {AxTwoSubjects};
+A3/A1/cogito-rethinking não mudaram de conteúdo.)
 
 Enunciado:
 
-Da necessidade do certo-e-errado (T10) e do princípio de que o certo-e-errado
-é irredutivelmente interpessoal, segue:
+Do que é um sujeito (a definição de 2026-09-17) segue:
 
 ∃s₁∃s₂ [Person(s₁) ∧ Person(s₂) ∧ s₁ ≠ s₂].
 
-"não é sózinho" (poema).
+"não é sózinho" (poema). Testemunhas canónicas: a origem `Sum.inl ()` e o
+destinatário `Sum.inr True` (conteúdo auto-posto — Person por
+`Means (Sum.inr True) True`; distintos por construtores). C73–C74.
 
-PORQUE O PASSO NÃO É DEDUÇÃO PURA (falha registada):
-Sem AxTwoSubjects, o sistema só constrói o sujeito do ato (T5);
-nenhum segundo sujeito é derivável (DESIGN.md D14 mostra a falha no kernel).
-Spike (x2_spikeC): mesmo negando a solidão — ¬(∃s, Person(s) ∧ Alone(s)) — via
-cogito + T6 + P6, nada contradiz a cenário de uma só pessoa (lema em falta:
-ALONE_EXCLUDED). O princípio interpessoal é a ponte META do poema — a sua
-negação não destrói o ato de a negar. C3-I dividiu a antiga ponte
-AxValueInterpersonal: AxTwoSubjects (pluralidade, META) + AxPersonsAffect
-(afetividade, SEM). valueInterpersonal_of_split recupera o enunciado antigo.
+PORQUE AQUI NÃO HÁ PREÇO (nota formal, plurality-discharge 2026-09-17):
+a pluralidade tornou-se matemática — o sujeito definicional tem ≥2
+habitantes, ambos pessoas — e o lema em falta que justificava a ponte
+(ALONE_EXCLUDED) é agora um teorema. O "outro" do poema é o *destinatário*
+(para quem um ato significa), não um segundo origem silencioso: há um só
+`inl`; qualquer releitura `Index ⊕ Prop` é indistinguível em `Means`
+(veredicto Track-B, DESIGN.md D14). O salto interpessoal não se perdeu nem se
+fingiu — localizou-se na definição de sujeito (2026-09-17), exatamente como
+cogito e esse-est-agere.
