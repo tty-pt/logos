@@ -57,7 +57,7 @@ import Logos.Necessity
 
 namespace Logos.Choice
 
-open Logos.Agency (Subject Means A)
+open Logos.Agency (Subject Means A Asserts)
 open Logos.Person (Person)
 open Logos.Alternatives (Incompatible)
 open Logos.Necessity (Dia Necessity someWorld)
@@ -169,6 +169,23 @@ theorem freeWillExists_of_chooses (h : ∃ s : Subject, ∃ p q : Prop, Chooses 
     BLOCKED. The free direction below is `freeWillExists_of_genuineChoice`. -/
 def genuineChoice_exists : Prop := ∃ s : Subject, ∃ p q : Prop, Chooses s p q
 
+/--The precise missing resource (F1b, BLOCKED): one subject co-meaning a content
+    and its negation — the same-subject dual meaning-act.
+
+  `rejectedHornCoMeant : ∃ s p, A s p ∧ A s (¬ p)` — the single irreducible
+     resource of the freedom frontier (hostile milestone, 2026-09-18). Every
+     candidate route collapses onto it: the performative act is a *single*
+     meaning (`Act s p := Means s p`), asserting p is truth-laden
+     (`Asserts s p := Act s p ∧ p`, so no one can assert both horns,
+     `assertion_consistency`), meaning can be *veridical* in a model
+     (`Means s p → p` kills co-meaning, `genuineChoice_requires_error_possibility`),
+     and even plurality + right-and-wrong give only `ChoiceField` (one horn
+     co-meant against pure logic). It is a `def`-proposition, not a theorem:
+     adding it as an axiom is forbidden; DEDUCTION records it BLOCKED. Its
+     consequent is exactly `genuineChoice_exists`
+     (`rejectedHornCoMeant_implies_genuineChoice`). -/
+def rejectedHornCoMeant : Prop := ∃ s : Subject, ∃ p : Prop, A s p ∧ A s (¬ p)
+
 /--The formal frontier: genuine choice implies free will.
 
   `freeWillExists` FOLLOWS from `genuineChoice_exists` — definitional
@@ -178,6 +195,32 @@ def genuineChoice_exists : Prop := ∃ s : Subject, ∃ p q : Prop, Chooses s p 
 theorem freeWillExists_of_genuineChoice : genuineChoice_exists → ∃ s : Subject, FreeWill s := by
   intro h
   exact freeWillExists_of_chooses h
+
+/--Co-meaning a negation is the minimal frontier: it suffices for genuine choice.
+
+  The single resource of F1b (`rejectedHornCoMeant`) yields the full target:
+     from `A s p ∧ A s (¬ p)` genuine choice follows by `q := ¬ p`
+     (`incompatible_self_negation`). Footprint: `{Means, Subject}` (VOCAB
+     only). The converse is not needed: a genuine choice may use any
+     incompatible pair, but the negation-pair is always the canonical one. -/
+theorem rejectedHornCoMeant_implies_genuineChoice :
+    rejectedHornCoMeant → genuineChoice_exists := by
+  rintro ⟨s, p, hmp, hmn⟩
+  exact ⟨s, p, ¬ p, hmp, hmn, incompatible_self_negation p⟩
+
+/--Genuine choice forces the non-veridicality of meaning.
+
+  A genuine chooser (`genuineChoice_exists`) contradicts veridical meaning
+     `∀ s p, Means s p → p`: co-meaning two incompatible contents would then
+     yield a true contradiction. Hence the frontier is exactly the
+     *error-possibility* of `Means` — a resource no axiom supplies. This is
+     the formal core of hostile milestone 2026-09-18. Footprint:
+     `{Means, Subject}` (VOCAB only; pure logic over the relation). -/
+theorem genuineChoice_requires_error_possibility :
+    genuineChoice_exists → ¬ (∀ s : Subject, ∀ p : Prop, Means s p → p) := by
+  intro hgc hver
+  rcases hgc with ⟨s, p, q, hmp, hmq, hI⟩
+  exact hI ⟨hver s p hmp, hver s q hmq⟩
 
 /--There is a field of choice: some person with two incompatible alternatives.
 
@@ -290,6 +333,28 @@ theorem noSubject_contradicts_subject
     (hNo : Logos.Agency.NoSubject) : False :=
   hNo hSubj
 
+/--Assertion is truth-laden: a subject who asserts `p` can never assert `¬ p`.
+
+  `Asserts s p := Act s p ∧ p`; the asserted content is a *truth-claim*.
+     The performative act, qua assertion, is therefore single-horned by
+     definition — the "asserting is choosing" route to genuine choice is
+     impossible (hostile milestone 2026-09-18). Footprint `{Means, Subject}`. -/
+theorem assertion_consistency {s : Subject} {p : Prop} (h : Asserts s p) :
+    ¬ Asserts s (¬ p) := by
+  intro hn
+  exact hn.2 h.2
+
+/--No subject can assert both horns of an incompatible pair.
+
+  General form: assertion (the truth-laden performative) can NEVER constitute
+     a two-horned genuine choice — `Asserts` is consistent. Genuine choice
+     would have to come from *meaning* (truth-neutral `Means`), not from
+     asserting. Footprint `{Means, Subject}`. -/
+theorem no_one_asserts_incompatible_pair :
+    ¬ ∃ s : Subject, ∃ p q : Prop, Asserts s p ∧ Asserts s q ∧ Incompatible p q := by
+  rintro ⟨s, p, q, ha, hb, hI⟩
+  exact hI ⟨ha.2, hb.2⟩
+
 end Logos.Choice
 
 -- Axiom footprint audit
@@ -300,6 +365,10 @@ end Logos.Choice
 #print axioms Logos.Choice.chooses_implies_freeWill
 #print axioms Logos.Choice.freeWillExists_of_chooses
 #print axioms Logos.Choice.freeWillExists_of_genuineChoice
+#print axioms Logos.Choice.rejectedHornCoMeant_implies_genuineChoice
+#print axioms Logos.Choice.genuineChoice_requires_error_possibility
+#print axioms Logos.Choice.assertion_consistency
+#print axioms Logos.Choice.no_one_asserts_incompatible_pair
 #print axioms Logos.Choice.person_hasChoiceField
 #print axioms Logos.Choice.choiceField_exists
 #print axioms Logos.Choice.noChoiceField_selfRefutes

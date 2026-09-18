@@ -397,11 +397,14 @@ determinada*, não uma escolha. A reparação separa o vocabulário:
 O passo em falta (F1b, BLOCKED) é agora exacto e prop-level:
 
     rejectedHornCoMeant :
-      (∃s p, A(s,p)) → ∃s p, A(s,p) ∧ A(s,¬p)
+      ∃s p, A(s,p) ∧ A(s,¬p)
 
-Nada obriga um ato de significação a vir com a significação da sua negação:
-`Means` é opaco e AxTwoSubjects dá dois sujeitos diferentes, cada um com um só
-conteúdo. A *existência* de um escolhedor genuíno fica bloqueada; a implicação
+(formalizado em `formal/Logos/Choice.lean` como def-proposição, nó BLOCKED; a
+forma condicional `(∃s p, A(s,p)) → ∃s p, A(s,p) ∧ A(s,¬p)` é o seu
+enunciado em prosa.) Nada obriga um ato de significação a vir com a
+significação da sua negação: `Means` é opaco e AxTwoSubjects dá dois sujeitos
+diferentes, cada um com um só conteúdo. A *existência* de um escolhedor
+genuíno fica bloqueada; a implicação
 escolha → liberdade é gratuita. O `ChoiceAt : World → Subject → Prop → Prop`
 (nível-mundos, F7) permanece a ponte SEM futura e secundária.
 Cautela (C1): o alias `Dia` prop-level é a dupla negação clássica sob o modelo
@@ -416,6 +419,34 @@ separação `not_entails_decoupled_freewill` em
 definição `Chooses → FreeWill`, que é definicional (`{Means, Subject}`, só vocabulário). O que permanece
 substancial/bloqueado é a *existência* da escolha genuína
 (`rejectedHornCoMeant`, formal/GAPMAP.md F1b), não a ligação escolha → liberdade.
+
+(Nota formal, Milestone hostil 2026-09-18 — bloqueio irreducível da escolha
+genuína): um ataque exaustivo à existência da escolha genuína fecha o caso
+em **opção 3 — genuinamente bloqueado sob os primitivos presentes**
+(`{Means, Subject}`). Três factos provados e uma família de contramodelos:
+
+  1. `genuineChoice_requires_error_possibility` (`{Means, Subject}`): a escolha
+     genuína força a **não-veridicalidade** de `Means` — se significar
+     acarretasse verdade (`Means s p → p`), co-significar dois conteúdos
+     incompatíveis daria `p ∧ q ∧ ¬(p∧q)`. A fronteira é, portanto, exactamente
+     a possibilidade de erro na significação, que nenhum axioma fornece.
+  2. `assertion_consistency` e `no_one_asserts_incompatible_pair`
+     (`{Means, Subject}`): `Asserts s p := Act s p ∧ p` é fiel à verdade por
+     definição — o performativo enquanto **asserção** é de um-corno-só; a rota
+     "assertir/denegar é escolher" é impossível como teorema.
+  3. Contramodelo `CountermodelVeridicalMeaning` (`{}`), instâncias `Single`
+     (Unit) e `TwoPersons` (Bool), com `Means _ p := p` (veridical) e as
+     definições Logos exactas: o modelo satisfaz TODO o fragmento
+     agency/choice/order — datum do ato, dois sujeitos distintos, certo e
+     errado, `judge_commits`, falibilidade — e ainda assim a escolha genuína é
+     vazia (`full_fragment_without_genuine_choice`). As não-derivações formais
+     `not_entails_genuine_choice`/`not_entails_genuine_choice_with_plurality`
+     (`{}`) mostram que nem o datum, nem o datum+pluralidade, forçam a escolha.
+
+Candidatas a premissa substantiva nova — registadas, NÃO introduzidas:
+`AxCoMeaningNegation : ∃s p, Means(s,p) ∧ Means(s,¬p)`; co-sujeito dos cornos
+(`Incorrect ∧ Denies`); auto-representação do ato. Qualquer uma faria F1b →
+PROVEN↑ sob pegada nova (fase futura).
 
 16. RELAÇÃO
 

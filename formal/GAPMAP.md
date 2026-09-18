@@ -78,6 +78,49 @@ may be added.
   `judge_commits` `{AxTwoSubjects, Means, Subject, CL}`); hostile separations `{}`;
   unconditional `freeWillExists` BLOCKED (no footprint).
 
+## Batch fronteira escolha-genuína (2026-09-18) — veredito opção 3 (bloqueio irreducível)
+
+Hostile, proof-oriented attack on `genuineChoice_exists` (F1b). No axiom added;
+each step is either a theorem, a countermodel, or a documented gap.
+
+- **Recurso único formalizado**: `Choice.rejectedHornCoMeant : Prop :=
+  ∃ s p, A s p ∧ A s (¬ p)` — nó BLOCKED (`{Means, Subject}`); a fronteira mínima
+  `rejectedHornCoMeant → genuineChoice_exists` (`{Means, Subject}`) mostra que
+  co-significar a negação basta (`q := ¬p`, `incompatible_self_negation`).
+- **Factos negativos novos** (`{Means, Subject}`):
+  - `genuineChoice_requires_error_possibility : genuineChoice_exists →
+    ¬ (∀ s p, Means s p → p)` — escolha genuína força a não-veridicalidade de
+    `Means` (co-significar incompatíveis com significação veridical daria
+    `p ∧ q ∧ ¬(p∧q)`); a fronteira É a possibilidade de erro, que nenhum axioma
+    fornece.
+  - `assertion_consistency` / `no_one_asserts_incompatible_pair` — `Asserts s p
+    := Act s p ∧ p` é verídico pelo conjunção; o performativo enquanto
+    *asserção* é de um-corno-só por definição; a rota "assertir/denegar é
+    escolher" é impossível como teorema (não como lacuna).
+- **Contramodelos decisivos** (`{}`), `CountermodelVeridicalMeaning` em
+  HostileSemantics (Part C2c): instâncias `Single` (Unit) e `TwoPersons`
+  (Bool) usando as definições Logos **exatamente** (`A := Means`, `Person :=
+  ∃p, Means s p`, `Chooses := co-significação`, `FreeWill := ∃p q, Chooses`) com
+  `Means _ p := p` (veridical). Em `TwoPersons`, TODO o fragmento
+  agency/choice/order vale — datum do ato, dois sujeitos distintos
+  (AxTwoSubjects), certo/errado, `judge_commits`, falibilidade — com escolha
+  genuína **vazia** (`full_fragment_without_genuine_choice`).
+- **Não-derivação formal**: `not_entails_genuine_choice` e
+  `not_entails_genuine_choice_with_plurality` sobre
+  `GenuineChoiceSignature {Subject, Means}` (`{}`): nem o datum do ato, nem o
+  datum + pluralidade, forçam `GenuineChoice`.
+- **Veredito**: opção 3 — `genuineChoice_exists` é genuinamente bloqueado sob
+  os primitivos presentes (`{Means, Subject}`); nenhuma refundição definicional
+  o fecha sem regressão (colapso campo-escolha, 2026-09-18) ou sem relação nova.
+- **Premissas substantivas candidatas — registadas, NÃO introduzidas**:
+  `AxCoMeaningNegation : ∃ s p, Means s p ∧ Means s (¬ p)` (SEM/META); co-sujeito
+  dos cornos `∃ s p, Incorrect s p ∧ Denies s p` (composição `judge_commits` +
+  negação); auto-representação do ato (META). Qualquer uma faria F1b →
+  PROVEN↑ com pegada nova (próxima fase, fora deste milestone).
+- **Footprint report**: nenhuma pegada cresce; `rejectedHornCoMeant` e os 4
+  teoremas `{Means, Subject}` (VOCAB); modelos e não-entailments `{}`.
+  DEDUCTION.md: F1b ✖ BLOCKED (nó `rejectedHornCoMeant` + factos negativos).
+
 ## Batch A2-swap-theorem (2026-09-17) — `AxGlobalGround` becomes a theorem (atom-restricted)
 
 The quantifier swap `∀w∃e … ⇒ ∃e∀w …` (D7, SEM) is answered by the
@@ -228,7 +271,7 @@ C19 is derived under `AxGlobalGround` (`PROVEN↑`).
 | **Act → Subject** | `Agency.act_requires_subject`<br>`Agency.subject_exists_of_act` | **Caso B (Lei Constitutiva)** | Na lógica desprovida de ontologia, o ato bruto não acarreta sujeito (`CountermodelActWithoutSubject` permanece). Em Logos, rege como princípio constitutivo explícito da ontologia de agência: o ato intencional é constitutivamente a efetivação de um sujeito originador (`SubjectExists s := ∃ p, Act s p`). O contramodelo falha unicamente a condição constitutiva `ConstitutiveAct`. Não é postulado como axioma existencial sintético independente. |
 | **Subject → Person** | `Person.person_of_subject` | **Caso A (Definicional sob §12)** | No sistema Logos, `person_of_subject` é estritamente DEFINICIONAL sob a redução estrutural de §12 (`Person s := Agent s ∧ Rational s ∧ Intentional s` com `Agent := True` e `Rational := True`), colapsando pessoa à agência intencional (`∃ p, Means s p = SubjectExists s`). Não constitui descoberta metafísica independente. Sob semântica hostil com predicado substantivo não-interpretado, é separada pelo contramodelo `CountermodelSubjectWithoutPerson`. |
 | **Person → ChoiceField** | `Choice.person_hasChoiceField` | **Caso A/C (Campo, não escolha)** | O campo de escolha — o agente é posto contra um par incompatível — é DEFINICIONAL a partir do ato intencional (`Person s → ∃p q, ChoiceField s p q`), footprint `{Means, Subject}`. Aviso de auditoria (freedom/choice fix, 2026-09-18): o agente relaciona-se apenas com o conteúdo adotado `p`; o outro corno `¬p` é fornecido pela lógica pura (`incompatible_self_negation`), NÃO pelo agente. Isto **não** é escolha. |
-| **ChoiceField ↛ Chooses** | `Choice.Chooses` / `rejectedHornCoMeant` (`F1b`) | **Caso D (Bloqueado)** | Não se segue logicamente. A escolha genuína exige que o sujeito co-signifique os DOIS cornos incompatíveis (`A s p ∧ A s (¬p)`); `Means` é uma relação opaca e `AxTwoSubjects` dá dois sujeitos DIFERENTES, cada um com um só conteúdo. Falta exatamente `rejectedHornCoMeant : (∃s p, A s p) → ∃s p, A s p ∧ A s (¬p)`. `CountermodelNoFreeWill` mostra `Act ↛ Chooses` e `Act ↛ FreeWill` (`{}`); NÃO é contramodelo da definição `Chooses → FreeWill` (que é livre). F1b permanece BLOQUEADO. |
+| **ChoiceField ↛ Chooses** | `Choice.Chooses` / `rejectedHornCoMeant` (`F1b`) | **Caso D (Bloqueado)** | Não se segue logicamente. A escolha genuína exige que o sujeito co-signifique os DOIS cornos incompatíveis (`A s p ∧ A s (¬p)`); `Means` é uma relação opaca e `AxTwoSubjects` dá dois sujeitos DIFERENTES, cada um com um só conteúdo. Falta exatamente `rejectedHornCoMeant : (∃s p, A s p) → ∃s p, A s p ∧ A s (¬p)`. `CountermodelNoFreeWill` mostra `Act ↛ Chooses` e `Act ↛ FreeWill` (`{}`); NÃO é contramodelo da definição `Chooses → FreeWill` (que é livre). **Milestone hostil 2026-09-18** (Batch fronteira escolha-genuína): o bloqueio é *irreducível* — o modelo veridical `CountermodelVeridicalMeaning` (significação veridical, `Means s p → p`) satisfaz TODO o fragmento agency/choice/order (datum do ato, pluralidade, certo/errado, `judge_commits`, falibilidade) com escolha genuína **vazia**, sob a própria definição Logos de `Chooses`; `not_entails_genuine_choice(_with_plurality)` (`{}`) formaliza a não-derivação; a via performativa assertiva é *impossível* por `assertion_consistency`/`no_one_asserts_incompatible_pair`, e a veridicalidade é refutada apenas por `genuineChoice_requires_error_possibility`. F1b permanece BLOCKED (**opção 3**: premissa substantiva nova seria necessária). |
 | **Chooses → FreeWill** | `Choice.chooses_implies_freeWill` | **Caso A (Definicional)** | `FreeWill s := ∃p q, Chooses s p q` — por DEFINIÇÃO. A liberdade não é um passo metafísico adicional a partir do ato bruto; é a própria existência de uma escolha genuína entre alternativas incompatíveis. Footprint **`{Means, Subject}`** (VOCAB apenas — o conteúdo lógico é gratuito). A existência incondicional (`freeWillExists`) é que fica bloqueada, por depender de `rejectedHornCoMeant`. |
 
 Declared (Level 2): `Subject` is an uninterpreted pure sort (`axiom Subject : Type`,
@@ -245,7 +288,7 @@ through the strict 4-step chain (assertion is act → act exists → subject exi
 | ID | Prose | Status | Missing |
 |----|-------|--------|---------|
 | F1a | §13–§15 choice-field existence (`∃s p q`, `ChoiceField s p q`) | PROVEN | `person_hasChoiceField`/`choiceField_exists` `{Means, Subject}` + `judge_commits` `CL` (choice-realism batch, C51–C52/C55; renamed 2026-09-18 — field form, not genuine choice) |
-| F1b | §15 genuine choice & freedom of the actor | BLOCKED | alvo explícito `Choice.genuineChoice_exists := ∃ s, ∃ p q, Chooses s p q` (def-proposição; **não** axioma/`sorry`); via exata `rejectedHornCoMeant : (∃s p, A s p) → ∃s p, A s p ∧ A s (¬p)` — nada força um ato de significação a vir com a significação da sua negação; a fronteira formal é `genuineChoice_exists → freeWillExists` (`freeWillExists_of_genuineChoice`, `{Means, Subject}` — `Chooses → FreeWill` é definicional e ninguém usa `freeWillExists` como premissa). `CountermodelNoFreeWill` mostra só `Act ↛ Chooses`/`Act ↛ FreeWill`. |
+| F1b | §15 genuine choice & freedom of the actor | BLOCKED | alvo explícito `Choice.genuineChoice_exists := ∃ s, ∃ p q, Chooses s p q` (def-proposição; **não** axioma/`sorry`); recurso único formalizado como def **`Choice.rejectedHornCoMeant := ∃ s p, A s p ∧ A s (¬ p)`** — nada força um ato de significação a vir com a significação da sua negação; fronteira `rejectedHornCoMeant → genuineChoice_exists` (`{Means, Subject}`) e `genuineChoice_exists → freeWillExists` (`freeWillExists_of_genuineChoice`, `{Means, Subject}` — `Chooses → FreeWill` é definicional, ninguém usa `freeWillExists` como premissa). **Veredito hostil 2026-09-18 (opção 3 — bloqueio irreducível)**: `genuineChoice_requires_error_possibility` (`{Means, Subject}`, veridicalidade mata co-significação), `assertion_consistency`/`no_one_asserts_incompatible_pair` (`{Means, Subject}`, a via assertiva é impossível) e `CountermodelVeridicalMeaning`/`not_entails_genuine_choice(_with_plurality)` (`{}`, fragmento inteiro satisfeito com escolha vazia). Premissas substantivas candidatas registadas, NÃO introduzidas: `AxCoMeaningNegation`, co-sujeito `Incorrect∧Denies`, auto-representação. |
 | F2 | §21 teleology (`Ought → Goal`) | DEFERRED | deontic layer (normativity → telos) |
 | F3 | §28 Good (`§20 → bem`) | DEFERRED | moral good from logical normativity not yet derived |
 | F4 | §28 Love | PROVEN↑ | `Love.T13_someoneLovable` (C41) under `{AxTwoSubjects, Means, Subject}` |
@@ -533,7 +576,10 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
 - **BLOCKED**: C19 (T7 excluded-middle instance — missing lemma `∃ e,
   Ground e (or θ (not θ))`; transcript in `formal/Spikes/Spike_A6_probe.lean`);
   C69–C72 (retired origin-freedom witnesses) and F1b (genuine choice —
-  missing `rejectedHornCoMeant : (∃s p, A s p) → ∃s p, A s p ∧ A s (¬p)`;
+  missing `rejectedHornCoMeant : ∃s p, A s p ∧ A s (¬p)`, formalizado como nó
+  def BLOCKED; **veredito 2026-09-18 opção 3** — irreducível sob os primitivos
+  presentes: veridicalidade mata co-significação, asserção é de um-corno-só,
+  `CountermodelVeridicalMeaning` satisfaz o fragmento com escolha vazia;
   freedom itself is definitional, `Chooses → FreeWill` `{Means, Subject}` (vocab-only));
   F7 (world-level alternativity — **vocabulary gap**, not a proof gap:
   no world-varying choice predicate exists; missing

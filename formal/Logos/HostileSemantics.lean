@@ -33,11 +33,26 @@ Addresses foundational conflations in the formalization:
    (2026-09-18): person-persistence (`AxPersonStability`) is *definitional*
    too — abstract `Person` does not logically force `NecessarySubject`
    (`CountermodelPersonNotNecessary.not_entails_person_necessary`); the
-   concrete countermodel `Person s ∧ ¬ NecessarySubject s` cannot exist
-   (`Love.no_contingent_person`).
+concrete countermodel `Person s ∧ ¬ NecessarySubject s` cannot exist
+    (`Love.no_contingent_person`).
+8. Veridical-meaning attack on the choice frontier (milestone 2026-09-18):
+   the act-datum does NOT force `genuineChoice_exists` even under the *Logos*
+   definition of `Chooses` (co-meaned incompatible contents). `Means` may be
+   *veridical* (`Means s p → p`), and veridicality makes two-horned meaning
+   impossible (`Choice.genuineChoice_requires_error_possibility`), while
+   assertion is truth-laden and hence single-horned by definition
+   (`Choice.assertion_consistency` /
+   `Choice.no_one_asserts_incompatible_pair`). The concrete model
+   `CountermodelVeridicalMeaning` satisfies the whole agency/choice/order
+   fragment (act datum, plurality, right-and-wrong, `judge_commits`,
+   fallibility) with genuine choice empty; the abstract signatures
+   `not_entails_genuine_choice(_with_plurality)` state the non-entailment.
+   The frontier's single irreducible resource is same-subject co-meaning of a
+   negation (`Choice.rejectedHornCoMeant`, BLOCKED).
 -/
 
 import Logos.Core
+import Logos.Alternatives
 
 namespace Logos.HostileSemantics
 
@@ -492,6 +507,184 @@ theorem not_entails_person_necessary :
   exact hno (h I hp)
 
 end CountermodelPersonNotNecessary
+
+-- ===========================================================================
+-- Part C2c: Veridical Meaning vs. the Choice Frontier (F1b / 2026-09-18)
+-- ===========================================================================
+--
+-- `genuineChoice_exists` (Choice.F1b) demands that ONE subject co-mean two
+-- incompatible contents. Nothing forces `Means` to be truth-neutral: in a
+-- model where meaning is *veridical* (`Means s p → p`), co-meaning a
+-- disagreement is impossible (`p ∧ q ∧ ¬(p∧q)`). The models below instantiate
+-- the Logos definitions exactly (A := Means, Person := ∃p, Means s p,
+-- Chooses := co-meaned incompatibility, FreeWill := ∃p q, Chooses) and show
+-- the whole agency/choice/order fragment holds — act datum, plurality,
+-- right-and-wrong, `judge_commits`, fallibility — while genuine choice is
+-- empty. These are the honest replacements for `CountermodelNoFreeWill`
+-- (which decouples `Chooses` from its Logos definition and so does not bear
+-- on `genuineChoice_exists`).
+
+namespace CountermodelVeridicalMeaning
+
+-- Single subject, veridical meaning: `Unit` with `Means () p := p`.
+namespace Single
+
+def S : Type := Unit
+def M (_s : S) (p : Prop) : Prop := p
+def A (s : S) (p : Prop) : Prop := M s p
+def Person (s : S) : Prop := ∃ p : Prop, M s p
+def Chooses (s : S) (p q : Prop) : Prop := A s p ∧ A s q ∧ Logos.Alternatives.Incompatible p q
+def FreeWill (s : S) : Prop := ∃ p q : Prop, Chooses s p q
+
+theorem act_datum_holds : ∃ s : S, ∃ p : Prop, A s p :=
+  ⟨(), True, trivial⟩
+
+theorem field_holds : ∃ s : S, ∃ p q : Prop, A s p ∧ Logos.Alternatives.Incompatible p q := by
+  exact ⟨(), True, False, trivial, fun h => h.2⟩
+
+theorem no_genuine_choice : ¬ ∃ s : S, ∃ p q : Prop, Chooses s p q := by
+  rintro ⟨s, p, q, hp, hq, hI⟩
+  exact hI ⟨hp, hq⟩
+
+theorem no_rejected_horn : ¬ ∃ s : S, ∃ p : Prop, A s p ∧ A s (¬ p) := by
+  rintro ⟨s, p, hp, hnp⟩
+  exact hnp hp
+
+/-- Hostile separation: the act occurs (the performative datum), the choice
+    field obtains, yet genuine choice is impossible. -/
+theorem act_does_not_imply_genuine_choice :
+    (∃ s : S, ∃ p : Prop, A s p) ∧
+    ¬ (∃ s : S, ∃ p q : Prop, Chooses s p q) :=
+  ⟨act_datum_holds, no_genuine_choice⟩
+
+end Single
+
+-- Two persons, veridical meaning: `Bool` with `Means _ p := p`, mirroring
+-- the agency/choice/order fragment (Person, Correct/Incorrect, Fallible).
+namespace TwoPersons
+
+def S : Type := Bool
+def M (_s : S) (p : Prop) : Prop := p
+def A (s : S) (p : Prop) : Prop := M s p
+def Person (s : S) : Prop := ∃ p : Prop, M s p
+def Chooses (s : S) (p q : Prop) : Prop := A s p ∧ A s q ∧ Logos.Alternatives.Incompatible p q
+def FreeWill (s : S) : Prop := ∃ p q : Prop, Chooses s p q
+
+/-- Order-fragment mirrors (Logos.Order). -/
+def T (p : Prop) : Prop := p
+def IsFalse (p : Prop) : Prop := ¬ p
+def Correct (s : S) (p : Prop) : Prop := A s p ∧ T p
+def Incorrect (s : S) (p : Prop) : Prop := A s p ∧ IsFalse p
+def Fallible (_s : S) (p : Prop) : Prop := IsFalse p
+
+theorem act_datum_holds : ∃ s : S, ∃ p : Prop, A s p :=
+  ⟨false, True, trivial⟩
+
+theorem two_persons_exist : ∃ s₁ s₂ : S, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ := by
+  refine ⟨true, false, ?_, ?_, ?_⟩
+  · exact ⟨True, trivial⟩
+  · exact ⟨True, trivial⟩
+  · intro h
+    cases h
+
+theorem rightWrong_holds : (¬ (∀ p : Prop, ¬ T p)) ∧ (¬ (∀ p : Prop, T p)) := by
+  constructor
+  · intro h
+    exact h True trivial
+  · intro h
+    exact h False
+
+theorem judge_commits_holds :
+    ∃ (s : S) (p q : Prop),
+      A s p ∧ (Correct s p ∨ Incorrect s p) ∧ Logos.Alternatives.Incompatible p q := by
+  refine ⟨false, True, False, ?_, ?_, ?_⟩
+  · trivial
+  · exact Or.inl ⟨trivial, trivial⟩
+  · intro h
+    exact h.2
+
+theorem fallibility_holds : ∃ (s : S) (p : Prop), Fallible s p ∧ IsFalse p := by
+  refine ⟨false, False, ?_, ?_⟩
+  · intro h
+    exact h
+  · intro h
+    exact h
+
+theorem no_genuine_choice : ¬ ∃ s : S, ∃ p q : Prop, Chooses s p q := by
+  rintro ⟨s, p, q, hp, hq, hI⟩
+  exact hI ⟨hp, hq⟩
+
+theorem no_rejected_horn : ¬ ∃ s : S, ∃ p : Prop, A s p ∧ A s (¬ p) := by
+  rintro ⟨s, p, hp, hnp⟩
+  exact hnp hp
+
+/-- Hostile separation, full fragment: act datum, two distinct persons,
+    right-and-wrong, the judge committing a choice field, and fallibility all
+    hold — yet genuine choice (and with it `FreeWill`) is empty. This is the
+    "satisfies all relevant existing assumptions while falsifying
+    `genuineChoice_exists`" witness of the frontier. -/
+theorem full_fragment_without_genuine_choice :
+    (∃ s : S, ∃ p : Prop, A s p) ∧
+    (∃ s₁ s₂ : S, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂) ∧
+    ((¬ (∀ p : Prop, ¬ T p)) ∧ (¬ (∀ p : Prop, T p))) ∧
+    (∃ (s : S) (p q : Prop), A s p ∧ (Correct s p ∨ Incorrect s p) ∧ Logos.Alternatives.Incompatible p q) ∧
+    (∃ (s : S) (p : Prop), Fallible s p ∧ IsFalse p) ∧
+    ¬ (∃ s : S, ∃ p q : Prop, Chooses s p q) :=
+  ⟨act_datum_holds, two_persons_exist, rightWrong_holds, judge_commits_holds,
+   fallibility_holds, no_genuine_choice⟩
+
+end TwoPersons
+
+-- ===========================================================================
+-- Abstract-signature forms: non-entailment over the choice vocabulary
+-- ===========================================================================
+
+structure GenuineChoiceSignature where
+  Subject : Type
+  Means : Subject → Prop → Prop
+
+def GCdatum (I : GenuineChoiceSignature) : Prop :=
+  ∃ s : I.Subject, ∃ p : Prop, I.Means s p
+
+/-- Genuine choice over the signature, exactly as Logos defines it
+    (`Chooses s p q := A s p ∧ A s q ∧ Incompatible p q` with `A ∘ Means`). -/
+def GenuineChoice (I : GenuineChoiceSignature) : Prop :=
+  ∃ s : I.Subject, ∃ p q : Prop, I.Means s p ∧ I.Means s q ∧ Logos.Alternatives.Incompatible p q
+
+/-- Two distinct persons over the signature (`Person s := ∃ p, Means s p`). -/
+def Γ_twoGCSubjects (I : GenuineChoiceSignature) : Prop :=
+  ∃ s₁ s₂ : I.Subject, (∃ p : Prop, I.Means s₁ p) ∧ (∃ p : Prop, I.Means s₂ p) ∧ s₁ ≠ s₂
+
+/-- Separation: the act-datum does not force genuine choice under the Logos
+    definition — the veridical model witnesses the failure. -/
+theorem not_entails_genuine_choice :
+    ¬ (∀ I : GenuineChoiceSignature, GCdatum I → GenuineChoice I) := by
+  intro h
+  let I : GenuineChoiceSignature := { Subject := Unit, Means := fun _ p => p }
+  have hd : GCdatum I := ⟨(), True, trivial⟩
+  have hn : ¬ GenuineChoice I := by
+    rintro ⟨s, p, q, hp, hq, hI⟩
+    exact hI ⟨hp, hq⟩
+  exact hn (h I hd)
+
+/-- Separation, strengthened: act-datum plus two distinct persons still does
+    not force genuine choice — plurality is not the missing resource either. -/
+theorem not_entails_genuine_choice_with_plurality :
+    ¬ (∀ I : GenuineChoiceSignature, GCdatum I ∧ Γ_twoGCSubjects I → GenuineChoice I) := by
+  intro h
+  let I : GenuineChoiceSignature := { Subject := Bool, Means := fun _ p => p }
+  have hd : GCdatum I ∧ Γ_twoGCSubjects I := by
+    constructor
+    · exact ⟨false, True, trivial⟩
+    · refine ⟨true, false, ⟨True, trivial⟩, ⟨True, trivial⟩, ?_⟩
+      intro h
+      cases h
+  have hn : ¬ GenuineChoice I := by
+    rintro ⟨s, p, q, hp, hq, hI⟩
+    exact hI ⟨hp, hq⟩
+  exact hn (h I hd)
+
+end CountermodelVeridicalMeaning
 
 -- ===========================================================================
 -- Part D: Semantic Attack on Ultimate Ground (Infinite Descending Chain)

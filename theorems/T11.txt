@@ -5,14 +5,21 @@ Depende de: T5, T9; definições §14–§15 (desacoplado de `AxTwoSubjects` na 
 Verificado em: formal/Logos/Choice.lean (T11_choiceField, person_hasChoiceField,
 choiceField_exists, noChoiceField_selfRefutes, JUDGE_HAS_CHOICE_FIELD,
 chooses_implies_freeWill, rightWrong_implies_someone_means,
-meaning_I_needs_subject), formal/Logos/Order.lean (judge_commits,
+meaning_I_needs_subject, rejectedHornCoMeant, rejectedHornCoMeant_implies_genuineChoice,
+genuineChoice_requires_error_possibility, assertion_consistency,
+no_one_asserts_incompatible_pair), formal/Logos/Order.lean (judge_commits,
 rightWrong_implies_meaning, rightDistinctWrong_implies_meaning,
 rightWrongDistinction_implies_meaning), formal/Logos/HostileSemantics.lean
-(CountermodelNoFreeWill, not_entails_decoupled_freewill), GAPMAP.md C39–C72/F1a/F1b.
+(CountermodelNoFreeWill, not_entails_decoupled_freewill,
+CountermodelVeridicalMeaning, not_entails_genuine_choice,
+not_entails_genuine_choice_with_plurality), GAPMAP.md C39–C72/F1a/F1b.
 Impressão de axiomas:
 T11_choiceField — `{Means, Subject}` (herda de T5; C39 desacoplado de AxTwoSubjects);
 person_hasChoiceField — `{Means, Subject}` (PROVEN, campo de escolha, NÃO escolha genuína;
   renomeado de person_chooses, 2026-09-18);
+rejectedHornCoMeant_implies_genuineChoice, genuineChoice_requires_error_possibility,
+assertion_consistency, no_one_asserts_incompatible_pair — `{Means, Subject}`
+(novos, milestone hostil 2026-09-18); hostile separations/no_genuine_choice — nenhuma ({});
 rightWrong_implies_meaning / rightDistinctWrong_implies_meaning — `{Means, Subject}`
 (PROVEN, C62, só vocabulário);
 meaning_I_needs_subject — `{Means, Subject}` (PROVEN, C49);
@@ -51,11 +58,13 @@ chooses_implies_freeWill : Chooses(s,p,q) ⇒ FreeWill(s)   [{Means, Subject} s�
 
 O passo EM FALTA (F1b, BLOCKED) é a existência da escolha genuína:
 
-    rejectedHornCoMeant : (∃s p, A(s,p)) → ∃s p, A(s,p) ∧ A(s,¬p)
+    rejectedHornCoMeant : ∃s p, A(s,p) ∧ A(s,¬p)
 
-Nada força um ato de significar p a vir com a significação de ¬p: `Means` é
-opaco e AxTwoSubjects dá dois sujeitos diferentes, cada um com um só conteúdo.
-`Chooses → FreeWill` é definicional; o que falta é o escolhedor.
+(formalizado como def-proposição, nó BLOCKED.) Nada força um ato de significar
+p a vir com a significação de ¬p: `Means` é opaco e AxTwoSubjects dá dois
+sujeitos diferentes, cada um com um só conteúdo. `Chooses → FreeWill` é
+definicional; o que falta é o escolhedor. (Forma condicional em prosa:
+(∃s p, A(s,p)) → ∃s p, A(s,p) ∧ A(s,¬p).)
 
 Teoremas kernel-verificados (a cadeia §2 de IM_STUPID.md fecha para a
 existência do CAMPO de escolha; a escolha genuína é F1b, bloqueada):
@@ -94,5 +103,15 @@ CLASSIFICAÇÃO ONTOLÓGICA DAS PASSAGENS:
 - O campo (`ChoiceField`, person_hasChoiceField, choiceField_exists) e o juiz
   que o certo-e-errado compromete (`JUDGE_HAS_CHOICE_FIELD`) são teoremas; o
   que fica BLOCKED é a *existência* de um escolhedor genuíno.
+- Veredito hostil 2026-09-18 (opção 3 — bloqueio irreducível sob os primitivos
+  `{Means, Subject}`): `genuineChoice_requires_error_possibility`
+  (veridicalidade mata co-significação), `assertion_consistency` /
+  `no_one_asserts_incompatible_pair` (assertir é de um-corno-só por definição),
+  `rejectedHornCoMeant_implies_genuineChoice` (fronteira mínima), e
+  `CountermodelVeridicalMeaning` + `not_entails_genuine_choice(_with_plurality)`
+  (`{}` — datum, pluralidade, certo/errado, judge_commits e falibilidade valem
+  com escolha vazia). Premissas substantivas candidatas (`AxCoMeaningNegation`,
+  co-sujeito `Incorrect∧Denies`, auto-representação) registadas, NÃO
+  introduzidas.
 - O nível-mundos (F7, `ChoiceAt : World → Subject → Prop → Prop`) permanece a
   ponte SEM futura, secundária. Ver formal/GAPMAP.md F1a/F1b.
