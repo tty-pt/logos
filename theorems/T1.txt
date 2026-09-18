@@ -1,25 +1,38 @@
 T1 — O SUJEITO DO ATO EXISTE
 
-Depende de: Retorção performativa do Cogito (`Agency.noCogito_selfRefutes` / `Agency.subject_exists_of_assert`, GAPMAP C58/C68)
+Depende de: Retorção performativa direta do ato fraco (`Agency.noWeakAct_selfRefutes`, GAPMAP C58, pegada `{Subject, act}`),
+ponte de intencionalidade (`Agency.weak_act_implies_strong_act`) ou atalho forte de asserção intencional (`Agency.noCogito_selfRefutes` / `Agency.subject_exists_of_assert`, GAPMAP C68),
 e derivação constitutiva do ato presente (`Plurality.T1_subjectExists`, GAPMAP C21, pegada estrita `{Means, Subject}`).
 Desacoplado de `AxTwoSubjects`.
 
-O ponto de partida é o ato presente de raciocinar:
+O ponto de partida exige distinguir rigorosamente:
+
+act(s,p)
+*ato fraco: evento realizado* (emissão, proferimento, negação performativa)
 
 Act(s,p)
+*ato forte: ato intencional / portador de significado* (Act(s,p) := Means(s,p))
 
 onde:
 s = sujeito do ato
 p = conteúdo do ato
 
-O próprio ato não precisa ser inferido de uma premissa externa arbitrária:
-a negação de que ocorra qualquer ato (`NoAct := ¬ ∃ s p, Act s p`) é auto-refutante
-quando asserida (`Asserts speaker NoAct ⊢ False`, C58). A dedução opera em 4 passos estritos:
-1. A ocorrência de uma asserção é um ato (`assertion_is_act : Asserts s p → Act s p`).
-2. Portanto um ato existe (`act_exists_of_assert : Asserts s p → ∃ s' p', Act s' p'`).
-3. Portanto um sujeito existe (`subject_exists_of_assert : Asserts s p → ∃ s', SubjectExists s'`).
-4. Portanto NoAct é performativamente auto-refutante (`noCogito_selfRefutes`).
+1. Retorção performativa direta (ato fraco):
+A negação de que ocorra qualquer evento realizado (`NoWeakAct := ¬ ∃ s p, act s p`) é auto-refutante
+quando proferida (`asserts speaker NoWeakAct ⊢ False`, C58). A dedução fraca opera em passos estritos:
+- A ocorrência de uma asserção proferida é um evento realizado (`assertion_is_weak_act : asserts s p → act s p`).
+- Portanto um evento realizado existe (`weak_act_exists_of_assert : asserts s p → ∃ s' p', act s' p'`).
+- Portanto NoWeakAct é performativamente auto-refutante (`noWeakAct_selfRefutes`).
+Esta retorção estabelece DIRETAMENTE apenas o ato fraco: `∃ s p, act s p`.
 
+2. Transição para o ato forte:
+weak act [evento realizado] → ? [ponte de intencionalidade] → strong Act [ato intencional]
+A passagem do evento físico/proferido para a relação intencional de significado (`Act s p := Means s p`)
+constitui a ponte filosófica explícita `weak_act_implies_strong_act := ∀ s p, act s p → Act s p`.
+Sob semântica hostil (`CountermodelWeakActWithoutMeaning`, `{}`), a ocorrência de eventos não acarreta logicamente significado.
+O atalho forte em Logos assume a asserção intencional `Asserts s p := Act s p ∧ p` (`noCogito_selfRefutes`).
+
+3. Da agência ao sujeito:
 Por regra constitutiva de um ato intrinsecamente indexado:
 
 Act(s,p) → SubjectExists(s)  [Exists(s)]

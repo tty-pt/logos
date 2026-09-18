@@ -70,7 +70,12 @@ The §24a atom-grounding principle reflected at the level of propositions.
 
  GroundPrincipleProp (SEM): every true proposition of the present rational
     level has a grounding entity. Prop-level reflection of
-    `Truthmaker.groundPrinciple_atom`. -/
+    `Truthmaker.groundPrinciple_atom`.
+
+ Philosophical cost: a separate positive existential commitment over the whole
+    propositional level — every true proposition, not merely every atomic
+    formula, is guaranteed a ground. Beyond the definitional atom cases this is
+    a substantive semantic postulate, not a theorem the axioms force. -/
 axiom GroundPrincipleProp : ∀ {f : Prop}, T f → ∃ e : Entity, GroundProp e f
 
 /-- AxGroundBearing (now a theorem, B2): a ground *bears* what it grounds —
@@ -92,7 +97,13 @@ AxPersonalGround (META): the *necessary* reality grounds the personal
     features present in the rational act.
 
  This is the declared bridge of the poem's step; its negation does not
-    self-refute, so it may not be called a deduction (see failure trace above and §28). -/
+    self-refute, so it may not be called a deduction (see failure trace above and §28).
+
+ Philosophical cost: a metaphysical bridge. The necessary reality is asserted
+    to carry the present rational (personal) features without this following
+    from the performative datum: a world whose ultimate reality is impersonal
+    is logically consistent with the premises (impersonal-ground
+    countermodel). Γ names the bridge and pays for it explicitly. -/
 axiom AxPersonalGround : ∀ {f : Prop}, IsPresentPersonalFeature f →
   ∃ e : Entity, NecessaryEntity e ∧ GroundProp e f
 

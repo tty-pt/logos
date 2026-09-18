@@ -77,7 +77,13 @@ def NecessarilyFalse (φ : Form) : Prop := ∀ w : World, ¬ TrueAt w φ
 The truthmaker principle: truth is grounded in reality.
 
  If a formula is satisfied at world `w`, there is some entity `e` existing in `w` that grounds it.
- This is a substantive semantic bridge (`Tag: SEM`), not a definitional collapse. -/
+ This is a substantive semantic bridge (`Tag: SEM`), not a definitional collapse.
+
+ Philosophical cost: the price of a realist reading of correspondence — the
+    bridge commits Γ to a non-vacuous grounding relation between satisfied
+    formulas and existing entities, without deciding what kind of entities
+    those must be. A coherence or deflationary account of truth is thereby
+    excluded; the principle is posited, not derived. -/
 axiom Truthmaker : ∀ (w : World) (φ : Form),
   Satisfies w φ → ∃ e : Entity, ExistsAt w e ∧ Ground e φ
 

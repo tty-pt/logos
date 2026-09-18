@@ -59,14 +59,22 @@ def Agent (_s : Subject) : Prop := True
 def Rational (_s : Subject) : Prop := True
 
 /--Tag: VOCAB
+Vocabulary: weak act / performed event — something is performed, uttered, asserted, or denied.
+
+ `act s p`: weak act: performed event (utterance, assertion-event, performance).
+    Distinguished from the strong intentional meaning-act `Act s p := Means s p`. -/
+axiom act : Subject → Prop → Prop
+
+/--Tag: VOCAB
 Vocabulary: the meaning-act relation — a subject means a proposition.
 
  `Means s p`: subject s means (intentionally relates to) proposition p
     (base.txt §11, T5 component). Primitive intentional relation. -/
 axiom Means : Subject → Prop → Prop
 
-/-- The act — the meaning-act: a subject intentionally relates to proposition `p`.
-    Constitutively subject-indexed: an act is performed by an originating subject. -/
+/-- `Act s p`: strong act: intentional/meaning-bearing act.
+    Constitutively subject-indexed meaning-act: a subject intentionally relates to proposition `p`.
+    Defined via the primitive intentional relation `Means`. -/
 def Act (s : Subject) (p : Prop) : Prop := Means s p
 
 /-- Legacy alias for Act across the library. -/
@@ -110,20 +118,87 @@ theorem an_actual_subject_exists_of_act (h : ∃ s : Subject, ∃ p : Prop, Act 
     AnActualSubjectExists :=
   subject_exists_of_act h
 
-/-- No act occurs: the radical nihilist thesis. -/
+-- ===========================================================================
+-- 1. Weak Act Layer: Performed Events and Weak Retorsion
+-- ===========================================================================
+
+/-- No weak act occurs: the radical thesis that no performed event occurs. -/
+def NoWeakAct : Prop := ¬ ∃ s : Subject, ∃ p : Prop, act s p
+
+/-- The weak assertion relation: a performed event affirming proposition `p`.
+    `asserts s p` = weak assertion: performed event of asserting `p`. -/
+def asserts (s : Subject) (p : Prop) : Prop := act s p ∧ p
+
+/-- Step 1 (weak): The occurrence of a weak assertion is a weak act (performed event). -/
+theorem assertion_is_weak_act {s : Subject} {p : Prop} (h : asserts s p) : act s p :=
+  h.1
+
+/-- Step 2 (weak): A weak assertion entails that a performed event exists. -/
+theorem weak_act_exists_of_assert {s : Subject} {p : Prop} (h : asserts s p) :
+    ∃ s' : Subject, ∃ p' : Prop, act s' p' :=
+  ⟨s, p, assertion_is_weak_act h⟩
+
+/-- Step 4 (weak retorsion): Asserting that no performed event occurs refutes itself directly.
+    Establishes ONLY the weak act (performed event) without sliding into intentional meaning. -/
+theorem noWeakAct_selfRefutes (speaker : Subject) (h : asserts speaker NoWeakAct) : False :=
+  h.2 (weak_act_exists_of_assert h)
+
+/-- Weak Cogito: any performative assertion entails that a performed event occurs. -/
+theorem weak_Cogito {s : Subject} {p : Prop} (h : asserts s p) :
+    ∃ s' : Subject, ∃ p' : Prop, act s' p' :=
+  weak_act_exists_of_assert h
+
+-- ===========================================================================
+-- 2. Transition: Weak Act → Strong Act (Explicit Philosophical Burden)
+-- ===========================================================================
+
+/-- The explicit bridge proposition: every performed event is an intentional meaning-act.
+    The transition `weak act → strong Act(s,p)`.
+    This is a separately identified premise/philosophical target, not an analytical identity.
+    A mechanical device or automaton can perform an event `act s p` without intentional meaning. -/
+def weak_act_implies_strong_act : Prop :=
+  ∀ (s : Subject) (p : Prop), act s p → Act s p
+
+/-- Existential form of the bridge: existence of a performed event entails existence of an intentional act. -/
+def weak_act_exists_implies_strong_act_exists : Prop :=
+  (∃ s : Subject, ∃ p : Prop, act s p) → ∃ s : Subject, ∃ p : Prop, Act s p
+
+/-- Step from weak act to strong Act under the explicit bridge premise. -/
+theorem strong_act_of_weak_act (hBridge : weak_act_implies_strong_act)
+    {s : Subject} {p : Prop} (h : act s p) : Act s p :=
+  hBridge s p h
+
+/-- Conditional Cogito: performative assertion yields an intentional meaning-act given the bridge. -/
+theorem Cogito_of_bridge (hBridge : weak_act_implies_strong_act)
+    {s : Subject} {p : Prop} (h : asserts s p) :
+    ∃ s' : Subject, ∃ p' : Prop, Act s' p' := by
+  obtain ⟨s', p', ha⟩ := weak_act_exists_of_assert h
+  exact ⟨s', p', strong_act_of_weak_act hBridge ha⟩
+
+/-- No strong act occurs: the thesis that no intentional meaning-act occurs. -/
 def NoAct : Prop := ¬ ∃ s : Subject, ∃ p : Prop, Act s p
 
-/-- The assertion relation: a subject performs an act affirming proposition `p`.
-    In speech-act theory, asserting `p` means performing an intentional act whose asserted content is `p`. -/
+/-- Asserting NoAct refutes itself under a weak assertion ONLY given the bridge from weak act to strong Act. -/
+theorem noAct_conditional_selfRefutes (hBridge : weak_act_implies_strong_act)
+    (speaker : Subject) (h : asserts speaker NoAct) : False :=
+  h.2 ⟨speaker, NoAct, strong_act_of_weak_act hBridge (assertion_is_weak_act h)⟩
+
+-- ===========================================================================
+-- 3. Strong Act Layer: Intentional Assertions (Strong Shortcut)
+-- ===========================================================================
+
+/-- The strong assertion relation: a subject performs an intentional meaning-act affirming `p`.
+    `Asserts s p` = strong assertion: intentional/meaning-bearing act asserting `p`.
+    Stipulates that the assertion already embodies full intentional meaning (`Act s p := Means s p`). -/
 def Asserts (s : Subject) (p : Prop) : Prop := Act s p ∧ p
 
-/-- Arrow 0 (Case A: Purely Definitional):
-    Step 1: The occurrence of an assertion is an act.
+/-- Arrow 0 (Case A: Purely Definitional — Strong Shortcut):
+    Step 1: The occurrence of a strong assertion is an intentional Act.
     Follows purely from the conjunction definition Asserts s p := Act s p ∧ p. -/
 theorem assertion_is_act {s : Subject} {p : Prop} (h : Asserts s p) : Act s p :=
   h.1
 
-/-- Step 2: An assertion entails that an act exists. -/
+/-- Step 2 (strong shortcut): A strong assertion entails that an intentional act exists. -/
 theorem act_exists_of_assert {s : Subject} {p : Prop} (h : Asserts s p) :
     ∃ s' : Subject, ∃ p' : Prop, Act s' p' :=
   ⟨s, p, assertion_is_act h⟩
@@ -138,12 +213,12 @@ theorem subject_exists_of_assert {s : Subject} {p : Prop} (h : Asserts s p) :
     ∃ s' : Subject, SubjectExists s' :=
   ⟨s, act_requires_subject s p (assertion_is_act h)⟩
 
-/-- Step 4 (C58): Retorsion — asserting that no act occurs refutes itself.
-    The performance of the assertion constitutes an act, directly refuting the asserted thesis NoAct. -/
+/-- Step 4 (C58 strong shortcut): Retorsion — asserting that no act occurs refutes itself.
+    If the assertion is stipulated as already intentional (strong assertion), refutation is immediate. -/
 theorem noCogito_selfRefutes (speaker : Subject) (h : Asserts speaker NoAct) : False :=
   h.2 (act_exists_of_assert h)
 
-/-- Cogito as a derived theorem: any performative assertion entails that an act occurs. -/
+/-- Cogito as a derived theorem (strong shortcut): any strong assertion entails that an intentional act occurs. -/
 theorem Cogito {s : Subject} {p : Prop} (h : Asserts s p) :
     ∃ s' : Subject, ∃ p' : Prop, Act s' p' :=
   act_exists_of_assert h
@@ -208,10 +283,14 @@ theorem T2_contentExists : ∃ p : Prop, Content p :=
 
 end Logos.Agency
 
--- Axiom footprint audit
 #print axioms Logos.Agency.T2_contentExists
 #print axioms Logos.Agency.Cogito
 #print axioms Logos.Agency.noCogito_selfRefutes
+#print axioms Logos.Agency.noWeakAct_selfRefutes
+#print axioms Logos.Agency.weak_Cogito
+#print axioms Logos.Agency.strong_act_of_weak_act
+#print axioms Logos.Agency.Cogito_of_bridge
+#print axioms Logos.Agency.noAct_conditional_selfRefutes
 #print axioms Logos.Agency.act_requires_subject
 #print axioms Logos.Agency.subject_exists_of_act
 #print axioms Logos.Agency.subject_exists_of_assert

@@ -109,7 +109,13 @@ AxTwoSubjects (META; poem P5/P7, failure traces in DESIGN.md D14 and
     HostileSemantics): the *reality* of right-and-wrong demands that there be
     at least two distinct persons. Narrower than the former single bridge
     `AxValueInterpersonal` (plurality only; affectivity is AxPersonsAffect).
-    A single act does not entail plurality (settled by the Unit countermodel). -/
+    A single act does not entail plurality (settled by the Unit countermodel).
+
+ Philosophical cost: a substantive interpersonal metaphysics. A lone judging
+    subject, and the unit world of a single act, remain logically consistent
+    with every earlier premise, so the demand for a second distinct person is
+    posited, not deduced. Plural personal reality is bought with this declared
+    bridge. -/
 axiom AxTwoSubjects :
     (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) →
       ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂

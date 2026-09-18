@@ -67,13 +67,13 @@ declarada (só SEM/META).
   (`Choice.rightWrong_implies_someone_means`) e
   `Order.rightWrongDistinction_implies_meaning`, `CL`
   — sem axioma substantivo.
-- L20 (P4): "para haver alguém é preciso haver escolha" → PROVEN como CAMPO
+- L20 (P4): "para haver alguém é preciso haver escolha" → PROVEN como CAMPO (escolha fraca: alternativas incompatíveis presentes)
   ✔: C51 (`person_hasChoiceField`, `{Means, Subject}`; reparação 2026-09-18 —
-  é o campo de escolha, não a escolha genuína). A escolha genuína
+  é o campo de escolha `ChoiceField`, não a escolha genuína `Chooses`). A escolha genuína / forte
   (`Chooses(s,p,q) := A(s,p) ∧ A(s,q) ∧ Incompatible(p,q)`) e a liberdade
-  definicional (`FreeWill(s) := ∃p q, Chooses`, `chooses_implies_freeWill {Means, Subject} só vocab)
+  definicional (`FreeWill(s) := ∃p q, Chooses`, `chooses_implies_freeWill` `{Means, Subject}` só vocab)
   estão formalizadas, mas a sua *existência* é F1b BLOCKED
-  (`rejectedHornCoMeant`). "Escolha com significado →
+  (`rejectedHornCoMeant`). O fosso `weak choice / choice-field → ? → strong Chooses → FreeWill` é explícito. "Escolha com significado →
   mais do que uma pessoa" → PROVEN ✔: C40/C73 (plurality-discharge
   2026-09-17 — o par canónico origem+destinatário é teorema `{}`).
 - L22 (P5): "um Ser sózinho … não ajuda nem prejudica ninguém" → PROVEN
@@ -90,7 +90,8 @@ declarada (só SEM/META).
 - L26–30: "este mundo é necessário? Não" — negação não reivindicada (sem
   demonstração); "a criação existe / há propósito" — zona de fé (F9,
   DEFERRED); "existe este Ser Pessoal" — PROVEN↑ C32 (T8, `AxPersonalGround`).
-- L38 ("Eu Escolho! Escolho admitir que: Sou"): o ato de escolher/admitir é o
-  próprio dado performativo — C68 (`Agency.Cogito`, teorema `{}`); negá-lo
-  refuta-se por exibição (`noCogito_selfRefutes`, C58) e negar o sujeito também
-  (`noSubject_selfRefutes`, C57).
+- L38 ("Eu Escolho! Escolho admitir que: Sou"): o proferimento de admitir/negar é o
+  próprio evento performativo fraco (`act`) — C58 (`Agency.noWeakAct_selfRefutes`, `{Subject, act}`)
+  refuta a negação de eventos realizados; a asserção intencional forte é C68 (`Agency.Cogito`, `{Means, Subject}`),
+  e `noCogito_selfRefutes` refuta a negação do ato forte sob a ponte `weak act → strong Act` (`weak_act_implies_strong_act`);
+  e negar o sujeito também se refuta (`noSubject_selfRefutes`, C57).

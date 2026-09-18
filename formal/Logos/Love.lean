@@ -118,9 +118,14 @@ theorem no_contingent_person : ¬ (∃ s : Subject, Person s ∧ ¬ NecessarySub
      it is necessary by definition (`AxPersonStability`, esse est agere). The
      old closed form ran through plurality (`T5_personExists_from_plurality`,
      footprint `{AxTwoSubjects, Means, Subject}`); the hypothesis-carrying
-     form drops `AxTwoSubjects`. The necessity here is *definitional*
-     (`ExistsAt (Subject) := ExistsAt (Entity.ofSubject _) := True`), not a
-     bridge. Footprint: `{Means, Subject}` (VOCAB only). -/
+  form drops `AxTwoSubjects`. The necessity here is *definitional*
+  (`ExistsAt (Subject) := ExistsAt (Entity.ofSubject _) := True`), not a
+  bridge — and, like C24 itself, it needs only the actualized
+  meaning-subject (`∃ p, Means s p`), not the substantive reading of
+  "person". A VOCAB-only kernel footprint does NOT certify semantic
+  neutrality of the definitions: this is an ontology-internal constitutive
+  necessity, not an ontology-independent metaphysical one.
+  Footprint: `{Means, Subject}` (VOCAB only). -/
 theorem necessaryPersonExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
     ∃ s : Subject, Person s ∧ NecessarySubject s := by
   obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists h
@@ -131,10 +136,14 @@ theorem necessaryPersonExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.A
  E5 / C92 — from the demonstrated person (C24, `T5_personExists`) and its
     persistence (`AxPersonStability`, esse est agere) with the subject→entity
     lift (`Modal.subject_nec_entity_nec`, C91), some entity exists in every
-    world. This does NOT close T7: it is the performing person's correlate,
-    not a uniform ground of necessary truths (that stays
-    `AxGlobalGround`-priced, C18). Footprint: `{Means, Subject}` (VOCAB only;
-    no AxTwoSubjects, no SEM/META). -/
+  world. This does NOT close T7: it is the performing person's correlate,
+     not a uniform ground of necessary truths (that stays
+     `AxGlobalGround`-priced, C18). Like C77, it needs only the actualized
+     meaning-subject; a VOCAB-only footprint does NOT certify semantic
+     neutrality — this is constitutive necessity, not an ontology-independent
+     metaphysical one.
+     Footprint: `{Means, Subject}` (VOCAB only;
+     no AxTwoSubjects, no SEM/META). -/
 theorem necessary_entity_exists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
     ∃ e : Entity, NecessaryEntity e := by
   obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists h

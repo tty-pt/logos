@@ -76,11 +76,17 @@ theorem T4_agentExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p)
   obtain ⟨s, hs⟩ := T1_subjectExists h
   exact ⟨s, hs, trivial⟩
 
-/--At least one person exists: derived from the performative act-datum.
+/--At least one person exists (C24): formally forced under the §12
+  constitutive definition of Person (`Person` → `Intentional` →
+  `∃ p, Means s p`). It establishes only the actualized meaning-subject;
+  substantive personhood is not independently established.
 
-  T5 (C24) — there is a person:
-  derived from the existence of an intentional act (C68 → C21 → C24) via §12 definitional
-  collapse (Case A under §12). Footprint: `{Means, Subject}` (VOCAB only; decoupled from AxTwoSubjects). -/
+  The chain C68 → Act → SubjectExists → Intentional → Person (§12 nominal)
+  makes the identity explicit (`Person.person_intentional_iff` + bridge
+  lemmas); the substantive reading (deliberation, moral responsibility,
+  self-reflection, autonomous agency) is not independently established —
+  see `HostileSemantics` Part A2.
+  Footprint: `{Means, Subject}` (VOCAB; decoupled from AxTwoSubjects). -/
 theorem T5_personExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
     ∃ s : Subject, Person s :=
   Logos.Person.person_exists_of_act h

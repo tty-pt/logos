@@ -77,6 +77,14 @@ may be added.
   `{Means, Subject}`; `JUDGE_HAS_CHOICE_FIELD` `{AxTwoSubjects, Means, Subject}`;
   `judge_commits` `{AxTwoSubjects, Means, Subject, CL}`); hostile separations `{}`;
   unconditional `freeWillExists` BLOCKED (no footprint).
+- **Fronteira negativa completada (2026-09-18)**: o lado modal da abertura está
+  provado no kernel — átomos modicamente livres (`atoms_are_modally_free`,
+  C95, `{}`) e conteúdo contingente existe (`some_formula_contingent`, C96,
+  `{}`) — e é **inerte** para a fronteira: sob o datum de abertura modal, a
+  co-significação continua não-derivável
+  (`modal_openness_does_not_entail_genuine_choice(_and_plurality)`, `{}`,
+  HostileSemantics). O bloqueio de F1b é exclusivamente
+  `rejectedHornCoMeant` (o lado da agência), não qualquer determinação modal.
 
 ## Batch fronteira escolha-genuína (2026-09-18) — veredito opção 3 (bloqueio irreducível)
 
@@ -108,18 +116,67 @@ each step is either a theorem, a countermodel, or a documented gap.
 - **Não-derivação formal**: `not_entails_genuine_choice` e
   `not_entails_genuine_choice_with_plurality` sobre
   `GenuineChoiceSignature {Subject, Means}` (`{}`): nem o datum do ato, nem o
-  datum + pluralidade, forçam `GenuineChoice`.
+  datum + pluralidade, forçam `GenuineChoice`; novos, com o datum modal:
+  `modal_openness_does_not_entail_genuine_choice` e `_and_plurality_...` sobre
+  `BoundarySignature {Subject, World, Value, Means}` (`{}`) — mesmo alimentando
+  a abertura modal (espelho de C95/C96) como premissa extra, a co-significação
+  não é forçada.
 - **Veredito**: opção 3 — `genuineChoice_exists` é genuinamente bloqueado sob
   os primitivos presentes (`{Means, Subject}`); nenhuma refundição definicional
   o fecha sem regressão (colapso campo-escolha, 2026-09-18) ou sem relação nova.
+  Fronteira negativa completada: o lado modal está assentado (C95/C96, `{}`) e
+  é inerte; o bloqueio é exclusivamente agency-side (`rejectedHornCoMeant`).
 - **Premissas substantivas candidatas — registadas, NÃO introduzidas**:
   `AxCoMeaningNegation : ∃ s p, Means s p ∧ Means s (¬ p)` (SEM/META); co-sujeito
   dos cornos `∃ s p, Incorrect s p ∧ Denies s p` (composição `judge_commits` +
   negação); auto-representação do ato (META). Qualquer uma faria F1b →
   PROVEN↑ com pegada nova (próxima fase, fora deste milestone).
 - **Footprint report**: nenhuma pegada cresce; `rejectedHornCoMeant` e os 4
-  teoremas `{Means, Subject}` (VOCAB); modelos e não-entailments `{}`.
-  DEDUCTION.md: F1b ✖ BLOCKED (nó `rejectedHornCoMeant` + factos negativos).
+  teoremas `{Means, Subject}` (VOCAB); modelos e não-entailments `{}`; novos
+  não-entailments com datum modal `{}`. DEDUCTION.md: F1b ✖ BLOCKED (nó
+  `rejectedHornCoMeant` + factos negativos).
+
+## Batch fronteira pessoal (2026-09-18) — C24 nominal, pessoa substantiva não forçada
+
+Refactor mínimo B + endurecimento hostil da ponte C24. **Conteúdo kernel
+inalterado**: definições de `Act`/`SubjectExists`/`Intentional`/`Agent`/
+`Rational`/`Person`/`Means` intactas; −0 axiomas, −0 `sorry`. O que muda é a
+*precisão formal* da fronteira:
+
+- **Lemas-ponte explícitos** (Person.lean, todos `{Means, Subject}`, provas
+  mais fracas possíveis): `act_implies_intentional` (`⟨p, h⟩`),
+  `subjectExists_implies_intentional` / `intentional_implies_subjectExists`
+  (identidade), `person_intentional_iff` (a ponte §12 dita explicitamente:
+  `Person ↔ Intentional`, pois `Agent`/`Rational` são analiticamente `True`).
+  `person_of_subject`/`person_of_act`/`person_exists_of_act` ficam
+  documentados como consequências **nominais/constitutivas** das definições
+  correntes — NÃO como descobertas semânticas independentes.
+- **Separação obrigatória**: *derivabilidade formal ≠ neutralidade semântica
+  da definição*. C24 é teorema-válido na ontologia corrente, mas o §12 é
+  compromisso constitutivo (rótulo "person" sobre o sujeito significador
+  atualizado); a noção substantiva (deliberação, responsabilidade,
+  auto-reflexão, agência autónoma, escolha racional, agência moral) NÃO é
+  estabelecida pelo datum.
+- **Matriz hostil substantiva** (HostileSemantics, Parte A2, `{}`): NENHUM
+  modelo ataca a identidade §12 (é facto das definições); os quatro
+  `not_entails_substantive_intentionality` (`Mind` vazio, resto cheio),
+  `not_entails_substantive_rationality` (`Ratio` vazio),
+  `not_entails_substantive_autonomy` (`Auto` vazio),
+  `not_entails_substantive_person` (`Mind`/`Ratio`/`Auto` cheios, `Degree`
+  vazio — mesmo com tudo o resto presente) atacam as leituras mais fortes
+  que o rótulo não pode contrabandear, cada um com modelo DISTINTO que
+  preserva os demais predicados (matriz ortogonal). Docstrings de
+  `not_entails_person` e
+  `CountermodelSubjectWithoutPerson` emendadas com o aviso "atinge só a
+  leitura substantiva; NÃO é contramodelo de `person_intentional_iff`".
+- **C24 reclassificado**: enunciado e gloss do DEDUCTION passam a dizer que a
+  prova estabelece o sujeito significador atualizado sob §12 e que a
+  pessoalidade substantiva não é independentemente estabelecida. PROVEN
+  mantido; downstream intacto (C39/C77/C92 usam C24 só no sentido fraco —
+  forma mais forte válida = reancoragem em `SubjectExists`/`Intentional`;
+  C52 foi reancorado EM CÓDIGO: `choiceField_exists` deriva o campo via
+  `intentional_hasChoiceField` a partir de `act_implies_intentional`, sem
+  passar por `Person`).
 
 ## Batch A2-swap-theorem (2026-09-17) — `AxGlobalGround` becomes a theorem (atom-restricted)
 
@@ -242,13 +299,12 @@ C19 is derived under `AxGlobalGround` (`PROVEN↑`).
 
 | ID | Prose | Lean theorem | Status | Axiom footprint |
 |----|-------|--------------|--------|-----------------|
-| C58 | §1 fnd | `Agency.noCogito_selfRefutes : Asserts speaker NoAct → False` — **retorsão performativa** | PROVEN | `{Means, Subject}` (sequência de 4 passos: asserção é ato → ato existe → sujeito existe → refutação de NoAct) |
+| C58 | §1 fnd | `Agency.noWeakAct_selfRefutes : asserts speaker NoWeakAct → False` — **retorsão performativa direta (ato fraco)** | PROVEN | `{Subject, act}` (retorsão performativa direta: asserção é evento realizado → evento existe → refutação direta de NoWeakAct; estabelece diretamente apenas o ato fraco) |
 | C68 | §1 fnd | `Agency.Cogito : Asserts s p → ∃ s' p', Act s' p'` — **cogito derivado da asserção performativa** | PROVEN | `{Means, Subject}` (teorema derivado de qualquer asserção; deriva ato e sujeito via regra constitutiva) |
-| C59 | §27 | **M5** `Spike_M5.strongTruthExists : ∃ τ : Semantics.Form, Semantics.NecessarilyTrue τ` — "Strong Truth Exists" resident axiom-free ("há certo E há errado"; spike-only, outside barrel) | PROVEN (spike) | **`{CL}`** (C37 lever) |
 | C21 | §1/T1 | `Plurality.T1_subjectExists` | PROVEN | `{Means, Subject}` (derivado do ato intencional C68 via regra constitutiva act_requires_subject; desacoplado de AxTwoSubjects) |
 | C22 | T2 | `Agency.T2_contentExists` | PROVEN | **`{}`** — `Content _ := True` (def), `True` witnesses content |
 | C23 | T4 | `Plurality.T4_agentExists` | PROVEN | `{Means, Subject}` (derivado do ato intencional C68 → C21; `Agent` é `:= True`, def) |
-| C24 | T5 | `Plurality.T5_personExists` | PROVEN | `{Means, Subject}` (derivado do ato intencional C68 → C21 → C24 via colapso definicional §12) |
+| C24 | T5 | `Plurality.T5_personExists` | PROVEN | `{Means, Subject}` (teorema-válido sob a **definição constitutiva §12**, mas **não estabelece pessoalidade substantiva**; cadeia C68 → Act → SubjectExists → Intentional → Person (§12 nominal); `Person ≡ Intentional ≡ ∃p, Means s p` — `Person.person_intentional_iff` + lemas-ponte em Person.lean; matriz hostil substantive (Part A2) — Batch fronteira pessoal 2026-09-18) |
 | C25 | §24b | `Person.inseparability_24b` | PROVEN | `{Means, Subject, CL}` |
 | C26 | **T9 (new)** | `Alternatives.T9_incompatibleAlternatives` | PROVEN | `{}` (E0) |
 | C27 | §13 | `Alternatives.incompatible_with_negation` | PROVEN | `{}` (E0) |
@@ -263,24 +319,31 @@ C19 is derived under `AxGlobalGround` (`PROVEN↑`).
 | C34 | T8 | `GroundPerson.necessary_truth_has_necessary_grounder` | PROVEN↑ | `{AxGlobalGround, Ground, Subject}` (via C18) |
 | C90 | T8 | `GroundPerson.personal_ultimate_ground_exists` | BLOCKED | (retired: manufactured ultimate ground destroyed under hostile semantics) |
 
-### Auditoria Ontológica da Cadeia de Agência (`Asserts → Act → Subject → Person → ChoiceField → Chooses → FreeWill`)
+### Auditoria Ontológica da Cadeia de Agência (`asserts → act → Act → Subject → Person → ChoiceField → Chooses → FreeWill`)
 
 | Passo / Implicação | Formalização Lean | Classificação | Estatuto Epistemológico e Semântica Hostil |
 | :--- | :--- | :--- | :--- |
-| **Asserts → Act** | `Agency.assertion_is_act` | **Caso A (Definicional)** | Projeção lógica conjuntiva imediata a partir de `Asserts s p := Act s p ∧ p`. Segue puramente da definição do conceito. |
-| **Act → Subject** | `Agency.act_requires_subject`<br>`Agency.subject_exists_of_act` | **Caso B (Lei Constitutiva)** | Na lógica desprovida de ontologia, o ato bruto não acarreta sujeito (`CountermodelActWithoutSubject` permanece). Em Logos, rege como princípio constitutivo explícito da ontologia de agência: o ato intencional é constitutivamente a efetivação de um sujeito originador (`SubjectExists s := ∃ p, Act s p`). O contramodelo falha unicamente a condição constitutiva `ConstitutiveAct`. Não é postulado como axioma existencial sintético independente. |
-| **Subject → Person** | `Person.person_of_subject` | **Caso A (Definicional sob §12)** | No sistema Logos, `person_of_subject` é estritamente DEFINICIONAL sob a redução estrutural de §12 (`Person s := Agent s ∧ Rational s ∧ Intentional s` com `Agent := True` e `Rational := True`), colapsando pessoa à agência intencional (`∃ p, Means s p = SubjectExists s`). Não constitui descoberta metafísica independente. Sob semântica hostil com predicado substantivo não-interpretado, é separada pelo contramodelo `CountermodelSubjectWithoutPerson`. |
-| **Person → ChoiceField** | `Choice.person_hasChoiceField` | **Caso A/C (Campo, não escolha)** | O campo de escolha — o agente é posto contra um par incompatível — é DEFINICIONAL a partir do ato intencional (`Person s → ∃p q, ChoiceField s p q`), footprint `{Means, Subject}`. Aviso de auditoria (freedom/choice fix, 2026-09-18): o agente relaciona-se apenas com o conteúdo adotado `p`; o outro corno `¬p` é fornecido pela lógica pura (`incompatible_self_negation`), NÃO pelo agente. Isto **não** é escolha. |
-| **ChoiceField ↛ Chooses** | `Choice.Chooses` / `rejectedHornCoMeant` (`F1b`) | **Caso D (Bloqueado)** | Não se segue logicamente. A escolha genuína exige que o sujeito co-signifique os DOIS cornos incompatíveis (`A s p ∧ A s (¬p)`); `Means` é uma relação opaca e `AxTwoSubjects` dá dois sujeitos DIFERENTES, cada um com um só conteúdo. Falta exatamente `rejectedHornCoMeant : (∃s p, A s p) → ∃s p, A s p ∧ A s (¬p)`. `CountermodelNoFreeWill` mostra `Act ↛ Chooses` e `Act ↛ FreeWill` (`{}`); NÃO é contramodelo da definição `Chooses → FreeWill` (que é livre). **Milestone hostil 2026-09-18** (Batch fronteira escolha-genuína): o bloqueio é *irreducível* — o modelo veridical `CountermodelVeridicalMeaning` (significação veridical, `Means s p → p`) satisfaz TODO o fragmento agency/choice/order (datum do ato, pluralidade, certo/errado, `judge_commits`, falibilidade) com escolha genuína **vazia**, sob a própria definição Logos de `Chooses`; `not_entails_genuine_choice(_with_plurality)` (`{}`) formaliza a não-derivação; a via performativa assertiva é *impossível* por `assertion_consistency`/`no_one_asserts_incompatible_pair`, e a veridicalidade é refutada apenas por `genuineChoice_requires_error_possibility`. F1b permanece BLOCKED (**opção 3**: premissa substantiva nova seria necessária). |
+| **asserts → act** | `Agency.assertion_is_weak_act` | **Caso A (Definicional / Fraco)** | A ocorrência de uma asserção é um evento realizado (`act s p` — *ato fraco: evento realizado*), projecção imediata de `asserts s p := act s p ∧ p`. A retorsão `noWeakAct_selfRefutes` estabelece puramente `∃ s p, act s p` sob `{Subject, act}` sem assumir significado intencional. |
+| **act ↛ Act** | `Agency.weak_act_implies_strong_act` | **Caso D (Ponte / Bloqueio Aberto)** | O evento realizado (emissão, som, toque, evento físico/mecânico) **não acarreta logicamente** o ato intencional de significação (`Act s p := Means s p` — *ato forte: ato intencional/portador de significado*). Demonstrado formalmente sob semântica hostil por `CountermodelWeakActWithoutMeaning` / `not_entails_strong_act` (`{}`). A passagem `act → Act` é uma ponte filosófica explícita (`weak_act_implies_strong_act`), não uma identidade definicional oculta. O atalho forte Logos é a asserção intencional `Asserts s p := Act s p ∧ p` (`assertion_is_act`). |
+| **Act → SubjectExists** | `Agency.act_requires_subject`<br>`Agency.subject_exists_of_act` | **Caso B/A (regra constitutiva = identidade)** | Em Logos `Act s p := Means s p` e `SubjectExists s := ∃ p, Act s p`: ser sujeito *do* ato é a própria definição de sujeito atualizado. O contramodelo abstrato `CountermodelActWithoutSubject` (ato não-indexado, `Subject` predicado substantivo à parte) falha unicamente esta regra constitutiva; não atinge a identidade definicional Logos. |
+| **Act → Intentional** | `Person.act_implies_intentional` | **Caso A (identidade)** | O conteúdo do próprio ato testemunha `Intentional s := ∃ p, Means s p` (`⟨p, h⟩`, `{Means, Subject}`). Identidade definicional: NÃO é atacável por modelo hostil. A leitura substantiva de intencionalidade (consciência/awareness interna) NÃO é forçada — `not_entails_substantive_intentionality` (Part A2, `{}`). |
+| **SubjectExists → Intentional** | `Person.subjectExists_implies_intentional`<br>`Person.intentional_implies_subjectExists` | **Caso A (identidade)** | Ambas as noções desdobram para `∃ p, Means s p` (`{Means, Subject}`); equivalência por desdobramento direto. Nenhuma premissa. |
+| **Subject → Person** | `Person.person_of_subject` | **Caso A (nominal §12)** | Sob a redução estrutural de §12 (`Person s := Agent s ∧ Rational s ∧ Intentional s` com `Agent := True` e `Rational := True`), `Person` colapsa em `∃ p, Means s p`, IDÊNTICO a `SubjectExists`/`Intentional` (`Person.person_intentional_iff`, `{Means, Subject}`). O §12 é compromisso constitutivo (rótulo nominal), não descoberta metafísica. **Separação 2026-09-18**: derivabilidade formal ≠ neutralidade semântica da definição; sobsemântica hostil com predicado substantivo, a implicação NÃO se segue (`CountermodelSubjectWithoutPerson`, `not_entails_person`), mas isso NÃO é contramodelo da identidade §12. |
+| **Person (formal) → Person (substantiva)** | — (sem teorema; premissa registada, NÃO adicionada) | **Caso D (Bloqueado)** | A pessoa substantiva (deliberação, responsabilidade, auto-reflexão, agência autónoma, escolha racional, agência moral) não é forçada pelo datum performativo: `not_entails_substantive_person`, `not_entails_substantive_rationality`, `not_entails_substantive_intentionality` (HostileSemantics Part A2, `{}`) — o fragmento performativo é satisfeito com `Mind`/`Ratio`/`Degree` vazios. C24 é **teorema-válido** na ontologia corrente, mas **não estabelece** pessoalidade substantiva. Reancorar exigiria premissa substantiva nova (registada, não introduzida). |
+| **Person → ChoiceField** | `Choice.person_hasChoiceField` | **Caso A/C (Campo de escolha fraco)** | O campo de escolha — `ChoiceField(s,p,q)` (*escolha fraca: alternativas incompatíveis estão presentes*) — é DEFINICIONAL a partir do ato intencional (`Person s → ∃p q, ChoiceField s p q`), footprint `{Means, Subject}`. Aviso de auditoria (freedom/choice fix, 2026-09-18): o agente relaciona-se apenas com o conteúdo adotado `p`; o outro corno `¬p` é fornecido pela lógica pura (`incompatible_self_negation`), NÃO pelo agente. Isto **não** é escolha genuína. |
+| **ChoiceField ↛ Chooses** | `Choice.Chooses` / `rejectedHornCoMeant` (`F1b`) | **Caso D (Bloqueado)** | Não se segue logicamente da presença de alternativas que o sujeito escolha genuinamente (`Chooses(s,p,q)`: *escolha forte: o sujeito co-significa alternativas incompatíveis*). A escolha genuína exige que o sujeito co-signifique os DOIS cornos incompatíveis (`A s p ∧ A s (¬p)`); `Means` é uma relação opaca e `AxTwoSubjects` dá dois sujeitos DIFERENTES, cada um com um só conteúdo. Falta exatamente `rejectedHornCoMeant : (∃s p, A s p) → ∃s p, A s p ∧ A s (¬p)`. `CountermodelNoFreeWill` mostra `Act ↛ Chooses` e `Act ↛ FreeWill` (`{}`); NÃO é contramodelo da definição `Chooses → FreeWill` (que é livre). **Milestone hostil 2026-09-18** (Batch fronteira escolha-genuína): o bloqueio é *irreducível* — o modelo veridical `CountermodelVeridicalMeaning` (significação veridical, `Means s p → p`) satisfaz TODO o fragmento agency/choice/order (datum do ato, pluralidade, certo/errado, `judge_commits`, falibilidade) com escolha genuína **vazia**, sob a própria definição Logos de `Chooses`; `not_entails_genuine_choice(_with_plurality)` (`{}`) formaliza a não-derivação; a via performativa assertiva é *impossível* por `assertion_consistency`/`no_one_asserts_incompatible_pair`, e a veridicalidade é refutada apenas por `genuineChoice_requires_error_possibility`. F1b permanece BLOCKED (**opção 3**: premissa substantiva nova seria necessária). |
 | **Chooses → FreeWill** | `Choice.chooses_implies_freeWill` | **Caso A (Definicional)** | `FreeWill s := ∃p q, Chooses s p q` — por DEFINIÇÃO. A liberdade não é um passo metafísico adicional a partir do ato bruto; é a própria existência de uma escolha genuína entre alternativas incompatíveis. Footprint **`{Means, Subject}`** (VOCAB apenas — o conteúdo lógico é gratuito). A existência incondicional (`freeWillExists`) é que fica bloqueada, por depender de `rejectedHornCoMeant`. |
 
 Declared (Level 2): `Subject` is an uninterpreted pure sort (`axiom Subject : Type`,
+Tag: VOCAB); `act` is the uninterpreted weak performed event (`axiom act : Subject → Prop → Prop`,
 Tag: VOCAB); `Means` is an uninterpreted intentional relation (`axiom Means : Subject → Prop → Prop`,
 Tag: VOCAB); `Act` is the constitutively subject-indexed meaning-act (`Act s p := Means s p`);
 `SubjectExists s := ∃ p, Act s p` is the constitutive rule of subjecthood (`act_requires_subject`);
 `axiom Cogito` is **REMOVED ENTIRELY**; `Cogito` is a derived theorem from performative
-assertion (`Asserts s p → ∃ s' p', Act s' p'`). Retorsion is established via `noCogito_selfRefutes : Asserts speaker NoAct → False`
-through the strict 4-step chain (assertion is act → act exists → subject exists → NoAct refutes itself).
+assertion (`Asserts s p → ∃ s' p', Act s' p'`). Retorsion directly establishes the weak act via
+`noWeakAct_selfRefutes : asserts speaker NoWeakAct → False` (`{Subject, act}`).
+The strong retorsion shortcut is `noCogito_selfRefutes : Asserts speaker NoAct → False` (`{Means, Subject}`)
+under the intentional assertion `Asserts s p := Act s p ∧ p`.
 `GroundProp`, `GroundPrincipleProp` (SEM); `AxPersonalGround` (META, D9).
 
 ## Deferred / blocked
@@ -288,7 +351,7 @@ through the strict 4-step chain (assertion is act → act exists → subject exi
 | ID | Prose | Status | Missing |
 |----|-------|--------|---------|
 | F1a | §13–§15 choice-field existence (`∃s p q`, `ChoiceField s p q`) | PROVEN | `person_hasChoiceField`/`choiceField_exists` `{Means, Subject}` + `judge_commits` `CL` (choice-realism batch, C51–C52/C55; renamed 2026-09-18 — field form, not genuine choice) |
-| F1b | §15 genuine choice & freedom of the actor | BLOCKED | alvo explícito `Choice.genuineChoice_exists := ∃ s, ∃ p q, Chooses s p q` (def-proposição; **não** axioma/`sorry`); recurso único formalizado como def **`Choice.rejectedHornCoMeant := ∃ s p, A s p ∧ A s (¬ p)`** — nada força um ato de significação a vir com a significação da sua negação; fronteira `rejectedHornCoMeant → genuineChoice_exists` (`{Means, Subject}`) e `genuineChoice_exists → freeWillExists` (`freeWillExists_of_genuineChoice`, `{Means, Subject}` — `Chooses → FreeWill` é definicional, ninguém usa `freeWillExists` como premissa). **Veredito hostil 2026-09-18 (opção 3 — bloqueio irreducível)**: `genuineChoice_requires_error_possibility` (`{Means, Subject}`, veridicalidade mata co-significação), `assertion_consistency`/`no_one_asserts_incompatible_pair` (`{Means, Subject}`, a via assertiva é impossível) e `CountermodelVeridicalMeaning`/`not_entails_genuine_choice(_with_plurality)` (`{}`, fragmento inteiro satisfeito com escolha vazia). Premissas substantivas candidatas registadas, NÃO introduzidas: `AxCoMeaningNegation`, co-sujeito `Incorrect∧Denies`, auto-representação. |
+| F1b | §15 genuine choice & freedom of the actor | BLOCKED | alvo explícito `Choice.genuineChoice_exists := ∃ s, ∃ p q, Chooses s p q` (def-proposição; **não** axioma/`sorry`); recurso único formalizado como def **`Choice.rejectedHornCoMeant := ∃ s p, A s p ∧ A s (¬ p)`** — nada força um ato de significação a vir com a significação da sua negação; fronteira `rejectedHornCoMeant → genuineChoice_exists` (`{Means, Subject}`) e `genuineChoice_exists → freeWillExists` (`freeWillExists_of_genuineChoice`, `{Means, Subject}` — `Chooses → FreeWill` é definicional, ninguém usa `freeWillExists` como premissa). **Veredito hostil 2026-09-18 (opção 3 — bloqueio irreducível)**: `genuineChoice_requires_error_possibility` (`{Means, Subject}`, veridicalidade mata co-significação), `assertion_consistency`/`no_one_asserts_incompatible_pair` (`{Means, Subject}`, a via assertiva é impossível) e `CountermodelVeridicalMeaning`/`not_entails_genuine_choice(_with_plurality)` (`{}`, fragmento inteiro satisfeito com escolha vazia). Premissas substantivas candidatas registadas, NÃO introduzidas: `AxCoMeaningNegation`, co-sujeito `Incorrect∧Denies`, auto-representação. **Fronteira negativa completada (2026-09-18)**: lado modal **assentado e inerte** — C95/C96 (`{}`) provam conteúdo aberto e `modal_openness_does_not_entail_genuine_choice(_and_plurality)` (`{}`, HostileSemantics) mostra que o datum modal extra não força co-significação; o bloqueio é exclusivamente agency-side. |
 | F2 | §21 teleology (`Ought → Goal`) | DEFERRED | deontic layer (normativity → telos) |
 | F3 | §28 Good (`§20 → bem`) | DEFERRED | moral good from logical normativity not yet derived |
 | F4 | §28 Love | PROVEN↑ | `Love.T13_someoneLovable` (C41) under `{AxTwoSubjects, Means, Subject}` |
@@ -303,15 +366,20 @@ through the strict 4-step chain (assertion is act → act exists → subject exi
 | C35 | P2 | `Core.negatedAbsolutes : ¬ (N_T ∨ N_F)` | PROVEN | `{}` (E0) |
 | C36 | P2 | `Core.rightWrongDistinction : ¬ N_T ∧ ¬ N_F` | PROVEN | `{}` (E0) |
 | C37 | P2 | `Semantics.bothNecessarilyTrueAndFalse` | PROVEN | `CL` |
+| C59 | §27 | `Semantics.strongTruthExists : ∃ τ : Semantics.Form, Semantics.NecessarilyTrue τ` — "Strong Truth Exists" resident axiom-free ("há certo E há errado"; corolário nomeado de C37, residente no barrel 2026-09-18) | PROVEN | **`{CL}`** (C37 lever) |
+| C93 | §27 | `Semantics.noStrongTruth_selfRefutes : ¬ (¬ ∃ τ : Semantics.Form, Semantics.NecessarilyTrue τ)` — retorsão performativa: negar a verdade forte refuta-se a si mesma (o ato de negar é destruído por ela) | PROVEN | **`{CL}`** (via C59) |
+| C94 | §27 | `Choice.noStrongTruth_assertable_refutes : Asserts speaker (¬ ∃ τ : Semantics.Form, Semantics.NecessarilyTrue τ) → False` — retorsão assertiva do dado mundial: ninguém pode asserir que não existe verdade forte (o ato de negar o dado é destruído por ele) | PROVEN | **`{Means, Subject, CL}`** (via C93 + Asserts) |
+| C95 | §27 | `Semantics.atoms_are_modally_free : ∀ n : Nat, ¬ NecessarilyTrue (Form.atom n) ∧ ¬ NecessarilyFalse (Form.atom n)` — a parede dos átomos (fronteira de C59): nenhum átomo é fixado no percurso modal — a verdade forte fixa leis, não conteúdos | PROVEN | **`{}`** (Vocab puro, sem axiomas; `strongTruth_is_not_atomic` leva `{CL}`) |
+| C96 | §27 | `Semantics.some_formula_contingent : ∃ τ : Semantics.Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ` — conteúdo contingente existe (contrapeso de C59): há fórmula nem necessariamente-verdadeira nem necessariamente-falsa — o percurso modal não é degenerado | PROVEN | **`{}`** (via C95; `strongTruth_and_contingent_content` leva `{CL}`) |
 | C38 | P2 | `Necessity.necDistinction : Necessity (¬ N_T ∧ ¬ N_F)` | PROVEN (was AXIOM) | `{}` (E0; C1: identity-model alias; world content = C37) |
-| C39 | P4 | `Choice.T11_choiceField` | PROVEN | `{Means, Subject}` (campo de escolha — não escolha genuína — derivado do ato intencional C68 → C24 → C39; renomeação/split 2026-09-18) |
+| C39 | P4 | `Choice.T11_choiceField` | PROVEN | `{Means, Subject}` (campo de escolha — não escolha genuína — derivado do ato intencional C68 → C24 → C39; renomeação/split 2026-09-18; **usa C24 só no sentido fraco** `∃p, Means s p` — forma mais forte válida = reancoragem em `SubjectExists`/`Intentional`) |
 | C40 | P5/P7 | `Plurality.T12_twoPersons` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (settled by Unit countermodel that 1 act does not entail plurality; requires META bridge `AxTwoSubjects`) |
 | C41 | P7 | `Love.T13_someoneLovable` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (via C40) |
 | C48 | P1/§1 | `Plurality.cogito_from_T12` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` |
 | C49 | §13/IM_STUPID | `Choice.meaning_needs_subject` + `Choice.meaning_I_needs_subject` (definitional form: `Meaning_I p → ∃s, Means s p`) | PROVEN | `{Means, Subject}` |
 | C50 | §14 | `Choice.incompatible_self_negation` | PROVEN | **`{}`** (pure logic — the field around any meaning-act) |
 | C51 | §14/IM_STUPID | `Choice.person_hasChoiceField : Person s → ∃p q, ChoiceField s p q` — **subject ⇒ campo de escolha** (renomeado 2026-09-18; NÃO é escolha genuína) | PROVEN | `{Means, Subject}` |
-| C52 | §14 | `Choice.choiceField_exists` | PROVEN | `{Means, Subject}` (o campo é real, derivado do ato intencional C68 → C52; renomeado 2026-09-18) |
+| C52 | §14 | `Choice.choiceField_exists` | PROVEN | `{Means, Subject}` (o campo é real, derivado do ato intencional C68 → C52 via `intentional_hasChoiceField` a partir de `act_implies_intentional` — reancorado em código 2026-09-18, sem passar por `Person`; renomeado 2026-09-18) |
 | C53 | §14 | `Choice.noChoiceField_selfRefutes : Asserts speaker NoChoiceField → False` | PROVEN | `{Means, Subject}` (retorsão performativa do campo: negar o campo é ele próprio um ato de campo contra a sua negação) |
 | C54 | IM_STUPID §2 | `Choice.JUDGE_HAS_CHOICE_FIELD : (¬N_T ∧ ¬N_F) → ∃s p q, ChoiceField s p q` — **right/wrong ⇒ campo de escolha** | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (derivação operativa via AxTwoSubjects h e person_hasChoiceField; renomeado 2026-09-18) |
 | C55 | §8/§14 | `Order.judge_commits : ∃s p q, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ ChoiceField s p q` — the judge HAS a choice-field (não escolha genuína) | PROVEN↑ | `{AxTwoSubjects, Means, Subject, CL}` (defs act-relative §8) |
@@ -333,10 +401,10 @@ through the strict 4-step chain (assertion is act → act exists → subject exi
 | C74 | P5 | `Value.aloneExcluded : ¬ ∃ s, Person s ∧ Alone s` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (under the plurality bridge `AxTwoSubjects`, a lone person is excluded) |
 | C75 | P7 | `Person.everyContentIsAPerson` | BLOCKED | (killed under hostile semantics: content existence does not imply personhood; tripartite report) |
 | C76 | P8 | `Love.T14_canonicalRigid` | BLOCKED | (excised: manufactured witness destroyed) |
-| C77 | P5/P8 | `Love.necessaryPersonExists (h : ∃ s p, Act s p) : ∃ s, Person s ∧ NecessarySubject s` — **the necessary person exists**: from the performative act-datum (C68), a person (`T5_personExists`, C24) that is necessary by definition (`AxPersonStability`, esse est agere) | PROVEN | `{Means, Subject}` (VOCAB; **re-anchored 2026-09-18** ao dado performativo, sem `AxTwoSubjects` — a necessidade da pessoa é *definicional*, `ExistsAt (Subject) := True`; complementar ao concreto `Love.no_contingent_person`) |
+| C77 | P5/P8 | `Love.necessaryPersonExists (h : ∃ s p, Act s p) : ∃ s, Person s ∧ NecessarySubject s` — **the necessary person exists**: from the performative act-datum (C68), a person (`T5_personExists`, C24) that is necessary by definition (`AxPersonStability`, esse est agere) | PROVEN | `{Means, Subject}` (VOCAB; **re-anchored 2026-09-18** ao dado performativo, sem `AxTwoSubjects` — a necessidade da pessoa é *definicional*, `ExistsAt (Subject) := True`; complementar ao concreto `Love.no_contingent_person`; usa C24 só no sentido fraco — reancoragem `SubjectExists`/`Intentional`; não depende da pessoalidade substantiva) |
 | C85 | P6 | `Value.help_not_harm` — **princípio de benevolência**: no plano fundante, ajudar exclui prejudicar (`Helps s t → ¬ Harms s t`) | PROVEN | `{Subject}` |
 | C86 | P6/P8 | `Love.love_helps` (+ `Love.love_not_harms`, `Love.loves_of_helps`) — **amor como benevolência direcionada**: amar é ajudar e não prejudicar (`Loves s t := Helps s t ∧ ¬ Harms s t`) | PROVEN | `{Subject}` |
-| C92 | P8/§27 | `Love.necessary_entity_exists : ∃ e, NecessaryEntity e` — **existe uma entidade necessária** (rota performativa C24 + `AxPersonStability` + lift C91; o correlato da pessoa, ≠ T7) | PROVEN | `{Means, Subject}` (sem `AxTwoSubjects`; distinto de T7/C18) |
+| C92 | P8/§27 | `Love.necessary_entity_exists : ∃ e, NecessaryEntity e` — **existe uma entidade necessária** (rota performativa C24 + `AxPersonStability` + lift C91; o correlato da pessoa, ≠ T7) | PROVEN | `{Means, Subject}` (sem `AxTwoSubjects`; distinto de T7/C18; usa C24 só no sentido fraco — reancoragem `SubjectExists`/`Intentional`) |
 
 Declared (Level 3): **M1 (A3, 2026-09-16): `Affects` is a structural
 DEFINITION (`Affects s t := s ≠ t`), and `AxPersonsAffect` is a THEOREM** (distinct persons are
@@ -552,7 +620,7 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   C73–C79
   (definitional plurality, plenum seed, canonical rigid love, necessary person, contingent ground, substantive ultimate ground), F1a
   (choice-**field** existence resolves to a kernel step; renamed 2026-09-18, the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
-  `CL`-only: C3, C10, C12–C14, C25, C30, C37, C55 (+ C59 spike, outside barrel).
+  `CL`-only: C3, C10, C12–C14, C25, C30, C37, C55, C59, C93.
   Vocab-only (`{Ground}` — the statement's own vocabulary): C15, C16, C17,
   C18, C20, C34, C60 (denial refutes itself by definition — RAA;
   esse-est-agere drops `ExistsAt`, now a def; A2-swap-theorem drops
@@ -779,11 +847,13 @@ as it stood.)
   plurality spikes; the ban on plurality-from-plurality is preserved (nothing
   derives `AxTwoSubjects` from itself).
 - **M5 — "Strong Truth Exists" resident; choosing subject stays FORCED (spike
-  verdict BLOCKED, presumably permanent).** `Strexp` `Spike_M5_StrongTruth.lean`
-  (outside barrel) proves `strongTruthExists : ∃ τ, NecessarilyTrue τ` on the
+  verdict BLOCKED, presumably permanent).** `strongTruthExists` was promoted
+  into the barrel as `Semantics.strongTruthExists` (2026-09-18), on the
   axiom-free `{Core, Semantics}` surface — **C59, footprint `{CL}`, no Cogito**,
   the "há certo E há errado" datum of en.md §27/poem.txt, from C37. Axiom-free
-  theorems: 13 → 14. `Spike_M5_ChoosingSubject.lean` is the honest probe at
+  theorems: 13 → 14. `noStrongTruth_selfRefutes` (retorsão performativa)
+  added as C93. `Spike_M5_StrongTruth.lean` retained as historical record.
+  `Spike_M5_ChoosingSubject.lean` is the honest probe at
   `∃ s p q, Chooses s p q` WITHOUT Cogito: stopped at the **atom-wall**
   (`groundPrinciple_atom` is atom-only; the {CL}-forced strong truth is the
   necessitated disjunction `Form.or (atom 0) (Form.not (atom 0))`, never a true

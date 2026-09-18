@@ -57,7 +57,13 @@ AxGlobalGround (SEM): a formula true in every world is grounded by a
     derivable from `groundPrinciple_atom` (the swap is invalid in general); it is
     the declared modal price of the argument. Its negation does not destroy
     the act of denying it, so it stays a semantic axiom, never promoted to
-    "transcendental theorem". -/
+    "transcendental theorem".
+
+    Philosophical cost: the declared modal price of the argument. The
+    `∀w∃r … → ∃r∀w …` swap is not derivable from the atomic truthmaker
+    (`groundPrinciple_atom`); it posits one necessary ground for every
+    necessarily-true formula, which the worldwise-but-not-uniform model
+    (`CountermodelWorldwiseTruthmaking`) shows is unforced by logic alone. -/
 axiom AxGlobalGround :
   ∀ (φ : Form), NecessarilyTrue φ → ∃ e : Entity, ∀ w : World, ExistsAt w e ∧ Ground e φ
 

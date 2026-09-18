@@ -22,6 +22,11 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.Agency.Cogito_of_bridge": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.act"
+ ],
  "Logos.Agency.Content": [],
  "Logos.Agency.Exists": [
   "Logos.Agency.Means",
@@ -42,6 +47,10 @@
  "Logos.Agency.NoSubjectSort": [
   "Logos.Agency.Subject"
  ],
+ "Logos.Agency.NoWeakAct": [
+  "Logos.Agency.Subject",
+  "Logos.Agency.act"
+ ],
  "Logos.Agency.Rational": [
   "Logos.Agency.Subject"
  ],
@@ -57,6 +66,10 @@
   "Logos.Agency.Subject"
  ],
  "Logos.Agency.T2_contentExists": [],
+ "Logos.Agency.act": [
+  "Logos.Agency.Subject",
+  "Logos.Agency.act"
+ ],
  "Logos.Agency.act_exists_of_assert": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -97,6 +110,19 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.Agency.assertion_is_weak_act": [
+  "Logos.Agency.Subject",
+  "Logos.Agency.act"
+ ],
+ "Logos.Agency.asserts": [
+  "Logos.Agency.Subject",
+  "Logos.Agency.act"
+ ],
+ "Logos.Agency.noAct_conditional_selfRefutes": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.act"
+ ],
  "Logos.Agency.noCogito_selfRefutes": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -113,6 +139,15 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.Agency.noWeakAct_selfRefutes": [
+  "Logos.Agency.Subject",
+  "Logos.Agency.act"
+ ],
+ "Logos.Agency.strong_act_of_weak_act": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.act"
+ ],
  "Logos.Agency.subject_exists_of_act": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -120,6 +155,24 @@
  "Logos.Agency.subject_exists_of_assert": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
+ ],
+ "Logos.Agency.weak_Cogito": [
+  "Logos.Agency.Subject",
+  "Logos.Agency.act"
+ ],
+ "Logos.Agency.weak_act_exists_implies_strong_act_exists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.act"
+ ],
+ "Logos.Agency.weak_act_exists_of_assert": [
+  "Logos.Agency.Subject",
+  "Logos.Agency.act"
+ ],
+ "Logos.Agency.weak_act_implies_strong_act": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.act"
  ],
  "Logos.Alternatives.Incompatible": [],
  "Logos.Alternatives.T9_incompatibleAlternatives": [],
@@ -207,6 +260,10 @@
   "Logos.Agency.Subject"
  ],
  "Logos.Choice.incompatible_self_negation": [],
+ "Logos.Choice.intentional_hasChoiceField": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Choice.judge_asserting_rightWrong_has_choiceField": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -224,6 +281,13 @@
   "Logos.Agency.Subject"
  ],
  "Logos.Choice.noChoiceField_selfRefutes": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.noStrongTruth_assertable_refutes": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
@@ -492,6 +556,24 @@
  "Logos.HostileSemantics.CountermodelSubjectWithoutPerson.no_person": [],
  "Logos.HostileSemantics.CountermodelSubjectWithoutPerson.subject_exists": [],
  "Logos.HostileSemantics.CountermodelSubjectWithoutPerson.subject_without_person": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundaryDatum": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundaryGenuineChoice": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundarySignature.Means": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundarySignature.Subject": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundarySignature.Value": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundarySignature.World": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundarySignature.casesOn": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundarySignature.ctorIdx": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundarySignature.mk.inj": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundarySignature.mk.injEq": [
+  "propext"
+ ],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundarySignature.mk.noConfusion": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundarySignature.mk.sizeOf_spec": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundarySignature.noConfusion": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundarySignature.noConfusionType": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundarySignature.recOn": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.BoundaryTwoSubjects": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.GCdatum": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.GenuineChoice": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.GenuineChoiceSignature.Means": [],
@@ -507,6 +589,7 @@
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.GenuineChoiceSignature.noConfusion": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.GenuineChoiceSignature.noConfusionType": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.GenuineChoiceSignature.recOn": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.ModalOpen": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.A": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.Chooses": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.FreeWill": [],
@@ -537,9 +620,19 @@
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.no_rejected_horn": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.rightWrong_holds": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.two_persons_exist": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.modal_openness_and_plurality_do_not_entail_genuine_choice": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.modal_openness_does_not_entail_genuine_choice": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.not_entails_genuine_choice": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.not_entails_genuine_choice_with_plurality": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Γ_twoGCSubjects": [],
+ "Logos.HostileSemantics.CountermodelWeakActWithoutMeaning.Act": [],
+ "Logos.HostileSemantics.CountermodelWeakActWithoutMeaning.Entity": [],
+ "Logos.HostileSemantics.CountermodelWeakActWithoutMeaning.Means": [],
+ "Logos.HostileSemantics.CountermodelWeakActWithoutMeaning.act": [],
+ "Logos.HostileSemantics.CountermodelWeakActWithoutMeaning.no_strong_act": [],
+ "Logos.HostileSemantics.CountermodelWeakActWithoutMeaning.not_entails_strong_act": [],
+ "Logos.HostileSemantics.CountermodelWeakActWithoutMeaning.weak_act_occurs": [],
+ "Logos.HostileSemantics.CountermodelWeakActWithoutMeaning.weak_act_without_meaning": [],
  "Logos.HostileSemantics.CountermodelWorldwiseTruthmaking.Entity": [],
  "Logos.HostileSemantics.CountermodelWorldwiseTruthmaking.ExistsAt": [],
  "Logos.HostileSemantics.CountermodelWorldwiseTruthmaking.Ground": [],
@@ -559,6 +652,28 @@
  "Logos.HostileSemantics.PropositionalPersonhood.TripartiteVerdict": [
   "propext"
  ],
+ "Logos.HostileSemantics.SubstantiveAuto": [],
+ "Logos.HostileSemantics.SubstantiveDatum": [],
+ "Logos.HostileSemantics.SubstantiveDegree": [],
+ "Logos.HostileSemantics.SubstantiveMind": [],
+ "Logos.HostileSemantics.SubstantivePersonhood.Act": [],
+ "Logos.HostileSemantics.SubstantivePersonhood.Auto": [],
+ "Logos.HostileSemantics.SubstantivePersonhood.Degree": [],
+ "Logos.HostileSemantics.SubstantivePersonhood.Mind": [],
+ "Logos.HostileSemantics.SubstantivePersonhood.Ratio": [],
+ "Logos.HostileSemantics.SubstantivePersonhood.Subject": [],
+ "Logos.HostileSemantics.SubstantivePersonhood.casesOn": [],
+ "Logos.HostileSemantics.SubstantivePersonhood.ctorIdx": [],
+ "Logos.HostileSemantics.SubstantivePersonhood.mk.inj": [],
+ "Logos.HostileSemantics.SubstantivePersonhood.mk.injEq": [
+  "propext"
+ ],
+ "Logos.HostileSemantics.SubstantivePersonhood.mk.noConfusion": [],
+ "Logos.HostileSemantics.SubstantivePersonhood.mk.sizeOf_spec": [],
+ "Logos.HostileSemantics.SubstantivePersonhood.noConfusion": [],
+ "Logos.HostileSemantics.SubstantivePersonhood.noConfusionType": [],
+ "Logos.HostileSemantics.SubstantivePersonhood.recOn": [],
+ "Logos.HostileSemantics.SubstantiveRatio": [],
  "Logos.HostileSemantics.TwoPersons": [],
  "Logos.HostileSemantics.UnitPluralityCountermodel.A": [],
  "Logos.HostileSemantics.UnitPluralityCountermodel.Person": [],
@@ -572,6 +687,10 @@
  "Logos.HostileSemantics.not_entails_decoupled_freewill": [],
  "Logos.HostileSemantics.not_entails_person": [],
  "Logos.HostileSemantics.not_entails_plurality": [],
+ "Logos.HostileSemantics.not_entails_substantive_autonomy": [],
+ "Logos.HostileSemantics.not_entails_substantive_intentionality": [],
+ "Logos.HostileSemantics.not_entails_substantive_person": [],
+ "Logos.HostileSemantics.not_entails_substantive_rationality": [],
  "Logos.HostileSemantics.subject_exists_of_act": [],
  "Logos.HostileSemantics.Γ_act": [],
  "Logos.HostileSemantics.Γ_means": [],
@@ -795,10 +914,18 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.Person.act_implies_intentional": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Person.inseparability_24b": [
   "propext",
   "Classical.choice",
   "Quot.sound",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Person.intentional_implies_subjectExists": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
@@ -810,11 +937,19 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.Person.person_intentional_iff": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Person.person_of_act": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
  "Logos.Person.person_of_subject": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Person.subjectExists_implies_intentional": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
@@ -948,6 +1083,9 @@
  "Logos.Semantics.TV.t.sizeOf_spec": [],
  "Logos.Semantics.TrueAt": [],
  "Logos.Semantics.World": [],
+ "Logos.Semantics.atom_not_necessarily_false": [],
+ "Logos.Semantics.atom_not_necessarily_true": [],
+ "Logos.Semantics.atoms_are_modally_free": [],
  "Logos.Semantics.bothNecessarilyTrueAndFalse": [
   "propext",
   "Classical.choice",
@@ -965,6 +1103,11 @@
   "Classical.choice",
   "Quot.sound"
  ],
+ "Logos.Semantics.noStrongTruth_selfRefutes": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
  "Logos.Semantics.nonContradiction": [
   "propext"
  ],
@@ -972,6 +1115,22 @@
  "Logos.Semantics.sat_imp": [],
  "Logos.Semantics.sat_not": [],
  "Logos.Semantics.sat_or": [],
+ "Logos.Semantics.some_formula_contingent": [],
+ "Logos.Semantics.strongTruthExists": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.Semantics.strongTruth_and_contingent_content": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.Semantics.strongTruth_is_not_atomic": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
  "Logos.Truthmaker.Entity.casesOn": [
   "Logos.Agency.Subject"
  ],

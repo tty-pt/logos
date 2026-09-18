@@ -41,7 +41,10 @@ alternativity" wording with the prop-level statement; the world-level
 `ChoiceAt : World → Subject → Prop → Prop` remains the (future) SEM bridge.
 
 What is *derived* here (field form, unchanged footprints):
-  * `person_hasChoiceField`: a person is before an incompatible pair;
+  * `intentional_hasChoiceField`: the weaker predicate already yields a field
+    (`Intentional` → field; the §12 person label adds nothing);
+  * `person_hasChoiceField`: a person is before an incompatible pair
+    (nominal wrapper of the former);
   * `choiceField_exists` / `choiceField_exists_from_plurality`: the field is real;
   * `noChoiceField_selfRefutes`: denying the field is itself a field-act;
   * `JUDGE_HAS_CHOICE_FIELD`: right/wrong commits a choice-field.
@@ -61,21 +64,23 @@ open Logos.Agency (Subject Means A Asserts)
 open Logos.Person (Person)
 open Logos.Alternatives (Incompatible)
 open Logos.Necessity (Dia Necessity someWorld)
+open Logos.Semantics (Form NecessarilyTrue)
 
-/-- `ChoiceField s p q`: the choice *field* — subject `s` performs a meaning-act
-    on `p` against an incompatible content `q` (§13–§14 representability).
-    DEFINITION (choice-realism, 2026-09-16; renamed 2026-09-18): this is the
-    old `Chooses` body `A s p ∧ Incompatible p q`. It records that an act
-    occurs before an incompatible pair; it does NOT relate the agent to `q`,
-    so it is not a selection. Genuine choice is `Chooses` below. -/
+/-- `ChoiceField s p q`: weak choice: incompatible alternatives are present.
+    The choice *field* — subject `s` performs an intentional act on `p` against
+    an incompatible content `q` (§13–§14 representability).
+    Definition: `A s p ∧ Incompatible p q`.
+    The agent is related only to `p`; the rejected horn `q` (or `¬p`) is supplied
+    by logic, not co-meant by the agent. This records that alternatives are present,
+    distinguishable, or available to the subject, but it is NOT genuine selection.
+    Genuine choice is `Chooses` below. -/
 def ChoiceField (s : Subject) (p : Prop) (q : Prop) : Prop := A s p ∧ Incompatible p q
 
-/-- `Chooses s p q`: subject `s` genuinely chooses between incompatible
-    contents `p` and `q` (§14). DEFINITION (freedom/choice fix, 2026-09-18):
-    `s` adopts `p` *while `q` is co-meant* — the agent holds both horns. This
-    is strictly stronger than `ChoiceField`, which only relates `s` to `p`.
-    It does not merely encode that an outcome occurred: `∃ q, Chooses s p q`
-    now requires a second, incompatible content the subject relates to. -/
+/-- `Chooses s p q`: strong choice: the subject co-means incompatible alternatives.
+    Subject `s` genuinely chooses between incompatible contents `p` and `q` (§14).
+    Definition: `A s p ∧ A s q ∧ Incompatible p q`.
+    The agent genuinely co-means BOTH incompatible horns. Strictly stronger than
+    `ChoiceField`. -/
 def Chooses (s : Subject) (p : Prop) (q : Prop) : Prop :=
   A s p ∧ A s q ∧ Incompatible p q
 
@@ -157,8 +162,16 @@ theorem freeWillExists_of_chooses (h : ∃ s : Subject, ∃ p q : Prop, Chooses 
   obtain ⟨s, p, q, hc⟩ := h
   exact ⟨s, chooses_implies_freeWill hc⟩
 
-/--The precise missing lemma of the freedom frontier (F1b, BLOCKED): a genuine
-    chooser exists — some subject co-meaning two incompatible contents.
+/--Genuine choice exists: some subject co-means two incompatible
+    contents; that existence itself remains blocked. The modal side of
+    openness is settled and inert — `atoms_are_modally_free` (C95) and
+    `some_formula_contingent` (C96), both `{}`, prove content-openness,
+    yet even fuelled as an extra datum the modal channel cannot force
+    co-meaning (`modal_openness_does_not_entail_genuine_choice(_and_plurality)`,
+    `{}`, HostileSemantics); the block is solely `rejectedHornCoMeant`
+    (agency-side, option 3), not any modal determination.
+
+  The precise missing lemma of the freedom frontier (F1b, BLOCKED).
 
   This is the explicit existence target: `∃ s : Subject, ∃ p q : Prop,
     Chooses s p q`. It is NOT yet derived from the performative datum — the
@@ -240,27 +253,39 @@ theorem T11_choiceField_from_plurality :
   obtain ⟨p, q, hpq, _⟩ := Logos.Alternatives.T9_incompatibleAlternatives
   exact ⟨s, hs, p, q, hpq⟩
 
+/--The field needs only intentionality: `Intentional s` already unfolds to
+  `∃ p, Means s p`, so the weaker predicate suffices — the §12 person label
+  adds nothing here (nominal wrapper `person_hasChoiceField` below).
+  Footprint: `{Means, Subject}` (VOCAB only). -/
+theorem intentional_hasChoiceField {s : Subject} (hIn : Logos.Person.Intentional s) :
+    ∃ p q : Prop, ChoiceField s p q := by
+  obtain ⟨p, hmp⟩ := hIn
+  exact ⟨p, ¬ p, hmp, incompatible_self_negation p⟩
+
 /--Any person has a choice field: a person is always before two incompatible alternatives.
 
   Audit notice (freedom/choice fix, 2026-09-18): this yields `ChoiceField`, NOT
     genuine `Chooses`. The agent is related only to the adopted content `p`; the
     rejected horn `¬p` is supplied by pure logic (`incompatible_self_negation`),
     not by the agent. The genuine form (both horns co-meant) is BLOCKED on
-    `rejectedHornCoMeant`. -/
-theorem person_hasChoiceField {s : Subject} (hs : Person s) : ∃ p q : Prop, ChoiceField s p q := by
-  obtain ⟨_hAg, _hRa, hIn⟩ := hs
-  obtain ⟨p, hmp⟩ := hIn
-  exact ⟨p, ¬ p, hmp, incompatible_self_negation p⟩
+    `rejectedHornCoMeant`. Nominal wrapper of `intentional_hasChoiceField`
+    (the §12 label adds nothing). -/
+theorem person_hasChoiceField {s : Subject} (hs : Person s) : ∃ p q : Prop, ChoiceField s p q :=
+  intentional_hasChoiceField hs.2.2
 
 /--The choice field exists: some subject is before two incompatible alternatives.
 
   C52 (field form) — the field is real: derived from an intentional act datum
-    (C68 → C52). Footprint: `{Means, Subject}` (VOCAB only). -/
+    (C68 → C52) through the WEAKER predicate `Intentional` (via
+    `act_implies_intentional`), not through the §12 person label:
+    `SubjectExists`/`Intentional` suffices. Footprint: `{Means, Subject}`
+    (VOCAB only). -/
 theorem choiceField_exists (h : ∃ s : Subject, ∃ p : Prop, A s p) :
     ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q := by
-  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists h
-  obtain ⟨p, q, hch⟩ := person_hasChoiceField hs
-  exact ⟨s, p, q, hch⟩
+  obtain ⟨s, p, ha⟩ := h
+  obtain ⟨p', q, hch⟩ :=
+    intentional_hasChoiceField (Logos.Person.act_implies_intentional ha)
+  exact ⟨s, p', q, hch⟩
 
 /-- Choice field exists, derived from demonstrated plurality under AxTwoSubjects. -/
 theorem choiceField_exists_from_plurality : ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q := by
@@ -355,6 +380,15 @@ theorem no_one_asserts_incompatible_pair :
   rintro ⟨s, p, q, ha, hb, hI⟩
   exact hI ⟨ha.2, hb.2⟩
 
+/--No one can assert "there is no strong truth": the act of denying the
+  world-level datum is destroyed by the datum itself (assertive retorsion of
+  C93, completing the retorsion family at the assertion level; footprint
+  {Means, Subject, CL}). -/
+theorem noStrongTruth_assertable_refutes (speaker : Subject) :
+    Asserts speaker (¬ ∃ τ : Form, NecessarilyTrue τ) → False := by
+  intro h
+  exact Logos.Semantics.noStrongTruth_selfRefutes h.2
+
 end Logos.Choice
 
 -- Axiom footprint audit
@@ -369,9 +403,11 @@ end Logos.Choice
 #print axioms Logos.Choice.genuineChoice_requires_error_possibility
 #print axioms Logos.Choice.assertion_consistency
 #print axioms Logos.Choice.no_one_asserts_incompatible_pair
+#print axioms Logos.Choice.intentional_hasChoiceField
 #print axioms Logos.Choice.person_hasChoiceField
 #print axioms Logos.Choice.choiceField_exists
 #print axioms Logos.Choice.noChoiceField_selfRefutes
 #print axioms Logos.Choice.noSubject_selfRefutes
 #print axioms Logos.Choice.JUDGE_HAS_CHOICE_FIELD
 #print axioms Logos.Choice.rightWrong_implies_someone_means
+#print axioms Logos.Choice.noStrongTruth_assertable_refutes

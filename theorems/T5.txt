@@ -35,6 +35,31 @@ CLASSIFICAÇÃO ONTOLÓGICA:
   estatuto de pessoa substantiva com deliberação moral ou livre reflexão).
 Ver formal/GAPMAP.md C24.)
 
+FRONTEIRA DA PESSOA (2026-09-18, lemas-ponte explícitos):
+A cadeia `Act → SubjectExists → Intentional → Person` é uma cadeia de identidades
+definicionais — todos os nós desdobram para `∃ p, Means s p`. Os lemas-ponte
+`Person.act_implies_intentional`, `Person.subjectExists_implies_intentional`,
+`Person.intentional_implies_subjectExists` e `Person.person_intentional_iff`
+(pegada `{Means, Subject}`) tornam a equivalência explícita em vez de a esconder
+dentro de `person_of_act`.
+
+SEPARAÇÃO OBRIGATÓRIA (duas noções de pessoa):
+1. **Pessoa formal** — `Person s` significa exactamente o que a definição §12 diz:
+   o sujeito significador atualizado (`∃ p, Means s p`). C24 é teorema-válido nesta leitura.
+2. **Pessoa substantiva** — qualquer interpretação mais forte (deliberação,
+   responsabilidade, auto-reflexão, agência autónoma, escolha racional, agência
+   moral). NÃO é forçada pelo datum: `HostileSemantics` Parte A2
+   (`not_entails_substantive_person`/`_rationality`/`_intentionality`/
+   `_autonomy`, `{}` — matriz ortogonal de quatro modelos distintos) satisfaz
+   o fragmento performativo com essas leituras vazias. Nenhum modelo ataca a
+   identidade §12 — ela é um facto das definições.
+
+**Derivabilidade formal ≠ neutralidade semântica da definição.**
+C24 é teorema-válido na ontologia corrente, mas **não estabelece
+independentemente a pessoalidade substantiva**; o §12 é um compromisso
+constitutivo (rótulo nominal), e qualquer reancoragem substantiva exigiria uma
+premissa nova (não introduzida).
+
 Logo:
 
 ∃s Person(s).

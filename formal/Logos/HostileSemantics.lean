@@ -49,6 +49,16 @@ concrete countermodel `Person s ∧ ¬ NecessarySubject s` cannot exist
    `not_entails_genuine_choice(_with_plurality)` state the non-entailment.
    The frontier's single irreducible resource is same-subject co-meaning of a
    negation (`Choice.rejectedHornCoMeant`, BLOCKED).
+9. Personhood frontier (milestone 2026-09-18): the chain
+   `Act → SubjectExists → Intentional → Person` is a chain of *definitional
+   identities* in Logos (every node unfolds to `∃ p, Means s p`);
+   `Person.person_intentional_iff` makes the §12 bridge explicit. NO hostile
+   model attacks that identity — it is a fact about the definitions. The
+   models in Part A2 attack only the STRONGER SUBSTANTIVE readings of
+   personhood (self-reflection, deliberative rationality, autonomous agency,
+   full moral responsibility): the performative datum does
+   not force any of them, each via a DISTINCT model that preserves the other
+   predicates (orthogonal matrix).
 -/
 
 import Logos.Core
@@ -86,7 +96,16 @@ def TwoPersons (I : CoreSignature) : Prop :=
 def FreeWillExistence (I : CoreSignature) : Prop :=
   ∃ s : I.Subject, I.FreeWill s
 
-/-- Separation Theorem 1: Act does not logically imply Personhood. -/
+/-- Separation Theorem 1: Act does not logically imply Personhood.
+
+    Audit notice (personhood frontier, 2026-09-18): this targets the
+    SUBSTANTIVE reading of `Person` — an uninterpreted, independent predicate
+    (deliberation, responsibility, self-reflection, ...). It is NOT a
+    countermodel to the Logos nominal identity `Person ↔ Intentional`
+    (`Person.person_intentional_iff`): in Logos `Person` unfolds to
+    `∃ p, Means s p`, so the formal implication `Act → Person` holds
+    definitionally. Formal derivability ≠ semantic neutrality of the
+    definition. -/
 theorem not_entails_person :
     ¬ (∀ I : CoreSignature, Γ_person I → PersonExistence I) := by
   intro h
@@ -162,6 +181,127 @@ theorem not_entails_content_person :
   exact hNot (h S Means Person hPremise)
 
 -- ===========================================================================
+-- Part A2: Personhood frontier — formal identity vs substantive reading
+-- ===========================================================================
+--
+-- Logos *defines* the chain `Act → SubjectExists → Intentional → Person`:
+-- every node unfolds to `∃ p, Means s p` (Act s p := Means s p,
+-- SubjectExists s := ∃ p, Act s p, Intentional s := ∃ p, Means s p, and
+-- Person s := Agent s ∧ Rational s ∧ Intentional s with Agent/Rational
+-- analytic True). Hence `Person ↔ Intentional`
+-- (`Person.person_intentional_iff`) and the arrows are definitional
+-- identities -- model-independent, NOT hostile-separable. NO model below
+-- attacks that identity. What Part A2 attacks is the STRONGER semantic
+-- readings that the §12 label "person" must not smuggle in: self-reflection
+-- (inner awareness), deliberative rationality, autonomous agency, and full
+-- moral personhood (responsibility). Under those readings none of the arrows
+-- hold: the performative datum forces only the actualized meaning-subject.
+-- Each separation theorem uses a DISTINCT model that preserves the other
+-- substantive predicates (strongest minimal witnesses), so the matrix is
+-- orthogonal: no four copies of one model.
+
+/-- Substantive readings of the personhood vocabulary, kept LOCAL to the
+    hostile models (NO new Logos formal predicate): `Mind` = reflective
+    intentionality (inner awareness), `Ratio` = deliberative rationality,
+    `Auto` = autonomous agency, `Degree` = full moral personhood
+    (responsibility). -/
+structure SubstantivePersonhood where
+  Subject : Type
+  Act : Subject → Prop → Prop
+  Mind : Subject → Prop
+  Ratio : Subject → Prop
+  Auto : Subject → Prop
+  Degree : Subject → Prop
+
+def SubstantiveDatum (I : SubstantivePersonhood) : Prop :=
+  ∃ s : I.Subject, ∃ p : Prop, I.Act s p
+
+def SubstantiveMind (I : SubstantivePersonhood) : Prop := ∃ s : I.Subject, I.Mind s
+def SubstantiveRatio (I : SubstantivePersonhood) : Prop := ∃ s : I.Subject, I.Ratio s
+def SubstantiveAuto (I : SubstantivePersonhood) : Prop := ∃ s : I.Subject, I.Auto s
+def SubstantiveDegree (I : SubstantivePersonhood) : Prop := ∃ s : I.Subject, I.Degree s
+
+/-- Separation (reflective intentionality): the act-datum does NOT force
+    inner awareness — not even in a deliberatively rational autonomous
+    agent (`Ratio`/`Auto` present, `Mind` empty). NOT a countermodel to
+    Logos `Intentional` (which is definitionally `∃ p, Means s p` — see
+    `Person.act_implies_intentional`). -/
+theorem not_entails_substantive_intentionality :
+    ¬ (∀ I : SubstantivePersonhood, SubstantiveDatum I → SubstantiveMind I) := by
+  intro h
+  let I : SubstantivePersonhood := {
+    Subject := Unit
+    Act := fun _ _ => True
+    Mind := fun _ => False
+    Ratio := fun _ => True
+    Auto := fun _ => True
+    Degree := fun _ => False
+  }
+  have hd : SubstantiveDatum I := ⟨(), True, trivial⟩
+  have hn : ¬ SubstantiveMind I := fun ⟨_, hm⟩ => hm
+  exact hn (h I hd)
+
+/-- Separation (deliberative rationality): the act-datum does NOT force
+    deliberative rationality — not even in a self-aware autonomous agent
+    (`Mind`/`Auto` present, `Ratio` empty). NOT a countermodel to Logos
+    `Rational` (analytic `:= True`). -/
+theorem not_entails_substantive_rationality :
+    ¬ (∀ I : SubstantivePersonhood, SubstantiveDatum I → SubstantiveRatio I) := by
+  intro h
+  let I : SubstantivePersonhood := {
+    Subject := Unit
+    Act := fun _ _ => True
+    Mind := fun _ => True
+    Ratio := fun _ => False
+    Auto := fun _ => True
+    Degree := fun _ => False
+  }
+  have hd : SubstantiveDatum I := ⟨(), True, trivial⟩
+  have hn : ¬ SubstantiveRatio I := fun ⟨_, hr⟩ => hr
+  exact hn (h I hd)
+
+/-- Separation (autonomous agency): the act-datum does NOT force autonomous
+    agency — not even in a self-aware deliberative agent (`Mind`/`Ratio`
+    present, `Auto` empty). NOT a countermodel to Logos `Agent` (analytic
+    `:= True`). -/
+theorem not_entails_substantive_autonomy :
+    ¬ (∀ I : SubstantivePersonhood, SubstantiveDatum I → SubstantiveAuto I) := by
+  intro h
+  let I : SubstantivePersonhood := {
+    Subject := Unit
+    Act := fun _ _ => True
+    Mind := fun _ => True
+    Ratio := fun _ => True
+    Auto := fun _ => False
+    Degree := fun _ => False
+  }
+  have hd : SubstantiveDatum I := ⟨(), True, trivial⟩
+  have hn : ¬ SubstantiveAuto I := fun ⟨_, ha⟩ => ha
+  exact hn (h I hd)
+
+/-- Separation (substantive personhood): the act-datum does NOT force a full
+    moral person — not even with self-awareness, deliberative rationality
+    and autonomous agency ALL present (`Mind`/`Ratio`/`Auto` full,
+    `Degree` empty). Honest restatement of `not_entails_person` framed
+    against the Logos nominal identity: it targets the SUBSTANTIVE reading;
+    it is NOT a countermodel to `Person ↔ Intentional`
+    (`Person.person_intentional_iff`). -/
+theorem not_entails_substantive_person :
+    ¬ (∀ I : SubstantivePersonhood, SubstantiveDatum I → SubstantiveDegree I) := by
+  intro h
+  let I : SubstantivePersonhood := {
+    Subject := Unit
+    Act := fun _ _ => True
+    Mind := fun _ => True
+    Ratio := fun _ => True
+    Auto := fun _ => True
+    Degree := fun _ => False
+  }
+  have hd : SubstantiveDatum I := ⟨(), True, trivial⟩
+  have hn : ¬ SubstantiveDegree I := fun ⟨_, hd'⟩ => hd'
+  exact hn (h I hd)
+
+-- ===========================================================================
 -- Part B: Hostile Abstraction of Agency and Direct Models
 -- ===========================================================================
 
@@ -230,8 +370,42 @@ theorem countermodel_violates_constitutive_act :
 
 end CountermodelActWithoutSubject
 
+/- Hostile Countermodel 1b: A weak act / performed event without intentional meaning.
+   Shows that a performed event (utterance, keystroke, physical emission, mechanical act)
+   does not logically entail an intentional meaning-act (`Act s p := Means s p`).
+   Separates weak act `act` from strong act `Act` in pure logic without axioms (`{}`). -/
+namespace CountermodelWeakActWithoutMeaning
+
+def Entity : Type := Unit
+def act : Entity → Prop → Prop := fun _ _ => True
+def Means : Entity → Prop → Prop := fun _ _ => False
+def Act (s : Entity) (p : Prop) : Prop := Means s p
+
+theorem weak_act_occurs : ∃ s : Entity, ∃ p : Prop, act s p := ⟨(), True, trivial⟩
+theorem no_strong_act : ¬ ∃ s : Entity, ∃ p : Prop, Act s p := fun ⟨_, _, hm⟩ => hm
+
+/-- Hostile separation: a performed event occurs without any intentional meaning. -/
+theorem weak_act_without_meaning :
+    (∃ s : Entity, ∃ p : Prop, act s p) ∧ ¬ (∃ s : Entity, ∃ p : Prop, Act s p) :=
+  ⟨weak_act_occurs, no_strong_act⟩
+
+/-- Separation theorem: the occurrence of a performed event does not entail an intentional act.
+    Footprint `{}`: pure logic over the relational signatures. -/
+theorem not_entails_strong_act :
+    ¬ (∀ (I_act : Entity → Prop → Prop) (I_Means : Entity → Prop → Prop),
+        (∃ s p, I_act s p) → (∃ s p, I_Means s p)) := by
+  intro h
+  exact no_strong_act (h act Means weak_act_occurs)
+
+end CountermodelWeakActWithoutMeaning
+
 /- Hostile Countermodel 2: A subject of an act that is NOT a person.
-   Shows that if Person is an uninterpreted substantive predicate, Subject does not logically entail Person. -/
+   Shows that if Person is an uninterpreted substantive predicate, Subject does
+   not logically entail Person. (Personhood frontier, 2026-09-18: NOT a
+   countermodel to the Logos nominal identity `Person ↔ Intentional`
+   (`Person.person_intentional_iff`) — a Logos-model with `Subject := True`
+   and the Logos definition `Person s := ∃ p, Means s p` would make a person.
+   This model only refutes the SUBSTANTIVE reading.) -/
 namespace CountermodelSubjectWithoutPerson
 def Entity : Type := Unit
 def Act : Entity → Prop → Prop := fun _ _ => True
@@ -680,6 +854,84 @@ theorem not_entails_genuine_choice_with_plurality :
       intro h
       cases h
   have hn : ¬ GenuineChoice I := by
+    rintro ⟨s, p, q, hp, hq, hI⟩
+    exact hI ⟨hp, hq⟩
+  exact hn (h I hd)
+
+-- ===========================================================================
+-- Boundary signature: the negative boundary generalized to the modal layer.
+-- `Value` stands in for `Satisfies w τ` of a witness content; `ModalOpen`
+-- mirrors the two inhabited satisfaction-horns that C95/C96 establish for
+-- atoms. Even with a modal-open channel as an extra datum, the choice
+-- relation cannot be forced (the completed negative boundary of F1b).
+-- ===========================================================================
+
+structure BoundarySignature where
+  Subject : Type
+  World : Type
+  Value : World → Prop
+  Means : Subject → Prop → Prop
+
+/-- Modal openness of a content over the signature: the two satisfaction-horns
+    `(∃ w, Satisfies w τ) ∧ (∃ w, ¬ Satisfies w τ)` that C95/C96 prove at the
+    content level, abstracted over `Value`. -/
+def ModalOpen (I : BoundarySignature) : Prop :=
+  (∃ w : I.World, I.Value w) ∧ (∃ w : I.World, ¬ I.Value w)
+
+/-- The boundary datum: someone means something, and the modal channel is open. -/
+def BoundaryDatum (I : BoundarySignature) : Prop :=
+  (∃ s : I.Subject, ∃ p : Prop, I.Means s p) ∧ ModalOpen I
+
+/-- Genuine choice over the boundary signature, exactly as over
+    `GenuineChoiceSignature` (`Chooses s p q := A s p ∧ A s q ∧ Incompatible p q`). -/
+def BoundaryGenuineChoice (I : BoundarySignature) : Prop :=
+  ∃ s : I.Subject, ∃ p q : Prop,
+    I.Means s p ∧ I.Means s q ∧ Logos.Alternatives.Incompatible p q
+
+/-- Two distinct subjects with content over the boundary signature. -/
+def BoundaryTwoSubjects (I : BoundarySignature) : Prop :=
+  ∃ s₁ s₂ : I.Subject,
+    (∃ p : Prop, I.Means s₁ p) ∧ (∃ p : Prop, I.Means s₂ p) ∧ s₁ ≠ s₂
+
+/-- Separation over the modal boundary: even feeding the modal-openness datum
+    (the C95/C96 outcome at the content level) as an extra premise, the choice
+    relation cannot be forced — the veridical model witnesses the failure. -/
+theorem modal_openness_does_not_entail_genuine_choice :
+    ¬ (∀ I : BoundarySignature, BoundaryDatum I → BoundaryGenuineChoice I) := by
+  intro h
+  let I : BoundarySignature :=
+    { Subject := Unit, World := Bool, Value := fun b => b = true, Means := fun _ p => p }
+  have hd : BoundaryDatum I := by
+    constructor
+    · exact ⟨(), True, trivial⟩
+    · constructor
+      · exact ⟨true, rfl⟩
+      · exact ⟨false, by decide⟩
+  have hn : ¬ BoundaryGenuineChoice I := by
+    rintro ⟨s, p, q, hp, hq, hI⟩
+    exact hI ⟨hp, hq⟩
+  exact hn (h I hd)
+
+/-- Separation, strengthened: modal openness plus two distinct subjects still
+    does not force genuine choice — plurality is not the missing resource
+    either, even with the modal channel open. -/
+theorem modal_openness_and_plurality_do_not_entail_genuine_choice :
+    ¬ (∀ I : BoundarySignature, BoundaryDatum I ∧ BoundaryTwoSubjects I →
+         BoundaryGenuineChoice I) := by
+  intro h
+  let I : BoundarySignature :=
+    { Subject := Bool, World := Bool, Value := fun b => b = true, Means := fun _ p => p }
+  have hd : BoundaryDatum I ∧ BoundaryTwoSubjects I := by
+    constructor
+    · constructor
+      · exact ⟨false, True, trivial⟩
+      · constructor
+        · exact ⟨true, rfl⟩
+        · exact ⟨false, by decide⟩
+    · refine ⟨true, false, ⟨True, trivial⟩, ⟨True, trivial⟩, ?_⟩
+      intro h
+      cases h
+  have hn : ¬ BoundaryGenuineChoice I := by
     rintro ⟨s, p, q, hp, hq, hI⟩
     exact hI ⟨hp, hq⟩
   exact hn (h I hd)

@@ -24,47 +24,92 @@ Nenhuma passagem deve ser chamada "dedução pura" se depender de conteúdo que 
 
 Estamos a considerar uma proposição.
 
-Portanto ocorre um ato do tipo:
+Portanto ocorre um ato. Devemos distinguir rigorosamente:
 
-A(s,p)
+act(s,p)
+*ato fraco: evento realizado* (emissão, proferimento, evento performativo)
+
+Act(s,p)
+*ato forte: ato intencional / portador de significado* (definido formalmente por Act(s,p) := Means(s,p))
 
 onde:
 
 s = sujeito do ato
 p = conteúdo do ato.
 
-O próprio ato não precisa ser inferido de uma premissa externa:
+O próprio ato não precisa ser inferido de uma premissa externa arbitrária:
+a negação de que ocorra qualquer evento realizado (`NoWeakAct := ¬ ∃ s p, act s p`) é diretamente auto-refutante
+quando proferida (`noWeakAct_selfRefutes : asserts speaker NoWeakAct ⊢ False`, C58).
+A retorção performativa direta estabelece UNICAMENTE o ato fraco:
 
-A(s,p)
+asserts(s,p) → act(s,p)
+logo: ∃s ∃p act(s,p).
 
-é o dado performativo do raciocínio em curso.
+A passagem do ato fraco para o ato forte:
+
+weak act [evento realizado] → ? [ponte de intencionalidade] → strong Act [ato intencional]
+
+é uma meta filosófica e matemática explícita, NÃO uma identidade definicional oculta.
+Sob semântica hostil (`formal/Logos/HostileSemantics.lean`, `CountermodelWeakActWithoutMeaning`, `{}`),
+demonstra-se que a ocorrência de um evento realizado não acarreta logicamente a significação intencional:
+um autómato ou dispositivo mecânico emite símbolos (`act s p`) sem relação intencional (`Means s p`).
+A transição exige a ponte de intencionalidade explícita:
+
+weak_act_implies_strong_act := ∀ s p, act s p → Act s p.
+
+O atalho forte em Logos opera estipulando que a asserção sob exame é já intencional (`Asserts s p := Act s p ∧ p`),
+sob a qual `noCogito_selfRefutes : Asserts speaker NoAct ⊢ False` opera analiticamente.
 
 Teoremas: ver theorems/T1.txt, theorems/T2.txt
 
-**[Nota formal, 2026-09-17]** O ato é a *iniciação* do movimento, não a sua
+**[Nota formal, 2026-09-17 / revisada 2026-09-18]** O ato é a *iniciação* do movimento, não a sua
 transferência: uma transferência é uma função (o efeito determinado pelo
 estado anterior); uma iniciação tem alternativas genuínas. Residentes
 (`formal/Logos/Initiation.lean`, no barrel): `branches_not_transfer : {}` —
 iniciação ≠ transferência, lógica pura — e
 `originates_not_transfer : {}`. O
 sujeito é a *origem* do ato, não o próprio ato: `Subject` é um tipo puro
-não-interpretado (axioma VOCAB) e `Means : Subject → Prop → Prop` é a
-relação intencional primitiva (axioma VOCAB). O ato é constitutivamente
-indexado pelo sujeito (`Act s p := Means s p`), não podendo existir sem um
+não-interpretado (axioma VOCAB), `act : Subject → Prop → Prop` é o evento realizado fraco (axioma VOCAB),
+e `Means : Subject → Prop → Prop` é a relação intencional primitiva (axioma VOCAB).
+O ato forte é constitutivamente indexado pelo sujeito (`Act s p := Means s p`), não podendo existir sem um
 sujeito que o atualize: `act_requires_subject : Act s p → SubjectExists s`.
-A retorção performativa opera em 4 passos estritos: (1) a asserção é um ato
-(`assertion_is_act`), (2) portanto um ato existe (`act_exists_of_assert`),
-(3) portanto um sujeito existe (`subject_exists_of_assert`), (4) portanto
-asserir que não há ato refuta-se a si mesmo (`noCogito_selfRefutes : Asserts speaker NoAct ⊢ False`).
-Sob semântica hostil (`formal/Logos/HostileSemantics.lean`), a tentativa de modelar
-um ato sem sujeito (`CountermodelActWithoutSubject`, formalizando a objeção de
+A retorção performativa genuína opera em passos estritos: (1) a asserção é um evento realizado fraco
+(`assertion_is_weak_act`), (2) portanto um evento existe (`weak_act_exists_of_assert`),
+(3) negar o evento refuta-se a si mesmo (`noWeakAct_selfRefutes : asserts speaker NoWeakAct ⊢ False`),
+(4) a transição para ato forte `Act` (`Means`) opera via a ponte explícita `weak_act_implies_strong_act`,
+(5) a partir do ato forte, o sujeito existe (`act_requires_subject : Act s p → SubjectExists s`).
+Sob semântica hostil (`formal/Logos/HostileSemantics.lean`), a separação `act ↛ Act` é formalizada em
+`CountermodelWeakActWithoutMeaning` / `not_entails_strong_act` (`{}`). E a tentativa de modelar
+um ato forte sem sujeito (`CountermodelActWithoutSubject`, formalizando a objeção de
 Lichtenberg "es denkt") é impossível unicamente pela definição constitutiva de `Act`
 (`countermodel_violates_constitutive_act`). Da mesma forma, demonstra-se que ser sujeito
 de um ato não implica logicamente ser pessoa sob predicados substantivos independentes
 (`CountermodelSubjectWithoutPerson`), sendo a ponte `Subject → Person` em Logos uma
 consequência definicional da redução estrutural de §12 (`Person.person_of_subject`).
 O inventário de axiomas é rigorosamente auditado com Tags explícitas
-(VOCAB, SEM, META). Pegada estrita da base: `{Means, Subject}`. Ver THOUGHTS.md e formal/GAPMAP.md.
+(VOCAB, SEM, META). Pegada estrita da base: `{act, Means, Subject}`. Ver THOUGHTS.md e formal/GAPMAP.md.
+
+(Nota formal, fronteira da pessoa — C24, 2026-09-18): sob as definições correntes,
+a cadeia `Act → SubjectExists → Intentional → Person` é uma cadeia de **identidades
+definicionais**: `Act s p := Means s p`, `SubjectExists s := ∃p, Act s p`,
+`Intentional s := ∃p, Means s p`, e `Person s := Agent s ∧ Rational s ∧ Intentional s`
+com `Agent := True` e `Rational := True` (logo `Person s = ∃p, Means s p`). Os lemas-ponte
+em `formal/Logos/Person.lean` (`act_implies_intentional`,
+`subjectExists_implies_intentional`, `intentional_implies_subjectExists`,
+`person_intentional_iff`) tornam a identidade explícita em vez de a esconder dentro de
+`person_of_act`. **Derivabilidade formal ≠ neutralidade semântica da definição**: C24
+(`T5_personExists`) é teorema-válido, mas o §12 é um compromisso constitutivo — o rótulo
+"pessoa" aplica-se por definição ao sujeito significador atualizado
+(`∃p, Means s p`); a pessoa **substantiva** (deliberação, responsabilidade,
+auto-reflexão, agência autónoma, escolha racional, agência moral) **não é estabelecida**
+pelo datum performativo. Os contramodelos da Parte A2 de HostileSemantics
+(`not_entails_substantive_person`, `not_entails_substantive_rationality`,
+`not_entails_substantive_intentionality`, `not_entails_substantive_autonomy`,
+`{}` — cada um com modelo Unit distinto que preserva os demais predicados)
+atacam apenas essas leituras substantivas; nenhum ataca a identidade §12 (é um facto das definições).
+O downstream C39/C52/C77/C92 usa C24 só no sentido fraco (`∃p, Means s p`);
+a forma mais forte válida é a reancoragem em `SubjectExists`/`Intentional`, sem
+redefinição silenciosa.
 
 2. T1 — O SUJEITO DO ATO EXISTE → theorems/T1.txt
 
@@ -328,55 +373,42 @@ Isto é uma forma mínima de agência racional.
 Teorema: ver theorems/T9.txt (T9 — a existência de alternativas
 incompatíveis, apenas afirmada aqui, é derivada de T3).
 
-14. ESCOLHA RACIONAL
+14. CAMPO DE ESCOLHA (ESCOLHA FRACA) vs. ESCOLHA GENUÍNA (ESCOLHA FORTE)
 
-Definimos:
+Devemos distinguir com máxima clareza:
 
-Choose(s,p,q)
+ChoiceField(s,p,q)
+*escolha fraca: alternativas incompatíveis estão presentes* (o agente relaciona-se com p perante a incompatibilidade pura Incompatible(p,q))
 
-como o ato pelo qual s, perante alternativas incompatíveis, determina qual proposição adota.
+Chooses(s,p,q)
+*escolha forte: o sujeito co-significa alternativas incompatíveis* (o agente co-significa ativamente ambos os cornos: A(s,p) ∧ A(s,q) ∧ Incompatible(p,q))
 
-Então:
+Não se deve permitir que `ChoiceField(s,p,q)` se converta silenciosamente em `Chooses(s,p,q)`.
+A presença de alternativas representáveis no pensamento estabelece apenas o campo (escolha fraca):
 
-Choose(s,p,q) → Agent(s).
+Person(s) → ∃p ∃q ChoiceField(s,p,q).
 
-E:
+Mas a escolha genuína (escolha forte) requer a co-significação de ambas as opções pelo mesmo agente.
 
-Choose(s,p,q) → Possible(p) ∧ Possible(q).
+A cadeia e o seu fosso tornam-se visual e formalmente transparentes:
 
-Portanto:
-
-Choice → Agency ∧ Alternatives.
-
-A existência de agência racional contém uma estrutura mínima de seleção entre possibilidades.
+weak choice / choice-field → ? [co-significação do corno rejeitado] → strong Chooses → FreeWill
 
 15. LIBERDADE
 
-Não se deve confundir:
+Definimos:
 
-Choice
+FreeWill(s) := ∃p ∃q Chooses(s,p,q).
 
-com:
+A passagem de escolha forte para liberdade é puramente **definicional**:
 
-FreeWill.
+chooses_implies_freeWill : Chooses(s,p,q) ⇒ FreeWill(s)   [{Means, Subject} só vocabulário]
 
-Para obter liberdade metafísica forte seria necessário demonstrar:
+A liberdade não é um passo metafísico adicional a partir da escolha genuína; é a sua própria definição formal.
+Contudo, precisamente porque `ChoiceField ↛ Chooses`, a *existência* incondicional de um sujeito livre
+permanece estritamente BLOQUEADA no lema em falta (F1b):
 
-FreeWill(s,p)
-↔
-◇Choose(s,p)
-∧
-◇Choose(s,¬p).
-
-Esta passagem não é uma simples tautologia.
-
-Mas a estrutura anterior já exclui uma concepção em que:
-
-raciocínio
-
-seja apenas uma cadeia de símbolos sem sujeito.
-
-Há agência racional real no ato presente.
+    rejectedHornCoMeant : ∃s p, A(s,p) ∧ A(s,¬p)
 
 (Nota formal, reparada 2026-09-18 — freedom/choice fix): a versão anterior
 usava `Chooses(s,p,q) := A(s,p) ∧ Incompatible(p,q)`. Como
@@ -384,15 +416,14 @@ usava `Chooses(s,p,q) := A(s,p) ∧ Incompatible(p,q)`. Como
 o agente nunca se relacionava com o corno rejeitado — era uma *ocorrência
 determinada*, não uma escolha. A reparação separa o vocabulário:
 
-  * ChoiceField(s,p,q) := A(s,p) ∧ Incompatible(p,q) — a antiga relação,
-    agora chamada **campo** (representabilidade); teorema para qualquer ato
-    (person_hasChoiceField, choiceField_exists, JUDGE_HAS_CHOICE_FIELD;
-    GAPMAP.md C51/C52/C54, F1a PROVEN) — mas NÃO é escolha;
-  * Chooses(s,p,q) := A(s,p) ∧ A(s,q) ∧ Incompatible(p,q) — **escolha
-    genuína**: o agente co-significa os dois cornos incompatíveis;
+  * ChoiceField(s,p,q) := A(s,p) ∧ Incompatible(p,q) — o **campo de escolha** (escolha fraca, representabilidade);
+    teorema para qualquer ato (person_hasChoiceField, choiceField_exists, JUDGE_HAS_CHOICE_FIELD;
+    GAPMAP.md C51/C52/C54, F1a PROVEN) — mas NÃO é escolha genuína;
+  * Chooses(s,p,q) := A(s,p) ∧ A(s,q) ∧ Incompatible(p,q) — **escolha genuína** (escolha forte):
+    o agente co-significa ambos os cornos incompatíveis (§14);
   * FreeWill(s) := ∃p q, Chooses(s,p,q) — a liberdade é **definicional**
     (chooses_implies_freeWill, pegada `{Means, Subject}`, só vocabulário): não é um passo metafísico
-    adicional a partir do ato bruto.
+    adicional a partir da escolha genuína.
 
 O passo em falta (F1b, BLOCKED) é agora exacto e prop-level:
 
@@ -447,6 +478,20 @@ Candidatas a premissa substantiva nova — registadas, NÃO introduzidas:
 `AxCoMeaningNegation : ∃s p, Means(s,p) ∧ Means(s,¬p)`; co-sujeito dos cornos
 (`Incorrect ∧ Denies`); auto-representação do ato. Qualquer uma faria F1b →
 PROVEN↑ sob pegada nova (fase futura).
+
+(Nota formal, Fronteira negativa completada — 2026-09-18): a objecção modal à
+liberdade está resolvida e é **inerte** para a fronteira. O lado modal da
+abertura é teorema no kernel: os átomos são modicamente livres
+(`atoms_are_modally_free`, C95, `{}`) e existe conteúdo contingente
+(`some_formula_contingent`, C96, `{}`) — leis necessárias, conteúdos
+contingentes. E a modalidade não contribui para a escolha genuína: mesmo
+alimentando a abertura modal como premissa extra (`BoundarySignature`, com
+`ModalOpen` a espelhar os dois cornos satisfeitos de C95/C96), a
+co-significação dos cornos incompatíveis não é forçada
+(`modal_openness_does_not_entail_genuine_choice(_and_plurality)`, `{}`,
+HostileSemantics.lean). O bloqueio de F1b é exclusivamente `rejectedHornCoMeant`
+(lado da agência; premissa substantiva nova), não qualquer determinação modal —
+C59 fixa leis, nunca conteúdo atómico.
 
 16. RELAÇÃO
 
@@ -1034,11 +1079,32 @@ T14 (relação eterna de amor) — PROVEN↑ sob `{AxTwoSubjects}`:
   o par de amantes e a sua persistência são demonstrados com base em T12
   e na definição de amor benevolente (`Loves s t := Helps s t ∧ ¬ Harms s t`).
 
-Nota (M5, 2026-09-16): o dado "há certo E há errado" — "Strong Truth Exists" —
-foi tornado registo axiom-free residente como corolário nomeado
-(strongTruthExists : ∃τ, NecessariamenteVerdadeiro τ, footprint `{CL}`;
-o teorema fonte é Semantics.bothNecessarilyTrueAndFalse, C37).
-E o ponto de partida do ato (Cogito) é rigorosamente derivado da retorção
+Nota (M5, 2026-09-16; residente no barrel 2026-09-18): o dado "há certo E há errado" —
+"Strong Truth Exists" — foi tornado registo axiom-free residente como corolário
+nomeado (strongTruthExists : ∃τ, NecessariamenteVerdadeiro τ, footprint `{CL}`);
+o teorema fonte é Semantics.bothNecessarilyTrueAndFalse, C37, e vive em
+formal/Logos/Semantics.lean (GAPMAP.md C59). A retorsão performativa do dado
+está nomeada como noStrongTruth_selfRefutes : ¬(¬∃τ, NecessariamenteVerdadeiro τ)
+(GAPMAP.md C93): negar a verdade forte é um ato destruído por ela.
+ E a retorsão assertiva do dado está nomeada como
+ noStrongTruth_assertable_refutes : Asserts speaker (¬∃τ, NecessariamenteVerdadeiro τ) → False
+ (GAPMAP.md C94): ninguém pode asserir que não existe verdade forte.
+ E uma fronteira rigorosa do dado — e está **provada no kernel**, não apenas
+ bloqueada: a parede dos átomos. `Semantics.atoms_are_modally_free` mostra que
+ nenhum átomo é necessário nem necessariamente-falso (footprint `{}`, sem
+ axiomas; GAPMAP.md C95): a verdade forte fixa leis (o terceiro excluído das
+ testemunhas de C59), nunca um átomo — C59 **não autoriza átomos nem escolha
+ genuína**; F1b permanece BLOCKED (veredito M5), e o corolário nomeado
+`strongTruth_is_not_atomic` junta as duas faces: existe verdade forte e ela
+  não é conteúdo atómico fixado.
+  E o contrapeso do dado está nomeado como `Semantics.some_formula_contingent :
+  ∃τ, ¬NecessariamenteVerdadeiro τ ∧ ¬NecessariamenteFalso τ` (GAPMAP.md C96,
+  footprint `{}` via C95): existe conteúdo contingente — há fórmula nem
+  necessariamente-verdadeira nem necessariamente-falsa. O percurso modal não é
+  degenerado: leis são necessárias (C59), átomos são contingentes (C95/C96); o
+  corolário `strongTruth_and_contingent_content` junta as duas faces num só
+  nome (∃τ□τ ∧ ∃σ ¬□σ ∧ ¬□¬σ).
+  E o ponto de partida do ato (Cogito) é rigorosamente derivado da retorção
 performativa: a asserção explícita de que nenhum ato ocorre refuta-se
 a si mesma (`noCogito_selfRefutes`, C58), de onde o Cogito decorre como
 teorema a partir do ato performativo (C68), sem axiomas forçados nem

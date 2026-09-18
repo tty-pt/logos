@@ -44,17 +44,22 @@ escolha racional (§13–§14) está não-vazio para essa pessoa:
 
 Definições formalizadas (reparadas 2026-09-18 — freedom/choice fix):
 
-ChoiceField(s,p,q) := A(s,p) ∧ Incompatible(p,q)  — o CAMPO de escolha: o
-                    agente é posto contra um par incompatível, mas relaciona-se
-                    só com p (o corno ¬p vem da lógica pura). É a antiga relação
-                    `Chooses`; NÃO é escolha.
-Chooses(s,p,q)   := A(s,p) ∧ A(s,q) ∧ Incompatible(p,q)  — ESCOLHA GENUÍNA: o
-                    agente co-significa os dois cornos incompatíveis (§14).
-                    Antes (2026-09-16) o corpo era só `A(s,p) ∧ Incompatible(p,q)`,
-                    que colapsava em A(s,p) — ocorrência determinada, não escolha.
+ChoiceField(s,p,q)
+*escolha fraca: alternativas incompatíveis estão presentes*
+Corpo: A(s,p) ∧ Incompatible(p,q) — o CAMPO de escolha: o agente é posto contra um par incompatível,
+mas relaciona-se só com p (o corno ¬p vem da lógica pura). É a antiga relação `Chooses`; NÃO é escolha genuína.
+
+Chooses(s,p,q)
+*escolha forte: o sujeito co-significa alternativas incompatíveis*
+Corpo: A(s,p) ∧ A(s,q) ∧ Incompatible(p,q) — ESCOLHA GENUÍNA: o agente co-significa ativamente ambos os cornos (§14).
+
 CanChoose(s,p)   := Dia(∃q Chooses(s,p,q))
-FreeWill(s)      := ∃p∃q Chooses(s,p,q)          [§15, DEFINIÇÃO: escolha → liberdade]
+FreeWill(s)      := ∃p∃q Chooses(s,p,q)          [*liberdade: definicional a partir da escolha forte*]
 chooses_implies_freeWill : Chooses(s,p,q) ⇒ FreeWill(s)   [{Means, Subject} só vocab — por definição]
+
+A cadeia e o seu fosso ontológico:
+
+weak choice / choice-field → ? [co-significação do corno rejeitado] → strong Chooses → FreeWill
 
 O passo EM FALTA (F1b, BLOCKED) é a existência da escolha genuína:
 

@@ -21,6 +21,20 @@ Under hostile semantics, propositional content does NOT imply personhood,
 and a single act does not entail plurality. The pseudo-theorems
 `twoPersonsFromSubject`, `everyContentIsAPerson`, and `positedDistinct`
 are retired as conflations of definitions with proofs.
+
+Personhood frontier (2026-09-18, PLAN_C24_PERSONHOOD.md): the chain
+`Act → SubjectExists → Intentional → Person` is a chain of *definitional
+identities* — every node unfolds to `∃ p, Means s p` (since
+`Act s p := Means s p`, `SubjectExists s := ∃ p, Act s p`,
+`Intentional s := ∃ p, Means s p`, and `Person s := Agent s ∧ Rational s ∧
+Intentional s` with `Agent := True`, `Rational := True`). The bridge lemmas
+below state these identities explicitly instead of hiding them inside
+`person_of_act`. Formal derivability (`{Means, Subject}`) is therefore
+NOT semantic neutrality of the definition: the §12 label "person" is a
+constitutive commitment, and any *substantive* reading of personhood
+(deliberation, moral responsibility, self-reflection, autonomous rational
+choice) is not established by the performative datum (see
+`HostileSemantics.Part A2`).
 -/
 
 import Logos.Core
@@ -37,33 +51,71 @@ def Intentional (s : Subject) : Prop := ∃ p : Prop, Means s p
 /-- Person (structural definition, base.txt §12 / theorem T5). -/
 def Person (s : Subject) : Prop := Logos.Agency.Agent s ∧ Rational s ∧ Intentional s
 
+/-- Act implies intentionality: an act's own content witnesses that the subject
+    means something (`Intentional s := ∃ p, Means s p`) — a definitional
+    identity, not a semantic discovery (PLAN_C24_PERSONHOOD.md).
+    Footprint: `{Means, Subject}` (VOCAB). -/
+theorem act_implies_intentional {s : Subject} {p : Prop} (h : Logos.Agency.Act s p) :
+    Intentional s :=
+  ⟨p, h⟩
+
+/-- SubjectExists is definitionally Intentional: both are `∃ p, Means s p`
+    (Agency.SubjectExists s := ∃ p, Act s p, Act s p := Means s p) — direct
+    identity. Footprint: `{Means, Subject}` (VOCAB). -/
+theorem subjectExists_implies_intentional (h : Logos.Agency.SubjectExists s) : Intentional s :=
+  h
+
+/-- Intentionality is definitionally SubjectExists (converse of the same
+    identity). Footprint: `{Means, Subject}` (VOCAB). -/
+theorem intentional_implies_subjectExists (h : Intentional s) : Logos.Agency.SubjectExists s :=
+  h
+
+/--The §12 bridge made explicit: `Person ↔ Intentional` is exactly the current
+    ontology (`Agent` and `Rational` are analytically `True`) — in Logos
+    personhood is *nominal*, it adds no property beyond being an actualized
+    meaning-subject. Direct unfolding, weakest proof.
+    Footprint: `{Means, Subject}` (VOCAB). -/
+theorem person_intentional_iff (s : Subject) : Person s ↔ Intentional s :=
+  ⟨fun h => h.2.2, fun h => ⟨trivial, trivial, h⟩⟩
+
 /-- Arrow 2 (Case A: Merely Definitional under §12 structural definition):
     Bridge from subject actuality to personhood.
 
-    Audit notice: This implication is DEFINITIONAL, not an independent metaphysical
-    discovery. Under the §12 structural definition of Person
-    (`Person s := Agent s ∧ Rational s ∧ Intentional s`), with `Agent` and `Rational`
-    analytically defined as `True`, personhood collapses to intentional agency
-    (`∃ p, Means s p`), which is identical to `SubjectExists s`.
-
-    Under hostile semantics where Person is an independent substantive predicate (requiring
-    moral responsibility, reflective self-consciousness, or robust deliberative rationality),
-    this implication does NOT follow, as proved by `CountermodelSubjectWithoutPerson`.
-    In Logos, it is maintained strictly as a definitional consequence of §12. -/
+    Audit notice (2026-09-18, personhood frontier): this implication is
+    NOMINAL/CONSTITUTIVE, not an independent metaphysical discovery. Under the
+    §12 structural definition of Person (`Person s := Agent s ∧ Rational s ∧
+    Intentional s`, with `Agent := True`, `Rational := True`), personhood
+    collapses to intentional agency (`∃ p, Means s p`), which is definitionally
+    IDENTICAL to `SubjectExists s` — see `subjectExists_implies_intentional`,
+    `intentional_implies_subjectExists`, `person_intentional_iff`. The
+    performative datum thereby forces exactly the *actualized meaning-subject*;
+    it does NOT establish substantive personhood (deliberation, responsibility,
+    self-reflection, autonomous rational choice): formal derivability ≠
+    semantic neutrality of the definition. Under hostile semantics where
+    Person is an independent substantive predicate, this implication does NOT
+    follow, as proved by `CountermodelSubjectWithoutPerson`
+    (`not_entails_person`, HostileSemantics Part A / A2). -/
 theorem person_of_subject {s : Subject} (h : Logos.Agency.SubjectExists s) : Person s :=
   ⟨trivial, trivial, h⟩
 
-/-- An act directly yields a person. -/
+/-- An act directly yields a person — nominal consequence of the §12
+    definitional collapse (Act → SubjectExists → Person is identity, see
+    `act_implies_intentional`/`person_intentional_iff`), NOT independent
+    evidence of substantive personhood. Footprint: `{Means, Subject}`. -/
 theorem person_of_act {s : Subject} {p : Prop} (h : Logos.Agency.Act s p) : Person s :=
   person_of_subject ⟨p, h⟩
 
-/-- The existence of an act entails that a person exists. -/
+/-- The existence of an act entails that a person exists — formally valid
+    under the current §12 constitutive definition (Person = Intentional =
+    ∃ p, Means s p); the substantive notion of personhood is not
+    independently established by this proof. Footprint: `{Means, Subject}`. -/
 theorem person_exists_of_act (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
     ∃ s : Subject, Person s := by
   obtain ⟨s, p, ha⟩ := h
   exact ⟨s, person_of_act ha⟩
 
-/-- An assertion entails that a person exists. -/
+/-- An assertion entails that a person exists — same nominal §12 reading as
+    `person_exists_of_act`. Footprint: `{Means, Subject}`. -/
 theorem person_exists_of_assert {s : Subject} {p : Prop} (h : Logos.Agency.Asserts s p) :
     ∃ s' : Subject, Person s' :=
   ⟨s, person_of_act (Logos.Agency.assertion_is_act h)⟩
@@ -108,6 +160,10 @@ end Logos.Person
 
 -- Axiom footprint audit
 #print axioms Logos.Person.inseparability_24b
+#print axioms Logos.Person.act_implies_intentional
+#print axioms Logos.Person.subjectExists_implies_intentional
+#print axioms Logos.Person.intentional_implies_subjectExists
+#print axioms Logos.Person.person_intentional_iff
 #print axioms Logos.Person.person_of_subject
 #print axioms Logos.Person.person_of_act
 #print axioms Logos.Person.person_exists_of_act

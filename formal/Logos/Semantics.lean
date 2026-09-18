@@ -107,9 +107,81 @@ theorem bothNecessarilyTrueAndFalse :
   · exact ⟨Form.and (Form.atom 0) (Form.not (Form.atom 0)),
       nonContradiction (Form.atom 0)⟩
 
+/--Strong truth exists: some formula is true in every world — axiom-free, the
+  performative "há certo E há errado" (§27, poem.txt), resident as the
+  excluded-middle datum C37 (footprint {CL}). -/
+theorem strongTruthExists :
+    ∃ τ : Form, NecessarilyTrue τ := by
+  obtain ⟨hN, _⟩ := bothNecessarilyTrueAndFalse
+  exact hN
+
+/--Denying strong truth refutes itself: it cannot be the case that no formula
+  is necessarily true — the act of denying strong truth is destroyed by
+  strong truth (performative retorsion of C59, footprint {CL}). -/
+theorem noStrongTruth_selfRefutes :
+    ¬ (¬ ∃ τ : Form, NecessarilyTrue τ) := by
+  intro hDenial
+  exact hDenial strongTruthExists
+
+/--No atom is necessarily true: a world sending atom `n` to `f` refutes it.
+
+  The atom-wall (C95): strong truth (C59) fixes the excluded-middle law,
+  never an atom — the semantic course is modally free in every atomic content
+  (footprint {}). -/
+theorem atom_not_necessarily_true (n : Nat) : ¬ NecessarilyTrue (Form.atom n) := by
+  intro h
+  have hw : (fun _ : Nat => TV.f) n = TV.t := h (fun _ => TV.f)
+  exact TV.noConfusion hw
+
+/--No atom is necessarily false either: the constant-`t` world refutes it.
+
+  The atom-wall, symmetric horn (footprint {}). -/
+theorem atom_not_necessarily_false (n : Nat) : ¬ NecessarilyFalse (Form.atom n) := by
+  intro h
+  exact h (fun _ => TV.t) rfl
+
+/--The atoms are modally free: no atom is fixed in either modal direction.
+
+  The atom-wall, combined form (footprint {}). -/
+theorem atoms_are_modally_free : ∀ n : Nat,
+    ¬ NecessarilyTrue (Form.atom n) ∧ ¬ NecessarilyFalse (Form.atom n) :=
+  fun n => ⟨atom_not_necessarily_true n, atom_not_necessarily_false n⟩
+
+/--Strong truth exists and is not atomic content: the excluded-middle
+  tautology is the witness of C59, and every atom stays modally free (footprint {CL}). -/
+theorem strongTruth_is_not_atomic :
+    ∃ τ : Form, NecessarilyTrue τ ∧ ∀ n : Nat, ¬ NecessarilyTrue (Form.atom n) :=
+  ⟨Form.or (Form.atom 0) (Form.not (Form.atom 0)),
+   lawExcludedMiddle (Form.atom 0), atom_not_necessarily_true⟩
+
+/--Contingent content exists — the counterweight of C59 (GAPMAP.md C96): some
+  formula is neither necessary nor impossible, derived from the atom-wall
+  (footprint {}). -/
+theorem some_formula_contingent :
+    ∃ τ : Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ := by
+  rcases atoms_are_modally_free 0 with ⟨hT, hF⟩
+  exact ⟨Form.atom 0, hT, hF⟩
+
+/--Law and contingent content coexist: the junction of C37 (the witness of
+  strong truth) and C96 - some formula is necessary and some is contingent
+  (footprint {CL}). -/
+theorem strongTruth_and_contingent_content :
+    ∃ τ : Form, NecessarilyTrue τ ∧ ∃ σ : Form, ¬ NecessarilyTrue σ ∧ ¬ NecessarilyFalse σ := by
+  obtain ⟨⟨τ, hτ⟩, _⟩ := bothNecessarilyTrueAndFalse
+  obtain ⟨σ, hσN, hσF⟩ := some_formula_contingent
+  exact ⟨τ, hτ, σ, hσN, hσF⟩
+
 end Logos.Semantics
 
 -- Axiom footprint audit
 #print axioms Logos.Semantics.lawExcludedMiddle
 #print axioms Logos.Semantics.nonContradiction
 #print axioms Logos.Semantics.bothNecessarilyTrueAndFalse
+#print axioms Logos.Semantics.strongTruthExists
+#print axioms Logos.Semantics.noStrongTruth_selfRefutes
+#print axioms Logos.Semantics.atom_not_necessarily_true
+#print axioms Logos.Semantics.atom_not_necessarily_false
+#print axioms Logos.Semantics.atoms_are_modally_free
+#print axioms Logos.Semantics.strongTruth_is_not_atomic
+#print axioms Logos.Semantics.some_formula_contingent
+#print axioms Logos.Semantics.strongTruth_and_contingent_content
