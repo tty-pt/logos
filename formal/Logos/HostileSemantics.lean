@@ -13,15 +13,28 @@ Addresses foundational conflations in the formalization:
 5. Hostile separation theorems over explicit abstract interfaces:
    - Act does not imply Person
    - Act does not imply Plurality
-   - Act does not imply FreeWill
+   - Act does not imply genuine choice (`Chooses`) nor FreeWill
    - Content does not imply Personhood
+
+   Freedom/choice fix (2026-09-18): the old `not_entails_freewill` treated
+   `Chooses` and `FreeWill` as independent predicates. In Logos `FreeWill` is
+   now *defined* from `Chooses` (`Choice.chooses_implies_freeWill`), so that
+   abstract model no longer bears on `Chooses ↛ FreeWill` — it only shows a
+   *decoupled* FreeWill-predicate is unforced. It is renamed
+   `not_entails_decoupled_freewill` and the concrete model below proves the
+   honest separation `Act ↛ Chooses`.
 6. Semantic attacks on uniform grounding (C18), ultimate ground (C79/C89),
    personal ground (T8), and love (T13/T14).
 7. Semantic attack on the necessity lift (batches esse-est-agere / lift-necessário):
    subject-persistence (`NecessarySubject` in the general signature) does not
    entail entity-necessity (`NecessaryEntity`) by logic alone — the lift
    `Modal.subject_nec_entity_nec` (C91) is definitional, not a logical law
-   (`CountermodelSubjectNecessityNotEntityNecessity`).
+   (`CountermodelSubjectNecessityNotEntityNecessity`). Step-6 verdict
+   (2026-09-18): person-persistence (`AxPersonStability`) is *definitional*
+   too — abstract `Person` does not logically force `NecessarySubject`
+   (`CountermodelPersonNotNecessary.not_entails_person_necessary`); the
+   concrete countermodel `Person s ∧ ¬ NecessarySubject s` cannot exist
+   (`Love.no_contingent_person`).
 -/
 
 import Logos.Core
@@ -94,8 +107,17 @@ theorem not_entails_plurality :
     exact hne rfl
   exact hNot (h I hΓ)
 
-/-- Separation Theorem 3: Act and choice do not logically imply Free Will. -/
-theorem not_entails_freewill :
+/-- Separation Theorem 3 (decoupled form): a `FreeWill` predicate treated as
+    *independent* of `Chooses` is not implied by act + choice.
+
+  Audit notice (freedom/choice fix, 2026-09-18): this is NOT a countermodel to
+    `Chooses ↛ FreeWill`. In Logos `FreeWill` is *defined* from `Chooses`
+    (`Choice.FreeWill s := ∃ p q, Chooses s p q`), so no Logos-model can set
+    `FreeWill := False` while `Chooses` holds. The model below only shows that
+    an abstract signature which decouples the two predicates does not force the
+    link — i.e. the link in Logos is definitional, not logical. Kept as a
+    precise statement of what the old F1b "block" actually established. -/
+theorem not_entails_decoupled_freewill :
     ¬ (∀ I : CoreSignature, Γ_act I ∧ (∀ s : I.Subject, I.Person s → ∃ p q, I.Chooses s p q) → FreeWillExistence I) := by
   intro h
   let I : CoreSignature := {
@@ -233,15 +255,27 @@ theorem act_does_not_imply_person :
   ⟨act_occurs, no_person⟩
 end CountermodelNoPerson
 
+/- Hostile Countermodel 3 (freedom/choice fix, 2026-09-18): mere occurrence
+   does not entail genuine choice. `A` is uninterpreted and set to `True`
+   (a determined meaning-act occurs), while `Chooses` is set to `False` — no
+   subject ever co-means an incompatible alternative. `FreeWill` is defined
+   from `Chooses`, so it too is empty *consistently* with the Logos
+   definition. This is the honest replacement for the old `Act ↛ FreeWill`
+   model: it attacks genuine choice, not a free-floating predicate. -/
 namespace CountermodelNoFreeWill
 def S : Type := Unit
 def A : S → Prop → Prop := fun _ _ => True
-def FreeWill : S → Prop → Prop := fun _ _ => False
+def Chooses : S → Prop → Prop → Prop := fun _ _ _ => False
+def FreeWill : S → Prop := fun s => ∃ p q : Prop, Chooses s p q
 
 theorem act_occurs : ∃ s : S, ∃ p : Prop, A s p := ⟨(), True, trivial⟩
-theorem no_free_will : ¬ ∃ s : S, ∃ p : Prop, FreeWill s p := fun ⟨_, _, hfw⟩ => hfw
+theorem no_choice : ¬ ∃ s : S, ∃ p q : Prop, Chooses s p q := fun ⟨_, _, _, hc⟩ => hc
+theorem no_free_will : ¬ ∃ s : S, FreeWill s := fun ⟨s, hfw⟩ => no_choice ⟨s, hfw⟩
+theorem act_does_not_imply_choice :
+    (∃ s : S, ∃ p : Prop, A s p) ∧ ¬ (∃ s : S, ∃ p q : Prop, Chooses s p q) :=
+  ⟨act_occurs, no_choice⟩
 theorem act_does_not_imply_freewill :
-    (∃ s : S, ∃ p : Prop, A s p) ∧ ¬ (∃ s : S, ∃ p : Prop, FreeWill s p) :=
+    (∃ s : S, ∃ p : Prop, A s p) ∧ ¬ (∃ s : S, FreeWill s) :=
   ⟨act_occurs, no_free_will⟩
 end CountermodelNoFreeWill
 
@@ -397,6 +431,67 @@ theorem not_holds_of_arbitrary_signature :
   exact no_necessary_entity ⟨I.EntityOf (), hn⟩
 
 end CountermodelSubjectNecessityNotEntityNecessity
+
+-- ===========================================================================
+-- Part C2b: Person-persistence is definitional, not logical (step 6)
+-- ===========================================================================
+--
+-- In Logos, `Person s → NecessarySubject s` (`AxPersonStability`) holds because
+-- `ExistsAt` for subject-correlates is flow from agency — definitional
+-- (esse est agere). This countermodel shows the implication is NOT a logical
+-- law: a person can exist while no subject persists in every world. Necessity
+-- is not hidden in the semantics; the definitions chosen are what do the
+-- work. Concrete side: `Love.no_contingent_person` (no `Person s ∧
+-- ¬ NecessarySubject s` exists).
+
+namespace CountermodelPersonNotNecessary
+
+abbrev Subject : Type := Unit
+abbrev World : Type := Bool
+
+/-- Simulated world-existence: the subject exists only in the `true` world. -/
+def ExistsAt (w : World) (_s : Subject) : Prop := w = true
+
+def Person (_s : Subject) : Prop := True
+
+def NecessarySubject (s : Subject) : Prop := ∀ w : World, ExistsAt w s
+
+theorem person_exists : ∃ s : Subject, Person s := ⟨(), trivial⟩
+
+theorem no_necessary_subject : ¬ ∃ s : Subject, NecessarySubject s := by
+  rintro ⟨s, h⟩
+  nomatch h false
+
+/-- Hostile separation: a person exists but no subject is necessary — the
+    implication `Person → NecessarySubject` is not a logical law. -/
+theorem person_not_entails_necessary :
+    (∃ s : Subject, Person s) ∧ ¬ (∃ s : Subject, NecessarySubject s) :=
+  ⟨person_exists, no_necessary_subject⟩
+
+/-- Abstract-signature form: for arbitrary interpretations of the three
+    notions, personhood does not force persistence. -/
+structure NecessitySignature where
+  Subject : Type
+  Person : Subject → Prop
+  NecessarySubject : Subject → Prop
+
+/-- No abstract signature forces `Person → NecessarySubject`; some guarantee it
+    and others do not, so it is not a theorem of the vocabulary alone (the
+    step-6 verdict: in Logos it holds *by definition*, not by logic). -/
+theorem not_entails_person_necessary :
+    ¬ (∀ I : NecessitySignature,
+        (∃ s : I.Subject, I.Person s) → ∃ s : I.Subject, I.NecessarySubject s) := by
+  intro h
+  let I : NecessitySignature := {
+    Subject := Unit
+    Person := fun _ => True
+    NecessarySubject := fun _ => False
+  }
+  have hp : ∃ s : I.Subject, I.Person s := ⟨(), trivial⟩
+  have hno : ¬ (∃ s : I.Subject, I.NecessarySubject s) := fun ⟨_, hn⟩ => hn
+  exact hno (h I hp)
+
+end CountermodelPersonNotNecessary
 
 -- ===========================================================================
 -- Part D: Semantic Attack on Ultimate Ground (Infinite Descending Chain)

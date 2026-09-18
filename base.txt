@@ -378,36 +378,44 @@ seja apenas uma cadeia de símbolos sem sujeito.
 
 Há agência racional real no ato presente.
 
-(Nota formal: o campo estrutural da escolha — que há conteúdos incompatíveis
-entre os quais a pessoa pode representar a adopção — é teorema
-formalizado: formal/Choice.lean T11_choiceField (PROVEN, funde T5 + T9).
-Pelo batch choice-realism (2026-09-16), a própria escolha é agora real:
-Chooses(s,p,q) := A(s,p) ∧ Incompatible(p,q) (definição — antes era um
-placeholder vazio, o que fazia a escolha irrepresentável); person_chooses
-(sujeito ⇒ escolha, `{}` — PROVEN; GAPMAP.md C51,
-VOCAB.md), choiceExists, noChoice_selfRefutes
-(negar a escolha é uma escolha) e JUDGE_COMMITTED/judge_commits (sem certo e
-errado não há escolha) são teoremas kernel-verificados — GAPMAP.md C49–C56,
-F1a PROVEN. A forma modal de liberdade (FreeWill: ◇Choose ∧ ◇Choose¬,
-abaixo) foi dividida em F1b-weak (PROVEN, 2026-09-17 — a origem do ato pode
-escolher os dois lados, C69/C71/C72) e F1b-strong (BLOCKED — alternatividade
-a nível-mundos, vocabulário dependente do mundo em falta; ver a nota F1b
-split abaixo).
+(Nota formal, reparada 2026-09-18 — freedom/choice fix): a versão anterior
+usava `Chooses(s,p,q) := A(s,p) ∧ Incompatible(p,q)`. Como
+`Incompatible(p,¬p)` é lógica pura, `∃q, Chooses(s,p,q)` colapsava em `A(s,p)`:
+o agente nunca se relacionava com o corno rejeitado — era uma *ocorrência
+determinada*, não uma escolha. A reparação separa o vocabulário:
+
+  * ChoiceField(s,p,q) := A(s,p) ∧ Incompatible(p,q) — a antiga relação,
+    agora chamada **campo** (representabilidade); teorema para qualquer ato
+    (person_hasChoiceField, choiceField_exists, JUDGE_HAS_CHOICE_FIELD;
+    GAPMAP.md C51/C52/C54, F1a PROVEN) — mas NÃO é escolha;
+  * Chooses(s,p,q) := A(s,p) ∧ A(s,q) ∧ Incompatible(p,q) — **escolha
+    genuína**: o agente co-significa os dois cornos incompatíveis;
+  * FreeWill(s) := ∃p q, Chooses(s,p,q) — a liberdade é **definicional**
+    (chooses_implies_freeWill, pegada `{Means, Subject}`, só vocabulário): não é um passo metafísico
+    adicional a partir do ato bruto.
+
+O passo em falta (F1b, BLOCKED) é agora exacto e prop-level:
+
+    rejectedHornCoMeant :
+      (∃s p, A(s,p)) → ∃s p, A(s,p) ∧ A(s,¬p)
+
+Nada obriga um ato de significação a vir com a significação da sua negação:
+`Means` é opaco e AxTwoSubjects dá dois sujeitos diferentes, cada um com um só
+conteúdo. A *existência* de um escolhedor genuíno fica bloqueada; a implicação
+escolha → liberdade é gratuita. O `ChoiceAt : World → Subject → Prop → Prop`
+(nível-mundos, F7) permanece a ponte SEM futura e secundária.
 Cautela (C1): o alias `Dia` prop-level é a dupla negação clássica sob o modelo
-identidade; a liberdade modal futura deve ser construída sobre `NecessityPH`
-(nível-mundos), não sobre o alias degenerado.)
+identidade; não reintroduzir liberdade a partir de `Act`.)
 
 (Nota formal, Liberdade e semântica hostil — F1b):
-Sob reconstrução sob semântica hostil, a existência de ato e escolha não
-implica livre-arbítrio por mera lógica pura: o contramodelo
-`CountermodelNoFreeWill` (e o teorema de separação `not_entails_freewill`
-em `formal/Logos/HostileSemantics.lean`) demonstra formalmente que um modelo com
-agência e escolha pode ter `FreeWill s p := False` sem qualquer contradição lógica.
-A distinção entre o ato de escolha (Chooses, transcendentalmente exercido
-no juízo, C54 JUDGE_COMMITTED) e a alternatividade bilateral modal
-(FreeWill) é assim explicitada: a escolha enquanto determinação entre incompatíveis
-é real, mas a alternatividade modal plena a nível de mundos (F1b) permanece
-um passo substantive/bloqueado sem pontes adicionais (formal/GAPMAP.md F1b).
+Sob reconstrução sob semântica hostil, `Act(s,p)` não implica `Chooses(s,p,q)`
+nem `FreeWill(s)`: o contramodelo `CountermodelNoFreeWill` (e o teorema de
+separação `not_entails_decoupled_freewill` em
+`formal/Logos/HostileSemantics.lean`) demonstra-o formalmente, com
+`Chooses := fun _ _ _ => False`. Esse contramodelo NÃO é contramodelo da
+definição `Chooses → FreeWill`, que é definicional (`{Means, Subject}`, só vocabulário). O que permanece
+substancial/bloqueado é a *existência* da escolha genuína
+(`rejectedHornCoMeant`, formal/GAPMAP.md F1b), não a ligação escolha → liberdade.
 
 16. RELAÇÃO
 
@@ -815,7 +823,7 @@ algo significar" é PROVEN — C61 (`Choice.rightWrong_implies_someone_means`) e
 `Order.rightWrongDistinction_implies_meaning` (`CL`), e a metade
 analítica "significado → sujeito" é C49 (`meaning_needs_subject` /
 `meaning_I_needs_subject`, `{}` — ✔); L20 (P4)
-"para haver alguém é preciso haver escolha" é C51 (`person_chooses`, `{}`),
+"para haver alguém é preciso haver escolha" é C51 (`person_hasChoiceField`, campo de escolha, `{Means, Subject}` — reparação 2026-09-18: é o *campo*, não a escolha genuína),
 e "escolha com significado → mais do que uma pessoa" é PROVEN — C40/C73
 (plurality-discharge: o par canónico origem+destinatário é teorema `{}`); L22
 (P5) "um Ser sózinho não ajuda nem prejudica ninguém" é C56
@@ -877,7 +885,7 @@ Distintas das impossibilidades performativas acima, as duas transições ontoló
 
 (Nota formal §26: "Não existe sujeito do ato presente" tem registo formal
 kernel-checked — `noSubject_selfRefutes` (formal/Logos/Choice.lean, C57):
-¬(∃s : Subject, True) ⇒ False (deriva de `choiceExists`, pegada `{AxTwoSubjects, Means, Subject}`).
+¬(∃s : Subject, True) ⇒ False (deriva da retorção performativa de `Agency`, pegada `{Means, Subject}`).
 E, na raiz, a negação do próprio ato refuta-se por retorção performativa:
 `noCogito_selfRefutes` (formal/Logos/Agency.lean, C58): formalizando a negação do ato
 como `NoAct := ¬ ∃ s p, A s p`, a asserção explícita `h : Asserts speaker NoAct`
@@ -976,12 +984,16 @@ A cadeia do poema avançou. Estado formal (theorems/T10–T14.txt):
 
 T10 (certo e errado necessários) — PROVEN; a sua necessidade (necDistinction)
   é teorema desde C1 (o modal prop-level é agora alias definições).
-T11 (campo da escolha) — PROVEN. Pelo batch choice-realism (2026-09-16) a
-  própria escolha é real e teoremática: person_chooses (sujeito ⇒ escolha,
-  `{}` — PROVEN; ver VOCAB.md),
-  choiceExists, noChoice_selfRefutes (negar a escolha é uma escolha),
-JUDGE_COMMITTED/judge_commits (sem certo e errado não há escolha) — ver
-   theorems/T11.txt e formal/GAPMAP.md C49–C57.
+T11 (campo da escolha) — PROVEN (reparado 2026-09-18: é o *campo*, não a
+  escolha genuína): person_hasChoiceField (sujeito ⇒ campo, `{Means, Subject}`
+  — PROVEN; ver VOCAB.md), choiceField_exists,
+  noChoiceField_selfRefutes (negar o campo é um ato de campo),
+JUDGE_HAS_CHOICE_FIELD/judge_commits (sem certo e errado não há campo de
+  escolha). A escolha genuína `Chooses(s,p,q) := A(s,p) ∧ A(s,q) ∧
+  Incompatible(p,q)` e a liberdade definicional `FreeWill(s) := ∃p q, Chooses`
+  (chooses_implies_freeWill, `{Means, Subject}`, só vocabulário) estão em Choice.lean; a sua *existência*
+  permanece bloqueada em `rejectedHornCoMeant` (F1b) — ver
+   theorems/T11.txt e formal/GAPMAP.md C49–C57/F1b.
 T12 (mais do que uma pessoa) — PROVEN↑ sob a ponte META `AxTwoSubjects`:
   a pluralidade exige uma ponte metafísica, demonstrada indispensável pelo
   contramodelo `UnitPluralityCountermodel` em `HostileSemantics` (um único
@@ -1039,14 +1051,18 @@ Ponte independente da pessoalidade #9 — `Ground(e, traço pessoal) → Persona
   procurando uma derivação sem `AxPersonalGround` (T8).
 O alvo central (#8) é `NecessaryEntity(e) ∧ Ground(e,τ)` sem `AxGlobalGround`;
   e o alvo final (#10) `∃e (NecessaryEntity(e) ∧ Personal(e))`.
-Freedom (FreeWill, modal bipolar) — a liberdade do sujeito do ato (a origem,
-  bilateral: ◇Choose ∧ ◇Choose¬) está DEMONSTRADA (F1b-weak:
-  freeWillOrigin, judgeIsFree, originFreedomSelfRefutes — C69/C71/C72, `{}`;
-  a *existência* da escolha F1a em T11). A forma forte a nível-mundos
-  (F1b-strong) permanece BLOCKED por falta de vocabulário dependente do mundo
-  (ChoiceAt : World → Subject → Prop → Prop, um predicado de escolha
-  genuinamente variável por mundo — ponte SEM/META adiada; sem ele,
-  NecessityPH aplicado a qualquer predicado atual colapsa em identidade).
+Escolha genuína / liberdade (F1b; reparado 2026-09-18) — a liberdade é
+  DEFINICIONAL a partir da escolha genuína (`FreeWill(s) := ∃p q,
+  Chooses(s,p,q)`; chooses_implies_freeWill, `{Means, Subject}`, só vocabulário): escolha → liberdade não é
+  um passo metafísico. O que falta é a *existência* de uma escolha genuína,
+  i.e. que o agente co-signifique também o corno rejeitado:
+  `rejectedHornCoMeant : (∃s p, A(s,p)) → ∃s p, A(s,p) ∧ A(s,¬p)`.
+  `Means` é opaco e AxTwoSubjects dá dois sujeitos diferentes, cada um com um
+  só conteúdo — daí o BLOCKED. As antigas testemunhas fabricadas
+  (freeWillOrigin, judgeIsFree, originFreedomSelfRefutes, noFreeWillPosited —
+  C69–C72) estão RETIRADAS sob semântica hostil. O nível-mundos
+  (F7) permanece a ponte SEM futura e secundária
+  (ChoiceAt : World → Subject → Prop → Prop).
 Good (o bem como objeto moral da relação) — DEFERRED/F2, passo de
   normatividade lógica (§20) a bem, em conexão com T12/T13.
 Trinity — DEFERRED, sem argumento (§28/§29).

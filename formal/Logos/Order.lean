@@ -20,7 +20,7 @@ namespace Logos.Order
 
 open Logos.Core (T IsFalse tschema someTrue someFalse)
 open Logos.Agency (Subject A)
-open Logos.Choice (Chooses incompatible_self_negation)
+open Logos.Choice (ChoiceField incompatible_self_negation)
 
 /-- Correctness: a subject's act of *meaning* p is correct iff p is true
     (§8, literal form `Correct(A(s,p)) ↔ True(p)`). The act is constitutive:
@@ -111,17 +111,21 @@ theorem correctness_distinct : ¬ (∀ s : Subject, ∀ p : Prop, Correct s p �
   · exact ((h s p).1 ⟨ha, hT⟩).2 hT
   · exact hT ((h s p).2 ⟨ha, hT⟩).2
 
-/--The judge is a chooser: whoever judges acts and chooses, correctly or incorrectly.
+/--The judge is before a choice field: whoever judges acts, correctly or incorrectly.
 
-  "There is no right and wrong without choice" (IM_STUPID.md §1–§2): the
-     judgment act — a subject asserting a content that is correct-or-incorrect
-     (§8) — IS a choice against the incompatible alternative `¬p`. From
+  "There is no right and wrong without (a field of) choice" (IM_STUPID.md §1–§2):
+     the judgment act — a subject asserting a content that is correct-or-incorrect
+     (§8) — IS set against the incompatible alternative `¬p`. From
      `cogito_from_T12` (a meaning-act with content p; corollary of the
      exhibited `Agency.Cogito`, 2026-09-17) + bivalence (p is right-or-wrong)
-    + `Incompatible p (¬p)` (pure logic). The former "gap" F1a is now a
-    theorem, kernel-checked. -/
+    + `Incompatible p (¬p)` (pure logic).
+
+  Audit notice (freedom/choice fix, 2026-09-18): this delivers `ChoiceField`,
+    not genuine `Chooses`. The judge relates only to the judged content `p`; the
+    rejected horn `¬p` is pure logic. Genuine choice needs the co-meaned horn
+    (`Choice.rejectedHornCoMeant`, BLOCKED). -/
 theorem judge_commits :
-    ∃ s : Subject, ∃ p q : Prop, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ Chooses s p q := by
+    ∃ s : Subject, ∃ p q : Prop, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ ChoiceField s p q := by
   obtain ⟨s, p, ha⟩ := Logos.Plurality.cogito_from_T12
   by_cases hT : T p
   · exact ⟨s, p, ¬ p, ha, Or.inl ⟨ha, hT⟩, ha, incompatible_self_negation p⟩

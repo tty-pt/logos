@@ -128,6 +128,10 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.Choice.ChoiceField": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Choice.Chooses": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -136,7 +140,7 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
- "Logos.Choice.JUDGE_COMMITTED": [
+ "Logos.Choice.JUDGE_HAS_CHOICE_FIELD": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
   "Logos.Value.AxTwoSubjects"
@@ -145,7 +149,7 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
- "Logos.Choice.NoChoice": [
+ "Logos.Choice.NoChoiceField": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
@@ -158,7 +162,7 @@
   "Logos.Agency.Subject",
   "Logos.Value.AxTwoSubjects"
  ],
- "Logos.Choice.asserting_no_choice_is_choice": [
+ "Logos.Choice.asserting_noChoiceField_is_choiceField": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
@@ -169,17 +173,33 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
- "Logos.Choice.choiceExists": [
+ "Logos.Choice.choiceField_exists": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
- "Logos.Choice.choiceExists_from_plurality": [
+ "Logos.Choice.choiceField_exists_from_plurality": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
   "Logos.Value.AxTwoSubjects"
  ],
+ "Logos.Choice.chooses_implies_freeWill": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.freeWillExists_of_chooses": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.freeWillExists_of_genuineChoice": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.genuineChoice_exists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Choice.incompatible_self_negation": [],
- "Logos.Choice.judge_asserting_rightWrong_commits_chooser": [
+ "Logos.Choice.judge_asserting_rightWrong_has_choiceField": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
@@ -191,11 +211,11 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
- "Logos.Choice.noChoice_contradicts_choice": [
+ "Logos.Choice.noChoiceField_contradicts_field": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
- "Logos.Choice.noChoice_selfRefutes": [
+ "Logos.Choice.noChoiceField_selfRefutes": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
@@ -207,7 +227,7 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
- "Logos.Choice.person_chooses": [
+ "Logos.Choice.person_hasChoiceField": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
@@ -371,10 +391,13 @@
   "propext"
  ],
  "Logos.HostileSemantics.CountermodelNoFreeWill.A": [],
+ "Logos.HostileSemantics.CountermodelNoFreeWill.Chooses": [],
  "Logos.HostileSemantics.CountermodelNoFreeWill.FreeWill": [],
  "Logos.HostileSemantics.CountermodelNoFreeWill.S": [],
+ "Logos.HostileSemantics.CountermodelNoFreeWill.act_does_not_imply_choice": [],
  "Logos.HostileSemantics.CountermodelNoFreeWill.act_does_not_imply_freewill": [],
  "Logos.HostileSemantics.CountermodelNoFreeWill.act_occurs": [],
+ "Logos.HostileSemantics.CountermodelNoFreeWill.no_choice": [],
  "Logos.HostileSemantics.CountermodelNoFreeWill.no_free_will": [],
  "Logos.HostileSemantics.CountermodelNoPerson.A": [],
  "Logos.HostileSemantics.CountermodelNoPerson.Person": [],
@@ -382,6 +405,29 @@
  "Logos.HostileSemantics.CountermodelNoPerson.act_does_not_imply_person": [],
  "Logos.HostileSemantics.CountermodelNoPerson.act_occurs": [],
  "Logos.HostileSemantics.CountermodelNoPerson.no_person": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.ExistsAt": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessarySubject": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessitySignature.NecessarySubject": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessitySignature.Person": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessitySignature.Subject": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessitySignature.casesOn": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessitySignature.ctorIdx": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessitySignature.mk.inj": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessitySignature.mk.injEq": [
+  "propext"
+ ],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessitySignature.mk.noConfusion": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessitySignature.mk.sizeOf_spec": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessitySignature.noConfusion": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessitySignature.noConfusionType": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessitySignature.recOn": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.Person": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.Subject": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.World": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.no_necessary_subject": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.not_entails_person_necessary": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.person_exists": [],
+ "Logos.HostileSemantics.CountermodelPersonNotNecessary.person_not_entails_necessary": [],
  "Logos.HostileSemantics.CountermodelPluralityWithoutLove.Loves": [],
  "Logos.HostileSemantics.CountermodelPluralityWithoutLove.Person": [],
  "Logos.HostileSemantics.CountermodelPluralityWithoutLove.Subject": [],
@@ -455,7 +501,7 @@
  "Logos.HostileSemantics.UnitPluralityCountermodel.person_exists": [],
  "Logos.HostileSemantics.act_exists_of_act": [],
  "Logos.HostileSemantics.not_entails_content_person": [],
- "Logos.HostileSemantics.not_entails_freewill": [],
+ "Logos.HostileSemantics.not_entails_decoupled_freewill": [],
  "Logos.HostileSemantics.not_entails_person": [],
  "Logos.HostileSemantics.not_entails_plurality": [],
  "Logos.HostileSemantics.subject_exists_of_act": [],
@@ -515,10 +561,13 @@
  ],
  "Logos.Love.necessaryPersonExists": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject",
-  "Logos.Value.AxTwoSubjects"
+  "Logos.Agency.Subject"
  ],
  "Logos.Love.necessary_entity_exists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Love.no_contingent_person": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],

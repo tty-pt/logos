@@ -11,7 +11,7 @@ namespace Logos.ClaimMeanings
 
 def C59 : String := "Strong truth exists: some formula is true in every world (spike-level, axiom-free)."
 
-def F1b : String := "Freedom of the actor is blocked: act and choice do not entail free will without world-varying alternativity."
+def F1b : String := "Existence of *genuine choice* has not yet been derived from the performative datum: the explicit target is `genuineChoice_exists := ∃ s, ∃ p q, Chooses s p q` (BLOCKED, no axiom/sorry), via `rejectedHornCoMeant` (nothing forces the performative subject to co-mean the rejected horn, A s p with A s (¬p)). The frontier `genuineChoice_exists → freeWillExists` is free (`freeWillExists_of_genuineChoice`, {Means, Subject} vocab-only); what is blocked is the existence of the genuine chooser, not the implication."
 
 def F2 : String := "Deontic teleology is deferred: how norms point at goals is not yet derived."
 
@@ -23,7 +23,7 @@ def F5 : String := "Eternal loveship is proven: two distinct persons stand in an
 
 def F6 : String := "The Trinity is deferred: no argument exists yet."
 
-def F7 : String := "World-level alternativity of freedom is blocked: missing world-varying choice vocabulary ChoiceAt."
+def F7 : String := "The bipolar half of freedom is subsumed by unary `FreeWill`; the open gap is not 'freedom impossible to derive' but *existence of genuine choice* not yet derived from the performative datum (F1b, `genuineChoice_exists`). World-level `ChoiceAt : World → Subject → Prop → Prop` remains a future, priced SEM vocabulary."
 
 def F8 : String := "The Trinity is not attempted."
 
@@ -53,7 +53,7 @@ def C70 : String := "Posited content non-freedom is retired: manufactured witnes
 
 def C71 : String := "Origin freedom denial self-refuting is retired: manufactured witness destroyed."
 
-def C72 : String := "Judge is free is retired: act does not entail free will."
+def C72 : String := "Judge is free is retired: act does not entail free will; `judge_commits` yields only the choice field."
 
 def C73 : String := "Plurality without bridges is blocked: unit countermodel settles that 1 act does not entail plurality; requires AxTwoSubjects."
 

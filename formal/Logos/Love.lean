@@ -97,14 +97,33 @@ theorem AxPersonStability : ∀ s : Subject, Person s → NecessarySubject s := 
   intro s _hs _w
   trivial
 
+/--No person is contingent: nobody who is a person fails to persist in every world.
+
+  Step-6 verdict, concrete form: `¬ NecessarySubject s` is refuted for every
+    subject, so the countermodel `Person s ∧ ¬ NecessarySubject s` cannot
+    exist. The necessity of persons is *definitional* (`ExistsAt` for
+    subject-correlates is agency itself, esse est agere) — it is not a
+    stronger metaphysical bridge, and no concrete model can attack it.
+    Abstractly the implication is still not a logical law
+    (`HostileSemantics.not_entails_person_necessary`). Footprint:
+    `{Means, Subject}` (VOCAB only — `Person` unfolds through `Means`). -/
+theorem no_contingent_person : ¬ (∃ s : Subject, Person s ∧ ¬ NecessarySubject s) := by
+  rintro ⟨s, hs, hnc⟩
+  exact hnc (AxPersonStability s hs)
+
 /--There exists a necessary person: someone who is a person and persists in every world.
 
-  The kernel-verified step: from the demonstrated person (`T5_personExists`) and
-  the persistence theorem (`AxPersonStability`, esse est agere), there exists
-  an entity that is both a Person and a NecessarySubject.
-  Axiom footprint: `{}` (pure logic, no axioms). -/
-theorem necessaryPersonExists : ∃ s : Subject, Person s ∧ NecessarySubject s := by
-  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists_from_plurality
+  C77 (re-anchored, 2026-09-18): from the performative act-datum
+     (`h : ∃ s p, Act s p`, C68) a person exists (`T5_personExists`, C24) and
+     it is necessary by definition (`AxPersonStability`, esse est agere). The
+     old closed form ran through plurality (`T5_personExists_from_plurality`,
+     footprint `{AxTwoSubjects, Means, Subject}`); the hypothesis-carrying
+     form drops `AxTwoSubjects`. The necessity here is *definitional*
+     (`ExistsAt (Subject) := ExistsAt (Entity.ofSubject _) := True`), not a
+     bridge. Footprint: `{Means, Subject}` (VOCAB only). -/
+theorem necessaryPersonExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
+    ∃ s : Subject, Person s ∧ NecessarySubject s := by
+  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists h
   exact ⟨s, hs, AxPersonStability s hs⟩
 
 /--There exists a necessary entity: the entity-correlate of the performing person exists in every world.
@@ -175,6 +194,7 @@ end Logos.Love
 #print axioms Logos.Love.love_affects
 #print axioms Logos.Love.loves_of_helps
 #print axioms Logos.Love.necessaryPersonExists
+#print axioms Logos.Love.no_contingent_person
 #print axioms Logos.Love.T13_someoneLovable
 #print axioms Logos.Love.T14_eternalRelation
 #print axioms Logos.Love.T14_world

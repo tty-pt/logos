@@ -1,23 +1,26 @@
 T11 — CAMPO DA ESCOLHA RACIONAL (revive §13–§15 com a definição de liberdade)
 
-Depende de: T5, T9; definições §14–§15 (desacoplado de `AxTwoSubjects` na existência da escolha e retorsão)
+Depende de: T5, T9; definições §14–§15 (desacoplado de `AxTwoSubjects` na existência do campo e retorsão)
 
-Verificado em: formal/Logos/Choice.lean (T11_choiceField, person_chooses,
-choiceExists, noChoice_selfRefutes, JUDGE_COMMITTED,
-rightWrong_implies_someone_means, meaning_I_needs_subject),
-formal/Logos/Order.lean (judge_commits, rightWrong_implies_meaning,
-rightDistinctWrong_implies_meaning, rightWrongDistinction_implies_meaning),
-GAPMAP.md C39–C72.
+Verificado em: formal/Logos/Choice.lean (T11_choiceField, person_hasChoiceField,
+choiceField_exists, noChoiceField_selfRefutes, JUDGE_HAS_CHOICE_FIELD,
+chooses_implies_freeWill, rightWrong_implies_someone_means,
+meaning_I_needs_subject), formal/Logos/Order.lean (judge_commits,
+rightWrong_implies_meaning, rightDistinctWrong_implies_meaning,
+rightWrongDistinction_implies_meaning), formal/Logos/HostileSemantics.lean
+(CountermodelNoFreeWill, not_entails_decoupled_freewill), GAPMAP.md C39–C72/F1a/F1b.
 Impressão de axiomas:
 T11_choiceField — `{Means, Subject}` (herda de T5; C39 desacoplado de AxTwoSubjects);
-person_chooses — `{Means, Subject}` (PROVEN, constitutivo sob §14);
+person_hasChoiceField — `{Means, Subject}` (PROVEN, campo de escolha, NÃO escolha genuína;
+  renomeado de person_chooses, 2026-09-18);
 rightWrong_implies_meaning / rightDistinctWrong_implies_meaning — `{Means, Subject}`
 (PROVEN, C62, só vocabulário);
 meaning_I_needs_subject — `{Means, Subject}` (PROVEN, C49);
-choiceExists — `{Means, Subject}` (PROVEN, C52, derivado de C68);
-noChoice_selfRefutes — `{Means, Subject}` (PROVEN, C53, retorsão performativa genuína);
-JUDGE_COMMITTED — `{AxTwoSubjects, Means, Subject}` (PROVEN↑, C54, operando via AxTwoSubjects h);
+choiceField_exists — `{Means, Subject}` (PROVEN, C52, derivado de C68);
+noChoiceField_selfRefutes — `{Means, Subject}` (PROVEN, C53, retorsão performativa do campo);
+JUDGE_HAS_CHOICE_FIELD — `{AxTwoSubjects, Means, Subject}` (PROVEN↑, C54, via AxTwoSubjects h);
 judge_commits / rightWrongDistinction_implies_meaning — `CL + {AxTwoSubjects, Means, Subject}`;
+chooses_implies_freeWill — `{Means, Subject}` (só vocabulário), por definição;
 incompatible_self_negation — nenhuma ({}); sorryAx: 0.
 
 Definições §8 (2026-09-16, versão literal Correct(A(s,p))):
@@ -32,19 +35,32 @@ escolha racional (§13–§14) está não-vazio para essa pessoa:
 
 ∃s Person(s) ∧ ∃p∃q Incompatible(p,q).
 
-Definições formalizadas (batch choice-realism, 2026-09-16):
+Definições formalizadas (reparadas 2026-09-18 — freedom/choice fix):
 
-Chooses(s,p,q)   := A(s,p) ∧ Incompatible(p,q)  — o sujeito s adota p contra o
-                    conteúdo incompatível q (§14); ESTA É AGORA UMA DEFINIÇÃO
-                    REAL (antes era o placeholder vazio ":= False", que tornava
-                    a escolha irrepresentável — os "gaps" abaixo eram falsos).
+ChoiceField(s,p,q) := A(s,p) ∧ Incompatible(p,q)  — o CAMPO de escolha: o
+                    agente é posto contra um par incompatível, mas relaciona-se
+                    só com p (o corno ¬p vem da lógica pura). É a antiga relação
+                    `Chooses`; NÃO é escolha.
+Chooses(s,p,q)   := A(s,p) ∧ A(s,q) ∧ Incompatible(p,q)  — ESCOLHA GENUÍNA: o
+                    agente co-significa os dois cornos incompatíveis (§14).
+                    Antes (2026-09-16) o corpo era só `A(s,p) ∧ Incompatible(p,q)`,
+                    que colapsava em A(s,p) — ocorrência determinada, não escolha.
 CanChoose(s,p)   := Dia(∃q Chooses(s,p,q))
-FreeWill(s,p)    := CanChoose(s,p) ∧ CanChoose(s,¬p)        [§15, definição]
+FreeWill(s)      := ∃p∃q Chooses(s,p,q)          [§15, DEFINIÇÃO: escolha → liberdade]
+chooses_implies_freeWill : Chooses(s,p,q) ⇒ FreeWill(s)   [{Means, Subject} só vocab — por definição]
+
+O passo EM FALTA (F1b, BLOCKED) é a existência da escolha genuína:
+
+    rejectedHornCoMeant : (∃s p, A(s,p)) → ∃s p, A(s,p) ∧ A(s,¬p)
+
+Nada força um ato de significar p a vir com a significação de ¬p: `Means` é
+opaco e AxTwoSubjects dá dois sujeitos diferentes, cada um com um só conteúdo.
+`Chooses → FreeWill` é definicional; o que falta é o escolhedor.
 
 Teoremas kernel-verificados (a cadeia §2 de IM_STUPID.md fecha para a
-existência da escolha):
+existência do CAMPO de escolha; a escolha genuína é F1b, bloqueada):
 
-- person_chooses: Person(s) ⇒ ∃p∃q Chooses(s,p,q) —  sujeito ⇒ escolha.
+- person_hasChoiceField: Person(s) ⇒ ∃p∃q ChoiceField(s,p,q) — sujeito ⇒ campo.
 - rightWrong_implies_meaning / rightDistinctWrong_implies_meaning (§8/poem P3):
   (∃s∃p Correct(s,p)) ∨/∧ (∃s∃p Incorrect(s,p)) ⇒ ∃p Meaning_I(p) — "direito e
   errado precisam de significado": Correct/Incorrect são atos de significar
@@ -56,22 +72,27 @@ existência da escolha):
   — "há certo e errado ⇒ há alguém para quem algo significar" (C61,
   `{}`); a metade "significado ⇒ sujeito" é analítica
   meaning_needs_subject / meaning_I_needs_subject (C49, `{}`).
-- choiceExists: ∃s∃p∃q Chooses(s,p,q) —  a escolha é real (via T5).
-- noChoice_selfRefutes: ¬(∃s∃p∃q Chooses(s,p,q)) ⇒ False —  negar a escolha
-  é uma escolha (transcendental).
-- JUDGE_COMMITTED e judge_commits: sem certo e errado não há escolha —
-  o juiz (§8) é um escolhedor.
+- choiceField_exists: ∃s∃p∃q ChoiceField(s,p,q) — o campo é real (via T5).
+- noChoiceField_selfRefutes: ¬(∃s∃p∃q ChoiceField(s,p,q)) ⇒ False — negar o
+  campo é um ato de campo (transcendental).
+- JUDGE_HAS_CHOICE_FIELD e judge_commits: sem certo e errado não há campo de
+  escolha — o juiz (§8) tem um campo (a escolha genuína é bloqueada).
 
-FREEDOM — F1 (Semântica Hostil e Alternatividade):
-CLASSIFICAÇÃO ONTOLÓGICA DA PASSAGEM Person → FreeWill:
-É estritamente do Caso D (Não se segue / Bloqueado por contramodelo hostil).
-- O contramodelo `CountermodelNoFreeWill` e o teorema de separação `not_entails_freewill`
-  (em `formal/Logos/HostileSemantics.lean`) provam formalmente que a existência
-  de um ato racional, da pessoa e da escolha entre incompatíveis não implicam logicamente
-  livre-arbítrio (`FreeWillExistence`).
-- A escolha real (`Chooses`, `person_chooses`, `choiceExists`) é demonstrada
-  a partir da determinação analítica em face de incompatíveis, e o juiz
-  que o certo-e-errado compromete (`JUDGE_COMMITTED`) é um escolhedor real.
-- Todavia, a capacidade bilateral modal plena de alternatividade através de mundos possíveis
-  (F1b) permanece DEFERRED/BLOCKED como salto além da pura determinação lógica.
-  Não se tenta forçar uma dedução onde ela não é válida. Ver formal/GAPMAP.md F1b.
+FREEDOM — F1 (reparado 2026-09-18; semântica hostil e alternatividade):
+CLASSIFICAÇÃO ONTOLÓGICA DAS PASSAGENS:
+- Person → ChoiceField: DEFINICIONAL/analítica (person_hasChoiceField, {Means, Subject}).
+- ChoiceField ↛ Chooses: BLOQUEADO (F1b) no lema exacto `rejectedHornCoMeant`
+  — a Agência hostil mostra que um ato (e mesmo a pessoa) não força a
+  co-significação do corno rejeitado.
+- Chooses → FreeWill: DEFINICIONAL (chooses_implies_freeWill, `{Means, Subject}`
+  só vocabulário). A liberdade
+  não é um passo metafísico a partir do ato bruto; é a própria existência de
+  uma escolha genuína. O antigo contramodelo `CountermodelNoFreeWill` /
+  `not_entails_decoupled_freewill` (em `formal/Logos/HostileSemantics.lean`,
+  com `Chooses := False`) mostra `Act ↛ Chooses` e `Act ↛ FreeWill` — NÃO é
+  contramodelo da definição `Chooses → FreeWill`.
+- O campo (`ChoiceField`, person_hasChoiceField, choiceField_exists) e o juiz
+  que o certo-e-errado compromete (`JUDGE_HAS_CHOICE_FIELD`) são teoremas; o
+  que fica BLOCKED é a *existência* de um escolhedor genuíno.
+- O nível-mundos (F7, `ChoiceAt : World → Subject → Prop → Prop`) permanece a
+  ponte SEM futura, secundária. Ver formal/GAPMAP.md F1a/F1b.

@@ -30,6 +30,54 @@ The roadmap step #4/#5 (subject necessity → entity necessity) is executed:
   `NecessaryEntity e → ∃τ, Ground e τ` (step #7, without AxGlobalGround) and
   `Ground(e, personal) → Personal(e)` (step #9, without AxPersonalGround).
 
+## Batch freedom/choice fix (2026-09-18) — `Chooses` is genuine choice, `FreeWill` is definitional
+
+Driven by the user: the hostile countermodel only showed `Act(s,p) ↛ FreeWill(s)`,
+which is not the needed claim; `Chooses` was a *determined occurrence*, not a
+choice; freedom must not be derived from `Act`; and no new metaphysical axiom
+may be added.
+
+- **Root finding**: with the old `Chooses s p q := A s p ∧ Incompatible p q` and
+  `Incompatible p (¬p)` pure logic, `∃ q, Chooses s p q` collapses to `A s p`
+  (`= SubjectExists s`). The agent was never related to the rejected horn.
+- **Repair (definitions)**: vocabulary split into
+  `ChoiceField s p q := A s p ∧ Incompatible p q` (representability; the OLD
+  relation, no longer called choice), `Chooses s p q := A s p ∧ A s q ∧
+  Incompatible p q` (genuine choice: the agent co-means both horns), and
+  `FreeWill s := ∃ p q, Chooses s p q` (unary; freedom is DEFINITIONAL).
+  `chooses_implies_freeWill` has footprint **`{Means, Subject}`** (VOCAB only:
+  the statement's own vocabulary; the logical content is free); the old bipolar
+  `FreeWill s p := CanChoose s p ∧ CanChoose s (¬p)` is subsumed.
+- **Renamed (field form preserved)**: `person_chooses` → `person_hasChoiceField`,
+  `choiceExists` → `choiceField_exists` (+`_from_plurality`),
+  `noChoice_selfRefutes` → `noChoiceField_selfRefutes`,
+  `JUDGE_COMMITTED` → `JUDGE_HAS_CHOICE_FIELD`, `NoChoice` → `NoChoiceField`;
+  `Order.judge_commits` now concludes `ChoiceField`. Footprints unchanged
+  (`{Means, Subject}`, `{AxTwoSubjects, Means, Subject}`, `CL` where applicable);
+  only the conclusion is weakened from the (never valid) genuine choice to the
+  honest field.
+- **Hostile model**: `CountermodelNoFreeWill` now has `Chooses := fun _ _ _ => False`
+  and `FreeWill := fun s => ∃ p q, Chooses s p q`; it proves `Act ↛ Chooses` and
+  `Act ↛ FreeWill` (`{}`). It is **no longer** presented as a countermodel to
+  `Chooses ↛ FreeWill`, which is definitional. `not_entails_freewill` →
+  `not_entails_decoupled_freewill` (the decoupled predicate, not Logos's
+  definitional `FreeWill`).
+- **Exact missing lemma (F1b, BLOCKED)**:
+
+      rejectedHornCoMeant :
+        (∃ s : Subject, ∃ p : Prop, A s p) →
+        ∃ s : Subject, ∃ p : Prop, A s p ∧ A s (¬ p)
+
+  Rule form: `means_faces_negation {s p} : A s p → A s (¬ p)`. Why: `Means` is
+  opaque (`Agency.lean`) and `AxTwoSubjects` yields two *different* subjects,
+  each with a single content. The world-level `ChoiceAt : World → Subject →
+  Prop → Prop` remains the (future, priced) SEM bridge, F7.
+- **Footprint report**: no footprint grows, no axiom added. `chooses_implies_freeWill`
+  `{Means, Subject}` (VOCAB only); field theorems same as before (`person_hasChoiceField`/`choiceField_exists`
+  `{Means, Subject}`; `JUDGE_HAS_CHOICE_FIELD` `{AxTwoSubjects, Means, Subject}`;
+  `judge_commits` `{AxTwoSubjects, Means, Subject, CL}`); hostile separations `{}`;
+  unconditional `freeWillExists` BLOCKED (no footprint).
+
 ## Batch A2-swap-theorem (2026-09-17) — `AxGlobalGround` becomes a theorem (atom-restricted)
 
 The quantifier swap `∀w∃e … ⇒ ∃e∀w …` (D7, SEM) is answered by the
@@ -172,14 +220,16 @@ C19 is derived under `AxGlobalGround` (`PROVEN↑`).
 | C34 | T8 | `GroundPerson.necessary_truth_has_necessary_grounder` | PROVEN↑ | `{AxGlobalGround, Ground, Subject}` (via C18) |
 | C90 | T8 | `GroundPerson.personal_ultimate_ground_exists` | BLOCKED | (retired: manufactured ultimate ground destroyed under hostile semantics) |
 
-### Auditoria Ontológica da Cadeia de Agência (`Asserts → Act → Subject → Person → FreeWill`)
+### Auditoria Ontológica da Cadeia de Agência (`Asserts → Act → Subject → Person → ChoiceField → Chooses → FreeWill`)
 
 | Passo / Implicação | Formalização Lean | Classificação | Estatuto Epistemológico e Semântica Hostil |
 | :--- | :--- | :--- | :--- |
 | **Asserts → Act** | `Agency.assertion_is_act` | **Caso A (Definicional)** | Projeção lógica conjuntiva imediata a partir de `Asserts s p := Act s p ∧ p`. Segue puramente da definição do conceito. |
 | **Act → Subject** | `Agency.act_requires_subject`<br>`Agency.subject_exists_of_act` | **Caso B (Lei Constitutiva)** | Na lógica desprovida de ontologia, o ato bruto não acarreta sujeito (`CountermodelActWithoutSubject` permanece). Em Logos, rege como princípio constitutivo explícito da ontologia de agência: o ato intencional é constitutivamente a efetivação de um sujeito originador (`SubjectExists s := ∃ p, Act s p`). O contramodelo falha unicamente a condição constitutiva `ConstitutiveAct`. Não é postulado como axioma existencial sintético independente. |
 | **Subject → Person** | `Person.person_of_subject` | **Caso A (Definicional sob §12)** | No sistema Logos, `person_of_subject` é estritamente DEFINICIONAL sob a redução estrutural de §12 (`Person s := Agent s ∧ Rational s ∧ Intentional s` com `Agent := True` e `Rational := True`), colapsando pessoa à agência intencional (`∃ p, Means s p = SubjectExists s`). Não constitui descoberta metafísica independente. Sob semântica hostil com predicado substantivo não-interpretado, é separada pelo contramodelo `CountermodelSubjectWithoutPerson`. |
-| **Person → FreeWill** | `Choice.FreeWill` (`F1b`) | **Caso D (Bloqueado)** | Não se segue logicamente. A alternatividade modal bilateral através de mundos possíveis é bloqueada sob semântica hostil (`CountermodelNoFreeWill` / `not_entails_freewill`). F1b permanece BLOQUEADO. |
+| **Person → ChoiceField** | `Choice.person_hasChoiceField` | **Caso A/C (Campo, não escolha)** | O campo de escolha — o agente é posto contra um par incompatível — é DEFINICIONAL a partir do ato intencional (`Person s → ∃p q, ChoiceField s p q`), footprint `{Means, Subject}`. Aviso de auditoria (freedom/choice fix, 2026-09-18): o agente relaciona-se apenas com o conteúdo adotado `p`; o outro corno `¬p` é fornecido pela lógica pura (`incompatible_self_negation`), NÃO pelo agente. Isto **não** é escolha. |
+| **ChoiceField ↛ Chooses** | `Choice.Chooses` / `rejectedHornCoMeant` (`F1b`) | **Caso D (Bloqueado)** | Não se segue logicamente. A escolha genuína exige que o sujeito co-signifique os DOIS cornos incompatíveis (`A s p ∧ A s (¬p)`); `Means` é uma relação opaca e `AxTwoSubjects` dá dois sujeitos DIFERENTES, cada um com um só conteúdo. Falta exatamente `rejectedHornCoMeant : (∃s p, A s p) → ∃s p, A s p ∧ A s (¬p)`. `CountermodelNoFreeWill` mostra `Act ↛ Chooses` e `Act ↛ FreeWill` (`{}`); NÃO é contramodelo da definição `Chooses → FreeWill` (que é livre). F1b permanece BLOQUEADO. |
+| **Chooses → FreeWill** | `Choice.chooses_implies_freeWill` | **Caso A (Definicional)** | `FreeWill s := ∃p q, Chooses s p q` — por DEFINIÇÃO. A liberdade não é um passo metafísico adicional a partir do ato bruto; é a própria existência de uma escolha genuína entre alternativas incompatíveis. Footprint **`{Means, Subject}`** (VOCAB apenas — o conteúdo lógico é gratuito). A existência incondicional (`freeWillExists`) é que fica bloqueada, por depender de `rejectedHornCoMeant`. |
 
 Declared (Level 2): `Subject` is an uninterpreted pure sort (`axiom Subject : Type`,
 Tag: VOCAB); `Means` is an uninterpreted intentional relation (`axiom Means : Subject → Prop → Prop`,
@@ -194,8 +244,8 @@ through the strict 4-step chain (assertion is act → act exists → subject exi
 
 | ID | Prose | Status | Missing |
 |----|-------|--------|---------|
-| F1a | §13–§15 choice-existence (`∃s p q`, `Chooses s p q`) | PROVEN | `person_chooses`/`choiceExists` `{}` + `judge_commits` `CL` (choice-realism batch, C51–C52/C55) |
-| F1b | §15 freedom of the actor | BLOCKED | (hostile semantics: `CountermodelNoFreeWill` proves freedom does not follow from act datum; alternativity blocked) |
+| F1a | §13–§15 choice-field existence (`∃s p q`, `ChoiceField s p q`) | PROVEN | `person_hasChoiceField`/`choiceField_exists` `{Means, Subject}` + `judge_commits` `CL` (choice-realism batch, C51–C52/C55; renamed 2026-09-18 — field form, not genuine choice) |
+| F1b | §15 genuine choice & freedom of the actor | BLOCKED | alvo explícito `Choice.genuineChoice_exists := ∃ s, ∃ p q, Chooses s p q` (def-proposição; **não** axioma/`sorry`); via exata `rejectedHornCoMeant : (∃s p, A s p) → ∃s p, A s p ∧ A s (¬p)` — nada força um ato de significação a vir com a significação da sua negação; a fronteira formal é `genuineChoice_exists → freeWillExists` (`freeWillExists_of_genuineChoice`, `{Means, Subject}` — `Chooses → FreeWill` é definicional e ninguém usa `freeWillExists` como premissa). `CountermodelNoFreeWill` mostra só `Act ↛ Chooses`/`Act ↛ FreeWill`. |
 | F2 | §21 teleology (`Ought → Goal`) | DEFERRED | deontic layer (normativity → telos) |
 | F3 | §28 Good (`§20 → bem`) | DEFERRED | moral good from logical normativity not yet derived |
 | F4 | §28 Love | PROVEN↑ | `Love.T13_someoneLovable` (C41) under `{AxTwoSubjects, Means, Subject}` |
@@ -211,17 +261,17 @@ through the strict 4-step chain (assertion is act → act exists → subject exi
 | C36 | P2 | `Core.rightWrongDistinction : ¬ N_T ∧ ¬ N_F` | PROVEN | `{}` (E0) |
 | C37 | P2 | `Semantics.bothNecessarilyTrueAndFalse` | PROVEN | `CL` |
 | C38 | P2 | `Necessity.necDistinction : Necessity (¬ N_T ∧ ¬ N_F)` | PROVEN (was AXIOM) | `{}` (E0; C1: identity-model alias; world content = C37) |
-| C39 | P4 | `Choice.T11_choiceField` | PROVEN | `{Means, Subject}` (campo de escolha derivado do ato intencional C68 → C24 → C39) |
+| C39 | P4 | `Choice.T11_choiceField` | PROVEN | `{Means, Subject}` (campo de escolha — não escolha genuína — derivado do ato intencional C68 → C24 → C39; renomeação/split 2026-09-18) |
 | C40 | P5/P7 | `Plurality.T12_twoPersons` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (settled by Unit countermodel that 1 act does not entail plurality; requires META bridge `AxTwoSubjects`) |
 | C41 | P7 | `Love.T13_someoneLovable` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (via C40) |
 | C48 | P1/§1 | `Plurality.cogito_from_T12` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` |
 | C49 | §13/IM_STUPID | `Choice.meaning_needs_subject` + `Choice.meaning_I_needs_subject` (definitional form: `Meaning_I p → ∃s, Means s p`) | PROVEN | `{Means, Subject}` |
 | C50 | §14 | `Choice.incompatible_self_negation` | PROVEN | **`{}`** (pure logic — the field around any meaning-act) |
-| C51 | §14/IM_STUPID | `Choice.person_chooses : Person s → ∃p q, Chooses s p q` — **subject ⇒ choice** (was mislabeled "OPEN" gap) | PROVEN | `{Means, Subject}` |
-| C52 | §14 | `Choice.choiceExists` | PROVEN | `{Means, Subject}` (a escolha é real, derivada do ato intencional C68 → C52) |
-| C53 | §14 | `Choice.noChoice_selfRefutes : Asserts speaker NoChoice → False` | PROVEN | `{Means, Subject}` (retorsão performativa genuína: a negação da escolha escolhe NoChoice contra ¬NoChoice) |
-| C54 | IM_STUPID §2 | `Choice.JUDGE_COMMITTED : (¬N_T ∧ ¬N_F) → ∃s p q, Chooses s p q` — **right/wrong ⇒ choice** | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (derivação operativa via AxTwoSubjects h e person_chooses) |
-| C55 | §8/§14 | `Order.judge_commits : ∃s p q, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ Chooses s p q` — the judge IS a chooser | PROVEN↑ | `{AxTwoSubjects, Means, Subject, CL}` (defs act-relative §8) |
+| C51 | §14/IM_STUPID | `Choice.person_hasChoiceField : Person s → ∃p q, ChoiceField s p q` — **subject ⇒ campo de escolha** (renomeado 2026-09-18; NÃO é escolha genuína) | PROVEN | `{Means, Subject}` |
+| C52 | §14 | `Choice.choiceField_exists` | PROVEN | `{Means, Subject}` (o campo é real, derivado do ato intencional C68 → C52; renomeado 2026-09-18) |
+| C53 | §14 | `Choice.noChoiceField_selfRefutes : Asserts speaker NoChoiceField → False` | PROVEN | `{Means, Subject}` (retorsão performativa do campo: negar o campo é ele próprio um ato de campo contra a sua negação) |
+| C54 | IM_STUPID §2 | `Choice.JUDGE_HAS_CHOICE_FIELD : (¬N_T ∧ ¬N_F) → ∃s p q, ChoiceField s p q` — **right/wrong ⇒ campo de escolha** | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (derivação operativa via AxTwoSubjects h e person_hasChoiceField; renomeado 2026-09-18) |
+| C55 | §8/§14 | `Order.judge_commits : ∃s p q, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ ChoiceField s p q` — the judge HAS a choice-field (não escolha genuína) | PROVEN↑ | `{AxTwoSubjects, Means, Subject, CL}` (defs act-relative §8) |
 | C56 | P6 | `Value.alone_no_other_help_harm` | PROVEN | `{Subject}` |
 | C57 | §26 | `Choice.noSubject_selfRefutes : Asserts speaker NoSubject → False` | PROVEN | `{Means, Subject}` (retorsão performativa genuína: negar o sujeito é um ato que testemunha o sujeito) |
 | C42 | P8 | `Love.T14_eternalRelation` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (built on directed pair C47 under AxTwoSubjects) |
@@ -230,17 +280,17 @@ through the strict 4-step chain (assertion is act → act exists → subject exi
 | C45 | P8 | `Love.T14_square` (alias `Necessity`) | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (image of the old statement shape) |
 | C46 | P5 | `Value.valueInterpersonal_of_split` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (recovery theorem under AxTwoSubjects) |
 | C47 | P5/P7 | `Plurality.T12_directedPair` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (chain node — distinctness is forward direction; T14 built on this node) |
-| C61 | P3 | `Choice.rightWrong_implies_someone_means` — "há certo e há errado → há alguém para quem algo significar" | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (`JUDGE_COMMITTED` C54 ∘ `rightWrongDistinction` C36) |
+| C61 | P3 | `Choice.rightWrong_implies_someone_means` — "há certo e há errado → há alguém para quem algo significar" | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (`JUDGE_HAS_CHOICE_FIELD` C54 ∘ `rightWrongDistinction` C36) |
 | C62 | P3 | `Order.rightWrong_implies_meaning` (+ `Order.rightDistinctWrong_implies_meaning`) | PROVEN | `{Means, Subject}` |
-| C69 | §15/F1b | `Choice.freeWillOrigin` | BLOCKED | (retired: manufactured freedom via `Sum.inl` destroyed under hostile semantics) |
-| C70 | §15/F1b | `Choice.noFreeWillPosited` | BLOCKED | (retired: manufactured free will destroyed under hostile semantics) |
-| C71 | §15/F1b | `Choice.originFreedomSelfRefutes` | BLOCKED | (retired: manufactured freedom destroyed under hostile semantics) |
-| C72 | §15/F1b | `Choice.judgeIsFree` | BLOCKED | (retired: manufactured freedom destroyed under hostile semantics) |
+| C69 | §15/F1b | origin freedom (retired) | BLOCKED | (retired: manufactured freedom via `Sum.inl` destroyed under hostile semantics; genuine-choice replacement is `Choice.Chooses`/`rejectedHornCoMeant`) |
+| C70 | §15/F1b | posited content non-freedom (retired) | BLOCKED | (retired: manufactured free will destroyed under hostile semantics) |
+| C71 | §15/F1b | origin-freedom denial self-refutation (retired) | BLOCKED | (retired: manufactured freedom destroyed under hostile semantics) |
+| C72 | §15/F1b | judge is free (retired) | BLOCKED | (retired: act does not entail free will; `Order.judge_commits` yields only the choice field; `Chooses → FreeWill` is definitional but its existence needs `rejectedHornCoMeant`) |
 | C73 | P5/P7 | `Person.twoPersonsFromSubject` | BLOCKED | (demoted: Unit countermodel settles that 1 act does not entail plurality; manufactured `Sum.inl`/`inr` witness destroyed) |
 | C74 | P5 | `Value.aloneExcluded : ¬ ∃ s, Person s ∧ Alone s` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (under the plurality bridge `AxTwoSubjects`, a lone person is excluded) |
 | C75 | P7 | `Person.everyContentIsAPerson` | BLOCKED | (killed under hostile semantics: content existence does not imply personhood; tripartite report) |
 | C76 | P8 | `Love.T14_canonicalRigid` | BLOCKED | (excised: manufactured witness destroyed) |
-| C77 | P5/P8 | `Love.necessaryPersonExists` — **the necessary person exists**: from demonstrated person (`T5_personExists`) and persistence (`AxPersonStability`) | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` |
+| C77 | P5/P8 | `Love.necessaryPersonExists (h : ∃ s p, Act s p) : ∃ s, Person s ∧ NecessarySubject s` — **the necessary person exists**: from the performative act-datum (C68), a person (`T5_personExists`, C24) that is necessary by definition (`AxPersonStability`, esse est agere) | PROVEN | `{Means, Subject}` (VOCAB; **re-anchored 2026-09-18** ao dado performativo, sem `AxTwoSubjects` — a necessidade da pessoa é *definicional*, `ExistsAt (Subject) := True`; complementar ao concreto `Love.no_contingent_person`) |
 | C85 | P6 | `Value.help_not_harm` — **princípio de benevolência**: no plano fundante, ajudar exclui prejudicar (`Helps s t → ¬ Harms s t`) | PROVEN | `{Subject}` |
 | C86 | P6/P8 | `Love.love_helps` (+ `Love.love_not_harms`, `Love.loves_of_helps`) — **amor como benevolência direcionada**: amar é ajudar e não prejudicar (`Loves s t := Helps s t ∧ ¬ Harms s t`) | PROVEN | `{Subject}` |
 | C92 | P8/§27 | `Love.necessary_entity_exists : ∃ e, NecessaryEntity e` — **existe uma entidade necessária** (rota performativa C24 + `AxPersonStability` + lift C91; o correlato da pessoa, ≠ T7) | PROVEN | `{Means, Subject}` (sem `AxTwoSubjects`; distinto de T7/C18) |
@@ -281,7 +331,7 @@ are theorem; `necDistinction` is a theorem. No modal axiom remains.
 |----|------|--------|------|
 | FAITH-1 | P2 necessity | → PROVEN | dissolved in C1: `necDistinction` is now a theorem (C38); world content = C37 |
 | FAITH-2 | P8 eternal love | → PROVEN↑ | rests on `AxTwoSubjects` (META bridge restored after Unit countermodel) + `AxPersonStability` (theorem); T14 is proven under `{AxTwoSubjects}` (C42–C45) |
-| F7 | §15 the bipolar half of freedom | BLOCKED | (hostile semantics: freedom not entailed by bare act datum; world-level alternativity blocked on missing vocabulary `ChoiceAt`) |
+| F7 | §15 the bipolar half of freedom | BLOCKED | (the bipolar half is subsumed by unary `FreeWill`; the remaining gap is NOT "freedom impossible to derive" — it is **existence of *genuine choice* not yet derived from the performative datum**: `genuineChoice_exists` BLOCKED on `rejectedHornCoMeant`; `Chooses → FreeWill` is definitional, `freeWillExists_of_genuineChoice` `{Means, Subject}`; world-level `ChoiceAt` remains a future SEM vocabulary) |
 | F8 | Trinity | DEFERRED | not attempted (§28/§29) |
 | F9 | Incarnation / creation | DEFERRED | poem P10, faith datum |
 
@@ -456,10 +506,10 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
 - **PROVEN** (no axioms beyond `CL` where marked) — **45 axiom-free** (`{}`):
   C1, C2, C4–C9, C11, C21–C24, C26–C29, C31, C35, C36, C38, C39,
   C48–C54, C56–C58, C61–C68 (C62: pure bridges `{}`; full conditional `CL`),
-  C69, C71, C72 (freedom split — the origin's both-ways capacity), C73–C79
+  C73–C79
   (definitional plurality, plenum seed, canonical rigid love, necessary person, contingent ground, substantive ultimate ground), F1a
-  (choice-existence resolves to a kernel step).
-  `CL`-only: C3, C10, C12–C14, C25, C30, C37, C55, C70 (+ C59 spike, outside barrel).
+  (choice-**field** existence resolves to a kernel step; renamed 2026-09-18, the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
+  `CL`-only: C3, C10, C12–C14, C25, C30, C37, C55 (+ C59 spike, outside barrel).
   Vocab-only (`{Ground}` — the statement's own vocabulary): C15, C16, C17,
   C18, C20, C34, C60 (denial refutes itself by definition — RAA;
   esse-est-agere drops `ExistsAt`, now a def; A2-swap-theorem drops
@@ -482,7 +532,10 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   `AxGlobalGround` (atom-restricted) are theorems.)
 - **BLOCKED**: C19 (T7 excluded-middle instance — missing lemma `∃ e,
   Ground e (or θ (not θ))`; transcript in `formal/Spikes/Spike_A6_probe.lean`);
-  F1b-strong (world-level alternativity — **vocabulary gap**, not a proof gap:
+  C69–C72 (retired origin-freedom witnesses) and F1b (genuine choice —
+  missing `rejectedHornCoMeant : (∃s p, A s p) → ∃s p, A s p ∧ A s (¬p)`;
+  freedom itself is definitional, `Chooses → FreeWill` `{Means, Subject}` (vocab-only));
+  F7 (world-level alternativity — **vocabulary gap**, not a proof gap:
   no world-varying choice predicate exists; missing
   `ChoiceAt : World → Subject → Prop → Prop`, a new SEM/META bridge,
   deliberately deferred).
@@ -530,7 +583,11 @@ and "fix the argument, some gaps are obviously not so". Fine-text in
   (Superseded 2026-09-17 by the definitional-subject batch:
   `Subject := Unit ⊕ Prop` — the neutral witness `Sum.inl ()` smuggles
   nothing beyond the datum itself.)
-- **Choice-realism** (`Choice.lean`, `Order.lean`): the old `def Chooses :=
+- **(Superseded 2026-09-18 by the freedom/choice fix — see the batch at the top:
+  the old body `A s p ∧ Incompatible p q` was a determined occurrence, not a
+  choice; it is now `ChoiceField`, and genuine `Chooses` additionally requires
+  `A s q`. Names below are the at-batch names.)**
+  **Choice-realism** (`Choice.lean`, `Order.lean`): the old `def Chooses :=
   False` placeholder made choice unrepresentable — the mislabeled "subject ⇒
   choice" gap. New real definition `Chooses s p q := A s p ∧ Incompatible
   p q`, plus theorems: `incompatible_self_negation` (pure logic `{}` —
@@ -691,6 +748,12 @@ as it stood.)
   `Agency.Cogito`, `{}`, by definitional exhibition of the underlier.)
 
 ## Batch freedom-split (2026-09-17) — the "could not have chosen otherwise" paradox dissolved
+
+**(Superseded 2026-09-18 by the freedom/choice fix — see the batch at the top:
+the witnesses `freeWillOrigin`, `noFreeWillPosited`, `originFreedomSelfRefutes`,
+`judgeIsFree` below were manufactured `Sum.inl`/`Sum.inr` constructions
+destroyed under hostile semantics; C69–C72 are now BLOCKED/retired. The
+genuine replacement is `Chooses`/`FreeWill`/`rejectedHornCoMeant`.)**
 
 Driven by the user: "if you could not have chosen otherwise, then choice does
 not exist in the freedom sense. Which means right and wrong would not exist.

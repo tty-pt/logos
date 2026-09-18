@@ -1,47 +1,51 @@
 /-
-# Logos.Choice — rational choice and freedom (base.txt §13–§15, T11; poem P4/P5)
+# Logos.Choice — rational choice-field and freedom (base.txt §13–§15, T11; poem P4/P5)
 
-Tier-1 + choice-realism batch (2026-09-16) — the transcendental chain
-"right/wrong → choice → subject → meaning" (IM_STUPID.md) closes for
-choice-existence. What is *derived* here:
+Choice-realism batch (2026-09-16), **repaired 2026-09-18** (freedom/choice fix):
+the relation formerly named `Chooses` was a *determined occurrence*, not a
+choice. With `Chooses s p q := A s p ∧ Incompatible p q` and
+`Incompatible p (¬p)` pure logic, `∃ q, Chooses s p q` collapses to `A s p`:
+the agent was never related to the rejected horn. The repair splits the
+vocabulary into two relations and a definitional freedom:
 
-  * `Alternatives` / `Incompatible` come from T9 (already PROVEN);
-  * `T11_choiceField`: there is a person (T5) and incompatible alternatives
-    (T9) — the *field* of rational choice of §13/§14 is non-empty;
-  * **`Chooses` is now a definition, not a placeholder**: `s` chooses `p`
-    (in the face of incompatible `q`) iff the meaning-act `A s p` holds and
-    `p` excludes `q`. Since a proposition and its own negation are *always*
-    incompatible (`¬(p ∧ ¬p)`, pure logic), any meaning-act is a real choice
-    against `¬p`. (Formerly `def Chooses := False` — dead placeholder; the
-    claim "some choices exist" was then *unrepresentable* and misread as a
-    gap. That was the mislabel the user's "OBVIOUSLY" caught.)
-  * **transcendental theorems** (the chain, kernel-checked, no new axioms):
-      - `person_chooses`: a subject cannot exist without choice — each person
-        (meaning-subject) chooses its content against `¬p`;
-      - `choiceExists` / `noChoice_selfRefutes`: choice is real, and denying
-        it refutes itself (the denial is itself an act = a choice);
-      - `meaning_needs_subject`: no meaning without a subject (relational
-        signature `Means : Subject → Prop → Prop`, analytic).
-  * `judge_commits` and `JUDGE_COMMITTED` ("no right and wrong without
-    choice") live in `Logos.Order` (they need `Correct`/`Incorrect`).
+  * `ChoiceField s p q := A s p ∧ Incompatible p q` — **representability/field**:
+    the agent's act is set against an incompatible content. This is the old
+    occurrence relation; it is PROVEN for any meaning-act (C51/C52 field form)
+    but is *not* a choice.
+  * `Chooses s p q := A s p ∧ A s q ∧ Incompatible p q` — **genuine choice**:
+    the agent holds *both* incompatible contents (adopts `p` while `q` is
+    co-meant). `∃ q, Chooses s p q` is no longer `A s p`.
+  * `FreeWill s := ∃ p q, Chooses s p q` — freedom is *definitional* from
+    genuine choice (`chooses_implies_freeWill`, footprint `{Means, Subject}` —
+    VOCAB only: the logical content is free, the vocabulary is the statement's
+    own). The old
+    bipolar `FreeWill s p := CanChoose s p ∧ CanChoose s (¬p)` (which unfolds
+    to `A s p ∧ A s (¬ p)`) is subsumed by the unary `FreeWill s`.
 
-What §15's *bipolar* freedom adds is the modal claim (F1b, split
-2026-09-17 — see GAPMAP.md and DESIGN.md):
+The exact missing step (F1b, BLOCKED) is the co-meaning of the rejected horn:
 
-  * **F1b-weak — PROVEN**: `FreeWill (inl ()) p` for every `p` (`{}`,
-    `freeWillOrigin` below): the act's own subject — the origin, the judge
-    that `JUDGE_COMMITTED` commits to right-and-wrong — can both choose `p`
-    and choose `¬p`. Kernel-checked; "I could not have chosen otherwise"
-    self-refutes when asserted (`originFreedomSelfRefutes`).
-  * **F1b-strong — BLOCKED (vocabulary gap)**: a *world-level* alternativity
-    `◇Choose ∧ ◇Choose¬` over `NecessityPH` (see Necessity.lean) cannot even
-    be formulated: every existing predicate is world-invariant, so
-    `NecessityPH` over any of them collapses to identity. The missing
-    vocabulary is a genuinely world-varying
-    `ChoiceAt : World → Subject → Prop → Prop` (a new SEM/META bridge,
-    deliberately deferred). Posited contents (`inr q`) provably LACK freedom
-    in the weak sense (`noFreeWillPosited`, `CL`) — and are no paradox,
-    since they are never the judge right-and-wrong commits.
+    rejectedHornCoMeant :
+      (∃ s : Subject, ∃ p : Prop, A s p) →
+      ∃ s : Subject, ∃ p : Prop, A s p ∧ A s (¬ p)
+
+Nothing in the tree forces one meaning-act to come with the meaning of its
+negation: `Means` is an opaque relation (`Agency.lean`), and `AxTwoSubjects`
+yields two *different* subjects, each with a single content. Hence the
+*existence* of a genuine chooser is blocked, while the implication
+choice → freedom is free. The explicit target is declared as the
+`def`-proposition `genuineChoice_exists` (F1b, BLOCKED) and the frontier is
+the theorem `freeWillExists_of_genuineChoice : genuineChoice_exists →
+∃ s, FreeWill s` — the first implication is the substantive step still to
+establish. This replaces the vague "world-varying
+alternativity" wording with the prop-level statement; the world-level
+`ChoiceAt : World → Subject → Prop → Prop` remains the (future) SEM bridge.
+
+What is *derived* here (field form, unchanged footprints):
+  * `person_hasChoiceField`: a person is before an incompatible pair;
+  * `choiceField_exists` / `choiceField_exists_from_plurality`: the field is real;
+  * `noChoiceField_selfRefutes`: denying the field is itself a field-act;
+  * `JUDGE_HAS_CHOICE_FIELD`: right/wrong commits a choice-field.
+  * `judge_commits` (field form) lives in `Logos.Order`.
 -/
 
 import Logos.Core
@@ -58,15 +62,22 @@ open Logos.Person (Person)
 open Logos.Alternatives (Incompatible)
 open Logos.Necessity (Dia Necessity someWorld)
 
-/-- `Chooses s p q`: subject `s`, before incompatible contents `p` and `q`,
-    determines which to adopt (§14). DEFINITION (choice-realism,
-    2026-09-16): `s` chooses `p` in the face of incompatible `q` iff the
-    meaning-act `A s p` holds and `p` excludes `q`. Under the Tier-1
-    collapse this is `Means s p ∧ ¬(p ∧ q)`. A meaning-act against `¬p` is
-    always a choice, since `Incompatible p (¬p)` is pure logic. This
-    replaced the former dead placeholder `def Chooses := False`, which made
-    "some choice exists" unrepresentable. -/
-def Chooses (s : Subject) (p : Prop) (q : Prop) : Prop := A s p ∧ Incompatible p q
+/-- `ChoiceField s p q`: the choice *field* — subject `s` performs a meaning-act
+    on `p` against an incompatible content `q` (§13–§14 representability).
+    DEFINITION (choice-realism, 2026-09-16; renamed 2026-09-18): this is the
+    old `Chooses` body `A s p ∧ Incompatible p q`. It records that an act
+    occurs before an incompatible pair; it does NOT relate the agent to `q`,
+    so it is not a selection. Genuine choice is `Chooses` below. -/
+def ChoiceField (s : Subject) (p : Prop) (q : Prop) : Prop := A s p ∧ Incompatible p q
+
+/-- `Chooses s p q`: subject `s` genuinely chooses between incompatible
+    contents `p` and `q` (§14). DEFINITION (freedom/choice fix, 2026-09-18):
+    `s` adopts `p` *while `q` is co-meant* — the agent holds both horns. This
+    is strictly stronger than `ChoiceField`, which only relates `s` to `p`.
+    It does not merely encode that an outcome occurred: `∃ q, Chooses s p q`
+    now requires a second, incompatible content the subject relates to. -/
+def Chooses (s : Subject) (p : Prop) (q : Prop) : Prop :=
+  A s p ∧ A s q ∧ Incompatible p q
 
 /--Every proposition is incompatible with its own negation.
 
@@ -101,13 +112,13 @@ theorem meaning_needs_subject {s : Subject} {p : Prop} (hm : Means s p) :
     ∃ t : Subject, Means t p :=
   ⟨s, hm⟩
 
-/-- `CanChoose s p`: `s` is in a position to adopt `p`. -/
+/-- `CanChoose s p`: `s` is in a position to genuinely adopt `p` (to select it
+    against some incompatible alternative). -/
 def CanChoose (s : Subject) (p : Prop) : Prop := Dia (∃ q : Prop, Chooses s p q)
 
 /-- `CanChoose` unfolds honestly: possibility of adopting `p` (under the
     degenerate alias `Necessity p := ∀w, p`) collapses to the real presence
-    of a choice of `p` — `¬¬` removed classically. This is the footprint of
-    the old F1 interface on top of the now-real `Chooses`. -/
+    of a genuine choice of `p` — `¬¬` removed classically. -/
 theorem canChoose_unfold {s : Subject} {p : Prop} :
     CanChoose s p ↔ ∃ q : Prop, Chooses s p q := by
   unfold CanChoose Dia Necessity
@@ -119,17 +130,54 @@ theorem canChoose_unfold {s : Subject} {p : Prop} :
   · intro heq hw
     exact (hw Logos.Necessity.someWorld) heq
 
-/-- §15 — bipolar freedom (DEFINITION; F1b, split 2026-09-17): freedom with
-    respect to `p` is the possibility of choosing `p` AND the possibility of
-    choosing its negation. F1a (choice existence, transcendental) is PROVEN,
-    and the weak half F1b-weak (the origin's both-ways capacity —
-    `freeWillOrigin`) is PROVEN; only the strong world-level half (F1b-strong,
-    `◇PH`-alternativity on `NecessityPH`) stays BLOCKED on missing
-    world-varying vocabulary. A subject may mean `p` without anything forcing
-    it also to be *able* (across worlds) to mean `¬p`; the strong claim must
-    be built on `NecessityPH` (world-level), not the degenerate alias. -/
-def FreeWill (s : Subject) (p : Prop) : Prop :=
-  CanChoose s p ∧ CanChoose s (¬ p)
+/-- §15 — freedom (DEFINITION; freedom/choice fix, 2026-09-18): a subject is
+    free iff it genuinely chooses between some incompatible pair. The
+    implication choice → freedom is definitional (`chooses_implies_freeWill`).
+    The *existence* half is BLOCKED on the exact missing lemma
+    `rejectedHornCoMeant` (no axiom forces `A s p` to come with `A s (¬p)`),
+    so `freeWillExists` is not derivable unconditionally; see the module
+    header and GAPMAP F1b. -/
+def FreeWill (s : Subject) : Prop := ∃ p q : Prop, Chooses s p q
+
+/--Genuine choice entails freedom — by definition.
+
+  Footprint `{Means, Subject}` (VOCAB only — the statement's own vocabulary;
+    the logical content is free). This is the repair's core: freedom is
+    *conceptually/definitionally* the existence of a genuine choice between
+    incompatible alternatives, not a further metaphysical step from a bare act. -/
+theorem chooses_implies_freeWill {s : Subject} {p q : Prop}
+    (h : Chooses s p q) : FreeWill s :=
+  ⟨p, q, h⟩
+
+/--Freedom exists as soon as a genuine choice witness is supplied. This is the
+    formal shape of the target `freeWillExists`; it is *conditional* because
+    the unconditional witness is exactly the blocked `rejectedHornCoMeant`. -/
+theorem freeWillExists_of_chooses (h : ∃ s : Subject, ∃ p q : Prop, Chooses s p q) :
+    ∃ s : Subject, FreeWill s := by
+  obtain ⟨s, p, q, hc⟩ := h
+  exact ⟨s, chooses_implies_freeWill hc⟩
+
+/--The precise missing lemma of the freedom frontier (F1b, BLOCKED): a genuine
+    chooser exists — some subject co-meaning two incompatible contents.
+
+  This is the explicit existence target: `∃ s : Subject, ∃ p q : Prop,
+    Chooses s p q`. It is NOT yet derived from the performative datum — the
+    exact route is `rejectedHornCoMeant` (nothing forces a meaning-act `A s p`
+    to come with `A s (¬ p)`; `AxTwoSubjects` yields two *different* subjects,
+    each with one content). It is a `def`-proposition, not a theorem: adding
+    it as an axiom or `sorry` is forbidden; the deduction ledger records it as
+    BLOCKED. The free direction below is `freeWillExists_of_genuineChoice`. -/
+def genuineChoice_exists : Prop := ∃ s : Subject, ∃ p q : Prop, Chooses s p q
+
+/--The formal frontier: genuine choice implies free will.
+
+  `freeWillExists` FOLLOWS from `genuineChoice_exists` — definitional
+     (`FreeWill s := ∃ p q, Chooses s p q`) — and is never used as a premise.
+     The missing substance is `genuineChoice_exists` itself (F1b, BLOCKED on
+     `rejectedHornCoMeant`). Footprint: `{Means, Subject}` (VOCAB only). -/
+theorem freeWillExists_of_genuineChoice : genuineChoice_exists → ∃ s : Subject, FreeWill s := by
+  intro h
+  exact freeWillExists_of_chooses h
 
 /--There is a field of choice: some person with two incompatible alternatives.
 
@@ -149,82 +197,85 @@ theorem T11_choiceField_from_plurality :
   obtain ⟨p, q, hpq, _⟩ := Logos.Alternatives.T9_incompatibleAlternatives
   exact ⟨s, hs, p, q, hpq⟩
 
-/--Any person chooses: a person always has two incompatible alternatives to choose between.
+/--Any person has a choice field: a person is always before two incompatible alternatives.
 
-  Audit notice: This theorem is CONSTITUTIVE of the ontology's definition of `Chooses`
-    (`Chooses s p q := Means s p ∧ ¬(p ∧ q)`), where intentional meaning of `p` against
-    its own logical negation `¬p` is defined as a minimal choice. It does NOT derive
-    libertarian free will (which remains blocked by `CountermodelNoFreeWill`). -/
-theorem person_chooses {s : Subject} (hs : Person s) : ∃ p q : Prop, Chooses s p q := by
+  Audit notice (freedom/choice fix, 2026-09-18): this yields `ChoiceField`, NOT
+    genuine `Chooses`. The agent is related only to the adopted content `p`; the
+    rejected horn `¬p` is supplied by pure logic (`incompatible_self_negation`),
+    not by the agent. The genuine form (both horns co-meant) is BLOCKED on
+    `rejectedHornCoMeant`. -/
+theorem person_hasChoiceField {s : Subject} (hs : Person s) : ∃ p q : Prop, ChoiceField s p q := by
   obtain ⟨_hAg, _hRa, hIn⟩ := hs
   obtain ⟨p, hmp⟩ := hIn
   exact ⟨p, ¬ p, hmp, incompatible_self_negation p⟩
 
-/--Choice exists: some subject chooses between two incompatible alternatives.
+/--The choice field exists: some subject is before two incompatible alternatives.
 
-  C52 — Choice is real: derived from an intentional act datum (C68 → C52).
-    Footprint: `{Means, Subject}` (VOCAB only). -/
-theorem choiceExists (h : ∃ s : Subject, ∃ p : Prop, A s p) :
-    ∃ s : Subject, ∃ p q : Prop, Chooses s p q := by
+  C52 (field form) — the field is real: derived from an intentional act datum
+    (C68 → C52). Footprint: `{Means, Subject}` (VOCAB only). -/
+theorem choiceField_exists (h : ∃ s : Subject, ∃ p : Prop, A s p) :
+    ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q := by
   obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists h
-  obtain ⟨p, q, hch⟩ := person_chooses hs
+  obtain ⟨p, q, hch⟩ := person_hasChoiceField hs
   exact ⟨s, p, q, hch⟩
 
-/-- Choice exists, derived from demonstrated plurality under AxTwoSubjects. -/
-theorem choiceExists_from_plurality : ∃ s : Subject, ∃ p q : Prop, Chooses s p q := by
+/-- Choice field exists, derived from demonstrated plurality under AxTwoSubjects. -/
+theorem choiceField_exists_from_plurality : ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q := by
   obtain ⟨s₁, _, hp₁, _, _⟩ := Logos.Plurality.T12_twoPersons
-  obtain ⟨p, q, hch⟩ := person_chooses hp₁
+  obtain ⟨p, q, hch⟩ := person_hasChoiceField hp₁
   exact ⟨s₁, p, q, hch⟩
 
-/-- Radical nihilist thesis regarding choice: no choice occurs. -/
-def NoChoice : Prop := ¬ ∃ s : Subject, ∃ p q : Prop, Chooses s p q
+/-- Radical nihilist thesis regarding the choice field: no field occurs. -/
+def NoChoiceField : Prop := ¬ ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q
 
-/-- Denying choice is itself an act of choice:
-    asserting NoChoice chooses NoChoice against its own logical negation. -/
-theorem asserting_no_choice_is_choice (speaker : Subject)
-    (h : Logos.Agency.Asserts speaker NoChoice) :
-    ∃ s : Subject, ∃ p q : Prop, Chooses s p q :=
-  ⟨speaker, NoChoice, ¬ NoChoice, h.1, incompatible_self_negation NoChoice⟩
+/-- Denying the choice field is itself an act of choice-field:
+    asserting NoChoiceField sets the assertion against its own logical negation. -/
+theorem asserting_noChoiceField_is_choiceField (speaker : Subject)
+    (h : Logos.Agency.Asserts speaker NoChoiceField) :
+    ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q :=
+  ⟨speaker, NoChoiceField, ¬ NoChoiceField, h.1, incompatible_self_negation NoChoiceField⟩
 
-/-- C53: Genuine performative retorsion — asserting that no choice exists refutes itself.
-    The performance of the assertion chooses NoChoice over ¬NoChoice.
-    Footprint: `{Means, Subject}` (VOCAB only; zero AxTwoSubjects). -/
-theorem noChoice_selfRefutes (speaker : Subject)
-    (h : Logos.Agency.Asserts speaker NoChoice) : False :=
-  h.2 (asserting_no_choice_is_choice speaker h)
+/-- C53 (field form): performative retorsion — asserting that no choice field exists
+    refutes itself. Footprint: `{Means, Subject}` (VOCAB only; zero AxTwoSubjects). -/
+theorem noChoiceField_selfRefutes (speaker : Subject)
+    (h : Logos.Agency.Asserts speaker NoChoiceField) : False :=
+  h.2 (asserting_noChoiceField_is_choiceField speaker h)
 
-/-- Static contradiction with an established choice witness (honest restatement of former C53). -/
-theorem noChoice_contradicts_choice
-    (hChoice : ∃ s : Subject, ∃ p q : Prop, Chooses s p q) (hNo : NoChoice) : False :=
-  hNo hChoice
+/-- Static contradiction with an established choice-field witness. -/
+theorem noChoiceField_contradicts_field
+    (hField : ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q) (hNo : NoChoiceField) : False :=
+  hNo hField
 
-/--Right-and-wrong commits a chooser: where there is truth and error, someone has chosen.
+/--Right-and-wrong commits a choice field: where there is truth and error,
+ someone is before an incompatible pair.
 
-  C54: "No right and wrong without choice" (right/wrong ⇒ choice): whenever the
-    distinction holds, some choosing subject exists via AxTwoSubjects (poem P5).
-    Operative derivation passing `h` to `AxTwoSubjects h`. -/
-theorem JUDGE_COMMITTED (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
-    ∃ s : Subject, ∃ p q : Prop, Chooses s p q := by
+  C54 (field form): "No right and wrong without (a field of) choice" — whenever
+    the distinction holds, some subject before a choice field exists via
+    AxTwoSubjects (poem P5). The genuine `Chooses` conclusion is BLOCKED on
+    `rejectedHornCoMeant`. -/
+theorem JUDGE_HAS_CHOICE_FIELD (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
+    ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q := by
   obtain ⟨s₁, _, hp₁, _, _⟩ := Logos.Value.AxTwoSubjects h
-  obtain ⟨p, q, hch⟩ := person_chooses hp₁
+  obtain ⟨p, q, hch⟩ := person_hasChoiceField hp₁
   exact ⟨s₁, p, q, hch⟩
 
-/-- Performative judgment commits a chooser: asserting right-and-wrong is an act of choice. -/
-theorem judge_asserting_rightWrong_commits_chooser (speaker : Subject)
+/-- Performative judgment commits a choice field: asserting right-and-wrong is
+    an act set against its own negation. -/
+theorem judge_asserting_rightWrong_has_choiceField (speaker : Subject)
     (h : Logos.Agency.Asserts speaker (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F)) :
-    ∃ s : Subject, ∃ p q : Prop, Chooses s p q :=
+    ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q :=
   ⟨speaker, (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F), ¬ (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F),
    h.1, incompatible_self_negation _⟩
 
 /--Right-and-wrong implies someone who means (poem P3, line 18 "há certo e há
  errado → há significado → há alguém para quem algo significar").
 
- C61: `JUDGE_COMMITTED` (C54) composes with `rightWrongDistinction` (C36)
-    to yield a chooser; every choice is a meaning-act (`Chooses` unfolds to `A s p`),
-    so some subject means some content. -/
+  C61: `JUDGE_HAS_CHOICE_FIELD` (C54) composes with `rightWrongDistinction` (C36)
+    to yield a field; its first conjunct is a meaning-act, so some subject means
+    some content. -/
 theorem rightWrong_implies_someone_means (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
     ∃ s : Subject, ∃ p : Prop, Means s p := by
-  obtain ⟨s, p, _, hch⟩ := JUDGE_COMMITTED h
+  obtain ⟨s, p, _, hch⟩ := JUDGE_HAS_CHOICE_FIELD h
   exact ⟨s, p, hch.1⟩
 
 /-- C57: Retorsion — asserting that no actual subject exists refutes itself.
@@ -246,9 +297,12 @@ end Logos.Choice
 #print axioms Logos.Choice.incompatible_self_negation
 #print axioms Logos.Choice.meaning_I_needs_subject
 #print axioms Logos.Choice.meaning_needs_subject
-#print axioms Logos.Choice.person_chooses
-#print axioms Logos.Choice.choiceExists
-#print axioms Logos.Choice.noChoice_selfRefutes
+#print axioms Logos.Choice.chooses_implies_freeWill
+#print axioms Logos.Choice.freeWillExists_of_chooses
+#print axioms Logos.Choice.freeWillExists_of_genuineChoice
+#print axioms Logos.Choice.person_hasChoiceField
+#print axioms Logos.Choice.choiceField_exists
+#print axioms Logos.Choice.noChoiceField_selfRefutes
 #print axioms Logos.Choice.noSubject_selfRefutes
-#print axioms Logos.Choice.JUDGE_COMMITTED
+#print axioms Logos.Choice.JUDGE_HAS_CHOICE_FIELD
 #print axioms Logos.Choice.rightWrong_implies_someone_means

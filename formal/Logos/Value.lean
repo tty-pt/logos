@@ -42,9 +42,12 @@ open Logos.Person (Person)
     does not pretend to *derive* it. The former two-declaration swing
     (`axiom Affects` + `axiom AxPersonsAffect`) collapses to zero.
 
-    Prose price: "Amar é escolhido" now rests entirely on `FreeWill` (F1,
-    DEFERRED); `Loves := Affects` in Love.lean reads as the directed
-    constitutive bearing of one subject on a *distinct* one. -/
+    Prose price: "Amar é escolhido" rests on `FreeWill`, which is now
+    *definitional* from genuine choice (`Choice.FreeWill s := ∃p q, Chooses s p q`,
+    `chooses_implies_freeWill`, footprint `{Means, Subject}` VOCAB only); what remains blocked is the *existence* of a
+    genuine chooser (`rejectedHornCoMeant`, F1b). `Loves := Affects` in Love.lean
+    reads as the directed constitutive bearing of one subject on a *distinct*
+    one. -/
 def Affects (s t : Subject) : Prop := s ≠ t
 
 /--Positive constitutive bearing: a subject benefiting another.

@@ -1577,9 +1577,15 @@ def main():
         "F4": "Logos.ClaimMeanings.F4",
         "F5": "Logos.ClaimMeanings.F5",
         "F6": "Logos.ClaimMeanings.F6",
+        "F1b": "Logos.ClaimMeanings.F1b",
+        "F7": "Logos.ClaimMeanings.F7",
         "F8": "Logos.ClaimMeanings.F8",
         "F9": "Logos.ClaimMeanings.F9",
         "Q7.2": "Logos.ClaimMeanings.Q7_2",
+        "C69": "Logos.ClaimMeanings.C69",
+        "C70": "Logos.ClaimMeanings.C70",
+        "C71": "Logos.ClaimMeanings.C71",
+        "C72": "Logos.ClaimMeanings.C72",
     }
     for cid, full in claim_stub.items():
         info = decls.get(full)

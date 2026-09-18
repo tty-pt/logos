@@ -354,23 +354,23 @@ Segue dos axiomas **A2**, **A5** (vocabulário do enunciado) — [§13/IM_STUPID
 [§14](base.txt)
 
 ### C51 · ✔
-`∃ p q : Prop, Chooses s p q` — _Any person chooses: a person always has two incompatible alternatives to choose between._
+`∃ p q : Prop, ChoiceField s p q` — _Any person has a choice field: a person is always before two incompatible alternatives._
 Segue de: **C50** e dos axiomas **A2**, **A5** (vocabulário do enunciado) — [§14/IM_STUPID](base.txt)
 
 ### C52 · ✔
-`∃ s : Subject, ∃ p q : Prop, Chooses s p q` — _Choice exists: some subject chooses between two incompatible alternatives._
+`∃ s : Subject, ∃ p q : Prop, ChoiceField s p q` — _The choice field exists: some subject is before two incompatible alternatives._
 Segue de: **C24**, **C51**, **F1a** e dos axiomas **A2**, **A5** (vocabulário do enunciado) — [§14](base.txt)
 
 ### C53 · ✔
-`False` — _C53: Genuine performative retorsion — asserting that no choice exists refutes itself_
+`False` — _C53 (field form): performative retorsion — asserting that no choice field exists refutes itself. Footprint: `{Means, Subject}` (VOCAB only; zero AxTwoSubjects)._
 Segue dos axiomas **A2**, **A5** (vocabulário do enunciado) — [§14](base.txt)
 
 ### C54 · ⚠
-`∃ s : Subject, ∃ p q : Prop, Chooses s p q` — _Right-and-wrong commits a chooser: where there is truth and error, someone has chosen._
+`∃ s : Subject, ∃ p q : Prop, ChoiceField s p q` — _Right-and-wrong commits a choice field: where there is truth and error, someone is before an incompatible pair._
 Segue de: **C51**, **F1a** e dos axiomas **A2**, **A5**, **A6** — [IM_STUPID §2](base.txt)
 
 ### C55 · ⚠
-`∃ s : Subject, ∃ p q : Prop, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ Chooses s p q` — _The judge is a chooser: whoever judges acts and chooses, correctly or incorrectly._
+`∃ s : Subject, ∃ p q : Prop, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ ChoiceField s p q` — _The judge is before a choice field: whoever judges acts, correctly or incorrectly._
 Segue de: **C48**, **C50** e dos axiomas **A2**, **A5**, **A6** — [§8/§14](base.txt)
 
 ### C56 · ✔
@@ -414,12 +414,16 @@ Segue de: **C54** e dos axiomas **A2**, **A5**, **A6** — [P3](poem.txt)
 Segue dos axiomas **A2**, **A5** (vocabulário do enunciado) — [P3](poem.txt)
 
 ### C69 · ✖
+_Free will of origin is retired: manufactured constructor split destroyed._
 
 ### C70 · ✖
+_Posited content non-freedom is retired: manufactured witness destroyed._
 
 ### C71 · ✖
+_Origin freedom denial self-refuting is retired: manufactured witness destroyed._
 
 ### C72 · ✖
+_Judge is free is retired: act does not entail free will; `judge_commits` yields only the choice field._
 
 ### C73 · ✖
 
@@ -431,9 +435,9 @@ Segue de: **C36** e dos axiomas **A2**, **A5**, **A6** — [P5](poem.txt)
 
 ### C76 · ✖
 
-### C77 · ⚠
+### C77 · ✔
 `∃ s : Subject, Person s ∧ NecessarySubject s` — _There exists a necessary person: someone who is a person and persists in every world._
-Segue dos axiomas **A2**, **A5**, **A6** — [P5/P8](poem.txt)
+Segue de: **C24** e dos axiomas **A2**, **A5** (vocabulário do enunciado) — [P5/P8](poem.txt)
 
 ### C85 · ✔
 `∀ {s t : Subject}, Helps s t → ¬ Harms s t` — _Helping excludes harming: benevolence is incompatible with malice._
@@ -477,8 +481,8 @@ Segue de: **C24**, **C91** e dos axiomas **A2**, **A5** (vocabulário do enuncia
 
 | ID | Prosa | Status | Nota / lema em falta |
 |---|---|---|---|
-| F1a | §13–§15 choice-existence (`∃s p q`, `Chooses s p q`) | ✔ | person_chooses/choiceExists {} + judge_commits CL (choice-realism batch, C51–C52/C55) |
-| F1b | §15 freedom of the actor | ✖ | (hostile semantics: CountermodelNoFreeWill proves freedom does not follow from act datum; alternativity blocked) |
+| F1a | §13–§15 choice-field existence (`∃s p q`, `ChoiceField s p q`) | ✔ | person_hasChoiceField/choiceField_exists {Means, Subject} + judge_commits CL (choice-realism batch, C51–C52/C55; renamed 2026-09-18 — field form, not genuine choice) |
+| F1b | §15 genuine choice & freedom of the actor | ✖ | alvo explícito Choice.genuineChoice_exists := ∃ s, ∃ p q, Chooses s p q (def-proposição; **não** axioma/sorry); via exata rejectedHornCoMeant : (∃s p, A s p) → ∃s p, A s p ∧ A s (¬p) — nada força um ato de significação a vir com a significação da sua negação; a fronteira formal é genuineChoice_exists → freeWillExists (freeWillExists_of_genuineChoice, {Means, Subject} — Chooses → FreeWill é definicional e ninguém usa freeWillExists como premissa). CountermodelNoFreeWill mostra só Act ↛ Chooses/Act ↛ FreeWill. |
 | F2 | §21 teleology (`Ought → Goal`) | ➖ | deontic layer (normativity → telos) |
 | F3 | §28 Good (`§20 → bem`) | ➖ | moral good from logical normativity not yet derived |
 | F4 | §28 Love | ⚠ | Love.T13_someoneLovable (C41) under {AxTwoSubjects, Means, Subject} |
@@ -490,6 +494,8 @@ Segue de: **C24**, **C91** e dos axiomas **A2**, **A5** (vocabulário do enuncia
 *Vide **C51** (passo já apresentado).*
 
 ### F1b · ✖
+`genuineChoice_exists : Prop` — _The precise missing lemma of the freedom frontier (F1b, BLOCKED): a genuine chooser exists — some subject co-meaning two incompatible contents._
+Segue dos axiomas **A2**, **A5** (vocabulário do enunciado) — [§15 genuine choice & freedom of the actor](base.txt)
 
 ### F2 · ➖
 _Deontic teleology is deferred: how norms point at goals is not yet derived._
@@ -507,7 +513,7 @@ _Moral good from logical normativity is deferred: not yet derived._
 _The Trinity is deferred: no argument exists yet._
 
 ### Q7.2 · ANSWERED
-`ExistsAt (w : World) (e : Entity) : Prop` — _Research question, answered: the swap is a theorem for atoms (no axiom needed); the compound instance is unforced._
+`ExistsAt (w : World) (_s : Subject) : Prop` — _Simulated world-existence: the subject exists only in the `true` world._
 [weaker `AxGlobalGround`](base.txt)
 
 
@@ -518,7 +524,7 @@ _The Trinity is deferred: no argument exists yet._
 |---|---|---|---|
 | FAITH-1 | P2 necessity | → | dissolved in C1: necDistinction is now a theorem (C38); world content = C37 |
 | FAITH-2 | P8 eternal love | → | rests on AxTwoSubjects (META bridge restored after Unit countermodel) + AxPersonStability (theorem); T14 is proven under {AxTwoSubjects} (C42–C45) |
-| F7 | §15 the bipolar half of freedom | ✖ | (hostile semantics: freedom not entailed by bare act datum; world-level alternativity blocked on missing vocabulary ChoiceAt) |
+| F7 | §15 the bipolar half of freedom | ✖ | (the bipolar half is subsumed by unary FreeWill; the remaining gap is NOT "freedom impossible to derive" — it is **existence of *genuine choice* not yet derived from the performative datum**: genuineChoice_exists BLOCKED on rejectedHornCoMeant; Chooses → FreeWill is definitional, freeWillExists_of_genuineChoice {Means, Subject}; world-level ChoiceAt remains a future SEM vocabulary) |
 | F8 | Trinity | ➖ | not attempted (§28/§29) |
 | F9 | Incarnation / creation | ➖ | poem P10, faith datum |
 
@@ -530,6 +536,8 @@ _The Trinity is deferred: no argument exists yet._
 [P8 eternal love](poem.txt)
 
 ### F7 · ✖
+`FreeWill : S → Prop` — _The bipolar half of freedom is subsumed by unary `FreeWill`; the open gap is not 'freedom impossible to derive' but *existence of genuine choice* not yet derived from the performative datum (F1b, `genuineChoice_exists`). World-level `ChoiceAt : World → Subject → Prop → Prop` remains a future, priced SEM vocabulary._
+[§15 the bipolar half of freedom](base.txt)
 
 ### F8 · ➖
 _The Trinity is not attempted._
@@ -543,15 +551,15 @@ _Incarnation and creation are faith data from the poem, deferred._
 
 | Axioma | Nº | Tag | Significado (EN) / preço | Depende dele (claims) |
 |---|---|---|---|---|
-| `Means` | A5 | `VOCAB` | Vocabulary: the meaning-act relation — a subject means a proposition. | C21, C23, C24, C25, C28, C29, C30, C32, C33, C39, C40, C41, C42, C43, C44, C45, C46, C47, C48, C49, C51, C52, C53, C54, C55, C57, C58, C61, C62, C68, C74, C77, C83, C84, C92, FAITH-2 |
-| `Subject` | A2 | `VOCAB` | Vocabulary: the pure sort of subjects — that which performs acts of reasoning. | C15, C18, C19, C20, C21, C23, C24, C25, C28, C29, C30, C32, C33, C34, C39, C40, C41, C42, C43, C44, C45, C46, C47, C48, C49, C51, C52, C53, C54, C55, C56, C57, C58, C60, C61, C62, C68, C74, C77, C83, C84, C85, C86, C91, C92, FAITH-2 |
+| `Means` | A5 | `VOCAB` | Vocabulary: the meaning-act relation — a subject means a proposition. | C21, C23, C24, C25, C28, C29, C30, C32, C33, C39, C40, C41, C42, C43, C44, C45, C46, C47, C48, C49, C51, C52, C53, C54, C55, C57, C58, C61, C62, C68, C74, C77, C83, C84, C92, F1b, FAITH-2 |
+| `Subject` | A2 | `VOCAB` | Vocabulary: the pure sort of subjects — that which performs acts of reasoning. | C15, C18, C19, C20, C21, C23, C24, C25, C28, C29, C30, C32, C33, C34, C39, C40, C41, C42, C43, C44, C45, C46, C47, C48, C49, C51, C52, C53, C54, C55, C56, C57, C58, C60, C61, C62, C68, C74, C77, C83, C84, C85, C86, C91, C92, F1b, FAITH-2 |
 | `AxPersonalGround` | A7 | `META` | AxPersonalGround (META): the *necessary* reality grounds the personal features present in the rational act. | C32 |
 | `GroundPrincipleProp` | A9 | `SEM` | The §24a atom-grounding principle reflected at the level of propositions. | C33 |
 | `GroundProp` | A8 | `VOCAB` | The grounding relation between an entity and a proposition. | C32, C33 |
 | `AxGlobalGround` | A4 | `SEM` | AxGlobalGround (SEM): a formula true in every world is grounded by a single entity that exists in every world. | C18, C19, C20, C34 |
 | `Ground` | A1 | `VOCAB` | The truthmaker relation — an entity grounding a formula. | C15, C18, C19, C20, C34, C60 |
 | `Truthmaker` | A3 | `SEM` | The truthmaker principle: truth is grounded in reality. | C15, C60 |
-| `AxTwoSubjects` | A6 | `META` | AxTwoSubjects (META; poem P5/P7, failure traces in DESIGN.md D14 and HostileSemantics): the *reality* of right-and-wrong demands that there be at least two distinct persons. Narrower than the former single bridge `AxValueInterpersonal` (plurality only; affecti | C28, C29, C30, C40, C41, C42, C43, C44, C45, C46, C47, C48, C54, C55, C61, C74, C77, FAITH-2 |
+| `AxTwoSubjects` | A6 | `META` | AxTwoSubjects (META; poem P5/P7, failure traces in DESIGN.md D14 and HostileSemantics): the *reality* of right-and-wrong demands that there be at least two distinct persons. Narrower than the former single bridge `AxValueInterpersonal` (plurality only; affecti | C28, C29, C30, C40, C41, C42, C43, C44, C45, C46, C47, C48, C54, C55, C61, C74, FAITH-2 |
 
 Detalhe do kernel:
 
@@ -568,25 +576,24 @@ Detalhe do kernel:
 ---
 ## Relatório de consistência (kernel ↔ GAPMAP)
 
-- Claims do GAPMAP com teorema localizado no kernel (FOUND): **77** / 105
-- Steps com **significado em inglês**: **83** / 105 · **sem gloss:** C78, C79, C87, C88, C89, C90, F1b, C69, C70, C71, C72, C73, C75, C76, C64, C65, C66, C67, C80, C81, C82, F7
+- Claims do GAPMAP com teorema localizado no kernel (FOUND): **79** / 105
+- Steps com **significado em inglês**: **89** / 105 · **sem gloss:** C78, C79, C87, C88, C89, C90, C73, C75, C76, C64, C65, C66, C67, C80, C81, C82
 - **Claims com teorema em falta (MISSING — teorema referenciado não localizado no kernel) (1):**
   - `C59` ref `Spike_M5.strongTruthExists` — §27
-- **Claims retirados / bloqueados (RETIRED/BLOCKED — fora da dedução ativa) (27):**
+- **Claims retirados / bloqueados (RETIRED/BLOCKED — fora da dedução ativa) (25):**
   - `C78` (`BLOCKED`) ref `Modal.contingent_ground` — T7
   - `C79` (`BLOCKED`) ref `Modal.ultimateGround_exists` — T7
   - `C87` (`BLOCKED`) ref `Modal.origin_is_necessary` — T7
   - `C88` (`BLOCKED`) ref `Modal.transcendental_quantifier_swap` — T7
   - `C89` (`BLOCKED`) ref `Modal.ultimateGroundInit_exists` — T7
   - `C90` (`BLOCKED`) ref `GroundPerson.personal_ultimate_ground_exists` — T8
-  - `F1b` (`BLOCKED`) ref `CountermodelNoFreeWill` — §15 freedom of the actor
   - `F2` (`DEFERRED`) ref `—` — §21 teleology (`Ought → Goal`)
   - `F3` (`DEFERRED`) ref `—` — §28 Good (`§20 → bem`)
   - `F6` (`DEFERRED`) ref `—` — §28 Trinity
-  - `C69` (`BLOCKED`) ref `Choice.freeWillOrigin` — §15/F1b
-  - `C70` (`BLOCKED`) ref `Choice.noFreeWillPosited` — §15/F1b
-  - `C71` (`BLOCKED`) ref `Choice.originFreedomSelfRefutes` — §15/F1b
-  - `C72` (`BLOCKED`) ref `Choice.judgeIsFree` — §15/F1b
+  - `C69` (`BLOCKED`) ref `—` — §15/F1b
+  - `C70` (`BLOCKED`) ref `—` — §15/F1b
+  - `C71` (`BLOCKED`) ref `—` — §15/F1b
+  - `C72` (`BLOCKED`) ref `—` — §15/F1b
   - `C73` (`BLOCKED`) ref `Person.twoPersonsFromSubject` — P5/P7
   - `C75` (`BLOCKED`) ref `Person.everyContentIsAPerson` — P7
   - `C76` (`BLOCKED`) ref `Love.T14_canonicalRigid` — P8
@@ -597,15 +604,14 @@ Detalhe do kernel:
   - `C80` (`BLOCKED`) ref `Initiation.posited_not_branch` — §1
   - `C81` (`BLOCKED`) ref `Initiation.origin_branches` — §1
   - `C82` (`BLOCKED`) ref `Initiation.origin_is_initiating_person` — §1/§12
-  - `F7` (`BLOCKED`) ref `ChoiceAt` — §15 the bipolar half of freedom
   - `F8` (`DEFERRED`) ref `—` — Trinity
   - `F9` (`DEFERRED`) ref `—` — Incarnation / creation
-- Teoremas no kernel **sem claim** no GAPMAP (78): Agency.T1_subjectExists_of_act, Agency.act_exists_of_assert, Agency.act_implies_agent, Agency.act_implies_content, Agency.act_implies_means, Agency.act_implies_rational, Agency.act_of_asserting_no_act, Agency.act_requires_subject, Agency.an_actual_subject_exists_of_act, Agency.assertion_is_act, Agency.noSubjectSort_selfRefutes, Agency.noSubject_performative_selfRefutes, Agency.noSubject_selfRefutes, Agency.subject_exists_of_act, Agency.subject_exists_of_assert, Choice.T11_choiceField_from_plurality, Choice.asserting_no_choice_is_choice, Choice.canChoose_unfold, Choice.choiceExists_from_plurality, Choice.judge_asserting_rightWrong_commits_chooser, Choice.meaning_I_needs_subject, Choice.noChoice_contradicts_choice, Choice.noSubject_contradicts_subject, Core.atomicWitnessFalsehood, Core.someTruthAndSomeFalsehood, Core.tschema, GroundPerson.AxGroundBearing, HostileSemantics.act_exists_of_act, HostileSemantics.not_entails_content_person, HostileSemantics.not_entails_freewill, HostileSemantics.not_entails_person, HostileSemantics.not_entails_plurality, HostileSemantics.subject_exists_of_act, Love.AxPersonStability, Love.love_affects, Love.love_not_harms, Love.loves_of_helps, Modal.necessary_entity_exists_of_necessary_subject, Modal.subject_nec_entity_nec_iff, Necessity.dia_def, Necessity.nec4, Necessity.nec4PH, Necessity.necDistinction_content, Necessity.necK, Necessity.necKPH, Necessity.necMP, Necessity.necT, Necessity.necTPH, Necessity.nec_apply, Order.fallible_false, Order.judgment_implies_act, Order.judgment_implies_cogito, Order.judgment_of_no_act_is_incorrect, Order.rightDistinctWrong_implies_meaning, Order.rightWrongDistinction_implies_meaning, Person.person_exists_of_act, Person.person_exists_of_assert, Person.person_of_act, Person.person_of_subject, Plurality.T1_of_assert, Plurality.T1_subjectExists_from_plurality, Plurality.T4_agentExists_from_plurality, Plurality.T4_of_assert, Plurality.T5_of_assert, Plurality.T5_personExists_from_plurality, Plurality.notAlone, Semantics.sat_and, Semantics.sat_imp, Semantics.sat_not, Semantics.sat_or, Truthmaker.sat_ground_and, Truthmaker.sat_ground_imp, Truthmaker.sat_ground_not, Truthmaker.sat_ground_or, Value.AxPersonsAffect, Value.alone_no_other_affects, Value.harm_affects, Value.help_affects
-- **Estatuto derivado do kernel** (#print axioms + `Tag:` dos axiomas): **46 ✔** · **25 ⚠** · **0 ◆** (passos únicos detalhados no mapa)
-- **Inventário reconciliado de claims (105 no total):** 71 passos únicos ativos (46 ✔ + 25 ⚠) · 5 repetidos / dissolvidos (→) · 23 bloqueados / em falta (✖) · 5 diferidos (➖) · 1 outros (ANSWERED)
+- Teoremas no kernel **sem claim** no GAPMAP (82): Agency.T1_subjectExists_of_act, Agency.act_exists_of_assert, Agency.act_implies_agent, Agency.act_implies_content, Agency.act_implies_means, Agency.act_implies_rational, Agency.act_of_asserting_no_act, Agency.act_requires_subject, Agency.an_actual_subject_exists_of_act, Agency.assertion_is_act, Agency.noSubjectSort_selfRefutes, Agency.noSubject_performative_selfRefutes, Agency.noSubject_selfRefutes, Agency.subject_exists_of_act, Agency.subject_exists_of_assert, Choice.T11_choiceField_from_plurality, Choice.asserting_noChoiceField_is_choiceField, Choice.canChoose_unfold, Choice.choiceField_exists_from_plurality, Choice.chooses_implies_freeWill, Choice.freeWillExists_of_chooses, Choice.freeWillExists_of_genuineChoice, Choice.judge_asserting_rightWrong_has_choiceField, Choice.meaning_I_needs_subject, Choice.noChoiceField_contradicts_field, Choice.noSubject_contradicts_subject, Core.atomicWitnessFalsehood, Core.someTruthAndSomeFalsehood, Core.tschema, GroundPerson.AxGroundBearing, HostileSemantics.act_exists_of_act, HostileSemantics.not_entails_content_person, HostileSemantics.not_entails_decoupled_freewill, HostileSemantics.not_entails_person, HostileSemantics.not_entails_plurality, HostileSemantics.subject_exists_of_act, Love.AxPersonStability, Love.love_affects, Love.love_not_harms, Love.loves_of_helps, Love.no_contingent_person, Modal.necessary_entity_exists_of_necessary_subject, Modal.subject_nec_entity_nec_iff, Necessity.dia_def, Necessity.nec4, Necessity.nec4PH, Necessity.necDistinction_content, Necessity.necK, Necessity.necKPH, Necessity.necMP, Necessity.necT, Necessity.necTPH, Necessity.nec_apply, Order.fallible_false, Order.judgment_implies_act, Order.judgment_implies_cogito, Order.judgment_of_no_act_is_incorrect, Order.rightDistinctWrong_implies_meaning, Order.rightWrongDistinction_implies_meaning, Person.person_exists_of_act, Person.person_exists_of_assert, Person.person_of_act, Person.person_of_subject, Plurality.T1_of_assert, Plurality.T1_subjectExists_from_plurality, Plurality.T4_agentExists_from_plurality, Plurality.T4_of_assert, Plurality.T5_of_assert, Plurality.T5_personExists_from_plurality, Plurality.notAlone, Semantics.sat_and, Semantics.sat_imp, Semantics.sat_not, Semantics.sat_or, Truthmaker.sat_ground_and, Truthmaker.sat_ground_imp, Truthmaker.sat_ground_not, Truthmaker.sat_ground_or, Value.AxPersonsAffect, Value.alone_no_other_affects, Value.harm_affects, Value.help_affects
+- **Estatuto derivado do kernel** (#print axioms + `Tag:` dos axiomas): **47 ✔** · **24 ⚠** · **0 ◆** (passos únicos detalhados no mapa)
+- **Inventário reconciliado de claims (105 no total):** 71 passos únicos ativos (47 ✔ + 24 ⚠) · 5 repetidos / dissolvidos (→) · 23 bloqueados / em falta (✖) · 5 diferidos (➖) · 1 outros (ANSWERED)
 - Estatuto GAPMAP × derivado: **sem divergências** (transcrição verificada).
-- **Steps ⚠ sob axioma substantivo (SEM/META)** (27): C15, C18, C19, C20, C28, C29, C30, C32, C33, C34, C40, C41, C42, C43, C44, C45, C46, C47, C48, C54, C55, C60, C61, C74, C77, F4, F5
-- **Exibidos ✔ por só-vocabulário (axiom-free módulo vocabulário declarado)** (pegada do kernel só com vocábulos VOCAB do próprio enunciado — SEM/META/TRANS nenhum): C21, C23, C24, C25, C39, C49, C51, C52, C53, C56, C57, C58, C62, C68, C83, C84, C85, C86, C91, C92, F1a
+- **Steps ⚠ sob axioma substantivo (SEM/META)** (26): C15, C18, C19, C20, C28, C29, C30, C32, C33, C34, C40, C41, C42, C43, C44, C45, C46, C47, C48, C54, C55, C60, C61, C74, F4, F5
+- **Exibidos ✔ por só-vocabulário (axiom-free módulo vocabulário declarado)** (pegada do kernel só com vocábulos VOCAB do próprio enunciado — SEM/META/TRANS nenhum): C21, C23, C24, C25, C39, C49, C51, C52, C53, C56, C57, C58, C62, C68, C77, C83, C84, C85, C86, C91, C92, F1a
 - Pegada kernel × GAPMAP: **sem divergências**.
 - **Grafo (closure) × audição (#print axioms) divergem em 1 claims** (subconta transitiva do depviz — toolchain, não ledger; a audição manda):
   - `FAITH-2` audição `{AxTwoSubjects, Means, Subject}` vs grafo `{}`
@@ -650,65 +656,65 @@ Detalhe do kernel:
 | C21 | `Logos.Plurality.T1_subjectExists` | [Plurality.lean#L66](formal/Logos/Plurality.lean#L66) | `{Means, Subject}` | {Means, Subject} (derivado do ato intencional C68 via regra constitutiva act_requires_subject; desacoplado de AxTwoSubjects) | `Agency.Act`, axiom `Subject` (VOCAB), `Agency.SubjectExists`, `Agency.subject_exists_of_act` | **C23** `T4_agentExists` |
 | C22 | `Logos.Agency.T2_contentExists` | [Agency.lean#L206](formal/Logos/Agency.lean#L206) | `{}` | **{}** — Content _ := True (def), True witnesses content | `Agency.Content` | — |
 | C23 | `Logos.Plurality.T4_agentExists` | [Plurality.lean#L74](formal/Logos/Plurality.lean#L74) | `{Means, Subject}` | {Means, Subject} (derivado do ato intencional C68 → C21; Agent é := True, def) | `Agency.Act`, `Agency.Agent`, axiom `Subject` (VOCAB), `Agency.SubjectExists`, **C21** `T1_subjectExists` | — |
-| C24 | `Logos.Plurality.T5_personExists` | [Plurality.lean#L84](formal/Logos/Plurality.lean#L84) | `{Means, Subject}` | {Means, Subject} (derivado do ato intencional C68 → C21 → C24 via colapso definicional §12) | `Agency.Act`, axiom `Subject` (VOCAB), `Person.Person`, `Person.person_exists_of_act` | **C39** `T11_choiceField`, **C52** `choiceExists`, **C92** `necessary_entity_exists` |
+| C24 | `Logos.Plurality.T5_personExists` | [Plurality.lean#L84](formal/Logos/Plurality.lean#L84) | `{Means, Subject}` | {Means, Subject} (derivado do ato intencional C68 → C21 → C24 via colapso definicional §12) | `Agency.Act`, axiom `Subject` (VOCAB), `Person.Person`, `Person.person_exists_of_act` | **C39** `T11_choiceField`, **C52** `choiceField_exists`, **C77** `necessaryPersonExists`, **C92** `necessary_entity_exists` |
 | C25 | `Logos.Person.inseparability_24b` | [Person.lean#L92](formal/Logos/Person.lean#L92) | `{Means, Subject, CL}` | {Means, Subject, CL} | `Agency.A`, axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Agency.act_implies_means`, `Core.IsFalse`, `Core.T`, `Person.CarriesLogicalFeature`, `Person.CarriesPersonalFeature`, `Person.HasFeature`, `Person.RationalAct` | — |
 | C26 | `Logos.Alternatives.T9_incompatibleAlternatives` | [Alternatives.lean#L24](formal/Logos/Alternatives.lean#L24) | `{}` | {} (E0) | `Alternatives.Incompatible`, `Core.IsFalse`, `Core.T`, **C4** `atomicTruthWitnessed`, `Core.atomicWitnessFalsehood` | **C39** `T11_choiceField`, `Choice.T11_choiceField_from_plurality` |
 | C27 | `Logos.Alternatives.incompatible_with_negation` | [Alternatives.lean#L35](formal/Logos/Alternatives.lean#L35) | `{}` | {} (E0) | `Alternatives.Incompatible`, `Core.IsFalse`, `Core.T`, `Core.tschema` | — |
 | C28 | `Logos.Order.T6_fallibility` | [Order.lean#L90](formal/Logos/Order.lean#L90) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (via T12 + Core.someFalse) | axiom `Subject` (VOCAB), `Core.IsFalse`, `Core.T`, `Order.Fallible`, `Order.fallible_false` | — |
 | C29 | `Logos.Order.T6_truthTranscendsWill` | [Order.lean#L99](formal/Logos/Order.lean#L99) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (as C28) | axiom `Subject` (VOCAB), `Core.IsFalse`, `Core.T`, `Order.Fallible`, `Order.fallible_false` | — |
 | C30 | `Logos.Order.correctness_distinct` | [Order.lean#L107](formal/Logos/Order.lean#L107) | `{AxTwoSubjects, Means, Subject, CL}` | {AxTwoSubjects, Means, Subject, CL} (defs act-relative §8) | `Agency.A`, axiom `Subject` (VOCAB), `Core.IsFalse`, `Core.T`, `Order.Correct`, `Order.Incorrect`, **C48** `cogito_from_T12` | — |
-| C31 | `Logos.Order.consequence_preserves_truth` | [Order.lean#L146](formal/Logos/Order.lean#L146) | `{}` | {} (E0) | `Core.T`, `Core.tschema` | — |
-| C83 | `Logos.Order.no_correct_judgment_of_no_act` | [Order.lean#L155](formal/Logos/Order.lean#L155) | `{Means, Subject}` | {Means, Subject} | `Agency.A`, axiom `Subject` (VOCAB), `Core.T`, `Order.Correct`, `Order.NoAct` | `Order.judgment_of_no_act_is_incorrect` |
-| C84 | `Logos.Order.judgment_of_no_act_proves_act` | [Order.lean#L176](formal/Logos/Order.lean#L176) | `{Means, Subject}` | {Means, Subject} | `Agency.A`, axiom `Subject` (VOCAB), `Order.Correct`, `Order.Incorrect`, `Order.NoAct`, `Order.judgment_implies_act` | — |
+| C31 | `Logos.Order.consequence_preserves_truth` | [Order.lean#L150](formal/Logos/Order.lean#L150) | `{}` | {} (E0) | `Core.T`, `Core.tschema` | — |
+| C83 | `Logos.Order.no_correct_judgment_of_no_act` | [Order.lean#L159](formal/Logos/Order.lean#L159) | `{Means, Subject}` | {Means, Subject} | `Agency.A`, axiom `Subject` (VOCAB), `Core.T`, `Order.Correct`, `Order.NoAct` | `Order.judgment_of_no_act_is_incorrect` |
+| C84 | `Logos.Order.judgment_of_no_act_proves_act` | [Order.lean#L180](formal/Logos/Order.lean#L180) | `{Means, Subject}` | {Means, Subject} | `Agency.A`, axiom `Subject` (VOCAB), `Order.Correct`, `Order.Incorrect`, `Order.NoAct`, `Order.judgment_implies_act` | — |
 | C32 | `Logos.GroundPerson.T8_personalGround` | [GroundPerson.lean#L101](formal/Logos/GroundPerson.lean#L101) | `{AxPersonalGround, GroundProp, Means, Subject}` | {AxPersonalGround, GroundProp, Means, Subject} | `GroundPerson.AxGroundBearing`, axiom `AxPersonalGround` (META), axiom `GroundProp` (VOCAB), `GroundPerson.IsPresentPersonalFeature`, `GroundPerson.Personal`, `GroundPerson.Realizes`, `Modal.NecessaryEntity`, `Truthmaker.Entity` | — |
 | C33 | `Logos.GroundPerson.present_feature_is_grounded` | [GroundPerson.lean#L109](formal/Logos/GroundPerson.lean#L109) | `{GroundPrincipleProp, GroundProp, Means, Subject}` | {GroundPrincipleProp, GroundProp, Means, Subject} | `Core.T`, axiom `GroundPrincipleProp` (SEM), axiom `GroundProp` (VOCAB), `GroundPerson.IsPresentPersonalFeature`, `Truthmaker.Entity` | — |
 | C34 | `Logos.GroundPerson.necessary_truth_has_necessary_grounder` | [GroundPerson.lean#L114](formal/Logos/GroundPerson.lean#L114) | `{AxGlobalGround, Ground, Subject}` | {AxGlobalGround, Ground, Subject} (via C18) | `Modal.NecessaryEntity`, **C18** `T7_necessaryReality`, `Semantics.Form`, `Truthmaker.Entity`, axiom `Ground` (VOCAB), `Truthmaker.NecessarilyTrue` | — |
 | C90 | — | — | — | (retired: manufactured ultimate ground destroyed under hostile semantics) | GroundPerson.personal_ultimate_ground_exists | — |
-| F1a | `Logos.Choice.person_chooses` | [Choice.lean#L158](formal/Logos/Choice.lean#L158) | `{Means, Subject}` | — | `Agency.A`, `Agency.Agent`, axiom `Means` (VOCAB), `Agency.Rational`, axiom `Subject` (VOCAB), `Alternatives.Incompatible`, `Choice.Chooses`, **C50** `incompatible_self_negation`, `Person.Intentional`, `Person.Person` | **C54** `JUDGE_COMMITTED`, **C52** `choiceExists`, `Choice.choiceExists_from_plurality` |
-| F1b | — | — | — | — | CountermodelNoFreeWill | — |
+| F1a | `Logos.Choice.person_hasChoiceField` | [Choice.lean#L207](formal/Logos/Choice.lean#L207) | `{Means, Subject}` | — | `Agency.A`, `Agency.Agent`, axiom `Means` (VOCAB), `Agency.Rational`, axiom `Subject` (VOCAB), `Alternatives.Incompatible`, `Choice.ChoiceField`, **C50** `incompatible_self_negation`, `Person.Intentional`, `Person.Person` | **C54** `JUDGE_HAS_CHOICE_FIELD`, **C52** `choiceField_exists`, `Choice.choiceField_exists_from_plurality` |
+| F1b | `Logos.Choice.genuineChoice_exists` | [Choice.lean#L170](formal/Logos/Choice.lean#L170) | `{Means, Subject}` | — | axiom `Subject` (VOCAB), `Choice.Chooses` | `Choice.freeWillExists_of_genuineChoice` |
 | F2 | — | — | — | — | — | — |
 | F3 | — | — | — | — | — | — |
 | F4 | `Logos.Love.T13_someoneLovable` | [Love.lean#L81](formal/Logos/Love.lean#L81) | `{AxTwoSubjects, Means, Subject}` | — | axiom `Subject` (VOCAB), `Love.Lovable`, `Person.Person`, **C40** `T12_twoPersons` | — |
-| F5 | `Logos.Love.T14_eternalRelation` | [Love.lean#L131](formal/Logos/Love.lean#L131) | `{AxTwoSubjects, Means, Subject}` | — | axiom `Subject` (VOCAB), `Love.AxPersonStability`, `Love.Loves`, `Love.loves_of_helps`, `Person.Person`, `Plurality.NecessarySubject`, **C47** `T12_directedPair`, `Value.Affects` | **C43** `T14_content`, **C45** `T14_square`, **C44** `T14_world` |
+| F5 | `Logos.Love.T14_eternalRelation` | [Love.lean#L150](formal/Logos/Love.lean#L150) | `{AxTwoSubjects, Means, Subject}` | — | axiom `Subject` (VOCAB), `Love.AxPersonStability`, `Love.Loves`, `Love.loves_of_helps`, `Person.Person`, `Plurality.NecessarySubject`, **C47** `T12_directedPair`, `Value.Affects` | **C43** `T14_content`, **C45** `T14_square`, **C44** `T14_world` |
 | F6 | — | — | — | — | — | — |
-| Q7.2 | `CountermodelWorldwiseTruthmaking.ExistsAt` | [HostileSemantics.lean#L296](formal/Logos/HostileSemantics.lean#L296) | `{}` | — | — | — |
+| Q7.2 | `CountermodelPersonNotNecessary.ExistsAt` | [HostileSemantics.lean#L453](formal/Logos/HostileSemantics.lean#L453) | `{}` | — | — | — |
 | C35 | `Logos.Core.negatedAbsolutes` | [Core.lean#L129](formal/Logos/Core.lean#L129) | `{}` | {} (E0) | `Core.N_F`, `Core.N_T`, **C6** `notEverythingTrue`, **C2** `notNothingTrue` | — |
 | C36 | `Logos.Core.rightWrongDistinction` | [Core.lean#L145](formal/Logos/Core.lean#L145) | `{}` | {} (E0) | `Core.N_F`, `Core.N_T`, **C6** `notEverythingTrue`, **C2** `notNothingTrue` | **FAITH-1** `necDistinction`, **C40** `T12_twoPersons`, **C74** `aloneExcluded` |
 | C37 | `Logos.Semantics.bothNecessarilyTrueAndFalse` | [Semantics.lean#L102](formal/Logos/Semantics.lean#L102) | `{CL}` | CL | `Semantics.Form`, `Semantics.NecessarilyFalse`, `Semantics.NecessarilyTrue`, **C13** `lawExcludedMiddle`, **C14** `nonContradiction` | — |
 | C38 | `Logos.Necessity.necDistinction` | [Necessity.lean#L116](formal/Logos/Necessity.lean#L116) | `{}` | {} (E0; C1: identity-model alias; world content = C37) | `Core.N_F`, `Core.N_T`, **C36** `rightWrongDistinction`, `Necessity.Necessity`, `Semantics.World` | `Necessity.necDistinction_content` |
-| C39 | `Logos.Choice.T11_choiceField` | [Choice.lean#L139](formal/Logos/Choice.lean#L139) | `{Means, Subject}` | {Means, Subject} (campo de escolha derivado do ato intencional C68 → C24 → C39) | `Agency.A`, axiom `Subject` (VOCAB), `Alternatives.Incompatible`, **C26** `T9_incompatibleAlternatives`, `Core.IsFalse`, `Core.T`, `Person.Person`, **C24** `T5_personExists` | — |
-| C40 | `Logos.Plurality.T12_twoPersons` | [Plurality.lean#L44](formal/Logos/Plurality.lean#L44) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (settled by Unit countermodel that 1 act does not entail plurality; requires META bridge AxTwoSubjects) | axiom `Subject` (VOCAB), **C36** `rightWrongDistinction`, `Person.Person`, **FAITH-2** `AxTwoSubjects` | `Choice.choiceExists_from_plurality`, **C41** `T13_someoneLovable`, **C47** `T12_directedPair`, `Plurality.T1_subjectExists_from_plurality`, `Plurality.T4_agentExists_from_plurality`, `Plurality.T5_personExists_from_plurality`, **C48** `cogito_from_T12`, `Plurality.notAlone` |
+| C39 | `Logos.Choice.T11_choiceField` | [Choice.lean#L187](formal/Logos/Choice.lean#L187) | `{Means, Subject}` | {Means, Subject} (campo de escolha — não escolha genuína — derivado do ato intencional C68 → C24 → C39; renomeação/split 2026-09-18) | `Agency.A`, axiom `Subject` (VOCAB), `Alternatives.Incompatible`, **C26** `T9_incompatibleAlternatives`, `Core.IsFalse`, `Core.T`, `Person.Person`, **C24** `T5_personExists` | — |
+| C40 | `Logos.Plurality.T12_twoPersons` | [Plurality.lean#L44](formal/Logos/Plurality.lean#L44) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (settled by Unit countermodel that 1 act does not entail plurality; requires META bridge AxTwoSubjects) | axiom `Subject` (VOCAB), **C36** `rightWrongDistinction`, `Person.Person`, **FAITH-2** `AxTwoSubjects` | `Choice.choiceField_exists_from_plurality`, **C41** `T13_someoneLovable`, **C47** `T12_directedPair`, `Plurality.T1_subjectExists_from_plurality`, `Plurality.T4_agentExists_from_plurality`, `Plurality.T5_personExists_from_plurality`, **C48** `cogito_from_T12`, `Plurality.notAlone` |
 | C41 | `Logos.Love.T13_someoneLovable` | [Love.lean#L81](formal/Logos/Love.lean#L81) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (via C40) | axiom `Subject` (VOCAB), `Love.Lovable`, `Person.Person`, **C40** `T12_twoPersons` | — |
 | C48 | `Logos.Plurality.cogito_from_T12` | [Plurality.lean#L57](formal/Logos/Plurality.lean#L57) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} | `Agency.A`, `Agency.Agent`, axiom `Means` (VOCAB), `Agency.Rational`, axiom `Subject` (VOCAB), `Person.Intentional`, `Person.Person`, **C40** `T12_twoPersons` | **C30** `correctness_distinct`, `Order.fallible_false`, **C55** `judge_commits` |
-| C49 | `Logos.Choice.meaning_needs_subject` | [Choice.lean#L100](formal/Logos/Choice.lean#L100) | `{Means, Subject}` | {Means, Subject} | axiom `Means` (VOCAB), axiom `Subject` (VOCAB) | — |
-| C50 | `Logos.Choice.incompatible_self_negation` | [Choice.lean#L76](formal/Logos/Choice.lean#L76) | `{}` | **{}** (pure logic — the field around any meaning-act) | `Alternatives.Incompatible` | `Choice.asserting_no_choice_is_choice`, `Choice.judge_asserting_rightWrong_commits_chooser`, **C51** `person_chooses`, **C55** `judge_commits` |
-| C51 | `Logos.Choice.person_chooses` | [Choice.lean#L158](formal/Logos/Choice.lean#L158) | `{Means, Subject}` | {Means, Subject} | `Agency.A`, `Agency.Agent`, axiom `Means` (VOCAB), `Agency.Rational`, axiom `Subject` (VOCAB), `Alternatives.Incompatible`, `Choice.Chooses`, **C50** `incompatible_self_negation`, `Person.Intentional`, `Person.Person` | **C54** `JUDGE_COMMITTED`, **C52** `choiceExists`, `Choice.choiceExists_from_plurality` |
-| C52 | `Logos.Choice.choiceExists` | [Choice.lean#L167](formal/Logos/Choice.lean#L167) | `{Means, Subject}` | {Means, Subject} (a escolha é real, derivada do ato intencional C68 → C52) | `Agency.A`, axiom `Subject` (VOCAB), `Choice.Chooses`, **C51** `person_chooses`, `Person.Person`, **C24** `T5_personExists` | — |
-| C53 | `Logos.Choice.noChoice_selfRefutes` | [Choice.lean#L192](formal/Logos/Choice.lean#L192) | `{Means, Subject}` | {Means, Subject} (retorsão performativa genuína: a negação da escolha escolhe NoChoice contra ¬NoChoice) | `Agency.Act`, `Agency.Asserts`, axiom `Subject` (VOCAB), `Choice.NoChoice`, `Choice.asserting_no_choice_is_choice` | — |
-| C54 | `Logos.Choice.JUDGE_COMMITTED` | [Choice.lean#L206](formal/Logos/Choice.lean#L206) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (derivação operativa via AxTwoSubjects h e person_chooses) | axiom `Subject` (VOCAB), `Choice.Chooses`, **C51** `person_chooses`, `Core.N_F`, `Core.N_T`, `Person.Person`, **FAITH-2** `AxTwoSubjects` | **C61** `rightWrong_implies_someone_means` |
-| C55 | `Logos.Order.judge_commits` | [Order.lean#L123](formal/Logos/Order.lean#L123) | `{AxTwoSubjects, Means, Subject, CL}` | {AxTwoSubjects, Means, Subject, CL} (defs act-relative §8) | `Agency.A`, axiom `Subject` (VOCAB), `Alternatives.Incompatible`, `Choice.Chooses`, **C50** `incompatible_self_negation`, `Core.IsFalse`, `Core.T`, `Order.Correct`, `Order.Incorrect`, **C48** `cogito_from_T12` | `Order.rightWrongDistinction_implies_meaning` |
-| C56 | `Logos.Value.alone_no_other_help_harm` | [Value.lean#L94](formal/Logos/Value.lean#L94) | `{Subject}` | {Subject} | axiom `Subject` (VOCAB), `Value.Alone`, `Value.Harms`, `Value.Helps` | — |
-| C57 | `Logos.Choice.noSubject_selfRefutes` | [Choice.lean#L232](formal/Logos/Choice.lean#L232) | `{Means, Subject}` | {Means, Subject} (retorsão performativa genuína: negar o sujeito é um ato que testemunha o sujeito) | `Agency.Asserts`, `Agency.NoSubject`, axiom `Subject` (VOCAB), `Agency.noSubject_performative_selfRefutes` | — |
-| C42 | `Logos.Love.T14_eternalRelation` | [Love.lean#L131](formal/Logos/Love.lean#L131) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (built on directed pair C47 under AxTwoSubjects) | axiom `Subject` (VOCAB), `Love.AxPersonStability`, `Love.Loves`, `Love.loves_of_helps`, `Person.Person`, `Plurality.NecessarySubject`, **C47** `T12_directedPair`, `Value.Affects` | **C43** `T14_content`, **C45** `T14_square`, **C44** `T14_world` |
-| C43 | `Logos.Love.T14_content` | [Love.lean#L166](formal/Logos/Love.lean#L166) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} | axiom `Subject` (VOCAB), `Love.Loves`, **C42** `T14_eternalRelation`, `Person.Person`, `Plurality.NecessarySubject` | — |
-| C44 | `Logos.Love.T14_world` | [Love.lean#L144](formal/Logos/Love.lean#L144) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (world-anchored honest □) | axiom `Subject` (VOCAB), `Love.Loves`, **C42** `T14_eternalRelation`, `Necessity.NecessityPH`, `Person.Person`, `Plurality.EntityOf`, `Plurality.NecessarySubject`, `Semantics.World`, `Truthmaker.ExistsAt` | — |
-| C45 | `Logos.Love.T14_square` | [Love.lean#L156](formal/Logos/Love.lean#L156) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (image of the old statement shape) | axiom `Subject` (VOCAB), `Love.Loves`, **C42** `T14_eternalRelation`, `Necessity.Necessity`, `Person.Person`, `Plurality.NecessarySubject`, `Semantics.World` | — |
-| C46 | `Logos.Value.valueInterpersonal_of_split` | [Value.lean#L142](formal/Logos/Value.lean#L142) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (recovery theorem under AxTwoSubjects) | axiom `Subject` (VOCAB), `Core.N_F`, `Core.N_T`, `Person.Person`, `Value.Affects`, `Value.AxPersonsAffect`, **FAITH-2** `AxTwoSubjects` | — |
+| C49 | `Logos.Choice.meaning_needs_subject` | [Choice.lean#L111](formal/Logos/Choice.lean#L111) | `{Means, Subject}` | {Means, Subject} | axiom `Means` (VOCAB), axiom `Subject` (VOCAB) | — |
+| C50 | `Logos.Choice.incompatible_self_negation` | [Choice.lean#L87](formal/Logos/Choice.lean#L87) | `{}` | **{}** (pure logic — the field around any meaning-act) | `Alternatives.Incompatible` | `Choice.asserting_noChoiceField_is_choiceField`, `Choice.judge_asserting_rightWrong_has_choiceField`, **C51** `person_hasChoiceField`, **C55** `judge_commits` |
+| C51 | `Logos.Choice.person_hasChoiceField` | [Choice.lean#L207](formal/Logos/Choice.lean#L207) | `{Means, Subject}` | {Means, Subject} | `Agency.A`, `Agency.Agent`, axiom `Means` (VOCAB), `Agency.Rational`, axiom `Subject` (VOCAB), `Alternatives.Incompatible`, `Choice.ChoiceField`, **C50** `incompatible_self_negation`, `Person.Intentional`, `Person.Person` | **C54** `JUDGE_HAS_CHOICE_FIELD`, **C52** `choiceField_exists`, `Choice.choiceField_exists_from_plurality` |
+| C52 | `Logos.Choice.choiceField_exists` | [Choice.lean#L216](formal/Logos/Choice.lean#L216) | `{Means, Subject}` | {Means, Subject} (o campo é real, derivado do ato intencional C68 → C52; renomeado 2026-09-18) | `Agency.A`, axiom `Subject` (VOCAB), `Choice.ChoiceField`, **C51** `person_hasChoiceField`, `Person.Person`, **C24** `T5_personExists` | — |
+| C53 | `Logos.Choice.noChoiceField_selfRefutes` | [Choice.lean#L240](formal/Logos/Choice.lean#L240) | `{Means, Subject}` | {Means, Subject} (retorsão performativa do campo: negar o campo é ele próprio um ato de campo contra a sua negação) | `Agency.Act`, `Agency.Asserts`, axiom `Subject` (VOCAB), `Choice.NoChoiceField`, `Choice.asserting_noChoiceField_is_choiceField` | — |
+| C54 | `Logos.Choice.JUDGE_HAS_CHOICE_FIELD` | [Choice.lean#L256](formal/Logos/Choice.lean#L256) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (derivação operativa via AxTwoSubjects h e person_hasChoiceField; renomeado 2026-09-18) | axiom `Subject` (VOCAB), `Choice.ChoiceField`, **C51** `person_hasChoiceField`, `Core.N_F`, `Core.N_T`, `Person.Person`, **FAITH-2** `AxTwoSubjects` | **C61** `rightWrong_implies_someone_means` |
+| C55 | `Logos.Order.judge_commits` | [Order.lean#L127](formal/Logos/Order.lean#L127) | `{AxTwoSubjects, Means, Subject, CL}` | {AxTwoSubjects, Means, Subject, CL} (defs act-relative §8) | `Agency.A`, axiom `Subject` (VOCAB), `Alternatives.Incompatible`, `Choice.ChoiceField`, **C50** `incompatible_self_negation`, `Core.IsFalse`, `Core.T`, `Order.Correct`, `Order.Incorrect`, **C48** `cogito_from_T12` | `Order.rightWrongDistinction_implies_meaning` |
+| C56 | `Logos.Value.alone_no_other_help_harm` | [Value.lean#L97](formal/Logos/Value.lean#L97) | `{Subject}` | {Subject} | axiom `Subject` (VOCAB), `Value.Alone`, `Value.Harms`, `Value.Helps` | — |
+| C57 | `Logos.Choice.noSubject_selfRefutes` | [Choice.lean#L283](formal/Logos/Choice.lean#L283) | `{Means, Subject}` | {Means, Subject} (retorsão performativa genuína: negar o sujeito é um ato que testemunha o sujeito) | `Agency.Asserts`, `Agency.NoSubject`, axiom `Subject` (VOCAB), `Agency.noSubject_performative_selfRefutes` | — |
+| C42 | `Logos.Love.T14_eternalRelation` | [Love.lean#L150](formal/Logos/Love.lean#L150) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (built on directed pair C47 under AxTwoSubjects) | axiom `Subject` (VOCAB), `Love.AxPersonStability`, `Love.Loves`, `Love.loves_of_helps`, `Person.Person`, `Plurality.NecessarySubject`, **C47** `T12_directedPair`, `Value.Affects` | **C43** `T14_content`, **C45** `T14_square`, **C44** `T14_world` |
+| C43 | `Logos.Love.T14_content` | [Love.lean#L185](formal/Logos/Love.lean#L185) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} | axiom `Subject` (VOCAB), `Love.Loves`, **C42** `T14_eternalRelation`, `Person.Person`, `Plurality.NecessarySubject` | — |
+| C44 | `Logos.Love.T14_world` | [Love.lean#L163](formal/Logos/Love.lean#L163) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (world-anchored honest □) | axiom `Subject` (VOCAB), `Love.Loves`, **C42** `T14_eternalRelation`, `Necessity.NecessityPH`, `Person.Person`, `Plurality.EntityOf`, `Plurality.NecessarySubject`, `Semantics.World`, `Truthmaker.ExistsAt` | — |
+| C45 | `Logos.Love.T14_square` | [Love.lean#L175](formal/Logos/Love.lean#L175) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (image of the old statement shape) | axiom `Subject` (VOCAB), `Love.Loves`, **C42** `T14_eternalRelation`, `Necessity.Necessity`, `Person.Person`, `Plurality.NecessarySubject`, `Semantics.World` | — |
+| C46 | `Logos.Value.valueInterpersonal_of_split` | [Value.lean#L145](formal/Logos/Value.lean#L145) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (recovery theorem under AxTwoSubjects) | axiom `Subject` (VOCAB), `Core.N_F`, `Core.N_T`, `Person.Person`, `Value.Affects`, `Value.AxPersonsAffect`, **FAITH-2** `AxTwoSubjects` | — |
 | C47 | `Logos.Plurality.T12_directedPair` | [Plurality.lean#L124](formal/Logos/Plurality.lean#L124) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (chain node — distinctness is forward direction; T14 built on this node) | axiom `Subject` (VOCAB), `Person.Person`, **C40** `T12_twoPersons`, `Value.Affects` | **C42** `T14_eternalRelation` |
-| C61 | `Logos.Choice.rightWrong_implies_someone_means` | [Choice.lean#L225](formal/Logos/Choice.lean#L225) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (JUDGE_COMMITTED C54 ∘ rightWrongDistinction C36) | `Agency.A`, axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Alternatives.Incompatible`, `Choice.Chooses`, **C54** `JUDGE_COMMITTED`, `Core.N_F`, `Core.N_T` | — |
+| C61 | `Logos.Choice.rightWrong_implies_someone_means` | [Choice.lean#L276](formal/Logos/Choice.lean#L276) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (JUDGE_HAS_CHOICE_FIELD C54 ∘ rightWrongDistinction C36) | `Agency.A`, axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Alternatives.Incompatible`, `Choice.ChoiceField`, **C54** `JUDGE_HAS_CHOICE_FIELD`, `Core.N_F`, `Core.N_T` | — |
 | C62 | `Logos.Order.rightWrong_implies_meaning` | [Order.lean#L46](formal/Logos/Order.lean#L46) | `{Means, Subject}` | {Means, Subject} | `Agency.A`, axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Choice.Meaning_I`, `Core.IsFalse`, `Core.T`, `Order.Correct`, `Order.Incorrect` | `Order.rightDistinctWrong_implies_meaning`, `Order.rightWrongDistinction_implies_meaning` |
-| C69 | — | — | — | (retired: manufactured freedom via Sum.inl destroyed under hostile semantics) | Choice.freeWillOrigin | — |
-| C70 | — | — | — | (retired: manufactured free will destroyed under hostile semantics) | Choice.noFreeWillPosited | — |
-| C71 | — | — | — | (retired: manufactured freedom destroyed under hostile semantics) | Choice.originFreedomSelfRefutes | — |
-| C72 | — | — | — | (retired: manufactured freedom destroyed under hostile semantics) | Choice.judgeIsFree | — |
+| C69 | — | — | — | (retired: manufactured freedom via Sum.inl destroyed under hostile semantics; genuine-choice replacement is Choice.Chooses/rejectedHornCoMeant) | — | — |
+| C70 | — | — | — | (retired: manufactured free will destroyed under hostile semantics) | — | — |
+| C71 | — | — | — | (retired: manufactured freedom destroyed under hostile semantics) | — | — |
+| C72 | — | — | — | (retired: act does not entail free will; Order.judge_commits yields only the choice field; Chooses → FreeWill is definitional but its existence needs rejectedHornCoMeant) | — | — |
 | C73 | — | — | — | (demoted: Unit countermodel settles that 1 act does not entail plurality; manufactured Sum.inl/inr witness destroyed) | Person.twoPersonsFromSubject | — |
-| C74 | `Logos.Value.aloneExcluded` | [Value.lean#L119](formal/Logos/Value.lean#L119) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (under the plurality bridge AxTwoSubjects, a lone person is excluded) | axiom `Subject` (VOCAB), **C36** `rightWrongDistinction`, `Person.Person`, `Value.Alone`, **FAITH-2** `AxTwoSubjects` | — |
+| C74 | `Logos.Value.aloneExcluded` | [Value.lean#L122](formal/Logos/Value.lean#L122) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} (under the plurality bridge AxTwoSubjects, a lone person is excluded) | axiom `Subject` (VOCAB), **C36** `rightWrongDistinction`, `Person.Person`, `Value.Alone`, **FAITH-2** `AxTwoSubjects` | — |
 | C75 | — | — | — | (killed under hostile semantics: content existence does not imply personhood; tripartite report) | Person.everyContentIsAPerson | — |
 | C76 | — | — | — | (excised: manufactured witness destroyed) | Love.T14_canonicalRigid | — |
-| C77 | `Logos.Love.necessaryPersonExists` | [Love.lean#L106](formal/Logos/Love.lean#L106) | `{AxTwoSubjects, Means, Subject}` | {AxTwoSubjects, Means, Subject} | axiom `Subject` (VOCAB), `Love.AxPersonStability`, `Person.Person`, `Plurality.NecessarySubject`, `Plurality.T5_personExists_from_plurality` | — |
-| C85 | `Logos.Value.help_not_harm` | [Value.lean#L75](formal/Logos/Value.lean#L75) | `{Subject}` | {Subject} | axiom `Subject` (VOCAB), `Value.Harms`, `Value.Helps` | `Love.loves_of_helps` |
+| C77 | `Logos.Love.necessaryPersonExists` | [Love.lean#L124](formal/Logos/Love.lean#L124) | `{Means, Subject}` | {Means, Subject} (VOCAB; **re-anchored 2026-09-18** ao dado performativo, sem AxTwoSubjects — a necessidade da pessoa é *definicional*, ExistsAt (Subject) := True; complementar ao concreto Love.no_contingent_person) | `Agency.Act`, axiom `Subject` (VOCAB), `Love.AxPersonStability`, `Person.Person`, `Plurality.NecessarySubject`, **C24** `T5_personExists` | — |
+| C85 | `Logos.Value.help_not_harm` | [Value.lean#L78](formal/Logos/Value.lean#L78) | `{Subject}` | {Subject} | axiom `Subject` (VOCAB), `Value.Harms`, `Value.Helps` | `Love.loves_of_helps` |
 | C86 | `Logos.Love.love_helps` | [Love.lean#L47](formal/Logos/Love.lean#L47) | `{Subject}` | {Subject} | axiom `Subject` (VOCAB), `Love.Loves`, `Value.Harms`, `Value.Helps` | — |
-| C92 | `Logos.Love.necessary_entity_exists` | [Love.lean#L119](formal/Logos/Love.lean#L119) | `{Means, Subject}` | {Means, Subject} (sem AxTwoSubjects; distinto de T7/C18) | `Agency.Act`, axiom `Subject` (VOCAB), `Love.AxPersonStability`, `Modal.NecessaryEntity`, **C91** `subject_nec_entity_nec`, `Person.Person`, `Plurality.EntityOf`, **C24** `T5_personExists`, `Truthmaker.Entity` | — |
+| C92 | `Logos.Love.necessary_entity_exists` | [Love.lean#L138](formal/Logos/Love.lean#L138) | `{Means, Subject}` | {Means, Subject} (sem AxTwoSubjects; distinto de T7/C18) | `Agency.Act`, axiom `Subject` (VOCAB), `Love.AxPersonStability`, `Modal.NecessaryEntity`, **C91** `subject_nec_entity_nec`, `Person.Person`, `Plurality.EntityOf`, **C24** `T5_personExists`, `Truthmaker.Entity` | — |
 | C63 | `Logos.Initiation.branches_not_transfer` | [Initiation.lean#L27](formal/Logos/Initiation.lean#L27) | `{}` | **{}** (lógica pura — sem axioma, sem vocabulário) | `Initiation.Branches`, `Initiation.IsTransfer` | — |
 | C64 | — | — | — | (retired: manufactured Sum.inl origin destroyed under hostile semantics) | Initiation.originates_not_transfer | — |
 | C65 | — | — | — | (retired: manufactured personhood by initiation destroyed under hostile semantics) | Initiation.person_iff_originates | — |
@@ -718,8 +724,8 @@ Detalhe do kernel:
 | C81 | — | — | — | (retired: manufactured origin branch evaluation destroyed) | Initiation.origin_branches | — |
 | C82 | — | — | — | (retired: manufactured initiating person destroyed) | Initiation.origin_is_initiating_person | — |
 | FAITH-1 | `Logos.Necessity.necDistinction` | [Necessity.lean#L116](formal/Logos/Necessity.lean#L116) | `{}` | — | `Core.N_F`, `Core.N_T`, **C36** `rightWrongDistinction`, `Necessity.Necessity`, `Semantics.World` | `Necessity.necDistinction_content` |
-| FAITH-2 | `Logos.Value.AxTwoSubjects` | [Value.lean#L110](formal/Logos/Value.lean#L110) | `{AxTwoSubjects, Means, Subject}` | — | axiom `Subject` (VOCAB), `Core.N_F`, `Core.N_T`, `Person.Person` | **C54** `JUDGE_COMMITTED`, **C40** `T12_twoPersons`, **C74** `aloneExcluded`, **C46** `valueInterpersonal_of_split` |
-| F7 | — | — | — | — | ChoiceAt | — |
+| FAITH-2 | `Logos.Value.AxTwoSubjects` | [Value.lean#L113](formal/Logos/Value.lean#L113) | `{AxTwoSubjects, Means, Subject}` | — | axiom `Subject` (VOCAB), `Core.N_F`, `Core.N_T`, `Person.Person` | **C54** `JUDGE_HAS_CHOICE_FIELD`, **C40** `T12_twoPersons`, **C74** `aloneExcluded`, **C46** `valueInterpersonal_of_split` |
+| F7 | `CountermodelNoFreeWill.FreeWill` | [HostileSemantics.lean#L269](formal/Logos/HostileSemantics.lean#L269) | `{}` | — | — | — |
 | F8 | — | — | — | — | — | — |
 | F9 | — | — | — | — | — | — |
 
@@ -735,126 +741,144 @@ Detalhe do kernel:
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `ActOntology` | structure | [L148](formal/Logos/HostileSemantics.lean#L148) | `structure ActOntology where` | —  |
+| `ActOntology` | structure | [L170](formal/Logos/HostileSemantics.lean#L170) | `structure ActOntology where` | —  |
 
 ### `CountermodelActWithoutSubject`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `Act` | def | [L158](formal/Logos/HostileSemantics.lean#L158) | `def Act : Entity → Prop → Prop` | —  |
-| `ConstitutiveAct` | def | [L172](formal/Logos/HostileSemantics.lean#L172) | `def ConstitutiveAct (I : ActOntology) : Prop` | —  |
-| `Entity` | def | [L157](formal/Logos/HostileSemantics.lean#L157) | `def Entity : Type` | —  |
-| `Person` | def | [L160](formal/Logos/HostileSemantics.lean#L160) | `def Person : Entity → Prop` | —  |
-| `Subject` | def | [L159](formal/Logos/HostileSemantics.lean#L159) | `def Subject : Entity → Prop` | —  |
-| `act_occurs` | theorem | [L162](formal/Logos/HostileSemantics.lean#L162) | `theorem act_occurs : ∃ s : Entity, ∃ p : Prop, Act s p` | —  |
-| `act_without_subject` | theorem | [L167](formal/Logos/HostileSemantics.lean#L167) | `theorem act_without_subject : (∃ s : Entity, ∃ p : Prop, Act s p) ∧ ¬ (∃ s : Ent` | —  |
-| `countermodel_violates_constitutive_act` | theorem | [L183](formal/Logos/HostileSemantics.lean#L183) | `theorem countermodel_violates_constitutive_act : ¬ ConstitutiveAct { Entity` | —  |
-| `no_person` | theorem | [L164](formal/Logos/HostileSemantics.lean#L164) | `theorem no_person : ¬ ∃ s : Entity, Person s` | —  |
-| `no_subject` | theorem | [L163](formal/Logos/HostileSemantics.lean#L163) | `theorem no_subject : ¬ ∃ s : Entity, Subject s` | —  |
-| `subject_of_constitutive_act` | theorem | [L176](formal/Logos/HostileSemantics.lean#L176) | `theorem subject_of_constitutive_act (I : ActOntology) (hConst : ConstitutiveAct ` | —  |
+| `Act` | def | [L180](formal/Logos/HostileSemantics.lean#L180) | `def Act : Entity → Prop → Prop` | —  |
+| `ConstitutiveAct` | def | [L194](formal/Logos/HostileSemantics.lean#L194) | `def ConstitutiveAct (I : ActOntology) : Prop` | —  |
+| `Entity` | def | [L179](formal/Logos/HostileSemantics.lean#L179) | `def Entity : Type` | —  |
+| `Person` | def | [L182](formal/Logos/HostileSemantics.lean#L182) | `def Person : Entity → Prop` | —  |
+| `Subject` | def | [L181](formal/Logos/HostileSemantics.lean#L181) | `def Subject : Entity → Prop` | —  |
+| `act_occurs` | theorem | [L184](formal/Logos/HostileSemantics.lean#L184) | `theorem act_occurs : ∃ s : Entity, ∃ p : Prop, Act s p` | —  |
+| `act_without_subject` | theorem | [L189](formal/Logos/HostileSemantics.lean#L189) | `theorem act_without_subject : (∃ s : Entity, ∃ p : Prop, Act s p) ∧ ¬ (∃ s : Ent` | —  |
+| `countermodel_violates_constitutive_act` | theorem | [L205](formal/Logos/HostileSemantics.lean#L205) | `theorem countermodel_violates_constitutive_act : ¬ ConstitutiveAct { Entity` | —  |
+| `no_person` | theorem | [L186](formal/Logos/HostileSemantics.lean#L186) | `theorem no_person : ¬ ∃ s : Entity, Person s` | —  |
+| `no_subject` | theorem | [L185](formal/Logos/HostileSemantics.lean#L185) | `theorem no_subject : ¬ ∃ s : Entity, Subject s` | —  |
+| `subject_of_constitutive_act` | theorem | [L198](formal/Logos/HostileSemantics.lean#L198) | `theorem subject_of_constitutive_act (I : ActOntology) (hConst : ConstitutiveAct ` | —  |
 
 ### `CountermodelImpersonalUltimateGround`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `Entity` | abbrev | [L442](formal/Logos/HostileSemantics.lean#L442) | `abbrev Entity : Type` | —  |
-| `GroundEntity` | def | [L444](formal/Logos/HostileSemantics.lean#L444) | `def GroundEntity (_x _y : Entity) : Prop` | —  |
-| `Personal` | def | [L446](formal/Logos/HostileSemantics.lean#L446) | `def Personal (_e : Entity) : Prop` | —  |
-| `UltimateGround` | def | [L445](formal/Logos/HostileSemantics.lean#L445) | `def UltimateGround (u : Entity) : Prop` | —  |
-| `no_personal_ultimate` | theorem | [L453](formal/Logos/HostileSemantics.lean#L453) | `theorem no_personal_ultimate : ¬ ∃ u : Entity, UltimateGround u ∧ Personal u` | —  |
-| `ultimate_exists` | theorem | [L448](formal/Logos/HostileSemantics.lean#L448) | `theorem ultimate_exists : ∃ u : Entity, UltimateGround u` | —  |
-| `ultimate_not_entails_personal` | theorem | [L458](formal/Logos/HostileSemantics.lean#L458) | `theorem ultimate_not_entails_personal : (∃ u : Entity, UltimateGround u) ∧ ¬ (∃ ` | —  |
+| `Entity` | abbrev | [L537](formal/Logos/HostileSemantics.lean#L537) | `abbrev Entity : Type` | —  |
+| `GroundEntity` | def | [L539](formal/Logos/HostileSemantics.lean#L539) | `def GroundEntity (_x _y : Entity) : Prop` | —  |
+| `Personal` | def | [L541](formal/Logos/HostileSemantics.lean#L541) | `def Personal (_e : Entity) : Prop` | —  |
+| `UltimateGround` | def | [L540](formal/Logos/HostileSemantics.lean#L540) | `def UltimateGround (u : Entity) : Prop` | —  |
+| `no_personal_ultimate` | theorem | [L548](formal/Logos/HostileSemantics.lean#L548) | `theorem no_personal_ultimate : ¬ ∃ u : Entity, UltimateGround u ∧ Personal u` | —  |
+| `ultimate_exists` | theorem | [L543](formal/Logos/HostileSemantics.lean#L543) | `theorem ultimate_exists : ∃ u : Entity, UltimateGround u` | —  |
+| `ultimate_not_entails_personal` | theorem | [L553](formal/Logos/HostileSemantics.lean#L553) | `theorem ultimate_not_entails_personal : (∃ u : Entity, UltimateGround u) ∧ ¬ (∃ ` | —  |
 
 ### `CountermodelInfiniteGroundChain`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `Entity` | abbrev | [L407](formal/Logos/HostileSemantics.lean#L407) | `abbrev Entity : Type` | —  |
-| `GroundEntity` | def | [L410](formal/Logos/HostileSemantics.lean#L410) | `def GroundEntity (x y : Entity) : Prop` | —  |
-| `UltimateGround` | def | [L412](formal/Logos/HostileSemantics.lean#L412) | `def UltimateGround (u : Entity) : Prop` | —  |
-| `asymmetric` | theorem | [L417](formal/Logos/HostileSemantics.lean#L417) | `theorem asymmetric (x y : Entity) : GroundEntity x y → ¬ GroundEntity y x` | —  |
-| `infinite_chain_has_no_ultimate` | theorem | [L427](formal/Logos/HostileSemantics.lean#L427) | `theorem infinite_chain_has_no_ultimate : (∀ x, ¬ GroundEntity x x) ∧ (∀ x y, Gro` | —  |
-| `irreflexive` | theorem | [L414](formal/Logos/HostileSemantics.lean#L414) | `theorem irreflexive (x : Entity) : ¬ GroundEntity x x` | —  |
-| `no_ultimate` | theorem | [L423](formal/Logos/HostileSemantics.lean#L423) | `theorem no_ultimate : ¬ ∃ u : Entity, UltimateGround u` | —  |
-| `transitive` | theorem | [L420](formal/Logos/HostileSemantics.lean#L420) | `theorem transitive (x y z : Entity) : GroundEntity x y → GroundEntity y z → Grou` | —  |
+| `Entity` | abbrev | [L502](formal/Logos/HostileSemantics.lean#L502) | `abbrev Entity : Type` | —  |
+| `GroundEntity` | def | [L505](formal/Logos/HostileSemantics.lean#L505) | `def GroundEntity (x y : Entity) : Prop` | —  |
+| `UltimateGround` | def | [L507](formal/Logos/HostileSemantics.lean#L507) | `def UltimateGround (u : Entity) : Prop` | —  |
+| `asymmetric` | theorem | [L512](formal/Logos/HostileSemantics.lean#L512) | `theorem asymmetric (x y : Entity) : GroundEntity x y → ¬ GroundEntity y x` | —  |
+| `infinite_chain_has_no_ultimate` | theorem | [L522](formal/Logos/HostileSemantics.lean#L522) | `theorem infinite_chain_has_no_ultimate : (∀ x, ¬ GroundEntity x x) ∧ (∀ x y, Gro` | —  |
+| `irreflexive` | theorem | [L509](formal/Logos/HostileSemantics.lean#L509) | `theorem irreflexive (x : Entity) : ¬ GroundEntity x x` | —  |
+| `no_ultimate` | theorem | [L518](formal/Logos/HostileSemantics.lean#L518) | `theorem no_ultimate : ¬ ∃ u : Entity, UltimateGround u` | —  |
+| `transitive` | theorem | [L515](formal/Logos/HostileSemantics.lean#L515) | `theorem transitive (x y z : Entity) : GroundEntity x y → GroundEntity y z → Grou` | —  |
 
 ### `CountermodelNoFreeWill`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `A` | def | [L238](formal/Logos/HostileSemantics.lean#L238) | `def A : S → Prop → Prop` | —  |
-| `FreeWill` | def | [L239](formal/Logos/HostileSemantics.lean#L239) | `def FreeWill : S → Prop → Prop` | —  |
-| `S` | def | [L237](formal/Logos/HostileSemantics.lean#L237) | `def S : Type` | —  |
-| `act_does_not_imply_freewill` | theorem | [L243](formal/Logos/HostileSemantics.lean#L243) | `theorem act_does_not_imply_freewill : (∃ s : S, ∃ p : Prop, A s p) ∧ ¬ (∃ s : S,` | —  |
-| `act_occurs` | theorem | [L241](formal/Logos/HostileSemantics.lean#L241) | `theorem act_occurs : ∃ s : S, ∃ p : Prop, A s p` | —  |
-| `no_free_will` | theorem | [L242](formal/Logos/HostileSemantics.lean#L242) | `theorem no_free_will : ¬ ∃ s : S, ∃ p : Prop, FreeWill s p` | —  |
+| `A` | def | [L267](formal/Logos/HostileSemantics.lean#L267) | `def A : S → Prop → Prop` | —  |
+| `Chooses` | def | [L268](formal/Logos/HostileSemantics.lean#L268) | `def Chooses : S → Prop → Prop → Prop` | —  |
+| `FreeWill` | def | [L269](formal/Logos/HostileSemantics.lean#L269) | `def FreeWill : S → Prop` | — → F7 |
+| `S` | def | [L266](formal/Logos/HostileSemantics.lean#L266) | `def S : Type` | —  |
+| `act_does_not_imply_choice` | theorem | [L274](formal/Logos/HostileSemantics.lean#L274) | `theorem act_does_not_imply_choice : (∃ s : S, ∃ p : Prop, A s p) ∧ ¬ (∃ s : S, ∃` | —  |
+| `act_does_not_imply_freewill` | theorem | [L277](formal/Logos/HostileSemantics.lean#L277) | `theorem act_does_not_imply_freewill : (∃ s : S, ∃ p : Prop, A s p) ∧ ¬ (∃ s : S,` | —  |
+| `act_occurs` | theorem | [L271](formal/Logos/HostileSemantics.lean#L271) | `theorem act_occurs : ∃ s : S, ∃ p : Prop, A s p` | —  |
+| `no_choice` | theorem | [L272](formal/Logos/HostileSemantics.lean#L272) | `theorem no_choice : ¬ ∃ s : S, ∃ p q : Prop, Chooses s p q` | —  |
+| `no_free_will` | theorem | [L273](formal/Logos/HostileSemantics.lean#L273) | `theorem no_free_will : ¬ ∃ s : S, FreeWill s` | —  |
 
 ### `CountermodelNoPerson`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `A` | def | [L226](formal/Logos/HostileSemantics.lean#L226) | `def A : S → Prop → Prop` | —  |
-| `Person` | def | [L227](formal/Logos/HostileSemantics.lean#L227) | `def Person : S → Prop` | —  |
-| `S` | def | [L225](formal/Logos/HostileSemantics.lean#L225) | `def S : Type` | —  |
-| `act_does_not_imply_person` | theorem | [L231](formal/Logos/HostileSemantics.lean#L231) | `theorem act_does_not_imply_person : (∃ s : S, ∃ p : Prop, A s p) ∧ ¬ (∃ s : S, P` | —  |
-| `act_occurs` | theorem | [L229](formal/Logos/HostileSemantics.lean#L229) | `theorem act_occurs : ∃ s : S, ∃ p : Prop, A s p` | —  |
-| `no_person` | theorem | [L230](formal/Logos/HostileSemantics.lean#L230) | `theorem no_person : ¬ ∃ s : S, Person s` | —  |
+| `A` | def | [L248](formal/Logos/HostileSemantics.lean#L248) | `def A : S → Prop → Prop` | —  |
+| `Person` | def | [L249](formal/Logos/HostileSemantics.lean#L249) | `def Person : S → Prop` | —  |
+| `S` | def | [L247](formal/Logos/HostileSemantics.lean#L247) | `def S : Type` | —  |
+| `act_does_not_imply_person` | theorem | [L253](formal/Logos/HostileSemantics.lean#L253) | `theorem act_does_not_imply_person : (∃ s : S, ∃ p : Prop, A s p) ∧ ¬ (∃ s : S, P` | —  |
+| `act_occurs` | theorem | [L251](formal/Logos/HostileSemantics.lean#L251) | `theorem act_occurs : ∃ s : S, ∃ p : Prop, A s p` | —  |
+| `no_person` | theorem | [L252](formal/Logos/HostileSemantics.lean#L252) | `theorem no_person : ¬ ∃ s : S, Person s` | —  |
+
+### `CountermodelPersonNotNecessary`
+
+| Nome | Tipo | Linha | Statement (Lógica) | Axis |
+|---|---|---|---|---|
+| `ExistsAt` | def | [L453](formal/Logos/HostileSemantics.lean#L453) | `def ExistsAt (w : World) (_s : Subject) : Prop` | — → Q7.2 |
+| `NecessarySubject` | def | [L457](formal/Logos/HostileSemantics.lean#L457) | `def NecessarySubject (s : Subject) : Prop` | —  |
+| `NecessitySignature` | structure | [L473](formal/Logos/HostileSemantics.lean#L473) | `structure NecessitySignature where` | —  |
+| `Person` | def | [L455](formal/Logos/HostileSemantics.lean#L455) | `def Person (_s : Subject) : Prop` | —  |
+| `Subject` | abbrev | [L449](formal/Logos/HostileSemantics.lean#L449) | `abbrev Subject : Type` | —  |
+| `World` | abbrev | [L450](formal/Logos/HostileSemantics.lean#L450) | `abbrev World : Type` | —  |
+| `no_necessary_subject` | theorem | [L461](formal/Logos/HostileSemantics.lean#L461) | `theorem no_necessary_subject : ¬ ∃ s : Subject, NecessarySubject s` | —  |
+| `not_entails_person_necessary` | theorem | [L481](formal/Logos/HostileSemantics.lean#L481) | `theorem not_entails_person_necessary : ¬ (∀ I : NecessitySignature, (∃ s : I.Sub` | —  |
+| `person_exists` | theorem | [L459](formal/Logos/HostileSemantics.lean#L459) | `theorem person_exists : ∃ s : Subject, Person s` | —  |
+| `person_not_entails_necessary` | theorem | [L467](formal/Logos/HostileSemantics.lean#L467) | `theorem person_not_entails_necessary : (∃ s : Subject, Person s) ∧ ¬ (∃ s : Subj` | —  |
 
 ### `CountermodelPluralityWithoutLove`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `Loves` | def | [L473](formal/Logos/HostileSemantics.lean#L473) | `def Loves (_s _t : Subject) : Prop` | —  |
-| `Person` | def | [L472](formal/Logos/HostileSemantics.lean#L472) | `def Person (_s : Subject) : Prop` | —  |
-| `Subject` | abbrev | [L471](formal/Logos/HostileSemantics.lean#L471) | `abbrev Subject : Type` | —  |
-| `no_love` | theorem | [L479](formal/Logos/HostileSemantics.lean#L479) | `theorem no_love : ¬ ∃ s₁ s₂ : Subject, Loves s₁ s₂` | —  |
-| `plurality_not_entails_love` | theorem | [L484](formal/Logos/HostileSemantics.lean#L484) | `theorem plurality_not_entails_love : (∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧` | —  |
-| `two_persons_exist` | theorem | [L475](formal/Logos/HostileSemantics.lean#L475) | `theorem two_persons_exist : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` | —  |
+| `Loves` | def | [L568](formal/Logos/HostileSemantics.lean#L568) | `def Loves (_s _t : Subject) : Prop` | —  |
+| `Person` | def | [L567](formal/Logos/HostileSemantics.lean#L567) | `def Person (_s : Subject) : Prop` | —  |
+| `Subject` | abbrev | [L566](formal/Logos/HostileSemantics.lean#L566) | `abbrev Subject : Type` | —  |
+| `no_love` | theorem | [L574](formal/Logos/HostileSemantics.lean#L574) | `theorem no_love : ¬ ∃ s₁ s₂ : Subject, Loves s₁ s₂` | —  |
+| `plurality_not_entails_love` | theorem | [L579](formal/Logos/HostileSemantics.lean#L579) | `theorem plurality_not_entails_love : (∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧` | —  |
+| `two_persons_exist` | theorem | [L570](formal/Logos/HostileSemantics.lean#L570) | `theorem two_persons_exist : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` | —  |
 
 ### `CountermodelSubjectNecessityNotEntityNecessity`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `Entity` | abbrev | [L334](formal/Logos/HostileSemantics.lean#L334) | `abbrev Entity : Type` | —  |
-| `EntityExistsAt` | def | [L346](formal/Logos/HostileSemantics.lean#L346) | `def EntityExistsAt (w : World) (_e : Entity) : Prop` | —  |
-| `EntityOf` | def | [L338](formal/Logos/HostileSemantics.lean#L338) | `def EntityOf (_s : Subject) : Entity` | —  |
-| `NecessaryEntity` | def | [L352](formal/Logos/HostileSemantics.lean#L352) | `def NecessaryEntity (e : Entity) : Prop` | —  |
-| `NecessarySubject` | def | [L349](formal/Logos/HostileSemantics.lean#L349) | `def NecessarySubject (s : Subject) : Prop` | —  |
-| `NecessityLift` | structure | [L373](formal/Logos/HostileSemantics.lean#L373) | `structure NecessityLift where` | —  |
-| `Subject` | abbrev | [L333](formal/Logos/HostileSemantics.lean#L333) | `abbrev Subject : Type` | —  |
-| `SubjectExistsAt` | def | [L342](formal/Logos/HostileSemantics.lean#L342) | `def SubjectExistsAt (_w : World) (_s : Subject) : Prop` | —  |
-| `World` | abbrev | [L332](formal/Logos/HostileSemantics.lean#L332) | `abbrev World : Type` | —  |
-| `necessary_subject_is_necessary` | theorem | [L355](formal/Logos/HostileSemantics.lean#L355) | `theorem necessary_subject_is_necessary : NecessarySubject ()` | —  |
-| `no_necessary_entity` | theorem | [L360](formal/Logos/HostileSemantics.lean#L360) | `theorem no_necessary_entity : ¬ ∃ e : Entity, NecessaryEntity e` | —  |
-| `not_holds_of_arbitrary_signature` | theorem | [L382](formal/Logos/HostileSemantics.lean#L382) | `theorem not_holds_of_arbitrary_signature : ¬ (∀ (I : NecessityLift), ∀ s : I.Sub` | —  |
-| `subject_necessity_not_entails_entity_necessity` | theorem | [L367](formal/Logos/HostileSemantics.lean#L367) | `theorem subject_necessity_not_entails_entity_necessity : (∃ s : Subject, Necessa` | —  |
+| `Entity` | abbrev | [L368](formal/Logos/HostileSemantics.lean#L368) | `abbrev Entity : Type` | —  |
+| `EntityExistsAt` | def | [L380](formal/Logos/HostileSemantics.lean#L380) | `def EntityExistsAt (w : World) (_e : Entity) : Prop` | —  |
+| `EntityOf` | def | [L372](formal/Logos/HostileSemantics.lean#L372) | `def EntityOf (_s : Subject) : Entity` | —  |
+| `NecessaryEntity` | def | [L386](formal/Logos/HostileSemantics.lean#L386) | `def NecessaryEntity (e : Entity) : Prop` | —  |
+| `NecessarySubject` | def | [L383](formal/Logos/HostileSemantics.lean#L383) | `def NecessarySubject (s : Subject) : Prop` | —  |
+| `NecessityLift` | structure | [L407](formal/Logos/HostileSemantics.lean#L407) | `structure NecessityLift where` | —  |
+| `Subject` | abbrev | [L367](formal/Logos/HostileSemantics.lean#L367) | `abbrev Subject : Type` | —  |
+| `SubjectExistsAt` | def | [L376](formal/Logos/HostileSemantics.lean#L376) | `def SubjectExistsAt (_w : World) (_s : Subject) : Prop` | —  |
+| `World` | abbrev | [L366](formal/Logos/HostileSemantics.lean#L366) | `abbrev World : Type` | —  |
+| `necessary_subject_is_necessary` | theorem | [L389](formal/Logos/HostileSemantics.lean#L389) | `theorem necessary_subject_is_necessary : NecessarySubject ()` | —  |
+| `no_necessary_entity` | theorem | [L394](formal/Logos/HostileSemantics.lean#L394) | `theorem no_necessary_entity : ¬ ∃ e : Entity, NecessaryEntity e` | —  |
+| `not_holds_of_arbitrary_signature` | theorem | [L416](formal/Logos/HostileSemantics.lean#L416) | `theorem not_holds_of_arbitrary_signature : ¬ (∀ (I : NecessityLift), ∀ s : I.Sub` | —  |
+| `subject_necessity_not_entails_entity_necessity` | theorem | [L401](formal/Logos/HostileSemantics.lean#L401) | `theorem subject_necessity_not_entails_entity_necessity : (∃ s : Subject, Necessa` | —  |
 
 ### `CountermodelSubjectWithoutPerson`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `Act` | def | [L200](formal/Logos/HostileSemantics.lean#L200) | `def Act : Entity → Prop → Prop` | —  |
-| `Entity` | def | [L199](formal/Logos/HostileSemantics.lean#L199) | `def Entity : Type` | —  |
-| `Person` | def | [L202](formal/Logos/HostileSemantics.lean#L202) | `def Person : Entity → Prop` | —  |
-| `Subject` | def | [L201](formal/Logos/HostileSemantics.lean#L201) | `def Subject : Entity → Prop` | —  |
-| `act_and_subject_without_person` | theorem | [L218](formal/Logos/HostileSemantics.lean#L218) | `theorem act_and_subject_without_person : (∃ s : Entity, ∃ p : Prop, Act s p) ∧ (` | —  |
-| `act_occurs` | theorem | [L208](formal/Logos/HostileSemantics.lean#L208) | `theorem act_occurs : ∃ s : Entity, ∃ p : Prop, Act s p` | —  |
-| `constitutive_act_holds` | theorem | [L205](formal/Logos/HostileSemantics.lean#L205) | `theorem constitutive_act_holds : ∀ (s : Entity) (p : Prop), Act s p → Subject s` | —  |
-| `no_person` | theorem | [L210](formal/Logos/HostileSemantics.lean#L210) | `theorem no_person : ¬ ∃ s : Entity, Person s` | —  |
-| `subject_exists` | theorem | [L209](formal/Logos/HostileSemantics.lean#L209) | `theorem subject_exists : ∃ s : Entity, Subject s` | —  |
-| `subject_without_person` | theorem | [L213](formal/Logos/HostileSemantics.lean#L213) | `theorem subject_without_person : (∃ s : Entity, Subject s) ∧ ¬ (∃ s : Entity, Pe` | —  |
+| `Act` | def | [L222](formal/Logos/HostileSemantics.lean#L222) | `def Act : Entity → Prop → Prop` | —  |
+| `Entity` | def | [L221](formal/Logos/HostileSemantics.lean#L221) | `def Entity : Type` | —  |
+| `Person` | def | [L224](formal/Logos/HostileSemantics.lean#L224) | `def Person : Entity → Prop` | —  |
+| `Subject` | def | [L223](formal/Logos/HostileSemantics.lean#L223) | `def Subject : Entity → Prop` | —  |
+| `act_and_subject_without_person` | theorem | [L240](formal/Logos/HostileSemantics.lean#L240) | `theorem act_and_subject_without_person : (∃ s : Entity, ∃ p : Prop, Act s p) ∧ (` | —  |
+| `act_occurs` | theorem | [L230](formal/Logos/HostileSemantics.lean#L230) | `theorem act_occurs : ∃ s : Entity, ∃ p : Prop, Act s p` | —  |
+| `constitutive_act_holds` | theorem | [L227](formal/Logos/HostileSemantics.lean#L227) | `theorem constitutive_act_holds : ∀ (s : Entity) (p : Prop), Act s p → Subject s` | —  |
+| `no_person` | theorem | [L232](formal/Logos/HostileSemantics.lean#L232) | `theorem no_person : ¬ ∃ s : Entity, Person s` | —  |
+| `subject_exists` | theorem | [L231](formal/Logos/HostileSemantics.lean#L231) | `theorem subject_exists : ∃ s : Entity, Subject s` | —  |
+| `subject_without_person` | theorem | [L235](formal/Logos/HostileSemantics.lean#L235) | `theorem subject_without_person : (∃ s : Entity, Subject s) ∧ ¬ (∃ s : Entity, Pe` | —  |
 
 ### `CountermodelWorldwiseTruthmaking`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `Entity` | abbrev | [L294](formal/Logos/HostileSemantics.lean#L294) | `abbrev Entity : Type` | —  |
-| `ExistsAt` | def | [L296](formal/Logos/HostileSemantics.lean#L296) | `def ExistsAt (w : World) (e : Entity) : Prop` | — → Q7.2 |
-| `Ground` | def | [L297](formal/Logos/HostileSemantics.lean#L297) | `def Ground (_e : Entity) (_φ : Unit) : Prop` | —  |
-| `World` | abbrev | [L293](formal/Logos/HostileSemantics.lean#L293) | `abbrev World : Type` | —  |
-| `no_uniform_ground` | theorem | [L303](formal/Logos/HostileSemantics.lean#L303) | `theorem no_uniform_ground : ¬ ∃ e : Entity, ∀ w : World, ExistsAt w e ∧ Ground e` | —  |
-| `worldwise_not_entails_uniform_ground` | theorem | [L311](formal/Logos/HostileSemantics.lean#L311) | `theorem worldwise_not_entails_uniform_ground : (∀ w : World, ∃ e : Entity, Exist` | —  |
-| `worldwise_truthmaking` | theorem | [L299](formal/Logos/HostileSemantics.lean#L299) | `theorem worldwise_truthmaking : ∀ w : World, ∃ e : Entity, ExistsAt w e ∧ Ground` | —  |
+| `Entity` | abbrev | [L328](formal/Logos/HostileSemantics.lean#L328) | `abbrev Entity : Type` | —  |
+| `ExistsAt` | def | [L330](formal/Logos/HostileSemantics.lean#L330) | `def ExistsAt (w : World) (e : Entity) : Prop` | —  |
+| `Ground` | def | [L331](formal/Logos/HostileSemantics.lean#L331) | `def Ground (_e : Entity) (_φ : Unit) : Prop` | —  |
+| `World` | abbrev | [L327](formal/Logos/HostileSemantics.lean#L327) | `abbrev World : Type` | —  |
+| `no_uniform_ground` | theorem | [L337](formal/Logos/HostileSemantics.lean#L337) | `theorem no_uniform_ground : ¬ ∃ e : Entity, ∀ w : World, ExistsAt w e ∧ Ground e` | —  |
+| `worldwise_not_entails_uniform_ground` | theorem | [L345](formal/Logos/HostileSemantics.lean#L345) | `theorem worldwise_not_entails_uniform_ground : (∀ w : World, ∃ e : Entity, Exist` | —  |
+| `worldwise_truthmaking` | theorem | [L333](formal/Logos/HostileSemantics.lean#L333) | `theorem worldwise_truthmaking : ∀ w : World, ∃ e : Entity, ExistsAt w e ∧ Ground` | —  |
 
 ### `Logos.Agency`
 
@@ -906,28 +930,33 @@ Detalhe do kernel:
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `CanChoose` | def | [L105](formal/Logos/Choice.lean#L105) | `def CanChoose (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
-| `Chooses` | def | [L69](formal/Logos/Choice.lean#L69) | `def Chooses (s : Subject) (p : Prop) (q : Prop) : Prop` | {Means, Subject}  |
-| `FreeWill` | def | [L131](formal/Logos/Choice.lean#L131) | `def FreeWill (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
-| `JUDGE_COMMITTED` | theorem | [L206](formal/Logos/Choice.lean#L206) | `theorem JUDGE_COMMITTED (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) : ∃ s : Subjec` | {AxTwoSubjects, Means, Subject} → C54 |
-| `Meaning_I` | def | [L83](formal/Logos/Choice.lean#L83) | `def Meaning_I (p : Prop) : Prop` | {Means, Subject}  |
-| `NoChoice` | def | [L180](formal/Logos/Choice.lean#L180) | `def NoChoice : Prop` | {Means, Subject}  |
-| `T11_choiceField` | theorem | [L139](formal/Logos/Choice.lean#L139) | `theorem T11_choiceField (h : ∃ s : Subject, ∃ p : Prop, A s p) : ∃ s : Subject, ` | {Means, Subject} → C39 |
-| `T11_choiceField_from_plurality` | theorem | [L146](formal/Logos/Choice.lean#L146) | `theorem T11_choiceField_from_plurality : ∃ s : Subject, Person s ∧ ∃ p q : Prop,` | {AxTwoSubjects, Means, Subject}  |
-| `asserting_no_choice_is_choice` | theorem | [L184](formal/Logos/Choice.lean#L184) | `theorem asserting_no_choice_is_choice (speaker : Subject) (h : Logos.Agency.Asse` | {Means, Subject}  |
-| `canChoose_unfold` | theorem | [L111](formal/Logos/Choice.lean#L111) | `theorem canChoose_unfold {s : Subject} {p : Prop} : CanChoose s p ↔ ∃ q : Prop, ` | {Means, Subject, CL}  |
-| `choiceExists` | theorem | [L167](formal/Logos/Choice.lean#L167) | `theorem choiceExists (h : ∃ s : Subject, ∃ p : Prop, A s p) : ∃ s : Subject, ∃ p` | {Means, Subject} → C52 |
-| `choiceExists_from_plurality` | theorem | [L174](formal/Logos/Choice.lean#L174) | `theorem choiceExists_from_plurality : ∃ s : Subject, ∃ p q : Prop, Chooses s p q` | {AxTwoSubjects, Means, Subject}  |
-| `incompatible_self_negation` | theorem | [L76](formal/Logos/Choice.lean#L76) | `theorem incompatible_self_negation (p : Prop) : Incompatible p (¬ p)` | {} → C50 |
-| `judge_asserting_rightWrong_commits_chooser` | theorem | [L213](formal/Logos/Choice.lean#L213) | `theorem judge_asserting_rightWrong_commits_chooser (speaker : Subject) (h : Logo` | {Means, Subject}  |
-| `meaning_I_needs_subject` | theorem | [L91](formal/Logos/Choice.lean#L91) | `theorem meaning_I_needs_subject {p : Prop} (h : Meaning_I p) : ∃ s : Subject, Me` | {Means, Subject}  |
-| `meaning_needs_subject` | theorem | [L100](formal/Logos/Choice.lean#L100) | `theorem meaning_needs_subject {s : Subject} {p : Prop} (hm : Means s p) : ∃ t : ` | {Means, Subject} → C49 |
-| `noChoice_contradicts_choice` | theorem | [L197](formal/Logos/Choice.lean#L197) | `theorem noChoice_contradicts_choice (hChoice : ∃ s : Subject, ∃ p q : Prop, Choo` | {Means, Subject}  |
-| `noChoice_selfRefutes` | theorem | [L192](formal/Logos/Choice.lean#L192) | `theorem noChoice_selfRefutes (speaker : Subject) (h : Logos.Agency.Asserts speak` | {Means, Subject} → C53 |
-| `noSubject_contradicts_subject` | theorem | [L237](formal/Logos/Choice.lean#L237) | `theorem noSubject_contradicts_subject (hSubj : ∃ s : Subject, Logos.Agency.Subje` | {Means, Subject}  |
-| `noSubject_selfRefutes` | theorem | [L232](formal/Logos/Choice.lean#L232) | `theorem noSubject_selfRefutes (speaker : Subject) (h : Logos.Agency.Asserts spea` | {Means, Subject} → C57 |
-| `person_chooses` | theorem | [L158](formal/Logos/Choice.lean#L158) | `theorem person_chooses {s : Subject} (hs : Person s) : ∃ p q : Prop, Chooses s p` | {Means, Subject} → C51 |
-| `rightWrong_implies_someone_means` | theorem | [L225](formal/Logos/Choice.lean#L225) | `theorem rightWrong_implies_someone_means (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_` | {AxTwoSubjects, Means, Subject} → C61 |
+| `CanChoose` | def | [L117](formal/Logos/Choice.lean#L117) | `def CanChoose (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
+| `ChoiceField` | def | [L71](formal/Logos/Choice.lean#L71) | `def ChoiceField (s : Subject) (p : Prop) (q : Prop) : Prop` | {Means, Subject}  |
+| `Chooses` | def | [L79](formal/Logos/Choice.lean#L79) | `def Chooses (s : Subject) (p : Prop) (q : Prop) : Prop` | {Means, Subject}  |
+| `FreeWill` | def | [L140](formal/Logos/Choice.lean#L140) | `def FreeWill (s : Subject) : Prop` | {Means, Subject}  |
+| `JUDGE_HAS_CHOICE_FIELD` | theorem | [L256](formal/Logos/Choice.lean#L256) | `theorem JUDGE_HAS_CHOICE_FIELD (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) : ∃ s :` | {AxTwoSubjects, Means, Subject} → C54 |
+| `Meaning_I` | def | [L94](formal/Logos/Choice.lean#L94) | `def Meaning_I (p : Prop) : Prop` | {Means, Subject}  |
+| `NoChoiceField` | def | [L229](formal/Logos/Choice.lean#L229) | `def NoChoiceField : Prop` | {Means, Subject}  |
+| `T11_choiceField` | theorem | [L187](formal/Logos/Choice.lean#L187) | `theorem T11_choiceField (h : ∃ s : Subject, ∃ p : Prop, A s p) : ∃ s : Subject, ` | {Means, Subject} → C39 |
+| `T11_choiceField_from_plurality` | theorem | [L194](formal/Logos/Choice.lean#L194) | `theorem T11_choiceField_from_plurality : ∃ s : Subject, Person s ∧ ∃ p q : Prop,` | {AxTwoSubjects, Means, Subject}  |
+| `asserting_noChoiceField_is_choiceField` | theorem | [L233](formal/Logos/Choice.lean#L233) | `theorem asserting_noChoiceField_is_choiceField (speaker : Subject) (h : Logos.Ag` | {Means, Subject}  |
+| `canChoose_unfold` | theorem | [L122](formal/Logos/Choice.lean#L122) | `theorem canChoose_unfold {s : Subject} {p : Prop} : CanChoose s p ↔ ∃ q : Prop, ` | {Means, Subject, CL}  |
+| `choiceField_exists` | theorem | [L216](formal/Logos/Choice.lean#L216) | `theorem choiceField_exists (h : ∃ s : Subject, ∃ p : Prop, A s p) : ∃ s : Subjec` | {Means, Subject} → C52 |
+| `choiceField_exists_from_plurality` | theorem | [L223](formal/Logos/Choice.lean#L223) | `theorem choiceField_exists_from_plurality : ∃ s : Subject, ∃ p q : Prop, ChoiceF` | {AxTwoSubjects, Means, Subject}  |
+| `chooses_implies_freeWill` | theorem | [L148](formal/Logos/Choice.lean#L148) | `theorem chooses_implies_freeWill {s : Subject} {p q : Prop} (h : Chooses s p q) ` | {Means, Subject}  |
+| `freeWillExists_of_chooses` | theorem | [L155](formal/Logos/Choice.lean#L155) | `theorem freeWillExists_of_chooses (h : ∃ s : Subject, ∃ p q : Prop, Chooses s p ` | {Means, Subject}  |
+| `freeWillExists_of_genuineChoice` | theorem | [L178](formal/Logos/Choice.lean#L178) | `theorem freeWillExists_of_genuineChoice : genuineChoice_exists → ∃ s : Subject, ` | {Means, Subject}  |
+| `genuineChoice_exists` | def | [L170](formal/Logos/Choice.lean#L170) | `def genuineChoice_exists : Prop` | {Means, Subject} → F1b |
+| `incompatible_self_negation` | theorem | [L87](formal/Logos/Choice.lean#L87) | `theorem incompatible_self_negation (p : Prop) : Incompatible p (¬ p)` | {} → C50 |
+| `judge_asserting_rightWrong_has_choiceField` | theorem | [L264](formal/Logos/Choice.lean#L264) | `theorem judge_asserting_rightWrong_has_choiceField (speaker : Subject) (h : Logo` | {Means, Subject}  |
+| `meaning_I_needs_subject` | theorem | [L102](formal/Logos/Choice.lean#L102) | `theorem meaning_I_needs_subject {p : Prop} (h : Meaning_I p) : ∃ s : Subject, Me` | {Means, Subject}  |
+| `meaning_needs_subject` | theorem | [L111](formal/Logos/Choice.lean#L111) | `theorem meaning_needs_subject {s : Subject} {p : Prop} (hm : Means s p) : ∃ t : ` | {Means, Subject} → C49 |
+| `noChoiceField_contradicts_field` | theorem | [L245](formal/Logos/Choice.lean#L245) | `theorem noChoiceField_contradicts_field (hField : ∃ s : Subject, ∃ p q : Prop, C` | {Means, Subject}  |
+| `noChoiceField_selfRefutes` | theorem | [L240](formal/Logos/Choice.lean#L240) | `theorem noChoiceField_selfRefutes (speaker : Subject) (h : Logos.Agency.Asserts ` | {Means, Subject} → C53 |
+| `noSubject_contradicts_subject` | theorem | [L288](formal/Logos/Choice.lean#L288) | `theorem noSubject_contradicts_subject (hSubj : ∃ s : Subject, Logos.Agency.Subje` | {Means, Subject}  |
+| `noSubject_selfRefutes` | theorem | [L283](formal/Logos/Choice.lean#L283) | `theorem noSubject_selfRefutes (speaker : Subject) (h : Logos.Agency.Asserts spea` | {Means, Subject} → C57 |
+| `person_hasChoiceField` | theorem | [L207](formal/Logos/Choice.lean#L207) | `theorem person_hasChoiceField {s : Subject} (hs : Person s) : ∃ p q : Prop, Choi` | {Means, Subject} → C51 |
+| `rightWrong_implies_someone_means` | theorem | [L276](formal/Logos/Choice.lean#L276) | `theorem rightWrong_implies_someone_means (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_` | {AxTwoSubjects, Means, Subject} → C61 |
 
 ### `Logos.ClaimMeanings`
 
@@ -1011,19 +1040,19 @@ Detalhe do kernel:
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `CoreSignature` | structure | [L35](formal/Logos/HostileSemantics.lean#L35) | `structure CoreSignature where` | —  |
-| `FreeWillExistence` | def | [L58](formal/Logos/HostileSemantics.lean#L58) | `def FreeWillExistence (I : CoreSignature) : Prop` | {}  |
-| `PersonExistence` | def | [L52](formal/Logos/HostileSemantics.lean#L52) | `def PersonExistence (I : CoreSignature) : Prop` | {}  |
-| `TwoPersons` | def | [L55](formal/Logos/HostileSemantics.lean#L55) | `def TwoPersons (I : CoreSignature) : Prop` | {}  |
-| `act_exists_of_act` | theorem | [L142](formal/Logos/HostileSemantics.lean#L142) | `theorem act_exists_of_act (hAct : ∃ s : S, ∃ p : Prop, A s p) : ∃ s : S, ∃ p : P` | {}  |
-| `not_entails_content_person` | theorem | [L115](formal/Logos/HostileSemantics.lean#L115) | `theorem not_entails_content_person : ¬ (∀ (S : Type) (Means : S → Prop → Prop) (` | {}  |
-| `not_entails_freewill` | theorem | [L98](formal/Logos/HostileSemantics.lean#L98) | `theorem not_entails_freewill : ¬ (∀ I : CoreSignature, Γ_act I ∧ (∀ s : I.Subjec` | {}  |
-| `not_entails_person` | theorem | [L62](formal/Logos/HostileSemantics.lean#L62) | `theorem not_entails_person : ¬ (∀ I : CoreSignature, Γ_person I → PersonExistenc` | {}  |
-| `not_entails_plurality` | theorem | [L78](formal/Logos/HostileSemantics.lean#L78) | `theorem not_entails_plurality : ¬ (∀ I : CoreSignature, Γ_act I ∧ (∃ s : I.Subje` | {}  |
-| `subject_exists_of_act` | theorem | [L137](formal/Logos/HostileSemantics.lean#L137) | `theorem subject_exists_of_act (hAct : ∃ s : S, ∃ p : Prop, A s p) : ∃ _s : S, Tr` | {}  |
-| `Γ_act` | def | [L43](formal/Logos/HostileSemantics.lean#L43) | `def Γ_act (I : CoreSignature) : Prop` | {}  |
-| `Γ_means` | def | [L46](formal/Logos/HostileSemantics.lean#L46) | `def Γ_means (I : CoreSignature) : Prop` | {}  |
-| `Γ_person` | def | [L49](formal/Logos/HostileSemantics.lean#L49) | `def Γ_person (I : CoreSignature) : Prop` | {}  |
+| `CoreSignature` | structure | [L48](formal/Logos/HostileSemantics.lean#L48) | `structure CoreSignature where` | —  |
+| `FreeWillExistence` | def | [L71](formal/Logos/HostileSemantics.lean#L71) | `def FreeWillExistence (I : CoreSignature) : Prop` | {}  |
+| `PersonExistence` | def | [L65](formal/Logos/HostileSemantics.lean#L65) | `def PersonExistence (I : CoreSignature) : Prop` | {}  |
+| `TwoPersons` | def | [L68](formal/Logos/HostileSemantics.lean#L68) | `def TwoPersons (I : CoreSignature) : Prop` | {}  |
+| `act_exists_of_act` | theorem | [L164](formal/Logos/HostileSemantics.lean#L164) | `theorem act_exists_of_act (hAct : ∃ s : S, ∃ p : Prop, A s p) : ∃ s : S, ∃ p : P` | {}  |
+| `not_entails_content_person` | theorem | [L137](formal/Logos/HostileSemantics.lean#L137) | `theorem not_entails_content_person : ¬ (∀ (S : Type) (Means : S → Prop → Prop) (` | {}  |
+| `not_entails_decoupled_freewill` | theorem | [L120](formal/Logos/HostileSemantics.lean#L120) | `theorem not_entails_decoupled_freewill : ¬ (∀ I : CoreSignature, Γ_act I ∧ (∀ s ` | {}  |
+| `not_entails_person` | theorem | [L75](formal/Logos/HostileSemantics.lean#L75) | `theorem not_entails_person : ¬ (∀ I : CoreSignature, Γ_person I → PersonExistenc` | {}  |
+| `not_entails_plurality` | theorem | [L91](formal/Logos/HostileSemantics.lean#L91) | `theorem not_entails_plurality : ¬ (∀ I : CoreSignature, Γ_act I ∧ (∃ s : I.Subje` | {}  |
+| `subject_exists_of_act` | theorem | [L159](formal/Logos/HostileSemantics.lean#L159) | `theorem subject_exists_of_act (hAct : ∃ s : S, ∃ p : Prop, A s p) : ∃ _s : S, Tr` | {}  |
+| `Γ_act` | def | [L56](formal/Logos/HostileSemantics.lean#L56) | `def Γ_act (I : CoreSignature) : Prop` | {}  |
+| `Γ_means` | def | [L59](formal/Logos/HostileSemantics.lean#L59) | `def Γ_means (I : CoreSignature) : Prop` | {}  |
+| `Γ_person` | def | [L62](formal/Logos/HostileSemantics.lean#L62) | `def Γ_person (I : CoreSignature) : Prop` | {}  |
 
 ### `Logos.Initiation`
 
@@ -1041,16 +1070,17 @@ Detalhe do kernel:
 | `Lovable` | def | [L75](formal/Logos/Love.lean#L75) | `def Lovable (t : Subject) : Prop` | {Means, Subject}  |
 | `Loves` | def | [L42](formal/Logos/Love.lean#L42) | `def Loves (s t : Subject) : Prop` | {Subject}  |
 | `T13_someoneLovable` | theorem | [L81](formal/Logos/Love.lean#L81) | `theorem T13_someoneLovable : ∃ s t : Subject, Person s ∧ Person t ∧ s ≠ t ∧ Lova` | {AxTwoSubjects, Means, Subject} → C41 |
-| `T14_content` | theorem | [L166](formal/Logos/Love.lean#L166) | `theorem T14_content : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves` | {AxTwoSubjects, Means, Subject} → C43 |
-| `T14_eternalRelation` | theorem | [L131](formal/Logos/Love.lean#L131) | `theorem T14_eternalRelation : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` | {AxTwoSubjects, Means, Subject} → C42 |
-| `T14_square` | theorem | [L156](formal/Logos/Love.lean#L156) | `theorem T14_square : □(∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Love` | {AxTwoSubjects, Means, Subject} → C45 |
-| `T14_world` | theorem | [L144](formal/Logos/Love.lean#L144) | `theorem T14_world : ∀ w, ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Lo` | {AxTwoSubjects, Means, Subject} → C44 |
+| `T14_content` | theorem | [L185](formal/Logos/Love.lean#L185) | `theorem T14_content : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves` | {AxTwoSubjects, Means, Subject} → C43 |
+| `T14_eternalRelation` | theorem | [L150](formal/Logos/Love.lean#L150) | `theorem T14_eternalRelation : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` | {AxTwoSubjects, Means, Subject} → C42 |
+| `T14_square` | theorem | [L175](formal/Logos/Love.lean#L175) | `theorem T14_square : □(∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Love` | {AxTwoSubjects, Means, Subject} → C45 |
+| `T14_world` | theorem | [L163](formal/Logos/Love.lean#L163) | `theorem T14_world : ∀ w, ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Lo` | {AxTwoSubjects, Means, Subject} → C44 |
 | `love_affects` | theorem | [L61](formal/Logos/Love.lean#L61) | `theorem love_affects : ∀ {s t : Subject}, Loves s t → Affects s t` | {Subject}  |
 | `love_helps` | theorem | [L47](formal/Logos/Love.lean#L47) | `theorem love_helps : ∀ {s t : Subject}, Loves s t → Helps s t` | {Subject} → C86 |
 | `love_not_harms` | theorem | [L54](formal/Logos/Love.lean#L54) | `theorem love_not_harms : ∀ {s t : Subject}, Loves s t → ¬ Harms s t` | {Subject}  |
 | `loves_of_helps` | theorem | [L69](formal/Logos/Love.lean#L69) | `theorem loves_of_helps : ∀ {s t : Subject}, Helps s t → Loves s t` | {Subject}  |
-| `necessaryPersonExists` | theorem | [L106](formal/Logos/Love.lean#L106) | `theorem necessaryPersonExists : ∃ s : Subject, Person s ∧ NecessarySubject s` | {AxTwoSubjects, Means, Subject} → C77 |
-| `necessary_entity_exists` | theorem | [L119](formal/Logos/Love.lean#L119) | `theorem necessary_entity_exists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act` | {Means, Subject} → C92 |
+| `necessaryPersonExists` | theorem | [L124](formal/Logos/Love.lean#L124) | `theorem necessaryPersonExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s` | {Means, Subject} → C77 |
+| `necessary_entity_exists` | theorem | [L138](formal/Logos/Love.lean#L138) | `theorem necessary_entity_exists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act` | {Means, Subject} → C92 |
+| `no_contingent_person` | theorem | [L110](formal/Logos/Love.lean#L110) | `theorem no_contingent_person : ¬ (∃ s : Subject, Person s ∧ ¬ NecessarySubject s` | {Means, Subject}  |
 
 ### `Logos.Modal`
 
@@ -1095,20 +1125,20 @@ Detalhe do kernel:
 | `Correct` | def | [L29](formal/Logos/Order.lean#L29) | `def Correct (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
 | `Fallible` | def | [L74](formal/Logos/Order.lean#L74) | `def Fallible (_s : Subject) (p : Prop) : Prop` | {Subject}  |
 | `Incorrect` | def | [L34](formal/Logos/Order.lean#L34) | `def Incorrect (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
-| `NoAct` | def | [L151](formal/Logos/Order.lean#L151) | `def NoAct : Prop` | {Means, Subject}  |
+| `NoAct` | def | [L155](formal/Logos/Order.lean#L155) | `def NoAct : Prop` | {Means, Subject}  |
 | `T6_fallibility` | theorem | [L90](formal/Logos/Order.lean#L90) | `theorem T6_fallibility : ¬ (∀ s : Subject, ∀ p : Prop, Fallible s p → T p)` | {AxTwoSubjects, Means, Subject} → C28 |
 | `T6_truthTranscendsWill` | theorem | [L99](formal/Logos/Order.lean#L99) | `theorem T6_truthTranscendsWill : ¬ (∀ s : Subject, ∀ p : Prop, Fallible s p ↔ T ` | {AxTwoSubjects, Means, Subject} → C29 |
-| `consequence_preserves_truth` | theorem | [L146](formal/Logos/Order.lean#L146) | `theorem consequence_preserves_truth {p₁ p₂ q : Prop} (himp : p₁ → p₂ → q) (h1 : ` | {} → C31 |
+| `consequence_preserves_truth` | theorem | [L150](formal/Logos/Order.lean#L150) | `theorem consequence_preserves_truth {p₁ p₂ q : Prop} (himp : p₁ → p₂ → q) (h1 : ` | {} → C31 |
 | `correctness_distinct` | theorem | [L107](formal/Logos/Order.lean#L107) | `theorem correctness_distinct : ¬ (∀ s : Subject, ∀ p : Prop, Correct s p ↔ Incor` | {AxTwoSubjects, Means, Subject, CL} → C30 |
 | `fallible_false` | theorem | [L82](formal/Logos/Order.lean#L82) | `theorem fallible_false : ∃ s : Subject, ∃ p : Prop, Fallible s p ∧ IsFalse p` | {AxTwoSubjects, Means, Subject}  |
-| `judge_commits` | theorem | [L123](formal/Logos/Order.lean#L123) | `theorem judge_commits : ∃ s : Subject, ∃ p q : Prop, A s p ∧ (Correct s p ∨ Inco` | {AxTwoSubjects, Means, Subject, CL} → C55 |
-| `judgment_implies_act` | theorem | [L169](formal/Logos/Order.lean#L169) | `theorem judgment_implies_act {s : Subject} {p : Prop} (h : Correct s p ∨ Incorre` | {Means, Subject}  |
-| `judgment_implies_cogito` | theorem | [L181](formal/Logos/Order.lean#L181) | `theorem judgment_implies_cogito (h : (∃ s : Subject, ∃ p : Prop, Correct s p) ∨ ` | {Means, Subject}  |
-| `judgment_of_no_act_is_incorrect` | theorem | [L162](formal/Logos/Order.lean#L162) | `theorem judgment_of_no_act_is_incorrect (s : Subject) (h : Correct s NoAct ∨ Inc` | {Means, Subject}  |
-| `judgment_of_no_act_proves_act` | theorem | [L176](formal/Logos/Order.lean#L176) | `theorem judgment_of_no_act_proves_act (s : Subject) (h : Correct s NoAct ∨ Incor` | {Means, Subject} → C84 |
-| `no_correct_judgment_of_no_act` | theorem | [L155](formal/Logos/Order.lean#L155) | `theorem no_correct_judgment_of_no_act (s : Subject) : ¬ Correct s NoAct` | {Means, Subject} → C83 |
+| `judge_commits` | theorem | [L127](formal/Logos/Order.lean#L127) | `theorem judge_commits : ∃ s : Subject, ∃ p q : Prop, A s p ∧ (Correct s p ∨ Inco` | {AxTwoSubjects, Means, Subject, CL} → C55 |
+| `judgment_implies_act` | theorem | [L173](formal/Logos/Order.lean#L173) | `theorem judgment_implies_act {s : Subject} {p : Prop} (h : Correct s p ∨ Incorre` | {Means, Subject}  |
+| `judgment_implies_cogito` | theorem | [L185](formal/Logos/Order.lean#L185) | `theorem judgment_implies_cogito (h : (∃ s : Subject, ∃ p : Prop, Correct s p) ∨ ` | {Means, Subject}  |
+| `judgment_of_no_act_is_incorrect` | theorem | [L166](formal/Logos/Order.lean#L166) | `theorem judgment_of_no_act_is_incorrect (s : Subject) (h : Correct s NoAct ∨ Inc` | {Means, Subject}  |
+| `judgment_of_no_act_proves_act` | theorem | [L180](formal/Logos/Order.lean#L180) | `theorem judgment_of_no_act_proves_act (s : Subject) (h : Correct s NoAct ∨ Incor` | {Means, Subject} → C84 |
+| `no_correct_judgment_of_no_act` | theorem | [L159](formal/Logos/Order.lean#L159) | `theorem no_correct_judgment_of_no_act (s : Subject) : ¬ Correct s NoAct` | {Means, Subject} → C83 |
 | `rightDistinctWrong_implies_meaning` | theorem | [L62](formal/Logos/Order.lean#L62) | `theorem rightDistinctWrong_implies_meaning (h : (∃ s : Subject, ∃ p : Prop, Corr` | {Means, Subject}  |
-| `rightWrongDistinction_implies_meaning` | theorem | [L134](formal/Logos/Order.lean#L134) | `theorem rightWrongDistinction_implies_meaning (_h : ¬ Logos.Core.N_T ∧ ¬ Logos.C` | {AxTwoSubjects, Means, Subject, CL}  |
+| `rightWrongDistinction_implies_meaning` | theorem | [L138](formal/Logos/Order.lean#L138) | `theorem rightWrongDistinction_implies_meaning (_h : ¬ Logos.Core.N_T ∧ ¬ Logos.C` | {AxTwoSubjects, Means, Subject, CL}  |
 | `rightWrong_implies_meaning` | theorem | [L46](formal/Logos/Order.lean#L46) | `theorem rightWrong_implies_meaning (h : (∃ s : Subject, ∃ p : Prop, Correct s p)` | {Means, Subject} → C62 |
 
 ### `Logos.Person`
@@ -1192,50 +1222,50 @@ Detalhe do kernel:
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `Affects` | def | [L48](formal/Logos/Value.lean#L48) | `def Affects (s t : Subject) : Prop` | {Subject}  |
-| `Alone` | def | [L83](formal/Logos/Value.lean#L83) | `def Alone (s : Subject) : Prop` | {Subject}  |
-| `AxPersonsAffect` | theorem | [L134](formal/Logos/Value.lean#L134) | `theorem AxPersonsAffect (s₁ s₂ : Subject) (_hs₁ : Person s₁) (_hs₂ : Person s₂) ` | {Means, Subject}  |
-| `AxTwoSubjects` | axiom | [L110](formal/Logos/Value.lean#L110) | `axiom AxTwoSubjects : (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) → ∃ s₁ s₂ : Subject,` | {AxTwoSubjects, Means, Subject} → FAITH-2 |
-| `Harms` | def | [L60](formal/Logos/Value.lean#L60) | `def Harms (_s _t : Subject) : Prop` | {Subject}  |
-| `Helps` | def | [L54](formal/Logos/Value.lean#L54) | `def Helps (s t : Subject) : Prop` | {Subject}  |
-| `OtherAffects` | def | [L80](formal/Logos/Value.lean#L80) | `def OtherAffects (s : Subject) : Prop` | {Subject}  |
-| `aloneExcluded` | theorem | [L119](formal/Logos/Value.lean#L119) | `theorem aloneExcluded : ¬ ∃ s : Subject, Person s ∧ Alone s` | {AxTwoSubjects, Means, Subject} → C74 |
-| `alone_no_other_affects` | theorem | [L86](formal/Logos/Value.lean#L86) | `theorem alone_no_other_affects {s : Subject} (ha : Alone s) : ¬ OtherAffects s` | {Subject}  |
-| `alone_no_other_help_harm` | theorem | [L94](formal/Logos/Value.lean#L94) | `theorem alone_no_other_help_harm {s : Subject} (ha : Alone s) : (¬ ∃ t : Subject` | {Subject} → C56 |
-| `harm_affects` | theorem | [L68](formal/Logos/Value.lean#L68) | `theorem harm_affects : ∀ {s t : Subject}, Harms s t → Affects s t` | {Subject}  |
-| `help_affects` | theorem | [L63](formal/Logos/Value.lean#L63) | `theorem help_affects : ∀ {s t : Subject}, Helps s t → Affects s t` | {Subject}  |
-| `help_not_harm` | theorem | [L75](formal/Logos/Value.lean#L75) | `theorem help_not_harm : ∀ {s t : Subject}, Helps s t → ¬ Harms s t` | {Subject} → C85 |
-| `valueInterpersonal_of_split` | theorem | [L142](formal/Logos/Value.lean#L142) | `theorem valueInterpersonal_of_split : (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) → ∃ ` | {AxTwoSubjects, Means, Subject} → C46 |
+| `Affects` | def | [L51](formal/Logos/Value.lean#L51) | `def Affects (s t : Subject) : Prop` | {Subject}  |
+| `Alone` | def | [L86](formal/Logos/Value.lean#L86) | `def Alone (s : Subject) : Prop` | {Subject}  |
+| `AxPersonsAffect` | theorem | [L137](formal/Logos/Value.lean#L137) | `theorem AxPersonsAffect (s₁ s₂ : Subject) (_hs₁ : Person s₁) (_hs₂ : Person s₂) ` | {Means, Subject}  |
+| `AxTwoSubjects` | axiom | [L113](formal/Logos/Value.lean#L113) | `axiom AxTwoSubjects : (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) → ∃ s₁ s₂ : Subject,` | {AxTwoSubjects, Means, Subject} → FAITH-2 |
+| `Harms` | def | [L63](formal/Logos/Value.lean#L63) | `def Harms (_s _t : Subject) : Prop` | {Subject}  |
+| `Helps` | def | [L57](formal/Logos/Value.lean#L57) | `def Helps (s t : Subject) : Prop` | {Subject}  |
+| `OtherAffects` | def | [L83](formal/Logos/Value.lean#L83) | `def OtherAffects (s : Subject) : Prop` | {Subject}  |
+| `aloneExcluded` | theorem | [L122](formal/Logos/Value.lean#L122) | `theorem aloneExcluded : ¬ ∃ s : Subject, Person s ∧ Alone s` | {AxTwoSubjects, Means, Subject} → C74 |
+| `alone_no_other_affects` | theorem | [L89](formal/Logos/Value.lean#L89) | `theorem alone_no_other_affects {s : Subject} (ha : Alone s) : ¬ OtherAffects s` | {Subject}  |
+| `alone_no_other_help_harm` | theorem | [L97](formal/Logos/Value.lean#L97) | `theorem alone_no_other_help_harm {s : Subject} (ha : Alone s) : (¬ ∃ t : Subject` | {Subject} → C56 |
+| `harm_affects` | theorem | [L71](formal/Logos/Value.lean#L71) | `theorem harm_affects : ∀ {s t : Subject}, Harms s t → Affects s t` | {Subject}  |
+| `help_affects` | theorem | [L66](formal/Logos/Value.lean#L66) | `theorem help_affects : ∀ {s t : Subject}, Helps s t → Affects s t` | {Subject}  |
+| `help_not_harm` | theorem | [L78](formal/Logos/Value.lean#L78) | `theorem help_not_harm : ∀ {s t : Subject}, Helps s t → ¬ Harms s t` | {Subject} → C85 |
+| `valueInterpersonal_of_split` | theorem | [L145](formal/Logos/Value.lean#L145) | `theorem valueInterpersonal_of_split : (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) → ∃ ` | {AxTwoSubjects, Means, Subject} → C46 |
 
 ### `PropositionalPersonhood`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `TripartiteVerdict` | def | [L280](formal/Logos/HostileSemantics.lean#L280) | `def TripartiteVerdict : String` | —  |
+| `TripartiteVerdict` | def | [L314](formal/Logos/HostileSemantics.lean#L314) | `def TripartiteVerdict : String` | —  |
 
 ### `PropositionalPersonhood.CountermodelContentWithoutPerson`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `Means` | def | [L268](formal/Logos/HostileSemantics.lean#L268) | `def Means : S → Prop → Prop` | —  |
-| `Person` | def | [L269](formal/Logos/HostileSemantics.lean#L269) | `def Person : S → Prop` | —  |
-| `S` | def | [L267](formal/Logos/HostileSemantics.lean#L267) | `def S : Type` | —  |
-| `content_does_not_imply_personhood` | theorem | [L275](formal/Logos/HostileSemantics.lean#L275) | `theorem content_does_not_imply_personhood : (∃ _p : Prop, True) ∧ (∀ p : Prop, ∃` | —  |
-| `content_exists` | theorem | [L271](formal/Logos/HostileSemantics.lean#L271) | `theorem content_exists : ∃ _p : Prop, True` | —  |
-| `every_content_meant` | theorem | [L272](formal/Logos/HostileSemantics.lean#L272) | `theorem every_content_meant (p : Prop) : ∃ s : S, Means s p` | —  |
-| `no_person` | theorem | [L273](formal/Logos/HostileSemantics.lean#L273) | `theorem no_person : ¬ ∃ s : S, Person s` | —  |
+| `Means` | def | [L302](formal/Logos/HostileSemantics.lean#L302) | `def Means : S → Prop → Prop` | —  |
+| `Person` | def | [L303](formal/Logos/HostileSemantics.lean#L303) | `def Person : S → Prop` | —  |
+| `S` | def | [L301](formal/Logos/HostileSemantics.lean#L301) | `def S : Type` | —  |
+| `content_does_not_imply_personhood` | theorem | [L309](formal/Logos/HostileSemantics.lean#L309) | `theorem content_does_not_imply_personhood : (∃ _p : Prop, True) ∧ (∀ p : Prop, ∃` | —  |
+| `content_exists` | theorem | [L305](formal/Logos/HostileSemantics.lean#L305) | `theorem content_exists : ∃ _p : Prop, True` | —  |
+| `every_content_meant` | theorem | [L306](formal/Logos/HostileSemantics.lean#L306) | `theorem every_content_meant (p : Prop) : ∃ s : S, Means s p` | —  |
+| `no_person` | theorem | [L307](formal/Logos/HostileSemantics.lean#L307) | `theorem no_person : ¬ ∃ s : S, Person s` | —  |
 
 ### `UnitPluralityCountermodel`
 
 | Nome | Tipo | Linha | Statement (Lógica) | Axis |
 |---|---|---|---|---|
-| `A` | def | [L250](formal/Logos/HostileSemantics.lean#L250) | `def A : S → Prop → Prop` | —  |
-| `Person` | def | [L251](formal/Logos/HostileSemantics.lean#L251) | `def Person : S → Prop` | —  |
-| `S` | def | [L249](formal/Logos/HostileSemantics.lean#L249) | `def S : Type` | —  |
-| `act_occurs` | theorem | [L253](formal/Logos/HostileSemantics.lean#L253) | `theorem act_occurs : ∃ s : S, ∃ p : Prop, A s p` | —  |
-| `agency_does_not_imply_plurality` | theorem | [L260](formal/Logos/HostileSemantics.lean#L260) | `theorem agency_does_not_imply_plurality : (∃ s : S, ∃ p : Prop, A s p) ∧ (∃ s : ` | —  |
-| `no_plurality` | theorem | [L255](formal/Logos/HostileSemantics.lean#L255) | `theorem no_plurality : ¬ ∃ s t : S, s ≠ t` | —  |
-| `person_exists` | theorem | [L254](formal/Logos/HostileSemantics.lean#L254) | `theorem person_exists : ∃ s : S, Person s` | —  |
+| `A` | def | [L284](formal/Logos/HostileSemantics.lean#L284) | `def A : S → Prop → Prop` | —  |
+| `Person` | def | [L285](formal/Logos/HostileSemantics.lean#L285) | `def Person : S → Prop` | —  |
+| `S` | def | [L283](formal/Logos/HostileSemantics.lean#L283) | `def S : Type` | —  |
+| `act_occurs` | theorem | [L287](formal/Logos/HostileSemantics.lean#L287) | `theorem act_occurs : ∃ s : S, ∃ p : Prop, A s p` | —  |
+| `agency_does_not_imply_plurality` | theorem | [L294](formal/Logos/HostileSemantics.lean#L294) | `theorem agency_does_not_imply_plurality : (∃ s : S, ∃ p : Prop, A s p) ∧ (∃ s : ` | —  |
+| `no_plurality` | theorem | [L289](formal/Logos/HostileSemantics.lean#L289) | `theorem no_plurality : ¬ ∃ s t : S, s ≠ t` | —  |
+| `person_exists` | theorem | [L288](formal/Logos/HostileSemantics.lean#L288) | `theorem person_exists : ∃ s : S, Person s` | —  |
 
 </details>
 

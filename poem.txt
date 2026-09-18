@@ -67,11 +67,15 @@ declarada (só SEM/META).
   (`Choice.rightWrong_implies_someone_means`) e
   `Order.rightWrongDistinction_implies_meaning`, `CL`
   — sem axioma substantivo.
-- L20 (P4): "para haver alguém é preciso haver escolha" → PROVEN
-  ✔: C51 (`person_chooses`, `{}`). "Escolha com significado →
+- L20 (P4): "para haver alguém é preciso haver escolha" → PROVEN como CAMPO
+  ✔: C51 (`person_hasChoiceField`, `{Means, Subject}`; reparação 2026-09-18 —
+  é o campo de escolha, não a escolha genuína). A escolha genuína
+  (`Chooses(s,p,q) := A(s,p) ∧ A(s,q) ∧ Incompatible(p,q)`) e a liberdade
+  definicional (`FreeWill(s) := ∃p q, Chooses`, `chooses_implies_freeWill {Means, Subject} só vocab)
+  estão formalizadas, mas a sua *existência* é F1b BLOCKED
+  (`rejectedHornCoMeant`). "Escolha com significado →
   mais do que uma pessoa" → PROVEN ✔: C40/C73 (plurality-discharge
-  2026-09-17 — o par canónico origem+destinatário é teorema `{}`; a ponte
-  `AxTwoSubjects` foi RETIRED).
+  2026-09-17 — o par canónico origem+destinatário é teorema `{}`).
 - L22 (P5): "um Ser sózinho … não ajuda nem prejudica ninguém" → PROVEN
   ✔: C56 (`alone_no_other_help_harm`, `{}`; o antigo preço
   `AxPersonsAffect` foi dissolvido em M1). "Nenhum sujeito está sózinho" →

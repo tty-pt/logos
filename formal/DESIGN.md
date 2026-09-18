@@ -278,26 +278,39 @@ love of T14 is now PROVEN `{}` on the world-level shape: the canonical pair
 `T14_canonicalRigid` (C76): *the same pair* loves and exists in every world
 (`∀ w`), no stability bridge needed (esse est agere).
 
-### F1b split (2026-09-17, Choice.lean — "could not have chosen otherwise")
+### F1b — genuine choice and freedom (freedom/choice fix, 2026-09-18)
 
-F1b separates into a proven weak half and a blocked strong half:
+The former "F1b split" (2026-09-17) rested on manufactured origin witnesses
+(`freeWillOrigin`, `judgeIsFree`, `noFreeWillPosited`) that the hostile
+semantics destroyed; those steps are retired (C69–C72, BLOCKED). The genuine
+status is:
 
-- **F1b-weak — PROVEN**: `freeWillOrigin : FreeWill (inl ()) p` (`{}`) — the
-  act's own subject, the origin that `JUDGE_COMMITTED` commits to right/wrong,
-  can choose `p` AND choose `¬p`. `originFreedomSelfRefutes` (`{}`) makes the
-  determinist denial performatively self-contradictory; `judgeIsFree` (`{}`)
-  states the dissolved paradox; `noFreeWillPosited : ¬ FreeWill (inr q) p`
-  (`CL`) shows the self-posited contents are provably unfree — yet never the
-  right/wrong judge. The paradox is dissolved at kernel level (C69–C72).
-- **F1b-strong — BLOCKED (vocabulary gap)**: a world-level alternativity
-  `◇PH Choose ∧ ◇PH Choose¬` needs a genuinely world-varying choice predicate.
-  Every predicate below `Semantics` is world-invariant — `NecessityPH` applied
-  to any of them collapses to identity (world inhabited) — so the strong
-  sentence cannot be *formulated*, let alone proved. The missing vocabulary is
-  `ChoiceAt : World → Subject → Prop → Prop` (SEM/META bridge, deliberately
-  NOT added — nothing in the current chain forces it). This differs from
-  C19's BLOCKED (formulable but unprovable lemma): F1b-strong is a formulation
-  gap.
+- **`Chooses → FreeWill` — DEFINITIONAL, PROVEN `{Means, Subject}` (VOCAB only,
+  logical content free)**: `FreeWill s := ∃p q,
+  Chooses s p q` and `chooses_implies_freeWill` is the identity. Freedom is not
+  a further metaphysical step from a bare act; it *is* the existence of a
+  genuine choice between incompatible alternatives. The old decoupled bipolar
+  predicate (`CanChoose s p ∧ CanChoose s (¬p)`, which unfolds to `A s p ∧
+  A s (¬p)`) is subsumed by the unary `FreeWill`.
+- **`ChoiceField ↛ Chooses` — BLOCKED (proof gap, not vocabulary)**: genuine
+  choice requires the agent to co-mean *both* horns (`A s p ∧ A s (¬p)`), and
+  nothing forces that. The exact missing lemma is
+
+      rejectedHornCoMeant :
+        (∃ s : Subject, ∃ p : Prop, A s p) →
+        ∃ s : Subject, ∃ p : Prop, A s p ∧ A s (¬ p)
+
+  (`Means` is opaque; `AxTwoSubjects` gives two different subjects, each with a
+  single content). `Chooses` must not be weakened back to `ChoiceField` merely
+  to make the existence claim provable.
+- **World-level alternativity — F7, BLOCKED (vocabulary gap)**: a world-level
+  `◇PH Choose ∧ ◇PH Choose¬` still needs a genuinely world-varying choice
+  predicate `ChoiceAt : World → Subject → Prop → Prop` (SEM/META bridge,
+  deliberately NOT added). This is now secondary: the prop-level missing lemma
+  `rejectedHornCoMeant` is the primary blocker.
+- **Hostile model**: `CountermodelNoFreeWill` proves `Act ↛ Chooses` and
+  `Act ↛ FreeWill` (`{}`) with `Chooses := False`. It is NOT a countermodel to
+  the *definitional* `Chooses → FreeWill`.
 
 ## D13 — Faith boundary scope (Love.lean, T14, C4)
 
@@ -578,27 +591,33 @@ OBVIOUSLY" — exposed the placeholder as the *mislabeled gap*: with
 `Chooses := False`, choice was unrepresentable, so "subject ⇒ choice" and
 "right/wrong ⇒ choice" looked OPEN. The real definition (no axiom, no price):
 
-    def Chooses s p q := A s p ∧ Incompatible p q
+    def ChoiceField s p q := A s p ∧ Incompatible p q   -- OLD relation, renamed 2026-09-18
+    def Chooses s p q := A s p ∧ A s q ∧ Incompatible p q -- genuine choice
+    def FreeWill s := ∃ p q, Chooses s p q
 
 i.e. a subject choosing content `p` against an incompatible content `q`
-(§14: choosing is adopting p over q). `Incompatible p (¬p)` is pure logic,
-so every meaning-act is a choice against its own negation. Theorems:
-`meaning_needs_subject`, `person_chooses` (subject ⇒ choice, `{Means,
-Subject}` — no cogito), `choiceExists`, `noChoice_selfRefutes` (denying
-choice is itself a choice), `JUDGE_COMMITTED` (right/wrong ⇒ choice),
-`Order.judge_commits` (the §8 judge is a chooser, needs bivalence +
-`cogito_from_T12` after A1), `canChoose_unfold` (the aliased-◇ `CanChoose`
-collapses to real choice). `Order.lean` gained `import Logos.Choice` (no
-cycle).
+(§14: choosing is adopting p over q). **Correction (freedom/choice fix,
+2026-09-18)**: the old body `A s p ∧ Incompatible p q` is a *determined
+occurrence*, not a choice — with `Incompatible p (¬p)` pure logic,
+`∃ q, Chooses s p q` collapses to `A s p`. It is kept as `ChoiceField`
+(representability). Genuine `Chooses` additionally requires the agent to
+co-mean the rejected horn `q`; `FreeWill` is then definitional. Theorems:
+`meaning_needs_subject`, `person_hasChoiceField` (subject ⇒ field, `{Means,
+Subject}` — no cogito), `choiceField_exists`, `noChoiceField_selfRefutes`
+(denying the field is itself a field-act), `JUDGE_HAS_CHOICE_FIELD`
+(right/wrong ⇒ field), `Order.judge_commits` (the §8 judge has a field, needs
+bivalence + `cogito_from_T12` after A1), `canChoose_unfold` (the aliased-◇
+`CanChoose` collapses to the genuine choice), `chooses_implies_freeWill`
+(`{Means, Subject}`, VOCAB only). `Order.lean` gained `import Logos.Choice` (no cycle).
 
-- **F1 split**: F1a (choice-existence, the transcendental step) is now
-  PROVEN↑; F1b (bipolar freedom `FreeWill ↔ ◇Choose ∧ ◇Choose¬`, world-level
-  on `NecessityPH`) stays DEFERRED — a subject may mean `p` without being
-  able to mean `¬p`. `FreeWill` remains an unproven definitional interface;
-  restoring it is a future priced move (semantic choice for the modal
-  choice-alternatives), never a silent revert.
-  (Superseded 2026-09-17 by the F1b split — see note at D12: the weak half is
-  PROVEN, only the world-level alternativity stays blocked on vocabulary.)
+- **F1 split**: F1a (choice-**field** existence) is PROVEN; F1b (genuine
+  choice existence) is BLOCKED on the exact lemma `rejectedHornCoMeant :
+  (∃s p, A s p) → ∃s p, A s p ∧ A s (¬p)`. It is a proof gap, not merely a
+  vocabulary gap; the world-level `ChoiceAt` (F7) is the secondary, priced
+  bridge. Crucially, `Chooses → FreeWill` is already definitional
+  (`{Means, Subject}`, VOCAB only): the
+  precise missing step is the *existence* of a co-meaned rejected horn, never
+  a further metaphysical leap from `Act` to freedom.
 
 ## D-cogito-rethinking — non-cogito refutes itself (Agency.lean, Plurality.lean)
 
@@ -723,6 +742,18 @@ the *existence* half (F1a; the bipolar modal half F1b stays deferred). 2026-09-1
   gets refined: the *formulable* half is now proven, and the strong world-level
   half is, precisely, a vocabulary gap — `ChoiceAt` is genuinely missing.)
 - Cost: zero new axioms; `Order.lean` imports `Logos.Choice` (acyclic).
+
+**Correction (freedom/choice fix, 2026-09-18).** The bullets above describe
+what is now `ChoiceField`, not genuine choice: the old `Chooses s p q :=
+A s p ∧ Incompatible p q` only relates the agent to `p`, so `∃q, Chooses s p q
+= A s p` (a determined occurrence). Renamed `person_chooses` →
+`person_hasChoiceField`, `choiceExists` → `choiceField_exists`,
+`JUDGE_COMMITTED` → `JUDGE_HAS_CHOICE_FIELD`, `noChoice_selfRefutes` →
+`noChoiceField_selfRefutes`; `Order.judge_commits` now concludes `ChoiceField`.
+Genuine `Chooses` adds `A s q` (co-meaning both horns); `FreeWill` is
+definitional, and the *existence* claim is BLOCKED on `rejectedHornCoMeant`
+(F1b). Nothing about `Act → freedom` is assumed. See D-Chooses and the F1b
+section above.
 
 ## D-C47 — Chain node `T12_directedPair` (Plurality.lean)
 
