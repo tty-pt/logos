@@ -7,16 +7,21 @@ choiceField_exists, noChoiceField_selfRefutes, JUDGE_HAS_CHOICE_FIELD,
 chooses_implies_freeWill, rightWrong_implies_someone_means,
 meaning_I_needs_subject, rejectedHornCoMeant, rejectedHornCoMeant_implies_genuineChoice,
 genuineChoice_requires_error_possibility, assertion_consistency,
-no_one_asserts_incompatible_pair), formal/Logos/Order.lean (judge_commits,
+no_one_asserts_incompatible_pair, Selects, asserts_selects, asserts_selects_all_incompatible,
+selection_exists, no_selection_no_assertion), formal/Logos/Order.lean (judge_commits,
 rightWrong_implies_meaning, rightDistinctWrong_implies_meaning,
 rightWrongDistinction_implies_meaning), formal/Logos/HostileSemantics.lean
 (CountermodelNoFreeWill, not_entails_decoupled_freewill,
 CountermodelVeridicalMeaning, not_entails_genuine_choice,
-not_entails_genuine_choice_with_plurality), GAPMAP.md C39–C72/F1a/F1b.
+not_entails_genuine_choice_with_plurality, CountermodelOmniMeaning,
+selection_does_not_imply_genuine_choice, selection_does_not_imply_freewill,
+not_entails_selection_of_bare_means), GAPMAP.md C39–C72/F1a/F1b.
 Impressão de axiomas:
 T11_choiceField — `{Means, Subject}` (herda de T5; C39 desacoplado de AxTwoSubjects);
 person_hasChoiceField — `{Means, Subject}` (PROVEN, campo de escolha, NÃO escolha genuína;
   renomeado de person_chooses, 2026-09-18);
+Selects, asserts_selects, asserts_selects_all_incompatible, selection_exists,
+no_selection_no_assertion — `{Means, Subject}` (PROVEN, seleção semântica demonstrada, 2026-09-18);
 rejectedHornCoMeant_implies_genuineChoice, genuineChoice_requires_error_possibility,
 assertion_consistency, no_one_asserts_incompatible_pair — `{Means, Subject}`
 (novos, milestone hostil 2026-09-18); hostile separations/no_genuine_choice — nenhuma ({});
@@ -49,6 +54,18 @@ ChoiceField(s,p,q)
 Corpo: A(s,p) ∧ Incompatible(p,q) — o CAMPO de escolha: o agente é posto contra um par incompatível,
 mas relaciona-se só com p (o corno ¬p vem da lógica pura). É a antiga relação `Chooses`; NÃO é escolha genuína.
 
+Selects(s,p,q)
+*seleção semântica: compromisso assertivo contra alternativas incompatíveis*
+Corpo: Asserts(s,p) ∧ Incompatible(p,q) ∧ ¬ Asserts(s,q) — SELEÇÃO SEMÂNTICA: o sujeito compromete-se
+com p e exclui constitutivamente a alternativa incompatível q. Provado a partir de qualquer asserção
+(asserts_selects, `{Means, Subject}`).
+
+DeliberateChoice(s,p,q)
+*escolha deliberativa: conceber ambos os cornos em pensamento, asserir apenas um*
+Corpo: Means(s,p) ∧ Means(s,q) ∧ Incompatible(p,q) ∧ Asserts(s,p) ∧ ¬ Asserts(s,q) — o agente
+representa ambos os cornos incompatíveis em pensamento, mas compromete-se assertivamente com apenas um.
+Acarreta Selects e Chooses, mas a sua existência não é forçada pelo datum do ato isolado.
+
 Chooses(s,p,q)
 *escolha forte: o sujeito co-significa alternativas incompatíveis*
 Corpo: A(s,p) ∧ A(s,q) ∧ Incompatible(p,q) — ESCOLHA GENUÍNA: o agente co-significa ativamente ambos os cornos (§14).
@@ -59,7 +76,7 @@ chooses_implies_freeWill : Chooses(s,p,q) ⇒ FreeWill(s)   [{Means, Subject} s�
 
 A cadeia e o seu fosso ontológico:
 
-weak choice / choice-field → ? [co-significação do corno rejeitado] → strong Chooses → FreeWill
+weak choice / choice-field → semantic selection (Selects, PROVEN) → deliberate choice / co-meaning (Chooses) → FreeWill
 
 O passo EM FALTA (F1b, BLOCKED) é a existência da escolha genuína:
 
@@ -87,6 +104,23 @@ existência do CAMPO de escolha; a escolha genuína é F1b, bloqueada):
   `{}`); a metade "significado ⇒ sujeito" é analítica
   meaning_needs_subject / meaning_I_needs_subject (C49, `{}`).
 - choiceField_exists: ∃s∃p∃q ChoiceField(s,p,q) — o campo é real (via T5).
+- asserts_selects: Asserts(s,p) ⇒ Selects(s,p,¬p) — qualquer asserção é seleção semântica contra a sua negação ({Means, Subject}).
+- asserts_selects_all_incompatible: Asserts(s,p) ∧ Incompatible(p,q) ⇒ Selects(s,p,q) — asserção seleciona contra qualquer alternativa ({Means, Subject}).
+- selection_exists: (∃s p, Asserts(s,p)) ⇒ ∃s p q, Selects(s,p,q) — existência de seleção semântica ({Means, Subject}).
+- no_selection_no_assertion: (∀q, ¬ Selects(s,p,q)) ⇒ ¬ Asserts(s,p) — sem seleção não há asserção ({Means, Subject}).
+- deliberateChoice_implies_selects: DeliberateChoice(s,p,q) ⇒ Selects(s,p,q) (C97, `{Means, Subject}`) — escolha deliberativa acarreta seleção.
+- deliberateChoice_implies_chooses: DeliberateChoice(s,p,q) ⇒ Chooses(s,p,q) (C98, `{Means, Subject}`) — escolha deliberativa acarreta escolha co-significada.
+- deliberateChoice_iff_selects_and_means: DeliberateChoice(s,p,q) ↔ Selects(s,p,q) ∧ Means(s,q) (C100, `{Means, Subject}`) —
+  decomposição exata: deliberação é seleção semântica mais representação/consciência da alternativa rejeitada.
+- deliberateChoice_iff_selects_and_rejects: DeliberateChoice(s,p,q) ↔ Selects(s,p,q) ∧ Rejects(s,q) ({Means, Subject}) —
+  onde Rejects(s,q) := Means(s,q) ∧ ¬ Asserts(s,q) formaliza a rejeição ativa.
+- deliberateChoice_negation_iff: Asserts(s,p) → (DeliberateChoice(s,p,¬p) ↔ Means(s,¬p)) ({Means, Subject}) —
+  para alternativas contraditórias, deliberar equivale estritamente à conceção da negação.
+- deliberateGenuineChoiceResource : Prop := ∃ s : Subject, ∃ p : Prop, Asserts s p ∧ Means s (¬p) —
+  a obstrução mínima exata de F1b: a existência de uma verdade assertada cuja negação é simultaneamente concebida.
+- genuineChoice_exists_of_assertion_and_negation_meaning: deliberateGenuineChoiceResource → genuineChoice_exists ({Means, Subject}) —
+  teorema de fecho: se a asserção vem acompanhada da conceção da negação, a escolha genuína e a liberdade estão provadas.
+- selection_exists_of_act: act_implies_asserts_bridge → (∃s p, Act(s,p)) ⇒ ∃s p q, Selects(s,p,q) (C99, `{Means, Subject}`) — seleção sob a ponte de asserção.
 - noChoiceField_selfRefutes: ¬(∃s∃p∃q ChoiceField(s,p,q)) ⇒ False — negar o
   campo é um ato de campo (transcendental).
 - JUDGE_HAS_CHOICE_FIELD e judge_commits: sem certo e errado não há campo de
@@ -95,19 +129,18 @@ existência do CAMPO de escolha; a escolha genuína é F1b, bloqueada):
 FREEDOM — F1 (reparado 2026-09-18; semântica hostil e alternatividade):
 CLASSIFICAÇÃO ONTOLÓGICA DAS PASSAGENS:
 - Person → ChoiceField: DEFINICIONAL/analítica (person_hasChoiceField, {Means, Subject}).
-- ChoiceField ↛ Chooses: BLOQUEADO (F1b) no lema exacto `rejectedHornCoMeant`
-  — a Agência hostil mostra que um ato (e mesmo a pessoa) não força a
-  co-significação do corno rejeitado.
+- ChoiceField ↛ Chooses: A presença de alternativas não força co-significação de ambos os cornos.
+- Selects ↛ Means(¬p): provado em CountermodelVeridicalMeaning.Single (selects_does_not_imply_rejected_horn_meaning).
+  A seleção semântica exclui objetivamente a negação, mas não obriga a mente a concebê-la.
+- Asserts ↛ Means(¬p): provado em CountermodelVeridicalMeaning.Single (assertion_does_not_imply_rejected_horn_meaning).
+  Asserir uma verdade não exige pensar na sua falsidade.
 - Chooses → FreeWill: DEFINICIONAL (chooses_implies_freeWill, `{Means, Subject}`
   só vocabulário). A liberdade
   não é um passo metafísico a partir do ato bruto; é a própria existência de
-  uma escolha genuína. O antigo contramodelo `CountermodelNoFreeWill` /
-  `not_entails_decoupled_freewill` (em `formal/Logos/HostileSemantics.lean`,
-  com `Chooses := False`) mostra `Act ↛ Chooses` e `Act ↛ FreeWill` — NÃO é
-  contramodelo da definição `Chooses → FreeWill`.
-- O campo (`ChoiceField`, person_hasChoiceField, choiceField_exists) e o juiz
-  que o certo-e-errado compromete (`JUDGE_HAS_CHOICE_FIELD`) são teoremas; o
-  que fica BLOCKED é a *existência* de um escolhedor genuíno.
+  uma escolha genuína.
+- O campo (`ChoiceField`, person_hasChoiceField, choiceField_exists) e a seleção (`Selects`, asserts_selects) são teoremas; o
+  que fica OPEN é a *existência* da escolha genuína (F1b), agora estritamente reduzida à fórmula mínima:
+  `∃ s p, Asserts s p ∧ Means s (¬p)`.
 - Veredito hostil 2026-09-18 (opção 3 — bloqueio irreducível sob os primitivos
   `{Means, Subject}`): `genuineChoice_requires_error_possibility`
   (veridicalidade mata co-significação), `assertion_consistency` /

@@ -59,6 +59,15 @@ concrete countermodel `Person s ∧ ¬ NecessarySubject s` cannot exist
    full moral responsibility): the performative datum does
    not force any of them, each via a DISTINCT model that preserves the other
    predicates (orthogonal matrix).
+10. Semantic selection frontier (milestone 2026-09-18 / F1b reopening):
+    separates Alternatives (`ChoiceField`) → Selection (`Selects`) → Free Choice (`FreeWill`).
+    While bare meaning does not force selection (`CountermodelOmniMeaning`: an
+    omni-entertaining subject represents all contents without rejecting any),
+    assertion constitutively entails semantic selection (`Choice.asserts_selects`).
+    However, semantic selection does NOT force genuine choice (co-meaning both horns)
+    nor libertarian free will: `CountermodelVeridicalMeaning.Single` satisfies
+    `Selects () True False` while `Chooses` and `FreeWill` are identically empty,
+    and abstract signatures formalize the non-entailments.
 -/
 
 import Logos.Core
@@ -709,6 +718,11 @@ def A (s : S) (p : Prop) : Prop := M s p
 def Person (s : S) : Prop := ∃ p : Prop, M s p
 def Chooses (s : S) (p q : Prop) : Prop := A s p ∧ A s q ∧ Logos.Alternatives.Incompatible p q
 def FreeWill (s : S) : Prop := ∃ p q : Prop, Chooses s p q
+def Asserts (s : S) (p : Prop) : Prop := A s p ∧ p
+def Selects (s : S) (p q : Prop) : Prop :=
+  Asserts s p ∧ Logos.Alternatives.Incompatible p q ∧ ¬ Asserts s q
+def DeliberateChoice (s : S) (p q : Prop) : Prop :=
+  M s p ∧ M s q ∧ Logos.Alternatives.Incompatible p q ∧ Asserts s p ∧ ¬ Asserts s q
 
 theorem act_datum_holds : ∃ s : S, ∃ p : Prop, A s p :=
   ⟨(), True, trivial⟩
@@ -716,9 +730,22 @@ theorem act_datum_holds : ∃ s : S, ∃ p : Prop, A s p :=
 theorem field_holds : ∃ s : S, ∃ p q : Prop, A s p ∧ Logos.Alternatives.Incompatible p q := by
   exact ⟨(), True, False, trivial, fun h => h.2⟩
 
+theorem selection_holds : ∃ s : S, ∃ p q : Prop, Selects s p q := by
+  refine ⟨(), True, False, ⟨trivial, trivial⟩, fun h => h.2, ?_⟩
+  rintro ⟨_, hFalse⟩
+  exact hFalse
+
 theorem no_genuine_choice : ¬ ∃ s : S, ∃ p q : Prop, Chooses s p q := by
   rintro ⟨s, p, q, hp, hq, hI⟩
   exact hI ⟨hp, hq⟩
+
+theorem no_deliberate_choice : ¬ ∃ s : S, ∃ p q : Prop, DeliberateChoice s p q := by
+  rintro ⟨s, p, q, hp, hq, hI, _, _⟩
+  exact hI ⟨hp, hq⟩
+
+theorem no_freewill : ¬ ∃ s : S, FreeWill s := by
+  rintro ⟨s, p, q, hc⟩
+  exact no_genuine_choice ⟨s, p, q, hc⟩
 
 theorem no_rejected_horn : ¬ ∃ s : S, ∃ p : Prop, A s p ∧ A s (¬ p) := by
   rintro ⟨s, p, hp, hnp⟩
@@ -730,6 +757,54 @@ theorem act_does_not_imply_genuine_choice :
     (∃ s : S, ∃ p : Prop, A s p) ∧
     ¬ (∃ s : S, ∃ p q : Prop, Chooses s p q) :=
   ⟨act_datum_holds, no_genuine_choice⟩
+
+/-- Semantic selection holds in the veridical model, yet genuine choice fails:
+    selection does not entail co-meaning both incompatible horns. -/
+theorem selection_does_not_imply_genuine_choice :
+    (∃ s : S, ∃ p q : Prop, Selects s p q) ∧
+    ¬ (∃ s : S, ∃ p q : Prop, Chooses s p q) :=
+  ⟨selection_holds, no_genuine_choice⟩
+
+/-- Semantic selection holds in the veridical model, yet deliberate choice fails:
+    selection does not entail deliberative co-meaning of the rejected alternative. -/
+theorem selection_does_not_imply_deliberate_choice :
+    (∃ s : S, ∃ p q : Prop, Selects s p q) ∧
+    ¬ (∃ s : S, ∃ p q : Prop, DeliberateChoice s p q) :=
+  ⟨selection_holds, no_deliberate_choice⟩
+
+/-- Semantic selection holds in the deterministic/veridical model, yet free will fails:
+    semantic selection does not entail libertarian free will. -/
+theorem selection_does_not_imply_freewill :
+    (∃ s : S, ∃ p q : Prop, Selects s p q) ∧
+    ¬ (∃ s : S, FreeWill s) :=
+  ⟨selection_holds, no_freewill⟩
+
+/-- Semantic selection does not entail meaning the rejected alternative (F1b boundary):
+    A subject can select `p` against its negation `¬p` (via factive assertion) without
+    meaning or entertaining the rejected horn `¬p` in thought. -/
+theorem selects_does_not_imply_rejected_horn_meaning :
+    (∃ s : S, ∃ p : Prop, Selects s p (¬p)) ∧
+    ¬ (∃ s : S, ∃ p : Prop, Selects s p (¬p) ∧ M s (¬p)) := by
+  constructor
+  · refine ⟨(), True, ?_⟩
+    have hI : Logos.Alternatives.Incompatible True (¬True) := by
+      intro h; exact h.2 h.1
+    refine ⟨⟨trivial, trivial⟩, hI, ?_⟩
+    rintro ⟨_, hFalse⟩
+    exact hFalse trivial
+  · rintro ⟨_s, _p, hSel, hMn⟩
+    exact hMn hSel.1.2
+
+/-- Factive assertion does not entail meaning the rejected alternative:
+    Asserting `p` guarantees semantic selection against `¬p`, but does not force
+    the subject to represent `¬p` in thought. -/
+theorem assertion_does_not_imply_rejected_horn_meaning :
+    (∃ s : S, ∃ p : Prop, Asserts s p) ∧
+    ¬ (∃ s : S, ∃ p : Prop, Asserts s p ∧ M s (¬p)) := by
+  constructor
+  · exact ⟨(), True, trivial, trivial⟩
+  · rintro ⟨_s, _p, hAss, hMn⟩
+    exact hMn hAss.2
 
 end Single
 
@@ -750,9 +825,17 @@ def IsFalse (p : Prop) : Prop := ¬ p
 def Correct (s : S) (p : Prop) : Prop := A s p ∧ T p
 def Incorrect (s : S) (p : Prop) : Prop := A s p ∧ IsFalse p
 def Fallible (_s : S) (p : Prop) : Prop := IsFalse p
+def Asserts (s : S) (p : Prop) : Prop := A s p ∧ p
+def Selects (s : S) (p q : Prop) : Prop :=
+  Asserts s p ∧ Logos.Alternatives.Incompatible p q ∧ ¬ Asserts s q
+def DeliberateChoice (s : S) (p q : Prop) : Prop :=
+  M s p ∧ M s q ∧ Logos.Alternatives.Incompatible p q ∧ Asserts s p ∧ ¬ Asserts s q
 
 theorem act_datum_holds : ∃ s : S, ∃ p : Prop, A s p :=
   ⟨false, True, trivial⟩
+
+theorem assertion_holds : ∃ s : S, ∃ p : Prop, Asserts s p :=
+  ⟨false, True, trivial, trivial⟩
 
 theorem two_persons_exist : ∃ s₁ s₂ : S, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ := by
   refine ⟨true, false, ?_, ?_, ?_⟩
@@ -792,6 +875,20 @@ theorem no_rejected_horn : ¬ ∃ s : S, ∃ p : Prop, A s p ∧ A s (¬ p) := b
   rintro ⟨s, p, hp, hnp⟩
   exact hnp hp
 
+theorem no_deliberate_choice : ¬ ∃ s : S, ∃ p q : Prop, DeliberateChoice s p q := by
+  rintro ⟨s, p, q, hp, hq, hI, _, _⟩
+  exact hI ⟨hp, hq⟩
+
+theorem no_deliberate_resource : ¬ ∃ s : S, ∃ p : Prop, Asserts s p ∧ M s (¬ p) := by
+  rintro ⟨s, p, hAss, hMn⟩
+  exact hMn hAss.2
+
+/-- Hostile separation: an assertion occurs under two persons, yet meaning the rejected alternative is impossible. -/
+theorem assertion_does_not_imply_rejected_horn_meaning :
+    (∃ s : S, ∃ p : Prop, Asserts s p) ∧
+    ¬ (∃ s : S, ∃ p : Prop, Asserts s p ∧ M s (¬ p)) :=
+  ⟨assertion_holds, no_deliberate_resource⟩
+
 /-- Hostile separation, full fragment: act datum, two distinct persons,
     right-and-wrong, the judge committing a choice field, and fallibility all
     hold — yet genuine choice (and with it `FreeWill`) is empty. This is the
@@ -806,6 +903,19 @@ theorem full_fragment_without_genuine_choice :
     ¬ (∃ s : S, ∃ p q : Prop, Chooses s p q) :=
   ⟨act_datum_holds, two_persons_exist, rightWrong_holds, judge_commits_holds,
    fallibility_holds, no_genuine_choice⟩
+
+/-- Hostile separation, full fragment with assertion: factive assertion, two distinct persons,
+    right-and-wrong, the judge committing a choice field, and fallibility all hold —
+    yet the minimal deliberative resource (asserting p while meaning ¬p) is provably empty. -/
+theorem full_fragment_without_deliberate_resource :
+    (∃ s : S, ∃ p : Prop, Asserts s p) ∧
+    (∃ s₁ s₂ : S, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂) ∧
+    ((¬ (∀ p : Prop, ¬ T p)) ∧ (¬ (∀ p : Prop, T p))) ∧
+    (∃ (s : S) (p q : Prop), A s p ∧ (Correct s p ∨ Incorrect s p) ∧ Logos.Alternatives.Incompatible p q) ∧
+    (∃ (s : S) (p : Prop), Fallible s p ∧ IsFalse p) ∧
+    ¬ (∃ s : S, ∃ p : Prop, Asserts s p ∧ M s (¬ p)) :=
+  ⟨assertion_holds, two_persons_exist, rightWrong_holds, judge_commits_holds,
+   fallibility_holds, no_deliberate_resource⟩
 
 end TwoPersons
 
@@ -937,6 +1047,243 @@ theorem modal_openness_and_plurality_do_not_entail_genuine_choice :
   exact hn (h I hd)
 
 end CountermodelVeridicalMeaning
+
+-- ===========================================================================
+-- Part C2: Semantic Selection and Non-Entailment Boundary
+-- ===========================================================================
+
+namespace CountermodelOmniMeaning
+
+def S : Type := Unit
+def Means (_s : S) (_p : Prop) : Prop := True
+def Act (s : S) (p : Prop) : Prop := Means s p
+def MeansSelects (s : S) (p q : Prop) : Prop :=
+  Means s p ∧ Logos.Alternatives.Incompatible p q ∧ ¬ Means s q
+
+theorem act_datum_holds : ∃ s : S, ∃ p : Prop, Act s p :=
+  ⟨(), True, trivial⟩
+
+theorem no_means_selection : ¬ ∃ s : S, ∃ p q : Prop, MeansSelects s p q := by
+  rintro ⟨s, p, q, _, _, hnq⟩
+  exact hnq trivial
+
+/-- Bare meaning does not entail semantic selection at the level of Means:
+    an omni-entertaining subject represents every content without rejecting any. -/
+theorem means_does_not_entail_means_selection :
+    (∃ s : S, ∃ p : Prop, Act s p) ∧
+    ¬ (∃ s : S, ∃ p q : Prop, MeansSelects s p q) :=
+  ⟨act_datum_holds, no_means_selection⟩
+
+end CountermodelOmniMeaning
+
+namespace CountermodelActWithoutAssertion
+
+def S : Type := Unit
+def Means (_s : S) (p : Prop) : Prop := (p = False)
+def Act (s : S) (p : Prop) : Prop := Means s p
+def Asserts (s : S) (p : Prop) : Prop := Act s p ∧ p
+
+theorem act_datum_holds : ∃ s : S, ∃ p : Prop, Act s p :=
+  ⟨(), False, rfl⟩
+
+theorem no_assertion : ¬ ∃ s : S, ∃ p : Prop, Asserts s p := by
+  rintro ⟨s, p, hp1, hp2⟩
+  subst hp1
+  exact hp2
+
+/-- An intentional act does not entail assertion: an agent can mean falsehood,
+    in which case an act occurs, but no veridical assertion obtains. -/
+theorem act_does_not_imply_assertion :
+    (∃ s : S, ∃ p : Prop, Act s p) ∧
+    ¬ (∃ s : S, ∃ p : Prop, Asserts s p) :=
+  ⟨act_datum_holds, no_assertion⟩
+
+end CountermodelActWithoutAssertion
+
+-- ===========================================================================
+-- Abstract-signature forms: non-entailment over the selection vocabulary
+-- Note on Asserts ↛ Selection: no countermodel can exist in Γ because
+-- `Choice.asserts_selects` is a verified theorem in the kernel. The definition
+-- `Asserts s p := Act s p ∧ p` requires p to be true, which constitutively
+-- excludes asserting any incompatible q (via `assertion_consistency`).
+-- Hence `Asserts ↛ Selection` is mathematically impossible under Γ's logic.
+-- ===========================================================================
+
+structure SelectionSignature where
+  Subject : Type
+  Means : Subject → Prop → Prop
+  Asserts : Subject → Prop → Prop
+  Selects : Subject → Prop → Prop → Prop
+  DeliberateChoice : Subject → Prop → Prop → Prop
+  Chooses : Subject → Prop → Prop → Prop
+  FreeWill : Subject → Prop
+
+def ActDatum (I : SelectionSignature) : Prop :=
+  ∃ s : I.Subject, ∃ p : Prop, I.Means s p
+
+def AssertsDatum (I : SelectionSignature) : Prop :=
+  ∃ s : I.Subject, ∃ p : Prop, I.Asserts s p
+
+def SelectionDatum (I : SelectionSignature) : Prop :=
+  ∃ s : I.Subject, ∃ p q : Prop, I.Selects s p q
+
+def DeliberateChoiceDatum (I : SelectionSignature) : Prop :=
+  ∃ s : I.Subject, ∃ p q : Prop, I.DeliberateChoice s p q
+
+def GenuineChoiceDatum (I : SelectionSignature) : Prop :=
+  ∃ s : I.Subject, ∃ p q : Prop, I.Chooses s p q
+
+def FreeWillDatum (I : SelectionSignature) : Prop :=
+  ∃ s : I.Subject, I.FreeWill s
+
+/-- Separation: the occurrence of an intentional act does not logically entail an assertion.
+    An agent may mean false content; because assertion contains the truth condition `p`,
+    an act without true content constitutes no assertion. -/
+theorem act_not_entails_asserts :
+    ¬ (∀ I : SelectionSignature, ActDatum I → AssertsDatum I) := by
+  intro h
+  let I : SelectionSignature := {
+    Subject := Unit
+    Means := fun _ p => p = False
+    Asserts := fun _ p => (p = False) ∧ p
+    Selects := fun _ p q => (p = False) ∧ p ∧ Logos.Alternatives.Incompatible p q ∧ ¬ ((q = False) ∧ q)
+    DeliberateChoice := fun _ p q => False
+    Chooses := fun _ p q => False
+    FreeWill := fun _ => False
+  }
+  have ha : ActDatum I := ⟨(), False, rfl⟩
+  have hna : ¬ AssertsDatum I := by
+    rintro ⟨s, p, hp1, hp2⟩
+    subst hp1
+    exact hp2
+  exact hna (h I ha)
+
+/-- Separation: the occurrence of an intentional act does not logically entail semantic selection.
+    An agent meaning only falsehood performs an act but cannot make a factive assertion or selection. -/
+theorem act_not_entails_selects :
+    ¬ (∀ I : SelectionSignature, ActDatum I → SelectionDatum I) := by
+  intro h
+  let I : SelectionSignature := {
+    Subject := Unit
+    Means := fun _ p => p = False
+    Asserts := fun _ p => (p = False) ∧ p
+    Selects := fun _ p q => (p = False) ∧ p ∧ Logos.Alternatives.Incompatible p q ∧ ¬ ((q = False) ∧ q)
+    DeliberateChoice := fun _ p q => False
+    Chooses := fun _ p q => False
+    FreeWill := fun _ => False
+  }
+  have ha : ActDatum I := ⟨(), False, rfl⟩
+  have hns : ¬ SelectionDatum I := by
+    rintro ⟨s, p, q, hp1, hp2, _, _⟩
+    subst hp1
+    exact hp2
+  exact hns (h I ha)
+
+/-- Separation: genuine choice (co-meaning incompatible contents) does not logically entail
+    deliberate choice (which requires asserting one horn).
+    An agent may entertain two incompatible hypotheses in contemplation without committing to either. -/
+theorem chooses_not_entails_deliberateChoice :
+    ¬ (∀ I : SelectionSignature, GenuineChoiceDatum I → DeliberateChoiceDatum I) := by
+  intro h
+  let I : SelectionSignature := {
+    Subject := Unit
+    Means := fun _ _ => True
+    Asserts := fun _ _ => False
+    Selects := fun _ _ _ => False
+    DeliberateChoice := fun _ p q => True ∧ True ∧ Logos.Alternatives.Incompatible p q ∧ False ∧ ¬ False
+    Chooses := fun _ p q => True ∧ True ∧ Logos.Alternatives.Incompatible p q
+    FreeWill := fun _ => False
+  }
+  have hc : GenuineChoiceDatum I := ⟨(), True, False, trivial, trivial, fun h => h.2⟩
+  have hnd : ¬ DeliberateChoiceDatum I := by
+    rintro ⟨s, p, q, _, _, _, hAss, _⟩
+    exact hAss
+  exact hnd (h I hc)
+
+/-- Separation: semantic selection does not logically entail deliberate choice
+    (entertaining both horns in thought while asserting one). -/
+theorem selection_not_entails_deliberate_choice :
+    ¬ (∀ I : SelectionSignature, SelectionDatum I → DeliberateChoiceDatum I) := by
+  intro h
+  let I : SelectionSignature := {
+    Subject := Unit
+    Means := fun _ p => p
+    Asserts := fun _ p => p
+    Selects := fun _ p q => p ∧ Logos.Alternatives.Incompatible p q ∧ ¬ q
+    DeliberateChoice := fun _ p q => p ∧ q ∧ Logos.Alternatives.Incompatible p q ∧ p ∧ ¬ q
+    Chooses := fun _ p q => p ∧ q ∧ Logos.Alternatives.Incompatible p q
+    FreeWill := fun _ => False
+  }
+  have hd : SelectionDatum I := ⟨(), True, False, trivial, fun h => h.2, id⟩
+  have hn : ¬ DeliberateChoiceDatum I := by
+    rintro ⟨s, p, q, hp, hq, hI, _, _⟩
+    exact hI ⟨hp, hq⟩
+  exact hn (h I hd)
+
+/-- Separation: semantic selection does not logically entail genuine choice
+    (co-meaning both incompatible horns). -/
+theorem selection_not_entails_genuine_choice :
+    ¬ (∀ I : SelectionSignature, SelectionDatum I → GenuineChoiceDatum I) := by
+  intro h
+  let I : SelectionSignature := {
+    Subject := Unit
+    Means := fun _ p => p
+    Asserts := fun _ p => p
+    Selects := fun _ p q => p ∧ Logos.Alternatives.Incompatible p q ∧ ¬ q
+    DeliberateChoice := fun _ p q => p ∧ q ∧ Logos.Alternatives.Incompatible p q ∧ p ∧ ¬ q
+    Chooses := fun _ p q => p ∧ q ∧ Logos.Alternatives.Incompatible p q
+    FreeWill := fun _ => False
+  }
+  have hd : SelectionDatum I := ⟨(), True, False, trivial, fun h => h.2, id⟩
+  have hn : ¬ GenuineChoiceDatum I := by
+    rintro ⟨s, p, q, hp, hq, hI⟩
+    exact hI ⟨hp, hq⟩
+  exact hn (h I hd)
+
+/-- Separation: semantic selection does not logically entail libertarian free will. -/
+theorem selection_not_entails_freewill :
+    ¬ (∀ I : SelectionSignature, SelectionDatum I → FreeWillDatum I) := by
+  intro h
+  let I : SelectionSignature := {
+    Subject := Unit
+    Means := fun _ p => p
+    Asserts := fun _ p => p
+    Selects := fun _ p q => p ∧ Logos.Alternatives.Incompatible p q ∧ ¬ q
+    DeliberateChoice := fun _ p q => p ∧ q ∧ Logos.Alternatives.Incompatible p q ∧ p ∧ ¬ q
+    Chooses := fun _ p q => p ∧ q ∧ Logos.Alternatives.Incompatible p q
+    FreeWill := fun _ => False
+  }
+  have hd : SelectionDatum I := ⟨(), True, False, trivial, fun h => h.2, id⟩
+  have hn : ¬ FreeWillDatum I := by
+    rintro ⟨s, hf⟩
+    exact hf
+  exact hn (h I hd)
+
+structure MeansSelectionSignature where
+  Subject : Type
+  Means : Subject → Prop → Prop
+  Selects : Subject → Prop → Prop → Prop
+
+def BareMeansDatum (I : MeansSelectionSignature) : Prop :=
+  ∃ s : I.Subject, ∃ p : Prop, I.Means s p
+
+def MeansSelectionDatum (I : MeansSelectionSignature) : Prop :=
+  ∃ s : I.Subject, ∃ p q : Prop, I.Selects s p q
+
+/-- Separation: bare meaning does not logically entail selection. -/
+theorem not_entails_selection_of_bare_means :
+    ¬ (∀ I : MeansSelectionSignature, BareMeansDatum I → MeansSelectionDatum I) := by
+  intro h
+  let I : MeansSelectionSignature := {
+    Subject := Unit
+    Means := fun _ _ => True
+    Selects := fun _ _ _ => False
+  }
+  have hd : BareMeansDatum I := ⟨(), True, trivial⟩
+  have hn : ¬ MeansSelectionDatum I := by
+    rintro ⟨s, p, q, hs⟩
+    exact hs
+  exact hn (h I hd)
 
 -- ===========================================================================
 -- Part D: Semantic Attack on Ultimate Ground (Infinite Descending Chain)

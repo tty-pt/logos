@@ -8,19 +8,25 @@ choice. With `Chooses s p q := A s p ∧ Incompatible p q` and
 the agent was never related to the rejected horn. The repair splits the
 vocabulary into two relations and a definitional freedom:
 
-  * `ChoiceField s p q := A s p ∧ Incompatible p q` — **representability/field**:
+  * `ChoiceField s p q := A s p ∧ Incompatible p q` — **representability/field** (Level 1):
     the agent's act is set against an incompatible content. This is the old
     occurrence relation; it is PROVEN for any meaning-act (C51/C52 field form)
     but is *not* a choice.
+  * `Selects s p q := Asserts s p ∧ Incompatible p q ∧ ¬ Asserts s q` — **semantic selection** (Level 2):
+    the agent commits to `p` against incompatible alternative `q` and does not assert `q`.
+    PROVEN for any assertion (`asserts_selects`, `asserts_selects_all_incompatible`),
+    establishing that meaningful assertive agency is constitutively selective.
+  * `DeliberateChoice s p q := Means s p ∧ Means s q ∧ Incompatible p q ∧ Asserts s p ∧ ¬ Asserts s q` —
+    **deliberative choice**: the agent entertains both incompatible alternatives in thought,
+    while asserting only one. Entails `Selects` and `Chooses`, but its existence remains unforced
+    by the performative datum alone (witnessed by `CountermodelVeridicalMeaning`).
   * `Chooses s p q := A s p ∧ A s q ∧ Incompatible p q` — **genuine choice**:
     the agent holds *both* incompatible contents (adopts `p` while `q` is
     co-meant). `∃ q, Chooses s p q` is no longer `A s p`.
-  * `FreeWill s := ∃ p q, Chooses s p q` — freedom is *definitional* from
+  * `FreeWill s := ∃ p q, Chooses s p q` — freedom (Level 4) is *definitional* from
     genuine choice (`chooses_implies_freeWill`, footprint `{Means, Subject}` —
-    VOCAB only: the logical content is free, the vocabulary is the statement's
-    own). The old
-    bipolar `FreeWill s p := CanChoose s p ∧ CanChoose s (¬p)` (which unfolds
-    to `A s p ∧ A s (¬ p)`) is subsumed by the unary `FreeWill s`.
+    VOCAB only). Level 3 (counterfactual possibility of selecting otherwise) is not
+    forced by deterministic agency.
 
 The exact missing step (F1b, BLOCKED) is the co-meaning of the rejected horn:
 
@@ -60,7 +66,7 @@ import Logos.Necessity
 
 namespace Logos.Choice
 
-open Logos.Agency (Subject Means A Asserts)
+open Logos.Agency (Subject Means A Act Asserts)
 open Logos.Person (Person)
 open Logos.Alternatives (Incompatible)
 open Logos.Necessity (Dia Necessity someWorld)
@@ -380,6 +386,215 @@ theorem no_one_asserts_incompatible_pair :
   rintro ⟨s, p, q, ha, hb, hI⟩
   exact hI ⟨ha.2, hb.2⟩
 
+-- ===========================================================================
+-- Semantic Selection Layer (F1b Refined Frontier)
+-- Distinguishes Alternatives (ChoiceField) → Selection (Selects) → Free Choice (FreeWill)
+-- ===========================================================================
+
+/-- Semantic selection: subject `s` commits to `p` against incompatible alternative `q`.
+    The agent asserts `p`, standing against an incompatible proposition `q`,
+    and does not assert `q`. This records directed semantic commitment to one horn
+    rather than its incompatible alternatives, without requiring co-meaning of the
+    rejected horn or libertarian freedom. -/
+def Selects (s : Subject) (p : Prop) (q : Prop) : Prop :=
+  Asserts s p ∧ Incompatible p q ∧ ¬ Asserts s q
+
+/-- Any assertion constitutes semantic selection against its own negation.
+    From `Asserts s p`, the agent is committed to `p`, `p` is incompatible with `¬p`,
+    and consistency guarantees that the agent does not assert `¬p`. -/
+theorem asserts_selects (s : Subject) (p : Prop) (h : Asserts s p) :
+    Selects s p (¬p) := by
+  refine ⟨h, incompatible_self_negation p, assertion_consistency h⟩
+
+/-- Assertion selects against every incompatible alternative.
+    Whenever a subject asserts `p`, any proposition `q` incompatible with `p` is
+    excluded from assertion: the subject cannot assert both horns. -/
+theorem asserts_selects_all_incompatible (s : Subject) (p q : Prop)
+    (h : Asserts s p) (hI : Incompatible p q) :
+    Selects s p q := by
+  refine ⟨h, hI, ?_⟩
+  intro hq
+  exact hI ⟨h.2, hq.2⟩
+
+/-- Semantic selection exists whenever an assertion datum is supplied.
+    An assertive performative act immediately furnishes a witness of semantic selection
+    between the asserted content and its negation. -/
+theorem selection_exists (h : ∃ s : Subject, ∃ p : Prop, Asserts s p) :
+    ∃ s : Subject, ∃ p q : Prop, Selects s p q := by
+  obtain ⟨s, p, ha⟩ := h
+  exact ⟨s, p, ¬p, asserts_selects s p ha⟩
+
+/-- No selection entails no assertion: the contrapositive of semantic selection.
+    If a subject cannot or does not select `p` against any alternative, that subject
+    does not assert `p`. Meaningful assertive commitment constitutively involves selection. -/
+theorem no_selection_no_assertion (s : Subject) (p : Prop)
+    (hNo : ∀ q : Prop, ¬ Selects s p q) : ¬ Asserts s p := by
+  intro hAss
+  exact hNo (¬p) (asserts_selects s p hAss)
+
+-- ===========================================================================
+-- Deliberate Choice & Bridge Pricing (Candidate C)
+-- ===========================================================================
+
+/-- Deliberate choice: subject `s` entertains both `p` and `q` while asserting only `p`.
+    The subject represents both incompatible alternatives in thought (`Means s p ∧ Means s q`),
+    recognizes their mutual incompatibility (`Incompatible p q`),
+    and commits to one horn by asserting `p` while withholding assertion of `q` (`Asserts s p ∧ ¬ Asserts s q`).
+    This formalizes deliberation without requiring contradictory dual assertion. -/
+def DeliberateChoice (s : Subject) (p : Prop) (q : Prop) : Prop :=
+  Means s p ∧ Means s q ∧ Incompatible p q ∧ Asserts s p ∧ ¬ Asserts s q
+
+/-- Deliberate choice strictly entails semantic selection.
+    Any subject who deliberates between `p` and `q` and chooses `p` thereby selects `p` against `q`. -/
+theorem deliberateChoice_implies_selects {s : Subject} {p q : Prop}
+    (h : DeliberateChoice s p q) : Selects s p q :=
+  ⟨h.2.2.2.1, h.2.2.1, h.2.2.2.2⟩
+
+/-- Deliberate choice entails genuine choice in the co-meaning sense.
+    Because the deliberating agent entertains both horns in thought, both are meant. -/
+theorem deliberateChoice_implies_chooses {s : Subject} {p q : Prop}
+    (h : DeliberateChoice s p q) : Chooses s p q :=
+  ⟨h.1, h.2.1, h.2.2.1⟩
+
+/-- Exact decomposition of deliberate choice (Route C milestone):
+    Deliberate choice between `p` and `q` is definitionally equivalent to
+    semantic selection of `p` against `q` plus awareness (intentional representation)
+    of the alternative horn `q`. -/
+theorem deliberateChoice_iff_selects_and_means (s : Subject) (p q : Prop) :
+    DeliberateChoice s p q ↔ Selects s p q ∧ Means s q := by
+  constructor
+  · intro h
+    exact ⟨deliberateChoice_implies_selects h, h.2.1⟩
+  · rintro ⟨hSel, hMq⟩
+    exact ⟨hSel.1.1, hMq, hSel.2.1, hSel.1, hSel.2.2⟩
+
+/-- Active rejection of an alternative:
+    Subject `s` actively rejects `q` when `s` entertains `q` in thought (`Means s q`)
+    but does not assert it (`¬ Asserts s q`).
+    This formalizes conscious exclusion of a candidate alternative. -/
+def Rejects (s : Subject) (q : Prop) : Prop :=
+  Means s q ∧ ¬ Asserts s q
+
+/-- Deliberate choice as Selection + Rejection (Route C milestone):
+    Choosing deliberately between `p` and `q` is selecting `p` against `q`
+    while actively rejecting `q`. -/
+theorem deliberateChoice_iff_selects_and_rejects (s : Subject) (p q : Prop) :
+    DeliberateChoice s p q ↔ Selects s p q ∧ Rejects s q := by
+  constructor
+  · intro h
+    exact ⟨deliberateChoice_implies_selects h, ⟨h.2.1, h.2.2.2.2⟩⟩
+  · rintro ⟨hSel, hRej⟩
+    exact ⟨hSel.1.1, hRej.1, hSel.2.1, hSel.1, hRej.2⟩
+
+/-- For self-negation alternatives, deliberate choice reduces to assertion of `p`
+    combined with meaning the rejected negation `¬p` (the exact F1b resource `rejectedHornCoMeant`). -/
+theorem deliberateChoice_negation_iff (s : Subject) (p : Prop) (hAss : Asserts s p) :
+    DeliberateChoice s p (¬p) ↔ Means s (¬p) := by
+  constructor
+  · intro h
+    exact h.2.1
+  · intro hMn
+    have hSel := asserts_selects s p hAss
+    exact (deliberateChoice_iff_selects_and_means s p (¬p)).2 ⟨hSel, hMn⟩
+
+/-- Minimal deliberative resource for genuine choice (exact F1b reduction):
+    An actualized subject asserts a proposition `p` while simultaneously
+    meaning (entertaining in thought) its incompatible negation `¬p`. -/
+def deliberateGenuineChoiceResource : Prop :=
+  ∃ s : Subject, ∃ p : Prop, Asserts s p ∧ Means s (¬p)
+
+/-- Deliberate choice existence from the minimal deliberative resource:
+    Given an asserted proposition whose negation is entertained in thought,
+    an explicit deliberate choice between contradictory alternatives obtains. -/
+theorem deliberateChoice_exists_of_assertion_and_negation_meaning
+    (h : deliberateGenuineChoiceResource) :
+    ∃ s : Subject, ∃ p q : Prop, DeliberateChoice s p q := by
+  obtain ⟨s, p, hAss, hMn⟩ := h
+  have hDel : DeliberateChoice s p (¬p) :=
+    (deliberateChoice_negation_iff s p hAss).2 hMn
+  exact ⟨s, p, ¬p, hDel⟩
+
+/-- Genuine choice closure from the minimal deliberative resource (F1b reduction):
+    Given an asserted truth whose negation is entertained in thought,
+    genuine choice between incompatible contents is strictly derived without substantive axioms. -/
+theorem genuineChoice_exists_of_assertion_and_negation_meaning
+    (h : deliberateGenuineChoiceResource) :
+    genuineChoice_exists := by
+  obtain ⟨s, p, hAss, hMn⟩ := h
+  have hDel : DeliberateChoice s p (¬p) :=
+    (deliberateChoice_negation_iff s p hAss).2 hMn
+  exact ⟨s, p, ¬p, deliberateChoice_implies_chooses hDel⟩
+
+/-- Candidate C bridge: every intentional act entails an assertion.
+    The explicit semantic proposition that the occurrence of an intentional act
+    guarantees an assertive truth-claim. This is an unprovable substantive semantic
+    premise, required if semantic selection is to be derived from the bare
+    act-datum without the retorsive shortcut. -/
+def act_implies_asserts_bridge : Prop :=
+  (∃ s : Subject, ∃ p : Prop, Act s p) → ∃ s : Subject, ∃ p : Prop, Asserts s p
+
+/-- Under the explicit Candidate C bridge, an intentional act yields semantic selection.
+    Priced explicitly by the bridge premise; without this premise, bare meaning does not
+    force selection (witnessed by CountermodelOmniMeaning). -/
+theorem selection_exists_of_act (hBridge : act_implies_asserts_bridge)
+    (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
+    ∃ s : Subject, ∃ p q : Prop, Selects s p q := by
+  obtain ⟨s, p, ha⟩ := hBridge h
+  exact selection_exists ⟨s, p, ha⟩
+
+-- ===========================================================================
+-- Candidate Outcome B: Independent Semantic Principles (Bilateralism / Doubt)
+-- ===========================================================================
+
+/-- Candidate Outcome B semantic principle: Bilateral intentionality / representational polarity.
+    The substantive semantic thesis that intentional representation of any proposition `p`
+    constitutively endows the subject with the capacity to represent its negation `¬p`.
+    This formalizes the Frege/Dummett/Wittgenstein bilateralism thesis: to grasp a thought is
+    to understand the contrast between its being true and its being false.
+    Classified as SEMANTIC; unprovable from bare uninterpreted `Means` (witnessed by
+    CountermodelVeridicalMeaning). -/
+def bilateral_intentionality_principle : Prop :=
+  ∀ (s : Subject) (p : Prop), Means s p → Means s (¬p)
+
+/-- Deliberative genuine choice resource derived under Bilateral Intentionality and Assertion.
+    Given bilateral intentionality and an assertive performative act, the minimal deliberative
+    resource `deliberateGenuineChoiceResource` is strictly derived. -/
+theorem deliberateResource_of_bilateral_intentionality
+    (hBilateral : bilateral_intentionality_principle)
+    (hAss : ∃ s : Subject, ∃ p : Prop, Asserts s p) :
+    deliberateGenuineChoiceResource := by
+  obtain ⟨s, p, ha⟩ := hAss
+  have hMn : Means s (¬p) := hBilateral s p ha.1
+  exact ⟨s, p, ha, hMn⟩
+
+/-- Genuine choice closure under Bilateral Intentionality and Assertion (Outcome B conditional).
+    Shows the exact bridge needed to close F1b under an independent, principled theory of
+    intentionality rather than an ad hoc postulate of F1b. -/
+theorem genuineChoice_exists_of_bilateral_intentionality
+    (hBilateral : bilateral_intentionality_principle)
+    (hAss : ∃ s : Subject, ∃ p : Prop, Asserts s p) :
+    genuineChoice_exists := by
+  have hRes := deliberateResource_of_bilateral_intentionality hBilateral hAss
+  exact genuineChoice_exists_of_assertion_and_negation_meaning hRes
+
+/-- Candidate Outcome B principle: Cartesian Doubt.
+    An act of doubting `p` constitutively involves entertaining both `p` and its contrary `¬p`
+    in thought. A subject in doubt is already related to incompatible alternatives. -/
+def Doubts (s : Subject) (p : Prop) : Prop :=
+  Means s p ∧ Means s (¬p)
+
+/-- An act of Cartesian doubt immediately witnesses genuine choice between incompatible alternatives.
+    Shows that if the foundational performative datum were an act of doubt rather than a single-horned
+    assertion or meaning-act, genuine choice would be derived immediately without additional bridges. -/
+theorem genuineChoice_of_doubt {s : Subject} {p : Prop} (hDoubt : Doubts s p) :
+    Chooses s p (¬p) :=
+  ⟨hDoubt.1, hDoubt.2, incompatible_self_negation p⟩
+
+/-- Cartesian doubt directly yields freedom for the doubting subject. -/
+theorem freeWill_of_doubt {s : Subject} {p : Prop} (hDoubt : Doubts s p) :
+    FreeWill s :=
+  chooses_implies_freeWill (genuineChoice_of_doubt hDoubt)
+
 /--No one can assert "there is no strong truth": the act of denying the
   world-level datum is destroyed by the datum itself (assertive retorsion of
   C93, completing the retorsion family at the assertion level; footprint
@@ -411,3 +626,26 @@ end Logos.Choice
 #print axioms Logos.Choice.JUDGE_HAS_CHOICE_FIELD
 #print axioms Logos.Choice.rightWrong_implies_someone_means
 #print axioms Logos.Choice.noStrongTruth_assertable_refutes
+#print axioms Logos.Choice.Selects
+#print axioms Logos.Choice.asserts_selects
+#print axioms Logos.Choice.asserts_selects_all_incompatible
+#print axioms Logos.Choice.selection_exists
+#print axioms Logos.Choice.no_selection_no_assertion
+#print axioms Logos.Choice.DeliberateChoice
+#print axioms Logos.Choice.deliberateChoice_implies_selects
+#print axioms Logos.Choice.deliberateChoice_implies_chooses
+#print axioms Logos.Choice.deliberateChoice_iff_selects_and_means
+#print axioms Logos.Choice.Rejects
+#print axioms Logos.Choice.deliberateChoice_iff_selects_and_rejects
+#print axioms Logos.Choice.deliberateChoice_negation_iff
+#print axioms Logos.Choice.deliberateGenuineChoiceResource
+#print axioms Logos.Choice.deliberateChoice_exists_of_assertion_and_negation_meaning
+#print axioms Logos.Choice.genuineChoice_exists_of_assertion_and_negation_meaning
+#print axioms Logos.Choice.act_implies_asserts_bridge
+#print axioms Logos.Choice.selection_exists_of_act
+#print axioms Logos.Choice.bilateral_intentionality_principle
+#print axioms Logos.Choice.deliberateResource_of_bilateral_intentionality
+#print axioms Logos.Choice.genuineChoice_exists_of_bilateral_intentionality
+#print axioms Logos.Choice.Doubts
+#print axioms Logos.Choice.genuineChoice_of_doubt
+#print axioms Logos.Choice.freeWill_of_doubt

@@ -773,8 +773,20 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
     covered = {c.get("_full") for c in all_claims if c.get("_full")}
     missing = sorted(f for f in kern_theorems - covered if f in node_map)
     if missing:
-        ap(f"- Kernel theorems **without a GAPMAP claim** ({len(missing)}): "
-           + ", ".join(f.replace("Logos.", "") for f in missing))
+        hostile_sep = [f for f in missing if "HostileSemantics" in f]
+        modal_calc = [f for f in missing if "Necessity" in f or "Modal" in f]
+        semantic_sat = [f for f in missing if "Semantics" in f or "Truthmaker" in f or "Core" in f]
+        structural_lemmas = [f for f in missing if f not in hostile_sep and f not in modal_calc and f not in semantic_sat]
+
+        ap(f"- **Kernel theorems supporting the architecture ({len(missing)} intentional unmapped helper/infrastructure theorems):**")
+        ap(f"  - *Hostile countermodel separations ({len(hostile_sep)}):* "
+           + ", ".join(f.replace("Logos.HostileSemantics.", "") for f in hostile_sep))
+        ap(f"  - *Modal calculus S4/K4 machinery ({len(modal_calc)}):* "
+           + ", ".join(f.replace("Logos.", "") for f in modal_calc))
+        ap(f"  - *Semantic satisfaction & object-language lemmas ({len(semantic_sat)}):* "
+           + ", ".join(f.replace("Logos.", "") for f in semantic_sat))
+        ap(f"  - *Intermediate agency, order, and relation steps ({len(structural_lemmas)}):* "
+           + ", ".join(f.replace("Logos.", "") for f in structural_lemmas))
     else:
         ap("- Every kernel theorem has a claim (or a mapped reference).")
 
@@ -1373,7 +1385,7 @@ STAGES = [
 STAGE_OF = {}
 for _x in range(1, 13):          # C1–C12
     STAGE_OF[f"C{_x}"] = "II"
-for _x in ("C13", "C14", "C16", "C17", "C31", "C35", "C36"):
+for _x in ("C13", "C14", "C16", "C17", "C31", "C35", "C36", "C101"):
     STAGE_OF[_x] = "II"
 for _x in ("C58", "C68", "C83", "C84", "C63"):
     STAGE_OF[_x] = "I"
@@ -1381,7 +1393,7 @@ for _x in ("C21", "C22", "C23", "C24", "C25", "C49", "C57", "C62"):
     STAGE_OF[_x] = "III"
 for _x in ("C26", "C27", "C28", "C29", "C39", "C50", "C51",
            "C52", "C53", "C54", "C61", "F1a", "F1b", "F7",
-           "C69", "C70", "C71", "C72"):
+           "C69", "C70", "C71", "C72", "C97", "C98", "C99", "C100"):
     STAGE_OF[_x] = "IV"
 for _x in ("C37", "C38", "C59", "C93", "C94", "C95", "C96", "C77", "C91", "C92", "FAITH-1"):
     STAGE_OF[_x] = "V"
@@ -1408,12 +1420,12 @@ READING_ORDER = [
     "C58", "C68", "C83", "C84", "C63",
     # II — truth and falsehood
     "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "C11",
-    "C12", "C13", "C14", "C16", "C17", "C31", "C35", "C36",
+    "C12", "C13", "C14", "C16", "C17", "C31", "C35", "C36", "C101",
     # III — subject and person
     "C21", "C22", "C23", "C24", "C25", "C49", "C57", "C62",
     # IV — alternatives -> choice field -> genuine choice -> free will
     "C26", "C27", "C50", "C39", "C51", "C52", "C53", "C54", "C61",
-    "C28", "C29", "F1b", "F7",
+    "C28", "C29", "C97", "C98", "C99", "C100", "F1b", "F7",
     # V — necessity (C91 lifts from the necessary subject C77 to the entity)
     "C37", "C38", "C59", "C93", "C94", "C95", "C96", "C77", "C91", "C92",
     # VI — grounding
@@ -1434,7 +1446,7 @@ FREEWILL_FULL = "Logos.Choice.chooses_implies_freeWill"
 # `_capture_statement` discards a def's `:=`-body, so the target is presentation
 # data (mirrored in the Lean def). Rendered as a fenced ```text block.
 TARGET_OF = {
-    "F1b": r"\exists s\,p\,q\; Chooses(s,p,q) \qquad (\text{not derived})",
+    "F1b": r"\exists s\,p\,q\; Chooses(s,p,q) \qquad (\text{reduced to } \exists s\,p,\; Asserts(s,p) \land Means(s,\neg p))",
 }
 
 MODULE_STAGE = {
@@ -1660,8 +1672,8 @@ DEFINITIONS = {
         "(*strong choice: the subject co-means incompatible alternatives*).",
         "**Definition (Free will).** FreeWill(s) := ∃ p, q (Chooses(s, p, q)) "
         "(*freedom: definitional from strong choice*).",
-        "**Frontier (Genuine choice).** rejectedHornCoMeant := ∃ s p, A(s, p) ∧ A(s, ¬p) "
-        "(*the missing co-meaning resource, F1b BLOCKED*).",
+        "**Frontier (Genuine choice).** deliberateGenuineChoiceResource := ∃ s p, Asserts(s, p) ∧ Means(s, ¬p) "
+        "(*the exact minimal F1b resource; proves genuineChoice_exists and deliberateChoice_exists*).",
         "**Definition (Judgment quality).** "
         "Correct(s, p) := A(s, p) ∧ T(p), "
         "Incorrect(s, p) := A(s, p) ∧ IsFalse(p), and "
@@ -1691,31 +1703,44 @@ DEFINITIONS = {
 
 # §5 argument-at-a-glance: every arrow carries a status, validated at build.
 TRANSITIONS = [
-    {"label": "performative act → truth / falsehood", "status": "LOGICAL",
+    # Classical / Logical Core (independent of performative act)
+    {"label": "classical core: truth / falsehood", "status": "LOGICAL",
      "targets": ["C1", "C5", "C7", "C12"]},
-    {"label": "performative act → distinction (right / wrong)", "status": "LOGICAL",
+    {"label": "classical core: right / wrong distinction", "status": "LOGICAL",
      "targets": ["C36"]},
-    {"label": "performative act → subject", "status": "DEFINITIONAL",
+    {"label": "classical core: excluded middle & non-contradiction", "status": "LOGICAL",
+     "targets": ["C10", "C11"]},
+    {"label": "classical core: bivalence & strong truth", "status": "LOGICAL",
+     "targets": ["C37", "C59"]},
+
+    # Agency & Metaphysical Branch (anchored to the performative meaning-act ∃ s p, Act s p)
+    {"label": "performative meaning-act → subject", "status": "DEFINITIONAL",
      "targets": ["C21"]},
-    {"label": "performative act → person", "status": "DEFINITIONAL",
+    {"label": "performative meaning-act → Γ-person", "status": "DEFINITIONAL",
      "targets": ["C24"]},
-    {"label": "performative act → choice field (weak choice)", "status": "DEFINITIONAL",
+    {"label": "performative meaning-act → choice field (alternatives)", "status": "DEFINITIONAL",
      "targets": ["C51", "C52"]},
-    {"label": "weak choice / choice-field → genuine choice (strong choice)", "status": "OPEN",
-     "targets": ["F1b"]},
-    {"label": "genuine choice (strong choice) → free will", "status": "DEFINITIONAL",
+    {"label": "assertion → semantic selection", "status": "DEFINITIONAL",
+     "targets": ["Logos.Choice.asserts_selects"]},
+    {"label": "deliberate choice → semantic selection", "status": "DEFINITIONAL",
+     "targets": ["C97"]},
+    {"label": "deliberate choice → genuine choice", "status": "DEFINITIONAL",
+     "targets": ["C98"]},
+    {"label": "genuine choice → free will", "status": "DEFINITIONAL",
      "targets": ["Logos.Choice.chooses_implies_freeWill"]},
-    {"label": "performative act → necessary person / entity", "status": "DEFINITIONAL",
+    {"label": "genuine choice (existence: F1b)", "status": "OPEN",
+     "targets": ["F1b"]},
+    {"label": "performative meaning-act → Γ-necessary person / entity", "status": "DEFINITIONAL",
      "targets": ["C77", "C91", "C92"]},
-    {"label": "performative act → necessary reality (T7)", "status": "SEMANTIC",
+    {"label": "necessary truth → necessary ground / reality (T7)", "status": "SEMANTIC",
      "targets": ["C18"]},
-    {"label": "performative act → personal ground (T8)", "status": "METAPHYSICAL",
+    {"label": "necessary reality → personal ground (T8)", "status": "METAPHYSICAL",
      "targets": ["C32"]},
-    {"label": "performative act → plurality", "status": "METAPHYSICAL",
+    {"label": "performative meaning-act → plurality", "status": "METAPHYSICAL",
      "targets": ["C40"]},
-    {"label": "performative act → love", "status": "METAPHYSICAL",
+    {"label": "plurality → love", "status": "METAPHYSICAL",
      "targets": ["C41", "C42", "C43", "C44", "C45"]},
-    {"label": "performative act → God ?", "status": "OPEN",
+    {"label": "performative meaning-act → God ?", "status": "OPEN",
      "targets": ["F6", "F8", "F9"]},
 ]
 
@@ -2176,7 +2201,7 @@ def math_statement(full: str, cid: str = None) -> str:
         hum_antes = []
         for a in antes:
             ha = humanise(strip_ns(a)).strip()
-            if "→" in ha or "↔" in ha or " ∧ " in ha or " ∨ " in ha:
+            if "→" in ha or "↔" in ha or " ∧ " in ha or " ∨ " in ha or "∃" in ha or "∀" in ha:
                 if not (ha.startswith("(") and ha.endswith(")")):
                     ha = f"({ha})"
             hum_antes.append(ha)
@@ -2556,29 +2581,57 @@ def render_glance() -> list:
     ap = L.append
     ap("## 2. The argument at a glance")
     ap("")
+    ap("### 2.1 Classical and Logical Core")
+    ap("")
+    ap("The logical core holds by classical propositional logic and semantic definition alone, "
+       "independently of whether any agent is acting or meaning:")
+    ap("")
     ap("```text")
     for t in TRANSITIONS:
-        ap(f"{t['label']:<58} {t['status']}")
+        if t["label"].startswith("classical core:"):
+            ap(f"{t['label']:<58} {t['status']}")
     ap("```")
     ap("")
-    ap("### 2.1 The genuine-choice frontier")
+    ap("### 2.2 The Agency and Metaphysical Branch")
+    ap("")
+    ap("From the performative meaning-bearing datum (`∃ s p, Act s p`), Γ reads off subjecthood, "
+       "constitutive personhood, available alternatives, and semantic selection. Substantive metaphysical "
+       "and relational bridges remain explicitly priced:")
     ap("")
     ap("```text")
-    ap("PERFORMATIVE ACT")
-    ap("       │")
-    ap("       ├──→ PERSON                 established (C24)")
-    ap("       ├──→ CHOICE FIELD           established (C51, C52)")
-    ap("       └──→ GENUINE CHOICE         OPEN (F1b)")
-    ap("                    │")
-    ap("                    ↓")
-    ap("                FREE WILL            follows by definition")
+    for t in TRANSITIONS:
+        if not t["label"].startswith("classical core:"):
+            ap(f"{t['label']:<58} {t['status']}")
     ap("```")
     ap("")
-    ap("Conceptual stipulation: `Chooses s p q` means genuine choice between "
-       "incompatible alternatives. Therefore `Chooses s p q → FreeWill s` is "
-       "valid by definition (`Chooses → FreeWill`, footprint `{Means, Subject}`). "
-       "The substantive question is whether anything actually satisfies "
-       "`Chooses`: that is the open existence claim F1b, not the implication.")
+    ap("### 2.3 The genuine-choice frontier")
+    ap("")
+    ap("```text")
+    ap("PERFORMATIVE MEANING-ACT")
+    ap("      │")
+    ap("      ↓")
+    ap("    MEANING                        established (C68)")
+    ap("      │")
+    ap("      ├── ? ─→ ASSERTION           OPEN / SEMANTIC (act_implies_asserts_bridge)")
+    ap("      │           │")
+    ap("      │           ↓")
+    ap("      └── ? ─→ SELECTION           established from assertion (asserts_selects)")
+    ap("                 │")
+    ap("                 ├── ? ─→ DELIBERATE CHOICE  OPEN (deliberateChoice_negation_iff: Asserts s p ∧ Means s (¬p))")
+    ap("                 │            │")
+    ap("                 │            ↓ (C98, DEFINITIONAL)")
+    ap("                 └── ✕ ─→ GENUINE CHOICE     OPEN (F1b, minimal resource: Asserts s p ∧ Means s (¬p))")
+    ap("                              │")
+    ap("                              ↓ (chooses_implies_freeWill, DEFINITIONAL)")
+    ap("                          FREE WILL          follows by definition")
+    ap("```")
+    ap("")
+    ap("Conceptual distinction: all implications along the choice branch are **DEFINITIONAL** "
+       "(`DeliberateChoice → Selects`, `DeliberateChoice → Chooses`, `Chooses → FreeWill`, "
+       "footprint `{Means, Subject}`). The substantive question is **existence**: whether anything "
+       "actually satisfies `DeliberateChoice` or `Chooses`. That is the open existence claim F1b, "
+       "now reduced strictly to the minimal deliberative resource `∃ s p, Asserts s p ∧ Means s (¬p)`, "
+       "which is defeated in `CountermodelVeridicalMeaning.Single` where `Selects s p (¬p) ↛ Means s (¬p)`.")
     ap("")
     ap("---")
     ap("")

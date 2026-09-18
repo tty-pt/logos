@@ -419,24 +419,43 @@ determinada*, não uma escolha. A reparação separa o vocabulário:
   * ChoiceField(s,p,q) := A(s,p) ∧ Incompatible(p,q) — o **campo de escolha** (escolha fraca, representabilidade);
     teorema para qualquer ato (person_hasChoiceField, choiceField_exists, JUDGE_HAS_CHOICE_FIELD;
     GAPMAP.md C51/C52/C54, F1a PROVEN) — mas NÃO é escolha genuína;
+  * Selects(s,p,q) := Asserts(s,p) ∧ Incompatible(p,q) ∧ ¬ Asserts(s,q) — **seleção semântica**:
+    o agente compromete-se assertivamente com p e exclui a alternativa incompatível q;
+    teorema para qualquer asserção (asserts_selects, asserts_selects_all_incompatible, selection_exists;
+    contrapositivo: no_selection_no_assertion; pegada `{Means, Subject}`, só vocabulário);
+  * DeliberateChoice(s,p,q) := Means(s,p) ∧ Means(s,q) ∧ Incompatible(p,q) ∧ Asserts(s,p) ∧ ¬ Asserts(s,q) —
+    **escolha deliberativa**: o agente concebe ambos os cornos em pensamento, mas compromete-se com apenas um
+    (acarreta seleção semântica C97 e escolha co-significada C98; `{Means, Subject}`);
+    teorema de decomposição exata (C100, `{Means, Subject}`): `DeliberateChoice(s,p,q) ↔ Selects(s,p,q) ∧ Means(s,q)`
+    (deliberação é seleção mais representação da alternativa; sob `Rejects(s,q) := Means(s,q) ∧ ¬ Asserts(s,q)`,
+    equivale a seleção com rejeição ativa; para `q = ¬p`, reduz-se estritamente a `Means(s,¬p)`);
   * Chooses(s,p,q) := A(s,p) ∧ A(s,q) ∧ Incompatible(p,q) — **escolha genuína** (escolha forte):
     o agente co-significa ambos os cornos incompatíveis (§14);
   * FreeWill(s) := ∃p q, Chooses(s,p,q) — a liberdade é **definicional**
     (chooses_implies_freeWill, pegada `{Means, Subject}`, só vocabulário): não é um passo metafísico
-    adicional a partir da escolha genuína.
+    adicional a partir da escolha genuína;
+  * selection_exists_of_act (C99, `{Means, Subject}`) — o ato genérico só acarreta seleção sob a ponte semântica
+    explícita act_implies_asserts_bridge;
+  * act_iff_asserts_or_incorrect (C101, `{Means, Subject, CL}`) — todo ato intencional é ou asserção verídica
+    ou juízo incorreto (`A(s,p) ↔ Asserts(s,p) ∨ Incorrect(s,p)`).
 
-O passo em falta (F1b, BLOCKED) é agora exacto e prop-level:
+O passo em falta para a escolha genuína e livre-arbítrio (F1b, OPEN) está agora estritamente reduzido
+à sua fórmula mínima deliberativa:
 
-    rejectedHornCoMeant :
-      ∃s p, A(s,p) ∧ A(s,¬p)
+    deliberateGenuineChoiceResource :
+      ∃ s : Subject, ∃ p : Prop, Asserts s p ∧ Means s (¬p)
 
-(formalizado em `formal/Logos/Choice.lean` como def-proposição, nó BLOCKED; a
-forma condicional `(∃s p, A(s,p)) → ∃s p, A(s,p) ∧ A(s,¬p)` é o seu
-enunciado em prosa.) Nada obriga um ato de significação a vir com a
-significação da sua negação: `Means` é opaco e AxTwoSubjects dá dois sujeitos
-diferentes, cada um com um só conteúdo. A *existência* de um escolhedor
-genuíno fica bloqueada; a implicação
-escolha → liberdade é gratuita. O `ChoiceAt : World → Subject → Prop → Prop`
+(formalizado em `formal/Logos/Choice.lean`; teorema de fecho provado:
+`genuineChoice_exists_of_assertion_and_negation_meaning : deliberateGenuineChoiceResource → genuineChoice_exists`
+com pegada `{Means, Subject}`, só vocabulário). Por `deliberateChoice_negation_iff`, asserir uma verdade
+e simultaneamente conceber a sua negação é estritamente equivalente a deliberação contraditória
+(`DeliberateChoice s p (¬p)`), a qual acarreta escolha genuína (`Chooses s p (¬p)`) e liberdade (`FreeWill s`).
+A razão pela qual F1b permanece em aberto no dado performativo isolado é que nem a asserção nem a seleção
+semântica forçam a mente a conceber a negação: `Selects s p (¬p) ↛ Means s (¬p)` e `Asserts s p ↛ Means s (¬p)`
+são ambos teoremas demonstrados em `CountermodelVeridicalMeaning.Single` (`HostileSemantics.lean`).
+Nada obriga um ato de significação a vir com a significação da sua negação: `Means` é opaco e AxTwoSubjects
+dá dois sujeitos diferentes, cada um com um só conteúdo. A *existência* de um escolhedor genuíno
+fica assim circunscrita com rigor máximo: basta uma única asserção cuja negação seja pensada. O `ChoiceAt : World → Subject → Prop → Prop`
 (nível-mundos, F7) permanece a ponte SEM futura e secundária.
 Cautela (C1): o alias `Dia` prop-level é a dupla negação clássica sob o modelo
 identidade; não reintroduzir liberdade a partir de `Act`.)
@@ -1175,10 +1194,12 @@ T7-atómico é teorema desde o batch A2-swap-theorem (2026-09-17) e a troca
 transcendental de quantificadores é teorema `{Ground}` (C88), com a Origem
 necessária `{}` (C87).
 A instância do terceiro excluído (C19) fica BLOCKED — lema em falta:
-fundamento existencial de compostos. A pluralidade e o amor são teoremas
-`{}` (plurality-discharge, 2026-09-17 — o par canónico origem+destinatário,
-C73/C76; o amor benevolente C85/C86; o lema em falta ALONE_EXCLUDED é agora
-o teorema C74); a persistência (AxPersonStability) é teorema (esse est agere).
+fundamento existencial de compostos. A pluralidade (T12, C40) e o amor relacional
+(T13/T14, C41–C45) exigem a ponte metafísica explícita AxTwoSubjects (Tag: META,
+pegada `{AxTwoSubjects, Means, Subject}` — as tentativas de derivação a custo zero
+foram refutadas sob semântica hostil por UnitPluralityCountermodel e PluralityWithoutLove;
+C73/C76 foram retirados); o amor benevolente C85/C86 tem pegada `{Subject}`;
+a persistência (AxPersonStability) e a pessoa necessária (C77) são teoremas `{Means, Subject}` (esse est agere).
 (O método transcendental não muda: a exceção interpessoal tinha spikes de
 exclusão registados em formal/DESIGN.md D14b — todos superados por
 derivação, como foram cogito, esse-est-agere, AxGlobalGround e o Fundamento Pessoal Supremo.)

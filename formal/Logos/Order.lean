@@ -19,8 +19,9 @@ import Logos.Plurality
 namespace Logos.Order
 
 open Logos.Core (T IsFalse tschema someTrue someFalse)
-open Logos.Agency (Subject A)
-open Logos.Choice (ChoiceField incompatible_self_negation)
+open Logos.Agency (Subject A Asserts)
+open Logos.Choice (ChoiceField incompatible_self_negation Selects asserts_selects asserts_selects_all_incompatible)
+open Logos.Alternatives (Incompatible)
 
 /-- Correctness: a subject's act of *meaning* p is correct iff p is true
     (§8, literal form `Correct(A(s,p)) ↔ True(p)`). The act is constitutive:
@@ -28,10 +29,53 @@ open Logos.Choice (ChoiceField incompatible_self_negation)
     already a meaning-act — you cannot have right/wrong without meaning. -/
 def Correct (s : Subject) (p : Prop) : Prop := A s p ∧ T p
 
+/-- Candidate B: any correct judgment constitutes semantic selection against its negation.
+    Because `Correct s p := A s p ∧ T p` unfolds to `Asserts s p`, truth-directed meaning
+    strictly yields directed semantic commitment without requiring additional axioms. -/
+theorem correct_implies_selection {s : Subject} {p : Prop} (h : Correct s p) :
+    Selects s p (¬p) := by
+  have hAss : Asserts s p := ⟨h.1, (tschema p).1 h.2⟩
+  exact asserts_selects s p hAss
+
+/-- Candidate B general form: correct judgment selects against every incompatible alternative.
+    Truth-directed commitment to `p` constitutively excludes asserting any incompatible `q`. -/
+theorem correct_implies_selection_all_incompatible {s : Subject} {p q : Prop}
+    (h : Correct s p) (hI : Incompatible p q) :
+    Selects s p q := by
+  have hAss : Asserts s p := ⟨h.1, (tschema p).1 h.2⟩
+  exact asserts_selects_all_incompatible s p q hAss hI
+
 /-- Incorrectness: a subject's act of *meaning* p is incorrect iff p is false
     (§8, literal form `Incorrect(A(s,p)) ↔ False(p)`). Same as `Correct`:
     the meaning-act `A s p` is a conjunct, hence unavoidable. -/
 def Incorrect (s : Subject) (p : Prop) : Prop := A s p ∧ IsFalse p
+
+/-- Bivalent partition of intentional meaning (Route B milestone):
+    Every intentional act is constitutively either a veridical assertion (correct stance)
+    or an erroneous judgment (incorrect stance). An agent cannot mean a content
+    without that meaning being either truth-affirming or truth-violating. -/
+theorem act_iff_asserts_or_incorrect (s : Subject) (p : Prop) :
+    A s p ↔ Asserts s p ∨ Incorrect s p := by
+  constructor
+  · intro ha
+    by_cases hp : p
+    · exact Or.inl ⟨ha, hp⟩
+    · exact Or.inr ⟨ha, hp⟩
+  · rintro (hAss | hInc)
+    · exact hAss.1
+    · exact hInc.1
+
+/-- Formulation under correctness: every meaning-act is either correct or incorrect. -/
+theorem act_iff_correct_or_incorrect (s : Subject) (p : Prop) :
+    A s p ↔ Correct s p ∨ Incorrect s p := by
+  constructor
+  · intro ha
+    by_cases hp : p
+    · exact Or.inl ⟨ha, hp⟩
+    · exact Or.inr ⟨ha, hp⟩
+  · rintro (hCorr | hInc)
+    · exact hCorr.1
+    · exact hInc.1
 
 /--Right and wrong need meaning: the normative predicates are properties of
  meaning-acts, so wherever right-or-wrong is realized, a meaning (and thus a
@@ -210,3 +254,7 @@ end Logos.Order
 #print axioms Logos.Order.judgment_implies_act
 #print axioms Logos.Order.judgment_of_no_act_proves_act
 #print axioms Logos.Order.judgment_implies_cogito
+#print axioms Logos.Order.correct_implies_selection
+#print axioms Logos.Order.correct_implies_selection_all_incompatible
+#print axioms Logos.Order.act_iff_asserts_or_incorrect
+#print axioms Logos.Order.act_iff_correct_or_incorrect

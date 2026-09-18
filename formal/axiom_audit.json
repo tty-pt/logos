@@ -189,6 +189,14 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.Choice.DeliberateChoice": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.Doubts": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Choice.FreeWill": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -206,6 +214,14 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.Choice.Rejects": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.Selects": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Choice.T11_choiceField": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -215,11 +231,27 @@
   "Logos.Agency.Subject",
   "Logos.Value.AxTwoSubjects"
  ],
+ "Logos.Choice.act_implies_asserts_bridge": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Choice.asserting_noChoiceField_is_choiceField": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
  "Logos.Choice.assertion_consistency": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.asserts_selects": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.asserts_selects_all_incompatible": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.bilateral_intentionality_principle": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
@@ -243,6 +275,38 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.Choice.deliberateChoice_exists_of_assertion_and_negation_meaning": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.deliberateChoice_iff_selects_and_means": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.deliberateChoice_iff_selects_and_rejects": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.deliberateChoice_implies_chooses": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.deliberateChoice_implies_selects": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.deliberateChoice_negation_iff": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.deliberateGenuineChoiceResource": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.deliberateResource_of_bilateral_intentionality": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Choice.freeWillExists_of_chooses": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -251,7 +315,23 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.Choice.freeWill_of_doubt": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Choice.genuineChoice_exists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.genuineChoice_exists_of_assertion_and_negation_meaning": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.genuineChoice_exists_of_bilateral_intentionality": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.genuineChoice_of_doubt": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
@@ -303,6 +383,10 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.Choice.no_selection_no_assertion": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Choice.person_hasChoiceField": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -319,6 +403,14 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
   "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.Choice.selection_exists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.selection_exists_of_act": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
  ],
  "Logos.Core.IsFalse": [],
  "Logos.Core.N_F": [],
@@ -406,6 +498,7 @@
   "Logos.GroundPerson.GroundPrincipleProp",
   "Logos.GroundPerson.GroundProp"
  ],
+ "Logos.HostileSemantics.ActDatum": [],
  "Logos.HostileSemantics.ActOntology.Act": [],
  "Logos.HostileSemantics.ActOntology.Entity": [],
  "Logos.HostileSemantics.ActOntology.Person": [],
@@ -421,6 +514,8 @@
  "Logos.HostileSemantics.ActOntology.noConfusion": [],
  "Logos.HostileSemantics.ActOntology.noConfusionType": [],
  "Logos.HostileSemantics.ActOntology.recOn": [],
+ "Logos.HostileSemantics.AssertsDatum": [],
+ "Logos.HostileSemantics.BareMeansDatum": [],
  "Logos.HostileSemantics.CoreSignature.A": [],
  "Logos.HostileSemantics.CoreSignature.Chooses": [],
  "Logos.HostileSemantics.CoreSignature.FreeWill": [],
@@ -438,6 +533,13 @@
  "Logos.HostileSemantics.CoreSignature.noConfusion": [],
  "Logos.HostileSemantics.CoreSignature.noConfusionType": [],
  "Logos.HostileSemantics.CoreSignature.recOn": [],
+ "Logos.HostileSemantics.CountermodelActWithoutAssertion.Act": [],
+ "Logos.HostileSemantics.CountermodelActWithoutAssertion.Asserts": [],
+ "Logos.HostileSemantics.CountermodelActWithoutAssertion.Means": [],
+ "Logos.HostileSemantics.CountermodelActWithoutAssertion.S": [],
+ "Logos.HostileSemantics.CountermodelActWithoutAssertion.act_datum_holds": [],
+ "Logos.HostileSemantics.CountermodelActWithoutAssertion.act_does_not_imply_assertion": [],
+ "Logos.HostileSemantics.CountermodelActWithoutAssertion.no_assertion": [],
  "Logos.HostileSemantics.CountermodelActWithoutSubject.Act": [],
  "Logos.HostileSemantics.CountermodelActWithoutSubject.ConstitutiveAct": [],
  "Logos.HostileSemantics.CountermodelActWithoutSubject.Entity": [],
@@ -489,6 +591,13 @@
  "Logos.HostileSemantics.CountermodelNoPerson.act_does_not_imply_person": [],
  "Logos.HostileSemantics.CountermodelNoPerson.act_occurs": [],
  "Logos.HostileSemantics.CountermodelNoPerson.no_person": [],
+ "Logos.HostileSemantics.CountermodelOmniMeaning.Act": [],
+ "Logos.HostileSemantics.CountermodelOmniMeaning.Means": [],
+ "Logos.HostileSemantics.CountermodelOmniMeaning.MeansSelects": [],
+ "Logos.HostileSemantics.CountermodelOmniMeaning.S": [],
+ "Logos.HostileSemantics.CountermodelOmniMeaning.act_datum_holds": [],
+ "Logos.HostileSemantics.CountermodelOmniMeaning.means_does_not_entail_means_selection": [],
+ "Logos.HostileSemantics.CountermodelOmniMeaning.no_means_selection": [],
  "Logos.HostileSemantics.CountermodelPersonNotNecessary.ExistsAt": [],
  "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessarySubject": [],
  "Logos.HostileSemantics.CountermodelPersonNotNecessary.NecessitySignature.NecessarySubject": [],
@@ -591,19 +700,32 @@
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.GenuineChoiceSignature.recOn": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.ModalOpen": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.A": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.Asserts": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.Chooses": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.DeliberateChoice": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.FreeWill": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.M": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.Person": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.S": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.Selects": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.act_datum_holds": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.act_does_not_imply_genuine_choice": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.assertion_does_not_imply_rejected_horn_meaning": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.field_holds": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.no_deliberate_choice": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.no_freewill": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.no_genuine_choice": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.no_rejected_horn": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.selection_does_not_imply_deliberate_choice": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.selection_does_not_imply_freewill": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.selection_does_not_imply_genuine_choice": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.selection_holds": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.Single.selects_does_not_imply_rejected_horn_meaning": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.A": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.Asserts": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.Chooses": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.Correct": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.DeliberateChoice": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.Fallible": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.FreeWill": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.Incorrect": [],
@@ -611,11 +733,17 @@
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.M": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.Person": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.S": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.Selects": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.T": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.act_datum_holds": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.assertion_does_not_imply_rejected_horn_meaning": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.assertion_holds": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.fallibility_holds": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.full_fragment_without_deliberate_resource": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.full_fragment_without_genuine_choice": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.judge_commits_holds": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.no_deliberate_choice": [],
+ "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.no_deliberate_resource": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.no_genuine_choice": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.no_rejected_horn": [],
  "Logos.HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.rightWrong_holds": [],
@@ -640,7 +768,25 @@
  "Logos.HostileSemantics.CountermodelWorldwiseTruthmaking.no_uniform_ground": [],
  "Logos.HostileSemantics.CountermodelWorldwiseTruthmaking.worldwise_not_entails_uniform_ground": [],
  "Logos.HostileSemantics.CountermodelWorldwiseTruthmaking.worldwise_truthmaking": [],
+ "Logos.HostileSemantics.DeliberateChoiceDatum": [],
+ "Logos.HostileSemantics.FreeWillDatum": [],
  "Logos.HostileSemantics.FreeWillExistence": [],
+ "Logos.HostileSemantics.GenuineChoiceDatum": [],
+ "Logos.HostileSemantics.MeansSelectionDatum": [],
+ "Logos.HostileSemantics.MeansSelectionSignature.Means": [],
+ "Logos.HostileSemantics.MeansSelectionSignature.Selects": [],
+ "Logos.HostileSemantics.MeansSelectionSignature.Subject": [],
+ "Logos.HostileSemantics.MeansSelectionSignature.casesOn": [],
+ "Logos.HostileSemantics.MeansSelectionSignature.ctorIdx": [],
+ "Logos.HostileSemantics.MeansSelectionSignature.mk.inj": [],
+ "Logos.HostileSemantics.MeansSelectionSignature.mk.injEq": [
+  "propext"
+ ],
+ "Logos.HostileSemantics.MeansSelectionSignature.mk.noConfusion": [],
+ "Logos.HostileSemantics.MeansSelectionSignature.mk.sizeOf_spec": [],
+ "Logos.HostileSemantics.MeansSelectionSignature.noConfusion": [],
+ "Logos.HostileSemantics.MeansSelectionSignature.noConfusionType": [],
+ "Logos.HostileSemantics.MeansSelectionSignature.recOn": [],
  "Logos.HostileSemantics.PersonExistence": [],
  "Logos.HostileSemantics.PropositionalPersonhood.CountermodelContentWithoutPerson.Means": [],
  "Logos.HostileSemantics.PropositionalPersonhood.CountermodelContentWithoutPerson.Person": [],
@@ -652,6 +798,25 @@
  "Logos.HostileSemantics.PropositionalPersonhood.TripartiteVerdict": [
   "propext"
  ],
+ "Logos.HostileSemantics.SelectionDatum": [],
+ "Logos.HostileSemantics.SelectionSignature.Asserts": [],
+ "Logos.HostileSemantics.SelectionSignature.Chooses": [],
+ "Logos.HostileSemantics.SelectionSignature.DeliberateChoice": [],
+ "Logos.HostileSemantics.SelectionSignature.FreeWill": [],
+ "Logos.HostileSemantics.SelectionSignature.Means": [],
+ "Logos.HostileSemantics.SelectionSignature.Selects": [],
+ "Logos.HostileSemantics.SelectionSignature.Subject": [],
+ "Logos.HostileSemantics.SelectionSignature.casesOn": [],
+ "Logos.HostileSemantics.SelectionSignature.ctorIdx": [],
+ "Logos.HostileSemantics.SelectionSignature.mk.inj": [],
+ "Logos.HostileSemantics.SelectionSignature.mk.injEq": [
+  "propext"
+ ],
+ "Logos.HostileSemantics.SelectionSignature.mk.noConfusion": [],
+ "Logos.HostileSemantics.SelectionSignature.mk.sizeOf_spec": [],
+ "Logos.HostileSemantics.SelectionSignature.noConfusion": [],
+ "Logos.HostileSemantics.SelectionSignature.noConfusionType": [],
+ "Logos.HostileSemantics.SelectionSignature.recOn": [],
  "Logos.HostileSemantics.SubstantiveAuto": [],
  "Logos.HostileSemantics.SubstantiveDatum": [],
  "Logos.HostileSemantics.SubstantiveDegree": [],
@@ -683,14 +848,21 @@
  "Logos.HostileSemantics.UnitPluralityCountermodel.no_plurality": [],
  "Logos.HostileSemantics.UnitPluralityCountermodel.person_exists": [],
  "Logos.HostileSemantics.act_exists_of_act": [],
+ "Logos.HostileSemantics.act_not_entails_asserts": [],
+ "Logos.HostileSemantics.act_not_entails_selects": [],
+ "Logos.HostileSemantics.chooses_not_entails_deliberateChoice": [],
  "Logos.HostileSemantics.not_entails_content_person": [],
  "Logos.HostileSemantics.not_entails_decoupled_freewill": [],
  "Logos.HostileSemantics.not_entails_person": [],
  "Logos.HostileSemantics.not_entails_plurality": [],
+ "Logos.HostileSemantics.not_entails_selection_of_bare_means": [],
  "Logos.HostileSemantics.not_entails_substantive_autonomy": [],
  "Logos.HostileSemantics.not_entails_substantive_intentionality": [],
  "Logos.HostileSemantics.not_entails_substantive_person": [],
  "Logos.HostileSemantics.not_entails_substantive_rationality": [],
+ "Logos.HostileSemantics.selection_not_entails_deliberate_choice": [],
+ "Logos.HostileSemantics.selection_not_entails_freewill": [],
+ "Logos.HostileSemantics.selection_not_entails_genuine_choice": [],
  "Logos.HostileSemantics.subject_exists_of_act": [],
  "Logos.HostileSemantics.Γ_act": [],
  "Logos.HostileSemantics.Γ_means": [],
@@ -838,7 +1010,29 @@
   "Logos.Agency.Subject",
   "Logos.Value.AxTwoSubjects"
  ],
+ "Logos.Order.act_iff_asserts_or_incorrect": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Order.act_iff_correct_or_incorrect": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Order.consequence_preserves_truth": [],
+ "Logos.Order.correct_implies_selection": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Order.correct_implies_selection_all_incompatible": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Order.correctness_distinct": [
   "propext",
   "Classical.choice",
