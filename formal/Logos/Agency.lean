@@ -15,16 +15,17 @@ relation, not a primitive. The act is — by the meaning rules of the system
 
     A s p  :=  Agent s ∧ Exists s ∧ Content p ∧ Rational s ∧ Means s p.
 
-Tier-1 collapse (2026-09-16): with `Agent` and `Rational` now *analytical
-definitions* (`def := True`, same class as `Exists`/`Content`), every aspect
-collapses and the bundle reduces to the meaning-act:
+Tier-1 collapse (2026-09-16) and initiation dimension: with `Agent` and
+`Rational` now *analytical definitions* (`def := True`, same class as `Exists`/`Content`),
+every aspect collapses to the meaningful initiation:
 
-    A s p  :=  Means s p.
+    A s p  :=  Means s p ∧ ∃ w w', Initiates s w w' p.
 
 The meaning rules are now exactly E0-furnished: every subject exists
 (`Exists _ := True`), every proposition is a content (`Content _ := True`),
 agency and rationality are analytical (`Agent _ := True`, `Rational _ := True`),
-and the act IS meaning (`A s p := Means s p`).
+and an act is a meaningful initiation: its constitutive content is intentional meaning,
+and its evental character is initiation.
 -/
 
 import Logos.Core
@@ -62,7 +63,7 @@ def Rational (_s : Subject) : Prop := True
 Vocabulary: weak act / performed event — something is performed, uttered, asserted, or denied.
 
  `act s p`: weak act: performed event (utterance, assertion-event, performance).
-    Distinguished from the strong intentional meaning-act `Act s p := Means s p`. -/
+    Distinguished from the strong act `Act s p := Means s p ∧ ∃ w w', Initiates s w w' p`. -/
 axiom act : Subject → Prop → Prop
 
 /--Tag: VOCAB
@@ -72,13 +73,51 @@ Vocabulary: the meaning-act relation — a subject means a proposition.
     (base.txt §11, T5 component). Primitive intentional relation. -/
 axiom Means : Subject → Prop → Prop
 
-/-- `Act s p`: strong act: intentional/meaning-bearing act.
-    Constitutively subject-indexed meaning-act: a subject intentionally relates to proposition `p`.
-    Defined via the primitive intentional relation `Means`. -/
-def Act (s : Subject) (p : Prop) : Prop := Means s p
+/--Tag: VOCAB
+Vocabulary: abstract state space for initiation of movement.
+
+ State: the state space of transitions for initiation — the act begins movement
+    between states. An uninterpreted pure sort. -/
+axiom State : Type
+
+/--Tag: VOCAB
+Vocabulary: the initiation relation — a subject initiates a transition between states positing content.
+
+ `Initiates s w w' p`: subject s initiates a transition from state w to state w' positing proposition p. -/
+axiom Initiates : Subject → State → State → Prop → Prop
+
+/-- `Act s p`: strong act: meaningful initiation of movement.
+    An act is a meaningful initiation: its constitutive content is intentional meaning,
+    and its evental character is initiation. -/
+def Act (s : Subject) (p : Prop) : Prop :=
+  Means s p ∧ ∃ w w' : State, Initiates s w w' p
 
 /-- Legacy alias for Act across the library. -/
 abbrev A := Act
+
+/-- Definitional consequence: an act entails an initiation of movement. -/
+theorem act_implies_initiates {s : Subject} {p : Prop} (h : Act s p) :
+    ∃ w w' : State, Initiates s w w' p :=
+  h.2
+
+/-- Exact structural decomposition of an intentional act:
+    an act decomposes definitionally into an intentional horn (meaning p)
+    and an executive horn (initiating a state transition positing p). -/
+theorem act_decomposition (s : Subject) (p : Prop) :
+    Act s p ↔ Means s p ∧ ∃ w w' : State, Initiates s w w' p :=
+  Iff.rfl
+
+/-- The performative act-datum gives intentional meaning without an extra bridge. -/
+theorem act_datum_implies_means (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
+    ∃ s : Subject, ∃ p : Prop, Means s p := by
+  obtain ⟨s, p, ha⟩ := h
+  exact ⟨s, p, ha.1⟩
+
+/-- The performative act-datum gives initiation without an extra bridge. -/
+theorem act_datum_implies_initiates (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
+    ∃ s : Subject, ∃ p : Prop, ∃ w w' : State, Initiates s w w' p := by
+  obtain ⟨s, p, _, w, w', hi⟩ := h
+  exact ⟨s, p, w, w', hi⟩
 
 -- ===========================================================================
 -- Ontological Distinction: Sort vs. Actuality Predicate vs. Existential Claim
@@ -268,10 +307,10 @@ theorem act_implies_rational : ∀ {s : Subject} {p : Prop}, A s p → Rational 
   trivial
 
 /-- An act entails that its subject means its content (§11, T5 component).
-    Under the Tier-1 collapse `A s p := Means s p` this is the identity. -/
+    Constitutive definition: the first conjunct of `Act s p` is `Means s p`. -/
 theorem act_implies_means : ∀ {s : Subject} {p : Prop}, A s p → Means s p := by
   intro s p h
-  exact h
+  exact h.1
 
 /--At least one content exists: every proposition is admissible content.
 
@@ -294,3 +333,7 @@ end Logos.Agency
 #print axioms Logos.Agency.act_requires_subject
 #print axioms Logos.Agency.subject_exists_of_act
 #print axioms Logos.Agency.subject_exists_of_assert
+#print axioms Logos.Agency.act_implies_initiates
+#print axioms Logos.Agency.act_decomposition
+#print axioms Logos.Agency.act_datum_implies_means
+#print axioms Logos.Agency.act_datum_implies_initiates

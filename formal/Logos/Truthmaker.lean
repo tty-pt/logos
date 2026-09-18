@@ -48,20 +48,31 @@ def EntityOf (s : Subject) : Entity := Entity.ofSubject s
 instance : Coe Subject Entity := ⟨EntityOf⟩
 
 /--Tag: VOCAB
-
- The truthmaker relation — an entity grounding a formula.
+The truthmaker relation — an entity grounding a formula.
 
  `Ground e φ`: entity `e` grounds formula `φ`. -/
 axiom Ground : Entity → Form → Prop
 
-/--Existence of an entity in a world, defined independently of agency.
+/-- The actual world valuation: all atoms true. -/
+def actualWorld : World := fun _ => Logos.Semantics.TV.t
 
- `ExistsAt w e`: entity `e` exists in world `w`.
- Subjects exist across all worlds; atomic entities exist at worlds where
- their corresponding valuation evaluates to true. -/
-def ExistsAt (w : World) : Entity → Prop
-  | Entity.ofSubject _ => True
+/-- The counterfactual world valuation: all atoms false. -/
+def otherWorld : World := fun _ => Logos.Semantics.TV.f
+
+/-- World-relative existence of subjects:
+    A subject is actualized at the actual world, but does not automatically exist across all possible worlds. -/
+def SubjectExistsAt (w : World) (_s : Subject) : Prop :=
+  w = actualWorld
+
+/-- Existence of an entity in a world:
+    Subjects exist only at worlds where SubjectExistsAt holds;
+    atomic entities exist at worlds where their atomic valuation holds. -/
+def EntityExistsAt (w : World) : Entity → Prop
+  | Entity.ofSubject s => SubjectExistsAt w s
   | Entity.ofAtom n => w n = Logos.Semantics.TV.t
+
+/-- ExistsAt is the canonical entity existence relation across worlds. -/
+def ExistsAt (w : World) (e : Entity) : Prop := EntityExistsAt w e
 
 /-- Truth at a world, defined by standard Tarskian semantic satisfaction,
     independent of existential grounding (2026-09-17). -/

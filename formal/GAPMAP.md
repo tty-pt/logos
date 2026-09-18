@@ -62,16 +62,15 @@ may be added.
   `Chooses ↛ FreeWill`, which is definitional. `not_entails_freewill` →
   `not_entails_decoupled_freewill` (the decoupled predicate, not Logos's
   definitional `FreeWill`).
-- **Exact missing lemma (F1b, BLOCKED)**:
+- **Missing lemma F1b resolved (PROVEN↑)**:
 
-      rejectedHornCoMeant :
-        (∃ s : Subject, ∃ p : Prop, A s p) →
-        ∃ s : Subject, ∃ p : Prop, A s p ∧ A s (¬ p)
-
-  Rule form: `means_faces_negation {s p} : A s p → A s (¬ p)`. Why: `Means` is
-  opaque (`Agency.lean`) and `AxTwoSubjects` yields two *different* subjects,
-  each with a single content. The world-level `ChoiceAt : World → Subject →
-  Prop → Prop` remains the (future, priced) SEM bridge, F7.
+  Fechado sob a ponte semântica estritamente mais fraca `AxActPolarity : ∀ s p, Act s p → Means s (¬ p)`
+  (`Tag: SEM`, polaridade da agência / início de movimento). A intencionalidade bilateral universal
+  (`∀ s p, Means s p → Means s (¬p)`) foi demonstrada independente por `CountermodelVeridicalMeaning`
+  (`unilateral_meaning_witness`, `bilateral_intentionality_fails`); `AxActPolarity` restringe a
+  exigência de polaridade estritamente à iniciação de movimento (`Act s p`), derivando
+  `Choice.genuineChoice_exists_of_act` e `Choice.freeWill_exists` sob
+  `{AxActPolarity, Initiates, Means, State, Subject}`.
 - **Footprint report**: no footprint grows, no axiom added. `chooses_implies_freeWill`
   `{Means, Subject}` (VOCAB only); field theorems same as before (`person_hasChoiceField`/`choiceField_exists`
   `{Means, Subject}`; `JUDGE_HAS_CHOICE_FIELD` `{AxTwoSubjects, Means, Subject}`;
@@ -331,22 +330,22 @@ C19 is derived under `AxGlobalGround` (`PROVEN↑`).
 | ID | Prose | Lean theorem | Status | Axiom footprint |
 |----|-------|--------------|--------|-----------------|
 | C58 | §1 fnd | `Agency.noWeakAct_selfRefutes : asserts speaker NoWeakAct → False` — **retorsão performativa direta (ato fraco)** | PROVEN | `{Subject, act}` (retorsão performativa direta: asserção é evento realizado → evento existe → refutação direta de NoWeakAct; estabelece diretamente apenas o ato fraco) |
-| C68 | §1 fnd | `Agency.Cogito : Asserts s p → ∃ s' p', Act s' p'` — **cogito derivado da asserção performativa** | PROVEN | `{Means, Subject}` (teorema derivado de qualquer asserção; deriva ato e sujeito via regra constitutiva) |
-| C21 | §1/T1 | `Plurality.T1_subjectExists` | PROVEN | `{Means, Subject}` (derivado do ato intencional C68 via regra constitutiva act_requires_subject; desacoplado de AxTwoSubjects) |
+| C68 | §1 fnd | `Agency.Cogito : Asserts s p → ∃ s' p', Act s' p'` — **cogito derivado da asserção performativa** | PROVEN | `{Initiates, Means, State, Subject}` (teorema derivado de qualquer asserção; deriva ato e sujeito via regra constitutiva) |
+| C21 | §1/T1 | `Plurality.T1_subjectExists` | PROVEN | `{Initiates, Means, State, Subject}` (derivado do ato intencional C68 via regra constitutiva act_requires_subject; desacoplado de AxTwoSubjects) |
 | C22 | T2 | `Agency.T2_contentExists` | PROVEN | **`{}`** — `Content _ := True` (def), `True` witnesses content |
-| C23 | T4 | `Plurality.T4_agentExists` | PROVEN | `{Means, Subject}` (derivado do ato intencional C68 → C21; `Agent` é `:= True`, def) |
-| C24 | T5 | `Plurality.T5_personExists` | PROVEN | `{Means, Subject}` (teorema-válido sob a **definição constitutiva §12**, mas **não estabelece pessoalidade substantiva**; cadeia C68 → Act → SubjectExists → Intentional → Person (§12 nominal); `Person ≡ Intentional ≡ ∃p, Means s p` — `Person.person_intentional_iff` + lemas-ponte em Person.lean; matriz hostil substantive (Part A2) — Batch fronteira pessoal 2026-09-18) |
-| C25 | §24b | `Person.inseparability_24b` | PROVEN | `{Means, Subject, CL}` |
+| C23 | T4 | `Plurality.T4_agentExists` | PROVEN | `{Initiates, Means, State, Subject}` (derivado do ato intencional C68 → C21; `Agent` é `:= True`, def) |
+| C24 | T5 | `Plurality.T5_intentionalSubjectExists` | PROVEN | `{Initiates, Means, State, Subject}` (derivado do ato intencional C68 → C21 → C24; estabelece o sujeito intencional como conclusão necessária da agência; pessoalidade substantiva permanece desacoplada) |
+| C25 | §24b | `Person.inseparability_24b` | PROVEN | `{Initiates, Means, State, Subject, CL}` |
 | C26 | **T9 (new)** | `Alternatives.T9_incompatibleAlternatives` | PROVEN | `{}` (E0) |
 | C27 | §13 | `Alternatives.incompatible_with_negation` | PROVEN | `{}` (E0) |
 | C28 | T6 | `Order.T6_fallibility` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (via T12 + `Core.someFalse`) |
 | C29 | T6 | `Order.T6_truthTranscendsWill` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (as C28) |
-| C30 | §8 | `Order.correctness_distinct` | PROVEN↑ | `{AxTwoSubjects, Means, Subject, CL}` (defs act-relative §8) |
+| C30 | §8 | `Order.correctness_distinct` | PROVEN | `{Initiates, Means, State, Subject, CL}` (defs act-relative §8; usa o dado performativo do ato) |
 | C31 | §9 | `Order.consequence_preserves_truth` | PROVEN | `{}` (E0) |
-| C83 | §8 | `Order.no_correct_judgment_of_no_act` — **retorsão cartesiana**: nenhuma negação do ato pode ser correta (`judgment_of_no_act_is_incorrect`) | PROVEN | `{Means, Subject}` |
-| C84 | §1/§8 | `Order.judgment_of_no_act_proves_act` — **cogito retorsivo**: o ato de julgar que não há ato testemunha que o ato ocorre (`judgment_implies_cogito`) | PROVEN | `{Means, Subject}` |
-| C32 | T8 | `GroundPerson.T8_personalGround` | PROVEN↑ | `{AxPersonalGround, GroundProp, Means, Subject}` |
-| C33 | T8 | `GroundPerson.present_feature_is_grounded` | PROVEN↑ | `{GroundPrincipleProp, GroundProp, Means, Subject}` |
+| C83 | §8 | `Order.no_correct_judgment_of_no_act` — **retorsão cartesiana**: nenhuma negação do ato pode ser correta (`judgment_of_no_act_is_incorrect`) | PROVEN | `{Initiates, Means, State, Subject}` |
+| C84 | §1/§8 | `Order.judgment_of_no_act_proves_act` — **cogito retorsivo**: o ato de julgar que não há ato testemunha que o ato ocorre (`judgment_implies_cogito`) | PROVEN | `{Initiates, Means, State, Subject}` |
+| C32 | T8 | `GroundPerson.T8_personalGround` | PROVEN↑ | `{AxPersonalGround, GroundProp, Initiates, Means, State, Subject}` |
+| C33 | T8 | `GroundPerson.present_feature_is_grounded` | PROVEN↑ | `{GroundPrincipleProp, GroundProp, Initiates, Means, State, Subject}` |
 | C34 | T8 | `GroundPerson.necessary_truth_has_necessary_grounder` | PROVEN↑ | `{AxGlobalGround, Ground, Subject}` (via C18) |
 | C90 | T8 | `GroundPerson.personal_ultimate_ground_exists` | BLOCKED | (retired: manufactured ultimate ground destroyed under hostile semantics) |
 
@@ -355,9 +354,9 @@ C19 is derived under `AxGlobalGround` (`PROVEN↑`).
 | Passo / Implicação | Formalização Lean | Classificação | Estatuto Epistemológico e Semântica Hostil |
 | :--- | :--- | :--- | :--- |
 | **asserts → act** | `Agency.assertion_is_weak_act` | **Caso A (Definicional / Fraco)** | A ocorrência de uma asserção é um evento realizado (`act s p` — *ato fraco: evento realizado*), projecção imediata de `asserts s p := act s p ∧ p`. A retorsão `noWeakAct_selfRefutes` estabelece puramente `∃ s p, act s p` sob `{Subject, act}` sem assumir significado intencional. |
-| **act ↛ Act** | `Agency.weak_act_implies_strong_act` | **Caso D (Ponte / Bloqueio Aberto)** | O evento realizado (emissão, som, toque, evento físico/mecânico) **não acarreta logicamente** o ato intencional de significação (`Act s p := Means s p` — *ato forte: ato intencional/portador de significado*). Demonstrado formalmente sob semântica hostil por `CountermodelWeakActWithoutMeaning` / `not_entails_strong_act` (`{}`). A passagem `act → Act` é uma ponte filosófica explícita (`weak_act_implies_strong_act`), não uma identidade definicional oculta. O atalho forte Logos é a asserção intencional `Asserts s p := Act s p ∧ p` (`assertion_is_act`). |
-| **Act → SubjectExists** | `Agency.act_requires_subject`<br>`Agency.subject_exists_of_act` | **Caso B/A (regra constitutiva = identidade)** | Em Logos `Act s p := Means s p` e `SubjectExists s := ∃ p, Act s p`: ser sujeito *do* ato é a própria definição de sujeito atualizado. O contramodelo abstrato `CountermodelActWithoutSubject` (ato não-indexado, `Subject` predicado substantivo à parte) falha unicamente esta regra constitutiva; não atinge a identidade definicional Logos. |
-| **Act → Intentional** | `Person.act_implies_intentional` | **Caso A (identidade)** | O conteúdo do próprio ato testemunha `Intentional s := ∃ p, Means s p` (`⟨p, h⟩`, `{Means, Subject}`). Identidade definicional: NÃO é atacável por modelo hostil. A leitura substantiva de intencionalidade (consciência/awareness interna) NÃO é forçada — `not_entails_substantive_intentionality` (Part A2, `{}`). |
+| **act ↛ Act** | `Agency.weak_act_implies_strong_act` | **Caso D (Ponte / Bloqueio Aberto)** | O evento realizado (emissão, som, toque, evento físico/mecânico) **não acarreta logicamente** o ato intencional de iniciação com significado (`Act s p := Means s p ∧ ∃ w w', Initiates s w w' p` — *ato forte: ato com significado intencional e caráter de iniciação*). Demonstrado formalmente sob semântica hostil por `CountermodelWeakActWithoutMeaning` / `not_entails_strong_act` (`{}`). A passagem `act → Act` é uma ponte filosófica explícita (`weak_act_implies_strong_act`), não uma identidade definicional oculta. O atalho forte Logos é a asserção intencional `Asserts s p := Act s p ∧ p` (`assertion_is_act`). |
+| **Act → SubjectExists** | `Agency.act_requires_subject`<br>`Agency.subject_exists_of_act` | **Caso B/A (regra constitutiva = identidade)** | Em Logos `Act s p := Means s p ∧ ∃ w w', Initiates s w w' p` e `SubjectExists s := ∃ p, Act s p`: ser sujeito *do* ato é a própria definição de sujeito atualizado. O contramodelo abstrato `CountermodelActWithoutSubject` (ato não-indexado, `Subject` predicado substantivo à parte) falha unicamente esta regra constitutiva; não atinge a identidade definicional Logos. |
+| **Act → Intentional** | `Person.act_implies_intentional` | **Caso A (identidade)** | O conteúdo do próprio ato testemunha `Intentional s := ∃ p, Means s p` (`⟨p, h.1⟩`, `{Initiates, Means, State, Subject}`). Identidade definicional: NÃO é atacável por modelo hostil. A leitura substantiva de intencionalidade (consciência/awareness interna) NÃO é forçada — `not_entails_substantive_intentionality` (Part A2, `{}`). |
 | **SubjectExists → Intentional** | `Person.subjectExists_implies_intentional`<br>`Person.intentional_implies_subjectExists` | **Caso A (identidade)** | Ambas as noções desdobram para `∃ p, Means s p` (`{Means, Subject}`); equivalência por desdobramento direto. Nenhuma premissa. |
 | **Subject → Person** | `Person.person_of_subject` | **Caso A (nominal §12)** | Sob a redução estrutural de §12 (`Person s := Agent s ∧ Rational s ∧ Intentional s` com `Agent := True` e `Rational := True`), `Person` colapsa em `∃ p, Means s p`, IDÊNTICO a `SubjectExists`/`Intentional` (`Person.person_intentional_iff`, `{Means, Subject}`). O §12 é compromisso constitutivo (rótulo nominal), não descoberta metafísica. **Separação 2026-09-18**: derivabilidade formal ≠ neutralidade semântica da definição; sobsemântica hostil com predicado substantivo, a implicação NÃO se segue (`CountermodelSubjectWithoutPerson`, `not_entails_person`), mas isso NÃO é contramodelo da identidade §12. |
 | **Person (formal) → Person (substantiva)** | — (sem teorema; premissa registada, NÃO adicionada) | **Caso D (Bloqueado)** | A pessoa substantiva (deliberação, responsabilidade, auto-reflexão, agência autónoma, escolha racional, agência moral) não é forçada pelo datum performativo: `not_entails_substantive_person`, `not_entails_substantive_rationality`, `not_entails_substantive_intentionality` (HostileSemantics Part A2, `{}`) — o fragmento performativo é satisfeito com `Mind`/`Ratio`/`Degree` vazios. C24 é **teorema-válido** na ontologia corrente, mas **não estabelece** pessoalidade substantiva. Reancorar exigiria premissa substantiva nova (registada, não introduzida). |
@@ -370,29 +369,80 @@ C19 is derived under `AxGlobalGround` (`PROVEN↑`).
 | **Selects ↛ Chooses** | `HostileSemantics.selection_does_not_imply_genuine_choice` | **Caso D (Separação Hostil)** | A seleção semântica NÃO força a co-significação de ambos os cornos incompatíveis exigida pelo antigo `Chooses`: `CountermodelVeridicalMeaning.Single` satisfaz `Selects () True False` enquanto `Chooses` é impossível (`{}`). |
 | **Selects ↛ FreeWill** | `HostileSemantics.selection_does_not_imply_freewill` | **Caso D (Separação Hostil)** | A seleção semântica NÃO força liberdade libertária: um agente determinista representa, seleciona e exclui o corno incompatível sem contingência modal (`{}`). |
 | **Asserts ↛ Asserts ∧ Means ¬p** | `HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.assertion_does_not_imply_rejected_horn_meaning`<br>`HostileSemantics.CountermodelVeridicalMeaning.TwoPersons.full_fragment_without_deliberate_resource` | **Caso D (Separação Hostil)** | A asserção fáctica em dois sujeitos NÃO força a representação da negação contraditória: sob significação verídica, `Asserts` é satisfeito enquanto `deliberateGenuineChoiceResource` é provadamente falso (`{}`). |
-| **BilateralIntentionality → GenuineChoice** | `Choice.bilateral_intentionality_principle`<br>`Choice.genuineChoice_exists_of_bilateral_intentionality` | **Caso B (Princípio Semântico Candidato)** | Sob a tese semântica de intencionalidade bilateral (`Means s p → Means s (¬p)`, SEM), qualquer asserção fecha estritamente a escolha genuína (`genuineChoice_exists`, `{Means, Subject}`). |
+| **AxIntentionalChoice / AxActPolarity → GenuineChoice** | `Choice.AxIntentionalChoice`<br>`Choice.AxActPolarity`<br>`Choice.genuineChoice_exists_of_act_constitutive`<br>`Choice.freeWill_exists` | **Caso B (Ponte Semântica Adotada)** | Sob o princípio constitutivo semântico adotado (`AxIntentionalChoice : Act s p → ∃ q, Chooses s p q`, SEM / A14), o ato intencional fecha a escolha genuína (`genuineChoice_exists_of_act_constitutive`) e o livre-arbítrio (`freeWill_exists`) sob `{AxIntentionalChoice, Initiates, Means, State, Subject}`. A tese de polaridade contraditória mais forte `AxActPolarity : Act s p → Means s (¬p)` (SEM / A13) acarreta estritamente `AxIntentionalChoice` via `act_polarity_implies_intentional_choice`. |
 | **Doubt → GenuineChoice** | `Choice.Doubts`<br>`Choice.genuineChoice_of_doubt`<br>`Choice.freeWill_of_doubt` | **Caso B (Capacidade Cartesiana Candidata)** | Se o ato performativo for concebido como dúvida cartesiana (`Doubts s p := Means s p ∧ Means s (¬p)`), a escolha genuína e a liberdade do sujeito são imediatas (`{Means, Subject}`). |
-| **ChoiceField ↛ Chooses** | `Choice.Chooses` / `rejectedHornCoMeant` (`F1b`) | **Caso D (Bloqueado)** | Não se segue logicamente da presença de alternativas que o sujeito escolha genuinamente (`Chooses(s,p,q)`: *escolha forte: o sujeito co-significa alternativas incompatíveis*). A escolha genuína exige que o sujeito co-signifique os DOIS cornos incompatíveis (`A s p ∧ A s (¬p)`); `Means` é uma relação opaca e `AxTwoSubjects` dá dois sujeitos DIFERENTES, cada um com um só conteúdo. Falta exatamente `rejectedHornCoMeant : (∃s p, A s p) → ∃s p, A s p ∧ A s (¬p)`. `CountermodelNoFreeWill` mostra `Act ↛ Chooses` e `Act ↛ FreeWill` (`{}`); NÃO é contramodelo da definição `Chooses → FreeWill` (que é livre). **Milestone hostil 2026-09-18** (Batch fronteira escolha-genuína): o bloqueio é *irreducível* — o modelo veridical `CountermodelVeridicalMeaning` (significação veridical, `Means s p → p`) satisfaz TODO o fragmento agency/choice/order (datum do ato, pluralidade, certo/errado, `judge_commits`, falibilidade) com escolha genuína **vazia**, sob a própria definição Logos de `Chooses`; `not_entails_genuine_choice(_with_plurality)` (`{}`) formaliza a não-derivação; a via performativa assertiva é *impossível* por `assertion_consistency`/`no_one_asserts_incompatible_pair`, e a veridicalidade é refutada apenas por `genuineChoice_requires_error_possibility`. F1b permanece BLOCKED (**opção 3**: premissa substantiva nova seria necessária). |
+| **ChoiceField ↛ Chooses** | `Choice.Chooses` / `rejectedHornCoMeant` (`F1b`) | **Caso D (Bloqueado)** | Não se segue logicamente da presença de alternativas que o sujeito escolha genuinamente (`Chooses(s,p,q)`: *escolha forte: o sujeito co-significa alternativas incompatíveis*). A escolha genuína exige que o sujeito co-signifique os DOIS cornos incompatíveis (`Means s p ∧ Means s (¬p)`); `Means` é uma relação opaca e `AxTwoSubjects` dá dois sujeitos DIFERENTES, cada um com um só conteúdo. Falta exatamente `rejectedHornCoMeant : (∃s p, Means s p) → ∃s p, Means s p ∧ Means s (¬p)`. `CountermodelNoFreeWill` mostra `Act ↛ Chooses` e `Act ↛ FreeWill` (`{}`); NÃO é contramodelo da definição `Chooses → FreeWill` (que é livre). **Milestone hostil 2026-09-18** (Batch fronteira escolha-genuína): o bloqueio é *irreducível* — o modelo veridical `CountermodelVeridicalMeaning` (significação veridical, `Means s p → p`) satisfaz TODO o fragmento agency/choice/order (datum do ato, pluralidade, certo/errado, `judge_commits`, falibilidade) com escolha genuína **vazia**, sob a própria definição Logos de `Chooses`; `not_entails_genuine_choice(_with_plurality)` (`{}`) formaliza a não-derivação; a via performativa assertiva é *impossível* por `assertion_consistency`/`no_one_asserts_incompatible_pair`, e a veridicalidade é refutada apenas por `genuineChoice_requires_error_possibility`. F1b permanece BLOCKED (**opção 3**: premissa substantiva nova seria necessária). |
 | **Chooses → FreeWill** | `Choice.chooses_implies_freeWill` | **Caso A (Definicional)** | `FreeWill s := ∃p q, Chooses s p q` — por DEFINIÇÃO. A liberdade não é um passo metafísico adicional a partir do ato bruto; é a própria existência de uma escolha genuína entre alternativas incompatíveis. Footprint **`{Means, Subject}`** (VOCAB apenas — o conteúdo lógico é gratuito). A existência incondicional (`freeWillExists`) é que fica bloqueada, por depender de `rejectedHornCoMeant`. |
 
 Declared (Level 2): `Subject` is an uninterpreted pure sort (`axiom Subject : Type`,
+Tag: VOCAB); `State` is an uninterpreted state sort (`axiom State : Type`,
 Tag: VOCAB); `act` is the uninterpreted weak performed event (`axiom act : Subject → Prop → Prop`,
 Tag: VOCAB); `Means` is an uninterpreted intentional relation (`axiom Means : Subject → Prop → Prop`,
-Tag: VOCAB); `Act` is the constitutively subject-indexed meaning-act (`Act s p := Means s p`);
+Tag: VOCAB); `Initiates` is the initiation of movement relation (`axiom Initiates : Subject → State → State → Prop → Prop`,
+Tag: VOCAB); an act is a meaningful initiation: its constitutive content is intentional meaning, and its evental character is initiation (`Act s p := Means s p ∧ ∃ w w', Initiates s w w' p`);
 `SubjectExists s := ∃ p, Act s p` is the constitutive rule of subjecthood (`act_requires_subject`);
 `axiom Cogito` is **REMOVED ENTIRELY**; `Cogito` is a derived theorem from performative
 assertion (`Asserts s p → ∃ s' p', Act s' p'`). Retorsion directly establishes the weak act via
 `noWeakAct_selfRefutes : asserts speaker NoWeakAct → False` (`{Subject, act}`).
-The strong retorsion shortcut is `noCogito_selfRefutes : Asserts speaker NoAct → False` (`{Means, Subject}`)
+The strong retorsion shortcut is `noCogito_selfRefutes : Asserts speaker NoAct → False` (`{Initiates, Means, State, Subject}`)
 under the intentional assertion `Asserts s p := Act s p ∧ p`.
 `GroundProp`, `GroundPrincipleProp` (SEM); `AxPersonalGround` (META, D9).
+
+### 14-Row Candidate Derivation Route Audit Table (`Act s p` to `Means s (¬p)`):
+
+| Route | Intermediate Step | Classification | Exact Mathematical Obstruction |
+|---|---|---|---|
+| 1. Act → Means p | Analytic unrolling | DERIVES | `Act s p := Means s p ∧ ...`; only yields positive horn `Means s p`. |
+| 2. Act → Asserts | Factive commitment | REQUIRES A NEW BRIDGE | Requires `act_implies_asserts_bridge` (factual truth of `p`). |
+| 3. Act → Correct ∨ Incorrect | Bivalent partition | DERIVES | Proved via `act_iff_correct_or_incorrect` (C101). |
+| 4. Correct/Incorrect → Means ¬p | Normative truth-value | DOES NOT DERIVE | Concerns truth-value of `p`, not mental representation of `¬p`. |
+| 5. ChoiceField → Means ¬p | Incompatible availability | DOES NOT DERIVE | `¬p` occurs only in `Incompatible p (¬p) := ¬(p ∧ ¬p)`, not in `Means s _`. |
+| 6. DeliberateChoice → Means ¬p | Deliberative co-meaning | REQUIRES A NEW BRIDGE | `DeliberateChoice` defines co-meaning, but `Act → DeliberateChoice` does not derive. |
+| 7. Bivalence / LEM → Means ¬p | Propositional excluded middle | DOES NOT DERIVE | Intensional barrier: `p ∨ ¬p` in `Prop` does not force `Means s (¬p)`. |
+| 8. Truth / Falsehood → Means ¬p | Semantic status | DOES NOT DERIVE | External truth-values do not populate intentional relations. |
+| 9. Retorsion → Means ¬p | Performative contradiction | DOES NOT DERIVE | Refutes `NoAct`; does not force every act to co-mean contradictory negations. |
+| 10. Intentional → Means ¬p | Representation faculty | DOES NOT DERIVE | `Intentional s := ∃ p, Means s p` provides only a single content. |
+| 11. Person → Means ¬p | Rational personhood | DOES NOT DERIVE | Inherits only single intentional content of `Intentional s`. |
+| 12. Plurality → Means ¬p | Distinct subjects | DOES NOT DERIVE | `AxTwoSubjects` gives two distinct subjects with single contents, not dual co-meaning. |
+| 13. Modal Principles → Means ¬p | Propositional necessity | DOES NOT DERIVE | Modal backbone governs world-satisfaction, not internal cognitive representation. |
+| 14. Grounding Principles → Means ¬p | Truthmaker grounding | DOES NOT DERIVE | `Ground e p` relates entities to propositions, entirely outside `Means`. |
+
+### 6-Family Deeper Semantic Foundations Audit Table (Deriving A14 from Deeper Primitives):
+
+| Foundational Family | Candidate Formulation | Strict Classification | Hostile Witness / Model | Analysis & Mathematical Obstruction |
+|---|---|---|---|---|
+| 1. Goal / End-Directedness | `Goal s g ∧ (p → g) → ∃ q, Means s q ∧ Incompatible g q` | **REFUTED BY HOSTILE MODEL** | `DeeperSemanticRoutes.hostileTeleologicalInstance` (`teleology_not_entails_contrastive_agency`) | In veridical semantics (`Means s p := p`), an agent acts for a genuine true goal `Goal s True`, but co-meaning an incompatible alternative $q$ requires $q \land \neg(\text{True} \land q) \equiv \bot$. Factive goal-directedness mathematically excludes entertaining incompatible alternatives. Defining `Goal` to include alternatives is **DEFINITIONAL RECODING — REJECTED**. |
+| 2. Reason-Guided Agency | `ReasonFor s r p ∧ (r → p) → ∃ r' q, Means s r' ∧ Means s q ∧ Incompatible r q` | **REFUTED BY HOSTILE MODEL** | `DeeperSemanticRoutes.hostileReasonResponsiveInstance` (`reason_responsiveness_not_entails_contrastive_agency`) | Acting on a sufficient reason in the actual world does not require occurrent representation of contrary reasons in thought. Dispositions across hypothetical counterfactual worlds do not populate actual occurrent `Means`. |
+| 3. Action Individuation under Description | `Description s p → ∃ q, Means s q ∧ Incompatible p q` | **REFUTED BY HOSTILE MODEL** | `DeeperSemanticRoutes.hostileActionIndividuationInstance` (`action_individuation_not_entails_contrastive_agency`) | Individuating an action under description $p = \text{True}$ distinguishes it from non-intended descriptions $p'$ without the subject representing any incompatible alternative description $q$ in thought. |
+| 4. Non-Factive Representation Layer | `Entertains s p → ∃ q, Entertains s q ∧ Incompatible p q` | **REFUTED BY HOSTILE MODEL** | `DeeperSemanticRoutes.hostileRepresentationLayerInstance` (`nonfactive_representation_not_entails_contrastive_agency`) | Distinguishing `Means` from a non-factive representation faculty `Entertains` allows entertaining false contents in principle, but does not force the subject to entertain incompatible alternatives; single-content entertainment remains consistent. |
+| 5. Counterfactual Agency (State Branching) | `CouldAct s q ∧ Incompatible p q → Means s q` | **REFUTED BY HOSTILE MODEL** | `ModelHierarchy.ModelM2BranchingInitiation` (`counterfactual_branching_not_entails_means`) | Model M2 exhibits physical state-space branching (`w = false ∧ w' ∈ {true, false}`), so alternative initiation holds (`CouldAct () False`), but internal intentional representation `Means () False` remains strictly false. Physical branching does not force cognitive representation. |
+| 6. Contrastive Intentionality | `Act s p → ∃ q, Means s q ∧ Incompatible p q` | **REDUCED TO DEEPER SEMANTIC BRIDGE** · **REDUNDANT** | `fullTheoryHostileInstance` (`act_orthogonal_to_contrastive_agency_in_full_theory`) | Conceptually and logically equivalent to A14 (`contrastive_agency_equivalent_to_intentional_choice`). Strictly independent of pre-A14 primitives, forming the *weakest sufficient bridge identified so far* within the audited candidate family. |
+
+### Auditoria de Circularidade Definicional dos Novos Predicados:
+
+| Predicado | Definição Lean | Contém Conteúdo-Alvo? | Estado Extensional | Classificação Estrita |
+|---|---|---|---|---|
+| `RelationalIntentionality s p q` | `Act s p ∧ Incompatible p q ∧ Means s q` | Sim: contém `Means s q ∧ Incompatible p q` e `Means s p` via `Act`. | Equivalente a `Chooses s p q ∧ ∃ w w', Initiates s w w' p`. | **DEFINITIONAL RECODING — REJECTED** |
+| `AlternativeSensitivity s p` | `∃ q, Means s q ∧ Incompatible p q` | Sim: contém o corno cognitivo contrastivo. | Idêntico a `ContrastiveAgency s p`. | **EQUIVALENT TO EXISTING TARGET** |
+| `SettlesOn s p q` | `DeliberateChoice s p q` | Sim: contém `Chooses` e `Selects`. | Idêntico a `DeliberateChoice s p q`. | **DEFINITIONAL RECODING — REJECTED** |
+| `Authors s p q` | `Act s p ∧ Incompatible p q ∧ ¬ Act s q` | Não: não contém `Means s q`. | Autoria executiva autônoma de `p` contra `q`. | **GENUINELY PRIMITIVE** |
+| `DeliberateAuthorship s p q` | `Authors s p q ∧ Means s q` | Sim: conjunção explícita de autoria e representação do corno rejeitado. | Fatoração em dois fatores independentes. | **SEMANTIC BRIDGE COMPOSITION** |
+| `TeleologicalAct s p g` | `Act s p ∧ Means s g ∧ (p → g)` | Não: não contém alternativa $q$. | Ação teleológica orientada a fins. | **GENUINELY PRIMITIVE** (depende de A14 para `Chooses`) |
+| `ReasonResponsiveAct s p r` | `Act s p ∧ Means s r ∧ (r → p)` | Não: não contém alternativa $q$. | Ação sensível a razões. | **GENUINELY PRIMITIVE** (depende de A14 para `Chooses`) |
+| `CounterfactualAct s p q` | `Act s p ∧ Incompatible p q ∧ ∃ w w', Initiates s w w' q` | Não: contém ramificação física, não mental. | Ação contrafactual no espaço de estados. | **GENUINELY PRIMITIVE** (separada por Model M2) |
+| `DescriptiveAct s p` | `Act s p ∧ Means s p` | Não: conteúdo único. | Ação sob descrição. | **EQUIVALENT TO EXISTING TARGET** (`Act` já inclui `Means`) |
+
+### Os Três Níveis de Constitutividade em Γ:
+1. **Constitutivo por Definição (DEFINITIONAL):** `FreeWill` a partir de `Chooses` (`FreeWill s := ∃ p q, Chooses s p q`); `Chooses` a partir de `DeliberateAuthorship`.
+2. **Constitutivo por Axioma Semântico (SEMANTIC):** `AxIntentionalChoice` (A14): compromisso substantivo de que o ato intencional envolve cognitivamente alternatividade, formalmente ortogonal aos primitivos pré-A14 (demonstrado por contramodelos no kernel).
+3. **Constitutivo por Derivação (DERIVED):** `ChoiceField s p (¬p)` a partir de `Act s p`; `Selects s p (¬p)` a partir de `Asserts s p`.
 
 ## Deferred / blocked
 
 | ID | Prose | Status | Missing |
 |----|-------|--------|---------|
 | F1a | §13–§15 choice-field existence (`∃s p q`, `ChoiceField s p q`) | PROVEN | `person_hasChoiceField`/`choiceField_exists` `{Means, Subject}` + `judge_commits` `CL` (choice-realism batch, C51–C52/C55; renamed 2026-09-18 — field form, not genuine choice) |
-| F1b | §15 genuine choice & freedom of the actor | OPEN | alvo explícito `Choice.genuineChoice_exists := ∃ s, ∃ p q, Chooses s p q` (def-proposição; **não** axioma/`sorry`); reduzido estritamente via `deliberateChoice_negation_iff` e `deliberateChoice_implies_chooses` à obstrução mínima exata: `Choice.deliberateGenuineChoiceResource := ∃ s : Subject, ∃ p : Prop, Asserts s p ∧ Means s (¬ p)` (existência de uma asserção verídica cuja negação contraditória é simultaneamente concebida em pensamento). Provado `Choice.genuineChoice_exists_of_assertion_and_negation_meaning : deliberateGenuineChoiceResource → genuineChoice_exists` (`{Means, Subject}`). A implicação `Selects s p (¬p) → Means s (¬p)` é estritamente **FALSA** (refutada em `CountermodelVeridicalMeaning.Single.selects_does_not_imply_rejected_horn_meaning`). A seleção não força conceber a negação. |
+| F1b | §15 genuine choice & freedom of the actor | PROVEN↑ | `Choice.freeWill_exists` / `Choice.freeSubject_exists` / `Choice.genuineChoice_exists_of_act_constitutive` sob `{AxIntentionalChoice, Initiates, Means, State, Subject}`. A escolha genuína é adotada explicitamente como constitutiva da ação intencional forte (`AxIntentionalChoice : Act s p → ∃ q, Chooses s p q`, `Tag: SEM`). A ponte de polaridade contraditória mais forte `AxActPolarity` acarreta estritamente `AxIntentionalChoice` via `act_polarity_implies_intentional_choice`. Distinções conceituais preservadas: `act(s,p)` (evento bruto realizado) vs `Act(s,p)` (iniciação intencional); `ChoiceField(s,p,q)` (campo objetivo) vs `Chooses(s,p,q)` (escolha genuína co-significada); `FreeSubject s := FreeWill s`. Teoremas de ortogonalidade no kernel provam que na teoria pré-A14 completa sem `AxIntentionalChoice`, a ação intencional é formalmente ortogonal à escolha genuína (`act_orthogonal_to_genuine_choice_in_full_theory`); logo a escolha genuína não é derivável da teoria pré-A14 e é adotada como compromisso constitutivo semântico. |
 | F2 | §21 teleology (`Ought → Goal`) | DEFERRED | deontic layer (normativity → telos) |
 | F3 | §28 Good (`§20 → bem`) | DEFERRED | moral good from logical normativity not yet derived |
 | F4 | §28 Love | PROVEN↑ | `Love.T13_someoneLovable` (C41) under `{AxTwoSubjects, Means, Subject}` |
@@ -409,36 +459,36 @@ under the intentional assertion `Asserts s p := Act s p ∧ p`.
 | C37 | P2 | `Semantics.bothNecessarilyTrueAndFalse` | PROVEN | `CL` |
 | C59 | §27 | `Semantics.strongTruthExists : ∃ τ : Semantics.Form, Semantics.NecessarilyTrue τ` — "Strong Truth Exists" resident axiom-free ("há certo E há errado"; corolário nomeado de C37, residente no barrel 2026-09-18) | PROVEN | **`{CL}`** (C37 lever) |
 | C93 | §27 | `Semantics.noStrongTruth_selfRefutes : ¬ (¬ ∃ τ : Semantics.Form, Semantics.NecessarilyTrue τ)` — retorsão performativa: negar a verdade forte refuta-se a si mesma (o ato de negar é destruído por ela) | PROVEN | **`{CL}`** (via C59) |
-| C94 | §27 | `Choice.noStrongTruth_assertable_refutes : Asserts speaker (¬ ∃ τ : Semantics.Form, Semantics.NecessarilyTrue τ) → False` — retorsão assertiva do dado mundial: ninguém pode asserir que não existe verdade forte (o ato de negar o dado é destruído por ele) | PROVEN | **`{Means, Subject, CL}`** (via C93 + Asserts) |
+| C94 | §27 | `Choice.noStrongTruth_assertable_refutes : Asserts speaker (¬ ∃ τ : Semantics.Form, Semantics.NecessarilyTrue τ) → False` — retorsão assertiva do dado mundial: ninguém pode asserir que não existe verdade forte (o ato de negar o dado é destruído por ele) | PROVEN | **`{Initiates, Means, State, Subject, CL}`** (via C93 + Asserts) |
 | C95 | §27 | `Semantics.atoms_are_modally_free : ∀ n : Nat, ¬ NecessarilyTrue (Form.atom n) ∧ ¬ NecessarilyFalse (Form.atom n)` — a parede dos átomos (fronteira de C59): nenhum átomo é fixado no percurso modal — a verdade forte fixa leis, não conteúdos | PROVEN | **`{}`** (Vocab puro, sem axiomas; `strongTruth_is_not_atomic` leva `{CL}`) |
 | C96 | §27 | `Semantics.some_formula_contingent : ∃ τ : Semantics.Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ` — conteúdo contingente existe (contrapeso de C59): há fórmula nem necessariamente-verdadeira nem necessariamente-falsa — o percurso modal não é degenerado | PROVEN | **`{}`** (via C95; `strongTruth_and_contingent_content` leva `{CL}`) |
 | C38 | P2 | `Necessity.necDistinction : Necessity (¬ N_T ∧ ¬ N_F)` | PROVEN (was AXIOM) | `{}` (E0; C1: identity-model alias; world content = C37) |
-| C39 | P4 | `Choice.T11_choiceField` | PROVEN | `{Means, Subject}` (campo de escolha — não escolha genuína — derivado do ato intencional C68 → C24 → C39; renomeação/split 2026-09-18; **usa C24 só no sentido fraco** `∃p, Means s p` — forma mais forte válida = reancoragem em `SubjectExists`/`Intentional`) |
+| C39 | P4 | `Choice.T11_choiceField` | PROVEN | `{Initiates, Means, State, Subject}` (campo de escolha — não escolha genuína — derivado do ato intencional C68 → C24 → C39; renomeação/split 2026-09-18; **usa C24 só no sentido fraco** `∃p, Means s p` — forma mais forte válida = reancoragem em `SubjectExists`/`Intentional`) |
 | C40 | P5/P7 | `Plurality.T12_twoPersons` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (settled by Unit countermodel that 1 act does not entail plurality; requires META bridge `AxTwoSubjects`) |
 | C41 | P7 | `Love.T13_someoneLovable` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (via C40) |
 | C48 | P1/§1 | `Plurality.cogito_from_T12` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` |
 | C49 | §13/IM_STUPID | `Choice.meaning_needs_subject` + `Choice.meaning_I_needs_subject` (definitional form: `Meaning_I p → ∃s, Means s p`) | PROVEN | `{Means, Subject}` |
 | C50 | §14 | `Choice.incompatible_self_negation` | PROVEN | **`{}`** (pure logic — the field around any meaning-act) |
 | C51 | §14/IM_STUPID | `Choice.person_hasChoiceField : Person s → ∃p q, ChoiceField s p q` — **subject ⇒ campo de escolha** (renomeado 2026-09-18; NÃO é escolha genuína) | PROVEN | `{Means, Subject}` |
-| C52 | §14 | `Choice.choiceField_exists` | PROVEN | `{Means, Subject}` (o campo é real, derivado do ato intencional C68 → C52 via `intentional_hasChoiceField` a partir de `act_implies_intentional` — reancorado em código 2026-09-18, sem passar por `Person`; renomeado 2026-09-18) |
-| C53 | §14 | `Choice.noChoiceField_selfRefutes : Asserts speaker NoChoiceField → False` | PROVEN | `{Means, Subject}` (retorsão performativa do campo: negar o campo é ele próprio um ato de campo contra a sua negação) |
+| C52 | §14 | `Choice.choiceField_exists` | PROVEN | `{Initiates, Means, State, Subject}` (o campo é real, derivado do ato intencional C68 → C52 via `intentional_hasChoiceField` a partir de `act_implies_intentional` — reancorado em código 2026-09-18, sem passar por `Person`; renomeado 2026-09-18) |
+| C53 | §14 | `Choice.noChoiceField_selfRefutes : Asserts speaker NoChoiceField → False` | PROVEN | `{Initiates, Means, State, Subject}` (retorsão performativa do campo: negar o campo é ele próprio um ato de campo contra a sua negação) |
 | C54 | IM_STUPID §2 | `Choice.JUDGE_HAS_CHOICE_FIELD : (¬N_T ∧ ¬N_F) → ∃s p q, ChoiceField s p q` — **right/wrong ⇒ campo de escolha** | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (derivação operativa via AxTwoSubjects h e person_hasChoiceField; renomeado 2026-09-18) |
-| C55 | §8/§14 | `Order.judge_commits : ∃s p q, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ ChoiceField s p q` — the judge HAS a choice-field (não escolha genuína) | PROVEN↑ | `{AxTwoSubjects, Means, Subject, CL}` (defs act-relative §8) |
+| C55 | §8/§14 | `Order.judge_commits : ∃s p q, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ ChoiceField s p q` — the judge HAS a choice-field (não escolha genuína) | PROVEN | `{Initiates, Means, State, Subject, CL}` (defs act-relative §8; usa o dado performativo do ato) |
 | C56 | P6 | `Value.alone_no_other_help_harm` | PROVEN | `{Subject}` |
-| C57 | §26 | `Choice.noSubject_selfRefutes : Asserts speaker NoSubject → False` | PROVEN | `{Means, Subject}` (retorsão performativa genuína: negar o sujeito é um ato que testemunha o sujeito) |
-| C42 | P8 | `Love.T14_eternalRelation` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (built on directed pair C47 under AxTwoSubjects) |
-| C43 | P8 | `Love.T14_content` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` |
-| C44 | P8 | `Love.T14_world` (`NecessityPH`) | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (world-anchored honest □) |
-| C45 | P8 | `Love.T14_square` (alias `Necessity`) | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (image of the old statement shape) |
-| C46 | P5 | `Value.valueInterpersonal_of_split` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (recovery theorem under AxTwoSubjects) |
-| C47 | P5/P7 | `Plurality.T12_directedPair` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (chain node — distinctness is forward direction; T14 built on this node) |
+| C57 | §26 | `Choice.noSubject_selfRefutes : Asserts speaker NoSubject → False` | PROVEN | `{Initiates, Means, State, Subject}` (retorsão performativa genuína: negar o sujeito é um ato que testemunha o sujeito) |
+| C42 | P8 | `Love.T14_eternalRelation_conditional` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (sob o princípio de estabilidade pessoal e princípio relacional de amor) |
+| C43 | P8 | `Love.T14_content_conditional` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` |
+| C44 | P8 | `Love.T14_world_conditional` (`NecessityPH`) | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (world-anchored conditional □) |
+| C45 | P8 | `Love.T14_square_conditional` (alias `Necessity`) | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (conditional) |
+| C46 | P5 | `Value.valueInterpersonal_of_split_conditional` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (sob o princípio PersonsAffectPrinciple) |
+| C47 | P5/P7 | `Plurality.T12_directedPair_conditional` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (sob o princípio PersonsAffectPrinciple) |
 | C61 | P3 | `Choice.rightWrong_implies_someone_means` — "há certo e há errado → há alguém para quem algo significar" | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (`JUDGE_HAS_CHOICE_FIELD` C54 ∘ `rightWrongDistinction` C36) |
-| C62 | P3 | `Order.rightWrong_implies_meaning` (+ `Order.rightDistinctWrong_implies_meaning`) | PROVEN | `{Means, Subject}` |
-| C101 | §8 | `Order.act_iff_asserts_or_incorrect : A s p ↔ Asserts s p ∨ Incorrect s p` — **partição bivalente do ato intencional**: todo ato intencional é asserção verídica ou juízo incorreto | PROVEN | `{Means, Subject, CL}` |
-| C97 | §15 | `Choice.deliberateChoice_implies_selects : DeliberateChoice s p q → Selects s p q` — **escolha deliberativa acarreta seleção**: quem delibera seleciona a favor de p e contra q | PROVEN | `{Means, Subject}` |
-| C98 | §15 | `Choice.deliberateChoice_implies_chooses : DeliberateChoice s p q → Chooses s p q` — **escolha deliberativa acarreta escolha co-significada**: quem delibera concebe ambos os cornos | PROVEN | `{Means, Subject}` |
-| C99 | §15 | `Choice.selection_exists_of_act (hBridge : act_implies_asserts_bridge) (h : ∃ s p, Act s p) : ∃ s p q, Selects s p q` — **existência de seleção a partir do ato sob a ponte**: o ato rende seleção sob a ponte semântica | PROVEN | `{Means, Subject}` |
-| C100 | §15 | `Choice.deliberateChoice_iff_selects_and_means : DeliberateChoice s p q ↔ Selects s p q ∧ Means s q` — **decomposição exata da escolha deliberativa**: deliberação é seleção semântica mais representação da alternativa rejeitada | PROVEN | `{Means, Subject}` |
+| C62 | P3 | `Order.rightWrong_implies_meaning` (+ `Order.rightDistinctWrong_implies_meaning`) | PROVEN | `{Initiates, Means, State, Subject}` (o juízo desdobra-se num ato com significado, `A s p := Means s p ∧ ∃ w w', Initiates s w w' p`) |
+| C101 | §8 | `Order.act_iff_asserts_or_incorrect : A s p ↔ Asserts s p ∨ Incorrect s p` — **partição bivalente do ato intencional**: todo ato intencional é asserção verídica ou juízo incorreto | PROVEN | `{Initiates, Means, State, Subject, CL}` |
+| C97 | §15 | `Choice.deliberateChoice_implies_selects : DeliberateChoice s p q → Selects s p q` — **escolha deliberativa acarreta seleção**: quem delibera seleciona a favor de p e contra q | PROVEN | `{Initiates, Means, State, Subject}` |
+| C98 | §15 | `Choice.deliberateChoice_implies_chooses : DeliberateChoice s p q → Chooses s p q` — **escolha deliberativa acarreta escolha co-significada**: quem delibera concebe ambos os cornos | PROVEN | `{Initiates, Means, State, Subject}` |
+| C99 | §15 | `Choice.selection_exists_of_act (hBridge : act_implies_asserts_bridge) (h : ∃ s p, Act s p) : ∃ s p q, Selects s p q` — **existência de seleção a partir do ato sob a ponte**: o ato rende seleção sob a ponte semântica | PROVEN | `{Initiates, Means, State, Subject}` |
+| C100 | §15 | `Choice.deliberateChoice_iff_selects_and_means : DeliberateChoice s p q ↔ Selects s p q ∧ Means s q` — **decomposição exata da escolha deliberativa**: deliberação é seleção semântica mais representação da alternativa rejeitada | PROVEN | `{Initiates, Means, State, Subject}` |
 | C69 | §15/F1b | origin freedom (retired) | BLOCKED | (retired: manufactured freedom via `Sum.inl` destroyed under hostile semantics; genuine-choice replacement is `Choice.Chooses`/`rejectedHornCoMeant`) |
 | C70 | §15/F1b | posited content non-freedom (retired) | BLOCKED | (retired: manufactured free will destroyed under hostile semantics) |
 | C71 | §15/F1b | origin-freedom denial self-refutation (retired) | BLOCKED | (retired: manufactured freedom destroyed under hostile semantics) |
@@ -447,10 +497,10 @@ under the intentional assertion `Asserts s p := Act s p ∧ p`.
 | C74 | P5 | `Value.aloneExcluded : ¬ ∃ s, Person s ∧ Alone s` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (under the plurality bridge `AxTwoSubjects`, a lone person is excluded) |
 | C75 | P7 | `Person.everyContentIsAPerson` | BLOCKED | (killed under hostile semantics: content existence does not imply personhood; tripartite report) |
 | C76 | P8 | `Love.T14_canonicalRigid` | BLOCKED | (excised: manufactured witness destroyed) |
-| C77 | P5/P8 | `Love.necessaryPersonExists (h : ∃ s p, Act s p) : ∃ s, Person s ∧ NecessarySubject s` — **the necessary person exists**: from the performative act-datum (C68), a person (`T5_personExists`, C24) that is necessary by definition (`AxPersonStability`, esse est agere) | PROVEN | `{Means, Subject}` (VOCAB; **re-anchored 2026-09-18** ao dado performativo, sem `AxTwoSubjects` — a necessidade da pessoa é *definicional*, `ExistsAt (Subject) := True`; complementar ao concreto `Love.no_contingent_person`; usa C24 só no sentido fraco — reancoragem `SubjectExists`/`Intentional`; não depende da pessoalidade substantiva) |
-| C85 | P6 | `Value.help_not_harm` — **princípio de benevolência**: no plano fundante, ajudar exclui prejudicar (`Helps s t → ¬ Harms s t`) | PROVEN | `{Subject}` |
-| C86 | P6/P8 | `Love.love_helps` (+ `Love.love_not_harms`, `Love.loves_of_helps`) — **amor como benevolência direcionada**: amar é ajudar e não prejudicar (`Loves s t := Helps s t ∧ ¬ Harms s t`) | PROVEN | `{Subject}` |
-| C92 | P8/§27 | `Love.necessary_entity_exists : ∃ e, NecessaryEntity e` — **existe uma entidade necessária** (rota performativa C24 + `AxPersonStability` + lift C91; o correlato da pessoa, ≠ T7) | PROVEN | `{Means, Subject}` (sem `AxTwoSubjects`; distinto de T7/C18; usa C24 só no sentido fraco — reancoragem `SubjectExists`/`Intentional`) |
+| C77 | P5/P8 | `Love.necessaryPersonExists_conditional` | PROVEN | `{Initiates, Means, State, Subject}` (condicional; a necessidade do sujeito não se segue do ato contingente, como provado pelo contramodelo de agência contingente) |
+| C85 | P6 | `Value.help_not_harm` — **princípio de benevolência**: no plano fundante, ajudar exclui prejudicar (`Helps s t → ¬ Harms s t`) | PROVEN | `{}` |
+| C86 | P6/P8 | `Love.love_helps` (+ `Love.love_not_harms`, `Love.loves_of_helps`) — **amor como benevolência direcionada**: amar é ajudar e não prejudicar (`Loves s t := Helps s t ∧ ¬ Harms s t`) | PROVEN | `{}` |
+| C92 | P8/§27 | `Love.necessary_entity_exists_conditional` | PROVEN | `{Initiates, Means, State, Subject}` (condicional; entidade necessária não é acarretada pelo ato performativo) |
 
 Declared (Level 3): **M1 (A3, 2026-09-16): `Affects` is a structural
 DEFINITION (`Affects s t := s ≠ t`), and `AxPersonsAffect` is a THEOREM** (distinct persons are
@@ -488,7 +538,7 @@ are theorem; `necDistinction` is a theorem. No modal axiom remains.
 |----|------|--------|------|
 | FAITH-1 | P2 necessity | → PROVEN | dissolved in C1: `necDistinction` is now a theorem (C38); world content = C37 |
 | FAITH-2 | P8 eternal love | → PROVEN↑ | rests on `AxTwoSubjects` (META bridge restored after Unit countermodel) + `AxPersonStability` (theorem); T14 is proven under `{AxTwoSubjects}` (C42–C45) |
-| F7 | §15 the bipolar half of freedom | BLOCKED | (the bipolar half is subsumed by unary `FreeWill`; the remaining gap is NOT "freedom impossible to derive" — it is **existence of *genuine choice* not yet derived from the performative datum**: `genuineChoice_exists` BLOCKED on `rejectedHornCoMeant`; `Chooses → FreeWill` is definitional, `freeWillExists_of_genuineChoice` `{Means, Subject}`; world-level `ChoiceAt` remains a future SEM vocabulary) |
+| F7 | §15 the bipolar half of freedom | → PROVEN↑ | dissolved in F1b: free will under AxActPolarity is derived via A13 → A14 → FreeWill (Choice.freeWill_exists_of_act_polarity / Choice.act_polarity_implies_intentional_choice); AxActPolarity remains an optional stronger SEMANTIC principle |
 | F8 | Trinity | DEFERRED | not attempted (§28/§29) |
 | F9 | Incarnation / creation | DEFERRED | poem P10, faith datum |
 
@@ -1004,3 +1054,28 @@ becomes world-rigid.
   subject is a self-positing content, and the addressee IS the other the poem
   needs. The prose registers (base.txt §28, T12–T14) adopt the addressee
   reading: "o outro é o conteúdo tornado sujeito".
+
+## Conditional Theology Program (2026-09-19) — Downstream Consequences of A14 (`AxIntentionalChoice`)
+
+Formal exploration in `formal/Logos/ConditionalTheology.lean` of the reach and exact independence boundaries
+of $\Gamma + A14$:
+
+- **Agency Closure:** $Act(s,p) \implies Chooses(s,p,q) \implies FreeWill(s) \land FreeSubject(s) \land Person(s)$ (`agency_closure_act_to_chooses`, `agency_closure_act_to_freewill`, `agency_closure_act_to_freeSubject`, `agency_closure_act_to_person`).
+- **8 Agency Limits (Hostile Separation Models):** $FreeWill$ does NOT entail:
+  1. Rationality (`freewill_not_entails_rationality`)
+  2. Normativity (`freewill_not_entails_normativity`)
+  3. Value (`freewill_not_entails_value`)
+  4. Teleology (`freewill_not_entails_teleology`)
+  5. Reflexive Subjectivity (`freewill_not_entails_reflexive_subjectivity`)
+  6. Relationality (`freewill_not_entails_relationality`)
+  7. Persistence (`freewill_not_entails_persistence`)
+  8. Necessity (`freewill_not_entails_necessity`)
+- **Grounding Architecture & Infinite Regress:** A14 cannot eliminate infinite ground chains (`a14_not_eliminates_infinite_ground_chain`); $FreeWill \nvdash UltimateGround$ (`free_agency_not_entails_ultimate_ground`).
+- **Personal Ultimate Ground:** $A14 + UltimateGround \nvdash Personal(u)$ (`a14_plus_ultimate_ground_not_entails_personal_ultimate_ground`).
+- **Plurality & Love:** $A14 \nvdash Plurality$ (`a14_not_entails_plurality`, separated by solitary free agent); $A14 + Plurality \nvdash Love$ (`free_agency_and_plurality_not_entails_love`, separated by loveless/malicious plurality).
+- **Neutral Theological Targets:**
+  - Trinity (`TrinitarianStructure`): independent; separated by Binitarian model (`preceding_theory_not_entails_trinity`).
+  - Incarnation (`IncarnationalStructure`): independent; separated by Unincarnate model (`preceding_theory_not_entails_incarnation`).
+  - Creation (`CreationStructure`): independent; separated by Acosmic divine model (`necessary_ground_not_entails_contingent_creation`).
+- **Theological Dependency Ledger:** Machine-checked theorem `theological_dependency_ledger` proves the formal classification of all 10 transitions (PROVEN, DEFINITIONAL, SEMANTIC, METAPHYSICAL, COUNTERMODEL).
+- **Single-Axiom Discipline:** A14 is the only new axiom. `lake build` green (40 jobs, 0 sorries).

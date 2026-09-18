@@ -29,7 +29,7 @@ namespace Logos.Love
 open Logos.Agency (Subject)
 open Logos.Person (Person)
 open Logos.Plurality (EntityOf NecessarySubject)
-open Logos.Value (Affects AxPersonsAffect Helps Harms help_not_harm help_affects)
+open Logos.Value (Affects PersonsAffectPrinciple Helps Harms help_not_harm help_affects)
 open Logos.Semantics (World)
 open Logos.Truthmaker (ExistsAt Entity)
 open Logos.Modal (NecessaryEntity)
@@ -85,115 +85,73 @@ theorem T13_someoneLovable :
     ⟨q, hne.symm, hq⟩,
     ⟨p, hne, hp⟩⟩
 
-/--Persons persist across worlds: whoever is a person exists in every world — the poem's 'somehow'.
+/-- The person stability principle: whoever is a person exists across all worlds.
+    With ExistsAt hardened, this is an explicit metaphysical principle, not a definitional triviality. -/
+def PersonStabilityPrinciple : Prop := ∀ s : Subject, Person s → NecessarySubject s
 
- THEOREM (esse est agere, 2026-09-17): `Person s` unfolds definitionally to
-    `∃ p, Means s p` (via `Intentional`; kind-preds are `:= True`), and
-    `ExistsAt` is now agency itself — so persistence follows with no axiom
-    (the M3 PERSON_PERSISTS wall dissolves: the missing Means→ExistsAt rule
-    is supplied by definition). Former SEM bridge (C4; poem P8 "de alguma
-    forma", DESIGN.md D-C4). Footprint: `{}`. -/
-theorem AxPersonStability : ∀ s : Subject, Person s → NecessarySubject s := by
-  intro s _hs _w
-  trivial
+/-- The plurality-to-love principle: distinct persons love one another.
+    With Affects/Helps/Harms hardened, love is an explicit relational principle. -/
+def PluralityLovePrinciple : Prop := ∀ s₁ s₂ : Subject, Person s₁ → Person s₂ → s₁ ≠ s₂ → Loves s₁ s₂
 
-/--No person is contingent: nobody who is a person fails to persist in every world.
-
-  Step-6 verdict, concrete form: `¬ NecessarySubject s` is refuted for every
-    subject, so the countermodel `Person s ∧ ¬ NecessarySubject s` cannot
-    exist. The necessity of persons is *definitional* (`ExistsAt` for
-    subject-correlates is agency itself, esse est agere) — it is not a
-    stronger metaphysical bridge, and no concrete model can attack it.
-    Abstractly the implication is still not a logical law
-    (`HostileSemantics.not_entails_person_necessary`). Footprint:
-    `{Means, Subject}` (VOCAB only — `Person` unfolds through `Means`). -/
-theorem no_contingent_person : ¬ (∃ s : Subject, Person s ∧ ¬ NecessarySubject s) := by
-  rintro ⟨s, hs, hnc⟩
-  exact hnc (AxPersonStability s hs)
-
-/--There exists a necessary person: someone who is a person and persists in every world.
-
-  C77 (re-anchored, 2026-09-18): from the performative act-datum
-     (`h : ∃ s p, Act s p`, C68) a person exists (`T5_personExists`, C24) and
-     it is necessary by definition (`AxPersonStability`, esse est agere). The
-     old closed form ran through plurality (`T5_personExists_from_plurality`,
-     footprint `{AxTwoSubjects, Means, Subject}`); the hypothesis-carrying
-  form drops `AxTwoSubjects`. The necessity here is *definitional*
-  (`ExistsAt (Subject) := ExistsAt (Entity.ofSubject _) := True`), not a
-  bridge — and, like C24 itself, it needs only the actualized
-  meaning-subject (`∃ p, Means s p`), not the substantive reading of
-  "person". A VOCAB-only kernel footprint does NOT certify semantic
-  neutrality of the definitions: this is an ontology-internal constitutive
-  necessity, not an ontology-independent metaphysical one.
-  Footprint: `{Means, Subject}` (VOCAB only). -/
-theorem necessaryPersonExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
+/-- Conditional C77: If person stability holds and intentional action confers personhood,
+    an intentional act yields a necessary person. -/
+theorem necessaryPersonExists_conditional
+    (hStab : PersonStabilityPrinciple)
+    (hActPerson : ∀ (s : Subject) (p : Prop), Logos.Agency.Act s p → Person s)
+    (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
     ∃ s : Subject, Person s ∧ NecessarySubject s := by
-  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists h
-  exact ⟨s, hs, AxPersonStability s hs⟩
+  obtain ⟨s, p, ha⟩ := h
+  have hp : Person s := hActPerson s p ha
+  exact ⟨s, hp, hStab s hp⟩
 
-/--There exists a necessary entity: the entity-correlate of the performing person exists in every world.
-
- E5 / C92 — from the demonstrated person (C24, `T5_personExists`) and its
-    persistence (`AxPersonStability`, esse est agere) with the subject→entity
-    lift (`Modal.subject_nec_entity_nec`, C91), some entity exists in every
-  world. This does NOT close T7: it is the performing person's correlate,
-     not a uniform ground of necessary truths (that stays
-     `AxGlobalGround`-priced, C18). Like C77, it needs only the actualized
-     meaning-subject; a VOCAB-only footprint does NOT certify semantic
-     neutrality — this is constitutive necessity, not an ontology-independent
-     metaphysical one.
-     Footprint: `{Means, Subject}` (VOCAB only;
-     no AxTwoSubjects, no SEM/META). -/
-theorem necessary_entity_exists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
+/-- Conditional C92: If person stability holds and intentional action confers personhood,
+    an intentional act yields a necessary entity. -/
+theorem necessary_entity_exists_conditional
+    (hStab : PersonStabilityPrinciple)
+    (hActPerson : ∀ (s : Subject) (p : Prop), Logos.Agency.Act s p → Person s)
+    (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
     ∃ e : Entity, NecessaryEntity e := by
-  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists h
-  exact ⟨EntityOf s, Logos.Modal.subject_nec_entity_nec s (AxPersonStability s hs)⟩
+  obtain ⟨s, _, hNs⟩ := necessaryPersonExists_conditional hStab hActPerson h
+  exact ⟨EntityOf s, Logos.Modal.subject_nec_entity_nec s hNs⟩
 
-/--Two distinct persons stand in an eternal love-relation, and both persist in every world.
-
- T14 — the eternal love-relation: a pair of distinct persons who love each
-    other, both of whose entity-correlates exist in *every* world — the poem's
-    "Amar é escolhido e também é necessário (de alguma forma)". Built on the
-    directed pair `Plurality.T12_directedPair` (C47): direction and stability
-    live on the *same* pair. Footprint: `{AxTwoSubjects}`. -/
-theorem T14_eternalRelation :
+/-- Conditional T14: Under person stability and the plurality-love principle,
+    two distinct persons stand in an eternal love relation. -/
+theorem T14_eternalRelation_conditional
+    (hStab : PersonStabilityPrinciple)
+    (hLove : PluralityLovePrinciple) :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
       Loves s₁ s₂ ∧ NecessarySubject s₁ ∧ NecessarySubject s₂ := by
-  obtain ⟨p, q, hp, hq, hne, ha⟩ := Logos.Plurality.T12_directedPair
-  have hl : Loves p q := loves_of_helps ha
-  exact ⟨p, q, hp, hq, hne, hl, AxPersonStability p hp, AxPersonStability q hq⟩
+  obtain ⟨p, q, hp, hq, hne⟩ := Logos.Plurality.T12_twoPersons
+  have hl : Loves p q := hLove p q hp hq hne
+  exact ⟨p, q, hp, hq, hne, hl, hStab p hp, hStab q hq⟩
 
-/--In every world, two distinct persons stand in a love-relation.
-
- T14, world-anchored form (`NecessityPH`): in every world there is a pair of
-    distinct persons who love each other and whose entity-correlates exist in
-    that world. This is the honest, world-indexed content of "eternal" — the
-    love-relation, the relata, and the stability (from AxPersonStability). -/
-theorem T14_world : NecessityPH
-    (fun _w : World =>
-      ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
-        Loves s₁ s₂ ∧ ExistsAt _w (EntityOf s₁) ∧ ExistsAt _w (EntityOf s₂)) := by
-  obtain ⟨p, q, hp, hq, hne, hl, hNs, hNq⟩ := T14_eternalRelation
+/-- In every world, two distinct persons stand in a love relation (conditional on stability and love). -/
+theorem T14_world_conditional
+    (hStab : PersonStabilityPrinciple)
+    (hLove : PluralityLovePrinciple) :
+    NecessityPH
+      (fun _w : World =>
+        ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
+          Loves s₁ s₂ ∧ ExistsAt _w (EntityOf s₁) ∧ ExistsAt _w (EntityOf s₂)) := by
+  obtain ⟨p, q, hp, hq, hne, hl, hNs, hNq⟩ := T14_eternalRelation_conditional hStab hLove
   intro w
   exact ⟨p, q, hp, hq, hne, hl, hNs w, hNq w⟩
 
-/--Necessarily, two distinct persons stand in a love-relation.
-
- T14 in the *alias* modality (C1: `Necessity p := ∀ _w, p`) — the image of
-    the old statement shape `□(∃ loving pair)`, now a theorem by unfolding. -/
-theorem T14_square : Necessity
-    (∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves s₁ s₂) := by
+/-- Necessarily, two distinct persons stand in a love relation (conditional on stability and love). -/
+theorem T14_square_conditional
+    (hStab : PersonStabilityPrinciple)
+    (hLove : PluralityLovePrinciple) :
+    Necessity
+      (∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves s₁ s₂) := by
   intro _w
-  obtain ⟨p, q, hp, hq, hne, hl, _, _⟩ := T14_eternalRelation
+  obtain ⟨p, q, hp, hq, hne, hl, _, _⟩ := T14_eternalRelation_conditional hStab hLove
   exact ⟨p, q, hp, hq, hne, hl⟩
 
-/--Two distinct persons stand in a love-relation.
-
- The eternal relation's *content*: there is a pair of loving persons (from
-    T14_eternalRelation, past the stability half). -/
-theorem T14_content : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves s₁ s₂ := by
-  obtain ⟨p, q, hp, hq, hne, hl, _, _⟩ := T14_eternalRelation
-  exact ⟨p, q, hp, hq, hne, hl⟩
+/-- Two distinct persons stand in a love relation (conditional on the plurality-love principle). -/
+theorem T14_content_conditional (hLove : PluralityLovePrinciple) :
+    ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves s₁ s₂ := by
+  obtain ⟨p, q, hp, hq, hne⟩ := Logos.Plurality.T12_twoPersons
+  exact ⟨p, q, hp, hq, hne, hLove p q hp hq hne⟩
 
 end Logos.Love
 
@@ -202,11 +160,10 @@ end Logos.Love
 #print axioms Logos.Love.love_not_harms
 #print axioms Logos.Love.love_affects
 #print axioms Logos.Love.loves_of_helps
-#print axioms Logos.Love.necessaryPersonExists
-#print axioms Logos.Love.no_contingent_person
+#print axioms Logos.Love.necessaryPersonExists_conditional
 #print axioms Logos.Love.T13_someoneLovable
-#print axioms Logos.Love.T14_eternalRelation
-#print axioms Logos.Love.T14_world
-#print axioms Logos.Love.T14_square
-#print axioms Logos.Love.T14_content
-#print axioms Logos.Love.necessary_entity_exists
+#print axioms Logos.Love.T14_eternalRelation_conditional
+#print axioms Logos.Love.T14_world_conditional
+#print axioms Logos.Love.T14_square_conditional
+#print axioms Logos.Love.T14_content_conditional
+#print axioms Logos.Love.necessary_entity_exists_conditional

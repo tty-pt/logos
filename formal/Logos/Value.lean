@@ -31,53 +31,51 @@ namespace Logos.Value
 open Logos.Agency (Subject)
 open Logos.Person (Person)
 
-/-- `Affects s t`: what `s` does bears on `t`. NOW a structural DEFINITION
-    (A3, batch M1 of `FORCED_SUBJECT.md`, 2026-09-16): bearing = distinctness —
-    a subject bears on what is *other*; the lone subject bears on nothing
-    (P6: "não ajuda nem prejudica ninguém"). `Helps`/`Harms` are its
-    definitional *projections* (see below).
+/-- Directed interpersonal bearing of a subject toward another. -/
+inductive InterpersonalBearing : Type
+  | unbearing : InterpersonalBearing
+  | affects_only : InterpersonalBearing
+  | benevolent : InterpersonalBearing
+  | harmful : InterpersonalBearing
 
-    This is a SEM *position*, recorded and owned (same class as A2's structural
-    `TrueAt`): it defines the minimal structural content of affectivity, it
-    does not pretend to *derive* it. The former two-declaration swing
-    (`axiom Affects` + `axiom AxPersonsAffect`) collapses to zero.
+/-- The uninterpreted interpersonal bearing of s toward t:
+    by default, a distinct subject does not automatically affect or help another. -/
+def BearingOf (_s _t : Subject) : InterpersonalBearing :=
+  InterpersonalBearing.unbearing
 
-    Prose price: "Amar é escolhido" rests on `FreeWill`, which is now
-    *definitional* from genuine choice (`Choice.FreeWill s := ∃p q, Chooses s p q`,
-    `chooses_implies_freeWill`, footprint `{Means, Subject}` VOCAB only); what remains blocked is the *existence* of a
-    genuine chooser (`rejectedHornCoMeant`, F1b). `Loves := Affects` in Love.lean
-    reads as the directed constitutive bearing of one subject on a *distinct*
-    one. -/
-def Affects (s t : Subject) : Prop := s ≠ t
+/-- Affects: what s does bears on t (through help, harm, or pure affectivity).
+    Decoupled from bare non-identity s ≠ t. -/
+def Affects (s t : Subject) : Prop :=
+  BearingOf s t = InterpersonalBearing.benevolent ∨
+  BearingOf s t = InterpersonalBearing.harmful ∨
+  BearingOf s t = InterpersonalBearing.affects_only
 
-/--Positive constitutive bearing: a subject benefiting another.
+/-- Helps: positive constitutive bearing — s benefits t. -/
+def Helps (s t : Subject) : Prop :=
+  BearingOf s t = InterpersonalBearing.benevolent
 
- `Helps s t`: `s` benefits `t` — definitional projection of `Affects`
-    (the helps-direction). -/
-def Helps (s t : Subject) : Prop := Affects s t
+/-- Harms: detrimental constitutive bearing — s harms t. -/
+def Harms (s t : Subject) : Prop :=
+  BearingOf s t = InterpersonalBearing.harmful
 
-/--Detrimental constitutive bearing: a subject harming another.
-
- `Harms s t`: `s` harms `t` — in the foundational ground, harm has no
-    ontological standing. -/
-def Harms (_s _t : Subject) : Prop := False
-
-/--Helping is a way of affecting (unfolds to the identity). -/
+/-- Helping is an affective bearing: helping entails affecting. -/
 theorem help_affects : ∀ {s t : Subject}, Helps s t → Affects s t := by
   intro s t h
+  left
   exact h
 
-/--Harming is a way of affecting (vacuously true in the foundational ground). -/
+/-- Harming is an affective bearing: harming entails affecting. -/
 theorem harm_affects : ∀ {s t : Subject}, Harms s t → Affects s t := by
   intro s t h
-  exact False.elim h
+  right; left
+  exact h
 
-/--Helping excludes harming: benevolence is incompatible with malice.
-
- Benevolence principle: in the foundational order, what helps does not harm. -/
+/-- Benevolence principle: in the foundational order, what helps does not harm. -/
 theorem help_not_harm : ∀ {s t : Subject}, Helps s t → ¬ Harms s t := by
-  intro s t _h hh
-  exact hh
+  intro s t hh hharm
+  dsimp [Helps, Harms] at hh hharm
+  rw [hh] at hharm
+  cases hharm
 
 /-- `OtherAffects s`: `s`'s doings bear on some *other* subject. -/
 def OtherAffects (s : Subject) : Prop := ∃ t : Subject, t ≠ s ∧ Affects s t
@@ -97,12 +95,10 @@ theorem alone_no_other_affects {s : Subject} (ha : Alone s) : ¬ OtherAffects s 
 theorem alone_no_other_help_harm {s : Subject} (ha : Alone s) :
     (¬ ∃ t : Subject, t ≠ s ∧ Helps s t) ∧ (¬ ∃ t : Subject, t ≠ s ∧ Harms s t) := by
   constructor
-  · intro h
-    obtain ⟨t, hne, _⟩ := h
+  · rintro ⟨t, hne, _⟩
     exact hne (ha t)
-  · intro h
-    obtain ⟨t, _, hh⟩ := h
-    exact hh
+  · rintro ⟨t, hne, _⟩
+    exact hne (ha t)
 
 /--Tag: META
 AxTwoSubjects (META; poem P5/P7, failure traces in DESIGN.md D14 and
@@ -133,28 +129,20 @@ theorem aloneExcluded : ¬ ∃ s : Subject, Person s ∧ Alone s := by
   subst h1 h2
   exact hne rfl
 
-/-- AxPersonsAffect (theorem of A3, M1 2026-09-16; formerly a SEM
-    meaning-postulate): distinct persons necessarily bear on each other in at
-    least one direction — because bearing IS distinctness, `hne : s₁ ≠ s₂`
-    is the left disjunct itself. This formerly stood as a declared axiom
-    (`axiom` with no introduction rule; exclusion attempt in
-    /tmp/opencode/x2_spikeB.lean); the A3 definition supplies the missing
-    introduction rule. -/
-theorem AxPersonsAffect (s₁ s₂ : Subject) (_hs₁ : Person s₁) (_hs₂ : Person s₂)
-    (hne : s₁ ≠ s₂) : Affects s₁ s₂ ∨ Affects s₂ s₁ :=
-  Or.inl hne
+/-- PersonsAffectPrinciple: distinct persons bear on each other in at least one direction.
+With Affects hardened to an independent relation, this is an explicit metaphysical principle. -/
+def PersonsAffectPrinciple : Prop :=
+  ∀ (s₁ s₂ : Subject), Person s₁ → Person s₂ → s₁ ≠ s₂ → Affects s₁ s₂ ∨ Affects s₂ s₁
 
-/--Right-and-wrong yields two distinct persons who bear on each other.
-
- Recovery theorem: the exact statement of the deleted `AxValueInterpersonal`
-    (line 70-73, 2026-09-14) is a theorem of the split — no strength lost. -/
-theorem valueInterpersonal_of_split :
-    (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) →
-      ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
-        (Affects s₁ s₂ ∨ Affects s₂ s₁) := by
-  intro h
+/-- Right-and-wrong yields two distinct persons who bear on each other,
+    conditional on the PersonsAffectPrinciple. -/
+theorem valueInterpersonal_of_split_conditional
+    (hAffect : PersonsAffectPrinciple)
+    (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
+    ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
+      (Affects s₁ s₂ ∨ Affects s₂ s₁) := by
   obtain ⟨s₁, s₂, hs₁, hs₂, hne⟩ := AxTwoSubjects h
-  exact ⟨s₁, s₂, hs₁, hs₂, hne, AxPersonsAffect s₁ s₂ hs₁ hs₂ hne⟩
+  exact ⟨s₁, s₂, hs₁, hs₂, hne, hAffect s₁ s₂ hs₁ hs₂ hne⟩
 
 end Logos.Value
 
@@ -162,6 +150,5 @@ end Logos.Value
 #print axioms Logos.Value.alone_no_other_help_harm
 #print axioms Logos.Value.AxTwoSubjects
 #print axioms Logos.Value.aloneExcluded
-#print axioms Logos.Value.AxPersonsAffect
-#print axioms Logos.Value.valueInterpersonal_of_split
 #print axioms Logos.Value.help_not_harm
+#print axioms Logos.Value.help_affects

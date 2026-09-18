@@ -16,3 +16,5 @@ import Logos.Value
 import Logos.Plurality
 import Logos.Love
 import Logos.HostileSemantics
+import Logos.ConditionalTheology
+import Logos.Retorsion

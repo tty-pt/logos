@@ -4,18 +4,35 @@ Depende de: T5, T9; definições §14–§15 (desacoplado de `AxTwoSubjects` na 
 
 Verificado em: formal/Logos/Choice.lean (T11_choiceField, person_hasChoiceField,
 choiceField_exists, noChoiceField_selfRefutes, JUDGE_HAS_CHOICE_FIELD,
-chooses_implies_freeWill, rightWrong_implies_someone_means,
+chooses_implies_freeWill, FreeSubject, freeSubject_iff_freeWill, chooses_implies_freeSubject,
+freeSubject_implies_person, freeSubject_exists, rightWrong_implies_someone_means,
 meaning_I_needs_subject, rejectedHornCoMeant, rejectedHornCoMeant_implies_genuineChoice,
 genuineChoice_requires_error_possibility, assertion_consistency,
 no_one_asserts_incompatible_pair, Selects, asserts_selects, asserts_selects_all_incompatible,
-selection_exists, no_selection_no_assertion), formal/Logos/Order.lean (judge_commits,
+selection_exists, no_selection_no_assertion, deliberateChoice_negation_decomposition,
+AxIntentionalChoice, genuineChoice_exists_of_act_constitutive, freeWill_exists_of_act,
+freeSubject_exists_of_act, AxActPolarity, genuineChoice_exists_of_act,
+freeWill_exists_of_act_polarity, freeWill_exists, contrastive_agency_principle,
+existential_contrastive_agency, act_polarity_implies_contrastive,
+act_polarity_implies_intentional_choice, intentional_choice_implies_contrastive,
+contrastive_implies_intentional_choice, contrastive_agency_implies_existential,
+genuineChoice_exists_of_contrastive_act, freeWill_exists_of_contrastive_act,
+freeSubject_exists_of_contrastive_act), formal/Logos/Order.lean (judge_commits,
 rightWrong_implies_meaning, rightDistinctWrong_implies_meaning,
 rightWrongDistinction_implies_meaning), formal/Logos/HostileSemantics.lean
 (CountermodelNoFreeWill, not_entails_decoupled_freewill,
 CountermodelVeridicalMeaning, not_entails_genuine_choice,
 not_entails_genuine_choice_with_plurality, CountermodelOmniMeaning,
 selection_does_not_imply_genuine_choice, selection_does_not_imply_freewill,
-not_entails_selection_of_bare_means), GAPMAP.md C39–C72/F1a/F1b.
+not_entails_selection_of_bare_means, ActPolaritySeparation,
+not_entails_bilateral_intentionality, not_entails_act_polarity_from_preA13,
+not_entails_existential_polarity_from_preA13, not_entails_act_polarity_from_full_theory,
+not_entails_existential_polarity_from_full_theory, FullChooses, FullFreeWill,
+FullContrastiveAgency, act_orthogonal_to_genuine_choice_in_full_theory,
+act_orthogonal_to_freewill_in_full_theory, act_orthogonal_to_contrastive_agency_in_full_theory,
+act_orthogonal_to_existential_contrastive_agency_in_full_theory, ModelHierarchy,
+ModelM2BranchingInitiation, ModelM3ContrastiveAgency, ContrastiveSeparation),
+GAPMAP.md C39–C72/F1a/F1b.
 Impressão de axiomas:
 T11_choiceField — `{Means, Subject}` (herda de T5; C39 desacoplado de AxTwoSubjects);
 person_hasChoiceField — `{Means, Subject}` (PROVEN, campo de escolha, NÃO escolha genuína;
@@ -32,7 +49,17 @@ choiceField_exists — `{Means, Subject}` (PROVEN, C52, derivado de C68);
 noChoiceField_selfRefutes — `{Means, Subject}` (PROVEN, C53, retorsão performativa do campo);
 JUDGE_HAS_CHOICE_FIELD — `{AxTwoSubjects, Means, Subject}` (PROVEN↑, C54, via AxTwoSubjects h);
 judge_commits / rightWrongDistinction_implies_meaning — `CL + {AxTwoSubjects, Means, Subject}`;
-chooses_implies_freeWill — `{Means, Subject}` (só vocabulário), por definição;
+chooses_implies_freeWill / chooses_implies_freeSubject — `{Means, Subject}` (só vocabulário), por definição;
+freeSubject_implies_person — `{Means, Subject}` (definicional);
+deliberateChoice_negation_decomposition — `{Initiates, Means, State, Subject}`;
+AxIntentionalChoice — `{AxIntentionalChoice, Initiates, Means, State, Subject}` (SEM, axioma constitutivo adotado);
+genuineChoice_exists_of_act_constitutive, freeWill_exists_of_act, freeSubject_exists_of_act,
+freeWill_exists, freeSubject_exists — `{AxIntentionalChoice, Initiates, Means, State, Subject}` (PROVEN↑, F1b fechado);
+AxActPolarity, genuineChoice_exists_of_act, freeWill_exists_of_act_polarity — `{AxActPolarity, Initiates, Means, State, Subject}` (SEM, tese de polaridade contraditória opcional mais forte);
+act_polarity_implies_intentional_choice, intentional_choice_implies_contrastive,
+contrastive_implies_intentional_choice, act_polarity_implies_contrastive,
+contrastive_agency_implies_existential, genuineChoice_exists_of_contrastive_act,
+freeWill_exists_of_contrastive_act, freeSubject_exists_of_contrastive_act — `{Initiates, Means, State, Subject}` (pontes e reduções lógicas);
 incompatible_self_negation — nenhuma ({}); sorryAx: 0.
 
 Definições §8 (2026-09-16, versão literal Correct(A(s,p))):
@@ -72,24 +99,165 @@ Corpo: A(s,p) ∧ A(s,q) ∧ Incompatible(p,q) — ESCOLHA GENUÍNA: o agente co
 
 CanChoose(s,p)   := Dia(∃q Chooses(s,p,q))
 FreeWill(s)      := ∃p∃q Chooses(s,p,q)          [*liberdade: definicional a partir da escolha forte*]
+FreeSubject(s)   := FreeWill(s)                  [*sujeito livre: definicional a partir do livre-arbítrio*]
 chooses_implies_freeWill : Chooses(s,p,q) ⇒ FreeWill(s)   [{Means, Subject} só vocab — por definição]
+chooses_implies_freeSubject : Chooses(s,p,q) ⇒ FreeSubject(s)   [{Means, Subject} só vocab — por definição]
+freeSubject_implies_person : FreeSubject(s) ⇒ Person(s)   [{Means, Subject} definicional: sujeito livre acarreta pessoa]
 
-A cadeia e o seu fosso ontológico:
+A cadeia e o seu fecho ontológico:
 
-weak choice / choice-field → semantic selection (Selects, PROVEN) → deliberate choice / co-meaning (Chooses) → FreeWill
+weak choice / choice-field → semantic selection (Selects, PROVEN) → deliberate choice / co-meaning (Chooses) → FreeWill / FreeSubject
 
-O passo EM FALTA (F1b, BLOCKED) é a existência da escolha genuína:
+O fecho da existência da escolha genuína e do livre-arbítrio (F1b, PROVEN↑):
 
-    rejectedHornCoMeant : ∃s p, A(s,p) ∧ A(s,¬p)
+A tentativa de deduzir a escolha genuína a partir da teoria pré-A14 foi
+formalmente refutada ao nível de modelos: na teoria pré-A14 completa de Γ (12 axiomas),
+a ação intencional forte é formalmente ortogonal à escolha genuína (`act_orthogonal_to_genuine_choice_in_full_theory`).
+Logo a escolha genuína não é derivável de Strong Act na teoria pré-A14.
+Um evento pode ser mecânico ou causalmente involuntário (`act`); mas uma ação intencional (`Act s p`),
+enquanto ação intencional forte, é uma iniciação realizada através da apreensão/seleção de uma alternativa incompatível.
 
-(formalizado como def-proposição, nó BLOCKED.) Nada força um ato de significar
-p a vir com a significação de ¬p: `Means` é opaco e AxTwoSubjects dá dois
-sujeitos diferentes, cada um com um só conteúdo. `Chooses → FreeWill` é
-definicional; o que falta é o escolhedor. (Forma condicional em prosa:
-(∃s p, A(s,p)) → ∃s p, A(s,p) ∧ A(s,¬p).)
+Γ adota agora explicitamente a sua constitutividade como tese semântica substantiva (A14):
+> **A escolha genuína é constitutiva da ação intencional.**
+`AxIntentionalChoice : ∀ (s : Subject) (p : Prop), Act s p → ∃ q, Chooses s p q` (Tag: SEM).
+
+Distingue-se rigorosamente:
+1. `act(s, p)`: evento bruto realizado (emissão física, prolação) — `CountermodelWeakActWithoutMeaning`;
+2. `Act(s, p)`: iniciação intencional com significado (`Means s p ∧ ∃ w w', Initiates s w w' p`);
+3. `AxIntentionalChoice`: a escolha genuína é constitutiva da Ação Intencional Forte (Act), não do evento bruto (act);
+4. `Chooses(s, p, q)`: co-significação de alternativas incompatíveis em pensamento;
+5. `FreeWill(s)` / `FreeSubject(s)`: definidos a partir de Chooses.
+
+Cadeia constitutiva no kernel de Lean 4:
+∃ s p, Act s p
+    → ∃ s p q, Chooses s p q (genuineChoice_exists_of_act_constitutive)
+    → ∃ s, FreeWill s (freeWill_exists_of_act / freeWill_exists)
+    → ∃ s, FreeSubject s (freeSubject_exists_of_act / freeSubject_exists)
+todas provadas sob `{AxIntentionalChoice, Initiates, Means, State, Subject}`.
+
+Hierarquia entre AxIntentionalChoice e AxActPolarity:
+- `AxIntentionalChoice` é a formulação de agência contrastiva mínima suficiente: admite alternativas positivas incompatíveis (ex: Norte vs Leste, conforme provado em `ModelHierarchy.ContrastiveSeparation`), sem forçar a representação da negação contraditória ¬p.
+- `AxActPolarity` (`Act s p → Means s (¬p)`) é uma tese semântica opcional estritamente mais forte, exigindo especificamente a representação da negação contraditória.
+- Demonstrou-se no kernel que `AxActPolarity` acarreta estritamente `AxIntentionalChoice` (`act_polarity_implies_intentional_choice`), mas a recíproca não é forçada.
+
+Preservação dos Resultados de Independência:
+- Pre-A14 Γ ⊬ genuine choice (provado pelo modelo hostil `fullTheoryHostileInstance` e pelos teoremas `act_orthogonal_to_genuine_choice_in_full_theory`).
+- Pre-A14 Γ + AxIntentionalChoice ⊢ genuine choice (provado por `genuineChoice_exists_of_act_constitutive`).
+O modelo hostil permanece válido contra a teoria pré-A14 anterior, justificando a necessidade da adoção explícita de `AxIntentionalChoice` como compromisso semântico constitutivo.
+
+AUDITORIA EXAUSTIVA DAS SEIS FAMÍLIAS SEMÂNTICAS FUNDACIONAIS (Tentativas de Derivar A14):
+Investigou-se formalmente se o princípio A14 (AxIntentionalChoice) pode ser deduzido de noções intencionais mais primitivas:
+1. Família 1 (Intencionalidade Teleológica / Meios-Fins): REFUTADA POR MODELO HOSTIL.
+   `Act s p → ∃ g, Goal s g ∧ (p → g)` não acarreta `∃ q, Means s q ∧ Incompatible g q`.
+   Em semântica verídica (`hostileTeleologicalInstance`), o agente persegue um fim verdadeiro (`Goal false True`),
+   mas co-significar um corno incompatível falso exigiria `q ∧ ¬(True ∧ q) ≡ ⊥`.
+   Redefinir `Goal` para incluir alternativas contraditórias é DEFINITIONAL RECODING — REJECTED.
+2. Família 2 (Intencionalidade Sensível a Razões / Reason-Guided Agency): REFUTADA POR MODELO HOSTIL.
+   `ReasonFor s r p ∧ (r → p)` não acarreta representação de razões contrárias (`hostileReasonResponsiveInstance`).
+   Sensibilidade disposicional contrafactual através de mundos hipotéticos não povoa a mente com representações
+   ocurrentes no mundo real.
+3. Família 3 (Individuação da Ação sob Descrição / Anscombe-Davidson): REFUTADA POR MODELO HOSTIL.
+   Individuar o ato sob a descrição `p` (`Description s p`, `hostileActionIndividuationInstance`)
+   distingue-o de descrições não-intencionais sem forçar a representação de uma descrição incompatível `q`.
+4. Família 4 (Camada de Representação Não-Verídica / Entertains): REFUTADA POR MODELO HOSTIL.
+   Distinguir `Means` de uma faculdade representacional não-fáctiva `Entertains` permite entreter falsidades em princípio,
+   mas não força o sujeito a entreter alternativas incompatíveis (`hostileRepresentationLayerInstance`).
+5. Família 5 (Ação Contrafactual / Could-Have-Done-Otherwise): REFUTADA POR MODELO HOSTIL.
+   A ramificação física no espaço de estados (`CouldAct s q := ∃ w w', Initiates s w w' q`, Model M2)
+   não acarreta representação cognitiva intencional (`Means s q`).
+6. Família 6 (Intencionalidade Contrastiva): REDUZIDA A UMA PONTE SEMÂNTICA PROFUNDA / REDUNDANTE.
+   `contrastive_agency_principle` é logicamente equivalente a A14 (`contrastive_agency_equivalent_to_intentional_choice`),
+   sendo a ponte suficiente mais fraca identificada até ao momento dentro da família de candidatas auditada.
+
+Conclusão Ontológica: A escolha genuína não é derivável de componentes não-contrastivos da agência;
+a sua adoção como A14 (AxIntentionalChoice) é a ponte suficiente mínima identificada na família auditada.
+
+PRIMITIVE BOUNDARY: MEANS:
+- Status Formal: `Means : Subject → Prop → Prop` (PRIMITIVO / `Tag: VOCAB`).
+- Como formalizado, `Means` não possui estrutura interna além de emparelhar um sujeito com uma proposição.
+- Nenhum fecho, factividade, não-factividade, geração de alternativas ou representação contrastiva decorre puramente da relação em si.
+- Questão em aberto: Poderá `Means` ser reduzido a uma estrutura semântica mais primitiva sem codificar A14?
+- Conclusão da auditoria: NÃO. Qualquer tentativa de decomposição sem introduzir um novo axioma substantivo recai em mera renomeação (`Means := Represents`) ou em codificação tautológica de A14. A menor primitiva em falta abaixo de `Means` é uma faculdade de polaridade cognitiva (`Means s p → Means s (¬p)`), semanticamente equivalente a A13/A14 (`Tag: SEM`).
+
+A FRONTEIRA DE A14: O QUE A TEORIA EXISTENTE JÁ FORNECE VS. O ABISMO COGNITIVO:
+Para qualquer ato intencional forte `Act s p`, as definições analíticas e a lógica de Γ já fornecem:
+- `Means s p` (corno intencional por definição)
+- Iniciação física de movimento no espaço de estados (`∃ w w', Initiates s w w' p`)
+- `ChoiceField s p (¬p)` (campo objetivo em lógica pura via `Incompatible p (¬p)`)
+Contudo, `Act s p` isolado NÃO acarreta por si mesmo:
+- `¬ Act s (¬p)` (necessário para `Authors s p (¬p)`)
+- `Asserts s p` (necessário para `Selects s p (¬p)`)
+- `Means s (¬p)` nem `Means s q` para nenhum `q` incompatível.
+A proposição em falta que separa a ação da escolha genuína é unicamente:
+  `Act s p → ∃ q, Means s q ∧ Incompatible p q` (Representação Contrastiva).
+Como `Chooses s p q := Means s p ∧ Means s q ∧ Incompatible p q`, A14 é definicionalmente equivalente a esta ponte.
+Portanto:
+  Definições + Lógica ⊢ Act s p → ChoiceField s p (¬p)
+  Definições + Lógica ⊬ Act s p → ∃ q, Means s q ∧ Incompatible p q
+  ALTERNATIVA OBJETIVA (ChoiceField) ───X───> ALTERNATIVA COGNITIVA (Chooses / Means q)
+
+O CONTRASTE DEFINIDOR: A14 (ATO → ESCOLHA) VS. INVERSO DE A14 (ESCOLHA → ATO):
+- A14 (`Act s p → ∃ q, Chooses s p q`): Princípio semântico constitutivo adotado (`Tag: SEM`). Postula que a ação intencional envolve constitutivamente a faculdade cognitiva de escolha entre alternativas.
+- Inverso de A14 (`(∃ q, Chooses s p q) → Act s p`): REFUTADO POR MODELO HOSTIL (`ContemplationWithoutActionModel.universal_reverse_a14_refuted` e `existential_reverse_a14_refuted`). A escolha genuína e o livre-arbítrio são faculdades cognitivas/deliberativas (`Means s p ∧ Means s q ∧ Incompatible p q`) que não exigem execução ou iniciação causal física (`Initiates s w w' p`). Um sujeito pode escolher e deliberar em puro pensamento contemplativo sem agir no mundo físico.
+Conclusão filosófica: A escolha genuína não acarreta execução. Escolha cognitiva e ação intencional são fenômenos ontologicamente distintos.
+
+RECONSTRUÇÃO ONTOLÓGICA DA ESCOLHA: DETERMINAÇÃO EXECUTIVA VS. DELIBERAÇÃO:
+- Deliberação / Representação Contrastiva (`Deliberates s p q := Means s p ∧ Means s q ∧ Incompatible p q`): Media a faculdade puramente cognitiva de contemplação dual em pensamento (legado `Chooses`).
+- Escolha Executiva (`Choice s p := Selects s p (¬p)` e `AuthorshipChoice s p := Authors s p (¬p)`): O ato de determinação/seleção semântica em que o agente assere/executa $p$ e exclui $\neg p$.
+- Retorção Performativa da Negação da Escolha (`selfDenialOfExecutiveChoice_selfRefutes`): A asserção "Esta asserção não possui Escolha" (`Asserts s p ∧ (p ↔ ¬ Choice s p)`) é uma CONTRADIÇÃO PERFORMATIVA GENUÍNA (`SelfDenialOfExecutiveChoice s p → False`), pois o próprio ato de asserir instancia a determinação `Choice s p`, refutando o conteúdo da negação!
+
+AUDITORIA DA ESCOLHA LIVRE AUTO-REFERENCIAL (CANDIDATAS A, B, C, D):
+- Candidata A (Escolha Genuína Auto-Asserida): Sob asserção fáctica (`Asserts s p`), deriva escolha por desprendimento definicional (`selfAssertedChoice_factive_implies_chooses`). Sob ação não-fáctica (`Act s p`), o agente profere falsamente que escolhe num mundo determinista (REFUTADO POR MODELO HOSTIL, `DelusionalSelfChoiceModel.nonfactive_self_choice_not_derives_choice`).
+- Candidata B (Autoria Auto-Asserida): Autoria executiva não força representação do corno rejeitado (`Single.authors_not_entails_rejected_horn_meaning`).
+- Candidata C (Escolha Deliberada Auto-Asserida): Sob asserção fáctica, deriva escolha por desprendimento (`selfAssertedDeliberateChoice_factive_implies_chooses`); sob ação não-fáctica, falha por auto-atribuição falsa.
+- Candidata D (Paradoxo Auto-Referencial): $p$ é logicamente falso (`selfAssertedParadox_is_false`). A asserção fáctica é auto-refutante (`selfAssertedParadox_not_assertable`), mas a emissão não-fáctica de falsidades não instancia escolha.
+Conclusão: A auto-referência positiva apenas deriva a escolha se a auto-atribuição for previamente admitida como verdadeira (fáctica), o que não pode ser generalizado a um ato genérico (`Act s p`) sem assumir A14.
+
+AUDITORIA DA NEGAÇÃO AUTO-REFERENCIAL DA ESCOLHA:
+- Testou-se se asserir auto-referencialmente a ausência de escolha (`SelfDenialOfChoice s p := Act s p ∧ (p ↔ ∀ q, ¬ Chooses s p q)`) força a escolha por retorção performativa.
+- Resultado: REFUTADO POR MODELO HOSTIL (`SelfDenialOfChoiceModel.self_denial_not_derives_choice`).
+- Em semântica verídica, $p = (\forall q, \neg \text{Chooses}(s, p, q))$ é estritamente verdadeiro; o sujeito significa e profere $p$ com verdade, e de facto não possui escolha alguma. Negar a escolha exige apenas agir (`Act`), não escolher (`Chooses`).
+- A auto-referência não ultrapassa A14; derivar a escolha a partir da negação da escolha requer a adoção prévia da bilateralidade cognitiva (`AxActPolarity` / A13).
+
+AUDIT DO DADO PERFORMATIVO INICIAL:
+- Dado formal atual: `∃ s p, Act s p`
+- Pergunta: É esta a expressão formal completa da evidência performativa, ou contém o dado intencional original estrutura adicional?
+- Estado: AUDITADO. O ponto de partida experienciado em `base.txt` (§0–§1) abrange pensar, asserir, julgar e duvidar. Asserção forte (`Asserts`) e julgamento (`Correct/Incorrect`) derivam seleção semântica objetiva (`Selects s p (¬p)`), mas nenhuma candidata genérica ao dado performativo acarreta a representação cognitiva do corno rejeitado (`Means s q`).
+- Restrição: Nenhum fortalecimento é permitido meramente para fazer funcionar a prova de A14. Qualquer enriquecimento do dado tem de ser independentemente justificado pelo facto performativo experienciado.
+
+AUDITORIA DE CIRCULARIDADE DEFINICIONAL & SEPARAÇÃO DE QUATRO FENÔMENOS:
+1. Recodificações Definicionais Rejeitadas:
+   - `RelationalIntentionality s p q` e `SettlesOn s p q` continham `Chooses`/`DeliberateChoice` por definição.
+     A sua implicação para a escolha genuína é tautológica e foi devidamente exposta e desqualificada como derivação.
+2. Predicados Genuinamente Primitivos:
+   - `Authors s p q := Act s p ∧ Incompatible p q ∧ ¬ Act s q`: autoria executiva sem representação do corno rejeitado.
+   - `TeleologicalAct`, `ReasonResponsiveAct`, `CounterfactualAct`: mantidos como estruturas primitivas autônomas cuja implicação a `Chooses` depende estritamente de A14.
+3. Separação Rigorosa de Quatro Fenômenos de Agência:
+   - Desfecho Causal (`CausalSettles`): transição de estados sem conteúdo mental (`CountermodelWeakActWithoutMeaning`).
+   - Contemplação sem Desfecho (`ContemplatesWithoutSettling`): co-significação mental de alternativas sem ação física (`ContemplationWithoutActionModel`).
+   - Seleção/Autoria sem Alternativas (`Authors` / `Selects`): determinação executiva de p sem pensar em q (`Single`).
+   - Escolha Genuína / Autoria Deliberada (`DeliberateAuthorship` / `Chooses`): compromisso com alternativas cognitivamente co-significadas.
+4. Três Níveis de Constitutividade em Γ:
+   - Constitutivo por Definição: `FreeWill` a partir de `Chooses`.
+   - Constitutivo por Axioma Semântico: `AxIntentionalChoice` (A14, compromisso substantivo de Γ).
+   - Constitutivo por Derivação: `ChoiceField` a partir de `Act`; `Selects` a partir de `Asserts`.
+
+TEOREMA DE ORTOGONALIDADE DA AÇÃO E ESCOLHA GENUÍNA (Act ⟂ Chooses na teoria pré-A14):
+Demonstrou-se no kernel de Lean 4 que sob todos os 12 axiomas pré-A14 de Γ reunidos:
+- act_orthogonal_to_genuine_choice_in_full_theory: ∃ s p, Act s p NÃO acarreta ∃ s p q, Chooses s p q.
+- act_orthogonal_to_freewill_in_full_theory: ∃ s p, Act s p NÃO acarreta ∃ s, FreeWill s.
+- act_orthogonal_to_contrastive_agency_in_full_theory: Act s p NÃO acarreta agência contrastiva.
+A escolha genuína não é derivável na teoria pré-A14; sob o princípio constitutivo semântico adotado `AxIntentionalChoice` (A14), derivam-se no kernel:
+- `genuineChoice_exists_of_act_constitutive (h : ∃ s p, Act s p) : genuineChoice_exists` (`{AxIntentionalChoice, Initiates, Means, State, Subject}`)
+- `freeWill_exists_of_act (h : ∃ s p, Act s p) : ∃ s, FreeWill s` (`{AxIntentionalChoice, Initiates, Means, State, Subject}`)
+- `freeWill_exists (h : ∃ s p, Act s p) : ∃ s, FreeWill s` (`{AxIntentionalChoice, Initiates, Means, State, Subject}`)
+E sob a tese opcional mais forte de polaridade contraditória `AxActPolarity` (A13):
+- `freeWill_exists_of_act_polarity (h : ∃ s p, Act s p) : ∃ s, FreeWill s` (`{AxActPolarity, Initiates, Means, State, Subject}`)
+Logo F7 está DERIVADO / DISSOLVIDO em F1b via `A13 → A14 → FreeWill`.
+Assim, a escolha genuína e o livre-arbítrio estão demonstrados a partir do dado performativo do ato e de AxIntentionalChoice.
 
 Teoremas kernel-verificados (a cadeia §2 de IM_STUPID.md fecha para a
-existência do CAMPO de escolha; a escolha genuína é F1b, bloqueada):
+existência do CAMPO de escolha; a escolha genuína é F1b, PROVEN↑ sob AxIntentionalChoice):
 
 - person_hasChoiceField: Person(s) ⇒ ∃p∃q ChoiceField(s,p,q) — sujeito ⇒ campo.
 - rightWrong_implies_meaning / rightDistinctWrong_implies_meaning (§8/poem P3):
@@ -103,28 +271,43 @@ existência do CAMPO de escolha; a escolha genuína é F1b, bloqueada):
   — "há certo e errado ⇒ há alguém para quem algo significar" (C61,
   `{}`); a metade "significado ⇒ sujeito" é analítica
   meaning_needs_subject / meaning_I_needs_subject (C49, `{}`).
-- choiceField_exists: ∃s∃p∃q ChoiceField(s,p,q) — o campo é real (via T5).
-- asserts_selects: Asserts(s,p) ⇒ Selects(s,p,¬p) — qualquer asserção é seleção semântica contra a sua negação ({Means, Subject}).
-- asserts_selects_all_incompatible: Asserts(s,p) ∧ Incompatible(p,q) ⇒ Selects(s,p,q) — asserção seleciona contra qualquer alternativa ({Means, Subject}).
-- selection_exists: (∃s p, Asserts(s,p)) ⇒ ∃s p q, Selects(s,p,q) — existência de seleção semântica ({Means, Subject}).
-- no_selection_no_assertion: (∀q, ¬ Selects(s,p,q)) ⇒ ¬ Asserts(s,p) — sem seleção não há asserção ({Means, Subject}).
-- deliberateChoice_implies_selects: DeliberateChoice(s,p,q) ⇒ Selects(s,p,q) (C97, `{Means, Subject}`) — escolha deliberativa acarreta seleção.
-- deliberateChoice_implies_chooses: DeliberateChoice(s,p,q) ⇒ Chooses(s,p,q) (C98, `{Means, Subject}`) — escolha deliberativa acarreta escolha co-significada.
-- deliberateChoice_iff_selects_and_means: DeliberateChoice(s,p,q) ↔ Selects(s,p,q) ∧ Means(s,q) (C100, `{Means, Subject}`) —
+- choiceField_exists: ∃s∃p∃q ChoiceField(s,p,q) — o campo é real (via T5; `{Initiates, Means, State, Subject}`).
+- asserts_selects: Asserts(s,p) ⇒ Selects(s,p,¬p) — qualquer asserção é seleção semântica contra a sua negação ({Initiates, Means, State, Subject}).
+- asserts_selects_all_incompatible: Asserts(s,p) ∧ Incompatible(p,q) ⇒ Selects(s,p,q) — asserção seleciona contra qualquer alternativa ({Initiates, Means, State, Subject}).
+- selection_exists: (∃s p, Asserts(s,p)) ⇒ ∃s p q, Selects(s,p,q) — existência de seleção semântica ({Initiates, Means, State, Subject}).
+- no_selection_no_assertion: (∀q, ¬ Selects(s,p,q)) ⇒ ¬ Asserts(s,p) — sem seleção não há asserção ({Initiates, Means, State, Subject}).
+- deliberateChoice_implies_selects: DeliberateChoice(s,p,q) ⇒ Selects(s,p,q) (C97, `{Initiates, Means, State, Subject}`) — escolha deliberativa acarreta seleção.
+- deliberateChoice_implies_chooses: DeliberateChoice(s,p,q) ⇒ Chooses(s,p,q) (C98, `{Initiates, Means, State, Subject}`) — escolha deliberativa acarreta escolha co-significada.
+- deliberateChoice_iff_selects_and_means: DeliberateChoice(s,p,q) ↔ Selects(s,p,q) ∧ Means(s,q) (C100, `{Initiates, Means, State, Subject}`) —
   decomposição exata: deliberação é seleção semântica mais representação/consciência da alternativa rejeitada.
-- deliberateChoice_iff_selects_and_rejects: DeliberateChoice(s,p,q) ↔ Selects(s,p,q) ∧ Rejects(s,q) ({Means, Subject}) —
+- deliberateChoice_iff_selects_and_rejects: DeliberateChoice(s,p,q) ↔ Selects(s,p,q) ∧ Rejects(s,q) ({Initiates, Means, State, Subject}) —
   onde Rejects(s,q) := Means(s,q) ∧ ¬ Asserts(s,q) formaliza a rejeição ativa.
-- deliberateChoice_negation_iff: Asserts(s,p) → (DeliberateChoice(s,p,¬p) ↔ Means(s,¬p)) ({Means, Subject}) —
+- deliberateChoice_negation_iff: Asserts(s,p) → (DeliberateChoice(s,p,¬p) ↔ Means(s,¬p)) ({Initiates, Means, State, Subject}) —
   para alternativas contraditórias, deliberar equivale estritamente à conceção da negação.
 - deliberateGenuineChoiceResource : Prop := ∃ s : Subject, ∃ p : Prop, Asserts s p ∧ Means s (¬p) —
-  a obstrução mínima exata de F1b: a existência de uma verdade assertada cuja negação é simultaneamente concebida.
-- genuineChoice_exists_of_assertion_and_negation_meaning: deliberateGenuineChoiceResource → genuineChoice_exists ({Means, Subject}) —
+  o recurso deliberativo mínimo suficiente para provar F1b; a sua existência permanece em aberto.
+- deliberate_resource_implies_genuine_choice: deliberateGenuineChoiceResource → genuineChoice_exists ({Initiates, Means, State, Subject}) —
   teorema de fecho: se a asserção vem acompanhada da conceção da negação, a escolha genuína e a liberdade estão provadas.
-- selection_exists_of_act: act_implies_asserts_bridge → (∃s p, Act(s,p)) ⇒ ∃s p q, Selects(s,p,q) (C99, `{Means, Subject}`) — seleção sob a ponte de asserção.
+- Doubts: Doubts(s,p) := Means(s,p) ∧ Means(s,¬p) — a dúvida cartesiana rende imediatamente escolha genuína (genuineChoice_of_doubt, {Means, Subject}) e liberdade (freeWill_of_doubt, {Means, Subject}).
+- selection_exists_of_act: act_implies_asserts_bridge → (∃s p, Act(s,p)) ⇒ ∃s p q, Selects(s,p,q) (C99, `{Initiates, Means, State, Subject}`) — seleção sob a ponte de asserção.
 - noChoiceField_selfRefutes: ¬(∃s∃p∃q ChoiceField(s,p,q)) ⇒ False — negar o
-  campo é um ato de campo (transcendental).
+  campo é um ato de campo ({Initiates, Means, State, Subject}).
 - JUDGE_HAS_CHOICE_FIELD e judge_commits: sem certo e errado não há campo de
   escolha — o juiz (§8) tem um campo (a escolha genuína é bloqueada).
+
+DISTINÇÃO CONCETUAL DOS SEIS NÍVEIS DE AGÊNCIA:
+1. ChoiceField(s,p,q) := Means(s,p) ∧ Incompatible(p,q) — alternativas disponíveis ao sujeito;
+2. Selects(s,p,q) := Asserts(s,p) ∧ Incompatible(p,q) ∧ ¬ Asserts(s,q) — uma alternativa é selecionada por asserção;
+3. Rejects(s,q) := Means(s,q) ∧ ¬ Asserts(s,q) — uma alternativa é concebida em pensamento mas não asserida;
+4. DeliberateChoice(s,p,q) := Selects(s,p,q) ∧ Rejects(s,q) — seleção de p mais representação intencional da alternativa q;
+5. Chooses(s,p,q) := Means(s,p) ∧ Means(s,q) ∧ Incompatible(p,q) — critério formal do projeto para escolha genuína (co-significação);
+6. Doubts(s,p) := Means(s,p) ∧ Means(s,¬p) — conceção simultânea de p e ¬p em dúvida cartesiana (rende Chooses(s,p,¬p)).
+
+NOTA ARQUITETURAL SOBRE A DEFINIÇÃO DE CHOOSES:
+A tentativa de definir a escolha de forma assimétrica como Chooses_asym(s,p,q) := Means(s,p) ∧ Means(s,¬q) ∧ Incompatible(p,q)
+falha por colapso de dupla negação: para o caso contraditório q := ¬p, ¬(¬p) ↔ p colapsa em Means(s,p) ∧ Incompatible(p,¬p),
+que é identicamente ChoiceField(s,p,¬p), dissolvendo a exigência do segundo corno e destruindo a separação com os modelos hostis.
+A escolha genuína exige portanto co-significação estrita: Means(s,p) ∧ Means(s,q) ∧ Incompatible(p,q).
 
 FREEDOM — F1 (reparado 2026-09-18; semântica hostil e alternatividade):
 CLASSIFICAÇÃO ONTOLÓGICA DAS PASSAGENS:
@@ -138,18 +321,12 @@ CLASSIFICAÇÃO ONTOLÓGICA DAS PASSAGENS:
   só vocabulário). A liberdade
   não é um passo metafísico a partir do ato bruto; é a própria existência de
   uma escolha genuína.
-- O campo (`ChoiceField`, person_hasChoiceField, choiceField_exists) e a seleção (`Selects`, asserts_selects) são teoremas; o
-  que fica OPEN é a *existência* da escolha genuína (F1b), agora estritamente reduzida à fórmula mínima:
-  `∃ s p, Asserts s p ∧ Means s (¬p)`.
-- Veredito hostil 2026-09-18 (opção 3 — bloqueio irreducível sob os primitivos
-  `{Means, Subject}`): `genuineChoice_requires_error_possibility`
-  (veridicalidade mata co-significação), `assertion_consistency` /
-  `no_one_asserts_incompatible_pair` (assertir é de um-corno-só por definição),
-  `rejectedHornCoMeant_implies_genuineChoice` (fronteira mínima), e
-  `CountermodelVeridicalMeaning` + `not_entails_genuine_choice(_with_plurality)`
-  (`{}` — datum, pluralidade, certo/errado, judge_commits e falibilidade valem
-  com escolha vazia). Premissas substantivas candidatas (`AxCoMeaningNegation`,
-  co-sujeito `Incorrect∧Denies`, auto-representação) registadas, NÃO
-  introduzidas.
-- O nível-mundos (F7, `ChoiceAt : World → Subject → Prop → Prop`) permanece a
-  ponte SEM futura, secundária. Ver formal/GAPMAP.md F1a/F1b.
+- O campo (`ChoiceField`, person_hasChoiceField, choiceField_exists) e a seleção (`Selects`, asserts_selects) são teoremas; a
+  *existência* da escolha genuína e do livre-arbítrio (F1b) é provada (PROVEN↑) sob o princípio constitutivo semântico adotado
+  `AxIntentionalChoice : ∀ s p, Act s p → ∃ q, Chooses s p q` (SEM / A14), gerando `freeWill_exists` sob `{AxIntentionalChoice, Initiates, Means, State, Subject}`.
+- A tese de polaridade contraditória mais forte `AxActPolarity : ∀ s p, Act s p → Means s (¬ p)` (SEM / A13) acarreta estritamente `AxIntentionalChoice` (`act_polarity_implies_intentional_choice`), gerando `freeWill_exists_of_act_polarity` sob `{AxActPolarity, Initiates, Means, State, Subject}`.
+- Veredito hostil e resolução: `CountermodelVeridicalMeaning` e `fullTheoryHostileInstance` demonstraram formalmente que
+  a escolha genuína não é derivável da agência bruta na teoria pré-A14 (`act_orthogonal_to_genuine_choice_in_full_theory`).
+  A adoção de `AxIntentionalChoice` fecha F1b como compromisso constitutivo semântico explícito da agência intencional forte.
+- F7 (livre-arbítrio sob AxActPolarity) fica DERIVADO / DISSOLVIDO em F1b via `A13 → A14 → FreeWill`.
+  O nível-mundos (`ChoiceAt : World → Subject → Prop → Prop`) permanece a ponte SEM futura e secundária.

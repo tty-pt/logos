@@ -405,10 +405,12 @@ A passagem de escolha forte para liberdade é puramente **definicional**:
 chooses_implies_freeWill : Chooses(s,p,q) ⇒ FreeWill(s)   [{Means, Subject} só vocabulário]
 
 A liberdade não é um passo metafísico adicional a partir da escolha genuína; é a sua própria definição formal.
-Contudo, precisamente porque `ChoiceField ↛ Chooses`, a *existência* incondicional de um sujeito livre
-permanece estritamente BLOQUEADA no lema em falta (F1b):
+A *existência* de escolha genuína e do livre-arbítrio (F1b) é provada (PROVEN↑) sob a adoção do princípio constitutivo semântico:
 
-    rejectedHornCoMeant : ∃s p, A(s,p) ∧ A(s,¬p)
+    AxIntentionalChoice : ∀ (s : Subject) (p : Prop), Act s p → ∃ q, Chooses s p q
+
+(Tag: SEM; escolha constitutiva da ação intencional forte), derivando o teorema `freeWill_exists (h : ∃ s p, Act s p) : ∃ s, FreeWill s` sob `{AxIntentionalChoice, Initiates, Means, State, Subject}`.
+A tese de polaridade contraditória mais forte `AxActPolarity : ∀ (s : Subject) (p : Prop), Act s p → Means s (¬ p)` (Tag: SEM / A13) acarreta estritamente `AxIntentionalChoice` via `act_polarity_implies_intentional_choice`.
 
 (Nota formal, reparada 2026-09-18 — freedom/choice fix): a versão anterior
 usava `Chooses(s,p,q) := A(s,p) ∧ Incompatible(p,q)`. Como
@@ -425,38 +427,32 @@ determinada*, não uma escolha. A reparação separa o vocabulário:
     contrapositivo: no_selection_no_assertion; pegada `{Means, Subject}`, só vocabulário);
   * DeliberateChoice(s,p,q) := Means(s,p) ∧ Means(s,q) ∧ Incompatible(p,q) ∧ Asserts(s,p) ∧ ¬ Asserts(s,q) —
     **escolha deliberativa**: o agente concebe ambos os cornos em pensamento, mas compromete-se com apenas um
-    (acarreta seleção semântica C97 e escolha co-significada C98; `{Means, Subject}`);
-    teorema de decomposição exata (C100, `{Means, Subject}`): `DeliberateChoice(s,p,q) ↔ Selects(s,p,q) ∧ Means(s,q)`
+    (acarreta seleção semântica C97 e escolha co-significada C98; `{Initiates, Means, State, Subject}`);
+    teorema de decomposição exata (C100, `{Initiates, Means, State, Subject}`): `DeliberateChoice(s,p,q) ↔ Selects(s,p,q) ∧ Means(s,q)`
     (deliberação é seleção mais representação da alternativa; sob `Rejects(s,q) := Means(s,q) ∧ ¬ Asserts(s,q)`,
     equivale a seleção com rejeição ativa; para `q = ¬p`, reduz-se estritamente a `Means(s,¬p)`);
-  * Chooses(s,p,q) := A(s,p) ∧ A(s,q) ∧ Incompatible(p,q) — **escolha genuína** (escolha forte):
+  * Rejects(s,q) := Means(s,q) ∧ ¬ Asserts(s,q) — **rejeição ativa**: conceber a alternativa em pensamento sem a asserir;
+  * Chooses(s,p,q) := Means(s,p) ∧ Means(s,q) ∧ Incompatible(p,q) — **escolha genuína** (escolha forte):
     o agente co-significa ambos os cornos incompatíveis (§14);
+  * Doubts(s,p) := Means(s,p) ∧ Means(s,¬p) — **dúvida cartesiana**: conceção simultânea de p e da sua negação
+    (teorema genuineChoice_of_doubt: `Doubts(s,p) → Chooses(s,p,¬p)`, pegada `{Means, Subject}`);
   * FreeWill(s) := ∃p q, Chooses(s,p,q) — a liberdade é **definicional**
     (chooses_implies_freeWill, pegada `{Means, Subject}`, só vocabulário): não é um passo metafísico
     adicional a partir da escolha genuína;
-  * selection_exists_of_act (C99, `{Means, Subject}`) — o ato genérico só acarreta seleção sob a ponte semântica
+  * selection_exists_of_act (C99, `{Initiates, Means, State, Subject}`) — o ato genérico só acarreta seleção sob a ponte semântica
     explícita act_implies_asserts_bridge;
-  * act_iff_asserts_or_incorrect (C101, `{Means, Subject, CL}`) — todo ato intencional é ou asserção verídica
+  * act_iff_asserts_or_incorrect (C101, `{Initiates, Means, State, Subject, CL}`) — todo ato intencional é ou asserção verídica
     ou juízo incorreto (`A(s,p) ↔ Asserts(s,p) ∨ Incorrect(s,p)`).
 
-O passo em falta para a escolha genuína e livre-arbítrio (F1b, OPEN) está agora estritamente reduzido
-à sua fórmula mínima deliberativa:
+O passo da escolha genuína e livre-arbítrio (F1b, PROVEN↑) fecha-se através do princípio constitutivo semântico adotado `AxIntentionalChoice`:
 
-    deliberateGenuineChoiceResource :
-      ∃ s : Subject, ∃ p : Prop, Asserts s p ∧ Means s (¬p)
+    AxIntentionalChoice : ∀ (s : Subject) (p : Prop), Act s p → ∃ q, Chooses s p q
 
-(formalizado em `formal/Logos/Choice.lean`; teorema de fecho provado:
-`genuineChoice_exists_of_assertion_and_negation_meaning : deliberateGenuineChoiceResource → genuineChoice_exists`
-com pegada `{Means, Subject}`, só vocabulário). Por `deliberateChoice_negation_iff`, asserir uma verdade
-e simultaneamente conceber a sua negação é estritamente equivalente a deliberação contraditória
-(`DeliberateChoice s p (¬p)`), a qual acarreta escolha genuína (`Chooses s p (¬p)`) e liberdade (`FreeWill s`).
-A razão pela qual F1b permanece em aberto no dado performativo isolado é que nem a asserção nem a seleção
-semântica forçam a mente a conceber a negação: `Selects s p (¬p) ↛ Means s (¬p)` e `Asserts s p ↛ Means s (¬p)`
-são ambos teoremas demonstrados em `CountermodelVeridicalMeaning.Single` (`HostileSemantics.lean`).
-Nada obriga um ato de significação a vir com a significação da sua negação: `Means` é opaco e AxTwoSubjects
-dá dois sujeitos diferentes, cada um com um só conteúdo. A *existência* de um escolhedor genuíno
-fica assim circunscrita com rigor máximo: basta uma única asserção cuja negação seja pensada. O `ChoiceAt : World → Subject → Prop → Prop`
-(nível-mundos, F7) permanece a ponte SEM futura e secundária.
+Com este princípio, o ato de iniciação de movimento `Act s p` acarreta constitutivamente a co-significação de uma alternativa incompatível `Chooses s p q` e deriva `FreeWill s` (`freeWill_exists` sob `{AxIntentionalChoice, Initiates, Means, State, Subject}`).
+A tese opcional mais forte de polaridade `AxActPolarity : ∀ (s : Subject) (p : Prop), Act s p → Means s (¬p)` fecha igualmente o livre-arbítrio (`freeWill_exists_of_act_polarity`).
+Na teoria pré-A14 sem A14, a escolha genuína é formalmente ortogonal à ação intencional forte (`act_orthogonal_to_genuine_choice_in_full_theory`).
+Logo a escolha genuína não é derivável da agência bruta pré-A14 e é adotada como compromisso semântico constitutivo. O `ChoiceAt : World → Subject → Prop → Prop`
+(nível-mundos, F7) permanece a ponte SEM futura e secundária, estando F7 dissolvido em F1b.
 Cautela (C1): o alias `Dia` prop-level é a dupla negação clássica sob o modelo
 identidade; não reintroduzir liberdade a partir de `Act`.)
 
@@ -1084,10 +1080,10 @@ T11 (campo da escolha) — PROVEN (reparado 2026-09-18: é o *campo*, não a
   — PROVEN; ver VOCAB.md), choiceField_exists,
   noChoiceField_selfRefutes (negar o campo é um ato de campo),
 JUDGE_HAS_CHOICE_FIELD/judge_commits (sem certo e errado não há campo de
-  escolha). A escolha genuína `Chooses(s,p,q) := A(s,p) ∧ A(s,q) ∧
+  escolha). A escolha genuína `Chooses(s,p,q) := Means(s,p) ∧ Means(s,q) ∧
   Incompatible(p,q)` e a liberdade definicional `FreeWill(s) := ∃p q, Chooses`
   (chooses_implies_freeWill, `{Means, Subject}`, só vocabulário) estão em Choice.lean; a sua *existência*
-  permanece bloqueada em `rejectedHornCoMeant` (F1b) — ver
+  está provada (PROVEN↑) sob o princípio constitutivo semântico AxIntentionalChoice (Choice.freeWill_exists sob {AxIntentionalChoice, Initiates, Means, State, Subject}) — ver
    theorems/T11.txt e formal/GAPMAP.md C49–C57/F1b.
 T12 (mais do que uma pessoa) — PROVEN↑ sob a ponte META `AxTwoSubjects`:
   a pluralidade exige uma ponte metafísica, demonstrada indispensável pelo
@@ -1167,18 +1163,17 @@ Ponte independente da pessoalidade #9 — `Ground(e, traço pessoal) → Persona
   procurando uma derivação sem `AxPersonalGround` (T8).
 O alvo central (#8) é `NecessaryEntity(e) ∧ Ground(e,τ)` sem `AxGlobalGround`;
   e o alvo final (#10) `∃e (NecessaryEntity(e) ∧ Personal(e))`.
-Escolha genuína / liberdade (F1b; reparado 2026-09-18) — a liberdade é
+Escolha genuína / liberdade (F1b; reparado e provado 2026-09-18) — a liberdade é
   DEFINICIONAL a partir da escolha genuína (`FreeWill(s) := ∃p q,
   Chooses(s,p,q)`; chooses_implies_freeWill, `{Means, Subject}`, só vocabulário): escolha → liberdade não é
-  um passo metafísico. O que falta é a *existência* de uma escolha genuína,
-  i.e. que o agente co-signifique também o corno rejeitado:
-  `rejectedHornCoMeant : (∃s p, A(s,p)) → ∃s p, A(s,p) ∧ A(s,¬p)`.
-  `Means` é opaco e AxTwoSubjects dá dois sujeitos diferentes, cada um com um
-  só conteúdo — daí o BLOCKED. As antigas testemunhas fabricadas
-  (freeWillOrigin, judgeIsFree, originFreedomSelfRefutes, noFreeWillPosited —
-  C69–C72) estão RETIRADAS sob semântica hostil. O nível-mundos
-  (F7) permanece a ponte SEM futura e secundária
-  (ChoiceAt : World → Subject → Prop → Prop).
+  um passo metafísico. A *existência* de escolha genuína e de livre-arbítrio é provada
+  (PROVEN↑) sob o princípio constitutivo semântico adotado `AxIntentionalChoice : ∀ s p, Act s p → ∃ q, Chooses s p q`
+  (SEM / A14), gerando `Choice.freeWill_exists` sob `{AxIntentionalChoice, Initiates, Means, State, Subject}`.
+  A tese de polaridade contraditória mais forte `AxActPolarity : ∀ s p, Act s p → Means s (¬ p)`
+  acarreta estritamente `AxIntentionalChoice`. A não-derivação na teoria pré-A14
+  foi demonstrada por `act_orthogonal_to_genuine_choice_in_full_theory` e `CountermodelVeridicalMeaning`.
+  As antigas testemunhas fabricadas (freeWillOrigin, judgeIsFree, originFreedomSelfRefutes, noFreeWillPosited —
+  C69–C72) continuam RETIRADAS sob semântica hostil. F7 está derivado/dissolvido em F1b via A13 → A14 → FreeWill.
 Good (o bem como objeto moral da relação) — DEFERRED/F2, passo de
   normatividade lógica (§20) a bem, em conexão com T12/T13.
 Trinity — DEFERRED, sem argumento (§28/§29).
