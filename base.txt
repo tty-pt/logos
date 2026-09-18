@@ -84,32 +84,30 @@ um ato forte sem sujeito (`CountermodelActWithoutSubject`, formalizando a objeç
 Lichtenberg "es denkt") é impossível unicamente pela definição constitutiva de `Act`
 (`countermodel_violates_constitutive_act`). Da mesma forma, demonstra-se que ser sujeito
 de um ato não implica logicamente ser pessoa sob predicados substantivos independentes
-(`CountermodelSubjectWithoutPerson`), sendo a ponte `Subject → Person` em Logos uma
-consequência definicional da redução estrutural de §12 (`Person.person_of_subject`).
+(`CountermodelSubjectWithoutPerson`). Na ontologia endurecida, o ato deriva estritamente
+o Sujeito Intencional (`IntentionalSubject`), enquanto a pessoalidade substantiva permanece
+um predicado independente (`Act → Person` é OPEN; `Person.lean`).
 O inventário de axiomas é rigorosamente auditado com Tags explícitas
 (VOCAB, SEM, META). Pegada estrita da base: `{act, Means, Subject}`. Ver THOUGHTS.md e formal/GAPMAP.md.
 
-(Nota formal, fronteira da pessoa — C24, 2026-09-18): sob as definições correntes,
-a cadeia `Act → SubjectExists → Intentional → Person` é uma cadeia de **identidades
-definicionais**: `Act s p := Means s p`, `SubjectExists s := ∃p, Act s p`,
-`Intentional s := ∃p, Means s p`, e `Person s := Agent s ∧ Rational s ∧ Intentional s`
-com `Agent := True` e `Rational := True` (logo `Person s = ∃p, Means s p`). Os lemas-ponte
-em `formal/Logos/Person.lean` (`act_implies_intentional`,
-`subjectExists_implies_intentional`, `intentional_implies_subjectExists`,
-`person_intentional_iff`) tornam a identidade explícita em vez de a esconder dentro de
-`person_of_act`. **Derivabilidade formal ≠ neutralidade semântica da definição**: C24
-(`T5_personExists`) é teorema-válido, mas o §12 é um compromisso constitutivo — o rótulo
-"pessoa" aplica-se por definição ao sujeito significador atualizado
-(`∃p, Means s p`); a pessoa **substantiva** (deliberação, responsabilidade,
-auto-reflexão, agência autónoma, escolha racional, agência moral) **não é estabelecida**
-pelo datum performativo. Os contramodelos da Parte A2 de HostileSemantics
-(`not_entails_substantive_person`, `not_entails_substantive_rationality`,
-`not_entails_substantive_intentionality`, `not_entails_substantive_autonomy`,
-`{}` — cada um com modelo Unit distinto que preserva os demais predicados)
-atacam apenas essas leituras substantivas; nenhum ataca a identidade §12 (é um facto das definições).
-O downstream C39/C52/C77/C92 usa C24 só no sentido fraco (`∃p, Means s p`);
-a forma mais forte válida é a reancoragem em `SubjectExists`/`Intentional`, sem
-redefinição silenciosa.
+(Nota formal, fronteira da pessoa e da intencionalidade — C24, endurecimento ontológico):
+A ontologia de Logos distingue rigorosamente o Sujeito Intencional (`IntentionalSubject s := ∃ p, Means s p`)
+da Pessoa Substantiva (`Person s := IntentionalSubject s ∧ SubstantivePerson s`).
+O ato performativo deriva com rigor lógico e estrito o sujeito intencional:
+`Act s p → IntentionalSubject s` (`act_implies_intentionalSubject`, `{Means, Subject}`).
+Contudo, a pessoalidade substantiva (`SubstantivePerson`) NÃO é forçada pelo datum:
+os contramodelos de HostileSemantics e HardenedInvariance (`not_entails_substantive_person`,
+`not_entails_substantive_rationality`, `{}`) refutam formalmente qualquer derivação de
+`SubstantivePerson` a partir de `Act`, `IntentionalSubject`, `Chooses` ou `FreeWill`.
+Assim:
+- `Act → IntentionalSubject`: PROVEN.
+- `Person → IntentionalSubject`: PROVEN (`person_is_intentional`).
+- `FreeSubject → IntentionalSubject`: PROVEN (`freeSubject_implies_intentionalSubject`).
+- `Act → SubstantivePerson`: REFUTADO.
+- `Act → Person`: MODELO-TEORETICAMENTE INDEPENDENTE / OPEN.
+A existência de Pessoas no sistema apoia-se honestamente na ponte metafísica de pluralidade
+`AxTwoSubjects : ∃ s₁ s₂, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` (Tag: META).
+O downstream formal ancora-se no sujeito intencional estritamente demonstrado.
 
 2. T1 — O SUJEITO DO ATO EXISTE → theorems/T1.txt
 
@@ -405,10 +403,12 @@ A passagem de escolha forte para liberdade é puramente **definicional**:
 chooses_implies_freeWill : Chooses(s,p,q) ⇒ FreeWill(s)   [{Means, Subject} só vocabulário]
 
 A liberdade não é um passo metafísico adicional a partir da escolha genuína; é a sua própria definição formal.
-Contudo, precisamente porque `ChoiceField ↛ Chooses`, a *existência* incondicional de um sujeito livre
-permanece estritamente BLOQUEADA no lema em falta (F1b):
+A *existência* de escolha genuína e do livre-arbítrio (F1b) é provada (PROVEN↑) sob a adoção do princípio constitutivo semântico:
 
-    rejectedHornCoMeant : ∃s p, A(s,p) ∧ A(s,¬p)
+    AxIntentionalChoice : ∀ (s : Subject) (p : Prop), Act s p → ∃ q, Chooses s p q
+
+(Tag: SEM; escolha constitutiva da ação intencional forte), derivando o teorema `freeWill_exists (h : ∃ s p, Act s p) : ∃ s, FreeWill s` sob `{AxIntentionalChoice, Initiates, Means, State, Subject}`.
+A tese de polaridade contraditória mais forte `AxActPolarity : ∀ (s : Subject) (p : Prop), Act s p → Means s (¬ p)` (Tag: SEM / A13) acarreta estritamente `AxIntentionalChoice` via `act_polarity_implies_intentional_choice`.
 
 (Nota formal, reparada 2026-09-18 — freedom/choice fix): a versão anterior
 usava `Chooses(s,p,q) := A(s,p) ∧ Incompatible(p,q)`. Como
@@ -425,38 +425,40 @@ determinada*, não uma escolha. A reparação separa o vocabulário:
     contrapositivo: no_selection_no_assertion; pegada `{Means, Subject}`, só vocabulário);
   * DeliberateChoice(s,p,q) := Means(s,p) ∧ Means(s,q) ∧ Incompatible(p,q) ∧ Asserts(s,p) ∧ ¬ Asserts(s,q) —
     **escolha deliberativa**: o agente concebe ambos os cornos em pensamento, mas compromete-se com apenas um
-    (acarreta seleção semântica C97 e escolha co-significada C98; `{Means, Subject}`);
-    teorema de decomposição exata (C100, `{Means, Subject}`): `DeliberateChoice(s,p,q) ↔ Selects(s,p,q) ∧ Means(s,q)`
+    (acarreta seleção semântica C97 e escolha co-significada C98; `{Initiates, Means, State, Subject}`);
+    teorema de decomposição exata (C100, `{Initiates, Means, State, Subject}`): `DeliberateChoice(s,p,q) ↔ Selects(s,p,q) ∧ Means(s,q)`
     (deliberação é seleção mais representação da alternativa; sob `Rejects(s,q) := Means(s,q) ∧ ¬ Asserts(s,q)`,
     equivale a seleção com rejeição ativa; para `q = ¬p`, reduz-se estritamente a `Means(s,¬p)`);
-  * Chooses(s,p,q) := A(s,p) ∧ A(s,q) ∧ Incompatible(p,q) — **escolha genuína** (escolha forte):
-    o agente co-significa ambos os cornos incompatíveis (§14);
+  * Rejects(s,q) := Means(s,q) ∧ ¬ Asserts(s,q) — **rejeição ativa**: conceber a alternativa em pensamento sem a asserir;
+  * Choice(s,p) := Selects(s,p,¬p) — **escolha executiva (determinação)**: a fixação assertiva de p excluindo a sua negação lógica contraditória; teorema para qualquer asserção (`asserts_implies_choice`, pegada `{Means, Subject}`);
+  * FreeAgency(s) := ∃ p, Choice(s,p) — **agência livre executiva**: posse de agência determinativa no mundo (`asserts_implies_freeAgency`);
+  * SelfDenialOfExecutiveChoice(s,p) := Asserts(s,p) ∧ (p ↔ ¬ Choice(s,p)) — a negação auto-referencial da escolha executiva é auto-refutante por retorção performativa (`selfDenialOfExecutiveChoice_selfRefutes`, pegada `{Means, Subject}`);
+  * Chooses(s,p,q) := Means(s,p) ∧ Means(s,q) ∧ Incompatible(p,q) — **escolha deliberativa (co-significação / escolha forte)**:
+    o agente co-significa ambos os cornos incompatíveis em pensamento (§14); formalmente equivalente a `Deliberates(s,p,q)`;
+  * **Distinção Crítica entre Escolha Executiva e Deliberativa (2026-09-19)**:
+    A escolha executiva (`Choice`) e a escolha deliberativa (`Chooses`) são mutuamente irredutíveis.
+    `Choice(s,p)` exclui o corno contraditório ¬p no plano do ato assertivo, mas NÃO exige que a mente do agente co-signifique ¬p (`Means s (¬p)`).
+    Logo, `Choice` não acarreta `Chooses`, e `FreeAgency` não acarreta `FreeWill` (separados pelo modelo hostil determinista `M_det` em `Logos.ExecutiveDeliberativeFrontier`).
+    A retorção de `Choice` vinga (negar determinação na asserção é auto-refutante), mas a retorção de `Chooses` falha: um sujeito determinista pode asserir veridicamente que não delibera (`schema_S4_satisfiable_and_non_self_refuting`);
+  * Doubts(s,p) := Means(s,p) ∧ Means(s,¬p) — **dúvida cartesiana**: conceção simultânea de p e da sua negação
+    (teorema genuineChoice_of_doubt: `Doubts(s,p) → Chooses(s,p,¬p)`, pegada `{Means, Subject}`);
   * FreeWill(s) := ∃p q, Chooses(s,p,q) — a liberdade é **definicional**
     (chooses_implies_freeWill, pegada `{Means, Subject}`, só vocabulário): não é um passo metafísico
     adicional a partir da escolha genuína;
-  * selection_exists_of_act (C99, `{Means, Subject}`) — o ato genérico só acarreta seleção sob a ponte semântica
+  * selection_exists_of_act (C99, `{Initiates, Means, State, Subject}`) — o ato genérico só acarreta seleção sob a ponte semântica
     explícita act_implies_asserts_bridge;
-  * act_iff_asserts_or_incorrect (C101, `{Means, Subject, CL}`) — todo ato intencional é ou asserção verídica
+  * act_iff_asserts_or_incorrect (C101, `{Initiates, Means, State, Subject, CL}`) — todo ato intencional é ou asserção verídica
     ou juízo incorreto (`A(s,p) ↔ Asserts(s,p) ∨ Incorrect(s,p)`).
 
-O passo em falta para a escolha genuína e livre-arbítrio (F1b, OPEN) está agora estritamente reduzido
-à sua fórmula mínima deliberativa:
+O passo da escolha genuína e livre-arbítrio (F1b, PROVEN↑) fecha-se através do princípio constitutivo semântico adotado `AxIntentionalChoice`:
 
-    deliberateGenuineChoiceResource :
-      ∃ s : Subject, ∃ p : Prop, Asserts s p ∧ Means s (¬p)
+    AxIntentionalChoice : ∀ (s : Subject) (p : Prop), Act s p → ∃ q, Chooses s p q
 
-(formalizado em `formal/Logos/Choice.lean`; teorema de fecho provado:
-`genuineChoice_exists_of_assertion_and_negation_meaning : deliberateGenuineChoiceResource → genuineChoice_exists`
-com pegada `{Means, Subject}`, só vocabulário). Por `deliberateChoice_negation_iff`, asserir uma verdade
-e simultaneamente conceber a sua negação é estritamente equivalente a deliberação contraditória
-(`DeliberateChoice s p (¬p)`), a qual acarreta escolha genuína (`Chooses s p (¬p)`) e liberdade (`FreeWill s`).
-A razão pela qual F1b permanece em aberto no dado performativo isolado é que nem a asserção nem a seleção
-semântica forçam a mente a conceber a negação: `Selects s p (¬p) ↛ Means s (¬p)` e `Asserts s p ↛ Means s (¬p)`
-são ambos teoremas demonstrados em `CountermodelVeridicalMeaning.Single` (`HostileSemantics.lean`).
-Nada obriga um ato de significação a vir com a significação da sua negação: `Means` é opaco e AxTwoSubjects
-dá dois sujeitos diferentes, cada um com um só conteúdo. A *existência* de um escolhedor genuíno
-fica assim circunscrita com rigor máximo: basta uma única asserção cuja negação seja pensada. O `ChoiceAt : World → Subject → Prop → Prop`
-(nível-mundos, F7) permanece a ponte SEM futura e secundária.
+Com este princípio, o ato de iniciação de movimento `Act s p` acarreta constitutivamente a co-significação de uma alternativa incompatível `Chooses s p q` e deriva `FreeWill s` (`freeWill_exists` sob `{AxIntentionalChoice, Initiates, Means, State, Subject}`).
+A tese opcional mais forte de polaridade `AxActPolarity : ∀ (s : Subject) (p : Prop), Act s p → Means s (¬p)` fecha igualmente o livre-arbítrio (`freeWill_exists_of_act_polarity`).
+Na teoria pré-A14 sem A14, a escolha genuína é formalmente ortogonal à ação intencional forte (`act_orthogonal_to_genuine_choice_in_full_theory`).
+Logo a escolha genuína não é derivável da agência bruta pré-A14 e é adotada como compromisso semântico constitutivo. O `ChoiceAt : World → Subject → Prop → Prop`
+(nível-mundos, F7) permanece a ponte SEM futura e secundária, estando F7 dissolvido em F1b.
 Cautela (C1): o alias `Dia` prop-level é a dupla negação clássica sob o modelo
 identidade; não reintroduzir liberdade a partir de `Act`.)
 
@@ -804,7 +806,7 @@ Demonstração:
 
 Direita para esquerda (P → L):
 
-1. P(f, a) → o acto tem racionalidade [T5: Person = Agent ∧ Rational ∧ Intentional]
+1. P(f, a) → o acto tem direcionalidade intencional (sujeito que significa) [T5: IntentionalSubject(s) := ∃p, Means(s,p)]
 
 2. racionalidade → o acto segue normas [§8: Correct ≠ Incorrect]
 
@@ -822,9 +824,13 @@ Esquerda para direita (L → P):
 
 3. intencionalidade → ∃s Means(s,p) [§11]
 
-4. Means(s,p) → Person(s) [T5]
+4. Means(s,p) → IntentionalSubject(s) [T5]
 
 5. Logo: L(g, a) → ∃f P(f, a)
+
+(Nota formal: a inseparabilidade em §24b/§25, demonstrada em `Person.inseparability_24b`,
+opera no nível do Sujeito Intencional e do conteúdo significado; a pessoalidade
+substantiva independente `SubstantivePerson` permanece não forçada sem `AxTwoSubjects`.)
 
 Portanto:
 
@@ -976,7 +982,7 @@ Distintas das impossibilidades performativas acima, as duas transições ontoló
    É logicamente sustentável sob modelos onde toda a realidade existente é contingente, e as verdades necessárias em cada mundo são satisfeitas por fazedores de verdade contingentes variáveis de mundo para mundo (conforme demonstrado formalmente pelo contramodelo `CountermodelWorldwiseTruthmaking` em `formal/Logos/HostileSemantics.lean`).
    Só é excluída e refutada se se admitir a ponte semântica de uniformidade transmundana `AxGlobalGround` (Tag: SEM, C18/C19/C20), que impõe uma entidade necessária uniforme através de todos os mundos.
    Sem esta ponte, o salto da verdade necessária para a existência de uma entidade necessária é **ainda negável**.
-   (Distinção registada: o resultado esse est agere `∃e □Exists(e)` — C91/C92, `Love.necessary_entity_exists` — dá uma *entidade necessária* (o correlato da pessoa, que existe em todos os mundos), mas **não** o fundamento uniforme de *todas* as verdades necessárias: o passo T7 aqui referido permanece negável sem `AxGlobalGround`.)
+   (Distinção registada: a certeza performativa do sujeito e do seu correlato-entidade é incondicional no mundo atual (`ExistsAt actualWorld e`, T1/T4). Contudo, a extensão para *entidade necessária* através de todos os mundos (`∃e □Exists(e)` — C91/C92, `Love.necessary_entity_exists_conditional`) é **condicional** ao princípio de estabilidade pessoal (`PersonStabilityPrinciple`, Tag: META/SEM): o ato presente não acarreta logicamente a sua persistência modal transmundana, conforme demonstrado pelos contramodelos `CountermodelPersonNotNecessary` e `contingent_agency_consistent` em `HostileSemantics`. Assim, sem pontes explícitas, tanto o correlato necessário como o fundamento uniforme de *todas* as verdades necessárias (`AxGlobalGround`) permanecem negáveis.)
 
 (Nota formal §26: "Não existe sujeito do ato presente" tem registo formal
 kernel-checked — `noSubject_selfRefutes` (formal/Logos/Choice.lean, C57):
@@ -997,7 +1003,9 @@ Ver formal/GAPMAP.md C15, C18, C20, C57, C58, C60, C68.)
 
 Temos:
 
-∃s [Exists(s) ∧ Agent(s) ∧ Person(s)]
+∃s [Exists(s) ∧ Agent(s) ∧ IntentionalSubject(s)]
+(Nota formal: a pessoalidade substantiva plena `Person(s)` exige a ponte `AxTwoSubjects`;
+o resultado irrefutável do ato performativo singular é o Sujeito Intencional `IntentionalSubject(s)`).
 
 e:
 
@@ -1057,22 +1065,27 @@ O item "há realidade necessária que é pessoal" (T8) é PROVEN↑ sob `AxPerso
 (o contramodelo `CountermodelImpersonalUltimateGround` prova a irredutibilidade).
 Os itens 20–22 (pluralidade, amor, eternidade) são PROVEN↑ sob `AxTwoSubjects`
 (META), pois a agência isolada não implica pluralidade (contramodelo `UnitPluralityCountermodel`).
-O item "há um correlato-entidade necessário da pessoa" (C91/C92) é PROVEN sem
-pontes (esse est agere): `Love.necessary_entity_exists` (pegada `{Means, Subject}`)
-via o lift definicional `Modal.subject_nec_entity_nec` (pegada `{Subject}`, C91) —
-o contramodelo hostil `CountermodelSubjectNecessityNotEntityNecessity` mostra que
-a transferência não é lei lógica (é força das definições partilhadas de `ExistsAt`/`EntityOf`).
+O item "há um correlato-entidade da pessoa no mundo atual" (C21/C24) é PROVEN
+com certeza performativa estrita (`ExistsAt actualWorld (EntityOf s)`).
+Contudo, o salto para "entidade necessária" em todos os mundos (C91/C92) é **CONDICIONAL**:
+`Love.necessary_entity_exists_conditional` (pegada `{Initiates, Means, State, Subject}`)
+exige a hipótese explícita `PersonStabilityPrinciple` (`Person s → NecessarySubject s`).
+O lift `Modal.subject_nec_entity_nec` (C91, `{Subject}`) transfere analiticamente
+a necessidade do sujeito para a entidade, mas a necessidade do próprio sujeito
+não decorre do ato contingente, como provado pelos contramodelos hostis
+`CountermodelPersonNotNecessary` e `contingent_agency_consistent` em `HostileSemantics`.
 Este item é distinto de T7 (C18): não dá o fundamento uniforme das verdades necessárias.
 Ver theorems/T7.txt, theorems/T8.txt, theorems/T12–T14.txt e formal/GAPMAP.md C15, C18, C19, C32, C40, C91, C92.
 Os itens 19–22 são o acréscimo do poema — ver a nota formal do §25.)
 
 28. LIMITE DA FASE PURAMENTE DEDUTIVA
 
-A dedução puramente transcendental (sem pontes semânticas ou metafísicas adicionais) estabelece com certeza performativa a existência do ato presente, do sujeito, da distinção objetiva de verdade, da normatividade, do significado, da agência, das verdades necessárias e do correlato-entidade necessário da pessoa (`∃e □Exists(e)`, esse est agere — C91/C92, `{Subject}`/`{Means, Subject}`, sem pontes) (T1–T6, T10, T11).
+A dedução puramente transcendental (sem pontes semânticas ou metafísicas adicionais) estabelece com certeza performativa a existência do ato presente, do sujeito no mundo atual, da distinção objetiva de verdade, da normatividade, do significado, da agência e das verdades lógicas necessárias no mundo atual (T1–T6, T10, T11).
 
-O limite da fase puramente dedutiva manifesta-se onde a dedução pura encontra as transições ontológicas:
-- `truth → truthmaker real` (§24a, C15/C60)
-- `truth necessária → entidade necessária` (T7, C18/C19/C20)
+O limite da fase puramente dedutiva manifesta-se onde a dedução pura encontra as transições ontológicas transmundanas:
+- `ato performativo atual → sujeito / entidade necessária em todos os mundos` (C77/C92: condicional a `PersonStabilityPrinciple`; refutado sem pontes por `CountermodelPersonNotNecessary` e `ContingentAgencyModel`)
+- `truth → truthmaker real` (§24a, C15/C60: requer a ponte SEM `Truthmaker`)
+- `truth necessária → entidade necessária` (T7, C18/C19/C20: requer a ponte SEM `AxGlobalGround`, a qual conflita com o mundo vazio `otherWorld` em `HostileSemantics`).
 Ambas são **ainda negáveis** por um cético que rejeite pontes adicionais (como deflacionistas aléticos ou defensores de modelos onde todas as entidades são contingentes, conforme formalmente provado pelos contramodelos em `formal/Logos/HostileSemantics.lean`). Elas tornam-se teoremas no sistema apenas mediante a assunção honesta e explícita das pontes semânticas `Truthmaker` e `AxGlobalGround` (Tag: SEM).
 
 A cadeia do poema avançou. Estado formal (theorems/T10–T14.txt):
@@ -1084,10 +1097,10 @@ T11 (campo da escolha) — PROVEN (reparado 2026-09-18: é o *campo*, não a
   — PROVEN; ver VOCAB.md), choiceField_exists,
   noChoiceField_selfRefutes (negar o campo é um ato de campo),
 JUDGE_HAS_CHOICE_FIELD/judge_commits (sem certo e errado não há campo de
-  escolha). A escolha genuína `Chooses(s,p,q) := A(s,p) ∧ A(s,q) ∧
+  escolha). A escolha genuína `Chooses(s,p,q) := Means(s,p) ∧ Means(s,q) ∧
   Incompatible(p,q)` e a liberdade definicional `FreeWill(s) := ∃p q, Chooses`
   (chooses_implies_freeWill, `{Means, Subject}`, só vocabulário) estão em Choice.lean; a sua *existência*
-  permanece bloqueada em `rejectedHornCoMeant` (F1b) — ver
+  está provada (PROVEN↑) sob o princípio constitutivo semântico AxIntentionalChoice (Choice.freeWill_exists sob {AxIntentionalChoice, Initiates, Means, State, Subject}) — ver
    theorems/T11.txt e formal/GAPMAP.md C49–C57/F1b.
 T12 (mais do que uma pessoa) — PROVEN↑ sob a ponte META `AxTwoSubjects`:
   a pluralidade exige uma ponte metafísica, demonstrada indispensável pelo
@@ -1157,6 +1170,12 @@ tornando o sistema inconsistente; Bool/fin 2/ℕ/Unit esconderiam cardinalidade)
 (Tag: VOCAB), com o predicado de atualidade ontológica `SubjectExists (s : Subject) : Prop := ∃ p, Act s p`
 e retorção performativa estrita em 4 passos — ver Nota formal do §1 acima e GAPMAP.md.)
 
+Nota (Hardened Ontology, 2026-09-19): O atalho analítico de definir `Person` via `Agent := True` e `Rational := True`
+foi formalmente revogado. O sujeito derivado pelo datum do ato singular é unicamente o Sujeito Intencional
+(`IntentionalSubject(s) := ∃ p, Means s p`). A Pessoa Substantiva (`Person(s) := IntentionalSubject(s) ∧ SubstantivePerson(s)`)
+é model-teoreticamente independente, e a inferência `Act → Person` permanece estritamente OPEN (refutada
+por contramodelos hostis sem o compromisso metafísico `AxTwoSubjects`).
+
 Ainda precisam de demonstração:
 
 Ponte independente do conhecer #7 — `NecessaryEntity(e) → ∃τ, Ground(e,τ)`
@@ -1167,18 +1186,17 @@ Ponte independente da pessoalidade #9 — `Ground(e, traço pessoal) → Persona
   procurando uma derivação sem `AxPersonalGround` (T8).
 O alvo central (#8) é `NecessaryEntity(e) ∧ Ground(e,τ)` sem `AxGlobalGround`;
   e o alvo final (#10) `∃e (NecessaryEntity(e) ∧ Personal(e))`.
-Escolha genuína / liberdade (F1b; reparado 2026-09-18) — a liberdade é
+Escolha genuína / liberdade (F1b; reparado e provado 2026-09-18) — a liberdade é
   DEFINICIONAL a partir da escolha genuína (`FreeWill(s) := ∃p q,
   Chooses(s,p,q)`; chooses_implies_freeWill, `{Means, Subject}`, só vocabulário): escolha → liberdade não é
-  um passo metafísico. O que falta é a *existência* de uma escolha genuína,
-  i.e. que o agente co-signifique também o corno rejeitado:
-  `rejectedHornCoMeant : (∃s p, A(s,p)) → ∃s p, A(s,p) ∧ A(s,¬p)`.
-  `Means` é opaco e AxTwoSubjects dá dois sujeitos diferentes, cada um com um
-  só conteúdo — daí o BLOCKED. As antigas testemunhas fabricadas
-  (freeWillOrigin, judgeIsFree, originFreedomSelfRefutes, noFreeWillPosited —
-  C69–C72) estão RETIRADAS sob semântica hostil. O nível-mundos
-  (F7) permanece a ponte SEM futura e secundária
-  (ChoiceAt : World → Subject → Prop → Prop).
+  um passo metafísico. A *existência* de escolha genuína e de livre-arbítrio é provada
+  (PROVEN↑) sob o princípio constitutivo semântico adotado `AxIntentionalChoice : ∀ s p, Act s p → ∃ q, Chooses s p q`
+  (SEM / A14), gerando `Choice.freeWill_exists` sob `{AxIntentionalChoice, Initiates, Means, State, Subject}`.
+  A tese de polaridade contraditória mais forte `AxActPolarity : ∀ s p, Act s p → Means s (¬ p)`
+  acarreta estritamente `AxIntentionalChoice`. A não-derivação na teoria pré-A14
+  foi demonstrada por `act_orthogonal_to_genuine_choice_in_full_theory` e `CountermodelVeridicalMeaning`.
+  As antigas testemunhas fabricadas (freeWillOrigin, judgeIsFree, originFreedomSelfRefutes, noFreeWillPosited —
+  C69–C72) continuam RETIRADAS sob semântica hostil. F7 está derivado/dissolvido em F1b via A13 → A14 → FreeWill.
 Good (o bem como objeto moral da relação) — DEFERRED/F2, passo de
   normatividade lógica (§20) a bem, em conexão com T12/T13.
 Trinity — DEFERRED, sem argumento (§28/§29).

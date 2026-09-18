@@ -1,69 +1,51 @@
-T5 — DA AGÊNCIA À PESSOA
+T5 — DO ATO AO SUJEITO INTENCIONAL (E A FRONTEIRA DA PESSOA SUBSTANTIVA)
 
-Depende de: T1 e ato presente (C68 → C21 → C24; pegada estrita `{Means, Subject}`; desacoplado de `AxTwoSubjects`).
+Depende de: T1 e ato presente (C68 → C21 → C24; pegada estrita `{Means, Subject}` / `{Initiates, Means, State, Subject}`; desacoplado de `AxTwoSubjects`).
 
-Definimos:
+Definimos com rigor ontológico:
 
-Person(s) := Agent(s) ∧ Rational(s) ∧ Intentional(s).
+IntentionalSubject(s) := ∃ p, Means(s,p).
+Person(s)             := IntentionalSubject(s) ∧ SubstantivePerson(s).
 
-O sujeito do ato racional satisfaz:
+O sujeito do ato performativo satisfaz:
 
-- Agent(s): definição analítica desde o batch Tier1 (2026-09-16) —
-  com A(s,p) := Means(s,p), todo o sujeito encontrado no ato é agente por
-  definição; T4 é teorema trivial.
-- Rational(s): idem — definição analítica (Rational(s) := True); o ato de
-  significar é racional por hipótese.
-- Intentional(s): o ato possui conteúdo direcionado — Means(s,p)
+- Means(s,p): o ato intencional possui conteúdo direcionado a proposição.
+- IntentionalSubject(s): por definição a partir de Means(s,p).
 
 Portanto:
 
-Person(s).
+IntentionalSubject(s)  [PROVEN, T5_intentionalSubjectExists, {Initiates, Means, State, Subject}].
 
-(Nota formal: com o colapso Tier-1, Person colapsa à pessoa intencional:
-`Person(s) := Agent s ∧ Rational s ∧ Intentional s`, onde `Intentional s := ∃ p, Means s p`.
-No kernel, `Person.person_of_subject` deriva que todo o sujeito atualizado de um ato
-é definicionalmente uma pessoa (`person_of_act : Act s p → Person s`).
-A partir da asserção performativa explícita `h : Asserts s p`,
-`Person.person_exists_of_assert` e `Plurality.T5_of_assert` derivam a pessoa com pegada estrita `{Means, Subject}`.
+(Nota formal sobre a evolução ontológica: no início da formalização, `Person` havia sido definida
+analiticamente como `Agent s ∧ Rational s ∧ Intentional s` com `Agent := True` e `Rational := True`,
+colapsando nominalmente a `IntentionalSubject s`. Essa identificação degenerada foi formalmente revogada
+para impedir o contrabando de pessoalidade substantiva sob um rótulo puramente intencional.
+Na ontologia endurecida de Logos (`formal/Logos/Person.lean`):
+`Person s := IntentionalSubject s ∧ SubstantivePerson s`, onde `SubstantivePerson` é o centro racional
+e moral substantivo irredutível.)
 
-CLASSIFICAÇÃO ONTOLÓGICA:
-- No sistema formal de Logos: a passagem `Subject → Person` é do Caso A (Meramente Definicional),
-  uma vez que decorre estritamente da redução estrutural de §12 (onde `Agent := True` e `Rational := True`),
-  colapsando `Person s` a `SubjectExists s`. Não deve ser apresentada como descoberta metafísica independente.
-- Sob semântica hostil substantiva: é do Caso D (Não se segue / Bloqueada), conforme demonstrado
-  pelo contramodelo `HostileSemantics.CountermodelSubjectWithoutPerson` (onde um sujeito atua, mas não possui
-  estatuto de pessoa substantiva com deliberação moral ou livre reflexão).
-Ver formal/GAPMAP.md C24.)
+FRONTEIRA DA PESSOA E DA INTENCIONALIDADE:
+- `Act → IntentionalSubject`: PROVEN (`act_implies_intentionalSubject`, `{Means, Subject}`).
+- `Person → IntentionalSubject`: PROVEN (`person_is_intentional`, `{}`).
+- `FreeSubject → IntentionalSubject`: PROVEN (`freeSubject_implies_intentionalSubject`, `{Means, Subject}`).
+- `Act → SubstantivePerson`: REFUTADO por contramodelos hostis (`HardenedInvariance`, `HostileSemantics`).
+- `FreeSubject → SubstantivePerson`: REFUTADO por contramodelos hostis.
+- `FreeWill → SubstantivePerson`: REFUTADO por contramodelos hostis.
+- `IntentionalSubject → SubstantivePerson`: REFUTADO por contramodelos hostis.
+- `Act → Person`: MODELO-TEORETICAMENTE INDEPENDENTE / OPEN.
 
-FRONTEIRA DA PESSOA (2026-09-18, lemas-ponte explícitos):
-A cadeia `Act → SubjectExists → Intentional → Person` é uma cadeia de identidades
-definicionais — todos os nós desdobram para `∃ p, Means s p`. Os lemas-ponte
-`Person.act_implies_intentional`, `Person.subjectExists_implies_intentional`,
-`Person.intentional_implies_subjectExists` e `Person.person_intentional_iff`
-(pegada `{Means, Subject}`) tornam a equivalência explícita em vez de a esconder
-dentro de `person_of_act`.
-
-SEPARAÇÃO OBRIGATÓRIA (duas noções de pessoa):
-1. **Pessoa formal** — `Person s` significa exactamente o que a definição §12 diz:
-   o sujeito significador atualizado (`∃ p, Means s p`). C24 é teorema-válido nesta leitura.
-2. **Pessoa substantiva** — qualquer interpretação mais forte (deliberação,
-   responsabilidade, auto-reflexão, agência autónoma, escolha racional, agência
-   moral). NÃO é forçada pelo datum: `HostileSemantics` Parte A2
-   (`not_entails_substantive_person`/`_rationality`/`_intentionality`/
-   `_autonomy`, `{}` — matriz ortogonal de quatro modelos distintos) satisfaz
-   o fragmento performativo com essas leituras vazias. Nenhum modelo ataca a
-   identidade §12 — ela é um facto das definições.
-
-**Derivabilidade formal ≠ neutralidade semântica da definição.**
-C24 é teorema-válido na ontologia corrente, mas **não estabelece
-independentemente a pessoalidade substantiva**; o §12 é um compromisso
-constitutivo (rótulo nominal), e qualquer reancoragem substantiva exigiria uma
-premissa nova (não introduzida).
+CLASSIFICAÇÃO ONTOLÓGICA DEFINITIVA:
+1. **Sujeito Intencional** — Derivado com necessidade lógica e performativa do próprio ato
+   (`IntentionalSubject s := ∃ p, Means s p`). Teorema estrito do núcleo performativo.
+2. **Pessoa Substantiva** — NÃO é forçada pelo dado performativo nem pela escolha contrastiva.
+   O fragmento performativo é plenamente satisfeito com `SubstantivePerson` vazio.
+   A existência de uma Pessoa no sistema exige explicitamente a ponte metafísica de pluralidade
+   `AxTwoSubjects : ∃ s₁ s₂, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` (Tag: META).
 
 Logo:
 
-∃s Person(s).
+∃s IntentionalSubject(s)   [PROVEN]
 
-Nesta formulação, "pessoa" não foi adicionada como axioma;
-foi definida como a estrutura mínima do agente racional-intencional
-que já apareceu no próprio ato.
+A pessoalidade substantiva NÃO foi demonstrada pelo ato singular; o que o ato singular demonstra
+de forma irrefutável é o Sujeito Intencional.
+

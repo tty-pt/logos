@@ -3,8 +3,8 @@ T14 — RELAÇÃO ETERNA (o "Amar é escolhido e necessário", poema)
 Depende de: T12_directedPair (T12, sob ponte META AxTwoSubjects) + esse est agere
 (AxPersonStability é teorema). PROVEN↑ sob `{AxTwoSubjects, Means, Subject}`.
 
-Verificado em: formal/Logos/Love.lean (T14_eternalRelation, T14_world,
-T14_square, T14_content), GAPMAP.md C42–C45,
+Verificado em: formal/Logos/Love.lean (T14_eternalRelation_conditional / C42, T14_world_conditional / C44,
+T14_square_conditional / C45, T14_content_conditional / C43), GAPMAP.md C42–C45, F5,
 DESIGN.md D13/D14b/D-C4. Pegada: `{AxTwoSubjects, Means, Subject}`.
 
 O par de amantes decorre de T12 (que se apoia na ponte META `AxTwoSubjects`)

@@ -23,10 +23,10 @@ open Logos.Agency (Subject A Asserts)
 open Logos.Choice (ChoiceField incompatible_self_negation Selects asserts_selects asserts_selects_all_incompatible)
 open Logos.Alternatives (Incompatible)
 
-/-- Correctness: a subject's act of *meaning* p is correct iff p is true
+/-- Correctness: a subject's act of judging p is correct iff p is true
     (§8, literal form `Correct(A(s,p)) ↔ True(p)`). The act is constitutive:
-    `A s p := Means s p` (Tier-1 collapse), so every correct judgment is
-    already a meaning-act — you cannot have right/wrong without meaning. -/
+    an act is a meaningful initiation (`A s p := Means s p ∧ ∃ w w', Initiates s w w' p`),
+    so every correct judgment embodies intentional meaning. -/
 def Correct (s : Subject) (p : Prop) : Prop := A s p ∧ T p
 
 /-- Candidate B: any correct judgment constitutes semantic selection against its negation.
@@ -78,15 +78,16 @@ theorem act_iff_correct_or_incorrect (s : Subject) (p : Prop) :
     · exact hInc.1
 
 /--Right and wrong need meaning: the normative predicates are properties of
- meaning-acts, so wherever right-or-wrong is realized, a meaning (and thus a
+ acts, so wherever right-or-wrong is realized, meaning (and thus a
  subject, C49) is realized.
 
  "For right to be distinct from wrong, meaning must be a thing" (poem P3,
     line 18). Pure projection from the §8 definitions: `Correct s p` unfolds
-    to `A s p ∧ T p` with `A s p := Means s p`, so the witness content `p`,
-    meant by `s`, is a `Meaning_I`. Footprint `{Means, Subject}` (vocab-only —
-    no substantive axiom): no model can assert `Correct`/`Incorrect` while
-    denying meaning, because `A s p` is a conjunct. -/
+    to `A s p ∧ T p` where `A s p := Means s p ∧ ∃ w w', Initiates s w w' p`,
+    so the witness content `p`, meant by `s`, is a `Meaning_I` (via `hc.1.1`).
+    Footprint `{Initiates, Means, State, Subject}` (vocab-only — no substantive axiom):
+    no model can assert `Correct`/`Incorrect` while denying meaning, because `A s p`
+    has `Means s p` as its constitutive content. -/
 theorem rightWrong_implies_meaning
     (h : (∃ s : Subject, ∃ p : Prop, Correct s p) ∨
          (∃ s : Subject, ∃ p : Prop, Incorrect s p)) :
@@ -94,10 +95,10 @@ theorem rightWrong_implies_meaning
   cases h with
   | inl hc =>
       obtain ⟨s, p, hc⟩ := hc
-      exact ⟨p, s, hc.1⟩
+      exact ⟨p, s, hc.1.1⟩
   | inr hw =>
       obtain ⟨s, p, hw⟩ := hw
-      exact ⟨p, s, hw.1⟩
+      exact ⟨p, s, hw.1.1⟩
 
 /--The strong form: right *and* wrong both realized entails meaning.
  `Correct` and `Incorrect` are each a meaning-act, so the distinction
@@ -148,9 +149,10 @@ theorem T6_truthTranscendsWill : ¬ (∀ s : Subject, ∀ p : Prop, Fallible s p
 /--Correct and incorrect judging are distinct: correctness is not incorrectness.
 
  §8 — Correct ≠ Incorrect: the two normative predicates are distinct. -/
-theorem correctness_distinct : ¬ (∀ s : Subject, ∀ p : Prop, Correct s p ↔ Incorrect s p) := by
+theorem correctness_distinct (hAct : ∃ s : Subject, ∃ p : Prop, A s p) :
+    ¬ (∀ s : Subject, ∀ p : Prop, Correct s p ↔ Incorrect s p) := by
   intro h
-  obtain ⟨s, p, ha⟩ := Logos.Plurality.cogito_from_T12
+  obtain ⟨s, p, ha⟩ := hAct
   by_cases hT : T p
   · exact ((h s p).1 ⟨ha, hT⟩).2 hT
   · exact hT ((h s p).2 ⟨ha, hT⟩).2
@@ -159,30 +161,29 @@ theorem correctness_distinct : ¬ (∀ s : Subject, ∀ p : Prop, Correct s p �
 
   "There is no right and wrong without (a field of) choice" (IM_STUPID.md §1–§2):
      the judgment act — a subject asserting a content that is correct-or-incorrect
-     (§8) — IS set against the incompatible alternative `¬p`. From
-     `cogito_from_T12` (a meaning-act with content p; corollary of the
-     exhibited `Agency.Cogito`, 2026-09-17) + bivalence (p is right-or-wrong)
-    + `Incompatible p (¬p)` (pure logic).
+     (§8) — IS set against the incompatible alternative `¬p`.
+     Derived from an act datum + bivalence (p is right-or-wrong)
+     + `Incompatible p (¬p)` (pure logic).
 
   Audit notice (freedom/choice fix, 2026-09-18): this delivers `ChoiceField`,
     not genuine `Chooses`. The judge relates only to the judged content `p`; the
     rejected horn `¬p` is pure logic. Genuine choice needs the co-meaned horn
     (`Choice.rejectedHornCoMeant`, BLOCKED). -/
-theorem judge_commits :
+theorem judge_commits (hAct : ∃ s : Subject, ∃ p : Prop, A s p) :
     ∃ s : Subject, ∃ p q : Prop, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ ChoiceField s p q := by
-  obtain ⟨s, p, ha⟩ := Logos.Plurality.cogito_from_T12
+  obtain ⟨s, p, ha⟩ := hAct
   by_cases hT : T p
-  · exact ⟨s, p, ¬ p, ha, Or.inl ⟨ha, hT⟩, ha, incompatible_self_negation p⟩
-  · exact ⟨s, p, ¬ p, ha, Or.inr ⟨ha, hT⟩, ha, incompatible_self_negation p⟩
+  · exact ⟨s, p, ¬ p, ha, Or.inl ⟨ha, hT⟩, ha.1, incompatible_self_negation p⟩
+  · exact ⟨s, p, ¬ p, ha, Or.inr ⟨ha, hT⟩, ha.1, incompatible_self_negation p⟩
 
 /--The full poetic conditional, with the exhibited step made explicit: the bare
- distinction `¬N_T ∧ ¬N_F` forces an actual judging act (`judge_commits`,
- paying only the exhibited `Cogito`), after which the *pure* bridge
- `rightWrong_implies_meaning` (vocab-only) yields meaning. -/
+ distinction `¬N_T ∧ ¬N_F` forces an actual judging act (`judge_commits`),
+ after which the *pure* bridge `rightWrong_implies_meaning` (vocab-only) yields meaning. -/
 theorem rightWrongDistinction_implies_meaning
+    (hAct : ∃ s : Subject, ∃ p : Prop, A s p)
     (_h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
     ∃ p : Prop, Logos.Choice.Meaning_I p := by
-  obtain ⟨s, p, _q, _ha, hci, _⟩ := judge_commits
+  obtain ⟨s, p, _q, _ha, hci, _⟩ := judge_commits hAct
   rcases hci with hc | hw
   · exact rightWrong_implies_meaning (Or.inl ⟨s, p, hc⟩)
   · exact rightWrong_implies_meaning (Or.inr ⟨s, p, hw⟩)

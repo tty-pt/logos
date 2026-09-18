@@ -28,7 +28,7 @@ open Logos.Agency (Subject)
 open Logos.Person (Person)
 open Logos.Truthmaker (Entity ExistsAt)
 open Logos.Semantics (World)
-open Logos.Value (AxTwoSubjects Affects AxPersonsAffect)
+open Logos.Value (AxTwoSubjects Affects PersonsAffectPrinciple)
 
 /-- Q2 bridge: canonical embedding of subjects into the general entity type. -/
 def EntityOf : Subject → Entity := Logos.Truthmaker.EntityOf
@@ -50,19 +50,20 @@ theorem T12_twoPersons :
 theorem notAlone : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ :=
   T12_twoPersons
 
-/--The acting subject is exhibited from plurality: someone acts on something.
+/--The intentional subject is exhibited from plurality: someone means something.
 
  cogito, RESTATED AS A COROLLARY OF PLURALITY: from the demonstrated
-    pair of persons, an act occurs. -/
-theorem cogito_from_T12 : ∃ s : Subject, ∃ p : Prop, Logos.Agency.A s p := by
-  obtain ⟨s₁, _, ⟨_, _, p, hmp⟩, _, _⟩ := T12_twoPersons
+    pair of persons, an intentional meaning occurs. -/
+theorem cogito_from_T12 : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Means s p := by
+  obtain ⟨s₁, _, hp₁, _, _⟩ := T12_twoPersons
+  obtain ⟨p, hmp⟩ := Logos.Person.person_is_intentional s₁ hp₁
   exact ⟨s₁, p, hmp⟩
 
 /--At least one subject exists: derived from the performative act-datum.
 
   T1 (C21) — the subject of the present act exists:
   derived from the existence of an intentional act (C68) via the constitutive rule
-  `act_requires_subject` (Case B). Footprint: `{Means, Subject}` (VOCAB only; decoupled from AxTwoSubjects). -/
+  `act_requires_subject` (Case B). Footprint: `{Initiates, Means, State, Subject}` (VOCAB only; decoupled from AxTwoSubjects). -/
 theorem T1_subjectExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
     ∃ s : Subject, Logos.Agency.SubjectExists s :=
   Logos.Agency.subject_exists_of_act h
@@ -70,74 +71,70 @@ theorem T1_subjectExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s 
 /--At least one agent exists: someone who acts.
 
   T4 (C23) — the subject is an agent (`Agent` is analytical `:= True`):
-  derived from the existence of an intentional act (C68 → C21). Footprint: `{Means, Subject}`. -/
+  derived from the existence of an intentional act (C68 → C21). Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem T4_agentExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
     ∃ s : Subject, Logos.Agency.SubjectExists s ∧ Logos.Agency.Agent s := by
   obtain ⟨s, hs⟩ := T1_subjectExists h
   exact ⟨s, hs, trivial⟩
 
-/--At least one person exists (C24): formally forced under the §12
-  constitutive definition of Person (`Person` → `Intentional` →
-  `∃ p, Means s p`). It establishes only the actualized meaning-subject;
-  substantive personhood is not independently established.
+/--At least one intentional subject exists: someone who means content.
+   Derived from the existence of an intentional act.
+   Footprint: `{Initiates, Means, State, Subject}`. -/
+theorem T5_intentionalSubjectExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
+    ∃ s : Subject, Logos.Person.IntentionalSubject s :=
+  Logos.Person.intentionalSubject_exists_of_act h
 
-  The chain C68 → Act → SubjectExists → Intentional → Person (§12 nominal)
-  makes the identity explicit (`Person.person_intentional_iff` + bridge
-  lemmas); the substantive reading (deliberation, moral responsibility,
-  self-reflection, autonomous agency) is not independently established —
-  see `HostileSemantics` Part A2.
-  Footprint: `{Means, Subject}` (VOCAB; decoupled from AxTwoSubjects). -/
-theorem T5_personExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
-    ∃ s : Subject, Person s :=
-  Logos.Person.person_exists_of_act h
-
-/-- T1 derived from a performative assertion. -/
+/-- T1 derived from an intentional assertion. -/
 theorem T1_of_assert {s : Subject} {p : Prop} (h : Logos.Agency.Asserts s p) :
     ∃ s' : Subject, Logos.Agency.SubjectExists s' :=
   Logos.Agency.subject_exists_of_assert h
 
-/-- T4 derived from a performative assertion. -/
+/-- T4 derived from an intentional assertion. -/
 theorem T4_of_assert {s : Subject} {p : Prop} (h : Logos.Agency.Asserts s p) :
     ∃ s' : Subject, Logos.Agency.SubjectExists s' ∧ Logos.Agency.Agent s' :=
   ⟨s, Logos.Agency.act_requires_subject s p (Logos.Agency.assertion_is_act h), trivial⟩
 
-/-- T5 derived from a performative assertion. -/
-theorem T5_of_assert {s : Subject} {p : Prop} (h : Logos.Agency.Asserts s p) :
-    ∃ s' : Subject, Person s' :=
-  Logos.Person.person_exists_of_assert h
+/-- An intentional subject exists from an intentional assertion. -/
+theorem T5_intentional_of_assert {s : Subject} {p : Prop} (h : Logos.Agency.Asserts s p) :
+    ∃ s' : Subject, Logos.Person.IntentionalSubject s' :=
+  ⟨s, Logos.Person.act_implies_intentionalSubject (Logos.Agency.assertion_is_act h)⟩
 
-/-- Corollary of plurality: from two distinct persons, a subject exists. -/
-theorem T1_subjectExists_from_plurality : ∃ s : Subject, Logos.Agency.SubjectExists s := by
-  obtain ⟨s₁, _, ⟨_, _, p, hmp⟩, _, _⟩ := T12_twoPersons
-  exact ⟨s₁, p, hmp⟩
+/-- Corollary of plurality under an initiation bridge: from two distinct persons and an initiation bridge, a subject exists. -/
+theorem T1_subjectExists_from_plurality
+    (hBridge : ∀ (s : Subject) (p : Prop), Logos.Agency.Means s p → ∃ w w' : Logos.Agency.State, Logos.Agency.Initiates s w w' p) :
+    ∃ s : Subject, Logos.Agency.SubjectExists s := by
+  obtain ⟨s₁, _, hp₁, _, _⟩ := T12_twoPersons
+  obtain ⟨p, hmp⟩ := Logos.Person.person_is_intentional s₁ hp₁
+  exact ⟨s₁, p, hmp, hBridge s₁ p hmp⟩
 
-/-- Corollary of plurality: from two distinct persons, an agent exists. -/
-theorem T4_agentExists_from_plurality :
+/-- Corollary of plurality under an initiation bridge: from two distinct persons and an initiation bridge, an agent exists. -/
+theorem T4_agentExists_from_plurality
+    (hBridge : ∀ (s : Subject) (p : Prop), Logos.Agency.Means s p → ∃ w w' : Logos.Agency.State, Logos.Agency.Initiates s w w' p) :
     ∃ s : Subject, Logos.Agency.SubjectExists s ∧ Logos.Agency.Agent s := by
-  obtain ⟨s₁, _, ⟨_, _, p, hmp⟩, _, _⟩ := T12_twoPersons
-  exact ⟨s₁, ⟨p, hmp⟩, trivial⟩
+  obtain ⟨s, hs⟩ := T1_subjectExists_from_plurality hBridge
+  exact ⟨s, hs, trivial⟩
 
 /-- Corollary of plurality: from two distinct persons, a person exists. -/
 theorem T5_personExists_from_plurality : ∃ s : Subject, Person s := by
   obtain ⟨s₁, _, hp₁, _, _⟩ := T12_twoPersons
   exact ⟨s₁, hp₁⟩
 
-/--There are two distinct persons where one bears on the other.
-
- T12, directed form (chain node C47): the two-person pair can
-    be oriented so that affectivity flows named-forward — under A3
-    (`Affects s t := s ≠ t`) distinctness IS the forward direction. -/
-theorem T12_directedPair :
+/-- T12, directed form (chain node C47): the two-person pair can
+    be oriented so that affectivity flows forward, conditional on PersonsAffectPrinciple. -/
+theorem T12_directedPair_conditional
+    (hAffect : Logos.Value.PersonsAffectPrinciple) :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Affects s₁ s₂ := by
   obtain ⟨p, q, hp, hq, hne⟩ := T12_twoPersons
-  exact ⟨p, q, hp, hq, hne, hne⟩
+  rcases hAffect p q hp hq hne with h1 | h2
+  · exact ⟨p, q, hp, hq, hne, h1⟩
+  · exact ⟨q, p, hq, hp, hne.symm, h2⟩
 
 end Logos.Plurality
 
 -- Axiom footprint audit
 #print axioms Logos.Plurality.T1_subjectExists
 #print axioms Logos.Plurality.T4_agentExists
-#print axioms Logos.Plurality.T5_personExists
+#print axioms Logos.Plurality.T5_intentionalSubjectExists
 #print axioms Logos.Plurality.T12_twoPersons
-#print axioms Logos.Plurality.T12_directedPair
+#print axioms Logos.Plurality.T12_directedPair_conditional
 #print axioms Logos.Plurality.cogito_from_T12

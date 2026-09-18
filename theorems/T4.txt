@@ -7,10 +7,11 @@ Desacoplado de `AxTwoSubjects`.
 
 A(s,p) → Agent(s).
 
-(Nota formal: com a identificação Tier-1 — A(s,p) := Means(s,p) e Agent(s) := True —
-esta passagem é analítica.
-No kernel, `Plurality.T4_agentExists` deriva a existência do agente a partir do
-ato performativo presente (pegada estrita `{Means, Subject}`).
+(Nota formal: no início da formalização, adotou-se nominalmente `Agent(s) := True`.
+Na ontologia endurecida, a agência genuína é a iniciação intencional forte
+`Act(s,p) := Means(s,p) ∧ ∃ w w', Initiates(s,w,w',p)`.
+No kernel, `Plurality.T4_agentExists` deriva a existência do sujeito agente a partir do
+ato performativo presente (pegada estrita `{Initiates, Means, State, Subject}`).
 Ver formal/GAPMAP.md C23.)
 
 Logo:
