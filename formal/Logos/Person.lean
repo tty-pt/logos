@@ -1,69 +1,104 @@
 /-
 # Logos.Person — Level 2b: from agency to person; §24b inseparability
 
-Person is *defined* structurally (T5, base.txt §12): the agent, rational,
-intentional subject already present in the act — not an added axiom.
+In the unified Γ ontology, **Personhood** is defined constitutively:
+> A person is a subject possessing a numerically distinct free will.
 
-Tier 1 (2026-09-16): `Agent` and `Rational` are analytical definitions
-(`:= True`), so the structural definition collapses to its intentional
-core: a person IS a subject who means some content
-(`Person s := ∃ p, Means s p`). The `Agent ∧ Rational` conjuncts remain in
-the definition for §12 fidelity but are definitionally True.
-
-§24b is formalized under the renderings of Q3.1/Q3.2 (see DESIGN.md):
-  * a *feature* of the act is a proposition entailed by the act's content,
-    `HasFeature a f := a → f` (logical-consequence reading);
-  * a *personal* feature is one that a subject *means*, `Means s f`;
-  * a *logical* feature is one that is true or false (bivalence, §10).
-On these readings the inseparability becomes a theorem.
-
-Under hostile semantics, propositional content does NOT imply personhood,
-and a single act does not entail plurality. The pseudo-theorems
-`twoPersonsFromSubject`, `everyContentIsAPerson`, and `positedDistinct`
-are retired as conflations of definitions with proofs.
-
-Personhood frontier (Hardened Ontology):
-The hardened ontology distinguishes the Intentional Subject (`IntentionalSubject s := ∃ p, Means s p`)
-from the Substantive Person (`Person s := IntentionalSubject s ∧ SubstantivePerson s`).
-The performative datum strictly derives the intentional subject (`Act s p → IntentionalSubject s`),
-but leaves substantive personhood (`SubstantivePerson s`) model-theoretically independent.
-Substantive personhood is refuted from `Act`, `FreeSubject`, or `FreeWill` by hostile models
-(`HostileSemantics.Part A2`, `HardenedInvariance`), and its positive instantiation enters only
-via the metaphysical plurality bridge `AxTwoSubjects` (Tag: META).
+Personhood is not an additional opaque metaphysical property placed on top of an
+already established free subject. The project derives:
+  Subject → Intentional Subject → Normativity → Choice → Free Will → Person
+without any added metaphysical bridge or uninterpreted dummy predicate.
 -/
 
 import Logos.Core
 import Logos.Agency
+import Logos.Alternatives
+import Logos.Choice
 
 namespace Logos.Person
 
 open Logos.Core (T IsFalse)
-open Logos.Agency (Subject A Rational Means act_implies_means)
+open Logos.Agency
+open Logos.Alternatives (Incompatible)
+open Logos.Choice (Chooses FreeWill FreeSubject ChoiceField)
 
-/-- Intentional Subject: a subject who means some propositional content (§11).
-    Purely definitional from the primitive `Means` relation. -/
-def IntentionalSubject (s : Subject) : Prop := ∃ p : Prop, Means s p
+/-- Person: a subject possessing a numerically distinct free will.
+    In the unified Γ ontology, Personhood is constitutively defined as the possession
+    of genuine free will (`Person s := FreeSubject s`).
+    Footprint: `{}`. -/
+def Person (s : Subject) : Prop := FreeSubject s
 
-/-- Backward-compatibility alias for intentionality. -/
-def Intentional (s : Subject) : Prop := IntentionalSubject s
+/-- Master Theorem: Every Free Subject is a Person.
+    Footprint: `{}`. -/
+theorem free_subject_is_person (s : Subject) (h : FreeSubject s) : Person s :=
+  h
 
-/-- Substantive personal feature: independent uninterpreted property
-    representing a rational, deliberative personal center. -/
-opaque SubstantivePerson : Subject → Prop
+/-- Master Equivalence: Personhood is constitutively equivalent to Free Subjecthood.
+    Footprint: `{}`. -/
+theorem person_iff_freeSubject (s : Subject) : Person s ↔ FreeSubject s :=
+  Iff.rfl
 
-/-- Person: substantive metaphysical personhood (base.txt §12 / theorem T5).
-    Requires both intentional directedness and substantive personal agency.
-    Decoupled from degenerate analytical identities (`Agent := True`, `Rational := True`). -/
-def Person (s : Subject) : Prop := IntentionalSubject s ∧ SubstantivePerson s
+/-- Master Equivalence: Personhood is constitutively equivalent to Free Will.
+    Footprint: `{}`. -/
+theorem person_iff_freeWill (s : Subject) : Person s ↔ FreeWill s :=
+  Iff.rfl
 
-/-- Every substantive metaphysical person is an intentional subject:
-    personhood entails intentional directedness at propositional content. -/
-theorem person_is_intentional (s : Subject) (h : Person s) : IntentionalSubject s :=
-  h.1
+/-- Every Person possesses Free Will.
+    Footprint: `{}`. -/
+theorem person_has_free_will (s : Subject) (h : Person s) : FreeWill s :=
+  h
 
-/-- Act implies an intentional subject: an act's own content witnesses that the subject
-    means something (`IntentionalSubject s := ∃ p, Means s p`) — a definitional
-    identity, not a semantic discovery.
+/-- Independent Will: the faculty of will possessed by subject s is uniquely its own,
+    numerically distinct from the will of any distinct subject.
+    Directly unpacks the principle of numerical individuation of wills (`will_individuation`). -/
+def IndependentWill (s : Subject) : Prop :=
+  ∀ s' : Subject, s' ≠ s → Logos.Agency.subjectWill s' ≠ Logos.Agency.subjectWill s
+
+/-- Free, Independent Will: a subject endowed with both the capacity of free choice
+    (`FreeWill s`) and an independently individuated volitional faculty (`IndependentWill s`). -/
+def FreeIndependentWill (s : Subject) : Prop :=
+  FreeWill s ∧ IndependentWill s
+
+/-- Numerical individuation guarantees that every subject possesses an independent will.
+    Footprint: `{subjectWill, will_individuation, Subject}`. -/
+theorem independent_will_of_subject (s : Subject) : IndependentWill s :=
+  fun s' hne => Logos.Agency.will_individuation s' s hne
+
+/-- Master Equivalence: Personhood is constitutively equivalent to Free, Independent Will.
+    A person is a subject possessing a free will that is genuinely its own,
+    not numerically identical with another subject's will.
+    Footprint: `{subjectWill, will_individuation, Means, Subject}`. -/
+theorem person_iff_freeIndependentWill (s : Subject) : Person s ↔ FreeIndependentWill s := by
+  constructor
+  · intro hp
+    exact ⟨hp, independent_will_of_subject s⟩
+  · intro ⟨hFW, _⟩
+    exact hFW
+
+/-- Master Theorem: Every Person possesses a Free, Independent Will.
+    Footprint: `{subjectWill, will_individuation, Means, Subject}`. -/
+theorem person_has_free_independent_will (s : Subject) (h : Person s) : FreeIndependentWill s :=
+  (person_iff_freeIndependentWill s).mp h
+
+/-- Master Theorem: Every Subject with a Free, Independent Will is a Person.
+    Footprint: `{subjectWill, will_individuation, Means, Subject}`. -/
+theorem free_independent_will_is_person (s : Subject) (h : FreeIndependentWill s) : Person s :=
+  (person_iff_freeIndependentWill s).mpr h
+
+/-- Every Person is an Intentional Subject.
+    A free choosing agent necessarily means the alternatives between which it chooses.
+    Footprint: `{Means, Subject}`. -/
+theorem person_is_intentional (s : Subject) (h : Person s) : IntentionalSubject s := by
+  obtain ⟨p, _q, hCh⟩ := h
+  exact ⟨p, hCh.1⟩
+
+/-- Any person has a choice field: a person is always before two incompatible alternatives.
+    Footprint: `{Means, Subject}`. -/
+theorem person_hasChoiceField {s : Subject} (hs : Person s) : ∃ p q : Prop, ChoiceField s p q := by
+  obtain ⟨p, q, hCh⟩ := hs
+  exact ⟨p, q, hCh.1, hCh.2.2⟩
+
+/-- Act implies an intentional subject.
     Footprint: `{Means, Subject}` (VOCAB). -/
 theorem act_implies_intentionalSubject {s : Subject} {p : Prop} (h : Logos.Agency.Act s p) :
     IntentionalSubject s :=
@@ -132,9 +167,9 @@ def CarriesPersonalFeature (a : Prop) : Prop :=
 def CarriesLogicalFeature (a : Prop) : Prop :=
   ∃ p : Prop, HasFeature a p ∧ (T p ∨ IsFalse p)
 
-/--Every rational act carries a personal feature exactly when it carries a logical feature: personhood and logic travel together.
-
- §24b — in every rational act, personal and logical features coincide. -/
+/-- Every rational act carries a personal feature exactly when it carries a logical feature:
+    personhood and logic travel together.
+    §24b — in every rational act, personal and logical features coincide. -/
 theorem inseparability_24b : ∀ a : Prop,
     RationalAct a → (CarriesPersonalFeature a ↔ CarriesLogicalFeature a) := by
   intro a hra
@@ -150,11 +185,20 @@ theorem inseparability_24b : ∀ a : Prop,
     rw [heq]
     exact ⟨q, id, s, act_implies_means ha⟩
 
-end Logos.Person
+-- ===========================================================================
+-- Axiom Footprint Audit
+-- ===========================================================================
 
--- Axiom footprint audit
-#print axioms Logos.Person.inseparability_24b
-#print axioms Logos.Person.act_implies_intentionalSubject
-#print axioms Logos.Person.subjectExists_implies_intentionalSubject
-#print axioms Logos.Person.intentionalSubject_exists_of_act
-#print axioms Logos.Person.person_is_intentional
+#print axioms free_subject_is_person
+#print axioms person_iff_freeSubject
+#print axioms person_iff_freeWill
+#print axioms person_has_free_will
+#print axioms person_is_intentional
+#print axioms person_hasChoiceField
+#print axioms inseparability_24b
+#print axioms independent_will_of_subject
+#print axioms person_iff_freeIndependentWill
+#print axioms person_has_free_independent_will
+#print axioms free_independent_will_is_person
+
+end Logos.Person

@@ -59,15 +59,12 @@ What is *derived* here (field form, unchanged footprints):
 
 import Logos.Core
 import Logos.Agency
-import Logos.Person
-import Logos.Plurality
 import Logos.Alternatives
 import Logos.Necessity
 
 namespace Logos.Choice
 
-open Logos.Agency (Subject Means A Act Asserts State Initiates)
-open Logos.Person (Person)
+open Logos.Agency (Subject Means A Act Asserts State Initiates IntentionalSubject Intentional)
 open Logos.Alternatives (Incompatible)
 open Logos.Necessity (Dia Necessity someWorld)
 open Logos.Semantics (Form NecessarilyTrue)
@@ -194,13 +191,13 @@ theorem chooses_implies_freeSubject {s : Subject} {p q : Prop}
 /-- Every free subject is an intentional subject:
     genuine choice requires meaning at least one proposition. -/
 theorem freeSubject_implies_intentionalSubject (s : Subject) (h : FreeSubject s) :
-    Logos.Person.IntentionalSubject s := by
+    IntentionalSubject s := by
   obtain ⟨p, _q, hChooses⟩ := h
   exact ⟨p, hChooses.1⟩
 
 /-- Backward-compatibility alias for intentionality. -/
 theorem freeSubject_implies_intentional (s : Subject) (h : FreeSubject s) :
-    Logos.Person.Intentional s :=
+    Intentional s :=
   freeSubject_implies_intentionalSubject s h
 
 /--Freedom exists as soon as a genuine choice witness is supplied. This is the
@@ -243,7 +240,7 @@ def genuineChoice_exists : Prop := ∃ s : Subject, ∃ p q : Prop, Chooses s p 
      (`Means s p → p` kills co-meaning, `genuineChoice_requires_error_possibility`),
      and even plurality + right-and-wrong give only `ChoiceField` (one horn
      co-meant against pure logic). It is a `def`-proposition, not a theorem:
-     adding it as an axiom is forbidden; DEDUCTION records it BLOCKED. Its
+     adding it as an axiom is forbidden; README records it BLOCKED. Its
      consequent is exactly `genuineChoice_exists`
      (`rejectedHornCoMeant_implies_genuineChoice`). -/
 def rejectedHornCoMeant : Prop := ∃ s : Subject, ∃ p : Prop, Means s p ∧ Means s (¬ p)
@@ -290,37 +287,18 @@ theorem genuineChoice_requires_error_possibility :
     derived from an intentional act datum (C68 → C21 → C39).
     Footprint: `{Initiates, Means, State, Subject}` (VOCAB only; decoupled from AxTwoSubjects). -/
 theorem T11_choiceField (h : ∃ s : Subject, ∃ p : Prop, A s p) :
-    ∃ s : Subject, Logos.Person.IntentionalSubject s ∧ ∃ p q : Prop, Incompatible p q := by
-  obtain ⟨s, hs⟩ := Logos.Plurality.T5_intentionalSubjectExists h
-  obtain ⟨p, q, hpq, _⟩ := Logos.Alternatives.T9_incompatibleAlternatives
-  exact ⟨s, hs, p, q, hpq⟩
-
-/-- Plurality form of T11: choice field derived from demonstrated plurality under AxTwoSubjects. -/
-theorem T11_choiceField_from_plurality :
-    ∃ s : Subject, Person s ∧ ∃ p q : Prop, Incompatible p q := by
-  obtain ⟨s, hs⟩ := Logos.Plurality.T5_personExists_from_plurality
-  obtain ⟨p, q, hpq, _⟩ := Logos.Alternatives.T9_incompatibleAlternatives
-  exact ⟨s, hs, p, q, hpq⟩
+    ∃ s : Subject, IntentionalSubject s ∧ ∃ p q : Prop, Incompatible p q := by
+  obtain ⟨s, p, ha⟩ := h
+  obtain ⟨p', q', hpq, _⟩ := Logos.Alternatives.T9_incompatibleAlternatives
+  exact ⟨s, ⟨p, ha.1⟩, p', q', hpq⟩
 
 /--The field needs only intentionality: `Intentional s` already unfolds to
-  `∃ p, Means s p`, so the weaker predicate suffices — the §12 person label
-  adds nothing here (nominal wrapper `person_hasChoiceField` below).
+  `∃ p, Means s p`, so the weaker predicate suffices.
   Footprint: `{Means, Subject}` (VOCAB only). -/
-theorem intentional_hasChoiceField {s : Subject} (hIn : Logos.Person.Intentional s) :
+theorem intentional_hasChoiceField {s : Subject} (hIn : Intentional s) :
     ∃ p q : Prop, ChoiceField s p q := by
   obtain ⟨p, hmp⟩ := hIn
   exact ⟨p, ¬ p, hmp, incompatible_self_negation p⟩
-
-/--Any person has a choice field: a person is always before two incompatible alternatives.
-
-  Audit notice (freedom/choice fix, 2026-09-18): this yields `ChoiceField`, NOT
-    genuine `Chooses`. The agent is related only to the adopted content `p`; the
-    rejected horn `¬p` is supplied by pure logic (`incompatible_self_negation`),
-    not by the agent. The genuine form (both horns co-meant) is BLOCKED on
-    `rejectedHornCoMeant`. Nominal wrapper of `intentional_hasChoiceField`
-    (the §12 label adds nothing). -/
-theorem person_hasChoiceField {s : Subject} (hs : Person s) : ∃ p q : Prop, ChoiceField s p q :=
-  intentional_hasChoiceField (Logos.Person.person_is_intentional s hs)
 
 /--The choice field exists: some subject is before two incompatible alternatives.
 
@@ -333,14 +311,8 @@ theorem choiceField_exists (h : ∃ s : Subject, ∃ p : Prop, A s p) :
     ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q := by
   obtain ⟨s, p, ha⟩ := h
   obtain ⟨p', q, hch⟩ :=
-    intentional_hasChoiceField (Logos.Person.act_implies_intentional ha)
+    intentional_hasChoiceField ⟨p, ha.1⟩
   exact ⟨s, p', q, hch⟩
-
-/-- Choice field exists, derived from demonstrated plurality under AxTwoSubjects. -/
-theorem choiceField_exists_from_plurality : ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q := by
-  obtain ⟨s₁, _, hp₁, _, _⟩ := Logos.Plurality.T12_twoPersons
-  obtain ⟨p, q, hch⟩ := person_hasChoiceField hp₁
-  exact ⟨s₁, p, q, hch⟩
 
 /-- Radical nihilist thesis regarding the choice field: no field occurs. -/
 def NoChoiceField : Prop := ¬ ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q
@@ -363,19 +335,6 @@ theorem noChoiceField_contradicts_field
     (hField : ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q) (hNo : NoChoiceField) : False :=
   hNo hField
 
-/--Right-and-wrong commits a choice field: where there is truth and error,
- someone is before an incompatible pair.
-
-  C54 (field form): "No right and wrong without (a field of) choice" — whenever
-    the distinction holds, some subject before a choice field exists via
-    AxTwoSubjects (poem P5). The genuine `Chooses` conclusion is BLOCKED on
-    `rejectedHornCoMeant`. -/
-theorem JUDGE_HAS_CHOICE_FIELD (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
-    ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q := by
-  obtain ⟨s₁, _, hp₁, _, _⟩ := Logos.Value.AxTwoSubjects h
-  obtain ⟨p, q, hch⟩ := person_hasChoiceField hp₁
-  exact ⟨s₁, p, q, hch⟩
-
 /-- Performative judgment commits a choice field: asserting right-and-wrong is
     an act set against its own negation. -/
 theorem judge_asserting_rightWrong_has_choiceField (speaker : Subject)
@@ -383,17 +342,6 @@ theorem judge_asserting_rightWrong_has_choiceField (speaker : Subject)
     ∃ s : Subject, ∃ p q : Prop, ChoiceField s p q :=
   ⟨speaker, (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F), ¬ (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F),
    h.1.1, incompatible_self_negation _⟩
-
-/--Right-and-wrong implies someone who means (poem P3, line 18 "há certo e há
- errado → há significado → há alguém para quem algo significar").
-
-  C61: `JUDGE_HAS_CHOICE_FIELD` (C54) composes with `rightWrongDistinction` (C36)
-    to yield a field; its first conjunct is a meaning-act, so some subject means
-    some content. -/
-theorem rightWrong_implies_someone_means (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
-    ∃ s : Subject, ∃ p : Prop, Means s p := by
-  obtain ⟨s, p, _, hch⟩ := JUDGE_HAS_CHOICE_FIELD h
-  exact ⟨s, p, hch.1⟩
 
 /-- C57: Retorsion — asserting that no actual subject exists refutes itself.
     Delegated to Agency's genuine performative retorsion. Footprint: `{Initiates, Means, State, Subject}`. -/
@@ -1373,12 +1321,9 @@ end Logos.Choice
 #print axioms Logos.Choice.assertion_consistency
 #print axioms Logos.Choice.no_one_asserts_incompatible_pair
 #print axioms Logos.Choice.intentional_hasChoiceField
-#print axioms Logos.Choice.person_hasChoiceField
 #print axioms Logos.Choice.choiceField_exists
 #print axioms Logos.Choice.noChoiceField_selfRefutes
 #print axioms Logos.Choice.noSubject_selfRefutes
-#print axioms Logos.Choice.JUDGE_HAS_CHOICE_FIELD
-#print axioms Logos.Choice.rightWrong_implies_someone_means
 #print axioms Logos.Choice.noStrongTruth_assertable_refutes
 #print axioms Logos.Choice.Selects
 #print axioms Logos.Choice.asserts_selects

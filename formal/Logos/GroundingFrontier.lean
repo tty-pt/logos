@@ -55,8 +55,8 @@ import Logos.DefinitiveAgencyFrontier
 
 namespace Logos.GroundingFrontier
 
-open Logos.Agency (Subject Act Means State Initiates Asserts)
-open Logos.Person (IntentionalSubject SubstantivePerson Person)
+open Logos.Agency (Subject Act Means State Initiates Asserts IntentionalSubject)
+open Logos.Person (Person)
 open Logos.Alternatives (Incompatible)
 
 -- ===========================================================================

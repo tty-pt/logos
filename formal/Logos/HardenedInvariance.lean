@@ -235,8 +235,8 @@ theorem strict_core_inclusion :
 
 /-- Positive Entailment 1: Person entails IntentionalSubject. -/
 theorem person_entails_intentionalSubject (s : Logos.Agency.Subject) (h : Logos.Person.Person s) :
-    Logos.Person.IntentionalSubject s :=
-  h.1
+    Logos.Agency.IntentionalSubject s :=
+  Logos.Person.person_is_intentional s h
 
 /-- Positive Entailment 2: FreeSubject is definitionally equivalent to FreeWill. -/
 theorem freeSubject_equiv_freeWill (s : Logos.Agency.Subject) :
@@ -245,7 +245,7 @@ theorem freeSubject_equiv_freeWill (s : Logos.Agency.Subject) :
 
 /-- Positive Entailment 3: FreeWill entails IntentionalSubject. -/
 theorem freewill_entails_intentionalSubject (s : Logos.Agency.Subject) (h : Logos.Choice.FreeWill s) :
-    Logos.Person.IntentionalSubject s := by
+    Logos.Agency.IntentionalSubject s := by
   obtain ⟨p, q, hChooses⟩ := h
   exact ⟨p, hChooses.1⟩
 

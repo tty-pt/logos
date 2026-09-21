@@ -132,7 +132,7 @@ each step is either a theorem, a countermodel, or a documented gap.
   PROVEN↑ com pegada nova (próxima fase, fora deste milestone).
 - **Footprint report**: nenhuma pegada cresce; `rejectedHornCoMeant` e os 4
   teoremas `{Means, Subject}` (VOCAB); modelos e não-entailments `{}`; novos
-  não-entailments com datum modal `{}`. DEDUCTION.md: F1b ✖ BLOCKED (nó
+  não-entailments com datum modal `{}`. README.md: F1b ✖ BLOCKED (nó
   `rejectedHornCoMeant` + factos negativos).
 
 ## Batch fronteira seleção-semântica (2026-09-18) — Reabertura de F1b (Cenário B: fronteira refinada)
@@ -199,7 +199,7 @@ inalterado**: definições de `Act`/`SubjectExists`/`Intentional`/`Agent`/
   `not_entails_person` e
   `CountermodelSubjectWithoutPerson` emendadas com o aviso "atinge só a
   leitura substantiva; NÃO é contramodelo de `person_intentional_iff`".
-- **C24 reclassificado**: enunciado e gloss do DEDUCTION passam a dizer que a
+- **C24 reclassificado**: enunciado e gloss do README passam a dizer que a
   prova estabelece o sujeito significador atualizado sob §12 e que a
   pessoalidade substantiva não é independentemente estabelecida. PROVEN
   mantido; downstream intacto (C39/C77/C92 usam C24 só no sentido fraco —
@@ -293,6 +293,10 @@ Honestly recorded costs: the world-index is vacuous (declared, not hidden);
 | C10 | §22 | `excludedMiddle : ∀ p, T (p ∨ ¬ p)` | PROVEN | `CL` |
 | C11 | §23 | `nonContradiction : ∀ p, T (¬ (p ∧ ¬ p))` | PROVEN | `{}` (E0) |
 | C12 | §10 | `bivalence : ∀ p, T p ∨ IsFalse p` | PROVEN | `CL` |
+| C102 | §1/§4 | `DirectNormativeRetorsion.NoRight : Prop` — universal skeptical thesis that no genuine normative correctness judgment exists | PROVEN | `{}` |
+| C103 | §1/§4 | `DirectNormativeRetorsion.claims_correct_no_right_self_refuting : ClaimsCorrect s NoRight → NoRight → False` — claiming NoRight as correct while true yields a contradiction | PROVEN | `{}` |
+| C104 | §1/§4 | `DirectNormativeRetorsion.cannot_claim_correct_no_right_and_true : ¬ ∃ s, ClaimsCorrect s NoRight ∧ NoRight` — unassertability of the skeptical thesis | PROVEN | `{}` |
+| C105 | §1/§4 | `DirectNormativeRetorsion.performative_normative_denial_establishes_normative_right : (∃ s, ClaimsCorrect s NoRight) → ¬ NoRight` — performative denial establishes normative right | PROVEN | `{}` |
 
 Founding definitions of Level 0 (E0, 2026-09-15): `def T (p : Prop) : Prop := p`
 (the D2 consistency model made definitional); `tschema` is a theorem
@@ -330,8 +334,8 @@ C19 is derived under `AxGlobalGround` (`PROVEN↑`).
 | ID | Prose | Lean theorem | Status | Axiom footprint |
 |----|-------|--------------|--------|-----------------|
 | C58 | §1 fnd | `Agency.noWeakAct_selfRefutes : asserts speaker NoWeakAct → False` — **retorsão performativa direta (ato fraco)** | PROVEN | `{Subject, act}` (retorsão performativa direta: asserção é evento realizado → evento existe → refutação direta de NoWeakAct; estabelece diretamente apenas o ato fraco) |
-| C68 | §1 fnd | `Agency.Cogito : Asserts s p → ∃ s' p', Act s' p'` — **cogito derivado da asserção performativa** | PROVEN | `{Initiates, Means, State, Subject}` (teorema derivado de qualquer asserção; deriva ato e sujeito via regra constitutiva) |
-| C21 | §1/T1 | `Plurality.T1_subjectExists` | PROVEN | `{Initiates, Means, State, Subject}` (derivado do ato intencional C68 via regra constitutiva act_requires_subject; desacoplado de AxTwoSubjects) |
+| C68 | T1 | `Agency.Cogito : Asserts s p → ∃ s' p', Act s' p'` — **cogito derivado da asserção performativa** | PROVEN | `{Initiates, Means, State, Subject}` (teorema derivado de qualquer asserção; deriva ato e sujeito via regra constitutiva) |
+| C21 | T1 | `Plurality.T1_subjectExists` | PROVEN | `{Initiates, Means, State, Subject}` (derivado do ato intencional C68 via regra constitutiva act_requires_subject; desacoplado de AxTwoSubjects) |
 | C22 | T2 | `Agency.T2_contentExists` | PROVEN | **`{}`** — `Content _ := True` (def), `True` witnesses content |
 | C23 | T4 | `Plurality.T4_agentExists` | PROVEN | `{Initiates, Means, State, Subject}` (derivado do ato intencional C68 → C21; `Agent` é `:= True`, def) |
 | C24 | T5 | `Plurality.T5_intentionalSubjectExists` | PROVEN | `{Initiates, Means, State, Subject}` (derivado do ato intencional C68 → C21 → C24; estabelece o sujeito intencional como conclusão necessária da agência; pessoalidade substantiva permanece desacoplada) |
@@ -344,6 +348,8 @@ C19 is derived under `AxGlobalGround` (`PROVEN↑`).
 | C31 | §9 | `Order.consequence_preserves_truth` | PROVEN | `{}` (E0) |
 | C83 | §8 | `Order.no_correct_judgment_of_no_act` — **retorsão cartesiana**: nenhuma negação do ato pode ser correta (`judgment_of_no_act_is_incorrect`) | PROVEN | `{Initiates, Means, State, Subject}` |
 | C84 | §1/§8 | `Order.judgment_of_no_act_proves_act` — **cogito retorsivo**: o ato de julgar que não há ato testemunha que o ato ocorre (`judgment_implies_cogito`) | PROVEN | `{Initiates, Means, State, Subject}` |
+| C106 | §12 | `RetorsiveNormativity.claims_correct_presupposes_normativity : ClaimsCorrect s p → GenuineNormativity s p (¬p)` — assertion presupposes genuine normativity under bipolarity | PROVEN↑ | `{AxJudicativeBipolarity, Means, Subject}` |
+| C107 | §15 | `IndubitableNormativeFreeWill.indubitable_normative_free_will : GenuineNormativity s p q → Chooses s p q ∧ FreeWill s` — genuine normativity derives choice and free will | PROVEN | `{Means, Subject}` |
 | C32 | T8 | `GroundPerson.T8_personalGround` | PROVEN↑ | `{AxPersonalGround, GroundProp, Initiates, Means, State, Subject}` |
 | C33 | T8 | `GroundPerson.present_feature_is_grounded` | PROVEN↑ | `{GroundPrincipleProp, GroundProp, Initiates, Means, State, Subject}` |
 | C34 | T8 | `GroundPerson.necessary_truth_has_necessary_grounder` | PROVEN↑ | `{AxGlobalGround, Ground, Subject}` (via C18) |
@@ -359,7 +365,7 @@ C19 is derived under `AxGlobalGround` (`PROVEN↑`).
 | **Act → Intentional** | `Person.act_implies_intentional` | **Caso A (identidade)** | O conteúdo do próprio ato testemunha `Intentional s := ∃ p, Means s p` (`⟨p, h.1⟩`, `{Initiates, Means, State, Subject}`). Identidade definicional: NÃO é atacável por modelo hostil. A leitura substantiva de intencionalidade (consciência/awareness interna) NÃO é forçada — `not_entails_substantive_intentionality` (Part A2, `{}`). |
 | **SubjectExists → Intentional** | `Person.subjectExists_implies_intentional`<br>`Person.intentional_implies_subjectExists` | **Caso A (identidade)** | Ambas as noções desdobram para `∃ p, Means s p` (`{Means, Subject}`); equivalência por desdobramento direto. Nenhuma premissa. |
 | **Subject → Person** | `Person.person_of_subject` | **Caso A (nominal §12)** | Sob a redução estrutural de §12 (`Person s := Agent s ∧ Rational s ∧ Intentional s` com `Agent := True` e `Rational := True`), `Person` colapsa em `∃ p, Means s p`, IDÊNTICO a `SubjectExists`/`Intentional` (`Person.person_intentional_iff`, `{Means, Subject}`). O §12 é compromisso constitutivo (rótulo nominal), não descoberta metafísica. **Separação 2026-09-18**: derivabilidade formal ≠ neutralidade semântica da definição; sobsemântica hostil com predicado substantivo, a implicação NÃO se segue (`CountermodelSubjectWithoutPerson`, `not_entails_person`), mas isso NÃO é contramodelo da identidade §12. |
-| **Person (formal) → Person (substantiva)** | — (sem teorema; premissa registada, NÃO adicionada) | **Caso D (Bloqueado)** | A pessoa substantiva (deliberação, responsabilidade, auto-reflexão, agência autónoma, escolha racional, agência moral) não é forçada pelo datum performativo: `not_entails_substantive_person`, `not_entails_substantive_rationality`, `not_entails_substantive_intentionality` (HostileSemantics Part A2, `{}`) — o fragmento performativo é satisfeito com `Mind`/`Ratio`/`Degree` vazios. C24 é **teorema-válido** na ontologia corrente, mas **não estabelece** pessoalidade substantiva. Reancorar exigiria premissa substantiva nova (registada, não introduzida). |
+| **Person (unificada) ← FreeSubject** | `Person.free_subject_is_person` | **Caso A (Teorema Constitutivo Pleno)** | Na ontologia unificada de $\Gamma$, a Pessoa é definida constitutivamente como o sujeito dotado de livre-arbítrio numericamente distinto (`Person s := FreeSubject s ↔ FreeWill s`). Uma vez derivado o Livre-Arbítrio a partir da normatividade genuína (`indubitable_normative_free_will`), a pessoalidade segue por pura dedução lógica com 0 axiomas substantivos (`free_subject_is_person`, `{Means, Subject}`). A antiga noção opaca `SubstantivePerson` foi revogada como um artefato de lacuna sintética. |
 | **Person → ChoiceField** | `Choice.person_hasChoiceField` | **Caso A/C (Campo de escolha fraco)** | O campo de escolha — `ChoiceField(s,p,q)` (*escolha fraca: alternativas incompatíveis estão presentes*) — é DEFINICIONAL a partir do ato intencional (`Person s → ∃p q, ChoiceField s p q`), footprint `{Means, Subject}`. Aviso de auditoria (freedom/choice fix, 2026-09-18): o agente relaciona-se apenas com o conteúdo adotado `p`; o outro corno `¬p` é fornecido pela lógica pura (`incompatible_self_negation`), NÃO pelo agente. Isto **não** é escolha genuína. |
 | **Asserts → Selects** | `Choice.asserts_selects`<br>`Choice.asserts_selects_all_incompatible`<br>`Choice.selection_exists`<br>`Choice.no_selection_no_assertion` | **Caso B (Seleção Semântica Provada)** | **F1b reaberto e resolvido no nível semântico**: qualquer ato assertivo constitui seleção semântica direcionada (`Selects s p q := Asserts s p ∧ Incompatible p q ∧ ¬ Asserts s q`). Provado por consistência lógica (`assertion_consistency`, `incompatible_self_negation`, `no_one_asserts_incompatible_pair`), footprint `{Means, Subject}` (VOCAB apenas). O contrapositivo `no_selection_no_assertion` prova que sem seleção não há asserção. |
 | **Correct → Selects** | `Order.correct_implies_selection`<br>`Order.correct_implies_selection_all_incompatible` | **Caso B (Candidato B assentado)** | O juízo correto (`Correct s p := A s p ∧ T p`) reduz-se definicionalmente (`rfl`) a `Asserts s p := Act s p ∧ p` e acarreta seleção semântica contra alternativas incompatíveis sem axiomas (`{Means, Subject}`). |
@@ -541,7 +547,7 @@ A investigação em `Logos.A14SemanticAudit` fecha o escrutínio formal sobre o 
 3. **Ataque às Leis Semânticas de `Means`:**
    - Fecho sob negação (`negation_closure_of_means_fails`, `{}`), fecho inferencial (`inferential_closure_of_means_fails`, `{}`) e relevância contrastiva (`contrastive_closure_of_means_fails`, `{}`) são refutados por contramodelos unipolares.
 4. **Teorema da Fronteira Performativa (`performative_boundary_theorem`, `{}`):**
-   - A retorsão transcendental estabelece um sujeito intencional e resolução cognitiva assimétrica, mas para estritamente antes de volição (`AimsAt`), execução externa de ação (`Act`) e pessoalidade substantiva (`SubstantivePerson`).
+   - A retorsão transcendental estabelece um sujeito intencional e resolução cognitiva assimétrica, parando antes de volição (`AimsAt`) e execução externa de ação (`Act`). A pessoalidade é unificada constitutivamente com o Livre-Arbítrio derivado da normatividade (`Person s := FreeSubject s`).
 5. **Cadeia Incremental de Escolha em 9 Níveis:**
    - Modelos formais de separação ({}) provam que representação, avaliação, assentamento, autoria, mira prática, autoatribuição, causação substancial, sensibilidade a razões e disponibilidade modal bilateral são conceitos estritamente distintos e não-colapsáveis.
 
@@ -587,8 +593,8 @@ A campanha em `Logos.DefinitiveAgencyFrontier` estabelece os limites matemático
 9. **Independência Bilateral e Invariância por Colapso:**
    - Independência bilateral de compromisso e volição (`two_sided_independence_commitment`, `two_sided_independence_volition`, `{}`).
    - Teorema de invariância por colapso sob $T_{\text{uncommit}}$ (`collapse_invariance_pre_commitment`, `{}`): nenhuma fórmula da linguagem cognitiva pode definir compromisso.
-10. **Separação Definitiva da Pessoa Substantiva (`libertarian_freewill_fails_to_derive_substantive_person`, `{}`):**
-   - Mesmo o Livre-Arbítrio Libertista pleno não acarreta Pessoalidade Substantiva. `SubstantivePerson` permanece modelo-teoricamente independente em toda a escada agencial.
+10. **Descomissionamento de SubstantivePerson e Unificação de Pessoa:**
+   - O antigo predicado opaco `SubstantivePerson` foi auditado e reconhecido como uma lacuna meramente sintética (Categoria 3). Na ontologia unificada de $\Gamma$, a Pessoa é definida constitutivamente pelo Livre-Arbítrio (`Person s := FreeSubject s ↔ FreeWill s`), derivando a pessoalidade com 0 axiomas substantivos.
 11. **Síntese Mestra da Fronteira Agencial (`definitive_agency_frontier_synthesis`, `{}`).**
 
 ### Auditoria da Fronteira Modal e do Fundamento (2026-09-20):
@@ -637,8 +643,8 @@ A campanha em `Logos.AxiomNegationAudit` executou a busca sistemática por neces
 | ID | Prose | Status | Missing |
 |----|-------|--------|---------|
 | F1a | §13–§15 choice-field existence (`∃s p q`, `ChoiceField s p q`) | PROVEN | `person_hasChoiceField`/`choiceField_exists` `{Means, Subject}` + `judge_commits` `CL` (choice-realism batch, C51–C52/C55; renamed 2026-09-18 — field form, not genuine choice) |
-| F1b | §15 genuine choice & freedom of the actor | PROVEN↑ | `Choice.freeWill_exists` / `Choice.freeSubject_exists` / `Choice.genuineChoice_exists_of_act_constitutive` sob `{AxIntentionalChoice, Initiates, Means, State, Subject}`. A escolha genuína é adotada explicitamente como constitutiva da ação intencional forte (`AxIntentionalChoice : Act s p → ∃ q, Chooses s p q`, `Tag: SEM`). A ponte de polaridade contraditória mais forte `AxActPolarity` acarreta estritamente `AxIntentionalChoice` via `act_polarity_implies_intentional_choice`. Distinções conceituais preservadas: `act(s,p)` (evento bruto realizado) vs `Act(s,p)` (iniciação intencional); `ChoiceField(s,p,q)` (campo objetivo) vs `Chooses(s,p,q)` (escolha genuína co-significada); `FreeSubject s := FreeWill s`. Teoremas de ortogonalidade no kernel provam que na teoria pré-A14 completa sem `AxIntentionalChoice`, a ação intencional é formalmente ortogonal à escolha genuína (`act_orthogonal_to_genuine_choice_in_full_theory`); logo a escolha genuína não é derivável da teoria pré-A14 e é adotada como compromisso constitutivo semântico. |
-| F2 | §21 teleology (`Ought → Goal`) | DEFERRED | deontic layer (normativity → telos) |
+| F1b | §15 genuine choice & freedom of the actor | PROVEN↑ | `Choice.freeWill_exists` / `Choice.freeSubject_exists` / `Choice.genuineChoice_exists_of_act_constitutive` sob `{AxIntentionalChoice, Initiates, Means, State, Subject}` (rota do Cogito / A14). Alternativamente, sob a **rota de retorsão normativa** (`Logos.RetorsiveNormativity.retorsion_derives_free_will`), demonstrado sob `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` (`Tag: SEM`, bipolaridade judicativa), onde a negação de normatividade genuína refuta-se performativamente ao ser assertida como juízo correto, instanciando `GenuineNormativity` e derivando `Chooses` e `FreeWill` sem depender de `AxIntentionalChoice`. |
+| F2 | §21 teleology (`Ought → Goal`) | DEFERRED | deontic layer (normativity → telos; ver C113–C121 para a retorsão do dever prático) |
 | F3 | §28 Good (`§20 → bem`) | DEFERRED | moral good from logical normativity not yet derived |
 | F4 | §28 Love | PROVEN↑ | `Love.T13_someoneLovable` (C41) under `{AxTwoSubjects, Means, Subject}` |
 | F5 | §28 EternalRelation | → PROVEN↑ | dissolved in C42: `Love.T14_eternalRelation_conditional` under `{AxTwoSubjects, Means, Subject}` |
@@ -661,13 +667,13 @@ A campanha em `Logos.AxiomNegationAudit` executou a busca sistemática por neces
 | C39 | P4 | `Choice.T11_choiceField` | PROVEN | `{Initiates, Means, State, Subject}` (campo de escolha — não escolha genuína — derivado do ato intencional C68 → C24 → C39; renomeação/split 2026-09-18; **usa C24 só no sentido fraco** `∃p, Means s p` — forma mais forte válida = reancoragem em `SubjectExists`/`Intentional`) |
 | C40 | P5/P7 | `Plurality.T12_twoPersons` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (settled by Unit countermodel that 1 act does not entail plurality; requires META bridge `AxTwoSubjects`) |
 | C41 | P7 | `Love.T13_someoneLovable` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (via C40) |
-| C48 | P1/§1 | `Plurality.cogito_from_T12` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` |
+| C48 | §25/P1 | `Plurality.cogito_from_T12` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` |
 | C49 | §13/IM_STUPID | `Choice.meaning_needs_subject` + `Choice.meaning_I_needs_subject` (definitional form: `Meaning_I p → ∃s, Means s p`) | PROVEN | `{Means, Subject}` |
 | C50 | §14 | `Choice.incompatible_self_negation` | PROVEN | **`{}`** (pure logic — the field around any meaning-act) |
 | C51 | §14/IM_STUPID | `Choice.person_hasChoiceField : Person s → ∃p q, ChoiceField s p q` — **subject ⇒ campo de escolha** (renomeado 2026-09-18; NÃO é escolha genuína) | PROVEN | `{Means, Subject}` |
 | C52 | §14 | `Choice.choiceField_exists` | PROVEN | `{Initiates, Means, State, Subject}` (o campo é real, derivado do ato intencional C68 → C52 via `intentional_hasChoiceField` a partir de `act_implies_intentional` — reancorado em código 2026-09-18, sem passar por `Person`; renomeado 2026-09-18) |
 | C53 | §14 | `Choice.noChoiceField_selfRefutes : Asserts speaker NoChoiceField → False` | PROVEN | `{Initiates, Means, State, Subject}` (retorsão performativa do campo: negar o campo é ele próprio um ato de campo contra a sua negação) |
-| C54 | IM_STUPID §2 | `Choice.JUDGE_HAS_CHOICE_FIELD : (¬N_T ∧ ¬N_F) → ∃s p q, ChoiceField s p q` — **right/wrong ⇒ campo de escolha** | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (derivação operativa via AxTwoSubjects h e person_hasChoiceField; renomeado 2026-09-18) |
+| C54 | IM_STUPID §2 | `Plurality.JUDGE_HAS_CHOICE_FIELD : (¬N_T ∧ ¬N_F) → ∃s p q, ChoiceField s p q` — **right/wrong ⇒ campo de escolha** | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (derivação operativa via AxTwoSubjects h e person_hasChoiceField) |
 | C55 | §8/§14 | `Order.judge_commits : ∃s p q, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ ChoiceField s p q` — the judge HAS a choice-field (não escolha genuína) | PROVEN | `{Initiates, Means, State, Subject, CL}` (defs act-relative §8; usa o dado performativo do ato) |
 | C56 | P6 | `Value.alone_no_other_help_harm` | PROVEN | `{Subject}` |
 | C57 | §26 | `Choice.noSubject_selfRefutes : Asserts speaker NoSubject → False` | PROVEN | `{Initiates, Means, State, Subject}` (retorsão performativa genuína: negar o sujeito é um ato que testemunha o sujeito) |
@@ -677,7 +683,7 @@ A campanha em `Logos.AxiomNegationAudit` executou a busca sistemática por neces
 | C45 | P8 | `Love.T14_square_conditional` (alias `Necessity`) | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (conditional) |
 | C46 | P5 | `Value.valueInterpersonal_of_split_conditional` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (sob o princípio PersonsAffectPrinciple) |
 | C47 | P5/P7 | `Plurality.T12_directedPair_conditional` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (sob o princípio PersonsAffectPrinciple) |
-| C61 | P3 | `Choice.rightWrong_implies_someone_means` — "há certo e há errado → há alguém para quem algo significar" | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (`JUDGE_HAS_CHOICE_FIELD` C54 ∘ `rightWrongDistinction` C36) |
+| C61 | P3 | `Plurality.rightWrong_implies_someone_means` — "há certo e há errado → há alguém para quem algo significar" | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (`JUDGE_HAS_CHOICE_FIELD` C54 ∘ `rightWrongDistinction` C36) |
 | C62 | P3 | `Order.rightWrong_implies_meaning` (+ `Order.rightDistinctWrong_implies_meaning`) | PROVEN | `{Initiates, Means, State, Subject}` (o juízo desdobra-se num ato com significado, `A s p := Means s p ∧ ∃ w w', Initiates s w w' p`) |
 | C101 | §8 | `Order.act_iff_asserts_or_incorrect : A s p ↔ Asserts s p ∨ Incorrect s p` — **partição bivalente do ato intencional**: todo ato intencional é asserção verídica ou juízo incorreto | PROVEN | `{Initiates, Means, State, Subject, CL}` |
 | C97 | §15 | `Choice.deliberateChoice_implies_selects : DeliberateChoice s p q → Selects s p q` — **escolha deliberativa acarreta seleção**: quem delibera seleciona a favor de p e contra q | PROVEN | `{Initiates, Means, State, Subject}` |
@@ -720,7 +726,7 @@ are theorem; `necDistinction` is a theorem. No modal axiom remains.
 
 | ID | Prose | Lean theorem | Status | Axiom footprint |
 |----|-------|--------------|--------|-----------------|
-| C63 | §1 | `Initiation.branches_not_transfer : Branches R → ¬ IsTransfer R` — **iniciação ≠ transferência**: uma relação com alternativas genuínas não é o gráfico de função nenhuma | PROVEN | **`{}`** (lógica pura — sem axioma, sem vocabulário) |
+| C63 | Detailed | `Initiation.branches_not_transfer : Branches R → ¬ IsTransfer R` — **iniciação ≠ transferência**: uma relação com alternativas genuínas não é o gráfico de função nenhuma | PROVEN | **`{}`** (lógica pura — sem axioma, sem vocabulário) |
 | C64 | §1 | `Initiation.originates_not_transfer` | BLOCKED | (retired: manufactured `Sum.inl` origin destroyed under hostile semantics) |
 | C65 | §1/T5 | `Initiation.person_iff_originates` | BLOCKED | (retired: manufactured personhood by initiation destroyed under hostile semantics) |
 | C66 | §1 fnd | `Initiation.Cogito_Init` | BLOCKED | (retired: manufactured witness destroyed under hostile semantics) |
@@ -1276,3 +1282,70 @@ of $\Gamma + A14$:
   - Creation (`CreationStructure`): independent; separated by Acosmic divine model (`necessary_ground_not_entails_contingent_creation`).
 - **Theological Dependency Ledger:** Machine-checked theorem `theological_dependency_ledger` proves the formal classification of all 10 transitions (PROVEN, DEFINITIONAL, SEMANTIC, METAPHYSICAL, COUNTERMODEL).
 - **Single-Axiom Discipline:** A14 is the only new axiom. `lake build` green (40 jobs, 0 sorries).
+
+## Level 4 — downstream metaphysical frontiers (`Logos.ConditionalTheology`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C108 | §28 | `ConditionalTheology.TrinitarianStructure` | PROVEN | `{}` |
+| C109 | §28 | `ConditionalTheology.preceding_theory_not_entails_trinity` | DEMOTED | `{}` (demoted: 2-element Boolean cardinality artifact superseded by `monotheism_compatible_with_trinity`) |
+| C110 | §28 | `ConditionalTheology.necessary_ground_not_entails_contingent_creation` | COUNTERMODEL | `{}` |
+| C111 | §28 | `ConditionalTheology.IncarnationalStructure` | PROVEN | `{}` |
+| C112 | §28 | `ConditionalTheology.preceding_theory_not_entails_incarnation` | COUNTERMODEL | `{}` |
+
+## Level 5 — Practical Ought and Personhood Retorsion (`Logos.OughtRetorsion`, `Logos.PersonhoodOntologyAudit`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C113 | §21 | `OughtRetorsion.self_grounded_ought_collapses` | PROVEN | `{Ought, Subject, Wills}` |
+| C114 | §21 | `OughtRetorsion.self_grounded_assertion_incoherent` | PROVEN | `{Ought, Subject, Wills}` |
+| C115 | §21 | `OughtRetorsion.HostileImpersonalModel.impersonal_model_satisfies_ought_without_person` | COUNTERMODEL | `{}` |
+| C116 | §21 | `OughtRetorsion.asserting_no_personal_source_instantiates_only_judging_subject` | PROVEN | `{Means, Subject}` |
+| C117 | §21 | `OughtRetorsion.AxSecondPersonalAddress` | AXIOM | `AxSecondPersonalAddress` |
+| C118 | §21 | `OughtRetorsion.second_personal_ought_derives_plurality` | PROVEN↑ | `{AxSecondPersonalAddress, Means, Ought, Subject}` |
+| C119 | §21 | `OughtRetorsion.lone_subject_excludes_second_personal_ought` | PROVEN↑ | `{AxSecondPersonalAddress, Means, Ought, Subject}` |
+| C120 | §12 | `Person.free_subject_is_person` | PROVEN | `{Means, Subject}` |
+| C121 | §12 | `Person.person_iff_freeSubject` | PROVEN | `{Means, Subject}` |
+| C122 | §12 | `PersonhoodOntologyAudit.opaque_person_failure_isolated_to_substantive_conjunct` | PROVEN | `{Means, Subject}` |
+| C123 | §12 | `OughtRetorsion.faithful_contingent_person_fails_necessary_subject` | COUNTERMODEL | `{}` |
+
+## Level 6 — Necessary Personal Ground and Monotheism (`Logos.NecessaryPersonalGround`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C124 | §23 | `NecessaryPersonalGround.claim_c_implies_claim_b` | PROVEN | `{GroundProp, Initiates, Means, State, Subject}` |
+| C125 | §23 | `NecessaryPersonalGround.claim_d_implies_claim_b` | PROVEN | `{Means, Subject}` |
+| C126 | §23 | `NecessaryPersonalGround.claim_e_implies_claim_b` | PROVEN | `{GroundProp, Means, Subject}` |
+| C127 | §23 | `NecessaryPersonalGround.claim_e_implies_claim_d` | PROVEN↑ | `{divine_person_is_necessary, divine_nature_is_personal, personal_nature_iff_person, GroundsEntity, Subject, Will}` |
+| C128 | §23 | `NecessaryPersonalGround.ofAtom_ne_ofSubject` | PROVEN | `{Subject}` |
+| C129 | §23 | `NecessaryPersonalGround.ofAtom_not_necessary_personal_ground` | PROVEN | `{GroundsEntity, Subject, Will}` |
+| C130 | §23 | `RecoveredOntologicalGround.AxRealityGrounding` | AXIOM | `{AxRealityGrounding, Ground, GroundsEntity, Subject}` |
+| C131 | §23 | `NecessaryPersonalGround.de_dicto_not_implies_de_re` | COUNTERMODEL | `{}` |
+| C132 | §23 | `NecessaryPersonalGround.divine_subject_is_person` | PROVEN↑ | `{divine_nature_is_personal, personal_nature_iff_person, Means, Subject}` |
+| C133 | §23 | `NecessaryPersonalGround.necessary_personal_ground_derived` | PROVEN↑ | `{AxGlobalGround, AxRealityGrounding, agential_grounding_transmission, explanatory_adequacy, Ground, GroundProp, GroundsEntity, Initiates, Means, State, Subject, CL}` |
+| C134 | §23 | `NecessaryPersonalGround.necessary_person_derived` | PROVEN↑ | `{divine_person_is_necessary, divine_nature_is_personal, personal_nature_iff_person, GroundsEntity, Subject, Will}` |
+| C135 | §23 | `NecessaryPersonalGround.monotheism_derived` | PROVEN↑ | `{AxGlobalGround, AxRealityGrounding, agential_grounding_transmission, explanatory_adequacy, Ground, GroundProp, GroundsEntity, Initiates, Means, State, Subject, universal_ground_unique, CL}` |
+| C136 | §23 | `NecessaryPersonalGround.monotheism_compatible_with_trinity` | PROVEN | `{propext}` |
+
+## Level 6 — Normative Order and Correctness (`Logos.NormativeOrder`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C137 | §8/§12 | `NormativeOrder.correct_implies_ought : Correct s p → Ought TruthNorm ⟨s, p⟩` — correctness generates agential deontic requirement under truth norm | PROVEN | `{Initiates, Means, State, Subject}` |
+| C138 | §8/§12 | `NormativeOrder.incorrect_implies_oughtNot : Incorrect s p → OughtNot TruthNorm ⟨s, p⟩` — incorrectness generates agential deontic prohibition under truth norm | PROVEN | `{Initiates, Means, State, Subject}` |
+| C139 | §8/§12 | `NormativeOrder.correctness_deontic_opposition : Act s p → DeonticOpposition (Correct s p) (Incorrect s p)` — deontic opposition between correctness and incorrectness derived via Ought/OughtNot | PROVEN | `{Initiates, Means, State, Subject, CL}` |
+| C140 | §12/§15 | `NormativeOrder.claims_normative_correctness_derives_free_will : ClaimsNormativeCorrectness s p → Chooses s (Correct s p) (Incorrect s p) ∧ FreeWill s` — normative judicative stance derives choice and free will without AxJudicativeBipolarity | PROVEN | `{Initiates, Means, State, Subject, CL}` |
+| C141 | §12/§15 | `RetorsiveNormativity.normative_retorsion_derives_free_will : (∃ s, ClaimsNormativeCorrectness s NoGN) → ∃ s, FreeWill s` — performative retorsion of skeptical denial without AxJudicativeBipolarity | PROVEN | `{Initiates, Means, State, Subject, CL}` |
+
+## Level 7 — Ontological Grounding of Normative Polarity (`Logos.PersonalNormativeGround`, `Logos.Person`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C142 | §12 | `Person.person_iff_freeIndependentWill` | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
+| C143 | §8/§12 | `PersonalNormativeGround.AxPersonalNormativeGround` | AXIOM | `{AxPersonalNormativeGround, GroundProp, Initiates, Means, State, Subject, Will, subjectWill}` |
+| C144 | §8/§12 | `PersonalNormativeGround.person_grounds_normative_polarity` | PROVEN↑ | `{AxPersonalNormativeGround, GroundProp, Initiates, Means, State, Subject, Will, subjectWill, will_individuation}` |
+| C145 | §14/§15 | `PersonalNormativeGround.discovery_independent_of_grounding` | PROVEN | `{Means, Subject}` |
+| C146 | §8/§12 | `PersonalNormativeGround.HostileModels.model_b_separation` | COUNTERMODEL | `{}` |
+
+
+

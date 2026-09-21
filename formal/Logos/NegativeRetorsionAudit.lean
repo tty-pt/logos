@@ -32,8 +32,7 @@ import Logos.Retorsion
 
 namespace Logos.NegativeRetorsionAudit
 
-open Logos.Agency (Subject Means Act Asserts State Initiates act asserts)
-open Logos.Person (IntentionalSubject)
+open Logos.Agency (Subject Means Act Asserts State Initiates act asserts IntentionalSubject)
 open Logos.Retorsion (DomainItem DependsOn EverythingObjective Objective Subjective transcendental_reflection_intentional)
 
 -- ===========================================================================

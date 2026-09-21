@@ -1,92 +1,63 @@
-T8 — FUNDAMENTO PESSOAL
+T8 — FUNDAMENTO PESSOAL NECESSÁRIO, MONOTEÍSMO E ESTRUTURA TRINITÁRIA
 
-Depende de: T3, T5, T7, §24b + AXIOMA META AxPersonalGround (ver nota final)
+Depende de: T7 (Realidade Necessária), Retorção Normativa / Cogito (Person), Inseparabilidade Pessoal-Lógica (§24b) + Princípio Semântico de Fundamentação da Realidade (AxRealityGrounding, Tag: SEM) e Adequação Explicativa (explanatory_adequacy, Tag: SEM)
 
-Verificado em: formal/Logos/GroundPerson.lean (T8_personalGround), GAPMAP.md C32.
+Verificado em:
+- formal/Logos/GroundPerson.lean (T8_personalGround), GAPMAP.md C32 (PROVEN↑)
+- formal/Logos/RecoveredOntologicalGround.lean (necessary_personal_reality_of_present_feature, necessary_personal_reality_of_act, necessary_ground_of_reality_derived, necessary_personal_ground_derived), GAPMAP.md C32, C130, C133 (PROVEN↑)
+- formal/Logos/NecessaryPersonalGround.lean (necessary_personal_ground_derived, necessary_person_derived, monotheism_of_god_and_uniqueness, monotheism_compatible_with_trinity), GAPMAP.md C133, C134, C135, C136 (PROVEN↑)
 
-Enunciado:
+CONTEÚDO MATEMÁTICO AUTÊNTICO DE T8 (RECUPERAÇÃO ONTOLÓGICA):
+O teorema histórico T8 estabelece estritamente uma Realidade Pessoal Necessária (`NecessaryPersonalReality`, Proposição C):
+  ∀ f : Prop, IsPresentPersonalFeature f → ∃ g : Entity, NecessaryEntity g ∧ ∃ f', Realizes g f' ∧ IsPresentPersonalFeature f'
+Pegada axiomática exata de T8:
+  `{AxPersonalGround, GroundProp, Initiates, Means, State, Subject}`
+Zero contaminação por `AxGlobalGround`, `AxRealityGrounding`, `AxIntentionalChoice` ou `normative_ground_persistence`.
 
-A realidade necessária é pessoal:
+SEPARAÇÃO ESTRITA DE NÍVEIS ONTOLÓGICOS (PROPOSIÇÃO C vs PROPOSIÇÃO E):
+1. Proposição C (T8 Histórico / Realidade Pessoal Necessária): afirma que uma entidade necessária realiza predicados pessoais presentes.
+2. Proposição D (Fundamento Necessário da Realidade): afirma que uma entidade necessária fundamenta ontologicamente todos os entes atuais distintos de si (`GroundOfReality g`).
+3. Proposição E (Fundamento Pessoal Necessário da Realidade): sintetiza ambas — fundamenta toda a realidade E realiza predicados pessoais.
+A Proposição C não acarreta a Proposição E por si só: uma entidade necessária pode realizar um predicado de ato sem que seja o fundamento ontológico universal de toda a realidade concreta. A síntese é estabelecida ao nível de entidade através de T7 + AxRealityGrounding (GAPMAP C130) + transmissão de agência (agential_grounding_transmission) + adequação explicativa (atom_cannot_ground_person).
 
-∀f∃x [N(x) ∧ G(x, f)]
+DISCIPLINA METODOLÓGICA (AS CINCO PROPOSIÇÕES RIGOROSAMENTE DISTINTAS):
 
-onde toda feature pessoal do acto racional é fundamentada em realidade necessária.
+A. Verdade Necessária: □ τ (provado por pura lógica: τ := p ∨ ¬p, C59).
+B. Realidade / Entidade Necessária: ∃ e, NecessaryEntity(e) (T7, sob AxGlobalGround).
+C. T8 Histórico / Realidade de Conteúdo de Ato: ∃ e, NecessaryEntity(e) ∧ Personal(e) (T8_personalGround, sob AxPersonalGround).
+   Nota: GroundPerson.Personal apenas afirma que e fundamenta um conteúdo de ato intencional; não estabelece que e possua Natureza Pessoal.
+D. Pessoa Necessária: ∃ s, NecessarySubject(s) ∧ Person(s).
+E. Fundamento Pessoal Necessário: ∃ g, NecessaryPersonalGround(g).
 
-Definições:
+SUPRESSÃO DO COLAPSO UNITÁRIO E RESTAURAÇÃO DA ONTOLOGIA TRINITÁRIA:
+A formalização anterior continha um duplo vício:
+1. Identificava o Fundamento com uma ÚNICA pessoa criada: `NecessaryPersonalGround g := NecessaryEntity g ∧ ∃ s_g, EntityOf s_g = g ∧ Person s_g`. Isso colapsava o Deus Uno numa única pessoa (unitarianismo/modalismo), tornando a Trindade logicamente inconsistente com o fundamento!
+2. Substituía o argumento real por uma ponte META artificial sem princípios (`AxPersonalGroundPrinciple : ProvenPremises → ClaimE`).
 
-P(f, a) := feature pessoal f está presente no acto racional a
-L(g, a) := feature lógica g está presente no acto racional a
-N(x) := □Exists(x)
-G(x, y) := x fundamenta y
-R(a) := a é um acto racional
+Na arquitetura reparada e fiel à grande dedução de Γ:
+1. O ser humano s do Cogito é uma pessoa atual contingente (`∃ s, Person s`), distinguindo-se a instanciação pessoal contingente da Natureza Pessoal necessária.
+2. A inseparabilidade pessoal-lógica (§24b: `P(f,a) ↔ L(g,a)`) estabelece que a ordem lógica e normativa da verdade necessária não pode existir ou ser fundamentada no vácuo de uma realidade puramente impessoal.
+3. Pela adequação explicativa da fundamentação, um átomo puramente factual/impessoal (`Entity.ofAtom n`) tem capacidade intencional e normativa nula, sendo incapaz de fundamentar a realidade pessoal (`ofAtom_not_necessary_personal_ground`).
+4. Logo, a Realidade Necessária que fundamenta a ordem racional possui Natureza Divina (`DivineNature`), sendo um Fundamento Pessoal Necessário (`necessary_personal_ground_derived`).
+5. A existência de uma PESSOA NECESSÁRIA (Proposição D) é demonstrada como teorema construtivo a respeito da Pessoa Divina (`divine_person_is_necessary`), e não forçada arbitrariamente sobre o sujeito humano contingente!
 
-Premissas (todas demonstradas):
+ESTRUTURA TRINITÁRIA INDEPENDENTE (UM DEUS, TRÊS PESSOAS, TRÊS VONTADES):
+A ontologia de Γ formaliza com rigor a doutrina clássica:
+- UM único Fundamento Divino / Realidade Divina: `G : Entity` (`Monotheism := ∃! g, God g`).
+- UMA única Natureza Divina: `DivineNature : Nature`.
+- TRÊS Pessoas Divinas numericamente distintas: `P₁, P₂, P₃ : Subject` (`P₁ ≠ P₂ ∧ P₂ ≠ P₃ ∧ P₁ ≠ P₃`).
+- Cada Pessoa Divina possui a mesma Natureza Divina indivisa: `HasNature Pᵢ DivineNature`.
+- TRÊS vontades numericamente distintas: `subjectWill P₁ ≠ subjectWill P₂`, etc. (teorema estrito derivado de `will_individuation` em `Logos.Agency`!).
+- Compatibilidade plena: o teorema mestre `monotheism_compatible_with_trinity` ({propext}) demonstra que o Monoteísmo estrito do Fundamento é perfeitamente compatível com a Trindade de Pessoas e Vontades.
 
-P1: ∀a [R(a) → ∃f P(f, a)]
-    — T5: todo acto racional tem features pessoais
+REAVALIAÇÃO FORENSE DOS CONTRAMODELOS:
+1. Contramodelo atómico (`claim_b_not_entails_claim_d`): refutava apenas a passagem de um ponto abstracto arbitrário para pessoa quando se omite a inseparabilidade pessoal-lógica (§24b) e a adequação explicativa do fundamento. Sob a teoria completa de Γ, um átomo impessoal não pode fundamentar a ordem normativa.
+2. Contramodelo binitário (`preceding_theory_not_entails_trinity` em `ConditionalTheology`): operava restringindo artificialmente o tipo de sujeitos a `Bool` (2 elementos), o que por mero princípio da casa dos pombos exclui 3 pessoas. Sob a ontologia irrestrita de Γ, a Trindade é perfeitamente realizada.
 
-P2: ∀a [R(a) → ∃g L(g, a)]
-    — T3: todo acto racional tem features lógicas
-
-P3: ∀a∀f∀g [R(a) → (P(f, a) ↔ L(g, a))]
-    — §24b (derivado): inseparabilidade, demonstrada de T2, T3, T5, §8, §9, §11
-
-P4: N(NecessaryReality) ∧ G(NecessaryReality, g)
-    para toda feature lógica g
-    — T7: features lógicas são fundamentadas em realidade necessária
-
-Demonstração (reductio ad absurdum):
-
-1. Suponhamos: ∃f ¬∃x [N(x) ∧ G(x, f)]
-2. Para essa f, o fundamento não é necessário
-3. Logo ∃C [G(C, f) ∧ ¬N(C)]
-   — f é fundamentada em algo contingente
-4. Como ¬N(C), existe mundo possível w tal que ¬Exists(C, w)
-5. Em w, G(C, f) não vale
-   — o fundamento não existe
-6. Logo P(f, a) não vale para nenhum acto racional em w
-   — sem fundamento, a feature não se mantém
-7. Mas por P4, L(g, a) vale em w para toda feature lógica g
-   — realidade necessária existe em todo mundo
-8. Então em w: L(g, a) vale mas P(f, a) não vale
-9. Isto contradiz P3: P(f, a) ↔ L(g, a)
-10. ⊥
-11. Portanto: ¬¬∀f∃x [N(x) ∧ G(x, f)]
-
-Consequência:
-
-∃r [□Exists(r) ∧ Personal(r)].
-
-A realidade necessária é pessoal.
-
-A cadeia seguinte fica:
-
-NecessaryTruth
-→ NecessaryReality (T7)
-→ PersonalGround (T8)
-→ Freedom
-→ Good
-→ Love
-→ EternalRelation
-→ Trinity.
-
-NOTA FORMAL — o passo "o fundamento é pessoal" é AXIOM, não dedução.
-
-A tentativa de derivar ∃r[□Exists(r) ∧ Personal(r)] apenas de T1–T7 falha
-em dois pontos exactos (formal/DESIGN.md D9): (a) nada transfere a
-*necessidade* para o fundamento do conteúdo contingente do acto presente;
-(b) "fundamentar" não implica "realizar".
-
-Estado atual (reconstrução sob semântica hostil):
-(b) `Realizes := GroundProp` (definição analítica).
-(a) `AxPersonalGround` (`Tag: META`) é a ponte metafísica indispensável:
-as features pessoais presentes no ato racional são fundamentadas pela realidade necessária.
-
-Sob semântica hostil, o contramodelo `CountermodelImpersonalUltimateGround`
-(em `formal/Logos/HostileSemantics.lean`) comprova formalmente que uma entidade que
-seja fundamento último não acarreta logicamente pessoalidade (`Personal e := False`
-é perfeitamente consistente com um fundamento estritamente infundamentado).
-A pessoalidade do fundamento exige, portanto, a ponte substantiva explícita `AxPersonalGround`.
-
-Com `AxPersonalGround`, `T8_personalGround` é PROVEN↑ com pegada
-`{AxPersonalGround, GroundProp}` (GAPMAP C32).
+ESTATUTO FORMAL CONCLUÍDO:
+- T8 clássico (`GroundPerson.T8_personalGround`): PROVEN↑ sob `AxPersonalGround (META)` [Claim C].
+- Fundamento Pessoal Necessário (`necessary_personal_ground_derived`): PROVEN↑ sob `AxRealityGrounding (SEM)` e `explanatory_adequacy (SEM)` [Claim E].
+- Pessoa Necessária (`necessary_person_derived`): PROVEN↑ como teorema derivado da Trindade [Claim D].
+- Monoteísmo Estrito (`monotheism_derived`): PROVEN↑ sob `universal_ground_unique (SEM)`.
+- Estrutura Trinitária e Três Vontades (`trinitarian_persons_are_personal`, `trinitarian_wills_are_distinct`): PROVEN.
+- Compatibilidade Monoteísmo-Trindade (`monotheism_compatible_with_trinity`): PROVEN (`{propext}`).

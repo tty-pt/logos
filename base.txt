@@ -22,9 +22,22 @@ Nenhuma passagem deve ser chamada "dedução pura" se depender de conteúdo que 
 
 1. O PONTO DE PARTIDA
 
-Estamos a considerar uma proposição.
+Tentativa de negação: "Não há certo e errado" (niilismo normativo radical).
 
-Portanto ocorre um ato. Devemos distinguir rigorosamente:
+Ao proferir a negação de que haja qualquer distinção objetiva entre certo e errado como uma tese a ser aceita racionalmente, o negador reivindica necessariamente que sua tese é *correta* — isto é, que é certo afirmar que não há certo e errado, e errado afirmar o contrário (`ClaimsCorrect s NoRight`).
+
+A tentativa de negação autodestrói-se na sua própria enunciação performativa (`claims_correct_no_right_self_refuting : ClaimsCorrect s NoRight → NoRight → False`, 0 axiomas substantivos):
+
+(∃ s, ClaimsCorrect s NoRight) → ¬ NoRight.
+
+O ato de negação revela e exibe os seus testemunhos performativos necessários:
+- (1) Um evento ocorreu: o ato performativo (`act(s,p)`).
+- (2) O ato visa um conteúdo: o significado visado (`Means(s,p)`).
+- (3) O ato provém de um sujeito julgador: o proferidor (`Subject`).
+
+O ato não é uma premissa metafísica arbitrária independente da qual toda a dedução é construída; o ato é o testemunho exibido pela própria tentativa de negação.
+
+Devemos distinguir rigorosamente:
 
 act(s,p)
 *ato fraco: evento realizado* (emissão, proferimento, evento performativo)
@@ -90,24 +103,23 @@ um predicado independente (`Act → Person` é OPEN; `Person.lean`).
 O inventário de axiomas é rigorosamente auditado com Tags explícitas
 (VOCAB, SEM, META). Pegada estrita da base: `{act, Means, Subject}`. Ver THOUGHTS.md e formal/GAPMAP.md.
 
-(Nota formal, fronteira da pessoa e da intencionalidade — C24, endurecimento ontológico):
-A ontologia de Logos distingue rigorosamente o Sujeito Intencional (`IntentionalSubject s := ∃ p, Means s p`)
-da Pessoa Substantiva (`Person s := IntentionalSubject s ∧ SubstantivePerson s`).
-O ato performativo deriva com rigor lógico e estrito o sujeito intencional:
-`Act s p → IntentionalSubject s` (`act_implies_intentionalSubject`, `{Means, Subject}`).
-Contudo, a pessoalidade substantiva (`SubstantivePerson`) NÃO é forçada pelo datum:
-os contramodelos de HostileSemantics e HardenedInvariance (`not_entails_substantive_person`,
-`not_entails_substantive_rationality`, `{}`) refutam formalmente qualquer derivação de
-`SubstantivePerson` a partir de `Act`, `IntentionalSubject`, `Chooses` ou `FreeWill`.
+(Nota formal, ontologia unificada de Pessoa, Sujeito, Vontade e Natureza — C24 / T5):
+A ontologia de Logos distingue rigorosamente:
+1. Sujeito (`Subject : Type`): o centro agencial de imputação do ato.
+2. Natureza (`Nature : Type`): a essência ou espécie (`HasNature s n`), onde `Person ≠ Nature`, permitindo que múltiplas pessoas partilhem a mesma natureza.
+3. Vontade (`Will : Type`): a faculdade volitiva com individuação numérica estrita (`s₁ ≠ s₂ → subjectWill s₁ ≠ subjectWill s₂`), distinta da volição ativa (`Wills s p`).
+4. Sujeito Intencional (`IntentionalSubject s := ∃ p, Means s p`): derivado do ato performativo (`Act s p → IntentionalSubject s`, `{Means, Subject}`).
+5. Livre-Arbítrio (`FreeWill s := ∃ p q, Chooses s p q`): a eleição efetiva entre alternativas incompatíveis sob polaridade normativa.
+6. Pessoa (`Person s := FreeSubject s ↔ FreeWill s`): o sujeito dotado de livre-arbítrio numericamente distinto.
+
+A antiga noção de `SubstantivePerson` (predicado opaco sem regras) foi descomissionada como um artefato artificial. A pessoalidade é um teorema pleno derivado da cadeia retorsiva com 0 axiomas substantivos (`FreeSubject s → Person s`, `free_subject_is_person`, `{Means, Subject}`).
 Assim:
-- `Act → IntentionalSubject`: PROVEN.
-- `Person → IntentionalSubject`: PROVEN (`person_is_intentional`).
-- `FreeSubject → IntentionalSubject`: PROVEN (`freeSubject_implies_intentionalSubject`).
-- `Act → SubstantivePerson`: REFUTADO.
-- `Act → Person`: MODELO-TEORETICAMENTE INDEPENDENTE / OPEN.
-A existência de Pessoas no sistema apoia-se honestamente na ponte metafísica de pluralidade
-`AxTwoSubjects : ∃ s₁ s₂, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` (Tag: META).
-O downstream formal ancora-se no sujeito intencional estritamente demonstrado.
+- `Act → IntentionalSubject`: PROVEN (`act_implies_intentionalSubject`, `{Means, Subject}`).
+- `Person → IntentionalSubject`: PROVEN (`person_is_intentional`, `{Means, Subject}`).
+- `FreeSubject → Person`: PROVEN (`free_subject_is_person`, `{Means, Subject}`).
+- `Person → FreeWill`: PROVEN (`person_has_free_will`, `{Means, Subject}`).
+- `Person ⇏ NecessarySubject`: REFUTADO por modelo modal fiel (`faithful_contingent_person_fails_necessary_subject`, `{}`). A necessidade pessoal exige as pontes modais de fundamentação.
+A pluralidade interpessoal apoia-se na ponte de segunda pessoa `AxSecondPersonalAddress` (META) ou em `AxTwoSubjects` (META).
 
 2. T1 — O SUJEITO DO ATO EXISTE → theorems/T1.txt
 
@@ -402,13 +414,20 @@ A passagem de escolha forte para liberdade é puramente **definicional**:
 
 chooses_implies_freeWill : Chooses(s,p,q) ⇒ FreeWill(s)   [{Means, Subject} só vocabulário]
 
-A liberdade não é um passo metafísico adicional a partir da escolha genuína; é a sua própria definição formal.
-A *existência* de escolha genuína e do livre-arbítrio (F1b) é provada (PROVEN↑) sob a adoção do princípio constitutivo semântico:
+A liberdade não é um passo metafísico adicional a partir da escolha genuína; é a sua própria definição formal:
+o sujeito livre é aquele que possui livre-arbítrio (`FreeSubject(s) := FreeWill(s)`, `freeSubject_iff_freeWill : FreeSubject s ↔ FreeWill s`, `Iff.rfl`).
 
-    AxIntentionalChoice : ∀ (s : Subject) (p : Prop), Act s p → ∃ q, Chooses s p q
+A *existência* de escolha genuína e do livre-arbítrio (F1b) é demonstrada no corpus por duas rotas formais:
 
-(Tag: SEM; escolha constitutiva da ação intencional forte), derivando o teorema `freeWill_exists (h : ∃ s p, Act s p) : ∃ s, FreeWill s` sob `{AxIntentionalChoice, Initiates, Means, State, Subject}`.
-A tese de polaridade contraditória mais forte `AxActPolarity : ∀ (s : Subject) (p : Prop), Act s p → Means s (¬ p)` (Tag: SEM / A13) acarreta estritamente `AxIntentionalChoice` via `act_polarity_implies_intentional_choice`.
+1. **Rota Primária de Retorsão Normativa (0 axiomas substantivos, PROVEN)**:
+   A tentativa de negação de correção objetiva autodestrói-se performativamente ao ser julgada correta, instanciando `GenuineNormativity` sob bipolaridade judicativa. A normatividade constitutiva acarreta analiticamente a apreensão de alternativas contraditórias e a seleção agencial, derivando o teorema mestre:
+   `indubitable_normative_free_will : GenuineNormativity s p q → Chooses s p q ∧ FreeWill s`
+   (formal/Logos/IndubitableNormativeFreeWill.lean, 0 axiomas substantivos, pegada `{Means, Subject}`).
+   Aqui, a liberdade do sujeito não é um postulado nem uma premissa, mas uma conclusão **estritamente derivada** da progressão ontológica do ato judicativo:
+   `Subject → Agent → GenuineNormativity → Chooses → FreeSubject / FreeWill`.
+
+2. **Rota Alternativa via Escolha Constitutiva (PROVEN↑, requer AxIntentionalChoice)**:
+   Sob a adoção do axioma semântico `AxIntentionalChoice : ∀ (s : Subject) (p : Prop), Act s p → ∃ q, Chooses s p q` (Tag: SEM; escolha constitutiva da ação intencional forte), deriva-se a existência de livre-arbítrio sob `{AxIntentionalChoice, Initiates, Means, State, Subject}`. Esta rota é mantida como derivação alternativa nas deduções detalhadas com o seu preço formal explicitado. A tese mais forte `AxActPolarity : ∀ (s : Subject) (p : Prop), Act s p → Means s (¬ p)` (Tag: SEM / A13) acarreta estritamente `AxIntentionalChoice` via `act_polarity_implies_intentional_choice`.
 
 (Nota formal, reparada 2026-09-18 — freedom/choice fix): a versão anterior
 usava `Chooses(s,p,q) := A(s,p) ∧ Incompatible(p,q)`. Como
@@ -461,6 +480,20 @@ Logo a escolha genuína não é derivável da agência bruta pré-A14 e é adota
 (nível-mundos, F7) permanece a ponte SEM futura e secundária, estando F7 dissolvido em F1b.
 Cautela (C1): o alias `Dia` prop-level é a dupla negação clássica sob o modelo
 identidade; não reintroduzir liberdade a partir de `Act`.)
+
+(Rota Primária Independente: Retorsão Normativa Transcendental — 2026-09-21):
+Paralelamente à rota cartesiana de A14 sobre o ato bruto, F1b é demonstrado de modo independente através da **rota de retorsão normativa** (`formal/Logos/RetorsiveNormativity.lean` e `formal/Logos/UndeniableNormativeDerivation.lean`).
+A negação cética de normatividade genuína (`NoGN := ¬ ∃ s p q, GenuineNormativity s p q`) não pode ser assertida como um juízo correto (`ClaimsCorrect s NoGN := Act s p ∧ Means s (Correct s p)`) sem incorrer em contradição performativa direta (`denial_of_genuine_normativity_is_self_refuting`).
+A apresentação de uma asserção como normativamente correta contra o erro pressupõe constitutivamente a apreensão do corno asseverado e da alternativa proibida sob o princípio semântico de **bipolaridade judicativa**:
+
+    AxJudicativeBipolarity : ∀ (s : Subject) (p : Prop), ClaimsCorrect s p → Means s (¬ p)
+
+Com esta ponte semântica (`Tag: SEM`, pegada `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`), o ato judicativo de denegação instancía performativamente a própria normatividade genuína que pretende negar (`claiming_denial_presupposes_genuine_normativity`), derivando `GenuineNormativityExists`, `Chooses` e `FreeWill` (`retorsion_derives_free_will`) com total independência de `AxIntentionalChoice` e sem passar por `Act`.
+
+(Aprofundamento: Recuperação Normativa de `Correct` e Retorsão Livre de Axiomas — 2026-09-22):
+Mais fundamentalmente, a formalização em `formal/Logos/NormativeOrder.lean` demonstra que a normatividade deôntica já está presente na própria estrutura do juízo objetivo (`Correct` e `Incorrect`) sob a norma epistêmica de verdade (`TruthNorm : JudicativeNorm`), onde a verdade prescreve o juízo (`Ought`) e a falsidade proíbe o juízo (`OughtNot`), com oposição deôntica estrita (`correctness_deontic_opposition`). A postura judicativa normativa (`ClaimsNormativeCorrectness s p := Act s p ∧ Means s (Correct s p) ∧ Means s (Incorrect s p)`) apreende os dois polos constitutivos da correção sem demandar a representação da negação contraditória `¬p`, derivando `GenuineNormativity s (Correct s p) (Incorrect s p)` e o livre-arbítrio com ZERO axiomas substantivos (`claims_normative_correctness_derives_free_will` e `normative_retorsion_derives_free_will` sob `{Initiates, Means, State, Subject, CL}`), dispensando por completo `AxJudicativeBipolarity`.
+
+A bivalência extensional pura (`¬N_T ∧ ¬N_F`) não força agência isoladamente (admitindo o contramodelo de um universo inanimado sem sujeitos), mas sob qualquer evento de asserção filosófica no espaço de razões, o livre-arbítrio intencional é inescapável.
 
 (Nota formal, Liberdade e semântica hostil — F1b):
 Sob reconstrução sob semântica hostil, `Act(s,p)` não implica `Chooses(s,p,q)`
@@ -634,8 +667,22 @@ Normativity → Direction → Teleology.
 
 Existe uma estrutura mínima de orientação para um fim.
 
-(Nota formal: §21 — teleologia — permanece DEFERRED / GAPMAP.md F2.
-Nenhum teorema formal neste módulo.)
+(Nota formal sobre o estatuto do Dever Prático e Pessoalidade, módulos `Logos.OughtRetorsion`, `Logos.Person` e `Logos.PersonhoodOntologyAudit` / GAPMAP.md F2, C113–C123):
+1. **Ontologia Unificada de Pessoa:** A pessoalidade é definida constitutivamente como o sujeito dotado de livre-arbítrio numericamente distinto (`Person s := FreeSubject s`). A pessoalidade segue por pura dedução lógica do Livre-Arbítrio (`free_subject_is_person`, `{Means, Subject}`), com 0 axiomas substantivos. A anterior noção opaca `SubstantivePerson` foi revogada como um artefato artificial que criava uma falsa fronteira metafísica.
+2. **Distinção entre Sujeito, Vontade e Natureza:** O sujeito é o centro de imputação; a natureza é a essência possuída (`Person ≠ Nature`, permitindo que múltiplas pessoas partilhem a mesma natureza); a vontade é a faculdade com individuação numérica (`s₁ ≠ s₂ → subjectWill s₁ ≠ subjectWill s₂`).
+3. **Dever Prático Deôntico Independente:** O dever prático (`Ought r s a`) é uma relação deôntica irredutível, separada da correcção epistémica, do querer (`Wills`) e do mero significado (`Means`). A violação normativa (`NormativeViolation s a := ObjectiveOught s a ∧ Wills s (¬a)`) é logicamente possível no sistema.
+4. **Anti-auto-legislação provada por retorsão:** Se a força vinculante do dever viesse da própria vontade do sujeito (`Ought s s a ↔ Wills s a`), a violação normativa torna-se impossível (ao querer ¬a, a obrigação dissolve-se), colapsando o dever em preferência subjetiva (`self_grounded_ought_collapses`).
+5. **Consistência do modelo hostil impessoal:** Um universo solitário com um Sujeito Livre e um dever prático impessoal abstrato satisfaz a lógica sem contradição (`impersonal_model_satisfies_ought_without_person`, `{}`). Logo, o dever prático por si só NÃO força logicamente outra pessoa sem a ponte de interpelação relacional de segunda pessoa `AxSecondPersonalAddress` (META).
+6. **Fronteira da necessidade pessoal:** `Person ⇏ NecessarySubject` sob o modelo modal fiel (`faithful_contingent_person_fails_necessary_subject`, `{}`). A pessoa necessária exige as pontes modais de fundamentação global e pessoal.
+7. **Descoberta Transcendental vs. Fundamentação Ontológica:**
+   O argumento transcendental descobre o sujeito livre a partir da polaridade normativa:
+     Certo/Errado ⇒ Normatividade Genuína ⇒ Escolha ⇒ Livre-Arbítrio ⇒ Pessoa.
+   Esta é a direção epistémica e performativa de descoberta no argumento.
+   A ontologia explicita a direção inversa de fundamentação ontológica:
+     Pessoa (= Sujeito com Vontade Livre e Independente) ⇒ fundamenta ⇒ Polaridade Normativa.
+   A Pessoa é constitutivamente o sujeito dotado de vontade livre e numericamente individuada (`Person s ↔ FreeIndependentWill s`, 0 axiomas substantivos).
+   Essa agência volicional pessoal livre é o fundamento ontológico da polaridade normativa (`person_grounds_normative_polarity` sob a ponte SEM `AxPersonalNormativeGround`).
+   As duas direções não são circulares porque «revela a partir de» e «é ontologicamente fundamentado em» são relações distintas. A prova de descoberta do Livre-Arbítrio é completamente independente do axioma de fundamentação (`PersonalNormativeGround.discovery_independent_of_grounding`). Além disso, fundamentação não é identidade (`Grounding ≠ Identity`): o dever não se identifica com a vontade atual do sujeito, preservando a realidade da violação normativa (`will_identity_collapses_normativity`).)
 
 22. VERDADE NECESSÁRIA
 
@@ -884,12 +931,14 @@ Act
 → Meaning
 → Intentionality
 → Agency
-→ Person
 → Choice
+→ Free Will
+→ Person
 → Teleological Structure
 → Necessary Truth
 → Necessary Reality
-→ Personal Ground.
+→ Personal Necessary Ground
+→ One God.
 
 Do poema (avaliado pela mesma disciplina, ver theorems/T10–T14.txt):
 
@@ -1170,11 +1219,11 @@ tornando o sistema inconsistente; Bool/fin 2/ℕ/Unit esconderiam cardinalidade)
 (Tag: VOCAB), com o predicado de atualidade ontológica `SubjectExists (s : Subject) : Prop := ∃ p, Act s p`
 e retorção performativa estrita em 4 passos — ver Nota formal do §1 acima e GAPMAP.md.)
 
-Nota (Hardened Ontology, 2026-09-19): O atalho analítico de definir `Person` via `Agent := True` e `Rational := True`
-foi formalmente revogado. O sujeito derivado pelo datum do ato singular é unicamente o Sujeito Intencional
-(`IntentionalSubject(s) := ∃ p, Means s p`). A Pessoa Substantiva (`Person(s) := IntentionalSubject(s) ∧ SubstantivePerson(s)`)
-é model-teoreticamente independente, e a inferência `Act → Person` permanece estritamente OPEN (refutada
-por contramodelos hostis sem o compromisso metafísico `AxTwoSubjects`).
+Nota (Ontologia Unificada, 2026-09-20): O sujeito derivado pelo datum do ato singular é inicialmente o Sujeito Intencional
+(`IntentionalSubject(s) := ∃ p, Means s p`). Com a derivação retorsiva da escolha contrastiva e do Livre-Arbítrio a partir da normatividade genuína,
+a Pessoa é definida constitutivamente como o sujeito dotado de livre-arbítrio (`Person(s) := FreeSubject(s) ↔ FreeWill(s)`).
+A inferência `FreeSubject → Person` é um teorema estrito com 0 axiomas substantivos (`free_subject_is_person`, `{Means, Subject}`).
+O antigo predicado opaco `SubstantivePerson` foi formalmente descomissionado como uma lacuna meramente sintética.
 
 Ainda precisam de demonstração:
 
@@ -1182,10 +1231,24 @@ Ponte independente do conhecer #7 — `NecessaryEntity(e) → ∃τ, Ground(e,τ
   (uma entidade necessária como fundamento de uma verdade), procurando uma
   ponte mais fraca que o `AxGlobalGround` (T7). Sem ela, a entidade necessária
   de C92 permanece *existente mas não-fundadora*.
-Ponte independente da pessoalidade #9 — `Ground(e, traço pessoal) → Personal(e)`,
-  procurando uma derivação sem `AxPersonalGround` (T8).
-O alvo central (#8) é `NecessaryEntity(e) ∧ Ground(e,τ)` sem `AxGlobalGround`;
-  e o alvo final (#10) `∃e (NecessaryEntity(e) ∧ Personal(e))`.
+Ponte independente do fundamento pessoal #9 — `Ground(g, PersonalNature) → NecessaryPersonalGround(g)`,
+  formalizada em `formal/Logos/NecessaryPersonalGround.lean`.
+  O alvo central é distinguir rigorosamente as 5 proposições:
+  (A) Verdade Necessária (□ τ);
+  (B) Entidade Necessária (∃ e, NecessaryEntity e);
+  (C) T8 Histórico / Realidade de Conteúdo de Ato (∃ e, NecessaryEntity e ∧ Personal e, sob AxPersonalGround);
+  (D) Pessoa Necessária (∃ s, NecessarySubject s ∧ Person s);
+  (E) Fundamento Pessoal Necessário (∃ g, NecessaryPersonalGround g).
+  A passagem para o Fundamento Pessoal (E) apoia-se no princípio semântico de fundamentação da realidade `AxRealityGrounding` (SEM) e adequação explicativa (`explanatory_adequacy`),
+  com o Fundamento de Toda a Realidade demonstrado não-axiomaticamente a partir de T7 (`necessary_ground_for_all_reality`),
+  e a exclusão de fundamentos impessoais demonstrada por redução ao absurdo através da inseparabilidade pessoal-lógica (§24b) e da cadeia volitiva (`Will → FreeWill → FreeSubject → Person`).
+  A existência de uma Pessoa Necessária (D) é demonstrada como teorema construtivo (`claim_e_implies_claim_d`) referente ao Sujeito Divino,
+  sem assumir que o sujeito humano contingente seja necessário.
+  A ontologia distingue Deus como o Fundamento Divino Único dotado de Natureza Divina (`DivineNature`),
+  da qual participam Três Pessoas Divinas numericamente distintas (`P₁, P₂, P₃`) com Três Vontades distintas (`subjectWill P₁ ≠ subjectWill P₂`, etc.),
+  sendo a compatibilidade entre Monoteísmo e Trindade provada como teorema no kernel (`monotheism_compatible_with_trinity`).
+O alvo central (#8) é `NecessaryEntity(e) ∧ Ground(e,τ)` sob `AxGlobalGround`;
+  e o alvo final (#10) `∃g s (NecessaryPersonalGround(g, s)) ∧ Monotheism`.
 Escolha genuína / liberdade (F1b; reparado e provado 2026-09-18) — a liberdade é
   DEFINICIONAL a partir da escolha genuína (`FreeWill(s) := ∃p q,
   Chooses(s,p,q)`; chooses_implies_freeWill, `{Means, Subject}`, só vocabulário): escolha → liberdade não é

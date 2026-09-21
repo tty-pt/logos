@@ -65,19 +65,6 @@ axiom GroundProp : Entity → Prop → Prop
     now an `rfl`-level theorem. -/
 def Realizes (e : Entity) (f : Prop) : Prop := GroundProp e f
 
-/--Tag: SEM
-The §24a atom-grounding principle reflected at the level of propositions.
-
- GroundPrincipleProp (SEM): every true proposition of the present rational
-    level has a grounding entity. Prop-level reflection of
-    `Truthmaker.groundPrinciple_atom`.
-
- Philosophical cost: a separate positive existential commitment over the whole
-    propositional level — every true proposition, not merely every atomic
-    formula, is guaranteed a ground. Beyond the definitional atom cases this is
-    a substantive semantic postulate, not a theorem the axioms force. -/
-axiom GroundPrincipleProp : ∀ {f : Prop}, T f → ∃ e : Entity, GroundProp e f
-
 /-- AxGroundBearing (now a theorem, B2): a ground *bears* what it grounds —
     the minimal non-reductive realism that lets grounded features be features
     of the ground, i.e. `Realizes` unfolded. -/
@@ -107,19 +94,23 @@ AxPersonalGround (META): the *necessary* reality grounds the personal
 axiom AxPersonalGround : ∀ {f : Prop}, IsPresentPersonalFeature f →
   ∃ e : Entity, NecessaryEntity e ∧ GroundProp e f
 
-/-- T8 — the necessary reality is personal (PROVEN↑ under the two META
-    bridges declared above). -/
+/-- T8 — the necessary reality is personal (PROVEN↑ under the META bridge AxPersonalGround).
+    Note: this establishes that some necessary entity bears a present personal feature.
+    It does not yet establish the full Necessary Personal Ground of the Free-Subject
+    nature (which is formalized in Logos.NecessaryPersonalGround). -/
 theorem T8_personalGround {f : Prop} (hf : IsPresentPersonalFeature f) :
     ∃ e : Entity, NecessaryEntity e ∧ Personal e := by
   obtain ⟨e, hne, hg⟩ := AxPersonalGround hf
   exact ⟨e, hne, f, AxGroundBearing hg, hf⟩
 
-/-- Every present personal feature is grounded in reality (the weak,
-    necessity-free half of §24a that is provable without the META bridges,
-    for completeness). -/
-theorem present_feature_is_grounded {f : Prop} (ht : T f) (_hf : IsPresentPersonalFeature f) :
+/-- Every present personal feature is grounded in reality — via the one META
+    bridge `AxPersonalGround` (the universal `GroundPrincipleProp` is retired;
+    unrestricted truthmaking G is refuted by `DeflationaryModel`).
+    Footprint: `{AxPersonalGround, GroundProp}`. -/
+theorem present_feature_is_grounded {f : Prop} (hf : IsPresentPersonalFeature f) :
     ∃ e : Entity, GroundProp e f :=
-  GroundPrincipleProp ht
+  let ⟨e, _, hg⟩ := AxPersonalGround hf
+  ⟨e, hg⟩
 
 /-- §24a applied to a necessary truth yields a grounder (linking Prop-level and world-level principles: T7 supplies the necessary entity). -/
 theorem necessary_truth_has_necessary_grounder {τ : Form} (hτ : Logos.Truthmaker.NecessarilyTrue τ) :

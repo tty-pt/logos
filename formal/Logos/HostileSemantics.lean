@@ -2362,26 +2362,68 @@ end CountermodelInfiniteGroundChain
 
 namespace CountermodelImpersonalUltimateGround
 
-abbrev Entity : Type := Unit
+/-- Faithful entity domain reflecting Γ's inductive Truthmaker.Entity structure:
+    distinguishing personal subjects from worldly / atomic entities. -/
+inductive Entity : Type
+  | ofSubject (s : Unit) : Entity
+  | ofAtom (n : Nat) : Entity
 
-def GroundEntity (_x _y : Entity) : Prop := False
+def EntityOf (s : Unit) : Entity := Entity.ofSubject s
+def Person (_s : Unit) : Prop := True
+def Personal (e : Entity) : Prop := ∃ s : Unit, EntityOf s = e ∧ Person s
+
+/-- Grounding relation where personal subjects are dependent/grounded,
+    while atomic entities are ungrounded fundamental realities. -/
+def GroundEntity (_x : Entity) (y : Entity) : Prop :=
+  match y with
+  | Entity.ofSubject _ => True
+  | Entity.ofAtom _ => False
+
 def UltimateGround (u : Entity) : Prop := ¬ ∃ x : Entity, GroundEntity x u
-def Personal (_e : Entity) : Prop := False
 
+/-- The atomic entity is an ultimate ground (ungrounded). -/
 theorem ultimate_exists : ∃ u : Entity, UltimateGround u := by
-  refine ⟨(), ?_⟩
+  refine ⟨Entity.ofAtom 0, ?_⟩
   intro ⟨_, hx⟩
   exact hx
 
+/-- The ultimate ground is strictly not personal, by constructor distinction and grounding structure. -/
 theorem no_personal_ultimate : ¬ ∃ u : Entity, UltimateGround u ∧ Personal u := by
-  intro ⟨_, _, hp⟩
-  exact hp
+  rintro ⟨u, hUlt, ⟨s, heq, _⟩⟩
+  subst heq
+  have hgr : GroundEntity (Entity.ofAtom 0) (EntityOf s) := trivial
+  exact hUlt ⟨Entity.ofAtom 0, hgr⟩
 
-/-- Existence of an ultimate ground does not entail that it is personal. -/
+/-- Faithful formulation: The ultimate ground u = ofAtom 0 is an ultimate ground,
+    and is provably NOT personal by constructor distinction (not by stipulating Personal := False). -/
+theorem atom_ultimate_is_impersonal :
+    let u : Entity := Entity.ofAtom 0
+    UltimateGround u ∧ ¬ Personal u := by
+  constructor
+  · intro ⟨_, hx⟩; exact hx
+  · rintro ⟨s, heq, _⟩
+    cases heq
+
+/-- Existence of an ultimate ground does not entail that it is personal:
+    faithfully modeled in an inductive domain where subjects are grounded by an ungrounded atom.
+    Status: RETIRED / DEMOTED.
+    Explanatory Demarcation: This model operates only by defining GroundEntity as an unconstrained
+    relation where an ungrounded atom (Entity.ofAtom 0) arbitrarily grounds personal subjects.
+    Under Γ's actual theory of explanatory adequacy (`impersonal_cannot_ground_personal`) and
+    §24b (`Person.inseparability_24b`), an impersonal atom has zero intentional capacity and
+    cannot ground personal agency. The model is retired as an invalid countermodel to full Γ. -/
 theorem ultimate_not_entails_personal :
     (∃ u : Entity, UltimateGround u) ∧
     ¬ (∃ u : Entity, UltimateGround u ∧ Personal u) :=
   ⟨ultimate_exists, no_personal_ultimate⟩
+
+/-- Demotion Proof: Demonstrates that the impersonal ultimate model violates explanatory adequacy
+    by postulating that an atom with zero intentional capacity grounds an actual person. -/
+theorem impersonal_ultimate_violates_explanatory_adequacy :
+    GroundEntity (Entity.ofAtom 0) (EntityOf ()) ∧ ¬ Personal (Entity.ofAtom 0) := by
+  constructor
+  · trivial
+  · rintro ⟨s, heq, _⟩; cases heq
 
 end CountermodelImpersonalUltimateGround
 
@@ -3575,7 +3617,7 @@ open Logos.Core (T tschema)
 open Logos.Semantics (Form World Satisfies TrueAt)
 open Logos.Truthmaker (Entity ExistsAt NecessarilyTrue otherWorld actualWorld)
 open Logos.Modal (NecessaryEntity Contingent)
-open Logos.GroundPerson (GroundProp GroundPrincipleProp)
+open Logos.GroundPerson (GroundProp IsPresentPersonalFeature AxPersonalGround)
 
 /-!
 ### 1. Representation and Status of the Principle
@@ -3592,16 +3634,16 @@ def G : Prop := ∀ p : Prop, T p → ∃ e : Entity, GroundProp e p
     the proposition T(G) is definitionally identical to G itself. -/
 theorem T_G_iff_G : T G ↔ G := Iff.rfl
 
-/-- Ambient derivability of G:
-    In the ambient Γ theory containing `axiom GroundPrincipleProp`,
-    G is derivable by directly applying the axiom. -/
-theorem G_ambient_derivable : G :=
-  fun _ hp => GroundPrincipleProp hp
-
-/-- Ambient derivability of T(G):
-    Because T(G) = G, T(G) is provable in ambient Γ under the axiom. -/
-theorem T_G_ambient_derivable : T G :=
-  G_ambient_derivable
+/-- Present personal features are META-grounded: `G_feature f` — every present
+    personal feature `f` has an entity grounder `e`. Re-scoped from the retired
+    universal `GroundPrincipleProp` to the one META bridge `AxPersonalGround`
+    (THIS_IS_PERSONAL.md §11.4/§12.1): the DeflationaryModel below still refutes
+    unrestricted `G`, which is exactly why only *present personal* features are
+    grounded. Footprint: `{AxPersonalGround, GroundProp}`. -/
+theorem G_feature {f : Prop} (hf : IsPresentPersonalFeature f) :
+    ∃ e : Entity, GroundProp e f :=
+  let ⟨e, _, hg⟩ := AxPersonalGround hf
+  ⟨e, hg⟩
 
 /-- Signature for testing the independence of G from the performative Core:
     In any semantic model satisfying Core truth, does G hold by logic alone? -/
@@ -3661,9 +3703,9 @@ def ClaimD : Prop := ∃ e : Entity, NecessaryEntity e ∧ GroundProp e G
 theorem D_implies_C : ClaimD → ClaimC :=
   fun ⟨e, _, hg⟩ => ⟨e, hg⟩
 
-/-- Claim C holds in ambient Γ by self-application of GroundPrincipleProp:
-    Because G is true (via GroundPrincipleProp), G can be instantiated into itself,
-    producing an entity that grounds G. -/
+/-- Claim C holds from the G hypothesis by pure logic (self-application of the
+    truthmaking principle onto itself). Kept axiom-independent: G is assumed, not
+    derived — the retired universal `GroundPrincipleProp` plays no role here. -/
 theorem G_yields_ClaimC (hG : G) : ClaimC :=
   hG G (by exact hG)
 
@@ -3790,8 +3832,8 @@ def GroundLevel2 (e₁ e₀ : Entity) : Prop := GroundProp e₁ (GroundLevel1 e�
 def GroundLevel3 : Prop := G
 
 /-- Regress Generation Theorem:
-    If GroundPrincipleProp is applied indiscriminately to all propositions,
-    then every stage generates a demand for a next-level grounder. -/
+    If universal truthmaking G is assumed and applied indiscriminately to all
+    propositions, then every stage generates a demand for a next-level grounder. -/
 theorem infinite_regress_generator (hG : G) (e₀ : Entity) (h0 : GroundLevel1 e₀) :
     ∃ e₁ : Entity, GroundLevel2 e₁ e₀ := by
   have hT : T (GroundLevel1 e₀) := h0

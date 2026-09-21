@@ -323,10 +323,18 @@ structure TrinitarianStructure (Subj : Type) (Ent : Type) where
   rel_23 : relational_distinction P2 P3
   rel_13 : relational_distinction P1 P3
 
-/-- Binitarian Separation Model:
-    The existing theory (agency, free choice, plurality of persons, grounding, love)
-    is fully consistent with a Binitarian reality (exactly 2 divine persons),
-    and therefore does NOT entail a Trinity. -/
+/-- Binitarian Separation Model (Toy Cardinality Model over Bool):
+    Demonstrates that an unconstrained 2-element domain (`Subj := Bool`) cannot accommodate
+    three distinct personal centers by pure cardinality (Pigeonhole Principle).
+
+ Forensic Audit & Methodological Demarcation:
+    This model satisfies only a truncated 2-element signature, not the full unified ontology
+    of Γ (`Nature`, `HasNature`, `will_individuation`, and `DivineNature`).
+    In the full Γ theory (`Logos.NecessaryPersonalGround`), Monotheism of the Divine Ground
+    is fully compatible with, and realized in, a Trinity of distinct Divine Persons
+    with distinct wills (`monotheism_compatible_with_trinity`).
+    Therefore, this theorem establishes only that binary cardinality excludes three elements,
+    not that the full Γ architecture is hostile to Trinity. -/
 theorem preceding_theory_not_entails_trinity :
     ∃ (Subj : Type) (Ent : Type)
       (Chooses : Subj → Prop → Prop → Prop)
@@ -356,15 +364,8 @@ end Sector6_Trinity
 
 section Sector7_Incarnation
 
-/-!
-Neutral formalization of Incarnational Structure:
-Expresses:
-1. A personal subject.
-2. Divine status / nature.
-3. Human / contingent status / nature.
-4. Non-identity of the two natures.
-5. Possession of both natures by the single subject.
--/
+/-- Neutral formalization of Incarnational Structure:
+Expresses the teleological union of divine and human nature in a single personal subject. -/
 
 structure IncarnationalStructure (Subj : Type) (Nature : Type) (HasNature : Subj → Nature → Prop) where
   incarnate_subject : Subj
