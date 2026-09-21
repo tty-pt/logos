@@ -107,8 +107,10 @@ AxPersonalGround (META): the *necessary* reality grounds the personal
 axiom AxPersonalGround : ∀ {f : Prop}, IsPresentPersonalFeature f →
   ∃ e : Entity, NecessaryEntity e ∧ GroundProp e f
 
-/-- T8 — the necessary reality is personal (PROVEN↑ under the two META
-    bridges declared above). -/
+/-- T8 — the necessary reality is personal (PROVEN↑ under the META bridge AxPersonalGround).
+    Note: this establishes that some necessary entity bears a present personal feature.
+    It does not yet establish the full Necessary Personal Ground of the Free-Subject
+    nature (which is formalized in Logos.NecessaryPersonalGround). -/
 theorem T8_personalGround {f : Prop} (hf : IsPresentPersonalFeature f) :
     ∃ e : Entity, NecessaryEntity e ∧ Personal e := by
   obtain ⟨e, hne, hg⟩ := AxPersonalGround hf

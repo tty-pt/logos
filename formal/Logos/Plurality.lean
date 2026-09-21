@@ -19,6 +19,7 @@ claims, standing honestly on `{AxTwoSubjects}`.
 import Logos.Core
 import Logos.Agency
 import Logos.Person
+import Logos.Choice
 import Logos.Value
 import Logos.Truthmaker
 
@@ -81,7 +82,7 @@ theorem T4_agentExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p)
    Derived from the existence of an intentional act.
    Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem T5_intentionalSubjectExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
-    ∃ s : Subject, Logos.Person.IntentionalSubject s :=
+    ∃ s : Subject, Logos.Agency.IntentionalSubject s :=
   Logos.Person.intentionalSubject_exists_of_act h
 
 /-- T1 derived from an intentional assertion. -/
@@ -96,7 +97,7 @@ theorem T4_of_assert {s : Subject} {p : Prop} (h : Logos.Agency.Asserts s p) :
 
 /-- An intentional subject exists from an intentional assertion. -/
 theorem T5_intentional_of_assert {s : Subject} {p : Prop} (h : Logos.Agency.Asserts s p) :
-    ∃ s' : Subject, Logos.Person.IntentionalSubject s' :=
+    ∃ s' : Subject, Logos.Agency.IntentionalSubject s' :=
   ⟨s, Logos.Person.act_implies_intentionalSubject (Logos.Agency.assertion_is_act h)⟩
 
 /-- Corollary of plurality under an initiation bridge: from two distinct persons and an initiation bridge, a subject exists. -/
@@ -129,6 +130,22 @@ theorem T12_directedPair_conditional
   · exact ⟨p, q, hp, hq, hne, h1⟩
   · exact ⟨q, p, hq, hp, hne.symm, h2⟩
 
+/-- Right-and-wrong commits a choice field: where there is truth and error,
+    someone is before an incompatible pair.
+    Footprint: `{AxTwoSubjects, Means, Subject}`. -/
+theorem JUDGE_HAS_CHOICE_FIELD (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
+    ∃ s : Subject, ∃ p q : Prop, Logos.Choice.ChoiceField s p q := by
+  obtain ⟨s₁, _, hp₁, _, _⟩ := Logos.Value.AxTwoSubjects h
+  obtain ⟨p, q, hch⟩ := Logos.Person.person_hasChoiceField hp₁
+  exact ⟨s₁, p, q, hch⟩
+
+/-- Right-and-wrong implies someone who means.
+    Footprint: `{AxTwoSubjects, Means, Subject}`. -/
+theorem rightWrong_implies_someone_means (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
+    ∃ s : Subject, ∃ p : Prop, Logos.Agency.Means s p := by
+  obtain ⟨s, p, _, hch⟩ := JUDGE_HAS_CHOICE_FIELD h
+  exact ⟨s, p, hch.1⟩
+
 end Logos.Plurality
 
 -- Axiom footprint audit
@@ -138,3 +155,5 @@ end Logos.Plurality
 #print axioms Logos.Plurality.T12_twoPersons
 #print axioms Logos.Plurality.T12_directedPair_conditional
 #print axioms Logos.Plurality.cogito_from_T12
+#print axioms Logos.Plurality.JUDGE_HAS_CHOICE_FIELD
+#print axioms Logos.Plurality.rightWrong_implies_someone_means

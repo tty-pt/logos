@@ -53,3 +53,12 @@ import Logos.DirectNormativeFreeWill
 import Logos.ConstitutiveNormativeFreeWill
 import Logos.A14DerivationAudit
 import Logos.IndubitableNormativeFreeWill
+import Logos.UndeniableNormativeDerivation
+import Logos.RetorsiveNormativity
+import Logos.BipolarityRetorsion
+import Logos.DirectNormativeRetorsion
+import Logos.NormativeOrder
+import Logos.PersonhoodOntologyAudit
+import Logos.OughtRetorsion
+import Logos.NecessaryPersonalGround
+import Logos.PersonalNormativeGround

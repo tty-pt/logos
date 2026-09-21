@@ -1,6 +1,6 @@
 /-!
 Meanings (EN) for the hostile-semantics countermodels referenced by
-`DEDUCTION.md` (Appendix C and the per-claim `Challenge` lines).
+`README.md` (Appendix C and the per-claim `Challenge` lines).
 
 Following the rule that every English sentence consumed by the generated
 document lives in code, each countermodel carries two accounts: what it

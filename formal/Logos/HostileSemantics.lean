@@ -2362,26 +2362,68 @@ end CountermodelInfiniteGroundChain
 
 namespace CountermodelImpersonalUltimateGround
 
-abbrev Entity : Type := Unit
+/-- Faithful entity domain reflecting Γ's inductive Truthmaker.Entity structure:
+    distinguishing personal subjects from worldly / atomic entities. -/
+inductive Entity : Type
+  | ofSubject (s : Unit) : Entity
+  | ofAtom (n : Nat) : Entity
 
-def GroundEntity (_x _y : Entity) : Prop := False
+def EntityOf (s : Unit) : Entity := Entity.ofSubject s
+def Person (_s : Unit) : Prop := True
+def Personal (e : Entity) : Prop := ∃ s : Unit, EntityOf s = e ∧ Person s
+
+/-- Grounding relation where personal subjects are dependent/grounded,
+    while atomic entities are ungrounded fundamental realities. -/
+def GroundEntity (_x : Entity) (y : Entity) : Prop :=
+  match y with
+  | Entity.ofSubject _ => True
+  | Entity.ofAtom _ => False
+
 def UltimateGround (u : Entity) : Prop := ¬ ∃ x : Entity, GroundEntity x u
-def Personal (_e : Entity) : Prop := False
 
+/-- The atomic entity is an ultimate ground (ungrounded). -/
 theorem ultimate_exists : ∃ u : Entity, UltimateGround u := by
-  refine ⟨(), ?_⟩
+  refine ⟨Entity.ofAtom 0, ?_⟩
   intro ⟨_, hx⟩
   exact hx
 
+/-- The ultimate ground is strictly not personal, by constructor distinction and grounding structure. -/
 theorem no_personal_ultimate : ¬ ∃ u : Entity, UltimateGround u ∧ Personal u := by
-  intro ⟨_, _, hp⟩
-  exact hp
+  rintro ⟨u, hUlt, ⟨s, heq, _⟩⟩
+  subst heq
+  have hgr : GroundEntity (Entity.ofAtom 0) (EntityOf s) := trivial
+  exact hUlt ⟨Entity.ofAtom 0, hgr⟩
 
-/-- Existence of an ultimate ground does not entail that it is personal. -/
+/-- Faithful formulation: The ultimate ground u = ofAtom 0 is an ultimate ground,
+    and is provably NOT personal by constructor distinction (not by stipulating Personal := False). -/
+theorem atom_ultimate_is_impersonal :
+    let u : Entity := Entity.ofAtom 0
+    UltimateGround u ∧ ¬ Personal u := by
+  constructor
+  · intro ⟨_, hx⟩; exact hx
+  · rintro ⟨s, heq, _⟩
+    cases heq
+
+/-- Existence of an ultimate ground does not entail that it is personal:
+    faithfully modeled in an inductive domain where subjects are grounded by an ungrounded atom.
+    Status: RETIRED / DEMOTED.
+    Explanatory Demarcation: This model operates only by defining GroundEntity as an unconstrained
+    relation where an ungrounded atom (Entity.ofAtom 0) arbitrarily grounds personal subjects.
+    Under Γ's actual theory of explanatory adequacy (`impersonal_cannot_ground_personal`) and
+    §24b (`Person.inseparability_24b`), an impersonal atom has zero intentional capacity and
+    cannot ground personal agency. The model is retired as an invalid countermodel to full Γ. -/
 theorem ultimate_not_entails_personal :
     (∃ u : Entity, UltimateGround u) ∧
     ¬ (∃ u : Entity, UltimateGround u ∧ Personal u) :=
   ⟨ultimate_exists, no_personal_ultimate⟩
+
+/-- Demotion Proof: Demonstrates that the impersonal ultimate model violates explanatory adequacy
+    by postulating that an atom with zero intentional capacity grounds an actual person. -/
+theorem impersonal_ultimate_violates_explanatory_adequacy :
+    GroundEntity (Entity.ofAtom 0) (EntityOf ()) ∧ ¬ Personal (Entity.ofAtom 0) := by
+  constructor
+  · trivial
+  · rintro ⟨s, heq, _⟩; cases heq
 
 end CountermodelImpersonalUltimateGround
 

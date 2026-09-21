@@ -1,0 +1,298 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": 1,
+  "project": "Logos",
+  "title": "Authoritative Deductive Presentation Spine",
+  "presentation_policy": {
+    "include_main_spine": true,
+    "include_detailed_appendix": false,
+    "include_countermodels_appendix": false,
+    "include_frontiers_appendix": false,
+    "investigations_directory": "investigations"
+  },
+  "spine_nodes": [
+    {
+      "id": "right_wrong",
+      "label": "RIGHT / WRONG",
+      "title": "1. Objective Right and Wrong",
+      "explanation": "Right and wrong both obtain: the binary normative distinction is real.",
+      "formula": "Right ≠ Wrong ∧ EstablishedRightWrong : Prop := ¬N_T ∧ ¬N_F",
+      "summary": "The deduction begins with the objective distinction between Right and Wrong (Right ≠ Wrong). Objective normative distinction is real: neither all propositions are true nor all are false (¬N_T ∧ ¬N_F), and rational judgment constitutively presupposes an objective standard of correctness.\n\nThe main reader should first understand WHAT is established: the reality of the normative distinction itself. The performative retorsion is a supporting investigation explaining HOW the normative datum is defended against skeptical denial.",
+      "primary_targets": [
+        "rightWrongDistinction",
+        "EstablishedRightWrong"
+      ],
+      "investigation_link": "investigations/right-and-wrong.md",
+      "supporting_defense": [
+        {
+          "title": "Retorsive Defense Against Skeptical Denial",
+          "formula": "ClaimsCorrect(s, NoRight) ∧ NoRight → ⊥ [NoRight ≡ ¬NormativeRightExists]",
+          "summary": "The attempted denial of objective Right and Wrong (NoRight := ¬NormativeRightExists) refutes itself performatively. Claiming the denial as correct (ClaimsCorrect s NoRight) while the denial is true produces a strict constructive contradiction (claims_correct_no_right_self_refuting). Classical double-negation elimination (Classical.not_not, footprint {CL}) derives that objective Right necessarily exists (performative_normative_denial_establishes_normative_right).",
+          "target_names": [
+            "claims_correct_no_right_self_refuting",
+            "cannot_claim_correct_no_right_and_true",
+            "performative_normative_denial_establishes_normative_right"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ought",
+      "label": "OUGHT / OUGHT-NOT",
+      "title": "2. Ought and Normative Polarity",
+      "explanation": "Objective correctness determines agential standards: Ought vs. Ought-Not.",
+      "formula": "Ought TruthNorm ⟨s, p⟩ ∧ OughtNot TruthNorm ⟨s, q⟩",
+      "summary": "From objective Right and Wrong, the normative standard is expressed as agential Ought and Ought-Not. Under the objective epistemic TruthNorm, correct judgment implies what the subject ought to affirm, and incorrect judgment implies what the subject ought not to affirm. Correctness and incorrectness constitute a strict deontic opposition between what ought and what ought not to be judged.",
+      "primary_targets": [
+        "correctness_deontic_opposition"
+      ],
+      "supporting_targets": [
+        "TruthNorm",
+        "correct_implies_ought",
+        "incorrect_implies_oughtNot"
+      ]
+    },
+    {
+      "id": "choice",
+      "label": "CHOICE",
+      "title": "3. Genuine Choice",
+      "explanation": "Apprehending incompatible alternatives and committing constitutes Choice.",
+      "formula": "Chooses s p q : Prop := Means s p ∧ Means s q ∧ Incompatible p q",
+      "summary": "Genuine normativity between incompatible alternatives requires that the agent cognitively grasps both options. Apprehending incompatible alternatives and selecting between them is the constitutive definition of rational choice: the agent co-means both incompatible contents in thought while committing to one.",
+      "primary_targets": [
+        "deliberateChoice_implies_chooses"
+      ],
+      "supporting_targets": [
+        "Chooses",
+        "incompatible_self_negation"
+      ],
+      "investigation_link": "investigations/contrastive-choice.md"
+    },
+    {
+      "id": "free_will",
+      "label": "FREE WILL",
+      "title": "4. Free Will",
+      "explanation": "Freedom is derived by pure logic from genuine normativity and choice.",
+      "formula": "Chooses s p q ∧ FreeWill(s)",
+      "summary": "We did not assume a free subject. Free Will is not assumed as an initial axiom; the argument derives it as an unavoidable theorem. From the reality of genuine normative address and rational choice, Free Will follows from Genuine Normativity by pure logic with zero substantive axioms. A subject endowed with the capacity to choose between incompatible alternatives possesses Free Will by definition.",
+      "primary_targets": [
+        "indubitable_normative_free_will"
+      ],
+      "supporting_targets": [
+        "freeWillExists_of_chooses"
+      ],
+      "investigation_link": "investigations/free-will.md"
+    },
+    {
+      "id": "free_subject",
+      "label": "FREE SUBJECT",
+      "title": "5. The Free Subject",
+      "explanation": "A subject is recognized as free in virtue of possessing Free Will.",
+      "formula": "FreeSubject(s) ≡ FreeWill(s)",
+      "summary": "A subject is definitionally a free subject if and only if it possesses free will (FreeSubject(s) ↔ FreeWill(s), Iff.rfl). The subject is recognized here as a Free Subject because it possesses Free Will. We do NOT derive Free Will from the existence of the subject; rather, the free subject is introduced only after Free Will is established.",
+      "primary_targets": [
+        "freeSubject_iff_freeWill"
+      ],
+      "supporting_targets": [
+        "chooses_implies_freeSubject"
+      ]
+    },
+    {
+      "id": "person",
+      "label": "PERSON",
+      "title": "6. Person",
+      "explanation": "A free subject is constitutively an authoritative Person.",
+      "formula": "Person s : Prop := FreeSubject s",
+      "summary": "In the unified Γ ontology, Personhood is defined constitutively: a Person is a subject possessing genuine free will (Person(s) := FreeSubject(s)). Personhood is not an opaque or unprovable predicate; every Free Subject is proven to be an authoritative Person by pure deduction (free_subject_is_person, 0 substantive axioms). This is the first point at which the personal subject properly enters the main deduction.",
+      "primary_targets": [
+        "free_subject_is_person"
+      ],
+      "supporting_targets": [
+        "person_iff_freeSubject",
+        "person_has_free_will"
+      ],
+      "investigation_link": "investigations/divine-personhood.md"
+    },
+    {
+      "id": "personal_will",
+      "label": "INDEPENDENT PERSONAL WILL",
+      "title": "7. Personal and Independent Will",
+      "explanation": "Distinct persons have numerically distinct wills (subjectWill s₁ ≠ subjectWill s₂).",
+      "formula": "Person(s) ↔ FreeIndependentWill(s)",
+      "summary": "We distinguish carefully between: (1) the subject possessing a Will; (2) the faculty of will (subjectWill s); (3) the act of willing (Wills s p); and (4) the capacity of free choice (FreeWill s). By the principle of numerical individuation (will_individuation), distinct subjects possess numerically distinct faculties of will (subjectWill s₁ ≠ subjectWill s₂). A Person is constitutively a subject with a free will that is genuinely its own, not numerically identical with another subject's will (Person(s) ↔ FreeIndependentWill(s), 0 substantive axioms).",
+      "primary_targets": [
+        "person_iff_freeIndependentWill"
+      ],
+      "supporting_targets": [
+        "independent_will_of_subject",
+        "person_has_free_independent_will"
+      ]
+    },
+    {
+      "id": "ground_right_wrong",
+      "label": "ONTOLOGICAL GROUND OF RIGHT / WRONG",
+      "title": "8. Personal Agency as Ontological Ground of Normativity",
+      "explanation": "Personal free agency ontologically grounds the normative order (Grounding ≠ Id).",
+      "formula": "GroundsJudicativePolarity s p : Prop := GroundProp (EntityOf s) (DeonticOpposition (Correct s p) (Incorrect s p))",
+      "summary": "Here the argument reverses the direction: personal free agency is the ontological ground of the Right/Wrong distinction (person_grounds_normative_polarity, under AxPersonalNormativeGround (SEM)).\n\n### Discovery vs. Ontological Grounding\n* **Discovery direction:** The argument discovers personal agency FROM normative reality (Right/Wrong → Ought → Choice → Free Will → Free Subject → Person).\n* **Ontological grounding direction:** Once Person / Free Will has been established, the ontological relation runs in reverse: Person / Free Independent Will → grounds → Right/Wrong.\n\nThese two relations are strictly distinct. Grounding is not causal generation and not identity (Grounding ≠ Identity): identifying Ought with current volition collapses normative violation (will_identity_collapses_normativity). Bare model theory confirms that a free subject does not analytically entail personal grounding without an explicit semantic bridge (Model B separation).",
+      "note": "Anti-Self-Legislation: identifying Ought with current will collapses normativity (NORMATIVE COLLAPSE). Hostile Impersonal Model confirms bare ought consistent without a second person (SURVIVING PLATONIST MODEL). Under second-personal address and plurality (AxSecondPersonalAddress META / AxTwoSubjects META), objective ought derives distinct persons.",
+      "primary_targets": [
+        "person_grounds_normative_polarity",
+        "discovery_independent_of_grounding"
+      ],
+      "supporting_targets": [
+        "AxPersonalNormativeGround"
+      ],
+      "obstructions": [
+        "HostileModels.model_b_separation"
+      ],
+      "investigation_link": "investigations/grounding.md"
+    },
+    {
+      "id": "necessary_truth",
+      "label": "NECESSARY TRUTH",
+      "title": "9. Necessary Truth",
+      "explanation": "The objective logical and normative order entails necessary truth.",
+      "formula": "□ τ : Prop",
+      "summary": "Only after normative reality has been established and its personal grounding explained does the document move to Necessary Truth (∃ τ, □ τ). Necessary truth is not an unrelated parallel argument accidentally appended to the personal argument; it reads as the modal continuation of the already-established objective normative and logical order.",
+      "primary_targets": [
+        "step1_necessary_truth_exists"
+      ],
+      "supporting_targets": [
+        "groundPrinciple_atom"
+      ]
+    },
+    {
+      "id": "necessary_reality",
+      "label": "NECESSARY REALITY",
+      "title": "10. Necessary Reality",
+      "explanation": "Necessary truth requires an ontological grounder: a necessary entity.",
+      "formula": "∃ e, NecessaryEntity(e) ∧ Ground(e, τ) [requires: AxGlobalGround (SEM)]",
+      "summary": "Truth does not float ungrounded. By the truthmaker principle, necessary truth entails the existence of a necessary reality: an entity that exists in every possible world and rigidly grounds necessary truth (T7_necessaryReality, under AxGlobalGround (SEM)). The formal dependency on AxGlobalGround is stated explicitly and honestly.",
+      "primary_targets": [
+        "T7_necessaryReality"
+      ],
+      "supporting_targets": [
+        "AxGlobalGround"
+      ]
+    },
+    {
+      "id": "necessary_personal_ground",
+      "label": "NECESSARY PERSONAL GROUND",
+      "title": "11. Necessary Personal Ground",
+      "explanation": "The necessary ground must possess the Divine Personal Nature (One God ≠ One Person).",
+      "formula": "∃ g, NecessaryPersonalGround g",
+      "summary": "The culmination of the ontological deduction. The target is NOT merely a NecessaryEntity(g), NOT merely NecessaryEntity(g) ∧ Personal(g), and NOT merely Ground(g, τ). The target is specifically a necessary ground of personal/free-subject reality: NecessaryPersonalGround(g). We strictly distinguish three concepts: Necessary Entity (NecessaryEntity e) ≠ Personal Ground (Personal e) ≠ Necessary Personal Ground (NecessaryPersonalGround g). Because personal and logical features are inseparable (§24b) and an impersonal atom cannot ground personal agency, the necessary ground must possess the Divine Personal Nature (necessary_personal_ground_derived, under AxRealityGrounding (SEM)).\n\n### Strict Monotheism and Personal Plurality\nONE GOD ≠ ONE PERSON. We do NOT define God as the entity-correlate of one Person in a way that collapses the Godhead. The desired architecture remains: ONE NECESSARY DIVINE REALITY / ONE DIVINE NATURE, with THREE NUMERICALLY DISTINCT PERSONS and THREE NUMERICALLY DISTINCT WILLS (monotheism_compatible_with_trinity, 0 substantive axioms). The Necessary Personal Ground establishes the personal character of the necessary divine reality; it does not by itself constitute the complete proof of the Trinity.",
+      "primary_targets": [
+        "necessary_personal_ground_derived"
+      ],
+      "supporting_targets": [
+        "divine_subject_is_person",
+        "claim_e_implies_claim_d"
+      ],
+      "branches": [
+        {
+          "id": "necessary_person",
+          "label": "NECESSARY PERSON (Divine Person)",
+          "title": "Branch A: Necessary Divine Person",
+          "formula": "∃ s, NecessarySubject(s) ∧ Person(s)",
+          "edge_label": "[DERIVED THEOREM · DIVINE]",
+          "primary_targets": [
+            "necessary_person_derived"
+          ],
+          "summary": "From the necessary personal ground, the reality of a Necessary Person possessing the Divine Nature follows directly (Claim E → Claim D, 0 substantive axioms beyond ground infrastructure)."
+        },
+        {
+          "id": "monotheism",
+          "label": "ONE GOD / STRICT MONOTHEISM",
+          "title": "Branch B: Divine Uniqueness and Monotheism",
+          "formula": "Monotheism",
+          "edge_label": "[DIVINE UNIQUENESS · g₁=g₂]",
+          "primary_targets": [
+            "monotheism_of_god_and_uniqueness",
+            "monotheism_compatible_with_trinity"
+          ],
+          "summary": "The uniqueness of the ultimate ground entails strict monotheism (g₁ = g₂). This monotheism is formally proven to be fully compatible with three distinct personal centers and wills (monotheism_compatible_with_trinity, 0 substantive axioms)."
+        },
+        {
+          "id": "frontiers",
+          "label": "WHAT THIS DOES NOT YET PROVE",
+          "title": "Branch C: What This Does Not Yet Prove (Theological Frontiers)",
+          "formula": "preceding_theory ⇏ trinity | necessary_ground ⇏ contingent_creation",
+          "edge_label": "[COUNTERMODEL SEPARATION FRONTIERS]",
+          "continuation_label": "THEOLOGICAL FRONTIERS",
+          "obstructions": [
+            "preceding_theory_not_entails_trinity",
+            "necessary_ground_not_entails_contingent_creation",
+            "preceding_theory_not_entails_incarnation"
+          ],
+          "investigation_link": "investigations/countermodels.md",
+          "summary": "The power of a formal system lies as much in what it refrains from claiming as in what it proves. The deduction strictly distinguishes established theorems from open frontiers. Machine-checked independence countermodels prove that preceding theory does NOT logically entail: (1) The Trinitarian structure of Three Divine Persons; (2) Contingent creation of a temporal cosmos; or (3) The Incarnation. These remain independent theological frontiers.\n\nFor deep technical proofs, countermodel models, and exhaustive dependency matrices, consult the specialized investigations:\n* [Retorsive Defense and Normative Polarity](investigations/right-and-wrong.md)\n* [Contrastive Choice and Free Will](investigations/contrastive-choice.md)\n* [Free Will Theorem & Derivations](investigations/free-will.md)\n* [Ontological Grounding and Model Separations](investigations/grounding.md)\n* [Divine Personhood and Monotheism](investigations/divine-personhood.md)\n* [Countermodels and Independence Proofs](investigations/countermodels.md)\n* [Theological Frontiers: Trinity](investigations/trinity.md)\n* [Theological Frontiers: Creation](investigations/creation.md)\n* [Theological Frontiers: Incarnation](investigations/incarnation.md)\n* [Plurality and Love](investigations/plurality-and-love.md)\n* [Kernel Axiom Audit & Footprint Ledger](investigations/kernel-audit.md)"
+        }
+      ],
+      "investigation_link": "investigations/divine-personhood.md"
+    }
+  ],
+  "edges": [
+    {
+      "from": "right_wrong",
+      "to": "ought",
+      "relation": "normative standard specification",
+      "direction": "discovery"
+    },
+    {
+      "from": "ought",
+      "to": "choice",
+      "relation": "apprehension of incompatible alternatives",
+      "direction": "discovery"
+    },
+    {
+      "from": "choice",
+      "to": "free_will",
+      "relation": "PURE LOGIC · 0 substantive axioms",
+      "direction": "discovery"
+    },
+    {
+      "from": "free_will",
+      "to": "free_subject",
+      "relation": "definitional equivalence [FreeSubject(s) ≡ FreeWill(s)]",
+      "direction": "discovery"
+    },
+    {
+      "from": "free_subject",
+      "to": "person",
+      "relation": "constitutive theorem [Person := FreeSubject]",
+      "direction": "discovery"
+    },
+    {
+      "from": "person",
+      "to": "personal_will",
+      "relation": "numerical individuation [will_individuation]",
+      "direction": "discovery"
+    },
+    {
+      "from": "personal_will",
+      "to": "ground_right_wrong",
+      "relation": "ONTOLOGICAL GROUNDING ARROW [Grounding ≠ Identity]",
+      "direction": "grounding"
+    },
+    {
+      "from": "ground_right_wrong",
+      "to": "necessary_truth",
+      "relation": "modal continuation from normative truth",
+      "direction": "continuation"
+    },
+    {
+      "from": "necessary_truth",
+      "to": "necessary_reality",
+      "relation": "truthmaker grounding [AxGlobalGround (SEM)]",
+      "direction": "continuation"
+    },
+    {
+      "from": "necessary_reality",
+      "to": "necessary_personal_ground",
+      "relation": "explanatory adequacy [AxRealityGrounding (SEM)]",
+      "direction": "continuation"
+    }
+  ]
+}

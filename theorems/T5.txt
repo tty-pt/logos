@@ -1,51 +1,34 @@
-T5 — DO ATO AO SUJEITO INTENCIONAL (E A FRONTEIRA DA PESSOA SUBSTANTIVA)
+T5 — DO ATO AO SUJEITO INTENCIONAL E À PESSOA CONSTITUTIVA
 
 Depende de: T1 e ato presente (C68 → C21 → C24; pegada estrita `{Means, Subject}` / `{Initiates, Means, State, Subject}`; desacoplado de `AxTwoSubjects`).
 
-Definimos com rigor ontológico:
+Definição ontológica unificada de Pessoa (base.txt §12 / formal/Logos/Person.lean):
 
-IntentionalSubject(s) := ∃ p, Means(s,p).
-Person(s)             := IntentionalSubject(s) ∧ SubstantivePerson(s).
+> Uma pessoa é um sujeito dotado de livre-arbítrio numericamente distinto.
 
-O sujeito do ato performativo satisfaz:
+Person(s) := FreeSubject(s) ↔ FreeWill(s).
 
-- Means(s,p): o ato intencional possui conteúdo direcionado a proposição.
-- IntentionalSubject(s): por definição a partir de Means(s,p).
+A pessoalidade NÃO é uma propriedade metafísica opaca sobreposta a um sujeito livre já estabelecido.
+O sistema distingue com clareza:
+- Sujeito: o centro de imputação e agência (`Subject : Type`).
+- Natureza: a essência ou espécie possuída (`Nature : Type`), onde Pessoa ≠ Natureza (permitindo uma natureza partilhada por múltiplas pessoas).
+- Vontade: a faculdade volitiva com individuação numérica (`subjectWill s₁ ≠ subjectWill s₂` para `s₁ ≠ s₂`).
+- Livre-Arbítrio: a eleição efetiva entre alternativas incompatíveis (`FreeWill s := ∃ p q, Chooses s p q`).
+- Pessoa: o sujeito dotado de livre-arbítrio (`Person s := FreeSubject s`).
 
 Portanto:
 
-IntentionalSubject(s)  [PROVEN, T5_intentionalSubjectExists, {Initiates, Means, State, Subject}].
+FreeSubject(s) → Person(s)  [PROVEN, free_subject_is_person, {Means, Subject}].
+Person(s) ↔ FreeSubject(s)  [PROVEN, person_iff_freeSubject, {Means, Subject}].
 
-(Nota formal sobre a evolução ontológica: no início da formalização, `Person` havia sido definida
-analiticamente como `Agent s ∧ Rational s ∧ Intentional s` com `Agent := True` e `Rational := True`,
-colapsando nominalmente a `IntentionalSubject s`. Essa identificação degenerada foi formalmente revogada
-para impedir o contrabando de pessoalidade substantiva sob um rótulo puramente intencional.
-Na ontologia endurecida de Logos (`formal/Logos/Person.lean`):
-`Person s := IntentionalSubject s ∧ SubstantivePerson s`, onde `SubstantivePerson` é o centro racional
-e moral substantivo irredutível.)
-
-FRONTEIRA DA PESSOA E DA INTENCIONALIDADE:
+ESTATUTO FORMAL CONCLUÍDO:
 - `Act → IntentionalSubject`: PROVEN (`act_implies_intentionalSubject`, `{Means, Subject}`).
-- `Person → IntentionalSubject`: PROVEN (`person_is_intentional`, `{}`).
-- `FreeSubject → IntentionalSubject`: PROVEN (`freeSubject_implies_intentionalSubject`, `{Means, Subject}`).
-- `Act → SubstantivePerson`: REFUTADO por contramodelos hostis (`HardenedInvariance`, `HostileSemantics`).
-- `FreeSubject → SubstantivePerson`: REFUTADO por contramodelos hostis.
-- `FreeWill → SubstantivePerson`: REFUTADO por contramodelos hostis.
-- `IntentionalSubject → SubstantivePerson`: REFUTADO por contramodelos hostis.
-- `Act → Person`: MODELO-TEORETICAMENTE INDEPENDENTE / OPEN.
+- `Person → IntentionalSubject`: PROVEN (`person_is_intentional`, `{Means, Subject}`).
+- `FreeSubject → Person`: PROVEN (`free_subject_is_person`, `{Means, Subject}`).
+- `Person → FreeWill`: PROVEN (`person_has_free_will`, `{Means, Subject}`).
+- `Person → NecessarySubject`: REFUTADO por contramodelo modal fiel (`faithful_contingent_person_fails_necessary_subject`, `{}`).
+- `SelfGroundedOught → ⊥`: PROVEN por retorsão (`self_grounded_ought_collapses`, `{Ought, Subject, Wills}`).
+- `ObjectiveOught → Plurality`: PROVEN↑ sob a ponte relacional `AxSecondPersonalAddress` (META) (`second_personal_ought_derives_plurality`).
 
-CLASSIFICAÇÃO ONTOLÓGICA DEFINITIVA:
-1. **Sujeito Intencional** — Derivado com necessidade lógica e performativa do próprio ato
-   (`IntentionalSubject s := ∃ p, Means s p`). Teorema estrito do núcleo performativo.
-2. **Pessoa Substantiva** — NÃO é forçada pelo dado performativo nem pela escolha contrastiva.
-   O fragmento performativo é plenamente satisfeito com `SubstantivePerson` vazio.
-   A existência de uma Pessoa no sistema exige explicitamente a ponte metafísica de pluralidade
-   `AxTwoSubjects : ∃ s₁ s₂, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` (Tag: META).
-
-Logo:
-
-∃s IntentionalSubject(s)   [PROVEN]
-
-A pessoalidade substantiva NÃO foi demonstrada pelo ato singular; o que o ato singular demonstra
-de forma irrefutável é o Sujeito Intencional.
-
+A pessoalidade é um teorema constitutivo pleno derivado da cadeia retorsiva com zero axiomas substantivos.
+A necessidade pessoal exige as pontes modais de fundamentação global e pessoal.

@@ -20,9 +20,9 @@ Whenever the formalization changes:
 Concrete practice: after each milestone, re-read the affected prose files and patch them so the
 prose and the Lean theorem ledger agree (see `formal/GAPMAP.md`).
 
-## DEDUCTION.md (auto-generated map)
+## README.md (auto-generated map)
 
-`DEDUCTION.md` (repo root) is the generated visualization of the deduction. Statuses
+`README.md` (repo root) is the generated visualization of the deduction. Statuses
 are **derived, never transcribed**: each step's badge is a pure function of (kernel node
 kind, audited `#print axioms` footprint, declared axiom `Tag:`). The GAPMAP status/footprint
 cells are checked against the derived values, never used as their source. **Never edit it by hand.**
@@ -45,7 +45,7 @@ cd .. && python3 scripts/audit_footprints.py && python3 scripts/build_deduction.
 - The script is stdlib-only; it parses `formal/Logos/*.lean` (declarations + line numbers),
   `formal/GAPMAP.md` (claim IDs, prose refs), `axiom_audit.json` (authoritative
   footprints), and `depgraph.json` (nodes with kinds, edges), and renders
-  `DEDUCTION.md` in Portuguese.
+  `README.md` in Portuguese.
 - Each axiom carries its type on the first line of its `/-- … -/` docstring —
   `Tag: VOCAB` (vocabulary of the statement itself), `Tag: SEM` (semantic choice),
   `Tag: META` (metaphysical bridge) — closed vocabulary; an untagged or mistyped

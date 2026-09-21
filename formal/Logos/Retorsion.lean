@@ -40,10 +40,9 @@ namespace Logos.Retorsion
 
 open Logos.Core (T IsFalse nothingTrueRefutes rightWrongDistinction)
 open Logos.Semantics (Form World Satisfies)
-open Logos.Agency (Subject Act Asserts act asserts Means Initiates State SubjectExists
+open Logos.Agency (Subject Act Asserts act asserts Means Initiates State SubjectExists IntentionalSubject
                    NoAct NoWeakAct NoSubject noCogito_selfRefutes noWeakAct_selfRefutes
                    act_exists_of_assert weak_act_exists_of_assert assertion_is_act)
-open Logos.Person (IntentionalSubject)
 open Logos.Alternatives (Incompatible incompatible_with_negation)
 open Logos.Choice (ChoiceField Chooses FreeWill FreeSubject choiceField_exists
                    noChoiceField_selfRefutes noSubject_selfRefutes NoChoiceField)

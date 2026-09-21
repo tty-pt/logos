@@ -4,7 +4,7 @@ Meanings (EN) for prose claims that have no kernel declaration behind them
 and some are retired/blocked steps under hostile semantics).
 
 These are "def strings": each meaning is the literal value of a `String`
-constant, so every English sentence consumed by `DEDUCTION.md` lives in code
+constant, so every English sentence consumed by `README.md` lives in code
 and needs no external gloss file.
 -/
 namespace Logos.ClaimMeanings
@@ -72,5 +72,37 @@ def C80 : String := "Posited content deterministic transfer is retired: construc
 def C81 : String := "Origin branching is retired: constructor evaluation excised."
 
 def C82 : String := "Origin initiating person is retired: constructor evaluation excised."
+
+def C102 : String := "NoRight is the universal skeptical thesis asserting that no genuine normative correctness judgment exists."
+
+def C103 : String := "Claiming NoRight as correct while NoRight is true produces a strict, constructive contradiction."
+
+def C104 : String := "No agent can claim NoRight as correct if NoRight is true."
+
+def C105 : String := "If any agent actually performs a normative correctness claim on NoRight, the thesis NoRight is strictly false."
+
+def C106 : String := "Asserting p as correct constitutively instantiates genuine normative governance between p and ¬p for subject s under AxJudicativeBipolarity."
+
+def C107 : String := "The shortest complete master proof: Genuine Normativity derives Choice and Free Will."
+
+def C108 : String := "Neutral formalization of Trinitarian structure: exactly three distinct personal centers sharing divine status."
+
+def C109 : String := "Binitarian separation model: the existing theory is fully consistent with a Binitarian reality and does not entail a Trinity."
+
+def C110 : String := "Acosmic divine model: a necessary divine ground exists with zero contingent created reality."
+
+def C111 : String := "Neutral formalization of Incarnational structure: expresses the teleological union of divine and human nature in a single personal subject."
+
+def C112 : String := "Unincarnate hostile model: the existing theory is completely consistent with God remaining purely transcendent and unincarnate."
+
+def C142 : String := "Personhood is constitutively equivalent to possessing a free, independently individuated will."
+
+def C143 : String := "A personal subject with free independent will who performs a judgment act ontologically grounds judicative normative polarity."
+
+def C144 : String := "Every Person performing a judgment act ontologically grounds the judicative normative polarity between correctness and error."
+
+def C145 : String := "Transcendental discovery of the free subject from normative polarity is logically independent of the ontological grounding bridge."
+
+def C146 : String := "Model B proves that in bare theory without AxPersonalNormativeGround, a free subject does not logically entail personal grounding of normative polarity."
 
 end Logos.ClaimMeanings

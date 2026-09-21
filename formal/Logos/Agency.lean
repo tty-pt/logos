@@ -73,6 +73,62 @@ Vocabulary: the meaning-act relation — a subject means a proposition.
     (base.txt §11, T5 component). Primitive intentional relation. -/
 axiom Means : Subject → Prop → Prop
 
+/-- Intentional Subject: a subject that means some propositional content (§11).
+    Constitutively follows from the primitive `Means` relation. -/
+def IntentionalSubject (s : Subject) : Prop := ∃ p : Prop, Means s p
+
+/-- Backward-compatibility alias for intentionality. -/
+def Intentional (s : Subject) : Prop := IntentionalSubject s
+
+/-- Act implies an intentional subject: an act's own content witnesses that the subject
+    means something (`IntentionalSubject s := ∃ p, Means s p`). -/
+theorem act_implies_intentionalSubject {s : Subject} {p : Prop} (h : Means s p) :
+    IntentionalSubject s :=
+  ⟨p, h⟩
+
+theorem act_implies_intentional {s : Subject} {p : Prop} (h : Means s p) :
+    Intentional s :=
+  act_implies_intentionalSubject h
+
+/--Tag: VOCAB
+Vocabulary: the sort of natures (essences/kinds) distinct from subjects.
+
+ Nature: the sort of natures. In Γ ontology, Person (Subject) ≠ Nature,
+    and multiple distinct subjects may possess the same nature. -/
+axiom Nature : Type
+
+/--Tag: VOCAB
+Vocabulary: the relation attributing a nature to a subject.
+
+ HasNature s n: subject s possesses nature n. -/
+axiom HasNature : Subject → Nature → Prop
+
+/--Tag: VOCAB
+Vocabulary: the sort of will faculties distinct from subjects and natures.
+
+ Will: the sort of volitional faculties. Distinct from both Subject and Nature. -/
+axiom Will : Type
+
+/--Tag: VOCAB
+Vocabulary: the mapping from each subject to its volitional faculty.
+
+ subjectWill s: the unique will faculty possessed by subject s. -/
+axiom subjectWill : Subject → Will
+
+/--Tag: VOCAB
+Vocabulary: numerical individuation of will faculties across distinct subjects.
+
+ Numerical individuation of wills: distinct subjects possess numerically distinct wills. -/
+axiom will_individuation : ∀ s₁ s₂ : Subject, s₁ ≠ s₂ → subjectWill s₁ ≠ subjectWill s₂
+
+/--Tag: VOCAB
+Vocabulary: the volitional act relation — a subject wills an action or content.
+
+ Wills s p: subject s actively wills proposition/action p.
+    This is the operation or act of willing, distinct from the faculty of willing (`subjectWill s`)
+    and distinct from free will (`FreeWill s`). -/
+axiom Wills : Subject → Prop → Prop
+
 /--Tag: VOCAB
 Vocabulary: abstract state space for initiation of movement.
 
