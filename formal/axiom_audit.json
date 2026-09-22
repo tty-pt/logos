@@ -7169,7 +7169,22 @@
   "Logos.Agency.State",
   "Logos.Agency.Subject"
  ],
+ "Logos.PersonalGroundOfReality.deny_right_self_contradicts": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
  "Logos.PersonalGroundOfReality.direction_stack": [],
+ "Logos.PersonalGroundOfReality.every_judicative_act_grounds_its_own_polarity": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
  "Logos.PersonalGroundOfReality.free_subject_grounds_normative_order": [
   "propext",
   "Classical.choice",
@@ -7179,7 +7194,40 @@
   "Logos.Agency.State",
   "Logos.Agency.Subject"
  ],
+ "Logos.PersonalGroundOfReality.judicative_stance_forces_person": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.PersonalGroundOfReality.personal_ground_of_right_exists": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
  "Logos.PersonalGroundOfReality.present_act_yields_personal_grounding_of_reality": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.PersonalGroundOfReality.reality_of_right": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.PersonalGroundOfReality.the_person_supports_the_reality_of_right": [
   "propext",
   "Classical.choice",
   "Quot.sound",

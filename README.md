@@ -338,7 +338,7 @@ Master Theorem: Every Person possesses a Free, Independent Will
 
 ## 8. Personal Agency as Ontological Ground of Normativity
 
-Here the argument reverses the direction: personal free agency is the ontological ground of the Right/Wrong distinction (person_grounds_normative_polarity, under AxPersonalNormativeGround (SEM)).
+Here the argument reverses the direction: personal free agency is the ontological ground of the Right/Wrong distinction (person_grounds_normative_polarity, 0 substantive axioms — the free personal judicative act constitutes the polarity constitutively, no grounding axiom needed).
 
 ### Discovery vs. Ontological Grounding
 * **Discovery direction:** The argument discovers personal agency FROM normative reality (Right/Wrong → Ought → Choice → Free Will → Free Subject → Person).
@@ -355,7 +355,7 @@ Master Grounding Theorem from Personhood: Every Person performing a judgment act
     [PROVEN | 0 substantive axioms]
     *(Formal certification: Lean: `PersonalNormativeGround.lean#person_grounds_normative_polarity`)*
 
-Non-Circularity Architectural Theorem: The retorsive discovery proof of Free Will (`indubitable_normative_free_will`) does NOT require or depend upon the grounding bridge `AxPersonalNormativeGround`
+Non-Circularity Architectural Theorem: The retorsive discovery proof of Free Will (`indubitable_normative_free_will`) does NOT require or depend upon any grounding bridge (the historical `AxPersonalNormativeGround` was removed 2026-09-21; grounding of…
 
     ∴ Chooses(s, p, q) ∧ FreeWill(s)
 
@@ -534,7 +534,8 @@ Unincarnate Hostile Model: The existing theory (necessary divine ground, human a
 * **Normative_Truth_Exists:** `normative_truth_exists` (`formal/Logos/NormativeTruth.lean`) — Theorem: Direct derivation that normative truth necessarily exists from the retorsive self-application
 * **Judgment_Of_No_Act_Proves_Act:** `judgment_of_no_act_proves_act` (`formal/Logos/Order.lean`) — The Retorsive Cogito: even the skeptic's denial that any act occurs strictly witnesses that an act occurs. The act cannot be denied without providing the witness that refutes the denial.
 * **Asserting_No_Personal_Source_Instantiates_Only_Judging_Subject:** `asserting_no_personal_source_instantiates_only_judging_subject` (`formal/Logos/OughtRetorsion.lean`) — Theorem: Retorsion Boundary on Personal Source
-* **Discovery_Independent_Of_Grounding:** `discovery_independent_of_grounding` (`formal/Logos/PersonalNormativeGround.lean`) — Non-Circularity Architectural Theorem: The retorsive discovery proof of Free Will (`indubitable_normative_free_will`) does NOT require or depend upon the grounding bridge `AxPersonalNormativeGround`
+* **Deny_Right_Self_Contradicts:** `deny_right_self_contradicts` (`formal/Logos/PersonalGroundOfReality.lean`) — Denying Right is performatively self-contradictory: no agent can present NoRight as correct while NoRight is true. Footprint: `{Initiates, Means, State, Subject}` (zero substantive axioms). Re-export of the retorsion boundary.
+* **Discovery_Independent_Of_Grounding:** `discovery_independent_of_grounding` (`formal/Logos/PersonalNormativeGround.lean`) — Non-Circularity Architectural Theorem: The retorsive discovery proof of Free Will (`indubitable_normative_free_will`) does NOT require or depend upon any grounding bridge (the historical `AxPersonalNormativeGround` was removed 2026-09-21; grounding of…
 * **Retorsion_Proof_Derives_F1B:** `retorsion_proof_derives_F1b` (`formal/Logos/ProofSpecificContrast.lean`) — The Existential Free Will Theorem (F1b) derived from the performative retorsion proof!
 * **Bigo_Bigs_Intentional_Synthesis:** `bigO_bigS_intentional_synthesis` (`formal/Logos/Retorsion.lean`) — Synthesis of Big-O / Big-S Retorsion with Intentional Subject: Both absolutes are self-defeating, establishing the irreducible co-existence of the Objective realm, the Subjective realm, and an active IntentionalSubject.
 * **Deterministic_Transcendental_Subject_Refutes_Freewill:** `deterministic_transcendental_subject_refutes_freewill` (`formal/Logos/Retorsion.lean`) — Hostile Separation Theorem 1: Weakened retorsion CANNOT derive FreeWill

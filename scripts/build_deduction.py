@@ -516,7 +516,23 @@ _REGISTRY: dict = {}   # axiom base name -> {"tag", "gloss", "full"}
 # footprint check spots stale GAPMAP transcriptions after a demotion (a cell
 # still listing them as footprint members). Never used for status. Update in
 # the demotion batch itself.
-RETIRED_AXIOMS = {"ExistsAt", "AxPersonStability"}
+RETIRED_AXIOMS = {
+    "ExistsAt", "AxPersonStability",
+    # Batch THIS_IS_PERSONAL (2026-09-22): 16 distinct axioms removed from the
+    # kernel. Retired in-place (no longer axioms anywhere): AxPersonalNormativeGround
+    # (becomes rfl-level theorem), GroundPrincipleProp. Axiom→definition/theorem:
+    # GroundsEntity (RecoveredOntologicalGround), explanatory_adequacy (Recovered).
+    # Deleted outright: AxRealityGrounding, agential_grounding_transmission,
+    # normative_ground_persistence. Deferred verbatim to scratch/Trinitarian_deferred.lean
+    # (never imported): universal_ground_unique, explanatory_adequacy_normative_order,
+    # PersonalNature, personal_nature_iff_person, DivineNature,
+    # divine_nature_is_personal, divine_person_is_necessary.
+    "AxPersonalNormativeGround", "GroundPrincipleProp",
+    "AxRealityGrounding", "agential_grounding_transmission", "normative_ground_persistence",
+    "universal_ground_unique", "explanatory_adequacy_normative_order",
+    "PersonalNature", "personal_nature_iff_person", "DivineNature",
+    "divine_nature_is_personal", "divine_person_is_necessary",
+}
 
 
 def _short(name: str) -> str:

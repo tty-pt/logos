@@ -1225,6 +1225,23 @@ a Pessoa é definida constitutivamente como o sujeito dotado de livre-arbítrio 
 A inferência `FreeSubject → Person` é um teorema estrito com 0 axiomas substantivos (`free_subject_is_person`, `{Means, Subject}`).
 O antigo predicado opaco `SubstantivePerson` foi formalmente descomissionado como uma lacuna meramente sintética.
 
+Nota formal (Headline, 2026-09-22 — A PESSOA JÁ SUPORTA A REALIDADE DO CERTO; GAPMAP C147–C153,
+`formal/Logos/PersonalGroundOfReality.lean`): a descoberta usada é a cadeia do Primeiro
+Enunciado do README — negar o Certo é contraditório (C147, retorsão) → o Certo e o Errado
+são reais e a ordem é necessária (C148) → a postura judicativa força a Pessoa (C149) →
+a Pessoa fundamenta TODA a realidade judicativa (C150) — tudo incondicional, sem axiomas
+substantivos, pegada `{Initiates, Means, State, Subject, CL}`. O teorema-bandeira
+`PersonalGroundOfReality.the_person_supports_the_reality_of_right` (C151) junta os quatro
+conjunctos numa só Proposição fechada: negar o Certo é performativamente contraditório,
+o Certo e o Errado são reais e necessários, a postura judicativa força a Pessoa, e a Pessoa
+suporta a realidade do Certo. O dado performativo **não é premissa exterior** — foi
+internalizado como implicação: por isso o enunciado não tem premissa livre. "Necessário"
+designa a necessidade retorsivo-transcendental (a ordem é necessária e a sua base é a
+natureza pessoal judicativa livre), NÃO a necessidade da entidade em todos os mundos
+(a Proposição E de nível-ente continua anotada, não-teorema — §12.1; e.g.
+`retorsion_fails_against_no_necessary_entity`). Corolário existencial (C152) e forma-instância
+(C153) permanecem sob data, mesma pegada.
+
 Ainda precisam de demonstração:
 
 Ponte independente do conhecer #7 — `NecessaryEntity(e) → ∃τ, Ground(e,τ)`
@@ -1310,6 +1327,12 @@ Ato racional presente
 → verdade necessária
 → realidade necessária (T7, ainda negável sem AxGlobalGround)
 → fundamento pessoal.
+
+À cabeça desta cadeia, e como selo da dedução retorsiva pura, está o teorema
+incondicional da descoberta (C151, `PersonalGroundOfReality.the_person_supports_the_reality_of_right`):
+
+negar o Certo é contraditório ∧ o Certo e o Errado são reais e necessários ∧
+a postura judicativa força a Pessoa ∧ a Pessoa suporta a realidade do Certo.
 
 A tese não é:
 

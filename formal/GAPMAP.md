@@ -351,7 +351,7 @@ C19 is derived under `AxGlobalGround` (`PROVEN↑`).
 | C106 | §12 | `RetorsiveNormativity.claims_correct_presupposes_normativity : ClaimsCorrect s p → GenuineNormativity s p (¬p)` — assertion presupposes genuine normativity under bipolarity | PROVEN↑ | `{AxJudicativeBipolarity, Means, Subject}` |
 | C107 | §15 | `IndubitableNormativeFreeWill.indubitable_normative_free_will : GenuineNormativity s p q → Chooses s p q ∧ FreeWill s` — genuine normativity derives choice and free will | PROVEN | `{Means, Subject}` |
 | C32 | T8 | `GroundPerson.T8_personalGround` | PROVEN↑ | `{AxPersonalGround, GroundProp, Initiates, Means, State, Subject}` |
-| C33 | T8 | `GroundPerson.present_feature_is_grounded` | PROVEN↑ | `{GroundPrincipleProp, GroundProp, Initiates, Means, State, Subject}` |
+| C33 | T8 | `GroundPerson.present_feature_is_grounded` | PROVEN↑ | `{AxPersonalGround, GroundProp, Initiates, Means, State, Subject}` |
 | C34 | T8 | `GroundPerson.necessary_truth_has_necessary_grounder` | PROVEN↑ | `{AxGlobalGround, Ground, Subject}` (via C18) |
 | C90 | T8 | `GroundPerson.personal_ultimate_ground_exists` | BLOCKED | (retired: manufactured ultimate ground destroyed under hostile semantics) |
 
@@ -1342,10 +1342,37 @@ of $\Gamma + A14$:
 | ID | Prose | Lean theorem | Status | Axiom footprint |
 |----|-------|--------------|--------|-----------------|
 | C142 | §12 | `Person.person_iff_freeIndependentWill` | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
-| C143 | §8/§12 | `PersonalNormativeGround.AxPersonalNormativeGround` | AXIOM | `{AxPersonalNormativeGround, GroundProp, Initiates, Means, State, Subject, Will, subjectWill}` |
-| C144 | §8/§12 | `PersonalNormativeGround.person_grounds_normative_polarity` | PROVEN↑ | `{AxPersonalNormativeGround, GroundProp, Initiates, Means, State, Subject, Will, subjectWill, will_individuation}` |
+| C144 | §8/§12 | `PersonalNormativeGround.person_grounds_normative_polarity : Act s p → Person s → GroundsJudicativePolarity s p` — the free personal judicative act grounds the polarity constitutively (AxPersonalNormativeGround removed 2026-09-21, becomes rfl-level theorem) | PROVEN | `{Initiates, Means, State, Subject, CL}` |
 | C145 | §14/§15 | `PersonalNormativeGround.discovery_independent_of_grounding` | PROVEN | `{Means, Subject}` |
 | C146 | §8/§12 | `PersonalNormativeGround.HostileModels.model_b_separation` | COUNTERMODEL | `{}` |
+
+## Level 8 — Personal Grounding of All Reality (`Logos.PersonalGroundOfReality`)
+
+The headline of the deduction: **the Person already supports the reality of Right.**
+Unconditional, no free premise, zero substantive axioms; the performative datum is
+internalized as an implication. "Necessary" = the order is necessary and its basis is the
+free personal judging nature (retorsive-transcendental necessity), NOT entity-level
+world-indexed necessity (Claim E stays annotated, THIS_IS_PERSONAL.md §12.1).
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C147 | §28/§29 | `PersonalGroundOfReality.deny_right_self_contradicts : ¬ ∃ s, ClaimsCorrect s NoRight ∧ NoRight` — denying Right is performatively self-contradictory (retorsion boundary) | PROVEN | `{Initiates, Means, State, Subject}` |
+| C148 | §28/§29 | `PersonalGroundOfReality.reality_of_right : EstablishedRightWrong ∧ NecessaryNormativeOrder` — Right/Wrong is real and the order is necessary, unconditionally | PROVEN | `{Initiates, Means, State, Subject}` |
+| C149 | §28/§29 | `PersonalGroundOfReality.judicative_stance_forces_person : ∀ s p, ClaimsNormativeCorrectness s p → Person s` — the judicative stance forces the Person | PROVEN | `{Initiates, Means, State, Subject, CL}` |
+| C150 | §28/§29 | `PersonalGroundOfReality.every_judicative_act_grounds_its_own_polarity : ∀ s q, Act s q → GroundsJudicativePolarity s q` — the Person grounds ALL judicative reality | PROVEN | `{Initiates, Means, State, Subject, CL}` |
+| C151 | §28/§29 | `PersonalGroundOfReality.the_person_supports_the_reality_of_right` — HEADLINE: deny-Right is contradictory; Right/Wrong is real and necessary; the judicative stance forces the Person; the Person supports the reality of Right. Unconditional, closed Prop. | PROVEN | `{Initiates, Means, State, Subject, CL}` |
+| C152 | §28/§29 | `PersonalGroundOfReality.personal_ground_of_right_exists (hDatum : ∃ s p, ClaimsNormativeCorrectness s p) : ∃ s, Person s ∧ NecessaryNormativeOrder ∧ (∀ q, Act s q → GroundsJudicativePolarity s q)` — existential corollary, datum-guarded | PROVEN | `{Initiates, Means, State, Subject, CL}` |
+| C153 | §28/§29 | `PersonalGroundOfReality.present_act_yields_personal_grounding_of_reality` — instance form (datum-guarded), retained as corollary of C151 | PROVEN | `{Initiates, Means, State, Subject, CL}` |
+
+### Claim E status (annotated, not a theorem)
+
+`∃ g, NecessaryEntity g ∧ Personal g ∧ GroundOfReality g` — beliefs that a
+**necessary, personal ground of all reality** exists. **NOT derivable** from the
+VOCAB-only spine: entity-level modal necessity needs `AxGlobalGround` (SEM) and
+entity-level personal grounding needs `AxPersonalGround` (META). Counter-theorems:
+`deterministic_transcendental_subject_*`, `retorsion_fails_against_no_necessary_entity`,
+`necessary_normative_truth_not_implies_ground`, `normative_ground_independence_model_satisfiable`.
+Record only; never re-axiomatize.
 
 
 

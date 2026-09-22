@@ -188,7 +188,9 @@ theorem person_exists_implies_global_grounded_polarity
 
 /-- Non-Circularity Architectural Theorem:
     The retorsive discovery proof of Free Will (`indubitable_normative_free_will`)
-    does NOT require or depend upon the grounding bridge `AxPersonalNormativeGround`.
+    does NOT require or depend upon any grounding bridge (the historical
+    `AxPersonalNormativeGround` was removed 2026-09-21; grounding of polarity is
+    constitutive, `judicative_normative_polarity_of_act`).
     Transcendental discovery of the free subject from normative polarity is logically
     independent of the ontological grounding direction.
     Footprint: `{Means, Subject}` (0 substantive axioms). -/
@@ -199,7 +201,8 @@ theorem discovery_independent_of_grounding
 
 /-- Non-Circularity for Judicative Correctness:
     The derivation of Free Will from ClaimsNormativeCorrectness is completely independent
-    of the grounding bridge `AxPersonalNormativeGround`.
+    of any grounding bridge (the historical `AxPersonalNormativeGround` was removed
+    2026-09-21; grounding is constitutive).
     Footprint: `{Initiates, Means, State, Subject, CL}` (0 substantive axioms). -/
 theorem judicative_discovery_independent_of_grounding
     {s : Subject} {p : Prop} (hClaims : Logos.NormativeOrder.ClaimsNormativeCorrectness s p) :

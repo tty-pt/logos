@@ -103,6 +103,20 @@ def C144 : String := "Every Person performing a judgment act ontologically groun
 
 def C145 : String := "Transcendental discovery of the free subject from normative polarity is logically independent of the ontological grounding bridge."
 
-def C146 : String := "Model B proves that in bare theory without AxPersonalNormativeGround, a free subject does not logically entail personal grounding of normative polarity."
+def C146 : String := "Model B proves that in bare theory, the hypothesis of a free subject does not by itself entail personal grounding of normative polarity; grounding is instead constitutive (judicative_normative_polarity_of_act, 0 substantive axioms)."
+
+def C147 : String := "Denying Right is performatively self-contradictory: no agent can present NoRight as correct while NoRight is true."
+
+def C148 : String := "Right and Wrong are real, and the normative order is necessary — both unconditional, zero substantive axioms."
+
+def C149 : String := "The judicative stance forces the Person: any agent grasping a proposition as correct and as incorrect is a free subject (FreeWill), hence a Person."
+
+def C150 : String := "The Person, as free subject, grounds ALL judicative reality: every judicative act of every subject constitutes its own Right/Wrong polarity."
+
+def C151 : String := "HEADLINE — The Person supports the reality of Right: deny-Right is contradictory, Right/Wrong is real and necessary, the judicative stance forces the Person, and the Person grounds all judicative reality."
+
+def C152 : String := "Given the performative datum (some agent actually judges), a Person exists whose free judicative nature grounds Right/Wrong for all its acts, and the normative order is necessary."
+
+def C153 : String := "The present personal free act is the necessary ontological basis of Right/Wrong and of all Gamma-reality (instance form of the headline)."
 
 end Logos.ClaimMeanings
