@@ -907,7 +907,7 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   C1, C2, C4–C9, C11, C21–C24, C26–C29, C31, C35, C36, C38, C39,
   C48–C54, C56–C58, C61–C68 (C62: pure bridges `{}`; full conditional `CL`),
   C73–C79
-  (definitional plurality, plenum seed, canonical rigid love, necessary person, contingent ground, substantive ultimate ground), F1a
+  (definitional plurality, plenum seed, canonical rigid love, necessary person — claim C77/D, conditional, never a derived divine Person —, contingent ground, substantive ultimate ground), F1a
   (choice-**field** existence resolves to a kernel step; renamed 2026-09-18, the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
   `CL`-only: C3, C10, C12–C14, C25, C30, C37, C55, C59, C93.
   Vocab-only (`{Ground}` — the statement's own vocabulary): C15, C16, C17,
@@ -1362,6 +1362,7 @@ that the ground creates existents, makes evil exist, or morally legitimizes what
 | C151 | §28/§29 | `PersonalGroundOfReality.the_person_supports_the_reality_of_right` — HEADLINE: deny-Right is contradictory; Right/Wrong is real and necessary; the normative datum forces the Person; the ground is personal in kind via GroundsRightWrong. Unconditional, closed Prop. | PROVEN | `{Initiates, Means, State, Subject, CL}` |
 | C152 | §28/§29 | `PersonalGroundOfReality.personal_ground_of_right_exists (hDatum : ∃ s, RightWrong s) : ∃ s, Person s ∧ NecessaryNormativeOrder ∧ GroundsRightWrong s` — existential corollary, datum-guarded: a personal ground exists | PROVEN | `{Initiates, Means, State, Subject, CL}` |
 | C153 | §28/§29 | `PersonalGroundOfReality.person_yields_personal_grounding_of_reality` — instance form (datum-guarded): the derived Person witnesses the personal ground of the objective normative/truth order governing judgments about reality (grounding correctness about reality; not creation of existents) (historical compatibility alias: `present_act_yields_personal_grounding_of_reality`) | PROVEN | `{Initiates, Means, State, Subject, CL}` |
+| C172 | §28/§29 | `PersonalGroundOfReality.personal_ground_of_right_wrong : ∀ s, RightWrong s → Person s` — the 'simple thing' in one universal: wherever Right/Wrong is real, its ground-type is personal; direct alias of `normative_datum_forces_person` (the elaborated `GroundsRightWrong` record is its record-form, DEFINITIONAL) | PROVEN | `{Means, Subject}` |
 
 ### Claim E status (annotated, not a theorem)
 

@@ -91,6 +91,14 @@ theorem normative_datum_forces_person :
     ∀ (s : Subject), RightWrong s → Person s :=
   discovery_rightwrong_to_person
 
+/-- The ontology in one universal: wherever Right/Wrong is real, its
+    ground-type is personal (the 'simple thing'). The elaborated
+    `GroundsRightWrong` record is its record-form (DEFINITIONAL).
+    Footprint: `{Means, Subject}`. -/
+theorem personal_ground_of_right_wrong
+    (s : Subject) : RightWrong s → Person s :=
+  normative_datum_forces_person s
+
 /-- The judicative stance forces the Person: any agent grasping a proposition
     as correct and as incorrect is a free subject (FreeWill), hence a Person.
     Footprint: `{Initiates, Means, State, Subject, CL}` (zero substantive

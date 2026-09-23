@@ -270,10 +270,10 @@ theorem denial_requires_meaning_genuine_normativity
     Means s NoGN :=
   claims_correct_means_content s NoGN hClaim
 
-/-- The axiom-free normative route terminates in the SAME GenuineNormativity type
-    (horns = the judicative normative poles Correct vs Incorrect): the downstream
-    chain GN → Chooses → FreeWill is therefore route-agnostic, holding for both
-    the AxJudicativeBipolarity route and the normative-correctness route.
+/-- Structure-identity: the axiom-free normative route terminates in the SAME
+    GenuineNormativity type (horns = the judicative normative poles Correct vs
+    Incorrect) as the AxJudicativeBipolarity route; the downstream chain
+    GN → Chooses → FreeWill is therefore route-agnostic.
     Footprint: `{Initiates, Means, State, Subject, CL}` (zero substantive axioms). -/
 theorem normative_retorsion_same_structure_type
     (s : Subject) (hClaim : ClaimsNormativeCorrectness s NoGN) :
@@ -284,11 +284,10 @@ theorem normative_retorsion_same_structure_type
 -- Section 4d: Axiom-Free Refutation of the Stipulation Attack
 -- ===========================================================================
 
-/-- The stipulation attack on GenuineNormativity is inviable by pure logic: any
-    normative-judicative stance (an actual claim of correctness over some content)
-    derives GenuineNormativity on the Correct/Incorrect poles and thereby refutes
-    NoGN with ZERO substantive axioms — no AxJudicativeBipolarity, no new SEM.
-    Footprint: `{Initiates, Means, State, Subject, CL}`. -/
+/-- Non-vacuity: any normative-judicative stance (an actual claim of correctness
+    over some content) derives GenuineNormativity on the Correct/Incorrect poles
+    and thereby refutes NoGN — with ZERO substantive axioms, no AxJudicativeBipolarity,
+    no new SEM. Footprint: `{Initiates, Means, State, Subject, CL}`. -/
 theorem normative_stance_refutes_attack_without_axioms
     (h : ∃ s : Subject, ∃ p : Prop, ClaimsNormativeCorrectness s p) :
     ¬ NoGN := by
@@ -300,22 +299,13 @@ theorem normative_stance_refutes_attack_without_axioms
     ⟨s, Logos.Order.Correct s p, Logos.Order.Incorrect s p, hGN⟩
   exact hNoGN hEx
 
-/-- The stipulation attack against GenuineNormativity is axiom-free inviable on
-    all decisive wings: (1) the thesis is false — any normative-judicative stance
-    refutes NoGN with zero substantive axioms; (2) an attack voiced IN the
-    normative-judicative stance cannot be true — no subject can simultaneously
-    claim and believe NoGN (`cannot_claim_normative_denial_and_truth`, axiom-free);
-    the weak-voice twin `cannot_coherently_claim_denial_and_truth` (tier 1 of
-    INVIABLE.md §1, voice alone) still costs `AxJudicativeBipolarity` (C106);
-    (3) the chain is not vacuous — co-grasp is definitionally choice
-    (`d7_co_grasp_is_definitionally_choice`) and choice is definitionally free
-    will (`d8_choice_is_definitionally_free_will`), both pure logic `{Means, Subject}`.
-    The attack is refuted exactly at the cost of being made: that a spoken attack
-    instantiates the stance is the field-non-empty datum (INVIABLE.md §3), not a
-    theorem of bare voice (`voice_without_normative_stance`, C166).
-    Footprint: `{Initiates, Means, State, Subject, CL}`.
-    This theorem is the headline witness for INVIABLE.md: the attack is inviable
-    without axioms. -/
+/-- Free-will corollary: the combined result `(¬ NoGN) ∧ (∃ s, FreeWill s)` falls
+    out by pure logic — the stance yields GenuineNormativity (refuting NoGN), and
+    co-grasp of incompatible alternatives is definitionally choice, which is
+    definitionally free will (`d8_choice_is_definitionally_free_will`). A spoken
+    attack instantiates the stance; that the field is non-empty is the performative
+    datum of retorsion, not a theorem of bare voice (`voice_without_normative_stance`).
+    Footprint: `{Initiates, Means, State, Subject, CL}`. -/
 theorem attack_inviable_without_axioms
     (h : ∃ s : Subject, ∃ p : Prop, ClaimsNormativeCorrectness s p) :
     (¬ NoGN) ∧ (∃ s : Subject, FreeWill s) := by

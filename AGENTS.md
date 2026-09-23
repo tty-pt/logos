@@ -45,7 +45,8 @@ cd .. && python3 scripts/audit_footprints.py && python3 scripts/build_deduction.
 - The script is stdlib-only; it parses `formal/Logos/*.lean` (declarations + line numbers),
   `formal/GAPMAP.md` (claim IDs, prose refs), `axiom_audit.json` (authoritative
   footprints), and `depgraph.json` (nodes with kinds, edges), and renders
-  `README.md` in Portuguese.
+  `README.md` in English (from the English closed-caption docstrings in the Lean
+  sources; the prose corpus `base.txt`/`theorems/*.txt` stays Portuguese).
 - Each axiom carries its type on the first line of its `/-- … -/` docstring —
   `Tag: VOCAB` (vocabulary of the statement itself), `Tag: SEM` (semantic choice),
   `Tag: META` (metaphysical bridge) — closed vocabulary; an untagged or mistyped

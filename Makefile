@@ -50,8 +50,8 @@ clean:
 
 # Package source code via dedicated packaging makefile
 zip:
-	@echo "=== Packaging source code via Makefile.zip ==="
-	$(MAKE) -f Makefile.zip zip
+	@echo "=== Packaging source code via Makefile-zip ==="
+	$(MAKE) -f Makefile-zip zip
 
 help:
 	@echo "Γ / Logos Build System"
@@ -65,5 +65,5 @@ help:
 	@echo "  test       Run verification test suites"
 	@echo "  check      Alias for test"
 	@echo "  clean      Clean Lake build artifacts and python cache"
-	@echo "  zip        Package source code into zip archive via Makefile.zip"
+	@echo "  zip        Package source code into zip archive via Makefile-zip"
 	@echo "  help       Display this help message"

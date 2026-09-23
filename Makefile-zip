@@ -1,0 +1,67 @@
+# Makefile.zip — Source code packaging and archiving for Γ / Logos.
+
+SHELL := /bin/bash
+
+ZIP ?= zip
+UNZIP ?= unzip
+
+OUT_DIR ?= dist
+ZIP_NAME ?= logos-source.zip
+ZIP_PATH := $(OUT_DIR)/$(ZIP_NAME)
+
+.PHONY: all zip verify check list clean help
+
+# Default target creates the source archive and verifies its integrity.
+all: zip verify
+	@echo "=== Source packaging complete and verified: $(ZIP_PATH) ==="
+
+# Package the repository into a clean zip archive excluding build cache, git, and ephemeral files.
+zip: clean
+	@echo "=== Creating source zip archive: $(ZIP_PATH) ==="
+	@mkdir -p $(OUT_DIR)
+	$(ZIP) -r -9 "$(ZIP_PATH)" . \
+		-x ".git/*" \
+		-x "*/.git/*" \
+		-x ".gitignore" \
+		-x "formal/.lake/*" \
+		-x "*/.lake/*" \
+		-x ".pi/*" \
+		-x "*/.pi/*" \
+		-x "__pycache__/*" \
+		-x "*/__pycache__/*" \
+		-x "*.pyc" \
+		-x "*.log" \
+		-x "dist/*" \
+		-x "*.zip"
+
+# Verify archive integrity using unzip -t
+verify:
+	@echo "=== Verifying archive integrity: $(ZIP_PATH) ==="
+	@test -f "$(ZIP_PATH)" || (echo "Error: $(ZIP_PATH) does not exist. Run 'make -f Makefile.zip' first." && exit 1)
+	$(UNZIP) -t "$(ZIP_PATH)"
+	@echo "=== Archive integrity check passed! ==="
+
+check: verify
+
+# List files inside the archive
+list:
+	@test -f "$(ZIP_PATH)" || (echo "Error: $(ZIP_PATH) does not exist. Run 'make -f Makefile.zip' first." && exit 1)
+	$(UNZIP) -l "$(ZIP_PATH)"
+
+# Clean packaging artifacts
+clean:
+	@echo "=== Cleaning archive artifacts ==="
+	rm -rf "$(OUT_DIR)"
+	rm -f "$(ZIP_NAME)"
+
+help:
+	@echo "Γ / Logos Packaging System (Makefile.zip)"
+	@echo ""
+	@echo "Targets:"
+	@echo "  all      Package source code into $(ZIP_PATH) and verify integrity (default)"
+	@echo "  zip      Package source code into $(ZIP_PATH)"
+	@echo "  verify   Verify integrity of $(ZIP_PATH) via unzip -t"
+	@echo "  check    Alias for verify"
+	@echo "  list     List files in $(ZIP_PATH)"
+	@echo "  clean    Remove $(OUT_DIR) and generated zip files"
+	@echo "  help     Display this help message"

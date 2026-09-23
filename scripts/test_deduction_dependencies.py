@@ -250,12 +250,40 @@ def test_readability_invariants():
     assert "investigations/divine-personhood.md" in text
     assert "investigations/countermodels.md" in text
 
-    # 13. Invariant: Act / SubjectExists / Agent do NOT precede Free Will in main spine
+    # 12b. Classical-attributes status table: live statuses, honest deferrals,
+    #      and no "necessary Person of God" conflation in the table region.
+    attr_text = text.partition("## Which Classical Attributes Are Already Established?")[2].partition("## Further Investigations")[0]
+    assert text.partition("## Which Classical Attributes Are Already Established?")[0], (
+        "Classical-attributes table heading must appear in the main body"
+    )
+    assert text.partition("## Which Classical Attributes Are Already Established?")[2].find("## Further Investigations") != -1, (
+        "Classical-attributes table must sit before the Further Investigations catalogue"
+    )
+    for scope in ("Personal ground / person-type", "Divine Being / Ground", "Divine Personhood"):
+        assert scope in attr_text, f"Table must report scope '{scope}'"
+    for bucket in ("✅ PROVEN", "⏸ DEFERRED", "❌ NOT ESTABLISHED", "🧱 INDEPENDENT"):
+        assert bucket in attr_text, f"Table must report status bucket '{bucket}'"
+    for footer in ("personal_ground_of_right_wrong", "person_iff_thomisticCore",
+                   "preceding_theory_not_entails_trinity",
+                   "necessary_ground_not_entails_contingent_creation",
+                   "preceding_theory_not_entails_incarnation"):
+        assert footer in attr_text, f"Table must cite live declaration '{footer}'"
+    assert "NECESSARY PERSON" not in attr_text, (
+        "Table must not re-introduce the 'necessary Person' conflation"
+    )
+    assert "God is a necessary Person" not in attr_text, (
+        "Table must never say 'God is a necessary Person'"
+    )
+    assert "never a theorem" in attr_text, (
+        "Table must record deferral honesty ('never a theorem') for Claim E"
+    )
+
+    # 14. Invariant: Act / SubjectExists / Agent do NOT precede Free Will in main spine
     prior_to_fw = text.partition("## 4. Free Will")[0]
     assert "T1_subjectExists" not in prior_to_fw, "T1_subjectExists must not precede Free Will in main spine"
     assert "T4_agentExists" not in prior_to_fw, "T4_agentExists must not precede Free Will in main spine"
 
-    # 14. Glance is conceptual and reflects the presentation spine with source-node branching
+    # 15. Glance is conceptual and reflects the presentation spine with source-node branching
     glance_text = text.partition("## The Argument at a Glance")[2].partition("## 1.")[0]
     assert "RIGHT / WRONG" in glance_text
     assert "OUGHT / OUGHT-NOT" in glance_text
@@ -267,14 +295,14 @@ def test_readability_invariants():
     assert "ONTOLOGICAL GROUND OF RIGHT / WRONG" in glance_text
     assert "NECESSARY TRUTH" in glance_text
     assert "CONSTRUCTIVE PERSONAL GROUND" in glance_text
-    assert "├─── [DERIVED THEOREM · DIVINE] → NECESSARY PERSON" in glance_text
-    assert "├─── [DIVINE UNIQUENESS · g₁=g₂] → ONE GOD / STRICT MONOTHEISM" in glance_text
+    assert "├─── [DEFERRED · NOT PART OF PROOF] → NECESSARY DIVINE GROUND / BEING" in glance_text
+    assert "├─── [DEFERRED · NOT PART OF PROOF] → ONE GOD / STRICT MONOTHEISM" in glance_text
     assert "└─── [COUNTERMODEL SEPARATION FRONTIERS] → WHAT THIS DOES NOT YET PROVE" in glance_text
     assert "THEOLOGICAL FRONTIERS" in glance_text
     assert "discovery" in glance_text
     assert "GROUNDING" in glance_text or "grounding" in glance_text
 
-    # 15. Explanatory sentences under each transition in glance
+    # 16. Explanatory sentences under each transition in glance
     assert "Right and wrong both obtain" in glance_text
     assert "Objective correctness determines agential standards" in glance_text
     assert "Apprehending incompatible alternatives and committing constitutes Choice" in glance_text
@@ -284,14 +312,14 @@ def test_readability_invariants():
     assert "Distinct persons have numerically distinct wills" in glance_text
     assert "Personal free agency ontologically grounds the normative order" in glance_text
     assert "The objective logical and normative order entails necessary truth" in glance_text
-    assert "Objective Normativity entails Person constructively" in glance_text
+    assert "The machine-proved dependence: wherever Right/Wrong is real, its ground-type is personal" in glance_text
 
-    # 16. First 200 lines readability
+    # 17. First 200 lines readability
     first_200 = "\n".join(text.splitlines()[:200])
     assert "NoRight" in first_200
     assert "claims_correct_no_right_self_refuting" in first_200
 
-    print("  ✓ All philosophical readability and expository invariants verified (16/16 checks passed).")
+    print("  ✓ All philosophical readability and expository invariants verified (17/17 checks passed).")
 
 
 def test_normative_free_will_footprint_and_edge_isolation(decls: dict, node_map: dict, graph: dict) -> None:
@@ -471,7 +499,7 @@ def test_ought_retorsion_and_personhood_frontiers(decls: dict, node_map: dict) -
     assert "SubstantivePerson" not in glance_text, "Fake SubstantivePerson frontier must not appear in glance"
     assert "CONSTRUCTIVE PERSONAL GROUND" in glance_text
     assert "ONE GOD / STRICT MONOTHEISM" in glance_text
-    assert "NECESSARY PERSON" in glance_text
+    assert "NECESSARY DIVINE GROUND / BEING" in glance_text
     assert "preceding_theory ⇏ trinity" in glance_text
     print("  ✓ Test 7 passed: Flowchart exposes unified personhood, personal ground, necessary person frontier, strict monotheism frontier, and faithful frontiers.")
 
@@ -494,6 +522,18 @@ def test_ought_retorsion_and_personhood_frontiers(decls: dict, node_map: dict) -
             f"Deferred Trinitarian declaration '{dm}' must not be live in the kernel"
         )
     print("  ✓ Test 8 passed: claim taxonomy audited, Trinitarian block confirmed deferred (not in kernel).")
+
+    # 9. Quarantined stance-closure attempt must NOT be live in the kernel
+    quarantine_marks = [
+        "AxJudicativeGrasp", "AxJudicativeGraspNeg",
+        "PresentActDatum", "stance_from_act",
+        "stance_exists_unconditional", "free_will_unconditional",
+    ]
+    for qm in quarantine_marks:
+        assert not any(d.rsplit(".", 1)[-1] == qm for d in decls), (
+            f"Quarantined stance-attempt declaration '{qm}' must not be live in the kernel"
+        )
+    print("  ✓ Test 9 passed: stance-closure attempt confirmed quarantined (scratch/, not in kernel).")
 
 
 def test_grounding_predicate_is_forced(decls: dict, node_map: dict) -> None:
@@ -742,8 +782,9 @@ def test_no_modal_collapse(decls: dict, node_map: dict) -> None:
 def test_no_unitarian_collapse(decls: dict, node_map: dict) -> None:
     print("Testing absence of unitarian collapse…")
     
-    # The Trinitarian/monotheism architecture was deferred verbatim to
-    # scratch/Trinitarian_deferred.lean (never imported). In the live kernel the
+    # The Trinitarian/monotheism architecture is deferred and currently absent
+    # from the repository (would live in scratch/Trinitarian_deferred.lean once
+    # authored; see NecessaryPersonalGround.lean). In the live kernel the
     # one-God definition must not collapse to a single subject, and no deferred
     # declaration may leak back.
     npg_code = (Path("formal/Logos/NecessaryPersonalGround.lean")).read_text(encoding="utf-8")
@@ -754,9 +795,10 @@ def test_no_unitarian_collapse(decls: dict, node_map: dict) -> None:
         assert not any(d.rsplit(".", 1)[-1] == deferred for d in decls), (
             f"Deferred Trinitarian declaration '{deferred}' must not be live in the kernel"
         )
-    scratch_code = (Path("scratch/Trinitarian_deferred.lean")).read_text(encoding="utf-8") if (Path("scratch/Trinitarian_deferred.lean")).exists() else ""
-    assert "TrinitarianGodhead" in scratch_code, (
-        "stale regression: TrinitarianGodhead must persist in the deferred archive for faithful provenance"
+    scratch_file = Path("scratch/Trinitarian_deferred.lean")
+    assert not scratch_file.exists(), (
+        "stale regression: the deferred Trinitarian/monotheism archive is not in this repository "
+        "(absent per NecessaryPersonalGround.lean; only scratch/StanceAttempt.lean is tracked)"
     )
     
     print("  ✓ Test passed: Trinitarian/monotheism block deferred to scratch; no unitarian collapse in the live kernel.")

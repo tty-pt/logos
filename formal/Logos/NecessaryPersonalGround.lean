@@ -19,15 +19,18 @@ Status (Batch THIS_IS_PERSONAL, 2026-09-22; plan `THIS_IS_PERSONAL.md` §11.7/§
    (`∃ g, NecessaryEntity g ∧ NecessaryPersonalGround g`) is **annotated only**,
    never a theorem (obstacle registry, `THIS_IS_PERSONAL.md` §12.1).
 2. **Trinitarian / monotheism block DEFERRED.** The strict-monotheism and
-   trinitarian-architecture material (axioms `PersonalNature`,
-   `personal_nature_iff_person`, `DivineNature`, `divine_nature_is_personal`,
-   `divine_person_is_necessary`, `universal_ground_unique`, duplicate
-   `GroundsEntity`/`explanatory_adequacy`, `explanatory_adequacy_normative_order`,
-   and the derived theorems `divine_subject_is_person`, `God`, `Monotheism`,
-   `divine_uniqueness`, `monotheism_derived`, `TrinitarianGodhead`,
-   `trinitarian_*`, `necessary_person_derived`, `claim_e_implies_claim_d`, …) was
-   moved verbatim to `scratch/Trinitarian_deferred.lean`, which is **never
-   imported** by the build and may not compile (that is acceptable).
+    trinitarian-architecture material (axioms `PersonalNature`,
+    `personal_nature_iff_person`, `DivineNature`, `divine_nature_is_personal`,
+    `divine_person_is_necessary`, `universal_ground_unique`, duplicate
+    `GroundsEntity`/`explanatory_adequacy`, `explanatory_adequacy_normative_order`,
+    and the derived theorems `divine_subject_is_person`, `God`, `Monotheism`,
+    `divine_uniqueness`, `monotheism_derived`, `TrinitarianGodhead`,
+    `trinitarian_*`, `necessary_person_derived`, `claim_e_implies_claim_d`, …) is
+    deferred out of the live kernel and is **currently absent from the repository**
+    (no `scratch/` directory exists). Once authored, it will live in
+    `scratch/Trinitarian_deferred.lean`, never imported by the build; it may not
+    compile (that is acceptable). Nothing trinitarian/monotheistic is a theorem of
+    this build.
 3. **Claim-E surface kept as annotations.** The definitions
    `GroundsPersonalReality`, `PersonalGround`, `NecessaryPersonalGround`, the five
    claim definitions, and the pure-logic claim entailments stay as the annotated
@@ -178,7 +181,7 @@ theorem atom_cannot_ground_person (n : Nat) (s : Subject) (hPerson : Person s) :
 -- 6. Principled Derivation of Necessary Personal Ground (No Blunt Shortcut)
 -- ============================================================================
 
-/-- Step 1: Strong Necessary Truth exists (resident in Core/Semantics, C59).
+/-- Step 1: Strong Necessary Truth exists (resident in the Core/Semantics machinery).
     Verified with footprint `{CL}`. -/
 theorem step1_necessary_truth_exists : ∃ τ : Form, NecessarilyTrue τ :=
   Logos.Semantics.strongTruthExists

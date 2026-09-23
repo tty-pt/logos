@@ -1410,8 +1410,9 @@ STAGES = [
      "with AxIntentionalChoice adopted as the minimal constitutive bridge."},
     {"key": "V", "title": "Necessity", "intro":
      "From the semantic principles and the modal backbone Γ derives the "
-     "necessary: excluded middle and non-contradiction, and the necessary person. "
-     "The person/entity lifts are definitional."},
+     "necessary: excluded middle and non-contradiction, and the necessity of the "
+     "normative order. The person/entity lifts are definitional, and a necessary "
+     "person is not derived unconditionally."},
     {"key": "VI", "title": "Grounding", "intro":
      "Ontologically, the person is the ground of the Right and the Wrong. "
      "The clean approach encodes the ontological dependence in the formal "
@@ -1784,7 +1785,7 @@ TRANSITIONS = [
      "targets": ["Logos.Choice.chooses_implies_freeWill"]},
     {"label": "genuine choice (existence: F1b)", "status": "SEMANTIC",
      "targets": ["F1b"]},
-    {"label": "performative meaning-act → necessary person / entity", "status": "CONDITIONAL",
+    {"label": "performative meaning-act → necessary entity (ground) / conditional person", "status": "CONDITIONAL",
      "targets": ["C77", "C92"]},
     {"label": "necessary subject → necessary entity", "status": "DEFINITIONAL",
      "targets": ["C91"]},
@@ -2075,6 +2076,33 @@ def proof_claimed_class(proof, node_map: dict) -> str:
         return "AXIOM"
     subst, _, _ = footprint_parts(full)
     return "PROVEN↑" if subst else "PROVEN"
+
+
+def _select_strongest(proofs: list, node_map: dict) -> list:
+    """Derived, kernel-first selection for one narrative slot (a section's
+    primary slot, a supporting_defense unit, or a supporting list): keep only
+    the strongest kernel class present (PROVEN > PROVEN↑ > AXIOM); among kept
+    proofs of the SAME goal (true duplicates of one claim) the shortest wins —
+    fewest rendered steps, then fewest assumptions, then declaration order.
+    Nothing here is curated: rank and length come from the kernel audit and the
+    compiled ProofIR. Distinct same-class proofs of different claims are all kept."""
+    if not proofs:
+        return []
+    classes = [proof_claimed_class(p, node_map) for p in proofs]
+    for best in ("PROVEN", "PROVEN↑", "AXIOM"):
+        if best in classes:
+            break
+    by_goal: dict[str, list] = {}
+    for p, c in zip(proofs, classes):
+        if c == best:
+            by_goal.setdefault(p.goal or "", []).append(p)
+    out = []
+    for cands in by_goal.values():
+        if len(cands) == 1:
+            out.append(cands[0])
+        else:
+            out.append(min(cands, key=lambda q: (len(q.steps), len(q.assumptions))))
+    return out
 
 
 def route_definition_proofs(proofs: list, decls: dict, node_map: dict, graph: dict, def_registry: dict) -> list:
@@ -3403,6 +3431,12 @@ def select_global_proof_spine(
                 if p:
                     supporting_proofs.append(p)
 
+            # STRONG.md: derived strongest-proof selection — a narrative slot renders
+            # only its strongest kernel class (PROVEN > PROVEN↑ > AXIOM); among kept
+            # proofs of the same goal, the shortest wins. Kernel-only, never curated.
+            primary_proofs = _select_strongest(primary_proofs, graph["node_map"])
+            supporting_proofs = _select_strongest(supporting_proofs, graph["node_map"])
+
             obstruction_proofs = []
             for name in node.get("obstructions", []):
                 p = resolve_proof_by_name(name, compiled_by_id, decls, graph)
@@ -3436,6 +3470,22 @@ def select_global_proof_spine(
                         "label": g.get("label", ""),
                         "proofs": g_proofs,
                     })
+                # STRONG.md: the supporting_defense unit is one narrative slot —
+                # filter its whole candidate pool (flat + every route group) and keep
+                # only the strongest kernel class; groups left empty are dropped, and
+                # the flat list roles the selected proofs. Branches/obstructions are
+                # frontiers, excluded from the filter.
+                kept = _select_strongest(
+                    sub_proofs + [p for g in groups for p in g["proofs"]],
+                    graph["node_map"])
+                kept_names = {p.full_name for p in kept}
+                filtered_groups = []
+                for g in groups:
+                    g["proofs"] = [p for p in g["proofs"] if p.full_name in kept_names]
+                    if g["proofs"]:
+                        filtered_groups.append(g)
+                groups = filtered_groups
+                sub_proofs = [p for p in sub_proofs if p.full_name in kept_names]
                 subsections.append({
                     "title": sub.get("title", ""),
                     "summary": sub.get("summary", ""),
@@ -3460,6 +3510,8 @@ def select_global_proof_spine(
                     "continuation_label": b.get("continuation_label", ""),
                     "summary": b.get("summary", ""),
                     "investigation_link": b.get("investigation_link", ""),
+                    "status": b.get("status", ""),
+                    "defer_note": b.get("defer_note", ""),
                     "primary_proofs": b_primary,
                     "supporting_proofs": b_supporting,
                     "obstruction_proofs": b_obstructions,
@@ -3500,6 +3552,49 @@ def select_global_proof_spine(
                 "conclusion": sec.get("conclusion", ""),
                 "category": "spine",
             })
+
+    # Loud check: any declared target with no compiled proof (and no documented
+    # deferral) is a stale reference — future drift fails loudly instead of
+    # silently producing a DEFINITIONAL/empty badge.
+    stale_refs = []
+    for node in (presentation_data or {}).get("spine_nodes", []):
+        node_id = node.get("id", "")
+        node_refs = [
+            ("node", node_id, n)
+            for n in (node.get("primary_targets", [])
+                      + node.get("supporting_targets", [])
+                      + node.get("obstructions", []))
+            if not resolve_proof_by_name(n, compiled_by_id, decls, graph)
+        ]
+        stale_refs.extend(node_refs)
+        for sub in node.get("supporting_defense", []):
+            sub_refs = [
+                ("subsection", f"{node_id}/{sub.get('title', '')}", n)
+                for n in sub.get("target_names", [])
+                if not resolve_proof_by_name(n, compiled_by_id, decls, graph)
+            ]
+            stale_refs.extend(sub_refs)
+            for g in sub.get("groups", []):
+                g_refs = [
+                    ("group", f"{node_id}/{sub.get('title', '')}", n)
+                    for n in g.get("target_names", [])
+                    if not resolve_proof_by_name(n, compiled_by_id, decls, graph)
+                ]
+                stale_refs.extend(g_refs)
+        for b in node.get("branches", []):
+            if b.get("status") == "deferred":
+                continue
+            stale_refs.extend(
+                ("branch", f"{node_id}/{b.get('id', '')}", n)
+                for n in (b.get("primary_targets", [])
+                          + b.get("supporting_targets", [])
+                          + b.get("obstructions", []))
+                if not resolve_proof_by_name(n, compiled_by_id, decls, graph)
+            )
+    if stale_refs:
+        detail = "; ".join(f"{kind} {where}: `{name}`" for kind, where, name in stale_refs)
+        print(f"WARNING: spine targets with no compiled Lean proof (not marked "
+              f"deferred): {detail}", file=sys.stderr)
 
     return spine_sections, detailed_sections, alternative_proofs, assigned_cids
 
@@ -3889,6 +3984,9 @@ def generate_ascii_chart(
                 b_badge = compute_epistemic_badge(b_proofs)
                 if b.get("obstructions") and not b.get("primary_targets"):
                     b_badge = "COUNTERMODEL · ⇏"
+                if b.get("status") == "deferred" or (
+                        b.get("primary_targets") and not b_proofs and not b.get("obstructions")):
+                    b_badge = "DEFERRED"
 
                 lines.append("        │")
                 lines.append(f"{prefix} {b_edge} → {b_label}")
@@ -3946,6 +4044,13 @@ def render_reading_guide() -> list[str]:
     """
     lines = []
     ap = lines.append
+    ap("> **Γ is a machine-checked deduction**: genuine normativity — an objective right/wrong")
+    ap("> binding our judgments — forces a *personal* ground. Free will is *derived, never")
+    ap("> assumed* (`GenuineNormativity ⇒ Chooses ⇒ FreeWill ⇒ FreeSubject ⇒ Person`);")
+    ap("> wherever right/wrong is real, its ground-type is personal (`RightWrong ⇒ Person`).")
+    ap("> A necessary Divine Being/Ground, Divine Personhood, and monotheism are **deferred** (⏸); every other claim is")
+    ap("> definitional, derived, or a declared axiom.")
+    ap("")
     ap("Every section below answers the same question — *what is the status of this claim?*")
     ap("")
     ap("> **The arc in one breath** — try to deny any step of the cascade. Either the denial")
@@ -3957,7 +4062,24 @@ def render_reading_guide() -> list[str]:
     ap("**Two directions, not one.** The chart distinguishes *epistemic discovery* (▲ — what")
     ap("the argument must prove upward: no free subject precedes free will) from *ontological")
     ap("grounding* (▼ — what the established order then entails downward: a personal free")
-    ap("agency grounds Right/Wrong).")
+    ap("agency grounds Right/Wrong). The kernel proves the one dependence")
+    ap("`RightWrong ⇒ Person`; the downward `▼` ontological-grounding arrow is the")
+    ap("interpretive reading of that same proved subjunction, not an additional theorem —")
+    ap("the direction is not machine-decidable.")
+    ap("")
+    ap("> **What this proof does and does not show**")
+    ap(">")
+    ap("> 1. The machine-verified chain above — clean, established **under** the")
+    ap(">    normative-judicative stance — the self-given performative datum (irrefutable in")
+    ap(">    the act of denying it), validated by the retorsion with 0 substantive axioms.")
+    ap(">    Zero-input free will is *not* claimed — §3 states the boundary and the machine")
+    ap(">    witnesses.")
+    ap("> 2. That same dependence — *wherever the normative order is real, its ground-type")
+    ap(">    is personal* — is machine-proved with 0 substantive axioms. Reading the")
+    ap(">    subjunction as a direction of ontology is interpretive, as 'Two directions, not")
+    ap(">    one.' above explains.")
+    ap("> 3. A necessary Divine Being/Ground, Divine Personhood, and Strict Monotheism — **DEFERRED** (⏸), not proved here.")
+    ap("> 4. Moral good/evil — a deferred frontier, not treated in this document.")
     ap("")
     ap("**Badge legend.** Every icon on a formal consequence is machine-derived from")
     ap("the Lean kernel (see `formal/GAPMAP.md` and the investigations) — never transcribed:")
@@ -3967,6 +4089,7 @@ def render_reading_guide() -> list[str]:
     ap("| `✅` | PROVEN — verified by pure logic; footprint contains only classical meta-logic (`CL`) and the claim's own vocabulary (0 substantive axioms) |")
     ap("| `⚠️ (AxName)` | AXIOMATIC — machine-verified, yet deliberately rests on the named declared axiom (`SEM` semantic choice / `META` metaphysical bridge) — **not unproved** |")
     ap("| `📘` | DEFINITIONAL — true by definition of the term being introduced |")
+    ap("| `⏸` | DEFERRED — a claimed result whose Lean declaration is not in the live kernel; annotated surface only (see GAPMAP + source notes), **NOT a theorem in this repository** |")
     ap("| `🧱 X ⇏ Y` | COUNTERMODEL — a model forces X nowhere near Y: an explicit boundary, not a failure |")
     ap("")
     ap("Axioms appear as `◆` in the audit ledger. `AXIOM` (the claim *is itself* a declared")
@@ -3981,8 +4104,19 @@ def render_reading_guide() -> list[str]:
     ap("")
     ap("> `✅ · File.lean#name`-style footers point at the exact Lean declaration behind each")
     ap("> consequence: the anchor is the declaration name, and the link jumps to its line under")
-    ap("> `formal/Logos/`. Follow the `Investigações` links for the deeper countermodel and")
+    ap("> `formal/Logos/`. Follow the `investigations` links for the deeper countermodel and")
     ap("> retorsion analyses.")
+    ap("")
+    ap("**How to read a step.** Claim in words first, machine rendering beneath:")
+    ap("- `∴` introduces the symbolic rendering that follows. `≡` reads \"by definition\" (`📘`);")
+    ap("  `→` and `↔` mean implication and equivalence; `⇒` chains steps into one argument;")
+    ap("  `⇏` marks a demonstrated *non-consequence* (a countermodel frontier, `🧱`).")
+    ap("- a **backticked name** is the Lean declaration that verifies the line; footers like")
+    ap("  `✅ · File.lean#name` link to it under `formal/Logos/`.")
+    ap("- each section reads: summary → the skeptic's attack & the reply → definitions used")
+    ap("  → the steps. §4–§6 are the gentlest introduction.")
+    ap("- the chain `GenuineNormativity ⇒ Chooses ⇒ FreeWill ⇒ FreeSubject ⇒ Person` is the")
+    ap("  same argument the numbered sections build link by link.")
     ap("")
     return lines
 
@@ -3999,7 +4133,9 @@ def generate_argument_at_a_glance(spine_sections: list[dict], frontiers: list[di
     ap("")
     ap("This chart is the whole argument in one map. Each box is a claim; each arrow shows a forced consequence; each icon states the claim's machine-derived status. Read it, then walk the numbered sections below.")
     ap("")
-    ap("Central Distinction: Epistemic Discovery (Right/Wrong reveals Person) operates in reverse of Ontological Grounding (Person grounds Right/Wrong).")
+    ap("Central Distinction: the upward arrows are *discovery* (from the datum to its ground);")
+    ap("the downward arrows are *ontological grounding* (from the ground to the datum) — the")
+    ap("same proved dependence, read in two directions (see the note above).")
     ap("")
     ap("```text")
 
@@ -4023,6 +4159,8 @@ def generate_argument_at_a_glance(spine_sections: list[dict], frontiers: list[di
 
 def status_icon(edge_badge: str) -> str:
     """Map a display badge string to its one-emoji chart/ledger icon."""
+    if edge_badge.startswith("DEFERRED"):
+        return "⏸"
     if edge_badge.startswith("PROVEN"):
         return "✅"
     if edge_badge == "DEFINITIONAL":
@@ -4078,7 +4216,11 @@ def render_proof_body_spine(proof: ProofIR, ap):
             ap(f"    {proof.goal}")
         ap("")
     elif proof.conclusion:
-        ap(f"    ∴ {proof.conclusion.proposition}")
+        if proof.assumptions:
+            assump_str = " ∧ ".join(a.proposition for a in proof.assumptions)
+            ap(f"    {assump_str} → {proof.conclusion.proposition}")
+        else:
+            ap(f"    ∴ {proof.conclusion.proposition}")
         ap("")
     elif proof.goal:
         ap(f"    ∴ {proof.goal}")
@@ -4140,6 +4282,324 @@ def render_proof_body(proof: ProofIR, ap, detailed: bool = False):
         ap("")
 
 
+# ---------------------------------------------------------------------------
+# Classical-attributes status table (reader-facing, generated after Branch C)
+#
+# Question answered: "Which classical characteristics of God do we already
+# have?" Statuses are DERIVED, never transcribed: each row's live bucket is a
+# pure function of (kernel node kind, audited footprint, declared GAPMAP /
+# presentation-spine status, absence of any live theorem). `render_…` shows the
+# live value; `verify_…` (run at regeneration in `main`) fails loudly if a row's
+# expected bucket no longer matches the kernel — a future theorem forces the
+# row to be upgraded honestly instead of drifting.
+# ---------------------------------------------------------------------------
+
+CLASSICAL_ATTRIBUTES = [
+    # ---- Ground 1 — Personal ground / person-type (established ✅) ----
+    {
+        "attribute": "**Personal** — the ground-type is personal",
+        "scope": "Personal ground / person-type",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.PersonalGroundOfReality.personal_ground_of_right_wrong"}],
+        "refs": [],
+        "sense": ("`RightWrong ⇒ Person` (`∀ s, RightWrong s → Person s`). "
+                  "Established of the personal ground/type, not of a particular divine person."),
+    },
+    {
+        "attribute": "**Rational** — formally equivalent to the Thomistic core containing RationalNature",
+        "scope": "Personal ground / person-type",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.Person.person_iff_thomisticCore"}],
+        "refs": ["Logos.Person.RationalNature"],
+        "sense": ("`Person(s) ↔ ThomisticPersonCore(s)`, whose conjunct "
+                  "`RationalNature s ≡ Intentional s ∧ FreeWill s` is definitional (`📘`). "
+                  "Established of the person-type."),
+    },
+    {
+        "attribute": "**Free** — genuine normativity yields genuine choice and free will",
+        "scope": "Personal ground / person-type",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will"}],
+        "refs": ["Logos.Choice.FreeWill"],
+        "sense": ("`GenuineNormativity ⇒ Chooses ⇒ FreeWill`; "
+                  "`FreeWill s ≡ ∃ p q, Chooses s p q` is definitional (`📘`)."),
+    },
+    {
+        "attribute": "**Independent will** — with numerical individuation",
+        "scope": "Personal ground / person-type",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.Person.person_iff_freeIndependentWill"}],
+        "refs": ["Logos.Person.IndependentWill"],
+        "sense": ("`Person(s) ↔ FreeIndependentWill(s)`; "
+                  "`subjectWill s₁ ≠ subjectWill s₂` — distinct persons have numerically "
+                  "distinct wills."),
+    },
+    {
+        "attribute": "**Dominion over acts** / authoritative personhood",
+        "scope": "Personal ground / person-type",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl", "full": "Logos.Person.DominionOverActs"}],
+        "refs": [],
+        "sense": ("the Thomistic-personcore conjunct `DominionOverActs s ≡ FreeWill s` is "
+                  "definitional (`📘`); present inside `person_iff_thomisticCore`."),
+    },
+    {
+        "attribute": "**Ground of objective normativity (Right and Wrong)**",
+        "scope": "Personal ground / person-type",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.PersonalNormativeGround.person_grounds_normative_polarity"}],
+        "refs": ["Logos.PersonalGroundOfReality.the_person_supports_the_reality_of_right"],
+        "sense": ("`Person s → GroundsRightWrong s`, and the headline that \"the person "
+                  "supports the reality of Right\". Established of the personal ground."),
+    },
+    # ---- Ground 2 — Divine Being / Ground (open) ----
+    {
+        "attribute": "**Necessary Divine Being / Ground**",
+        "scope": "Divine Being / Ground",
+        "expected": "DEFERRED",
+        "checks": [{"type": "branch", "id": "necessary_person"},
+                   {"type": "absent",
+                    "fragments": ["necessary_person_derived", "divine_person_is_necessary"],
+                    "allow": ["Logos.ModalCreationAgency.model_MC2_necessary_person_no_agency_consistent"]}],
+        "refs": ["Logos.NecessaryPersonalGround.step1_necessary_truth_exists",
+                 "Logos.NecessaryPersonalGround.necessary_normative_order"],
+        "sense": ("Necessary truth and a necessary *normative order* are established — "
+                  "**order-level modal facts, not a necessary Being**. Claim E "
+                  "`∃ g, NecessaryEntity g ∧ NecessaryPersonalGround g` is marked "
+                  "*never a theorem*; Branch A is deferred (`⏸`)."),
+    },
+    {
+        "attribute": "**One God / strict monotheism** (unity of the Divine Being)",
+        "scope": "Divine Being / Ground",
+        "expected": "DEFERRED",
+        "checks": [{"type": "branch", "id": "monotheism"},
+                   {"type": "absent",
+                    "fragments": ["monotheism"],
+                    "allow": []}],
+        "refs": [],
+        "sense": ("Strict monotheism (`monotheism_of_god_and_uniqueness`, "
+                  "`monotheism_compatible_with_trinity`) is deferred out of the live kernel "
+                  "(Branch B, `⏸`); unity concerns the Divine Being, not numerical identity "
+                  "of Personhood."),
+    },
+    {
+        "attribute": "**Perfect (moral) goodness**",
+        "scope": "Divine Being / Ground",
+        "expected": "DEFERRED",
+        "checks": [{"type": "claim", "id": "F3"}],
+        "refs": [],
+        "sense": ("GAPMAP ledger row `F3 §28 (Good)` = DEFERRED (`⏸`). Right/Wrong here is "
+                  "epistemic correctness, explicitly distinguished from moral good/evil."),
+    },
+    {
+        "attribute": "**Eternal** (of the Divine Being)",
+        "scope": "Divine Being / Ground",
+        "expected": "ABSENT",
+        "checks": [{"type": "absent",
+                    "fragments": ["eternal"],
+                    "allow": ["Logos.Love.T14_eternalRelation_conditional"]}],
+        "refs": ["Logos.Love.T14_eternalRelation_conditional"],
+        "sense": ("No live theorem establishes the Divine Being's eternality; the only "
+                  "`eternal` result is `T14_eternalRelation_conditional` (C42) — an eternal "
+                  "love-**relation** under `AxTwoSubjects`, not the Being's eternality."),
+    },
+    {
+        "attribute": "**Divine simplicity**",
+        "scope": "Divine Being / Ground",
+        "expected": "ABSENT",
+        "checks": [{"type": "absent", "fragments": ["simplic"], "allow": []}],
+        "refs": [],
+        "sense": "No live theorem.",
+    },
+    {
+        "attribute": "**Omniscience**",
+        "scope": "Divine Being / Ground",
+        "expected": "ABSENT",
+        "checks": [{"type": "absent", "fragments": ["omnisci"], "allow": []}],
+        "refs": ["Logos.DeepModalFrontier.Omniscience_AllTruths",
+                 "Logos.DeepModalFrontier.Omniscience_Counterfactuals"],
+        "sense": ("`Omniscience_AllTruths` / `Omniscience_Counterfactuals` "
+                  "(`DeepModalFrontier`) are frontier vocabulary definitions, not theorems."),
+    },
+    {
+        "attribute": "**Omnipotence**",
+        "scope": "Divine Being / Ground",
+        "expected": "ABSENT",
+        "checks": [{"type": "absent", "fragments": ["omnipot"], "allow": []}],
+        "refs": [],
+        "sense": "No live theorem.",
+    },
+    {
+        "attribute": "**Creator of contingent reality**",
+        "scope": "Divine Being / Ground",
+        "expected": "COUNTERMODEL",
+        "checks": [{"type": "countermodel",
+                    "full": "Logos.ConditionalTheology.necessary_ground_not_entails_contingent_creation"}],
+        "refs": [],
+        "sense": ("`necessary_ground ⇏ contingent_creation` (Acosmic model, footprint `{}`): "
+                  "a necessary divine ground is consistent with zero contingent created "
+                  "reality. (Ledger target F9 DEFERRED.)"),
+    },
+    # ---- Ground 3 — Divine Personhood (open) ----
+    {
+        "attribute": "**Three Divine Persons (Trinity)**",
+        "scope": "Divine Personhood",
+        "expected": "COUNTERMODEL",
+        "checks": [{"type": "countermodel",
+                    "full": "Logos.ConditionalTheology.preceding_theory_not_entails_trinity"}],
+        "refs": [],
+        "sense": ("`preceding_theory ⇏ trinity` (Binitarian separation model, footprint `{}`). "
+                  "A separate claim, distinct from necessity and from unity. (F6/F8 DEFERRED; "
+                  "plurality `T12_twoPersons` is at most generic persons under `AxTwoSubjects`.)"),
+    },
+    {
+        "attribute": "**Incarnation**",
+        "scope": "Divine Personhood",
+        "expected": "COUNTERMODEL",
+        "checks": [{"type": "countermodel",
+                    "full": "Logos.ConditionalTheology.preceding_theory_not_entails_incarnation"}],
+        "refs": [],
+        "sense": ("`preceding_theory ⇏ incarnation` (Unincarnate model, footprint `{}`). "
+                  "(F9 DEFERRED.)"),
+    },
+]
+
+_CA_BADGE = {
+    "PROVEN": "✅", "PROVEN↑": "⚠️", "AXIOM": "◆",
+    "COUNTERMODEL": "🧱", "DEFERRED": "⏸", "ABSENT": "❌",
+}
+
+_CA_STATUS_TEXT = {
+    "PROVEN": "✅ PROVEN",
+    "PROVEN↑": "⚠️ AXIOMATIC",
+    "AXIOM": "◆ AXIOM",
+    "COUNTERMODEL": "🧱 INDEPENDENT",
+    "DEFERRED": "⏸ DEFERRED",
+    "ABSENT": "❌ NOT ESTABLISHED",
+}
+
+
+def _classical_anchor_live(anchor: dict, decls: dict, node_map: dict) -> str:
+    """Current live bucket of one CLASSICAL_ATTRIBUTES anchor (never raises;
+    anomalies surface as descriptive strings that the `verify_…` guard turns
+    into regeneration failures — or as a `?` badge in the rendered table)."""
+    t = anchor["type"]
+    if t in ("decl", "countermodel"):
+        full = anchor["full"]
+        if full not in decls:
+            return "MISSING_DECL"
+        if full not in node_map:
+            return "MISSING_NODE"
+        if node_map[full]["kind"] == "axiom":
+            return "AXIOM"
+        if t == "countermodel":
+            fp = audit_footprint(full)
+            return "COUNTERMODEL" if not fp else f"COUNTERMODEL?({sorted(fp)})"
+        subst, _, _ = footprint_parts(full)
+        return "PROVEN↑" if subst else "PROVEN"
+    if t == "branch":
+        pd = load_presentation_spine()
+        for node in (pd or {}).get("spine_nodes", []):
+            for b in node.get("branches", []):
+                if b.get("id") == anchor["id"]:
+                    return "DEFERRED" if b.get("status") == "deferred" else "LIVE"
+        return "MISSING_BRANCH"
+    if t == "claim":
+        c = _CTX.get("by_id", {}).get(anchor["id"])
+        if c is None:
+            return "MISSING_CLAIM"
+        return _clean_status((c.get("status") or "").strip())
+    if t == "absent":
+        allow = {x.rsplit(".", 1)[-1] for x in anchor["allow"]}
+        for frag in anchor["fragments"]:
+            for f, d in decls.items():
+                if d["kind"] not in ("theorem", "axiom"):
+                    continue
+                base = f.rsplit(".", 1)[-1]
+                if frag in base and base not in allow:
+                    return "FOUND"
+        return "ABSENT"
+    return "UNKNOWN"
+
+
+def _classical_row_status(row: dict, decls: dict, node_map: dict) -> str:
+    live = _classical_anchor_live(row["checks"][0], decls, node_map)
+    return _CA_STATUS_TEXT.get(live, "?")
+
+
+def _classical_decl_link(full: str, decls: dict) -> str:
+    d = decls.get(full)
+    if not d:
+        return f"`{full}`"
+    return (f"[{d['file']}#{d['name']}]"
+            f"(formal/Logos/{d['file']}#L{d['line']}), footprint {kernel_fp_text(full)}")
+
+
+def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
+    """Emits the classical-attributes table block (placed after Branch C, before
+    the Further Investigations catalogue). Statuses are live-derived, never
+    transcribed."""
+    lines = []
+    ap = lines.append
+    ap("---")
+    ap("")
+    ap("## Which Classical Attributes Are Already Established?")
+    ap("")
+    ap("> **Which classical characteristics of God do we already have?** This table reports the")
+    ap("> **live formal status** of the main classical attributes, derived from the current kernel")
+    ap("> and ledger (never from intentions). The three scopes are kept apart: the **Divine")
+    ap("> Being / Ground**, **Divine Personhood**, and the **personal normative ground /**")
+    ap("> **person-type** — what §1–§10 actually establish. \"Necessity\" concerns the")
+    ap("> Being/Ground, not each Divine Person; \"Personal\", \"Three Persons\", and \"One God\"")
+    ap("> are separate claims and are reported separately. Nothing here claims a \"necessary")
+    ap("> Person\": \"He is necessary\" is a claim about the Divine Being / Ground, \"He is")
+    ap("> personal\" a claim about the ground-type — two different rows, never conjoined.")
+    ap("")
+    ap("Status vocabulary used here (extends the badge legend above): `✅` PROVEN (machine-verified, footprint stated) · `📘` DEFINITIONAL · `⏸` DEFERRED (target not in the live kernel) · `❌` NOT ESTABLISHED (no current theorem; distinct from the ledger's `✖` BLOCKED) · `🧱` INDEPENDENT / FRONTIER (explicit countermodel: the preceding theory does not entail it).")
+    ap("")
+    ap("| Classical characteristic | Scope | Status | Exact sense established by the current theory (reference) |")
+    ap("|---|---|---|---|")
+    for row in CLASSICAL_ATTRIBUTES:
+        refs = list(row["refs"])
+        primary = row["checks"][0].get("full")
+        if primary and primary not in refs:
+            refs.insert(0, primary)
+        ref_cell = " ; ".join(_classical_decl_link(f, decls) for f in refs)
+        ref_cell = f" — {ref_cell}" if ref_cell else ""
+        ap(f"| {row['attribute']} | {row['scope']} | "
+           f"{_classical_row_status(row, decls, node_map)} | {row['sense']}{ref_cell} |")
+    ap("")
+    ap("_Synthesis — the strongest current profile._ The theory has established, of a")
+    ap("**personal, rational, free, authoritative-over-its-acts, independently individuated**")
+    ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")
+    ap("of a necessary normative/truth order. The specifically divine attributes — a **necessary")
+    ap("Divine Being / Ground**, **unity / monotheism**, **simplicity**, **omniscience**, **omnipotence**,")
+    ap("**eternality**, **perfect moral goodness**, the **Trinity**, the **Incarnation**, and contingent")
+    ap("**creation** — remain **separate proof targets**")
+    ap("(`⏸` / `❌`) or explicit **countermodel frontiers** (`🧱`) until the live kernel proves them.")
+    ap("")
+    return lines
+
+
+def verify_classical_attribute_status(decls: dict, node_map: dict) -> None:
+    """Regeneration guard: every CLASSICAL_ATTRIBUTES row's live-derived bucket
+    must still equal its expected bucket. A future theorem that establishes a
+    currently-absent attribute (or a GAPMAP/branch status change) fails loudly
+    here, forcing the row to be upgraded honestly in the same change."""
+    for row in CLASSICAL_ATTRIBUTES:
+        got = _classical_anchor_live(row["checks"][0], decls, node_map)
+        assert got == row["expected"], (
+            f"CLASSICAL ATTRIBUTES drift: '{row['attribute']}' is declared "
+            f"{row['expected']} but the live kernel/ledger derives {got}. "
+            f"Upgrade the CHAR.md table row only together with the real formal "
+            f"change; never transcribe status text over the kernel.")
+
+
 def render_deduction_sections(sections: list[dict], decls: dict = None, node_map: dict = None, investigations_dir: Path = None) -> list[str]:
     """Renders compiled ProofIR sections into README.md in 3 simultaneous layers:
 
@@ -4177,7 +4637,53 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
     include_further = policy.get("include_further_investigations", True)
 
     # 1. Main Proof Spine
+    dedupe_defs = bool(policy.get("dedupe_shared_definitions", False))
+    surfaced = {}
+
+    def _section_ref(title):
+        m = re.match(r'^\s*(\d+)\s*[.)]\s*(.*)$', title)
+        return (int(m.group(1)), m.group(2).strip()) if m else (None, title.strip())
+
+    def _surface(proof, sec_no, sec_bare, kind):
+        surfaced.setdefault(proof.name, (sec_no, sec_bare, kind))
+
+    def _render_step(proof, sec_no, sec_bare):
+        render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+        if dedupe_defs:
+            _surface(proof, sec_no, sec_bare, "step")
+
+    def _render_route_definitions(sec, sec_no, sec_bare):
+        if not sec.get("route_definitions") or is_synthetic:
+            return
+        new_defs, refs = [], []
+        for d in sec["route_definitions"]:
+            if dedupe_defs and d.name in surfaced:
+                refs.append(d)
+            else:
+                new_defs.append(d)
+                if dedupe_defs:
+                    _surface(d, sec_no, sec_bare, "def")
+        if not new_defs and not refs:
+            return
+        ap("<details>")
+        if refs:
+            ap(f"<summary>Definitions used in this section ({len(new_defs) + len(refs)}; "
+               f"{len(new_defs)} new, {len(refs)} already shown)</summary>")
+        else:
+            ap(f"<summary>Definitions used in this section ({len(new_defs)})</summary>")
+        ap("")
+        for d in new_defs:
+            render_proof_body_spine(d, ap)
+        for d in refs:
+            ref_no, ref_bare, ref_kind = surfaced[d.name]
+            verb = "defined" if ref_kind == "def" else "first shown"
+            ap(f"    ∴ {d.goal} — {verb} in §{ref_no}. {ref_bare}.")
+            ap("")
+        ap("</details>")
+        ap("")
+
     for i, sec in enumerate(spine):
+        sec_no, sec_bare = _section_ref(sec.get("title", ""))
         ap(f"## {sec['title']}")
         ap("")
         if sec.get("summary"):
@@ -4189,37 +4695,45 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
             ap("")
 
         if sec.get("pushback"):
-            ap(f"> **The skeptic tries —** {sec['pushback']}")
-        if sec.get("reply"):
-            ap(f"> **The reply / the frontier —** {sec['reply']}")
-        if sec.get("pushback") or sec.get("reply"):
-            ap("")
-
-        if sec.get("route_definitions") and not is_synthetic:
             ap("<details>")
-            ap(f"<summary>Definitions used in this section ({len(sec['route_definitions'])})</summary>")
+            ap("<summary>The skeptic's attack & the reply</summary>")
             ap("")
-            for d in sec["route_definitions"]:
-                render_proof_body_spine(d, ap)
+            ap(f"> **The skeptic tries —** {sec['pushback']}")
+            if sec.get("reply"):
+                ap(f"> **The reply / the frontier —** {sec['reply']}")
+            ap("</details>")
+            ap("")
+        elif sec.get("reply"):
+            ap("<details>")
+            ap("<summary>The reply / the frontier</summary>")
+            ap("")
+            ap(f"> **The reply / the frontier —** {sec['reply']}")
             ap("</details>")
             ap("")
 
+        _render_route_definitions(sec, sec_no, sec_bare)
+
         for proof in sec.get("primary_proofs", sec.get("proofs", [])):
-            render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+            _render_step(proof, sec_no, sec_bare)
 
         if sec.get("supporting_proofs"):
             ap("<details>")
             ap(f"<summary>Supporting Infrastructure — {len(sec['supporting_proofs'])} auxiliary theorem(s) beneath this step</summary>")
             ap("")
             for proof in sec.get("supporting_proofs", []):
-                render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+                _render_step(proof, sec_no, sec_bare)
             ap("</details>")
             ap("")
 
         for proof in sec.get("obstruction_proofs", []):
+            ap("<details>")
+            ap(f"<summary>Obstruction / Formal Boundary: `{proof.name}`</summary>")
+            ap("")
             ap(f"### Obstruction / Formal Boundary: `{proof.name}`")
             ap("")
-            render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+            _render_step(proof, sec_no, sec_bare)
+            ap("</details>")
+            ap("")
 
         for sub in sec.get("subsections", []):
             ap(f"### {sub['title']}")
@@ -4230,14 +4744,16 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
             groups = sub.get("groups")
             if groups:
                 for g in groups:
+                    if not g.get("proofs"):
+                        continue
                     if g.get("label"):
                         ap(g["label"])
                         ap("")
                     for proof in g.get("proofs", []):
-                        render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+                        _render_step(proof, sec_no, sec_bare)
             else:
                 for proof in sub.get("proofs", []):
-                    render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+                    _render_step(proof, sec_no, sec_bare)
 
         for b in sec.get("branches", []):
             ap(f"### {b['title']}")
@@ -4248,20 +4764,30 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
             if b.get("investigation_link"):
                 ap(f"*(Detailed technical proof & model analysis: [{b['investigation_link']}]({b['investigation_link']}))*")
                 ap("")
+            if b.get("status") == "deferred" and not b.get("primary_proofs"):
+                defer_line = b.get("defer_note") or (
+                    "> ⏸ **DEFERRED** — annotated surface only; no compiled Lean declaration "
+                    "(`NecessaryPersonalGround.lean` defers this block; "
+                    "`scratch/Trinitarian_deferred.lean` is absent from the repository).")
+                ap("> " + defer_line if not defer_line.startswith("> ") else defer_line)
+                ap("")
             for proof in b.get("primary_proofs", []):
-                render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+                _render_step(proof, sec_no, sec_bare)
             if b.get("supporting_proofs"):
                 ap("<details>")
                 ap(f"<summary>Supporting Infrastructure — {len(b['supporting_proofs'])} auxiliary theorem(s) beneath this branch</summary>")
                 ap("")
                 for proof in b.get("supporting_proofs", []):
-                    render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+                    _render_step(proof, sec_no, sec_bare)
                 ap("</details>")
                 ap("")
             for proof in b.get("obstruction_proofs", []):
-                ap(f"#### Obstruction / Formal Boundary: `{proof.name}`")
+                ap("<details>")
+                ap(f"<summary>Obstruction / Formal Boundary: `{proof.name}`</summary>")
                 ap("")
-                render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+                _render_step(proof, sec_no, sec_bare)
+                ap("</details>")
+                ap("")
 
         if i < len(spine) - 1:
             ap("---")
@@ -4319,6 +4845,12 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
                 doc_str = f" — {proof.doc}" if proof.doc else ""
                 ap(f"* **`{proof.name}`** (`{proof.goal}`){doc_str}")
         ap("")
+
+    # 5. Classical-attributes status table (after the whole core deduction,
+    #    before the Further Investigations catalogue) — real-repository mode only.
+    if not is_synthetic and decls and len(decls) > 10 and _AUDIT:
+        for line in render_classical_attribute_status(decls, node_map):
+            ap(line)
 
     if include_further:
         further = render_further_investigations(decls, investigations_dir)
@@ -4622,6 +5154,10 @@ def main():
     def_registry = {}
     deduction_sections = discover_deduction_sections(sections, decls, node_map, graph, def_registry)
     lines = render_deduction_sections(deduction_sections, decls, node_map)
+
+    # Classical-attributes table honesty: live kernel/ledger must still match the
+    # declared buckets (a future theorem would fail regeneration loudly here).
+    verify_classical_attribute_status(decls, node_map)
 
     missing_ax = set(ax_id) - _CTX["ax_shown"]
     assert not missing_ax, f"axioms never introduced inline: {sorted(missing_ax)}"

@@ -84,7 +84,7 @@ theorem extensional_bivalence_insufficient_for_free_will :
   obtain ⟨s, _, _, _, _, _⟩ := hContra
   cases s
 
-/-- Direct tier-3 witness (INVIABLE.md §1): an inanimate universe is extensionally
+/-- Direct witness (`M_inanimate`): an inanimate universe is extensionally
     bivalent (`¬N_T ∧ ¬N_F`) yet realizes NO instance of the genuine-normativity
     shape — incompatible alternatives plus agential address via a means relation.
     The unconditional denial `¬ NoGN` is therefore not derivable from bare

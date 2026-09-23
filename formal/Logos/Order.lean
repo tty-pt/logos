@@ -23,8 +23,7 @@ open Logos.Agency (Subject A Asserts)
 open Logos.Choice (ChoiceField incompatible_self_negation Selects asserts_selects asserts_selects_all_incompatible)
 open Logos.Alternatives (Incompatible)
 
-/-- Correctness: a subject's act of judging p is correct iff p is true
-    (§8, literal form `Correct(A(s,p)) ↔ True(p)`). The act is constitutive:
+/-- Correctness: a subject's act of judging p is correct iff p is true. The act is constitutive:
     an act is a meaningful initiation (`A s p := Means s p ∧ ∃ w w', Initiates s w w' p`),
     so every correct judgment embodies intentional meaning. -/
 def Correct (s : Subject) (p : Prop) : Prop := A s p ∧ T p
@@ -45,8 +44,7 @@ theorem correct_implies_selection_all_incompatible {s : Subject} {p q : Prop}
   have hAss : Asserts s p := ⟨h.1, (tschema p).1 h.2⟩
   exact asserts_selects_all_incompatible s p q hAss hI
 
-/-- Incorrectness: a subject's act of *meaning* p is incorrect iff p is false
-    (§8, literal form `Incorrect(A(s,p)) ↔ False(p)`). Same as `Correct`:
+/-- Incorrectness: a subject's act of *meaning* p is incorrect iff p is false. Same as `Correct`:
     the meaning-act `A s p` is a conjunct, hence unavoidable. -/
 def Incorrect (s : Subject) (p : Prop) : Prop := A s p ∧ IsFalse p
 

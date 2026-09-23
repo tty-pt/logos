@@ -8,7 +8,8 @@
     "include_detailed_appendix": false,
     "include_countermodels_appendix": false,
     "include_frontiers_appendix": false,
-    "investigations_directory": "investigations"
+    "investigations_directory": "investigations",
+    "dedupe_shared_definitions": true
   },
   "spine_nodes": [
     {
@@ -17,9 +18,9 @@
       "reply": "Retorsive: claiming the denial as *correct* while it is true is a constructive contradiction (claims_correct_no_right_self_refuting); downplaying to a mere assertion forfeits the claim to correctness. Under classical meta-logic {CL} objective Right necessarily exists — with zero substantive axioms.",
       "label": "RIGHT / WRONG",
       "title": "1. Objective Right and Wrong",
-      "explanation": "Right and wrong both obtain: the binary normative distinction is real. 'Right'/'Wrong' here denotes the objective truth/correctness polarity (some propositions are true, some false; affirming a truth is correct, affirming a falsehood is incorrect), NOT a moral evaluation of good vs. evil (moral good is DEFERRED, F3).",
+      "explanation": "Right and wrong both obtain: the binary normative distinction is real. The 'Right'/'Wrong' polarity is the objective truth/correctness standard — some propositions are true, some false; affirming a truth is correct, affirming a falsehood is incorrect.",
       "formula": "Right ≠ Wrong ∧ EstablishedRightWrong : Prop := ¬N_T ∧ ¬N_F",
-      "summary": "The deduction begins with the objective distinction between Right and Wrong (Right ≠ Wrong). Objective normative distinction is real: neither all propositions are true nor all are false (¬N_T ∧ ¬N_F), and rational judgment constitutively presupposes an objective standard of correctness.\n\nThe main reader should first understand WHAT is established: the reality of the normative distinction itself. The performative retorsion is a supporting investigation explaining HOW the normative datum is defended against skeptical denial.\n\nTerminology caveat: 'Right' and 'Wrong' are used in their objective, truth-based sense here — Right = a proposition's being true (so that affirming it is correct), Wrong = a proposition's being false (so that affirming it is incorrect). This is the epistemic/logical correctness polarity, NOT a claim that some things are morally good or evil; moral good/evil is a deferred frontier (F3). In particular, 'evil exists' can be objectively true — 'evil exists' is then correct to affirm — without being morally right.",
+      "summary": "The deduction begins with the objective distinction between Right and Wrong (Right ≠ Wrong). Objective normative distinction is real: neither all propositions are true nor all are false (¬N_T ∧ ¬N_F), and rational judgment constitutively presupposes an objective standard of correctness.\n\nThe main reader should first understand WHAT is established: the reality of the normative distinction itself. The performative retorsion is a supporting investigation explaining HOW the normative datum is defended against skeptical denial.\n\nTerminology: 'Right'/'Wrong' here denote the objective truth/correctness polarity — a proposition's being true (so that affirming it is correct) vs. being false (so that affirming it is incorrect) — not a moral evaluation of good vs. evil (moral good/evil is a deferred frontier, noted in the scope box above).",
       "primary_targets": [
         "rightWrongDistinction",
         "EstablishedRightWrong"
@@ -41,12 +42,12 @@
     {
       "id": "ought",
       "pushback": "'Ought' is nothing but a relabel of 'correct' — no genuinely normative force is added.",
-      "reply": "The deontic opposition here is itself derived under the objective epistemic TruthNorm (correct → ought to affirm; incorrect → ought not to affirm). The irreducible practical Ought of actions stays a separate VOCAB primitive (OughtRetorsion.Ought, base.txt §21) — the derivation neither collapses nor imports it.",
+      "reply": "The deontic opposition here is derived under the objective epistemic TruthNorm (correct → ought to affirm; incorrect → ought not to affirm) — a genuinely new normative relation, not a relabel; the irreducible practical Ought of actions stays a separate primitive (see the terminology note above).",
       "label": "OUGHT / OUGHT-NOT",
       "title": "2. Ought and Normative Polarity",
       "explanation": "Objective correctness determines agential standards: Ought vs. Ought-Not — the epistemic objective standard (a proposition ought to be affirmed because it is true).",
       "formula": "Ought TruthNorm ⟨s, p⟩ ∧ OughtNot TruthNorm ⟨s, q⟩",
-      "summary": "From objective Right and Wrong, the normative standard is expressed as agential Ought and Ought-Not. Under the objective epistemic TruthNorm, correct judgment implies what the subject ought to affirm, and incorrect judgment implies what the subject ought not to affirm. Correctness and incorrectness constitute a strict deontic opposition between what ought and what ought not to be judged.\n\nTerminology caveat: the Ought/Ought-Not here are derived from the epistemic TruthNorm — they govern whether a judgment about reality is correct to affirm (true) or incorrect (false). They are not the irreducible practical deontic Ought of actions (`OughtRetorsion.Ought`, a separate VOCAB primitive, base.txt §21), and they attribute no moral good/evil to any content.",
+      "summary": "From objective Right and Wrong, the normative standard is expressed as agential Ought and Ought-Not. Under the objective epistemic TruthNorm, correct judgment implies what the subject ought to affirm, and incorrect judgment implies what the subject ought not to affirm. Correctness and incorrectness constitute a strict deontic opposition between what ought and what ought not to be judged.\n\nTerminology: the Ought/Ought-Not here are derived from the epistemic TruthNorm — they govern whether a judgment about reality is correct to affirm (true) or incorrect (false). They are not the irreducible practical deontic Ought of actions (`OughtRetorsion.Ought`, a separate VOCAB primitive).",
       "primary_targets": [
         "correctness_deontic_opposition"
       ],
@@ -59,7 +60,7 @@
     {
       "id": "choice",
       "pushback": "Genuine Normativity is a stipulation — the chain GN → Chooses → FreeWill may be valid but empty.",
-      "reply": "Retorsive: claiming the denial of genuine normativity as correct (ClaimsCorrect s NoGN) yields a literal term of the identical GenuineNormativity structure (denial_of_genuine_normativity_is_self_refuting). A stance-level refutation is axiom-free (normative_stance_refutes_attack_without_axioms); only the weak-voice twin costs AxJudicativeBipolarity (SEM).",
+      "reply": "Retorsive: claiming the denial of genuine normativity as correct (ClaimsCorrect s NoGN) yields a literal term of the identical GenuineNormativity structure (denial_of_genuine_normativity_is_self_refuting); the axiom-free stance-level derivation is set out in the retorsion block below.",
       "label": "CHOICE",
       "title": "3. Genuine Choice",
       "explanation": "Apprehending incompatible alternatives and committing constitutes Choice.",
@@ -75,8 +76,8 @@
       "supporting_defense": [
         {
           "title": "Retorsion Against 'Genuine Normativity Is Stipulative'",
-          "formula": "ClaimsCorrect(s, NoGN) ∧ NoGN → ⊥  |  ClaimsCorrect s NoGN → GenuineNormativity s NoGN (¬ NoGN)",
-          "summary": "Attack: GenuineNormativity is defined as incompatible alternatives plus Means(s,p) and Means(s,q) — a stipulation of what 'normativity' means, so GN → Chooses → FreeWill may be valid but empty.\n\nRetorsion: the denial cannot be maintained as a *correct* denial without instantiating the very structure it denies. Claiming the denial of genuine normativity as correct (ClaimsCorrect s NoGN) yields a literal term of the identical GenuineNormativity structure consumed downstream (claiming_denial_presupposes_genuine_normativity, denial_of_genuine_normativity_is_self_refuting).\n\nVerdict — same semantic level: the address component is exactly the pair ⟨Means s NoGN, Means s (¬ NoGN)⟩ built from the primitive Means relation alone (retorsion_address_uses_only_means); the opposition component is pure logic — incompatible-with-its-negation plus non-identity (retorsion_opposition_is_pure_logic). No Correct, Incorrect, Ought, or any stronger notion of normativity is imported at the retorsion step; the axiom-free normative route terminates in the same GenuineNormativity type, so the chain GN → Chooses → FreeWill is route-agnostic (retorsion_conclusion_is_the_very_genuine_normativity_structure, normative_retorsion_same_structure_type).\n\nInviability WITHOUT axioms: the attack cannot win. A normative-judicative stance — the field of every *evaluative* judgment, non-empty because we attempt the proof from inside it — derives GenuineNormativity on the judicative poles Correct/Incorrect and refutes NoGN with ZERO substantive axioms (normative_stance_refutes_attack_without_axioms, footprint {Initiates, Means, State, Subject, CL}); only the weak-voice twin still costs the SEM bridge AxJudicativeBipolarity (C106; model-theoretically independent of primitive Γ — M_opaque — hence an OPTIONAL weak-stance asset). Residuals recorded honestly: a voiceless denial never becomes a stance-refuting one — M_oneway separates bare voice from judgment-in-the-stance (C166), M_inanimate keeps bivalence without agency (C167) — and the free will won through the denial has meta-level horns (NoGN, ¬NoGN), so object/action deliberation lives on the separate DeliberateChoice / ClaimsNormativeCorrectness route (C140/C141).",
+          "formula": "(∃ s, ∃ p, ClaimsNormativeCorrectness s p) → GenuineNormativity s (Correct s NoGN) (Incorrect s NoGN) ∧ ¬ NoGN ∧ (∃ s, FreeWill s)",
+          "summary": "Attack: `GenuineNormativity` is just incompatible alternatives plus `Means(s,p)` and `Means(s,q)` — a stipulation of what 'normativity' means.\n\nStrong retorsion, axiom-free: the normative-judicative stance — the performative datum described in the scope box above — derives GenuineNormativity on the judicative poles and thereby refutes NoGN, without any substantive axiom (normative_stance_refutes_attack_without_axioms). Its stance antecedent `(∃ s, ∃ p, ClaimsNormativeCorrectness s p)` is made explicit in the step block and the chart; `Cogito` turns a *given* assertion into an act and does not supply the stance; only the weak-voice twin of the retorsion costs `AxJudicativeBipolarity` (SEM).\n\nResiduals, stated once: voicing alone does not force the stance, and an inanimate bivalent universe realizes no genuine normativity — the two independence witnesses below establish both, so no zero-input `⊢ ∃ s, FreeWill s` theorem is claimed; under a denied horn, deliberation lives on the separate DeliberateChoice / ClaimsNormativeCorrectness route. A weak-voice twin variant exists but is dispensable for this narrative.",
           "target_names": [
             "claiming_denial_presupposes_genuine_normativity",
             "denial_of_genuine_normativity_is_self_refuting",
@@ -112,7 +113,7 @@
               ]
             },
             {
-              "label": "**Master route to Free Will — weak-voice twin under `AxJudicativeBipolarity` (the axiom-free twin is already carried at C140/C141, ✅):**",
+              "label": "**Master route to Free Will — weak-voice twin under `AxJudicativeBipolarity` (the axiom-free twin is already carried above, ✅):**",
               "expected_badge": "PROVEN↑",
               "target_names": [
                 "retorsion_derives_free_will"
@@ -134,12 +135,12 @@
     {
       "id": "free_will",
       "pushback": "You assumed freedom — a free will was smuggled in as a premise.",
-      "reply": "No: Free Will is derived by pure logic (indubitable_normative_free_will) with 0 substantive axioms, and M_oneway shows a voice need not even force the stance — genuine normative address alone suffices.",
+      "reply": "No — the starting point is normative address, not a free subject: see the derivation in the section text (`indubitable_normative_free_will`).",
       "label": "FREE WILL",
       "title": "4. Free Will",
       "explanation": "Freedom is derived by pure logic from genuine normativity and choice.",
       "formula": "Chooses s p q ∧ FreeWill(s)",
-      "summary": "We did not assume a free subject. Free Will is not assumed as an initial axiom; the argument derives it as an unavoidable theorem. From the reality of genuine normative address and rational choice, Free Will follows from Genuine Normativity by pure logic with zero substantive axioms. A subject endowed with the capacity to choose between incompatible alternatives possesses Free Will by definition.",
+      "summary": "We did not assume a free subject. Free Will is derived, not assumed: from the reality of genuine normative address and rational choice, Free Will follows from Genuine Normativity by pure logic with zero substantive axioms — a subject endowed with the capacity to choose between incompatible alternatives possesses Free Will by definition.",
       "primary_targets": [
         "indubitable_normative_free_will"
       ],
@@ -151,12 +152,12 @@
     {
       "id": "free_subject",
       "pushback": "A definitional manoeuvre — the free subject is bought by a definition, not proven.",
-      "reply": "Precisely: FreeSubject(s) ↔ FreeWill(s) is Iff.rfl. Nothing precedes free will — the free subject is recognized only after Free Will is established. The 'manoeuvre' is the theorem.",
+      "reply": "Precisely — the 'manoeuvre' *is* the theorem: the equivalence is `Iff.rfl`, which is exactly why nothing can precede free will.",
       "label": "FREE SUBJECT",
       "title": "5. The Free Subject",
       "explanation": "A subject is recognized as free in virtue of possessing Free Will.",
       "formula": "FreeSubject(s) ≡ FreeWill(s)",
-      "summary": "A subject is definitionally a free subject if and only if it possesses free will (FreeSubject(s) ↔ FreeWill(s), Iff.rfl). The subject is recognized here as a Free Subject because it possesses Free Will. We do NOT derive Free Will from the existence of the subject; rather, the free subject is introduced only after Free Will is established.",
+      "summary": "A subject is definitionally a free subject iff it possesses free will (`FreeSubject(s) ↔ FreeWill(s)`, Iff.rfl). The recognition runs strictly forward: free will first, the free subject only after it.",
       "primary_targets": [
         "freeSubject_iff_freeWill"
       ],
@@ -167,26 +168,26 @@
     {
       "id": "person",
       "pushback": "A loaded, theological word smuggled into the deduction.",
-      "reply": "Person(s) := FreeSubject(s): the term is defined constitutively, and every free subject is proven an authoritative Person by pure logic (free_subject_is_person, 0 substantive axioms). Nothing theological enters here; theology would enter only downstream, in the branches — and is then explicitly bounded by countermodels.",
+      "reply": "Classical, not novel: the term follows Boethius and Aquinas rather than theological invention. Nothing theological is *assumed*; theology would enter only downstream, in the branches — and is then explicitly bounded by countermodels.",
       "label": "PERSON",
       "title": "6. Person",
       "explanation": "A free subject is constitutively an authoritative Person.",
       "formula": "Person s : Prop := FreeSubject s",
-      "summary": "In the unified Γ ontology, Personhood is defined constitutively: a Person is a subject possessing genuine free will (Person(s) := FreeSubject(s)). Personhood is not an opaque or unprovable predicate; every Free Subject is proven to be an authoritative Person by pure deduction (free_subject_is_person, 0 substantive axioms). This is the first point at which the personal subject properly enters the main deduction.",
-"primary_targets": [
-  "free_subject_is_person"
- ],
- "supporting_targets": [
-  "person_iff_freeSubject",
-  "person_has_free_will",
-  "person_iff_thomisticCore"
- ],
- "investigation_link": "investigations/divine-personhood.md"
+      "summary": "In the unified Γ ontology, Personhood is defined constitutively in the classical sense of Boethius and Aquinas — an *individual substance of a rational nature*, with *dominion over its own acts* — formalized as a subject possessing genuine free will (`Person(s) := FreeSubject(s)`); the equivalence with the explicit Thomistic person core (`IndividualSubstance ∧ RationalNature ∧ DominionOverActs`) is proved below (`person_iff_thomisticCore`, 0 substantive axioms). Personhood is therefore not an opaque or unprovable predicate: every Free Subject is an authoritative Person by pure deduction (`free_subject_is_person`). This is the first point at which the personal subject properly enters the main deduction.",
+      "primary_targets": [
+        "free_subject_is_person",
+        "person_iff_thomisticCore"
+      ],
+      "supporting_targets": [
+        "person_iff_freeSubject",
+        "person_has_free_will"
+      ],
+      "investigation_link": "investigations/divine-personhood.md"
     },
     {
       "id": "personal_will",
       "pushback": "Two persons could share one will — individuation is not forced.",
-      "reply": "Numerical individuation is forced: will_individuation (VOCAB) yields subjectWill s₁ ≠ subjectWill s₂ for distinct subjects, so a Person's free will is genuinely its own (Person(s) ↔ FreeIndependentWill(s), 0 substantive axioms).",
+      "reply": "Individuation is forced, not chosen: `will_individuation` (VOCAB) assigns each subject its own numerically distinct will-faculty (`subjectWill s₁ ≠ subjectWill s₂`), so two Persons cannot share one will; `Person ↔ FreeIndependentWill` then follows with 0 substantive axioms.",
       "label": "INDEPENDENT PERSONAL WILL",
       "title": "7. Personal and Independent Will",
       "explanation": "Distinct persons have numerically distinct wills (subjectWill s₁ ≠ subjectWill s₂).",
@@ -204,12 +205,12 @@
     {
       "id": "ground_right_wrong",
       "pushback": "Principle-of-Sufficient-Reason smuggling: this makes the Person (or the argument) the causal creator of morality.",
-      "reply": "Grounding ≠ identity and ≠ causation: the claim is that Right/Wrong's correctness-order has an ontological ground *personal in kind* — not that the person causally creates existents or produces rightness. The bare ought survives the impersonal model, the personal ground is forced within the normative order, and model_b_separation marks exactly what the antecedent does and does not reach.",
+      "reply": "Grounding ≠ identity and ≠ causation — see distinctions 2 and 4: Right/Wrong's correctness-order has a ground *personal in kind*, not a particular person causally producing existents or rightness. The bare ought survives the impersonal model, the personal ground is forced within the normative order, and model_b_separation marks exactly what the antecedent does and does not reach.",
       "label": "ONTOLOGICAL GROUND OF RIGHT / WRONG",
       "title": "8. Personal Agency as Ontological Ground of Normativity",
       "explanation": "Personal free agency ontologically grounds the normative order: the ground of objective normativity is personal in kind/type (Grounding ≠ Id; Grounding ≠ Individual Causation).",
       "formula": "RightWrongAt s p q ⇒ ... ⇒ Person s ⇒ GroundsRightWrong s",
-      "summary": "The complete logical shape is a strictly forward implication chain: A₀ ⇒ A₁ ⇒ ... ⇒ P ⇒ G. Every implication has a true antecedent once the previous step has been established: from the starting normative datum (A₀), through genuine choice and free will, to the Person (P), and finally to the proposition (G) that this Person grounds the original normative datum.\n\n### The Three Critical Distinctions\n1. **Discovery of a personal ground (forward proof):** The deductive proof runs forward via successive modus ponens: A₀ ⇒ Choice ⇒ Free Will ⇒ Free Subject ⇒ Person ⇒ G. Discovery identifies a personal ground from the normative datum.\n2. **Grounding in a personal kind/type (derived ontological proposition):** Objective Right/Wrong has a necessary ontological grounding of a personal kind/type. The derived subject s is the formal index/witness satisfying the universal grounding specification (`dependence: ∀ s', RightWrong s' → Person s'`). **The argument does not identify a particular contingent individual as the creator of Right and Wrong; it establishes that the ontological ground required by objective Right/Wrong is personal in kind.**\n3. **Separation from specific divine personal identity:** Establishing that the ground of normativity is personal in kind is distinct from identifying which particular divine person(s), if any, instantiate that ground. That further question belongs to the downstream theological and monotheistic branches (Branches A and B), not to the initial derivation of the personal ground-type.\n4. **Grounding correctness about reality is not producing reality:** The claim is that the personal ground is the ontological basis of the objective normative/truth order governing whether judgments about what is the case are correct or incorrect. It is NOT a claim that the personal ground causally creates every existent, makes evil exist, or morally legitimizes anything that exists. If an apple exists, 'an apple exists' is objectively correct; if evil exists, 'evil exists' is objectively correct — neither assertion evaluates the apple or evil morally, and neither implies that the ground of truth/correctness caused them. Entity-level `GroundOfReality` (Claim E) stays annotated-only.\n\nGrounding is derived directly from Personhood itself without Act (Grounding from Personhood). Grounding is not causal generation and not identity (Grounding ≠ Identity): identifying Ought with current volition collapses normative violation (will_identity_collapses_normativity). Every step in the chain—including the step from Person to 'Person grounds Right/Wrong'—is derived without arbitrary grounding axioms, PSR smuggling, or reliance on Act.",
+      "summary": "The complete logical shape is a strictly forward implication chain: A₀ ⇒ A₁ ⇒ ... ⇒ P ⇒ G. Every implication has a true antecedent once the previous step has been established: from the starting normative datum (A₀), through genuine choice and free will, to the Person (P), and finally to the proposition (G) that this Person grounds the original normative datum.\n\n### The Four Critical Distinctions\n1. **Discovery of a personal ground (forward proof):** The deductive proof runs forward via successive modus ponens: A₀ ⇒ Choice ⇒ Free Will ⇒ Free Subject ⇒ Person ⇒ G. Discovery identifies a personal ground from the normative datum.\n2. **Grounding in a personal kind/type (derived ontological proposition):** Objective Right/Wrong has such a necessary ontological grounding. The derived subject s is the formal index/witness satisfying the universal grounding specification (`dependence: ∀ s', RightWrong s' → Person s'`). **The argument does not identify a particular contingent individual as the creator of Right and Wrong.**\n3. **Separation from specific divine personal identity:** Establishing that the ground of normativity is personal in kind is distinct from identifying which particular divine person(s), if any, instantiate that ground. That further question belongs to the downstream theological and monotheistic branches (Branches A and B), not to the initial derivation of the personal ground-type.\n4. **Grounding correctness about reality is not producing reality:** The claim is that the personal ground is the ontological basis of the objective normative/truth order governing whether judgments about what is the case are correct or incorrect. It is NOT a claim that the personal ground causally creates every existent, makes evil exist, or morally legitimizes anything that exists. If an apple exists, 'an apple exists' is objectively correct; if evil exists, 'evil exists' is objectively correct — neither assertion evaluates the apple or evil morally, and neither implies that the ground of truth/correctness caused them. Entity-level `GroundOfReality` (Claim E) stays annotated-only.\n\nGrounding is derived directly from Personhood itself without Act (Grounding from Personhood). Grounding is not causal generation and not identity (Grounding ≠ Identity): identifying Ought with current volition collapses normative violation (will_identity_collapses_normativity). Every step in the chain—including the step from Person to 'Person grounds Right/Wrong'—is derived without arbitrary grounding axioms, PSR smuggling, or reliance on Act.",
       "note": "Anti-Self-Legislation: identifying Ought with current will collapses normativity (NORMATIVE COLLAPSE). Hostile Impersonal Model confirms bare ought consistent without a second person (SURVIVING PLATONIST MODEL). Under second-personal address and plurality (AxSecondPersonalAddress META / AxTwoSubjects META), objective ought derives distinct persons.",
       "primary_targets": [
         "forward_modus_ponens_derivation",
@@ -229,7 +230,7 @@
     {
       "id": "necessary_truth",
       "pushback": "Quietly assumes modal metaphysics — necessity is a contested fragment, not a consequence.",
-      "reply": "Necessary truth is the modal *continuation* of the already-established objective logical and normative order, resident in the Core/Semantics machinery at world-level modality (C59) — it is derived from what precedes it, not presupposed as an ungrounded metaphysics.",
+      "reply": "Necessary truth is the modal *continuation* of the already-established objective logical and normative order, resident in the Core/Semantics machinery at world-level modality — it is derived from what precedes it, not presupposed as an ungrounded metaphysics.",
       "label": "NECESSARY TRUTH",
       "title": "9. Necessary Truth",
       "explanation": "The objective logical and normative order entails necessary truth.",
@@ -243,13 +244,14 @@
     {
       "id": "constructive_personal_ground",
       "pushback": "You still quietly pick a contingent author of morality — some particular person who happens to ground Right/Wrong.",
-      "reply": "The indexing encodes *dependence without nomination*: RightWrong is indexed by a personal kind/type, not by any arbitrary contingent individual — objective Normativity ⇒ Person is discovery, Person ⇒ Right/Wrong is the typed index. And Branch C's countermodel frontiers mark exactly what is NOT forced: trinity ⇏, contingent creation ⇏, incarnation ⇏.",
+      "reply": "The indexing encodes *dependence without nomination*: RightWrong is indexed by a personal kind/type, not by any arbitrary contingent individual — objective Normativity ⇒ Person is discovery, Person ⇒ Right/Wrong is the typed index. And Branch C below marks exactly what is NOT forced: trinity, contingent creation, and incarnation all remain countermodel frontiers (⇏).",
       "label": "CONSTRUCTIVE PERSONAL GROUND",
       "title": "10. Constructive Personal Ground",
-      "explanation": "Objective Normativity entails Person constructively; Person grounds Right/Wrong via indexing.",
+      "explanation": "The machine-proved dependence: wherever Right/Wrong is real, its ground-type is personal (`∀ s, RightWrong s → Person s`). The `GroundsRightWrong` record merely registers that same dependence (see §8).",
       "formula": "ObjectiveNormativity → ∃ p : Person, RightWrong p ∧ GroundedRightWrong := Σ' p, RightWrong p",
-      "summary": "The clean approach encodes the ontological dependence in the formal definition rather than introducing an axiom: Objective Normativity ⇒ Person is the direction of discovery, while Person ⇒ Right/Wrong is represented by the indexing of RightWrong by Person. This demonstrates that the ontological ground required by objective normativity is personal in kind/type, without identifying an arbitrary contingent person as the causal author of morality. No grounding axiom is required.\n\nThe headline 'the Person supports the reality of Right' asserts that the RightWrong-reality — the objective correctness/normativity structure governing judgments about what is the case — has a personal ontological ground-type. It does NOT assert that the personal ground creates every existent or makes evil exist; grounding the correctness order is distinct from producing reality.",
+      "summary": "The dependence `RightWrong ⇒ Person` was proved in §8. Its constructive form needs no grounding axiom: the ontological direction is encoded in the definition — `ObjectiveNormativity ⇒ Person` is discovery, `Person ⇒ Right/Wrong` is RightWrong indexed by Person (the `GroundsRightWrong` record).\n\nThe headline — 'the Person supports the reality of Right' — asserts that the RightWrong-reality, the objective correctness structure governing judgments about what is the case, has a personal ontological ground-type. The four distinctions of §8 apply unchanged; in particular, grounding the correctness order is not producing reality (§8, distinction 4).",
       "primary_targets": [
+        "personal_ground_of_right_wrong",
         "discover_person",
         "the_person_supports_the_reality_of_right"
       ],
@@ -260,26 +262,30 @@
       "branches": [
         {
           "id": "necessary_person",
-          "label": "NECESSARY PERSON (Divine Person)",
-          "title": "Branch A: Necessary Divine Person",
-          "formula": "∃ s, NecessarySubject(s) ∧ Person(s)",
-          "edge_label": "[DERIVED THEOREM · DIVINE]",
+          "label": "NECESSARY DIVINE GROUND / BEING",
+          "title": "Branch A: Necessity of the Divine Being (Ground)",
+          "formula": "∃ g, NecessaryEntity g ∧ NecessaryPersonalGround g",
+          "edge_label": "[DEFERRED · NOT PART OF PROOF]",
+          "status": "deferred",
           "primary_targets": [
             "necessary_person_derived"
           ],
-          "summary": "From the necessary personal ground, the reality of a Necessary Person possessing the Divine Nature follows directly (Claim E → Claim D, 0 substantive axioms beyond ground infrastructure)."
+          "summary": "Annotated surface only — not a theorem of this repository. Necessity concerns the Divine Being/Ground, not a particular Divine Person as such: Claim E (`∃ g, NecessaryEntity g ∧ NecessaryPersonalGround g`) is the branch target and is marked *never a theorem* in `NecessaryPersonalGround.lean`; the bare 'necessary person' claim D (`∃ s, NecessarySubject s ∧ Person s`) is also annotation-only — no live theorem derives it. The branch renders the target, not the proof.",
+          "defer_note": "⏸ **DEFERRED** — annotated surface only; `NecessaryPersonalGround.lean` marks Claim E *never a theorem*, and the deferred block (`scratch/Trinitarian_deferred.lean`) is absent from the repository."
         },
         {
           "id": "monotheism",
           "label": "ONE GOD / STRICT MONOTHEISM",
           "title": "Branch B: Divine Uniqueness and Monotheism",
           "formula": "Monotheism",
-          "edge_label": "[DIVINE UNIQUENESS · g₁=g₂]",
+          "edge_label": "[DEFERRED · NOT PART OF PROOF]",
+          "status": "deferred",
           "primary_targets": [
             "monotheism_of_god_and_uniqueness",
             "monotheism_compatible_with_trinity"
           ],
-          "summary": "The uniqueness of the ultimate ground entails strict monotheism (g₁ = g₂). This monotheism is formally proven to be fully compatible with three distinct personal centers and wills (monotheism_compatible_with_trinity, 0 substantive axioms)."
+          "summary": "Annotated surface only — not a theorem of this repository. The strict-monotheism theorems (`monotheism_of_god_and_uniqueness`, `monotheism_compatible_with_trinity`) are deferred out of the live kernel (see `NecessaryPersonalGround.lean`); no compiled declaration exists. The trinity-compatibility claim is not a theorem of the current build.",
+          "defer_note": "⏸ **DEFERRED** — annotated surface only; the strict-monotheism theorems carry the same deferral as Branch A: no compiled declaration exists in the live kernel."
         },
         {
           "id": "frontiers",
@@ -294,7 +300,7 @@
             "preceding_theory_not_entails_incarnation"
           ],
           "investigation_link": "investigations/countermodels.md",
-          "summary": "The power of a formal system lies as much in what it refrains from claiming as in what it proves. The deduction strictly distinguishes established theorems from open frontiers. Machine-checked independence countermodels prove that preceding theory does NOT logically entail: (1) The Trinitarian structure of Three Divine Persons; (2) Contingent creation of a temporal cosmos; or (3) The Incarnation. These remain independent theological frontiers.\n\nFor deep technical proofs, countermodel models, and exhaustive dependency matrices, consult the specialized investigations:\n* [Retorsive Defense and Normative Polarity](investigations/right-and-wrong.md)\n* [Contrastive Choice and Free Will](investigations/contrastive-choice.md)\n* [Free Will Theorem & Derivations](investigations/free-will.md)\n* [Ontological Grounding and Model Separations](investigations/grounding.md)\n* [Divine Personhood and Monotheism](investigations/divine-personhood.md)\n* [Countermodels and Independence Proofs](investigations/countermodels.md)\n* [Theological Frontiers: Trinity](investigations/trinity.md)\n* [Theological Frontiers: Creation](investigations/creation.md)\n* [Theological Frontiers: Incarnation](investigations/incarnation.md)\n* [Plurality and Love](investigations/plurality-and-love.md)\n* [Kernel Axiom Audit & Footprint Ledger](investigations/kernel-audit.md)"
+          "summary": "The power of a formal system lies as much in what it refrains from claiming as in what it proves. The deduction strictly distinguishes established theorems from open frontiers. Machine-checked independence countermodels prove that preceding theory does NOT logically entail: (1) The Trinitarian structure of Three Divine Persons; (2) Contingent creation of a temporal cosmos; or (3) The Incarnation. These remain independent theological frontiers — for the deep technical proofs, countermodel models, and exhaustive dependency matrices, consult the Further Investigations catalogue at the end of this document."
         }
       ],
       "investigation_link": "investigations/divine-personhood.md"

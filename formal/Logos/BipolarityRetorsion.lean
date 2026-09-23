@@ -267,8 +267,8 @@ def JudSigCorrect (sig : JudicativeSig) (s : sig.Subject) (p : Prop) : Prop :=
 def JudSigIncorrect (sig : JudicativeSig) (s : sig.Subject) (p : Prop) : Prop :=
   JudSigAct sig s p ∧ sig.IsFalse p
 
-/-- Voice (tier 1 of INVIABLE.md §1): act plus grasp of the positive pole
-    `Correct s p` — this is all `ClaimsCorrect` gives in Γ. -/
+/-- Voice: act plus grasp of the positive pole
+    `Correct s p` — nothing more; this is all `ClaimsCorrect` gives in Γ. -/
 def VoiceSig (sig : JudicativeSig) (s : sig.Subject) (p : Prop) : Prop :=
   JudSigAct sig s p ∧ sig.Means s (JudSigCorrect sig s p)
 
@@ -313,9 +313,8 @@ theorem m_oneway_stance_fails :
 /-- In primitive Γ, voicing a judgment does NOT force the normative-judicative
     stance: M_oneway voices `True` as correct (act plus grasp of the positive
     pole) while failing to mean `Incorrect () True` — machine witness of the
-    tier-1 ⇄ tier-2 gap of INVIABLE.md §1. The stance is a datum
-    (INVIABLE.md §3: we know its field is non-empty because we attempt the proof
-    from inside it), not a derivable consequence of voice.
+    voice↔stance gap. The stance is a datum (its field is non-empty because the
+    proof is attempted from inside it), not a derivable consequence of voice.
     Classification: COUNTERMODEL / INDEPENDENCE. Footprint: {}. -/
 theorem voice_without_normative_stance :
     ∃ (sig : JudicativeSig) (s : sig.Subject) (p : Prop),

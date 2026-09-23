@@ -48,4 +48,4 @@ ESTATUTO FORMAL CONCLUÍDO:
 - `ObjectiveOught → Plurality`: PROVEN↑ sob a ponte relacional `AxSecondPersonalAddress` (META) (`second_personal_ought_derives_plurality`).
 
 A pessoalidade é um teorema constitutivo pleno derivado da cadeia retorsiva com zero axiomas substantivos.
-A necessidade pessoal exige as pontes modais de fundamentação global e pessoal.
+A conjunção `Person ∧ NecessarySubject` (a "pessoa necessária") não é decorrência; exige as pontes modais de fundamentação global e pessoal.

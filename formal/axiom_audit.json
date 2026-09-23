@@ -6277,6 +6277,10 @@
   "Logos.Agency.State",
   "Logos.Agency.Subject"
  ],
+ "Logos.PersonalGroundOfReality.personal_ground_of_right_wrong": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.PersonalGroundOfReality.present_act_yields_personal_grounding_of_reality": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",

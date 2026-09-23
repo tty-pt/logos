@@ -34,7 +34,7 @@ N_T is the absolute "nothing is true"; N_F is "nothing is false"
 
 namespace Logos.Core
 
-/-- Truth, *defined* as identity (E0, 2026-09-15): `T p` is `p` itself.
+/-- Truth, *defined* as identity (E0): `T p` is `p` itself.
     The proposition/truth gap of the old primitive is made definitional —
     the D2 consistency model adopted as the definition. -/
 def T (p : Prop) : Prop := p
