@@ -47,7 +47,3 @@ hostile models are not rhetorical objections. They are **machine-checked Lean 4 
 * **Content:** Divine nature and human nature exist, but zero subjects unite both natures.
 * **Separation Proved:** Creation and divine reality do not logically force the Incarnation without the teleological bridge of divine self-communication.
 
-### 7. Model Worldwise Truthmaking (`CountermodelWorldwiseTruthmaking`)
-* **Source:** `formal/Logos/HostileSemantics.lean:240`.
-* **Content:** Necessary truth is grounded in each world by a different contingent entity.
-* **Separation Proved:** Proves that `Truthmaker` alone does not entail a single necessary entity without `AxGlobalGround`.

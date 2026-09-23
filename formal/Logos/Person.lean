@@ -59,6 +59,52 @@ def IndependentWill (s : Subject) : Prop :=
 def FreeIndependentWill (s : Subject) : Prop :=
   FreeWill s ∧ IndependentWill s
 
+/-- Individual substance (Boethius, "individual"): the subject's will faculty is
+    numerically individuated — no distinct subject owns it (`IndependentWill`). -/
+def IndividualSubstance (s : Subject) : Prop := IndependentWill s
+
+/-- Rational nature (Boethius, "of a rational nature"; deliberative rationality):
+    propositional apprehension together with deliberation over incompatible
+    alternatives. NOT the floor kind-pred `Logos.Agency.Rational`; this is the
+    operative Boethius "rational nature". -/
+def RationalNature (s : Subject) : Prop := Intentional s ∧ FreeWill s
+
+/-- Dominion over one's own acts (Aquinas, ST I q.29 a.3; q.83): the subject
+    genuinely chooses, acting from itself rather than being merely acted upon. -/
+def DominionOverActs (s : Subject) : Prop := FreeWill s
+
+/-- Thomistic person core: the Boethius–Aquinas conditions of personhood —
+    "individual substance of a rational nature" possessed of dominion over its
+    own acts — formalized through their operative distinguishing features.
+    Personhood is thus NOT an arbitrary redefinition: it is the formal criterion
+    through which the Thomistic personal reality is identified.
+    Map: individual → IndependentWill; rational nature → Intentional ∧ FreeWill;
+    dominion → FreeWill. -/
+def ThomisticPersonCore (s : Subject) : Prop :=
+  IndividualSubstance s ∧ RationalNature s ∧ DominionOverActs s
+
+/-- Free, independent will entails the Thomistic person core.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+theorem freeIndependentWill_implies_thomisticCore (s : Subject)
+    (h : FreeIndependentWill s) : ThomisticPersonCore s := by
+  exact ⟨h.2, ⟨Logos.Choice.freeSubject_implies_intentional s h.1, h.1⟩, h.1⟩
+
+/-- Thomistic person core entails free, independent will.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+theorem thomisticCore_implies_freeIndependentWill (s : Subject)
+    (h : ThomisticPersonCore s) : FreeIndependentWill s := by
+  obtain ⟨hInd, hRN, _hDom⟩ := h
+  exact ⟨hRN.2, hInd⟩
+
+/-- Master Equivalence: free, independent will is equivalent to the
+    Thomistic person core.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+theorem freeIndependentWill_iff_thomisticCore (s : Subject) :
+    FreeIndependentWill s ↔ ThomisticPersonCore s := by
+  constructor
+  · exact freeIndependentWill_implies_thomisticCore s
+  · exact thomisticCore_implies_freeIndependentWill s
+
 /-- Numerical individuation guarantees that every subject possesses an independent will.
     Footprint: `{subjectWill, will_individuation, Subject}`. -/
 theorem independent_will_of_subject (s : Subject) : IndependentWill s :=
@@ -84,6 +130,16 @@ theorem person_has_free_independent_will (s : Subject) (h : Person s) : FreeInde
     Footprint: `{subjectWill, will_individuation, Means, Subject}`. -/
 theorem free_independent_will_is_person (s : Subject) (h : FreeIndependentWill s) : Person s :=
   (person_iff_freeIndependentWill s).mpr h
+
+/-- Master Correspondence: Personhood is constitutively equivalent to the
+    Thomistic person core.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+theorem person_iff_thomisticCore (s : Subject) : Person s ↔ ThomisticPersonCore s := by
+  constructor
+  · intro hp
+    exact freeIndependentWill_implies_thomisticCore s ((person_iff_freeIndependentWill s).mp hp)
+  · intro hc
+    exact (person_iff_freeIndependentWill s).mpr (thomisticCore_implies_freeIndependentWill s hc)
 
 /-- Every Person is an Intentional Subject.
     A free choosing agent necessarily means the alternatives between which it chooses.
@@ -200,5 +256,9 @@ theorem inseparability_24b : ∀ a : Prop,
 #print axioms person_iff_freeIndependentWill
 #print axioms person_has_free_independent_will
 #print axioms free_independent_will_is_person
+#print axioms freeIndependentWill_implies_thomisticCore
+#print axioms thomisticCore_implies_freeIndependentWill
+#print axioms freeIndependentWill_iff_thomisticCore
+#print axioms person_iff_thomisticCore
 
 end Logos.Person

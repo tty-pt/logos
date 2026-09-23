@@ -21,18 +21,18 @@ import Logos.Agency
 import Logos.Person
 import Logos.Choice
 import Logos.Value
-import Logos.Truthmaker
+import Logos.Entity
 
 namespace Logos.Plurality
 
 open Logos.Agency (Subject)
 open Logos.Person (Person)
-open Logos.Truthmaker (Entity ExistsAt)
+open Logos.Entity (Entity ExistsAt)
 open Logos.Semantics (World)
 open Logos.Value (AxTwoSubjects Affects PersonsAffectPrinciple)
 
 /-- Q2 bridge: canonical embedding of subjects into the general entity type. -/
-def EntityOf : Subject → Entity := Logos.Truthmaker.EntityOf
+def EntityOf : Subject → Entity := Logos.Entity.EntityOf
 
 /-- A subject is necessary iff its entity-correlate exists in every world. -/
 def NecessarySubject (s : Subject) : Prop := ∀ w : World, ExistsAt w (EntityOf s)

@@ -1,0 +1,5 @@
+/scripts/__pycache__
+/.pi
+/dist
+formal/depgraph.dot
+formal/depgraph.json

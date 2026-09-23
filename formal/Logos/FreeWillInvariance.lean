@@ -23,7 +23,7 @@ Methodological disciplines:
 import Logos.Core
 import Logos.Necessity
 import Logos.Semantics
-import Logos.Truthmaker
+import Logos.Entity
 import Logos.Modal
 import Logos.Agency
 import Logos.Person
@@ -84,7 +84,7 @@ inductive DependencyLayer
   | L1_PerformativeDatum    -- Occurrence of an event
   | L2_IntentionalMeaning   -- Means s p
   | L3_IntentionalSubject   -- Subject exists, intentionality
-  | L4_TruthSemantics       -- Truthmaker, strong truth
+  | L4_TruthSemantics       -- Entity semantics, strong truth
   | L5_ObjectiveNormativity -- AxTwoSubjects, Order, T6 Fallibility
   | L6_Retorsion            -- Transcendental self-refutation
   | L7_Modality             -- T7 Necessary Reality, S5

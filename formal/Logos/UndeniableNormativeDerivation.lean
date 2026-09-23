@@ -84,6 +84,33 @@ theorem extensional_bivalence_insufficient_for_free_will :
   obtain ⟨s, _, _, _, _, _⟩ := hContra
   cases s
 
+/-- Direct tier-3 witness (INVIABLE.md §1): an inanimate universe is extensionally
+    bivalent (`¬N_T ∧ ¬N_F`) yet realizes NO instance of the genuine-normativity
+    shape — incompatible alternatives plus agential address via a means relation.
+    The unconditional denial `¬ NoGN` is therefore not derivable from bare
+    bivalence: `M_inanimate` is now a direct verdict, not a meta-inference.
+    Classification: COUNTERMODEL / NEGATIVE RESULT. Footprint: {}. -/
+theorem inanimate_universe_satisfies_bivalence_and_no_genuine_normativity :
+    ∃ (U : Type) (MeansRel : U → Prop → Prop),
+      (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) ∧
+      ¬ ∃ (s : U) (p q : Prop), Incompatible p q ∧ p ≠ q ∧ MeansRel s p ∧ MeansRel s q := by
+  refine ⟨Empty, fun e _ => False, Logos.Core.rightWrongDistinction, ?_⟩
+  intro ⟨s, _p, _q, _hInc, _hNeq, _hMeansP, _hMeansQ⟩
+  cases s
+
+/-- Companion negative result: bare extensional bivalence, in any universe with
+    any means relation, does not deductively force the genuine-normativity shape —
+    unconditional `¬ NoGN` cannot be derived from non-triviality alone.
+    Classification: COUNTERMODEL / NEGATIVE RESULT. Footprint: {}. -/
+theorem extensional_bivalence_insufficient_for_genuine_normativity :
+    ¬ (∀ (U : Type) (M : U → Prop → Prop),
+        (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) →
+        (∃ (s : U) (p q : Prop), Incompatible p q ∧ p ≠ q ∧ M s p ∧ M s q)) := by
+  intro h
+  have hContra := h Empty (fun _ _ => False) Logos.Core.rightWrongDistinction
+  obtain ⟨s, _p, _q, _hInc, _hNeq, _hMeansP, _hMeansQ⟩ := hContra
+  cases s
+
 -- ===========================================================================
 -- Section 2: The Three Bridges from Propositional Fact to Agential Normativity
 -- ===========================================================================
@@ -282,6 +309,8 @@ end Logos.UndeniableNormativeDerivation
 -- Kernel footprint audit
 #print axioms Logos.UndeniableNormativeDerivation.inanimate_universe_satisfies_extensional_bivalence_without_agency
 #print axioms Logos.UndeniableNormativeDerivation.extensional_bivalence_insufficient_for_free_will
+#print axioms Logos.UndeniableNormativeDerivation.inanimate_universe_satisfies_bivalence_and_no_genuine_normativity
+#print axioms Logos.UndeniableNormativeDerivation.extensional_bivalence_insufficient_for_genuine_normativity
 #print axioms Logos.UndeniableNormativeDerivation.bridge_a_constitutive_normativity_derives_free_will
 #print axioms Logos.UndeniableNormativeDerivation.bridge_b_plurality_yields_choice_field
 #print axioms Logos.UndeniableNormativeDerivation.bridge_c_performative_judge_yields_choice_field

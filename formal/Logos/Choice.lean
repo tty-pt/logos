@@ -691,13 +691,12 @@ theorem bilateral_implies_act_polarity (h : bilateral_intentionality_principle) 
 | 11. Person → Means ¬p | Rational personhood | DOES NOT DERIVE | Inherits only single intentional content of `Intentional s`. |
 | 12. Plurality → Means ¬p | Distinct subjects | DOES NOT DERIVE | `AxTwoSubjects` gives two distinct subjects with single contents, not dual co-meaning. |
 | 13. Modal Principles → Means ¬p | Propositional necessity | DOES NOT DERIVE | Modal backbone governs world-satisfaction, not internal cognitive representation. |
-| 14. Grounding Principles → Means ¬p | Truthmaker grounding | DOES NOT DERIVE | `Ground e p` relates entities to propositions, entirely outside `Means`. |
+| 14. Grounding Principles → Means ¬p | Entity grounding | DOES NOT DERIVE | `Ground e p` relates entities to propositions, entirely outside `Means`. |
 
 ### Diagnostic Grid of Strong Act and Choice across Model Levels:
 
 | Level | Model Description | Act s p | ChoiceField s p q | Chooses s p q | FreeWill s | FreeSubject s | Verdict |
 |---|---|---|---|---|---|---|---|
-| M0 | Weak Act (`CountermodelWeakActWithoutMeaning`) | FALSE | FALSE | FALSE | FALSE | FALSE | Event occurs without meaning or strong Act |
 | M1 | Factive Strong Act (`hostileAgencyInstance`) | TRUE | TRUE | FALSE | FALSE | FALSE | Strong Act & ChoiceField hold; Chooses fails by veridicality |
 | M2 | Branching Initiation (`ModelM2BranchingInitiation`) | TRUE | TRUE | FALSE | FALSE | FALSE | Non-trivial state branching holds; Chooses still fails |
 | M3 | Contrastive Agency (`ModelM3ContrastiveAgency`) | TRUE | TRUE | TRUE | TRUE | TRUE | Polar agency validated (AxActPolarity); FreeSubject valid |
@@ -748,8 +747,7 @@ theorem act_decomposition (s : Subject) (p : Prop) :
    Furthermore, `HostileSemantics.not_entails_existential_polarity_from_preA13` proves
    that even the cheaper existential premise `∃ s p, Act s p ∧ Means s (¬p)` is independent.
 3. Level 3 (Metatheoretical consequence for full pre-A14 Γ theory):
-   The remaining pre-A14 axioms (A1, A3, A4, A7, A8, A9) govern worldly truthmakers and
-   grounding and do not mention `Means` or `Initiates`, hence cannot bridge to `Means s (¬p)`.
+   The remaining axioms govern worldly grounding and do not mention `Means` or `Initiates`, hence cannot bridge to `Means s (¬p)`.
 
 ### Logical Hierarchy:
 AxActPolarity (A13, SEM: contradictory negation ¬p)

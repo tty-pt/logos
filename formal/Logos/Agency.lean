@@ -16,14 +16,20 @@ relation, not a primitive. The act is — by the meaning rules of the system
     A s p  :=  Agent s ∧ Exists s ∧ Content p ∧ Rational s ∧ Means s p.
 
 Tier-1 collapse (2026-09-16) and initiation dimension: with `Agent` and
-`Rational` now *analytical definitions* (`def := True`, same class as `Exists`/`Content`),
-every aspect collapses to the meaningful initiation:
+`Rational` originally *analytical definitions* (`def := True`, same class as
+`Exists`/`Content`), every aspect collapses to the meaningful initiation:
 
     A s p  :=  Means s p ∧ ∃ w w', Initiates s w w' p.
 
+Rationality upgrade (PERSON.md, 2026-09-23): `Rational` is no longer the analytic
+kind-pred `:= True`. It is a DERIVED floor — a rational subject is one that stands
+in intentional meaning (`Rational s := ∃ p, Means s p`); the substantive,
+deliberative rationality used for personhood is `RationalNature` in `Logos.Person`.
+
 The meaning rules are now exactly E0-furnished: every subject exists
 (`Exists _ := True`), every proposition is a content (`Content _ := True`),
-agency and rationality are analytical (`Agent _ := True`, `Rational _ := True`),
+agency is analytical (`Agent _ := True`), rationality is a derived floor
+(`Rational s := ∃ p, Means s p`),
 and an act is a meaningful initiation: its constitutive content is intentional meaning,
 and its evental character is initiation.
 -/
@@ -53,12 +59,6 @@ def Content (_p : Prop) : Prop := True
     `Exists`/`Content`). -/
 def Agent (_s : Subject) : Prop := True
 
-/-- Rationality of a subject: the present act is rational by being the act of
-    reasoning (base.txt §12, T5 component). Analytical definition (Tier 1,
-    2026-09-16): former axiom, now def — the act of reasoning is rational by
-    being the act of reasoning. -/
-def Rational (_s : Subject) : Prop := True
-
 /--Tag: VOCAB
 Vocabulary: weak act / performed event — something is performed, uttered, asserted, or denied.
 
@@ -79,6 +79,13 @@ def IntentionalSubject (s : Subject) : Prop := ∃ p : Prop, Means s p
 
 /-- Backward-compatibility alias for intentionality. -/
 def Intentional (s : Subject) : Prop := IntentionalSubject s
+
+/-- Rationality of a subject: the subject stands in intentional meaning.
+    Former analytic kind-pred `:= True`; upgraded (PERSON.md, 2026-09-23) so
+    rationality is DERIVED: a rational subject is one that means something
+    (`Rational s := ∃ p, Means s p`). Still only a floor — deliberative
+    rationality is `Logos.Person.RationalNature`. -/
+def Rational (s : Subject) : Prop := ∃ p : Prop, Means s p
 
 /-- Act implies an intentional subject: an act's own content witnesses that the subject
     means something (`IntentionalSubject s := ∃ p, Means s p`). -/
@@ -356,11 +363,14 @@ theorem act_implies_agent : ∀ {s : Subject} {p : Prop}, A s p → Agent s := b
   intro s p h
   trivial
 
-/-- An act entails its subject is rational (T5 component). Analytic (Tier 1):
-    `Rational _ := True`. -/
+/-- An act entails its subject is rational. (PERSON.md, 2026-09-23):
+    rational is the derived floor `Rational s := ∃ p, Means s p` — the act's
+    own content witnesses meaning.
+    Footprint: `{Initiates, Means, State, Subject}` (act-bundle, same class as
+    `act_implies_agent`/`act_implies_means`). -/
 theorem act_implies_rational : ∀ {s : Subject} {p : Prop}, A s p → Rational s := by
   intro s p h
-  trivial
+  exact ⟨p, h.1⟩
 
 /-- An act entails that its subject means its content (§11, T5 component).
     Constitutive definition: the first conjunct of `Act s p` is `Means s p`. -/

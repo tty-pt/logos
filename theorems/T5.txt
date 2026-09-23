@@ -16,6 +16,22 @@ O sistema distingue com clareza:
 - Livre-Arbítrio: a eleição efetiva entre alternativas incompatíveis (`FreeWill s := ∃ p q, Chooses s p q`).
 - Pessoa: o sujeito dotado de livre-arbítrio (`Person s := FreeSubject s`).
 
+Correspondência tomista explícita (Boécio — substância individual de natureza racional; Aquino, ST I q.29 a.3 e q.83 — domínio dos próprios atos; PERSON.md 2026-09-23):
+
+> ThomisticPersonCore(s) := IndividualSubstance(s) ∧ RationalNature(s) ∧ DominionOverActs(s)
+>   · Indivíduo → `IndividualSubstance s := IndependentWill s` (vontade numericamente individuada);
+>   · Natureza racional → `RationalNature s := Intentional s ∧ FreeWill s` (apreensão + deliberação);
+>   · Domínio → `DominionOverActs s := FreeWill s` (escolha genuína, agere a se).
+
+Person(s) ↔ FreeIndependentWill(s) ↔ ThomisticPersonCore(s)  [PROVEN, C162/C163,
+`Person.freeIndependentWill_iff_thomisticCore` / `Person.person_iff_thomisticCore`,
+pegada `{Means, Subject, Will, subjectWill, will_individuation}`, 0 axiomas novos].
+
+Racionalidade em dois pisos: `Rational s := ∃ p, Means s p` é agora piso DERIVADO
+(mera significação, definicionalmente idêntico a `Intentional`, `{Means, Subject}`),
+não o kind-pred analítico `True`; a racionalidade operativa da pessoa é `RationalNature`,
+nunca o piso truncado.
+
 Portanto:
 
 FreeSubject(s) → Person(s)  [PROVEN, free_subject_is_person, {Means, Subject}].
@@ -26,6 +42,7 @@ ESTATUTO FORMAL CONCLUÍDO:
 - `Person → IntentionalSubject`: PROVEN (`person_is_intentional`, `{Means, Subject}`).
 - `FreeSubject → Person`: PROVEN (`free_subject_is_person`, `{Means, Subject}`).
 - `Person → FreeWill`: PROVEN (`person_has_free_will`, `{Means, Subject}`).
+- `Person ↔ ThomisticPersonCore`: PROVEN (C163, `person_iff_thomisticCore`, `{Means, Subject, Will, subjectWill, will_individuation}`).
 - `Person → NecessarySubject`: REFUTADO por contramodelo modal fiel (`faithful_contingent_person_fails_necessary_subject`, `{}`).
 - `SelfGroundedOught → ⊥`: PROVEN por retorsão (`self_grounded_ought_collapses`, `{Ought, Subject, Wills}`).
 - `ObjectiveOught → Plurality`: PROVEN↑ sob a ponte relacional `AxSecondPersonalAddress` (META) (`second_personal_ought_derives_plurality`).

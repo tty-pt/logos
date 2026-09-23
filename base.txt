@@ -30,6 +30,12 @@ A tentativa de negação autodestrói-se na sua própria enunciação performati
 
 (∃ s, ClaimsCorrect s NoRight) → ¬ NoRight.
 
+Nota (contexto): quando Γ diz que há "certo e errado", refere-se à **polaridade objectiva de
+correcção** (é correcto afirmar o que é verdadeiro, incorrecto afirmar o que é falso; ¬N_T ∧ ¬N_F),
+NÃO ao bem/mal moral. O bem/mal moral permanece em aberto (F2/F3, DEFERRED; ver §20/§28 e
+GAPMAP.md). "O mal existe" (se for o caso) seria objectivamente correcto afirmar — sem que isso
+torne o mal moralmente correcto.
+
 O ato de negação revela e exibe os seus testemunhos performativos necessários:
 - (1) Um evento ocorreu: o ato performativo (`act(s,p)`).
 - (2) O ato visa um conteúdo: o significado visado (`Means(s,p)`).
@@ -63,7 +69,7 @@ A passagem do ato fraco para o ato forte:
 weak act [evento realizado] → ? [ponte de intencionalidade] → strong Act [ato intencional]
 
 é uma meta filosófica e matemática explícita, NÃO uma identidade definicional oculta.
-Sob semântica hostil (`formal/Logos/HostileSemantics.lean`, `CountermodelWeakActWithoutMeaning`, `{}`),
+Sob semântica formal,
 demonstra-se que a ocorrência de um evento realizado não acarreta logicamente a significação intencional:
 um autómato ou dispositivo mecânico emite símbolos (`act s p`) sem relação intencional (`Means s p`).
 A transição exige a ponte de intencionalidade explícita:
@@ -91,11 +97,9 @@ A retorção performativa genuína opera em passos estritos: (1) a asserção é
 (3) negar o evento refuta-se a si mesmo (`noWeakAct_selfRefutes : asserts speaker NoWeakAct ⊢ False`),
 (4) a transição para ato forte `Act` (`Means`) opera via a ponte explícita `weak_act_implies_strong_act`,
 (5) a partir do ato forte, o sujeito existe (`act_requires_subject : Act s p → SubjectExists s`).
-Sob semântica hostil (`formal/Logos/HostileSemantics.lean`), a separação `act ↛ Act` é formalizada em
-`CountermodelWeakActWithoutMeaning` / `not_entails_strong_act` (`{}`). E a tentativa de modelar
-um ato forte sem sujeito (`CountermodelActWithoutSubject`, formalizando a objeção de
-Lichtenberg "es denkt") é impossível unicamente pela definição constitutiva de `Act`
-(`countermodel_violates_constitutive_act`). Da mesma forma, demonstra-se que ser sujeito
+A tentativa de modelar um ato forte sem sujeito (formalizando a objeção de
+Lichtenberg "es denkt") é impossível unicamente pela definição constitutiva de `Act`.
+Da mesma forma, demonstra-se que ser sujeito
 de um ato não implica logicamente ser pessoa sob predicados substantivos independentes
 (`CountermodelSubjectWithoutPerson`). Na ontologia endurecida, o ato deriva estritamente
 o Sujeito Intencional (`IntentionalSubject`), enquanto a pessoalidade substantiva permanece
@@ -111,6 +115,12 @@ A ontologia de Logos distingue rigorosamente:
 4. Sujeito Intencional (`IntentionalSubject s := ∃ p, Means s p`): derivado do ato performativo (`Act s p → IntentionalSubject s`, `{Means, Subject}`).
 5. Livre-Arbítrio (`FreeWill s := ∃ p q, Chooses s p q`): a eleição efetiva entre alternativas incompatíveis sob polaridade normativa.
 6. Pessoa (`Person s := FreeSubject s ↔ FreeWill s`): o sujeito dotado de livre-arbítrio numericamente distinto.
+7. Núcleo Tomista de Pessoa (Boécio — substância individual de natureza racional; Aquino, ST I q.29 a.3 e q.83 — domínio dos próprios atos; PERSON.md, 2026-09-23): `ThomisticPersonCore s := IndividualSubstance s ∧ RationalNature s ∧ DominionOverActs s`, com
+   - `IndividualSubstance s := IndependentWill s` (individuação numérica da vontade);
+   - `RationalNature s := Intentional s ∧ FreeWill s` (apreensão + deliberação; NÃO é o piso `Rational`);
+   - `DominionOverActs s := FreeWill s` (escolha genuína, `agere a se`).
+   Equivalência plena provada: `Person ↔ FreeIndependentWill ↔ ThomisticPersonCore` (C162/C163, pegada `{Means, Subject, Will, subjectWill, will_individuation}`, 0 axiomas novos, idêntica ao feixe de C142). A definição `Person := FreeSubject` não é redefinição arbitrária da pessoa clássica: é o critério formal através do qual a realidade pessoal boécio-aquiniana é identificada.
+8. Racionalidade em dois pisos: `Rational s := ∃ p, Means s p` é piso DERIVADO — mera significação, definicionalmente idêntico a `Intentional` (`{Means, Subject}`) — deixou de ser o kind-pred analítico `True` (PERSON.md, 2026-09-23); a racionalidade operativa da pessoa é `RationalNature` (item 7), nunca o piso truncado.
 
 A antiga noção de `SubstantivePerson` (predicado opaco sem regras) foi descomissionada como um artefato artificial. A pessoalidade é um teorema pleno derivado da cadeia retorsiva com 0 axiomas substantivos (`FreeSubject s → Person s`, `free_subject_is_person`, `{Means, Subject}`).
 Assim:
@@ -261,6 +271,39 @@ ato de significado**. Consequências:
 - C62 `rightWrong_implies_meaning`: PROVEN, `{Means, Subject}` (só
   vocabulário) — "direito e errado precisam de significado": a negação é
   contradição por definição, em qualquer modelo.
+
+Nota conceptual — os quatro níveis:
+
+REALIDADE
+  └── o que é o caso / o que existe
+
+PROPOSIÇÃO
+  └── uma afirmação sobre o que é o caso
+
+VERDADE / CORRECÇÃO OBJECTIVA
+  └── se a proposição corresponde ou não à realidade
+
+ORDEM NORMATIVA
+  └── o padrão objectivo que governa se afirmar a proposição é correcto
+      (deve-ser) ou incorrecto (não-deve-ser)
+
+A ordem normativa (TruthNorm) governa a **correcção objectiva dos juízos sobre a
+realidade**; não gera o conteúdo desses juízos nem cria os existentes. A tese
+sobre o fundamento não é, portanto:
+
+- fundamento pessoal → causa todos os existentes;
+- fundamento pessoal → faz existir o mal → aprova o mal → legitima o mal.
+
+Teste conceptual (maçã e mal): suponha que existe uma maçã. Então "existe uma
+maçã" pode ser objectivamente verdadeiro/correcto. Suponha que o mal existe.
+Então "o mal existe" pode, igualmente, ser objectivamente verdadeiro/correcto.
+Nenhuma destas afirmações avalia moralmente a maçã ou o mal, e nenhuma implica
+que o fundamento ontológico da verdade/correcção tenha causado a maçã ou o mal.
+
+Aviso sobre o duplo sentido de "certo/errado": neste documento, "certo/errado"
+designa a polaridade objectiva de correcção (¬N_T ∧ ¬N_F), não o bem/mal moral
+(bem moral: F2/F3, DEFERRED). Por isso: "o mal existe" é objectivamente correcto
+afirmar — isso **não** torna o mal moralmente correcto.
 
 9. CONSEQUÊNCIA LÓGICA
 
@@ -419,12 +462,21 @@ o sujeito livre é aquele que possui livre-arbítrio (`FreeSubject(s) := FreeWil
 
 A *existência* de escolha genuína e do livre-arbítrio (F1b) é demonstrada no corpus por duas rotas formais:
 
-1. **Rota Primária de Retorsão Normativa (0 axiomas substantivos, PROVEN)**:
-   A tentativa de negação de correção objetiva autodestrói-se performativamente ao ser julgada correta, instanciando `GenuineNormativity` sob bipolaridade judicativa. A normatividade constitutiva acarreta analiticamente a apreensão de alternativas contraditórias e a seleção agencial, derivando o teorema mestre:
+1. **Rota Primária de Retorsão Normativa (PROVEN↑ — repartição de pegadas abaixo)**:
+   A tentativa de negação de correção objetiva autodestrói-se performativamente ao ser julgada correta, instanciando `GenuineNormativity` sob bipolaridade judicativa. **Mesmo nível semântico:** a conclusão da retorsão é um termo da própria estrutura `GenuineNormativity` consumida na cadeia (C106, C157–C159): o endereço é construído só pela relação primitiva `Means` (`Means s NoGN`, `Means s (¬NoGN)`); a oposição é pura lógica (`Incompatible NoGN (¬NoGN)` e `NoGN ≠ ¬NoGN`); nenhuma noção mais forte de normatividade (Ought prático, dever, bem/mal) é importada — o único custo substantivo é o preço SEM `AxJudicativeBipolarity`. A normatividade constitutiva acarreta analiticamente a apreensão de alternativas contraditórias e a seleção agencial, derivando o teorema mestre:
    `indubitable_normative_free_will : GenuineNormativity s p q → Chooses s p q ∧ FreeWill s`
    (formal/Logos/IndubitableNormativeFreeWill.lean, 0 axiomas substantivos, pegada `{Means, Subject}`).
    Aqui, a liberdade do sujeito não é um postulado nem uma premissa, mas uma conclusão **estritamente derivada** da progressão ontológica do ato judicativo:
    `Subject → Agent → GenuineNormativity → Chooses → FreeSubject / FreeWill`.
+   O "0 axiomas substantivos" da rota refere-se ao teorema mestre `indubitable_normative_free_will`;
+   o passo de *instanciação* da `GenuineNormativity` pela denegação paga o preço SEM da bipolaridade judicativa (ver Rota Retorsão Normativa, §15).
+   Refutação axiomática do ataque estipulacionista: o ataque "GN é só uma definição estipulada" é **inviável sem axiomas** —
+   qualquer postura normativo-judicativa (um juízo real de correção sobre algum conteúdo) deriva `GenuineNormativity` sobre os polos
+   judicativos Correct/Incorrect e refuta `NoGN` com ZERO axiomas substantivos (`normative_stance_refutes_attack_without_axioms`,
+   `attack_inviable_without_axioms`, C164/C165, pegada `{Initiates, Means, State, Subject, CL}`). O preço SEM `AxJudicativeBipolarity`
+   fica relegado à variante de postura fraca, dispensável para a inviabilidade do ataque (INVIABLE.md). Fronteira honesta: `¬NoGN`
+   incondicional não é derivável — `M_inanimate` mostra que a bivalência extensional sozinha não gera agente (`UndeniableNormativeDerivation`);
+   o ataque só vincula na medida em que é proferido (postura), e ser proferido = ser refutado.
 
 2. **Rota Alternativa via Escolha Constitutiva (PROVEN↑, requer AxIntentionalChoice)**:
    Sob a adoção do axioma semântico `AxIntentionalChoice : ∀ (s : Subject) (p : Prop), Act s p → ∃ q, Chooses s p q` (Tag: SEM; escolha constitutiva da ação intencional forte), deriva-se a existência de livre-arbítrio sob `{AxIntentionalChoice, Initiates, Means, State, Subject}`. Esta rota é mantida como derivação alternativa nas deduções detalhadas com o seu preço formal explicitado. A tese mais forte `AxActPolarity : ∀ (s : Subject) (p : Prop), Act s p → Means s (¬ p)` (Tag: SEM / A13) acarreta estritamente `AxIntentionalChoice` via `act_polarity_implies_intentional_choice`.
@@ -483,12 +535,15 @@ identidade; não reintroduzir liberdade a partir de `Act`.)
 
 (Rota Primária Independente: Retorsão Normativa Transcendental — 2026-09-21):
 Paralelamente à rota cartesiana de A14 sobre o ato bruto, F1b é demonstrado de modo independente através da **rota de retorsão normativa** (`formal/Logos/RetorsiveNormativity.lean` e `formal/Logos/UndeniableNormativeDerivation.lean`).
-A negação cética de normatividade genuína (`NoGN := ¬ ∃ s p q, GenuineNormativity s p q`) não pode ser assertida como um juízo correto (`ClaimsCorrect s NoGN := Act s p ∧ Means s (Correct s p)`) sem incorrer em contradição performativa direta (`denial_of_genuine_normativity_is_self_refuting`).
+A negação cética de normatividade genuína (`NoGN := ¬ ∃ s p q, GenuineNormativity s p q`) não pode ser assertida como um juízo correto (`ClaimsCorrect s NoGN := Act s NoGN ∧ Means s (Correct s NoGN)`) sem incorrer em contradição performativa direta (`denial_of_genuine_normativity_is_self_refuting`).
 A apresentação de uma asserção como normativamente correta contra o erro pressupõe constitutivamente a apreensão do corno asseverado e da alternativa proibida sob o princípio semântico de **bipolaridade judicativa**:
 
     AxJudicativeBipolarity : ∀ (s : Subject) (p : Prop), ClaimsCorrect s p → Means s (¬ p)
 
 Com esta ponte semântica (`Tag: SEM`, pegada `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`), o ato judicativo de denegação instancía performativamente a própria normatividade genuína que pretende negar (`claiming_denial_presupposes_genuine_normativity`), derivando `GenuineNormativityExists`, `Chooses` e `FreeWill` (`retorsion_derives_free_will`) com total independência de `AxIntentionalChoice` e sem passar por `Act`.
+
+(Veredito de nível semântico — testemunhas C157–C161):
+A objeção "`GenuineNormativity` é apenas estipulativa" é respondida no MESMO nível da estrutura atacada. Testemunhas formais provam a identidade de nível: (i) `retorsion_conclusion_is_the_very_genuine_normativity_structure` — a negação realizada (denegada como correta) é um termo da própria estrutura `GenuineNormativity s NoGN (¬NoGN)` consumida por `indubitable_normative_free_will`, com a mesma definição, o mesmo endereço `Means` e oposição lógica pura; (ii) `retorsion_address_uses_only_means` — o componente de endereço é exatamente o par `⟨Means s NoGN, Means s (¬NoGN)⟩`: nenhum primitivo deôntico (`Correct`, `Incorrect`, `Ought` prático) ocorre na conclusão; (iii) `retorsion_opposition_is_pure_logic` — o componente de oposição é pura lógica (`incompatible_self_negation` + `prop_neq_neg`), exatamente a mesma oposição usada em todo o corpus; (iv) `normative_retorsion_same_structure_type` — a rota sem `AxJudicativeBipolarity` também termina no MESMO tipo `GenuineNormativity` (cornos = polos normativos judicativos `Correct`/`Incorrect`); logo a cadeia GN → Chooses → FreeWill é independente da rota (C140/C141/C161). O preço SEM `AxJudicativeBipolarity` é uma peça não-lógica da *variante de postura fraca*, independente em Γ primitivo (contramodelo `M_opaque`; ver §28) — porém dispensável: a postura normativo-judicativa refuta o ataque estipulacionista com ZERO axiomas substantivos (`normative_stance_refutes_attack_without_axioms` → ¬ NoGN; `attack_inviable_without_axioms` → ¬ NoGN ∧ ∃ s, FreeWill s; C164/C165, pegada `{Initiates, Means, State, Subject, CL}`). Resíduos honestos: (a) `¬NoGN` incondicional (sem postura) não é derivável — `M_inanimate` (bivalência extensional sem agência) permanece; um ataque só vincula ao ser proferido, e ser proferido = ser refutado; (b) o livre-arbítrio assim obtido tem cornos meta-nível (`NoGN`, `¬NoGN`) — deliberação sobre conteúdo de objeto/ação pertence à rota separada `DeliberateChoice`/`ClaimsNormativeCorrectness`.
 
 (Aprofundamento: Recuperação Normativa de `Correct` e Retorsão Livre de Axiomas — 2026-09-22):
 Mais fundamentalmente, a formalização em `formal/Logos/NormativeOrder.lean` demonstra que a normatividade deôntica já está presente na própria estrutura do juízo objetivo (`Correct` e `Incorrect`) sob a norma epistêmica de verdade (`TruthNorm : JudicativeNorm`), onde a verdade prescreve o juízo (`Ought`) e a falsidade proíbe o juízo (`OughtNot`), com oposição deôntica estrita (`correctness_deontic_opposition`). A postura judicativa normativa (`ClaimsNormativeCorrectness s p := Act s p ∧ Means s (Correct s p) ∧ Means s (Incorrect s p)`) apreende os dois polos constitutivos da correção sem demandar a representação da negação contraditória `¬p`, derivando `GenuineNormativity s (Correct s p) (Incorrect s p)` e o livre-arbítrio com ZERO axiomas substantivos (`claims_normative_correctness_derives_free_will` e `normative_retorsion_derives_free_will` sob `{Initiates, Means, State, Subject, CL}`), dispensando por completo `AxJudicativeBipolarity`.
@@ -678,10 +733,10 @@ Existe uma estrutura mínima de orientação para um fim.
    O argumento transcendental descobre o sujeito livre a partir da polaridade normativa:
      Certo/Errado ⇒ Normatividade Genuína ⇒ Escolha ⇒ Livre-Arbítrio ⇒ Pessoa.
    Esta é a direção epistémica e performativa de descoberta no argumento.
-   A ontologia explicita a direção inversa de fundamentação ontológica:
-     Pessoa (= Sujeito com Vontade Livre e Independente) ⇒ fundamenta ⇒ Polaridade Normativa.
+   A ontologia explicita a direção de fundamentação ontológica:
+     A ordem normativa exige um fundamento ontológico de tipo pessoal.
    A Pessoa é constitutivamente o sujeito dotado de vontade livre e numericamente individuada (`Person s ↔ FreeIndependentWill s`, 0 axiomas substantivos).
-   Essa agência volicional pessoal livre é o fundamento ontológico da polaridade normativa (`person_grounds_normative_polarity` sob a ponte SEM `AxPersonalNormativeGround`).
+   Essa agência volicional pessoal livre fornece o fundamento ontológico da polaridade normativa (`person_grounds_right_wrong`, 0 axiomas substantivos, derivado puramente da Pessoa sem Act). O argumento não identifica um indivíduo contingente particular como criador do Certo e do Errado; estabelece que o fundamento ontológico exigido pelo Certo/Errado objetivo é de tipo pessoal, sendo o sujeito derivado s a testemunha formal da especificação ontológica.
    As duas direções não são circulares porque «revela a partir de» e «é ontologicamente fundamentado em» são relações distintas. A prova de descoberta do Livre-Arbítrio é completamente independente do axioma de fundamentação (`PersonalNormativeGround.discovery_independent_of_grounding`). Além disso, fundamentação não é identidade (`Grounding ≠ Identity`): o dever não se identifica com a vontade atual do sujeito, preservando a realidade da violação normativa (`will_identity_collapses_normativity`).)
 
 22. VERDADE NECESSÁRIA
@@ -708,10 +763,7 @@ Portanto:
 
 Existe verdade logicamente necessária.
 
-Verificado em dois níveis: formal/Logos/Semantics.lean (semântica clássica
-de mundos, sem axiomas novos) e formal/Logos/Truthmaker.lean (nível
-truthmaker, com cláusulas de composição tarskianas — TEOREMAS por definição,
-TrueAt estrutural, A2 2026-09-16; ver formal/GAPMAP.md C15–C17).
+Verificado em: formal/Logos/Semantics.lean (semântica clássica de mundos, sem axiomas novos; ver formal/GAPMAP.md C15).
 
 23. FALSIDADE NECESSÁRIA
 
@@ -751,89 +803,43 @@ Logo:
 
 a condição de verdade necessária não pode ser reduzida ao sujeito contingente que a reconhece.
 
-24a. FUNDAMENTO DA VERDADE (Princípio do Truth-Maker)
+24a. A DESCOBERTA CONSTRUTIVA E A FUNDAMENTAÇÃO ONTOLÓGICA (T7 e T8)
 
-Enunciado (formal: restrito a átomos):
+A transição da normatividade objetiva para a realidade pessoal opera pela distinção entre a direção epistêmica da descoberta e a direção ontológica da fundamentação:
 
-True(p) → ∃r Ground(r, p).
+1. Direção Epistêmica da Descoberta (T7):
+   Da realidade da normatividade objetiva (distinção entre Certo e Errado, ¬N_T ∧ ¬N_F), descobre-se construtivamente a Pessoa:
+   ObjectiveNormativity := ∃ p : Person, RightWrong p
+   discover_person : ObjectiveNormativity → ∃ p : Person, RightWrong p (teorema construtivo, 0 axiomas).
 
-Toda verdade atómica tem um fundamento na realidade; a verdade
-composta é composicional (cláusulas Tarskianas — TEOREMAS por
-definição no nível truthmaker, A2 2026-09-16). Que um composto
-tenha fundamento (Ground(r, p ∧ q), etc.) não é afirmado nem negado.
+2. Direção Ontológica da Fundamentação (T8):
+   A fundamentação ontológica não recorre a axiomas de truthmaker ou relações externas não-interpretadas.
+   A fundamentação é dada pela própria estrutura do par dependente:
+   GroundedRightWrong := Σ' p : Person, RightWrong p
+   groundOfRightWrong (x : GroundedRightWrong) : Person := x.1
+   E no plano da agência plena, a pessoa sustenta constitutivamente a realidade do correto:
+   the_person_supports_the_reality_of_right :
+     ¬(∃s, ClaimsCorrect s NoRight ∧ NoRight) ∧ EstablishedRightWrong ∧
+     (∀p, T p ∨ IsFalse p) ∧ NecessaryNormativeOrder ∧
+     (∀s, RightWrong s → Person s) ∧ (∀s, Person s → GroundsRightWrong s)
+     (conjunção fechada, sem seta `FreeSubject s →` e sem `GroundOfReality` de nível-ente; 0 axiomas substantivos).
+   Neste enunciado, a Pessoa fundamenta a realidade do Certo (= a estrutura objectiva de
+   correcção/normatividade dos juízos sobre a realidade), não a criação dos existentes.
 
-Demonstração (reductio):
+3. Cadeia Construtiva de Implicações e Princípio de Não-Inversão:
+   A demonstração não corre para trás: corre estritamente para a frente via modus ponens sucessivo:
+   A₀ ⇒ A₁ ⇒ A₂ ⇒ A₃ ⇒ A₄ ⇒ P ⇒ G
+   onde A₀ é o dado normativo inicial (`RightWrongAt s p q`) e cada passo possui antecedente verdadeiro uma vez demonstrado o anterior (sem qualquer recurso a Act).
+   O facto de a Pessoa (P) ser a base ontológica de A₀ não exige inverter a demonstração lógica; a relação de fundamentação é ela própria a proposição derivada terminal (G), provada construtivamente no kernel (`forward_modus_ponens_derivation`, `person_grounds_original_normative_datum`, `person_grounds_right_wrong`, 0 axiomas substantivos).
 
-1. De T3 temos:
+4. O Predicado de Fundamentação é Forçado, Não Estipulado (C168–C171):
+   `GroundsRightWrong` não é um predicado formal ad hoc que se constrói uma vez obtida a Pessoa; a sua extensão é determinada pelos factos precedentes:
+   - Transparência: `groundsRightWrong_iff_forced_content : GroundsRightWrong s ↔ ForcedGroundContent s`, onde `ForcedGroundContent s := Person s ∧ (∀ s', RightWrong s' → Person s') ∧ (∃ p q, Chooses s p q)` é escrita inteiramente no vocabulário anterior à fundamentação — sem campo oculto nem átomo opaco;
+   - Cada campo é teorema precedente (`forced_content_of_person`): a dependência universal é o fecho do teorema de descoberta da §4 (`discovery_rightwrong_to_person`), provado antes do passo P⇒G; o substrato agencial desdobra a própria definição de Pessoa (`FreeWill := ∃ p q, Chooses`);
+   - Forçamento pelo dado: `grounding_forced_by_preceding_facts : RightWrongAt s p q → GroundsRightWrong s` — G segue de A₀ sozinha, sem hipótese `Person`; e `grounding_forced_at_datum : RightWrongAt s p q → GroundsRightWrongAt s p q` fixa as testemunhas no próprio par ⟨p, q⟩ do dado.
+   Pegada `{Means, Subject}`, zero axiomas substantivos, zero Act (ver §28, Batch FORCING, e theorems/T8.txt).
 
-True ≠ False.
-
-2. De §8 temos:
-
-True(p) ↔ Correct(A(s,p))
-
-e:
-
-False(p) ↔ Incorrect(A(s,p))
-
-e:
-
-Correct ≠ Incorrect.
-
-3. De T6 temos:
-
-Truth ≠ WillOfAgent.
-
-A distinção Correct ≠ Incorrect é objectiva —
-não depende de nenhum sujeito.
-
-4. Logo, a distinção Correct ≠ Incorrect mantém-se
-mesmo que nenhum sujeito exista.
-
-5. Se a distinção se mantém sem sujeitos,
-ela se mantém em virtude da realidade.
-
-6. Pela lei da identidade:
-se a realidade fosse idêntica nos dois casos
-(Correct e Incorrect),
-não haveria distinção.
-
-7. Mas a distinção existe (passo 3).
-
-8. Logo, a realidade difere nos dois casos.
-
-9. Se a realidade difere, algo na realidade
-faz a diferença.
-
-10. Esse algo é o fundamento:
-
-∃r Ground(r, p).
-
-11. Portanto:
-
-True(p) → ∃r Ground(r, p).
-
-Consequência:
-
-A negação "a verdade não tem fundamento" é incoerente sob a admissão do princípio do truthmaker:
-pressupõe uma distinção objectiva (True ≠ False)
-cuja objectividade exige que a realidade difira,
-o que exige um fundamento.
-Contudo, no plano puramente lógico e semântico formal, esta negação é **ainda negável** enquanto se rejeitar a ponte ontológica adicional (`truth → truthmaker real`): um cético deflacionista ou minimalista pode sustentar que a verdade é mera satisfação de fórmulas sem requerer uma entidade existente na realidade que faça a verdade.
-Esta refutação e o princípio de verdade fundamentada estão verificados no kernel:
-`noGround_selfRefutes` e `groundPrinciple_atom` (formal/Logos/Truthmaker.lean,
-GAPMAP.md C15, C60).
-Sob a reconstrução sob semântica hostil, a verdade semântica foi desacoplada
-da fundamentação ontológica (`TrueAt w φ := Satisfies w φ`). A exigência de que
-a verdade possua um fazedor de verdade na realidade é formalizada honestamente
-como a ponte semântica `Truthmaker` (axioma `Tag: SEM`). Sob esta ponte,
-tanto `groundPrinciple_atom` quanto `noGround_selfRefutes` são teoremas
-verificados com pegada `{Ground, Truthmaker, Subject}`.
-Os conectivos são composicionais (cláusulas Tarskianas TEOREMAS por definição,
-C16–C17 — `Iff.rfl`). A imagem ao nível proposicional (`GroundPrincipleProp`)
-permanece axioma SEM declarado (ver formal/Logos/GroundPerson.lean).
-
-Teorema: ver theorems/T7.txt
+Teoremas: ver theorems/T7.txt e theorems/T8.txt.
 
 24b. INSEPARABILIDADE PESSOAL-LÓGICA
 
@@ -988,9 +994,7 @@ alguma forma)" é C42–C45 + C76 (T14 sob AxTwoSubjects); L38 ("Escolho admitir
 dado performativo C68 — a sua negação refuta-se por retorção (`noCogito_selfRefutes`, C58).
 Ficam fora da demonstração as linhas 26–30: "este mundo é necessário? Não" é uma negação
 não reivindicada, e "a criação existe / há propósito" pertence à zona de fé
-(F9); "existe este Ser Pessoal" é T8 (C32 sob a ponte META AxPersonalGround;
-o contramodelo `ultimate_not_entails_personal` em HostileSemantics prova que um
-fundamento último não é analiticamente pessoal sem ponte substantiva).
+(F9); "existe este Ser Pessoal" é T8 (descoberta construtiva da pessoa e a Pessoa que sustenta a realidade do correto: `PersonalGroundOfReality.the_person_supports_the_reality_of_right`, com 0 axiomas substantivos; e a forma-instância `PersonalGroundOfReality.person_yields_personal_grounding_of_reality`).
 
 26. DEMARCAÇÃO: O EXCLUÍDO POR IMPOSSIBILIDADE DE NEGAÇÃO E O AINDA NEGÁVEL
 
@@ -1018,21 +1022,6 @@ Não pode ser coerentemente mantido:
 
 Ao afirmar ou negar racionalmente qualquer uma destas posições, o agente utiliza a própria estrutura que a posição tenta eliminar: o ato de negação refuta-se a si mesmo de forma performativa direta ou analítica.
 
-II. Ainda negável enquanto se rejeitarem pontes adicionais:
-
-Distintas das impossibilidades performativas acima, as duas transições ontológicas seguintes não constituem autocontradições no plano puramente lógico e semântico abstrato. São **ainda negáveis** enquanto se rejeitarem as pontes semânticas adicionais que ligam a verdade à ontologia:
-
-1. `truth → truthmaker real` ("A verdade não tem fundamento na realidade"):
-   É logicamente sustentável sob semântica formal pura, deflacionismo ou minimalismo alético (onde a verdade em mundos é mera satisfação de fórmulas, `TrueAt w φ := Satisfies w φ`, sem compromisso com entidades existentes que façam a verdade).
-   Só é excluída e refutada se se admitir a ponte semântica `Truthmaker` (Tag: SEM, C15/C60), que exige que toda a verdade atómica corresponda a um fundamento na realidade (`Ground e φ`).
-   Sem esta ponte, o salto da verdade lógica para o fundamento na realidade é **ainda negável**.
-
-2. `truth necessária → entidade necessária` ("Não existe realidade necessária"):
-   É logicamente sustentável sob modelos onde toda a realidade existente é contingente, e as verdades necessárias em cada mundo são satisfeitas por fazedores de verdade contingentes variáveis de mundo para mundo (conforme demonstrado formalmente pelo contramodelo `CountermodelWorldwiseTruthmaking` em `formal/Logos/HostileSemantics.lean`).
-   Só é excluída e refutada se se admitir a ponte semântica de uniformidade transmundana `AxGlobalGround` (Tag: SEM, C18/C19/C20), que impõe uma entidade necessária uniforme através de todos os mundos.
-   Sem esta ponte, o salto da verdade necessária para a existência de uma entidade necessária é **ainda negável**.
-   (Distinção registada: a certeza performativa do sujeito e do seu correlato-entidade é incondicional no mundo atual (`ExistsAt actualWorld e`, T1/T4). Contudo, a extensão para *entidade necessária* através de todos os mundos (`∃e □Exists(e)` — C91/C92, `Love.necessary_entity_exists_conditional`) é **condicional** ao princípio de estabilidade pessoal (`PersonStabilityPrinciple`, Tag: META/SEM): o ato presente não acarreta logicamente a sua persistência modal transmundana, conforme demonstrado pelos contramodelos `CountermodelPersonNotNecessary` e `contingent_agency_consistent` em `HostileSemantics`. Assim, sem pontes explícitas, tanto o correlato necessário como o fundamento uniforme de *todas* as verdades necessárias (`AxGlobalGround`) permanecem negáveis.)
-
 (Nota formal §26: "Não existe sujeito do ato presente" tem registo formal
 kernel-checked — `noSubject_selfRefutes` (formal/Logos/Choice.lean, C57):
 ¬(∃s : Subject, True) ⇒ False (deriva da retorção performativa de `Agency`, pegada `{Means, Subject}`).
@@ -1041,12 +1030,7 @@ E, na raiz, a negação do próprio ato refuta-se por retorção performativa:
 como `NoAct := ¬ ∃ s p, A s p`, a asserção explícita `h : Asserts speaker NoAct`
 é ela própria um ato, implicando `∃ s p, A s p` e gerando contradição direta com `NoAct`
 (`h ⊢ False`). Assim, C58 não assume a conclusão, não depende de axioma forçado,
-e tem pegada estrita `{Means, Subject}`.
-Por sua vez, as refutações de "A verdade não tem fundamento na realidade" (`noGround_selfRefutes`, C60)
-e de "Não existe realidade necessária" (`noNecessaryTruthIfAllContingent`, C20) não são
-retorções no vácuo: dependem formalmente das pontes semânticas declaradas `{Truthmaker}` e `{AxGlobalGround}`,
-cuja dispensabilidade puramente lógica é atestada pelos contramodelos em `HostileSemantics`.
-Ver formal/GAPMAP.md C15, C18, C20, C57, C58, C60, C68.)
+e tem pegada estrita `{Means, Subject}`.)
 
 27. RESULTADO MÁXIMO DESTA FASE
 
@@ -1082,8 +1066,6 @@ Truth ≠ WillOfAgent
 
 e os lemas derivados:
 
-True(p) → ∃r Ground(r, p)  [§24a: toda verdade ATÓMICA tem fundamento; a composta é composicional; sob a ponte SEM Truthmaker]
-
 P(f, a) ↔ L(g, a)  [§24b: inseparabilidade pessoal-lógica]
 
 Portanto:
@@ -1096,46 +1078,22 @@ há normatividade objectiva;
 há significado;
 há agência;
 há uma pessoa no sentido estrutural definido;
-há um correlato-entidade dessa pessoa que existe em todos os mundos (entidade necessária — esse est agere, C91/C92, sem pontes);
-há verdades necessárias que não dependem da existência contingente deste sujeito;
-há realidade necessária (T7, sob a ponte SEM AxGlobalGround);
-há realidade necessária que é pessoal (T8, sob a ponte META AxPersonalGround);
+há a descoberta construtiva da pessoa a partir da normatividade objetiva (T7);
+há a pessoa que sustenta a realidade do correto (T8);
 há mais do que uma pessoa (T12);
 há quem se possa amar (T13);
 há uma relação eterna de amor (T14).
 
-(Nota formal: o lema do truthmaker atómico (§24a) é PROVEN↑ sob a ponte semântica `Truthmaker` (SEM, C15/C60).
-O item "há realidade necessária" (T7) é PROVEN↑ sob a ponte semântica `AxGlobalGround` (SEM),
-necessária para colapsar o fazedor de mundos num fundamento uniforme necessário
-(conforme provado pelo contramodelo `CountermodelWorldwiseTruthmaking` em HostileSemantics);
-a instância do terceiro excluído (C19) fecha-se sob a mesma ponte
-(`Modal.T7_excludedMiddleInstance`, pegada `{AxGlobalGround, Ground}`).
-O item "há realidade necessária que é pessoal" (T8) é PROVEN↑ sob `AxPersonalGround` (META) para o passo "pessoal"
-(o contramodelo `CountermodelImpersonalUltimateGround` prova a irredutibilidade).
-Os itens 20–22 (pluralidade, amor, eternidade) são PROVEN↑ sob `AxTwoSubjects`
+(Nota formal: Os itens de pluralidade, amor e eternidade (T12–T14) utilizam `AxTwoSubjects`
 (META), pois a agência isolada não implica pluralidade (contramodelo `UnitPluralityCountermodel`).
-O item "há um correlato-entidade da pessoa no mundo atual" (C21/C24) é PROVEN
-com certeza performativa estrita (`ExistsAt actualWorld (EntityOf s)`).
-Contudo, o salto para "entidade necessária" em todos os mundos (C91/C92) é **CONDICIONAL**:
-`Love.necessary_entity_exists_conditional` (pegada `{Initiates, Means, State, Subject}`)
-exige a hipótese explícita `PersonStabilityPrinciple` (`Person s → NecessarySubject s`).
-O lift `Modal.subject_nec_entity_nec` (C91, `{Subject}`) transfere analiticamente
-a necessidade do sujeito para a entidade, mas a necessidade do próprio sujeito
-não decorre do ato contingente, como provado pelos contramodelos hostis
-`CountermodelPersonNotNecessary` e `contingent_agency_consistent` em `HostileSemantics`.
-Este item é distinto de T7 (C18): não dá o fundamento uniforme das verdades necessárias.
-Ver theorems/T7.txt, theorems/T8.txt, theorems/T12–T14.txt e formal/GAPMAP.md C15, C18, C19, C32, C40, C91, C92.
-Os itens 19–22 são o acréscimo do poema — ver a nota formal do §25.)
+Ver theorems/T7.txt, theorems/T8.txt, theorems/T12–T14.txt.)
 
 28. LIMITE DA FASE PURAMENTE DEDUTIVA
 
 A dedução puramente transcendental (sem pontes semânticas ou metafísicas adicionais) estabelece com certeza performativa a existência do ato presente, do sujeito no mundo atual, da distinção objetiva de verdade, da normatividade, do significado, da agência e das verdades lógicas necessárias no mundo atual (T1–T6, T10, T11).
 
 O limite da fase puramente dedutiva manifesta-se onde a dedução pura encontra as transições ontológicas transmundanas:
-- `ato performativo atual → sujeito / entidade necessária em todos os mundos` (C77/C92: condicional a `PersonStabilityPrinciple`; refutado sem pontes por `CountermodelPersonNotNecessary` e `ContingentAgencyModel`)
-- `truth → truthmaker real` (§24a, C15/C60: requer a ponte SEM `Truthmaker`)
-- `truth necessária → entidade necessária` (T7, C18/C19/C20: requer a ponte SEM `AxGlobalGround`, a qual conflita com o mundo vazio `otherWorld` em `HostileSemantics`).
-Ambas são **ainda negáveis** por um cético que rejeite pontes adicionais (como deflacionistas aléticos ou defensores de modelos onde todas as entidades são contingentes, conforme formalmente provado pelos contramodelos em `formal/Logos/HostileSemantics.lean`). Elas tornam-se teoremas no sistema apenas mediante a assunção honesta e explícita das pontes semânticas `Truthmaker` e `AxGlobalGround` (Tag: SEM).
+- `ato performativo atual → sujeito / entidade necessária em todos os mundos` (C77/C92: condicional a `PersonStabilityPrinciple`; refutado sem pontes por `CountermodelPersonNotNecessary` e `ContingentAgencyModel`).
 
 A cadeia do poema avançou. Estado formal (theorems/T10–T14.txt):
 
@@ -1210,9 +1168,10 @@ Axiomas 16 → 15. O selo TRANS deixa de existir.
 deixaram de existir — a pluralidade é teorema `{}` desde o
 plurality-discharge; ver GAPMAP.md C73/C74.)
 
-Nota (Tier1, 2026-09-16): Agent e Rational deixaram também de ser axiomas —
-são definições analíticas (Agent(s) := True; Rational(s) := True) e o ato é o
-ato de significar: A(s,p) := Means(s,p). Axiomas 18 → 16. Subject permanece
+Nota (Tier1, 2026-09-16; emendada 2026-09-23, PERSON.md): Agent e Rational deixaram também de ser axiomas —
+Agent é definição analítica (Agent(s) := True); Rational é agora piso DERIVADO
+(Rational(s) := ∃ p, Means s p, `{Means, Subject}` — mera significação, idêntico a
+`Intentional`) e o ato é o ato de significar: A(s,p) := Means(s,p). Axiomas 18 → 16. Subject permanece
 axioma, mas como sort puro (uma definição indutiva vazia refutaria ∃s,
 tornando o sistema inconsistente; Bool/fin 2/ℕ/Unit esconderiam cardinalidade)
 — IM_STUPID.md §5. (Superada em 2026-09-17: Subject é restaurado como sort puro não-interpretado `axiom Subject : Type`
@@ -1240,32 +1199,14 @@ designa a necessidade retorsivo-transcendental (a ordem é necessária e a sua b
 natureza pessoal judicativa livre), NÃO a necessidade da entidade em todos os mundos
 (a Proposição E de nível-ente continua anotada, não-teorema — §12.1; e.g.
 `retorsion_fails_against_no_necessary_entity`). Corolário existencial (C152) e forma-instância
-(C153) permanecem sob data, mesma pegada.
+(C153, `PersonalGroundOfReality.person_yields_personal_grounding_of_reality`, com o alias histórico de compatibilidade `present_act_yields_personal_grounding_of_reality`) permanecem sob data, mesma pegada.
+
+Nesta formulação: (a) "Γ-realidade" designa o domínio do que existe / do que é o caso;
+(b) a ordem normativa determina apenas a correcção objectiva das proposições sobre esse
+domínio — não cria os existentes, não aprova o mal, não legitima moralmente o que existe;
+(c) ver a "Nota conceptual — os quatro níveis" no §8.
 
 Ainda precisam de demonstração:
-
-Ponte independente do conhecer #7 — `NecessaryEntity(e) → ∃τ, Ground(e,τ)`
-  (uma entidade necessária como fundamento de uma verdade), procurando uma
-  ponte mais fraca que o `AxGlobalGround` (T7). Sem ela, a entidade necessária
-  de C92 permanece *existente mas não-fundadora*.
-Ponte independente do fundamento pessoal #9 — `Ground(g, PersonalNature) → NecessaryPersonalGround(g)`,
-  formalizada em `formal/Logos/NecessaryPersonalGround.lean`.
-  O alvo central é distinguir rigorosamente as 5 proposições:
-  (A) Verdade Necessária (□ τ);
-  (B) Entidade Necessária (∃ e, NecessaryEntity e);
-  (C) T8 Histórico / Realidade de Conteúdo de Ato (∃ e, NecessaryEntity e ∧ Personal e, sob AxPersonalGround);
-  (D) Pessoa Necessária (∃ s, NecessarySubject s ∧ Person s);
-  (E) Fundamento Pessoal Necessário (∃ g, NecessaryPersonalGround g).
-  A passagem para o Fundamento Pessoal (E) apoia-se no princípio semântico de fundamentação da realidade `AxRealityGrounding` (SEM) e adequação explicativa (`explanatory_adequacy`),
-  com o Fundamento de Toda a Realidade demonstrado não-axiomaticamente a partir de T7 (`necessary_ground_for_all_reality`),
-  e a exclusão de fundamentos impessoais demonstrada por redução ao absurdo através da inseparabilidade pessoal-lógica (§24b) e da cadeia volitiva (`Will → FreeWill → FreeSubject → Person`).
-  A existência de uma Pessoa Necessária (D) é demonstrada como teorema construtivo (`claim_e_implies_claim_d`) referente ao Sujeito Divino,
-  sem assumir que o sujeito humano contingente seja necessário.
-  A ontologia distingue Deus como o Fundamento Divino Único dotado de Natureza Divina (`DivineNature`),
-  da qual participam Três Pessoas Divinas numericamente distintas (`P₁, P₂, P₃`) com Três Vontades distintas (`subjectWill P₁ ≠ subjectWill P₂`, etc.),
-  sendo a compatibilidade entre Monoteísmo e Trindade provada como teorema no kernel (`monotheism_compatible_with_trinity`).
-O alvo central (#8) é `NecessaryEntity(e) ∧ Ground(e,τ)` sob `AxGlobalGround`;
-  e o alvo final (#10) `∃g s (NecessaryPersonalGround(g, s)) ∧ Monotheism`.
 Escolha genuína / liberdade (F1b; reparado e provado 2026-09-18) — a liberdade é
   DEFINICIONAL a partir da escolha genuína (`FreeWill(s) := ∃p q,
   Chooses(s,p,q)`; chooses_implies_freeWill, `{Means, Subject}`, só vocabulário): escolha → liberdade não é
@@ -1277,30 +1218,40 @@ Escolha genuína / liberdade (F1b; reparado e provado 2026-09-18) — a liberdad
   foi demonstrada por `act_orthogonal_to_genuine_choice_in_full_theory` e `CountermodelVeridicalMeaning`.
   As antigas testemunhas fabricadas (freeWillOrigin, judgeIsFree, originFreedomSelfRefutes, noFreeWillPosited —
   C69–C72) continuam RETIRADAS sob semântica hostil. F7 está derivado/dissolvido em F1b via A13 → A14 → FreeWill.
+Independência e descartabilidade do preço SEM da retorsão normativa — o axioma `AxJudicativeBipolarity : ∀ s p, ClaimsCorrect s p → Means s (¬ p)`
+  (Tag: SEM) é um passo não-lógico da *variante de postura fraca* da instanciação de `GenuineNormativity` pela denegação (C106, C157–C159). É INDEPENDENTE
+  em Γ primitivo: o contramodelo `M_opaque` em `formal/Logos/BipolarityRetorsion.lean` satisfaz toda a agência/asserção
+  (`ClaimsCorrect`) enquanto `Means s (¬ p)` falha (verificação de independência, níveis 1–4). Não derivar `AxJudicativeBipolarity` dos primitivos atuais
+  sem um novo axioma é uma limitação de vocabulário registrada, não uma lacuna do argumento retorsivo.
+Ataque estipulacionista inviável SEM axiomas — o ataque "GN é só uma definição estipulada" não vence sem axiomas:
+  sob a postura normativo-judicativa (o campo de qualquer juízo avaliativo; o campo não está vazio porque se tenta a prova
+  já de dentro dele — objetar já é julgar), `NoGN` é refutado com ZERO axiomas substantivos
+  (`normative_stance_refutes_attack_without_axioms` → ¬ NoGN; `attack_inviable_without_axioms` → ¬ NoGN ∧ ∃ s, FreeWill s;
+  C164/C165, pegada `{Initiates, Means, State, Subject, CL}`); as asas estruturais — co-apreensão é definicionalmente escolha (D7) e escolha
+  é definicionalmente livre-arbítrio (D8), ambas `{Means, Subject}` pura lógica — refutam a acusação de vacuidade. O ataque vincula apenas na medida
+  em que é proferido, e aí instancia a postura que o refuta — mas instanciar a postura (apreender junto o polo negativo
+  `Incorrect`) é um dado, não um teorema da voz: `M_oneway` profere `True` como correto sem significar `Incorrect () True` (C166, `{}`,
+  a voz não força a postura em Γ primitivo). Fronteira honesta (trade-off de 4 níveis): voz fraca → custa SEM `AxJudicativeBipolarity`
+  (C106); postura completa → zero axiomas substantivos (C164/C165); `¬NoGN` incondicional (sem postura) não é derivável —
+  `M_inanimate` testemunha diretamente a consistência bivalente-sem-forma-GN (C167, `{}`); uma mera emissão sem compromisso de correção
+  (Regime A / Ataque C) sai do discurso racional.
+Cornos meta-nível do livre-arbítrio retorsivo — a retorsão da denegação obtém `Chooses s NoGN (¬ NoGN)` com cornos do
+  META-nível (conteúdos sobre a própria normatividade). Liberdade sobre conteúdo de objeto/ação concreto (e.g. alternativas
+  de ação no mundo) não se segue da retorsão da denegação: requer a rota deliberativa separada
+  `DeliberateChoice` / `ClaimsNormativeCorrectness` (C140/C141, `{Initiates, Means, State, Subject, CL}`). Isto é registrado
+  como âmbito da rota, não como objeção à validade da cadeia GN → Chooses → FreeWill.
+Trade-off de 4 níveis da vedação do ataque (INVIABLE.md §1): (0) emissão/descompromisso (Ataques A/C) sai do discurso — `¬ClaimsCorrect → ¬postura` por projeção; (1) voz fraca (voz sem polo negativo) custa SEM `AxJudicativeBipolarity` (C106, contramodelo `M_opaque`); (2) postura completa (voz + apreensão do polo negativo) refuta o ataque com zero axiomas substantivos (C164/C165); (3) `¬NoGN` incondicional é bloqueado — `M_inanimate` testemunha diretamente bivalência-sem-forma-GN (C167). A passagem (1)→(2) não é derivável: `M_oneway` profere `True` como correto sem significar `Incorrect () True` (C166) — a apreensão bipolar é o constitutivo dado, e sabemos que o campo não está vazio porque tentamos a prova de dentro dele.
 Good (o bem como objeto moral da relação) — DEFERRED/F2, passo de
   normatividade lógica (§20) a bem, em conexão com T12/T13.
 Trinity — DEFERRED, sem argumento (§28/§29).
 
 Nenhuma destas passagens deve ser simplesmente assumida.
 
-Nota formal (formal/GAPMAP.md, formal/DESIGN.md D7, D9, D14): PersonalGround
-permanece registado sob a ponte histórica AxPersonalGround (C32, META), mas o
-passo pessoal supremo foi demonstrado no kernel com pegada vazia `{}` via
-`GroundPerson.personal_ultimate_ground_exists` (C90) e a fundamentação ontológica
-por dependência de iniciação (`Modal.ultimateGroundInit_exists`, C89).
-T7-atómico é teorema desde o batch A2-swap-theorem (2026-09-17) e a troca
-transcendental de quantificadores é teorema `{Ground}` (C88), com a Origem
-necessária `{}` (C87).
-A instância do terceiro excluído (C19) fica BLOCKED — lema em falta:
-fundamento existencial de compostos. A pluralidade (T12, C40) e o amor relacional
+Nota formal: A pluralidade (T12, C40) e o amor relacional
 (T13/T14, C41–C45) exigem a ponte metafísica explícita AxTwoSubjects (Tag: META,
 pegada `{AxTwoSubjects, Means, Subject}` — as tentativas de derivação a custo zero
 foram refutadas sob semântica hostil por UnitPluralityCountermodel e PluralityWithoutLove;
-C73/C76 foram retirados); o amor benevolente C85/C86 tem pegada `{Subject}`;
-a persistência (AxPersonStability) e a pessoa necessária (C77) são teoremas `{Means, Subject}` (esse est agere).
-(O método transcendental não muda: a exceção interpessoal tinha spikes de
-exclusão registados em formal/DESIGN.md D14b — todos superados por
-derivação, como foram cogito, esse-est-agere, AxGlobalGround e o Fundamento Pessoal Supremo.)
+C73/C76 foram retirados); o amor benevolente C85/C86 tem pegada `{Subject}`.
 
 O objectivo seguinte é demonstrar cada uma delas pelo mesmo método transcendental:
 
@@ -1325,8 +1276,7 @@ Ato racional presente
 → escolha
 → orientação teleológica
 → verdade necessária
-→ realidade necessária (T7, ainda negável sem AxGlobalGround)
-→ fundamento pessoal.
+→ pessoa como fundamento ontológico (T7 / T8).
 
 À cabeça desta cadeia, e como selo da dedução retorsiva pura, está o teorema
 incondicional da descoberta (C151, `PersonalGroundOfReality.the_person_supports_the_reality_of_right`):
@@ -1337,6 +1287,13 @@ a postura judicativa força a Pessoa ∧ a Pessoa suporta a realidade do Certo.
 A tese não é:
 
 "estas coisas parecem razoáveis".
+
+A tese também não é:
+
+"o fundamento pessoal causa a existência de cada coisa, faz existir o mal ou
+legitima moralmente o mal" — a tese é apenas: a ordem normativa objectiva, que
+governa a correcção dos juízos sobre a realidade, tem um fundamento ontológico
+de tipo pessoal.
 
 A tese é:
 

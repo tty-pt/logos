@@ -49,6 +49,21 @@ choiceField_exists — `{Means, Subject}` (PROVEN, C52, derivado de C68);
 noChoiceField_selfRefutes — `{Means, Subject}` (PROVEN, C53, retorsão performativa do campo);
 JUDGE_HAS_CHOICE_FIELD — `{AxTwoSubjects, Means, Subject}` (PROVEN↑, C54, via AxTwoSubjects h);
 retorsion_derives_free_will — `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` (PROVEN↑, rota normativa retorsiva: a negação de normatividade genuína refuta-se performativamente como asserção correta sob AxJudicativeBipolarity, derivando FreeWill sem A14);
+  retorsion_conclusion_is_the_very_genuine_normativity_structure / retorsion_address_uses_only_means /
+  retorsion_opposition_is_pure_logic — `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` (PROVEN↑, testemunhas de
+  NÍVEL SEMÂNTICO: a conclusão da retorsão é um termo da própria estrutura `GenuineNormativity`; o endereço é só `Means` primitivo
+  (`⟨Means s NoGN, Means s (¬NoGN)⟩`) e a oposição é pura lógica — nenhuma noção mais forte de normatividade é importada; C157–C159);
+  denial_requires_meaning_genuine_normativity — `{Initiates, Means, State, Subject}` (PROVEN, negar exige significar o negado; C160);
+  normative_retorsion_same_structure_type / normative_claiming_denial_presupposes_normativity —
+  `{Initiates, Means, State, Subject, CL}` (PROVEN, rota sem AxJudicativeBipolarity termina no MESMO tipo `GenuineNormativity`;
+  cadeia GN → Chooses → FreeWill rota-agnóstica; C161);
+  normative_stance_refutes_attack_without_axioms / attack_inviable_without_axioms — `{Initiates, Means, State, Subject, CL}`
+  (PROVEN, INVARIABILIDADE DO ATAQUE SEM AXIOMAS: a postura normativo-judicativa refuta NoGN e deriva FreeWill com ZERO axiomas
+  substantivos; C164/C165, INVIABLE.md). Resíduos (§28): o preço SEM `AxJudicativeBipolarity` é independente (`M_opaque`) e
+  dispensável — relegado à variante de postura fraca; a voz sem postura não a gera (`M_oneway`, C166 — a apreensão bipolar é o
+  dado constitutivo; o campo não está vazio porque se tenta a prova de dentro dele); `¬NoGN` incondicional não é derivável
+  (testemunha direta `M_inanimate`, C167); os cornos
+  `NoGN`/`¬NoGN` são meta-nível — deliberação de objeto/ação exige a rota deliberativa separada;
 judge_commits / rightWrongDistinction_implies_meaning — `CL + {AxTwoSubjects, Means, Subject}`;
 chooses_implies_freeWill / chooses_implies_freeSubject — `{Means, Subject}` (só vocabulário), por definição;
 freeSubject_implies_intentionalSubject — `{Means, Subject}` (definicional; pessoalidade substantiva permanece independente);
@@ -144,7 +159,7 @@ enquanto ação intencional forte, é uma iniciação realizada através da apre
 `AxIntentionalChoice : ∀ (s : Subject) (p : Prop), Act s p → ∃ q, Chooses s p q` (Tag: SEM).
 
 Distingue-se rigorosamente:
-1. `act(s, p)`: evento bruto realizado (emissão física, prolação) — `CountermodelWeakActWithoutMeaning`;
+1. `act(s, p)`: evento bruto realizado (emissão física, prolação);
 2. `Act(s, p)`: iniciação intencional com significado (`Means s p ∧ ∃ w w', Initiates s w w' p`);
 3. `AxIntentionalChoice`: a escolha genuína é constitutiva da Ação Intencional Forte (Act), não do evento bruto (act);
 4. `Chooses(s, p, q)`: co-significação de alternativas incompatíveis em pensamento;
@@ -255,8 +270,8 @@ AUDITORIA DE CIRCULARIDADE DEFINICIONAL & SEPARAÇÃO DE QUATRO FENÔMENOS:
    - `Authors s p q := Act s p ∧ Incompatible p q ∧ ¬ Act s q`: autoria executiva sem representação do corno rejeitado.
    - `TeleologicalAct`, `ReasonResponsiveAct`, `CounterfactualAct`: mantidos como estruturas primitivas autônomas cuja implicação a `Chooses` depende estritamente de A14.
 3. Separação Rigorosa de Quatro Fenômenos de Agência:
-   - Desfecho Causal (`CausalSettles`): transição de estados sem conteúdo mental (`CountermodelWeakActWithoutMeaning`).
-   - Contemplação sem Desfecho (`ContemplatesWithoutSettling`): co-significação mental de alternativas sem ação física (`ContemplationWithoutActionModel`).
+   - Desfecho Causal (`CausalSettles`): transição de estados sem conteúdo mental.
+   - Contemplação sem Desfecho (`ContemplatesWithoutSettling`): co-significação mental de alternativas sem ação física.
    - Seleção/Autoria sem Alternativas (`Authors` / `Selects`): determinação executiva de p sem pensar em q (`Single`).
    - Escolha Genuína / Autoria Deliberada (`DeliberateAuthorship` / `Chooses`): compromisso com alternativas cognitivamente co-significadas.
 4. Três Níveis de Constitutividade em Γ:
@@ -364,12 +379,12 @@ O argumento transcendental descobre o sujeito livre a partir da polaridade norma
   Certo/Errado ⇒ Normatividade Genuína ⇒ Escolha ⇒ Livre-Arbítrio ⇒ Pessoa.
 Esta é a direção epistémica e argumentativa de descoberta (o dado performativo do juízo revela a agência livre).
 
-A ontologia explicita a direção inversa de fundamentação ontológica:
-  Pessoa (= Sujeito com Vontade Livre e Independente) ⇒ fundamenta ⇒ Certo/Errado (Polaridade Normativa).
-A Pessoa é constitutivamente o sujeito dotado de vontade livre e independentemente individuada:
+A ontologia explicita a direção de fundamentação ontológica:
+  A ordem normativa exige um fundamento ontológico de tipo pessoal:
   `Person s ↔ FreeIndependentWill s` (`person_iff_freeIndependentWill`, `{subjectWill, will_individuation, Means, Subject}`).
-Essa agência pessoal livre é o fundamento ontológico que torna a polaridade normativa (oposição deôntica entre correcção e erro) inteligível e realizada:
-  `Person s → GroundsJudicativePolarity s p` (`person_grounds_normative_polarity`, sob ponte SEM `AxPersonalNormativeGround`).
+Essa agência pessoal livre fornece a especificação do fundamento ontológico que torna a polaridade normativa inteligível e realizada:
+  `Person s → GroundsRightWrong s` (`person_grounds_right_wrong`, 0 axiomas substantivos, derivado puramente da Pessoa sem Act).
+O argumento não identifica um indivíduo contingente particular como criador do Certo e do Errado; estabelece que o fundamento ontológico exigido pelo Certo/Errado objetivo é de tipo pessoal, sendo o sujeito derivado s a testemunha formal que instancia essa especificação.
 
 As duas direções não são circulares:
 1. "Revela a partir de" (epistémico) e "é ontologicamente fundamentado em" (metafísico) são relações com estatutos conceptuais distintos.

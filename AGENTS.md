@@ -73,6 +73,12 @@ cd .. && python3 scripts/audit_footprints.py && python3 scripts/build_deduction.
 - Axiom footprint of every claim must be inspected via `#print axioms` and recorded in
   `formal/GAPMAP.md`. Theorem statuses: `PROVEN`, `PROVEN↑` (proven under flagged axioms),
   `AXIOM`, `BLOCKED`, `DEFERRED`.
+- **Display mapping:** `PROVEN↑` is the ledger/GAPMAP status only. Reader-facing
+  display in generated `README.md`/`kernel-audit.md` says **AXIOMATIC** (`AXIOMATIC (X)`,
+  where `X` is the named axiom) via `classify_proof_edge`/`compute_epistemic_badge`
+  in `scripts/build_deduction.py`; internal category strings (`SEMANTIC`/`METAPHYSICAL`)
+  stay unchanged so the test suites and IL compilers remain stable. `AXIOMATIC ≠ unproved`
+  (machine-verified, rests on a declared axiom); `AXIOM` = the claim itself is an axiom.
 - Axiom justification tags: `TRANS` (performative/transcendental), `SEM` (semantic choice,
   with consistency-model note), `META` (metaphysical bridge, with price made explicit).
 

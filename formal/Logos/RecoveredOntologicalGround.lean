@@ -18,26 +18,24 @@ to the entity-level ground of reality:
 
 import Logos.Core
 import Logos.Semantics
-import Logos.Truthmaker
+import Logos.Entity
 import Logos.Modal
 import Logos.Agency
 import Logos.Person
-import Logos.GroundPerson
 
 namespace Logos.RecoveredOntologicalGround
 
 open Logos.Core (T IsFalse)
 open Logos.Semantics (Form World Satisfies TrueAt NecessarilyTrue strongTruthExists TV)
-open Logos.Truthmaker (Entity Ground ExistsAt actualWorld otherWorld EntityOf)
-open Logos.Modal (NecessaryEntity AxGlobalGround T7_necessaryReality)
+open Logos.Entity (Entity ExistsAt actualWorld EntityOf)
+open Logos.Modal (NecessaryEntity)
 open Logos.Agency (Subject Act A Means Will subjectWill)
 open Logos.Person (Person inseparability_24b CarriesPersonalFeature CarriesLogicalFeature RationalAct free_subject_is_person person_is_intentional)
-open Logos.GroundPerson (GroundProp Realizes IsPresentPersonalFeature Personal AxGroundBearing AxPersonalGround T8_personalGround)
 
 /-- Actual entity: an entity that exists in the actual world. -/
 def ActualEntity (e : Entity) : Prop := ExistsAt actualWorld e
 
-/-- Impersonal Entity: an atomic factual truthmaker that is not a subject. -/
+/-- Impersonal Entity: an atomic factual entity that is not a subject. -/
 def ImpersonalEntity (e : Entity) : Prop := ∃ n : Nat, e = Entity.ofAtom n
 
 /-- Meaning capacity of an entity. -/
@@ -80,68 +78,17 @@ theorem atom_cannot_ground_person
   exact hGM
 
 -- ============================================================================
--- Section 1: Entity-Level Grounding Surface (annotations only)
--- ============================================================================
-
-/-
-Entity-level claim E (`∃ g : Entity, NecessaryEntity g ∧ NecessaryPersonalGround g`) is
-NOT a theorem: world-indexed necessity requires SEM `AxGlobalGround`; the
-`Personal` predicate needs a META `GroundProp` instance; the `GroundOfReality`
-subject-branch is open. These are the obstacle-registry items of
-THIS_IS_PERSONAL.md §12.1 (Claim E) — never re-added as axioms. The required
-headline is the constitutive claim in `Logos.PersonalGroundOfReality`.
--/
-
--- ============================================================================
--- Section 2: Formal Recovery of T8 Result Directly (Claim C)
--- ============================================================================
-
-/-- NecessaryPersonalReality: a necessary entity realizes a present personal feature.
-    This is the clean current-language predicate for what T8 actually establishes (Claim C). -/
-def NecessaryPersonalReality (g : Entity) : Prop :=
-  NecessaryEntity g ∧ ∃ f : Prop, Realizes g f ∧ IsPresentPersonalFeature f
-
-/-- Theorem: A present personal feature directly forces a Necessary Personal Reality.
-    Directly consumes `Logos.GroundPerson.T8_personalGround`.
-    Footprint: `{AxPersonalGround, GroundProp, Initiates, Means, State, Subject}`. -/
-theorem necessary_personal_reality_of_present_feature
-    {f : Prop} (hf : IsPresentPersonalFeature f) :
-    ∃ g : Entity, NecessaryPersonalReality g := by
-  obtain ⟨g, hNec, hPersonal⟩ := T8_personalGround hf
-  exact ⟨g, hNec, hPersonal⟩
-
-/-- Present personal feature of a rational act. -/
-theorem present_personal_feature_of_act
-    {s : Subject} {p : Prop} (hAct : Act s p) :
-    IsPresentPersonalFeature p :=
-  ⟨s, p, hAct, hAct.1, rfl⟩
-
-/-- Act-to-Personal-Reality Corollary: Any performed rational act forces a Necessary Personal Reality.
-    Footprint: `{AxPersonalGround, GroundProp, Initiates, Means, State, Subject}`. -/
-theorem necessary_personal_reality_of_act
-    {s : Subject} {p : Prop} (hAct : Act s p) :
-    ∃ g : Entity, NecessaryPersonalReality g :=
-  necessary_personal_reality_of_present_feature (present_personal_feature_of_act hAct)
-
--- ============================================================================
--- Section 3: Stronger Entity-Level Ontology (Claim D and Claim E)
+-- Section 3: Entity-Level Ground of Reality
 -- ============================================================================
 
 /-- GroundOfReality: an entity g ontologically grounds every actual entity distinct from itself. -/
 def GroundOfReality (g : Entity) : Prop :=
   ∀ e : Entity, ActualEntity e → e = g ∨ GroundsEntity g e
 
-/-- NecessaryGroundOfReality: an entity is necessary and is the ontological ground of reality (Claim D).
-    Does not encode necessity inside GroundOfReality or encode the final conclusion recursively. -/
+/-- NecessaryGroundOfReality: an entity is necessary and is the ontological ground of reality. -/
 structure NecessaryGroundOfReality (g : Entity) : Prop where
   necessary : NecessaryEntity g
   grounds_reality : GroundOfReality g
-
-/-- NecessaryPersonalGroundOfReality: an entity is the necessary ground of reality AND personal (Claim E).
-    Combines the universal ground of reality with the positive realization of personal features. -/
-structure NecessaryPersonalGroundOfReality (g : Entity) : Prop where
-  reality : NecessaryGroundOfReality g
-  personal : ∃ f : Prop, Realizes g f ∧ IsPresentPersonalFeature f
 
 -- ============================================================================
 -- Section 4: Derivation of the Ground of Reality (T7 + AxRealityGrounding)
@@ -160,19 +107,8 @@ theorem is the constitutive claim in `Logos.PersonalGroundOfReality`.
 -- Section 5: Modal Invariance and Finite Subject Separation
 -- ============================================================================
 
-theorem actualWorld_ne_otherWorld : otherWorld ≠ actualWorld := by
-  intro h
-  have h0 : otherWorld 0 = actualWorld 0 := congrFun h 0
-  dsimp [otherWorld, actualWorld] at h0
-  contradiction
-
 theorem subject_exists_at_actualWorld (s : Subject) : ExistsAt actualWorld (EntityOf s) := by
-  dsimp [ExistsAt, Logos.Truthmaker.EntityExistsAt, Logos.Truthmaker.SubjectExistsAt, EntityOf]
-
-theorem subject_not_exists_at_otherWorld (s : Subject) : ¬ ExistsAt otherWorld (EntityOf s) := by
-  dsimp [ExistsAt, Logos.Truthmaker.EntityExistsAt, Logos.Truthmaker.SubjectExistsAt, EntityOf]
-  intro h
-  exact actualWorld_ne_otherWorld h
+  dsimp [ExistsAt, Logos.Entity.EntityExistsAt, Logos.Entity.SubjectExistsAt, EntityOf]
 
 /-- Contingent finite subjects are numerically distinct from any necessary entity.
     Prevents modal collapse and preserves the separation of the human subject from the ground. -/
@@ -235,23 +171,8 @@ theorem rational_act_carries_personal_feature
 /-
 `necessary_personal_ground_derived` is REMOVED (route used the two deleted
 axioms; see Section 4 note). The constitutive headline lives in
-`Logos.PersonalGroundOfReality.present_act_yields_personal_grounding_of_reality`.
+`Logos.PersonalGroundOfReality.person_yields_personal_grounding_of_reality`
+(historical compatibility alias: `present_act_yields_personal_grounding_of_reality`).
 -/
-
--- ============================================================================
--- Section 8: Strict Level Separation & Non-Equivalence (Claim C vs Claim E)
--- ============================================================================
-
-/-- Claim E entails Claim C: A Necessary Personal Ground of Reality is a Necessary Personal Reality. -/
-theorem necessary_personal_ground_implies_personal_reality
-    (g : Entity) (h : NecessaryPersonalGroundOfReality g) :
-    NecessaryPersonalReality g :=
-  ⟨h.reality.necessary, h.personal⟩
-
-/-- Claim E entails Claim D: A Necessary Personal Ground of Reality is a Necessary Ground of Reality. -/
-theorem necessary_personal_ground_implies_ground_of_reality
-    (g : Entity) (h : NecessaryPersonalGroundOfReality g) :
-    NecessaryGroundOfReality g :=
-  h.reality
 
 end Logos.RecoveredOntologicalGround

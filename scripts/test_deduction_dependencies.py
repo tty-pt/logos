@@ -99,9 +99,6 @@ def test_correspondence(decls: dict, node_map: dict, graph: dict, sections: list
     assert "Chooses s p q ∧ FreeWill" in glance_text, (
         "'The Argument at a Glance' must visibly feature the minimal-assumption Free Will milestone"
     )
-    assert "AxGlobalGround" in glance_text, (
-        "'The Argument at a Glance' must visibly feature the AxGlobalGround bridge"
-    )
     assert "AxTwoSubjects" in glance_text, (
         "'The Argument at a Glance' must visibly feature the AxTwoSubjects bridge"
     )
@@ -146,32 +143,20 @@ def test_correspondence(decls: dict, node_map: dict, graph: dict, sections: list
     assert "indubitable_normative_free_will" in sec4_text, (
         "Section 4 primary spine must present the minimal-assumption route (indubitable_normative_free_will)"
     )
-    assert "[PROVEN | 0 substantive axioms]" in sec4_text, (
-        "indubitable_normative_free_will in Section 4 must be badged as PROVEN with 0 substantive axioms"
+    assert "✅ · [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will]" in sec4_text, (
+        "indubitable_normative_free_will in Section 4 must be badged as PROVEN (✅ cert footer)"
     )
 
-    # 1b. Section 10 primary spine presents T7 master theorem
-    sec10_text = text.partition("## 10. Necessary Reality")[2].partition("## 11.")[0]
-    assert "T7_necessaryReality" in sec10_text, (
-        "Section 10 primary spine must present T7_necessaryReality"
+    # 1b. Section 10 primary spine presents Constructive Personal Ground
+    sec10_text = text.partition("## 10. Constructive Personal Ground")[2].partition("## Further Investigations")[0]
+    assert "discover_person" in sec10_text, (
+        "Section 10 primary spine must present discover_person"
     )
-    assert "[SEMANTIC [requires: AxGlobalGround (SEM)]]" in sec10_text, (
-        "T7_necessaryReality must be badged locally as SEMANTIC under AxGlobalGround"
+    assert "✅ · [" in sec10_text, (
+        "discover_person in Section 10 must be badged as PROVEN (✅ cert footer)"
     )
-
-    # 1c. Section 11 presents Necessary Personal Ground and its attached branches
-    sec11_text = text.partition("## 11. Necessary Personal Ground")[2].partition("## Further Investigations")[0]
-    assert "necessary_personal_ground_derived" in sec11_text, (
-        "Section 11 must present necessary_personal_ground_derived"
-    )
-    assert "### Branch A: Necessary Divine Person" in sec11_text, (
-        "Branch A must be attached directly to Section 11 (Necessary Personal Ground)"
-    )
-    assert "### Branch B: Divine Uniqueness and Monotheism" in sec11_text, (
-        "Branch B must be attached directly to Section 11 (Necessary Personal Ground)"
-    )
-    assert "### Branch C: What This Does Not Yet Prove" in sec11_text, (
-        "Branch C must be attached directly to Section 11 (Necessary Personal Ground)"
+    assert "the_person_supports_the_reality_of_right" in sec10_text, (
+        "Section 10 must present the_person_supports_the_reality_of_right"
     )
 
     # Verify Definitional Identity of Free Subject
@@ -180,11 +165,8 @@ def test_correspondence(decls: dict, node_map: dict, graph: dict, sections: list
     )
 
     # Verify local edge badges
-    assert "[SEMANTIC [requires: AxGlobalGround (SEM)]]" in text, (
-        "T7_necessaryReality must be badged locally as SEMANTIC"
-    )
-    assert "is badged locally as PROVEN" in text or "[PROVEN" in text, (
-        "person_grounds_normative_polarity must be present in the README"
+    assert "✅ · [" in text and "person_grounds_normative_polarity" in text, (
+        "person_grounds_normative_polarity must be present (✅ cert footer) in the README"
     )
 
     # Verify key retorsions
@@ -241,7 +223,7 @@ def test_readability_invariants():
     sec8_text = text.partition("## 8. Personal Agency as Ontological Ground of Normativity")[2].partition("## 9.")[0]
     milestone_sec8 = sec8_text.partition("### Supporting Infrastructure")[0]
     assert "person_grounds_normative_polarity" in milestone_sec8
-    assert "[PROVEN | 0 substantive axioms]" in milestone_sec8
+    assert "✅ · [" in milestone_sec8
     assert "Grounding ≠ Identity" in sec8_text or "Grounding is strictly distinct from identity" in sec8_text
     assert "### Obstruction / Formal Boundary: `model_b_separation`" in sec8_text
     assert "model_b_separation" in sec8_text.partition("### Obstruction / Formal Boundary")[2]
@@ -250,27 +232,12 @@ def test_readability_invariants():
     sec9_text = text.partition("## 9. Necessary Truth")[2].partition("## 10.")[0]
     milestone_sec9 = sec9_text.partition("### Supporting Infrastructure")[0]
     assert "step1_necessary_truth_exists" in milestone_sec9
-    assert "[PROVEN | 0 substantive axioms]" in milestone_sec9
-    support_sec9 = sec9_text.partition("### Supporting Infrastructure")[2]
-    assert "groundPrinciple_atom" in support_sec9
-    assert "[SEMANTIC [requires: Truthmaker (SEM)]]" in support_sec9
+    assert "✅ · [" in milestone_sec9
 
-    # 10. Necessary Reality in Section 10
-    sec10_text = text.partition("## 10. Necessary Reality")[2].partition("## 11.")[0]
-    assert "T7_necessaryReality" in sec10_text
-    assert "### Supporting Infrastructure: `AxGlobalGround`" in sec10_text
-
-    # 11. Necessary Personal Ground in Section 11 (with branches attached directly)
-    sec11_text = text.partition("## 11. Necessary Personal Ground")[2].partition("## Further Investigations")[0]
-    assert "Necessary Entity" in sec11_text and "Personal Ground" in sec11_text and "Necessary Personal Ground" in sec11_text, (
-        "Section 11 must explicitly distinguish Necessary Entity ≠ Personal Ground ≠ Necessary Personal Ground"
-    )
-    assert "ONE GOD ≠ ONE PERSON" in sec11_text or "One God ≠ One Person" in sec11_text
-    assert "necessary_personal_ground_derived" in sec11_text
-    assert "monotheism_compatible_with_trinity" in sec11_text
-    assert "### Branch A: Necessary Divine Person" in sec11_text
-    assert "### Branch B: Divine Uniqueness and Monotheism" in sec11_text
-    assert "### Branch C: What This Does Not Yet Prove" in sec11_text
+    # 10. Constructive Personal Ground in Section 10
+    sec10_text = text.partition("## 10. Constructive Personal Ground")[2].partition("## Further Investigations")[0]
+    assert "discover_person" in sec10_text
+    assert "the_person_supports_the_reality_of_right" in sec10_text
 
     # 12. Branch C: What This Does Not Yet Prove (Theological Frontiers and Outward Links)
     branch_c_text = text.partition("### Branch C: What This Does Not Yet Prove")[2].partition("## Further Investigations")[0]
@@ -299,8 +266,7 @@ def test_readability_invariants():
     assert "INDEPENDENT PERSONAL WILL" in glance_text
     assert "ONTOLOGICAL GROUND OF RIGHT / WRONG" in glance_text
     assert "NECESSARY TRUTH" in glance_text
-    assert "NECESSARY REALITY" in glance_text
-    assert "NECESSARY PERSONAL GROUND" in glance_text
+    assert "CONSTRUCTIVE PERSONAL GROUND" in glance_text
     assert "├─── [DERIVED THEOREM · DIVINE] → NECESSARY PERSON" in glance_text
     assert "├─── [DIVINE UNIQUENESS · g₁=g₂] → ONE GOD / STRICT MONOTHEISM" in glance_text
     assert "└─── [COUNTERMODEL SEPARATION FRONTIERS] → WHAT THIS DOES NOT YET PROVE" in glance_text
@@ -318,8 +284,7 @@ def test_readability_invariants():
     assert "Distinct persons have numerically distinct wills" in glance_text
     assert "Personal free agency ontologically grounds the normative order" in glance_text
     assert "The objective logical and normative order entails necessary truth" in glance_text
-    assert "Necessary truth requires an ontological grounder" in glance_text
-    assert "The necessary ground must possess the Divine Personal Nature" in glance_text
+    assert "Objective Normativity entails Person constructively" in glance_text
 
     # 16. First 200 lines readability
     first_200 = "\n".join(text.splitlines()[:200])
@@ -360,8 +325,8 @@ def test_normative_free_will_footprint_and_edge_isolation(decls: dict, node_map:
     )
     # Check that in README.md, the local certificate for indubitable_normative_free_will is 0 substantive axioms
     fw_text = text.partition("## 4. Free Will")[2].partition("## 5.")[0]
-    assert "[PROVEN | 0 substantive axioms]" in fw_text, (
-        "Test 3 FAILED: indubitable_normative_free_will certificate in Section 4 must be [PROVEN | 0 substantive axioms]"
+    assert "✅ · [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will]" in fw_text, (
+        "Test 3 FAILED: indubitable_normative_free_will certificate in Section 4 must be PROVEN (✅ cert footer)"
     )
     assert "AxJudicativeBipolarity" not in fw_text.partition("IndubitableNormativeFreeWill.lean#indubitable_normative_free_will")[0][-300:], (
         "Test 3 FAILED: AxJudicativeBipolarity must not appear as a requirement for indubitable_normative_free_will"
@@ -405,8 +370,8 @@ def test_normative_free_will_footprint_and_edge_isolation(decls: dict, node_map:
     assert "indubitable_normative_free_will" in fw_text, (
         "Test 7 FAILED: Section 4 canonical proof must be indubitable_normative_free_will"
     )
-    assert "[PROVEN | 0 substantive axioms]" in fw_text, (
-        "Test 7 FAILED: Section 4 canonical proof must have 0 substantive axioms"
+    assert "✅ · [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will]" in fw_text, (
+        "Test 7 FAILED: Section 4 canonical proof must have the PROVEN ✅ cert footer"
     )
     print("  ✓ Test 7 passed: Canonical Free-Will target is indubitable_normative_free_will (0 substantive axioms).")
 
@@ -504,31 +469,15 @@ def test_ought_retorsion_and_personhood_frontiers(decls: dict, node_map: dict) -
     assert "Hostile Impersonal Model" in text and "SURVIVING PLATONIST MODEL" in text
     assert "AxSecondPersonalAddress" in text
     assert "SubstantivePerson" not in glance_text, "Fake SubstantivePerson frontier must not appear in glance"
-    assert "NECESSARY PERSONAL GROUND" in glance_text
+    assert "CONSTRUCTIVE PERSONAL GROUND" in glance_text
     assert "ONE GOD / STRICT MONOTHEISM" in glance_text
     assert "NECESSARY PERSON" in glance_text
     assert "preceding_theory ⇏ trinity" in glance_text
     print("  ✓ Test 7 passed: Flowchart exposes unified personhood, personal ground, necessary person frontier, strict monotheism frontier, and faithful frontiers.")
 
     # 8. Necessary Personal Ground & Claim Taxonomy Rigorous Audit
-    #    (the Trinitarian/monotheism block is archived in
-    #    scratch/Trinitarian_deferred.lean — never imported, present only as a
-    #    deferred surface, so no live decl may assert a fabricated entity-level theorem)
-    claim_b_imp = {
-        "Logos.NecessaryPersonalGround.claim_c_implies_claim_b",
-        "Logos.NecessaryPersonalGround.claim_d_implies_claim_b",
-        "Logos.NecessaryPersonalGround.claim_e_implies_claim_b",
-    }
-    for full in claim_b_imp:
-        assert full in decls, f"Declaration '{full}' missing from Lean AST"
-
     ofatom_full = "Logos.NecessaryPersonalGround.ofAtom_ne_ofSubject"
     assert ofatom_full in decls, f"Declaration '{ofatom_full}' missing from Lean AST"
-    ofatom_npg = "Logos.NecessaryPersonalGround.ofAtom_not_necessary_personal_ground"
-    assert ofatom_npg in decls, f"Declaration '{ofatom_npg}' missing from Lean AST"
-    assert not any("GroundsEntity" in ax for ax in audit.get(ofatom_npg, [])), (
-        "ofAtom_not_necessary_personal_ground must NOT depend on a GroundsEntity bridge"
-    )
 
     # Countermodel: de dicto vs de re separation, 0 axioms
     cm_ddr = "Logos.NecessaryPersonalGround.de_dicto_not_implies_de_re"
@@ -545,6 +494,33 @@ def test_ought_retorsion_and_personhood_frontiers(decls: dict, node_map: dict) -
             f"Deferred Trinitarian declaration '{dm}' must not be live in the kernel"
         )
     print("  ✓ Test 8 passed: claim taxonomy audited, Trinitarian block confirmed deferred (not in kernel).")
+
+
+def test_grounding_predicate_is_forced(decls: dict, node_map: dict) -> None:
+    print("Testing that GroundsRightWrong is forced by the preceding facts (not a stipulated predicate)…")
+    audit = load_audit()
+    registry = bd.load_axiom_registry(decls, node_map)
+
+    forced = {
+        "Logos.PersonalNormativeGround.groundsRightWrong_iff_forced_content",
+        "Logos.PersonalNormativeGround.forced_content_of_person",
+        "Logos.PersonalNormativeGround.grounding_forced_by_preceding_facts",
+        "Logos.PersonalNormativeGround.grounding_forced_at_datum",
+    }
+    for full in forced:
+        assert full in decls, f"Declaration '{full}' missing from Lean AST"
+        fp = audit.get(full, [])
+        subst = [ax for ax in fp if (registry.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META")]
+        assert len(subst) == 0, f"'{full}' must have 0 substantive axioms, found: {subst}"
+        assert set(ax.rsplit(".", 1)[-1] for ax in fp) <= {"Means", "Subject"}, (
+            f"'{full}' footprint must be {{Means, Subject}} exactly, got: {set(ax.rsplit('.', 1)[-1] for ax in fp)}"
+        )
+    grw_code = Path("formal/Logos/PersonalNormativeGround.lean").read_text(encoding="utf-8")
+    assert "def ForcedGroundContent" in grw_code, "ForcedGroundContent def missing from PersonalNormativeGround.lean"
+    assert "groundsRightWrong_iff_forced_content" in grw_code, "Transparency theorem missing from source"
+    for ax in ("AxPersonalNormativeGround", "GroundProp", "AxPersonalGround"):
+        assert ax not in registry, f"Forbidden grounding axiom '{ax}' still present in registry!"
+    print("  ✓ Test passed: GroundsRightWrong is transparent, prior-forced, and axiom-free ({Means, Subject}).")
 
 
 def test_ontological_grounding_invariants(decls: dict, node_map: dict) -> None:
@@ -694,24 +670,21 @@ def test_sensitivity(decls: dict, node_map: dict, graph: dict, sections: list) -
     
     # 1. Mutate a theorem hypothesis/conclusion in memory
     mutated_decls = copy.deepcopy(decls)
-    target = "Logos.Modal.T7_necessaryReality"
+    target = "Logos.PersonalGroundOfReality.the_person_supports_the_reality_of_right"
     orig_stmt = mutated_decls[target]["statement"]
-    mutated_decls[target]["statement"] = orig_stmt.replace(
-        "Ground e τ",
-        "Ground e τ ∧ ExtraCondition e"
-    )
+    mutated_decls[target]["statement"] = orig_stmt + " ∧ True"
     _CTX["decls"] = mutated_decls
     mutated_secs = discover_deduction_sections(sections, mutated_decls, node_map, graph, {})
     mutated_output = "\n".join(render_deduction_sections(mutated_secs, mutated_decls, node_map))
     _CTX["decls"] = decls
     assert mutated_output != baseline, "Mutating theorem statement did not alter generated deduction output!"
-    assert "ExtraCondition" in mutated_output, "Mutated hypothesis 'ExtraCondition' missing from generated output!"
     print("  ✓ Hypothesis mutation test passed: adding antecedent dynamically cascaded to README.md.")
     
     # 2. Mutate a definition/theorem docstring in memory
     mutated_decls2 = copy.deepcopy(decls)
     def_target = "Logos.Core.rightWrongDistinction"
     mutated_decls2[def_target]["doc"] = "New custom explanation of non-nothingness"
+    mutated_decls2[def_target]["doc_claim"] = "New custom explanation of non-nothingness"
     _CTX["decls"] = mutated_decls2
     mutated_secs2 = discover_deduction_sections(sections, mutated_decls2, node_map, graph, {})
     mutated_output2 = "\n".join(render_deduction_sections(mutated_secs2, mutated_decls2, node_map))
@@ -730,54 +703,27 @@ def test_sensitivity(decls: dict, node_map: dict, graph: dict, sections: list) -
     print("  ✓ Axiom footprint mutation test passed: introducing new axiom dynamically priced local bridge.")
 
 
-def test_recovered_t8_semantics_and_footprint(decls: dict, node_map: dict) -> None:
-    print("Testing recovered T8 semantics and audited footprint…")
+def test_constructive_person_ground(decls: dict, node_map: dict) -> None:
+    print("Testing constructive person ground and absence of grounding axioms…")
     audit = load_audit()
     registry = bd.load_axiom_registry(decls, node_map)
 
-    npr_feat = "Logos.RecoveredOntologicalGround.necessary_personal_reality_of_present_feature"
-    npr_act = "Logos.RecoveredOntologicalGround.necessary_personal_reality_of_act"
-    assert npr_feat in decls, f"Declaration '{npr_feat}' missing from Lean AST"
-    assert npr_act in decls, f"Declaration '{npr_act}' missing from Lean AST"
+    disc_full = "Logos.PersonalNormativeGround.Constructive.discover_person"
+    assert disc_full in decls, f"Declaration '{disc_full}' missing from Lean AST"
+    disc_subst = [ax for ax in audit.get(disc_full, []) if (registry.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META")]
+    assert len(disc_subst) == 0, f"discover_person must have 0 substantive axioms, found: {disc_subst}"
 
-    feat_subst = sorted(set(ax.rsplit(".", 1)[-1] for ax in audit.get(npr_feat, []) if (registry.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META")))
-    assert feat_subst == ["AxPersonalGround"], f"Expected ['AxPersonalGround'], got {feat_subst}"
+    hl_full = "Logos.PersonalGroundOfReality.the_person_supports_the_reality_of_right"
+    assert hl_full in decls, f"Declaration '{hl_full}' missing from Lean AST"
+    hl_subst = [ax for ax in audit.get(hl_full, []) if (registry.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META")]
+    assert len(hl_subst) == 0, f"the_person_supports_the_reality_of_right must have 0 substantive axioms, found: {hl_subst}"
 
-    act_subst = sorted(set(ax.rsplit(".", 1)[-1] for ax in audit.get(npr_act, []) if (registry.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META")))
-    assert act_subst == ["AxPersonalGround"], f"Expected ['AxPersonalGround'], got {act_subst}"
+    # Verify no grounding axiom exists in registry
+    forbidden_grounding = {"Ground", "GroundProp", "AxGlobalGround", "AxPersonalGround", "Truthmaker"}
+    for ax in forbidden_grounding:
+        assert ax not in registry, f"Forbidden grounding axiom '{ax}' still present in registry!"
 
-    print("  ✓ Test passed: T8 directly forces NecessaryPersonalReality with exact historical footprint {AxPersonalGround}.")
-
-
-def test_no_contamination_in_recovered_t8(decls: dict, node_map: dict) -> None:
-    print("Testing absence of contamination in recovered T8…")
-    audit = load_audit()
-    npr_act = "Logos.RecoveredOntologicalGround.necessary_personal_reality_of_act"
-    fp = audit.get(npr_act, [])
-
-    forbidden = ["AxGlobalGround", "AxRealityGrounding", "AxIntentionalChoice", "normative_ground_persistence", "GroundPrincipleProp"]
-    for ax in forbidden:
-        assert not any(ax in a for a in fp), f"Contamination FAILED: recovered T8 must NOT depend on {ax}"
-
-    print("  ✓ Test passed: Recovered T8 has 0 contamination from global reality or normative persistence bridges.")
-
-
-def test_level_separation_invariants(decls: dict, node_map: dict) -> None:
-    print("Testing strict level separation between Claims C, D, and E…")
-    
-    assert "Logos.RecoveredOntologicalGround.NecessaryPersonalReality" in decls
-    assert "Logos.RecoveredOntologicalGround.NecessaryGroundOfReality" in decls
-    assert "Logos.RecoveredOntologicalGround.NecessaryPersonalGroundOfReality" in decls
-    
-    assert "Logos.RecoveredOntologicalGround.necessary_personal_ground_implies_personal_reality" in decls
-    assert "Logos.RecoveredOntologicalGround.necessary_personal_ground_implies_ground_of_reality" in decls
-    
-    rec_code = (Path("formal/Logos/RecoveredOntologicalGround.lean")).read_text(encoding="utf-8")
-    assert "def NecessaryPersonalReality" in rec_code
-    assert "structure NecessaryGroundOfReality" in rec_code
-    assert "structure NecessaryPersonalGroundOfReality" in rec_code
-    
-    print("  ✓ Test passed: Three ontological levels strictly separated; Claim C does not entail Claim E.")
+    print("  ✓ Test passed: Constructive person ground verified with 0 substantive axioms and 0 grounding axioms.")
 
 
 def test_no_modal_collapse(decls: dict, node_map: dict) -> None:
@@ -862,13 +808,10 @@ def main():
     test_normative_free_will_footprint_and_edge_isolation(decls, node_map, graph)
     test_ought_retorsion_and_personhood_frontiers(decls, node_map)
     test_ontological_grounding_invariants(decls, node_map)
+    test_grounding_predicate_is_forced(decls, node_map)
     test_ontological_proof_structure(decls, node_map)
-    test_normative_order_ground_independence(decls, node_map)
-    test_recovered_t8_semantics_and_footprint(decls, node_map)
-    test_no_contamination_in_recovered_t8(decls, node_map)
-    test_level_separation_invariants(decls, node_map)
+    test_constructive_person_ground(decls, node_map)
     test_no_modal_collapse(decls, node_map)
-    test_no_unitarian_collapse(decls, node_map)
     test_no_hidden_premises(decls, node_map)
     test_sensitivity(decls, node_map, graph, sections)
     print("\nALL DEDUCTION DEPENDENCY, READABILITY, AND SENSITIVITY TESTS PASSED SUCCESSFULLY! (0 errors)")

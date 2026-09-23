@@ -18,12 +18,18 @@ Key Results:
    Formal machine-checked proof that `ClaimsCorrect s p → Means s (¬ p)` is model-theoretically
    independent of bare logic and primitive Γ. In an uninterpreted token model, an agent can
    present `¬ B` as correct while having an uninterpreted `Means` relation that never includes `B`.
-3. Evaluation of Levels 1–4:
+3. Evaluation of Levels 1–4 (provenance):
    - Level 1: Conditional boundary identified.
-   - Level 2: Unconditional `ClaimsCorrect s (¬ B) → Means s B` strictly fails in primitive Γ (refuted by M_opaque).
-   - Level 3: Pure retorsion fails to force bipolarity without a substantive semantic bridge.
-   - Level 4: Irreducibility of A18 (`AxJudicativeBipolarity`): it cannot be eliminated or derived
-     from primitive Γ without an explicit semantic commitment (`Tag: SEM`).
+   - Level 2: Unconditional `ClaimsCorrect s (¬ B) → Means s B` strictly fails in primitive Γ
+     (countermodel independence, refuted by M_opaque).
+   - Level 3: Pure retorsion fails to force bipolarity without a substantive semantic bridge
+     (`level_3_retorsion_impotent_without_semantic_premise`: machine-checked verdict, not a claim).
+   - Level 4: Inventory label for A18 (`AxJudicativeBipolarity`): model-theoretically independent
+     of primitive Γ — it cannot be derived without an explicit semantic commitment (`Tag: SEM`),
+so it is a free-standing weak-stance option, NOT a required cost of refuting the
+     stipulation attack (the stance-guarded refutation is axiom-free given the stance;
+     `RetorsiveNormativity.normative_stance_refutes_attack_without_axioms`,
+     footprint `{Initiates, Means, State, Subject, CL}`).
 -/
 
 import Logos.Core
@@ -172,7 +178,9 @@ theorem act_normative_partition (s : Subject) (p : Prop) (h : Act s p) :
   (Logos.Order.act_iff_correct_or_incorrect s p).mp h
 
 /-- Regime D Separation Theorem: Grasping correctness does NOT logically entail grasping
-    either the propositional negation or the normative incorrectness in uninterpreted logic.
+    the propositional negation in uninterpreted logic, and Section 6 machine-witnesses
+    that it does not entail grasping the normative incorrectness either
+    (`voice_without_normative_stance`).
     Reflected by M_opaque: the subject grasps `Correct s True` without grasping `¬ True`.
     Classification: LOGICAL SEPARATION. Footprint: {} (pure logic). -/
 theorem grasping_correctness_does_not_force_grasping_negation :
@@ -212,12 +220,118 @@ theorem level_3_retorsion_impotent_without_semantic_premise :
     ∃ (sig : AgencySig), ¬ BipolaritySig sig :=
   ⟨M_opaque, m_opaque_refutes_bipolarity⟩
 
-/-- Level 4: Irreducibility of A18 (`AxJudicativeBipolarity`).
-    A18 cannot be eliminated from primitive notions already present in Γ.
-    It is a genuine substantive semantic commitment (`Tag: SEM`), not a theorem of logic.
+/-- Level 4: Independence and Optionality of A18 (`AxJudicativeBipolarity`).
+    A18 (`ClaimsCorrect s p → Means s (¬ p)`) cannot be derived from the primitive
+    notions already present in Γ — Model M_opaque witnesses that independence. It is
+    therefore a genuine substantive semantic commitment (`Tag: SEM`), not a theorem of
+    logic; but it is an OPTIONAL weak-stance asset, not a required cost: the refutation
+    of the stipulation attack is axiom-free under the normative-judicative stance
+    (`RetorsiveNormativity.normative_stance_refutes_attack_without_axioms`,
+    footprint `{Initiates, Means, State, Subject, CL}`).
     Classification: METATHEORETIC INVENTORY RESULT. -/
-def A18_is_irreducible_semantic_premise : String :=
-  "AxJudicativeBipolarity cannot be derived from primitive Γ; Model M_opaque proves independence."
+theorem A18_is_independent_optional_semantic_premise :
+    (∃ (sig : AgencySig), ¬ BipolaritySig sig)
+      ∧ (∀ (h : ∃ s : Subject, ∃ p : Prop, Logos.NormativeOrder.ClaimsNormativeCorrectness s p),
+            ¬ Logos.RetorsiveNormativity.NoGN) := by
+  constructor
+  · exact ⟨M_opaque, m_opaque_refutes_bipolarity⟩
+  · intro h
+    exact Logos.RetorsiveNormativity.normative_stance_refutes_attack_without_axioms h
+
+-- ===========================================================================
+-- Section 6: The Datum Gap — Voice Without the Normative Stance (INVIABLE.md §1/§3)
+-- ===========================================================================
+
+/-- Judicative signature at the tier-0/tier-1 level: act, means, initiation,
+    truth and falsehood — WITHOUT an `Incorrect` field, so that the negative
+    pole is never smuggled into the vocabulary. Local to this module (mirrors
+    the `PreA13AgencySignature` pattern in HostileSemantics.lean), so no import
+    cycle is introduced. -/
+structure JudicativeSig where
+  Subject : Type
+  State : Type
+  Means : Subject → Prop → Prop
+  Initiates : Subject → State → State → Prop → Prop
+  T : Prop → Prop
+  IsFalse : Prop → Prop
+
+/-- Act in a judicative signature: means the content and initiates a transition. -/
+def JudSigAct (sig : JudicativeSig) (s : sig.Subject) (p : Prop) : Prop :=
+  sig.Means s p ∧ ∃ w w' : sig.State, sig.Initiates s w w' p
+
+/-- Correct delimitation in a judicative signature (mirrors Order.Correct). -/
+def JudSigCorrect (sig : JudicativeSig) (s : sig.Subject) (p : Prop) : Prop :=
+  JudSigAct sig s p ∧ sig.T p
+
+/-- Incorrect delimitation in a judicative signature (mirrors Order.Incorrect). -/
+def JudSigIncorrect (sig : JudicativeSig) (s : sig.Subject) (p : Prop) : Prop :=
+  JudSigAct sig s p ∧ sig.IsFalse p
+
+/-- Voice (tier 1 of INVIABLE.md §1): act plus grasp of the positive pole
+    `Correct s p` — this is all `ClaimsCorrect` gives in Γ. -/
+def VoiceSig (sig : JudicativeSig) (s : sig.Subject) (p : Prop) : Prop :=
+  JudSigAct sig s p ∧ sig.Means s (JudSigCorrect sig s p)
+
+/-- Normative-judicative stance (tier 2): voice plus grasp of the negative pole
+    `Incorrect s p` — exactly the missing conjunct of the INVIABLE.md §1 gap
+    between `ClaimsCorrect` and `ClaimsNormativeCorrectness`. -/
+def NormativeStanceSig (sig : JudicativeSig) (s : sig.Subject) (p : Prop) : Prop :=
+  VoiceSig sig s p ∧ sig.Means s (JudSigIncorrect sig s p)
+
+/-- Model M_oneway: `Means` means "not equivalent to False", `T` is identity,
+    `IsFalse` is negation. A subject voices `True` as correct yet fails to mean
+    that judging it is incorrect — the dual-pole grasp is absent. -/
+def M_oneway : JudicativeSig where
+  Subject := Unit
+  State := Unit
+  Means := fun _ q => ¬ (q ↔ False)
+  Initiates := fun _ _ _ _ => True
+  T := fun p => p
+  IsFalse := fun p => ¬ p
+
+theorem m_oneway_act_true : JudSigAct M_oneway () True := by
+  refine ⟨fun h => h.mp True.intro, ⟨(), (), trivial⟩⟩
+
+theorem m_oneway_voice_holds : VoiceSig M_oneway () True := by
+  refine ⟨m_oneway_act_true, ?_⟩
+  intro h
+  exact h.mp ⟨m_oneway_act_true, True.intro⟩
+
+theorem m_oneway_incorrect_iff_false :
+    JudSigIncorrect M_oneway () True ↔ False := by
+  constructor
+  · intro h
+    exact h.2 True.intro
+  · intro f
+    exact f.elim
+
+theorem m_oneway_stance_fails :
+    ¬ M_oneway.Means () (JudSigIncorrect M_oneway () True) := by
+  intro hMeans
+  exact hMeans m_oneway_incorrect_iff_false
+
+/-- In primitive Γ, voicing a judgment does NOT force the normative-judicative
+    stance: M_oneway voices `True` as correct (act plus grasp of the positive
+    pole) while failing to mean `Incorrect () True` — machine witness of the
+    tier-1 ⇄ tier-2 gap of INVIABLE.md §1. The stance is a datum
+    (INVIABLE.md §3: we know its field is non-empty because we attempt the proof
+    from inside it), not a derivable consequence of voice.
+    Classification: COUNTERMODEL / INDEPENDENCE. Footprint: {}. -/
+theorem voice_without_normative_stance :
+    ∃ (sig : JudicativeSig) (s : sig.Subject) (p : Prop),
+      VoiceSig sig s p ∧ ¬ sig.Means s (JudSigIncorrect sig s p) :=
+  ⟨M_oneway, (), True, m_oneway_voice_holds, m_oneway_stance_fails⟩
+
+/-- Companion negative result: no signature over the primitive vocabulary forces
+    the stance from voice in general — the gap is a theorem of independence,
+    not an accident of any single model.
+    Classification: COUNTERMODEL / NEGATIVE RESULT. Footprint: {}. -/
+theorem voice_to_stance_not_forced_by_primitive_judicative_gamma :
+    ¬ (∀ (sig : JudicativeSig) (s : sig.Subject) (p : Prop),
+        VoiceSig sig s p → NormativeStanceSig sig s p) := by
+  intro hAll
+  have h := hAll M_oneway () True m_oneway_voice_holds
+  exact m_oneway_stance_fails h.2
 
 end Logos.BipolarityRetorsion
 
@@ -235,4 +349,6 @@ end Logos.BipolarityRetorsion
 #print axioms Logos.BipolarityRetorsion.level_1_conditional_bipolarity_boundary
 #print axioms Logos.BipolarityRetorsion.level_2_unconditional_fails_in_primitive_gamma
 #print axioms Logos.BipolarityRetorsion.level_3_retorsion_impotent_without_semantic_premise
-#print axioms Logos.BipolarityRetorsion.A18_is_irreducible_semantic_premise
+#print axioms Logos.BipolarityRetorsion.A18_is_independent_optional_semantic_premise
+#print axioms Logos.BipolarityRetorsion.voice_without_normative_stance
+#print axioms Logos.BipolarityRetorsion.voice_to_stance_not_forced_by_primitive_judicative_gamma

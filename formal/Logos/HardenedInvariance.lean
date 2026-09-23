@@ -25,7 +25,7 @@ Key architectural advances:
 import Logos.Core
 import Logos.Necessity
 import Logos.Semantics
-import Logos.Truthmaker
+import Logos.Entity
 import Logos.Modal
 import Logos.Agency
 import Logos.Person

@@ -237,10 +237,13 @@ def _doc_for(doc: str) -> str:
     if m:
         doc = doc[m.end():]
     para = doc
-    # cut at first blank-line-equivalent marker like a double newline or '-\n'
+    # cut at first blank-line-equivalent marker like a double newline or '-\n'.
+    # A '.\n' sentence break keeps its period (it belongs to the sentence).
     for sep in ("\n\n", "-\n", ".\n"):
         if sep in para:
             para = para.split(sep, 1)[0]
+            if sep == ".\n" and not para.rstrip().endswith("."):
+                para += "."
     para = " ".join(para.split())
     if len(para) > 260:
         cut = para[:260]
@@ -265,6 +268,8 @@ def _claim_gloss_for(doc: str) -> str:
     for sep in ("\n\n", "-\n", ".\n"):
         if sep in para:
             para = para.split(sep, 1)[0]
+            if sep == ".\n" and not para.rstrip().endswith("."):
+                para += "."
     return " ".join(para.split())
 
 
@@ -386,7 +391,7 @@ def parse_gapmap() -> list:
 
 _LEVEL_MODULES = {
     "Level 0": {"Core"},
-    "Level 1": {"Necessity", "Semantics", "Truthmaker", "Modal"},
+    "Level 1": {"Necessity", "Semantics", "Entity", "Modal"},
     "Level 2": {"Agency", "Person", "Alternatives", "Order", "GroundPerson"},
     "Level 3": {"Choice", "Value", "Plurality", "Love"},
 }
@@ -481,8 +486,8 @@ def resolve(lean_ref: str, decls: dict, node_map: dict, level_key: str = "") -> 
 # ---------------------------------------------------------------------------
 
 STATUS_BADGE = {
-    "PROVEN": "✔",
-    "PROVEN↑": "⚠",
+    "PROVEN": "✅",
+    "PROVEN↑": "⚠️",
     "AXIOM": "◆",
     "BLOCKED": "✖",
     "DEFERRED": "➖",
@@ -580,7 +585,7 @@ def footprint_parts(full: str) -> tuple[list, list, list]:
 def is_vocab_only(full: str) -> bool:
     """True when a claim's kernel footprint carries only declared vocabulary
     axioms (VOCAB) of the statement itself and no substantive axiom (SEM/META/TRANS).
-    The theorem is axiom-free modulo the declared vocabulary. Displays ✔."""
+    The theorem is axiom-free modulo the declared vocabulary. Displays ✅."""
     subst, vocab, _ = footprint_parts(full)
     return bool(vocab) and not subst
 
@@ -785,8 +790,8 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
     ap("")
     ap("| Machine badge | GAPMAP status | Philosophical status |")
     ap("|---|---|---|")
-    ap("| `✔` | PROVEN | LOGICAL or DEFINITIONAL |")
-    ap("| `⚠` | PROVEN↑ | SEMANTIC or METAPHYSICAL |")
+    ap("| `✅` | PROVEN | LOGICAL or DEFINITIONAL |")
+    ap("| `⚠️` | AXIOMATIC (ledger: PROVEN↑) | derived under a substantive axiom (SEM/META) |")
     ap("| `◆` | AXIOM | tag of the axiom (`VOCAB`/`SEM`/`META`) |")
     ap("| `✖` | BLOCKED | OPEN or COUNTERMODEL |")
     ap("| `➖` | DEFERRED | OPEN |")
@@ -826,7 +831,7 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
     if missing:
         hostile_sep = [f for f in missing if "HostileSemantics" in f]
         modal_calc = [f for f in missing if "Necessity" in f or "Modal" in f]
-        semantic_sat = [f for f in missing if "Semantics" in f or "Truthmaker" in f or "Core" in f]
+        semantic_sat = [f for f in missing if "Semantics" in f or "Entity" in f or "Core" in f]
         structural_lemmas = [f for f in missing if f not in hostile_sep and f not in modal_calc and f not in semantic_sat]
 
         ap(f"- **Kernel theorems supporting the architecture ({len(missing)} intentional unmapped helper/infrastructure theorems):**")
@@ -843,13 +848,13 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
 
     # --- detailed claims accounting & reconciliation assertion ----------------
     detailed_badges = compute_detailed_badges(all_claims, decls, node_map)
-    cnt_prov = sum(1 for b in detailed_badges.values() if b == "✔")
-    cnt_up = sum(1 for b in detailed_badges.values() if b == "⚠")
+    cnt_prov = sum(1 for b in detailed_badges.values() if b == "✅")
+    cnt_up = sum(1 for b in detailed_badges.values() if b == "⚠️")
     cnt_ax = sum(1 for b in detailed_badges.values() if b == "◆")
     cnt_repeat = sum(1 for b in detailed_badges.values() if b == "→")
     cnt_blocked = sum(1 for b in detailed_badges.values() if b == "✖")
     cnt_deferred = sum(1 for b in detailed_badges.values() if b == "➖")
-    cnt_other = sum(1 for b in detailed_badges.values() if b not in ("✔", "⚠", "◆", "→", "✖", "➖"))
+    cnt_other = sum(1 for b in detailed_badges.values() if b not in ("✅", "⚠️", "◆", "→", "✖", "➖"))
 
     # Reconcile assertion
     total_detailed = cnt_prov + cnt_up + cnt_ax + cnt_repeat + cnt_blocked + cnt_deferred + cnt_other
@@ -864,13 +869,13 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
     n_ax_decl = sum(1 for d in derived if d == "AXIOM")
 
     ap(f"- **Kernel-derived status** (#print axioms + axiom `Tag:`): "
-       f"**{cnt_prov} ✔** · **{cnt_up} ⚠** · **{cnt_ax} ◆** (unique steps detailed in the map)")
+       f"**{cnt_prov} ✅** · **{cnt_up} ⚠️** · **{cnt_ax} ◆** (unique steps detailed in the map)")
     ap(f"- **Reconciled claim inventory ({len(all_claims)} total):** "
-       f"{cnt_prov + cnt_up} unique active steps ({cnt_prov} ✔ + {cnt_up} ⚠) · "
+       f"{cnt_prov + cnt_up} unique active steps ({cnt_prov} ✅ + {cnt_up} ⚠️) · "
        f"{cnt_repeat} repeated / dissolved (→) · "
        f"{cnt_blocked} blocked / missing (✖) · "
        f"{cnt_deferred} deferred (➖)"
-       + (f" · {cnt_other} other ({', '.join(b for b in detailed_badges.values() if b not in ('✔', '⚠', '◆', '→', '✖', '➖'))})" if cnt_other else ""))
+       + (f" · {cnt_other} other ({', '.join(b for b in detailed_badges.values() if b not in ('✅', '⚠️', '◆', '→', '✖', '➖'))})" if cnt_other else ""))
     philo_hist = defaultdict(int)
     for c in all_claims:
         philo_hist[philo_status(c, node_map)] += 1
@@ -894,11 +899,11 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
     # --- footprint transcription check -------------------------------------
     subst_claims = [c for c in steps if derived_for(c, node_map) == "PROVEN↑"]
     if subst_claims:
-        ap(f"- **Steps ⚠ under a substantive axiom (SEM/META)** "
+        ap(f"- **Steps ⚠️ under a substantive axiom (SEM/META)** "
            f"({len(subst_claims)}): " + ", ".join(sorted(c["id"] for c in subst_claims)))
     vocab_only = [c for c in steps if is_vocab_only(c["_full"])]
     if vocab_only:
-        ap(f"- **Displayed ✔ by vocabulary only (axiom-free modulo declared vocabulary)** "
+        ap(f"- **Displayed ✅ by vocabulary only (axiom-free modulo declared vocabulary)** "
            f"(kernel footprint contains only the statement's own VOCAB axioms — no SEM/META/TRANS): "
            f"{', '.join(sorted(c['id'] for c in vocab_only))}")
     ax_vocab = sorted(_REGISTRY)
@@ -1387,7 +1392,7 @@ STAGES = [
      "abolished. The performative absolutes refute themselves (C1–C9); the "
      "classical laws and the object-language distinction between truth and "
      "falsehood follow (C10–C12). The stage closes with the transcendental "
-     "principles of semantics and the elementary truthmaker step."},
+     "principles of semantics and entity reality."},
     {"key": "III", "title": "The Subject of Thought", "intro":
      "The act is always an act *of* a subject and *about* content. From the "
      "performative datum Γ reads off the existence of a subject of thought "
@@ -1405,16 +1410,14 @@ STAGES = [
      "with AxIntentionalChoice adopted as the minimal constitutive bridge."},
     {"key": "V", "title": "Necessity", "intro":
      "From the semantic principles and the modal backbone Γ derives the "
-     "necessary: excluded middle and non-contradiction, the necessary person, "
-     "and the necessary reality (T7). The person/entity lifts are definitional; "
-     "the necessary reality itself is the first place a substantive bridge — "
-     "`AxGlobalGround` — is priced."},
+     "necessary: excluded middle and non-contradiction, and the necessary person. "
+     "The person/entity lifts are definitional."},
     {"key": "VI", "title": "Grounding", "intro":
-     "Grounding turns truth into a relation to reality. The atomic truthmaker is "
-     "definitional; its propositional and global reflections are the priced "
-     "semantic bridge (`AxGlobalGround`), and the personal ground is the priced "
-     "metaphysical bridge (`AxPersonalGround`). The withdrawn and blocked "
-     "ground-theoretic steps are shown here as well."},
+     "Ontologically, the person is the ground of the Right and the Wrong. "
+     "The clean approach encodes the ontological dependence in the formal "
+     "definition rather than introducing an axiom: RightWrong is indexed "
+     "by Person, discovery is constructive, and GroundedRightWrong is a "
+     "dependent pair. No grounding axiom is required."},
     {"key": "VII", "title": "Plurality and Relation", "intro":
      "Right and wrong are interpersonal. The unit world satisfies a single act "
      "with no second subject, so plurality is not derived: it is bought with "
@@ -1449,8 +1452,8 @@ for _x in ("C26", "C27", "C28", "C29", "C39", "C50", "C51",
     STAGE_OF[_x] = "IV"
 for _x in ("C37", "C38", "C59", "C93", "C94", "C95", "C96", "C77", "C91", "C92", "FAITH-1"):
     STAGE_OF[_x] = "V"
-for _x in ("C15", "C60", "C18", "C19", "C20", "C34", "C78", "C79", "C87",
-           "C88", "C89", "C33", "C32", "C90", "Q7.2"):
+for _x in ("C78", "C79", "C87",
+           "C88", "C89", "C90", "Q7.2"):
     STAGE_OF[_x] = "VI"
 for _x in ("C40", "C48", "C30", "C55", "C46", "C47", "C56", "C73", "C74",
            "C75"):
@@ -1502,7 +1505,7 @@ TARGET_OF = {
 }
 
 MODULE_STAGE = {
-    "Core": "II", "Semantics": "II", "Necessity": "II", "Truthmaker": "VI",
+    "Core": "II", "Semantics": "II", "Necessity": "II", "Entity": "VI",
     "Modal": "V", "Agency": "III", "Person": "III", "Initiation": "I",
     "Alternatives": "IV", "Order": "IV", "Choice": "IV", "Plurality": "VII",
     "Value": "VII", "GroundPerson": "VI", "Love": "VIII",
@@ -1514,16 +1517,23 @@ MODULE_STAGE = {
 }
 
 AX_ID = {
-    "Ground": "A1", "Subject": "A2", "Truthmaker": "A3",
-    "AxGlobalGround": "A4", "Means": "A5", "AxTwoSubjects": "A6",
-    "AxPersonalGround": "A7", "GroundProp": "A8", "GroundPrincipleProp": "A9",
-    "act": "A10", "State": "A11", "Initiates": "A12",
-    "AxActPolarity": "A13",
-    "AxIntentionalChoice": "A14",
-    "DependsOn": "A15",
-    "universal_thesis_claims_objectivity": "A16",
-    "transcendental_reflection_intentional": "A17",
-    "AxJudicativeBipolarity": "A18",
+    "Subject": "A1",
+    "Means": "A2", "AxTwoSubjects": "A3",
+    "act": "A4", "State": "A5", "Initiates": "A6",
+    "AxActPolarity": "A7",
+    "AxIntentionalChoice": "A8",
+    "DependsOn": "A9",
+    "universal_thesis_claims_objectivity": "A10",
+    "transcendental_reflection_intentional": "A11",
+    "AxJudicativeBipolarity": "A12",
+    "AxSecondPersonalAddress": "A13",
+    "Nature": "A14",
+    "HasNature": "A15",
+    "Will": "A16",
+    "subjectWill": "A17",
+    "will_individuation": "A18",
+    "Wills": "A19",
+    "Ought": "A20",
 }
 
 # A proposed inference that a hostile model refutes: withdrawn/retired steps
@@ -1559,10 +1569,6 @@ BRIDGE_OF = {
 # Curated sharper resolutions for obstructions where the generic status phrase
 # is too weak (FORMAT.md §5.2). Presentation data, scoped to these rows.
 RESOLUTION_OF = {
-    "C18": "Γ derives this only under AxGlobalGround; the countermodel shows "
-           "that the stronger conclusion is not forced by worldwise truthmaking alone.",
-    "C19": "Γ derives this only under AxGlobalGround; the countermodel shows "
-           "that the stronger conclusion is not forced by worldwise truthmaking alone.",
     "C77": "Conditional upon PersonStabilityPrinciple; hostile countermodels show that performative agency does not logically force modal subject-necessity.",
     "C92": "Conditional upon PersonStabilityPrinciple; hostile countermodels show that performative agency does not logically force modal entity-necessity.",
 }
@@ -1584,35 +1590,16 @@ CONTESTS = {
     "C73": ["UnitPlurality"],
     "C75": ["ContentWithoutPerson"],
     "C76": ["PluralityWithoutLove"],
-    "C78": ["ActWithoutSubject"],
-    "C79": ["InfiniteGroundChain"],
-    "C80": ["ActWithoutSubject"],
-    "C81": ["ActWithoutSubject"],
-    "C82": ["ActWithoutSubject"],
-    "C87": ["ActWithoutSubject"],
-    "C88": ["WorldwiseTruthmaking"],
-    "C89": ["InfiniteGroundChain"],
-    "C90": ["ImpersonalUltimateGround"],
     "C91": ["SubjectNecessityNotEntity"],
     "C92": ["PersonNotNecessary"],
-    "C19": ["WorldwiseTruthmaking"],
-    "C64": ["ActWithoutSubject"],
-    "C65": ["ActWithoutSubject"],
-    "C66": ["ActWithoutSubject"],
-    "C67": ["ActWithoutSubject"],
     "C69": ["NoFreeWill", "VeridicalMeaning"],
     "C70": ["NoFreeWill", "VeridicalMeaning"],
     "C71": ["NoFreeWill", "VeridicalMeaning"],
     "C72": ["NoFreeWill", "VeridicalMeaning"],
     "C77": ["PersonNotNecessary"],
     "F1b": ["VeridicalMeaning", "NoFreeWill"],
-    "C58": ["WeakActWithoutMeaning"],
     # --- inline obstructions on the main-body constitutive steps (FORMAT.md §5) ---
-    "C18": ["WorldwiseTruthmaking"],
-    "C21": ["ActWithoutSubject"],
-    "C23": ["ActWithoutSubject"],
     "C24": ["NoPerson"],
-    "C32": ["ImpersonalUltimateGround"],
     "C39": ["NoPerson"],
     "C40": ["UnitPlurality"],
     "C41": ["PluralityWithoutLove"],
@@ -1624,12 +1611,6 @@ CONTESTS = {
 }
 
 COUNTERMODEL_CATALOG = [
-    {"key": "WeakActWithoutMeaning", "title": "The mechanical event",
-     "attacks": "a performed event entailing intentional meaning (`act → Act`)",
-     "ns": "Logos.HostileSemantics.CountermodelWeakActWithoutMeaning"},
-    {"key": "ActWithoutSubject", "title": "The void act (Lichtenberg)",
-     "attacks": "an act occurring with no actualizing subject",
-     "ns": "Logos.CountermodelActWithoutSubject"},
     {"key": "SubjectWithoutPerson", "title": "The unpredicated subject",
      "attacks": "`Subject → Person` as a logical law",
      "ns": "Logos.HostileSemantics.CountermodelSubjectWithoutPerson"},
@@ -1645,9 +1626,6 @@ COUNTERMODEL_CATALOG = [
     {"key": "ContentWithoutPerson", "title": "Content without a person",
      "attacks": "content existence entailing personhood",
      "ns": "Logos.HostileSemantics.PropositionalPersonhood.CountermodelContentWithoutPerson"},
-    {"key": "WorldwiseTruthmaking", "title": "Worldwise but not uniform",
-     "attacks": "worldwise truthmaking entailing a uniform necessary ground",
-     "ns": "Logos.HostileSemantics.CountermodelWorldwiseTruthmaking"},
     {"key": "SubjectNecessityNotEntity", "title": "Persistence without entity",
      "attacks": "subject-persistence entailing entity-necessity by logic alone",
      "ns": "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity"},
@@ -1657,12 +1635,6 @@ COUNTERMODEL_CATALOG = [
     {"key": "VeridicalMeaning", "title": "Veridical meaning (one and two persons)",
      "attacks": "the act datum forcing genuine choice",
      "ns": "Logos.HostileSemantics.CountermodelVeridicalMeaning"},
-    {"key": "InfiniteGroundChain", "title": "The infinite descending chain",
-     "attacks": "grounding forcing an ultimate element",
-     "ns": "Logos.HostileSemantics.CountermodelInfiniteGroundChain"},
-    {"key": "ImpersonalUltimateGround", "title": "The impersonal ultimate",
-     "attacks": "an ultimate ground entailing a personal one",
-     "ns": "Logos.HostileSemantics.CountermodelImpersonalUltimateGround"},
     {"key": "PluralityWithoutLove", "title": "Plurality without love",
      "attacks": "plurality entailing love",
      "ns": "Logos.HostileSemantics.CountermodelPluralityWithoutLove"},
@@ -1715,7 +1687,7 @@ DEFINITIONS = {
         "`asserts(s, p) := act(s, p) ∧ p` (*weak assertion: performed assertion event*) vs. "
         "`Asserts(s, p) := Act(s, p) ∧ p` (*strong assertion: meaning-bearing assertion*).",
         "**Bridge (Weak act to strong act).** "
-        "`weak_act_implies_strong_act := ∀ s p, act(s, p) → Act(s, p)` (*unforced open intentionality bridge; separated by CountermodelWeakActWithoutMeaning*).",
+        "`weak_act_implies_strong_act := ∀ s p, act(s, p) → Act(s, p)` (*unforced open intentionality bridge*).",
         "**Definition (Subject actuality).** "
         "SubjectExists(s) := ∃ p, Act(s, p).",
         "**Definition (Subject, Intentionality, and Person).** "
@@ -1816,10 +1788,10 @@ TRANSITIONS = [
      "targets": ["C77", "C92"]},
     {"label": "necessary subject → necessary entity", "status": "DEFINITIONAL",
      "targets": ["C91"]},
-    {"label": "necessary truth → necessary ground / reality (T7)", "status": "SEMANTIC",
-     "targets": ["C18"]},
-    {"label": "necessary reality → personal ground (T8)", "status": "METAPHYSICAL",
-     "targets": ["C32"]},
+    {"label": "right-wrong → person (constructive discovery)", "status": "LOGICAL",
+     "targets": ["Logos.PersonalNormativeGround.Constructive.discover_person"]},
+    {"label": "person → right-wrong (ontological grounding)", "status": "DEFINITIONAL",
+     "targets": ["C151"]},
     {"label": "performative meaning-act → plurality", "status": "METAPHYSICAL",
      "targets": ["C40"]},
     {"label": "plurality → love", "status": "METAPHYSICAL",
@@ -1955,6 +1927,41 @@ def _short_gloss(c: dict, n: int = 220) -> str:
     return cut.rstrip(" ,;:.") + "…"
 
 
+def _spine_lead(doc: str, n: int = 260) -> str:
+    """A clean sentence-boundary lead for a proof doc paragraph.
+
+    `ProofIR.doc_lead` is the uncapped first doc paragraph (`doc_claim`), so this can
+    recover a clean sentence boundary; `ProofIR.doc` (capped by `_doc_for` at ~260
+    chars) is only a fallback. Resolves mid-sentence "…" back to a clean sentence
+    while keeping every displayed meaning in the argument spine.
+    """
+    s = re.sub(r"\s+", " ", (doc or "").strip())
+    if s.endswith("…"):
+        s = s.rstrip("… ").rstrip(" ,;:.")
+    if not s:
+        return s
+    if len(s) <= n:
+        return s
+    # Sentence ends: a period that punctuates the paragraph, or a period followed
+    # by a space with a fresh sentence. Leads that start mid-sentence may carry on
+    # a little past `n` (bounded window) so they reach the end of that sentence
+    # instead of stopping at an arbitrary word boundary with "…".
+    ends = [i for i in range(len(s))
+            if s[i] == "." and (i + 1 == len(s) or s[i + 1] == " ")]
+    for e in ends:
+        if e < int(n * 0.45):
+            continue  # stub lead (a bare first clause); keep looking
+        if e <= n + 220:
+            return s[:e + 1].strip()
+    cut = s[:n]
+    last = cut.rfind(". ")
+    if last > int(len(cut) * 0.35):
+        return cut[:last + 1].strip()
+    if " " in cut:
+        cut = cut.rsplit(" ", 1)[0]
+    return cut.rstrip(" ,;:.") + "…"
+
+
 TITLE_CAP = 110
 
 
@@ -2057,6 +2064,54 @@ def predecessor_ids(full: str) -> list:
             if i not in out:
                 out.append(i)
     return sorted(out)
+
+
+def proof_claimed_class(proof, node_map: dict) -> str:
+    """Kernel-derivable class of a rendered proof: PROVEN / PROVEN↑ / AXIOM.
+    Used to keep curated route-group labels honest about what the kernel implies."""
+    full = proof.full_name
+    node = node_map.get(full)
+    if node and node.get("kind") == "axiom":
+        return "AXIOM"
+    subst, _, _ = footprint_parts(full)
+    return "PROVEN↑" if subst else "PROVEN"
+
+
+def route_definition_proofs(proofs: list, decls: dict, node_map: dict, graph: dict, def_registry: dict) -> list:
+    """Definition steps used by the rendered goals of a section but not surfaced
+    as their own step. Derived, never transcribed: short-name tokens of the
+    humanised goals are intersected with glossed Logos `def`/`inductive`/`opaque`
+    nodes; name collisions (hostile-model twins) resolve to the canonical,
+    non-hostile module. Axioms (Means, Initiates, …) never match — kinds differ."""
+    tokens = set()
+    for p in proofs:
+        tokens |= set(re.findall(r"[A-Za-z_][A-Za-z0-9_]*", p.goal or ""))
+    if not tokens:
+        return []
+    hostile_markers = ("Hostile", "Countermodel", "UnitPlurality", "ModelHierarchy")
+    cand = {}
+    for full, nd in node_map.items():
+        if not full.startswith("Logos."):
+            continue
+        if nd.get("kind") not in ("def", "inductive", "opaque"):
+            continue
+        base = full.rsplit(".", 1)[-1]
+        if base not in tokens or not decls.get(full, {}).get("doc"):
+            continue
+        cand.setdefault(base, []).append(full)
+    if not cand:
+        return []
+    shown = {p.full_name for p in proofs}
+    out = []
+    for base in sorted(cand):
+        fds = sorted(cand[base])
+        chosen = next((f for f in fds if not any(h in f for h in hostile_markers)), fds[0])
+        if chosen in shown:
+            continue
+        pr = compile_lean_proof(chosen, decls, node_map, graph, def_registry)
+        if pr.name == base:
+            out.append(pr)
+    return out
 
 
 def assumption_text(full: str) -> str:
@@ -2477,1199 +2532,6 @@ def proof_of(c: dict) -> str:
     return synthesize_proof(c)
 
 
-def _axiom_gloss_body(gloss: str) -> str:
-    s = gloss.strip()
-    if s.startswith("— "):
-        s = s[2:].strip()
-    s = re.sub(r'^[A-Za-z0-9_]+\s*(?:\([^)]*\))?\s*:\s*', '', s).strip()
-    if s.lower().startswith('vocabulary:'):
-        s = s[len('vocabulary:'):].strip()
-    if s:
-        s = s[0].upper() + s[1:]
-    return s
-
-
-def inline_countermodel(c: dict) -> list:
-    """Compressed, first-use-deduped inline obstructions (MATH.md §2.2).
-
-    Returns the `**Obstruction.**` lines only. The first occurrence of a model
-    in the main body shows its `refutes` sentence; later occurrences use the
-    catalog's short `attacks` phrase and point at Appendix C.1 (which carries the
-    full refutes/survives text).
-    """
-    keys = CONTESTS.get(c["id"], [])
-    if not keys:
-        return []
-    seen = _CTX["cm_seen"]
-    L = []
-    for k in keys:
-        cm = _CTX["countermodels"].get(k, {})
-        if k not in seen:
-            seen.add(k)
-            L.append(f"**Obstruction.** `Countermodel{k}` — "
-                     f"{cm.get('refutes', '').strip()}")
-        else:
-            attacks = next((m["attacks"] for m in COUNTERMODEL_CATALOG
-                            if m["key"] == k), "")
-            L.append(f"**Obstruction.** `Countermodel{k}` — {attacks} "
-                     f"(see Appendix C.1).")
-    return L
-
-
-def _answer_phrase(c: dict, st: str) -> str:
-    """Status-derived philosophical payoff for a contested non-OPEN step."""
-    r = RESOLUTION_OF.get(c["id"])
-    if r:
-        return r
-    b = BRIDGE_OF.get(c["id"], "").rstrip(".")
-    if b:
-        return f"the step is {st} in Γ, not LOGICAL: it follows from {b}."
-    return {
-        "DEFINITIONAL": "the step is constitutive in Γ, not a logical consequence.",
-        "SEMANTIC": ("the step rests on a substantive semantic principle, "
-                     "not logic alone."),
-        "METAPHYSICAL": ("the step rests on a substantive metaphysical bridge, "
-                         "not logic alone."),
-    }.get(st, "the step is not a logical consequence.")
-
-
-def axiom_intro_en(full: str) -> list:
-    L = []
-    ax_shown = _CTX["ax_shown"]
-    ax_id = _CTX["ax_id"]
-    new = [b for b in kernel_axiom_names(full, _CTX["node_map"])
-           if b in ax_id and b not in ax_shown]
-    if "AxIntentionalChoice" in new and "AxActPolarity" not in ax_shown:
-        new.append("AxActPolarity")
-    if "AxIntentionalChoice" in new and "AxJudicativeBipolarity" not in ax_shown:
-        new.append("AxJudicativeBipolarity")
-    for base in sorted(new, key=lambda b: int(ax_id[b][1:])):
-        ax_shown.add(base)
-        r = _REGISTRY.get(base, {})
-        fn = r.get("full") or _CTX["axiom_full"].get(base) or base
-        d = _CTX["decls"].get(fn, {})
-        stmt = math_statement(fn) if d.get("statement") else ""
-        gloss = _axiom_gloss_body(_CTX["glosses"].get(fn, "") or r.get("gloss", ""))
-        cost = _cost_for(d.get("doc_full", ""))
-        L.append(f"**Axiom {ax_id[base]} · {base} ({r.get('tag', '?')}).**")
-        if stmt:
-            L.append(displmath(stmt))
-        if gloss:
-            L.append(gloss)
-        if cost:
-            L.append("")
-            L.append(f"*Philosophical cost:* {cost}")
-        L.append("")
-    return L
-
-
-def render_claim_block(c: dict) -> list:
-    L = []
-    ap = L.append
-    decls = _CTX["decls"]
-    node_map = _CTX["node_map"]
-    full = c.get("_full")
-    canon = _CTX.get("canonical_of", {}).get(c["id"])
-    if canon:
-        target = _CTX["by_id"].get(canon, {})
-        tfull = target.get("_full")
-        ref = f"`{tfull}`" if tfull else "the claim"
-        ap(f"### {c['id']} · →")
-        ap(f"*Dissolved into **{canon}** (shares {ref}); see that block.*")
-        ap("")
-        return L
-    is_kernel = bool(full and full in decls and full in node_map
-                     and c.get("status") in ("PROVEN", "PROVEN↑", "AXIOM"))
-    st = philo_status(c, node_map)
-    title, extra = split_claim(c)
-    kind = kind_of(c)
-    ap(f"**{kind} {c['id']} ({title}).**")
-    ap("")
-    if extra:
-        ap(extra)
-        ap("")
-    if is_kernel:
-        stmt = math_statement(full, c["id"])
-        if stmt:
-            ap(displmath(stmt))
-            ap("")
-    elif c["id"] in TARGET_OF:
-        ap(displmath(TARGET_OF[c["id"]]))
-        ap("")
-    if is_kernel and st != "OPEN":
-        p = proof_of(c)
-        if not p.endswith("∎"):
-            p += " ∎"
-        ap(f"**Proof.** {p}")
-        ap("")
-    cml = inline_countermodel(c)
-    for line in cml:
-        ap(line)
-        ap("")
-    if st == "OPEN":
-        ap("**Status: OPEN.**")
-        ap("")
-    elif cml:
-        ap(f"**Γ's answer.** {_answer_phrase(c, st)}")
-        ap("")
-    ap(math_metadata(c))
-    ap("")
-    return L
-
-
-def render_freewill_step() -> list:
-    stmt = "Chooses(s, p, q) → FreeWill(s)"
-    proof = "Immediate from FreeWill(s) := ∃ p, q (Chooses(s, p, q)) (definitional unrolling). ∎"
-    ref = "Choice.lean#L151"
-    meta = f"`Lean: {ref} · uses A5 · DEFINITIONAL ✔`"
-    return [
-        "**Corollary (Free will is definitional).**\n",
-        f"\\[ {stmt} \\]\n",
-        f"**Proof.** {proof}\n",
-        f"{meta}\n",
-    ]
-
-def render_stages(all_claims: list) -> list:
-    L = []
-    ap = L.append
-    rank = _CTX["reading_rank"]
-    ap("## 3. The deduction")
-    ap("")
-    for st in STAGES:
-        ap(f"### Stage {st['key']} — {st['title']}")
-        ap("")
-        ap(st["intro"])
-        ap("")
-        defs = DEFINITIONS.get(st["key"], [])
-        if defs:
-            for d in defs:
-                ap(d)
-                ap("")
-        members = [c for c in all_claims
-                   if stage_for(c) == st["key"]
-                   and c["id"] not in _CTX["canonical_of"]]
-        members.sort(key=lambda c: rank.get(c["id"], len(rank)))
-        for c in members:
-            full = c.get("_full")
-            if full and full in _CTX["decls"]:
-                for line in axiom_intro_en(full):
-                    ap(line)
-            if philo_status(c, _CTX["node_map"]) == "COUNTERMODEL":
-                continue
-            ap("\n".join(render_claim_block(c)).rstrip())
-            ap("")
-            extra = EXTRA_AFTER.get(c["id"])
-            if extra == "FREEWILL":
-                ap("\n".join(render_freewill_step()).rstrip())
-                ap("")
-        ap("")
-    return L
-
-
-def render_glance() -> list:
-    L = []
-    ap = L.append
-    ap("## 2. The argument at a glance")
-    ap("")
-    ap("### 2.1 Classical and Logical Core")
-    ap("")
-    ap("The logical core holds by classical propositional logic and semantic definition alone, "
-       "independently of whether any agent is acting or meaning:")
-    ap("")
-    ap("```text")
-    for t in TRANSITIONS:
-        if t["label"].startswith("classical core:"):
-            ap(f"{t['label']:<58} {t['status']}")
-    ap("```")
-    ap("")
-    ap("### 2.2 The Agency and Metaphysical Branch")
-    ap("")
-    ap("From the performative meaning-bearing datum (`∃ s p, Act s p`), Γ reads off subjecthood, "
-       "constitutive personhood, available alternatives, and semantic selection. Substantive metaphysical "
-       "and relational bridges remain explicitly priced:")
-    ap("")
-    ap("```text")
-    for t in TRANSITIONS:
-        if not t["label"].startswith("classical core:"):
-            ap(f"{t['label']:<58} {t['status']}")
-    ap("```")
-    ap("")
-    ap("### 2.3 The genuine-choice frontier")
-    ap("")
-    ap("```text")
-    ap("PERFORMATIVE MEANING-ACT")
-    ap("        │")
-    ap("        └──→ Strong Act")
-    ap("              ├──→ ChoiceField              [DEFINITIONAL]")
-    ap("              │")
-    ap("              └──→ Genuine Choice           [A14 / SEM]")
-    ap("                         │")
-    ap("                         └──→ FreeWill / FreeSubject")
-    ap("")
-    ap("A14 (AxIntentionalChoice):")
-    ap("    Act(s,p) → ∃ q, Chooses(s,p,q)")
-    ap("")
-    ap("    ADOPTED as a substantive SEMANTIC constitutive principle")
-    ap("    Weakest sufficient bridge identified at the pointwise level")
-    ap("")
-    ap("A13 (AxActPolarity):")
-    ap("    Act(s,p) → Means(s,¬p)")
-    ap("")
-    ap("    Optional stronger contradictory-negation polarity principle")
-    ap("    Strictly entails A14 (act_polarity_implies_intentional_choice)")
-    ap("```")
-    ap("")
-    ap("#### Adopted Constitutive Semantic Principle: AxIntentionalChoice (A14)")
-    ap("")
-    ap("The hostile-model audit definitively proved that Strong Act is orthogonal "
-       "to Genuine Choice under the pre-A14 primitives (`PreA14GammaTheory ⊬ genuine choice`, "
-       "formalized by `act_orthogonal_to_genuine_choice_in_full_theory`). "
-       "Genuine choice is not derivable from Strong Act in the pre-A14 theory. "
-       "Γ now explicitly adopts the constitutive thesis as A14, a substantive semantic commitment:")
-    ap("")
-    ap("> **Genuine choice is constitutive of intentional action.**")
-    ap("")
-    ap("An event can be mechanical, involuntary, or merely causally produced (`act`); "
-       "but an **intentional action** (`Act`), qua intentional action, is an action performed "
-       "through the agent's apprehension and co-meaning of an incompatible alternative (`Chooses s p q`). "
-       "Hence, genuine choice is constitutive of Strong Act, while remaining orthogonal to raw/weak "
-       "performed events (`act`), preserving the separation proven in `CountermodelWeakActWithoutMeaning`.")
-    ap("")
-    ap("This constitutive commitment is formalized as the substantive semantic axiom:")
-    ap("")
-    ap("$$\\text{AxIntentionalChoice} : \\forall (s : \\text{Subject}) (p : \\text{Prop}),\\; "
-       "\\text{Act}(s,p) \\implies \\exists q,\\; \\text{Chooses}(s,p,q)$$")
-    ap("")
-    ap("Under AxIntentionalChoice:")
-    ap("")
-    ap("$$\\text{Act}(s,p) \\longrightarrow \\text{Chooses}(s,p,q) \\longrightarrow \\text{FreeWill}(s) \\iff \\text{FreeSubject}(s)$$")
-    ap("")
-    ap("Thus F1b is closed under `{AxIntentionalChoice, Initiates, Means, State, Subject}` "
-       "(`genuineChoice_exists_of_act_constitutive`, `freeWill_exists_of_act`, `freeSubject_exists_of_act`).")
-    ap("")
-    ap("**Distinction between Derivation and Adoption:**")
-    ap("1. `Pre-A14 Γ ⊬ genuine choice` is **formally established** by the machine-checked hostile models "
-       "`HostileSemantics.hostileAgencyInstance` and `HostileSemantics.fullTheoryHostileInstance` "
-       "(`act_orthogonal_to_genuine_choice_in_full_theory`).")
-    ap("2. `Pre-A14 Γ + AxIntentionalChoice ⊢ genuine choice` is **formally established** by the kernel theorem "
-       "`Choice.genuineChoice_exists_of_act_constitutive`.")
-    ap("The hostile countermodels remain valid against the pre-A14 theory, demonstrating why genuine choice "
-       "is an authentic semantic commitment rather than a theorem of raw agency.")
-    ap("")
-    ap("#### Four-Model Diagnostic Hierarchy (M0–M3)")
-    ap("")
-    ap("| Level | Model Description | Act s p | ChoiceField s p q | Chooses s p q | FreeWill s | FreeSubject s | Verdict |")
-    ap("|---|---|---|---|---|---|---|---|")
-    ap("| M0 | Weak Act (`CountermodelWeakActWithoutMeaning`) | FALSE | FALSE | FALSE | FALSE | FALSE | Event occurs without meaning or strong Act |")
-    ap("| M1 | Factive Strong Act (`hostileAgencyInstance`) | TRUE | TRUE | FALSE | FALSE | FALSE | Strong Act & ChoiceField hold; Chooses fails by veridicality |")
-    ap("| M2 | Branching Initiation (`ModelM2BranchingInitiation`) | TRUE | TRUE | FALSE | FALSE | FALSE | Non-trivial state branching holds; Chooses still fails |")
-    ap("| M3 | Contrastive Agency (`ModelM3ContrastiveAgency`) | TRUE | TRUE | TRUE | TRUE | TRUE | Polar agency validated (AxActPolarity); FreeSubject valid |")
-    ap("")
-    ap("#### Six-Attack Audit on Deriving Polarity from Strong Act")
-    ap("")
-    ap("| Attack Vector | Candidate Principle | Outcome Classification | Hostile Witness / Model | Exact Separating Valuation & Analysis |")
-    ap("|---|---|---|---|---|")
-    ap(r"| **Attack 1 (Existential Act Polarity)** | `(∃ s p, Act s p) → ∃ s p, Act s p ∧ Means s (¬p)` | **C. REFUTED BY HOSTILE MODEL** | `fullTheoryHostileInstance` (`not_entails_existential_polarity_from_full_theory`) | Valuation: `s = false, p = True`. In veridical semantics (`Means s p := p`), `Act s p` forces $p$, while `Means s (¬p)` forces $\neg p$, making dual co-meaning an absolute contradiction ($p \land \neg p \equiv \bot$). |")
-    ap(r"| **Attack 2 (Semantics of Means)** | `Act s p → ∃ q, Means s q ∧ Incompatible p q` | **C. REFUTED BY HOSTILE MODEL** | `CountermodelVeridicalMeaning.Single` (`Single.no_genuine_choice`, `genuineChoice_requires_error_possibility`) | Valuation: `p = True`. If meaning is factive, any incompatible pair $p, q$ would require $p \land q \land \neg(p \land q) \equiv \bot$. Factive meaning mathematically excludes co-meaning incompatible alternatives. |")
-    ap("| **Attack 3 (Contrastive Initiation)** | `Branches (fun w w' => ∃ p, Initiates s w w' p) → ∃ q, Means s q ∧ Incompatible p q` | **C. REFUTED / D. REDUNDANT** | `ModelM2BranchingInitiation` (`m2_diagnostic_separation`) | For physical branching: **C. REFUTED** by Model M2 (`w = false ∧ w' ∈ {true, false}`); physical state transitions are extensional and do not force mental co-meaning. For intentional contrast: **D. REDUNDANT** (extensionally equivalent to A13). |")
-    ap("| **Attack 4 (DeliberateChoice Decomposition)** | `Act s p → ∃ q, DeliberateChoice s p q` | **C. REFUTED BY HOSTILE MODEL** | `hostileAgencyInstance` (`deliberateChoice_negation_decomposition`) | Valuation: `s = false, p = True, q = False`. Executive selection `Selects s p (¬p)` holds by assertion, but alternative awareness `Means s (¬p)` fails by veridicality. Deliberation fails strictly at the missing cognitive horn. |")
-    ap("| **Attack 5 (Performative Doubt & Retorsion)** | `(Asserts speaker NoAct → False) → ∃ s p, Doubts s p` | **C. REFUTED BY HOSTILE MODEL** | `TwoPersons.retorsion_does_not_imply_doubt` | Valuation: `NoAct := ¬ ∃ s p, Act s p`. Retorsion establishes that denying action is performatively self-refuting, but refutation of an assertion does not populate the agent's mind with dual contradictory contents. |")
-    ap("| **Attack 6 (C101 Normative Bivalence)** | `(Act s p ↔ Asserts s p ∨ Incorrect s p) → ∃ s p, Means s p ∧ Means s (¬p)` | **C. REFUTED BY HOSTILE MODEL** | `hostileAgencyInstance` (`hostile_c101`) | Valuation: `s = false, p = True`. Bivalent partition classifies the normative status of the posited content $p$ relative to reality; it tracks the world, not dual cognitive representations in the same subject $s$. |")
-    ap("")
-    ap("**Philosophical resolution of intentional initiation:**")
-    ap("- **Case A (Already derivable from existing Strong Act in pre-A14 theory):** REFUTED by the all-scope hostile model `HostileSemantics.fullTheoryHostileInstance`.")
-    ap("- **Case B (Initiates vocabulary is under-specified):** EVALUATED & BOUNDED. Model M2 shows that even when `Initiates` branches dynamically across states (`Branches`), physical transitions do not force cognitive co-meaning of the unchosen alternative in `Means`.")
-    ap("- **Case C (Adoption of Constitutive Semantic Principle A14):** ESTABLISHED. Strong Choice is not an executive property of state transitions, but a cognitive property of contrastive agency. In the pre-A14 theory, Strong Act does not entail Genuine Choice; Γ therefore adopts `AxIntentionalChoice : Act s p → ∃ q, Chooses s p q` as an authentic, substantive **SEMANTIC constitutive principle** (`Tag: SEM`), with `AxActPolarity : Act s p → Means s (¬p)` remaining an optional stronger contradictory-negation principle.")
-    ap("")
-    ap("**Free Subject vs. Personhood:**")
-    ap("- `FreeSubject s := ∃ p q, Chooses s p q` is definitionally equivalent to `FreeWill s` (`Choice.freeSubject_iff_freeWill`).")
-    ap("- Every free subject is an ontological person (`Choice.freeSubject_implies_person`: `FreeSubject s → Person s`, `{Means, Subject}`).")
-    ap("- But ontological personhood does NOT imply a free subject: in `TwoPersons`, two distinct persons exist while neither possesses free will (`HostileSemantics.TwoPersons.person_does_not_imply_freeSubject`).")
-    ap("")
-    ap("")
-    ap("#### A Fronteira de A14: O Que a Teoria Existente Já Fornece vs. O Abismo Cognitivo")
-    ap("")
-    ap("Para qualquer ato intencional forte `Act s p`, as definições analíticas e a lógica de Γ já fornecem rigorosamente:")
-    ap("```text")
-    ap("Act s p")
-    ap("  ├─→ Means s p                  [Definição analítica de Act: corno intencional]")
-    ap("  ├─→ ∃ w w', Initiates s w w' p  [Definição analítica de Act: iniciação causal]")
-    ap("  └─→ ChoiceField s p (¬p)       [Lógica pura: Incompatible p (¬p)]")
-    ap("```")
-    ap("")
-    ap("Contudo, a ação intencional `Act s p` isolada **não** acarreta por si mesma:")
-    ap("- `¬ Act s (¬p)` (necessário para a exclusão executiva em `Authors s p (¬p)`);")
-    ap("- `Asserts s p` (necessário para a seleção assertiva em `Selects s p (¬p)`);")
-    ap("- e, crucialmente, **não acarreta `Means s (¬p)` nem `Means s q` para nenhum `q` incompatível**.")
-    ap("")
-    ap("A proposição não-resolvida que separa a ação da escolha genuína é unicamente:")
-    ap("$$\\text{Act}(s, p) \\implies \\exists q : \\text{Prop},\\; \\text{Means}(s, q) \\land \\text{Incompatible}(p, q)$$")
-    ap("Esta é a ponte em falta da **Representação Contrastiva** (o segundo corno cognitivo).")
-    ap("")
-    ap("Como `Chooses s p q := Means s p ∧ Means s q ∧ Incompatible p q` e `Act s p` já fornece analiticamente `Means s p`, "
-       "o axioma substantivo A14 (`AxIntentionalChoice : Act s p → ∃ q, Chooses s p q`) é **logicamente e definicionalmente equivalente à ponte de Representação Contrastiva** sobre a teoria existente.")
-    ap("")
-    ap("Portanto, a fronteira epistemológica de A14 fica perfeitamente isolada:")
-    ap("$$\\text{Definições} + \\text{Lógica} \\quad \\vdash \\quad \\text{Act}(s, p) \\implies \\text{ChoiceField}(s, p, \\neg p)$$")
-    ap("$$\\text{Definições} + \\text{Lógica} \\quad \\not\\vdash \\quad \\text{Act}(s, p) \\implies \\exists q,\\; \\text{Means}(s, q) \\land \\text{Incompatible}(p, q)$$")
-    ap("")
-    ap("```text")
-    ap("ALTERNATIVA OBJETIVA (ChoiceField)   ───X───>   ALTERNATIVA COGNITIVA (Chooses / Means q)")
-    ap("```")
-    ap("Nenhuma propriedade puramente lógica ou analítica da semântica atual de `Means` é estritamente mais fraca do que A14 e capaz de derivar esta ponte: "
-       "a co-significação de alternativas é o compromisso semântico irredutível de A14.")
-    ap("")
-    ap("### Primitive Boundary: Means and Incompatibility")
-    ap("")
-    ap("Means is primitive and presently uninterpreted.")
-    ap("")
-    ap("Incompatible is logical:")
-    ap("    Incompatible p q := ¬(p ∧ q)")
-    ap("")
-    ap("Thus Γ currently contains:")
-    ap("")
-    ap("    cognitive relation: Means(s,p)")
-    ap("    objective relation: Incompatible(p,q)")
-    ap("")
-    ap("but no primitive relation connecting the two.")
-    ap("")
-    ap("The unresolved A14 bridge is precisely that connection.")
-    ap("")
-    ap("```text")
-    ap("The current formalization contains no primitive relation connecting")
-    ap("objective incompatibility with cognitive representation.")
-    ap("")
-    ap("The unresolved bridge is therefore not recoverable from either:")
-    ap("  (a) the current semantics of Means, or")
-    ap("  (b) the current logic of Incompatible.")
-    ap("```")
-    ap("")
-    ap("#### Audit: Semantics of Incompatible vs. Cognitive Representation")
-    ap("")
-    ap("1. **Is `Incompatible` primitive?** NO. In `formal/Logos/Alternatives.lean:17`, `Incompatible p q := ¬ (p ∧ q)` is a pure definition of propositional logic (`sorryAx = 0`, axiom footprint `{}`).")
-    ap("2. **Seven Conceptual Dimensions of Incompatibility:**")
-    ap("   - *Logical Incompatibility:* $\\neg(p \\land q)$ (truth-functional non-conjunction; the formal definition in Γ).")
-    ap("   - *Truth Incompatibility:* $p$ and $q$ cannot co-obtain in reality.")
-    ap("   - *Action Incompatibility:* An agent cannot execute both acts simultaneously.")
-    ap("   - *Goal Incompatibility:* The realization of $p$ frustrates or precludes goal $q$.")
-    ap("   - *Practical Opposition:* Volitional commitment to $p$ versus active rejection of $q$.")
-    ap("   - *Counterfactual Exclusivity:* In any accessible counterfactual world realizing $p$, $q$ does not obtain.")
-    ap("   - *Cognitive Alternative:* Both incompatible propositions $p$ and $q$ are apprehended, entertained, or represented in consciousness (`Means s p ∧ Means s q ∧ Incompatible p q`).")
-    ap("3. **Sufficiency of Logical Relation:** Tested against hostile models (`CountermodelVeridicalMeaning.Single` and `ModelM2BranchingInitiation`), bare objective incompatibility $\\neg(p \\land q)$ does not imply that either proposition is represented (`Means s q`), considered, possible, actionable, chosen, rejected, or cognitively available.")
-    ap("4. **Search for Deeper Structure in Γ:** Neither modal possibility (`Logos.Modal`), dynamic physical state branching (`ModelM2BranchingInitiation`), normative bivalence (`Logos.Order` C101), nor teleological goals (`TeleologicalAct`) can derive `Means s q` for an incompatible $q$ without already presupposing cognitive representation.")
-    ap("5. **Candidate Principles & Relation to A14:**")
-    ap("   - `Incompatible p q → Means s q`: Strictly stronger than A14 ($P > \\text{A14}$), cognitively explosive (forces representation of every incompatible proposition / contradiction), rejected.")
-    ap("   - `Initiates s w w' p ∧ Initiates s w w'' q`: Independent of A14 ($P \\perp \\text{A14}$); extensional state branching fails to force mental co-meaning (refuted by Model M2).")
-    ap("   - `Means s p → Means s (¬p)`: Equivalent to **A13** (`AxActPolarity`), NOT A14.")
-    ap("")
-    ap("#### Strength Relation: A13 vs. A14")
-    ap("")
-    ap("```text")
-    ap("A13 : Act s p → Means s (¬p)")
-    ap("             ↓")
-    ap("A14 : Act s p → ∃q, Chooses s p q")
-    ap("```")
-    ap("")
-    ap("A13 is **strictly stronger** in general than A14 because A14 permits an arbitrary incompatible alternative $q$ (e.g. contrasting positive actions such as North vs. East, as formally separated in `ContrastiveSeparation.contrastive_strictly_weaker`), whereas A13 forces the alternative to be the formal contradictory negation $\\neg p$.")
-    ap("")
-    ap("### Universal vs. Existential Constitutive Principle")
-    ap("")
-    ap("Universal A14:")
-    ap("    ∀s p, Act s p → ∃q, Chooses s p q")
-    ap("")
-    ap("Existential weakening:")
-    ap("    (∃s p, Act s p) →")
-    ap("      ∃s p q, Chooses s p q")
-    ap("")
-    ap("The latter is sufficient for F1b.")
-    ap("")
-    ap("Its relation to A14 must be established formally.")
-    ap("")
-    ap("#### Audit: A14 vs. A14∃ (Formal Results)")
-    ap("")
-    ap("1. **Formalization:**")
-    ap("   - Universal A14 (`AxIntentionalChoice`): `∀ (s : Subject) (p : Prop), Act s p → ∃ q, Chooses s p q`")
-    ap("   - Existential A14 (`existential_intentional_choice`): `(∃ s : Subject, ∃ p : Prop, Act s p) → ∃ s : Subject, ∃ p q : Prop, Chooses s p q`")
-    ap("2. **Entailment `A14 → A14∃`:** PROVEN by pure logic (`intentional_choice_implies_existential_choice`).")
-    ap("3. **Converse `A14∃ → A14`:** REFUTED BY HOSTILE MODEL (`ExistentialChoiceSeparationModel.existential_not_entails_universal`). In a two-agent model where one agent chooses and another acts unilaterally without choice, `A14∃` holds while universal `A14` fails.")
-    ap("   - Therefore: **`A14∃ < A14` (strictly weaker).**")
-    ap("4. **Relation to Target F1b:** `existential_choice_iff_f1b` proves that `A14∃` is **DEFINITIONALLY EQUIVALENT** to target F1b (`(∃ s p, Act s p) → ∃ s, FreeWill s`) under `FreeWill s := ∃ p q, Chooses s p q` (`rfl`).")
-    ap("5. **Sufficiency for Free Will:** YES (`freeWill_exists_of_existential_choice`).")
-    ap("6. **Pre-A14 Derivability:** NO. `act_orthogonal_to_existential_contrastive_agency_in_full_theory` in `fullTheoryHostileInstance` proves that `A14∃` is independent of the pre-A14 theory.")
-    ap("7. **Transitivity with A13:**")
-    ap("```text")
-    ap("A13 : Act s p → Means s (¬p)")
-    ap("       ↓")
-    ap("A14 : ∀ s p, Act s p → ∃ q, Chooses s p q")
-    ap("       ↓")
-    ap("A14∃ : (∃ s p, Act s p) → ∃ s p q, Chooses s p q  (≡ F1b)")
-    ap("```")
-    ap("`act_polarity_implies_existential_choice` verifies direct entailment `A13 → A14∃`.")
-    ap("")
-    ap("### Systematic Attack on F1b and the Mathematical Frontier")
-    ap("")
-    ap("Target F1b: `(∃ s p, Act s p) → ∃ s, FreeWill s` (definitionally equivalent to `A14∃`).")
-    ap("")
-    ap("We seek whether there is a genuinely more primitive semantic principle $B$ such that:")
-    ap("$$\\text{Pre-A14 } \\Gamma + B \\vdash \\text{F1b}$$")
-    ap("while $B$ is not definitionally or propositionally equivalent to F1b/A14∃, and not merely A14/A13 under another name.")
-    ap("")
-    ap("#### The 11-Way Candidate Classification")
-    ap("")
-    ap("| Candidate Direction | Formulation / Schema | Strict Classification | Hostile Witness / Model | Formal Mechanism & Status |")
-    ap("|---|---|---|---|---|")
-    ap(r"| **1. Doubt / Propositional Polarity** | `Doubts s p := Means s p ∧ Means s (¬p)` | **INCOMPARABLE** (datum) / **STRICTLY STRONGER THAN F1b** (act bridge); **REFUTED BY HOSTILE MODEL** | `fullTheoryHostileInstance` (`Means s p := p`) | As an unprompted datum (`DoubtingDatum : ∃ s p, Doubts s p`), it is incomparable with F1b (entails FreeWill without requiring an intentional act; not entailed by F1b). As an act bridge (`Act s p → ∃ q, Doubts s q`), it strictly entails F1b but forces contradictory negation $\neg p$. In pre-A14 Γ, doubt is identically False in veridical models (`p ∧ ¬p ↔ False`). |")
-    ap(r"| **2. Self-Reference / Retorsion** | `SelfDenialOfChoice s p := Act s p ∧ (p ↔ ∀ q, ¬ Chooses s p q)` | **REFUTED BY HOSTILE MODEL** | `DelusionalSelfChoiceModel` & `SelfDenialOfChoiceModel` | An agent can truthfully perform an act with content 'this act contains no genuine choice' (`p = True`), and in fact possess zero choice (`∀ q, ¬ Chooses s p q`). Performative retorsion fails to populate the cognitive field with alternative contents. |")
-    ap(r"| **3. Intentionality as such** | `Intentional s := ∃ p, Means s p` (or `Act s p`) | **REFUTED BY HOSTILE MODEL** | `fullTheoryHostileInstance` (`act_orthogonal_to_genuine_choice_in_full_theory`) | Present in pre-A14 Γ (`T5_personExists`, `act_implies_intentional`). Survives in hostile models where an agent acts intentionally with single/veridical content, completely decoupled from genuine choice. |")
-    ap(r"| **4. Rationality / Judgment** | `Judge s := Asserts s (¬ N_T ∧ ¬ N_F)` | **REFUTED BY HOSTILE MODEL** | `fullTheoryHostileInstance` (`JUDGE_HAS_CHOICE_FIELD`) | Judgment derives an *objective* alternative field `ChoiceField s p (¬p)` (`Means s p ∧ Incompatible p (¬p)`), but does NOT derive the second cognitive horn `Means s (¬p)`. The judge remains free of choice in factive models. |")
-    ap(r"| **5. Alternative-Generation** | `∃ q, Incompatible p q` | **REFUTED BY HOSTILE MODEL** | `CountermodelVeridicalMeaning.Single` | Pure logic: for any $p$, $q := \neg p$ satisfies `Incompatible p (¬p)`. Being a tautology, it holds in all models, including single-meaning deterministic models, and cannot force mental representation of $q$. |")
-    ap(r"| **6. Modal Openness / Branching** | `∃ w w' : State, Initiates s w w' p ∧ ∃ w'' : State, Initiates s w w'' q` | **REFUTED BY HOSTILE MODEL** | `ModelM2BranchingInitiation` (`counterfactual_branching_not_entails_means`) | Physical or modal non-determinacy in causal initiation branches the state space without forcing internal intentional representation `Means s q` of the non-actualized branch. |")
-    ap(r"| **7. Contrastive Explanation** | `ExplainsContrast s p q := Act s p ∧ Means s q ∧ Incompatible p q` | **REDUNDANT / RENAMED F1b** (if cognitive) / **REFUTED BY HOSTILE MODEL** (if objective) | `ModelM2BranchingInitiation` & `fullTheoryHostileInstance` | If defined with cognitive representation `Means s q`, existential contrastive agency is definitionally equivalent to F1b (`existential_contrastive_agency`). If defined purely objectively without `Means s q`, it is refuted by M2. |")
-    ap(r"| **8. Reasons-Responsive Agency** | `ReasonResponsiveAct s p r := Act s p ∧ Means s r ∧ (r → p)` | **REFUTED BY HOSTILE MODEL** | `hostileReasonResponsiveInstance` (`reason_responsiveness_not_entails_contrastive_agency`) | Acting for a sufficient reason in the actual world does not require occurrent representation of contrary reasons in thought. Counterfactual dispositions do not populate actual occurrent `Means`. |")
-    ap(r"| **9. Authorship / Settlement** | `Authors s p q := Act s p ∧ ¬ Act s q ∧ Incompatible p q` | **DERIVED** in pre-A14 Γ; **REFUTED BY HOSTILE MODEL** for F1b | `fullTheoryHostileInstance` (`authors_not_entails_rejected_horn_meaning`) | Raw authorship is derived in pre-A14 Γ (`act_implies_authors`), but fails to derive F1b because non-action on $\neg p$ does not imply meaning $\neg p$. 'Deliberate Authorship' (`Authors ∧ Means s q`) is **REDUNDANT / RENAMED F1b**. |")
-    ap(r"| **10. Deliberation** | `Deliberates s p q` vs `DeliberateChoice s p q` | **REDUNDANT / RENAMED F1b** (raw) / **STRICTLY STRONGER THAN F1b** (executive) | `hostileAgencyInstance` (`deliberateChoice_negation_decomposition`) | Raw deliberation (`deliberates_iff_chooses`) is definitionally identical to `Chooses`. Executive deliberation (`DeliberateChoice := Selects ∧ Means s q`) strictly entails F1b and is refuted by veridical models. |")
-    ap(r"| **11. Unrealized Possibilities** | `∃ s p, Means s p ∧ ¬p` (non-factive intentionality) | **REFUTED BY HOSTILE MODEL** | `UnrealizedPossibilityModel` (`unrealized_not_entails_freeWill`) | Representing a false or unrealized proposition allows error in thought, but does not force co-meaning mutually exclusive alternatives. An agent representing a falsehood does not thereby possess genuine choice among alternatives. |")
-    ap("")
-    ap("#### The Exact Mathematical Frontier of Genuine Choice")
-    ap("")
-    ap("In `formal/Logos/Choice.lean`, the exact mathematical structure required to close F1b is formally isolated:")
-    ap("")
-    ap("```lean")
-    ap("def MissingCognitiveHorn (s : Subject) (p : Prop) : Prop :=")
-    ap("  ∃ q : Prop, Means s q ∧ Incompatible p q")
-    ap("")
-    ap("theorem means_missing_horn_iff_chooses (s : Subject) (p : Prop) :")
-    ap("  Means s p ∧ MissingCognitiveHorn s p ↔ ∃ q, Chooses s p q")
-    ap("")
-    ap("theorem freeWill_iff_means_missing_horn :")
-    ap("  (∃ s : Subject, FreeWill s) ↔ ∃ s : Subject, ∃ p : Prop, Means s p ∧ MissingCognitiveHorn s p")
-    ap("")
-    ap("theorem act_missing_horn_implies_chooses (s : Subject) (p : Prop) :")
-    ap("  Act s p ∧ MissingCognitiveHorn s p → ∃ q, Chooses s p q")
-    ap("")
-    ap("theorem act_missing_horn_iff_chooses (s : Subject) (p : Prop) (hAct : Act s p) :")
-    ap("  MissingCognitiveHorn s p ↔ ∃ q, Chooses s p q")
-    ap("```")
-    ap("")
-    ap("The mathematical frontier is completely rigid:")
-    ap("1. **First Horn Provided by Act:** For any intentional act `Act s p`, pre-A14 Γ supplies the first cognitive horn: `Means s p` (via `act_decomposition`).")
-    ap("2. **Objective Incompatibility Provided by Logic:** For any proposition $p$, logic supplies an incompatible partner: $q := \\neg p$ with `Incompatible p (¬p)` (`incompatible_self_negation`).")
-    ap("3. **The Irreducible Missing Ingredient:** The entire axiomatic gap of F1b is precisely `MissingCognitiveHorn s p`, i.e., `∃ q, Means s q ∧ Incompatible p q`.")
-    ap("4. **No Pre-A14 Structure Supplies This Horn:** Neither causal initiation (`Initiates`), nor logical negation (`¬`), nor assertion (`Asserts`), nor judgment (`Judge`), nor authorship (`Authors`), nor non-factivity (`Means s p ∧ ¬p`) supplies `Means s q` for an incompatible $q$.")
-    ap("5. **Conclusion:** Any principle $B$ that derives F1b without goal-containment either introduces a substantive cognitive commitment strictly stronger than F1b (such as A13 or DoubtingDatum), or is equivalent to F1b under definitional expansion (such as A14∃ or Deliberates). No weaker or decoupled existing structure in Γ can derive genuine choice.")
-    ap("")
-    ap("### The Frontier Meta-Theorems (Relative Completeness, General Independence, and Contrastive Collapse)")
-    ap("")
-    ap("The frontier separating pre-A14 agency from genuine choice is not merely an empirical collection of failed attempts. "
-       "It is a **rigorous mathematical boundary** governing the formal language of Γ, established by three meta-theorems:")
-    ap("")
-    ap("#### 1. Claim A — Exact Relative Completeness Theorem")
-    ap("")
-    ap("Relative to the pre-A14 vocabulary and axioms, target F1b is provably equivalent to the conditional existence of the missing cognitive horn over the performative action datum:")
-    ap("")
-    ap("```lean")
-    ap("theorem f1b_iff_missing_cognitive_horn :")
-    ap("  ((∃ s : Subject, ∃ p : Prop, Act s p) → ∃ s : Subject, FreeWill s) ↔")
-    ap("  ((∃ s : Subject, ∃ p : Prop, Act s p) → ∃ s : Subject, ∃ p : Prop, Means s p ∧ MissingCognitiveHorn s p)")
-    ap("```")
-    ap("")
-    ap("- **Kernel Footprint:** `{Initiates, Means, State, Subject}` (VOCAB only; zero non-logical axioms).")
-    ap("- **Transparent Equivalence:** Because `FreeWill s ↔ ∃ p, Means s p ∧ MissingCognitiveHorn s p` holds by pure definition, "
-       "F1b is transparently the requirement that intentional action be accompanied by the mental co-representation of an incompatible alternative. "
-       "Closing F1b without supplying `MissingCognitiveHorn` is a logical impossibility.")
-    ap("")
-    ap("#### 2. Claim B — Parameterized Hostile Model Family (General Independence)")
-    ap("")
-    ap("In `formal/Logos/HostileSemantics.lean` (`ParameterizedHostileFamily`), the hostile countermodel is elevated from an isolated instance to a **reusable parameterized model family**:")
-    ap("")
-    ap("$$\\forall R : \\text{Bool} \\to \\text{Prop} \\to \\text{Prop},\\; \\text{AdmissiblePreA14Meaning}(R) \\land \\text{HornFreeMeaning}(R) \\implies \\text{PreA13FullTheory}(\\text{model}(R)) \\land \\neg \\text{F1b}$$")
-    ap("")
-    ap("- **Admissibility:** Any relation where subjects mean true performed contents (e.g. $R(\\text{true}, \\text{True})$).")
-    ap("- **Horn-Free Condition:** $\\forall s\\,p\\,q,\\; R(s,p) \\land R(s,q) \\implies \\neg \\text{Incompatible}(p,q)$ (i.e. the agent never simultaneously entertains mutually exclusive propositions).")
-    ap("- **Scope:** Captures veridical semantics ($R(s,p) := p$), single-content intentionality ($R(s,p) := (p = \\text{True})$), and any conjunctive belief filter.")
-    ap("- **Result:** Pre-A14 $\\Gamma \\nvdash \\text{F1b}$ across the entire family.")
-    ap("")
-    ap("#### 3. Claim C — Model-Transformation Preservation & Blocker Analysis")
-    ap("")
-    ap("In `formal/Logos/HostileSemantics.lean` (`ModelTransformationCollapse`), we define the generic semantic transformation:")
-    ap("")
-    ap("$$\\text{Collapse}(M) := M[\\text{Means} \\mapsto \\lambda s\\,p,\\; M.\\text{Means}(s,p) \\land p]$$")
-    ap("")
-    ap("1. **Universal Choice Destruction:** For EVERY model $M$, $\\forall s\\,p\\,q,\\; \\neg \\text{Chooses}(\\text{Collapse}(M), s, p, q)$ (`collapse_destroys_all_choice`).")
-    ap("2. **Blocker Analysis for Unconditioned $T_0$:** Does `Collapse(M)` preserve the unconditioned 12-axiom theory $T_0$ for arbitrary models? **NO.**")
-    ap("   - *Axiom 1 Blocker (`nonfactive_act_blocks_collapse`):* If all intentional acts in $M$ are non-factive ($p = \\text{False}$), `FullAct` collapses to false, refuting Axiom 1 (Act Datum).")
-    ap("   - *Axiom 2 Blocker (`nonfactive_plurality_blocks_collapse`):* If a person in $M$ only means non-factive contents, `FullPerson` collapses to false, refuting Axiom 2 (Plurality of Persons).")
-    ap("3. **Full Preservation Theorem on Factive Models:** On `FactivePreA14Theory` (where intentional acts and personhood meanings are realized factively), `ContrastiveCollapse` **provably preserves every one of the 12 pre-A14 axioms** (`collapse_preserves_preA14`).")
-    ap("4. **Canonical Witness:** `fullTheoryHostileInstance_is_factive` formally verifies that the canonical hostile instance is factive.")
-    ap("")
-    ap("#### 4. Claim D — Structural Impossibility for Contrastive-Blind Extensions")
-    ap("")
-    ap("Let $B$ be any extension of the theory satisfying the model-preserving blindness condition:")
-    ap("$$\\text{PreA14ContrastiveBlind}(B) := \\forall I,\\; \\text{FactivePreA14Theory}(I) \\land B(I) \\implies B(\\text{ContrastiveCollapse } I)$$")
-    ap("")
-    ap("The kernel formally proves the model-theoretic impossibility theorem (`blind_extension_cannot_derive_f1b`):")
-    ap("")
-    ap("$$\\text{PreA14ContrastiveBlind}(B) \\land \\text{PreA14Consistent}(B) \\implies \\exists M,\\; \\text{PreA13FullTheory}(M) \\land B(M) \\land (\\exists s\\,p,\\; \\text{FullAct } M\\,s\\,p) \\land \\neg (\\exists s,\\; \\text{FullFreeWill } M\\,s)$$")
-    ap("")
-    ap("> **Exact Impossibility:** $\\text{Pre-A14 }\\Gamma + B \\nvdash \\text{F1b}$. Every consistent contrastive-blind extension admits a choice-free model satisfying the entire pre-A14 theory.")
-    ap("")
-    ap("#### 5. Claim E — Expressivity Boundary & Non-Definability Theorem")
-    ap("")
-    ap("In `formal/Logos/HostileSemantics.lean` (`ExpressivityBoundary`), we construct the inductive syntax `BlindFormula (Subject State Entity : Type)` decoupled from concrete model instances, with constructors for:")
-    ap("- Propositional truth connectives (`top`, `bot`, `not`, `and`, `or`, `imp`)")
-    ap("- Causal state transitions: `causal (s : Subject) (w w' : State) (p : Prop)` (`Initiates`)")
-    ap("- Truthmaker grounding: `ground (e : Entity) (p : Prop)` (`Ground`)")
-    ap("- Objective logical incompatibility: `incomp (p q : Prop)` (`Incompatible`)")
-    ap("- Factive intentional meaning: `factiveMeans (s : Subject) (p : Prop)` (`Means s p ∧ p`)")
-    ap("")
-    ap("The kernel machine-checks two fundamental expressivity results:")
-    ap("1. **Invariance Theorem (`blind_formula_collapse_invariant`):** By structural induction on formulas, every $\\varphi \\in \\text{BlindFormula}$ evaluates identically in any model and in its contrastive collapse:")
-    ap("$$\\forall I\\,\\varphi,\\; \\text{eval } I\\ \\varphi \\iff \\text{eval } (\\text{ContrastiveCollapse } I)\\ \\varphi$$")
-    ap("2. **Non-Definability of Genuine Choice (`no_blind_formula_defines_choice`):** In a model $I_{\\text{choice}}$ where genuine choice occurs, any formula defining `Chooses` would evaluate to true in $I_{\\text{choice}}$, hence true in $\\text{Collapse}(I_{\\text{choice}})$, contradicting `collapse_destroys_all_choice`. Thus:")
-    ap("$$\\neg \\exists \\varphi \\in \\text{BlindFormula},\\; \\text{eval } I\\ \\varphi \\iff \\text{FullChooses } I\\ s\\ p\\ q$$")
-    ap("3. **Non-Definability of Free Will (`no_blind_formula_defines_freeWill`):** No formula in `BlindFormula` can define `FreeWill` or target F1b across models.")
-    ap("")
-    ap("#### 6. Adversarial Self-Attack & Loopholes Analysis")
-    ap("")
-    ap("- **Loophole 1: Quantifier Permutation:** Can an existential action datum $\\exists s\\,p, Act(s,p)$ force choice through an external subject? Refuted: In single-agent models (`CountermodelVeridicalMeaning.Single`), no external subject exists.")
-    ap("- **Loophole 2: Non-Factivity without Choice:** Can allowing false beliefs force choice? Refuted: `UnrealizedPossibilityModel` demonstrates an agent meaning a falsehood (`Means () False`) with zero genuine choice.")
-    ap("- **Loophole 3: Disjunctive / Negated Actions:** Can an agent act on a disjunction $p \\lor q$? Refuted: Acting on $p \\lor q$ provides `Means s (p ∨ q)`, not `Means s p ∧ Means s q`.")
-    ap("- **Loophole 4: Performative Retorsion / Self-Denial:** Refuted: `SelfDenialOfChoiceModel` and `DelusionalSelfChoiceModel` prove that self-referential denial of choice is consistent with zero genuine choice.")
-    ap("")
-    ap("#### 5. Architectural Synthesis: The Frontier Diagram")
-    ap("")
-    ap("```text")
-    ap("=========================================================================================")
-    ap("                           THE FRONTIER THEOREM                                          ")
-    ap("=========================================================================================")
-    ap("                                                                                         ")
-    ap("    Performative Intentional Action (Act s p)                                            ")
-    ap("            │                                                                            ")
-    ap("            ├──► Intentional Meaning: Means s p                   (Layer 1 - PROVEN)     ")
-    ap("            ├──► Causal Initiation: Initiates s w w' p            (Layer 0 - PROVEN)     ")
-    ap("            ├──► Objective Incompatibility: Incompatible p (¬p)   (Layer 2 - PROVEN)     ")
-    ap("            ├──► Selection / Settlement: Selects / Authors        (Layer 3 - PROVEN)     ")
-    ap("            └──► Judgment / Truth / Normativity / Modality        (Layer 3+ - PROVEN)    ")
-    ap("                           │                                                             ")
-    ap("                           X  ◄─── CONTRASTIVE COLLAPSE BARRIER                          ")
-    ap("                           │       (Destroyed by Collapse(M); Underdetermined by T₀)     ")
-    ap("                           │                                                             ")
-    ap("                Cognitive Representation of an Incompatible Alternative                   ")
-    ap("                (MissingCognitiveHorn s p := ∃ q, Means s q ∧ Incompatible p q)          ")
-    ap("                           │                                                             ")
-    ap("                           ▼                                                             ")
-    ap("                     Genuine Choice (Chooses s p q)               (Layer 4 - A14)        ")
-    ap("                           │                                                             ")
-    ap("                           ▼                                                             ")
-    ap("                       Free Will (FreeWill s)                     (Target F1b)           ")
-    ap("=========================================================================================")
-    ap("```")
-    ap("")
-    ap("### Candidate Layer Beneath A14")
-    ap("")
-    ap("Current status:")
-    ap("")
-    ap("```text")
-    ap("  Objective incompatibility")
-    ap("          ↓")
-    ap("  [MISSING COGNITIVE RELATION]")
-    ap("          ↓")
-    ap("  Cognitive alternative representation")
-    ap("          ↓")
-    ap("  Chooses")
-    ap("          ↓")
-    ap("  FreeWill")
-    ap("```")
-    ap("")
-    ap("The candidate cognitive relation is NOT yet part of Γ.")
-    ap("")
-    ap("Its logical strength relative to A14 is currently OPEN.")
-    ap("")
-    ap("---")
-    ap("")
-    ap("## O Programa de Teologia Condicional (Γ + A14 ⊢ ?)")
-    ap("")
-    ap("Adotando $A14$ (`AxIntentionalChoice`: $Act(s,p) \\to \\exists q, Chooses(s,p,q)$) como o único novo compromisso semântico substantivo, "
-       "investigamos formalmente no módulo `formal/Logos/ConditionalTheology.lean` o que o sistema axiomático existente de $\\Gamma$ é capaz de derivar em direção à teologia filosófica "
-       "(fundamento último, personalidade, pluralidade, amor, trindade, encarnação, criação).")
-    ap("")
-    ap("### 1. Fechamento de Agência e Limites de FreeWill")
-    ap("")
-    ap("O fechamento dedutivo imediato de A14 estabelece:")
-    ap("$$Act(s,p) \\implies Chooses(s,p,q) \\implies FreeWill(s) \\land FreeSubject(s) \\land IntentionalSubject(s)$$")
-    ap("(Na ontologia unificada de $\\Gamma$, $Person(s) := FreeSubject(s) \\leftrightarrow FreeWill(s)$, sendo a pessoalidade decorrência constitutiva do livre-arbítrio com 0 axiomas substantivos).")
-    ap("")
-    ap("No entanto, o teste adversarial contra 8 dimensões de agência prova que $FreeWill$ **NÃO acarreta** nenhuma das seguintes propriedades (todas separadas por contramodelos máquina-verificados):")
-    ap("1. **Racionalidade:** $FreeWill \\nvdash ReasonsFor$ (`freewill_not_entails_rationality`). Agentes livres podem escolher sem razões explicativas.")
-    ap("2. **Normatividade:** $FreeWill \\nvdash ActsCorrectly$ (`freewill_not_entails_normativity`). A liberdade permite o erro e a infração normativa.")
-    ap("3. **Valor Interpessoal:** $FreeWill \\nvdash AffectsValue$ (`freewill_not_entails_value`). Agência livre é consistente com estados proposicionais indiferentes.")
-    ap("4. **Teleologia:** $FreeWill \\nvdash HasGoal$ (`freewill_not_entails_teleology`). Escolhas deliberadas podem ser pontuais e espontâneas sem meta final.")
-    ap("5. **Subjetividade Reflexiva:** $FreeWill \\nvdash KnowsOwnAct$ (`freewill_not_entails_reflexive_subjectivity`). A escolha de primeira ordem não força auto-representação transcendental de ordem superior.")
-    ap("6. **Relacionalidade:** $FreeWill \\nvdash \\exists s_2, s_1 \\neq s_2$ (`freewill_not_entails_relationality`). Um agente livre pode existir em isolamento solipsista absoluto.")
-    ap("7. **Persistência / Imortalidade:** $FreeWill \\nvdash Persists$ (`freewill_not_entails_persistence`). Agentes livres podem ser puramente efêmeros (existir e escolher em um único instante temporal/causal).")
-    ap("8. **Necessidade:** $FreeWill \\nvdash NecSubject$ (`freewill_not_entails_necessity`). A vontade livre é compatível com contingência ontológica total.")
-    ap("")
-    ap("### 2. A Arquitetura de Fundamentação sob A14 (Obstrução da Cadeia Infinita)")
-    ap("")
-    ap("Na cadeia de fundamentação de verdades necessárias:")
-    ap("$$T(p) \\implies \\exists e, Ground(e,p) \\implies \\exists e, Ground(e,p) \\land Nec(e) \\stackrel{?}{\\implies} UltimateGround(u)$$")
-    ap("- A14 **não elimina** a regressão infinita de fundamentação (`a14_not_eliminates_infinite_ground_chain`). A agência livre de sujeitos contingentes não impõe boa-ordenação ou finitude na ordem explicativa ontológica.")
-    ap("- Logo, $FreeWill \\nvdash UltimateGround$ (`free_agency_not_entails_ultimate_ground`).")
-    ap("")
-    ap("### 3. Independência do Fundamento Último Pessoal")
-    ap("")
-    ap("Mesmo que se postule a existência de um fundamento último ($UltimateGround(u)$), a adição de A14 **não força** que o fundamento último seja pessoal:")
-    ap("$$A14 + UltimateGround \\nvdash Personal(u)$$")
-    ap("Demonstrado formalmente em `a14_plus_ultimate_ground_not_entails_personal_ultimate_ground`: um fundamento último impessoal (substrato cósmico) é plenamente compatível com a existência de criaturas contingentes dotadas de livre-arbítrio.")
-    ap("")
-    ap("### 4. Independência de Pluralidade e Amor")
-    ap("")
-    ap("1. **Pluralidade:** $A14 \\nvdash Plurality$ (`a14_not_entails_plurality`). O contramodelo `SolitaryFreeAgentModel` prova que a agência livre não deriva um segundo sujeito sem o compromisso metafísico `AxTwoSubjects`.")
-    ap("2. **Amor:** $A14 + Plurality \\nvdash Loves$ (`free_agency_and_plurality_not_entails_love`). Um universo com múltiplos agentes livres pode ser mutuamente hostil, maldoso ou estéril. O amor não decorre analiticamente da liberdade.")
-    ap("")
-    ap("### 5. Estruturas Teológicas Neutras: Trindade, Encarnação e Criação")
-    ap("")
-    ap("Definindo alvos estruturais neutros (sem contrabando dogmático por definição):")
-    ap("1. **Trindade (`TrinitarianStructure`):** Exige 3 centros pessoais distintos em 1 realidade divina comum com relações mútuas eternas. Separado pelo modelo binitariano (`preceding_theory_not_entails_trinity`): uma teologia com 2 pessoas divinas em mútuo amor satisfaz plenamente $\\Gamma + A14$, tornando a Trindade estritamente indemonstrável sem axioma triádico.")
-    ap("2. **Encarnação (`IncarnationalStructure`):** Exige que um mesmo sujeito pessoal una uma natureza divina e uma natureza humana. Separado pelo modelo unincarnado (`preceding_theory_not_entails_incarnation`): a transcendência divina não acarreta ontologicamente a união hipostática.")
-    ap("3. **Criação Contingente (`CreationStructure`):** Separado pelo modelo divino acósmico (`necessary_ground_not_entails_contingent_creation`): um Deus necessário e autossuficiente pode existir sem criar qualquer universo ou sujeito contingente. A realidade necessária não força criação contingente.")
-    ap("")
-    ap("### 6. O Grafo de Dependência Teológica Formal")
-    ap("")
-    ap("```text")
-    ap("=========================================================================================")
-    ap("                 GRAFO DE DEPENDÊNCIA TEOLÓGICA (Γ + A14)                                 ")
-    ap("=========================================================================================")
-    ap("                                                                                         ")
-    ap("     [Act s p]                                                                           ")
-    ap("         │                                                                               ")
-    ap("         ▼  (A14: AxIntentionalChoice - SEMANTIC)                                        ")
-    ap("     [Chooses s p q]                                                                     ")
-    ap("         │                                                                               ")
-    ap("         ▼  (DEFINITIONAL)                                                               ")
-    ap("     [FreeWill s]                                                                        ")
-    ap("         │                                                                               ")
-    ap("         ├──X (COUNTERMODEL: freewill_not_entails_rationality)      ──► [Rationality]    ")
-    ap("         ├──X (COUNTERMODEL: freewill_not_entails_normativity)      ──► [Normativity]    ")
-    ap("         ├──X (COUNTERMODEL: freewill_not_entails_teleology)        ──► [Teleology]      ")
-    ap("         ├──X (COUNTERMODEL: freewill_not_entails_relationality)    ──► [Relationality]  ")
-    ap("         └──X (COUNTERMODEL: freewill_not_entails_necessity)        ──► [Necessity]      ")
-    ap("                                                                                         ")
-    ap("     [Necessary Truth (T p)]                                                             ")
-    ap("         │                                                                               ")
-    ap("         ▼  (A4/A6: AxGlobalGround - PROVEN)                                             ")
-    ap("     [Some Ground (Ground e p)]                                                          ")
-    ap("         │                                                                               ")
-    ap("         ▼  (Modal: T7_necessaryReality - PROVEN)                                        ")
-    ap("     [Necessary Ground (Ground e p ∧ Nec e)]                                             ")
-    ap("         │                                                                               ")
-    ap("         X  ◄─── (COUNTERMODEL: a14_not_eliminates_infinite_ground_chain)                  ")
-    ap("         │                                                                               ")
-    ap("     [Ultimate Ground]                                                                   ")
-    ap("         │                                                                               ")
-    ap("         X  ◄─── (COUNTERMODEL: a14_plus_ultimate_ground_not_entails_personal_ultimate)      ")
-    ap("         │                                                                               ")
-    ap("     [Personal Ultimate Ground]                                                          ")
-    ap("         │                                                                               ")
-    ap("         X  ◄─── (METAPHYSICAL: A10 AxTwoSubjects required; Solitary Model blocks)       ")
-    ap("         │                                                                               ")
-    ap("     [Plurality of Persons]                                                              ")
-    ap("         │                                                                               ")
-    ap("         X  ◄─── (METAPHYSICAL: AxPersonsAffect required; Malicious Model blocks)        ")
-    ap("         │                                                                               ")
-    ap("     [Mutual Divine Love]                                                                ")
-    ap("         │                                                                               ")
-    ap("         X  ◄─── (COUNTERMODEL: Binitarian Model blocks Trinity)                         ")
-    ap("         │                                                                               ")
-    ap("     [Trinitarian Structure (3 Persons)]                                                 ")
-    ap("         │                                                                               ")
-    ap("         ├──X (COUNTERMODEL: Acosmic Model blocks) ──► [Contingent Creation]             ")
-    ap("         │                                                    │                          ")
-    ap("         └────────────────────────────────────────────────────X (Unincarnate Model)     ")
-    ap("                                                              │                          ")
-    ap("                                                              ▼                          ")
-    ap("                                                     [Incarnation]                       ")
-    ap("=========================================================================================")
-    ap("```")
-    ap("")
-    ap("### 7. Síntese do Balanço Axiomático (Single-Axiom Discipline)")
-    ap("")
-    ap("- **O que A14 realmente compra:** A14 fecha formalmente o salto de agência performativa para livre-arbítrio (`Act → Chooses → FreeWill`), garantindo a existência de um sujeito livre (`FreeSubject`) e de uma pessoa moral (`Person`).")
-    ap("- **O que A14 NÃO compra:** A14 não compra fundamentação última bem-ordenada, não compra personalidade do absoluto, não força pluralidade, não força amor mútuo, não deriva a Trindade, não força a criação contingente e não deriva a Encarnação.")
-    ap("- **A Teologia de $\\Gamma$:** É uma teologia rigorosamente condicional, estratificada e honesta. Cada passo além da liberdade requer explicitamente ou uma nova ponte metafísica (como `AxTwoSubjects` e `AxPersonsAffect`) ou permanece estritamente indecidível/independente da lógica interna da agência.")
-    ap("")
-    ap("---")
-    ap("")
-    ap("## O Passe de Endurecimento Ontológico de Γ (Ontology Hardening)")
-    ap("")
-    ap("Executamos um passe agressivo de **endurecimento ontológico** sobre $\\Gamma$, eliminando atalhos definicionais "
-       "que carregavam conteúdo metafísico substantivo disfarçado de analiticidade, sob a regra mandatória:")
-    ap("")
-    ap("> **Prefira perder um teorema a esconder uma premissa.**")
-    ap("")
-    ap("### 1. Desconstrução dos Atalhos Eliminados")
-    ap("")
-    ap("1. **`ExistsAt` (Existência Relativa a Mundos vs. Necessidade Degenerada):**")
-    ap("   - *Atalho anterior:* `ExistsAt w (Entity.ofSubject _) := True` tornava qualquer sujeito atuante trivialmente necessário em todos os mundos por pura definição analítica.")
-    ap("   - *Endurecimento:* Substituído por existência genuinamente sensível ao mundo (`SubjectExistsAt w s`, `EntityExistsAt w e`). Sujeitos atuantes na atualidade não existem automaticamente em mundos contrafatuais.")
-    ap("   - *Impacto:* Os teoremas C77 (`necessaryPersonExists`) e C92 (`necessary_entity_exists`) a partir do ato performativo foram **demovidos e refutados por contramodelo** (`ContingentAgencyModel`: `act_not_entails_necessary_subject` e `act_not_entails_necessary_entity`). A necessidade ontológica não nasce mais de um ato contingente.")
-    ap("")
-    ap("2. **`Person` (Sujeito Intencional vs. Livre-Arbítrio e Pessoalidade):**")
-    ap("   - *Atalho anterior:* `Person s := Agent s ∧ Rational s ∧ Intentional s` com `Agent := True` e `Rational := True`, fazendo com que qualquer registro intencional fosse nominalmente uma 'pessoa'.")
-    ap("   - *Endurecimento e Unificação:* Distinção entre o mero sujeito intencional (`IntentionalSubject s := ∃ p, Means s p`), a vontade numericamente individuada (`subjectWill s`), e a Pessoa como o sujeito dotado de livre-arbítrio (`Person s := FreeSubject s ↔ FreeWill s`).")
-    ap("   - *Impacto:* O ato intencional singular não é chamado de pessoa antes da deliberação; a pessoalidade segue com necessidade dedutiva plena a partir do Livre-Arbítrio derivado da retorsão (`free_subject_is_person`, 0 axiomas substantivos).")
-    ap("")
-    ap("3. **Relações Interpessoais (`Affects`, `Helps`, `Harms`, `Loves`):**")
-    ap("   - *Atalho anterior:* `Affects s t := s ≠ t`, `Helps := Affects`, `Harms := False`, o que tornava o amor uma consequência analítica imediata da mera distinção entre dois sujeitos ($s \\neq t \\implies Loves(s,t)$).")
-    ap("   - *Endurecimento:* As relações de afetação, ajuda e dano foram endurecidas em termos primitivos independentes (`BearingOf s t`), preservando a definição constitutiva de amor como benevolência direcionada (`Loves s t := Helps s t ∧ ¬ Harms s t`).")
-    ap("   - *Impacto:* A derivação automática de amor a partir da pluralidade foi **completamente destruída**. Dois sujeitos distintos não se afetam, não se ajudam e não se amam analiticamente (`DisconnectedPluralityModel`: `plurality_not_entails_affects`, `plurality_not_entails_helps`, `plurality_not_entails_love`, `freewill_and_plurality_not_entails_love`). T13 e T14 tornam-se estritamente condicionais a princípios relacionais explícitos.")
-    ap("")
-    ap("4. **Ataque aos Quatro Grandes Axiomas (A3, A4, A6, A7):**")
-    ap("   - **A3 (Truthmaker):** A instanciação atômica (`groundPrinciple_atom`) não deriva a fundamentação existencial de fórmulas compostas sem indução estrutural (`AtomicVsFormulaTruthmakerModel`).")
-    ap("   - **A4 (Global Ground):** A fundamentação mundanal ordinária não acarreta um fundamento uniforme necessário comum a todos os mundos (`CountermodelWorldwiseTruthmaking`). A4 permanece estritamente irredutível como compromisso semântico.")
-    ap("   - **A6 (Pluralidade):** O cogito performativo, a bivalência e o livre-arbítrio (sob A14) são plenamente consistentes com um modelo solitário de agente único (`SolitaryChoiceModel`). A6 permanece estritamente irredutível como compromisso META.")
-    ap("   - **A7 (Personal Ground):** A fundamentação de uma propriedade pessoal não transfere o tipo ontológico para o fundamento (`CountermodelImpersonalUltimateGround`). A7 permanece estritamente irredutível como compromisso META.")
-    ap("")
-    ap("### 2. Tabela de Auditoria Compacta (Ontology Hardening Ledger)")
-    ap("")
-    ap("| Área Ontológica | Formulação Antiga (Degenerada) | Formulação Endurecida (Robusta) | Teorema Antigo Sobrevive? | Novo Axioma Adicionado? | Status Epistêmico / Contramodelo |")
-    ap("| :--- | :--- | :--- | :--- | :--- | :--- |")
-    ap("| **Person** | `Agent ∧ Rational ∧ Intentional` (`Agent, Rational := True`) | `IntentionalSubject s := ∃p, Means s p`; `Person s := FreeSubject s` | **UNIFICADO / DERIVADO** (`Act → IntentionalSubject` e `FreeSubject → Person` provados) | **NÃO** (0 axiomas) | `DEFINITIONAL` (`free_subject_is_person`, 0 axiomas substantivos) |")
-    ap("| **ExistsAt** | `ExistsAt w (Entity.ofSubject _) := True` (necessidade analítica) | `SubjectExistsAt w s` sensível a mundos (`w = actualWorld`) | **DEMOVIDO** (C77 e C92 refutados; necessidade do ato cai) | **NÃO** (0 axiomas) | `COUNTERMODEL` (`ContingentAgencyModel`: `act_not_entails_necessary_subject`) |")
-    ap("| **Ground (A3)** | Truthmaker existencial irrestrito para todas as fórmulas | Fundamentação atômica (`groundPrinciple_atom`) + semântica composicional | **AUDITADO / REDUZIDO** (átomos fundamentados; compostos livres) | **NÃO** (A3 auditado) | `SEMANTIC` / `AtomicVsFormulaTruthmakerModel` |")
-    ap("| **GlobalGround (A4)** | Troca de quantificadores $\\forall w \\exists e \\to \\exists e \\forall w$ | Fundamentação mundanal vs. fundamento necessário uniforme | **IRREDUTÍVEL** (fundamento uniforme não dedutível de mundanal) | **NÃO** (A4 preservado) | `SEMANTIC` / `CountermodelWorldwiseTruthmaking` |")
-    ap("| **Plurality (A6)** | `AxTwoSubjects` decorrente de certo/errado | Pluralidade genuína irredutível do agente único | **IRREDUTÍVEL** (agência e escolha não forçam segundo sujeito) | **NÃO** (A6 mantido como META) | `METAPHYSICAL` / `SolitaryChoiceModel`, `CountermodelUnitPlurality` |")
-    ap("| **Love / Value** | `Affects := s ≠ t`, `Helps := Affects`, `Harms := False` | `BearingOf s t` independente; `Loves := Helps ∧ ¬Harms` | **DEMOVIDO** (Amor não decorre da pluralidade; T13/T14 condicionais) | **NÃO** (0 axiomas) | `COUNTERMODEL` (`DisconnectedPluralityModel`: `plurality_not_entails_love`) |")
-    ap("")
-    ap("> **Conclusão:** O sistema $\\Gamma$ agora repousa sobre uma base axiomática limpa, livre de atalhos definicionais ilícitos. A necessidade, a pessoalidade substantiva, a pluralidade e o amor mútuo são explicitamente reconhecidos pelo que são: exigências ontológicas de alto preço que jamais devem ser mascaradas sob definições analíticas triviais.")
-    ap("")
-    ap("---")
-    ap("")
-    ap("## O Programa de Expansão Retorsiva de Γ (Retorsion Expansion Pass)")
-    ap("")
-    ap("Sob a diretriz metodológica central:")
-    ap("> **Para toda afirmação substantiva que Γ aceita, não basta testar se ela é derivável. Ataque também sua negação. Verifique se a negação é performativa, semântica, lógica ou metafisicamente auto-refutável.**")
-    ap("> **Prefira perder um teorema a esconder uma premissa. Uma retorsão tem êxito somente quando a negação genuinamente não pode ser coerentemente sustentada.**")
-    ap("")
-    ap("### 1. Taxonomia e Estratégia Retorsiva de Primeira Classe")
-    ap("")
-    ap("- **Reductio Ordinário:** Assume $\\neg P$, deriva `False` num modelo arbitrário (`by_contra`).")
-    ap("- **Retorsão Performativa:** Assume $\\neg P$ como uma posição cognitiva ou ato asserido real, analisa os compromissos ontológicos e semânticos indispensáveis para executar ou sustentar esse próprio ato, e demonstra que o próprio ato de negação pressupõe ou instancia $P$.")
-    ap("")
-    ap("Fontes rastreadas da contradição retorsiva:")
-    ap("1. `RETORSION / LOGICAL`: O ato de asserção viola a coerência lógica bivalente ($T(\\text{NoTruth}) \\implies False$).")
-    ap("2. `RETORSION / DEFINITIONAL`: O ato de asserir a negação instancia analiticamente o conceito negado (asserir `NoAct` executa um `Act`).")
-    ap("3. `RETORSION / SEMANTIC`: A verdade pretendida pela negação exige uma ponte semântica que ela mesma rejeita (ou revela limitação expressiva).")
-    ap("4. `RETORSION / METAPHYSICAL`: A posição sustentada anula as condições ontológicas do sujeito que julga.")
-    ap("")
-    ap("### 2. A Campanha Retorsiva Big-O / Big-S (Ontologia de Sujeito Intencional)")
-    ap("")
-    ap("Reformulamos a campanha retorsiva em torno do conceito ontológico fundamental de **dependência de um Sujeito Intencional** (`IntentionalSubject`), desvinculando a definição de Subjetividade de Pessoa e Livre-Arbítrio:")
-    ap("")
-    ap("```text")
-    ap("Subject")
-    ap("  └── IntentionalSubject")
-    ap("")
-    ap("Subjective x  :=  x depende de um Sujeito Intencional (DependsOnIntentional x)")
-    ap("Objective x   :=  x não depende de um Sujeito Intencional (¬ DependsOnIntentional x)")
-    ap("```")
-    ap("")
-    ap("- **Definição de Dependência Intencional:** `DependsOnIntentional x := ∃ s : Subject, IntentionalSubject s ∧ DependsOn x s`. Um item é subjetivo sse inere ontologicamente em um sujeito que significa conteúdos proposicionais.")
-    ap("- **Dependência Ontológica:** Primitivo intensional `DependsOn x s` (**A15**, `Tag: VOCAB`).")
-    ap("- **Disjunção Lógica Pura:** A disjunção entre Objetividade e Subjetividade (`objective_and_subjective_disjoint`) é um **teorema da lógica pura** ($\\neg P \\land P \\implies False$).")
-    ap("- **Exaustão Clássica:** `Objective x ∨ Subjective x` decorre do Terceiro Excluído clássico.")
-    ap("- **Cadeia Construtiva:** A inferência `Subjective x → ∃ s, IntentionalSubject s` é puramente lógica e definicional.")
-    ap("")
-    ap("Axiomas constitutivos da campanha retorsiva:")
-    for base in ["DependsOn", "universal_thesis_claims_objectivity", "transcendental_reflection_intentional"]:
-        _CTX["ax_shown"].add(base)
-        r = _REGISTRY.get(base, {})
-        aid = AX_ID.get(base, "?")
-        ap(f"- **Axiom {aid} · `{base}` (`{r.get('tag', '?')}`):** {r.get('gloss', '—')}")
-    ap("")
-    ap("1. **Retorsão contra a Subjetividade Absoluta (Big-S):**")
-    ap("   - Seja $ES := \\forall x, Subjective(x)$ (\"Tudo depende de um Sujeito Intencional\").")
-    ap("   - Reivindica validade objetiva como tese universal sobre a realidade (independência de sujeito intencional): `universal_thesis_claims_objectivity` (**A16** / `SEM`).")
-    ap("   - Pelo lema de auto-inclusão (`everything_subjective_self_applies`), $ES$ classifica a si mesma como dependente de sujeito intencional: $Subjective(ES)$.")
-    ap("   - Pela contradição definicional entre $Objective$ e $Subjective$, temos $\\neg EverythingSubjective$ (`not_everything_subjective`, 0 premissas).")
-    ap("   - Consequência existencial positiva: **$\\exists x, Objective(x)$** (`exists_objective_of_retorsion`, testemunhado pela própria tese universal).")
-    ap("")
-    ap("2. **Retorsão contra a Objetividade Absoluta (Big-O):**")
-    ap("   - Seja $EO := \\forall x, Objective(x)$ (\"Nada depende de um Sujeito Intencional\").")
-    ap("   - A reflexão transcendental sobre a objetividade universal depende de um sujeito intencional pensante: `transcendental_reflection_intentional` (**A17** / `SEM`).")
-    ap("   - Essa ponte semântica estabelece que a própria formulação de $EO$ depende de um sujeito intencional: $Subjective(EO)$.")
-    ap("   - Pelo lema de auto-inclusão (`everything_objective_self_applies`), $EO$ dita que ela mesma é objetiva: $Objective(EO)$.")
-    ap("   - Pela contradição definicional, temos $\\neg EverythingObjective$ (`not_everything_objective`, 0 premissas).")
-    ap("   - Consequência existencial positiva: **$\\exists x, Subjective(x)$** (`exists_subjective_of_retorsion`).")
-    ap("")
-    ap("3. **Dedução do Teorema Central: Existência do Sujeito Intencional via Retorsão:**")
-    ap("   - Da testemunha positiva $\\exists x, Subjective(x)$, decorre imediatamente:")
-    ap("     $$\\exists s : Subject, \\; IntentionalSubject(s) \\quad (\\text{`exists_intentional_subject_of_retorsion`})$$")
-    ap("")
-    ap("```text")
-    ap("=========================================================================================")
-    ap("TEOREMA CENTRAL — EXISTÊNCIA DO SUJEITO INTENCIONAL VIA RETORSÃO BIG-O / BIG-S")
-    ap("=========================================================================================")
-    ap("A campanha retorsiva sob a ontologia de Dependência Intencional estabelece formalmente em Lean:")
-    ap("")
-    ap("    exists_intentional_subject_of_retorsion : ∃ s : Subject, IntentionalSubject s")
-    ap("")
-    ap("Cadeia Construtiva Transparente:")
-    ap("    Retorsão Big-O  ──→  ∃ x, Subjective x  ──→  ∃ s, IntentionalSubject s")
-    ap("")
-    ap("Footprint Axiomático Auditado pelo Kernel:")
-    ap("    {Means, Subject, DependsOn, transcendental_reflection_intentional}")
-    ap("")
-    ap("• RIGOROSAMENTE INDEPENDENTE de Person, FreeWill, Chooses, Act e A14.")
-    ap("• Não depende de Initiates, State, Cogito, ou escolha moral deliberada.")
-    ap("• A retorsão atinge legitimamente o Sujeito Intencional e estanca ANTES de Pessoa / Livre-Arbítrio.")
-    ap("=========================================================================================")
-    ap("```")
-    ap("")
-    ap("> **Significado Conceitual Preciso:** A rota Big-O / Big-S estabelece a existência de um centro de perspectiva intencional (`IntentionalSubject`) independentemente de `Act`. Ela não assume Livre-Arbítrio nem Pessoalidade, mantendo estes como conceitos a jusante.")
-    ap("")
-    ap("#### Fronteira Conceitual e Teoremas de Separação")
-    ap("")
-    ap("A arquitetura torna a fronteira explícita:")
-    ap("```text")
-    ap("Retorsão Big-O / Big-S")
-    ap("   │")
-    ap("   ▼  [PROVADO - exists_intentional_subject_of_retorsion]")
-    ap("IntentionalSubject")
-    ap("   │")
-    ap("   X  [BLOQUEADO - DeterministicTranscendentalSubjectModel]")
-    ap("   ▼")
-    ap("Person (FreeWill)")
-    ap("```")
-    ap("")
-    ap("#### Auditoria Adversarial: A Fraqueza Inerente e o Teste do \"Porco Voador\"")
-    ap("")
-    ap("Submetemos a campanha retorsiva ao teste adversarial definitivo: **pode a retorsão descobrir o Livre-Arbítrio sem já assumi-lo na premissa retorsiva A17?**")
-    ap("")
-    ap("1. **Variantes Enfraquecidas da Premissa Retorsiva:**")
-    ap("   - *Dependência de Sujeito Nu (`DependsOnBareSubject`):* Se a reflexão transcendental exige apenas que a tese dependa de algum sujeito (`∃ s, DependsOn EO s`), a retorsão deriva apenas a existência do sort `∃ s : Subject, True`, sem qualquer intencionalidade ou agência.")
-    ap("   - *Dependência de Sujeito Intencional (`DependsOnIntentional`):* Se a reflexão exige que a tese dependa de um sujeito intencional (`∃ s, IntentionalSubject s ∧ DependsOn EO s`), a retorsão deriva legitimamente `∃ s : Subject, IntentionalSubject s` (`weakened_retorsion_derives_intentional_subject`).")
-    ap("")
-    ap("2. **O Modelo Hostil Permanente (`DeterministicTranscendentalSubjectModel`):**")
-    ap("   Construímos em Lean um modelo concreto com `0 axiomas` onde um sujeito puramente mecânico/determinista reflete intencionalmente sobre a tese transcendental, satisfazendo plenamente a teoria retorsiva enfraquecida, enquanto `FreeWill` e `Person` são uniformemente falsos:")
-    ap("   - Provamos `deterministic_transcendental_subject_refutes_freewill`: **a retorsão enfraquecida NÃO deriva Livre-Arbítrio**.")
-    ap("   - Provamos `deterministic_transcendental_subject_refutes_person`: **a retorsão enfraquecida NÃO deriva Pessoalidade**.")
-    ap("")
-    ap("3. **O Teste de Estresse do \"Porco Voador\" (Arbitrary-Object Stress Test):**")
-    ap("   Para demonstrar o vício de petição de princípio de injetar `Person / FreeWill` na premissa transcendental A17, introduzimos o predicado arbitrário `WingedPig : Subject → Prop` e definimos `SubjectivePig x := ∃ s, WingedPig s ∧ DependsOn x s`.")
-    ap("   - Provamos `winged_pig_derived_of_pig_reflection`: se postulamos que a reflexão depende de um porco voador, a retorsão \"prova\" a existência de um porco voador!")
-    ap("   - Provamos `pig_retorsion_exposes_premise_smuggling` (`0 axiomas`): a reflexão transcendental não força predicados externos arbitrários.")
-    ap("")
-    ap("4. **Decomposição Sistemática e Escada Dedutiva de A17:**")
-    ap("   Decompomos o axioma forte A17 em quatro alvos intermediários explícitos:")
-    ap("   - **(A17a) `∃ s, IntentionalSubject s`:** Existência de sujeito intencional (derivável via Rota B).")
-    ap("   - **(A17b) `∃ s, Means s EO ∧ DependsOn EO s`:** Mesma testemunha que significa e fundamenta a tese universal.")
-    ap("   - **(A17c) `∃ s, Person s`:** Existência de uma pessoa.")
-    ap("   - **(A17d) `∃ s, FreeWill s`:** Existência de livre-arbítrio.")
-    ap("   - **`A17_weak`:** `∃ s, IntentionalSubject s ∧ DependsOn EO s` (transcendental enfraquecido).")
-    ap("   - **`A17_strong`:** `∃ s, Person s ∧ DependsOn EO s` (o A17 original com livre-arbítrio).")
-    ap("")
-    ap("   *Pontes Candidatas entre Significação e Dependência:*")
-    ap("   - *Ponte Universal (`Means s p → DependsOn (ofProp p) s`):* Rejeitada como absurda — faria qualquer pensamento sobre 2+2=4 ou sobre um Porco Voador tornar a entidade dependente da mente.")
-    ap("   - *Ponte Transcendental Restrita (`RestrictedTranscendentalBridge`):* Postula especificamente que a tese de objetividade universal, enquanto formulação conceitual, depende ontologicamente do sujeito que a pensa (`Tag: SEM`). Provamos que ela deriva `A17b` e `A17_weak`, mas **não** deriva `FreeWill`.")
-    ap("")
-    ap("   *Rastreamento Estrito de Testemunha e Modelo de Deslizamento (Witness Slippage):*")
-    ap("   Provamos formalmente que ter separadamente um pensante de EO (`A17b`) e uma pessoa (`A17c`) **não implica** que o pensante seja uma pessoa (`witness_slippage_separation`, `0 axiomas`). No modelo com dois sujeitos `WitnessSubject` (`thinker` e `person`), o pensante opera sem livre-arbítrio, enquanto a pessoa não fundamenta a tese.")
-    ap("")
-    ap("```text")
-    ap("=========================================================================================")
-    ap("A ESCADA DEDUTIVA DE A17 E O ESTATUTO DE CADA DEGRAU")
-    ap("=========================================================================================")
-    ap("Retorsão Big-O / Big-S")
-    ap("  │")
-    ap("  ▼  [PROVADO - Rota B]")
-    ap("∃ s : Subject, IntentionalSubject s  (A17a)")
-    ap("  │")
-    ap("  ▼? [EXIGE PREMISSA DE CONSIDERAÇÃO PERFORMATIVA (SEMÂNTICA)]")
-    ap("∃ s : Subject, Means s EverythingObjective")
-    ap("  │")
-    ap("  ▼? [EXIGE PONTE TRANSCENDENTAL DE DEPENDÊNCIA (SEMÂNTICA)]")
-    ap("∃ s : Subject, Means s EO ∧ DependsOn EO s  (A17b)")
-    ap("  │")
-    ap("  ▼  [PROVADO / DEFINICIONAL - a17b_implies_a17_weak]")
-    ap("A17_weak : ∃ s : Subject, IntentionalSubject s ∧ DependsOn EO s")
-    ap("  │")
-    ap("  ▼? [INDEPENDENTE / BLOQUEADO PELO MODELO DETERMINISTA E DESLIZAMENTO]")
-    ap("∃ s : Subject, Person s ∧ DependsOn EO s")
-    ap("  │")
-    ap("  ▼  [PROVADO / DEFINICIONAL]")
-    ap("A17_strong : ∃ s : Subject, FreeWill s ∧ DependsOn EO s")
-    ap("=========================================================================================")
-    ap("```")
-    ap("")
-    ap("> **Veredito Filosófico e Formal (CASO C):**")
-    ap("> A reflexão transcendental força performativamente a existência de um **Sujeito Intencional** (`IntentionalSubject`), pois não se pode formular uma tese sem significá-la. Contudo, ela **NÃO força Livre-Arbítrio nem Pessoalidade**, pois um autômato determinista pode significar uma tese. Portanto, **A17_strong é uma ponte metafísica substantiva irredutível (`Tag: META`)**, e não uma decorrência neutra da lógica ou da retorsão pura.")
-    ap("")
-    ap("Provamos formalmente 11 teoremas de separação sem axiomas (`0 axioms`) demonstrando essas fronteiras:")
-    ap("1. **`representation_not_depends_on_person`:** Representação intencional (`Means s p`) não implica dependência de pessoa.")
-    ap("2. **`subjective_not_depends_on_person`:** Em assinatura desvinculada, subjetividade não força dependência de pessoa.")
-    ap("3. **`intentional_subject_not_person`:** Sujeito intencional não implica Pessoa (Livre-Arbítrio).")
-    ap("4. **`person_not_freewill`:** Em assinatura desvinculada, pessoalidade não força livre-arbítrio.")
-    ap("5. **`exists_subjective_not_exists_person`:** A existência de algo subjetivo não força a existência de uma pessoa.")
-    ap("6. **`exists_subjective_not_exists_freewill`:** A existência de algo subjetivo não força livre-arbítrio.")
-    ap("7. **`deterministic_transcendental_subject_refutes_freewill`:** Retorsão enfraquecida não deriva livre-arbítrio.")
-    ap("8. **`deterministic_transcendental_subject_refutes_person`:** Retorsão enfraquecida não deriva pessoalidade.")
-    ap("9. **`pig_retorsion_exposes_premise_smuggling`:** Retorsão enfraquecida não deriva predicados arbitrários externos.")
-    ap("10. **`means_not_dependson` / `exists_means_not_exists_dependson`:** Significar EO não implica depender ontologicamente de s.")
-    ap("11. **`witness_slippage_separation`:** Conjunção de pensante de EO e pessoa não garante pensante pessoal (bloqueio de deslizamento).")
-    ap("")
-    ap("### 3. Livro-Razão Adversarial de Retorsão (Adversarial Retorsion Ledger)")
-    ap("")
-    ap("| Afirmação Alvo | Negação Exata | Ataque Retorsivo | O que a negação precisa executar/assumir | Resultado | Classificação | Modelo Hostil / Obstrução |")
-    ap("| :--- | :--- | :--- | :--- | :--- | :--- | :--- |")
-    ap("| **Ato Intencional** (`Act`) | `∀ s p, ¬ Act s p` (`NoAct`) | Performativo direto | Asserir que não há ato executa um ato intencional | **REFUTADO** | `PROVEN BY RETORSION` | Nenhum (impossibilidade analítica) |")
-    ap("| **Ato Fraco** (`act`) | `∀ s p, ¬ act s p` (`NoWeakAct`) | Performativo fraco | Enunciar a negação realiza um evento de prolação | **REFUTADO** | `PROVEN BY RETORSION` | Nenhum |")
-    ap("| **Verdade** (`T`) | `∀ p, ¬ T p` (`NoTruth`) | Lógico | Se é verdade que nada é verdade, algo é verdade | **REFUTADO** | `PROVEN BY RETORSION + LOGIC` | Nenhum |")
-    ap("| **Sujeito** (`SubjectExists`) | `∀ s, ¬ SubjectExists s` | Performativo direto | Negar o sujeito exige o centro de perspectiva que julga | **REFUTADO** | `PROVEN BY RETORSION` | Nenhum |")
-    ap("| **Campo de Escolha** (`ChoiceField`) | `∀ s p q, ¬ ChoiceField s p q` | Performativo alternativo | Asserir coloca o agente diante da alternativa da sua própria negação | **REFUTADO** | `PROVEN BY RETORSION` | Nenhum |")
-    ap("| **Subjetividade Absoluta** | `∀ x, Subjective x` | Auto-inclusão objetiva | A tese reivindica estatuto objetivo sobre o real | **REFUTADO** | `PROVEN BY RETORSION + LOGIC` | Nenhum (sob disjunção lógica O/S) |")
-    ap("| **Objetividade Absoluta** | `∀ x, Objective x` | Representação pessoal | O ato de formular a tese depende de um sujeito pessoal livre | **REFUTADO** | `PROVEN BY RETORSION + META` | Nenhum (sob A17) |")
-    ap("| **Retorsão Enfraquecida → FreeWill** | `∃ s, IntentionalSubject s ↛ FreeWill s` | Teste de enfraquecimento | Reflexão transcendental mecânica sem livre-arbítrio | **FALHOU** | `FAILED — HOSTILE MODEL` | `DeterministicTranscendentalSubjectModel` |")
-    ap("| **Retorsão Arbitrária (WingedPig)** | `Reflexão ↛ WingedPig` | Objeção de Gaunilo | Enxertar predicados contingentes na premissa | **FALHOU** | `FAILED — PREMISE SMUGGLING` | `pig_retorsion_exposes_premise_smuggling` |")
-    ap("| **A3 (Truthmaker)** | `∃ w φ, TrueAt w φ ∧ ∀ e, ¬(ExistsAt ∧ Ground)` | Performativo / Diagonal | Asserir que algo não tem grounder não fornece grounder ontológico | **FALHOU** | `FAILED — HOSTILE MODEL` / `EXPRESSIVITY GAP` | Satisfação sem grounder é coerente (`Form` carece de ponto fixo diagonal) |")
-    ap("| **A4 (Global Ground)** | `∃ φ, □φ ∧ ∀ e, ¬(∀ w, ExistsAt ∧ Ground)` | Universal contrafatual | Troca $\\forall w \\exists e \\to \\exists e \\forall w$ não é forçada por asserir sua ausência | **FALHOU** | `FAILED — HOSTILE MODEL` | `CountermodelWorldwiseTruthmaking` |")
-    ap("| **A9 (GroundProp)** | `∃ f, T f ∧ ∀ e, ¬ GroundProp e f` | Performativo | Proposição verdadeira não carrega entidade grounder por mera auto-asserção | **FALHOU** | `FAILED — HOSTILE MODEL` | Impessoalismo semântico |")
-    ap("| **A13 (ActPolarity)** | `∃ s p, Act s p ∧ ¬ Means s (¬p)` | Asserção de contra-exemplo | Agente pode asserir sem conceber a negação contraditória | **FALHOU** | `FAILED — HOSTILE MODEL` | `CountermodelVeridicalMeaning` (`Means s p := p`) |")
-    ap("| **A14 (IntentionalChoice)** | `∃ s p, Act s p ∧ ∀ q, ¬ Chooses s p q` | Auto-negação de escolha | \"Ajo sem escolher\": ato determinado assere a negação sem ter alternativas co-significadas | **FALHOU** | `FAILED — HOSTILE MODEL` | `CountermodelNoFreeWill` (ato determinado sem livre-arbítrio) |")
-    ap("| **A6 (Pluralidade)** | `¬ ∃ s₁ s₂, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` | Solipsismo asserido | Agente único assere \"estou só\"; ato não requer interlocutor | **FALHOU** | `FAILED — HOSTILE MODEL` | `SolitaryChoiceModel` (agente único cumpre toda a agência pré-A6) |")
-    ap("| **A7 (Personal Ground)** | `∃ f, IsPresentPersonalFeature f ∧ ∀ e, ¬Personal e` | Grounding de pessoa | Ato pessoal sustentado por fundamento impessoal | **FALHOU** | `FAILED — HOSTILE MODEL` | `CountermodelImpersonalUltimateGround` |")
-    ap("| **Fundamento Último** (`UltimateGround`) | `¬ ∃ u, UltimateGround u` | Regresso Infinito com Truthmakers | Asserir que não há fundamento último exige verdade fundamentada | **SOBREVIVE / DILEMA** | `DILEMMA — HOSTILE MODEL` | Sobrevive sob truthmaking permissivo (`PermissiveTruthGroundedInfiniteChain`); refutado sob truthmaking de totalidade substantiva (`TotalityGroundingSignature`) |")
-    ap("| **Act → Person** | `∃ s p, Act s p ∧ ¬ Person s` | Agente intencional não-livre | Ato singular não força co-significação de alternativas incompatíveis | **FALHOU** | `FAILED — HOSTILE MODEL` | `CountermodelNoFreeWill` (Ato determinado sem escolha) |")
-    ap("| **FreeSubject → Person** | `FreeSubject s → Person s` | Definição constitutiva de Pessoa | O sujeito dotado de livre-arbítrio é constitutivamente uma pessoa | **PROVADO** | `PROVEN (0 axiomas)` | `Person.free_subject_is_person` |")
-    ap("| **Person → NecessarySubject** | `∃ s, Person s ∧ ¬ NecessarySubject s` | Pessoa contingente | Pessoa no mundo atual não existe necessariamente em todos os mundos | **FALHOU** | `FAILED — HOSTILE MODEL` | `faithful_contingent_person_fails_necessary_subject` |")
-    ap("| **Plurality → Loves** | `Pluralidade ∧ ¬ Amor` | Indiferença interpessoal | Dois sujeitos interagem em total indiferença ou hostilidade | **FALHOU** | `FAILED — HOSTILE MODEL` | `DisconnectedPluralityModel` |")
-    ap("")
-    ap("### 4. Mapa Sintético: O Espaço Negativo e Positivo de Γ")
-    ap("")
-    ap("```text")
-    ap("                        [ DADO PERFORMATIVO ]                                            ")
-    ap("                                  │                                                      ")
-    ap("        ┌─────────────────────────┴─────────────────────────┐                            ")
-    ap("        ▼                                                   ▼                            ")
-    ap("[ Consequências Positivas ]                       [ Exclusões Retorsivas ]               ")
-    ap("  • Act s p                                         • ¬(NoAct)                           ")
-    ap("  • Means s p                                       • ¬(NoWeakAct)                       ")
-    ap("  • IntentionalSubject s                            • ¬(NoTruth)                         ")
-    ap("  • ChoiceField s p (¬p)                            • ¬(NoSubject)                       ")
-    ap("  • Chooses / FreeWill (sob A14)                    • ¬(NoChoiceField)                   ")
-    ap("                                                    • ¬(EverythingSubjective)            ")
-    ap("                                                    • ¬(EverythingObjective)             ")
-    ap("                                                            │                            ")
-    ap("                                                            ▼                            ")
-    ap("                                              [ Testemunhas Positivas ]                  ")
-    ap("                                                • ∃ x, Objective x                       ")
-    ap("                                                • ∃ x, Subjective x                      ")
-    ap("                                                • ∃ s, IntentionalSubject s (Rota B)     ")
-    ap("                                                                                         ")
-    ap("=========================================================================================")
-    ap("                 FRONTEIRA DE IRREDUCIBILIDADE (Retorsão Falha)                          ")
-    ap("=========================================================================================")
-    ap("  Axiomas Semânticos:                                                                    ")
-    ap("    A3 (Truthmaker)      ◄─── Retorsão falha; modelo hostil sem grounder sobrevive       ")
-    ap("    A4 (GlobalGround)    ◄─── Retorsão falha; modelo mundanal sem swap sobrevive         ")
-    ap("    A9 (GroundProp)      ◄─── Retorsão falha; modelo impessoal sobrevive                 ")
-    ap("    A13 (ActPolarity)    ◄─── Retorsão falha; modelo verídico sem ¬p sobrevive           ")
-    ap("    A14 (Choice)         ◄─── Retorsão falha; ato determinado sem Chooses sobrevive      ")
-    ap("                                                                                         ")
-    ap("  Axiomas Metafísicos:                                                                   ")
-    ap("    A6 (Pluralidade)     ◄─── Retorsão falha; modelo de agente solitário sobrevive       ")
-    ap("    A7 (Personal Ground) ◄─── Retorsão falha; modelo de base impessoal sobrevive         ")
-    ap("                                                                                         ")
-    ap("  Fronteiras Abertas / Modelos de Separação:                                             ")
-    ap("    Act → Person         ◄─── Ato intencional singular não força livre-arbítrio (exige normatividade)")
-    ap("    Person → NecSubject  ◄─── Pessoa atual não força existência necessária em todos os mundos     ")
-    ap("    Pluralidade → Amor   ◄─── Retorsão falha; sujeitos indiferentes/hostis sobrevivem    ")
-    ap("```")
-    ap("")
-    ap("#### Audit of Candidate Cognitive Primitive R")
-    ap("")
-    ap("- **Candidate primitive:** `AlternativeRepresentation : Subject → Prop → Prop → Prop`")
-    ap("- **Semantic elimination:** `elim_R : ∀ s p q, AlternativeRepresentation s p q → Means s q ∧ Incompatible p q`")
-    ap("- **Action bridge:** `B_R : ∀ s p, Act s p → ∃ q, AlternativeRepresentation s p q`")
-    ap("- **Does $B_R$ derive A14?** YES (via `elim_R` and `Act s p → Means s p`).")
-    ap("- **Does A14 derive $B_R$?** NOT in general (if $R$ requires intentional contrastive awareness beyond extensional co-meaning) / YES (if $R$ is extensionally defined as `Means s q ∧ Incompatible p q`).")
-    ap("- **Strictly weaker than A14?** NO. Any candidate weaker than `Means s q ∧ Incompatible p q` fails to derive A14, while any candidate requiring intentional contrast is strictly stronger ($B_R > \\text{A14}$).")
-    ap("- **Outcome:** **Outcome C** (every candidate reduces either to A13, A14, or a renamed composite primitive; no genuinely weaker bridge has yet been discovered).")
-    ap("- **Hostile model:** In `CountermodelVeridicalMeaning.Single` (`Means s p := p`), $B_R$ fails identically to A14, because no incompatible proposition can be represented without contradiction.")
-    ap("")
-    ap("Current formal status of `Means`:")
-    ap("```lean")
-    ap("Means : Subject → Prop → Prop")
-    ap("Tag: VOCAB (Primitive Vocabulary)")
-    ap("```")
-    ap("")
-    ap("As currently formalized, `Means` has no internal structure beyond pairing a subject with a proposition. "
-       "Therefore no closure, factivity, non-factivity, alternative-generation, or contrastive representation "
-       "follows merely from the relation itself.")
-    ap("")
-    ap("- **Independent decomposition found?** NO. Any decomposition into mental states/representations either renames the primitive (`Means := Represents`) or hard-codes contrastivity into the definition.")
-    ap("- **Smallest missing primitive beneath Means:** A structured intensional representation layer or cognitive polarity faculty (`Polarity : Means s p → Means s (¬p)`), which is equivalent to **A13** (`Tag: SEM`), not A14.")
-    ap("- **Status:** OPEN as a deeper reductive question; BOUNDED as a primitive semantic relation in the formal ledger.")
-    ap("")
-    ap("#### Conceptual Hierarchy: The Multi-Stage Architecture of Agency")
-    ap("")
-    ap("```text")
-    ap("Layer 0: Causal Production (Initiates s w w' p)")
-    ap("      ↓  [Refuted: initiates_does_not_imply_means (CountermodelWeakActWithoutMeaning)]")
-    ap("Layer 1: Intentional Action (Act s p := Means s p ∧ ∃ w w', Initiates s w w' p)")
-    ap("      ↓  [PROVEN: act_implies_choiceField / intentional_hasChoiceField]")
-    ap("Layer 2: Objective Alternative Field (ChoiceField s p q := Means s p ∧ Incompatible p q)")
-    ap("      ↓  [PROVEN for Asserts: asserts_implies_selects / asserts_selects]")
-    ap("Layer 3: Semantic Selection / Authorship (Selects s p q / Authors s p q)")
-    ap("      ↓  [Refuted: selection_not_entails_rejected_horn_meaning / authors_not_entails_rejected_horn_meaning]")
-    ap("Layer 4: Cognitive Alternative Representation (Means s q ∧ Incompatible p q / Contemplates)")
-    ap("      ↓  [PROVEN: deliberateAuthorship_implies_chooses / deliberateChoice_iff_selects_and_means]")
-    ap("Layer 5: Deliberate Authorship / Settlement (DeliberateAuthorship s p q := Authors s p q ∧ Means s q)")
-    ap("      ↓  [PROVEN: deliberateAuthorship_implies_chooses / chooses_implies_freeWill]")
-    ap("Layer 6: Genuine Choice & Free Will (Chooses s p q  →  FreeSubject s / FreeWill s)")
-    ap("```")
-    ap("")
-    ap("This multi-stage hierarchy isolates the exact locus of non-derivability in the pre-A14 theory:")
-    ap("- **Transitions 1 → 2 and 2 → 3** are machine-verified theorems of logic and assertion.")
-    ap("- **Transition 3 → 4** is the sole unbridgeable cognitive boundary: selecting or authoring *against* $q$ does not force *thinking* or *co-meaning* $q$.")
-    ap("- **Transitions 4 → 5 → 6** are definitional identities.")
-    ap("")
-    ap("#### Four Rigorously Separated Phenomena of Agency")
-    ap("")
-    ap("1. **Causal Outcome (`CausalSettles`):** Physical execution bringing about $p$ and suppressing $q$ in state space; satisfied by deterministic systems (`ModelM2BranchingInitiation`). Does not entail mental representation.")
-    ap("2. **Contemplative Representation (`ContemplatesWithoutSettling`):** Co-meaning incompatible options without physical action; satisfied by `ContemplationWithoutActionModel` (`contemplation_without_action`). Shows that cognitive free will does not require overt physical action.")
-    ap("3. **Selection / Authorship (`Authors` / `Selects`):** Executive determination of $p$ over $q$ without representing $q$; satisfied by `Single` (`authors_not_entails_rejected_horn_meaning`).")
-    ap("4. **Deliberate Choice (`DeliberateAuthorship` / `DeliberateChoice` / `Chooses`):** Active commitment with dual cognitive representation of both incompatible options.")
-    ap("")
-    ap("#### Three Epistemic Levels of Constitutivity in Γ")
-    ap("")
-    ap("- **Constitutive by Definition (DEFINITIONAL):** `FreeWill` from `Chooses` (`FreeWill s := ∃ p q, Chooses s p q`); `Chooses` from `DeliberateAuthorship`.")
-    ap("- **Constitutive by Semantic Axiom (SEMANTIC):** `AxIntentionalChoice` (A14): substantive commitment that intentional initiation constitutively involves cognitive alternativity, proven independent of pre-A14 primitives by machine-checked full-theory countermodels.")
-    ap("- **Constitutive by Derivation (DERIVED):** `ChoiceField s p (¬p)` from `Act s p`; `Selects s p (¬p)` from `Asserts s p`.")
-    ap("")
-    ap("#### O Contraste Definidor: A14 (Ato → Escolha) vs. Inverso de A14 (Escolha → Ato)")
-    ap("")
-    ap("A relação entre ação intencional e escolha genuína é assimetricamente estruturada:")
-    ap("")
-    ap("- **A14 (`Act s p → ∃ q, Chooses s p q`):** Princípio semântico constitutivo adotado (`Tag: SEM`). Postula que a ação intencional envolve constitutivamente a faculdade cognitiva de escolha entre alternativas.")
-    ap("- **Inverso de A14 (`(∃ q, Chooses s p q) → Act s p`):** **REFUTADO POR MODELO HOSTIL** (`ContemplationWithoutActionModel.universal_reverse_a14_refuted` e `existential_reverse_a14_refuted`). A escolha genuína e o livre-arbítrio são faculdades cognitivas/deliberativas (`Means s p ∧ Means s q ∧ Incompatible p q`) que não exigem execução ou iniciação causal física (`Initiates s w w' p`). Um sujeito pode escolher e deliberar em puro pensamento contemplativo sem agir no mundo físico.")
-    ap("")
-    ap("Conclusão filosófica: **A escolha genuína não acarreta execução. Escolha cognitiva e ação intencional são fenômenos ontologicamente distintos.**")
-    ap("")
-    ap("#### Auditoria da Negação Auto-Referencial da Escolha")
-    ap("")
-    ap("Investigou-se se uma asserção auto-referencial que nega a existência de escolha em si mesma "
-       "(`SelfDenialOfChoice s p := Act s p ∧ (p ↔ ∀ q, ¬ Chooses s p q)`) poderia forçar a escolha genuína por retorção performativa.")
-    ap("")
-    ap("- **Resultado:** **REFUTADO POR MODELO HOSTIL** (`SelfDenialOfChoiceModel.self_denial_not_derives_choice` e `self_denial_without_choice_consistent`).")
-    ap("- **Mecanismo:** Em semântica verídica, a proposição $p := (\\forall q, \\neg \\text{Chooses}(s, p, q))$ é estritamente verdadeira; "
-       "o agente intencionalmente significa $p$, inicia o proferimento de $p$, e de facto não possui escolha alguma, sem qualquer contradição. "
-       "Ao contrário da negação de atos (onde negar o ato destrói a própria execução), negar a escolha apenas exige agir, não escolher.")
-    ap("- **Conclusão:** A auto-referência não ultrapassa A14; refutar a negação da escolha pressupõe a própria bilateralidade cognitiva (A13/A14) em vez de a derivar.")
-    ap("")
-    ap("#### Auditoria da Escolha Livre Auto-Referencial (Candidatas A, B, C, D)")
-    ap("")
-    ap("Investigou-se se asserir positivamente a escolha livre de si mesmo (\"Escolho livremente este próprio ato\") "
-       "poderia derivar a escolha genuína ou gerar contradição performativa sem assumir A14.")
-    ap("")
-    ap("- **Candidata A (Escolha Genuína Auto-Asserida, `p ↔ ∃ q, Chooses s p q`):**")
-    ap("  - Sob asserção fáctica (`Asserts s p`), $p$ é verdadeiro, logo $\\exists q, \\text{Chooses}(s, p, q)$ segue por **pura lógica/desprendimento definicional** (`selfAssertedChoice_factive_implies_chooses`).")
-    ap("  - Sob ação intencional não-fáctica (`Act s p`), o agente pode proferir iludidamente $p$ num mundo determinista onde $p$ é falso e nenhuma escolha existe (**REFUTADO POR MODELO HOSTIL**, `DelusionalSelfChoiceModel.nonfactive_self_choice_not_derives_choice`).")
-    ap("- **Candidata B (Autoria Auto-Asserida, `p ↔ ∃ q, Authors s p q`):** A autoria executiva verdadeira não força a representação cognitiva do corno rejeitado (`Single.authors_not_entails_rejected_horn_meaning`).")
-    ap("- **Candidata C (Escolha Deliberada Auto-Asserida, `p ↔ ∃ q, DeliberateChoice s p q`):** Sob asserção fáctica, deriva escolha por desprendimento (`selfAssertedDeliberateChoice_factive_implies_chooses`); sob ação não-fáctica, falha por auto-atribuição falsa.")
-    ap("- **Candidata D (Paradoxo Auto-Referencial, `p ↔ (∃ q, Chooses s p q) ∧ (∀ q, ¬ Chooses s p q)`):** $p$ é logicamente falso (`selfAssertedParadox_is_false`). A asserção fáctica é auto-refutante (`selfAssertedParadox_not_assertable`), mas o proferimento de uma falsidade em ato não-fáctico não instancia escolha.")
-    ap("")
-    ap("Conclusão: **A auto-referência positiva apenas deriva a escolha se a auto-atribuição for previamente admitida como verdadeira (fáctica), o que não pode ser generalizado a um ato genérico (`Act s p`) sem assumir A14.**")
-    ap("")
-    ap("#### Reconstrução Ontológica da Escolha: Determinação Executiva vs. Deliberação")
-    ap("")
-    ap("A auditoria formal revelou que a definição histórica de `Chooses s p q := Means s p ∧ Means s q ∧ Incompatible p q` "
-       "media a faculdade cognitiva de **Deliberação / Representação Contrastiva** (co-significar simultaneamente ambos os cornos em pensamento), "
-       "e não a **Escolha Executiva** (o ato de determinação/seleção semântica).")
-    ap("")
-    ap("A ontologia reconstruída separa rigorosamente as camadas:")
-    ap("1. **Movimento/Evento Fraco (`act s`):** Comportamento causal/físico sem intencionalidade.")
-    ap("2. **Ato Intencional Forte (`Act s p`):** Significado intencional aliado à iniciação causal de transição de estado.")
-    ap("3. **Campo Objetivo de Alternativas (`ChoiceField s p q`):** Espaço lógico objetivo de alternativas (`Incompatible p q`).")
-    ap("4. **Determinação Executiva / Escolha (`Choice s p := Selects s p (¬p)` e `AuthorshipChoice s p := Authors s p (¬p)`):** O sujeito assere/determina $p$ e exclui $\\neg p$.")
-    ap("5. **Deliberação Cognitiva (`Deliberates s p q := Means s p ∧ Means s q ∧ Incompatible p q`):** Contemplação de alternativas em pensamento (legado `Chooses`).")
-    ap("6. **Escolha Deliberada (`DeliberateChoice s p q := Selects s p q ∧ Means s q`):** Determinação executiva unida à consciência cognitiva do corno rejeitado.")
-    ap("7. **Livre Agência (`FreeAgency s := ∃ p, Choice s p`):** Capacidade de determinação executiva.")
-    ap("")
-    ap("- **Teorema da Retorção Performativa da Escolha (`selfDenialOfExecutiveChoice_selfRefutes`):**")
-    ap("  A asserção auto-referencial \"Esta minha asserção não possui Escolha\" (`SelfDenialOfExecutiveChoice s p := Asserts s p ∧ (p ↔ ¬ Choice s p)`) "
-       "é uma **CONTRADIÇÃO PERFORMATIVA GENUÍNA** (`SelfDenialOfExecutiveChoice s p → False`, derivado por pura lógica/definições). "
-       "O próprio ato de asserir $p$ instancia a determinação executiva `Choice s p`, destruindo o conteúdo da negação!")
-    ap("")
-    ap("This clarifies that genuine choice constitutively requires *alternativity* "
-       "(`Incompatible p q` entertained in thought), but does not intrinsically require the formal "
-       "operator of contradictory propositional negation (`¬p`). Model `ContrastiveSeparation` "
-       "formally demonstrates that an agent can choose between incompatible positive courses "
-       "of action (e.g. North vs. East) without entertaining `¬North`.")
-    ap("")
-    ap("#### Six Foundational Candidate Families for Deriving A14 (Exhaustive Audit)")
-    ap("")
-    ap("| Foundational Family | Candidate Formulation | Strict Classification | Hostile Witness / Model | Analysis & Mathematical Mechanism |")
-    ap("|---|---|---|---|---|")
-    ap(r"| **1. Goal / End-Directedness** | `Goal s g ∧ (p → g) → ∃ q, Means s q ∧ Incompatible g q` | **REFUTED BY HOSTILE MODEL** | `hostileTeleologicalInstance` (`teleology_not_entails_contrastive_agency`) | Valuation: `s = false, p = True, g = True`. In veridical semantics (`Means s p := p`), acting for a true goal does not force representation of an incompatible alternative; factive goal-directedness mathematically excludes co-meaning false $q$. Baking contrastivity into `Goal` is **DEFINITIONAL RECODING — REJECTED**. |")
-    ap(r"| **2. Reason-Guided Agency** | `ReasonFor s r p ∧ (r → p) → ∃ r' q, Means s r' ∧ Means s q ∧ Incompatible r q` | **REFUTED BY HOSTILE MODEL** | `hostileReasonResponsiveInstance` (`reason_responsiveness_not_entails_contrastive_agency`) | Valuation: `s = false, r = True, p = True`. Acting on a sufficient reason in the actual world does not require occurrent representation of contrary reasons in thought. Dispositions across hypothetical counterfactual worlds do not populate actual occurrent `Means`. |")
-    ap(r"| **3. Action Individuation under Description** | `Description s p → ∃ q, Means s q ∧ Incompatible p q` | **REFUTED BY HOSTILE MODEL** | `hostileActionIndividuationInstance` (`action_individuation_not_entails_contrastive_agency`) | Valuation: `s = false, p = True`. Individuating an action under description $p$ distinguishes it from non-intended descriptions $p'$ without the subject representing any incompatible alternative description $q$ in thought. |")
-    ap(r"| **4. Non-Factive Representation Layer** | `Entertains s p → ∃ q, Entertains s q ∧ Incompatible p q` | **REFUTED BY HOSTILE MODEL** | `hostileRepresentationLayerInstance` (`nonfactive_representation_not_entails_contrastive_agency`) | Valuation: `s = false, p = True`. Distinguishing `Means` from a non-factive representation faculty `Entertains` allows entertaining false contents in principle, but does not force the subject to entertain incompatible alternatives; single-content entertainment remains consistent. |")
-    ap(r"| **5. Counterfactual Agency (State Branching)** | `CouldAct s q ∧ Incompatible p q → Means s q` | **REFUTED BY HOSTILE MODEL** | `ModelM2BranchingInitiation` (`counterfactual_branching_not_entails_means`) | Valuation: Model M2 exhibits physical state-space branching (`w = false ∧ w' ∈ {true, false}`), so alternative initiation holds (`CouldAct () False`), but internal intentional representation `Means () False` remains strictly false. Physical branching does not force cognitive representation. |")
-    ap(r"| **6. Contrastive Intentionality** | `Act s p → ∃ q, Means s q ∧ Incompatible p q` | **REDUCED TO DEEPER SEMANTIC BRIDGE** · **REDUNDANT** | `fullTheoryHostileInstance` (`act_orthogonal_to_contrastive_agency_in_full_theory`) | Conceptually and logically equivalent to A14 (`contrastive_agency_equivalent_to_intentional_choice`). Strictly independent of pre-A14 primitives, forming the *weakest sufficient bridge identified at the pointwise level* within the audited candidate family. |")
-    ap("")
-    ap("#### Machine-Checked Orthogonality Theorem: Act ⟂ Chooses (Pre-A14 Theory)")
-    ap("")
-    ap("In `formal/Logos/HostileSemantics.lean`, the kernel formally verifies that under the ENTIRE "
-       "pre-A14 axiomatic theory of Γ (12 axioms across Agency, Plurality, Truthmaker, Modal, GroundPerson, and Value):")
-    ap("")
-    ap("$$\\exists s\\,p,\\; \\text{Act}(s,p) \\quad \\perp \\quad \\exists s\\,p\\,q,\\; \\text{Chooses}(s,p,q)$$")
-    ap("")
-    ap("- `act_orthogonal_to_genuine_choice_in_full_theory`: Strong Act does NOT entail Genuine Choice in the pre-A14 theory.")
-    ap("- `act_orthogonal_to_freewill_in_full_theory`: Strong Act does NOT entail Free Will in the pre-A14 theory.")
-    ap("- `act_orthogonal_to_contrastive_agency_in_full_theory`: Strong Act does NOT entail Contrastive Agency in the pre-A14 theory.")
-    ap("")
-    ap("Thus, genuine choice is not derivable from Strong Act in the pre-A14 theory; Γ adopts its constitutivity as A14, an authentic substantive semantic commitment (`Tag: SEM`).")
-    ap("")
-    ap("Architectural note on the formal definition of `Chooses`: the attempted asymmetric definition "
-       "`Chooses_asym(s, p, q) := Means(s, p) ∧ Means(s, ¬q) ∧ Incompatible(p, q)` fails by double-negation collapse: "
-       "for `q := ¬p`, `Means(s, ¬¬p)` reduces to `Means(s, p)`, dissolving the requirement of entertaining "
-       "the rejected alternative and collapsing genuine choice into mere `ChoiceField`. Genuine choice "
-       "therefore constitutively requires co-meaning of both alternatives (`Means s p ∧ Means s q ∧ Incompatible p q`).")
-    ap("")
-    ap("---")
-    ap("")
-    return L
-
-
-def render_frontier(all_claims: list) -> list:
-    L = []
-    ap = L.append
-    ap("## 4. Where the deduction stops")
-    ap("")
-    ap(FRONTIER_INTRO)
-    ap("")
-    open_claims = [c for c in all_claims
-                   if philo_status(c, _CTX["node_map"]) == "OPEN"]
-    for c in open_claims:
-        keys = CONTESTS.get(c["id"], [])
-        cm = ""
-        if keys:
-            cm = " _(countermodel: " + ", ".join(f"`Countermodel{k}`" for k in keys) + ")_"
-        math_target = ""
-        if c["id"] == "F1b":
-            math_target = r" \((\exists s\,p\,q,\; Chooses(s,p,q))\)"
-        ap(f"- **{c['id']}** — {claim_title(c)}{math_target}{cm}")
-    if not open_claims:
-        ap("_(none)_")
-    ap("")
-    ap(OPEN_BRIDGES)
-    ap("")
-    ap("---")
-    ap("")
-    return L
-
-
 def load_countermodels(decls: dict) -> dict:
     out = {}
     for full, info in decls.items():
@@ -3845,6 +2707,7 @@ class ProofIR:
     line: int
     goal: str
     doc: str
+    doc_lead: str = ""
     assumptions: list[ProofStepIR] = field(default_factory=list)
     steps: list[ProofStepIR] = field(default_factory=list)
     conclusion: ProofStepIR | None = None
@@ -3861,6 +2724,10 @@ def compile_lean_proof(full: str, decls: dict, node_map: dict, graph: dict, def_
 
     goal_fm = format_discrete_math(humanise(strip_ns(body)).strip())
     doc_text = d.get("doc", "").strip()
+    # `doc` is the ~260-char capped first paragraph (bad for sentence-boundary
+    # resolution). Keep the uncapped first paragraph separately so the spine
+    # renderer can recover a clean, complete lead sentence.
+    doc_lead_text = d.get("doc_claim", "").strip() or doc_text
 
     proof = ProofIR(
         full_name=full,
@@ -3870,6 +2737,7 @@ def compile_lean_proof(full: str, decls: dict, node_map: dict, graph: dict, def_
         line=d["line"],
         goal=goal_fm if goal_fm else math_statement(full),
         doc=doc_text,
+        doc_lead=doc_lead_text,
         subst_axioms=subst,
     )
 
@@ -4315,9 +3183,12 @@ def classify_proof_edge(proof: ProofIR, graph: dict = None, decls: dict = None) 
     - DEFINITIONAL: definitional equality, structure constructor, or identity (Iff.rfl / def)
     - COUNTERMODEL: machine-checked independence separation boundary
     - OPEN / FRONTIER: open problem / unproved horizon
-    - SEMANTIC [requires: <Ax> (SEM)]: direct invocation of a semantic bridge axiom (Tag: SEM)
-    - METAPHYSICAL [requires: <Ax> (META)]: direct invocation of a metaphysical bridge axiom (Tag: META)
+    - AXIOMATIC (<Ax>): direct invocation of a declared semantic/metaphysical bridge axiom (Tag: SEM/META)
     - PROVEN: machine-verified derivation from established premises with 0 substantive axioms
+
+    The *category* half keeps the legacy vocab ("SEMANTIC"/"METAPHYSICAL") so tooling and
+    tests stay stable; the reader-facing *display* half says AXIOMATIC. AXIOMATIC never
+    means "unproved" — it means machine-verified while resting on the named, priced axiom.
     """
     if proof.boundary:
         left, right = proof.boundary[0], proof.boundary[1]
@@ -4331,10 +3202,10 @@ def classify_proof_edge(proof: ProofIR, graph: dict = None, decls: dict = None) 
 
     if local_meta:
         req = ", ".join(sorted(set(local_meta)))
-        return "METAPHYSICAL", f"METAPHYSICAL [requires: {req} (META)]"
+        return "METAPHYSICAL", f"AXIOMATIC ({req})"
     elif local_sem:
         req = ", ".join(sorted(set(local_sem)))
-        return "SEMANTIC", f"SEMANTIC [requires: {req} (SEM)]"
+        return "SEMANTIC", f"AXIOMATIC ({req})"
     else:
         return "PROVEN", "PROVEN | 0 substantive axioms"
 
@@ -4545,10 +3416,31 @@ def select_global_proof_spine(
                     p = resolve_proof_by_name(name, compiled_by_id, decls, graph)
                     if p:
                         sub_proofs.append(p)
+                groups = []
+                for g in sub.get("groups", []):
+                    g_proofs = []
+                    for name in g.get("target_names", []):
+                        p = resolve_proof_by_name(name, compiled_by_id, decls, graph)
+                        if p:
+                            g_proofs.append(p)
+                    expected = g.get("expected_badge", "*")
+                    group_node_map = graph["node_map"]
+                    for p in g_proofs:
+                        cls = proof_claimed_class(p, group_node_map)
+                        if expected != "*" and cls != expected:
+                            raise SystemExit(
+                                f"FATAL: supporting_defense group '{sub.get('title', '')}' "
+                                f"labels '{p.name}' as {expected} but the kernel derives "
+                                f"{cls} — route label contradicted by the kernel")
+                    groups.append({
+                        "label": g.get("label", ""),
+                        "proofs": g_proofs,
+                    })
                 subsections.append({
                     "title": sub.get("title", ""),
                     "summary": sub.get("summary", ""),
                     "proofs": sub_proofs,
+                    "groups": groups,
                 })
 
             branches = []
@@ -4582,12 +3474,19 @@ def select_global_proof_spine(
                 "summary": node["summary"],
                 "formula": node.get("formula", ""),
                 "investigation_link": node.get("investigation_link", ""),
+                "pushback": node.get("pushback", ""),
+                "reply": node.get("reply", ""),
                 "primary_proofs": primary_proofs,
                 "supporting_proofs": supporting_proofs,
                 "obstruction_proofs": obstruction_proofs,
                 "proofs": primary_proofs,
                 "branches": branches,
                 "subsections": subsections,
+                "route_definitions": route_definition_proofs(
+                    primary_proofs + supporting_proofs
+                    + [p for sub in subsections for p in sub.get("proofs", [])]
+                    + [p for sub in subsections for g in sub.get("groups", []) for p in g.get("proofs", [])],
+                    decls, graph["node_map"], graph, {}),
                 "conclusion": primary_proofs[-1].goal if primary_proofs else "",
                 "category": "spine",
             })
@@ -4816,20 +3715,26 @@ def render_further_investigations(decls: dict = None, investigations_dir: Path =
     ap("### Retorsions")
     ap("")
     # Dynamically extract retorsion theorems from decls without hardcoding specific names
+    retorsion_proofs = []
     if decls:
-        retorsion_proofs = []
         for full, d in sorted(decls.items()):
             name = d["name"]
             doc = d.get("doc", "")
             if d["kind"] in ("theorem", "lemma") and doc:
-                first_line = doc.splitlines()[0].strip(" -*")
+                first_line = _spine_lead(doc.splitlines()[0] if doc.splitlines() else doc)
                 name_l = name.lower()
                 doc_l = doc.lower()
                 if "retorsion" in name_l or "selfrefutes" in name_l or "claims_correct" in name_l or "retors" in doc_l or "self-refut" in doc_l:
                     label = humanise(strip_ns(name)).title()
                     retorsion_proofs.append((label, name, f"formal/Logos/{d['file']}", first_line))
+    if retorsion_proofs:
+        ap("<details>")
+        ap(f"<summary>Retorsion catalogue — {len(retorsion_proofs)} machine-checked retorsion theorems (click to expand)</summary>")
+        ap("")
         for label, name, file_path, first_line in retorsion_proofs:
             ap(f"* **{label}:** `{name}` (`{file_path}`) — {first_line}")
+        ap("</details>")
+        ap("")
     for d in cat["retorsions_docs"]:
         desc = f" — {d['status']}" if d.get("status") else ""
         ap(f"* [{d['title']}]({d['path']}){desc}")
@@ -4838,20 +3743,26 @@ def render_further_investigations(decls: dict = None, investigations_dir: Path =
     ap("### Countermodels & Independence")
     ap("")
     # Dynamically extract independence boundaries from decls without hardcoding specific names
+    independence_proofs = []
     if decls:
-        independence_proofs = []
         for full, d in sorted(decls.items()):
             name = d["name"]
             doc = d.get("doc", "")
             stmt = d.get("statement", "")
             if ("_not_entails_" in name or d.get("status") == "COUNTERMODEL") and d["kind"] in ("theorem", "lemma"):
                 left, right = extract_boundary_generically(name, doc, stmt)
-                first_line = doc.splitlines()[0].strip(" -*") if doc else "Mathematical independence model."
+                first_line = _spine_lead(doc) if doc else "Mathematical independence model."
                 line_no = d.get("line", 1)
                 loc = f"formal/Logos/{d['file']}:{line_no}"
                 independence_proofs.append((f"{left} ⇏ {right}", name, loc, first_line))
+    if independence_proofs[:6]:
+        ap("<details>")
+        ap(f"<summary>Countermodel catalogue — {min(len(independence_proofs), 6)} independence frontiers (click to expand)</summary>")
+        ap("")
         for boundary, name, loc, first_line in independence_proofs[:6]:
             ap(f"* **{boundary}:** `{name}` (`{loc}`) — {first_line}")
+        ap("</details>")
+        ap("")
     for d in cat["countermodels_docs"]:
         desc = f" — {d['status']}" if d.get("status") else ""
         ap(f"* [{d['title']}]({d['path']}){desc}")
@@ -4909,9 +3820,9 @@ def compute_epistemic_badge(proofs: list[ProofIR], registry: dict = None) -> str
     if any(getattr(p, "boundary", None) or "_not_entails_" in p.name for p in proofs):
         return "COUNTERMODEL · ⇏"
     elif meta_axes:
-        return f"METAPHYSICAL [requires: {', '.join(meta_axes)} (META)]"
+        return f"AXIOMATIC ({', '.join(meta_axes)})"
     elif sem_axes:
-        return f"SEMANTIC [requires: {', '.join(sem_axes)} (SEM)]"
+        return f"AXIOMATIC ({', '.join(sem_axes)})"
     elif all(p.kind in ("def", "structure") for p in proofs):
         return "DEFINITIONAL"
     return "PROVEN · 0 substantive axioms"
@@ -4946,7 +3857,7 @@ def generate_ascii_chart(
             lines.append(f"  {node['explanation']}")
         if formula:
             lines.append(f"  ⊢ {formula}")
-        lines.append(f"  *[{badge}]*")
+        lines.append(f"  *[{status_icon(badge)}]*")
         if node.get("note"):
             lines.append(f"  *[{node['note']}]*")
 
@@ -4983,13 +3894,13 @@ def generate_ascii_chart(
                 lines.append(f"{prefix} {b_edge} → {b_label}")
                 if b_formula:
                     lines.append(f"{cont_pfx}  ⊢ {b_formula}")
-                lines.append(f"{cont_pfx}  *[{b_badge}]*")
+                lines.append(f"{cont_pfx}  *[{status_icon(b_badge)}]*")
                 if b.get("continuation_label"):
                     lines.append(f"{cont_pfx}       │")
                     lines.append(f"{cont_pfx}       │ [COUNTERMODEL SEPARATION FRONTIERS]")
                     lines.append(f"{cont_pfx}       ▼")
                     lines.append(f"{cont_pfx}  {b.get('continuation_label')}")
-                    lines.append(f"{cont_pfx}    *[COUNTERMODEL · ⇏]*")
+                    lines.append(f"{cont_pfx}    *[{status_icon('COUNTERMODEL · ⇏')}]*")
 
         # Outgoing edges
         out_edges = edges_by_from.get(node_id, [])
@@ -5015,7 +3926,7 @@ def generate_ascii_chart(
             lines.append("        ▼                             ▼                             │")
             lines.append(f"{b1['label']} {b2['label']}")
             lines.append(f"  ⊢ {b1['formula']}         ⊢ {b2['formula']}")
-            lines.append(f"  *[{b1['badge']}]* *[{b2['badge']}]*")
+            lines.append(f"  *[{status_icon(b1['badge'])}]* *[{status_icon(b2['badge'])}]*")
             cont = tb.get("continuation")
             if cont:
                 lines.append("        │")
@@ -5023,8 +3934,56 @@ def generate_ascii_chart(
                 lines.append("        ▼")
                 lines.append(cont["label"])
                 lines.append(f"  ⊢ {cont['formula']}")
-                lines.append(f"  *[{cont['badge']}]*")
+                lines.append(f"  *[{status_icon(cont['badge'])}]*")
 
+    return lines
+
+
+def render_reading_guide() -> list[str]:
+    """Emits the "How to Read This Deduction" block between the title and the
+    Argument-at-a-Glance chart: the arc in one breath, the two directions (discovery vs
+    grounding), and a badge legend explaining every status symbol that follows.
+    """
+    lines = []
+    ap = lines.append
+    ap("Every section below answers the same question — *what is the status of this claim?*")
+    ap("")
+    ap("> **The arc in one breath** — try to deny any step of the cascade. Either the denial")
+    ap("> refutes itself (a *retorsion*: denying Right/Wrong, Ought, or genuine"),
+    ap("> normativity while relying on it), or the claim is definitional, or it is a")
+    ap("> freely-chosen axiom whose footprint is declared out loud, or it simply is not")
+    ap("> claimed at all (a *countermodel frontier*, marked `⇏`).")
+    ap("")
+    ap("**Two directions, not one.** The chart distinguishes *epistemic discovery* (▲ — what")
+    ap("the argument must prove upward: no free subject precedes free will) from *ontological")
+    ap("grounding* (▼ — what the established order then entails downward: a personal free")
+    ap("agency grounds Right/Wrong).")
+    ap("")
+    ap("**Badge legend.** Every icon on a formal consequence is machine-derived from")
+    ap("the Lean kernel (see `formal/GAPMAP.md` and the investigations) — never transcribed:")
+    ap("")
+    ap("| icon | meaning |")
+    ap("|---|---|")
+    ap("| `✅` | PROVEN — verified by pure logic; footprint contains only classical meta-logic (`CL`) and the claim's own vocabulary (0 substantive axioms) |")
+    ap("| `⚠️ (AxName)` | AXIOMATIC — machine-verified, yet deliberately rests on the named declared axiom (`SEM` semantic choice / `META` metaphysical bridge) — **not unproved** |")
+    ap("| `📘` | DEFINITIONAL — true by definition of the term being introduced |")
+    ap("| `🧱 X ⇏ Y` | COUNTERMODEL — a model forces X nowhere near Y: an explicit boundary, not a failure |")
+    ap("")
+    ap("Axioms appear as `◆` in the audit ledger. `AXIOM` (the claim *is itself* a declared")
+    ap("axiom) is distinct from `AXIOMATIC` (the claim is *derived under* an axiom).")
+    ap("")
+    ap("The badge marks that **step's own** axiom cost, recomputed per declaration from")
+    ap("`#print axioms` — it is never inherited from a neighbouring step. A `✅` that")
+    ap("immediately follows a `⚠️` step is provably axiom-free on its own; badges do not")
+    ap("\"propagate\" down the chain — the kernel footprint is the transitive closure, so")
+    ap("a `✅` after a `⚠️` means the two share no proof edge: the marker between them is")
+    ap("narration, not inference.")
+    ap("")
+    ap("> `✅ · File.lean#name`-style footers point at the exact Lean declaration behind each")
+    ap("> consequence: the anchor is the declaration name, and the link jumps to its line under")
+    ap("> `formal/Logos/`. Follow the `Investigações` links for the deeper countermodel and")
+    ap("> retorsion analyses.")
+    ap("")
     return lines
 
 
@@ -5038,7 +3997,7 @@ def generate_argument_at_a_glance(spine_sections: list[dict], frontiers: list[di
     ap = lines.append
     ap("## The Argument at a Glance")
     ap("")
-    ap("This deduction establishes the complete philosophical arc from the performative attempt to deny objective Right and Wrong to the ultimate personal ground, exposing the exact formal status, substantive axiom footprint, and mathematical frontiers at every step.")
+    ap("This chart is the whole argument in one map. Each box is a claim; each arrow shows a forced consequence; each icon states the claim's machine-derived status. Read it, then walk the numbered sections below.")
     ap("")
     ap("Central Distinction: Epistemic Discovery (Right/Wrong reveals Person) operates in reverse of Ontological Grounding (Person grounds Right/Wrong).")
     ap("")
@@ -5062,14 +4021,40 @@ def generate_argument_at_a_glance(spine_sections: list[dict], frontiers: list[di
     return lines
 
 
+def status_icon(edge_badge: str) -> str:
+    """Map a display badge string to its one-emoji chart/ledger icon."""
+    if edge_badge.startswith("PROVEN"):
+        return "✅"
+    if edge_badge == "DEFINITIONAL":
+        return "📘"
+    if edge_badge.startswith("COUNTERMODEL"):
+        return "🧱"
+    if edge_badge.startswith("AXIOMATIC"):
+        return "⚠️"
+    return edge_badge
+
+
+def proof_cert_line(proof: ProofIR, edge_badge: str) -> str:
+    """One-line clickable footer: `{icon[ + axis/boundary]} · [file#name](formal/Logos/file#Lline)`."""
+    icon = status_icon(edge_badge)
+    if edge_badge.startswith("AXIOMATIC ("):
+        head = f"{icon} {edge_badge[len('AXIOMATIC ('):-1]}"
+    elif edge_badge.startswith("COUNTERMODEL | "):
+        head = f"{icon} {edge_badge[len('COUNTERMODEL | '):]}"
+    else:
+        head = icon
+    return f"{head} · [{proof.file}#{proof.name}](formal/Logos/{proof.file}#L{proof.line})"
+
+
 def render_proof_body_spine(proof: ProofIR, ap):
     """Renders a proof on the Main Proof Spine as an integral, readable part of the
     philosophical argument: clear mathematical-philosophical explanation, formal consequence,
     subordinate status badge, and Lean certification.
     """
     doc_lines = []
-    if proof.doc:
-        for line in proof.doc.splitlines():
+    lead_src = proof.doc_lead or proof.doc
+    if lead_src:
+        for line in lead_src.splitlines():
             line_str = line.strip()
             if not line_str:
                 continue
@@ -5078,7 +4063,7 @@ def render_proof_body_spine(proof: ProofIR, ap):
             doc_lines.append(line_str)
 
     if doc_lines:
-        ap(" ".join(doc_lines))
+        ap(_spine_lead(" ".join(doc_lines)))
         ap("")
 
     if proof.boundary:
@@ -5100,8 +4085,7 @@ def render_proof_body_spine(proof: ProofIR, ap):
         ap("")
 
     edge_cat, edge_badge = classify_proof_edge(proof)
-    ap(f"    [{edge_badge}]")
-    ap(f"    *(Formal certification: Lean: `{proof.file}#{proof.name}`)*")
+    ap(proof_cert_line(proof, edge_badge))
     ap("")
 
 
@@ -5147,27 +4131,13 @@ def render_proof_body(proof: ProofIR, ap, detailed: bool = False):
             ap("")
 
     edge_cat, edge_badge = classify_proof_edge(proof)
-    if edge_cat in ("SEMANTIC", "METAPHYSICAL"):
-        ap(f"    [{edge_badge}]")
-        ap("")
-    elif edge_cat == "DEFINITIONAL":
-        ap("    [DEFINITIONAL]")
-        ap("")
-    elif edge_cat == "COUNTERMODEL":
-        ap(f"    [{edge_badge}]")
+    if edge_cat == "PROVEN" and proof.subst_axioms:
+        inherited = ", ".join(sorted({ax.rsplit(".", 1)[-1] for ax in proof.subst_axioms}))
+        ap(f"✅ (inherited premise context: {inherited}) · [{proof.file}#{proof.name}](formal/Logos/{proof.file}#L{proof.line})")
         ap("")
     else:
-        if proof.subst_axioms:
-            ap("    [PROVEN | derived theorem]")
-            inherited = ", ".join(sorted({ax.rsplit(".", 1)[-1] for ax in proof.subst_axioms}))
-            ap(f"    *(inherited premise context: {inherited})*")
-            ap("")
-        else:
-            ap("    [PROVEN | 0 substantive axioms]")
-            ap("")
-
-    ap(f"*(Lean: `{proof.file}#{proof.name}`)*")
-    ap("")
+        ap(proof_cert_line(proof, edge_badge))
+        ap("")
 
 
 def render_deduction_sections(sections: list[dict], decls: dict = None, node_map: dict = None, investigations_dir: Path = None) -> list[str]:
@@ -5191,8 +4161,10 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
     if is_synthetic:
         spine = sections
 
-    # Opening: The Argument at a Glance (only in full document mode)
+    # Opening: how-to-read, then The Argument at a Glance (only in full document mode)
     if not is_synthetic:
+        for gl in render_reading_guide():
+            ap(gl)
         glance_lines = generate_argument_at_a_glance(spine, frontiers, countermodels)
         for gl in glance_lines:
             ap(gl)
@@ -5216,13 +4188,33 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
             ap(f"*(Detailed technical proof & model analysis: [{sec['investigation_link']}]({sec['investigation_link']}))*")
             ap("")
 
+        if sec.get("pushback"):
+            ap(f"> **The skeptic tries —** {sec['pushback']}")
+        if sec.get("reply"):
+            ap(f"> **The reply / the frontier —** {sec['reply']}")
+        if sec.get("pushback") or sec.get("reply"):
+            ap("")
+
+        if sec.get("route_definitions") and not is_synthetic:
+            ap("<details>")
+            ap(f"<summary>Definitions used in this section ({len(sec['route_definitions'])})</summary>")
+            ap("")
+            for d in sec["route_definitions"]:
+                render_proof_body_spine(d, ap)
+            ap("</details>")
+            ap("")
+
         for proof in sec.get("primary_proofs", sec.get("proofs", [])):
             render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
 
-        for proof in sec.get("supporting_proofs", []):
-            ap(f"### Supporting Infrastructure: `{proof.name}`")
+        if sec.get("supporting_proofs"):
+            ap("<details>")
+            ap(f"<summary>Supporting Infrastructure — {len(sec['supporting_proofs'])} auxiliary theorem(s) beneath this step</summary>")
             ap("")
-            render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+            for proof in sec.get("supporting_proofs", []):
+                render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+            ap("</details>")
+            ap("")
 
         for proof in sec.get("obstruction_proofs", []):
             ap(f"### Obstruction / Formal Boundary: `{proof.name}`")
@@ -5235,8 +4227,17 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
             if sub.get("summary"):
                 ap(sub["summary"])
                 ap("")
-            for proof in sub.get("proofs", []):
-                render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+            groups = sub.get("groups")
+            if groups:
+                for g in groups:
+                    if g.get("label"):
+                        ap(g["label"])
+                        ap("")
+                    for proof in g.get("proofs", []):
+                        render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+            else:
+                for proof in sub.get("proofs", []):
+                    render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
 
         for b in sec.get("branches", []):
             ap(f"### {b['title']}")
@@ -5249,10 +4250,14 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
                 ap("")
             for proof in b.get("primary_proofs", []):
                 render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
-            for proof in b.get("supporting_proofs", []):
-                ap(f"#### Supporting Infrastructure: `{proof.name}`")
+            if b.get("supporting_proofs"):
+                ap("<details>")
+                ap(f"<summary>Supporting Infrastructure — {len(b['supporting_proofs'])} auxiliary theorem(s) beneath this branch</summary>")
                 ap("")
-                render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+                for proof in b.get("supporting_proofs", []):
+                    render_proof_body_spine(proof, ap) if not is_synthetic else render_proof_body(proof, ap, detailed=is_synthetic)
+                ap("</details>")
+                ap("")
             for proof in b.get("obstruction_proofs", []):
                 ap(f"#### Obstruction / Formal Boundary: `{proof.name}`")
                 ap("")
@@ -5334,50 +4339,6 @@ def render_ledger_tables(sections: list) -> list:
         for c in sec["claims"]:
             ap(f"| {c['id']} | {c.get('prose') or '—'} | "
                f"{status_label(c)} | {_short_gloss(c)} |")
-    ap("")
-    return L
-
-
-def render_prologue() -> list:
-    L = []
-    ap = L.append
-    ap("# Γ — The Deduction")
-    ap("")
-    ap("**Generated document.** Produced by `scripts/build_deduction.py`; do not "
-       "edit it by hand (sync rule in `AGENTS.md`). A philosopher can read "
-       "Sections 1–4 and understand the argument, its inline obstructions and "
-       "caveats, and its unresolved frontier; a logician can follow the "
-       "appendices down to the kernel proof and the exact axiom footprint.")
-    ap("")
-    ap("- **Lean source:** `formal/Logos/*.lean` — kernel-checked "
-       "(`lake build` green, sorryAx 0)")
-    ap("- **Kernel footprints:** `formal/axiom_audit.json` (`#print axioms` per "
-       "declaration — the exact transitive kernel axiom set, meta-logic included)")
-    ap("- **Axiom tags:** the `Tag:` line (`VOCAB`/`SEM`/`META`) on each axiom's "
-       "Lean docstring")
-    ap("- **Dependency graph:** `formal/depgraph.json` (LeanDepViz, kernel)")
-    ap("- **Claim ledger:** [`formal/GAPMAP.md`](formal/GAPMAP.md) — statuses "
-       "transcribed and *checked* against the kernel, never its source")
-    ap("- **Prose:** [`base.txt`](base.txt) (§0–§29) · "
-       "[`poem.txt`](poem.txt) (P1–P10) · [`theorems/`](theorems/)")
-    ap("")
-    ap("Regeneration: `python3 scripts/audit_footprints.py && "
-       "python3 scripts/build_deduction.py`")
-    ap("")
-    ap("---")
-    ap("")
-    ap("## 1. What the argument tries to establish")
-    ap("")
-    ap(THESIS)
-    ap("")
-    ap("**Status vocabulary.** **LOGICAL** (logic alone) · **DEFINITIONAL** "
-       "(follows from how Γ's concepts are constituted) · **SEMANTIC** (a "
-       "substantive semantic principle) · **METAPHYSICAL** (a substantive "
-       "metaphysical bridge) · **OPEN** (not currently derived) · "
-       "**COUNTERMODEL** (a proposed inference fails in a hostile model). A "
-       "`/ CONDITIONAL` qualifier marks a conclusion resting on a premise clause.")
-    ap("")
-    ap("---")
     ap("")
     return L
 

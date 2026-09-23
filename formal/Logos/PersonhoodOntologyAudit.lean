@@ -12,7 +12,8 @@ In Γ's development, three distinct definitions of `Person` have emerged:
 
 1. **Nominal/Early Cogito Definition (`Spike_A4_2` / commit `7803f44`):**
    `Person_nominal s := Agent s ∧ Rational s ∧ Intentional s`
-   With `Agent := True` and `Rational := True`, this collapsed definitionally to
+   With `Agent := True` and `Rational := ∃ p, Means s p` (derived floor,
+   PERSON.md 2026-09-23), this still collapses definitionally to
    `IntentionalSubject s := ∃ p, Means s p`.
    Under this definition, `present_person` was proven immediately from the Cogito
    datum with `{Means, Subject}`. However, this was rightly criticized as nominal:
@@ -215,8 +216,7 @@ def FaithfulModalModel : ModalPersonSignature where
 /-- Theorem: Genuine Modal Independence of Necessary Subjecthood.
     A subject being a Person in the actual world does NOT logically entail that the subject
     exists across all possible worlds.
-    This proves that `Person → NecessarySubject` is a GENUINE METAPHYSICAL FRONTIER (Type 1/4),
-    requiring the modal grounding bridges `AxGlobalGround` (SEM) and `AxPersonalGround` (META).
+    This proves that `Person → NecessarySubject` is a genuine modal boundary.
     Footprint: `{}`. -/
 theorem faithful_contingent_person_fails_necessary_subject :
     (∃ s : FaithfulModalModel.Subject, FaithfulModalModel.Person s ∧ FaithfulModalModel.ExistsAt FaithfulModalModel.actualWorld s) ∧

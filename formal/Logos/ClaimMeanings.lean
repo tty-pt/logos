@@ -29,8 +29,6 @@ def F9 : String := "Incarnation and creation are faith data from the poem, defer
 
 def Q7_2 : String := "Research question, answered: the swap is a theorem for atoms (no axiom needed); the compound instance is unforced."
 
-def C19 : String := "There is a necessary reality grounded on the indubitable: some entity existing in every world grounds 'φ or not-φ' under AxGlobalGround."
-
 -- Retired / blocked claims under hostile semantics
 
 def C78 : String := "Contingent ground is retired: manufactured witness destroyed under hostile semantics."
@@ -38,8 +36,6 @@ def C78 : String := "Contingent ground is retired: manufactured witness destroye
 def C79 : String := "Ultimate ground existence is blocked: infinite descending chains have no ultimate element without a well-foundedness axiom."
 
 def C87 : String := "Origin necessity is retired: manufactured origin witness destroyed."
-
-def C88 : String := "Transcendental quantifier swap is retired: uniform necessary ground requires AxGlobalGround."
 
 def C89 : String := "Ultimate ground by initiation is blocked: non-entailed without well-foundedness."
 
@@ -97,26 +93,26 @@ def C112 : String := "Unincarnate hostile model: the existing theory is complete
 
 def C142 : String := "Personhood is constitutively equivalent to possessing a free, independently individuated will."
 
-def C143 : String := "A personal subject with free independent will who performs a judgment act ontologically grounds judicative normative polarity."
+def C143 : String := "A personal subject with free independent will satisfies the specification of the personal ontological ground of Right/Wrong."
 
-def C144 : String := "Every Person performing a judgment act ontologically grounds the judicative normative polarity between correctness and error."
+def C144 : String := "Personhood supplies the ontological ground-type required by objective Right/Wrong, derived directly from Personhood without Act."
 
 def C145 : String := "Transcendental discovery of the free subject from normative polarity is logically independent of the ontological grounding bridge."
 
-def C146 : String := "Model B proves that in bare theory, the hypothesis of a free subject does not by itself entail personal grounding of normative polarity; grounding is instead constitutive (judicative_normative_polarity_of_act, 0 substantive axioms)."
+def C146 : String := "Model B proves that in bare theory, the hypothesis of a free subject does not by itself entail an external grounding relation; grounding is instead constitutive from Personhood itself (0 substantive axioms)."
 
 def C147 : String := "Denying Right is performatively self-contradictory: no agent can present NoRight as correct while NoRight is true."
 
-def C148 : String := "Right and Wrong are real, and the normative order is necessary — both unconditional, zero substantive axioms."
+def C148 : String := "Right and Wrong are real, and the normative order is necessary — both unconditional, zero substantive axioms. 'Right/Wrong' here denotes the objective truth-based correctness polarity (some propositions true, some false), not moral good/evil (moral good is DEFERRED, F3)."
 
 def C149 : String := "The judicative stance forces the Person: any agent grasping a proposition as correct and as incorrect is a free subject (FreeWill), hence a Person."
 
-def C150 : String := "The Person, as free subject, grounds ALL judicative reality: every judicative act of every subject constitutes its own Right/Wrong polarity."
+def C150 : String := "Personhood supplies the ontological ground-type for all subjects without Act."
 
-def C151 : String := "HEADLINE — The Person supports the reality of Right: deny-Right is contradictory, Right/Wrong is real and necessary, the judicative stance forces the Person, and the Person grounds all judicative reality."
+def C151 : String := "HEADLINE — The Person supports the reality of Right: deny-Right is contradictory, Right/Wrong is real and necessary, the normative datum forces the Person, and the ground required by Right/Wrong is personal in kind. 'Supports the reality of Right' = grounds the objective correctness/normativity structure governing judgments (RightWrong-reality); not a claim that the Person creates existence or legitimizes evil."
 
-def C152 : String := "Given the performative datum (some agent actually judges), a Person exists whose free judicative nature grounds Right/Wrong for all its acts, and the normative order is necessary."
+def C152 : String := "Given the performative datum (some agent actually faces Right/Wrong), there exists a personal ontological ground of Right/Wrong, and the normative order is necessary."
 
-def C153 : String := "The present personal free act is the necessary ontological basis of Right/Wrong and of all Gamma-reality (instance form of the headline)."
+def C153 : String := "The derived Person instantiates the personal ontological ground of the objective normative/truth order governing judgments about Gamma-reality — grounding the correctness of propositions about what is the case, not producing what exists or approving evil (instance form of the headline)."
 
 end Logos.ClaimMeanings

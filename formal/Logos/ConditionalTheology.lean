@@ -5,14 +5,13 @@
 import Logos.Core
 import Logos.Necessity
 import Logos.Semantics
-import Logos.Truthmaker
+import Logos.Entity
 import Logos.Modal
 import Logos.Agency
 import Logos.Person
 import Logos.Initiation
 import Logos.Alternatives
 import Logos.Order
-import Logos.GroundPerson
 import Logos.Choice
 import Logos.Value
 import Logos.Plurality
@@ -219,7 +218,6 @@ section Sector3_PersonalUltimateGround
 
 /-!
 Investigates: `ultimate ground → personal ground` under Γ + A14.
-CountermodelImpersonalUltimateGround shows that grounding alone does not entail personality.
 Does A14 change that?
 -/
 

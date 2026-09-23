@@ -1,122 +1,310 @@
-# Investigation: Truthmaking, Grounding, and Necessary Reality (God)
+# Investigation: Constructive Personal Ground of Normativity and Reality
 
 **Repository:** Γ (Logos)  
-**Primary Formal Source:** `formal/Logos/Truthmaker.lean`, `formal/Logos/Modal.lean`, `formal/Logos/GroundPerson.lean`, `formal/Logos/TheologicalModalHardening.lean`  
-**Kernel Status:** SEMANTIC BRIDGE (`Truthmaker`, `AxGlobalGround`) / THEOREMS T7 & T8  
+**Primary Formal Sources:** `formal/Logos/PersonalNormativeGround.lean`, `formal/Logos/PersonalGroundOfReality.lean`  
+**Kernel Status:** THEOREMS T7 & T8 (0 Substantive Axioms / Minimal Classical Logic)  
 
 ---
 
-## 1. The Route from Truth to Reality
+## 1. Dual-Arrow Architecture: Epistemic Discovery vs. Ontological Grounding
 
-How does Γ proceed from necessary propositions to a necessary ontological reality?
-The transition requires two foundational bridges:
-1. **The Truthmaker Principle (`Truthmaker` / A3):** Truth does not float unsupported; truths are grounded in reality.
-2. **The Global Ground Principle (`AxGlobalGround` / A4):** Necessary truth is uniformly grounded across all modal worlds.
+The grounding architecture of Γ operates through a fundamental distinction between the direction of deductive discovery and the ontological direction of grounding:
 
----
+```text
+DEDUCTIVE DISCOVERY (STRICTLY FORWARD IMPLICATION CHAIN, ZERO ACT):
+  A₀(s, p, q) ⇒ A₁(s, p, q) ⇒ A₂(s, p, q) ⇒ A₃(s) ⇒ A₄(s) ⇒ P(s) ⇒ G(s)
+  (The starting normative datum constructively derives the Person, who derives Grounding.)
 
-## 2. Formalization of Truthmaking and Atomic Grounding
+ONTOLOGICAL GROUNDING (DERIVED PROPOSITION):
+  Objective Right/Wrong has a necessary ontological grounding of a personal kind/type.
+  (The ground required by objective Right/Wrong is personal in kind;
+   the derived subject s witnesses/instantiates this personal ground.)
 
-In `formal/Logos/Truthmaker.lean:35`:
-```lean
-axiom Ground : Entity → Prop → Prop
-axiom Truthmaker : ∀ p : Prop, T p → ∃ r : Entity, Ground r p
+NOT:
+  “A particular contingent person s individually generates, creates, causes, or grounds
+   every particular instance of Right and Wrong.”
 ```
-- For atomic propositions, truth implies the existence of a real grounding entity.
-- For compound propositions, truth follows compositionally.
+
+### The Non-Reversal Principle
+A central insight of the formalization is that **the fact that a personal ground is the ontological foundation of $A_0$ does not require the proof to run backwards**.
+
+The proof runs strictly forward:
+$$A_0 \Rightarrow A_1 \Rightarrow \dots \Rightarrow P \Rightarrow G.$$
+
+What is discovered at the end is something about the **ontological kind of the ground**:
+$$\text{The ontological ground of Right/Wrong is personal in kind/type (witnessed by } P\text{).}$$
+
+There are no arbitrary grounding axioms, no Principle of Sufficient Reason being smuggled in, and no reliance on `Act`:
+1. Every implication has a true antecedent once the previous step has been established;
+2. $P$ is Person (`Person s := FreeSubject s := FreeWill s`);
+3. $G$ is the proposition that this Person instantiates the personal ontological ground of Right/Wrong (`GroundsRightWrong s`).
+
+Because $G$ is an object-level derived theorem, deriving $G$ from $P$ by modus ponens means the proof continues forward to its conclusion without circularity, reversal, or physical action dependencies.
+
+### Clarifying the Personal Ground-Type
+The argument does not identify a particular contingent individual as the creator of Right and Wrong; it establishes that the ontological ground required by objective Right/Wrong is personal in kind.
+
+Specifically:
+- **Universal Agential Dependence (`dependence`):**
+  $$\forall s' : \text{Subject}, \text{RightWrong } s' \to \text{Person } s'$$
+  This universal condition ensures that wherever the normative order obtains, its relevant agential ground is of the personal kind. Personhood supplies the ontological ground-type required by normativity.
+- **Index vs. Causal Generator:**
+  The parameter $s : \text{Subject}$ in $\text{GroundsRightWrong } s$ is the formal witness showing that a personal entity satisfies the specification of grounding. It does not mean that the individual's contingent biography or particular empirical choices generate the universal normative order.
+- **General Grounding vs. Content-Indexed Grounding:**
+  `GroundsRightWrong s` concerns the personal ontological ground of Right/Wrong in general, whereas `GroundsRightWrongAt s p q` indexes grounding to a specific normative opposition $(p, q)$.
+- **Retorsive-Transcendental Necessity:**
+  "Necessity" here is transcendental/ontological necessity (objective Right/Wrong cannot stand without a personal ontological basis), not an entity-level modal claim that the same contingent individual $s$ exists in every possible world.
+- **Existential Interpretation:**
+  $\exists s : \text{Subject}, \text{Person } s \land \text{GroundsRightWrong } s$ establishes that there exists a personal ground of the normative order, not that one particular empirical person personally causes every normative fact.
 
 ---
 
-## 3. The Necessity Bridge: Theorem T7 (`necessary_truth_has_necessary_grounder`)
+## 2. The Forward Implication Chain in Lean
 
-Does a necessary truth imply the existence of a necessary reality?
-In `formal/Logos/GroundPerson.lean:125`:
+In `formal/Logos/PersonalNormativeGround.lean` (Section 5b):
+
 ```lean
-theorem necessary_truth_has_necessary_grounder :
-    ∀ (p : Prop) (hNec : NecessarilyTrue p),
-      ∃ (g : Entity), NecessaryEntity g ∧ Ground g p
+-- Individual Steps (Zero Act Dependency)
+step_datum_to_stance        : Stage0_NormativeDatum s p q → Stage1_NormativeStance s p q
+step_stance_to_choice       : Stage1_NormativeStance s p q → Stage2_NormativeChoice s p q
+step_choice_to_freewill     : Stage2_NormativeChoice s p q → Stage3_AgentialFreeWill s
+step_freewill_to_freeSubject: Stage3_AgentialFreeWill s → Stage4_FreeSubject s
+step_freeSubject_to_person  : Stage4_FreeSubject s → Stage5_Person s
+step_person_to_grounding    : Stage5_Person s → Stage6_PersonalGrounding s
+
+-- Master Forward Modus Ponens Derivation
+theorem forward_modus_ponens_derivation (s : Subject) (p q : Prop)
+    (h₀ : RightWrongAt s p q) :
+    Person s ∧ GroundsRightWrong s := by
+  have h₁ := step_datum_to_stance s p q h₀
+  have h₂ := step_stance_to_choice s p q h₁
+  have h₃ := step_choice_to_freewill s p q h₂
+  have h₄ := step_freewill_to_freeSubject s h₃
+  have hp := step_freeSubject_to_person s h₄
+  have hg := step_person_to_grounding s hp
+  exact hg
+
+-- Master Forward Composition Pipeline
+theorem forward_composition_pipeline (s : Subject) (p q : Prop) :
+    RightWrongAt s p q → Person s ∧ GroundsRightWrong s :=
+  fun h₀ =>
+    step_person_to_grounding s
+      (step_freeSubject_to_person s
+        (step_freewill_to_freeSubject s
+          (step_choice_to_freewill s p q
+            (step_stance_to_choice s p q
+              (step_datum_to_stance s p q h₀)))))
+
+-- Concrete Grounding of the Starting Datum
+theorem person_grounds_original_normative_datum (s : Subject) (p q : Prop)
+    (h₀ : RightWrongAt s p q) :
+    Person s ∧ GroundsRightWrong s :=
+  forward_modus_ponens_derivation s p q h₀
+
+-- Substantive Grounding Derivation from Personhood
+theorem person_grounds_right_wrong (s : Subject) (hPerson : Person s) :
+    GroundsRightWrong s := by
+  refine ⟨hPerson, ?_, ?_⟩
+  · intro s' hRW
+    exact discovery_rightwrong_to_person s' hRW
+  · exact Logos.Person.person_has_free_will s hPerson
 ```
-* **Status:** PROVEN under `{AxGlobalGround, Ground, Subject}`.
-* **Why `AxGlobalGround` is Required (`CountermodelWorldwiseTruthmaking`):**  
-  Without `AxGlobalGround`, a necessary truth $p$ could be grounded in world $w_1$ by contingent entity $e_1$, and in world $w_2$ by a distinct contingent entity $e_2$, without any single entity existing necessarily. `AxGlobalGround` collapses worldwise variation into a uniform necessary ground.
+
+* **Status:** PROVEN under `{Means, Subject}` (0 substantive axioms, zero `Act`).
+* The derived Person $s$ instantiates the personal ontological ground of Right/Wrong via substantive agential choice and universal ontological dependence.
+* **Core Conclusion:** The argument does not identify a particular contingent individual as the creator of Right and Wrong; it establishes that the ontological ground required by objective Right/Wrong is personal in kind.
 
 ---
 
-## 4. The Ultimate Ground
+## 3. Constructive Discovery of the Person (Theorem T7)
 
-Can grounding form an infinite regress or cycle?
-In `formal/Logos/TheologicalModalHardening.lean:80-140`:
-- **Model IR (Infinite Regress):** Demonstrates that without well-foundedness or totality grounding, an infinite chain of contingent grounds is model-theoretically satisfiable.
-- **Totality Grounding Principle:** The totality of contingent facts requires an ungrounded, self-subsistent ground.
-- **Result:** The existence of an **Ultimate Ground** $u : \text{Entity}$ that is necessary, ungrounded, and grounds all dependent reality.
-
----
-
-## 5. Uninterpreted-Ground Relation Separation (Independence of Syntactic GroundProp)
-
-### Forensic Reassessment
-The earlier attempt to derive the Necessary Personal Ground routed the proof through a higher-order proposition of the normative order:
-$$\text{ObjectiveNormativeOrder} \to \text{GroundPrincipleProp} \to \text{normative\_ground\_persistence}$$
-This was routed through an uninterpreted relation `GroundProp` and an ad hoc persistence bridge `normative_ground_persistence`.
-
-The countermodel `NormativeGroundIndependenceModel` and the separation theorem:
+In `formal/Logos/PersonalNormativeGround.lean`:
 ```lean
-theorem necessary_normative_truth_not_implies_ground :
-    ¬ (∀ (M : NormativeGroundIndependenceModel),
-        (∀ w, M.NormativeOrderAt w M.ObjectiveNormativeOrder) →
-        ∃ g : M.Entity, M.GroundProp g M.ObjectiveNormativeOrder)
-```
-demonstrates that in the absence of `GroundPrincipleProp`, invariant necessity of a proposition does not force an ontological ground over an uninterpreted syntactic relation (`GroundProp g p := false`). This establishes an **uninterpreted-relation separation theorem**, not a genuine philosophical independence of reality grounding.
+namespace Constructive
 
-Consequently, both `normative_ground_persistence` and `GroundPrincipleProp` have been **retired** from the master ontological derivation.
+structure Person where
+  subject : Logos.Agency.Subject
+  is_person : Logos.Person.Person subject
+
+def RightWrong (p : Person) : Prop :=
+  ∃ a b : Prop, Logos.IndubitableNormativeFreeWill.GenuineNormativity p.subject a b
+
+def ObjectiveNormativity : Prop :=
+  ∃ p : Person, RightWrong p
+
+theorem discover_person :
+    ObjectiveNormativity → ∃ p : Person, RightWrong p := by
+  intro h
+  exact h
+```
+* **Status:** PROVEN under `{Means, Subject}` (0 substantive axioms).
+* `p` is not a dummy parameter: `p.subject` is actively required by `GenuineNormativity` to cognitively grasp the normative alternatives.
+* From the reality of objective normativity, we constructively discover the person.
 
 ---
 
-## 6. The Recovered Ontological Ground Architecture (T8 Recovery & Reality Grounding)
+## 4. Grounding as Dependent Pair (0 Axioms)
 
-### Authentic T8 vs. Necessary Personal Ground of Reality
-The forensic audit revealed that the original theorem T8 established:
-$$\text{NecessaryPersonalReality}(g) := \text{NecessaryEntity}(g) \land \exists f, \text{Realizes}(g, f) \land \text{IsPresentPersonalFeature}(f)$$
-with the clean, minimal axiom footprint:
-$$\{ \text{AxPersonalGround}, \text{GroundProp}, \text{Initiates}, \text{Means}, \text{State}, \text{Subject} \}$$
-This result (Claim C) directly derives that any present personal feature (such as that instantiated in a rational act) forces a Necessary Personal Reality. It is completely uncontaminated by `AxGlobalGround`, `AxRealityGrounding`, or `AxIntentionalChoice`.
+Rather than introducing an uninterpreted or external `Ground` relation or postulating a metaphysical grounding axiom, grounding is built directly into the formal dependent pair type structure:
+```lean
+def GroundedRightWrong : Type :=
+  Σ' p : Person, RightWrong p
 
-### The Five-Claim Ontological Hierarchy
-To prevent conflations and modal/unitarian collapse, Γ rigorously formalizes five distinct claims:
-* **Claim A (`ClaimA_NecessaryTruth`):** Necessary Truth exists ($\Box \tau$, e.g., $\tau := p \lor \neg p$, proven with 0 axioms).
-* **Claim B (`ClaimB_NecessaryReality`):** Necessary Reality exists ($\exists e, \text{NecessaryEntity}(e)$, derived in T7 under `AxGlobalGround`).
-* **Claim C (`ClaimC_HistoricalT8` / `NecessaryPersonalReality`):** A necessary entity realizes present personal features (derived in T8 under `AxPersonalGround`).
-* **Claim D (`ClaimD_NecessaryPerson` / `NecessaryGroundOfReality`):** The necessary ground of all reality exists ($\exists g, \text{NecessaryGroundOfReality}(g)$).
-* **Claim E (`ClaimE_NecessaryPersonalGround` / `NecessaryPersonalGroundOfReality`):** The necessary entity that grounds all reality also realizes personal agency ($\exists g, \text{NecessaryPersonalGroundOfReality}(g)$).
+def groundOfRightWrong (x : GroundedRightWrong) : Person :=
+  x.1
+```
+* The relation of person to Right/Wrong is represented by the genuine dependent pair: the person is the base and the normative distinction is the fiber.
+* No grounding axiom (`AxGlobalGround`, `Truthmaker`, etc.) is required.
 
-### Entailments and Level Separation
-* Claim E strictly entails Claim C (`necessary_personal_ground_implies_personal_reality`) and Claim D (`necessary_personal_ground_implies_ground_of_reality`).
-* Claim C does NOT entail Claim E: realizing personal features in an act-content does not make an entity the universal ontological ground of all reality.
-* Claim D does NOT entail Claim E: grounding all reality does not analytically entail personal agency without explanatory adequacy and agential transmission.
+---
 
-### Restored Entity Grounding Principles
-The synthesis of Claim E is established in `formal/Logos/RecoveredOntologicalGround.lean` using the restored historical grounding infrastructure:
-1. **`AxRealityGrounding` (Tag: SEM, restored from historical GAPMAP C130, commit 817f168):**
+## 5. The Headline Ontological Grounding Theorem (Theorem T8)
+
+In `formal/Logos/PersonalGroundOfReality.lean`:
+```lean
+theorem the_person_supports_the_reality_of_right :
+    (¬ ∃ s : Subject, ClaimsCorrect s NoRight ∧ NoRight) ∧
+    EstablishedRightWrong ∧ (∀ p : Prop, Logos.Core.T p ∨ Logos.Core.IsFalse p) ∧
+    NecessaryNormativeOrder ∧
+    (∀ (s : Subject), RightWrong s → Person s) ∧
+    (∀ (s : Subject), Person s → GroundsRightWrong s) := by
+  exact ⟨deny_right_self_contradicts,
+         ⟨Logos.Core.rightWrongDistinction, ⟨Logos.Core.bivalence, ⟨necessary_normative_order,
+            ⟨normative_datum_forces_person,
+             person_grounds_normative_order⟩⟩⟩⟩⟩
+```
+* **Status:** PROVEN under `{Initiates, Means, State, Subject, CL}` (0 substantive axioms).
+* The Person supports the reality of Right without relying on `Act` in the grounding argument.
+* **Explicit Boundary:** The argument does not identify a particular contingent individual as the creator of Right and Wrong; it establishes that the ontological ground required by objective Right/Wrong is personal in kind. The existential corollary `personal_ground_of_right_exists` establishes that a personal ground exists, not that an empirical person causally produces morality.
+
+---
+
+## 5a. Forcing: `GroundsRightWrong` is determined, not stipulated
+
+**Objection addressed.** One might charge that `GroundsRightWrong` is merely a formally
+specified predicate — you define `G(s) := P(s) ∧ (provable field₂) ∧ (provable field₃)`,
+and once the deduction delivers `Person s` you simply *construct* a record; so the
+"grounding" claim is an artifact of definitional choices, not something *forced* by the
+preceding facts.
+
+**Reply (Section 5c of `PersonalNormativeGround.lean`, GAPMAP C168–C171).** The
+predicate is *determined* by the preceding facts in three independently sufficient senses:
+
+1. **Transparency — no new content.** `GroundsRightWrong s` is definitionally equivalent
+   to a conjunction written entirely in the *pre-grounding* vocabulary (the symbol
+   `GroundsRightWrong` does not occur in it):
    ```lean
-   axiom AxRealityGrounding :
-     ∀ (g : Entity), NecessaryEntity g → (∃ τ : Form, NecessarilyTrue τ ∧ Ground g τ) →
-       ∀ (e : Entity), e ≠ g → ActualEntity e → GroundsEntity g e
+   def ForcedGroundContent (s : Subject) : Prop :=
+     Person s ∧ (∀ s' : Subject, RightWrong s' → Person s') ∧ (∃ p q : Prop, Chooses s p q)
+
+   theorem groundsRightWrong_iff_forced_content (s : Subject) :
+       GroundsRightWrong s ↔ ForcedGroundContent s
    ```
-   The necessary ground of necessary truth ontologically grounds every distinct actual entity in reality.
-2. **`agential_grounding_transmission` (Tag: SEM):**
+   There is no hidden field and no opaque semantic atom (`Ground`, `Bridge`, …). The
+   predicate is notation for facts already in the theory — it is *eliminable*.
+
+2. **Every field is a preceding theorem.** `forced_content_of_person : Person s →
+   ForcedGroundContent s` constructs the three conjuncts from facts established *before*
+   the grounding step exists:
+   - the universal dependence literal field is the global closure of the §4 discovery
+     theorem `discovery_rightwrong_to_person` (proved *prior* to any grounding step);
+   - the agential substrate `∃ p q, Chooses s p q` unpacks the very *definition* of
+     Personhood (`Person s := FreeSubject s := FreeWill s := ∃ p q, Chooses s p q`);
+   - `Person s` is the derived conclusion of the chain, not a grounding premise.
+   Hence `Person s → GroundsRightWrong s` is a *reading-off* of prior content, not an
+   arbitrary assembly.
+
+3. **Forced by the datum, not by the Person.** The ground follows from the *datum* A₀
+   alone — before the Person is even reached — with the witness pair aligned to the datum:
    ```lean
-   axiom agential_grounding_transmission :
-     ∀ (g : Entity) (s : Subject) (p : Prop),
-       GroundsEntity g (EntityOf s) → Act s p → Realizes g p
+   theorem grounding_forced_by_preceding_facts (s : Subject) (p q : Prop)
+       (h0 : RightWrongAt s p q) : GroundsRightWrong s
+
+   theorem grounding_forced_at_datum (s : Subject) (p q : Prop)
+       (h0 : RightWrongAt s p q) : GroundsRightWrongAt s p q
    ```
-   If an entity $g$ ontologically grounds an agent $e$, $g$ accounts for and grounds the personal features realized in the rational acts of $e$.
-3. **Explanatory Adequacy & Finite Separation:**
-   Contingent human subjects are contingent ($\neg \text{ExistsAt}(\text{otherWorld}, \text{EntityOf}(s))$), whereas the ground is necessary, proving numerical distinctness ($s \ne g$, eliminating modal collapse). Furthermore, by explanatory adequacy (`atom_cannot_ground_person`), an impersonal atom cannot ground personal agency.
+   No witness is manufactured after Person is obtained: the content-indexed ground sits
+   at the datum's own pair `⟨p, q⟩`. Footprint `{Means, Subject}`, 0 substantive axioms.
 
-### Master Theorem
-The master synthesis theorem (`Logos.NecessaryPersonalGround.necessary_personal_ground_derived`) is proven by constructive synthesis:
-$$\text{Performative Act Datum} \implies \text{Claim E}$$
-with the authoritative footprint:
-$$\{ \text{AxGlobalGround}, \text{AxRealityGrounding}, \text{agential\_grounding\_transmission}, \text{explanatory\_adequacy}, \text{Ground}, \text{GroundProp}, \text{GroundsEntity}, \text{Initiates}, \text{Means}, \text{State}, \text{Subject}, \text{CL} \}$$
-Zero `normative_ground_persistence`, zero `GroundPrincipleProp`, zero `AxIntentionalChoice`.
+Contrast with the *external-relation* reading that the hostile Model B isolates: an
+uninterpreted relation `GroundProp` needs a priced bridge (`AxPersonalNormativeGround`,
+since retired). The record form avoids that entire class of stipulation by being
+transparent.
 
+---
+
+## 5. Elimination of Obsolete Grounding Apparatus
+
+The formal audit eliminated all historical machinery that attempted to substantiate a personal ground through ungrounded external relations or quantifier swaps:
+1. **`Truthmaker` Axiom:** Eliminated. Truth does not require a primitive truthmaking entity.
+2. **`AxGlobalGround` Axiom:** Eliminated. Uniform modal necessity across worlds is not routed through a global quantifier-swap axiom.
+3. **Infinite Ground Regress / Chains:** Eliminated as unnecessary for the main proof. The constructive dependent-pair grounding of normativity in the person does not depend on well-foundedness of an external entity-grounding partial order.
+4. **Anti-Self-Legislation (`OughtRetorsion.self_grounded_ought_collapses`):** Grounding normative polarity in a personal agent does NOT mean identifying Right or Ought with the agent's current willing. Grounding is an asymmetrical, external ontological dependence, not an analytical reduction that would destroy the possibility of normative violation.
+
+---
+
+## 6. Semantic Clarification: What the Grounding Claim Does and Does Not Say
+
+The grounding claim operates on four distinct levels, which must not be collapsed:
+
+```text
+REALITY
+  └── whatever is actually the case / whatever exists
+
+PROPOSITION
+  └── a claim about what is the case
+
+OBJECTIVE TRUTH / CORRECTNESS
+  └── whether that proposition corresponds to reality
+
+NORMATIVE ORDER
+  └── the objective standard governing whether affirming the proposition
+      is correct/ought, or incorrect/ought-not
+```
+
+The normative order (the epistemic `TruthNorm`: prescribe = true, prohibit = false)
+governs **the correctness of judgments about reality**; it does not generate the
+contents of those judgments and does not create the existents they concern.
+
+### Explicitly ruled-out category mistakes
+
+Grounding the normative order is **not** efficient causation of existence. The
+argument is NOT claiming:
+
+```text
+personal ground → causes every existent thing
+personal ground → makes evil exist → approves evil → morally legitimizes evil
+```
+
+Instead:
+
+```text
+Reality            → determines what is actually the case
+Normative order    → determines the objective correctness-status of propositions about what is the case
+```
+
+### Conceptual test (apple and evil)
+
+- Suppose an apple exists. Then "an apple exists" can be objectively true/correct.
+- Suppose evil exists. Then "evil exists" can likewise be objectively true/correct.
+
+Neither statement thereby evaluates the apple or evil morally, and neither implies
+that the ontological ground of truth/correctness caused the apple or caused evil to
+exist. (Cross-reference the individual-causation guard already stated in §1.)
+
+### Two senses of "Right"/"Wrong"
+
+- **Epistemic/logical correctness:** a proposition ought to be affirmed because it is true.
+- **Moral/deontic evaluation:** an action/content is right or wrong.
+
+The epistemic sense is what `rightWrongDistinction : ¬N_T ∧ ¬N_F` and `Order.Correct`
+express. "Evil exists, so 'evil exists' is true/correct — this does not make evil
+morally right." Moral good/evil remains DEFERRED (F2/F3).
+
+### Boundary statement
+
+The clarification does not change the mathematics: no `GroundOfReality := Person`,
+no causal principle `∀ x, Exists x → CausedByGround x`, `Act` remains absent from the
+discovery → grounding chain, entity-level Claim E (`GroundOfReality`) stays
+annotated-only (never a theorem), and nothing new is axiomatized. `GroundsRightWrong`
+grounds the normative/truth order only.

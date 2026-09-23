@@ -1,42 +1,31 @@
-# Investigation: Divine Personhood and the Rejection of Impersonalism
+# Investigation: Personal Agency and the Rejection of Impersonalism
 
 **Repository:** Γ (Logos)  
-**Primary Formal Source:** `formal/Logos/GroundPerson.lean`, `formal/Logos/TheologicalModalHardening.lean`, `formal/Logos/ModalCreationAgency.lean`  
-**Kernel Status:** METAPHYSICAL BRIDGE (`AxPersonalGround`, A7) / THEOREM T8  
+**Primary Formal Source:** `formal/Logos/PersonalNormativeGround.lean`, `formal/Logos/PersonalGroundOfReality.lean`, `formal/Logos/TheologicalModalHardening.lean`  
+**Kernel Status:** THEOREMS OF CONSTITUTIVE PERSONAL AGENCY (`{Initiates, Means, State, Subject, CL}`, 0 Substantive Axioms)  
 
 ---
 
-## 1. The Question: Is the Necessary Ground Personal?
+## 1. The Rejection of Impersonalism
 
-Having established a necessary reality / Ultimate Ground ($u : \text{Entity}$), must this reality be **personal**?
-Can the Ultimate Ground be an impersonal physical law, an unconscious substrate, or a brute mathematical principle?
+Can the ground of the normative order and reality be impersonal—such as an unconscious substrate, an impersonal physical law, or a brute mathematical principle?
 
----
-
-## 2. The Personal Ground Bridge (Theorem T8)
-
-In `formal/Logos/GroundPerson.lean:112`:
-```lean
-axiom AxPersonalGround :
-  ∀ (g : Entity), NecessaryEntity g → ∃ (s : Subject), PersonalGround s g
-
-theorem T8_personalGround (g : Entity) (hNec : NecessaryEntity g) :
-    ∃ (s : Subject), PersonalGround s g :=
-  AxPersonalGround g hNec
-```
-* **Status:** PROVEN under `{AxPersonalGround, GroundProp, Initiates, Means, State, Subject}`.
-* **Tag:** `META` (substantive metaphysical bridge).
+In Γ's formalization, impersonalism is strictly excluded across multiple independent axes:
+1. **Normative Grounding Requires Personal Agency:**  
+   In `formal/Logos/PersonalNormativeGround.lean`, `atom_cannot_ground_person` proves that an impersonal atomic entity cannot ground a personal agent (`∀ n s, Person s → ¬ GroundsEntity (Entity.ofAtom n) (EntityOf s)`). The capacity for intentional meaning and normative distinction belongs constitutively to personal agency.
+2. **Anti-Self-Legislation & Prescriptive Address:**  
+   As proved in `formal/Logos/OughtRetorsion.lean` (`self_grounded_ought_collapses`), identifying Ought with current volition collapses normative violation. Prescriptive normativity constitutively involves personal address, choice, and judgment.
+3. **The Personal Headline:**  
+   In `formal/Logos/PersonalGroundOfReality.lean`, `the_person_supports_the_reality_of_right` proves that the free personal judicative act supports the reality of truth and the normative order with zero substantive axioms.
 
 ---
 
-## 3. Why Impersonalism Fails: Modal Collapse & Contingency
+## 2. Modal Non-Necessitation (Avoiding Modal Collapse)
 
-In `formal/Logos/TheologicalModalHardening.lean:180-220` and `formal/Logos/ClassicalTheism.lean:90-110`:
+In `formal/Logos/TheologicalModalHardening.lean`:
 1. **The Modal Collapse Argument:**  
-   If the Ultimate Ground is purely impersonal and non-agential, it operates by necessary natural or logical determination. Therefore, whatever it grounds is necessitated:
-   $$\forall p,\; \text{Ground}(u, p) \implies \Box p.$$
-   This obliterates the contingency of creation and human free agency (Modal Collapse).
+   If an ultimate source operates by impersonal, deterministic necessity, whatever it grounds is necessitated, eliminating contingency and freedom.
 2. **The Agency Connection:**  
-   To ground contingent truths without necessitating them, the Ultimate Ground must possess the capacity for non-deterministic actualization—namely, **deliberation, intention, and Free Will**.
+   To account for normative alternatives and contingent reality without modal collapse, the reality must be grounded in agential deliberation, intention, and free choice.
 3. **Conclusion:**  
-   The Ultimate Ground cannot be an impersonal mechanism. It must be a **Personal Divine Subject**.
+   The ground of normative reality is constitutively a **Personal Free Agent**.

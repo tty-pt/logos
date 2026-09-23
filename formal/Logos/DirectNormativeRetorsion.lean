@@ -16,30 +16,25 @@ Key Architecture:
    - Model A (Mere noise): `Act s NoRight` without claiming correctness remains consistent.
    - Model B (Non-normative representation): `Means s NoRight` without acting remains consistent.
    - Model C (Normative denial): Formally refuted in the kernel.
-3. The Constitutive Semantic Bridge to Free Will:
-   - Bypasses `AxJudicativeBipolarity` (A18) and `AxIntentionalChoice` (A14) entirely.
-   - Connects `NormativeRightExists` to `GenuineNormativity`, deriving `Chooses` and `FreeWill`
-     with footprint `{Means, Subject}` (zero substantive axioms).
+3. Free Will (composition):
+   - The normative route `NormativeRightExists → GenuineNormativity → Chooses → FreeWill`
+     is carried by the C140/C141 chain in
+     `Logos.NormativeOrder.claims_normative_correctness_derives_free_will` and
+     `Logos.RetorsiveNormativity.normative_retorsion_derives_free_will`
+     (footprints `{Initiates, Means, State, Subject, CL}`, zero substantive axioms).
+   - The former `ConstitutiveNormativeBridge` structure was retired (2026-09-23): never
+     instantiated, never on any ledger route.
 -/
 
-import Logos.Core
-import Logos.Necessity
-import Logos.Semantics
 import Logos.Agency
 import Logos.Order
-import Logos.Choice
-import Logos.Alternatives
-import Logos.IndubitableNormativeFreeWill
 import Logos.RetorsiveNormativity
 
 set_option linter.unusedVariables false
 
 namespace Logos.DirectNormativeRetorsion
 
-open Logos.Agency (Subject Means State Initiates Act)
-open Logos.Alternatives (Incompatible)
-open Logos.Choice (Chooses FreeWill FreeSubject)
-open Logos.IndubitableNormativeFreeWill (GenuineNormativity indubitable_normative_free_will)
+open Logos.Agency (Subject Means Act)
 open Logos.RetorsiveNormativity (ClaimsCorrect)
 
 -- ===========================================================================
@@ -201,38 +196,11 @@ theorem model_c_normative_denial_is_impossible :
   cannot_claim_correct_no_right_and_true
 
 -- ===========================================================================
--- Section 3: The Constitutive Semantic Bridge to Free Will
+-- Section 3: (retired 2026-09-23 — the former `ConstitutiveNormativeBridge`
+--            structure and its two theorems were dead code: never instantiated,
+--            never on a ledger route. The free-will composition is carried by
+--            C140/C141, see module docstring, item 3.)
 -- ===========================================================================
-
-/-- Tag: SEM
-    Constitutive Normative Bridge:
-    Realized normative correctness is constitutively an authoritative deontic directive
-    addressed to an agent between incompatible alternatives (GenuineNormativity).
-    Classification: CONSTITUTIVE SEMANTIC. -/
-structure ConstitutiveNormativeBridge where
-  normativity_of_right : NormativeRightExists → ∃ (s : Subject) (p q : Prop), GenuineNormativity s p q
-
-/-- Master Theorem: Realized Normative Right entails Free Will under the Constitutive Normative Bridge.
-    Footprint: `{Means, Subject}` (zero substantive axioms).
-    Classification: LOGICAL derivation from SEMANTIC bridge. -/
-theorem normative_right_to_free_will
-    (bridge : ConstitutiveNormativeBridge)
-    (hNorm : NormativeRightExists) :
-    ∃ s : Subject, FreeWill s := by
-  obtain ⟨s, p, q, hGN⟩ := bridge.normativity_of_right hNorm
-  exact ⟨s, (indubitable_normative_free_will hGN).2⟩
-
-/-- Master Retorsive Synthesis: If an agent performs a normative denial of NoRight,
-    then Free Will is established under classical double negation and the constitutive bridge.
-    Footprint: `{Initiates, Means, State, Subject, CL}` (zero substantive axioms). -/
-theorem master_retorsion_to_free_will
-    (bridge : ConstitutiveNormativeBridge)
-    (hDenial : ∃ s : Subject, ClaimsCorrect s NoRight) :
-    ∃ s : Subject, FreeWill s := by
-  have hNotNoRight : ¬ NoRight :=
-    performative_normative_denial_establishes_normative_right hDenial
-  have hNorm : NormativeRightExists := Classical.not_not.mp hNotNoRight
-  exact normative_right_to_free_will bridge hNorm
 
 end Logos.DirectNormativeRetorsion
 
@@ -250,5 +218,3 @@ end Logos.DirectNormativeRetorsion
 #print axioms Logos.DirectNormativeRetorsion.model_a_mere_utterance_avoids_claims_correct
 #print axioms Logos.DirectNormativeRetorsion.model_b_mere_meaning_avoids_claims_correct
 #print axioms Logos.DirectNormativeRetorsion.model_c_normative_denial_is_impossible
-#print axioms Logos.DirectNormativeRetorsion.normative_right_to_free_will
-#print axioms Logos.DirectNormativeRetorsion.master_retorsion_to_free_will

@@ -29,7 +29,7 @@ Esta retorção estabelece DIRETAMENTE apenas o ato fraco: `∃ s p, act s p`.
 weak act [evento realizado] → ? [ponte de intencionalidade] → strong Act [ato intencional]
 A passagem do evento físico/proferido para a relação intencional de significado (`Act s p := Means s p`)
 constitui a ponte filosófica explícita `weak_act_implies_strong_act := ∀ s p, act s p → Act s p`.
-Sob semântica hostil (`CountermodelWeakActWithoutMeaning`, `{}`), a ocorrência de eventos não acarreta logicamente significado.
+A ocorrência de eventos físicos por si só não acarreta logicamente significado intencional.
 O atalho forte em Logos assume a asserção intencional `Asserts s p := Act s p ∧ p` (`noCogito_selfRefutes`).
 
 3. Da agência ao sujeito:
@@ -61,11 +61,8 @@ A ontologia distingue estritamente três níveis:
 
 Um ato não pode existir sem um sujeito que o efetive: a regra constitutiva
 `act_requires_subject : Act s p → SubjectExists s` (Caso B) vincula a atualidade do sujeito
-à sua agência no ato. Sob semântica hostil desprovida desta regra constitutiva, um modelo de ato
-sem sujeito é matematicamente viável (`HostileSemantics.CountermodelActWithoutSubject` —
-formalizando a objeção de Lichtenberg do "es denkt" / evento anónimo). Contudo, sob a regra
-constitutiva de `Act` em Logos, tal contramodelo torna-se impossível por contradição estrita
-no kernel (`countermodel_violates_constitutive_act`).
+à sua agência no ato. A objeção de Lichtenberg do "es denkt" (evento anónimo sem sujeito)
+é refutada pela própria definição constitutiva de `Act` em Logos.
 `Agency.noCogito_selfRefutes` (C58) opera por retorção performativa com pegada estrita
 `{Means, Subject}`, derivando a existência do sujeito (`Plurality.T1_of_assert`)
 diretamente da asserção presente sem recorrer ao axioma metafísico `AxTwoSubjects`.

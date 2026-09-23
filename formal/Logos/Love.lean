@@ -31,7 +31,7 @@ open Logos.Person (Person)
 open Logos.Plurality (EntityOf NecessarySubject)
 open Logos.Value (Affects PersonsAffectPrinciple Helps Harms help_not_harm help_affects)
 open Logos.Semantics (World)
-open Logos.Truthmaker (ExistsAt Entity)
+open Logos.Entity (ExistsAt Entity)
 open Logos.Modal (NecessaryEntity)
 open Logos.Necessity (Necessity NecessityPH)
 
@@ -93,27 +93,6 @@ def PersonStabilityPrinciple : Prop := ∀ s : Subject, Person s → NecessarySu
     With Affects/Helps/Harms hardened, love is an explicit relational principle. -/
 def PluralityLovePrinciple : Prop := ∀ s₁ s₂ : Subject, Person s₁ → Person s₂ → s₁ ≠ s₂ → Loves s₁ s₂
 
-/-- Conditional C77: If person stability holds and intentional action confers personhood,
-    an intentional act yields a necessary person. -/
-theorem necessaryPersonExists_conditional
-    (hStab : PersonStabilityPrinciple)
-    (hActPerson : ∀ (s : Subject) (p : Prop), Logos.Agency.Act s p → Person s)
-    (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
-    ∃ s : Subject, Person s ∧ NecessarySubject s := by
-  obtain ⟨s, p, ha⟩ := h
-  have hp : Person s := hActPerson s p ha
-  exact ⟨s, hp, hStab s hp⟩
-
-/-- Conditional C92: If person stability holds and intentional action confers personhood,
-    an intentional act yields a necessary entity. -/
-theorem necessary_entity_exists_conditional
-    (hStab : PersonStabilityPrinciple)
-    (hActPerson : ∀ (s : Subject) (p : Prop), Logos.Agency.Act s p → Person s)
-    (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
-    ∃ e : Entity, NecessaryEntity e := by
-  obtain ⟨s, _, hNs⟩ := necessaryPersonExists_conditional hStab hActPerson h
-  exact ⟨EntityOf s, Logos.Modal.subject_nec_entity_nec s hNs⟩
-
 /-- Conditional T14: Under person stability and the plurality-love principle,
     two distinct persons stand in an eternal love relation. -/
 theorem T14_eternalRelation_conditional
@@ -160,10 +139,5 @@ end Logos.Love
 #print axioms Logos.Love.love_not_harms
 #print axioms Logos.Love.love_affects
 #print axioms Logos.Love.loves_of_helps
-#print axioms Logos.Love.necessaryPersonExists_conditional
-#print axioms Logos.Love.T13_someoneLovable
-#print axioms Logos.Love.T14_eternalRelation_conditional
-#print axioms Logos.Love.T14_world_conditional
 #print axioms Logos.Love.T14_square_conditional
 #print axioms Logos.Love.T14_content_conditional
-#print axioms Logos.Love.necessary_entity_exists_conditional

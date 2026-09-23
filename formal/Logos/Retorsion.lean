@@ -24,7 +24,7 @@ Guiding Rule:
 
 import Logos.Core
 import Logos.Semantics
-import Logos.Truthmaker
+import Logos.Entity
 import Logos.Modal
 import Logos.Agency
 import Logos.Person
@@ -34,7 +34,6 @@ import Logos.Order
 import Logos.Value
 import Logos.Plurality
 import Logos.Love
-import Logos.GroundPerson
 
 namespace Logos.Retorsion
 
@@ -49,9 +48,8 @@ open Logos.Choice (ChoiceField Chooses FreeWill FreeSubject choiceField_exists
 open Logos.Value (Affects Helps Harms BearingOf InterpersonalBearing)
 open Logos.Love (Loves)
 open Logos.Plurality (EntityOf NecessarySubject)
-open Logos.Truthmaker (Entity Ground ExistsAt TrueAt NecessarilyTrue)
+open Logos.Entity (Entity ExistsAt TrueAt NecessarilyTrue)
 open Logos.Modal (NecessaryEntity Contingent)
-open Logos.GroundPerson (IsPresentPersonalFeature Personal GroundProp)
 
 /-!
 ## 1. First-Class Retorsion Machinery
@@ -896,14 +894,6 @@ theorem witness_slippage_separation :
 ## 7. Retorsion Frontier Assessment (Structural Limits of Retorsion)
 -/
 
-/-- Formal Negation of A3 (Truthmaker Principle). -/
-def NegA3_Truthmaker : Prop :=
-  ∃ w : World, ∃ φ : Form, TrueAt w φ ∧ ∀ e : Entity, ¬ (ExistsAt w e ∧ Ground e φ)
-
-/-- Formal Negation of A4 (AxGlobalGround). -/
-def NegA4_GlobalGround : Prop :=
-  ∃ φ : Form, NecessarilyTrue φ ∧ ∀ e : Entity, ¬ (∀ w : World, ExistsAt w e ∧ Ground e φ)
-
 /-- Formal Negation of A13 (AxActPolarity). -/
 def NegA13_ActPolarity : Prop :=
   ∃ s : Subject, ∃ p : Prop, Act s p ∧ ¬ Means s (¬p)
@@ -915,11 +905,6 @@ def NegA14_IntentionalChoice : Prop :=
 /-- Formal Negation of A6 (AxTwoSubjects / Plurality). -/
 def NegA6_Plurality : Prop :=
   ¬ ∃ s₁ s₂ : Subject, Logos.Person.Person s₁ ∧ Logos.Person.Person s₂ ∧ s₁ ≠ s₂
-
-/-- Formal Negation of A7 (AxPersonalGround). -/
-def NegA7_PersonalGround : Prop :=
-  ∃ f : Prop, IsPresentPersonalFeature f ∧
-    ∀ e : Entity, ¬ (NecessaryEntity e ∧ Personal e ∧ GroundProp e f)
 
 /-- Formal Negation of Act → Person. -/
 def NegActToPerson : Prop :=

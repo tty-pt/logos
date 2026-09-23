@@ -29,18 +29,16 @@ This module investigates the modal and theological status of necessary reality i
 
 import Logos.Core
 import Logos.Semantics
-import Logos.Truthmaker
+import Logos.Entity
 import Logos.Modal
 import Logos.Agency
 import Logos.Person
-import Logos.GroundPerson
 import Logos.HostileSemantics
 
 namespace Logos.TheologicalModalHardening
 
 open Logos.Semantics (Form World Satisfies TrueAt)
-open Logos.Truthmaker (Entity ExistsAt actualWorld otherWorld)
-open Logos.HostileSemantics.TruthmakingInvestigation (no_entity_at_otherWorld)
+open Logos.Entity (Entity ExistsAt actualWorld)
 
 -- ===========================================================================
 -- Part 1: Modal Ontology Hardening (Sections I, II, III, XI, XII)
@@ -101,25 +99,8 @@ theorem non_contingent_not_entails_necessary :
   exact hFalse
 
 /-!
-### 2. Fundamental World Models: Model E and Model G
+### 2. Fundamental World Models: Model G
 -/
-
-/-- Model E — Absolute Empty World:
-    A world in which NO entity in the ontological domain exists.
-    In Logos, `otherWorld := fun _ => TV.f` provides a concrete witness:
-    both subjects and atomic entities fail to exist at `otherWorld`. -/
-theorem model_E_absolute_empty_world :
-    ∃ w : World, ∀ e : Entity, ¬ ExistsAt w e :=
-  ⟨otherWorld, no_entity_at_otherWorld⟩
-
-/-- Logical Necessity vs Ontological Emptiness:
-    In Model E (`otherWorld`), logical tautologies (such as excluded middle)
-    are satisfied, while the ontological domain is completely empty. -/
-theorem logical_truth_in_empty_world (φ : Form) :
-    Satisfies otherWorld (Form.or φ (Form.not φ)) ∧
-    (∀ e : Entity, ¬ ExistsAt otherWorld e) :=
-  ⟨Logos.Truthmaker.lawExcludedMiddle φ otherWorld,
-   no_entity_at_otherWorld⟩
 
 /-- Model G Signature: Necessary Being Without Contingent Creation.
     There exists a distinguished necessary entity `g` that exists in all worlds,
@@ -191,10 +172,8 @@ theorem boxR_universal_iff {W : Type} (P : W → Prop) (w : W) :
     exact hAll v
 
 /-- World filtering under accessibility:
-    If `otherWorld` (the absolute empty world) is deemed inaccessible from `actualWorld`,
-    world-indexed truthmaking can hold across all ACCESSIBLE worlds without asserting
-    that entities exist in empty worlds. -/
-theorem accessible_worldwise_truthmaking_consistent :
+    world-indexed grounding can hold across all ACCESSIBLE worlds. -/
+theorem accessible_worldwise_grounding_consistent :
     let W := Bool
     let R := fun (w v : W) => w = true → v = true
     let frame : KripkeFrame W := ⟨R⟩
@@ -206,110 +185,9 @@ theorem accessible_worldwise_truthmaking_consistent :
   subst hv
   exact ⟨(), rfl⟩
 
-/-!
-### 4. Retorsion Analysis on ¬ ∃ e, NecessaryEntity(e) (Section XII)
--/
-
-/-- The denial of necessary reality: no entity exists across all possible worlds. -/
-def Neg_NecessaryEntityExists : Prop :=
-  ∀ e : Entity, ¬ NecessaryEntity e
-
-/-- In Γ's concrete ontology (Truthmaker.lean), because `otherWorld` is devoid of entities,
-    `Neg_NecessaryEntityExists` is a derived THEOREM of the concrete model! -/
-theorem neg_necessary_entity_holds_in_concrete_ontology :
-    Neg_NecessaryEntityExists :=
-  fun e hNec => no_entity_at_otherWorld e (hNec otherWorld)
-
-/-- Retorsion Failure on the denial of necessary reality:
-    An agent asserting `Neg_NecessaryEntityExists` commits no performative contradiction:
-    the agent is actualized at `actualWorld`, but contingent across `World`.
-    Asserting that no entity is necessary is completely consistent with classical logic
-    and performative agency unless `AxGlobalGround` or `AxPersonalGround` is posited. -/
-theorem retorsion_fails_against_no_necessary_entity :
-    (∃ w : World, ∀ e : Entity, ¬ ExistsAt w e) →
-    Neg_NecessaryEntityExists := by
-  intro ⟨w_empty, hEmpty⟩ e hNec
-  exact hEmpty e (hNec w_empty)
-
 -- ===========================================================================
 -- Part 2: Necessary Entity, Grounding, and Ultimate Ground Gap (Sections IV, V, VI)
 -- ===========================================================================
-
-/-!
-### 5. Infinite Necessary Grounding Chain over ℤ (Section IV)
--/
-
-/-- Abstract Signature for Testing Necessary Entity vs Ultimate Ground:
-    Every integer represents a necessary entity existing in all worlds.
-    Grounding between entities is transitive, asymmetric, and irreflexive.
-    Every necessary entity is grounded, yet no ultimate ground exists. -/
-structure InfiniteNecessaryChainSignature where
-  Entity : Type
-  World : Type
-  ExistsAt : World → Entity → Prop
-  NecessaryEntity : Entity → Prop := fun e => ∀ w, ExistsAt w e
-  GroundEntity : Entity → Entity → Prop
-  transitive : ∀ x y z, GroundEntity x y → GroundEntity y z → GroundEntity x z
-  asymmetric : ∀ x y, GroundEntity x y → ¬ GroundEntity y x
-  irreflexive : ∀ x, ¬ GroundEntity x x
-  UltimateGround : Entity → Prop := fun u => ¬ ∃ x, GroundEntity x u
-  UltimateGroundExists : Prop := ∃ u, UltimateGround u
-  necessary_entity_exists : ∃ e, NecessaryEntity e
-  all_entities_necessary : ∀ e, NecessaryEntity e
-  all_grounded : ∀ y, ∃ x, GroundEntity x y
-  no_ultimate : ¬ UltimateGroundExists
-
-/-- The concrete infinite necessary grounding model over ℤ:
-    Proves that `∃ e, NecessaryEntity e` does NOT entail `UltimateGroundExists`. -/
-def ConcreteInfiniteNecessaryChain : InfiniteNecessaryChainSignature where
-  Entity := Int
-  World := Unit
-  ExistsAt := fun (_w : Unit) (_e : Int) => True
-  GroundEntity := fun x y => x > y
-  transitive := fun _ _ _ hxy hyz => Int.lt_trans hyz hxy
-  asymmetric := fun _ _ hxy hyx => Int.lt_irrefl _ (Int.lt_trans hyx hxy)
-  irreflexive := fun x => Int.lt_irrefl x
-  necessary_entity_exists := ⟨0, fun (_w : Unit) => trivial⟩
-  all_entities_necessary := fun (_e : Int) (_w : Unit) => trivial
-  all_grounded := fun y => ⟨y + 1, Int.le_refl (y + 1)⟩
-  no_ultimate := fun ⟨u, hu⟩ => hu ⟨u + 1, Int.le_refl (u + 1)⟩
-
-/-- Separation Theorem: Necessary existence does NOT derive an Ultimate Ground. -/
-theorem necessary_entity_not_entails_ultimate_ground :
-    ¬ (∀ S : InfiniteNecessaryChainSignature, S.UltimateGroundExists) := by
-  intro hAll
-  exact ConcreteInfiniteNecessaryChain.no_ultimate (hAll ConcreteInfiniteNecessaryChain)
-
-/-!
-### 6. Investigation of Candidate Bridges for NecessaryEntity → UltimateGround (Section V)
--/
-
-/-- Candidate Bridge 1: Grounding Well-Foundedness.
-    If the converse grounding relation is well-founded (admitting a minimal element for every non-empty predicate),
-    an ultimate ungrounded grounder is guaranteed to exist. -/
-theorem well_foundedness_forces_ultimate_ground
-    (Entity : Type) (GroundEntity : Entity → Entity → Prop)
-    [Inhabited Entity]
-    (hFoundation : ∀ (P : Entity → Prop), (∃ x, P x) → ∃ m, P m ∧ ∀ y, P y → ¬ GroundEntity y m) :
-    ∃ u : Entity, ¬ ∃ x : Entity, GroundEntity x u := by
-  have ⟨u, _, hMin⟩ := hFoundation (fun _ => True) ⟨default, trivial⟩
-  refine ⟨u, fun ⟨x, hx⟩ => hMin x trivial hx⟩
-
-/-- Candidate Bridge 3: Self-Grounding (`GroundEntity g g`).
-    If a necessary entity is asserted to ground itself, it directly contradicts
-    the metaphysical axiom of irreflexivity (`∀ x, ¬ GroundEntity x x`). -/
-theorem self_grounding_violates_irreflexivity
-    (Entity : Type) (GroundEntity : Entity → Entity → Prop)
-    (irrefl : ∀ x : Entity, ¬ GroundEntity x x)
-    (g : Entity) (hSelf : GroundEntity g g) : False :=
-  irrefl g hSelf
-
-/-
-Candidate Bridge 4: Totality Grounding.
-As proved in `totality_grounding_forces_ultimate_ground` (HostileSemantics.lean:2340),
-a totality entity forces an ultimate ground ONLY because the totality entity is
-explicitly postulated to be ungrounded.
--/
 
 /-!
 ### 7. The "Empty World" Theological Test (Section VI)
@@ -540,27 +418,6 @@ theorem necessary_existence_not_entails_uniqueness :
 -- ===========================================================================
 
 /-!
-### 11. Inconsistency Between Model E and AxGlobalGround (Section 2)
--/
-
-/-- AxGlobalGround Inconsistency Theorem:
-    If AxGlobalGround holds, then NO possible world can be absolutely empty.
-    Instantiating AxGlobalGround with the logical tautology `Form.or φ (Form.not φ)`
-    guarantees an entity `e` that exists at all worlds (`∀ w, ExistsAt w e`).
-    This directly refutes the existence of an absolute empty world (`∃ w, ∀ e, ¬ ExistsAt w e`). -/
-theorem axGlobalGround_refutes_empty_world
-    (hGlobal : ∀ (φ : Form), Logos.Truthmaker.NecessarilyTrue φ →
-      ∃ e : Entity, ∀ w : World, ExistsAt w e ∧ Logos.Truthmaker.Ground e φ)
-    (φ : Form) :
-    ¬ (∃ w : World, ∀ e : Entity, ¬ ExistsAt w e) := by
-  intro ⟨w_empty, hEmpty⟩
-  have hNec : Logos.Truthmaker.NecessarilyTrue (Form.or φ (Form.not φ)) :=
-    fun w => Logos.Truthmaker.lawExcludedMiddle φ w
-  obtain ⟨e, he⟩ := hGlobal (Form.or φ (Form.not φ)) hNec
-  have hExAtW := (he w_empty).1
-  exact hEmpty e hExAtW
-
-/-!
 ### 12. Competing Modal Regimes: Regime E vs Regime G (Section 3)
 -/
 
@@ -643,17 +500,16 @@ theorem constant_domain_yields_necessary_entity (S : RegimeG_Signature) [Inhabit
 -/
 
 /-- Frame E1: Universal accessibility (R := fun _ _ => True).
-    The empty world is accessible from every world; worldwise truthmaking fails. -/
+    Worldwise grounding fails under empty world accessibility. -/
 def FrameE1 (W : Type) : KripkeFrame W where
   R := fun _ _ => True
 
 /-- Frame E2: Restricted accessibility.
-    The empty world exists in the model, but is inaccessible from actualWorld.
-    Truthmaking across all accessible worlds holds. -/
+    Grounding across all accessible worlds holds. -/
 def FrameE2 : KripkeFrame Bool where
   R := fun w v => w = true → v = true
 
-theorem frameE2_truthmaking_holds_at_actual :
+theorem frameE2_grounding_holds_at_actual :
     let ExistsAt := fun (w : Bool) (_e : Unit) => w = true
     BoxR FrameE2 (fun v => ∃ e : Unit, ExistsAt v e) true := by
   dsimp [BoxR, FrameE2]

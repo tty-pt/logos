@@ -3,7 +3,7 @@
 import Logos.Core
 import Logos.Necessity
 import Logos.Semantics
-import Logos.Truthmaker
+import Logos.Entity
 import Logos.Modal
 import Logos.Agency
 import Logos.Person
@@ -38,7 +38,6 @@ import Logos.AgencyFrontierAudit
 import Logos.A14SemanticAudit
 import Logos.PostA14Frontier
 import Logos.DefinitiveAgencyFrontier
-import Logos.GroundingFrontier
 import Logos.AxiomNegationAudit
 import Logos.JointForcing
 import Logos.NegativeRetorsionAudit
@@ -63,5 +62,5 @@ import Logos.OughtRetorsion
 import Logos.NecessaryPersonalGround
 import Logos.PersonalNormativeGround
 import Logos.RecoveredOntologicalGround
--- New constitutive headline: the free personal act grounds all Gamma-reality (Claim I).
+-- New constitutive headline: the free personal act grounds the Gamma judicative/normative order (Claim I).
 import Logos.PersonalGroundOfReality

@@ -16,9 +16,18 @@ Key Architecture:
    Proves `ClaimsCorrect s NoGN → GenuineNormativityExists` by direct agential construction,
    strictly avoiding vacuous `exfalso` derivations.
 4. Classical Self-Refutation:
-   Proves that asserting the denial while claiming it to be true yields `False`.
-5. Full Composition to Free Will:
-   `ClaimsCorrect s NoGN → GenuineNormativityExists → Chooses s p q → FreeWill s`.
+    Proves that asserting the denial while claiming it to be true yields `False`.
+ 5. Full Composition to Free Will:
+    `ClaimsCorrect s NoGN → GenuineNormativityExists → Chooses s p q → FreeWill s`.
+ 6. Semantic-Level Identity:
+    Witness theorems prove the retorsion conclusion instantiates the very
+    `GenuineNormativity` structure consumed downstream: address from primitive
+    `Means` only, opposition by pure logic — no stronger notion of normativity
+    is introduced at the retorsion step.
+ 7. Axiom-Free Attack Inviability:
+    The stipulation attack is inviable without substantive axioms: any
+    normative-judicative stance derives GenuineNormativity and refutes NoGN;
+    co-grasp is definitionally choice and choice is definitionally free will.
 -/
 
 import Logos.Core
@@ -91,7 +100,7 @@ theorem deontic_opposition_self_negation (p : Prop) :
 /-- Performative Presupposition of Assertion:
     Asserting p as correct constitutively instantiates genuine normative governance
     between p and ¬p for subject s.
-    Footprint: `{AxJudicativeBipolarity, Means, Subject}`. -/
+    Footprint: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`. -/
 theorem claims_correct_presupposes_normativity
     (s : Subject) (p : Prop) (h : ClaimsCorrect s p) :
     GenuineNormativity s p (¬ p) := by
@@ -117,7 +126,7 @@ def NoGN : Prop :=
 /-- The Fundamental Retorsive Presupposition:
     Claiming the denial of normativity as correct directly instantiates GenuineNormativity.
     Constructive and non-vacuous: does NOT use False.elim.
-    Footprint: `{AxJudicativeBipolarity, Means, Subject}`. -/
+    Footprint: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`. -/
 theorem claiming_denial_presupposes_genuine_normativity
     (s : Subject) (hClaim : ClaimsCorrect s NoGN) :
     GenuineNormativity s NoGN (¬ NoGN) :=
@@ -125,7 +134,7 @@ theorem claiming_denial_presupposes_genuine_normativity
 
 /-- Theorem: Non-vacuous self-refutation of the denial of GenuineNormativity.
     Asserting the denial while asserting it as true is strictly self-contradictory.
-    Footprint: `{AxJudicativeBipolarity, Means, Subject}`. -/
+    Footprint: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`. -/
 theorem denial_of_genuine_normativity_is_self_refuting
     (s : Subject) (hClaim : ClaimsCorrect s NoGN) (hTrue : NoGN) : False := by
   have hGN : GenuineNormativity s NoGN (¬ NoGN) :=
@@ -142,7 +151,7 @@ theorem cannot_coherently_claim_denial_and_truth :
 
 /-- Performative Derivation Theorem: Under an actual performed denial event,
     GenuineNormativity is inescapably established.
-    Footprint: `{AxJudicativeBipolarity, Means, Subject}`. -/
+    Footprint: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`. -/
 theorem retorsion_derives_genuine_normativity
     (hEvent : ∃ s : Subject, ClaimsCorrect s NoGN) :
     GenuineNormativityExists := by
@@ -156,7 +165,7 @@ theorem retorsion_derives_genuine_normativity
 
 /-- The Complete Master Retorsion Route:
     Denial of GN ⇒ Assertion as Correct ⇒ GenuineNormativity ⇒ Chooses ⇒ FreeWill.
-    Footprint: `{AxJudicativeBipolarity, Means, Subject}`. -/
+    Footprint: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`. -/
 theorem retorsion_derives_free_will
     (hEvent : ∃ s : Subject, ClaimsCorrect s NoGN) :
     ∃ s : Subject, FreeWill s := by
@@ -212,6 +221,108 @@ theorem normative_retorsion_derives_free_will
     ∃ s : Subject, FreeWill s := by
   obtain ⟨s, hClaim⟩ := hEvent
   exact ⟨s, (claims_normative_correctness_derives_free_will s NoGN hClaim).2⟩
+
+-- ===========================================================================
+-- Section 4c: Semantic-Level Identity Witnesses
+-- ===========================================================================
+
+/-- The performed denial of genuine normativity instantiates the very
+    GenuineNormativity structure the downstream chain consumes: same definition,
+    same Means-level address, opposition by pure logic. No stronger notion of
+    normativity is introduced at this step. Canonical named witness for the
+    conclusion of `claiming_denial_presupposes_genuine_normativity`.
+    Footprint: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`. -/
+theorem retorsion_conclusion_is_the_very_genuine_normativity_structure
+    (s : Subject) (hClaim : ClaimsCorrect s NoGN) :
+    GenuineNormativity s NoGN (¬ NoGN) :=
+  claiming_denial_presupposes_genuine_normativity s hClaim
+
+/-- The address component of the instantiated GenuineNormativity is built solely
+    from the primitive Means relation: its canonical witness is exactly the pair
+    `⟨Means s NoGN, Means s (¬ NoGN)⟩`. No Correct, Incorrect, Ought, or deontic
+    primitive occurs in the retorsion conclusion.
+    Footprint: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`. -/
+theorem retorsion_address_uses_only_means
+    (s : Subject) (hClaim : ClaimsCorrect s NoGN) :
+    (claiming_denial_presupposes_genuine_normativity s hClaim).address =
+      ⟨claims_correct_means_content s NoGN hClaim,
+       AxJudicativeBipolarity s NoGN hClaim⟩ := by
+  apply Subsingleton.elim
+
+/-- The opposition component of the instantiated GenuineNormativity is pure logic:
+    its canonical witness is exactly `⟨Incompatible NoGN (¬ NoGN), prop_neq_neg NoGN⟩`
+    (incompatibility with one's negation + propositional non-triviality). The
+    opposition conjunct itself is constructed without any axiom; the theorem's
+    footprint inherits the route's `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`
+    because it projects from the retorsion structure term. -/
+theorem retorsion_opposition_is_pure_logic
+    (s : Subject) (hClaim : ClaimsCorrect s NoGN) :
+    (claiming_denial_presupposes_genuine_normativity s hClaim).opposition =
+      ⟨Logos.Choice.incompatible_self_negation NoGN, prop_neq_neg NoGN⟩ := by
+  apply Subsingleton.elim
+
+/-- To claim the denial of genuine normativity as correct, the subject must mean
+    the denial: the retorsion never lets the denier avoid grasping the very content
+    denied (no mere string, no bare phonetic emission; cf. Attack A).
+    Footprint: `{Initiates, Means, State, Subject}`. -/
+theorem denial_requires_meaning_genuine_normativity
+    (s : Subject) (hClaim : ClaimsCorrect s NoGN) :
+    Means s NoGN :=
+  claims_correct_means_content s NoGN hClaim
+
+/-- The axiom-free normative route terminates in the SAME GenuineNormativity type
+    (horns = the judicative normative poles Correct vs Incorrect): the downstream
+    chain GN → Chooses → FreeWill is therefore route-agnostic, holding for both
+    the AxJudicativeBipolarity route and the normative-correctness route.
+    Footprint: `{Initiates, Means, State, Subject, CL}` (zero substantive axioms). -/
+theorem normative_retorsion_same_structure_type
+    (s : Subject) (hClaim : ClaimsNormativeCorrectness s NoGN) :
+    GenuineNormativity s (Logos.Order.Correct s NoGN) (Logos.Order.Incorrect s NoGN) :=
+  normative_claiming_denial_presupposes_normativity s hClaim
+
+-- ===========================================================================
+-- Section 4d: Axiom-Free Refutation of the Stipulation Attack
+-- ===========================================================================
+
+/-- The stipulation attack on GenuineNormativity is inviable by pure logic: any
+    normative-judicative stance (an actual claim of correctness over some content)
+    derives GenuineNormativity on the Correct/Incorrect poles and thereby refutes
+    NoGN with ZERO substantive axioms — no AxJudicativeBipolarity, no new SEM.
+    Footprint: `{Initiates, Means, State, Subject, CL}`. -/
+theorem normative_stance_refutes_attack_without_axioms
+    (h : ∃ s : Subject, ∃ p : Prop, ClaimsNormativeCorrectness s p) :
+    ¬ NoGN := by
+  intro hNoGN
+  obtain ⟨s, p, hClaim⟩ := h
+  have hGN : GenuineNormativity s (Logos.Order.Correct s p) (Logos.Order.Incorrect s p) :=
+    claims_normative_correctness_derives_genuine_normativity s p hClaim
+  have hEx : GenuineNormativityExists :=
+    ⟨s, Logos.Order.Correct s p, Logos.Order.Incorrect s p, hGN⟩
+  exact hNoGN hEx
+
+/-- The stipulation attack against GenuineNormativity is axiom-free inviable on
+    all decisive wings: (1) the thesis is false — any normative-judicative stance
+    refutes NoGN with zero substantive axioms; (2) an attack voiced IN the
+    normative-judicative stance cannot be true — no subject can simultaneously
+    claim and believe NoGN (`cannot_claim_normative_denial_and_truth`, axiom-free);
+    the weak-voice twin `cannot_coherently_claim_denial_and_truth` (tier 1 of
+    INVIABLE.md §1, voice alone) still costs `AxJudicativeBipolarity` (C106);
+    (3) the chain is not vacuous — co-grasp is definitionally choice
+    (`d7_co_grasp_is_definitionally_choice`) and choice is definitionally free
+    will (`d8_choice_is_definitionally_free_will`), both pure logic `{Means, Subject}`.
+    The attack is refuted exactly at the cost of being made: that a spoken attack
+    instantiates the stance is the field-non-empty datum (INVIABLE.md §3), not a
+    theorem of bare voice (`voice_without_normative_stance`, C166).
+    Footprint: `{Initiates, Means, State, Subject, CL}`.
+    This theorem is the headline witness for INVIABLE.md: the attack is inviable
+    without axioms. -/
+theorem attack_inviable_without_axioms
+    (h : ∃ s : Subject, ∃ p : Prop, ClaimsNormativeCorrectness s p) :
+    (¬ NoGN) ∧ (∃ s : Subject, FreeWill s) := by
+  constructor
+  · exact normative_stance_refutes_attack_without_axioms h
+  · obtain ⟨s, p, hClaim⟩ := h
+    exact ⟨s, (claims_normative_correctness_derives_free_will s p hClaim).2⟩
 
 -- ===========================================================================
 -- Section 5: Adversarial Attacks A through E
@@ -289,3 +400,10 @@ end Logos.RetorsiveNormativity
 #print axioms Logos.RetorsiveNormativity.cannot_claim_normative_denial_and_truth
 #print axioms Logos.RetorsiveNormativity.normative_retorsion_derives_genuine_normativity
 #print axioms Logos.RetorsiveNormativity.normative_retorsion_derives_free_will
+#print axioms Logos.RetorsiveNormativity.retorsion_conclusion_is_the_very_genuine_normativity_structure
+#print axioms Logos.RetorsiveNormativity.retorsion_address_uses_only_means
+#print axioms Logos.RetorsiveNormativity.retorsion_opposition_is_pure_logic
+#print axioms Logos.RetorsiveNormativity.denial_requires_meaning_genuine_normativity
+#print axioms Logos.RetorsiveNormativity.normative_retorsion_same_structure_type
+#print axioms Logos.RetorsiveNormativity.normative_stance_refutes_attack_without_axioms
+#print axioms Logos.RetorsiveNormativity.attack_inviable_without_axioms

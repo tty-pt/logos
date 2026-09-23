@@ -7,11 +7,15 @@ to the Necessary Personal Ground within Γ's unified four-tier ontology
 
 Status (Batch THIS_IS_PERSONAL, 2026-09-22; plan `THIS_IS_PERSONAL.md` §11.7/§12):
 
-1. **Constitutive headline.** The required deliverable is Claim (I): the free
-   personal judicative act is the necessary ontological basis of Right/Wrong,
-   truth/falsity, and all Γ-reality. It is proved in
-   `Logos.PersonalGroundOfReality.present_act_yields_personal_grounding_of_reality`
-   (footprint `{Initiates, Means, State, Subject, CL}`). Claim E
+1. **Constitutive headline.** The required deliverable is Claim (I): Personhood
+   is the necessary ontological basis of the objective normative/truth order (Right/Wrong,
+   truth/falsity, Ought/OughtNot under the epistemic TruthNorm) governing judgments about
+   Γ-reality. That is, it grounds the *correctness of propositions about what is the case*,
+   not the fact of what exists: it is NOT a claim that the personal ground causally produces
+   every existent, nor that it makes evil exist or morally legitimizes evil.
+   It is proved in `Logos.PersonalGroundOfReality.person_yields_personal_grounding_of_reality`
+   (historical compatibility alias: `present_act_yields_personal_grounding_of_reality`,
+   footprint `{Initiates, Means, State, Subject, CL}`). Claim E
    (`∃ g, NecessaryEntity g ∧ NecessaryPersonalGround g`) is **annotated only**,
    never a theorem (obstacle registry, `THIS_IS_PERSONAL.md` §12.1).
 2. **Trinitarian / monotheism block DEFERRED.** The strict-monotheism and
@@ -39,10 +43,9 @@ import Logos.Person
 import Logos.Order
 import Logos.Value
 import Logos.Semantics
-import Logos.Truthmaker
+import Logos.Entity
 import Logos.Modal
 import Logos.Plurality
-import Logos.GroundPerson
 import Logos.NormativeOrder
 import Logos.RecoveredOntologicalGround
 
@@ -53,26 +56,19 @@ open Logos.Semantics (Form World Satisfies TrueAt)
 open Logos.Agency (Subject A Means IntentionalSubject Nature HasNature Will subjectWill will_individuation)
 open Logos.Choice (Chooses FreeWill FreeSubject)
 open Logos.Person (Person person_is_intentional person_has_free_will)
-open Logos.Truthmaker (Entity Ground ExistsAt TrueAt NecessarilyTrue EntityOf)
-open Logos.Modal (NecessaryEntity Contingent actualWorld T7_necessaryReality)
+open Logos.Entity (Entity ExistsAt TrueAt NecessarilyTrue EntityOf)
+open Logos.Modal (NecessaryEntity Contingent actualWorld)
 open Logos.Plurality (NecessarySubject)
-open Logos.GroundPerson (GroundProp Realizes IsPresentPersonalFeature)
 open Logos.RecoveredOntologicalGround (GroundsEntity explanatory_adequacy)
 
 -- ============================================================================
 -- 1. Unified Ontological Framework (Subject, Nature, Will, Entity)
 -- ============================================================================
 
-/- The trinitarian axioms (`PersonalNature`, `personal_nature_iff_person`,
-`DivineNature`, `divine_nature_is_personal`, `divine_person_is_necessary`) and
-`divine_subject_is_person` moved VERBATIM to scratch/Trinitarian_deferred.lean
-(DEFERRED, never imported). The duplicate `GroundsEntity` AXIOM that shadowed
-the canonical definition was retired with that block. -/
-
 /-- Actual entity: an entity that exists in the actual world. -/
 def ActualEntity (e : Entity) : Prop := ExistsAt actualWorld e
 
-/-- Impersonal Entity: an atomic factual truthmaker that is not a subject. -/
+/-- Impersonal Entity: an atomic factual entity that is not a subject. -/
 def ImpersonalEntity (e : Entity) : Prop := ∃ n : Nat, e = Entity.ofAtom n
 
 /-- The Propositional Content of the Objective Normative Order:
@@ -111,19 +107,8 @@ def NecessaryNormativeOrder : Prop :=
 theorem necessary_normative_order : NecessaryNormativeOrder :=
   fun _w => objective_normative_order_holds
 
-/-- Strengthened Semantic Definition of Ontological Grounding of the Normative Order:
-    An entity g ontologically grounds the objective normative order iff:
-    1. g grounds the proposition of the objective normative order (GroundProp g ObjectiveNormativeOrder);
-    2. Ontological Persistence: in every possible world w where the normative order obtains,
-       its ground g exists (ExistsAt w g).
-    Kept as the annotated Claim-E surface (THIS_IS_PERSONAL.md §12.1). -/
-structure GroundsNormativeOrder (g : Entity) : Prop where
-  grounds : Logos.GroundPerson.GroundProp g ObjectiveNormativeOrder
-  persistence : ∀ (w : World), NormativeOrderAt w → ExistsAt w g
-
 /-- The necessity of the normative order is grounded in the free personal judicative
-    act — constitutive, axiom-free (NormativeGroundPersistence and
-    GroundPrincipleProp retired, THIS_IS_PERSONAL.md §13.4). -/
+    act — constitutive, axiom-free. -/
 theorem normative_order_is_grounded_in_personal_nature
     {s : Subject} {p : Prop} (h : Logos.NormativeOrder.ClaimsNormativeCorrectness s p) :
     NecessaryNormativeOrder ∧ Person s := by
@@ -134,84 +119,16 @@ theorem normative_order_is_grounded_in_personal_nature
 theorem necessary_normative_order_is_necessary : NecessaryNormativeOrder :=
   necessary_normative_order
 
-/-- Derivation of the Necessity of the Normative Ground.
-    Derived by direct modus ponens from grounding persistence and necessary_normative_order.
-    Footprint: `{}` (pure logic). -/
-theorem ground_of_necessary_normative_order_is_necessary
-    {g : Entity}
-    (hGround : GroundsNormativeOrder g)
-    (hNecessary : NecessaryNormativeOrder) :
-    NecessaryEntity g := by
-  intro w
-  exact hGround.persistence w (hNecessary w)
-
-/-- GroundsPersonalReality: entity g genuinely grounds personal reality.
-    An entity g grounds personal reality iff g grounds all reality and realizes a present personal feature. -/
-def GroundsPersonalReality (g : Entity) : Prop :=
-  Logos.RecoveredOntologicalGround.GroundOfReality g ∧
-  ∃ f : Prop, Logos.GroundPerson.Realizes g f ∧ Logos.GroundPerson.IsPresentPersonalFeature f
-
-/-- PersonalGround: an entity g is a personal ground iff:
-    1. g grounds personal reality;
-    2. g is strictly non-impersonal (¬ ImpersonalEntity g). -/
-def PersonalGround (g : Entity) : Prop :=
-  GroundsPersonalReality g ∧ ¬ ImpersonalEntity g
-
-/-- Target Definition: Necessary Personal Ground.
-    An entity G is a necessary personal ground iff:
-    1. G is a necessary entity (NecessaryEntity G);
-    2. G grounds the personal reality of free subjects (GroundsPersonalReality G);
-    3. G is strictly not an impersonal entity (¬ ImpersonalEntity G). -/
-def NecessaryPersonalGround (g : Entity) : Prop :=
-  NecessaryEntity g ∧ GroundsPersonalReality g ∧ ¬ ImpersonalEntity g
-
 -- ============================================================================
--- 3. Rigorous Formulation of the Five Claims
+-- 3. Rigorous Formulation of Claims
 -- ============================================================================
 
 /-- Claim A: Necessary Truth exists (e.g. τ := p ∨ ¬p). -/
 def ClaimA_NecessaryTruth (φ : Form) : Prop := NecessarilyTrue φ
 
-/-- Claim B: Necessary Reality exists (T7 under AxGlobalGround). -/
-def ClaimB_NecessaryReality : Prop := ∃ e : Entity, NecessaryEntity e
-
-/-- Claim C: Historical T8 / Act-Content Reality exists.
-    A necessary entity grounds some proposition meant in an act.
-    Note: GroundPerson.Personal merely denotes property-bearing on act-content. -/
-def ClaimC_HistoricalT8 : Prop := ∃ e : Entity, NecessaryEntity e ∧ Logos.GroundPerson.Personal e
-
 /-- Claim D: Necessary Person exists.
     There exists a personal subject that exists across all possible worlds. -/
 def ClaimD_NecessaryPerson : Prop := ∃ s : Subject, NecessarySubject s ∧ Person s
-
-/-- Claim E: Necessary Personal Ground exists.
-    There exists a necessary personal ground of personal reality. -/
-def ClaimE_NecessaryPersonalGround : Prop := ∃ g : Entity, NecessaryPersonalGround g
-
--- ============================================================================
--- 4. Constructive Entailments Between Claims
--- ============================================================================
-
-/-- Theorem: Claim E implies Claim B (Personal Ground entails Necessary Reality).
-    Footprint: `{}`. -/
-theorem claim_e_implies_claim_b :
-    ClaimE_NecessaryPersonalGround → ClaimB_NecessaryReality := by
-  rintro ⟨g, hNecG, _, _⟩
-  exact ⟨g, hNecG⟩
-
-/-- Theorem: Claim D implies Claim B (Necessary Person entails Necessary Reality).
-    Footprint: `{Subject}`. -/
-theorem claim_d_implies_claim_b :
-    ClaimD_NecessaryPerson → ClaimB_NecessaryReality := by
-  rintro ⟨s, hNecS, _⟩
-  exact ⟨EntityOf s, Logos.Modal.subject_nec_entity_nec s hNecS⟩
-
-/-- Theorem: Claim C implies Claim B (Historical T8 entails Necessary Reality).
-    Footprint: `{}`. -/
-theorem claim_c_implies_claim_b :
-    ClaimC_HistoricalT8 → ClaimB_NecessaryReality := by
-  rintro ⟨e, hNecE, _⟩
-  exact ⟨e, hNecE⟩
 
 -- ============================================================================
 -- 5. Explanatory Adequacy & Non-Reducibility of Personal Reality
@@ -221,20 +138,6 @@ theorem claim_c_implies_claim_b :
 theorem ofAtom_ne_ofSubject (n : Nat) (s : Subject) :
     Entity.ofAtom n ≠ EntityOf s :=
   fun h => Entity.noConfusion h
-
-/-- Empirical atomic entities are contingent: they fail to exist in the empty world where atoms evaluate false.
-    Footprint: `{}` (0 axioms). -/
-theorem ofAtom_not_necessary_entity (n : Nat) : ¬ NecessaryEntity (Entity.ofAtom n) := by
-  intro hNec
-  have hFalse : ExistsAt (fun _ => Logos.Semantics.TV.f) (Entity.ofAtom n) :=
-    hNec (fun _ => Logos.Semantics.TV.f)
-  nomatch hFalse
-
-/-- No impersonal atomic entity can be a necessary entity.
-    Footprint: `{}` (0 axioms). -/
-theorem impersonal_not_necessary (e : Entity) : ImpersonalEntity e → ¬ NecessaryEntity e := by
-  rintro ⟨n, rfl⟩
-  exact ofAtom_not_necessary_entity n
 
 /-- Intentional capacity of an entity: an entity means proposition `p` iff it is a
     subject performing the intentional act `Means s p`. Empirical atoms have zero intentional capacity. -/
@@ -280,15 +183,6 @@ theorem atom_cannot_ground_person (n : Nat) (s : Subject) (hPerson : Person s) :
 theorem step1_necessary_truth_exists : ∃ τ : Form, NecessarilyTrue τ :=
   Logos.Semantics.strongTruthExists
 
-/-- Step 2: Necessary Truth forces a Necessary Reality that grounds it (T7, C18).
-    Derived under the declared semantic bridge `AxGlobalGround`.
-    Footprint: `{AxGlobalGround, Ground, Subject}`. -/
-theorem step2_necessary_reality_exists :
-    ∃ e : Entity, NecessaryEntity e ∧ ∃ τ : Form, NecessarilyTrue τ ∧ Ground e τ := by
-  obtain ⟨τ, hNecτ⟩ := step1_necessary_truth_exists
-  obtain ⟨e, hNecE, hGr⟩ := Logos.Modal.T7_necessaryReality hNecτ
-  exact ⟨e, hNecE, τ, hNecτ, hGr⟩
-
 /-- Step 3: Personal-Logical Inseparability (§24b, C25).
     In every rational act, personal features and logical features are strictly inseparable.
     Footprint: `{Initiates, Means, State, Subject, CL}`. -/
@@ -326,7 +220,7 @@ theorem established_will_reality (hAssert : ∃ s : Subject, ∃ p : Prop, Logos
   have hPerson : Person s' := Logos.Person.free_subject_is_person s' hFreeSubj
   have hWill : ∃ w : Will, w = subjectWill s' := ⟨subjectWill s', rfl⟩
   have hActual : ActualEntity (EntityOf s') := by
-    change Logos.Truthmaker.SubjectExistsAt actualWorld s'
+    change Logos.Entity.SubjectExistsAt actualWorld s'
     exact rfl
   exact ⟨s', hWill, hFreeWill, hFreeSubj, hPerson, hActual⟩
 
@@ -343,110 +237,17 @@ theorem established_normative_person
   have hPerson : Person s := Logos.Person.free_subject_is_person s hFreeSubj
   have hWill : ∃ w : Will, w = subjectWill s := ⟨subjectWill s, rfl⟩
   have hActual : ActualEntity (EntityOf s) := by
-    change Logos.Truthmaker.SubjectExistsAt actualWorld s
+    change Logos.Entity.SubjectExistsAt actualWorld s
     exact rfl
   exact ⟨s, hWill, hFW, hFreeSubj, hPerson, hActual⟩
-
-/- The redundant SEM axiom `explanatory_adequacy_normative_order` moved VERBATIM
-to scratch/Trinitarian_deferred.lean (DEFERRED). Its only consumers,
-`atom_cannot_ground_normative_order` and `ground_of_normative_order_not_impersonal`,
-are NOT re-provable over the uninterpreted `GroundProp` relation (the
-`GroundsNormativeOrder` structure field `grounds : GroundProp g ObjectiveNormativeOrder`
-has no ground-free negation), so they are annotated instead of faked
-("prefer losing a theorem over hiding a premise"; THIS_IS_PERSONAL.md §13.8).
-Entity-level non-impersonality of the ground of reality is retained at
-`Logos.RecoveredOntologicalGround.ground_of_reality_not_impersonal` via the
-constitutive `GroundsEntity` definition (atom branch `EntityMeans atom p = False`). -/
-
-/-- Derivation of Personal Ground from Explanatory Adequacy. -/
-theorem ground_of_normative_order_is_personal_ground
-    {g : Entity} (hGr : GroundsPersonalReality g) (hNotImp : ¬ ImpersonalEntity g) :
-    PersonalGround g :=
-  ⟨hGr, hNotImp⟩
-
-/-- Theorem: An impersonal atomic entity cannot be a Necessary Personal Ground.
-    Footprint: `{}`. -/
-theorem ofAtom_not_necessary_personal_ground (n : Nat) :
-    ¬ NecessaryPersonalGround (Entity.ofAtom n) := by
-  rintro ⟨_hNec, _hPers, hNotImp⟩
-  exact hNotImp ⟨n, rfl⟩
-
-/-
-`necessary_personal_ground_derived` and `necessary_ground_is_personal` (Claim-E
-derivations: `ClaimE_NecessaryPersonalGround`, resp. `∃ g, NecessaryEntity g ∧
-GroundsPersonalReality g`) are REMOVED as theorems: their only routes used the
-deleted axioms `AxRealityGrounding` + `agential_grounding_transmission`
-(`Logos.RecoveredOntologicalGround`, retired this batch).
-
-Claim E is an ANNOTATED-ONLY surface, never a theorem (THIS_IS_PERSONAL.md §12.1,
-obstacle registry): world-indexed necessity needs the SEM `AxGlobalGround`;
-`Personal` needs the META `GroundProp` instance `AxPersonalGround`; the
-`GroundOfReality` subject-branch is open (R3). The headline deliverable is the
-constitutive Claim (I):
-`Logos.PersonalGroundOfReality.present_act_yields_personal_grounding_of_reality`
-(footprint `{Initiates, Means, State, Subject, CL}`).
--/
-
--- ============================================================================
--- 6b. The Complete Proof Spine of Γ (Addendum Section 9)
--- ============================================================================
-
-/-- Spine 1: Right and Wrong are objectively distinct. -/
-theorem right_wrong_established
-    (h : (∃ s : Subject, ∃ p : Prop, Logos.Order.Correct s p) ∧
-         (∃ s : Subject, ∃ p : Prop, Logos.Order.Incorrect s p)) :
-    ∃ p : Prop, Logos.Choice.Meaning_I p :=
-  Logos.Order.rightDistinctWrong_implies_meaning h
-
-/-- Spine 2: Objective Normativity: Correct and Incorrect judgments are distinct. -/
-theorem normativity_established (hAct : ∃ s : Subject, ∃ p : Prop, Logos.Agency.A s p) :
-    ¬ (∀ s : Subject, ∀ p : Prop, Logos.Order.Correct s p ↔ Logos.Order.Incorrect s p) :=
-  Logos.Order.correctness_distinct hAct
-
-/-- Spine 3: Genuine Choice is established from intentional action (Choice.AxIntentionalChoice). -/
-theorem genuine_choice_established (s : Subject) (p : Prop) (hAct : Logos.Agency.Act s p) :
-    ∃ q : Prop, Chooses s p q :=
-  Logos.Choice.AxIntentionalChoice s p hAct
-
-/-- Spine 4: Free Will is established from intentional action (Choice.freeWill_exists_of_act). -/
-theorem free_will_established (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
-    ∃ s : Subject, FreeWill s :=
-  Logos.Choice.freeWill_exists_of_act h
-
-/-- Spine 5: Free Subject exists from intentional action (Choice.freeSubject_exists_of_act). -/
-theorem free_subject_exists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
-    ∃ s : Subject, FreeSubject s :=
-  Logos.Choice.freeSubject_exists_of_act h
-
-/-- Spine 6: Person exists from intentional action (Person.free_subject_is_person). -/
-theorem person_exists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
-    ∃ s : Subject, Person s := by
-  obtain ⟨s, hFs⟩ := free_subject_exists h
-  exact ⟨s, Logos.Person.free_subject_is_person s hFs⟩
 
 /-- Spine 7: Necessary Truth exists (resident in Semantics, C59). -/
 theorem necessary_truth_exists : ∃ τ : Form, NecessarilyTrue τ :=
   step1_necessary_truth_exists
 
-/-- Spine 8: Necessary Reality exists (Modal.T7_necessaryReality / T7, C18). -/
-theorem necessary_reality_exists :
-    ∃ e : Entity, NecessaryEntity e ∧ ∃ τ : Form, NecessarilyTrue τ ∧ Ground e τ :=
-  step2_necessary_reality_exists
-
 -- ============================================================================
 -- 7. Forensic Reassessment of Countermodels
 -- ============================================================================
-
-/- Sections 7 (Strict Monotheism) and 8 (Trinitarian Architecture) of the
-original file moved VERBATIM to scratch/Trinitarian_deferred.lean (DEFERRED,
-never imported by the build): `God`, `Monotheism`, `universal_ground_unique`,
-`divine_uniqueness`, `monotheism_derived`, `monotheism_of_god_and_uniqueness`,
-`TrinitarianGodhead`, `trinitarian_persons_are_personal`,
-`trinitarian_persons_are_necessary`, `trinitarian_wills_are_distinct`,
-`trinitarian_godhead_yields_necessary_person`, `necessary_person_derived`,
-`claim_e_implies_claim_d`, `monotheism_compatible_with_trinity`.
-The proof spine above (1-8) and everything below (forensic countermodels, audit)
-do not depend on that material. -/
 
 /-- De Dicto vs De Re Modal Gap:
     General modal logic separating de dicto necessity from de re necessity.
@@ -464,94 +265,13 @@ theorem de_dicto_not_implies_de_re :
     rw [hTrue] at hFalse
     contradiction
 
-/-- Normative Ground Independence Model:
-    Evaluates whether the invariant necessity of the objective normative order
-    (NecessaryNormativeOrder) logically forces the existence of an ontological ground
-    (∃ g : Entity, GroundProp g ObjectiveNormativeOrder) in the absence of the
-    universal truthmaker principle `GroundPrincipleProp`.
-    Demonstrates that necessary normative truth does NOT entail a truthmaker. -/
-structure NormativeGroundIndependenceModel where
-  World : Type
-  Entity : Type
-  Subject : Type
-  EntityOf : Subject → Entity
-  ExistsAt : World → Entity → Prop
-  PropSort : Type
-  T : PropSort → Prop
-  ObjectiveNormativeOrder : PropSort
-  NormativeOrderAt : World → PropSort → Prop
-  GroundProp : Entity → PropSort → Prop
-  order_holds : T ObjectiveNormativeOrder
-  necessary_order : ∀ w : World, NormativeOrderAt w ObjectiveNormativeOrder
-  Act : Subject → PropSort → Prop
-  FreeIndependentWill : Subject → Prop
-  JudicativePolarity : Subject → PropSort → PropSort
-  local_agential_grounding :
-    ∀ (s : Subject) (p : PropSort),
-      Act s p → FreeIndependentWill s → GroundProp (EntityOf s) (JudicativePolarity s p)
-  no_ground_of_normative_order :
-    ∀ g : Entity, ¬ GroundProp g ObjectiveNormativeOrder
-
-/-- Theorem: The Normative Ground Independence Model is mathematically satisfiable.
-    Proves that a universe can satisfy classical semantics, necessary normative truth,
-    and local personal grounding while lacking any ontological ground of the objective normative order.
-    Footprint: `{}`. -/
-theorem normative_ground_independence_model_satisfiable :
-    ∃ (_M : NormativeGroundIndependenceModel), True := by
-  let M : NormativeGroundIndependenceModel := {
-    World := Unit
-    Entity := Unit
-    Subject := Unit
-    EntityOf := fun _ => ()
-    ExistsAt := fun _ _ => True
-    PropSort := Bool
-    T := fun b => b = true
-    ObjectiveNormativeOrder := true
-    NormativeOrderAt := fun _ b => b = true
-    GroundProp := fun _ p => p = false
-    order_holds := rfl
-    necessary_order := fun _ => rfl
-    Act := fun _ _ => True
-    FreeIndependentWill := fun _ => True
-    JudicativePolarity := fun _ _ => false
-    local_agential_grounding := fun _ _ _ _ => rfl
-    no_ground_of_normative_order := fun _ h => by cases h
-  }
-  exact ⟨M, trivial⟩
-
-/-- UNINTERPRETED-GROUND RELATION SEPARATION:
-    In the absence of the universal truthmaking axiom `GroundPrincipleProp`,
-    the invariant necessity of the objective normative order does NOT logically force
-    the existence of an ontological ground over an uninterpreted `GroundProp` relation
-    (`fun _ p => p = false`). This refutes forcing over an uninterpreted syntactic relation
-    rather than proving philosophical independence of reality grounding.
-    Footprint: `{}`. -/
-theorem necessary_normative_truth_not_implies_ground :
-    ¬ (∀ (M : NormativeGroundIndependenceModel),
-        (∀ w, M.NormativeOrderAt w M.ObjectiveNormativeOrder) →
-        ∃ g : M.Entity, M.GroundProp g M.ObjectiveNormativeOrder) := by
-  intro hForced
-  obtain ⟨M, _⟩ := normative_ground_independence_model_satisfiable
-  have hNec := M.necessary_order
-  obtain ⟨g, hg⟩ := hForced M hNec
-  exact M.no_ground_of_normative_order g hg
-
 -- ============================================================================
 -- 8. Audit Block
 -- ============================================================================
 
-#print axioms claim_e_implies_claim_b
-#print axioms claim_d_implies_claim_b
-#print axioms claim_c_implies_claim_b
 #print axioms ofAtom_ne_ofSubject
-#print axioms ofAtom_not_necessary_personal_ground
 #print axioms step1_necessary_truth_exists
-#print axioms step2_necessary_reality_exists
 #print axioms step3_personal_logical_inseparability
-#print axioms ground_of_necessary_normative_order_is_necessary
-#print axioms ground_of_normative_order_is_personal_ground
 #print axioms de_dicto_not_implies_de_re
-#print axioms normative_ground_independence_model_satisfiable
-#print axioms necessary_normative_truth_not_implies_ground
 
 end Logos.NecessaryPersonalGround

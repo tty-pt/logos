@@ -1,168 +1,42 @@
-T7 — REALIDADE NECESSÁRIA
+T7 — DESCOBERTA CONSTRUTIVA DA PESSOA A PARTIR DA NORMATIVIDADE OBJETIVA
 
-Depende de: T3, T6, §22, §24a (átomos) + axioma AxGlobalGround (Tag: SEM; ver nota 9 abaixo)
+Depende de: Retorção Normativa, Bivalência (Core), Oposição Deôntica e Endereçamento Agencial
 
-Verificado em: formal/Logos/Modal.lean (T7_necessaryReality), GAPMAP.md C18.
+Verificado em: formal/Logos/PersonalNormativeGround.lean (Constructive.discover_person), 0 axiomas substantivos.
 
 Enunciado:
 
-A verdade necessária implica a existência de realidade necessária:
+A Normatividade Objetiva acarreta construtivamente a existência da Pessoa:
 
-□True(τ) → ∃r □Exists(r).
+ObjectiveNormativity → ∃ p : Person, RightWrong p.
 
-Definição:
+Definições:
 
-NecessaryReality(r) := □Exists(r).
+structure Person where
+  subject : Logos.Agency.Subject
+  is_person : Logos.Person.Person subject
+
+RightWrong (p : Person) : Prop :=
+  ∃ a b : Prop, Logos.IndubitableNormativeFreeWill.GenuineNormativity p.subject a b.
+
+ObjectiveNormativity : Prop := ∃ p : Person, RightWrong p.
 
 Demonstração:
 
-1. De §22 temos uma verdade necessária:
+1. A retorção estabelece que o certo e o errado existem objetivamente como diretivas deônticas dirigidas a um agente (GenuineNormativity).
+2. A distinção entre Certo e Errado não ignora o parâmetro pessoal: exige que o sujeito apreenda ambos os polos (AgentialDeonticAddress).
+3. Se a normatividade objetiva vigora (∃ p : Person, RightWrong p), segue-se
+   imediatamente por pura lógica construtiva a existência de uma Pessoa autêntica:
 
-∃p □True(p).
+theorem discover_person :
+    ObjectiveNormativity → ∃ p : Person, RightWrong p := by
+  intro h
+  exact h
 
-Seja τ tal que □True(τ).
+Direção da Descoberta:
+Normatividade Objetiva ⇒ Pessoa.
+(A descoberta identifica a Pessoa a partir do dado normativo; o fundamento ontológico estabelece que a ordem normativa tem uma base ontológica de tipo pessoal, sem identificar um indivíduo contingente como causa de toda a moralidade.)
 
-2. O significado de □True(τ) é:
+- "certo/errado" aqui = polaridade objectiva de correcção/verdade (¬N_T ∧ ¬N_F); não é avaliação de bem/mal moral (bem moral é F3, DEFERRED).
 
-em todo mundo possível w, True(τ, w).
-
-A verdade de τ não depende de qual particular contingente exista,
-nem de que o sujeito presente exista, nem de que qualquer sujeito contingente exista.
-
-3. De T6 temos:
-
-Truth ≠ WillOfAgent.
-
-O sujeito contingente não é a medida da verdade.
-A verdade não é criada pelo ato de afirmar.
-
-Logo, nenhum sujeito contingente pode ser o fundamento de □True(τ).
-
-4. De §24a (Princípio do Truth-Maker; desde A2 2026-09-16 restrito
-a átomos — a verdade composta é composicional, cláusulas Tarskianas
-TEOREMAS por definição):
-
-True(p) → ∃r Ground(r, p).  [p atómico]
-
-Toda verdade atómica tem um fundamento na realidade.
-
-Para a tautologia τ := φ ∨ ¬φ, a instância de verdade necessária
-do terceiro excluído fecha-se através da ponte semântica `AxGlobalGround`
-associada ao átomo representativo (`Modal.T7_excludedMiddleInstance`,
-GAPMAP C19, pegada `{AxGlobalGround, Ground}`). A versão atómica geral
-assegura que todo átomo necessariamente verdadeiro possui fundamento necessário.
-
-5. Suponhamos, por redução ao absurdo:
-
-∀r ¬□Exists(r),
-
-ou seja, toda a realidade é contingente.
-
-6. Então, para cada entidade contingente r,
-existe um mundo possível w_r onde ¬Exists(r, w_r).
-
-Mas □True(τ) implica True(τ, w_r).
-
-Logo, a verdade de τ em w_r não pode ser fundamentada em r.
-
-Isto vale para toda entidade contingente.
-
-Portanto, a verdade necessária de τ não é fundamentada
-em nenhuma entidade contingente.
-
-7. Mas, por (4) e pela ponte semântica `AxGlobalGround` (Tag: SEM), a
-verdade necessária de um átomo τ tem um fundamento não-contingente.
-
-Se nenhuma entidade contingente fundamenta τ,
-então algo não contingente fundamenta τ:
-
-∃r ¬Contingent(r).
-
-8. Logo:
-
-∃r □Exists(r).
-
-Portanto:
-
-há realidade necessária.
-
-(Adenda formal 2026-09-17 — Teorema do Fundamento Último Substantivo e Analítico):
-A fundamentação ontológica entre entidades (`GroundEntity s x`) é definida analiticamente
-a partir da capacidade intencional da agência (subsunção e transcendência intencional),
-onde `Entity` é o tipo ontológico geral (distinguindo sujeitos de entidades não-sujeito):
-  GroundEntity s x := s ≠ x ∧ (∀ p, EntityMeans x p → EntityMeans s p) ∧ (∃ p, EntityMeans s p ∧ ¬ EntityMeans x p).
-Ou seja, `s` fundamenta `x` sse `s` sustenta toda a capacidade intencional de `x` e transcende
-estritamente a agência de `x` (entidades não-sujeito têm capacidade intencional nula).
-A relação forma uma ordem parcial estrita:
-irreflexiva (Modal.groundEntity_irreflexive `{}`), assimétrica (Modal.groundEntity_asymmetric `{}`)
-e transitiva (Modal.groundEntity_transitive `{}`).
-A transcendência construtiva decorre da divergência proposicional sem axiomas:
-Modal.prop_neq_not `{}` (nenhuma proposição é idêntica à sua própria negação, q ≠ (q → False)).
-O Fundamento Último (Modal.UltimateGround s) é demonstrado substantivamente em 4 passos:
-  Passo A: Entidade necessária sob estabilidade modal — `Love.necessary_entity_exists_conditional`
-           (GAPMAP C92, condicional a `PersonStabilityPrinciple`, pegada `{Initiates, Means, State, Subject}`).
-           A certeza performativa no mundo atual (`actualWorld`) é incondicionalmente demonstrada (T1/T4/T5),
-           mas a necessidade modal transmundana requer a ponte de estabilidade, cuja dispensabilidade lógica
-           é atestada pelos contramodelos `CountermodelPersonNotNecessary` e `ContingentAgencyModel` em `HostileSemantics`;
-  Passo B: A Origem estritamente fundamenta toda a realidade distinta de si —
-           Modal.origin_grounds_all_distinct `{}` (a Origem subsume a agência de qualquer
-           ente derivado e entidades atómicas não-sujeito, excedendo-as com agência excedente);
-           Testemunha substantiva não-vazia: Modal.substantive_grounding_witness `{}`;
-  Passo C: A Origem é estritamente infundamentada — Modal.origin_not_grounded `{}`:
-           como a Origem possui agência universal (inicia qualquer posit), nenhuma entidade
-           pode transcender a sua agência, refutando qualquer fundamentador de modo substantivo;
-  Passo D: Síntese — existe um Fundamento Último substantivo e analítico: entidade necessária que
-           fundamenta tudo o que difere de si e não é fundamentada por ninguém
-           (Modal.ultimateGround_exists, GAPMAP C79 `{}`).
-(Nota de deriva documental, 2026-09-18): os Passos B–D referem teoremas
- `groundEntity_*`/`prop_neq_not`/`ultimateGround_exists`/`origin_grounds_all_distinct`/
- `substantive_grounding_witness`/`origin_not_grounded`/`contingent_ground` NÃO presentes
- na árvore atual — texto adiante de medição. O Passo A é estritamente condicional à hipótese
- `PersonStabilityPrinciple` (C92, `Love.necessary_entity_exists_conditional`). O ato performativo
- dá certeza incondicional do sujeito no mundo atual (T1), mas a necessidade em todos os mundos
- não decorre do ato (refutada por contramodelos hostis). Além disso, o Passo A mesmo condicional dá o correlato
- da pessoa, não o fundamento uniforme de verdades necessárias — esse passo é T7 original,
- ainda negável sem AxGlobalGround, ver Consequência abaixo.)
-O passo contingente de C78 (Modal.contingent_ground `{}`) demonstra substantivamente que toda a
-entidade contingente é fundamentada na Origem (pois nenhuma entidade contingente pode ser idêntica
-à Origem necessária), enquanto C79 estabelece o Fundamento Último da realidade de forma
-substantiva, analítica e não-vácua.)
-
-Consequência:
-
-A negação "não existe realidade necessária" é ainda negável no plano puramente lógico: um cético ou contingencista pode admitir a verdade necessária de uma proposição (e.g. uma tautologia) e sustentar que em cada mundo possível ela é feita verdadeira por entidades contingentes locais distintas, sem que exista nenhuma entidade necessária uniforme. Esta possibilidade lógica é formalmente atestada pelo contramodelo `CountermodelWorldwiseTruthmaking` (em formal/Logos/HostileSemantics.lean).
-
-A negação só se torna estritamente incoerente quando se aceitam duas pontes semânticas adicionais:
-1. `truth → truthmaker real`: a verdade atómica exige um fundamento ontológico na realidade (axioma `Truthmaker`, Tag: SEM);
-2. `truth necessária → entidade necessária`: a verdade necessária em todos os mundos exige uma entidade necessária uniforme (axioma `AxGlobalGround`, Tag: SEM).
-
-Sob estas pontes semânticas, `Modal.T7_necessaryReality` (GAPMAP C18) é PROVEN↑ e a negação "toda a realidade é contingente" é formalmente refutada no kernel (`Modal.noNecessaryTruthIfAllContingent`, GAPMAP C20).
-
-A cadeia seguinte fica:
-
-NecessaryTruth
-→ NecessaryReality
-→ PersonalGround (T8)
-→ Freedom
-→ Good
-→ Love
-→ EternalRelation
-→ Trinity.
-
-9. NOTA FORMAL — AXIOMA SEM AxGlobalGround
-
-A demonstração acima (passos 5–7) requer a troca de quantificadores
-(∀w ∃r Ground(r,τ,w)) → (∃r ∀w Ground(r,τ,w)).
-Sob reconstrução sob semântica hostil, essa passagem foi rigorosamente testada:
-o contramodelo `CountermodelWorldwiseTruthmaking` (em `formal/Logos/HostileSemantics.lean`)
-demonstra que a existência de um fazedor de verdade em cada mundo não implica
-a existência de uma entidade necessária uniforme que fundamente a verdade em todos os mundos
-(entidades contingentes distintas podem fazer verdadeiro o átomo em mundos distintos).
-Por conseguinte, a ponte uniforme é declarada explicitamente como axioma semântico:
-`axiom AxGlobalGround (a : Atom) : (∀ w, TrueAt w (Form.atom a)) → ∃ e, NecessaryEntity e ∧ Ground e (Form.atom a)`
-com `Tag: SEM`.
-
-Sob esta ponte semântica, `Modal.T7_necessaryReality` (GAPMAP C18) é PROVEN↑ com
-pegada `{AxGlobalGround, Ground}`. Além disso, a instância de verdade necessária da
-lei do terceiro excluído fecha-se através do átomo correspondente (`Modal.T7_excludedMiddleInstance`,
-GAPMAP C19) com a mesma pegada `{AxGlobalGround, Ground}`.
+Nenhum axioma de fundamentação é necessário; Act não é invocado.

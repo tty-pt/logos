@@ -24,7 +24,7 @@ the *single vulnerable premise* a skeptic could deny without destroying the
 act of denying (§29 criterion). Making it a definition removes the attack
 surface: the self-refutation core (¬N_T ∧ ¬N_F, "há certo e há errado")
 now rests on pure classical logic (§10 bivalence). The world-level
-truthmaker semantics (`Logos.Semantics`/`Truthmaker`) are independent of
+semantics (`Logos.Semantics`/`Entity`) are independent of
 `T` and carry the genuine modality. The earlier `#print axioms` rows
 read `{T, tschema}`; they now read `CL` or `{}` (see GAPMAP.md).
 

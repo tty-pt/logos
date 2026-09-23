@@ -89,7 +89,7 @@ declarada (só SEM/META).
   em todos os mundos; `AxPersonStability` teorema — esse est agere).
 - L26–30: "este mundo é necessário? Não" — negação não reivindicada (sem
   demonstração); "a criação existe / há propósito" — zona de fé (F9,
-  DEFERRED); "existe este Ser Pessoal" — PROVEN↑ C32 (T8, `AxPersonalGround`).
+  DEFERRED); "existe este Ser Pessoal" — PROVEN (T8, `the_person_supports_the_reality_of_right`, `GroundOfReality`).
 - L38 ("Eu Escolho! Escolho admitir que: Sou"): o proferimento de admitir/negar é o
   próprio evento performativo fraco (`act`) — C58 (`Agency.noWeakAct_selfRefutes`, `{Subject, act}`)
   refuta a negação de eventos realizados; a asserção intencional forte é C68 (`Agency.Cogito`, `{Means, Subject}`),

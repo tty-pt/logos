@@ -2,9 +2,9 @@
 # Logos.Semantics — Level 1a: object-language syntax and classical semantics
 
 Proves base.txt §22–§23 (necessity of the excluded middle and of
-non-contradiction) in a world-based semantics. This module is also the
-consistency model ("face-value model") behind the truthmaker axioms of
-`Logos.Truthmaker`.
+non-contradiction) in a world-based semantics. This module provides the
+classical semantics for the entity and modal layer of
+`Logos.Entity`.
 
 Design (see DESIGN.md, D0/D6):
   * `Form` is a *code* type for formulas: the object language is kept distinct
