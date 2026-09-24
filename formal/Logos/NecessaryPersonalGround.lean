@@ -143,11 +143,16 @@ theorem ofAtom_ne_ofSubject (n : Nat) (s : Subject) :
   fun h => Entity.noConfusion h
 
 /-- Intentional capacity of an entity: an entity means proposition `p` iff it is a
-    subject performing the intentional act `Means s p`. Empirical atoms have zero intentional capacity. -/
+    subject performing the intentional act `Means s p`. Empirical atoms have zero
+    intentional capacity; the ground of reality means every proposition
+    (explanatory-adequacy dual of the atom). NOTE (semantic stipulation, §5.2): as
+    in `RecoveredOntologicalGround.EntityMeans`, the `.ofGround` meaning-everything
+    branch is a definitional stipulation of the world-rigid constructor. -/
 def EntityMeans (e : Entity) (p : Prop) : Prop :=
   match e with
   | Entity.ofSubject s => Means s p
   | Entity.ofAtom _ => False
+  | Entity.ofGround => True
 
 /- The duplicated `explanatory_adequacy` AXIOM moved VERBATIM to
 scratch/Trinitarian_deferred.lean (DEFERRED); the canonical theorem

@@ -11,6 +11,8 @@ moral primitives (`Good`, `Bad`, `Duty`, `Lawgiver`) and without semantic bridge
   5. Primary recovery of `GenuineNormativity` connecting the positive normative pole (`Correct s p`) and negative normative pole (`Incorrect s p`) via `ClaimsNormativeCorrectness`.
   6. Grounded deliberative content recovery via `DeliberateChoice`.
   7. Derivation of `Chooses` and `FreeWill` via unmodified `indubitable_normative_free_will`.
+  8. `CommittedChoice`: the stance bundle (`Act` + co-meaning) that carries settlement,
+     matching the presentation which spoke of "committing to one".
 -/
 
 import Logos.Core
@@ -219,6 +221,77 @@ theorem deliberate_choice_derives_free_will
   indubitable_normative_free_will (deliberate_choice_derives_genuine_normativity s p q hDelib hCorr)
 
 -- ===========================================================================
+-- Section 5b: Committed Choice — the stance bundle carrying settlement (Step 5b)
+-- ===========================================================================
+
+/-- Committed choice: the subject is committed to p (performs the act on p) while
+    co-meaning the incompatible alternatives q and r in thought.
+    This is the definition that matches the reader-facing claim of "apprehending
+    incompatible alternatives and committing to one": the commitment is the act-conjunct
+    (`Act s p`), the grasp is the co-meaning (`Chooses s q r`).
+    `Chooses` alone is the cognitive core (a merely contemplative subject who co-means
+    without settling still satisfies it, cf. `contemplatesWithoutSettling_implies_freeWill`);
+    the stance bundle adds settlement at no extra axiom cost.
+    Classification: DEFINITIONAL. -/
+def CommittedChoice (s : Subject) (p : Prop) (q : Prop) (r : Prop) : Prop :=
+  Act s p ∧ Chooses s q r
+
+/-- Committed choice carries the deliberate grasp of the incompatible alternatives.
+    Footprint: {} (pure logic). -/
+theorem committedChoice_implies_chooses (s : Subject) (p q r : Prop)
+    (h : CommittedChoice s p q r) : Chooses s q r :=
+  h.2
+
+/-- Committed choice carries commitment in the world (the performed act on p).
+    Footprint: {} (pure logic). -/
+theorem committedChoice_implies_act (s : Subject) (p q r : Prop)
+    (h : CommittedChoice s p q r) : Act s p :=
+  h.1
+
+/-- Committed choice entails free will, definitionally from `Chooses`.
+    Footprint: {} (pure logic). -/
+theorem committedChoice_implies_freeWill (s : Subject) (p q r : Prop)
+    (h : CommittedChoice s p q r) : FreeWill s :=
+  ⟨q, r, committedChoice_implies_chooses s p q r h⟩
+
+/-- Committed choice entails free subjectivity, definitionally (`FreeSubject s := FreeWill s`).
+    Footprint: {} (pure logic). -/
+theorem committedChoice_implies_freeSubject (s : Subject) (p q r : Prop)
+    (h : CommittedChoice s p q r) : FreeSubject s :=
+  committedChoice_implies_freeWill s p q r h
+
+/-- The normative judicative stance is, by construction, a committed choice:
+    the stance performs the judgment act on p (commitment) and co-means the two
+    judicative normative poles `Correct s p` and `Incorrect s p` (grasp), which are
+    incompatible. So the stance literally satisfies the presentation's definition of
+    choice — commitment + co-meaning of incompatible alternatives.
+    Footprint: `{Initiates, Means, State, Subject, CL}` (zero substantive axioms). -/
+theorem claims_normative_correctness_implies_committed_choice
+    (s : Subject) (p : Prop) (h : ClaimsNormativeCorrectness s p) :
+    CommittedChoice s p (Correct s p) (Incorrect s p) := by
+  exact ⟨h.1, (claims_normative_correctness_derives_free_will s p h).1⟩
+
+/-- Master committed-choice theorem from the stance: committed choice, co-meaning,
+    and free will all hold of the judicative stance at the unchanged footprint.
+    Footprint: `{Initiates, Means, State, Subject, CL}` (zero substantive axioms). -/
+theorem claims_normative_correctness_derives_committed_free_will
+    (s : Subject) (p : Prop) (h : ClaimsNormativeCorrectness s p) :
+    CommittedChoice s p (Correct s p) (Incorrect s p) ∧
+    Chooses s (Correct s p) (Incorrect s p) ∧ FreeWill s :=
+  ⟨claims_normative_correctness_implies_committed_choice s p h,
+   claims_normative_correctness_derives_free_will s p h⟩
+
+/-- Whenever a normative judicative stance exists (any Act-judged content claimed
+    correct against a prohibited alternative), committed choice exists.
+    Footprint: `{Initiates, Means, State, Subject, CL}` (zero substantive axioms). -/
+theorem committed_choice_exists_of_stance
+    (h : ∃ (s : Subject) (p : Prop), ClaimsNormativeCorrectness s p) :
+    ∃ (s : Subject) (p q r : Prop), CommittedChoice s p q r := by
+  rcases h with ⟨s, p, hc⟩
+  exact ⟨s, p, Correct s p, Incorrect s p,
+         claims_normative_correctness_implies_committed_choice s p hc⟩
+
+-- ===========================================================================
 -- Section 6: Axiom Audit
 -- ===========================================================================
 
@@ -236,5 +309,12 @@ theorem deliberate_choice_derives_free_will
 #print axioms claims_normative_correctness_derives_free_will
 #print axioms deliberate_choice_derives_genuine_normativity
 #print axioms deliberate_choice_derives_free_will
+#print axioms committedChoice_implies_chooses
+#print axioms committedChoice_implies_act
+#print axioms committedChoice_implies_freeWill
+#print axioms committedChoice_implies_freeSubject
+#print axioms claims_normative_correctness_implies_committed_choice
+#print axioms claims_normative_correctness_derives_committed_free_will
+#print axioms committed_choice_exists_of_stance
 
 end Logos.NormativeOrder

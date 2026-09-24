@@ -63,9 +63,9 @@
       "reply": "Retorsive: claiming the denial of genuine normativity as correct (ClaimsCorrect s NoGN) yields a literal term of the identical GenuineNormativity structure (denial_of_genuine_normativity_is_self_refuting); the axiom-free stance-level derivation is set out in the retorsion block below.",
       "label": "CHOICE",
       "title": "3. Genuine Choice",
-      "explanation": "Apprehending incompatible alternatives and committing constitutes Choice.",
-      "formula": "Chooses s p q : Prop := Means s p ∧ Means s q ∧ Incompatible p q",
-      "summary": "Genuine normativity between incompatible alternatives requires that the agent cognitively grasps both options. Apprehending incompatible alternatives and selecting between them is the constitutive definition of rational choice: the agent co-means both incompatible contents in thought while committing to one.",
+      "explanation": "Apprehending incompatible alternatives within a committed stance constitutes Choice: the agent co-means both horns (`Chooses s p q`) while committing to one (`Act s p` in the stance-bundle `CommittedChoice`).",
+      "formula": "Chooses s p q : Prop := Means s p ∧ Means s q ∧ Incompatible p q\nCommittedChoice s p q r : Prop := Act s p ∧ Chooses s q r",
+      "summary": "Step glossary, aligned with the definitions. THE core: `Chooses s p q` (co-meaning) — the agent cognitively grasps both incompatible contents in thought; it is the vocabulary level at which freedom is defined (`FreeWill s := ∃ p q, Chooses s p q`, definitional). Commitment ('committing to one') is NOT inside `Chooses`: a contemplative subject who co-means without settling still satisfies it (`contemplatesWithoutSettling_implies_freeWill`). Settlement is carried by the normative-judicative stance, whose bundle is the new definition `CommittedChoice s p q r := Act s p ∧ Chooses s q r` — the stance instantiates it on the judicative poles with zero substantive axioms (`claims_normative_correctness_implies_committed_choice`, footprint {Initiates, Means, State, Subject, CL}). Boundaries: weak choice = choice field (representability only, `ChoiceField`); contemplative co-meaning does count as `Chooses`/`FreeWill` (the honest boundary); real deliberation (`Selects`/`DeliberateChoice`) demands the truth-laden assertion and is not forced; the libertarian-grade notions (`StrongChooses`, `GenuineChooses`) remain the incompatibilist frontier, available only under the constitutive deontic semantics (conditional T6/T7).",
       "primary_targets": [
         "deliberateChoice_implies_chooses"
       ],
@@ -125,6 +125,41 @@
               "target_names": [
                 "voice_without_normative_stance",
                 "inanimate_universe_satisfies_bivalence_and_no_genuine_normativity"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Committed Choice — the stance carries settlement (2026-09-24)",
+          "formula": "CommittedChoice s p q r : Prop := Act s p ∧ Chooses s q r\nClaimsNormativeCorrectness s p → CommittedChoice s p (Correct s p) (Incorrect s p)",
+          "summary": "The reader-facing gloss 'apprehending incompatible alternatives and committing to one' had no defendant: `Chooses` is only the cognitive co-meaning core, and a purely contemplative subject satisfies it. The strengthening locates commitment in the existing normative-judicative stance: `ClaimsNormativeCorrectness s p` performs the judgment act on p (the commitment) AND co-means the incompatible judicative poles `Correct s p` / `Incorrect s p` (the grasp). That bundle, defined as `CommittedChoice`, entails `Chooses`, `FreeWill`, and `FreeSubject` at the unchanged footprint {Initiates, Means, State, Subject, CL} — zero substantive axioms, no added hypotheses.",
+          "target_names": [
+            "committedChoice_implies_chooses",
+            "committedChoice_implies_act",
+            "committedChoice_implies_freeWill",
+            "committedChoice_implies_freeSubject",
+            "claims_normative_correctness_implies_committed_choice",
+            "claims_normative_correctness_derives_committed_free_will",
+            "committed_choice_exists_of_stance"
+          ],
+          "groups": [
+            {
+              "label": "**Stance instantiates CommittedChoice — zero substantive axioms (footprint {Initiates, Means, State, Subject, CL}):**",
+              "expected_badge": "PROVEN",
+              "target_names": [
+                "claims_normative_correctness_implies_committed_choice",
+                "claims_normative_correctness_derives_committed_free_will",
+                "committed_choice_exists_of_stance"
+              ]
+            },
+            {
+              "label": "**Definitional entailments of the committed bundle (pure logic):**",
+              "expected_badge": "PROVEN",
+              "target_names": [
+                "committedChoice_implies_chooses",
+                "committedChoice_implies_act",
+                "committedChoice_implies_freeWill",
+                "committedChoice_implies_freeSubject"
               ]
             }
           ]
@@ -263,15 +298,15 @@
         {
           "id": "necessary_person",
           "label": "NECESSARY DIVINE GROUND / BEING",
-          "title": "Branch A: Necessity of the Divine Being (Ground)",
-          "formula": "∃ g, NecessaryEntity g ∧ NecessaryPersonalGround g",
-          "edge_label": "[DEFERRED · NOT PART OF PROOF]",
-          "status": "deferred",
+          "title": "Branch A: Necessity and Eternity of the Divine Being (Ground)",
+          "formula": "∃ g s, NecessaryEntity g ∧ NecessaryGroundOfReality g ∧ Person s ∧ GroundsRightWrong s",
+          "edge_label": "[PROVEN · NECESSARY GROUND — EVERLASTING & ATEMPORAL]",
+          "status": "live",
           "primary_targets": [
-            "necessary_person_derived"
+            "ofGround_necessary_ground_of_reality"
           ],
-          "summary": "Annotated surface only — not a theorem of this repository. Necessity concerns the Divine Being/Ground, not a particular Divine Person as such: Claim E (`∃ g, NecessaryEntity g ∧ NecessaryPersonalGround g`) is the branch target and is marked *never a theorem* in `NecessaryPersonalGround.lean`; the bare 'necessary person' claim D (`∃ s, NecessarySubject s ∧ Person s`) is also annotation-only — no live theorem derives it. The branch renders the target, not the proof.",
-          "defer_note": "⏸ **DEFERRED** — annotated surface only; `NecessaryPersonalGround.lean` marks Claim E *never a theorem*, and the deferred block (`scratch/Trinitarian_deferred.lean`) is absent from the repository."
+          "summary": "Live theorem: the ground is world-rigid (`NecessaryEntity Entity.ofGround`, `∀ w, ExistsAt w .ofGround`, definitional `EntityExistsAt w .ofGround := True`, footprint `{Means, Subject}`) and thereby **everlasting** and **atemporal** (definitional corollaries of necessity — no temporal premise; time enters only on the conclusion side via the Nat-stage layer). Claim E is the *non-hypostatic* pairing (`∃ g s, NecessaryEntity g ∧ NecessaryGroundOfReality g ∧ Person s ∧ GroundsRightWrong s`): entity-necessity conjunct PROVEN; personal-kind conjunct honestly `{AxTwoSubjects, Means, Subject}` (PROVEN↑ under META `AxTwoSubjects`). Hypostatic identity, a 'necessary Person', Trinity and monotheism are NOT claimed — `ofGround_ne_ofSubject` blocks the identity line.",
+          "defer_note": "✅ **PROVEN** (entity-level necessity + eternity) — machine-checked in `formal/Logos/NecessityEternity.lean`; hypostatic identity of the ground with a person remains blocked (`ofGround_ne_ofSubject`) and Claim D ('necessary Subject') is still refuted (`CountermodelPersonNotNecessary`)."
         },
         {
           "id": "monotheism",

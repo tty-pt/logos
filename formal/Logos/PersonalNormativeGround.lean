@@ -197,7 +197,8 @@ theorem judicative_normative_polarity_of_act (s : Subject) (p : Prop) (hAct : Ac
     so the predicate is determined by the preceding facts, never stipulated.
     Classification: DEFINITIONAL. -/
 structure GroundsRightWrong (s : Subject) : Prop where
-  /-- The ground is an authoritative Person (witness of the personal ground-type). -/
+  /-- The ground-type is personal: its witness is an authoritative Person
+      (free subject with the free-will faculty). -/
   person : Person s
   /-- Universal ontological dependence: Wherever Right/Wrong obtains, it strictly depends on Personhood. -/
   dependence : ∀ s' : Subject, RightWrong s' → Person s'
@@ -647,7 +648,8 @@ structure ModelBSignature where
 
 /-- Theorem: Model B is mathematically satisfiable.
     Proves that `FreeIndependentWill s ⇏ GroundProp (EntityOf s) Polarity` in bare model theory,
-    rigorously isolating the necessity of the semantic bridge `AxPersonalNormativeGround`.
+    rigorously isolating the necessity of the semantic bridge `AxPersonalNormativeGround`
+    (historical name — no longer in the kernel; the current axiom is `AxTwoSubjects`).
     Footprint: `{}`. -/
 theorem model_b_satisfiable : ∃ M : ModelBSignature, True := by
   let M : ModelBSignature := {

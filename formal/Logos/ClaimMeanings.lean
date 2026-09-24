@@ -55,6 +55,12 @@ def C75 : String := "Propositional personhood is blocked: content existence does
 
 def C76 : String := "Canonical rigid love is retired: plurality does not entail love without substantive relational bridges."
 
+def C88 : String := "Transcendental quantifier swap is retired: the manufactured origin quantifier swap was destroyed under hostile semantics; the declaration is absent from the live kernel."
+
+def C77 : String := "Conditional necessary-person claim is deferred: the theorem Love.necessaryPersonExists_conditional was removed from the live kernel (commit ae7f4bd); retained as annotated conditional surface only, never a derived divine Person."
+
+def C92 : String := "Conditional necessary-entity claim is deferred: the theorem Love.necessary_entity_exists_conditional was removed from the live kernel (commit ae7f4bd); retained as annotated conditional surface only."
+
 def C64 : String := "Movement not transfer is retired: initiation constructor evaluation excised."
 
 def C65 : String := "Person iff originates is retired: manufactured initiation identity excised."

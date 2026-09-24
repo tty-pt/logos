@@ -1414,7 +1414,8 @@ STAGES = [
      "normative order. The person/entity lifts are definitional, and a necessary "
      "person is not derived unconditionally."},
     {"key": "VI", "title": "Grounding", "intro":
-     "Ontologically, the person is the ground of the Right and the Wrong. "
+     "Ontologically, the ground of the Right and the Wrong is personal "
+     "in kind/type. "
      "The clean approach encodes the ontological dependence in the formal "
      "definition rather than introducing an axiom: RightWrong is indexed "
      "by Person, discovery is constructive, and GroundedRightWrong is a "
@@ -4048,7 +4049,7 @@ def render_reading_guide() -> list[str]:
     ap("> binding our judgments — forces a *personal* ground. Free will is *derived, never")
     ap("> assumed* (`GenuineNormativity ⇒ Chooses ⇒ FreeWill ⇒ FreeSubject ⇒ Person`);")
     ap("> wherever right/wrong is real, its ground-type is personal (`RightWrong ⇒ Person`).")
-    ap("> A necessary Divine Being/Ground, Divine Personhood, and monotheism are **deferred** (⏸); every other claim is")
+    ap("> A necessary Divine Being/Ground — eternal (everlasting and atemporal) — is **proven** (✅); Divine Personhood and monotheism are **deferred** (⏸); every other claim is")
     ap("> definitional, derived, or a declared axiom.")
     ap("")
     ap("Every section below answers the same question — *what is the status of this claim?*")
@@ -4078,7 +4079,8 @@ def render_reading_guide() -> list[str]:
     ap(">    is personal* — is machine-proved with 0 substantive axioms. Reading the")
     ap(">    subjunction as a direction of ontology is interpretive, as 'Two directions, not")
     ap(">    one.' above explains.")
-    ap("> 3. A necessary Divine Being/Ground, Divine Personhood, and Strict Monotheism — **DEFERRED** (⏸), not proved here.")
+    ap("> 3. Divine Personhood and Strict Monotheism — **DEFERRED** (⏸), not proved here; a necessary")
+    ap(">    Divine Being/Ground (world-rigid, everlasting, atemporal) is its entity-level **PROVEN** claim (✅).")
     ap("> 4. Moral good/evil — a deferred frontier, not treated in this document.")
     ap("")
     ap("**Badge legend.** Every icon on a formal consequence is machine-derived from")
@@ -4357,21 +4359,27 @@ CLASSICAL_ATTRIBUTES = [
         "sense": ("`Person s → GroundsRightWrong s`, and the headline that \"the person "
                   "supports the reality of Right\". Established of the personal ground."),
     },
-    # ---- Ground 2 — Divine Being / Ground (open) ----
+    # ---- Ground 2 — Divine Being / Ground ----
     {
         "attribute": "**Necessary Divine Being / Ground**",
         "scope": "Divine Being / Ground",
-        "expected": "DEFERRED",
-        "checks": [{"type": "branch", "id": "necessary_person"},
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.NecessityEternity.ofGround_necessary_ground_of_reality"},
                    {"type": "absent",
                     "fragments": ["necessary_person_derived", "divine_person_is_necessary"],
                     "allow": ["Logos.ModalCreationAgency.model_MC2_necessary_person_no_agency_consistent"]}],
-        "refs": ["Logos.NecessaryPersonalGround.step1_necessary_truth_exists",
+        "refs": ["Logos.NecessityEternity.claimE",
+                 "Logos.NecessaryPersonalGround.step1_necessary_truth_exists",
                  "Logos.NecessaryPersonalGround.necessary_normative_order"],
-        "sense": ("Necessary truth and a necessary *normative order* are established — "
-                  "**order-level modal facts, not a necessary Being**. Claim E "
-                  "`∃ g, NecessaryEntity g ∧ NecessaryPersonalGround g` is marked "
-                  "*never a theorem*; Branch A is deferred (`⏸`)."),
+        "sense": ("The ground itself is world-rigid: `NecessaryEntity Entity.ofGround` "
+                  "(`∀ w, ExistsAt w .ofGround`, definitional `EntityExistsAt w .ofGround := True`, "
+                  "footprint `{Means, Subject}` — VOCAB only). Claim E is now a **live theorem** "
+                  "as a *non-hypostatic* pairing: the entity-necessity conjunct is PROVEN, the "
+                  "personal-kind conjunct is `{AxTwoSubjects, Means, Subject}` (PROVEN↑ under the "
+                  "declared META axiom `AxTwoSubjects`), and the hypostatic identity is blocked "
+                  "(`ofGround_ne_ofSubject`: `ofGround ≠ EntityOf s`). NO 'necessary Person' theorem "
+                  "exists — this row is the entity-level ground, distinct from the necessary-*order* row above."),
     },
     {
         "attribute": "**One God / strict monotheism** (unity of the Divine Being)",
@@ -4385,7 +4393,12 @@ CLASSICAL_ATTRIBUTES = [
         "sense": ("Strict monotheism (`monotheism_of_god_and_uniqueness`, "
                   "`monotheism_compatible_with_trinity`) is deferred out of the live kernel "
                   "(Branch B, `⏸`); unity concerns the Divine Being, not numerical identity "
-                  "of Personhood."),
+                  "of Personhood. Uniqueness is provably NOT a kernel consequence: the "
+                  "machine-witnessed separation "
+                  "`TheologicalModalHardening.necessary_existence_not_entails_uniqueness` "
+                  "(`¬ (∀ S, UniqueExists S.NecessaryEntity)`, L406-414, footprint `{}`) and "
+                  "the deferred `universal_ground_unique` (`NecessaryPersonalGround.lean:24`) "
+                  "mark it as an interpretive layer."),
     },
     {
         "attribute": "**Perfect (moral) goodness**",
@@ -4397,16 +4410,41 @@ CLASSICAL_ATTRIBUTES = [
                   "epistemic correctness, explicitly distinguished from moral good/evil."),
     },
     {
-        "attribute": "**Eternal** (of the Divine Being)",
+        "attribute": "**Eternal — ever-present** (everlasting existence)",
         "scope": "Divine Being / Ground",
-        "expected": "ABSENT",
-        "checks": [{"type": "absent",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.NecessityEternity.the_ground_everlasting"},
+                   {"type": "absent",
                     "fragments": ["eternal"],
                     "allow": ["Logos.Love.T14_eternalRelation_conditional"]}],
-        "refs": ["Logos.Love.T14_eternalRelation_conditional"],
-        "sense": ("No live theorem establishes the Divine Being's eternality; the only "
-                  "`eternal` result is `T14_eternalRelation_conditional` (C42) — an eternal "
-                  "love-**relation** under `AxTwoSubjects`, not the Being's eternality."),
+        "refs": ["Logos.NecessityEternity.necessary_implies_everlasting",
+                 "Logos.NecessityEternity.ofGround_necessary",
+                 "Logos.Love.T14_eternalRelation_conditional"],
+        "sense": ("World-rigid existence is unmodulated by time: `NecessaryEntity e → "
+                  "Everlasting e` (`∀ t, ExistsAtTime t e`) is a definitional corollary of "
+                  "necessity via the Nat-stage layer — the deduction imports NO temporal premise, "
+                  "time enters only on the conclusion side. `Everlasting Entity.ofGround` is "
+                  "therefore PROVEN (`{Subject}` + ground footprint, VOCAB). Distinct from the "
+                  "eternal love-*relation* `T14_eternalRelation_conditional`."),
+    },
+    {
+        "attribute": "**Atemporal** (existence not time-modulated; outside succession)",
+        "scope": "Divine Being / Ground",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.NecessityEternity.the_ground_atemporal"}],
+        "refs": ["Logos.NecessityEternity.necessary_implies_atemporal",
+                 "Logos.NecessityEternity.the_ground_not_in_succession",
+                 "Logos.NecessityEternity.atom_has_temporal_mode",
+                 "Logos.NecessityEternity.everlasting_but_contingent"],
+        "sense": ("`NecessaryEntity e → Atemporal e` (`ExistsAtTime t₁ e ↔ ExistsAtTime t₂ e`); "
+                  "the ground is also outside every initiation-act "
+                  "(`the_ground_not_in_succession`, `{Initiates, State, Subject}`). Separation is "
+                  "honest: atoms/subjects are time-modulated (`atom_has_temporal_mode`) and "
+                  "`Everlasting` does not collapse into necessity (`everlasting_but_contingent`). "
+                  "What is PROVEN is stage-unmodulated world-rigid existence — not a full "
+                  "theology of divine eternity."),
     },
     {
         "attribute": "**Divine simplicity**",
@@ -4577,9 +4615,11 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("_Synthesis — the strongest current profile._ The theory has established, of a")
     ap("**personal, rational, free, authoritative-over-its-acts, independently individuated**")
     ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")
-    ap("of a necessary normative/truth order. The specifically divine attributes — a **necessary")
-    ap("Divine Being / Ground**, **unity / monotheism**, **simplicity**, **omniscience**, **omnipotence**,")
-    ap("**eternality**, **perfect moral goodness**, the **Trinity**, the **Incarnation**, and contingent")
+    ap("of a necessary normative/truth order, and (entity-level) that a **necessary Divine Being")
+    ap("/ Ground** exists — world-rigid, **everlasting** and **atemporal**, a definitional")
+    ap("corollary of necessity with time entering only on the conclusion side. The remaining")
+    ap("divine attributes — **unity / monotheism**, **simplicity**, **omniscience**, **omnipotence**,")
+    ap("**perfect moral goodness**, the **Trinity**, the **Incarnation**, and contingent")
     ap("**creation** — remain **separate proof targets**")
     ap("(`⏸` / `❌`) or explicit **countermodel frontiers** (`🧱`) until the live kernel proves them.")
     ap("")

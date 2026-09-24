@@ -3307,6 +3307,12 @@
  "Logos.Entity.Entity.ofAtom.sizeOf_spec": [
   "Logos.Agency.Subject"
  ],
+ "Logos.Entity.Entity.ofGround.elim": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Entity.Entity.ofGround.sizeOf_spec": [
+  "Logos.Agency.Subject"
+ ],
  "Logos.Entity.Entity.ofSubject.elim": [
   "Logos.Agency.Subject"
  ],
@@ -5213,6 +5219,84 @@
  "Logos.Necessity.necTPH": [],
  "Logos.Necessity.nec_apply": [],
  "Logos.Necessity.someWorld": [],
+ "Logos.NecessityEternity.Atemporal": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.Everlasting": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.ExistsAtTime": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.HasTemporalMode": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.NotInSuccession": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.Time": [],
+ "Logos.NecessityEternity.atom_has_temporal_mode": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.atom_not_atemporal": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.atom_not_everlasting": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.claimE": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.NecessityEternity.everlasting_and_atemporal_ground": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.everlasting_but_contingent": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.necessary_implies_atemporal": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.necessary_implies_everlasting": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.ofGround_ground_of_reality": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.ofGround_ne_ofSubject": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.ofGround_necessary": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.ofGround_necessary_ground_of_reality": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.stageOf": [],
+ "Logos.NecessityEternity.subject_not_everlasting": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.the_ground_atemporal": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.the_ground_everlasting": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.the_ground_not_in_succession": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.the_personal_type_grounding": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxTwoSubjects"
+ ],
  "Logos.NegativeRetorsionAudit.CertConclusion": [],
  "Logos.NegativeRetorsionAudit.DiagonalSpec.D": [],
  "Logos.NegativeRetorsionAudit.DiagonalSpec.casesOn": [],
@@ -5478,6 +5562,12 @@
   "Logos.Agency.State",
   "Logos.Agency.Subject"
  ],
+ "Logos.NormativeOrder.CommittedChoice": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
  "Logos.NormativeOrder.JudicativeAct.casesOn": [
   "Logos.Agency.Subject"
  ],
@@ -5564,6 +5654,15 @@
  "Logos.NormativeOrder.TruthNorm": [
   "Logos.Agency.Subject"
  ],
+ "Logos.NormativeOrder.claims_normative_correctness_derives_committed_free_will": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
  "Logos.NormativeOrder.claims_normative_correctness_derives_free_will": [
   "propext",
   "Classical.choice",
@@ -5582,7 +5681,49 @@
   "Logos.Agency.State",
   "Logos.Agency.Subject"
  ],
+ "Logos.NormativeOrder.claims_normative_correctness_implies_committed_choice": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
  "Logos.NormativeOrder.claims_normative_correctness_is_act": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NormativeOrder.committedChoice_implies_act": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NormativeOrder.committedChoice_implies_chooses": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NormativeOrder.committedChoice_implies_freeSubject": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NormativeOrder.committedChoice_implies_freeWill": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NormativeOrder.committed_choice_exists_of_stance": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
   "Logos.Agency.State",

@@ -266,7 +266,10 @@ def test_readability_invariants():
     for footer in ("personal_ground_of_right_wrong", "person_iff_thomisticCore",
                    "preceding_theory_not_entails_trinity",
                    "necessary_ground_not_entails_contingent_creation",
-                   "preceding_theory_not_entails_incarnation"):
+                   "preceding_theory_not_entails_incarnation",
+                   "ofGround_necessary_ground_of_reality",
+                   "the_ground_everlasting",
+                   "the_ground_atemporal"):
         assert footer in attr_text, f"Table must cite live declaration '{footer}'"
     assert "NECESSARY PERSON" not in attr_text, (
         "Table must not re-introduce the 'necessary Person' conflation"
@@ -274,8 +277,11 @@ def test_readability_invariants():
     assert "God is a necessary Person" not in attr_text, (
         "Table must never say 'God is a necessary Person'"
     )
-    assert "never a theorem" in attr_text, (
-        "Table must record deferral honesty ('never a theorem') for Claim E"
+    assert "claimE" in attr_text, (
+        "Claim E is a live theorem (non-hypostatic pairing) and must be cited by the table"
+    )
+    assert "ofGround_ne_ofSubject" in attr_text, (
+        "Table must record the blocked hypostatic identity (ofGround ≠ EntityOf s)"
     )
 
     # 14. Invariant: Act / SubjectExists / Agent do NOT precede Free Will in main spine
@@ -295,7 +301,7 @@ def test_readability_invariants():
     assert "ONTOLOGICAL GROUND OF RIGHT / WRONG" in glance_text
     assert "NECESSARY TRUTH" in glance_text
     assert "CONSTRUCTIVE PERSONAL GROUND" in glance_text
-    assert "├─── [DEFERRED · NOT PART OF PROOF] → NECESSARY DIVINE GROUND / BEING" in glance_text
+    assert "├─── [PROVEN · NECESSARY GROUND — EVERLASTING & ATEMPORAL] → NECESSARY DIVINE GROUND / BEING" in glance_text
     assert "├─── [DEFERRED · NOT PART OF PROOF] → ONE GOD / STRICT MONOTHEISM" in glance_text
     assert "└─── [COUNTERMODEL SEPARATION FRONTIERS] → WHAT THIS DOES NOT YET PROVE" in glance_text
     assert "THEOLOGICAL FRONTIERS" in glance_text
@@ -305,7 +311,7 @@ def test_readability_invariants():
     # 16. Explanatory sentences under each transition in glance
     assert "Right and wrong both obtain" in glance_text
     assert "Objective correctness determines agential standards" in glance_text
-    assert "Apprehending incompatible alternatives and committing constitutes Choice" in glance_text
+    assert "Apprehending incompatible alternatives within a committed stance constitutes Choice" in glance_text
     assert "Freedom is derived by pure logic from genuine normativity and choice" in glance_text
     assert "A subject is recognized as free in virtue of possessing Free Will" in glance_text
     assert "A free subject is constitutively an authoritative Person" in glance_text
@@ -855,6 +861,7 @@ def main():
     test_constructive_person_ground(decls, node_map)
     test_no_modal_collapse(decls, node_map)
     test_no_hidden_premises(decls, node_map)
+    test_no_unitarian_collapse(decls, node_map)
     test_sensitivity(decls, node_map, graph, sections)
     print("\nALL DEDUCTION DEPENDENCY, READABILITY, AND SENSITIVITY TESTS PASSED SUCCESSFULLY! (0 errors)")
 

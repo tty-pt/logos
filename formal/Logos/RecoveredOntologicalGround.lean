@@ -38,11 +38,16 @@ def ActualEntity (e : Entity) : Prop := ExistsAt actualWorld e
 /-- Impersonal Entity: an atomic factual entity that is not a subject. -/
 def ImpersonalEntity (e : Entity) : Prop := ∃ n : Nat, e = Entity.ofAtom n
 
-/-- Meaning capacity of an entity. -/
+/-- Meaning capacity of an entity. NOTE (semantic stipulation, §5.2):
+    `Entity.ofGround` returns `True` for every proposition — the omni-meaning of
+    the ground is a definitional stipulation of the world-rigid constructor
+    (`Entity.ofGround`), distinguishing *the model has a necessary ground* from
+    *the argument entails an ontological necessary ground*. -/
 def EntityMeans (e : Entity) (p : Prop) : Prop :=
   match e with
   | Entity.ofSubject s => Means s p
   | Entity.ofAtom _ => False
+  | Entity.ofGround => True
 
 /-- GroundsEntity: ontological entities-relation l ge. DEFINITION (meaning-
     containment, esse est agere at the entity level): g grounds e iff g

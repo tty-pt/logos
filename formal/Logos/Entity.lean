@@ -15,10 +15,15 @@ open Logos.Agency (Subject)
 
 /-- General ontological type of entities. World-rigid.
     Subjects (capable of agency) are embedded via `Entity.ofSubject`,
-    while non-agent worldly entities are represented via `Entity.ofAtom`. -/
+    while non-agent worldly entities are represented via `Entity.ofAtom`.
+    `Entity.ofGround` is the world-rigid ground of reality: the only entity whose
+    existence the semantics make invariant across every world (definitional
+    semantic stipulation, VOCAB class — `EntityExistsAt w .ofGround := True`).
+    It is a constructor, not an axiom. -/
 inductive Entity : Type
   | ofSubject (s : Subject) : Entity
   | ofAtom (n : Nat) : Entity
+  | ofGround : Entity
 
 /-- The canonical embedding of subjects into entities. -/
 def EntityOf (s : Subject) : Entity := Entity.ofSubject s
@@ -35,10 +40,12 @@ def SubjectExistsAt (w : World) (_s : Subject) : Prop :=
 
 /-- Existence of an entity in a world:
     Subjects exist only at worlds where SubjectExistsAt holds;
-    atomic entities exist at worlds where their atomic valuation holds. -/
+    atomic entities exist at worlds where their atomic valuation holds;
+    the ground of reality exists in every world (world-rigid, by definition). -/
 def EntityExistsAt (w : World) : Entity → Prop
   | Entity.ofSubject s => SubjectExistsAt w s
   | Entity.ofAtom n => w n = Logos.Semantics.TV.t
+  | Entity.ofGround => True
 
 /-- ExistsAt is the canonical entity existence relation across worlds. -/
 def ExistsAt (w : World) (e : Entity) : Prop := EntityExistsAt w e

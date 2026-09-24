@@ -6,6 +6,92 @@ flagged axioms) · `AXIOM` (declared) · `BLOCKED` (missing lemma named) ·
 
 `CL` = `{propext, Classical.choice, Quot.sound}` (classical meta-logic, D1).
 
+## Batch committed-choice (2026-09-24) — Escolha Comprometida / "committing to one"
+
+O glossado "apreender alternativas incompatíveis **e comprometer-se com uma**" ganhou
+denotado formal. `Chooses` é só o núcleo cognitivo (co-significação); o comprometimento
+é carregado pela postura judicativa `ClaimsNormativeCorrectness`, cujo feixe é definido
+como `CommittedChoice s p q r := Act s p ∧ Chooses s q r` (novo §5b de
+`formal/Logos/NormativeOrder.lean`). Nada muda em cadeia: `CommittedChoice` ⇒ `Chooses`
+⇒ `FreeWill` ⇒ `Person`; a estrutura `GroundsRightWrong.agential_foundation` permanece
+`∃ p q, Chooses s p q`. Ver `CHOICE.md`.
+
+Pegadas `#print axioms` verificadas no build:
+
+| Decl (Logos.NormativeOrder §5b) | Pegada | Classe |
+|---|---|---|
+| `committedChoice_implies_chooses`/`_act`/`_freeWill`/`_freeSubject` | `{Initiates, Means, State, Subject}` | PROVEN (VOCAB) |
+| `claims_normative_correctness_implies_committed_choice` | `{Initiates, Means, State, Subject, CL}` | PROVEN |
+| `claims_normative_correctness_derives_committed_free_will` | `{Initiates, Means, State, Subject, CL}` | PROVEN |
+| `committed_choice_exists_of_stance` | `{Initiates, Means, State, Subject, CL}` | PROVEN |
+
+- `CommittedChoice` é DEFINITIONAL; as pegadas `{Initiates, Means, State, Subject}` das
+  deduções são o custo VOCAB de mencionar `Act`/`Chooses`/`FreeWill`.
+- O teorema-mestre da postura mantém ZERO axiomas substantivos — mesmo `CL` do resto do
+  §4/§5 de `NormativeOrder`. Apresentação sincronizada: nó `choice` do spine +
+  supporting-defense "Committed Choice — the stance carries settlement (2026-09-24)";
+  prosa em base.txt §15/"Aprofundamento"; docs em `CHOICE.md` e GOAL.md §"choice audit".
+
+## Batch fundamento-necessário (2026-09-24) — Necessidade e Eternidade do Fundamento
+
+Extensão do sort canónico `Logos.Entity.Entity` com o construtor **`Entity.ofGround`**
+(entidade mundo-rígida: `EntityExistsAt w .ofGround := True`; as duas correspondências
+`EntityMeans .ofGround p := True` em `RecoveredOntologicalGround` (~L45) e
+`NecessaryPersonalGround` (~L150) + docstrings). Novo módulo
+`formal/Logos/NecessityEternity.lean` (namespace `Logos.NecessityEternity`; importado
+no barrel 2026-09-24) com a camada temporal de estágios Nat (`Time := Nat`,
+`stageOf t m := if m ≤ t then TV.t else TV.f`, `ExistsAtTime`, `Everlasting`,
+`Atemporal e := ∀ t₁ t₂, ExistsAtTime t₁ e ↔ ExistsAtTime t₂ e`,
+`HasTemporalMode e := ¬ Atemporal e`, `NotInSuccession`)
+e os teoremas abaixo.
+
+Pegadas `#print axioms` verificadas no build (0 axiomas substantivos; `CL` ausente):
+
+| Decl (Logos.NecessityEternity) | Pegada | Classe |
+|---|---|---|
+| `ofGround_necessary` | `{Subject}` | PROVEN (VOCAB) |
+| `ofGround_ground_of_reality` | `{Means, Subject}` | PROVEN (VOCAB) |
+| `ofGround_necessary_ground_of_reality` | `{Means, Subject}` | PROVEN (VOCAB) |
+| `ofGround_ne_ofSubject` | `{Subject}` | PROVEN (VOCAB) |
+| `necessary_implies_everlasting` | `{Subject}` | PROVEN (VOCAB) |
+| `necessary_implies_atemporal` | `{Subject}` | PROVEN (VOCAB) |
+| `the_ground_everlasting` | `{Subject}` | PROVEN (VOCAB) |
+| `the_ground_atemporal` | `{Subject}` | PROVEN (VOCAB) |
+| `the_ground_not_in_succession` | `{Initiates, State, Subject}` | PROVEN (VOCAB) |
+| `everlasting_and_atemporal_ground` | `{Subject}` | PROVEN (VOCAB) |
+| `atom_has_temporal_mode` | `{Subject}` | PROVEN (VOCAB) |
+| `atom_not_everlasting` | `{Subject}` | PROVEN (VOCAB) |
+| `atom_not_atemporal` | `{Subject}` | PROVEN (VOCAB) |
+| `subject_not_everlasting` | `{Subject}` | PROVEN (VOCAB) |
+| `everlasting_but_contingent` | `{Subject}` | PROVEN (VOCAB) |
+| `the_personal_type_grounding` | `{AxTwoSubjects, Means, Subject}` | PROVEN↑ (META) |
+| `claimE` | `{AxTwoSubjects, Means, Subject}` | PROVEN↑ (META) |
+
+Notas:
+- O `{Subject}` Vocab nos teoremas "{}"-esperados é o custo de *mencionar* o tipo
+  `Entity` (o construtor `ofSubject` referencia a sort-axioma `Agency.Subject`) —
+  mesma convenção de `Modal.subject_nec_entity_nec` (C91). Zero axiomas substantivos.
+- A obstrução pré-extension `¬ ∃ e, NecessaryEntity e` (C-set "no necessary entity",
+  GOAL.md §2.2) **deixa de ser teorema** do sort estendido: `NecessaryEntity
+  Entity.ofGround` é uma estipulação semântica definicional (VOCAB), não um axioma.
+- Estipulação mundial do construtor rígido (§4.2): `EntityExistsAt w Entity.ofGround := True`
+  (`Entity.lean:45-48`) e `EntityMeans .ofGround p := True`
+  (`RecoveredOntologicalGround.lean:46`) são ESTIPULAÇÕES definicionais do construtor
+  de mundo-rígido (`Entity.lean:23-26`) — distinguem *o modelo tem um fundamento
+  necessário* de *o argumento acarreta um fundamento ontológico necessário*.
+- A Proposição E (nível-ente) passou de "anotada, nunca teorema" a teorema vivo como
+  **par não-hipostático** (`∃ g s, NecessaryEntity g ∧ NecessaryGroundOfReality g ∧
+  Person s ∧ GroundsRightWrong s`); o conjuncto pessoal carrega honestamente a ponte
+  META `AxTwoSubjects` (via `T5_personExists_from_plurality`) → `PROVEN↑`. A âncora
+  da linha README é `ofGround_necessary_ground_of_reality` (`{Means, Subject}`, PROVEN).
+- Identidade hipostática bloqueada: `ofGround_ne_ofSubject` (`Entity.noConfusion`).
+- Guarda de nomes honrada: nenhuma declaração nova contém o fragmento `eternal`
+  (`everlasting`/`atemporal`; `Love.T14_eternalRelation_conditional` permanece a única
+  exceção permitida).
+- Fronteiras honestas registadas em base.txt §28: Claim D ("sujeito necessário")
+  continua refutado (`CountermodelPersonNotNecessary`); teologia forte da eternidade
+  divina além da rigidez de estágios não é reivindicada.
+
 ## Batch retire-ConstitutiveNormativeBridge (2026-09-23) — Opção A: remoção de código morto
 
 `Logos.DirectNormativeRetorsion.ConstitutiveNormativeBridge` (estrutura) e os seus
@@ -44,12 +130,14 @@ The roadmap step #4/#5 (subject necessity → entity necessity) is executed:
   and `subject_necessity_not_entails_entity_necessity`
   (HostileSemantics, `{}`) show a subject can persist in every world while its
   entity-correlate exists in only one.
-- **C92** `Love.necessary_entity_exists : ∃ e, NecessaryEntity e` — from the
-  demonstrated person (`T5_personExists`, C24) and persistence
-  (`AxPersonStability`, esse est agere) with the C91 lift. Footprint
-  `{Means, Subject}` (no AxTwoSubjects). This gives the *performing person's
-  entity-correlate*; it does **NOT** close T7 — the uniform ground of a
-  necessary truth stays `AxGlobalGround`-priced (C18). Prose base.txt
+- **C92** `Love.necessary_entity_exists_conditional : ∃ e, NecessaryEntity e` — **DEFERRED**
+  (theorem removed from kernel, commit ae7f4bd "remove a lot of garbage"
+  2026-09-23; the former `Love.necessary_entity_exists` declaration exists
+  nowhere in the live kernel). Retained as annotated conditional surface only:
+  from the demonstrated person (`T5_personExists`, C24) and persistence
+  (`AxPersonStability`, esse est agere) with the C91 lift. It does **NOT**
+  close T7 — the uniform ground of a necessary truth stays
+  `AxGlobalGround`-priced (C18). Prose base.txt
   §26/§27/§28/§29 and theorems/T7.txt (Passo A) updated accordingly.
 - Still requires proof (recorded in base.txt §28): an independent bridge
   `NecessaryEntity e → ∃τ, Ground e τ` (step #7, without AxGlobalGround) and
@@ -228,6 +316,7 @@ inalterado**: definições de `Act`/`SubjectExists`/`Intentional`/`Agent`/
   prova estabelece o sujeito significador atualizado sob §12 e que a
   pessoalidade substantiva não é independentemente estabelecida. PROVEN
   mantido; downstream intacto (C39/C77/C92 usam C24 só no sentido fraco —
+  C77/C92: teoremas removidos do kernel (ae7f4bd), demovidos para DEFERRED;
   forma mais forte válida = reancoragem em `SubjectExists`/`Intentional`;
   C52 foi reancorado EM CÓDIGO: `choiceField_exists` deriva o campo via
   `intentional_hasChoiceField` a partir de `act_implies_intentional`, sem
@@ -318,10 +407,10 @@ Honestly recorded costs: the world-index is vacuous (declared, not hidden);
 | C10 | §22 | `excludedMiddle : ∀ p, T (p ∨ ¬ p)` | PROVEN | `CL` |
 | C11 | §23 | `nonContradiction : ∀ p, T (¬ (p ∧ ¬ p))` | PROVEN | `{}` (E0) |
 | C12 | §10 | `bivalence : ∀ p, T p ∨ IsFalse p` | PROVEN | `CL` |
-| C102 | §1/§4 | `DirectNormativeRetorsion.NoRight : Prop` — universal skeptical thesis that no genuine normative correctness judgment exists | PROVEN | `{}` |
-| C103 | §1/§4 | `DirectNormativeRetorsion.claims_correct_no_right_self_refuting : ClaimsCorrect s NoRight → NoRight → False` — claiming NoRight as correct while true yields a contradiction | PROVEN | `{}` |
-| C104 | §1/§4 | `DirectNormativeRetorsion.cannot_claim_correct_no_right_and_true : ¬ ∃ s, ClaimsCorrect s NoRight ∧ NoRight` — unassertability of the skeptical thesis | PROVEN | `{}` |
-| C105 | §1/§4 | `DirectNormativeRetorsion.performative_normative_denial_establishes_normative_right : (∃ s, ClaimsCorrect s NoRight) → ¬ NoRight` — performative denial establishes normative right | PROVEN | `{}` |
+| C102 | §1/§4 | `DirectNormativeRetorsion.NoRight : Prop` — universal skeptical thesis that no genuine normative correctness judgment exists | PROVEN | `{Initiates, Means, State, Subject}` |
+| C103 | §1/§4 | `DirectNormativeRetorsion.claims_correct_no_right_self_refuting : ClaimsCorrect s NoRight → NoRight → False` — claiming NoRight as correct while true yields a contradiction | PROVEN | `{Initiates, Means, State, Subject}` |
+| C104 | §1/§4 | `DirectNormativeRetorsion.cannot_claim_correct_no_right_and_true : ¬ ∃ s, ClaimsCorrect s NoRight ∧ NoRight` — unassertability of the skeptical thesis | PROVEN | `{Initiates, Means, State, Subject}` |
+| C105 | §1/§4 | `DirectNormativeRetorsion.performative_normative_denial_establishes_normative_right : (∃ s, ClaimsCorrect s NoRight) → ¬ NoRight` — performative denial establishes normative right | PROVEN | `{Initiates, Means, State, Subject}` |
 
 Founding definitions of Level 0 (E0, 2026-09-15): `def T (p : Prop) : Prop := p`
 (the D2 consistency model made definitional); `tschema` is a theorem
@@ -411,6 +500,10 @@ assertion (`Asserts s p → ∃ s' p', Act s' p'`). Retorsion directly establish
 The strong retorsion shortcut is `noCogito_selfRefutes : Asserts speaker NoAct → False` (`{Initiates, Means, State, Subject}`)
 under the intentional assertion `Asserts s p := Act s p ∧ p`.
 `GroundProp`, `GroundPrincipleProp` (SEM); `AxPersonalGround` (META, D9).
+Will layer (all VOCAB, `Logos.Agency` A16–A20): `Will` (Type of volitional
+faculties), `subjectWill : Subject → Will` (A17), `will_individuation` (A18 —
+constitutive MEANING-POSTULATE, injectivity of `subjectWill`, **declared not
+derived**), `Wills` (A19), `Ought` (A20).
 
 ### 14-Row Candidate Derivation Route Audit Table (`Act s p` to `Means s (¬p)`):
 
@@ -643,6 +736,15 @@ A campanha em `Logos.AxiomNegationAudit` executou a busca sistemática por neces
 
 ## Level 3 — modal, choice, interpersonal value (new: poem chain)
 
+> **Modal continuation — do NOT conflate (C59 note):** the *logical*
+> continuation is `Semantics.strongTruthExists` (C59, `{CL}`) — `∃ τ,
+> NecessarilyTrue τ`, resident in Core/Semantics (LEM), **not** derived from the
+> normative chain; the *normative world-level* continuation is
+> `NecessaryNormativeOrder : ∀ w, NormativeOrderAt w`
+> (`NecessaryPersonalGround.lean:110-111`, anchored in C36 +
+> incompatibilities). C95/C96 surround C59: the atom wall (no atom is fixed
+> modally) and contingent content.
+
 | ID | Poem | Lean theorem | Status | Axiom footprint |
 |----|------|--------------|--------|-----------------|
 | C35 | P2 | `Core.negatedAbsolutes : ¬ (N_T ∨ N_F)` | PROVEN | `{}` (E0) |
@@ -688,10 +790,10 @@ A campanha em `Logos.AxiomNegationAudit` executou a busca sistemática por neces
 | C74 | P5 | `Value.aloneExcluded : ¬ ∃ s, Person s ∧ Alone s` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (under the plurality bridge `AxTwoSubjects`, a lone person is excluded) |
 | C75 | P7 | `Person.everyContentIsAPerson` | BLOCKED | (killed under hostile semantics: content existence does not imply personhood; tripartite report) |
 | C76 | P8 | `Love.T14_canonicalRigid` | BLOCKED | (excised: manufactured witness destroyed) |
-| C77 | P5/P8 | `Love.necessaryPersonExists_conditional` | PROVEN | `{Initiates, Means, State, Subject}` (condicional; a necessidade do sujeito não se segue do ato contingente, como provado pelo contramodelo de agência contingente) |
+| C77 | P5/P8 | `Love.necessaryPersonExists_conditional` | DEFERRED | `{Initiates, Means, State, Subject}` (theorem removed from kernel, commit ae7f4bd "remove a lot of garbage" 2026-09-23; conditional claim retained as annotated surface only — a necessidade do sujeito não se segue do ato contingente, como provado pelo contramodelo de agência contingente) |
 | C85 | P6 | `Value.help_not_harm` — **princípio de benevolência**: no plano fundante, ajudar exclui prejudicar (`Helps s t → ¬ Harms s t`) | PROVEN | `{Subject}` |
 | C86 | P6/P8 | `Love.love_helps` (+ `Love.love_not_harms`, `Love.loves_of_helps`) — **amor como benevolência direcionada**: amar é ajudar e não prejudicar (`Loves s t := Helps s t ∧ ¬ Harms s t`) | PROVEN | `{Subject}` |
-| C92 | P8/§27 | `Love.necessary_entity_exists_conditional` | PROVEN | `{Initiates, Means, State, Subject}` (condicional; entidade necessária não é acarretada pelo ato performativo) |
+| C92 | P8/§27 | `Love.necessary_entity_exists_conditional` | DEFERRED | `{Initiates, Means, State, Subject}` (theorem removed from kernel, commit ae7f4bd "remove a lot of garbage" 2026-09-23; conditional claim retained as annotated surface only — entidade necessária não é acarretada pelo ato performativo) |
 
 Declared (Level 3): **M1 (A3, 2026-09-16): `Affects` is a structural
 DEFINITION (`Affects s t := s ≠ t`), and `AxPersonsAffect` is a THEOREM** (distinct persons are
@@ -705,7 +807,7 @@ following the mathematical proof of the Unit countermodel in `HostileSemantics`.
 `PersonStabilityPrinciple` is the explicit modal hypothesis for world-persistence of persons (`Person s → NecessarySubject s`).
 It is NOT a theorem of pure performative logic: the countermodels `CountermodelPersonNotNecessary` and `ContingentAgencyModel`
 in `HostileSemantics` formally prove that an intentional act at `actualWorld` does not entail modal necessity across all worlds.
-C77 and C92 are explicitly CONDITIONAL on this hypothesis.
+C77 and C92 are demoted to DEFERRED (theorems removed from the kernel, commit ae7f4bd); while they existed they were explicitly CONDITIONAL on this hypothesis.
 T14 stands on the pair under `AxTwoSubjects` and `PersonStabilityPrinciple`.
 Modal layer is derived (C1): `Necessity: Prop → Prop` is a *definition*
 (identity-model alias) and `NecessityPH : (World → Prop) → Prop` the
@@ -907,15 +1009,18 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   C1, C2, C4–C9, C11, C21–C24, C26–C29, C31, C35, C36, C38, C39,
   C48–C54, C56–C58, C61–C68 (C62: pure bridges `{}`; full conditional `CL`),
   C73–C79
-  (definitional plurality, plenum seed, canonical rigid love, necessary person — claim C77/D, conditional, never a derived divine Person —, contingent ground, substantive ultimate ground), F1a
+  (definitional plurality, plenum seed, canonical rigid love, contingent ground, substantive ultimate ground), F1a
   (choice-**field** existence resolves to a kernel step; renamed 2026-09-18, the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
   `CL`-only: C3, C10, C12–C14, C25, C30, C37, C55, C59, C93.
   Vocab-only (`{Ground}` — the statement's own vocabulary): C15, C16, C17,
   C18, C20, C34, C60 (denial refutes itself by definition — RAA;
   esse-est-agere drops `ExistsAt`, now a def; A2-swap-theorem drops
   `AxGlobalGround`, now a theorem).
-  New (lift-necessário, 2026-09-18): **C91**, **C92** — vocab-only
-  (`{Subject}` and `{Means, Subject}` respectively); hostile separations `{}`.
+  New (lift-necessário, 2026-09-18): **C91** — vocab-only
+  (`{Subject}`); hostile separations `{}`. C92 (the vocab-only lift
+  `{Means, Subject}` from that batch) later became the conditional
+  `Love.necessary_entity_exists_conditional` — removed from the kernel
+  (ae7f4bd), DEMOVIDO para DEFERRED.
   C62 (`rightWrong_implies_meaning`) is the pure bridge: with the §8
   act-relative `Correct`/`Incorrect`, right/wrong unfold to a `Means`-act;
   the bare-distinction form `rightWrongDistinction_implies_meaning` is `CL`.
@@ -1291,7 +1396,7 @@ of $\Gamma + A14$:
 | C114 | §21 | `OughtRetorsion.self_grounded_assertion_incoherent` | PROVEN | `{Ought, Subject, Wills}` |
 | C115 | §21 | `OughtRetorsion.HostileImpersonalModel.impersonal_model_satisfies_ought_without_person` | COUNTERMODEL | `{}` |
 | C116 | §21 | `OughtRetorsion.asserting_no_personal_source_instantiates_only_judging_subject` | PROVEN | `{Means, Subject}` |
-| C117 | §21 | `OughtRetorsion.AxSecondPersonalAddress` | AXIOM | `AxSecondPersonalAddress` |
+| C117 | §21 | `OughtRetorsion.AxSecondPersonalAddress` | AXIOM | `{AxSecondPersonalAddress, Means, Ought, Subject}` |
 | C118 | §21 | `OughtRetorsion.second_personal_ought_derives_plurality` | PROVEN↑ | `{AxSecondPersonalAddress, Means, Ought, Subject}` |
 | C119 | §21 | `OughtRetorsion.lone_subject_excludes_second_personal_ought` | PROVEN↑ | `{AxSecondPersonalAddress, Means, Ought, Subject}` |
 | C120 | §12 | `Person.free_subject_is_person` | PROVEN | `{Means, Subject}` |
@@ -1364,6 +1469,16 @@ that the ground creates existents, makes evil exist, or morally legitimizes what
 | C153 | §28/§29 | `PersonalGroundOfReality.person_yields_personal_grounding_of_reality` — instance form (datum-guarded): the derived Person witnesses the personal ground of the objective normative/truth order governing judgments about reality (grounding correctness about reality; not creation of existents) (historical compatibility alias: `present_act_yields_personal_grounding_of_reality`) | PROVEN | `{Initiates, Means, State, Subject, CL}` |
 | C172 | §28/§29 | `PersonalGroundOfReality.personal_ground_of_right_wrong : ∀ s, RightWrong s → Person s` — the 'simple thing' in one universal: wherever Right/Wrong is real, its ground-type is personal; direct alias of `normative_datum_forces_person` (the elaborated `GroundsRightWrong` record is its record-form, DEFINITIONAL) | PROVEN | `{Means, Subject}` |
 
+> **GroundsRightWrong package (§4.3):** `GroundsRightWrong` is a RECORD — person,
+> universal dependence, `agential_foundation := ∃p q, Chooses s p q`
+> (transparent, C168; at most the generating theorem `Person s → GroundsRightWrong s`
+> proves Γ's specification is SATISFIED). `model_b_separation`
+> (`PersonalNormativeGround.lean:673-675`) shows a concrete witness where an
+> *arbitrary external* `GroundProp` is NOT forced: `Entity := Bool`,
+> `GroundProp := fun e _ => e = false` — an impersonal atom satisfies it while the
+> free person's entity fails. The kernel proves the package INSTANCE, not a
+> general reduction of ontological grounding.
+
 ### Claim E status (annotated, not a theorem)
 
 `∃ g, NecessaryEntity g ∧ Personal g ∧ GroundOfReality g` — beliefs that a
@@ -1373,6 +1488,15 @@ entity-level personal grounding needs `AxPersonalGround` (META). Counter-theorem
 `deterministic_transcendental_subject_*`, `retorsion_fails_against_no_necessary_entity`,
 `necessary_normative_truth_not_implies_ground`, `normative_ground_independence_model_satisfiable`.
 Record only; never re-axiomatize.
+
+### Uniqueness / monotheism (nota §4.7) — NÃO estabelecido
+
+Nenhuma afirmação de unicidade/monoteísmo é provada no kernel; o kernel prova a
+**separação oposta**: `TheologicalModalHardening.necessary_existence_not_entails_uniqueness`
+(`¬ (∀ S : PluralNecessaryEntitiesSignature, UniqueExists S.NecessaryEntity)`,
+L406-414, testemunha `plural_necessary_entities_consistent` L391-403) e difere
+`universal_ground_unique` (`NecessaryPersonalGround.lean:24`). Monoteísmo é uma
+camada interpretativa, não consequência kernel.
 
 
 

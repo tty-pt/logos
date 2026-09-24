@@ -1,0 +1,50 @@
+T15 — NECESSIDADE E ETERNIDADE DO FUNDAMENTO (a entidade mundo-rígida)
+
+Depende de: formal/Logos/NecessityEternity.lean (módulo novo, 2026-09-24, namespace
+Logos.NecessityEternity) + extensão do sort em formal/Logos/Entity.lean (construtor
+Entity.ofGround; EntityExistsAt w .ofGround := True; correspondências EntityMeans
+.ofGround p := True em RecoveredOntologicalGround.lean e NecessaryPersonalGround.lean).
+PROVEN (VOCAB) — pegadas {Means, Subject} / {Subject} / {Initiates, State, Subject},
+zero axiomas substantivos; conjuncto pessoal da Proposição E: PROVEN↑ sob
+{ AxTwoSubjects, Means, Subject } (META anunciada).
+
+Verificado em: formal/Logos/NecessityEternity.lean (ofGround_necessary,
+ofGround_ground_of_reality, ofGround_necessary_ground_of_reality,
+necessary_implies_everlasting, necessary_implies_atemporal, the_ground_everlasting,
+the_ground_atemporal, the_ground_not_in_succession, everlasting_and_atemporal_ground,
+claimE), GAPMAP.md (Batch fundamento-necessário), GOAL.md §3/§4/§7.
+
+O fundamento último — a entidade cuja existência a semântica torna mundo-invariante —
+existe necessariamente em todos os mundos: `NecessaryEntity Entity.ofGround`
+(`∀ w, ExistsAt w .ofGround`; a estipulação `EntityExistsAt w .ofGround := True` é uma
+estipulação semântica definicional, classe VOCAB, não um axioma substantivo — a obstrução
+pré-extension `¬ ∃ e, NecessaryEntity e` deixou de ser teorema do sort estendido).
+
+O argumento NÃO depende do tempo: a camada temporal (estágios Nat, `stageOf`,
+`ExistsAtTime`) entra apenas no lado da conclusão, nunca nas premissas. Por isso a
+rigidez-mundo do fundamento entrega, por corolário definicional, ambas:
+Everlasting (∀ t, ExistsAtTime t Entity.ofGround) e
+Atemporal (∀ t₁ t₂, ExistsAtTime t₁ .ofGround ↔ ExistsAtTime t₂ .ofGround),
+mais a não-sucessão (the_ground_not_in_succession: fora de todo acto de iniciação).
+
+Separação honesta (os predicados não colapsam): `atom_has_temporal_mode`,
+`atom_not_everlasting`, `atom_not_atemporal`, `subject_not_everlasting`,
+`everlasting_but_contingent` (Everlasting ⇏ Necessário).
+
+Enunciado (forma de base):
+
+Necessário(g) ∧ Fundamento-da-Realidade(g) ∧ Eterno(g) ∧ Atemporal(g)
+  com g = Entity.ofGround, Eterno(g) := ∀t ExistsAtTime(t, g),
+  Atemporal(g) := ∀t₁ t₂ [ExistsAtTime(t₁,g) ↔ ExistsAtTime(t₂,g)]
+
+Proposição E (par não-hipostático, claimE):
+
+∃g ∃s [NecessaryEntity(g) ∧ NecessaryGroundOfReality(g) ∧ Person(s) ∧ GroundsRightWrong(s)]
+
+idêntico ao que, antes da extensão, era anotado "nunca teorema"; agora teorema vivo,
+sem linha de identidade — a identidade hipostática g = EntityOf s é BLOQUEADA
+(ofGround_ne_ofSubject). Claim D ("sujeito necessário") continua REFUTADO
+(CountermodelPersonNotNecessary). Teologia forte da eternidade divina além da rigidez
+de estágios: não reivindicada (fronteira, §28).
+
+sorryAx: 0.

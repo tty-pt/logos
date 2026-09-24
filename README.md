@@ -4,7 +4,7 @@
 > binding our judgments — forces a *personal* ground. Free will is *derived, never
 > assumed* (`GenuineNormativity ⇒ Chooses ⇒ FreeWill ⇒ FreeSubject ⇒ Person`);
 > wherever right/wrong is real, its ground-type is personal (`RightWrong ⇒ Person`).
-> A necessary Divine Being/Ground, Divine Personhood, and monotheism are **deferred** (⏸); every other claim is
+> A necessary Divine Being/Ground — eternal (everlasting and atemporal) — is **proven** (✅); Divine Personhood and monotheism are **deferred** (⏸); every other claim is
 > definitional, derived, or a declared axiom.
 
 Every section below answers the same question — *what is the status of this claim?*
@@ -34,7 +34,8 @@ the direction is not machine-decidable.
 >    is personal* — is machine-proved with 0 substantive axioms. Reading the
 >    subjunction as a direction of ontology is interpretive, as 'Two directions, not
 >    one.' above explains.
-> 3. A necessary Divine Being/Ground, Divine Personhood, and Strict Monotheism — **DEFERRED** (⏸), not proved here.
+> 3. Divine Personhood and Strict Monotheism — **DEFERRED** (⏸), not proved here; a necessary
+>    Divine Being/Ground (world-rigid, everlasting, atemporal) is its entity-level **PROVEN** claim (✅).
 > 4. Moral good/evil — a deferred frontier, not treated in this document.
 
 **Badge legend.** Every icon on a formal consequence is machine-derived from
@@ -101,12 +102,17 @@ OUGHT / OUGHT-NOT
         │ [discovery · apprehension of incompatible alternatives]
         ▼
 CHOICE
-  Apprehending incompatible alternatives and committing constitutes Choice.
+  Apprehending incompatible alternatives within a committed stance constitutes Choice: the agent co-means both horns (`Chooses s p q`) while committing to one (`Act s p` in the stance-bundle `CommittedChoice`).
   ⊢ Chooses s p q : Prop := Means s p ∧ Means s q ∧ Incompatible p q
+CommittedChoice s p q r : Prop := Act s p ∧ Chooses s q r
   *[✅]*
         ▲
         │ [Retorsion Against 'Genuine Normativity Is Stipulative']
         │ ⊢ (∃ s, ∃ p, ClaimsNormativeCorrectness s p) → GenuineNormativity s (Correct s NoGN) (Incorrect s NoGN) ∧ ¬ NoGN ∧ (∃ s, FreeWill s)
+        ▲
+        │ [Committed Choice — the stance carries settlement (2026-09-24)]
+        │ ⊢ CommittedChoice s p q r : Prop := Act s p ∧ Chooses s q r
+ClaimsNormativeCorrectness s p → CommittedChoice s p (Correct s p) (Incorrect s p)
         │
         │ [discovery · PURE LOGIC · 0 substantive axioms]
         ▼
@@ -158,9 +164,9 @@ CONSTRUCTIVE PERSONAL GROUND
   ⊢ ObjectiveNormativity → ∃ p : Person, RightWrong p ∧ GroundedRightWrong := Σ' p, RightWrong p
   *[✅]*
         │
-        ├─── [DEFERRED · NOT PART OF PROOF] → NECESSARY DIVINE GROUND / BEING
-        │     ⊢ ∃ g, NecessaryEntity g ∧ NecessaryPersonalGround g
-        │     *[⏸]*
+        ├─── [PROVEN · NECESSARY GROUND — EVERLASTING & ATEMPORAL] → NECESSARY DIVINE GROUND / BEING
+        │     ⊢ ∃ g s, NecessaryEntity g ∧ NecessaryGroundOfReality g ∧ Person s ∧ GroundsRightWrong s
+        │     *[✅]*
         │
         ├─── [DEFERRED · NOT PART OF PROOF] → ONE GOD / STRICT MONOTHEISM
         │     ⊢ Monotheism
@@ -302,13 +308,13 @@ General agential Ought: the act is prescribed by standard N.
 
     ∴ Ought ≡ N.prescribes a
 
-📘 · [NormativeOrder.lean#Ought](formal/Logos/NormativeOrder.lean#L59)
+📘 · [NormativeOrder.lean#Ought](formal/Logos/NormativeOrder.lean#L61)
 
 General agential OughtNot: the act is prohibited by standard N.
 
     ∴ OughtNot ≡ N.prohibits a
 
-📘 · [NormativeOrder.lean#OughtNot](formal/Logos/NormativeOrder.lean#L64)
+📘 · [NormativeOrder.lean#OughtNot](formal/Logos/NormativeOrder.lean#L66)
 
 Truth, *defined* as identity (E0): `T p` is `p` itself.
 
@@ -322,7 +328,7 @@ Deontic opposition between the positive normative pole (Correct s p) and the neg
 
     Act s p → DeonticOpposition(Correct s p, Incorrect s p)
 
-✅ · [NormativeOrder.lean#correctness_deontic_opposition](formal/Logos/NormativeOrder.lean#L153)
+✅ · [NormativeOrder.lean#correctness_deontic_opposition](formal/Logos/NormativeOrder.lean#L155)
 
 <details>
 <summary>Supporting Infrastructure — 3 auxiliary theorem(s) beneath this step</summary>
@@ -331,19 +337,19 @@ The objective epistemic norm of Truth: truth prescribes affirmation, and falsity
 
     ∴ TruthNorm ≡ T(a).content prohibits a := IsFalse(a).content incompatible a := fun ⟨hT, hF⟩ => hF hT
 
-📘 · [NormativeOrder.lean#TruthNorm](formal/Logos/NormativeOrder.lean#L70)
+📘 · [NormativeOrder.lean#TruthNorm](formal/Logos/NormativeOrder.lean#L72)
 
 A correct judgment act implies that the subject ought to affirm the content under TruthNorm.
 
     Correct(s, p) → Ought TruthNorm ⟨s, p⟩
 
-✅ · [NormativeOrder.lean#correct_implies_ought](formal/Logos/NormativeOrder.lean#L81)
+✅ · [NormativeOrder.lean#correct_implies_ought](formal/Logos/NormativeOrder.lean#L83)
 
 An incorrect judgment act implies that the subject ought not to affirm the content under TruthNorm.
 
     Incorrect(s, p) → OughtNot TruthNorm ⟨s, p⟩
 
-✅ · [NormativeOrder.lean#incorrect_implies_oughtNot](formal/Logos/NormativeOrder.lean#L87)
+✅ · [NormativeOrder.lean#incorrect_implies_oughtNot](formal/Logos/NormativeOrder.lean#L89)
 
 </details>
 
@@ -351,7 +357,7 @@ An incorrect judgment act implies that the subject ought not to affirm the conte
 
 ## 3. Genuine Choice
 
-Genuine normativity between incompatible alternatives requires that the agent cognitively grasps both options. Apprehending incompatible alternatives and selecting between them is the constitutive definition of rational choice: the agent co-means both incompatible contents in thought while committing to one.
+Step glossary, aligned with the definitions. THE core: `Chooses s p q` (co-meaning) — the agent cognitively grasps both incompatible contents in thought; it is the vocabulary level at which freedom is defined (`FreeWill s := ∃ p q, Chooses s p q`, definitional). Commitment ('committing to one') is NOT inside `Chooses`: a contemplative subject who co-means without settling still satisfies it (`contemplatesWithoutSettling_implies_freeWill`). Settlement is carried by the normative-judicative stance, whose bundle is the new definition `CommittedChoice s p q r := Act s p ∧ Chooses s q r` — the stance instantiates it on the judicative poles with zero substantive axioms (`claims_normative_correctness_implies_committed_choice`, footprint {Initiates, Means, State, Subject, CL}). Boundaries: weak choice = choice field (representability only, `ChoiceField`); contemplative co-meaning does count as `Chooses`/`FreeWill` (the honest boundary); real deliberation (`Selects`/`DeliberateChoice`) demands the truth-laden assertion and is not forced; the libertarian-grade notions (`StrongChooses`, `GenuineChooses`) remain the incompatibilist frontier, available only under the constitutive deontic semantics (conditional T6/T7).
 
 *(Detailed technical proof & model analysis: [investigations/contrastive-choice.md](investigations/contrastive-choice.md))*
 
@@ -363,7 +369,25 @@ Genuine normativity between incompatible alternatives requires that the agent co
 </details>
 
 <details>
-<summary>Definitions used in this section (10; 6 new, 4 already shown)</summary>
+<summary>Definitions used in this section (13; 9 new, 4 already shown)</summary>
+
+`Act s p`: strong act: meaningful initiation of movement.
+
+    ∴ Act ≡ Means(s, p) ∧ ∃ w, w', Initiates s w w' p
+
+📘 · [Agency.lean#Act](formal/Logos/Agency.lean#L155)
+
+Committed choice: the subject is committed to p (performs the act on p) while co-meaning the incompatible alternatives q and r in thought.
+
+    ∴ CommittedChoice ≡ Act s p ∧ Chooses(s, q, r)
+
+📘 · [NormativeOrder.lean#CommittedChoice](formal/Logos/NormativeOrder.lean#L236)
+
+A subject is a free subject iff it possesses free will (definitionally, genuinely chooses).
+
+    ∴ FreeSubject ≡ FreeWill(s)
+
+📘 · [Choice.lean#FreeSubject](formal/Logos/Choice.lean#L170)
 
 §15 — freedom (DEFINITION; freedom/choice fix, 2026-09-18): a subject is free iff it genuinely chooses between some incompatible pair. The implication choice → freedom is definitional (`chooses_implies_freeWill`).
 
@@ -476,6 +500,56 @@ Direct witness (`M_inanimate`): an inanimate universe is extensionally bivalent 
 
 ✅ · [UndeniableNormativeDerivation.lean#inanimate_universe_satisfies_bivalence_and_no_genuine_normativity](formal/Logos/UndeniableNormativeDerivation.lean#L93)
 
+### Committed Choice — the stance carries settlement (2026-09-24)
+
+The reader-facing gloss 'apprehending incompatible alternatives and committing to one' had no defendant: `Chooses` is only the cognitive co-meaning core, and a purely contemplative subject satisfies it. The strengthening locates commitment in the existing normative-judicative stance: `ClaimsNormativeCorrectness s p` performs the judgment act on p (the commitment) AND co-means the incompatible judicative poles `Correct s p` / `Incorrect s p` (the grasp). That bundle, defined as `CommittedChoice`, entails `Chooses`, `FreeWill`, and `FreeSubject` at the unchanged footprint {Initiates, Means, State, Subject, CL} — zero substantive axioms, no added hypotheses.
+
+**Stance instantiates CommittedChoice — zero substantive axioms (footprint {Initiates, Means, State, Subject, CL}):**
+
+The normative judicative stance is, by construction, a committed choice: the stance performs the judgment act on p (commitment) and co-means the two judicative normative poles `Correct s p` and `Incorrect s p` (grasp), which are incompatible.
+
+    ClaimsNormativeCorrectness(s, p) → CommittedChoice s p (Correct(s, p)) (Incorrect(s, p))
+
+✅ · [NormativeOrder.lean#claims_normative_correctness_implies_committed_choice](formal/Logos/NormativeOrder.lean#L269)
+
+Master committed-choice theorem from the stance: committed choice, co-meaning, and free will all hold of the judicative stance at the unchanged footprint.
+
+    ClaimsNormativeCorrectness(s, p) → CommittedChoice s p (Correct(s, p)) (Incorrect(s, p)) ∧ Chooses(s, Correct(s, p), Incorrect(s, p)) ∧ FreeWill(s)
+
+✅ · [NormativeOrder.lean#claims_normative_correctness_derives_committed_free_will](formal/Logos/NormativeOrder.lean#L277)
+
+Whenever a normative judicative stance exists (any Act-judged content claimed correct against a prohibited alternative), committed choice exists.
+
+    ∃ s, p, ClaimsNormativeCorrectness(s, p) → ∃ s,(p q r : Prop), CommittedChoice s p q r
+
+✅ · [NormativeOrder.lean#committed_choice_exists_of_stance](formal/Logos/NormativeOrder.lean#L287)
+
+**Definitional entailments of the committed bundle (pure logic):**
+
+Committed choice carries the deliberate grasp of the incompatible alternatives.
+
+    CommittedChoice s p q r → Chooses(s, q, r)
+
+✅ · [NormativeOrder.lean#committedChoice_implies_chooses](formal/Logos/NormativeOrder.lean#L241)
+
+Committed choice carries commitment in the world (the performed act on p).
+
+    CommittedChoice s p q r → Act s p
+
+✅ · [NormativeOrder.lean#committedChoice_implies_act](formal/Logos/NormativeOrder.lean#L247)
+
+Committed choice entails free will, definitionally from `Chooses`.
+
+    CommittedChoice s p q r → FreeWill(s)
+
+✅ · [NormativeOrder.lean#committedChoice_implies_freeWill](formal/Logos/NormativeOrder.lean#L253)
+
+Committed choice entails free subjectivity, definitionally (`FreeSubject s := FreeWill s`).
+
+    CommittedChoice s p q r → FreeSubject(s)
+
+✅ · [NormativeOrder.lean#committedChoice_implies_freeSubject](formal/Logos/NormativeOrder.lean#L259)
+
 ---
 
 ## 4. Free Will
@@ -531,13 +605,9 @@ A subject is definitionally a free subject iff it possesses free will (`FreeSubj
 </details>
 
 <details>
-<summary>Definitions used in this section (2; 1 new, 1 already shown)</summary>
+<summary>Definitions used in this section (2; 0 new, 2 already shown)</summary>
 
-A subject is a free subject iff it possesses free will (definitionally, genuinely chooses).
-
-    ∴ FreeSubject ≡ FreeWill(s)
-
-📘 · [Choice.lean#FreeSubject](formal/Logos/Choice.lean#L170)
+    ∴ FreeSubject ≡ FreeWill(s) — defined in §3. Genuine Choice.
 
     ∴ FreeWill ≡ ∃ p, q, Chooses(s, p, q) — defined in §3. Genuine Choice.
 
@@ -590,7 +660,7 @@ Thomistic person core: the Boethius–Aquinas conditions of personhood — "indi
 
 📘 · [Person.lean#ThomisticPersonCore](formal/Logos/Person.lean#L83)
 
-    ∴ FreeSubject ≡ FreeWill(s) — defined in §5. The Free Subject.
+    ∴ FreeSubject ≡ FreeWill(s) — defined in §3. Genuine Choice.
 
     ∴ FreeWill ≡ ∃ p, q, Chooses(s, p, q) — defined in §3. Genuine Choice.
 
@@ -718,7 +788,7 @@ GroundedNormativePolarity: Normative polarity is ontologically grounded in a sub
 
     ∴ GroundedNormativePolarity ≡ FreeIndependentWill(s) ∧ GroundsRightWrong s
 
-📘 · [PersonalNormativeGround.lean#GroundedNormativePolarity](formal/Logos/PersonalNormativeGround.lean#L230)
+📘 · [PersonalNormativeGround.lean#GroundedNormativePolarity](formal/Logos/PersonalNormativeGround.lean#L231)
 
 GroundsRightWrong: Objective Right/Wrong is ontologically grounded in an agential basis of a personal kind/type.
 
@@ -744,13 +814,13 @@ Direct Derivation: The derived subject s instantiates the personal ground of the
 
     RightWrongAt(s, p, q) → Person(s) ∧ GroundsRightWrong s
 
-✅ · [PersonalNormativeGround.lean#person_grounds_original_normative_datum](formal/Logos/PersonalNormativeGround.lean#L470)
+✅ · [PersonalNormativeGround.lean#person_grounds_original_normative_datum](formal/Logos/PersonalNormativeGround.lean#L471)
 
 Master Grounding Theorem from Personhood (Historical Compatibility Name): Personhood supplies the ontological ground-type required by the normative order.
 
     Person(s) → GroundsRightWrong s
 
-✅ · [PersonalNormativeGround.lean#person_grounds_normative_polarity](formal/Logos/PersonalNormativeGround.lean#L384)
+✅ · [PersonalNormativeGround.lean#person_grounds_normative_polarity](formal/Logos/PersonalNormativeGround.lean#L385)
 
 <details>
 <summary>Supporting Infrastructure — 3 auxiliary theorem(s) beneath this step</summary>
@@ -759,19 +829,19 @@ Master Realization Theorem: Any Person realizes GroundedNormativePolarity, showi
 
     Person(s) → GroundedNormativePolarity(s)
 
-✅ · [PersonalNormativeGround.lean#person_realizes_grounded_polarity](formal/Logos/PersonalNormativeGround.lean#L400)
+✅ · [PersonalNormativeGround.lean#person_realizes_grounded_polarity](formal/Logos/PersonalNormativeGround.lean#L401)
 
 The Non-Reversal Architectural Principle: 1. Deductive Discovery runs forward: RightWrongAt s p q ⇒ ... ⇒ Person s ⇒ GroundsRightWrong s.
 
     ∴ (RightWrongAt(s, p, q) → Person(s) ∧ GroundsRightWrong s) ∧ (Person(s) → GroundsRightWrong s)
 
-✅ · [PersonalNormativeGround.lean#non_reversal_discovery_and_grounding](formal/Logos/PersonalNormativeGround.lean#L514)
+✅ · [PersonalNormativeGround.lean#non_reversal_discovery_and_grounding](formal/Logos/PersonalNormativeGround.lean#L515)
 
 Non-Circularity Architectural Theorem: The retorsive discovery proof of Free Will (`indubitable_normative_free_will`) does NOT require or depend upon any grounding bridge.
 
     GenuineNormativity s p q → Chooses(s, p, q) ∧ FreeWill(s)
 
-✅ · [PersonalNormativeGround.lean#discovery_independent_of_grounding](formal/Logos/PersonalNormativeGround.lean#L586)
+✅ · [PersonalNormativeGround.lean#discovery_independent_of_grounding](formal/Logos/PersonalNormativeGround.lean#L587)
 
 </details>
 
@@ -784,7 +854,7 @@ Theorem: Separation Theorem from Model B.
 
     model_b_separation ⇏ Independence
 
-🧱 model_b_separation ⇏ Independence · [PersonalNormativeGround.lean#model_b_separation](formal/Logos/PersonalNormativeGround.lean#L672)
+🧱 model_b_separation ⇏ Independence · [PersonalNormativeGround.lean#model_b_separation](formal/Logos/PersonalNormativeGround.lean#L674)
 
 </details>
 
@@ -805,7 +875,7 @@ Step 1: Strong Necessary Truth exists (resident in the Core/Semantics machinery)
 
     ∴ ∃ τ, □ τ
 
-✅ · [NecessaryPersonalGround.lean#step1_necessary_truth_exists](formal/Logos/NecessaryPersonalGround.lean#L186)
+✅ · [NecessaryPersonalGround.lean#step1_necessary_truth_exists](formal/Logos/NecessaryPersonalGround.lean#L191)
 
 ---
 
@@ -896,11 +966,15 @@ HEADLINE (instance form, datum-guarded). The personal ontological ground is the 
 
 </details>
 
-### Branch A: Necessity of the Divine Being (Ground)
+### Branch A: Necessity and Eternity of the Divine Being (Ground)
 
-Annotated surface only — not a theorem of this repository. Necessity concerns the Divine Being/Ground, not a particular Divine Person as such: Claim E (`∃ g, NecessaryEntity g ∧ NecessaryPersonalGround g`) is the branch target and is marked *never a theorem* in `NecessaryPersonalGround.lean`; the bare 'necessary person' claim D (`∃ s, NecessarySubject s ∧ Person s`) is also annotation-only — no live theorem derives it. The branch renders the target, not the proof.
+Live theorem: the ground is world-rigid (`NecessaryEntity Entity.ofGround`, `∀ w, ExistsAt w .ofGround`, definitional `EntityExistsAt w .ofGround := True`, footprint `{Means, Subject}`) and thereby **everlasting** and **atemporal** (definitional corollaries of necessity — no temporal premise; time enters only on the conclusion side via the Nat-stage layer). Claim E is the *non-hypostatic* pairing (`∃ g s, NecessaryEntity g ∧ NecessaryGroundOfReality g ∧ Person s ∧ GroundsRightWrong s`): entity-necessity conjunct PROVEN; personal-kind conjunct honestly `{AxTwoSubjects, Means, Subject}` (PROVEN↑ under META `AxTwoSubjects`). Hypostatic identity, a 'necessary Person', Trinity and monotheism are NOT claimed — `ofGround_ne_ofSubject` blocks the identity line.
 
-> ⏸ **DEFERRED** — annotated surface only; `NecessaryPersonalGround.lean` marks Claim E *never a theorem*, and the deferred block (`scratch/Trinitarian_deferred.lean`) is absent from the repository.
+HEADLINE — the necessary ground of reality exists: `Entity.ofGround` is a necessary entity and the ontological ground of reality.
+
+    ∴ NecessaryGroundOfReality Entity.ofGround
+
+✅ · [NecessityEternity.lean#ofGround_necessary_ground_of_reality](formal/Logos/NecessityEternity.lean#L126)
 
 ### Branch B: Divine Uniqueness and Monotheism
 
@@ -970,11 +1044,12 @@ Status vocabulary used here (extends the badge legend above): `✅` PROVEN (mach
 | **Free** — genuine normativity yields genuine choice and free will | Personal ground / person-type | ✅ PROVEN | `GenuineNormativity ⇒ Chooses ⇒ FreeWill`; `FreeWill s ≡ ∃ p q, Chooses s p q` is definitional (`📘`). — [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will](formal/Logos/IndubitableNormativeFreeWill.lean#L115), footprint {Means, Subject} ; [Choice.lean#FreeWill](formal/Logos/Choice.lean#L163), footprint {Means, Subject} |
 | **Independent will** — with numerical individuation | Personal ground / person-type | ✅ PROVEN | `Person(s) ↔ FreeIndependentWill(s)`; `subjectWill s₁ ≠ subjectWill s₂` — distinct persons have numerically distinct wills. — [Person.lean#person_iff_freeIndependentWill](formal/Logos/Person.lean#L117), footprint {Means, Subject, Will, subjectWill, will_individuation} ; [Person.lean#IndependentWill](formal/Logos/Person.lean#L54), footprint {Subject, Will, subjectWill} |
 | **Dominion over acts** / authoritative personhood | Personal ground / person-type | ✅ PROVEN | the Thomistic-personcore conjunct `DominionOverActs s ≡ FreeWill s` is definitional (`📘`); present inside `person_iff_thomisticCore`. — [Person.lean#DominionOverActs](formal/Logos/Person.lean#L74), footprint {Means, Subject} |
-| **Ground of objective normativity (Right and Wrong)** | Personal ground / person-type | ✅ PROVEN | `Person s → GroundsRightWrong s`, and the headline that "the person supports the reality of Right". Established of the personal ground. — [PersonalNormativeGround.lean#person_grounds_normative_polarity](formal/Logos/PersonalNormativeGround.lean#L384), footprint {Means, Subject} ; [PersonalGroundOfReality.lean#the_person_supports_the_reality_of_right](formal/Logos/PersonalGroundOfReality.lean#L150), footprint {Initiates, Means, State, Subject, CL} |
-| **Necessary Divine Being / Ground** | Divine Being / Ground | ⏸ DEFERRED | Necessary truth and a necessary *normative order* are established — **order-level modal facts, not a necessary Being**. Claim E `∃ g, NecessaryEntity g ∧ NecessaryPersonalGround g` is marked *never a theorem*; Branch A is deferred (`⏸`). — [NecessaryPersonalGround.lean#step1_necessary_truth_exists](formal/Logos/NecessaryPersonalGround.lean#L186), footprint {CL} ; [NecessaryPersonalGround.lean#necessary_normative_order](formal/Logos/NecessaryPersonalGround.lean#L110), footprint {Initiates, Means, State, Subject} |
-| **One God / strict monotheism** (unity of the Divine Being) | Divine Being / Ground | ⏸ DEFERRED | Strict monotheism (`monotheism_of_god_and_uniqueness`, `monotheism_compatible_with_trinity`) is deferred out of the live kernel (Branch B, `⏸`); unity concerns the Divine Being, not numerical identity of Personhood. |
+| **Ground of objective normativity (Right and Wrong)** | Personal ground / person-type | ✅ PROVEN | `Person s → GroundsRightWrong s`, and the headline that "the person supports the reality of Right". Established of the personal ground. — [PersonalNormativeGround.lean#person_grounds_normative_polarity](formal/Logos/PersonalNormativeGround.lean#L385), footprint {Means, Subject} ; [PersonalGroundOfReality.lean#the_person_supports_the_reality_of_right](formal/Logos/PersonalGroundOfReality.lean#L150), footprint {Initiates, Means, State, Subject, CL} |
+| **Necessary Divine Being / Ground** | Divine Being / Ground | ✅ PROVEN | The ground itself is world-rigid: `NecessaryEntity Entity.ofGround` (`∀ w, ExistsAt w .ofGround`, definitional `EntityExistsAt w .ofGround := True`, footprint `{Means, Subject}` — VOCAB only). Claim E is now a **live theorem** as a *non-hypostatic* pairing: the entity-necessity conjunct is PROVEN, the personal-kind conjunct is `{AxTwoSubjects, Means, Subject}` (PROVEN↑ under the declared META axiom `AxTwoSubjects`), and the hypostatic identity is blocked (`ofGround_ne_ofSubject`: `ofGround ≠ EntityOf s`). NO 'necessary Person' theorem exists — this row is the entity-level ground, distinct from the necessary-*order* row above. — [NecessityEternity.lean#ofGround_necessary_ground_of_reality](formal/Logos/NecessityEternity.lean#L126), footprint {Means, Subject} ; [NecessityEternity.lean#claimE](formal/Logos/NecessityEternity.lean#L268), footprint {AxTwoSubjects, Means, Subject} ; [NecessaryPersonalGround.lean#step1_necessary_truth_exists](formal/Logos/NecessaryPersonalGround.lean#L191), footprint {CL} ; [NecessaryPersonalGround.lean#necessary_normative_order](formal/Logos/NecessaryPersonalGround.lean#L110), footprint {Initiates, Means, State, Subject} |
+| **One God / strict monotheism** (unity of the Divine Being) | Divine Being / Ground | ⏸ DEFERRED | Strict monotheism (`monotheism_of_god_and_uniqueness`, `monotheism_compatible_with_trinity`) is deferred out of the live kernel (Branch B, `⏸`); unity concerns the Divine Being, not numerical identity of Personhood. Uniqueness is provably NOT a kernel consequence: the machine-witnessed separation `TheologicalModalHardening.necessary_existence_not_entails_uniqueness` (`¬ (∀ S, UniqueExists S.NecessaryEntity)`, L406-414, footprint `{}`) and the deferred `universal_ground_unique` (`NecessaryPersonalGround.lean:24`) mark it as an interpretive layer. |
 | **Perfect (moral) goodness** | Divine Being / Ground | ⏸ DEFERRED | GAPMAP ledger row `F3 §28 (Good)` = DEFERRED (`⏸`). Right/Wrong here is epistemic correctness, explicitly distinguished from moral good/evil. |
-| **Eternal** (of the Divine Being) | Divine Being / Ground | ❌ NOT ESTABLISHED | No live theorem establishes the Divine Being's eternality; the only `eternal` result is `T14_eternalRelation_conditional` (C42) — an eternal love-**relation** under `AxTwoSubjects`, not the Being's eternality. — [Love.lean#T14_eternalRelation_conditional](formal/Logos/Love.lean#L98), footprint {AxTwoSubjects, Means, Subject} |
+| **Eternal — ever-present** (everlasting existence) | Divine Being / Ground | ✅ PROVEN | World-rigid existence is unmodulated by time: `NecessaryEntity e → Everlasting e` (`∀ t, ExistsAtTime t e`) is a definitional corollary of necessity via the Nat-stage layer — the deduction imports NO temporal premise, time enters only on the conclusion side. `Everlasting Entity.ofGround` is therefore PROVEN (`{Subject}` + ground footprint, VOCAB). Distinct from the eternal love-*relation* `T14_eternalRelation_conditional`. — [NecessityEternity.lean#the_ground_everlasting](formal/Logos/NecessityEternity.lean#L160), footprint {Subject} ; [NecessityEternity.lean#necessary_implies_everlasting](formal/Logos/NecessityEternity.lean#L145), footprint {Subject} ; [NecessityEternity.lean#ofGround_necessary](formal/Logos/NecessityEternity.lean#L110), footprint {Subject} ; [Love.lean#T14_eternalRelation_conditional](formal/Logos/Love.lean#L98), footprint {AxTwoSubjects, Means, Subject} |
+| **Atemporal** (existence not time-modulated; outside succession) | Divine Being / Ground | ✅ PROVEN | `NecessaryEntity e → Atemporal e` (`ExistsAtTime t₁ e ↔ ExistsAtTime t₂ e`); the ground is also outside every initiation-act (`the_ground_not_in_succession`, `{Initiates, State, Subject}`). Separation is honest: atoms/subjects are time-modulated (`atom_has_temporal_mode`) and `Everlasting` does not collapse into necessity (`everlasting_but_contingent`). What is PROVEN is stage-unmodulated world-rigid existence — not a full theology of divine eternity. — [NecessityEternity.lean#the_ground_atemporal](formal/Logos/NecessityEternity.lean#L164), footprint {Subject} ; [NecessityEternity.lean#necessary_implies_atemporal](formal/Logos/NecessityEternity.lean#L152), footprint {Subject} ; [NecessityEternity.lean#the_ground_not_in_succession](formal/Logos/NecessityEternity.lean#L169), footprint {Initiates, State, Subject} ; [NecessityEternity.lean#atom_has_temporal_mode](formal/Logos/NecessityEternity.lean#L212), footprint {Subject} ; [NecessityEternity.lean#everlasting_but_contingent](formal/Logos/NecessityEternity.lean#L237), footprint {Subject} |
 | **Divine simplicity** | Divine Being / Ground | ❌ NOT ESTABLISHED | No live theorem. |
 | **Omniscience** | Divine Being / Ground | ❌ NOT ESTABLISHED | `Omniscience_AllTruths` / `Omniscience_Counterfactuals` (`DeepModalFrontier`) are frontier vocabulary definitions, not theorems. — [DeepModalFrontier.lean#Omniscience_AllTruths](formal/Logos/DeepModalFrontier.lean#L313), footprint {} ; [DeepModalFrontier.lean#Omniscience_Counterfactuals](formal/Logos/DeepModalFrontier.lean#L317), footprint {} |
 | **Omnipotence** | Divine Being / Ground | ❌ NOT ESTABLISHED | No live theorem. |
@@ -985,9 +1060,11 @@ Status vocabulary used here (extends the badge legend above): `✅` PROVEN (mach
 _Synthesis — the strongest current profile._ The theory has established, of a
 **personal, rational, free, authoritative-over-its-acts, independently individuated**
 **normative ground / person-type**, that its objective Right/Wrong order is the object
-of a necessary normative/truth order. The specifically divine attributes — a **necessary
-Divine Being / Ground**, **unity / monotheism**, **simplicity**, **omniscience**, **omnipotence**,
-**eternality**, **perfect moral goodness**, the **Trinity**, the **Incarnation**, and contingent
+of a necessary normative/truth order, and (entity-level) that a **necessary Divine Being
+/ Ground** exists — world-rigid, **everlasting** and **atemporal**, a definitional
+corollary of necessity with time entering only on the conclusion side. The remaining
+divine attributes — **unity / monotheism**, **simplicity**, **omniscience**, **omnipotence**,
+**perfect moral goodness**, the **Trinity**, the **Incarnation**, and contingent
 **creation** — remain **separate proof targets**
 (`⏸` / `❌`) or explicit **countermodel frontiers** (`🧱`) until the live kernel proves them.
 

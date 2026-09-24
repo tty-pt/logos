@@ -64,3 +64,5 @@ import Logos.PersonalNormativeGround
 import Logos.RecoveredOntologicalGround
 -- New constitutive headline: the free personal act grounds the Gamma judicative/normative order (Claim I).
 import Logos.PersonalGroundOfReality
+-- Necessity and eternity of the ultimate ground (Claim E / stage layer).
+import Logos.NecessityEternity

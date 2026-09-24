@@ -548,6 +548,9 @@ A objeção "`GenuineNormativity` é apenas estipulativa" é respondida no MESMO
 (Aprofundamento: Recuperação Normativa de `Correct` e Retorsão Livre de Axiomas — 2026-09-22):
 Mais fundamentalmente, a formalização em `formal/Logos/NormativeOrder.lean` demonstra que a normatividade deôntica já está presente na própria estrutura do juízo objetivo (`Correct` e `Incorrect`) sob a norma epistêmica de verdade (`TruthNorm : JudicativeNorm`), onde a verdade prescreve o juízo (`Ought`) e a falsidade proíbe o juízo (`OughtNot`), com oposição deôntica estrita (`correctness_deontic_opposition`). A postura judicativa normativa (`ClaimsNormativeCorrectness s p := Act s p ∧ Means s (Correct s p) ∧ Means s (Incorrect s p)`) apreende os dois polos constitutivos da correção sem demandar a representação da negação contraditória `¬p`, derivando `GenuineNormativity s (Correct s p) (Incorrect s p)` e o livre-arbítrio com ZERO axiomas substantivos (`claims_normative_correctness_derives_free_will` e `normative_retorsion_derives_free_will` sob `{Initiates, Means, State, Subject, CL}`), dispensando por completo `AxJudicativeBipolarity`.
 
+(Aprofundamento: Escolha Comprometida ou Comprometimento ("committing to one") — 2026-09-24):
+A apresentação dizia que escolher é "apreender alternativas incompatíveis **e comprometer-se com uma**". Mas `Chooses(s,p,q)` só carrega a co-significação cognitiva — um sujeito contemplativo que co-significa sem se fixar já a satisfaz (`contemplatesWithoutSettling_implies_freeWill`). O comprometimento é carregado pela própria postura judicativa normativa: `ClaimsNormativeCorrectness s p` **executa o ato judicativo sobre p** (o comprometimento) **e co-significa os polos judicativos incompatíveis** `Correct s p` / `Incorrect s p` (a apreensão). Esse feixe é definido formalmente como `CommittedChoice s p q r := Act s p ∧ Chooses s q r` e a postura instancia-o sobre os polos com ZERO axiomas substantivos (`claims_normative_correctness_implies_committed_choice`, `claims_normative_correctness_derives_committed_free_will`, `committed_choice_exists_of_stance`, pegada `{Initiates, Means, State, Subject, CL}`, `formal/Logos/NormativeOrder.lean` §5b; deduções: `committedChoice_implies_chooses/freeWill/freeSubject`, lógica pura). Nada muda em cadeia: `CommittedChoice` ⇒ `Chooses` ⇒ `FreeWill`; o glossado "apreender e comprometer-se" tem agora um denotado formal (ver `CHOICE.md`).
+
 A bivalência extensional pura (`¬N_T ∧ ¬N_F`) não força agência isoladamente (admitindo o contramodelo de um universo inanimado sem sujeitos), mas sob qualquer evento de asserção filosófica no espaço de razões, o livre-arbítrio intencional é inescapável.
 
 (Nota formal, Liberdade e semântica hostil — F1b):
@@ -918,7 +921,7 @@ O ato racional presente implica:
 15. teleologia mínima;
 16. verdades necessárias;
 17. realidade necessária;
-18. realidade necessária é pessoal;
+18. fundamento ontológico de tipo pessoal (T8);
 19. o campo da escolha racional não-vazio (T9 + T11);
 20. mais do que uma pessoa (T12);
 21. há quem se possa amar (T13);
@@ -1093,7 +1096,8 @@ Ver theorems/T7.txt, theorems/T8.txt, theorems/T12–T14.txt.)
 A dedução puramente transcendental (sem pontes semânticas ou metafísicas adicionais) estabelece com certeza performativa a existência do ato presente, do sujeito no mundo atual, da distinção objetiva de verdade, da normatividade, do significado, da agência e das verdades lógicas necessárias no mundo atual (T1–T6, T10, T11).
 
 O limite da fase puramente dedutiva manifesta-se onde a dedução pura encontra as transições ontológicas transmundanas:
-- `ato performativo atual → sujeito / entidade necessária em todos os mundos` (C77/C92: condicional a `PersonStabilityPrinciple`; refutado sem pontes por `CountermodelPersonNotNecessary` e `ContingentAgencyModel`).
+- `ato performativo atual → sujeito / entidade necessária em todos os mundos` (C77/C92: condicional a `PersonStabilityPrinciple`; refutado sem pontes por `CountermodelPersonNotNecessary` e `ContingentAgencyModel`) — continua FALSO para cada sujeito (`¬ NecessarySubject s`).
+- `entidade do fundamento necessária em todos os mundos` (2026-09-24, `NecessityEternity.lean`): `NecessaryEntity Entity.ofGround` é uma estipulação semântica definicional (`EntityExistsAt w .ofGround := True`, classe VOCAB — não um axioma substantivo); a obstrução pré-extension `¬ ∃ e, NecessaryEntity e` deixou de ser teorema do sort estendido. Corolários definicionais: `Everlasting .ofGround` e `Atemporal .ofGround` (o argumento não depende do tempo — o tempo entra apenas no lado da conclusão, camada de estágios Nat). A identidade hipostática é bloqueada (`ofGround ≠ EntityOf s`, `ofGround_ne_ofSubject`, injectividade do construtor). Pegadas: `{Means, Subject}` (VOCAB) nos teoremas de necessidade/eternidade; `the_ground_not_in_succession` `{Initiates, State, Subject}`; o conjuncto pessoal da Proposição E carrega honestamente `{AxTwoSubjects, Means, Subject}` (PROVEN↑, META).
 
 A cadeia do poema avançou. Estado formal (theorems/T10–T14.txt):
 
@@ -1197,8 +1201,14 @@ suporta a realidade do Certo. O dado performativo **não é premissa exterior** 
 internalizado como implicação: por isso o enunciado não tem premissa livre. "Necessário"
 designa a necessidade retorsivo-transcendental (a ordem é necessária e a sua base é a
 natureza pessoal judicativa livre), NÃO a necessidade da entidade em todos os mundos
-(a Proposição E de nível-ente continua anotada, não-teorema — §12.1; e.g.
-`retorsion_fails_against_no_necessary_entity`). Corolário existencial (C152) e forma-instância
+(a Proposição E de nível-ente foi ANOTADA, não-teorema, até 2026-09-24; desde então é
+teorema como **par não-hipostático** — `NecessityEternity.claimE`:
+`∃ g s, NecessaryEntity g ∧ NecessaryGroundOfReality g ∧ Person s ∧ GroundsRightWrong s`.
+O conjuncto de necessidade-ente é `{Means, Subject}` (PROVEN, VOCAB); o conjuncto pessoal
+é `{AxTwoSubjects, Means, Subject}` (PROVEN↑ sob a ponte META anunciada `AxTwoSubjects`);
+a linha de identidade é bloqueada por `ofGround_ne_ofSubject`. A refutação pré-extension
+`retorsion_fails_against_no_necessary_entity` aplica-se ao sort antigo sem `ofGround`,
+não ao atual). Corolário existencial (C152) e forma-instância
 (C153, `PersonalGroundOfReality.person_yields_personal_grounding_of_reality`, com o alias histórico de compatibilidade `present_act_yields_personal_grounding_of_reality`) permanecem sob data, mesma pegada.
 
 Nesta formulação: (a) "Γ-realidade" designa o domínio do que existe / do que é o caso;
@@ -1244,6 +1254,16 @@ Trade-off de 4 níveis da vedação do ataque (INVIABLE.md §1): (0) emissão/de
 Good (o bem como objeto moral da relação) — DEFERRED/F2, passo de
   normatividade lógica (§20) a bem, em conexão com T12/T13.
 Trinity — DEFERRED, sem argumento (§28/§29).
+Identidade hipostática do fundamento com uma pessoa (g = EntityOf s enquanto pessoa) — BLOQUEADA:
+  `ofGround_ne_ofSubject` (`Entity.noConfusion`). O fundamento é necessário como *entidade*
+  (mundo-rígida) e o *tipo*-fundamento é pessoal — sem linha de identidade entre as duas.
+Claim D ("sujeito necessário", ∃ s, NecessarySubject s ∧ Person s) — REFUTADO
+  (`CountermodelPersonNotNecessary`); `Person → NecessarySubject` permanece simples hipótese
+  (`Love.PersonStabilityPrinciple`), nunca teorema.
+Teologia forte da eternidade divina (eternidade metafísica "fora de toda a temporalidade",
+  sem começo nem cessação para além da rigidez de estágios) — NÃO reivindicada: o que está
+  PROVEN é existência mundo-rígida não modulada por estágios (`Everlasting`/`Atemporal`,
+  NecessityEternity.lean), distinguida da relação eterna de amor (T14).
 
 Nenhuma destas passagens deve ser simplesmente assumida.
 
@@ -1273,10 +1293,11 @@ Ato racional presente
 → agência
 → pessoa
 → entidade necessária (correlato do sujeito; ∃e □Exists(e), esse est agere, C91/C92, sem pontes)
+→ fundamento como entidade mundo-rígida (Entity.ofGround; NecessityEternity.lean, PROVEN — e, por corolário definicional, EVERLASTING e ATEMPORAL)
 → escolha
 → orientação teleológica
 → verdade necessária
-→ pessoa como fundamento ontológico (T7 / T8).
+→ fundamento ontológico de tipo pessoal (T7 / T8).
 
 À cabeça desta cadeia, e como selo da dedução retorsiva pura, está o teorema
 incondicional da descoberta (C151, `PersonalGroundOfReality.the_person_supports_the_reality_of_right`):
