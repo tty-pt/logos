@@ -36,7 +36,11 @@ the direction is not machine-decidable.
 >    one.' above explains.
 > 3. Divine Personhood and Strict Monotheism — **DEFERRED** (⏸), not proved here; a necessary
 >    Divine Being/Ground (world-rigid, everlasting, atemporal) is its entity-level **PROVEN** claim (✅).
-> 4. Moral good/evil — a deferred frontier, not treated in this document.
+> 4. Moral good/evil — machine-separated from epistemic normativity (countermodel 
+>    frontier 🧱, C175): the faithful model `M_amoral` satisfies the whole epistemic 
+>    agential reality-hook with zero practical obligation; a positive close requires 
+>    a declared moral datum (price sheet §5.4). The epistemic reality-hook itself is 
+>    unconditional and vocabulary-only (`correct_tracks_reality`, C173/C174).
 
 **Badge legend.** Every icon on a formal consequence is machine-derived from
 the Lean kernel (see `formal/GAPMAP.md` and the investigations) — never transcribed:
@@ -188,7 +192,7 @@ The deduction begins with the objective distinction between Right and Wrong (Rig
 
 The main reader should first understand WHAT is established: the reality of the normative distinction itself. The performative retorsion is a supporting investigation explaining HOW the normative datum is defended against skeptical denial.
 
-Terminology: 'Right'/'Wrong' here denote the objective truth/correctness polarity — a proposition's being true (so that affirming it is correct) vs. being false (so that affirming it is incorrect) — not a moral evaluation of good vs. evil (moral good/evil is a deferred frontier, noted in the scope box above).
+Terminology: 'Right'/'Wrong' here denote the objective truth/correctness polarity — a proposition's being true (so that affirming it is correct) vs. being false (so that affirming it is incorrect) — not a moral evaluation of good vs. evil (moral good/evil is machine-separated from epistemic normativity: countermodel frontier 🧱, C175; a positive bridge would cost the declared SEM poles Good/Evil, price sheet §5.4). The extensional distinction (¬N_T ∧ ¬N_F) and the agential stance-conditional form RightWrong s (bridge open, M_inanimate C167) are two distinct formal objects.
 
 *(Detailed technical proof & model analysis: [investigations/right-and-wrong.md](investigations/right-and-wrong.md))*
 
@@ -369,7 +373,7 @@ Step glossary, aligned with the definitions. THE core: `Chooses s p q` (co-meani
 </details>
 
 <details>
-<summary>Definitions used in this section (13; 9 new, 4 already shown)</summary>
+<summary>Definitions used in this section (14; 10 new, 4 already shown)</summary>
 
 `Act s p`: strong act: meaningful initiation of movement.
 
@@ -412,6 +416,12 @@ Incorrect delimitation in a judicative signature (mirrors Order.Incorrect).
     ∴ JudSigIncorrect ≡ JudSigAct(sig, s, p) ∧ sig.IsFalse(p)
 
 📘 · [BipolarityRetorsion.lean#JudSigIncorrect](formal/Logos/BipolarityRetorsion.lean#L267)
+
+Local means-relation: the subject's judgement always reaches any content.
+
+    ∴ Means ≡ True
+
+📘 · [MoralFrontierAudit.lean#Means](formal/Logos/MoralFrontierAudit.lean#L64)
 
 The skeptical denial proposition: There is no genuine normativity anywhere.
 
@@ -1025,7 +1035,7 @@ Unincarnate Hostile Model: The existing theory (necessary divine ground, human a
 
 ## Formal Frontiers
 
-The frontier is the set of claims that are not currently derived. An **OPEN** claim has no kernel node (blocked, deferred, answered, or a missing lemma) and is listed below. A **COUNTERMODEL** claim is a proposed inference that a hostile model refutes: the step is *withdrawn*, and what survives is recorded in Appendix C.2. The premier open frontiers are deontic teleology (F2) and moral good (F3).
+The frontier is the set of claims that are not currently derived. An **OPEN** claim has no kernel node (blocked, deferred, answered, or a missing lemma) and is listed below. A **COUNTERMODEL** claim is a proposed inference that a hostile model refutes: the step is *withdrawn*, and what survives is recorded in Appendix C.2. The premier open frontier is deontic teleology (F2); moral good (F3) is no longer open — the faithful model `M_amoral` machine-separates practical bindingness from epistemic agential normativity (`MoralFrontierAudit.epistemic_normativity_without_practical_obligation`, C175, `{}`), making F3 a countermodel frontier, not a gap.
 
 * **`C78`** (`T7 — Modal.contingent_ground`) — Contingent ground is retired: manufactured witness destroyed under hostile semantics.
 * **`C79`** (`T7 — Modal.ultimateGround_exists`) — Ultimate ground existence is blocked: infinite descending chains have no ultimate element without a well-foundedness axiom.
@@ -1034,7 +1044,6 @@ The frontier is the set of claims that are not currently derived. An **OPEN** cl
 * **`C89`** (`T7 — Modal.ultimateGroundInit_exists`) — Ultimate ground by initiation is blocked: non-entailed without well-foundedness.
 * **`C90`** (`T8 — GroundPerson.personal_ultimate_ground_exists`) — Personal ultimate ground is blocked: ultimate grounding does not entail personal nature.
 * **`F2`** (`§21 teleology (`Ought → Goal`) — `) — Deontic teleology is deferred: how norms point at goals is not yet derived.
-* **`F3`** (`§28 Good (`§20 → bem`) — `) — Moral good from logical normativity is deferred: not yet derived.
 * **`F6`** (`§28 Trinity — `) — The Trinity is deferred: no argument exists yet.
 * **`C69`** (`§15/F1b — `) — Free will of origin is retired: manufactured constructor split destroyed.
 * **`C70`** (`§15/F1b — `) — Posited content non-freedom is retired: manufactured witness destroyed.
@@ -1083,7 +1092,7 @@ Status vocabulary used here (extends the badge legend above): `✅` PROVEN (mach
 | **Ground of objective normativity (Right and Wrong)** | Personal ground / person-type | ✅ PROVEN | `Person s → GroundsRightWrong s`, and the headline that "the person supports the reality of Right". Established of the personal ground. — [PersonalNormativeGround.lean#person_grounds_normative_polarity](formal/Logos/PersonalNormativeGround.lean#L385), footprint {Means, Subject} ; [PersonalGroundOfReality.lean#the_person_supports_the_reality_of_right](formal/Logos/PersonalGroundOfReality.lean#L150), footprint {Initiates, Means, State, Subject, CL} |
 | **Necessary Divine Being / Ground** | Divine Being / Ground | ✅ PROVEN | The ground itself is world-rigid: `NecessaryEntity Entity.ofGround` (`∀ w, ExistsAt w .ofGround`, definitional `EntityExistsAt w .ofGround := True`, footprint `{Means, Subject}` — VOCAB only). Claim E is now a **live theorem** as a *non-hypostatic* pairing: the entity-necessity conjunct is PROVEN, the personal-kind conjunct is `{AxTwoSubjects, Means, Subject}` (PROVEN↑ under the declared META axiom `AxTwoSubjects`), and the hypostatic identity is blocked (`ofGround_ne_ofSubject`: `ofGround ≠ EntityOf s`). NO 'necessary Person' theorem exists — this row is the entity-level ground, distinct from the necessary-*order* row above. — [NecessityEternity.lean#ofGround_necessary_ground_of_reality](formal/Logos/NecessityEternity.lean#L126), footprint {Means, Subject} ; [NecessityEternity.lean#claimE](formal/Logos/NecessityEternity.lean#L269), footprint {AxTwoSubjects, Means, Subject} ; [NecessaryPersonalGround.lean#step1_necessary_truth_exists](formal/Logos/NecessaryPersonalGround.lean#L191), footprint {CL} ; [NecessaryPersonalGround.lean#necessary_normative_order](formal/Logos/NecessaryPersonalGround.lean#L110), footprint {Initiates, Means, State, Subject} |
 | **One God / strict monotheism** (unity of the Divine Being) | Divine Being / Ground | ⏸ DEFERRED | Strict monotheism (`monotheism_of_god_and_uniqueness`, `monotheism_compatible_with_trinity`) is deferred out of the live kernel (Branch B, `⏸`); unity concerns the Divine Being, not numerical identity of Personhood. Uniqueness is provably NOT a kernel consequence: the machine-witnessed separation `TheologicalModalHardening.necessary_existence_not_entails_uniqueness` (`¬ (∀ S, UniqueExists S.NecessaryEntity)`, L406-414, footprint `{}`) and the deferred `universal_ground_unique` (`NecessaryPersonalGround.lean:24`) mark it as an interpretive layer. |
-| **Perfect (moral) goodness** | Divine Being / Ground | ⏸ DEFERRED | GAPMAP ledger row `F3 §28 (Good)` = DEFERRED (`⏸`). Right/Wrong here is epistemic correctness, explicitly distinguished from moral good/evil. |
+| **Perfect (moral) goodness** | Divine Being / Ground | 🧱 INDEPENDENT | GAPMAP ledger row `F3 §28 (Good)` = COUNTERMODEL (🧱) via C175: the `M_amoral` model (`{}`) satisfies epistemic agential normativity with no practical obligation. Right/Wrong here is epistemic correctness, explicitly distinguished from moral good/evil; a positive moral bridge would cost the declared SEM poles `Good`/`Evil` (price sheet §5.4). |
 | **Eternal — ever-present** (everlasting existence) | Divine Being / Ground | ✅ PROVEN | World-rigid existence is unmodulated by time: `NecessaryEntity e → Everlasting e` (`∀ t, ExistsAtTime t e`) is a definitional corollary of necessity via the Nat-stage layer — the deduction imports NO temporal premise, time enters only on the conclusion side. `Everlasting Entity.ofGround` is therefore PROVEN (`{Subject}` + ground footprint, VOCAB). Distinct from the eternal love-*relation* `T14_eternalRelation_conditional`. — [NecessityEternity.lean#the_ground_everlasting](formal/Logos/NecessityEternity.lean#L160), footprint {Subject} ; [NecessityEternity.lean#necessary_implies_everlasting](formal/Logos/NecessityEternity.lean#L145), footprint {Subject} ; [NecessityEternity.lean#ofGround_necessary](formal/Logos/NecessityEternity.lean#L110), footprint {Subject} ; [Love.lean#T14_eternalRelation_conditional](formal/Logos/Love.lean#L98), footprint {AxTwoSubjects, Means, Subject} |
 | **Atemporal** (existence not time-modulated; outside succession) | Divine Being / Ground | ✅ PROVEN | `NecessaryEntity e → Atemporal e` (`ExistsAtTime t₁ e ↔ ExistsAtTime t₂ e`); the ground is also outside every initiation-act (`the_ground_not_in_succession`, `{Initiates, State, Subject}`). Separation is honest: atoms/subjects are time-modulated (`atom_has_temporal_mode`) and `Everlasting` does not collapse into necessity (`everlasting_but_contingent`). What is PROVEN is stage-unmodulated world-rigid existence — not a full theology of divine eternity. — [NecessityEternity.lean#the_ground_atemporal](formal/Logos/NecessityEternity.lean#L164), footprint {Subject} ; [NecessityEternity.lean#necessary_implies_atemporal](formal/Logos/NecessityEternity.lean#L152), footprint {Subject} ; [NecessityEternity.lean#the_ground_not_in_succession](formal/Logos/NecessityEternity.lean#L169), footprint {Initiates, State, Subject} ; [NecessityEternity.lean#atom_has_temporal_mode](formal/Logos/NecessityEternity.lean#L212), footprint {Subject} ; [NecessityEternity.lean#everlasting_but_contingent](formal/Logos/NecessityEternity.lean#L237), footprint {Subject} |
 | **Divine simplicity** | Divine Being / Ground | ❌ NOT ESTABLISHED | No live theorem. |
@@ -1109,7 +1118,7 @@ divine attributes — **unity / monotheism**, **simplicity**, **omniscience**, *
 ### Retorsions
 
 <details>
-<summary>Retorsion catalogue — 87 machine-checked retorsion theorems (click to expand)</summary>
+<summary>Retorsion catalogue — 89 machine-checked retorsion theorems (click to expand)</summary>
 
 * **Performative_Boundary_Theorem:** `performative_boundary_theorem` (`formal/Logos/A14SemanticAudit.lean`) — PERFORMATIVE BOUNDARY THEOREM: Performative retorsion forces an intentional subject (Considers, Assumes, Derives, Affirms, Rejects) and asymmetric cognitive resolution (SettlementChoice), but strictly stops before executive aiming (AimsAt), action execution
 * **Noact_Conditional_Selfrefutes:** `noAct_conditional_selfRefutes` (`formal/Logos/Agency.lean`) — Asserting NoAct refutes itself under a weak assertion ONLY given the bridge from weak act to strong Act.
@@ -1140,6 +1149,7 @@ divine attributes — **unity / monotheism**, **simplicity**, **omniscience**, *
 * **Retorsion_Does_Not_Imply_Doubt:** `retorsion_does_not_imply_doubt` (`formal/Logos/HostileSemantics.lean`) — Transcendental retorsion holds fully in TwoPersons, yet Cartesian doubt is empty.
 * **A6_A7_Synergistic_Forcing:** `A6_A7_synergistic_forcing` (`formal/Logos/JointForcing.lean`) — Synergy Forcing Theorem: A6 (universal_thesis_claims_objectivity) + A7 (transcendental_reflection_intentional) jointly force NonTrivialOntology under the standard retorsive bridges.
 * **Retorsion_Not_Implies_Choice:** `retorsion_not_implies_choice` (`formal/Logos/JointForcing.lean`) — Cross-Frontier Barrier: {A6, A7} (Retorsion) does NOT force AxIntentionalChoice (A1) or FreeWill.
+* **Amoral_Disconnection_Is_Judgeable_As_Correct:** `amoral_disconnection_is_judgeable_as_correct` (`formal/Logos/MoralFrontierAudit.lean`) — The amoralist thesis is judgeable-as-correct in the model: satisfiable, not self-refuting.
 * **Canonical_Act_Noi_Proves_P:** `canonical_act_noi_proves_P` (`formal/Logos/NegativeRetorsionAudit.lean`) — Positive Retorsion: Performing an act on NoI proves that an intentional subject exists! Classification: DEFINITIONAL. Footprint: `{Initiates, Means, State, Subject}`.
 * **Canonical_Asserts_Noi_Selfrefutes:** `canonical_asserts_noi_selfRefutes` (`formal/Logos/NegativeRetorsionAudit.lean`) — The Fundamental Assertive Retorsion: Actually asserting NoI is unconditionally self-refuting (proves False).
 * **Canonical_Exists_Asserts_Noi_Selfrefutes:** `canonical_exists_asserts_noi_selfRefutes` (`formal/Logos/NegativeRetorsionAudit.lean`) — Existential Assertive Retorsion: Existence of any assertion of NoI derives False.
@@ -1158,6 +1168,7 @@ divine attributes — **unity / monotheism**, **simplicity**, **omniscience**, *
 * **Deny_Right_Self_Contradicts:** `deny_right_self_contradicts` (`formal/Logos/PersonalGroundOfReality.lean`) — Denying Right is performatively self-contradictory: no agent can present NoRight as correct while NoRight is true. Footprint: `{Initiates, Means, State, Subject}` (zero substantive axioms). Re-export of the retorsion boundary.
 * **Discovery_Independent_Of_Grounding:** `discovery_independent_of_grounding` (`formal/Logos/PersonalNormativeGround.lean`) — Non-Circularity Architectural Theorem: The retorsive discovery proof of Free Will (`indubitable_normative_free_will`) does NOT require or depend upon any grounding bridge.
 * **Retorsion_Proof_Derives_F1B:** `retorsion_proof_derives_F1b` (`formal/Logos/ProofSpecificContrast.lean`) — The Existential Free Will Theorem (F1b) derived from the performative retorsion proof!
+* **Claims_Correct_Disconnection_Never_Factive:** `claims_correct_disconnection_never_factive` (`formal/Logos/RealityHookAudit.lean`) — No claim of correctness over the disconnection thesis is ever veridical.
 * **Bigo_Bigs_Intentional_Synthesis:** `bigO_bigS_intentional_synthesis` (`formal/Logos/Retorsion.lean`) — Synthesis of Big-O / Big-S Retorsion with Intentional Subject: Both absolutes are self-defeating, establishing the irreducible co-existence of the Objective realm, the Subjective realm, and an active IntentionalSubject.
 * **Deterministic_Transcendental_Subject_Refutes_Freewill:** `deterministic_transcendental_subject_refutes_freewill` (`formal/Logos/Retorsion.lean`) — Hostile Separation Theorem 1: Weakened retorsion CANNOT derive FreeWill.
 * **Deterministic_Transcendental_Subject_Refutes_Person:** `deterministic_transcendental_subject_refutes_person` (`formal/Logos/Retorsion.lean`) — Hostile Separation Theorem 2: Weakened retorsion CANNOT derive Personhood.

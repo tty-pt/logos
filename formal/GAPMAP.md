@@ -737,7 +737,7 @@ A campanha em `Logos.AxiomNegationAudit` executou a busca sistemática por neces
 | F1a | §13–§15 choice-field existence (`∃s p q`, `ChoiceField s p q`) | PROVEN | `person_hasChoiceField`/`choiceField_exists` `{Means, Subject}` + `judge_commits` `CL` (choice-realism batch, C51–C52/C55; renamed 2026-09-18 — field form, not genuine choice) |
 | F1b | §15 genuine choice & freedom of the actor | PROVEN↑ | `Choice.freeWill_exists` / `Choice.freeSubject_exists` / `Choice.genuineChoice_exists_of_act_constitutive` sob `{AxIntentionalChoice, Initiates, Means, State, Subject}` (rota do Cogito / A14). Alternativamente, sob a **rota de retorsão normativa** (`Logos.RetorsiveNormativity.retorsion_derives_free_will`), demonstrado sob `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` (`Tag: SEM`, bipolaridade judicativa), onde a negação de normatividade genuína refuta-se performativamente ao ser assertida como juízo correto, instanciando `GenuineNormativity` e derivando `Chooses` e `FreeWill` sem depender de `AxIntentionalChoice`. Resíduos registrados: (a) o preço SEM `AxJudicativeBipolarity` é **independente** em Γ primitivo (contramodelo `M_opaque`, `BipolarityRetorsion`) — porém é *dispensável* para a refutação do ataque, que é axiomática sob a postura normativo-judicativa (C164/C165); (b) o livre-arbítrio assim obtido tem cornos meta-nível (`NoGN`, `¬NoGN`) — deliberação sobre conteúdo de objeto/ação requer a rota separada `DeliberateChoice`/`ClaimsNormativeCorrectness` (C140/C141) |
 | F2 | §21 teleology (`Ought → Goal`) | DEFERRED | deontic layer (normativity → telos; ver C113–C121 para a retorsão do dever prático) |
-| F3 | §28 Good (`§20 → bem`) | DEFERRED | moral good from logical normativity not yet derived |
+| F3 | §28 Good (`§20 → bem`) | COUNTERMODEL | moral good **separated** from logical normativity: `MoralFrontierAudit.epistemic_normativity_without_practical_obligation` (`M_amoral`, `{}` — row C175) — epistemic agential normativity carries no practical obligation; positive close available only under the declared SEM poles `Good`/`Evil` (price sheet §5.4, `moral_pole_postulate_is_not_a_consequence` proves they are never forced) |
 | F4 | §28 Love | PROVEN↑ | `Love.T13_someoneLovable` (C41) under `{AxTwoSubjects, Means, Subject}` |
 | F5 | §28 EternalRelation | → PROVEN↑ | dissolved in C42: `Love.T14_eternalRelation_conditional` under `{AxTwoSubjects, Means, Subject}` |
 | F6 | §28 Trinity | DEFERRED | no argument exists yet (§28/§29) |
@@ -1020,12 +1020,12 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
 - **PROVEN** (status PROVEN/PROVEN↑ whose audit footprint carries **no SEM/META
   axiom** — machine re-derived from `formal/axiom_audit.json`, 2026-09-24):
   - **25 truly axiom-free** (`{}`): C1, C2, C4–C9, C11, C17, C22, C26, C27,
-    C31, C35, C36, C38, C50, C63, C95, C96, C108, C111, C166, C167.
+    C31, C35, C36, C38, C50, C63, C95, C96, C108, C111, C166, C167, C175.
   - **9 `CL`-only**: C3, C10, C12–C14, C16, C37, C59, C93.
   - **68 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
     C21, C23–C25, C30, C39, C49, C51–C53, C55–C58, C62, C68, C83–C86, C91,
     C94, C97–C105, C107, C113, C114, C116, C120–C122, C137–C142, C144, C145,
-    C147–C156, C160–C165, C168–C172, F1a.
+    C147–C156, C160–C165, C168–C174, F1a.
     F1a is the choice-**field** existence form (resolves to a kernel step;
     renamed 2026-09-18 — the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
   - **C91** — vocab-only (`{Subject}`); hostile separations `{}`. C92 (the
@@ -1513,6 +1513,37 @@ Nenhuma afirmação de unicidade/monoteísmo é provada no kernel; o kernel prov
 L406-414, testemunha `plural_necessary_entities_consistent` L391-403) e difere
 `universal_ground_unique` (`NecessaryPersonalGround.lean:24`). Monoteísmo é uma
 camada interpretativa, não consequência kernel.
+
+---
+
+## Level 9 — Reality-Hook & Moral Frontier (`RealityHookAudit`, `MoralFrontierAudit`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C173 | §28/§4 | `RealityHookAudit.content_reality_hook : ∀ p, (∃ s, Correct s p) → p` — wherever a judgment is correct, its content is the case (reality-hook, vocabulary-only, zero substantive axioms) | PROVEN | `{Initiates, Means, State, Subject}` |
+| C174 | §28/§4 | `RealityHookAudit.disconnection_thesis_unjudgeable_as_correct : ¬ ∃ s, Correct s D` (+ `def D`, `D : Prop := ¬ ∀ s p, Correct s p → p`) — "propositional right/wrong has nothing to do with reality" is never correctly judged | PROVEN | `{Initiates, Means, State, Subject}` |
+| C175 | §28/§5 | `MoralFrontierAudit.epistemic_normativity_without_practical_obligation : (∃ s, RightWrongStar s) ∧ (¬ ∃ r s a, OughtStar r s a)` — the `M_amoral` faithful model satisfies the epistemic agential reality-hook with zero practical binding; moral meaning is machine-separated (F3's countermodel row-of-record) | COUNTERMODEL | `{}` |
+
+> Batch REALITY-HOOK & MORAL-FRONTIER (2026-09-24): a tese cética "certo/errado
+> proposicional nada tem a ver com realidade" é **refutada no kernel** —
+> `correct_tracks_reality` (`Correct s p → p`, vocab-only `{Initiates, Means, State,
+> Subject}`, zero axiomas substantivos) torna `D` incorretamente-julgável
+> (`disconnection_thesis_unjudgeable_as_correct`, C174). O mesmo método transferido
+> para o domínio moral **inverte o veredito**: o polo prático `Ought`
+> (`OughtRetorsion.lean:72`) é um postulado declarado, não uma definição, e o modelo
+> `M_amoral` instancia toda a normatividade agencial epistémica sem nenhuma obrigação
+> prática (`epistemic_normativity_without_practical_obligation`, C175, `{}`) — F3 vira
+> **fronteira de contramodelo** 🧱, separada, não lacuna. O fecho positivo custa o datum
+> SEM §5.4 (`Good`/`Evil`), provado nunca-forçado por
+> `moral_pole_postulate_is_not_a_consequence` (`{Initiates, Means, State, Subject}`).
+
+> Machine-witness note (kernel fact, 2026-09-24 — not a derivation gap): the local model
+> `M_amoral` (`S := Unit`, `OughtStar := False` everywhere, `CorrectStar` identity hook)
+> satisfies `CorrectStar s p → p` plus an instantiated `<Subject, Means, State,
+> Initiates>` vocabulary, so `epistemic_normativity_without_practical_obligation` holds
+> with **zero axioms** (`{}`); `amoral_disconnection_is_judgeable_as_correct : ∃ s,
+> CorrectStar s AmoralistThesis` is the formal flip — in contrast with epistemic `D`, the
+> amoralist thesis is true-in-the-model, hence correctly judgeable.
 
 
 

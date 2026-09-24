@@ -5083,6 +5083,56 @@
  "Logos.ModalPossibilityFrontier.necessary_rationality_not_entails_necessary_act": [],
  "Logos.ModalPossibilityFrontier.reason_determinism_modal_collapse": [],
  "Logos.ModalPossibilityFrontier.target_contingent_creation_iff_missing_modal_settlement": [],
+ "Logos.MoralFrontierAudit.ClaimsMoralRectitude": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.MoralFrontierAudit.Evil",
+  "Logos.MoralFrontierAudit.Good"
+ ],
+ "Logos.MoralFrontierAudit.Evil": [
+  "Logos.Agency.Subject",
+  "Logos.MoralFrontierAudit.Evil"
+ ],
+ "Logos.MoralFrontierAudit.Good": [
+  "Logos.Agency.Subject",
+  "Logos.MoralFrontierAudit.Good"
+ ],
+ "Logos.MoralFrontierAudit.M_amoral.Act": [],
+ "Logos.MoralFrontierAudit.M_amoral.AmoralistThesis": [],
+ "Logos.MoralFrontierAudit.M_amoral.CorrectStar": [],
+ "Logos.MoralFrontierAudit.M_amoral.GenuineNormativityStar": [],
+ "Logos.MoralFrontierAudit.M_amoral.IncorrectStar": [],
+ "Logos.MoralFrontierAudit.M_amoral.Initiates": [],
+ "Logos.MoralFrontierAudit.M_amoral.Means": [],
+ "Logos.MoralFrontierAudit.M_amoral.OughtStar": [],
+ "Logos.MoralFrontierAudit.M_amoral.RightWrongStar": [],
+ "Logos.MoralFrontierAudit.M_amoral.S": [],
+ "Logos.MoralFrontierAudit.M_amoral.State": [],
+ "Logos.MoralFrontierAudit.M_amoral.amoral_disconnection_is_judgeable_as_correct": [],
+ "Logos.MoralFrontierAudit.M_amoral.amoral_model_has_no_practical_obligation": [],
+ "Logos.MoralFrontierAudit.M_amoral.amoral_model_satisfies_epistemic_agential_normativity": [],
+ "Logos.MoralFrontierAudit.M_amoral.amoral_model_separation": [],
+ "Logos.MoralFrontierAudit.M_amoral.amoralist_consistent_with_reality_hook": [],
+ "Logos.MoralFrontierAudit.M_amoral.amoralist_thesis_true_in_model": [],
+ "Logos.MoralFrontierAudit.M_amoral.correct_star_tracks_reality": [],
+ "Logos.MoralFrontierAudit.M_amoral.soleSubject": [],
+ "Logos.MoralFrontierAudit.epistemic_normativity_without_practical_obligation": [],
+ "Logos.MoralFrontierAudit.moral_pole_postulate_is_not_a_consequence": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.MoralFrontierAudit.stance_exhibits_moral_poles": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.MoralFrontierAudit.Evil",
+  "Logos.MoralFrontierAudit.Good"
+ ],
  "Logos.NecessaryPersonalGround.ActualEntity": [
   "Logos.Agency.Subject"
  ],
@@ -7047,6 +7097,67 @@
  "Logos.ProofSpecificContrast.retorsion_proof_derives_F1b": [],
  "Logos.ProofSpecificContrast.trace_occurrence_not_implies_cognitive_uptake": [],
  "Logos.ProofSpecificContrast.universal_a14_false_for_arbitrary_acts": [],
+ "Logos.RealityHookAudit.D": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.RealityHookAudit.TrEverything": [],
+ "Logos.RealityHookAudit.TrNothing": [],
+ "Logos.RealityHookAudit.assertion_tracks_reality": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.RealityHookAudit.claims_correct_disconnection_never_factive": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.RealityHookAudit.content_reality_hook": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.RealityHookAudit.correct_tracks_reality": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.RealityHookAudit.disconnection_thesis_false": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.RealityHookAudit.disconnection_thesis_unjudgeable_as_correct": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.RealityHookAudit.incorrect_tracks_reality": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.RealityHookAudit.nontrivial_truth_forces_internal_split": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.RealityHookAudit.poles_are_reality_split": [],
+ "Logos.RealityHookAudit.tr_everything_absorbs_nf_family": [],
+ "Logos.RealityHookAudit.tr_everything_all_marked": [],
+ "Logos.RealityHookAudit.tr_everything_destroys_content_tracking": [],
+ "Logos.RealityHookAudit.tr_nothing_absorbs_nt_family": [],
+ "Logos.RealityHookAudit.tr_nothing_all_unmarked": [],
  "Logos.RecoveredOntologicalGround.ActualEntity": [
   "Logos.Agency.Subject"
  ],

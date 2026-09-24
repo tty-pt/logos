@@ -67,3 +67,7 @@ import Logos.RecoveredOntologicalGround
 import Logos.PersonalGroundOfReality
 -- Necessity and eternity of the ultimate ground (Claim E / stage layer).
 import Logos.NecessityEternity
+-- Reality-hook & moral frontier audit (countermodel vs "right/wrong has nothing to do
+-- with reality", and the machine-separated moral bridge).
+import Logos.RealityHookAudit
+import Logos.MoralFrontierAudit

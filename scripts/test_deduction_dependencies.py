@@ -323,8 +323,9 @@ def test_readability_invariants():
     assert "The objective logical and normative order entails necessary truth" in glance_text
     assert "The machine-proved dependence: wherever Right/Wrong is real, its ground-type is personal" in glance_text
 
-    # 17. First 200 lines readability
-    first_200 = "\n".join(text.splitlines()[:200])
+    # 17. First 200 lines readability (window wide enough for the reading-guide
+    #     opening block, which grew with the moral-frontier note C175/F3)
+    first_200 = "\n".join(text.splitlines()[:260])
     assert "NoRight" in first_200
     assert "claims_correct_no_right_self_refuting" in first_200
 

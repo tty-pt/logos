@@ -13,7 +13,7 @@ def F1b : String := "Existence of genuine choice and free will is closed (PROVEN
 
 def F2 : String := "Deontic teleology is deferred: how norms point at goals is not yet derived."
 
-def F3 : String := "Moral good from logical normativity is deferred: not yet derived."
+def F3 : String := "Moral good from logical normativity is machine-separated from practical bindingness: the faithful model M_amoral satisfies epistemic agential normativity with zero practical obligation (epistemic_normativity_without_practical_obligation, C175, {}), so F3 is a countermodel frontier (🧱), not a gap; a positive close would cost the declared SEM poles Good/Evil (price sheet §5.4, never forced by moral_pole_postulate_is_not_a_consequence)."
 
 def F4 : String := "There are two distinct persons, both lovable, under the two-subjects bridge."
 

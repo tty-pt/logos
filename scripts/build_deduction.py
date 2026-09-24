@@ -1432,11 +1432,12 @@ STAGES = [
      "not harm. C41–C45 derive an eternal love-relation between two "
      "persons; plurality alone still does not force love — that is the separate "
      "bridge content."},
-    {"key": "IX", "title": "The Remaining Metaphysical Frontier", "intro":
-     "The remaining frontier is explicit: teleology, the moral good, the "
-     "Trinity, incarnation and creation are deferred or faith data; the "
-     "initiation-theoretic and ground-chain constructions are withdrawn under "
-     "hostile semantics. Nothing here is presented as derived."},
+{"key": "IX", "title": "The Remaining Metaphysical Frontier", "intro":
+      "The remaining frontier is explicit: teleology is deferred; the moral good is "
+      "machine-separated from epistemic normativity (countermodel frontier C175, positive "
+      "close costs the declared moral datum §5.4); the Trinity, incarnation and creation "
+      "are deferred or faith data; the initiation-theoretic and ground-chain constructions "
+      "are withdrawn under hostile semantics. Nothing here is presented as derived."},
 ]
 
 STAGE_OF = {}
@@ -1822,8 +1823,11 @@ FRONTIER_INTRO = (
     "**OPEN** claim has no kernel node (blocked, deferred, answered, or a "
     "missing lemma) and is listed below. A **COUNTERMODEL** claim is a proposed "
     "inference that a hostile model refutes: the step is *withdrawn*, and what "
-    "survives is recorded in Appendix C.2. The premier open frontiers are "
-    "deontic teleology (F2) and moral good (F3)."
+    "survives is recorded in Appendix C.2. The premier open frontier is deontic "
+    "teleology (F2); moral good (F3) is no longer open — the faithful model "
+    "`M_amoral` machine-separates practical bindingness from epistemic agential "
+    "normativity (`MoralFrontierAudit.epistemic_normativity_without_practical_obligation`, "
+    "C175, `{}`), making F3 a countermodel frontier, not a gap."
 )
 
 OPEN_BRIDGES = (
@@ -4081,7 +4085,11 @@ def render_reading_guide() -> list[str]:
     ap(">    one.' above explains.")
     ap("> 3. Divine Personhood and Strict Monotheism — **DEFERRED** (⏸), not proved here; a necessary")
     ap(">    Divine Being/Ground (world-rigid, everlasting, atemporal) is its entity-level **PROVEN** claim (✅).")
-    ap("> 4. Moral good/evil — a deferred frontier, not treated in this document.")
+    ap("> 4. Moral good/evil — machine-separated from epistemic normativity (countermodel ")
+    ap(">    frontier 🧱, C175): the faithful model `M_amoral` satisfies the whole epistemic ")
+    ap(">    agential reality-hook with zero practical obligation; a positive close requires ")
+    ap(">    a declared moral datum (price sheet §5.4). The epistemic reality-hook itself is ")
+    ap(">    unconditional and vocabulary-only (`correct_tracks_reality`, C173/C174).")
     ap("")
     ap("**Badge legend.** Every icon on a formal consequence is machine-derived from")
     ap("the Lean kernel (see `formal/GAPMAP.md` and the investigations) — never transcribed:")
@@ -4405,11 +4413,14 @@ CLASSICAL_ATTRIBUTES = [
     {
         "attribute": "**Perfect (moral) goodness**",
         "scope": "Divine Being / Ground",
-        "expected": "DEFERRED",
+        "expected": "COUNTERMODEL",
         "checks": [{"type": "claim", "id": "F3"}],
         "refs": [],
-        "sense": ("GAPMAP ledger row `F3 §28 (Good)` = DEFERRED (`⏸`). Right/Wrong here is "
-                  "epistemic correctness, explicitly distinguished from moral good/evil."),
+        "sense": ("GAPMAP ledger row `F3 §28 (Good)` = COUNTERMODEL (🧱) via C175: the "
+                  "`M_amoral` model (`{}`) satisfies epistemic agential normativity with no "
+                  "practical obligation. Right/Wrong here is epistemic correctness, explicitly "
+                  "distinguished from moral good/evil; a positive moral bridge would cost the "
+                  "declared SEM poles `Good`/`Evil` (price sheet §5.4)."),
     },
     {
         "attribute": "**Eternal — ever-present** (everlasting existence)",
@@ -5115,8 +5126,8 @@ def main():
 
     dissolved = [c["id"] for c in all_claims
                  if philo_status(c, node_map) == "DISSOLVED"]
-    assert len(dissolved) == 6, (
-        f"expected 6 dissolved aliases (F1a, F4, F5, F7, FAITH-1, FAITH-2), "
+    assert len(dissolved) == 7, (
+        f"expected 7 dissolved aliases (F1a, F3, F4, F5, F7, FAITH-1, FAITH-2), "
         f"got {len(dissolved)}: {sorted(dissolved)}")
     for a, b in canonical_of.items():
         assert b in all_ids, f"alias {a} targets unknown claim {b}"
