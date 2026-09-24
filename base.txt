@@ -119,7 +119,7 @@ A ontologia de Logos distingue rigorosamente:
    - `IndividualSubstance s := IndependentWill s` (individuação numérica da vontade);
    - `RationalNature s := Intentional s ∧ FreeWill s` (apreensão + deliberação; NÃO é o piso `Rational`);
    - `DominionOverActs s := FreeWill s` (escolha genuína, `agere a se`).
-   Equivalência plena provada: `Person ↔ FreeIndependentWill ↔ ThomisticPersonCore` (C162/C163, pegada `{Means, Subject, Will, subjectWill, will_individuation}`, 0 axiomas novos, idêntica ao feixe de C142). A definição `Person := FreeSubject` não é redefinição arbitrária da pessoa clássica: é o critério formal através do qual a realidade pessoal boécio-aquiniana é identificada.
+   Equivalência plena provada: `Person ↔ FreeIndependentWill ↔ ThomisticPersonCore` (C162/C163, pegada `{Means, Subject, Will, subjectWill, will_individuation}`, 0 axiomas substantivos novos — idêntica ao feixe de C142). O "0 axiomas novos" refere-se a axiomas *substantivos*: a pegada inclui o postulado de significado constituinte `will_individuation` (A18, VOCAB — lei de injectividade *declarada* `subjectWill s₁ ≠ subjectWill s₂`, não derivada). A não-derivação é um **fato de kernel**, não uma lacuna: o modelo hostil `Subject := Bool`, `Will := Unit`, `subjectWill := fun _ => ()` satisfaz a coluna pré-vontade (ato performativo incluso; `WillIndividuationAudit.hostile_model_satisfies_prewill_spine`, `{}`) e aí a lei **chega a uma contradição** — impor a injectividade sobre o modelo exige `subjectWill true ≠ subjectWill false` quando ambos são `()` (`hostile_model_refutes_will_individuation`, `{}`); coluna+lei é inconsistente, coluna sozinha é satisfazível ⇒ a lei não é consequência da coluna (`will_individuation_not_forced_by_prewill_spine`, `{}`). A definição `Person := FreeSubject` não é redefinição arbitrária da pessoa clássica: é o critério formal através do qual a realidade pessoal boécio-aquiniana é identificada.
 8. Racionalidade em dois pisos: `Rational s := ∃ p, Means s p` é piso DERIVADO — mera significação, definicionalmente idêntico a `Intentional` (`{Means, Subject}`) — deixou de ser o kind-pred analítico `True` (PERSON.md, 2026-09-23); a racionalidade operativa da pessoa é `RationalNature` (item 7), nunca o piso truncado.
 
 A antiga noção de `SubstantivePerson` (predicado opaco sem regras) foi descomissionada como um artefato artificial. A pessoalidade é um teorema pleno derivado da cadeia retorsiva com 0 axiomas substantivos (`FreeSubject s → Person s`, `free_subject_is_person`, `{Means, Subject}`).
@@ -1264,6 +1264,14 @@ Teologia forte da eternidade divina (eternidade metafísica "fora de toda a temp
   sem começo nem cessação para além da rigidez de estágios) — NÃO reivindicada: o que está
   PROVEN é existência mundo-rígida não modulada por estágios (`Everlasting`/`Atemporal`,
   NecessityEternity.lean), distinguida da relação eterna de amor (T14).
+Pontes abertas nomeadas #7/#9 (ligado ao Apêndice Formal Frontiers do README gerado):
+  #7 `NecessaryEntity e → ∃ τ, Ground e τ` e o seu alvo oposto #8; #9 `Ground(e, personal) → Personal(e)`
+  e o seu alvo #10. Nenhuma delas é provada nem assumida; estão enumeradas como fronteira aberta nomeada.
+Conjectura nomeada OpenBridgeNormativity (§0.10) — a ponte positiva bivalência → normatividade genuína,
+  proposta como `∀ s p, Judge s p → GenuineNormativity s p (¬p)` (ou a variante com antecedente de postura):
+  BLOQUEADA sob bivalência nua — `M_inanimate` testemunha bivalência sem forma-GN (C167, `{}`);
+  a variante de postura fraca fecha-a a custo SEM `AxJudicativeBipolarity` (C106, independente via `M_opaque`);
+  a rota axiom-free de postura completa exige o dado de postura (C164/C165); `¬NoGN` incondicional não é derivável.
 
 Nenhuma destas passagens deve ser simplesmente assumida.
 

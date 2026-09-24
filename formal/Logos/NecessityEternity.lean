@@ -75,7 +75,7 @@ abbrev Time : Type := Nat
 def stageOf (t : Time) (m : Nat) : TV := if m ≤ t then TV.t else TV.f
 
 /-- Existence of an entity at a global stage: existence in the world `stageOf t`.
-    This is a *derived* relation (footprint `{}`), not a new axiom of temporal
+    This is a *derived* relation (footprint `{Subject}`), not a new axiom of temporal
     ontology. -/
 def ExistsAtTime (t : Time) (e : Entity) : Prop := ExistsAt (stageOf t) e
 
@@ -106,7 +106,7 @@ def NotInSuccession (e : Entity) : Prop :=
     Definitional (world-rigid constructor, VOCAB class). Before this extension
     the live sort satisfied `¬ ∃ e, NecessaryEntity e`; the extension declares
     the ground's world-invariance as a semantic stipulation, not an axiom.
-    Footprint: `{}`. -/
+    Footprint: `{Subject}`. -/
 theorem ofGround_necessary : NecessaryEntity Entity.ofGround := by
   intro w
   trivial
@@ -114,14 +114,14 @@ theorem ofGround_necessary : NecessaryEntity Entity.ofGround := by
 /-- The ground of reality ontologically grounds every actual entity: for every
     actual entity `e`, either it is the ground itself or the ground means
     everything `e` means (`EntityMeans .ofGround p := True`, the explanatory-
-    adequacy dual of the atom's `False`). Footprint: `{}`. -/
+    adequacy dual of the atom's `False`). Footprint: `{Means, Subject}`. -/
 theorem ofGround_ground_of_reality : GroundOfReality Entity.ofGround := by
   intro e hActual
   exact Or.inr (fun p hEM => True.intro)
 
 /-- HEADLINE — the necessary ground of reality exists: `Entity.ofGround` is a
     necessary entity and the ontological ground of reality.
-    Footprint: `{}`. This is the live theorem behind the README row
+    Footprint: `{Means, Subject}`. This is the live theorem behind the README row
     "Necessary Divine Being / Ground — PROVEN". -/
 theorem ofGround_necessary_ground_of_reality : NecessaryGroundOfReality Entity.ofGround :=
   ⟨ofGround_necessary, ofGround_ground_of_reality⟩
@@ -129,7 +129,7 @@ theorem ofGround_necessary_ground_of_reality : NecessaryGroundOfReality Entity.o
 /-- The ground is numerically distinct from every subject-correlate: hypostatic
     identity is blocked by constructor injectivity (`Entity.noConfusion`). This
     is why no "necessary Person" claim is derivable from necessity of the ground.
-    Footprint: `{}`. -/
+    Footprint: `{Subject}`. -/
 theorem ofGround_ne_ofSubject (s : Subject) : Entity.ofGround ≠ EntityOf s := by
   intro h
   exact Entity.noConfusion h
@@ -141,14 +141,14 @@ theorem ofGround_ne_ofSubject (s : Subject) : Entity.ofGround ≠ EntityOf s := 
 /-- Necessary → Everlasting (task C): because every stage is a world
     (`stageOf t : World`), an entity that exists in every world exists at every
     stage. The argument carries no temporal premise over to the conclusion side.
-    Footprint: `{}`. -/
+    Footprint: `{Subject}`. -/
 theorem necessary_implies_everlasting {e : Entity} :
     NecessaryEntity e → Everlasting e := by
   intro h t
   exact h (stageOf t)
 
 /-- Necessary → Atemporal: a world-rigid entity's existence does not vary across
-    stages. Footprint: `{}`. -/
+    stages. Footprint: `{Subject}`. -/
 theorem necessary_implies_atemporal {e : Entity} :
     NecessaryEntity e → Atemporal e := by
   intro h t₁ t₂
@@ -156,22 +156,22 @@ theorem necessary_implies_atemporal {e : Entity} :
   · intro _; exact h (stageOf t₂)
   · intro _; exact h (stageOf t₁)
 
-/-- The ground is everlasting (exists at every stage). Footprint: `{}`. -/
+/-- The ground is everlasting (exists at every stage). Footprint: `{Subject}`. -/
 theorem the_ground_everlasting : Everlasting Entity.ofGround := by
   exact necessary_implies_everlasting ofGround_necessary
 
-/-- The ground is atemporal (existence not time-modulated). Footprint: `{}`. -/
+/-- The ground is atemporal (existence not time-modulated). Footprint: `{Subject}`. -/
 theorem the_ground_atemporal : Atemporal Entity.ofGround := by
   exact necessary_implies_atemporal ofGround_necessary
 
 /-- The ground is outside every initiation-becoming (no transition role).
-    Footprint: `{}`. -/
+    Footprint: `{Initiates, State, Subject}`. -/
 theorem the_ground_not_in_succession : NotInSuccession Entity.ofGround := by
   rintro ⟨s, σ, σ', p, ⟨hEq, _h⟩⟩
   exact Entity.noConfusion hEq
 
 /-- Reader-facing bundle: the ground is everlasting and atemporal.
-    Footprint: `{}`. (Deliberately named without "eternal" — see the README
+    Footprint: `{Subject}`. (Deliberately named without "eternal" — see the README
     regeneration guards.) -/
 theorem everlasting_and_atemporal_ground :
     Everlasting Entity.ofGround ∧ Atemporal Entity.ofGround :=
@@ -182,7 +182,7 @@ theorem everlasting_and_atemporal_ground :
 -- ============================================================================
 
 /-- Atoms are not everlasting: an atomic entity fails at stage 0.
-    Footprint: `{}`. -/
+    Footprint: `{Subject}`. -/
 theorem atom_not_everlasting : ¬ Everlasting (Entity.ofAtom 1) := by
   intro h
   have hn : ¬ (1 ≤ 0) := by decide
@@ -192,7 +192,7 @@ theorem atom_not_everlasting : ¬ Everlasting (Entity.ofAtom 1) := by
   exact Logos.Semantics.TV.noConfusion h0
 
 /-- Atoms are not atemporal: atomic existence varies across stages.
-    Footprint: `{}`. -/
+    Footprint: `{Subject}`. -/
 theorem atom_not_atemporal : ¬ Atemporal (Entity.ofAtom 1) := by
   intro h
   have hn : ¬ (1 ≤ 0) := by decide
@@ -208,14 +208,14 @@ theorem atom_not_atemporal : ¬ Atemporal (Entity.ofAtom 1) := by
   exact hF ((h 0 1).mpr hT)
 
 /-- Atoms are time-modulated: `Entity.ofAtom 1` exists at stage 1 but not at
-    stage 0 (footprint `{}`; alias of `atom_not_atemporal`). -/
+    stage 0 (alias of `atom_not_atemporal`). Footprint: `{Subject}`. -/
 theorem atom_has_temporal_mode : HasTemporalMode (Entity.ofAtom 1) :=
   atom_not_atemporal
 
 /-- Subjects exist at no global stage: `stageOf t ≠ actualWorld` at index `t + 1`
     (the growing timeline disagrees with the always-true valuation), so
     `ExistsAtTime` never holds for a subject-correlate. Consistent with the live
-    semantics `SubjectExistsAt w s := w = actualWorld`. Footprint: `{}`. -/
+    semantics `SubjectExistsAt w s := w = actualWorld`. Footprint: `{Subject}`. -/
 theorem subject_not_everlasting (s : Subject) : ¬ Everlasting (EntityOf s) := by
   intro h
   have ht := h 0
@@ -233,7 +233,7 @@ theorem subject_not_everlasting (s : Subject) : ¬ Everlasting (EntityOf s) := b
 
 /-- Everlasting ⇏ Necessary: `Entity.ofAtom 0` exists at every stage (`0 ≤ t`
     always) but fails in the all-`f` world — so everlastingness never collapses
-    into necessity. Footprint: `{}`. -/
+    into necessity. Footprint: `{Subject}`. -/
 theorem everlasting_but_contingent : ∃ e : Entity, Everlasting e ∧ ¬ NecessaryEntity e := by
   refine ⟨Entity.ofAtom 0, ?_, ?_⟩
   · intro t
@@ -263,7 +263,8 @@ theorem the_personal_type_grounding : ∃ s : Subject, Person s ∧ GroundsRight
     reality and a personal ground-type — two conjuncts, no identity line.
     `ofGround_ne_ofSubject` records that the hypostatic conjunction
     `g = EntityOf s ∧ NecessaryEntity g` is impossible for any subject.
-    Necessity conjunct footprint `{}`; the personal conjunct (via
+    Necessity conjunct: `{Means, Subject}` (via `ofGround_necessary` and
+    `ofGround_necessary_ground_of_reality`); the personal conjunct (via
     `the_personal_type_grounding`) is `{AxTwoSubjects, Means, Subject}`. -/
 theorem claimE :
     ∃ g : Entity, ∃ s : Subject,

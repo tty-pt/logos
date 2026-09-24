@@ -100,7 +100,7 @@ theorem rightWrong_implies_meaning
 
 /--The strong form: right *and* wrong both realized entails meaning.
  `Correct` and `Incorrect` are each a meaning-act, so the distinction
-    itself witnesses `Meaning_I` — purely derived, footprint `{Means, Subject}`
+    itself witnesses `Meaning_I` — purely derived, footprint `{Initiates, Means, State, Subject}`
     (vocab-only, no substantive axiom). -/
 theorem rightDistinctWrong_implies_meaning
     (h : (∃ s : Subject, ∃ p : Prop, Correct s p) ∧

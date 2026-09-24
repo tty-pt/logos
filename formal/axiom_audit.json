@@ -9105,5 +9105,29 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
   "Logos.Value.AxTwoSubjects"
- ]
+ ],
+ "Logos.WillIndividuationAudit.HostileModel": [],
+ "Logos.WillIndividuationAudit.NegWillIndividuation": [],
+ "Logos.WillIndividuationAudit.PreWillDatumHolds": [],
+ "Logos.WillIndividuationAudit.PreWillSpine.Initiates": [],
+ "Logos.WillIndividuationAudit.PreWillSpine.Means": [],
+ "Logos.WillIndividuationAudit.PreWillSpine.State": [],
+ "Logos.WillIndividuationAudit.PreWillSpine.Subject": [],
+ "Logos.WillIndividuationAudit.PreWillSpine.Will": [],
+ "Logos.WillIndividuationAudit.PreWillSpine.casesOn": [],
+ "Logos.WillIndividuationAudit.PreWillSpine.ctorIdx": [],
+ "Logos.WillIndividuationAudit.PreWillSpine.mk.inj": [],
+ "Logos.WillIndividuationAudit.PreWillSpine.mk.injEq": [
+  "propext"
+ ],
+ "Logos.WillIndividuationAudit.PreWillSpine.mk.noConfusion": [],
+ "Logos.WillIndividuationAudit.PreWillSpine.mk.sizeOf_spec": [],
+ "Logos.WillIndividuationAudit.PreWillSpine.noConfusion": [],
+ "Logos.WillIndividuationAudit.PreWillSpine.noConfusionType": [],
+ "Logos.WillIndividuationAudit.PreWillSpine.recOn": [],
+ "Logos.WillIndividuationAudit.PreWillSpine.subjectWill": [],
+ "Logos.WillIndividuationAudit.WillIndividuationStatement": [],
+ "Logos.WillIndividuationAudit.hostile_model_refutes_will_individuation": [],
+ "Logos.WillIndividuationAudit.hostile_model_satisfies_prewill_spine": [],
+ "Logos.WillIndividuationAudit.will_individuation_not_forced_by_prewill_spine": []
 }

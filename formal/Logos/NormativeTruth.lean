@@ -58,8 +58,8 @@ theorem no_normative_truth_is_self_refuting
   exact hNo hEx
 
 /-- Theorem: Direct derivation that normative truth necessarily exists from the retorsive self-application.
-    Status: PROVED (Pure logic, footprint {}). -/
-theorem normative_truth_exists
+Status: PROVED (Pure logic, footprint `{CL}`). -/
+    theorem normative_truth_exists
     (NormativeTruth : Prop → Prop)
     (hSelf : NoNormativeTruth NormativeTruth → NormativeTruth (NoNormativeTruth NormativeTruth)) :
     ∃ p : Prop, NormativeTruth p := by
@@ -68,7 +68,7 @@ theorem normative_truth_exists
   exact no_normative_truth_is_self_refuting NormativeTruth hSelf hNo
 
 /-- Theorem: Context-packaged form of the retorsion theorem.
-    Status: PROVED (Pure logic, footprint {}). -/
+    Status: PROVED (Pure logic, footprint `{CL}`). -/
 theorem context_normative_truth_exists (ctx : NormativeTruthContext) :
     ∃ p : Prop, ctx.NormativeTruth p :=
   normative_truth_exists ctx.NormativeTruth ctx.self_applicative
@@ -84,8 +84,8 @@ def NoNormativeTruthAt (World : Type) (NormAt : World → Prop → Prop) (w : Wo
 
 /-- Modal Retorsion Theorem: In any modal semantics where the retorsive self-application
     holds across worlds, normative truth necessarily exists in every world.
-    Status: PROVED (Pure logic, footprint {}). -/
-theorem necessary_normative_truth_exists
+Status: PROVED (Pure logic, footprint `{CL}`). -/
+    theorem necessary_normative_truth_exists
     {World : Type} (NormAt : World → Prop → Prop)
     (hRet : ∀ w : World, NoNormativeTruthAt World NormAt w → NormAt w (NoNormativeTruthAt World NormAt w)) :
     ∀ w : World, ∃ p : Prop, NormAt w p := by
@@ -182,8 +182,8 @@ theorem normative_free_subject_grounds_agency
   fgctx.free_ground s w hFS hLaws
 
 /-- Master Theorem 1: The synthesized Normative Free Subject strictly entails Metaphysical Indeterminism.
-    Status: PROVED (Footprint {}). -/
-theorem normative_free_subject_implies_indeterminism
+Status: PROVED (Footprint `{Means, Subject}`). -/
+    theorem normative_free_subject_implies_indeterminism
     {World PriorState FutureState : Type}
     (fgctx : NormativeFreeGroundContext World PriorState FutureState)
     (s : Subject) (w : World)
@@ -194,8 +194,8 @@ theorem normative_free_subject_implies_indeterminism
   exact free_subject_implies_metaphysical_indeterminism hGFS
 
 /-- Master Theorem 2: The synthesized Normative Free Subject strictly refutes Nomological Determinism D3.
-    Status: PROVED (Footprint {}). -/
-theorem normative_free_subject_implies_not_d3
+Status: PROVED (Footprint `{Means, Subject}`). -/
+    theorem normative_free_subject_implies_not_d3
     {World PriorState FutureState : Type}
     (fgctx : NormativeFreeGroundContext World PriorState FutureState)
     (s : Subject) (w : World)
@@ -207,8 +207,8 @@ theorem normative_free_subject_implies_not_d3
 
 /-- Theorem: Using the ALREADY-PROVED existential Free Subject from Choice.lean,
     in any lawful world, a Genuine Free Subject exists and Nomological Determinism D3 fails.
-    Status: PROVED (Footprint {}). -/
-theorem established_free_subject_defeats_d3
+Status: PROVED (Footprint `{Means, Subject}`). -/
+    theorem established_free_subject_defeats_d3
     {World PriorState FutureState : Type}
     (fgctx : NormativeFreeGroundContext World PriorState FutureState)
     (w : World)

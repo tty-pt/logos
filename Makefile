@@ -5,7 +5,7 @@ export PATH := $(HOME)/.elan/bin:$(PATH)
 
 PYTHON ?= python3
 
-.PHONY: all build depviz audit deduction test check clean zip help
+.PHONY: all build depviz audit sync deduction test check clean zip help
 
 # Default target runs the complete formal build, audit, deduction generation, and test verification.
 all: build depviz audit deduction test
@@ -21,10 +21,20 @@ depviz: build
 	@echo "=== Generating kernel dependency graph via LeanDepViz ==="
 	cd formal && lake exe depviz --roots Logos --json-out depgraph.json --dot-out depgraph.dot
 
-# Audit transitive kernel axiom footprints (#print axioms)
+# Audit transitive kernel axiom footprints (#print axioms), then verify that
+# every docstring Footprint marker / inline footprint copy matches the audit
+# (sync needs axiom_audit.json, hence it runs after audit_footprints.py).
 audit: build
 	@echo "=== Auditing kernel axiom footprints ==="
 	$(PYTHON) scripts/audit_footprints.py
+	@echo "=== Verifying docstring footprint markers vs formal/axiom_audit.json ==="
+	$(PYTHON) scripts/sync_docstring_footprints.py
+
+# Standalone convenience: verify docstring footprint markers against a
+# pre-existing formal/axiom_audit.json (run scripts/audit_footprints.py first).
+sync:
+	@echo "=== Verifying docstring footprint markers vs formal/axiom_audit.json ==="
+	$(PYTHON) scripts/sync_docstring_footprints.py
 
 # Generate README.md and investigations/kernel-audit.md
 deduction: audit depviz
@@ -60,7 +70,8 @@ help:
 	@echo "  all        Run full pipeline: build, depviz, audit, deduction, test (default)"
 	@echo "  build      Build Lean 4 library in formal/ via lake build"
 	@echo "  depviz     Generate formal/depgraph.json and formal/depgraph.dot"
-	@echo "  audit      Audit transitive kernel footprints via scripts/audit_footprints.py"
+	@echo "  audit      Audit transitive kernel footprints via scripts/audit_footprints.py + verify docstring footprint markers (scripts/sync_docstring_footprints.py)"
+	@echo "  sync       Verify docstring footprint markers vs formal/axiom_audit.json only"
 	@echo "  deduction  Compile README.md and investigations/kernel-audit.md"
 	@echo "  test       Run verification test suites"
 	@echo "  check      Alias for test"

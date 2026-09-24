@@ -156,7 +156,7 @@ def RightWrong (s : Subject) : Prop :=
   ∃ p q : Prop, RightWrongAt s p q
 
 /-- Any genuine normative address constitutes Right/Wrong for the addressee.
-    Footprint: `{}`. -/
+    Footprint: `{Subject}`. -/
 theorem right_wrong_of_genuine_normativity
     (s : Subject) (p q : Prop) (h : GenuineNormativity s p q) :
     RightWrongAt s p q :=
@@ -247,7 +247,7 @@ def GlobalGroundedNormativePolarity : Prop :=
     An ontological grounder (`EntityOf s : Entity`) is numerically and categorically distinct
     from the proposition it grounds (`JudicativeNormativePolarity s p : Prop`).
     Grounding is an asymmetrical ontological dependency, never an identity.
-    Footprint: `{}`. -/
+    Footprint: `{Subject}`. -/
 theorem grounding_distinct_from_grounded (s : Subject) (p : Prop) :
     EntityOf s ≠ Entity.ofAtom 0 := by
   intro h
@@ -305,35 +305,35 @@ def Stage5_Person (s : Subject) : Prop :=
 
 /-- Forward Step 0 → 1: From the normative datum to agential normative stance.
     Extracts `AgentialDeonticAddress` and `DeonticOpposition`.
-    Footprint: `{}`. -/
+    Footprint: `{Means, Subject}`. -/
 theorem step_datum_to_stance (s : Subject) (p q : Prop)
     (h0 : Stage0_NormativeDatum s p q) : Stage1_NormativeStance s p q :=
   ⟨h0.address, h0.opposition⟩
 
 /-- Forward Step 1 → 2: From normative stance to genuine agential choice.
     Apprehending incompatible normative poles constitutes choice (`Chooses`).
-    Footprint: `{}`. -/
+    Footprint: `{Means, Subject}`. -/
 theorem step_stance_to_choice (s : Subject) (p q : Prop)
     (h1 : Stage1_NormativeStance s p q) : Stage2_NormativeChoice s p q :=
   ⟨h1.1.1, h1.1.2, h1.2.1⟩
 
 /-- Forward Step 2 → 3: From genuine choice to agential free will.
     A subject choosing between alternatives possesses free will by definition.
-    Footprint: `{}`. -/
+    Footprint: `{Means, Subject}`. -/
 theorem step_choice_to_freewill (s : Subject) (p q : Prop)
     (h2 : Stage2_NormativeChoice s p q) : Stage3_AgentialFreeWill s :=
   ⟨p, q, h2⟩
 
 /-- Forward Step 3 → 4: From free will to free subjecthood.
     Definitional equivalence: `FreeSubject s := FreeWill s`.
-    Footprint: `{}`. -/
+    Footprint: `{Means, Subject}`. -/
 theorem step_freewill_to_freeSubject (s : Subject)
     (h3 : Stage3_AgentialFreeWill s) : Stage4_FreeSubject s :=
   h3
 
 /-- Forward Step 4 → 5: From free subjecthood to Personhood (P).
     Constitutive personhood theorem: every free subject is a person (`Person s := FreeSubject s`).
-    Footprint: `{}`. -/
+    Footprint: `{Means, Subject}`. -/
 theorem step_freeSubject_to_person (s : Subject)
     (h4 : Stage4_FreeSubject s) : Stage5_Person s :=
   Logos.Person.free_subject_is_person s h4
@@ -388,7 +388,7 @@ theorem person_grounds_normative_polarity (s : Subject) (hPerson : Person s) :
 
 /-- Master Grounding Theorem from Free Independent Will:
     A subject with a Free, Independent Will satisfies the specification of the personal ground.
-    Footprint: `{Means, Subject, subjectWill, will_individuation}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem free_independent_will_grounds_judicative_polarity
     (s : Subject) (hFW : FreeIndependentWill s) :
     GroundsRightWrong s :=
@@ -397,7 +397,7 @@ theorem free_independent_will_grounds_judicative_polarity
 /-- Master Realization Theorem:
     Any Person realizes GroundedNormativePolarity, showing that normative polarity is grounded
     in a personal ontological basis.
-    Footprint: `{Means, Subject, subjectWill, will_individuation}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem person_realizes_grounded_polarity (s : Subject) (hPerson : Person s) :
     GroundedNormativePolarity s := by
   have hFW : FreeIndependentWill s := (person_iff_freeIndependentWill s).mp hPerson
@@ -407,7 +407,7 @@ theorem person_realizes_grounded_polarity (s : Subject) (hPerson : Person s) :
     The existence of a Person entails that normative polarity has a personal ontological ground.
     Distinction: This existential result establishes that there exists a personal ground of the
     normative order; it does not claim that one contingent individual causally produces all morality.
-    Footprint: `{Means, Subject, subjectWill, will_individuation}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem person_exists_implies_global_grounded_polarity (h : ∃ s : Subject, Person s) :
     GlobalGroundedNormativePolarity := by
   obtain ⟨s, hPerson⟩ := h

@@ -164,7 +164,7 @@ theorem the_person_supports_the_reality_of_right :
     Distinction: This establishes that there exists a personal ground of the normative order;
     it does NOT claim that there exists one particular empirical person who personally
     causes every normative fact.
-    Footprint: `{Initiates, Means, State, Subject, CL}` (zero substantive axioms). -/
+    Footprint: `{Initiates, Means, State, Subject}` (zero substantive axioms). -/
 theorem personal_ground_of_right_exists
     (hDatum : ∃ s : Subject, RightWrong s) :
     ∃ s : Subject, Person s ∧ NecessaryNormativeOrder ∧ GroundsRightWrong s := by
@@ -192,7 +192,7 @@ theorem personal_ground_of_right_exists_of_claims
     The derived Person s instantiates the personal ground-type.
     The argument does not identify a particular contingent individual as the creator of Right and Wrong;
     it establishes that the ontological ground required by objective Right/Wrong is personal in kind.
-    Footprint: `{Initiates, Means, State, Subject, CL}`. -/
+    Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem person_yields_personal_grounding_of_reality
     (s : Subject) (hPerson : Person s) :
     Person s ∧ GroundsRightWrong s ∧ NecessaryNormativeOrder :=
@@ -201,7 +201,7 @@ theorem person_yields_personal_grounding_of_reality
 /-- Historical compatibility alias for `person_yields_personal_grounding_of_reality`.
     Marked explicitly as historical compatibility terminology: the theorem requires no `Act` premise
     and expresses `Person → personal ontological ground`.
-    Footprint: `{Initiates, Means, State, Subject, CL}`. -/
+    Footprint: `{Initiates, Means, State, Subject}`. -/
 @[deprecated person_yields_personal_grounding_of_reality (since := "2026-04")]
 theorem present_act_yields_personal_grounding_of_reality
     (s : Subject) (hPerson : Person s) :

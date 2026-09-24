@@ -101,7 +101,7 @@ def NormativeGraspPrinciple
     Means s p ∧ Means s q
 
 /-- Theorem: A normative alternative under Normative Grasp directly derives Chooses.
-    Status: PROVED (Pure logic, footprint {}). -/
+    Status: PROVED (Pure logic, footprint `{Means, Subject}`). -/
 theorem normative_alternative_implies_chooses
     (dom : StrongNormativeDomain Subject World)
     (hGrasp : NormativeGraspPrinciple dom)
@@ -113,7 +113,7 @@ theorem normative_alternative_implies_chooses
 
 /-- Theorem: Direct derivation of Choice.FreeWill from a Normative Alternative
     WITHOUT assuming AxIntentionalChoice.
-    Status: PROVED (Pure logic, footprint {}). -/
+    Status: PROVED (Pure logic, footprint `{Means, Subject}`). -/
 theorem normative_alternative_implies_core_free_will
     (dom : StrongNormativeDomain Subject World)
     (hGrasp : NormativeGraspPrinciple dom)
@@ -124,7 +124,7 @@ theorem normative_alternative_implies_core_free_will
 
 /-- Theorem: Direct derivation of Choice.FreeSubject from a Normative Alternative
     WITHOUT assuming AxIntentionalChoice.
-    Status: PROVED (Pure logic, footprint {}). -/
+    Status: PROVED (Pure logic, footprint `{Means, Subject}`). -/
 theorem normative_alternative_implies_core_free_subject
     (dom : StrongNormativeDomain Subject World)
     (hGrasp : NormativeGraspPrinciple dom)
@@ -164,7 +164,7 @@ structure NormativeDeliberationContext
       cctx.OwnsSettlement s p q
 
 /-- Theorem: Deliberative agency (StrongChooses) is derived from Normative Deliberation.
-    Status: PROVED (Footprint {}). -/
+    Status: PROVED (Footprint `{Subject}`). -/
 theorem normative_deliberation_yields_strong_chooses
     (dom : StrongNormativeDomain Subject World)
     (cctx : StrongChoosesContext Subject)
@@ -194,7 +194,7 @@ def OughtImpliesAlternativeAvailability
     Available mctx s p w ∧ Available mctx s q w
 
 /-- Theorem: Derivation of GenuineChooses from Normative Alternative, Deliberation, and the Kantian Bridge.
-    Status: PROVED (Footprint {}). -/
+    Status: PROVED (Footprint `{Subject}`). -/
 theorem normative_alternative_implies_genuine_chooses
     (dom : StrongNormativeDomain Subject World)
     {PriorState FutureState : Type}
@@ -210,7 +210,7 @@ theorem normative_alternative_implies_genuine_chooses
   exact ⟨hDelib, hAvailP, hAvailQ, hNorm.incompatible, hNorm.distinct, hLaws⟩
 
 /-- Theorem: Derivation of GenuineFreeSubject directly from Normative Deliberation.
-    Status: PROVED (Footprint {}). -/
+    Status: PROVED (Footprint `{Subject}`). -/
 theorem normative_alternative_implies_genuine_free_subject
     (dom : StrongNormativeDomain Subject World)
     {PriorState FutureState : Type}
@@ -226,7 +226,7 @@ theorem normative_alternative_implies_genuine_free_subject
   exact ⟨p, q, normative_alternative_implies_genuine_chooses dom cctx mctx hKantian s p q w hLaws hNorm hDelib⟩
 
 /-- Master Theorem 1: Direct Normative Route to Metaphysical Indeterminism.
-    Status: PROVED (Footprint {}). -/
+    Status: PROVED (Footprint `{Subject}`). -/
 theorem normative_route_to_metaphysical_indeterminism
     (dom : StrongNormativeDomain Subject World)
     {PriorState FutureState : Type}
@@ -242,7 +242,7 @@ theorem normative_route_to_metaphysical_indeterminism
   exact free_subject_implies_metaphysical_indeterminism hGFS
 
 /-- Master Theorem 2: Direct Normative Route to the Refutation of Nomological Determinism D3.
-    Status: PROVED (Footprint {}). -/
+    Status: PROVED (Footprint `{Subject}`). -/
 theorem normative_route_to_not_d3
     (dom : StrongNormativeDomain Subject World)
     {PriorState FutureState : Type}
@@ -276,7 +276,7 @@ def NecessaryStrongNormativity
 
 /-- Theorem: Necessary Strong Normativity entails the necessary existence of Free Subjects
     WITHOUT assuming AxIntentionalChoice.
-    Status: PROVED (Pure logic, footprint {}). -/
+    Status: PROVED (Pure logic, footprint `{Means, Subject}`). -/
 theorem necessary_normativity_implies_necessary_free_subject
     (dom : StrongNormativeDomain Subject World)
     (hGrasp : NormativeGraspPrinciple dom)
@@ -288,7 +288,7 @@ theorem necessary_normativity_implies_necessary_free_subject
 
 /-- Theorem: Necessary Strong Normativity entails the necessary existence of Free Will
     (□ ∃ s, FreeWill s).
-    Status: PROVED (Pure logic, footprint {}). -/
+    Status: PROVED (Pure logic, footprint `{Means, Subject}`). -/
 theorem necessary_normativity_implies_necessary_free_will
     (dom : StrongNormativeDomain Subject World)
     (hGrasp : NormativeGraspPrinciple dom)
@@ -300,7 +300,7 @@ theorem necessary_normativity_implies_necessary_free_will
 
 /-- Theorem: Necessary Strong Normativity under the Kantian Principle entails that
     in every lawful world, a Genuine Free Subject exists and Nomological Determinism D3 fails.
-    Status: PROVED (Footprint {}). -/
+    Status: PROVED (Footprint `{Subject}`). -/
 theorem necessary_normativity_implies_necessary_genuine_freedom
     (dom : StrongNormativeDomain Subject World)
     {PriorState FutureState : Type}

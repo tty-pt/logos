@@ -79,31 +79,31 @@ def TruthNorm : JudicativeNorm where
 -- ===========================================================================
 
 /-- A correct judgment act implies that the subject ought to affirm the content under TruthNorm.
-    Footprint: {} (pure logic). -/
+    Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem correct_implies_ought (s : Subject) (p : Prop) (h : Correct s p) :
     Ought TruthNorm ⟨s, p⟩ :=
   h.2
 
 /-- An incorrect judgment act implies that the subject ought not to affirm the content under TruthNorm.
-    Footprint: {} (pure logic). -/
+    Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem incorrect_implies_oughtNot (s : Subject) (p : Prop) (h : Incorrect s p) :
     OughtNot TruthNorm ⟨s, p⟩ :=
   h.2
 
 /-- Correctness is definitionally the performance of the judicative act in conformity with what ought to be judged.
-    Footprint: {} (pure logic). -/
+    Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem correct_iff_performed_and_ought (s : Subject) (p : Prop) :
     Correct s p ↔ (JudicativeAct.mk s p).performed ∧ Ought TruthNorm ⟨s, p⟩ :=
   Iff.rfl
 
 /-- Incorrectness is definitionally the performance of the judicative act in violation of the norm (what ought not to be judged).
-    Footprint: {} (pure logic). -/
+    Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem incorrect_iff_performed_and_oughtNot (s : Subject) (p : Prop) :
     Incorrect s p ↔ (JudicativeAct.mk s p).performed ∧ OughtNot TruthNorm ⟨s, p⟩ :=
   Iff.rfl
 
 /-- If p is correctly judged, any incompatible alternative q is what ought not to be affirmed under TruthNorm.
-    Footprint: {} (pure logic). -/
+    Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem correct_implies_oughtNot_incompatible (s : Subject) (p q : Prop)
     (hCorr : Correct s p) (hIncomp : Incompatible p q) :
     OughtNot TruthNorm ⟨s, q⟩ :=
@@ -114,7 +114,7 @@ theorem correct_implies_oughtNot_incompatible (s : Subject) (p q : Prop)
 -- ===========================================================================
 
 /-- Ought and OughtNot under TruthNorm are strictly incompatible.
-    Footprint: {} (pure logic). -/
+    Footprint: `{Subject}`. -/
 theorem ought_and_oughtNot_incompatible (s : Subject) (p : Prop) :
     Incompatible (Ought TruthNorm ⟨s, p⟩) (OughtNot TruthNorm ⟨s, p⟩) :=
   TruthNorm.incompatible ⟨s, p⟩
@@ -122,7 +122,7 @@ theorem ought_and_oughtNot_incompatible (s : Subject) (p : Prop) :
 /-- Essential non-identity of contents: what ought to be affirmed cannot be identical
     to what ought not to be affirmed under TruthNorm.
     Uses Ought and OughtNot essentially, guaranteeing zero dead code.
-    Footprint: {} (pure logic). -/
+    Footprint: `{Subject}`. -/
 theorem content_distinct_of_ought_oughtNot (s : Subject) (p q : Prop)
     (hp : Ought TruthNorm ⟨s, p⟩) (hq : OughtNot TruthNorm ⟨s, q⟩) : p ≠ q := by
   intro hEq
@@ -131,7 +131,7 @@ theorem content_distinct_of_ought_oughtNot (s : Subject) (p q : Prop)
 
 /-- Correctness and incorrectness are mutually incompatible, derived directly from
     the incompatibility of Ought and OughtNot under TruthNorm.
-    Footprint: {} (pure logic). -/
+    Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem correctness_incompatible (s : Subject) (p : Prop) :
     Incompatible (Correct s p) (Incorrect s p) :=
   fun ⟨hC, hI⟩ => ought_and_oughtNot_incompatible s p ⟨hC.2, hI.2⟩
@@ -237,25 +237,25 @@ def CommittedChoice (s : Subject) (p : Prop) (q : Prop) (r : Prop) : Prop :=
   Act s p ∧ Chooses s q r
 
 /-- Committed choice carries the deliberate grasp of the incompatible alternatives.
-    Footprint: {} (pure logic). -/
+    Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem committedChoice_implies_chooses (s : Subject) (p q r : Prop)
     (h : CommittedChoice s p q r) : Chooses s q r :=
   h.2
 
 /-- Committed choice carries commitment in the world (the performed act on p).
-    Footprint: {} (pure logic). -/
+    Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem committedChoice_implies_act (s : Subject) (p q r : Prop)
     (h : CommittedChoice s p q r) : Act s p :=
   h.1
 
 /-- Committed choice entails free will, definitionally from `Chooses`.
-    Footprint: {} (pure logic). -/
+    Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem committedChoice_implies_freeWill (s : Subject) (p q r : Prop)
     (h : CommittedChoice s p q r) : FreeWill s :=
   ⟨q, r, committedChoice_implies_chooses s p q r h⟩
 
 /-- Committed choice entails free subjectivity, definitionally (`FreeSubject s := FreeWill s`).
-    Footprint: {} (pure logic). -/
+    Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem committedChoice_implies_freeSubject (s : Subject) (p q r : Prop)
     (h : CommittedChoice s p q r) : FreeSubject s :=
   committedChoice_implies_freeWill s p q r h

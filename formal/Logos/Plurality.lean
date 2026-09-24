@@ -41,7 +41,7 @@ def NecessarySubject (s : Subject) : Prop := ∀ w : World, ExistsAt w (EntityOf
 
   T12 — there is more than one person (poem P5/P7; PROVEN↑ under `AxTwoSubjects`):
     the reality of right-and-wrong demands plurality. A single act does not entail
-    plurality (settled by the Unit countermodel in HostileSemantics). Footprint: `{AxTwoSubjects}`. -/
+    plurality (settled by the Unit countermodel in HostileSemantics). Footprint: `{AxTwoSubjects, Means, Subject}`. -/
 theorem T12_twoPersons :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ :=
   AxTwoSubjects Logos.Core.rightWrongDistinction

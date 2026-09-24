@@ -162,7 +162,7 @@ scratch/Trinitarian_deferred.lean (DEFERRED); the canonical theorem
 /-- An impersonal atomic entity cannot ground an intentional agent.
     Because an atom has zero intentional capacity (EntityMeans (Entity.ofAtom n) p ↔ False),
     it cannot ground any subject that means a proposition.
-    Footprint: `{explanatory_adequacy, Means, Subject}`. -/
+    Footprint: `{Means, Subject}`. -/
 theorem atom_cannot_ground_intentional_subject
     (n : Nat) (s : Subject) (p : Prop) (hm : Means s p) :
     ¬ GroundsEntity (Entity.ofAtom n) (EntityOf s) := by
@@ -175,7 +175,7 @@ theorem atom_cannot_ground_intentional_subject
 /-- An impersonal atomic entity cannot ground a free subject / person.
     Every Person possesses free will and genuine choice, which entails intentional meaning (Means s p).
     Hence, by explanatory adequacy, no empirical atom can ground a Person.
-    Footprint: `{explanatory_adequacy, Means, Subject}`. -/
+    Footprint: `{Means, Subject}`. -/
 theorem atom_cannot_ground_person (n : Nat) (s : Subject) (hPerson : Person s) :
     ¬ GroundsEntity (Entity.ofAtom n) (EntityOf s) := by
   have hFreeWill : FreeWill s := Logos.Person.person_has_free_will s hPerson
@@ -217,7 +217,7 @@ theorem rational_act_carries_personal (s : Subject) (p : Prop) (hAct : Logos.Age
 /-- Step 4: Master Agential Theorem.
     Under the performative retorsive hypothesis, actual volitional reality is established:
     `Asserts s p → Act s p → Chooses s p q → FreeWill s → FreeSubject s → Person s ∧ Will (subjectWill s) ∧ ActualEntity (EntityOf s)`.
-    Footprint: `{AxIntentionalChoice, Initiates, Means, State, Subject, CL}`. -/
+    Footprint: `{AxIntentionalChoice, Initiates, Means, State, Subject, Will, subjectWill}`. -/
 theorem established_will_reality (hAssert : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Asserts s p) :
     ∃ s : Subject, (∃ w : Will, w = subjectWill s) ∧ FreeWill s ∧ FreeSubject s ∧ Person s ∧ ActualEntity (EntityOf s) := by
   obtain ⟨s, p, hAss⟩ := hAssert
@@ -235,7 +235,7 @@ theorem established_will_reality (hAssert : ∃ s : Subject, ∃ p : Prop, Logos
 /-- Epistemic Discovery: Master Agential Theorem without AxIntentionalChoice.
     Under the performative normative stance, actual volitional reality is established:
     `ClaimsNormativeCorrectness s p → Chooses s (Correct s p) (Incorrect s p) → FreeWill s → FreeSubject s → Person s ∧ Will (subjectWill s) ∧ ActualEntity (EntityOf s)`.
-    Footprint: `{Initiates, Means, State, Subject, CL}` (0 substantive axioms, completely free of AxIntentionalChoice). -/
+    Footprint: `{Initiates, Means, State, Subject, Will, subjectWill, CL}` (0 substantive axioms, completely free of AxIntentionalChoice). -/
 theorem established_normative_person
     (hClaims : ∃ s : Subject, ∃ p : Prop, Logos.NormativeOrder.ClaimsNormativeCorrectness s p) :
     ∃ s : Subject, (∃ w : Will, w = subjectWill s) ∧ FreeWill s ∧ FreeSubject s ∧ Person s ∧ ActualEntity (EntityOf s) := by

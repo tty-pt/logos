@@ -267,7 +267,7 @@ Semantic transcendental bridge: the transcendental reflection on universal objec
  The transcendental position that everything is objective is held by an intentional subject upon whom its formulation depends.
     This is the natural transcendental requirement of an intentional thesis: formulating or asserting a universal thesis
     is an intentional act whose conceptual formulation depends on the subject who entertains it.
-    Audit footprint: strictly independent of `Person`, `FreeWill`, `Chooses`, `Act`, and `A14`. -/
+    Footprint: {DependsOn, Means, Subject} (strictly independent of `Person`, `FreeWill`, `Chooses`, `Act`, and `A14`). -/
 axiom transcendental_reflection_intentional :
     ∃ s : Subject, IntentionalSubject s ∧ DependsOn (DomainItem.ofProp EverythingObjective) s
 
@@ -562,7 +562,7 @@ def DeterministicTranscendentalSubjectModel : WeakenedRetorsionSignature where
 /-- Hostile Separation Theorem 1: Weakened retorsion CANNOT derive FreeWill.
     The deterministic transcendental subject model satisfies the weakened retorsion premise
     while having `¬ ∃ s, FreeWill s`.
-    Proof footprint: pure logic (`0 axioms`). -/
+    Footprint: {} (pure logic). -/
 theorem deterministic_transcendental_subject_refutes_freewill :
     ¬ (∀ I : WeakenedRetorsionSignature,
         (∃ s : I.Subject, I.IntentionalSubject s ∧ I.DependsOn (I.ofProp I.WeakenedEverythingObjective) s) →
@@ -575,7 +575,7 @@ theorem deterministic_transcendental_subject_refutes_freewill :
   exact hFW
 
 /-- Hostile Separation Theorem 2: Weakened retorsion CANNOT derive Personhood.
-    Proof footprint: pure logic (`0 axioms`). -/
+    Footprint: {} (pure logic). -/
 theorem deterministic_transcendental_subject_refutes_person :
     ¬ (∀ I : WeakenedRetorsionSignature,
         (∃ s : I.Subject, I.IntentionalSubject s ∧ I.DependsOn (I.ofProp I.WeakenedEverythingObjective) s) →
@@ -635,7 +635,7 @@ structure ArbitraryPigSignature where
 /-- Separation Theorem: Bare transcendental reflection does NOT force arbitrary predicates (such as Winged Pig).
     This proves that packing an external predicate into the transcendental dependence premise
     is a question-begging smuggling mechanism, rather than a genuine transcendental discovery.
-    Proof footprint: pure logic (`0 axioms`). -/
+    Footprint: {} (pure logic). -/
 theorem pig_retorsion_exposes_premise_smuggling :
     ¬ (∀ I : ArbitraryPigSignature,
         (∃ s : I.Subject, I.IntentionalSubject s ∧ I.DependsOn I.Thesis s) →
@@ -852,7 +852,7 @@ theorem exists_means_not_exists_dependson :
     does NOT logically entail that the thinker is a person (`A17_strong`).
     Witness 1 (`thinker`) grounds EO without free will.
     Witness 2 (`person`) has free will but does not ground EO.
-    Proof footprint: pure logic (`0 axioms`). -/
+    Footprint: {} (pure logic). -/
 theorem witness_slippage_separation :
     ¬ (∀ I : A17AnalysisSignature,
         (∃ s : I.Subject, I.Means s I.EO ∧ I.DependsOn (I.ofProp I.EO) s) ∧

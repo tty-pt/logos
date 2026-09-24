@@ -11,7 +11,9 @@ This test validates two core architectural invariants:
 
 import sys
 import copy
+import re
 from pathlib import Path
+from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
@@ -29,6 +31,7 @@ from scripts.build_deduction import (
     AX_ID,
     OUT_PATH
 )
+from scripts.sync_docstring_footprints import scan as footprint_scan
 
 
 def test_correspondence(decls: dict, node_map: dict, graph: dict, sections: list) -> None:
@@ -670,19 +673,19 @@ def test_normative_order_ground_independence(decls: dict, node_map: dict) -> Non
     audit = load_audit()
     registry = bd.load_axiom_registry(decls, node_map)
     
-    # 1. Verify model and separation declarations exist in Lean AST
-    m_sat = "Logos.NecessaryPersonalGround.normative_ground_independence_model_satisfiable"
-    sep_thm = "Logos.NecessaryPersonalGround.necessary_normative_truth_not_implies_ground"
+    # 1. Verify live independence model + separation (HostileModels Model B) exist in Lean AST
+    m_sat = "Logos.PersonalNormativeGround.HostileModels.model_b_satisfiable"
+    sep_thm = "Logos.PersonalNormativeGround.HostileModels.model_b_separation"
     assert m_sat in decls, f"Declaration '{m_sat}' missing from Lean AST"
     assert sep_thm in decls, f"Declaration '{sep_thm}' missing from Lean AST"
-    
+
     # 2. Verify audited footprints of independence model: 0 substantive axioms
     m_sat_subst = [ax for ax in audit.get(m_sat, []) if (registry.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META")]
-    assert len(m_sat_subst) == 0, f"normative_ground_independence_model_satisfiable must have 0 substantive axioms, got {m_sat_subst}"
-    
+    assert len(m_sat_subst) == 0, f"model_b_satisfiable must have 0 substantive axioms, got {m_sat_subst}"
+
     sep_thm_subst = [ax for ax in audit.get(sep_thm, []) if (registry.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META")]
-    assert len(sep_thm_subst) == 0, f"necessary_normative_truth_not_implies_ground must have 0 substantive axioms, got {sep_thm_subst}"
-    print("  ✓ Test 1 passed: NormativeGroundIndependenceModel and separation theorem proven with 0 substantive axioms.")
+    assert len(sep_thm_subst) == 0, f"model_b_separation must have 0 substantive axioms, got {sep_thm_subst}"
+    print("  ✓ Test 1 passed: Model B (satisfiable) and its separation theorem proven with 0 substantive axioms.")
     
     # 3. Verify no smuggled replacement axiom exists
     forbidden_axioms = {
@@ -822,6 +825,87 @@ def test_no_hidden_premises(decls: dict, node_map: dict) -> None:
     print("  ✓ Test passed: GroundOfReality definition is clean, non-circular, and free of hidden premises.")
 
 
+def test_docstring_footprint_sync() -> None:
+    print("Verifying every docstring Footprint marker / inline copy against formal/axiom_audit.json…")
+    mismatches, warnings, checked = footprint_scan()
+    for w in warnings:
+        print(f"  ⚠ {w}")
+    if checked == 0:
+        raise AssertionError("footprint sync checker verified zero claims — nothing tested")
+    if mismatches:
+        for mm in mismatches:
+            print(f"  ✗ {mm['full']} ({mm['file']}:{mm['line']}): doc {mm['doc']} ≠ audit {mm['audit']}")
+        raise AssertionError(f"{len(mismatches)} footprint claim(s) disagree with the audit")
+    print(f"  ✓ {checked} footprint claims verified, 0 mismatches.")
+
+
+def test_frontier_appendix_renders() -> None:
+    print("Verifying the ## Formal Frontiers appendix renders the named open bridges #7/#9…")
+    text = OUT_PATH.read_text(encoding="utf-8")
+    assert "\n## Formal Frontiers\n" in text, "README: '## Formal Frontiers' appendix missing from generated README (check presentation_policy.include_frontiers_appendix)"
+    assert "**§28 open bridges.**" in text, "OPEN_BRIDGES block missing from ## Formal Frontiers"
+    assert "#7 `NecessaryEntity e → ∃ τ, Ground e τ`" in text, "open bridge #7 literal missing"
+    assert "#9 `Ground(e, personal) → Personal(e)`" in text, "open bridge #9 literal missing"
+    print("  ✓ ## Formal Frontiers renders OPEN_BRIDGES #7/#9.")
+
+
+def test_claim_kernel_existence_walk(decls: dict, node_map: dict, sections: list) -> None:
+    """§7.6 — every GAPMAP PROVEN/PROVEN↑ row must resolve to a live kernel declaration."""
+    print("Walking GAPMAP PROVEN/PROVEN↑ rows → kernel declarations…")
+    missing = []
+    walked = 0
+    for s in sections:
+        for c in s["claims"]:
+            if c.get("status") in ("PROVEN", "PROVEN↑"):
+                walked += 1
+                full = c.get("_full")
+                if not full or full not in decls:
+                    missing.append((c["id"], c.get("lean_ref") or ""))
+    assert not missing, (
+        f"{len(missing)} PROVEN/PROVEN↑ claim(s) with no kernel declaration: "
+        + ", ".join(f"{cid} ref {ref}" for cid, ref in missing)
+    )
+    audit_doc = (ROOT / "investigations" / "kernel-audit.md").read_text(encoding="utf-8")
+    assert "**Claims whose referenced theorem is missing (MISSING)**" not in audit_doc, \
+        "kernel-audit.md reports MISSING claims (D1-class residue)"
+    print(f"  ✓ {walked} PROVEN/PROVEN↑ rows all resolved to live kernel declarations; no MISSING block.")
+
+
+def test_no_gloss_residue() -> None:
+    """§7.5 — every claim carries an English meaning in code; any no-gloss residue fails."""
+    audit_doc = (ROOT / "investigations" / "kernel-audit.md").read_text(encoding="utf-8")
+    line = next((l for l in audit_doc.splitlines() if "English meaning in code" in l), None)
+    assert line, "kernel-audit.md missing the 'English meaning in code' gloss line"
+    m = re.search(r"\*\*(\d+)\*\* / (\d+)\s*$", line)
+    assert m, f"unparsable gloss line: {line!r}"
+    got, total = int(m.group(1)), int(m.group(2))
+    assert got == total and "**no gloss:**" not in line, \
+        f"no-gloss residue: glossed {got}/{total} ({(total - got)} missing meaning strings)"
+    print(f"  ✓ Gloss coverage {got}/{total}: no missing English meaning strings.")
+
+
+def test_badge_display_mapping() -> None:
+    print("Verifying the AGENTS.md-mandated display mapping PROVEN↑ → ⚠️ AXIOMATIC (X)…")
+    assert bd._CA_STATUS_TEXT["PROVEN↑"] == "⚠️ AXIOMATIC", \
+        "claim-status text must render PROVEN↑ as AXIOMATIC"
+    assert bd.STATUS_BADGE["PROVEN↑"] == "⚠️", \
+        "stage badge for PROVEN↑ must be ⚠️"
+    sem = SimpleNamespace(
+        subst_axioms=["Logos.Semantics.strongTruthExists"],
+        name="some_proof", kind="theorem", boundary=False,
+        goal="∃ τ, NecessarilyTrue τ", conclusion=None, doc="")
+    badge = bd.compute_epistemic_badge(
+        [sem], {"strongTruthExists": {"tag": "SEM", "note": "test"}})
+    assert badge == "AXIOMATIC (strongTruthExists)", f"badge = {badge!r}"
+    meta = SimpleNamespace(
+        subst_axioms=["Logos.NecessaryNormativeOrder.ax"],
+        name="some_proof2", kind="theorem", boundary=False, goal="", conclusion=None, doc="")
+    badge2 = bd.compute_epistemic_badge(
+        [meta], {"ax": {"tag": "META", "note": "test"}})
+    assert badge2 == "AXIOMATIC (ax)", f"badge = {badge2!r}"
+    print("  ✓ PROVEN↑ → ⚠️ AXIOMATIC (named axiom); SEM and META routes verified.")
+
+
 def main():
     decls = parse_lean_sources()
     sections = parse_gapmap()
@@ -862,6 +946,12 @@ def main():
     test_no_modal_collapse(decls, node_map)
     test_no_hidden_premises(decls, node_map)
     test_no_unitarian_collapse(decls, node_map)
+    test_docstring_footprint_sync()
+    test_badge_display_mapping()
+    test_frontier_appendix_renders()
+    test_normative_order_ground_independence(decls, node_map)
+    test_claim_kernel_existence_walk(decls, node_map, sections)
+    test_no_gloss_residue()
     test_sensitivity(decls, node_map, graph, sections)
     print("\nALL DEDUCTION DEPENDENCY, READABILITY, AND SENSITIVITY TESTS PASSED SUCCESSFULLY! (0 errors)")
 

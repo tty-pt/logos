@@ -29,6 +29,12 @@ def F9 : String := "Incarnation and creation are faith data from the poem, defer
 
 def Q7_2 : String := "Research question, answered: the swap is a theorem for atoms (no axiom needed); the compound instance is unforced."
 
+def F1bUncond : String := "The unconditional existence claim ∃ s, FreeWill s is BLOCKED, as the companion row to F1b (the conditional/closed front): the missing lemma is the rejected-horn datum rejectedHornCoMeant : ∃ s p, A s p ∧ A s (¬p)."
+
+def EvalSettlement : String := "Executive settlement (executive Choice/Selects/FreeAgency) is proven independent of deliberative Chooses with no bridge axioms — separated by M_det (ExecutiveDeliberativeFrontier Track A–H). CommittedChoice bundles settlement via the Act conjunct but derives no executive causation or sourcehood; ContemplatesWithoutSettling still implies FreeWill."
+
+def OpenBridgeNormativity : String := "The positive bivalence→normativity bridge (∀ s p, Judge s p → GenuineNormativity s p (¬p), or stand-antecedent variant) is BLOCKED: bivalence alone is insufficient (M_inanimate, C167); the weak-voice route C106 closes it at SEM cost AxJudicativeBipolarity (independent via M_opaque, dispensable); the axiom-free full-stance route C164/C165 needs the stance datum; unconditional ¬NoGN is not derivable."
+
 -- Retired / blocked claims under hostile semantics
 
 def C78 : String := "Contingent ground is retired: manufactured witness destroyed under hostile semantics."

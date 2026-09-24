@@ -4336,9 +4336,11 @@ CLASSICAL_ATTRIBUTES = [
         "checks": [{"type": "decl",
                     "full": "Logos.Person.person_iff_freeIndependentWill"}],
         "refs": ["Logos.Person.IndependentWill"],
-        "sense": ("`Person(s) ↔ FreeIndependentWill(s)`; "
-                  "`subjectWill s₁ ≠ subjectWill s₂` — distinct persons have numerically "
-                  "distinct wills."),
+"sense": ("`Person(s) ↔ FreeIndependentWill(s)`; "
+                   "`subjectWill s₁ ≠ subjectWill s₂` — distinct persons have numerically "
+                   "distinct wills. The meaning-postulate status is kernel-verified: "
+                   "`will_individuation` is not derivable from the pre-will spine "
+                   "(`WillIndividuationAudit.will_individuation_not_forced_by_prewill_spine`, `{}`)."),
     },
     {
         "attribute": "**Dominion over acts** / authoritative personhood",
@@ -4878,12 +4880,14 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
         ap("")
         ap("## Formal Frontiers")
         ap("")
-        ap("Unresolved formal steps, active conjectures, and open boundaries in Γ.")
+        ap(FRONTIER_INTRO)
         ap("")
         for sec in frontiers:
             for proof in sec.get("proofs", []):
                 doc_str = f" — {proof.doc}" if proof.doc else ""
                 ap(f"* **`{proof.name}`** (`{proof.goal}`){doc_str}")
+        ap("")
+        ap(OPEN_BRIDGES)
         ap("")
 
     # 5. Classical-attributes status table (after the whole core deduction,

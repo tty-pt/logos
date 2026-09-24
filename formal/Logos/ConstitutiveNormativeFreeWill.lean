@@ -110,7 +110,7 @@ Because cognitive grasp (`Means s p ∧ Means s q`) is constitutive of an obliga
 -/
 
 /-- Theorem T1: Constitutive Normative Truth entails Normative Agency.
-    Status: PROVED (Pure logic, footprint {}). -/
+    Status: PROVED (Pure logic, footprint `{Means, Subject}`). -/
 theorem T1_constitutive_normative_truth_implies_agency
     {World : Type} (cnt : ConstitutiveNormativeTruth World)
     (dom : StrongNormativeDomain Subject World)
@@ -121,7 +121,7 @@ theorem T1_constitutive_normative_truth_implies_agency
   ⟨hMatchRight, hMatchWrong, hMatchNorm⟩
 
 /-- Theorem T2: Constitutive Normative Truth entails Normative Alternative.
-    Status: PROVED (Pure logic, footprint {}). -/
+    Status: PROVED (Pure logic, footprint `{Means, Subject}`). -/
 theorem T2_constitutive_normative_truth_implies_alternative
     {World : Type} (cnt : ConstitutiveNormativeTruth World)
     (dom : StrongNormativeDomain Subject World)
@@ -132,7 +132,7 @@ theorem T2_constitutive_normative_truth_implies_alternative
   ⟨⟨hMatchRight, hMatchWrong, hMatchNorm⟩, cnt.incompatible, cnt.distinct⟩
 
 /-- Theorem T3: Constitutive Normative Truth directly entails Chooses.
-    Status: PROVED (Pure logic, footprint {}). -/
+    Status: PROVED (Pure logic, footprint `{Means, Subject}`). -/
 theorem T3_constitutive_normative_truth_implies_chooses
     {World : Type} (cnt : ConstitutiveNormativeTruth World) :
     Chooses cnt.s cnt.p cnt.q :=
@@ -140,7 +140,7 @@ theorem T3_constitutive_normative_truth_implies_chooses
 
 /-- Theorem T4: Direct derivation of FreeSubject and FreeWill from Constitutive Normative Truth.
     AxIntentionalChoice is completely eliminated.
-    Status: PROVED (Pure logic, footprint {}). -/
+    Status: PROVED (Pure logic, footprint `{Means, Subject}`). -/
 theorem T4_constitutive_normative_truth_implies_free_will
     {World : Type} (cnt : ConstitutiveNormativeTruth World) :
     FreeSubject cnt.s ∧ FreeWill cnt.s := by
@@ -154,7 +154,7 @@ def NecessaryConstitutiveNormativity (World : Type) : Prop :=
 
 /-- Theorem T5: Necessary Constitutive Normative Truth entails the necessary existence of Free Will
     (□ ∃ s, FreeWill s) with pure logic and zero external axioms.
-    Status: PROVED (Pure logic, footprint {}). -/
+    Status: PROVED (Pure logic, footprint `{Means, Subject}`). -/
 theorem T5_necessary_constitutive_normativity_implies_necessary_free_will
     {World : Type}
     (hNec : NecessaryConstitutiveNormativity World) :
@@ -189,7 +189,7 @@ structure ConstitutiveDeonticTruth
   actual_law : mctx.W.laws cnt.w
 
 /-- Theorem: Constitutive Deontic Truth directly yields GenuineChooses.
-    Status: PROVED (Pure logic, footprint {}). -/
+    Status: PROVED (Pure logic, footprint `{Means, Subject}`). -/
 theorem constitutive_deontic_truth_implies_genuine_chooses
     {World PriorState FutureState : Type}
     {mctx : MetaphysicalAvailabilityContext World PriorState Subject FutureState}
@@ -200,7 +200,7 @@ theorem constitutive_deontic_truth_implies_genuine_chooses
 
 /-- Theorem T6: Necessary Constitutive Deontic Truth entails the necessary existence of
     Genuine Free Subjects across all lawful worlds.
-    Status: PROVED (Footprint {}). -/
+    Status: PROVED (Footprint `{Means, Subject}`). -/
 theorem T6_necessary_deontic_truth_implies_necessary_genuine_free_subject
     {World PriorState FutureState : Type}
     (mctx : MetaphysicalAvailabilityContext World PriorState Subject FutureState)
@@ -214,7 +214,7 @@ theorem T6_necessary_deontic_truth_implies_necessary_genuine_free_subject
   exact ⟨cdt.cnt.s, cdt.cnt.p, cdt.cnt.q, hGC⟩
 
 /-- Theorem T7: Necessary Constitutive Deontic Truth entails the refutation of Nomological Determinism D3.
-    Status: PROVED (Footprint {}). -/
+    Status: PROVED (Footprint `{Means, Subject}`). -/
 theorem T7_necessary_deontic_truth_implies_not_d3
     {World PriorState FutureState : Type}
     (mctx : MetaphysicalAvailabilityContext World PriorState Subject FutureState)

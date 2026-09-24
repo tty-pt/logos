@@ -39,6 +39,7 @@ import Logos.A14SemanticAudit
 import Logos.PostA14Frontier
 import Logos.DefinitiveAgencyFrontier
 import Logos.AxiomNegationAudit
+import Logos.WillIndividuationAudit
 import Logos.JointForcing
 import Logos.NegativeRetorsionAudit
 import Logos.ExecutiveDeliberativeFrontier

@@ -139,9 +139,10 @@ The roadmap step #4/#5 (subject necessity → entity necessity) is executed:
   close T7 — the uniform ground of a necessary truth stays
   `AxGlobalGround`-priced (C18). Prose base.txt
   §26/§27/§28/§29 and theorems/T7.txt (Passo A) updated accordingly.
-- Still requires proof (recorded in base.txt §28): an independent bridge
-  `NecessaryEntity e → ∃τ, Ground e τ` (step #7, without AxGlobalGround) and
-  `Ground(e, personal) → Personal(e)` (step #9, without AxPersonalGround).
+- Still requires proof (recorded literally in base.txt §28 and rendered in the
+  generated README "## Formal Frontiers" appendix + OPEN_BRIDGES): an independent
+  bridge `NecessaryEntity e → ∃τ, Ground e τ` (step #7, without AxGlobalGround)
+  and `Ground(e, personal) → Personal(e)` (step #9, without AxPersonalGround).
 
 ## Batch freedom/choice fix (2026-09-18) — `Chooses` is genuine choice, `FreeWill` is definitional
 
@@ -504,6 +505,14 @@ Will layer (all VOCAB, `Logos.Agency` A16–A20): `Will` (Type of volitional
 faculties), `subjectWill : Subject → Will` (A17), `will_individuation` (A18 —
 constitutive MEANING-POSTULATE, injectivity of `subjectWill`, **declared not
 derived**), `Wills` (A19), `Ought` (A20).
+Independence machine-witnessed — a **kernel fact** (2026-09-24), not a derivation gap:
+the hostile model `Subject := Bool`, `Will := Unit`, `subjectWill := fun _ => ()` satisfies the
+pre-will spine with its performative datum (`WillIndividuationAudit.hostile_model_satisfies_prewill_spine`,
+`{}`), and there the law **arrives at a contradiction**: forcing `will_individuation` on this
+model demands `subjectWill true ≠ subjectWill false` while both sides are `()`
+(`hostile_model_refutes_will_individuation`, `{}`). Spine + law is inconsistent, spine alone
+satisfiable ⇒ the law is not a consequence of the spine
+(`will_individuation_not_forced_by_prewill_spine`, `{}`) — A18's VOCAB status is kernel-verified (§5.1).
 
 ### 14-Row Candidate Derivation Route Audit Table (`Act s p` to `Means s (¬p)`):
 
@@ -732,6 +741,9 @@ A campanha em `Logos.AxiomNegationAudit` executou a busca sistemática por neces
 | F4 | §28 Love | PROVEN↑ | `Love.T13_someoneLovable` (C41) under `{AxTwoSubjects, Means, Subject}` |
 | F5 | §28 EternalRelation | → PROVEN↑ | dissolved in C42: `Love.T14_eternalRelation_conditional` under `{AxTwoSubjects, Means, Subject}` |
 | F6 | §28 Trinity | DEFERRED | no argument exists yet (§28/§29) |
+| F1bUncond | §15 unconditional `∃ s, FreeWill s` | BLOCKED | companion row to F1b (which is the conditional/PROVEN↑ front): the unconditional existence claim stays BLOCKED — missing lemma `rejectedHornCoMeant : ∃ s p, A s p ∧ A s (¬p)` |
+| EvalSettlement | §3 executive settlement (executive `Choice` vs deliberative `Chooses`) | PROVEN | `ExecutiveDeliberativeFrontier.M_det` / `M_det_validates_executive_choice`: separation — executive `Selects`/`Choice`/`FreeAgency` is independent of deliberative `Chooses` with NO bridge axioms (`M_det`, `ExecutiveDeliberativeFrontier` Track A–H); `CommittedChoice` bundles settlement via the `Act` conjunct but derives no executive causation/sourcehood; `ContemplatesWithoutSettling` still implies `FreeWill` |
+| OpenBridgeNormativity | §0.10 positive bridge bivalence → `GenuineNormativity` (`∀ s p, Judge s p → GenuineNormativity s p (¬p)` or stance-antecedent variant) | BLOCKED | bivalence alone is insufficient — `M_inanimate` (C167, `{}`); the weak-voice route C106 closes it at SEM cost `AxJudicativeBipolarity` (independent via `M_opaque`, dispensable); the axiom-free full-stance route C164/C165 requires the stance datum; unconditional `¬NoGN` is not derivable |
 | Q7.2 | weaker `AxGlobalGround` | ANSWERED | answered by batch A2-swap-theorem: for atoms the swap needs no premise at all (definitional via world-vacuous `ExistsAt`); the compound instance is unforced, not weaken-able (DESIGN.md) |
 
 ## Level 3 — modal, choice, interpersonal value (new: poem chain)
@@ -1005,36 +1017,40 @@ contradicts itself. RETHINKING-COGITO.md records the parallel in full.
 
 Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-theorem figures below):
 
-- **PROVEN** (no axioms beyond `CL` where marked) — **45 axiom-free** (`{}`):
-  C1, C2, C4–C9, C11, C21–C24, C26–C29, C31, C35, C36, C38, C39,
-  C48–C54, C56–C58, C61–C68 (C62: pure bridges `{}`; full conditional `CL`),
-  C73–C79
-  (definitional plurality, plenum seed, canonical rigid love, contingent ground, substantive ultimate ground), F1a
-  (choice-**field** existence resolves to a kernel step; renamed 2026-09-18, the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
-  `CL`-only: C3, C10, C12–C14, C25, C30, C37, C55, C59, C93.
-  Vocab-only (`{Ground}` — the statement's own vocabulary): C15, C16, C17,
-  C18, C20, C34, C60 (denial refutes itself by definition — RAA;
-  esse-est-agere drops `ExistsAt`, now a def; A2-swap-theorem drops
-  `AxGlobalGround`, now a theorem).
-  New (lift-necessário, 2026-09-18): **C91** — vocab-only
-  (`{Subject}`); hostile separations `{}`. C92 (the vocab-only lift
-  `{Means, Subject}` from that batch) later became the conditional
-  `Love.necessary_entity_exists_conditional` — removed from the kernel
-  (ae7f4bd), DEMOVIDO para DEFERRED.
-  C62 (`rightWrong_implies_meaning`) is the pure bridge: with the §8
-  act-relative `Correct`/`Incorrect`, right/wrong unfold to a `Means`-act;
-  the bare-distinction form `rightWrongDistinction_implies_meaning` is `CL`.
-- **PROVEN↑** (under flagged SEM/META only — no foundation axiom remains):
-  C32, C33, C40–C47, F4, F5.
+- **PROVEN** (status PROVEN/PROVEN↑ whose audit footprint carries **no SEM/META
+  axiom** — machine re-derived from `formal/axiom_audit.json`, 2026-09-24):
+  - **25 truly axiom-free** (`{}`): C1, C2, C4–C9, C11, C17, C22, C26, C27,
+    C31, C35, C36, C38, C50, C63, C95, C96, C108, C111, C166, C167.
+  - **9 `CL`-only**: C3, C10, C12–C14, C16, C37, C59, C93.
+  - **68 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+    C21, C23–C25, C30, C39, C49, C51–C53, C55–C58, C62, C68, C83–C86, C91,
+    C94, C97–C105, C107, C113, C114, C116, C120–C122, C137–C142, C144, C145,
+    C147–C156, C160–C165, C168–C172, F1a.
+    F1a is the choice-**field** existence form (resolves to a kernel step;
+    renamed 2026-09-18 — the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
+  - **C91** — vocab-only (`{Subject}`); hostile separations `{}`. C92 (the
+    vocab-only lift `{Means, Subject}`) became `Love.necessary_entity_exists_conditional`,
+    removed from the kernel (ae7f4bd) — DEMOVIDO para DEFERRED.
+  - **C62** (`rightWrong_implies_meaning`) is the pure bridge: with the §8
+    act-relative `Correct`/`Incorrect`, right/wrong unfold to a `Means`-act;
+    the bare-distinction form `rightWrongDistinction_implies_meaning` is `CL`.
+  - Former "axiom-free" range **C73–C79 split out**: C73 (two-persons) and C75
+    (propositional necessity) are BLOCKED under hostile semantics; C76 retired
+    (canonical rigid love); C77 DEMOTED → DEFERRED (ae7f4bd); C78/C79 BLOCKED —
+    see the BLOCKED/retired blocks and the `## Formal Frontiers` inventory.
+    Of that range only C74 (`aloneExcluded`) survives, as PROVEN↑ (below).
+- **PROVEN↑** (fully machine-verified under the flagged SEM/META axiom shown —
+  no foundation axiom remains): **22 claims** —
+  `AxTwoSubjects` (14): C28, C29, C40–C48, C54, C61, C74;
+  `AxJudicativeBipolarity` (4): C106, C157–C159;
+  `AxSecondPersonalAddress` (2): C118, C119;
+  `AxIntentionalChoice` (1): F1b (`freeWill_exists`);
+  F4 shares the C41 decl (`T13_someoneLovable`).
   (`Cogito` is proven — the M0 forced-foundation axiom is retired, its
-  degenerate `fun h => h Cogito` with it. `AxPersonalGround` (META, T8)
-  is the remaining Level-2 price alongside `GroundPrincipleProp` (SEM);
-  `AxTwoSubjects` was **retired** by the plurality-discharge (2026-09-17 —
-  canonical pair C73, `ALONE_EXCLUDED` C74);
-  `actualWorld` is a def;
+  degenerate `fun h => h Cogito` with it. `actualWorld` is a def;
   `Exists`/`Content`/`Agent`/`Rational` are analytical defs; `Affects` is the A3
   definition `s ≠ t`; `AxPersonsAffect`, `AxPersonStability` and now
-  `AxGlobalGround` (atom-restricted) are theorems.)
+  `AxGlobalGround` (atom-restricted) are theorems — see "Axioms dissolved" below.)
 - **BLOCKED**: C19 (T7 excluded-middle instance — missing lemma `∃ e,
   Ground e (or θ (not θ))`; transcript in `formal/Spikes/Spike_A6_probe.lean`);
   C69–C72 (retired origin-freedom witnesses) and F1b (genuine choice —

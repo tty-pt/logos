@@ -165,7 +165,7 @@ We formally separate:
 -/
 
 /-- Objective Logical Polarity: Correctness and Incorrectness are strictly incompatible.
-    Footprint: {} (pure logic). -/
+    Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem correctness_and_incorrectness_incompatible (s : Subject) (p : Prop) :
     Incompatible (Logos.Order.Correct s p) (Logos.Order.Incorrect s p) := by
   intro ⟨hCorr, hInc⟩

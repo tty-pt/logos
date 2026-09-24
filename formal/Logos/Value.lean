@@ -120,7 +120,7 @@ axiom AxTwoSubjects :
 
  `aloneExcluded` — under `AxTwoSubjects`, a lone person is excluded:
     there exist distinct persons, so no single subject can encompass all subjects.
-    Footprint: `{AxTwoSubjects}`. -/
+    Footprint: `{AxTwoSubjects, Means, Subject}`. -/
 theorem aloneExcluded : ¬ ∃ s : Subject, Person s ∧ Alone s := by
   intro ⟨s, _, ha⟩
   obtain ⟨s₁, s₂, _, _, hne⟩ := AxTwoSubjects Logos.Core.rightWrongDistinction

@@ -449,7 +449,7 @@ theorem joint_satisfiability_synthesis :
 /-- Empty Inconsistency Basis Theorem:
     Because the full substantive set S is satisfiable, no subset Δ ⊆ S can be inconsistent
     with Γ_core. The Minimal Inconsistent Subset basis MIS(S) is empty.
-    Footprint: {}. -/
+    Footprint: `{propext}`. -/
 theorem empty_inconsistency_basis :
     ¬ ∃ (Δ : List Prop), (∀ p ∈ Δ, p = True) ∧ (Δ = [False]) := by
   rintro ⟨Δ, hAll, hEq⟩
@@ -469,7 +469,7 @@ theorem empty_inconsistency_basis :
     3. Retorsive Synergy: {A6, A7} jointly forces NonTrivialOntology, while neither alone does.
     4. Cross-Frontier Barrier: {A6, A7} does not force AxIntentionalChoice.
     5. Joint Satisfiability: All substantive axioms are simultaneously compossible with Γ_core.
-    Footprint: {}. -/
+    Footprint: `{propext}`. -/
 theorem joint_forcing_synthesis :
     -- 1. Contextual Redundancy
     (∀ J, A2_AxActPolarity J → A1_AxIntentionalChoice J) ∧

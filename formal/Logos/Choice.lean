@@ -120,7 +120,7 @@ def Meaning_I (p : Prop) : Prop := ∃ s : Subject, Means s p
 
  The subject of a meaning is a constituent of `Meaning_I`, so asserting
     that something is meant while denying that any subject means it is a
-    contradiction — footprint `{}`, for every model. (The bare relational form
+    contradiction — footprint `{Means, Subject}`, for every model. (The bare relational form
     `Means s p → ∃t, Means t p` is `meaning_needs_subject` just below.) -/
 theorem meaning_I_needs_subject {p : Prop} (h : Meaning_I p) :
     ∃ s : Subject, Means s p :=
@@ -360,7 +360,7 @@ theorem noSubject_contradicts_subject
   `Asserts s p := Act s p ∧ p`; the asserted content is a *truth-claim*.
      The performative act, qua assertion, is therefore single-horned by
      definition — the "asserting is choosing" route to genuine choice is
-     impossible (hostile milestone 2026-09-18). Footprint `{Means, Subject}`. -/
+     impossible (hostile milestone 2026-09-18). Footprint `{Initiates, Means, State, Subject}`. -/
 theorem assertion_consistency {s : Subject} {p : Prop} (h : Asserts s p) :
     ¬ Asserts s (¬ p) := by
   intro hn
@@ -371,7 +371,7 @@ theorem assertion_consistency {s : Subject} {p : Prop} (h : Asserts s p) :
   General form: assertion (the truth-laden performative) can NEVER constitute
      a two-horned genuine choice — `Asserts` is consistent. Genuine choice
      would have to come from *meaning* (truth-neutral `Means`), not from
-     asserting. Footprint `{Means, Subject}`. -/
+     asserting. Footprint `{Initiates, Means, State, Subject}`. -/
 theorem no_one_asserts_incompatible_pair :
     ¬ ∃ s : Subject, ∃ p q : Prop, Asserts s p ∧ Asserts s q ∧ Incompatible p q := by
   rintro ⟨s, p, q, ha, hb, hI⟩
@@ -1170,8 +1170,8 @@ theorem descriptive_act_implies_genuineChoice
 
 /--No one can assert "there is no strong truth": the act of denying the
   world-level datum is destroyed by the datum itself (assertive retorsion of
-  C93, completing the retorsion family at the assertion level; footprint
-  {Means, Subject, CL}). -/
+  C93, completing the retorsion family at the assertion level).
+    Footprint: {Initiates, Means, State, Subject, CL}. -/
 theorem noStrongTruth_assertable_refutes (speaker : Subject) :
     Asserts speaker (¬ ∃ τ : Form, NecessarilyTrue τ) → False := by
   intro h

@@ -108,7 +108,7 @@ def SelfLegislation (s : Subject) : Prop :=
     If practical obligation is exhausted by the subject's own will, then whenever the
     subject wills the contrary (SubjectWills s a.neg), the original obligation evaporates.
     Consequently, genuine normative violation is logically impossible.
-    Footprint: `{}` (zero substantive axioms). -/
+    Footprint: `{Ought, Subject, Wills}` (zero substantive axioms). -/
 theorem self_grounded_ought_collapses
     {s : Subject} (hSelf : SelfLegislation s)
     (a : PracticalAction)
@@ -125,7 +125,7 @@ theorem self_grounded_ought_collapses
 /-- Theorem: Performative Incoherence of Asserting Self-Legislation.
     Asserting that an act is objectively obligatory while claiming that its obligatoriness
     is identical to one's own will collapses the distinction between duty and preference.
-    Footprint: `{}` (zero substantive axioms). -/
+    Footprint: `{Ought, Subject, Wills}` (zero substantive axioms). -/
 theorem self_grounded_assertion_incoherent
     {s : Subject} {a : PracticalAction}
     (hOught : Ought s s a)
@@ -218,7 +218,7 @@ axiom AxSecondPersonalAddress :
 /-- Theorem: Derivation of Plurality from Objective Ought under AxSecondPersonalAddress.
     Under the second-personal address bridge, an objective practical ought derives a distinct
     person, establishing interpersonal plurality.
-    Footprint: `{AxSecondPersonalAddress, Means, Subject}`. -/
+    Footprint: `{AxSecondPersonalAddress, Means, Ought, Subject}`. -/
 theorem second_personal_ought_derives_plurality
     {s : Subject} {a : PracticalAction}
     (hOught : ObjectiveOught s a) :
@@ -227,7 +227,7 @@ theorem second_personal_ought_derives_plurality
   exact ⟨r, hp, hne⟩
 
 /-- Theorem: A lone subject cannot possess second-personal practical ought under AxSecondPersonalAddress.
-    Footprint: `{AxSecondPersonalAddress, Means, Subject}`. -/
+    Footprint: `{AxSecondPersonalAddress, Means, Ought, Subject}`. -/
 theorem lone_subject_excludes_second_personal_ought
     {s : Subject} (ha : Alone s) (a : PracticalAction) :
     ObjectiveOught s a → False := by

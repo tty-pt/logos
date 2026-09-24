@@ -49,7 +49,7 @@ def NoI_canonical : Prop := ¬ P_canonical
 def NoI_pointwise_canonical : Prop := ∀ s : Subject, ¬ IntentionalSubject s
 
 /-- Theorem: Equivalence of existential negation and universal negative quantification.
-    Classification: LOGICAL. Footprint: `{}`. -/
+    Classification: LOGICAL. Footprint: `{Means, Subject}`. -/
 theorem noi_canonical_iff_pointwise : NoI_canonical ↔ NoI_pointwise_canonical := by
   constructor
   · intro hNotExists s hInt
@@ -181,7 +181,7 @@ theorem level0_noi_incompatible_with_a17 (S : NegativeRetorsionSignature) :
   exact hNoI ⟨s, hInt⟩
 
 /-- Canonical Γ Theorem: In the existing Γ library, NoI contradicts A17.
-    Classification: SEMANTIC. Footprint: depends on A17. -/
+    Classification: SEMANTIC. Footprint: {DependsOn, Means, Subject, transcendental_reflection_intentional}. -/
 theorem canonical_noi_contradicts_a17 : NoI_canonical → False := by
   intro hNoI
   have hA17 := transcendental_reflection_intentional
@@ -200,7 +200,7 @@ Since `IntentionalSubject s := ∃ p, Means s p`, meaning NoI instantly witnesse
 
 /-- Canonical Fundamental Theorem of Negative Retorsion:
     Under NoI, no subject can mean NoI.
-    Classification: DEFINITIONAL. Footprint: `{}`. -/
+    Classification: DEFINITIONAL. Footprint: `{Means, Subject}`. -/
 theorem canonical_noi_implies_not_means (s : Subject) :
     NoI_canonical → ¬ Means s NoI_canonical := by
   intro hNoI hMeans
@@ -208,21 +208,21 @@ theorem canonical_noi_implies_not_means (s : Subject) :
   exact hNoI ⟨s, hInt⟩
 
 /-- Existential form: Under NoI, no subject meaning NoI exists.
-    Classification: DEFINITIONAL. Footprint: `{}`. -/
+    Classification: DEFINITIONAL. Footprint: `{Means, Subject}`. -/
 theorem canonical_noi_implies_not_exists_means :
     NoI_canonical → ¬ ∃ s : Subject, Means s NoI_canonical := by
   intro hNoI ⟨s, hMeans⟩
   exact canonical_noi_implies_not_means s hNoI hMeans
 
 /-- Positive retorsion: Any subject meaning NoI proves that an intentional subject exists!
-    Classification: DEFINITIONAL. Footprint: `{}`. -/
+    Classification: DEFINITIONAL. Footprint: `{Means, Subject}`. -/
 theorem canonical_means_noi_proves_P (s : Subject) :
     Means s NoI_canonical → P_canonical := by
   intro hMeans
   exact ⟨s, NoI_canonical, hMeans⟩
 
 /-- Refutation of NoI: Meaning NoI refutes the content NoI.
-    Classification: DEFINITIONAL. Footprint: `{}`. -/
+    Classification: DEFINITIONAL. Footprint: `{Means, Subject}`. -/
 theorem canonical_means_noi_refutes_noi (s : Subject) :
     Means s NoI_canonical → ¬ NoI_canonical := by
   intro hMeans hNoI
@@ -247,7 +247,7 @@ meaning NoI AND the truth of NoI. This is unconditionally self-contradictory.
 -/
 
 /-- Canonical Theorem: No subject can assert NoI under NoI.
-    Classification: DEFINITIONAL. Footprint: `{}`. -/
+    Classification: DEFINITIONAL. Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem canonical_noi_implies_not_asserts (s : Subject) :
     NoI_canonical → ¬ Asserts s NoI_canonical := by
   intro hNoI hAssert
@@ -256,7 +256,7 @@ theorem canonical_noi_implies_not_asserts (s : Subject) :
   exact canonical_noi_implies_not_means s hNoI hMeans
 
 /-- Canonical Theorem: Under NoI, no assertion of NoI exists.
-    Classification: DEFINITIONAL. Footprint: `{}`. -/
+    Classification: DEFINITIONAL. Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem canonical_noi_implies_not_exists_asserts :
     NoI_canonical → ¬ ∃ s : Subject, Asserts s NoI_canonical := by
   intro hNoI ⟨s, hAssert⟩
@@ -264,7 +264,7 @@ theorem canonical_noi_implies_not_exists_asserts :
 
 /-- The Fundamental Assertive Retorsion:
     Actually asserting NoI is unconditionally self-refuting (proves False).
-    Classification: DEFINITIONAL. Footprint: `{}`. -/
+    Classification: DEFINITIONAL. Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem canonical_asserts_noi_selfRefutes (s : Subject) :
     Asserts s NoI_canonical → False := by
   intro hAssert
@@ -275,7 +275,7 @@ theorem canonical_asserts_noi_selfRefutes (s : Subject) :
 
 /-- Existential Assertive Retorsion:
     Existence of any assertion of NoI derives False.
-    Classification: DEFINITIONAL. Footprint: `{}`. -/
+    Classification: DEFINITIONAL. Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem canonical_exists_asserts_noi_selfRefutes :
     (∃ s : Subject, Asserts s NoI_canonical) → False := by
   rintro ⟨s, hAssert⟩
@@ -326,32 +326,32 @@ Acting on NoI does NOT imply False by itself, but it strictly proves P (refuting
 -/
 
 /-- Canonical Theorem: Under NoI, no subject can perform an act with content NoI.
-    Classification: DEFINITIONAL. Footprint: `{}`. -/
+    Classification: DEFINITIONAL. Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem canonical_noi_implies_not_act (s : Subject) :
     NoI_canonical → ¬ Act s NoI_canonical := by
   intro hNoI hAct
   exact canonical_noi_implies_not_means s hNoI hAct.1
 
 /-- Existential form: Under NoI, no act positing NoI exists.
-    Classification: DEFINITIONAL. Footprint: `{}`. -/
+    Classification: DEFINITIONAL. Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem canonical_noi_implies_not_exists_act :
     NoI_canonical → ¬ ∃ s : Subject, Act s NoI_canonical := by
   intro hNoI ⟨s, hAct⟩
   exact canonical_noi_implies_not_act s hNoI hAct
 
 /-- Positive Retorsion: Performing an act on NoI proves that an intentional subject exists!
-    Classification: DEFINITIONAL. Footprint: `{}`. -/
+    Classification: DEFINITIONAL. Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem canonical_act_noi_proves_P (s : Subject) :
     Act s NoI_canonical → P_canonical := by
   intro hAct
   exact ⟨s, NoI_canonical, hAct.1⟩
 
 /-- Refutation: Performing an act on NoI refutes NoI.
-    Classification: DEFINITIONAL. Footprint: `{}`. -/
+    Classification: DEFINITIONAL. Footprint: `{Initiates, Means, State, Subject}`. -/
 theorem canonical_act_noi_refutes_noi (s : Subject) :
-    Act s NoI_canonical → ¬ NoI_canonical := by
-  intro hAct hNoI
-  exact canonical_noi_implies_not_act s hNoI hAct
+    Act s NoI_canonical → P_canonical := by
+  intro hAct
+  exact ⟨s, NoI_canonical, hAct.1⟩
 
 /-- Distinction: An intentional act positing NoI is NOT contradictory on its own;
     it simply establishes that NoI is false (the agent is mistaken about the universe).
@@ -479,7 +479,7 @@ Strict answers:
     Unless an external injection from Prop into Subject is postulated,
     propositions and subjects are categorically distinct types in Lean's CIC.
     NoI := ∀ s : Subject, ¬ IntentionalSubject s quantifies exclusively over Subject.
-    Classification: DISSOLVED. Footprint: `{}`. -/
+    Classification: DISSOLVED. Footprint: `{Means, Subject}`. -/
 theorem level5_noi_cannot_self_apply :
     ∀ s : Subject, IntentionalSubject s → ∃ p : Prop, Means s p := by
   intro s hInt
@@ -487,7 +487,7 @@ theorem level5_noi_cannot_self_apply :
 
 /-- Formal proof that Big-O self-inclusion requires a domain item constructor,
     which is absent from the Subject sort.
-    Classification: DEFINITIONAL. Footprint: `{}`. -/
+    Classification: DEFINITIONAL. Footprint: `{DependsOn, Means, Subject}`. -/
 theorem level5_domain_item_versus_subject_sort :
     (∃ (wrap : Prop → DomainItem), wrap EverythingObjective = DomainItem.ofProp EverythingObjective) ∧
     (∀ (s : Subject), s = s) := by

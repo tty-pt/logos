@@ -25,26 +25,26 @@ open Logos.Choice (Chooses FreeWill FreeSubject ChoiceField)
 /-- Person: a subject possessing a numerically distinct free will.
     In the unified Γ ontology, Personhood is constitutively defined as the possession
     of genuine free will (`Person s := FreeSubject s`).
-    Footprint: `{}`. -/
+    Footprint: `{Means, Subject}`. -/
 def Person (s : Subject) : Prop := FreeSubject s
 
 /-- Master Theorem: Every Free Subject is a Person.
-    Footprint: `{}`. -/
+    Footprint: `{Means, Subject}`. -/
 theorem free_subject_is_person (s : Subject) (h : FreeSubject s) : Person s :=
   h
 
 /-- Master Equivalence: Personhood is constitutively equivalent to Free Subjecthood.
-    Footprint: `{}`. -/
+    Footprint: `{Means, Subject}`. -/
 theorem person_iff_freeSubject (s : Subject) : Person s ↔ FreeSubject s :=
   Iff.rfl
 
 /-- Master Equivalence: Personhood is constitutively equivalent to Free Will.
-    Footprint: `{}`. -/
+    Footprint: `{Means, Subject}`. -/
 theorem person_iff_freeWill (s : Subject) : Person s ↔ FreeWill s :=
   Iff.rfl
 
 /-- Every Person possesses Free Will.
-    Footprint: `{}`. -/
+    Footprint: `{Means, Subject}`. -/
 theorem person_has_free_will (s : Subject) (h : Person s) : FreeWill s :=
   h
 
@@ -84,13 +84,13 @@ def ThomisticPersonCore (s : Subject) : Prop :=
   IndividualSubstance s ∧ RationalNature s ∧ DominionOverActs s
 
 /-- Free, independent will entails the Thomistic person core.
-    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem freeIndependentWill_implies_thomisticCore (s : Subject)
     (h : FreeIndependentWill s) : ThomisticPersonCore s := by
   exact ⟨h.2, ⟨Logos.Choice.freeSubject_implies_intentional s h.1, h.1⟩, h.1⟩
 
 /-- Thomistic person core entails free, independent will.
-    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem thomisticCore_implies_freeIndependentWill (s : Subject)
     (h : ThomisticPersonCore s) : FreeIndependentWill s := by
   obtain ⟨hInd, hRN, _hDom⟩ := h
@@ -98,7 +98,7 @@ theorem thomisticCore_implies_freeIndependentWill (s : Subject)
 
 /-- Master Equivalence: free, independent will is equivalent to the
     Thomistic person core.
-    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem freeIndependentWill_iff_thomisticCore (s : Subject) :
     FreeIndependentWill s ↔ ThomisticPersonCore s := by
   constructor
@@ -106,14 +106,14 @@ theorem freeIndependentWill_iff_thomisticCore (s : Subject) :
   · exact thomisticCore_implies_freeIndependentWill s
 
 /-- Numerical individuation guarantees that every subject possesses an independent will.
-    Footprint: `{subjectWill, will_individuation, Subject}`. -/
+    Footprint: `{Subject, Will, subjectWill, will_individuation}`. -/
 theorem independent_will_of_subject (s : Subject) : IndependentWill s :=
   fun s' hne => Logos.Agency.will_individuation s' s hne
 
 /-- Master Equivalence: Personhood is constitutively equivalent to Free, Independent Will.
     A person is a subject possessing a free will that is genuinely its own,
     not numerically identical with another subject's will.
-    Footprint: `{subjectWill, will_individuation, Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem person_iff_freeIndependentWill (s : Subject) : Person s ↔ FreeIndependentWill s := by
   constructor
   · intro hp
@@ -122,12 +122,12 @@ theorem person_iff_freeIndependentWill (s : Subject) : Person s ↔ FreeIndepend
     exact hFW
 
 /-- Master Theorem: Every Person possesses a Free, Independent Will.
-    Footprint: `{subjectWill, will_individuation, Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem person_has_free_independent_will (s : Subject) (h : Person s) : FreeIndependentWill s :=
   (person_iff_freeIndependentWill s).mp h
 
 /-- Master Theorem: Every Subject with a Free, Independent Will is a Person.
-    Footprint: `{subjectWill, will_individuation, Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem free_independent_will_is_person (s : Subject) (h : FreeIndependentWill s) : Person s :=
   (person_iff_freeIndependentWill s).mpr h
 
@@ -155,7 +155,7 @@ theorem person_hasChoiceField {s : Subject} (hs : Person s) : ∃ p q : Prop, Ch
   exact ⟨p, q, hCh.1, hCh.2.2⟩
 
 /-- Act implies an intentional subject.
-    Footprint: `{Means, Subject}` (VOCAB). -/
+    Footprint: `{Initiates, Means, State, Subject}` (VOCAB). -/
 theorem act_implies_intentionalSubject {s : Subject} {p : Prop} (h : Logos.Agency.Act s p) :
     IntentionalSubject s :=
   ⟨p, h.1⟩

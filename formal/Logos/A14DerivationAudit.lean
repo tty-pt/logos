@@ -64,15 +64,15 @@ def NormativeActionChoice {World : Type}
 
 /-- Theorem: For any genuine normative truth, the commanded act constitutively
     yields an incompatible alternative grasped by the subject, deriving Chooses.
-    Status: PROVED (Pure logic, footprint {}). -/
-theorem normative_action_yields_choice
+Status: PROVED (Pure logic, footprint `{Means, Subject}`). -/
+    theorem normative_action_yields_choice
     {World : Type} (cnt : ConstitutiveNormativeTruth World) :
     ∃ q : Prop, Chooses cnt.s cnt.p q :=
   ⟨cnt.q, T3_constitutive_normative_truth_implies_chooses cnt⟩
 
 /-- Theorem: The normative route strictly derives FreeSubject and FreeWill for the normative agent.
-    Status: PROVED (Pure logic, footprint {}). -/
-theorem normative_route_derives_free_will
+Status: PROVED (Pure logic, footprint `{Means, Subject}`). -/
+    theorem normative_route_derives_free_will
     {World : Type} (cnt : ConstitutiveNormativeTruth World) :
     FreeSubject cnt.s ∧ FreeWill cnt.s :=
   T4_constitutive_normative_truth_implies_free_will cnt
@@ -201,8 +201,8 @@ def UniversalActPolarity (Subj : Type) (ActRel : Subj → Prop → Prop)
   ∀ (s : Subj) (p : Prop), ActRel s p → MeansRel s (¬ p)
 
 /-- Theorem: Universal Act Polarity strictly entails Universal A14.
-    Status: PROVED (Pure logic, footprint {}). -/
-theorem polarity_entails_universal_a14
+Status: PROVED (Pure logic, footprint `{propext}`). -/
+    theorem polarity_entails_universal_a14
     {Subj : Type} (ActRel : Subj → Prop → Prop) (MeansRel : Subj → Prop → Prop)
     (ChoosesRel : Subj → Prop → Prop → Prop)
     (hActMeans : ∀ s p, ActRel s p → MeansRel s p)
