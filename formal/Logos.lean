@@ -75,3 +75,5 @@ import Logos.MoralFrontierAudit
 import Logos.CanonicalAseity
 -- Proof-presentation retorsion, syntactic checker separation, and adversarial audit.
 import Logos.ProofPresentationRetorsion
+-- Classical divine simplicity and ontological transcendence.
+import Logos.DivineSimplicity

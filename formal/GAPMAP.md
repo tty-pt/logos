@@ -1060,10 +1060,11 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     C111, C166, C167. (C175 is also `{}`, but its ledger status is COUNTERMODEL —
     the separation, not a PROVEN step — so it is not counted in this bucket.)
   - **9 `CL`-only**: C3, C10, C12–C14, C16, C37, C59, C93.
-  - **75 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+  - **79 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
     C21, C23–C25, C30, C39, C49, C51–C53, C55–C58, C62, C68, C83–C86, C91,
     C94, C97–C105, C107, C113, C114, C116, C120–C122, C137–C142, C144, C145,
-    C147–C156, C160–C165, C168–C174, C176, C186, C189, C190, C191, F1a.
+    C147–C156, C160–C165, C168–C174, C176, C186, C189, C190, C191, C193,
+    C194, C195, C196, F1a.
     F1a is the choice-**field** existence form (resolves to a kernel step;
     renamed 2026-09-18 — the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
   - **C91** — vocab-only (`{Subject}`); hostile separations `{}`. C92 (the
@@ -1653,6 +1654,29 @@ camada interpretativa, não consequência kernel.
 > (`ClaimsNormativeCorrectness`), committed choice, free will, and personhood with
 > zero substantive axioms (`{Initiates, Means, State, Subject, CL}`). C191 formalizes
 > dialectical retorsion against skeptical dismissal of formal correctness.
+
+---
+
+## Level 11 — Classical Divine Simplicity & Ontological Transcendence (`Logos.DivineSimplicity`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C192 | §28/CHARACTERISTICS | `DivineSimplicity.composite_entity_fails_simplicity : ∃ Ent HasComp Simp, (∀ e, Simp e → ¬ HasComp e) ∧ (∃ e, HasComp e ∧ ¬ Simp e)` — a composite entity with internal components fails Divine Simplicity | COUNTERMODEL | `{}` |
+| C193 | §28/CHARACTERISTICS | `DivineSimplicity.ofGround_has_no_internal_components : ¬ HasInternalComponent Entity.ofGround` — Entity.ofGround has zero internal component decomposition (is an atomic, nullary ontological constructor) | PROVEN | `{Subject}` |
+| C194 | §28/CHARACTERISTICS | `DivineSimplicity.ofGround_undivided_meaning : UndividedMeaning Entity.ofGround` — Entity.ofGround possesses undivided, uniform intentional capacity across reality | PROVEN | `{Means, Subject}` |
+| C195 | §28/CHARACTERISTICS | `DivineSimplicity.ofGround_transcendent : TranscendentGround Entity.ofGround` — Entity.ofGround is transcendent to all atomic worldly entities and finite subjective agents | PROVEN | `{Subject}` |
+| C196 | §28/CHARACTERISTICS | `DivineSimplicity.ofGround_divine_simplicity : (∀ s, ∃ p, ¬ Means s p) → DivineSimplicity Entity.ofGround` — under finite subjectivity, Entity.ofGround satisfies Classical Divine Simplicity (mereological non-compositeness, structural inextension, and undivided meaning) | PROVEN | `{Means, Subject, CL}` |
+
+> Batch DIVINE-SIMPLICITY-TRANSCENDENCE (2026-09-25): C192 is a machine-checked
+> independence countermodel refuting the conflation of composite entities with simplicity.
+> C193 proves structural inextension (`ofGround_has_no_internal_components`, `{Subject}`),
+> establishing that `Entity.ofGround` is an atomic, nullary constructor without internal parts.
+> C194 establishes intentional undividedness (`ofGround_undivided_meaning`, `{Means, Subject}`).
+> C195 establishes ontological transcendence (`ofGround_transcendent`, `{Subject}`).
+> C196 provides the master synthesis (`ofGround_divine_simplicity`, `{Means, Subject, CL}`),
+> proving that `Entity.ofGround` satisfies classical Divine Simplicity (mereological, structural,
+> and intentional) with zero substantive axioms.
+
 
 
 

@@ -222,7 +222,14 @@ The foundation is **one**: it is non-composite and universally foundational.
 
 **Status in the prose:** Present in the conclusions and theological identification, but only compressed within the unity and non-systemicity arguments.
 
-**Formal status: ❌ not established — no live simplicity theorem.** No `Simplicity`/`NonComposite` declaration in `formal/Logos/*.lean` or `formal/GAPMAP.md`; generated `README.md` corroborates: "Divine simplicity ❌ NOT ESTABLISHED — no live theorem".
+**Formal status: ✅ PROVEN (mereological, structural, and intentional simplicity).** Formalized in `Logos.DivineSimplicity` (`formal/Logos/DivineSimplicity.lean`):
+(1) Mereological Simplicity: `ProperPart p e := p ≠ e ∧ GroundsEntity p e`, `NonComposite e := ¬ ∃ p, ProperPart p e`, proving `non_composite_iff_canonical_aseity` and `ofGround_non_composite` (footprint `{Means, Subject, propext}`);
+(2) Structural Inextension: `ofGround_has_no_internal_components` (C193, `{Subject}`), proving `Entity.ofGround` has zero internal decomposition;
+(3) Intentional Simplicity: `ofGround_undivided_meaning` (C194, `{Means, Subject}`), proving uniform intentional capacity across reality;
+(4) Ontological Transcendence: `ofGround_transcendent` (C195, `{Subject}`);
+(5) The Master Synthesis: `ofGround_divine_simplicity` (C196, `{Means, Subject, propext}`, 0 substantive axioms), proving that `Entity.ofGround` satisfies classical Divine Simplicity under finite subjectivity;
+(6) Metatheoretic Independence: `composite_entity_fails_simplicity` (C192, `{}`).
+Honest boundary: This establishes mereological, structural, and intentional simplicity of `Entity.ofGround` — it does not establish identity of essence and existence or exhaustive formal simplicity.
 
 ### Argument
 

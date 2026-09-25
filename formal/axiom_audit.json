@@ -3317,6 +3317,78 @@
   "Logos.Agency.Subject"
  ],
  "Logos.DirectNormativeRetorsion.sig_model_c_normative_denial_is_impossible": [],
+ "Logos.DivineSimplicity.DivineSimplicity.casesOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.DivineSimplicity.no_internal_components": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.DivineSimplicity.non_composite": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.DivineSimplicity.recOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.DivineSimplicity.undivided_meaning": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.HasInternalComponent": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.NonComposite": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.ProperPart": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.TranscendentGround": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.UndividedMeaning": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.composite_entity_fails_simplicity": [],
+ "Logos.DivineSimplicity.discriminating_subject_not_undivided": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.non_composite_iff_canonical_aseity": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.ofGround_divine_simplicity": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.ofGround_has_no_internal_components": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.ofGround_non_composite": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.ofGround_simplicity_and_transcendence": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.ofGround_transcendent": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.ofGround_undivided_meaning": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Entity.Entity.casesOn": [
   "Logos.Agency.Subject"
  ],

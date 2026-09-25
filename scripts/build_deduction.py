@@ -4754,10 +4754,23 @@ CLASSICAL_ATTRIBUTES = [
     {
         "attribute": "**Divine simplicity**",
         "scope": "Divine Being / Ground",
-        "expected": "ABSENT",
-        "checks": [{"type": "absent", "fragments": ["simplic"], "allow": []}],
-        "refs": [],
-        "sense": "No live theorem.",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.DivineSimplicity.ofGround_divine_simplicity"}],
+        "refs": ["Logos.DivineSimplicity.ofGround_has_no_internal_components",
+                 "Logos.DivineSimplicity.ofGround_undivided_meaning",
+                 "Logos.DivineSimplicity.ofGround_transcendent",
+                 "Logos.DivineSimplicity.non_composite_iff_canonical_aseity",
+                 "Logos.DivineSimplicity.composite_entity_fails_simplicity"],
+        "sense": ("In `DivineSimplicity.lean` (footprint `{Means, Subject, propext}` — VOCAB + CL), "
+                  "`ofGround_divine_simplicity` proves that `Entity.ofGround` satisfies classical Divine "
+                  "Simplicity under finite subjectivity (`∀ s, ∃ p, ¬ Means s p`): "
+                  "(1) Mereological Non-Compositeness (`NonComposite e ↔ CanonicalAseity e`, no proper grounding parts); "
+                  "(2) Structural Inextension (`ofGround_has_no_internal_components`, atomic nullary constructor with zero internal decomposition); "
+                  "(3) Intentional Simplicity (`ofGround_undivided_meaning`, uniform meaning capacity across all propositions); "
+                  "(4) Ontological Transcendence (`ofGround_transcendent`, distinct from all atomic worldly states and finite subjects). "
+                  "Composite entities provably fail simplicity (`composite_entity_fails_simplicity`, `{}`). "
+                  "Honest boundary: this establishes mereological, structural, and intentional simplicity — not identity of essence and existence."),
     },
     {
         "attribute": "**Omniscience**",
@@ -4952,7 +4965,7 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("of a necessary normative/truth order, and (entity-level) that a **necessary Divine Being")
     ap("/ Ground** exists — world-rigid, **everlasting** and **atemporal**, a definitional")
     ap("corollary of necessity with time entering only on the conclusion side. The remaining")
-    ap("divine attributes — **unity / monotheism**, **simplicity**, **omniscience**, **omnipotence**,")
+    ap("divine attributes — **unity / monotheism**, **omniscience**, **omnipotence**,")
     ap("**perfect moral goodness** (the moral pole itself now obtains under the single declared "
        "META bridge, C178; its attribution to the Divine Being stays a 🧱 frontier), the "
        "**Trinity**, the **Incarnation**, and contingent")

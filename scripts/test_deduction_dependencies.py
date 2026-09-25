@@ -302,6 +302,10 @@ def test_readability_invariants():
     assert "volitional_alternative_does_not_force_aseity" in attr_text, (
         "Table must cite C184"
     )
+    assert "**Divine simplicity**" in attr_text, "Table must report Divine simplicity"
+    assert "ofGround_divine_simplicity" in attr_text, (
+        "Table must cite ofGround_divine_simplicity"
+    )
     assert "not a proof or disproof of aseity for `Entity.ofGround`" in attr_text, (
         "Aseity row must preserve the canonical divine-aseity boundary"
     )

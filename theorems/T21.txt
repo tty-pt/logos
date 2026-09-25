@@ -1,0 +1,79 @@
+T21 — SIMPLICIDADE DIVINA E TRANSCENDÊNCIA ONTOLÓGICA DO FUNDAMENTO
+
+Depende de: `formal/Logos/DivineSimplicity.lean`, formalizando a característica
+clássica da Simplicidade Divina (Aquino ST I q. 3, Boécio, Agostinho, README-OLD.md §164)
+e a Transcendência Ontológica para o fundamento da realidade `Entity.ofGround`.
+
+Verificado em: `formal/Logos/DivineSimplicity.lean`; auditoria `#print axioms`
+em `:215-229`; `formal/GAPMAP.md` C192–C196; `base.txt` §28.
+
+C192 — Contramodelo de independência metateórica:
+
+```lean
+theorem composite_entity_fails_simplicity :
+    ∃ (Ent : Type) (HasComp : Ent → Prop) (Simp : Ent → Prop),
+      (∀ e, Simp e → ¬ HasComp e) ∧
+      (∃ e, HasComp e ∧ ¬ Simp e)
+```
+
+Pegada auditada: `{}` (lógica pura). Uma entidade com componentes internos
+não satisfaz a simplicidade, confirmando a não-trivialidade do predicado.
+
+C193 — Inextensão e ausência de componentes estruturais no fundamento:
+
+```lean
+theorem ofGround_has_no_internal_components :
+    ¬ HasInternalComponent Entity.ofGround
+```
+
+Pegada auditada: `{Subject}` (apenas vocabulário). `Entity.ofGround` é um
+construtor ontológico atómico nulo, sem parâmetros ou decomposição interna.
+
+C194 — Indivisibilidade intencional do fundamento:
+
+```lean
+theorem ofGround_undivided_meaning :
+    UndividedMeaning Entity.ofGround
+```
+
+Pegada auditada: `{Means, Subject}` (apenas vocabulário). A capacidade intencional
+do fundamento é uniforme e indivisa em todas as proposições (`EntityMeans .ofGround p := True`),
+ao passo que sujeitos discriminadores finitos quebram a indivisibilidade (`discriminating_subject_not_undivided`).
+
+C195 — Transcendência ontológica do fundamento:
+
+```lean
+theorem ofGround_transcendent :
+    TranscendentGround Entity.ofGround
+```
+
+Pegada auditada: `{Subject}` (apenas vocabulário). O fundamento é estritamente distinto
+de qualquer estado atómico mundano (`Entity.ofAtom n`) e de qualquer sujeito finito (`EntityOf s`).
+
+C196 — Simplicidade Divina Clássica do Fundamento (Síntese Mestre):
+
+```lean
+theorem ofGround_divine_simplicity
+    (hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p) :
+    DivineSimplicity Entity.ofGround
+```
+
+Pegada auditada: `{Means, Subject, propext}` (0 axiomas substantivos).
+
+Teoremas canónicos associados:
+
+1. Equivalência mereológica e aseidade (`non_composite_iff_canonical_aseity`, `{Means, Subject}`):
+   `NonComposite e ↔ CanonicalAseity e`. Um fundamento não possui partes ontológicas próprias
+   ou constituintes externos de fundamentação se e somente se nada externo o fundamenta.
+
+2. Não-composição mereológica (`ofGround_non_composite`, `{Means, Subject, propext}`):
+   Sob a premissa de finitude subjetiva, `Entity.ofGround` não tem partes próprias.
+
+3. Conjunção de simplicidade e transcendência (`ofGround_simplicity_and_transcendence`, `{Means, Subject, propext}`):
+   `Entity.ofGround` é simultaneamente divinamente simples e ontologicamente transcendente.
+
+Limites honestos de escopo:
+A demonstração estabelece a não-composição mereológica, a inextensão estrutural
+e a presença intencional indivisa do fundamento no modelo ontológico de Γ.
+Não estabelece a identidade tomista forte entre essência e existência nem
+representação formal exaustiva.
