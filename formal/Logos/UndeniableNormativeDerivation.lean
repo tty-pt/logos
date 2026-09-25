@@ -222,12 +222,14 @@ D7: Co-grasp of alternatives is not Choice. (Status: Direct Formal Contradiction
 D8: Choice is not Free Will. (Status: Direct Formal Contradiction)
 -/
 
--- D1 & D2: Denial of Existence
+/-- D1 & D2: Denial of Existence — denying extensional Right/Wrong directly contradicts core retorsion.
+    Footprint: `{}` (pure logic). -/
 theorem d1_d2_denial_contradicts_core_retorsion
     (hDeny : ¬ ExtensionalRightWrong) : False :=
   hDeny Logos.Core.rightWrongDistinction
 
--- D3: Denial of Prescriptivity (Right/Wrong is merely descriptive truth)
+/-- D3: Denial of Prescriptivity — asserting that Right/Wrong is merely descriptive truth
+    lacks deontic guidance and is refuted by genuine normativity. Footprint: `{Means, Subject}`. -/
 theorem d3_descriptive_truth_lacks_deontic_guidance
     (p q : Prop) (hDescriptiveOnly : Prop)
     (hNoOught : hDescriptiveOnly → ∀ s : Subject, ¬ AgentialDeonticAddress s p q)
@@ -237,34 +239,39 @@ theorem d3_descriptive_truth_lacks_deontic_guidance
   obtain ⟨s, hNormInst⟩ := hNorm
   exact (hNoOught hDesc s) hNormInst.address
 
--- D4: Denial of Agential Address (Impersonal Ought)
+/-- D4: Denial of Agential Address — impersonal ought without an addressed subject fails relationality.
+    Footprint: `{Means, Subject}`. -/
 theorem d4_impersonal_normativity_fails_relationality
     (p q : Prop)
     (hImpersonal : ∀ s : Subject, ¬ AgentialDeonticAddress s p q) :
     ¬ ∃ s : Subject, GenuineNormativity s p q :=
   Logos.IndubitableNormativeFreeWill.dnf3_impersonal_ought_fails_address p q hImpersonal
 
--- D5: Denial of Incompatible Alternatives (Monolithic Command)
+/-- D5: Denial of Incompatible Alternatives — a monolithic command without opposition lacks choice.
+    Footprint: `{Subject}`. -/
 theorem d5_monolithic_command_lacks_opposition
     (p : Prop) (hNoIncompatible : ∀ q : Prop, ¬ Incompatible p q) :
     ¬ ∃ s : Subject, ∃ q : Prop, GenuineNormativity s p q :=
   Logos.IndubitableNormativeFreeWill.dnf4_monolithic_command_lacks_opposition p hNoIncompatible
 
--- D6: Denial of Cognitive Grasp (Ungraspable Command)
+/-- D6: Denial of Cognitive Grasp — an ungraspable command fails agential address.
+    Footprint: `{Means, Subject}`. -/
 theorem d6_ungraspable_command_fails_agential_address
     (s : Subject) (p q : Prop)
     (hUngraspable : ¬ (Means s p ∧ Means s q)) :
     ¬ AgentialDeonticAddress s p q :=
   hUngraspable
 
--- D7: Denial of Choice from Co-Grasp (Formal Contradiction)
+/-- D7: Denial of Choice from Co-Grasp — denying Chooses when incompatible alternatives are co-grasped
+    is a direct formal contradiction. Footprint: `{Means, Subject}`. -/
 theorem d7_co_grasp_is_definitionally_choice
     (s : Subject) (p q : Prop)
     (hMeansP : Means s p) (hMeansQ : Means s q) (hIncomp : Incompatible p q)
     (hDenyChooses : ¬ Chooses s p q) : False :=
   hDenyChooses ⟨hMeansP, hMeansQ, hIncomp⟩
 
--- D8: Denial of Free Will from Choice (Formal Contradiction)
+/-- D8: Denial of Free Will from Choice — denying FreeWill when Chooses obtains
+    is a direct formal contradiction. Footprint: `{Means, Subject}`. -/
 theorem d8_choice_is_definitionally_free_will
     (s : Subject) (p q : Prop)
     (hChooses : Chooses s p q)

@@ -1,8 +1,8 @@
 # Investigation: The Trinity and the Condilectus Principle
 
 **Repository:** Γ (Logos)  
-**Primary Formal Source:** `formal/Logos/ConditionalTheology.lean`, `formal/Logos/ClassicalTheism.lean`  
-**Kernel Status:** CONDITIONAL METAPHYSICAL BRIDGE / BINITARIAN SEPARATION MODEL  
+**Primary Formal Source:** `formal/Logos/ConditionalTheology.lean`  
+**Kernel Status:** DEFERRED THEOLOGICAL BRIDGE / BINITARIAN SEPARATION MODEL (`{}`)  
 
 ---
 
@@ -35,18 +35,19 @@ theorem preceding_theory_not_entails_trinity :
 
 ## 3. The Necessary Bridge: Richard of St. Victor's *Condilectus* Principle
 
-To advance from a Binity to a Trinity without smuggling the conclusion into definitions, Christian philosophical theology (specifically Richard of St. Victor, *De Trinitate*, III) identifies the exact metaphysical bridge:
+To advance from a Binity to a Trinity without smuggling the conclusion into definitions, Christian philosophical theology (specifically Richard of St. Victor, *De Trinitate*, III) identifies the candidate metaphysical bridge:
 
 > **Supreme mutual love between two persons cannot remain an exclusive, closed dyad without defect in communicative fullness; supreme love constitutively wills that the beloved also be loved by a third co-beloved (*condilectus*), and that both together share love for a third.**
 
-In `formal/Logos/ClassicalTheism.lean:186`:
+In the theological scratch exploration (intentionally deferred and quarantined from the active Lean kernel):
 ```lean
-axiom AxCondilectus :
-  ∀ (s1 s2 : Subject),
-    NecessarySubject s1 → NecessarySubject s2 → s1 ≠ s2 →
-    Loves s1 s2 ∧ Loves s2 s1 →
-    ∃ s3 : Subject,
-      NecessarySubject s3 ∧ s1 ≠ s3 ∧ s2 ≠ s3 ∧ Loves s1 s3 ∧ Loves s2 s3
+-- Deferred candidate bridge (Richard of St. Victor):
+-- AxCondilectus :
+--   ∀ (s1 s2 : Subject),
+--     NecessarySubject s1 → NecessarySubject s2 → s1 ≠ s2 →
+--     Loves s1 s2 ∧ Loves s2 s1 →
+--     ∃ s3 : Subject,
+--       NecessarySubject s3 ∧ s1 ≠ s3 ∧ s2 ≠ s3 ∧ Loves s1 s3 ∧ Loves s2 s3
 ```
 
 ---

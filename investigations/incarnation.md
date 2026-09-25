@@ -1,8 +1,8 @@
 # Investigation: The Incarnation — The Builder Entering the House
 
 **Repository:** Γ (Logos)  
-**Primary Formal Source:** `formal/Logos/ConditionalTheology.lean`, `formal/Logos/ClassicalTheism.lean`, `poem.txt`  
-**Kernel Status:** THEOLOGICAL TELEOLOGICAL BRIDGE / UNINCARNATE MODEL  
+**Primary Formal Source:** `formal/Logos/ConditionalTheology.lean`, `poem.txt`  
+**Kernel Status:** DEFERRED THEOLOGICAL BRIDGE / UNINCARNATE MODEL (`{}`)  
 
 ---
 

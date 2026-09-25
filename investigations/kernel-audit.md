@@ -3380,27 +3380,27 @@ A hostile model is a self-contained Lean structure in which the premises hold an
 |---|---|---|---|---|
 | `ConstitutiveRightWrong` | def | [L60](formal/Logos/UndeniableNormativeDerivation.lean#L60) | `def ConstitutiveRightWrong : Prop` | {Subject}  |
 | `ExtensionalRightWrong` | def | [L54](formal/Logos/UndeniableNormativeDerivation.lean#L54) | `def ExtensionalRightWrong : Prop` | {}  |
-| `NecessaryConstitutiveRightWrong` | def | [L294](formal/Logos/UndeniableNormativeDerivation.lean#L294) | `def NecessaryConstitutiveRightWrong (World : Type) : Prop` | {Subject}  |
+| `NecessaryConstitutiveRightWrong` | def | [L301](formal/Logos/UndeniableNormativeDerivation.lean#L301) | `def NecessaryConstitutiveRightWrong (World : Type) : Prop` | {Subject}  |
 | `bridge_a_constitutive_normativity_derives_free_will` | theorem | [L133](formal/Logos/UndeniableNormativeDerivation.lean#L133) | `theorem bridge_a_constitutive_normativity_derives_free_will (h : ConstitutiveRig` | {Means, Subject}  |
 | `bridge_b_plurality_yields_choice_field` | theorem | [L141](formal/Logos/UndeniableNormativeDerivation.lean#L141) | `theorem bridge_b_plurality_yields_choice_field (hExt : ExtensionalRightWrong) : ` | {AxTwoSubjects, Means, Subject}  |
 | `bridge_c_performative_judge_yields_choice_field` | theorem | [L148](formal/Logos/UndeniableNormativeDerivation.lean#L148) | `theorem bridge_c_performative_judge_yields_choice_field (speaker : Subject) (hAs` | {Initiates, Means, State, Subject}  |
 | `bridge_d_retorsion_derives_free_will` | theorem | [L157](formal/Logos/UndeniableNormativeDerivation.lean#L157) | `theorem bridge_d_retorsion_derives_free_will (hEvent : ∃ s : Subject, Logos.Reto` | {AxJudicativeBipolarity, Initiates, Means, State, Subject}  |
-| `d1_d2_denial_contradicts_core_retorsion` | theorem | [L226](formal/Logos/UndeniableNormativeDerivation.lean#L226) | `theorem d1_d2_denial_contradicts_core_retorsion (hDeny : ¬ ExtensionalRightWrong` | {}  |
-| `d3_descriptive_truth_lacks_deontic_guidance` | theorem | [L231](formal/Logos/UndeniableNormativeDerivation.lean#L231) | `theorem d3_descriptive_truth_lacks_deontic_guidance (p q : Prop) (hDescriptiveOn` | {Means, Subject}  |
-| `d4_impersonal_normativity_fails_relationality` | theorem | [L241](formal/Logos/UndeniableNormativeDerivation.lean#L241) | `theorem d4_impersonal_normativity_fails_relationality (p q : Prop) (hImpersonal ` | {Means, Subject}  |
-| `d5_monolithic_command_lacks_opposition` | theorem | [L248](formal/Logos/UndeniableNormativeDerivation.lean#L248) | `theorem d5_monolithic_command_lacks_opposition (p : Prop) (hNoIncompatible : ∀ q` | {Subject}  |
-| `d6_ungraspable_command_fails_agential_address` | theorem | [L254](formal/Logos/UndeniableNormativeDerivation.lean#L254) | `theorem d6_ungraspable_command_fails_agential_address (s : Subject) (p q : Prop)` | {Means, Subject}  |
-| `d7_co_grasp_is_definitionally_choice` | theorem | [L261](formal/Logos/UndeniableNormativeDerivation.lean#L261) | `theorem d7_co_grasp_is_definitionally_choice (s : Subject) (p q : Prop) (hMeansP` | {Means, Subject}  |
-| `d8_choice_is_definitionally_free_will` | theorem | [L268](formal/Logos/UndeniableNormativeDerivation.lean#L268) | `theorem d8_choice_is_definitionally_free_will (s : Subject) (p q : Prop) (hChoos` | {Means, Subject}  |
+| `d1_d2_denial_contradicts_core_retorsion` | theorem | [L227](formal/Logos/UndeniableNormativeDerivation.lean#L227) | `theorem d1_d2_denial_contradicts_core_retorsion (hDeny : ¬ ExtensionalRightWrong` | {}  |
+| `d3_descriptive_truth_lacks_deontic_guidance` | theorem | [L233](formal/Logos/UndeniableNormativeDerivation.lean#L233) | `theorem d3_descriptive_truth_lacks_deontic_guidance (p q : Prop) (hDescriptiveOn` | {Means, Subject}  |
+| `d4_impersonal_normativity_fails_relationality` | theorem | [L244](formal/Logos/UndeniableNormativeDerivation.lean#L244) | `theorem d4_impersonal_normativity_fails_relationality (p q : Prop) (hImpersonal ` | {Means, Subject}  |
+| `d5_monolithic_command_lacks_opposition` | theorem | [L252](formal/Logos/UndeniableNormativeDerivation.lean#L252) | `theorem d5_monolithic_command_lacks_opposition (p : Prop) (hNoIncompatible : ∀ q` | {Subject}  |
+| `d6_ungraspable_command_fails_agential_address` | theorem | [L259](formal/Logos/UndeniableNormativeDerivation.lean#L259) | `theorem d6_ungraspable_command_fails_agential_address (s : Subject) (p q : Prop)` | {Means, Subject}  |
+| `d7_co_grasp_is_definitionally_choice` | theorem | [L267](formal/Logos/UndeniableNormativeDerivation.lean#L267) | `theorem d7_co_grasp_is_definitionally_choice (s : Subject) (p q : Prop) (hMeansP` | {Means, Subject}  |
+| `d8_choice_is_definitionally_free_will` | theorem | [L275](formal/Logos/UndeniableNormativeDerivation.lean#L275) | `theorem d8_choice_is_definitionally_free_will (s : Subject) (p q : Prop) (hChoos` | {Means, Subject}  |
 | `extensional_bivalence_insufficient_for_free_will` | theorem | [L78](formal/Logos/UndeniableNormativeDerivation.lean#L78) | `theorem extensional_bivalence_insufficient_for_free_will : ¬ (∀ (U : Type) (M : ` | {}  |
 | `extensional_bivalence_insufficient_for_genuine_normativity` | theorem | [L105](formal/Logos/UndeniableNormativeDerivation.lean#L105) | `theorem extensional_bivalence_insufficient_for_genuine_normativity : ¬ (∀ (U : T` | {}  |
 | `inanimate_universe_satisfies_bivalence_and_no_genuine_normativity` | theorem | [L93](formal/Logos/UndeniableNormativeDerivation.lean#L93) | `theorem inanimate_universe_satisfies_bivalence_and_no_genuine_normativity : ∃ (U` | {} → C167 |
 | `inanimate_universe_satisfies_extensional_bivalence_without_agency` | theorem | [L67](formal/Logos/UndeniableNormativeDerivation.lean#L67) | `theorem inanimate_universe_satisfies_extensional_bivalence_without_agency : ∃ (U` | {}  |
-| `necessary_normative_free_will` | theorem | [L299](formal/Logos/UndeniableNormativeDerivation.lean#L299) | `theorem necessary_normative_free_will {World : Type} (hNec : NecessaryConstituti` | {Means, Subject}  |
+| `necessary_normative_free_will` | theorem | [L306](formal/Logos/UndeniableNormativeDerivation.lean#L306) | `theorem necessary_normative_free_will {World : Type} (hNec : NecessaryConstituti` | {Means, Subject}  |
 | `non_circularity_chooses_independent_of_freewill` | theorem | [L190](formal/Logos/UndeniableNormativeDerivation.lean#L190) | `theorem non_circularity_chooses_independent_of_freewill (s : Subject) (p q : Pro` | {Means, Subject}  |
 | `non_circularity_normativity_independent_of_chooses` | theorem | [L197](formal/Logos/UndeniableNormativeDerivation.lean#L197) | `theorem non_circularity_normativity_independent_of_chooses (s : Subject) (p q : ` | {Means, Subject}  |
-| `normative_free_will` | theorem | [L287](formal/Logos/UndeniableNormativeDerivation.lean#L287) | `theorem normative_free_will (h : ConstitutiveRightWrong) : ∃ s : Subject, FreeWi` | {Means, Subject}  |
-| `normative_free_will_local` | theorem | [L280](formal/Logos/UndeniableNormativeDerivation.lean#L280) | `theorem normative_free_will_local {s : Subject} {p q : Prop} (h : GenuineNormati` | {Means, Subject}  |
+| `normative_free_will` | theorem | [L294](formal/Logos/UndeniableNormativeDerivation.lean#L294) | `theorem normative_free_will (h : ConstitutiveRightWrong) : ∃ s : Subject, FreeWi` | {Means, Subject}  |
+| `normative_free_will_local` | theorem | [L287](formal/Logos/UndeniableNormativeDerivation.lean#L287) | `theorem normative_free_will_local {s : Subject} {p q : Prop} (h : GenuineNormati` | {Means, Subject}  |
 | `normativity_projects_to_chooses` | theorem | [L204](formal/Logos/UndeniableNormativeDerivation.lean#L204) | `theorem normativity_projects_to_chooses {s : Subject} {p q : Prop} (h : GenuineN` | {Means, Subject}  |
 
 ### `Logos.Value`

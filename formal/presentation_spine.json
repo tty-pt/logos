@@ -16,6 +16,8 @@
       "id": "right_wrong",
       "pushback": "Deny Right/Wrong at all — adopt NoRight, claiming 'there is no correct standard' as if that were itself correct.",
       "reply": "Retorsive: claiming the denial as *correct* while it is true is a constructive contradiction (claims_correct_no_right_self_refuting); downplaying to a mere assertion forfeits the claim to correctness. Under classical meta-logic {CL} objective Right necessarily exists — with zero substantive axioms.",
+      "rebuttal_target": "Logos.DirectNormativeRetorsion.claims_correct_no_right_self_refuting",
+      "rebuttal_formula": "ClaimsCorrect s NoRight ∧ NoRight → ⊥",
       "label": "RIGHT / WRONG",
       "title": "1. Objective Right and Wrong",
       "explanation": "Right and wrong both obtain: the binary normative distinction is real. The 'Right'/'Wrong' polarity is the objective truth/correctness standard — some propositions are true, some false; affirming a truth is correct, affirming a falsehood is incorrect.",
@@ -43,6 +45,8 @@
       "id": "ought",
       "pushback": "'Ought' is nothing but a relabel of 'correct' — no genuinely normative force is added.",
       "reply": "The deontic opposition here is derived under the objective epistemic TruthNorm (correct → ought to affirm; incorrect → ought not to affirm) — a genuinely new normative relation, not a relabel; the irreducible practical Ought of actions stays a separate primitive (see the terminology note above).",
+      "rebuttal_target": "Logos.NormativeOrder.correctness_deontic_opposition",
+      "rebuttal_formula": "DeonticOpposition (Correct s p) (Incorrect s p)",
       "label": "OUGHT / OUGHT-NOT",
       "title": "2. Ought and Normative Polarity",
       "explanation": "Objective correctness determines agential standards: Ought vs. Ought-Not — the epistemic objective standard (a proposition ought to be affirmed because it is true).",
@@ -61,6 +65,8 @@
       "id": "choice",
       "pushback": "Genuine Normativity is a stipulation — the chain GN → Chooses → FreeWill may be valid but empty.",
       "reply": "Retorsive: claiming the denial of genuine normativity as correct (ClaimsCorrect s NoGN) yields a literal term of the identical GenuineNormativity structure (denial_of_genuine_normativity_is_self_refuting); the axiom-free stance-level derivation is set out in the retorsion block below.",
+      "rebuttal_target": "Logos.UndeniableNormativeDerivation.d7_co_grasp_is_definitionally_choice",
+      "rebuttal_formula": "Means s p ∧ Means s q ∧ Incompatible p q ∧ ¬ Chooses s p q → ⊥",
       "label": "CHOICE",
       "title": "3. Genuine Choice",
       "explanation": "Apprehending incompatible alternatives within a committed stance constitutes Choice: the agent co-means both horns (`Chooses s p q`) while committing to one (`Act s p` in the stance-bundle `CommittedChoice`).",
@@ -171,6 +177,8 @@
       "id": "free_will",
       "pushback": "You assumed freedom — a free will was smuggled in as a premise.",
       "reply": "No — the starting point is normative address, not a free subject: see the derivation in the section text (`indubitable_normative_free_will`).",
+      "rebuttal_target": "Logos.UndeniableNormativeDerivation.d8_choice_is_definitionally_free_will",
+      "rebuttal_formula": "Chooses s p q ∧ ¬ FreeWill s → ⊥",
       "label": "FREE WILL",
       "title": "4. Free Will",
       "explanation": "Freedom is derived by pure logic from genuine normativity and choice.",
@@ -182,12 +190,27 @@
       "supporting_targets": [
         "freeWillExists_of_chooses"
       ],
+      "supporting_defense": [
+        {
+          "title": "Adversarial Denial Normal Forms (D1–D8) — Exhaustive Proof of Inevitability",
+          "formula": "¬ Chooses s p q ∧ CoGrasp → ⊥ | ¬ FreeWill s ∧ Chooses → ⊥",
+          "summary": "Every conceivable skeptical evasion against the derivation of Free Will has been formally classified and refuted in the kernel:\n\n- **D1 & D2 (Denial of Right/Wrong):** Refuted by core retorsion (`d1_d2_denial_contradicts_core_retorsion`).\n- **D3 (Denial of Prescriptivity):** Descriptive truth alone lacks deontic guidance (`d3_descriptive_truth_lacks_deontic_guidance`).\n- **D4 (Denial of Agential Address):** Impersonal ought without a subject fails relationality (`d4_impersonal_normativity_fails_relationality`).\n- **D5 (Denial of Alternatives):** Monolithic command without opposition lacks choice (`d5_monolithic_command_lacks_opposition`).\n- **D6 (Denial of Cognitive Grasp):** Ungraspable command fails agential address (`d6_ungraspable_command_fails_agential_address`).\n- **D7 (Denial of Choice from Co-Grasp):** Denying `Chooses` given co-meaning of incompatible alternatives yields a direct formal contradiction (`d7_co_grasp_is_definitionally_choice` → ⊥).\n- **D8 (Denial of Free Will from Choice):** Denying `FreeWill` given `Chooses` yields a direct formal contradiction (`d8_choice_is_definitionally_free_will` → ⊥).",
+          "target_names": [
+            "d7_co_grasp_is_definitionally_choice",
+            "d8_choice_is_definitionally_free_will",
+            "normative_free_will_local",
+            "normative_free_will"
+          ]
+        }
+      ],
       "investigation_link": "investigations/free-will.md"
     },
     {
       "id": "free_subject",
       "pushback": "A definitional manoeuvre — the free subject is bought by a definition, not proven.",
       "reply": "Precisely — the 'manoeuvre' *is* the theorem: the equivalence is `Iff.rfl`, which is exactly why nothing can precede free will.",
+      "rebuttal_target": "Logos.Choice.freeSubject_iff_freeWill",
+      "rebuttal_formula": "FreeSubject s ↔ FreeWill s",
       "label": "FREE SUBJECT",
       "title": "5. The Free Subject",
       "explanation": "A subject is recognized as free in virtue of possessing Free Will.",
@@ -204,6 +227,8 @@
       "id": "person",
       "pushback": "A loaded, theological word smuggled into the deduction.",
       "reply": "Classical, not novel: the term follows Boethius and Aquinas rather than theological invention. Nothing theological is *assumed*; theology would enter only downstream, in the branches — and is then explicitly bounded by countermodels.",
+      "rebuttal_target": "Logos.Person.person_iff_thomisticCore",
+      "rebuttal_formula": "Person s ↔ IndividualSubstance s ∧ RationalNature s ∧ DominionOverActs s",
       "label": "PERSON",
       "title": "6. Person",
       "explanation": "A free subject is constitutively an authoritative Person.",
@@ -223,6 +248,8 @@
       "id": "personal_will",
       "pushback": "Two persons could share one will — individuation is not forced.",
       "reply": "Individuation is a constitutive meaning-postulate, not a derived construction: `will_individuation` (A18, VOCAB — a **declared** injectivity law `subjectWill s₁ ≠ subjectWill s₂`, not a theorem) assigns each subject its own numerically distinct will-faculty, so two Persons cannot share one will; given that postulate, `Person ↔ FreeIndependentWill` follows with 0 substantive axioms. Its status as a declared postulate — not a theorem — is **kernel-verified**: the hostile model `Subject := Bool`, `Will := Unit`, `subjectWill := fun _ => ()` satisfies the pre-will spine (performative act included), and there the law **arrives at a contradiction** — forcing injectivity demands `subjectWill true ≠ subjectWill false` while both wills are `()`; spine+law is inconsistent, spine alone satisfiable ⇒ the law cannot be derived (`WillIndividuationAudit.will_individuation_not_forced_by_prewill_spine`, footprint `{}`).",
+      "rebuttal_target": "Logos.Person.person_iff_freeIndependentWill",
+      "rebuttal_formula": "Person s ↔ FreeIndependentWill s",
       "label": "INDEPENDENT PERSONAL WILL",
       "title": "7. Personal and Independent Will",
       "explanation": "Distinct persons have numerically distinct wills (subjectWill s₁ ≠ subjectWill s₂).",
@@ -241,6 +268,8 @@
       "id": "ground_right_wrong",
       "pushback": "Principle-of-Sufficient-Reason smuggling: this makes the Person (or the argument) the causal creator of morality.",
       "reply": "Grounding ≠ identity and ≠ causation — see distinctions 2 and 4: Right/Wrong's correctness-order has a ground *personal in kind*, not a particular person causally producing existents or rightness. The bare ought survives the impersonal model, the personal ground is forced within the normative order, and model_b_separation marks exactly what the antecedent does and does not reach.",
+      "rebuttal_target": "Logos.PersonalNormativeGround.will_identity_collapses_normativity",
+      "rebuttal_formula": "Wills s p = Ought s p → NormativeViolation s p → ⊥",
       "label": "ONTOLOGICAL GROUND OF RIGHT / WRONG",
       "title": "8. Personal Agency as Ontological Ground of Normativity",
       "explanation": "Personal free agency ontologically grounds the normative order: the ground of objective normativity is personal in kind/type (Grounding ≠ Id; Grounding ≠ Individual Causation).",
@@ -266,6 +295,8 @@
       "id": "necessary_truth",
       "pushback": "Quietly assumes modal metaphysics — necessity is a contested fragment, not a consequence.",
       "reply": "The world-level necessity of §9 is the *logical* continuation — classical meta-logic resident in Core/Semantics (`Semantics.strongTruthExists`, C59, footprint `{CL}`) — not a theorem derived from the normative chain. The normative world-level continuation is recorded separately (`NecessaryNormativeOrder : ∀ w, NormativeOrderAt w`) and is never claimed to entail `∃ τ, □ τ`. Neither continuation presupposes an ungrounded modal metaphysics.",
+      "rebuttal_target": "Logos.Semantics.strongTruthExists",
+      "rebuttal_formula": "∃ τ, □ τ",
       "label": "NECESSARY TRUTH",
       "title": "9. Necessary Truth",
       "explanation": "The objective logical and normative order entails necessary truth.",
@@ -280,6 +311,8 @@
       "id": "constructive_personal_ground",
       "pushback": "You still quietly pick a contingent author of morality — some particular person who happens to ground Right/Wrong.",
       "reply": "The indexing encodes *dependence without nomination*: RightWrong is indexed by a personal kind/type, not by any arbitrary contingent individual — objective Normativity ⇒ Person is discovery, Person ⇒ Right/Wrong is the typed index. And Branch C below marks exactly what is NOT forced: trinity, contingent creation, and incarnation all remain countermodel frontiers (⇏).",
+      "rebuttal_target": "Logos.PersonalNormativeGround.Constructive.discover_person",
+      "rebuttal_formula": "ObjectiveNormativity → Σ' p, RightWrong p",
       "label": "CONSTRUCTIVE PERSONAL GROUND",
       "title": "10. Constructive Personal Ground",
       "explanation": "The machine-proved dependence: wherever Right/Wrong is real, its ground-type is personal (`∀ s, RightWrong s → Person s`). The `GroundsRightWrong` record merely registers that same dependence (see §8).",
@@ -305,8 +338,8 @@
           "primary_targets": [
             "ofGround_necessary_ground_of_reality"
           ],
-          "summary": "Live theorem: the ground is world-rigid (`NecessaryEntity Entity.ofGround`, `∀ w, ExistsAt w .ofGround`, definitional `EntityExistsAt w .ofGround := True`, footprint `{Means, Subject}`) and thereby **everlasting** and **atemporal** (definitional corollaries of necessity — no temporal premise; time enters only on the conclusion side via the Nat-stage layer). Claim E is the *non-hypostatic* pairing (`∃ g s, NecessaryEntity g ∧ NecessaryGroundOfReality g ∧ Person s ∧ GroundsRightWrong s`): entity-necessity conjunct PROVEN; personal-kind conjunct honestly `{AxTwoSubjects, Means, Subject}` (PROVEN↑ under META `AxTwoSubjects`). Hypostatic identity, a 'necessary Person', Trinity and monotheism are NOT claimed — `ofGround_ne_ofSubject` blocks the identity line.",
-          "defer_note": "✅ **PROVEN** (entity-level necessity + eternity) — machine-checked in `formal/Logos/NecessityEternity.lean`; hypostatic identity of the ground with a person remains blocked (`ofGround_ne_ofSubject`) and Claim D ('necessary Subject') is still refuted (`CountermodelPersonNotNecessary`)."
+          "summary": "Live theorem: the ground is world-rigid (`NecessaryEntity Entity.ofGround`, `∀ w, ExistsAt w .ofGround`, definitional `EntityExistsAt w .ofGround := True`, footprint `{Means, Subject}`), **everlasting**, **atemporal**, and possesses **Canonical Aseity** (`conditional_canonical_aseity`, `{Means, Subject}`: `¬ ∃ g, ExternalGrounding g .ofGround`). Claim E is the *non-hypostatic* pairing (`∃ g s, NecessaryEntity g ∧ NecessaryGroundOfReality g ∧ Person s ∧ GroundsRightWrong s`): entity-necessity conjunct PROVEN; personal-kind conjunct honestly `{AxTwoSubjects, Means, Subject}` (PROVEN↑ under META `AxTwoSubjects`). Hypostatic identity, a 'necessary Person', Trinity and monotheism are NOT claimed — `ofGround_ne_ofSubject` blocks the identity line.",
+          "defer_note": "✅ **PROVEN** (entity-level necessity, eternity, and canonical aseity) — machine-checked in `formal/Logos/NecessityEternity.lean` and `formal/Logos/CanonicalAseity.lean`; hypostatic identity of the ground with a person remains blocked (`ofGround_ne_ofSubject`) and Claim D ('necessary Subject') is still refuted (`CountermodelPersonNotNecessary`)."
         },
         {
           "id": "monotheism",

@@ -16,11 +16,11 @@ In `poem.txt` (lines 22–24):
 
 ## 2. Plurality of Subjects (Theorem T12)
 
-In `formal/Logos/Plurality.lean:80-140`:
-- **Theorem `T12_plurality`:** Reality contains at least two distinct subjects:
+In `formal/Logos/Plurality.lean:45`:
+- **Theorem `T12_twoPersons`:** Reality contains at least two distinct subjects:
   $$\exists (s_1 s_2 : \text{Subject}),\; s_1 \ne s_2.$$
-- **The Canonical Pair:** Derived mathematically from the structure of agential address: every normative directive involves an origin and an addressee.
-- **Non-Solitude (`neverAlone`):** No subject in Γ exists in absolute ontological isolation (`Plurality.lean:135`).
+- **Footprint & Bridge:** Proven under the explicit metaphysical bridge `AxTwoSubjects` (footprint `{Means, Subject, AxTwoSubjects}`), formalizing the non-solitude premise required for intersubjective relations.
+- **Non-Solitude (`notAlone`):** Each of the two persons is not alone (`Plurality.lean:104`).
 
 ---
 

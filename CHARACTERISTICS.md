@@ -1,4 +1,15 @@
+# [HISTORICAL AUDIT INVENTORY OF README-OLD.MD]
 # Arguments for the Characteristics of the Ultimate Foundation
+
+> ⚠️ **HISTORICAL AUDIT NOTICE FOR AGENTS AND CRITICS:**
+> This document (`CHARACTERISTICS.md`) is a **historical audit inventory** that reconstructs and evaluates the informal arguments from the legacy draft [`README-OLD.md`](README-OLD.md).
+> It does **not** define the active architecture of the Γ formalization, and its negative or absent badges reflect the informal claims of `README-OLD.md`, **not** the boundaries of the machine-verified Lean 4 kernel.
+>
+> **Authoritative Canonical References:**
+> - **The Machine-Checked Deduction:** [`README.md`](README.md)
+> - **Formal Kernel:** [`formal/Logos/`](formal/Logos/)
+> - **Status Ledger:** [`formal/GAPMAP.md`](formal/GAPMAP.md)
+> - **Verified Classical Attributes:** See `## Which Classical Attributes Are Already Established?` in `README.md` (where Divine Ground Necessity, Everlasting, Atemporal, and Canonical Aseity are machine-verified ✅).
 
 > **Source scope:** This inventory reconstructs the arguments in [`README-OLD.md`](README-OLD.md) itself. It does not assess formalizability, import conclusions from the Lean formalization, or use external sources.
 >

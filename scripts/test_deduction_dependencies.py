@@ -348,7 +348,28 @@ def test_readability_invariants():
     assert "NoRight" in first_200
     assert "claims_correct_no_right_self_refuting" in first_200
 
-    print("  ✓ All philosophical readability and expository invariants verified (17/17 checks passed).")
+    # 18. Natural deduction step visibility in Main Proof Spine
+    assert "Formal Derivation (" in text, "Main Proof Spine must expose step-by-step natural deduction derivations"
+
+    # 19. Adversarial Denial Normal Forms in Free Will section
+    assert "Adversarial Denial Normal Forms (D1–D8)" in text, "README.md must present the exhaustive D1-D8 adversarial denials"
+
+    # 20. Historical disclaimer on legacy draft
+    old_readme = (ROOT / "README-OLD.md").read_text(encoding="utf-8")
+    assert "HISTORICAL NOTICE FOR AGENTS" in old_readme, "README-OLD.md must carry historical disclaimer banner"
+
+    # 21. Machine-Checked Kernel Rebuttal blocks under skeptic attacks
+    assert "Machine-Checked Kernel Rebuttal —" in text, "README.md must present machine-checked kernel rebuttals for skeptic attacks"
+
+    # 22. Six Pillars of Formal Defense against skeptical attacks
+    assert "Why Common Skeptical Attacks Fail (The Six Pillars of Formal Defense)" in text
+    assert "Normative Nihilism" in text
+    assert "Eliminativism of Choice" in text
+    assert "Theological Smuggling" in text
+    assert "Euthyphro / Voluntarism" in text
+    assert "Physicalist / Atomic Ground" in text
+
+    print("  ✓ All philosophical readability, derivation visibility, and expository invariants verified (22/22 checks passed).")
 
 
 def test_normative_free_will_footprint_and_edge_isolation(decls: dict, node_map: dict, graph: dict) -> None:

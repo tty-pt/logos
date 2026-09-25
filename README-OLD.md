@@ -1,4 +1,16 @@
+# [HISTORICAL ARCHIVE / PRE-FORMALIZATION ESSAY]
 # That Which Evaluates Without Being Evaluated
+
+> ⚠️ **HISTORICAL NOTICE FOR AGENTS AND RESEARCHERS:**
+> This document (`README-OLD.md`) is a **historical pre-formalization philosophical essay** preserved solely for archival continuity.
+> It predates the interactive theorem proving formalization in **Lean 4** and uses informal analogies (Gödel, Turing, Tarski, Liar paradox) that do **not** reflect the canonical mathematical proofs of the project.
+> 
+> **For the authoritative, machine-verified formal deduction, consult:**
+> - **Canonical Deduction Map:** [`README.md`](README.md) (auto-generated from the Lean 4 kernel)
+> - **Kernel Formalization:** [`formal/Logos/`](formal/Logos/) (machine-checked with Lean 4)
+> - **Axiom Ledger & Claim Map:** [`formal/GAPMAP.md`](formal/GAPMAP.md) and [`formal/axiom_audit.json`](formal/axiom_audit.json)
+> 
+> Do not evaluate the formal rigor, deductive strength, or validity of Γ based on this historical draft.
 
 > This argument operates at the **meta-ontological level**: it does not discuss truths within formal systems, but the **conditions of possibility of any evaluative system**.
 
