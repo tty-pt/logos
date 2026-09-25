@@ -240,8 +240,8 @@ theorem lone_subject_excludes_second_personal_ought
 -- 6. Unified Personhood Theorem & Modal Independence
 -- ============================================================================
 
-/-- In the unified ontology, every Free Subject is a Person by definition.
-    Footprint: `{Means, Subject}` (0 substantive axioms). -/
+/-- In the unified ontology, every Free Subject is a Person.
+    Footprint: `{Means, Subject}`. -/
 theorem free_subject_is_person (s : Subject) (h : FreeSubject s) : Person s :=
   Logos.Person.free_subject_is_person s h
 

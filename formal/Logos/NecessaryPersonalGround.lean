@@ -58,7 +58,7 @@ open Logos.Core (T IsFalse)
 open Logos.Semantics (Form World Satisfies TrueAt)
 open Logos.Agency (Subject A Means IntentionalSubject Nature HasNature Will subjectWill will_individuation)
 open Logos.Choice (Chooses FreeWill FreeSubject)
-open Logos.Person (Person person_is_intentional person_has_free_will)
+open Logos.Person (Person person_is_intentional)
 open Logos.Entity (Entity ExistsAt TrueAt NecessarilyTrue EntityOf)
 open Logos.Modal (NecessaryEntity Contingent actualWorld)
 open Logos.Plurality (NecessarySubject)
@@ -178,9 +178,9 @@ theorem atom_cannot_ground_intentional_subject
     Footprint: `{Means, Subject}`. -/
 theorem atom_cannot_ground_person (n : Nat) (s : Subject) (hPerson : Person s) :
     ¬ GroundsEntity (Entity.ofAtom n) (EntityOf s) := by
-  have hFreeWill : FreeWill s := Logos.Person.person_has_free_will s hPerson
-  obtain ⟨p, _q, hChooses⟩ := hFreeWill
-  exact atom_cannot_ground_intentional_subject n s p hChooses.1
+  have hInt : IntentionalSubject s := Logos.Person.person_is_intentional s hPerson
+  obtain ⟨p, hm⟩ := hInt
+  exact atom_cannot_ground_intentional_subject n s p hm
 
 -- ============================================================================
 -- 6. Principled Derivation of Necessary Personal Ground (No Blunt Shortcut)

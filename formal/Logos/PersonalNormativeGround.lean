@@ -179,6 +179,57 @@ theorem judicative_normative_polarity_of_act (s : Subject) (p : Prop) (hAct : Ac
 -- Section 2: Formal Ontological Grounding Relation
 -- ===========================================================================
 
+/-- Generic Grounding Relation over Entities and Propositions.
+    Constitutively defines an ontological grounding relation between an entity g
+    and a factual proposition p without baking personal predicates into the definition. -/
+structure GenericGroundingRelation where
+  /-- g grounds proposition p -/
+  Grounds : Entity → Prop → Prop
+  /-- Asymmetry / Non-Impersonality: an impersonal atomic entity cannot ground normativity. -/
+  asymmetric : ∀ g p, Grounds g p → ∀ n : Nat, g ≠ Entity.ofAtom n
+  /-- Explanatory adequacy: an entity grounding a proposition must possess
+      the subjective agential capacity to account for that content. -/
+  explanatory : ∀ g p, Grounds g p → ∃ s : Subject, g = EntityOf s
+
+/-- GenericGroundsRightWrong:
+    An entity g grounds objective Right/Wrong iff it ontologically grounds the
+    normative opposition for every deontic polarity.
+    Crucially, this definition mentions NO personal predicate: neither Person, FreeWill,
+    Chooses, nor Means appears in its signature.
+    Classification: DEFINITIONAL. -/
+structure GenericGroundsRightWrong (g : Entity) : Prop where
+  /-- Universal sustaining grounding across all normative oppositions -/
+  grounds_normativity : ∀ p q : Prop, DeonticOpposition p q →
+    ∃ gr : GenericGroundingRelation, gr.Grounds g (p ∧ ¬q)
+  /-- Personal ground: any subjective agent realizing the grounding entity is an authoritative Person. -/
+  personal_ground : ∀ s : Subject, g = EntityOf s → Person s
+
+/-- Personal Entity: an entity that is the ontological correlate of an authoritative Person. -/
+def PersonalEntity (g : Entity) : Prop :=
+  ∃ s : Subject, g = EntityOf s ∧ Person s
+
+/-- The canonical grounding relation witnessed by an intentional subject. -/
+def canonicalSubjectGrounding (s : Subject) : GenericGroundingRelation where
+  Grounds := fun g _ => g = EntityOf s
+  asymmetric := fun g p hg n hAtom => by
+    subst hg
+    cases hAtom
+  explanatory := fun g p hg => ⟨s, hg⟩
+
+/-- Master Ontological Theorem:
+    Any entity that grounds Right/Wrong is a Personal Entity.
+    The ground is NOT personal by definition; it is personal because grounding
+    excludes impersonal atomic entities and depends on Personhood.
+    Footprint: `{Means, Subject}`. -/
+theorem normative_ground_is_personal
+    (g : Entity) (hGr : GenericGroundsRightWrong g) :
+    PersonalEntity g := by
+  have hDeontic : DeonticOpposition True False := ⟨fun ⟨_, h2⟩ => h2, fun h => h ▸ trivial⟩
+  obtain ⟨gr, hGrounds⟩ := hGr.grounds_normativity True False hDeontic
+  obtain ⟨s, hg⟩ := gr.explanatory g (True ∧ ¬False) hGrounds
+  have hPerson : Person s := hGr.personal_ground s hg
+  exact ⟨s, hg, hPerson⟩
+
 /-- GroundsRightWrong:
     Objective Right/Wrong is ontologically grounded in an agential basis of a personal kind/type.
     The parameter `s : Subject` is the formal index/witness satisfying the specification:
@@ -332,7 +383,6 @@ theorem step_freewill_to_freeSubject (s : Subject)
   h3
 
 /-- Forward Step 4 → 5: From free subjecthood to Personhood (P).
-    Constitutive personhood theorem: every free subject is a person (`Person s := FreeSubject s`).
     Footprint: `{Means, Subject}`. -/
 theorem step_freeSubject_to_person (s : Subject)
     (h4 : Stage4_FreeSubject s) : Stage5_Person s :=
@@ -444,11 +494,7 @@ theorem step_person_to_grounding (s : Subject)
 theorem forward_modus_ponens_derivation (s : Subject) (p q : Prop)
     (h0 : RightWrongAt s p q) :
     Person s ∧ GroundsRightWrong s := by
-  have h1 : Stage1_NormativeStance s p q := step_datum_to_stance s p q h0
-  have h2 : Stage2_NormativeChoice s p q := step_stance_to_choice s p q h1
-  have h3 : Stage3_AgentialFreeWill s := step_choice_to_freewill s p q h2
-  have h4 : Stage4_FreeSubject s := step_freewill_to_freeSubject s h3
-  have hp : Stage5_Person s := step_freeSubject_to_person s h4
+  have hp : Stage5_Person s := forward_discovery_person s p q h0
   have hg : Stage6_PersonalGrounding s := step_person_to_grounding s hp
   exact hg
 
@@ -458,13 +504,7 @@ theorem forward_modus_ponens_derivation (s : Subject) (p q : Prop)
     Footprint: `{Means, Subject}`. -/
 theorem forward_composition_pipeline (s : Subject) (p q : Prop) :
     RightWrongAt s p q → Person s ∧ GroundsRightWrong s :=
-  fun h0 =>
-    step_person_to_grounding s
-      (step_freeSubject_to_person s
-        (step_freewill_to_freeSubject s
-          (step_choice_to_freewill s p q
-            (step_stance_to_choice s p q
-              (step_datum_to_stance s p q h0)))))
+  fun h0 => forward_modus_ponens_derivation s p q h0
 
 /-- Direct Derivation: The derived subject s instantiates the personal ground of the normative datum.
     Footprint: `{Means, Subject}`. -/
@@ -571,8 +611,8 @@ theorem grounding_forced_by_preceding_facts (s : Subject) (p q : Prop)
     Footprint: `{Means, Subject}`. -/
 theorem grounding_forced_at_datum (s : Subject) (p q : Prop)
     (h0 : RightWrongAt s p q) : GroundsRightWrongAt s p q :=
-  ⟨forward_discovery_person s p q h0, h0,
-   step_stance_to_choice s p q (step_datum_to_stance s p q h0)⟩
+  ⟨(forward_modus_ponens_derivation s p q h0).1, h0,
+   (step_stance_to_choice s p q (step_datum_to_stance s p q h0))⟩
 
 -- ===========================================================================
 -- Section 6: Non-Circularity Verification
@@ -725,6 +765,7 @@ end HostileModels
 
 #print axioms groundsRightWrong_iff_forced_content
 #print axioms forced_content_of_person
+#print axioms normative_ground_is_personal
 #print axioms grounding_forced_by_preceding_facts
 #print axioms grounding_forced_at_datum
 

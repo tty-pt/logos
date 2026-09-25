@@ -81,3 +81,5 @@ import Logos.DivineSimplicity
 import Logos.DivineImmutability
 -- Classical foundational omnipresence and universal modal grounding.
 import Logos.FoundationalOmnipresence
+-- Classical foundational unicity and structural monotheism.
+import Logos.FoundationalUnicity

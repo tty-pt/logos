@@ -1060,11 +1060,12 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     C111, C166, C167. (C175 is also `{}`, but its ledger status is COUNTERMODEL —
     the separation, not a PROVEN step — so it is not counted in this bucket.)
   - **9 `CL`-only**: C3, C10, C12–C14, C16, C37, C59, C93.
-  - **87 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+  - **93 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
     C21, C23–C25, C30, C39, C49, C51–C53, C55–C58, C62, C68, C83–C86, C91,
     C94, C97–C105, C107, C113, C114, C116, C120–C122, C137–C142, C144, C145,
     C147–C156, C160–C165, C168–C174, C176, C186, C189, C190, C191, C193,
-    C194, C195, C196, C198, C199, C200, C201, C203, C204, C205, C206, F1a.
+    C194, C195, C196, C198, C199, C200, C201, C203, C204, C205, C206,
+    C207, C208, C209, C210, C211, C213, F1a.
     F1a is the choice-**field** existence form (resolves to a kernel step;
     renamed 2026-09-18 — the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
   - **C91** — vocab-only (`{Subject}`); hostile separations `{}`. C92 (the
@@ -1717,6 +1718,32 @@ camada interpretativa, não consequência kernel.
 > C206 provides the master synthesis (`ofGround_foundational_omnipresence`, `{Means, Subject}`),
 > establishing that the ground satisfies Classical Foundational Omnipresence (Aquinas ST I q. 8)
 > with zero substantive axioms.
+
+---
+
+## Level 14 — Classical Foundational Unicity & Structural Monotheism (`Logos.FoundationalUnicity`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C207 | §28/CHARACTERISTICS | `FoundationalUnicity.universal_ground_unicity : ∀ g1 g2, UniversalModalGround g1 → UniversalModalGround g2 → AsymmetricGrounding → ∀ w, ExistsAt w g1 → ExistsAt w g2 → g1 = g2` — two distinct entities cannot both be universal modal grounds under asymmetric grounding | PROVEN | `{CL, Means, Subject}` |
+| C208 | §28/CHARACTERISTICS | `FoundationalUnicity.no_atom_is_universal_modal_ground : ∀ n w, ¬ UniversalModalGround (Entity.ofAtom n)` — an atomic factual state cannot ground Entity.ofGround, hence cannot ground all beings | PROVEN | `{Means, Subject}` |
+| C209 | §28/CHARACTERISTICS | `FoundationalUnicity.no_discriminating_subject_is_universal_modal_ground : ∀ s, (∃ p, ¬ Means s p) → ∀ w, ¬ UniversalModalGround (EntityOf s)` — a discriminating subject cannot ground Entity.ofGround, hence cannot ground all beings across modal space | PROVEN | `{Means, Subject}` |
+| C210 | §28/CHARACTERISTICS | `FoundationalUnicity.ofGround_sole_universal_ground : ∀ e w, UniversalModalGround e → (∀ n, e ≠ Entity.ofAtom n) ∧ (∀ s, (∃ p, ¬ Means s p) → e ≠ EntityOf s)` — any universal modal ground in world w cannot be an atom, nor a discriminating subject | PROVEN | `{Means, Subject}` |
+| C211 | §28/CHARACTERISTICS | `FoundationalUnicity.ofGround_foundational_unicity : FoundationalUnicity Entity.ofGround` — Entity.ofGround satisfies Classical Divine Unicity (Monotheism), grounding all beings and being structurally unique under asymmetry | PROVEN | `{CL, Means, Subject}` |
+| C212 | §28/CHARACTERISTICS | `FoundationalUnicity.unicity_does_not_force_unitarian_monad : ∃ Ground Persons, (∃ g : Ground, ∀ g', g' = g) ∧ (∀ g, ∃ p1 p2 : Persons g, p1 ≠ p2)` — foundational unicity of universal grounding does not force a solitary, relationless monad; the Trinitarian frontier remains open | COUNTERMODEL | `{}` |
+| C213 | §28/CHARACTERISTICS | `FoundationalUnicity.unicity_strictly_transcends_world : TranscendentGround Entity.ofGround` — foundational unicity does not collapse the ground into the world, strictly preserving ontological transcendence | PROVEN | `{Subject}` |
+
+> Batch FOUNDATIONAL-UNICITY (2026-09-25): C207 proves the master metaphysical theorem
+> that two distinct entities cannot both be universal modal grounds under asymmetric grounding
+> (`universal_ground_unicity`, `{CL, Means, Subject}`). C208 and C209 systematically exclude
+> worldly atoms and discriminating subjects from universal grounding (`{Means, Subject}`).
+> C210 shows that `Entity.ofGround` is the sole candidate in the Γ inventory (`{Means, Subject}`).
+> C211 provides the master synthesis (`ofGround_foundational_unicity`, `{CL, Means, Subject}`),
+> establishing Classical Divine Unicity (Aquinas ST I q. 11 a. 3) with zero substantive axioms.
+> C212 is a machine-checked separation model showing that foundational unicity does not collapse
+> into numerical unitarianism, keeping the Trinitarian frontier open (`{}`).
+> C213 confirms ontological transcendence over pantheistic conflation (`{Subject}`).
+
 
 
 

@@ -54,31 +54,59 @@ theorem person_has_free_will (s : Subject) (h : Person s) : FreeWill s :=
 def IndependentWill (s : Subject) : Prop :=
   ∀ s' : Subject, s' ≠ s → Logos.Agency.subjectWill s' ≠ Logos.Agency.subjectWill s
 
+/-- Individual substance (Boethius, "individual"): the subject is numerically
+    individuated — no distinct subject owns its volitional identity (`IndependentWill`). -/
+def IndividualSubstance (s : Subject) : Prop := IndependentWill s
+
+/-- Discursive capacity: the intellectual capacity of a subject to co-entertain
+    distinct or incompatible propositional contents. Independent of choice or volition. -/
+def DiscursiveCapacity (s : Subject) : Prop :=
+  ∃ p q : Prop, Means s p ∧ Means s q ∧ (p ≠ q ∨ Incompatible p q)
+
+/-- Rational nature (Boethius, "of a rational nature"; deliberative rationality):
+    an intentional subject endowed with discursive capacity (entertaining distinct
+    or alternative propositional contents). Independent of FreeWill or Chooses. -/
+def RationalNature (s : Subject) : Prop :=
+  IntentionalSubject s ∧ DiscursiveCapacity s
+
+/-- Dominion over one's own acts (Aquinas, ST I q.29 a.3; q.83): the subject
+    genuinely chooses, acting from itself rather than being merely acted upon. -/
+def DominionOverActs (s : Subject) : Prop := FreeWill s
+
 /-- Free, Independent Will: a subject endowed with both the capacity of free choice
     (`FreeWill s`) and an independently individuated volitional faculty (`IndependentWill s`). -/
 def FreeIndependentWill (s : Subject) : Prop :=
   FreeWill s ∧ IndependentWill s
 
-/-- Individual substance (Boethius, "individual"): the subject's will faculty is
-    numerically individuated — no distinct subject owns it (`IndependentWill`). -/
-def IndividualSubstance (s : Subject) : Prop := IndependentWill s
+/-- Numerical individuation guarantees that every subject possesses an independent will.
+    Footprint: `{Subject, Will, subjectWill, will_individuation}`. -/
+theorem independent_will_of_subject (s : Subject) : IndependentWill s :=
+  fun s' hne => Logos.Agency.will_individuation s' s hne
 
-/-- Rational nature (Boethius, "of a rational nature"; deliberative rationality):
-    propositional apprehension together with deliberation over incompatible
-    alternatives. NOT the floor kind-pred `Logos.Agency.Rational`; this is the
-    operative Boethius "rational nature". -/
-def RationalNature (s : Subject) : Prop := Intentional s ∧ FreeWill s
+/-- Every subject is an individual substance.
+    Footprint: `{Subject, Will, subjectWill, will_individuation}`. -/
+theorem individual_substance_of_subject (s : Subject) : IndividualSubstance s :=
+  independent_will_of_subject s
 
-/-- Dominion over one's own acts (Aquinas, ST I q.29 a.3; q.83): the subject
-    genuinely chooses, acting from itself rather than being merely acted upon. -/
-def DominionOverActs (s : Subject) : Prop := FreeWill s
+/-- Free will implies discursive capacity. -/
+theorem freeWill_implies_discursiveCapacity (s : Subject)
+    (h : FreeWill s) : DiscursiveCapacity s := by
+  obtain ⟨p, q, hCh⟩ := h
+  exact ⟨p, q, hCh.1, hCh.2.1, Or.inr hCh.2.2⟩
+
+/-- Free will implies rational nature. -/
+theorem freeWill_implies_rationalNature (s : Subject)
+    (h : FreeWill s) : RationalNature s := by
+  have hDisc := freeWill_implies_discursiveCapacity s h
+  obtain ⟨p, _q, hCh⟩ := h
+  exact ⟨⟨p, hCh.1⟩, hDisc⟩
 
 /-- Thomistic person core: the Boethius–Aquinas conditions of personhood —
     "individual substance of a rational nature" possessed of dominion over its
     own acts — formalized through their operative distinguishing features.
     Personhood is thus NOT an arbitrary redefinition: it is the formal criterion
     through which the Thomistic personal reality is identified.
-    Map: individual → IndependentWill; rational nature → Intentional ∧ FreeWill;
+    Map: individual → IndependentWill; rational nature → IntentionalSubject ∧ DiscursiveCapacity;
     dominion → FreeWill. -/
 def ThomisticPersonCore (s : Subject) : Prop :=
   IndividualSubstance s ∧ RationalNature s ∧ DominionOverActs s
@@ -86,29 +114,21 @@ def ThomisticPersonCore (s : Subject) : Prop :=
 /-- Free, independent will entails the Thomistic person core.
     Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem freeIndependentWill_implies_thomisticCore (s : Subject)
-    (h : FreeIndependentWill s) : ThomisticPersonCore s := by
-  exact ⟨h.2, ⟨Logos.Choice.freeSubject_implies_intentional s h.1, h.1⟩, h.1⟩
+    (h : FreeIndependentWill s) : ThomisticPersonCore s :=
+  ⟨h.2, freeWill_implies_rationalNature s h.1, h.1⟩
 
 /-- Thomistic person core entails free, independent will.
     Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem thomisticCore_implies_freeIndependentWill (s : Subject)
-    (h : ThomisticPersonCore s) : FreeIndependentWill s := by
-  obtain ⟨hInd, hRN, _hDom⟩ := h
-  exact ⟨hRN.2, hInd⟩
+    (h : ThomisticPersonCore s) : FreeIndependentWill s :=
+  ⟨h.2.2, h.1⟩
 
 /-- Master Equivalence: free, independent will is equivalent to the
     Thomistic person core.
     Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem freeIndependentWill_iff_thomisticCore (s : Subject) :
-    FreeIndependentWill s ↔ ThomisticPersonCore s := by
-  constructor
-  · exact freeIndependentWill_implies_thomisticCore s
-  · exact thomisticCore_implies_freeIndependentWill s
-
-/-- Numerical individuation guarantees that every subject possesses an independent will.
-    Footprint: `{Subject, Will, subjectWill, will_individuation}`. -/
-theorem independent_will_of_subject (s : Subject) : IndependentWill s :=
-  fun s' hne => Logos.Agency.will_individuation s' s hne
+    FreeIndependentWill s ↔ ThomisticPersonCore s :=
+  ⟨freeIndependentWill_implies_thomisticCore s, thomisticCore_implies_freeIndependentWill s⟩
 
 /-- Master Equivalence: Personhood is constitutively equivalent to Free, Independent Will.
     A person is a subject possessing a free will that is genuinely its own,
@@ -147,6 +167,16 @@ theorem person_iff_thomisticCore (s : Subject) : Person s ↔ ThomisticPersonCor
 theorem person_is_intentional (s : Subject) (h : Person s) : IntentionalSubject s := by
   obtain ⟨p, _q, hCh⟩ := h
   exact ⟨p, hCh.1⟩
+
+/-- Every Person possesses Discursive Capacity.
+    Footprint: `{Means, Subject}`. -/
+theorem person_has_discursive_capacity (s : Subject) (h : Person s) : DiscursiveCapacity s :=
+  freeWill_implies_discursiveCapacity s h
+
+/-- Every Person has an Independent Will.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+theorem person_has_independent_will (s : Subject) (h : Person s) : IndependentWill s :=
+  independent_will_of_subject s
 
 /-- Any person has a choice field: a person is always before two incompatible alternatives.
     Footprint: `{Means, Subject}`. -/

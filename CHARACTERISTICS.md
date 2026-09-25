@@ -194,7 +194,16 @@ The foundation is **free and personal** in the minimal sense of being an uncondi
 
 **Status in the prose:** Explicit but compressed; closely connected to simplicity and universality.
 
-**Formal status: ❌ deferred and separated — no unity/monotheism theorem.** `TheologicalModalHardening.necessary_existence_not_entails_uniqueness` (`formal/Logos/TheologicalModalHardening.lean:406`, `{}`) proves uniqueness is not a kernel consequence; `universal_ground_unique` (`formal/Logos/NecessaryPersonalGround.lean:24`) is deferred/absent with no compiled declaration. Generated `README.md` corroborates: "One God / strict monotheism ⏸ DEFERRED". Live plurality goes the other way: `Plurality.T12_twoPersons` (`formal/Logos/Plurality.lean:45`, `{AxTwoSubjects, Means, Subject}`) PROVEN↑.
+**Formal status: ✅ PROVEN (Foundational Unicity; Aquinas ST I q. 11 a. 3); ⊨ SEPARATED (Numerical Unitarianism); ⏸ DEFERRED (Strict Monotheism branch).**
+Formalized in `Logos.FoundationalUnicity` (`formal/Logos/FoundationalUnicity.lean`):
+(1) Master Metaphysical Theorem: `universal_ground_unicity` (C207, `{CL, Means, Subject}`), proving that two distinct entities cannot both be universal modal grounds under asymmetric grounding;
+(2) Concrete Atom Exclusion: `no_atom_is_universal_modal_ground` (C208, `{Means, Subject}`), proving no atomic factual state can be a universal ground;
+(3) Discriminating Subject Exclusion: `no_discriminating_subject_is_universal_modal_ground` (C209, `{Means, Subject}`), proving no finite subject can be a universal ground;
+(4) Sole Universal Ground: `ofGround_sole_universal_ground` (C210, `{Means, Subject}`), proving `Entity.ofGround` is the unique universal ground candidate in Γ;
+(5) Master Synthesis: `ofGround_foundational_unicity` (C211, `{CL, Means, Subject}`, 0 substantive axioms);
+(6) Metatheoretic Independence: `unicity_does_not_force_unitarian_monad` (C212, `{}`), proving that foundational unicity does not force a solitary, relationless monad, keeping the Trinitarian frontier open;
+(7) Ontological Transcendence: `unicity_strictly_transcends_world` (C213, `{Subject}`), confirming that the unique ground strictly transcends the world.
+Separation: `TheologicalModalHardening.necessary_existence_not_entails_uniqueness` (`formal/Logos/TheologicalModalHardening.lean:406`, `{}`) proves uniqueness does not follow from bare necessity alone. Generated `README.md` corroborates: Foundational unicity ✅ PROVEN, Strict numerical unitarianism ⊨ INDEPENDENT, One God / strict monotheism ⏸ DEFERRED.
 
 ### Argument
 

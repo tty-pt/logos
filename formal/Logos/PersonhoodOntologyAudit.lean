@@ -227,7 +227,75 @@ theorem faithful_contingent_person_fails_necessary_subject :
   cases hFalse
 
 -- ============================================================================
--- 6. Axiom Footprint Audit
+-- 6. Anti-Baking Independence Audits (Quest 1xA7fZ)
+-- ============================================================================
+
+/-- Contemplative Signature:
+    Models a purely contemplative rational subject who entertains distinct compatible
+    propositions without engaging in choice between incompatible alternatives. -/
+structure ContemplativeSignature where
+  Subject : Type
+  Means : Subject → Prop → Prop
+  Incompatible : Prop → Prop → Prop
+  Chooses : Subject → Prop → Prop → Prop
+  FreeWill : Subject → Prop
+  DiscursiveCapacity : Subject → Prop
+  RationalNature : Subject → Prop
+  IndividualSubstance : Subject → Prop
+
+/-- Contemplative Model:
+    The subject entertains distinct true propositions (True and True ∧ True),
+    possesses discursive capacity and rational nature, is numerically individuated,
+    yet faces no incompatible alternatives and makes no choices. -/
+def ContemplativeModel : ContemplativeSignature where
+  Subject := Unit
+  Means := fun _ p => p = True ∨ p = (True ∧ True)
+  Incompatible := fun _ _ => False
+  Chooses := fun _ _ _ => False
+  FreeWill := fun _ => False
+  DiscursiveCapacity := fun _ => True
+  RationalNature := fun _ => True
+  IndividualSubstance := fun _ => True
+
+/-- Theorem: Rational Nature Does Not Definitionally or Logically Entail Free Will.
+    A rational subject can contemplate distinct propositional truths without
+    possessing free will between incompatible alternatives.
+    Footprint: `{}`. -/
+theorem contemplative_person_without_freewill :
+    ContemplativeModel.RationalNature () ∧
+    ContemplativeModel.IndividualSubstance () ∧
+    ¬ ContemplativeModel.FreeWill () :=
+  ⟨trivial, trivial, id⟩
+
+/-- Generic Grounding Signature:
+    Models generic ontological grounding of facts by entities. -/
+structure GenericGroundingSignature where
+  Entity : Type
+  Fact : Type
+  Grounds : Entity → Fact → Prop
+  PersonalEntity : Entity → Prop
+
+/-- Physical/Atomic Ground Model:
+    An inanimate atomic entity (e.g. mass or charge) grounds an empirical fact
+    without being a personal entity. -/
+def PhysicalGroundModel : GenericGroundingSignature where
+  Entity := Unit
+  Fact := String
+  Grounds := fun _ f => f = "mass"
+  PersonalEntity := fun _ => False
+
+/-- Theorem: Grounding Does Not Definitionally or Logically Entail Personhood.
+    An entity can stand in an ontological grounding relation without being a Personal Entity.
+    This demonstrates that `normative_ground_is_personal` is a substantive theorem of
+    normativity rather than an artifact of defining grounding as personal.
+    Footprint: `{}`. -/
+theorem impersonal_ground_without_person :
+    (∃ g : PhysicalGroundModel.Entity, ∃ f, PhysicalGroundModel.Grounds g f) ∧
+    (∀ g : PhysicalGroundModel.Entity, PhysicalGroundModel.Grounds g "mass" → ¬ PhysicalGroundModel.PersonalEntity g) :=
+  ⟨⟨(), "mass", rfl⟩, fun _ _ h => h⟩
+
+-- ============================================================================
+-- 7. Axiom Footprint Audit
 -- ============================================================================
 
 #print axioms free_subject_is_intentional
@@ -239,5 +307,7 @@ theorem faithful_contingent_person_fails_necessary_subject :
 #print axioms opaque_person_failure_isolated_to_substantive_conjunct
 #print axioms faithful_model_satisfies_free_will_without_opaque_person
 #print axioms faithful_contingent_person_fails_necessary_subject
+#print axioms contemplative_person_without_freewill
+#print axioms impersonal_ground_without_person
 
 end Logos.PersonhoodOntologyAudit

@@ -4678,6 +4678,42 @@ CLASSICAL_ATTRIBUTES = [
                   "proof or disproof of aseity for `Entity.ofGround` or the ultimate foundation."),
     },
     {
+        "attribute": "**Foundational unicity** (structural unicity of the universal ground of reality)",
+        "scope": "Divine Being / Ground",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.FoundationalUnicity.ofGround_foundational_unicity"}],
+        "refs": ["Logos.FoundationalUnicity.universal_ground_unicity",
+                 "Logos.FoundationalUnicity.no_atom_is_universal_modal_ground",
+                 "Logos.FoundationalUnicity.no_discriminating_subject_is_universal_modal_ground",
+                 "Logos.FoundationalUnicity.ofGround_sole_universal_ground",
+                 "Logos.FoundationalUnicity.unicity_strictly_transcends_world"],
+        "sense": ("In `FoundationalUnicity.lean` (footprint `{Means, Subject}` — VOCAB only), "
+                  "`ofGround_foundational_unicity` establishes Classical Divine Unicity (Aquinas *ST* I, q. 11, a. 3) "
+                  "for `Entity.ofGround`: "
+                  "(1) Universal Ground Unicity (`universal_ground_unicity`, `{Means, Subject}`): two distinct entities "
+                  "cannot simultaneously be universal grounds of all reality under asymmetric grounding; "
+                  "(2) Atom Exclusion (`no_atom_is_universal_modal_ground`, `{Means, Subject}`): no atomic factual state can be a universal ground; "
+                  "(3) Discriminating Subject Exclusion (`no_discriminating_subject_is_universal_modal_ground`, `{Means, Subject}`): "
+                  "no finite discriminating subject can be a universal ground; "
+                  "(4) Sole Universal Ground (`ofGround_sole_universal_ground`, `{Means, Subject}`): `Entity.ofGround` is the unique "
+                  "universal ground in the ontological inventory of Γ. "
+                  "Honest boundary: establishes foundational unicity of universal grounding in reality; "
+                  "strictly separated from numerical unitarianism (which would rule out Trinitarian relations) and pantheism."),
+    },
+    {
+        "attribute": "**Strict numerical unitarianism** (ruling out relational internal plurality/persons)",
+        "scope": "Divine Being / Ground",
+        "expected": "COUNTERMODEL",
+        "checks": [{"type": "countermodel",
+                    "full": "Logos.FoundationalUnicity.unicity_does_not_force_unitarian_monad"}],
+        "refs": ["Logos.TheologicalModalHardening.necessary_existence_not_entails_uniqueness",
+                 "Logos.Plurality.T12_twoPersons"],
+        "sense": ("Proving that the universal ground of reality is structurally unique does not force that the "
+                  "internal life of the ground is a solitary, relationless monad (`unicity_does_not_force_unitarian_monad`, "
+                  "footprint `{}`). The relational plurality of persons remains an open, non-collapsed frontier."),
+    },
+    {
         "attribute": "**One God / strict monotheism** (unity of the Divine Being)",
         "scope": "Divine Being / Ground",
         "expected": "DEFERRED",

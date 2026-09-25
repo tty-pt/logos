@@ -1164,7 +1164,7 @@ In the unified Γ ontology, Personhood is defined constitutively in the classica
 > **The skeptic tries —** A loaded, theological word smuggled into the deduction.
 > **The reply / the frontier —** Classical, not novel: the term follows Boethius and Aquinas rather than theological invention. Nothing theological is *assumed*; theology would enter only downstream, in the branches — and is then explicitly bounded by countermodels.
 >
-> **Machine-Checked Kernel Rebuttal —** [`person_iff_thomisticCore`](formal/Logos/Person.lean#L137) (Footprint: 0 substantive axioms):
+> **Machine-Checked Kernel Rebuttal —** [`person_iff_thomisticCore`](formal/Logos/Person.lean#L157) (Footprint: 0 substantive axioms):
 > `⊢ Person s ↔ IndividualSubstance s ∧ RationalNature s ∧ DominionOverActs s`
 </details>
 
@@ -1175,7 +1175,7 @@ Thomistic person core: the Boethius–Aquinas conditions of personhood — "indi
 
     ∴ ThomisticPersonCore ≡ IndividualSubstance(s) ∧ RationalNature(s) ∧ DominionOverActs(s)
 
-📘 · [Person.lean#ThomisticPersonCore](formal/Logos/Person.lean#L83)
+📘 · [Person.lean#ThomisticPersonCore](formal/Logos/Person.lean#L111)
 
     ∴ FreeSubject ≡ FreeWill(s) — defined in §3. Genuine Choice.
 
@@ -1206,7 +1206,7 @@ Master Correspondence: Personhood is constitutively equivalent to the Thomistic 
 
     ∴ Person(s) ↔ ThomisticPersonCore(s)
 
-✅ · [Person.lean#person_iff_thomisticCore](formal/Logos/Person.lean#L137)
+✅ · [Person.lean#person_iff_thomisticCore](formal/Logos/Person.lean#L157)
 
 <details>
 <summary>Formal Derivation (3 steps, natural deduction, 0 substantive axioms)</summary>
@@ -1270,7 +1270,7 @@ We distinguish carefully between: (1) the subject possessing a Will; (2) the fac
 > **The skeptic tries —** Two persons could share one will — individuation is not forced.
 > **The reply / the frontier —** Individuation is a constitutive meaning-postulate, not a derived construction: `will_individuation` (A18, VOCAB — a **declared** injectivity law `subjectWill s₁ ≠ subjectWill s₂`, not a theorem) assigns each subject its own numerically distinct will-faculty, so two Persons cannot share one will; given that postulate, `Person ↔ FreeIndependentWill` follows with 0 substantive axioms. Its status as a declared postulate — not a theorem — is **kernel-verified**: the hostile model `Subject := Bool`, `Will := Unit`, `subjectWill := fun _ => ()` satisfies the pre-will spine (performative act included), and there the law **arrives at a contradiction** — forcing injectivity demands `subjectWill true ≠ subjectWill false` while both wills are `()`; spine+law is inconsistent, spine alone satisfiable ⇒ the law cannot be derived (`WillIndividuationAudit.will_individuation_not_forced_by_prewill_spine`, footprint `{}`).
 >
-> **Machine-Checked Kernel Rebuttal —** [`person_iff_freeIndependentWill`](formal/Logos/Person.lean#L117) (Footprint: 0 substantive axioms):
+> **Machine-Checked Kernel Rebuttal —** [`person_iff_freeIndependentWill`](formal/Logos/Person.lean#L137) (Footprint: 0 substantive axioms):
 > `⊢ Person s ↔ FreeIndependentWill s`
 </details>
 
@@ -1281,7 +1281,7 @@ Free, Independent Will: a subject endowed with both the capacity of free choice 
 
     ∴ FreeIndependentWill ≡ FreeWill(s) ∧ IndependentWill(s)
 
-📘 · [Person.lean#FreeIndependentWill](formal/Logos/Person.lean#L59)
+📘 · [Person.lean#FreeIndependentWill](formal/Logos/Person.lean#L78)
 
 Independent Will: the faculty of will possessed by subject s is uniquely its own, numerically distinct from the will of any distinct subject.
 
@@ -1299,7 +1299,7 @@ Master Equivalence: Personhood is constitutively equivalent to Free, Independent
 
     ∴ Person(s) ↔ FreeIndependentWill(s)
 
-✅ · [Person.lean#person_iff_freeIndependentWill](formal/Logos/Person.lean#L117)
+✅ · [Person.lean#person_iff_freeIndependentWill](formal/Logos/Person.lean#L137)
 
 <details>
 <summary>Formal Derivation (5 steps, natural deduction, 0 substantive axioms)</summary>
@@ -1321,24 +1321,25 @@ Numerical individuation guarantees that every subject possesses an independent w
 
     ∴ IndependentWill(s)
 
-✅ · [Person.lean#independent_will_of_subject](formal/Logos/Person.lean#L110)
+✅ · [Person.lean#independent_will_of_subject](formal/Logos/Person.lean#L83)
 
 Master Theorem: Every Person possesses a Free, Independent Will.
 
     Person(s) → FreeIndependentWill(s)
 
-✅ · [Person.lean#person_has_free_independent_will](formal/Logos/Person.lean#L126)
+✅ · [Person.lean#person_has_free_independent_will](formal/Logos/Person.lean#L146)
 
 Master Equivalence: free, independent will is equivalent to the Thomistic person core.
 
     ∴ FreeIndependentWill(s) ↔ ThomisticPersonCore(s)
 
-✅ · [Person.lean#freeIndependentWill_iff_thomisticCore](formal/Logos/Person.lean#L102)
+✅ · [Person.lean#freeIndependentWill_iff_thomisticCore](formal/Logos/Person.lean#L129)
 
 <details>
-<summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
+<summary>Formal Derivation (2 steps, natural deduction, 0 substantive axioms)</summary>
 
-    1. split into forward and reverse directions (↔ / ∧)  (split equivalence/conjunction into forward (mp) and reverse (mpr) goals)
+    1. freeIndependentWill_implies_thomisticCore s  (component witness 1: freeIndependentWill_implies_thomisticCore s)
+    2. thomisticCore_implies_freeIndependentWill s  (component witness 2: thomisticCore_implies_freeIndependentWill s)
 
     ∴ FreeIndependentWill(s) ↔ ThomisticPersonCore(s)
 
@@ -1370,7 +1371,7 @@ Grounding is derived directly from Personhood itself without Act (Grounding from
 > **The skeptic tries —** Principle-of-Sufficient-Reason smuggling: this makes the Person (or the argument) the causal creator of morality.
 > **The reply / the frontier —** Grounding ≠ identity and ≠ causation — see distinctions 2 and 4: Right/Wrong's correctness-order has a ground *personal in kind*, not a particular person causally producing existents or rightness. The bare ought survives the impersonal model, the personal ground is forced within the normative order, and model_b_separation marks exactly what the antecedent does and does not reach.
 >
-> **Machine-Checked Kernel Rebuttal —** [`will_identity_collapses_normativity`](formal/Logos/PersonalNormativeGround.lean#L261) (Footprint: 0 substantive axioms):
+> **Machine-Checked Kernel Rebuttal —** [`will_identity_collapses_normativity`](formal/Logos/PersonalNormativeGround.lean#L312) (Footprint: 0 substantive axioms):
 > `⊢ Wills s p = Ought s p → NormativeViolation s p → ⊥`
 </details>
 
@@ -1381,13 +1382,13 @@ GroundedNormativePolarity: Normative polarity is ontologically grounded in a sub
 
     ∴ GroundedNormativePolarity ≡ FreeIndependentWill(s) ∧ GroundsRightWrong s
 
-📘 · [PersonalNormativeGround.lean#GroundedNormativePolarity](formal/Logos/PersonalNormativeGround.lean#L231)
+📘 · [PersonalNormativeGround.lean#GroundedNormativePolarity](formal/Logos/PersonalNormativeGround.lean#L282)
 
 GroundsRightWrong: Objective Right/Wrong is ontologically grounded in an agential basis of a personal kind/type.
 
     ∴ structure GroundsRightWrong (s : Subject) : Prop where
 
-📘 · [PersonalNormativeGround.lean#GroundsRightWrong](formal/Logos/PersonalNormativeGround.lean#L199)
+📘 · [PersonalNormativeGround.lean#GroundsRightWrong](formal/Logos/PersonalNormativeGround.lean#L250)
 
 Right/Wrong Distinction at contents p and q for subject s: The subject is addressed by an objective deontic opposition between Right (p) and Wrong (q).
 
@@ -1407,13 +1408,13 @@ Direct Derivation: The derived subject s instantiates the personal ground of the
 
     RightWrongAt(s, p, q) → Person(s) ∧ GroundsRightWrong s
 
-✅ · [PersonalNormativeGround.lean#person_grounds_original_normative_datum](formal/Logos/PersonalNormativeGround.lean#L471)
+✅ · [PersonalNormativeGround.lean#person_grounds_original_normative_datum](formal/Logos/PersonalNormativeGround.lean#L511)
 
 Master Grounding Theorem from Personhood (Historical Compatibility Name): Personhood supplies the ontological ground-type required by the normative order.
 
     Person(s) → GroundsRightWrong s
 
-✅ · [PersonalNormativeGround.lean#person_grounds_normative_polarity](formal/Logos/PersonalNormativeGround.lean#L385)
+✅ · [PersonalNormativeGround.lean#person_grounds_normative_polarity](formal/Logos/PersonalNormativeGround.lean#L435)
 
 <details>
 <summary>Supporting Infrastructure — 3 auxiliary theorem(s) beneath this step</summary>
@@ -1422,7 +1423,7 @@ Master Realization Theorem: Any Person realizes GroundedNormativePolarity, showi
 
     Person(s) → GroundedNormativePolarity(s)
 
-✅ · [PersonalNormativeGround.lean#person_realizes_grounded_polarity](formal/Logos/PersonalNormativeGround.lean#L401)
+✅ · [PersonalNormativeGround.lean#person_realizes_grounded_polarity](formal/Logos/PersonalNormativeGround.lean#L451)
 
 <details>
 <summary>Formal Derivation (3 steps, natural deduction, 0 substantive axioms)</summary>
@@ -1441,7 +1442,7 @@ The Non-Reversal Architectural Principle: 1. Deductive Discovery runs forward: R
 
     ∴ (RightWrongAt(s, p, q) → Person(s) ∧ GroundsRightWrong s) ∧ (Person(s) → GroundsRightWrong s)
 
-✅ · [PersonalNormativeGround.lean#non_reversal_discovery_and_grounding](formal/Logos/PersonalNormativeGround.lean#L515)
+✅ · [PersonalNormativeGround.lean#non_reversal_discovery_and_grounding](formal/Logos/PersonalNormativeGround.lean#L555)
 
 <details>
 <summary>Formal Derivation (2 steps, natural deduction, 0 substantive axioms)</summary>
@@ -1457,7 +1458,7 @@ Non-Circularity Architectural Theorem: The retorsive discovery proof of Free Wil
 
     GenuineNormativity s p q → Chooses(s, p, q) ∧ FreeWill(s)
 
-✅ · [PersonalNormativeGround.lean#discovery_independent_of_grounding](formal/Logos/PersonalNormativeGround.lean#L587)
+✅ · [PersonalNormativeGround.lean#discovery_independent_of_grounding](formal/Logos/PersonalNormativeGround.lean#L627)
 
 </details>
 
@@ -1470,7 +1471,7 @@ Theorem: Separation Theorem from Model B.
 
     model_b_separation ⇏ Independence
 
-🧱 model_b_separation ⇏ Independence · [PersonalNormativeGround.lean#model_b_separation](formal/Logos/PersonalNormativeGround.lean#L674)
+🧱 model_b_separation ⇏ Independence · [PersonalNormativeGround.lean#model_b_separation](formal/Logos/PersonalNormativeGround.lean#L714)
 
 <details>
 <summary>Formal Derivation (3 steps, natural deduction, 0 substantive axioms)</summary>
@@ -1809,14 +1810,16 @@ Status vocabulary used here (extends the badge legend above): `✅` PROVEN (mach
 |---|---|---|---|
 | **Personal** — the ground-type is personal | Personal ground / person-type | ✅ PROVEN | `RightWrong ⇒ Person` (`∀ s, RightWrong s → Person s`). Established of the personal ground/type, not of a particular divine person. — [PersonalGroundOfReality.lean#personal_ground_of_right_wrong](formal/Logos/PersonalGroundOfReality.lean#L98), footprint {Means, Subject} |
 | **Psychological personality** (humanoid consciousness, stream of experience) | Personal ground / person-type | 🧱 INDEPENDENT | Minimal constitutive personhood in Γ is functional: the locus of non-derived normative discrimination (`Person := FreeSubject`). Substantive psychological personhood (ordinary humanoid mind, emotional states, stream of consciousness) is provably independent: `faithful_model_satisfies_free_will_without_opaque_person` (footprint `{}`) satisfies free will without substantive psychological personality. The text explicitly disclaims ordinary psychological personality (`README-OLD.md:179-187`). — [PersonhoodOntologyAudit.lean#faithful_model_satisfies_free_will_without_opaque_person](formal/Logos/PersonhoodOntologyAudit.lean#L182), footprint {} ; [PersonhoodOntologyAudit.lean#faithful_contingent_person_fails_necessary_subject](formal/Logos/PersonhoodOntologyAudit.lean#L221), footprint {} |
-| **Rational** — formally equivalent to the Thomistic core containing RationalNature | Personal ground / person-type | ✅ PROVEN | `Person(s) ↔ ThomisticPersonCore(s)`, whose conjunct `RationalNature s ≡ Intentional s ∧ FreeWill s` is definitional (`📘`). Established of the person-type. — [Person.lean#person_iff_thomisticCore](formal/Logos/Person.lean#L137), footprint {Means, Subject, Will, subjectWill, will_individuation} ; [Person.lean#RationalNature](formal/Logos/Person.lean#L70), footprint {Means, Subject} |
+| **Rational** — formally equivalent to the Thomistic core containing RationalNature | Personal ground / person-type | ✅ PROVEN | `Person(s) ↔ ThomisticPersonCore(s)`, whose conjunct `RationalNature s ≡ Intentional s ∧ FreeWill s` is definitional (`📘`). Established of the person-type. — [Person.lean#person_iff_thomisticCore](formal/Logos/Person.lean#L157), footprint {Means, Subject, Will, subjectWill, will_individuation} ; [Person.lean#RationalNature](formal/Logos/Person.lean#L69), footprint {Means, Subject} |
 | **Free** — genuine normativity yields genuine choice and free will | Personal ground / person-type | ✅ PROVEN | `GenuineNormativity ⇒ Chooses ⇒ FreeWill`; `FreeWill s ≡ ∃ p q, Chooses s p q` is definitional (`📘`). — [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will](formal/Logos/IndubitableNormativeFreeWill.lean#L115), footprint {Means, Subject} ; [Choice.lean#FreeWill](formal/Logos/Choice.lean#L163), footprint {Means, Subject} |
-| **Independent will** — with numerical individuation | Personal ground / person-type | ✅ PROVEN | `Person(s) ↔ FreeIndependentWill(s)`; `subjectWill s₁ ≠ subjectWill s₂` — distinct persons have numerically distinct wills. The meaning-postulate status is kernel-verified: `will_individuation` is not derivable from the pre-will spine (`WillIndividuationAudit.will_individuation_not_forced_by_prewill_spine`, `{}`). — [Person.lean#person_iff_freeIndependentWill](formal/Logos/Person.lean#L117), footprint {Means, Subject, Will, subjectWill, will_individuation} ; [Person.lean#IndependentWill](formal/Logos/Person.lean#L54), footprint {Subject, Will, subjectWill} |
+| **Independent will** — with numerical individuation | Personal ground / person-type | ✅ PROVEN | `Person(s) ↔ FreeIndependentWill(s)`; `subjectWill s₁ ≠ subjectWill s₂` — distinct persons have numerically distinct wills. The meaning-postulate status is kernel-verified: `will_individuation` is not derivable from the pre-will spine (`WillIndividuationAudit.will_individuation_not_forced_by_prewill_spine`, `{}`). — [Person.lean#person_iff_freeIndependentWill](formal/Logos/Person.lean#L137), footprint {Means, Subject, Will, subjectWill, will_individuation} ; [Person.lean#IndependentWill](formal/Logos/Person.lean#L54), footprint {Subject, Will, subjectWill} |
 | **Dominion over acts** / authoritative personhood | Personal ground / person-type | ✅ PROVEN | the Thomistic-personcore conjunct `DominionOverActs s ≡ FreeWill s` is definitional (`📘`); present inside `person_iff_thomisticCore`. — [Person.lean#DominionOverActs](formal/Logos/Person.lean#L74), footprint {Means, Subject} |
-| **Ground of objective normativity (Right and Wrong)** | Personal ground / person-type | ✅ PROVEN | `Person s → GroundsRightWrong s`, and the headline that "the person supports the reality of Right". Established of the personal ground. — [PersonalNormativeGround.lean#person_grounds_normative_polarity](formal/Logos/PersonalNormativeGround.lean#L385), footprint {Means, Subject} ; [PersonalGroundOfReality.lean#the_person_supports_the_reality_of_right](formal/Logos/PersonalGroundOfReality.lean#L150), footprint {Initiates, Means, State, Subject, CL} |
+| **Ground of objective normativity (Right and Wrong)** | Personal ground / person-type | ✅ PROVEN | `Person s → GroundsRightWrong s`, and the headline that "the person supports the reality of Right". Established of the personal ground. — [PersonalNormativeGround.lean#person_grounds_normative_polarity](formal/Logos/PersonalNormativeGround.lean#L435), footprint {Means, Subject} ; [PersonalGroundOfReality.lean#the_person_supports_the_reality_of_right](formal/Logos/PersonalGroundOfReality.lean#L150), footprint {Initiates, Means, State, Subject, CL} |
 | **Non-relative core** — strict architectural invariance only | Proof architecture (not divine scope) | ✅ PROVEN | `(∀ l, AgentInvariant l → FreeWillInvariant l) ∧ ∃ l, FreeWillInvariant l ∧ ¬ AgentInvariant l` (GAPMAP C180; prose T18): the dependency-layer core admissible in every proof regime — including the non-agentive structural regime — is strictly contained in the core admissible across all agentive regimes (footprint `{}`, pure logic). This is proof architecture only: it does not establish that the Divine Being / Ground, a divine person, or the ultimate foundation is invariant across systems, perspectives, or worlds. — [HardenedInvariance.lean#agent_invariant_core_is_strictly_inside_freewill_invariant_core](formal/Logos/HardenedInvariance.lean#L226), footprint {} ; [HardenedInvariance.lean#strict_core_inclusion](formal/Logos/HardenedInvariance.lean#L173), footprint {} ; [HardenedInvariance.lean#agent_invariant_iff_agent_neutral_core](formal/Logos/HardenedInvariance.lean#L118), footprint {} ; [HardenedInvariance.lean#freewill_invariant_iff_freewill_neutral_core](formal/Logos/HardenedInvariance.lean#L153), footprint {} |
 | **Necessary Divine Being / Ground** | Divine Being / Ground | ✅ PROVEN | The ground itself is world-rigid: `NecessaryEntity Entity.ofGround` (`∀ w, ExistsAt w .ofGround`, definitional `EntityExistsAt w .ofGround := True`, footprint `{Means, Subject}` — VOCAB only). Claim E is now a **live theorem** as a *non-hypostatic* pairing: the entity-necessity conjunct is PROVEN, the personal-kind conjunct is `{AxTwoSubjects, Means, Subject}` (PROVEN↑ under the declared META axiom `AxTwoSubjects`), and the hypostatic identity is blocked (`ofGround_ne_ofSubject`: `ofGround ≠ EntityOf s`). NO 'necessary Person' theorem exists — this row is the entity-level ground, distinct from the necessary-*order* row above. — [NecessityEternity.lean#ofGround_necessary_ground_of_reality](formal/Logos/NecessityEternity.lean#L148), footprint {Means, Subject} ; [NecessityEternity.lean#claimE](formal/Logos/NecessityEternity.lean#L291), footprint {AxTwoSubjects, Means, Subject} ; [NecessaryPersonalGround.lean#step1_necessary_truth_exists](formal/Logos/NecessaryPersonalGround.lean#L191), footprint {CL} ; [NecessaryPersonalGround.lean#necessary_normative_order](formal/Logos/NecessaryPersonalGround.lean#L110), footprint {Initiates, Means, State, Subject} |
 | **Aseity** — non-derived / non-dependent | Divine Being / Ground | ✅ PROVEN | In the canonical ontology of entities, `conditional_canonical_aseity` (`CanonicalAseity.lean`, footprint `{Means, Subject}` — VOCAB only) establishes that `Entity.ofGround` has Canonical Aseity (`¬ ∃ g, ExternalGrounding g .ofGround`), conditional on all subjects being discriminating (`∀ s, ∃ p, ¬ Means s p`). Atomic entities are unconditionally excluded (`atom_cannot_ground_the_ground`, `{Means, Subject}`). At the generic modal frontier, C182 and C184 establish two-way logical independence between bare `Aseity` and volitional alternatives (footprint `{}`); that generic separation is not a proof or disproof of aseity for `Entity.ofGround` or the ultimate foundation. — [CanonicalAseity.lean#conditional_canonical_aseity](formal/Logos/CanonicalAseity.lean#L133), footprint {Means, Subject} ; [CanonicalAseity.lean#atom_cannot_ground_the_ground](formal/Logos/CanonicalAseity.lean#L96), footprint {Means, Subject} ; [CanonicalAseity.lean#canonical_aseity_implies_modal_aseity](formal/Logos/CanonicalAseity.lean#L73), footprint {Means, Subject} ; [ModalPossibilityFrontier.lean#aseity_does_not_force_any_volition_alternatives](formal/Logos/ModalPossibilityFrontier.lean#L463), footprint {} ; [ModalPossibilityFrontier.lean#volitional_alternative_does_not_force_aseity](formal/Logos/ModalPossibilityFrontier.lean#L485), footprint {} |
+| **Foundational unicity** (structural unicity of the universal ground of reality) | Divine Being / Ground | ✅ PROVEN | In `FoundationalUnicity.lean` (footprint `{Means, Subject}` — VOCAB only), `ofGround_foundational_unicity` establishes Classical Divine Unicity (Aquinas *ST* I, q. 11, a. 3) for `Entity.ofGround`: (1) Universal Ground Unicity (`universal_ground_unicity`, `{Means, Subject}`): two distinct entities cannot simultaneously be universal grounds of all reality under asymmetric grounding; (2) Atom Exclusion (`no_atom_is_universal_modal_ground`, `{Means, Subject}`): no atomic factual state can be a universal ground; (3) Discriminating Subject Exclusion (`no_discriminating_subject_is_universal_modal_ground`, `{Means, Subject}`): no finite discriminating subject can be a universal ground; (4) Sole Universal Ground (`ofGround_sole_universal_ground`, `{Means, Subject}`): `Entity.ofGround` is the unique universal ground in the ontological inventory of Γ. Honest boundary: establishes foundational unicity of universal grounding in reality; strictly separated from numerical unitarianism (which would rule out Trinitarian relations) and pantheism. — [FoundationalUnicity.lean#ofGround_foundational_unicity](formal/Logos/FoundationalUnicity.lean#L172), footprint {Means, Subject, CL} ; [FoundationalUnicity.lean#universal_ground_unicity](formal/Logos/FoundationalUnicity.lean#L86), footprint {Means, Subject, CL} ; [FoundationalUnicity.lean#no_atom_is_universal_modal_ground](formal/Logos/FoundationalUnicity.lean#L112), footprint {Means, Subject} ; [FoundationalUnicity.lean#no_discriminating_subject_is_universal_modal_ground](formal/Logos/FoundationalUnicity.lean#L125), footprint {Means, Subject} ; [FoundationalUnicity.lean#ofGround_sole_universal_ground](formal/Logos/FoundationalUnicity.lean#L138), footprint {Means, Subject} ; [FoundationalUnicity.lean#unicity_strictly_transcends_world](formal/Logos/FoundationalUnicity.lean#L200), footprint {Subject} |
+| **Strict numerical unitarianism** (ruling out relational internal plurality/persons) | Divine Being / Ground | 🧱 INDEPENDENT | Proving that the universal ground of reality is structurally unique does not force that the internal life of the ground is a solitary, relationless monad (`unicity_does_not_force_unitarian_monad`, footprint `{}`). The relational plurality of persons remains an open, non-collapsed frontier. — [FoundationalUnicity.lean#unicity_does_not_force_unitarian_monad](formal/Logos/FoundationalUnicity.lean#L190), footprint {} ; [TheologicalModalHardening.lean#necessary_existence_not_entails_uniqueness](formal/Logos/TheologicalModalHardening.lean#L406), footprint {} ; [Plurality.lean#T12_twoPersons](formal/Logos/Plurality.lean#L45), footprint {AxTwoSubjects, Means, Subject} |
 | **One God / strict monotheism** (unity of the Divine Being) | Divine Being / Ground | ⏸ DEFERRED | Strict monotheism (`monotheism_of_god_and_uniqueness`, `monotheism_compatible_with_trinity`) is deferred out of the live kernel (Branch B, `⏸`); unity concerns the Divine Being, not numerical identity of Personhood. Uniqueness is provably NOT a kernel consequence: the machine-witnessed separation `TheologicalModalHardening.necessary_existence_not_entails_uniqueness` (`¬ (∀ S, UniqueExists S.NecessaryEntity)`, L406-414, footprint `{}`) and the deferred `universal_ground_unique` (`NecessaryPersonalGround.lean:24`) mark it as an interpretive layer. |
 | **Perfect (moral) goodness** | Divine Being / Ground | 🧱 INDEPENDENT | GAPMAP ledger row `F3 §28 (Good)` = COUNTERMODEL (🧱) via C175: the `M_amoral` model (`{}`) satisfies epistemic agential normativity with no practical obligation — the separation is permanent (`moral_pole_postulate_is_not_a_consequence`, vocabulary-only), so the moral pole is never *read off* the normative structure. Right/Wrong here is epistemic correctness, explicitly distinguished from moral good/evil. The *positive pole itself* is nevertheless obtained: `Good` is a fair definition (helping another person; `{Means, Subject}` — the definition smuggles nothing) and `moral_good_obtains` (C178) is PROVEN↑ under the single disclosed META bridge `AxBenevolentBearingObtains` (C177, "some person is actually helped"). The bridge is a paid commitment, not a hidden derivation: the bare value layer is machine-proven empty (`no_help_obtains`, C176, `{Subject}`), which is the bridge's own countermodel. The negative pole `Evil` remains a declared SEM datum (its fair reading needs a parallel harm bridge, not declared). What stays a countermodel frontier is the *attribution* of this goodness to the Divine Being — that remains a separate target. — [MoralFrontierAudit.lean#moral_good_obtains](formal/Logos/MoralFrontierAudit.lean#L212), footprint {AxBenevolentBearingObtains, Means, Subject} ; [MoralFrontierAudit.lean#Good](formal/Logos/MoralFrontierAudit.lean#L203), footprint {Means, Subject} ; [MoralFrontierAudit.lean#moral_pole_postulate_is_not_a_consequence](formal/Logos/MoralFrontierAudit.lean#L261), footprint {Initiates, Means, State, Subject} ; [Value.lean#AxBenevolentBearingObtains](formal/Logos/Value.lean#L183), footprint {AxBenevolentBearingObtains, Means, Subject} ; [Value.lean#no_help_obtains](formal/Logos/Value.lean#L110), footprint {Subject} |
 | **Eternal — ever-present** (everlasting existence) | Divine Being / Ground | ✅ PROVEN | World-rigid existence is unmodulated by time: `NecessaryEntity e → Everlasting e` (`∀ t, ExistsAtTime t e`) is a definitional corollary of necessity via the Nat-stage layer — the deduction imports NO temporal premise, time enters only on the conclusion side. `Everlasting Entity.ofGround` is therefore PROVEN (`{Subject}` + ground footprint, VOCAB). Distinct from the eternal love-*relation* `T14_eternalRelation_conditional`. C181 supplies the generic empty-footprint necessity-to-stage transport, but deliberately does not instantiate the canonical `Entity` sort. — [NecessityEternity.lean#the_ground_everlasting](formal/Logos/NecessityEternity.lean#L182), footprint {Subject} ; [NecessityEternity.lean#necessary_implies_everlasting](formal/Logos/NecessityEternity.lean#L167), footprint {Subject} ; [NecessityEternity.lean#necessary_existence_is_stage_uniform](formal/Logos/NecessityEternity.lean#L106), footprint {} ; [NecessityEternity.lean#ofGround_necessary](formal/Logos/NecessityEternity.lean#L132), footprint {Subject} ; [Love.lean#T14_eternalRelation_conditional](formal/Logos/Love.lean#L105), footprint {AxTwoSubjects, Means, Subject} |

@@ -1,0 +1,97 @@
+T24 — UNICIDADE FUNDACIONAL E MONOTEÍSMO ESTRUTURAL DA REALIDADE
+
+Depende de: `formal/Logos/FoundationalUnicity.lean`, formalizando a característica
+clássica da Unidade / Unicidade Divina (Tomás de Aquino ST I q. 11 a. 3: *De Dei unitate*,
+README-OLD.md §163-164, §253) para o fundamento da realidade `Entity.ofGround`.
+
+Verificado em: `formal/Logos/FoundationalUnicity.lean`; auditoria `#print axioms`
+em `:208-214`; `formal/GAPMAP.md` C207–C213; `base.txt` §28.
+
+C207 — Teorema Metafísico Mestre de Unicidade do Fundamento Universal:
+
+```lean
+theorem universal_ground_unicity
+    (g1 g2 : Entity)
+    (hU1 : UniversalModalGround g1)
+    (hU2 : UniversalModalGround g2)
+    (hAsym : AsymmetricGrounding)
+    (w : World) (hEx1 : ExistsAt w g1) (hEx2 : ExistsAt w g2) :
+    g1 = g2
+```
+
+Pegada auditada: `{CL, Means, Subject}` (0 axiomas substantivos). Se duas entidades distintas
+fossem ambas fundamentos universais da realidade sob uma relação de fundamentação assimétrica,
+$g_1$ fundamentaria $g_2$ e $g_2$ fundamentaria $g_1$, violando a assimetria da dependência.
+Logo, quaisquer dois fundamentos modais universais co-existentes são estritamente idênticos.
+
+C208 — Exclusão exaustiva de estados atómicos:
+
+```lean
+theorem no_atom_is_universal_modal_ground (n : Nat) (w : World) :
+    ¬ UniversalModalGround (Entity.ofAtom n)
+```
+
+Pegada auditada: `{Means, Subject}` (0 axiomas substantivos). Nenhum estado de facto mundano
+atómico pode fundamentar a totalidade da realidade modal.
+
+C209 — Exclusão de sujeitos discriminadores finitos:
+
+```lean
+theorem no_discriminating_subject_is_universal_modal_ground
+    (s : Subject) (hDisc : ∃ p, ¬ Logos.Agency.Means s p) (w : World) :
+    ¬ UniversalModalGround (EntityOf s)
+```
+
+Pegada auditada: `{Means, Subject}` (0 axiomas substantivos). Nenhum sujeito dotado de horizonte
+intencional finito ou discriminador pode atuar como fundamento modal universal.
+
+C210 — Unicidade exaustiva no inventário de Γ:
+
+```lean
+theorem ofGround_sole_universal_ground (e : Entity) (w : World)
+    (hU : UniversalModalGround e) :
+    (∀ n : Nat, e ≠ Entity.ofAtom n) ∧
+    (∀ s : Subject, (∃ p, ¬ Logos.Agency.Means s p) → e ≠ EntityOf s)
+```
+
+Pegada auditada: `{Means, Subject}`. Qualquer fundamento universal modal em Γ não pode ser
+um átomo nem um sujeito discriminador; apenas `Entity.ofGround` preenche o papel fundacional.
+
+C211 — Unicidade Fundacional Clássica (Síntese Mestre):
+
+```lean
+theorem ofGround_foundational_unicity :
+    FoundationalUnicity Entity.ofGround
+```
+
+Pegada auditada: `{CL, Means, Subject}` (0 axiomas substantivos). `Entity.ofGround` satisfaz
+plenamente a Unicidade Fundacional (Monoteísmo Filosófico Estrutural): fundamenta todo o ser
+através de todo o espaço modal, transcende átomos e mentes finitas, e exclui todo e qualquer
+princípio universal concorrente.
+
+C212 — Separação metateórica de não-colapso unitarista:
+
+```lean
+theorem unicity_does_not_force_unitarian_monad :
+    ∃ (Ground : Type) (Persons : Ground → Type),
+      (∃ g : Ground, ∀ g' : Ground, g' = g) ∧ (∀ g : Ground, ∃ (p1 p2 : Persons g), p1 ≠ p2)
+```
+
+Pegada auditada: `{}` (lógica pura). Demonstrar a unicidade estrita do fundamento universal
+não implica um monadismo solitário e desprovido de relações internas. A fronteira relacional
+da Trindade (`T12_twoPersons`, `T14_eternalRelation_conditional`) permanece aberta e não-colapsada.
+
+C213 — Transcendência contra o colapso panteísta:
+
+```lean
+theorem unicity_strictly_transcends_world :
+    TranscendentGround Entity.ofGround
+```
+
+Pegada auditada: `{Subject}`. A unicidade do fundamento não o identifica com o conjunto dos
+entes do universo (panteísmo), preservando a sua transcendência real perante o mundo.
+
+Limites honestos de escopo:
+A demonstração estabelece a unicidade fundacional ontológica do princípio explicativo universal
+(Monoteísmo formal, Aquino ST I q. 11 a. 3). Distingue-se expressamente do unitarismo numérico
+monádico (que excluiria a pluralidade interna trinitária) e do monismo panteísta.
