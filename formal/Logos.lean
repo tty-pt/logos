@@ -77,3 +77,5 @@ import Logos.CanonicalAseity
 import Logos.ProofPresentationRetorsion
 -- Classical divine simplicity and ontological transcendence.
 import Logos.DivineSimplicity
+-- Classical divine immutability and ontological invariance.
+import Logos.DivineImmutability

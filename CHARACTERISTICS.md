@@ -276,7 +276,7 @@ The foundation is **timeless or eternal** in the sense of being prior to and ind
 - The text does not distinguish timelessness from everlastingness.
 - “Precedence” could mean logical, ontological, or temporal priority.
 - The premise that temporal existence necessarily implies submission to causality is asserted rather than argued (`README-OLD.md:161`).
-- Immutability is never explicitly argued or named, even though it could be associated with timelessness.
+- Immutability: Formally established in `Logos.DivineImmutability` (`formal/Logos/DivineImmutability.lean`, C197–C201). `ofGround_divine_immutability` proves Classical Divine Immutability (Aquinas *ST* I, q. 9) via modal invariance (`ofGround_modal_invariance`, `{Subject}`), stage invariance (`ofGround_stage_invariance`, `{Subject}`), process invariance (`ofGround_transition_invariance`, `{Initiates, State, Subject}`), and capacity invariance (`ofGround_capacity_invariance`, `{Means, Subject}`), with footprint `{Initiates, Means, State, Subject}` (0 substantive axioms). The countermodel `contingent_entity_fails_immutability` (C197, `{}`) confirms that contingent entities fail immutability. Honest boundary: this establishes modal, temporal, process, and capacity unchangeability in Γ; it does not claim psychological impassibility or constrain relational intentionality.
 - The claim that the universe is contingent, composite, and temporal is assumed in the pantheism objection rather than derived there (`README-OLD.md:264`).
 
 ## 9. Precedence to the true/false distinction

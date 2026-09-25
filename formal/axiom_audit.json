@@ -3317,6 +3317,85 @@
   "Logos.Agency.Subject"
  ],
  "Logos.DirectNormativeRetorsion.sig_model_c_normative_denial_is_impossible": [],
+ "Logos.DivineImmutability.CapacityInvariance": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.DivineImmutability.capacity_invariance": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.DivineImmutability.casesOn": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.DivineImmutability.modal_invariance": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.DivineImmutability.recOn": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.DivineImmutability.stage_invariance": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.DivineImmutability.transition_invariance": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.ModalInvariance": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.StageInvariance": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.TransitionInvariance": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.contingent_entity_fails_immutability": [],
+ "Logos.DivineImmutability.necessity_and_atemporality_yield_immutability": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.ofGround_capacity_invariance": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.ofGround_divine_immutability": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.ofGround_modal_invariance": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.ofGround_stage_invariance": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.ofGround_transition_invariance": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
  "Logos.DivineSimplicity.DivineSimplicity.casesOn": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"

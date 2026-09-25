@@ -1,0 +1,73 @@
+T22 — IMUTABILIDADE DIVINA E INVARIÂNCIA ONTOLÓGICA DO FUNDAMENTO
+
+Depende de: `formal/Logos/DivineImmutability.lean`, formalizando a característica
+clássica da Imutabilidade Divina (Tomás de Aquino ST I q. 9, Boécio, Agostinho, README-OLD.md §160-161)
+para o fundamento da realidade `Entity.ofGround`.
+
+Verificado em: `formal/Logos/DivineImmutability.lean`; auditoria `#print axioms`
+em `:195-206`; `formal/GAPMAP.md` C197–C201; `base.txt` §28.
+
+C197 — Contramodelo de independência metateórica:
+
+```lean
+theorem contingent_entity_fails_immutability :
+    ∃ (Ent World : Type) (ExistsAtRel : World → Ent → Prop) (e : Ent),
+      ¬ (∀ w₁ w₂ : World, ExistsAtRel w₁ e ↔ ExistsAtRel w₂ e)
+```
+
+Pegada auditada: `{}` (lógica pura). Entidades contingentes variam a sua existência
+de mundo para mundo, confirmando que a imutabilidade é um predicado discriminante e não-trivial.
+
+C198 — Invariância modal da existência do fundamento:
+
+```lean
+theorem ofGround_modal_invariance :
+    ModalInvariance Entity.ofGround
+```
+
+Pegada auditada: `{Subject}` (apenas vocabulário). `Entity.ofGround` existe de forma
+invariante e rígida em todos os mundos possíveis (`∀ w₁ w₂, ExistsAt w₁ e ↔ ExistsAt w₂ e`).
+
+C199 — Invariância temporal / estágios do fundamento:
+
+```lean
+theorem ofGround_stage_invariance :
+    StageInvariance Entity.ofGround
+```
+
+Pegada auditada: `{Subject}` (apenas vocabulário). A existência do fundamento não flutua
+ao longo dos estágios temporais (`∀ t₁ t₂, ExistsAtTime t₁ e ↔ ExistsAtTime t₂ e`).
+
+C200 — Invariância de processo e transição (fora do devir):
+
+```lean
+theorem ofGround_transition_invariance :
+    TransitionInvariance Entity.ofGround
+```
+
+Pegada auditada: `{Initiates, State, Subject}` (apenas vocabulário). O fundamento está
+fora de qualquer sucessão iniciada por sujeitos (`the_ground_not_in_succession`); nenhuma
+agência finita pode criá-lo, alterá-lo ou extingui-lo.
+
+C201 — Imutabilidade Divina Clássica do Fundamento (Síntese Mestre):
+
+```lean
+theorem ofGround_divine_immutability :
+    DivineImmutability Entity.ofGround
+```
+
+Pegada auditada: `{Initiates, Means, State, Subject}` (0 axiomas substantivos).
+
+Teoremas canónicos associados:
+
+1. Princípio tomista de imutabilidade (`necessity_and_atemporality_yield_immutability`, `{Initiates, Means, State, Subject}`):
+   Qualquer entidade necessária, atemporal, fora da sucessão e com capacidade intencional invariante
+   satisfaz a Imutabilidade Divina (ST I q. 9 a. 1–2).
+
+2. Invariância intencional (`ofGround_capacity_invariance`, `{Means, Subject}`):
+   A capacidade de fundamentação intencional do fundamento é uniforme e imutável em toda a realidade.
+
+Limites honestos de escopo:
+A demonstração estabelece a imutabilidade modal, temporal, de processo e de capacidade
+de `Entity.ofGround` no sistema ontológico de Γ. Não pretende demonstrar impassibilidade
+psicológica nem restringir o endereço intencional pessoal além do que o modelo formal estipula.

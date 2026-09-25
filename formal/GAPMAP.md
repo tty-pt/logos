@@ -1060,11 +1060,11 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     C111, C166, C167. (C175 is also `{}`, but its ledger status is COUNTERMODEL —
     the separation, not a PROVEN step — so it is not counted in this bucket.)
   - **9 `CL`-only**: C3, C10, C12–C14, C16, C37, C59, C93.
-  - **79 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+  - **83 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
     C21, C23–C25, C30, C39, C49, C51–C53, C55–C58, C62, C68, C83–C86, C91,
     C94, C97–C105, C107, C113, C114, C116, C120–C122, C137–C142, C144, C145,
     C147–C156, C160–C165, C168–C174, C176, C186, C189, C190, C191, C193,
-    C194, C195, C196, F1a.
+    C194, C195, C196, C198, C199, C200, C201, F1a.
     F1a is the choice-**field** existence form (resolves to a kernel step;
     renamed 2026-09-18 — the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
   - **C91** — vocab-only (`{Subject}`); hostile separations `{}`. C92 (the
@@ -1676,6 +1676,26 @@ camada interpretativa, não consequência kernel.
 > C196 provides the master synthesis (`ofGround_divine_simplicity`, `{Means, Subject, CL}`),
 > proving that `Entity.ofGround` satisfies classical Divine Simplicity (mereological, structural,
 > and intentional) with zero substantive axioms.
+
+---
+
+## Level 12 — Classical Divine Immutability & Ontological Invariance (`Logos.DivineImmutability`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C197 | §28/CHARACTERISTICS | `DivineImmutability.contingent_entity_fails_immutability : ∃ Ent World ExistsAtRel e, ¬ (∀ w₁ w₂, ExistsAtRel w₁ e ↔ ExistsAtRel w₂ e)` — contingent entities are mutable across worlds, confirming that immutability is non-trivial | COUNTERMODEL | `{}` |
+| C198 | §28/CHARACTERISTICS | `DivineImmutability.ofGround_modal_invariance : ModalInvariance Entity.ofGround` — Entity.ofGround has invariant existence across all possible worlds | PROVEN | `{Subject}` |
+| C199 | §28/CHARACTERISTICS | `DivineImmutability.ofGround_stage_invariance : StageInvariance Entity.ofGround` — Entity.ofGround has invariant existence across all temporal stages | PROVEN | `{Subject}` |
+| C200 | §28/CHARACTERISTICS | `DivineImmutability.ofGround_transition_invariance : TransitionInvariance Entity.ofGround` — Entity.ofGround is outside all initiation-becoming and state transitions | PROVEN | `{Initiates, State, Subject}` |
+| C201 | §28/CHARACTERISTICS | `DivineImmutability.ofGround_divine_immutability : DivineImmutability Entity.ofGround` — Entity.ofGround satisfies Classical Divine Immutability across worlds, time, state transitions, and meaning capacity | PROVEN | `{Initiates, Means, State, Subject}` |
+
+> Batch DIVINE-IMMUTABILITY (2026-09-25): C197 is a machine-checked countermodel
+> showing that contingent entities fail immutability. C198 proves modal invariance
+> (`ofGround_modal_invariance`, `{Subject}`). C199 proves stage invariance
+> (`ofGround_stage_invariance`, `{Subject}`). C200 establishes process invariance
+> (`ofGround_transition_invariance`, `{Initiates, State, Subject}`). C201 provides the
+> master synthesis (`ofGround_divine_immutability`, `{Initiates, Means, State, Subject}`),
+> establishing that the ground satisfies Classical Divine Immutability with zero substantive axioms.
 
 
 

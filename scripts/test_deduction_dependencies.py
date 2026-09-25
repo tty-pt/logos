@@ -306,6 +306,10 @@ def test_readability_invariants():
     assert "ofGround_divine_simplicity" in attr_text, (
         "Table must cite ofGround_divine_simplicity"
     )
+    assert "**Divine immutability**" in attr_text, "Table must report Divine immutability"
+    assert "ofGround_divine_immutability" in attr_text, (
+        "Table must cite ofGround_divine_immutability"
+    )
     assert "not a proof or disproof of aseity for `Entity.ofGround`" in attr_text, (
         "Aseity row must preserve the canonical divine-aseity boundary"
     )

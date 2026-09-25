@@ -4773,6 +4773,30 @@ CLASSICAL_ATTRIBUTES = [
                   "Honest boundary: this establishes mereological, structural, and intentional simplicity — not identity of essence and existence."),
     },
     {
+        "attribute": "**Divine immutability** (ontological, temporal, and process unchangeability)",
+        "scope": "Divine Being / Ground",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.DivineImmutability.ofGround_divine_immutability"}],
+        "refs": ["Logos.DivineImmutability.ofGround_modal_invariance",
+                 "Logos.DivineImmutability.ofGround_stage_invariance",
+                 "Logos.DivineImmutability.ofGround_transition_invariance",
+                 "Logos.DivineImmutability.ofGround_capacity_invariance",
+                 "Logos.DivineImmutability.necessity_and_atemporality_yield_immutability",
+                 "Logos.DivineImmutability.contingent_entity_fails_immutability"],
+        "sense": ("In `DivineImmutability.lean` (footprint `{Initiates, Means, State, Subject}` — VOCAB only), "
+                  "`ofGround_divine_immutability` establishes Classical Divine Immutability (Aquinas *ST* I, q. 9) "
+                  "for `Entity.ofGround`: "
+                  "(1) Modal Invariance (`ofGround_modal_invariance`, `{Subject}`, unchanging existence across all worlds); "
+                  "(2) Stage Invariance (`ofGround_stage_invariance`, `{Subject}`, unchanging existence across all temporal stages); "
+                  "(3) Transition Invariance (`ofGround_transition_invariance`, `{Initiates, State, Subject}`, outside all initiation and state becoming); "
+                  "(4) Capacity Invariance (`ofGround_capacity_invariance`, `{Means, Subject}`, uniform intentional capacity across reality). "
+                  "The Thomistic principle is proven: necessity, atemporality, and non-succession entail immutability. "
+                  "Contingent entities provably fail immutability (`contingent_entity_fails_immutability`, `{}`). "
+                  "Honest boundary: establishes modal, temporal, process, and capacity unchangeability in Γ; "
+                  "does not claim psychological impassibility or constrain relational intentionality."),
+    },
+    {
         "attribute": "**Omniscience**",
         "scope": "Divine Being / Ground",
         "expected": "ABSENT",
@@ -4963,9 +4987,9 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("**personal, rational, free, authoritative-over-its-acts, independently individuated**")
     ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")
     ap("of a necessary normative/truth order, and (entity-level) that a **necessary Divine Being")
-    ap("/ Ground** exists — world-rigid, **everlasting** and **atemporal**, a definitional")
-    ap("corollary of necessity with time entering only on the conclusion side. The remaining")
-    ap("divine attributes — **unity / monotheism**, **omniscience**, **omnipotence**,")
+    ap("/ Ground** exists — world-rigid, **everlasting**, **atemporal**, with **Canonical Aseity**,")
+    ap("**Divine Simplicity**, and **Divine Immutability** (invariant across modal worlds, temporal stages,")
+    ap("and agential state transitions). The remaining divine attributes — **unity / monotheism**,")
     ap("**perfect moral goodness** (the moral pole itself now obtains under the single declared "
        "META bridge, C178; its attribution to the Divine Being stays a 🧱 frontier), the "
        "**Trinity**, the **Incarnation**, and contingent")
