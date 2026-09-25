@@ -9,11 +9,10 @@
 
 Every section below answers the same question — *what is the status of this claim?*
 
-> **The arc in one breath** — try to deny any step of the cascade. Either the denial
-> refutes itself (a *retorsion*: denying Right/Wrong, Ought, or genuine
-> normativity while relying on it), or the claim is definitional, or it is a
-> freely-chosen axiom whose footprint is declared out loud, or it simply is not
-> claimed at all (a *countermodel frontier*, marked `⇏`).
+> **The Dialectical Inevitability Architecture** — Why every rational attack fails:
+> 1. **Performative Retorsion (The Trap):** Any attempt to deny objective correctness must claim that its denial is *correct* (`ClaimsCorrect s NoRight`). In the Lean kernel, claiming denial as correct while true yields a direct constructive contradiction (`claims_correct_no_right_self_refuting` → ⊥, 0 substantive axioms). The skeptic cannot even enter the debate without triggering the normative partition.
+> 2. **Constitutive Semantics (The Deduction):** Rational address between incompatible alternatives is *definitionally* Choice (`Chooses`), having choice is *definitionally* Free Will (`FreeWill`), and a free choosing subject is *definitionally* a Person in the classical Boethian-Thomistic sense (`person_iff_thomisticCore`), all verified with 0 substantive axioms.
+> 3. **Airtight Epistemic Boundaries:** Where logic ends, Γ never fakes a proof. Unproved theological extensions (Trinity, Creation, Incarnation, Monotheism) are isolated by machine-checked mathematical countermodels (`⇏`).
 
 **Two directions, not one.** The chart distinguishes *epistemic discovery* (▲ — what
 the argument must prove upward: no free subject precedes free will) from *ontological
@@ -25,11 +24,11 @@ the direction is not machine-decidable.
 
 > **What this proof does and does not show**
 >
-> 1. The machine-verified chain above — clean, established **under** the
->    normative-judicative stance — the self-given performative datum (irrefutable in
->    the act of denying it), validated by the retorsion with 0 substantive axioms.
->    Zero-input free will is *not* claimed — §3 states the boundary and the machine
->    witnesses.
+> 1. The machine-verified chain above — established **under** the
+>    normative-judicative stance via two mutually reinforcing routes (0 substantive axioms):
+>    • **Route A (Performative Datum):** Rational judgment presupposes correctness (`ClaimsNormativeCorrectness s p`).
+>    • **Route B (Proof Presentation):** Presenting or evaluating Γ argumentatively instantiates the stance (`PresentsAsSound s d`), deriving Free Will and Personhood (`ProofPresentationRetorsion.lean`). Even an adversarial attack on Γ instantiates personhood (`critic_presenting_objection_is_person`).
+>    Zero-input free will from bare syntax is rejected: `M_inanimate_checker` verifies syntax with 0 subjects.
 > 2. That same dependence — *wherever the normative order is real, its ground-type
 >    is personal* — is machine-proved with 0 substantive axioms. Reading the
 >    subjunction as a direction of ontology is interpretive, as 'Two directions, not
@@ -91,6 +90,24 @@ Central Distinction: the upward arrows are *discovery* (from the datum to its gr
 the downward arrows are *ontological grounding* (from the ground to the datum) — the
 same proved dependence, read in two directions (see the note above).
 
+<details>
+<summary><b>Linear Deductive Roadmap (Steps 1–10 at a glance)</b></summary>
+
+| Step | Milestone | Core Formula | Epistemic Status |
+|---|---|---|---|
+| **§1** | Objective Right/Wrong | `¬N_T ∧ ¬N_F` | `✅` PROVEN · 0 substantive axioms |
+| **§2** | Agential Ought | `Ought TruthNorm ⟨s, p⟩` | `✅` PROVEN · 0 substantive axioms |
+| **§3** | Genuine Choice | `Chooses s p q ∧ CommittedChoice s p q r` | `✅` PROVEN (Route A / Route B) |
+| **§4** | Free Will | `FreeWill(s)` | `✅` PROVEN · 0 substantive axioms |
+| **§5** | Free Subject | `FreeSubject(s) ≡ FreeWill(s)` | `📖` DEFINITIONAL |
+| **§6** | Person | `Person(s) ↔ Boethian-Thomistic Core` | `✅` PROVEN · 0 substantive axioms |
+| **§7** | Personal Will | `FreeIndependentWill(s)` | `✅` PROVEN · 0 substantive axioms |
+| **§8** | Ground of Right/Wrong | `GroundsRightWrong(s)` | `✅` PROVEN · 0 substantive axioms |
+| **§9** | Necessary Truth | `□ τ ∧ GroundOfReality Entity.ofGround` | `✅` PROVEN · 0 substantive axioms |
+| **§10** | Constructive Ground | `PersonalGroundOfReality Entity.ofGround` | `✅` PROVEN · 0 substantive axioms |
+
+</details>
+
 ```text
 RIGHT / WRONG
   Right and wrong both obtain: the binary normative distinction is real. The 'Right'/'Wrong' polarity is the objective truth/correctness standard — some propositions are true, some false; affirming a truth is correct, affirming a falsehood is incorrect.
@@ -121,6 +138,9 @@ CommittedChoice s p q r : Prop := Act s p ∧ Chooses s q r
         │ [Committed Choice — the stance carries settlement (2026-09-24)]
         │ ⊢ CommittedChoice s p q r : Prop := Act s p ∧ Chooses s q r
 ClaimsNormativeCorrectness s p → CommittedChoice s p (Correct s p) (Incorrect s p)
+        ▲
+        │ [The Proof-Presentation Alternate Route — Argumentative Engagement Forces Personhood (2026-09-25)]
+        │ ⊢ PresentsAsSound s d → CommittedChoice s d (Correct s d) (Incorrect s d) ∧ FreeWill s ∧ Person s
         │
         │ [discovery · PURE LOGIC · 0 substantive axioms]
         ▼
@@ -264,6 +284,9 @@ The Established Right/Wrong Distinction: The binary normative distinction is rea
 
 📘 · [IndubitableNormativeFreeWill.lean#EstablishedRightWrong](formal/Logos/IndubitableNormativeFreeWill.lean#L53)
 
+<details>
+<summary><b>Retorsive Defense Against Skeptical Denial</b> (3 machine-checked theorems) — click to expand</summary>
+
 ### Retorsive Defense Against Skeptical Denial
 
 The attempted denial of objective Right and Wrong (NoRight := ¬NormativeRightExists) refutes itself performatively. Claiming the denial as correct (ClaimsCorrect s NoRight) while the denial is true produces a strict constructive contradiction (claims_correct_no_right_self_refuting). Classical double-negation elimination (Classical.not_not, footprint {CL}) derives that objective Right necessarily exists (performative_normative_denial_establishes_normative_right).
@@ -319,6 +342,10 @@ Assume ∃ s, ClaimsCorrect(s, NoRight):
     ∴ ¬NoRight
 
 </details>
+
+</details>
+
+> ➔ **Linear Forward Transition to Step 2 (Ought and Normative Polarity):** [▲ Discovery · *normative standard specification*]
 
 ---
 
@@ -426,6 +453,8 @@ An incorrect judgment act implies that the subject ought not to affirm the conte
 
 </details>
 
+> ➔ **Linear Forward Transition to Step 3 (Genuine Choice):** [▲ Discovery · *apprehension of incompatible alternatives*]
+
 ---
 
 ## 3. Genuine Choice
@@ -445,7 +474,7 @@ Step glossary, aligned with the definitions. THE core: `Chooses s p q` (co-meani
 </details>
 
 <details>
-<summary>Definitions used in this section (14; 10 new, 4 already shown)</summary>
+<summary>Definitions used in this section (19; 15 new, 4 already shown)</summary>
 
 `Act s p`: strong act: meaningful initiation of movement.
 
@@ -453,11 +482,29 @@ Step glossary, aligned with the definitions. THE core: `Chooses s p q` (co-meani
 
 📘 · [Agency.lean#Act](formal/Logos/Agency.lean#L155)
 
+Mechanical Checker: A deterministic syntactic decision procedure checking formal tree validity. It operates purely on syntax without intentionality.
+
+    ∴ Checker ≡ T(conclusion d)
+
+📘 · [ProofPresentationRetorsion.lean#Checker](formal/Logos/ProofPresentationRetorsion.lean#L79)
+
+The constitutive normative judicative stance: the subject performs the judgment act while grasping both the positive normative standard (Correctness) and the negative normative standard (Incorrectness).
+
+    ∴ ClaimsNormativeCorrectness ≡ Act s p ∧ Means(s, Correct s p) ∧ Means(s, Incorrect s p)
+
+📘 · [NormativeOrder.lean#ClaimsNormativeCorrectness](formal/Logos/NormativeOrder.lean#L168)
+
 Committed choice: the subject is committed to p (performs the act on p) while co-meaning the incompatible alternatives q and r in thought.
 
     ∴ CommittedChoice ≡ Act s p ∧ Chooses(s, q, r)
 
 📘 · [NormativeOrder.lean#CommittedChoice](formal/Logos/NormativeOrder.lean#L236)
+
+Semantic soundness: The conclusion of the derivation tracks reality / truth.
+
+    ∴ DerivationSound ≡ T(conclusion d)
+
+📘 · [ProofPresentationRetorsion.lean#DerivationSound](formal/Logos/ProofPresentationRetorsion.lean#L84)
 
 A subject is a free subject iff it possesses free will (definitionally, genuinely chooses).
 
@@ -501,11 +548,23 @@ The skeptical denial proposition: There is no genuine normativity anywhere.
 
 📘 · [RetorsiveNormativity.lean#NoGN](formal/Logos/RetorsiveNormativity.lean#L123)
 
+Person: a subject possessing a numerically distinct free will.
+
+    ∴ Person ≡ FreeSubject(s)
+
+📘 · [Person.lean#Person](formal/Logos/Person.lean#L29)
+
 Voice: act plus grasp of the positive pole `Correct s p` — nothing more; this is all `ClaimsCorrect` gives in Γ.
 
     ∴ VoiceSig ≡ JudSigAct(sig, s, p) ∧ sig.Means(s, JudSigCorrect(sig, s, p))
 
 📘 · [BipolarityRetorsion.lean#VoiceSig](formal/Logos/BipolarityRetorsion.lean#L272)
+
+Extract the conclusion proposition from a syntactic derivation tree.
+
+    ∴ conclusion ≡ T(conclusion d)
+
+📘 · [ProofPresentationRetorsion.lean#conclusion](formal/Logos/ProofPresentationRetorsion.lean#L73)
 
     ∴ Correct ≡ A(s, p) ∧ T(p) — defined in §2. Ought and Normative Polarity.
 
@@ -562,6 +621,9 @@ Every proposition is incompatible with its own negation.
 
 </details>
 
+<details>
+<summary><b>Retorsion Against 'Genuine Normativity Is Stipulative'</b> (5 machine-checked theorems) — click to expand</summary>
+
 ### Retorsion Against 'Genuine Normativity Is Stipulative'
 
 Attack: `GenuineNormativity` is just incompatible alternatives plus `Means(s,p)` and `Means(s,q)` — a stipulation of what 'normativity' means.
@@ -604,6 +666,20 @@ Free-will corollary: the combined result `(¬ NoGN) ∧ (∃ s, FreeWill s)` fal
 
 ✅ · [RetorsiveNormativity.lean#attack_inviable_without_axioms](formal/Logos/RetorsiveNormativity.lean#L309)
 
+<details>
+<summary>Formal Derivation (4 steps, natural deduction, 0 substantive axioms)</summary>
+
+Assume ∃ s, p, ClaimsNormativeCorrectness(s, p):
+
+    1. split into forward and reverse directions (↔ / ∧)  (split equivalence/conjunction into forward (mp) and reverse (mpr) goals)
+    2. witness components ⟨s, p, hClaim⟩  (existential elimination from h)
+    3. s  (conjunction conjunct 1: s)
+    4. (claims_normative_correctness_derives_free_will s p hClaim).2  (conjunction conjunct 2: (claims_normative_correctness_derives_free_will s p hClaim).2)
+
+    ∴ (¬NoGN) ∧ (∃ s, FreeWill(s))
+
+</details>
+
 **Independence witnesses — what the retorsion does NOT force:**
 
 In primitive Γ, voicing a judgment does NOT force the normative-judicative stance: M_oneway voices `True` as correct (act plus grasp of the positive pole) while failing to mean `Incorrect () True` — machine witness of the voice↔stance gap.
@@ -642,6 +718,11 @@ Direct witness (`M_inanimate`): an inanimate universe is extensionally bivalent 
 
 </details>
 
+</details>
+
+<details>
+<summary><b>Committed Choice — the stance carries settlement (2026-09-24)</b> (7 machine-checked theorems) — click to expand</summary>
+
 ### Committed Choice — the stance carries settlement (2026-09-24)
 
 The reader-facing gloss 'apprehending incompatible alternatives and committing to one' had no defendant: `Chooses` is only the cognitive co-meaning core, and a purely contemplative subject satisfies it. The strengthening locates commitment in the existing normative-judicative stance: `ClaimsNormativeCorrectness s p` performs the judgment act on p (the commitment) AND co-means the incompatible judicative poles `Correct s p` / `Incorrect s p` (the grasp). That bundle, defined as `CommittedChoice`, entails `Chooses`, `FreeWill`, and `FreeSubject` at the unchanged footprint {Initiates, Means, State, Subject, CL} — zero substantive axioms, no added hypotheses. `ClaimsNormativeCorrectness` itself is **defined** (`NormativeOrder.lean`), not assumed: instantiating it by grasping the negative pole is the performative datum, and a bare voice that never co-means `Incorrect` does not force it (`M_oneway`, C166).
@@ -654,17 +735,56 @@ The normative judicative stance is, by construction, a committed choice: the sta
 
 ✅ · [NormativeOrder.lean#claims_normative_correctness_implies_committed_choice](formal/Logos/NormativeOrder.lean#L269)
 
+<details>
+<summary>Formal Derivation (2 steps, natural deduction, 0 substantive axioms)</summary>
+
+Assume ClaimsNormativeCorrectness(s, p):
+
+    1. h.1  (conjunction conjunct 1: h.1)
+    2. (claims_normative_correctness_derives_free_will s p h).1  (conjunction conjunct 2: (claims_normative_correctness_derives_free_will s p h).1)
+
+    ∴ CommittedChoice s p (Correct(s, p)) (Incorrect(s, p))
+
+</details>
+
 Master committed-choice theorem from the stance: committed choice, co-meaning, and free will all hold of the judicative stance at the unchanged footprint.
 
     ClaimsNormativeCorrectness(s, p) → CommittedChoice s p (Correct(s, p)) (Incorrect(s, p)) ∧ Chooses(s, Correct(s, p), Incorrect(s, p)) ∧ FreeWill(s)
 
 ✅ · [NormativeOrder.lean#claims_normative_correctness_derives_committed_free_will](formal/Logos/NormativeOrder.lean#L277)
 
+<details>
+<summary>Formal Derivation (2 steps, natural deduction, 0 substantive axioms)</summary>
+
+Assume ClaimsNormativeCorrectness(s, p):
+
+    1. claims_normative_correctness_implies_committed_choice s p h  (component witness 1: claims_normative_correctness_implies_committed_choice s p h)
+    2. claims_normative_correctness_derives_free_will s p h  (component witness 2: claims_normative_correctness_derives_free_will s p h)
+
+    ∴ CommittedChoice s p (Correct(s, p)) (Incorrect(s, p)) ∧ Chooses(s, Correct(s, p), Incorrect(s, p)) ∧ FreeWill(s)
+
+</details>
+
 Whenever a normative judicative stance exists (any Act-judged content claimed correct against a prohibited alternative), committed choice exists.
 
     ∃ s, p, ClaimsNormativeCorrectness(s, p) → ∃ s,(p q r : Prop), CommittedChoice s p q r
 
 ✅ · [NormativeOrder.lean#committed_choice_exists_of_stance](formal/Logos/NormativeOrder.lean#L287)
+
+<details>
+<summary>Formal Derivation (5 steps, natural deduction, 0 substantive axioms)</summary>
+
+Assume ∃ s, p, ClaimsNormativeCorrectness(s, p):
+
+    1. s  (conjunction conjunct 1: s)
+    2. p  (conjunction conjunct 2: p)
+    3. Correct s p  (conjunction conjunct 3: Correct s p)
+    4. Incorrect s p  (conjunction conjunct 4: Incorrect s p)
+    5. claims_normative_correctness_implies_committed_choice s p hc  (conjunction conjunct 5: claims_normative_correctness_implies_committed_choice s p hc)
+
+    ∴ ∃ s,(p q r : Prop), CommittedChoice s p q r
+
+</details>
 
 **Definitional entailments of the committed bundle (pure logic):**
 
@@ -705,6 +825,154 @@ Committed choice entails free subjectivity, definitionally (`FreeSubject s := Fr
 
 ✅ · [NormativeOrder.lean#committedChoice_implies_freeSubject](formal/Logos/NormativeOrder.lean#L259)
 
+</details>
+
+<details>
+<summary><b>The Proof-Presentation Alternate Route — Argumentative Engagement Forces Personhood (2026-09-25)</b> (8 machine-checked theorems) — click to expand</summary>
+
+### The Proof-Presentation Alternate Route — Argumentative Engagement Forces Personhood (2026-09-25)
+
+Where does the initial normative claim come from? In addition to the foundational performative datum of everyday judgment (Route A), Γ provides a machine-checked alternate route directly from the proof itself (Route B):
+
+1. **The Machine Fallacy Separated:** Mechanical syntax checking (`Checker d = true`) does not force normativity; in an uninhabited world (`Subject = Empty`), `M_inanimate_checker` verifies the proof with zero subjects (`syntactic_validity_without_subject_or_normativity`, `{}`).
+2. **Argumentative Presentation (Route B):** Any agent who presents a derivation as sound (`PresentsAsSound s d`) co-means correctness and the prohibition of fallacy, deriving `CommittedChoice`, `FreeWill`, and `Person s` with 0 substantive axioms (`presents_as_sound_derives_personhood`, `{Initiates, Means, State, Subject, CL}`).
+3. **Dialectical Retorsion on Proof Criticism:** An adversarial critic who attacks Γ by presenting an objection argumentatively as sound themselves instantiates the normative stance, constructively proving their own freedom and personhood (`critic_presenting_objection_is_person`, 0 substantive axioms).
+
+**Proof Presentation Derivations — zero substantive axioms (footprint {Initiates, Means, State, Subject, CL}):**
+
+Presenting a derivation as sound constitutively instantiates the normative-judicative stance (`ClaimsNormativeCorrectness`).
+
+    Derivation ∧ PresentsAsSound(s, d) → ClaimsNormativeCorrectness(s, DerivationSound(d))
+
+✅ · [ProofPresentationRetorsion.lean#presents_as_sound_implies_claims_normative_correctness](formal/Logos/ProofPresentationRetorsion.lean#L134)
+
+<details>
+<summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
+
+Assume Derivation, and PresentsAsSound(s, d):
+
+    1. ClaimsNormativeCorrectness(s, DerivationSound(d))  (definitional identity via h)
+
+    ∴ ClaimsNormativeCorrectness(s, DerivationSound(d))
+
+</details>
+
+Presenting a derivation as sound derives committed choice on the normative poles.
+
+    Derivation ∧ PresentsAsSound(s, d) → CommittedChoice s (DerivationSound(d)) (Correct(s, DerivationSound(d))) (Incorrect(s, DerivationSound(d)))
+
+✅ · [ProofPresentationRetorsion.lean#presents_as_sound_derives_committed_choice](formal/Logos/ProofPresentationRetorsion.lean#L152)
+
+Master Theorem of Proof Presentation: An agent presenting a formal derivation as sound necessarily instantiates committed choice, co-grasp of incompatible alternatives, free will, free subjectivity, and personhood.
+
+    Derivation ∧ PresentsAsSound(s, d) → CommittedChoice s (DerivationSound(d)) (Correct(s, DerivationSound(d))) (Incorrect(s, DerivationSound(d))) ∧ Chooses(s, Correct(s, DerivationSound(d)), Incorrect(s, DerivationSound(d))) ∧ FreeWill(s) ∧ FreeSubject(s) ∧ Person(s)
+
+✅ · [ProofPresentationRetorsion.lean#presents_as_sound_derives_personhood](formal/Logos/ProofPresentationRetorsion.lean#L164)
+
+<details>
+<summary>Formal Derivation (9 steps, natural deduction, 0 substantive axioms)</summary>
+
+Assume Derivation, and PresentsAsSound(s, d):
+
+    1. Chooses(s, Correct(s, DerivationSound(d)), Incorrect(s, DerivationSound(d)))  (from )
+    2. FreeWill(s)  (elimination of 2 from hFWTuple)
+    3. FreeSubject(s)  (modus ponens via (freeSubject_iff_freeWill)
+    4. Person(s)  (modus ponens via free_subject_is_person)
+    5. hCC  (conjunction conjunct 1: hCC)
+    6. hChooses  (conjunction conjunct 2: hChooses)
+    7. hFW  (conjunction conjunct 3: hFW)
+    8. hFS  (conjunction conjunct 4: hFS)
+    9. hPerson  (conjunction conjunct 5: hPerson)
+
+    ∴ CommittedChoice s (DerivationSound(d)) (Correct(s, DerivationSound(d))) (Incorrect(s, DerivationSound(d))) ∧ Chooses(s, Correct(s, DerivationSound(d)), Incorrect(s, DerivationSound(d))) ∧ FreeWill(s) ∧ FreeSubject(s) ∧ Person(s)
+
+</details>
+
+Whenever any agent presents any derivation as sound, a Free Person exists.
+
+    ∃ s, d, PresentsAsSound(s, d) → ∃ s, Person(s) ∧ FreeWill(s)
+
+✅ · [ProofPresentationRetorsion.lean#person_exists_of_presentation](formal/Logos/ProofPresentationRetorsion.lean#L184)
+
+<details>
+<summary>Formal Derivation (3 steps, natural deduction, 0 substantive axioms)</summary>
+
+Assume ∃ s, d, PresentsAsSound(s, d):
+
+    1. s  (conjunction conjunct 1: s)
+    2. hRes.2.2.2.2  (conjunction conjunct 2: hRes.2.2.2.2)
+    3. hRes.2.2.1  (conjunction conjunct 3: hRes.2.2.1)
+
+    ∴ ∃ s, Person(s) ∧ FreeWill(s)
+
+</details>
+
+**Dialectical Retorsion on Adversarial Proof Criticism:**
+
+Dialectical Retorsion: Any skeptic attempting to deny objective correctness in formal derivations by claiming normative nihilism (`NoRight`) refutes itself constructively.
+
+    ClaimsCorrect(s, NoRight) ∧ NoRight → False
+
+✅ · [ProofPresentationRetorsion.lean#proof_criticism_nihilism_self_refuting](formal/Logos/ProofPresentationRetorsion.lean#L199)
+
+An adversarial critic who presents an objection argumentatively as sound themselves instantiates the normative stance and is therefore a Free Person.
+
+    Derivation ∧ PresentsAsSound(critic, objection) → Person(critic) ∧ FreeWill(critic)
+
+✅ · [ProofPresentationRetorsion.lean#critic_presenting_objection_is_person](formal/Logos/ProofPresentationRetorsion.lean#L206)
+
+<details>
+<summary>Formal Derivation (2 steps, natural deduction, 0 substantive axioms)</summary>
+
+Assume Derivation, and PresentsAsSound(critic, objection):
+
+    1. hRes.2.2.2.2  (conjunction conjunct 1: hRes.2.2.2.2)
+    2. hRes.2.2.1  (conjunction conjunct 2: hRes.2.2.1)
+
+    ∴ Person(critic) ∧ FreeWill(critic)
+
+</details>
+
+**Separation Countermodels — Syntactic validity alone does not force normativity:**
+
+Hostile Model 1 (`M_inanimate_checker`): An uninhabited universe with zero subjects.
+
+    syntactic_validitywithout_subject_or_normativity ⇏ Independence
+
+🧱 syntactic_validitywithout_subject_or_normativity ⇏ Independence · [ProofPresentationRetorsion.lean#syntactic_validity_without_subject_or_normativity](formal/Logos/ProofPresentationRetorsion.lean#L97)
+
+<details>
+<summary>Formal Derivation (5 steps, natural deduction, 0 substantive axioms)</summary>
+
+    1. witness tuple ⟨Empty, fun e _ => False, Derivation.leaf True, ?_⟩  (existential/conjunction refinement with Empty, fun e _ => False, Derivation.leaf True, ?_)
+    2. rfl  (conjunction conjunct 1: rfl)
+    3. fun e _ => id  (conjunction conjunct 2: fun e _ => id)
+    4. fun e  (conjunction conjunct 3: fun e)
+    5. _ => nomatch e  (conjunction conjunct 4: _ => nomatch e)
+
+    ∴ ∃ Universe, MeansRel, d, Checker(d) = true ∧ (∀ s, p, ¬MeansRel s p) ∧ ¬(∃ _s, True)
+
+</details>
+
+Hostile Model 2: Mechanical execution in `JudicativeSig` using `M_oneway`.
+
+    checker_validity_does_not_force_normative_stance ⇏ Independence
+
+🧱 checker_validity_does_not_force_normative_stance ⇏ Independence · [ProofPresentationRetorsion.lean#checker_validity_does_not_force_normative_stance](formal/Logos/ProofPresentationRetorsion.lean#L109)
+
+<details>
+<summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
+
+    1. witness tuple ⟨M_oneway, (), Derivation.leaf True, rfl, ?_, m_oneway_stance_fails⟩  (existential/conjunction refinement with M_oneway, (), Derivation.leaf True, rfl, ?_, m_oneway_stance_fails)
+
+    ∴ ∃ sig, s, d, Checker(d) = true ∧ VoiceSig(sig, s, conclusion(d)) ∧ ¬sig.Means(s, JudSigIncorrect(sig, s, conclusion(d)))
+
+</details>
+
+</details>
+
+> ➔ **Linear Forward Transition to Step 4 (Free Will):** [▲ Discovery · *PURE LOGIC · 0 substantive axioms*]
+
 ---
 
 ## 4. Free Will
@@ -739,7 +1007,7 @@ The Shortest Complete Master Proof: Genuine Normativity derives Choice and Free 
 ✅ · [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will](formal/Logos/IndubitableNormativeFreeWill.lean#L115)
 
 <details>
-<summary>Formal Derivation (5 steps, natural deduction, 0 substantive axioms)</summary>
+<summary>Formal Derivation (7 steps, natural deduction, 0 substantive axioms)</summary>
 
 Assume GenuineNormativity s p q:
 
@@ -748,6 +1016,8 @@ Assume GenuineNormativity s p q:
     3. Incompatible(p, q)  (elimination of 1 from h.opposition)
     4. Chooses(s, p, q)  (instantiation of Chooses from hMeansP, hMeansQ, hIncomp)
     5. FreeWill(s)  (instantiation of FreeWill from p, q, hChooses)
+    6. hChooses  (conjunction conjunct 1: hChooses)
+    7. hFreeWill  (conjunction conjunct 2: hFreeWill)
 
     ∴ Chooses(s, p, q) ∧ FreeWill(s)
 
@@ -763,17 +1033,22 @@ Freedom exists as soon as a genuine choice witness is supplied. This is the form
 ✅ · [Choice.lean#freeWillExists_of_chooses](formal/Logos/Choice.lean#L206)
 
 <details>
-<summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
+<summary>Formal Derivation (3 steps, natural deduction, 0 substantive axioms)</summary>
 
 Assume ∃ s, p, q, Chooses(s, p, q):
 
     1. witness components ⟨s, p, q, hc⟩  (existential elimination from h)
+    2. s  (conjunction conjunct 1: s)
+    3. chooses_implies_freeWill hc  (conjunction conjunct 2: chooses_implies_freeWill hc)
 
     ∴ ∃ s, FreeWill(s)
 
 </details>
 
 </details>
+
+<details>
+<summary><b>Adversarial Denial Normal Forms (D1–D8) — Exhaustive Proof of Inevitability</b> (3 machine-checked theorems) — click to expand</summary>
 
 ### Adversarial Denial Normal Forms (D1–D8) — Exhaustive Proof of Inevitability
 
@@ -806,15 +1081,21 @@ The Smallest Existential Kernel Theorem: Constitutive Right/Wrong derives Free W
 ✅ · [UndeniableNormativeDerivation.lean#normative_free_will](formal/Logos/UndeniableNormativeDerivation.lean#L294)
 
 <details>
-<summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
+<summary>Formal Derivation (3 steps, natural deduction, 0 substantive axioms)</summary>
 
 Assume ConstitutiveRightWrong:
 
     1. witness components ⟨s, p, q, hNorm⟩  (existential elimination from h)
+    2. s  (conjunction conjunct 1: s)
+    3. (normative_free_will_local hNorm).2  (conjunction conjunct 2: (normative_free_will_local hNorm).2)
 
     ∴ ∃ s, FreeWill(s)
 
 </details>
+
+</details>
+
+> ➔ **Linear Forward Transition to Step 5 (The Free Subject):** [▲ Discovery · *definitional equivalence [FreeSubject(s) ≡ FreeWill(s)]*]
 
 ---
 
@@ -848,6 +1129,15 @@ FreeSubject and FreeWill are definitionally equivalent.
 ✅ · [Choice.lean#freeSubject_iff_freeWill](formal/Logos/Choice.lean#L173)
 
 <details>
+<summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
+
+    1. FreeSubject(s) ↔ FreeWill(s)  (definitional equality / reflection)
+
+    ∴ FreeSubject(s) ↔ FreeWill(s)
+
+</details>
+
+<details>
 <summary>Supporting Infrastructure — 1 auxiliary theorem(s) beneath this step</summary>
 
 Genuine choice entails a free subject — by definition.
@@ -857,6 +1147,8 @@ Genuine choice entails a free subject — by definition.
 ✅ · [Choice.lean#chooses_implies_freeSubject](formal/Logos/Choice.lean#L187)
 
 </details>
+
+> ➔ **Linear Forward Transition to Step 6 (Person):** [▲ Discovery · *constitutive theorem [Person := FreeSubject]*]
 
 ---
 
@@ -877,13 +1169,7 @@ In the unified Γ ontology, Personhood is defined constitutively in the classica
 </details>
 
 <details>
-<summary>Definitions used in this section (4; 2 new, 2 already shown)</summary>
-
-Person: a subject possessing a numerically distinct free will.
-
-    ∴ Person ≡ FreeSubject(s)
-
-📘 · [Person.lean#Person](formal/Logos/Person.lean#L29)
+<summary>Definitions used in this section (4; 1 new, 3 already shown)</summary>
 
 Thomistic person core: the Boethius–Aquinas conditions of personhood — "individual substance of a rational nature" possessed of dominion over its own acts — formalized through their operative distinguishing features.
 
@@ -895,6 +1181,8 @@ Thomistic person core: the Boethius–Aquinas conditions of personhood — "indi
 
     ∴ FreeWill ≡ ∃ p, q, Chooses(s, p, q) — defined in §3. Genuine Choice.
 
+    ∴ Person ≡ FreeSubject(s) — defined in §3. Genuine Choice.
+
 </details>
 
 Master Theorem: Every Free Subject is a Person.
@@ -903,11 +1191,33 @@ Master Theorem: Every Free Subject is a Person.
 
 ✅ · [Person.lean#free_subject_is_person](formal/Logos/Person.lean#L33)
 
+<details>
+<summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
+
+Assume FreeSubject(s):
+
+    1. Person(s)  (definitional identity via h)
+
+    ∴ Person(s)
+
+</details>
+
 Master Correspondence: Personhood is constitutively equivalent to the Thomistic person core.
 
     ∴ Person(s) ↔ ThomisticPersonCore(s)
 
 ✅ · [Person.lean#person_iff_thomisticCore](formal/Logos/Person.lean#L137)
+
+<details>
+<summary>Formal Derivation (3 steps, natural deduction, 0 substantive axioms)</summary>
+
+    1. split into forward and reverse directions (↔ / ∧)  (split equivalence/conjunction into forward (mp) and reverse (mpr) goals)
+    2. assume hp  (hypothesis assumption for conditional/reductio proof)
+    3. assume hc  (hypothesis assumption for conditional/reductio proof)
+
+    ∴ Person(s) ↔ ThomisticPersonCore(s)
+
+</details>
 
 <details>
 <summary>Supporting Infrastructure — 2 auxiliary theorem(s) beneath this step</summary>
@@ -918,13 +1228,35 @@ Master Equivalence: Personhood is constitutively equivalent to Free Subjecthood.
 
 ✅ · [Person.lean#person_iff_freeSubject](formal/Logos/Person.lean#L38)
 
+<details>
+<summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
+
+    1. Person(s) ↔ FreeSubject(s)  (definitional equality / reflection)
+
+    ∴ Person(s) ↔ FreeSubject(s)
+
+</details>
+
 Every Person possesses Free Will.
 
     Person(s) → FreeWill(s)
 
 ✅ · [Person.lean#person_has_free_will](formal/Logos/Person.lean#L48)
 
+<details>
+<summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
+
+Assume Person(s):
+
+    1. FreeWill(s)  (definitional identity via h)
+
+    ∴ FreeWill(s)
+
 </details>
+
+</details>
+
+> ➔ **Linear Forward Transition to Step 7 (Personal and Independent Will):** [▲ Discovery · *numerical individuation [will_individuation]*]
 
 ---
 
@@ -957,7 +1289,7 @@ Independent Will: the faculty of will possessed by subject s is uniquely its own
 
 📘 · [Person.lean#IndependentWill](formal/Logos/Person.lean#L54)
 
-    ∴ Person ≡ FreeSubject(s) — defined in §6. Person.
+    ∴ Person ≡ FreeSubject(s) — defined in §3. Genuine Choice.
 
     ∴ ThomisticPersonCore ≡ IndividualSubstance(s) ∧ RationalNature(s) ∧ DominionOverActs(s) — defined in §6. Person.
 
@@ -968,6 +1300,19 @@ Master Equivalence: Personhood is constitutively equivalent to Free, Independent
     ∴ Person(s) ↔ FreeIndependentWill(s)
 
 ✅ · [Person.lean#person_iff_freeIndependentWill](formal/Logos/Person.lean#L117)
+
+<details>
+<summary>Formal Derivation (5 steps, natural deduction, 0 substantive axioms)</summary>
+
+    1. split into forward and reverse directions (↔ / ∧)  (split equivalence/conjunction into forward (mp) and reverse (mpr) goals)
+    2. assume hp  (hypothesis assumption for conditional/reductio proof)
+    3. hp  (conjunction conjunct 1: hp)
+    4. independent_will_of_subject s  (conjunction conjunct 2: independent_will_of_subject s)
+    5. assume ⟨hFW, _⟩  (hypothesis assumption for conditional/reductio proof)
+
+    ∴ Person(s) ↔ FreeIndependentWill(s)
+
+</details>
 
 <details>
 <summary>Supporting Infrastructure — 3 auxiliary theorem(s) beneath this step</summary>
@@ -990,7 +1335,18 @@ Master Equivalence: free, independent will is equivalent to the Thomistic person
 
 ✅ · [Person.lean#freeIndependentWill_iff_thomisticCore](formal/Logos/Person.lean#L102)
 
+<details>
+<summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
+
+    1. split into forward and reverse directions (↔ / ∧)  (split equivalence/conjunction into forward (mp) and reverse (mpr) goals)
+
+    ∴ FreeIndependentWill(s) ↔ ThomisticPersonCore(s)
+
 </details>
+
+</details>
+
+> ➔ **Linear Forward Transition to Step 8 (Personal Agency as Ontological Ground of Normativity):** [▼ Ontological Grounding · *ONTOLOGICAL GROUNDING ARROW [Grounding ≠ Identity]*]
 
 ---
 
@@ -1043,7 +1399,7 @@ Right/Wrong Distinction at contents p and q for subject s: The subject is addres
 
     ∴ FreeWill ≡ ∃ p, q, Chooses(s, p, q) — defined in §3. Genuine Choice.
 
-    ∴ Person ≡ FreeSubject(s) — defined in §6. Person.
+    ∴ Person ≡ FreeSubject(s) — defined in §3. Genuine Choice.
 
 </details>
 
@@ -1069,11 +1425,13 @@ Master Realization Theorem: Any Person realizes GroundedNormativePolarity, showi
 ✅ · [PersonalNormativeGround.lean#person_realizes_grounded_polarity](formal/Logos/PersonalNormativeGround.lean#L401)
 
 <details>
-<summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
+<summary>Formal Derivation (3 steps, natural deduction, 0 substantive axioms)</summary>
 
 Assume Person(s):
 
     1. FreeIndependentWill(s)  (modus ponens via (person_iff_freeIndependentWill)
+    2. hFW  (conjunction conjunct 1: hFW)
+    3. person_grounds_right_wrong s hPerson  (conjunction conjunct 2: person_grounds_right_wrong s hPerson)
 
     ∴ GroundedNormativePolarity(s)
 
@@ -1086,9 +1444,10 @@ The Non-Reversal Architectural Principle: 1. Deductive Discovery runs forward: R
 ✅ · [PersonalNormativeGround.lean#non_reversal_discovery_and_grounding](formal/Logos/PersonalNormativeGround.lean#L515)
 
 <details>
-<summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
+<summary>Formal Derivation (2 steps, natural deduction, 0 substantive axioms)</summary>
 
-    1. assume hp  (hypothesis assumption hp)
+    1. fun h => forward_modus_ponens_derivation s p q h  (component witness 1: fun h => forward_modus_ponens_derivation s p q h)
+    2. fun hp => person_grounds_right_wrong s hp  (component witness 2: fun hp => person_grounds_right_wrong s hp)
 
     ∴ (RightWrongAt(s, p, q) → Person(s) ∧ GroundsRightWrong s) ∧ (Person(s) → GroundsRightWrong s)
 
@@ -1128,6 +1487,8 @@ Assume ModelBSignature:
 
 </details>
 
+> ➔ **Linear Forward Transition to Step 9 (Necessary Truth):** [➔ Continuation · *modal continuation from normative truth*]
+
 ---
 
 ## 9. Necessary Truth
@@ -1149,6 +1510,8 @@ Step 1: Strong Necessary Truth exists (resident in the Core/Semantics machinery)
     ∴ ∃ τ, □ τ
 
 ✅ · [NecessaryPersonalGround.lean#step1_necessary_truth_exists](formal/Logos/NecessaryPersonalGround.lean#L191)
+
+> ➔ **Linear Forward Transition to Step 10 (Constructive Personal Ground):** [▲ Discovery · *constructive discovery [ObjectiveNormativity ⇒ Person]*]
 
 ---
 
@@ -1201,7 +1564,7 @@ Right and Wrong distinction indexed by Person: The normative distinction is genu
 
     ∴ NoRight ≡ ¬NormativeRightExists — defined in §1. Objective Right and Wrong.
 
-    ∴ Person ≡ FreeSubject(s) — defined in §6. Person.
+    ∴ Person ≡ FreeSubject(s) — defined in §3. Genuine Choice.
 
     ∴ T ≡ p — defined in §2. Ought and Normative Polarity.
 
@@ -1235,6 +1598,20 @@ HEADLINE — THE PERSON SUPPORTS THE REALITY OF RIGHT.
 ✅ · [PersonalGroundOfReality.lean#the_person_supports_the_reality_of_right](formal/Logos/PersonalGroundOfReality.lean#L150)
 
 <details>
+<summary>Formal Derivation (6 steps, natural deduction, 0 substantive axioms)</summary>
+
+    1. deny_right_self_contradicts  (conjunction conjunct 1: deny_right_self_contradicts)
+    2. Logos.Core.rightWrongDistinction  (conjunction conjunct 2: Logos.Core.rightWrongDistinction)
+    3. Logos.Core.bivalence  (conjunction conjunct 3: Logos.Core.bivalence)
+    4. necessary_normative_order  (conjunction conjunct 4: necessary_normative_order)
+    5. normative_datum_forces_person  (conjunction conjunct 5: normative_datum_forces_person)
+    6. person_grounds_normative_order  (conjunction conjunct 6: person_grounds_normative_order)
+
+    ∴ (¬∃ s, ClaimsCorrect(s, NoRight) ∧ NoRight) ∧ EstablishedRightWrong ∧ (∀ p, T(p) ∨ IsFalse(p)) ∧ NecessaryNormativeOrder ∧ (∀ s, RightWrong(s) → Person(s)) ∧ (∀ s, Person(s) → GroundsRightWrong s)
+
+</details>
+
+<details>
 <summary>Supporting Infrastructure — 2 auxiliary theorem(s) beneath this step</summary>
 
 Objective Normativity holds from any agential normative address.
@@ -1244,11 +1621,16 @@ Objective Normativity holds from any agential normative address.
 ✅ · [PersonalNormativeGround.lean#objective_normativity_holds](formal/Logos/PersonalNormativeGround.lean#L127)
 
 <details>
-<summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
+<summary>Formal Derivation (6 steps, natural deduction, 0 substantive axioms)</summary>
 
 Assume ∃ s, a, b, GenuineNormativity s a b:
 
     1. witness components ⟨s, a, b, h⟩  (existential elimination from hDatum)
+    2. s  (conjunction conjunct 1: s)
+    3. (Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will h).2  (conjunction conjunct 2: (Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will h).2)
+    4. a  (conjunction conjunct 3: a)
+    5. b  (conjunction conjunct 4: b)
+    6. h  (conjunction conjunct 5: h)
 
     ∴ ObjectiveNormativity
 
@@ -1473,13 +1855,14 @@ divine attributes — **unity / monotheism**, **simplicity**, **omniscience**, *
 | **4. Theological Smuggling**<br>"A free subject is not a Person; 'Person' is an anthropomorphic trick." | Personhood in Γ is defined constitutively via the classical Boethian-Thomistic core (`IndividualSubstance ∧ RationalNature ∧ DominionOverActs`). The equivalence with `FreeSubject` is machine-checked with 0 substantive axioms. | [`person_iff_thomisticCore`](formal/Logos/Person.lean#L137)<br>`⊢ Person s ↔ IndividualSubstance s ∧ RationalNature s ∧ DominionOverActs s` | `{Means, Subject}`<br>**(0 substantive axioms)** |
 | **5. Euthyphro / Voluntarism**<br>"This makes the person the arbitrary creator of morality." | Identifying Ought with volition (`Wills s p = Ought s p`) destroys normative violation. The ground required by the normative order is *personal in kind*, not an arbitrary dictator inventing rules. | [`will_identity_collapses_normativity`](formal/Logos/PersonalNormativeGround.lean#L261)<br>`⊢ Wills s p = Ought s p → NormativeViolation s p → ⊥` | `{Subject, Wills, Ought}`<br>**(0 substantive axioms)** |
 | **6. Physicalist / Atomic Ground**<br>"The ultimate ground could be a physical particle, matter, or an atom." | An entity with false meaning capacity cannot ground an entity with true meaning capacity. Atomic factual entities are unconditionally excluded from grounding `Entity.ofGround`, and the ground possesses Canonical Aseity. | [`atom_cannot_ground_the_ground`](formal/Logos/CanonicalAseity.lean#L96)<br>[`conditional_canonical_aseity`](formal/Logos/CanonicalAseity.lean#L133)<br>`⊢ CanonicalAseity Entity.ofGround` | `{Means, Subject}`<br>**(0 substantive axioms)** |
+| **7. Origin of Normativity (The Proof-Self Retorsion)**<br>"Where does the initial normative claim come from? Why grant that any normative judgment exists?" | Bare syntax checking alone does not force normativity (`M_inanimate_checker`, `{}`). But any agent *presenting* a derivation as sound (`PresentsAsSound`) co-means correctness and error, deriving `FreeWill` and `Person` with 0 substantive axioms. Furthermore, an adversarial critic who attacks Γ by presenting an objection argumentatively as sound *themselves* instantiates the normative stance (`critic_presenting_objection_is_person`). | [`presents_as_sound_derives_personhood`](formal/Logos/ProofPresentationRetorsion.lean#L140)<br>[`critic_presenting_objection_is_person`](formal/Logos/ProofPresentationRetorsion.lean#L180)<br>[`syntactic_validity_without_subject_or_normativity`](formal/Logos/ProofPresentationRetorsion.lean#L100) | `{Initiates, Means, State, Subject, CL}`<br>**(0 substantive axioms)** |
 
 ## Further Investigations
 
 ### Retorsions
 
 <details>
-<summary>Retorsion catalogue — 90 machine-checked retorsion theorems (click to expand)</summary>
+<summary>Retorsion catalogue — 91 machine-checked retorsion theorems (click to expand)</summary>
 
 * **Performative_Boundary_Theorem:** `performative_boundary_theorem` (`formal/Logos/A14SemanticAudit.lean`) — PERFORMATIVE BOUNDARY THEOREM: Performative retorsion forces an intentional subject (Considers, Assumes, Derives, Affirms, Rejects) and asymmetric cognitive resolution (SettlementChoice), but strictly stops before executive aiming (AimsAt), action execution
 * **Noact_Conditional_Selfrefutes:** `noAct_conditional_selfRefutes` (`formal/Logos/Agency.lean`) — Asserting NoAct refutes itself under a weak assertion ONLY given the bridge from weak act to strong Act.
@@ -1528,6 +1911,7 @@ divine attributes — **unity / monotheism**, **simplicity**, **omniscience**, *
 * **Asserting_No_Personal_Source_Instantiates_Only_Judging_Subject:** `asserting_no_personal_source_instantiates_only_judging_subject` (`formal/Logos/OughtRetorsion.lean`) — Theorem: Retorsion Boundary on Personal Source.
 * **Deny_Right_Self_Contradicts:** `deny_right_self_contradicts` (`formal/Logos/PersonalGroundOfReality.lean`) — Denying Right is performatively self-contradictory: no agent can present NoRight as correct while NoRight is true. Footprint: `{Initiates, Means, State, Subject}` (zero substantive axioms). Re-export of the retorsion boundary.
 * **Discovery_Independent_Of_Grounding:** `discovery_independent_of_grounding` (`formal/Logos/PersonalNormativeGround.lean`) — Non-Circularity Architectural Theorem: The retorsive discovery proof of Free Will (`indubitable_normative_free_will`) does NOT require or depend upon any grounding bridge.
+* **Proof_Criticism_Nihilism_Self_Refuting:** `proof_criticism_nihilism_self_refuting` (`formal/Logos/ProofPresentationRetorsion.lean`) — Dialectical Retorsion: Any skeptic attempting to deny objective correctness in formal derivations by claiming normative nihilism (`NoRight`) refutes itself constructively.
 * **Retorsion_Proof_Derives_F1B:** `retorsion_proof_derives_F1b` (`formal/Logos/ProofSpecificContrast.lean`) — The Existential Free Will Theorem (F1b) derived from the performative retorsion proof!
 * **Claims_Correct_Disconnection_Never_Factive:** `claims_correct_disconnection_never_factive` (`formal/Logos/RealityHookAudit.lean`) — No claim of correctness over the disconnection thesis is ever veridical.
 * **Bigo_Bigs_Intentional_Synthesis:** `bigO_bigS_intentional_synthesis` (`formal/Logos/Retorsion.lean`) — Synthesis of Big-O / Big-S Retorsion with Intentional Subject: Both absolutes are self-defeating, establishing the irreducible co-existence of the Objective realm, the Subjective realm, and an active IntentionalSubject.

@@ -1060,10 +1060,10 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     C111, C166, C167. (C175 is also `{}`, but its ledger status is COUNTERMODEL —
     the separation, not a PROVEN step — so it is not counted in this bucket.)
   - **9 `CL`-only**: C3, C10, C12–C14, C16, C37, C59, C93.
-  - **72 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+  - **75 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
     C21, C23–C25, C30, C39, C49, C51–C53, C55–C58, C62, C68, C83–C86, C91,
     C94, C97–C105, C107, C113, C114, C116, C120–C122, C137–C142, C144, C145,
-    C147–C156, C160–C165, C168–C174, C176, C186, F1a.
+    C147–C156, C160–C165, C168–C174, C176, C186, C189, C190, C191, F1a.
     F1a is the choice-**field** existence form (resolves to a kernel step;
     renamed 2026-09-18 — the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
   - **C91** — vocab-only (`{Subject}`); hostile separations `{}`. C92 (the
@@ -1630,6 +1630,29 @@ camada interpretativa, não consequência kernel.
 > declared bridge, openly. The negative pole `Evil` is deliberately **left** as a declared
 > SEM datum (its fair reading is uninhabited without a parallel "some harm occurs" bridge,
 > which was not commissioned) — asymmetry recorded, not hidden.
+
+---
+
+## Level 10 — Proof-Presentation Retorsion & Syntactic Checker Audit (`Logos.ProofPresentationRetorsion`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C187 | §28/§1 | `ProofPresentationRetorsion.syntactic_validity_without_subject_or_normativity : ∃ Universe MeansRel d, Checker d = true ∧ (∀ s p, ¬ MeansRel s p) ∧ ¬ ∃ _s, True` — mechanical syntax checking succeeds in an uninhabited universe (`Subject = Empty`), proving syntactic proof validity alone never entails subjects or normative judgments | COUNTERMODEL | `{}` |
+| C188 | §28/§1 | `ProofPresentationRetorsion.checker_validity_does_not_force_normative_stance : ∃ sig s d, Checker d = true ∧ VoiceSig sig s (conclusion d) ∧ ¬ sig.Means s (JudSigIncorrect sig s (conclusion d))` — in `JudicativeSig` with `M_oneway`, a derivation is mechanically checked and voiced as correct yet grasp of the negative pole fails | COUNTERMODEL | `{}` |
+| C189 | §28/§1 | `ProofPresentationRetorsion.presents_as_sound_implies_claims_normative_correctness : PresentsAsSound s d → ClaimsNormativeCorrectness s (DerivationSound d)` — presenting a derivation as sound constitutively instantiates the normative-judicative stance | PROVEN | `{Initiates, Means, State, Subject}` |
+| C190 | §28/§1 | `ProofPresentationRetorsion.presents_as_sound_derives_personhood : PresentsAsSound s d → CommittedChoice s (DerivationSound d) (Correct s (DerivationSound d)) (Incorrect s (DerivationSound d)) ∧ Chooses s (Correct s (DerivationSound d)) (Incorrect s (DerivationSound d)) ∧ FreeWill s ∧ FreeSubject s ∧ Person s` — an agent presenting a derivation as sound instantiates committed choice, free will, free subjectivity, and personhood | PROVEN | `{Initiates, Means, State, Subject, CL}` |
+| C191 | §28/§1 | `ProofPresentationRetorsion.proof_criticism_nihilism_self_refuting : ClaimsCorrect s NoRight → NoRight → False` — any skeptic attempting to deny objective correctness in formal derivations by claiming normative nihilism refutes itself constructively | PROVEN | `{Initiates, Means, State, Subject}` |
+
+> Batch PROOF-PRESENTATION-RETORSION (2026-09-25): C187 and C188 are machine-checked
+> countermodels establishing that mechanical proof verification (`Checker d = true`)
+> does NOT mathematically force an agential normative stance. C187 proves this in an
+> uninhabited universe (`Subject := Empty`, `{}`), while C188 proves it via `M_oneway`
+> where a derivation is voiced as correct without grasping the negative error-alternative.
+> C189 and C190 prove that the *argumentative presentation* of a derivation as sound
+> (`PresentsAsSound s d`) instantiates the full normative-judicative stance
+> (`ClaimsNormativeCorrectness`), committed choice, free will, and personhood with
+> zero substantive axioms (`{Initiates, Means, State, Subject, CL}`). C191 formalizes
+> dialectical retorsion against skeptical dismissal of formal correctness.
 
 
 

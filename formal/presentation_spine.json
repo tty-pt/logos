@@ -169,6 +169,49 @@
               ]
             }
           ]
+        },
+        {
+          "title": "The Proof-Presentation Alternate Route — Argumentative Engagement Forces Personhood (2026-09-25)",
+          "formula": "PresentsAsSound s d → CommittedChoice s d (Correct s d) (Incorrect s d) ∧ FreeWill s ∧ Person s",
+          "summary": "Where does the initial normative claim come from? In addition to the foundational performative datum of everyday judgment (Route A), Γ provides a machine-checked alternate route directly from the proof itself (Route B):\n\n1. **The Machine Fallacy Separated:** Mechanical syntax checking (`Checker d = true`) does not force normativity; in an uninhabited world (`Subject = Empty`), `M_inanimate_checker` verifies the proof with zero subjects (`syntactic_validity_without_subject_or_normativity`, `{}`).\n2. **Argumentative Presentation (Route B):** Any agent who presents a derivation as sound (`PresentsAsSound s d`) co-means correctness and the prohibition of fallacy, deriving `CommittedChoice`, `FreeWill`, and `Person s` with 0 substantive axioms (`presents_as_sound_derives_personhood`, `{Initiates, Means, State, Subject, CL}`).\n3. **Dialectical Retorsion on Proof Criticism:** An adversarial critic who attacks Γ by presenting an objection argumentatively as sound themselves instantiates the normative stance, constructively proving their own freedom and personhood (`critic_presenting_objection_is_person`, 0 substantive axioms).",
+          "target_names": [
+            "presents_as_sound_implies_claims_normative_correctness",
+            "presents_as_sound_derives_committed_choice",
+            "presents_as_sound_derives_personhood",
+            "person_exists_of_presentation",
+            "proof_criticism_nihilism_self_refuting",
+            "critic_presenting_objection_is_person",
+            "syntactic_validity_without_subject_or_normativity",
+            "checker_validity_does_not_force_normative_stance"
+          ],
+          "groups": [
+            {
+              "label": "**Proof Presentation Derivations — zero substantive axioms (footprint {Initiates, Means, State, Subject, CL}):**",
+              "expected_badge": "PROVEN",
+              "target_names": [
+                "presents_as_sound_implies_claims_normative_correctness",
+                "presents_as_sound_derives_committed_choice",
+                "presents_as_sound_derives_personhood",
+                "person_exists_of_presentation"
+              ]
+            },
+            {
+              "label": "**Dialectical Retorsion on Adversarial Proof Criticism:**",
+              "expected_badge": "PROVEN",
+              "target_names": [
+                "proof_criticism_nihilism_self_refuting",
+                "critic_presenting_objection_is_person"
+              ]
+            },
+            {
+              "label": "**Separation Countermodels — Syntactic validity alone does not force normativity:**",
+              "expected_badge": "PROVEN",
+              "target_names": [
+                "syntactic_validity_without_subject_or_normativity",
+                "checker_validity_does_not_force_normative_stance"
+              ]
+            }
+          ]
         }
       ],
       "investigation_link": "investigations/contrastive-choice.md"

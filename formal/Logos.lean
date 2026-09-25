@@ -73,3 +73,5 @@ import Logos.RealityHookAudit
 import Logos.MoralFrontierAudit
 -- Canonical aseity and external grounding boundary.
 import Logos.CanonicalAseity
+-- Proof-presentation retorsion, syntactic checker separation, and adversarial audit.
+import Logos.ProofPresentationRetorsion

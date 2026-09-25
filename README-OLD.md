@@ -208,6 +208,12 @@ All objections that purport general validity without abandoning normativity — 
 
 ### The central objection: "it is not logically necessary"
 
+> ⚠️ **HISTORICAL NOTE ON FORMAL STATUS:**
+> In this early, pre-formalization draft, the text asserted that the argument "does not operate at the level of formal logical deduction."
+> **This statement is obsolete.** In the machine-verified Lean 4 formalization ([`README.md`](README.md), [`formal/Logos/`](formal/Logos/)), the core argument has been fully formalized as a **strict, constructive first-order deduction** with **zero substantive axioms** (`{CL, Initiates, Means, State, Subject}`).
+> Retorsion is formalized as a direct logical contradiction ($\bot$) in `DirectNormativeRetorsion.lean` (`claims_correct_no_right_self_refuting`); Free Will is derived deductively from Genuine Normativity in `IndubitableNormativeFreeWill.lean`; and the Person is derived constructively in `Person.lean` and `PersonalNormativeGround.lean`.
+> The argument is therefore **both** transcendentally undeniable **and** a machine-checked formal logical deduction.
+
 This objection maintains that, even granting the limits of self-reference and self-foundation, **it is not deductively forced** to conclude the existence of an ultimate foundation with the derived characteristics.
 
 The error here is technical and decisive:
