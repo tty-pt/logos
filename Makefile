@@ -5,7 +5,7 @@ export PATH := $(HOME)/.elan/bin:$(PATH)
 
 PYTHON ?= python3
 
-.PHONY: all build depviz audit sync deduction test check clean zip help
+.PHONY: all build depviz audit sync taxonomy deduction test check clean zip help
 
 # Default target runs the complete formal build, audit, deduction generation, and test verification.
 all: build depviz audit deduction test
@@ -29,6 +29,13 @@ audit: build
 	$(PYTHON) scripts/audit_footprints.py
 	@echo "=== Verifying docstring footprint markers vs formal/axiom_audit.json ==="
 	$(PYTHON) scripts/sync_docstring_footprints.py
+	@$(MAKE) --no-print-directory taxonomy
+
+# Verify that GAPMAP.md's hand-written taxonomy tallies (the corpus's last
+# status-like numbers) still match the kernel; needs axiom_audit.json.
+taxonomy:
+	@echo "=== Verifying GAPMAP taxonomy tallies vs the kernel ==="
+	$(PYTHON) scripts/gapmap_taxonomy.py --check
 
 # Standalone convenience: verify docstring footprint markers against a
 # pre-existing formal/axiom_audit.json (run scripts/audit_footprints.py first).
@@ -70,7 +77,8 @@ help:
 	@echo "  all        Run full pipeline: build, depviz, audit, deduction, test (default)"
 	@echo "  build      Build Lean 4 library in formal/ via lake build"
 	@echo "  depviz     Generate formal/depgraph.json and formal/depgraph.dot"
-	@echo "  audit      Audit transitive kernel footprints via scripts/audit_footprints.py + verify docstring footprint markers (scripts/sync_docstring_footprints.py)"
+	@echo "  audit      Audit transitive kernel footprints via scripts/audit_footprints.py + verify docstring footprint markers (scripts/sync_docstring_footprints.py) + GAPMAP taxonomy tally (scripts/gapmap_taxonomy.py --check)"
+	@echo "  taxonomy   Verify GAPMAP taxonomy tallies vs the kernel (scripts/gapmap_taxonomy.py --check)"
 	@echo "  sync       Verify docstring footprint markers vs formal/axiom_audit.json only"
 	@echo "  deduction  Compile README.md and investigations/kernel-audit.md"
 	@echo "  test       Run verification test suites"

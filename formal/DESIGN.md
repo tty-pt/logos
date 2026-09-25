@@ -4,6 +4,23 @@ Running record of every modeling choice. Each entry: the decision, why it was
 taken, what it costs, and (where relevant) the consistency model that keeps
 the axiom system contradiction-free.
 
+> **⚠️ 2026-09-24 — the "plurality-discharge" entries are REFUTED.** Several passages
+> below (marked *"(Superseded 2026-09-17 by the plurality-discharge…)"* or *"Achieved
+> 2026-09-17 by the plurality-discharge"*) assert that `AxTwoSubjects` was retired, that
+> the canonical two-person pair (C73) became a `{}` theorem, and that the lone-subject
+> model M2 was void. The axiom audit of 2026-09-24 refutes all three: `AxTwoSubjects` is
+> a **live `Tag: META` axiom** behind 15 PROVEN↑ claims (C28, C29, C40–C48, C54, C61,
+> C74, F4); `Person.twoPersonsFromSubject` (C73) is **BLOCKED** (the Unit countermodel
+> settles that one act does not entail plurality); `Value.aloneExcluded` (C74) carries the
+> plurality bridge `{AxTwoSubjects, Means, Subject}`, not `{}`; and every `T14_*` theorem
+> is *conditional* on the unproven `PluralityLovePrinciple`. Those passages are kept as
+> the historical record of the (mistaken) decision; the kernel is the authority. Current
+> statements: GAPMAP "Summary counts" + C73/C74, `theorems/T14.txt`, MORAL.md §8c/§8e.
+> Likewise, the moral-frontier design of 2026-09-24 evolved: `Good` is a **fair
+> definition** whose inhabitation rests on the declared META bridge
+> `AxBenevolentBearingObtains` (not a SEM postulate), with `Evil` still a declared SEM
+> datum (WITNESS.md §5.4 banner, §11).
+
 ## D0 — Two-level architecture
 
 - **Level 0 (`Core`)**: Lean's impredicative `Prop` is the universe of

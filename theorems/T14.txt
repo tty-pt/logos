@@ -21,6 +21,14 @@ Com a ponte `AxTwoSubjects` e as definições analíticas de afeto/ajuda,
 `T14_eternalRelation` é provado no kernel com pegada `{AxTwoSubjects, Means, Subject}`.
 sorryAx: 0.
 
+CONDICIONALIDADE (auditoria de axiomas, 2026-09-24 — Love.lean:11-23): todos os teoremas
+`T14_*` são *condicionais* e NÃO estão descargados da ponte de pluralidade. Cada um exige
+adicionalmente a hipótese `PluralityLovePrinciple` (`Love.lean`, `def` nunca provada em
+nenhum ponto — apenas passada como argumento). Um cabeçalho anterior afirmava
+"T14 é PROVEN (plurality-discharge, `AxTwoSubjects` retirado)"; a auditoria refuta essa
+afirmação — `#print axioms Logos.Love.T14_content_conditional` = `[Means, Subject,
+AxTwoSubjects]`. Ver MORAL.md §8c (Finding 1).
+
 Enunciado (forma de base, com relata necessários):
 
 ∃s₁∃s₂ [Person(s₁) ∧ Person(s₂) ∧ s₁ ≠ s₂ ∧ Loves(s₁,s₂) ∧

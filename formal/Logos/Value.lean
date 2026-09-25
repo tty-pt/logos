@@ -20,6 +20,12 @@ in `HostileSemantics`). The former pseudo-proof via `otherSubject` (swapping
 metaphysical bridge `AxTwoSubjects` (META: from right-and-wrong to two
 distinct persons). `valueInterpersonal_of_split` recovers the exact old
 statement; no strength is lost.
+
+2026-09-24: the *value layer itself* is provably empty in the pure theory
+(`BearingOf` is a closed def returning `unbearing`, so `Helps`/`Harms`/`Affects`
+are refutable for every pair — `helps_unobtainable`, `no_help_obtains`). The
+positive moral close therefore carries the disclosed META bridge
+`AxBenevolentBearingObtains` ("some person is actually helped").
 -/
 
 import Logos.Core
@@ -77,6 +83,34 @@ theorem help_not_harm : ∀ {s t : Subject}, Helps s t → ¬ Harms s t := by
   rw [hh] at hharm
   cases hharm
 
+/-- The bare value layer is empty: in the pure theory no subject helps any subject.
+    `BearingOf` is a *closed* definition returning `unbearing`, so `Helps s t` reduces to
+    `unbearing = benevolent`, which is refutable for every pair. Help does not obtain
+    without a disclosed datum; this is the machine-witness for why the positive moral
+    close carries the META bridge `AxBenevolentBearingObtains`. -/
+theorem helps_unobtainable (s t : Subject) : ¬ Helps s t := by
+  intro h
+  dsimp [Helps, BearingOf] at h
+  exact nomatch h
+
+/-- Likewise, no subject harms any subject in the pure theory. -/
+theorem harms_unobtainable (s t : Subject) : ¬ Harms s t := by
+  intro h
+  dsimp [Harms, BearingOf] at h
+  exact nomatch h
+
+/-- Likewise, no subject affects any subject in the pure theory. -/
+theorem affects_unobtainable (s t : Subject) : ¬ Affects s t := by
+  intro h
+  dsimp [Affects, BearingOf] at h
+  rcases h with h | h | h <;> nomatch h
+
+/-- The helping existential required by the fair moral poles is refuted in the pure theory:
+    there is no pair of distinct subjects with `Helps` between them. -/
+theorem no_help_obtains : ¬ ∃ s t : Subject, s ≠ t ∧ Helps s t := by
+  rintro ⟨s, t, _, h⟩
+  exact helps_unobtainable s t h
+
 /-- `OtherAffects s`: `s`'s doings bear on some *other* subject. -/
 def OtherAffects (s : Subject) : Prop := ∃ t : Subject, t ≠ s ∧ Affects s t
 
@@ -129,8 +163,35 @@ theorem aloneExcluded : ¬ ∃ s : Subject, Person s ∧ Alone s := by
   subst h1 h2
   exact hne rfl
 
+/--Tag: META
+Some person is actually helped: benevolence is not merely definable but obtains.
+  The *reality* of interpersonal value demands that at least one subject actually
+  helps another distinct person (the positive moral datum the poem's "ajuda" asserts
+  in the world, not only in the definition). Without this bridge the value layer is
+  provably empty (`no_help_obtains`: `BearingOf := unbearing` refutes every `Helps`),
+  so no moral pole that is defined as helping another person could ever obtain.
+
+  Consistency-model note: the bridge is not forced by any earlier premise (the empty
+  pure theory is a model of them all, by `helps_unobtainable`/`no_help_obtains`), so this
+  is a genuine, paid commitment — not a hidden derivation. The hostile local universes
+  (`M_amoral`, the Unit models) live in *separate* `S` and are untouched by this global
+  value-layer datum.
+
+  Philosophical cost: a substantive interpersonal-value metaphysics — that benevolence
+  occurs in the world, not only in the definitions. Bought with this declared bridge,
+  and carried openly in the footprint of every moral conclusion. -/
+axiom AxBenevolentBearingObtains :
+    ∃ s t : Subject, s ≠ t ∧ Person t ∧ Helps s t
+
+/--Under the benevolence bridge, some person is actually helped by another (a help
+  relation toward a distinct person obtains).
+  Footprint: `{AxBenevolentBearingObtains, Means, Subject}`. -/
+theorem some_person_is_helped :
+    ∃ s t : Subject, s ≠ t ∧ Person t ∧ Helps s t :=
+  AxBenevolentBearingObtains
+
 /-- PersonsAffectPrinciple: distinct persons bear on each other in at least one direction.
-With Affects hardened to an independent relation, this is an explicit metaphysical principle. -/
+With Affects/Helps/Harms hardened, this is an explicit metaphysical principle. -/
 def PersonsAffectPrinciple : Prop :=
   ∀ (s₁ s₂ : Subject), Person s₁ → Person s₂ → s₁ ≠ s₂ → Affects s₁ s₂ ∨ Affects s₂ s₁
 
@@ -149,6 +210,12 @@ end Logos.Value
 -- Axiom footprint audit
 #print axioms Logos.Value.alone_no_other_help_harm
 #print axioms Logos.Value.AxTwoSubjects
+#print axioms Logos.Value.helps_unobtainable
+#print axioms Logos.Value.harms_unobtainable
+#print axioms Logos.Value.affects_unobtainable
+#print axioms Logos.Value.no_help_obtains
+#print axioms Logos.Value.AxBenevolentBearingObtains
+#print axioms Logos.Value.some_person_is_helped
 #print axioms Logos.Value.aloneExcluded
 #print axioms Logos.Value.help_not_harm
 #print axioms Logos.Value.help_affects

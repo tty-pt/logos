@@ -299,7 +299,13 @@ exist. (Cross-reference the individual-causation guard already stated in §1.)
 
 The epistemic sense is what `rightWrongDistinction : ¬N_T ∧ ¬N_F` and `Order.Correct`
 express. "Evil exists, so 'evil exists' is true/correct — this does not make evil
-morally right." Moral good/evil remains DEFERRED (F2/F3).
+morally right." Moral good/evil is machine-separated from epistemic normativity
+(`M_amoral`, C175, `{}` — a permanent countermodel separation), and its positive pole
+is obtained under one disclosed, priced META bridge: the fair definition
+`Good s a := ∃ t ≠ s, Person t ∧ Helps s t ∧ ¬ Harms s t` (vocabulary-only) plus
+`moral_good_obtains` (C178) under `AxBenevolentBearingObtains` (C177), whose price is
+machine-visible (the bare value layer is empty, C176); the negative pole `Evil` remains
+a declared SEM datum. Deontic teleology (F2) remains open.
 
 ### Boundary statement
 

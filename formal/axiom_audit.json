@@ -5088,16 +5088,15 @@
   "Logos.Agency.Means",
   "Logos.Agency.State",
   "Logos.Agency.Subject",
-  "Logos.MoralFrontierAudit.Evil",
-  "Logos.MoralFrontierAudit.Good"
+  "Logos.MoralFrontierAudit.Evil"
  ],
  "Logos.MoralFrontierAudit.Evil": [
   "Logos.Agency.Subject",
   "Logos.MoralFrontierAudit.Evil"
  ],
  "Logos.MoralFrontierAudit.Good": [
-  "Logos.Agency.Subject",
-  "Logos.MoralFrontierAudit.Good"
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
  ],
  "Logos.MoralFrontierAudit.M_amoral.Act": [],
  "Logos.MoralFrontierAudit.M_amoral.AmoralistThesis": [],
@@ -5119,6 +5118,11 @@
  "Logos.MoralFrontierAudit.M_amoral.correct_star_tracks_reality": [],
  "Logos.MoralFrontierAudit.M_amoral.soleSubject": [],
  "Logos.MoralFrontierAudit.epistemic_normativity_without_practical_obligation": [],
+ "Logos.MoralFrontierAudit.moral_good_obtains": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxBenevolentBearingObtains"
+ ],
  "Logos.MoralFrontierAudit.moral_pole_postulate_is_not_a_consequence": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
@@ -5130,8 +5134,7 @@
   "Logos.Agency.Means",
   "Logos.Agency.State",
   "Logos.Agency.Subject",
-  "Logos.MoralFrontierAudit.Evil",
-  "Logos.MoralFrontierAudit.Good"
+  "Logos.MoralFrontierAudit.Evil"
  ],
  "Logos.NecessaryPersonalGround.ActualEntity": [
   "Logos.Agency.Subject"
@@ -9156,6 +9159,11 @@
  "Logos.Value.Alone": [
   "Logos.Agency.Subject"
  ],
+ "Logos.Value.AxBenevolentBearingObtains": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxBenevolentBearingObtains"
+ ],
  "Logos.Value.AxTwoSubjects": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
@@ -9192,6 +9200,9 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.Value.affects_unobtainable": [
+  "Logos.Agency.Subject"
+ ],
  "Logos.Value.aloneExcluded": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
@@ -9206,11 +9217,25 @@
  "Logos.Value.harm_affects": [
   "Logos.Agency.Subject"
  ],
+ "Logos.Value.harms_unobtainable": [
+  "Logos.Agency.Subject"
+ ],
  "Logos.Value.help_affects": [
   "Logos.Agency.Subject"
  ],
  "Logos.Value.help_not_harm": [
   "Logos.Agency.Subject"
+ ],
+ "Logos.Value.helps_unobtainable": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Value.no_help_obtains": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Value.some_person_is_helped": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Value.AxBenevolentBearingObtains"
  ],
  "Logos.Value.valueInterpersonal_of_split_conditional": [
   "Logos.Agency.Means",

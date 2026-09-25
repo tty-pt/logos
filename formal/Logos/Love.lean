@@ -2,18 +2,25 @@
 # Logos.Love — the beloved (poem P7/P8; theorems T13, T14)
 
 T13 (someone able to be loved): from T12, each of two persons is *able to be
-loved* by the other (`Lovable`). PROVEN.
+loved* by the other (`Lovable`).
 
 T14 (eternal relation): the strong claim — the beloved of the necessary
 person is itself necessary and is loved eternally: the poem's "Amar é
 escolhido e também é necessário (de alguma forma)". Since C4 (2026-09-15)
-the relation itself is *structural*: `Loves := Affects` (directed constitutive
-bearing; the affective fullness stays on the prose side). T14 is PROVEN
-(plurality-discharge, 2026-09-17): the canonical pair (origin + addressee) is
-exhibited with no plurality axiom (`AxTwoSubjects` retired) and
-`AxPersonStability` (esse est agere) is already a theorem — so
-`T14_canonicalRigid` states the *same* pair loving in every world. The
-"chosen" component depends on F1 (freedom, DEFERRED).
+the relation itself is *structural*: `Loves := Helps ∧ ¬ Harms` (directed
+constitutive benevolence). **Corrected 2026-09-24 (axiom audit):** T14 is
+**conditional, NOT plurality-discharged and NOT unconditionally PROVEN.** An
+earlier header claimed "T14 is PROVEN (plurality-discharge, 2026-09-17) …
+`AxTwoSubjects` retired"; the machine audit refutes that — every T14 theorem
+still depends on `{AxTwoSubjects, Means, Subject}` and additionally requires the
+hypothesis `PluralityLovePrinciple` (a `def` that is never proved anywhere):
+
+    'Logos.Love.T14_content_conditional' depends on
+      [Logos.Agency.Means, Subject, Logos.Value.AxTwoSubjects]
+
+So T14 = `PROVEN↑ under {AxTwoSubjects, Means, Subject}`, **conditional on
+`PluralityLovePrinciple`**. The "chosen" component depends on F1 (freedom,
+DEFERRED). See MORAL.md §8c Finding 1.
 -/
 
 import Logos.Core

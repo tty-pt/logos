@@ -737,7 +737,7 @@ A campanha em `Logos.AxiomNegationAudit` executou a busca sistemática por neces
 | F1a | §13–§15 choice-field existence (`∃s p q`, `ChoiceField s p q`) | PROVEN | `person_hasChoiceField`/`choiceField_exists` `{Means, Subject}` + `judge_commits` `CL` (choice-realism batch, C51–C52/C55; renamed 2026-09-18 — field form, not genuine choice) |
 | F1b | §15 genuine choice & freedom of the actor | PROVEN↑ | `Choice.freeWill_exists` / `Choice.freeSubject_exists` / `Choice.genuineChoice_exists_of_act_constitutive` sob `{AxIntentionalChoice, Initiates, Means, State, Subject}` (rota do Cogito / A14). Alternativamente, sob a **rota de retorsão normativa** (`Logos.RetorsiveNormativity.retorsion_derives_free_will`), demonstrado sob `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` (`Tag: SEM`, bipolaridade judicativa), onde a negação de normatividade genuína refuta-se performativamente ao ser assertida como juízo correto, instanciando `GenuineNormativity` e derivando `Chooses` e `FreeWill` sem depender de `AxIntentionalChoice`. Resíduos registrados: (a) o preço SEM `AxJudicativeBipolarity` é **independente** em Γ primitivo (contramodelo `M_opaque`, `BipolarityRetorsion`) — porém é *dispensável* para a refutação do ataque, que é axiomática sob a postura normativo-judicativa (C164/C165); (b) o livre-arbítrio assim obtido tem cornos meta-nível (`NoGN`, `¬NoGN`) — deliberação sobre conteúdo de objeto/ação requer a rota separada `DeliberateChoice`/`ClaimsNormativeCorrectness` (C140/C141) |
 | F2 | §21 teleology (`Ought → Goal`) | DEFERRED | deontic layer (normativity → telos; ver C113–C121 para a retorsão do dever prático) |
-| F3 | §28 Good (`§20 → bem`) | COUNTERMODEL | moral good **separated** from logical normativity: `MoralFrontierAudit.epistemic_normativity_without_practical_obligation` (`M_amoral`, `{}` — row C175) — epistemic agential normativity carries no practical obligation; positive close available only under the declared SEM poles `Good`/`Evil` (price sheet §5.4, `moral_pole_postulate_is_not_a_consequence` proves they are never forced) |
+| F3 | §28 Good (`§20 → bem`) | COUNTERMODEL (positive close C178) | moral good **separated** from logical normativity: `MoralFrontierAudit.epistemic_normativity_without_practical_obligation` (`M_amoral`, `{}` — row C175) — epistemic agential normativity carries no practical obligation. **The separation itself is permanent (`{}`)**; the *positive close* is now earned honestly (2026-09-24, C176–C178): `Good` is a **fair definition** (helpfulness toward the other — `∃ t ≠ s, Person t ∧ Helps s t ∧ ¬ Harms s t`) and **obtains** (`moral_good_obtains`, C178) under the single disclosed META bridge `AxBenevolentBearingObtains` (C177, `Tag: META`). The bare value layer is machine-proven empty (C176), so the bridge is a genuine paid commitment, not a hidden derivation. The negative pole `Evil` remains a declared SEM datum (its fair reading is uninhabited without a parallel "some harm occurs" bridge — not yet declared). The relying structure alone still never forces any pole (`moral_pole_postulate_is_not_a_consequence`, `{Initiates, Means, State, Subject}`) |
 | F4 | §28 Love | PROVEN↑ | `Love.T13_someoneLovable` (C41) under `{AxTwoSubjects, Means, Subject}` |
 | F5 | §28 EternalRelation | → PROVEN↑ | dissolved in C42: `Love.T14_eternalRelation_conditional` under `{AxTwoSubjects, Means, Subject}` |
 | F6 | §28 Trinity | DEFERRED | no argument exists yet (§28/§29) |
@@ -1015,17 +1015,19 @@ contradicts itself. RETHINKING-COGITO.md records the parallel in full.
   the *derivability* is now proven, so cogito's status is "axiom, proved
   redundant" rather than "irreducible datum" — a strict strengthening.
 
-Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-theorem figures below):
+Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-theorem figures below; **re-derived 2026-09-24 by `scripts/gapmap_taxonomy.py --check` from `formal/axiom_audit.json`** — the four tallies and the per-axiom PROVEN↑ counts are machine-derived, not transcribed):
 
 - **PROVEN** (status PROVEN/PROVEN↑ whose audit footprint carries **no SEM/META
   axiom** — machine re-derived from `formal/axiom_audit.json`, 2026-09-24):
   - **25 truly axiom-free** (`{}`): C1, C2, C4–C9, C11, C17, C22, C26, C27,
-    C31, C35, C36, C38, C50, C63, C95, C96, C108, C111, C166, C167, C175.
+    C31, C35, C36, C38, C50, C63, C95, C96, C108, C111, C166, C167. (C175 is
+    also `{}`, but its ledger status is COUNTERMODEL — the separation, not a
+    PROVEN step — so it is not counted in this bucket.)
   - **9 `CL`-only**: C3, C10, C12–C14, C16, C37, C59, C93.
-  - **68 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+  - **71 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
     C21, C23–C25, C30, C39, C49, C51–C53, C55–C58, C62, C68, C83–C86, C91,
     C94, C97–C105, C107, C113, C114, C116, C120–C122, C137–C142, C144, C145,
-    C147–C156, C160–C165, C168–C174, F1a.
+    C147–C156, C160–C165, C168–C174, C176, F1a.
     F1a is the choice-**field** existence form (resolves to a kernel step;
     renamed 2026-09-18 — the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
   - **C91** — vocab-only (`{Subject}`); hostile separations `{}`. C92 (the
@@ -1040,12 +1042,14 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     see the BLOCKED/retired blocks and the `## Formal Frontiers` inventory.
     Of that range only C74 (`aloneExcluded`) survives, as PROVEN↑ (below).
 - **PROVEN↑** (fully machine-verified under the flagged SEM/META axiom shown —
-  no foundation axiom remains): **22 claims** —
-  `AxTwoSubjects` (14): C28, C29, C40–C48, C54, C61, C74;
+  no foundation axiom remains): **23 claims** —
+  `AxTwoSubjects` (15): C28, C29, C40–C48, C54, C61, C74, F4 (F4 shares the C41
+  decl, `T13_someoneLovable`);
   `AxJudicativeBipolarity` (4): C106, C157–C159;
   `AxSecondPersonalAddress` (2): C118, C119;
   `AxIntentionalChoice` (1): F1b (`freeWill_exists`);
-  F4 shares the C41 decl (`T13_someoneLovable`).
+  `AxBenevolentBearingObtains` (1): C178 (`moral_good_obtains` — the positive
+  moral close; C176 is the bridge's own countermodel).
   (`Cogito` is proven — the M0 forced-foundation axiom is retired, its
   degenerate `fun h => h Cogito` with it. `actualWorld` is a def;
   `Exists`/`Content`/`Agent`/`Rational` are analytical defs; `Affects` is the A3
@@ -1075,15 +1079,27 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   `ExistsAt` (axiom → def, esse est agere);
   `AxPersonStability` (axiom → theorem, esse est agere);
   `AxGlobalGround` (axiom → theorem, atom-restricted, A2-swap-theorem);
-  `AxTwoSubjects` (axiom → **retired**, plurality-discharge 2026-09-17 — its
-  content moved into the definition of a subject: the canonical pair C73 is
-  a theorem `{}` and `ALONE_EXCLUDED` is C74; the M2 lone-subject model is
-  superseded).
+  `AxTwoSubjects` is **NOT retired** (the earlier "plurality-discharge
+  2026-09-17" claim was refuted by the 2026-09-24 audit): it remains a live
+  `Tag: META` bridge behind 15 PROVEN↑ claims (C28, C29, C40–C48, C54, C61,
+  C74, F4), and the canonical-pair claim it was said to discharge is **C73 =
+  BLOCKED** (`Person.twoPersonsFromSubject`), not a theorem `{}`. The lone-
+  subject model M2 stands as the Unit countermodel instead, and every T14
+  theorem is additionally conditional on the unproven
+  `PluralityLovePrinciple`.
   A1 removed `cogito`; M0 restored it as the FORCED foundation (+1);
   the definitional-subject batch proves it (−1).
-  Net inventory: **4 declarations** + `CL`:
-  `Ground`,
-  `GroundProp`, `GroundPrincipleProp`, `AxPersonalGround`.
+  Net inventory (machine-derived 2026-09-24, `scripts/gapmap_taxonomy.py`):
+  **22 declared axioms**, all tagged — `Tag: VOCAB` (13): `HasNature`,
+  `Initiates`, `Means`, `Nature`, `State`, `Subject`, `Will`, `Wills`, `act`,
+  `subjectWill`, `will_individuation`, `Ought`, `DependsOn`; `Tag: SEM` (6):
+  `AxActPolarity`, `AxIntentionalChoice`, `Evil`, `AxJudicativeBipolarity`,
+  `transcendental_reflection_intentional`,
+  `universal_thesis_claims_objectivity`; `Tag: META` (3):
+  `AxSecondPersonalAddress`, `AxTwoSubjects`, `AxBenevolentBearingObtains` —
+  plus Lean's own `Classical.choice`, `Quot.sound`, `propext`. The former
+  "4 declarations + CL" figure (`Ground`, `GroundProp`, `GroundPrincipleProp`,
+  `AxPersonalGround`) is dead: none of those four is an axiom any more.
 - `sorryAx` count across all modules: **0**.
 - Verification: `lake build` green (36 jobs, seconds, Lean core only); zero
   errors, zero warnings.
@@ -1323,6 +1339,17 @@ This is paradoxical. We need to make it clear that it can't be the case."
 
 ## Batch plurality-discharge (2026-09-17) — `AxTwoSubjects` retired; the other is the addressee
 
+> **⚠️ REFUTED 2026-09-24 (auditoria de axiomas + contramodelo Unit).** This batch record
+> is kept as history, but its central claim is **false**: `AxTwoSubjects` was **not**
+> retired — it is a live `Tag: META` axiom behind 15 PROVEN↑ claims (C28, C29, C40–C48,
+> C54, C61, C74, F4) — and **`Person.twoPersonsFromSubject` (C73) is `BLOCKED`**, not a
+> `{}` theorem: the Unit countermodel (`Subject := Unit`) settles that one act does not
+> entail plurality, and the manufactured `Sum.inl`/`Sum.inr` witness was destroyed. The
+> `Value.neverAlone`/`aloneExcluded` (C74) step likewise carries the plurality bridge
+> (`{AxTwoSubjects, Means, Subject}`), not `{}`. Every T14 theorem is additionally
+> *conditional* on the unproven `PluralityLovePrinciple`. Corrected statements are in the
+> "Summary counts" block and at C73/C74; see `theorems/T14.txt` and MORAL.md §8c/§8f.
+
 Driven by the project's own discovery: under the definitional subject
 (`Subject := Unit ⊕ Prop`, 2026-09-17) two distinct persons are **derivable** —
 the former META price is redundant and is discharged as a demotion, the poem's
@@ -1523,6 +1550,9 @@ camada interpretativa, não consequência kernel.
 | C173 | §28/§4 | `RealityHookAudit.content_reality_hook : ∀ p, (∃ s, Correct s p) → p` — wherever a judgment is correct, its content is the case (reality-hook, vocabulary-only, zero substantive axioms) | PROVEN | `{Initiates, Means, State, Subject}` |
 | C174 | §28/§4 | `RealityHookAudit.disconnection_thesis_unjudgeable_as_correct : ¬ ∃ s, Correct s D` (+ `def D`, `D : Prop := ¬ ∀ s p, Correct s p → p`) — "propositional right/wrong has nothing to do with reality" is never correctly judged | PROVEN | `{Initiates, Means, State, Subject}` |
 | C175 | §28/§5 | `MoralFrontierAudit.epistemic_normativity_without_practical_obligation : (∃ s, RightWrongStar s) ∧ (¬ ∃ r s a, OughtStar r s a)` — the `M_amoral` faithful model satisfies the epistemic agential reality-hook with zero practical binding; moral meaning is machine-separated (F3's countermodel row-of-record) | COUNTERMODEL | `{}` |
+| C176 | §28/§5 | `Value.no_help_obtains : ¬ ∃ s t, s ≠ t ∧ Helps s t` — **the bare value layer is empty**: `BearingOf` is a closed def returning `unbearing`, so `Affects`/`Helps`/`Harms` are refutable for *every* pair (`helps_unobtainable`, `harms_unobtainable`, `affects_unobtainable`). The machine proof that benevolence does **not** obtain in the pure theory — and hence that any inhabited moral pole must pay a disclosed bridge | PROVEN | `{Subject}` |
+| C177 | §28/§5 | `Value.AxBenevolentBearingObtains : ∃ s t, s ≠ t ∧ Person t ∧ Helps s t` — **META bridge** (poem P6 "ajuda" as world-fact, not only definition): some person is *actually* helped. Declared, tagged `META`, priced in the footprint; not forced (C176 is its countermodel). The one honest price of the positive moral close | AXIOM | `{Means, Subject, AxBenevolentBearingObtains}` |
+| C178 | §28/§5 | `MoralFrontierAudit.moral_good_obtains : ∃ s a, Good s a` — **the positive close of F3**: the moral pole is a *fair definition* (`Good s a := ∃ t ≠ s, Person t ∧ Helps s t ∧ ¬ Harms s t` — helpfulness toward the other, per the declared content) and it **obtains** under C177. `Good` itself is vocabulary-only (`{Means, Subject}`); the inhabitation carries the bridge openly | PROVEN↑ | `{Means, Subject, AxBenevolentBearingObtains}` |
 
 > Batch REALITY-HOOK & MORAL-FRONTIER (2026-09-24): a tese cética "certo/errado
 > proposicional nada tem a ver com realidade" é **refutada no kernel** —
@@ -1533,8 +1563,10 @@ camada interpretativa, não consequência kernel.
 > (`OughtRetorsion.lean:72`) é um postulado declarado, não uma definição, e o modelo
 > `M_amoral` instancia toda a normatividade agencial epistémica sem nenhuma obrigação
 > prática (`epistemic_normativity_without_practical_obligation`, C175, `{}`) — F3 vira
-> **fronteira de contramodelo** 🧱, separada, não lacuna. O fecho positivo custa o datum
-> SEM §5.4 (`Good`/`Evil`), provado nunca-forçado por
+> **fronteira de contramodelo** 🧱, separada, não lacuna. *(A frase original deste
+> bloco — "o fecho positivo custa o datum SEM §5.4 (`Good`/`Evil`)" — foi
+> **superada** pelo fecho efetivamente implementado: ver a nota "Positive close of
+> the moral frontier" abaixo, C176–C178.)* A separação é provada nunca-forçada por
 > `moral_pole_postulate_is_not_a_consequence` (`{Initiates, Means, State, Subject}`).
 
 > Machine-witness note (kernel fact, 2026-09-24 — not a derivation gap): the local model
@@ -1544,6 +1576,24 @@ camada interpretativa, não consequência kernel.
 > with **zero axioms** (`{}`); `amoral_disconnection_is_judgeable_as_correct : ∃ s,
 > CorrectStar s AmoralistThesis` is the formal flip — in contrast with epistemic `D`, the
 > amoralist thesis is true-in-the-model, hence correctly judgeable.
+
+> **Positive close of the moral frontier (batch OTHER-FIRST, 2026-09-24; C176–C178).**
+> The separation C175 stays `{}` forever — normativity alone never forces a moral pole.
+> But the positive pole no longer has to be *postulated*. Axiom-audit first settled two
+> facts: (i) the bare value layer is **empty** — `BearingOf` is a closed def returning
+> `unbearing`, so `Affects`/`Helps`/`Harms` are refutable for every pair (`C176`
+> `no_help_obtains`), which is exactly why the fair `Good` could not obtain without a
+> bridge; and (ii) the `Love.lean` "plurality-discharge" header was **false** (T14 still
+> rests on `AxTwoSubjects` + an unproven `PluralityLovePrinciple` — the header is now
+> corrected in place). The honest close (MORAL.md §8b fairness law — a consequence of a
+> *fair* definition is declared, not smuggled): `Good` becomes a **fair definition**
+> (helpfulness toward the other) and **obtains** (`moral_good_obtains`, `C178`,
+> `PROVEN↑`) under ONE disclosed, tagged, priced META bridge `AxBenevolentBearingObtains`
+> (`C177`, "some person is actually helped"). `Good` the *definition* is vocabulary-only
+> (`{Means, Subject}`) — the definition smuggles nothing; only its *inhabitation* pays the
+> declared bridge, openly. The negative pole `Evil` is deliberately **left** as a declared
+> SEM datum (its fair reading is uninhabited without a parallel "some harm occurs" bridge,
+> which was not commissioned) — asymmetry recorded, not hidden.
 
 
 

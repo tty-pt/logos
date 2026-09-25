@@ -1434,8 +1434,10 @@ STAGES = [
      "bridge content."},
 {"key": "IX", "title": "The Remaining Metaphysical Frontier", "intro":
       "The remaining frontier is explicit: teleology is deferred; the moral good is "
-      "machine-separated from epistemic normativity (countermodel frontier C175, positive "
-      "close costs the declared moral datum §5.4); the Trinity, incarnation and creation "
+      "machine-separated from epistemic normativity (permanent countermodel frontier, "
+      "C175) and its positive pole is inhabited only under one disclosed, priced META "
+      "bridge, `AxBenevolentBearingObtains` — the fair `Good` definition itself is "
+      "vocabulary-only (C178); the Trinity, incarnation and creation "
       "are deferred or faith data; the initiation-theoretic and ground-chain constructions "
       "are withdrawn under hostile semantics. Nothing here is presented as derived."},
 ]
@@ -1827,7 +1829,12 @@ FRONTIER_INTRO = (
     "teleology (F2); moral good (F3) is no longer open — the faithful model "
     "`M_amoral` machine-separates practical bindingness from epistemic agential "
     "normativity (`MoralFrontierAudit.epistemic_normativity_without_practical_obligation`, "
-    "C175, `{}`), making F3 a countermodel frontier, not a gap."
+    "C175, `{}`), making F3 a countermodel frontier, not a gap. The *positive* moral "
+    "pole is separately obtained under one disclosed, priced META bridge "
+    "(`Value.AxBenevolentBearingObtains`, C177 → `moral_good_obtains`, C178); the bare "
+    "value layer is machine-proven empty (C176), so the bridge is a paid commitment "
+    "rather than a hidden derivation, and the negative pole `Evil` remains a declared "
+    "SEM datum (its fair reading needs a parallel harm bridge, not declared)."
 )
 
 OPEN_BRIDGES = (
@@ -4085,10 +4092,14 @@ def render_reading_guide() -> list[str]:
     ap(">    one.' above explains.")
     ap("> 3. Divine Personhood and Strict Monotheism — **DEFERRED** (⏸), not proved here; a necessary")
     ap(">    Divine Being/Ground (world-rigid, everlasting, atemporal) is its entity-level **PROVEN** claim (✅).")
-    ap("> 4. Moral good/evil — machine-separated from epistemic normativity (countermodel ")
-    ap(">    frontier 🧱, C175): the faithful model `M_amoral` satisfies the whole epistemic ")
-    ap(">    agential reality-hook with zero practical obligation; a positive close requires ")
-    ap(">    a declared moral datum (price sheet §5.4). The epistemic reality-hook itself is ")
+    ap("> 4. Moral good/evil — machine-separated from epistemic normativity (permanent ")
+    ap(">    countermodel frontier 🧱, C175): the faithful model `M_amoral` satisfies the whole epistemic ")
+    ap(">    agential reality-hook with zero practical obligation. The positive pole is then obtained ")
+    ap(">    honestly: `Good` is a *fair definition* (helping another person, vocabulary-only, ")
+    ap(">    `{Means, Subject}`) and `moral_good_obtains` (C178) is PROVEN↑ under the single declared ")
+    ap(">    META bridge `AxBenevolentBearingObtains` (C177, \"some person is actually helped\"), whose ")
+    ap(">    price is machine-visible (the bare value layer is empty, C176). The negative pole `Evil` ")
+    ap(">    remains a declared SEM datum. The epistemic reality-hook itself is ")
     ap(">    unconditional and vocabulary-only (`correct_tracks_reality`, C173/C174).")
     ap("")
     ap("**Badge legend.** Every icon on a formal consequence is machine-derived from")
@@ -4415,12 +4426,27 @@ CLASSICAL_ATTRIBUTES = [
         "scope": "Divine Being / Ground",
         "expected": "COUNTERMODEL",
         "checks": [{"type": "claim", "id": "F3"}],
-        "refs": [],
+        "refs": ["Logos.MoralFrontierAudit.moral_good_obtains",
+                 "Logos.MoralFrontierAudit.Good",
+                 "Logos.MoralFrontierAudit.moral_pole_postulate_is_not_a_consequence",
+                 "Logos.Value.AxBenevolentBearingObtains",
+                 "Logos.Value.no_help_obtains"],
         "sense": ("GAPMAP ledger row `F3 §28 (Good)` = COUNTERMODEL (🧱) via C175: the "
                   "`M_amoral` model (`{}`) satisfies epistemic agential normativity with no "
-                  "practical obligation. Right/Wrong here is epistemic correctness, explicitly "
-                  "distinguished from moral good/evil; a positive moral bridge would cost the "
-                  "declared SEM poles `Good`/`Evil` (price sheet §5.4)."),
+                  "practical obligation — the separation is permanent "
+                  "(`moral_pole_postulate_is_not_a_consequence`, vocabulary-only), so the moral "
+                  "pole is never *read off* the normative structure. Right/Wrong here is "
+                  "epistemic correctness, explicitly distinguished from moral good/evil. The "
+                  "*positive pole itself* is nevertheless obtained: `Good` is a fair definition "
+                  "(helping another person; `{Means, Subject}` — the definition smuggles "
+                  "nothing) and `moral_good_obtains` (C178) is PROVEN↑ under the single "
+                  "disclosed META bridge `AxBenevolentBearingObtains` (C177, \"some person is "
+                  "actually helped\"). The bridge is a paid commitment, not a hidden derivation: "
+                  "the bare value layer is machine-proven empty (`no_help_obtains`, C176, "
+                  "`{Subject}`), which is the bridge's own countermodel. The negative pole `Evil` "
+                  "remains a declared SEM datum (its fair reading needs a parallel harm bridge, "
+                  "not declared). What stays a countermodel frontier is the *attribution* of this "
+                  "goodness to the Divine Being — that remains a separate target."),
     },
     {
         "attribute": "**Eternal — ever-present** (everlasting existence)",
@@ -4632,7 +4658,9 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("/ Ground** exists — world-rigid, **everlasting** and **atemporal**, a definitional")
     ap("corollary of necessity with time entering only on the conclusion side. The remaining")
     ap("divine attributes — **unity / monotheism**, **simplicity**, **omniscience**, **omnipotence**,")
-    ap("**perfect moral goodness**, the **Trinity**, the **Incarnation**, and contingent")
+    ap("**perfect moral goodness** (the moral pole itself now obtains under the single declared "
+       "META bridge, C178; its attribution to the Divine Being stays a 🧱 frontier), the "
+       "**Trinity**, the **Incarnation**, and contingent")
     ap("**creation** — remain **separate proof targets**")
     ap("(`⏸` / `❌`) or explicit **countermodel frontiers** (`🧱`) until the live kernel proves them.")
     ap("")

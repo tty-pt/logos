@@ -1,0 +1,59 @@
+T16 — O BEM MORAL EXISTE (o fecho positivo do polo moral, poema P5/P6)
+
+Depende de: formal/Logos/MoralFrontierAudit.lean (def `Good`, pegada `{Means, Subject}` — só
+vocabulário; theorem `moral_good_obtains`, pegada `{AxBenevolentBearingObtains, Means, Subject}`;
+axiom `Evil`, Tag: SEM) + formal/Logos/Value.lean (theorems `helps_unobtainable`,
+`harms_unobtainable`, `affects_unobtainable`, `no_help_obtains`, pegada `{Subject}`; axiom
+`AxBenevolentBearingObtains`, Tag: META; theorem `some_person_is_helped`, pegada
+`{AxBenevolentBearingObtains, Means, Subject}`; `help_not_harm` / C85, `{Subject}`).
+PROVEN↑ sob a ponte META declarada `AxBenevolentBearingObtains`.
+
+Verificado em: formal/Logos/MoralFrontierAudit.lean (Good :203, moral_good_obtains :212,
+moral_pole_postulate_is_not_a_consequence :261), formal/Logos/Value.lean (no_help_obtains,
+AxBenevolentBearingObtains :183, some_person_is_helped :189), GAPMAP.md F3 + C176–C178
+(§28/§5, secção Level 9), base.txt §21 e §28. Desenho e decisões: MORAL.md §8b–§8e.
+sorryAx: 0.
+
+Enunciado:
+
+def Good (s : Subject) (_a : Prop) : Prop :=
+  ∃ t : Subject, t ≠ s ∧ Person t ∧ Helps s t ∧ ¬ Harms s t
+
+axiom AxBenevolentBearingObtains :
+  ∃ s t : Subject, s ≠ t ∧ Person t ∧ Helps s t
+
+theorem moral_good_obtains : ∃ s : Subject, ∃ a : Prop, Good s a
+
+theorem no_help_obtains : ¬ ∃ s t : Subject, s ≠ t ∧ Helps s t
+
+O que muda em relação a F3: `Good` **deixou de ser um axioma SEM** e passou a ser uma
+*definição justa* — o conteúdo declarado do polo positivo é precisamente "ajudar o outro"
+(o "não ajuda nem prejudica ninguém" do poema, lido relacionalmente). A pegada da
+definição é `{Means, Subject}`: só vocabulário, sem nenhum axioma substantivo. A
+definição, portanto, não transporta a conclusão — a conclusão vem depois, e diz respeito
+ao facto de a bondade **ocorrer** no mundo.
+
+Fecho (o único preço): `moral_good_obtains` é PROVEN↑ sob a ponte META declarada e
+precificada `AxBenevolentBearingObtains` — "alguma pessoa é de facto ajudada" — com a
+pegada `{AxBenevolentBearingObtains, Means, Subject}` escrita por extenso. A ponte é um
+compromisso pago, não uma dedução disfarçada: a camada de valor nua é machine-vazia
+(`BearingOf := unbearing`; `helps_unobtainable`, `harms_unobtainable`,
+`affects_unobtainable`, `no_help_obtains`, C176, `{Subject}`) e esse é precisamente o
+contramodelo da ponte.
+
+O que NÃO muda (permanece honesto e perene):
+- A separação epistémica é machine-permanente: a normatividade agencial epistémica não
+  força obrigação prática (`M_amoral`, C175, `{}`) — o polo moral não é lido da estrutura
+  de apoio.
+- Nenhum polo é nunca consequência do apoio: `moral_pole_postulate_is_not_a_consequence`
+  (`{Initiates, Means, State, Subject}`) interpreta ambos como falso por todo o lado com
+  o gancho de realidade epistémico intacto.
+- A afirmação sobre a correcção objectiva (TruthNorm) continua a ser a de §20 e não
+  implica qualquer avaliação moral: "o mal existe" pode ser objectivamente correcto sem
+  que o mal moralmente o seja.
+- `Evil` (o polo negativo) **permanece um datum SEM declarado**: a sua leitura relacional
+  justa ("prejudicar outra pessoa") não é habitada sem a ponte paralela "algum prejuízo
+  ocorre", que não foi declarada. A assimetria é declarada, não escondida; a derivação
+  simétrica do polo negativo é o próximo passo aberto.
+- A teleologia deôntica F2 continua em aberto; a Trindade continua DEFERRED
+  (`preceding_theory_not_entails_trinity`, `{}`).

@@ -74,19 +74,28 @@ declarada (só SEM/META).
   definicional (`FreeWill(s) := ∃p q, Chooses`, `chooses_implies_freeWill` `{Means, Subject}` só vocab)
   estão formalizadas, mas a sua *existência* é F1b BLOCKED
   (`rejectedHornCoMeant`). O fosso `weak choice / choice-field → ? → strong Chooses → FreeWill` é explícito. "Escolha com significado →
-  mais do que uma pessoa" → PROVEN ✔: C40/C73 (plurality-discharge
-  2026-09-17 — o par canónico origem+destinatário é teorema `{}`).
+  mais do que uma pessoa" → PROVEN↑: C40 (`Plurality.T12_twoPersons`, `{AxTwoSubjects, Means, Subject}`
+  — ponte META `AxTwoSubjects`; **NÃO** é `{}`: um cabeçalho anterior com "plurality-discharge
+  2026-09-17" foi refutado pela auditoria de 2026-09-24); C73 está **BLOCKED** (o par canónico
+  não é teorema axiom-free).
 - L22 (P5): "um Ser sózinho … não ajuda nem prejudica ninguém" → PROVEN
-  ✔: C56 (`alone_no_other_help_harm`, `{}`; o antigo preço
+  ✔: C56 (`alone_no_other_help_harm`, `{Subject}`; o antigo preço
   `AxPersonsAffect` foi dissolvido em M1). "Nenhum sujeito está sózinho" →
-  C74 (`neverAlone`/`aloneExcluded`, `{}` — o lema em falta ALONE_EXCLUDED
-  é agora teorema). "Tem de haver este Ser, e o certo e
-  o errado também têm de haver" → C68 (`Cogito`, teorema `{}`) + C37/C38. "Tem de
-  haver quem se possa Amar" → PROVEN ✔ C41/C75 (via C40; cada conteúdo é pessoa).
-- L24 (P6): "não é impessoal, e não é sózinho" → C40/C73/C74; "Amar é escolhido e
-  também é necessário (de alguma forma)" → PROVEN ✔ C42–C45/C76 (T14 `{}`;
-  forma canónica rígida: o MESMO par — origem e destinatário — ama e existe
-  em todos os mundos; `AxPersonStability` teorema — esse est agere).
+  C74 (`neverAlone`/`aloneExcluded`, PROVEN↑ sob `{AxTwoSubjects, Means, Subject}` — o lema em falta
+  ALONE_EXCLUDED é agora teorema, mas sob a ponte de pluralidade, não `{}`). "Tem de haver este Ser, e o certo e
+  o errado também têm de haver" → C68 (`Cogito`, `{Initiates, Means, State, Subject}`) + C37/C38. "Tem de
+  haver quem se possa Amar" → PROVEN↑ C41 (`T13_someoneLovable`, via C40, sob `AxTwoSubjects`); C75 **BLOCKED**.
+- L22/L24 (P5/P6) — o polo moral: "não ajuda nem prejudica ninguém" lido relacionalmente dá a
+  **definição justa** `Good s a := ∃ t ≠ s, Person t ∧ Helps s t ∧ ¬ Harms s t` (só vocabulário,
+  `{Means, Subject}`), e o bem moral **existe**: `moral_good_obtains` (C178) PROVEN↑ sob a ponte META
+  declarada `AxBenevolentBearingObtains` (C177, "alguma pessoa é de facto ajudada"); a camada de valor
+  nua é machine-vazia (C176 `no_help_obtains`, `{Subject}`) — a ponte é um compromisso pago, com o seu
+  próprio contramodelo. O polo negativo `Evil` permanece um datum **SEM declarado**. (T16, GAPMAP F3.)
+- L24 (P6): "não é impessoal, e não é sózinho" → C40/C73/C74 (C73 BLOCKED, C40/C74 PROVEN↑ sob
+  `AxTwoSubjects`); "Amar é escolhido e
+  também é necessário (de alguma forma)" → PROVEN↑ C42–C45 (T14, `{AxTwoSubjects, Means, Subject}`,
+  *condicionais* à hipótese `PluralityLovePrinciple`, nunca provada; NÃO são `{}`); C76 **BLOCKED**
+  (a forma canónica rígida foi excidida).
 - L26–30: "este mundo é necessário? Não" — negação não reivindicada (sem
   demonstração); "a criação existe / há propósito" — zona de fé (F9,
   DEFERRED); "existe este Ser Pessoal" — PROVEN (T8, `the_person_supports_the_reality_of_right`, `GroundOfReality`).

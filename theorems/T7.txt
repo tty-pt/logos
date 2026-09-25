@@ -37,6 +37,6 @@ Direção da Descoberta:
 Normatividade Objetiva ⇒ Pessoa.
 (A descoberta identifica a Pessoa a partir do dado normativo; o fundamento ontológico estabelece que a ordem normativa tem uma base ontológica de tipo pessoal, sem identificar um indivíduo contingente como causa de toda a moralidade.)
 
-- "certo/errado" aqui = polaridade objectiva de correcção/verdade (¬N_T ∧ ¬N_F); não é avaliação de bem/mal moral (bem moral é F3, DEFERRED).
+- "certo/errado" aqui = polaridade objectiva de correcção/verdade (¬N_T ∧ ¬N_F); não é avaliação de bem/mal moral. O bem moral está machine-separado da normatividade epistémica (F3 → fronteira de contramodelo 🧱, C175, permanente) e o seu fecho positivo é obtido por definição justa + uma ponte META declarada (`moral_good_obtains`, C178, sob `AxBenevolentBearingObtains`, C177) — ver `theorems/T16.txt` e GAPMAP F3.
 
 Nenhum axioma de fundamentação é necessário; Act não é invocado.

@@ -33,8 +33,10 @@ A tentativa de negação autodestrói-se na sua própria enunciação performati
 Nota (contexto): quando Γ diz que há "certo e errado", refere-se à **polaridade objectiva de
 correcção** (é correcto afirmar o que é verdadeiro, incorrecto afirmar o que é falso; ¬N_T ∧ ¬N_F),
 NÃO ao bem/mal moral. O bem/mal moral está machine-separado da normatividade epistémica
-(F3 → fronteira de contramodelo 🧱, C175; ver §20/§28 e GAPMAP.md); fechar a ponte
-positiva custa o datum SEM `Good`/`Evil` (§5.4). "O mal existe" (se for o caso) seria objectivamente correcto afirmar — sem que isso
+(F3 → fronteira de contramodelo 🧱, C175; ver §20/§21/§28 e GAPMAP.md); a ponte positiva
+foi já fechada honestamente — `Good` é uma definição justa (pegada só de vocabulário) cuja
+habitação repousa numa ponte META declarada e precificada (`AxBenevolentBearingObtains`,
+C177/C178), e o polo negativo `Evil` permanece um datum SEM declarado. "O mal existe" (se for o caso) seria objectivamente correcto afirmar — sem que isso
 torne o mal moralmente correcto.
 
 O ato de negação revela e exibe os seus testemunhos performativos necessários:
@@ -303,8 +305,9 @@ que o fundamento ontológico da verdade/correcção tenha causado a maçã ou o 
 
 Aviso sobre o duplo sentido de "certo/errado": neste documento, "certo/errado"
 designa a polaridade objectiva de correcção (¬N_T ∧ ¬N_F), não o bem/mal moral
-(bem moral: F3 → fronteira de contramodelo 🧱, C175 — separada, não lacuna;
-teleologia deôntica F2 em aberto; ver §28). Por isso: "o mal existe" é objectivamente correcto
+(bem moral: F3 → fronteira de contramodelo 🧱, C175 — separada, não lacuna — com fecho
+positivo já obtido sob uma ponte META declarada, §21; teleologia deôntica F2 em aberto; ver §28).
+Por isso: "o mal existe" é objectivamente correcto
 afirmar — isso **não** torna o mal moralmente correcto.
 
 9. CONSEQUÊNCIA LÓGICA
@@ -727,6 +730,16 @@ Normativity → Direction → Teleology.
 
 Existe uma estrutura mínima de orientação para um fim.
 
+Nota formal sobre o polo moral (2026-09-24 — fecho positivo de F3; `Logos.MoralFrontierAudit`,
+`Logos.Value`; GAPMAP C175–C178; ver `theorems/T16.txt`):
+1. **O bem moral é uma DEFINIÇÃO JUSTA, não um postulado:** `Good s a := ∃ t ≠ s, Person t ∧ Helps s t ∧ ¬ Harms s t` — "ajudar o outro é o bem moral", o conteúdo declarado do polo positivo. A sua própria pegada é `{Means, Subject}` (só vocabulário): a definição não transporta nenhuma conclusão escondida.
+2. **O bem moral EXISTE — sob uma única ponte declarada:** `moral_good_obtains : ∃ s a, Good s a` (C178) sob `AxBenevolentBearingObtains` (C177, `Tag: META` — "alguma pessoa é de facto ajudada"), com pegada `{AxBenevolentBearingObtains, Means, Subject}`: o preço escrito por extenso.
+3. **A ponte é um compromisso pago, não uma dedução disfarçada:** a camada de valor nua é machine-vazia (`BearingOf := unbearing`; `helps_unobtainable`, `harms_unobtainable`, `affects_unobtainable`, `no_help_obtains`, C176, `{Subject}`) — esse é o contramodelo da própria ponte.
+4. **A separação epistémica permanece permanente:** a normatividade agencial epistémica não força obrigação prática (`M_amoral`, C175, `{}`), e nenhum polo é consequência da estrutura de apoio (`moral_pole_postulate_is_not_a_consequence`, `{Initiates, Means, State, Subject}`).
+5. **Assimetria declarada:** o polo negativo `Evil` continua a ser um datum SEM declarado — a sua leitura relacional justa ("prejudicar outra pessoa") não é habitada sem a ponte paralela "algum prejuízo ocorre", que não foi declarada.
+
+Teorema: ver theorems/T16.txt.
+
 (Nota formal sobre o estatuto do Dever Prático e Pessoalidade, módulos `Logos.OughtRetorsion`, `Logos.Person` e `Logos.PersonhoodOntologyAudit` / GAPMAP.md F2, C113–C123):
 1. **Ontologia Unificada de Pessoa:** A pessoalidade é definida constitutivamente como o sujeito dotado de livre-arbítrio numericamente distinto (`Person s := FreeSubject s`). A pessoalidade segue por pura dedução lógica do Livre-Arbítrio (`free_subject_is_person`, `{Means, Subject}`), com 0 axiomas substantivos. A anterior noção opaca `SubstantivePerson` foi revogada como um artefato artificial que criava uma falsa fronteira metafísica.
 2. **Distinção entre Sujeito, Vontade e Natureza:** O sujeito é o centro de imputação; a natureza é a essência possuída (`Person ≠ Nature`, permitindo que múltiplas pessoas partilhem a mesma natureza); a vontade é a faculdade com individuação numérica (`s₁ ≠ s₂ → subjectWill s₁ ≠ subjectWill s₂`).
@@ -959,12 +972,14 @@ Certo e errado necessários (T10)
 → quem se possa amar (T13)
 → relação eterna de amor (T14).
 
-(Nota formal §25: T12–T14 são PROVEN (plurality-discharge, 2026-09-17) sem
-nenhuma ponte interpessoal — a pluralidade tornou-se matemática: a definição de
-sujeito (Unit ⊕ Prop) dá o par canónico origem+destinatário (C73) e invalida a
-solidão (C74), a antiga ponte META AxTwoSubjects foi RETIRED e o modelo de
-solidão de M2 foi superado; a persistência (AxPersonStability) é teorema
-(esse est agere) — a ponte FAITH AxEternalLove e a axiom Loves foram
+(Nota formal §25, emendada 2026-09-24 pela auditoria de axiomas: T12–T14 **não** são
+PROVEN sem ponte — são PROVEN↑ sob a ponte META `AxTwoSubjects`
+(`{AxTwoSubjects, Means, Subject}`). A alegação "plurality-discharge 2026-09-17" foi
+refutada: C73 (par canónico origem+destinatário) está **BLOCKED**, `AxTwoSubjects` NÃO
+foi retired (é a ponte viva por trás de 15 claims PROVEN↑) e os teoremas T14 são
+adicionalmente **condicionais** ao `PluralityLovePrinciple` (nunca provado). O que é
+teorema: a invalidação da solidão (C74, sob a mesma ponte) e a persistência
+(`AxPersonStability`, esse est agere); a ponte FAITH `AxEternalLove` e o axioma `Loves`
 dissolvidas em C4 (Loves := Affects, relação estrutural), AxPersonsAffect
 dissolvido em M1;
 Affects é a relação primitiva única (A3-refactor, 2026-09-15: Helps/Harms :=
@@ -985,10 +1000,10 @@ algo significar" é PROVEN — C61 (`Choice.rightWrong_implies_someone_means`) e
 analítica "significado → sujeito" é C49 (`meaning_needs_subject` /
 `meaning_I_needs_subject`, `{}` — ✔); L20 (P4)
 "para haver alguém é preciso haver escolha" é C51 (`person_hasChoiceField`, campo de escolha, `{Means, Subject}` — reparação 2026-09-18: é o *campo*, não a escolha genuína),
-e "escolha com significado → mais do que uma pessoa" é PROVEN — C40/C73
-(plurality-discharge: o par canónico origem+destinatário é teorema `{}`); L22
+e "escolha com significado → mais do que uma pessoa" é PROVEN↑ sob a ponte META
+`AxTwoSubjects` — C40 (C73 está **BLOCKED**, não `{}`; auditoria 2026-09-24); L22
 (P5) "um Ser sózinho não ajuda nem prejudica ninguém" é C56
-(`alone_no_other_help_harm`, `{AxTwoSubjects}`; o antigo preço AxPersonsAffect foi
+(`alone_no_other_help_harm`, `{Subject}`; o antigo preço AxPersonsAffect foi
 dissolvido em M1), e "nenhum sujeito está sózinho" apoia-se honestamente na ponte
 metafísica de pluralidade `AxTwoSubjects` (C40, C74), pois um ato isolado
 não força logicamente pluralidade (teorema de separação `not_entails_plurality`
@@ -1170,9 +1185,11 @@ Plurality como projeções de T12 (Plurality.T1_subjectExists,
 Plurality.T4_agentExists, Plurality.T5_personExists); todos os footprints
 {cogito, Means, Subject} passaram a {AxTwoSubjects, Means, Subject}.
 Axiomas 16 → 15. O selo TRANS deixa de existir.
-(Superada em 2026-09-17: os footprints {AxTwoSubjects, …} deste período
-deixaram de existir — a pluralidade é teorema `{}` desde o
-plurality-discharge; ver GAPMAP.md C73/C74.)
+(Emendada 2026-09-24 pela auditoria de axiomas: a suposta "superada" de 2026-09-17
+está **refutada** — os footprints `{AxTwoSubjects, …}` deste período são exactamente
+os footprints actuais de C40/C41/C42–C45/C54/C61/C74; C73 está BLOCKED e T14 é
+condicional a `PluralityLovePrinciple`. Ver GAPMAP.md C73/C74 e a entrada
+`AxTwoSubjects` no bloco "Summary counts".)
 
 Nota (Tier1, 2026-09-16; emendada 2026-09-23, PERSON.md): Agent e Rational deixaram também de ser axiomas —
 Agent é definição analítica (Agent(s) := True); Rational é agora piso DERIVADO
@@ -1265,10 +1282,18 @@ Tese cética da desconexão realidade-norma ("certo/errado proposicional nada te
   epistémica sem vínculo prático (`MoralFrontierAudit.epistemic_normativity_without_practical_obligation`,
   C175, `{}`): F3 deixa de ser lacuna e vira **fronteira de contramodelo** 🧱 — a tese amoralista é
   satisfazível, não auto-refutante (`amoral_disconnection_is_judgeable_as_correct`).
-Good (o bem como objeto moral da relação) — F3 agora **fronteira de contramodelo** 🧱 (C175, `{}`):
-  a normatividade agencial epistémica não força obrigação prática (`M_amoral`); fechar a ponte
-  positiva custa o datum SEM `Good`/`Evil` (§5.4), provado nunca-forçado por
-  `moral_pole_postulate_is_not_a_consequence` (`{Initiates, Means, State, Subject}`). A teleologia
+Good (o bem como objeto moral da relação) — F3: **fronteira de contramodelo** 🧱 (C175, `{}`)
+  **e fecho positivo já obtido**: a normatividade agencial epistémica não força obrigação prática
+  (`M_amoral`) e nenhum polo é consequência da estrutura de apoio
+  (`moral_pole_postulate_is_not_a_consequence`, `{Initiates, Means, State, Subject}`) — a separação
+  é permanente. O fecho positivo foi ganho honestamente (C176–C178; ver §21 e `theorems/T16.txt`):
+  `Good` é uma **definição justa** (ajudar o outro; só vocabulário, `{Means, Subject}`) e a sua
+  *inhabitação* repousa numa **única ponte META declarada e precificada**,
+  `AxBenevolentBearingObtains` ("alguma pessoa é de facto ajudada", C177); `moral_good_obtains`
+  (C178) é PROVEN↑ sob essa ponte. A camada de valor nua é machine-vazia (C176, `{Subject}`) — a
+  ponte é um compromisso pago, com o seu próprio contramodelo. O polo negativo `Evil` permanece um
+  datum **SEM declarado** (a sua leitura relacional justa não é habitada sem a ponte paralela
+  "algum prejuízo ocorre", não declarada). A teleologia
   deôntica F2 permanece em aberto, em conexão com T12/T13.
 Trinity — DEFERRED, sem argumento (§28/§29).
 Identidade hipostática do fundamento com uma pessoa (g = EntityOf s enquanto pessoa) — BLOQUEADA:
