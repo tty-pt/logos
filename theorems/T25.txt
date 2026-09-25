@@ -1,0 +1,114 @@
+T25 — ATO PURO E PERFEIÇÃO DIVINA DO FUNDAMENTO DA REALIDADE
+
+Depende de: `formal/Logos/DivinePureActuality.lean`, formalizando a característica
+clássica do Ato Puro e Perfeição Divina (*Actus Purus*, Tomás de Aquino ST I q. 3 a. 1–2;
+q. 4 a. 1–2: *De Deo quod sit actus purus* e *De perfectione Dei*; Aristóteles *Metaph.* XII.7;
+README-OLD.md §144-145, §189; CHARACTERISTICS.md §12; CHARS.md §12) para o fundamento
+da realidade `Entity.ofGround`.
+
+Verificado em: `formal/Logos/DivinePureActuality.lean`; auditoria `#print axioms`
+em `:279-290`; `formal/GAPMAP.md` C214–C220; `base.txt` §28.
+
+C214 — Contramodelo de independência metateórica:
+
+```lean
+theorem entity_with_potency_fails_pure_actuality :
+    ∃ (Ent : Type) (HasPotency : Ent → Prop) (PureAct : Ent → Prop),
+      (∀ e, PureAct e → ¬ HasPotency e) ∧
+      (∃ e, HasPotency e ∧ ¬ PureAct e)
+```
+
+Pegada auditada: `{}` (lógica pura). Entidades portadoras de potência passiva falham
+o Ato Puro, confirmando que a Atualidade Pura é um predicado metafísico discriminante
+e não-trivial.
+
+C215 — Ausência de potência existencial passiva no fundamento:
+
+```lean
+theorem ofGround_no_existential_potency :
+    ¬ PassiveExistentialPotency Entity.ofGround
+```
+
+Pegada auditada: `{Subject}` (apenas vocabulário). `Entity.ofGround` existe necessariamente
+em todos os mundos possíveis da ontologia modal (`∀ w, ExistsAt w e`), não possuindo potência
+passiva para a inexistência ou não-ser.
+
+C216 — Ausência de potência de fundamentação passiva (Asseidade no Ato):
+
+```lean
+theorem ofGround_no_grounding_potency
+    (hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p) :
+    ¬ PassiveGroundingPotency Entity.ofGround
+```
+
+Pegada auditada: `{Means, Subject}` (apenas vocabulário). Sob a premissa de subjetividade
+discriminadora finita, nada externo fundamenta o fundamento; ele não recebe a sua atualidade
+de nenhum outro princípio anterior ou exterior.
+
+C217 — Ausência de potência de transição e devir (Impassibilidade Operativa):
+
+```lean
+theorem ofGround_no_transition_potency :
+    ¬ PassiveTransitionPotency Entity.ofGround
+```
+
+Pegada auditada: `{Initiates, State, Subject}` (apenas vocabulário). O fundamento é
+imune a qualquer devir temporal ou transição desencadeada por agência criada
+(`the_ground_not_in_succession`); nenhuma causa eficiente pode passar o fundamento
+de potência a ato.
+
+C218 — Ausência de potência intencional (Atualidade Exaustiva de Significado):
+
+```lean
+theorem ofGround_no_intentional_potency :
+    ¬ PassiveIntentionalPotency Entity.ofGround
+```
+
+Pegada auditada: `{Means, Subject}` (apenas vocabulário). A capacidade intencional do
+fundamento é plenamente atualizada em todas as proposições da realidade, em contraste
+estrito com mentes finitas cujo horizonte é incompleto (`discriminating_subject_has_intentional_potency`).
+
+C219 — Ato Puro e Perfeição Divina Clássica (Síntese Mestre):
+
+```lean
+theorem ofGround_divine_pure_actuality
+    (hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p) :
+    DivinePureActuality Entity.ofGround
+```
+
+Pegada auditada: `{Initiates, Means, State, Subject}` (0 axiomas substantivos).
+`Entity.ofGround` satisfaz plenamente o Ato Puro (*Actus Purus*, Tomás de Aquino ST I q. 4 a. 1):
+purificado de toda a potência passiva existencial, de fundamentação, de devir e intencional,
+e atuando universalmente como fundamento sustentador de toda a ordem modal.
+
+C220 — Incorporeidade e Imaterialidade Divina (Corolário Ontológico):
+
+```lean
+theorem ofGround_incorporeal :
+    ∀ n : Nat, Entity.ofGround ≠ Entity.ofAtom n
+```
+
+Pegada auditada: `{Subject}` (apenas vocabulário). Por ser Ato Puro isento de matéria
+e de potência passiva, `Entity.ofGround` não é um corpo nem um agregado atómico físico
+(Aquinas ST I q. 3 a. 1–2: *Deus non est corpus*).
+
+Teoremas canónicos associados:
+
+1. Princípio tomista de Ato Puro (`necessity_aseity_and_immutability_yield_pure_actuality`, `{Initiates, Means, State, Subject}`):
+   Qualquer entidade necessária, a se, imutável em transição, com capacidade máxima e sustentação
+   universal de todo o ser é necessariamente Ato Puro.
+
+2. Exclusão exaustiva de corpos e mentes finitas (`atom_fails_pure_actuality`, `discriminating_subject_fails_pure_actuality`, `ofGround_sole_pure_actuality`, `{Initiates, Means, State, Subject}`):
+   Estados atómicos mundanos e sujeitos discriminadores possuem potência passiva e falham o Ato Puro.
+   `Entity.ofGround` é o único candidato a Ato Puro no inventário ontológico de Γ.
+
+3. Demarcação categorial honesta (`pure_actuality_independent_of_physical_energy`, `{}`):
+   O Ato Puro metafísico de Γ distingue-se rigorosamente de conceitos físicos como energia
+   cinética ou trabalho termodinâmico.
+
+Limites honestos de escopo:
+A demonstração estabelece a Atualidade Pura ontológica e fundacional de `Entity.ofGround`
+no sentido metafísico clássico (ausência de potência passiva perante causação externa, devir,
+inexistência e limitação intencional, aliada à sustentação modal de toda a realidade).
+Não postula nem implica energia cinética, trabalho físico material ou identificação
+antropomórfica empírica.

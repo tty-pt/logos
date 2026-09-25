@@ -1060,12 +1060,12 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     C111, C166, C167. (C175 is also `{}`, but its ledger status is COUNTERMODEL —
     the separation, not a PROVEN step — so it is not counted in this bucket.)
   - **9 `CL`-only**: C3, C10, C12–C14, C16, C37, C59, C93.
-  - **93 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+  - **99 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
     C21, C23–C25, C30, C39, C49, C51–C53, C55–C58, C62, C68, C83–C86, C91,
     C94, C97–C105, C107, C113, C114, C116, C120–C122, C137–C142, C144, C145,
     C147–C156, C160–C165, C168–C174, C176, C186, C189, C190, C191, C193,
     C194, C195, C196, C198, C199, C200, C201, C203, C204, C205, C206,
-    C207, C208, C209, C210, C211, C213, F1a.
+    C207, C208, C209, C210, C211, C213, C215, C216, C217, C218, C219, C220, F1a.
     F1a is the choice-**field** existence form (resolves to a kernel step;
     renamed 2026-09-18 — the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
   - **C91** — vocab-only (`{Subject}`); hostile separations `{}`. C92 (the
@@ -1743,6 +1743,31 @@ camada interpretativa, não consequência kernel.
 > C212 is a machine-checked separation model showing that foundational unicity does not collapse
 > into numerical unitarianism, keeping the Trinitarian frontier open (`{}`).
 > C213 confirms ontological transcendence over pantheistic conflation (`{Subject}`).
+
+---
+
+## Level 15 — Classical Divine Pure Actuality & Perfection (`Logos.DivinePureActuality`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C214 | §28/CHARACTERISTICS | `DivinePureActuality.entity_with_potency_fails_pure_actuality : ∃ Ent HasPotency PureAct, (∀ e, PureAct e → ¬ HasPotency e) ∧ (∃ e, HasPotency e ∧ ¬ PureAct e)` — an entity with passive potency fails pure actuality, confirming that pure actuality is non-trivial | COUNTERMODEL | `{}` |
+| C215 | §28/CHARACTERISTICS | `DivinePureActuality.ofGround_no_existential_potency : ¬ PassiveExistentialPotency Entity.ofGround` — Entity.ofGround has zero passive existential potency, existing necessarily across all possible worlds | PROVEN | `{Subject}` |
+| C216 | §28/CHARACTERISTICS | `DivinePureActuality.ofGround_no_grounding_potency : (∀ s, ∃ p, ¬ Means s p) → ¬ PassiveGroundingPotency Entity.ofGround` — under finite subjectivity, Entity.ofGround has zero passive grounding potency, depending on no external ground | PROVEN | `{Means, Subject}` |
+| C217 | §28/CHARACTERISTICS | `DivinePureActuality.ofGround_no_transition_potency : ¬ PassiveTransitionPotency Entity.ofGround` — Entity.ofGround has zero passive transition potency, immune to agential succession and temporal becoming | PROVEN | `{Initiates, State, Subject}` |
+| C218 | §28/CHARACTERISTICS | `DivinePureActuality.ofGround_no_intentional_potency : ¬ PassiveIntentionalPotency Entity.ofGround` — Entity.ofGround has zero passive intentional potency, possessing complete propositional meaning grasp | PROVEN | `{Means, Subject}` |
+| C219 | §28/CHARACTERISTICS | `DivinePureActuality.ofGround_divine_pure_actuality : (∀ s, ∃ p, ¬ Means s p) → DivinePureActuality Entity.ofGround` — Entity.ofGround satisfies Classical Divine Pure Actuality (Actus Purus, Aquinas ST I q. 3-4), with zero passive potency and universal modal grounding | PROVEN | `{Initiates, Means, State, Subject}` |
+| C220 | §28/CHARACTERISTICS | `DivinePureActuality.ofGround_incorporeal : ∀ n, Entity.ofGround ≠ Entity.ofAtom n` — as pure act without material/passive potency, Entity.ofGround is strictly non-corporeal and transcends all worldly atomic states | PROVEN | `{Subject}` |
+
+> Batch DIVINE-PURE-ACTUALITY (2026-09-25): C214 is a machine-checked separation model
+> showing that entities with passive potency fail Pure Actuality (`entity_with_potency_fails_pure_actuality`, `{}`).
+> C215 proves that `Entity.ofGround` has zero passive existential potency across all worlds (`ofGround_no_existential_potency`, `{Subject}`).
+> C216 proves zero passive grounding potency under finite subjectivity (`ofGround_no_grounding_potency`, `{Means, Subject}`).
+> C217 proves zero passive transition potency (`ofGround_no_transition_potency`, `{Initiates, State, Subject}`).
+> C218 proves zero passive intentional potency (`ofGround_no_intentional_potency`, `{Means, Subject}`).
+> C219 provides the master synthesis (`ofGround_divine_pure_actuality`, `{Initiates, Means, State, Subject}`),
+> establishing Classical Divine Pure Actuality (Actus Purus, Aquinas ST I q. 4 a. 1) with zero substantive axioms.
+> C220 derives Divine Incorporeality and Immateriality (`ofGround_incorporeal`, `{Subject}`),
+> proving that the ground cannot be an atom or physical body (Aquinas ST I q. 3 a. 1–2).
 
 
 

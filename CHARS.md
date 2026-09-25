@@ -242,9 +242,16 @@ exact ⟨greatResult, noBothTrueAndFalse⟩
 
 ### 12. Pure actuality
 
-- **Current status:** no `PureAct`, `ActusPurus`, `Potentiality`, or equivalent live predicate.
-- **Next work:** requires a vocabulary design for potency, change, and act, followed by a bridge from timelessness/unconditionedness to actuality.
-- **Recommendation:** defer until the simpler aseity boundary work is complete; this is not a low-effort theorem.
+- **Completed live layer:** ✅ **PROVEN** in `formal/Logos/DivinePureActuality.lean` (C214–C220; footprints `{}` and `{Initiates, Means, State, Subject}`). Results:
+  1. Absence of Passive Existential Potency (`ofGround_no_existential_potency`, C215, `{Subject}`): necessary existence across all possible worlds;
+  2. Absence of Passive Grounding Potency (`ofGround_no_grounding_potency`, C216, `{Means, Subject}`): ungrounded by any external entity under finite subjectivity;
+  3. Absence of Passive Transition Potency (`ofGround_no_transition_potency`, C217, `{Initiates, State, Subject}`): immune to temporal becoming and agential succession;
+  4. Absence of Passive Intentional Potency (`ofGround_no_intentional_potency`, C218, `{Means, Subject}`): exhaustive propositional meaning capacity;
+  5. The Master Synthesis: `ofGround_divine_pure_actuality` (C219, `{Initiates, Means, State, Subject}`, 0 substantive axioms);
+  6. Divine Incorporeality and Immateriality: `ofGround_incorporeal` (C220, `{Subject}`, Aquinas ST I q. 3 a. 1–2: *Deus non est corpus*);
+  7. The Thomistic Principle: `necessity_aseity_and_immutability_yield_pure_actuality` (ST I q. 3 a. 1–2, q. 4 a. 1);
+  8. Metatheoretic Independence: `entity_with_potency_fails_pure_actuality` (C214, `{}`).
+- **Honest boundary:** establishes metaphysical Pure Actuality (*Actus Purus* in Γ: zero passive potentiality and universal modal grounding); strictly distinguished from physical kinetic motion or thermodynamic energy (separated as `❌ NOT ESTABLISHED` in the attributes table).
 
 ### 13. Sovereignty over value and goodness
 

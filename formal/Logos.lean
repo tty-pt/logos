@@ -83,3 +83,5 @@ import Logos.DivineImmutability
 import Logos.FoundationalOmnipresence
 -- Classical foundational unicity and structural monotheism.
 import Logos.FoundationalUnicity
+-- Classical divine pure actuality and perfection.
+import Logos.DivinePureActuality

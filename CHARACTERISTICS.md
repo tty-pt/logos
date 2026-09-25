@@ -374,7 +374,7 @@ The foundation is **universal** in scope, and is traditionally identified as an 
 
 **Status in the prose:** A traditional label is mentioned, but no act/potency argument is developed.
 
-**Formal status: ❌ absent — no act/potency or pure-act formalization.** No `PureAct`/`ActusPurus`/`Potentiality` declaration in `formal/Logos/*.lean` or `formal/GAPMAP.md`.
+**Formal status: ✅ PROVEN for classical Pure Actuality (*Actus Purus*) in `formal/Logos/DivinePureActuality.lean` (C214–C220; `{Initiates, Means, State, Subject}`, 0 substantive axioms); ❌ NOT ESTABLISHED for physical kinetic/thermodynamic energy.** Results: (1) `ofGround_no_existential_potency` (C215, `{Subject}`): zero existential potency; (2) `ofGround_no_grounding_potency` (C216, `{Means, Subject}`): zero grounding potency; (3) `ofGround_no_transition_potency` (C217, `{Initiates, State, Subject}`): zero transition potency; (4) `ofGround_no_intentional_potency` (C218, `{Means, Subject}`): zero intentional potency; (5) `ofGround_divine_pure_actuality` (C219, `{Initiates, Means, State, Subject}`): Master Synthesis of Divine Pure Actuality; (6) `ofGround_incorporeal` (C220, `{Subject}`): Divine Incorporeality and Immateriality (Aquinas ST I q. 3 a. 1–2: *Deus non est corpus*); (7) `entity_with_potency_fails_pure_actuality` (C214, `{}`): Metatheoretic Independence Countermodel.
 
 ### Argument
 

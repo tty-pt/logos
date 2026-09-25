@@ -3396,6 +3396,119 @@
   "Logos.Agency.State",
   "Logos.Agency.Subject"
  ],
+ "Logos.DivinePureActuality.DivinePureActuality.casesOn": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.DivinePureActuality.no_existential_potency": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.DivinePureActuality.no_grounding_potency": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.DivinePureActuality.no_intentional_potency": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.DivinePureActuality.no_transition_potency": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.DivinePureActuality.recOn": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.DivinePureActuality.universal_ground": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.PassiveExistentialPotency": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.PassiveGroundingPotency": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.PassiveIntentionalPotency": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.PassiveTransitionPotency": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.atom_fails_pure_actuality": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.discriminating_subject_fails_pure_actuality": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.discriminating_subject_has_intentional_potency": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.entity_with_potency_fails_pure_actuality": [],
+ "Logos.DivinePureActuality.necessity_aseity_and_immutability_yield_pure_actuality": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.ofGround_divine_pure_actuality": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.ofGround_incorporeal": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.ofGround_no_existential_potency": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.ofGround_no_grounding_potency": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.ofGround_no_intentional_potency": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.ofGround_no_transition_potency": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.ofGround_sole_pure_actuality": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivinePureActuality.pure_actuality_independent_of_physical_energy": [],
  "Logos.DivineSimplicity.DivineSimplicity.casesOn": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"

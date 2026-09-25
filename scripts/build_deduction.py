@@ -4922,6 +4922,44 @@ CLASSICAL_ATTRIBUTES = [
                   "explicitly disclaimed (`CHARACTERISTICS.md` §11; `CHARS.md` §11)."),
     },
     {
+        "attribute": "**Divine pure actuality** (*Actus Purus* / perfection)",
+        "scope": "Divine Being / Ground",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.DivinePureActuality.ofGround_divine_pure_actuality"}],
+        "refs": ["Logos.DivinePureActuality.ofGround_no_existential_potency",
+                 "Logos.DivinePureActuality.ofGround_no_grounding_potency",
+                 "Logos.DivinePureActuality.ofGround_no_transition_potency",
+                 "Logos.DivinePureActuality.ofGround_no_intentional_potency",
+                 "Logos.DivinePureActuality.necessity_aseity_and_immutability_yield_pure_actuality",
+                 "Logos.DivinePureActuality.ofGround_incorporeal",
+                 "Logos.DivinePureActuality.entity_with_potency_fails_pure_actuality"],
+        "sense": ("In `DivinePureActuality.lean` (footprint `{Initiates, Means, State, Subject}` — VOCAB only), "
+                  "`ofGround_divine_pure_actuality` establishes Classical Divine Pure Actuality "
+                  "(*Actus Purus*, Aquinas *ST* I, q. 3, a. 1–2; q. 4, a. 1–2) for `Entity.ofGround` "
+                  "with 0 substantive axioms: "
+                  "(1) Zero Existential Potency (`ofGround_no_existential_potency`, `{Subject}`, necessary actuality across all worlds); "
+                  "(2) Zero Grounding Potency (`ofGround_no_grounding_potency`, `{Means, Subject}`, ungrounded by external entities); "
+                  "(3) Zero Transition Potency (`ofGround_no_transition_potency`, `{Initiates, State, Subject}`, immune to agential succession); "
+                  "(4) Zero Intentional Potency (`ofGround_no_intentional_potency`, `{Means, Subject}`, exhaustive propositional meaning); "
+                  "(5) Universal Actuality (`ofGround_universal_modal_ground`, active sustaining ground of all reality). "
+                  "Corollaries: Divine Incorporeality (`ofGround_incorporeal`, `{Subject}`, non-atomic and non-corporeal); "
+                  "entities with passive potency fail Pure Actuality (`entity_with_potency_fails_pure_actuality`, `{}`). "
+                  "Honest boundary: establishes metaphysical Pure Actuality in Γ; does not imply physical kinetic energy or thermodynamic work."),
+    },
+    {
+        "attribute": "**Physical / kinetic energy** (thermodynamic or kinetic physical motion)",
+        "scope": "Divine Being / Ground",
+        "expected": "ABSENT",
+        "checks": [{"type": "absent",
+                    "fragments": ["kinetic_energy", "thermodynamic_work"],
+                    "allow": []}],
+        "refs": ["Logos.DivinePureActuality.pure_actuality_independent_of_physical_energy"],
+        "sense": ("Pure Actuality in Γ is metaphysical (absence of passive potency and universal modal grounding, "
+                  "`DivinePureActuality.lean`). Physical kinetic motion, thermodynamic energy, and material "
+                  "work are not derived and are explicitly demarcated (`pure_actuality_independent_of_physical_energy`, `{}`)."),
+    },
+    {
         "attribute": "**Omniscience**",
         "scope": "Divine Being / Ground",
         "expected": "ABSENT",
@@ -5113,8 +5151,9 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")
     ap("of a necessary normative/truth order, and (entity-level) that a **necessary Divine Being")
     ap("/ Ground** exists — world-rigid, **everlasting**, **atemporal**, with **Canonical Aseity**,")
-    ap("**Divine Simplicity**, **Divine Immutability**, and **Foundational Omnipresence** (sustaining all")
-    ap("beings across modal reality). Crucially, the theory **strictly separates** these machine-verified")
+    ap("**Divine Simplicity**, **Divine Immutability**, **Foundational Omnipresence** (sustaining all")
+    ap("beings across modal reality), **Foundational Unicity**, and **Divine Pure Actuality** (*Actus Purus*).")
+    ap("Crucially, the theory **strictly separates** these machine-verified")
     ap("foundational/functional attributes from their unproven physical, psychological, and scholastic counterparts:")
     ap("**physical/spatial omnipresence**, **psychological personality**, **scholastic simplicity**, and")
     ap("**psychological impassibility** remain separate targets (❌ NOT ESTABLISHED or 🔴 INDEPENDENT).")
