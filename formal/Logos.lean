@@ -79,3 +79,5 @@ import Logos.ProofPresentationRetorsion
 import Logos.DivineSimplicity
 -- Classical divine immutability and ontological invariance.
 import Logos.DivineImmutability
+-- Classical foundational omnipresence and universal modal grounding.
+import Logos.FoundationalOmnipresence

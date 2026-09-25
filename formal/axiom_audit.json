@@ -3938,6 +3938,69 @@
   "Logos.Agency.State",
   "Logos.Agency.Subject"
  ],
+ "Logos.FoundationalOmnipresence.FoundationalOmnipresence.casesOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.FoundationalOmnipresence.maximal_capacity": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.FoundationalOmnipresence.non_reciprocal": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.FoundationalOmnipresence.presence": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.FoundationalOmnipresence.recOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.FoundationalOmnipresence.universal_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.MaximalCapacity": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.NonReciprocalGround": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.UniversalModalGround": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.WorldRigidPresence": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.finite_entity_fails_omnipresence": [],
+ "Logos.FoundationalOmnipresence.ofGround_foundational_omnipresence": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.ofGround_maximal_capacity": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.ofGround_non_reciprocal_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.ofGround_universal_modal_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.ofGround_world_rigid_presence": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalOmnipresence.omnipresence_from_universal_ground_and_aseity": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.FreeWillIndependence.BridgeB1": [
   "Logos.Agency.Subject"
  ],

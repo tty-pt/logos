@@ -4552,6 +4552,20 @@ CLASSICAL_ATTRIBUTES = [
                   "Established of the personal ground/type, not of a particular divine person."),
     },
     {
+        "attribute": "**Psychological personality** (humanoid consciousness, stream of experience)",
+        "scope": "Personal ground / person-type",
+        "expected": "COUNTERMODEL",
+        "checks": [{"type": "countermodel",
+                    "full": "Logos.PersonhoodOntologyAudit.faithful_model_satisfies_free_will_without_opaque_person"}],
+        "refs": ["Logos.PersonhoodOntologyAudit.faithful_contingent_person_fails_necessary_subject"],
+        "sense": ("Minimal constitutive personhood in Γ is functional: the locus of non-derived "
+                  "normative discrimination (`Person := FreeSubject`). Substantive psychological "
+                  "personhood (ordinary humanoid mind, emotional states, stream of consciousness) "
+                  "is provably independent: `faithful_model_satisfies_free_will_without_opaque_person` "
+                  "(footprint `{}`) satisfies free will without substantive psychological personality. "
+                  "The text explicitly disclaims ordinary psychological personality (`README-OLD.md:179-187`)."),
+    },
+    {
         "attribute": "**Rational** — formally equivalent to the Thomistic core containing RationalNature",
         "scope": "Personal ground / person-type",
         "expected": "PROVEN",
@@ -4773,6 +4787,19 @@ CLASSICAL_ATTRIBUTES = [
                   "Honest boundary: this establishes mereological, structural, and intentional simplicity — not identity of essence and existence."),
     },
     {
+        "attribute": "**Scholastic simplicity** (strict identity of essence and existence)",
+        "scope": "Divine Being / Ground",
+        "expected": "ABSENT",
+        "checks": [{"type": "absent",
+                    "fragments": ["essence_and_existence", "scholastic_simplicity"],
+                    "allow": []}],
+        "refs": [],
+        "sense": ("The theory proves mereological, structural, and intentional simplicity "
+                  "(`DivineSimplicity.lean`). The traditional scholastic doctrine asserting the strict "
+                  "identity of essence and existence or collapsing all divine attributes into "
+                  "undifferentiated identity is not derived."),
+    },
+    {
         "attribute": "**Divine immutability** (ontological, temporal, and process unchangeability)",
         "scope": "Divine Being / Ground",
         "expected": "PROVEN",
@@ -4795,6 +4822,68 @@ CLASSICAL_ATTRIBUTES = [
                   "Contingent entities provably fail immutability (`contingent_entity_fails_immutability`, `{}`). "
                   "Honest boundary: establishes modal, temporal, process, and capacity unchangeability in Γ; "
                   "does not claim psychological impassibility or constrain relational intentionality."),
+    },
+    {
+        "attribute": "**Psychological impassibility** (incapacity for relational affect or compassion)",
+        "scope": "Divine Being / Ground",
+        "expected": "ABSENT",
+        "checks": [{"type": "absent",
+                    "fragments": ["impassib", "psychological_impassibility"],
+                    "allow": []}],
+        "refs": ["Logos.Love.T14_eternalRelation_conditional"],
+        "sense": ("The ground is immutable in its modal existence, temporal stages, process transitions, "
+                  "and capacity (`DivineImmutability.lean`). Impassibility in the sense of relational indifference "
+                  "or incapacity for compassion is not established; Γ explicitly proves the eternal "
+                  "relationality of love (`T14_eternalRelation_conditional`)."),
+    },
+    {
+        "attribute": "**Foundational omnipresence** (sustaining presence to all beings across modal reality)",
+        "scope": "Divine Being / Ground",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.FoundationalOmnipresence.ofGround_foundational_omnipresence"}],
+        "refs": ["Logos.FoundationalOmnipresence.ofGround_world_rigid_presence",
+                 "Logos.FoundationalOmnipresence.ofGround_universal_modal_ground",
+                 "Logos.FoundationalOmnipresence.ofGround_non_reciprocal_ground",
+                 "Logos.FoundationalOmnipresence.ofGround_maximal_capacity",
+                 "Logos.FoundationalOmnipresence.omnipresence_from_universal_ground_and_aseity",
+                 "Logos.FoundationalOmnipresence.finite_entity_fails_omnipresence"],
+        "sense": ("In `FoundationalOmnipresence.lean` (footprint `{Means, Subject}` — VOCAB only), "
+                  "`ofGround_foundational_omnipresence` establishes Classical Foundational Omnipresence (Aquinas *ST* I, q. 8) "
+                  "for `Entity.ofGround`: "
+                  "(1) World-Rigid Presence (`ofGround_world_rigid_presence`, `{Subject}`, present across all possible worlds); "
+                  "(2) Universal Modal Grounding (`ofGround_universal_modal_ground`, `{Means, Subject}`, grounds every entity in every possible world); "
+                  "(3) Non-Reciprocal Grounding (`ofGround_non_reciprocal_ground`, `{Means, Subject}`, asymmetric sustenance, ungrounded by atoms or finite subjects); "
+                  "(4) Maximal Intentional Capacity (`ofGround_maximal_capacity`, `{Means, Subject}`, exhaustive meaning capacity). "
+                  "The Thomistic principle is proven: universal modal grounding, presence, and aseity entail omnipresence. "
+                  "Finite entities provably fail universal grounding (`finite_entity_fails_omnipresence`, `{}`). "
+                  "Honest boundary: establishes foundational sustaining presence across modal reality in Γ; "
+                  "explicitly distinguishes foundational omnipresence from physical spatial omnipresence or quantitative metric infinity."),
+    },
+    {
+        "attribute": "**Physical omnipresence** (spatial presence throughout physical spacetime coordinates)",
+        "scope": "Divine Being / Ground",
+        "expected": "ABSENT",
+        "checks": [{"type": "absent",
+                    "fragments": ["physical_omnipresence", "spatial_omnipresence"],
+                    "allow": []}],
+        "refs": [],
+        "sense": ("Spatial extension and physical spacetime coordinates are absent from the primitive "
+                  "ontology of Γ. The ground is omnipresent foundationally (sustaining all beings across "
+                  "all possible worlds, `FoundationalOmnipresence.lean`), not by physical diffusion or "
+                  "spatial location."),
+    },
+    {
+        "attribute": "**Quantitative metric infinity** (infinite physical magnitude or cardinal size)",
+        "scope": "Divine Being / Ground",
+        "expected": "ABSENT",
+        "checks": [{"type": "absent",
+                    "fragments": ["metric_infinity", "quantitative_infinity"],
+                    "allow": []}],
+        "refs": [],
+        "sense": ("The foundation is universal in foundational scope (grounding all reality, `FoundationalOmnipresence.lean`), "
+                  "but quantitative metric infinity (spatial magnitude or cardinal size) is not derived and is "
+                  "explicitly disclaimed (`CHARACTERISTICS.md` §11; `CHARS.md` §11)."),
     },
     {
         "attribute": "**Omniscience**",
@@ -4988,8 +5077,12 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")
     ap("of a necessary normative/truth order, and (entity-level) that a **necessary Divine Being")
     ap("/ Ground** exists — world-rigid, **everlasting**, **atemporal**, with **Canonical Aseity**,")
-    ap("**Divine Simplicity**, and **Divine Immutability** (invariant across modal worlds, temporal stages,")
-    ap("and agential state transitions). The remaining divine attributes — **unity / monotheism**,")
+    ap("**Divine Simplicity**, **Divine Immutability**, and **Foundational Omnipresence** (sustaining all")
+    ap("beings across modal reality). Crucially, the theory **strictly separates** these machine-verified")
+    ap("foundational/functional attributes from their unproven physical, psychological, and scholastic counterparts:")
+    ap("**physical/spatial omnipresence**, **psychological personality**, **scholastic simplicity**, and")
+    ap("**psychological impassibility** remain separate targets (❌ NOT ESTABLISHED or 🔴 INDEPENDENT).")
+    ap("The remaining divine attributes — **unity / monotheism**,")
     ap("**perfect moral goodness** (the moral pole itself now obtains under the single declared "
        "META bridge, C178; its attribution to the Divine Being stays a 🧱 frontier), the "
        "**Trinity**, the **Incarnation**, and contingent")

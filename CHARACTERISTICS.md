@@ -247,7 +247,7 @@ The foundation is **simple** in at least two senses: non-composite and not exhau
 ### Gaps and ambiguities
 
 - Non-compositeness, oneness, non-systemicity, inexhaustibility, and ineffability are not clearly separated.
-- The classical metaphysical doctrine of divine simplicity normally includes claims such as identity of essence and existence or absence of potency. The prose supplies no argument for those stronger senses (`README-OLD.md:258`).
+- The classical metaphysical doctrine of divine simplicity normally includes claims such as identity of essence and existence or absence of potency. The prose supplies no argument for those stronger senses (`README-OLD.md:258`), and Scholastic simplicity (essence-existence identity) is explicitly separated in the attributes table as `❌ NOT ESTABLISHED`.
 - The non-systemicity argument rules out exhaustive formal representation of the foundation, but it does not by itself establish a traditional doctrine of metaphysical simplicity.
 
 ## 8. Eternity, timelessness, and ontological precedence
@@ -276,7 +276,7 @@ The foundation is **timeless or eternal** in the sense of being prior to and ind
 - The text does not distinguish timelessness from everlastingness.
 - “Precedence” could mean logical, ontological, or temporal priority.
 - The premise that temporal existence necessarily implies submission to causality is asserted rather than argued (`README-OLD.md:161`).
-- Immutability: Formally established in `Logos.DivineImmutability` (`formal/Logos/DivineImmutability.lean`, C197–C201). `ofGround_divine_immutability` proves Classical Divine Immutability (Aquinas *ST* I, q. 9) via modal invariance (`ofGround_modal_invariance`, `{Subject}`), stage invariance (`ofGround_stage_invariance`, `{Subject}`), process invariance (`ofGround_transition_invariance`, `{Initiates, State, Subject}`), and capacity invariance (`ofGround_capacity_invariance`, `{Means, Subject}`), with footprint `{Initiates, Means, State, Subject}` (0 substantive axioms). The countermodel `contingent_entity_fails_immutability` (C197, `{}`) confirms that contingent entities fail immutability. Honest boundary: this establishes modal, temporal, process, and capacity unchangeability in Γ; it does not claim psychological impassibility or constrain relational intentionality.
+- Immutability: Formally established in `Logos.DivineImmutability` (`formal/Logos/DivineImmutability.lean`, C197–C201). `ofGround_divine_immutability` proves Classical Divine Immutability (Aquinas *ST* I, q. 9) via modal invariance (`ofGround_modal_invariance`, `{Subject}`), stage invariance (`ofGround_stage_invariance`, `{Subject}`), process invariance (`ofGround_transition_invariance`, `{Initiates, State, Subject}`), and capacity invariance (`ofGround_capacity_invariance`, `{Means, Subject}`), with footprint `{Initiates, Means, State, Subject}` (0 substantive axioms). The countermodel `contingent_entity_fails_immutability` (C197, `{}`) confirms that contingent entities fail immutability. Honest boundary: this establishes modal, temporal, process, and capacity unchangeability in Γ; it does not claim psychological impassibility (which is explicitly separated in the attributes table as `❌ NOT ESTABLISHED`, with Γ affirming the eternal relation of love in T14).
 - The claim that the universe is contingent, composite, and temporal is assumed in the pantheism objection rather than derived there (`README-OLD.md:264`).
 
 ## 9. Precedence to the true/false distinction
@@ -334,7 +334,12 @@ The foundation is **absolute**: unrestricted by prior conditions and invariant a
 
 **Status in the prose:** Universality is explicit; infinity is an allusive traditional identification rather than a developed independent argument.
 
-**Formal status: ✅ thin definitional universality only; ❌ infinity.** `NecessityEternity.ofGround_ground_of_reality` (`formal/Logos/NecessityEternity.lean:118`, `{Means, Subject}`) and `ofGround_necessary_ground_of_reality` (`:126`, `{Means, Subject}`) PROVEN as VOCAB-definitional grounding of every actual entity. No `Infinite`/`InfiniteSubstance` theorem exists in `formal/Logos/*.lean` or `formal/GAPMAP.md`.
+**Formal status: ✅ Foundational Omnipresence & Universal Modal Grounding PROVEN (`Logos.FoundationalOmnipresence`, C202–C206); ❌ quantitative infinity.** `FoundationalOmnipresence.ofGround_foundational_omnipresence` (`formal/Logos/FoundationalOmnipresence.lean:160`, `{Means, Subject}` — VOCAB only) proves Classical Foundational Omnipresence (Aquinas *ST* I, q. 8) for `Entity.ofGround`:
+1. World-Rigid Presence (`ofGround_world_rigid_presence`, `{Subject}`): present across all possible worlds;
+2. Universal Modal Grounding (`ofGround_universal_modal_ground`, `{Means, Subject}`): grounds every entity existing in any possible world;
+3. Non-Reciprocal Grounding (`ofGround_non_reciprocal_ground`, `{Means, Subject}`): no worldly atom or discriminating subject grounds the ground;
+4. Maximal Intentional Capacity (`ofGround_maximal_capacity`, `{Means, Subject}`): comprehensive meaning capacity across reality.
+Metatheoretic countermodel `finite_entity_fails_omnipresence` (C202, `{}`) confirms that localized entities fail universal grounding. Honest boundary: establishes foundational sustaining presence across modal reality in Γ; explicitly distinguishes foundational omnipresence from physical spatial omnipresence or quantitative metric infinity.
 
 ### Argument
 
@@ -351,8 +356,8 @@ The foundation is **universal** in scope, and is traditionally identified as an 
 
 ### Gaps and ambiguities
 
-- No independent argument from unconditionedness to quantitative infinity appears in the prose.
-- Universality of foundational scope, spatial omnipresence, infinite magnitude, and absolute indivisibility are left conflated.
+- Physical omnipresence: Spatial coordinates and physical spacetime are absent from Γ's ontology; physical omnipresence (diffusion throughout physical space) is explicitly separated in the attributes table as `❌ NOT ESTABLISHED`.
+- Quantitative infinity: No independent argument from unconditionedness to quantitative infinity appears in the prose. Quantitative metric infinity (spatial magnitude or cardinal size) is explicitly separated as `❌ NOT ESTABLISHED`.
 - The text explicitly disclaims any inference to omnipotence or omniscience (`README-OLD.md:263`).
 - “Infinite substance” is introduced through identification with traditional language, not derived through a separate argument (`README-OLD.md:258`).
 

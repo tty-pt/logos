@@ -1060,11 +1060,11 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     C111, C166, C167. (C175 is also `{}`, but its ledger status is COUNTERMODEL —
     the separation, not a PROVEN step — so it is not counted in this bucket.)
   - **9 `CL`-only**: C3, C10, C12–C14, C16, C37, C59, C93.
-  - **83 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+  - **87 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
     C21, C23–C25, C30, C39, C49, C51–C53, C55–C58, C62, C68, C83–C86, C91,
     C94, C97–C105, C107, C113, C114, C116, C120–C122, C137–C142, C144, C145,
     C147–C156, C160–C165, C168–C174, C176, C186, C189, C190, C191, C193,
-    C194, C195, C196, C198, C199, C200, C201, F1a.
+    C194, C195, C196, C198, C199, C200, C201, C203, C204, C205, C206, F1a.
     F1a is the choice-**field** existence form (resolves to a kernel step;
     renamed 2026-09-18 — the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
   - **C91** — vocab-only (`{Subject}`); hostile separations `{}`. C92 (the
@@ -1696,6 +1696,27 @@ camada interpretativa, não consequência kernel.
 > (`ofGround_transition_invariance`, `{Initiates, State, Subject}`). C201 provides the
 > master synthesis (`ofGround_divine_immutability`, `{Initiates, Means, State, Subject}`),
 > establishing that the ground satisfies Classical Divine Immutability with zero substantive axioms.
+
+---
+
+## Level 13 — Classical Foundational Omnipresence & Universal Sustaining Ground (`Logos.FoundationalOmnipresence`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C202 | §28/CHARACTERISTICS | `FoundationalOmnipresence.finite_entity_fails_omnipresence : ∃ Ent World ExistsAtRel GroundsRel e, ¬ (∀ w x, ExistsAtRel w x → x = e ∨ GroundsRel e x)` — finite/localized entities fail universal modal grounding, confirming that omnipresence is non-trivial | COUNTERMODEL | `{}` |
+| C203 | §28/CHARACTERISTICS | `FoundationalOmnipresence.ofGround_world_rigid_presence : WorldRigidPresence Entity.ofGround` — Entity.ofGround is present across all possible worlds | PROVEN | `{Subject}` |
+| C204 | §28/CHARACTERISTICS | `FoundationalOmnipresence.ofGround_universal_modal_ground : UniversalModalGround Entity.ofGround` — Entity.ofGround grounds every entity that exists in any possible world | PROVEN | `{Means, Subject}` |
+| C205 | §28/CHARACTERISTICS | `FoundationalOmnipresence.ofGround_non_reciprocal_ground : NonReciprocalGround Entity.ofGround` — Entity.ofGround operates as asymmetric ground; no worldly atom or discriminating subject grounds it | PROVEN | `{Means, Subject}` |
+| C206 | §28/CHARACTERISTICS | `FoundationalOmnipresence.ofGround_foundational_omnipresence : FoundationalOmnipresence Entity.ofGround` — Entity.ofGround satisfies Classical Foundational Omnipresence across all worlds, entities, and contents | PROVEN | `{Means, Subject}` |
+
+> Batch FOUNDATIONAL-OMNIPRESENCE (2026-09-25): C202 is a machine-checked countermodel
+> showing that finite localized entities fail universal modal grounding. C203 proves
+> world-rigid presence across modal space (`ofGround_world_rigid_presence`, `{Subject}`).
+> C204 establishes universal modal grounding across all worlds (`ofGround_universal_modal_ground`, `{Means, Subject}`).
+> C205 proves non-reciprocal grounding (`ofGround_non_reciprocal_ground`, `{Means, Subject}`).
+> C206 provides the master synthesis (`ofGround_foundational_omnipresence`, `{Means, Subject}`),
+> establishing that the ground satisfies Classical Foundational Omnipresence (Aquinas ST I q. 8)
+> with zero substantive axioms.
 
 
 

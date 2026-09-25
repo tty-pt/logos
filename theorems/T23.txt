@@ -1,0 +1,75 @@
+T23 — ONIPRESENÇA FUNDACIONAL E FUNDAMENTAÇÃO MODAL UNIVERSAL DA REALIDADE
+
+Depende de: `formal/Logos/FoundationalOmnipresence.lean`, formalizando a característica
+clássica da Onipresença Divina Fundacional (Tomás de Aquino ST I q. 8: *De Dei omnipraesentia*,
+README-OLD.md §163-164, §253) para o fundamento da realidade `Entity.ofGround`.
+
+Verificado em: `formal/Logos/FoundationalOmnipresence.lean`; auditoria `#print axioms`
+em `:200-211`; `formal/GAPMAP.md` C202–C206; `base.txt` §28.
+
+C202 — Contramodelo de independência metateórica:
+
+```lean
+theorem finite_entity_fails_omnipresence :
+    ∃ (Ent World : Type) (ExistsAtRel : World → Ent → Prop) (GroundsRel : Ent → Ent → Prop) (e : Ent),
+      ¬ (∀ (w : World) (x : Ent), ExistsAtRel w x → x = e ∨ GroundsRel e x)
+```
+
+Pegada auditada: `{}` (lógica pura). Entidades particulares ou finitas falham a fundamentação
+modal universal, confirmando que a onipresença fundacional é um predicado discriminante e não-trivial.
+
+C203 — Presença rígida através do espaço modal:
+
+```lean
+theorem ofGround_world_rigid_presence :
+    WorldRigidPresence Entity.ofGround
+```
+
+Pegada auditada: `{Subject}` (apenas vocabulário). `Entity.ofGround` está presente
+em todos os mundos possíveis da ontologia modal (`∀ w, ExistsAt w e`).
+
+C204 — Fundamentação modal universal:
+
+```lean
+theorem ofGround_universal_modal_ground :
+    UniversalModalGround Entity.ofGround
+```
+
+Pegada auditada: `{Means, Subject}` (apenas vocabulário). Para todo o mundo possível `w`
+e toda a entidade `e` existente em `w`, `Entity.ofGround` fundamenta ontologicamente `e`
+(`GroundsEntity Entity.ofGround e`).
+
+C205 — Fundamentação assimétrica e não-recíproca:
+
+```lean
+theorem ofGround_non_reciprocal_ground :
+    NonReciprocalGround Entity.ofGround
+```
+
+Pegada auditada: `{Means, Subject}` (apenas vocabulário). O fundamento sustenta toda
+a realidade modal, mas nenhum estado atómico mundano nem sujeito finito discriminador
+pode fundamentar o fundamento em retorno.
+
+C206 — Onipresença Fundacional Clássica (Síntese Mestre):
+
+```lean
+theorem ofGround_foundational_omnipresence :
+    FoundationalOmnipresence Entity.ofGround
+```
+
+Pegada auditada: `{Means, Subject}` (0 axiomas substantivos).
+
+Teoremas canónicos associados:
+
+1. Princípio tomista de onipresença (`omnipresence_from_universal_ground_and_aseity`, `{Means, Subject}`):
+   Qualquer entidade presente em todos os mundos, que fundamente todo o ser modalmente,
+   com soberania não-recíproca e capacidade intencional máxima, satisfaz a Onipresença
+   Fundacional (ST I q. 8 a. 1–3).
+
+2. Capacidade intencional máxima (`ofGround_maximal_capacity`, `{Means, Subject}`):
+   A presença intencional do fundamento abrange exaustivamente todas as proposições da realidade.
+
+Limites honestos de escopo:
+A demonstração estabelece a onipresença fundacional ontológica (presença sustentadora a todos
+os entes em todos os mundos possíveis de Γ). Distingue-se expressamente de onipresença espacial
+física tridimensional ou de infinitude métrica quantitativa.

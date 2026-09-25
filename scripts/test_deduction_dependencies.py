@@ -306,10 +306,27 @@ def test_readability_invariants():
     assert "ofGround_divine_simplicity" in attr_text, (
         "Table must cite ofGround_divine_simplicity"
     )
+    assert "**Scholastic simplicity**" in attr_text, "Table must report Scholastic simplicity"
     assert "**Divine immutability**" in attr_text, "Table must report Divine immutability"
     assert "ofGround_divine_immutability" in attr_text, (
         "Table must cite ofGround_divine_immutability"
     )
+    assert "**Psychological impassibility**" in attr_text, "Table must report Psychological impassibility"
+    assert "**Foundational omnipresence**" in attr_text, "Table must report Foundational omnipresence"
+    assert "ofGround_foundational_omnipresence" in attr_text, (
+        "Table must cite ofGround_foundational_omnipresence"
+    )
+    assert "**Physical omnipresence**" in attr_text, "Table must report Physical omnipresence"
+    assert "**Quantitative metric infinity**" in attr_text, "Table must report Quantitative metric infinity"
+    assert "**Psychological personality**" in attr_text, "Table must report Psychological personality"
+    assert "faithful_model_satisfies_free_will_without_opaque_person" in attr_text, (
+        "Table must cite faithful_model_satisfies_free_will_without_opaque_person"
+    )
+    # Check that separated unproven counterparts carry explicit status badges:
+    assert "| **Physical omnipresence** (spatial presence throughout physical spacetime coordinates) | Divine Being / Ground | ❌ NOT ESTABLISHED |" in attr_text
+    assert "| **Scholastic simplicity** (strict identity of essence and existence) | Divine Being / Ground | ❌ NOT ESTABLISHED |" in attr_text
+    assert "| **Psychological impassibility** (incapacity for relational affect or compassion) | Divine Being / Ground | ❌ NOT ESTABLISHED |" in attr_text
+    assert "| **Quantitative metric infinity** (infinite physical magnitude or cardinal size) | Divine Being / Ground | ❌ NOT ESTABLISHED |" in attr_text
     assert "not a proof or disproof of aseity for `Entity.ofGround`" in attr_text, (
         "Aseity row must preserve the canonical divine-aseity boundary"
     )
