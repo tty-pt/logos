@@ -71,3 +71,5 @@ import Logos.NecessityEternity
 -- with reality", and the machine-separated moral bridge).
 import Logos.RealityHookAudit
 import Logos.MoralFrontierAudit
+-- Canonical aseity and external grounding boundary.
+import Logos.CanonicalAseity

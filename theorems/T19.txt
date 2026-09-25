@@ -1,0 +1,51 @@
+T19 — SEPARAÇÃO ENTRE ASEIDADE E ALTERNATIVAS VOLITIVAS
+
+Depende de: `formal/Logos/ModalPossibilityFrontier.lean`, especialmente
+`Aseity` e `Level3_VolitionAlternative`. Os dois teoremas C182 e C184 são
+PROVEN com pegada literal `{}` e não usam `sorryAx`.
+
+Verificado em: `formal/Logos/ModalPossibilityFrontier.lean:463-503`; auditoria
+`#print axioms` em `:626-627`; `formal/GAPMAP.md` C182/C184; `base.txt` §28.
+
+C182 — Aseidade não força alternativas volitivas:
+
+```lean
+theorem aseity_does_not_force_any_volition_alternatives :
+    ∃ (World Entity Subject : Type)
+      (ExtDepAt : World → Entity → Prop)
+      (WillsAt : World → Subject → Prop → Prop)
+      (g : Entity),
+      Aseity World Entity ExtDepAt g ∧
+        ¬ ∃ (s : Subject) (a : Prop) (v u : World),
+          Level3_VolitionAlternative World Subject WillsAt s a v u
+```
+
+O modelo escolhe `World`, `Entity` e `Subject` unitários, `ExtDepAt` e
+`WillsAt` falsas. A asserção de aseidade reduz-se a uma tautologia, enquanto
+qualquer alternativa volitiva contém uma premissa falsa. Logo, a aseidade
+genérica é compatível com a ausência de qualquer alternativa de nível 3.
+
+C184 — Uma alternativa volitiva não força aseidade:
+
+```lean
+theorem volitional_alternative_does_not_force_aseity :
+    ∃ (World Entity Subject : Type)
+      (ExtDepAt : World → Entity → Prop)
+      (WillsAt : World → Subject → Prop → Prop)
+      (g : Entity) (s : Subject) (a : Prop) (v u : World),
+      Level3_VolitionAlternative World Subject WillsAt s a v u ∧
+        ¬ Aseity World Entity ExtDepAt g
+```
+
+O modelo usa `World := Bool`, `Entity := Subject := Unit`,
+`ExtDepAt := fun _ _ => True` e `WillsAt := fun w _ _ => w = true`.
+Em `true`/`false` há uma alternativa volitiva; a dependência externa em
+`true` refuta a aseidade de `g`.
+
+Juntos, C182 e C184 estabelecem que `Aseity` e a existência de uma
+`Level3_VolitionAlternative` são logicamente independentes para predicados
+genéricos. `Level3_VolitionAlternative` é apenas
+`WillsAt v s a ∧ ¬ WillsAt u s a`: não contém acessibilidade modal,
+incompatibilidade ou exigência de mundos distintos. Estes resultados não
+provam a aseidade de `Entity.ofGround`, não dependem de uma semântica
+divina e não adicionam uma ponte modal ou metafísica.

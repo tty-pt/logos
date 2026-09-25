@@ -169,6 +169,14 @@ theorem sig_model_c_normative_denial_is_impossible
   have hEx : SigNormativeRightExists sig := ⟨s, SigNoRight sig, hClaim, hCorr⟩
   exact hTrue hEx
 
+/-- A normative denial cannot be both claimed correct and true.
+    Classification: LOGICAL COROLLARY. Footprint: {} (pure logic). -/
+theorem no_correct_claim_of_no_right_can_be_true
+    (sig : RetorsionSig) (s : sig.Subject) :
+    SigClaimsCorrect sig s (SigNoRight sig) → ¬ SigNoRight sig := by
+  intro hClaim hTrue
+  exact sig_model_c_normative_denial_is_impossible sig s ⟨hClaim, hTrue⟩
+
 /-- Mere Utterance in Ambient Signature: An agent acts on p without claiming correctness. -/
 def MereUtterance (s : Subject) (p : Prop) : Prop :=
   Act s p ∧ ¬ Means s (Logos.Order.Correct s p)
@@ -215,6 +223,7 @@ end Logos.DirectNormativeRetorsion
 #print axioms Logos.DirectNormativeRetorsion.model_b_no_right_is_true
 #print axioms Logos.DirectNormativeRetorsion.model_b_satisfiability
 #print axioms Logos.DirectNormativeRetorsion.sig_model_c_normative_denial_is_impossible
+#print axioms Logos.DirectNormativeRetorsion.no_correct_claim_of_no_right_can_be_true
 #print axioms Logos.DirectNormativeRetorsion.model_a_mere_utterance_avoids_claims_correct
 #print axioms Logos.DirectNormativeRetorsion.model_b_mere_meaning_avoids_claims_correct
 #print axioms Logos.DirectNormativeRetorsion.model_c_normative_denial_is_impossible

@@ -454,6 +454,48 @@ theorem model_MC21_consistent :
   refine ⟨Bool, Unit, Unit, fun _ _ => False, fun w _ _ => w = true, (), (), True, true, false,
           fun _ h => h, ⟨rfl, fun h => by cases h⟩⟩
 
+/-- Generic aseity does not entail the existence of any Level-3 volitional
+    alternative. This unit-domain countermodel makes external dependence and
+    willing false. It concerns the current bare predicate, which has no
+    accessibility or incompatibility condition; it does not establish aseity of
+    `Entity.ofGround`, interpret `ExtDepAt` as causal dependence, or prove
+    divine metaphysics. Footprint: `{}`. -/
+theorem aseity_does_not_force_any_volition_alternatives :
+    ∃ (World Entity Subject : Type)
+      (ExtDepAt : World → Entity → Prop)
+      (WillsAt : World → Subject → Prop → Prop)
+      (g : Entity),
+      Aseity World Entity ExtDepAt g ∧
+        ¬ ∃ (s : Subject) (a : Prop) (v u : World),
+          Level3_VolitionAlternative World Subject WillsAt s a v u := by
+  refine ⟨Unit, Unit, Unit, fun _ _ => False, fun _ _ _ => False, (), ?_⟩
+  constructor
+  · intro _ h
+    exact h
+  · intro hExists
+    obtain ⟨s, a, v, u, hWill⟩ := hExists
+    exact hWill.1
+
+/-- The existence of a Level-3 volitional alternative does not entail generic
+    aseity. This Boolean-domain countermodel makes external dependence true
+    everywhere while willing differs between `true` and `false`. It concerns
+    the current bare predicate, with no accessibility or incompatibility
+    condition, and does not establish aseity of `Entity.ofGround` or prove
+    divine metaphysics. Footprint: `{}`. -/
+theorem volitional_alternative_does_not_force_aseity :
+    ∃ (World Entity Subject : Type)
+      (ExtDepAt : World → Entity → Prop)
+      (WillsAt : World → Subject → Prop → Prop)
+      (g : Entity) (s : Subject) (a : Prop) (v u : World),
+      Level3_VolitionAlternative World Subject WillsAt s a v u ∧
+        ¬ Aseity World Entity ExtDepAt g := by
+  refine ⟨Bool, Unit, Unit, fun _ _ => True, fun w _ _ => w = true,
+          (), (), True, true, false, ?_⟩
+  constructor
+  · exact ⟨rfl, fun h => by cases h⟩
+  · intro hAseity
+    exact hAseity true trivial
+
 /-- MC22: Contrastive explanation via irreducible agent-causal settlement. -/
 theorem model_MC22_consistent :
     ∃ (World Entity Subject : Type)
@@ -580,5 +622,8 @@ theorem model_MC30_consistent :
           fun _ => trivial, fun ⟨_, hq⟩ => hq,
           ⟨true, trivial, Or.inl ⟨rfl, rfl⟩, ⟨(), rfl⟩⟩,
           ⟨false, trivial, Or.inr ⟨rfl, rfl⟩, fun ⟨_, hx⟩ => by cases hx⟩⟩
+
+#print axioms Logos.ModalPossibilityFrontier.aseity_does_not_force_any_volition_alternatives
+#print axioms Logos.ModalPossibilityFrontier.volitional_alternative_does_not_force_aseity
 
 end Logos.ModalPossibilityFrontier

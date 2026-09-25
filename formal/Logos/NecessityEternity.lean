@@ -98,6 +98,28 @@ def NotInSuccession (e : Entity) : Prop :=
   ¬ ∃ (s : Subject) (σ σ' : State) (p : Prop),
       e = EntityOf s ∧ Initiates s σ σ' p
 
+/-- Generic modal transport: if an entity exists in every world, then it is
+    present at every stage corresponding to one of those worlds, and its stage
+    occurrences are equivalent. This conditional, type-generic lemma does not
+    instantiate `Entity.ofGround` or establish metaphysical eternity.
+    Footprint: `{}`. -/
+theorem necessary_existence_is_stage_uniform
+    {World Stage Entity : Type}
+    (ExistsAt : World → Entity → Prop)
+    (At : Stage → Entity → Prop)
+    (stage : Stage → World)
+    (e : Entity)
+    (hNecessary : ∀ w : World, ExistsAt w e)
+    (hAt : ∀ t : Stage, At t e ↔ ExistsAt (stage t) e) :
+    ∀ t : Stage, At t e ∧ ∀ u : Stage, At t e ↔ At u e := by
+  intro t
+  refine ⟨(hAt t).2 (hNecessary (stage t)), fun u => ?_⟩
+  constructor
+  · intro _
+    exact (hAt u).2 (hNecessary (stage u))
+  · intro _
+    exact (hAt t).2 (hNecessary (stage t))
+
 -- ============================================================================
 -- Section 2: Necessity of the ground (all footprint `{}`)
 -- ============================================================================
@@ -279,6 +301,7 @@ end Logos.NecessityEternity
 #print axioms Logos.NecessityEternity.ofGround_ground_of_reality
 #print axioms Logos.NecessityEternity.ofGround_necessary_ground_of_reality
 #print axioms Logos.NecessityEternity.ofGround_ne_ofSubject
+#print axioms Logos.NecessityEternity.necessary_existence_is_stage_uniform
 #print axioms Logos.NecessityEternity.necessary_implies_everlasting
 #print axioms Logos.NecessityEternity.necessary_implies_atemporal
 #print axioms Logos.NecessityEternity.the_ground_everlasting

@@ -30,6 +30,13 @@ A tentativa de negação autodestrói-se na sua própria enunciação performati
 
 (∃ s, ClaimsCorrect s NoRight) → ¬ NoRight.
 
+Na assinatura interpretada `RetorsionSig`, o corolário local
+`no_correct_claim_of_no_right_can_be_true : SigClaimsCorrect sig s (SigNoRight sig) → ¬ SigNoRight sig`
+(C179, GAPMAP.md) é também PROVEN com pegada literal `{}`: a lógica pura impede que a
+negação do direito seja simultaneamente alegada como correcta e verdadeira. Este
+resultado é local à assinatura interpretada; não substitui a prova ambiental de
+`¬NoRight` nem estabelece sozinho a soberania normativa do fundamento.
+
 Nota (contexto): quando Γ diz que há "certo e errado", refere-se à **polaridade objectiva de
 correcção** (é correcto afirmar o que é verdadeiro, incorrecto afirmar o que é falso; ¬N_T ∧ ¬N_F),
 NÃO ao bem/mal moral. O bem/mal moral está machine-separado da normatividade epistémica
@@ -915,6 +922,24 @@ São aspectos inseparáveis do mesmo acto.
 
 Teorema: ver theorems/T8.txt
 
+24c. INVARIÂNCIA ARQUITETURAL DO NÚCLEO
+
+A parametrização dos regimes de execução em `formal/Logos/HardenedInvariance.lean`
+formaliza uma distinção estrita entre o núcleo admissível em todos os regimes,
+incluindo a realização estrutural não-agente, e o núcleo admissível em todos os
+regimes agentes. O teorema
+
+`agent_invariant_core_is_strictly_inside_freewill_invariant_core` (C180; PROVEN,
+pegada literal `{}`) estabelece que o primeiro núcleo está estritamente contido no
+segundo: `AgentInvariant ⊊ FreeWillInvariant` no espaço das camadas de dependência.
+
+Este é um resultado de arquitectura formal, não uma demonstração de que o fundamento
+último seja metafisicamente invariante, absoluto ou não relativo a todos os sistemas.
+Não há uma ponte canónica desse tipo no corpus; por isso a característica de
+não-relatividade continua apenas arquitecturalmente ilustrada, não teologicamente
+derivada. Ver `CHARACTERISTICS.md` §10, `formal/Logos/HardenedInvariance.lean:223-237`
+e `theorems/T18.txt`.
+
 25. RESULTADO TRANSCENDENTAL
 
 O ato racional presente implica:
@@ -1115,8 +1140,14 @@ A dedução puramente transcendental (sem pontes semânticas ou metafísicas adi
 O limite da fase puramente dedutiva manifesta-se onde a dedução pura encontra as transições ontológicas transmundanas:
 - `ato performativo atual → sujeito / entidade necessária em todos os mundos` (C77/C92: condicional a `PersonStabilityPrinciple`; refutado sem pontes por `CountermodelPersonNotNecessary` e `ContingentAgencyModel`) — continua FALSO para cada sujeito (`¬ NecessarySubject s`).
 - `entidade do fundamento necessária em todos os mundos` (2026-09-24, `NecessityEternity.lean`): `NecessaryEntity Entity.ofGround` é uma estipulação semântica definicional (`EntityExistsAt w .ofGround := True`, classe VOCAB — não um axioma substantivo); a obstrução pré-extension `¬ ∃ e, NecessaryEntity e` deixou de ser teorema do sort estendido. Corolários definicionais: `Everlasting .ofGround` e `Atemporal .ofGround` (o argumento não depende do tempo — o tempo entra apenas no lado da conclusão, camada de estágios Nat). A identidade hipostática é bloqueada (`ofGround ≠ EntityOf s`, `ofGround_ne_ofSubject`, injectividade do construtor). Pegadas: `{Means, Subject}` (VOCAB) nos teoremas de necessidade/eternidade; `the_ground_not_in_succession` `{Initiates, State, Subject}`; o conjuncto pessoal da Proposição E carrega honestamente `{AxTwoSubjects, Means, Subject}` (PROVEN↑, META).
+- `NecessityEternity.necessary_existence_is_stage_uniform` (C181, 2026-09-25): para tipos genéricos `World`, `Stage` e `Entity`, se uma entidade existe em todos os mundos e cada estágio representa um mundo, então existe em todos os estágios e as suas ocorrências são equivalentes. É um transporte condicional de necessidade para estágios, com pegada `{}`; não instancia `Entity.ofGround`, não remove a pegada `{Subject}` dos corolários canónicos e não constitui prova de eternidade metafísica.
+- **C182 (PROVEN, 2026-09-25):** `ModalPossibilityFrontier.aseity_does_not_force_any_volition_alternatives` é um contramodelo genérico com `World`, `Entity` e `Subject` unitários, `ExtDepAt` e `WillsAt` falsas. A pegada auditada é `{}`. A asserção `Level3_VolitionAlternative` continua a ser apenas `WillsAt v s a ∧ ¬ WillsAt u s a`, sem acessibilidade modal, incompatibilidade ou exigência `v ≠ u`; o resultado não prova aseidade do `Entity.ofGround`.
+- **C184 (PROVEN, 2026-09-25):** `ModalPossibilityFrontier.volitional_alternative_does_not_force_aseity` é o contramodelo complementar, com `World := Bool`, `ExtDepAt := True` e `WillsAt w _ _ := w = true`; a alternativa existe em `true`/`false`, enquanto a dependência externa em `true` refuta `Aseity`. A pegada auditada é `{}`. C182/C184 dão independência lógica bidirecional para os predicados genéricos, não um resultado de aseidade divina.
+- **C183 (PROVEN, 2026-09-25):** `Core.rightWrong_nonempty_and_nonconflating` é o fecho lógico que agrupa `greatResult` e `noBothTrueAndFalse`, com a pegada auditada `{}`. É quase definicional (`T p := p`), apenas fecha C8/C9 e não constitui uma prova transcendental nova.
+- **C185 (PROVEN, 2026-09-25):** `CanonicalAseity.false_meaning_cannot_ground_true_meaning` é a exclusão modelar genérica segundo a qual uma entidade com capacidade falsa de significado para `p` não pode fundamentar outra que tenha capacidade verdadeira para `p`. Pegada auditada: `{}`.
+- **C186 (PROVEN, 2026-09-25):** `CanonicalAseity.conditional_canonical_aseity` demonstra que `Entity.ofGround` possui aseidade canónica (`CanonicalAseity Entity.ofGround`, sem nenhum fundamento ontológico externo `ExternalGrounding g .ofGround`), sob a premissa de que os sujeitos são discriminadores (`∀ s, ∃ p, ¬ Means s p`). Teoremas auxiliares: exclusão incondicional de átomos (`atom_cannot_ground_the_ground`, `{Means, Subject}`) e exclusão de sujeitos discriminadores (`discriminating_subject_cannot_ground_the_ground`, `{Means, Subject}`). A aseidade incondicional não se deduz da lógica de agência pura sem postulado de finitude intencional (`unconditional_aseity_independent_of_bare_agency`, `{}`). Pegada auditada: `{Means, Subject}` (vocabulário).
 
-A cadeia do poema avançou. Estado formal (theorems/T10–T14.txt):
+A cadeia do poema avançou. Estado formal (theorems/T3.txt, theorems/T10–T14.txt, theorems/T19.txt, theorems/T20.txt):
 
 T10 (certo e errado necessários) — PROVEN; a sua necessidade (necDistinction)
   é teorema desde C1 (o modal prop-level é agora alias definições).

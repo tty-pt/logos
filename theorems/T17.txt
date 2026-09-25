@@ -1,0 +1,38 @@
+T17 — RETORÇÃO NORMATIVA DE TIPO C
+
+Depende de: `formal/Logos/DirectNormativeRetorsion.lean`, especialmente
+`RetorsionSig`, `SigClaimsCorrect`, `SigNoRight` e
+`sig_model_c_normative_denial_is_impossible` (linhas 161–170). O corolário
+`no_correct_claim_of_no_right_can_be_true` (linhas 172–178) é PROVEN com
+pegada literal `{}`: a demonstração não depende de qualquer axioma, nem de
+`CL`.
+
+Verificado em: `formal/Logos/DirectNormativeRetorsion.lean:172-178` e
+`GAPMAP.md` C179.
+
+Enunciado:
+
+```lean
+theorem no_correct_claim_of_no_right_can_be_true
+    (sig : RetorsionSig) (s : sig.Subject) :
+    SigClaimsCorrect sig s (SigNoRight sig) → ¬ SigNoRight sig
+```
+
+Demonstração:
+
+```lean
+intro hClaim hTrue
+exact sig_model_c_normative_denial_is_impossible sig s ⟨hClaim, hTrue⟩
+```
+
+A lógica pura mostra que a afirmação `SigClaimsCorrect sig s (SigNoRight sig)`
+não pode coexistir com a verdade de `SigNoRight sig`: a própria alegação de
+correcção construiria uma instanciação de `SigNormativeRightExists`, contradizendo
+`SigNoRight`.
+
+Limite do resultado: trata-se de um teorema local para a assinatura
+interpretada `RetorsionSig`. Não prova, sem uma ponte adicional, a
+soberania normativa do fundamento canónico nem transforma `¬NoRight` numa
+tese ambiental incondicional. O resultado ambiental
+`performative_normative_denial_establishes_normative_right` continua a ter a
+pegada de vocabulário `{Initiates, Means, State, Subject}`.

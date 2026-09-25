@@ -5,14 +5,16 @@ Logos.NecessityEternity) + extensão do sort em formal/Logos/Entity.lean (constr
 Entity.ofGround; EntityExistsAt w .ofGround := True; correspondências EntityMeans
 .ofGround p := True em RecoveredOntologicalGround.lean e NecessaryPersonalGround.lean).
 PROVEN (VOCAB) — pegadas {Means, Subject} / {Subject} / {Initiates, State, Subject},
-zero axiomas substantivos; conjuncto pessoal da Proposição E: PROVEN↑ sob
-{ AxTwoSubjects, Means, Subject } (META anunciada).
+zero axiomas substantivos; C181 `necessary_existence_is_stage_uniform` é PROVEN
+com pegada `{}` (transporte modal genérico); conjuncto pessoal da Proposição E:
+PROVEN↑ sob { AxTwoSubjects, Means, Subject } (META anunciada).
 
 Verificado em: formal/Logos/NecessityEternity.lean (ofGround_necessary,
 ofGround_ground_of_reality, ofGround_necessary_ground_of_reality,
 necessary_implies_everlasting, necessary_implies_atemporal, the_ground_everlasting,
 the_ground_atemporal, the_ground_not_in_succession, everlasting_and_atemporal_ground,
-claimE), GAPMAP.md (Batch fundamento-necessário), GOAL.md §3/§4/§7.
+necessary_existence_is_stage_uniform, claimE), GAPMAP.md (Batch fundamento-necessário),
+GOAL.md §3/§4/§7.
 
 O fundamento último — a entidade cuja existência a semântica torna mundo-invariante —
 existe necessariamente em todos os mundos: `NecessaryEntity Entity.ofGround`
@@ -26,6 +28,14 @@ rigidez-mundo do fundamento entrega, por corolário definicional, ambas:
 Everlasting (∀ t, ExistsAtTime t Entity.ofGround) e
 Atemporal (∀ t₁ t₂, ExistsAtTime t₁ .ofGround ↔ ExistsAtTime t₂ .ofGround),
 mais a não-sucessão (the_ground_not_in_succession: fora de todo acto de iniciação).
+
+O teorema C181, `necessary_existence_is_stage_uniform`, formaliza o transporte
+condicional genérico: dada a existência em todos os mundos, uma representação
+`stage : Stage → World` e a equivalência `At t e ↔ ExistsAt (stage t) e`, obtém-se
+presença em todos os estágios e a equivalência entre quaisquer duas ocorrências.
+A prova é logicamente independente do sort `Entity`: não instancia
+`Entity.ofGround`, não altera as pegadas dos corolários canónicos e não permite
+descrever o resultado como eternidade metafísica do fundamento último.
 
 Separação honesta (os predicados não colapsam): `atom_has_temporal_mode`,
 `atom_not_everlasting`, `atom_not_atemporal`, `subject_not_everlasting`,

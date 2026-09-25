@@ -1,0 +1,53 @@
+T20 — ASEIDADE CANÓNICA E FRONTEIRA DE NÃO-DEPENDÊNCIA DO FUNDAMENTO
+
+Depende de: `formal/Logos/CanonicalAseity.lean`, formalizando a relação
+de dependência externa ontológica (`ExternalGrounding`) e o predicado de
+aseidade canónica (`CanonicalAseity`) para o fundamento último `Entity.ofGround`.
+
+Verificado em: `formal/Logos/CanonicalAseity.lean`; auditoria `#print axioms`
+em `:169-180`; `formal/GAPMAP.md` C185/C186; `base.txt` §28.
+
+C185 — Exclusão modelar genérica de fundamentação por capacidade de significado:
+
+```lean
+theorem false_meaning_cannot_ground_true_meaning
+    {E : Type} (EM : E → Prop → Prop) (g e : E) (p : Prop)
+    (hE : EM e p) (hG : ¬ EM g p) :
+    ¬ (∀ q : Prop, EM e q → EM g q)
+```
+
+Pegada auditada: `{}` (lógica pura). Uma entidade cuja capacidade de significado
+falha para uma proposição `p` não pode fundamentar ontologicamente outra entidade
+que possua capacidade de significado para `p`.
+
+C186 — Aseidade Canónica do Fundamento (condicional à finitude dos sujeitos):
+
+```lean
+theorem conditional_canonical_aseity
+    (hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p) :
+    CanonicalAseity Entity.ofGround
+```
+
+Pegada auditada: `{Means, Subject}` (apenas vocabulário).
+
+Teoremas canónicos associados:
+
+1. Exclusão incondicional de átomos (`atom_cannot_ground_the_ground`, `{Means, Subject}`):
+   Nenhuma entidade atómica factual pode fundamentar `Entity.ofGround`, pois
+   `EntityMeans .ofGround False = True` e `EntityMeans (ofAtom n) False = False`.
+   Logo, nenhum átomo é fundamento externo (`no_atom_externally_grounds_the_ground`).
+
+2. Exclusão de sujeitos discriminadores (`discriminating_subject_cannot_ground_the_ground`, `{Means, Subject}`):
+   Qualquer sujeito que não signifique todas as proposições (`∃ p, ¬ Means s p`)
+   não pode fundamentar `Entity.ofGround`.
+
+3. Aseidade modal (`ofGround_modal_aseity_conditional`, `{Means, Subject}`):
+   Sob a condição de discriminação finita, `Entity.ofGround` satisfaz o predicado
+   genérico `Aseity World Entity CanonicalExtDepAt Entity.ofGround` em todos os mundos.
+
+4. Fronteira de independência incondicional (`unconditional_aseity_independent_of_bare_agency`, `{}`):
+   A primitiva `Means` da agência pura não impõe limites à capacidade intencional.
+   Em modelos irrestritos onde um sujeito significasse todas as proposições, esse
+   sujeito satisfaria a relação de fundamentação. Assim, a aseidade incondicional
+   exige ou o postulado de discriminação finita dos sujeitos mundanos ou uma
+   ponte explícita de aseidade/não-derivação ontológica.

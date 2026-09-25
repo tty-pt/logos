@@ -163,6 +163,15 @@ theorem noBothTrueAndFalse : ∀ p : Prop, ¬ (T p ∧ IsFalse p) := by
   intro p h
   exact h.2 h.1
 
+/-- Truth and falsehood are both instantiated, and no proposition is both
+    true and false. This bundles the explicit C8 and C9 results; because
+    `T p := p`, it is a logical-level closure rather than a new transcendental
+    theorem. Footprint: `{}`. -/
+theorem rightWrong_nonempty_and_nonconflating :
+    (∃ p q : Prop, T p ∧ IsFalse q) ∧
+      ∀ p : Prop, ¬ (T p ∧ IsFalse p) := by
+  exact ⟨greatResult, noBothTrueAndFalse⟩
+
 -- ---------------------------------------------------------------------------
 -- §10 — logical meaning: bivalence is available (classical meta-logic)
 -- ---------------------------------------------------------------------------
@@ -197,3 +206,4 @@ end Logos.Core
 #print axioms Logos.Core.nothingTrueRefutes
 #print axioms Logos.Core.someTrue
 #print axioms Logos.Core.greatResult
+#print axioms Logos.Core.rightWrong_nonempty_and_nonconflating

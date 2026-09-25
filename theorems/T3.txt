@@ -1,6 +1,6 @@
 T3 — PRIMEIRO GRANDE RESULTADO: TRUE ≠ FALSE
 
-Depende de: T1, T2
+Depende de: T1, T2; C183 (`formal/Logos/Core.lean`, `rightWrong_nonempty_and_nonconflating`)
 
 4. O ABSOLUTO "NADA É VERDADEIRO"
 
@@ -103,3 +103,15 @@ Impressão de axiomas (Lean #print axioms): greatResult, nothingTrueRefutes,
 notNothingTrue, notEverythingTrue, rightWrongDistinction *não dependem de
 nenhum axioma*; someTrue acresce {propext, Classical.choice, Quot.sound}.
 sorryAx: 0 em todo o módulo.
+
+8. REGISTO C183 (PROVEN, 2026-09-25)
+
+O fecho lógico `Core.rightWrong_nonempty_and_nonconflating` agrupa os dois
+resultados já verificados `greatResult` e `noBothTrueAndFalse`:
+`⟨greatResult, noBothTrueAndFalse⟩`. A auditoria de `#print axioms` em
+`formal/Logos/Core.lean:209` devolve a pegada literal `{}`; não há `sorryAx`.
+A prova é quase definicional porque `T p := p`: C183 fecha o feixe C8/C9, mas
+não constitui uma nova prova transcendental nem uma característica divina.
+
+Verificado em: `formal/Logos/Core.lean:170-176`; `formal/GAPMAP.md` C183;
+`base.txt` §28.

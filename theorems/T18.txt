@@ -1,0 +1,44 @@
+T18 — INVARIÂNCIA ARQUITETURAL DO NÚCLEO
+
+Depende de: `formal/Logos/HardenedInvariance.lean`, especialmente as definições
+`AgentInvariant` e `FreeWillInvariant`, as equivalências `agent_invariant_iff_agent_neutral_core`
+e `freewill_invariant_iff_freewill_neutral_core`, e `strict_core_inclusion`.
+O teorema é PROVEN com pegada literal `{}`: a prova usa apenas lógica e as
+equivalências estruturais do módulo, sem qualquer axioma (nem `CL`).
+
+Verificado em: `formal/Logos/HardenedInvariance.lean:223-237`, com a auditoria
+`#print axioms` em `:552`; `GAPMAP.md` C180; `base.txt` §24c; e
+`CHARACTERISTICS.md` §10.
+
+Enunciado:
+
+```lean
+theorem agent_invariant_core_is_strictly_inside_freewill_invariant_core :
+    (∀ l, AgentInvariant l → FreeWillInvariant l) ∧
+      ∃ l, FreeWillInvariant l ∧ ¬ AgentInvariant l
+```
+
+Demonstração (corolário da inclusão estrutural existente):
+
+```lean
+constructor
+· intro l hInv
+  apply (freewill_invariant_iff_freewill_neutral_core l).2
+  exact (strict_core_inclusion.1 l)
+    ((agent_invariant_iff_agent_neutral_core l).1 hInv)
+· rcases strict_core_inclusion.2.1 with ⟨l, hFW, hNotA⟩
+  refine ⟨l, (freewill_invariant_iff_freewill_neutral_core l).2 hFW, ?_⟩
+  intro hInv
+  exact hNotA ((agent_invariant_iff_agent_neutral_core l).1 hInv)
+```
+
+O resultado separa dois regimes de admissibilidade das camadas de dependência:
+o núcleo agente-invariante continua admissível mesmo no regime estrutural
+não-agente, enquanto o núcleo independente do livre-arbítrio exige todos os
+regimes agentes. A segunda componente fornece uma camada (`L1_PerformativeDatum`,
+por exemplo) que pertence ao segundo núcleo mas não ao primeiro.
+
+Limite: isto prova `AgentInvariant ⊊ FreeWillInvariant` como arquitectura do
+sistema de camadas. Não prova que o fundamento último seja absoluto,
+invariante entre todos os sistemas ou metafisicamente não relativo; essa ponte
+continua por estabelecer e não é acrescentada ao argumento.

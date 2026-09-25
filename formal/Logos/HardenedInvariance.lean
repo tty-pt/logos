@@ -220,6 +220,22 @@ theorem strict_core_inclusion :
   · refine ⟨DependencyLayer.L10_GenuineChoice, ?_⟩
     · intro hCore; exact hCore (Or.inl rfl)
 
+/-- Strict Agent/Core Inclusion (C180/T18):
+    the agent-invariant core is a proper subset of the free-will-invariant core.
+    Classification: ARCHITECTURAL INVARIANCE ONLY, not metaphysical non-relativity. Footprint: {} (pure logic). -/
+theorem agent_invariant_core_is_strictly_inside_freewill_invariant_core :
+    (∀ l, AgentInvariant l → FreeWillInvariant l) ∧
+      ∃ l, FreeWillInvariant l ∧ ¬ AgentInvariant l := by
+  constructor
+  · intro l hInv
+    apply (freewill_invariant_iff_freewill_neutral_core l).2
+    exact (strict_core_inclusion.1 l)
+      ((agent_invariant_iff_agent_neutral_core l).1 hInv)
+  · rcases strict_core_inclusion.2.1 with ⟨l, hFW, hNotA⟩
+    refine ⟨l, (freewill_invariant_iff_freewill_neutral_core l).2 hFW, ?_⟩
+    intro hInv
+    exact hNotA ((agent_invariant_iff_agent_neutral_core l).1 hInv)
+
 -- ===========================================================================
 -- Part II: Resolving the Personhood Contradiction (Section 2)
 -- ===========================================================================
@@ -532,5 +548,7 @@ theorem contextual_retorsion_datum :
                   Checks.CheckFormalKernel _,
                   RealizesAt.RealizeAxiom _ _ trivial,
                   rfl⟩
+
+#print axioms Logos.HardenedInvariance.agent_invariant_core_is_strictly_inside_freewill_invariant_core
 
 end Logos.HardenedInvariance

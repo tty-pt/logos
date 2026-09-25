@@ -262,7 +262,8 @@ def test_readability_invariants():
     assert text.partition("## Which Classical Attributes Are Already Established?")[2].find("## Further Investigations") != -1, (
         "Classical-attributes table must sit before the Further Investigations catalogue"
     )
-    for scope in ("Personal ground / person-type", "Divine Being / Ground", "Divine Personhood"):
+    for scope in ("Personal ground / person-type", "Divine Being / Ground", "Divine Personhood",
+                   "Proof architecture (not divine scope)"):
         assert scope in attr_text, f"Table must report scope '{scope}'"
     for bucket in ("✅ PROVEN", "⏸ DEFERRED", "❌ NOT ESTABLISHED", "🧱 INDEPENDENT"):
         assert bucket in attr_text, f"Table must report status bucket '{bucket}'"
@@ -272,8 +273,16 @@ def test_readability_invariants():
                    "preceding_theory_not_entails_incarnation",
                    "ofGround_necessary_ground_of_reality",
                    "the_ground_everlasting",
-                   "the_ground_atemporal"):
+                   "the_ground_atemporal",
+                   "necessary_existence_is_stage_uniform",
+                   "agent_invariant_core_is_strictly_inside_freewill_invariant_core"):
         assert footer in attr_text, f"Table must cite live declaration '{footer}'"
+    assert "does not establish that the Divine Being / Ground" in attr_text, (
+        "Table must preserve the architectural boundary for the non-relative core"
+    )
+    assert "does not instantiate the canonical `Entity` sort" in attr_text, (
+        "C181 must remain generic rather than being presented as canonical divine eternity"
+    )
     assert "NECESSARY PERSON" not in attr_text, (
         "Table must not re-introduce the 'necessary Person' conflation"
     )
@@ -285,6 +294,16 @@ def test_readability_invariants():
     )
     assert "ofGround_ne_ofSubject" in attr_text, (
         "Table must record the blocked hypostatic identity (ofGround ≠ EntityOf s)"
+    )
+    assert "**Aseity**" in attr_text, "Table must report Aseity"
+    assert "aseity_does_not_force_any_volition_alternatives" in attr_text, (
+        "Table must cite C182"
+    )
+    assert "volitional_alternative_does_not_force_aseity" in attr_text, (
+        "Table must cite C184"
+    )
+    assert "not a proof or disproof of aseity for `Entity.ofGround`" in attr_text, (
+        "Aseity row must preserve the canonical divine-aseity boundary"
     )
 
     # 14. Invariant: Act / SubjectExists / Agent do NOT precede Free Will in main spine

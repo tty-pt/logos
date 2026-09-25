@@ -1183,6 +1183,48 @@
  ],
  "Logos.BipolarityRetorsion.voice_to_stance_not_forced_by_primitive_judicative_gamma": [],
  "Logos.BipolarityRetorsion.voice_without_normative_stance": [],
+ "Logos.CanonicalAseity.CanonicalAseity": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CanonicalAseity.CanonicalExtDepAt": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CanonicalAseity.ExternalGrounding": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CanonicalAseity.atom_cannot_ground_the_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CanonicalAseity.canonical_aseity_implies_modal_aseity": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CanonicalAseity.conditional_canonical_aseity": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CanonicalAseity.discriminating_subject_cannot_ground_the_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CanonicalAseity.false_meaning_cannot_ground_true_meaning": [],
+ "Logos.CanonicalAseity.no_atom_externally_grounds_the_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CanonicalAseity.no_discriminating_subject_externally_grounds_the_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CanonicalAseity.ofGround_modal_aseity_conditional": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CanonicalAseity.unconditional_aseity_independent_of_bare_agency": [],
  "Logos.Choice.AlternativeSensitivity": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -2706,6 +2748,7 @@
  "Logos.Core.nothingFalseRefutes": [],
  "Logos.Core.nothingTrueRefutes": [],
  "Logos.Core.rightWrongDistinction": [],
+ "Logos.Core.rightWrong_nonempty_and_nonconflating": [],
  "Logos.Core.someFalse": [],
  "Logos.Core.someTrue": [
   "propext",
@@ -3266,6 +3309,7 @@
   "Logos.Agency.State",
   "Logos.Agency.Subject"
  ],
+ "Logos.DirectNormativeRetorsion.no_correct_claim_of_no_right_can_be_true": [],
  "Logos.DirectNormativeRetorsion.performative_normative_denial_establishes_normative_right": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
@@ -4048,6 +4092,7 @@
  "Logos.HardenedInvariance.RequiresLibertarianAgency": [],
  "Logos.HardenedInvariance.TraceConclusion": [],
  "Logos.HardenedInvariance.act_not_implies_person": [],
+ "Logos.HardenedInvariance.agent_invariant_core_is_strictly_inside_freewill_invariant_core": [],
  "Logos.HardenedInvariance.agent_invariant_iff_agent_neutral_core": [],
  "Logos.HardenedInvariance.causal_determination_not_implies_logical_validity": [],
  "Logos.HardenedInvariance.chooses_not_implies_agent_causal_settlement": [],
@@ -5053,6 +5098,7 @@
  "Logos.ModalPossibilityFrontier.SameTotalDeliberativeState.same_nature": [],
  "Logos.ModalPossibilityFrontier.SameTotalDeliberativeState.same_reasons": [],
  "Logos.ModalPossibilityFrontier.StrictDeterminism": [],
+ "Logos.ModalPossibilityFrontier.aseity_does_not_force_any_volition_alternatives": [],
  "Logos.ModalPossibilityFrontier.causal_determinism_modal_collapse": [],
  "Logos.ModalPossibilityFrontier.determining_psr_iff_reason_determinism": [],
  "Logos.ModalPossibilityFrontier.determining_psr_incompatible_with_modal_freedom": [],
@@ -5083,6 +5129,7 @@
  "Logos.ModalPossibilityFrontier.necessary_rationality_not_entails_necessary_act": [],
  "Logos.ModalPossibilityFrontier.reason_determinism_modal_collapse": [],
  "Logos.ModalPossibilityFrontier.target_contingent_creation_iff_missing_modal_settlement": [],
+ "Logos.ModalPossibilityFrontier.volitional_alternative_does_not_force_aseity": [],
  "Logos.MoralFrontierAudit.ClaimsMoralRectitude": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
@@ -5310,6 +5357,7 @@
  "Logos.NecessityEternity.everlasting_but_contingent": [
   "Logos.Agency.Subject"
  ],
+ "Logos.NecessityEternity.necessary_existence_is_stage_uniform": [],
  "Logos.NecessityEternity.necessary_implies_atemporal": [
   "Logos.Agency.Subject"
  ],

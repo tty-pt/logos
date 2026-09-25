@@ -4380,6 +4380,24 @@ CLASSICAL_ATTRIBUTES = [
         "sense": ("`Person s → GroundsRightWrong s`, and the headline that \"the person "
                   "supports the reality of Right\". Established of the personal ground."),
     },
+    {
+        "attribute": "**Non-relative core** — strict architectural invariance only",
+        "scope": "Proof architecture (not divine scope)",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.HardenedInvariance.agent_invariant_core_is_strictly_inside_freewill_invariant_core"}],
+        "refs": ["Logos.HardenedInvariance.strict_core_inclusion",
+                 "Logos.HardenedInvariance.agent_invariant_iff_agent_neutral_core",
+                 "Logos.HardenedInvariance.freewill_invariant_iff_freewill_neutral_core"],
+        "sense": ("`(∀ l, AgentInvariant l → FreeWillInvariant l) ∧ "
+                  "∃ l, FreeWillInvariant l ∧ ¬ AgentInvariant l` (GAPMAP C180; prose T18): the "
+                  "dependency-layer core admissible in every proof regime — including the "
+                  "non-agentive structural regime — is strictly contained in the core admissible "
+                  "across all agentive regimes (footprint `{}`, pure logic). This is proof "
+                  "architecture only: it does not establish that the Divine Being / Ground, a "
+                  "divine person, or the ultimate foundation is invariant across systems, "
+                  "perspectives, or worlds."),
+    },
     # ---- Ground 2 — Divine Being / Ground ----
     {
         "attribute": "**Necessary Divine Being / Ground**",
@@ -4401,6 +4419,25 @@ CLASSICAL_ATTRIBUTES = [
                   "declared META axiom `AxTwoSubjects`), and the hypostatic identity is blocked "
                   "(`ofGround_ne_ofSubject`: `ofGround ≠ EntityOf s`). NO 'necessary Person' theorem "
                   "exists — this row is the entity-level ground, distinct from the necessary-*order* row above."),
+    },
+    {
+        "attribute": "**Aseity** — non-derived / non-dependent",
+        "scope": "Divine Being / Ground",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.CanonicalAseity.conditional_canonical_aseity"}],
+        "refs": ["Logos.CanonicalAseity.atom_cannot_ground_the_ground",
+                 "Logos.CanonicalAseity.canonical_aseity_implies_modal_aseity",
+                 "Logos.ModalPossibilityFrontier.aseity_does_not_force_any_volition_alternatives",
+                 "Logos.ModalPossibilityFrontier.volitional_alternative_does_not_force_aseity"],
+        "sense": ("In the canonical ontology of entities, `conditional_canonical_aseity` "
+                  "(`CanonicalAseity.lean`, footprint `{Means, Subject}` — VOCAB only) establishes "
+                  "that `Entity.ofGround` has Canonical Aseity (`¬ ∃ g, ExternalGrounding g .ofGround`), "
+                  "conditional on all subjects being discriminating (`∀ s, ∃ p, ¬ Means s p`). "
+                  "Atomic entities are unconditionally excluded (`atom_cannot_ground_the_ground`, `{Means, Subject}`). "
+                  "At the generic modal frontier, C182 and C184 establish two-way logical independence between "
+                  "bare `Aseity` and volitional alternatives (footprint `{}`); that generic separation is not a "
+                  "proof or disproof of aseity for `Entity.ofGround` or the ultimate foundation."),
     },
     {
         "attribute": "**One God / strict monotheism** (unity of the Divine Being)",
@@ -4458,6 +4495,7 @@ CLASSICAL_ATTRIBUTES = [
                     "fragments": ["eternal"],
                     "allow": ["Logos.Love.T14_eternalRelation_conditional"]}],
         "refs": ["Logos.NecessityEternity.necessary_implies_everlasting",
+                 "Logos.NecessityEternity.necessary_existence_is_stage_uniform",
                  "Logos.NecessityEternity.ofGround_necessary",
                  "Logos.Love.T14_eternalRelation_conditional"],
         "sense": ("World-rigid existence is unmodulated by time: `NecessaryEntity e → "
@@ -4465,7 +4503,9 @@ CLASSICAL_ATTRIBUTES = [
                   "necessity via the Nat-stage layer — the deduction imports NO temporal premise, "
                   "time enters only on the conclusion side. `Everlasting Entity.ofGround` is "
                   "therefore PROVEN (`{Subject}` + ground footprint, VOCAB). Distinct from the "
-                  "eternal love-*relation* `T14_eternalRelation_conditional`."),
+                  "eternal love-*relation* `T14_eternalRelation_conditional`. C181 supplies "
+                  "the generic empty-footprint necessity-to-stage transport, but deliberately "
+                  "does not instantiate the canonical `Entity` sort."),
     },
     {
         "attribute": "**Atemporal** (existence not time-modulated; outside succession)",
@@ -4474,6 +4514,7 @@ CLASSICAL_ATTRIBUTES = [
         "checks": [{"type": "decl",
                     "full": "Logos.NecessityEternity.the_ground_atemporal"}],
         "refs": ["Logos.NecessityEternity.necessary_implies_atemporal",
+                 "Logos.NecessityEternity.necessary_existence_is_stage_uniform",
                  "Logos.NecessityEternity.the_ground_not_in_succession",
                  "Logos.NecessityEternity.atom_has_temporal_mode",
                  "Logos.NecessityEternity.everlasting_but_contingent"],
@@ -4483,7 +4524,8 @@ CLASSICAL_ATTRIBUTES = [
                   "honest: atoms/subjects are time-modulated (`atom_has_temporal_mode`) and "
                   "`Everlasting` does not collapse into necessity (`everlasting_but_contingent`). "
                   "What is PROVEN is stage-unmodulated world-rigid existence — not a full "
-                  "theology of divine eternity."),
+                  "theology of divine eternity. C181 makes the underlying transport explicit "
+                  "without instantiating the canonical `Entity` sort."),
     },
     {
         "attribute": "**Divine simplicity**",
@@ -4629,9 +4671,10 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("")
     ap("> **Which classical characteristics of God do we already have?** This table reports the")
     ap("> **live formal status** of the main classical attributes, derived from the current kernel")
-    ap("> and ledger (never from intentions). The three scopes are kept apart: the **Divine")
+    ap("> and ledger (never from intentions). The three divine-adjacent scopes are kept apart: the **Divine")
     ap("> Being / Ground**, **Divine Personhood**, and the **personal normative ground /**")
-    ap("> **person-type** — what §1–§10 actually establish. \"Necessity\" concerns the")
+    ap("> **person-type** — what §1–§10 actually establish. A separate **proof-architecture** scope reports")
+    ap("> a result about the deduction itself, never as a divine attribute. \"Necessity\" concerns the")
     ap("> Being/Ground, not each Divine Person; \"Personal\", \"Three Persons\", and \"One God\"")
     ap("> are separate claims and are reported separately. Nothing here claims a \"necessary")
     ap("> Person\": \"He is necessary\" is a claim about the Divine Being / Ground, \"He is")

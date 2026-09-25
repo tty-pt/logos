@@ -43,7 +43,9 @@ no barrel 2026-09-24) com a camada temporal de estágios Nat (`Time := Nat`,
 `stageOf t m := if m ≤ t then TV.t else TV.f`, `ExistsAtTime`, `Everlasting`,
 `Atemporal e := ∀ t₁ t₂, ExistsAtTime t₁ e ↔ ExistsAtTime t₂ e`,
 `HasTemporalMode e := ¬ Atemporal e`, `NotInSuccession`)
-e os teoremas abaixo.
+e os teoremas abaixo. C181 acrescenta um transporte modal genérico: existência
+necessária implica presença e equivalência em todos os estágios, mas não instancia
+o sort canónico `Entity` nem prova eternidade metafísica.
 
 Pegadas `#print axioms` verificadas no build (0 axiomas substantivos; `CL` ausente):
 
@@ -62,6 +64,7 @@ Pegadas `#print axioms` verificadas no build (0 axiomas substantivos; `CL` ausen
 | `atom_has_temporal_mode` | `{Subject}` | PROVEN (VOCAB) |
 | `atom_not_everlasting` | `{Subject}` | PROVEN (VOCAB) |
 | `atom_not_atemporal` | `{Subject}` | PROVEN (VOCAB) |
+| `necessary_existence_is_stage_uniform` | `{}` | PROVEN (lógica modal genérica) |
 | `subject_not_everlasting` | `{Subject}` | PROVEN (VOCAB) |
 | `everlasting_but_contingent` | `{Subject}` | PROVEN (VOCAB) |
 | `the_personal_type_grounding` | `{AxTwoSubjects, Means, Subject}` | PROVEN↑ (META) |
@@ -71,6 +74,11 @@ Notas:
 - O `{Subject}` Vocab nos teoremas "{}"-esperados é o custo de *mencionar* o tipo
   `Entity` (o construtor `ofSubject` referencia a sort-axioma `Agency.Subject`) —
   mesma convenção de `Modal.subject_nec_entity_nec` (C91). Zero axiomas substantivos.
+- C181 (`necessary_existence_is_stage_uniform`) é uma codificação independente do
+  tipo: recebe `ExistsAt`, `At` e `stage` como parâmetros, tem pegada `{}` e só
+  transporta a necessidade mundial para estágios. Não elimina a pegada `{Subject}`
+  dos corolários canónicos de `Entity.ofGround`, nem transforma esse transporte em
+  uma prova de eternidade metafísica.
 - A obstrução pré-extension `¬ ∃ e, NecessaryEntity e` (C-set "no necessary entity",
   GOAL.md §2.2) **deixa de ser teorema** do sort estendido: `NecessaryEntity
   Entity.ofGround` é uma estipulação semântica definicional (VOCAB), não um axioma.
@@ -405,6 +413,7 @@ Honestly recorded costs: the world-index is vacuous (declared, not hidden);
 | C7 | §5 | `someFalse : ∃ q, IsFalse q` | PROVEN | `{}` (E0) |
 | C8 | T3 §6 | `greatResult : ∃ p q, T p ∧ IsFalse q` | PROVEN | `{}` (E0) |
 | C9 | T3 | `noBothTrueAndFalse` | PROVEN | `{}` (pure logic) |
+| C183 | T3/§28 | `Core.rightWrong_nonempty_and_nonconflating` — bundles the explicit truth/falsity witnesses and nonconflation result | PROVEN | `{}` (E0; bundles C8/C9) |
 | C10 | §22 | `excludedMiddle : ∀ p, T (p ∨ ¬ p)` | PROVEN | `CL` |
 | C11 | §23 | `nonContradiction : ∀ p, T (¬ (p ∧ ¬ p))` | PROVEN | `{}` (E0) |
 | C12 | §10 | `bivalence : ∀ p, T p ∨ IsFalse p` | PROVEN | `CL` |
@@ -412,13 +421,14 @@ Honestly recorded costs: the world-index is vacuous (declared, not hidden);
 | C103 | §1/§4 | `DirectNormativeRetorsion.claims_correct_no_right_self_refuting : ClaimsCorrect s NoRight → NoRight → False` — claiming NoRight as correct while true yields a contradiction | PROVEN | `{Initiates, Means, State, Subject}` |
 | C104 | §1/§4 | `DirectNormativeRetorsion.cannot_claim_correct_no_right_and_true : ¬ ∃ s, ClaimsCorrect s NoRight ∧ NoRight` — unassertability of the skeptical thesis | PROVEN | `{Initiates, Means, State, Subject}` |
 | C105 | §1/§4 | `DirectNormativeRetorsion.performative_normative_denial_establishes_normative_right : (∃ s, ClaimsCorrect s NoRight) → ¬ NoRight` — performative denial establishes normative right | PROVEN | `{Initiates, Means, State, Subject}` |
+| C179 | §1/§4 | `DirectNormativeRetorsion.no_correct_claim_of_no_right_can_be_true : SigClaimsCorrect sig s (SigNoRight sig) → ¬ SigNoRight sig` — local interpreted-signature corollary: a normative denial cannot be both claimed correct and true | PROVEN | `{}` (pure logic; local retorsion) |
 
 Founding definitions of Level 0 (E0, 2026-09-15): `def T (p : Prop) : Prop := p`
 (the D2 consistency model made definitional); `tschema` is a theorem
 (`Iff.rfl`), no longer an axiom. The §4–§6 self-refutation core is
 axiom-free: its negation-free content rests on classical logic only.
 
-## Level 1 — semantics (`Logos.Semantics`, `Logos.Entity`, `Logos.Modal`)
+## Level 1 — semantics (`Logos.Semantics`, `Logos.Entity`, `Logos.Modal`, `Logos.NecessityEternity`)
 
 | ID | Prose | Lean theorem | Status | Axiom footprint |
 |----|-------|--------------|--------|-----------------|
@@ -427,6 +437,7 @@ axiom-free: its negation-free content rests on classical logic only.
 | C16 | §22 | `Entity.lawExcludedMiddle` | PROVEN | `{CL}` |
 | C17 | §23 | `Entity.nonContradiction` | PROVEN | `{}` |
 | C91 | §25/§27/T7 Passo A | `Modal.subject_nec_entity_nec : NecessarySubject s → NecessaryEntity (EntityOf s)` (+ `_iff`, `necessary_entity_exists_of_necessary_subject`) — **lift definicional sujeito → entidade** | PROVEN | `{Subject}` (VOCAB; `ExistsAt`/`EntityOf` partilhados — contramodelo hostil `{}` mostra que não é lei lógica) |
+| C181 | §28/T15 | `NecessityEternity.necessary_existence_is_stage_uniform` — transporte condicional de necessidade mundial para presença e equivalência em todos os estágios | PROVEN | `{}` (lógica modal genérica; sem instanciação do sort canónico `Entity`) |
 | C78 | T7 | `Modal.contingent_ground` | BLOCKED | (retired: manufactured `Sum.inl` origin grounding destroyed under hostile semantics) |
 | C79 | T7 | `Modal.ultimateGround_exists` | BLOCKED | (retired: manufactured ultimate ground destroyed under hostile semantics) |
 | C87 | T7 | `Modal.origin_is_necessary` | BLOCKED | (retired: manufactured `Sum.inl` origin necessity destroyed) |
@@ -767,6 +778,10 @@ A campanha em `Logos.AxiomNegationAudit` executou a busca sistemática por neces
 | C94 | §27 | `Choice.noStrongTruth_assertable_refutes : Asserts speaker (¬ ∃ τ : Semantics.Form, Semantics.NecessarilyTrue τ) → False` — retorsão assertiva do dado mundial: ninguém pode asserir que não existe verdade forte (o ato de negar o dado é destruído por ele) | PROVEN | **`{Initiates, Means, State, Subject, CL}`** (via C93 + Asserts) |
 | C95 | §27 | `Semantics.atoms_are_modally_free : ∀ n : Nat, ¬ NecessarilyTrue (Form.atom n) ∧ ¬ NecessarilyFalse (Form.atom n)` — a parede dos átomos (fronteira de C59): nenhum átomo é fixado no percurso modal — a verdade forte fixa leis, não conteúdos | PROVEN | **`{}`** (Vocab puro, sem axiomas; `strongTruth_is_not_atomic` leva `{CL}`) |
 | C96 | §27 | `Semantics.some_formula_contingent : ∃ τ : Semantics.Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ` — conteúdo contingente existe (contrapeso de C59): há fórmula nem necessariamente-verdadeira nem necessariamente-falsa — o percurso modal não é degenerado | PROVEN | **`{}`** (via C95; `strongTruth_and_contingent_content` leva `{CL}`) |
+| C182 | §28/CHARACTERISTICS | `ModalPossibilityFrontier.aseity_does_not_force_any_volition_alternatives` — generic `Aseity` is compatible with the absence of every Level-3 volitional alternative | PROVEN | `{}` (pure logic; generic Unit/False countermodel) |
+| C184 | §28/CHARACTERISTICS | `ModalPossibilityFrontier.volitional_alternative_does_not_force_aseity` — a Level-3 volitional alternative is compatible with failure of generic `Aseity` | PROVEN | `{}` (pure logic; generic Bool/True countermodel) |
+| C185 | §28/CHARACTERISTICS | `CanonicalAseity.false_meaning_cannot_ground_true_meaning` — generic model-theoretic exclusion: an entity with false meaning capacity cannot ground true meaning | PROVEN | `{}` (pure logic) |
+| C186 | §28/CHARACTERISTICS | `CanonicalAseity.conditional_canonical_aseity` — `Entity.ofGround` has Canonical Aseity (no external grounding entity) if all subjects are discriminating | PROVEN | `{Means, Subject}` (vocabulary-only) |
 | C38 | P2 | `Necessity.necDistinction : Necessity (¬ N_T ∧ ¬ N_F)` | PROVEN (was AXIOM) | `{}` (E0; C1: identity-model alias; world content = C37) |
 | C39 | P4 | `Choice.T11_choiceField` | PROVEN | `{Initiates, Means, State, Subject}` (campo de escolha — não escolha genuína — derivado do ato intencional C68 → C24 → C39; renomeação/split 2026-09-18; **usa C24 só no sentido fraco** `∃p, Means s p` — forma mais forte válida = reancoragem em `SubjectExists`/`Intentional`) |
 | C40 | P5/P7 | `Plurality.T12_twoPersons` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (settled by Unit countermodel that 1 act does not entail plurality; requires META bridge `AxTwoSubjects`) |
@@ -807,6 +822,15 @@ A campanha em `Logos.AxiomNegationAudit` executou a busca sistemática por neces
 | C86 | P6/P8 | `Love.love_helps` (+ `Love.love_not_harms`, `Love.loves_of_helps`) — **amor como benevolência direcionada**: amar é ajudar e não prejudicar (`Loves s t := Helps s t ∧ ¬ Harms s t`) | PROVEN | `{Subject}` |
 | C92 | P8/§27 | `Love.necessary_entity_exists_conditional` | DEFERRED | `{Initiates, Means, State, Subject}` (theorem removed from kernel, commit ae7f4bd "remove a lot of garbage" 2026-09-23; conditional claim retained as annotated surface only — entidade necessária não é acarretada pelo ato performativo) |
 
+> Batch MODAL-FRONTIER-SEPARATIONS (2026-09-25): C182 and C184 are generic
+> non-entailment countermodels over independently chosen predicates. Together
+> they show two-way logical independence between `Aseity` and the existence of a
+> `Level3_VolitionAlternative`; they do not establish aseity of `Entity.ofGround`
+> or add modal accessibility, incompatibility, or distinct-world conditions.
+> C185 and C186 formalize canonical external grounding and aseity for `Entity.ofGround`:
+> C185 establishes the generic meaning-exclusion principle (`{}`), while C186
+> proves Canonical Aseity for `Entity.ofGround` conditional on discriminating subjects (`{Means, Subject}`).
+
 Declared (Level 3): **M1 (A3, 2026-09-16): `Affects` is a structural
 DEFINITION (`Affects s t := s ≠ t`), and `AxPersonsAffect` is a THEOREM** (distinct persons are
 distinct — `Or.inl hne`). `Helps` is its positive projection (`:= Affects`),
@@ -825,6 +849,18 @@ Modal layer is derived (C1): `Necessity: Prop → Prop` is a *definition*
 (identity-model alias) and `NecessityPH : (World → Prop) → Prop` the
 semantics-grounded operator; `necK/necT/nec4` (alias) and `necKPH/necTPH/nec4PH`
 are theorem; `necDistinction` is a theorem. No modal axiom remains.
+
+## Level 2d — proof-performer invariance architecture (`Logos.HardenedInvariance`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C180 | §10/§24c | `HardenedInvariance.agent_invariant_core_is_strictly_inside_freewill_invariant_core` — the agent-invariant dependency-layer core is a proper subset of the free-will-invariant core; architectural non-relativity only, not metaphysical invariance of the ultimate foundation | PROVEN | `{}` (pure logic; no `CL`) |
+
+> Batch INVARIANCE (2026-09-25): `AgentInvariant` and `FreeWillInvariant` are formalized
+> as admissibility across proof-performer regimes. C180 proves strict inclusion by
+> transporting the existing neutral-core equivalences and the strict witness from
+> `strict_core_inclusion`. The result is architectural: it does not instantiate an
+> absolute/non-relative predicate for the canonical foundation.
 
 ## Level 2c — the act as initiation (`Logos.Initiation`, 2026-09-17)
 
@@ -1015,19 +1051,19 @@ contradicts itself. RETHINKING-COGITO.md records the parallel in full.
   the *derivability* is now proven, so cogito's status is "axiom, proved
   redundant" rather than "irreducible datum" — a strict strengthening.
 
-Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-theorem figures below; **re-derived 2026-09-24 by `scripts/gapmap_taxonomy.py --check` from `formal/axiom_audit.json`** — the four tallies and the per-axiom PROVEN↑ counts are machine-derived, not transcribed):
+Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-theorem figures below; **re-derived 2026-09-25 by `scripts/gapmap_taxonomy.py --check` from `formal/axiom_audit.json`** — the four tallies and the per-axiom PROVEN↑ counts are machine-derived, not transcribed):
 
 - **PROVEN** (status PROVEN/PROVEN↑ whose audit footprint carries **no SEM/META
-  axiom** — machine re-derived from `formal/axiom_audit.json`, 2026-09-24):
-  - **25 truly axiom-free** (`{}`): C1, C2, C4–C9, C11, C17, C22, C26, C27,
-    C31, C35, C36, C38, C50, C63, C95, C96, C108, C111, C166, C167. (C175 is
-    also `{}`, but its ledger status is COUNTERMODEL — the separation, not a
-    PROVEN step — so it is not counted in this bucket.)
+  axiom** — machine re-derived from `formal/axiom_audit.json`, 2026-09-25):
+  - **32 truly axiom-free** (`{}`): C1, C2, C4–C9, C11, C179, C17, C181, C182, C183,
+    C184, C185, C22, C26, C27, C31, C35, C36, C95, C96, C38, C50, C180, C63, C108,
+    C111, C166, C167. (C175 is also `{}`, but its ledger status is COUNTERMODEL —
+    the separation, not a PROVEN step — so it is not counted in this bucket.)
   - **9 `CL`-only**: C3, C10, C12–C14, C16, C37, C59, C93.
-  - **71 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+  - **72 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
     C21, C23–C25, C30, C39, C49, C51–C53, C55–C58, C62, C68, C83–C86, C91,
     C94, C97–C105, C107, C113, C114, C116, C120–C122, C137–C142, C144, C145,
-    C147–C156, C160–C165, C168–C174, C176, F1a.
+    C147–C156, C160–C165, C168–C174, C176, C186, F1a.
     F1a is the choice-**field** existence form (resolves to a kernel step;
     renamed 2026-09-18 — the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
   - **C91** — vocab-only (`{Subject}`); hostile separations `{}`. C92 (the
