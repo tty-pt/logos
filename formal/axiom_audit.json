@@ -4511,7 +4511,9 @@
  "Logos.HardenedInvariance.logical_validity_not_implies_metaphysical_necessity": [],
  "Logos.HardenedInvariance.person_entails_intentionalSubject": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.HardenedInvariance.proof_correctness_not_implies_freewill": [],
  "Logos.HardenedInvariance.proof_occurrence_not_implies_freewill": [],
@@ -5248,42 +5250,58 @@
  "Logos.JointForcing.retorsion_not_implies_choice": [],
  "Logos.Love.Lovable": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Love.Loves": [
   "Logos.Agency.Subject"
  ],
  "Logos.Love.PersonStabilityPrinciple": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Love.PluralityLovePrinciple": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Love.T13_someoneLovable": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Love.T14_content_conditional": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Love.T14_eternalRelation_conditional": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Love.T14_square_conditional": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Love.T14_world_conditional": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Love.love_affects": [
@@ -5520,6 +5538,8 @@
   "Logos.Agency.Means",
   "Logos.Agency.State",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.MoralFrontierAudit.Evil"
  ],
  "Logos.MoralFrontierAudit.Evil": [
@@ -5528,7 +5548,9 @@
  ],
  "Logos.MoralFrontierAudit.Good": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.MoralFrontierAudit.M_amoral.Act": [],
  "Logos.MoralFrontierAudit.M_amoral.AmoralistThesis": [],
@@ -5553,6 +5575,8 @@
  "Logos.MoralFrontierAudit.moral_good_obtains": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxBenevolentBearingObtains"
  ],
  "Logos.MoralFrontierAudit.moral_pole_postulate_is_not_a_consequence": [
@@ -5566,6 +5590,8 @@
   "Logos.Agency.Means",
   "Logos.Agency.State",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.MoralFrontierAudit.Evil"
  ],
  "Logos.NecessaryPersonalGround.ActualEntity": [
@@ -5574,7 +5600,9 @@
  "Logos.NecessaryPersonalGround.ClaimA_NecessaryTruth": [],
  "Logos.NecessaryPersonalGround.ClaimD_NecessaryPerson": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.NecessaryPersonalGround.EntityMeans": [
   "Logos.Agency.Means",
@@ -5607,7 +5635,9 @@
  ],
  "Logos.NecessaryPersonalGround.atom_cannot_ground_person": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.NecessaryPersonalGround.de_dicto_not_implies_de_re": [],
  "Logos.NecessaryPersonalGround.established_normative_person": [
@@ -5619,7 +5649,8 @@
   "Logos.Agency.State",
   "Logos.Agency.Subject",
   "Logos.Agency.Will",
-  "Logos.Agency.subjectWill"
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.NecessaryPersonalGround.established_will_reality": [
   "Logos.Agency.Initiates",
@@ -5628,6 +5659,7 @@
   "Logos.Agency.Subject",
   "Logos.Agency.Will",
   "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation",
   "Logos.Choice.AxIntentionalChoice"
  ],
  "Logos.NecessaryPersonalGround.necessary_normative_order": [
@@ -5654,7 +5686,10 @@
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
   "Logos.Agency.State",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.NecessaryPersonalGround.objective_normative_order_holds": [
   "Logos.Agency.Initiates",
@@ -5734,6 +5769,8 @@
  "Logos.NecessityEternity.claimE": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.NecessityEternity.everlasting_and_atemporal_ground": [
@@ -5781,6 +5818,8 @@
  "Logos.NecessityEternity.the_personal_type_grounding": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.NegativeRetorsionAudit.CertConclusion": [],
@@ -6437,11 +6476,15 @@
  "Logos.Order.T6_fallibility": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Order.T6_truthTranscendsWill": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Order.act_iff_asserts_or_incorrect": [
@@ -6487,6 +6530,8 @@
  "Logos.Order.fallible_false": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Order.judge_commits": [
@@ -6552,6 +6597,8 @@
  "Logos.OughtRetorsion.AxSecondPersonalAddress": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.OughtRetorsion.AxSecondPersonalAddress",
   "Logos.OughtRetorsion.Ought"
  ],
@@ -6619,22 +6666,31 @@
  ],
  "Logos.OughtRetorsion.asserting_no_personal_source_instantiates_only_judging_subject": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.OughtRetorsion.faithful_contingent_person_fails_necessary_subject": [],
  "Logos.OughtRetorsion.free_subject_is_person": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.OughtRetorsion.lone_subject_excludes_second_personal_ought": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.OughtRetorsion.AxSecondPersonalAddress",
   "Logos.OughtRetorsion.Ought"
  ],
  "Logos.OughtRetorsion.second_personal_ought_derives_plurality": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.OughtRetorsion.AxSecondPersonalAddress",
   "Logos.OughtRetorsion.Ought"
  ],
@@ -6681,7 +6737,9 @@
  ],
  "Logos.Person.Person": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Person.RationalAct": [
   "Logos.Agency.Initiates",
@@ -6727,6 +6785,13 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.Person.freeWill_implies_person": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
+ ],
  "Logos.Person.freeWill_implies_rationalNature": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -6735,12 +6800,14 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
   "Logos.Agency.Will",
-  "Logos.Agency.subjectWill",
-  "Logos.Agency.will_individuation"
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Person.free_subject_is_person": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.Person.independent_will_of_subject": [
   "Logos.Agency.Subject",
@@ -6795,55 +6862,65 @@
  ],
  "Logos.Person.person_hasChoiceField": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Person.person_has_discursive_capacity": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Person.person_has_free_independent_will": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
   "Logos.Agency.Will",
-  "Logos.Agency.subjectWill",
-  "Logos.Agency.will_individuation"
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Person.person_has_free_will": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Person.person_has_independent_will": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
   "Logos.Agency.Will",
-  "Logos.Agency.subjectWill",
-  "Logos.Agency.will_individuation"
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Person.person_iff_freeIndependentWill": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
   "Logos.Agency.Will",
-  "Logos.Agency.subjectWill",
-  "Logos.Agency.will_individuation"
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Person.person_iff_freeSubject": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject"
- ],
- "Logos.Person.person_iff_freeWill": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject"
- ],
- "Logos.Person.person_iff_thomisticCore": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
   "Logos.Agency.Will",
   "Logos.Agency.subjectWill",
   "Logos.Agency.will_individuation"
  ],
+ "Logos.Person.person_iff_freeWill": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
+ ],
+ "Logos.Person.person_iff_thomisticCore": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
  "Logos.Person.person_is_intentional": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Person.subjectExists_implies_intentional": [
   "Logos.Agency.Initiates",
@@ -6881,15 +6958,24 @@
  ],
  "Logos.PersonalGroundOfReality.forward_normative_derivation_to_personal_ground": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalGroundOfReality.forward_pipeline": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalGroundOfReality.free_subject_grounds_normative_order": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalGroundOfReality.judicative_stance_forces_person": [
   "propext",
@@ -6898,31 +6984,47 @@
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
   "Logos.Agency.State",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalGroundOfReality.normative_datum_forces_person": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalGroundOfReality.person_grounds_initial_normative_datum": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalGroundOfReality.person_grounds_normative_order": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalGroundOfReality.person_yields_personal_grounding_of_reality": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
   "Logos.Agency.State",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalGroundOfReality.personal_ground_of_right_exists": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
   "Logos.Agency.State",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalGroundOfReality.personal_ground_of_right_exists_of_claims": [
   "propext",
@@ -6931,17 +7033,25 @@
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
   "Logos.Agency.State",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalGroundOfReality.personal_ground_of_right_wrong": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalGroundOfReality.present_act_yields_personal_grounding_of_reality": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
   "Logos.Agency.State",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalGroundOfReality.reality_of_right": [
   "propext",
@@ -6959,80 +7069,121 @@
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
   "Logos.Agency.State",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalNormativeGround.Constructive.GroundedRightWrong": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.ObjectiveNormativity": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.Person.casesOn": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.Person.ctorIdx": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.Person.is_person": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.Person.mk.inj": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.Person.mk.injEq": [
   "propext",
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.Person.mk.noConfusion": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.Person.mk.sizeOf_spec": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.Person.noConfusion": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.Person.noConfusionType": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.Person.recOn": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.Person.subject": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.RightWrong": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.discover_person": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.groundOfRightWrong": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Constructive.groundedRightWrongOfDatum": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalNormativeGround.Constructive.objective_normativity_holds": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalNormativeGround.ForcedGroundContent": [
   "Logos.Agency.Means",
@@ -7077,19 +7228,27 @@
  ],
  "Logos.PersonalNormativeGround.GenericGroundsRightWrong.casesOn": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.GenericGroundsRightWrong.grounds_normativity": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.GenericGroundsRightWrong.personal_ground": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.GenericGroundsRightWrong.recOn": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.GlobalGroundedNormativePolarity": [
   "Logos.Agency.Means",
@@ -7115,14 +7274,6 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
- "Logos.PersonalNormativeGround.GroundsRightWrong.dependence": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject"
- ],
- "Logos.PersonalNormativeGround.GroundsRightWrong.person": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject"
- ],
  "Logos.PersonalNormativeGround.GroundsRightWrong.recOn": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -7136,10 +7287,6 @@
   "Logos.Agency.Subject"
  ],
  "Logos.PersonalNormativeGround.GroundsRightWrongAt.normativity": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject"
- ],
- "Logos.PersonalNormativeGround.GroundsRightWrongAt.person": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
@@ -7204,11 +7351,15 @@
  "Logos.PersonalNormativeGround.NormativePolarity": [],
  "Logos.PersonalNormativeGround.PersonalEntity": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.PersonalGroundExists": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.RightWrong": [
   "Logos.Agency.Subject"
@@ -7237,11 +7388,15 @@
  ],
  "Logos.PersonalNormativeGround.Stage5_Person": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.Stage6_PersonalGrounding": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.canonicalSubjectGrounding": [
   "Logos.Agency.Subject"
@@ -7252,25 +7407,46 @@
  ],
  "Logos.PersonalNormativeGround.discovery_rightwrong_to_person": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalNormativeGround.existential_forward_normative_grounding": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalNormativeGround.forced_content_of_person": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.forward_composition_pipeline": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalNormativeGround.forward_discovery_person": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalNormativeGround.forward_modus_ponens_derivation": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
+ ],
+ "Logos.PersonalNormativeGround.freeWill_grounds_right_wrong": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
@@ -7278,8 +7454,25 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
   "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
+ "Logos.PersonalNormativeGround.genuineNormativity_implies_person": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
   "Logos.Agency.subjectWill",
   "Logos.Agency.will_individuation"
+ ],
+ "Logos.PersonalNormativeGround.grounding_carries_dependence": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
+ ],
+ "Logos.PersonalNormativeGround.grounding_carries_dependence_free": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
  ],
  "Logos.PersonalNormativeGround.grounding_distinct_from_grounded": [
   "Logos.Agency.Subject"
@@ -7290,7 +7483,24 @@
  ],
  "Logos.PersonalNormativeGround.grounding_forced_by_preceding_facts": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
+ ],
+ "Logos.PersonalNormativeGround.grounding_right_wrong_entails_person": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
+ ],
+ "Logos.PersonalNormativeGround.groundsRightWrongAt_entails_person": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalNormativeGround.groundsRightWrong_iff_forced_content": [
   "Logos.Agency.Means",
@@ -7316,43 +7526,60 @@
  ],
  "Logos.PersonalNormativeGround.non_reversal_discovery_and_grounding": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalNormativeGround.normative_ground_is_personal": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.person_exists_implies_global_grounded_polarity": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
   "Logos.Agency.Will",
-  "Logos.Agency.subjectWill",
-  "Logos.Agency.will_individuation"
+  "Logos.Agency.subjectWill"
+ ],
+ "Logos.PersonalNormativeGround.person_from_rightwrong_iff_individuation": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.person_grounds_normative_polarity": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.person_grounds_original_normative_datum": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject"
- ],
- "Logos.PersonalNormativeGround.person_grounds_right_wrong": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject"
- ],
- "Logos.PersonalNormativeGround.person_realizes_grounded_polarity": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
   "Logos.Agency.Will",
   "Logos.Agency.subjectWill",
   "Logos.Agency.will_individuation"
  ],
+ "Logos.PersonalNormativeGround.person_realizes_grounded_polarity": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
  "Logos.PersonalNormativeGround.personal_ground_exists_of_datum": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalNormativeGround.right_wrong_of_genuine_normativity": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.PersonalNormativeGround.rightwrong_gives_rational_domination": [
+  "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
  "Logos.PersonalNormativeGround.step_choice_to_freewill": [
@@ -7365,7 +7592,10 @@
  ],
  "Logos.PersonalNormativeGround.step_freeSubject_to_person": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonalNormativeGround.step_freewill_to_freeSubject": [
   "Logos.Agency.Means",
@@ -7373,7 +7603,9 @@
  ],
  "Logos.PersonalNormativeGround.step_person_to_grounding": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.PersonalNormativeGround.step_stance_to_choice": [
   "Logos.Agency.Means",
@@ -7450,10 +7682,38 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.PersonhoodOntologyAudit.PersonhoodVocab.MeansRel": [],
+ "Logos.PersonhoodOntologyAudit.PersonhoodVocab.Subj": [],
+ "Logos.PersonhoodOntologyAudit.PersonhoodVocab.WillOf": [],
+ "Logos.PersonhoodOntologyAudit.PersonhoodVocab.WillSort": [],
+ "Logos.PersonhoodOntologyAudit.PersonhoodVocab.casesOn": [],
+ "Logos.PersonhoodOntologyAudit.PersonhoodVocab.ctorIdx": [],
+ "Logos.PersonhoodOntologyAudit.PersonhoodVocab.mk.inj": [],
+ "Logos.PersonhoodOntologyAudit.PersonhoodVocab.mk.injEq": [
+  "propext"
+ ],
+ "Logos.PersonhoodOntologyAudit.PersonhoodVocab.mk.noConfusion": [],
+ "Logos.PersonhoodOntologyAudit.PersonhoodVocab.mk.sizeOf_spec": [],
+ "Logos.PersonhoodOntologyAudit.PersonhoodVocab.noConfusion": [],
+ "Logos.PersonhoodOntologyAudit.PersonhoodVocab.noConfusionType": [],
+ "Logos.PersonhoodOntologyAudit.PersonhoodVocab.recOn": [],
  "Logos.PersonhoodOntologyAudit.PhysicalGroundModel": [],
+ "Logos.PersonhoodOntologyAudit.SharedWillModel": [],
+ "Logos.PersonhoodOntologyAudit.Vocab.Chooses": [],
+ "Logos.PersonhoodOntologyAudit.Vocab.DiscursiveCapacity": [],
+ "Logos.PersonhoodOntologyAudit.Vocab.DominionOverActs": [],
+ "Logos.PersonhoodOntologyAudit.Vocab.FreeWill": [],
+ "Logos.PersonhoodOntologyAudit.Vocab.IndependentWill": [],
+ "Logos.PersonhoodOntologyAudit.Vocab.IndividualSubstance": [],
+ "Logos.PersonhoodOntologyAudit.Vocab.IntentionalSubject": [],
+ "Logos.PersonhoodOntologyAudit.Vocab.Person": [],
+ "Logos.PersonhoodOntologyAudit.Vocab.RationalNature": [],
+ "Logos.PersonhoodOntologyAudit.Vocab.ThomisticPersonCore": [],
  "Logos.PersonhoodOntologyAudit.contemplative_person_without_freewill": [],
  "Logos.PersonhoodOntologyAudit.faithful_contingent_person_fails_necessary_subject": [],
  "Logos.PersonhoodOntologyAudit.faithful_model_satisfies_free_will_without_opaque_person": [],
+ "Logos.PersonhoodOntologyAudit.freeWill_person_iff_individuation": [],
+ "Logos.PersonhoodOntologyAudit.freeWill_without_person": [],
  "Logos.PersonhoodOntologyAudit.free_subject_iff_constitutive_person": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -7464,7 +7724,10 @@
  ],
  "Logos.PersonhoodOntologyAudit.free_subject_implies_person_exists": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonhoodOntologyAudit.free_subject_is_constitutive_person": [
   "Logos.Agency.Means",
@@ -7476,19 +7739,25 @@
  ],
  "Logos.PersonhoodOntologyAudit.free_subject_is_person": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.PersonhoodOntologyAudit.impersonal_ground_without_person": [],
  "Logos.PersonhoodOntologyAudit.opaque_person_failure_isolated_to_substantive_conjunct": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.PersonhoodOntologyAudit.rational_domination_without_person": [],
  "Logos.Plurality.EntityOf": [
   "Logos.Agency.Subject"
  ],
  "Logos.Plurality.JUDGE_HAS_CHOICE_FIELD": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Plurality.NecessarySubject": [
@@ -7497,11 +7766,15 @@
  "Logos.Plurality.T12_directedPair_conditional": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Plurality.T12_twoPersons": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Plurality.T1_of_assert": [
@@ -7521,6 +7794,8 @@
   "Logos.Agency.Means",
   "Logos.Agency.State",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Plurality.T4_agentExists": [
@@ -7534,6 +7809,8 @@
   "Logos.Agency.Means",
   "Logos.Agency.State",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Plurality.T4_of_assert": [
@@ -7557,21 +7834,29 @@
  "Logos.Plurality.T5_personExists_from_plurality": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Plurality.cogito_from_T12": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Plurality.notAlone": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Plurality.rightWrong_implies_someone_means": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.PostA14Frontier.DoxasticCommitmentHorn": [],
@@ -7648,7 +7933,10 @@
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
   "Logos.Agency.State",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.ProofPresentationRetorsion.instDecidableEqRuleId": [],
  "Logos.ProofPresentationRetorsion.instReprRuleId": [],
@@ -7660,7 +7948,10 @@
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
   "Logos.Agency.State",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.ProofPresentationRetorsion.presentation_is_situated_datum_not_arbitrary_creator": [
   "Logos.Agency.Initiates",
@@ -7684,7 +7975,10 @@
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
   "Logos.Agency.State",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
  ],
  "Logos.ProofPresentationRetorsion.presents_as_sound_implies_claims_normative_correctness": [
   "Logos.Agency.Initiates",
@@ -7874,7 +8168,9 @@
  ],
  "Logos.RecoveredOntologicalGround.atom_cannot_ground_person": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.RecoveredOntologicalGround.contingent_subject_ne_necessary_entity": [
   "Logos.Agency.Subject"
@@ -7889,7 +8185,9 @@
  ],
  "Logos.RecoveredOntologicalGround.ground_of_reality_not_impersonal": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.RecoveredOntologicalGround.ofAtom_ne_ofSubject": [
   "Logos.Agency.Subject"
@@ -8086,17 +8384,23 @@
  ],
  "Logos.Retorsion.NegA6_Plurality": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Retorsion.NegActToPerson": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
   "Logos.Agency.State",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Retorsion.NegPluralityToLove": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Retorsion.NoTruth": [],
  "Logos.Retorsion.Objective": [
@@ -8808,6 +9112,45 @@
   "Classical.choice",
   "Quot.sound"
  ],
+ "Logos.Stipulations.Stipulation.anchor": [],
+ "Logos.Stipulations.Stipulation.casesOn": [],
+ "Logos.Stipulations.Stipulation.cost": [],
+ "Logos.Stipulations.Stipulation.ctorIdx": [],
+ "Logos.Stipulations.Stipulation.dependents": [],
+ "Logos.Stipulations.Stipulation.location": [],
+ "Logos.Stipulations.Stipulation.mk.inj": [],
+ "Logos.Stipulations.Stipulation.mk.injEq": [
+  "propext"
+ ],
+ "Logos.Stipulations.Stipulation.mk.noConfusion": [],
+ "Logos.Stipulations.Stipulation.mk.sizeOf_spec": [],
+ "Logos.Stipulations.Stipulation.name": [],
+ "Logos.Stipulations.Stipulation.noConfusion": [],
+ "Logos.Stipulations.Stipulation.noConfusionType": [],
+ "Logos.Stipulations.Stipulation.recOn": [],
+ "Logos.Stipulations.Stipulation.tag": [],
+ "Logos.Stipulations.StipulationTag.META.elim": [],
+ "Logos.Stipulations.StipulationTag.META.sizeOf_spec": [],
+ "Logos.Stipulations.StipulationTag.SEM.elim": [],
+ "Logos.Stipulations.StipulationTag.SEM.sizeOf_spec": [],
+ "Logos.Stipulations.StipulationTag.VOCAB.elim": [],
+ "Logos.Stipulations.StipulationTag.VOCAB.sizeOf_spec": [],
+ "Logos.Stipulations.StipulationTag.casesOn": [],
+ "Logos.Stipulations.StipulationTag.ctorElim": [],
+ "Logos.Stipulations.StipulationTag.ctorElimType": [],
+ "Logos.Stipulations.StipulationTag.ctorIdx": [],
+ "Logos.Stipulations.StipulationTag.noConfusion": [],
+ "Logos.Stipulations.StipulationTag.noConfusionType": [],
+ "Logos.Stipulations.StipulationTag.ofNat": [],
+ "Logos.Stipulations.StipulationTag.ofNat_ctorIdx": [],
+ "Logos.Stipulations.StipulationTag.recOn": [],
+ "Logos.Stipulations.instDecidableEqStipulationTag": [],
+ "Logos.Stipulations.instReprStipulationTag": [],
+ "Logos.Stipulations.instReprStipulationTag.repr": [],
+ "Logos.Stipulations.ofGround_existsAt": [],
+ "Logos.Stipulations.ofGround_meansAll": [],
+ "Logos.Stipulations.ofGround_noInternalComponents": [],
+ "Logos.Stipulations.registeredStipulations": [],
  "Logos.StrongActionChoice.ActLegacy": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
@@ -9764,6 +10107,8 @@
  "Logos.UndeniableNormativeDerivation.bridge_b_plurality_yields_choice_field": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.UndeniableNormativeDerivation.bridge_c_performative_judge_yields_choice_field": [
@@ -9840,11 +10185,15 @@
  "Logos.Value.AxBenevolentBearingObtains": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxBenevolentBearingObtains"
  ],
  "Logos.Value.AxTwoSubjects": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Value.BearingOf": [
@@ -9876,7 +10225,9 @@
  ],
  "Logos.Value.PersonsAffectPrinciple": [
   "Logos.Agency.Means",
-  "Logos.Agency.Subject"
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
  ],
  "Logos.Value.affects_unobtainable": [
   "Logos.Agency.Subject"
@@ -9884,6 +10235,8 @@
  "Logos.Value.aloneExcluded": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.Value.alone_no_other_affects": [
@@ -9913,11 +10266,15 @@
  "Logos.Value.some_person_is_helped": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxBenevolentBearingObtains"
  ],
  "Logos.Value.valueInterpersonal_of_split_conditional": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
  "Logos.WillIndividuationAudit.HostileModel": [],

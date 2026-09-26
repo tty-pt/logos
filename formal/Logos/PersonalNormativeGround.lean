@@ -21,14 +21,17 @@ NOT:
 
 ## Key Architectural Principles:
 1. Grounding in a Personal Kind/Type (Zero Act Dependency):
-   Grounding is derived directly from the constitutive properties of Personhood
-   (`Person s := FreeSubject s := FreeWill s`). The derived subject `s : Subject` is
+   Grounding is derived from free will via the priced personalness theorem
+   (`Person s := ThomisticPersonCore s`; `grounding_right_wrong_entails_person`
+   through the named law `will_individuation`). The derived subject `s : Subject` is
    the formal index/witness demonstrating that a personal entity satisfies the ontological
    specification of grounding. It does NOT assert that an arbitrary empirical individual
    causes or creates the universal moral order.
-2. Universal Dependence (`∀ s', RightWrong s' → Person s'`):
-   The grounding structure requires that wherever the normative order obtains, its
-   relevant agential ground is of the personal kind. Personhood supplies the ontological
+2. Priced Personalness (`GroundsRightWrong s → Person s`):
+   The grounding record carries only the agential substrate; wherever the
+   normative order obtains, its relevant agential ground is of the personal kind
+   by the priced theorem `grounding_right_wrong_entails_person` (via the named
+   law `will_individuation`), never by a record field. Personhood supplies the ontological
    ground-type required by the normative order.
 3. Grounding ≠ Identity (Anti-Self-Legislation):
    Grounding normative polarity in a personal ontological basis does NOT mean identifying
@@ -68,7 +71,7 @@ open Logos.Core (T IsFalse rightWrongDistinction)
 open Logos.Agency (Subject Act Means State Initiates SubjectExists IntentionalSubject Wills)
 open Logos.Alternatives (Incompatible)
 open Logos.Choice (Chooses FreeWill FreeSubject)
-open Logos.Person (Person FreeIndependentWill IndependentWill person_iff_freeIndependentWill person_has_free_independent_will free_independent_will_is_person free_subject_is_person)
+open Logos.Person (Person FreeIndependentWill IndependentWill RationalNature DominionOverActs ThomisticPersonCore person_iff_freeIndependentWill person_has_free_independent_will free_independent_will_is_person free_subject_is_person)
 open Logos.Order (Correct Incorrect)
 open Logos.NormativeOrder (TruthNorm Ought OughtNot correctness_deontic_opposition)
 open Logos.Entity (Entity EntityOf)
@@ -118,17 +121,19 @@ def GroundedRightWrong : Type :=
 def groundOfRightWrong (x : GroundedRightWrong) : Person :=
   x.1
 
-/-- Canonical constructor of grounded right and wrong from any genuine normative datum. -/
+/-- Canonical constructor of grounded right and wrong from any genuine normative datum.
+    The step from free will to Personhood is the priced AC2 theorem
+    (`free_subject_is_person`), never an unfolding. -/
 def groundedRightWrongOfDatum (s : Logos.Agency.Subject) (a b : Prop)
     (h : Logos.IndubitableNormativeFreeWill.GenuineNormativity s a b) : GroundedRightWrong :=
-  ⟨⟨s, (Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will h).2⟩, ⟨a, b, h⟩⟩
+  ⟨⟨s, free_subject_is_person s (Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will h).2⟩, ⟨a, b, h⟩⟩
 
 /-- Objective Normativity holds from any agential normative address. -/
 theorem objective_normativity_holds
     (hDatum : ∃ s : Logos.Agency.Subject, ∃ a b : Prop, Logos.IndubitableNormativeFreeWill.GenuineNormativity s a b) :
     ObjectiveNormativity := by
   obtain ⟨s, a, b, h⟩ := hDatum
-  exact ⟨⟨s, (Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will h).2⟩, ⟨a, b, h⟩⟩
+  exact ⟨⟨s, free_subject_is_person s (Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will h).2⟩, ⟨a, b, h⟩⟩
 
 end Constructive
 
@@ -181,14 +186,29 @@ theorem judicative_normative_polarity_of_act (s : Subject) (p : Prop) (hAct : Ac
 
 /-- Generic Grounding Relation over Entities and Propositions.
     Constitutively defines an ontological grounding relation between an entity g
-    and a factual proposition p without baking personal predicates into the definition. -/
+    and a factual proposition p without baking personal predicates into the definition.
+    D1′ DEFERRAL (recorded, not executed): the fields `asymmetric` and `explanatory`
+    below are the NAMED BLOCKERS of the generic-relation independence claim.
+    `asymmetric` forbids every atom from grounding (foreclosing the in-theory
+    countermodel by definition); `explanatory` forces every ground to be
+    `EntityOf s`, so personalness enters only as the assumed `personal_ground`
+    field of `GenericGroundsRightWrong`. Stripping `explanatory` is a semantic
+    decision, not a refactor (it would leave a bare `Entity → Prop → Prop` field
+    with no explanatory adequacy), and dropping `asymmetric` would forfeit an
+    explicit anti-impersonality commitment. Consequence: `normative_ground_is_personal`
+    stays a field projection (BLOCKED, bridge #9 verbatim in GAPMAP/W8), and AC5
+    stays unmet — recorded as a gap, never silenced. -/
 structure GenericGroundingRelation where
   /-- g grounds proposition p -/
   Grounds : Entity → Prop → Prop
-  /-- Asymmetry / Non-Impersonality: an impersonal atomic entity cannot ground normativity. -/
+  /-- Asymmetry / Non-Impersonality: an impersonal atomic entity cannot ground normativity.
+      D1′ BLOCKER (kept by decision): forecloses the atom countermodel by definition. -/
   asymmetric : ∀ g p, Grounds g p → ∀ n : Nat, g ≠ Entity.ofAtom n
   /-- Explanatory adequacy: an entity grounding a proposition must possess
-      the subjective agential capacity to account for that content. -/
+      the subjective agential capacity to account for that content.
+      D1′ BLOCKER (kept by decision): forces every ground to be `EntityOf s`,
+      so `normative_ground_is_personal` is an entailment through `personal_ground`,
+      never a free-standing theorem. -/
   explanatory : ∀ g p, Grounds g p → ∃ s : Subject, g = EntityOf s
 
 /-- GenericGroundsRightWrong:
@@ -216,11 +236,17 @@ def canonicalSubjectGrounding (s : Subject) : GenericGroundingRelation where
     cases hAtom
   explanatory := fun g p hg => ⟨s, hg⟩
 
-/-- Master Ontological Theorem:
-    Any entity that grounds Right/Wrong is a Personal Entity.
-    The ground is NOT personal by definition; it is personal because grounding
-    excludes impersonal atomic entities and depends on Personhood.
-    Footprint: `{Means, Subject}`. -/
+/-- BLOCKED (AC5 unmet, D1′ recorded not executed): any entity that grounds
+    Right/Wrong is a Personal Entity — but the personalness is a THREE-STEP FIELD
+    PROJECTION, not a free-standing theorem: `grounds_normativity` supplies the
+    `GenericGroundingRelation`, `explanatory` forces `g = EntityOf s`, and
+    `personal_ground` then supplies `Person s`. The two sealing fields are the
+    named blockers: `explanatory` forecloses every in-theory countermodel by
+    forcing each ground to be `EntityOf s`, and `asymmetric` forbids every atom
+    from grounding by definition. The missing lemma is bridge #9, verbatim from
+    `base.txt:1345-1346`: `Ground(e, personal) → Personal(e)` (and its target #10).
+    Recorded as BLOCKED (ledger row C228), never deferred into silence.
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem normative_ground_is_personal
     (g : Entity) (hGr : GenericGroundsRightWrong g) :
     PersonalEntity g := by
@@ -231,42 +257,39 @@ theorem normative_ground_is_personal
   exact ⟨s, hg, hPerson⟩
 
 /-- GroundsRightWrong:
-    Objective Right/Wrong is ontologically grounded in an agential basis of a personal kind/type.
-    The parameter `s : Subject` is the formal index/witness satisfying the specification:
-    1. `person`: s possesses the constitutive properties of Personhood (authoritative free agency);
-    2. `dependence`: Universal ontological dependence (`∀ s' : Subject, RightWrong s' → Person s'`).
-       Wherever the normative order obtains, its agential ground is of the personal kind;
-    3. `agential_foundation`: s constitutively provides the faculty of choice between incompatible
-       alternatives (`∃ p q, Chooses s p q`), supplying the ontological ground-type required by
-       normative polarity.
-
+    Objective Right/Wrong is ontologically grounded in an agential basis:
+    the witness s co-means incompatible alternatives (`∃ p q, Chooses s p q`),
+    supplying the ontological ground-type required by normative polarity.
+    The record mentions NO `Person`: personalness is supplied only by theorem
+    (`grounding_right_wrong_entails_person`), never by a field.
+    AC4′ priced exception (disclosed, not silent): the record retains the
+    agential `Chooses` commitment — grounding still asserts that a ground
+    co-means incompatible alternatives, which is `Incompatible`-shaped
+    content. This is why the structure satisfies AC4′ rather than AC4's letter.
     The claim is NOT that a particular contingent individual s causally creates or generates
     every normative fact; it establishes that the ground required by objective Right/Wrong
-    is personal in kind/type.
+    is personal in kind/type (by theorem, not by stipulation).
     Transparency: the record is definitionally equivalent to `ForcedGroundContent`
-    (Section 5c) — a conjunction of prior theorems in the pre-grounding vocabulary —
+    (Section 5c) — the agential fact in the pre-grounding vocabulary —
     so the predicate is determined by the preceding facts, never stipulated.
     Classification: DEFINITIONAL. -/
 structure GroundsRightWrong (s : Subject) : Prop where
-  /-- The ground-type is personal: its witness is an authoritative Person
-      (free subject with the free-will faculty). -/
-  person : Person s
-  /-- Universal ontological dependence: Wherever Right/Wrong obtains, it strictly depends on Personhood. -/
-  dependence : ∀ s' : Subject, RightWrong s' → Person s'
-  /-- Agential substrate: The personal ground constitutively provides the faculty of choice. -/
+  /-- Agential substrate: The ground constitutively provides the faculty of choice. -/
   agential_foundation : ∃ p q : Prop, Chooses s p q
 
 /-- GroundsRightWrongAt:
     Subject s witnesses the grounding relation indexed to a specific normative opposition (p, q).
     Distinction:
-    - `GroundsRightWrong s` concerns the personal ontological ground of Right/Wrong in general.
+    - `GroundsRightWrong s` concerns the ontological ground of Right/Wrong in general.
     - `GroundsRightWrongAt s p q` concerns the grounding relation indexed to a particular normative
       opposition `(p, q)`.
+    The record mentions NO `Person`: personalness is supplied only by theorem
+    (`groundsRightWrongAt_entails_person`), never by a field. The retained
+    `choice` field is the AC4′ priced exception (see `GroundsRightWrong`).
     The main philosophical claim is about the ontological kind of the ground, not about identifying
     one human/person-shaped individual as the producer of every normative proposition.
     Classification: DEFINITIONAL. -/
 structure GroundsRightWrongAt (s : Subject) (p q : Prop) : Prop where
-  person : Person s
   normativity : RightWrongAt s p q
   choice : Chooses s p q
 
@@ -383,14 +406,16 @@ theorem step_freewill_to_freeSubject (s : Subject)
   h3
 
 /-- Forward Step 4 → 5: From free subjecthood to Personhood (P).
-    Footprint: `{Means, Subject}`. -/
+    Via the priced AC2 theorem `free_subject_is_person` — not an unfolding.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem step_freeSubject_to_person (s : Subject)
     (h4 : Stage4_FreeSubject s) : Stage5_Person s :=
   Logos.Person.free_subject_is_person s h4
 
 /-- Forward Discovery Theorem: From normative datum to Personhood.
-    A subject addressed by genuine normativity between alternatives is a Person.
-    Footprint: `{Means, Subject}`. -/
+    A subject addressed by genuine normativity between alternatives is a Person —
+    via the priced AC2 theorem at the final step.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem forward_discovery_person (s : Subject) (p q : Prop)
     (h0 : RightWrongAt s p q) : Person s :=
   step_freeSubject_to_person s
@@ -400,64 +425,122 @@ theorem forward_discovery_person (s : Subject) (p q : Prop)
           (step_datum_to_stance s p q h0))))
 
 /-- Forward Discovery: Right/Wrong entails Personhood.
-    Footprint: `{Means, Subject}`. -/
+    Via the priced AC2 theorem: the datum yields free will definitionally, and
+    free will yields Personhood only through the named law `will_individuation`.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem discovery_rightwrong_to_person (s : Subject) (h : RightWrong s) : Person s := by
   obtain ⟨p, q, h0⟩ := h
   exact forward_discovery_person s p q h0
+
+/-- Two thirds of personhood are already carried by genuine normative address
+    (ZERO AXIOMS). `RightWrong s` unfolds to an `Incompatible` pair of poles
+    between which `s` is addressed, i.e. `Chooses s p q`. That immediately yields
+    `RationalNature s` (intentional subject + discursive capacity, both projections
+    out of `Means`) and `DominionOverActs s` (definitionally `FreeWill s`).
+    Discloses, at zero price, that two of the three `ThomisticPersonCore` conjuncts
+    do not need the individuation law at all.
+    Footprint: `{Means, Subject}` (0 axioms of any kind). -/
+theorem rightwrong_gives_rational_domination (s : Subject) (h : RightWrong s) :
+    RationalNature s ∧ DominionOverActs s := by
+  obtain ⟨p, q, h0⟩ := h
+  obtain ⟨hChooses, hFreeWill⟩ := indubitable_normative_free_will h0
+  exact ⟨⟨⟨p, hChooses.1⟩, ⟨p, q, hChooses.1, hChooses.2.1, Or.inr hChooses.2.2⟩⟩, hFreeWill⟩
+
+/-- The price of personhood-from-normativity, localized and exact (the
+    `freeWill_person_iff_individuation` analogue for the `RightWrong` entry point).
+    Given genuine normative address, being a Person is EQUIVALENT to this subject's
+    will being numerically individuated — because `rightwrong_gives_rational_domination`
+    already supplies the other two conjuncts for free. So the whole non-definitional
+    cost of the `RightWrong ⇒ Person` headline is precisely the law `will_individuation`,
+    and it is the *only* cost.
+    Being an `Iff` rather than a derivation, this theorem does NOT itself depend on
+    `will_individuation`: it characterizes the price instead of paying it.
+    Footprint: `{Means, Subject, Will, subjectWill}` (0 substantive axioms; the
+    declared law does not appear in this footprint). -/
+theorem person_from_rightwrong_iff_individuation (s : Subject) (h : RightWrong s) :
+    Person s ↔ IndependentWill s := by
+  obtain ⟨hRational, hDominion⟩ := rightwrong_gives_rational_domination s h
+  constructor
+  · intro hPerson
+    exact hPerson.1
+  · intro hIndiv
+    exact ⟨hIndiv, hRational, hDominion⟩
+
+/-- HEADLINE (AC3): Genuine Normativity implies Personhood — the critic's exact chain,
+    as a theorem. Composes the axiom-free `indubitable_normative_free_will`
+    (genuine normativity yields choice and free will) with the priced
+    `free_subject_is_person` (free will yields Personhood only through the named
+    law `will_individuation`). Neither step is an unfolding.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+theorem genuineNormativity_implies_person {s : Subject} {p q : Prop}
+    (h : GenuineNormativity s p q) : Person s :=
+  free_subject_is_person s (indubitable_normative_free_will h).2
 
 -- ===========================================================================
 -- Section 5: Principal Ontological Grounding Theorems (Zero Act Dependency)
 -- ===========================================================================
 
-/-- Substantive Grounding Derivation from Personhood:
-    Every subject possessing the constitutive properties of Personhood satisfies the
-    formal specification of the personal ontological ground of Right/Wrong.
-    The proof establishes that the ground of objective normativity is personal in kind:
-    - `person` is instantiated by `hPerson`;
-    - `dependence` is instantiated by the universal discovery theorem `discovery_rightwrong_to_person`;
-    - `agential_foundation` is instantiated by the Person's own faculty of free choice (`person_has_free_will`).
-
+/-- Grounding Derivation from Free Will (E2):
+    Every free-willing subject satisfies the formal specification of the
+    ontological ground of Right/Wrong. The record has a single field, so this
+    is definitional: `FreeWill s` IS `∃ p q, Chooses s p q`.
+    No `Person` hypothesis is taken and none is needed.
     The argument does not identify a particular contingent individual as the creator of Right and Wrong;
-    it establishes that the ontological ground required by objective Right/Wrong is personal in kind.
+    it establishes the agential ground required by objective Right/Wrong.
     Footprint: `{Means, Subject}` (0 substantive axioms, zero Act). -/
-theorem person_grounds_right_wrong (s : Subject) (hPerson : Person s) :
-    GroundsRightWrong s := by
-  refine ⟨hPerson, ?_, ?_⟩
-  · intro s' hRW
-    exact discovery_rightwrong_to_person s' hRW
-  · exact Logos.Person.person_has_free_will s hPerson
+theorem freeWill_grounds_right_wrong (s : Subject) (h : FreeWill s) :
+    GroundsRightWrong s :=
+  ⟨h⟩
+
+/-- Personalness of the ground (E2): a ground of Right/Wrong is a Person —
+    as a priced theorem, not a record field. Composes the definitional
+    `agential_foundation → FreeWill` step with the priced `freeWill_implies_person`
+    (whose cost is the named law `will_individuation`, disclosed).
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+theorem grounding_right_wrong_entails_person (s : Subject) :
+    GroundsRightWrong s → Person s :=
+  fun h => Logos.Person.freeWill_implies_person s h.agential_foundation
+
+/-- Personalness of the indexed ground (E2): a ground of the indexed opposition
+    is a Person — as a priced theorem, not a record field.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+theorem groundsRightWrongAt_entails_person (s : Subject) (p q : Prop) :
+    GroundsRightWrongAt s p q → Person s :=
+  fun h => Logos.Person.freeWill_implies_person s ⟨p, q, h.choice⟩
 
 /-- Master Grounding Theorem from Personhood (Historical Compatibility Name):
-    Personhood supplies the ontological ground-type required by the normative order.
+    Personhood supplies the ontological ground-type required by the normative order —
+    now as a derived theorem routing through free will, not as a field projection.
     The argument does not identify a particular contingent individual as the creator of Right and Wrong;
     it establishes that the ontological ground required by objective Right/Wrong is personal in kind.
-    Footprint: `{Means, Subject}` (0 substantive axioms, zero Act). -/
+    Footprint: `{Means, Subject, Will, subjectWill}` (0 substantive axioms, zero Act). -/
 theorem person_grounds_normative_polarity (s : Subject) (hPerson : Person s) :
     GroundsRightWrong s :=
-  person_grounds_right_wrong s hPerson
+  freeWill_grounds_right_wrong s (Logos.Person.person_has_free_will s hPerson)
 
 /-- Master Grounding Theorem from Free Independent Will:
-    A subject with a Free, Independent Will satisfies the specification of the personal ground.
-    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+    A subject with a Free, Independent Will satisfies the specification of the ground —
+    by projection onto the free-will component.
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem free_independent_will_grounds_judicative_polarity
     (s : Subject) (hFW : FreeIndependentWill s) :
     GroundsRightWrong s :=
-  person_grounds_right_wrong s ((person_iff_freeIndependentWill s).mpr hFW)
+  freeWill_grounds_right_wrong s hFW.1
 
 /-- Master Realization Theorem:
     Any Person realizes GroundedNormativePolarity, showing that normative polarity is grounded
     in a personal ontological basis.
-    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem person_realizes_grounded_polarity (s : Subject) (hPerson : Person s) :
     GroundedNormativePolarity s := by
   have hFW : FreeIndependentWill s := (person_iff_freeIndependentWill s).mp hPerson
-  exact ⟨hFW, person_grounds_right_wrong s hPerson⟩
+  exact ⟨hFW, freeWill_grounds_right_wrong s hFW.1⟩
 
 /-- Existential Ontological Grounding Theorem:
     The existence of a Person entails that normative polarity has a personal ontological ground.
     Distinction: This existential result establishes that there exists a personal ground of the
     normative order; it does not claim that one contingent individual causally produces all morality.
-    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem person_exists_implies_global_grounded_polarity (h : ∃ s : Subject, Person s) :
     GlobalGroundedNormativePolarity := by
   obtain ⟨s, hPerson⟩ := h
@@ -474,13 +557,14 @@ def Stage6_PersonalGrounding (s : Subject) : Prop :=
   Person s ∧ GroundsRightWrong s
 
 /-- Forward Step 5 → 6: From Person to Ontological Grounding (P ⇒ G).
-    The Person constitutively satisfies the personal ground-type of Right/Wrong.
+    The Person's free will (projection, no priced step) satisfies the agential
+    ground specification via `freeWill_grounds_right_wrong`.
     The argument does not identify a particular contingent individual as the creator of Right and Wrong;
     it establishes that the ontological ground required by objective Right/Wrong is personal in kind.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem step_person_to_grounding (s : Subject)
     (hp : Stage5_Person s) : Stage6_PersonalGrounding s :=
-  ⟨hp, person_grounds_right_wrong s hp⟩
+  ⟨hp, freeWill_grounds_right_wrong s (Logos.Person.person_has_free_will s hp)⟩
 
 /-- Master Forward Modus Ponens Derivation Theorem:
     From the initial normative datum A₀(s, p, q), successive forward modus ponens
@@ -490,7 +574,7 @@ theorem step_person_to_grounding (s : Subject)
     (witnessed by s).
     The argument does not identify a particular contingent individual as the creator of Right and Wrong;
     it establishes that the ontological ground required by objective Right/Wrong is personal in kind.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem forward_modus_ponens_derivation (s : Subject) (p q : Prop)
     (h0 : RightWrongAt s p q) :
     Person s ∧ GroundsRightWrong s := by
@@ -501,13 +585,13 @@ theorem forward_modus_ponens_derivation (s : Subject) (p q : Prop)
 /-- Master Forward Composition Pipeline:
     Direct functional composition of the implication chain from A₀ directly to G:
     `step_person_to_grounding ∘ ... ∘ step_datum_to_stance`.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem forward_composition_pipeline (s : Subject) (p q : Prop) :
     RightWrongAt s p q → Person s ∧ GroundsRightWrong s :=
   fun h0 => forward_modus_ponens_derivation s p q h0
 
 /-- Direct Derivation: The derived subject s instantiates the personal ground of the normative datum.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem person_grounds_original_normative_datum (s : Subject) (p q : Prop)
     (h0 : RightWrongAt s p q) :
     Person s ∧ GroundsRightWrong s :=
@@ -519,7 +603,7 @@ theorem person_grounds_original_normative_datum (s : Subject) (p q : Prop)
     Distinction: This establishes that there exists a personal ground of the normative order;
     it is NOT the claim that there exists one particular empirical person who personally
     causes every normative fact.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem existential_forward_normative_grounding
     (hDatum : ∃ s : Subject, ∃ p q : Prop, RightWrongAt s p q) :
     ∃ s : Subject, Person s ∧ GroundsRightWrong s := by
@@ -536,7 +620,7 @@ def PersonalGroundExists : Prop :=
 /-- Presentation Theorem: From any normative datum, a personal ground exists.
     The argument does not identify a particular contingent individual as the creator of Right and Wrong;
     it establishes that the ontological ground required by objective Right/Wrong is personal in kind.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem personal_ground_exists_of_datum
     (hDatum : ∃ s : Subject, ∃ p q : Prop, RightWrongAt s p q) :
     PersonalGroundExists :=
@@ -551,68 +635,82 @@ theorem personal_ground_exists_of_datum
     The proof never runs backwards: Person is not an ungrounded premise from which Right/Wrong is deduced;
     Person is the derived conclusion of the normative datum, and its personal grounding of Right/Wrong is
     the final derived proposition.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem non_reversal_discovery_and_grounding (s : Subject) (p q : Prop) :
     (RightWrongAt s p q → Person s ∧ GroundsRightWrong s) ∧
     (Person s → GroundsRightWrong s) :=
   ⟨fun h => forward_modus_ponens_derivation s p q h,
-   fun hp => person_grounds_right_wrong s hp⟩
+   fun hp => freeWill_grounds_right_wrong s (Logos.Person.person_has_free_will s hp)⟩
 
 -- ===========================================================================
 -- Section 5c: Forcing Audit — GroundsRightWrong is Determined, Not Stipulated
 -- ===========================================================================
 
 /-- The ground-content forced by the preceding facts, written entirely in the
-    vocabulary available BEFORE the grounding step (`Person`, `RightWrong`,
-    `Chooses`). The symbol `GroundsRightWrong` does not occur anywhere in it.
+    vocabulary available BEFORE the grounding step (`Chooses`). The symbol
+    `GroundsRightWrong` does not occur anywhere in it.
     Classification: DEFINITIONAL (notational shorthand for the audit). -/
 def ForcedGroundContent (s : Subject) : Prop :=
-  Person s ∧ (∀ s' : Subject, RightWrong s' → Person s') ∧ (∃ p q : Prop, Chooses s p q)
+  ∃ p q : Prop, Chooses s p q
 
 /-- Transparency: `GroundsRightWrong s` carries exactly the forced content and
-    nothing else — no hidden field, no opaque semantic atom. The predicate is a
-    notational abbreviation for the conjunction of three facts each already
-    obtained before Personhood was reached; it adds zero new content.
+    nothing else — no hidden field, no opaque semantic atom. The single-field
+    record is a notational abbreviation for the agential fact already obtained
+    before Personhood was reached; it adds zero new content.
     Footprint: `{Means, Subject}`. -/
 theorem groundsRightWrong_iff_forced_content (s : Subject) :
     GroundsRightWrong s ↔ ForcedGroundContent s := by
   constructor
   · intro h
-    exact ⟨h.person, ⟨h.dependence, h.agential_foundation⟩⟩
-  · intro ⟨hPerson, hDep, hFoundation⟩
-    exact ⟨hPerson, hDep, hFoundation⟩
+    exact h.agential_foundation
+  · intro hFoundation
+    exact ⟨hFoundation⟩
 
-/-- Every Person satisfies the forced content, and every conjunct is a PRIOR
-    theorem, not a grounding-time stipulation:
-    1. `Person s` is the conclusion already derived from the normative datum;
-    2. the universal dependence is literally the global closure of the §4
-       discovery theorem `discovery_rightwrong_to_person`, proved before any
-       grounding step;
-    3. the agential substrate unpacks the defining content of Personhood itself
-       (`Person s := FreeSubject s := FreeWill s := ∃ p q, Chooses s p q`).
-    Footprint: `{Means, Subject}` (0 substantive axioms, zero Act). -/
+/-- The dependence content the record no longer carries as a field, restored as a
+    THEOREM at zero price. The deleted `dependence : ∀ s', RightWrong s' → Person s'`
+    field used to make this true by definition; here it is derived, in free form.
+    Note that `s` and `hGround` do not occur on the right: the conclusion is about
+    *every* subject addressed by Right/Wrong, independent of which subject grounds —
+    which is exactly the force of the original dependence field.
+    Footprint: `{Means, Subject}` (0 axioms of any kind). -/
+theorem grounding_carries_dependence_free (s : Subject) (hGround : GroundsRightWrong s) :
+    ∀ s' : Subject, RightWrong s' → RationalNature s' ∧ DominionOverActs s' :=
+  fun s' h => rightwrong_gives_rational_domination s' h
+
+/-- The paid completion of the restored dependence: whoever grounds Right/Wrong
+    lives in a world where every subject addressed by Right/Wrong is a Person.
+    This is the derived form of the deleted `dependence` field. Its sole price is
+    the named law `will_individuation`, and `person_from_rightwrong_iff_individuation`
+    proves that price is both sufficient and necessary — no cheaper route exists.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+theorem grounding_carries_dependence (s : Subject) (hGround : GroundsRightWrong s) :
+    ∀ s' : Subject, RightWrong s' → Person s' :=
+  fun s' h => discovery_rightwrong_to_person s' h
+
+/-- Every Person satisfies the forced content: the agential substrate is the
+    Person's own faculty of free choice, by projection out of the dominion
+    conjunct (`Person s → FreeWill s := ∃ p q, Chooses s p q`).
+    Footprint: `{Means, Subject, Will, subjectWill}` (0 substantive axioms, zero Act). -/
 theorem forced_content_of_person (s : Subject) (hPerson : Person s) : ForcedGroundContent s :=
-  ⟨hPerson, discovery_rightwrong_to_person, Logos.Person.person_has_free_will s hPerson⟩
+  Logos.Person.person_has_free_will s hPerson
 
 /-- The predicate is forced by the PRECEDING datum A₀ alone: no Person
     hypothesis is needed. Once `RightWrongAt s p q` is given, `GroundsRightWrong s`
     follows directly, so the grounding relation is determined before Person is
     reached — it is not constructed after the fact.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem grounding_forced_by_preceding_facts (s : Subject) (p q : Prop)
     (h0 : RightWrongAt s p q) : GroundsRightWrong s :=
   (forward_modus_ponens_derivation s p q h0).2
 
 /-- Index-alignment: the content-indexed ground at the datum's OWN pair ⟨p, q⟩.
-    The personal ground is witnessed by the person derived from the datum, the
-    normativity field is the datum itself, and the agential substrate is the
+    The normativity field is the datum itself, and the agential substrate is the
     datum's own pair of alternatives — no witness is manufactured after Person
-    is obtained.
+    is obtained. No `Person` hypothesis appears anywhere.
     Footprint: `{Means, Subject}`. -/
 theorem grounding_forced_at_datum (s : Subject) (p q : Prop)
     (h0 : RightWrongAt s p q) : GroundsRightWrongAt s p q :=
-  ⟨(forward_modus_ponens_derivation s p q h0).1, h0,
-   (step_stance_to_choice s p q (step_datum_to_stance s p q h0))⟩
+  ⟨h0, (step_stance_to_choice s p q (step_datum_to_stance s p q h0))⟩
 
 -- ===========================================================================
 -- Section 6: Non-Circularity Verification
@@ -738,9 +836,11 @@ end HostileModels
 
 #print axioms Logos.PersonalNormativeGround.Constructive.discover_person
 #print axioms will_identity_collapses_normativity
-#print axioms free_independent_will_grounds_judicative_polarity
+#print axioms freeWill_grounds_right_wrong
+#print axioms grounding_right_wrong_entails_person
+#print axioms groundsRightWrongAt_entails_person
+#print axioms genuineNormativity_implies_person
 #print axioms person_grounds_normative_polarity
-#print axioms person_grounds_right_wrong
 #print axioms person_realizes_grounded_polarity
 #print axioms person_exists_implies_global_grounded_polarity
 #print axioms discovery_independent_of_grounding

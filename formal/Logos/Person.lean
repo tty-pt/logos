@@ -1,13 +1,17 @@
 /-
 # Logos.Person — Level 2b: from agency to person; §24b inseparability
 
-In the unified Γ ontology, **Personhood** is defined constitutively:
-> A person is a subject possessing a numerically distinct free will.
+In the unified Γ ontology, **Personhood** is the Boethius–Aquinas criterion:
+> A person is an individual substance of a rational nature, possessed of
+> dominion over its own acts (`Person s := ThomisticPersonCore s`).
 
-Personhood is not an additional opaque metaphysical property placed on top of an
-already established free subject. The project derives:
+Personhood is therefore NOT definitionally free will. It is free will *plus*
+the numerical individuation of the will *plus* discursive rationality — and the
+reduction of the three-conjunct criterion to free will is a priced theorem
+(`freeWill_implies_person`), whose entire non-definitional content is the
+declared VOCAB law `will_individuation`. The project derives:
   Subject → Intentional Subject → Normativity → Choice → Free Will → Person
-without any added metaphysical bridge or uninterpreted dummy predicate.
+where the last arrow is a theorem with a named price, never an unfolding step.
 -/
 
 import Logos.Core
@@ -22,31 +26,9 @@ open Logos.Agency
 open Logos.Alternatives (Incompatible)
 open Logos.Choice (Chooses FreeWill FreeSubject ChoiceField)
 
-/-- Person: a subject possessing a numerically distinct free will.
-    In the unified Γ ontology, Personhood is constitutively defined as the possession
-    of genuine free will (`Person s := FreeSubject s`).
-    Footprint: `{Means, Subject}`. -/
-def Person (s : Subject) : Prop := FreeSubject s
-
-/-- Master Theorem: Every Free Subject is a Person.
-    Footprint: `{Means, Subject}`. -/
-theorem free_subject_is_person (s : Subject) (h : FreeSubject s) : Person s :=
-  h
-
-/-- Master Equivalence: Personhood is constitutively equivalent to Free Subjecthood.
-    Footprint: `{Means, Subject}`. -/
-theorem person_iff_freeSubject (s : Subject) : Person s ↔ FreeSubject s :=
-  Iff.rfl
-
-/-- Master Equivalence: Personhood is constitutively equivalent to Free Will.
-    Footprint: `{Means, Subject}`. -/
-theorem person_iff_freeWill (s : Subject) : Person s ↔ FreeWill s :=
-  Iff.rfl
-
-/-- Every Person possesses Free Will.
-    Footprint: `{Means, Subject}`. -/
-theorem person_has_free_will (s : Subject) (h : Person s) : FreeWill s :=
-  h
+-- ---------------------------------------------------------------------------
+-- §12a — the three Boethius–Aquinas conjuncts (each FreeWill-free as a definiens)
+-- ---------------------------------------------------------------------------
 
 /-- Independent Will: the faculty of will possessed by subject s is uniquely its own,
     numerically distinct from the will of any distinct subject.
@@ -130,58 +112,101 @@ theorem freeIndependentWill_iff_thomisticCore (s : Subject) :
     FreeIndependentWill s ↔ ThomisticPersonCore s :=
   ⟨freeIndependentWill_implies_thomisticCore s, thomisticCore_implies_freeIndependentWill s⟩
 
-/-- Master Equivalence: Personhood is constitutively equivalent to Free, Independent Will.
+-- ---------------------------------------------------------------------------
+-- §12b — Person IS the Boethius–Aquinas criterion (AC1/AC1′)
+-- ---------------------------------------------------------------------------
+
+/-- Person: an individual substance of a rational nature, possessed of dominion
+    over its own acts (Boethius; Aquinas, ST I q.29 a.3).
+    `Person` is NOT free will. It is the three-conjunct Thomistic core; the
+    reduction of the core to free will is the priced theorem
+    `freeWill_implies_person` below, never an unfolding step.
+    Map: individual → IndependentWill; rational nature → IntentionalSubject ∧
+    DiscursiveCapacity; dominion → FreeWill (disclosed coincidence, kept).
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
+def Person (s : Subject) : Prop := ThomisticPersonCore s
+
+/-- HEADLINE (AC2): Free will implies Personhood — as a theorem, not a definition.
+    The proof assembles the three conjuncts: individual substance from the
+    declared VOCAB law `will_individuation` (the entire non-definitional
+    content), rational nature definitionally from free will, dominion
+    definitionally. This is NOT `Iff.rfl`.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+theorem freeWill_implies_person (s : Subject) (h : FreeWill s) : Person s :=
+  ⟨independent_will_of_subject s, freeWill_implies_rationalNature s h, h⟩
+
+/-- Master Theorem: Every Free Subject is a Person — via the priced AC2 theorem.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+theorem free_subject_is_person (s : Subject) (h : FreeSubject s) : Person s :=
+  freeWill_implies_person s h
+
+/-- Personhood is equivalent to Free Subjecthood — as a theorem resting on the
+    named law `will_individuation`, never `Iff.rfl`.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+theorem person_iff_freeSubject (s : Subject) : Person s ↔ FreeSubject s :=
+  ⟨fun h => h.2.2, fun h => freeWill_implies_person s h⟩
+
+/-- Personhood is equivalent to Free Will — as a theorem resting on the named
+    law `will_individuation`, never `Iff.rfl`.
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+theorem person_iff_freeWill (s : Subject) : Person s ↔ FreeWill s :=
+  ⟨fun h => h.2.2, fun h => freeWill_implies_person s h⟩
+
+/-- Every Person possesses Free Will — projection out of the dominion conjunct.
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
+theorem person_has_free_will (s : Subject) (h : Person s) : FreeWill s :=
+  h.2.2
+
+/-- Master Equivalence: Personhood is equivalent to Free, Independent Will.
     A person is a subject possessing a free will that is genuinely its own,
     not numerically identical with another subject's will.
-    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
-theorem person_iff_freeIndependentWill (s : Subject) : Person s ↔ FreeIndependentWill s := by
-  constructor
-  · intro hp
-    exact ⟨hp, independent_will_of_subject s⟩
-  · intro ⟨hFW, _⟩
-    exact hFW
+    Forward: projections out of conjuncts 3 and 1. Backward: the rational
+    conjunct from free will, definitionally — no individuation law needed.
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
+theorem person_iff_freeIndependentWill (s : Subject) : Person s ↔ FreeIndependentWill s :=
+  ⟨fun h => ⟨h.2.2, h.1⟩,
+   fun ⟨hFW, hI⟩ => ⟨hI, freeWill_implies_rationalNature s hFW, hFW⟩⟩
 
 /-- Master Theorem: Every Person possesses a Free, Independent Will.
-    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem person_has_free_independent_will (s : Subject) (h : Person s) : FreeIndependentWill s :=
   (person_iff_freeIndependentWill s).mp h
 
 /-- Master Theorem: Every Subject with a Free, Independent Will is a Person.
-    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem free_independent_will_is_person (s : Subject) (h : FreeIndependentWill s) : Person s :=
   (person_iff_freeIndependentWill s).mpr h
 
-/-- Master Correspondence: Personhood is constitutively equivalent to the
-    Thomistic person core.
-    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
-theorem person_iff_thomisticCore (s : Subject) : Person s ↔ ThomisticPersonCore s := by
-  constructor
-  · intro hp
-    exact freeIndependentWill_implies_thomisticCore s ((person_iff_freeIndependentWill s).mp hp)
-  · intro hc
-    exact (person_iff_freeIndependentWill s).mpr (thomisticCore_implies_freeIndependentWill s hc)
+/-- Master Correspondence: Personhood IS the Thomistic person core — honestly
+    `rfl` now, since that is the definition (AC1′).
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
+theorem person_iff_thomisticCore (s : Subject) : Person s ↔ ThomisticPersonCore s :=
+  Iff.rfl
 
-/-- Every Person is an Intentional Subject.
-    A free choosing agent necessarily means the alternatives between which it chooses.
-    Footprint: `{Means, Subject}`. -/
-theorem person_is_intentional (s : Subject) (h : Person s) : IntentionalSubject s := by
-  obtain ⟨p, _q, hCh⟩ := h
-  exact ⟨p, hCh.1⟩
+/-- Every Person is an Intentional Subject — projection out of the rational
+    conjunct. A free choosing agent necessarily means the alternatives between
+    which it chooses.
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
+theorem person_is_intentional (s : Subject) (h : Person s) : IntentionalSubject s :=
+  h.2.1.1
 
-/-- Every Person possesses Discursive Capacity.
-    Footprint: `{Means, Subject}`. -/
+/-- Every Person possesses Discursive Capacity — projection out of the rational
+    conjunct.
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem person_has_discursive_capacity (s : Subject) (h : Person s) : DiscursiveCapacity s :=
-  freeWill_implies_discursiveCapacity s h
+  h.2.1.2
 
-/-- Every Person has an Independent Will.
-    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
+/-- Every Person has an Independent Will — projection out of the individual
+    conjunct (no individuation law needed for the forward direction).
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem person_has_independent_will (s : Subject) (h : Person s) : IndependentWill s :=
-  independent_will_of_subject s
+  h.1
 
 /-- Any person has a choice field: a person is always before two incompatible alternatives.
-    Footprint: `{Means, Subject}`. -/
+    Via the dominion conjunct (`FreeWill s := ∃ p q, Chooses s p q`).
+    Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem person_hasChoiceField {s : Subject} (hs : Person s) : ∃ p q : Prop, ChoiceField s p q := by
-  obtain ⟨p, q, hCh⟩ := hs
+  obtain ⟨p, q, hCh⟩ := hs.2.2
   exact ⟨p, q, hCh.1, hCh.2.2⟩
 
 /-- Act implies an intentional subject.
@@ -279,6 +304,7 @@ theorem inseparability_24b : ∀ a : Prop,
 #print axioms person_iff_freeSubject
 #print axioms person_iff_freeWill
 #print axioms person_has_free_will
+#print axioms freeWill_implies_person
 #print axioms person_is_intentional
 #print axioms person_hasChoiceField
 #print axioms inseparability_24b

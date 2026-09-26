@@ -781,6 +781,35 @@ def verify_gloss_relations(all_claims: list[dict], decls: dict, graph: dict):
         raise AssertionError("Gloss relation consistency verification failed:\n" + "\n".join(errors))
 
 
+STIPULATION_AUDIT_PATH = FORMAL / "stipulation_audit.json"
+
+
+def render_stipulation_badge() -> list[str]:
+    """◈ badge rows for the registered definitional stipulations.
+
+    Derived, never transcribed: entries come from
+    `formal/stipulation_audit.json` (written by `scripts/audit_stipulations.py`
+    from `formal/Logos/Stipulations.lean`). A missing audit file degrades to a
+    warning line so standalone runs keep working; `make all` always regenerates
+    it before this runs."""
+    if not STIPULATION_AUDIT_PATH.exists():
+        return ["- ⚠ stipulation audit not generated yet "
+                "(run `python3 scripts/audit_stipulations.py`)."]
+    try:
+        data = json.loads(STIPULATION_AUDIT_PATH.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as e:
+        return [f"- ⚠ stipulation audit unreadable: {e}."]
+    lines = []
+    for e in data.get("stipulations", []):
+        deps = ", ".join(f"`{d}`" for d in e.get("dependents", []))
+        lines.append(
+            f"- ◈ `{e.get('name')}` ({e.get('tag')}, `{e.get('location')}`) — "
+            f"{e.get('cost', '')} Rested on by: {deps}.")
+    if not lines:
+        lines.append("- (no stipulations registered)")
+    return lines
+
+
 def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_info, glosses):
     L = []
     ap = L.append
@@ -824,6 +853,18 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
         ap(f"- **Withdrawn / blocked claims (outside the active deduction) ({len(retired_blocked)}):**")
         for c in retired_blocked:
             ap(f"  - `{c['id']}` (`{c['status']}`) ref `{c['lean_ref'] or '—'}` — {c['prose']}")
+
+    ap("")
+    ap("### D.2b Registered definitional stipulations (◈)")
+    ap("")
+    ap("A definitional stipulation settles a philosophical question by fiat in a "
+       "match arm, rather than by proof or declared axiom. Each entry below is "
+       "declared in `formal/Logos/Stipulations.lean` with its `Tag:` and "
+       "`Philosophical cost:`, verified by `scripts/audit_stipulations.py`, and "
+       "badged ◈ with the theorems whose `trivial`-class proofs rest on it.")
+    ap("")
+    for sline in render_stipulation_badge():
+        ap(sline)
 
     kern_theorems = {f for f, n in decls.items() if n["kind"] in ("theorem", "example")}
     covered = {c.get("_full") for c in all_claims if c.get("_full")}
@@ -1697,8 +1738,9 @@ DEFINITIONS = {
         "SubjectExists(s) := ∃ p, Act(s, p).",
         "**Definition (Subject, Intentionality, and Person).** "
         "IntentionalSubject(s) := ∃ p, Means(s, p) (*the subject who means content, derived from Act*). "
-        "Person(s) := FreeSubject(s) ↔ FreeWill(s) (*the subject possessing a numerically distinct free will, "
-        "derived as a constitutive theorem with 0 substantive axioms*).",
+        "Person(s) := ThomisticPersonCore(s) (*individual substance of a rational nature with dominion "
+        "over its acts; the reduction to free will is the priced theorem freeWill_implies_person, "
+        "0 substantive axioms*).",
         "**Audit of the Performative Datum.**\n\n"
         "- **Current formal datum:** `∃ s p, Act s p`\n"
         "- **Question:** Is this the complete formal expression of the performative evidence, or does the intended datum contain additional structure?\n"
@@ -4254,7 +4296,7 @@ def render_reading_guide() -> list[str]:
     ap("")
     ap("> **The Dialectical Inevitability Architecture** — Why every rational attack fails:")
     ap("> 1. **Performative Retorsion (The Trap):** Any attempt to deny objective correctness must claim that its denial is *correct* (`ClaimsCorrect s NoRight`). In the Lean kernel, claiming denial as correct while true yields a direct constructive contradiction (`claims_correct_no_right_self_refuting` → ⊥, 0 substantive axioms). The skeptic cannot even enter the debate without triggering the normative partition.")
-    ap("> 2. **Constitutive Semantics (The Deduction):** Rational address between incompatible alternatives is *definitionally* Choice (`Chooses`), having choice is *definitionally* Free Will (`FreeWill`), and a free choosing subject is *definitionally* a Person in the classical Boethian-Thomistic sense (`person_iff_thomisticCore`), all verified with 0 substantive axioms.")
+    ap("> 2. **Constitutive Semantics (The Deduction):** Rational address between incompatible alternatives is *definitionally* Choice (`Chooses`), having choice is *definitionally* Free Will (`FreeWill`), and a free choosing subject is a Person in the classical Boethian-Thomistic sense by priced theorem (`freeWill_implies_person`, 0 substantive axioms, via the declared law `will_individuation`).")
     ap("> 3. **Airtight Epistemic Boundaries:** Where logic ends, Γ never fakes a proof. Unproved theological extensions (Trinity, Creation, Incarnation, Monotheism) are isolated by machine-checked mathematical countermodels (`⇏`).")
     ap("")
     ap("**Two directions, not one.** The chart distinguishes *epistemic discovery* (▲ — what")
@@ -4558,8 +4600,8 @@ CLASSICAL_ATTRIBUTES = [
         "checks": [{"type": "countermodel",
                     "full": "Logos.PersonhoodOntologyAudit.faithful_model_satisfies_free_will_without_opaque_person"}],
         "refs": ["Logos.PersonhoodOntologyAudit.faithful_contingent_person_fails_necessary_subject"],
-        "sense": ("Minimal constitutive personhood in Γ is functional: the locus of non-derived "
-                  "normative discrimination (`Person := FreeSubject`). Substantive psychological "
+        "sense": ("Minimal personhood in Γ is functional: the Boethius–Aquinas locus of "
+                  "non-derived normative discrimination (`Person := ThomisticPersonCore`). Substantive psychological "
                   "personhood (ordinary humanoid mind, emotional states, stream of consciousness) "
                   "is provably independent: `faithful_model_satisfies_free_will_without_opaque_person` "
                   "(footprint `{}`) satisfies free will without substantive psychological personality. "
@@ -5103,7 +5145,7 @@ def render_defense_against_attacks() -> list[str]:
     ap("| **1. Normative Nihilism**<br>\"There is no objective right and wrong; normativity is arbitrary.\" | Any rational denial must claim that its denial is *correct* (`ClaimsCorrect s NoRight`). Claiming the denial as correct while it is true produces a strict constructive contradiction. | [`claims_correct_no_right_self_refuting`](formal/Logos/DirectNormativeRetorsion.lean#L60)<br>`⊢ ClaimsCorrect s NoRight ∧ NoRight → ⊥` | `{Initiates, Means, State, Subject, CL}`<br>**(0 substantive axioms)** |")
     ap("| **2. Eliminativism of Choice**<br>\"Normative address does not imply genuine choice.\" | Prescriptive normativity commands one alternative and forbids an incompatible one. Co-grasping incompatible alternatives *is* the constitutive definition of choice; denying choice yields a direct contradiction. | [`d7_co_grasp_is_definitionally_choice`](formal/Logos/UndeniableNormativeDerivation.lean#L261)<br>`⊢ Means s p ∧ Means s q ∧ Incompatible p q ∧ ¬ Chooses s p q → ⊥` | `{Means, Subject}`<br>**(0 substantive axioms)** |")
     ap("| **3. Determinism / Incompatibilism**<br>\"Choice is not Free Will; freedom requires physical indeterminism.\" | Having the capacity to choose between incompatible normative alternatives *is* Free Will (`FreeWill s := ∃ p q, Chooses s p q`). Denying free will when one chooses yields a formal contradiction. Physical indeterminism is an orthogonal concept isolated to countermodels. | [`d8_choice_is_definitionally_free_will`](formal/Logos/UndeniableNormativeDerivation.lean#L275)<br>`⊢ Chooses s p q ∧ ¬ FreeWill s → ⊥`<br>[`indubitable_normative_free_will`](formal/Logos/IndubitableNormativeFreeWill.lean#L115) | `{Means, Subject}`<br>**(0 substantive axioms)** |")
-    ap("| **4. Theological Smuggling**<br>\"A free subject is not a Person; 'Person' is an anthropomorphic trick.\" | Personhood in Γ is defined constitutively via the classical Boethian-Thomistic core (`IndividualSubstance ∧ RationalNature ∧ DominionOverActs`). The equivalence with `FreeSubject` is machine-checked with 0 substantive axioms. | [`person_iff_thomisticCore`](formal/Logos/Person.lean#L137)<br>`⊢ Person s ↔ IndividualSubstance s ∧ RationalNature s ∧ DominionOverActs s` | `{Means, Subject}`<br>**(0 substantive axioms)** |")
+    ap("| **4. Theological Smuggling**<br>\"A free subject is not a Person; 'Person' is an anthropomorphic trick.\" | Personhood in Γ IS the classical Boethian-Thomistic core (`Person := ThomisticPersonCore := IndividualSubstance ∧ RationalNature ∧ DominionOverActs`). The reduction to `FreeSubject` is a priced theorem (`freeWill_implies_person`), machine-checked with 0 substantive axioms, whose exact boundary is witnessed by `SharedWillModel` (`{}`). | [`freeWill_implies_person`](formal/Logos/Person.lean#L135)<br>`⊢ FreeWill s → Person s` | `{Means, Subject, Will, subjectWill, will_individuation}`<br>**(0 substantive axioms)** |")
     ap("| **5. Euthyphro / Voluntarism**<br>\"This makes the person the arbitrary creator of morality.\" | Identifying Ought with volition (`Wills s p = Ought s p`) destroys normative violation. The ground required by the normative order is *personal in kind*, not an arbitrary dictator inventing rules. | [`will_identity_collapses_normativity`](formal/Logos/PersonalNormativeGround.lean#L261)<br>`⊢ Wills s p = Ought s p → NormativeViolation s p → ⊥` | `{Subject, Wills, Ought}`<br>**(0 substantive axioms)** |")
     ap("| **6. Physicalist / Atomic Ground**<br>\"The ultimate ground could be a physical particle, matter, or an atom.\" | An entity with false meaning capacity cannot ground an entity with true meaning capacity. Atomic factual entities are unconditionally excluded from grounding `Entity.ofGround`, and the ground possesses Canonical Aseity. | [`atom_cannot_ground_the_ground`](formal/Logos/CanonicalAseity.lean#L96)<br>[`conditional_canonical_aseity`](formal/Logos/CanonicalAseity.lean#L133)<br>`⊢ CanonicalAseity Entity.ofGround` | `{Means, Subject}`<br>**(0 substantive axioms)** |")
     ap("| **7. Origin of Normativity (The Proof-Self Retorsion)**<br>\"Where does the initial normative claim come from? Why grant that any normative judgment exists?\" | Bare syntax checking alone does not force normativity (`M_inanimate_checker`, `{}`). But any agent *presenting* a derivation as sound (`PresentsAsSound`) co-means correctness and error, deriving `FreeWill` and `Person` with 0 substantive axioms. Furthermore, an adversarial critic who attacks Γ by presenting an objection argumentatively as sound *themselves* instantiates the normative stance (`critic_presenting_objection_is_person`). | [`presents_as_sound_derives_personhood`](formal/Logos/ProofPresentationRetorsion.lean#L140)<br>[`critic_presenting_objection_is_person`](formal/Logos/ProofPresentationRetorsion.lean#L180)<br>[`syntactic_validity_without_subject_or_normativity`](formal/Logos/ProofPresentationRetorsion.lean#L100) | `{Initiates, Means, State, Subject, CL}`<br>**(0 substantive axioms)** |")

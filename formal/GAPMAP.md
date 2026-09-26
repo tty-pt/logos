@@ -67,8 +67,8 @@ Pegadas `#print axioms` verificadas no build (0 axiomas substantivos; `CL` ausen
 | `necessary_existence_is_stage_uniform` | `{}` | PROVEN (lógica modal genérica) |
 | `subject_not_everlasting` | `{Subject}` | PROVEN (VOCAB) |
 | `everlasting_but_contingent` | `{Subject}` | PROVEN (VOCAB) |
-| `the_personal_type_grounding` | `{AxTwoSubjects, Means, Subject}` | PROVEN↑ (META) |
-| `claimE` | `{AxTwoSubjects, Means, Subject}` | PROVEN↑ (META) |
+| `the_personal_type_grounding` | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` | PROVEN↑ (META) |
+| `claimE` | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` | PROVEN↑ (META) |
 
 Notas:
 - O `{Subject}` Vocab nos teoremas "{}"-esperados é o custo de *mencionar* o tipo
@@ -90,7 +90,9 @@ Notas:
 - A Proposição E (nível-ente) passou de "anotada, nunca teorema" a teorema vivo como
   **par não-hipostático** (`∃ g s, NecessaryEntity g ∧ NecessaryGroundOfReality g ∧
   Person s ∧ GroundsRightWrong s`); o conjuncto pessoal carrega honestamente a ponte
-  META `AxTwoSubjects` (via `T5_personExists_from_plurality`) → `PROVEN↑`. A âncora
+  META `AxTwoSubjects` (via `T5_personExists_from_plurality`) mais o vocabulário da
+  vontade e a lei `will_individuation` (via `Person := ThomisticPersonCore`, emenda
+  2026-09-25: a redução a livre-arbítrio é o teorema com preço `freeWill_implies_person`) → `PROVEN↑`. A âncora
   da linha README é `ofGround_necessary_ground_of_reality` (`{Means, Subject}`, PROVEN).
 - Identidade hipostática bloqueada: `ofGround_ne_ofSubject` (`Entity.noConfusion`).
 - Guarda de nomes honrada: nenhuma declaração nova contém o fragmento `eternal`
@@ -151,6 +153,10 @@ The roadmap step #4/#5 (subject necessity → entity necessity) is executed:
   generated README "## Formal Frontiers" appendix + OPEN_BRIDGES): an independent
   bridge `NecessaryEntity e → ∃τ, Ground e τ` (step #7, without AxGlobalGround)
   and `Ground(e, personal) → Personal(e)` (step #9, without AxPersonalGround).
+  **#9 is now a numbered ledger row**: C228
+  (`PersonalNormativeGround.normative_ground_is_personal`) is BLOCKED, with the
+  missing lemma named verbatim and the two sealing fields `explanatory` and
+  `asymmetric` named as the blockers (decision D1′, deferred, not executed).
 
 ## Batch freedom/choice fix (2026-09-18) — `Chooses` is genuine choice, `FreeWill` is definitional
 
@@ -384,8 +390,11 @@ is answered by supplying the rule as a definition: `axiom ExistsAt` → **def**
 `ExistsAt _w s := ∃ p, A s p` (to be is to act; the world-index is vacuous by
 principle — `Means` takes no `World` parameter, so agency is not
 world-located — while the existential does the real work: only actors exist).
-`Person s` unfolds definitionally to `∃ p, Means s p` (via `Intentional`;
-kind-preds `:= True`; `A := Means`), so `AxPersonStability : ∀ s, Person s →
+`Person s` yields `∃ p, Means s p` (via the rational conjunct `RationalNature.1`,
+i.e. `Intentional`; kind-preds `:= True`; `A := Means`) — historically an
+unfolding, but since the 2026-09-25 cut it is an **entailment** out of the second
+conjunct of `ThomisticPersonCore`, not a definition (`Person` is now the
+three-conjunct criterion, C163) — so `AxPersonStability : ∀ s, Person s →
 NecessarySubject s` is now a **theorem** (**`{}`**, name kept per M1
 precedent). Measured (`#print axioms`): T14 family (C42–C45) → `{}`
   after the plurality-discharge (2026-09-17); C18/C34 → `{AxGlobalGround, Ground}`;
@@ -459,8 +468,8 @@ Declared (Level 1): `ExistsAt` is the definition (2026-09-17); `actualWorld` (de
 | C25 | §24b | `Person.inseparability_24b` | PROVEN | `{Initiates, Means, State, Subject, CL}` |
 | C26 | **T9 (new)** | `Alternatives.T9_incompatibleAlternatives` | PROVEN | `{}` (E0) |
 | C27 | §13 | `Alternatives.incompatible_with_negation` | PROVEN | `{}` (E0) |
-| C28 | T6 | `Order.T6_fallibility` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (via T12 + `Core.someFalse`) |
-| C29 | T6 | `Order.T6_truthTranscendsWill` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (as C28) |
+| C28 | T6 | `Order.T6_fallibility` | PROVEN↑ | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (via T12 + `Core.someFalse`) |
+| C29 | T6 | `Order.T6_truthTranscendsWill` | PROVEN↑ | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (as C28) |
 | C30 | §8 | `Order.correctness_distinct` | PROVEN | `{Initiates, Means, State, Subject, CL}` (defs act-relative §8; usa o dado performativo do ato) |
 | C31 | §9 | `Order.consequence_preserves_truth` | PROVEN | `{}` (E0) |
 | C83 | §8 | `Order.no_correct_judgment_of_no_act` — **retorsão cartesiana**: nenhuma negação do ato pode ser correta (`judgment_of_no_act_is_incorrect`) | PROVEN | `{Initiates, Means, State, Subject}` |
@@ -484,7 +493,7 @@ Declared (Level 1): `ExistsAt` is the definition (2026-09-17); `actualWorld` (de
 | **Act → Intentional** | `Person.act_implies_intentional` | **Caso A (identidade)** | O conteúdo do próprio ato testemunha `Intentional s := ∃ p, Means s p` (`⟨p, h.1⟩`, `{Initiates, Means, State, Subject}`). Identidade definicional: NÃO é atacável por modelo hostil. A leitura substantiva de intencionalidade (consciência/awareness interna) NÃO é forçada — `not_entails_substantive_intentionality` (Part A2, `{}`). |
 | **SubjectExists → Intentional** | `Person.subjectExists_implies_intentional`<br>`Person.intentional_implies_subjectExists` | **Caso A (identidade)** | Ambas as noções desdobram para `∃ p, Means s p` (`{Means, Subject}`); equivalência por desdobramento direto. Nenhuma premissa. |
 | **Subject → Person** | `Person.person_of_subject` | **Caso A (nominal §12)** | Sob a redução estrutural de §12 (`Person s := Agent s ∧ Rational s ∧ Intentional s` com `Agent := True` e `Rational := ∃ p, Means s p` — piso derivado, PERSON.md 2026-09-23), `Person` colapsa em `∃ p, Means s p`, IDÊNTICO a `SubjectExists`/`Intentional` (`Person.person_intentional_iff`, `{Means, Subject}`). O §12 é compromisso constitutivo (rótulo nominal), não descoberta metafísica. **Separação 2026-09-18**: derivabilidade formal ≠ neutralidade semântica da definição; sobsemântica hostil com predicado substantivo, a implicação NÃO se segue (`CountermodelSubjectWithoutPerson`, `not_entails_person`), mas isso NÃO é contramodelo da identidade §12. |
-| **Person (unificada) ← FreeSubject** | `Person.free_subject_is_person` | **Caso A (Teorema Constitutivo Pleno)** | Na ontologia unificada de $\Gamma$, a Pessoa é definida constitutivamente como o sujeito dotado de livre-arbítrio numericamente distinto (`Person s := FreeSubject s ↔ FreeWill s`). Uma vez derivado o Livre-Arbítrio a partir da normatividade genuína (`indubitable_normative_free_will`), a pessoalidade segue por pura dedução lógica com 0 axiomas substantivos (`free_subject_is_person`, `{Means, Subject}`). A antiga noção opaca `SubstantivePerson` foi revogada como um artefato de lacuna sintética. |
+| **Person (unificada) ← FreeSubject** | `Person.free_subject_is_person` | **Caso A (Teorema com Preço Nomeado)** | Na ontologia unificada de $\Gamma$, a Pessoa é o critério boécio-aquiniano (`Person s := ThomisticPersonCore s`): substância individual de natureza racional, dotada de domínio dos próprios atos. Uma vez derivado o Livre-Arbítrio a partir da normatividade genuína (`indubitable_normative_free_will`), a pessoalidade segue como teorema com preço nomeado — o único conteúdo não-definicional é a lei VOCAB `will_individuation` (`free_subject_is_person`/`freeWill_implies_person`, `{Means, Subject, Will, subjectWill, will_individuation}`, 0 axiomas substantivos; emenda 2026-09-25: a definição antiga `Person s := FreeSubject s` foi substituída). A antiga noção opaca `SubstantivePerson` foi revogada como um artefato de lacuna sintética. |
 | **Person → ChoiceField** | `Choice.person_hasChoiceField` | **Caso A/C (Campo de escolha fraco)** | O campo de escolha — `ChoiceField(s,p,q)` (*escolha fraca: alternativas incompatíveis estão presentes*) — é DEFINICIONAL a partir do ato intencional (`Person s → ∃p q, ChoiceField s p q`), footprint `{Means, Subject}`. Aviso de auditoria (freedom/choice fix, 2026-09-18): o agente relaciona-se apenas com o conteúdo adotado `p`; o outro corno `¬p` é fornecido pela lógica pura (`incompatible_self_negation`), NÃO pelo agente. Isto **não** é escolha genuína. |
 | **Asserts → Selects** | `Choice.asserts_selects`<br>`Choice.asserts_selects_all_incompatible`<br>`Choice.selection_exists`<br>`Choice.no_selection_no_assertion` | **Caso B (Seleção Semântica Provada)** | **F1b reaberto e resolvido no nível semântico**: qualquer ato assertivo constitui seleção semântica direcionada (`Selects s p q := Asserts s p ∧ Incompatible p q ∧ ¬ Asserts s q`). Provado por consistência lógica (`assertion_consistency`, `incompatible_self_negation`, `no_one_asserts_incompatible_pair`), footprint `{Means, Subject}` (VOCAB apenas). O contrapositivo `no_selection_no_assertion` prova que sem seleção não há asserção. |
 | **Correct → Selects** | `Order.correct_implies_selection`<br>`Order.correct_implies_selection_all_incompatible` | **Caso B (Candidato B assentado)** | O juízo correto (`Correct s p := A s p ∧ T p`) reduz-se definicionalmente (`rfl`) a `Asserts s p := Act s p ∧ p` e acarreta seleção semântica contra alternativas incompatíveis sem axiomas (`{Means, Subject}`). |
@@ -653,7 +662,7 @@ A investigação em `Logos.A14SemanticAudit` fecha o escrutínio formal sobre o 
 3. **Ataque às Leis Semânticas de `Means`:**
    - Fecho sob negação (`negation_closure_of_means_fails`, `{}`), fecho inferencial (`inferential_closure_of_means_fails`, `{}`) e relevância contrastiva (`contrastive_closure_of_means_fails`, `{}`) são refutados por contramodelos unipolares.
 4. **Teorema da Fronteira Performativa (`performative_boundary_theorem`, `{}`):**
-   - A retorsão transcendental estabelece um sujeito intencional e resolução cognitiva assimétrica, parando antes de volição (`AimsAt`) e execução externa de ação (`Act`). A pessoalidade é unificada constitutivamente com o Livre-Arbítrio derivado da normatividade (`Person s := FreeSubject s`).
+   - A retorsão transcendental estabelece um sujeito intencional e resolução cognitiva assimétrica, parando antes de volição (`AimsAt`) e execução externa de ação (`Act`). A pessoalidade é o critério boécio-aquiniano alcançado a partir do Livre-Arbítrio derivado da normatividade via teorema com preço (`Person s := ThomisticPersonCore s`; emenda 2026-09-25 substitui a formulação antiga `Person s := FreeSubject s`).
 5. **Cadeia Incremental de Escolha em 9 Níveis:**
    - Modelos formais de separação ({}) provam que representação, avaliação, assentamento, autoria, mira prática, autoatribuição, causação substancial, sensibilidade a razões e disponibilidade modal bilateral são conceitos estritamente distintos e não-colapsáveis.
 
@@ -700,7 +709,7 @@ A campanha em `Logos.DefinitiveAgencyFrontier` estabelece os limites matemático
    - Independência bilateral de compromisso e volição (`two_sided_independence_commitment`, `two_sided_independence_volition`, `{}`).
    - Teorema de invariância por colapso sob $T_{\text{uncommit}}$ (`collapse_invariance_pre_commitment`, `{}`): nenhuma fórmula da linguagem cognitiva pode definir compromisso.
 10. **Descomissionamento de SubstantivePerson e Unificação de Pessoa:**
-   - O antigo predicado opaco `SubstantivePerson` foi auditado e reconhecido como uma lacuna meramente sintética (Categoria 3). Na ontologia unificada de $\Gamma$, a Pessoa é definida constitutivamente pelo Livre-Arbítrio (`Person s := FreeSubject s ↔ FreeWill s`), derivando a pessoalidade com 0 axiomas substantivos.
+   - O antigo predicado opaco `SubstantivePerson` foi auditado e reconhecido como uma lacuna meramente sintética (Categoria 3). Na ontologia unificada de $\Gamma$, a Pessoa é o critério boécio-aquiniano (`Person s := ThomisticPersonCore s`), alcançado a partir do Livre-Arbítrio via teorema com preço nomeado (`will_individuation`), com 0 axiomas substantivos (emenda 2026-09-25 substitui a formulação antiga `Person s := FreeSubject s ↔ FreeWill s`).
 11. **Síntese Mestra da Fronteira Agencial (`definitive_agency_frontier_synthesis`, `{}`).**
 
 ### Auditoria da Fronteira Modal e do Fundamento (2026-09-20):
@@ -784,25 +793,25 @@ A campanha em `Logos.AxiomNegationAudit` executou a busca sistemática por neces
 | C186 | §28/CHARACTERISTICS | `CanonicalAseity.conditional_canonical_aseity` — `Entity.ofGround` has Canonical Aseity (no external grounding entity) if all subjects are discriminating | PROVEN | `{Means, Subject}` (vocabulary-only) |
 | C38 | P2 | `Necessity.necDistinction : Necessity (¬ N_T ∧ ¬ N_F)` | PROVEN (was AXIOM) | `{}` (E0; C1: identity-model alias; world content = C37) |
 | C39 | P4 | `Choice.T11_choiceField` | PROVEN | `{Initiates, Means, State, Subject}` (campo de escolha — não escolha genuína — derivado do ato intencional C68 → C24 → C39; renomeação/split 2026-09-18; **usa C24 só no sentido fraco** `∃p, Means s p` — forma mais forte válida = reancoragem em `SubjectExists`/`Intentional`) |
-| C40 | P5/P7 | `Plurality.T12_twoPersons` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (settled by Unit countermodel that 1 act does not entail plurality; requires META bridge `AxTwoSubjects`) |
-| C41 | P7 | `Love.T13_someoneLovable` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (via C40) |
-| C48 | §25/P1 | `Plurality.cogito_from_T12` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` |
+| C40 | P5/P7 | `Plurality.T12_twoPersons` | PROVEN↑ | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (settled by Unit countermodel that 1 act does not entail plurality; requires META bridge `AxTwoSubjects`) |
+| C41 | P7 | `Love.T13_someoneLovable` | PROVEN↑ | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (via C40) |
+| C48 | §25/P1 | `Plurality.cogito_from_T12` | PROVEN↑ | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` |
 | C49 | §13/IM_STUPID | `Choice.meaning_needs_subject` + `Choice.meaning_I_needs_subject` (definitional form: `Meaning_I p → ∃s, Means s p`) | PROVEN | `{Means, Subject}` |
 | C50 | §14 | `Choice.incompatible_self_negation` | PROVEN | **`{}`** (pure logic — the field around any meaning-act) |
-| C51 | §14/IM_STUPID | `Choice.person_hasChoiceField : Person s → ∃p q, ChoiceField s p q` — **subject ⇒ campo de escolha** (renomeado 2026-09-18; NÃO é escolha genuína) | PROVEN | `{Means, Subject}` |
+| C51 | §14/IM_STUPID | `Person.person_hasChoiceField : Person s → ∃p q, ChoiceField s p q` — **subject ⇒ campo de escolha** (via o conjunto do domínio, emenda 2026-09-25; NÃO é escolha genuína) | PROVEN | `{Means, Subject, Will, subjectWill}` |
 | C52 | §14 | `Choice.choiceField_exists` | PROVEN | `{Initiates, Means, State, Subject}` (o campo é real, derivado do ato intencional C68 → C52 via `intentional_hasChoiceField` a partir de `act_implies_intentional` — reancorado em código 2026-09-18, sem passar por `Person`; renomeado 2026-09-18) |
 | C53 | §14 | `Choice.noChoiceField_selfRefutes : Asserts speaker NoChoiceField → False` | PROVEN | `{Initiates, Means, State, Subject}` (retorsão performativa do campo: negar o campo é ele próprio um ato de campo contra a sua negação) |
-| C54 | IM_STUPID §2 | `Plurality.JUDGE_HAS_CHOICE_FIELD : (¬N_T ∧ ¬N_F) → ∃s p q, ChoiceField s p q` — **right/wrong ⇒ campo de escolha** | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (derivação operativa via AxTwoSubjects h e person_hasChoiceField) |
+| C54 | IM_STUPID §2 | `Plurality.JUDGE_HAS_CHOICE_FIELD : (¬N_T ∧ ¬N_F) → ∃s p q, ChoiceField s p q` — **right/wrong ⇒ campo de escolha** | PROVEN↑ | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (derivação operativa via AxTwoSubjects h e person_hasChoiceField) |
 | C55 | §8/§14 | `Order.judge_commits : ∃s p q, A s p ∧ (Correct s p ∨ Incorrect s p) ∧ ChoiceField s p q` — the judge HAS a choice-field (não escolha genuína) | PROVEN | `{Initiates, Means, State, Subject, CL}` (defs act-relative §8; usa o dado performativo do ato) |
 | C56 | P6 | `Value.alone_no_other_help_harm` | PROVEN | `{Subject}` |
 | C57 | §26 | `Choice.noSubject_selfRefutes : Asserts speaker NoSubject → False` | PROVEN | `{Initiates, Means, State, Subject}` (retorsão performativa genuína: negar o sujeito é um ato que testemunha o sujeito) |
-| C42 | P8 | `Love.T14_eternalRelation_conditional` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (sob o princípio de estabilidade pessoal e princípio relacional de amor) |
-| C43 | P8 | `Love.T14_content_conditional` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` |
-| C44 | P8 | `Love.T14_world_conditional` (`NecessityPH`) | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (world-anchored conditional □) |
-| C45 | P8 | `Love.T14_square_conditional` (alias `Necessity`) | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (conditional) |
-| C46 | P5 | `Value.valueInterpersonal_of_split_conditional` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (sob o princípio PersonsAffectPrinciple) |
-| C47 | P5/P7 | `Plurality.T12_directedPair_conditional` | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (sob o princípio PersonsAffectPrinciple) |
-| C61 | P3 | `Plurality.rightWrong_implies_someone_means` — "há certo e há errado → há alguém para quem algo significar" | PROVEN↑ | `{AxTwoSubjects, Means, Subject}` (`JUDGE_HAS_CHOICE_FIELD` C54 ∘ `rightWrongDistinction` C36) |
+| C42 | P8 | `Love.T14_eternalRelation_conditional` | PROVEN↑ | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (sob o princípio de estabilidade pessoal e princípio relacional de amor) |
+| C43 | P8 | `Love.T14_content_conditional` | PROVEN↑ | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` |
+| C44 | P8 | `Love.T14_world_conditional` (`NecessityPH`) | PROVEN↑ | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (world-anchored conditional □) |
+| C45 | P8 | `Love.T14_square_conditional` (alias `Necessity`) | PROVEN↑ | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (conditional) |
+| C46 | P5 | `Value.valueInterpersonal_of_split_conditional` | PROVEN↑ | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (sob o princípio PersonsAffectPrinciple) |
+| C47 | P5/P7 | `Plurality.T12_directedPair_conditional` | PROVEN↑ | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (sob o princípio PersonsAffectPrinciple) |
+| C61 | P3 | `Plurality.rightWrong_implies_someone_means` — "há certo e há errado → há alguém para quem algo significar" | PROVEN↑ | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (`JUDGE_HAS_CHOICE_FIELD` C54 ∘ `rightWrongDistinction` C36) |
 | C62 | P3 | `Order.rightWrong_implies_meaning` (+ `Order.rightDistinctWrong_implies_meaning`) | PROVEN | `{Initiates, Means, State, Subject}` (o juízo desdobra-se num ato com significado, `A s p := Means s p ∧ ∃ w w', Initiates s w w' p`) |
 | C101 | §8 | `Order.act_iff_asserts_or_incorrect : A s p ↔ Asserts s p ∨ Incorrect s p` — **partição bivalente do ato intencional**: todo ato intencional é asserção verídica ou juízo incorreto | PROVEN | `{Initiates, Means, State, Subject, CL}` |
 | C97 | §15 | `Choice.deliberateChoice_implies_selects : DeliberateChoice s p q → Selects s p q` — **escolha deliberativa acarreta seleção**: quem delibera seleciona a favor de p e contra q | PROVEN | `{Initiates, Means, State, Subject}` |
@@ -1055,17 +1064,28 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
 
 - **PROVEN** (status PROVEN/PROVEN↑ whose audit footprint carries **no SEM/META
   axiom** — machine re-derived from `formal/axiom_audit.json`, 2026-09-25):
-  - **32 truly axiom-free** (`{}`): C1, C2, C4–C9, C11, C179, C17, C181, C182, C183,
-    C184, C185, C22, C26, C27, C31, C35, C36, C95, C96, C38, C50, C180, C63, C108,
-    C111, C166, C167. (C175 is also `{}`, but its ledger status is COUNTERMODEL —
-    the separation, not a PROVEN step — so it is not counted in this bucket.)
-  - **9 `CL`-only**: C3, C10, C12–C14, C16, C37, C59, C93.
-  - **99 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
-    C21, C23–C25, C30, C39, C49, C51–C53, C55–C58, C62, C68, C83–C86, C91,
-    C94, C97–C105, C107, C113, C114, C116, C120–C122, C137–C142, C144, C145,
-    C147–C156, C160–C165, C168–C174, C176, C186, C189, C190, C191, C193,
-    C194, C195, C196, C198, C199, C200, C201, C203, C204, C205, C206,
-    C207, C208, C209, C210, C211, C213, C215, C216, C217, C218, C219, C220, F1a.
+  - **35 truly axiom-free** (`{}`): C1, C2, C4, C5, C6, C7, C8, C9, C183, C11, C179,
+    C17, C181, C22, C26, C27, C31, C35, C36, C95, C96, C182, C184, C185, C38, C50,
+    C180, C63, C108, C111, C166, C167, C226, C227, C231. (C175 is also `{}`, but its
+    ledger status is COUNTERMODEL — the separation, not a PROVEN step — so it is
+    not counted in this bucket. C226/C227 are the two `{}`-footprint
+    personhood-separation results of the 2026-09-25 refactor; C231 is the
+    `{}`-footprint *irreducibility* result that closes that batch.)
+  - **9 `CL`-only**: C3, C10, C12, C13, C14, C16, C37, C59, C93.
+  - **107 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+    C102, C103, C104, C105, C91, C58, C68, C21, C23, C24, C25, C30, C83, C84,
+    C107, C160, C161, F1a, C94, C186, C39, C49, C51, C52, C53, C55, C56, C57, C62,
+    C101, C97, C98, C99, C100, C85, C86, C113, C114, C116, C120, C121, C122, C137,
+    C138, C139, C140, C141, C164, C165, C142, C144, C145, C154, C155, C156, C162,
+    C163, C168, C169, C170, C171, C221, C222, C223, C224, C225, C229, C230, C232,
+    C147, C148, C149, C150, C151, C152, C153, C172, C173, C174, C176, C189, C190,
+    C191, C193, C194, C195, C196, C198, C199, C200, C201, C203, C204, C205, C206,
+    C207, C208, C209, C210, C211, C213, C215, C216, C217, C218, C219, C220.
+    C221–C225 are the five new priced personhood/grounding theorems of the
+    2026-09-25 refactor (C223 is the definitional free-will route; C221/C222/
+    C224/C225 carry the declared VOCAB law `will_individuation`). C229/C230/C232
+    are the 2026-09-26 price-localization batch: C229 and C232's free half cost
+    nothing, C230 *characterizes* the individuation price without paying it.
     F1a is the choice-**field** existence form (resolves to a kernel step;
     renamed 2026-09-18 — the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
   - **C91** — vocab-only (`{Subject}`); hostile separations `{}`. C92 (the
@@ -1476,12 +1496,12 @@ of $\Gamma + A14$:
 | C113 | §21 | `OughtRetorsion.self_grounded_ought_collapses` | PROVEN | `{Ought, Subject, Wills}` |
 | C114 | §21 | `OughtRetorsion.self_grounded_assertion_incoherent` | PROVEN | `{Ought, Subject, Wills}` |
 | C115 | §21 | `OughtRetorsion.HostileImpersonalModel.impersonal_model_satisfies_ought_without_person` | COUNTERMODEL | `{}` |
-| C116 | §21 | `OughtRetorsion.asserting_no_personal_source_instantiates_only_judging_subject` | PROVEN | `{Means, Subject}` |
-| C117 | §21 | `OughtRetorsion.AxSecondPersonalAddress` | AXIOM | `{AxSecondPersonalAddress, Means, Ought, Subject}` |
-| C118 | §21 | `OughtRetorsion.second_personal_ought_derives_plurality` | PROVEN↑ | `{AxSecondPersonalAddress, Means, Ought, Subject}` |
-| C119 | §21 | `OughtRetorsion.lone_subject_excludes_second_personal_ought` | PROVEN↑ | `{AxSecondPersonalAddress, Means, Ought, Subject}` |
-| C120 | §12 | `Person.free_subject_is_person` | PROVEN | `{Means, Subject}` |
-| C121 | §12 | `Person.person_iff_freeSubject` | PROVEN | `{Means, Subject}` |
+| C116 | §21 | `OughtRetorsion.asserting_no_personal_source_instantiates_only_judging_subject` | PROVEN | `{Means, Subject, Will, subjectWill}` |
+| C117 | §21 | `OughtRetorsion.AxSecondPersonalAddress` | AXIOM | `{AxSecondPersonalAddress, Means, Ought, Subject, Will, subjectWill}` |
+| C118 | §21 | `OughtRetorsion.second_personal_ought_derives_plurality` | PROVEN↑ | `{AxSecondPersonalAddress, Means, Ought, Subject, Will, subjectWill}` |
+| C119 | §21 | `OughtRetorsion.lone_subject_excludes_second_personal_ought` | PROVEN↑ | `{AxSecondPersonalAddress, Means, Ought, Subject, Will, subjectWill}` |
+| C120 | §12 | `Person.free_subject_is_person` — free subjecthood yields Personhood via the priced theorem (the only non-definitional content is the VOCAB law `will_individuation`) | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
+| C121 | §12 | `Person.person_iff_freeSubject` — as a priced theorem, never `Iff.rfl` | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
 | C122 | §12 | `PersonhoodOntologyAudit.opaque_person_failure_isolated_to_substantive_conjunct` | PROVEN | `{Means, Subject}` |
 | C123 | §12 | `OughtRetorsion.faithful_contingent_person_fails_necessary_subject` | COUNTERMODEL | `{}` |
 
@@ -1505,21 +1525,37 @@ of $\Gamma + A14$:
 
 | ID | Prose | Lean theorem | Status | Axiom footprint |
 |----|-------|--------------|--------|-----------------|
-| C142 | §12 | `Person.person_iff_freeIndependentWill` | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
-| C144 | §8/§12 | `PersonalNormativeGround.person_grounds_normative_polarity : Person s → GroundsRightWrong s` — Personhood supplies the ontological ground-type required by Right/Wrong constitutively without Act; s is the formal witness | PROVEN | `{Means, Subject}` |
+| C142 | §12 | `Person.person_iff_freeIndependentWill` — by projections plus the definitional rational conjunct (no individuation law needed) | PROVEN | `{Means, Subject, Will, subjectWill}` |
+| C144 | §8/§12 | `PersonalNormativeGround.person_grounds_normative_polarity : Person s → GroundsRightWrong s` — Personhood supplies the ontological ground-type required by Right/Wrong via its free will (freeWill route), without Act; s is the formal witness | PROVEN | `{Means, Subject, Will, subjectWill}` |
 | C145 | §14/§15 | `PersonalNormativeGround.discovery_independent_of_grounding` | PROVEN | `{Means, Subject}` |
 | C146 | §8/§12 | `PersonalNormativeGround.HostileModels.model_b_separation` | COUNTERMODEL | `{}` |
-| C154 | §28/§29 | `PersonalNormativeGround.forward_modus_ponens_derivation : RightWrongAt s p q → Person s ∧ GroundsRightWrong s` — strictly forward constructive deduction chain via modus ponens (A₀ ⇒ ... ⇒ P ⇒ G) showing the ground is personal in kind | PROVEN | `{Means, Subject}` |
-| C155 | §28/§29 | `PersonalNormativeGround.person_grounds_original_normative_datum : RightWrongAt s p q → Person s ∧ GroundsRightWrong s` — the derived subject s instantiates the personal ontological ground of datum A₀(s, p, q) | PROVEN | `{Means, Subject}` |
-| C156 | §28/§29 | `PersonalNormativeGround.non_reversal_discovery_and_grounding` — discovery runs forward (A₀ ⇒ P ⇒ G) while personal ground-type is the derived conclusion | PROVEN | `{Means, Subject}` |
+| C154 | §28/§29 | `PersonalNormativeGround.forward_modus_ponens_derivation : RightWrongAt s p q → Person s ∧ GroundsRightWrong s` — strictly forward constructive deduction chain via modus ponens (A₀ ⇒ ... ⇒ P ⇒ G); the P-step is the priced theorem (via `will_individuation`), the G-step the definitional free-will route | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
+| C155 | §28/§29 | `PersonalNormativeGround.person_grounds_original_normative_datum : RightWrongAt s p q → Person s ∧ GroundsRightWrong s` — the derived subject s instantiates the personal ontological ground of datum A₀(s, p, q) | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
+| C156 | §28/§29 | `PersonalNormativeGround.non_reversal_discovery_and_grounding` — discovery runs forward (A₀ ⇒ P ⇒ G) while personal ground-type is the derived conclusion | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
 | C162 | §12 | `Person.freeIndependentWill_iff_thomisticCore : FreeIndependentWill s ↔ ThomisticPersonCore s` — free, independent will is equivalent to the explicit Thomistic person core (`IndividualSubstance ∧ RationalNature ∧ DominionOverActs`; Boethius: individual substance of a rational nature; Aquinas ST I q.29 a.3, q.83: dominion over own acts); the formal correspondence that defeats the arbitrary-redefinition charge; zero new axioms | PROVEN | `{Means, Subject, Will, subjectWill}` |
-| C163 | §12 | `Person.person_iff_thomisticCore : Person s ↔ ThomisticPersonCore s` — personhood is constitutively equivalent to the Boethius–Aquinas person core | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
-| C168 | §24a/§28/§29 | `PersonalNormativeGround.groundsRightWrong_iff_forced_content : GroundsRightWrong s ↔ ForcedGroundContent s` — transparência: o predicado de fundamentação é abreviação definicional da conjunção `Person s ∧ (∀ s', RightWrong s' → Person s') ∧ (∃ p q, Chooses s p q)` escrita inteiramente no vocabulário ANTERIOR (sem o símbolo `GroundsRightWrong`); sem campo oculto, sem átomo opaco — o predicado é determinado, não estipulado | PROVEN | `{Means, Subject}` |
-| C169 | §24a/§28/§29 | `PersonalNormativeGround.forced_content_of_person : Person s → ForcedGroundContent s` — cada conjuntor é teorema PRECEDENTE, não decisão de fundamentação: `dependence` = fecho universal de `discovery_rightwrong_to_person` (§4, provado antes do passo P⇒G); `agential_foundation` = desdobrar definicional da Pessoa (`FreeWill := ∃ p q, Chooses`); `person` = conclusão derivada da cadeia | PROVEN | `{Means, Subject}` |
-| C170 | §24a/§28/§29 | `PersonalNormativeGround.grounding_forced_by_preceding_facts : RightWrongAt s p q → GroundsRightWrong s` — o predicado é forçado pelo DADO A₀ sozinho, antes de a Pessoa ser atingida: sem hipótese `Person` no instante da fundamentação | PROVEN | `{Means, Subject}` |
-| C171 | §24a/§28/§29 | `PersonalNormativeGround.grounding_forced_at_datum : RightWrongAt s p q → GroundsRightWrongAt s p q` — alinhamento indexado: o fundamento no próprio par ⟨p, q⟩ do dado (person via `forward_discovery_person`, normatividade = o dado, substrato = o mesmo par) — nenhuma testemunha é fabricada depois de a Pessoa ter sido obtida | PROVEN | `{Means, Subject}` |
+| C163 | §12 | `Person.person_iff_thomisticCore : Person s ↔ ThomisticPersonCore s` — personhood IS the Boethius–Aquinas person core, honestly `rfl` since that is the definition (emenda 2026-09-25) | PROVEN | `{Means, Subject, Will, subjectWill}` |
+| C168 | §24a/§28/§29 | `PersonalNormativeGround.groundsRightWrong_iff_forced_content : GroundsRightWrong s ↔ ForcedGroundContent s` — transparência: o predicado de fundamentação (registo de campo único, sem `person`, sem `dependence`) é abreviação definicional do facto agencial `ForcedGroundContent s := ∃ p q, Chooses s p q` escrito inteiramente no vocabulário ANTERIOR (sem o símbolo `GroundsRightWrong`); sem campo oculto, sem átomo opaco — o predicado é determinado, não estipulado | PROVEN | `{Means, Subject}` |
+| C169 | §24a/§28/§29 | `PersonalNormativeGround.forced_content_of_person : Person s → ForcedGroundContent s` — projecção do conjunto do domínio (`Person s → FreeWill s := ∃ p q, Chooses s p q`); a pessoalidade do fundamento é o teorema com preço `grounding_right_wrong_entails_person` (via `will_individuation`), nunca um campo | PROVEN | `{Means, Subject, Will, subjectWill}` |
+| C170 | §24a/§28/§29 | `PersonalNormativeGround.grounding_forced_by_preceding_facts : RightWrongAt s p q → GroundsRightWrong s` — o predicado é forçado pelo DADO A₀ sozinho, antes de a Pessoa ser atingida: sem hipótese `Person` no instante da fundamentação (a rota via Pessoa, pelo teorema de descoberta, carrega `will_individuation`) | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
+| C171 | §24a/§28/§29 | `PersonalNormativeGround.grounding_forced_at_datum : RightWrongAt s p q → GroundsRightWrongAt s p q` — alinhamento indexado: o fundamento no próprio par ⟨p, q⟩ do dado (normatividade = o dado, substrato = o mesmo par) — nenhuma testemunha pessoal é fabricada | PROVEN | `{Means, Subject}` |
+| C221 | §12 | `Person.freeWill_implies_person : FreeWill s → Person s` — HEADLINE (AC2): o livre-arbítrio implica a pessoalidade **como teorema**, nunca `Iff.rfl`; a prova assembla os três conjunctos boécio-aquinianos, e todo o seu conteúdo não-definicional é a lei VOCAB declarada `will_individuation` (a substância individual vem dessa lei; a natureza racional e o domínio dos próprios atos são definitionais a partir do livre-arbítrio) | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
+| C222 | §8/§12 | `PersonalNormativeGround.genuineNormativity_implies_person : GenuineNormativity s p q → Person s` — HEADLINE (AC3): a cadeia exacta do crítico como teorema; compõe `indubitable_normative_free_will` (normatividade genuína → livre-arbítrio, `{Means, Subject}`) com o teorema com preço `free_subject_is_person` (via `will_individuation`). Nenhum passo é um desdobramento | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
+| C223 | §24a/§28/§29 | `PersonalNormativeGround.freeWill_grounds_right_wrong : FreeWill s → GroundsRightWrong s` — E2: o livre-arbítrio satisfaz a especificação ontológica do fundamento; o registo tem campo único e `FreeWill s` É `∃ p q, Chooses s p q`, portanto o passo é definitionally — e **nenhuma hipótese `Person` é tomada ou necessária** | PROVEN | `{Means, Subject}` |
+| C224 | §24a/§28/§29 | `PersonalNormativeGround.grounding_right_wrong_entails_person : GroundsRightWrong s → Person s` — E2: a pessoalidade do fundamento é um **teorema com preço**, não um campo do registo; compõe o passo definitionally `agential_foundation → FreeWill` com `freeWill_implies_person` (custo: a lei nomeada `will_individuation`, divulgada) | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
+| C225 | §24a/§28/§29 | `PersonalNormativeGround.groundsRightWrongAt_entails_person : GroundsRightWrongAt s p q → Person s` — E1b: o gémeo indexado do anterior; a forma indexada também tem a pessoalidade **só por teorema**, nunca por campo | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
+| C226 | §12 | `PersonhoodOntologyAudit.freeWill_without_person : Vocab.FreeWill SharedWillModel true ∧ ¬ Vocab.Person SharedWillModel true` — AC9′: a separação é **machine-checked**, não afirmada; um sujeito com livre-arbítrio genuíno cujo domínio de vontade é partilhado (`WillOf := fun _ => ()`, `Subj := Bool`) **não** é pessoa. Computado, não estipulado, e a pegada é `{}` porque o modelo apenas interpreta o vocabulário de quatro campos `{Subject, Means, Will, subjectWill}` e **withholds** a lei `will_individuation` (é exactamente esse withholding que torna o contramodelo admissível) | PROVEN | `{}` |
+| C227 | §12 | `PersonhoodOntologyAudit.freeWill_person_iff_individuation (M) (s) : Vocab.FreeWill M s → (Vocab.Person M s ↔ ∀ s', M.WillOf s' ≠ M.WillOf s)` — a precisão: dada a liberdade, ser pessoa **equivale** à individuação numérica desta vontade. Diz no kernel, sem desdobramento definicional, que a redução `Person ↔ FreeWill` não é uma identidade de significado mas um teorema cujo conteúdo não-definicional é exactamente `will_individuation` — e `SharedWillModel` (C226) é o contramodelo machine-checked dessa redução | PROVEN | `{}` |
+| C228 | §24a/§29 | `PersonalNormativeGround.normative_ground_is_personal (g) (hGr : GenericGroundsRightWrong g) : PersonalEntity g` — **BLOCKED**: a pessoalidade do fundamento NÃO vem de um campo, mas continua a ser uma **projecção de campo em três passos** (1. `grounds_normativity` dá a `GenericGroundingRelation`; 2. `explanatory` força `g = EntityOf s`; 3. `personal_ground` dá `Person s`). Os dois campos que selam a Pierce-negociação são nomeados como bloqueadores (decisão D1′, adiada): `explanatory` impede qualquer contramodelo ao forçar todo fundamento a ser `EntityOf s`, e `asymmetric` proíbe por definição o contramodelo do átomo. Falta a lemma nomeada, verbatim de `base.txt:1345-1346`: `#9 Ground(e, personal) → Personal(e)` e o seu alvo #10. BLOCKED, não deferido em silêncio | BLOCKED | `{Means, Subject, Will, subjectWill}` |
+| C229 | §12 | `PersonalNormativeGround.rightwrong_gives_rational_domination (s) (h : RightWrong s) : RationalNature s ∧ DominionOverActs s` — **dois terços da pessoa sem nenhum axiom**: o endereço normativo genuíno já traz `RationalNature` (sujeito intencional + capacidade discursiva, ambos projeções de `Means`) e `DominionOverActs` (definitionally `FreeWill`). Desvela, a preço zero, que dois dos três conjunctos de `ThomisticPersonCore` não precisam da lei de individuação | PROVEN | `{Means, Subject}` |
+| C230 | §12 | `PersonalNormativeGround.person_from_rightwrong_iff_individuation (s) (h : RightWrong s) : Person s ↔ IndependentWill s` — o **preço localizado e exacto**: dada o datum normativo, ser Pessoa **equivale** a esta vontade ser individualmente numerada, porque C229 já fornece os outros dois conjunctos de graça. Analogue exacto de C227 para o ponto de entrada `RightWrong`. Sendo um `Iff` e não uma derivação, esta theorem **não** depende de `will_individuation`: ela **caracteriza** o preço em vez de o pagar | PROVEN | `{Means, Subject, Will, subjectWill}` |
+| C231 | §12 | `PersonhoodOntologyAudit.rational_domination_without_person : Vocab.RationalNature SharedWillModel true ∧ Vocab.DominionOverActs SharedWillModel true ∧ ¬ Vocab.Person SharedWillModel true` — **necessidade**: um sujeito pode satisfazer *ambos* os conjunctos baratos (natureza racional + domínio sobre os seus actos) e ainda assim **não** ser Pessoa. Prova machine-checked que os dois terços **não** alcançam a pessoalidade: `will_individuation` não é despesa evitável, é o preço exacto e mínimo de `RightWrong ⇒ Person` | PROVEN | `{}` |
+| C232 | §24a/§29 | `PersonalNormativeGround.grounding_carries_dependence_free (s) (hGround : GroundsRightWrong s) : ∀ s', RightWrong s' → RationalNature s' ∧ DominionOverActs s'` e `PersonalNormativeGround.grounding_carries_dependence (s) (hGround : GroundsRightWrong s) : ∀ s', RightWrong s' → Person s'` — o **conteúdo de dependência restaurado como teorema**, não como campo: o campo `dependence : ∀ s', RightWrong s' → Person s'` removido em 2026-09-25 é agora *derivado*. A metade livre (preço zero) devolve a `GroundsRightWrong` conteúdo implicado não-vacuoso, que é exactamente o que a redução a `FreeWill` tinha perdido; a metade paga completa a derivação com o preço declarado. O preço é provadamente mínimo por C230+C231 | PROVEN | `{Means, Subject}` / `{Means, Subject, Will, subjectWill, will_individuation}` |
 
-> Batch FORCING (2026-09-23) — demonstração formal de que `GroundsRightWrong` NÃO é um predicado formal ad hoc construível uma vez obtida a Pessoa: (i) transparência (`groundsRightWrong_iff_forced_content`, C168) — o predicado é definicionalmente idêntico a uma conjunção no vocabulário anterior à fundamentação; (ii) cada campo é teorema precedente (`forced_content_of_person`, C169): a dependência universal é o fecho da teorema de descoberta §4 e o substrato agencial é a própria definição de Pessoa; (iii) forçamento pelo dado (`grounding_forced_by_preceding_facts`, C170) com alinhamento indexado ao par ⟨p, q⟩ do próprio dado (`grounding_forced_at_datum`, C171). Zero axiomas substantivos, pegada `{Means, Subject}`; contraste honesto: a leitura de relação externa (`GroundProp`, `AxPersonalNormativeGround`) foi retirada e o registo (record) é transparente — nada é estipulado no instante P⇒G.
+> Batch SEMANTIC-INDEPENDENCE (2026-09-25) — a refactor de independência semântica fecha as três objecções C1/C2/C3 sem acrescentar um único axioma (conjunto declarado 22 = 22, AC10′). (i) **P1 — personhood vs. livre-arbítrio:** `Person` passou a ser o critério boécio-aquiniano completo (`Person s := ThomisticPersonCore s`), e a redução a livre-arbítrio é o teorema com preço C221/C222 (via `will_individuation`), não uma definição. A separação é machine-checked e exacta: C226 computa `FreeWill ∧ ¬Person` **com vontade não individuada**, e C227 declara o limite — pessoa **mais** vontade individuada **mais** racionalidade discursiva. Um modelo que importasse `Will`/`subjectWill` de Γ não pode exprimir esse contra-exemplo, porque `will_individuation` é justamente a lei em disputa; é por isso que o contramodelo tem **quatro campos** e nunca é descrito como "um modelo de Γ". (ii) **P2 — grounding-baking:** C223 é o único construtor de `GroundsRightWrong` a partir do livre-arbítrio e **não toma `Person`**; o registo de campo único eliminou `person`/`dependence`, e a pessoalidade é só por teorema (C224, e o gémeo indexado C225). O contraste honesto: `GroundsRightWrong` é agora *definitionally* `FreeWill` (C168), pelo que todo o conteúdo de fundamentação substantivo reside na relação genérica — que permanece **BLOCKED** em C228 com a lemma nomeada verbatim. (iii) **P3 — nomeado na ontologia:** `Entity.ofGround` fica (decisão §47.2) mas tagged, priced e badged ◈ no registo de `formal/Logos/Stipulations.lean` (3 stipulações, 9 dependentes verificados por `scripts/audit_stipulations.py`). Nada se perde no ledger de estados: 43 BLOCKED / 15 DEFERRED / 18 PROVEN / 41 PROVEN↑ / 5 AXIOM inalterados; 0 axiomas substantivos em todos os 115 footprints que cresceram.
+
+> Batch PRICE-LOCALIZATION (2026-09-26) — fecha a segunda objecção de P2: a redução de `GroundsRightWrong` a `FreeWill` tornara o vocabulário de fundamentação *vacuoso*, e o preço de `will_individuation` aparecia como linha de custo sem ever ser caracterizado. Quatro teoremas aditivos, zero axiomas novos (22 = 22, AC10′). (i) **Dependência restaurada como teorema, não como campo:** o campo `dependence : ∀ s', RightWrong s' → Person s'` removido em 2026-09-25 é agora derivado em duas metades — `grounding_carries_dependence_free` (`{Means, Subject}`, **zero axiomas**) devolve a `GroundsRightWrong` um conteúdo *implicado* não-vacuoso, e `grounding_carries_dependence` completa a derivação com o preço declarado (C232). (ii) **Dois terços de graça:** `rightwrong_gives_rational_domination` (C229, `{Means, Subject}`) mostra que o endereço normativo genuíno já fornece `RationalNature` *e* `DominionOverActs` — dois dos três conjunctos de `ThomisticPersonCore` sem a lei de individuação. (iii) **O preço é exacto:** `person_from_rightwrong_iff_individuation` (C230, `{Means, Subject, Will, subjectWill}`) dá `Person s ↔ IndependentWill s` sob `RightWrong s`; sendo um `Iff`, **caracteriza** o preço em vez de o pagar — a lei `will_individuation` não consta da sua pegada. (iv) **O preço é necessário:** `rational_domination_without_person` (C231, `{}`) prova em `SharedWillModel` que um sujeito com natureza racional *e* domínio sobre os seus actos **não** é Pessoa. Conclusão: `will_individuation` é o preço **exacto e mínimo** de `RightWrong ⇒ Person`, e nenhuma técnica de prova o remove sem repor a deflação de `Person` (a `Person := FreeSubject` de HEAD^, tipo "stronger"). Nenhuma afirmação existente foi enfraquecida; o batch é puramente aditivo.
+> Batch FORCING (2026-09-23; emenda 2026-09-25) — demonstração formal de que `GroundsRightWrong` NÃO é um predicado formal ad hoc construível uma vez obtida a Pessoa:
+ (i) transparência (`groundsRightWrong_iff_forced_content`, C168) — o registo de campo único é definicionalmente idêntico ao facto agencial `∃ p q, Chooses s p q` no vocabulário anterior à fundamentação; (ii) toda a Pessoa satisfaz o conteúdo forçado (`forced_content_of_person`, C169) por projecção do domínio, e a pessoalidade do fundamento é o teorema com preço `grounding_right_wrong_entails_person` (via `will_individuation`); (iii) forçamento pelo dado (`grounding_forced_by_preceding_facts`, C170) com alinhamento indexado ao par ⟨p, q⟩ do próprio dado (`grounding_forced_at_datum`, C171), sem hipótese `Person`. Zero axiomas substantivos; núcleo agencial pegada `{Means, Subject}`, rotas via Pessoa com `Will, subjectWill, will_individuation`; contraste honesto: a leitura de relação externa (`GroundProp`, `AxPersonalNormativeGround`) foi retirada e o registo (record) é transparente — nada é estipulado no instante P⇒G.
 
 > Batch PERSON.md (2026-09-23) — correspondência Boécio–Aquinas explícita + piso racional derivado: `Rational` deixou de ser o kind-pred analítico `:= True` e passou a piso DERIVADO `Rational s := ∃ p, Means s p` (`{Means, Subject}`, valor efetivo da definição = `Intentional`); a natureza racional operativa da pessoa é `RationalNature := Intentional ∧ FreeWill` (Person.lean), nunca o piso truncado. `ThomisticPersonCore` = substância individual (vontade numericamente individuada) + natureza racional (apreensão + deliberação) + domínio dos próprios atos (livre-arbítrio genuíno) — equivalência total `Person ↔ FreeIndependentWill ↔ ThomisticPersonCore` (C162/C163), pegada zero axiomas novos, idêntica ao feixe de C142. Contramodelos hostis intactos: `SubstantivePersonhood`` (Ratio próprio) e `freewill_not_entails_rationality` (RazõesFor local) não importam `Logos.Agency.Rational`.
 
@@ -1543,17 +1579,17 @@ that the ground creates existents, makes evil exist, or morally legitimizes what
 |----|-------|--------------|--------|-----------------|
 | C147 | §28/§29 | `PersonalGroundOfReality.deny_right_self_contradicts : ¬ ∃ s, ClaimsCorrect s NoRight ∧ NoRight` — denying Right is performatively self-contradictory (retorsion boundary) | PROVEN | `{Initiates, Means, State, Subject}` |
 | C148 | §28/§29 | `PersonalGroundOfReality.reality_of_right : EstablishedRightWrong ∧ (∀ p, T p ∨ IsFalse p) ∧ NecessaryNormativeOrder` — Right/Wrong is real, bivalence holds, and the order is necessary | PROVEN | `{Initiates, Means, State, Subject, CL}` |
-| C149 | §28/§29 | `PersonalGroundOfReality.judicative_stance_forces_person : ∀ s p, ClaimsNormativeCorrectness s p → Person s` — the judicative stance forces the Person | PROVEN | `{Initiates, Means, State, Subject, CL}` |
-| C150 | §28/§29 | `PersonalGroundOfReality.person_grounds_normative_order : ∀ s, Person s → GroundsRightWrong s` — Personhood supplies the ontological ground-type for all subjects without Act | PROVEN | `{Means, Subject}` |
-| C151 | §28/§29 | `PersonalGroundOfReality.the_person_supports_the_reality_of_right` — HEADLINE: deny-Right is contradictory; Right/Wrong is real and necessary; the normative datum forces the Person; the ground is personal in kind via GroundsRightWrong. Unconditional, closed Prop. | PROVEN | `{Initiates, Means, State, Subject, CL}` |
-| C152 | §28/§29 | `PersonalGroundOfReality.personal_ground_of_right_exists (hDatum : ∃ s, RightWrong s) : ∃ s, Person s ∧ NecessaryNormativeOrder ∧ GroundsRightWrong s` — existential corollary, datum-guarded: a personal ground exists | PROVEN | `{Initiates, Means, State, Subject, CL}` |
-| C153 | §28/§29 | `PersonalGroundOfReality.person_yields_personal_grounding_of_reality` — instance form (datum-guarded): the derived Person witnesses the personal ground of the objective normative/truth order governing judgments about reality (grounding correctness about reality; not creation of existents) (historical compatibility alias: `present_act_yields_personal_grounding_of_reality`) | PROVEN | `{Initiates, Means, State, Subject, CL}` |
-| C172 | §28/§29 | `PersonalGroundOfReality.personal_ground_of_right_wrong : ∀ s, RightWrong s → Person s` — the 'simple thing' in one universal: wherever Right/Wrong is real, its ground-type is personal; direct alias of `normative_datum_forces_person` (the elaborated `GroundsRightWrong` record is its record-form, DEFINITIONAL) | PROVEN | `{Means, Subject}` |
+| C149 | §28/§29 | `PersonalGroundOfReality.judicative_stance_forces_person : ∀ s p, ClaimsNormativeCorrectness s p → Person s` — the judicative stance forces the Person (via the priced discovery theorem) | PROVEN | `{Initiates, Means, State, Subject, Will, subjectWill, will_individuation, CL}` |
+| C150 | §28/§29 | `PersonalGroundOfReality.person_grounds_normative_order : ∀ s, Person s → GroundsRightWrong s` — Personhood supplies the ontological ground-type for all subjects without Act, via its free will | PROVEN | `{Means, Subject, Will, subjectWill}` |
+| C151 | §28/§29 | `PersonalGroundOfReality.the_person_supports_the_reality_of_right` — HEADLINE: deny-Right is contradictory; Right/Wrong is real and necessary; the normative datum forces the Person (priced step); the ground is personal in kind via the priced personalness theorem. Unconditional, closed Prop. | PROVEN | `{Initiates, Means, State, Subject, Will, subjectWill, will_individuation, CL}` |
+| C152 | §28/§29 | `PersonalGroundOfReality.personal_ground_of_right_exists (hDatum : ∃ s, RightWrong s) : ∃ s, Person s ∧ NecessaryNormativeOrder ∧ GroundsRightWrong s` — existential corollary, datum-guarded: a personal ground exists | PROVEN | `{Initiates, Means, State, Subject, Will, subjectWill, will_individuation}` |
+| C153 | §28/§29 | `PersonalGroundOfReality.person_yields_personal_grounding_of_reality` — instance form (datum-guarded): the derived Person witnesses the personal ground of the objective normative/truth order governing judgments about reality (grounding correctness about reality; not creation of existents) (historical compatibility alias: `present_act_yields_personal_grounding_of_reality`) | PROVEN | `{Initiates, Means, State, Subject, Will, subjectWill}` |
+| C172 | §28/§29 | `PersonalGroundOfReality.personal_ground_of_right_wrong : ∀ s, RightWrong s → Person s` — the 'simple thing' in one universal: wherever Right/Wrong is real, its ground-type is personal; via the priced discovery theorem (`normative_datum_forces_person`) | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
 
-> **GroundsRightWrong package (§4.3):** `GroundsRightWrong` is a RECORD — person,
-> universal dependence, `agential_foundation := ∃p q, Chooses s p q`
-> (transparent, C168; at most the generating theorem `Person s → GroundsRightWrong s`
-> proves Γ's specification is SATISFIED). `model_b_separation`
+> **GroundsRightWrong package (§4.3; emenda 2026-09-25):** `GroundsRightWrong` is a single-field RECORD —
+> `agential_foundation := ∃p q, Chooses s p q` (transparent, C168; NO `person`,
+> NO `dependence` fields — personalness is the priced theorem
+> `grounding_right_wrong_entails_person`, C169/E2). `model_b_separation`
 > (`PersonalNormativeGround.lean:673-675`) shows a concrete witness where an
 > *arbitrary external* `GroundProp` is NOT forced: `Entity := Bool`,
 > `GroundProp := fun e _ => e = false` — an impersonal atom satisfies it while the
@@ -1590,7 +1626,7 @@ camada interpretativa, não consequência kernel.
 | C175 | §28/§5 | `MoralFrontierAudit.epistemic_normativity_without_practical_obligation : (∃ s, RightWrongStar s) ∧ (¬ ∃ r s a, OughtStar r s a)` — the `M_amoral` faithful model satisfies the epistemic agential reality-hook with zero practical binding; moral meaning is machine-separated (F3's countermodel row-of-record) | COUNTERMODEL | `{}` |
 | C176 | §28/§5 | `Value.no_help_obtains : ¬ ∃ s t, s ≠ t ∧ Helps s t` — **the bare value layer is empty**: `BearingOf` is a closed def returning `unbearing`, so `Affects`/`Helps`/`Harms` are refutable for *every* pair (`helps_unobtainable`, `harms_unobtainable`, `affects_unobtainable`). The machine proof that benevolence does **not** obtain in the pure theory — and hence that any inhabited moral pole must pay a disclosed bridge | PROVEN | `{Subject}` |
 | C177 | §28/§5 | `Value.AxBenevolentBearingObtains : ∃ s t, s ≠ t ∧ Person t ∧ Helps s t` — **META bridge** (poem P6 "ajuda" as world-fact, not only definition): some person is *actually* helped. Declared, tagged `META`, priced in the footprint; not forced (C176 is its countermodel). The one honest price of the positive moral close | AXIOM | `{Means, Subject, AxBenevolentBearingObtains}` |
-| C178 | §28/§5 | `MoralFrontierAudit.moral_good_obtains : ∃ s a, Good s a` — **the positive close of F3**: the moral pole is a *fair definition* (`Good s a := ∃ t ≠ s, Person t ∧ Helps s t ∧ ¬ Harms s t` — helpfulness toward the other, per the declared content) and it **obtains** under C177. `Good` itself is vocabulary-only (`{Means, Subject}`); the inhabitation carries the bridge openly | PROVEN↑ | `{Means, Subject, AxBenevolentBearingObtains}` |
+| C178 | §28/§5 | `MoralFrontierAudit.moral_good_obtains : ∃ s a, Good s a` — **the positive close of F3**: the moral pole is a *fair definition* (`Good s a := ∃ t ≠ s, Person t ∧ Helps s t ∧ ¬ Harms s t` — helpfulness toward the other, per the declared content) and it **obtains** under C177. `Good` itself is vocabulary-only (`{Means, Subject, Will, subjectWill}` — `Person` in the definiens); the inhabitation carries the bridge openly | PROVEN↑ | `{Means, Subject, Will, subjectWill, AxBenevolentBearingObtains}` |
 
 > Batch REALITY-HOOK & MORAL-FRONTIER (2026-09-24): a tese cética "certo/errado
 > proposicional nada tem a ver com realidade" é **refutada no kernel** —

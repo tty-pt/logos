@@ -198,7 +198,7 @@ theorem epistemic_normativity_without_practical_obligation :
   (Good is not Correct) and NOT self-legislation (Good is not my inclination). The
   action argument `a` is the context of evaluation; the value layer indexes bearing by
   subject-pairs, so the moral character at `a` is the subject's bearing toward the other.
-  Footprint: `{Means, Subject}` (vocabulary-only — the definition itself smuggles nothing;
+  Footprint: `{Means, Subject, Will, subjectWill}` (vocabulary-only — the definition itself smuggles nothing;
   only the pole's *inhabitation* pays the disclosed bridge, in `moral_good_obtains`). -/
 def Good (s : Subject) (_a : Prop) : Prop :=
   ∃ t : Subject, t ≠ s ∧ Person t ∧ Helps s t ∧ ¬ Harms s t
@@ -208,7 +208,7 @@ def Good (s : Subject) (_a : Prop) : Prop :=
   actually helped"), the fair positive pole `Good` is inhabited — the F3 frontier's
   positive close, earned honestly: the pole is *defined* (fairly, no hidden axiom) and
   its *existence* rests on one declared, priced bridge. Footprint:
-  `{AxBenevolentBearingObtains, Means, Subject}` (the price, written out loud). -/
+  `{AxBenevolentBearingObtains, Means, Subject, Will, subjectWill}` (the price, written out loud). -/
 theorem moral_good_obtains : ∃ s : Subject, ∃ a : Prop, Good s a := by
   obtain ⟨s, t, hne, hpt, hh⟩ := some_person_is_helped
   exact ⟨s, True, ⟨t, Ne.symm hne, hpt, hh, help_not_harm hh⟩⟩
@@ -240,14 +240,14 @@ axiom Evil : Subject → Prop → Prop
 /--The moral-judicative stance: the subject performs its act and means its action's Good and
   Evil — mirroring the normative-judicative stance with the fair positive pole and the
   declared negative pole.
-  Footprint: `{Evil, Initiates, Means, State, Subject}` — the fair `Good` def is
+  Footprint: `{Evil, Initiates, Means, State, Subject, Will, subjectWill}` — the fair `Good` def is
   vocabulary-only, so the *stance* costs only the still-declared negative pole. -/
 def ClaimsMoralRectitude (s : Subject) (a : PracticalAction) : Prop :=
   Act s a.prop ∧ Means s (Good s a.prop) ∧ Means s (Evil s a.prop)
 
 /--The stance exhibits both moral poles: moral rectitude towards an action means the subject
   means its goodness and its evil.
-  Footprint: `{Evil, Initiates, Means, State, Subject}`. -/
+  Footprint: `{Evil, Initiates, Means, State, Subject, Will, subjectWill}`. -/
 theorem stance_exhibits_moral_poles (s : Subject) (a : PracticalAction)
     (h : ClaimsMoralRectitude s a) : Means s (Good s a.prop) ∧ Means s (Evil s a.prop) :=
   h.2

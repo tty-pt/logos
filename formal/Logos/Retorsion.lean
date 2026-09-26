@@ -145,8 +145,11 @@ Key Structural Features:
 -/
 
 /-- Personhood in the refined retorsion framework (retained downstream):
-    A subject is a Person iff it possesses FreeWill (genuinely chooses between incompatible alternatives).
-    `Person s := FreeWill s`. -/
+    MODULE-LOCAL analysis predicate (distinct from the unified `Logos.Person.Person`,
+    which is the Boethius–Aquinas criterion `ThomisticPersonCore` since 2026-09-25):
+    a subject is a Person-local iff it possesses FreeWill (genuinely chooses between
+    incompatible alternatives).
+    `Person s := FreeWill s` (local). -/
 def Person (s : Subject) : Prop := FreeWill s
 
 /-- Minimum typed domain items avoiding category errors:

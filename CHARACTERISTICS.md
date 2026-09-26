@@ -132,7 +132,7 @@ The foundation is **necessary** in the performative-transcendental sense that ra
 
 **Status in the prose:** One of the most elaborately argued positive characteristics.
 
-**Formal status: ✅ datum-conditional, no substantive axioms.** `Core.rightWrongDistinction` (`formal/Logos/Core.lean:145`, `{}`) PROVEN; `PersonalNormativeGround.person_grounds_right_wrong` (`formal/Logos/PersonalNormativeGround.lean:373`, `{Means, Subject}`) PROVEN; headline `PersonalGroundOfReality.the_person_supports_the_reality_of_right` (`formal/Logos/PersonalGroundOfReality.lean:150`, `{Initiates, Means, State, Subject, CL}`) PROVEN; reality-hook `RealityHookAudit.content_reality_hook` (`formal/Logos/RealityHookAudit.lean:85`, `{Initiates, Means, State, Subject}`) PROVEN. The new local retorsional corollary `DirectNormativeRetorsion.no_correct_claim_of_no_right_can_be_true` (`formal/Logos/DirectNormativeRetorsion.lean:174`, `{}`) is also PROVEN. Boundary: unconditional `¬NoGN` is underivable (`M_inanimate`, `formal/GAPMAP.md` C167, `{}`); the broader theorems are conditional on the judicative datum/stance, with `CL` only.
+**Formal status: ✅ datum-conditional, no substantive axioms.** `Core.rightWrongDistinction` (`formal/Logos/Core.lean:145`, `{}`) PROVEN; `PersonalNormativeGround.freeWill_grounds_right_wrong` (`formal/Logos/PersonalNormativeGround.lean`, `{Means, Subject}`) PROVEN with personalness as the priced theorem `grounding_right_wrong_entails_person`; headline `PersonalGroundOfReality.the_person_supports_the_reality_of_right` (`formal/Logos/PersonalGroundOfReality.lean:152`, `{Initiates, Means, State, Subject, Will, subjectWill, will_individuation, CL}`) PROVEN; reality-hook `RealityHookAudit.content_reality_hook` (`formal/Logos/RealityHookAudit.lean:85`, `{Initiates, Means, State, Subject}`) PROVEN. The new local retorsional corollary `DirectNormativeRetorsion.no_correct_claim_of_no_right_can_be_true` (`formal/Logos/DirectNormativeRetorsion.lean:174`, `{}`) is also PROVEN. Boundary: unconditional `¬NoGN` is underivable (`M_inanimate`, `formal/GAPMAP.md` C167, `{}`); the broader theorems are conditional on the judicative datum/stance, with `CL` only.
 
 ### Argument
 
@@ -292,7 +292,7 @@ The foundation is **timeless or eternal** in the sense of being prior to and ind
 
 **Status in the prose:** Explicit, although its relation to later logical and temporal precedence is not fully explained.
 
-**Formal status: ❌ absent — no precedence-to-truth/falsity theorem.** Nearest live results establish the distinction (`Core.rightWrongDistinction`, `formal/Logos/Core.lean:145`, `{}`) and its personal ground-type (`PersonalNormativeGround.person_grounds_right_wrong`, `formal/Logos/PersonalNormativeGround.lean:373`, `{Means, Subject}`), not logical/ontological precedence of the ground to the distinction.
+**Formal status: ❌ absent — no precedence-to-truth/falsity theorem.** Nearest live results establish the distinction (`Core.rightWrongDistinction`, `formal/Logos/Core.lean:145`, `{}`) and its personal ground-type (`PersonalNormativeGround.freeWill_grounds_right_wrong` + `grounding_right_wrong_entails_person`, `formal/Logos/PersonalNormativeGround.lean`), not logical/ontological precedence of the ground to the distinction.
 
 ### Argument
 

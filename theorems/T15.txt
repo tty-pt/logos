@@ -7,7 +7,7 @@ Entity.ofGround; EntityExistsAt w .ofGround := True; correspondências EntityMea
 PROVEN (VOCAB) — pegadas {Means, Subject} / {Subject} / {Initiates, State, Subject},
 zero axiomas substantivos; C181 `necessary_existence_is_stage_uniform` é PROVEN
 com pegada `{}` (transporte modal genérico); conjuncto pessoal da Proposição E:
-PROVEN↑ sob { AxTwoSubjects, Means, Subject } (META anunciada).
+PROVEN↑ sob { AxTwoSubjects, Means, Subject, Will, subjectWill } (META anunciada; sem `will_individuation` — a rota do fundamento passa pelo livre-arbítrio).
 
 Verificado em: formal/Logos/NecessityEternity.lean (ofGround_necessary,
 ofGround_ground_of_reality, ofGround_necessary_ground_of_reality,

@@ -45,7 +45,8 @@ open Logos.PersonalNormativeGround (
   GlobalGroundedNormativePolarity
   judicative_normative_polarity_of_act
   JudicativeNormativePolarity
-  person_grounds_right_wrong
+  freeWill_grounds_right_wrong
+  grounding_right_wrong_entails_person
   person_grounds_normative_polarity
   discovery_rightwrong_to_person
   forward_discovery_person
@@ -60,11 +61,12 @@ open Logos.IndubitableNormativeFreeWill (EstablishedRightWrong)
 open Logos.RetorsiveNormativity (ClaimsCorrect)
 open Logos.DirectNormativeRetorsion (NoRight cannot_claim_correct_no_right_and_true)
 
-/-- The free subject addressed by an objective normative opposition constitutively
-    instantiates the personal ground of Right/Wrong.
+/-- The free subject addressed by an objective normative opposition instantiates
+    the personal ground of Right/Wrong — via the priced discovery route
+    (`forward_modus_ponens_derivation`), never by stipulation.
     The argument does not identify a particular contingent individual as the creator of Right and Wrong;
     it establishes that the ontological ground required by objective Right/Wrong is personal in kind.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem free_subject_grounds_normative_order
     {s : Subject} {p q : Prop} (hRW : RightWrongAt s p q) :
     GroundsRightWrong s :=
@@ -86,7 +88,7 @@ theorem reality_of_right :
 
 /-- The normative datum forces the Person: any agent addressed by genuine
     normativity is a free subject (FreeWill), hence a Person.
-    Footprint: `{Means, Subject}` (zero substantive axioms). -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}` (zero substantive axioms). -/
 theorem normative_datum_forces_person :
     ∀ (s : Subject), RightWrong s → Person s :=
   discovery_rightwrong_to_person
@@ -94,14 +96,14 @@ theorem normative_datum_forces_person :
 /-- The ontology in one universal: wherever Right/Wrong is real, its
     ground-type is personal (the 'simple thing'). The elaborated
     `GroundsRightWrong` record is its record-form (DEFINITIONAL).
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem personal_ground_of_right_wrong
     (s : Subject) : RightWrong s → Person s :=
   normative_datum_forces_person s
 
 /-- The judicative stance forces the Person: any agent grasping a proposition
     as correct and as incorrect is a free subject (FreeWill), hence a Person.
-    Footprint: `{Initiates, Means, State, Subject, CL}` (zero substantive
+    Footprint: `{Classical.choice, Initiates, Means, Quot.sound, State, Subject, propext, Will, subjectWill, will_individuation}` (zero substantive
     axioms). -/
 theorem judicative_stance_forces_person :
     ∀ (s : Subject) (p : Prop), ClaimsNormativeCorrectness s p → Person s := by
@@ -110,13 +112,14 @@ theorem judicative_stance_forces_person :
   exact Logos.Person.free_subject_is_person s hFW.2
 
 /-- Every Person constitutes the ontological ground of Right/Wrong.
-    Derived directly from Personhood itself without Act.
+    Derived from Personhood itself without Act — routing through the Person's
+    free will (projection) into `freeWill_grounds_right_wrong`.
     The argument does not identify a particular contingent individual as the creator of Right and Wrong;
     it establishes that the ontological ground required by objective Right/Wrong is personal in kind.
-    Footprint: `{Means, Subject}` (zero substantive axioms). -/
+    Footprint: `{Means, Subject, Will, subjectWill}` (zero substantive axioms). -/
 theorem person_grounds_normative_order :
     ∀ (s : Subject), Person s → GroundsRightWrong s :=
-  person_grounds_right_wrong
+  fun s hP => freeWill_grounds_right_wrong s (Logos.Person.person_has_free_will s hP)
 
 /-- Historical lemma: every performed act under correctness realizes judicative polarity.
     Grounding itself is established through Personhood (`Person s → GroundsRightWrong s`). -/
@@ -146,7 +149,7 @@ theorem every_judicative_act_grounds_its_own_polarity :
     "Necessary" = the order is necessary and its basis is the personal ontological nature
     (retorsive-transcendental necessity), NOT an entity-level modal claim that the same contingent
     individual s exists in every possible world.
-    Footprint: `{Initiates, Means, State, Subject, CL}`. -/
+    Footprint: `{Classical.choice, Initiates, Means, Quot.sound, State, Subject, propext, Will, subjectWill, will_individuation}`. -/
 theorem the_person_supports_the_reality_of_right :
     (¬ ∃ s : Subject, ClaimsCorrect s NoRight ∧ NoRight) ∧
     EstablishedRightWrong ∧ (∀ p : Prop, Logos.Core.T p ∨ Logos.Core.IsFalse p) ∧
@@ -164,7 +167,7 @@ theorem the_person_supports_the_reality_of_right :
     Distinction: This establishes that there exists a personal ground of the normative order;
     it does NOT claim that there exists one particular empirical person who personally
     causes every normative fact.
-    Footprint: `{Initiates, Means, State, Subject}` (zero substantive axioms). -/
+    Footprint: `{Initiates, Means, State, Subject, Will, subjectWill, will_individuation}` (zero substantive axioms). -/
 theorem personal_ground_of_right_exists
     (hDatum : ∃ s : Subject, RightWrong s) :
     ∃ s : Subject, Person s ∧ NecessaryNormativeOrder ∧ GroundsRightWrong s := by
@@ -192,16 +195,17 @@ theorem personal_ground_of_right_exists_of_claims
     The derived Person s instantiates the personal ground-type.
     The argument does not identify a particular contingent individual as the creator of Right and Wrong;
     it establishes that the ontological ground required by objective Right/Wrong is personal in kind.
-    Footprint: `{Initiates, Means, State, Subject}`. -/
+    Footprint: `{Initiates, Means, State, Subject, Will, subjectWill}`. -/
 theorem person_yields_personal_grounding_of_reality
     (s : Subject) (hPerson : Person s) :
     Person s ∧ GroundsRightWrong s ∧ NecessaryNormativeOrder :=
-  ⟨hPerson, person_grounds_right_wrong s hPerson, necessary_normative_order⟩
+  ⟨hPerson, freeWill_grounds_right_wrong s (Logos.Person.person_has_free_will s hPerson),
+   necessary_normative_order⟩
 
 /-- Historical compatibility alias for `person_yields_personal_grounding_of_reality`.
     Marked explicitly as historical compatibility terminology: the theorem requires no `Act` premise
     and expresses `Person → personal ontological ground`.
-    Footprint: `{Initiates, Means, State, Subject}`. -/
+    Footprint: `{Initiates, Means, State, Subject, Will, subjectWill}`. -/
 @[deprecated person_yields_personal_grounding_of_reality (since := "2026-04")]
 theorem present_act_yields_personal_grounding_of_reality
     (s : Subject) (hPerson : Person s) :
@@ -213,7 +217,7 @@ theorem present_act_yields_personal_grounding_of_reality
     Unconditional implication chain: A₀(s, p, q) ⇒ ... ⇒ P(s) ⇒ G(s).
     The argument does not identify a particular contingent individual as the creator of Right and Wrong;
     it establishes that the ontological ground required by objective Right/Wrong is personal in kind.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem forward_normative_derivation_to_personal_ground (s : Subject) (p q : Prop)
     (h0 : RightWrongAt s p q) :
     Person s ∧ GroundsRightWrong s :=
@@ -229,7 +233,7 @@ theorem forward_pipeline (s : Subject) (p q : Prop) :
     The proof runs strictly forward; the personal ontological grounding relation is the terminal derived theorem.
     The argument does not identify a particular contingent individual as the creator of Right and Wrong;
     it establishes that the ontological ground required by objective Right/Wrong is personal in kind.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem person_grounds_initial_normative_datum (s : Subject) (p q : Prop)
     (h0 : RightWrongAt s p q) :
     Person s ∧ GroundsRightWrong s :=

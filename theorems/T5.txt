@@ -4,9 +4,9 @@ Depende de: T1 e ato presente (C68 → C21 → C24; pegada estrita `{Means, Subj
 
 Definição ontológica unificada de Pessoa (base.txt §12 / formal/Logos/Person.lean):
 
-> Uma pessoa é um sujeito dotado de livre-arbítrio numericamente distinto.
+> Uma pessoa é uma substância individual de natureza racional, dotada de domínio dos próprios atos.
 
-Person(s) := FreeSubject(s) ↔ FreeWill(s).
+Person(s) := ThomisticPersonCore(s).
 
 A pessoalidade NÃO é uma propriedade metafísica opaca sobreposta a um sujeito livre já estabelecido.
 O sistema distingue com clareza:
@@ -14,7 +14,7 @@ O sistema distingue com clareza:
 - Natureza: a essência ou espécie possuída (`Nature : Type`), onde Pessoa ≠ Natureza (permitindo uma natureza partilhada por múltiplas pessoas).
 - Vontade: a faculdade volitiva com individuação numérica (`subjectWill s₁ ≠ subjectWill s₂` para `s₁ ≠ s₂`).
 - Livre-Arbítrio: a eleição efetiva entre alternativas incompatíveis (`FreeWill s := ∃ p q, Chooses s p q`).
-- Pessoa: o sujeito dotado de livre-arbítrio (`Person s := FreeSubject s`).
+- Pessoa: a substância individual de natureza racional, dotada de domínio dos próprios atos (`Person s := ThomisticPersonCore s`); a redução ao livre-arbítrio é o teorema com preço `freeWill_implies_person` (lei VOCAB `will_individuation`).
 
 Correspondência tomista explícita (Boécio — substância individual de natureza racional; Aquino, ST I q.29 a.3 e q.83 — domínio dos próprios atos; PERSON.md 2026-09-23):
 
@@ -24,28 +24,33 @@ Correspondência tomista explícita (Boécio — substância individual de natur
 >   · Domínio → `DominionOverActs s := FreeWill s` (escolha genuína, agere a se).
 
 Person(s) ↔ FreeIndependentWill(s) ↔ ThomisticPersonCore(s)  [PROVEN, C162/C163,
-`Person.freeIndependentWill_iff_thomisticCore` / `Person.person_iff_thomisticCore`,
-pegada `{Means, Subject, Will, subjectWill, will_individuation}`, 0 axiomas novos].
+`Person.freeIndependentWill_iff_thomisticCore` / `Person.person_iff_thomisticCore`;
+a redução `Person ↔ FreeWill` custa a lei VOCAB `will_individuation`
+(`freeWill_implies_person`), 0 axiomas substantivos novos].
 
 Racionalidade em dois pisos: `Rational s := ∃ p, Means s p` é agora piso DERIVADO
 (mera significação, definicionalmente idêntico a `Intentional`, `{Means, Subject}`),
 não o kind-pred analítico `True`; a racionalidade operativa da pessoa é `RationalNature`,
 nunca o piso truncado.
 
-Portanto:
+Portanto (cada implicação com a sua pegada honesta; 0 axiomas substantivos):
 
-FreeSubject(s) → Person(s)  [PROVEN, free_subject_is_person, {Means, Subject}].
-Person(s) ↔ FreeSubject(s)  [PROVEN, person_iff_freeSubject, {Means, Subject}].
+FreeSubject(s) → Person(s)  [PROVEN, free_subject_is_person, {Means, Subject, Will, subjectWill, will_individuation}].
+Person(s) ↔ FreeSubject(s)  [PROVEN, person_iff_freeSubject, {Means, Subject, Will, subjectWill, will_individuation}].
+FreeWill(s) → Person(s)  [PROVEN, freeWill_implies_person — o teorema-vedete AC2, nunca `Iff.rfl`].
+GenuineNormativity(s,p,q) → Person(s)  [PROVEN, genuineNormativity_implies_person — a cadeia exacta do crítico, como teorema].
 
 ESTATUTO FORMAL CONCLUÍDO:
 - `Act → IntentionalSubject`: PROVEN (`act_implies_intentionalSubject`, `{Means, Subject}`).
-- `Person → IntentionalSubject`: PROVEN (`person_is_intentional`, `{Means, Subject}`).
-- `FreeSubject → Person`: PROVEN (`free_subject_is_person`, `{Means, Subject}`).
-- `Person → FreeWill`: PROVEN (`person_has_free_will`, `{Means, Subject}`).
-- `Person ↔ ThomisticPersonCore`: PROVEN (C163, `person_iff_thomisticCore`, `{Means, Subject, Will, subjectWill, will_individuation}`).
+- `Person → IntentionalSubject`: PROVEN (`person_is_intentional`, `{Means, Subject, Will, subjectWill}`).
+- `FreeSubject → Person`: PROVEN (`free_subject_is_person`, `{Means, Subject, Will, subjectWill, will_individuation}`).
+- `Person → FreeWill`: PROVEN (`person_has_free_will`, `{Means, Subject, Will, subjectWill}`).
+- `Person ↔ ThomisticPersonCore`: PROVEN (C163, `person_iff_thomisticCore`, `{Means, Subject, Will, subjectWill}` — honestamente `rfl`, pois é a definição).
+- Separação exacta: `FreeWill ∧ ¬Person` no modelo de vontade partilhada (`freeWill_without_person`, `{}`); dada liberdade, ser pessoa equivale à individuação da vontade (`freeWill_person_iff_individuation`, `{}`).
+- Preço localizado e **mínimo** (2026-09-26): o endereço normativo genuíno já fornece **dois dos três** conjunctos de `ThomisticPersonCore` a preço zero (`rightwrong_gives_rational_domination`, `{Means, Subject}`, zero axiomas); e, dado esse datum, `Person s ↔ IndependentWill s` (`person_from_rightwrong_iff_individuation`, `{Means, Subject, Will, subjectWill}`) — um `Iff` que *caracteriza* o preço em vez de o pagar. A necessidade é machine-checked: `rational_domination_without_person` (`{}`) mostra em `SharedWillModel` um sujeito com natureza racional *e* domínio sobre os actos que **não** é Pessoa. Logo `will_individuation` é o preço exacto e mínimo de `RightWrong ⇒ Person` — não uma despesa removível por técnica de prova.
 - `Person → NecessarySubject`: REFUTADO por contramodelo modal fiel (`faithful_contingent_person_fails_necessary_subject`, `{}`).
 - `SelfGroundedOught → ⊥`: PROVEN por retorsão (`self_grounded_ought_collapses`, `{Ought, Subject, Wills}`).
 - `ObjectiveOught → Plurality`: PROVEN↑ sob a ponte relacional `AxSecondPersonalAddress` (META) (`second_personal_ought_derives_plurality`).
 
-A pessoalidade é um teorema constitutivo pleno derivado da cadeia retorsiva com zero axiomas substantivos.
+A pessoalidade é um teorema com preço nomeado derivado da cadeia retorsiva com zero axiomas substantivos: o único conteúdo não-definicional é a lei de individuação das vontades (`will_individuation`, VOCAB, declarada e com contramodelo).
 A conjunção `Person ∧ NecessarySubject` (a "pessoa necessária") não é decorrência; exige as pontes modais de fundamentação global e pessoal.

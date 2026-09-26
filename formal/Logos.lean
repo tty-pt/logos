@@ -52,6 +52,8 @@ import Logos.NormativeTruth
 import Logos.DirectNormativeFreeWill
 import Logos.ConstitutiveNormativeFreeWill
 import Logos.A14DerivationAudit
+-- Registry of definitional stipulations (tagged, priced, badged; no new axioms).
+import Logos.Stipulations
 import Logos.IndubitableNormativeFreeWill
 import Logos.UndeniableNormativeDerivation
 import Logos.RetorsiveNormativity

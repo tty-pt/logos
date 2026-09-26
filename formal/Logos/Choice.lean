@@ -164,9 +164,10 @@ def FreeWill (s : Subject) : Prop := ∃ p q : Prop, Chooses s p q
 
 /-- A subject is a free subject iff it possesses free will (definitionally, genuinely chooses).
     Distinguished from intentional subjectivity (`IntentionalSubject s := ∃ p, Means s p`):
-    every free subject is an intentional subject (`freeSubject_implies_intentionalSubject`),
-    but whether every free subject is a substantive person (`Person s := IntentionalSubject s ∧ SubstantivePerson s`)
-    remains an OPEN bridge. -/
+    every free subject is an intentional subject (`freeSubject_implies_intentionalSubject`).
+    Every free subject is a person of the unified Boethius–Aquinas criterion
+    (`Logos.Person.free_subject_is_person`) — as a priced theorem resting on the
+    declared VOCAB law `will_individuation`, never an unfolding step. -/
 def FreeSubject (s : Subject) : Prop := FreeWill s
 
 /-- FreeSubject and FreeWill are definitionally equivalent. -/

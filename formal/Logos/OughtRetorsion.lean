@@ -192,7 +192,7 @@ end HostileImpersonalModel
     Asserting "No personal normative source exists" performatively instantiates the
     speaker's own intentional subjecthood (`IntentionalSubject s`), but does NOT
     performatively instantiate any distinct person `r ≠ s`.
-    Footprint: `{Means, Subject}` (zero substantive axioms). -/
+    Footprint: `{Means, Subject, Will, subjectWill}` (zero substantive axioms). -/
 theorem asserting_no_personal_source_instantiates_only_judging_subject
     {s : Subject}
     (hDenial : Means s (¬ ∃ r : Subject, Person r ∧ r ≠ s)) :
@@ -218,7 +218,7 @@ axiom AxSecondPersonalAddress :
 /-- Theorem: Derivation of Plurality from Objective Ought under AxSecondPersonalAddress.
     Under the second-personal address bridge, an objective practical ought derives a distinct
     person, establishing interpersonal plurality.
-    Footprint: `{AxSecondPersonalAddress, Means, Ought, Subject}`. -/
+    Footprint: `{AxSecondPersonalAddress, Means, Ought, Subject, Will, subjectWill}`. -/
 theorem second_personal_ought_derives_plurality
     {s : Subject} {a : PracticalAction}
     (hOught : ObjectiveOught s a) :
@@ -227,7 +227,7 @@ theorem second_personal_ought_derives_plurality
   exact ⟨r, hp, hne⟩
 
 /-- Theorem: A lone subject cannot possess second-personal practical ought under AxSecondPersonalAddress.
-    Footprint: `{AxSecondPersonalAddress, Means, Ought, Subject}`. -/
+    Footprint: `{AxSecondPersonalAddress, Means, Ought, Subject, Will, subjectWill}`. -/
 theorem lone_subject_excludes_second_personal_ought
     {s : Subject} (ha : Alone s) (a : PracticalAction) :
     ObjectiveOught s a → False := by
@@ -241,7 +241,7 @@ theorem lone_subject_excludes_second_personal_ought
 -- ============================================================================
 
 /-- In the unified ontology, every Free Subject is a Person.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}`. -/
 theorem free_subject_is_person (s : Subject) (h : FreeSubject s) : Person s :=
   Logos.Person.free_subject_is_person s h
 

@@ -5,10 +5,10 @@ export PATH := $(HOME)/.elan/bin:$(PATH)
 
 PYTHON ?= python3
 
-.PHONY: all build depviz audit sync taxonomy deduction test check clean zip help
+.PHONY: all build depviz audit stip sync taxonomy deduction test check clean zip help
 
 # Default target runs the complete formal build, audit, deduction generation, and test verification.
-all: build depviz audit deduction test
+all: build depviz audit stip deduction test
 	@echo "=== Γ / Logos: Full build and verification pipeline complete (0 errors) ==="
 
 # Build the formal Lean 4 library in formal/
@@ -43,8 +43,15 @@ sync:
 	@echo "=== Verifying docstring footprint markers vs formal/axiom_audit.json ==="
 	$(PYTHON) scripts/sync_docstring_footprints.py
 
+# Verify the definitional-stipulation registry (Stipulations.lean) against the
+# sources and the kernel graph, emitting formal/stipulation_audit.json (needs
+# depgraph.json, hence runs after depviz).
+stip: depviz
+	@echo "=== Verifying definitional stipulation registry ==="
+	$(PYTHON) scripts/audit_stipulations.py
+
 # Generate README.md and investigations/kernel-audit.md
-deduction: audit depviz
+deduction: audit depviz stip
 	@echo "=== Compiling README.md and investigations/kernel-audit.md ==="
 	$(PYTHON) scripts/build_deduction.py
 
@@ -77,7 +84,8 @@ help:
 	@echo "  all        Run full pipeline: build, depviz, audit, deduction, test (default)"
 	@echo "  build      Build Lean 4 library in formal/ via lake build"
 	@echo "  depviz     Generate formal/depgraph.json and formal/depgraph.dot"
-	@echo "  audit      Audit transitive kernel footprints via scripts/audit_footprints.py + verify docstring footprint markers (scripts/sync_docstring_footprints.py) + GAPMAP taxonomy tally (scripts/gapmap_taxonomy.py --check)"
+	@echo "  audit      Audit transitive kernel footprints + docstring markers + GAPMAP taxonomy"
+	@echo "  stip       Verify stipulation registry (audit_stipulations.py → stipulation_audit.json)"
 	@echo "  taxonomy   Verify GAPMAP taxonomy tallies vs the kernel (scripts/gapmap_taxonomy.py --check)"
 	@echo "  sync       Verify docstring footprint markers vs formal/axiom_audit.json only"
 	@echo "  deduction  Compile README.md and investigations/kernel-audit.md"

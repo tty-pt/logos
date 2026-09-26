@@ -36,7 +36,7 @@ $$\text{The ontological ground of Right/Wrong is personal in kind/type (witnesse
 
 There are no arbitrary grounding axioms, no Principle of Sufficient Reason being smuggled in, and no reliance on `Act`:
 1. Every implication has a true antecedent once the previous step has been established;
-2. $P$ is Person (`Person s := FreeSubject s := FreeWill s`);
+2. $P$ is Person (`Person s := ThomisticPersonCore s`, reached from free will by the priced theorem);
 3. $G$ is the proposition that this Person instantiates the personal ontological ground of Right/Wrong (`GroundsRightWrong s`).
 
 Because $G$ is an object-level derived theorem, deriving $G$ from $P$ by modus ponens means the proof continues forward to its conclusion without circularity, reversal, or physical action dependencies.
@@ -101,17 +101,20 @@ theorem person_grounds_original_normative_datum (s : Subject) (p q : Prop)
     Person s ∧ GroundsRightWrong s :=
   forward_modus_ponens_derivation s p q h₀
 
--- Substantive Grounding Derivation from Personhood
-theorem person_grounds_right_wrong (s : Subject) (hPerson : Person s) :
-    GroundsRightWrong s := by
-  refine ⟨hPerson, ?_, ?_⟩
-  · intro s' hRW
-    exact discovery_rightwrong_to_person s' hRW
-  · exact Logos.Person.person_has_free_will s hPerson
+-- Grounding Derivation from Free Will (E2; emenda 2026-09-25: the record no
+-- longer carries `person`/`dependence` fields — personalness is a priced theorem)
+theorem freeWill_grounds_right_wrong (s : Subject) (h : FreeWill s) :
+    GroundsRightWrong s :=
+  ⟨h⟩
+
+-- Personalness of the ground (E2): as a priced theorem, not a record field
+theorem grounding_right_wrong_entails_person (s : Subject) :
+    GroundsRightWrong s → Person s :=
+  fun h => Logos.Person.freeWill_implies_person s h.agential_foundation
 ```
 
-* **Status:** PROVEN under `{Means, Subject}` (0 substantive axioms, zero `Act`).
-* The derived Person $s$ instantiates the personal ontological ground of Right/Wrong via substantive agential choice and universal ontological dependence.
+* **Status:** PROVEN — agential core under `{Means, Subject}` (0 substantive axioms, zero `Act`); the personalness theorem carries the priced VOCAB law `will_individuation`.
+* The derived free will $s$ satisfies the agential ground specification via substantive agential choice; personalness of the ground is the priced theorem, never a field.
 * **Core Conclusion:** The argument does not identify a particular contingent individual as the creator of Right and Wrong; it establishes that the ontological ground required by objective Right/Wrong is personal in kind.
 
 ---
@@ -203,15 +206,8 @@ predicate is *determined* by the preceding facts in three independently sufficie
    There is no hidden field and no opaque semantic atom (`Ground`, `Bridge`, …). The
    predicate is notation for facts already in the theory — it is *eliminable*.
 
-2. **Every field is a preceding theorem.** `forced_content_of_person : Person s →
-   ForcedGroundContent s` constructs the three conjuncts from facts established *before*
-   the grounding step exists:
-   - the universal dependence literal field is the global closure of the §4 discovery
-     theorem `discovery_rightwrong_to_person` (proved *prior* to any grounding step);
-   - the agential substrate `∃ p q, Chooses s p q` unpacks the very *definition* of
-     Personhood (`Person s := FreeSubject s := FreeWill s := ∃ p q, Chooses s p q`);
-   - `Person s` is the derived conclusion of the chain, not a grounding premise.
-   Hence `Person s → GroundsRightWrong s` is a *reading-off* of prior content, not an
+2. **Every Person satisfies the forced content, and ground-personalness is a priced theorem.** `forced_content_of_person : Person s → ForcedGroundContent s` projects the dominion conjunct (`Person s → FreeWill s := ∃ p q, Chooses s p q`); the converse is `grounding_right_wrong_entails_person` (via `will_individuation`) — never a record field.
+   Hence `Person s → GroundsRightWrong s` routes through free will, not an
    arbitrary assembly.
 
 3. **Forced by the datum, not by the Person.** The ground follows from the *datum* A₀

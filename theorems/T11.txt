@@ -35,7 +35,7 @@ ModelM2BranchingInitiation, ModelM3ContrastiveAgency, ContrastiveSeparation),
 GAPMAP.md C39–C72/F1a/F1b.
 Impressão de axiomas:
 T11_choiceField — `{Means, Subject}` (herda de T5; C39 desacoplado de AxTwoSubjects);
-person_hasChoiceField — `{Means, Subject}` (PROVEN, campo de escolha, NÃO escolha genuína;
+person_hasChoiceField — `{Means, Subject, Will, subjectWill}` (PROVEN, campo de escolha, NÃO escolha genuína;
   renomeado de person_chooses, 2026-09-18);
 Selects, asserts_selects, asserts_selects_all_incompatible, selection_exists,
 no_selection_no_assertion — `{Means, Subject}` (PROVEN, seleção semântica demonstrada, 2026-09-18);
@@ -47,7 +47,7 @@ rightWrong_implies_meaning / rightDistinctWrong_implies_meaning — `{Means, Sub
 meaning_I_needs_subject — `{Means, Subject}` (PROVEN, C49);
 choiceField_exists — `{Means, Subject}` (PROVEN, C52, derivado de C68);
 noChoiceField_selfRefutes — `{Means, Subject}` (PROVEN, C53, retorsão performativa do campo);
-JUDGE_HAS_CHOICE_FIELD — `{AxTwoSubjects, Means, Subject}` (PROVEN↑, C54, via AxTwoSubjects h);
+JUDGE_HAS_CHOICE_FIELD — `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (PROVEN↑, C54, via AxTwoSubjects h);
 retorsion_derives_free_will — `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` (PROVEN↑, rota normativa retorsiva: a negação de normatividade genuína refuta-se performativamente como asserção correta sob AxJudicativeBipolarity, derivando FreeWill sem A14);
   retorsion_conclusion_is_the_very_genuine_normativity_structure / retorsion_address_uses_only_means /
   retorsion_opposition_is_pure_logic — `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` (PROVEN↑, testemunhas de
@@ -354,7 +354,7 @@ A escolha genuína exige portanto co-significação estrita: Means(s,p) ∧ Mean
 
 FREEDOM — F1 (reparado 2026-09-18; semântica hostil e alternatividade):
 CLASSIFICAÇÃO ONTOLÓGICA DAS PASSAGENS:
-- Person → ChoiceField: DEFINICIONAL/analítica (person_hasChoiceField, {Means, Subject}).
+- Person → ChoiceField: projecção do conjunto do domínio (person_hasChoiceField, {Means, Subject, Will, subjectWill}).
 - ChoiceField ↛ Chooses: A presença de alternativas não força co-significação de ambos os cornos.
 - Selects ↛ Means(¬p): provado em CountermodelVeridicalMeaning.Single (selects_does_not_imply_rejected_horn_meaning).
   A seleção semântica exclui objetivamente a negação, mas não obriga a mente a concebê-la.
@@ -383,7 +383,7 @@ A ontologia explicita a direção de fundamentação ontológica:
   A ordem normativa exige um fundamento ontológico de tipo pessoal:
   `Person s ↔ FreeIndependentWill s` (`person_iff_freeIndependentWill`, `{subjectWill, will_individuation, Means, Subject}`).
 Essa agência pessoal livre fornece a especificação do fundamento ontológico que torna a polaridade normativa inteligível e realizada:
-  `Person s → GroundsRightWrong s` (`person_grounds_right_wrong`, 0 axiomas substantivos, derivado puramente da Pessoa sem Act).
+  `Person s → GroundsRightWrong s` (`person_grounds_normative_polarity`, 0 axiomas substantivos, derivado da Pessoa via o seu livre-arbítrio sem Act; o núcleo agencial é `freeWill_grounds_right_wrong`, e a pessoalidade do fundamento é o teorema com preço `grounding_right_wrong_entails_person`).
 O argumento não identifica um indivíduo contingente particular como criador do Certo e do Errado; estabelece que o fundamento ontológico exigido pelo Certo/Errado objetivo é de tipo pessoal, sendo o sujeito derivado s a testemunha formal que instancia essa especificação.
 
 As duas direções não são circulares:

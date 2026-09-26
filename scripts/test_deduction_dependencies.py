@@ -534,7 +534,7 @@ def test_ought_retorsion_and_personhood_frontiers(decls: dict, node_map: dict) -
     )
     print("  ✓ Test 5 passed: second_personal_ought_derives_plurality correctly loads AxSecondPersonalAddress.")
 
-    # 6. Unified Ontology: Person := FreeSubject derived with 0 substantive axioms
+    # 6. Unified Ontology: Person := ThomisticPersonCore, reached from FreeSubject by priced theorem, 0 substantive axioms
     fp_full = "Logos.Person.free_subject_is_person"
     assert fp_full in decls, f"Declaration '{fp_full}' missing from Lean AST"
     fp_subst = [ax for ax in audit.get(fp_full, []) if (registry.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META")]
@@ -565,7 +565,7 @@ def test_ought_retorsion_and_personhood_frontiers(decls: dict, node_map: dict) -
 
     # 7. Flowchart in README.md reflects the unified ontology without fake frontiers
     glance_text = text.partition("## The Argument at a Glance")[2].partition("## 1.")[0]
-    assert "PERSON" in glance_text and ("Person(s) := FreeSubject(s)" in glance_text or "Person s : Prop := FreeSubject s" in glance_text), (
+    assert "PERSON" in glance_text and ("Person(s) := ThomisticPersonCore(s)" in glance_text or "Person s : Prop := ThomisticPersonCore s" in glance_text), (
         "Glance must expose authoritative PERSON"
     )
     assert "Anti-Self-Legislation" in text and "NORMATIVE COLLAPSE" in text
@@ -616,26 +616,33 @@ def test_grounding_predicate_is_forced(decls: dict, node_map: dict) -> None:
     audit = load_audit()
     registry = bd.load_axiom_registry(decls, node_map)
 
-    forced = {
-        "Logos.PersonalNormativeGround.groundsRightWrong_iff_forced_content",
-        "Logos.PersonalNormativeGround.forced_content_of_person",
-        "Logos.PersonalNormativeGround.grounding_forced_by_preceding_facts",
-        "Logos.PersonalNormativeGround.grounding_forced_at_datum",
+    # Exact kernel footprints (emenda 2026-09-25: the single-field record and the
+    # datum routes stay {Means, Subject}; routes through Person honestly carry
+    # the will vocabulary, and the discovery route the priced law).
+    forced_exact = {
+        "Logos.PersonalNormativeGround.groundsRightWrong_iff_forced_content":
+            {"Means", "Subject"},
+        "Logos.PersonalNormativeGround.forced_content_of_person":
+            {"Means", "Subject", "Will", "subjectWill"},
+        "Logos.PersonalNormativeGround.grounding_forced_by_preceding_facts":
+            {"Means", "Subject", "Will", "subjectWill", "will_individuation"},
+        "Logos.PersonalNormativeGround.grounding_forced_at_datum":
+            {"Means", "Subject"},
     }
-    for full in forced:
+    for full, expected in forced_exact.items():
         assert full in decls, f"Declaration '{full}' missing from Lean AST"
         fp = audit.get(full, [])
         subst = [ax for ax in fp if (registry.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META")]
         assert len(subst) == 0, f"'{full}' must have 0 substantive axioms, found: {subst}"
-        assert set(ax.rsplit(".", 1)[-1] for ax in fp) <= {"Means", "Subject"}, (
-            f"'{full}' footprint must be {{Means, Subject}} exactly, got: {set(ax.rsplit('.', 1)[-1] for ax in fp)}"
+        assert set(ax.rsplit(".", 1)[-1] for ax in fp) == expected, (
+            f"'{full}' footprint must be {expected} exactly, got: {set(ax.rsplit('.', 1)[-1] for ax in fp)}"
         )
     grw_code = Path("formal/Logos/PersonalNormativeGround.lean").read_text(encoding="utf-8")
     assert "def ForcedGroundContent" in grw_code, "ForcedGroundContent def missing from PersonalNormativeGround.lean"
     assert "groundsRightWrong_iff_forced_content" in grw_code, "Transparency theorem missing from source"
     for ax in ("AxPersonalNormativeGround", "GroundProp", "AxPersonalGround"):
         assert ax not in registry, f"Forbidden grounding axiom '{ax}' still present in registry!"
-    print("  ✓ Test passed: GroundsRightWrong is transparent, prior-forced, and axiom-free ({Means, Subject}).")
+    print("  ✓ Test passed: GroundsRightWrong is transparent, prior-forced, 0 substantive axioms (agential core {Means, Subject}; Person routes priced).")
 
 
 def test_ontological_grounding_invariants(decls: dict, node_map: dict) -> None:
@@ -710,14 +717,16 @@ def test_ontological_proof_structure(decls: dict, node_map: dict) -> None:
     assert hl_full in decls, f"Declaration '{hl_full}' missing from Lean AST"
     hl_footprint = audit.get(hl_full, [])
     
-    # 1. The headline is unconditional: exactly the vocabulary-only agency tunnel.
+    # 1. The headline is unconditional: the vocabulary-only agency tunnel plus the
+    #    honestly-priced will vocabulary (emenda 2026-09-25: Person routes carry
+    #    Will/subjectWill, and the discovery step the VOCAB law will_individuation).
     hl_subst = [ax for ax in hl_footprint if (registry.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META")]
     assert len(hl_subst) == 0, f"Headline must have 0 substantive axioms, found: {hl_subst}"
     hl_vocab = sorted(set(ax.rsplit(".", 1)[-1] for ax in hl_footprint))
-    assert set(hl_vocab) == {"Initiates", "Means", "State", "Subject", "choice", "propext", "sound"}, (
+    assert set(hl_vocab) == {"Initiates", "Means", "State", "Subject", "Will", "subjectWill", "will_individuation", "choice", "propext", "sound"}, (
         f"Headline footprint mismatch: {hl_vocab}"
     )
-    print(f"  ✓ Test 1 passed: Headline footprint exactly {{Initiates, Means, State, Subject, CL}} ({len(hl_subst)} substantive axioms).")
+    print(f"  ✓ Test 1 passed: Headline footprint exactly {{Initiates, Means, State, Subject, Will, subjectWill, will_individuation, CL}} ({len(hl_subst)} substantive axioms).")
     
     # 2. The headline is closed (no free premise): the textual signature must not
     #    expose a hypothesis on a Subject/Act the reader would have to supply.

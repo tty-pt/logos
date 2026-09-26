@@ -2,24 +2,24 @@ T8 — FUNDAMENTAÇÃO ONTOLÓGICA CONSTRUTIVA: A NORMATIVIDADE TEM UM FUNDAMENT
 
 Depende de: T7 (Descoberta Construtiva), Estrutura Formal Dependente
 
-Verificado em: formal/Logos/PersonalNormativeGround.lean (Constructive.GroundedRightWrong, person_grounds_right_wrong, groundsRightWrong_iff_forced_content, forced_content_of_person, grounding_forced_by_preceding_facts, grounding_forced_at_datum), formal/Logos/PersonalGroundOfReality.lean (the_person_supports_the_reality_of_right, person_yields_personal_grounding_of_reality), 0 axiomas substantivos.
+Verificado em: formal/Logos/PersonalNormativeGround.lean (Constructive.GroundedRightWrong, freeWill_grounds_right_wrong, grounding_right_wrong_entails_person, groundsRightWrongAt_entails_person, groundsRightWrong_iff_forced_content, forced_content_of_person, grounding_forced_by_preceding_facts, grounding_forced_at_datum; compatibilidade histórica: person_grounds_normative_polarity), formal/Logos/PersonalGroundOfReality.lean (the_person_supports_the_reality_of_right, person_yields_personal_grounding_of_reality), 0 axiomas substantivos.
 
 Enunciado:
 
-A fundamentação ontológica do Certo e do Errado num substrato de tipo pessoal está codificada na própria estrutura formal do tipo dependente e demonstrada formalmente como teorema derivado, sem recurso a nenhum axioma substantivo de fundamentação e sem qualquer uso de Act:
+A fundamentação ontológica do Certo e do Errado num substrato agencial está codificada na própria estrutura formal e demonstrada como teorema derivado, sem recurso a nenhum axioma substantivo de fundamentação e sem qualquer uso de Act; a pessoalidade do fundamento é ela própria um teorema com preço nomeado, nunca um campo:
 
 GroundedRightWrong : Type := Σ' p : Person, RightWrong p.
-person_grounds_right_wrong : Person s → GroundsRightWrong s.
+freeWill_grounds_right_wrong : FreeWill s → GroundsRightWrong s.
+grounding_right_wrong_entails_person : GroundsRightWrong s → Person s.
 
 Clarificação Central sobre a Natureza do Fundamento:
 **O argumento não identifica um indivíduo contingente particular como criador do Certo e do Errado; estabelece que o fundamento ontológico exigido pelo Certo/Errado objetivo é de tipo pessoal.**
 
 Fundamentar o Certo/Errado é fundamentar a estrutura objectiva de correcção/normatividade dos juízos sobre a realidade; não é causar a existência de cada coisa nem tornar moralmente correcto aquilo que existe (teste: se o mal existe, "o mal existe" é correcto afirmar, sem que o mal seja bom).
 
-O parâmetro `s : Subject` em `GroundsRightWrong s` é a testemunha formal que instancia a especificação ontológica de fundamentação:
-1. `person`: `s` possui constitutivamente as faculdades de Pessoa (livre-arbítrio e escolha);
-2. `dependence`: Dependência universal (`∀ s' : Subject, RightWrong s' → Person s'`), assegurando que onde quer que a ordem normativa vigore, o seu fundamento agencial relevante é de natureza pessoal;
-3. `agential_foundation`: `s` fornece constitutivamente a faculdade de escolha deliberada entre alternativas incompatíveis (`∃ p q, Chooses s p q`).
+O parâmetro `s : Subject` em `GroundsRightWrong s` é a testemunha formal que instancia a especificação ontológica de fundamentação. O registo tem um único campo (sem `person`, sem `dependence` — a pessoalidade entra só por teorema):
+1. `agential_foundation`: `s` fornece constitutivamente a faculdade de escolha deliberada entre alternativas incompatíveis (`∃ p q, Chooses s p q`).
+A pessoalidade do fundamento é o teorema com preço `grounding_right_wrong_entails_person` (via a lei VOCAB `will_individuation`), e a forma indexada tem o seu gémeo `groundsRightWrongAt_entails_person`.
 
 Distinções Fundamentais:
 1. **Descoberta vs. Fundamentação do Tipo Pessoal:**
@@ -36,8 +36,8 @@ Distinções Fundamentais:
 
 Demonstração:
 
-1. Ontologicamente, a ordem normativa é fundamentada numa base ontológica pessoal.
-2. Esta prioridade ontológica é representada pelo facto de a oposição normativa depender substantivamente da agência pessoal (`GroundsRightWrong s`), que fornece o substrato de escolha (`Chooses s p q`) e a dependência universal de que nenhum certo/errado vigora sem Pessoa.
+1. Ontologicamente, a ordem normativa é fundamentada numa base agencial (o substrato de escolha entre incompatíveis).
+2. Esta prioridade ontológica é representada pelo facto de a oposição normativa depender substantivamente da agência (`GroundsRightWrong s`), que fornece o substrato de escolha (`Chooses s p q`); a pessoalidade dessa base é o teorema com preço `grounding_right_wrong_entails_person`, não um campo.
 3. A realidade fundamentada é formalizada como o par dependente (tipo Sigma):
 
 def GroundedRightWrong : Type :=
@@ -49,7 +49,7 @@ def groundOfRightWrong (x : GroundedRightWrong) : Person :=
   x.1
 
 Direção Ontológica:
-Pessoa ⇒ Certo/Errado (`Person s → GroundsRightWrong s`, teorema derivado substantivo: a Pessoa satisfaz a especificação do fundamento pessoal).
+Livre-arbítrio ⇒ Certo/Errado (`FreeWill s → GroundsRightWrong s`, teorema definicional: o livre-arbítrio satisfaz a especificação do fundamento); Pessoa ⟺ fundamento (`grounding_right_wrong_entails_person`, teorema com preço).
 
 Cadeia Construtiva de Implicações (A Demonstração Corre para a Frente, Zero Act):
 A estrutura completa da derivação é uma cadeia estrita de implicações com antecedentes verdadeiros:
@@ -78,28 +78,35 @@ Objeção possível: "`GroundsRightWrong` é apenas um predicado formalmente esp
 Resposta formal (Section 5c de PersonalNormativeGround.lean, GAPMAP C168–C171):
 
 1. Transparência (o predicado não carrega conteúdo novo):
-   O registo é definicionalmente equivalente à conjunção escrita inteiramente no vocabulário ANTERIOR ao passo de fundamentação (sem o símbolo `GroundsRightWrong`):
-     ForcedGroundContent s := Person s ∧ (∀ s', RightWrong s' → Person s') ∧ (∃ p q, Chooses s p q)
+   O registo de campo único é definicionalmente equivalente ao facto agencial escrito inteiramente no vocabulário ANTERIOR ao passo de fundamentação (sem o símbolo `GroundsRightWrong`):
+     ForcedGroundContent s := ∃ p q, Chooses s p q
      groundsRightWrong_iff_forced_content : GroundsRightWrong s ↔ ForcedGroundContent s
    Não há campo oculto nem átomo semântico opaco; o predicado é abreviação notacional, não uma nova relação externa não-interpretada.
 
-2. Cada campo é um teorema PRECEDENTE, não uma decisão no instante P⇒G:
+2. Toda a Pessoa satisfaz o conteúdo forçado, e a pessoalidade do fundamento é um teorema PRECEDENTE com preço, não uma decisão no instante P⇒G:
      forced_content_of_person : Person s → ForcedGroundContent s
-   - a dependência universal `∀ s', RightWrong s' → Person s'` é literalmente o fecho do teorema de descoberta `discovery_rightwrong_to_person`, provado na §4 do módulo ANTES de qualquer passo de fundamentação;
-   - o substrato agencial `∃ p q, Chooses s p q` desdobra a própria definição de Pessoa (`Person := FreeSubject := FreeWill := ∃ p q, Chooses`);
-   - `Person s` é a conclusão derivada da cadeia a partir do dado, não uma premissa da fundamentação.
+     grounding_right_wrong_entails_person : GroundsRightWrong s → Person s
+   - o substrato agencial `∃ p q, Chooses s p q` é a projecção do conjunto do domínio (`Person s → FreeWill s := ∃ p q, Chooses s p q`);
+   - a implicação inversa custa exactamente a lei VOCAB `will_individuation` (declarada, com modelo hostil que a refuta: `SharedWillModel`, `{}`) — ver o teorema de precisão `freeWill_person_iff_individuation`.
+
+2b. O conteúdo de dependência que o registo deixou de carregar como campo foi RESTAURADO como teorema (2026-09-26), e o preço da pessoalidade foi LOCALIZADO e provado mínimo:
+     grounding_carries_dependence_free : GroundsRightWrong s → ∀ s', RightWrong s' → RationalNature s' ∧ DominionOverActs s'
+     grounding_carries_dependence      : GroundsRightWrong s → ∀ s', RightWrong s' → Person s'
+   - a metade livre (`{Means, Subject}`, zero axiomas) devolve a `GroundsRightWrong` um conteúdo implicado não-vacuoso: o campo `dependence : ∀ s', RightWrong s' → Person s'`, removido em 2026-09-25 por ser um campo `Person`, é agora *derivado*;
+   - o preço ficou exacto, não aproximado: `RightWrong s` já fornece **dois dos três** conjunctos de `ThomisticPersonCore` a preço zero (`rightwrong_gives_rational_domination`, `{Means, Subject}`), e dado o datum normativo, ser Pessoa **equivale** a vontade ser individualmente numerada (`person_from_rightwrong_iff_individuation`, `{Means, Subject, Will, subjectWill}` — um `Iff`, que *caracteriza* o preço em vez de o pagar);
+   - e o preço é **necessário**, não apenas pago: `rational_domination_without_person` (`{}`) prova em `SharedWillModel` que um sujeito pode ter natureza racional *e* domínio sobre os seus actos e ainda assim não ser Pessoa. `will_individuation` é o preço exacto e mínimo de `RightWrong ⇒ Person`; nenhuma técnica de prova o remove sem repor a deflação de `Person`.
 
 3. O predicado é forçado pelo DADO, não pela Pessoa já obtida:
      grounding_forced_by_preceding_facts : RightWrongAt s p q → GroundsRightWrong s
-   A fundamentação segue de A₀ sozinha, antes de P ser atingida; e o alinhamento indexado fixa as testemunhas no próprio par do dado:
+   A fundamentação segue de A₀ sozinha, antes de P ser atingida e sem qualquer hipótese `Person`; e o alinhamento indexado fixa as testemunhas no próprio par do dado:
      grounding_forced_at_datum : RightWrongAt s p q → GroundsRightWrongAt s p q
-   (person via `forward_discovery_person`, normatividade = o dado, substrato = o mesmo ⟨p, q⟩).
+   (normatividade = o dado, substrato = o mesmo ⟨p, q⟩ — sem testemunha pessoal fabricada).
 
-4. Custo zero: pegada `{Means, Subject}`, zero axiomas substantivos, zero Act. A leitura de relação externa (`GroundProp`/`AxPersonalNormativeGround`) foi retirada; o registo é transparente — nada é estipulado no instante P⇒G.
+4. Custo zero no núcleo agencial: pegada `{Means, Subject}`, zero axiomas substantivos, zero Act. As rotas que passam pela Pessoa carregam honestamente `Will, subjectWill, will_individuation`. A leitura de relação externa (`GroundProp`/`AxPersonalNormativeGround`) foi retirada; o registo é transparente — nada é estipulado no instante P⇒G.
 
 Síntese:
-- Direção de Descoberta: Normatividade Objetiva ⇒ Pessoa (discover_person, discovery_rightwrong_to_person, forward_modus_ponens_derivation, 0 axiomas)
-- Direção Ontológica: Pessoa ⟶ satisfaz especificação de fundamento pessoal ⟶ Certo/Errado (person_grounds_right_wrong, person_yields_personal_grounding_of_reality, projeção Σ)
+- Direção de Descoberta: Normatividade Objetiva ⇒ Pessoa (`discover_person`, `discovery_rightwrong_to_person`, `forward_modus_ponens_derivation`, `genuineNormativity_implies_person`, 0 axiomas substantivos; preço VOCAB `will_individuation` no passo final)
+- Direção Ontológica: Livre-arbítrio ⟶ satisfaz especificação de fundamento ⟶ Certo/Errado (`freeWill_grounds_right_wrong`, `person_yields_personal_grounding_of_reality`, projeção Σ); pessoalidade do fundamento por teorema com preço (`grounding_right_wrong_entails_person`)
 
-Zero axiomas de fundamentação. Toda a dependência é analítica e constitutiva da própria Pessoa.
+Zero axiomas de fundamentação. A única dependência não-definicional de toda a cadeia é a lei de individuação das vontades, declarada e com preço.
 

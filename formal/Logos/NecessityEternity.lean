@@ -276,7 +276,7 @@ theorem everlasting_but_contingent : ∃ e : Entity, Everlasting e ∧ ¬ Necess
     conjunct rests on the declared META plurality axiom `AxTwoSubjects` (through
     `T5_personExists_from_plurality`); it is the kind-witness for Claim E, never
     an identification of the necessary ground with a subject.
-    Footprint: `{AxTwoSubjects, Means, Subject}`. -/
+    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
 theorem the_personal_type_grounding : ∃ s : Subject, Person s ∧ GroundsRightWrong s := by
   obtain ⟨s, hP⟩ := T5_personExists_from_plurality
   exact ⟨s, hP, person_grounds_normative_order s hP⟩

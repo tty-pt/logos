@@ -3,7 +3,7 @@ T13 — HÁ QUEM SE POSSA AMAR
 Depende de: T12 (sob a ponte META AxTwoSubjects)
 
 Verificado em: formal/Logos/Love.lean (T13_someoneLovable), GAPMAP.md C41.
-Pegada: `{AxTwoSubjects, Means, Subject}` (herda de T12; sorryAx: 0).
+Pegada: `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (herda de T12; sorryAx: 0).
 
 Enunciado:
 
@@ -20,4 +20,4 @@ A realidade necessária não é impessoal (T8) e há quem se possa amar (T13).
 Juntos: "não é impessoal, e não é sózinho".
 
 NOTA: esse amor é atual e eterno na estrutura interpessoal — a T14 herda a
-pegada `{AxTwoSubjects, Means, Subject}` — ver theorems/T14.txt.
+pegada `{AxTwoSubjects, Means, Subject, Will, subjectWill}` — ver theorems/T14.txt.

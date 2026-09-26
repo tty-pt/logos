@@ -137,7 +137,7 @@ theorem bridge_a_constitutive_normativity_derives_free_will
   exact ⟨s, (indubitable_normative_free_will hNorm).2⟩
 
 /-- Bridge B: Metaphysical Plurality Bridge (AxTwoSubjects) derives ChoiceField.
-    Footprint: `{AxTwoSubjects, Means, Subject}`. -/
+    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
 theorem bridge_b_plurality_yields_choice_field
     (hExt : ExtensionalRightWrong) :
     ∃ (s : Subject) (p q : Prop), ChoiceField s p q :=

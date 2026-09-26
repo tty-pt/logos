@@ -41,7 +41,7 @@ def NecessarySubject (s : Subject) : Prop := ∀ w : World, ExistsAt w (EntityOf
 
   T12 — there is more than one person (poem P5/P7; PROVEN↑ under `AxTwoSubjects`):
     the reality of right-and-wrong demands plurality. A single act does not entail
-    plurality (settled by the Unit countermodel in HostileSemantics). Footprint: `{AxTwoSubjects, Means, Subject}`. -/
+    plurality (settled by the Unit countermodel in HostileSemantics). Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
 theorem T12_twoPersons :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ :=
   AxTwoSubjects Logos.Core.rightWrongDistinction
@@ -132,7 +132,7 @@ theorem T12_directedPair_conditional
 
 /-- Right-and-wrong commits a choice field: where there is truth and error,
     someone is before an incompatible pair.
-    Footprint: `{AxTwoSubjects, Means, Subject}`. -/
+    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
 theorem JUDGE_HAS_CHOICE_FIELD (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
     ∃ s : Subject, ∃ p q : Prop, Logos.Choice.ChoiceField s p q := by
   obtain ⟨s₁, _, hp₁, _, _⟩ := Logos.Value.AxTwoSubjects h
@@ -140,7 +140,7 @@ theorem JUDGE_HAS_CHOICE_FIELD (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
   exact ⟨s₁, p, q, hch⟩
 
 /-- Right-and-wrong implies someone who means.
-    Footprint: `{AxTwoSubjects, Means, Subject}`. -/
+    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
 theorem rightWrong_implies_someone_means (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
     ∃ s : Subject, ∃ p : Prop, Logos.Agency.Means s p := by
   obtain ⟨s, p, _, hch⟩ := JUDGE_HAS_CHOICE_FIELD h

@@ -113,13 +113,13 @@ theorem free_subject_is_constitutive_person (s : Subject) (h : FreeSubject s) :
   ⟨free_subject_is_intentional s h, h⟩
 
 /-- Master Theorem: Every Free Subject is an authoritative Person in the unified Γ ontology.
-    Footprint: `{Means, Subject}` (0 substantive axioms). -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}` (0 substantive axioms). -/
 theorem free_subject_is_person (s : Subject) (h : FreeSubject s) :
     Person s :=
   Logos.Person.free_subject_is_person s h
 
 /-- Master Theorem: Existence of a Free Subject implies existence of a Person.
-    Footprint: `{Means, Subject}` (0 substantive axioms). -/
+    Footprint: `{Means, Subject, Will, subjectWill, will_individuation}` (0 substantive axioms). -/
 theorem free_subject_implies_person_exists (h : ∃ s : Subject, FreeSubject s) :
     ∃ s : Subject, Person s := by
   obtain ⟨s, hf⟩ := h
@@ -226,13 +226,146 @@ theorem faithful_contingent_person_fails_necessary_subject :
   have hFalse := h () trivial false
   cases hFalse
 
+
+-- ============================================================================
+-- 6b. Shared-will separation: FreeWill WITHOUT Personhood (AC9′)
+-- ============================================================================
+
+/-- Personhood-relevant axiom signature: exactly the four VOCAB items
+    personhood closes over — `Subject`, `Means`, `Will`, `subjectWill` — and
+    nothing else.
+    Honest labelling (mandatory): a model of THIS signature is a model of the
+    personhood-relevant axiom signature, NEVER "a model of Γ". It withholds the
+    law `will_individuation` (and every axiom outside the four VOCAB items);
+    that withholding is what makes the countermodel admissible. -/
+structure PersonhoodVocab where
+  Subj : Type
+  MeansRel : Subj → Prop → Prop
+  WillSort : Type
+  WillOf : Subj → WillSort
+
+-- Γ's personhood vocabulary, replayed over a `PersonhoodVocab` model.
+-- Each body is Γ's own body with the four axioms replaced by model fields —
+-- no field is transcribed, nothing is stipulated.
+namespace Vocab
+
+variable (M : PersonhoodVocab)
+
+/-- Γ's `Chooses` body (`Means s p ∧ Means s q ∧ Incompatible p q`,
+    `Incompatible p q := ¬ (p ∧ q)`) over the model vocabulary. -/
+def Chooses (s : M.Subj) (p q : Prop) : Prop :=
+  M.MeansRel s p ∧ M.MeansRel s q ∧ ¬ (p ∧ q)
+
+/-- Γ's `FreeWill` body over the model vocabulary. -/
+def FreeWill (s : M.Subj) : Prop :=
+  ∃ p q : Prop, Chooses M s p q
+
+/-- Γ's `IndependentWill` body over the model vocabulary. -/
+def IndependentWill (s : M.Subj) : Prop :=
+  ∀ s' : M.Subj, s' ≠ s → M.WillOf s' ≠ M.WillOf s
+
+/-- Γ's `IntentionalSubject` body over the model vocabulary. -/
+def IntentionalSubject (s : M.Subj) : Prop :=
+  ∃ p : Prop, M.MeansRel s p
+
+/-- Γ's `DiscursiveCapacity` body over the model vocabulary. -/
+def DiscursiveCapacity (s : M.Subj) : Prop :=
+  ∃ p q : Prop, M.MeansRel s p ∧ M.MeansRel s q ∧ (p ≠ q ∨ ¬ (p ∧ q))
+
+/-- Γ's `RationalNature` body over the model vocabulary. -/
+def RationalNature (s : M.Subj) : Prop :=
+  IntentionalSubject M s ∧ DiscursiveCapacity M s
+
+/-- Γ's `DominionOverActs` body over the model vocabulary (the disclosed
+    coincidence: dominion IS free will). -/
+def DominionOverActs (s : M.Subj) : Prop :=
+  FreeWill M s
+
+/-- Γ's `IndividualSubstance` body over the model vocabulary. -/
+def IndividualSubstance (s : M.Subj) : Prop :=
+  IndependentWill M s
+
+/-- Γ's `ThomisticPersonCore` body over the model vocabulary. -/
+def ThomisticPersonCore (s : M.Subj) : Prop :=
+  IndividualSubstance M s ∧ RationalNature M s ∧ DominionOverActs M s
+
+/-- Γ's `Person` body (the Boethius–Aquinas criterion) over the model vocabulary. -/
+def Person (s : M.Subj) : Prop :=
+  ThomisticPersonCore M s
+
+end Vocab
+
+/-- The shared-will model: two subjects (`Bool`), one shared will faculty
+    (`Unit`), and a genuine incompatible pair (`True`, `False`) both co-meant.
+    `P := True` and `Q := False` are both provable yet jointly unprovable, so
+    `FreeWill` genuinely holds while the shared will defeats
+    `IndividualSubstance`. A `def`, not an axiom: the counterexample works by
+    WITHHOLDING `will_individuation`.
+    Footprint: `{}`. -/
+def SharedWillModel : PersonhoodVocab where
+  Subj := Bool
+  MeansRel := fun _ p => p = True ∨ p = False
+  WillSort := Unit
+  WillOf := fun _ => ()
+
+/-- Separation (AC9′): a genuinely free-willing subject that is NOT a person.
+    `FreeWill` holds via the incompatible pair `⟨True, False⟩`; `Person` fails
+    because every subject shares the single will `()`, so no will is
+    numerically individuated. Computed, not stipulated.
+    Footprint: `{}`. -/
+theorem freeWill_without_person :
+    Vocab.FreeWill SharedWillModel true ∧ ¬ Vocab.Person SharedWillModel true := by
+  constructor
+  · exact ⟨True, False, Or.inl rfl, Or.inr rfl, fun h => h.2⟩
+  · intro h
+    exact h.1 false (fun heq => Bool.noConfusion heq) rfl
+
+/-- Necessity (the irreducibility result): a subject can satisfy BOTH free
+    personhood conjuncts — rational nature and dominion over its acts — and still
+    fail to be a Person. In `SharedWillModel` the subject `true` means `True` and
+    `False`, hence is an intentional subject with discursive capacity, and
+    `DominionOverActs` is definitionally `FreeWill`, which holds. Yet `Person` fails,
+    because `IndividualSubstance` (the third conjunct) needs an individuated will
+    and this model deliberately withholds `will_individuation`.
+    This is the machine-checked proof that the two cheap conjuncts CANNOT reach
+    personhood: `will_individuation` is not an avoidable expense of the
+    `RightWrong ⇒ Person` headline but its exact and minimal price.
+    Footprint: `{}`. -/
+theorem rational_domination_without_person :
+    Vocab.RationalNature SharedWillModel true ∧
+    Vocab.DominionOverActs SharedWillModel true ∧
+    ¬ Vocab.Person SharedWillModel true := by
+  obtain ⟨hFW, hNotPerson⟩ := freeWill_without_person
+  refine ⟨⟨⟨True, Or.inl rfl⟩,
+    ⟨True, False, Or.inl rfl, Or.inr rfl, Or.inr (fun h => h.2)⟩⟩, hFW, hNotPerson⟩
+
+/-- Precision (the crown result): given free will, being a person is
+    EQUIVALENT to this subject's will being numerically individuated.
+    In the kernel, without definitional unfolding: personhood collapses to
+    free will if and only if wills are numerically individuated. The entire
+    non-definitional content of the `Person ↔ FreeWill` reduction is therefore
+    the law `will_individuation`, and `SharedWillModel` is a machine-checked
+    counterexample to that reduction.
+    Footprint: `{}`. -/
+theorem freeWill_person_iff_individuation (M : PersonhoodVocab) (s : M.Subj)
+    (hFW : Vocab.FreeWill M s) :
+    Vocab.Person M s ↔ ∀ s' : M.Subj, s' ≠ s → M.WillOf s' ≠ M.WillOf s := by
+  constructor
+  · intro h
+    exact h.1
+  · intro hIndiv
+    have hEx : ∃ p q : Prop, Vocab.Chooses M s p q := hFW
+    obtain ⟨p, q, hCh⟩ := hEx
+    exact ⟨hIndiv, ⟨⟨p, hCh.1⟩, ⟨p, q, hCh.1, hCh.2.1, Or.inr hCh.2.2⟩⟩, hFW⟩
 -- ============================================================================
 -- 6. Anti-Baking Independence Audits (Quest 1xA7fZ)
 -- ============================================================================
 
 /-- Contemplative Signature:
     Models a purely contemplative rational subject who entertains distinct compatible
-    propositions without engaging in choice between incompatible alternatives. -/
+    propositions without engaging in choice between incompatible alternatives.
+    DEPRECATED (2026-09-25): superseded by `PersonhoodVocab`. Retained, not deleted. -/
+@[deprecated PersonhoodVocab (since := "2026-09-25")]
 structure ContemplativeSignature where
   Subject : Type
   Means : Subject → Prop → Prop
@@ -246,7 +379,12 @@ structure ContemplativeSignature where
 /-- Contemplative Model:
     The subject entertains distinct true propositions (True and True ∧ True),
     possesses discursive capacity and rational nature, is numerically individuated,
-    yet faces no incompatible alternatives and makes no choices. -/
+    yet faces no incompatible alternatives and makes no choices.
+    DEPRECATED (2026-09-25): stipulates its own conclusion (`FreeWill := fun _ => False`
+    together with the theorem's own conclusion) and its `Incompatible` diverges from
+    Γ's body off-range. Superseded by the faithful `SharedWillModel`.
+    Retained, not deleted. -/
+@[deprecated SharedWillModel (since := "2026-09-25")]
 def ContemplativeModel : ContemplativeSignature where
   Subject := Unit
   Means := fun _ p => p = True ∨ p = (True ∧ True)
@@ -260,7 +398,13 @@ def ContemplativeModel : ContemplativeSignature where
 /-- Theorem: Rational Nature Does Not Definitionally or Logically Entail Free Will.
     A rational subject can contemplate distinct propositional truths without
     possessing free will between incompatible alternatives.
+    DEPRECATED (2026-09-25): the proof is `⟨trivial, trivial, id⟩` — a tautology
+    about stipulations, in the same category of error as the C1 charge (defining
+    free will to be `False`, then reporting `¬FreeWill`). Superseded by the
+    computed separation `freeWill_without_person`.
+    Retained, not deleted.
     Footprint: `{}`. -/
+@[deprecated freeWill_without_person (since := "2026-09-25")]
 theorem contemplative_person_without_freewill :
     ContemplativeModel.RationalNature () ∧
     ContemplativeModel.IndividualSubstance () ∧
@@ -309,5 +453,7 @@ theorem impersonal_ground_without_person :
 #print axioms faithful_contingent_person_fails_necessary_subject
 #print axioms contemplative_person_without_freewill
 #print axioms impersonal_ground_without_person
+#print axioms freeWill_without_person
+#print axioms freeWill_person_iff_individuation
 
 end Logos.PersonhoodOntologyAudit

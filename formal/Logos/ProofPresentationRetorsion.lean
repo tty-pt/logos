@@ -160,7 +160,7 @@ theorem presents_as_sound_derives_committed_choice
     An agent presenting a formal derivation as sound necessarily instantiates
     committed choice, co-grasp of incompatible alternatives, free will,
     free subjectivity, and personhood.
-    Footprint: `{Initiates, Means, State, Subject, CL}` (zero substantive axioms). -/
+    Footprint: `{Classical.choice, Initiates, Means, Quot.sound, State, Subject, propext, Will, subjectWill, will_individuation}` (zero substantive axioms). -/
 theorem presents_as_sound_derives_personhood
     (s : Subject) (d : Derivation) (h : PresentsAsSound s d) :
     CommittedChoice s (DerivationSound d)
@@ -180,7 +180,7 @@ theorem presents_as_sound_derives_personhood
   exact ⟨hCC, hChooses, hFW, hFS, hPerson⟩
 
 /-- Whenever any agent presents any derivation as sound, a Free Person exists.
-    Footprint: `{Initiates, Means, State, Subject, CL}` (zero substantive axioms). -/
+    Footprint: `{Classical.choice, Initiates, Means, Quot.sound, State, Subject, propext, Will, subjectWill, will_individuation}` (zero substantive axioms). -/
 theorem person_exists_of_presentation
     (hExist : ∃ (s : Subject) (d : Derivation), PresentsAsSound s d) :
     ∃ (s : Subject), Person s ∧ FreeWill s := by
@@ -202,7 +202,7 @@ theorem proof_criticism_nihilism_self_refuting
 
 /-- An adversarial critic who presents an objection argumentatively as sound
     themselves instantiates the normative stance and is therefore a Free Person.
-    Footprint: `{Initiates, Means, State, Subject, CL}` (zero substantive axioms). -/
+    Footprint: `{Classical.choice, Initiates, Means, Quot.sound, State, Subject, propext, Will, subjectWill, will_individuation}` (zero substantive axioms). -/
 theorem critic_presenting_objection_is_person
     (critic : Subject) (objection : Derivation)
     (hPres : PresentsAsSound critic objection) :

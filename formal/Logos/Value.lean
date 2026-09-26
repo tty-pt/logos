@@ -154,7 +154,7 @@ axiom AxTwoSubjects :
 
  `aloneExcluded` — under `AxTwoSubjects`, a lone person is excluded:
     there exist distinct persons, so no single subject can encompass all subjects.
-    Footprint: `{AxTwoSubjects, Means, Subject}`. -/
+    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
 theorem aloneExcluded : ¬ ∃ s : Subject, Person s ∧ Alone s := by
   intro ⟨s, _, ha⟩
   obtain ⟨s₁, s₂, _, _, hne⟩ := AxTwoSubjects Logos.Core.rightWrongDistinction
@@ -185,7 +185,7 @@ axiom AxBenevolentBearingObtains :
 
 /--Under the benevolence bridge, some person is actually helped by another (a help
   relation toward a distinct person obtains).
-  Footprint: `{AxBenevolentBearingObtains, Means, Subject}`. -/
+  Footprint: `{AxBenevolentBearingObtains, Means, Subject, Will, subjectWill}`. -/
 theorem some_person_is_helped :
     ∃ s t : Subject, s ≠ t ∧ Person t ∧ Helps s t :=
   AxBenevolentBearingObtains

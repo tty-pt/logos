@@ -111,7 +111,7 @@ def C144 : String := "Personhood supplies the ontological ground-type required b
 
 def C145 : String := "Transcendental discovery of the free subject from normative polarity is logically independent of the ontological grounding bridge."
 
-def C146 : String := "Model B proves that in bare theory, the hypothesis of a free subject does not by itself entail an external grounding relation; grounding is instead constitutive from Personhood itself (0 substantive axioms)."
+def C146 : String := "Model B proves that in bare theory, the hypothesis of a free subject does not by itself entail an external grounding relation; grounding is instead achieved via the free-will route with personalness as a priced theorem (0 substantive axioms)."
 
 def C147 : String := "Denying Right is performatively self-contradictory: no agent can present NoRight as correct while NoRight is true."
 

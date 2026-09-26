@@ -4,7 +4,7 @@ Depende de: axioma metafísico AxTwoSubjects (Tag: META) + T3 (rightWrongDistinc
 
 Verificado em: formal/Logos/Plurality.lean (T12_twoPersons, C40; T12_directedPair, C47),
 formal/Logos/Value.lean (AxTwoSubjects, C40), GAPMAP.md C40, C47, C73, C74.
-Pegada: `{AxTwoSubjects, Means, Subject}`.
+Pegada: `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (o `Person` no enunciado carrega o vocabulário da vontade; sem axiomas substantivos novos).
 
 Enunciado:
 

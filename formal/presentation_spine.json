@@ -275,8 +275,8 @@
       "label": "PERSON",
       "title": "6. Person",
       "explanation": "A free subject is constitutively an authoritative Person.",
-      "formula": "Person s : Prop := FreeSubject s",
-      "summary": "In the unified Γ ontology, Personhood is defined constitutively in the classical sense of Boethius and Aquinas — an *individual substance of a rational nature*, with *dominion over its own acts* — formalized as a subject possessing genuine free will (`Person(s) := FreeSubject(s)`); the equivalence with the explicit Thomistic person core (`IndividualSubstance ∧ RationalNature ∧ DominionOverActs`) is proved below (`person_iff_thomisticCore`, 0 substantive axioms). Personhood is therefore not an opaque or unprovable predicate: every Free Subject is an authoritative Person by pure deduction (`free_subject_is_person`). This is the first point at which the personal subject properly enters the main deduction.",
+      "formula": "Person s : Prop := ThomisticPersonCore s",
+      "summary": "In the unified Γ ontology, Personhood IS the classical Boethius–Aquinas criterion — an *individual substance of a rational nature*, with *dominion over its own acts* — formalized as the three-conjunct core (`Person(s) := ThomisticPersonCore(s)`); the reduction of the core to free will is the priced theorem `freeWill_implies_person` (0 substantive axioms; the only non-definitional content is the declared VOCAB law `will_individuation`), never an unfolding step. Personhood is therefore not an opaque or unprovable predicate: every Free Subject is an authoritative Person by priced theorem (`free_subject_is_person`), and the exact boundary is machine-checked — a free-willing subject with a non-individuated will is not a person (`SharedWillModel`, footprint `{}`). This is the first point at which the personal subject properly enters the main deduction.",
       "primary_targets": [
         "free_subject_is_person",
         "person_iff_thomisticCore"
@@ -358,9 +358,9 @@
       "rebuttal_formula": "ObjectiveNormativity → Σ' p, RightWrong p",
       "label": "CONSTRUCTIVE PERSONAL GROUND",
       "title": "10. Constructive Personal Ground",
-      "explanation": "The machine-proved dependence: wherever Right/Wrong is real, its ground-type is personal (`∀ s, RightWrong s → Person s`). The `GroundsRightWrong` record merely registers that same dependence (see §8).",
+      "explanation": "The machine-proved dependence: wherever Right/Wrong is real, its ground-type is personal (`∀ s, RightWrong s → Person s`, via the priced discovery theorem). The `GroundsRightWrong` record carries only the agential substrate (`∃ p q, Chooses s p q`); personalness of the ground is the priced theorem `grounding_right_wrong_entails_person`, never a field (see §8).",
       "formula": "ObjectiveNormativity → ∃ p : Person, RightWrong p ∧ GroundedRightWrong := Σ' p, RightWrong p",
-      "summary": "The dependence `RightWrong ⇒ Person` was proved in §8. Its constructive form needs no grounding axiom: the ontological direction is encoded in the definition — `ObjectiveNormativity ⇒ Person` is discovery, `Person ⇒ Right/Wrong` is RightWrong indexed by Person (the `GroundsRightWrong` record).\n\nThe headline — 'the Person supports the reality of Right' — asserts that the RightWrong-reality, the objective correctness structure governing judgments about what is the case, has a personal ontological ground-type. The four distinctions of §8 apply unchanged; in particular, grounding the correctness order is not producing reality (§8, distinction 4).",
+      "summary": "The dependence `RightWrong ⇒ Person` was proved in §8 via the priced discovery theorem (the only non-definitional content is the VOCAB law `will_individuation`). Its constructive form needs no grounding axiom: `ObjectiveNormativity ⇒ Person` is discovery, `FreeWill ⇒ GroundsRightWrong` is the definitional agential route, and ground-personalness is a priced theorem — never a record field.\n\nThe headline — 'the Person supports the reality of Right' — asserts that the RightWrong-reality, the objective correctness structure governing judgments about what is the case, has a personal ontological ground-type. The four distinctions of §8 apply unchanged; in particular, grounding the correctness order is not producing reality (§8, distinction 4).",
       "primary_targets": [
         "personal_ground_of_right_wrong",
         "discover_person",
@@ -381,7 +381,7 @@
           "primary_targets": [
             "ofGround_necessary_ground_of_reality"
           ],
-          "summary": "Live theorem: the ground is world-rigid (`NecessaryEntity Entity.ofGround`, `∀ w, ExistsAt w .ofGround`, definitional `EntityExistsAt w .ofGround := True`, footprint `{Means, Subject}`), **everlasting**, **atemporal**, and possesses **Canonical Aseity** (`conditional_canonical_aseity`, `{Means, Subject}`: `¬ ∃ g, ExternalGrounding g .ofGround`). Claim E is the *non-hypostatic* pairing (`∃ g s, NecessaryEntity g ∧ NecessaryGroundOfReality g ∧ Person s ∧ GroundsRightWrong s`): entity-necessity conjunct PROVEN; personal-kind conjunct honestly `{AxTwoSubjects, Means, Subject}` (PROVEN↑ under META `AxTwoSubjects`). Hypostatic identity, a 'necessary Person', Trinity and monotheism are NOT claimed — `ofGround_ne_ofSubject` blocks the identity line.",
+          "summary": "Live theorem: the ground is world-rigid (`NecessaryEntity Entity.ofGround`, `∀ w, ExistsAt w .ofGround`, definitional `EntityExistsAt w .ofGround := True`, footprint `{Means, Subject}`), **everlasting**, **atemporal**, and possesses **Canonical Aseity** (`conditional_canonical_aseity`, `{Means, Subject}`: `¬ ∃ g, ExternalGrounding g .ofGround`). Claim E is the *non-hypostatic* pairing (`∃ g s, NecessaryEntity g ∧ NecessaryGroundOfReality g ∧ Person s ∧ GroundsRightWrong s`): entity-necessity conjunct PROVEN; personal-kind conjunct honestly `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (PROVEN↑ under META `AxTwoSubjects`). Hypostatic identity, a 'necessary Person', Trinity and monotheism are NOT claimed — `ofGround_ne_ofSubject` blocks the identity line.",
           "defer_note": "✅ **PROVEN** (entity-level necessity, eternity, and canonical aseity) — machine-checked in `formal/Logos/NecessityEternity.lean` and `formal/Logos/CanonicalAseity.lean`; hypostatic identity of the ground with a person remains blocked (`ofGround_ne_ofSubject`) and Claim D ('necessary Subject') is still refuted (`CountermodelPersonNotNecessary`)."
         },
         {
@@ -445,7 +445,7 @@
     {
       "from": "free_subject",
       "to": "person",
-      "relation": "constitutive theorem [Person := FreeSubject]",
+      "relation": "priced theorem [Person := ThomisticPersonCore; via will_individuation]",
       "direction": "discovery"
     },
     {
