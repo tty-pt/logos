@@ -89,3 +89,9 @@ import Logos.FoundationalUnicity
 import Logos.DivinePureActuality
 -- Classical foundational omniscience and truth-exhaustiveness.
 import Logos.DivineOmniscience
+-- Classical foundational omnipotence and the non-contradictory restriction.
+import Logos.DivineOmnipotence
+-- The ground's love as a distinct, Entity-level relation (not-merge with `Loves`).
+import Logos.LovesAsGround
+-- The cosmos exists, as a declared empirical datum.
+import Logos.CosmicExistence

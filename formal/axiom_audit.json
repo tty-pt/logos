@@ -2761,6 +2761,153 @@
   "Quot.sound"
  ],
  "Logos.Core.tschema": [],
+ "Logos.CosmicExistence.AxContingentCreationObtains": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.CosmicExistence.AxContingentCreationObtains"
+ ],
+ "Logos.CosmicExistence.CreatedRealm": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.PerfectUniverse.Entity": [],
+ "Logos.CosmicExistence.PerfectUniverse.ExistsAt": [],
+ "Logos.CosmicExistence.PerfectUniverse.World": [],
+ "Logos.CosmicExistence.PerfectUniverse.WorldRigid": [],
+ "Logos.CosmicExistence.PerfectUniverse.actualWorld": [],
+ "Logos.CosmicExistence.PerfectUniverse.casesOn": [],
+ "Logos.CosmicExistence.PerfectUniverse.ctorIdx": [],
+ "Logos.CosmicExistence.PerfectUniverse.mk.inj": [],
+ "Logos.CosmicExistence.PerfectUniverse.mk.injEq": [
+  "propext"
+ ],
+ "Logos.CosmicExistence.PerfectUniverse.mk.noConfusion": [],
+ "Logos.CosmicExistence.PerfectUniverse.mk.sizeOf_spec": [],
+ "Logos.CosmicExistence.PerfectUniverse.noConfusion": [],
+ "Logos.CosmicExistence.PerfectUniverse.noConfusionType": [],
+ "Logos.CosmicExistence.PerfectUniverse.recOn": [],
+ "Logos.CosmicExistence.Realm.actual": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.Realm.bears_meaning": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.Realm.casesOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.Realm.contingent": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.Realm.ctorIdx": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.Realm.mk.inj": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.Realm.mk.injEq": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.Realm.mk.noConfusion": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.Realm.mk.sizeOf_spec": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.Realm.noConfusion": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.Realm.noConfusionType": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.Realm.not_the_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.Realm.recOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.Realm.witness": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.a_contingent_reality_obtains": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.CosmicExistence.AxContingentCreationObtains"
+ ],
+ "Logos.CosmicExistence.a_created_realm_obtains": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.CosmicExistence.AxContingentCreationObtains"
+ ],
+ "Logos.CosmicExistence.contingent_reality_is_not_necessary": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.cosmos_presence_model": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.perfect_universe_actual_is_necessary": [],
+ "Logos.CosmicExistence.perfect_universe_has_no_contingent_realm": [],
+ "Logos.CosmicExistence.reality_is_not_exhausted_by_the_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.CosmicExistence.AxContingentCreationObtains"
+ ],
+ "Logos.CosmicExistence.realm_existence_does_not_imply_realm_necessity": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.CosmicExistence.AxContingentCreationObtains"
+ ],
+ "Logos.CosmicExistence.the_cosmos_datum_is_not_refutable": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.the_ground_is_necessary_and_the_realm_is_contingent": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.CosmicExistence.AxContingentCreationObtains"
+ ],
+ "Logos.CosmicExistence.the_ground_is_not_personal": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
+ "Logos.CosmicExistence.the_ground_loves_the_cosmos": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.CosmicExistence.AxContingentCreationObtains",
+  "Logos.LovesAsGround.AxGroundLovesContingentRealm",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.CosmicExistence.the_ground_loves_the_cosmos_in_a_context": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.CosmicExistence.AxContingentCreationObtains",
+  "Logos.LovesAsGround.AxGroundLovesContingentRealm",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.CosmicExistence.the_realm_bears_meaning": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.CosmicExistence.AxContingentCreationObtains"
+ ],
  "Logos.DeepContrastiveFrontier.Collapse": [],
  "Logos.DeepContrastiveFrontier.CompatibleIntensional": [],
  "Logos.DeepContrastiveFrontier.ContrastiveModel.Asserts": [],
@@ -3395,6 +3542,68 @@
   "Logos.Agency.Initiates",
   "Logos.Agency.State",
   "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.ConjunctivePower": [],
+ "Logos.DivineOmnipotence.FoundationalOmnipotence.casesOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.FoundationalOmnipotence.gapless_operate": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.FoundationalOmnipotence.operates_no_contradiction": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.FoundationalOmnipotence.operates_only_obtaining": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.FoundationalOmnipotence.recOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.FoundationalOmnipotence.universal_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.GaplessOperate": [],
+ "Logos.DivineOmnipotence.OperatesAt": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.PossibleAt": [],
+ "Logos.DivineOmnipotence.atom_not_gapless_operate": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.discriminating_subject_not_gapless_operate": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.exhaustive_scope_without_operative_scope": [],
+ "Logos.DivineOmnipotence.existence_everywhere_does_not_entail_operation": [],
+ "Logos.DivineOmnipotence.gapless_operative_scope_without_conjunctive_power": [],
+ "Logos.DivineOmnipotence.necessity_and_presence_yield_foundational_omnipotence": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.ofGround_does_not_operate_contradictions": [
+  "propext",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.ofGround_foundational_omnipotence": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.ofGround_gapless_operative_scope": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.ofGround_operates_only_what_obtains": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.ofGround_sole_gapless_operator": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmnipotence.satisfiable_scope_is_nonempty_and_contradiction_free": [
+  "propext"
  ],
  "Logos.DivineOmniscience.FoundationalOmniscience.casesOn": [
   "Logos.Agency.Means",
@@ -5385,6 +5594,158 @@
  ],
  "Logos.Love.loves_of_helps": [
   "Logos.Agency.Subject"
+ ],
+ "Logos.LovesAsGround.AxGroundLovesContingentRealm": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.AxGroundLovesContingentRealm",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.GroundBearsGood": [
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.GroundLoves": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.a_contingent_entity_exists": [
+  "propext",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.LovesAsGround.a_meaningful_contingent_entity_exists": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.LovesAsGround.an_atom_is_contingent": [
+  "propext",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.LovesAsGround.atoms_bear_no_meaning": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.LovesAsGround.falsityWorld_ne_actualWorld": [
+  "propext"
+ ],
+ "Logos.LovesAsGround.ground_grounds_every_entity": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.LovesAsGround.ground_grounds_the_meaningless": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.LovesAsGround.ground_love_bears_a_directional_good": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.ground_love_cannot_be_read_as_person_love": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.ground_love_does_not_identify_a_person": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.LovesAsGround.ground_love_is_directed_at_another": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.ground_love_preserves_pure_actuality": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.ground_love_requires_a_meaningful_target": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.ground_love_requires_a_necessary_lover": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.grounding_is_total_but_love_is_not": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.grounding_reaches_what_love_cannot": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.interpersonal_love_never_reaches_the_necessary_quadrant": [
+  "propext",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.LovesAsGround.meaningful_love_bridge_is_refuted": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.meaningless_entities_cannot_be_loved": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.no_subject_is_a_necessary_entity": [
+  "propext",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.LovesAsGround.only_the_ground_is_necessary": [
+  "propext",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.LovesAsGround.subject_love_is_not_ground_love": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.the_ground_bears_a_directional_good_toward_the_cosmos": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.AxGroundLovesContingentRealm",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.the_ground_is_a_liver": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.AxGroundLovesContingentRealm",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.the_ground_is_a_necessary_and_chosen_lover": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.AxGroundLovesContingentRealm",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.the_ground_is_a_universal_modal_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.LovesAsGround.the_ground_is_not_a_person": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.LovesAsGround.the_ground_loves_every_meaningful_contingent_reality": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.AxGroundLovesContingentRealm",
+  "Logos.LovesAsGround.GroundBearsGood"
  ],
  "Logos.Modal.Contingent": [
   "Logos.Agency.Subject"
@@ -9220,6 +9581,7 @@
  "Logos.Stipulations.ofGround_existsAt": [],
  "Logos.Stipulations.ofGround_meansAll": [],
  "Logos.Stipulations.ofGround_noInternalComponents": [],
+ "Logos.Stipulations.operatesAt_presencePlusObtaining": [],
  "Logos.Stipulations.registeredStipulations": [],
  "Logos.StrongActionChoice.ActLegacy": [
   "Logos.Agency.Initiates",

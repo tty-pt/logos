@@ -5059,12 +5059,72 @@ CLASSICAL_ATTRIBUTES = [
                   "is manufactured."),
     },
     {
-        "attribute": "**Omnipotence**",
+        "attribute": "**Foundational omnipotence** (operative scope: no non-contradictory state of affairs is closed to the ground)",
+        "scope": "Divine Being / Ground",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.DivineOmnipotence.ofGround_foundational_omnipotence"}],
+        "refs": ["Logos.DivineOmnipotence.ofGround_gapless_operative_scope",
+                 "Logos.DivineOmnipotence.ofGround_operates_only_what_obtains",
+                 "Logos.DivineOmnipotence.ofGround_does_not_operate_contradictions",
+                 "Logos.DivineOmnipotence.atom_not_gapless_operate",
+                 "Logos.DivineOmnipotence.discriminating_subject_not_gapless_operate",
+                 "Logos.DivineOmnipotence.ofGround_sole_gapless_operator",
+                 "Logos.DivineOmnipotence.necessity_and_presence_yield_foundational_omnipotence",
+                 "Logos.DivineOmnipotence.satisfiable_scope_is_nonempty_and_contradiction_free",
+                 "Logos.DivineOmnipotence.existence_everywhere_does_not_entail_operation",
+                 "Logos.DivineOmnipotence.gapless_operative_scope_without_conjunctive_power",
+                 "Logos.DivineOmnipotence.exhaustive_scope_without_operative_scope"],
+        "sense": ("In `DivineOmnipotence.lean` (footprint `{Means, Subject, propext}` — VOCAB only, the "
+                  "`propext` cost inherited from `Semantics.nonContradiction`, C14), "
+                  "`ofGround_foundational_omnipotence` establishes the *orthodox* classical sense of "
+                  "omnipotence for `Entity.ofGround` (Aquinas *ST* I, q. 25, a. 5, ad 1 — *semper et ubique "
+                  "operans*) at 0 substantive axioms: power over whatever does not involve a contradiction. "
+                  "The scope is *operative*, in the sense that no state of affairs satisfiable in any "
+                  "accessible world is closed to the ground "
+                  "(`ofGround_gapless_operative_scope`, `{Subject}`), with the two non-contradictory horns "
+                  "made explicit: nothing unobtained — hence nothing unsatisfiable — is operated "
+                  "(`ofGround_operates_only_what_obtains`, `{Subject}`) and no contradiction is ever operated "
+                  "(`ofGround_does_not_operate_contradictions`, `{Subject, propext}`). The reading is "
+                  "substantive rather than vacuous, since the scope domain is machine-checked non-empty and "
+                  "contradiction-free (`satisfiable_scope_is_nonempty_and_contradiction_free`, `{propext}`), "
+                  "and the ground is the **sole** gapless operator in the Γ inventory "
+                  "(`ofGround_sole_gapless_operator`, `{Subject}`, with `atom_not_gapless_operate` and "
+                  "`discriminating_subject_not_gapless_operate` excluding the other two `Entity` "
+                  "constructors). Only the contradiction-omni reading — power over everything conceivable, "
+                  "*including contradictions* — is refuted, and it is refuted *by* the orthodox restriction, "
+                  "not against it. "
+                  "Honest boundary, priced not hidden: Γ has no causal production relation, so "
+                  "`OperatesAt v e P := ExistsAt v e ∧ P v` reads *operates* as presence plus obtaining, and "
+                  "is registered as a priced stipulation ◈ `operatesAt_presencePlusObtaining` (`Tag: SEM`). "
+                  "That price is machine-checked, not asserted: `existence_everywhere_does_not_entail_operation` "
+                  "(`{}`) shows an entity present in every world can still operate nothing, and "
+                  "`exhaustive_scope_without_operative_scope` (`{}`) shows exhaustive meaning scope does not "
+                  "entail operative scope — so the result is proved from world-rigid presence, never read off "
+                  "the meaning-exhaustive scope of `DivineOmniscience`. `gapless_operative_scope_without_"
+                  "conjunctive_power` (`{}`) further bounds the claim: modal accessibility is not conjunctive, "
+                  "so gapless scope does not entail jointly-possible pairs. See the next row for the causal sense."),
+    },
+    {
+        "attribute": "**Causal / creative omnipotence** (\"can bring X about\", not \"is present where X obtains\")",
         "scope": "Divine Being / Ground",
         "expected": "ABSENT",
-        "checks": [{"type": "absent", "fragments": ["omnipot"], "allow": []}],
+        "checks": [{"type": "absent",
+                    "fragments": ["all_conceivable", "unrestricted_creative_power",
+                                  "power_over_all_possible", "Produces"],
+                    "allow": []}],
         "refs": [],
-        "sense": "No live theorem.",
+        "sense": ("No live theorem, and the prose disclaimer (`README-OLD.md:263`; `CHARS.md` §15) is "
+                  "**retained — but narrowed to this causal sense only**, since the non-contradictory sense "
+                  "above is now PROVEN. Γ declares no entity-level production relation: the only initiation "
+                  "relation is `Agency.Initiates : Subject → State → State → Prop → Prop` "
+                  "(`Agency.lean:150`, VOCAB), which is subject-indexed, and `Entity.ofGround` is provably not "
+                  "a subject correlate (`ofGround_ne_ofSubject`, `NecessityEternity.lean:155`), so it cannot be "
+                  "instantiated by the ground at all. The closest relation Γ has is explanatory containment "
+                  "`GroundsEntity` (`RecoveredOntologicalGround.lean:57`, *esse est agere*), and "
+                  "`exhaustive_scope_without_operative_scope` (`{}`) already machine-checks that omni-scope does "
+                  "not entail selection power, so it must not be weakened to that. BLOCKED with both exact "
+                  "missing statements recorded (GAPMAP Level 17, row F10)."),
     },
     {
         "attribute": "**Creator of contingent reality**",
@@ -5243,11 +5303,15 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("**Divine Simplicity**, **Divine Immutability**, **Foundational Omnipresence** (sustaining all")
     ap("beings across modal reality), **Foundational Unicity**, **Divine Pure Actuality** (*Actus Purus*),")
     ap("and **Foundational Omniscience** (a truth-exhaustive scope in every world, whose infallible half is")
-    ap("machine-checked as *refuted* for the ground).")
+    ap("machine-checked as *refuted* for the ground), and **Foundational Omnipotence** (a gapless operative")
+    ap("scope: no state of affairs that does not involve a contradiction is closed to the ground, whose scope")
+    ap("domain is machine-checked non-empty and contradiction-free).")
     ap("Crucially, the theory **strictly separates** these machine-verified")
     ap("foundational/functional attributes from their unproven physical, psychological, and scholastic counterparts:")
     ap("**physical/spatial omnipresence**, **psychological personality**, **scholastic simplicity**,")
-    ap("**infallible or counterfactual omniscience**, and")
+    ap("**infallible or counterfactual omniscience**, **causal / creative omnipotence** (the presence-plus-")
+    ap("obtaining reading above is priced ◈ `operatesAt_presencePlusObtaining`, and a production relation plus")
+    ap("its derivation remain BLOCKED), and")
     ap("**psychological impassibility** remain separate targets (❌ NOT ESTABLISHED or 🔴 INDEPENDENT).")
     ap("The remaining divine attributes — **unity / monotheism**,")
     ap("**perfect moral goodness** (the moral pole itself now obtains under the single declared "

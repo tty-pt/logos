@@ -441,23 +441,31 @@ No classical omniscience argument is supplied. Knowledge of all truth does not f
 
 ## 15. Omnipotence
 
-**Status in the prose:** Explicitly disclaimed.
+**Status in the prose:** Explicitly disclaimed — **for the causal sense only**.
 
-**Formal status: ❌ not established (agrees with the prose disclaimer).** No omnipotence theorem in `formal/Logos/*.lean` or `formal/GAPMAP.md`; generated `README.md` corroborates "Omnipotence ❌ NOT ESTABLISHED".
+**Formal status: 🟡 partially established — the orthodox non-contradictory sense is PROVEN; the causal/creative sense remains 🔴 BLOCKED.** `formal/Logos/DivineOmnipotence.lean` proves *foundational* omnipotence for `Entity.ofGround` (C241–C251, 0 substantive axioms), on the reading that is Aquinas' own (*ST* I, q. 25, a. 5, ad 1, *semper et ubique operans*): **power over whatever does not involve a contradiction**. No state of affairs satisfiable in any accessible world is closed to the ground's operative scope (`ofGround_gapless_operative_scope`, `{Subject}`); nothing unobtained — hence nothing unsatisfiable — is operated (`ofGround_operates_only_what_obtains`, `{Subject}`); and no contradiction is ever operated (`ofGround_does_not_operate_contradictions`, `{Subject, propext}`, via `Semantics.nonContradiction`, C14). The reading is substantive rather than vacuous, since the scope domain is machine-checked non-empty and contradiction-free (`satisfiable_scope_is_nonempty_and_contradiction_free`, `{propext}`), and the ground is the **sole** gapless operator in Γ's `Entity` inventory (`ofGround_sole_gapless_operator` with `atom_not_gapless_operate` and `discriminating_subject_not_gapless_operate`, `{Subject}`). The master synthesis is `ofGround_foundational_omnipotence` (`{Means, Subject, propext}`), with the Thomistic *semper* principle `necessity_and_presence_yield_foundational_omnipotence` alongside it.
+
+**Only the contradiction-omni reading is refuted** — "power over everything conceivable, *including contradictions*" — and it is refuted *by* the orthodox restriction, not against it. It was never the classical sense, and the first draft of this batch, which proposed to refute it as *the* sense, was wrong and has been corrected.
+
+**The batch's price is disclosed, not hidden.** Γ declares no entity-level production relation, so `OperatesAt v e P := ExistsAt v e ∧ P v` reads "operates" as *presence plus obtaining*; this is registered and priced as the 4th stipulation ◈ `operatesAt_presencePlusObtaining` (`Tag: SEM`), and the price is machine-checked: `existence_everywhere_does_not_entail_operation` (`{}`) shows an entity present in every world can still operate nothing, and `exhaustive_scope_without_operative_scope` (`{}`) shows exhaustive meaning scope does not entail operative scope — so the result is proved from world-rigid presence, never read off `FoundationalOmniscience`. A further boundary, `gapless_operative_scope_without_conjunctive_power` (`{}`), records that Γ's modal accessibility is not conjunctive.
+
+**The causal/creative sense — "can bring X about", as against "is present where X obtains" — stays 🔴 BLOCKED**, and the prose disclaimer (`README-OLD.md:263`) is **retained but narrowed to it**: the non-contradictory sense is now PROVEN, so the blanket disclaimer no longer describes the kernel. Γ's only initiation relation, `Agency.Initiates`, is subject-indexed (`Agency.lean:150`) and `Entity.ofGround` is provably not a subject correlate (`ofGround_ne_ofSubject`), so it cannot be instantiated by the ground; the closest relation is explanatory containment `GroundsEntity` (`RecoveredOntologicalGround.lean:57`), which C250 already blocks. See `theorems/T27.txt` and `formal/GAPMAP.md` Level 17 (row F10).
 
 ### Boundary of the argument
 
-Founding the conditions of evaluation is not identified with causal power over every possible state of affairs. The text's claims concern foundational and normative priority, not the ability to bring about any contingent being (`README-OLD.md:263,266`).
+Founding the conditions of evaluation is not identified with causal power over every possible state of affairs. The text's claims concern foundational and normative priority, not the ability to bring about any contingent being (`README-OLD.md:263,266`). **The kernel now matches that boundary exactly:** it proves presence-and-obtaining over the non-contradictory and refuses to manufacture production.
 
 ### Characteristic argued for
 
-No omnipotence argument is supplied.
+No causal/creative omnipotence argument is supplied, and none can be stated in Γ's current vocabulary. The non-contradictory sense is not argued in the text either — it is derived in the kernel from the ground's world-rigid presence, and it is proved *over a priced identification* (◈ `operatesAt_presencePlusObtaining`).
 
 ### Gaps and ambiguities
 
-- A derivation would require at least a bridge from ultimate normative foundation to creative or causal power.
-- Universality of scope does not establish ability to produce every possible state of affairs.
-- The text expressly declines to derive omnipotence (`README-OLD.md:263`).
+- **Machine-checked consequence of the reframing:** the remaining gap is no longer "the proof is missing" for the foundational sense; it is that the identification used to state it is a stipulation. The price is now machine-checked on both sides (C241, C250), so it is disclosed rather than smuggled.
+- The causal sense still requires **two** statements, in this order: (1) the vocabulary, a production relation `Produces : Entity → World → Form → Prop`; and (2) the derivation that the ground produces every satisfiable state of affairs, which (1) alone would not give.
+- Universality of scope still does not establish ability to produce every possible state of affairs — and this is now a theorem, not an argument: `exhaustive_scope_without_operative_scope` (`{}`).
+- The text expressly declines to derive causal omnipotence (`README-OLD.md:263`); the kernel agrees on that point and only there.
+- A second trap, recorded in `theorems/T27.txt`: any consistency predicate built on `Core.T` is degenerate (`def T p := p`, `Core.lean:40`), so "does not involve a contradiction" must be read as satisfiability in Γ's classical valuation semantics, which is what C242/C251 do.
 
 ## 16. Benevolence and ordinary moral perfection
 

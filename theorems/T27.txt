@@ -1,0 +1,210 @@
+ T27 — ONIPOTÊNCIA FUNDACIONAL E A RESTRIÇÃO NÃO-CONTRADITÓRIA DO FUNDAMENTO DA REALIDADE
+
+Depende de: `formal/Logos/DivineOmnipotence.lean`, formalizando a característica
+clássica fundacional da onipotência — o fundamento como operante *sempre e em todo
+lugar* sobre o que não envolve contradição (Tomás de Aquino ST I q. 25 a. 5 ad 1,
+*De potentia Dei*, *semper et ubique operans*) para o fundamento da realidade
+`Entity.ofGround`.
+
+Verificado em: `formal/Logos/DivineOmnipotence.lean`; auditoria `#print axioms`
+em `:391-402`; `formal/GAPMAP.md` C241–C251 (nível 17) e linha F10;
+`base.txt` §28.
+
+Correção que governa este lote (2026-09-26):
+A primeira redacção deste lote propunha "refutar o sentido forte da onipotência",
+nomeando a leitura da onipotência-contraditória (poder sobre tudo o que é
+conceitível, *incluindo contradições*) como *o* sentido clássico. Isso estava errado,
+e o próprio corpus de Γ dá a razão: a leitura Ortodoxa é a de Tomás de Aquino — poder
+sobre o que não envolva contradição. Logo, a restrição **afirma-se, não se refuta**: a
+leitura não-contraditória é PROVEN (C242), e **apenas** a leitura da
+onipotência-contraditória é refutada (C244) — refutada *por causa da* restrição
+ortodoxa, não contra ela. O sentido **causal/criativo** permanece BLOCKED (§ Limites
+honestos abaixo), com as duas afirmações em falta registadas por extenso.
+
+C241 — Contramodelo: a presença em todo o lado não implica operação:
+
+```lean
+theorem existence_everywhere_does_not_entail_operation :
+    ∃ (Ent : Type) (ExistsAtRel : World → Ent → Prop)
+      (Operates : World → Ent → WProp → Prop) (e : Ent),
+    (∀ w, ExistsAtRel w e) ∧ ¬ GaplessOperate (UniversalFrame World) Operates e
+```
+
+Pegada auditada: `{}` (lógica pura). Uma entidade presente em *todos* os mundos pode
+não operar nada. Este é o **preço machine-checked** da escolha definicional do lote
+(abaixo): presença não é produção, e este contramodelo é o que torna o preço honesto
+em vez de retórico.
+
+C242 — Onipotência fundacional do fundamento (âmbito operativo sem lacunas):
+
+```lean
+theorem ofGround_gapless_operative_scope :
+    GaplessOperate (UniversalFrame World) OperatesAt Entity.ofGround
+```
+
+com `GaplessOperate frame Operates e := ∀ w P, PossibleAt frame w P →
+∃ v, frame.R w v ∧ Operates v e P` e `PossibleAt frame w P := ∃ v, frame.R w v ∧ P v`.
+
+Pegada auditada: `{Subject}` (apenas vocabulário). Nenhum estado de affairs
+satisfazível em qualquer mundo acessível está fechado ao âmbito operativo do
+fundamento: poder sobre o que não envolva contradição (ST I q. 25 a. 5 ad 1).
+
+C243 — Primeira face da restrição: opera-se só o que obtém:
+
+```lean
+theorem ofGround_operates_only_what_obtains :
+    ∀ v : World, ∀ P : WProp, OperatesAt v Entity.ofGround P → P v
+```
+
+Pegada auditada: `{Subject}` (apenas vocabulário). Nada que não obtenha — logo nada
+que não seja satisfazível — pertence ao âmbito operativo do fundamento. Vale para
+*qualquer* entidade sob `OperatesAt`, sem premissa alguma.
+
+C244 — Segunda face: nenhuma contradição é operada:
+
+```lean
+theorem ofGround_does_not_operate_contradictions (v : World) (φ : Form) :
+    ¬ OperatesAt v Entity.ofGround
+        (fun u => Satisfies u (Form.and φ (Form.not φ)))
+```
+
+Pegada auditada: `{propext, Subject}` (apenas vocabulário; o `propext` é herdado de
+`Semantics.nonContradiction`, C14, `CL`-only). Nenhuma contradição é operada, em
+nenhum mundo. **O único sentido da onipotência aqui refutado é o da
+onipotência-contraditória**, e é refutado *pela* restrição ortodoxa.
+
+C245 — Exclusão de átomos mundanos:
+
+```lean
+theorem atom_not_gapless_operate (n : Nat) :
+    ¬ GaplessOperate (UniversalFrame World) OperatesAt (Entity.ofAtom n)
+```
+
+Pegada auditada: `{Subject}` (apenas vocabulário). Nenhum átomo mundano é um operador
+sem lacunas; testemunha: o conteúdo `¬ atom n`, satisfazível no mundo `fun _ => TV.f` e
+não obtido onde o átomo existe.
+
+C246 — Exclusão de sujeitos discriminadores:
+
+```lean
+theorem discriminating_subject_not_gapless_operate (s : Subject) :
+    ¬ GaplessOperate (UniversalFrame World) OperatesAt (EntityOf s)
+```
+
+Pegada auditada: `{Subject}` (apenas vocabulário). Um sujeito existe apenas em
+`actualWorld`, que nega `atom 0` enquanto `¬ atom 0` é satisfazível no mundo
+`fun _ => TV.f`.
+
+C247 — O fundamento é o **único** operador sem lacunas:
+
+```lean
+theorem ofGround_sole_gapless_operator (e : Entity)
+    (h : GaplessOperate (UniversalFrame World) OperatesAt e) :
+    e = Entity.ofGround
+```
+
+Pegada auditada: `{Subject}` (apenas vocabulário). Com C245 e C246, a característica
+fica **fechada** contra os outros dois construtores de `Entity` no inventário de Γ.
+
+C248 — Onipotência Fundacional do Fundamento da Realidade (Síntese Mestre):
+
+```lean
+theorem ofGround_foundational_omnipotence :
+    FoundationalOmnipotence Entity.ofGround
+```
+
+Pegada auditada: `{Means, Subject, propext}` (0 axiomas substantivos). Confunde:
+(1) âmbito operativo sem lacunas (C242); (2) opera-se só o que obtém (C243);
+(3) nenhuma contradição operada (C244); (4) fundamentação modal universal (reutilizada
+de `FoundationalOmnipresence`, `ofGround_universal_modal_ground`).
+
+C249 — Contramodelo: âmbito sem lacunas ⇏ poder conjuntivo:
+
+```lean
+theorem gapless_operative_scope_without_conjunctive_power :
+    ∃ (Ent : Type) (Operates : World → Ent → WProp → Prop) (e : Ent),
+      GaplessOperate (UniversalFrame World) Operates e ∧
+      ¬ ConjunctivePower (UniversalFrame World) Operates e
+```
+
+Pegada auditada: `{}` (lógica pura). A acessibilidade modal de Γ não é conjuntiva
+(`atom 0` e `¬ atom 0` são cada um possíveis; nenhum mundo opera ambos): o âmbito
+operativo sem lacunas não implica poder sobre pares conjuntamente possíveis. É o limite
+do próprio lote: a restrição não-contraditória está machine-checked, mas
+"conjuntivamente possível" é estritamente mais do que a acessibilidade modal entrega.
+
+C250 — Contramodelo: âmbito exaustivo ⇏ âmbito operativo:
+
+```lean
+theorem exhaustive_scope_without_operative_scope :
+    ∃ (Ent : Type) (Scope : Ent → WProp → Prop)
+      (Operates : World → Ent → WProp → Prop) (e : Ent),
+      (∀ P : WProp, Scope e P) ∧
+      ¬ GaplessOperate (UniversalFrame World) Operates e
+```
+
+Pegada auditada: `{}` (lógica pura). É o análogo operacional de
+`means_does_not_imply_means_selection` (`HostileSemantics.lean:1861`). Por isso C242 é
+provado a partir da presença rígido-mundial (estipulação ◈ `ofGround_existsAt`) e
+**nunca** lido do âmbito exaustivo de sentido de `FoundationalOmniscience`.
+
+C251 — O domínio do âmbito é não-vazio e livre de contradições:
+
+```lean
+theorem satisfiable_scope_is_nonempty_and_contradiction_free :
+    (∃ v : World, ∃ φ : Form, Satisfies v φ) ∧
+    (∀ (φ : Form) (v : World),
+      ¬ Satisfies v (Form.and φ (Form.not φ)))
+```
+
+Pegada auditada: `{propext}` (`CL`-only, herdado de C14). A não-vacuidade é testemunhada
+por `atom 0` em `actualWorld`; a liberdade de contradição vem de C14. É a licença
+machine-checked para ler C242 como "poder sobre o que não envolva contradição": a
+leitura é **substancial, não vaciosa**.
+
+Teoremas canónicos associados:
+
+1. Princípio tomista de *semper* (`necessity_and_presence_yield_foundational_omnipotence`,
+   `{Means, Subject, propext}`):
+   Qualquer entidade necessária, presente em todos os mundos e de fundamentação modal
+   universal satisfaz a Onipotência Fundacional (ST I q. 25 a. 5); as duas faces
+   não-contraditórias são gratuitas, logo só a premissa de presença faz trabalho.
+
+2. Exclusão exaustiva dos candidatos mundanos (`atom_not_gapless_operate`,
+   `discriminating_subject_not_gapless_operate`, `ofGround_sole_gapless_operator`,
+   `{Subject}`):
+   Átomos mundanos e sujeitos discriminadores não são operadores sem lacunas;
+   `Entity.ofGround` é o único candidato no inventário ontológico de Γ.
+
+3. Demarcações honestas (`existence_everywhere_does_not_entail_operation`,
+   `gapless_operative_scope_without_conjunctive_power` e
+   `exhaustive_scope_without_operative_scope`, todos `{}`):
+   Presença ⇏ produção; âmbito sem lacunas ⇏ poder conjuntivo; âmbito exaustivo ⇏
+   âmbito operativo.
+
+4. A identificação **`OperatesAt v e P := ExistsAt v e ∧ P v`** é uma *definição*, não
+   uma derivação: Γ não possui relação de produção, logo "opera" é lido como
+   *presença mais obtenção*. Está registada e **preçada** como 4.ª estipulação
+   ◈ `operatesAt_presencePlusObtaining` (`Tag: SEM`), e o seu preço está
+   machine-checked por C241, C249 e C250.
+
+Limites honestos de escopo (o que **não** se deve reclamar):
+A demonstração estabelece a Onipotência Fundacional de `Entity.ofGround` no sentido
+clássico **não-contraditório** (ST I q. 25 a. 5 ad 1), e apenas esse. O sentido
+**causal/criativo** — "pode trazer X à existência", distinto de "está presente onde X
+obtém" — continua **BLOCKED**, e a ressalva da prosa (`README-OLD.md:263`; `CHARS.md`
+§15) fica **mantida mas estreitada a este sentido causal**, já que o sentido
+não-contraditório está agora PROVEN. Γ não declara qualquer relação de produção de
+nível de entidade: a única relação de iniciação é `Agency.Initiates :
+Subject → State → State → Prop → Prop` (`Agency.lean:150`, VOCAB), que é indexada por
+sujeito, e `Entity.ofGround` é provadamente não correlato de sujeito algum
+(`ofGround_ne_ofSubject`, `NecessityEternity.lean:155`), pelo que nem sequer pode ser
+instanciada pelo fundamento. A relação mais próxima que Γ tem é a **contenção
+explicativa** `GroundsEntity` (`RecoveredOntologicalGround.lean:57`, *esse est agere*),
+e C250 já machine-checka que âmbito exaustivo não implica âmbito operativo — logo a
+relação causal não pode ser enfraquecida até `GroundsEntity`. Faltam exactamente duas
+afirmações, por esta ordem:
+  (1) VOCABULÁRIO EM FALTA: uma relação de produção `Produces : Entity → World → Form → Prop`;
+  (2) DERIVAÇÃO EM FALTA: que o fundamento produz todo estado de affairs satisfazível
+      (que (1) por si só não daria).
+Nenhuma ponte de produção é manufacturada neste lote.

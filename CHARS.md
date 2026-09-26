@@ -269,9 +269,11 @@ exact ⟨greatResult, noBothTrueAndFalse⟩
 
 ### 15. Omnipotence
 
-- **Current status:** no live theorem or substantive predicate.
-- **Next work:** would require a causal/creative-power vocabulary and a bridge from foundation to power over every possible state of affairs.
-- **Recommendation:** keep independent from foundational scope; universality does not imply omnipotence.
+- **Completed live layer:** `formal/Logos/DivineOmnipotence.lean` proves the *orthodox non-contradictory* sense for `Entity.ofGround` (C241–C251, 0 substantive axioms): no satisfiable state of affairs is closed to the ground's operative scope (`ofGround_gapless_operative_scope`, `{Subject}`), with both faces of the restriction explicit — nothing unobtained is operated (`ofGround_operates_only_what_obtains`, `{Subject}`) and no contradiction is ever operated (`ofGround_does_not_operate_contradictions`, `{Subject, propext}`) — plus the master synthesis `ofGround_foundational_omnipotence` (`{Means, Subject, propext}`) and the *semper* principle `necessity_and_presence_yield_foundational_omnipotence`.
+- **Reframed, not overstated (2026-09-26):** the batch's first draft proposed to refute "the strong sense of omnipotence" by naming contradiction-omni as *the* classical sense. That was wrong — Aquinas' sense is power over whatever does not involve a contradiction (*ST* I q. 25 a. 5 ad 1) — so the restriction is **affirmed**, and only the contradiction-omni reading is refuted (C244), by the restriction itself.
+- **The price is disclosed:** Γ has no production relation, so `OperatesAt` reads "operates" as presence plus obtaining, priced as ◈ `operatesAt_presencePlusObtaining` (`Tag: SEM`). The price is machine-checked, not asserted: `existence_everywhere_does_not_entail_operation` (`{}`) — presence everywhere ⇏ operation; `exhaustive_scope_without_operative_scope` (`{}`) — exhaustive scope ⇏ operative scope; `gapless_operative_scope_without_conjunctive_power` (`{}`) — gapless scope ⇏ conjunctive power.
+- **Honest boundary:** causal/creative omnipotence ("can bring X about") stays 🔴 **BLOCKED**, and the prose disclaimer (`README-OLD.md:263`) is retained **narrowed to that sense only** (GAPMAP Level 17, row F10). Two statements are missing, in order: the vocabulary `Produces : Entity → World → Form → Prop`, and the derivation that the ground produces every satisfiable state of affairs. `Agency.Initiates` is subject-indexed and `Entity.ofGround` is not a subject correlate (`ofGround_ne_ofSubject`); `GroundsEntity` cannot substitute, by C250.
+- **Do not claim:** causal or creative power for the ground, and do not read Foundational Omnipotence as a claim about bringing contingent beings into existence.
 
 ### 16. Benevolence and ordinary moral perfection
 

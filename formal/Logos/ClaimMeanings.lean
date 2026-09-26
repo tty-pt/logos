@@ -27,6 +27,8 @@ def F8 : String := "The Trinity is not attempted."
 
 def F9 : String := "Incarnation and creation are faith data from the poem, deferred."
 
+def F10 : String := "Causal (creative) omnipotence — the power to BRING a state of affairs about, as against being present where it obtains — is BLOCKED, and the prose disclaimer is retained for this causal sense alone, since the non-contradictory sense of omnipotence is now PROVEN (C242, the ground operates every satisfiable state of affairs, and C251, that scope domain is non-empty and contradiction-free). Γ declares no entity-level production relation: its only initiation relation, Agency.Initiates : Subject → State → State → Prop → Prop, is subject-indexed, and Entity.ofGround is provably not a subject correlate (ofGround_ne_ofSubject), so the ground cannot instantiate it at all. The closest relation Γ has is explanatory containment (GroundsEntity), and exhaustive_scope_without_operative_scope already machine-checks that an exhaustive scope does not entail an operative one, so the causal sense must not be weakened to it. Two exact statements are missing, in this order: (1) the vocabulary, a production relation Produces : Entity → World → Form → Prop; and (2) the derivation, that the ground produces every satisfiable state of affairs."
+
 def Q7_2 : String := "Research question, answered: the swap is a theorem for atoms (no axiom needed); the compound instance is unforced."
 
 def F1bUncond : String := "The unconditional existence claim ∃ s, FreeWill s is BLOCKED, as the companion row to F1b (the conditional/closed front): the missing lemma is the rejected-horn datum rejectedHornCoMeant : ∃ s p, A s p ∧ A s (¬p)."

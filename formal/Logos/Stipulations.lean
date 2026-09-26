@@ -48,7 +48,7 @@ def ofGround_existsAt : Stipulation where
   anchor := "Entity.ofGround => True"
   tag := StipulationTag.VOCAB
   cost := "World-rigidity stipulated by match arm: necessity theorems about ofGround unfold this True."
-  dependents := ["ofGround_necessary", "the_ground_everlasting", "the_ground_atemporal", "everlasting_and_atemporal_ground", "ofGround_necessary_ground_of_reality"]
+  dependents := ["ofGround_necessary", "the_ground_everlasting", "the_ground_atemporal", "everlasting_and_atemporal_ground", "ofGround_necessary_ground_of_reality", "ofGround_gapless_operative_scope", "ofGround_foundational_omnipotence"]
 
 /-- Tag: VOCAB
 Meaning-everything of the ground: `EntityMeans .ofGround p := True`
@@ -79,8 +79,33 @@ def ofGround_noInternalComponents : Stipulation where
   cost := "Indivisibility stipulated by match arm: the simplicity theorem unfolds this False."
   dependents := ["ofGround_has_no_internal_components"]
 
+/-- Tag: SEM
+The identification of operation with presence-plus-obtaining:
+`OperatesAt v e P := ExistsAt v e ∧ P v` — the founding definitional choice of
+`DivineOmnipotence` (Aquinas *ST* I q. 25 a. 5: *semper et ubique* operans).
+
+Philosophical cost: Γ has **no** causal production relation, so "the ground
+operates P" is read as "the ground is present where P obtains" — presence, not
+production. Foundational omnipotence is therefore proved over this weakened
+reading, and the causal/creative sense is BLOCKED, not discharged
+(`README-OLD.md:263`; GAPMAP Level 17). The price is machine-checked in both
+directions: `existence_everywhere_does_not_entail_operation` (presence without
+operation) and `exhaustive_scope_without_operative_scope` (maximal meaning scope
+without operation) are `{}` countermodels, so the identification is not free.
+Consistency model: Γ's own classical valuation semantics with `EntityExistsAt`
+— every countermodel above is a finite two-element carrier, so the reading is
+consistent. -/
+def operatesAt_presencePlusObtaining : Stipulation where
+  name := "operatesAt_presencePlusObtaining"
+  location := "DivineOmnipotence.lean:118"
+  anchor := "def OperatesAt"
+  tag := StipulationTag.SEM
+  cost := "Operation identified with presence-plus-obtaining: foundational omnipotence is proved over the weakened reading; the causal/creative sense stays BLOCKED."
+  dependents := ["ofGround_gapless_operative_scope", "ofGround_operates_only_what_obtains", "ofGround_does_not_operate_contradictions", "ofGround_sole_gapless_operator", "ofGround_foundational_omnipotence", "necessity_and_presence_yield_foundational_omnipotence"]
+
 /-- The registered stipulations, in audit order. -/
 def registeredStipulations : List Stipulation :=
-  [ofGround_existsAt, ofGround_meansAll, ofGround_noInternalComponents]
+  [ofGround_existsAt, ofGround_meansAll, ofGround_noInternalComponents,
+   operatesAt_presencePlusObtaining]
 
 end Logos.Stipulations

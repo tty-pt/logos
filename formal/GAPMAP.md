@@ -1073,9 +1073,14 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     `{}`-footprint *irreducibility* result that closes that batch. C233 and C240
     are likewise `{}` with COUNTERMODEL status — the scope/infallibility and
     scope/counterfactual-knowledge separations of the 2026-09-26
-    foundational-omniscience batch — so they stay out of this bucket too.)
-  - **9 `CL`-only**: C3, C10, C12, C13, C14, C16, C37, C59, C93.
-  - **113 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+    foundational-omniscience batch — so they stay out of this bucket too. C241,
+    C249 and C250 are the three `{}`-footprint separations of the same day's
+    foundational-omnipotence batch (presence-without-operation,
+    gapless-without-conjunctive-power, scope-without-operation), likewise out.)
+  - **10 `CL`-only**: C3, C10, C12, C13, C14, C16, C37, C59, C93, C251. (C251 is the
+    non-emptiness + contradiction-freedom of the satisfiable scope domain; its `propext`
+    cost is inherited from C14, deliberately, so the graph shows the C251 → C14 edge.)
+  - **120 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
     C102, C103, C104, C105, C91, C58, C68, C21, C23, C24, C25, C30, C83, C84,
     C107, C160, C161, F1a, C94, C186, C39, C49, C51, C52, C53, C55, C56, C57, C62,
     C101, C97, C98, C99, C100, C85, C86, C113, C114, C116, C120, C121, C122, C137,
@@ -1084,7 +1089,14 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     C147, C148, C149, C150, C151, C152, C153, C172, C173, C174, C176, C189, C190,
     C191, C193, C194, C195, C196, C198, C199, C200, C201, C203, C204, C205, C206,
     C207, C208, C209, C210, C211, C213, C215, C216, C217, C218, C219, C220, C234,
-    C235, C236, C237, C238, C239.
+    C235, C236, C237, C238, C239, C242, C243, C244, C245, C246, C247, C248.
+    C242–C248 are the seven vocabulary-footprint results of the 2026-09-26
+    foundational-omnipotence batch (gapless operative scope, the two
+    non-contradictory horns, the atom/subject exclusions, the sole-operator
+    theorem, and the master synthesis); each carries `propext` from C14 where it
+    touches `nonContradiction`, and the companion
+    `necessity_and_presence_yield_foundational_omnipotence` (no claim ID) is
+    `{Subject, Means, propext}` on the same footing.
     C221–C225 are the five new priced personhood/grounding theorems of the
     2026-09-25 refactor (C223 is the definitional free-will route; C221/C222/
     C224/C225 carry the declared VOCAB law `will_individuation`). C229/C230/C232
@@ -1850,3 +1862,44 @@ camada interpretativa, não consequência kernel.
 > disclaimed** (`README-OLD.md:263`; `CHARS.md` §14): Γ has no `Knows` predicate, the frontier's knowledge relations
 > are vocabulary definitions, and `Entity.ofGround` is not a subject correlate
 > (`ofGround_ne_ofSubject`, `NecessityEternity.lean:155`), so no divine knowledge bridge is manufactured.
+
+## Level 17 — Classical Foundational Omnipotence & the Non-Contradictory Restriction (`Logos.DivineOmnipotence`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C241 | §15/CHARACTERISTICS | `DivineOmnipotence.existence_everywhere_does_not_entail_operation : ∃ (Ent : Type) (ExistsAtRel : World → Ent → Prop) (Operates : World → Ent → WProp → Prop) (e : Ent), (∀ w, ExistsAtRel w e) ∧ ¬ GaplessOperate (UniversalFrame World) Operates e` — **the price of the identification, machine-checked**: an entity present in *every* world can still operate nothing, so presence is not production. This is what keeps the causal disclaimer honest | COUNTERMODEL | `{}` |
+| C242 | §15/CHARACTERISTICS | `DivineOmnipotence.ofGround_gapless_operative_scope : GaplessOperate (UniversalFrame World) OperatesAt Entity.ofGround` — **the doctrine**: no state of affairs satisfiable in any accessible world is closed to the ground's operative scope, i.e. power over whatever does not involve a contradiction (Aquinas *ST* I, q. 25, a. 5, ad 1, *semper et ubique operans*). Proved from the two clauses of `OperatesAt` (stipulation ◈ `operatesAt_presencePlusObtaining`) | PROVEN | `{Subject}` |
+| C243 | §15/CHARACTERISTICS | `DivineOmnipotence.ofGround_operates_only_what_obtains : ∀ (v : World) (P : WProp), OperatesAt v Entity.ofGround P → P v` — the non-contradictory restriction, first horn: nothing unobtained — hence nothing unsatisfiable — is in the ground's operative scope. Holds of *every* entity under `OperatesAt` with no premise at all | PROVEN | `{Subject}` |
+| C244 | §15/CHARACTERISTICS | `DivineOmnipotence.ofGround_does_not_operate_contradictions : ∀ (v : World) (φ : Form), ¬ OperatesAt v Entity.ofGround (fun u => Satisfies u (Form.and φ (Form.not φ)))` — second horn: no contradiction is ever operated, at no world, by `Semantics.nonContradiction` (C14). **The only sense of omnipotence refuted here is the contradiction-omni reading** ("everything conceivable, including contradictions"), and it is refuted *by* the orthodox restriction, not against it | PROVEN | `{Subject, propext}` |
+| C245 | §15/CHARACTERISTICS | `DivineOmnipotence.atom_not_gapless_operate : ∀ (n : Nat), ¬ GaplessOperate (UniversalFrame World) OperatesAt (Entity.ofAtom n)` — no worldly atom is a gapless operator; witness the content `¬ atom n`, satisfiable in the all-`f` world and yet unobtained wherever the atom exists | PROVEN | `{Subject}` |
+| C246 | §15/CHARACTERISTICS | `DivineOmnipotence.discriminating_subject_not_gapless_operate : ∀ (s : Subject), ¬ GaplessOperate (UniversalFrame World) OperatesAt (EntityOf s)` — no subject is a gapless operator; a subject exists only at `actualWorld`, which denies `atom 0` while `¬ atom 0` is satisfiable in the all-`f` world | PROVEN | `{Subject}` |
+| C247 | §15/CHARACTERISTICS | `DivineOmnipotence.ofGround_sole_gapless_operator : ∀ (e : Entity), GaplessOperate (UniversalFrame World) OperatesAt e → e = Entity.ofGround` — **the ground is the sole gapless operator in the Γ inventory**: with C245/C246 this closes the characteristic against the other two constructors of `Entity` | PROVEN | `{Subject}` |
+| C248 | §15/CHARACTERISTICS | `DivineOmnipotence.ofGround_foundational_omnipotence : FoundationalOmnipotence Entity.ofGround` — **master synthesis**: gapless operative scope (C242), operates-only-what-obtains (C243), operates-no-contradiction (C244) and universal modal grounding (reused `ofGround_universal_modal_ground`), at 0 substantive axioms | PROVEN | `{Subject, Means, propext}` |
+| C249 | §15/CHARACTERISTICS | `DivineOmnipotence.gapless_operative_scope_without_conjunctive_power : ∃ (Ent : Type) (Operates : World → Ent → WProp → Prop) (e : Ent), GaplessOperate (UniversalFrame World) Operates e ∧ ¬ ConjunctivePower (UniversalFrame World) Operates e` — countermodel: gapless scope does **not** entail conjunctive power, because Γ's Kripke accessibility is not conjunctive (`atom 0` and `¬ atom 0` are each possible; no world operates both). Bounds this batch's own claim: the non-contradictory restriction is machine-checked, but "jointly possible pairs" is strictly more than modal accessibility delivers | COUNTERMODEL | `{}` |
+| C250 | §15/CHARACTERISTICS | `DivineOmnipotence.exhaustive_scope_without_operative_scope : ∃ (Ent : Type) (Scope : Ent → WProp → Prop) (Operates : World → Ent → WProp → Prop) (e : Ent), (∀ P : WProp, Scope e P) ∧ ¬ GaplessOperate (UniversalFrame World) Operates e` — countermodel: an exhaustive meaning scope does **not** entail operative scope; the operational analogue of `means_does_not_imply_means_selection` (`HostileSemantics.lean:1861`). This is why C242 is proved from world-rigid presence (◈ `ofGround_existsAt`) and never read off the meaning-exhaustive scope of `FoundationalOmniscience` | COUNTERMODEL | `{}` |
+| C251 | §15/CHARACTERISTICS | `DivineOmnipotence.satisfiable_scope_is_nonempty_and_contradiction_free : (∃ v : World, ∃ φ : Form, Satisfies v φ) ∧ (∀ (φ : Form) (v : World), ¬ Satisfies v (Form.and φ (Form.not φ)))` — **the scope domain is non-empty and contradiction-free**: non-emptiness witnessed by `atom 0` at `actualWorld`, contradiction-freedom by C14. This is the machine-checked licence for reading C242 as "power over whatever does not involve a contradiction" — the reading is substantive, not vacuous | PROVEN | `{propext}` |
+| F10 | §15 causal/creative omnipotence ("can bring X about", not "is present where X obtains") | BLOCKED | exactly two missing statements, in this order. **(1) MISSING VOCABULARY:** a production relation for entities, `Produces : Entity → World → Form → Prop` — Γ declares none; the only initiation relation is `Agency.Initiates : Subject → State → State → Prop → Prop` (`Agency.lean:150`, VOCAB), which is **subject**-indexed, and `Entity.ofGround` is provably not a subject correlate (`ofGround_ne_ofSubject`, `NecessityEternity.lean:155`), so it cannot even be instantiated by the ground. **(2) MISSING DERIVATION:** `∀ (φ : Form), (∃ w, Satisfies w φ) → ∃ v, Produces Entity.ofGround v φ` — which (1) alone would not give. The closest relation Γ has is explanatory containment `GroundsEntity` (`RecoveredOntologicalGround.lean:57`, *esse est agere*), and C250 plus `means_does_not_imply_means_selection` already machine-check that omni-scope does not entail selection power, so (1) must not be weakened to it. **Consequence for the prose:** the `README-OLD.md:263` / `CHARS.md` §15 disclaimer is **retained and narrowed to the causal sense only** — the non-contradictory sense is now PROVEN, not disclaimed |
+| — | §15/CHARACTERISTICS | `DivineOmnipotence.necessity_and_presence_yield_foundational_omnipotence : ∀ (e : Entity), NecessaryEntity e → WorldRigidPresence e → UniversalModalGround e → FoundationalOmnipotence e` — companion principle (Aquinas *ST* I q. 25 a. 5: *semper*): necessary existence, world-rigid presence and universal grounding concede Foundational Omnipotence; the two non-contradictory horns are free, so only the presence premise does work | PROVEN | `{Subject, Means, propext}` |
+
+> Batch FOUNDATIONAL-OMNIPOTENCE (2026-09-26): this batch **reverses the theological framing** of its own
+> first draft, which had proposed to "refute the strong sense of omnipotence" by naming the
+> contradiction-omni reading (power over everything conceivable, *including contradictions*) as *the*
+> classical sense. That was wrong: the orthodox reading is Aquinas' own (*ST* I, q. 25, a. 5, ad 1) —
+> power over whatever does not involve a contradiction — and Γ's own corpus already sides with it
+> (`theorems/T25.txt:111` marks the passive-potentia scope; `README-OLD.md:263` disclaims the *causal*
+> claim, not the non-contradictory one). So the restriction is **affirmed, not refuted**: C242 proves the
+> orthodox sense for `Entity.ofGround` (`{Subject}`), C243/C244 give its two horns (`{Subject}` /
+> `{Subject, propext}`), and C251 (`{propext}`) machine-checks that the scope domain is **non-empty and
+> contradiction-free** — so the reading is substantive, not vacuous. C241 (`{}`) is the machine-checked
+> **price** of the batch's founding definitional choice, now registered as a 4th stipulation
+> ◈ `operatesAt_presencePlusObtaining` (`Tag: SEM`): Γ has no causal production relation, so
+> `OperatesAt v e P := ExistsAt v e ∧ P v` reads "operates" as *presence plus obtaining*. Foundational
+> omnipotence is therefore proved over that weakened reading, and the causal sense is **BLOCKED**, not
+> discharged (F10, with both exact missing statements). C245/C246/C247 (`{Subject}`) exclude worldly atoms
+> and discriminating subjects and make the ground the **sole** gapless operator, so the characteristic is
+> closed against Γ's whole `Entity` inventory. C249 (`{}`) and C250 (`{}`) bracket the claim from both
+> sides: modal accessibility is not conjunctive (so gapless scope ⇏ conjunctive power), and exhaustive
+> meaning scope ⇏ operative scope (so C242 rests on presence, not on `ofGround_meansAll`).
+> C248 (`{Subject, Means, propext}`) is the master synthesis and
+> `necessity_and_presence_yield_foundational_omnipotence` the companion. 0 new axioms, 0 new `Tag:`
+> axioms; the `propext` cost is inherited from C14 by design, so the graph shows the C241–C251 → C14 edge.
