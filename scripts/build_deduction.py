@@ -1580,6 +1580,22 @@ AX_ID = {
     "will_individuation": "A18",
     "Wills": "A19",
     "Ought": "A20",
+    # Batch C2 (2026-09-27): the five names the hand-authored dict was missing, appended in
+    # true first-use order by a ledgered claim — never re-derive, or the A# citations
+    # embedded in generated prose renumber. Only three are Batch C's own exposure:
+    # AxBenevolentBearingObtains is a pre-existing gap (first cited C177), and Evil is
+    # cited by NOTHING — registry-only, because its sole consumer
+    # (Logos.MoralFrontierAudit.stance_exhibits_moral_poles) is itself unledgered.
+    "AxBenevolentBearingObtains": "A21",   # first cited C177 (pre-existing gap)
+    "GroundBearsGood": "A22",              # first cited C331
+    "AxGroundLovesContingentRealm": "A23",  # first cited C339
+    # AxContingentCreationObtains was A24 (first cited C350) and is RETIRED 2026-09-27:
+    # the axiom was deleted rather than ledgered, because the lemma it declared unavailable
+    # was already a theorem. On the same day (lot COSMOS-EXISTENCE-IS-FREE) the claim it
+    # carried was SPLIT: C350 `contingent_realm_obtains` is the free existence and pays
+    # nothing, while C367 `cosmos_obtains` — the meaning-bearing half — is what rests on
+    # the plurality bridge AxTwoSubjects (A15). The registry does not move either way.
+    "Evil": "A25",                          # cited by no claim row — registry-only
 }
 
 # A proposed inference that a hostile model refutes: withdrawn/retired steps
@@ -4704,6 +4720,44 @@ CLASSICAL_ATTRIBUTES = [
                   "which is why the whole metaphysical weight sits on the ◈ entry."),
     },
     {
+        "attribute": "**Divine love** (the ground as lover of contingent reality)",
+        "scope": "Divine Being / Ground",
+        "expected": "PROVEN↑",
+        "checks": [{"type": "decl",
+                    "full": "Logos.LovesAsGround.the_ground_is_a_necessary_and_chosen_lover"}],
+        "refs": ["Logos.LovesAsGround.GroundLoves",
+                 "Logos.LovesAsGround.grounding_reaches_what_love_cannot",
+                 "Logos.LovesAsGround.meaningful_love_bridge_is_refuted",
+                 "Logos.LovesAsGround.ground_love_cannot_be_read_as_person_love",
+                 "Logos.CosmicExistence.the_ground_loves_the_cosmos"],
+        "sense": ("The ground is a *necessary* lover of a *chosen* good: `NecessaryEntity "
+                  "Entity.ofGround` (`trivial`, ontology-forced) conjoined with a directional "
+                  "good it holds toward a contingent, meaning-bearing realm — the machine form "
+                  "of `poem.txt:24`'s \"Amar é escolhido e também é necessário\". The claim is "
+                  "about the ground **as a kind**; no hypostatic identification is made (C344). "
+                  "**Two prices, different in kind** (see the **LOVE chain, step by step** block "
+                  "below): the VOCAB primitive `GroundBearsGood` (the directed-good vocabulary "
+                  "the library lacked — `GroundsEntity` is undirected and vacuous, `EntityMeans` "
+                  "is a capacity of the target, `Good s (_a)` is `Subject`-indexed) and the META "
+                  "bridge `AxGroundLovesContingentRealm` (the inhabitation, genuinely not forced: "
+                  "the `GroundBearsGood := False` model satisfies all vocabulary while every "
+                  "inhabitant fails). "
+                  "Note the badge reads **⚠️ AXIOMATIC (AxGroundLovesContingentRealm)** only: "
+                  "`GroundBearsGood` is filed under the vocabulary baseline by `footprint_parts` "
+                  "and never appears in the parenthetical, so a reader trusting the badge alone "
+                  "will take the primitive as free — the chain block below is the only place the "
+                  "VOCAB price is visible. What the batch is mostly is negative: the separation "
+                  "is machine-checked (C336: grounding reaches an atom, love does not); the "
+                  "unrestricted, more attractive bridge is *false* (C338 — the only justification "
+                  "for the axiom's meaning hypothesis); and the `GroundLoves → Loves` transfer is "
+                  "**unstatable, not merely unproved** (C348), so bridge #9 / C228 is untouched "
+                  "and F3, F6/Trinity and the personal-monotheism frontier do not move. "
+                  "The cosmos it loves now *exists by theorem* — free, in fact: C350 "
+                  "`contingent_realm_obtains` at `{propext, Subject}`, with the plurality "
+                  "bridge paying only for the realm's *content* (C367 `cosmos_obtains`) — "
+                  "which is not an entailment from the ground."),
+    },
+    {
         "attribute": "**Independent will** — with numerical individuation",
         "scope": "Personal ground / person-type",
         "expected": "PROVEN",
@@ -4799,24 +4853,47 @@ CLASSICAL_ATTRIBUTES = [
         "scope": "Divine Being / Ground",
         "expected": "PROVEN",
         "checks": [{"type": "decl",
-                    "full": "Logos.FoundationalUnicity.ofGround_foundational_unicity"}],
+                    "full": "Logos.FoundationalUnicity.ofGround_foundational_unicity"},
+                   {"type": "decl",
+                    "full": "Logos.FoundationalUnicity.ofGround_sole_universal_grounding"},
+                   {"type": "countermodel",
+                    "full": "Logos.FoundationalUnicity.not_asymmetric_grounding"}],
         "refs": ["Logos.FoundationalUnicity.universal_ground_unicity",
                  "Logos.FoundationalUnicity.no_atom_is_universal_modal_ground",
                  "Logos.FoundationalUnicity.no_discriminating_subject_is_universal_modal_ground",
                  "Logos.FoundationalUnicity.ofGround_sole_universal_ground",
-                 "Logos.FoundationalUnicity.unicity_strictly_transcends_world"],
-        "sense": ("In `FoundationalUnicity.lean` (footprint `{Means, Subject}` — VOCAB only), "
-                  "`ofGround_foundational_unicity` establishes Classical Divine Unicity (Aquinas *ST* I, q. 11, a. 3) "
-                  "for `Entity.ofGround`: "
-                  "(1) Universal Ground Unicity (`universal_ground_unicity`, `{Means, Subject}`): two distinct entities "
-                  "cannot simultaneously be universal grounds of all reality under asymmetric grounding; "
-                  "(2) Atom Exclusion (`no_atom_is_universal_modal_ground`, `{Means, Subject}`): no atomic factual state can be a universal ground; "
-                  "(3) Discriminating Subject Exclusion (`no_discriminating_subject_is_universal_modal_ground`, `{Means, Subject}`): "
-                  "no finite discriminating subject can be a universal ground; "
-                  "(4) Sole Universal Ground (`ofGround_sole_universal_ground`, `{Means, Subject}`): `Entity.ofGround` is the unique "
-                  "universal ground in the ontological inventory of Γ. "
-                  "Honest boundary: establishes foundational unicity of universal grounding in reality; "
-                  "strictly separated from numerical unitarianism (which would rule out Trinitarian relations) and pantheism."),
+                 "Logos.FoundationalUnicity.unicity_strictly_transcends_world",
+                 "Logos.FoundationalUnicity.groundsEntity_reflexive",
+                 "Logos.FoundationalUnicity.grounds_ground_iff_maximal",
+                 "Logos.FoundationalUnicity.ofGround_unicity_from_no_discriminating_subject",
+                 "Logos.FoundationalUnicity.no_discriminating_subject_iff_no_maximal_non_ground",
+                 "Logos.FoundationalUnicity.exactly_one_universal_modal_ground"],
+        "sense": ("In `FoundationalUnicity.lean` (footprint `{Means, Subject}` — VOCAB only). "
+                  "**Correction (2026-09-27): the original route is void.** "
+                  "(1) Diagnosis — `not_asymmetric_grounding` machine-refutes `AsymmetricGrounding`: grounding is "
+                  "meaning-containment and therefore **reflexive** (`groundsEntity_reflexive`), and the definition omitted the "
+                  "`g1 ≠ g2` guard, so the premise consumed by `universal_ground_unicity` and `ofGround_foundational_unicity` "
+                  "is **unsatisfiable**. Those two rows stay PROVEN as conditional theorems, but no unpayable premise may stand "
+                  "as a proven attribute. "
+                  "(2) The needed notion already existed — `grounds_ground_iff_maximal` proves that grounding the ground **is** "
+                  "`MaximalCapacity`, so no new axiom was invented. "
+                  "(3) Repair — `ofGround_sole_universal_ground` already excludes every entity except a subject meaning "
+                  "*everything*; `ofGround_unicity_from_no_discriminating_subject` closes exactly that last case from the single "
+                  "hypothesis that no subject has total meaning-capacity, and `exactly_one_universal_modal_ground` states "
+                  "**Classical Monotheism outright** (Aquinas *ST* I, q. 11, a. 3): existence unconditional, uniqueness under that "
+                  "one named hypothesis. `no_discriminating_subject_iff_no_maximal_non_ground` proves the hypothesis **is** the "
+                  "exclusion of maximal capacity among non-ground entities, so the whole price is one existing predicate. "
+                  "**Open (frontier F15), but not a new act of faith:** no *axiom* asserts the hypothesis, so C320 cannot consume "
+                  "it unconditionally — yet the **identical sentence is already the standing premise of the corpus**: "
+                  "`DivineSimplicity.canonical_aseity_conditional` (`DivineSimplicity.lean:79`), `ofGround_divine_simplicity` "
+                  "(`:180`) and `ofGround_divine_simplicity_and_transcendence` (`:191`) all take "
+                  "`hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p`, and C195/C196 are ledgered on it. Γ has been paying this "
+                  "price for five attribute arguments, not two: the hypothesis shape occurs 20 times across 5 files "
+                  "(`DivinePureActuality` 5, `FoundationalUnicity` 7, `CanonicalAseity` 4, `AsieticChoice` 1, "
+                  "`DivineSimplicity` 3), and is no richer for it; F15 is an *unnamed* "
+                  "commitment rather than a new bridge. The outstanding decision is **consolidation** of that already-paid "
+                  "sentence into one named stipulation, which would make C320 an unconditional corollary and retire the row. "
+                  "Honest boundary: strictly separated from numerical unitarianism (which would rule out Trinitarian relations) and pantheism."),
     },
     {
         "attribute": "**Strict numerical unitarianism** (ruling out relational internal plurality/persons)",
@@ -4835,19 +4912,29 @@ CLASSICAL_ATTRIBUTES = [
         "scope": "Divine Being / Ground",
         "expected": "DEFERRED",
         "checks": [{"type": "branch", "id": "monotheism"},
-                   {"type": "absent",
-                    "fragments": ["monotheism"],
-                    "allow": []}],
-        "refs": [],
-        "sense": ("Strict monotheism (`monotheism_of_god_and_uniqueness`, "
-                  "`monotheism_compatible_with_trinity`) is deferred out of the live kernel "
-                  "(Branch B, `⏸`); unity concerns the Divine Being, not numerical identity "
-                  "of Personhood. Uniqueness is provably NOT a kernel consequence: the "
-                  "machine-witnessed separation "
-                  "`TheologicalModalHardening.necessary_existence_not_entails_uniqueness` "
-                  "(`¬ (∀ S, UniqueExists S.NecessaryEntity)`, L406-414, footprint `{}`) and "
-                  "the deferred `universal_ground_unique` (`NecessaryPersonalGround.lean:24`) "
-                  "mark it as an interpretive layer."),
+                   {"type": "decl",
+                    "full": "Logos.FoundationalUnicity.exactly_one_universal_modal_ground"}],
+        "refs": ["Logos.FoundationalUnicity.exactly_one_universal_modal_ground",
+                 "Logos.FoundationalUnicity.ofGround_sole_universal_grounding",
+                 "Logos.FoundationalUnicity.ofGround_unicity_from_no_discriminating_subject",
+                 "Logos.FoundationalUnicity.unicity_does_not_force_unitarian_monad",
+                 "Logos.TheologicalModalHardening.necessary_existence_not_entails_uniqueness"],
+        "sense": ("**This label was carrying two claims; only one of them is still open (corrected "
+                  "2026-09-27).** (1) *Uniqueness of the universal ground* is no longer deferred: "
+                  "`exactly_one_universal_modal_ground` (C320) proves that exactly one universal modal "
+                  "ground exists — **existence unconditional**, uniqueness under the single named "
+                  "hypothesis of frontier row F15 (`∀ s, ∃ p, ¬ Means s p`, not yet asserted in Γ). "
+                  "That is the mathematical content of monotheism at the level of the Divine Being. "
+                  "(2) *Person-level monotheism* — one God as numerically one Person, and its "
+                  "compatibility with three Persons — **remains DEFERRED**: `monotheism_of_god_and_uniqueness` "
+                  "and `monotheism_compatible_with_trinity` are still out of the live kernel and no "
+                  "compiled declaration exists for either, because they need the person bridge C228, which "
+                  "is BLOCKED. The scope limit is unchanged and machine-checked: unicity of the ground does "
+                  "not force a solitary, relationless monad (`unicity_does_not_force_unitarian_monad`, C212, "
+                  "`{}`), so the Trinitarian frontier stays open. The older justification for the deferral — "
+                  "that \"uniqueness is provably NOT a kernel consequence\" — held only of the *modal* route "
+                  "(`TheologicalModalHardening.necessary_existence_not_entails_uniqueness`, `{}`: bare necessity "
+                  "does not entail uniqueness). It did not hold of the grounding route, which now closes."),
     },
     {
         "attribute": "**Perfect (moral) goodness**",
@@ -4962,6 +5049,7 @@ CLASSICAL_ATTRIBUTES = [
                  "Logos.DivineImmutability.ofGround_stage_invariance",
                  "Logos.DivineImmutability.ofGround_transition_invariance",
                  "Logos.DivineImmutability.ofGround_capacity_invariance",
+                 "Logos.DivineImmutability.capacity_invariance_holds_for_every_entity",
                  "Logos.DivineImmutability.necessity_and_atemporality_yield_immutability",
                  "Logos.DivineImmutability.contingent_entity_fails_immutability"],
         "sense": ("In `DivineImmutability.lean` (footprint `{Initiates, Means, State, Subject}` — VOCAB only), "
@@ -4973,7 +5061,15 @@ CLASSICAL_ATTRIBUTES = [
                   "(4) Capacity Invariance (`ofGround_capacity_invariance`, `{Means, Subject}`, uniform intentional capacity across reality). "
                   "The Thomistic principle is proven: necessity, atemporality, and non-succession entail immutability. "
                   "Contingent entities provably fail immutability (`contingent_entity_fails_immutability`, `{}`). "
-                  "Honest boundary: establishes modal, temporal, process, and capacity unchangeability in Γ; "
+                  "**Vacuity disclosure (C321):** field (4) discriminates nothing — "
+                  "`capacity_invariance_holds_for_every_entity` proves it holds for *every* entity, because `EntityMeans` "
+                  "takes no world argument, so the two worlds in `CapacityInvariance` are bound and unused and the body is "
+                  "`P ↔ P`. All three siblings genuinely quantify and each has a `{}` countermodel; this one has none, because "
+                  "there is nothing in it to refute. The substantive reading (capacity constant *across worlds*, *ST* I q. 9 a. 3) "
+                  "is not expressible in the present vocabulary and stays open as frontier F16. This is disclosure, not demotion: "
+                  "the immutability row itself remains PROVEN. "
+                  "Honest boundary: establishes modal, temporal, and process unchangeability in Γ, plus a capacity-invariance "
+                  "predicate that is currently vacuous; "
                   "does not claim psychological impassibility or constrain relational intentionality."),
     },
     {
@@ -4983,11 +5079,20 @@ CLASSICAL_ATTRIBUTES = [
         "checks": [{"type": "absent",
                     "fragments": ["impassib", "psychological_impassibility"],
                     "allow": []}],
-        "refs": ["Logos.Love.T14_eternalRelation_conditional"],
+        "refs": ["Logos.Love.T14_eternalRelation_conditional",
+                 "Logos.LovesAsGround.the_ground_is_a_necessary_and_chosen_lover",
+                 "Logos.LovesAsGround.the_ground_is_not_a_person"],
         "sense": ("The ground is immutable in its modal existence, temporal stages, process transitions, "
-                  "and capacity (`DivineImmutability.lean`). Impassibility in the sense of relational indifference "
-                  "or incapacity for compassion is not established; Γ explicitly proves the eternal "
-                  "relationality of love (`T14_eternalRelation_conditional`)."),
+                  "and capacity (`DivineImmutability.lean`). Impassibility as a **person-level** claim — "
+                  "incapacity for relational affect or compassion in a person — is not established and "
+                  "cannot be: the ground is provably **no person** (`the_ground_is_not_a_person`, C344), "
+                  "and impassibility is a claim about persons. What is *not* excluded is relational "
+                  "affect at the **entity** level: `the_ground_is_a_necessary_and_chosen_lover` (C343, "
+                  "AXIOMATIC) attributes a directed good to the ground **as a kind**, without making it "
+                  "a subject. So the absence is genuine but narrow: person-level impassibility stays "
+                  "absent because there is no person here to be impassible, while Γ explicitly proves "
+                  "both the eternal relationality of interpersonal love (`T14_eternalRelation_conditional`) "
+                  "and a priced ground-level love that is provably disjoint from it (C346/C348)."),
     },
     {
         "attribute": "**Foundational omnipresence** (sustaining presence to all beings across modal reality)",
@@ -5206,11 +5311,40 @@ CLASSICAL_ATTRIBUTES = [
         "scope": "Divine Being / Ground",
         "expected": "COUNTERMODEL",
         "checks": [{"type": "countermodel",
-                    "full": "Logos.ConditionalTheology.necessary_ground_not_entails_contingent_creation"}],
-        "refs": [],
-        "sense": ("`necessary_ground ⇏ contingent_creation` (Acosmic model, footprint `{}`): "
-                  "a necessary divine ground is consistent with zero contingent created "
-                  "reality. (Ledger target F9 DEFERRED.)"),
+                    "full": "Logos.ConditionalTheology.necessary_ground_not_entails_contingent_creation"},
+                   {"type": "countermodel",
+                    "full": "Logos.ConditionalTheology."
+                            "the_creation_countermodel_is_a_populated_contingent_world"},
+                   {"type": "theorem",
+                    "full": "Logos.ConditionalTheology."
+                            "a_populated_contingent_world_can_also_carry_creation"}],
+        "refs": ["Logos.CosmicExistence.contingent_realm_obtains",
+                 "Logos.CosmicExistence.cosmos_obtains",
+                 "Logos.CosmicExistence.the_ground_loves_the_cosmos"],
+        "sense": ("`necessary_ground ⇏ contingent_creation`, **on a populated world** (footprint "
+                  "`{}`): a necessary ground that grounds *every* content may still create "
+                  "nothing, so the ground does not entail a creation record. (Ledger target F9 "
+                  "DEFERRED.) **This is not the empty world, and the kernel never claimed it "
+                  "was.** `the_creation_countermodel_is_a_populated_contingent_world` proves the "
+                  "separating world contains a subject that is genuinely contingent, and "
+                  "`a_populated_contingent_world_can_also_carry_creation` is its positive "
+                  "counterpart — so the entailment is undetermined in *both* directions, not "
+                  "refuted-and-replaced. The countermodel is a free structure, **not a model of "
+                  "Γ and not a candidate for reality**; the empty world is separately refuted by "
+                  "C355 once a necessary entity exists. **Existence vs entailment, kept apart:** "
+                  "the *existence* of a contingent realm is a **theorem of Γ** — and, since "
+                  "2026-09-27 (lot COSMOS-EXISTENCE-IS-FREE), a **free** one: "
+                  "`CosmicExistence.contingent_realm_obtains` (C350, `PROVEN` at "
+                  "`{propext, Subject}`, witnessed by an atom, no bridge) — while its being a "
+                  "bearer of content is the separate `CosmicExistence.cosmos_obtains` (C367, "
+                  "`PROVEN↑` under the plurality bridge `AxTwoSubjects`; conditionally "
+                  "satisfiable per C354, non-trivial in shape per C353). So what stays "
+                  "COUNTERMODEL here is the *entailment* from the ground, not the existence. "
+                  "**These two facts are independent and both hold**: Γ proves a contingent "
+                  "realm exists at no price at all, and Γ refutes that a necessary ground alone "
+                  "entails a creation record. The ground loves the cosmos under declared prices "
+                  "(C351/C352); it does not derive the cosmos from itself, and no production is "
+                  "claimed."),
     },
     # ---- Ground 3 — Divine Personhood (open) ----
     {
@@ -5419,6 +5553,122 @@ ASIETY_FREEDOM_STEPS = [
 ]
 
 
+# --- LOVE chain: two prices, different in kind, so the table prices both.
+# --- Badges and footprints are DERIVED (kernel audit / axiom registry);
+# --- nothing here is transcribed. See AGENTS.md.
+# --- `L1` = no new vocabulary · `V` = consumes the VOCAB primitive, no substantive axiom ·
+# --- `◆` = the axiom rows themselves · `L2` = the priced inhabitants ·
+# --- `S` = separations · `D` = the record/structure rows (was "the SEM datum side", which
+# --- no longer exists: the `Tag: SEM` datum was retired 2026-09-27) · `🧱` = `{}` countermodel.
+LOVE_STEPS = [
+    ("L1", "C322", "Logos.LovesAsGround.falsityWorld_ne_actualWorld", "decl",
+     "the single witness of modal fragility: the all-`TV.f` world is not the actual world"),
+    ("L1", "C323", "Logos.LovesAsGround.an_atom_is_contingent", "decl",
+     "an atom is contingent — this is what makes C338 bite"),
+    ("L1", "C324", "Logos.LovesAsGround.a_contingent_entity_exists", "decl",
+     "bare contingency, witnessed by an atom — not the cosmos, not an object of love"),
+    ("L1", "C325", "Logos.LovesAsGround.a_meaningful_contingent_entity_exists", "decl",
+     "a contingent entity bearing content exists — *consumes* a `Means` inhabitant, produces none"),
+    ("L1", "C326", "Logos.LovesAsGround.ground_grounds_every_entity", "decl",
+     "the ground grounds everything — proof is `intro p _; exact True.intro`"),
+    ("L1", "C327", "Logos.LovesAsGround.atoms_bear_no_meaning", "decl",
+     "an atom bears no meaning at all"),
+    ("L1", "C328", "Logos.LovesAsGround.ground_grounds_the_meaningless", "decl",
+     "the ground grounds even the meaningless — undiscriminating, *vacuously*"),
+    ("L1", "—", "Logos.LovesAsGround.the_ground_is_a_universal_modal_ground", "decl",
+     "**restates C204**; body is literally `ofGround_universal_modal_ground` — no second id"),
+    ("L1", "C329", "Logos.LovesAsGround.no_subject_is_a_necessary_entity", "decl",
+     "no person can occupy the necessary pole — discharges it with no love axiom"),
+    ("L1", "C330", "Logos.LovesAsGround.only_the_ground_is_necessary", "decl",
+     "**forced by the three-constructor ontology** — structural fact, **not** evidence of love"),
+    ("V", "—", "Logos.LovesAsGround.GroundLoves", "decl",
+     "**THE RELATION, ADDED NOT REUSED**: necessary lover, actual other, directed good, "
+     "meaningful target, context `a` — `Loves` is `Subject`-indexed and the ground is no subject"),
+    ("V", "C331", "Logos.LovesAsGround.ground_love_requires_a_necessary_lover", "decl",
+     "love is eternal *in the lover* — half of the poem's \"também é necessário\""),
+    ("V", "C332", "Logos.LovesAsGround.ground_love_is_directed_at_another", "decl",
+     "love is not self-regarding: actual target, other than the lover"),
+    ("V", "C333", "Logos.LovesAsGround.ground_love_bears_a_directional_good", "decl",
+     "the conjunct with no first-order substitute — the one the inhabitation pays for"),
+    ("V", "C334", "Logos.LovesAsGround.ground_love_requires_a_meaningful_target", "decl",
+     "the target bears content **of its own** — what separates love from mere capacity"),
+    ("V", "C335", "Logos.LovesAsGround.meaningless_entities_cannot_be_loved", "decl",
+     "love cannot reach the meaningless, in any context"),
+    ("V", "C336", "Logos.LovesAsGround.grounding_reaches_what_love_cannot", "decl",
+     "**the separation, in one statement** — the machine-checked content of \"not *merely* "
+     "a mathematical ground\""),
+    ("V", "C337", "Logos.LovesAsGround.grounding_is_total_but_love_is_not", "decl",
+     "the totals separate — read with C338 as a pair, not a single step"),
+    ("V", "C338", "Logos.LovesAsGround.meaningful_love_bridge_is_refuted", "decl",
+     "**REFUTATION OF THE ATTRACTIVE FORM**: the unrestricted bridge is false in Γ — "
+     "the only justification for the axiom's meaning hypothesis"),
+    ("◆", "C349", "Logos.LovesAsGround.GroundBearsGood", "axiom",
+     "**PRICE 1, VOCABULARY**: the directed-good primitive — constrains nothing, names what is missing"),
+    ("◆", "C339", "Logos.LovesAsGround.AxGroundLovesContingentRealm", "axiom",
+     "**PRICE 2, SUBSTANCE**: the inhabitation — genuinely not forced, genuinely not trivial"),
+    ("L2", "C340", "Logos.LovesAsGround.the_ground_loves_every_meaningful_contingent_reality", "decl",
+     "the bridge, applied — the ground's love as a *conclusion*, first time in the corpus"),
+    ("L2", "C341", "Logos.LovesAsGround.the_ground_bears_a_directional_good_toward_the_cosmos", "decl",
+     "the content, unwrapped — where the whole price sits"),
+    ("L2", "C342", "Logos.LovesAsGround.the_ground_is_a_liver", "decl",
+     "the inhabitants, with the price visible — identifies nothing with the cosmos"),
+    ("L2", "C343", "Logos.LovesAsGround.the_ground_is_a_necessary_and_chosen_lover", "decl",
+     "**the \"necessary ∧ chosen\" cell, occupied** — necessity forced, choice exactly the bridge"),
+    ("S", "C344", "Logos.LovesAsGround.the_ground_is_not_a_person", "decl",
+     "the ground is not a personal entity — love is attributed **as a kind**"),
+    ("S", "C345", "Logos.LovesAsGround.ground_love_does_not_identify_a_person", "decl",
+     "the inhabitation cannot be read as a claim about a person"),
+    ("S", "C346", "Logos.LovesAsGround.subject_love_is_not_ground_love", "decl",
+     "**interpersonal love never yields ground-level love** — provably disjoint"),
+    ("S", "C347", "Logos.LovesAsGround.interpersonal_love_never_reaches_the_necessary_quadrant", "decl",
+     "no amount of interpersonal love populates the necessary quadrant"),
+    ("S", "C348", "Logos.LovesAsGround.ground_love_cannot_be_read_as_person_love", "decl",
+     "**the transfer is unstatable, not merely blocked** — bridge #9 / C228 untouched"),
+    ("V", "—", "Logos.LovesAsGround.ground_love_preserves_pure_actuality", "decl",
+     "**restates C217** (`ofGround_no_transition_potency`) — love as act *adds to* pure actuality"),
+    ("L1", "C350", "Logos.CosmicExistence.contingent_realm_obtains", "decl",
+     "**contingency-overflow — a theorem, not a datum, and now free of any bridge**: something "
+     "obtains, is modal-fragile, and is not the necessary ground. Witnessed by an atom via "
+     "`an_atom_is_contingent 0` (C324), which is why the price vanished — `ContingentRealm` is "
+     "`Realm` *without* `bears_meaning`, so no `Subject` and no `Means` are consumed. **This "
+     "row asserts no act of production**: \"created\" names the region of reality that is "
+     "actual, modal-fragile and not the ground; no `Creates` relation, agent or first moment is "
+     "claimed or derivable. Rejecting `AxTwoSubjects` does not touch this row. Was a "
+     "`Tag: SEM` axiom (`AxContingentCreationObtains`), retired 2026-09-27 — the lemma it "
+     "declared unavailable was already a theorem"),
+    ("D", "—", "Logos.CosmicExistence.ContingentRealm", "decl",
+     "the realm **without the meaning condition**: `witness`, `actual`, `contingent`, "
+     "`not_the_ground` — i.e. `Realm` minus `bears_meaning`, which is precisely why C350 is free"),
+    ("D", "—", "Logos.CosmicExistence.ContingentRealmObtains", "decl",
+     "the `Prop` form of the same, so the ledger can name the claim as C350 while the record "
+     "keeps a single witness"),
+    ("L2", "C367", "Logos.CosmicExistence.cosmos_obtains", "decl",
+     "**the same realm, now meaning-bearing — this is the row that pays**: derived from "
+     "`Plurality.cogito_from_T12` under the plurality bridge `AxTwoSubjects` (META), so Γ itself "
+     "produces the meaning-bearing subject and an empty contingent world is *proved* impossible. "
+     "The price is now correctly attributed: `AxTwoSubjects` buys the realm's *content*, not "
+     "its existence. **It is also the row that identifies the realm as *the* cosmos** — C324's "
+     "prohibition (an atom is not the cosmos) is untouched, because C350 shows only that the "
+     "*shape* has an instance"),
+    ("D", "—", "Logos.CosmicExistence.CreatedRealm", "decl",
+     "the meaning-bearing realm's structure: `Nonempty Realm`, single witness — fair definition; "
+     "the inhabitation is now **proved** (C367), no longer stipulated"),
+    ("S", "—", "Logos.CosmicExistence.gamma_exhibits_a_meaning_subject", "decl",
+     "**the emptiness result on its own**: Γ exhibits a subject that means something — the "
+     "user's point, made checkable, with the subject produced *inside* Γ rather than assumed"),
+    ("L2", "C351", "Logos.CosmicExistence.the_ground_loves_the_cosmos", "decl",
+     "**the conclusion, both prices visible** — \"not merely a mathematical ground, but loves\""),
+    ("L2", "C352", "Logos.CosmicExistence.the_ground_loves_the_cosmos_in_a_context", "decl",
+     "the same conclusion in the relational vocabulary — `GroundLoves`, **not** `Loves`"),
+    ("🧱", "C353", "Logos.CosmicExistence.perfect_universe_has_no_contingent_realm", "countermodel",
+     "**countermodel, `{}`**: the contingency shape is refutable in a world-rigid universe — "
+     "on an **unrelated free structure, not a model of Γ**"),
+    ("L1", "C354", "Logos.CosmicExistence.cosmos_presence_model", "decl",
+     "**conditional satisfiability**: the realm obtains for any `Means` inhabitant — "
+     "stated, not glossed as unconditional"),
+]
+
+
 def _stipulation_entry(name: str):
     """One ◈ registry entry by name, or None (derived from the audit file)."""
     if not STIPULATION_AUDIT_PATH.exists():
@@ -5497,6 +5747,70 @@ def render_asiety_freedom_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     return lines
 
+
+def _axiom_row_status(full: str, decls: dict) -> str:
+    """`◆ AXIOM (TAG)` for one declared axiom, tag derived from the Lean docstring.
+    A bare `◆ AXIOM` carries no tag, so axiom rows in the LOVE chain get their own
+    presentation rather than the generic cell."""
+    d = decls.get(full) or {}
+    tag = (d.get("tag") or "UNTAGGED").strip()
+    return f"◆ AXIOM ({tag}) — a declared axiom, **not a theorem**"
+
+
+def render_love_chain(decls: dict, node_map: dict) -> list[str]:
+    """The LOVE chain, step by step, with both prices on every step.
+
+    Emitted so that neither price can be read off the badge alone: the PROVEN↑ badge
+    names only the substantive axiom, so without this block a reader would conclude the
+    VOCAB primitive is free. Every other cell is derived from the kernel audit."""
+    lines = []
+    ap = lines.append
+    ap("### LOVE chain, step by step (both prices, every step)")
+    ap("")
+    ap("> **Read this table before reading the divine-love row above.** The author's chain was:")
+    ap("> axiom-free ground facts → **the missing vocabulary** (`GroundBearsGood`, PRICE 1) →")
+    ap("> **the declared bridge** (`AxGroundLovesContingentRealm`, PRICE 2) → which yields the")
+    ap("> inhabitants → while the separations say what was **not** bought, and the SEM datum")
+    ap("> (PRICE 3, sibling module) supplies the cosmos. The **◆ rows are axioms, not theorems**,")
+    ap("> and the two prices are different in kind: confusing them is the mistake the kernel")
+    ap("> audit cannot catch.")
+    ap("")
+    ap("`L1` = no new vocabulary · `V` = consumes the VOCAB primitive, no substantive axiom ·")
+    ap("`◆` = **the axiom itself, not a theorem** · `L2` = the priced inhabitants · `S` =")
+    ap("separations · `D` = the SEM datum side · `🧱` = `{}` countermodel pricing the shape.")
+    ap("")
+    ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
+    ap("|---|---|---|---|---|---|")
+    for kind, cid, full, atype, text in LOVE_STEPS:
+        if atype == "axiom":
+            status = _axiom_row_status(full, decls)
+        else:
+            live = _classical_anchor_live({"type": atype, "full": full},
+                                          decls, node_map)
+            status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
+           f"{status} | {kernel_fp_text(full)} |")
+    ap("")
+    ap("**The dual cost, stated because the badge states only half of it.** The "
+       "`the_ground_is_a_necessary_and_chosen_lover` row above renders "
+       "**⚠️ AXIOMATIC (AxGroundLovesContingentRealm)**: `footprint_parts` files "
+       "`GroundBearsGood` under the vocabulary baseline, so the primitive never appears in "
+       "the parenthetical. A reader trusting the badge alone concludes the directed-good "
+       "vocabulary is free. It is not: without PRICE 1 there is no `GroundLoves` relation to "
+       "inhabit, and without PRICE 2 no inhabitant follows. The registry is unmoved at 25 "
+       "axioms (14/7/4) **not because the batch is free but because all three prices were "
+       "already declared and invisible** — which is why this block, like the ◈ registry for "
+       "ASIETIC-CHOICE, is load-bearing rather than decorative.")
+    ap("")
+    ap("**Also not claimed:** `GroundLoves` is **not** `Loves` (different index, different "
+       "kind — merging them would silently reinterpret T14); the `GroundLoves → Loves` "
+       "transfer is unstatable (C348), so bridge #9 / C228 stands exactly as it was; C330 "
+       "is ontology-forced, not evidence of love; C353 is a countermodel on an unrelated "
+       "free structure, not a model of Γ; and C354 is satisfiability conditional on a "
+       "`Means` inhabitant.")
+    ap("")
+    return lines
+
 def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     """Emits the classical-attributes table block (placed after Branch C, before
     the Further Investigations catalogue). Statuses are live-derived, never
@@ -5541,6 +5855,7 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
            f"{_stip_marker(marked)} | {row['sense']}{ref_cell} |")
     ap("")
     lines.extend(render_asiety_freedom_chain(decls, node_map))
+    lines.extend(render_love_chain(decls, node_map))
     ap("_Synthesis — the strongest current profile._ The theory has established, of a")
     ap("**personal, rational, free, authoritative-over-its-acts, independently individuated**")
     ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")
@@ -5551,7 +5866,11 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("and **Foundational Omniscience** (a truth-exhaustive scope in every world, whose infallible half is")
     ap("machine-checked as *refuted* for the ground), and **Foundational Omnipotence** (a gapless operative")
     ap("scope: no state of affairs that does not involve a contradiction is closed to the ground, whose scope")
-    ap("domain is machine-checked non-empty and contradiction-free).")
+    ap("domain is machine-checked non-empty and contradiction-free), and **Divine love** (the ground as "
+       "lover of contingent reality — ⚠️ AXIOMATIC under the VOCAB primitive `GroundBearsGood` and the "
+       "META bridge `AxGroundLovesContingentRealm`, with the cosmos's existence a **free theorem** "
+       "(C350, `{propext, Subject}`, no bridge) and only its content-bearinghood priced on "
+       "`AxTwoSubjects` (C367); see the LOVE chain block).")
     ap("Crucially, the theory **strictly separates** these machine-verified")
     ap("foundational/functional attributes from their unproven physical, psychological, and scholastic counterparts:")
     ap("**physical/spatial omnipresence**, **psychological personality**, **scholastic simplicity**,")
@@ -5563,8 +5882,15 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("**perfect moral goodness** (the moral pole itself now obtains under the single declared "
        "META bridge, C178; its attribution to the Divine Being stays a 🧱 frontier), the "
        "**Trinity**, the **Incarnation**, and contingent")
-    ap("**creation** — remain **separate proof targets**")
-    ap("(`⏸` / `❌`) or explicit **countermodel frontiers** (`🧱`) until the live kernel proves them.")
+    ap("**creation as entailment** — remain **separate proof targets**")
+    ap("(`⏸` / `❌`) or explicit **countermodel frontiers** (`🧱`) until the live kernel proves them. "
+       "Contingent creation *as existence* is no longer among them: it is a **free theorem** "
+       "(C350 `contingent_realm_obtains`, `{propext, Subject}`), witnessed by an atom, with no "
+       "bridge and no substantive axiom. Only the realm's *content* is priced, on the plurality "
+       "bridge `AxTwoSubjects` (C367 `cosmos_obtains`) — a metaethical commitment, not a semantic "
+       "one. And contingent creation *as production* remains unclaimed: no `Creates` relation, "
+       "no agent, no first moment. So the cost was relocated and then, for existence itself, "
+       "dissolved — but the act was never ours to claim.")
     ap("")
     return lines
 

@@ -22,6 +22,10 @@ and **Eternity/Atemporality** (`Logos.NecessityEternity`).
 4. **Capacity Invariance (Unchanging Meaning Capacity):**
    The ground's intentional capacity across reality is immutable and uniform
    (`CapacityInvariance Entity.ofGround`, footprint `{Means, Subject}`).
+   **Vacuity disclosure (C321):** this fourth field is a tautology, satisfied by *every*
+   entity, because `EntityMeans` takes no world argument — see
+   `capacity_invariance_holds_for_every_entity`. The other three fields genuinely discriminate
+   and each has a `{}` countermodel. Disclosure only: item 5 below remains `PROVEN`.
 5. **The Master Synthesis:**
    `DivineImmutability Entity.ofGround` conjoins modal, temporal, process, and capacity
    invariance with 0 substantive axioms (footprint: `{Initiates, Means, State, Subject}`).
@@ -112,6 +116,17 @@ theorem ofGround_transition_invariance :
 
 /-- Intentional Capacity Invariance: the entity's meaning capacity across reality
     is constant and does not vary across worlds, times, or contexts.
+
+    **Vacuity disclosure (C321).** As stated this predicate is a tautology, not a
+    discrimination. `EntityMeans` is `EntityMeans (e : Entity) (p : Prop) : Prop`
+    (`RecoveredOntologicalGround.lean:46`) and takes **no world argument at all**, so the two
+    worlds quantified below are bound and never mentioned in the body, and `P ↔ P` holds for
+    any `p`. Consequently `CapacityInvariance` holds for *every* entity — see
+    `capacity_invariance_holds_for_every_entity`. The substantive reading ("meaning capacity is
+    constant *across worlds*") is not expressible in the present vocabulary, which has no
+    world-indexed meaning relation; that is recorded as blocked frontier F16. This is
+    disclosure, not demotion: `ofGround_divine_immutability` remains `PROVEN`.
+
     Footprint: `{Means, Subject}`. -/
 def CapacityInvariance (e : Entity) : Prop :=
   ∀ p : Prop, ∀ _w₁ _w₂ : World, EntityMeans e p ↔ EntityMeans e p
@@ -121,6 +136,32 @@ def CapacityInvariance (e : Entity) : Prop :=
     Footprint: `{Means, Subject}`. -/
 theorem ofGround_capacity_invariance :
     CapacityInvariance Entity.ofGround := by
+  intro p _w₁ _w₂
+  exact Iff.rfl
+
+/-- COUNTERMODEL (C321) — Intentional Capacity Invariance discriminates nothing: it is
+    satisfied by every entity whatsoever, not merely by the ground, so it cannot distinguish
+    the ground from a subject or an atom.
+
+    The reason is in the vocabulary, not the proof. `EntityMeans` takes no world argument
+    (`RecoveredOntologicalGround.lean:46`), so the two worlds in `CapacityInvariance` are bound
+    and unused, and the body reduces to `EntityMeans e p ↔ EntityMeans e p` — discharged by
+    `Iff.rfl`, the same two lines as `ofGround_capacity_invariance` (`:132-135`).
+
+    The asymmetry that makes this worth recording: all three sibling fields of
+    `DivineImmutability` genuinely quantify and do discriminate — `ModalInvariance` over
+    `w₁ w₂ : World` via `ExistsAt`, `StageInvariance` over `t₁ t₂ : Time` via `ExistsAtTime`,
+    `TransitionInvariance` as the real predicate `NotInSuccession e` — and each has a `{}`
+    non-triviality countermodel on record (C197 for modal/stage invariance, alongside C192
+    simplicity, C202 omnipresence, C214 pure actuality). This field has none, because there is
+    nothing in it to refute. Generalising the existing ground-specific theorem to all entities
+    is the honest form of the disclosure: the ledger previously stated the property only where
+    it could not fail, which read as if it carried weight.
+
+    Footprint: `{Means, Subject}` — the *statement* mentions `EntityMeans`, whose body mentions
+    `Means` and `Subject`, though the proof uses no axiom. Same reason
+    `FoundationalUnicity.groundsEntity_reflexive` is not `{}`; see the `Entity`-layer floor. -/
+theorem capacity_invariance_holds_for_every_entity (e : Entity) : CapacityInvariance e := by
   intro p _w₁ _w₂
   exact Iff.rfl
 

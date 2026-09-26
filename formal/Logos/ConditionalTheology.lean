@@ -398,7 +398,7 @@ theorem preceding_theory_not_entails_incarnation :
 end Sector7_Incarnation
 
 -- ===========================================================================
--- Sector 8: Contingent Creation Independence & Acosmic Model
+-- Sector 8: Contingent Creation Independence & the Separation Model
 -- ===========================================================================
 
 section Sector8_Creation
@@ -406,29 +406,222 @@ section Sector8_Creation
 /-!
 Investigates whether necessary divine reality entails contingent created reality.
 Does a necessary ground entail the existence of contingent creatures?
+
+**Rebuilt 2026-09-27 (Sector 8).** The countermodel previously installed the
+*empty type* as the subject sort and discharged the negated conclusion by `nomatch`
+on a data field. That proved only that a creation record cannot be built from an
+empty sort; it stated no contingency, never used the ground's `∀ p` premise, and
+had no creation relation to deny — while its English gloss in
+`ClaimMeanings.lean` and its report in `investigations/creation.md` read as
+"a necessary divine ground exists with zero contingent created reality".
+
+The countermodel is now `CreationWorld`: a **populated** modal world with a
+necessary ground that grounds every content, a subject that is genuinely contingent
+in the model's own modality, and a *creation relation kept distinct from the
+grounding relation* so that "grounds everything yet creates nothing" is statable.
+`the_creation_countermodel_is_a_populated_contingent_world` machine-checks that the
+separating world is not an empty world, and
+`a_populated_contingent_world_can_also_carry_creation` is its positive counterpart,
+so `COUNTERMODEL` reads as *undetermined*, never as "creation is impossible".
 -/
 
-structure CreationStructure (Subj : Type) (Ent : Type) where
-  creator : Ent
-  created_subject : Subj
-  is_contingent : Subj → Prop
-  contingent_created : is_contingent created_subject
+/-- **A modal creation world**, in the `DeepCreationSignature` idiom of
+    `TheologicalModalHardening.lean:631-640`, extended with a subject sort `Subj`
+    kept *separate* from the entity sort `Ent` so a world can hold contingent
+    subjects while holding no creation record.
 
-/-- Acosmic Divine Model:
-    A necessary divine ground exists with zero contingent created reality.
-    Necessary reality does NOT entail creation. -/
+    **Why these are fields and not accidents of the proof.** Every property the
+    countermodel needs is made structural, so that no instantiation can degenerate
+    into the empty world and no reading of it can be "the contingent world does not
+    exist":
+
+    - `s` / `s_actual` / `s_contingent` put a **genuinely contingent subject** in the
+      world: it obtains at the actual world and fails at another. This is ambient
+      contingency in the model's own modality, not a by-product of an empty sort.
+    - `g : Ent` makes the entity sort inhabited, so the model cannot be the empty
+      world on the creator side either.
+    - `Nec` defaults to world-indexed existence, so the ground cannot be made
+      necessary by stipulation.
+    - `g_grounds_all` keeps the ground's own premise `∀ p, p → Ground e p`
+      load-bearing. A countermodel that ignored it would not be testing the
+      ground's strength at all.
+
+    What is *not* a field is the presence or absence of a creation record: that is
+    what each model settles, and the two models below settle it both ways. -/
+structure CreationWorld (Subj Ent World : Type) where
+  /-- World-indexed existence of entities. -/
+  ExistsAt : World → Ent → Prop
+  /-- The actual world. -/
+  actualWorld : World
+  /-- World-indexed existence of subjects, on their own sort. -/
+  SubjectExistsAt : World → Subj → Prop
+  /-- The grounding relation: an entity grounds a content. -/
+  Ground : Ent → Prop → Prop
+  /-- The creation relation: an entity brings a subject into existence. Kept
+      distinct from `Ground` in both shape and target — a content vs a subject —
+      see `CreationRecord`. -/
+  Creates : Ent → Subj → Prop
+  /-- Necessity of an entity. Defaults to existence in every world, so a model
+      cannot grant necessity by stipulation. -/
+  Nec : Ent → Prop := fun e => ∀ w, ExistsAt w e
+  /-- The ground entity. Its presence makes `Ent` inhabited. -/
+  g : Ent
+  /-- The ground is necessary. -/
+  g_necessary : Nec g
+  /-- The ground grounds every content — the second half of the refuted premise. -/
+  g_grounds_all : ∀ p, Ground g p
+  /-- A contingent subject. Its presence makes `Subj` inhabited. -/
+  s : Subj
+  /-- It obtains at the actual world. -/
+  s_actual : SubjectExistsAt actualWorld s
+  /-- And it fails at another world: real contingency, in the model's modality. -/
+  s_contingent : ∃ w, ¬ SubjectExistsAt w s
+
+/-- **A creation record**: a contingent subject, brought into existence by a given
+    entity *through a creation relation*.
+
+    The creation relation `M.Creates` is deliberately a relation **distinct from**
+    the grounding relation `M.Ground`, and this is the load-bearing design decision
+    of the whole countermodel: the claim under test is that a ground which grounds
+    *everything* nevertheless creates *nothing*. Had the record's link to the ground
+    been the grounding relation itself, the countermodel would be unstatable — a
+    necessary ground grounding every content trivially builds a record. Two
+    relations, not one.
+
+    `contingent_created` is stated over `M.SubjectExistsAt` directly rather than
+    through a free `is_contingent` field, so a record cannot be built by declaring
+    its own subject contingent. -/
+structure CreationRecord {Subj Ent World : Type} (M : CreationWorld Subj Ent World) where
+  /-- The creating entity. -/
+  creator : Ent
+  /-- The created subject. -/
+  created_subject : Subj
+  /-- The creation itself. This is what the countermodel denies. -/
+  created : M.Creates creator created_subject
+  /-- The created subject is genuinely contingent in the model's own modality. -/
+  contingent_created : ∃ w, ¬ M.SubjectExistsAt w created_subject
+
+/-- **The entailment under examination**, in the models' own modality: in *every*
+    world whose ground is necessary and grounds every content, a contingent subject
+    exists that the ground created. Quantifying over models — rather than
+    exhibiting one failed pair of `Ground`/`Nec` — is what makes a refutation of it
+    a countermodel proper. -/
+def GroundEntailsCreation (Subj Ent World : Type) : Prop :=
+  ∀ (M : CreationWorld Subj Ent World),
+    (∃ e : Ent, M.Nec e ∧ ∀ p, M.Ground e p) →
+    Nonempty (CreationRecord M)
+
+/-- **The countermodel, on a populated world.** A necessary ground exists and grounds
+    everything; a contingent subject exists and is genuinely contingent; the ground
+    creates nothing. Both sorts are inhabited and the contingency is ambient, so
+    this is **not** the empty world — see
+    `the_creation_countermodel_is_a_populated_contingent_world`.
+
+    The absence of a creation record is carried by `Creates := fun _ _ => False`,
+    a field *distinct* from `Ground := fun _ _ => True`. The
+    ground-grounds-everything premise is honoured in full and the creation relation
+    is empty regardless.
+
+    **Recorded history.** The predecessor of this model set `Subj := Empty` and
+    discharged the negated conclusion by `nomatch` on the data field
+    `created_subject`; it never used the ground's `∀ p` premise, had no creation
+    relation to deny, and stated no contingency at all. It proved only that a record
+    cannot be built from an empty sort — yet `investigations/creation.md` reported
+    it as `∀ e, ¬ ContingentEntity e`, a conjunct the kernel never contained, under a
+    `PROVEN` status the ledger assigns to `COUNTERMODEL`. -/
+def populatedCreationWorld : CreationWorld Unit Unit Bool where
+  ExistsAt := fun _ _ => True
+  actualWorld := true
+  SubjectExistsAt := fun w _ => w = true
+  Ground := fun _ _ => True
+  Creates := fun _ _ => False
+  g := ()
+  g_necessary := fun _ => trivial
+  g_grounds_all := fun _ => trivial
+  s := ()
+  s_actual := rfl
+  s_contingent := ⟨false, fun h => by cases h⟩
+
+/-- **The positive counterpart.** The *same* populated world, with the creation
+    relation inhabited: the necessary ground still grounds everything, a contingent
+    subject still exists, and now the ground does create it.
+
+    Stated so the ledger's `COUNTERMODEL` is not read as "creation is impossible".
+    The entailment is **undetermined**, not refuted-and-replaced: one populated world
+    without a record, one with. -/
+def createdCreationWorld : CreationWorld Unit Unit Bool where
+  ExistsAt := fun _ _ => True
+  actualWorld := true
+  SubjectExistsAt := fun w _ => w = true
+  Ground := fun _ _ => True
+  Creates := fun _ _ => True
+  g := ()
+  g_necessary := fun _ => trivial
+  g_grounds_all := fun _ => trivial
+  s := ()
+  s_actual := rfl
+  s_contingent := ⟨false, fun h => by cases h⟩
+
+/-- **The countermodel world is populated, and its subject is genuinely
+    contingent.** This is the machine-checked answer to reading the countermodel as
+    a proposal that the contingent world does not exist: the very world that
+    separates the necessary ground from creation is *proved here to contain a
+    contingent subject*. What is absent from it is a creation record — not
+    contingent reality. -/
+theorem the_creation_countermodel_is_a_populated_contingent_world :
+    ∃ (Subj Ent World : Type) (M : CreationWorld Subj Ent World),
+      Nonempty Subj ∧
+      (∃ s, M.SubjectExistsAt M.actualWorld s ∧ ∃ w, ¬ M.SubjectExistsAt w s) ∧
+      ¬ Nonempty (CreationRecord M) := by
+  refine ⟨Unit, Unit, Bool, populatedCreationWorld, ⟨⟨()⟩, ⟨⟨(), ⟨?_, ?_⟩⟩, ?_⟩⟩⟩
+  · exact populatedCreationWorld.s_actual
+  · exact populatedCreationWorld.s_contingent
+  · rintro ⟨c⟩
+    exact c.created
+
+/-- **The same populated world can also carry a creation record.** With `Creates`
+    inhabited, a record is built and its subject is contingent by the ambient
+    modality. Paired with
+    `the_creation_countermodel_is_a_populated_contingent_world`, this is the
+    positive/negative pair that makes the C110 separation a genuine
+    non-determination rather than a denial of creation. -/
+theorem a_populated_contingent_world_can_also_carry_creation :
+    ∃ (Subj Ent World : Type) (M : CreationWorld Subj Ent World),
+      (∃ s, M.SubjectExistsAt M.actualWorld s ∧ ∃ w, ¬ M.SubjectExistsAt w s) ∧
+      Nonempty (CreationRecord M) := by
+  refine ⟨Unit, Unit, Bool, createdCreationWorld, ⟨⟨(), ⟨?_, ?_⟩⟩, ?_⟩⟩
+  · exact createdCreationWorld.s_actual
+  · exact createdCreationWorld.s_contingent
+  · refine ⟨{ creator := (), created_subject := (), created := trivial,
+               contingent_created := ⟨false, fun h => by cases h⟩ }⟩
+
+/-- **Separation Model (rebuilt on a populated world).** A necessary divine ground exists,
+    grounds every content, and coexists with a contingent subject that is not *its* creation:
+    necessary reality does NOT entail creation.
+
+    **Read the scope before the content.** This is a countermodel over a purpose-built
+    free structure (`CreationWorld`), not a model of Γ and not a candidate for
+    reality. It says the necessary-ground premises do not *derive* a creation record.
+    It says nothing about whether the contingent world exists — that is
+    `CosmicExistence.cosmos_obtains` (C350), a **proved theorem** (proved 2026-09-27;
+    it was a declared `Tag: SEM` axiom until then) resting on the plurality bridge
+    `AxTwoSubjects` — and `the_creation_countermodel_is_a_populated_contingent_world`
+    proves the countermodel used here is no empty world.
+
+    Note the two facts are independent and both hold: Γ **proves** a contingent realm
+    exists, and Γ **refutes** that a necessary ground alone entails a creation record.
+    Existence is not entailment.
+
+    Footprint: `{}`. -/
 theorem necessary_ground_not_entails_contingent_creation :
-    ∃ (Subj : Type) (Ent : Type)
-      (Ground : Ent → Prop → Prop)
-      (Nec : Ent → Prop),
-      -- Necessary ground exists
-      (∃ e : Ent, Nec e ∧ ∀ p, p → Ground e p) ∧
-      -- Zero contingent subjects exist
-      ¬ (∃ (_c : CreationStructure Subj Ent), True) := by
-  refine ⟨Empty, Unit, fun _ p => p, fun _ => True, ?_⟩
-  refine ⟨⟨(), trivial, fun _ hp => hp⟩, ?_⟩
-  rintro ⟨⟨_, s, _, _⟩, _⟩
-  exact nomatch s
+    ¬ (∀ (Subj Ent World : Type), GroundEntailsCreation Subj Ent World) := by
+  rintro hAll
+  have hRec : Nonempty (CreationRecord populatedCreationWorld) :=
+    hAll Unit Unit Bool populatedCreationWorld
+      ⟨populatedCreationWorld.g, populatedCreationWorld.g_necessary,
+        populatedCreationWorld.g_grounds_all⟩
+  obtain ⟨c⟩ := hRec
+  exact c.created
 
 end Sector8_Creation
 
@@ -458,7 +651,7 @@ def edge_UltimateGround_to_PersonalGround : InferenceStatus := InferenceStatus.C
 def edge_PersonalGround_to_Plurality : InferenceStatus := InferenceStatus.METAPHYSICAL -- requires A10 (AxTwoSubjects)
 def edge_Plurality_to_Love : InferenceStatus := InferenceStatus.METAPHYSICAL -- requires AxPersonsAffect
 def edge_Love_to_Trinity : InferenceStatus := InferenceStatus.COUNTERMODEL -- separated by preceding_theory_not_entails_trinity
-def edge_DivineGround_to_Creation : InferenceStatus := InferenceStatus.COUNTERMODEL -- separated by necessary_ground_not_entails_contingent_creation
+def edge_DivineGround_to_Creation : InferenceStatus := InferenceStatus.COUNTERMODEL -- separated by necessary_ground_not_entails_contingent_creation (on a populated world, not an empty one)
 def edge_Creation_to_Incarnation : InferenceStatus := InferenceStatus.COUNTERMODEL -- separated by preceding_theory_not_entails_incarnation
 
 /-- Machine-Checked Theological Dependency Ledger:

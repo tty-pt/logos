@@ -28,7 +28,7 @@ something outside itself' to 'one foundation is external to every system' is
 asserted but not shown"* (`CHARACTERISTICS.md:64`). The ledger had to retire the
 corresponding routes as **C78/C79/C88** (`CHARS.md:142`), the last being
 `Modal.transcendental_quantifier_swap`, retired as *"manufactured origin
-quantifier swap destroyed"*. **C252 is the machine-checked justification of that
+quantifier swap destroyed"*. **C301 is the machine-checked justification of that
 retirement.** It was asserted; here it is proved.
 
 ### The design decision `CHARS.md:144` demands, now taken
@@ -44,22 +44,23 @@ single `Transcendence` would silently pick one sense and hide the other three.
 | Sense | Verdict | Claims |
 |---|---|---|
 | ontological | **already PROVEN** (C195) — nothing added, cited only | — |
-| logical (system-externality) | **inference refuted**, conclusion undelivered | C252, C253, C254 |
-| hierarchical | **separation shown**: externality ⇏ ungroundedness | C255, C256 |
-| causal | **separation shown**: universal grounding ⇏ causal externality | C257 |
+| logical (system-externality) | **inference refuted**, conclusion undelivered | C301, C302, C303 |
+| hierarchical | **separation shown**: externality ⇏ ungroundedness | C304, C305 |
+| causal | **separation shown**: universal grounding ⇏ causal externality | C306 |
+| diagonal (GTT shape) | **consistent in both directions**; yields no forced foundation | C308 |
 
-The one new **PROVEN** result is **C258**: the ground is the **sole** entity in
+The one new **PROVEN** result is **C307**: the ground is the **sole** entity in
 the Γ inventory satisfying `TranscendentGround`. No ledger row said this; C195
 says the ground *is* transcendent, C213 repeats it.
 
 ### The honest boundary, machine-checked
 
-- **The conclusion is affirmed as consistent, not destroyed.** C252 refutes an
-  *inference*; C253 exhibits a model in which the conclusion ("some point is
-  outside every system") is *true*, so C252 bounds a real claim rather than a
+- **The conclusion is affirmed as consistent, not destroyed.** C301 refutes an
+  *inference*; C302 exhibits a model in which the conclusion ("some point is
+  outside every system") is *true*, so C301 bounds a real claim rather than a
   fiction. Refuting a route is not refuting a thesis.
 - **The route dies at the quantifier swap.** `∀ σ, ∃ e, ¬ In σ e` does not give
-  `∃ e, ∀ σ, ¬ In σ e`; the outsides need not coalesce (C252). C254 makes the
+  `∃ e, ∀ σ, ¬ In σ e`; the outsides need not coalesce (C301). C303 makes the
   failure concrete at `Entity.ofGround`: the ground really does ground all actual
   reality (`ofGround_ground_of_reality`, `NecessityEternity.lean:140`, reused
   verbatim), and it is nonetheless **inside** an ordinary membership class.
@@ -75,7 +76,7 @@ says the ground *is* transcendent, C213 repeats it.
   `Agency.Initiates : Subject → State → State → Prop → Prop`
   (`Agency.lean:150`), a declared VOCAB axiom, and it is subject-indexed;
   `GroundsEntity` (`RecoveredOntologicalGround.lean:57`) is explanatory
-  containment (*esse est agere*), not production. C257 is therefore stated over
+  containment (*esse est agere*), not production. C306 is therefore stated over
   an abstract causal relation. The missing statements are recorded here without
   the `axiom`/`def` keywords on purpose — a line starting with `axiom` inside
   this header is parsed as a real axiom declaration by `depviz` and by
@@ -87,7 +88,7 @@ says the ground *is* transcendent, C213 repeats it.
           for all g : Entity and all phi : Form,
             (exists w, Satisfies w phi) -> exists v, Produces g v phi
 
-  Note that (1) alone would not give (2): C257 already machine-checks that
+  Note that (1) alone would not give (2): C306 already machine-checks that
   universal grounding entails no causal externality whatever.
 - **Aseity is out of scope, deliberately.** `TranscendentGround` is a pair of
   non-identity clauses and says nothing about grounding, so `CanonicalAseity` is
@@ -97,13 +98,37 @@ says the ground *is* transcendent, C213 repeats it.
   an explicit countermodel against unconditional aseity). Since this
   characteristic does not ask for aseity, that premise never enters here, and
   the master synthesis of C195/C196 is left where it already stands.
-- **The Gödel/Tarski/Turning diagonal is out of scope.** Self-application of a
-  predicate is impredicative and is not expressible in Lean 4's `Prop`, so the
-  diagonal cannot be stated faithfully without weakening it into a different
-  theorem. `CHARACTERISTICS.md:36` already records that the pattern is not
-  formalized; this module keeps that sentence and makes it precise. A
-  `Bool`-valued self-applicable checker or a `Nat`-diagonal would be a *different*
-  theorem and must be labelled as such.
+- **The Gödel/Tarski/Turing diagonal: the shape is formalized, the theorem is not.**
+  An earlier draft of this header dismissed the diagonal on the grounds that
+  "self-application of a predicate is impredicative and is not expressible in Lean
+  4's `Prop`". **That was wrong, and is retracted here.** Self-application is
+  perfectly expressible; the real obstacle is different, and the corpus already
+  contains the formalized part. `Logos.NegativeRetorsionAudit` defines, at
+  `NegativeRetorsionAudit.lean:515`,
+
+      DiagonalSpec (Subject : Type) (Means : Subject → Prop → Prop)
+        D : Prop
+        spec : D <-> not (exists s : Subject, Means s D)
+
+  — the self-referential proposition "this very proposition is not entertained by
+  any subject", i.e. **system-externality instantiated in Γ's own vocabulary**.
+  Its four consequences (`:521`, `:530`, `:538`, `:560`) are all `{}`, and the
+  module's own analysis at `:506-511` records the result: **the diagonal is
+  NEVER paradoxical**, in both directions — consistent as true-and-unmeant and as
+  false-and-meant. So the diagonal yields no contradiction and therefore no
+  forced foundation.
+
+  What remains unformalized is Gödel's *theorem*, and the reason is a
+  **missing-vocabulary** gap, not a missing-effort one: it needs a coding of
+  formulas (`Code`), a syntactic `Subst`, a `Diag`, and an internal truth
+  predicate `Truth : Form -> Prop` closed under it. Γ declares none of these;
+  `Form`, `Satisfies` and `NecessarilyTrue` (`Semantics.lean:22,44,58`) are
+  meta-level, and there is no `Form -> Prop` truth predicate anywhere in
+  `Logos/`. Adding one would move the declared-axiom register, which this batch's
+  invariance test forbids. That obligation is recorded as frontier row **F14**
+  with its missing lemma named, and `base.txt:219` already records the liar
+  paradox as blocked for the independent reason that no self-referential
+  proposition is assumed. Section 7 prices what the diagonal does *not* deliver.
 -/
 
 import Logos.Core
@@ -115,6 +140,7 @@ import Logos.RecoveredOntologicalGround
 import Logos.NecessityEternity
 import Logos.CanonicalAseity
 import Logos.DivineSimplicity
+import Logos.NegativeRetorsionAudit
 
 namespace Logos.DivineTranscendence
 
@@ -127,6 +153,7 @@ open Logos.RecoveredOntologicalGround
 open Logos.NecessityEternity (ofGround_ground_of_reality)
 open Logos.CanonicalAseity (ExternalGrounding CanonicalAseity)
 open Logos.DivineSimplicity (TranscendentGround ofGround_transcendent)
+open Logos.NegativeRetorsionAudit (DiagonalSpec)
 
 -- ============================================================================
 -- Section 1: Vocabulary — Four Senses, Four Names, No Umbrella
@@ -140,7 +167,7 @@ def OutsideEverySystem (S : Type) (In : S → Entity → Prop) (e : Entity) : Pr
 
 /-- The prose's step 1 to step 2 premise, in its weakest form: every system has
     *some* outside point. This says nothing about whether those points coincide,
-    and that gap is exactly what C252 machine-checks.
+    and that gap is exactly what C301 machine-checks.
     Footprint: `{Subject}`. -/
 def EachSystemHasAnOutside (S : Type) (In : S → Entity → Prop) : Prop :=
   ∀ σ : S, ∃ e : Entity, ¬ In σ e
@@ -152,7 +179,7 @@ def GroundedInSystem (S : Type) (In : S → Entity → Prop)
   ∃ σ : S, ∃ g : Entity, In σ g ∧ Gr σ g e
 
 /-- Hierarchical externality: outside every system **and** grounded in none of
-    them. Strictly stronger than `OutsideEverySystem`; C255 machine-checks that
+    them. Strictly stronger than `OutsideEverySystem`; C304 machine-checks that
     the two come apart.
     Footprint: `{Subject}`. -/
 def HierarchicalExternality (S : Type) (In : S → Entity → Prop)
@@ -197,7 +224,7 @@ theorem per_system_outside_points_need_not_coalesce :
     | ofSubject s => exact he true fun h => Entity.noConfusion h
 
 /-- The conclusion of the prose route is itself satisfiable, so this batch refutes
-    the route and not the thesis: C252 bounds a real claim rather than a fiction.
+    the route and not the thesis: C301 bounds a real claim rather than a fiction.
     Witness: a one-system family containing nothing.
     Footprint: `{Subject}`. -/
 theorem externality_to_every_system_is_consistent :
@@ -293,7 +320,49 @@ theorem ofGround_sole_transcendent_ground (e : Entity)
   | ofGround => rfl
 
 -- ============================================================================
--- Section 6: Axiom Footprint Audit
+-- Section 6: The Diagonal Sense — Self-Reference Does Not Force an Outside
+-- ============================================================================
+
+/-- C308 — the price of the diagonal, in one statement: even granting the
+    **whole** `DiagonalSpec` (the genuine self-referential proposition
+    `D ↔ ¬ ∃ s, Means s D`, not a weakened shadow of it), there need be **no**
+    entity standing outside every system.
+
+    Witness: satisfy the diagonal exactly as
+    `level6_model_diagonal_true_consistent` does — `Subj := Unit`, `Means` meaning
+    nothing, `D := True` — and simultaneously take a system family `S := Unit` in
+    which *every* system contains *every* entity. The diagonal is fully granted
+    and yet nothing is outside anything, because the system membership relation
+    `In` and the diagonal's `Means` are **independent parameters**. The diagonal's
+    externality is externality from *entertainment*; `OutsideEverySystem` is
+    externality from *membership*. Nothing identifies them.
+
+    The premise `_diag` is therefore **inert**, and that is the result rather than a
+    defect of the encoding: the statement holds for *every* `DiagonalSpec`,
+    because nothing in it constrains `In`. The underscore records the grant
+    explicitly — the convention of naming inert premises instead of dropping them —
+    so that a reader cannot mistake the unused hypothesis for an oversight. A reader
+    who wants the diagonal to *matter* must supply the missing link between `Means`
+    and `In`; Γ declares no such link, and inventing one would move the axiom
+    register, which this batch's invariance test forbids.
+
+    This is the machine-checked answer to `CHARACTERISTICS.md:65`, which calls the
+    extension of the Gödel/Tarski/Turing pattern to normative claims "the decisive
+    transcendental move". It is decisive about nothing: the pattern does not
+    decide the matter, and a reader must not infer that it was refuted either —
+    only that the self-reference it appeals to is already formalized here
+    (`NegativeRetorsionAudit.lean:515`) and delivers no foundation.
+    Footprint: `{Subject}`. -/
+theorem diagonal_does_not_deliver_system_externality
+    (Subj : Type) (Means : Subj → Prop → Prop) (_diag : DiagonalSpec Subj Means) :
+    ∃ (S : Type) (In : S → Entity → Prop),
+      ¬ (∃ e : Entity, OutsideEverySystem S In e) := by
+  refine ⟨Unit, fun _ _ => True, ?_⟩
+  rintro ⟨e, he⟩
+  exact he Unit.unit trivial
+
+-- ============================================================================
+-- Section 7: Axiom Footprint Audit
 -- ============================================================================
 
 #print axioms OutsideEverySystem
@@ -308,5 +377,6 @@ theorem ofGround_sole_transcendent_ground (e : Entity)
 #print axioms ofGround_external_to_every_class_may_still_be_ordered
 #print axioms universal_grounding_does_not_entail_causal_externality
 #print axioms ofGround_sole_transcendent_ground
+#print axioms diagonal_does_not_deliver_system_externality
 
 end Logos.DivineTranscendence

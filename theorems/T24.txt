@@ -95,3 +95,97 @@ Limites honestos de escopo:
 A demonstração estabelece a unicidade fundacional ontológica do princípio explicativo universal
 (Monoteísmo formal, Aquino ST I q. 11 a. 3). Distingue-se expressamente do unitarismo numérico
 monádico (que excluiria a pluralidade interna trinitária) e do monismo panteísta.
+
+================================================================================
+CORRECÇÃO (2026-09-27) — C207/C211 rested on uma premissa IMPAGÁVEL; a rota
+foi refeita sobre uma hipótese pagável. Ver GAPMAP C313–C320, fila F15, e
+`base.txt` §34. Nada foi removido nem rebaixado: C207 e C211 continuam
+PROVEN como teoremas condicionais.
+--------------------------------------------------------------------------------
+
+O que estava errado. `AsymmetricGrounding` lia-se
+`∀ g1 g2, GroundsEntity g1 g2 → ¬ GroundsEntity g2 g1` **sem a guarda `g1 ≠ g2`**, e a
+fundamentação é contenção de significado, logo reflexiva. Tomando `g1 = g2 = ofGround`, a
+premissa é refutada. Uma premissa que ninguém pode pagar não sustenta um atributo: o
+`PROVEN` de C207/C211 é verdadeiro *como inferência*, mas o atributo que lhes era creditado
+não estava estabelecido. Por isso §28 e o README diziam estabelecido o que era condicional.
+
+C316 — A premissa de assimetria é INSATISFAZÍVEL (COUNTERMODEL, `{Means, Subject}`):
+
+```lean
+theorem not_asymmetric_grounding : ¬ AsymmetricGrounding
+```
+
+com C313 `groundsEntity_reflexive : ∀ e, GroundsEntity e e` a fechar o diagnose.
+
+C314 — A noção que a prova precisava JÁ EXISTIA (`{Means, Subject}`):
+
+```lean
+theorem grounds_ground_iff_maximal (e : Entity) :
+    GroundsEntity e Entity.ofGround ↔ MaximalCapacity e
+```
+
+Como `Entity.ofGround` significa toda a proposição, "fundamentar o fundamento" é exactamente
+`MaximalCapacity` (`FoundationalOmnipresence.lean:119`). O `GroundMaximal` que o plano propunha
+como axioma novo está **retirado como invenção**.
+
+C317 — Unicidade a partir de UMA hipótese nomeada (`{Means, Subject}`):
+
+```lean
+theorem ofGround_unicity_from_no_discriminating_subject
+    (hNoTotal : ∀ s : Subject, ∃ p, ¬ Means s p)
+    (e : Entity) (w : World) (hU : UniversalModalGround e) : e = Entity.ofGround
+```
+
+C210 excluía todas as entidades menos uma: o sujeito que significa *tudo*. C317 fecha
+exactamente esse caso.
+
+C318 — A hipótese É a exclusão da capacidade máxima (`{CL, Means, Subject}`):
+
+```lean
+theorem no_discriminating_subject_iff_no_maximal_non_ground :
+    (∀ s : Subject, ∃ p, ¬ Means s p)
+      ↔ (∀ e : Entity, e ≠ Entity.ofGround → ¬ MaximalCapacity e)
+```
+
+O preço inteiro da unicidade é um predicado que já existe.
+
+C320 — O Monoteísmo clássico, enunciado directamente (`{Means, Subject}`):
+
+```lean
+theorem exactly_one_universal_modal_ground
+    (hNoTotal : ∀ s : Subject, ∃ p, ¬ Means s p) :
+    ∃ g : Entity, UniversalModalGround g ∧
+      (∀ g' : Entity, UniversalModalGround g' → g' = g)
+```
+
+A **existência** é incondicional (`ofGround_universal_modal_ground`); a **unicidade** repousa
+na única hipótese, com o preço visível numa linha. (A notação `∃!` e `ExistsUnique` não existem
+neste núcleo do Lean, pelo que a conjunção de existência única é escrita por extenso.)
+
+Ainda requer prova (F15): `∀ s : Subject, ∃ p : Prop, ¬ Means s p`. Não é derivável — `Means` é
+VOCAB e nada em Γ limita o alcance proposicional de um sujeito. O preço, sem eufemismo: uma
+**restrição do vocabulário de significado** (nenhuma criatura é semanticamente onipotente). Não é
+ponte META e não é definição nova; é uma sentença quantificada sobre vocabulário existente.
+
+**Correcção posterior (2026-09-27, encontrada ao aterrar C320): esta hipótese JÁ é a premissa
+permanente do corpus.** `canonical_aseity_conditional` (`DivineSimplicity.lean:79`),
+`ofGround_divine_simplicity` (`:180`) e `ofGround_divine_simplicity_and_transcendence` (`:191`)
+tomam `hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p` — a mesma frase, carácter por carácter — e
+C195/C196 estão ledgered sobre ela. Γ **já paga este preço três vezes**, por dois atributos clássicos
+outros (Aquino ST I q. 3), e não fica mais rico por isso. F15 **não é um acto de fé novo**: é um
+compromisso *sem nome*, passado ad hoc.
+
+**Segunda correcção (2026-09-27, mesmo dia): «três sítios» era uma contagem local a um ficheiro.**
+A forma da hipótese ocorre **20 vezes em 5 ficheiros** — `DivinePureActuality` 5, `FoundationalUnicity` 7,
+`CanonicalAseity` 4, `AsieticChoice` 1, `DivineSimplicity` 3. Γ paga este preço por **cinco**
+argumentos de atributo (aseidade, simplicidade, actuação pura, escolha/liberdade, unicidade), não dois.
+O argumento «já pago» fica mais forte.
+
+O que resta é contabilidade, não crença. Como nenhum *axioma* afirma a frase — é passada como
+argumento explícito em cada uso — C320 não a pode consumir incondicionalmente, e a fila permanece
+como fila. Consolidar as premissas ad hoc numa **única ◈ nomeada** (`Tag: VOCAB`; sendo um `def`, a contagem
+de axiomas continua 25 e o registo de estípulações sobe de 5 para 6) e apontar C320 para ela
+— os outros 19 utilizadores, incrementalmente — tornaria C320 um corolário incondicional e reformaria
+F15. É uma única frase já paga, não uma ponte nova; move o registo, por isso é posto ao autor e não
+feito em silêncio.

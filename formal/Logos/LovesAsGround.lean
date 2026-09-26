@@ -164,8 +164,13 @@ theorem an_atom_is_contingent (n : Nat) : ContingentEntity (Entity.ofAtom n) :=
     only. It is **not** the identification of an atom with the cosmos, which
     `investigations/creation.md` and the ledger forbid — and it is explicitly *not* an
     object of love either, since atoms bear no meaning
-    (`meaningless_entities_cannot_be_loved`). The cosmos is declared separately, as the
-    `CreatedRealm` datum of `Logos.CosmicExistence`.
+    (`meaningless_entities_cannot_be_loved`). The realm is handled separately and in two
+    halves, neither of which is a stipulated datum: its **contingency** is `PROVEN` by
+    `CosmicExistence.contingent_realm_obtains` (C350, `{propext, Subject}`), and its
+    **meaning-bearingness** is `PROVEN↑` by `CosmicExistence.cosmos_obtains` (C367,
+    `: CreatedRealm`) under the plurality bridge `AxTwoSubjects`. Note that "created" names
+    the region of reality — actual, modal-fragile, and not the ground — and never an act of
+    production; no `Creates` relation is claimed or derivable.
     Footprint: `{Subject, propext}`. -/
 theorem a_contingent_entity_exists : ∃ t : Entity, ContingentEntity t :=
   ⟨Entity.ofAtom 0, an_atom_is_contingent 0⟩

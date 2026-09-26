@@ -59,7 +59,7 @@ namespace Logos.FoundationalUnicity
 open Logos.Core (T IsFalse)
 open Logos.Semantics (World Form Satisfies)
 open Logos.Agency (Subject Means)
-open Logos.Entity (Entity ExistsAt EntityOf)
+open Logos.Entity (Entity ExistsAt EntityOf actualWorld)
 open Logos.RecoveredOntologicalGround (EntityMeans GroundsEntity ActualEntity GroundOfReality)
 open Logos.NecessityEternity (ofGround_necessary ofGround_ground_of_reality)
 open Logos.CanonicalAseity (CanonicalAseity atom_cannot_ground_the_ground discriminating_subject_cannot_ground_the_ground)
@@ -101,6 +101,49 @@ theorem universal_ground_unicity
       | inl h1 => exact False.elim (hEq h1)
       | inr h2 => exact h2
     exact False.elim (hAsym g1 g2 h12 h21)
+
+-- ============================================================================
+-- Section 1b: Semantic Repair — the Asymmetry Premise is Refutable
+-- ============================================================================
+
+/-- Semantic Lemma: `GroundsEntity` is reflexive at every entity.
+    Grounding is meaning-containment, so an entity trivially possesses every
+    capacity it already has. No relation of this form can be irreflexive.
+    Footprint: `{Means, Subject}`. -/
+theorem groundsEntity_reflexive (e : Entity) : GroundsEntity e e :=
+  fun _ hx => hx
+
+/-- Semantic Lemma: an entity grounds the Ground of Reality exactly when it has
+    total meaning-capacity. Because `Entity.ofGround` means every proposition,
+    the grounding obligation `∀ p, EntityMeans ofGround p → EntityMeans e p`
+    collapses to maximal capacity.
+    Footprint: `{Means, Subject}`. -/
+theorem grounds_ground_iff_maximal (e : Entity) :
+    GroundsEntity e Entity.ofGround ↔ MaximalCapacity e := by
+  constructor
+  · intro h p
+    exact h p trivial
+  · intro h p _
+    exact h p
+
+/-- Semantic Lemma: no subject-entity is identical with the Ground of Reality.
+    Footprint: `{Subject}`. -/
+theorem ofGround_ne_ofSubject (s : Subject) : EntityOf s ≠ Entity.ofGround := by
+  intro hEq
+  cases hEq
+
+/-- Countermodel: `AsymmetricGrounding` as stated is UNSATISFIABLE.
+    It reads `∀ g1 g2, GroundsEntity g1 g2 → ¬ GroundsEntity g2 g1` with no
+    `g1 ≠ g2` guard, but grounding is reflexive, so `g1 = g2 = ofGround` refutes
+    it. This is not a price the theory could ever pay: the `hAsym` argument of
+    `universal_ground_unicity` reduces against a false statement, so that route
+    to unicity is void. Section 3b supplies a satisfiable replacement.
+    Footprint: `{Means, Subject}`. -/
+theorem not_asymmetric_grounding : ¬ AsymmetricGrounding := by
+  intro h
+  exact h Entity.ofGround Entity.ofGround
+    (groundsEntity_reflexive Entity.ofGround)
+    (groundsEntity_reflexive Entity.ofGround)
 
 -- ============================================================================
 -- Section 2: Concrete Exhaustive Exclusion of Non-Ground Entities in Γ
@@ -179,6 +222,90 @@ theorem ofGround_foundational_unicity :
 }
 
 -- ============================================================================
+-- Section 3b: The Repaired Unicity Route (One Named Hypothesis)
+-- ============================================================================
+
+/-- Theorem: Foundational Unicity from ONE named hypothesis.
+    If no subject has total meaning-capacity, then the Ground of Reality is the
+    only universal modal ground. The atom and discriminating-subject branches are
+    discharged by `ofGround_sole_universal_ground`; only the total-capacity
+    subject is left, and `hNoTotal` rules it out. Unlike the `AsymmetricGrounding`
+    route this premise is satisfiable, so the argument is not void.
+    Footprint: `{Means, Subject}`. -/
+theorem ofGround_unicity_from_no_discriminating_subject
+    (hNoTotal : ∀ s : Subject, ∃ p, ¬ Means s p)
+    (e : Entity) (w : World) (hU : UniversalModalGround e) : e = Entity.ofGround := by
+  have h208 := ofGround_sole_universal_ground e w hU
+  rcases e with s | n | _
+  · exact False.elim (h208.2 s (hNoTotal s) rfl)
+  · exact False.elim (h208.1 n rfl)
+  · rfl
+
+/-- Theorem: the maximality hypothesis IS the exclusion of maximal capacity among
+    non-ground entities. This prices Foundational Unicity in the project's own
+    vocabulary (`MaximalCapacity`, `FoundationalOmnipresence.lean:119`) instead of
+    in newly invented terms, and shows the hypothesis is exactly one predicate.
+    Footprint: `{CL, Means, Subject}`. -/
+theorem no_discriminating_subject_iff_no_maximal_non_ground :
+    (∀ s : Subject, ∃ p, ¬ Means s p)
+      ↔ (∀ e : Entity, e ≠ Entity.ofGround → ¬ MaximalCapacity e) := by
+  constructor
+  · intro h e hne hM
+    rcases e with s | n | _
+    · obtain ⟨p, hp⟩ := h s
+      exact hp (hM p)
+    · exact hM True
+    · exact hne rfl
+  · intro h s
+    classical
+    by_cases hEx : ∃ p, ¬ Means s p
+    · exact hEx
+    · have hM : MaximalCapacity (EntityOf s) :=
+        fun p => Classical.byContradiction (fun hn => hEx ⟨p, hn⟩)
+      exact False.elim (h (EntityOf s) (ofGround_ne_ofSubject s) hM)
+
+/-- Repaired Foundational Unicity: identical in content to `FoundationalUnicity`,
+    except that the unicity field is discharged by the single named hypothesis
+    `∀ s, ∃ p, ¬ Means s p` rather than by the refutable `AsymmetricGrounding`.
+    The unicity field is now a plain identity, with no unpayable premise. -/
+structure SoleUniversalGrounding (g : Entity) : Prop where
+  /-- The entity grounds every being in every possible world -/
+  universal_ground : UniversalModalGround g
+  /-- The entity cannot be an atomic worldly state -/
+  atom_exclusion : ∀ n : Nat, g ≠ Entity.ofAtom n
+  /-- The entity cannot be a discriminating subject -/
+  subject_transcendence : ∀ s : Subject, (∃ p, ¬ Means s p) → g ≠ EntityOf s
+  /-- Unicity: any other universal modal ground is identical to this one -/
+  unicity : ∀ g' : Entity, UniversalModalGround g' → g' = g
+
+/-- Master Synthesis: the Ground of Reality is the sole universal ground, under
+    the single named hypothesis.
+    Footprint: `{Means, Subject}`. -/
+theorem ofGround_sole_universal_grounding
+    (hNoTotal : ∀ s : Subject, ∃ p, ¬ Means s p) :
+    SoleUniversalGrounding Entity.ofGround := {
+  universal_ground := ofGround_universal_modal_ground
+  atom_exclusion := fun n hEq => by cases hEq
+  subject_transcendence := fun s _ hEq => by cases hEq
+  unicity := fun g' hU' =>
+    ofGround_unicity_from_no_discriminating_subject hNoTotal g' actualWorld hU'
+}
+
+/-- Master Synthesis (existential form): exactly one universal modal ground exists.
+    Existence comes from `ofGround_universal_modal_ground`, which is unconditional;
+    uniqueness from `hNoTotal`. This is Classical Monotheism with the whole price
+    of the claim visible in a single line. The `∃!` notation and `ExistsUnique`
+    are absent from this Lean core, so the standard unique-existence conjunction
+    is written out.
+    Footprint: `{Means, Subject}`. -/
+theorem exactly_one_universal_modal_ground
+    (hNoTotal : ∀ s : Subject, ∃ p, ¬ Means s p) :
+    ∃ g : Entity, UniversalModalGround g ∧
+      (∀ g' : Entity, UniversalModalGround g' → g' = g) :=
+  ⟨Entity.ofGround, ofGround_universal_modal_ground,
+    fun g' hU' => ofGround_unicity_from_no_discriminating_subject hNoTotal g' actualWorld hU'⟩
+
+-- ============================================================================
 -- Section 4: Category Boundary Separations (Honest Demarcation)
 -- ============================================================================
 
@@ -212,5 +339,13 @@ theorem unicity_strictly_transcends_world :
 #print axioms ofGround_foundational_unicity
 #print axioms unicity_does_not_force_unitarian_monad
 #print axioms unicity_strictly_transcends_world
+#print axioms groundsEntity_reflexive
+#print axioms grounds_ground_iff_maximal
+#print axioms ofGround_ne_ofSubject
+#print axioms not_asymmetric_grounding
+#print axioms ofGround_unicity_from_no_discriminating_subject
+#print axioms no_discriminating_subject_iff_no_maximal_non_ground
+#print axioms ofGround_sole_universal_grounding
+#print axioms exactly_one_universal_modal_ground
 
 end Logos.FoundationalUnicity

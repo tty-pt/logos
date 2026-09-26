@@ -194,7 +194,7 @@ The foundation is **free and personal** in the minimal sense of being an uncondi
 
 **Status in the prose:** Explicit but compressed; closely connected to simplicity and universality.
 
-**Formal status: ✅ PROVEN (Foundational Unicity; Aquinas ST I q. 11 a. 3); ⊨ SEPARATED (Numerical Unitarianism); ⏸ DEFERRED (Strict Monotheism branch).**
+**Formal status: ✅ PROVEN under one named hypothesis (Foundational Unicity; Aquinas ST I q. 11 a. 3) — see the 2026-09-27 correction below; ⊨ SEPARATED (Numerical Unitarianism); ⏸ DEFERRED (Strict Monotheism branch).**
 Formalized in `Logos.FoundationalUnicity` (`formal/Logos/FoundationalUnicity.lean`):
 (1) Master Metaphysical Theorem: `universal_ground_unicity` (C207, `{CL, Means, Subject}`), proving that two distinct entities cannot both be universal modal grounds under asymmetric grounding;
 (2) Concrete Atom Exclusion: `no_atom_is_universal_modal_ground` (C208, `{Means, Subject}`), proving no atomic factual state can be a universal ground;
@@ -203,6 +203,38 @@ Formalized in `Logos.FoundationalUnicity` (`formal/Logos/FoundationalUnicity.lea
 (5) Master Synthesis: `ofGround_foundational_unicity` (C211, `{CL, Means, Subject}`, 0 substantive axioms);
 (6) Metatheoretic Independence: `unicity_does_not_force_unitarian_monad` (C212, `{}`), proving that foundational unicity does not force a solitary, relationless monad, keeping the Trinitarian frontier open;
 (7) Ontological Transcendence: `unicity_strictly_transcends_world` (C213, `{Subject}`), confirming that the unique ground strictly transcends the world.
+> **⚠ CORRECTION (2026-09-27, C313–C320 / F15).** Items (1) and (5) above rested on
+> `AsymmetricGrounding`, which **C316 (`not_asymmetric_grounding`, COUNTERMODEL) proves
+> unsatisfiable**: grounding is meaning-containment and therefore reflexive
+> (`groundsEntity_reflexive`, C313), and the definition omitted the `g1 ≠ g2` guard. C207 and
+> C211 remain PROVEN as *conditional* theorems and were not weakened or removed, but the
+> attribute they were credited with was not established. The route was rebuilt:
+> (8) `grounds_ground_iff_maximal` (C314, `{Means, Subject}`) — grounding the ground **is**
+> `MaximalCapacity`, so the needed notion already existed and no new axiom was invented;
+> (9) `ofGround_unicity_from_no_discriminating_subject` (C317, `{Means, Subject}`) — full
+> unicity from the single hypothesis that no subject has total meaning-capacity;
+> (10) `no_discriminating_subject_iff_no_maximal_non_ground` (C318, `{CL, Means, Subject}`) —
+> that hypothesis **is** the exclusion of maximal capacity among non-ground entities, so the
+> whole price is one existing predicate;
+> (11) `ofGround_sole_universal_grounding` (C319, `{Means, Subject}`) — repaired synthesis with
+> a plain-identity unicity field;
+> (12) `exactly_one_universal_modal_ground` (C320, `{Means, Subject}`) — **Classical Monotheism
+> stated outright**: existence unconditional, uniqueness under that one hypothesis.
+> **Open (F15), but not a new act of faith:** the hypothesis is not asserted by any *axiom*,
+> so C320 cannot consume it unconditionally. However the **identical sentence is already the standing
+> premise of the corpus**: `canonical_aseity_conditional` (`DivineSimplicity.lean:79`),
+> `ofGround_divine_simplicity` (`:180`) and `ofGround_divine_simplicity_and_transcendence` (`:191`)
+> all take `hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p` — the same hypothesis, character for
+> character — and C195/C196 are ledgered on it. **A second correction, same day: "three call sites"
+> was a file-local count and badly understated the case.** The hypothesis shape occurs **20 times
+> across 5 files** — `DivinePureActuality` 5, `FoundationalUnicity` 7, `CanonicalAseity` 4,
+> `AsieticChoice` 1, `DivineSimplicity` 3 — so Γ pays this exact price for **five** attribute
+> arguments (aseity, simplicity, pure actuality, choice/freedom, unicity), not two, and is no richer
+> for it. F15 is an *unnamed* commitment passed ad hoc, not a new bridge. The outstanding decision is
+> **consolidation** of that already-paid sentence into one named stipulation (`Tag: VOCAB`; being a
+> `def` it leaves the axiom count at 25 and raises the stipulation registry from 5 to 6), which would
+> make C320 an unconditional corollary and retire the row.
+
 Separation: `TheologicalModalHardening.necessary_existence_not_entails_uniqueness` (`formal/Logos/TheologicalModalHardening.lean:406`, `{}`) proves uniqueness does not follow from bare necessity alone. Generated `README.md` corroborates: Foundational unicity ✅ PROVEN, Strict numerical unitarianism ⊨ INDEPENDENT, One God / strict monotheism ⏸ DEFERRED.
 
 ### Argument
@@ -285,7 +317,7 @@ The foundation is **timeless or eternal** in the sense of being prior to and ind
 - The text does not distinguish timelessness from everlastingness.
 - “Precedence” could mean logical, ontological, or temporal priority.
 - The premise that temporal existence necessarily implies submission to causality is asserted rather than argued (`README-OLD.md:161`).
-- Immutability: Formally established in `Logos.DivineImmutability` (`formal/Logos/DivineImmutability.lean`, C197–C201). `ofGround_divine_immutability` proves Classical Divine Immutability (Aquinas *ST* I, q. 9) via modal invariance (`ofGround_modal_invariance`, `{Subject}`), stage invariance (`ofGround_stage_invariance`, `{Subject}`), process invariance (`ofGround_transition_invariance`, `{Initiates, State, Subject}`), and capacity invariance (`ofGround_capacity_invariance`, `{Means, Subject}`), with footprint `{Initiates, Means, State, Subject}` (0 substantive axioms). The countermodel `contingent_entity_fails_immutability` (C197, `{}`) confirms that contingent entities fail immutability. Honest boundary: this establishes modal, temporal, process, and capacity unchangeability in Γ; it does not claim psychological impassibility (which is explicitly separated in the attributes table as `❌ NOT ESTABLISHED`, with Γ affirming the eternal relation of love in T14).
+- Immutability: Formally established in `Logos.DivineImmutability` (`formal/Logos/DivineImmutability.lean`, C197–C201). `ofGround_divine_immutability` proves Classical Divine Immutability (Aquinas *ST* I, q. 9) via modal invariance (`ofGround_modal_invariance`, `{Subject}`), stage invariance (`ofGround_stage_invariance`, `{Subject}`), process invariance (`ofGround_transition_invariance`, `{Initiates, State, Subject}`), and capacity invariance (`ofGround_capacity_invariance`, `{Means, Subject}`), with footprint `{Initiates, Means, State, Subject}` (0 substantive axioms). The countermodel `contingent_entity_fails_immutability` (C197, `{}`) confirms that contingent entities fail immutability. **Vacuity disclosure (C321, `{}`-free: `{Means, Subject}`):** the fourth field, capacity invariance, **discriminates nothing** — `capacity_invariance_holds_for_every_entity : ∀ e, CapacityInvariance e`. `EntityMeans` is `Entity → Prop → Prop` and takes **no world argument** (`RecoveredOntologicalGround.lean:46`), so the two worlds in `CapacityInvariance` are bound and unused and the body is `P ↔ P` (`exact Iff.rfl`); the property holds for every entity, subjects and atoms included. All three siblings genuinely quantify and each has a `{}` non-triviality countermodel (C197, with C192/C202/C214 for the other attribute masters); this field has none, because there is nothing in it to refute. **This is disclosure, not demotion — `ofGround_divine_immutability` remains `PROVEN`.** The substantive reading (constancy *across worlds*, *ST* I q. 9 a. 3) is inexpressible in the present vocabulary: it needs a world-indexed `EntityMeansAt` plus proof that its variation is non-empty, which is frontier **F16**, not added. Honest boundary: this establishes modal, temporal, process, and capacity unchangeability in Γ; it does not claim psychological impassibility (which is explicitly separated in the attributes table as `❌ NOT ESTABLISHED`, with Γ affirming the eternal relation of love in T14).
 - The claim that the universe is contingent, composite, and temporal is assumed in the pantheism objection rather than derived there (`README-OLD.md:264`).
 
 ## 9. Precedence to the true/false distinction
@@ -491,7 +523,7 @@ No argument for benevolence or moral perfection is supplied.
 
 **Status in the prose:** Founding reality is implicit; creation is neither named nor argued.
 
-**Formal status: ✅ thin/foundational grounding only; ❌ creation ex nihilo.** `NecessityEternity.ofGround_ground_of_reality` (`formal/Logos/NecessityEternity.lean:118`, `{Means, Subject}`) PROVEN definitionally, and `PersonalGroundOfReality.person_grounds_normative_order` (`formal/Logos/PersonalGroundOfReality.lean:117`, `{Means, Subject}`) PROVEN for grounding correctness *about* reality (not causing existents). Contingent creation is DEFERRED (`formal/GAPMAP.md` F9) and separated: `ConditionalTheology.necessary_ground_not_entails_contingent_creation` (`formal/Logos/ConditionalTheology.lean:420`, `{}` COUNTERMODEL).
+**Formal status: ✅ thin/foundational grounding only; 📌 creation *as a derived theorem*, not as entailment; ❌ creation ex nihilo as derivation.** `NecessityEternity.ofGround_ground_of_reality` (`formal/Logos/NecessityEternity.lean:118`, `{Means, Subject}`) PROVEN definitionally, and `PersonalGroundOfReality.person_grounds_normative_order` (`formal/Logos/PersonalGroundOfReality.lean:117`, `{Means, Subject}`) PROVEN for grounding correctness *about* reality (not causing existents). Contingent creation is NOT DEFERRED as existence — it is a **theorem**, and since lot COSMOS-EXISTENCE-IS-FREE (2026-09-27) it is a **free** one: `CosmicExistence.contingent_realm_obtains : ContingentRealmObtains` (**C350**, `PROVEN`) at footprint `{propext, Subject}`, with no bridge and no substantive axiom, witnessed by an atom through `LovesAsGround.an_atom_is_contingent 0`. Its *meaning* is the separate `PROVEN↑` row **C367** `CosmicExistence.cosmos_obtains : CreatedRealm`, derived from `Plurality.cogito_from_T12` under the plurality bridge `AxTwoSubjects` (`Tag: META`) — footprint `{propext, Means, Subject, Will, subjectWill, AxTwoSubjects}` — with conditional satisfiability (C354, on a `Means` inhabitant) and a `{}` countermodel for the contingency shape (C353). `[This said "a declared `Tag: SEM` datum, `AxContingentCreationObtains`" until 2026-09-27; the axiom was deleted and the lemma it lacked was found already proven — batch COSMOS-IS-PROVEN. An intermediate state made the whole claim `PROVEN↑`; the same day's COSMOS-EXISTENCE-IS-FREE split existence from meaning. It is still not an entailment from the ground, and no production is claimed.]` Creation *as entailment from the ground* remains separated and BLOCKED (`ConditionalTheology.necessary_ground_not_entails_contingent_creation`, `formal/Logos/ConditionalTheology.lean:420`, `{}` COUNTERMODEL; `formal/GAPMAP.md` Level 17, F9's entailment half). See §6c, `theorems/T30.txt`, `base.txt` §35.
 
 ### Argument
 
@@ -518,7 +550,7 @@ The foundation **grounds reality** in a transcendental or foundational sense.
 
 **Status in the prose:** Explicitly rejected, relying on previously alleged divine characteristics.
 
-**Formal status: ❌ the exclusion is not formally established.** No pantheism/universe-contingency/composition theorem exists; the premises the prose exclusion relies on (contingency, simplicity, timelessness of the universe vs. ground) are not derived. `NecessityEternity.ofGround_ne_ofSubject` (`formal/Logos/NecessityEternity.lean:133`, `{Subject}`) blocks only hypostatic identity (`ofGround ≠ EntityOf s`), not pantheism.
+**Formal status: ❌ the exclusion is not formally established. (Re-dated 2026-09-27.)** The exclusion still does not follow, but the reason is no longer that nothing exists on this question. `CosmicExistence.contingent_realm_obtains` (**C350**) now **proves** the contingent realm's existence as a `PROVEN` theorem with **no bridge at all** — `{propext, Subject}`, witnessed by an atom — while its meaning is proved separately as `PROVEN↑` by `CosmicExistence.cosmos_obtains` (**C367**) under the plurality bridge `AxTwoSubjects`, Γ itself producing the meaning-bearing subject, so nothing is conditioned from outside — and the creation/countermodels batch added C351–C366 (notably C355, which refutes an absolutely empty world once a necessary entity exists, and C366, which makes creation modal-fragile where it holds). The C110 countermodel is now a **populated** world: a necessary ground that grounds every content need not produce a creation record. So the project can say *the realm exists, at a named price, and the ground does not entail it*. It still cannot say the universe is not the ground. What remains undelivered is a `Universe = Ground` identity predicate, a definition of the universe as an object, and a derivation of existence that routes from the **ground** rather than from plurality or from a bare contingency shape — note that C350 now needs no bridge, but it is also *not* derived from the ground, and its witness is an atom, which C324 explicitly refuses to identify with the cosmos. `NecessityEternity.ofGround_ne_ofSubject` (`formal/Logos/NecessityEternity.lean:133`, `{Subject}`) blocks only hypostatic identity (`ofGround ≠ EntityOf s`), not pantheism.
 
 ### Argument
 
@@ -925,6 +957,91 @@ chooser (C295 = C285): it *reaches* subjects, it is not one of them.
 `Asiety` step honestly, the Ground step as a priced META declaration. The characteristic to
 argue for next is **not** another transfer but the *substantive* grounding relation behind
 (C228); every further transfer would multiply a price already paid.
+
+## 6c. `GroundLoves`: the ground as lover — and the two prices that claim pays
+
+**Formal status: ⚠️ AXIOMATIC (AxGroundLovesContingentRealm) — see the 2026-09-27 notes
+below; ❌ the `GroundLoves → Loves` transfer is unstatable, not merely unproved (C348);
+C228 / bridge #9 untouched.**
+
+Modules `formal/Logos/LovesAsGround.lean` and `formal/Logos/CosmicExistence.lean`;
+GAPMAP Level 21, C322–C354 + 4 `—` display rows; `theorems/T30.txt`; `base.txt` §35.
+**No new `axiom` was declared** — the register is unmoved at 25 (VOCAB 14 / SEM 7 / META
+4). The three prices below already existed and were invisible to every reader-facing
+artifact; this batch makes them visible. That is criterion 5 of §0 of `IMPROVE.md`:
+no machine-verified theorem is invisible to the ledger.
+
+The claim, in the shape the author asked for: `poem.txt:24`'s "Amar é escolhido e também
+é necessário" is now **occupied as a kind-claim about the ground** by
+`the_ground_is_a_necessary_and_chosen_lover` (C343). The asymmetry is the honest content:
+the *necessary* half is `ofGround_necessary` (`trivial`, ontology-forced — see the C321
+precedent of the §6 unicity disclosure, where the forced half was likewise disclosed
+rather than celebrated); the *chosen* half is **exactly**
+`AxGroundLovesContingentRealm` and nothing else — no axiom of free choice is hidden, and
+`AxTwoSubjects` is not consumed here.
+
+Two prices, different in kind, and confusing them is the mistake the kernel audit cannot
+catch:
+
+| # | Price | Status | Footprint |
+|---|---|---|---|
+| 1 | `GroundBearsGood : Entity → Entity → Prop → Prop` — **vocabulary** (`Tag: VOCAB`). A primitive directional good, because the library's grounding vocabulary expresses only undirected sufficiency (`GroundsEntity`, vacuously satisfied, C326/C328), the one content predicate (`EntityMeans`) is a *capacity of the target*, not an attitude of the bearer, and `Good s (_a)` is `Subject`-indexed while the ground provably is no `Subject` (C344). Satisfiable by any interpretation including constant-`False`. **Rejecting it rejects the relation's content, not the theory.** | ◆ AXIOM | `{GroundBearsGood, Subject}` |
+| 2 | `AxGroundLovesContingentRealm` — **substance** (`Tag: META`). A necessary ground bears a directional good toward every contingent realm bearing content of its own. *Not derivable*: the primitive constrains nothing, and universal grounding carries no directed content from which love could follow. Consistency model: interpret `GroundBearsGood` as `False` everywhere — vocabulary, reality-hook and every per-constructor `Divine*` theorem hold, every inhabitant fails. And not a triviality: not satisfied by `True` (actual, distinct, meaningful target; directional good). | ◆ AXIOM | `{AxGroundLovesContingentRealm, GroundBearsGood, Means, Subject}` |
+
+A third price from the sibling module was **not** created here and has since been
+**retired** `[2026-09-27]`: `AxContingentCreationObtains : CreatedRealm` (`Tag: SEM`,
+formerly C350) is gone. The claim was then split in two, and the price now falls where it
+belongs:
+
+- the realm's **existence** is the **free** theorem `contingent_realm_obtains` (**C350**,
+  `PROVEN`, `{propext, Subject}`) — **no price at all**;
+- the realm's **meaning** is the theorem `cosmos_obtains` (**C367**, `PROVEN↑`), whose price
+  is the plurality bridge `AxTwoSubjects` (`Tag: META`) — shared with C351/C352, so this
+  table's two rows and C367 rest on a common footing rather than on an independent semantic
+  datum.
+
+So this table's rows are now supported without a third axiom, and rejecting
+`AxTwoSubjects` costs the cosmos its content-bearinghood but **not** its existence.
+
+The reductio that once forced the datum is real but narrower than it was stated: the
+reality-hook is unconditional in content (`RealityHookAudit.lean:85`), so the route
+`(∃ s, Correct s p) → p` would indeed make the judging subject's own claims necessary — the
+outcome `poem.txt:26` denies. But the route that actually derives C350 **never touches
+`Correct`**: `Realm.bears_meaning` is a *capacity*, and `Realm.contingent` asserts modal
+fragility. So the reductio does not apply, and it could not sustain an axiom.
+
+Net effect on the ledger: *existence* moved from the faith zone to the **plurality**
+commitment — a genuine narrowing, but not a free one. Purpose and the incarnation do not
+follow.
+
+What this batch is **mostly**, and why that is the finding:
+
+| Row | Content | Why it matters |
+|---|---|---|
+| C336 `grounding_reaches_what_love_cannot` | The separation in one statement: grounding reaches an atom, love does not | The machine-checked content of "not *merely* a mathematical ground" |
+| C338 `meaningful_love_bridge_is_refuted` | The unrestricted bridge — the stronger, more attractive form — is **false** | The *only* machine-checked justification for the axiom's meaning hypothesis; the module **declines** the attractive form rather than quietly stating the weaker one |
+| C346/C348 | `Loves` and `GroundLoves` are provably disjoint; the transfer is **unstatable** | No route from the ground's love to a created person exists here; bridge #9 (C228) stands exactly as it was, so F3, F6/Trinity and the personal-monotheism frontier do not move |
+
+Limits that belong to the row, not to a footnote:
+
+- C330 (`only_the_ground_is_necessary`) is **forced by the three-constructor ontology**
+  (`EntityExistsAt w .ofGround := True` is definitional) and is **not evidence that the
+  ground loves**; its legitimate content is negative (the "necessary ∧ chosen" cell
+  contains no person). The footprint (`{Subject, propext}`) confirms no love content.
+- C336's footprint is `{GroundBearsGood, Means, Subject}` — it already *consumes* the
+  VOCAB primitive, so it is substantive-axiom-free, not axiom-free in the strict sense
+  (the same regime as `Means`).
+- C353 (`perfect_universe_has_no_contingent_realm`, `{}`) is a countermodel on an
+  **unrelated free structure, not a model of Γ** (`CosmicExistence.lean:206-210`); it says
+  nothing about Γ's worlds.
+- C354 (`cosmos_presence_model`) is satisfiability **conditional on an inhabitant of
+  `Means`**, and it is *not* claimed that the datum's negation is consistent with all of
+  Γ — a model-theoretic statement over the whole theory, not built here.
+- The PROVEN↑ badge names **only the substantive axiom**: `GroundBearsGood` does not
+  appear in the `(AxGroundLovesContingentRealm)` parenthetical because
+  `footprint_parts` files it under the vocabulary baseline. The `LOVE chain, step by
+  step` block in the generated `README.md` is therefore load-bearing, not decorative —
+  it is the only place the VOCAB price is visible.
 
 ## Important blockers and separations
 

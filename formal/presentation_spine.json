@@ -393,10 +393,11 @@
           "status": "deferred",
           "primary_targets": [
             "monotheism_of_god_and_uniqueness",
-            "monotheism_compatible_with_trinity"
+            "monotheism_compatible_with_trinity",
+            "Logos.FoundationalUnicity.exactly_one_universal_modal_ground"
           ],
-          "summary": "Annotated surface only — not a theorem of this repository. The strict-monotheism theorems (`monotheism_of_god_and_uniqueness`, `monotheism_compatible_with_trinity`) are deferred out of the live kernel (see `NecessaryPersonalGround.lean`); no compiled declaration exists. The trinity-compatibility claim is not a theorem of the current build.",
-          "defer_note": "⏸ **DEFERRED** — annotated surface only; the strict-monotheism theorems carry the same deferral as Branch A: no compiled declaration exists in the live kernel."
+          "summary": "Two different claims were being carried under one label, and only one of them is still open. (1) UNIQUENESS OF THE UNIVERSAL GROUND is now machine-checked: `Logos.FoundationalUnicity.exactly_one_universal_modal_ground` (C320) proves that exactly one universal modal ground exists, with existence unconditional and uniqueness under the single named hypothesis of frontier row F15. (2) PERSON-LEVEL MONOTHEISM — one God as numerically one Person, and its compatibility with three Persons — remains DEFERRED: it needs the person bridge C228, which is BLOCKED, so `monotheism_of_god_and_uniqueness` and `monotheism_compatible_with_trinity` are still out of the live kernel and no compiled declaration exists for either. The deferral of this branch is therefore NARROWED to claim (2).",
+          "defer_note": "⏸ **DEFERRED, NARROWED (2026-09-27)** — the ground-unicity half is no longer deferred: C320 (`Logos.FoundationalUnicity.exactly_one_universal_modal_ground`) proves exactly one universal modal ground exists, existence unconditionally and uniqueness under frontier hypothesis F15 (not yet asserted in Γ). What remains deferred is the Person-level claim — one God as numerically one Person, and trinity-compatibility — which needs the person bridge C228 (`BLOCKED`); no compiled declaration exists for `monotheism_of_god_and_uniqueness` or `monotheism_compatible_with_trinity`, and the generic non-collapse of unicity into a solitary monad is already checked at C212 (`{}`)."
         },
         {
           "id": "frontiers",

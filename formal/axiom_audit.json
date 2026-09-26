@@ -2543,21 +2543,45 @@
  "Logos.CognitiveToAgencyFrontier.reductio_necessarily_asymmetric": [],
  "Logos.CognitiveToAgencyFrontier.reductio_proves_settlement_1": [],
  "Logos.CognitiveToAgencyFrontier.settlement_1_does_not_imply_settlement_3": [],
- "Logos.ConditionalTheology.CreationStructure.casesOn": [],
- "Logos.ConditionalTheology.CreationStructure.contingent_created": [],
- "Logos.ConditionalTheology.CreationStructure.created_subject": [],
- "Logos.ConditionalTheology.CreationStructure.creator": [],
- "Logos.ConditionalTheology.CreationStructure.ctorIdx": [],
- "Logos.ConditionalTheology.CreationStructure.is_contingent": [],
- "Logos.ConditionalTheology.CreationStructure.mk.inj": [],
- "Logos.ConditionalTheology.CreationStructure.mk.injEq": [
+ "Logos.ConditionalTheology.CreationRecord.casesOn": [],
+ "Logos.ConditionalTheology.CreationRecord.contingent_created": [],
+ "Logos.ConditionalTheology.CreationRecord.created": [],
+ "Logos.ConditionalTheology.CreationRecord.created_subject": [],
+ "Logos.ConditionalTheology.CreationRecord.creator": [],
+ "Logos.ConditionalTheology.CreationRecord.ctorIdx": [],
+ "Logos.ConditionalTheology.CreationRecord.mk.inj": [],
+ "Logos.ConditionalTheology.CreationRecord.mk.injEq": [
   "propext"
  ],
- "Logos.ConditionalTheology.CreationStructure.mk.noConfusion": [],
- "Logos.ConditionalTheology.CreationStructure.mk.sizeOf_spec": [],
- "Logos.ConditionalTheology.CreationStructure.noConfusion": [],
- "Logos.ConditionalTheology.CreationStructure.noConfusionType": [],
- "Logos.ConditionalTheology.CreationStructure.recOn": [],
+ "Logos.ConditionalTheology.CreationRecord.mk.noConfusion": [],
+ "Logos.ConditionalTheology.CreationRecord.mk.sizeOf_spec": [],
+ "Logos.ConditionalTheology.CreationRecord.noConfusion": [],
+ "Logos.ConditionalTheology.CreationRecord.noConfusionType": [],
+ "Logos.ConditionalTheology.CreationRecord.recOn": [],
+ "Logos.ConditionalTheology.CreationWorld.Creates": [],
+ "Logos.ConditionalTheology.CreationWorld.ExistsAt": [],
+ "Logos.ConditionalTheology.CreationWorld.Ground": [],
+ "Logos.ConditionalTheology.CreationWorld.Nec": [],
+ "Logos.ConditionalTheology.CreationWorld.SubjectExistsAt": [],
+ "Logos.ConditionalTheology.CreationWorld.actualWorld": [],
+ "Logos.ConditionalTheology.CreationWorld.casesOn": [],
+ "Logos.ConditionalTheology.CreationWorld.ctorIdx": [],
+ "Logos.ConditionalTheology.CreationWorld.g": [],
+ "Logos.ConditionalTheology.CreationWorld.g_grounds_all": [],
+ "Logos.ConditionalTheology.CreationWorld.g_necessary": [],
+ "Logos.ConditionalTheology.CreationWorld.mk.inj": [],
+ "Logos.ConditionalTheology.CreationWorld.mk.injEq": [
+  "propext"
+ ],
+ "Logos.ConditionalTheology.CreationWorld.mk.noConfusion": [],
+ "Logos.ConditionalTheology.CreationWorld.mk.sizeOf_spec": [],
+ "Logos.ConditionalTheology.CreationWorld.noConfusion": [],
+ "Logos.ConditionalTheology.CreationWorld.noConfusionType": [],
+ "Logos.ConditionalTheology.CreationWorld.recOn": [],
+ "Logos.ConditionalTheology.CreationWorld.s": [],
+ "Logos.ConditionalTheology.CreationWorld.s_actual": [],
+ "Logos.ConditionalTheology.CreationWorld.s_contingent": [],
+ "Logos.ConditionalTheology.GroundEntailsCreation": [],
  "Logos.ConditionalTheology.IncarnationalStructure.casesOn": [],
  "Logos.ConditionalTheology.IncarnationalStructure.ctorIdx": [],
  "Logos.ConditionalTheology.IncarnationalStructure.distinct_natures": [],
@@ -2625,6 +2649,7 @@
  ],
  "Logos.ConditionalTheology.a14_not_entails_plurality": [],
  "Logos.ConditionalTheology.a14_plus_ultimate_ground_not_entails_personal_ultimate_ground": [],
+ "Logos.ConditionalTheology.a_populated_contingent_world_can_also_carry_creation": [],
  "Logos.ConditionalTheology.agency_closure_act_to_chooses": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
@@ -2652,6 +2677,7 @@
   "Logos.Agency.State",
   "Logos.Agency.Subject"
  ],
+ "Logos.ConditionalTheology.createdCreationWorld": [],
  "Logos.ConditionalTheology.edge_Act_to_Chooses": [],
  "Logos.ConditionalTheology.edge_Chooses_to_FreeWill": [],
  "Logos.ConditionalTheology.edge_Creation_to_Incarnation": [],
@@ -2677,8 +2703,10 @@
  "Logos.ConditionalTheology.freewill_not_entails_teleology": [],
  "Logos.ConditionalTheology.freewill_not_entails_value": [],
  "Logos.ConditionalTheology.necessary_ground_not_entails_contingent_creation": [],
+ "Logos.ConditionalTheology.populatedCreationWorld": [],
  "Logos.ConditionalTheology.preceding_theory_not_entails_incarnation": [],
  "Logos.ConditionalTheology.preceding_theory_not_entails_trinity": [],
+ "Logos.ConditionalTheology.the_creation_countermodel_is_a_populated_contingent_world": [],
  "Logos.ConditionalTheology.theological_dependency_ledger": [],
  "Logos.ConstitutiveNormativeFreeWill.ConstitutiveDeonticTruth.actual_law": [
   "Logos.Agency.Means",
@@ -2981,10 +3009,48 @@
   "Quot.sound"
  ],
  "Logos.Core.tschema": [],
- "Logos.CosmicExistence.AxContingentCreationObtains": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject",
-  "Logos.CosmicExistence.AxContingentCreationObtains"
+ "Logos.CosmicExistence.ContingentRealm.actual": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.ContingentRealm.casesOn": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.ContingentRealm.contingent": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.ContingentRealm.ctorIdx": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.ContingentRealm.mk.inj": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.ContingentRealm.mk.injEq": [
+  "propext",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.ContingentRealm.mk.noConfusion": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.ContingentRealm.mk.sizeOf_spec": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.ContingentRealm.noConfusion": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.ContingentRealm.noConfusionType": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.ContingentRealm.not_the_ground": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.ContingentRealm.recOn": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.ContingentRealm.witness": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.ContingentRealmObtains": [
+  "Logos.Agency.Subject"
  ],
  "Logos.CosmicExistence.CreatedRealm": [
   "Logos.Agency.Means",
@@ -3064,44 +3130,57 @@
   "Logos.Agency.Subject"
  ],
  "Logos.CosmicExistence.a_contingent_reality_obtains": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject",
-  "Logos.CosmicExistence.AxContingentCreationObtains"
+  "propext",
+  "Logos.Agency.Subject"
  ],
  "Logos.CosmicExistence.a_created_realm_obtains": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject",
-  "Logos.CosmicExistence.AxContingentCreationObtains"
+  "propext",
+  "Logos.Agency.Subject"
  ],
  "Logos.CosmicExistence.contingent_reality_is_not_necessary": [
   "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.contingent_realm_obtains": [
+  "propext",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.cosmos_obtains": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Value.AxTwoSubjects"
  ],
  "Logos.CosmicExistence.cosmos_presence_model": [
   "propext",
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.CosmicExistence.gamma_exhibits_a_meaning_subject": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Value.AxTwoSubjects"
+ ],
  "Logos.CosmicExistence.perfect_universe_actual_is_necessary": [],
  "Logos.CosmicExistence.perfect_universe_has_no_contingent_realm": [],
  "Logos.CosmicExistence.reality_is_not_exhausted_by_the_ground": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject",
-  "Logos.CosmicExistence.AxContingentCreationObtains"
+  "propext",
+  "Logos.Agency.Subject"
  ],
  "Logos.CosmicExistence.realm_existence_does_not_imply_realm_necessity": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject",
-  "Logos.CosmicExistence.AxContingentCreationObtains"
- ],
- "Logos.CosmicExistence.the_cosmos_datum_is_not_refutable": [
   "propext",
-  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.the_cosmos_existence_is_not_refutable": [
+  "propext",
   "Logos.Agency.Subject"
  ],
  "Logos.CosmicExistence.the_ground_is_necessary_and_the_realm_is_contingent": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject",
-  "Logos.CosmicExistence.AxContingentCreationObtains"
+  "propext",
+  "Logos.Agency.Subject"
  ],
  "Logos.CosmicExistence.the_ground_is_not_personal": [
   "Logos.Agency.Means",
@@ -3110,23 +3189,32 @@
   "Logos.Agency.subjectWill"
  ],
  "Logos.CosmicExistence.the_ground_loves_the_cosmos": [
+  "propext",
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.CosmicExistence.AxContingentCreationObtains",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.LovesAsGround.AxGroundLovesContingentRealm",
-  "Logos.LovesAsGround.GroundBearsGood"
+  "Logos.LovesAsGround.GroundBearsGood",
+  "Logos.Value.AxTwoSubjects"
  ],
  "Logos.CosmicExistence.the_ground_loves_the_cosmos_in_a_context": [
+  "propext",
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.CosmicExistence.AxContingentCreationObtains",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
   "Logos.LovesAsGround.AxGroundLovesContingentRealm",
-  "Logos.LovesAsGround.GroundBearsGood"
+  "Logos.LovesAsGround.GroundBearsGood",
+  "Logos.Value.AxTwoSubjects"
  ],
  "Logos.CosmicExistence.the_realm_bears_meaning": [
+  "propext",
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.CosmicExistence.AxContingentCreationObtains"
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Value.AxTwoSubjects"
  ],
  "Logos.DeepContrastiveFrontier.Collapse": [],
  "Logos.DeepContrastiveFrontier.CompatibleIntensional": [],
@@ -3735,6 +3823,10 @@
   "Logos.Agency.State",
   "Logos.Agency.Subject"
  ],
+ "Logos.DivineImmutability.capacity_invariance_holds_for_every_entity": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.DivineImmutability.contingent_entity_fails_immutability": [],
  "Logos.DivineImmutability.necessity_and_atemporality_yield_immutability": [
   "Logos.Agency.Initiates",
@@ -4093,6 +4185,9 @@
   "Logos.Agency.Subject"
  ],
  "Logos.DivineTranscendence.OutsideEverySystem": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineTranscendence.diagonal_does_not_deliver_system_externality": [
   "Logos.Agency.Subject"
  ],
  "Logos.DivineTranscendence.externality_to_every_system_is_consistent": [
@@ -4679,11 +4774,58 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.FoundationalUnicity.SoleUniversalGrounding.atom_exclusion": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalUnicity.SoleUniversalGrounding.casesOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalUnicity.SoleUniversalGrounding.recOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalUnicity.SoleUniversalGrounding.subject_transcendence": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalUnicity.SoleUniversalGrounding.unicity": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalUnicity.SoleUniversalGrounding.universal_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalUnicity.exactly_one_universal_modal_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalUnicity.groundsEntity_reflexive": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalUnicity.grounds_ground_iff_maximal": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.FoundationalUnicity.no_atom_is_universal_modal_ground": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.FoundationalUnicity.no_discriminating_subject_iff_no_maximal_non_ground": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.FoundationalUnicity.no_discriminating_subject_is_universal_modal_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalUnicity.not_asymmetric_grounding": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
@@ -4694,7 +4836,18 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.FoundationalUnicity.ofGround_ne_ofSubject": [
+  "Logos.Agency.Subject"
+ ],
  "Logos.FoundationalUnicity.ofGround_sole_universal_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalUnicity.ofGround_sole_universal_grounding": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.FoundationalUnicity.ofGround_unicity_from_no_discriminating_subject": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],

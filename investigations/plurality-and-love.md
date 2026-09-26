@@ -1,8 +1,8 @@
 # Investigation: Plurality of Divine Persons and Eternal Love
 
 **Repository:** Γ (Logos)  
-**Primary Formal Source:** `formal/Logos/Plurality.lean`, `formal/Logos/Love.lean`  
-**Kernel Status:** THEOREMS T12, T13, T14 (`{Means, Subject, AxTwoSubjects}`)  
+**Primary Formal Source:** `formal/Logos/Plurality.lean`, `formal/Logos/Love.lean`, `formal/Logos/LovesAsGround.lean` (for §5)  
+**Kernel Status:** THEOREMS T12, T13, T14 (`{Means, Subject, AxTwoSubjects}`); T30 (GAPMAP Level 21, C322–C354)  
 
 ---
 
@@ -40,3 +40,45 @@ In `formal/Logos/Love.lean:150-170`:
 ## 4. Epistemic Assessment
 
 - **Plurality & Love:** Within the divine reality, love is not a contingent accident or a reaction to the creation of the world; it is the **eternal, necessary communion of distinct persons**.
+
+---
+
+## 5. A Second Relation Called Love — Deliberately Not This One (Theorem T30)
+
+Since 2026-09-27 Γ proves a second relation also called love:
+`GroundLoves (g t : Entity) (a : Prop)` (`formal/Logos/LovesAsGround.lean`) — a *necessary*
+bearer holds a directional good *toward* an actual, distinct, meaning-bearing target at a
+context of evaluation. It is priced twice over: the primitive `GroundBearsGood`
+(`Tag: VOCAB`, the directed-good vocabulary the library lacked) and the bridge
+`AxGroundLovesContingentRealm` (`Tag: META`, the inhabitation), with the cosmos's
+meaning now a **theorem** of Γ (`CosmicExistence.cosmos_obtains`, C367) rather than a
+declared datum `[2026-09-27: was a `Tag: SEM` datum, `AxContingentCreationObtains`;
+retired; and 2026-09-27 again, lot COSMOS-EXISTENCE-IS-FREE: this bridge now pays for the
+realm's *meaning* alone. C350 became `PROVEN` at `{propext, Subject}` — the existence is
+free, so the two prices are no longer shared, and rejecting `AxTwoSubjects` no longer takes
+the realm's existence with it]`.
+
+**The two relations are kept distinct rather than merged, and the separation is the
+point:**
+
+- `Loves` is `Subject`-indexed (`Love.lean:49`); the ground is provably no `Subject`
+  (`the_ground_is_not_a_person`, C344). So "the ground loves" is **not well-formed** in
+  this investigation's vocabulary — and it stays that way.
+- `GroundLoves` demands a *necessary* lover and no subject is necessary
+  (`no_subject_is_a_necessary_entity`, C329), so `Loves s t` never yields
+  `GroundLoves (EntityOf s) _ _` (`subject_love_is_not_ground_love`, C346 — whose
+  unused `_h : Loves s t` hypothesis makes the disjointness **stronger** than its motive).
+- The `GroundLoves → Loves` transfer is **unstatable, not merely unproved**
+  (`ground_love_cannot_be_read_as_person_love`, C348): a `GroundLoves` target is an
+  arbitrary `Entity`, not a `Subject`, so no well-formed statement of the transfer exists
+  without a hypostatic identification — which is bridge #9 (C228), untouched here.
+
+Why this matters for §§2–4 above: **merging the two relations would silently reinterpret
+T14 and `PersonStabilityPrinciple`** (`Love.lean:97`). The eternal mutual love proven
+there is interpersonal `Loves` between subjects, conditional on `AxTwoSubjects`; the
+ground's love is a kind-claim about `Entity.ofGround` (`the_ground_is_a_necessary_and_chosen_lover`,
+C343, PROVEN↑ under the two prices). Neither is the other, and the ledger records both
+refusals: C338 kills the unrestricted ground-love bridge (an atom is contingent *and*
+meaningless), and C353 kills nothing but confirms the SEM datum's contingency shape is
+not forced either. The poem's "necessary ∧ chosen" cell and §§1–4's eternal communion
+are now two separate verified things — that is the honest form of both.

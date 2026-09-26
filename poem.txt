@@ -105,9 +105,15 @@ declarada (só SEM/META).
   também é necessário (de alguma forma)" → PROVEN↑ C42–C45 (T14, `{AxTwoSubjects, Means, Subject}`,
   *condicionais* à hipótese `PluralityLovePrinciple`, nunca provada; NÃO são `{}`); C76 **BLOCKED**
   (a forma canónica rígida foi excidida).
-- L26–30: "este mundo é necessário? Não" — negação não reivindicada (sem
-  demonstração); "a criação existe / há propósito" — zona de fé (F9,
-  DEFERRED); "existe este Ser Pessoal" — PROVEN (T8, `the_person_supports_the_reality_of_right`, `GroundOfReality`).
+- L26–30: "este mundo é necessário? Não" — ✔ **PROVEN desde 2026-09-27**: a leitura da
+  necessidade é refutada por `CosmicExistence.realm_existence_does_not_imply_realm_necessity`
+  (`{propext, Subject}`), lida directamente de `contingent_realm_obtains`; "a criação existe" —
+  ✔ **PROVEN** (C350 `CosmicExistence.contingent_realm_obtains : ContingentRealmObtains`,
+  `{propext, Subject}`), mas **por contingência transbordante e não por um acto de produção**:
+  "criação" nomeia a região da realidade que é actual, modal-frágil e não é o solo, e nenhuma
+  relação `Creates`, agente ou primeiro momento é reivindicado ou derivável; "há propósito"
+  continua a ser **zona de fé** (F9, pista L4, DEFERRED); "existe este Ser Pessoal" — PROVEN
+  (T8, `the_person_supports_the_reality_of_right`, `GroundOfReality`).
 - L38 ("Eu Escolho! Escolho admitir que: Sou"): o proferimento de admitir/negar é o
   próprio evento performativo fraco (`act`) — C58 (`Agency.noWeakAct_selfRefutes`, `{Subject, act}`)
   refuta a negação de eventos realizados; a asserção intencional forte é C68 (`Agency.Cogito`, `{Means, Subject}`),

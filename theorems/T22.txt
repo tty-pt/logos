@@ -67,7 +67,47 @@ Teoremas canónicos associados:
 2. Invariância intencional (`ofGround_capacity_invariance`, `{Means, Subject}`):
    A capacidade de fundamentação intencional do fundamento é uniforme e imutável em toda a realidade.
 
+C321 — Contramodelo: a invariância de capacidade não discrimina nada:
+
+```lean
+theorem capacity_invariance_holds_for_every_entity (e : Entity) : CapacityInvariance e
+```
+
+Pegada auditada: `{Means, Subject}` (apenas vocabulário — a *prova* não usa axioma nenhum;
+a pegada vem de a *enunciado* mencionar `EntityMeans`, cujo corpo menciona `Means` e
+`Subject`, pelo mesmo motivo que `groundsEntity_reflexive` não é `{}`).
+
+**Este é um contramodelo, não uma refutação, e não degrada nada.** O que a máquina
+comprova é que `CapacityInvariance e := ∀ p, ∀ _w₁ _w₂ : World, EntityMeans e p ↔
+EntityMeans e p` (`DivineImmutability.lean:120`) é uma **tautologia**: `EntityMeans` é
+`EntityMeans (e : Entity) (p : Prop) : Prop` (`RecoveredOntologicalGround.lean:46`) e **não
+tem argumento de mundo nenhum** — logo `w₁`/`w₂` ficam ligados e nunca são mencionados, o
+corpo reduz-se a `P ↔ P`, e o `ofGround_capacity_invariance` existente (`DivineImmutability.lean:130-133`)
+descarrega-se com `exact Iff.rfl`. Consequência: a propriedade vale para **toda** entidade,
+sujeito e átomo incluídos.
+
+A assimetria é o achado. Os três campos irmãos **quantificam de verdade e discriminam**:
+`ModalInvariance` sobre `w₁ w₂ : World` via `ExistsAt` (`:65`), `StageInvariance` sobre
+`t₁ t₂ : Time` via `ExistsAtTime` (`:84`), `TransitionInvariance` como o predicado real
+`NotInSuccession e` (`:101`). E cada um deles tem um contramodelo de não-trivialidade `{}`
+registado (C197 para a invariância modal/estática, e C192, C202, C214 para as outras
+mestres de atributo). Este campo **não tem nenhum, porque não há nada ali para refutar.**
+
+Consequência para o registo: `ofGround_divine_immutability` (C201) **permanece `PROVEN` e
+intocado**. O que muda é que o ledger afirmava a propriedade apenas onde ela não podia
+falhar, o que lia como se carregasse peso. Antes de C321, a afirmação era verdadeira mas
+não era selectiva; agora é selectiva e o ledger diz isso.
+
+Ainda requer prova (F16): a leitura substantiva — «a capacidade de significado é constante
+*através dos mundos*» (Aquino ST I q. 9 a. 3, *idem actus semper et similiter est*) — **não
+é sequer expressável** no vocabulário actual, porque não existe nenhuma relação
+`Entity → World → Prop → Prop` na biblioteca. Falta a relação indexada por mundo
+`EntityMeansAt` **e** a prova de que a sua variação é não-vazia. É vocabulário novo, não
+prova nova; **não foi adicionado.**
+
 Limites honestos de escopo:
 A demonstração estabelece a imutabilidade modal, temporal, de processo e de capacidade
 de `Entity.ofGround` no sistema ontológico de Γ. Não pretende demonstrar impassibilidade
 psicológica nem restringir o endereço intencional pessoal além do que o modelo formal estipula.
+**Acrescento (C321):** dos quatro campos, apenas três discriminam; o quarto
+(`capacity_invariance`) é uma tautologia e está agora declarado como tal.

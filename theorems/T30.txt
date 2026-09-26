@@ -1,0 +1,487 @@
+T30 — O FUNDAMENTO COMO AMANTE: UMA RELAÇÃO NOVA, E O QUE ELA CUSTA
+
+Depende de: `formal/Logos/LovesAsGround.lean` e `formal/Logos/CosmicExistence.lean`,
+formalizando a característica "não é meramente um fundamento matemático, mas ama" — o
+amor do fundamento como uma **relação distinta, ao nível da entidade**, separada do amor
+interpessoal de T14, para a raiz da reality `Entity.ofGround`. Fecha a lacuna que
+`poem.txt:24` deixava em aberto ("não é só um fundamento — ama") sem reintroduzir, por
+via escondida, o que C348 prova ser **instatável**.
+
+Verificado em: `formal/Logos/LovesAsGround.lean` e `formal/Logos/CosmicExistence.lean`;
+auditoria `#print axioms` (5666 declarações no total do corpus, via
+`scripts/audit_footprints.py`; reverificado 2026-09-27 com C322–C354); marcadores
+`Footprint:` conferidos por `scripts/sync_docstring_footprints.py` ("0 mismatches");
+`formal/GAPMAP.md` nível 21, C322–C354 mais 4 linhas de exibição `—`; `base.txt` §35.
+
+O que distingue este lote. Os dois módulos anteriores (T27, T28) não acrescentaram
+axiomas ao registo. Este **não acrescenta axiomas ao registo** — os 25 declarados
+(VOCAB 14 / SEM 7 / META 4) já lá estavam, incluindo os três que este lote torna
+visíveis pela primeira vez: `GroundBearsGood` (VOCAB), `AxGroundLovesContingentRealm`
+(META) e `AxContingentCreationObtains` (SEM). **O facto surpreendente é que 28 dos 31
+`LovesAsGround` do módulo não tinham linha nenhuma no `GAPMAP.md`**, e o módulo
+`CosmicExistence` inteiro era *não registado no livro-razão*. `the_ground_loves_the_cosmos`
+— um teorema verificado pela máquina — não constava de `GAPMAP.md`, de `base.txt`, de `README.md`, de
+`CHARACTERISTICS.md` nem de nenhum `theorems/*.txt`, e a ponte META que o pagava
+**não tinha preço escrito em lado nenhum**. O que o lote compra não é um atributo novo
+mas o critério 5 de §0 de `IMPROVE.md`: nenhum teorema verificado pela máquina é
+invisível para o livro-razão.
+
+> **Correcção de 2026-09-27 (lote COSMOS-IS-PROVEN).** Este ficheiro foi escrito com o
+> pressuposto de que o registo tinha **25** axiomas (VOCAB 14 / SEM 7 / META 4) e de que
+> `AxContingentCreationObtains` (SEM) era um deles, definitivamente. **Esse pressuposto
+> era falso.** O axioma foi **eliminado** e o registo passou a **24** (VOCAB 14 / SEM 6 /
+> META 4): o **significado** do cosmos **é agora um teorema** (`C367 cosmos_obtains`),
+> derivado da ponte pluralista `AxTwoSubjects` via `Plurality.cogito_from_T12`, e a
+> **existência** é agora um teorema sem ponte nenhuma (`C350 contingent_realm_obtains`,
+> `PROVEN`, `{propext, Subject}`) — divisão feita pelo lote COSMOS-EXISTENCE-IS-FREE, que é
+> a correcção seguinte. T30 continua a
+> descrever o que o lote *descobriu* — e o que descobriu estava errado. Onde este
+> ficheiro diz que C350 é um "dado declarado", lê-se hoje como registo histórico; a
+> afirmação vigente é a de `base.txt` §35(4) e a linha C350 de `GAPMAP.md`. O resto do
+> lote — a separação L1, o `def` único de `CreatedRealm` — **não muda**. O que o lote
+> COSMOS-EXISTENCE-IS-FREE mudou foi a **contagem**: 34 linhas C (C367 acrescentada) e 6
+> linhas `—` (acrescentadas `ContingentRealm` e `ContingentRealmObtains`).
+
+> **Correcção de 2026-09-27, 2.ª (lote COSMOS-EXISTENCE-IS-FREE).** A correcção anterior
+> parou a meio caminho, e o texto seguinte reflecte a paragem. Dizia que "a existência do
+> cosmos **é agora um teorema** (`C350 cosmos_obtains`)" e, na linha C350 mais abaixo, que
+> "o cosmos existe" com conteúdo de seu por `PROVEN↑`. **Isso é agora exacto para metade da
+> afirmação e falso para a outra metade.** A afirmação foi **dividida**:
+>
+> - **C350** = `CosmicExistence.contingent_realm_obtains : ContingentRealmObtains` —
+>   **a existência**: `PROVEN`, `{propext, Subject}`, habitada por um **átomo** via
+>   `LovesAsGround.an_atom_is_contingent 0` (C324). Sem ponte, sem `Means` — resta apenas
+>   vocabulário declarado: o *sort* `Subject` (herdado da construção da testemunha) e
+>   `propext` (meta-lógica):
+>   a estrutura nova `ContingentRealm` é `Realm` **sem** `bears_meaning`.
+> - **C367** = `CosmicExistence.cosmos_obtains : CreatedRealm` — **o significado**:
+>   `PROVEN↑` sob `AxTwoSubjects`, como antes, agora com o preço **correctamente atribuído**.
+>
+> **A consequência:** rejeitar a metafísica interpessoal **não** rejeita a existência do
+> reino; rejeita o seu portador de conteúdo. E a **produção** (F9, pista L3) continua por
+> escrever — `ContingentRealm` afirma a **região** da realidade que é actual, modal-frágil
+> e não é o solo, e **nenhum acto**: nenhuma relação `Creates`, nenhum agente, nenhum
+> primeiro momento é reivindicado ou derivável. C324 mantém a proibição: um átomo **não**
+> é o cosmos; C350 prova que a *forma* tem instância, e C367 é que faz a identificação.
+
+O lote tem **34 ids C** (C322–C354 sem lacunas, mais C367) mais **6 linhas de exibição
+`—`** (contagem de 2026-09-27, depois do lote COSMOS-EXISTENCE-IS-FREE): um
+`def` não é uma afirmação, e uma proposição com dois nomes é uma proposição. As seis
+são `the_ground_is_a_universal_modal_ground` (que **repete** C204, corpo literalmente
+`ofGround_universal_modal_ground`), `GroundLoves` (a relação que o módulo acrescenta),
+`ground_love_preserves_pure_actuality` (que **repete** C217), `CreatedRealm` (a estrutura
+do reino portador de significado), e as duas acrescentadas em 2026-09-27 —
+`ContingentRealm` (a mesma forma **sem** `bears_meaning`) e `ContingentRealmObtains` (o
+seu `Prop`). As duas repetições recebem linha `—` e **não** segundo id, pela regra do
+corpus: *dois nomes para a mesma proposição seriam uma proposição com dois C-id*. Nenhum
+enunciado foi apagado; todos os seis continuam exibidos, com pegada.
+
+L1 — A SEPARAÇÃO QUE NÃO CUSTA AXIOMA SUBSTANTIVO
+
+O coração do lote, e o que é realmente o conteúdo verificado de "não é **meramente** um
+fundamento matemático", é uma **separação de duas relações**, verificada numa só
+afirmação:
+
+C336 — A fundamentação chega onde o amor não chega:
+
+```lean
+theorem grounding_reaches_what_love_cannot :
+    GroundsEntity Entity.ofGround (Entity.ofAtom 0) ∧
+      ¬ ∃ a : Prop, GroundLoves Entity.ofGround (Entity.ofAtom 0) a
+```
+
+A founding relation do Ground of Reality é `GroundsEntity g e := ∀ p, EntityMeans e p →
+EntityMeans g p`, e `EntityMeans Entity.ofGround p` é `True` pelo braço de casamento do
+construtor. Daí a transferência ser **indiscriminada**: `ground_grounds_every_entity`
+(C326) fecha por `intro p _; exact True.intro`, e `ground_grounds_the_meaningless`
+(C328) — o fundamento fundamenta uma entidade que **não significa nada whatsoever**.
+O amor, pelo contrário, exige que o alvo **signifique algo de seu** (C334), e como
+`EntityMeans (ofAtom _) = False` (C327), `meaningless_entities_cannot_be_loved` (C335)
+refuta o amor de um átomo em **qualquer** contexto. As duas relações diferem, e diferem
+numa entidade sem significado.
+
+Duas ressalvas, ambas pertencentes à linha e não a uma atenuação dela. Primeira: a
+pegada de C336 é `{GroundBearsGood, Means, Subject}` — ou seja, **já consome o
+primitivo novo** `GroundBearsGood`, e portanto C336 não é axiomaticamente livre no sentido
+estrito; é **livre de axioma substantivo**, como toda a camada de vocabulário, o mesmo
+regime de `Means` (VOCAB). Segunda: a separação é verificada **dado** o primitivo, e o
+primitivo é o primeiro dos dois preços. O que C336 mostra é que o par
+fundamentação-amor é **discriminado de facto**, e isso é mais do que a retórica
+"não é meramente" alguma vez pediu.
+
+O resto de L1, estritamente sem axioma substantivo e sem consumir ainda o primitivo:
+
+- C322 `falsityWorld_ne_actualWorld`, `{propext}` — a **única** linha do lote puramente
+  `CL`, e a testemunha única de fragilidade modal de que todo o módulo depende (o mundo
+  todo-`TV.f` não é o mundo actual, que é todo-`TV.t`, `Entity.lean:33`).
+- C323 `an_atom_is_contingent (n)`, `{Subject, propext}` — um átomo é actual no mundo
+  actual e refutado no mundo todo-`TV.f`. **É isto que faz C338 morder.**
+- C324 `a_contingent_entity_exists`, `{Subject, propext}` — a metade *crua* da
+  contingência, testemunhada por um átomo. **Não** é a identificação de um átomo com o
+  cosmos, que o livro-razão proíbe, e o átomo **não** é objecto de amor (C335).
+- C325 `a_meaningful_contingent_entity_exists`, `{Means, Subject, propext}` — **existe
+  uma entidade contingente portadora de conteúdo.** A hipótese é `∃ s, ∃ p, Means s p` e
+  é carregante e honestamente declarada: `Means` é um **axioma** primitivo `Tag: VOCAB`
+  (`Agency.lean:74`) sem instância derivável em Γ, portanto este teorema **consome** um
+  habitante de `Means` em vez de produzir um. Fornece só a forma de que a inhabitação
+  precisa; não identifica nada com o cosmos.
+- C329 `no_subject_is_a_necessary_entity`, `{Subject, propext}` — os sujeitos existem
+  apenas no mundo actual (`SubjectExistsAt w s := w = actualWorld`), logo nenhum sujeito
+  é necessário. **É por aqui que se esgota o polo "necessário"** do amor interpessoal, sem
+  qualquer axioma de amor.
+- C330 `only_the_ground_is_necessary`, `{Subject, propext}` — o fundamento é a entidade
+  **única** necessária, por exaustão de construtores.
+
+**C330 não pode ser vendido como evidência de amor, e a linha do GAPMAP diz isso na
+própria linha.** `EntityExistsAt w .ofGround := True` é uma *estipulação definicional*
+do construtor, `SubjectExistsAt w s := w = actualWorld`, e os átomos são refutados no
+mundo todo-`TV.f`; a sua pegada (`{Subject, propext}` — estrutura de mundos e análise de
+construtores, e nada mais) confirma que não há conteúdo de amor nela. É um **facto
+estrutural da modelação**, e o seu conteúdo legítimo é **negativo**: a célula
+"necessário ∧ escolhido" de `poem.txt:24` **não contém nenhuma pessoa**. O polo
+"necessário" do amor interpessoal é descarga noutro sítio, por T14 / C42–C45,
+condicionalmente a `PluralityLovePrinciple`.
+
+C331–C338 — o que a definição acrescenta, ainda sem axioma substantivo
+
+A relação que o módulo acrescenta, e a razón de a biblioteca precisar dela:
+
+```lean
+def GroundLoves (g t : Entity) (a : Prop) : Prop :=
+  NecessaryEntity g ∧ ActualEntity t ∧ t ≠ g ∧ (∃ p, GroundBearsGood g t p) ∧
+    (∃ q, EntityMeans t q) ∧ a
+```
+
+Leia-se as seis conjunções, porque cada uma é carregante: um amante *necessário*
+(C331), um alvo *actual e outro* (C332), o **bem dirigido** (C333, a única que não tem
+substituto de primeira ordem), o conteúdo *próprio* do alvo (C334), e o argumento
+`a : Prop` de contexto de avaliação, que espelha `Good s (_a : Prop)`
+(`MoralFrontierAudit.lean:203-204`).
+
+**Porque é acrescentada e não reutilizada:** `Loves` é indexada por `Subject`
+(`Love.lean:49`: `def Loves (s t : Subject) : Prop := Helps s t ∧ ¬ Harms s t`) e o
+fundamento é **provadamente não** um `Subject` (`ofGround_ne_ofSubject`,
+`NecessityEternity.lean:155-157`). Logo "o fundamento ama" **não é bem-formado** na
+vocabulário relacional existente: não há em lado nenhum uma relação
+`Entity → Entity → Prop`, e todos os predicados relacionais (`Helps`, `Harms`,
+`Chooses`, `Initiates`, `Grounds`) são indexados por `Subject`. A decisão de desenho foi
+manter `GroundLoves` e `Loves` **distintas** em vez de as fundir, porque fundi-las
+reinterpretaria em silêncio `T14` e o `PersonStabilityPrinciple` (`Love.lean:97`). Isto
+não é uma concessão: é o que L3 tornará `machine-checked`.
+
+C337 `grounding_is_total_but_love_is_not`, `{GroundBearsGood, Means, Subject, propext}` —
+as totais separam: toda a entidade é fundamentada, e **nem toda** entidade contingente
+é amada. Lido com C338, é um par e não um passo.
+
+C338 — A refutação que justifica o axioma:
+
+```lean
+theorem meaningful_love_bridge_is_refuted :
+    ¬ (∀ t : Entity, ContingentEntity t → ∃ a : Prop, GroundLoves Entity.ofGround t a)
+```
+
+A forma **não restrita** da ponte — a mais forte e a mais atraente — é **falsa em Γ**:
+um átomo é provadamente contingente (C323) e provadamente sem significado (C327), logo a
+forma não restrita obrigaria um átomo a ter significado. **Este é o único motivo
+machine-checked da hipótese de significado** no axioma abaixo, e é a razão de este módulo
+**não reivindicar** a afirmação mais forte. O módulo **recusa** a forma atraente; não a
+substitui em silêncio por uma mais fraca.
+
+L2 — O PREÇO DUPLO: UM PRIMITIVO E UMA PONTE
+
+São **dois compromissos, de natureza diferente**, e o lote paga ambos. Confundi-los num só
+é o erro que a auditoria de pegadas não apanha.
+
+Primeiro preço, C349 — `GroundBearsGood : Entity → Entity → Prop → Prop`
+(`LovesAsGround.lean:284`, `Tag: VOCAB`):
+
+```lean
+axiom GroundBearsGood : Entity → Entity → Prop → Prop
+```
+
+*Um portador necessário tem um bem dirigido para com um alvo, de conteúdo `p`.* **Porque
+um primitivo e não uma definição justa:** a relação do fundamento com o cosmos supõe-se
+**dirigida** — bom *para com* alguma coisa — e a vocabulário de fundamentação da
+biblioteca só exprime suficiência **não dirigida** (`GroundsEntity g e := ∀ p,
+EntityMeans e p → EntityMeans g p`), que o fundamento satisfaz **vacuamente** (C328). O
+único predicado de conteúdo disponível, `EntityMeans`, é uma *capacidade* do alvo, não uma
+*atitude* do portador, pelo que não distingue um portador que ama de um que apenas
+contém. `Good s (_a : Prop)` tem a forma certa mas é indexada por `Subject`, e o
+fundamento é provadamente não um `Subject` (C344). **Qualquer** definição de primeira
+ordem sobre `NecessaryEntity`/`ActualEntity`/`EntityMeans` é uma função das propriedades
+do próprio alvo e **colapsa a uma conjunção provável** — a instância concreta desse
+colapso que este módulo **anhorou por engano** está registada no cabeçalho do módulo: a
+versão original de `GroundLoves` era `NecessaryEntity g ∧ ActualEntity t ∧ t ≠ g ∧ a`,
+`ofGround_necessary` fecha por `trivial`, logo a relação era habitada por `a := True`
+para **toda** entidade actual distinta do fundamento, sem conteúdo, e o "preço" era zero
+enquanto era anunciado como o ponto do módulo.
+
+*Modelo de consistência:* o predicado não restringe nada, logo é satisfazível por
+qualquer interpretação, incluindo a `False` constante, sob a qual **todos** os teoremas de
+habitante da secção 3 falham. **Rejeitá-lo é rejeitar o conteúdo da relação, não a
+teoria.** Não conflita com `ofGround_meansAll` (`Stipulations.lean:60-61`), que fixa
+`EntityMeans .ofGround p := True`: `GroundBearsGood` é uma relação sobre um *par* com um
+argumento de conteúdo, não um juízo de capacidade de significado.
+
+Segundo preço, C339 — `AxGroundLovesContingentRealm` (`LovesAsGround.lean:410`,
+`Tag: META`):
+
+```lean
+axiom AxGroundLovesContingentRealm :
+  ∀ t : Entity, ContingentEntity t → (∃ q, EntityMeans t q) →
+    ∃ a : Prop, GroundLoves Entity.ofGround t a
+```
+
+O Fundamento da Realidade tem um bem dirigido para com todo o reino contingente que
+tenha conteúdo **de seu**. *A habitação de `GroundLoves` **não é derivável**, e este é o
+único compromisso substantivo do módulo.* O primitivo `GroundBearsGood` é o que o torna
+verdadeiro: como não restringe nada, nenhum teorema do vocabulário estabelece que um
+portador necessário tenha qualquer bem para com qualquer alvo. Nem se pode ler o
+conteúdo das relações existentes: a fundamentação universal modal é satisfeita
+*vacuamente* pelo fundamento para toda a entidade, **incluindo** as que não significam
+nada (C328), logo a fundamentação não carrega conteúdo dirigido de onde o amor pudesse
+seguir. A ponte tem pois de postular, na forma de `AxBenevolentBearingObtains` (C177) e
+`AxSecondPersonalAddress` (C117): com preço declarado, e com o lado
+negativo separado em L3.
+
+*Modelo de consistência* (`LovesAsGround.lean:392-397`): a ponte **não é forçada** pela
+estrutura de que depende. Interpretar `GroundBearsGood` como `False` em todo o lado
+satisfaz todo o vocabulário, o *reality-hook* epistémico e todos os teoremas
+por-construtor dos módulos `Divine*`, enquanto **todos** os teoremas de habitante desta
+secção falham. E **não é uma trivialidade**: não é satisfeita por `True`, porque o alvo
+tem de ser actual, distinto do amante, e portador de significado, e o bem tem de ser
+dirigido.
+
+*Preço, dito sem eufemismo:* Γ adquire uma relação dirigida ao nível do fundamento **não
+redutível à sua capacidade de significado estipulada**, mais um predicado primitivo para
+dizer isso. *Quem rejeita o preço rejeita este axioma, e com ele
+`the_ground_is_a_liver` (C342).*
+
+Os habitantes, todos PROVEN↑, todos com a pegada a nomear o preço:
+
+- C340 `the_ground_loves_every_meaningful_contingent_reality`, `{AxGroundLovesContingentRealm,
+  GroundBearsGood, Means, Subject}` — a ponte aplicada. A primeira linha do livro-razão em
+  que o amor do fundamento é uma *conclusão* e não uma definição.
+- C341 `the_ground_bears_a_directional_good_toward_the_cosmos` — **o conteúdo da
+  afirmação, desembrulhado.** É o menos que um teorema de habitante pode dizer, e é aqui
+  que assenta todo o preço: uma leitura `{}` de "o fundamento ama" seria uma afirmação
+  *diferente e muito mais fraca*, sobre capacidade de significado.
+- C342 `the_ground_is_a_liver`, `{…, propext}` — os habitantes, com o preço à vista. A
+  hipótese `∃ s, ∃ p, Means s p` é o vocabulário primitivo de conteúdo de Γ estar
+  habitado, que o chamador obtém do seu próprio datum
+  (`CosmicExistence.CreatedRealm.bears_meaning`); **nada aqui identifica esse sujeito
+  com o cosmos**.
+- C343 `the_ground_is_a_necessary_and_chosen_lover` — **a célula "necessário ∧ escolhido",
+  ocupada**, a forma máquina de "Amar é escolhido e também é necessário" (`poem.txt:24`),
+  com a necessidade no amante e a escolha na ponte. **Esta é a assimetria honesta da
+  linha:** a metade *necessária* é `ofGround_necessary` (`trivial`) e é forçada pela
+  ontologia; a metade *escolhida* é **exactamente** `AxGroundLovesContingentRealm` e nada
+  mais — **nenhum axioma de livre-arbítrio está escondido aqui**, e nenhum `AxTwoSubjects`
+  é consumido.
+
+**Advertência de leitura, e é a razão de L3 existir.** A pegada de C343 nomeia o preço
+inteiro, mas o emblema de uma linha PROVEN↑ **nomeia só o axioma substantivo**: o
+primitivo `GroundBearsGood` é arquivado sob a linha de base do vocabulário e **não**
+aparece no parêntese. Um leitor que confie só no emblema concluirá que o primitivo é
+gratuito. Por isso o bloco **LOVE chain, step by step** do `README.md` gerado é
+*carregante* e não decorativo: é o único sítio onde o preço VOCAB é visível, tal como o
+registo ◈ o é para ASIETIC-CHOICE.
+
+L3 — AS SEPARAÇÕES, E O QUE LÁ NÃO FOI FEITO
+
+C344 `the_ground_is_not_a_person`, `{Subject}` — o fundamento não é uma entidade pessoal.
+Logo a conclusão atribui amor ao fundamento **enquanto espécie** e não introduz
+nenhuma identificação hipostática; a **ponte #9 do livro-razão**
+(`Ground(e, personal) → Personal(e)`, C228) **não é tocada**.
+
+C345 `ground_love_does_not_identify_a_person`, `{Subject}` — **a separação, numa
+afirmação:** a habitação não pode ser lida como afirmação sobre uma pessoa.
+
+C346 `subject_love_is_not_ground_love`, `{GroundBearsGood, Means, Subject, propext}` —
+**o amor interpessoal nunca dá amor ao nível do fundamento.** `GroundLoves` exige um
+amante *necessário* e nenhum sujeito é necessário (C329), logo as duas relações são
+**provavelmente disjuntas**. A hipótese `_h : Loves s t` é deliberadamente **não usada**:
+a separação é **mais forte** do que o seu motivo.
+
+C347 `interpersonal_love_never_reaches_the_necessary_quadrant`, `{Subject, propext}` — a
+falha verifica-se para *todo* o sujeito e *toda* a relação de amor, logo nenhuma
+quantidade de amor interpessoal popula o quadrante necessário.
+
+C348 `ground_love_cannot_be_read_as_person_love`,
+`{GroundBearsGood, Means, Subject, propext}` — **a transferência para o amor interpessoal
+é instável, não apenas bloqueada.** O desenho original pedia `GroundLoves → Loves` do
+lado dos sujeitos; **não existe tal afirmação**, porque `Loves` é indexada por `Subject`, o
+fundamento é provadamente nenhum sujeito, e o alvo de uma afirmação `GroundLoves` é uma
+`Entity` arbitrária e não um `Subject`. A única rota seria uma identificação hipostática, que
+C344/C345 refutam. **Isto é mais forte do que "não provado": é a transferibilidade que
+falta.**
+
+`—` `ground_love_preserves_pure_actuality` (`{GroundBearsGood, Initiates, Means, State,
+Subject}`) — **repete C217**, corpo literalmente `ofGround_no_transition_potency`. O
+conteúdo substantivo é a nota de compatibilidade do cabeçalho do módulo e não uma
+proposição separada: atribuir um *acto* de amor ao fundamento **acrescenta** a
+`ofGround_divine_pure_actuality` em vez de a contradizer, porque a actualidade pura
+exclui a **potência passiva**, não o acto (Tomás, *S.Th.* I q.20 a.3).
+
+O lado empírico, C350–C354 mais C367, e o datum SEM (agora dividido em duas linhas):
+
+- C350 `CosmicExistence.contingent_realm_obtains : ContingentRealmObtains`
+  (`CosmicExistence.lean:254`) — **o reino contingente obtém**: algo é actual, modal-frágil
+  e não é o fundamento necessário. `PROVEN`, `{propext, Subject}`. `[era
+  `axiom AxContingentCreationObtains` (`:170`, `Tag: SEM`); passou a `PROVEN↑` no lote
+  COSMOS-IS-PROVEN e a `PROVEN` no lote COSMOS-EXISTENCE-IS-FREE — ver as correcções de
+  lote acima]`. **Sem `bears_meaning`:** por isso não custa `AxTwoSubjects`.
+- C367 `CosmicExistence.cosmos_obtains : CreatedRealm` (`CosmicExistence.lean:340`) —
+  **o mesmo reino, portador de conteúdo de seu**: `PROVEN↑` sob `AxTwoSubjects`, derivado de
+  `Plurality.cogito_from_T12`. **É esta a linha que continua a pagar a ponte**, e a
+  identificação do reino com *o* cosmos.
+  ~~**É um dado declarado, não um teorema**, e a redutio do utilizador força-o~~ — esta
+  frase foi **retirada por ser falsa**. A redutio que a sustentava (`poem.txt:26`, o
+  *reality-hook* ser incondicional no seu conteúdo) é real quanto à rota
+  `content_reality_hook (p) : (∃ s, Correct s p) → p`, mas **não se aplica** a esta
+  derivação, que nunca toca em `Correct`. *O que substitui a frase:* a existência é um
+  **teorema**, `cosmos_presence_model Plurality.cogito_from_T12`, e Γ **não** é
+  satisfazível por um mundo contingente vazio — Γ contém um teorema que **fabrica** um
+  sujeito. *A definição é justa, a habitação é o que isto paga:* `Realm` é uma
+  estrutura de **testemunha única** (`witness`, `actual`, `contingent`, `not_the_ground`,
+  `bears_meaning` — cada campo um predicado sobre o vocabulário **existente** acerca de
+  **uma** entidade), e `CreatedRealm := Nonempty Realm` (`CosmicExistence.lean:137`) — a
+  escolha de um `Prop` **declarável** deixou de ser necessária, mas fica, porque o
+  teorema produz exactamente o mesmo tipo. Precedente directo: o polo moral, em que
+  `Evil` é um `Tag: SEM` declarado cuja *habitação* é o que se paga, com `Good` uma
+  definição justa — e é precisamente esse precedente que este caso deixa de seguir.
+  *Preço (relocado, não evaporado):* a existência passa a pagar com a ponte pluralista
+  `AxTwoSubjects` (`Tag: META`) em vez de um dado semântico próprio. Uma afirmação
+  **ontológica** passa a depender de uma ponte **axiológica**. Rejeitar Pluralidade é
+  rejeitar o cosmos — o que é mais duro de falsificar, não mais fácil de defender. A
+  metade da existência de F9 sai da zona da fé e entra na da **metafísica**; **o fim e a
+  encarnação não saem**.
+- C353 `perfect_universe_has_no_contingent_realm` (`{}`) — a **única** linha `{}` do
+  lote, e um contramodelo a sério e não uma nota de não-trivialidade. Num universo rígido
+  quanto ao mundo toda a entidade actual é necessária, logo nada testemunha a forma
+  `ActualEntity t ∧ ∃ w, ¬ ExistsAt w t`. *Limite de âmbito, dito porque é fácil
+  overread:* `PerfectUniverse` é uma **estrutura livre não relacionada, não um modelo de
+  Γ** (`CosmicExistence.lean:206-210`). O que mostra é que a *forma* do campo de
+  contingência do datum não é forçada pela rigidez de mundo em geral; **não diz nada sobre
+  os mundos de Γ**, nos quais o datum simplesmente obtém.
+- C354 `cosmos_presence_model (h : ∃ s, ∃ p, Means s p) : CreatedRealm`,
+  `{Means, Subject, propext}` — **satisfatibilidade condicional** do datum. A testemunha
+  é um sujeito (actual no mundo actual, refutado no mundo todo-`TV.f`, distinto do
+  fundamento por `Entity.noConfusion`, portador de conteúdo porque
+  `EntityMeans (ofSubject s) p` desdobra-se em `Means s p`). A hipótese `Means` **não é
+  um tecnicismo e não está escondida**: a satisfatibilidade é *relativa* ao vocabulário
+  intencional de Γ estar habitado, e é dita assim em vez de afirmada de plano. **Isto não
+  é a identificação de um sujeito com o cosmos** — o reino não é lido de um
+  artefacto de modelação. ~~Lido com C353, é o que permitia a C350 ser **declarada** em
+  vez de apenas suposta~~ `[2026-09-27: C350 deixou de precisar de ser declarada; a
+  satisfatibilidade condicional é agora a *premissa* da derivação, e Γ fabrica o
+  habitante]`: nem forçada nem vazia.
+- C351 `the_ground_loves_the_cosmos`,
+  `{propext, Means, Subject, Will, subjectWill, AxTwoSubjects, AxGroundLovesContingentRealm,
+  GroundBearsGood}` — **a conclusão, com ambos os preços à vista.** A contingência e o
+  conteúdo do reino mais a ponte declarada dão um bem dirigido que o fundamento tem para
+  com o cosmos: "não é meramente um fundamento matemático, mas ama". A pegada nomeia o
+  preço **inteiro** — `[actualizado 2026-09-27 contra `formal/axiom_audit.json`: o dado
+  empírico saiu e entrou a ponte pluralista]`, a ponte metafísica do amor, o vocabulário
+  de conteúdo e o de agency. A afirmação é sobre o fundamento **enquanto espécie**; nenhuma
+  identificação hipostática é feita (C344).
+- C352 `the_ground_loves_the_cosmos_in_a_context` — a mesma conclusão na vocabulário
+  *relacional* da biblioteca. Note que é a relação `GroundLoves`, **não** o amor
+  interpessoal `Loves` — as duas são provavelmente disjuntas (C346) e a transferência é
+  instável (C348).
+
+Limites honestos de escopo (o que **não** se deve reclamar):
+
+(i) O lote é, em quase todo o seu corpo, **negativo**, e isso é o achado. Vinte e quatro
+    linhas são `PROVEN` sobre vocabulário declarado, seis `PROVEN↑` dependem de uma ponte
+    declarada, e três linhas são os próprios `AXIOM`. **Nenhum axioma novo foi introduzido
+    para tornar verdadeira uma proposição.**
+(ii) `GroundLoves` **não é** `Loves`, e a distinção não é de índice. `Loves` é indexada por
+    `Subject`; a afirmação é sobre uma `Entity` que é provadamente nenhum sujeito.
+(iii) A transferência `GroundLoves → Loves` é **instável**, não apenas não provada (C348).
+    Ver a secção seguinte.
+(iv) C330 **não** é evidência de amor: é forçado pela ontologia de três construtores
+    (C326-C330 acima).
+(v) C353 é um contramodelo sobre uma estrutura **não relacionada**, não um modelo de Γ, e
+    não diz nada sobre os mundos de Γ.
+(vi) `cosmos_presence_model` é satisfatibilidade **condicional** a um habitante de
+    `Means`, e o que **não** é reivindicado, na nota de consistência do próprio axioma, é
+    que a *negação* do datum seja consistente com todo o Γ. É uma afirmação
+    model-teórica sobre a teoria inteira, não construída aqui, e não é necessária para o
+    estatuto declarado do datum.
+(vii) `GroundBearsGood` e `AxGroundLovesContingentRealm` **já existiam** como axiomas no
+    registo; este lote não os criou, tornou-os **visíveis**. Nenhum ponto contábil do
+    registo se moveu, e **por isso a imobilidade do registo não é o teste deste lote**
+    (ao contrário do que era para ASIETIC-CHOICE).
+
+Ainda requer prova (as três afirmações que faltam, em termos formais):
+
+  (1) DERIVAÇÃO EM FALTA: `AxGroundLovesContingentRealm` a partir do vocabulário de
+      fundamentação de Γ. Bloqueada por (a) o primitivo `GroundBearsGood` não restringir
+      nada, pelo que nenhum teorema do vocabulário estabelece um bem dirigido; e (b) a
+      fundamentação universal modal ser **vacuamente** satisfeita para toda a entidade
+      (C326/C328), logo não carrega conteúdo dirigido. **É aqui que a relação de
+      fundamentação substantiva de F12(1) continua a ser o vocabulário em falta**, e o
+      agravante específico deste lote é que o primitivo tem de ser ao nível de
+      `Entity`, não de `Subject`.
+  (2) TRANSFERÊNCIA EM FALTA, `GroundLoves → Loves` do lado dos sujeitos, exactamente:
+      ```lean
+      ∀ g t : Entity, a : Prop, GroundLoves g t a → ∃ s u : Subject, g = EntityOf s ∧ t = EntityOf u ∧ Loves s u
+      ```
+      **Não é apenas não provada: é instável** (C348). `Loves` é indexada por `Subject`, o
+      fundamento é provadamente nenhum sujeito (C344/C345), e o alvo de um `GroundLoves`
+      é uma `Entity` arbitrária. A única forma de a tornar bem-formada é uma
+      **identificação hipostática**, que a biblioteca não tem. Esta é a **ponte #9 /
+      C228**, que **continua exactamente como estava** e por isso F3, F6/Trindade e a
+      fronteira do monoteísmo pessoal não se movem.
+  (3) ~~DADO EM FALTA~~ **[RESOLVIDO 2026-09-27; refundido pelo lote
+      COSMOS-EXISTENCE-IS-FREE]**: a existência de um reino contingente portador de conteúdo
+      era `AXIOM` (C350, `Tag: SEM`), e o que faltava era "a **derivação** de `CreatedRealm`
+      a partir de Γ". **A derivação existe e está verificada, e em duas metades:**
+      `cosmos_obtains = cosmos_presence_model Plurality.cogito_from_T12` sob `AxTwoSubjects`
+      (**C367**, o significado), e `contingent_realm_obtains` a partir de
+      `an_atom_is_contingent 0` sem ponte nenhuma (**C350**, a existência). A redutio de §1
+      de `EXISTS.md` que supunha esta rota fechada **está refutada** — fechava a rota do
+      *reality-hook*, não a pluralista. O item sai da lista; C350 é `PROVEN` sem preço, e o
+      preço que resta está nomeado na linha de C367.
+  (4) ~~LEMA EM FALTA, ISOLADO EXACTAMENTE (2026-09-27)~~ **[REFUTADO 2026-09-27]**: a
+      entrada afirmava que `∃ s : Subject, ∃ p : Prop, Means s p` era o "**único**
+      obstáculo" porque `Subject` e `Means` não têm "produtor em Γ". **Falso**: o lema
+      tem produtor, e **incondicional** — `Plurality.cogito_from_T12`, via
+      `T12_twoPersons` (= `AxTwoSubjects rightWrongDistinction`) e
+      `person_is_intentional`, com `Logos.Core.rightWrongDistinction` axiom-free (`{}`).
+      *O que era verdadeiro era mais estreito:* os **primitivos** não são produzidos (os
+      teoremas performativos recebem o sujeito como **entrada**, `Cogito` a `:324`,
+      `weak_Cogito` a `:249`, `noCogito_selfRefutes` a `:320`), mas o **existencial** é,
+      e por Pluralidade, não por Performance. O corpo do corpus confundiu "o primitivo
+      não é produzido" com "a sua existência não é provada", e cobrou por um compromisso
+      que Γ já tinha. O que Γ continua a não afirmar é a **consistência da negação** — que
+      Γ seja satisfazível num mundo contingente vazio; esse contramodelo não é
+      construído, e é agora **um contramodelo de outra coisa**: o mundo vazio é
+      incompatível com Γ, por theorem, não por stipulação.
+
+~~Nenhum destes **quatro** é um `?` novo~~ `[2026-09-27: passaram a ser **dois**. Os
+itens (3) e (4) foram resolvidos/refutados — C350 é `PROVEN↑` — e saíram da lista de
+bloqueios. Os dois que ficam são os bloqueios de §31 e de F12, agora nomeados] neste
+contexto e com a forma exacta da proposição em falta.
+
+CONSEQUÊNCIA PARA O LIVRO-RAZÃO
+
+O livro-razão passa a carregar **três factos novos sobre a relação do fundamento com o
+cosmos, todos verificados pela máquina e nenhum deles a favor da tese sem preço**:
+
+  - uma **separação** (C336): a fundamentação chega a uma entidade sem significado, o
+    amor não; logo "não é *meraneamente* um fundamento" é uma distinção entre duas
+    relações, não um lema;
+  - uma **refutação** (C338): a forma não restrita e mais atraente do amor do fundamento
+    é **falsa** em Γ, e é por isso que o axioma leva a hipótese de significado;
+  - uma **impossibilidade** (C348): a transferência para o amor interpessoal não é um
+    problema em aberto, é uma afirmação que não se pode escrever.
+
+E, do lado do preço, **dois** compromissos e não um: `GroundBearsGood` (VOCAB, o
+vocabulário relacional em falta) e `AxGroundLovesContingentRealm` (META, a substância).
+`[Actualizado 2026-09-27: era um terceiro, `AxContingentCreationObtains` (SEM, o dado
+empírico) do módulo irmão — **eliminado**. O preço da existência do cosmos passou a ser a
+ponte pluralista `AxTwoSubjects` (META), partilhada com C350/C351/C352.]` Os dois já
+constavam do registo de axiomas; o que este lote faz é dar-lhes nome, preço e linha no
+livro-razão.
