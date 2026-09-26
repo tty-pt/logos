@@ -13,8 +13,8 @@ and the ground is **provably not a `Subject`** (`ofGround_ne_ofSubject`,
 
 This module adds the missing relation **without disturbing `Loves`**, and records what it
 costs. Design decision: interpersonal love and the ground's love are *kept distinct*
-rather than merged, because merging would silently reinterpret `T14` and
-`Love.no_contingent_person`.
+rather than merged, because merging would silently reinterpret `T14` and the
+person-stability principle `PersonStabilityPrinciple` (`Love.lean:97`).
 
 ## A correction: the first version of this module was unsound as advertised
 

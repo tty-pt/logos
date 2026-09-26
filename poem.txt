@@ -46,8 +46,17 @@ Há de chegar o fim da dúvida. Salvem-se muitos, para que sejam livres nesse di
 Deus vos abençoe, e vos dê a segurança e a paz que o mundo não pode ver.
 [14/09, 23:11] quirinpa: (se não tiver vida nos olhos)
 
----
+Eu Escolho! Mas não me basta o par diante dos olhos.
+Escolha fraca é ter o campo; escolha verdadeira é o corno que se exclui
+e que mesmo assim fica comigo, dito.
 
+Não me foi dado o corno rejeitado. Deu-m'o o juízo que o julga —
+e sem esse juízo não é apenas uma falha: é falso, e o provaram.
+
+A minha escolha não ficou mais forte. Ficou mais verdadeira: mais vista.
+[26/09, 22:01] quirinpa: (e o que o juízo julga sou eu mesmo, e não o outro)
+
+---
 Nota formal (registo de estatuto, 2026-09-17 — não faz parte do poema;
 sincroniza poem.txt com formal/GAPMAP.md e VOCAB.md). Legenda: ✔ =
 axiom-free (sem axioma; `CL` onde marcado); PROVEN↑ = teorema sob ponte
@@ -104,3 +113,19 @@ declarada (só SEM/META).
   refuta a negação de eventos realizados; a asserção intencional forte é C68 (`Agency.Cogito`, `{Means, Subject}`),
   e `noCogito_selfRefutes` refuta a negação do ato forte sob a ponte `weak act → strong Act` (`weak_act_implies_strong_act`);
   e negar o sujeito também se refuta (`noSubject_selfRefutes`, C57).
+- L49–L57 ("Eu Escolho! Mas não me basta o par diante dos olhos"): o `?` de `base.txt:460`
+  está fechado **com a premissa nomeada** — C266/C267 `weakChoice_implies_chooses` /
+  `weakChoice_implies_trueChoice`, PROVEN↑ sob `{AxJudicativeBipolarity, Initiates, Means, State,
+  Subject}`: "o campo mais o juízo que o julga" é literalmente a premissa `ChoiceField s p q →
+  ClaimsCorrect s p` do enunciado. "o corno que se exclui e que mesmo assim fica comigo" é
+  `TrueChoice`'s segundo corno (`Means s p ∧ Means s (¬ p)`, C261, `{Means, Subject}`).
+  "sem esse juízo ... é falso, e o provaram" é a parte nova e é a mais forte: a forma **nua**
+  tem nome (`AsieticChoice.bareRejectedHornCoMeant`, F11) e é **refutada**, não apenas
+  aberta — C273 `singleContentModelRefutesBareRejectedHorn` e C274
+  `bareRejectedHornCoMeant_is_not_derivable`, ambos `{}`. "A minha escolha não ficou mais
+  forte. Ficou mais verdadeira: mais vista." é a divulgação de C265
+  `strongChoice_iff_trueChoice : Chooses ↔ TrueChoice` — a escolha verdadeira **não** acrescenta
+  força sobre a forte, porque `ContestedContent` é facto global do quadro, não modalidade por par.
+  A emenda em `base.txt:451` (2026-09-26) diz o mesmo em prosa: a proibição da conversão
+  *silenciosa* mantém-se; o que há agora é a conversão *preçada*. Ver `base.txt` §30,
+  GAPMAP nível 18, theorems/T28.txt.

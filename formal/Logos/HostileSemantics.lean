@@ -33,8 +33,10 @@ Addresses foundational conflations in the formalization:
    (2026-09-18): person-persistence (`AxPersonStability`) is *definitional*
    too — abstract `Person` does not logically force `NecessarySubject`
    (`CountermodelPersonNotNecessary.not_entails_person_necessary`); the
-concrete countermodel `Person s ∧ ¬ NecessarySubject s` cannot exist
-    (`Love.no_contingent_person`).
+   concrete countermodel `Person s ∧ ¬ NecessarySubject s` cannot exist
+    *under* the person-stability principle `PersonStabilityPrinciple`
+    (`Love.lean:97`), which Γ never assumes — so within Γ the countermodel
+    above stands, and the concrete blocking claim is conditional, not derived.
 8. Veridical-meaning attack on the choice frontier (milestone 2026-09-18):
    the act-datum does NOT force `genuineChoice_exists` even under the *Logos*
    definition of `Chooses` (co-meaned incompatible contents). `Means` may be
@@ -580,8 +582,9 @@ end CountermodelSubjectNecessityNotEntityNecessity
 -- (esse est agere). This countermodel shows the implication is NOT a logical
 -- law: a person can exist while no subject persists in every world. Necessity
 -- is not hidden in the semantics; the definitions chosen are what do the
--- work. Concrete side: `Love.no_contingent_person` (no `Person s ∧
--- ¬ NecessarySubject s` exists).
+-- work. Concrete side: `PersonStabilityPrinciple` (`Love.lean:97`) — *if adopted* it
+-- blocks `Person s ∧ ¬ NecessarySubject s`; Γ never assumes it, which is precisely
+-- why the abstract countermodel here is legal.
 
 namespace CountermodelPersonNotNecessary
 

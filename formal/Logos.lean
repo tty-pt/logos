@@ -95,3 +95,13 @@ import Logos.DivineOmnipotence
 import Logos.LovesAsGround
 -- The cosmos exists, as a declared empirical datum.
 import Logos.CosmicExistence
+-- True choice, asiety as true freedom, and the closing of the `?` in the choice chain
+-- (no axiom introduced; the rejected horn comes from AxJudicativeBipolarity, already in Gamma).
+import Logos.AsieticChoice
+-- Classical divine transcendence and the four senses of externality (the quantifier-swap
+-- inference behind C78/C79/C88 machine-checked as a countermodel; no axiom introduced).
+import Logos.DivineTranscendence
+-- Asiety from the Act-free weak choice (axiom-free), and the ground's stipulated sharing of it:
+-- `AsietyFreedomOfGround` is a definitional stipulation (Tag: META, registered in
+-- Logos.Stipulations), not an axiom, so the declared-axiom count is unchanged.
+import Logos.AsietyFreedom

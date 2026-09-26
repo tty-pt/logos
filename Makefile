@@ -5,10 +5,10 @@ export PATH := $(HOME)/.elan/bin:$(PATH)
 
 PYTHON ?= python3
 
-.PHONY: all build depviz audit stip sync taxonomy deduction test check clean zip help
+.PHONY: all build depviz audit stip stipdef sync taxonomy deduction test check clean zip help
 
 # Default target runs the complete formal build, audit, deduction generation, and test verification.
-all: build depviz audit stip deduction test
+all: build depviz audit stip stipdef deduction test
 	@echo "=== Γ / Logos: Full build and verification pipeline complete (0 errors) ==="
 
 # Build the formal Lean 4 library in formal/
@@ -50,6 +50,17 @@ stip: depviz
 	@echo "=== Verifying definitional stipulation registry ==="
 	$(PYTHON) scripts/audit_stipulations.py
 
+# Enforce the ◈ discipline for `def`s used as premises (F-2, AsietyFreedom.md
+# §0.5/§0.6.4). Needs formal/axiom_audit.json, hence runs after `audit`. FAILS on
+# any asserted Prop used as a bare-name premise that has neither a Stipulations.lean
+# entry nor an entry in scripts/stipulated_def_allowlist.json. Entries in that
+# baseline are all reviewed:false -- they record INHERITED DEBT, so a passing run
+# means "no NEW undisclosed bridge and the inherited set has not grown", never
+# "the corpus is clean".
+stipdef: audit
+	@echo "=== Auditing asserted Props used as premises (F-2) ==="
+	$(PYTHON) scripts/audit_stipulated_defs.py
+
 # Generate README.md and investigations/kernel-audit.md
 deduction: audit depviz stip
 	@echo "=== Compiling README.md and investigations/kernel-audit.md ==="
@@ -86,6 +97,7 @@ help:
 	@echo "  depviz     Generate formal/depgraph.json and formal/depgraph.dot"
 	@echo "  audit      Audit transitive kernel footprints + docstring markers + GAPMAP taxonomy"
 	@echo "  stip       Verify stipulation registry (audit_stipulations.py → stipulation_audit.json)"
+	@echo "  stipdef    Enforce ◈ discipline for premise-defs (audit_stipulated_defs.py; F-2)"
 	@echo "  taxonomy   Verify GAPMAP taxonomy tallies vs the kernel (scripts/gapmap_taxonomy.py --check)"
 	@echo "  sync       Verify docstring footprint markers vs formal/axiom_audit.json only"
 	@echo "  deduction  Compile README.md and investigations/kernel-audit.md"

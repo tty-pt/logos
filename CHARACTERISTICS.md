@@ -783,14 +783,156 @@ theorem rightWrong_nonempty_and_nonconflating :
 
 **Assessment:** C183 is mechanically safe but almost definitional because the current semantic layer uses `T p := p`. It bundles the existing explicit witnesses C8 and C9, showing that the logical core contains truth and falsity without conflating them. It is not an independent transcendental proof of God or of a new divine characteristic.
 
-**Implementation checkpoint (2026-09-25):** C182, C184, and C183 are now implemented, audited, and recorded in `formal/GAPMAP.md`. C182/C184 establish only generic two-way non-entailment between aseity and a Level-3 volitional alternative; C183 closes the truth/falsity logical bundle. No positive divine characteristic follows from these results.
+**Implementation checkpoint (2026-09-26):** batch ASIETIC-CHOICE, C259–C286 + F11 — see §6 below.
+
+## 6. True choice, asieticity, and the refuted bare horn
+
+**Characteristic:** *True choice* — freedom as the co-signification of the **rejected** horn, and the
+`?` of the weak-choice → strong-choice step discharged. Classical in the tradition of
+"malum contra malum non appetitur, nisi bonum" (Aquino ST I q. 13 a. 6 ad 2): evil is only
+appetible *as* an alternative to good, which is to say the alternative must be co-signified.
+
+**Formal status: ✅ PROVEN / ⚠️ PROVEN↑, with the frontier row 🔴 BLOCKED *and refuted*.** Module
+`formal/Logos/AsieticChoice.lean`; GAPMAP level 18, C259–C286 and F11; `theorems/T28.txt`;
+`base.txt` §30; `CHARS.md` §5. **Zero new axioms** — the register is unmoved at 25 declared
+(VOCAB 14 / SEM 7 / META 4), and that immobility *is* the test, since every footprint comes from
+`formal/axiom_audit.json`.
+
+**What is new, positively:**
+
+| | Result | Status | Footprint |
+|---|---|---|---|
+| C261 | `chooses_implies_trueChoice` — the substantive direction | PROVEN | `{Means, Subject}` |
+| C263/C264 | `trueChoice_implies_choiceField`, `trueChoice_implies_freeWill` | PROVEN | `{Means, Subject}` |
+| C266/C267 | `weakChoice_implies_chooses` / `weakChoice_implies_trueChoice` — **the `?`, with `ClaimsCorrect s p` written** | PROVEN↑ | `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` |
+| C268 | `derives_rejectedHornCoMeant` — the conditional rejected horn | PROVEN↑ | `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` |
+| C270/C271 | `retorsion_yields_genuine_normativity_on_its_own_content`, `retorsion_implies_rejectedHornCoMeant` | PROVEN↑ | `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` |
+| C275 | `doubt_implies_trueChoice` — Cartesian doubt suffices, no axiom | PROVEN | `{Means, Subject}` |
+| C277–C279 | `trueChoice_exists`, `freeWill_exists`, `an_asietic_entity_exists` | PROVEN↑ | `{AxTwoSubjects, Means, Subject, Will, subjectWill}` |
+| C280 | `asietic_is_true_freedom` — the thesis, vocabulary-only | PROVEN | `{Means, Subject}` |
+| C286 | `asietic_summary` — master synthesis | PROVEN↑ | `{AxJudicativeBipolarity, AxTwoSubjects, Initiates, Means, State, Subject, Will, subjectWill}` |
+
+**The disclosed weakness, stated first (D6, accepted):** C265
+`strongChoice_iff_trueChoice : Chooses s p q ↔ TrueChoice s p q` is **PROVEN**, and it *removes*
+from the notion. The `ContestedContent` conjunct is a **global** frame fact (C259, `{}`, from
+C96), not a per-pair modality, so "true choice" adds nothing to `Chooses` beyond the existential
+disjunction. Do not upgrade it to a per-pair modality.
+
+**The frontier is refuted, not open:** F11's bare implication
+`AsieticChoice.bareRejectedHornCoMeant` is a named `def` (before this batch it existed only as
+prose at `Choice.lean:33-35`, under a label colliding with the `def rejectedHornCoMeant` at
+`Choice.lean:247` — the *consequent*). C273 `singleContentModelRefutesBareRejectedHorn` and
+C274 `bareRejectedHornCoMeant_is_not_derivable`, both `{}`, exhibit a faithful single-content model
+in which the antecedent holds and the consequent does not. The load-bearing field is
+**faithfulness** (`means s p → p`), not single-valuedness: from `p = ¬ p` no contradiction follows,
+since `p` need not be provable; faithfulness converts `means t p ∧ means t (¬ p)` into `p ∧ ¬ p`,
+which `incompatible_self_negation` forbids.
+
+**Why that is the honest boundary.** All four of Γ's routes to `Means s (¬ p)` are `Act`-gated —
+`AxJudicativeBipolarity` (premise `ClaimsCorrect s p`), `AxActPolarity` and
+`AxIntentionalChoice` (premise `Act s p`; its `q` is arbitrary, never `¬ p`),
+`ClaimsNormativeCorrectness` (premise `Act s p ∧ …`) — and `Doubts` is itself
+`Means s p ∧ Means s (¬ p)`, hence circular. So the single upstream gap is the
+**`Initiates`-existence gap** (`∃ s p, Act s p`), *not* horn-saturation: no axiom of Γ supplies an
+`Initiates` witness (`ProofPresentationRetorsion.lean:95`), with countermodel
+`syntactic_validity_without_subject_or_normativity` (`{}`).
+
+**What this does not answer:** object/action deliberation, which still needs the separate
+`DeliberateChoice` / `ClaimsNormativeCorrectness` route (C140/C141). What it does answer is F1b's
+residue (b) at `formal/GAPMAP.md:758`, **at pinned content** — which is not the same as closing
+deliberation in general.
+
+**Assessment:** the `?` of `base.txt:460` is closed *with its premise named*, which is why
+`base.txt:451`'s prohibition on the **silent** `ChoiceField → Chooses` conversion stands unchanged:
+what is new is a *priced* conversion (C269 makes the price visible in the footprint), not a
+weakened prohibition. `CanonicalAseity → TrueChoice` is **refuted** (C283), recorded at
+countermodel grade because a later pass that "helpfully" adds the bridge breaks Γ; and the ground
+is canonically aseitous but not asietic (C284) and cannot be a true chooser (C285), since `Means`
+is subject-indexed (`ofGround_ne_ofSubject`).
+
+## 6b. `AsietyFreedom`: the ground's freedom, shared — and the one step that is not a theorem
+
+**Characteristic:** *Shared freedom of the ground* — "because of the nature of Him who grounds
+reality … one then asserts `AsietyFreedom`, which gives rise to true choice and `AsietyFreeWill`,
+which is shared with us by the creator." Classical in the tradition of the divine act of
+creation as the communication of *life* and not merely of *existence* (the causal vs. merely
+ontological grounding question of §4, on the freedom side).
+
+**Formal status: ✅ PROVEN for the `Asiety` half, ◈ STIPULATED (META) for the transfer.**
+Module `formal/Logos/AsietyFreedom.lean`; GAPMAP level 19, C287–C296; `theorems/T29.txt`;
+`base.txt` §31; plan `AsietyFreedom.md`. **Zero new `axiom`s** — the register is unmoved at 25
+declared (VOCAB 14 / SEM 7 / META 4). **But that immobility is *not* the test for this batch**;
+see "The audit does not test this batch" below, which is the honest headline of §6b.
+
+**What is new, positively:**
+
+| | Result | Status | Footprint |
+|---|---|---|---|
+| C287 | `weakChoice_implies_asiety` — `GenuineNormativity s p q → Asiety (EntityOf s)`, **no `Act`, no `Initiates`, no `ClaimsCorrect`, no stipulation** | PROVEN | `{Means, Subject}` |
+| C288 | `weakChoice_implies_freeWill` — the same step toward free will | PROVEN | `{Means, Subject}` |
+| ◈ | `AsietyFreedomOfGround` — the ground's freedom *reaches* every subject (**a `def`, not an axiom**) | ◈ STIPULATED (META) | `{Means, Subject}` |
+| C289 | `asietyFreedom_yields_trueChoice` | PROVEN ◈ | `{Means, Subject}` |
+| C290 | `asietyFreedom_yields_asietyFreeWill` — the *"shared with us by the creator"* step | PROVEN ◈ | `{Means, Subject}` |
+| C291 | `asietyFreeWill_yields_trueChoice` | PROVEN ◈ | `{Means, Subject}` |
+| C292 | `asietyAloneDoesNotYieldTrueChoice` — asiety alone yields no true choice | INDEPENDENT `{}` | `{}` |
+| C293 | `frameContingencyDoesNotBindAPair` — pins §6's global-`ContestedContent` collapse | INDEPENDENT `{}` | `{}` |
+| C294 | `rightWrongFactYieldsNoChooser` — **no axiom-free existence of a chooser** | INDEPENDENT `{}` | `{}` |
+| C295 | `groundIsNotASharerOfAsietyFreeWill` — C285 preserved, by `ofGround_ne_ofSubject` | PROVEN | `{Means, Subject}` |
+| C296 | `asietyFreedom_summary` — master synthesis | PROVEN ◈ | `{Means, Subject}` |
+
+**The disclosed weakness, stated first: the audit does not test this batch.** C287/C288 are
+genuinely axiom-free, and the register's immobility would have caught a new `axiom` — as it did
+in §6. But the batch's one substantive input, `AsietyFreedomOfGround`, is a **`def`**, so
+`#print axioms` cannot see it at all, and its reported `{Means, Subject}` footprint is
+vocabulary-only *whether the bridge is principled or arbitrary*. The ◈ registry entry
+(`formal/Logos/Stipulations.lean`, 5th entry) and the step-by-step block in `README.md` are
+therefore **load-bearing rather than decorative**: they are the only places the price is
+visible. This is a limitation of the instrument, declared rather than exploited.
+
+**Why the bridge cannot be derived — three independent blocks.** (i) `GroundsEntity` is
+**vacuous**: `EntityMeans Entity.ofGround p` reduces to `True`, so `ground_grounds_every_entity`
+is `intro p _; exact True.intro` (`LovesAsGround.lean:194`) and the ground grounds even
+meaningless entities (`ground_grounds_the_meaningless`). (ii) The only non-vacuous grounding
+predicate, `GroundsRightWrong`, is **definitionally** `∃ p q, Chooses s p q` (C168) — already
+collapsed to free will, with no Ground content. (iii) The substantive grounding relation is
+`BLOCKED` with a named lemma (C228). Hence: declared, priced, and registered.
+
+**No dishonest definitions (the R1 test).** `AsietyFreeWill s := AsietyFreedomOfGround ∧
+Asiety (EntityOf s)` does **not** make `TrueChoice` a conjunct of the proposition that is
+supposed to *yield* it, so C290/C291 are not projections of their own conclusion. What they do
+conjoin is ground-*participation* with subject-*asiety* — two different things. A fourth
+theorem, `creator_shares_asietyFreeWill`, was written and **deleted as a duplicate**: it was
+literally C290 again, and one inference gets one ledger id.
+
+**Why the existence half is conditional, not asserted.** `Core.rightWrongDistinction :
+¬ N_T ∧ ¬ N_F` (`Core.lean:145`, `{}`) is a fact about **contents**: it quantifies only over
+`p : Prop` and mentions no `Subject`. C294 exhibits a meaning-vocabulary in which **no subject
+means anything**, so the fact is compatible with there being no chooser. The Creator step is
+therefore stated conditionally, and its existence half is recorded as **not derivable** — the
+unconditional route remains `AxTwoSubjects` (META) at C277–C279.
+
+**Also not claimed.** (i) The universal reading of the bridge is **strictly stronger** than the
+existential one ("the ground's freedom is shared with *someone*"), and nothing here shows the
+stronger reading is the correct one — C292 is what makes the difference visible.
+(ii) The `GroundsEntity` premise of the three transfers is **vacuous**; it is named `_hG` and
+declared vacuous in the docstrings rather than quietly dropped, so a `{Means, Subject}` footprint
+cannot be mistaken for depth. (iii) The Act-free `?` of `base.txt:460` is **bypassed, not
+closed**: C287 starts from a hypothesis that already contains both horns, and the bare
+`ChoiceField → Chooses` form stays machine-refuted (C273/C274). (iv) The ground is **not** a
+chooser (C295 = C285): it *reaches* subjects, it is not one of them.
+
+**Assessment:** this closes the author's chain in the only shape Γ currently pays for — the
+`Asiety` step honestly, the Ground step as a priced META declaration. The characteristic to
+argue for next is **not** another transfer but the *substantive* grounding relation behind
+(C228); every further transfer would multiply a price already paid.
 
 ## Important blockers and separations
 
 - **Transcendence:** No theorem establishes externality to every formal or evaluative system. The quantifier-swap route remains BLOCKED in `formal/GAPMAP.md:433`; the Gödel/Tarski/Turing pattern is not formalized.
 - **Canonical eternity:** Existing `NecessityEternity` corollaries carry `{Subject}` (`formal/GAPMAP.md:52-69`). C181's generic empty-footprint transport does not automatically produce an empty-footprint canonical-ground theorem.
 - **Unity:** `TheologicalModalHardening.necessary_existence_not_entails_uniqueness` (`formal/Logos/TheologicalModalHardening.lean:406-414`, `{}`) is a countermodel showing that necessary existence does not entail uniqueness. `universal_ground_unique` remains deferred.
-- **Freedom and personhood:** Relevant positive results have `{Means, Subject}` or larger footprints. Unconditional existence of free will is blocked on the rejected-horn lemma, and substantive personhood is separated from the minimal definitional subjecthood.
+- **Freedom and personhood:** Relevant positive results have `{Means, Subject}` or larger footprints. The weak-choice → strong-choice step is now **PROVEN↑ under a named premise** (`ClaimsCorrect s p`, via `AxJudicativeBipolarity`) and the bare rejected horn is **refuted** (C273/C274), so the remaining gap is the `Initiates`-existence gap; the existence of true choice is **PROVEN↑** but not `{}` (it carries `{AxTwoSubjects, Will, subjectWill}`). Substantive personhood remains separated from the minimal definitional subjecthood. See §6.
+- **The ground's freedom reaching subjects (batch ASIETY-FREEDOM):** the `Asiety` half is **axiom-free** (C287/C288, `{Means, Subject}`, no `Act`), but **every transfer from `AsietyFreedom` onward is ◈ META** (C289–C291, C296) and the bridge is a `def` that `#print axioms` cannot see — so the immobility of the register is **not** a test for this batch. There is **no axiom-free existence of a chooser** (C294 `{}` refutes it), the `GroundsEntity` premise is **vacuous**, and the ground is still **not** a chooser (C295 = C285). See §6b.
 - **Moral goodness:** `MoralFrontierAudit.moral_good_obtains` carries `Logos.Value.AxBenevolentBearingObtains`; epistemic normativity does not imply practical obligation (`formal/Logos/MoralFrontierAudit.lean:179-183`).
 - **Omniscience and omnipotence:** These have only local frontier definitions or models and no bridge to the canonical foundation.
 - **Simplicity, pure actuality, and divine attribute bundles:** No substantive source predicates or missing bridges justify new positive claims.

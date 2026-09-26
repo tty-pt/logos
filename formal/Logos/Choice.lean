@@ -28,11 +28,25 @@ vocabulary into two relations and a definitional freedom:
     VOCAB only). Level 3 (counterfactual possibility of selecting otherwise) is not
     forced by deterministic agency.
 
-The exact missing step (F1b, BLOCKED) is the co-meaning of the rejected horn:
+The exact missing step (F1b, BLOCKED) is the co-meaning of the rejected horn.
+Note the two distinct objects, which this module docstring used to conflate
+under one name: `rejectedHornCoMeant` below is **the consequent only** — a
+`def` at `Choice.lean:247` — while the *implication* is the blocked step:
 
-    rejectedHornCoMeant :
+    bareRejectedHornCoMeant :
       (∃ s : Subject, ∃ p : Prop, A s p) →
       ∃ s : Subject, ∃ p : Prop, A s p ∧ A s (¬ p)
+
+The bare implication now has that name as a real `def` in
+`Logos.AsieticChoice.bareRejectedHornCoMeant` (footprint `{Means, Subject}`;
+GAPMAP F11), so it is citable rather than quoted as prose — and it is recorded
+as **BLOCKED *and refuted***: `singleContentModelRefutesBareRejectedHorn`
+(C273) / `bareRejectedHornCoMeant_is_not_derivable` (C274) build a model of
+the meaning vocabulary in which the antecedent holds and the consequent does
+not. Two *premise-named* discharges do go through: `derives_rejectedHornCoMeant`
+(C268) from a correctness-judgment, and `retorsion_implies_rejectedHornCoMeant`
+(C271) from the retorsion event. Neither is derivable in Γ, since both premises
+are `Act`-gated.
 
 Nothing in the tree forces one meaning-act to come with the meaning of its
 negation: `Means` is an opaque relation (`Agency.lean`), and `AxTwoSubjects`

@@ -35,6 +35,11 @@ cd formal && lake exe depviz --roots Logos --json-out depgraph.json --dot-out de
 cd .. && python3 scripts/audit_footprints.py && python3 scripts/build_deduction.py
 ```
 
+- `scripts/build_deduction.py` has a **hand-authored** chain list per batch
+  (`ASIETY_FREEDOM_STEPS`): badges and footprints in that block are derived, but the list's
+  *membership* is maintained by hand. **Adding a declaration to a chain module does not add it to
+  `README.md`** — extend the list in the same change, or the reader-facing chain silently omits
+  the new step. (`kernel-audit.md` is unaffected; it reads GAPMAP.)
 - `formal/depgraph.json`/`.dot` are produced by the LeanDepViz dep (see `formal/lakefile.toml`),
   rebuilt with `lake build depviz` after a toolchain/dependency change.
 - `formal/axiom_audit.json` is produced by `scripts/audit_footprints.py`: a temp

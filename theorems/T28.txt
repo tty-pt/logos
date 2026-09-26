@@ -1,0 +1,359 @@
+ T28 — ESCOLHA VERDADEIRA, ASSIETICIDADE, E O CORNO REJEITADO REFUTADO
+
+Depende de: `formal/Logos/AsieticChoice.lean`, formalizando a caracteristica classica da
+liberdade como *escolha verdadeira* — o sujeito que significa **ambos** os cornos de um par
+incompativel, e nao apenas o campo onde esse par e apresentado (Aquino ST I q. 13 a. 6 ad 2,
+*"malum contra malum non appetitur, nisi bonum": o mal so e appetivel como
+contrapartida), para a raiz da realidade `Entity.ofGround` e para o inventario de
+`Entity`. Fecha o `?` da cadeia "escolha fraca -> escolha forte -> liberdade"
+(`base.txt` §14) **com a premissa nomeada** e **sem um único axioma novo**.
+
+Verificado em: `formal/Logos/AsieticChoice.lean`; auditoria `#print axioms` (5590
+declaracoes no total do corpus, via `scripts/audit_footprints.py`); marcadores
+`Footprint:` conferidos por `scripts/sync_docstring_footprints.py` ("checked 572
+footprint claims / 0 mismatches"); `formal/GAPMAP.md` nivel 18, C259-C286 e linha F11;
+`base.txt` §30.
+
+O teste deste lote (2026-09-26):
+A contagem do registo de axiomas **nao se moveu**: 25 declarados, VOCAB 14 / SEM 7 /
+META 4, antes e depois. Essa imobilidade *e* o teste — cada pegada abaixo vem de
+`formal/axiom_audit.json`, pelo que um axioma novo teria aparecido na auditoria. O lote
+contem 38 declaracoes (28 teoremas com id C, 9 `def`s e 1 `structure`, com linhas de
+exibicao `—`): um `def` nao e uma afirmacao, e as linhas C sao as dos teoremas.
+
+C259 — O quadro contesta o seu proprio conteudo:
+
+```lean
+theorem contested_content : ContestedContent
+```
+
+Pegada auditada: `{}` (logica pura). Alguma formula nao e necessariamente verdadeira nem
+necessariamente falsa (C96 reutilizado). Axiom-free, e e a **unica** fonte da conjuncao
+de contingencia de `OpenAlternative`.
+
+C260 — A abertura exclui mesmo:
+
+```lean
+theorem open_alternative_is_incompatible {p q : Prop} (h : OpenAlternative p q) :
+    Incompatible p q
+```
+
+Pegada auditada: `{}` (logica pura), por `incompatible_self_negation` (C15).
+
+C261 — A direccao substantiva, escolha forte -> escolha verdadeira:
+
+```lean
+theorem chooses_implies_trueChoice {s : Subject} {p q : Prop} (h : Chooses s p q) :
+    TrueChoice s p q
+```
+
+Pegada auditada: `{Means, Subject}` (so vocabulario). Um sujeito que significa um conteudo
+e a sua negacao esta genuinamente a escolher entre ambos.
+
+C262 — A conversa e definicional:
+
+```lean
+theorem trueChoice_implies_chooses {s : Subject} {p q : Prop} (h : TrueChoice s p q) :
+    Chooses s p q
+```
+
+Pegada auditada: `{Means, Subject}`. `Chooses` e a segunda conjuncao de `TrueChoice`.
+
+C263 — A escolha verdadeira entrega o campo (e nao o contrario):
+
+```lean
+theorem trueChoice_implies_choiceField {s : Subject} {p q : Prop} (h : TrueChoice s p q) :
+    ChoiceField s p q
+```
+
+Pegada auditada: `{Means, Subject}`. **Nenhuma** conversao silenciosa
+`ChoiceField -> Chooses` em todo o corpus.
+
+C264 — A escolha verdadeira entrega o livre-arbitrio:
+
+```lean
+theorem trueChoice_implies_freeWill {s : Subject} {p q : Prop} (h : TrueChoice s p q) :
+    FreeWill s
+```
+
+Pegada auditada: `{Means, Subject}`. Por `FreeWill s := ∃ p q, Chooses s p q`.
+
+C265 — **A fraqueza declarada deste lote**:
+
+```lean
+theorem strongChoice_iff_trueChoice {s : Subject} {p q : Prop} :
+    Chooses s p q ↔ TrueChoice s p q
+```
+
+Pegada auditada: `{Means, Subject}`. `TrueChoice ≡ Chooses`, porque a conjuncao de
+`ContestedContent` e um facto **global** do quadro e nao uma modalidade por par. Logo
+"escolha verdadeira" nao acrescenta forca a `Chooses`; acrescenta apenas a disjuncao
+existencial. Isto e D6 do plano, aceite e **divulgado** aqui, no docstring do modulo, na
+nota do nivel 18 e em `base.txt` §30. Nao deve ser promovida a modalidade por par.
+
+C266 — **O `?` de `base.txt:460`, descarregado com a premissa nomeada**:
+
+```lean
+theorem weakChoice_implies_chooses {s : Subject} {p q : Prop}
+    (hField : ChoiceField s p q) (hJudge : ClaimsCorrect s p) : Chooses s p (¬ p)
+```
+
+Pegada auditada: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`. A ponte
+`AxJudicativeBipolarity` (`Tag: SEM`) e o que co-significa o corno rejeitado, e
+`ClaimsCorrect s p` e uma premissa **escrita**, nao tacit. A premissa e portadora: a forma
+nua nao segue, e e mesmo falsa (C273/C274).
+
+C267 — O mesmo implicito ao nivel do par:
+
+```lean
+theorem weakChoice_implies_trueChoice {s : Subject} {p q : Prop}
+    (hField : ChoiceField s p q) (hJudge : ClaimsCorrect s p) : TrueChoice s p (¬ p)
+```
+
+Pegada auditada: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`.
+
+C268 — A forma condicional do corno rejeitado:
+
+```lean
+theorem derives_rejectedHornCoMeant :
+    (∃ s : Subject, ∃ p : Prop, Means s p ∧ ClaimsCorrect s p) → rejectedHornCoMeant
+```
+
+Pegada auditada: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`. Um sujeito
+que reivindica um conteudo como correcto significa tambem a sua negacao. O antecedente e um
+*juizo de correccao*, estritamente mais do que o antecedente nu de F11.
+
+C269 — O preco da premissa tornado visivel:
+
+```lean
+theorem weakChoice_carries_the_judicative_premise_explicitly :
+    ∀ (s : Subject) (p : Prop), ChoiceField s p (¬ p) → ClaimsCorrect s p →
+      TrueChoice s p (¬ p)
+```
+
+Pegada auditada: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`. A
+saturacao de cornos seria precisa para o `ChoiceField -> Chooses` nu, e nenhum axioma de Γ
+a fornece; por isso o implicito e escrito **com** a sua premissa e nunca convertido em
+silencio.
+
+C270 — A rota performativa, e a resposta ao residuo meta-nivel de F1b
+(`GAPMAP.md:758`):
+
+```lean
+theorem retorsion_yields_genuine_normativity_on_its_own_content
+    (hEvent : ∃ s : Subject, ClaimsCorrect s NoGN) :
+    ∃ s : Subject, GenuineNormativity s NoGN (¬ NoGN)
+```
+
+Pegada auditada: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`. Um sujeito
+que reivindica "nao ha normatividade genuina" como correcto significa assim `NoGN` **e**
+`¬NoGN`: normatividade genuina **no seu proprio conteudo**. Provado de
+`claiming_denial_presupposes_genuine_normativity`, e nao por re-exportar
+`retorsion_derives_genuine_normativity` (cuja conclusao `∃ s p q` esconde as testemunhas
+fixadas). O que **nao** responde: conteudo de objecto/accao, que continua a precisar da rota
+`DeliberateChoice`/`ClaimsNormativeCorrectness` (C140/C141).
+
+C271 — A segunda descarga, performativa, do proprio corno:
+
+```lean
+theorem retorsion_implies_rejectedHornCoMeant
+    (hEvent : ∃ s : Subject, ClaimsCorrect s NoGN) : rejectedHornCoMeant
+```
+
+Pegada auditada: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`. Distinta de
+C270: esta conclui o *consequente* do corno, aquela a normatividade fixada. Ambas enunciam a
+sua premissa `∃ s, ClaimsCorrect s NoGN`, que e `Act`-gateada e portanto nao derivavel em Γ.
+
+C272 — O antecedente do contramodelo realmente obtem-se:
+
+```lean
+theorem SingleContentSignature.antecedentHolds_in_canonicalModel :
+    singleContentModel.antecedentHolds
+```
+
+Pegada auditada: `{}`. Algo e significado, logo C273 e um contra-exemplo e nao um truque
+sobre um antecedente insatisfazivel.
+
+C273 — **O corno nu e refutado, nao apenas em aberto**:
+
+```lean
+theorem singleContentModelRefutesBareRejectedHorn (S : SingleContentSignature)
+    (hFaith : S.Faithful) (hAntec : S.antecedentHolds) : ¬ S.bareHorn
+```
+
+Pegada auditada: `{}` (logica pura). Num modelo fiel de conteudo unico o antecedente obtem-se
+enquanto `means t p ∧ means t (¬ p)` e insatisfazivel. O campo portador e a **fidelidade**
+(`means s p → p`), nao a univocidade: de `p = ¬p` nao segue contradicao, porque `p` nao tem
+de ser provavel; a fidelidade converte `means t p ∧ means t (¬ p)` em `p ∧ ¬ p`, que
+`incompatible_self_negation` proibe. E o conteudo formal de `Choice.lean:36-40`.
+
+C274 — A refutacao, concreta, no modelo canonico:
+
+```lean
+theorem bareRejectedHornCoMeant_is_not_derivable :
+    ¬ SingleContentSignature.singleContentModel.bareHorn
+```
+
+Pegada auditada: `{}`. A fronteira F11 fica machine-backed: o bloqueio e uma sentenca **falsa
+num modelo** do vocabulario de significado, e nao um artefacto de uma pesquisa mal
+sucedida. E isto que torna criveis os resultados positivos acima.
+
+C275 — A duvida cartesiana basta, sem axioma nenhum:
+
+```lean
+theorem doubt_implies_trueChoice {s : Subject} {p : Prop} (h : Doubts s p) :
+    TrueChoice s p (¬ p)
+```
+
+Pegada auditada: `{Means, Subject}`. Significar `p` e `¬p` ao mesmo tempo *e* uma escolha
+forte entre ambos.
+
+C276 — A normatividade genuina produz escolha verdadeira:
+
+```lean
+theorem genuineNormativity_implies_trueChoice {s : Subject} {p q : Prop}
+    (h : GenuineNormativity s p q) : TrueChoice s p q
+```
+
+Pegada auditada: `{Means, Subject}`. Por `indubitable_normative_free_will` e logica pura.
+
+C277 — A existencia de escolha verdadeira, incondicional:
+
+```lean
+theorem trueChoice_exists : ∃ s : Subject, ∃ p q : Prop, TrueChoice s p q
+```
+
+Pegada auditada: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. Uma pessoa existe
+(C14, `T5_personExists_from_plurality`), `Person` agrupa `FreeWill`
+(`DominionOverActs s := FreeWill s`), logo existe uma testemunha de `Chooses`, e a secao 2
+promove-a. Segunda via a um resultado ja `PROVEN↑` (F1b), e genuinamente derivacional —
+apresentada como ambas.
+
+C278 — A existencia de livre-arbitrio, mesma via um passo antes:
+
+```lean
+theorem freeWill_exists : ∃ s : Subject, FreeWill s
+```
+
+Pegada auditada: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. **Nao** e `{}`.
+
+C279 — Existe uma entidade asietica:
+
+```lean
+theorem an_asietic_entity_exists : ∃ e : Entity, Asiety e
+```
+
+Pegada auditada: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`, com
+`Asiety e := ∃ s p q, e = EntityOf s ∧ TrueChoice s p q`, e a testemunha em `EntityOf s`.
+
+C280 — **A tese**: a asieticidade e a liberdade verdadeira:
+
+```lean
+theorem asietic_is_true_freedom {s : Subject} {p q : Prop} (h : TrueChoice s p q) :
+    FreeWill s
+```
+
+Pegada auditada: `{Means, Subject}`. So vocabulario, logo esta linha nao carrega preco
+substantivo — o preco esta nas linhas existenciais, que e onde lhe pertence.
+
+C281 — O escolhedo verdadeiro contingente e fundamentado externamente:
+
+```lean
+theorem the_ground_grounds_a_contingent_true_chooser {s : Subject} {p q : Prop}
+    (_h : TrueChoice s p q) (hCont : ContingentEntity (EntityOf s)) :
+    GroundsEntity Entity.ofGround (EntityOf s)
+```
+
+Pegada auditada: `{Means, Subject}`. Por `ExternalGrounding`.
+
+C282 — E o fundamento fundamenta-o mesmo (direccao inversa):
+
+```lean
+theorem contingent_true_chooser_is_externally_grounded {s : Subject} {p q : Prop}
+    (h : TrueChoice s p q) (hCont : ContingentEntity (EntityOf s)) :
+    ExternalGrounding Entity.ofGround (EntityOf s)
+```
+
+Pegada auditada: `{Means, Subject}`. Machine-checked.
+
+C283 — `CanonicalAseity -> TrueChoice` e **refutado**, nao aberto:
+
+```lean
+theorem contingent_asietic_is_not_canonically_aseitous {s : Subject} {p q : Prop}
+    (h : TrueChoice s p q) (hCont : ContingentEntity (EntityOf s)) :
+    ¬ CanonicalAseity (EntityOf s)
+```
+
+Pegada auditada: `{Means, Subject}`. Falha num palco contingente. Um lote futuro que
+"comolive" esta ponte parte Γ — razao pela qual e registada como separacao de nivel de
+contramodelo, e nao como fronteira.
+
+C284 — A forma condicional honesta: o fundamento e aseito, nao asietico:
+
+```lean
+theorem ground_is_canonically_aseitous_but_not_asietic
+    (hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p) :
+    CanonicalAseity Entity.ofGround ∧ ¬ Asiety Entity.ofGround
+```
+
+Pegada auditada: `{Means, Subject}`. O fundamento tem de permanecer **fora** do inventario
+de escolhedores.
+
+C285 — O fundamento nao e, nem pode ser, um escolhedor verdadeiro:
+
+```lean
+theorem ground_is_not_a_true_chooser : ¬ ∃ s : Subject, EntityOf s = Entity.ofGround
+```
+
+Pegada auditada: `{Subject}`. `ofGround_ne_ofSubject` (`NecessityEternity.lean:155`)
+bloqueia-o definitionamente: `Means` e indexada por sujeito.
+
+C286 — Sintese mestre do lote:
+
+```lean
+theorem asietic_summary :
+    (∀ (s : Subject) (p : Prop), ChoiceField s p (¬ p) → ClaimsCorrect s p →
+        Chooses s p (¬ p)) ∧
+    (∀ (s : Subject) {p q : Prop}, Chooses s p q → TrueChoice s p q) ∧
+    (∃ s : Subject, ∃ p q : Prop, TrueChoice s p q)
+```
+
+Pegada auditada: `{AxJudicativeBipolarity, AxTwoSubjects, Initiates, Means, State, Subject,
+Will, subjectWill}`. Confunde: a identificacao definicional (linhas so-vocabulario), o
+passo fraco -> forte sob a premissa nomeada, a existencia incondicional de escolha
+verdadeira, e a exclusao do fundamento do inventario de escolhedores.
+
+Linhas de exibicao (nao sao afirmacoes — um `def` nao e uma `claim`):
+
+- `TrueChoice` e `Asiety` (`{}`, so definicoes; `Asiety` e indexado por `Entity`, e a
+  identificacao e verdadeira por construcao — a leitura literal "`Asiety := TrueChoice`" de
+  `ASIETY_FREE.md` §0 e falsa contra o codigo);
+- `ContestedContent` / `OpenAlternative` (os teoremas sao C259/C260);
+- `bareRejectedHornCoMeant` — **o bloqueio nomeado** (D2). Antes deste lote a implicacao
+  bloqueada existia so como prosa em `Choice.lean:33-35`, sob um nome que colidia com o
+  `def rejectedHornCoMeant` de `Choice.lean:247` (o *consequente*); agora e um `def` com
+  nome proprio, e F11 cita-o em vez de o citar de memoria. Pegada e estatuto sao ortogonais:
+  `{Means, Subject}` e aquilo *de que* a definicao depende; `BLOCKED` e o facto de nao ser
+  descargas;
+- `SingleContentSignature` (estrutura) e os seus membros `Faithful`, `bareHorn`,
+  `antecedentHolds`, `singleContentModel` (todos `{}`), mais
+  `antecedentHolds_in_canonicalModel` (C272).
+
+Limites honestos de escopo (o que **nao** se deve reclamar):
+A demonstracao estabelece a escolha verdadeira a partir do quadro, e nada mais. (i) Nao
+acrescenta forca a `Chooses` (C265; `ContestedContent` e global, nao por par). (ii) A
+passagem escolha-fraca -> escolha-forte **exige** `ClaimsCorrect s p`, e a forma nua e
+refutada (C273/C274) — nao apenas nao provada. (iii) A deliberacao sobre conteudo de
+objecto/accao continua por responder (rota `DeliberateChoice`/`ClaimsNormativeCorrectness`,
+C140/C141). (iv) A existencia de escolha verdadeira carrega honestamente
+`{AxTwoSubjects, Will, subjectWill}`; nao e `{}`. (v) A forma meta-nivel esta fechada **em
+conteudo fixado** (`NoGN`/`¬NoGN`), o que nao e o mesmo que fechar a deliberacao em geral.
+(vi) A unica lacuna a montante e a **existencia de `Initiates`** (`∃ s p, Act s p`): as quatro
+rotas de Γ a `Means s (¬p)` sao todas `Act`-gateadas
+(`AxJudicativeBipolarity` com premissa `ClaimsCorrect s p`; `AxActPolarity` e
+`AxIntentionalChoice` com premissa `Act s p`; `ClaimsNormativeCorrectness` com premissa
+`Act s p ∧ …`), e `Doubts` e circular. Faltam exactamente duas afirmacoes, por esta ordem:
+  (1) VOCABULARIO EM FALTA: uma existencia de evento realizado
+      `∃ s p, Means s p ∧ ∃ w w', Initiates s w w' p`;
+  (2) DERIVACAO EM FALTA: que tal evento ocorra (que (1) por si so nao daria).
+Nenhuma ponte de evento e manufacturada neste lote, e nenhuma devia ser.

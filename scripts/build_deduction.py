@@ -4624,9 +4624,84 @@ CLASSICAL_ATTRIBUTES = [
         "expected": "PROVEN",
         "checks": [{"type": "decl",
                     "full": "Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will"}],
-        "refs": ["Logos.Choice.FreeWill"],
+        "refs": ["Logos.Choice.FreeWill",
+                 "Logos.AsieticChoice.chooses_implies_trueChoice",
+                 "Logos.AsieticChoice.trueChoice_exists"],
         "sense": ("`GenuineNormativity ⇒ Chooses ⇒ FreeWill`; "
-                  "`FreeWill s ≡ ∃ p q, Chooses s p q` is definitional (`📘`)."),
+                  "`FreeWill s ≡ ∃ p q, Chooses s p q` is definitional (`📘`). "
+                  "The *existence* half is now also derived outright: a person exists "
+                  "(`T5_personExists_from_plurality`), `Person` bundles `FreeWill` "
+                  "(`DominionOverActs s ≡ FreeWill s`), so a chooser exists — at the "
+                  "META price of `AxTwoSubjects`, which is why the Asiety row below is "
+                  "⚠️ AXIOMATIC while this row stays ✅. "
+                  "**Disclosed limit on this row:** `indubitable_normative_free_will` is a "
+                  "**sub-formula extraction, not a derivation.** It unfolds "
+                  "`GenuineNormativity s p q` to `Incompatible p q ∧ p ≠ q ∧ Means s p ∧ "
+                  "Means s q`, uses `.1`s, **discards `p ≠ q`**, and concludes `Chooses s p q` "
+                  "by reordering three of the four conjuncts. Its `{Means, Subject}` footprint "
+                  "is accurate — it records that the structure's fields *are* `Means` — but it "
+                  "measures no derivation from independent premises, and it must not be read "
+                  "as one."),
+    },
+    {
+        "attribute": "**Asiety** — true freedom (true choice)",
+        "scope": "Personal ground / person-type",
+        "expected": "PROVEN↑",
+        "checks": [{"type": "decl", "full": "Logos.AsieticChoice.asietic_summary"}],
+        "refs": ["Logos.AsieticChoice.TrueChoice", "Logos.AsieticChoice.Asiety",
+                 "Logos.AsieticChoice.asietic_is_true_freedom",
+                 "Logos.AsieticChoice.trueChoice_exists"],
+        "sense": ("`Asiety e ≡ ∃ s p q, e = EntityOf s ∧ TrueChoice s p q`, and "
+                  "`TrueChoice s p q ≡ Means s p ∧ Means s (¬ p) ∧ ContestedContent ∧ "
+                  "Incompatible p q` — so asiety is true freedom **by definition** "
+                  "(`📘`); the substantive content is the *derivation*, not the "
+                  "identification. Two disclosed prices, both pre-existing: `TrueChoice ≡ "
+                  "Chooses` (the openness conjunct is a global frame fact, not a per-pair "
+                  "modality), and existence at `AxTwoSubjects` (META). The weak→strong step "
+                  "is `ChoiceField → Chooses`, which is **not** free: it needs the "
+                  "correctness-judgment premise under `AxJudicativeBipolarity` (SEM), and the "
+                  "bare implication with no premise is not merely unproved but machine-refuted. "
+                  "**Batch ASIETY-FREEDOM splits this row's chain in two, and the split is the "
+                  "point:** the *Act-free* route into asiety is now **axiom-free** "
+                  "(`weakChoice_implies_asiety`: `GenuineNormativity s p q → Asiety (EntityOf s)`, "
+                  "footprint `{Means, Subject}` — 0 substantive axioms, no `Act`, no `Initiates`, "
+                  "no `ClaimsCorrect`, no stipulation), whereas **everything from "
+                  "`AsietyFreedom` onward rests on ◈ META** and is badged accordingly. See the "
+                  "**ASIETY-FREEDOM chain, step by step** block below for the full pricing."),
+    },
+    {
+        "attribute": "**Shared freedom of the ground** "
+                     "(`AsietyFreedom` — the ground's freedom, shared)",
+        "scope": "Divine Being / Ground",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.AsietyFreedom.asietyFreedom_summary"}],
+        "refs": ["Logos.AsietyFreedom.AsietyFreedomOfGround",
+                 "Logos.AsietyFreedom.AsietyFreeWill",
+                 "Logos.AsietyFreedom.asietyFreedom_yields_trueChoice",
+                 "Logos.AsietyFreedom.asietyFreedom_yields_asietyFreeWill",
+                 "Logos.AsietyFreedom.asietyFreeWill_yields_trueChoice",
+                 "Logos.AsietyFreedom.groundIsNotASharerOfAsietyFreeWill"],
+        "sense": ("`AsietyFreedomOfGround`: the ground's freedom *reaches* every subject, so "
+                  "`TrueChoice` and `AsietyFreeWill` follow **conditionally** "
+                  "(`AsietyFreedomOfGround → AsietyFreeWill s`, C290) — this is the reading of "
+                  "\"which is shared with us by the creator\". The `Asiety` half of it is "
+                  "**axiom-free and independent of the ground** "
+                  "(`weakChoice_implies_asiety`, C287); only the *transfer* is priced. "
+                  "**◈ META, and the price is load-bearing:** the bridge is a **`def`**, so "
+                  "`#print axioms` cannot see it, and its reported `{Means, Subject}` "
+                  "footprint is vocabulary-only *whether the bridge is principled or arbitrary* — "
+                  "**\"the axiom count did not move\" is therefore NOT a test for this batch** "
+                  "(for ASIETIC-CHOICE it was). Three `{}` countermodels price it: "
+                  "`asietyAloneDoesNotYieldTrueChoice` (C292, the universal reading is strictly "
+                  "stronger than the existential one), `frameContingencyDoesNotBindAPair` (C293), "
+                  "and `rightWrongFactYieldsNoChooser` (C294). **No axiom-free existence of a "
+                  "chooser**: `¬ N_T ∧ ¬ N_F` is `Prop`-level and quantifies over no `Subject`, so "
+                  "the Creator step is conditional and its existence half is *not derivable*. "
+                  "**The ground is still not a chooser** (C295 = C285 preserved, by "
+                  "`ofGround_ne_ofSubject`): the ground *reaches* subjects, it is not one of them. "
+                  "Its `GroundsEntity` premise is **vacuous** (`ground_grounds_the_meaningless`), "
+                  "which is why the whole metaphysical weight sits on the ◈ entry."),
     },
     {
         "attribute": "**Independent will** — with numerical individuation",
@@ -5219,6 +5294,44 @@ def _classical_anchor_live(anchor: dict, decls: dict, node_map: dict) -> str:
     return "UNKNOWN"
 
 
+_STIP_DEPENDENTS_CACHE: set = set()
+
+
+def stipulation_dependents() -> set:
+    """Every declaration named as a `dependents` entry by a registered ◈
+    stipulation, from `formal/stipulation_audit.json`.
+
+    Derived, never transcribed. A declaration in this set is machine-verified
+    *given* a declared stipulation, so its row must say so: per AGENTS.md
+    `AXIOMATIC ≠ unproved`, and the same reading applies to a priced `def`."""
+    global _STIP_DEPENDENTS_CACHE
+    if _STIP_DEPENDENTS_CACHE:
+        return _STIP_DEPENDENTS_CACHE
+    deps: set = set()
+    if STIPULATION_AUDIT_PATH.exists():
+        try:
+            data = json.loads(STIPULATION_AUDIT_PATH.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            data = {}
+        for e in data.get("stipulations", []):
+            deps.update(e.get("dependents", []))
+    _STIP_DEPENDENTS_CACHE = deps
+    return deps
+
+
+def _stip_marker(names) -> str:
+    """` ◈` when any of `names` is a registered ◈ dependent, else ``."""
+    deps = stipulation_dependents()
+    if not deps:
+        return ""
+    for n in names:
+        if not n:
+            continue
+        if n in deps or n.rsplit(".", 1)[-1] in deps:
+            return " ◈"
+    return ""
+
+
 def _classical_row_status(row: dict, decls: dict, node_map: dict) -> str:
     live = _classical_anchor_live(row["checks"][0], decls, node_map)
     return _CA_STATUS_TEXT.get(live, "?")
@@ -5260,6 +5373,130 @@ def render_defense_against_attacks() -> list[str]:
     return lines
 
 
+# --- ASIETY-FREEDOM chain: every step priced, so the ◈ step cannot be read as
+# --- a theorem. Badges and footprints are DERIVED (kernel audit / ◈ registry);
+# --- nothing here is transcribed. See AGENTS.md.
+ASIETY_FREEDOM_STEPS = [
+    ("L1", "C287", "Logos.AsietyFreedom.weakChoice_implies_asiety", "decl",
+     "`GenuineNormativity s p q → Asiety (EntityOf s)` — weak choice, **Act-free**"),
+    ("L1", "C288", "Logos.AsietyFreedom.weakChoice_implies_freeWill", "decl",
+     "the same step read toward free will"),
+    ("◈", "—", "Logos.AsietyFreedom.AsietyFreedomOfGround", "stipulation",
+     "**THE BRIDGE, BY DECLARATION**: the ground's freedom reaches every subject"),
+    ("L2", "C289", "Logos.AsietyFreedom.asietyFreedom_yields_trueChoice", "decl",
+     "`AsietyFreedomOfGround → TrueChoice s p q` (conditional)"),
+    ("L2", "C290", "Logos.AsietyFreedom.asietyFreedom_yields_asietyFreeWill", "decl",
+     "`AsietyFreedomOfGround → AsietyFreeWill s` — the *\"shared with us by the creator\"* step"),
+    ("L2", "C291", "Logos.AsietyFreedom.asietyFreeWill_yields_trueChoice", "decl",
+     "`AsietyFreeWill s → TrueChoice s p q`, and back again"),
+    ("🧱", "C292", "Logos.AsietyFreedom.asietyAloneDoesNotYieldTrueChoice", "countermodel",
+     "countermodel: asiety alone yields no true choice — the universal reading is strictly "
+     "stronger than the existential one"),
+    ("🧱", "C293", "Logos.AsietyFreedom.frameContingencyDoesNotBindAPair", "countermodel",
+     "countermodel: frame contingency binds no given pair — why `TrueChoice ≡ Chooses` "
+     "is forced, not lazy"),
+    ("🧱", "C294", "Logos.AsietyFreedom.rightWrongFactYieldsNoChooser", "countermodel",
+     "countermodel: `¬ N_T ∧ ¬ N_F` with **no** subject meaning anything — **no axiom-free "
+     "existence of a chooser**"),
+    ("✓", "C295", "Logos.AsietyFreedom.groundIsNotASharerOfAsietyFreeWill", "decl",
+     "coherence: the ground is still **not** a chooser (C285 preserved)"),
+    ("Σ", "C296", "Logos.AsietyFreedom.asietyFreedom_summary", "decl",
+     "master summary: the whole chain and both its prices in one statement"),
+    ("L1", "C300", "Logos.AsietyFreedom.weakChoice_yields_trueChoice", "decl",
+     "**the derived side at its actual maximum**: `GenuineNormativity s p q → TrueChoice s p q` "
+     "— axiom-free, no ◈, true choice **at the specified pair**. The hypothesis already contains "
+     "the choice; only the `{}` frame fact `ContestedContent` is added. **So the pair's existence "
+     "is free — what ◈ buys is the extension from the given pair to every incompatible pair**"),
+    ("L1", "C297", "Logos.AsietyFreedom.asiety_yields_witnessed_trueChoice", "decl",
+     "the same boundary via `Asiety`: `Asiety (EntityOf s) → ∃ p q, TrueChoice s p q`. "
+     "**Strictly weaker than C300** (it discards *which* pair); retained, not deleted"),
+    ("L1", "C298", "Logos.AsietyFreedom.asiety_yields_freeWill", "decl",
+     "and in the `FreeWill` direction: `Asiety (EntityOf s) → FreeWill s`, equally bounded"),
+    ("🧱", "C299", "Logos.AsietyFreedom.groundingCannotDeliverTrueChoice", "countermodel",
+     "countermodel: **no grounding premise of containment shape can deliver true choice** — the "
+     "grounding premise is granted *in full* and the conclusion still fails. Machine-checked reason "
+     "the ◈ step is `BLOCKED`. Scope limit: relations of *other* shape stay open (F12(1))"),
+]
+
+
+def _stipulation_entry(name: str):
+    """One ◈ registry entry by name, or None (derived from the audit file)."""
+    if not STIPULATION_AUDIT_PATH.exists():
+        return None
+    try:
+        data = json.loads(STIPULATION_AUDIT_PATH.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    for e in data.get("stipulations", []):
+        if e.get("name") == name:
+            return e
+    return None
+
+
+def render_asiety_freedom_chain(decls: dict, node_map: dict) -> list[str]:
+    """The ASIETY-FREEDOM chain, step by step, with the price of every step.
+
+    Emitted so that the ◈ stipulated bridge can never be read as a theorem: it
+    is its own row, badged from `formal/stipulation_audit.json`, and every
+    other cell is derived from the kernel audit."""
+    lines = []
+    ap = lines.append
+    ap("### ASIETY-FREEDOM chain, step by step (every step priced)")
+    ap("")
+    ap("> **Read this table before reading the asiety rows above.** The author's chain was:")
+    ap("> weak choice (Act-free) → **asiety** → *because of the nature of Him who grounds")
+    ap("> reality*, assert **`AsietyFreedom`** → which gives rise to **true choice** and")
+    ap("> **`AsietyFreeWill`** → *which is shared with us by the creator*. The **◈ row is the")
+    ap("> only step that is not a theorem**, and it is a declaration, not a derivation.")
+    ap("")
+    ap("`L1` = the axiom-free Act-free route · `◈` = **the declared bridge, not a theorem** ·")
+    ap("`L2` = the transfers that depend on it · `🧱` = `{}` countermodel pricing it · `✓` =")
+    ap("coherence · `Σ` = master summary.")
+    ap("")
+    ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
+    ap("|---|---|---|---|---|---|")
+    for kind, cid, full, atype, text in ASIETY_FREEDOM_STEPS:
+        if atype == "stipulation":
+            ent = _stipulation_entry("asietyFreedom_ofGroundFreedom")
+            tag = (ent or {}).get("tag", "META")
+            status = f"◈ STIPULATED ({tag}) — a `def`, **not an axiom**"
+        else:
+            live = _classical_anchor_live({"type": atype, "full": full},
+                                          decls, node_map)
+            status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
+           f"{status} | {kernel_fp_text(full)} |")
+    ap("")
+    ent = _stipulation_entry("asietyFreedom_ofGroundFreedom")
+    if ent:
+        ap(f"**Cost of ◈ `{ent.get('name')}`** (`{ent.get('location')}`), as registered: "
+           f"{ent.get('cost', '')}")
+        ap("")
+    ap("**Two limits that the badge alone does not convey, and which are the reason this")
+    ap("block exists:**")
+    ap("")
+    ap("1. **\"The declared-axiom count did not move\" is NOT a test for this batch.** The")
+    ap("   bridge is a `def`, so `#print axioms` cannot see it, and its `{Means, Subject}`")
+    ap("   footprint is vocabulary-only *whether the bridge is principled or arbitrary*. For")
+    ap("   ASIETIC-CHOICE the invariant was a genuine test; here the **◈ registry entry and")
+    ap("   this block are load-bearing rather than decorative**. That is a limitation of the")
+    ap("   auditing instrument, declared rather than exploited.")
+    ap("2. **The `GroundsEntity` premise of the three transfers is vacuous**")
+    ap("   (`ground_grounds_the_meaningless`: the ground grounds even entities bearing no")
+    ap("   meaning), so the whole metaphysical weight sits on the ◈ row. It is named `_hG` and")
+    ap("   declared vacuous rather than quietly dropped, so the footprint cannot be mistaken for")
+    ap("   depth. The only non-vacuous `GroundsEntity` use in the module is C295, which is a")
+    ap("   `¬ ∃ s` over subjects.")
+    ap("")
+    ap("**Also not claimed:** the universal reading of the ◈ bridge is strictly stronger than")
+    ap("an existential one (\"shared with *someone*\"), and nothing here shows the stronger")
+    ap("reading is the correct one; no axiom-free existence of a chooser (C294 **refutes** it,")
+    ap("it is not merely open); and the Act-free `?` around `base.txt`'s `ClaimsCorrect`-free")
+    ap("weak→strong step is **bypassed, not closed** — the bare form stays machine-refuted")
+    ap("(C273/C274).")
+    ap("")
+    return lines
+
 def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     """Emits the classical-attributes table block (placed after Branch C, before
     the Further Investigations catalogue). Statuses are live-derived, never
@@ -5283,6 +5520,12 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("")
     ap("Status vocabulary used here (extends the badge legend above): `✅` PROVEN (machine-verified, footprint stated) · `📘` DEFINITIONAL · `⏸` DEFERRED (target not in the live kernel) · `❌` NOT ESTABLISHED (no current theorem; distinct from the ledger's `✖` BLOCKED) · `🧱` INDEPENDENT / FRONTIER (explicit countermodel: the preceding theory does not entail it).")
     ap("")
+    ap("A **`◈` suffix** on a status cell is derived from `formal/stipulation_audit.json`: the row's")
+    ap("anchor is a declared dependent of a registered definitional stipulation, so its theorem is")
+    ap("machine-verified **given that declaration**, not from Γ's axioms. It is not a warning about")
+    ap("rigour — the proof is as solid as any other — it is a pointer to the price, which is listed")
+    ap("in §D.2b and, for the ASIETY-FREEDOM batch, in the step-by-step block below.")
+    ap("")
     ap("| Classical characteristic | Scope | Status | Exact sense established by the current theory (reference) |")
     ap("|---|---|---|---|")
     for row in CLASSICAL_ATTRIBUTES:
@@ -5292,9 +5535,12 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
             refs.insert(0, primary)
         ref_cell = " ; ".join(_classical_decl_link(f, decls) for f in refs)
         ref_cell = f" — {ref_cell}" if ref_cell else ""
+        marked = [c.get("full") for c in row["checks"]] + list(row.get("refs", []))
         ap(f"| {row['attribute']} | {row['scope']} | "
-           f"{_classical_row_status(row, decls, node_map)} | {row['sense']}{ref_cell} |")
+           f"{_classical_row_status(row, decls, node_map)}"
+           f"{_stip_marker(marked)} | {row['sense']}{ref_cell} |")
     ap("")
+    lines.extend(render_asiety_freedom_chain(decls, node_map))
     ap("_Synthesis — the strongest current profile._ The theory has established, of a")
     ap("**personal, rational, free, authoritative-over-its-acts, independently individuated**")
     ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")

@@ -976,6 +976,226 @@
  "Logos.Alternatives.Incompatible": [],
  "Logos.Alternatives.T9_incompatibleAlternatives": [],
  "Logos.Alternatives.incompatible_with_negation": [],
+ "Logos.AsieticChoice.Asiety": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.ContestedContent": [],
+ "Logos.AsieticChoice.OpenAlternative": [],
+ "Logos.AsieticChoice.SingleContentSignature.Faithful": [],
+ "Logos.AsieticChoice.SingleContentSignature.Subject": [],
+ "Logos.AsieticChoice.SingleContentSignature.antecedentHolds": [],
+ "Logos.AsieticChoice.SingleContentSignature.antecedentHolds_in_canonicalModel": [],
+ "Logos.AsieticChoice.SingleContentSignature.bareHorn": [],
+ "Logos.AsieticChoice.SingleContentSignature.casesOn": [],
+ "Logos.AsieticChoice.SingleContentSignature.content": [],
+ "Logos.AsieticChoice.SingleContentSignature.ctorIdx": [],
+ "Logos.AsieticChoice.SingleContentSignature.faithful": [],
+ "Logos.AsieticChoice.SingleContentSignature.means": [],
+ "Logos.AsieticChoice.SingleContentSignature.mk.inj": [],
+ "Logos.AsieticChoice.SingleContentSignature.mk.injEq": [
+  "propext"
+ ],
+ "Logos.AsieticChoice.SingleContentSignature.mk.noConfusion": [],
+ "Logos.AsieticChoice.SingleContentSignature.mk.sizeOf_spec": [],
+ "Logos.AsieticChoice.SingleContentSignature.noConfusion": [],
+ "Logos.AsieticChoice.SingleContentSignature.noConfusionType": [],
+ "Logos.AsieticChoice.SingleContentSignature.recOn": [],
+ "Logos.AsieticChoice.SingleContentSignature.singleContentModel": [],
+ "Logos.AsieticChoice.SingleContentSignature.witness": [],
+ "Logos.AsieticChoice.SingleContentSignature.witnessContent": [],
+ "Logos.AsieticChoice.TrueChoice": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.an_asietic_entity_exists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.AsieticChoice.asietic_is_true_freedom": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.asietic_summary": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.RetorsiveNormativity.AxJudicativeBipolarity",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.AsieticChoice.bareRejectedHornCoMeant": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.bareRejectedHornCoMeant_is_not_derivable": [],
+ "Logos.AsieticChoice.chooses_implies_trueChoice": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.contested_content": [],
+ "Logos.AsieticChoice.contingent_asietic_is_not_canonically_aseitous": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.contingent_true_chooser_is_externally_grounded": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.derives_rejectedHornCoMeant": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.RetorsiveNormativity.AxJudicativeBipolarity"
+ ],
+ "Logos.AsieticChoice.doubt_implies_trueChoice": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.freeWill_exists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.AsieticChoice.genuineNormativity_implies_trueChoice": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.ground_is_canonically_aseitous_but_not_asietic": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.ground_is_not_a_true_chooser": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.open_alternative_is_incompatible": [],
+ "Logos.AsieticChoice.retorsion_implies_rejectedHornCoMeant": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.RetorsiveNormativity.AxJudicativeBipolarity"
+ ],
+ "Logos.AsieticChoice.retorsion_yields_genuine_normativity_on_its_own_content": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.RetorsiveNormativity.AxJudicativeBipolarity"
+ ],
+ "Logos.AsieticChoice.singleContentModelRefutesBareRejectedHorn": [],
+ "Logos.AsieticChoice.strongChoice_iff_trueChoice": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.the_ground_grounds_a_contingent_true_chooser": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.trueChoice_exists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.AsieticChoice.trueChoice_implies_choiceField": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.trueChoice_implies_chooses": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.trueChoice_implies_freeWill": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.weakChoice_carries_the_judicative_premise_explicitly": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.RetorsiveNormativity.AxJudicativeBipolarity"
+ ],
+ "Logos.AsieticChoice.weakChoice_implies_chooses": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.RetorsiveNormativity.AxJudicativeBipolarity"
+ ],
+ "Logos.AsieticChoice.weakChoice_implies_trueChoice": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.RetorsiveNormativity.AxJudicativeBipolarity"
+ ],
+ "Logos.AsietyFreedom.AsietyFreeWill": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsietyFreedom.AsietyFreedomOfGround": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsietyFreedom.asietyAloneDoesNotYieldTrueChoice": [],
+ "Logos.AsietyFreedom.asietyFreeWill_yields_trueChoice": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsietyFreedom.asietyFreedom_summary": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsietyFreedom.asietyFreedom_yields_asietyFreeWill": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsietyFreedom.asietyFreedom_yields_trueChoice": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsietyFreedom.asiety_yields_freeWill": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsietyFreedom.asiety_yields_witnessed_trueChoice": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsietyFreedom.frameContingencyDoesNotBindAPair": [],
+ "Logos.AsietyFreedom.groundFreedomSharedWithSomeone": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsietyFreedom.groundIsNotASharerOfAsietyFreeWill": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsietyFreedom.groundingCannotDeliverTrueChoice": [],
+ "Logos.AsietyFreedom.rightWrongFactYieldsNoChooser": [],
+ "Logos.AsietyFreedom.weakChoice_implies_asiety": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsietyFreedom.weakChoice_implies_freeWill": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.AsietyFreedom.weakChoice_yields_trueChoice": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.AxiomNegationAudit.AxActPolarity_Statement": [],
  "Logos.AxiomNegationAudit.AxIntentionalChoice_Statement": [],
  "Logos.AxiomNegationAudit.AxTwoSubjects_Statement": [],
@@ -3857,6 +4077,44 @@
   "Logos.Agency.Subject"
  ],
  "Logos.DivineSimplicity.ofGround_undivided_meaning": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineTranscendence.CausalExternality": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineTranscendence.EachSystemHasAnOutside": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineTranscendence.GroundedInSystem": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineTranscendence.HierarchicalExternality": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineTranscendence.OutsideEverySystem": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineTranscendence.externality_to_every_system_is_consistent": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineTranscendence.membership_exclusion_does_not_entail_grounding_exclusion": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineTranscendence.ofGround_external_to_every_class_may_still_be_ordered": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineTranscendence.ofGround_sole_transcendent_ground": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineTranscendence.per_system_outside_points_need_not_coalesce": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineTranscendence.universal_grounding_does_not_entail_causal_externality": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineTranscendence.universal_grounding_places_the_ground_inside_a_system": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
@@ -9575,6 +9833,7 @@
  "Logos.Stipulations.StipulationTag.ofNat": [],
  "Logos.Stipulations.StipulationTag.ofNat_ctorIdx": [],
  "Logos.Stipulations.StipulationTag.recOn": [],
+ "Logos.Stipulations.asietyFreedom_ofGroundFreedom": [],
  "Logos.Stipulations.instDecidableEqStipulationTag": [],
  "Logos.Stipulations.instReprStipulationTag": [],
  "Logos.Stipulations.instReprStipulationTag.repr": [],

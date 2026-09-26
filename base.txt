@@ -448,16 +448,57 @@ ChoiceField(s,p,q)
 Chooses(s,p,q)
 *escolha forte: o sujeito co-significa alternativas incompatíveis* (o agente co-significa ativamente ambos os cornos: A(s,p) ∧ A(s,q) ∧ Incompatible(p,q))
 
-Não se deve permitir que `ChoiceField(s,p,q)` se converta silenciosamente em `Chooses(s,p,q)`.
+Não se deve permitir que `ChoiceField(s,p,q)` se converta **silenciosamente** em `Chooses(s,p,q)`.
 A presença de alternativas representáveis no pensamento estabelece apenas o campo (escolha fraca):
 
 Person(s) → ∃p ∃q ChoiceField(s,p,q).
 
 Mas a escolha genuína (escolha forte) requer a co-significação de ambas as opções pelo mesmo agente.
 
+(Emenda de 2026-09-26, lote ASIETIC-CHOICE. A proibição **mantém-se** — e a distinção entre
+*silenciosa* e *preçada* passou a ser o conteúdo inteiro do lote. Do campo sozinho não se segue
+a co-significação: `Choice.lean` regista-o, e o contramodelo `singleContentModelRefutesBareRejectedHorn`
+(C273) mostra que a forma *nu* é mesmo falsa num modelo do vocabulário de significado (§30). O que
+passou a existir é a conversão **com a premissa nomeada e o preço na pegada**:
+
+weakChoice_implies_chooses (hField : ChoiceField s p q) (hJudge : ClaimsCorrect s p) : Chooses s p (¬p)   [PROVEN↑]
+
+C266, com pegada `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` — a ponte
+`AxJudicativeBipolarity` (`Tag: SEM`) faz o trabalho, e a premissa `ClaimsCorrect s p` é
+*preço*, não ornamento. A face que torna isso explícito, sem abreviatura:
+
+weakChoice_carries_the_judicative_premise_explicitly : ∀ s p, ChoiceField s p (¬p) → ClaimsCorrect s p → TrueChoice s p (¬p)   [PROVEN↑]
+
+Logo: escolha fraca **não** implica escolha forte; escolha fraca **mais um juízo de correção**
+implica escolha forte. A primeira afirmação continua PROVEN↑ (C266/C267) porque a premissa está
+escrita nela; a segunda nunca será PROVEN↑ sem a ponte, e ninguém a deve ler assim.)
+
 A cadeia e o seu fosso tornam-se visual e formalmente transparentes:
 
 weak choice / choice-field → ? [co-significação do corno rejeitado] → strong Chooses → FreeWill
+
+O `?` **está fechado — com a premissa nomeada** (2026-09-26, lote ASIETIC-CHOICE, §30; GAPMAP nível
+18, C259–C286):
+
+weakChoice_implies_chooses : ChoiceField s p q → ClaimsCorrect s p → Chooses s p (¬p)   [PROVEN↑]
+
+Preço: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` — a bipolaridade judicativa
+declarada (`Tag: SEM`) é o que co-significa o corno rejeitado, e `ClaimsCorrect s p` é uma
+premissa *escrita*, não uma tácita. Sem ela o passo continua por fechar, e não apenas por
+demonstrar: ver §30.
+
+E há uma **segunda rota para a asieticidade, que não passa pelo `?` nem por `Act`** (2026-09-26,
+lote ASIETY-FREEDOM, §31; GAPMAP nível 19, C287/C288):
+
+weakChoice_implies_asiety : GenuineNormativity s p q → Asiety (EntityOf s)   [PROVEN, {Means, Subject}]
+
+`GenuineNormativity` (`IndubitableNormativeFreeWill.lean:84`) é a escolha fraca **sem `Act`**: os
+seus campos são `Incompatible p q ∧ p ≠ q` e `Means s p ∧ Means s q` — não há `Act`, nem
+`Initiates`, nem `ClaimsCorrect` em nenhum deles. Por isso esta rota custa `{Means, Subject}`, isto
+é, só vocabulário: **zero axiomas**, e nenhuma premissa escrita. Ela não *fecha* o `?` acima
+— contorna-o, começando por uma hipótese que já contém os dois cornos. A forma nua continua
+refutada (C273/C274) e o `?` continua fechado apenas sob a sua premissa: nada disto deve ser lido
+como se houvessemos fechado o `?` sem preço.
 
 15. LIBERDADE
 
@@ -1157,7 +1198,7 @@ O limite da fase puramente dedutiva manifesta-se onde a dedução pura encontra 
 
 - **C241–C251 (FOUNDATIONAL-OMNIPOTENCE, 2026-09-26):** `DivineOmnipotence.lean` formaliza a Onipotência Fundacional clássica — o fundamento como operante *sempre e em todo o lugar* sobre o que não envolve contradição (Aquino ST I q. 25 a. 5 ad 1, *semper et ubique operans*, README-OLD.md §263, CHARACTERISTICS.md §15) para `Entity.ofGround`. **Correção de enquadramento (2026-09-26):** a primeira redacção deste lote propunha "refutar o sentido forte" da onipotência, nomeando a leitura da onipotência-contraditória como *o* sentido clássico; isso estava errado, e a leitura ortodoxa é a de Tomás — poder sobre o que não envolva contradição. Logo a restrição **afirma-se, não se refuta**: (1) Contramodelo do preço da identificação (`existence_everywhere_does_not_entail_operation`, `{}`): presença em todo o lado ⇏ operação, pelo que presença não é produção; (2) Onipotência fundacional (`ofGround_gapless_operative_scope`, `{Subject}`): nenhum estado de affairs satisfazível em qualquer mundo acessível está fechado ao âmbito operativo do fundamento; (3) Primeira face da restrição (`ofGround_operates_only_what_obtains`, `{Subject}`): nada que não obtenha — logo nada satisfazível — é operado; (4) Segunda face (`ofGround_does_not_operate_contradictions`, `{propext, Subject}`): nenhuma contradição é operada em nenhum mundo, por `Semantics.nonContradiction` (C14) — **apenas** a leitura da onipotência-contraditória é refutada, e é-o *pela* restrição ortodoxa; (5) Exclusão de átomos (`atom_not_gapless_operate`) e de sujeitos discriminadores (`discriminating_subject_not_gapless_operate`), ambos `{Subject}`; (6) O fundamento é o **único** operador sem lacunas (`ofGround_sole_gapless_operator`, `{Subject}`), pelo que a característica fica fechada contra os outros dois construtores de `Entity`; (7) Síntese mestre da Onipotência Fundacional (`ofGround_foundational_omnipotence`, `{Means, Subject, propext}`); (8) O domínio do âmbito é não-vazio e livre de contradições (`satisfiable_scope_is_nonempty_and_contradiction_free`, `{propext}`), pelo que a leitura "tudo o que não envolva contradição" é **substancial, não vaciosa**; (9) Contramodelos de delimitação (`gapless_operative_scope_without_conjunctive_power` e `exhaustive_scope_without_operative_scope`, ambos `{}`): a acessibilidade modal de Γ não é conjuntiva, e âmbito exaustivo ⇏ âmbito operativo — por isso (2) é provado da presença rígido-mundial (estipulação ◈ `ofGround_existsAt`) e nunca lido do âmbito de `FoundationalOmniscience`; princípio tomista *semper* associado: `necessity_and_presence_yield_foundational_omnipotence` (`{Means, Subject, propext}`). A identificação `OperatesAt v e P := ExistsAt v e ∧ P v` é uma *definição*, não uma derivação, e está preçada como 4.ª estipulação ◈ `operatesAt_presencePlusObtaining` (`Tag: SEM`), com o preço machine-checked por (1) e (9). O sentido **causal/criativo** ("pode trazer X à existência") permanece **BLOCKED** (GAPMAP nível 17, linha F10): Γ não declara relação de produção de entidade alguma — a única relação de iniciação, `Agency.Initiates`, é indexada por sujeito e `Entity.ofGround` não é correlato de sujeito (`ofGround_ne_ofSubject`) — e a relação mais próxima, a contenção explicativa `GroundsEntity`, não pode servir por (9). Faltam exactamente duas afirmações: (i) o vocabulário `Produces : Entity → World → Form → Prop` e (ii) a derivação de que o fundamento produz todo estado de affairs satisfazível. A ressalva da prosa (`README-OLD.md:263`) fica **mantida mas estreitada ao sentido causal**.
 
-A cadeia do poema avançou. Estado formal (theorems/T3.txt, theorems/T10–T14.txt, theorems/T19.txt, theorems/T20.txt, theorems/T21.txt, theorems/T22.txt, theorems/T23.txt, theorems/T24.txt, theorems/T25.txt, theorems/T26.txt, theorems/T27.txt):
+A cadeia do poema avançou. Estado formal (theorems/T3.txt, theorems/T10–T14.txt, theorems/T19.txt, theorems/T20.txt, theorems/T21.txt, theorems/T22.txt, theorems/T23.txt, theorems/T24.txt, theorems/T25.txt, theorems/T26.txt, theorems/T27.txt, theorems/T28.txt, theorems/T29.txt):
 
 T10 (certo e errado necessários) — PROVEN; a sua necessidade (necDistinction)
   é teorema desde C1 (o modal prop-level é agora alias definições).
@@ -1420,3 +1461,317 @@ A tese é:
 "a tentativa de negar determinadas estruturas pressupõe ou utiliza as próprias estruturas negadas."
 
 Portanto, quanto mais fundo a dedução conseguir levar esta forma de redução transcendental, maior será a parte da estrutura da realidade que pode ser estabelecida sem uma hipótese metafísica arbitrária.
+
+30. ESCOLHA VERDADEIRA, ASSIETICIDADE, E O CORNO REJEITADO REFUTADO
+
+(2026-09-26, lote ASIETIC-CHOICE. Formalizado em `formal/Logos/AsieticChoice.lean`;
+GAPMAP nível 18, C259–C286 e linha F11; theorems/T28.txt. **Zero axiomas novos** — a
+contagem do registo continua **25 declarados** (VOCAB 14 / SEM 7 / META 4), e o facto de
+ela não se mover *é* o teste: cada pegada deste capítulo vem de
+`formal/axiom_audit.json`, pelo que um axioma novo teria aparecido aqui.)
+
+Escolha verdadeira e escolha forte não são a mesma fórmula. Define-se:
+
+TrueChoice(s,p,q) := Chooses(s,p,q) ∧ OpenAlternative(p,q)
+                    ≡ Means(s,p) ∧ Means(s,q) ∧ Incompatible(p,q) ∧ ContestedContent
+
+(a forma do *corno*, usada pelas linhas C, é a instanciação `TrueChoice s p (¬p)`.)
+
+`TrueChoice` exige que o sujeito signifique **ambos** os cornos, e que o par seja
+incompatível e o conteúdo efectivamente disputado. É a definição mais forte, e é a que
+a retorsão exige. Dela resultam, sem preço (C261–C265, `{Means, Subject}` só vocabulário):
+
+chooses_implies_trueChoice          Chooses → TrueChoice          (o passo substantivo)
+trueChoice_implies_chooses          TrueChoice → Chooses          (definicional)
+trueChoice_implies_choiceField      TrueChoice → ChoiceField
+trueChoice_implies_freeWill         TrueChoice → FreeWill
+
+**A honestidade desta secção é uma fraqueza sua, e por isso é declarada primeiro:**
+`strongChoice_iff_trueChoice : Chooses ↔ TrueChoice` (C265) é **PROVEN**, e isso *retira*
+algo da_noção. A conjunção `ContestedContent` é um facto **global** do quadro — o quadro
+contesta o seu próprio conteúdo (C259, `{}`, por C96) — e não uma modalidade por par. Logo
+"escolha verdadeira" acrescenta, a `Chooses`, apenas a disjunction `∃ s p q, TrueChoice s p q`
+que já era a existência de escolha genuína. Isto é D6 do plano, aceite, e fica registado
+aqui para que ninguém leia `TrueChoice` como uma força sui generis.
+
+O `?` do §14 — a co-significação do corno rejeitado — **está fechado, com a premissa escrita**
+(C266/C267, PROVEN↑, `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`):
+
+weakChoice_implies_chooses : ChoiceField s p q → ClaimsCorrect s p → Chooses s p (¬p)
+
+E a forma performativa, sem segunda rota, dá a mesma coisa em conteúdo fixado (C268,
+PROVEN↑): um sujeito que reivindica um conteúdo como *correcto* significa também a sua
+negação — `derives_rejectedHornCoMeant`. E o evento retorsivo (C270/C271, ambos PROVEN↑)
+dá a norma genuína **no seu próprio conteúdo**:
+`retorsion_yields_genuine_normativity_on_its_own_content`, com a premissa
+`∃ s, ClaimsCorrect s NoGN`.
+
+O que isso responde, e o que não responde. Responde ao resíduo (b) de F1b (GAPMAP.md:758): o
+corno *meta-nível* de F1b está fechado em conteúdo fixado. **Não** responde à deliberação
+sobre conteúdo de objecto/ação, que continua a precisar da rota separada
+`DeliberateChoice`/`ClaimsNormativeCorrectness` (C140/C141). E ambas as premissas acima são
+`Act`-gateadas, portanto **não** são deriváveis em Γ; isso é declarado, não escondido.
+
+**O corno nu não está em aberto: está refutado.** A implicação sem premissa alguma tem nome
+— `bareRejectedHornCoMeant` (`AsieticChoice.lean`; F11) — e é falsa num modelo do vocabulário
+de significado: `singleContentModelRefutesBareRejectedHorn` (C273) e
+`bareRejectedHornCoMeant_is_not_derivable` (C274), ambos `{}`, provam que o antecedente
+pode obter-se sem o consequente. O campo carregador é a **fidelidade**
+(`means s p → p`), não a univocidade: de `p = ¬p` não segue contradição, porque `p` não
+tem de ser provável; a fidelidade converte `means t p ∧ means t (¬p)` em `p ∧ ¬ p`, que
+`incompatible_self_negation` proíbe. É a razão pela qual a contradição *não* é
+`Means s p → Contradictory p`.
+
+Sendo o corno nu refutado, a lacuna a montante é uma só, e não a saturação de cornos: existe
+um evento realizado? `Act s p := Means s p ∧ ∃ w w', Initiates s w w' p`, e **nenhum** axioma
+de Γ fornece uma testemunha de `Initiates` (`ProofPresentationRetorsion.lean:95`: "CANNOT deduce
+`∃ s p, ClaimsNormativeCorrectness s p`"; contramodelo
+`syntactic_validity_without_subject_or_normativity`, `{}`). As quatro rotas de Γ a
+`Means s (¬p)` são todas `Act`-gateadas: `AxJudicativeBipolarity` (premissa `ClaimsCorrect s p`),
+`AxActPolarity` e `AxIntentionalChoice` (premissa `Act s p`; e o seu `q` é arbitrário, nunca
+`¬p`), e `ClaimsNormativeCorrectness` (premissa `Act s p ∧ …`); `Doubts` é *ele próprio*
+`Means s p ∧ Means s (¬p)`, logo circular.
+
+A existência, essa, é gratuita e demonstrada por duas vias (C277–C279, PROVEN↑, `{AxTwoSubjects,
+Means, Subject, Will, subjectWill}`): `trueChoice_exists`, `freeWill_exists`,
+`an_asietic_entity_exists`. E a tese, sem preço, é `asietic_is_true_freedom` (C280):
+a asieticidade *é* a liberdade verdadeira. O preço está nas linhas existenciais, que é onde
+pertence.
+
+**A fronteira do fundamento.** O fundamento é canonicamente aseito e **não** é asiético
+(`ground_is_canonically_aseitous_but_not_asietic`, C284), e não pode ser sujeito de escolha
+verdadeira (`ground_is_not_a_true_chooser`, C285, `{Subject}`), por `ofGround_ne_ofSubject`:
+`Means` é indexada por sujeito, e o fundamento não é correlato de sujeito algum. A
+fundamentação externa do escoledor contingente está por seu lado affirmada
+(`the_ground_grounds_a_contingent_true_chooser`, C281; e a direcção inversa, C282). E
+`CanonicalAseity → TrueChoice` é **refutado**, não aberto
+(`contingent_asietic_is_not_canonically_aseitous`, C283): um lote futuro que "comolive" esta
+ponte parte Γ, razão pela qual é registado como separação de nível de contramodelo e não como
+fronteira.
+
+Limites honestos de escopo (o que **não** se deve reclamar): (i) `TrueChoice` não acrescenta
+força a `Chooses`, por C265 e pelo carácter global de `ContestedContent`; (ii) a passagem
+escolha-fraca → escolha-forte **exige** o juízo de correção, e a forma nua é refutada (C273/C274);
+(iii) a deliberação de conteúdo de objecto/ação continua por responder; (iv) a existência de
+escolha verdadeira carrega honestamente `{AxTwoSubjects, Will, subjectWill}` — não é `{}`;
+(v) a forma *meta-nível* está fechada **em conteúdo fixado** (`NoGN`/`¬NoGN`), o que não é o
+mesmo que fechar a deliberação em geral. Nenhuma destas cinco coisas deve ser lida como
+resolvida por este lote.
+
+31. ASSIETICIDADE A PARTIR DA ESCOLHA FRACA SEM `Act`, E O PARTILHAMENTO PELO FUNDAMENTO
+
+(2026-09-26, lote ASIETY-FREEDOM. Formalizado em `formal/Logos/AsietyFreedom.lean`; GAPMAP
+nível 19, C287–C296; theorems/T29.txt. **Zero axiomas novos** — o registo continua **25 declarados**
+(VOCAB 14 / SEM 7 / META 4).)
+
+Este lote faz o que o §30 deixou em aberto, em **dois passos de preço deliberadamente desigual**,
+e a desigualdade é o conteúdo do capítulo, não um defeito dele.
+
+**L1 — a asieticidade vem da escolha fraca sem `Act`, sem axioma e sem premissa escrita.** A escolha fraca
+`Act`-independente que o §30 deixara "já feita" é `GenuineNormativity`
+(`IndubitableNormativeFreeWill.lean:84`), cujos campos são
+
+opposition : Incompatible p q ∧ p ≠ q          (DeonticOpposition, :72)
+address    : Means s p ∧ Means s q            (AgentialDeonticAddress, :78)
+
+Não há `Act`, nem `Initiates`, nem `ClaimsCorrect` em nenhum dos dois. Daí (C287, C288):
+
+weakChoice_implies_asiety : GenuineNormativity s p q → Asiety (EntityOf s)   [PROVEN, {Means, Subject}]
+weakChoice_implies_freeWill : GenuineNormativity s p q → FreeWill s          [PROVEN, {Means, Subject}]
+
+O único conteúdo para além das duas conjunções `Means` é o facto de quadro `ContestedContent`
+(C259, `{}`): a **abertura**. Sem `AxJudicativeBipolarity` (ao contrário de C266/C267), sem
+`AxTwoSubjects` (ao contrário de C277–C279), sem `Act`, sem `Initiates`, sem pré-missa escrita.
+
+**A honestidade deste passo, declarada antes de ser usado:** C287 está *muito perto* de uma
+projecção, porque `AgentialDeonticAddress` **já é** `Means s p ∧ Means s q` — a co-significação
+vem no interior da premissa. O que C287 acrescenta a `indubitable_normative_free_will` (C276) é a
+conjunção de abertura, e nada mais. E `indubitable_normative_free_will` é, ele próprio, uma
+**extracção de subfórmula** e não uma derivação: a sua hipótese desdobra-se em
+`Incompatible p q ∧ p ≠ q ∧ Means s p ∧ Means s q`, a prova usa `.1`s e **descarta `p ≠ q`**, e a
+sua conclusão `Chooses s p q` é uma reordenação de três das quatro conjunções. A pegada
+`{Means, Subject}` que apresenta é verdadeira — regista que os campos da estrutura são `Means` — mas
+não mede uma derivação a partir de premissas independentes. Isto está escrito no README.
+
+**L2 — a liberdade do fundamento é uma ponte *declarada*, não uma derivação.** Define-se:
+
+AsietyFreedomOfGround := ∀ (s : Subject) (p q : Prop),
+    GroundsEntity Entity.ofGround (EntityOf s) → Asiety (EntityOf s) → TrueChoice s p q     ◈ META
+
+AsietyFreeWill (s : Subject) := AsietyFreedomOfGround ∧ Asiety (EntityOf s)
+
+Isto **não é derivável**, por três bloqueios independentes, todos registados:
+
+(i) `GroundsEntity` é **vacuo**: `EntityMeans Entity.ofGround p` é `True` pelo braço de casamento
+do construtor, pelo que `ground_grounds_every_entity` é `intro p _; exact True.intro`
+(`LovesAsGround.lean:194`) e o fundamento fundamenta até entidades sem significado. O módulo que o
+declara diz que a transferência "é vacua, e é exactamente esse o ponto";
+(ii) o único predicado de fundamentação não vacuo, `GroundsRightWrong`, é **definicionalmente**
+`∃ p q, Chooses s p q` (C168) — já colapsado à liberdade, sem qualquer conteúdo de fundamento;
+(iii) a relação de fundamentação **substantiva** está `BLOCKED`, com lema nomeado (C228).
+
+Por isso `AsietyFreedomOfGround` fica registada como **estipulação definicional ◈**
+(`Stipulations.lean`, `Tag: META`), pelo precedente de `operatesAt_presencePlusObtaining`. Daí
+(C289, C290, C291, todos PROVEN):
+
+asietyFreedom_yields_trueChoice     : AsietyFreedomOfGround → GroundsEntity … → Asiety … → TrueChoice s p q
+asietyFreedom_yields_asietyFreeWill  : AsietyFreedomOfGround → GroundsEntity … → Asiety … → AsietyFreeWill s
+asietyFreeWill_yields_trueChoice     : AsietyFreeWill s → GroundsEntity … → TrueChoice s p q
+
+A última é a frase do autor — "`AsietyFreedom` dá origem à escolha verdadeira e à `AsietyFreeWill`" —
+lida na outra direcção. E a C290 é a outra metade dela: **"que é connosco partilhado pelo
+criador"**. C290 e a leitura do autor são **a mesma inferência**, e por isso há **uma** linha e
+não duas: dois nomes para a mesma proposição seriam uma proposição com dois C-id. O que se partilha
+é a **participação**, não a identidade — o sujeito não se torna o fundamento, e o fundamento não se
+torna escolhedor.
+
+**O preço da ponte é verificado pela máquina, não afirmado.** Os três contramodelos `{}`:
+
+C292 `asietyAloneDoesNotYieldTrueChoice` — a asieticidade numa testemunha **não** dá escolha
+   verdadeira em toda a parte: há um sujeito com asieticidade e, ao mesmo par, outro sem escolha
+   verdadeira. Logo o quantificador universal sobre sujeitos de `AsietyFreedomOfGround` trabalha a
+   sério, e a leitura **existencial** mais fraca — "a liberdade do fundamento é partilhada com
+   *alguém*" — seria uma estipulação estritamente mais barata que ainda entregaria C290. Fica
+   registada como contraparte, para que o preço da leitura forte seja visível e não suposto;
+C293 `frameContingencyDoesNotBindAPair` — a contingência do quadro **não** ata um par dado: o
+   facto global obtém-se e a contestedness per-par desse `p` falha. É porque `Incompatible` é de
+   nível `Prop` e `NecessarilyTrue` de nível `Form`, e Γ não tem ponte `Prop ↔ Form`, que
+   `TrueChoice ≡ Chooses` (C265) é **forçado** e não preguiçoso;
+C294 `rightWrongFactYieldsNoChooser` — o facto do autor, `Core.rightWrongDistinction :
+   ¬ N_T ∧ ¬ N_F` (`Core.lean:145`, `{}`), é um facto sobre **conteúdos**: não quantifica sobre
+   nenhum `Subject`. Logo é compatível com um vocabulário de significado em que **nenhum sujeito
+   significa nada alguma** (`S := Unit`, `M := fun _ _ => False`), e portanto **não há existência
+   axiomática de escolhedor**. O passo do partilhamento pelo Criador é por isso *condicional*, e a
+   sua metade existencial fica registada como não derivável em vez de afirmada; a metade
+   incondicional continua a ser a rota `AxTwoSubjects` (META) de C277–C279. Nota de forma: o
+   quantificador é `∃`, não `∀` — de `M s p` para `M` arbitrário não segue `False`, pelo que uma
+   forma universalmente quantificada teria sido **não-sólida** em vez de forte.
+
+**O que isto não faz, dito com as mesmas palavras.** Não torna o fundamento um escolhedor: C295
+(`groundIsNotASharerOfAsietyFreeWill`) preserva C285, e `AsietyFreedomOfGround` quantifica sobre
+*sujeitos* e diz que a liberdade do fundamento *lhes chega*. `AsietyFreedom` é uma característica do
+fundamento **enquanto fundamento**, e o fundamento continua canonicamente aseito mas não asiético
+(§30, C284). Não fecha o `?` do §14: L1 contorna-o. E não torna `TrueChoice` mais forte: C265 e
+C293 permanecem.
+
+**Sobre a frase "sem axiomas na cadeia".** Ela é honrada no único sentido em que pode ser honrada:
+L1 não tem nenhum, e L2 é uma **estipulação declarada e com preço**, que não toca o livro de
+axiomas. E é preciso dizer-se o porquê de isto ser mais do que uma tecnicalidade: porque
+`AsietyFreedomOfGround` é um `def` e não um `axiom`, **`#print axioms` não a vê** — a pegada
+reportada é `{Means, Subject}`, que é só vocabulário. Ou seja: **a invariante "a contagem não se
+moveu" não é, por si só, prova de que nada foi assumido.** Nenhuma ferramenta de contagem de
+axiomas apontará jamais esta ponte. O registo ◈ e o emblema no README são, por isso, carregantes e não
+decorativos: são o único sítio onde o preço é visível.
+
+Limites honestos de escopo (o que **não** se deve reclamar): (i) C287 é quase uma projecção, e
+dizê-lo é parte da linha, não uma atenuação dela; (ii) `AsietyFreedomOfGround` é uma `def`, logo
+invisível a toda a auditoria de axiomas — a sua legitimidade é inteiramente ◈; (iii) não há
+existência axiomática de escolhedor (C294), e o partilhamento pelo Criador é condicional;
+(iv) a premissa `GroundsEntity` é **vacua** em três das quatro transferências — mantida porque é a
+relação de fundamentação da própria biblioteca e nomeada como vacua (`_hG`) em vez de apagada em
+silêncio, para que a pegada não pareça profundidade; (v) a leitura universal (C289–C291) é
+estritamente mais forte que a existencial (C292), e nada aqui mostra que a mais forte seja a
+correcta. Nenhuma destas cinco coisas deve ser lida como resolvida por este lote.
+
+Ainda requer prova (o que falta, em termos formais): (a) qualquer derivação de
+`AsietyFreedomOfGround` a partir do vocabulário de fundamentação de Γ — bloqueada por (i)–(iii)
+acima, e a relação substantiva continua `BLOCKED` sob C228; (b) a existência de um sujeito
+asiético a partir de `¬ N_T ∧ ¬ N_F` sozinha — refutada por C294; (c) a passagem, par a par, de
+`ContestedContent` para `OpenAlternative p q` — bloqueada pela ausência de ponte `Prop ↔ Form`,
+e registrada por C293. Nenhum destes três é um `?` novo: são os mesmos três bloqueios, nomeados.
+Ver **§32**, que nomeia (a) e (b) como filas de fronteira F12 e F13 e **corrige o enquadramento de
+(iv)**: a vacuidade da premissa não é a doença a corrigir, é a prova de que uma relação de
+transferência de conteúdo não tem rota para uma escolha de conteúdos (C299, `{}`).
+
+32. O LADO DERIVADO NO MÁXIMO REAL, E AS DUAS OBRIGAÇÕES NOMEADAS
+
+(2026-09-26, correcção do lote ASIETY-FREEDOM. `formal/Logos/AsietyFreedom.lean`; GAPMAP nível
+19, C297–C300 + filas de fronteira F12/F13. **Zero axiomas novos** — o registo continua **25
+declarados** (VOCAB 14 / SEM 7 / META 4). Tudo o que se segue é **estritamente aditivo**: nenhuma
+afirmação anterior foi weakened, estreitada nem descargada.)
+
+**Correcção de 2026-09-26, registada antes do texto:** esta secção foi escrita com C297/C298
+descritos como "o lado derivado em plena força". **Isso era falso e foi retirado.** O máximo
+axiom-free é **C300**, mais forte que C297; o que se segue está corrigido. Ver
+`AsietyFreedom.md` §0.6.8.
+
+**O lado derivado, no máximo real — C300.** C300 (`weakChoice_yields_trueChoice :
+GenuineNormativity s p q → TrueChoice s p q`) é axiom-free, sem ◈, e entrega a escolha verdadeira
+**no par especificado**. É o máximo a partir da hipótese inicial do lote, e domina estritamente
+C297. **Quão pouco trabalho é:** `Chooses s p q := Means s p ∧ Means s q ∧ Incompatible p q`
+(`Choice.lean:116`) e `OpenAlternative p q := Incompatible p q ∧ ContestedContent`
+(`AsieticChoice.lean:132`), pelo que os dois campos de `GenuineNormativity` — `opposition :
+Incompatible p q ∧ (p ≠ q)` e `address : Means s p ∧ Means s q`
+(`IndubitableNormativeFreeWill.lean:72,78`) — são *literalmente* as duas conjonentes de `Chooses`; a
+única entrada que não está já em `h` é o facto de frame `{}` `ContestedContent`. Nem sequer se usa
+`p ≠ q`. Isto **aperta o §31** em vez de resgatar L1: o conteúdo axiom-free de L1 é que a hipótese
+*já contém* a escolha e que o mundo é contingente.
+
+O limite faz parte da linha, não é uma atenuação: é o par **dado**, não qualquer par incompatível. A
+afirmação do autor precisa de `TrueChoice s p q` a **todo** o par incompatível, e essa extensão é
+exactamente o que ◈ afirma. Daí uma consequência pior para a tese do que a formulação de C297
+sugeria: **◈ não compra a existência de um par — essa já era gratuitamente axiom-free — compra a
+extensão do par dado a todos os pares.** A estipulação está a pagar por menos do que se anunciava.
+
+**O mesmo limite, pela via de `Asiety` — C297/C298, mais fracas que C300.** C297
+(`asiety_yields_witnessed_trueChoice : Asiety (EntityOf s) → ∃ p q, TrueChoice s p q`) e C298
+(`asiety_yields_freeWill : Asiety (EntityOf s) → FreeWill s`) são axiom-free e sem ◈, mas
+**estritamente mais fracas que C300** como afirmações: C297 fecha o par existencialmente e perde
+*que* par era. O conteúdo é a própria unfolding de `Asiety` (`Asiety e := ∃ s, ∃ p q, e = EntityOf s
+∧ TrueChoice s p q`, `AsieticChoice.lean:147`); o único trabalho é a injectividade de `EntityOf`.
+**Mantidas, não apagadas** — apagar linhas do livro-razão seria, ele próprio, um enfraquecimento.
+Em qualquer caso C297/C298 **não substituem, não descargam e não suavizam** a estipulação;
+medem-na.
+
+**O preço, na forma mais forte disponível — e uma correcção de enquadramento.** C299
+(`groundingCannotDeliverTrueChoice`, `{}`) é a razão *machine-checked* de a ponte ser `BLOCKED` e
+não apenas não-afirmada, e é enunciada sobre **qualquer** relação de forma de **contenção**
+(`∀ v, M e v → M g v`), para não ser um artefacto da vacuidade de `LovesAsGround.lean:194`.
+**Limite de âmbito (correcção de 2026-09-26):** isto **não** exclui uma relação de *outra* forma —
+essa é exactamente a vocabulário em falta de F12(1), que continua **aberto**. O bloqueio é sério,
+não é permanente. O contramodelo **concede a premissa
+na íntegra** — um fundamento de capacidade de significado total (`∀ v, M g v`, que é exactamente o
+que ◈ `ofGround_meansAll` compra para `Entity.ofGround`) e a premissa de contenção **em todas as
+entidades** (`∀ e v, M e v → M g v`, `GroundsEntity` verbatim, logo válida também para o segundo
+sujeito `s₁`) — e ainda assim nega a conclusão **no mesmo par**, para um primeiro sujeito com
+asieticidade genuína.
+
+Isto **corrige o enquadramento do §31**. Lá a vacuidade foi registada como a doença e como algo a
+corrigir na raiz. A verdade é mais forte e mais simples: a vacuidade *não* é o defeito. O defeito é que
+uma relação de **transferência de conteúdo** não tem rota para uma **escolha de conteúdos** —
+transferir capacidade de significado nunca diz *que* conteúdos um sujeito significa, e é isso que
+entrega `TrueChoice`. Logo tornar a capacidade de significado do fundamento não-trivial **não
+repararia** a transferência: apenas tornaria uma premissa irrelevante menos obviamente irrelevante.
+A consequência prática é a mesma para o bloco, e melhor: não há versão da transferência, por mais
+forte que seja, quederive a ponte dentro deste vocabulário. Isto é o que a lista "ainda requer
+prova" passa a dizer, e é a formulação correcta.
+
+**As duas obrigações nomeadas.** (i) **F12** (`BLOCKED`) — a justificação que falta para ◈
+`asietyFreedom_ofGroundFreedom`, em duas metades: **(1) vocabulário em falta**, uma relação de
+fundamentação *substantiva* que ligue `Entity.ofGround` ao conteúdo normativo de um sujeito — Γ não
+declara nenhuma, porque `GroundsEntity` é vacua e `GroundsRightWrong` é definitionamente `∃ p q,
+Chooses s p q` (C168), ou seja já é livre-arbítrio e usá-la como antecedente seria circular; e a
+relação substantiva continua `BLOCKED` sob C228, com a sua lemma nomeada verbatim. **(2) derivação
+em falta**, de tal relação mais `Asiety (EntityOf s)` para `TrueChoice s p q` a todo o par
+incompatível — e C299 é a refutação machine-checked de que isto não se descarrega de uma premissa da
+forma de `GroundsEntity`. (ii) **F13** (`BLOCKED`, e **refutado como derivável**, não apenas
+aberto) — a afirmação existencial do partilhamento, agora com nome próprio:
+`AsietyFreedom.groundFreedomSharedWithSomeone : Prop := ∃ (s : Subject), AsietyFreeWill s`, pelo
+precedente de F11. A refutação é C294: `¬ N_T ∧ ¬ N_F` é um facto sobre conteúdos, não quantifica
+sobre nenhum `Subject`, e é compatível com um vocabulário em que nenhum sujeito significa nada.
+
+Assim, o corpus passa a trazer **as duas coisas ao mesmo tempo** sobre a ponte: ◈ (escolhemos
+afirmá-la) **e** `BLOCKED` (não a conseguimos justificar), com C299 a tornar a segunda
+machine-checked em vez de asserted. E o resultado negativo mais forte do lote deixou de ser uma nota
+de rodapé dentro de um módulo: passou a ser uma linha de fronteira citável.
+
+Ainda requer prova (o que falta, em termos formais): (a) qualquer derivação de
+`AsietyFreedomOfGround` a partir do vocabulário de fundamentação de Γ — **F12**, e agora com a
+forma exacta: uma relação de fundamentação substantiva que não seja nem vacua nem circular (o
+vocabulário), mais a derivação da extensão a todo o par (a derivação), com **C299** a mostrar que
+nenhuma premissa da forma de `GroundsEntity` chega lá; (b) a existência de um sujeito que partilhe a
+liberdade — **F13**, refutada como derivável por C294, e a rota incondicional continua `AxTwoSubjects`
+(META) de C277–C279; (c) a passagem, par a par, de `ContestedContent` para `OpenAlternative p q` —
+bloqueada pela ausência de ponte `Prop ↔ Form`, e registrada por C293. Nenhum destes é um `?` novo:
+são os mesmos três bloqueios de §31, agora **nomeados, machine-checked onde é possível, e com o
+enquadramento da premissa de fundamentação corrigido**.

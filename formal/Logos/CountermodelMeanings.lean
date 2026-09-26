@@ -63,7 +63,7 @@ def PersonNotNecessary_refutes : String :=
   "A person need not be a necessary subject: `Person → NecessarySubject` fails as a logical law (subject exists only in the `true` world)."
 
 def PersonNotNecessary_survives : String :=
-  "Person-persistence is definitional (esse est agere, `AxPersonStability`), and `Love.no_contingent_person` shows the concrete refutation cannot exist in Γ."
+  "Person-persistence is definitional (esse est agere, `AxPersonStability`), and `PersonStabilityPrinciple` (`Love.lean:97`) shows the concrete refutation cannot exist — conditional on adopting that principle, which Γ never assumes; within Γ the countermodel stands."
 
 -- CountermodelVeridicalMeaning (veridical meaning vs. the choice frontier)
 
