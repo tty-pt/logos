@@ -423,7 +423,7 @@ At most, the foundation is the **source of value** in the broad sense of normati
 
 **Status in the prose:** Explicitly disclaimed.
 
-**Formal status: ❌ not established (agrees with the prose disclaimer).** `Omniscience_AllTruths` / `Omniscience_Counterfactuals` (`formal/Logos/DeepModalFrontier.lean:313` / `:317`, `{}`) are frontier vocabulary definitions, not theorems; generated `README.md` corroborates "Omniscience ❌ NOT ESTABLISHED".
+**Formal status: 🟡 partially established — the weak foundational sense is PROVEN; the classical sense is machine-checked as refuted for the ground.** `formal/Logos/DivineOmniscience.lean` proves *foundational* omniscience for `Entity.ofGround` (C233–C240, all vocabulary-only, 0 substantive axioms): no true proposition and no state of affairs true in any world is closed to the ground's scope (`ofGround_truth_exhaustive`, `ofGround_world_truth_exhaustive`, `{Means, Subject}`), atoms and discriminating subjects are excluded from that scope, and the master synthesis is `ofGround_foundational_omniscience` (`{Means, Subject}`). The *strong* (infallible, "all and only truths") sense is **not merely unproven but refuted** for the ground: `ofGround_not_truth_tracking` (`{Means, Subject}`) proves `¬ TruthTracking Entity.ofGround`, since the ground's scope bears every proposition (`EntityMeans .ofGround p` reduces to `True`). The counterfactual sense is independent (`exhaustive_scope_without_counterfactual_knowledge`, `{}`). Ordinary omniscience remains out of reach: Γ has no `Knows` predicate, `DeepModalFrontier`'s `Omniscience_AllTruths` / `Omniscience_Counterfactuals` remain frontier vocabulary definitions, and `Entity.ofGround` is not a subject correlate (`ofGround_ne_ofSubject`). The prose disclaimer therefore **agrees** with the kernel: see `theorems/T26.txt` and `formal/GAPMAP.md` Level 16.
 
 ### Boundary of the argument
 
@@ -437,6 +437,7 @@ No classical omniscience argument is supplied. Knowledge of all truth does not f
 
 - To derive omniscience, one would need a bridge from normativity to knowledge and a proof that the foundation possesses unrestricted knowledge.
 - The text explicitly draws the boundary against such an inference (`README-OLD.md:263`).
+- Machine-checked consequence: the kernel now *refutes* the exclusive half of the classical sense for the canonical ground (C236), so the remaining gap is not "the proof is missing" but "the vocabulary must change" — a knowledge predicate (`Knows`) is required before any omniscience claim can even be stated, let alone proved.
 
 ## 15. Omnipotence
 

@@ -1,0 +1,134 @@
+T26 — ONISCIÊNCIA FUNDACIONAL E EXAUSTIVIDADE VERITATIVA DO FUNDAMENTO DA REALIDADE
+
+Depende de: `formal/Logos/DivineOmniscience.lean`, formalizando a característica
+clássica fundacional da onisciência — o fundamento como condição de toda a verdade
+(Tomás de Aquino ST I q. 14 a. 1, *De differentia Dei a creaturis*, onde o
+fundamento é a condição de toda a verdade; README-OLD.md §263; CHARACTERISTICS.md §14;
+CHARS.md §14) para o fundamento da realidade `Entity.ofGround`.
+
+Verificado em: `formal/Logos/DivineOmniscience.lean`; auditoria `#print axioms`
+em `:253-261`; `formal/GAPMAP.md` C233–C240; `base.txt` §28.
+
+C233 — Contramodelo de independência metateórica (exaustividade ≠ infalibilidade):
+
+```lean
+theorem entity_scope_exhaustiveness_is_not_infallibility :
+    ∃ (Ent : Type) (Scope Fails : Ent → Prop),
+      (∀ e : Ent, Scope e) ∧ (∃ e : Ent, Scope e ∧ Fails e)
+```
+
+Pegada auditada: `{}` (lógica pura). Um âmbito pode ser exaustivo sobre toda a
+proposição verdadeira e, ainda assim, não rastrear a verdade exactamente: a
+exaustividade do âmbito e a infalibilidade são independentes.
+
+C234 — Onisciência fundacional do fundamento (exaustividade veritativa):
+
+```lean
+theorem ofGround_truth_exhaustive : TruthExhaustive Entity.ofGround
+```
+
+com `TruthExhaustive e := ∀ p : Prop, T p → EntityMeans e p`.
+
+Pegada auditada: `{Means, Subject}` (apenas vocabulário). Nenhuma proposição
+verdadeira está fora do âmbito do fundamento: o fundamento é a condição de toda a
+verdade, no sentido de ST I q. 14 a. 1.
+
+C235 — Exaustividade indexada por mundo:
+
+```lean
+theorem ofGround_world_truth_exhaustive :
+    WorldTruthExhaustive Entity.ofGround
+```
+
+Pegada auditada: `{Means, Subject}` (apenas vocabulário). Nenhum estado de affairs
+verdadeiro em qualquer mundo possível está fora do âmbito do fundamento.
+
+C236 — Refutação do sentido forte (infalibilidade) para o fundamento canónico:
+
+```lean
+theorem ofGround_not_truth_tracking : ¬ TruthTracking Entity.ofGround
+```
+
+Pegada auditada: `{Means, Subject}` (apenas vocabulário). `EntityMeans (Entity.ofGround) p`
+reduz-se a `True` pelo braço de padrão do construtor (estipulação ◈ `ofGround_meansAll`),
+pelo que o âmbito do fundamento suporta *toda* a proposição, incluindo `False`. Logo a
+metade exclusiva do sentido clássico (`EntityMeans e p → T p`) é **falsa** do
+fundamento em Γ: o âmbito é exaustivo e provadamente não é isento de erro. A leitura
+clássica "todas e apenas as verdadeiras" não fica apenas por provar — é refutada.
+
+C237 — Exclusão de átomos mundanos:
+
+```lean
+theorem atom_not_truth_exhaustive (n : Nat) :
+    ¬ TruthExhaustive (Entity.ofAtom n)
+```
+
+Pegada auditada: `{Means, Subject}` (apenas vocabulário). Nenhum átomo mundano
+suporta sequer uma proposição verdadeira (testemunha `p := True`); nenhum átomo é
+exaustivamente veritativo.
+
+C238 — Exclusão de sujeitos discriminadores:
+
+```lean
+theorem discriminating_subject_not_truth_exhaustive
+    (s : Subject) (hDisc : ∃ p : Prop, T p ∧ ¬ Means s p) :
+    ¬ TruthExhaustive (EntityOf s)
+```
+
+Pegada auditada: `{Means, Subject}` (apenas vocabulário). Qualquer sujeito que não
+signifique uma proposição *verdadeira* não é exaustivamente veritativo — essa
+proposição verdadeira é a testemunha contra a exaustividade.
+
+C239 — Onisciência Fundacional do Fundamento da Realidade (Síntese Mestre):
+
+```lean
+theorem ofGround_foundational_omniscience :
+    FoundationalOmniscience Entity.ofGround
+```
+
+Pegada auditada: `{Means, Subject}` (0 axiomas substantivos). Confunde: (1) âmbito
+exaustivamente veritativo (C234); (2) o mesmo indexado por mundo (C235); (3) âmbito
+indiviso (reutilizado de `DivineSimplicity`, `ofGround_undivided_meaning`); (4)
+**refutação da infalibilidade como campo do registo** (C236) — o limite é parte do
+registo, não uma nota de rodapé; (5) fundamentação modal universal (reutilizada de
+`FoundationalOmnipresence`, `ofGround_universal_modal_ground`).
+
+C240 — Contramodelo: a onisciência de contrafactuais não é forcada:
+
+```lean
+theorem exhaustive_scope_without_counterfactual_knowledge :
+    ∃ (W S : Type) (Scope : S → Prop) (K : W → S → (W → Prop) → Prop) (s : S),
+      Scope s ∧ ¬ Omniscience_Counterfactuals W S K s
+```
+
+Pegada auditada: `{}` (lógica pura). Um âmbito exaustivo pode falhar o predicado
+contrafactual da fronteira (`DeepModalFrontier.Omniscience_Counterfactuals`): nada
+em Γ força o sentido contrafactual a partir do sentido fundacional.
+
+Teoremas canónicos associados:
+
+1. Princípio tomista de escopo e fundamentação (`necessity_and_scope_yield_foundational_omniscience`,
+   `{Means, Subject}`):
+   Qualquer entidade necessária, de âmbito máximo, de âmbito indiviso e de fundamentação
+   modal universal satisfaz a Onisciência Fundacional — e o seu âmbito é genericamente
+   não isento de erro (a partir de `hMax False`).
+
+2. Exclusão exaustiva dos candidatos mundanos (`atom_not_truth_exhaustive`,
+   `discriminating_subject_not_truth_exhaustive`, `{Means, Subject}`):
+   Estados atómicos mundanos e sujeitos discriminadores não são exaustivamente
+   veritativos; `Entity.ofGround` é o único candidato no inventário ontológico de Γ.
+
+3. Demarcações honestas (`entity_scope_exhaustiveness_is_not_infallibility` e
+   `exhaustive_scope_without_counterfactual_knowledge`, ambos `{}`):
+   A exaustividade de âmbito não é infalibilidade, e não é conhecimento contrafactual.
+
+Limites honestos de escopo:
+A demonstração estabelece a Onisciência Fundacional de `Entity.ofGround` no sentido
+metafísico clássico fraco — o fundamento como condição de toda a verdade, com âmbito
+exaustivo em todos os mundos, e com a refutação expressa da infalibilidade. Γ não
+possui predicado `Knows`: as relações de conhecimento da fronteira (`KnowsAt`,
+`KnowsCounterfactualAt`) são definições de vocabulário, e `Entity.ofGround` não é
+correlato de sujeito algum (`ofGround_ne_ofSubject`, `NecessityEternity.lean:155`).
+A onisciência clássica/ordinária permanece explicitamente desmentida na prosa
+(`README-OLD.md:263`): nenhuma ponte de conhecimento divino é manufacturada, e o
+sentido forte é refutado — não apenas omitido.

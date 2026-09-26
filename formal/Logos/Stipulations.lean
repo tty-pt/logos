@@ -63,7 +63,7 @@ def ofGround_meansAll : Stipulation where
   anchor := "Entity.ofGround => True"
   tag := StipulationTag.VOCAB
   cost := "Meaning-everything stipulated by match arm (duplicated at NecessaryPersonalGround.lean:155): grounding theorems about ofGround unfold this True."
-  dependents := ["ofGround_ground_of_reality", "ofGround_undivided_meaning", "ofGround_necessary_ground_of_reality"]
+  dependents := ["ofGround_ground_of_reality", "ofGround_undivided_meaning", "ofGround_necessary_ground_of_reality", "ofGround_truth_exhaustive", "ofGround_world_truth_exhaustive", "ofGround_not_truth_tracking", "ofGround_foundational_omniscience"]
 
 /-- Tag: VOCAB
 Indivisibility of the ground: `HasInternalComponent .ofGround := False`.

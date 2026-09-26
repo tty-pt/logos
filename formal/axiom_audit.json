@@ -3396,6 +3396,76 @@
   "Logos.Agency.State",
   "Logos.Agency.Subject"
  ],
+ "Logos.DivineOmniscience.FoundationalOmniscience.casesOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.FoundationalOmniscience.not_truth_tracking": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.FoundationalOmniscience.recOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.FoundationalOmniscience.truth_exhaustive": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.FoundationalOmniscience.undivided_scope": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.FoundationalOmniscience.universal_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.FoundationalOmniscience.world_truth_exhaustive": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.TruthExhaustive": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.TruthTracking": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.WorldTruthExhaustive": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.atom_not_truth_exhaustive": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.discriminating_subject_not_truth_exhaustive": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.entity_scope_exhaustiveness_is_not_infallibility": [],
+ "Logos.DivineOmniscience.exhaustive_scope_without_counterfactual_knowledge": [],
+ "Logos.DivineOmniscience.necessity_and_scope_yield_foundational_omniscience": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.ofGround_foundational_omniscience": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.ofGround_not_truth_tracking": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.ofGround_truth_exhaustive": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineOmniscience.ofGround_world_truth_exhaustive": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.DivinePureActuality.DivinePureActuality.casesOn": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",

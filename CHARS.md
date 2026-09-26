@@ -262,9 +262,10 @@ exact ⟨greatResult, noBothTrueAndFalse⟩
 
 ### 14. Omniscience
 
-- **Current status:** only frontier definitions in `formal/Logos/DeepModalFrontier.lean:313-317`; no theorem.
-- **Next work:** would require a knowledge predicate, a relation from normativity/truth to knowledge, and an unrestricted-knowledge premise.
-- **Recommendation:** retain the explicit prose disclaimer; do not manufacture a divine knowledge bridge.
+- **Completed live layer:** `formal/Logos/DivineOmniscience.lean` proves the *weak foundational* sense for `Entity.ofGround` (C233–C240, vocabulary-only, 0 substantive axioms): truth-exhaustive scope (`ofGround_truth_exhaustive`, `{Means, Subject}`), the same world-indexed (`ofGround_world_truth_exhaustive`, `{Means, Subject}`), atoms and discriminating subjects excluded (`atom_not_truth_exhaustive`, `discriminating_subject_not_truth_exhaustive`, `{Means, Subject}`), and the master synthesis `ofGround_foundational_omniscience` (`{Means, Subject}`).
+- **The strong sense is refuted, not open:** `ofGround_not_truth_tracking` (`{Means, Subject}`) proves `¬ TruthTracking Entity.ofGround` — because the ground's scope reduces to `True`, the exclusive half of "all and only truths" is false of the ground in Γ. The refutation is carried as a *field* of `FoundationalOmniscience`, so the boundary is part of the record.
+- **Honest boundary:** the counterfactual sense is independent (`exhaustive_scope_without_counterfactual_knowledge`, `{}`); the scope/infallibility separation is metatheoretic (`entity_scope_exhaustiveness_is_not_infallibility`, `{}`).
+- **Do not claim:** ordinary/classical omniscience. Γ has no `Knows` predicate; `KnowsAt` / `KnowsCounterfactualAt` are generic vocabulary definitions and `Entity.ofGround` is not a subject correlate (`ofGround_ne_ofSubject`). Retain the explicit prose disclaimer (`README-OLD.md:263`); do not manufacture a divine knowledge bridge. See `theorems/T26.txt`.
 
 ### 15. Omnipotence
 

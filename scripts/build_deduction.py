@@ -5002,14 +5002,61 @@ CLASSICAL_ATTRIBUTES = [
                   "work are not derived and are explicitly demarcated (`pure_actuality_independent_of_physical_energy`, `{}`)."),
     },
     {
-        "attribute": "**Omniscience**",
+        "attribute": "**Foundational omniscience** (truth-exhaustive scope — the condition of all truth)",
+        "scope": "Divine Being / Ground",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.DivineOmniscience.ofGround_foundational_omniscience"}],
+        "refs": ["Logos.DivineOmniscience.ofGround_truth_exhaustive",
+                 "Logos.DivineOmniscience.ofGround_world_truth_exhaustive",
+                 "Logos.DivineOmniscience.atom_not_truth_exhaustive",
+                 "Logos.DivineOmniscience.discriminating_subject_not_truth_exhaustive",
+                 "Logos.DivineOmniscience.necessity_and_scope_yield_foundational_omniscience",
+                 "Logos.DivineOmniscience.entity_scope_exhaustiveness_is_not_infallibility",
+                 "Logos.DivineOmniscience.exhaustive_scope_without_counterfactual_knowledge"],
+        "sense": ("In `DivineOmniscience.lean` (footprint `{Means, Subject}` — VOCAB only), "
+                  "`ofGround_foundational_omniscience` establishes the weak classical sense of "
+                  "omniscience for `Entity.ofGround` (the ground as the condition of all truth, "
+                  "Aquinas *ST* I, q. 14, a. 1) with 0 substantive axioms: "
+                  "(1) Truth-exhaustive scope (`ofGround_truth_exhaustive`, `{Means, Subject}`: no true "
+                  "proposition is closed to the ground's scope); "
+                  "(2) World-indexed exhaustiveness (`ofGround_world_truth_exhaustive`, `{Means, Subject}`: "
+                  "no state of affairs true in any world is out of scope); "
+                  "(3) Exhaustive exclusion of worldly atoms (`atom_not_truth_exhaustive`, `{Means, Subject}`) "
+                  "and of discriminating subjects (`discriminating_subject_not_truth_exhaustive`, "
+                  "`{Means, Subject}`), leaving `Entity.ofGround` the sole candidate in the Γ inventory; "
+                  "(4) Undivided scope (reused `ofGround_undivided_meaning`) and universal modal grounding "
+                  "(reused `ofGround_universal_modal_ground`). "
+                  "Honest boundary: the *refutation* of infallibility is carried as a field of the record, not "
+                  "as a remark — see the next row."),
+    },
+    {
+        "attribute": "**Infallible / counterfactual omniscience** (\"all and only truths\", ordinary knowledge of all truth)",
         "scope": "Divine Being / Ground",
         "expected": "ABSENT",
-        "checks": [{"type": "absent", "fragments": ["omnisci"], "allow": []}],
-        "refs": ["Logos.DeepModalFrontier.Omniscience_AllTruths",
+        "checks": [{"type": "absent",
+                    "fragments": ["infallible_omniscience", "infallible_knowledge",
+                                  "counterfactual_omniscience", "error_free_knowledge",
+                                  "unrestricted_knowledge"],
+                    "allow": []}],
+        "refs": ["Logos.DivineOmniscience.ofGround_not_truth_tracking",
+                 "Logos.DivineOmniscience.exhaustive_scope_without_counterfactual_knowledge",
+                 "Logos.DeepModalFrontier.Omniscience_AllTruths",
                  "Logos.DeepModalFrontier.Omniscience_Counterfactuals"],
-        "sense": ("`Omniscience_AllTruths` / `Omniscience_Counterfactuals` "
-                  "(`DeepModalFrontier`) are frontier vocabulary definitions, not theorems."),
+        "sense": ("The strong sense is not merely unproven but **refuted** for the canonical ground: "
+                  "`ofGround_not_truth_tracking` (`{Means, Subject}`) proves `¬ TruthTracking Entity.ofGround`, "
+                  "because `EntityMeans (Entity.ofGround) p` reduces to `True` (definitional stipulation "
+                  "◈ `ofGround_meansAll`), so the ground's scope bears every proposition — including `False` — "
+                  "and the exclusive half `EntityMeans e p → T p` is false of it; the scope is exhaustive and "
+                  "provably not error-free. Metatheoretically the two halves are independent "
+                  "(`entity_scope_exhaustiveness_is_not_infallibility`, `{}`), and the counterfactual sense is "
+                  "not forced by the foundational one "
+                  "(`exhaustive_scope_without_counterfactual_knowledge`, `{}`). Ordinary/classical omniscience "
+                  "stays out of reach: Γ has no `Knows` predicate, `Omniscience_AllTruths` / "
+                  "`Omniscience_Counterfactuals` (`DeepModalFrontier`) remain frontier vocabulary definitions, "
+                  "and `Entity.ofGround` is not a subject correlate (`ofGround_ne_ofSubject`) — the prose "
+                  "disclaimer (`README-OLD.md:263`; `CHARS.md` §14) is preserved, no divine knowledge bridge "
+                  "is manufactured."),
     },
     {
         "attribute": "**Omnipotence**",
@@ -5194,10 +5241,13 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("of a necessary normative/truth order, and (entity-level) that a **necessary Divine Being")
     ap("/ Ground** exists — world-rigid, **everlasting**, **atemporal**, with **Canonical Aseity**,")
     ap("**Divine Simplicity**, **Divine Immutability**, **Foundational Omnipresence** (sustaining all")
-    ap("beings across modal reality), **Foundational Unicity**, and **Divine Pure Actuality** (*Actus Purus*).")
+    ap("beings across modal reality), **Foundational Unicity**, **Divine Pure Actuality** (*Actus Purus*),")
+    ap("and **Foundational Omniscience** (a truth-exhaustive scope in every world, whose infallible half is")
+    ap("machine-checked as *refuted* for the ground).")
     ap("Crucially, the theory **strictly separates** these machine-verified")
     ap("foundational/functional attributes from their unproven physical, psychological, and scholastic counterparts:")
-    ap("**physical/spatial omnipresence**, **psychological personality**, **scholastic simplicity**, and")
+    ap("**physical/spatial omnipresence**, **psychological personality**, **scholastic simplicity**,")
+    ap("**infallible or counterfactual omniscience**, and")
     ap("**psychological impassibility** remain separate targets (❌ NOT ESTABLISHED or 🔴 INDEPENDENT).")
     ap("The remaining divine attributes — **unity / monotheism**,")
     ap("**perfect moral goodness** (the moral pole itself now obtains under the single declared "

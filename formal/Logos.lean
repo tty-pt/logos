@@ -87,3 +87,5 @@ import Logos.FoundationalOmnipresence
 import Logos.FoundationalUnicity
 -- Classical divine pure actuality and perfection.
 import Logos.DivinePureActuality
+-- Classical foundational omniscience and truth-exhaustiveness.
+import Logos.DivineOmniscience

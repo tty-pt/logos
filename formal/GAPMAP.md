@@ -1070,9 +1070,12 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     ledger status is COUNTERMODEL — the separation, not a PROVEN step — so it is
     not counted in this bucket. C226/C227 are the two `{}`-footprint
     personhood-separation results of the 2026-09-25 refactor; C231 is the
-    `{}`-footprint *irreducibility* result that closes that batch.)
+    `{}`-footprint *irreducibility* result that closes that batch. C233 and C240
+    are likewise `{}` with COUNTERMODEL status — the scope/infallibility and
+    scope/counterfactual-knowledge separations of the 2026-09-26
+    foundational-omniscience batch — so they stay out of this bucket too.)
   - **9 `CL`-only**: C3, C10, C12, C13, C14, C16, C37, C59, C93.
-  - **107 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+  - **113 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
     C102, C103, C104, C105, C91, C58, C68, C21, C23, C24, C25, C30, C83, C84,
     C107, C160, C161, F1a, C94, C186, C39, C49, C51, C52, C53, C55, C56, C57, C62,
     C101, C97, C98, C99, C100, C85, C86, C113, C114, C116, C120, C121, C122, C137,
@@ -1080,12 +1083,19 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     C163, C168, C169, C170, C171, C221, C222, C223, C224, C225, C229, C230, C232,
     C147, C148, C149, C150, C151, C152, C153, C172, C173, C174, C176, C189, C190,
     C191, C193, C194, C195, C196, C198, C199, C200, C201, C203, C204, C205, C206,
-    C207, C208, C209, C210, C211, C213, C215, C216, C217, C218, C219, C220.
+    C207, C208, C209, C210, C211, C213, C215, C216, C217, C218, C219, C220, C234,
+    C235, C236, C237, C238, C239.
     C221–C225 are the five new priced personhood/grounding theorems of the
     2026-09-25 refactor (C223 is the definitional free-will route; C221/C222/
     C224/C225 carry the declared VOCAB law `will_individuation`). C229/C230/C232
     are the 2026-09-26 price-localization batch: C229 and C232's free half cost
     nothing, C230 *characterizes* the individuation price without paying it.
+    C234–C239 are the 2026-09-26 foundational-omniscience batch (truth-exhaustive
+    and world-indexed exhaustive scope, the *refutation* of infallibility for the
+    ground, the exclusion of atoms and discriminating subjects, and the master
+    synthesis) — all `{Means, Subject}`, i.e. vocabulary only; the cost of the
+    scope is the declared VOCAB `Means` and the pure-sort `Subject`, exactly as
+    for `ofGround_maximal_capacity`.
     F1a is the choice-**field** existence form (resolves to a kernel step;
     renamed 2026-09-18 — the genuine-choice form is BLOCKED on `rejectedHornCoMeant`).
   - **C91** — vocab-only (`{Subject}`); hostile separations `{}`. C92 (the
@@ -1809,3 +1819,34 @@ camada interpretativa, não consequência kernel.
 
 
 
+## Level 16 — Classical Foundational Omniscience & Truth-Exhaustiveness (`Logos.DivineOmniscience`)
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C233 | §28/CHARACTERISTICS | `DivineOmniscience.entity_scope_exhaustiveness_is_not_infallibility : ∃ (Ent : Type) (Scope Fails : Ent → Prop), (∀ e, Scope e) ∧ (∃ e, Scope e ∧ Fails e)` — a scope can be exhaustive over every true proposition and yet fail to track truth exactly: exhaustiveness and infallibility are independent | COUNTERMODEL | `{}` |
+| C234 | §28/CHARACTERISTICS | `DivineOmniscience.ofGround_truth_exhaustive : TruthExhaustive Entity.ofGround` — no true proposition is closed to the ground's scope (`∀ p, T p → EntityMeans .ofGround p`); the ground is the condition of all truth (Aquinas ST I q. 14 a. 1) | PROVEN | `{Means, Subject}` |
+| C235 | §28/CHARACTERISTICS | `DivineOmniscience.ofGround_world_truth_exhaustive : WorldTruthExhaustive Entity.ofGround` — the same exhaustiveness world-indexed: no state of affairs true in any possible world is closed to the ground's scope | PROVEN | `{Means, Subject}` |
+| C236 | §28/CHARACTERISTICS | `DivineOmniscience.ofGround_not_truth_tracking : ¬ TruthTracking Entity.ofGround` — **the strong (infallible) sense is refuted for the canonical ground**: its scope bears every proposition (`p := False` witness), so `EntityMeans e p → T p` is false of `Entity.ofGround`; the scope is exhaustive and provably not error-free | PROVEN | `{Means, Subject}` |
+| C237 | §28/CHARACTERISTICS | `DivineOmniscience.atom_not_truth_exhaustive : (n : Nat) → ¬ TruthExhaustive (Entity.ofAtom n)` — no worldly atom bears even one true proposition (`p := True` witness), so no atom is truth-exhaustive | PROVEN | `{Means, Subject}` |
+| C238 | §28/CHARACTERISTICS | `DivineOmniscience.discriminating_subject_not_truth_exhaustive : (s : Subject) → (∃ p, T p ∧ ¬ Means s p) → ¬ TruthExhaustive (EntityOf s)` — any subject failing to mean a *true* proposition is not truth-exhaustive, that true proposition being the witness | PROVEN | `{Means, Subject}` |
+| C239 | §28/CHARACTERISTICS | `DivineOmniscience.ofGround_foundational_omniscience : FoundationalOmniscience Entity.ofGround` — **master synthesis**: truth-exhaustive scope, world-indexed exhaustiveness, undivided scope (`DivineSimplicity`), the *refutation* of infallibility as a carried field, and universal modal grounding (`FoundationalOmnipresence`) | PROVEN | `{Means, Subject}` |
+| C240 | §28/CHARACTERISTICS | `DivineOmniscience.exhaustive_scope_without_counterfactual_knowledge : ∃ (W S : Type) (Scope : S → Prop) (K : W → S → (W → Prop) → Prop) (s : S), Scope s ∧ ¬ Omniscience_Counterfactuals W S K s` — countermodel: exhaustive scope does not force the frontier's counterfactual-knowledge predicate, so the counterfactual sense of omniscience is independent of the foundational sense | COUNTERMODEL | `{}` |
+
+> Batch FOUNDATIONAL-OMNISCIENCE (2026-09-26): C233 is a machine-checked separation model showing that
+> scope-exhaustiveness and infallibility are independent (`entity_scope_exhaustiveness_is_not_infallibility`, `{}`).
+> C234 proves the foundational sense itself for `Entity.ofGround` (`ofGround_truth_exhaustive`, `{Means, Subject}`:
+> no true proposition is closed to the ground's scope) and C235 proves it world-indexed
+> (`ofGround_world_truth_exhaustive`, `{Means, Subject}`). C236 **refutes the strong classical sense for the canonical
+> ground** (`ofGround_not_truth_tracking`, `{Means, Subject}`): since `EntityMeans .ofGround p` reduces to `True`,
+> the exclusive half `EntityMeans e p → T p` is false of the ground — the classical "all and only truths" reading is
+> not merely unproven in Γ but refuted. C237/C238 exclude worldly atoms and discriminating subjects from
+> truth-exhaustive scope (`{Means, Subject}`), so `Entity.ofGround` is the sole candidate in the Γ inventory.
+> C239 provides the master synthesis (`ofGround_foundational_omniscience`, `{Means, Subject}`) — 0 substantive axioms,
+> with the refutation of infallibility carried as a **field** of the record rather than a remark. C240 shows the
+> counterfactual sense is not forced by the foundational one (`{}`), against `DeepModalFrontier`'s
+> `Omniscience_Counterfactuals`. Companion principle: `necessity_and_scope_yield_foundational_omniscience`
+> (`{Means, Subject}`) — necessary existence, exhaustive scope, undivided scope and universal grounding concede
+> Foundational Omniscience, and generically concede non-infallibility. **Ordinary/classical omniscience remains
+> disclaimed** (`README-OLD.md:263`; `CHARS.md` §14): Γ has no `Knows` predicate, the frontier's knowledge relations
+> are vocabulary definitions, and `Entity.ofGround` is not a subject correlate
+> (`ofGround_ne_ofSubject`, `NecessityEternity.lean:155`), so no divine knowledge bridge is manufactured.
