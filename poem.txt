@@ -76,6 +76,35 @@ declarada (só SEM/META).
   (`Choice.rightWrong_implies_someone_means`) e
   `Order.rightWrongDistinction_implies_meaning`, `CL`
   — sem axioma substantivo.
+  **Contrapartida (2026-09-27, lote MEANING-RETORSION):** a negação desta
+  linha — "não há significado", `base.txt` §26 item 3 — está agora enunciada no
+  vocabulário do verso como `NoMeaning := ¬ ∃ p, Meaning_I p` (C368) e refutada
+  **como posição**, em quatro degraus, o último deles incondicional e sem axiomas
+  novos: C371 (não pode ser significada), C372 (não pode ser actualizada),
+  C373 (não pode ser julgada correcta), C375 (**`¬ ∃ s, Asserts s NoMeaning`** —
+  "afirmar que não há significado é provar a invalidade da propria afirmação",
+  C377 na forma positiva: afirmar a tese produz uma instância de `Meaning_I`).
+  **O verso não muda e a tese não é declarada falsa quanto ao conteúdo:** C382
+  (`{}`) é um mundo populado onde "não há significado" é verdadeiro e inafirmável.
+  O que o lote elimina é a tese *enquanto resposta*, não a sua consistência.
+  **Verbos (2026-09-27):** a contradição performativa é contra a afirmação
+  *bem-sucedida*, não contra o acto de dizer. C375 exclui
+  `∃ s, Asserts s NoMeaning` — e `Asserts s p` é `Act s p ∧ p`; nenhum `assert`
+  em Γ dispensa o `∧ p`. O desempenho sem condição de sucesso passou a ter
+  nome: `Voices s p := act s p` (C384, `{Subject, act}`), e C385
+  (`the_thesis_is_utterable_though_not_assertable`, `{}`) é o mundo onde a tese
+  é **dita** — sujeito `Unit`, nada significado, a tese verdadeira — e ainda
+  assim nenhuma afirmação sua que funcione. C377 foi generalizado para
+  `∃ s, Act s NoMeaning` (o caso `Asserts` fica como caso particular; C372
+  continua a excluir a hipótese). **A retorsão não precisa de saber quem fala:**
+  `Voices` e `Act` quantificam sobre todos os sujeitos, logo quem quer que faça a
+  performance da tese refuta-a ao fazê-la — a contradição performativa é independente
+  de quem fala, e nenhum axiom precisa identificar quem fala em linguagem natural com
+  um `Subject` para a correr. *Nota (2026-09-27, corrigida):* isto estava registado
+  como *limite registado* à espera de um 27.º axiom; a moldura estava errada e é
+  retirada. `Subject` continua uma espécie sem interpretação e `()` a testemunha,
+  pelo que Γ não consegue *nomear* o sujeito do modelo — e nada na retorsão precisa
+  que o nomeie.
 - L20 (P4): "para haver alguém é preciso haver escolha" → PROVEN como CAMPO (escolha fraca: alternativas incompatíveis presentes)
   ✔: C51 (`person_hasChoiceField`, `{Means, Subject}`; reparação 2026-09-18 —
   é o campo de escolha `ChoiceField`, não a escolha genuína `Chooses`). A escolha genuína / forte

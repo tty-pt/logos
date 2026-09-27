@@ -3157,6 +3157,13 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.CosmicExistence.cosmos_presence_model_of_the_act_datum": [
+  "propext",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
  "Logos.CosmicExistence.gamma_exhibits_a_meaning_subject": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
@@ -3197,6 +3204,15 @@
   "Logos.LovesAsGround.AxGroundLovesContingentRealm",
   "Logos.LovesAsGround.GroundBearsGood",
   "Logos.Value.AxTwoSubjects"
+ ],
+ "Logos.CosmicExistence.the_ground_loves_the_cosmos_from_the_act_datum": [
+  "propext",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.AxGroundLovesContingentRealm",
+  "Logos.LovesAsGround.GroundBearsGood"
  ],
  "Logos.CosmicExistence.the_ground_loves_the_cosmos_in_a_context": [
   "propext",
@@ -6158,6 +6174,75 @@
   "Logos.LovesAsGround.AxGroundLovesContingentRealm",
   "Logos.LovesAsGround.GroundBearsGood"
  ],
+ "Logos.MeaningRetorsion.NoMeaning": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.MeaningRetorsion.NoWeakActIn": [],
+ "Logos.MeaningRetorsion.Voices": [
+  "Logos.Agency.Subject",
+  "Logos.Agency.act"
+ ],
+ "Logos.MeaningRetorsion.affirms_noMeaning_yields_meaning": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.MeaningRetorsion.countermodel_is_a_world_where_the_thesis_is_unutterable": [],
+ "Logos.MeaningRetorsion.judges_noMeaning_yields_meaning": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.MeaningRetorsion.judgment_of_noMeaning_is_incorrect": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.MeaningRetorsion.noMeaning_iff_noIntentionalSubject": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.MeaningRetorsion.noMeaning_iff_pointwise": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.MeaningRetorsion.noMeaning_is_unassertable": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.MeaningRetorsion.noMeaning_is_unmeaned": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.MeaningRetorsion.noMeaning_is_unperformed": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.MeaningRetorsion.noMeaning_ladder": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.MeaningRetorsion.no_correct_judgment_of_noMeaning": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.MeaningRetorsion.no_countermodel_can_affirm_the_thesis": [],
+ "Logos.MeaningRetorsion.signature_weak_retorsion": [],
+ "Logos.MeaningRetorsion.the_meaningless_world_remains_a_model": [],
+ "Logos.MeaningRetorsion.the_thesis_is_utterable_though_not_assertable": [],
+ "Logos.MeaningRetorsion.the_two_denials_cannot_both_be_affirmed": [],
  "Logos.Modal.Contingent": [
   "Logos.Agency.Subject"
  ],
@@ -9841,6 +9926,60 @@
   "Logos.Agency.Subject",
   "Logos.RetorsiveNormativity.AxJudicativeBipolarity"
  ],
+ "Logos.SemanticFinitude.SemanticFinitude": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SemanticFinitude.conditional_canonical_aseity_stipulated": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SemanticFinitude.exactly_one_universal_modal_ground_stipulated": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SemanticFinitude.ground_is_canonically_aseitous_but_not_asietic_stipulated": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SemanticFinitude.ofGround_divine_pure_actuality_stipulated": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SemanticFinitude.ofGround_divine_simplicity_stipulated": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SemanticFinitude.ofGround_modal_aseity_conditional_stipulated": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SemanticFinitude.ofGround_no_grounding_potency_stipulated": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SemanticFinitude.ofGround_non_composite_stipulated": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SemanticFinitude.ofGround_simplicity_and_transcendence_stipulated": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SemanticFinitude.ofGround_sole_universal_grounding_stipulated": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SemanticFinitude.semanticFinitude_excludes_ground_from_subjects": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SemanticFinitude.semantic_omnipotence_is_consistent": [],
  "Logos.Semantics.FalseAt": [],
  "Logos.Semantics.Form.and.elim": [],
  "Logos.Semantics.Form.and.inj": [],
@@ -9975,6 +10114,8 @@
  "Logos.Stipulations.StipulationTag.META.sizeOf_spec": [],
  "Logos.Stipulations.StipulationTag.SEM.elim": [],
  "Logos.Stipulations.StipulationTag.SEM.sizeOf_spec": [],
+ "Logos.Stipulations.StipulationTag.TRANS.elim": [],
+ "Logos.Stipulations.StipulationTag.TRANS.sizeOf_spec": [],
  "Logos.Stipulations.StipulationTag.VOCAB.elim": [],
  "Logos.Stipulations.StipulationTag.VOCAB.sizeOf_spec": [],
  "Logos.Stipulations.StipulationTag.casesOn": [],
@@ -9994,7 +10135,9 @@
  "Logos.Stipulations.ofGround_meansAll": [],
  "Logos.Stipulations.ofGround_noInternalComponents": [],
  "Logos.Stipulations.operatesAt_presencePlusObtaining": [],
+ "Logos.Stipulations.performativeActDatum": [],
  "Logos.Stipulations.registeredStipulations": [],
+ "Logos.Stipulations.semanticFinitude": [],
  "Logos.StrongActionChoice.ActLegacy": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",

@@ -5553,6 +5553,45 @@ ASIETY_FREEDOM_STEPS = [
 ]
 
 
+# --- SEMANTIC-FINITUDE chain: the F15 bound, consolidated and
+# --- badged. Badges and footprints are DERIVED (kernel audit / ◈ registry); nothing
+# --- here is transcribed. See AGENTS.md.
+# --- `◈` = the declared bound, not a theorem · `L2` = a corollary resting on the ◈ ·
+# --- `🧱` = `{}` countermodel pricing it · `✓` = coherence. C-ids are unallocated
+# --- (author decision pending), so the Ledger column reads `—` until then.
+SEMANTIC_FINITUDE_STEPS = [
+    ("◈", "C388", "Logos.SemanticFinitude.SemanticFinitude", "stipulation",
+     "**THE F15 BOUND, BY DECLARATION**: no subject means every proposition — no creature "
+     "is semantically omnipotent. Paid 17× as an anonymous premise, never registered"),
+    ("L2", "C389", "Logos.SemanticFinitude.exactly_one_universal_modal_ground_stipulated", "decl",
+     "**the unicity of the ground of all reality**, on the named bound"),
+    ("L2", "C390", "Logos.SemanticFinitude.ofGround_sole_universal_grounding_stipulated", "decl",
+     "sole universal grounding of reality"),
+    ("L2", "C391", "Logos.SemanticFinitude.conditional_canonical_aseity_stipulated", "decl",
+     "canonical aseity of the ground"),
+    ("L2", "C392", "Logos.SemanticFinitude.ofGround_modal_aseity_conditional_stipulated", "decl",
+     "modal aseity of the ground w.r.t. `CanonicalExtDepAt`"),
+    ("L2", "C393", "Logos.SemanticFinitude.ofGround_divine_pure_actuality_stipulated", "decl",
+     "**divine pure actuality** (actus purus) of the ground"),
+    ("L2", "C394", "Logos.SemanticFinitude.ofGround_no_grounding_potency_stipulated", "decl",
+     "zero passive grounding potency in the ground"),
+    ("L2", "C395", "Logos.SemanticFinitude.ofGround_divine_simplicity_stipulated", "decl",
+     "**divine simplicity** of the ground"),
+    ("L2", "C396", "Logos.SemanticFinitude.ofGround_non_composite_stipulated", "decl",
+     "mereological non-compositeness of the ground"),
+    ("L2", "C397", "Logos.SemanticFinitude.ofGround_simplicity_and_transcendence_stipulated", "decl",
+     "divine simplicity **and** ontological transcendence of the ground"),
+    ("L2", "C398", "Logos.SemanticFinitude.ground_is_canonically_aseitous_but_not_asietic_stipulated",
+     "decl", "canonically aseitous but not itself asietic"),
+    ("🧱", "C399", "Logos.SemanticFinitude.semantic_omnipotence_is_consistent", "countermodel",
+     "countermodel: a semantically omnipotent carrier is a model of the negation — the bound "
+     "is **falsifiable, not vacuous**, so the unicity really rests on it"),
+    ("✓", "C400", "Logos.SemanticFinitude.semanticFinitude_excludes_ground_from_subjects", "decl",
+     "coherence: `ofGround_meansAll` gives the ground *every* proposition, so the bound is "
+     "exactly what keeps the ground off the `Subject` sort"),
+]
+
+
 # --- LOVE chain: two prices, different in kind, so the table prices both.
 # --- Badges and footprints are DERIVED (kernel audit / axiom registry);
 # --- nothing here is transcribed. See AGENTS.md.
@@ -5644,22 +5683,37 @@ LOVE_STEPS = [
      "keeps a single witness"),
     ("L2", "C367", "Logos.CosmicExistence.cosmos_obtains", "decl",
      "**the same realm, now meaning-bearing — this is the row that pays**: derived from "
-     "`Plurality.cogito_from_T12` under the plurality bridge `AxTwoSubjects` (META), so Γ itself "
-     "produces the meaning-bearing subject and an empty contingent world is *proved* impossible. "
-     "The price is now correctly attributed: `AxTwoSubjects` buys the realm's *content*, not "
-     "its existence. **It is also the row that identifies the realm as *the* cosmos** — C324's "
-     "prohibition (an atom is not the cosmos) is untouched, because C350 shows only that the "
-     "*shape* has an instance"),
+     "`Plurality.cogito_from_T12` under the plurality bridge `AxTwoSubjects` (META), so Γ "
+     "*discovers* the meaning-bearing subject and an empty contingent world is *proved* "
+     "impossible. The price is now correctly attributed: `AxTwoSubjects` buys the realm's "
+     "*content*, not its existence. **It is also the row that identifies the realm as *the* "
+     "cosmos** — C324's prohibition (an atom is not the cosmos) is untouched, because C350 "
+     "shows only that the *shape* has an instance. **The price is not forced:** 3e below "
+     "reaches the same inhabitation with no bridge at all"),
     ("D", "—", "Logos.CosmicExistence.CreatedRealm", "decl",
      "the meaning-bearing realm's structure: `Nonempty Realm`, single witness — fair definition; "
      "the inhabitation is now **proved** (C367), no longer stipulated"),
     ("S", "—", "Logos.CosmicExistence.gamma_exhibits_a_meaning_subject", "decl",
      "**the emptiness result on its own**: Γ exhibits a subject that means something — the "
-     "user's point, made checkable, with the subject produced *inside* Γ rather than assumed"),
+     "user's point, made checkable, with the subject *discovered* inside Γ rather than assumed"),
     ("L2", "C351", "Logos.CosmicExistence.the_ground_loves_the_cosmos", "decl",
      "**the conclusion, both prices visible** — \"not merely a mathematical ground, but loves\""),
     ("L2", "C352", "Logos.CosmicExistence.the_ground_loves_the_cosmos_in_a_context", "decl",
      "the same conclusion in the relational vocabulary — `GroundLoves`, **not** `Loves`"),
+    ("L2b", "C386", "Logos.CosmicExistence.cosmos_presence_model_of_the_act_datum", "decl",
+     "**THE GOD-LANE, half one — the same inhabitation with the META bridge left out**: the "
+     "performative act-datum reaches a meaning-bearing subject on its own, because `Act` already "
+     "contains `Means` as a conjunct, so `act_datum_implies_means` needs no bridge. A **new row**, "
+     "not a re-anchoring of C367, and it does not replace it: a theorem *discovers*, it does not "
+     "manufacture, so Γ supplies no subject from nothing — the datum is given, not inferred. "
+     "Re-anchoring `cosmos_obtains` would repeat the A1 bug exactly"),
+    ("L2b", "C387", "Logos.CosmicExistence.the_ground_loves_the_cosmos_from_the_act_datum", "decl",
+     "**THE GOD-LANE's payoff — the ground's love, byte-identical statement, plurality route gone**: "
+     "three axioms and a sort fewer than C351, since `AxTwoSubjects` took `Will` and `subjectWill` "
+     "down with it. The interpersonal metaphysics is no longer a premise here, and the two remaining "
+     "premises are independent of it, so the removal is *visible* rather than absorbed. The love "
+     "bridge stays, and must: a directional good held by the ground is not in Γ's grounding "
+     "vocabulary. Relocated price ◈ `performativeActDatum` — free in axioms, not free in performance"),
     ("🧱", "C353", "Logos.CosmicExistence.perfect_universe_has_no_contingent_realm", "countermodel",
      "**countermodel, `{}`**: the contingency shape is refutable in a world-rigid universe — "
      "on an **unrelated free structure, not a model of Γ**"),
@@ -5744,6 +5798,205 @@ def render_asiety_freedom_chain(decls: dict, node_map: dict) -> list[str]:
     ap("it is not merely open); and the Act-free `?` around `base.txt`'s `ClaimsCorrect`-free")
     ap("weak→strong step is **bypassed, not closed** — the bare form stays machine-refuted")
     ap("(C273/C274).")
+    ap("")
+    return lines
+
+
+MEANING_RETORSION_STEPS = [
+    ("§0", "C368", "Logos.MeaningRetorsion.NoMeaning", "decl",
+     "**THE THESIS ITSELF**, stated in Γ's own `Meaning_I` vocabulary — `base.txt` §26 item 3 "
+     "(\"Não existe conteúdo\") and `poem.txt` P3 (\"há significado\")"),
+    ("§0", "C369", "Logos.MeaningRetorsion.noMeaning_iff_noIntentionalSubject", "decl",
+     "the thesis **is** the audited negation of the retorsive conclusion, re-indexed "
+     "(two existential quantifiers swapped — no `propext`)"),
+    ("§0", "C370", "Logos.MeaningRetorsion.noMeaning_iff_pointwise", "decl",
+     "pointwise form: no subject means anything at all"),
+    ("1/4", "C371", "Logos.MeaningRetorsion.noMeaning_is_unmeaned", "decl",
+     "the thesis cannot be **meant** (consistent — a universal negative is not a liar)"),
+    ("2/4", "C372", "Logos.MeaningRetorsion.noMeaning_is_unperformed", "decl",
+     "the thesis cannot be **acted**"),
+    ("3/4", "C373", "Logos.MeaningRetorsion.no_correct_judgment_of_noMeaning", "decl",
+     "the thesis cannot be **judged correct** — NEW: no `Correct` rung existed for any "
+     "meaninglessness thesis"),
+    ("3'/4", "C374", "Logos.MeaningRetorsion.judgment_of_noMeaning_is_incorrect", "decl",
+     "whoever judges the thesis at all judges it **incorrectly** (exhaustive form)"),
+    ("4/4", "C375", "Logos.MeaningRetorsion.noMeaning_is_unassertable", "decl",
+     "**THE RETORSION, unconditional**: nobody can hold the thesis as correct — no hypothesis, "
+     "no subject, no bridge, **no new axiom**"),
+    ("4/4", "C376", "Logos.MeaningRetorsion.noMeaning_ladder", "decl",
+     "all four rungs in one conjunction"),
+    ("+", "C377", "Logos.MeaningRetorsion.affirms_noMeaning_yields_meaning", "decl",
+     "the author's sentence, positively: **affirming the thesis produces an instance of what "
+     "the thesis denies**. Hypothesis `Act` (generalized from `Asserts` 2026-09-27, which is the "
+     "special case) — the performance, not the performance-plus-success C375 denies"),
+    ("+", "C378", "Logos.MeaningRetorsion.judges_noMeaning_yields_meaning", "decl",
+     "the same at the judging level — the form `poem.txt` P3 uses"),
+    ("3a", "C379", "Logos.MeaningRetorsion.no_countermodel_can_affirm_the_thesis", "decl",
+     "**no** meaning-vocabulary, of any shape, can host an affirmation of the thesis "
+     "(*a corollary* of `level2_signature_asserts_noi_selfRefutes`, generalised)"),
+    ("3b", "—", "Logos.MeaningRetorsion.NoWeakActIn", "decl",
+     "the denial of the act-datum, in an arbitrary signature — the withholding that "
+     "distinguishes M1 from any `Means`-vocabulary"),
+    ("3b", "C380", "Logos.MeaningRetorsion.signature_weak_retorsion", "decl",
+     "the **weak** retorsion, signature-general — NEW: `Agency.noWeakAct_selfRefutes` is "
+     "canonical-only"),
+    ("3b", "C381", "Logos.MeaningRetorsion.the_two_denials_cannot_both_be_affirmed", "decl",
+     "**THE JOINT REFUTATION, one sentence**: deny the act-datum, then affirm the denial — "
+     "impossible. This is M1 and C294 refuted as *answers*"),
+    ("3c", "C382", "Logos.MeaningRetorsion.the_meaningless_world_remains_a_model", "countermodel",
+     "**THE COMPLEMENT, populated**: a world *with subjects* where the thesis is true and no "
+     "assertion of it succeeds. A **model, not a refutation** — and the machine-checked reason "
+     "the content survives"),
+     ("3c", "C383", "Logos.MeaningRetorsion.countermodel_is_a_world_where_the_thesis_is_unutterable",
+      "decl", "both halves together: the countermodel's world is a world where the thesis is true "
+      "**and** no assertion of it succeeds. *\"Unutterable\" is not a prohibition on the type:* the "
+      "sentence is well-formed and the author utters it — what is excluded is the assertion "
+      "*succeeding*"),
+    ("3d", "C384", "Logos.MeaningRetorsion.Voices", "decl",
+     "**THE PERFORMANCE WITHOUT THE SUCCESS CONDITION** — the author's \"it can be uttered, it can "
+     "be asserted\". The predicate Γ lacked: every `asserts` in the corpus carries `∧ p`, so "
+     "*assert* had come to mean *correctly assert*. What the performative contradiction leaves "
+     "standing, since C375 refutes only the act *succeeding*"),
+    ("3d", "C385", "Logos.MeaningRetorsion.the_thesis_is_utterable_though_not_assertable",
+     "countermodel",
+     "**AND THE WORLD IN WHICH THE THESIS IS UTTERED**: 3c with `act := True`. A subject, nothing "
+     "meant, the thesis true, the thesis *said* — and still no assertion of it that succeeds. This "
+     "is what makes 3c's word \"unutterable\" a misnomer rather than a reading"),
+]
+
+
+def render_semantic_finitude_chain(decls: dict, node_map: dict) -> list[str]:
+    """The SEMANTIC-FINITUDE chain, step by step.
+
+    Emitted so the ◈ F15 bound can never be read as a derived theorem. The ◈
+    row is its own row, badged from `formal/stipulation_audit.json`; the ten
+    `L2` corollaries carry a `◈` marker derived from the registry `dependents`.
+    Badges and footprints are DERIVED; nothing here is transcribed. See AGENTS.md.
+    """
+    lines = []
+    ap = lines.append
+    ap("### SEMANTIC-FINITUDE chain, step by step (F15 consolidated and badged)")
+    ap("")
+    ap("> **Read this table before reading any unicity/ground row above.** Γ has a ground of")
+    ap("> reality, and on the **registered** ◈ bound that no subject means every proposition,")
+    ap("> that ground is the **sole** universal ground. The bound is the **◈ row**, and it is a")
+    ap("> **declaration, not a derivation**. A reader must not read the `L2` rows at")
+    ap("> `{Means, Subject}` as a proof of monotheism.")
+    ap("")
+    ap("`◈` = **the declared F15 bound, not a theorem** · `L2` = a corollary resting on the ◈")
+    ap("· `🧱` = `{}` countermodel pricing it · `✓` = coherence.")
+    ap("")
+    ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
+    ap("|---|---|---|---|---|---|")
+    for kind, cid, full, atype, text in SEMANTIC_FINITUDE_STEPS:
+        if atype == "stipulation":
+            ent = _stipulation_entry("semanticFinitude")
+            tag = (ent or {}).get("tag", "VOCAB")
+            status = f"◈ STIPULATED ({tag}) — a `def`, **not an axiom**"
+        else:
+            live = _classical_anchor_live({"type": atype, "full": full},
+                                          decls, node_map)
+            status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
+           f"{status} | {kernel_fp_text(full)} |")
+    ap("")
+    ent = _stipulation_entry("semanticFinitude")
+    if ent:
+        ap(f"**Cost of ◈ `{ent.get('name')}`** (`{ent.get('location')}`), as registered: "
+           f"{ent.get('cost', '')}")
+        ap("")
+    ap("**Four limits that the badge alone does not convey, and which are the reason this")
+    ap("block exists:**")
+    ap("")
+    ap("1. **The ◈ is invisible to every footprint tool.** `SemanticFinitude` is a `def` of a")
+    ap("   `Prop` that the `L2` corollaries take as a *premise*, so `#print axioms` reports the")
+    ap("   same `{Means, Subject}` (or `{Initiates, Means, State, Subject}`, or with `propext`)")
+    ap("   as the corresponding pre-existing conditional theorem, and the declared-axiom count")
+    ap("   is unmoved. \"The axiom count did not move\" is **not** a test for this chain.")
+    ap("2. **This is consolidation, not a new derivation.** The ten existing conditional theorems")
+    ap("   (`exactly_one_universal_modal_ground`, `ofGround_divine_simplicity`, …) are **not**")
+    ap("   edited and keep their anonymous premise; the `L2` rows are the same theorems keyed to")
+    ap("   the *named* bound, and their footprints are byte-identical to the originals.")
+    ap("3. **The bound is falsifiable, not vacuous** (`🧱 semantic_omnipotence_is_consistent`,")
+    ap("   `{}`): a semantically omnipotent carrier is a model of its negation, so the unicity")
+    ap("   genuinely rests on the bound — which is why the bound must be badged, not assumed.")
+    ap("   It is also *load-bearing* in the other direction (`✓`): `ofGround_meansAll` gives the")
+    ap("   ground every proposition, so the bound is exactly what keeps it off the `Subject` sort.")
+    ap("4. **What is still NOT claimed.** `Tag: VOCAB` says the bound restricts one uninterpreted")
+    ap("   relation on one nullary sort (`Means` on `Subject`) and asserts no connection between")
+    ap("   entities — the same status as `ofGround_existsAt`; if the author re-tags it `SEM` the")
+    ap("   badge follows. Personhood of the ground (C228), Trinity (F6/F8) and *explanatory*")
+    ap("   grounding (C326/C328) are untouched and remain BLOCKED / DEFERRED / not attempted.")
+    ap("   This batch does not move existence, which was already `PROVEN` unconditionally.")
+    ap("")
+    return lines
+
+
+def render_meaning_retorsion_chain(decls: dict, node_map: dict) -> list[str]:
+    """The MEANING-RETORSION chain, step by step.
+
+    Emitted so the refutation cannot be read off the badge alone. The two rows that
+    matter most are 4/4 (the unconditional retorsion) and 3c (the populated complement):
+    without 3c the refutation of the countermodel is a trick, and 3c is what stops it
+    being one. Badges and footprints are DERIVED; nothing here is transcribed.
+    See AGENTS.md.
+    """
+    lines = []
+    ap = lines.append
+    ap("### MEANING-RETORSION chain, step by step (the \"there is no meaning\" thesis)")
+    ap("")
+    ap("> **The demand:** *to affirm that there is no meaning is to prove the invalidity of my")
+    ap("> own affirmation* — and *the countermodel is wrong, and you shall prove it*. Both are")
+    ap("> discharged here, and the second only in the form in which it is true. The affirmation")
+    ap("> is refuted (4/4). The countermodel is refuted **as an answer** (3a/3b) and is")
+    ap("> **preserved as a model** (3c). A reader who takes 3a as a refutation of the model has")
+    ap("> misread the chain; 3c is the row that forbids it.")
+    ap("")
+    ap("`§0` = the re-index · `1/4…4/4` = the ladder, ascending in strength · `+` = the positive")
+    ap("existence form · `3a/3b` = the refutation *as an answer* · `3c` = the complement that")
+    ap("keeps it honest · `🧱` = `{}` countermodel.")
+    ap("")
+    ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
+    ap("|---|---|---|---|---|---|")
+    for kind, cid, full, atype, text in MEANING_RETORSION_STEPS:
+        live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
+        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
+           f"{status} | {kernel_fp_text(full)} |")
+    ap("")
+    ap("**Five limits the badges do not convey, and the reason this block exists:**")
+    ap("")
+    ap("1. **The retorsion is unconditional but not free.** 4/4 has no hypothesis and no new")
+    ap("   axiom — its footprint is vocabulary only. But the contradiction is fed *by* the")
+    ap("   affirmation: `Asserts s NoMeaning → False` needs the affirmation as input. The")
+    ap("   retorsion is **free in axioms and not free in performance**. That is the honest")
+    ap("   reading of the author's sentence, and it is also the whole price.")
+    ap("   **So \"unutterable\" is not a prohibition on the sentence.** The sentence is")
+    ap("   well-formed, the author utters it, and 4/4 is discharged by that very utterance:")
+    ap("   the antecedent is supplied and the contradiction follows. What C375 excludes is an")
+    ap("   assertion *succeeding* — an assertion that holds its content — not an assertion")
+    ap("   being made. Uttering the thesis is exactly what triggers the retorsion.")
+    ap("2. **The thesis is NOT shown false.** `¬ NoMeaning` is not derivable and is not")
+    ap("   claimed. 3c exhibits a **populated** world (`Subject := Unit`, against M0's empty")
+    ap("   sort) in which the thesis is true and no assertion of it succeeds. So the content")
+    ap("   survives intact; only the *affirming* of it fails to land. This is the corpus's own")
+    ap("   distinction (`NegativeRetorsionAudit.lean:292-295`): `NoI is false` is **not**")
+    ap("   equivalent to `NoI is unassertable`.")
+    ap("3. **3a is a corollary and is labelled one.** `no_countermodel_can_affirm_the_thesis`")
+    ap("   is `level2_signature_asserts_noi_selfRefutes` (`:286`) generalised from one signature")
+    ap("   to all of them. The batch's novelty is C369 (the re-index), C373 (the `Correct` rung),")
+    ap("   C380 (the signature-general weak retorsion) and C382 (the populated complement).")
+    ap("4. **Why an *answer* and not a *model*.** A countermodel is not a counterexample; it is")
+    ap("   a description of a world. An answer is a move made inside discourse. M1 and C294")
+    ap("   describe worlds where no move is ever made (`Means := False` *and* `act := False`),")
+    ap("   so they cannot contain the affirmation of their own silence. A content nobody can")
+    ap("   hold as correct is not a position; it is a description of a world in which nothing is")
+    ap("   ever held. **This is not a claim that meaninglessness is false.**")
+    ap("5. **Price of the positive claim is unmoved.** Nothing here carries `AxTwoSubjects` or")
+    ap("   `transcendental_reflection_intentional` — that is Batch B's one substantive claim")
+    ap("   about its own cost, and gate B2 verifies it rather than assuming it. But the")
+    ap("   *unconditional* existence of a meaning still costs `AxTwoSubjects` (C367); what is")
+    ap("   shown is that it is over-strong whenever an affirmation is supplied as input.")
     ap("")
     return lines
 
@@ -5855,6 +6108,8 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
            f"{_stip_marker(marked)} | {row['sense']}{ref_cell} |")
     ap("")
     lines.extend(render_asiety_freedom_chain(decls, node_map))
+    lines.extend(render_semantic_finitude_chain(decls, node_map))
+    lines.extend(render_meaning_retorsion_chain(decls, node_map))
     lines.extend(render_love_chain(decls, node_map))
     ap("_Synthesis — the strongest current profile._ The theory has established, of a")
     ap("**personal, rational, free, authoritative-over-its-acts, independently individuated**")

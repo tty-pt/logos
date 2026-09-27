@@ -20,9 +20,16 @@ That ground was **false**. The lemma is already an unconditional theorem —
 `cosmos_obtains` is the theorem that replaces it.
 
 So the answer to "does the cosmos exist?" is no longer stipulated. **Γ is not satisfiable by
-an empty contingent world**, because Γ contains a theorem that manufactures a subject: from
+an empty contingent world**, because Γ contains a theorem that *discovers* a subject: from
 two distinct persons (`AxTwoSubjects`, `Tag: META`) a person means something
 (`person_is_intentional`), a meaning subject witnesses a realm (`cosmos_presence_model`).
+
+Note the verb, and it is load-bearing throughout this module. A theorem **discovers**; it
+does not **manufacture**. Nothing here produces a subject — the two persons are already
+there, as a matter the derivation reports rather than causes, and the derivation is what
+makes the report *checkable*. Γ fabricates nothing. Read every inhabitation below as a
+discovery, never as a construction: see `Logos.Agency`'s module note, which states the same
+principle for the act-datum and disowns the term "manufacturing" for exactly this reason.
 
 **The price, stated plainly.** Existence now rests on the **plurality bridge**:
 `Logos.Value.AxTwoSubjects` — "the reality of right-and-wrong demands at least two distinct
@@ -288,12 +295,43 @@ theorem cosmos_presence_model
        not_the_ground := Entity.noConfusion
        bears_meaning := ⟨p, hp⟩ }⟩
 
+/-- **The realm, on the performative act-datum instead of the plurality bridge.**
+    `cosmos_presence_model` is the inhabitation; what it needs is a subject who means
+    something, and `Logos.Plurality.cogito_from_T12` gets one by paying
+    `Logos.Value.AxTwoSubjects`. That payment is **not forced**. The performative
+    act-datum gets the same witness with no bridge at all:
+    `Logos.Agency.act_datum_implies_means` turns `∃ s, ∃ p, Act s p` straight into
+    `∃ s, ∃ p, Means s p`, because `Act` already contains `Means` as a conjunct.
+
+    This is the God-lane, and it is deliberately a *new row* rather than a
+    re-anchoring of `cosmos_obtains`. The two reasons, both of them the project's
+    own:
+
+    - **A theorem discovers, it does not manufacture.** Γ cannot supply a subject out
+      of nothing, and it is not being asked to: the act-datum is *assumed as given*,
+      the way `Logos.Agency` states its foundation — "the present act of reasoning is
+      *given*, not inferred" (`Agency.lean:4`). The price moves from a META bridge to
+      a TRANS datum. It does not evaporate, and the row is badged ◈ accordingly.
+    - **The A1 bug was exactly this made unconditional.** Deleting the act-datum and
+      anchoring subject-existence on plurality made it "a consequence of plurality —
+      the very datum it must precede" (`GAPMAP.md`, batch A1/M0). A1 was caught and
+      reverted for that reason; re-anchoring `cosmos_obtains` now would repeat it.
+
+    So the claim is *not* that the cosmos is free. It is that `AxTwoSubjects` is one
+    route to a meaning-bearing realm and not the only one, which is a falsifiable
+    difference: reject the bridge and C367 goes, while this row stands on the datum
+    alone.
+    Footprint: `{propext, Initiates, Means, State, Subject}`. -/
+theorem cosmos_presence_model_of_the_act_datum
+    (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) : CreatedRealm :=
+  cosmos_presence_model (Logos.Agency.act_datum_implies_means h)
+
 /-- **The cosmos exists** — a contingent created realm, not the necessary ground, actually
     obtains and bears content of its own.
 
     **This was a `Tag: SEM` axiom until 2026-09-27, and that was an error.**
     `AxContingentCreationObtains` was declared on the ground that the lemma it needs had no
-    producer. It does have one. Γ contains a theorem that manufactures a subject:
+    producer. It does have one. Γ contains a theorem that *discovers* a subject:
 
         rightWrongDistinction        : ¬ N_T ∧ ¬ N_F                      -- `{}`
         T12_twoPersons               = AxTwoSubjects rightWrongDistinction
@@ -343,7 +381,8 @@ theorem cosmos_obtains : CreatedRealm :=
   cosmos_presence_model Logos.Plurality.cogito_from_T12
 
 /-- **No reading of Γ satisfies an empty contingent world.** The subject the derivation
-    uses is *produced inside Γ*, not assumed: `cogito_from_T12` has no hypothesis, and its
+    reports is *discovered inside Γ*, not assumed and not manufactured: `cogito_from_T12`
+    has no hypothesis, and its
     input `Logos.Core.rightWrongDistinction` is axiom-free. Stated as a standalone fact so
     the "cannot come about in an empty world" claim is checkable on its own, rather than
     only as a side effect of the row above. (No `propext`: it is `cogito_from_T12` verbatim,
@@ -501,6 +540,50 @@ theorem the_ground_loves_the_cosmos_in_a_context :
   have hc : ContingentEntity R.witness := ⟨R.actual, R.contingent⟩
   exact ⟨R.witness, hc,
     the_ground_loves_every_meaningful_contingent_reality hc R.bears_meaning⟩
+
+-- ============================================================================
+-- Section 3b: The God-lane — the ground's-love line without the META bridge
+-- ============================================================================
+
+/-- **The conclusion of C351, and the God-lane's payoff: `AxTwoSubjects` is not
+    required for the ground's love.** `the_ground_loves_the_cosmos` is C351 and reaches
+    its meaning conjunct through `cosmos_obtains`, which is the row that pays the
+    plurality bridge. Re-route the *only* step that pays it through
+    `cosmos_presence_model_of_the_act_datum` and the bridge drops out of the footprint
+    while the statement is byte-identical.
+
+    The love bridge `Logos.LovesAsGround.AxGroundLovesContingentRealm` and the
+    relation `GroundBearsGood` remain, and must: a directional good held by the ground
+    is not expressible in Γ's grounding vocabulary, which reaches only undirected
+    sufficiency, and the corpus has already recorded that no reading of it is `{}`
+    (see `LovesAsGround.lean`'s module note).
+
+    What this row removes is the **whole plurality route** — measured, `AxTwoSubjects`
+    *and* the `Will`/`subjectWill` that entered only through it: C351's footprint is
+    `{AxGroundLovesContingentRealm, AxTwoSubjects, GroundBearsGood, Means, Subject, Will,
+    propext, subjectWill}` and this row's is `{AxGroundLovesContingentRealm,
+    GroundBearsGood, Initiates, Means, State, Subject, propext}`. Three axioms and a sort
+    fewer, statement byte-identical. That matters for a reader's verdict on the price:
+    the interpersonal metaphysics is no longer among the premises of the ground's love,
+    and the two remaining premises are independent of it, so it is *visible* as removed
+    rather than quietly absorbed.
+
+    **This does not make the conclusion free, and the row is not promoted.** The price
+    is relocated to the performative act-datum ◈ `performativeActDatum` (`Tag: TRANS`):
+    free in axioms, not free in performance, which is the same account the retorsion
+    batch gives for C375/C377. A reader who will not grant that an act occurred
+    rejects this row; a reader who rejects `AxTwoSubjects` keeps it.
+    Footprint: `{propext, Initiates, Means, State, Subject, AxGroundLovesContingentRealm,
+    GroundBearsGood}`. -/
+theorem the_ground_loves_the_cosmos_from_the_act_datum
+    (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
+    ∃ t : Entity, ContingentEntity t ∧ (∃ q, EntityMeans t q) ∧
+      ∃ p, GroundBearsGood Entity.ofGround t p := by
+  obtain ⟨R⟩ := cosmos_presence_model_of_the_act_datum h
+  obtain ⟨q, hq⟩ := R.bears_meaning
+  have hc : ContingentEntity R.witness := ⟨R.actual, R.contingent⟩
+  exact ⟨R.witness, hc, ⟨q, hq⟩,
+    the_ground_bears_a_directional_good_toward_the_cosmos hc ⟨q, hq⟩⟩
 
 -- ============================================================================
 -- Section 4: Separations — what the free existence result does not buy

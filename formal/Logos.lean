@@ -105,3 +105,15 @@ import Logos.DivineTranscendence
 -- `AsietyFreedomOfGround` is a definitional stipulation (Tag: META, registered in
 -- Logos.Stipulations), not an axiom, so the declared-axiom count is unchanged.
 import Logos.AsietyFreedom
+-- Semantic finitude (`SemanticFinitude`, Tag: VOCAB, registered in Logos.Stipulations as
+-- ◈ `semanticFinitude`): the per-subject meaning bound F15 named, consolidated and badged,
+-- with ten priced corollaries. A premise carried on each corollary, not a new axiom, so the
+-- declared-axiom count is unchanged; the ◈ badge is the only signal.
+import Logos.SemanticFinitude
+-- The meaninglessness thesis stated in the corpus's own `Meaning_I` vocabulary (`NoMeaning`),
+-- its four-rung ladder up to the unconditional retorsion, and the joint refutation of the
+-- M1/C294 countermodel family *as answers* — with the populated complement that keeps the
+-- countermodel alive as a model, and the utterance model in which the thesis *is* said.
+-- The meaninglessness batch of 2026-09-27. 19 declarations — 16 theorems
+-- and 3 `def`s (`NoMeaning`, `NoWeakActIn`, `Voices`) — and zero new axioms.
+import Logos.MeaningRetorsion

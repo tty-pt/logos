@@ -189,3 +189,15 @@ de axiomas continua 25 e o registo de estípulações sobe de 5 para 6) e aponta
 — os outros 19 utilizadores, incrementalmente — tornaria C320 um corolário incondicional e reformaria
 F15. É uma única frase já paga, não uma ponte nova; move o registo, por isso é posto ao autor e não
 feito em silêncio.
+
+**Terceira correcção (2026-09-27, lote aterrado): a consolidação foi FEITA, por instrução do
+autor.** `Logos/SemanticFinitude.lean` nomeia o limite (`SemanticFinitude`, C388) e re-chaveia
+os dez teoremas condicionais para corolários `_stipulated` (C389–C398), com o contramodelo de
+falsificabilidade (C399) e a exclusão do fundamento do sort `Subject` *através* do limite
+(C400). Registry 5 → 6, e depois 6 → 7 com o dado performativo. **C-ids C388–C400 atribuídos
+2026-09-27.** Duas notas de exactidão, porque a prosa acima ficou para trás: (i) o censo
+"20 vezes" foi revisto para **19 ocorrências em 5 ficheiros** (17 premissas + 2 campos de
+estrutura, `DivinePureActuality` 4 não 5) — ver a nota do lote em `GAPMAP.md`; (ii) as
+pegadas das linhas de simplicidade (C395–C397) são `{Means, Subject, propext}`, não `{CL}` —
+`propext` é lógica clássica de Lean, não axiom substantivo, e o auditado manda. Os dez
+teoremas condicionais pré-existentes NÃO foram editados e mantêm a premissa anónima.

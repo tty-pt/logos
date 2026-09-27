@@ -367,6 +367,40 @@ Portanto:
 
 Há necessariamente significado lógico.
 
+**[Acrescimo formal, 2026-09-27 — lote MEANING-RETORSION]** Duas observações
+sobre este item, e uma lacuna que ele deixa à vista.
+
+*A lacuna:* `Meaning_L` **não está formalizada**. `Meaning_L(p) := True(p) ∨
+False(p)` e a bivalência que daí tira `∃p Meaning_L(p)` são, até à data, prosa:
+não há declaração Lean, portanto não há claim ledgerada, e por isso este item
+não figura no `GAPMAP.md`. Registo-o aqui para que a ausência seja um facto
+declarado e não um esquecimento.
+
+*O que o lote acrescenta:* a primeira existencia de significado **formalizada**
+de Γ é a do nível intensional, e é gratuita. `Choice.meaning_needs_subject` /
+`meaning_I_needs_subject` (C49) dão `Meaning_I p → ∃s, Means s p` por `{Means,
+Subject}`; e o lote MEANING-RETORSION fecha o lado da existencia com C377
+(`(∃ s, Act s NoMeaning) → ∃ p, Meaning_I p`, hipótese generalizada 2026-09-27 de
+`Asserts`, que é o caso particular) e C378 (a forma `Correct`, que
+é a que o poema P3 usa), ambos `{Initiates, Means, State, Subject}` e sem axiom
+novo. Note-se a assimetria de preço, que é o ponto: a existencia de significado
+**lógico** seria a mais barata de todas, e a de significado **intencional** é a
+que paga `AxTwoSubjects` (C367, na sua conjunct `bears_meaning`) — porque
+"realidade de certo e errado" exige pelo menos duas pessoas. O lote mostra
+apenas que essa ponte é desnecessária *quando a afirmação é dada*.
+
+*A negação desta conclusão, como posição:* o mesmo lote que formaliza a
+existencia formaliza também a recusa de a poder afirmar-se. `NoMeaning : Prop :=
+¬ ∃ p, Meaning_I p` (C368) e a escada C371→C375 culminam em
+`¬ ∃ s, Asserts s NoMeaning` (C375, `{Initiates, Means, State, Subject}`),
+incondicional. Isto **não** é uma proibição de tipo: a frase é bem-formada e o
+autor acaba de a enunciar — enunciá-la é precisamente o que dispara a
+retorsão. O que C375 exclui é uma afirmação *que resulte*, não uma afirmação
+*que seja feita*. E o conteúdo sobrevive: C382 (`{}`) é um mundo **populado**
+onde a tese é verdadeira e nenhuma afirmação dela tem êxito. Ver
+`NegativeRetorsionAudit.lean:292-295`: *`NoI is false` NÃO é equivalente a
+`NoI is unassertable`*.
+
 11. SIGNIFICADO INTENCIONAL
 
 Distinguimos:
@@ -402,6 +436,23 @@ tem um sujeito; e a forma definicional `meaning_I_needs_subject`, ambas
 partir de `Initiates`). O sujeito é **constituinte** da definição:
 assertar significado sem sujeito é contradição por definição, em qualquer
 modelo.
+
+**[Acrescimo formal, 2026-09-27 — lote MEANING-RETORSION]** O sujeito
+constitutivo é agora também o que **exclui a negação como posição**. A tese
+"não há significado" está enunciada no mesmo vocabulário como `NoMeaning : Prop :=
+¬ ∃ p, Meaning_I p` (C368, `MeaningRetorsion.lean`) e a sua identidade com a
+negação auditada do conclusion retorsivo é C369 (`NoMeaning ↔ NoI_canonical`,
+`{Means, Subject}`, **sem** `propext`). Disso sai uma escada de quatro degraus, cada
+um mais forte que o anterior, e o quarto é **incondicional**: C371 (não pode ser
+significada), C372 (não pode ser actualizada), C373 (**não pode ser julgada correcta**
+— degrau novo: não havia rungs `Correct` para nenhuma tese de insignificância),
+C374 (quem a julga, julga-a incorrectamente) e C375 **`¬ ∃ s, Asserts s NoMeaning`**.
+A forma positiva é C377: afirmar a tese produz uma instância de `Meaning_I`. E
+§11 é o que torna a excepção visível em vez de silenciosa: `NoMeaning` **não** é
+refutada no seu conteúdo — C382 (`{}`) é um mundo **populado** onde ela é verdadeira
+e inafirmável. A distinção é a de `NegativeRetorsionAudit.lean:292-295`: *`NoI is
+false` NÃO é equivalente a `NoI is unassertable`*. O contramodelo M1 é refutado
+como **resposta** (C379/C381) e preservado como **modelo** (C382).
 
 12. T4 — O SUJEITO É AGENTE → theorems/T4.txt
 
@@ -1118,6 +1169,79 @@ como `NoAct := ¬ ∃ s p, A s p`, a asserção explícita `h : Asserts speaker 
 (`h ⊢ False`). Assim, C58 não assume a conclusão, não depende de axioma forçado,
 e tem pegada estrita `{Means, Subject}`.)
 
+(Nota formal §26, item 3 — "Não existe conteúdo" (preenchida 2026-09-27, lote
+MEANING-RETORSION). Este item era o único da lista I sem nota formal; os itens 1,
+2 e 4 tinham-na desde 2026-09-27. A tese está agora enunciada no vocabulário
+significativo da própria Γ como
+`NoMeaning : Prop := ¬ ∃ p : Prop, Choice.Meaning_I p`
+(formal/Logos/MeaningRetorsion.lean, C368), e a sua identidade com a negação
+auditada é C369: `NoMeaning ↔ NoI_canonical`, o mesmo teorema que o corpus já
+tinha para a forma interna `NoI_canonical = ¬P_canonical` — a diferença é apenas a
+ordem de dois quantificadores existenciais, pelo que C369 tem pegada `{Means,
+Subject}` **sem** `propext`. O Escalão 4 é a retorsão e é **incondicional**:
+`noMeaning_is_unassertable : ¬ ∃ s : Subject, Asserts s NoMeaning` (C375, pegada
+`{Initiates, Means, State, Subject}`), sem hipótese, sem sujeito fornecido e sem
+ponte — `Asserts s p` é `Act s p ∧ p`, logo afirmar a tese é ao mesmo tempo um acto
+que a significa (proibido pelo Escalão 1, C371) e uma afirmação de verdade da
+tese (que é a própria tese). A forma positiva, que é a frase do autor, é C377:
+`(∃ s, Act s NoMeaning) → ∃ p, Meaning_I p` — afirmar a tese produz uma
+instância daquilo que a tese nega. **Hipótese generalizada 2026-09-27:** de
+`Asserts s NoMeaning` para `Act s NoMeaning`; como `Asserts s p` é
+`Act s p ∧ p`, o enunciado antigo é o caso particular e o novo subsume-o, pelo
+que o C-id não muda e a pegada fica `{Initiates, Means, State, Subject}`. A
+hipótese **não fica disponível**: C372 exclui `Act s NoMeaning` em todo mundo
+`NoMeaning`, exactamente como C375 excluía `Asserts s NoMeaning` — a
+generalização desce um degrau a exclusão, não a remove. C378
+(`Correct s NoMeaning`) fica intacto, porque a generalização não o alcanca. **A distinção que este lote deixa explícita e que
+o texto acima não distinguishia:** a *afirmação* é refutada; o *conteúdo* não.
+`¬ NoMeaning` NÃO é derivável, e C382 é a razão machine-checked — um mundo
+**populado** (sujeito `Unit`) no qual a tese é verdadeira e ninguém pode afirmá-la
+(`the_meaningless_world_remains_a_model`, pegada `{}`). O texto do verso, "o acto
+de negação refuta-se a si mesmo", é literalmente correcto quanto ao acto e
+silencioso quanto ao conteúdo; a nota torna esse silêncio explícito em vez de o
+deixar ler-se como uma refutação do conteúdo. Corolário: o contramodelo M1 é
+refutado como **resposta** (C379/C381, ambos `{}`) e preservado como **modelo**
+(C382). Zero axiomas novos declarados.)
+
+(Nota formal §26, verbos — preenchida 2026-09-27, lote MEANING-RETORSION. A
+distinção acima é entre *afirmação* e *conteúdo*; falta a distinção entre
+*afirmar* e *afirmar correctamente*, e é a que o texto do verso exige. Todo o
+vocabulário de `assert` em Γ é **condicionado pela verdade**: `asserts s p` é
+`act s p ∧ p` (Agency.lean), `Asserts s p` é `Act s p ∧ p` (Agency.lean), e
+`Correct s p` é `A s p ∧ T p` (Order.lean). Em inglês corrente "afirmar" não
+carrega o `∧ p` — "afirmo que 2+2=5" é uma afirmação formada. Logo a palavra
+*afirmar* tinha passado a significar *afirmar correctamente*, e o desempenho
+que ela devia nomear não tinha nome nenhum. A tabela, um verbo por predicado:
+
+| verbo | predicado Γ | para `NoMeaning` |
+|---|---|---|
+| enunciado | `NoMeaning : Prop` (C368) | vale — a frase existe |
+| afirmado | `Act s p` | C372 |
+| dito / afirmado (ordem comum) | `Voices s p` = `act s p` (C384) | C385 |
+| afirmado correctamente | `Asserts s p`, `Correct s p` | **C375** |
+
+`Voices` (C384, formal/Logos/MeaningRetorsion.lean) é o **desempenho sem a
+condição de sucesso**, pegada `{Subject, act}` — só vocabulário, zero axiomas
+novos. Construída sobre o `act` fraco e **não** sobre `Act`, deliberadamente:
+`Act` exige `Means`, e C372 já exclui `Act s NoMeaning` em todo mundo
+`NoMeaning`, pelo que um predicado de afirmação construído sobre `Act` jamais
+poderia testemunhar a tese a ser dita. C385
+(`the_thesis_is_utterable_though_not_assertable`, pegada `{}`) é o gémeo
+positivo de C375: um mundo com sujeito `Unit`, nada significado, a tese
+verdadeira e a tese **dita** — e ainda assim nenhuma afirmação sua que
+funcione. Por isso C375 não é proibição de falar: refuta o *sucesso*, não o
+acto. E é C385 que torna a palavra "unutterable" de C383 um nome impróprio e
+não uma leitura. **A retorsão não precisa de saber quem fala, e é esse o ponto:**
+`Voices` e `Act` quantificam sobre todos os sujeitos, logo **quem quer que faça a
+performance da tese refuta-a ao fazê-la** — a contradição performativa é independente
+de quem fala, e nenhum axiom precisa dizer que um orador em linguagem natural é um
+`Subject` para a retorsão correr. *Nota (2026-09-27, corrigida):* esta nota registava
+antes isso como *limite registado* à espera de um 27.º axiom; a moldura estava errada
+e é retirada. `Subject` continua a ser `axiom Subject : Type`, uma espécie sem
+interpretação, e a testemunha de C385 continua a ser `()`, pelo que Γ também não
+consegue *nomear* qual é o sujeito do modelo — mas nada na retorsão precisa que o
+nomeie.)
+
 27. RESULTADO MÁXIMO DESTA FASE
 
 Temos:
@@ -1831,30 +1955,56 @@ passado ad hoc.
 
 **Segunda correcção (2026-09-27, mesmo dia): «três sítios» era uma contagem local a um
 ficheiro, e subestimava muito o caso.** A forma da hipótese
-`∀ s : Subject, ∃ p : Prop, ¬ Means s p` ocorre **20 vezes em 5 ficheiros** —
-`DivinePureActuality` 5, `FoundationalUnicity` 7, `CanonicalAseity` 4, `AsieticChoice` 1,
+`∀ s : Subject, ∃ p : Prop, ¬ Means s p` ocorre **19 vezes em 5 ficheiros** —
+`DivinePureActuality` 4, `FoundationalUnicity` 7, `CanonicalAseity` 4, `AsieticChoice` 1,
 `DivineSimplicity` 3. Logo Γ paga este preço exacto por **cinco** argumentos de atributo
 (aseidade, simplicidade, actuação pura, escolha/liberdade, unicidade), não dois — e o argumento
 «já pago» fica *mais forte*, não mais fraco.
 
-E como nenhum *axioma* o afirma — é passado como argumento explícito em cada um dos 20 usos —
-C320 não o pode consumir incondicionalmente, e a fila permanece. O que resta é contabilidade, não
-crença: consolidar as premissas ad hoc numa **única ◈ nomeada** (`Tag: VOCAB` — sendo um `def`, a
-contagem de axiomas continua 25 e o registo de estípulações sobe de 5 para 6) e apontar C320 para
-ela tornaria C320 um corolário incondicional e reformaria esta fila; os outros 19 utilizadores são
-reapontados incrementalmente. É uma única frase já paga, não uma ponte nova — mas move o registo,
-por isso é posta ao autor e não feita em silêncio.
+E como nenhum *axioma* o afirma — é passado como argumento explícito em cada um dos 19 usos —
+C320 não o pode consumir incondicionalmente, e a fila permanece. O que restava era contabilidade,
+não crença: consolidar as premissas ad hoc numa **única ◈ nomeada** (`Tag: VOCAB` — sendo um `def`,
+a contagem de axiomas não se mexe e o registo de estípulações sobe de 5 para 6). **Isso foi feito**
+— lote SEMANTIC-FINITUDE, 2026-09-27; ver a retirada de F15 abaixo. Os corolários resultantes
+assentam na frase nomeada e por isso levam o selo ◈: a unicidade do fundamento passa a ser um
+corolário *stipulated*, não um teorema cru. É uma única frase já paga, não uma ponte nova — mas
+move o registo, por isso foi registada, não feita em silêncio.
 
-Ainda requer prova (o que falta, em termos formais): a hipótese
-`∀ s : Subject, ∃ p : Prop, ¬ Means s p` — **F15**. Não é derivável, porque `Means` é VOCAB
-(`Agency.lean:49` declara `Subject` como uma sort nula e não interpretada) e nada em Γ limita o
+**F15 RETIRA (2026-09-27, lote SEMANTIC-FINITUDE).** A hipótese
+`∀ s : Subject, ∃ p : Prop, ¬ Means s p` — **F15** — foi nomeada e registada:
+`SemanticFinitude` (`formal/Logos/SemanticFinitude.lean`), ◈ `semanticFinitude` em
+`Stipulations.lean` (`Tag: VOCAB`). Deixa de ser um lema-em-falta e passa a ser uma
+**estipulação nomeada e visível**. Continua **não derivável** (porque `Means` é VOCAB —
+`Agency.lean:49` declara `Subject` como sort nula e não interpretada, e nada em Γ limita o
 alcance proposicional de um sujeito; os resultados de universalidade `Existential` do resto da
-biblioteca não se aplicam, porque o que é preciso é um limite **por sujeito**, não global. O preço,
-dito sem eufemismo: é uma **restrição do vocabulário de significado** — diz que nenhuma criatura é
-semanticamente onipotente. **Não** é uma ponte META e **não** é uma definição nova: é uma única
-sentença quantificada sobre vocabulário existente. O que este lote **não** fez: não rebaixou
-C207 nem C211, não os apagou, e não declarou F15 em Γ. A decisão que resta é a
-consolidação de uma frase já paga, não o pagamento.
+biblioteca não se aplicam, porque o que é preciso é um limite **por sujeito**, não global), mas a
+verdade é que Γ **já a pagava** 19 vezes: este lote consolida e sela, não introduz.
+`SemanticFinitude` é um `def` de uma `Prop` que os corolários tomam como *premissa*, pelo que
+**zero axiomas novos** são declarados e a pegada `#print axioms` de cada corolário é
+**byte-idêntica** à do teorema condicional que espelha.
+
+Os dez corolários *stipulated* (todos PROVEN ◈) são:
+`exactly_one_universal_modal_ground_stipulated` (a unicidade do fundamento universal),
+`ofGround_sole_universal_grounding_stipulated`, `conditional_canonical_aseity_stipulated`,
+`ofGround_modal_aseity_conditional_stipulated`, `ofGround_divine_pure_actuality_stipulated`,
+`ofGround_no_grounding_potency_stipulated`, `ofGround_divine_simplicity_stipulated`,
+`ofGround_non_composite_stipulated`, `ofGround_simplicity_and_transcendence_stipulated` e
+`ground_is_canonically_aseitous_but_not_asietic_stipulated`.
+
+O preço, sem eufemismo e agora **machine-checked nos dois sentidos**: (i) o limite é
+**falsificável, não vácuo** — `semantic_omnipotence_is_consistent` (`{}`) é um modelo da sua
+negação (um portador semanticamente omnipotente), logo a unicidade assenta genuinamente nele e o
+selo ◈ é obrigatório; (ii) o limite **faz trabalho real** —
+`semanticFinitude_excludes_ground_from_subjects` mostra que, como `ofGround_meansAll` dá ao
+fundamento *toda* proposição, é o limite que o mantém fora do sort `Subject`. E, como em qualquer
+`def`, o preço é **invisível a `#print axioms`**: o selo ◈ no registo (6 estípulações) e a cadeia
+`SEMANTIC_FINITUDE_STEPS` do gerador são os únicos sinais. **Não** é uma ponte META e **não** é uma
+definição nova: é uma única sentença quantificada sobre vocabulário existente — uma
+**restrição do vocabulário de significado**, que diz que nenhuma criatura é semanticamente
+omnipotente. O que este lote **não** fez: não rebaixou C207 nem C211, não os apagou, não declarou
+F15 em Γ como axioma, e não editou os dez teoremas condicionais pré-existentes (mantêm a premissa
+anónima) — os corolários são aditivos. A existência de um fundamento já era `PROVEN`
+incondicionalmente (C319); o que é ◈ aqui é a sua *unicidade*.
 
 Limites honestos de escopo: a unicidade assim reparada é a **unicidade do fundamento universal
 modal**, sob uma hipótese de restaurante nomeada; continua expressamente separada do unitarismo
@@ -2050,7 +2200,34 @@ Ainda requer prova (o que falta, em termos formais):
       **O que Γ continua a não afirmar** (e a entrada do contramodelo permanece não
       construído, `EXISTS.md` §5, parte IV) é a **consistência da negação**: que Γ é
       satisfazível num mundo contingente vazio. O que mudou é que esse mundo já **não** é
-      o modelo de Γ — Γ **contém um teorema que fabrica um sujeito**.
+      o modelo de Γ — Γ **contém um teorema que descobre um sujeito**.
+      **Acrescimo 2026-09-27 (lote MEANING-RETORSION).** Duas coisas entram aqui, e
+      nenhuma delas move o preço de (4):
+      (B) **A *afirmação* da negação é axiom-free.** `noMeaning_is_unassertable :
+      ¬ ∃ s, Asserts s NoMeaning` (C375, `{Initiates, Means, State, Subject}`) e, na
+      forma positiva, `affirms_noMeaning_yields_meaning : (∃ s, Act s NoMeaning) →
+      ∃ p, Meaning_I p` (C377, hipótese generalizada 2026-09-27 de `Asserts`, que é o
+      caso particular): afirma-se `NoMeaning` e uma instância de `Meaning_I` é o
+      que sai. Zero axiomas novos. A afirmação é a **entrada** da contradição, não a sua
+      saída — pelo que a retorsão é livre em axiomas e **não** livre em performance.
+      (A) **O existencial de significado é também descarga por qualquer afirmação**, via
+      `Act → Means`: `Meaning_I p` sai de `Act s p` sem ponte alguma. Isto
+      generaliza a correcção acima para o caso em que a afirmação é *dada*, e **foi a
+      base da redução do lote GOD-LANE, aterrado 2026-09-27**: C386
+      (`cosmos_presence_model_of_the_act_datum`, `{propext, Initiates, Means, State,
+      Subject}`) habita `CreatedRealm` sem `AxTwoSubjects`, e C387
+      (`the_ground_loves_the_cosmos_from_the_act_datum`, com a ponte do amor mas sem a
+      rota da pluralidade — caem `AxTwoSubjects`, `Will` e `subjectWill`) leva a mesma
+      substituição à conclusão do amor, com enunciado byte-idêntico ao de C351. O preço
+      relocou-se para o dado performativo ◈ `performativeActDatum` (`Tag: TRANS`,
+      registry 6 → 7): livre em axiomas, não livre em performance. C367 fica intacta e
+      continua a pagar a ponte — a linha nova é *companhia*, não substituição.
+      **O que permanece caro é a existência incondicional** de um sujeito que significa,
+      que continua `PROVEN↑` sob `AxTwoSubjects` (C367): a ponte é excessiva *quando a
+      afirmação é fornecida*, não em geral. E a tese do "não há significado" **não** é
+      por isso refutada quanto ao conteúdo — C382 (`{}`) é um mundo **populado** onde ela é
+      verdadeira e inafirmável, e é esse o complemento que impede a leitura de trivia.
+      Ver §26 item 3 (nota agora preenchida) e §10/§11.
 
 Limites honestos de escopo: o lote é, em quase todo o corpo, **negativo** — das 33 linhas
 novas, **24 são `PROVEN` sobre vocabulário declarado, 6 são `PROVEN↑` sobre uma ponte

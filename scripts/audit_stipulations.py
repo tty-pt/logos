@@ -34,7 +34,8 @@ ENTRY_RE = re.compile(r"^def\s+(\w+)\s*:\s*Stipulation\s+where\s*$")
 FIELD_RE = re.compile(r"^\s*(name|location|anchor|tag|cost|dependents)\s*:=\s*(.+?)\s*$")
 STR_RE = re.compile(r'^"(.*)"$')
 LIST_RE = re.compile(r"^\[(.*)\]$")
-KNOWN_TAGS = {"StipulationTag.VOCAB", "StipulationTag.SEM", "StipulationTag.META"}
+KNOWN_TAGS = {"StipulationTag.VOCAB", "StipulationTag.SEM", "StipulationTag.META",
+              "StipulationTag.TRANS"}
 
 
 def parse_registry(text: str) -> list[dict]:

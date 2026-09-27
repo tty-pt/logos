@@ -341,8 +341,9 @@ O lado empírico, C350–C354 mais C367, e o datum SEM (agora dividido em duas l
   `content_reality_hook (p) : (∃ s, Correct s p) → p`, mas **não se aplica** a esta
   derivação, que nunca toca em `Correct`. *O que substitui a frase:* a existência é um
   **teorema**, `cosmos_presence_model Plurality.cogito_from_T12`, e Γ **não** é
-  satisfazível por um mundo contingente vazio — Γ contém um teorema que **fabrica** um
-  sujeito. *A definição é justa, a habitação é o que isto paga:* `Realm` é uma
+  satisfazível por um mundo contingente vazio — Γ contém um teorema que **descobre** um
+  sujeito. *O verbo é carga:* um teorema **descobre**, não fabrica — as duas pessoas já
+  lá estão, e a derivação é o que torna o relatório verificável. *A definição é justa, a habitação é o que isto paga:* `Realm` é uma
   estrutura de **testemunha única** (`witness`, `actual`, `contingent`, `not_the_ground`,
   `bears_meaning` — cada campo um predicado sobre o vocabulário **existente** acerca de
   **uma** entidade), e `CreatedRealm := Nonempty Realm` (`CosmicExistence.lean:137`) — a
@@ -374,7 +375,7 @@ O lado empírico, C350–C354 mais C367, e o datum SEM (agora dividido em duas l
   é a identificação de um sujeito com o cosmos** — o reino não é lido de um
   artefacto de modelação. ~~Lido com C353, é o que permitia a C350 ser **declarada** em
   vez de apenas suposta~~ `[2026-09-27: C350 deixou de precisar de ser declarada; a
-  satisfatibilidade condicional é agora a *premissa* da derivação, e Γ fabrica o
+  satisfatibilidade condicional é agora a *premissa* da derivação, e Γ **descobre** o
   habitante]`: nem forçada nem vazia.
 - C351 `the_ground_loves_the_cosmos`,
   `{propext, Means, Subject, Will, subjectWill, AxTwoSubjects, AxGroundLovesContingentRealm,
@@ -389,6 +390,18 @@ O lado empírico, C350–C354 mais C367, e o datum SEM (agora dividido em duas l
   *relacional* da biblioteca. Note que é a relação `GroundLoves`, **não** o amor
   interpessoal `Loves` — as duas são provavelmente disjuntas (C346) e a transferência é
   instável (C348).
+- **[2026-09-27, GOD-LANE.]** C386 `cosmos_presence_model_of_the_act_datum`,
+  `{propext, Initiates, Means, State, Subject}` — o mesmo inhabitation de `CreatedRealm`
+  que C367, com o preço movido do `Tag: META` `AxTwoSubjects` para o dado performativo
+  do acto ◈ `performativeActDatum` (`Tag: TRANS`, registry 6 → 7). É linha **nova**, não
+  reancoragem de C367, e não a substitui — um teorema *descobre*, não fabrica, e reancorar
+  seria repetir o bug de A1. C387 `the_ground_loves_the_cosmos_from_the_act_datum`,
+  `{propext, Initiates, Means, State, Subject, AxGroundLovesContingentRealm,
+  GroundBearsGood}` — a conclusão de C351 com enunciado byte-idêntico e sem a rota da
+  pluralidade: **três axiomas e um sort a menos** (`AxTwoSubjects`, `Will`,
+  `subjectWill`). A metafísica interpessoal deixa de ser premissa do amor do fundamento;
+  a ponte do amor fica, e tem de ficar. Preço relocado, não evaporado: livre em axiomas,
+  não livre em performance.
 
 Limites honestos de escopo (o que **não** se deve reclamar):
 

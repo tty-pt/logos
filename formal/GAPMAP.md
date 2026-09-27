@@ -6,6 +6,132 @@ flagged axioms) · `AXIOM` (declared) · `BLOCKED` (missing lemma named) ·
 
 `CL` = `{propext, Classical.choice, Quot.sound}` (classical meta-logic, D1).
 
+## Batch meaning-retorsion (2026-09-27) — a tese do "não há significado" refutada como resposta
+
+O novo módulo `Logos/MeaningRetorsion.lean` (lote B de 2026-09-27) enuncia a tese do
+§26 item 3 ("Não existe conteúdo") e do poema P3 ("há significado") no vocabulário
+significativo da própria Γ (`Choice.Meaning_I`), escala-a em quatro degraus até a
+retorsão incondicional, e refuta a família de contramodelos M1/C294 **como respostas**.
+**Zero axiomas novos declarados**: tudo são teoremas sobre `def`s e linhas já existentes.
+
+A distinção que o lote inteiro assenta é a que `NegativeRetorsionAudit.lean:292-295`
+já registava — *"`NoI is false` NÃO é equivalente a `NoI is unassertable`"*:
+
+| Claim | Secao | Declaracao | Status | Pegada |
+|---|---|---|---|---|
+| C368 | §26 item 3, `poem.txt` P3 | `MeaningRetorsion.NoMeaning : Prop` — a tese do "não há conteúdo" enunciada no vocabulário significativo da própria Γ, `¬ ∃ p, Meaning_I p`. **DEF, não axioma**: o que se ledgeriza é a *identificação* da tese com esta fórmula, não uma prova | PROVEN | `{Means, Subject}` |
+| C369 | §26 item 3 | `MeaningRetorsion.noMeaning_iff_noIntentionalSubject : NoMeaning ↔ NoI_canonical` — a tese **é** a negação auditada, re-indexada: só trocam a ordem de dois quantificadores existenciais. Sem `propext` — e a ausência dele na pegada é a confirmação machine-checked de que a re-indexação não precisa de cast | PROVEN | `{Means, Subject}` |
+| C370 | §26 item 3 | `MeaningRetorsion.noMeaning_iff_pointwise : NoMeaning ↔ ∀ s : Subject, ¬ ∃ p : Prop, Means s p` — a forma pontual: nenhum sujeito significa seja o que for | PROVEN | `{Means, Subject}` |
+| C371 | §26 item 3 | `MeaningRetorsion.noMeaning_is_unmeaned (s : Subject) : NoMeaning → ¬ Means s NoMeaning` — **degrau 1/4**: a tese não pode ser *significada*. Consistente, não paradoxal: uma negativo universal não é um mentiroso | PROVEN | `{Means, Subject}` |
+| C372 | §26 item 3 | `MeaningRetorsion.noMeaning_is_unperformed (s : Subject) : NoMeaning → ¬ Act s NoMeaning` — **degrau 2/4**: a tese não pode ser *actuada* | PROVEN | `{Initiates, Means, State, Subject}` |
+| C373 | §26 item 3 | `MeaningRetorsion.no_correct_judgment_of_noMeaning (s : Subject) : ¬ Correct s NoMeaning` — **degrau 3/4 — NOVO**: não havia rung `Correct` para nenhuma tese de insignificância | PROVEN | `{Initiates, Means, State, Subject}` |
+| C374 | §26 item 3 | `MeaningRetorsion.judgment_of_noMeaning_is_incorrect (s : Subject) (h : Correct s NoMeaning ∨ Incorrect s NoMeaning) : Incorrect s NoMeaning` — **3'/4, forma exaustiva**: quem julga a tese, julga-a incorretamente | PROVEN | `{Initiates, Means, State, Subject}` |
+| C375 | §26 item 3 | `MeaningRetorsion.noMeaning_is_unassertable : ¬ ∃ s : Subject, Asserts s NoMeaning` — **degrau 4/4, A RETORSÃO, incondicional**: sem hipótese, sem sujeito, sem ponte, sem axiom novo. **Não é uma proibição de tipo**: a frase é bem-formada e o autor enuncia-a; o que fica excluído é uma afirmação *que resulte*. Ver o bullet "a afirmação é a ENTRADA" | PROVEN | `{Initiates, Means, State, Subject}` |
+| C376 | §26 item 3 | `MeaningRetorsion.noMeaning_ladder` — os quatro degraus numa conjunção, o último incondicional | PROVEN | `{Initiates, Means, State, Subject}` |
+| C377 | §26 item 3 | `MeaningRetorsion.affirms_noMeaning_yields_meaning : (∃ s, Act s NoMeaning) → ∃ p, Meaning_I p` — a frase do autor como **teorema positiva de existência**: a afirmação é a entrada que produz o significado. *Delta 2026-09-27:* a hipótese foi **generalizada** de `Asserts` para `Act` (`Asserts s p` é `Act s p ∧ p`, logo a forma antiga é o caso particular e esta subsume-a; o C-id não muda porque a proposição cresceu). *O preço, inalterado:* a hipótese continua indisponível por antecedência — C372 exclui `Act s NoMeaning` onde `NoMeaning` vale — logo a leitura é a do autor: quem performua a tese com significado refuta-a | PROVEN | `{Initiates, Means, State, Subject}` |
+| C378 | `poem.txt` P3 | `MeaningRetorsion.judges_noMeaning_yields_meaning : (∃ s, Correct s NoMeaning) → ∃ p, Meaning_I p` — a forma que o P3 usa: "há certo e há errado → há significado" | PROVEN | `{Initiates, Means, State, Subject}` |
+| C379 | §35 item 3 | `MeaningRetorsion.no_countermodel_can_affirm_the_thesis : ∀ S, S.NoI → ¬ ∃ s, S.Asserts s NoI` — **corolário** de `level2_signature_asserts_noi_selfRefutes` (`NegativeRetorsionAudit.lean:286`), generalizado de uma assinatura a todas; **não reivindica novidade**. O peso independente da refutação está em C381 (que usa `NoWeakActIn` e não é instanciação) e em C382 | PROVEN | `{}` |
+| C380 | §35 item 3 | `MeaningRetorsion.signature_weak_retorsion (S) (s) : S.asserts s (NoWeakActIn S) → False` — **NOVO**: `Agency.noWeakAct_selfRefutes` (`:245`) é só canónico; aqui é a negação do dado-do-acto em assinatura arbitrária. `NoWeakActIn` (def, sem claim) é o que separa M1 de um `Means`-vocabulário qualquer, e a sua negação é o que M1 satisfaz | PROVEN | `{}` |
+| C381 | §35 item 3 | `MeaningRetorsion.the_two_denials_cannot_both_be_affirmed : ∀ S, S.NoI → NoWeakActIn S → ¬ ∃ s, S.asserts s NoWeakActIn S` — **a refutação conjunta, numa frase**: a tese e a negação do dado-do-acto não podem ser ambas afirmadas | PROVEN | `{}` |
+| C382 | §35 item 3 | `MeaningRetorsion.the_meaningless_world_remains_a_model : ∃ S, (∃ _s, True) ∧ S.NoI ∧ (∀ s, ¬ S.Asserts s NoI)` — **o complemento populado**: mundo com sujeito (`Unit`, contra o sort vazio de M0 em `NegativeRetorsionAudit.lean:296`) onde a tese é verdadeira e nenhuma afirmação dela tem êxito. **É a razão machine-checked de que `¬ NoMeaning` NÃO é derivável** | COUNTERMODEL | `{}` |
+| C383 | §35 item 3 | `MeaningRetorsion.countermodel_is_a_world_where_the_thesis_is_unutterable` — as duas metades em conjunto: o complemento populado (C382) e a retorsão assinatura-a-assinatura (C379). *Sobre o nome:* "unutterable" **não** é proibição de tipo — a frase é bem-formada e o autor enuncia-a; o excluído é o **sucesso** da afirmação. C385 é a meia-positiva que o torna mau nome, e não má leitura | PROVEN | `{}` |
+| C384 | §26 item 3 | `MeaningRetorsion.Voices (s : Subject) (p : Prop) : Prop := act s p` — **a performance sem a condição de sucesso**: o "pode ser dito, pode ser afirmado" do autor, e o predicado que Γ não tinha, porque todos os `asserts` do corpus trazem `∧ p` (`asserts s p := act s p ∧ p`, `Asserts s p := Act s p ∧ p`, `Correct s p := A s p ∧ T p`) — logo a palavra *afirmar* passara a significar *afirmar correctamente*. Construída sobre o `act` fraco, não sobre `Act`: `Act` exige `Means` e C372 já exclui `Act s NoMeaning` onde `NoMeaning` vale, portanto uma afirmação construída sobre `Act` nunca poderia testemunhar a tese a ser dita | PROVEN | `{Subject, act}` |
+| C385 | §26 item 3 | `MeaningRetorsion.the_thesis_is_utterable_though_not_assertable : ∃ S, (∃ _s, True) ∧ S.NoI ∧ (∃ s, S.act s S.NoI) ∧ (∀ s, ¬ S.Asserts s S.NoI)` — **o mundo em que a tese é dita**: o mundo de C382 com `act := True` em vez de `False`; a terceira conjuncta é C379 aplicada a ele. É o que torna "unutterable" (C383) mau nome e não má leitura: a frase é bem-formada, o autor enuncia-a, e o act performado é fraco — `Act` exigiria `Means`, e num mundo onde a tese é verdadeira o único acto disponível dela é o fraco. A mesma instância desfaz o contramodelo de C294 como RESPOSTA (lifting trivial: `Means := M`, `act := True`). *Nota (2026-09-27, corrigida):* este ficheiro registava antes a impossibilidade de identificar um orador com um `Subject` como *limite registado* à espera de um 27.º axiom. **Essa moldura estava errada e é retirada.** `Voices` e `Act` quantificam sobre todos os sujeitos, portanto **quem quer que faça a performance da tese refuta-a ao fazê-la** — a contradição performativa é independente de quem fala, e nenhum axiom precisa de dizer que um orador em linguagem natural é um `Subject` para a retorsão correr. `Subject` continua a ser um sort não interpretado, e `()` a testemunha, pelo que Γ também não consegue *nomear* qual é o sujeito do modelo; nada na retorsão precisa que o nomeie | COUNTERMODEL | `{}` |
+| C386 | §35 | `CosmicExistence.cosmos_presence_model_of_the_act_datum (h : ∃ s, ∃ p, Act s p) : CreatedRealm` — **a GOD-LANE, primeira metade**: o mesmo inhabitation de C367 com o preço movido do `Tag: META` `AxTwoSubjects` para o dado performativo do acto ◈ `performativeActDatum` (`Tag: TRANS`, registado 2026-09-27, registry 6 → 7). `Logos.Agency.act_datum_implies_means` dá a testemunha sem ponte nenhuma, porque `Act` já traz `Means` como conjuncta. **Não é uma reancoragem de C367** e não a substitui: um teorema *descobre*, não fabrica, e Γ não fornece um sujeito do nada — o dado é *dado*, como `Agency.lean:4` diz ("*given*, not inferred"). Reancorar `cosmos_obtains` seria repetir exactamente o bug de A1 ("consequência da pluralidade — o datum que deve preceder-la"), que foi apanhado e revertido. **O que a linha afirma é falsificável nos dois sentidos:** rejeite a ponte e C367 cai, esta linha fica | PROVEN ↑ | `{propext, Initiates, Means, State, Subject}` |
+| C387 | §35 | `CosmicExistence.the_ground_loves_the_cosmos_from_the_act_datum (h : ∃ s, ∃ p, Act s p) : ∃ t, ContingentEntity t ∧ (∃ q, EntityMeans t q) ∧ ∃ p, GroundBearsGood Entity.ofGround t p` — **a GOD-LANE, o pagamento**: a conclusão de C351 com enunciado *byte-idêntico* e sem a rota da pluralidade. Medido: C351 é `{AxGroundLovesContingentRealm, AxTwoSubjects, GroundBearsGood, Means, Subject, Will, propext, subjectWill}` e esta linha é `{AxGroundLovesContingentRealm, GroundBearsGood, Initiates, Means, State, Subject, propext}` — **três axiomas e um sort a menos** (`AxTwoSubjects`, e com ele o `Will`/`subjectWill` que só entravam por aí). Restam a ponte do amor e a relação `GroundBearsGood`, e têm de restar: um bem direccional detido pelo fundamento não é exprimível no vocabulário de fundamentação de Γ, que só chega à suficiência não dirigida. **A metafísica interpessoal deixa de ser premissa do amor do fundamento** — e as duas premissas restantes são independentes dela, pelo que a remoção é *visível* e não absorvida. Preço relocado para ◈ `performativeActDatum`: livre em axiomas, não livre em performance | PROVEN ↑ | `{propext, Initiates, Means, State, Subject, AxGroundLovesContingentRealm, GroundBearsGood}` |
+
+- **O contramodelo não é refutado como modelo; é refutado como RESPOSTA.** M1 e C294 são
+  instâncias de uma só família — *um vocabulário significativo em que nada é significado*
+  — e ambos Recusam também o dado-do-acto (`act := fun _ _ => False`). Uma resposta é um
+  movimento feito dentro do discurso; um mundo sem movimentos não tem respostas, logo não
+  pode conter a afirmação do seu próprio silêncio. As duas classes de modèle não se
+  confundem: `NoWeakActIn` é precisamente o que separa M1 de um `Means`-vocabulário
+  qualquer, e é a sua negação que M1 satisfaz.
+- **A afirmação é a ENTRADA da refutação, não a sua saída.** `noMeaning_is_unassertable`
+  (C375) é incondicional e não custa axiom nenhum, mas a contradição só se produz quando
+  a afirmação é fornecida. A retorsão é **livre em axiomas e não livre em performance** —
+  é essa a forma honesta da frase do autor, e é o preço que o gate B5 manda escrever.
+- **O que este lote NÃO entrega:** `¬ NoMeaning`. `the_meaningless_world_remains_a_model`
+  (C382) é a razão machine-checked: um mundo **populado** (sujeito `Unit`, ao contrário
+  de M0, o sort vazio de `unassertability_does_not_imply_falsity` `:296`) onde a tese é
+  verdadeira e ninguém pode afirmá-la. A afirmação só se paga quando é dado de entrada; um
+  mundo onde ninguém afirma nada não tem o que a refute. O conteúdo fica vivo; a
+  afirmação não sobrevive.
+- **O preço é zero e é verificado, não afirmado** (gate B2): nenhuma das 17 declarações
+  carrega `AxTwoSubjects` nem `transcendental_reflection_intentional`. Por isso o
+  `AxTwoSubjects` (C367) continua a ser o preço da **existência** positiva de significado;
+  o que este lote mostra é que ele é desnecessário sempre que a afirmação é dada.
+- **Leitura para o leitor, verbatim:** a tese do "não há significado" não é um erro
+  *lógico* (é consistente); é um erro *performativo* — um conteúdo que ninguém pode
+  ter por correto não é uma posição, é a descrição de um mundo em que nada é nunca
+  tenido.
+
+## Batch semantic-finitude (2026-09-27) — F15 consolidated, the bound now ◈-stipulated
+
+The per-subject meaning bound `∀ s, ∃ p, ¬ Means s p` (F15) is now a **stipulated**
+sentence, registered in `Stipulations.lean` as ◈ `semanticFinitude` (`Tag: VOCAB`),
+and the ten headline theorems that were conditional on an anonymous copy of it are keyed
+to the named bound in the new module `Logos/SemanticFinitude.lean`. This is
+**consolidation and badging, not derivation**: `SemanticFinitude` is a `def` of a `Prop`
+that each corollary takes as a *premise*, so **zero new axioms** are declared and every
+corollary's `#print axioms` footprint is byte-identical to the pre-existing conditional
+theorem it mirrors.
+
+| C-id | Decl (`Logos.SemanticFinitude`) | Pegada (auditada) | Classe |
+|---|---|---|---|
+| C388 | `SemanticFinitude` (def) | `{Means, Subject}` | ◈ STIPULATED (VOCAB) — a `def`, not an axiom |
+| C389 | `exactly_one_universal_modal_ground_stipulated` | `{Means, Subject}` | PROVEN ◈ (unicity of the ground) |
+| C390 | `ofGround_sole_universal_grounding_stipulated` | `{Means, Subject}` | PROVEN ◈ |
+| C391 | `conditional_canonical_aseity_stipulated` | `{Means, Subject}` | PROVEN ◈ |
+| C392 | `ofGround_modal_aseity_conditional_stipulated` | `{Means, Subject}` | PROVEN ◈ |
+| C393 | `ofGround_divine_pure_actuality_stipulated` | `{Initiates, Means, State, Subject}` | PROVEN ◈ |
+| C394 | `ofGround_no_grounding_potency_stipulated` | `{Means, Subject}` | PROVEN ◈ |
+| C395 | `ofGround_divine_simplicity_stipulated` | `{Means, Subject, propext}` | PROVEN ◈ |
+| C396 | `ofGround_non_composite_stipulated` | `{Means, Subject, propext}` | PROVEN ◈ |
+| C397 | `ofGround_simplicity_and_transcendence_stipulated` | `{Means, Subject, propext}` | PROVEN ◈ |
+| C398 | `ground_is_canonically_aseitous_but_not_asietic_stipulated` | `{Means, Subject}` | PROVEN ◈ |
+| C399 | `semantic_omnipotence_is_consistent` | `{}` | COUNTERMODEL (the bound is falsifiable) |
+| C400 | `semanticFinitude_excludes_ground_from_subjects` | `{Means, Subject}` | PROVEN ◈ (the bound is load-bearing) |
+
+**C-ids atribuídos 2026-09-27 (C388–C400), por instrução do autor.** As pegadas `{CL}`
+das linhas de simplicidade foram corrigidas para `{propext}` na mesma passagem — o
+auditado é `propext` (lógica clássica de Lean, não um axiom substantivo), e pegadas são
+derivadas, nunca transcritas.
+
+- **F15 retira** (o registo do lema-em-falta é substituído por este ponteiro ◈). A contagem
+  de chamadores do próprio F15 ("20 vezes, 5 ficheiros, `DivinePureActuality` 5") fica
+  superada por um censo fresco: 17 premissas + 2 campos de estrutura = 19 ocorrências em
+  5 ficheiros, `DivinePureActuality` 4 (não 5).
+- **O preço é invisível a `#print axioms`** (a premissa não é um axioma); o ◈ no registo
+  (agora **6** stipulações) e a cadeia do gerador `SEMANTIC_FINITUDE_STEPS` são os
+  únicos sinais. "A contagem de axiomas não se mexeu" **não** é um teste para este lote.
+- **O limite é falsificável, não vácuo**: `semantic_omnipotence_is_consistent` (`{}`)
+  é um modelo da sua negação (um portador semanticamente omnipotente), e
+  `semanticFinitude_excludes_ground_from_subjects` mostra o limite a fazer trabalho real
+  (`ofGround_meansAll` dá ao fundamento *toda* proposição, logo o limite é o que o mantém
+  fora do sort `Subject`).
+- **Os dez teoremas condicionais pré-existentes NÃO são editados** (mantêm a premissa
+  anónima); os corolários `_stipulated` são aditivos. A existência de um fundamento já era
+  `PROVEN` incondicionalmente (C319); o que é ◈ aqui é a sua *unicidade*. Pessoalidade
+  (C228), Trindade (F6/F8) e fundamentação *explicativa* (C326/C328) ficam intocados.
+- Decisões em aberto (autor): **resolvido 2026-09-27 para o bloco de C-ids — C388–C400
+  abaixo**; o Ledger desta nota lê os C-ids. O `Tag:` fica (VOCAB justificado;
+  alternativa SEM documentada; o autor mandou calar, não re-mexer).
+
+| C388 | §28 Unicity | `SemanticFinitude.SemanticFinitude : Prop := ∀ s : Subject, ∃ p : Prop, ¬ Means s p` — **o limite F15, nomeado**: nenhum sujeito significa toda a proposição; nenhuma criatura é semanticamente omnipotente. Uma frase sobre o vocabulário existente, já paga 17 vezes como premissa anónima, agora registada ◈. Não é ponte META e não declara conexão entre entidades — é o mesmo estatuto que `ofGround_existsAt` | PROVEN | `{Means, Subject}` |
+| C389 | §28 Unicity | `SemanticFinitude.exactly_one_universal_modal_ground_stipulated` — **a unicidade do fundamento de toda a realidade**, assente no limite nomeado em vez da premissa anónima. A existência já era `PROVEN` (C319); o que é ◈ aqui é a *unicidade* | PROVEN | `{Means, Subject}` |
+| C390 | §28 Unicity | `SemanticFinitude.ofGround_sole_universal_grounding_stipulated` — a fundamentação universal exclusiva do fundamento, no limite nomeado | PROVEN | `{Means, Subject}` |
+| C391 | §28 Unicity | `SemanticFinitude.conditional_canonical_aseity_stipulated` — a asseidade canónica condicional do fundamento, no limite nomeado | PROVEN | `{Means, Subject}` |
+| C392 | §28 Unicity | `SemanticFinitude.ofGround_modal_aseity_conditional_stipulated` — a asseidade modal do fundamento quanto a `CanonicalExtDepAt`, no limite nomeado | PROVEN | `{Means, Subject}` |
+| C393 | §28 Unicity | `SemanticFinitude.ofGround_divine_pure_actuality_stipulated` — **a actualidade pura divina** (actus purus) do fundamento, no limite nomeado | PROVEN | `{Initiates, Means, State, Subject}` |
+| C394 | §28 Unicity | `SemanticFinitude.ofGround_no_grounding_potency_stipulated` — zero potência passiva de fundamentação no fundamento, no limite nomeado | PROVEN | `{Means, Subject}` |
+| C395 | §28 Unicity | `SemanticFinitude.ofGround_divine_simplicity_stipulated` — **a simplicidade divina** do fundamento, no limite nomeado | PROVEN | `{Means, Subject, propext}` |
+| C396 | §28 Unicity | `SemanticFinitude.ofGround_non_composite_stipulated` — a não-composição mereológica do fundamento, no limite nomeado | PROVEN | `{Means, Subject, propext}` |
+| C397 | §28 Unicity | `SemanticFinitude.ofGround_simplicity_and_transcendence_stipulated` — simplicidade divina **e** transcendência ontológica do fundamento, no limite nomeado | PROVEN | `{Means, Subject, propext}` |
+| C398 | §28 Unicity | `SemanticFinitude.ground_is_canonically_aseitous_but_not_asietic_stipulated` — canonicamente asseitício mas não ele próprio assiético: a asseidade canónica vale do fundamento, a assiidade não | PROVEN | `{Means, Subject}` |
+| C399 | §28 Unicity | `SemanticFinitude.semantic_omnipotence_is_consistent` — **o limite é falsificável, não vácuo**: um portador semanticamente omnipotente (`S := Unit`, `M := True`) é modelo da sua negação, pelo que a unicidade assenta mesmo nele e tem de ser badged ◈ | COUNTERMODEL | `{}` |
+| C400 | §28 Unicity | `SemanticFinitude.semanticFinitude_excludes_ground_from_subjects` — **o limite a fazer trabalho real**: `ofGround_meansAll` dá ao fundamento *toda* a proposição, logo é o limite que o mantém fora do sort `Subject` — encadeado *através* do limite de propósito, para a dependência ficar visível em vez de escondida atrás de C315 | PROVEN | `{Means, Subject}` |
+
 ## Batch committed-choice (2026-09-24) — Escolha Comprometida / "committing to one"
 
 O glossado "apreender alternativas incompatíveis **e comprometer-se com uma**" ganhou
@@ -1064,12 +1190,19 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
 
 - **PROVEN** (status PROVEN/PROVEN↑ whose audit footprint carries **no SEM/META
   axiom** — machine re-derived from `formal/axiom_audit.json`, 2026-09-25):
-  - **47 truly axiom-free** (`{}`): C1, C2, C4, C5, C6, C7, C8, C9, C183, C11, C179,
+  - **51 truly axiom-free** (`{}`): C379, C380, C381, C383, C1, C2, C4, C5, C6, C7, C8, C9,
+    C183, C11, C179,
     C17, C181, C22, C26, C27, C31, C35, C36, C95, C96, C182, C184, C185, C38, C50,
     C180, C63, C108, C111, C166, C167, C226, C227, C231, C259, C260, C272, C309,
     C310, C353, C355, C356, C361, C364, C365, C366. (C175 is also `{}`, but its
     ledger status is COUNTERMODEL — the separation, not a PROVEN step — so it is
-    not counted in this bucket. C226/C227 are the two `{}`-footprint
+    not counted in this bucket; **C382 is the same case** — the 2026-09-27
+    meaning-retorsion batch's populated complement is `{}` with COUNTERMODEL
+    status, and it is the machine-checked reason `¬ NoMeaning` is not derivable,
+    so counting it as a PROVEN step would overstate the batch. **C385 is the same
+    case** — the utterance model is `{}` with COUNTERMODEL status, and it is a
+    separation (utterable, not assertable) rather than a PROVEN step. C379, C380, C381
+    and C383 are its four `{}` PROVEN siblings. C226/C227 are the two `{}`-footprint
     personhood-separation results of the 2026-09-25 refactor; C231 is the
     `{}`-footprint *irreducibility* result that closes that batch. C233 and C240
     are likewise `{}` with COUNTERMODEL status — the scope/infallibility and
@@ -1094,7 +1227,9 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   - **11 `CL`-only**: C3, C10, C12, C13, C14, C16, C37, C59, C93, C251, C322. (C251 is the
     non-emptiness + contradiction-freedom of the satisfiable scope domain; its `propext`
     cost is inherited from C14, deliberately, so the graph shows the C251 → C14 edge.)
-  - **174 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+  - **199 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+    C368, C369, C370, C371, C372, C373, C374, C375, C376, C377, C378, C384, C386,
+    C388, C389, C390, C391, C392, C393, C394, C395, C396, C397, C398, C400,
     C102, C103, C104, C105, C91, C58, C68, C21, C23, C24, C25, C30, C83, C84,
     C107, C160, C161, F1a, C94, C186, C39, C49, C51, C52, C53, C55, C56, C57, C62,
     C101, C97, C98, C99, C100, C85, C86, C113, C114, C116, C120, C121, C122, C137,
@@ -1157,13 +1292,21 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     see the BLOCKED/retired blocks and the `## Formal Frontiers` inventory.
     Of that range only C74 (`aloneExcluded`) survives, as PROVEN↑ (below).
 - **PROVEN↑** (fully machine-verified under the flagged SEM/META axiom shown —
-  no foundation axiom remains): **40 claims** —
+  no foundation axiom remains): **41 claims** —
   `AxTwoSubjects` (22): C28, C29, C40–C48, C54, C61, C74, C277, C278, C279, C286, F4,
   **C351, C352, C367**
   (F4 shares the C41 decl, `T13_someoneLovable`; C351–C352 entered this list on
   2026-09-27 when the SEM datum `AxContingentCreationObtains` was deleted; **C350 left it
   the same day and C367 entered**, when existence and meaning were split. **The
   `AxTwoSubjects` count is unchanged at 22 — C350 out, C367 in, net zero** — and that is the
+  **(C387, 2026-09-27, God-lane)** the 41st entry, which is the *first* claim to enter this
+  list on `AxGroundLovesContingentRealm` alone: it is the ground's-love conclusion reached
+  without the plurality route, so it is not behind `AxTwoSubjects` at all, and its footprint
+  also drops the `Will`/`subjectWill` that entered only through that bridge. It does not
+  reduce the 22: C351, C352 and C367 are untouched and still pay the bridge. The row is
+  `PROVEN↑` rather than `PROVEN` because the love bridge and `GroundBearsGood` are real
+  axioms, META and VOCAB respectively, and the ◈ marks the *stipulated* act-datum that
+  its hypothesis carries.
   right result, because the six existence-only claims this batch also freed
   (`a_created_realm_obtains`, `a_contingent_reality_obtains`,
   `reality_is_not_exhausted_by_the_ground`,
@@ -1180,10 +1323,11 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   `AxIntentionalChoice` (1): F1b (`freeWill_exists`);
   `AxBenevolentBearingObtains` (1): C178 (`moral_good_obtains` — the positive
   moral close; C176 is the bridge's own countermodel);
-  `AxGroundLovesContingentRealm` (6): C340, C341, C342, C343, C351, C352 (the
-  ground-love inhabitants and the two cosmic conclusions; the primitive that makes the
-  bridge non-derivable, `GroundBearsGood`, is `Tag: VOCAB` and so is **not** counted
-  here — the whole price of these six rows is the single META axiom C339);
+  `AxGroundLovesContingentRealm` (7): C340, C341, C342, C343, C351, C352, C387 (the
+  ground-love inhabitants and the two cosmic conclusions, plus the God-lane's re-routed
+  twin of C351, which reaches the love bridge without `AxTwoSubjects`; the primitive that
+  makes the bridge non-derivable, `GroundBearsGood`, is `Tag: VOCAB` and so is **not**
+  counted here — the whole price of these seven rows is the single META axiom C339);
   `AxContingentCreationObtains` — **RETIRED 2026-09-27, 0 rows.** It was a `Tag: SEM`
   datum entering C351, C352 through the target's contingency and content. It is deleted:
   `Plurality.cogito_from_T12` already exhibits the inhabitant of `Means` unconditionally,
@@ -2267,7 +2411,7 @@ aberto.**
 | C350 | §35 | `CosmicExistence.contingent_realm_obtains : ContingentRealmObtains` (`CosmicExistence.lean:~220`) — **contingency-overflow, at no substantive price**: something obtains, is modal-fragile, and is not the necessary ground, and Γ derives it outright. **PROMOTED FROM `PROVEN↑` TO `PROVEN` 2026-09-27** — the status *drops*, and that is an improvement: Batch 1 had left existence priced on `AxTwoSubjects` (`Tag: META`), which the user rejected — *"Cosmos existence MUST be axiom free. Otherwise the proof itself wouldn't exist."* *Why the price was never intrinsic:* it came from **one field** of the `Realm` record, `bears_meaning`. `EntityMeans` is `False` on `ofAtom` and `True` on `ofGround` (`RecoveredOntologicalGround.lean:48-50`), and `not_the_ground` excludes the latter, so `bears_meaning` **forces the witness to be a `Subject`** — and `Subject` is an opaque sort (`Agency.lean:43-49`). An `∃ s : Subject, p` is therefore unprovable without an axiom mentioning `Subject`. **Existence never needed that field.** `ContingentRealm` is `Realm` minus `bears_meaning`: a `structure` change, so it adds **no axiom** and the registry does not move. *The witness:* `LovesAsGround.an_atom_is_contingent 0` (`LovesAsGround.lean:171`), reused verbatim — the construction C324 already uses, so the footprint is `{propext, Subject}`. *Not vacuous:* `EntityExistsAt w (ofAtom n) := w n = TV.t` (`Entity.lean:45-48`) discriminates on the index, so `actualWorld 0 = TV.t` while `fun _ => TV.f` falsifies it — a real contingency claim, not an artifact of a coarse world sort. *On the word "created":* it labels the **region** of reality the record describes, and does **not** assert production. No `Creates` relation, no agent, no first moment appears here or is derivable from it. **Do not read this row as saying something made the realm** — that is lane L3, unclaimed, and C110 still refutes that grounding entails a creation record. *Nor as saying this is our cosmos:* C324's prohibition stands, an atom is **not** the cosmos. What is proved is that the *shape* has an instance; the **identification** is C367. Not a duplicate claim id: C324 remains `PROVEN` with its caveat unchanged, and C350 carries the explicit `not_the_ground` conjunct C324 lacks. The existence half of F9 leaves the faith zone for the second time and now for a stronger reason; **purpose and the incarnation do not** | PROVEN | `{propext, Subject}` |
 | C351 | §35 | `CosmicExistence.the_ground_loves_the_cosmos : ∃ t : Entity, ContingentEntity t ∧ (∃ q, EntityMeans t q) ∧ ∃ p, GroundBearsGood Entity.ofGround t p` — **the conclusion, with both prices visible.** The realm's contingency and content plus the declared bridge yield a directional good the ground holds toward the cosmos: "He is not merely a mathematical ground, but loves". The footprint names the **whole** price — the empirical datum, the metaphysical bridge, the content vocabulary and the world structure. The claim is about the ground **as a kind**; no hypostatic identification is made (C344) | PROVEN↑ | `{propext, Means, Subject, Will, subjectWill, AxTwoSubjects, AxGroundLovesContingentRealm, GroundBearsGood}` |
 | C352 | §35 | `CosmicExistence.the_ground_loves_the_cosmos_in_a_context : ∃ t : Entity, ContingentEntity t ∧ ∃ a : Prop, GroundLoves Entity.ofGround t a` — the same conclusion in the library's *relational* vocabulary: there is a context in which the ground's love of the realm holds. Note this is the relation `GroundLoves`, **not** interpersonal `Loves` — the two are provably disjoint (C346) and the transfer is unstatable rather than merely unproved (C348) | PROVEN↑ | `{propext, Means, Subject, Will, subjectWill, AxTwoSubjects, AxGroundLovesContingentRealm, GroundBearsGood}` |
-| C367 | §35 | `CosmicExistence.cosmos_obtains : CreatedRealm` (`CosmicExistence.lean:~300`) — **and it bears content of its own.** The meaning-bearing half, split off from C350 on 2026-09-27: a contingent created realm, not the necessary ground, obtains **and** bears content, and the witness is a `Subject`. *This is the row that identifies the derived realm as the cosmos.* *Price, now correctly attributed:* **existence is not what this row pays for** — C350 has it at `{propext, Subject}`. What costs here is the `bears_meaning` conjunct, and only that, via the plurality bridge `Logos.Value.AxTwoSubjects` (`Tag: META`): the reality of right-and-wrong demands at least two distinct persons. **Reject `AxTwoSubjects` and the realm's *meaning-bearingness* goes; its existence does not.** Both shortcuts that would have made this row free were considered and **rejected**: rescoping the love claims onto an atom, and relaxing `EntityMeans` so atoms bear content — which would also have destroyed C335 `meaningless_entities_cannot_be_loved` and C338. *Inherited from the retired row:* C324's "an atom is **not** the cosmos" limit, restated here because this is where the identification lives, and the C353 non-triviality note (`perfect_universe_has_no_contingent_realm` refutes the `Realm` shape in a world-rigid universe). *Unchanged by the split:* the deleted `AxContingentCreationObtains` was `AXIOM` (`Tag: SEM`) and its retirement (registry 25 → 24, SEM 7 → 6) stands, as does the finding that its stated reason — that `∃ s : Subject, ∃ p : Prop, Means s p` had no producer — was **false**, `Plurality.cogito_from_T12` being that producer *unconditionally* from the axiom-free `Logos.Core.rightWrongDistinction`. **Not claimed:** that the negation is consistent with all of Γ (model-theoretic over the whole theory, not built), nor that anything made the realm. **Existence is not entailment** — C110 stands | PROVEN↑ | `{propext, Means, Subject, Will, subjectWill, AxTwoSubjects}` |
+| C367 | §35 | `CosmicExistence.cosmos_obtains : CreatedRealm` (`CosmicExistence.lean:~300`) — **and it bears content of its own.** The meaning-bearing half, split off from C350 on 2026-09-27: a contingent created realm, not the necessary ground, obtains **and** bears content, and the witness is a `Subject`. *This is the row that identifies the derived realm as the cosmos.* *Price, now correctly attributed:* **existence is not what this row pays for** — C350 has it at `{propext, Subject}`. What costs here is the `bears_meaning` conjunct, and only that, via the plurality bridge `Logos.Value.AxTwoSubjects` (`Tag: META`): the reality of right-and-wrong demands at least two distinct persons. **Reject `AxTwoSubjects` and the realm's *meaning-bearingness* goes; its existence does not.** Both shortcuts that would have made this row free were considered and **rejected**: rescoping the love claims onto an atom, and relaxing `EntityMeans` so atoms bear content — which would also have destroyed C335 `meaningless_entities_cannot_be_loved` and C338. *Inherited from the retired row:* C324's "an atom is **not** the cosmos" limit, restated here because this is where the identification lives, and the C353 non-triviality note (`perfect_universe_has_no_contingent_realm` refutes the `Realm` shape in a world-rigid universe). *Unchanged by the split:* the deleted `AxContingentCreationObtains` was `AXIOM` (`Tag: SEM`) and its retirement (registry 25 → 24, SEM 7 → 6) stands, as does the finding that its stated reason — that `∃ s : Subject, ∃ p : Prop, Means s p` had no producer — was **false**, `Plurality.cogito_from_T12` being that producer *unconditionally* from the axiom-free `Logos.Core.rightWrongDistinction`. **Not claimed:** that the negation is consistent with all of Γ (model-theoretic over the whole theory, not built), nor that anything made the realm. **The price is not forced (2026-09-27, GOD-LANE):** `AxTwoSubjects` is one route to a meaning-bearing realm, not the only one. C386 inhabits `CreatedRealm` from the performative act-datum ◈ `performativeActDatum` (`Tag: TRANS`, registry 6 → 7) with no bridge, and C387 carries the same substitution all the way to the ground's love. **This row is untouched and still pays the bridge** — the substitution is a *companion*, not a re-anchoring, and the reason is the A1 bug: anchoring subject-existence on plurality made it a consequence of the datum it must precede. A theorem discovers; it does not manufacture. **Existence is not entailment** — C110 stands | PROVEN↑ | `{propext, Means, Subject, Will, subjectWill, AxTwoSubjects}` |
 | — | §35 | `CosmicExistence.ContingentRealm : Type` — **the realm without the meaning condition**: `witness`, `actual`, `contingent`, `not_the_ground`. It is `Realm` minus `bears_meaning`, and dropping that one field is what frees existence from `AxTwoSubjects`. A `structure` change, so **no axiom is added**. Displayed like `AsietyFreedomOfGround`; the claim that inhabits it is `contingent_realm_obtains` |
 | — | §35 | `CosmicExistence.ContingentRealmObtains : Prop := Nonempty ContingentRealm` — the `Prop` form, so the ledger can name the inhabitation as a claim while the record keeps a single witness (the same device as `CreatedRealm`) |
 | — | §35 | `CosmicExistence.CreatedRealm : Prop := Nonempty Realm` — the **meaning-bearing** realm's structure, displayed like `AsietyFreedomOfGround` at §31: a `Type`-valued, displayed like `AsietyFreedomOfGround` at §31: a `Type`-valued record, because a `Prop`-valued structure may not carry a data field, so the single witness is only expressible this way. **Corrected 2026-09-27:** this row previously read `CreatedRealm (R : Type) : Prop := Nonempty Realm`, inventing a parameter; the audited `def` (`CosmicExistence.lean:137`) is a closed `Prop` and `R` is the *structure* name being inhabited, not a binder. The `Type`-valued thing is `structure Realm : Type` (`:119`), displayed by the same row's prose. `Realm` carries `witness`, `actual`, `contingent`, `not_the_ground` and `bears_meaning` — every field a predicate over the *existing* vocabulary about **one** entity, so the record really does describe a single realm | — | `{Means, Subject}` |
