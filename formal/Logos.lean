@@ -121,5 +121,11 @@ import Logos.MeaningRetorsion
 -- (`Logos.Precedence`), plus the refutation of the "empty world" reading the prose
 -- route needed: no world satisfies no form. Ten declarations, one `structure`, zero new
 -- axioms. `Core.T p := p` is world-free, so the row's status is a split, not a bare
--- PROVEN. The plan of record is AUDIT.md.
+-- PROVEN. The plan of record is `PLAN.md`; there is no root `AUDIT.md`.
 import Logos.Precedence
+-- The sole-bearer suite (`Logos.CharacteristicSoleBearer`): the discriminating form
+-- `∀ e, P e → e = Entity.ofGround` for the six footprint characteristics, plus the master
+-- theorem. Zero new axioms; the four `SemanticFinitude`-priced rows pay the 27th axiom
+-- (`Tag: VOCAB`) once each, in one shared lemma (`no_subject_grounds_the_ground`).
+-- Immutability is recorded as a priced boundary, not asserted.
+import Logos.CharacteristicSoleBearer

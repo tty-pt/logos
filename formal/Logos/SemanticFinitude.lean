@@ -62,12 +62,20 @@ would change a lot of text without changing a single fact. Read `_stipulated` as
 single answer here.** `scripts/census_semantic_finitude.py` counts the occurrences and
 `--check` fails the build if this docstring drifts from the kernel.
 
-- **`any` = 19.** Every top-level declaration across the five attribute modules whose
+- **`any` = 20.** Every top-level declaration across the five attribute modules whose
   *statement* mentions the bound, in the ∀-form (F15 itself, as a hypothesis) or in the
   per-subject ∃-form (`hDisc : ∃ p, ¬ Means s p`). Per file: `DivinePureActuality` 5,
-  `FoundationalUnicity` 6, `CanonicalAseity` 4, `DivineSimplicity` 3, `AsieticChoice` 1.
-- **`forall` = 14.** Only the declarations carrying the exact F15 ∀-form — the ones
-  that pay the price Γ actually declares. Per file: 3, 5, 2, 3, 1.
+  `FoundationalUnicity` 6, `CanonicalAseity` 4, `DivineSimplicity` 4, `AsieticChoice` 1.
+- **`forall` = 15.** Only the declarations carrying the exact F15 ∀-form — the ones
+  that pay the price Γ actually declares. Per file: 3, 5, 2, 4, 1.
+
+**Delta 2026-09-28 (batch SOLE-BEARER-AND-DERIVABILITY).** The figures moved 19 → 20 and
+14 → 15, both in `DivineSimplicity` (3 → 4). The new payer is
+`divine_simplicity_sole_bearer` (C440), whose `hFinite` premise is the bound. The module's
+other new declaration, `divine_simplicity_is_unique_to_the_ground` (C439), does **not** pay:
+unicity reads only the structure's `no_internal_components` field, so the *existence* half of
+C440 pays the bound and the *unicity* half does not. That asymmetry is the point of the row —
+and it is why the count of payers went up by one while the count of `{}`-class rows did not.
 
 Proof bodies are excluded: an occurrence in a proof is a *use* of a price already
 paid, not a new payment. The robust statement, which holds under either measure, is
@@ -76,10 +84,13 @@ divine simplicity, divine pure actuality, asietic choice, foundational unicity) 
 **all five modules**.
 
 **On the earlier figures.** The prose corpus carried "20", then "19 occurrences
-(17 premissas + 2 campos de estrutura)", then "17". The **total 19 is right** for the
-`any` measure; the **per-file breakdowns attached to it were wrong** (`FoundationalUnicity`
-is 6, not 7; `DivinePureActuality` is 5, not 4), and the bare "17" belongs to no
-consistent measure at all. What was actually wrong is the presentation, not the
+(17 premissas + 2 campos de estrutura)", then "17", then (after this batch) 20. Of those,
+the bare "17" belongs to no consistent measure at all, and the per-file breakdown attached
+to the "19" was wrong twice over (`FoundationalUnicity` is 6, not 7; `DivinePureActuality`
+is 5, not 4). The `any` total is now **20**, the `forall` total **15** — see the delta note
+above. The lesson is not the number: it is that a single integer quoted without a stated
+measure, a method, and a per-file breakdown is not a fact, and two of the four historical
+figures were wrong in exactly that way. What was actually wrong is the presentation, not the
 conclusion: a single integer was quoted as if the measure were the only possible one,
 with no method stated and a wrong per-file breakdown behind it. Hence two measures and
 a checking script.

@@ -104,7 +104,7 @@ novas, 0 registos ◈ novos**. O total declarado fica em **27**.
 
 **Uma correcção, e ela é o achado mais honesto do lote.** A via de `base.txt` §9 passa
 por um "mundo vazio" — um mundo onde a distinção não está instanciada em lado nenhum,
-que o fundamento teria de preceder. O plano (`AUDIT.md` §4, Stage 0) propunha como
+que o fundamento teria de preceder. O plano (o `PLAN.md` do lote, Stage 0) propunha como
 primeiro lema `{}` a linha
 
     no_form_satisfied_at_falsity_world (φ : Form) : ¬ Satisfies falsityWorld φ
@@ -141,7 +141,7 @@ autor; o que muda é o que Γ pode dizer dela.
 Também neste lote, sem C-id por serem `def`s e não claims: `Precedence.PrecedesRightWrong`
 (a `structure` de C425) e `CosmicExistence.Universe` (o `def` de C430/C431). `Universe`
 aparece **só em conclusões** — é definido aqui e consumido pelas três linhas acima —
-pelo que não precisa de registo ◈ nem de `Tag:`. Este é o ponto de `AUDIT.md` §3.3:
+pelo que não precisa de registo ◈ nem de `Tag:`. Este é o ponto do plano do lote (§3.3):
 o plano original definia `Universe e := NecessaryEntity e` e thereby re-provava C330
 sob um nome novo, o que o corpus proíbe.
 
@@ -264,6 +264,177 @@ fundamento é atemporal e perene, e `Entity.ofAtom 0` também.
 * **F15 por provação.** Continua `AXIOM` (C388). C433 *consome* o limite, não o
   substitui.
 
+## Batch sole-bearer & derivability (2026-09-28) — as características que *singularizam* o fundamento, e as cinco que se *derivam* dele
+
+Catorze linhas novas, **C439–C452**, em três módulos já existentes, mais um módulo novo
+(`Logos/CharacteristicSoleBearer.lean`, seis declarações), mais uma linha `DEFERRED` sem
+declaração (C453). E uma correcção ao plano do lote, que errou e que fica registada
+abaixo. Invariante do lote: **0 axiomas novos, 0 `Tag:` novos, 0 ◈ novos, 0 primitivos
+novos, 0 definições novas de `Subject`**. O registo fica em **27 declarados (VOCAB 16 /
+SEM 6 / META 5)**. Nada disto toca `F10`–`F16`.
+
+O lote responde a uma lacuna que `INFO.md` §2 mediu e que o documento para o leitor não
+podia ver. Uma característica pode estar registada em Γ de duas maneiras muito
+diferentes:
+
+* **instanciada** — `Entity.ofGround` tem a propriedade. É o que
+  `ofGround_divine_immutability`, `ofGround_divine_simplicity` e irmãs estabelecem, e
+  sozinha é fraca: não distingue *"o fundamento é o único portador"* de *"o fundamento é
+  o único exemplo que alguém escreveu"*.
+* **discriminante** — a propriedade **caracteriza** o fundamento,
+  `∀ e, P e → e = Entity.ofGround`. É a forma que faz um conceito trabalhar, e até este
+  lote valia para **uma** característica só: a precedência de §9 (C433).
+
+Este lote estabelece a forma discriminante para seis características, e em quatro delas a
+prova é **a mesma prova**.
+
+| Claim | Secao | Declaracao | Status | Pegada |
+|---|---|---|---|---|
+| C439 | §13 | `DivineSimplicity.divine_simplicity_is_unique_to_the_ground : ∀ e, DivineSimplicity e → e = Entity.ofGround` — **a unicidade da simplicidade, e a mais barata do corpus**: o campo `no_internal_components` fecha o caso sozinho, porque `HasInternalComponent` é `True` em `ofSubject` e `ofAtom` e `False` só em `ofGround`. Sem F15 | PROVEN | `{Means, Subject}` |
+| C440 | §13 | `DivineSimplicity.divine_simplicity_sole_bearer` — a forma da tabela de atributos: existência e unicidade num único enunciado, para a linha poder citar uma só declaração. **A assimetria de custo é o que interessa**: a existência paga `Means`/`Subject`, a **unicidade é de preço zero** | PROVEN | `{propext, Means, Subject}` |
+| C441 | §12–§17 | `CharacteristicSoleBearer.no_subject_grounds_the_ground (s) : ¬ GroundsEntity (EntityOf s) Entity.ofGround` — **o lema partilhado**, e o **único** sítio do lote onde se paga F15. `SemanticFinitude` transforma a *hipótese* `∃ p, ¬ Means s p` de `discriminating_subject_cannot_ground_the_ground` numa frase sobre *todos* os sujeitos. Um limite, dois usos | PROVEN | `{Means, SemanticFinitude, Subject}` |
+| C442 | §16 | `CharacteristicSoleBearer.ofGround_sole_foundational_omniscience : ∀ e, FoundationalOmniscience e → e = Entity.ofGround` — **o braço dos átomos é grátis** (`atom_not_truth_exhaustive`); o braço dos sujeitos passa por `universal_ground`. **Divulgação**: a unicidade da leitura *permissiva* convive com a refutação da *forte* — `ofGround_not_truth_tracking` | PROVEN | `{Means, NecessarySubjectKind, SemanticFinitude, Subject}` |
+| C443 | §17 | `CharacteristicSoleBearer.ofGround_sole_foundational_omnipotence` — **o mesmo preço, e a divulgação mais afiada do lote**: `gapless_operators_are_ground_or_necessary_kind` (`:250`) prova que um operador sem falhas é o chão **ou** um sujeito de espécie necessária, logo `gapless_operate` **sozinho não caracteriza** o chão. É o campo `universal_ground`, pago por F15, que remove a segunda possibilidade. Sensação **operativa**, não causal: F10 continua `BLOCKED` | PROVEN | `{Means, NecessarySubjectKind, SemanticFinitude, Subject}` |
+| C444 | §13 | `CharacteristicSoleBearer.ofGround_sole_foundational_omnipresence` — a mais barata das quatro pagas: `maximal_capacity` resolve **os dois** construtores sozinho, porque `EntityMeans (ofAtom _) = False` mata o átomo sem teorema. Sensação **fundacional**; a omnipresença física e a infinitézima métrica continuam ❌ | PROVEN | `{Means, NecessarySubjectKind, SemanticFinitude, Subject}` |
+| C445 | §14 | `CharacteristicSoleBearer.ofGround_sole_divine_pure_actuality` — Actus Purus é o **único** portador, na mesma forma incondicional de C433, o que torna §14 e §9 directamente comparáveis. **Todo** o braço dos sujeitos é o 27.º axioma, porque `EntityMeans _ p := True` é o que faz "zero potência intencional" e "significa tudo" serem a mesma frase | PROVEN | `{Initiates, Means, NecessarySubjectKind, SemanticFinitude, State, Subject}` |
+| C446 | §12–§20 | `CharacteristicSoleBearer.the_ground_is_sole_bearer_of_the_footprint_characteristics` — **o teorema-mestre do lote**: as seis características discriminantes numa conjunção, logo disponível como um único enunciado. A conjunção é um registo, não uma inferência nova; o que é novo é a forma | PROVEN | `{Initiates, Means, NecessarySubjectKind, SemanticFinitude, State, Subject}` |
+| C447 | §8 | `DivineImmutability.necessity_and_atemporality_yield_immutability` — **princípio tomista #1**, e a linha que o lote anterior deixou de fora e registou como achado: a imutabilidade **deriva-se** da necessidade, não se instancia no chão | PROVEN | `{Initiates, Means, NecessarySubjectKind, State, Subject}` |
+| C448 | §14 | `DivinePureActuality.necessity_aseity_and_immutability_yield_pure_actuality` — **princípio tomista #2**: *Actus Purus* **deriva-se** de necessidade + aseidade + invariância de transição + capacidade máxima + chão universal | PROVEN | `{Initiates, Means, NecessarySubjectKind, State, Subject}` |
+| C449 | §13 | `FoundationalOmnipresence.omnipresence_from_universal_ground_and_aseity` — **princípio tomista #3**: a omnipresença **deriva-se** de presença + chão universal + não-reciprocidade | PROVEN | `{Means, NecessarySubjectKind, Subject}` |
+| C450 | §16 | `DivineOmniscience.necessity_and_scope_yield_foundational_omniscience` — **princípio tomista #4**: a onisciência **deriva-se** de máximo + indivisível + chão universal | PROVEN | `{Means, NecessarySubjectKind, Subject}` |
+| C451 | §17 | `DivineOmnipotence.necessity_and_presence_yield_foundational_omnipotence` — **princípio tomista #5**: a omnipotência **deriva-se** de necessidade + presença + chão universal. `GAPMAP.md` já confessava que esta linha não tinha claim id | PROVEN | `{Means, NecessarySubjectKind, Subject, propext}` |
+| C452 | §13/§20 | `DivineSimplicity.ofGround_simplicity_and_transcendence` — **a ponte que já existia** entre as duas características que faltavam na tabela, e que nenhum leitor podia ver: o chão é simples **e** trascendente num único enunciado | PROVEN | `{Means, Subject, propext}` |
+
+### A correcção: o plano do lote errou, e a máquina apanhou-o
+
+`PLAN2.md` Task 2 afirmava que
+`DivineTranscendence.ofGround_sole_transcendent_ground` estava **sem linha no ledger** e que
+os quatro negativos da transcendência também. **As duas coisas são falsas**, e o gerador
+apanhou-as antes de eu as escrever: ao tentar criar C441–C445 para essas declarações, o
+`build_deduction.py` reportou `12 claims dissolved into a canonical claim: C301→C445,
+C304→C443, C306→C442, C307→C441, C308→C444` e o guard `assert len(dissolved) == 7` falhou.
+Ou seja: **as declarações já estavam ledgeradas** —
+
+* C301 `per_system_outside_points_need_not_coalesce`
+* C304 `membership_exclusion_does_not_entail_grounding_exclusion`
+* C306 `universal_grounding_does_not_entail_causal_externality`
+* C307 `ofGround_sole_transcendent_ground`
+* C308 `diagonal_does_not_deliver_system_externality`
+
+— e o que faltava era outra coisa, e é a lacuna real: **a transcendência não tinha linha na
+tabela de atributos** (`CLASSICAL_ATTRIBUTES` em `scripts/build_deduction.py`), que é o que
+o leitor vê. A tabela tinha 37 linhas e nenhuma era *Ontological transcendence*, apesar de a
+característica estar provada das duas metades. A correcção do lote é portanto **no
+gerador, não no ledger**: a linha nova em `CLASSICAL_ATTRIBUTES`, com o estado derivado
+(`expected: PROVEN`, âncora C307) e as quatro negativas citadas por `refs` para que a
+leitura não pareça causal.
+
+O mesmo guard é a razão de não haver aqui uma linha nova para a transcendência: **duplicar
+uma declaração ledgerizada é um erro de bookkeeping, não uma contribuição.** O que
+contribui é a linha que faltava na tabela.
+
+| C453 | §8/§12 | **DEFERRED, sem declaração.** Unicidade da imutabilidade: `∀ e, DivineImmutability e → e = Entity.ofGround`. O braço `ofAtom n` é fechável (`EntityExistsAt w (ofAtom n) = w n = TV.t`, `World := Nat → TV`, logo um mundo que nega `n` quebra `ModalInvariance`); o braço `ofSubject s` **não é fechável com o vocabulário actual**, e o lema que falta está escrito abaixo | DEFERRED | `{Initiates, Means, NecessarySubjectKind, State, Subject}` (a pegada que o teorema teria, por herança da estrutura) |
+
+### Por que é que a prova é a mesma quatro vezes
+
+`FoundationalOmnipresence`, `FoundationalOmniscience`, `FoundationalOmnipotence` e
+`DivinePureActuality` têm, todas quatro, um campo `universal_ground : UniversalModalGround g`.
+E `UniversalModalGround g := ∀ w e, ExistsAt w e → e = g ∨ GroundsEntity g e`, instanciado
+em `(actualWorld, Entity.ofGround)`, dá a disjuntiva `Entity.ofGround = e ∨ GroundsEntity e
+Entity.ofGround`. O ramo `GroundsEntity` é exactamente `no_subject_grounds_the_ground`, que
+é `False` por C441. Logo: **um sujeito não pode ser um chão universal, e portanto nenhum
+sujeito pode ser portador de uma característica cuja estrutura traga um campo de chão.**
+
+Isto é a mesma observação que C433 fez por §9 — *"o preço é F15"* — e que
+`discriminating_subject_cannot_ground_the_ground` (`CanonicalAseity.lean:113`) já registava
+para as outras características. Um limite, usado em dois sítios, e o corpus passa a dizê-lo
+num ficheiro em vez de o deixar implícito em quatro provas.
+
+### C439 — o resultado mais barato, e a divulgação que ele obriga
+
+O plano do lote previu pegada `{}` para C439. **Errou, e a correcção é instrutiva:** a
+estrutura `DivineSimplicity` tem um campo `undivided_meaning : Prop` que menciona
+`UndividedMeaning`, que menciona `EntityMeans` — logo a pegada auditada é `{Means,
+Subject}`. Não é um axioma substantivo, mas o axioma de vocabulário entra **pelo tipo**.
+C439 é de preço zero *substantivo*, não axiom-free.
+
+A divulgação obrigatória: `UndividedMeaning e := ∀ p q, EntityMeans e p ↔ EntityMeans e q`,
+e `EntityMeans (ofAtom _) = False` é uma estipulação definicional, logo
+`undivided_meaning` é **vacuamente verdadeira de todo o átomo** — um átomo tem
+capacidade de significado uniforme porque não tem nenhuma. Do mesmo modo
+`discriminating_subject_not_undivided` exclui quem separa proposições, mas um sujeito que
+não separa nada também o satisfaz. **A estrutura é satisfeita vacuosamente pelas razões
+erradas** por entidades que não são o chão, e só o campo `no_internal_components` é
+portador neste teorema. Isto é uma divulgação, não um defeito: as conjuntas merereológica e
+intencional continuam significativas para o chão, apenas não discriminam.
+
+### C443 — a divulgação mais afiada: os campos de uma estrutura não são intercambiáveis com a sua doutrina
+
+`gapless_operators_are_ground_or_necessary_kind` (`DivineOmnipotence.lean:250`) já está no
+corpus e diz: um operador sem falhas é o chão **ou** um sujeito de espécie necessária, porque
+`NecessarySubjectKind` torna um sujeito presente em todo o lado e quem está em todo o lado
+opera tudo o que é satisfazível. Portanto `FoundationalOmnipotence e → e = ofGround` **não
+se segue** de `gapless_operate`, e o lote não o afirma por essa via. O que fecha o caso é o
+campo `universal_ground`, pago por F15. Uma leitura apressada de C443 como "a omnipotência
+é o chão" saltaria precisamente o passo que a torna verdadeira.
+
+### C447 — por que a atemporalidade e o segundo campo do mestre da imutabilidade **são um**
+
+`necessity_and_atemporality_yield_immutability` prova-se escrevendo literalmente
+`stage_invariance := hAtemp`: uma prova de `Atemporal` num campo de `StageInvariance`. Isso
+só é type-correcto porque **C432** regista `StageInvariance e ↔ Atemporal e`. Antes do lote
+anterior essa coincidência era **silenciosa**: um leitor da prova da imutabilidade não
+podia saber se o `stage_invariance` era mesmo sobre modulação temporal ou se era o mesmo
+predicado com outro nome. Agora é teorema, e a derivação imutabilidade→necessidade é honesta
+em vez de afortunada. **É um achado sobre o corpus, não uma nota de contabilidade.**
+
+### C453 — a fronteira que este lote não cruzou: a exclusividade da imutabilidade
+
+**DEFERRED, sem declaração.** A imutabilidade **não** está em C446, e o motivo fica
+registado em vez de escondido. O braço dos átomos é fechável
+(`EntityExistsAt w (ofAtom n) = w n = TV.t` com `World := Nat → TV`, logo um mundo que
+nega `n` quebra `ModalInvariance`). O braço dos sujeitos não é fechável aqui:
+
+* `capacity_invariance` é `∀ p, ∀ _w₁ _w₂, EntityMeans e p ↔ EntityMeans e p`
+  (`DivineImmutability.lean:131-132`) — **vacuosa por reflexividade para toda a entidade**,
+  a parede de F16;
+* o único campo não-vacuo é `NotInSuccession e := ¬ ∃ s σ σ' p, e = EntityOf s ∧ Initiates
+  s σ σ' p` (`NecessityEternity.lean:102-104`), e `Initiates` é um campo de assinatura
+  **não restringido**: um contramodelo em que nenhum sujeito inicia nada é tão admissível
+  como um em que todos iniciam;
+* `NecessarySubjectKind` **não tem** nenhum teorema de exclusão em todo o corpus, logo um
+  sujeito da espécie necessária é rígido-mundo por construção e é um candidato legítimo a
+  uma característica baseada em rigidez.
+
+**O lema exacto que falta**, para que C453 deixe de ser uma fronteira e passe a ser uma
+linha `PROVEN`:
+
+```lean
+∀ s : Subject, NecessarySubjectKind s →
+  ¬ (DivineImmutability.capacity_invariance (EntityOf s) ∧
+     Logos.NecessityEternity.NotInSuccession (EntityOf s))
+```
+
+isto é, ou um teorema que exclua o sujeito necessário, ou uma **restrição de assinatura** que
+torne `Initiates` irrefutável por pelo menos um par `(σ, σ', p)` — que é uma decisão de
+vocabulário, não um lema. Registado como `DEFERRED` porque Γ não tem nenhum dos dois, e
+afirmar a exclusividade sem eles seria exactamente repetir o defeito de vacuidade que C321
+já reporta para `CapacityInvariance`.
+
+### O que este lote **não** fecha
+
+* **Nada no `F10`–`F16`.** As quatro linhas ❌ por vocabulário (omnipresença física,
+  infinitézima métrica, energia cinética, simplicidade escolástica) continuam bloqueadas por
+  `Space`/`Metric`/`Cardinal`/`Infinity`/`Energy`/`Essence`, que **não têm nenhuma
+  declaração** em `formal/Logos/`. A onnisciência infalível continua **refutada**
+  (`ofGround_not_truth_tracking`), e a omnipotência causal continua bloqueada em `F10`
+  (`Produces`). Re-provar qualquer um destes seria mais fraco do que o contra-modelo ou o
+  bloqueio que já existem.
+* **As seis separações 🧱.** Trindade, Encarnação, Criador, monad numericamente unitário,
+  bondade moral perfeita e personalidade psicológica continuam com contramodelo
+  machine-checked a `{}`. Novos contramodelos seriam estritamente mais fracos.
+* **A exclusividade da imutabilidade.** C453, acima, com o lema exacto registado.
+
 ## Batch meaning-retorsion (2026-09-27) — a tese do "não há significado" refutada como resposta
 
 O novo módulo `Logos/MeaningRetorsion.lean` (lote B de 2026-09-27) enuncia a tese do
@@ -373,8 +544,13 @@ distintivo deve ser um `axiom`, não um `def`.
 
 - **F15 retira** (o registo do lema-em-falta é substituído por este ponteiro ◈). A contagem
   de chamadores do próprio F15 ("20 vezes, 5 ficheiros, `DivinePureActuality` 5") fica
-  superada por um censo fresco: 17 premissas + 2 campos de estrutura = 19 ocorrências em
-  5 ficheiros, `DivinePureActuality` 4 (não 5).
+  superada por um censo fresco e re-derivado (`scripts/census_semantic_finitude.py --check`):
+  **20 ocorrências** na medida `any` e **15** na medida `forall`, em 5 ficheiros —
+  `DivinePureActuality` 5, `FoundationalUnicity` 6, `CanonicalAseity` 4,
+  `DivineSimplicity` 4, `AsieticChoice` 1. A última contagem (17 + 2 = 19) datava de antes do
+  lote `SOLE-BEARER-AND-DERIVABILITY`, que acrescentou `divine_simplicity_sole_bearer` (C440)
+  como pagador — e_note que C439, o teorema de unicidade, **não** paga: lê só o campo
+  `no_internal_components`.
 - **O preço é invisível a `#print axioms`** (a premissa não é um axioma); o ◈ no registo
   (agora **6** stipulações) e a cadeia do gerador `SEMANTIC_FINITUDE_STEPS` são os
   únicos sinais. "A contagem de axiomas não se mexeu" **não** é um teste para este lote.
@@ -1507,7 +1683,7 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   - **11 `CL`-only**: C3, C10, C12, C13, C14, C16, C37, C59, C93, C251, C322. (C251 is the
     non-emptiness + contradiction-freedom of the satisfiable scope domain; its `propext`
     cost is inherited from C14, deliberately, so the graph shows the C251 → C14 edge.)
-  - **230 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+  - **244 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
     C419, C420, C421, C422, C423, C424, C425, C427, C428, C429, C430, C431
     (the 2026-09-28 precedence / §18 batch — twelve rows, 0 substantive axioms;
     the `NecessarySubjectKind` in C419–C421/C424/C429/C430 is the `ExistsAt` artifact
@@ -1518,6 +1694,17 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     own foundational axiom, not a premise; `NecessarySubjectKind` in C432/C436–C438 is
     the `ExistsAtTime → ExistsAt → SubjectExistsAt` unfolding. C433/C435 are the first
     §9 rows to price `SemanticFinitude`, still `Tag: VOCAB`, so the badge is `PROVEN`),
+    C439, C440, C441, C442, C443, C444, C445, C446, C447, C448, C449, C450, C451,
+    C452
+    (**the 2026-09-28 sole-bearer & derivability batch — fourteen rows, 0 substantive
+    axioms, 0 new `Tag:`, 0 new ◈, 1 new module, 0 new primitives.** C439 is the cheapest
+    row in the corpus and its `{}`-prediction was wrong: the `DivineSimplicity` *structure*
+    carries `Means` through `UndividedMeaning`, so unicity is zero-*substantive* rather
+    than axiom-free. C441–C446 price `SemanticFinitude` (`Tag: VOCAB`, so the badge is
+    `PROVEN`, not `PROVEN↑`) — the first rows in a *characteristic* lane to do so. C447–C452
+    are the five Thomistic derivation principles plus the simplicity/transcendence bridge,
+    and they are what turn "the ground has attribute X" into "X is entailed by the others".
+    C453 is `DEFERRED` with no declaration and is deliberately *not* in this bucket),
     C368, C369, C370, C371, C372, C373, C374, C375, C376, C377, C378, C384, C386,
     C389, C390, C391, C392, C393, C394, C395, C396, C397, C398, C400, C402,
     C410, C411, C412, C413, C414, C415, C405, C406,

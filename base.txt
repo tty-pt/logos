@@ -1522,6 +1522,21 @@ Teologia forte da eternidade divina (eternidade metafísica "fora de toda a temp
   sem começo nem cessação para além da rigidez de estágios) — NÃO reivindicada: o que está
   PROVEN é existência mundo-rígida não modulada por estágios (`Everlasting`/`Atemporal`,
   NecessityEternity.lean), distinguida da relação eterna de amor (T14).
+  Lot SOLE-BEARER-AND-DERIVABILITY (2026-09-28, C439–C453): o lote anterior.articulou
+  §9 com §8; este acrescenta a outra metade que faltava — que as características
+  **singularizam** o fundamento e que **se derivam** dele. A distinção que o texto
+  nunca fez é entre "o fundamento tem o atributo" e "o atributo é consequência dos
+  outros": (a) unicidade, `∀ e, P e → e = Entity.ofGround`, agora para seis
+  características (C439 simplicidade, de preço zero; C442 onisciência; C443
+  omnipotência; C444 omnipresença; C445 *Actus Purus*; e o teorema-mestre C446),
+  com a transcendência ontológica já ledgerada como C307 e agora com linha na tabela de
+  atributos; (b) derivação, com os cinco princípios tomistas ledgerados (C447–C451):
+  a Imutabilidade **deriva-se** da necessidade (C447), e é por isso que `Atemporal` e
+  `stage_invariance` serem o mesmo predicado (C432) passa a ser um teorema de que a
+  derivação depende, e não uma coincidência silenciosa. A exclusividade da Imutabilidade
+  é a **única** que fica de fora, e fica registada como fronteira com o lema exacto
+  (C453, DEFERRED) — `capacity_invariance` é vácua por reflexibilidade e `Initiates` é um
+  campo de assinatura não restringido.
   A distinção entre os dois termos, que o texto deixou por fazer, passou a ser
   machine-checked (lote PRECEDENCE-AND-TEMPORAL-UNICITY, 2026-09-28, C432/C436–C438):
   `everlasting_implies_atemporal` (C436) dá o passo genérico — `Everlasting e := ∀ t,
@@ -2024,8 +2039,11 @@ a uma **estipulação nomeada e visível**. Continua **não derivável** (porque
 alcance proposicional de um sujeito; os resultados de universalidade `Existential` do resto da
 biblioteca não se aplicam, porque o que é preciso é um limite **por sujeito**, não global), mas a
 verdade é que Γ **já a pagava** em 5 ficheiros e por 5 argumentos de atributo (censo derivado e
-verificável em `scripts/census_semantic_finitude.py`: 19 ocorrências sob a medida `any`, 14 sob a
-medida `forall`; ver a «Terceira correcção» abaixo para a história desta contagem).
+verificável em `scripts/census_semantic_finitude.py`: 20 ocorrências sob a medida `any`, 15 sob a
+medida `forall` — ambos movidos de 19/14 pelo lote `SOLE-BEARER-AND-DERIVABILITY`, e ambos só em
+`DivineSimplicity`, porque `divine_simplicity_sole_bearer` (C440) toma o limite por premissa ao
+passo que o teorema de unicidade (C439) não o toma; ver a «Terceira correcção» abaixo para a
+história desta contagem).
 **Em 2026-09-28 o limite foi promovido de `def` a axioma declarado `Tag: VOCAB`** — o 27º
 declarado (26 → 27; VOCAB 15 → 16). A razão está registada no módulo: sendo o `def` de uma `Prop`
 tomado como *premissa*, era **invisível a `#print axioms`** — as dez linhas reportavam

@@ -679,7 +679,8 @@ theorem the_ground_is_not_personal : ¬ PersonalEntity Entity.ofGround := by
 --
 -- The section adds no axiom, no primitive, and no stipulation. `Universe` occurs in
 -- CONCLUSIONS only — it is defined here and consumed by the three theorems below, so
--- it needs no ◈ registration and no `Tag:`. The plan of record is AUDIT.md §3.3/§4.
+-- it needs no ◈ registration and no `Tag:`. The plan of record is `PLAN.md`;
+-- there is no root `AUDIT.md` in this repository and never has been.
 -- ============================================================================
 
 /-- **Pantheism in its only well-formed identity form: whatever obtains IS `e`.**

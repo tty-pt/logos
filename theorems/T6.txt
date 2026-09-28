@@ -106,6 +106,32 @@ Iff.rfl). O segundo campo do mestre da Imutabilidade (T22) e a "atemporalidade"
 de §8 são um passo só, não dois — o que muda a contagem de distinguishability
 do que o texto aparentava guardar.
 
+Lote SOLE-BEARER-AND-DERIVABILITY (2026-09-28, C439–C453) — o que acrescenta a §8 e
+ao mestre da Imutabilidade. A derivação da Imutabilidade passou a ser um teorema
+ledgerado, `necessity_and_atemporality_yield_immutability` (C447), com pegada
+`{Initiates, Means, NecessarySubjectKind, State, Subject}`: a atemporalidade é uma
+**premissa** da Imutabilidade, não uma paráfrase. Isto torna o achado de C432
+*load-bearing* e não apenas curioso — a prova escreve literalmente
+`stage_invariance := hAtemp`, o que só é type-correcto porque
+`stage_invariance_iff_atemporal` é teorema. Os outros quatro princípios tomistas
+(C448 *Actus Purus*, C449 omnipresença, C450 onisciência, C451 omnipotência) estão
+ledgerados pela mesma razão: mudam "o fundamento tem X" em "X é consequência das
+outras características", e nenhum deles custou um axioma novo.
+
+O mesmo lote establishes a **segunda** distinção que o texto nunca fez: unicidade.
+`∀ e, P e → e = Entity.ofGround` vale agora para seis características (C439, C442–C446),
+e a transcendência ontológica ganhou linha na tabela de atributos (a declaração já estava
+ledgerada como C307 — o que faltava era a linha, não a prova). Preço: F15
+(`SemanticFinitude`, `Tag: VOCAB`) em quatro das seis, e **zero** em C439, porque o campo
+`no_internal_components` fecha o caso sozinho. A Imutabilidade é a única de fora (C453,
+DEFERRED), com o lema exacto registado: `∀ s, NecessarySubjectKind s →
+¬ (capacity_invariance (EntityOf s) ∧ NotInSuccession (EntityOf s))`. O que falta não
+é um lema provável com o vocabulário actual — é um teorema de exclusão do sujeito
+necessário, ou uma restrição de assinatura sobre `Initiates`, que é uma decisão de
+vocabulário. Divulgação obrigatória sobre C439: `EntityMeans (ofAtom _) = False` torna
+`undivided_meaning` **vacuamente verdadeira de todo o átomo**, logo só
+`no_internal_components` é portador para a unicidade.
+
 Continua NÃO preventivo / ainda requer prova (nada disto foi avançado por este lote):
 a teologia forte da eternidade metafísica "fora de toda a temporalidade" (§8,
 README-OLD.md:161), a consequência causal de a existência temporal implicar

@@ -230,7 +230,9 @@ theorem necessity_and_atemporality_yield_immutability (e : Entity)
 -- minimum, not a lemma this batch may supply.
 --
 -- F16 therefore STAYS BLOCKED. What changes is that its price is now a `{}`-class
--- result rather than a sentence in a ledger cell. The plan of record is AUDIT.md §4.
+-- result rather than a sentence in a ledger cell. The plan of record is `PLAN2.md`
+-- (and, for the audit trail, `investigations/kernel-audit.md`); there is no
+-- root `AUDIT.md` in this repository and never has been.
 -- ============================================================================
 
 /-- **No world-indexed extension of Γ's meaning relation can vary.**

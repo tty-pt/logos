@@ -58,9 +58,16 @@ The same conclusion is summarized as “transcendent to any formal structure” 
 
 The foundation is **transcendent**: it is not exhausted by membership in any formal or evaluative system.
 
+> **Now established in Γ, both halves.** Ontological transcendence — neither an atomic worldly
+> state nor the correlate of any subject — is PROVEN with existence (`ofGround_transcendent`, C195)
+> *and* uniqueness (`ofGround_sole_transcendent_ground`, C307, `{Subject}`, unconditional). The
+> uniqueness theorem had been proved for a long time with **no reader-facing row at all**; it now
+> has one (batch SOLE-BEARER-AND-DERIVABILITY, 2026-09-28, C439–C453). The four boundaries below
+> were already ledgered (C301, C304, C306, C308) and are what keep the sense from reading as causal.
+
 ### Gaps and ambiguities
 
-- “External” is not defined. It shifts among logical, ontological, hierarchical, and possibly causal senses.
+- “External” is not defined. It shifts among logical, ontological, hierarchical, and possibly causal senses. **Γ's proved sense is the ontological one only**, and the module machine-checks that the other three do not follow: universal grounding does not entail causal externality (C306), membership exclusion does not entail grounding exclusion (C304), the diagonal route delivers no system externality even given the whole `DiagonalSpec` (C308), and outsiders of different systems need not coalesce (C301).
 - The passage from “each system needs something outside itself” to “one foundation is external to every system” is asserted rather than demonstrated (`README-OLD.md:132-138`). Different systems might, on the text's own account, possess different outside points.
 - The extension of the Gödel/Tarski/Turing pattern to every normative claim is the decisive transcendental move, but it is not independently established (`README-OLD.md:83-89`).
 - The rejection of brute facts presupposes that a foundation must explain the binding character of normativity, not merely terminate explanatory regress (`README-OLD.md:134-136`).
@@ -288,6 +295,7 @@ The foundation is **simple** in at least two senses: non-composite and not exhau
 ### Gaps and ambiguities
 
 - Non-compositeness, oneness, non-systemicity, inexhaustibility, and ineffability are not clearly separated.
+- **Simplicity now discriminates the ground** (`divine_simplicity_sole_bearer`, C440; unicity alone is C439, `{Means, Subject}` — the cheapest sole-bearership in the corpus, and free of any substantive axiom, because the `no_internal_components` field closes the case: `HasInternalComponent` is `True` on `ofSubject` and `ofAtom` and `False` only on `ofGround`). **Disclosure, because it changes what the third conjunct is worth:** `EntityMeans (ofAtom _) = False` is a definitional stipulation, so `undivided_meaning` is *vacuously true of every atom* — an atom has uniform meaning capacity because it has none — and a subject that discriminates *nothing* satisfies it too. The structure is satisfied vacuously for the wrong reasons by non-ground entities; only `no_internal_components` is load-bearing for unicity. The mereological and intentional conjuncts remain meaningful for the ground, they simply do not discriminate.
 - The classical metaphysical doctrine of divine simplicity normally includes claims such as identity of essence and existence or absence of potency. The prose supplies no argument for those stronger senses (`README-OLD.md:258`), and Scholastic simplicity (essence-existence identity) is explicitly separated in the attributes table as `❌ NOT ESTABLISHED`.
 - The non-systemicity argument rules out exhaustive formal representation of the foundation, but it does not by itself establish a traditional doctrine of metaphysical simplicity.
 
@@ -330,7 +338,7 @@ The foundation is **timeless or eternal** in the sense of being prior to and ind
 
 **The reason the badge is a split, and it is the most important sentence in this entry:** `Core.T p := p` is the identity on `Prop`, so `N_T` and `N_F` carry **no world index**. A precedence *relative to a world* at the level of the truth predicate is therefore not well-formed on the current vocabulary, and C426 (`rightWrongDistinction_is_world_invariant`, `{}`) is the machine-checked statement of that inertness — deliberately inert, so that the obstruction is exhibited rather than hidden. Lifting the entry to a single `✅` would require a world-indexed `T`, which is new vocabulary at `Tag: SEM` at minimum and is the author's decision, not the implementer's.
 
-**And the first lemma this batch planned was false.** `AUDIT.md` opened with `no_form_satisfied_at_falsity_world`; `Satisfies` is closed under negation, so the all-`TV.f` world satisfies every negated form and no world satisfies no form. C418 (`every_world_satisfies_some_form`, `{}`) is the refutation, constructed without `Classical.choice` (the branch is on `w 0 = TV.t`). The positive form that replaced it — **no *atom* is true** (C417, `{}`) — is what the precedence is now stated over. The argument of §9 is not weakened by the correction; it is stated precisely for the first time. The author has not been asked to rewrite §9 itself: the characteristic remains his, and what changes is what Γ can say about it.
+**And the first lemma this batch planned was false.** The batch plan opened with `no_form_satisfied_at_falsity_world`; `Satisfies` is closed under negation, so the all-`TV.f` world satisfies every negated form and no world satisfies no form. C418 (`every_world_satisfies_some_form`, `{}`) is the refutation, constructed without `Classical.choice` (the branch is on `w 0 = TV.t`). The positive form that replaced it — **no *atom* is true** (C417, `{}`) — is what the precedence is now stated over. The argument of §9 is not weakened by the correction; it is stated precisely for the first time. The author has not been asked to rewrite §9 itself: the characteristic remains his, and what changes is what Γ can say about it.
 
 **Vacuity disclosure, to be read with the table.** On the current signature the *positive* half of §9 does no work: every world satisfies some form (C418), and in every world the ground's obtaining is already guaranteed by the `ofGround` arm of `EntityExistsAt`. C423 is meanwhile stronger than §9 asks and weaker than it looks — its meaning hypothesis is **not used**, because `GroundsEntity ofGround e` is `∀ p, EntityMeans e p → True`, so the ground conditions *everything*, meaning-bearing or not (the fact C328 already records for the meaningless). The discriminating force is entirely in the negative direction and in the vacuity report itself. A reader who wants §9 to *bite* needs a semantics leaving some form unassigned.
 

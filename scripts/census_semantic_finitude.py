@@ -63,12 +63,16 @@ RE_FORALL = re.compile(r"∀\s*s\s*:\s*Subject.{0,40}?" + EXISTS_FORM)
 # The number the prose corpus and the axiom docstring quote. `--check` fails if
 # the kernel stops agreeing, so a refactor that moves the bound cannot silently
 # leave a stale "paid N times" in the justification.
-EXPECTED = {"any": 19, "forall": 14,
+#
+# Delta 2026-09-28 (batch SOLE-BEARER-AND-DERIVABILITY): 19/14 -> 20/15, both in
+# `DivineSimplicity`, whose `divine_simplicity_sole_bearer` (C440) takes the bound as
+# a premise. `divine_simplicity_is_unique_to_the_ground` (C439) does not pay it.
+EXPECTED = {"any": 20, "forall": 15,
             "any_by_file": {"DivinePureActuality": 5, "FoundationalUnicity": 6,
-                            "CanonicalAseity": 4, "DivineSimplicity": 3,
+                            "CanonicalAseity": 4, "DivineSimplicity": 4,
                             "AsieticChoice": 1},
             "forall_by_file": {"DivinePureActuality": 3, "FoundationalUnicity": 5,
-                               "CanonicalAseity": 2, "DivineSimplicity": 3,
+                               "CanonicalAseity": 2, "DivineSimplicity": 4,
                                "AsieticChoice": 1}}
 
 

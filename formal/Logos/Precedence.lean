@@ -47,7 +47,7 @@ is stated accurately for the first time.
     claim about the semantic layer, which is where C419–C425 are stated.
 
 Zero new axioms, zero new primitives, zero new stipulations, zero new ◈
-registrations. The plan of record is `AUDIT.md` §4.
+registrations. The plan of record is `PLAN.md`; there is no root `AUDIT.md`.
 -/
 
 import Logos.Core

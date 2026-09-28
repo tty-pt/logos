@@ -862,6 +862,7 @@ CHAIN_LISTS = [
     ("TWO-KINDS", "TWO_KINDS_STEPS"),
     ("PRECEDENCE", "PRECEDENCE_STEPS"),
     ("TEMPORAL-SEPARATION", "TEMPORALITY_STEPS"),
+    ("SOLE-BEARER", "SOLE_BEARER_STEPS"),
 ]
 
 
@@ -5742,10 +5743,12 @@ CLASSICAL_ATTRIBUTES = [
         "scope": "Divine Being / Ground",
         "expected": "PROVEN",
         "checks": [{"type": "decl",
-                    "full": "Logos.DivineSimplicity.ofGround_divine_simplicity"}],
-        "refs": ["Logos.DivineSimplicity.ofGround_has_no_internal_components",
+                    "full": "Logos.DivineSimplicity.divine_simplicity_sole_bearer"}],
+        "refs": ["Logos.DivineSimplicity.ofGround_divine_simplicity",
+                 "Logos.DivineSimplicity.divine_simplicity_is_unique_to_the_ground",
+                 "Logos.DivineSimplicity.ofGround_has_no_internal_components",
                  "Logos.DivineSimplicity.ofGround_undivided_meaning",
-                 "Logos.DivineSimplicity.ofGround_transcendent",
+                 "Logos.DivineSimplicity.ofGround_simplicity_and_transcendence",
                  "Logos.DivineSimplicity.non_composite_iff_canonical_aseity",
                  "Logos.DivineSimplicity.composite_entity_fails_simplicity"],
         "sense": ("In `DivineSimplicity.lean` (footprint `{Means, Subject, propext}` — VOCAB + CL), "
@@ -5756,7 +5759,36 @@ CLASSICAL_ATTRIBUTES = [
                   "(3) Intentional Simplicity (`ofGround_undivided_meaning`, uniform meaning capacity across all propositions); "
                   "(4) Ontological Transcendence (`ofGround_transcendent`, distinct from all atomic worldly states and finite subjects). "
                   "Composite entities provably fail simplicity (`composite_entity_fails_simplicity`, `{}`). "
+                  "**And it discriminates:** `divine_simplicity_sole_bearer` (C440) proves the ground is the "
+                  "*only* bearer — the `no_internal_components` field alone closes the case, at **no** "
+                  "substantive axiom cost (`divine_simplicity_is_unique_to_the_ground`, C439, `{Means, "
+                  "Subject}`), the cheapest sole-bearership in the corpus. Disclosure: `EntityMeans "
+                  "(ofAtom _) = False` makes `undivided_meaning` **vacuously true of every atom**, so only "
+                  "`no_internal_components` is load-bearing for unicity. "
                   "Honest boundary: this establishes mereological, structural, and intentional simplicity — not identity of essence and existence."),
+    },
+    {
+        "attribute": "**Ontological transcendence** (neither an atomic worldly state nor any subject-correlate)",
+        "scope": "Divine Being / Ground",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.DivineTranscendence.ofGround_sole_transcendent_ground"}],
+        "refs": ["Logos.DivineSimplicity.ofGround_transcendent",
+                 "Logos.DivineTranscendence.universal_grounding_does_not_entail_causal_externality",
+                 "Logos.DivineTranscendence.membership_exclusion_does_not_entail_grounding_exclusion",
+                 "Logos.DivineTranscendence.diagonal_does_not_deliver_system_externality",
+                 "Logos.DivineTranscendence.per_system_outside_points_need_not_coalesce"],
+        "sense": ("Aquinas *ST* I q. 14 a. 1 / Pseudo-Dionysius. **Both halves established:** existence "
+                  "(`ofGround_transcendent`, C195) and unicity (`ofGround_sole_transcendent_ground`, C307, "
+                  "`{Subject}` and unconditional) — the second was already proved **and already ledgered as "
+                  "C307**; what was missing was a row in *this* table, so the characteristic was absent from "
+                  "the reader-facing attributes altogether until 2026-09-28. No theorem was added for it. "
+                  "Γ's sense is strictly **ontological**: the ground is neither an atomic worldly state nor "
+                  "the correlate of any subject. It is **not** causal externality "
+                  "(`universal_grounding_does_not_entail_causal_externality`, C306), membership exclusion "
+                  "does not deliver grounding exclusion (C304), the diagonal route does not deliver system "
+                  "externality even given the whole `DiagonalSpec` (C308), and outsiders of different systems "
+                  "need not coalesce (C301)."),
     },
     {
         "attribute": "**Scholastic simplicity** (strict identity of essence and existence)",
@@ -6970,7 +7002,7 @@ PRECEDENCE_STEPS = [
      "*atom* is true. This is the honest reading of 'a world where the distinction is not "
      "instantiated' — a valuation, not an absence of forms"),
     ("R", "C418", "Logos.Precedence.every_world_satisfies_some_form", "decl",
-     "**the refutation of this batch's own first draft.** `AUDIT.md` proposed as its opening "
+     "**the refutation of this batch's own first draft.** The batch plan (now `PLAN.md`) proposed as its opening "
      "`{}` lemma that no form is satisfied at the falsity world; that lemma is **false**, "
      "because `Satisfies` is closed under negation. This row is the machine-checked reason: "
      "for *every* world some form is satisfied, and the branching is constructive — the atom 0 "
@@ -7082,7 +7114,7 @@ def render_precedence_chain(decls: dict, node_map: dict) -> list[str]:
     ap("> anything with. Both now have machine-checked rows, on **0 new axioms, 0 new")
     ap("> primitives, 0 new stipulations, 0 new ◈ registrations**.")
     ap(">")
-    ap("> **And the first lemma this batch planned was false.** `AUDIT.md` opened with")
+    ap("> **And the first lemma this batch planned was false.** The batch plan opened with")
     ap("> `no_form_satisfied_at_falsity_world`; `Satisfies` is closed under negation, so the")
     ap("> falsity world satisfies every negated form. C418 is the refutation, and the positive")
     ap("> reading that replaced it — *no **atom** is true* — is what the precedence is now")
@@ -7205,6 +7237,106 @@ def render_temporality_chain(decls: dict, node_map: dict) -> list[str]:
     return lines
 
 
+SOLE_BEARER_STEPS = [
+    ("L1", "C441", "Logos.CharacteristicSoleBearer.no_subject_grounds_the_ground", "decl",
+     "**the one place this batch pays F15.** `SemanticFinitude` turns the *hypothesis* "
+     "`∃ p, ¬ Means s p` of `discriminating_subject_cannot_ground_the_ground` into a sentence "
+     "about *every* subject. A subject that grounds the ground would have to mean every "
+     "proposition, and the bound denies exactly that"),
+    ("Σ", "C442", "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omniscience", "decl",
+     "**the ground alone is omniscient** — the discriminating form, not the instantiation. The "
+     "atom arm is free (`EntityMeans (ofAtom _) = False`); the subject arm runs through the "
+     "structure's `universal_ground` field. Disclosure: unicity of the *permissive* sense "
+     "coexists with the refutation of the strong one (`ofGround_not_truth_tracking`)"),
+    ("Σ", "C443", "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omnipotence", "decl",
+     "**the ground alone operates gaplessly** — and this row carries the batch's sharpest "
+     "disclosure. `gapless_operators_are_ground_or_necessary_kind` (`DivineOmnipotence.lean:250`) "
+     "already proves a gapless operator is the ground **or** a necessary-kind subject, so "
+     "`gapless_operate` alone does *not* characterise the ground. It is the `universal_ground` "
+     "field, paid for by F15, that removes the second possibility. A structure's fields are not "
+     "interchangeable with its doctrine"),
+    ("Σ", "C444", "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omnipresence", "decl",
+     "**the ground alone is foundationally omnipresent**, and this is the cheapest of the four "
+     "paid rows: `maximal_capacity` settles *both* non-ground constructors by itself. Sense is "
+     "foundational — physical omnipresence and metric infinity stay ❌, because `Space`, "
+     "`Metric` and `Cardinal` have no declarations at all"),
+    ("Σ", "C445", "Logos.CharacteristicSoleBearer.ofGround_sole_divine_pure_actuality", "decl",
+     "**Actus Purus is the sole bearer**, in the same unconditional shape as C433 — which is what "
+     "makes §14 and §9 directly comparable. The whole subject arm is the 27th axiom, because "
+     "`EntityMeans _ p := True` is what makes 'no passive intentional potency' and 'means "
+     "everything' the same sentence"),
+    ("Σ", "C446",
+     "Logos.CharacteristicSoleBearer.the_ground_is_sole_bearer_of_the_footprint_characteristics",
+     "decl",
+     "**the master theorem of the batch**: the six characteristics discriminate the ground "
+     "simultaneously, so the six concepts jointly pick out `Entity.ofGround` rather than merely "
+     "describing it. The conjunction is a record, not a new inference; what is new is that it is "
+     "available as one statement"),
+]
+
+
+def render_sole_bearer_chain(decls: dict, node_map: dict) -> list[str]:
+    """Reader-facing chain for the 2026-09-28 sole-bearer & derivability batch."""
+    lines: list[str] = []
+    ap = lines.append
+    ap("### Chain 8 — Sole bearer, and the five derivations: which characteristics *pick out* the ground")
+    ap("")
+    ap("> **The distinction this chain exists to make.** A characteristic can sit in the theory in")
+    ap("> two very different ways. *Instantiated*: `Entity.ofGround` has the property — which does not")
+    ap("> distinguish \"the ground is the only bearer\" from \"the ground is the only example anyone")
+    ap("> wrote down\". *Discriminating*: the property **characterises** the ground,")
+    ap("> `∀ e, P e → e = Entity.ofGround`, so the concept does real work. Until this batch that")
+    ap("> second form held for **one** characteristic, §9 precedence (C433). It now holds for six.")
+    ap("")
+    ap("> **And the other half of the batch.** C447–C451 (ledgered in `formal/GAPMAP.md`) are the five")
+    ap("> already-proven Thomistic derivation principles. They turn *\"the ground has attribute X\"*")
+    ap("> into **\"X is entailed by the other attributes\"** — a categorically stronger claim, at no")
+    ap("> cost, because the proofs already existed and no ledger row mentioned them.")
+    ap("")
+    ap("`L1` = a theorem on vocabulary alone, **0 substantive axioms** · `Σ` = the headline.")
+    ap("")
+    ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
+    ap("|---|---|---|---|---|---|")
+    for kind, cid, full, atype, text in SOLE_BEARER_STEPS:
+        live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
+        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
+           f"{status} | {kernel_fp_text(full)} |")
+    ap("")
+    ap("**Why the proof is the same four times.** `FoundationalOmnipresence`,")
+    ap("`FoundationalOmniscience`, `FoundationalOmnipotence` and `DivinePureActuality` all carry a")
+    ap("field `universal_ground : UniversalModalGround g`, and")
+    ap("`UniversalModalGround g := ∀ w e, ExistsAt w e → e = g ∨ GroundsEntity g e`, instantiated at")
+    ap("`(actualWorld, Entity.ofGround)`, yields the `GroundsEntity` disjunct — which is C441, and")
+    ap("therefore `False`. So: **a subject cannot be a universal ground, hence no subject can bear")
+    ap("a characteristic whose structure carries a grounding field.** That is the same observation")
+    ap("C433 made for §9 (\"the price is F15\"), and `CanonicalAseity.lean:113` already recorded for")
+    ap("the other characteristics. One bound, two places it was needed — now said in one file")
+    ap("instead of left implicit in four proofs.")
+    ap("")
+    ap("**C439 — the cheapest row in the corpus, and the disclosure it forces.** Divine Simplicity is")
+    ap("the one characteristic whose sole-bearership needs **no** axiom at all: the")
+    ap("`no_internal_components` field closes the case, because `HasInternalComponent` is `True` on")
+    ap("`ofSubject` and `ofAtom` and `False` only on `ofGround`. The batch plan predicted a `{}`")
+    ap("footprint and was **wrong**: the `DivineSimplicity` *structure* carries `Means` through")
+    ap("`UndividedMeaning`, so the audited footprint is `{Means, Subject}` — zero *substantive*")
+    ap("axioms, not axiom-free. The disclosure is mandatory: `EntityMeans (ofAtom _) = False` is a")
+    ap("definitional stipulation, so `undivided_meaning` is **vacuously true of every atom** (an")
+    ap("atom has uniform meaning capacity because it has none), and a subject that discriminates")
+    ap("*nothing* also satisfies `undivided_meaning`. The structure is satisfied vacuously for the")
+    ap("wrong reasons by non-ground entities; only `no_internal_components` is load-bearing here.")
+    ap("")
+    ap("**What this chain does not say.** Not that the ground is the unique *ground* — that is")
+    ap("`FoundationalUnicity.unicity` (C199), which needs `AsymmetricGrounding` and is a weaker")
+    ap("claim. Not that any of this is causal: the six are structural and modal, and **F10 stays")
+    ap("BLOCKED**. And **not** immutability: `capacity_invariance` is vacuous by reflexivity (the")
+    ap("F16 wall) and `Initiates` is an unconstrained signature field, so the necessary-kind subject")
+    ap("arm is not closable here. Immutability is recorded as ledger row **C453, `DEFERRED`**, with")
+    ap("the exact missing lemma written out — a priced boundary, not a silent omission.")
+    ap("")
+    return lines
+
+
 def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     """Emits the classical-attributes table block (placed after Branch C, before
     the Further Investigations catalogue). Statuses are live-derived, never
@@ -7255,6 +7387,7 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     lines.extend(render_two_kinds_chain(decls, node_map))
     lines.extend(render_precedence_chain(decls, node_map))
     lines.extend(render_temporality_chain(decls, node_map))
+    lines.extend(render_sole_bearer_chain(decls, node_map))
     ap("_Synthesis — the strongest current profile._ The theory has established, of a")
     ap("**personal, rational, free, authoritative-over-its-acts, independently individuated**")
     ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")

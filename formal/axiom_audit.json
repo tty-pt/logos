@@ -1459,6 +1459,45 @@
   "Logos.Agency.Subject"
  ],
  "Logos.CanonicalAseity.unconditional_aseity_independent_of_bare_agency": [],
+ "Logos.CharacteristicSoleBearer.no_subject_grounds_the_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
+ "Logos.CharacteristicSoleBearer.ofGround_sole_divine_pure_actuality": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
+ "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omnipotence": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
+ "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omnipresence": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
+ "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omniscience": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
+ "Logos.CharacteristicSoleBearer.the_ground_is_sole_bearer_of_the_footprint_characteristics": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
  "Logos.Choice.AlternativeSensitivity": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -4285,6 +4324,15 @@
  ],
  "Logos.DivineSimplicity.composite_entity_fails_simplicity": [],
  "Logos.DivineSimplicity.discriminating_subject_not_undivided": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.divine_simplicity_is_unique_to_the_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineSimplicity.divine_simplicity_sole_bearer": [
+  "propext",
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],

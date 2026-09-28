@@ -212,11 +212,14 @@ agora **derivado e verificável** — `scripts/census_semantic_finitude.py`, cuj
 o núcleo divergir do número citado — e tem **duas medidas**, porque «quantas vezes» não tem
 resposta única: `any` = **19** (toda a declaração de enunciado cujo enunciado menciona o limite,
 na forma ∀ ou na forma ∃ por sujeito: `DivinePureActuality` 5, `FoundationalUnicity` **6**,
-`CanonicalAseity` 4, `DivineSimplicity` 3, `AsieticChoice` 1) e `forall` = **14** (só as que
-levam a forma ∀ exacta, que Γ declara: 3, 5, 2, 3, 1). Os corpos de prova excluem-se: uma
-ocorrência num corpo é um *uso* de um preço já pago. O total 19 **estava certo** para a medida
-`any`; o «17 premissas + 2 campos de estrutura» da terceira correcção não correspondia a nenhuma
-medida aplicada de forma consistente, e a repartição que o acompanhava estava errada. A conclusão
+`CanonicalAseity` 4, `DivineSimplicity` 4, `AsieticChoice` 1) e `forall` = **15** (só as que
+levam a forma ∀ exacta, que Γ declara: 3, 5, 2, 4, 1). Os corpos de prova excluem-se: uma
+ocorrência num corpo é um *uso* de um preço já pago. A `any` era 19 e a `forall` 14 até
+2026-09-28; o lote `SOLE-BEARER-AND-DERIVABILITY` moveu ambas (+1, +1), e só em
+`DivineSimplicity` — `divine_simplicity_sole_bearer` (C440) toma o limite por premissa, o
+teorema de unicidade (C439) lê só o campo `no_internal_components` e não o toma. O «17
+premissas + 2 campos de estrutura» da terceira correcção não correspondia a nenhuma medida
+aplicada de forma consistente, e a repartição que o acompanhava estava errada. A conclusão
 é robusta sob as duas medidas: Γ paga o preço exacto por **cinco** argumentos de atributo, nos
 **cinco** módulos. (ii) **A forma.** A ◈ era um `def` de uma `Prop` tomado como premissa, logo
 **invisível a `#print axioms`**: as dez linhas reportavam a mesma pegada que os teoremas

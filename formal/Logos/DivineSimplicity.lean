@@ -193,6 +193,62 @@ theorem ofGround_simplicity_and_transcendence
   ⟨ofGround_divine_simplicity hFinite, ofGround_transcendent⟩
 
 -- ============================================================================
+-- Section 5b: Sole Candidacy — Simplicity Discriminates
+-- ============================================================================
+
+/-- C439 — **sole bearer**: `Entity.ofGround` is the only entity in the Γ
+    inventory satisfying `DivineSimplicity`. The three constructors of `Entity`
+    exhaust the inventory, and the `no_internal_components` field alone closes
+    the case: `HasInternalComponent` is `True` on both `Entity.ofSubject _`
+    and `Entity.ofAtom _` and `False` only on `Entity.ofGround`
+    (`HasInternalComponent`, above), so no non-ground constructor can inhabit
+    the structure. The result is unconditional and — this is the correction to
+    the batch plan's prediction — it is *not* axiom-free: the `DivineSimplicity`
+    structure itself carries `Means`, because its `undivided_meaning : Prop` field
+    mentions `UndividedMeaning`, which mentions `EntityMeans`. Unicity therefore
+    rests on `{Means, Subject}`: no *substantive* axiom (0 price, no 27th axiom),
+    but the vocabulary axiom `Means` enters through the type. Contrast with C433
+    (`Precedence.ofGround_sole_precedes_right_wrong`), which pays the 27th axiom
+    `SemanticFinitude` to exclude subjects. Here the exclusion is free and the
+    price is zero-substantive.
+
+    **Disclosure — the intentional conjunct does no work here.**
+    `UndividedMeaning e := ∀ p q, EntityMeans e p ↔ EntityMeans e q`, and
+    `EntityMeans (Entity.ofAtom _) = False` is a definitional stipulation, so
+    `undivided_meaning` is *vacuously true of every atom*: an atom trivially
+    has uniform meaning capacity because it has none. Likewise
+    `discriminating_subject_not_undivided` rules out subjects that separate
+    propositions, but a subject that separates *nothing* satisfies it too. The
+    structure is therefore satisfied vacuously for the wrong reasons by non-ground
+    entities, and only the `no_internal_components` field is load-bearing for
+    this theorem. This is a disclosure, not a defect: the mereological and
+    intentional conjuncts remain meaningful for the ground, they just do not
+    discriminate.
+
+    Footprint: `{Means, Subject}` (0 substantive axioms). -/
+theorem divine_simplicity_is_unique_to_the_ground :
+    ∀ e, DivineSimplicity e → e = Entity.ofGround := by
+  intro e h
+  cases e with
+  | ofGround => rfl
+  | ofAtom n => exact (h.no_internal_components (by simp [HasInternalComponent])).elim
+  | ofSubject s => exact (h.no_internal_components (by simp [HasInternalComponent])).elim
+
+/-- C440 — the attributes-table form: the ground is the sole bearer of Divine
+    Simplicity, stated together with the existence half so a reader-facing row
+    can cite a single declaration. This is the §13 Simplicity analogue of C433
+    (`Precedence.ofGround_sole_precedes_right_wrong`), and unlike C433 it needs
+    no subject-finiteness axiom — the unicity half is exactly C439's.
+
+    Note the two halves have different costs, and the difference is the point:
+    existence pays `Means`/`Subject` (via `hFinite`), while **unicity is free**.
+    Footprint: `{Means, Subject, propext}`. -/
+theorem divine_simplicity_sole_bearer
+    (hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p) :
+    DivineSimplicity Entity.ofGround ∧ (∀ e, DivineSimplicity e → e = Entity.ofGround) :=
+  ⟨ofGround_divine_simplicity hFinite, divine_simplicity_is_unique_to_the_ground⟩
+
+-- ============================================================================
 -- Section 6: Metatheoretic Independence & Separation
 -- ============================================================================
 
@@ -225,6 +281,8 @@ theorem composite_entity_fails_simplicity :
 #print axioms DivineSimplicity
 #print axioms ofGround_divine_simplicity
 #print axioms ofGround_simplicity_and_transcendence
+#print axioms divine_simplicity_is_unique_to_the_ground
+#print axioms divine_simplicity_sole_bearer
 #print axioms composite_entity_fails_simplicity
 
 end Logos.DivineSimplicity
