@@ -305,7 +305,7 @@ C285 — O fundamento nao e, nem pode ser, um escolhedor verdadeiro:
 theorem ground_is_not_a_true_chooser : ¬ ∃ s : Subject, EntityOf s = Entity.ofGround
 ```
 
-Pegada auditada: `{Subject}`. `ofGround_ne_ofSubject` (`NecessityEternity.lean:155`)
+Pegada auditada: `{Subject}`. `ofGround_ne_ofSubject` (`NecessityEternity.lean:160`)
 bloqueia-o definitionamente: `Means` e indexada por sujeito.
 
 C286 — Sintese mestre do lote:

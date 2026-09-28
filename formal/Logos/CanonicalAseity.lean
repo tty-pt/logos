@@ -63,13 +63,13 @@ def CanonicalAseity (e : Entity) : Prop :=
 /-- Canonical external dependence at world `w`:
     entity `e` depends externally at world `w` if there exists an entity actualized
     at `w`, distinct from `e`, that ontologically grounds `e`.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 def CanonicalExtDepAt (w : World) (e : Entity) : Prop :=
   ∃ g : Entity, ExistsAt w g ∧ ExternalGrounding g e
 
 /-- Canonical aseity entails modal aseity under canonical external dependence:
     if `e` has canonical aseity, then no world contains an actualized external ground.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem canonical_aseity_implies_modal_aseity (e : Entity) :
     CanonicalAseity e → Aseity World Entity CanonicalExtDepAt e := by
   intro hCase w ⟨g, _, hExt⟩
@@ -145,7 +145,7 @@ theorem conditional_canonical_aseity
 /-- Modal Aseity of the Ground under Finite Subjectivity: if all subjects are
     discriminating, `Entity.ofGround` satisfies generic `Aseity` with respect to
     `CanonicalExtDepAt`.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem ofGround_modal_aseity_conditional
     (hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p) :
     Aseity World Entity CanonicalExtDepAt Entity.ofGround :=

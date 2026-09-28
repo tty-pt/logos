@@ -33,7 +33,7 @@ import Logos.Modal
 
 namespace Logos.Love
 
-open Logos.Agency (Subject)
+open Logos.Agency (Subject NecessarySubjectKind ContingentSubjectKind)
 open Logos.Person (Person)
 open Logos.Plurality (EntityOf NecessarySubject)
 open Logos.Value (Affects PersonsAffectPrinciple Helps Harms help_not_harm help_affects)
@@ -92,45 +92,61 @@ theorem T13_someoneLovable :
     ⟨q, hne.symm, hq⟩,
     ⟨p, hne, hp⟩⟩
 
-/-- The person stability principle: whoever is a person exists across all worlds.
-    With ExistsAt hardened, this is an explicit metaphysical principle, not a definitional triviality. -/
-def PersonStabilityPrinciple : Prop := ∀ s : Subject, Person s → NecessarySubject s
+/-- The person stability principle, differentiated by kind: whoever is a person
+    *of the necessary kind* exists across all worlds. The old unconditional form
+    (`∀ s, Person s → NecessarySubject s`) treated every person as world-rigid;
+    the two-kinds doctrine exhibits the hidden premise — persistence holds of
+    the necessary kind, never of persons as such. A contingent-kind person is
+    not persistent (`Plurality.contingentKindSubject_not_necessary`). -/
+def PersonStabilityPrinciple : Prop :=
+  ∀ s : Subject, Person s → NecessarySubjectKind s → NecessarySubject s
 
 /-- The plurality-to-love principle: distinct persons love one another.
     With Affects/Helps/Harms hardened, love is an explicit relational principle. -/
 def PluralityLovePrinciple : Prop := ∀ s₁ s₂ : Subject, Person s₁ → Person s₂ → s₁ ≠ s₂ → Loves s₁ s₂
 
-/-- Conditional T14: Under person stability and the plurality-love principle,
-    two distinct persons stand in an eternal love relation. -/
+/-- Conditional T14: under person stability, the plurality-love principle, and an
+    exhibited necessary-kind pair, two distinct persons stand in an eternal love
+    relation. The pair premise is the honest form of what T12 used to supply
+    silently: under kind-blind semantics the T12 pair's contingency was free, so
+    persistence rode along; now the kind must be exhibited. -/
 theorem T14_eternalRelation_conditional
     (hStab : PersonStabilityPrinciple)
-    (hLove : PluralityLovePrinciple) :
+    (hLove : PluralityLovePrinciple)
+    (hKind : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
+      NecessarySubjectKind s₁ ∧ NecessarySubjectKind s₂) :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
       Loves s₁ s₂ ∧ NecessarySubject s₁ ∧ NecessarySubject s₂ := by
-  obtain ⟨p, q, hp, hq, hne⟩ := Logos.Plurality.T12_twoPersons
-  have hl : Loves p q := hLove p q hp hq hne
-  exact ⟨p, q, hp, hq, hne, hl, hStab p hp, hStab q hq⟩
+  obtain ⟨p, q, hp, hq, hne, hkp, hkq⟩ := hKind
+  exact ⟨p, q, hp, hq, hne, hLove p q hp hq hne,
+    hStab p hp hkp, hStab q hq hkq⟩
 
-/-- In every world, two distinct persons stand in a love relation (conditional on stability and love). -/
+/-- In every world, two distinct persons stand in a love relation (conditional on stability, love, and the exhibited kind). -/
 theorem T14_world_conditional
     (hStab : PersonStabilityPrinciple)
-    (hLove : PluralityLovePrinciple) :
+    (hLove : PluralityLovePrinciple)
+    (hKind : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
+      NecessarySubjectKind s₁ ∧ NecessarySubjectKind s₂) :
     NecessityPH
       (fun _w : World =>
         ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
           Loves s₁ s₂ ∧ ExistsAt _w (EntityOf s₁) ∧ ExistsAt _w (EntityOf s₂)) := by
-  obtain ⟨p, q, hp, hq, hne, hl, hNs, hNq⟩ := T14_eternalRelation_conditional hStab hLove
+  obtain ⟨p, q, hp, hq, hne, hl, hNs, hNq⟩ :=
+    T14_eternalRelation_conditional hStab hLove hKind
   intro w
   exact ⟨p, q, hp, hq, hne, hl, hNs w, hNq w⟩
 
-/-- Necessarily, two distinct persons stand in a love relation (conditional on stability and love). -/
+/-- Necessarily, two distinct persons stand in a love relation (conditional on stability, love, and the exhibited kind). -/
 theorem T14_square_conditional
     (hStab : PersonStabilityPrinciple)
-    (hLove : PluralityLovePrinciple) :
+    (hLove : PluralityLovePrinciple)
+    (hKind : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
+      NecessarySubjectKind s₁ ∧ NecessarySubjectKind s₂) :
     Necessity
       (∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves s₁ s₂) := by
   intro _w
-  obtain ⟨p, q, hp, hq, hne, hl, _, _⟩ := T14_eternalRelation_conditional hStab hLove
+  obtain ⟨p, q, hp, hq, hne, hl, _, _⟩ :=
+    T14_eternalRelation_conditional hStab hLove hKind
   exact ⟨p, q, hp, hq, hne, hl⟩
 
 /-- Two distinct persons stand in a love relation (conditional on the plurality-love principle). -/
@@ -146,5 +162,7 @@ end Logos.Love
 #print axioms Logos.Love.love_not_harms
 #print axioms Logos.Love.love_affects
 #print axioms Logos.Love.loves_of_helps
+#print axioms Logos.Love.T14_eternalRelation_conditional
+#print axioms Logos.Love.T14_world_conditional
 #print axioms Logos.Love.T14_square_conditional
 #print axioms Logos.Love.T14_content_conditional

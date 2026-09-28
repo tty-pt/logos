@@ -90,13 +90,13 @@ theorem entity_with_potency_fails_pure_actuality :
 
 /-- Passive existential potency: entity `e` is in potency to non-existence,
     failing to exist in at least one possible world.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 def PassiveExistentialPotency (e : Entity) : Prop :=
   ∃ w : World, ¬ ExistsAt w e
 
 /-- Theorem: The Ground of Reality has zero passive existential potency.
     `Entity.ofGround` exists necessarily in every possible world.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem ofGround_no_existential_potency :
     ¬ PassiveExistentialPotency Entity.ofGround := by
   intro ⟨w, hw⟩
@@ -178,7 +178,7 @@ structure DivinePureActuality (g : Entity) : Prop where
 /-- Master Synthesis Theorem: The Ground of Reality possesses Divine Pure Actuality.
     `Entity.ofGround` is Actus Purus in Γ, having zero passive potentiality
     and universally grounding reality.
-    Footprint: `{Initiates, Means, State, Subject}` (0 substantive axioms). -/
+    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject}` (0 substantive axioms). -/
 theorem ofGround_divine_pure_actuality
     (hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p) :
     DivinePureActuality Entity.ofGround := {
@@ -193,7 +193,7 @@ theorem ofGround_divine_pure_actuality
     Any entity with world-rigid necessary existence, canonical aseity,
     transition invariance, maximal intentional capacity, and universal modal
     grounding satisfies Divine Pure Actuality (Aquinas ST I q. 3 a. 1-2; q. 4 a. 1).
-    Footprint: `{Initiates, Means, State, Subject}`. -/
+    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
 theorem necessity_aseity_and_immutability_yield_pure_actuality
     (e : Entity)
     (hNec : ∀ w : World, ExistsAt w e)
@@ -224,7 +224,7 @@ theorem ofGround_incorporeal :
 
 /-- Atomic physical entities fail Divine Pure Actuality:
     every atomic state has passive existential potency.
-    Footprint: `{Initiates, Means, State, Subject}`. -/
+    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
 theorem atom_fails_pure_actuality (n : Nat) :
     ¬ DivinePureActuality (Entity.ofAtom n) := by
   intro hAct
@@ -237,7 +237,7 @@ theorem atom_fails_pure_actuality (n : Nat) :
 
 /-- Finite discriminating subjects fail Divine Pure Actuality:
     every discriminating subject has passive intentional potency.
-    Footprint: `{Initiates, Means, State, Subject}`. -/
+    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
 theorem discriminating_subject_fails_pure_actuality
     (s : Subject) (hDisc : ∃ p, ¬ Means s p) :
     ¬ DivinePureActuality (EntityOf s) := by
@@ -246,7 +246,7 @@ theorem discriminating_subject_fails_pure_actuality
 
 /-- Theorem: Entity.ofGround is the Sole Candidate for Pure Actuality in Γ.
     No atomic state and no discriminating subject can be Actus Purus.
-    Footprint: `{Initiates, Means, State, Subject}`. -/
+    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
 theorem ofGround_sole_pure_actuality
     (e : Entity) (hAct : DivinePureActuality e) :
     (∀ n : Nat, e ≠ Entity.ofAtom n) ∧

@@ -8,7 +8,7 @@ PYTHON ?= python3
 .PHONY: all build depviz audit stip stipdef sync taxonomy deduction test check clean zip help
 
 # Default target runs the complete formal build, audit, deduction generation, and test verification.
-all: build depviz audit stip stipdef deduction test
+all: build depviz audit stip stipdef census deduction test
 	@echo "=== Γ / Logos: Full build and verification pipeline complete (0 errors) ==="
 
 # Build the formal Lean 4 library in formal/
@@ -60,6 +60,24 @@ stip: depviz
 stipdef: audit
 	@echo "=== Auditing asserted Props used as premises (F-2) ==="
 	$(PYTHON) scripts/audit_stipulated_defs.py
+
+# Two censuses, both of figures the prose quotes.
+#
+# (1) F15 multiplicity, quoted in SemanticFinitude.lean's justification,
+# ClaimMeanings.lean, base.txt and theorems/T24.txt. FAILS if the figures those
+# four files quote no longer match the kernel: a refactor that moves the bound
+# would otherwise leave a stale "paid N times" in the axiom's own justification.
+#
+# (2) Inherited `def`-as-bridge debt (VISIBILITY.md Phase 7), quoted in the
+# ledger's disclosure section and in README's score block. FAILS if the allowlist
+# and the ledger disagree about which bridges are disclosed, or if the quoted
+# totals drift -- the hand-written `gapmap` field of each entry is a maintained
+# field asserting a fact, so the check derives it instead of trusting it.
+census:
+	@echo "=== Checking the F15 multiplicity census against the kernel ==="
+	$(PYTHON) scripts/census_semantic_finitude.py --check
+	@echo "=== Checking the inherited def-as-bridge census against the ledger ==="
+	$(PYTHON) scripts/census_stipulated_defs.py --check
 
 # Generate README.md and investigations/kernel-audit.md
 deduction: audit depviz stip

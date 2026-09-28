@@ -6,6 +6,26 @@
 
 ---
 
+## 0. Two axes — what the brief judges, and what it does not (2026-09-28)
+
+Every model below makes two claims, and the author's brief bears on only one:
+
+- **Attack** — a derivability claim ("the disputed inference does not follow"). It stands unless Γ derives the inference. None of the verdicts below withdraws an attack.
+- **Model as the actual world** — a description of a world. Given that the (contingent) world exists — the stipulated actual world, whose Lean content is the performative act-datum — the model may be *wrong as the actual world*, at a stated price.
+
+| model | attack | as the actual world |
+|---|---|---|
+| M1 / C294 / C382 (no-meaning world) | stands (bare-vocabulary consistency of the form) | **WRONG** on the act-datum alone (C402; outright on the plurality bridge, C401) |
+| UnitPlurality, NoPerson, SubjectWithoutPerson, ContentWithoutPerson | stand | **WRONG ONLY IF `AxTwoSubjects` INSISTED** — not granted |
+| PluralityWithoutLove | stands | **WRONG ONLY IF `AxGroundLovesContingentRealm` INSISTED** |
+| NoFreeWill, VeridicalMeaning | stand | **WRONG ONLY IF `AxIntentionalChoice`/`AxActPolarity` INSISTED** |
+| PersonNotNecessary | **stands** (all-contingent kind-assignment admissible) | **WRONG** only if the kind bridge is granted — which Γ now does (C404/C409) |
+| SubjectNecessityNotEntity | stands | **UNANSWERED** — a limit on inference |
+
+The two-kinds doctrine (2026-09-28) is what locates `PersonNotNecessary` correctly: the attack refutes `Person → NecessarySubject` *as a logical law* (the contingent kind is admissible), while the necessary-kind person (C404/C409) is what is wrong with that model *as our world*.
+
+---
+
 ## 1. The Role of Hostile Models in Γ
 
 In accordance with Γ's core epistemic rule:
@@ -54,7 +74,7 @@ hostile models are not rhetorical objections. They are **machine-checked Lean 4 
 * **Content:** M1 (`NegativeRetorsionAudit.lean:157`) and C294 (`AsietyFreedom.lean:265`) are not two artefacts: they are instances of one family — *a meaning-vocabulary in which nothing is meant* — and both additionally **deny the act-datum** (`act := fun _ _ => False`). M1's `Subject` is `Unit`, so the world is populated, not empty.
 * **Separation Proved:** a world in which nothing is meant cannot also contain an affirmation of the claim that nothing is meant. The denial of the performed event, once **affirmed**, is itself a performed event (`signature_weak_retorsion`, C380, `{}` — the signature-general form; `Agency.noWeakAct_selfRefutes` is canonical-only).
 * **Why "answer" and not "model":** a countermodel is not a counterexample, it is a *description of a world*; an answer is a move made inside discourse. M1 and C294 describe worlds where no move is ever made, so they cannot contain the affirmation of their own silence. A content nobody can hold as correct is not a position — it is a description of a world in which nothing is ever held.
-* **The complement is not optional.** **C382 exhibits a populated world (`Subject := Unit`) in which `NoMeaning` is true and unassertable, and it is consistent.** The corpus's earlier `unassertability_does_not_imply_falsity` (`NegativeRetorsionAudit.lean:296`) used the **empty** subject sort, so its unassertability held vacuously; this is the populated version and it was not on record. Consequences: the *content* survives, `¬ NoMeaning` is **not** derivable, and the unconditional existence of a meaning still costs `AxTwoSubjects` (C367). This is the same separation as entry 5: the empty-sort version of a countermodel reads as a stronger claim than it is, and here the fix runs the other way — a *populated* model is the weaker, more honest countermodel.
+* **The complement is not optional — and its role narrowed 2026-09-27 (REFUTATION, C401/C402).** **C382 exhibits a populated world (`Subject := Unit`) in which `NoMeaning` is true and unassertable, and it is consistent.** The corpus's earlier `unassertability_does_not_imply_falsity` (`NegativeRetorsionAudit.lean:296`) used the **empty** subject sort, so its unassertability held vacuously; this is the populated version and it was not on record. **Correction:** an earlier form of this entry concluded "the *content* survives, `¬ NoMeaning` is **not** derivable." That holds only for the *bare vocabulary*. *In Γ* the thesis **is** refuted — C401 on the plurality bridge (unconditional), C402 on the act-datum (conditional). What survives of C382 is consistency-of-the-shape in a free signature, not a possible world *of the theory*. The unconditional existence of a meaning still costs `AxTwoSubjects` (C367) *as an unconditional route*; the datum route (C402, God-lane twin) is the bridge-free conditional. This is the same separation as entry 5: the empty-sort version of a countermodel reads as a stronger claim than it is, and here the fix runs the other way — a *populated* model is the weaker, more honest countermodel.
 * **The utterance twin — added 2026-09-27.** **C385 `the_thesis_is_utterable_though_not_assertable` (`{}`) is C382 with a single field changed: `act := fun _ _ => True`.** So the catalogue has both halves of the performative contradiction on record, and they are one model apart. In C382 nobody ever says the thesis, because M1 and C294 deny the act-datum outright. In C385 a subject exists, nothing is meant, the thesis is **true**, the thesis is **said** — and still no assertion of it that succeeds. The distinction the countermodels cannot see is the one C384 names: `Voices s p := act s p` (**C384**, `{Subject, act}`) is the performance with the success condition removed, and every `asserts` in Γ carries it — `asserts s p` is `act s p ∧ p`, `Asserts s p` is `Act s p ∧ p`, `Correct s p` is `A s p ∧ T p`. C375 refutes the **success** of an assertion, never the utterance, which is why a countermodel of the *answer* coexists with a world in which the answer is *spoken*. It is also the machine-checked reason C383's "unutterable" is a misnomer rather than a reading. **On the speaker (corrected 2026-09-27):** an earlier note here treated the absence of an axiom identifying a natural-language speaker with a `Subject` as a standing limitation. That framing was wrong and is withdrawn. `Voices` and `Act` quantify over all subjects, so **whoever performs the thesis is refuted by performing it** — the performative contradiction is speaker-independent, and no axiom is needed to run it. `Subject` remains a nullary uninterpreted sort and C385's witness remains `()`, so Γ cannot *name* the model's subject; nothing in the retorsion requires it to.
 * **Price:** zero new axioms. The whole batch is `theorem`s over existing `def`s and existing rows; C379 is labelled a **corollary** of `level2_signature_asserts_noi_selfRefutes` (`:286`) generalised from one signature to all, and claims no novelty. The batch's novelty is C369 (the re-index), C373 (the `Correct` rung), C380 (the signature-general weak retorsion) and C382 (the populated complement).
 

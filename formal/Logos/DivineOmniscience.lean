@@ -196,7 +196,7 @@ structure FoundationalOmniscience (g : Entity) : Prop where
     Omniscience in Γ — its scope excludes no truth, in any world, and (per the
     carried field) that scope is provably not infallible. Zero substantive
     axioms; the whole footprint is the declared vocabulary `{Means, Subject}`.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem ofGround_foundational_omniscience :
     FoundationalOmniscience Entity.ofGround := {
   truth_exhaustive := ofGround_truth_exhaustive
@@ -216,7 +216,7 @@ theorem ofGround_foundational_omniscience :
     (`Aquinas ST` I q. 14 a. 1: the ground exists always, as the condition of
     truth) is carried explicitly; the conclusion is proved from the scope
     premises alone.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem necessity_and_scope_yield_foundational_omniscience
     (e : Entity) (_hNec : NecessaryEntity e) (hMax : MaximalCapacity e)
     (hUnd : UndividedMeaning e) (hUniv : UniversalModalGround e) :

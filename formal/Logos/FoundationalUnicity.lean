@@ -82,7 +82,7 @@ def AsymmetricGrounding : Prop :=
     Proof: If g1 ≠ g2, universality of g1 forces g1 to ground g2, and universality of g2
     forces g2 to ground g1. Under asymmetry, this yields an immediate contradiction.
     Hence, g1 = g2.
-    Footprint: `{CL, Means, Subject}` (0 substantive axioms). -/
+    Footprint: `{CL, Means, NecessarySubjectKind, Subject}` (0 substantive axioms). -/
 theorem universal_ground_unicity
     (g1 g2 : Entity)
     (hU1 : UniversalModalGround g1)
@@ -151,7 +151,7 @@ theorem not_asymmetric_grounding : ¬ AsymmetricGrounding := by
 
 /-- Theorem: No Atomic Entity Can Be a Universal Modal Ground.
     An atomic factual state cannot ground Entity.ofGround, hence cannot ground all beings.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem no_atom_is_universal_modal_ground (n : Nat) (w : World) :
     ¬ UniversalModalGround (Entity.ofAtom n) := by
   intro hU
@@ -164,7 +164,7 @@ theorem no_atom_is_universal_modal_ground (n : Nat) (w : World) :
 /-- Theorem: No Finite Discriminating Subject Can Be a Universal Modal Ground.
     A subject with finite propositional grasp cannot ground Entity.ofGround,
     hence cannot ground all beings across modal space.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem no_discriminating_subject_is_universal_modal_ground
     (s : Subject) (hDisc : ∃ p, ¬ Logos.Agency.Means s p) (w : World) :
     ¬ UniversalModalGround (EntityOf s) := by
@@ -177,7 +177,7 @@ theorem no_discriminating_subject_is_universal_modal_ground
 
 /-- Theorem: Entity.ofGround is the Sole Universal Ground in the Γ Inventory.
     Any universal modal ground in a world w cannot be an atom, nor a discriminating subject.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem ofGround_sole_universal_ground (e : Entity) (w : World)
     (hU : UniversalModalGround e) :
     (∀ n : Nat, e ≠ Entity.ofAtom n) ∧
@@ -211,7 +211,7 @@ structure FoundationalUnicity (g : Entity) : Prop where
 
 /-- Master Synthesis Theorem: The Ground of Reality possesses Foundational Unicity.
     `Entity.ofGround` satisfies Classical Divine Unicity (Monotheism).
-    Footprint: `{CL, Means, Subject}` (0 substantive axioms). -/
+    Footprint: `{CL, Means, NecessarySubjectKind, Subject}` (0 substantive axioms). -/
 theorem ofGround_foundational_unicity :
     FoundationalUnicity Entity.ofGround := {
   universal_ground := ofGround_universal_modal_ground
@@ -231,7 +231,7 @@ theorem ofGround_foundational_unicity :
     discharged by `ofGround_sole_universal_ground`; only the total-capacity
     subject is left, and `hNoTotal` rules it out. Unlike the `AsymmetricGrounding`
     route this premise is satisfiable, so the argument is not void.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem ofGround_unicity_from_no_discriminating_subject
     (hNoTotal : ∀ s : Subject, ∃ p, ¬ Means s p)
     (e : Entity) (w : World) (hU : UniversalModalGround e) : e = Entity.ofGround := by
@@ -280,7 +280,7 @@ structure SoleUniversalGrounding (g : Entity) : Prop where
 
 /-- Master Synthesis: the Ground of Reality is the sole universal ground, under
     the single named hypothesis.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem ofGround_sole_universal_grounding
     (hNoTotal : ∀ s : Subject, ∃ p, ¬ Means s p) :
     SoleUniversalGrounding Entity.ofGround := {
@@ -297,7 +297,7 @@ theorem ofGround_sole_universal_grounding
     of the claim visible in a single line. The `∃!` notation and `ExistsUnique`
     are absent from this Lean core, so the standard unique-existence conjunction
     is written out.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem exactly_one_universal_modal_ground
     (hNoTotal : ∀ s : Subject, ∃ p, ¬ Means s p) :
     ∃ g : Entity, UniversalModalGround g ∧

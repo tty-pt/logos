@@ -25,9 +25,9 @@ import Logos.Entity
 
 namespace Logos.Plurality
 
-open Logos.Agency (Subject)
+open Logos.Agency (Subject NecessarySubjectKind ContingentSubjectKind)
 open Logos.Person (Person)
-open Logos.Entity (Entity ExistsAt)
+open Logos.Entity (Entity ExistsAt actualWorld falsityWorld)
 open Logos.Semantics (World)
 open Logos.Value (AxTwoSubjects Affects PersonsAffectPrinciple)
 
@@ -36,6 +36,168 @@ def EntityOf : Subject → Entity := Logos.Entity.EntityOf
 
 /-- A subject is necessary iff its entity-correlate exists in every world. -/
 def NecessarySubject (s : Subject) : Prop := ∀ w : World, ExistsAt w (EntityOf s)
+
+/-- A subject of the necessary kind is necessary: its correlate exists at every
+    world by the left disjunct of `SubjectExistsAt`. This is the kind-relative
+    form of persistence — it holds of the necessary kind only, never of subjects
+    as such. Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem necessaryKindSubject_is_necessary (s : Subject)
+    (h : NecessarySubjectKind s) : NecessarySubject s :=
+  fun _w => Or.inl h
+
+/-- A subject of the contingent kind is not necessary: at the all-`TV.f` world
+    its correlate fails, since the kind disjunct is refuted by hypothesis and
+    the all-`f` valuation is not the actual world. This keeps every
+    contingency finding that used to be stated unconditionally — they now carry
+    the kind hypothesis that was always their real content.
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem contingentKindSubject_not_necessary (s : Subject)
+    (h : ContingentSubjectKind s) : ¬ NecessarySubject s := by
+  intro hNec
+  have hAt := hNec (fun _ => Logos.Semantics.TV.f)
+  dsimp [ExistsAt, Logos.Entity.EntityExistsAt, Logos.Entity.SubjectExistsAt,
+    EntityOf] at hAt
+  rcases hAt with hk | heq
+  · exact h hk
+  · have h0 := congrArg (fun w : World => w 0) heq
+    exact Logos.Semantics.TV.noConfusion h0
+
+/-- The two kinds of subject are exactly the two modal profiles: a subject is of
+    the necessary kind if and only if its entity-correlate exists in every world.
+
+    This is the reading of the kind vocabulary, not a new claim about it. The
+    forward direction is `necessaryKindSubject_is_necessary` (C405); the reverse
+    is the same two lines `contingentKindSubject_not_necessary` (C406) already
+    used for the other direction: instantiate at the falsity world
+    (`Entity.falsityWorld`), and the world-disjunct of `SubjectExistsAt` is ruled
+    out because the all-`TV.f` valuation is not `actualWorld`. So
+    `NecessarySubjectKind` is not a free-floating label: the kernel now proves
+    what it separates, and the split is provably exhaustive and disjoint
+    (`contingentKind_iff_not_necessary`, C411). The kind predicate keeps its
+    `Tag: VOCAB` badge — this theorem interprets the badge, it does not demote it.
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem kinds_are_the_modal_partition (s : Subject) :
+    NecessarySubjectKind s ↔ NecessarySubject s := by
+  constructor
+  · exact necessaryKindSubject_is_necessary s
+  · intro h
+    have hAt := h falsityWorld
+    dsimp [ExistsAt, Logos.Entity.EntityExistsAt, Logos.Entity.SubjectExistsAt,
+      EntityOf] at hAt
+    rcases hAt with hk | heq
+    · exact hk
+    · have h0 := congrArg (fun w : World => w 0) heq
+      exact Logos.Semantics.TV.noConfusion h0
+
+/-- The contingent kind is exactly the non-necessary subjects: it is the
+    complement of the necessary kind by definition
+    (`ContingentSubjectKind s := ¬ NecessarySubjectKind s`), and by C410 it is
+    therefore the complement of world-rigidity itself. No axiom: the two kinds
+    and the two modal profiles are one partition, not two.
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem contingentKind_iff_not_necessary (s : Subject) :
+    ContingentSubjectKind s ↔ ¬ NecessarySubject s := by
+  constructor
+  · exact contingentKindSubject_not_necessary s
+  · intro h hk
+    exact h ((kinds_are_the_modal_partition s).mp hk)
+
+/-- A subject of the necessary kind exists at every world: the world-profile the
+    kind vocabulary was read as promising in `Entity.SubjectExistsAt`, now
+    machine-checked at the level of world-relative subject-existence rather than
+    through entity-correlates. Purely the left disjunct.
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem necessaryKind_existsAt_every_world {s : Subject}
+    (h : NecessarySubjectKind s) (w : World) :
+    Logos.Entity.SubjectExistsAt w s :=
+  Or.inl h
+
+/-- A subject of the contingent kind exists at the actual world and at no other
+    world: the counterpart of `necessaryKind_existsAt_every_world`, and with it
+    the **inhabitation asymmetry** in formal form — the two kinds have disjoint,
+    complementary world-profiles, all worlds versus this world alone. Nothing
+    here says either kind is inhabited; `necessaryPersonalSubjectExists` prices
+    the necessary kind, and the contingent kind's inhabitation remains the
+    recorded gap (`SUBJECTS.md` §4).
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem contingentKind_existsAt_actualWorld_only {s : Subject}
+    (h : ContingentSubjectKind s) (w : World) :
+    Logos.Entity.SubjectExistsAt w s ↔ w = actualWorld := by
+  constructor
+  · intro hex
+    rcases hex with hk | heq
+    · exact False.elim (h hk)
+    · exact heq
+  · intro heq
+    exact Or.inr heq
+
+/-- The falsity world holds no subject of the contingent kind: at the all-`TV.f`
+    valuation the kind disjunct is refuted and the world disjunct is refuted by
+    the valuation's not being the actual world.
+
+    Note what this does *not* say: it does not say the falsity world is empty. A
+    subject of the necessary kind exists there too
+    (`necessaryKind_existsAt_every_world`), and so does the ground-constructor,
+    while no atom exists (`EntityExistsAt w (ofAtom n) := w n = TV.t`). Under
+    Γ's semantics the all-`TV.f` world is the *necessary-subjects-only* world,
+    and it is our world that is excluded from it — free of charge, since the
+    actual world has contingent content (`CosmicExistence.contingent_realm_obtains`).
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem falsityWorld_holds_no_contingent_subject :
+    ¬ ∃ s : Subject, ContingentSubjectKind s ∧
+        Logos.Entity.SubjectExistsAt falsityWorld s := by
+  rintro ⟨s, hKind, hAt⟩
+  rcases hAt with hk | heq
+  · exact hKind hk
+  · have h0 := congrArg (fun w : World => w 0) heq
+    exact Logos.Semantics.TV.noConfusion h0
+
+/-- A subject of the contingent kind might not have existed: it fails to exist at
+    the falsity world. This is C406 in world-relative form — the formal content of
+    "the other might not be (humans)", and the modal half of the kind vocabulary
+    that the author's two-kinds doctrine claims for it.
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem contingentSubject_might_not_have_existed {s : Subject}
+    (h : ContingentSubjectKind s) :
+    ∃ w : World, ¬ Logos.Entity.SubjectExistsAt w s :=
+  ⟨falsityWorld, fun hAt => by
+    rcases hAt with hk | heq
+    · exact h hk
+    · have h0 := congrArg (fun w : World => w 0) heq
+      exact Logos.Semantics.TV.noConfusion h0⟩
+
+/--Tag: META
+Metaphysical bridge: the necessary kind of subject is inhabited by a person.
+
+  There is a subject of the necessary kind who is a Person — the ground of
+  reality in its Personal Type, read as a Subject. A Person is a Subject by
+  definition (`Person s` over `s : Subject`), and the Personal Type of Ground
+  is proved (`PersonalGroundOfReality.personal_ground_of_right_exists`,
+  `PersonalNormativeGround.normative_ground_is_personal`); what neither proves
+  is the modal step from personal ground to world-rigid subject. That step is
+  this bridge, and it is the whole price of "a person who means must be
+  necessary". It does NOT identify the ground-constructor with a
+  subject-correlate (`ofGround ≠ EntityOf s` for every `s` still holds); it does
+  NOT say the Creator inhabits the world (no link to the world inhabitant is
+  stated or derivable here); it does NOT make any other subject necessary
+  (kind-membership is per-subject). Reject it and the necessary-person claims
+  go; the kind distinction itself stays. -/
+axiom necessaryPersonalSubjectExists :
+    ∃ s : Subject, NecessarySubjectKind s ∧ Person s
+
+/-- A necessary subject exists, from the bridge. Footprint: `{Means, NecessarySubjectKind, Subject, Will, necessaryPersonalSubjectExists, subjectWill}`. -/
+theorem necessarySubject_exists : ∃ s : Subject, NecessarySubject s := by
+  obtain ⟨s, hKind, _hPerson⟩ := necessaryPersonalSubjectExists
+  exact ⟨s, necessaryKindSubject_is_necessary s hKind⟩
+
+/-- A necessary person exists, from the bridge: this is `ClaimD_NecessaryPerson`
+    derived rather than annotated. The person who means is of the necessary
+    kind; the contingent person is of the other kind (`ContingentSubjectKind`).
+    Footprint: `{Means, NecessarySubjectKind, Subject, Will, necessaryPersonalSubjectExists, subjectWill}`. -/
+theorem necessaryPersonalSubject_derived :
+    ∃ s : Subject, NecessarySubject s ∧ Person s := by
+  obtain ⟨s, hKind, hPerson⟩ := necessaryPersonalSubjectExists
+  exact ⟨s, necessaryKindSubject_is_necessary s hKind, hPerson⟩
 
 /--There are at least two distinct persons.
 
@@ -149,6 +311,11 @@ theorem rightWrong_implies_someone_means (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Cor
 end Logos.Plurality
 
 -- Axiom footprint audit
+#print axioms Logos.Plurality.necessaryKindSubject_is_necessary
+#print axioms Logos.Plurality.contingentKindSubject_not_necessary
+#print axioms Logos.Plurality.necessaryPersonalSubjectExists
+#print axioms Logos.Plurality.necessarySubject_exists
+#print axioms Logos.Plurality.necessaryPersonalSubject_derived
 #print axioms Logos.Plurality.T1_subjectExists
 #print axioms Logos.Plurality.T4_agentExists
 #print axioms Logos.Plurality.T5_intentionalSubjectExists

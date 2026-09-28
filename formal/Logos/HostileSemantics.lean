@@ -35,7 +35,7 @@ Addresses foundational conflations in the formalization:
    (`CountermodelPersonNotNecessary.not_entails_person_necessary`); the
    concrete countermodel `Person s ∧ ¬ NecessarySubject s` cannot exist
     *under* the person-stability principle `PersonStabilityPrinciple`
-    (`Love.lean:97`), which Γ never assumes — so within Γ the countermodel
+    (`Love.lean:101`), which Γ never assumes — so within Γ the countermodel
     above stands, and the concrete blocking claim is conditional, not derived.
 8. Veridical-meaning attack on the choice frontier (milestone 2026-09-18):
    the act-datum does NOT force `genuineChoice_exists` even under the *Logos*
@@ -79,6 +79,43 @@ import Logos.Entity
 import Logos.Modal
 
 namespace Logos.HostileSemantics
+
+-- ===========================================================================
+-- Part 0: The world-datum, and how each countermodel's world stands to it
+-- ===========================================================================
+
+/-- How a countermodel's world-structure stands to the author's world-datum —
+    "the contingent world exists", registered as `Stipulations.contingentWorldDatum`.
+
+    The constructor is the model's *structural* reading, nothing more: it is
+    derived from what the model's own signature declares, and the sentence the
+    reader sees beside it lives once in the generator legend
+    (`scripts/build_deduction.py`, `WORLD_STANCE_LEGEND`), so the classification
+    here cannot drift from the verdict printed with it. `scripts/build_deduction.py`
+    cross-checks every constructor against the namespace block it classifies — a
+    model that declares no world sort must be `noWorldStructure`, and a model
+    that does declare one may not be.
+
+    Reading a countermodel here settles only how the *world-datum* stands to it.
+    Whether the model is wrong as the actual world is a separate question, and its
+    answer names the exact grant that would exclude it (the act-datum, the
+    plurality bridge, the love bridge, the kind bridge) — see `investigations/countermodels.md` §0. -/
+inductive WorldStance where
+  /-- The signature declares no world sort at all: the world-datum is silent
+      about this model, and whatever it does say is in its gloss. -/
+  | noWorldStructure
+  /-- The model's subjects are not world-rigid: it is a world of contingent
+      subjects, which the world-datum is consistent with. -/
+  | contingentSubjects
+  /-- Every subject in the model is world-rigid: it is a world of necessary
+      subjects only, and ours is not that. Γ cannot say so — the exclusion needs
+      the contingent-inhabitation lemma, BLOCKED (`SUBJECTS.md` §4). -/
+  | necessarySubjectsOnly
+  /-- The model takes the all-`TV.f` valuation to *be* the actual world, which
+      Γ refutes outright and for free. (That valuation is not itself an empty
+      world: it holds every subject of the necessary kind, and no contingent
+      subject — `Plurality.falsityWorld_holds_no_contingent_subject`.) -/
+  | falsityWorldAsActual
 
 -- ===========================================================================
 -- Part A: Abstract Signature and Formal Non-Entailment Theorems
@@ -412,6 +449,11 @@ theorem act_and_subject_without_person :
     (∃ s : Entity, ∃ p : Prop, Act s p) ∧ (∃ s : Entity, Subject s) ∧ ¬ (∃ s : Entity, Person s) :=
   ⟨act_occurs, subject_exists, no_person⟩
 
+/-- How the model stands to the world-datum "the contingent world exists":
+    It refutes `Subject → Person` and nothing about worlds. The signature declares no world sort, so the datum is silent
+    about this model. -/
+def worldStance : WorldStance := .noWorldStructure
+
 end CountermodelSubjectWithoutPerson
 
 namespace CountermodelNoPerson
@@ -424,6 +466,11 @@ theorem no_person : ¬ ∃ s : S, Person s := fun ⟨_, hp⟩ => hp
 theorem act_does_not_imply_person :
     (∃ s : S, ∃ p : Prop, A s p) ∧ ¬ (∃ s : S, Person s) :=
   ⟨act_occurs, no_person⟩
+/-- How the model stands to the world-datum "the contingent world exists":
+    It refutes the bare act datum forcing `Person`; The signature declares no world sort, so the datum is silent
+    about this model. -/
+def worldStance : WorldStance := .noWorldStructure
+
 end CountermodelNoPerson
 
 /- Hostile Countermodel 3 (freedom/choice fix, 2026-09-18): mere occurrence
@@ -448,6 +495,11 @@ theorem act_does_not_imply_choice :
 theorem act_does_not_imply_freewill :
     (∃ s : S, ∃ p : Prop, A s p) ∧ ¬ (∃ s : S, FreeWill s) :=
   ⟨act_occurs, no_free_will⟩
+/-- How the model stands to the world-datum "the contingent world exists":
+    `S`, `A`, `Chooses`, `FreeWill` — no world sort, The signature declares no world sort, so the datum is silent
+    about this model. -/
+def worldStance : WorldStance := .noWorldStructure
+
 end CountermodelNoFreeWill
 
 namespace UnitPluralityCountermodel
@@ -465,6 +517,11 @@ theorem no_plurality : ¬ ∃ s t : S, s ≠ t := by
 theorem agency_does_not_imply_plurality :
     (∃ s : S, ∃ p : Prop, A s p) ∧ (∃ s : S, Person s) ∧ (¬ ∃ s t : S, s ≠ t) :=
   ⟨act_occurs, person_exists, no_plurality⟩
+/-- How the model stands to the world-datum "the contingent world exists":
+    One act, one subject, no world sort; The signature declares no world sort, so the datum is silent
+    about this model. -/
+def worldStance : WorldStance := .noWorldStructure
+
 end UnitPluralityCountermodel
 
 namespace PropositionalPersonhood
@@ -480,6 +537,11 @@ theorem no_person : ¬ ∃ s : S, Person s := fun ⟨_, hp⟩ => hp
 theorem content_does_not_imply_personhood :
     (∃ _p : Prop, True) ∧ (∀ p : Prop, ∃ s : S, Means s p) ∧ ¬ (∃ s : S, Person s) :=
   ⟨content_exists, every_content_meant, no_person⟩
+/-- How the model stands to the world-datum "the contingent world exists":
+    It refutes content-existence entailing personhood; The signature declares no world sort, so the datum is silent
+    about this model. -/
+def worldStance : WorldStance := .noWorldStructure
+
 end CountermodelContentWithoutPerson
 
 def TripartiteVerdict : String :=
@@ -571,6 +633,13 @@ theorem not_holds_of_arbitrary_signature :
   have hn : I.NecessaryEntity (I.EntityOf ()) := hinst () hN
   exact no_necessary_entity ⟨I.EntityOf (), hn⟩
 
+/-- How the model stands to the world-datum "the contingent world exists": every
+    subject in it is world-rigid, so it is a world of necessary subjects only —
+    and ours is not that. Γ cannot yet say so: the exclusion needs the
+    contingent-inhabitation lemma, BLOCKED (`SUBJECTS.md` §4). The reading is not
+    an assertion: `necessary_subject_is_necessary` above proves it. -/
+def worldStance : WorldStance := .necessarySubjectsOnly
+
 end CountermodelSubjectNecessityNotEntityNecessity
 
 -- ===========================================================================
@@ -582,7 +651,7 @@ end CountermodelSubjectNecessityNotEntityNecessity
 -- (esse est agere). This countermodel shows the implication is NOT a logical
 -- law: a person can exist while no subject persists in every world. Necessity
 -- is not hidden in the semantics; the definitions chosen are what do the
--- work. Concrete side: `PersonStabilityPrinciple` (`Love.lean:97`) — *if adopted* it
+-- work. Concrete side: `PersonStabilityPrinciple` (`Love.lean:101`) — *if adopted* it
 -- blocks `Person s ∧ ¬ NecessarySubject s`; Γ never assumes it, which is precisely
 -- why the abstract countermodel here is legal.
 
@@ -632,6 +701,13 @@ theorem not_entails_person_necessary :
   have hp : ∃ s : I.Subject, I.Person s := ⟨(), trivial⟩
   have hno : ¬ (∃ s : I.Subject, I.NecessarySubject s) := fun ⟨_, hn⟩ => hn
   exact hno (h I hp)
+
+/-- How the model stands to the world-datum "the contingent world exists": its
+    subjects are not world-rigid, so it *is* a world of contingent subjects and
+    the datum is consistent with it. The reading is not an assertion:
+    `no_necessary_subject` above proves it. Excluded as *our* world only by the
+    kind bridge (`C404`/`C409`). -/
+def worldStance : WorldStance := .contingentSubjects
 
 end CountermodelPersonNotNecessary
 
@@ -1838,6 +1914,13 @@ theorem modal_openness_and_plurality_do_not_entail_genuine_choice :
     exact hI ⟨hp, hq⟩
   exact hn (h I hd)
 
+/-- How the model stands to the world-datum "the contingent world exists": the
+    `Single` and `TwoPersons` models below declare a `State` world each, and their
+    subjects exist only at the actual state, so this is a world of contingent
+    subjects and the datum is consistent with it. Excluded as *our* world only by
+    the meaning/choice grants (`AxIntentionalChoice`/`AxActPolarity`). -/
+def worldStance : WorldStance := .contingentSubjects
+
 end CountermodelVeridicalMeaning
 
 -- ===========================================================================
@@ -2078,6 +2161,64 @@ theorem plurality_not_entails_love :
     ¬ (∃ s₁ s₂ : Subject, Loves s₁ s₂) :=
   ⟨two_persons_exist, no_love⟩
 
+/-- How the model stands to the world-datum "the contingent world exists":
+    It refutes plurality entailing love; The signature declares no world sort, so the datum is silent
+    about this model. -/
+def worldStance : WorldStance := .noWorldStructure
+
 end CountermodelPluralityWithoutLove
+
+-- ===========================================================================
+-- Part Z: The falsity world taken to be the actual world
+-- ===========================================================================
+
+/- The "empty world" of the author's line, stated as a reading of Γ's *own*
+  world semantics: this model takes the all-`TV.f` valuation to be the actual
+  world.
+
+  Every other countermodel in this file is a self-contained signature that Γ's
+  vocabulary happens to match; this one is different in kind — it fixes Γ's
+  `Entity.actualWorld`/`Entity.falsityWorld` to the wrong one, which is exactly
+  what makes it refutable by Γ's own theorems instead of merely un-refuted by
+  them.
+
+  The refutations are Λ's, not this file's, and none of them costs an axiom:
+  `Plurality.falsityWorld_holds_no_contingent_subject` (no subject of the
+  contingent kind exists at the falsity world), `LovesAsGround.falsityWorld_ne_actualWorld`
+  (that valuation is not the actual world), and
+  `CosmicExistence.contingent_realm_obtains` (the actual world does have
+  contingent content, witnessed by an atom).
+-/
+namespace CountermodelFalsityWorld
+
+open Logos.Semantics (TV World)
+open Logos.Entity (actualWorld falsityWorld SubjectExistsAt EntityExistsAt Entity)
+open Logos.Agency (Subject ContingentSubjectKind)
+
+/-- This model's actual world is Γ's falsity world. -/
+def itsActual : World := falsityWorld
+
+/-- Nothing contingent exists in it: no subject of the contingent kind survives
+    the falsity valuation, and no created content either
+    (`EntityExistsAt w (ofAtom n)` is `w n = TV.t`). Re-proved here from
+    `Logos.Entity`'s definitions alone, so the hostile file needs no import of
+    the refuting layer. Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem nothing_contingent_at_its_actual :
+    ¬ (∃ s : Subject, ContingentSubjectKind s ∧ SubjectExistsAt itsActual s)
+      ∧ ¬ (∃ n : Nat, EntityExistsAt itsActual (Entity.ofAtom n)) := by
+  refine ⟨?_, fun ⟨_, h⟩ => TV.noConfusion (by simpa [EntityExistsAt, itsActual] using h)⟩
+  rintro ⟨s, hKind, hAt⟩
+  rcases hAt with hk | heq
+  · exact hKind hk
+  · have h0 := congrArg (fun w : World => w 0) heq
+    exact TV.noConfusion h0
+
+/-- How the model stands to the world-datum "the contingent world exists": it
+    takes the all-`TV.f` valuation to *be* the actual world, and Γ refutes that
+    outright — this is the one possibility the world-datum kills on its own,
+    without an axiom and without the contingent-inhabitation lemma. -/
+def worldStance : WorldStance := .falsityWorldAsActual
+
+end CountermodelFalsityWorld
 
 end Logos.HostileSemantics

@@ -163,10 +163,16 @@ A **existência** é incondicional (`ofGround_universal_modal_ground`); a **unic
 na única hipótese, com o preço visível numa linha. (A notação `∃!` e `ExistsUnique` não existem
 neste núcleo do Lean, pelo que a conjunção de existência única é escrita por extenso.)
 
-Ainda requer prova (F15): `∀ s : Subject, ∃ p : Prop, ¬ Means s p`. Não é derivável — `Means` é
-VOCAB e nada em Γ limita o alcance proposicional de um sujeito. O preço, sem eufemismo: uma
-**restrição do vocabulário de significado** (nenhuma criatura é semanticamente onipotente). Não é
-ponte META e não é definição nova; é uma sentença quantificada sobre vocabulário existente.
+**F15 deixa de ser «ainda requer prova» (2026-09-28, lote SEMANTIC-FINITUDE-PROMOTION).**
+A frase `∀ s : Subject, ∃ p : Prop, ¬ Means s p` **continua a não ser derivável** — `Means` é
+VOCAB e nada em Γ limita o alcance proposicional de um sujeito — mas deixa de ser um *lema
+em falta* e passa a ser um **axioma declarado `Tag: VOCAB`** (`SemanticFinitude`, C388), o 27º
+declarado. O preço, sem eufemismo, é uma **restrição do vocabulário de significado** (nenhuma
+criatura é semanticamente omnipotente). Não é ponte META e não é definição nova; é uma sentença
+quantificada sobre vocabulário existente. A consequência prática: as dez linhas C389–C398 e C400
+passaram de *condicionais* a **incondicionais**, e mantêm o distintivo `PROVEN` porque `VOCAB`
+não é substantivo para o gerador. A distinção que isto fixa: *preço declarado* ≠ *preço
+substantivo*, e *declarado* ≠ *verdadeiro*.
 
 **Correcção posterior (2026-09-27, encontrada ao aterrar C320): esta hipótese JÁ é a premissa
 permanente do corpus.** `canonical_aseity_conditional` (`DivineSimplicity.lean:79`),
@@ -177,27 +183,45 @@ outros (Aquino ST I q. 3), e não fica mais rico por isso. F15 **não é um acto
 compromisso *sem nome*, passado ad hoc.
 
 **Segunda correcção (2026-09-27, mesmo dia): «três sítios» era uma contagem local a um ficheiro.**
-A forma da hipótese ocorre **20 vezes em 5 ficheiros** — `DivinePureActuality` 5, `FoundationalUnicity` 7,
-`CanonicalAseity` 4, `AsieticChoice` 1, `DivineSimplicity` 3. Γ paga este preço por **cinco**
-argumentos de atributo (aseidade, simplicidade, actuação pura, escolha/liberdade, unicidade), não dois.
-O argumento «já pago» fica mais forte.
+A forma da hipótese ocorre em **5 ficheiros**, logo Γ paga este preço por **cinco** argumentos de
+atributo (aseidade, simplicidade, actuação pura, escolha/liberdade, unicidade), não dois. O
+argumento «já pago» fica mais forte. *(O número e a repartição desta correcção estavam errados; ver
+a quarta.)*
 
 O que resta é contabilidade, não crença. Como nenhum *axioma* afirma a frase — é passada como
 argumento explícito em cada uso — C320 não a pode consumir incondicionalmente, e a fila permanece
-como fila. Consolidar as premissas ad hoc numa **única ◈ nomeada** (`Tag: VOCAB`; sendo um `def`, a contagem
-de axiomas continua 25 e o registo de estípulações sobe de 5 para 6) e apontar C320 para ela
-— os outros 19 utilizadores, incrementalmente — tornaria C320 um corolário incondicional e reformaria
-F15. É uma única frase já paga, não uma ponte nova; move o registo, por isso é posto ao autor e não
-feito em silêncio.
+como fila. Consolidar as premissas ad hoc numa **única ◈ nomeada** (`Tag: VOCAB`) e apontar C320
+para ela — os outros utilizadores, incrementalmente — tornaria C320 um corolário incondicional e
+reformaria F15. É uma única frase já paga, não uma ponte nova; move o registo, por isso foi posto ao
+autor e não feito em silêncio.
 
 **Terceira correcção (2026-09-27, lote aterrado): a consolidação foi FEITA, por instrução do
 autor.** `Logos/SemanticFinitude.lean` nomeia o limite (`SemanticFinitude`, C388) e re-chaveia
 os dez teoremas condicionais para corolários `_stipulated` (C389–C398), com o contramodelo de
 falsificabilidade (C399) e a exclusão do fundamento do sort `Subject` *através* do limite
-(C400). Registry 5 → 6, e depois 6 → 7 com o dado performativo. **C-ids C388–C400 atribuídos
-2026-09-27.** Duas notas de exactidão, porque a prosa acima ficou para trás: (i) o censo
-"20 vezes" foi revisto para **19 ocorrências em 5 ficheiros** (17 premissas + 2 campos de
-estrutura, `DivinePureActuality` 4 não 5) — ver a nota do lote em `GAPMAP.md`; (ii) as
-pegadas das linhas de simplicidade (C395–C397) são `{Means, Subject, propext}`, não `{CL}` —
-`propext` é lógica clássica de Lean, não axiom substantivo, e o auditado manda. Os dez
-teoremas condicionais pré-existentes NÃO foram editados e mantêm a premissa anónima.
+(C400). **C-ids C388–C400 atribuídos 2026-09-27.** Notas de exactidão, porque a prosa acima
+ficou para trás: (i) as pegadas das linhas de simplicidade (C395–C397) são
+`{Means, Subject, propext}`, não `{CL}` — `propext` é lógica clássica de Lean, não axiom
+substantivo, e o auditado manda; (ii) o censo foi revisto, e a quarta correcção volta a ele.
+Os dez teoremas condicionais pré-existentes NÃO foram editados e mantêm a premissa anónima.
+
+**Quarta correcção (2026-09-28, lote SEMANTIC-FINITUDE-PROMOTION): o limite passou de ◈ a
+axioma, e o censo foi refeito com medida declarada.** (i) **O censo.** Nenhuma das contagens
+anteriores declarava a medida que contava, e a repartição por ficheiro estava errada. O censo é
+agora **derivado e verificável** — `scripts/census_semantic_finitude.py`, cujo `--check` falha se
+o núcleo divergir do número citado — e tem **duas medidas**, porque «quantas vezes» não tem
+resposta única: `any` = **19** (toda a declaração de enunciado cujo enunciado menciona o limite,
+na forma ∀ ou na forma ∃ por sujeito: `DivinePureActuality` 5, `FoundationalUnicity` **6**,
+`CanonicalAseity` 4, `DivineSimplicity` 3, `AsieticChoice` 1) e `forall` = **14** (só as que
+levam a forma ∀ exacta, que Γ declara: 3, 5, 2, 3, 1). Os corpos de prova excluem-se: uma
+ocorrência num corpo é um *uso* de um preço já pago. O total 19 **estava certo** para a medida
+`any`; o «17 premissas + 2 campos de estrutura» da terceira correcção não correspondia a nenhuma
+medida aplicada de forma consistente, e a repartição que o acompanhava estava errada. A conclusão
+é robusta sob as duas medidas: Γ paga o preço exacto por **cinco** argumentos de atributo, nos
+**cinco** módulos. (ii) **A forma.** A ◈ era um `def` de uma `Prop` tomado como premissa, logo
+**invisível a `#print axioms`**: as dez linhas reportavam a mesma pegada que os teoremas
+condicionais que espelhavam e a contagem de axiomas não se mexia. O limite é agora um **axioma
+declarado `Tag: VOCAB`** (o 27º; 26 → 27, VOCAB 15 → 16), o registo ◈ foi removido, e as dez
+linhas passaram a **incondicionais**, mantendo `PROVEN`. A regra que Γ devia ter seguido desde o
+começo, e que este lote formula: *o corpus não pode provar o que não vê* — uma premissa com carga
+suficiente para precisar de selo tem de ser um `axiom`, não um `def`.

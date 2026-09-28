@@ -187,22 +187,30 @@ theorem judicative_normative_polarity_of_act (s : Subject) (p : Prop) (hAct : Ac
 /-- Generic Grounding Relation over Entities and Propositions.
     Constitutively defines an ontological grounding relation between an entity g
     and a factual proposition p without baking personal predicates into the definition.
-    D1′ DEFERRAL (recorded, not executed): the fields `asymmetric` and `explanatory`
-    below are the NAMED BLOCKERS of the generic-relation independence claim.
-    `asymmetric` forbids every atom from grounding (foreclosing the in-theory
-    countermodel by definition); `explanatory` forces every ground to be
-    `EntityOf s`, so personalness enters only as the assumed `personal_ground`
-    field of `GenericGroundsRightWrong`. Stripping `explanatory` is a semantic
-    decision, not a refactor (it would leave a bare `Entity → Prop → Prop` field
-    with no explanatory adequacy), and dropping `asymmetric` would forfeit an
-    explicit anti-impersonality commitment. Consequence: `normative_ground_is_personal`
-    stays a field projection (BLOCKED, bridge #9 verbatim in GAPMAP/W8), and AC5
-    stays unmet — recorded as a gap, never silenced. -/
+    D1′ RESOLVED AS A SEMANTIC DECISION (2026-09-28; see
+    `HostileModels.model_d_asymmetric_leaves_ofGround_standing`, ledger C416).
+    The fields `asymmetric` and `explanatory` below are the NAMED BLOCKERS of the
+    generic-relation independence claim, and Phase 6 established that **neither is
+    redundant**. `explanatory` forces every ground to be `EntityOf s`, so
+    personalness enters only as the assumed `personal_ground` field of
+    `GenericGroundsRightWrong`. Stripping it is a semantic decision, not a refactor
+    (it would leave a bare `Entity → Prop → Prop` field with no explanatory
+    adequacy). Critically, `asymmetric` alone is **not** sufficient: it forbids every
+    atom, but `Entity` has three constructors and the world-rigid `ofGround`
+    survives it while being no `EntityOf s` for any `s` — so Model D is a
+    counterexample to the stronger claim that only `explanatory` is load-bearing.
+    Consequence: `normative_ground_is_personal` stays a field projection (BLOCKED,
+    bridge #9 verbatim in `base.txt:1524-1525`, GAPMAP/W8), and AC5 stays unmet —
+    recorded as a gap, never silenced. -/
 structure GenericGroundingRelation where
   /-- g grounds proposition p -/
   Grounds : Entity → Prop → Prop
   /-- Asymmetry / Non-Impersonality: an impersonal atomic entity cannot ground normativity.
-      D1′ BLOCKER (kept by decision): forecloses the atom countermodel by definition. -/
+      D1′ BLOCKER (kept by decision): forecloses the **atom** countermodel by definition —
+      but *not* the ground one. `Entity.ofGround` satisfies this field by constructor
+      disjointness and is no `EntityOf s` for any `s`; see
+      `HostileModels.model_d_asymmetric_leaves_ofGround_standing` (C416). This field alone
+      does not force personal ground. -/
   asymmetric : ∀ g p, Grounds g p → ∀ n : Nat, g ≠ Entity.ofAtom n
   /-- Explanatory adequacy: an entity grounding a proposition must possess
       the subjective agential capacity to account for that content.
@@ -243,8 +251,12 @@ def canonicalSubjectGrounding (s : Subject) : GenericGroundingRelation where
     `personal_ground` then supplies `Person s`. The two sealing fields are the
     named blockers: `explanatory` forecloses every in-theory countermodel by
     forcing each ground to be `EntityOf s`, and `asymmetric` forbids every atom
-    from grounding by definition. The missing lemma is bridge #9, verbatim from
-    `base.txt:1345-1346`: `Ground(e, personal) → Personal(e)` (and its target #10).
+    from grounding by definition. **Phase 6 (2026-09-28) sharpened this, without changing the
+    status**: `asymmetric` blocks only the atom countermodel, not the ground one, so the
+    `ofGround` grounder of `HostileModels.model_d_asymmetric_leaves_ofGround_standing` (C416)
+    is a live in-theory witness that `asymmetric` is not by itself enough. D1′ is therefore
+    a decision, not a pending refactor. The missing lemma is bridge #9, verbatim from
+    `base.txt:1524-1525`: `Ground(e, personal) → Personal(e)` (and its target #10).
     Recorded as BLOCKED (ledger row C228), never deferred into silence.
     Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem normative_ground_is_personal
@@ -828,6 +840,48 @@ theorem model_c_self_legislation_collapses
     NormativeViolation s a → False :=
   self_grounded_ought_collapses hSelf a hSoloSource hContrary
 
+/-- Model D (PHASE 6 NEGATIVE RESULT): the C228 re-route is blocked by the *goal's own
+    definition*, not by a missing lemma.
+
+    The two-kinds batch (C403–C415) was proposed as a route to personal ground that does
+    not force any grounder to be an `EntityOf s`. That route cannot exist, and the reason
+    is checkable here: `PersonalEntity` is *defined* as `∃ s, g = EntityOf s ∧ Person s`
+    (`PersonalNormativeGround.lean:228`), so a theorem of personal ground for an entity
+    `g` must in every case deliver `g = EntityOf s` for some `s`. An approach that
+    "reaches personal ground without ever producing `g = EntityOf s`" is not a harder
+    route to the same destination; it is a route to a different proposition. This
+    theorem exhibits the two kinds of grounder that the `asymmetric` field leaves
+    standing — a subject-correlate and `ofGround` — and shows that excluding atoms is
+    not enough to exclude the second.
+
+    The witness is `Entity.ofGround`, the world-rigid ground of reality. It is not an
+    atom, so it satisfies `asymmetric` (`∀ n, ofGround ≠ ofAtom n` holds by constructor
+    disjointness); and by `ofGround_ne_ofSubject` it is not the correlate of any subject
+    either, so it is not `PersonalEntity`. Read with the caution already recorded in
+    `LovesAsGround.lean`, that constructor separation is a *modelling seam* and not a
+    metaphysical verdict about whether reality's necessary ground is personal — the claim
+    proved here is only that `Entity`'s three constructors make `asymmetric` insufficient
+    on its own, which is why `explanatory` and `personal_ground` are load-bearing.
+
+    D1′ is therefore confirmed as a semantic decision rather than an unfinished refactor:
+    the two sealing fields are not redundant, and C228 stays BLOCKED. Footprint:
+    `{Means, Subject, Will, subjectWill}` — the `Means`/`Will`/`subjectWill` axioms enter
+    through `Person` in the third conjunct, which is the conjunct that matters: it is what
+    shows `personal_ground` cannot rescue `ofGround` either, since its hypothesis
+    `g = EntityOf s` is unsatisfiable there. -/
+theorem model_d_asymmetric_leaves_ofGround_standing
+    : ∃ (g : Entity) (p q : Prop),
+      (∀ (n : Nat), g ≠ Entity.ofAtom n) ∧
+      (∀ (s : Subject), g ≠ EntityOf s) ∧
+      (∀ (s : Subject), g = EntityOf s → Person s) := by
+  refine ⟨Entity.ofGround, True, False, ?_, ?_, ?_⟩
+  · intro n h
+    cases h
+  · intro s h
+    cases h
+  · intro s h
+    cases h
+
 end HostileModels
 
 -- ===========================================================================
@@ -849,6 +903,7 @@ end HostileModels
 #print axioms HostileModels.model_b_satisfiable
 #print axioms HostileModels.model_b_separation
 #print axioms HostileModels.model_c_self_legislation_collapses
+#print axioms HostileModels.model_d_asymmetric_leaves_ofGround_standing
 
 #print axioms step_datum_to_stance
 #print axioms step_stance_to_choice

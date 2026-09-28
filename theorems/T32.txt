@@ -1,0 +1,43 @@
+T32 — OS DOIS GÉNEROS (C403–C409)
+====================================
+2026-09-28. Os sujeitos vêm em dois géneros, e o contingente é de outro género.
+`Agency.NecessarySubjectKind : Subject → Prop` (`Tag: VOCAB`, C403) é o predicado
+do género necessário; `ContingentSubjectKind` é a sua negação. `SubjectExistsAt`
+lê o género: `NecessarySubjectKind s ∨ w = actualWorld`. A cláusula contingente
+não é tocada — os humanos ficam exactamente tão contingentes como eram.
+
+- C404 `Plurality.necessaryPersonalSubjectExists : ∃ s, NecessarySubjectKind s ∧
+  Person s` — **a ponte** (`Tag: META`): o género necessário é habitado por uma
+  Pessoa. Pessoa é Sujeito por definição; o Tipo Pessoal do fundamento está
+  provado (T8); o passo modal é esta ponte, e é todo o preço de "uma pessoa que
+  significa tem de ser necessária". Não identifica o construtor-fundamento com
+  correlato algum; não diz que o Criador habita o mundo; não torna necessário
+  nenhum outro sujeito.
+- C405/C406 — transporte relativo-ao-género: o género necessário é necessário;
+  o contingente não é. É aqui que vivem agora todos os achados de contingência
+  antes incondicionais.
+- C407/C408 — um sujeito necessário / uma pessoa necessária existem, pela ponte.
+- C409 `NecessaryPersonalGround.necessary_person_derived_from_bridge :
+  ClaimD_NecessaryPerson` — **Claim D derivada em vez de anotada**. Reforma a nota
+  "annotated only".
+
+Reversões, um cacho, uma causa: C330 → `necessary_entities_are_ground_or_necessary_kind`
+(disjunção; a célula "necessário ∧ escolhido" está ocupada); C344 re-delimitada
+(separação de construtor, não veredicto sobre a pessoalidade do fundamento);
+C329/C346/C347/C348/C246 com premissas de género; C247 → `gapless_operators_are_ground_or_necessary_kind`;
+C367/C351/C352/C386/C387 e T14 (C42–C45) com premissas de género exibidas —
+`AxTwoSubjects` sai dessas linhas (exibir o género subsume a testemunha de T12),
+sem ser tocado em mais lado nenhum.
+
+O que isto NÃO faz: retirar nenhum ataque — `PersonNotNecessary`,
+`no_necessary_subject`, a independência Tipo 1/4, `subject_not_everlasting`,
+C329, C344–C348, C246 sobrevivem (os universais como condicionais ao género);
+ligar a ponte ao habitante do mundo; tocar `AxTwoSubjects`, T12, C382/C385/M1,
+os SEM, os átomos, ou qualquer `SubjectExistsAt` de assinatura independente.
+Dois axiomas novos, ambos ledgerizados (C403/C404); inventário 24 → 26.
+
+Ver: `formal/GAPMAP.md` (lote "Batch two-kinds", linhas C403–C409, 5.ª correcção),
+`formal/Logos/Agency.lean:49-63`, `formal/Logos/Entity.lean:33-59`,
+`formal/Logos/Plurality.lean` (ponte + transporte), `base.txt` §§22/26/28,
+`poem.txt` P5/P6/P10, `investigations/countermodels.md` §0, `CREATION.md`,
+`MEANING-2.md` §9.

@@ -63,13 +63,13 @@ open Logos.DivineSimplicity (DivineSimplicity ofGround_divine_simplicity ofGroun
 
 /-- Modal Invariance: an entity's existence is invariant across all possible worlds.
     It does not exist contingently in some worlds while failing to exist in others.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 def ModalInvariance (e : Entity) : Prop :=
   ∀ w₁ w₂ : World, ExistsAt w₁ e ↔ ExistsAt w₂ e
 
 /-- The Ground of Reality possesses Modal Invariance:
     `Entity.ofGround` exists invariably across every world (by definition).
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem ofGround_modal_invariance :
     ModalInvariance Entity.ofGround := by
   intro w₁ w₂
@@ -82,13 +82,13 @@ theorem ofGround_modal_invariance :
 
 /-- Temporal / Stage Invariance: an entity's existence does not fluctuate across temporal stages.
     It exists uniformly at all times without beginning, ending, or temporal alteration.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 def StageInvariance (e : Entity) : Prop :=
   ∀ t₁ t₂ : Time, ExistsAtTime t₁ e ↔ ExistsAtTime t₂ e
 
 /-- The Ground of Reality possesses Stage Invariance:
     its existence across temporal stages is completely invariant.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem ofGround_stage_invariance :
     StageInvariance Entity.ofGround :=
   the_ground_atemporal
@@ -188,7 +188,7 @@ structure DivineImmutability (e : Entity) : Prop where
 /-- HEADLINE — Divine Immutability of the Ground of Reality:
     `Entity.ofGround` satisfies Classical Divine Immutability across worlds, time,
     processes, and intentional capacities.
-    Footprint: `{Initiates, Means, State, Subject}` (0 substantive axioms). -/
+    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject}` (0 substantive axioms). -/
 theorem ofGround_divine_immutability :
     DivineImmutability Entity.ofGround := {
   modal_invariance := ofGround_modal_invariance
@@ -204,7 +204,7 @@ theorem ofGround_divine_immutability :
 /-- The Thomistic Principle of Immutability:
     Any entity that is necessary, atemporal, outside succession, and possesses
     capacity invariance satisfies Divine Immutability.
-    Footprint: `{Initiates, Means, State, Subject}`. -/
+    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
 theorem necessity_and_atemporality_yield_immutability (e : Entity)
     (hNec : ∀ w₁ w₂ : World, ExistsAt w₁ e ↔ ExistsAt w₂ e)
     (hAtemp : Atemporal e)

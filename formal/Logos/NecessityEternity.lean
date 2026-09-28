@@ -20,12 +20,17 @@ This module establishes, from the extended canonical sort `Logos.Entity.Entity`
    ground is eternal and atemporal."
 3. **Honest separation.** The new predicates are not collapsed: atoms are
    time-modulated (`atom_has_temporal_mode`, `atom_not_everlasting`,
-   `atom_not_atemporal`), subjects exist at no stage
-   (`subject_not_everlasting`), and `Everlasting ⇏ NecessaryEntity`
-   (`everlasting_but_contingent`: `Entity.ofAtom 0`). The ground is outside every
-   initiation-becoming (`the_ground_not_in_succession`) and provably distinct from
-   every subject-correlate (`ofGround_ne_ofSubject`) — so hypostatic identity is
-   blocked, not hidden.
+   `atom_not_atemporal`), subjects of the contingent kind exist at no stage
+   (`subject_not_everlasting`, now carrying the `ContingentSubjectKind s`
+   hypothesis that was always its real content), and `Everlasting ⇏
+   NecessaryEntity` (`everlasting_but_contingent`: `Entity.ofAtom 0`). The
+   ground is outside every initiation-becoming (`the_ground_not_in_succession`)
+   and provably distinct from every subject-correlate
+   (`ofGround_ne_ofSubject`) — so hypostatic identity is blocked, not hidden.
+   The necessary kind of subject is everlasting instead, by
+   `Plurality.necessaryKindSubject_is_necessary` with
+   `necessary_implies_everlasting`; the two kinds are differentiated, never
+   collapsed.
 4. **Claim E (non-hypostatic pairing).** `claimE` witnesses the necessary entity a
    nd the personal ground-type as separate conjuncts: there is a necessary ground
    of reality and a Person grounding Right/Wrong — with no identity line between
@@ -53,7 +58,7 @@ namespace Logos.NecessityEternity
 open Logos.Semantics (World TV)
 open Logos.Entity (Entity EntityOf ExistsAt actualWorld)
 open Logos.Modal (NecessaryEntity)
-open Logos.Agency (Subject State Initiates)
+open Logos.Agency (Subject State Initiates NecessarySubjectKind ContingentSubjectKind)
 open Logos.Plurality (T5_personExists_from_plurality)
 open Logos.RecoveredOntologicalGround (GroundOfReality NecessaryGroundOfReality GroundsEntity ActualEntity)
 open Logos.PersonalNormativeGround (GroundsRightWrong)
@@ -75,7 +80,7 @@ abbrev Time : Type := Nat
 def stageOf (t : Time) (m : Nat) : TV := if m ≤ t then TV.t else TV.f
 
 /-- Existence of an entity at a global stage: existence in the world `stageOf t`.
-    This is a *derived* relation (footprint `{Subject}`), not a new axiom of temporal
+    This is a *derived* relation (footprint `{NecessarySubjectKind, Subject}`), not a new axiom of temporal
     ontology. -/
 def ExistsAtTime (t : Time) (e : Entity) : Prop := ExistsAt (stageOf t) e
 
@@ -128,7 +133,7 @@ theorem necessary_existence_is_stage_uniform
     Definitional (world-rigid constructor, VOCAB class). Before this extension
     the live sort satisfied `¬ ∃ e, NecessaryEntity e`; the extension declares
     the ground's world-invariance as a semantic stipulation, not an axiom.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem ofGround_necessary : NecessaryEntity Entity.ofGround := by
   intro w
   trivial
@@ -136,14 +141,14 @@ theorem ofGround_necessary : NecessaryEntity Entity.ofGround := by
 /-- The ground of reality ontologically grounds every actual entity: for every
     actual entity `e`, either it is the ground itself or the ground means
     everything `e` means (`EntityMeans .ofGround p := True`, the explanatory-
-    adequacy dual of the atom's `False`). Footprint: `{Means, Subject}`. -/
+    adequacy dual of the atom's `False`). Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem ofGround_ground_of_reality : GroundOfReality Entity.ofGround := by
   intro e hActual
   exact Or.inr (fun p hEM => True.intro)
 
 /-- HEADLINE — the necessary ground of reality exists: `Entity.ofGround` is a
     necessary entity and the ontological ground of reality.
-    Footprint: `{Means, Subject}`. This is the live theorem behind the README row
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. This is the live theorem behind the README row
     "Necessary Divine Being / Ground — PROVEN". -/
 theorem ofGround_necessary_ground_of_reality : NecessaryGroundOfReality Entity.ofGround :=
   ⟨ofGround_necessary, ofGround_ground_of_reality⟩
@@ -163,14 +168,14 @@ theorem ofGround_ne_ofSubject (s : Subject) : Entity.ofGround ≠ EntityOf s := 
 /-- Necessary → Everlasting (task C): because every stage is a world
     (`stageOf t : World`), an entity that exists in every world exists at every
     stage. The argument carries no temporal premise over to the conclusion side.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem necessary_implies_everlasting {e : Entity} :
     NecessaryEntity e → Everlasting e := by
   intro h t
   exact h (stageOf t)
 
 /-- Necessary → Atemporal: a world-rigid entity's existence does not vary across
-    stages. Footprint: `{Subject}`. -/
+    stages. Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem necessary_implies_atemporal {e : Entity} :
     NecessaryEntity e → Atemporal e := by
   intro h t₁ t₂
@@ -178,11 +183,11 @@ theorem necessary_implies_atemporal {e : Entity} :
   · intro _; exact h (stageOf t₂)
   · intro _; exact h (stageOf t₁)
 
-/-- The ground is everlasting (exists at every stage). Footprint: `{Subject}`. -/
+/-- The ground is everlasting (exists at every stage). Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem the_ground_everlasting : Everlasting Entity.ofGround := by
   exact necessary_implies_everlasting ofGround_necessary
 
-/-- The ground is atemporal (existence not time-modulated). Footprint: `{Subject}`. -/
+/-- The ground is atemporal (existence not time-modulated). Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem the_ground_atemporal : Atemporal Entity.ofGround := by
   exact necessary_implies_atemporal ofGround_necessary
 
@@ -193,7 +198,7 @@ theorem the_ground_not_in_succession : NotInSuccession Entity.ofGround := by
   exact Entity.noConfusion hEq
 
 /-- Reader-facing bundle: the ground is everlasting and atemporal.
-    Footprint: `{Subject}`. (Deliberately named without "eternal" — see the README
+    Footprint: `{NecessarySubjectKind, Subject}`. (Deliberately named without "eternal" — see the README
     regeneration guards.) -/
 theorem everlasting_and_atemporal_ground :
     Everlasting Entity.ofGround ∧ Atemporal Entity.ofGround :=
@@ -204,7 +209,7 @@ theorem everlasting_and_atemporal_ground :
 -- ============================================================================
 
 /-- Atoms are not everlasting: an atomic entity fails at stage 0.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem atom_not_everlasting : ¬ Everlasting (Entity.ofAtom 1) := by
   intro h
   have hn : ¬ (1 ≤ 0) := by decide
@@ -214,7 +219,7 @@ theorem atom_not_everlasting : ¬ Everlasting (Entity.ofAtom 1) := by
   exact Logos.Semantics.TV.noConfusion h0
 
 /-- Atoms are not atemporal: atomic existence varies across stages.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem atom_not_atemporal : ¬ Atemporal (Entity.ofAtom 1) := by
   intro h
   have hn : ¬ (1 ≤ 0) := by decide
@@ -230,32 +235,40 @@ theorem atom_not_atemporal : ¬ Atemporal (Entity.ofAtom 1) := by
   exact hF ((h 0 1).mpr hT)
 
 /-- Atoms are time-modulated: `Entity.ofAtom 1` exists at stage 1 but not at
-    stage 0 (alias of `atom_not_atemporal`). Footprint: `{Subject}`. -/
+    stage 0 (alias of `atom_not_atemporal`). Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem atom_has_temporal_mode : HasTemporalMode (Entity.ofAtom 1) :=
   atom_not_atemporal
 
-/-- Subjects exist at no global stage: `stageOf t ≠ actualWorld` at index `t + 1`
-    (the growing timeline disagrees with the always-true valuation), so
-    `ExistsAtTime` never holds for a subject-correlate. Consistent with the live
-    semantics `SubjectExistsAt w s := w = actualWorld`. Footprint: `{Subject}`. -/
-theorem subject_not_everlasting (s : Subject) : ¬ Everlasting (EntityOf s) := by
+/-- Subjects of the contingent kind exist at no global stage: `stageOf t ≠
+    actualWorld` at index `t + 1` (the growing timeline disagrees with the
+    always-true valuation), so `ExistsAtTime` never holds for a
+    contingent-kind subject-correlate. This is the kind-relative form of the
+    old unconditional reading: the hypothesis `ContingentSubjectKind s` is what
+    the old semantics `SubjectExistsAt w s := w = actualWorld` asserted of every
+    subject. The necessary kind is everlasting instead
+    (`Plurality.necessaryKindSubject_is_necessary` with
+    `necessary_implies_everlasting`). Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem subject_not_everlasting (s : Subject) (hKind : ContingentSubjectKind s) :
+    ¬ Everlasting (EntityOf s) := by
   intro h
   have ht := h 0
   dsimp [ExistsAtTime, ExistsAt, Logos.Entity.EntityExistsAt, Logos.Entity.SubjectExistsAt, EntityOf] at ht
-  have hn : ¬ (1 ≤ 0) := by decide
-  have hstage : Logos.Semantics.TV.f = (stageOf 0) 1 := by
-    rw [stageOf, ite_eq_right hn]
-  have hact : (Logos.Entity.actualWorld) 1 = Logos.Semantics.TV.t := rfl
-  have hc : Logos.Semantics.TV.f = Logos.Semantics.TV.t := by
-    calc
-      Logos.Semantics.TV.f = (stageOf 0) 1 := hstage
-      _ = Logos.Entity.actualWorld 1 := congrArg (fun w : World => w 1) ht
-      _ = Logos.Semantics.TV.t := hact
-  exact Logos.Semantics.TV.noConfusion hc
+  rcases ht with hk | heq
+  · exact hKind hk
+  · have hn : ¬ (1 ≤ 0) := by decide
+    have hstage : Logos.Semantics.TV.f = (stageOf 0) 1 := by
+      rw [stageOf, ite_eq_right hn]
+    have hact : (Logos.Entity.actualWorld) 1 = Logos.Semantics.TV.t := rfl
+    have hc : Logos.Semantics.TV.f = Logos.Semantics.TV.t := by
+      calc
+        Logos.Semantics.TV.f = (stageOf 0) 1 := hstage
+        _ = Logos.Entity.actualWorld 1 := congrArg (fun w : World => w 1) heq
+        _ = Logos.Semantics.TV.t := hact
+    exact Logos.Semantics.TV.noConfusion hc
 
 /-- Everlasting ⇏ Necessary: `Entity.ofAtom 0` exists at every stage (`0 ≤ t`
     always) but fails in the all-`f` world — so everlastingness never collapses
-    into necessity. Footprint: `{Subject}`. -/
+    into necessity. Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem everlasting_but_contingent : ∃ e : Entity, Everlasting e ∧ ¬ NecessaryEntity e := by
   refine ⟨Entity.ofAtom 0, ?_, ?_⟩
   · intro t

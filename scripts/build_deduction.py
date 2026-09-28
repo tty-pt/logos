@@ -345,7 +345,45 @@ def _capture_statement(lines: list, start: int, kind: str) -> tuple[str, int]:
 # 2. GAPMAP parsing
 # ---------------------------------------------------------------------------
 
-CLAIM_ID_RE = re.compile(r"^(C\d+|F\d+[ab]?|FAITH-\d+|Q7\.\d)\s*$")
+# Claim-id shapes that appear in the GAPMAP ledger's first column. The
+# alternation must cover every id the ledger actually uses, not just the
+# common ones: `F1bUncond`, `EvalSettlement` and `OpenBridgeNormativity` are
+# real rows of the "Deferred / blocked" table, and a regex that omits them
+# drops them from every generated document *silently* — a BLOCKED row that
+# never reaches the reader reads as a row that does not exist. `F\d+[A-Za-z]*`
+# covers `F1a`/`F1b`/`F1bUncond`; the bare CamelCase alternative covers the
+# two descriptive ids. Header cells ("ID", "C-id", "Route", "Claim", "Status",
+# "Tag") are excluded by the explicit denylist in `_is_claim_id_cell`.
+CLAIM_ID_RE = re.compile(
+    r"^(C\d+|F\d+[A-Za-z]*|FAITH-\d+|Q7\.\d|[A-Z][A-Za-z]+)\s*$")
+
+# First-column cells that look like ids but are table headers or prose labels.
+_NOT_CLAIM_ID = {
+    "ID", "Cid", "Route", "Claim", "Status", "Tag", "Footprint", "Prose",
+    "Missing", "Intermediate", "Step", "Classification", "Obstruction", "Note",
+    "Axiom", "Axioms", "File", "Name", "Type", "Kind", "Badge", "Meaning",
+    "Section", "Level", "Passage", "Item", "Batch", "Cid Pegada",
+}
+
+
+def _is_claim_id_cell(cell: str) -> bool:
+    """True when a GAPMAP first-column cell is a claim id rather than a header.
+
+    Denylist-driven on purpose: an unknown CamelCase id should be *counted* so
+    the drift is visible, while the handful of known header words are excluded
+    explicitly rather than by pattern."""
+    c = cell.strip()
+    if not CLAIM_ID_RE.match(c):
+        return False
+    if c in _NOT_CLAIM_ID:
+        return False
+    # "C-id" is a header in the C388 provenance table; "Cid Pegada" likewise.
+    # `FAITH-n` is a legitimate id, so hyphens are only rejected when the cell
+    # is not already an exact match of one of the hyphenated id shapes.
+    if "-" in c or " " in c:
+        if not re.match(r"^(FAITH-\d+)\s*$", c):
+            return False
+    return True
 
 
 def parse_gapmap() -> list:
@@ -354,6 +392,14 @@ def parse_gapmap() -> list:
     text = GAPMAP_PATH.read_text(encoding="utf-8")
     sections = []
     cur = None
+    # Some ledger sections carry a *derived* sub-table (e.g. the C388–C400
+    # footprint-provenance table under the semantic-finitude batch) that repeats
+    # claim ids with a different column shape. Those rows must not be counted a
+    # second time: a duplicate id would be reconciled as a "repeated/dissolved"
+    # step, i.e. the very badge that means "this row adds nothing". A table is
+    # skipped when its header row is detected as a provenance/derived table.
+    skip_table = False
+    in_table = False
 
     for line in text.splitlines():
         s = line.strip()
@@ -362,13 +408,42 @@ def parse_gapmap() -> list:
             title = m.group(1).strip()
             cur = {"title": title, "claims": []}
             sections.append(cur)
+            skip_table = False
+            in_table = False
             continue
         if not s.startswith("|"):
+            in_table = False
+            skip_table = False
             continue
         if cur is None:
             continue
         cells = [c.strip() for c in s.strip("|").split("|")]
-        if not cells or not CLAIM_ID_RE.match(cells[0]):
+        if set(cells) <= {"-", "—", ""}:          # separator row
+            continue
+        # A header row is the first row of a table: no cell parses as a claim id
+        # for the shapes a claim row would use, and it introduces columns.
+        if not in_table:
+            in_table = True
+            if cells and not _is_claim_id_cell(cells[0]) and len(cells) >= 2:
+                hdr = {c.lower() for c in cells}
+                joined = " | ".join(cells).lower()
+                # A *derived* sub-table (footprint/class audit) names its id column
+                # `C-id` or `Decl (...)` — those repeat claim ids in a different
+                # column shape and are not claim rows. The main ledger's header is
+                # `Claim | Secao | Declaracao | Status | Pegada`: it contains
+                # neither `c-id` nor a `Decl (...)` cell, so it is never skipped.
+                # Both markers are required together with a footprint column so a
+                # future header mentioning one of them alone cannot silently drop
+                # a whole ledger.
+                derived_cols = ("c-id" in hdr
+                                or any(h.startswith("decl (") for h in hdr))
+                footprint_col = ("pegada" in joined or "footprint" in joined)
+                if derived_cols and footprint_col:
+                    skip_table = True
+                continue
+        if skip_table:
+            continue
+        if not cells or not _is_claim_id_cell(cells[0]):
             continue
         claim = {"id": cells[0], "prose": "", "status": "", "footprint": "",
                  "lean_ref": "", "note": "", "section": cur["title"],
@@ -378,7 +453,12 @@ def parse_gapmap() -> list:
             claim["lean_ref"] = _extract_lean_ref(lean_cell)
             claim["status"] = _clean_status(status)
             claim["footprint"] = re.sub(r"`+", "", footprint).strip()
-        elif len(cells) >= 4 and claim["id"].startswith(("F", "Q")):
+        elif len(cells) >= 4:
+            # 4-cell shape: id | prose | status | note(+lean ref). Historically
+            # gated on an `F`/`Q` prefix, which silently dropped the other
+            # frontier rows of the same table (`EvalSettlement`,
+            # `OpenBridgeNormativity`). `_is_claim_id_cell` has already decided
+            # the first cell is an id, so no prefix test belongs here.
             _, claim["prose"], status, note = cells[:4]
             claim["status"] = _clean_status(status)
             claim["note"] = re.sub(r"`+", "", note).strip()
@@ -491,7 +571,26 @@ STATUS_BADGE = {
     "AXIOM": "◆",
     "BLOCKED": "✖",
     "DEFERRED": "➖",
+    # A countermodel row is a WON claim, not a residual "other": Γ builds an
+    # explicit model in which the claim fails, which is a positive result about
+    # the boundary of the theory. Before this key existed, `badge_for` fell
+    # through to `STATUS_BADGE.get(st, st)` and returned the raw string
+    # "COUNTERMODEL", which then landed in the `other` bucket next to the
+    # BLOCKED rows and made a demonstrated boundary read as an unresolved one.
+    "COUNTERMODEL": "🧱",
 }
+
+# Statuses that count as a *demonstrated result*. `other` is a real residual
+# rather than a dumping ground; these must never be swept into it.
+#
+# `◆` is deliberately ABSENT. A declared axiom is an input the theory rests on,
+# and counting one as a win would be the same error as counting a hypothesis as
+# a proof — the score block publishes `n_ax` separately, as the price. `→` is a
+# cross-reference, `➖` a target outside the live kernel, and `✖` a gap. None is
+# a result. Phase 4c of VISIBILITY.md is this exclusion, and the assertions in
+# `derive_score_data` are what keep it load-bearing rather than aspirational.
+WON_BADGES = ("✅", "⚠️", "🧱")
+COUNTERMODEL_BADGE = "🧱"
 
 # ---------------------------------------------------------------------------
 # Axiom registry — derived from the Lean source (each axiom's `Tag:` line),
@@ -748,6 +847,115 @@ def compute_detailed_badges(all_claims: list[dict], decls: dict, node_map: dict)
     return detailed_badges
 
 
+ALL_CHAIN_STEPS = None  # bound in main() once the lists above are defined
+
+
+# The reader-facing narrative chains, in the order they are emitted. Membership is
+# hand-maintained (AGENTS.md); badges and footprints inside each row are derived.
+# `verify_chain_coverage` fails the build if a row drifts or a required declaration
+# is dropped.
+CHAIN_LISTS = [
+    ("ASIETY-FREEDOM", "ASIETY_FREEDOM_STEPS"),
+    ("SEMANTIC-FINITUDE", "SEMANTIC_FINITUDE_STEPS"),
+    ("MEANING-RETORSION", "MEANING_RETORSION_STEPS"),
+    ("LOVE", "LOVE_STEPS"),
+    ("TWO-KINDS", "TWO_KINDS_STEPS"),
+]
+
+
+# Declarations that a reader must be able to find in the rendered deduction, and
+# the chain lists that are therefore not allowed to drop them. This is the small,
+# reviewed guard the AGENTS.md sync rule needs: the failure it exists to prevent is
+# "a new batch is fully proven and fully registered in GAPMAP, but no reader-facing
+# chain list mentions it, so the document silently omits the newest work" — which
+# is exactly what happened to the 2026-09-28 two-kinds batch.
+#
+# Scope note (2026-09-28). A broader rule was considered and REJECTED on evidence:
+# requiring every displayable declaration in a chain module to appear in a list
+# yields 168 pre-existing violations (61 of them in Logos.Agency, which is the base
+# vocabulary), and requiring every Logos module to have a chain yields 75 of 84
+# modules uncovered. Either would need an exemption list large enough to be a fake
+# guard. This set is therefore explicit, tiny, and hard-failing, and it is checked
+# against the *rendered* chain lists rather than against module membership.
+CHAIN_REQUIRED_DECLS = {
+    "Logos.Plurality.necessaryPersonalSubjectExists": "C404 — the batch's only substantive price",
+    "Logos.Plurality.necessarySubject_exists": "C407 — a necessary subject exists",
+    "Logos.Plurality.necessaryPersonalSubject_derived": "C408 — a necessary Person exists",
+    "Logos.NecessaryPersonalGround.necessary_person_derived_from_bridge":
+        "C409 — CLAIM D derived rather than annotated; the batch's headline",
+    "Logos.Plurality.kinds_are_the_modal_partition":
+        "C410 — the two kinds ARE the two modal profiles; the batch's `{}`-class headline",
+    "Logos.Plurality.contingentKindSubject_not_necessary":
+        "C406 — discharges C329 with no love axiom",
+    "Logos.PersonalGroundOfReality.the_person_supports_the_reality_of_right":
+        "C151 — the unconditional personal-ground flagship",
+    "Logos.PersonalGroundOfReality.personal_ground_of_right_exists":
+        "C152 — a personal ground of right exists",
+}
+
+
+def verify_chain_coverage(node_map: dict, claims_by_id: dict) -> None:
+    """Hard-fail the build on two chain-list defects, and report coverage.
+
+    1. INTEGRITY — every `*_STEPS` row must point at a live kernel node, and when
+       it names a C-id, that C-id must resolve (via the generator's own resolver)
+       to exactly the declaration the row claims. This catches the dominant real
+       drift: a theorem is renamed and the list is not.
+    2. REQUIRED COVERAGE — every declaration in `CHAIN_REQUIRED_DECLS` must appear
+       in at least one `*_STEPS` list. This is the AGENTS.md sync rule made
+       mechanical for the batches it bit.
+
+    Badges and footprints are never touched here; this only governs membership.
+    """
+    problems = []
+
+    listed: dict[str, str] = {}          # fullName -> list name
+    cid_rows: list[tuple[str, str, str, str]] = []   # (list, cid, full, short)
+    for lname, rows in ALL_CHAIN_STEPS:
+        for _marker, cid, full, _atype, _text in rows:
+            listed.setdefault(full, lname)
+            if cid and cid != "—":
+                cid_rows.append((lname, cid, full, full.rsplit(".", 1)[-1]))
+
+    # 1. integrity
+    for lname, cid, full, short in cid_rows:
+        if full not in node_map:
+            problems.append(
+                f"chain integrity: {lname} row {cid} names `{full}`, which is not a live "
+                f"kernel node (renamed or deleted?)")
+            continue
+        resolved = claims_by_id.get(full)
+        if resolved and resolved["id"] != cid:
+            problems.append(
+                f"chain integrity: {lname} row labels `{short}` as {cid}, but the ledger "
+                f"resolves it to {resolved['id']} — fix the row or the ledger")
+
+    # 2. required coverage
+    for full, why in sorted(CHAIN_REQUIRED_DECLS.items()):
+        if full not in listed:
+            problems.append(
+                f"chain coverage: `{full}` must appear in a reader-facing chain list "
+                f"({why}); it is in none. Per AGENTS.md, extending the hand-authored "
+                f"`*_STEPS` list is part of the same change that adds the declaration.")
+        elif full not in node_map:
+            problems.append(
+                f"chain coverage: `{full}` is listed but is not a live kernel node")
+
+    if problems:
+        for p in problems:
+            print(f"  ✗ {p}")
+        raise SystemExit(
+            f"ERROR: {len(problems)} chain-list problem(s). The reader-facing deduction "
+            f"would drift from the kernel; see AGENTS.md (chain membership is hand-maintained, "
+            f"badges and footprints are derived).")
+
+    n_decl = sum(len(r) for _n, r in ALL_CHAIN_STEPS)
+    print(f"  ✓ chain integrity: {n_decl} rows across {len(ALL_CHAIN_STEPS)} chain lists, "
+          f"all resolving to live nodes and correct ledger ids.")
+    print(f"  ✓ chain coverage: all {len(CHAIN_REQUIRED_DECLS)} required declarations "
+          f"present ({len(listed)} distinct declarations listed).")
+
+
 def verify_gloss_relations(all_claims: list[dict], decls: dict, graph: dict):
     """Ensure that prose glosses do not claim relations (like active loving)
     unless that relation actually occurs in the formal statement or kernel dependencies."""
@@ -888,20 +1096,20 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
         ap("- Every kernel theorem has a claim (or a mapped reference).")
 
     # --- detailed claims accounting & reconciliation assertion ----------------
+    # Counts come from `derive_score_data`, the same function the README score
+    # block reads, so the annex and the document cannot drift apart. That
+    # function also holds the reconciliation assertion the plan requires be
+    # preserved: it fails the build when the badges do not sum to the inventory.
+    sd = derive_score_data(all_claims, decls, node_map)
     detailed_badges = compute_detailed_badges(all_claims, decls, node_map)
-    cnt_prov = sum(1 for b in detailed_badges.values() if b == "✅")
-    cnt_up = sum(1 for b in detailed_badges.values() if b == "⚠️")
-    cnt_ax = sum(1 for b in detailed_badges.values() if b == "◆")
-    cnt_repeat = sum(1 for b in detailed_badges.values() if b == "→")
-    cnt_blocked = sum(1 for b in detailed_badges.values() if b == "✖")
-    cnt_deferred = sum(1 for b in detailed_badges.values() if b == "➖")
-    cnt_other = sum(1 for b in detailed_badges.values() if b not in ("✅", "⚠️", "◆", "→", "✖", "➖"))
-
-    # Reconcile assertion
-    total_detailed = cnt_prov + cnt_up + cnt_ax + cnt_repeat + cnt_blocked + cnt_deferred + cnt_other
-    assert total_detailed == len(all_claims), (
-        f"Reconciliation error: detailed claims ({total_detailed}) != total claims ({len(all_claims)})"
-    )
+    cnt_prov = sd["n_prov"]
+    cnt_up = sd["n_up"]
+    cnt_ax = sd["n_ax"]
+    cnt_repeat = sd["n_rep"]
+    cnt_cm = sd["n_cm"]
+    cnt_blocked = sd["n_blocked"]
+    cnt_deferred = sd["n_deferred"]
+    cnt_other = sd["n_other"]
 
     steps = [c for c in found_claims if derived_for(c, node_map)]
     derived = [derived_for(c, node_map) for c in steps]
@@ -913,10 +1121,11 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
        f"**{cnt_prov} ✅** · **{cnt_up} ⚠️** · **{cnt_ax} ◆** (unique steps detailed in the map)")
     ap(f"- **Reconciled claim inventory ({len(all_claims)} total):** "
        f"{cnt_prov + cnt_up} unique active steps ({cnt_prov} ✅ + {cnt_up} ⚠️) · "
+       f"{cnt_cm} countermodel boundaries (🧱) · "
        f"{cnt_repeat} repeated / dissolved (→) · "
        f"{cnt_blocked} blocked / missing (✖) · "
        f"{cnt_deferred} deferred (➖)"
-       + (f" · {cnt_other} other ({', '.join(b for b in detailed_badges.values() if b not in ('✅', '⚠️', '◆', '→', '✖', '➖'))})" if cnt_other else ""))
+       + (f" · {cnt_other} other ({', '.join(b for b in detailed_badges.values() if b not in ('✅', '⚠️', '◆', '🧱', '→', '✖', '➖'))})" if cnt_other else ""))
     philo_hist = defaultdict(int)
     for c in all_claims:
         philo_hist[philo_status(c, node_map)] += 1
@@ -1017,15 +1226,27 @@ def render_code_annex(sections, claims_by_id, decls, node_map, graph):
     ap("<details>")
     ap("<summary>Lean declaration, file:line, kernel footprint and code dependencies, per claim →</summary>")
     ap("")
-    ap("| ID | Lean declaration | File#L | Kernel axioms | Depends on (Lean) | Used by |")
+    # The last cell is the *claim's* dependency data, so for a claim with no
+    # kernel declaration it must not be filled with a scraped token. The ledger
+    # rows for the F-claims put a whole sentence in the declaration cell, and the
+    # parser's identifier scrape out of that sentence produced `BLOCKED` for F15,
+    # `def` for F13, `propext` for F9 — printed under a "Used by" header, where a
+    # reader scanning F15 for its status saw `BLOCKED` beside an AXIOM claim. A
+    # scraped string is only shown when it actually resolves to a declaration;
+    # otherwise the cell carries the derived badge, which is the thing a reader
+    # opening an F-row is looking for.
+    ap("| ID | Lean declaration | File#L | Kernel axioms | Depends on (Lean) | Used by / status |")
     ap("|---|---|---|---|---|---|")
+    badges = compute_detailed_badges(
+        [c for sec in sections for c in sec["claims"]], decls, node_map)
     for sec in sections:
         for c in sec["claims"]:
             cid = c["id"]
             full = c.get("_full")
             if not full or full not in decls:
-                lr = c.get("lean_ref") or "—"
-                ap(f"| {cid} | — | — | — | — | {lr} |")
+                lr = c.get("lean_ref") or ""
+                ref = (f"`{lr}`" if lr in decls else "")
+                ap(f"| {cid} | — | — | — | — | {ref or badges.get(cid, '—')} |")
                 continue
             d = decls[full]
             kern = kernel_fp_text(full)
@@ -1470,8 +1691,9 @@ STAGES = [
      "and interpersonal-value steps follow."},
     {"key": "VIII", "title": "Love", "intro":
      "Given two distinct persons, love is defined as the mutual help that does "
-     "not harm. C41–C45 derive an eternal love-relation between two "
-     "persons; plurality alone still does not force love — that is the separate "
+     "not harm. C41/C43 derive love between two "
+     "persons under the plurality bridge; C42/C44/C45 derive the *eternal* love-relation "
+     "given an exhibited necessary-kind pair (2026-09-28, two-kinds) — plurality alone still does not force love, and kind-blind plurality no longer forces persistence either; those are separate "
      "bridge content."},
 {"key": "IX", "title": "The Remaining Metaphysical Frontier", "intro":
       "The remaining frontier is explicit: teleology is deferred; the moral good is "
@@ -1596,6 +1818,10 @@ AX_ID = {
     # nothing, while C367 `cosmos_obtains` — the meaning-bearing half — is what rests on
     # the plurality bridge AxTwoSubjects (A15). The registry does not move either way.
     "Evil": "A25",                          # cited by no claim row — registry-only
+    # Batch TWO-KINDS (2026-09-28): the two names the hand-authored dict was missing,
+    # appended in true first-use order by a ledgered claim (C403/C404) — never re-derive.
+    "NecessarySubjectKind": "A26",          # first cited C403 (the kind classifier, VOCAB)
+    "necessaryPersonalSubjectExists": "A27",  # first cited C404 (the inhabitant bridge, META)
 }
 
 # A proposed inference that a hostile model refutes: withdrawn/retired steps
@@ -1622,17 +1848,17 @@ BRIDGE_OF = {
     "C52": "`choiceField_exists`, from the intentional act `A s p`",
     "C54": "`JUDGE_HAS_CHOICE_FIELD` (uses `AxTwoSubjects`)",
     "C55": "`judge_commits` (uses `AxTwoSubjects` and C48)",
-    "C77": "`PersonStabilityPrinciple : Person s → NecessarySubject s` (explicit conditional hypothesis, refuted by `CountermodelPersonNotNecessary` and `ContingentAgencyModel`)",
+    "C77": "`PersonStabilityPrinciple : Person s → NecessarySubjectKind s → NecessarySubject s` (explicit kind-relative conditional hypothesis; the old unconditional form is refuted by `CountermodelPersonNotNecessary` and `ContingentAgencyModel`, which exhibit the contingent kind)",
     "C91": "`subject_nec_entity_nec : NecessarySubject s → "
            "NecessaryEntity (EntityOf s)` (definitional lift)",
-    "C92": "`PersonStabilityPrinciple` (conditional hypothesis) and `subject_nec_entity_nec` (definitional lift)",
+    "C92": "`PersonStabilityPrinciple` (kind-relative conditional hypothesis) and `subject_nec_entity_nec` (definitional lift)",
 }
 
 # Curated sharper resolutions for obstructions where the generic status phrase
 # is too weak (FORMAT.md §5.2). Presentation data, scoped to these rows.
 RESOLUTION_OF = {
-    "C77": "Conditional upon PersonStabilityPrinciple; hostile countermodels show that performative agency does not logically force modal subject-necessity.",
-    "C92": "Conditional upon PersonStabilityPrinciple; hostile countermodels show that performative agency does not logically force modal entity-necessity.",
+    "C77": "Conditional upon kind-relative PersonStabilityPrinciple; hostile countermodels exhibit the contingent kind, which is why the unconditional form fails and the kind-relative form stands.",
+    "C92": "Conditional upon kind-relative PersonStabilityPrinciple; hostile countermodels exhibit the contingent kind, which is why performative agency does not logically force modal entity-necessity of every person.",
 }
 
 # Frontier / faith rows that are aliases of an established claim (FORMAT.md
@@ -1675,32 +1901,135 @@ CONTESTS = {
 COUNTERMODEL_CATALOG = [
     {"key": "SubjectWithoutPerson", "title": "The unpredicated subject",
      "attacks": "`Subject → Person` as a logical law",
-     "ns": "Logos.HostileSemantics.CountermodelSubjectWithoutPerson"},
+     "ns": "Logos.HostileSemantics.CountermodelSubjectWithoutPerson",
+     "verdict": "NOT ESTABLISHED — wrong as the actual world only if personhood actually obtains (the T12/`AxTwoSubjects` route); the datum alone exhibits a subject, not a person"},
     {"key": "NoPerson", "title": "The personless act",
      "attacks": "the bare act datum forcing `Person`",
-     "ns": "Logos.HostileSemantics.CountermodelNoPerson"},
+     "ns": "Logos.HostileSemantics.CountermodelNoPerson",
+     "verdict": "NOT ESTABLISHED — wrong as the actual world only if a person actually exists; the act-datum exhibits agency, not personhood"},
     {"key": "NoFreeWill", "title": "The determined act",
      "attacks": "`Act → Chooses` / `Act → FreeWill`",
-     "ns": "Logos.HostileSemantics.CountermodelNoFreeWill"},
+     "ns": "Logos.HostileSemantics.CountermodelNoFreeWill",
+     "verdict": "WRONG AS THE ACTUAL WORLD ONLY IF `AxIntentionalChoice`/`AxActPolarity` INSISTED"},
     {"key": "UnitPlurality", "title": "The unit world",
      "attacks": "one act forcing a plurality of subjects",
-     "ns": "Logos.HostileSemantics.UnitPluralityCountermodel"},
+     "ns": "Logos.HostileSemantics.UnitPluralityCountermodel",
+     "verdict": "WRONG AS THE ACTUAL WORLD ONLY IF `AxTwoSubjects` INSISTED — not granted: no plurality yet unless the proof demands it"},
     {"key": "ContentWithoutPerson", "title": "Content without a person",
      "attacks": "content existence entailing personhood",
-     "ns": "Logos.HostileSemantics.PropositionalPersonhood.CountermodelContentWithoutPerson"},
+     "ns": "Logos.HostileSemantics.PropositionalPersonhood.CountermodelContentWithoutPerson",
+     "verdict": "NOT ESTABLISHED — wrong as the actual world only if content actually has a personal bearer"},
     {"key": "SubjectNecessityNotEntity", "title": "Persistence without entity",
      "attacks": "subject-persistence entailing entity-necessity by logic alone",
-     "ns": "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity"},
+     "ns": "Logos.HostileSemantics.CountermodelSubjectNecessityNotEntityNecessity",
+     "verdict": "UNANSWERED — a limit on inference; no grant settles it"},
     {"key": "PersonNotNecessary", "title": "The contingent person",
      "attacks": "`Person → NecessarySubject` as a logical law",
-     "ns": "Logos.HostileSemantics.CountermodelPersonNotNecessary"},
+     "ns": "Logos.HostileSemantics.CountermodelPersonNotNecessary",
+     "verdict": "attack STANDS — the all-contingent kind-assignment is admissible, so personhood does not logically force necessity; WRONG AS THE ACTUAL WORLD only if the kind bridge is granted — which Γ now does (C404 `necessaryPersonalSubjectExists`, C409 Claim D)"},
     {"key": "VeridicalMeaning", "title": "Veridical meaning (one and two persons)",
      "attacks": "the act datum forcing genuine choice",
-     "ns": "Logos.HostileSemantics.CountermodelVeridicalMeaning"},
+     "ns": "Logos.HostileSemantics.CountermodelVeridicalMeaning",
+     "verdict": "WRONG AS THE ACTUAL WORLD ONLY IF `AxIntentionalChoice`/`AxActPolarity` INSISTED"},
     {"key": "PluralityWithoutLove", "title": "Plurality without love",
      "attacks": "plurality entailing love",
-     "ns": "Logos.HostileSemantics.CountermodelPluralityWithoutLove"},
+     "ns": "Logos.HostileSemantics.CountermodelPluralityWithoutLove",
+     "verdict": "WRONG AS THE ACTUAL WORLD ONLY IF `AxGroundLovesContingentRealm` INSISTED"},
+    {"key": "FalsityWorld", "title": "The falsity world read as the actual world",
+     "attacks": "the empty (all-`TV.f`) world being the world the proof is written in",
+     "ns": "Logos.HostileSemantics.CountermodelFalsityWorld",
+     "verdict": "ELIMINATED — this is the one possibility the world-datum kills on its own, for free: `falsityWorld_ne_actualWorld` and `falsityWorld_holds_no_contingent_subject` against `contingent_realm_obtains`. No axiom is charged and the BLOCKED contingent-inhabitation lemma is not needed"},
 ]
+
+# How a countermodel's world-structure stands to the world-datum
+# (`Stipulations.contingentWorldDatum`). The constructor comes from the model's
+# own `def worldStance : WorldStance` in `formal/Logos/HostileSemantics.lean`, so
+# the classification is DERIVED, not transcribed; the sentence a reader sees lives
+# here, once per constructor. `verify_world_stances` cross-checks the constructor
+# against the structure the model's namespace actually declares, so this table
+# cannot drift into prose the model does not support.
+WORLD_STANCE_LEGEND = {
+    "noWorldStructure":
+        "SILENT — the model declares no world sort, so the datum neither saves nor "
+        "excludes it; what the model does say is in its gloss.",
+    "contingentSubjects":
+        "SATISFIED — the model's subjects are not world-rigid, so it is a world of "
+        "contingent subjects and the datum is consistent with it. Excluded as *our* "
+        "world only by the grants named above.",
+    "necessarySubjectsOnly":
+        "NOT ELIMINATED — every subject in the model is world-rigid, so its world is a "
+        "world of necessary subjects only and ours is not that. Γ cannot say so: the "
+        "exclusion needs the contingent-inhabitation lemma, which is BLOCKED "
+        "(`SUBJECTS.md` §4), not priced.",
+    "falsityWorldAsActual":
+        "ELIMINATED — the model takes the all-`TV.f` valuation to *be* the actual world, "
+        "and Γ refutes that outright with no axiom: `falsityWorld_ne_actualWorld` and "
+        "`falsityWorld_holds_no_contingent_subject` against `contingent_realm_obtains`.",
+}
+
+
+def _ns_block(ns: str) -> str:
+    """The source of the namespace `ns` (by its last component), for cross-checks."""
+    tail = ns.rsplit(".", 1)[-1]
+    text = (LEAN_DIR / "HostileSemantics.lean").read_text(encoding="utf-8")
+    m = re.search(r"^namespace %s\b(.*?)^end %s\s*$" % (re.escape(tail), re.escape(tail)),
+                  text, re.S | re.M)
+    return m.group(0) if m else ""
+
+
+def verify_world_stances() -> dict:
+    """Cross-check each catalogued model's `worldStance` against its own structure.
+
+    A model that declares no world sort MUST be `noWorldStructure`; a model that
+    declares one MUST NOT be. The point is that the third axis is derived from the
+    model, so a model that later gains a world sort cannot keep being described as
+    "silent". Violation is a build error, not a warning.
+    """
+    out = {}
+    for cm in COUNTERMODEL_CATALOG:
+        key, ns = cm["key"], cm["ns"]
+        block = _ns_block(ns)
+        if not block:
+            raise SystemExit(f"world-stance check: no namespace block for {ns}")
+        m = re.search(r"^def worldStance : WorldStance := \.(\w+)", block, re.M)
+        if not m:
+            raise SystemExit(f"world-stance check: {ns} has no `def worldStance`")
+        ctor = m.group(1)
+        if ctor not in WORLD_STANCE_LEGEND:
+            raise SystemExit(
+                f"world-stance check: {ns} has stance .{ctor}, which has no legend entry")
+        # A world sort is a `World`/`State` sort declared *in the model's own
+        # block*; nested sub-namespaces (e.g. VeridicalMeaning's `Single`/`TwoPersons`)
+        # declare theirs, and they decide the parent's stance.
+        declares_world = bool(re.search(
+            r"^\s*(?:abbrev|def) (?:World|State)\s*:", block, re.M))
+        # `falsityWorldAsActual` is the one stance a self-contained model cannot
+        # reach by declaring a sort of its own: it is a *reading of Γ's own world
+        # semantics* (`Entity.actualWorld`/`Entity.falsityWorld`), which is what
+        # makes it refutable by Γ's theorems. So the rule is inverted for it — it
+        # must NOT declare a world sort of its own, and must reference both of Γ's.
+        if ctor == "falsityWorldAsActual":
+            if declares_world:
+                raise SystemExit(
+                    f"world-stance check: {ns} claims .falsityWorldAsActual but declares "
+                    f"a world sort of its own — that stance is a reading of Γ's worlds")
+            for sym in ("falsityWorld", "actualWorld"):
+                if sym not in block:
+                    raise SystemExit(
+                        f"world-stance check: {ns} claims .falsityWorldAsActual without "
+                        f"referencing `{sym}`")
+        elif ctor == "noWorldStructure" and declares_world:
+            raise SystemExit(
+                f"world-stance check: {ns} declares a world sort but claims "
+                f".noWorldStructure — it must decide its own reading")
+        elif ctor != "noWorldStructure" and not declares_world:
+            raise SystemExit(
+                f"world-stance check: {ns} claims .{ctor} but declares no world sort")
+        out[key] = ctor
+    return out
+
+
+WORLD_STANCES = verify_world_stances()
 
 # ---------------------------------------------------------------------------
 # Presentation-data maps (MATH.md / FORMAT.md §9 sanctioned exceptions)
@@ -1858,7 +2187,9 @@ TRANSITIONS = [
     {"label": "performative meaning-act → plurality", "status": "METAPHYSICAL",
      "targets": ["C40"]},
     {"label": "plurality → love", "status": "METAPHYSICAL",
-     "targets": ["C41", "C42", "C43", "C44", "C45"]},
+     "targets": ["C41", "C43"]},
+    {"label": "exhibited kind → eternal love", "status": "DEFINITIONAL",
+     "targets": ["C42", "C44", "C45"]},
     {"label": "performative meaning-act → God ?", "status": "OPEN",
      "targets": ["F6", "F8", "F9"]},
 ]
@@ -2662,6 +2993,33 @@ def render_retired(all_claims: list) -> list:
        "lists the proposed steps those models retire; C.3 lists the dissolved "
        "aliases. Each step's inline **Obstruction** line points back here.")
     ap("")
+    ap("**Three axes — read all three.** A countermodel makes three claims, and the brief bears on "
+       "each in a different way. "
+       "The *attack* is a derivability claim: it stands unless Γ derives the disputed inference, and "
+       "that verdict is the kernel's own derivability fact — machine-checked, not transcribed. "
+       "The *model* is a description of a world, and whether it may be *wrong as the actual world* is "
+       "settled by the grants named beside it — this verdict is prose, keyed to specific grants, and it "
+       "is hand-maintained by design (the catalogue is the presentation layer; the models themselves are "
+       "the machine-checked part). "
+       "The *world-datum* ◈ `contingentWorldDatum` is a third and narrower question: given that this "
+       "contingent world — the one the proof is written in — exists, what does each model's own "
+       "world-structure say about it? This third axis is **derived, not transcribed**: it comes from each "
+       "model's `def worldStance : WorldStance` in `HostileSemantics.lean`, and "
+       "`verify_world_stances()` fails the build if a model declares a world sort while calling itself "
+       "silent, or claims a reading while declaring none. Read it as the ledger's honest summary of the "
+       "author's own question — *which models are wrong given that the world exists* — and note how few "
+       "the world-datum can answer on its own: it eliminates exactly one of the ten "
+       "(`CountermodelFalsityWorld`, the all-`TV.f` valuation read as the actual world, refuted for free), "
+       "it is *satisfied* by one (`PersonNotNecessary` — a contingent world of one person), it is silent "
+       "on seven, and the remaining one (`SubjectNecessityNotEntity`) needs the contingent-inhabitation "
+       "lemma, which is BLOCKED, not priced. The eliminations inside the catalogue come from the kind "
+       "bridge and the content bridges, not from the world's existence. Note also that the world-datum is "
+       "**not** the act-datum ◈ `performativeActDatum`; the two were conflated here until 2026-09-28. "
+       "The no-meaning family (M1/C294/C382) is **WRONG as the actual world** on the act-datum alone "
+       "(C402; also outright on the plurality bridge, C401) — while C382's *attack* (bare-vocabulary "
+       "consistency of the form) stands untouched. It *satisfies* the world-datum: a world can hold "
+       "subjects that mean nothing.")
+    ap("")
     ap("### C.1 Countermodel reference")
     ap("")
     for cm in COUNTERMODEL_CATALOG:
@@ -2673,7 +3031,9 @@ def render_retired(all_claims: list) -> list:
                f"(formal/Logos/HostileSemantics.lean#L{line})") if line else ""
         ap(f"- **`Countermodel{key}`** — {cm['title']}: *attacks* "
            f"{cm['attacks']}. Refutes: {gloss.get('refutes', '—')} "
-           f"**What survives:** {gloss.get('survives', '—')} · `{ns}`{loc}")
+           f"**What survives:** {gloss.get('survives', '—')} · `{ns}`{loc} "
+           f"**As the actual world:** {cm.get('verdict', '—')} "
+           f"**Given the contingent world exists:** {WORLD_STANCE_LEGEND[WORLD_STANCES[key]]}")
     ap("")
     ap("### C.2 Retired and rejected alternatives")
     ap("")
@@ -4294,6 +4654,308 @@ def generate_ascii_chart(
     return lines
 
 
+# ---------------------------------------------------------------------------
+# Phase 4 — the two-column score block. Every figure below is DERIVED, never
+# transcribed (AGENTS.md: a hardcoded number in generated prose is a
+# regeneration error in the same spirit as an untagged axiom). The block and the
+# annex counters are computed by `derive_score_data`, so they cannot disagree:
+# a mismatch would mean one of the two had stopped reading the derived data.
+# ---------------------------------------------------------------------------
+
+def derive_score_data(all_claims: list[dict], decls: dict, node_map: dict) -> dict:
+    """Single source of the score-block figures.
+
+    Returns badge counts, the open (still-unsettled) claim set, the declared
+    axiom inventory by tag, and the axiom-free theorem share. Every value is a
+    pure function of the kernel, `formal/axiom_audit.json`, the Lean `Tag:`
+    lines, and the GAPMAP ledger."""
+    global _REGISTRY, _AUDIT
+    if not _AUDIT:
+        _AUDIT = load_audit()
+    if not _REGISTRY:
+        _REGISTRY = load_axiom_registry(decls, node_map)
+
+    badges = compute_detailed_badges(all_claims, decls, node_map)
+    count = lambda b: sum(1 for v in badges.values() if v == b)
+    n_prov, n_up, n_ax = count("✅"), count("⚠️"), count("◆")
+    n_cm, n_rep = count("🧱"), count("→")
+    n_blocked, n_deferred = count("✖"), count("➖")
+    n_other = sum(1 for b in badges.values()
+                  if b not in ("✅", "⚠️", "◆", "🧱", "→", "✖", "➖"))
+
+    # Still-open set: BLOCKED and DEFERRED rows that are not dissolved into a
+    # canonical claim. `→` rows are cross-references, not open questions, and a
+    # `🧱` row is a demonstrated boundary — both are results, not gaps.
+    #
+    # A retired route is separated out because calling it "still open" is a
+    # falsehood in the opposite direction: its note says the step was destroyed
+    # under hostile semantics, i.e. the question is *settled negatively*, not
+    # pending. The corpus already files these under "Obstructions & retired
+    # alternatives"; merging them into the open column would misreport 15
+    # settled negatives as outstanding work.
+    by_id = {c["id"]: c for c in all_claims}
+    dissolved = set(_CTX.get("canonical_of") or ())
+    open_rows, retired_rows = [], []
+    for cid, badge in sorted(badges.items(),
+                             key=lambda kv: (kv[1] != "✖", kv[1] != "➖", kv[0])):
+        if badge in ("✖", "➖") and cid not in dissolved:
+            c = by_id.get(cid, {})
+            row = {
+                "id": cid, "badge": badge, "status": c.get("status", ""),
+                "ref": c.get("lean_ref", ""), "note": c.get("note", ""),
+                "section": c.get("section", ""),
+                "gloss": c.get("_gloss_display") or c.get("_gloss") or "",
+            }
+            is_retired = any("retired" in src.lower()
+                             for src in (row["gloss"], row["note"]))
+            (retired_rows if is_retired else open_rows).append(row)
+
+    # Declared axioms, by tag, straight from the Lean `Tag:` lines.
+    tags = {}
+    for r in _REGISTRY.values():
+        tags[r["tag"]] = tags.get(r["tag"], 0) + 1
+    n_axioms = len(_REGISTRY)
+
+    # Axiom-free theorems: audited `{}` (or Lean-core-only) over the theorems of
+    # `formal/Logos/`. The denominator is restricted to declarations the audit
+    # actually covers: `_AUDIT.get(f, ())` on an *unaudited* name returns `()`,
+    # which would score a declaration as axiom-free on the strength of its own
+    # absence — the dropped-row failure of Correction 9, one level down. The
+    # three such names are `parse_lean_sources` artefacts (`Logos.Recovered…is`,
+    # `of`, `content_reality_hook`), but the guard is general.
+    kern_all = {f for f, n in decls.items() if n["kind"] in ("theorem", "example")}
+    kern = {f for f in kern_all if f in _AUDIT}
+    unaudited = sorted(kern_all - kern)
+    free = sum(1 for f in kern
+               if not any(a.startswith("Logos.") for a in _AUDIT.get(f, ())))
+
+    # Phase 4c guard, enforced rather than asserted in prose: the won figure is
+    # computed *through* WON_BADGES, so a declared axiom can never reach it.
+    n_won = sum(1 for b in badges.values() if b in WON_BADGES)
+    assert "◆" not in WON_BADGES, (
+        "WON_BADGES must not contain a declared-axiom badge: axioms are inputs, "
+        "not wins")
+    assert n_won == n_prov + n_up + n_cm, (
+        f"won-count {n_won} != affirmative+boundary "
+        f"{n_prov + n_up + n_cm} — WON_BADGES and the score block disagree")
+    assert n_won < len(badges), "every claim counted as a win: nothing is open?"
+
+    data = {
+        "n_won": n_won,
+        "n_prov": n_prov, "n_up": n_up, "n_ax": n_ax, "n_cm": n_cm,
+        "n_rep": n_rep, "n_blocked": n_blocked, "n_deferred": n_deferred,
+        "n_other": n_other, "n_total": len(all_claims),
+        "open_rows": open_rows, "retired_rows": retired_rows,
+        "tags": tags, "n_axioms": n_axioms,
+        "n_kern": len(kern), "n_free": free, "n_unaudited": len(unaudited),
+        "n_affirmative": n_prov + n_up,
+    }
+    # The reconciliation assert the plan requires be preserved: the block may
+    # only ever publish numbers that sum back to the claim inventory.
+    total = (n_prov + n_up + n_ax + n_cm + n_rep
+             + n_blocked + n_deferred + n_other)
+    assert total == len(all_claims), (
+        f"Reconciliation error: detailed claims ({total}) != total claims "
+        f"({len(all_claims)})")
+    return data
+
+
+# A ledger gloss often opens with its own status before the statement, e.g.
+# "BLOCKED (AC5 unmet, D1′ recorded not executed): any entity that grounds ...".
+# Splitting on the first sentence would surface the status, not the claim, so
+# strip the status prefix and keep the statement that follows the first colon.
+_SCORE_STATUS_RE = re.compile(
+    r"^\**(?:BLOCKED|DEFERRED|RETIRED|AXIOM|PROVEN|OPEN|NOT ESTABLISHED)\**"
+    r"\s*(?:\([^)]*\))?\s*[:\u2014-]\s*", re.I)
+
+
+def _score_label(row: dict, limit: int = 150) -> str:
+    """One-line, human-checkable name for an open or retired claim row.
+
+    Prefers the claim's English meaning (resolved from code), then the ledger
+    note, then the bare reference — never invents a description. Some glosses
+    run to several paragraphs (the ASIETY-FREEDOM diagnostics); a table cell
+    takes the first sentence, capped, and the full text stays where it was
+    always readable — the ledger and the step-by-step block."""
+    for src in (row.get("gloss") or "", row.get("note") or ""):
+        t = " ".join(src.split()).strip()
+        if not t:
+            continue
+        t = _SCORE_STATUS_RE.sub("", t)
+        # First sentence, or the first clause if the sentence runs long.
+        head = t.split(". ")[0].rstrip(".")
+        if len(head) <= limit:
+            t = head
+        elif " — " in t[: limit + 40]:
+            t = t.split(" — ")[0].rstrip(" .")
+        else:
+            t = head[:limit].rsplit(" ", 1)[0].rstrip(" ,;:") + "…"
+        if t:
+            return t
+    return f"`{row['ref']}`" if row.get("ref") else row["id"]
+
+
+def _def_bridge_debt() -> dict | None:
+    """The inherited `def`-as-bridge debt, read from the allowlist at generation
+    time (VISIBILITY.md Phase 7). A `def` used as a bare-name premise is a bridge
+    `#print axioms` cannot see, so it is a price the kernel does not charge: a
+    theorem resting on one shows a footprint that omits it. Returns None when the
+    allowlist is absent, so the score block degrades rather than failing.
+
+    Counted here, not transcribed, because the number qualifies every `n_free`
+    figure quoted beside it: "943 of 1666 rest on no Γ axiom" is true, and this
+    says what it does not cover."""
+    import json as _json
+    try:
+        raw = _json.loads((ROOT / "scripts" / "stipulated_def_allowlist.json")
+                          .read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    entries = raw.get("acknowledged", [])
+    if not entries:
+        return None
+    reviewed = [e for e in entries if e.get("reviewed")]
+    # A bridge is `paid` only if it stopped being a def: the allowlist keys
+    # `acknowledged` by declaration name, and a promoted one leaves the list.
+    return {
+        "total": len(entries),
+        "theorems": sum(len(e.get("dependents", [])) for e in entries),
+        "reviewed": len(reviewed),
+        "worst": max((len(e.get("dependents", [])) for e in entries), default=0),
+    }
+
+
+def render_score_block(sd: dict) -> list[str]:
+    """The two-column Won / Still-open score block for README.md.
+
+    Anti-goal (VISIBILITY.md §4c): this is an accounting a hostile reader can
+    check, not a verdict. The right-hand column names every open row rather
+    than summing it, and the left-hand column carries its denominator and the
+    vocabulary-only caveat, so the two can never be read as a bare ratio."""
+    L = []
+    ap = L.append
+    n_total = sd["n_total"]
+    n_aff = sd["n_affirmative"]
+    n_cm = sd["n_cm"]
+    n_open = len(sd["open_rows"])
+    tags = sd["tags"]
+    vocab = tags.get(TAG_VOCAB, 0)
+    subst = sum(v for k, v in tags.items() if k != TAG_VOCAB)
+
+    n_ret = len(sd["retired_rows"])
+    blocked = [r for r in sd["open_rows"] if r["badge"] == "✖"]
+    deferred = [r for r in sd["open_rows"] if r["badge"] == "➖"]
+    pct_free = 100.0 * sd["n_free"] / sd["n_kern"] if sd["n_kern"] else 0.0
+
+    ap("## The score: what Γ has won, and what is still open")
+    ap("")
+    ap("Every figure in this table is **derived from the Lean kernel** at generation")
+    ap("time — each badge from (node kind, audited `#print axioms` footprint, declared")
+    ap("axiom `Tag:`), never transcribed. The same computation prints the audit counters")
+    ap("in [`investigations/kernel-audit.md`](../investigations/kernel-audit.md); the two")
+    ap("cannot disagree, because both read the one derived table. A claim's status here")
+    ap("is exactly its status in the ledger — this block only counts, and the columns")
+    ap("below are built by joining those counts, not by judgement.")
+    ap("")
+
+    debt = _def_bridge_debt()
+    if debt:
+        ap("**One thing these figures do not cover.** The axiom-free counts below are")
+        ap("footprints from `#print axioms`, which cannot see a **`def` used as a premise**")
+        ap(f"by name. There are **{debt['total']}** such inherited bridges, carrying")
+        ap(f"**{debt['theorems']}** theorems (the largest underwrites {debt['worst']}). They are")
+        ap("now enumerated in the ledger's `def`-as-bridge section, which is *disclosure*,")
+        ap(f"not payment: **{debt['reviewed']}** have been reviewed and **0** have been promoted")
+        ap("to a declared axiom. So a ✅ badge means the theorem is kernel-verified *conditional")
+        ap("on a bridge the kernel does not charge*. Full census and the open three-way")
+        ap("decision: `scripts/census_stipulated_defs.py`.")
+        ap("")
+
+    ap("| **Won** | **Still open** |")
+    ap("|---|---|")
+
+    # --- left column: one derived row per bullet ----------------------------
+    left = [
+        f"**{n_aff} affirmative claims derived** out of **{n_total}** ledger claims — "
+        f"{sd['n_prov']} ✅ kernel-verified, {sd['n_up']} ⚠️ derived under a substantive "
+        f"(`SEM`/`META`) axiom, each ⚠️ row naming the bridge it rests on.",
+        f"**{n_cm} countermodel boundaries** {COUNTERMODEL_BADGE} — a hostile model in which the claim "
+        f"*fails*. These are won results about the limit of the theory, not gaps.",
+        f"**{sd['n_free']} of {sd['n_kern']} theorems in `formal/Logos/` rest on no Γ "
+        f"axiom at all** ({pct_free:.0f}%) — counted from `formal/axiom_audit.json`, not "
+        f"claimed.",
+        f"**The whole price is {sd['n_axioms']} declared axioms**: {vocab} are `VOCAB` "
+        f"(the vocabulary the statements need in order to be sayable) and {subst} are "
+        f"substantive. Only the {subst} are philosophical commitments; the rest are the "
+        f"theory's definitions of its own words, which is a different thing from a "
+        f"premise.",
+    ]
+    # The attribute corollaries, counted from the chain list rather than by hand.
+    attr = [row for row in SEMANTIC_FINITUDE_STEPS if row[0] == "L2"]
+    if attr:
+        left.append(
+            f"**{len(attr)} attribute corollaries became unconditional theorems** "
+            f"(C389–C398) — they were conditional on a `def` until F15 was declared, so "
+            f"this is a *strengthening*: fewer hidden premises, same conclusions.")
+
+    # --- right column: every open row, named; retired set kept separate -----
+    right = []
+    for badge, rows, word in (("✖", blocked, "blocked"),
+                              ("➖", deferred, "deferred")):
+        if not rows:
+            continue
+        right.append(f"**{len(rows)} {word}** {badge} — named individually")
+        for r in rows:
+            right.append(f"&nbsp;&nbsp;· **{r['id']}** — {_score_label(r)}")
+    if n_ret:
+        right.append(
+            f"**{n_ret} retired routes** — settled *negatively*, not pending: each step "
+            f"was destroyed by a hostile model, so the question is closed against it "
+            f"(see *Appendix C*): " +
+            ", ".join(f"`{r['id']}`" for r in sd["retired_rows"]))
+
+    # Interleave the columns row-wise; markdown tables cannot hold lists of
+    # unequal length, so the shorter side gets padding cells.
+    for i in range(max(len(left), len(right))):
+        ap(f"| {left[i] if i < len(left) else ''} | {right[i] if i < len(right) else ''} |")
+
+    ap("")
+    ap(f"**Read the two columns together and the shape is precise: Γ won the metaphysics")
+    ap(f"of the ground and lost the soteriology.** Established: genuine normativity has a")
+    ap(f"personal ground; that ground is unique and necessary; it possesses canonical")
+    ap(f"aseity, simplicity, and pure actuality. Not established: that the person of that")
+    ap(f"ground is *one*. Strict monotheism, the Trinity, the Incarnation, and creation")
+    ap(f"each remain open, and each is named above with its missing lemma rather than")
+    ap(f"absorbed into an average. That is the honest ledger, and the left column is")
+    ap(f"larger because the ground-theory was proved, not because the open rows were")
+    ap(f"rounded down.")
+    ap("")
+    ap("Four qualifications, stated rather than hidden:")
+    ap("")
+    ap("1. **A ✅ means \"kernel-verified on declared vocabulary\", not \"free of "
+       "metaphysical assumption\".** The vocabulary axioms are real axioms; they are "
+       "merely the ones the statements need in order to be said at all. The substantive "
+       f"ones are the {subst} `SEM`/`META` bridges.")
+    ap(f"2. **The {sd['n_axioms']} declared axioms are inputs, not wins.** Counting them as "
+       "results would be the same error as counting a hypothesis as a proof. They are "
+       "listed so the reader can price Γ exactly, and `VOCAB` is separated from "
+       "`SEM`/`META` because only the latter are commitments.")
+    ap("3. **A 🧱 is a win about a boundary, not about the claim.** Γ building a model in "
+       "which monotheism fails is a real theorem — and a theorem *against* monotheism. "
+       "The columns keep those apart on purpose.")
+    ap(f"4. **The {n_ret} retired routes are counted as neither won nor open.** Their "
+       "ledger notes say the step was destroyed under hostile semantics; that is a "
+       "settled negative. Filing them under \"still open\" would overstate the debt, "
+       "and filing them as won would overstate the theory, so they get their own line.")
+    ap("")
+    if sd["n_unaudited"]:
+        ap(f"<sub>Declaration count excludes {sd['n_unaudited']} parsed names with no "
+           f"`#print axioms` footprint; they are `parse_lean_sources` artefacts and are "
+           f"excluded from the denominator rather than scored axiom-free.</sub>")
+        ap("")
+    return L
+
+
 def render_reading_guide() -> list[str]:
     """Emits the "How to Read This Deduction" block between the title and the
     Argument-at-a-Glance chart: the arc in one breath, the two directions (discovery vs
@@ -4305,8 +4967,14 @@ def render_reading_guide() -> list[str]:
     ap("> binding our judgments — forces a *personal* ground. Free will is *derived, never")
     ap("> assumed* (`GenuineNormativity ⇒ Chooses ⇒ FreeWill ⇒ FreeSubject ⇒ Person`);")
     ap("> wherever right/wrong is real, its ground-type is personal (`RightWrong ⇒ Person`).")
-    ap("> A necessary Divine Being/Ground — eternal (everlasting and atemporal) and possessing Canonical Aseity (`conditional_canonical_aseity`) — is **proven** (✅); Divine Personhood and monotheism are **deferred** (⏸); every other claim is")
-    ap("> definitional, derived, or a declared axiom.")
+    ap("> A necessary Divine Being/Ground is **proven** (✅): it exists unconditionally as the sole")
+    ap("> universal modal grounding ground (`ofGround_universal_modal_ground` C319,")
+    ap("> `exactly_one_universal_modal_ground` C320) and possesses Canonical Aseity")
+    ap("> (`conditional_canonical_aseity`). A **necessary Person** is likewise derived (⚠️) on the")
+    ap("> single declared `META` bridge `necessaryPersonalSubjectExists` (C404 → Claim D, C409).")
+    ap("> What is **not** established is monotheism *at the level of the Person*: C212 proves")
+    ap("> ground-unicity does not force a unitary monad, and the personal-identification bridge C228")
+    ap("> remains `BLOCKED`. Every other claim is definitional, derived, or a declared axiom.")
     ap("")
     ap("Every section below answers the same question — *what is the status of this claim?*")
     ap("")
@@ -4754,7 +5422,7 @@ CLASSICAL_ATTRIBUTES = [
                   "and F3, F6/Trinity and the personal-monotheism frontier do not move. "
                   "The cosmos it loves now *exists by theorem* — free, in fact: C350 "
                   "`contingent_realm_obtains` at `{propext, Subject}`, with the plurality "
-                  "bridge paying only for the realm's *content* (C367 `cosmos_obtains`) — "
+                  "bridge paying only for the realm's *content* (C367 `cosmos_obtains`, given an exhibited contingent person) — "
                   "which is not an entailment from the ground."),
     },
     {
@@ -4868,7 +5536,29 @@ CLASSICAL_ATTRIBUTES = [
                  "Logos.FoundationalUnicity.ofGround_unicity_from_no_discriminating_subject",
                  "Logos.FoundationalUnicity.no_discriminating_subject_iff_no_maximal_non_ground",
                  "Logos.FoundationalUnicity.exactly_one_universal_modal_ground"],
-        "sense": ("In `FoundationalUnicity.lean` (footprint `{Means, Subject}` — VOCAB only). "
+        # Phase 5: the affirmative result leads, the retraction follows. Every
+        # caveat below is preserved verbatim or extended — only the position
+        # changed. The F15 sentences are rewritten rather than reordered, because
+        # post-promotion they are false: F15 is now the declared axiom
+        # `SemanticFinitude` (C388, `Tag: VOCAB`, the 27th), not an unnamed
+        # premise awaiting consolidation.
+        "sense": ("**Classical Monotheism of the ground is PROVEN.** "
+                  "`exactly_one_universal_modal_ground` (C320) states it outright "
+                  "(Aquinas *ST* I, q. 11, a. 3): **existence is unconditional**, and "
+                  "uniqueness follows from the single named hypothesis that no subject has "
+                  "total meaning-capacity — which is now the **27th declared axiom**, "
+                  "`SemanticFinitude` (C388, `Tag: VOCAB`, ledger row F15), and is "
+                  "consumed unconditionally by `exactly_one_universal_modal_ground_stipulated` "
+                  "(C389, footprint `{Means, NecessarySubjectKind, SemanticFinitude, Subject}`). "
+                  "So the price of unicity is one *named vocabulary* axiom, not an "
+                  "anonymous premise: the same shape `∀ s, ∃ p, ¬ Means s p` was already "
+                  "being paid 20 times across 5 files as the standing hypothesis of "
+                  "`DivineSimplicity`, `DivinePureActuality`, `FoundationalUnicity` and "
+                  "`CanonicalAseity`; declaring it once is a *consolidation*, and it turned "
+                  "ten conditional attribute corollaries (C389–C398) into unconditional "
+                  "theorems. "
+                  "In `FoundationalUnicity.lean` (footprint `{Means, NecessarySubjectKind, Subject}` — "
+                  "VOCAB only). "
                   "**Correction (2026-09-27): the original route is void.** "
                   "(1) Diagnosis — `not_asymmetric_grounding` machine-refutes `AsymmetricGrounding`: grounding is "
                   "meaning-containment and therefore **reflexive** (`groundsEntity_reflexive`), and the definition omitted the "
@@ -4883,16 +5573,14 @@ CLASSICAL_ATTRIBUTES = [
                   "**Classical Monotheism outright** (Aquinas *ST* I, q. 11, a. 3): existence unconditional, uniqueness under that "
                   "one named hypothesis. `no_discriminating_subject_iff_no_maximal_non_ground` proves the hypothesis **is** the "
                   "exclusion of maximal capacity among non-ground entities, so the whole price is one existing predicate. "
-                  "**Open (frontier F15), but not a new act of faith:** no *axiom* asserts the hypothesis, so C320 cannot consume "
-                  "it unconditionally — yet the **identical sentence is already the standing premise of the corpus**: "
-                  "`DivineSimplicity.canonical_aseity_conditional` (`DivineSimplicity.lean:79`), `ofGround_divine_simplicity` "
-                  "(`:180`) and `ofGround_divine_simplicity_and_transcendence` (`:191`) all take "
-                  "`hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p`, and C195/C196 are ledgered on it. Γ has been paying this "
-                  "price for five attribute arguments, not two: the hypothesis shape occurs 20 times across 5 files "
-                  "(`DivinePureActuality` 5, `FoundationalUnicity` 7, `CanonicalAseity` 4, `AsieticChoice` 1, "
-                  "`DivineSimplicity` 3), and is no richer for it; F15 is an *unnamed* "
-                  "commitment rather than a new bridge. The outstanding decision is **consolidation** of that already-paid "
-                  "sentence into one named stipulation, which would make C320 an unconditional corollary and retire the row. "
+                  "**F15, closed by declaration (2026-09-28):** this row used to read "
+                  "*\"no *axiom* asserts the hypothesis, so C320 cannot consume it unconditionally … F15 is an "
+                  "*unnamed* commitment rather than a new bridge. The outstanding decision is consolidation.\"* "
+                  "All three sentences are now superseded: the consolidation was carried out, the sentence is "
+                  "`SemanticFinitude`, and C320's unicity has an unconditional corollary (C389). The diagnosis below is kept "
+                  "because it is still the reason the *old* route was void, and because it is the reason the axiom is a "
+                  "declaration rather than a derivation — the hypothesis was always being paid, which is exactly what makes it "
+                  "vocabulary. "
                   "Honest boundary: strictly separated from numerical unitarianism (which would rule out Trinitarian relations) and pantheism."),
     },
     {
@@ -4919,11 +5607,17 @@ CLASSICAL_ATTRIBUTES = [
                  "Logos.FoundationalUnicity.ofGround_unicity_from_no_discriminating_subject",
                  "Logos.FoundationalUnicity.unicity_does_not_force_unitarian_monad",
                  "Logos.TheologicalModalHardening.necessary_existence_not_entails_uniqueness"],
+        # Phase 5: the half that is won leads; the half that is still deferred
+        # follows. The label is split first because the reader needs to know
+        # which half they are reading. F15 is now declared (see Correction 12),
+        # so "not yet asserted in Γ" is false and is replaced.
         "sense": ("**This label was carrying two claims; only one of them is still open (corrected "
-                  "2026-09-27).** (1) *Uniqueness of the universal ground* is no longer deferred: "
+                  "2026-09-27).** (1) *Uniqueness of the universal ground* is **PROVEN**: "
                   "`exactly_one_universal_modal_ground` (C320) proves that exactly one universal modal "
                   "ground exists — **existence unconditional**, uniqueness under the single named "
-                  "hypothesis of frontier row F15 (`∀ s, ∃ p, ¬ Means s p`, not yet asserted in Γ). "
+                  "hypothesis `∀ s, ∃ p, ¬ Means s p`, which is now the **declared axiom** "
+                  "`SemanticFinitude` (C388, `Tag: VOCAB`, ledger row F15) and is consumed "
+                  "unconditionally by `exactly_one_universal_modal_ground_stipulated` (C389). "
                   "That is the mathematical content of monotheism at the level of the Divine Being. "
                   "(2) *Person-level monotheism* — one God as numerically one Person, and its "
                   "compatibility with three Persons — **remains DEFERRED**: `monotheism_of_god_and_uniqueness` "
@@ -5249,29 +5943,28 @@ CLASSICAL_ATTRIBUTES = [
                  "Logos.DivineOmnipotence.ofGround_does_not_operate_contradictions",
                  "Logos.DivineOmnipotence.atom_not_gapless_operate",
                  "Logos.DivineOmnipotence.discriminating_subject_not_gapless_operate",
-                 "Logos.DivineOmnipotence.ofGround_sole_gapless_operator",
+                 "Logos.DivineOmnipotence.gapless_operators_are_ground_or_necessary_kind",
                  "Logos.DivineOmnipotence.necessity_and_presence_yield_foundational_omnipotence",
                  "Logos.DivineOmnipotence.satisfiable_scope_is_nonempty_and_contradiction_free",
                  "Logos.DivineOmnipotence.existence_everywhere_does_not_entail_operation",
                  "Logos.DivineOmnipotence.gapless_operative_scope_without_conjunctive_power",
                  "Logos.DivineOmnipotence.exhaustive_scope_without_operative_scope"],
-        "sense": ("In `DivineOmnipotence.lean` (footprint `{Means, Subject, propext}` — VOCAB only, the "
+        "sense": ("In `DivineOmnipotence.lean` (footprint `{Means, NecessarySubjectKind, Subject, propext}` — VOCAB only, the "
                   "`propext` cost inherited from `Semantics.nonContradiction`, C14), "
                   "`ofGround_foundational_omnipotence` establishes the *orthodox* classical sense of "
                   "omnipotence for `Entity.ofGround` (Aquinas *ST* I, q. 25, a. 5, ad 1 — *semper et ubique "
                   "operans*) at 0 substantive axioms: power over whatever does not involve a contradiction. "
                   "The scope is *operative*, in the sense that no state of affairs satisfiable in any "
                   "accessible world is closed to the ground "
-                  "(`ofGround_gapless_operative_scope`, `{Subject}`), with the two non-contradictory horns "
-                  "made explicit: nothing unobtained — hence nothing unsatisfiable — is operated "
-                  "(`ofGround_operates_only_what_obtains`, `{Subject}`) and no contradiction is ever operated "
-                  "(`ofGround_does_not_operate_contradictions`, `{Subject, propext}`). The reading is "
+                  "(`ofGround_gapless_operative_scope`, `{NecessarySubjectKind, Subject}`), with the two non-contradictory horns "
+                   "made explicit: nothing unobtained — hence nothing unsatisfiable — is operated "
+                   "(`ofGround_operates_only_what_obtains`, `{NecessarySubjectKind, Subject}`) and no contradiction is ever operated "
+                   "(`ofGround_does_not_operate_contradictions`, `{NecessarySubjectKind, Subject, propext}`). The reading is "
                   "substantive rather than vacuous, since the scope domain is machine-checked non-empty and "
                   "contradiction-free (`satisfiable_scope_is_nonempty_and_contradiction_free`, `{propext}`), "
-                  "and the ground is the **sole** gapless operator in the Γ inventory "
-                  "(`ofGround_sole_gapless_operator`, `{Subject}`, with `atom_not_gapless_operate` and "
-                  "`discriminating_subject_not_gapless_operate` excluding the other two `Entity` "
-                  "constructors). Only the contradiction-omni reading — power over everything conceivable, "
+                  "and the ground is gapless alongside the necessary-kind subjects "
+                  "(`gapless_operators_are_ground_or_necessary_kind`, `{NecessarySubjectKind, Subject}`, with `atom_not_gapless_operate` and "
+                  "`discriminating_subject_not_gapless_operate` excluding atoms and contingent-kind subjects). Only the contradiction-omni reading — power over everything conceivable, "
                   "*including contradictions* — is refuted, and it is refuted *by* the orthodox restriction, "
                   "not against it. "
                   "Honest boundary, priced not hidden: Γ has no causal production relation, so "
@@ -5298,8 +5991,8 @@ CLASSICAL_ATTRIBUTES = [
                   "**retained — but narrowed to this causal sense only**, since the non-contradictory sense "
                   "above is now PROVEN. Γ declares no entity-level production relation: the only initiation "
                   "relation is `Agency.Initiates : Subject → State → State → Prop → Prop` "
-                  "(`Agency.lean:150`, VOCAB), which is subject-indexed, and `Entity.ofGround` is provably not "
-                  "a subject correlate (`ofGround_ne_ofSubject`, `NecessityEternity.lean:155`), so it cannot be "
+                  "(`Agency.lean:168`, VOCAB), which is subject-indexed, and `Entity.ofGround` is provably not "
+                  "a subject correlate (`ofGround_ne_ofSubject`, `NecessityEternity.lean:160`), so it cannot be "
                   "instantiated by the ground at all. The closest relation Γ has is explanatory containment "
                   "`GroundsEntity` (`RecoveredOntologicalGround.lean:57`, *esse est agere*), and "
                   "`exhaustive_scope_without_operative_scope` (`{}`) already machine-checks that omni-scope does "
@@ -5337,7 +6030,7 @@ CLASSICAL_ATTRIBUTES = [
                   "`CosmicExistence.contingent_realm_obtains` (C350, `PROVEN` at "
                   "`{propext, Subject}`, witnessed by an atom, no bridge) — while its being a "
                   "bearer of content is the separate `CosmicExistence.cosmos_obtains` (C367, "
-                  "`PROVEN↑` under the plurality bridge `AxTwoSubjects`; conditionally "
+                  "`PROVEN` given an exhibited contingent person; conditionally "
                   "satisfiable per C354, non-trivial in shape per C353). So what stays "
                   "COUNTERMODEL here is the *entailment* from the ground, not the existence. "
                   "**These two facts are independent and both hold**: Γ proves a contingent "
@@ -5493,6 +6186,18 @@ def render_defense_against_attacks() -> list[str]:
     ap("> Γ often mistake its conclusions for ungrounded metaphysical assumptions. Every common")
     ap("> objection has been formalized and refuted in the Lean 4 kernel — typically reducing to a")
     ap("> direct constructive contradiction (⊥) with zero substantive axioms.")
+    ap(">")
+    ap("> **Three axes — which models are wrong, given that the world exists.** A countermodel makes "
+       "three claims: the *attack* (a derivability claim, which stands unless Γ derives the inference), "
+       "the *model* (a description of a world), and the *world-datum* ◈ `contingentWorldDatum` (what the "
+       "model's own world-structure says about the world the proof is written in). Each model below "
+       "carries its verdict **as the actual world** with the exact price that would exclude it — WRONG "
+       "outright (the no-meaning world, on the act-datum; the falsity world read as the actual world, on "
+       "the world-datum, for free), WRONG ONLY IF an axiom is insisted (plurality, love, choice bridges), "
+       "NOT ESTABLISHED, or UNANSWERED — plus a third verdict, **given the contingent world exists**, "
+       "derived in Lean from each model's `WorldStance` and cross-checked against the structure it "
+       "declares. See the Technical Appendix (kernel-audit.md), Appendix C.1, where all three verdicts "
+       "are rendered beside the attack each leaves standing.")
     ap("")
     ap("| Skeptical Attack | What the Skeptic Misses | Formal Rebuttal in Kernel | Kernel Footprint |")
     ap("|---|---|---|---|")
@@ -5560,11 +6265,14 @@ ASIETY_FREEDOM_STEPS = [
 # --- `🧱` = `{}` countermodel pricing it · `✓` = coherence. C-ids are unallocated
 # --- (author decision pending), so the Ledger column reads `—` until then.
 SEMANTIC_FINITUDE_STEPS = [
-    ("◈", "C388", "Logos.SemanticFinitude.SemanticFinitude", "stipulation",
-     "**THE F15 BOUND, BY DECLARATION**: no subject means every proposition — no creature "
-     "is semantically omnipotent. Paid 17× as an anonymous premise, never registered"),
+    ("◆", "C388", "Logos.SemanticFinitude.SemanticFinitude", "decl",
+     "**THE F15 BOUND, BY DECLARATION** — the 27th axiom, `Tag: VOCAB`: no subject means every "
+     "proposition, so no creature is semantically omnipotent. Paid as an anonymous "
+     "premise in 19 declarations across the five attribute modules (14 carrying the "
+     "exact ∀-form) before it was named; now declared, and its price is in every "
+     "dependent footprint"),
     ("L2", "C389", "Logos.SemanticFinitude.exactly_one_universal_modal_ground_stipulated", "decl",
-     "**the unicity of the ground of all reality**, on the named bound"),
+     "**the unicity of the ground of all reality**, an unconditional theorem of Γ"),
     ("L2", "C390", "Logos.SemanticFinitude.ofGround_sole_universal_grounding_stipulated", "decl",
      "sole universal grounding of reality"),
     ("L2", "C391", "Logos.SemanticFinitude.conditional_canonical_aseity_stipulated", "decl",
@@ -5617,9 +6325,11 @@ LOVE_STEPS = [
     ("L1", "—", "Logos.LovesAsGround.the_ground_is_a_universal_modal_ground", "decl",
      "**restates C204**; body is literally `ofGround_universal_modal_ground` — no second id"),
     ("L1", "C329", "Logos.LovesAsGround.no_subject_is_a_necessary_entity", "decl",
-     "no person can occupy the necessary pole — discharges it with no love axiom"),
-    ("L1", "C330", "Logos.LovesAsGround.only_the_ground_is_necessary", "decl",
-     "**forced by the three-constructor ontology** — structural fact, **not** evidence of love"),
+     "no *contingent-kind* person can occupy the necessary pole — kind-relative, discharges it with no love axiom"),
+    ("L1", "C330", "Logos.LovesAsGround.necessary_entities_are_ground_or_necessary_kind", "decl",
+     "**the necessary entities are the ground AND the necessary-kind subjects** (renamed 2026-09-28) — "
+     "ground disjunct forced by the three-constructor ontology, subject disjunct the priced META bridge — "
+     "structural fact, **not** evidence of love"),
     ("V", "—", "Logos.LovesAsGround.GroundLoves", "decl",
      "**THE RELATION, ADDED NOT REUSED**: necessary lover, actual other, directed good, "
      "meaningful target, context `a` — `Loves` is `Subject`-indexed and the ground is no subject"),
@@ -5654,15 +6364,16 @@ LOVE_STEPS = [
     ("L2", "C343", "Logos.LovesAsGround.the_ground_is_a_necessary_and_chosen_lover", "decl",
      "**the \"necessary ∧ chosen\" cell, occupied** — necessity forced, choice exactly the bridge"),
     ("S", "C344", "Logos.LovesAsGround.the_ground_is_not_a_person", "decl",
-     "the ground is not a personal entity — love is attributed **as a kind**"),
+     "the ground-*constructor* is not a subject-correlate — constructor separation, re-scoped 2026-09-28; "
+     "the necessary-kind person is a *different* entity, so no identification is made"),
     ("S", "C345", "Logos.LovesAsGround.ground_love_does_not_identify_a_person", "decl",
      "the inhabitation cannot be read as a claim about a person"),
     ("S", "C346", "Logos.LovesAsGround.subject_love_is_not_ground_love", "decl",
-     "**interpersonal love never yields ground-level love** — provably disjoint"),
+     "**contingent interpersonal love never yields ground-level love** — disjoint on the contingent side"),
     ("S", "C347", "Logos.LovesAsGround.interpersonal_love_never_reaches_the_necessary_quadrant", "decl",
-     "no amount of interpersonal love populates the necessary quadrant"),
+     "no amount of *contingent* interpersonal love populates the necessary quadrant — the necessary kind can"),
     ("S", "C348", "Logos.LovesAsGround.ground_love_cannot_be_read_as_person_love", "decl",
-     "**the transfer is unstatable, not merely blocked** — bridge #9 / C228 untouched"),
+     "**the transfer to the contingent kind is unstatable, not merely blocked** — bridge #9 / C228 untouched"),
     ("V", "—", "Logos.LovesAsGround.ground_love_preserves_pure_actuality", "decl",
      "**restates C217** (`ofGround_no_transition_potency`) — love as act *adds to* pure actuality"),
     ("L1", "C350", "Logos.CosmicExistence.contingent_realm_obtains", "decl",
@@ -5682,14 +6393,13 @@ LOVE_STEPS = [
      "the `Prop` form of the same, so the ledger can name the claim as C350 while the record "
      "keeps a single witness"),
     ("L2", "C367", "Logos.CosmicExistence.cosmos_obtains", "decl",
-     "**the same realm, now meaning-bearing — this is the row that pays**: derived from "
-     "`Plurality.cogito_from_T12` under the plurality bridge `AxTwoSubjects` (META), so Γ "
-     "*discovers* the meaning-bearing subject and an empty contingent world is *proved* "
-     "impossible. The price is now correctly attributed: `AxTwoSubjects` buys the realm's "
-     "*content*, not its existence. **It is also the row that identifies the realm as *the* "
-     "cosmos** — C324's prohibition (an atom is not the cosmos) is untouched, because C350 "
-     "shows only that the *shape* has an instance. **The price is not forced:** 3e below "
-     "reaches the same inhabitation with no bridge at all"),
+     "**the same realm, now meaning-bearing — given an exhibited *contingent person***: the kind "
+     "premise (2026-09-28, two-kinds) exhibits what kind-blind semantics got for free, so "
+     "`AxTwoSubjects` is no longer among the premises — exhibiting the kind subsumes the "
+     "T12 witness. **It is still the row that identifies the realm as *the* cosmos** — C324's "
+     "prohibition (an atom is not the cosmos) is untouched, because C350 "
+     "shows only that the *shape* has an instance. **The price is exhibited, not forced:** 3e below "
+     "reaches the same inhabitation from the act-datum"),
     ("D", "—", "Logos.CosmicExistence.CreatedRealm", "decl",
      "the meaning-bearing realm's structure: `Nonempty Realm`, single witness — fair definition; "
      "the inhabitation is now **proved** (C367), no longer stipulated"),
@@ -5705,12 +6415,13 @@ LOVE_STEPS = [
      "performative act-datum reaches a meaning-bearing subject on its own, because `Act` already "
      "contains `Means` as a conjunct, so `act_datum_implies_means` needs no bridge. A **new row**, "
      "not a re-anchoring of C367, and it does not replace it: a theorem *discovers*, it does not "
-     "manufacture, so Γ supplies no subject from nothing — the datum is given, not inferred. "
+     "manufacture, so Γ supplies no subject from nothing — the datum is given, not inferred, and "
+     "the kind is exhibited with it (2026-09-28, two-kinds). "
      "Re-anchoring `cosmos_obtains` would repeat the A1 bug exactly"),
     ("L2b", "C387", "Logos.CosmicExistence.the_ground_loves_the_cosmos_from_the_act_datum", "decl",
      "**THE GOD-LANE's payoff — the ground's love, byte-identical statement, plurality route gone**: "
-     "three axioms and a sort fewer than C351, since `AxTwoSubjects` took `Will` and `subjectWill` "
-     "down with it. The interpersonal metaphysics is no longer a premise here, and the two remaining "
+     "the `Will`/`subjectWill` that entered only through `AxTwoSubjects` are gone with it. "
+     "The interpersonal metaphysics is no longer a premise here, and the remaining "
      "premises are independent of it, so the removal is *visible* rather than absorbed. The love "
      "bridge stays, and must: a directional good held by the ground is not in Γ's grounding "
      "vocabulary. Relocated price ◈ `performativeActDatum` — free in axioms, not free in performance"),
@@ -5718,8 +6429,71 @@ LOVE_STEPS = [
      "**countermodel, `{}`**: the contingency shape is refutable in a world-rigid universe — "
      "on an **unrelated free structure, not a model of Γ**"),
     ("L1", "C354", "Logos.CosmicExistence.cosmos_presence_model", "decl",
-     "**conditional satisfiability**: the realm obtains for any `Means` inhabitant — "
-     "stated, not glossed as unconditional"),
+     "**conditional satisfiability**: the realm obtains for any contingent-kind `Means` inhabitant — "
+     "kind exhibited, stated, not glossed as unconditional"),
+]
+
+
+# --- TWO-KINDS chain (batch two-kinds, 2026-09-28). The plan of record is
+# --- `SUBJECTS.md`. This list exists because the batch's most load-bearing rows —
+# --- the derived necessary Person (C404 -> C407/C408/C409) and the personal-ground
+# --- headlines (C151/C152) — were absent from every reader-facing chain list, so the
+# --- document silently omitted the newest batch. See AGENTS.md: "Adding a declaration
+# --- to a chain module does not add it to README.md — extend the list in the same
+# --- change." Badges and footprints are DERIVED; nothing here is transcribed.
+# --- `V` = the VOCAB axiom (free predicate of the necessary kind) · `D` = its `def`-side
+# --- negation · `◆` = the META bridge (the axiom rows) · `L1` = VOCAB-only theorem,
+# --- no substantive axiom · `L2` = rests on the META bridge · `Σ` = the headline partition.
+TWO_KINDS_STEPS = [
+    ("V", "C403", "Logos.Agency.NecessarySubjectKind", "decl",
+     "**THE VOCABULARY OF THE TWO KINDS** (`Tag: VOCAB`): a free predicate for the *kind* of a "
+     "subject. It asserts no existence — inhabitation is C404, the bridge, and is deliberately "
+     "not part of this line"),
+    ("D", "—", "Logos.Agency.ContingentSubjectKind", "decl",
+     "its `def` complement (`¬ NecessarySubjectKind`); the two kinds partition the sort by C411"),
+    ("L1", "C405", "Logos.Plurality.necessaryKindSubject_is_necessary", "decl",
+     "a subject of the necessary kind is a necessary subject — the kind-relative form of the "
+     "persistence theorem, from the left disjunct of `SubjectExistsAt`"),
+    ("L1", "C406", "Logos.Plurality.contingentKindSubject_not_necessary", "decl",
+     "a contingent-kind subject is **not** necessary — it fails in the all-`TV.f` world. This is "
+     "where every earlier contingency finding now lives, and it discharges C329 "
+     "(`no_subject_is_a_necessary_entity`) with **no love axiom**"),
+    ("Σ", "C410", "Logos.Plurality.kinds_are_the_modal_partition", "decl",
+     "**THE HEADLINE — the two kinds are exactly the two modal profiles**: a subject is "
+     "necessary-kind **iff** its correlate exists in every world. Vocabulary-only, "
+     "**0 substantive axioms**"),
+    ("L1", "C411", "Logos.Plurality.contingentKind_iff_not_necessary", "decl",
+     "contingent-kind is the complement of necessary-kind, hence — with C410 — the "
+     "complementarity of world-rigidity itself"),
+    ("L1", "C412", "Logos.Plurality.necessaryKind_existsAt_every_world", "decl",
+     "the necessary-kind profile: **every** world. Left disjunct, and nothing more"),
+    ("L1", "C413", "Logos.Plurality.contingentKind_existsAt_actualWorld_only", "decl",
+     "the contingent-kind profile: **the actual world and no other**. With C412, the "
+     "**asymmetry of inhabitation** between the kinds"),
+    ("L1", "C414", "Logos.Plurality.falsityWorld_holds_no_contingent_subject", "decl",
+     "the world of falsity hosts no contingent-kind subject. **What this does not say**: it does "
+     "not say the falsity world is empty, nor that the necessary kind is absent from it"),
+    ("L1", "C415", "Logos.Plurality.contingentSubject_might_not_have_existed", "decl",
+     "a contingent-kind subject **might not have existed** — C406 in world-relative form, and the "
+     "one half of contingency the argument does *not* need to assume"),
+    ("◆", "C404", "Logos.Plurality.necessaryPersonalSubjectExists", "decl",
+     "**THE BRIDGE, AND THE ONLY SUBSTANTIVE PRICE IN THIS BATCH** (`Tag: META`): the necessary "
+     "kind is inhabited by a **Person** — the ground read in its Personal Type, as a Subject. "
+     "**Everything below is this row, and nothing else**"),
+    ("L2", "C407", "Logos.Plurality.necessarySubject_exists", "decl",
+     "a necessary subject exists, by the bridge"),
+    ("L2", "C408", "Logos.Plurality.necessaryPersonalSubject_derived", "decl",
+     "a **necessary Person** exists: the meaning-bearing subject is necessary-kind, the "
+     "contingent one is the other kind"),
+    ("L2", "C409", "Logos.NecessaryPersonalGround.necessary_person_derived_from_bridge", "decl",
+     "**CLAIM D IS NOW DERIVED, NOT ANNOTATED** — the necessary-person existential is no longer "
+     "empty. The price is exactly the bridge and nothing more"),
+    ("L1", "C151", "Logos.PersonalGroundOfReality.the_person_supports_the_reality_of_right", "decl",
+     "**THE FLAGSHIP, UNCONDITIONAL — 0 substantive axioms**: the person supports the reality "
+     "of right, with the interpersonal metaphysics already discharged upstream. This is the "
+     "load-bearing theorem the whole personal-ground route rests on"),
+    ("L1", "C152", "Logos.PersonalGroundOfReality.personal_ground_of_right_exists", "decl",
+     "a **personal ground of right** exists — `{}`-class, vocabulary alone"),
 ]
 
 
@@ -5862,72 +6636,82 @@ MEANING_RETORSION_STEPS = [
      "**AND THE WORLD IN WHICH THE THESIS IS UTTERED**: 3c with `act := True`. A subject, nothing "
      "meant, the thesis true, the thesis *said* — and still no assertion of it that succeeds. This "
      "is what makes 3c's word \"unutterable\" a misnomer rather than a reading"),
+    ("4", "C401", "Logos.MeaningRetorsion.noMeaning_is_refuted_from_plurality", "decl",
+     "**THE REFUTATION — the no-meaning world is not possible in Γ**: `Meaning_I p` is definitionally "
+     "`∃ s, Means s p`, so `cogito_from_T12` is already a counterexample to the thesis, three lines "
+     "that were never written down. NOT axiom-free — C382 *is* the proof nothing in the bare vocabulary "
+     "refutes it. What C382 shows is a free signature's consistency; what this shows is the thesis does "
+     "not survive *the theory*, on the plurality bridge"),
+    ("4", "C402", "Logos.MeaningRetorsion.noMeaning_is_refuted_from_the_act_datum", "decl",
+     "**the same refutation on the act-datum, no META bridge**: whoever grants that an act occurred "
+     "grants the falsity with it, since `Act` already contains `Means`. Conditional, bridge-free, price "
+     "relocated to ◈ `performativeActDatum` — free in axioms, not free in performance"),
 ]
 
 
 def render_semantic_finitude_chain(decls: dict, node_map: dict) -> list[str]:
     """The SEMANTIC-FINITUDE chain, step by step.
 
-    Emitted so the ◈ F15 bound can never be read as a derived theorem. The ◈
-    row is its own row, badged from `formal/stipulation_audit.json`; the ten
-    `L2` corollaries carry a `◈` marker derived from the registry `dependents`.
-    Badges and footprints are DERIVED; nothing here is transcribed. See AGENTS.md.
+    Emitted so the declared F15 bound can never be read as a derived theorem. The
+    bound is its own row (C388), badged from the kernel node kind and the axiom
+    registry; the ten `L2` theorems are unconditional, resting on it. Badges and
+    footprints are DERIVED; nothing here is transcribed. See AGENTS.md.
     """
     lines = []
     ap = lines.append
-    ap("### SEMANTIC-FINITUDE chain, step by step (F15 consolidated and badged)")
+    ap("### SEMANTIC-FINITUDE chain, step by step (F15 declared as a vocabulary axiom)")
     ap("")
     ap("> **Read this table before reading any unicity/ground row above.** Γ has a ground of")
-    ap("> reality, and on the **registered** ◈ bound that no subject means every proposition,")
-    ap("> that ground is the **sole** universal ground. The bound is the **◈ row**, and it is a")
-    ap("> **declaration, not a derivation**. A reader must not read the `L2` rows at")
-    ap("> `{Means, Subject}` as a proof of monotheism.")
+    ap("> reality, and on the **declared** bound that no subject means every proposition, that")
+    ap("> ground is the **sole** universal ground. The bound is the **C388 row**, and it is a")
+    ap("> **declaration, not a derivation** — the 27th axiom, tagged `VOCAB`. A reader must not")
+    ap("> read the `L2` rows as a proof of monotheism, and must not read `VOCAB` as \"axiom-free\".")
     ap("")
-    ap("`◈` = **the declared F15 bound, not a theorem** · `L2` = a corollary resting on the ◈")
+    ap("`◆` = **the declared bound, not a theorem** · `L2` = a theorem resting on the bound")
     ap("· `🧱` = `{}` countermodel pricing it · `✓` = coherence.")
     ap("")
     ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
     ap("|---|---|---|---|---|---|")
     for kind, cid, full, atype, text in SEMANTIC_FINITUDE_STEPS:
-        if atype == "stipulation":
-            ent = _stipulation_entry("semanticFinitude")
-            tag = (ent or {}).get("tag", "VOCAB")
-            status = f"◈ STIPULATED ({tag}) — a `def`, **not an axiom**"
-        else:
-            live = _classical_anchor_live({"type": atype, "full": full},
-                                          decls, node_map)
-            status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
+        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
-    ent = _stipulation_entry("semanticFinitude")
-    if ent:
-        ap(f"**Cost of ◈ `{ent.get('name')}`** (`{ent.get('location')}`), as registered: "
-           f"{ent.get('cost', '')}")
-        ap("")
+    ap("**Cost of the C388 declaration** (`formal/Logos/SemanticFinitude.lean`), as declared:")
+    ap("one axiom, `Tag: VOCAB` — it bounds a single uninterpreted relation `Means` on a single")
+    ap("nullary sort `Subject` and asserts no connection between entities. It is priced in every")
+    ap("dependent footprint below, and the declared-axiom count moved **26 → 27** when it was")
+    ap("promoted. The ten `L2` rows keep the `PROVEN` badge they had as stipulations because the")
+    ap("generator treats only `SEM`/`META`/`TRANS` as substantive; `VOCAB` yields `PROVEN`.")
+    ap("")
     ap("**Four limits that the badge alone does not convey, and which are the reason this")
     ap("block exists:**")
     ap("")
-    ap("1. **The ◈ is invisible to every footprint tool.** `SemanticFinitude` is a `def` of a")
-    ap("   `Prop` that the `L2` corollaries take as a *premise*, so `#print axioms` reports the")
-    ap("   same `{Means, Subject}` (or `{Initiates, Means, State, Subject}`, or with `propext`)")
-    ap("   as the corresponding pre-existing conditional theorem, and the declared-axiom count")
-    ap("   is unmoved. \"The axiom count did not move\" is **not** a test for this chain.")
-    ap("2. **This is consolidation, not a new derivation.** The ten existing conditional theorems")
-    ap("   (`exactly_one_universal_modal_ground`, `ofGround_divine_simplicity`, …) are **not**")
-    ap("   edited and keep their anonymous premise; the `L2` rows are the same theorems keyed to")
-    ap("   the *named* bound, and their footprints are byte-identical to the originals.")
+    ap("1. **The price was invisible until this batch, and that was the defect.** As a `def` of a")
+    ap("   `Prop` taken as a premise, the bound was reported by `#print axioms` as the *same*")
+    ap("   footprint as the corresponding pre-existing conditional theorem, the axiom count was")
+    ap("   unmoved, and the ◈ badge was the only signal. It is now a declared axiom, so the price")
+    ap("   is in every dependent footprint. The count moving 26 → 27 is what a price looks like")
+    ap("   when it is honestly charged; its earlier stillness was the point, not a pass.")
+    ap("2. **The ten `L2` rows are unconditional theorems, not corollaries.** The ten original")
+    ap("   conditional theorems (`exactly_one_universal_modal_ground`, `ofGround_divine_simplicity`,")
+    ap("   …) are **not** edited and keep their anonymous premise; the `L2` rows are the same")
+    ap("   theorems keyed to the *named* bound, which declaring it turned into theorems of Γ in")
+    ap("   their own right. The `_stipulated` suffix is historical and is kept only because the")
+    ap("   ledger and the prose corpus cite these names.")
     ap("3. **The bound is falsifiable, not vacuous** (`🧱 semantic_omnipotence_is_consistent`,")
     ap("   `{}`): a semantically omnipotent carrier is a model of its negation, so the unicity")
-    ap("   genuinely rests on the bound — which is why the bound must be badged, not assumed.")
+    ap("   genuinely rests on the bound — which is why the bound must be declared, not assumed.")
     ap("   It is also *load-bearing* in the other direction (`✓`): `ofGround_meansAll` gives the")
     ap("   ground every proposition, so the bound is exactly what keeps it off the `Subject` sort.")
     ap("4. **What is still NOT claimed.** `Tag: VOCAB` says the bound restricts one uninterpreted")
     ap("   relation on one nullary sort (`Means` on `Subject`) and asserts no connection between")
     ap("   entities — the same status as `ofGround_existsAt`; if the author re-tags it `SEM` the")
-    ap("   badge follows. Personhood of the ground (C228), Trinity (F6/F8) and *explanatory*")
-    ap("   grounding (C326/C328) are untouched and remain BLOCKED / DEFERRED / not attempted.")
-    ap("   This batch does not move existence, which was already `PROVEN` unconditionally.")
+    ap("   badge follows and the ten theorems drop to `⚠️`. Personhood of the ground (C228),")
+    ap("   Trinity (F6/F8) and *explanatory* grounding (C326/C328) are untouched and remain")
+    ap("   BLOCKED / DEFERRED / not attempted. This batch does not move existence, which was")
+    ap("   already `PROVEN` unconditionally.")
     ap("")
     return lines
 
@@ -6064,6 +6848,80 @@ def render_love_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     return lines
 
+
+def render_two_kinds_chain(decls: dict, node_map: dict) -> list[str]:
+    """The TWO-KINDS chain, step by step, with the price of every step.
+
+    Added 2026-09-28 to close a presentation gap, not a formal one: the batch was
+    fully proven and fully registered in GAPMAP, but no reader-facing chain list
+    contained it, so the derived necessary Person (C409) and the personal-ground
+    flagship (C151/C152) never appeared in the deduction. Per AGENTS.md, chain
+    membership is maintained by hand while badges and footprints are derived, so
+    the list is explicit here and guarded by `audit_chain_coverage`.
+
+    Emitted so that the one substantive price in the batch — the META bridge
+    C404 — is visible as its own row and cannot be absorbed by the `{}`-class
+    rows either side of it. Badges and footprints are DERIVED; nothing here is
+    transcribed.
+    """
+    lines = []
+    ap = lines.append
+    ap("### TWO-KINDS chain, step by step (every step priced)")
+    ap("")
+    ap("> **Read this table before reading any plurality/personal-ground row above.** The")
+    ap("> argument's remaining metaphysical gap was *who fills the necessary pole*. This batch")
+    ap("> introduces a free predicate for a subject's **kind**, proves that the two kinds are")
+    ap("> exactly the two modal profiles, and then — on **one** declared `META` bridge — derives")
+    ap("> that the necessary kind is inhabited by a **Person**. The whole price is the `◆` row.")
+    ap("")
+    ap("`V` = the `VOCAB` axiom (a free predicate, asserting no existence) · `D` = its `def`")
+    ap("complement · `L1` = a theorem on vocabulary alone, **0 substantive axioms** · `◆` = the")
+    ap("declared `META` bridge · `L2` = a theorem resting on that bridge · `Σ` = the headline")
+    ap("partition.")
+    ap("")
+    ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
+    ap("|---|---|---|---|---|---|")
+    for kind, cid, full, atype, text in TWO_KINDS_STEPS:
+        live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
+        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
+           f"{status} | {kernel_fp_text(full)} |")
+    ap("")
+    ap("**Five limits that the badge alone does not convey, and which are the reason this")
+    ap("block exists:**")
+    ap("")
+    ap("1. **Eleven of the sixteen rows are vocabulary-only, and four carry the bridge.**")
+    ap("   The kind predicate `V` is `Tag: VOCAB` and asserts nothing about existence. Every")
+    ap("   `L1` row is vocabulary-only — C410 (the two kinds *are* the two modal profiles) is")
+    ap("   `{NecessarySubjectKind, Subject}`-class, and C152 is")
+    ap("   `{Initiates, Means, State, Subject, Will, subjectWill, will_individuation}`-class. Only")
+    ap("   C151 additionally carries Lean's own `choice`/`propext`/`sound`, which are **core")
+    ap("   kernel**, not Γ-declared axioms — the table prints it so the distinction is visible.")
+    ap("   The four rows carrying `necessaryPersonalSubjectExists` are the `◆` row and its three")
+    ap("   `L2` corollaries.")
+    ap("2. **The `◆` row is the entire price.** `necessaryPersonalSubjectExists` (`Tag: META`)")
+    ap("   is the only substantive axiom the batch introduces, and C407/C408/C409 inherit")
+    ap("   exactly it and nothing else. It is a **metaphysical bridge** (`META`), not a")
+    ap("   vocabulary commitment, and it is stated as an existential inhabitance of the kind —")
+    ap("   not as a derivation of personhood from the ground-constructor.")
+    ap("3. **C406 discharges C329 without a love axiom.** `no_subject_is_a_necessary_entity`")
+    ap("   used to need the exclusion hypothesis; it is now a kind-relative theorem. The love")
+    ap("   bridge is not doing metaphysical work it was never stated to do.")
+    ap("4. **The necessary kind and the ground-constructor are *not* the same row.** The")
+    ap("   `Entity.ofGround` constructor is disjoint from `EntityOf s` by `cases`")
+    ap("   (`ofGround_ne_ofSubject`, `FoundationalUnicity.lean:131`) — that is constructor")
+    ap("   disjointness on a three-constructor inductive, **not** a verdict that the ground is")
+    ap("   impersonal. The necessary *kind* is inhabited by a Person (C404); the ground")
+    ap("   *constructor* is not a `Subject`. Conflating the two is the error `LovesAsGround.lean`")
+    ap("   retracts in its own docstring.")
+    ap("5. **What this batch does NOT close.** C228 — identifying the normative ground with a")
+    ap("   *Person* — remains `BLOCKED`, and C212 proves ground-unicity does not force a unitary")
+    ap("   monad. Monotheism *at the level of the Person* is open; the ground's *sole universal")
+    ap("   modal grounding* (C319/C320) is unaffected by this batch and rests on F15 alone.")
+    ap("")
+    return lines
+
+
 def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     """Emits the classical-attributes table block (placed after Branch C, before
     the Further Investigations catalogue). Statuses are live-derived, never
@@ -6111,6 +6969,7 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     lines.extend(render_semantic_finitude_chain(decls, node_map))
     lines.extend(render_meaning_retorsion_chain(decls, node_map))
     lines.extend(render_love_chain(decls, node_map))
+    lines.extend(render_two_kinds_chain(decls, node_map))
     ap("_Synthesis — the strongest current profile._ The theory has established, of a")
     ap("**personal, rational, free, authoritative-over-its-acts, independently individuated**")
     ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")
@@ -6141,8 +7000,9 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("(`⏸` / `❌`) or explicit **countermodel frontiers** (`🧱`) until the live kernel proves them. "
        "Contingent creation *as existence* is no longer among them: it is a **free theorem** "
        "(C350 `contingent_realm_obtains`, `{propext, Subject}`), witnessed by an atom, with no "
-       "bridge and no substantive axiom. Only the realm's *content* is priced, on the plurality "
-       "bridge `AxTwoSubjects` (C367 `cosmos_obtains`) — a metaethical commitment, not a semantic "
+       "bridge and no substantive axiom. Only the realm's *content* is priced, on an exhibited "
+       "contingent person (C367 `cosmos_obtains`) — the kind premise the two-kinds doctrine "
+       "exhibits, not a semantic "
        "one. And contingent creation *as production* remains unclaimed: no `Creates` relation, "
        "no agent, no first moment. So the cost was relocated and then, for existence itself, "
        "dissolved — but the act was never ours to claim.")
@@ -6164,7 +7024,9 @@ def verify_classical_attribute_status(decls: dict, node_map: dict) -> None:
             f"change; never transcribe status text over the kernel.")
 
 
-def render_deduction_sections(sections: list[dict], decls: dict = None, node_map: dict = None, investigations_dir: Path = None) -> list[str]:
+def render_deduction_sections(sections: list[dict], decls: dict = None, node_map: dict = None,
+                          investigations_dir: Path = None,
+                          score_claims: list[dict] = None) -> list[str]:
     """Renders compiled ProofIR sections into README.md in 3 simultaneous layers:
 
     1. Ordinary English conceptual movement (from declaration docstrings)
@@ -6189,6 +7051,14 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
     if not is_synthetic:
         for gl in render_reading_guide():
             ap(gl)
+        # Phase 4: the two-column score. `score_claims` must be the GAPMAP claim
+        # rows, NOT the discovered ProofIR sections: those carry `proofs`, and
+        # reading `claims` off them silently yields an empty list, which is how
+        # 4b shipped as dead code behind a green build (VISIBILITY.md
+        # Correction 10). main() passes the real inventory.
+        if score_claims:
+            for gl in render_score_block(derive_score_data(score_claims, decls, node_map)):
+                ap(gl)
         glance_lines = generate_argument_at_a_glance(spine, frontiers, countermodels)
         for gl in glance_lines:
             ap(gl)
@@ -6621,6 +7491,24 @@ def main():
                                or claim_glosses.get(c["id"], "") or c["_gloss"])
     print(f"  {resolved} claims linked to a kernel declaration")
 
+    # A `lean_ref` that resolved to nothing is not a Lean reference. The
+    # frontier rows put a whole sentence in the ledger's declaration cell, so
+    # `_extract_lean_ref` had to guess, and it guessed: `BLOCKED` for F15, `def`
+    # for F13, `propext` for F9, `Produces` for F10. Those strings then rendered
+    # as though they were dependencies — the sharpest case being the code annex,
+    # where `F15 … | BLOCKED` sat under a "Used by" header beside an AXIOM claim.
+    # Clearing them here, keyed on the resolution that already ran, fixes every
+    # display site at once and needs no word-list.
+    dropped = [(c["id"], c["lean_ref"]) for c in all_claims
+               if c.get("lean_ref") and not c.get("_full")]
+    for c in all_claims:
+        if c.get("lean_ref") and not c.get("_full"):
+            c["lean_ref"] = ""
+    if dropped:
+        print(f"  cleared {len(dropped)} unresolvable lean_ref(s) that were "
+              f"scraped from prose cells: {', '.join(i for i, _ in dropped[:12])}"
+              + (" …" if len(dropped) > 12 else ""))
+
     for c in all_claims:
         if c.get("_full"):
             claims_by_id.setdefault(c["_full"], c)
@@ -6642,6 +7530,10 @@ def main():
     fp_by_id = {c["id"]: (c.get("footprint") or "") for c in all_claims}
     for c in all_claims:
         c["_curated_fp"] = expand_footprint(c["id"], fp_by_id)
+
+    print("verifying chain-list integrity and required coverage…")
+    globals()["ALL_CHAIN_STEPS"] = [(nm, globals()[var]) for nm, var in CHAIN_LISTS]
+    verify_chain_coverage(node_map, claims_by_id)
 
     print("verifying gloss relation consistency…")
     verify_gloss_relations(all_claims, decls, graph)
@@ -6764,7 +7656,7 @@ def main():
     print("rendering README.md…")
     def_registry = {}
     deduction_sections = discover_deduction_sections(sections, decls, node_map, graph, def_registry)
-    lines = render_deduction_sections(deduction_sections, decls, node_map)
+    lines = render_deduction_sections(deduction_sections, decls, node_map, score_claims=all_claims)
 
     # Classical-attributes table honesty: live kernel/ledger must still match the
     # declared buckets (a future theorem would fail regeneration loudly here).

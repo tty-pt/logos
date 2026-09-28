@@ -48,6 +48,24 @@ Vocabulary: the pure sort of subjects — that which performs acts of reasoning.
     sort, neither empty nor possessing encoded cardinalities. -/
 axiom Subject : Type
 
+/--Tag: VOCAB
+Vocabulary: the two kinds of subject.
+
+  Subjects come in two kinds, and the kind is part of the vocabulary, not a
+  remark. `NecessarySubjectKind s`: `s` is of the necessary kind — the ground
+  of reality in its Personal Type (a Person, hence a Subject), world-rigid, of
+  the necessary side. Its negation, `ContingentSubjectKind s`, is the other
+  kind: an individual person, actual-world-relative, which might not have
+  existed. Whether the necessary kind is inhabited is a separate, priced claim
+  (`Plurality.necessaryPersonalSubjectExists`); the distinction itself is
+  vocabulary. -/
+axiom NecessarySubjectKind : Subject → Prop
+
+/-- The contingent kind of subject: an individual person of the other kind —
+    actual-world-relative, which might not have existed. Defined as the negation
+    of the necessary kind, so the two kinds partition the sort by definition. -/
+def ContingentSubjectKind (s : Subject) : Prop := ¬ NecessarySubjectKind s
+
 /-- Content-ness: `Content p` — p is (a) a propositional content.
     Analytical definition (cogito-rethinking, 2026-09-15): the universe of
     propositions IS the universe of possible contents. Former axiom, now def. -/

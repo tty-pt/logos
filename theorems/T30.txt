@@ -122,7 +122,7 @@ O resto de L1, estritamente sem axioma substantivo e sem consumir ainda o primit
 - C325 `a_meaningful_contingent_entity_exists`, `{Means, Subject, propext}` — **existe
   uma entidade contingente portadora de conteúdo.** A hipótese é `∃ s, ∃ p, Means s p` e
   é carregante e honestamente declarada: `Means` é um **axioma** primitivo `Tag: VOCAB`
-  (`Agency.lean:74`) sem instância derivável em Γ, portanto este teorema **consome** um
+  (`Agency.lean:92`) sem instância derivável em Γ, portanto este teorema **consome** um
   habitante de `Means` em vez de produzir um. Fornece só a forma de que a inhabitação
   precisa; não identifica nada com o cosmos.
 - C329 `no_subject_is_a_necessary_entity`, `{Subject, propext}` — os sujeitos existem
@@ -447,6 +447,19 @@ Ainda requer prova (as três afirmações que faltam, em termos formais):
       **identificação hipostática**, que a biblioteca não tem. Esta é a **ponte #9 /
       C228**, que **continua exactamente como estava** e por isso F3, F6/Trindade e a
       fronteira do monoteísmo pessoal não se movem.
+      **[NOTA 2026-09-28 — o estado não mudou, a justificação passou a ser verificada.]**
+      A Fase 6 de `VISIBILITY.md` testou uma rota alternativa para C228 (o lote
+      "two kinds", C403–C415) que atingiria fundamento pessoal *sem* forçar
+      `g = EntityOf s`; é impossível, porque `PersonalEntity` é *definida* como
+      `∃ s, g = EntityOf s ∧ Person s` (`PersonalNormativeGround.lean:228`). O
+      resultado negativo registado é mais forte: `asymmetric` bloqueia o
+      contraexemplo do *átomo*, mas não o do *fundamento* — `Entity` tem três
+      construtores e `ofGround` sobrevive a `asymmetric` sem ser `EntityOf s` de
+      nenhum `s`, e `personal_ground` não o salva (a hipótese é insatisfazível ali).
+      Ver `HostileModels.model_d_asymmetric_leaves_ofGround_standing`, linha C416 do
+      `GAPMAP.md`. Portanto os dois campos selantes **não** são redundantes e D1′ é uma
+      decisão semântica, não um refactor pendente. **C228 continua `BLOCKED`;** a ponte
+      #9 não é tocada por nada disto.
   (3) ~~DADO EM FALTA~~ **[RESOLVIDO 2026-09-27; refundido pelo lote
       COSMOS-EXISTENCE-IS-FREE]**: a existência de um reino contingente portador de conteúdo
       era `AXIOM` (C350, `Tag: SEM`), e o que faltava era "a **derivação** de `CreatedRealm`
@@ -498,3 +511,11 @@ empírico) do módulo irmão — **eliminado**. O preço da existência do cosmo
 ponte pluralista `AxTwoSubjects` (META), partilhada com C350/C351/C352.]` Os dois já
 constavam do registo de axiomas; o que este lote faz é dar-lhes nome, preço e linha no
 livro-razão.
+
+[Actualizado 2026-09-28, dois géneros: C329 passa a condicional ao género
+(`ContingentSubjectKind s`); C330 passa a `necessary_entities_are_ground_or_necessary_kind`
+(disjunção: o fundamento E os sujeitos do género necessário) — a célula "necessário ∧
+escolhido" está ocupada, e o que permanece negativo é a exclusão da pessoa contingente.
+C344 re-delimitada (separação de construtor). C342/C343/C351/C352/C367/C386/C387 e T14
+(C42–C45) com premissas de género exibidas; `AxTwoSubjects` sai dessas linhas. Ver
+theorems/T32.txt e `formal/GAPMAP.md` (5.ª correcção).]

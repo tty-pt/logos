@@ -1024,10 +1024,12 @@ What this batch is **mostly**, and why that is the finding:
 
 Limits that belong to the row, not to a footnote:
 
-- C330 (`only_the_ground_is_necessary`) is **forced by the three-constructor ontology**
-  (`EntityExistsAt w .ofGround := True` is definitional) and is **not evidence that the
-  ground loves**; its legitimate content is negative (the "necessary ∧ chosen" cell
-  contains no person). The footprint (`{Subject, propext}`) confirms no love content.
+- C330 (`necessary_entities_are_ground_or_necessary_kind`; was `only_the_ground_is_necessary`,
+  re-scoped 2026-09-28, two-kinds) is **forced by the three-constructor ontology** for its
+  ground disjunct (`EntityExistsAt w .ofGround := True` is definitional) and is **not evidence that the
+  ground loves**; its legitimate content is now positive (the "necessary ∧ chosen" cell
+  is occupied — by the ground and the necessary kind), with the contingent person's exclusion
+  (C329, kind-relative) carrying the old negative content. The footprint (`{NecessarySubjectKind, Subject, propext}`) confirms no love content.
 - C336's footprint is `{GroundBearsGood, Means, Subject}` — it already *consumes* the
   VOCAB primitive, so it is substantive-axiom-free, not axiom-free in the strict sense
   (the same regime as `Means`).

@@ -64,7 +64,7 @@ novelty rests on four items that are not instantiations of existing rows:
 2. the `Correct`/judgeability rung, which exists for the act-thesis
    (`Order.no_correct_judgment_of_no_act`) and for nothing else in the corpus;
 3. the signature-general **weak** retorsion — `Agency.noWeakAct_selfRefutes`
-   (`Agency.lean:245`) is canonical-only;
+   (`Agency.lean:263`) is canonical-only;
 4. the **populated** complement — `unassertability_does_not_imply_falsity`
    (`:296`) is M0, the empty subject sort, so the populated form was missing.
 -/
@@ -74,6 +74,7 @@ import Logos.Agency
 import Logos.Choice
 import Logos.Order
 import Logos.NegativeRetorsionAudit
+import Logos.Plurality
 
 namespace Logos.MeaningRetorsion
 
@@ -332,7 +333,7 @@ def NoWeakActIn (S : NegativeRetorsionSignature) : Prop :=
 
 /-- **The weak retorsion, signature-general.** Affirming that no performed event
     occurs is self-refuting: the affirmation is itself a performed event. This
-    is `Agency.noWeakAct_selfRefutes` (`Agency.lean:245`) lifted from Γ's
+    is `Agency.noWeakAct_selfRefutes` (`Agency.lean:263`) lifted from Γ's
     canonical vocabulary to an arbitrary signature — the canonical version is
     the only one on record. Footprint: `{}`. -/
 theorem signature_weak_retorsion (S : NegativeRetorsionSignature) (s : S.Subject) :
@@ -371,7 +372,11 @@ theorem the_two_denials_cannot_both_be_affirmed :
     Consequences, and they are the price of the refutation above:
 
     * the countermodel is refuted as an **answer**, not as a **model**;
-    * the *content* `NoMeaning` stays alive and stays consistent;
+    * the *content* `NoMeaning` stays consistent **as a free signature** — which is
+      what this theorem shows, and all it shows. It is *not* consistent *in Γ*:
+      C401/C402 (Section 4) refute it there, on the plurality bridge and on the
+      act-datum respectively. The earlier form of this bullet ("stays alive and
+      stays consistent" without qualification) is withdrawn as overstated;
     * the positive claim still costs `AxTwoSubjects` (C367) for a subject that is
       not supplied as input.
 
@@ -457,5 +462,52 @@ theorem the_thesis_is_utterable_though_not_assertable :
     exact hMeans
   · intro _s hAss
     exact hAss.1.1
+
+-- ============================================================================
+-- Section 4: the refutation — the no-meaning world is not possible in Γ
+-- ============================================================================
+
+/-- **The thesis is false in Γ: no-meaning worlds are not possible here.**
+    `Meaning_I p` is definitionally `∃ s, Means s p` (`Choice.lean:131`), so a
+    subject who means something is already a counterexample to `NoMeaning`, and
+    `Logos.Plurality.cogito_from_T12` exhibits one with no hypothesis. Three
+    lines, never written down until now.
+
+    This is the "MUST be possible", priced honestly. It is **not** axiom-free —
+    nothing in the bare meaning vocabulary refutes the thesis, and C382 above
+    *is* the machine-checked proof of that impossibility. What C382 exhibits is
+    a free `NegativeRetorsionSignature` satisfying its own `NoI`, a different
+    proposition about a different sort; it is consistent *as a signature* and it
+    stays that way, COUNTERMODEL status and B4 gate untouched. What this row
+    shows is that the thesis does not survive *the theory*: given the plurality
+    bridge, Γ refutes it outright.
+
+    Companion, not replacement, to everything in Sections 1–3d. The ladder, the
+    retorsion, the complement and the utterance model all stand exactly as
+    stated; this row is what they were missing — the content's falsity, on the
+    record, at the price the record already pays elsewhere.
+    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
+theorem noMeaning_is_refuted_from_plurality : ¬ NoMeaning := by
+  obtain ⟨s, p, hmp⟩ := Logos.Plurality.cogito_from_T12
+  exact fun h => h ⟨p, ⟨s, hmp⟩⟩
+
+/-- **The same refutation on the act-datum: no META bridge required.**
+    `Logos.Agency.act_datum_implies_means` turns `∃ s, ∃ p, Act s p` straight
+    into a meaning witness, because `Act` already contains `Means` — so whoever
+    grants that an act occurred grants the thesis's falsity with it. The
+    God-lane twin of C401: C401 is unconditional on the plurality bridge, this
+    row is conditional on the performative datum and free of every bridge,
+    price relocated to ◈ `performativeActDatum` (`Tag: TRANS`) — free in axioms,
+    not free in performance.
+
+    The hypothesis is anonymous (`∃ s, ∃ p, Act s p`, not a named `def`), so the
+    ◈ registry listing is the *only* signal of the dependence — the same
+    arrangement as C386/C387, and the same limitation: invisible to
+    `#print axioms` by construction.
+    Footprint: `{Initiates, Means, State, Subject}`. -/
+theorem noMeaning_is_refuted_from_the_act_datum
+    (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) : ¬ NoMeaning := by
+  obtain ⟨s, p, hm⟩ := Logos.Agency.act_datum_implies_means h
+  exact fun hN => hN ⟨p, ⟨s, hm⟩⟩
 
 end Logos.MeaningRetorsion

@@ -59,14 +59,14 @@ open Logos.DivineImmutability (ModalInvariance ofGround_modal_invariance)
 
 /-- Universal Modal Grounding:
     The entity grounds every entity that exists across EVERY possible world.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 def UniversalModalGround (g : Entity) : Prop :=
   ∀ (w : World) (e : Entity), ExistsAt w e → e = g ∨ GroundsEntity g e
 
 /-- The Ground of Reality is a Universal Modal Ground:
     For every possible world `w` and every entity `e` existing in `w`,
     `Entity.ofGround` grounds `e`.
-    Footprint: `{Means, Subject}` (0 substantive axioms). -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}` (0 substantive axioms). -/
 theorem ofGround_universal_modal_ground :
     UniversalModalGround Entity.ofGround := by
   intro _w _e _hExists
@@ -78,13 +78,13 @@ theorem ofGround_universal_modal_ground :
 
 /-- World-Rigid Foundational Presence:
     The entity is present across all possible worlds.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 def WorldRigidPresence (e : Entity) : Prop :=
   ∀ w : World, ExistsAt w e
 
 /-- The Ground of Reality possesses World-Rigid Presence:
     it is present in every possible world.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem ofGround_world_rigid_presence :
     WorldRigidPresence Entity.ofGround := by
   intro _w
@@ -150,7 +150,7 @@ structure FoundationalOmnipresence (e : Entity) : Prop where
 /-- HEADLINE — Foundational Omnipresence of the Ground of Reality:
     `Entity.ofGround` satisfies Classical Foundational Omnipresence across all worlds,
     entities, and contents.
-    Footprint: `{Means, Subject}` (0 substantive axioms). -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}` (0 substantive axioms). -/
 theorem ofGround_foundational_omnipresence :
     FoundationalOmnipresence Entity.ofGround := {
   presence := ofGround_world_rigid_presence
@@ -166,7 +166,7 @@ theorem ofGround_foundational_omnipresence :
 /-- The Thomistic Principle of Omnipresence:
     Any entity that is present in all worlds, grounds every being across all worlds,
     operates non-reciprocally, and possesses maximal capacity is foundationally omnipresent.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem omnipresence_from_universal_ground_and_aseity (e : Entity)
     (hPres : WorldRigidPresence e)
     (hUniv : UniversalModalGround e)

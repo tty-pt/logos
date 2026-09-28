@@ -61,11 +61,13 @@ the realm's existence with it]`.
 **The two relations are kept distinct rather than merged, and the separation is the
 point:**
 
-- `Loves` is `Subject`-indexed (`Love.lean:49`); the ground is provably no `Subject`
-  (`the_ground_is_not_a_person`, C344). So "the ground loves" is **not well-formed** in
+- `Loves` is `Subject`-indexed (`Love.lean:49`); the ground-constructor is provably no
+  subject-correlate (`the_ground_is_not_a_person`, C344, re-scoped 2026-09-28: constructor
+  separation, not a verdict on the ground's personal kind). So "the ground loves" is **not well-formed** in
   this investigation's vocabulary — and it stays that way.
-- `GroundLoves` demands a *necessary* lover and no subject is necessary
-  (`no_subject_is_a_necessary_entity`, C329), so `Loves s t` never yields
+- `GroundLoves` demands a *necessary* lover and no *contingent-kind* subject is necessary
+  (`no_subject_is_a_necessary_entity`, C329, kind-relative 2026-09-28), so `Loves s t` of a
+  contingent-kind `s` never yields
   `GroundLoves (EntityOf s) _ _` (`subject_love_is_not_ground_love`, C346 — whose
   unused `_h : Loves s t` hypothesis makes the disjointness **stronger** than its motive).
 - The `GroundLoves → Loves` transfer is **unstatable, not merely unproved**
@@ -74,8 +76,9 @@ point:**
   without a hypostatic identification — which is bridge #9 (C228), untouched here.
 
 Why this matters for §§2–4 above: **merging the two relations would silently reinterpret
-T14 and `PersonStabilityPrinciple`** (`Love.lean:97`). The eternal mutual love proven
-there is interpersonal `Loves` between subjects, conditional on `AxTwoSubjects`; the
+T14 and `PersonStabilityPrinciple`** (`Love.lean:101`). The eternal mutual love proven
+there is interpersonal `Loves` between subjects, conditional on kind-relative stability,
+love, and an exhibited necessary-kind pair (2026-09-28; C43 still under `AxTwoSubjects`); the
 ground's love is a kind-claim about `Entity.ofGround` (`the_ground_is_a_necessary_and_chosen_lover`,
 C343, PROVEN↑ under the two prices). Neither is the other, and the ledger records both
 refusals: C338 kills the unrestricted ground-love bridge (an atom is contingent *and*

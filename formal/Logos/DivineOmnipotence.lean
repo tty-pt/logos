@@ -43,9 +43,9 @@ This module formalizes the characteristic of **Foundational Omnipotence**
 - **The causal/creative sense remains BLOCKED** and is *not* claimed here. "Can
   bring X about" needs a production relation Γ does not have: the only initiation
   relation is `Agency.Initiates : Subject → State → State → Prop → Prop`
-  (`Agency.lean:150`), a declared VOCAB axiom, and it is **subject**-indexed while
+  (`Agency.lean:168`), a declared VOCAB axiom, and it is **subject**-indexed while
   `Entity.ofGround` is provably not a subject correlate
-  (`ofGround_ne_ofSubject`, `NecessityEternity.lean:155`). The exact missing
+  (`ofGround_ne_ofSubject`, `NecessityEternity.lean:160`). The exact missing
   statements are recorded in `formal/GAPMAP.md` (Level 17) and `theorems/T27.txt`
   (written here without the `axiom`/`def` keywords on purpose — a line starting
   with `axiom` inside this header is parsed as a real axiom declaration by `depviz`
@@ -89,7 +89,7 @@ namespace Logos.DivineOmnipotence
 open Logos.Semantics (Form World Satisfies sat_and sat_not)
 open Logos.Entity (Entity EntityOf ExistsAt actualWorld)
 open Logos.Modal (NecessaryEntity)
-open Logos.Agency (Subject)
+open Logos.Agency (Subject NecessarySubjectKind ContingentSubjectKind)
 open Logos.Necessity (WProp)
 open Logos.RecoveredOntologicalGround (GroundsEntity)
 open Logos.FoundationalOmnipresence
@@ -114,7 +114,7 @@ def PossibleAt (frame : KripkeFrame World) (w : World) (P : WProp) : Prop :=
     and the content P obtains at `v`. This is a **definition**, not a derivation:
     C241 machine-checks that the price is real (presence ⇏ production), and the
     causal/creative sense stays BLOCKED.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 def OperatesAt (v : World) (e : Entity) (P : WProp) : Prop :=
   ExistsAt v e ∧ P v
 
@@ -173,7 +173,7 @@ theorem existence_everywhere_does_not_entail_operation :
     proof is the two clauses of `OperatesAt`: the ground is present at `v` by the
     world-rigid constructor (stipulation ◈ `ofGround_existsAt`) and the content
     obtains at `v` by the witness. Zero substantive axioms.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem ofGround_gapless_operative_scope :
     GaplessOperate (UniversalFrame World) OperatesAt Entity.ofGround := by
   intro w P ⟨v, hRv, hPv⟩
@@ -183,7 +183,7 @@ theorem ofGround_gapless_operative_scope :
     obtains**. Nothing unobtained — hence nothing unsatisfiable — is within the
     ground's operative scope. (Holds of every entity under `OperatesAt`, hence of
     the ground with no premise at all.)
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem ofGround_operates_only_what_obtains :
     ∀ v : World, ∀ P : WProp, OperatesAt v Entity.ofGround P → P v := by
   intro v P h
@@ -197,7 +197,7 @@ theorem ofGround_operates_only_what_obtains :
     including contradictions") — and it is refuted **by** the orthodox
     restriction, not against it. The cost is `propext`, inherited from
     `Semantics.nonContradiction` (C14, `CL`).
-    Footprint: `{propext, Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
 theorem ofGround_does_not_operate_contradictions (v : World) (φ : Form) :
     ¬ OperatesAt v Entity.ofGround
         (fun u => Satisfies u (Form.and φ (Form.not φ))) := by
@@ -216,7 +216,7 @@ theorem ofGround_does_not_operate_contradictions (v : World) (φ : Form) :
     exactly where its atomic content obtains, so it misses every world in which
     that content is denied — the witness being the content `¬atom n` itself, which
     is satisfiable (`(fun _ => TV.f)`) and yet unobtained wherever the atom
-    exists. Footprint: `{Subject}`. -/
+    exists. Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem atom_not_gapless_operate (n : Nat) :
     ¬ GaplessOperate (UniversalFrame World) OperatesAt (Entity.ofAtom n) := by
   intro hG
@@ -226,32 +226,53 @@ theorem atom_not_gapless_operate (n : Nat) :
         Logos.Semantics.TV.noConfusion hc⟩
   exact hPv hEv
 
-/-- Exhaustive exclusion: a subject is not a gapless operator. A subject exists
-    only at the actual world, so it misses every satisfiable content denied there
-    — witness `¬atom 0`, which is satisfiable in `(fun _ => TV.f)` and yet denied
-    at `actualWorld`. Footprint: `{Subject}`. -/
-theorem discriminating_subject_not_gapless_operate (s : Subject) :
+/-- Exhaustive exclusion: a subject of the contingent kind is not a gapless
+    operator. Such a subject exists only at the actual world, so it misses
+    every satisfiable content denied there — witness `¬atom 0`, which is
+    satisfiable in `(fun _ => TV.f)` and yet denied at `actualWorld`. The
+    necessary kind is excluded from this verdict by hypothesis: a necessary-kind
+    subject is present everywhere, so the argument does not touch it.
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem discriminating_subject_not_gapless_operate (s : Subject)
+    (hKind : ContingentSubjectKind s) :
     ¬ GaplessOperate (UniversalFrame World) OperatesAt (EntityOf s) := by
   intro hG
   obtain ⟨v, _, hEv, hPv⟩ :=
     hG actualWorld (fun u => Satisfies u (Form.not (Form.atom 0)))
       ⟨fun _ => Logos.Semantics.TV.f, trivial, fun hc =>
         Logos.Semantics.TV.noConfusion hc⟩
-  have hEvEq : v = actualWorld := hEv
-  subst v
-  exact hPv rfl
+  dsimp [OperatesAt, ExistsAt, Logos.Entity.EntityExistsAt,
+    Logos.Entity.SubjectExistsAt, EntityOf] at hEv
+  rcases hEv with hk | heq
+  · exact hKind hk
+  · subst heq
+    exact hPv rfl
 
-/-- **The ground is the sole gapless operator in the Γ inventory.** Together with
-    the exclusions of §4, this closes the characteristic: among the three
-    constructors of `Entity`, only `Entity.ofGround` has gapless operative scope.
-    Footprint: `{Subject}`. -/
-theorem ofGround_sole_gapless_operator (e : Entity)
+/-- **Gapless operators are the ground and the necessary-kind subjects.** Together
+    with the exclusions of §4, this closes the characteristic: among the three
+    constructors of `Entity`, gapless operative scope belongs to
+    `Entity.ofGround` and to subject-correlates of the necessary kind — never to
+    atoms, never to contingent-kind subjects. The necessary-kind disjunct is the
+    honest price of the two-kinds doctrine: whoever is present everywhere
+    operates everywhere satisfiable. Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem gapless_operators_are_ground_or_necessary_kind (e : Entity)
     (h : GaplessOperate (UniversalFrame World) OperatesAt e) :
-    e = Entity.ofGround := by
+    e = Entity.ofGround ∨
+      ∃ s : Subject, NecessarySubjectKind s ∧ e = EntityOf s := by
   cases e with
-  | ofSubject s => exact False.elim (discriminating_subject_not_gapless_operate s h)
+  | ofSubject s =>
+      obtain ⟨v, _, hEv, hPv⟩ :=
+        h actualWorld (fun u => Satisfies u (Form.not (Form.atom 0)))
+          ⟨fun _ => Logos.Semantics.TV.f, trivial, fun hc =>
+            Logos.Semantics.TV.noConfusion hc⟩
+      dsimp [OperatesAt, ExistsAt, Logos.Entity.EntityExistsAt,
+        Logos.Entity.SubjectExistsAt, EntityOf] at hEv
+      rcases hEv with hk | heq
+      · exact Or.inr ⟨s, hk, rfl⟩
+      · subst heq
+        exact absurd rfl hPv
   | ofAtom n => exact False.elim (atom_not_gapless_operate n h)
-  | ofGround => rfl
+  | ofGround => exact Or.inl rfl
 
 -- ============================================================================
 -- Section 5: The Master Synthesis — Foundational Omnipotence
@@ -281,7 +302,7 @@ structure FoundationalOmnipotence (g : Entity) : Prop where
     affairs, it operates only what obtains, and (per the carried field) it can
     never operate a contradiction. Zero substantive axioms; the whole footprint is
     the declared vocabulary `{Means, Subject}` (plus `propext`, from C14).
-    Footprint: `{Means, Subject, propext}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject, propext}`. -/
 theorem ofGround_foundational_omnipotence :
     FoundationalOmnipotence Entity.ofGround :=
   { gapless_operate := ofGround_gapless_operative_scope
@@ -295,7 +316,7 @@ theorem ofGround_foundational_omnipotence :
     (Aquinas *ST* I q. 25 a. 5: the ground is *semper et ubique*); the conclusion
     is proved from world-rigid presence and universal grounding alone — the two
     non-contradictory horns hold of every entity under `OperatesAt` with no
-    premise at all. Footprint: `{Means, Subject, propext}`. -/
+    premise at all. Footprint: `{Means, NecessarySubjectKind, Subject, propext}`. -/
 theorem necessity_and_presence_yield_foundational_omnipotence
     (e : Entity) (_hNec : NecessaryEntity e) (hPres : WorldRigidPresence e)
     (hUniv : UniversalModalGround e) :
@@ -394,7 +415,7 @@ theorem exhaustive_scope_without_operative_scope :
 #print axioms ofGround_does_not_operate_contradictions
 #print axioms atom_not_gapless_operate
 #print axioms discriminating_subject_not_gapless_operate
-#print axioms ofGround_sole_gapless_operator
+#print axioms gapless_operators_are_ground_or_necessary_kind
 #print axioms ofGround_foundational_omnipotence
 #print axioms necessity_and_presence_yield_foundational_omnipotence
 #print axioms satisfiable_scope_is_nonempty_and_contradiction_free

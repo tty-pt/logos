@@ -84,9 +84,12 @@ declarada (só SEM/META).
   C373 (não pode ser julgada correcta), C375 (**`¬ ∃ s, Asserts s NoMeaning`** —
   "afirmar que não há significado é provar a invalidade da propria afirmação",
   C377 na forma positiva: afirmar a tese produz uma instância de `Meaning_I`).
-  **O verso não muda e a tese não é declarada falsa quanto ao conteúdo:** C382
-  (`{}`) é um mundo populado onde "não há significado" é verdadeiro e inafirmável.
-  O que o lote elimina é a tese *enquanto resposta*, não a sua consistência.
+  **O verso não muda; o que mudou é o estatuto do conteúdo (REFUTAÇÃO 2026-09-27,
+  C401/C402):** a tese **é** declarada falsa *em Γ* — C401 refuta-a na ponte da
+  pluralidade, C402 no dado-do-acto. O que C382 (`{}`) conserva é a consistência
+  da forma numa assinatura livre, não um mundo possível da teoria. O que o lote
+  elimina continua a ser a tese *enquanto resposta*; o que a refutação acrescenta
+  é a tese *enquanto conteúdo de Γ*.
   **Verbos (2026-09-27):** a contradição performativa é contra a afirmação
   *bem-sucedida*, não contra o acto de dizer. C375 exclui
   `∃ s, Asserts s NoMeaning` — e `Asserts s p` é `Act s p ∧ p`; nenhum `assert`
@@ -123,6 +126,9 @@ declarada (só SEM/META).
   ALONE_EXCLUDED é agora teorema, mas sob a ponte de pluralidade, não `{}`). "Tem de haver este Ser, e o certo e
   o errado também têm de haver" → C68 (`Cogito`, `{Initiates, Means, State, Subject}`) + C37/C38. "Tem de
   haver quem se possa Amar" → PROVEN↑ C41 (`T13_someoneLovable`, via C40, sob `AxTwoSubjects`); C75 **BLOCKED**.
+  **Nota de género (2026-09-28):** "este Ser" — o Ser Eterno — é do género *necessário* (C404/C407–C409);
+  o homem, o irmão, o "eu" do verso são do género *contingente*. Os dois géneros estão diferenciados
+  no núcleo (`NecessarySubjectKind`/`ContingentSubjectKind`, `SubjectExistsAt` lê o género) e nunca colapsados.
 - L22/L24 (P5/P6) — o polo moral: "não ajuda nem prejudica ninguém" lido relacionalmente dá a
   **definição justa** `Good s a := ∃ t ≠ s, Person t ∧ Helps s t ∧ ¬ Harms s t` (só vocabulário,
   `{Means, Subject}`), e o bem moral **existe**: `moral_good_obtains` (C178) PROVEN↑ sob a ponte META
@@ -131,8 +137,9 @@ declarada (só SEM/META).
   próprio contramodelo. O polo negativo `Evil` permanece um datum **SEM declarado**. (T16, GAPMAP F3.)
 - L24 (P6): "não é impessoal, e não é sózinho" → C40/C73/C74 (C73 BLOCKED, C40/C74 PROVEN↑ sob
   `AxTwoSubjects`); "Amar é escolhido e
-  também é necessário (de alguma forma)" → PROVEN↑ C42–C45 (T14, `{AxTwoSubjects, Means, Subject}`,
-  *condicionais* à hipótese `PluralityLovePrinciple`, nunca provada; NÃO são `{}`); C76 **BLOCKED**
+  também é necessário (de alguma forma)" → PROVEN C42–C45 (T14, `{Means, NecessarySubjectKind, Subject}`,
+  *condicionais* ao par de género-necessário exibido mais `PluralityLovePrinciple`, nunca provados; NÃO são `{}`;
+  2026-09-28: `AxTwoSubjects` saiu destas linhas — exibir o género subsume a testemunha de T12); C76 **BLOCKED**
   (a forma canónica rígida foi excidida).
 - L26–30: "este mundo é necessário? Não" — ✔ **PROVEN desde 2026-09-27**: a leitura da
   necessidade é refutada por `CosmicExistence.realm_existence_does_not_imply_realm_necessity`
@@ -142,7 +149,9 @@ declarada (só SEM/META).
   "criação" nomeia a região da realidade que é actual, modal-frágil e não é o solo, e nenhuma
   relação `Creates`, agente ou primeiro momento é reivindicado ou derivável; "há propósito"
   continua a ser **zona de fé** (F9, pista L4, DEFERRED); "existe este Ser Pessoal" — PROVEN
-  (T8, `the_person_supports_the_reality_of_right`, `GroundOfReality`).
+  (T8, `the_person_supports_the_reality_of_right`, `GroundOfReality`) **e** Claim D derivada
+  (C409, `necessary_person_derived_from_bridge`, sob a ponte META C404): o Ser Pessoal é do
+  género necessário; o habitante do mundo, do contingente.
 - L38 ("Eu Escolho! Escolho admitir que: Sou"): o proferimento de admitir/negar é o
   próprio evento performativo fraco (`act`) — C58 (`Agency.noWeakAct_selfRefutes`, `{Subject, act}`)
   refuta a negação de eventos realizados; a asserção intencional forte é C68 (`Agency.Cogito`, `{Means, Subject}`),

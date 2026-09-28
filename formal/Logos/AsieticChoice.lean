@@ -27,7 +27,7 @@ derived, not posited, and the deduction passes from the field to genuine choice 
 ## Why `TrueChoice` is built on `Chooses` and not on `DeliberateChoice`
 
 `Logos.Choice.DeliberateChoice` conjoins `Asserts s p`. `Asserts s p := Act s p ∧ p`
-(`Agency.lean:295`), `Act s p` forces `Initiates`, and `Initiates` (`Agency.lean:150`) is an
+(`Agency.lean:313`), `Act s p` forces `Initiates`, and `Initiates` (`Agency.lean:168`) is an
 uninterpreted VOCAB axiom with **no existence instance anywhere in Γ** — no axiom anywhere
 concludes `Act` or `Initiates`. Building `TrueChoice` on `DeliberateChoice` therefore imports a
 witness that the corpus cannot supply, and the choice frontier looks blocked for that reason alone.
@@ -494,7 +494,7 @@ theorem asietic_is_true_freedom {s : Subject} {p q : Prop}
     `ContingentEntity` requires are exactly the two conjuncts `ground_of_reality_grounds_finite_
     subject` needs, so no helper is required. Divine necessity grounds the contingent order in
     which freedom operates, while the choosing remains the contingent subject's own act.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem the_ground_grounds_a_contingent_true_chooser {s : Subject} {p q : Prop}
     (_h : TrueChoice s p q) (hCont : ContingentEntity (EntityOf s)) :
     GroundsEntity Entity.ofGround (EntityOf s) :=
@@ -502,7 +502,7 @@ theorem the_ground_grounds_a_contingent_true_chooser {s : Subject} {p q : Prop}
     ofGround_necessary_ground_of_reality s hCont.2 hCont.1
 
 /-- A true chooser at a contingent stage is externally grounded: grounded, and distinct from the
-    ground. Footprint: `{Means, Subject}`. -/
+    ground. Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem contingent_true_chooser_is_externally_grounded {s : Subject} {p q : Prop}
     (h : TrueChoice s p q) (hCont : ContingentEntity (EntityOf s)) :
     ExternalGrounding Entity.ofGround (EntityOf s) :=
@@ -517,7 +517,7 @@ theorem contingent_true_chooser_is_externally_grounded {s : Subject} {p q : Prop
     The contingency premise is explicit rather than smuggled. An earlier version derived it from an
     openness conjunct about the chooser's own entity, which made the separation look unconditional
     when it was not.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem contingent_asietic_is_not_canonically_aseitous {s : Subject} {p q : Prop}
     (h : TrueChoice s p q) (hCont : ContingentEntity (EntityOf s)) :
     ¬ CanonicalAseity (EntityOf s) := by

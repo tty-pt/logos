@@ -114,6 +114,7 @@ theorem is the constitutive claim in `Logos.PersonalGroundOfReality`.
 
 theorem subject_exists_at_actualWorld (s : Subject) : ExistsAt actualWorld (EntityOf s) := by
   dsimp [ExistsAt, Logos.Entity.EntityExistsAt, Logos.Entity.SubjectExistsAt, EntityOf]
+  exact Or.inr rfl
 
 /-- Contingent finite subjects are numerically distinct from any necessary entity.
     Prevents modal collapse and preserves the separation of the human subject from the ground. -/

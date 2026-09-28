@@ -4,7 +4,7 @@
     {
       "def": "Logos.Agency.weak_act_implies_strong_act",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 3 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "GAPMAP prose mention: table L491 (disclosure in prose only; no dedicated claim row)",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "Cogito_of_bridge",
@@ -15,7 +15,7 @@
     {
       "def": "Logos.BipolarityRetorsion.JudicativeBipolarityProp",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "level_1_conditional_bipolarity_boundary"
@@ -24,7 +24,7 @@
     {
       "def": "Logos.Choice.DoubtingDatum",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 2 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "freeWill_exists_of_doubt_datum",
@@ -34,7 +34,7 @@
     {
       "def": "Logos.Choice.NoChoiceField",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "GAPMAP row C53 (L803); also L182",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "noChoiceField_contradicts_field"
@@ -43,7 +43,7 @@
     {
       "def": "Logos.Choice.act_implies_asserts_bridge",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "GAPMAP row C99 (L819); also L287, table L500, table L542",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "selection_exists_of_act"
@@ -52,7 +52,7 @@
     {
       "def": "Logos.Choice.act_polarity_principle",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 7 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "act_polarity_implies_conditional",
@@ -67,7 +67,7 @@
     {
       "def": "Logos.Choice.bilateral_intentionality_principle",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 3 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "bilateral_implies_act_polarity",
@@ -78,7 +78,7 @@
     {
       "def": "Logos.Choice.contrastive_agency_principle",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 4 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "contrastive_agency_implies_existential",
@@ -90,7 +90,7 @@
     {
       "def": "Logos.Choice.deliberateGenuineChoiceResource",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 2 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "GAPMAP prose mention: table L505 (disclosure in prose only; no dedicated claim row)",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "deliberateChoice_exists_of_assertion_and_negation_meaning",
@@ -100,7 +100,7 @@
     {
       "def": "Logos.Choice.doubt_existence_bridge",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 2 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "freeWill_exists_of_doubt_bridge",
@@ -110,7 +110,7 @@
     {
       "def": "Logos.Choice.existential_act_polarity",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 2 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "freeWill_exists_of_existential_act_polarity",
@@ -120,7 +120,7 @@
     {
       "def": "Logos.Choice.existential_intentional_choice",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "freeWill_exists_of_existential_choice"
@@ -129,7 +129,7 @@
     {
       "def": "Logos.DirectNormativeRetorsion.NoRight",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "GAPMAP row C102 (L429), row C103 (L430), row C104 (L431), row C105 (L432), row C179 (L433), row C147 (L1611), row C191 (L1713); also L121",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "proof_criticism_nihilism_self_refuting"
@@ -138,7 +138,7 @@
     {
       "def": "Logos.FoundationalUnicity.AsymmetricGrounding",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "GAPMAP row C207 (L1795)",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "universal_ground_unicity"
@@ -147,7 +147,7 @@
     {
       "def": "Logos.Love.PersonStabilityPrinciple",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 3 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "GAPMAP prose mention: L852, L856 (disclosure in prose only; no dedicated claim row)",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "T14_eternalRelation_conditional",
@@ -158,7 +158,7 @@
     {
       "def": "Logos.Love.PluralityLovePrinciple",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 4 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "GAPMAP prose mention: L1178, L1439, L1692 (disclosure in prose only; no dedicated claim row)",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "T14_content_conditional",
@@ -170,7 +170,7 @@
     {
       "def": "Logos.RealityHookAudit.D",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "GAPMAP row C102 (L429), row C103 (L430), row C104 (L431), row C105 (L432), row C179 (L433), row C78 (L450), row C79 (L451), row C87 (L452), row C88 (L453), row C89 (L454), row C90 (L484), row F1b (L758), row F2 (L759), row F3 (L760), row F6 (L763), row F1bUncond (L764), row C36 (L783), row C38 (L794), row C49 (L799), row C51 (L801), row C54 (L804), row C61 (L814), row C62 (L815), row C97 (L817), row C98 (L818), row C100 (L820), row C69 (L821), row C70 (L822), row C71 (L823), row C72 (L824), row C73 (L825), row C75 (L827), row C76 (L828), row C77 (L829), row C92 (L832), row C63 (L878), row C64 (L879), row C65 (L880), row C66 (L881), row C67 (L882), row C80 (L883), row C81 (L884), row C82 (L885), row F8 (L894), row F9 (L895), row C109 (L1518), row C110 (L1519), row C112 (L1521), row C115 (L1529), row C123 (L1537), row C139 (L1545), row C165 (L1549), row C167 (L1551), row C146 (L1562), row C162 (L1566), row C170 (L1570), row C221 (L1572), row C222 (L1573), row C227 (L1578), row C228 (L1579), row C229 (L1580), row C231 (L1582), row C232 (L1583), row C151 (L1615), row C152 (L1616), row C174 (L1656), row C175 (L1657), row C177 (L1659), row C187 (L1709), row C188 (L1710), row C189 (L1711), row C190 (L1712), row C192 (L1732), row C193 (L1733), row C194 (L1734), row C195 (L1735), row C196 (L1736), row C197 (L1754), row C198 (L1755), row C199 (L1756), row C200 (L1757), row C201 (L1758), row C202 (L1774), row C211 (L1799), row C212 (L1800), row C214 (L1820), row C215 (L1821), row C216 (L1822), row C217 (L1823), row C218 (L1824), row C219 (L1825), row C220 (L1826), row C233 (L1847), row C234 (L1848), row C235 (L1849), row C236 (L1850), row C237 (L1851), row C238 (L1852), row C239 (L1853), row C240 (L1854), row C241 (L1879), row C242 (L1880), row C243 (L1881), row C244 (L1882), row C245 (L1883), row C246 (L1884), row C247 (L1885), row C248 (L1886), row C249 (L1887), row C250 (L1888), row C251 (L1889), row F10 (L1890), row — (L1891), row C270 (L1932), row C271 (L1933), row C273 (L1935), row C274 (L1936), row C275 (L1937), row C277 (L1939), row F11 (L1949), row — (L1952), row C292 (L1994), row C293 (L1995), row C294 (L1996), row — (L1999), row C299 (L2004), row — (L2005), row F12 (L2007), row F13 (L2008); also L4, L5, L7, table L21, L28, table L52, L96, L101, L107, L128, L143, L153, L157, L159, L163, L172, L175, L182, L204, L206, L222, L239, L258, L263, L274, L282, L291, L323, L325, L326, L330, L334, L336, L342, L355, L376, L404, table L414, L436, table L442, L456, table L460, table L490, table L491, table L495, table L497, table L500, table L501, table L502, table L503, table L504, table L505, table L507, table L508, table L509, L511, L518, L523, L537, table L541, table L542, table L543, table L544, table L545, table L546, table L547, table L548, table L549, table L550, table L551, table L552, table L553, table L554, L557, L559, L561, L562, L563, L564, L565, L566, L567, L569, L574, L578, L580, L593, L594, L595, L599, L613, L614, L615, L616, L617, L619, L627, L628, L636, L637, L643, L644, L645, L657, L672, L685, L689, L690, L699, L706, L711, L738, L753, table L755, table L765, table L766, table L767, table L780, L834, L843, L844, L849, L855, L860, table L864, table L876, L887, table L889, table L891, L908, L911, L923, L925, L930, L934, L940, L951, L954, L956, L967, L968, L971, L973, L998, L1002, L1012, L1070, L1074, L1106, L1120, L1123, L1126, L1128, L1129, L1130, L1147, L1151, L1175, L1179, L1184, L1198, L1200, L1211, L1226, L1235, L1243, L1246, L1252, L1277, L1287, L1310, L1312, L1320, L1322, L1323, L1334, L1337, L1338, L1342, L1344, L1359, L1364, L1365, L1376, L1386, L1389, L1394, L1398, L1420, L1431, L1434, L1442, L1459, L1464, L1479, L1488, L1510, L1511, table L1515, table L1525, table L1541, table L1557, L1585, L1587, L1591, table L1609, L1620, table L1653, L1665, L1682, table L1707, L1728, table L1730, L1738, L1745, L1750, table L1752, L1760, L1766, table L1772, L1780, table L1793, L1803, L1809, L1816, table L1818, L1828, L1835, L1836, L1843, table L1845, L1856, L1867, L1871, L1875, table L1877, L1893, L1898, L1906, table L1919, L1972, L1973, table L1987, L2010, L2015, L2022",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "settlementChoice_compatible_with_case_D"
@@ -179,7 +179,7 @@
     {
       "def": "Logos.Retorsion.A17_strong",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "a17_strong_implies_a17_weak"
@@ -188,7 +188,7 @@
     {
       "def": "Logos.Retorsion.A17b",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "a17b_implies_a17_weak"
@@ -197,7 +197,7 @@
     {
       "def": "Logos.Retorsion.EverythingObjective",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "everything_objective_self_applies"
@@ -206,7 +206,7 @@
     {
       "def": "Logos.Retorsion.EverythingSubjective",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "everything_subjective_self_applies"
@@ -215,7 +215,7 @@
     {
       "def": "Logos.Retorsion.PigTranscendentalReflectionHypothesis",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "winged_pig_derived_of_pig_reflection"
@@ -224,7 +224,7 @@
     {
       "def": "Logos.Retorsion.RestrictedTranscendentalBridge",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 2 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "restricted_bridge_derives_a17_weak",
@@ -234,7 +234,7 @@
     {
       "def": "Logos.Retorsion.WeakenedTranscendentalReflectionHypothesis",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "weakened_retorsion_derives_intentional_subject"
@@ -243,7 +243,7 @@
     {
       "def": "Logos.RetorsiveNormativity.NoGN",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 2 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "GAPMAP row C157 (L479), row C158 (L480), row C159 (L481), row C160 (L482), row C161 (L483), row F1b (L758), row C141 (L1547), row C164 (L1548), row C165 (L1549), row C167 (L1551), row C270 (L1932), row C271 (L1933); also table L766, L1553, L1968, L1970",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "denial_of_genuine_normativity_is_self_refuting",
@@ -253,7 +253,7 @@
     {
       "def": "Logos.UndeniableNormativeDerivation.ConstitutiveRightWrong",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 2 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "bridge_a_constitutive_normativity_derives_free_will",
@@ -263,7 +263,7 @@
     {
       "def": "Logos.UndeniableNormativeDerivation.ExtensionalRightWrong",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "NOT MENTIONED IN GAPMAP.md — undisclosed in the ledger entirely",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "bridge_b_plurality_yields_choice_field"
@@ -272,7 +272,7 @@
     {
       "def": "Logos.Value.PersonsAffectPrinciple",
       "reason": "Inherited debt. An asserted Prop used as a bare-name premise by 1 declaration(s) and therefore invisible to `#print axioms`. The corpus discloses it in prose; it has NOT been re-reviewed here and has NO machine-enforced price (no Stipulations.lean diamond entry).",
-      "gapmap": "GAPMAP row C46 (L812), row C47 (L813)",
+      "gapmap": "GAPMAP §\"Dívida herdada de `def`-as-bridge\": table row of its own. DISCLOSED, NOT PAID -- the def is still a def and still invisible to `#print axioms`; the section's disclosed/reviewed/paid table is the authority, and `scripts/census_stipulated_defs.py --check` derives this field's truth from the ledger text rather than trusting it.",
       "reviewed": false,
       "dependents": [
         "valueInterpersonal_of_split_conditional"

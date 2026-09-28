@@ -37,7 +37,7 @@ def Contingent (e : Entity) : Prop := ¬ NecessaryEntity e
     entity that exists in every world. The lift is *definitional*: `ExistsAt`
     is one shared relation and `EntityOf` is the embedding, so both
     sides unfold to `∀ w, ExistsAt w (EntityOf s)`.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem subject_nec_entity_nec (s : Subject) :
     NecessarySubject s → NecessaryEntity (EntityOf s) := by
   intro hs

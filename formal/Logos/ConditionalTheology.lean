@@ -603,9 +603,9 @@ theorem a_populated_contingent_world_can_also_carry_creation :
     free structure (`CreationWorld`), not a model of Γ and not a candidate for
     reality. It says the necessary-ground premises do not *derive* a creation record.
     It says nothing about whether the contingent world exists — that is
-    `CosmicExistence.cosmos_obtains` (C350), a **proved theorem** (proved 2026-09-27;
-    it was a declared `Tag: SEM` axiom until then) resting on the plurality bridge
-    `AxTwoSubjects` — and `the_creation_countermodel_is_a_populated_contingent_world`
+    `CosmicExistence.cosmos_obtains` (C367), a **proved theorem** given an exhibited
+    contingent person (2026-09-28, two-kinds; the plurality bridge left this row) — and
+    `the_creation_countermodel_is_a_populated_contingent_world`
     proves the countermodel used here is no empty world.
 
     Note the two facts are independent and both hold: Γ **proves** a contingent realm

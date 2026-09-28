@@ -1,0 +1,105 @@
+{
+ "stipulations": [
+  {
+   "def": "ofGround_existsAt",
+   "name": "ofGround_existsAt",
+   "location": "Entity.lean:66",
+   "anchor": "Entity.ofGround => True",
+   "tag": "VOCAB",
+   "cost": "World-rigidity stipulated by match arm: necessity theorems about ofGround unfold this True.",
+   "dependents": [
+    "ofGround_necessary",
+    "the_ground_everlasting",
+    "the_ground_atemporal",
+    "everlasting_and_atemporal_ground",
+    "ofGround_necessary_ground_of_reality",
+    "ofGround_gapless_operative_scope",
+    "ofGround_foundational_omnipotence"
+   ]
+  },
+  {
+   "def": "ofGround_meansAll",
+   "name": "ofGround_meansAll",
+   "location": "RecoveredOntologicalGround.lean:50",
+   "anchor": "Entity.ofGround => True",
+   "tag": "VOCAB",
+   "cost": "Meaning-everything stipulated by match arm (duplicated at NecessaryPersonalGround.lean:155): grounding theorems about ofGround unfold this True.",
+   "dependents": [
+    "ofGround_ground_of_reality",
+    "ofGround_undivided_meaning",
+    "ofGround_necessary_ground_of_reality",
+    "ofGround_truth_exhaustive",
+    "ofGround_world_truth_exhaustive",
+    "ofGround_not_truth_tracking",
+    "ofGround_foundational_omniscience"
+   ]
+  },
+  {
+   "def": "ofGround_noInternalComponents",
+   "name": "ofGround_noInternalComponents",
+   "location": "DivineSimplicity.lean:94",
+   "anchor": "Entity.ofGround => False",
+   "tag": "VOCAB",
+   "cost": "Indivisibility stipulated by match arm: the simplicity theorem unfolds this False.",
+   "dependents": [
+    "ofGround_has_no_internal_components"
+   ]
+  },
+  {
+   "def": "operatesAt_presencePlusObtaining",
+   "name": "operatesAt_presencePlusObtaining",
+   "location": "DivineOmnipotence.lean:118",
+   "anchor": "def OperatesAt",
+   "tag": "SEM",
+   "cost": "Operation identified with presence-plus-obtaining: foundational omnipotence is proved over the weakened reading; the causal/creative sense stays BLOCKED.",
+   "dependents": [
+    "ofGround_gapless_operative_scope",
+    "ofGround_operates_only_what_obtains",
+    "ofGround_does_not_operate_contradictions",
+    "gapless_operators_are_ground_or_necessary_kind",
+    "ofGround_foundational_omnipotence",
+    "necessity_and_presence_yield_foundational_omnipotence"
+   ]
+  },
+  {
+   "def": "asietyFreedom_ofGroundFreedom",
+   "name": "asietyFreedom_ofGroundFreedom",
+   "location": "AsietyFreedom.lean:119",
+   "anchor": "def AsietyFreedomOfGround",
+   "tag": "META",
+   "cost": "The ground's being the ground of freedom is declared, not derived: GroundsEntity is vacuous, GroundsRightWrong is definitionally FreeWill (C168), and substantive grounding is BLOCKED (C228). Priced by three {} countermodels; the universal reading is strictly stronger than the existential one.",
+   "dependents": [
+    "asietyFreedom_yields_trueChoice",
+    "asietyFreedom_yields_asietyFreeWill",
+    "asietyFreeWill_yields_trueChoice",
+    "asietyFreedom_summary"
+   ]
+  },
+  {
+   "def": "performativeActDatum",
+   "name": "performativeActDatum",
+   "location": "Agency.lean:4",
+   "anchor": "The performative datum of §1",
+   "tag": "TRANS",
+   "cost": "The performative act-datum (someone acted), assumed as given rather than declared or derived, since a theorem discovers and does not manufacture. Registered so the God-lane's relocation of C367's price from the META bridge AxTwoSubjects to this datum is visible at all: a hypothesis is invisible to #print axioms, so the badge is the only signal. Free in axioms, not free in performance. Reject it and both dependents go; reject AxTwoSubjects and they stand.",
+   "dependents": [
+    "cosmos_presence_model_of_the_act_datum",
+    "the_ground_loves_the_cosmos_from_the_act_datum",
+    "noMeaning_is_refuted_from_the_act_datum"
+   ]
+  },
+  {
+   "def": "contingentWorldDatum",
+   "name": "contingentWorldDatum",
+   "location": "Entity.lean:34",
+   "anchor": "def actualWorld",
+   "tag": "TRANS",
+   "cost": "The world-datum (this world exists, and it is contingent), assumed as given rather than derived: the author stipulates the world the proof is written in exists, and only the consequences are in due. Registered so the world-datum is not silently merged with the performative act-datum in the C.1 preamble. Free in axioms, not free in performance. It eliminates the falsity world read as the actual world (WorldStance.falsityWorldAsActual) and settles that the falsity world is the necessary-subjects-only world; it does NOT reach a world of necessary subjects in general, which needs the BLOCKED contingent-inhabitation lemma, and it does NOT touch plurality (AxTwoSubjects is a separate META bridge). Reject it and the falsity-world elimination goes; the attack verdicts stand.",
+   "dependents": [
+    "falsityWorld_holds_no_contingent_subject",
+    "contingentSubject_might_not_have_existed",
+    "nothing_contingent_at_its_actual"
+   ]
+  }
+ ]
+}

@@ -52,7 +52,7 @@ content over `NecessaryEntity`/`ActualEntity`/`EntityMeans` is a function of the
 own properties, and therefore free.
 
 So the content is a **primitive**, `GroundBearsGood`, exactly as `Means : Subject → Prop →
-Prop` is a primitive (`Agency.lean:74`). It is `Tag: VOCAB` — the missing relational
+Prop` is a primitive (`Agency.lean:92`). It is `Tag: VOCAB` — the missing relational
 vocabulary — and it constrains nothing, so the inhabitation is a genuine `Tag: META`
 commitment. This is the library's own pattern for moral content: `Means` (VOCAB) → `Good`
 (fair def) → `AxBenevolentBearingObtains` (META inhabitation). Here no fair definition is
@@ -79,19 +79,26 @@ meaning hypothesis, and the refutation is what justifies the restriction.
    `AxGroundLovesContingentRealm`; `the_ground_is_a_liver` adds the existential, and
    `the_ground_is_a_necessary_and_chosen_lover` is the "necessary ∧ chosen" cell of
    `poem.txt:24` with a direction of good in it.
-3. **No person can occupy the necessary pole** (`no_subject_is_a_necessary_entity`,
-   `only_the_ground_is_necessary`). Note this is **forced by the three-constructor
-   ontology** — `EntityExistsAt w .ofGround := True`,
-   `SubjectExistsAt w s := w = actualWorld`, atoms fail somewhere — so it is a structural
-   fact of the modelling and **not** evidence that the ground loves. Its legitimate
-   content is negative: the "necessary ∧ chosen" cell contains no person. The "necessary"
-   pole of interpersonal love is handled elsewhere, by T14 / C42–C45, conditionally on
-   `PluralityLovePrinciple`.
-4. **The two relations are provably disjoint** (`subject_love_is_not_ground_love`,
-   `interpersonal_love_never_reaches_the_necessary_quadrant`): `GroundLoves` demands a
-   *necessary* lover and no subject is necessary, so `Loves s t` never yields
-   `GroundLoves (EntityOf s) _ _`. The transfer the original design asked for is recorded as
-   **unstatable, not merely blocked** (`ground_love_cannot_be_read_as_person_love`).
+3. **No contingent person can occupy the necessary pole**
+    (`no_subject_is_a_necessary_entity`,
+    `necessary_entities_are_ground_or_necessary_kind`). The contingent-kind
+    half is **forced by the three-constructor ontology** —
+    `EntityExistsAt w .ofGround := True`, contingent-kind subjects exist only at
+    the actual world, atoms fail somewhere — so it is a structural fact of the
+    modelling and **not** evidence that the ground loves. Its legitimate content
+    is now positive: the "necessary ∧ chosen" cell of `poem.txt:24` is occupied
+    — by the ground, and by whoever is of the necessary kind
+    (`Plurality.necessaryPersonalSubjectExists`, `Tag: META`). The "necessary"
+    pole of interpersonal love is discharged here and, conditionally, by T14 /
+    C42–C45.
+4. **The two relations are provably disjoint on the contingent side**
+    (`subject_love_is_not_ground_love`,
+    `interpersonal_love_never_reaches_the_necessary_quadrant`): `GroundLoves`
+    demands a *necessary* lover and no contingent-kind subject is necessary, so
+    `Loves s t` of a contingent-kind `s` never yields
+    `GroundLoves (EntityOf s) _ _`. The transfer the original design asked for is recorded as
+    **unstatable for the contingent kind, not merely blocked**
+    (`ground_love_cannot_be_read_as_person_love`).
 5. **Compatibility with `actus purus`** (`ground_love_preserves_pure_actuality`): the
    ground's love requires no initiation, so `DivinePureActuality` is untouched. Love as
    *act* adds to pure actuality rather than contradicting it (Aquinas, ST I q.20 a.3).
@@ -131,7 +138,7 @@ import Logos.DivinePureActuality
 namespace Logos.LovesAsGround
 
 open Logos.Semantics (World TV)
-open Logos.Agency (Subject State Initiates)
+open Logos.Agency (Subject State Initiates NecessarySubjectKind ContingentSubjectKind)
 open Logos.Entity (Entity ExistsAt EntityOf EntityExistsAt SubjectExistsAt actualWorld)
 open Logos.RecoveredOntologicalGround (EntityMeans GroundsEntity)
 open Logos.Love (Loves)
@@ -155,8 +162,8 @@ theorem falsityWorld_ne_actualWorld : (fun _ => TV.f) ≠ actualWorld := by
   simp [actualWorld] at h
 
 /-- An atom is contingent: actual at the actual world, refuted at the all-`TV.f` world,
-    because `EntityExistsAt w (ofAtom n) := w n = TV.t` (`Entity.lean:45-48`).
-    Footprint: `{Subject, propext}`. -/
+    because `EntityExistsAt w (ofAtom n) := w n = TV.t` (`Entity.lean:53-56`).
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
 theorem an_atom_is_contingent (n : Nat) : ContingentEntity (Entity.ofAtom n) :=
   ⟨rfl, (fun _ => TV.f), by simp [ExistsAt, EntityExistsAt]⟩
 
@@ -171,22 +178,32 @@ theorem an_atom_is_contingent (n : Nat) : ContingentEntity (Entity.ofAtom n) :=
     `: CreatedRealm`) under the plurality bridge `AxTwoSubjects`. Note that "created" names
     the region of reality — actual, modal-fragile, and not the ground — and never an act of
     production; no `Creates` relation is claimed or derivable.
-    Footprint: `{Subject, propext}`. -/
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
 theorem a_contingent_entity_exists : ∃ t : Entity, ContingentEntity t :=
   ⟨Entity.ofAtom 0, an_atom_is_contingent 0⟩
 
-/-- **A contingent entity bearing content exists.** The witness is a subject, whose
-    `EntityMeans` unfolds to `Means s p` — a primitive `Tag: VOCAB` **axiom**
-    (`Agency.lean:74`). `Means` has no derivable instance in Γ, so this theorem *consumes*
-    a `Means` inhabitant rather than producing one: its hypothesis is the honest form of
-    that dependency. Note what this does **not** do: it does not identify the subject with
-    the cosmos. It supplies only the shape the love inhabitation needs.
-    Footprint: `{Means, Subject, propext}`. -/
+/-- **A contingent entity bearing content exists.** The witness is a subject of the
+    contingent kind, whose `EntityMeans` unfolds to `Means s p` — a primitive
+    `Tag: VOCAB` **axiom** (`Agency.lean:92`). `Means` has no derivable instance
+    in Γ, so this theorem *consumes* a `Means` inhabitant rather than producing
+    one: its hypothesis is the honest form of that dependency. The kind premise
+    is load-bearing, not bureaucratic: only a contingent-kind subject is absent
+    somewhere, so only it can witness contingency. Note what this does **not**
+    do: it does not identify the subject with the cosmos. It supplies only the
+    shape the love inhabitation needs.
+    Footprint: `{Means, NecessarySubjectKind, Subject, propext}`. -/
 theorem a_meaningful_contingent_entity_exists
-    (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Means s p) :
+    (h : ∃ s : Subject, ContingentSubjectKind s ∧ ∃ p : Prop, Logos.Agency.Means s p) :
     ∃ t : Entity, ContingentEntity t ∧ ∃ p, EntityMeans t p := by
-  obtain ⟨s, p, hp⟩ := h
-  exact ⟨EntityOf s, ⟨rfl, (fun _ => TV.f), falsityWorld_ne_actualWorld⟩, p, hp⟩
+  obtain ⟨s, hKind, p, hp⟩ := h
+  have hActual : ExistsAt actualWorld (EntityOf s) := Or.inr rfl
+  have hAbsent : ¬ ExistsAt (fun _ => TV.f) (EntityOf s) := by
+    intro hEx
+    dsimp [ExistsAt, EntityExistsAt, SubjectExistsAt, EntityOf] at hEx
+    rcases hEx with hk | heq
+    · exact hKind hk
+    · exact falsityWorld_ne_actualWorld heq
+  exact ⟨EntityOf s, ⟨hActual, (fun _ => TV.f), hAbsent⟩, p, hp⟩
 
 -- ============================================================================
 -- Section 1: The ground as "merely a mathematical ground", machine-checked
@@ -217,41 +234,58 @@ theorem ground_grounds_the_meaningless :
 
 /-- Universal modal grounding of the ground, in the library's own form. Retained so the
     contrast with `GroundLoves` is read off a single pair of definitions.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem the_ground_is_a_universal_modal_ground :
     UniversalModalGround Entity.ofGround :=
   ofGround_universal_modal_ground
 
-/-- No subject is a necessary entity: subjects exist only at the actual world
-    (`SubjectExistsAt w s := w = actualWorld`), so a subject fails to exist in every other
-    world. This is why no person can occupy the necessary pole.
-    Footprint: `{Subject, propext}` (world structure alone). -/
-theorem no_subject_is_a_necessary_entity (s : Subject) : ¬ NecessaryEntity (EntityOf s) := by
+/-- No subject of the contingent kind is a necessary entity: such subjects exist
+    only at the actual world, so a contingent-kind subject fails to exist in
+    every other world. This is why no *contingent* person can occupy the
+    necessary pole. The necessary kind is excluded by hypothesis, not by
+    oversight: it occupies the pole by
+    `Plurality.necessaryKindSubject_is_necessary`.
+    Footprint: `{NecessarySubjectKind, Subject, propext}` (world structure alone). -/
+theorem no_subject_is_a_necessary_entity (s : Subject)
+    (hKind : ContingentSubjectKind s) : ¬ NecessaryEntity (EntityOf s) := by
   intro h
   have hf := h (fun _ => TV.f)
-  have hne : (fun _ => TV.f) ≠ actualWorld := falsityWorld_ne_actualWorld
-  exact hne hf
+  dsimp [ExistsAt, EntityExistsAt, SubjectExistsAt, EntityOf] at hf
+  rcases hf with hk | heq
+  · exact hKind hk
+  · exact falsityWorld_ne_actualWorld heq
 
-/-- The ground is the **unique** necessary entity: every other entity is either a subject
-    or an atom, and both are refuted above (atoms fail wherever a value is `TV.f`).
+/-- The necessary entities are the ground and the necessary-kind subjects: every
+    other entity is either a contingent-kind subject or an atom, and both are
+    refuted (contingent subjects fail at the all-`TV.f` world by the row above;
+    atoms fail wherever a value is `TV.f`).
 
-    Read this for what it is. It is **forced by the three-constructor ontology** —
-    `EntityExistsAt w .ofGround := True` is a definitional stipulation of the constructor,
-    `SubjectExistsAt w s := w = actualWorld`, and atoms are refuted at the all-`TV.f`
-    world — so it is a structural fact of the modelling and **not** evidence that the
-    ground loves. Its legitimate content is negative: the "necessary ∧ chosen" cell of
-    `poem.txt:24` contains no person. The "necessary" pole of love is discharged
-    elsewhere, by T14 / C42–C45, conditionally on `PluralityLovePrinciple`.
-    Footprint: `{Subject, propext}` (world structure and constructor analysis alone). -/
-theorem only_the_ground_is_necessary :
-    ∀ e : Entity, NecessaryEntity e → e = Entity.ofGround := by
+    Read this for what it is. The ground disjunct is **forced by the
+    three-constructor ontology** — `EntityExistsAt w .ofGround := True` is a
+    definitional stipulation of the constructor — and the subject disjunct is the
+    priced metaphysical bridge `Plurality.necessaryPersonalSubjectExists`
+    (`Tag: META`), never a derivation. Its legitimate content is now positive:
+    the "necessary ∧ chosen" cell of `poem.txt:24` is occupied — by the ground,
+    and by whoever is of the necessary kind. The "necessary" pole of love is
+    discharged here and, conditionally, by T14 / C42–C45.
+    Footprint: `{NecessarySubjectKind, Subject, propext}` (world structure and
+    constructor analysis alone; the inhabitant bridge is not unfolded here). -/
+theorem necessary_entities_are_ground_or_necessary_kind :
+    ∀ e : Entity, NecessaryEntity e →
+      e = Entity.ofGround ∨
+        ∃ s : Subject, NecessarySubjectKind s ∧ e = EntityOf s := by
   intro e h
   cases e with
-  | ofSubject s => exact absurd h (no_subject_is_a_necessary_entity s)
+  | ofSubject s =>
+      have hf := h (fun _ => TV.f)
+      dsimp [ExistsAt, EntityExistsAt, SubjectExistsAt, EntityOf] at hf
+      rcases hf with hk | heq
+      · exact Or.inr ⟨s, hk, rfl⟩
+      · exact absurd heq falsityWorld_ne_actualWorld
   | ofAtom n =>
       have hf := h (fun _ => TV.f)
       simp [ExistsAt, EntityExistsAt] at hf
-  | ofGround => rfl
+  | ofGround => exact Or.inl rfl
 
 -- ============================================================================
 -- Section 2: The missing vocabulary — a primitive directional good
@@ -301,7 +335,7 @@ axiom GroundBearsGood : Entity → Entity → Prop → Prop
     The `a : Prop` context-of-evaluation argument mirrors `Good s (_a : Prop)`
     (`MoralFrontierAudit.lean:203-204`), the library's existing idiom for a relational
     pole indexed by a context.
-    Footprint: `{GroundBearsGood, Means, Subject}`. -/
+    Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject}`. -/
 def GroundLoves (g : Entity) (t : Entity) (a : Prop) : Prop :=
   NecessaryEntity g ∧ ActualEntity t ∧ t ≠ g ∧ (∃ p, GroundBearsGood g t p) ∧
     (∃ q, EntityMeans t q) ∧ a
@@ -309,19 +343,19 @@ def GroundLoves (g : Entity) (t : Entity) (a : Prop) : Prop :=
 /-- Ground-level love is eternal in the lover: the lover is necessary. This is one half of
     the formal content of `poem.txt:24`'s "também é necessário" — the other half, that love
     is *chosen*, is the bridge of Section 3, not this conjunct.
-    Footprint: `{GroundBearsGood, Means, Subject}`. -/
+    Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject}`. -/
 theorem ground_love_requires_a_necessary_lover {g t : Entity} {a : Prop}
     (h : GroundLoves g t a) : NecessaryEntity g := h.1
 
 /-- Ground-level love is directed at a target distinct from the lover: love is not
-    self-regarding. Footprint: `{GroundBearsGood, Means, Subject}`. -/
+    self-regarding. Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject}`. -/
 theorem ground_love_is_directed_at_another {g t : Entity} {a : Prop}
     (h : GroundLoves g t a) : ActualEntity t ∧ t ≠ g := ⟨h.2.1, h.2.2.1⟩
 
 /-- **Ground-level love is content-bearing in the strong sense:** the ground holds some
     directional good *toward* the target. This is the conjunct with no first-order
     substitute, and the one the inhabitation axiom pays for.
-    Footprint: `{GroundBearsGood, Means, Subject}`. -/
+    Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject}`. -/
 theorem ground_love_bears_a_directional_good {g t : Entity} {a : Prop}
     (h : GroundLoves g t a) : ∃ p, GroundBearsGood g t p := h.2.2.2.1
 
@@ -329,14 +363,14 @@ theorem ground_love_bears_a_directional_good {g t : Entity} {a : Prop}
     `EntityMeans t q` for some `q`. Since `EntityMeans (ofAtom _) = False` and
     `EntityMeans Entity.ofGround _ = True`, this is what separates love from the ground's
     undiscriminated meaning-capacity.
-    Footprint: `{GroundBearsGood, Means, Subject}`. -/
+    Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject}`. -/
 theorem ground_love_requires_a_meaningful_target {g t : Entity} {a : Prop}
     (h : GroundLoves g t a) : ∃ q, EntityMeans t q := h.2.2.2.2.1
 
 /-- **Love cannot reach the meaningless.** A meaningless entity is not loved by the
     ground, in any context. This is the discriminating counterpart of
     `ground_grounds_the_meaningless`: grounding holds there, love does not.
-    Footprint: `{GroundBearsGood, Means, Subject}`. -/
+    Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject}`. -/
 theorem meaningless_entities_cannot_be_loved :
     ¬ ∃ a : Prop, GroundLoves Entity.ofGround (Entity.ofAtom 0) a := by
   rintro ⟨a, h⟩
@@ -347,7 +381,7 @@ theorem meaningless_entities_cannot_be_loved :
     conjunct is undiscriminated grounding; the right is the failure of love on the very
     same entity. This is the machine-checked content of "not *merely* a mathematical
     ground": the two relations differ, and they differ on an entity bearing no meaning.
-    Footprint: `{GroundBearsGood, Means, Subject}`. -/
+    Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject}`. -/
 theorem grounding_reaches_what_love_cannot :
     GroundsEntity Entity.ofGround (Entity.ofAtom 0) ∧
       ¬ ∃ a : Prop, GroundLoves Entity.ofGround (Entity.ofAtom 0) a :=
@@ -355,7 +389,7 @@ theorem grounding_reaches_what_love_cannot :
 
 /-- Grounding is total over entities while love is not: every entity is grounded, and not
     every contingent entity is loved.
-    Footprint: `{GroundBearsGood, Means, Subject, propext}`. -/
+    Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject, propext}`. -/
 theorem grounding_is_total_but_love_is_not :
     (∀ t : Entity, GroundsEntity Entity.ofGround t) ∧
       ¬ (∀ t : Entity, ContingentEntity t → ∃ a : Prop, GroundLoves Entity.ofGround t a) := by
@@ -375,7 +409,7 @@ theorem grounding_is_total_but_love_is_not :
     meaning. This theorem is the machine-checked reason the axiom below is stated over
     meaning-bearing targets only, and it is why this module does not claim the stronger,
     more attractive, and false statement.
-    Footprint: `{GroundBearsGood, Means, Subject, propext}`. -/
+    Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject, propext}`. -/
 theorem meaningful_love_bridge_is_refuted :
     ¬ (∀ t : Entity, ContingentEntity t → ∃ a : Prop, GroundLoves Entity.ofGround t a) :=
   fun hall => grounding_is_total_but_love_is_not.2 hall
@@ -418,7 +452,7 @@ axiom AxGroundLovesContingentRealm :
 
 /-- The bridge, applied: the ground loves every contingent created reality that bears
     content of its own.
-    Footprint: `{AxGroundLovesContingentRealm, GroundBearsGood, Means, Subject}`. -/
+    Footprint: `{AxGroundLovesContingentRealm, GroundBearsGood, Means, NecessarySubjectKind, Subject}`. -/
 theorem the_ground_loves_every_meaningful_contingent_reality {t : Entity}
     (h : ContingentEntity t) (hm : ∃ q, EntityMeans t q) :
     ∃ a : Prop, GroundLoves Entity.ofGround t a :=
@@ -428,7 +462,7 @@ theorem the_ground_loves_every_meaningful_contingent_reality {t : Entity}
     This is the least an inhabitant theorem can say, and it is where the whole price of the
     module sits — a `{}` reading of "the ground loves" would be a different, much weaker
     claim about meaning-capacity.
-    Footprint: `{AxGroundLovesContingentRealm, GroundBearsGood, Means, Subject}`. -/
+    Footprint: `{AxGroundLovesContingentRealm, GroundBearsGood, Means, NecessarySubjectKind, Subject}`. -/
 theorem the_ground_bears_a_directional_good_toward_the_cosmos {t : Entity}
     (h : ContingentEntity t) (hm : ∃ q, EntityMeans t q) :
     ∃ p, GroundBearsGood Entity.ofGround t p := by
@@ -440,9 +474,9 @@ theorem the_ground_bears_a_directional_good_toward_the_cosmos {t : Entity}
     `Means` hypothesis is the library's primitive content vocabulary being inhabited, which
     the caller obtains from its own datum (`Logos.CosmicExistence.CreatedRealm.bears_
     meaning`); nothing here identifies that subject with the cosmos.
-    Footprint: `{AxGroundLovesContingentRealm, GroundBearsGood, Means, Subject, propext}`. -/
+    Footprint: `{AxGroundLovesContingentRealm, GroundBearsGood, Means, NecessarySubjectKind, Subject, propext}`. -/
 theorem the_ground_is_a_liver
-    (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Means s p) :
+    (h : ∃ s : Subject, ContingentSubjectKind s ∧ ∃ p : Prop, Logos.Agency.Means s p) :
     ∃ t : Entity, ContingentEntity t ∧ (∃ q, EntityMeans t q) ∧
       ∃ p, GroundBearsGood Entity.ofGround t p := by
   obtain ⟨t, hc, hq⟩ := a_meaningful_contingent_entity_exists h
@@ -455,9 +489,9 @@ theorem the_ground_is_a_liver
     footprint names the whole price: the content vocabulary, the bridge, and the world's
     structure. No axiom of *free choice* is hidden here — the choice is exactly what
     `AxGroundLovesContingentRealm` declares.
-    Footprint: `{AxGroundLovesContingentRealm, GroundBearsGood, Means, Subject, propext}`. -/
+    Footprint: `{AxGroundLovesContingentRealm, GroundBearsGood, Means, NecessarySubjectKind, Subject, propext}`. -/
 theorem the_ground_is_a_necessary_and_chosen_lover
-    (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Means s p) :
+    (h : ∃ s : Subject, ContingentSubjectKind s ∧ ∃ p : Prop, Logos.Agency.Means s p) :
     NecessaryEntity Entity.ofGround ∧
       ∃ t : Entity, ContingentEntity t ∧ (∃ q, EntityMeans t q) ∧
         ∃ p, GroundBearsGood Entity.ofGround t p :=
@@ -467,10 +501,18 @@ theorem the_ground_is_a_necessary_and_chosen_lover
 -- Section 4: Ground-level love and interpersonal love are distinct
 -- ============================================================================
 
-/-- The ground is not a personal entity: no subject is its correlate. So the conclusion
-    attributes love to the ground **as a kind** and smuggles in no hypostatic
-    identification — the open ledger bridge #9 (`Ground(e, personal) → Personal(e)`) is
-    untouched by it.
+/-- The ground-constructor is not a subject-correlate: no subject's `EntityOf` is
+    definitionally the ground. So the conclusion attributes love to the ground
+    **as a kind** and smuggles in no hypostatic identification — the open ledger
+    bridge #9 (`Ground(e, personal) → Personal(e)`) is untouched by it.
+
+    Read the title for what it now says, not what it used to imply: this is a
+    *constructor* separation (`ofGround ≠ EntityOf s` for every `s`), not a
+    verdict on whether reality's necessary ground is personal. The personal
+    ground of the necessary kind is a *subject* (`Plurality.necessaryPersonalSubjectExists`),
+    hence a *different* entity from the ground-constructor; Claim E's two
+    conjuncts with no identity line are exactly that shape. What this row rules
+    out, then as now, is identifying the two.
     Footprint: `{Subject}`. -/
 theorem the_ground_is_not_a_person :
     ∀ s : Subject, Entity.ofGround ≠ EntityOf s :=
@@ -485,40 +527,49 @@ theorem ground_love_does_not_identify_a_person :
   rintro ⟨s, h⟩
   exact ofGround_ne_ofSubject s h
 
-/-- **Interpersonal love never yields ground-level love.** `GroundLoves` demands a
-    *necessary* lover and no subject is necessary, so `Loves s t` cannot give
-    `GroundLoves (EntityOf s) _ _`. The two relations are provably disjoint.
-    Footprint: `{GroundBearsGood, Means, Subject, propext}`. -/
-theorem subject_love_is_not_ground_love (s t : Subject) (a : Prop) (_h : Loves s t) :
+/-- **Interpersonal love of the contingent kind never yields ground-level love.**
+    `GroundLoves` demands a *necessary* lover and no contingent-kind subject is
+    necessary, so `Loves s t` of a contingent-kind `s` cannot give
+    `GroundLoves (EntityOf s) _ _`. The two relations are provably disjoint on
+    the contingent side; the necessary kind is excluded by hypothesis, not by
+    oversight. Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject, propext}`. -/
+theorem subject_love_is_not_ground_love (s t : Subject) (a : Prop)
+    (hKind : ContingentSubjectKind s) (_h : Loves s t) :
     ¬ GroundLoves (EntityOf s) (EntityOf t) a :=
-  fun hh => no_subject_is_a_necessary_entity s hh.1
+  fun hh => no_subject_is_a_necessary_entity s hKind hh.1
 
-/-- The failure holds for *every* subject and *every* love relation, so no amount of
-    interpersonal love can populate the necessary quadrant. This is the negative half of
-    the transfer the original design asked for.
-    Footprint: `{Subject, propext}`. -/
+/-- The failure holds for *every* contingent-kind subject and *every* love
+    relation, so no amount of contingent interpersonal love can populate the
+    necessary quadrant. The necessary kind can — that is the reversal this
+    batch records. This is the negative half of the transfer the original
+    design asked for, now correctly scoped to the kind it holds of.
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
 theorem interpersonal_love_never_reaches_the_necessary_quadrant :
-    ¬ ∃ s t : Subject, Loves s t ∧ NecessaryEntity (EntityOf s) := by
-  rintro ⟨s, _t, _, hn⟩
-  exact no_subject_is_a_necessary_entity s hn
+    ¬ ∃ s t : Subject, ContingentSubjectKind s ∧ Loves s t ∧
+      NecessaryEntity (EntityOf s) := by
+  rintro ⟨s, _t, hKind, _, hn⟩
+  exact no_subject_is_a_necessary_entity s hKind hn
 
-/-- **The transfer to interpersonal love is unstatable, not merely blocked.** The design
-    originally asked for `GroundLoves → Loves` on the subject side. There is no such
-    statement: `Loves` is `Subject`-indexed, the ground is provably no subject, and the
-    target of a `GroundLoves` claim is an arbitrary `Entity` rather than a `Subject`. The
-    only route would be a hypostatic identification, which the two theorems above refute.
-    Footprint: `{GroundBearsGood, Means, Subject, propext}`. -/
+/-- **The transfer to contingent interpersonal love is unstatable, not merely
+    blocked.** The design originally asked for `GroundLoves → Loves` on the
+    subject side. There is no such statement for the contingent kind: `Loves` is
+    `Subject`-indexed, the ground is provably no subject-correlate, and the
+    target of a `GroundLoves` claim is an arbitrary `Entity` rather than a
+    `Subject`. The only route would be a hypostatic identification, which the
+    theorems above refute for the contingent kind.
+    Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject, propext}`. -/
 theorem ground_love_cannot_be_read_as_person_love :
     ¬ (∃ s : Subject, Entity.ofGround = EntityOf s) ∧
-      ∀ s t : Subject, Loves s t → ¬ GroundLoves (EntityOf s) (EntityOf t) True :=
+      ∀ s t : Subject, ContingentSubjectKind s → Loves s t →
+        ¬ GroundLoves (EntityOf s) (EntityOf t) True :=
   ⟨ground_love_does_not_identify_a_person,
-    fun s t h => subject_love_is_not_ground_love s t True h⟩
+    fun s t hKind h => subject_love_is_not_ground_love s t True hKind h⟩
 
 /-- Pure actuality is preserved: the ground's love requires no initiation, so
     `DivinePureActuality`'s zero-transition-potency field is untouched. Attributing an
     *act* of love to the ground adds to `ofGround_divine_pure_actuality` rather than
     contradicting it — pure actuality excludes passive potency, not act.
-    Footprint: `{GroundBearsGood, Initiates, Means, State, Subject}`. -/
+    Footprint: `{GroundBearsGood, Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
 theorem ground_love_preserves_pure_actuality {t : Entity} {a : Prop}
     (_h : GroundLoves Entity.ofGround t a) : ¬ PassiveTransitionPotency Entity.ofGround :=
   ofGround_no_transition_potency
@@ -535,7 +586,7 @@ end Logos.LovesAsGround
 #print axioms Logos.LovesAsGround.ground_grounds_the_meaningless
 #print axioms Logos.LovesAsGround.the_ground_is_a_universal_modal_ground
 #print axioms Logos.LovesAsGround.no_subject_is_a_necessary_entity
-#print axioms Logos.LovesAsGround.only_the_ground_is_necessary
+#print axioms Logos.LovesAsGround.necessary_entities_are_ground_or_necessary_kind
 #print axioms Logos.LovesAsGround.GroundBearsGood
 #print axioms Logos.LovesAsGround.GroundLoves
 #print axioms Logos.LovesAsGround.ground_love_requires_a_necessary_lover

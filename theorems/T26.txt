@@ -128,7 +128,7 @@ metafísico clássico fraco — o fundamento como condição de toda a verdade, 
 exaustivo em todos os mundos, e com a refutação expressa da infalibilidade. Γ não
 possui predicado `Knows`: as relações de conhecimento da fronteira (`KnowsAt`,
 `KnowsCounterfactualAt`) são definições de vocabulário, e `Entity.ofGround` não é
-correlato de sujeito algum (`ofGround_ne_ofSubject`, `NecessityEternity.lean:155`).
+correlato de sujeito algum (`ofGround_ne_ofSubject`, `NecessityEternity.lean:160`).
 A onisciência clássica/ordinária permanece explicitamente desmentida na prosa
 (`README-OLD.md:263`): nenhuma ponte de conhecimento divino é manufacturada, e o
 sentido forte é refutado — não apenas omitido.

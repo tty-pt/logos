@@ -1,0 +1,28 @@
+T31 — A REFUTAÇÃO (C401/C402)
+===============================
+2026-09-27. A tese "não há significado", enunciada no vocabulário da própria Γ
+(`NoMeaning : Prop := ¬ ∃ p, Meaning_I p`, C368) e refutada *como resposta*
+(C375/C379/C381), é aqui refutada *como conteúdo de Γ*.
+
+- C401 `MeaningRetorsion.noMeaning_is_refuted_from_plurality : ¬ NoMeaning` —
+  incondicional, `{AxTwoSubjects, Means, Subject, Will, subjectWill}`, `PROVEN↑`.
+  `Meaning_I p` é por definição `∃ s, Means s p`, logo `cogito_from_T12` já era
+  um contra-exemplo; três linhas nunca escritas. O mundo-sem-significado não é
+  possível *dada a ponte da pluralidade*.
+- C402 `MeaningRetorsion.noMeaning_is_refuted_from_the_act_datum
+  (h : ∃ s, ∃ p, Act s p) : ¬ NoMeaning` — condicional no dado performativo,
+  `{Initiates, Means, State, Subject}`, `PROVEN` + ◈ `performativeActDatum`.
+  O gémeo God-lane: sem ponte META, preço no dado TRANS.
+
+O que isto NÃO faz: retirar C382 (consistência de assinatura livre, proposição
+diferente sobre sort diferente — verifica por tipagem, gate B4 intacto), tocar
+C385/C399/M1-como-modelos, ou refutar algo do vocabulário nu (C382 *é* a prova
+disso). A mudança é doutrinal e total: "o conteúdo sobrevive" → "o conteúdo é
+refutado em Γ; sobrevive só a consistência-da-forma".
+
+Ver: `formal/GAPMAP.md` (linhas C401/C402, C382 estreitada),
+`formal/Logos/MeaningRetorsion.lean` (Secção 4), `base.txt` §26, `poem.txt` P3,
+`investigations/countermodels.md` entrada 7, `MEANING-2.md` §8.
+
+Lacuna registada: o lote C368–C385 não tem ficheiro de teoremas próprio; este
+T31 cobre só C401/C402, com ponteiros para trás. Não absorvido em silêncio.

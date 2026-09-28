@@ -138,7 +138,7 @@ Assim:
 - `Person → IntentionalSubject`: PROVEN (`person_is_intentional`, `{Means, Subject}`).
 - `FreeSubject → Person`: PROVEN (`free_subject_is_person`, `{Means, Subject}`).
 - `Person → FreeWill`: PROVEN (`person_has_free_will`, `{Means, Subject}`).
-- `Person ⇏ NecessarySubject`: REFUTADO por modelo modal fiel (`faithful_contingent_person_fails_necessary_subject`, `{}`). A necessidade pessoal exige as pontes modais de fundamentação.
+- `Person ⇏ NecessarySubject`: REFUTADO por modelo modal fiel (`faithful_contingent_person_fails_necessary_subject`, `{}`). A necessidade pessoal exige as pontes modais de fundamentação. **Correcção 2026-09-28 (dois géneros):** o modelo fiel exibe o género *contingente*; a implicação incondicional continua refutada, e é por isso que a estabilidade é relativa-ao-género (`PersonStabilityPrinciple : Person s → NecessarySubjectKind s → NecessarySubject s`, `Love.lean:101`). A pessoa necessária é do outro género (C404/C408/C409, ponte META `necessaryPersonalSubjectExists`), nunca consequência lógica da pessoalidade.
 A pluralidade interpessoal apoia-se na ponte de segunda pessoa `AxSecondPersonalAddress` (META) ou em `AxTwoSubjects` (META).
 
 2. T1 — O SUJEITO DO ATO EXISTE → theorems/T1.txt
@@ -845,7 +845,7 @@ Teorema: ver theorems/T16.txt.
 3. **Dever Prático Deôntico Independente:** O dever prático (`Ought r s a`) é uma relação deôntica irredutível, separada da correcção epistémica, do querer (`Wills`) e do mero significado (`Means`). A violação normativa (`NormativeViolation s a := ObjectiveOught s a ∧ Wills s (¬a)`) é logicamente possível no sistema.
 4. **Anti-auto-legislação provada por retorsão:** Se a força vinculante do dever viesse da própria vontade do sujeito (`Ought s s a ↔ Wills s a`), a violação normativa torna-se impossível (ao querer ¬a, a obrigação dissolve-se), colapsando o dever em preferência subjetiva (`self_grounded_ought_collapses`).
 5. **Consistência do modelo hostil impessoal:** Um universo solitário com um Sujeito Livre e um dever prático impessoal abstrato satisfaz a lógica sem contradição (`impersonal_model_satisfies_ought_without_person`, `{}`). Logo, o dever prático por si só NÃO força logicamente outra pessoa sem a ponte de interpelação relacional de segunda pessoa `AxSecondPersonalAddress` (META).
-6. **Fronteira da necessidade pessoal:** `Person ⇏ NecessarySubject` sob o modelo modal fiel (`faithful_contingent_person_fails_necessary_subject`, `{}`): nenhuma "pessoa necessária" (a conjunção `Person ∧ NecessarySubject`) é derivada; alcançá-la exigiria as pontes modais de fundamentação global e pessoal.
+6. **Fronteira da necessidade pessoal:** `Person ⇏ NecessarySubject` sob o modelo modal fiel (`faithful_contingent_person_fails_necessary_subject`, `{}`): nenhuma "pessoa necessária" (a conjunção `Person ∧ NecessarySubject`) é derivada **da pessoalidade**; alcançá-la exigiu a ponte do género necessário (C404, `Tag: META`), e a pessoa necessária daí derivada (C408/C409, Claim D) é do outro género — nunca consequência lógica de ser pessoa. O modelo fiel exibe o género contingente e permanece intacto.
 7. **Descoberta Transcendental vs. Fundamentação Ontológica:**
    O argumento transcendental descobre o sujeito livre a partir da polaridade normativa:
      Certo/Errado ⇒ Normatividade Genuína ⇒ Escolha ⇒ Livre-Arbítrio ⇒ Pessoa.
@@ -1127,11 +1127,11 @@ não força logicamente pluralidade (teorema de separação `not_entails_plurali
 em `HostileSemantics`); "tem de haver este Ser, e o certo e o errado" é C68 (Cogito
 teorema derivado de ato performativo) + C37/C38, e "tem de haver quem se possa Amar" é C41
 (via T12 sob AxTwoSubjects); L24 (P6) "Amar é escolhido e também é necessário (de
-alguma forma)" é C42–C45 + C76 (T14 sob AxTwoSubjects); L38 ("Escolho admitir que: Sou") é o
+alguma forma)" é C42–C45 + C76 (T14 com par de género-necessário exibido, 2026-09-28; C43 segue sob AxTwoSubjects); L38 ("Escolho admitir que: Sou") é o
 dado performativo C68 — a sua negação refuta-se por retorção (`noCogito_selfRefutes`, C58).
 Ficam fora da demonstração as linhas 26–30: "este mundo é necessário? Não" é uma negação
 não reivindicada, e "a criação existe / há propósito" pertence à zona de fé
-(F9); "existe este Ser Pessoal" é T8 (descoberta construtiva da pessoa e a Pessoa que sustenta a realidade do correto: `PersonalGroundOfReality.the_person_supports_the_reality_of_right`, com 0 axiomas substantivos; e a forma-instância `PersonalGroundOfReality.person_yields_personal_grounding_of_reality`).
+(F9); "existe este Ser Pessoal" é T8 (descoberta construtiva da pessoa e a Pessoa que sustenta a realidade do correto: `PersonalGroundOfReality.the_person_supports_the_reality_of_right`, com 0 axiomas substantivos; e a forma-instância `PersonalGroundOfReality.person_yields_personal_grounding_of_reality`) — e, desde 2026-09-28, também Claim D derivada (C409, `necessary_person_derived_from_bridge`): a pessoa necessária existe sob a ponte do género necessário (C404, `Tag: META`). O Ser Pessoal é do género necessário; o habitante do mundo, do contingente — géneros diferenciados, nunca colapsados.
 
 26. DEMARCAÇÃO: O EXCLUÍDO POR IMPOSSIBILIDADE DE NEGAÇÃO E O AINDA NEGÁVEL
 
@@ -1193,10 +1193,17 @@ hipótese **não fica disponível**: C372 exclui `Act s NoMeaning` em todo mundo
 `NoMeaning`, exactamente como C375 excluía `Asserts s NoMeaning` — a
 generalização desce um degrau a exclusão, não a remove. C378
 (`Correct s NoMeaning`) fica intacto, porque a generalização não o alcanca. **A distinção que este lote deixa explícita e que
-o texto acima não distinguishia:** a *afirmação* é refutada; o *conteúdo* não.
-`¬ NoMeaning` NÃO é derivável, e C382 é a razão machine-checked — um mundo
-**populado** (sujeito `Unit`) no qual a tese é verdadeira e ninguém pode afirmá-la
-(`the_meaningless_world_remains_a_model`, pegada `{}`). O texto do verso, "o acto
+o texto acima não distinguishia:** a *afirmação* é refutada; o *conteúdo* não o era
+*do vocabulário nu*. **Correcção 2026-09-27 (REFUTAÇÃO, C401/C402):** `¬ NoMeaning`
+**é** derivável *em Γ* — C401 refuta a tese na ponte da pluralidade
+(`{AxTwoSubjects, Means, Subject, Will, subjectWill}`, incondicional) e C402 no
+dado-do-acto (`{Initiates, Means, State, Subject}`, condicional). O que C382 mostra,
+e continua a mostrar, é que nada no vocabulário nu a refuta: uma assinatura livre
+satisfaz a sua própria forma da tese, e isso é consistência-da-forma, não
+possibilidade-para-a-teoria. O mundo **populado** (sujeito `Unit`) no qual a tese é
+verdadeira e ninguém pode afirmá-la (`the_meaningless_world_remains_a_model`,
+pegada `{}`) continua consistente *como assinatura*; deixou de ser um mundo
+possível *de Γ*. O texto do verso, "o acto
 de negação refuta-se a si mesmo", é literalmente correcto quanto ao acto e
 silencioso quanto ao conteúdo; a nota torna esse silêncio explícito em vez de o
 deixar ler-se como uma refutação do conteúdo. Corolário: o contramodelo M1 é
@@ -1303,7 +1310,8 @@ Ver theorems/T7.txt, theorems/T8.txt, theorems/T12–T14.txt.)
 A dedução puramente transcendental (sem pontes semânticas ou metafísicas adicionais) estabelece com certeza performativa a existência do ato presente, do sujeito no mundo atual, da distinção objetiva de verdade, da normatividade, do significado, da agência e das verdades lógicas necessárias no mundo atual (T1–T6, T10, T11).
 
 O limite da fase puramente dedutiva manifesta-se onde a dedução pura encontra as transições ontológicas transmundanas:
-- `ato performativo atual → sujeito / entidade necessária em todos os mundos` (C77/C92: condicional a `PersonStabilityPrinciple`; refutado sem pontes por `CountermodelPersonNotNecessary` e `ContingentAgencyModel`) — continua FALSO para cada sujeito (`¬ NecessarySubject s`).
+- `ato performativo atual → sujeito / entidade necessária em todos os mundos` (C77/C92: condicional a `PersonStabilityPrinciple` relativa-ao-género desde 2026-09-28; refutado sem pontes por `CountermodelPersonNotNecessary` e `ContingentAgencyModel`, que exibem o género contingente) — continua FALSO para cada sujeito do género contingente (`ContingentSubjectKind s → ¬ NecessarySubject s`, C406). A pessoa necessária é do outro género (C404/C408/C409).
+- **Fundamento teológico do autor (fé, não caução do núcleo):** "não há criação sem pessoa, porque o Criador habita a criação". A primeira metade já é teorema sem axiomas na sua forma — `Realm.bears_meaning` + `meaning_needs_subject` (C49, `{}`) — e a segunda metade é o motivo pelo qual a ponte C404 é paga; **a habitação em si não é afirmada nem provada** (nenhum elo entre a pessoa necessária e o habitante do mundo é declarado ou derivável). Fé com endereço exacto, não premissa silenciosa.
 - `entidade do fundamento necessária em todos os mundos` (2026-09-24, `NecessityEternity.lean`): `NecessaryEntity Entity.ofGround` é uma estipulação semântica definicional (`EntityExistsAt w .ofGround := True`, classe VOCAB — não um axioma substantivo); a obstrução pré-extension `¬ ∃ e, NecessaryEntity e` deixou de ser teorema do sort estendido. Corolários definicionais: `Everlasting .ofGround` e `Atemporal .ofGround` (o argumento não depende do tempo — o tempo entra apenas no lado da conclusão, camada de estágios Nat). A identidade hipostática é bloqueada (`ofGround ≠ EntityOf s`, `ofGround_ne_ofSubject`, injectividade do construtor). Pegadas: `{Means, Subject}` (VOCAB) nos teoremas de necessidade/eternidade; `the_ground_not_in_succession` `{Initiates, State, Subject}`; o conjuncto pessoal da Proposição E carrega honestamente `{AxTwoSubjects, Means, Subject}` (PROVEN↑, META).
 - `NecessityEternity.necessary_existence_is_stage_uniform` (C181, 2026-09-25): para tipos genéricos `World`, `Stage` e `Entity`, se uma entidade existe em todos os mundos e cada estágio representa um mundo, então existe em todos os estágios e as suas ocorrências são equivalentes. É um transporte condicional de necessidade para estágios, com pegada `{}`; não instancia `Entity.ofGround`, não remove a pegada `{Subject}` dos corolários canónicos e não constitui prova de eternidade metafísica.
 - **C182 (PROVEN, 2026-09-25):** `ModalPossibilityFrontier.aseity_does_not_force_any_volition_alternatives` é um contramodelo genérico com `World`, `Entity` e `Subject` unitários, `ExtDepAt` e `WillsAt` falsas. A pegada auditada é `{}`. A asserção `Level3_VolitionAlternative` continua a ser apenas `WillsAt v s a ∧ ¬ WillsAt u s a`, sem acessibilidade modal, incompatibilidade ou exigência `v ≠ u`; o resultado não prova aseidade do `Entity.ofGround`.
@@ -1954,36 +1962,65 @@ q. 3), e não fica mais rico por isso. F15 **não é um acto de fé novo**: é u
 passado ad hoc.
 
 **Segunda correcção (2026-09-27, mesmo dia): «três sítios» era uma contagem local a um
-ficheiro, e subestimava muito o caso.** A forma da hipótese
-`∀ s : Subject, ∃ p : Prop, ¬ Means s p` ocorre **19 vezes em 5 ficheiros** —
-`DivinePureActuality` 4, `FoundationalUnicity` 7, `CanonicalAseity` 4, `AsieticChoice` 1,
-`DivineSimplicity` 3. Logo Γ paga este preço exacto por **cinco** argumentos de atributo
-(aseidade, simplicidade, actuação pura, escolha/liberdade, unicidade), não dois — e o argumento
-«já pago» fica *mais forte*, não mais fraco.
+ficheiro, e subestimava muito o caso.** A forma da hipótese ocorre em **5 ficheiros**, logo Γ
+paga este preço exacto por **cinco** argumentos de atributo (aseidade, simplicidade, actuação
+pura, escolha/liberdade, unicidade), não dois — e o argumento «já pago» fica *mais forte*, não
+mais fraco. *(A repartição numérica desta segunda correcção estava errada; ver a terceira.)*
 
-E como nenhum *axioma* o afirma — é passado como argumento explícito em cada um dos 19 usos —
+E como nenhum *axioma* o afirma — é passado como argumento explícito em cada um desses usos —
 C320 não o pode consumir incondicionalmente, e a fila permanece. O que restava era contabilidade,
-não crença: consolidar as premissas ad hoc numa **única ◈ nomeada** (`Tag: VOCAB` — sendo um `def`,
-a contagem de axiomas não se mexe e o registo de estípulações sobe de 5 para 6). **Isso foi feito**
-— lote SEMANTIC-FINITUDE, 2026-09-27; ver a retirada de F15 abaixo. Os corolários resultantes
-assentam na frase nomeada e por isso levam o selo ◈: a unicidade do fundamento passa a ser um
-corolário *stipulated*, não um teorema cru. É uma única frase já paga, não uma ponte nova — mas
-move o registo, por isso foi registada, não feita em silêncio.
+não crença: consolidar as premissas ad hoc numa **única ◈ nomeada** (`Tag: VOCAB`). **Isso foi
+feito** — lote SEMANTIC-FINITUDE, 2026-09-27; ver a retirada de F15 abaixo. Os corolários
+resultantes assentam na frase nomeada e por isso levam o selo ◈: a unicidade do fundamento passa a
+ser um corolário *stipulated*, não um teorema cru. É uma única frase já paga, não uma ponte nova.
 
-**F15 RETIRA (2026-09-27, lote SEMANTIC-FINITUDE).** A hipótese
-`∀ s : Subject, ∃ p : Prop, ¬ Means s p` — **F15** — foi nomeada e registada:
-`SemanticFinitude` (`formal/Logos/SemanticFinitude.lean`), ◈ `semanticFinitude` em
-`Stipulations.lean` (`Tag: VOCAB`). Deixa de ser um lema-em-falta e passa a ser uma
-**estipulação nomeada e visível**. Continua **não derivável** (porque `Means` é VOCAB —
+**Terceira correcção (2026-09-28): a contagem não tinha medida declarada, e a forma ◈ estava
+errada.** (i) O número. A «Segunda correcção» de 2026-09-27 citei um total sem dizer que medida o
+contava, por cima de uma repartição por ficheiro errada. O censo é agora **derivado e verificável**
+(`scripts/census_semantic_finitude.py`, `--check` falha se divergir do núcleo), e tem **duas
+medidas** porque «quantas vezes» não tem resposta única: `any` = **19** (toda a declaração cujo
+*enunciado* menciona o limite, na forma ∀ ou na forma ∃ por sujeito — `DivinePureActuality` 5,
+`FoundationalUnicity` **6**, `CanonicalAseity` 4, `DivineSimplicity` 3, `AsieticChoice` 1) e
+`forall` = **14** (só as que levam a forma ∀ exacta, que Γ declara: 3, 5, 2, 3, 1). Os corpos de
+prova excluem-se: uma ocorrência num corpo é um *uso* de um preço já pago, não um preço novo. O
+total 19 **estava certo** para a medida `any`; o que estava errado era a repartição por ficheiro
+(`FoundationalUnicity` é 6, não 7; `DivinePureActuality` 5, não 4) e o facto de citar um inteiro
+como se houvesse só uma medida possível. A conclusão é robusta sob as duas medidas — Γ paga o
+preço exacto por **cinco** argumentos de atributo, nos **cinco** módulos. (ii) A forma ◈ estava
+errada por uma razão que a contagem escondia: sendo um `def` tomado como premissa, `SemanticFinitude` era **invisível a
+`#print axioms`**, as dez linhas reportavam a mesma pegada que os teoremas condicionais que
+espelhavam, e a contagem de axiomas não se mexia — pelo que o selo ◈ e a cadeia do gerador eram
+os *únicos* sinais, e nenhuma ferramenta de pegadas conseguia precisar o lote. Em 2026-09-28 o
+limite foi **promovido a axioma declarado `Tag: VOCAB`** (o 27º; 26 → 27, VOCAB 15 → 16) e o
+registo ◈ foi removido (8 → 7). As dez linhas passaram de *condicionais* a **incondicionais** e
+mantêm o distintivo `PROVEN`, porque `VOCAB` não é substantivo para o gerador. A regra que o
+lote fixa, e que Γ devia ter seguido desde o começo: *o corpus não pode provar o que não vê* — uma
+premissa com carga suficiente para precisar de selo tem de ser um `axiom`, não um `def`.
+
+**F15 RETIRA (2026-09-27, lote SEMANTIC-FINITUDE) — PROMOVIDA A AXIOMA (2026-09-28, lote
+SEMANTIC-FINITUDE-PROMOTION).** A hipótese `∀ s : Subject, ∃ p : Prop, ¬ Means s p` — **F15** —
+foi nomeada em 2026-09-27: `SemanticFinitude` (`formal/Logos/SemanticFinitude.lean`), ◈
+`semanticFinitude` em `Stipulations.lean` (`Tag: VOCAB`). Deixou de ser um lema-em-falta e passou
+a uma **estipulação nomeada e visível**. Continua **não derivável** (porque `Means` é VOCAB —
 `Agency.lean:49` declara `Subject` como sort nula e não interpretada, e nada em Γ limita o
 alcance proposicional de um sujeito; os resultados de universalidade `Existential` do resto da
 biblioteca não se aplicam, porque o que é preciso é um limite **por sujeito**, não global), mas a
-verdade é que Γ **já a pagava** 19 vezes: este lote consolida e sela, não introduz.
-`SemanticFinitude` é um `def` de uma `Prop` que os corolários tomam como *premissa*, pelo que
-**zero axiomas novos** são declarados e a pegada `#print axioms` de cada corolário é
-**byte-idêntica** à do teorema condicional que espelha.
+verdade é que Γ **já a pagava** em 5 ficheiros e por 5 argumentos de atributo (censo derivado e
+verificável em `scripts/census_semantic_finitude.py`: 19 ocorrências sob a medida `any`, 14 sob a
+medida `forall`; ver a «Terceira correcção» abaixo para a história desta contagem).
+**Em 2026-09-28 o limite foi promovido de `def` a axioma declarado `Tag: VOCAB`** — o 27º
+declarado (26 → 27; VOCAB 15 → 16). A razão está registada no módulo: sendo o `def` de uma `Prop`
+tomado como *premissa*, era **invisível a `#print axioms`** — as dez linhas reportavam
+exactamente a mesma pegada que os teoremas condicionais que espelhavam, a contagem de axiomas não
+se mexia, e **nenhuma ferramenta de pegadas do repositório conseguia precisar o lote**. O selo ◈
+era o único sinal. Como axioma, o preço aparece em todas as pegadas dependentes, em
+`#print axioms`, no registo de axiomas e em `formal/axiom_audit.json`. O registo ◈ foi removido
+(8 → 7): uma premissa com carga suficiente para precisar de selo deve ser um `axiom`, não um
+`def`. **Nenhum enunciado foi acrescentado e nenhum estado mudou** — esta é a primeira vez que o
+total de axiomas sobe por *rigor* e não por conteúdo novo.
 
-Os dez corolários *stipulated* (todos PROVEN ◈) são:
+Os dez teoremas *stipulated* (todos PROVEN, e agora **incondicionais** — perderam o parâmetro
+`hf`) são:
 `exactly_one_universal_modal_ground_stipulated` (a unicidade do fundamento universal),
 `ofGround_sole_universal_grounding_stipulated`, `conditional_canonical_aseity_stipulated`,
 `ofGround_modal_aseity_conditional_stipulated`, `ofGround_divine_pure_actuality_stipulated`,
@@ -1991,25 +2028,48 @@ Os dez corolários *stipulated* (todos PROVEN ◈) são:
 `ofGround_non_composite_stipulated`, `ofGround_simplicity_and_transcendence_stipulated` e
 `ground_is_canonically_aseitous_but_not_asietic_stipulated`.
 
-O preço, sem eufemismo e agora **machine-checked nos dois sentidos**: (i) o limite é
+O preço, sem eufemismo e **machine-checked nos dois sentidos**: (i) o limite é
 **falsificável, não vácuo** — `semantic_omnipotence_is_consistent` (`{}`) é um modelo da sua
 negação (um portador semanticamente omnipotente), logo a unicidade assenta genuinamente nele e o
-selo ◈ é obrigatório; (ii) o limite **faz trabalho real** —
+preço tem de ser declarado, não assumido; (ii) o limite **faz trabalho real** —
 `semanticFinitude_excludes_ground_from_subjects` mostra que, como `ofGround_meansAll` dá ao
-fundamento *toda* proposição, é o limite que o mantém fora do sort `Subject`. E, como em qualquer
-`def`, o preço é **invisível a `#print axioms`**: o selo ◈ no registo (6 estípulações) e a cadeia
-`SEMANTIC_FINITUDE_STEPS` do gerador são os únicos sinais. **Não** é uma ponte META e **não** é uma
-definição nova: é uma única sentença quantificada sobre vocabulário existente — uma
+fundamento *toda* proposição, é o limite que o mantém fora do sort `Subject`. (Esta linha perdeu
+`hf` em 2026-09-28 e passou a depender directamente do axioma: pegada auditada
+`{Means, SemanticFinitude, Subject}`. É uma dependência real, e Mostrá-la é mais honesto do que
+preservar uma pegada que a subestimasse.) **Não** é uma ponte META e **não** é uma definição
+nova: é uma única sentença quantificada sobre vocabulário existente — uma
 **restrição do vocabulário de significado**, que diz que nenhuma criatura é semanticamente
-omnipotente. O que este lote **não** fez: não rebaixou C207 nem C211, não os apagou, não declarou
-F15 em Γ como axioma, e não editou os dez teoremas condicionais pré-existentes (mantêm a premissa
-anónima) — os corolários são aditivos. A existência de um fundamento já era `PROVEN`
-incondicionalmente (C319); o que é ◈ aqui é a sua *unicidade*.
+omnipotente. `Tag: VOCAB` diz exactamente isso: o limite restringe uma relação não interpretada
+(`Means`) num sort nulo (`Subject`) e não afirma conexão nenhuma entre entidades — o mesmo
+estatuto que `ofGround_existsAt`. (E é por isso que as dez linhas **mantêm** o distintivo `PROVEN`:
+o gerador trata só `SEM`/`META`/`TRANS` como substantivos. `VOCAB` dá `PROVEN`. Se o autor
+voltar a etiquetar `SEM`, o distintivo segue — e as dez caem para `⚠️`.) O que este lote **não**
+fez: não rebaixou C207 nem C211, não os apagou, e não editou os dez teoremas condicionais
+pré-existentes (mantêm a premissa anónima) — as dez linhas são aditivas. A existência de um
+fundamento já era `PROVEN` incondicionalmente (C319); o que assenta no limite é a sua
+*unicidade*.
 
 Limites honestos de escopo: a unicidade assim reparada é a **unicidade do fundamento universal
-modal**, sob uma hipótese de restaurante nomeada; continua expressamente separada do unitarismo
-numérico monádico (C212) e do monismo panteísta (C213), e a hipótese é uma restrição de vocabulário
-que alguém tem de subscrever, não uma verdade que Γ demonstrou.
+modal**, sob um limite de vocabulário nomeado e agora declarado; continua expressamente separada
+do unitarismo numérico monádico (C212) e do monismo panteísta (C213), e o limite é uma restrição
+de vocabulário que alguém tem de subscrever, não uma verdade que Γ demonstrou. **A declaração
+torna o preço visível; não o torna maior, e não o torna verdadeiro.** É esta a distinção que o
+lote fixa: *preço declarado* ≠ *preço substantivo*.
+
+**§34,actualizada em 2026-09-28 (lote SEMANTIC-FINITUDE-PROMOTION).** O diagnóstico desta secção
+— *«unicidade sob uma premissa que ninguém pode pagar não é unicidade»* — mantém-se, e a
+promoção não o desfaz: o limite `SemanticFinitude` continua a ser uma restrição de vocabulário que
+alguém tem de subscrever. O que muda é o **modo** de a pagar. Onde esta secção terminou com
+«falta só fechar esse último caso, e fecha-se com uma única hipótese nomeada», e onde a hipótese
+ficava *fora* do alcance do kernel, a hipótese passou a ser um **axioma declarado `Tag: VOCAB`** e
+as dez linhas de unicidade e atributos passaram a ser **incondicionais**. A contagem de axiomas
+subiu 26 → 27 (VOCAB 15 → 16) — a primeira subida por *rigor* e não por conteúdo novo neste
+corpus. Os números de inventário impressos no cabeçalho desta secção (25 declarados, VOCAB 14 /
+SEM 7 / META 4) são o **registo histórico de 2026-09-27** e ficam como estavam, pela convenção do
+ficheiro: estão correctos para o que era verdade nessa data. O inventário corrente está em
+`GAPMAP.md` e é conferido por `scripts/gapmap_taxonomy.py --check`. C228 (monoteísmo **ao nível
+da Pessoa**) continua `BLOCKED` e não foi tocado; nem o unitarismo numérico monádico (C212) nem o
+monismo panteísta (C213).
 
 35. O FUNDAMENTO COMO AMANTE, E OS DOIS PREÇOS DESSA AFIRMAÇÃO
 
@@ -2033,7 +2093,7 @@ todos os predicados relacionais — `Helps`, `Harms`, `Chooses`, `Initiates`, `G
 são indexados por `Subject`. Logo "o fundamento ama" **não é uma afirmação bem-formada** no
 vocabulário existente. O módulo acrescenta `GroundLoves`, de seis conjunções, e a decisão
 de desenho foi **mantê-la distinta** de `Loves` em vez de as fundir, porque fundi-las
-reinterpretaria em silêncio T14 e o `PersonStabilityPrinciple` (`Love.lean:97`).
+reinterpretaria em silêncio T14 e o `PersonStabilityPrinciple` (`Love.lean:101`).
 
 O que isso **não** é: não é um lema nem uma evasiva. C336
 (`grounding_reaches_what_love_cannot`) põe as duas relações lado a lado numa só
@@ -2050,9 +2110,13 @@ linha é a sua honestidade: a metade *necessária* é `ofGround_necessary`, que 
 `trivial` e é **forçada pela ontologia de três construtores**; a metade *escolhida* é
 **exactamente** `AxGroundLovesContingentRealm` e nada mais. **Nenhum axioma de
 livre-arbítrio está escondido aqui.** E o mesmo vale para C330
-(`only_the_ground_is_necessary`): é forçado por `EntityExistsAt w .ofGround := True`, pelo
-que **não é evidência de que o fundamento ama**; o seu conteúdo legítimo é negativo — a
-célula "necessário ∧ escolhido" de `poem.txt:24` **não contém nenhuma pessoa**.
+(`necessary_entities_are_ground_or_necessary_kind`, renomeada 2026-09-28; era
+`only_the_ground_is_necessary`): o disjunto do fundamento é forçado por
+`EntityExistsAt w .ofGround := True`, pelo que **não é evidência de que o
+fundamento ama**; o seu conteúdo legítimo deixou de ser negativo — a célula
+"necessário ∧ escolhido" de `poem.txt:24` **contém agora o fundamento e quem for
+do género necessário** (ponte META C404). O que permanece negativo é a exclusão
+da pessoa *contingente* desse pólo (C329 relativa-ao-género).
 
 Os **dois preços**, e são de natureza diferente, o que os confunde:
 
@@ -2169,7 +2233,7 @@ Ainda requer prova (o que falta, em termos formais):
       da ponte: Rejeitar `AxTwoSubjects` deixa-a intacta. Ver item (4) e a 2.ª correcção acima.
   (4) ~~**LEMA EM FALTA**~~ **[CORRIGIDO 2026-09-27]**: esta entrada afirmava que
       `∃ s : Subject, ∃ p : Prop, Means s p` era "o **único** obstáculo" porque `Subject`
-      (`Agency.lean:49`, `Tag: VOCAB`) e `Means` (`Agency.lean:74`, `Tag: VOCAB`) não têm
+      (`Agency.lean:49`, `Tag: VOCAB`) e `Means` (`Agency.lean:92`, `Tag: VOCAB`) não têm
       "nenhum produtor em Γ". **Essa afirmação era falsa, e o erro era do corpus.** O lema
       **tem** produtor, e incondicional:
       ```lean

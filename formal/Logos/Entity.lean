@@ -11,7 +11,7 @@ import Logos.Agency
 namespace Logos.Entity
 
 open Logos.Semantics (Form World Satisfies)
-open Logos.Agency (Subject)
+open Logos.Agency (Subject NecessarySubjectKind)
 
 /-- General ontological type of entities. World-rigid.
     Subjects (capable of agency) are embedded via `Entity.ofSubject`,
@@ -33,14 +33,32 @@ instance : Coe Subject Entity := ⟨EntityOf⟩
 /-- The actual world valuation: all atoms true. -/
 def actualWorld : World := fun _ => Logos.Semantics.TV.t
 
-/-- World-relative existence of subjects:
-    A subject is actualized at the actual world, but does not automatically exist across all possible worlds. -/
-def SubjectExistsAt (w : World) (_s : Subject) : Prop :=
-  w = actualWorld
+/-- The falsity world: the valuation in which nothing holds.
+
+    The point of world-space that `LovesAsGround.falsityWorld_ne_actualWorld` and
+    the subject-kind theorems use as an inline lambda, named here so that "the
+    empty world" is a world the ledger can point at: it is the world that holds no
+    contingent content, no atom, and no subject of the contingent kind
+    (`Plurality.falsityWorld_holds_no_contingent_subject`), while every subject of
+    the necessary kind exists there too. Definitional, VOCAB class; not an axiom. -/
+def falsityWorld : World := fun _ => Logos.Semantics.TV.f
+
+/-- World-relative existence of subjects, by kind.
+
+    A subject of the necessary kind (`NecessarySubjectKind s` — the ground of
+    reality in its Personal Type) exists at every world. A subject of the
+    contingent kind (an individual person) is actualized at the actual world,
+    but does not automatically exist across all possible worlds. The kind
+    distinction is vocabulary (`Agency.NecessarySubjectKind`, `Tag: VOCAB`);
+    whether the necessary kind is inhabited is the priced metaphysical claim
+    `Plurality.necessaryPersonalSubjectExists` (`Tag: META`). -/
+def SubjectExistsAt (w : World) (s : Subject) : Prop :=
+  NecessarySubjectKind s ∨ w = actualWorld
 
 /-- Existence of an entity in a world:
-    Subjects exist only at worlds where SubjectExistsAt holds;
-    atomic entities exist at worlds where their atomic valuation holds;
+    subject-correlates exist where their kind dictates (`SubjectExistsAt`);
+    atomic entities exist at worlds where their atomic valuation holds, so
+    created content stays **contingent** (refuted at the all-`TV.f` world);
     the ground of reality exists in every world (world-rigid, by definition). -/
 def EntityExistsAt (w : World) : Entity → Prop
   | Entity.ofSubject s => SubjectExistsAt w s

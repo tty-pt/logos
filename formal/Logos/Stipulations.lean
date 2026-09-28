@@ -16,6 +16,19 @@ parses exactly this shape, verifies each `location` anchor against the source
 and each dependent against `formal/depgraph.json`, and emits
 `formal/stipulation_audit.json`, which `scripts/build_deduction.py` renders as
 the ◈ stipulation badge in the kernel audit.
+
+**Retired 2026-09-28: `semanticFinitude` (registry 8 → 7).** The F15 meaning bound
+`∀ s, ∃ p, ¬ Means s p` was registered here as a ◈ `def` on 2026-09-27. It is now a
+**declared `Tag: VOCAB` axiom** in `SemanticFinitude.lean`, and the ten corollaries
+that took it as a named hypothesis are now unconditional theorems of Γ. The entry
+was retired because a `def`-premise is invisible to `#print axioms`: the ◈ badge was
+the *only* place its price appeared, and it was simultaneously the most load-bearing
+premise in the divine-attribute lane. A declared axiom shows up in every dependent's
+audited footprint, in the axiom registry, and in `formal/axiom_audit.json`. The ten
+`_stipulated` corollaries keep their names — historical, and cited from GAPMAP and
+the prose corpus — but they are no longer stipulations and carry no ◈ badge. The
+governing rule going forward: **a premise load-bearing enough to need a badge should
+be an `axiom`, not a `def`**, because a `def` premise is not auditable.
 -/
 
 namespace Logos.Stipulations
@@ -51,7 +64,7 @@ unfolds this `True`. Necessity of the ground is therefore stipulated by the
 constructor's match arm, never derived and never declared as an axiom. -/
 def ofGround_existsAt : Stipulation where
   name := "ofGround_existsAt"
-  location := "Entity.lean:48"
+  location := "Entity.lean:66"
   anchor := "Entity.ofGround => True"
   tag := StipulationTag.VOCAB
   cost := "World-rigidity stipulated by match arm: necessity theorems about ofGround unfold this True."
@@ -108,7 +121,7 @@ def operatesAt_presencePlusObtaining : Stipulation where
   anchor := "def OperatesAt"
   tag := StipulationTag.SEM
   cost := "Operation identified with presence-plus-obtaining: foundational omnipotence is proved over the weakened reading; the causal/creative sense stays BLOCKED."
-  dependents := ["ofGround_gapless_operative_scope", "ofGround_operates_only_what_obtains", "ofGround_does_not_operate_contradictions", "ofGround_sole_gapless_operator", "ofGround_foundational_omnipotence", "necessity_and_presence_yield_foundational_omnipotence"]
+  dependents := ["ofGround_gapless_operative_scope", "ofGround_operates_only_what_obtains", "ofGround_does_not_operate_contradictions", "gapless_operators_are_ground_or_necessary_kind", "ofGround_foundational_omnipotence", "necessity_and_presence_yield_foundational_omnipotence"]
 
 /-- Tag: META
 The ground of reality is the ground of *freedom*: `AsietyFreedomOfGround` says every subject the
@@ -143,50 +156,6 @@ def asietyFreedom_ofGroundFreedom : Stipulation where
   cost := "The ground's being the ground of freedom is declared, not derived: GroundsEntity is vacuous, GroundsRightWrong is definitionally FreeWill (C168), and substantive grounding is BLOCKED (C228). Priced by three {} countermodels; the universal reading is strictly stronger than the existential one."
   dependents := ["asietyFreedom_yields_trueChoice", "asietyFreedom_yields_asietyFreeWill", "asietyFreeWill_yields_trueChoice", "asietyFreedom_summary"]
 
-/-- Tag: VOCAB
-Semantic finitude: no subject means every proposition — no creature is semantically
-omnipotent. `SemanticFinitude : Prop := ∀ s, ∃ p, ¬ Means s p`.
-
-Philosophical cost: the per-subject meaning bound was already paid as an explicit
-premise 17 times across `DivineSimplicity`, `DivinePureActuality`, `CanonicalAseity`,
-`AsieticChoice` and `FoundationalUnicity`, and never registered. It is now named
-(`SemanticFinitude`) and badged ◈, and the ten headline corollaries — unicity of the
-ground, sole universal grounding, canonical and modal aseity, divine pure actuality, zero
-grounding potency, divine simplicity, non-compositeness, simplicity-and-transcendence, and
-aseity-without-asiety — carry it as a *named* hypothesis. The ten existing conditional
-theorems are not edited and keep their anonymous premise; consolidation is the new
-registered corollary. **No new axiom is added**: `SemanticFinitude` is a `def` of a
-`Prop` and the corollaries take it as a premise, so `#print axioms` reports the same
-`{Means, Subject}` (or `{Initiates, Means, State, Subject}`, or with `propext`) as the
-corresponding conditional theorem, and the declared-axiom count is unmoved. The price is
-therefore *invisible to every footprint tool*, and the ◈ badge is the only place it shows.
-A reader must NOT read `exactly_one_universal_modal_ground_stipulated` at `{Means,
-Subject}` as a proof of monotheism: the unicity of the ground is stipulated in the sense
-that no subject of assertion reaches every proposition, and it is not derived.
-`Tag: VOCAB` because the sentence bounds one uninterpreted relation (`Means`) on one
-nullary sort (`Subject`) and asserts no connection between entities — the same status as
-`ofGround_existsAt` and `ofGround_noInternalComponents`; contrast
-`asietyFreedom_ofGroundFreedom`, which is META because it declares a connection Γ's
-vocabulary cannot support. Consistency model / falsifiability: the reading does real
-work in both directions and is *not* free — `semantic_omnipotence_is_consistent` is a
-`{}` model of the negation (a semantically omnipotent carrier), so the stipulation is
-falsifiable and the unicity genuinely rests on it; and
-`semanticFinitude_excludes_ground_from_subjects` shows the bound doing work, since the
-`ofGround_meansAll` match arm gives the ground every proposition and the bound is what
-keeps it off the `Subject` sort.
-
-The registry record itself is a value of the `Stipulation` structure — strings, a tag and
-a list — and therefore depends on no axiom at all; it is the *ten theorems* it lists, and
-the `SemanticFinitude` def they take as a premise, that carry the (invisible) price.
-Footprint: `{}`. -/
-def semanticFinitude : Stipulation where
-  name := "semanticFinitude"
-  location := "SemanticFinitude.lean:70"
-  anchor := "def SemanticFinitude"
-  tag := StipulationTag.VOCAB
-  cost := "The per-subject meaning bound, paid 17 times as an anonymous premise and never registered, is now named and badged. The ten headline corollaries carry it as a named hypothesis; no new axiom is added and their kernel footprints are unchanged, so the ◈ badge is the only signal. A reader must not read exactly_one_universal_modal_ground_stipulated at {Means, Subject} as a proof of monotheism: the unicity of the ground is stipulated, not derived. Falsifiable via semantic_omnipotence_is_consistent ({})."
-  dependents := ["exactly_one_universal_modal_ground_stipulated", "ofGround_sole_universal_grounding_stipulated", "conditional_canonical_aseity_stipulated", "ofGround_modal_aseity_conditional_stipulated", "ofGround_divine_pure_actuality_stipulated", "ofGround_no_grounding_potency_stipulated", "ofGround_divine_simplicity_stipulated", "ofGround_non_composite_stipulated", "ofGround_simplicity_and_transcendence_stipulated", "ground_is_canonically_aseitous_but_not_asietic_stipulated"]
-
 /-- Tag: TRANS
 The performative act-datum: `∃ s : Subject, ∃ p : Prop, Act s p` — an act occurred.
 
@@ -204,8 +173,10 @@ reaches the same witness with no bridge at all, since `Act` already contains `Me
 unregistered, that relocation would have been invisible: a hypothesis is a hypothesis, and
 `#print axioms` cannot see one. `cosmos_presence_model_of_the_act_datum` and
 `the_ground_loves_the_cosmos_from_the_act_datum` are the two dependents, and the ◈ badge
-is the only signal — the same arrangement as `semanticFinitude` above, and the same
-limitation: the price here is invisible to `#print axioms` by construction.
+is the only signal. The same limitation applies: the price here is invisible to
+`#print axioms` by construction. (This was also true of the `semanticFinitude` entry, which
+was retired on 2026-09-28 when that bound was promoted from a `def` to a declared axiom —
+precisely so its price would stop being invisible. See `SemanticFinitude.lean`.)
 
 **The price, stated honestly.** `AxTwoSubjects` is a `Tag: META` bridge and this is not;
 the two are not interchangeable and neither is free. The act-datum is free *in axioms* and
@@ -220,7 +191,8 @@ unconditional subject-existence — no theorem in Γ concludes `∃ s, ∃ p, Ac
 nothing, precisely because Γ does not fabricate — so C350/C367 keep their own prices and
 this row is a *companion* to them, never a replacement. And it does not touch `Act`'s
 content: `Meanless` worlds (`Means := False`) cannot host the datum either, which is why
-`semanticFinitude` and this stipulation are separate entries rather than one.
+the declared axiom `SemanticFinitude` and this stipulation are separate commitments rather
+than one.
 Footprint: `{}`. -/
 def performativeActDatum : Stipulation where
   name := "performativeActDatum"
@@ -228,12 +200,67 @@ def performativeActDatum : Stipulation where
   anchor := "The performative datum of §1"
   tag := StipulationTag.TRANS
   cost := "The performative act-datum (someone acted), assumed as given rather than declared or derived, since a theorem discovers and does not manufacture. Registered so the God-lane's relocation of C367's price from the META bridge AxTwoSubjects to this datum is visible at all: a hypothesis is invisible to #print axioms, so the badge is the only signal. Free in axioms, not free in performance. Reject it and both dependents go; reject AxTwoSubjects and they stand."
-  dependents := ["cosmos_presence_model_of_the_act_datum", "the_ground_loves_the_cosmos_from_the_act_datum"]
+  dependents := ["cosmos_presence_model_of_the_act_datum", "the_ground_loves_the_cosmos_from_the_act_datum", "noMeaning_is_refuted_from_the_act_datum"]
+
+/-- Tag: TRANS
+The world-datum: this world — the one I am writing the proof in — exists, and it
+is contingent.
+
+`Entity.actualWorld` fixes *which* world the proof is in (the all-`TV.t`
+valuation) and `Entity.falsityWorld` names its opposite, so "the empty world is
+not the actual world" becomes a theorem rather than a posture:
+`falsityWorld_ne_actualWorld` (the two valuations differ), plus
+`falsityWorld_holds_no_contingent_subject` (no subject of the contingent kind
+exists at the falsity world) against `contingent_realm_obtains` (the actual
+world *does* have contingent content, witnessed by an atom). Together, for zero
+axioms, they rule out the one possibility the world-datum alone can kill.
+
+**Why it is a datum and not a bridge.** The world's existence is not derived:
+the author's line is "it is my stipulation that this world I'm writing the proof
+in exists. But given that it does, consequences are in due." The consequences are
+entailed; the existence is given. So this is `Tag: TRANS` — assumed as given, like
+`performativeActDatum` — and NOT a `Tag: META` bridge, which would claim Γ
+*infers* it, and NOT `Tag: VOCAB`, which would claim the valuation `def` decides
+the question. What the `def actualWorld` decides is which world, not whether.
+
+**What it buys, narrowly.** Free in axioms, not free in performance. It eliminates
+the falsity world read as the actual world (`HostileSemantics.CountermodelFalsityWorld`,
+`WorldStance.falsityWorldAsActual`) and it settles the falsity world's own content:
+it is the necessary-subjects-only world, not an empty one. It does **not** reach
+a world of necessary subjects only in general — that exclusion needs the
+contingent-inhabitation lemma, which is BLOCKED and is recorded as a gap
+(`SUBJECTS.md` §4), not as a price. And it does **not** touch the plurality of
+subjects: `AxTwoSubjects` (`Tag: META`) is a separate bridge on a separate ground,
+per the author's "No, not yet a world of two persons. Unless something else in the
+proof demands it."
+
+**Why register it now (2026-09-28).** It was unregistered, and the generated C.1
+preamble papered over the gap by naming the *act*-datum as the Lean content of the
+*world*-stipulation. The two are different data with different dependents, and
+conflating them made the world-datum's one genuine elimination invisible. The
+ledger now answers the question the author actually asked — which countermodels are
+wrong given that the contingent world exists — on its own axis, with the
+classification derived in Lean (`WorldStance`) and cross-checked by
+`scripts/build_deduction.py` against each model's declared structure.
+
+Consistency model: not vacuous, not over-strong. The datum does not say the world
+is *contingent* in the modal sense as a theorem — `contingent_realm_obtains` proves
+it, and only for content; and it does not say the contingent kind of subject is
+inhabited, which is exactly the blocked lemma. Reject it and the falsity-world
+elimination goes; the attack verdicts and the act-datum are untouched.
+Footprint: `{}`. -/
+def contingentWorldDatum : Stipulation where
+  name := "contingentWorldDatum"
+  location := "Entity.lean:34"
+  anchor := "def actualWorld"
+  tag := StipulationTag.TRANS
+  cost := "The world-datum (this world exists, and it is contingent), assumed as given rather than derived: the author stipulates the world the proof is written in exists, and only the consequences are in due. Registered so the world-datum is not silently merged with the performative act-datum in the C.1 preamble. Free in axioms, not free in performance. It eliminates the falsity world read as the actual world (WorldStance.falsityWorldAsActual) and settles that the falsity world is the necessary-subjects-only world; it does NOT reach a world of necessary subjects in general, which needs the BLOCKED contingent-inhabitation lemma, and it does NOT touch plurality (AxTwoSubjects is a separate META bridge). Reject it and the falsity-world elimination goes; the attack verdicts stand."
+  dependents := ["falsityWorld_holds_no_contingent_subject", "contingentSubject_might_not_have_existed", "nothing_contingent_at_its_actual"]
 
 /-- The registered stipulations, in audit order. -/
 def registeredStipulations : List Stipulation :=
   [ofGround_existsAt, ofGround_meansAll, ofGround_noInternalComponents,
    operatesAt_presencePlusObtaining, asietyFreedom_ofGroundFreedom,
-   semanticFinitude, performativeActDatum]
+   performativeActDatum, contingentWorldDatum]
 
 end Logos.Stipulations

@@ -39,7 +39,7 @@ def UnitPlurality_refutes : String :=
   "A single act (one subject) cannot force a plurality of subjects: the unit model with `Person := True` satisfies act and personhood but has no second subject."
 
 def UnitPlurality_survives : String :=
-  "Plurality rests on `AxTwoSubjects` (the reality of right-and-wrong demands two subjects), not on the mere act."
+  "Plurality rests on `AxTwoSubjects` (the reality of right-and-wrong demands two subjects), not on the mere act. World-datum note: the model declares no world sort, so the datum is silent on it — but read with its one subject as of the contingent kind, it *is* a contingent world of one person, and therefore admissible given that the contingent world exists. The world-datum does not touch it; only the plurality bridge separates it from ours."
 
 -- CountermodelContentWithoutPerson / not_entails_content_person
 
@@ -63,7 +63,15 @@ def PersonNotNecessary_refutes : String :=
   "A person need not be a necessary subject: `Person → NecessarySubject` fails as a logical law (subject exists only in the `true` world)."
 
 def PersonNotNecessary_survives : String :=
-  "Person-persistence is definitional (esse est agere, `AxPersonStability`), and `PersonStabilityPrinciple` (`Love.lean:97`) shows the concrete refutation cannot exist — conditional on adopting that principle, which Γ never assumes; within Γ the countermodel stands."
+  "Person-persistence holds of the necessary kind (`PersonStabilityPrinciple`, `Love.lean:101`, kind-relative since 2026-09-28); the model exhibits the contingent kind, so within Γ the countermodel stands as the refutation of the unconditional law. What is wrong with it as our world is answered by the kind bridge (C404/C409), not by withdrawing the attack. World-datum note: this is the one catalogued model that demonstrably *satisfies* the world-datum — its `true` world is a contingent world of one person — so the datum gives it nothing and takes nothing from it."
+
+-- CountermodelFalsityWorld / the falsity world read as the actual world
+
+def FalsityWorld_refutes : String :=
+  "The all-`TV.f` valuation is not the actual world: `falsityWorld_ne_actualWorld`, plus `falsityWorld_holds_no_contingent_subject` against `contingent_realm_obtains`, which witnesses contingent content in the real one. Refuted for free — no axiom is charged, and no contingent-inhabitation lemma is needed."
+
+def FalsityWorld_survives : String :=
+  "The valuation itself survives as a *world*: it is Γ's necessary-subjects-only world, holding every subject of the necessary kind and the ground-constructor, with no contingent subject and no atom. What dies is the reading of it as the actual world. So the falsity world is a coherent world and simply not ours."
 
 -- CountermodelVeridicalMeaning (veridical meaning vs. the choice frontier)
 

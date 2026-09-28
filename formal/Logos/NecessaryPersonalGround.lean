@@ -133,6 +133,19 @@ def ClaimA_NecessaryTruth (φ : Form) : Prop := NecessarilyTrue φ
     There exists a personal subject that exists across all possible worlds. -/
 def ClaimD_NecessaryPerson : Prop := ∃ s : Subject, NecessarySubject s ∧ Person s
 
+/-- Claim D derived: a necessary person exists. From the priced metaphysical
+    bridge `Plurality.necessaryPersonalSubjectExists` (a subject of the
+    necessary kind who is a Person) by the kind-relative persistence
+    `Plurality.necessaryKindSubject_is_necessary`. This retires the "annotated
+    only" note: the necessary person is no longer an empty existential. The
+    price is exactly the bridge — reject it and this goes with it; the
+    contingent person, the world inhabitant, and every countermodel are
+    untouched by it.
+    Footprint: `{Means, NecessarySubjectKind, Subject, Will, necessaryPersonalSubjectExists, subjectWill}`. -/
+theorem necessary_person_derived_from_bridge : ClaimD_NecessaryPerson := by
+  obtain ⟨s, hKind, hPerson⟩ := Logos.Plurality.necessaryPersonalSubjectExists
+  exact ⟨s, Logos.Plurality.necessaryKindSubject_is_necessary s hKind, hPerson⟩
+
 -- ============================================================================
 -- 5. Explanatory Adequacy & Non-Reducibility of Personal Reality
 -- ============================================================================
@@ -217,7 +230,7 @@ theorem rational_act_carries_personal (s : Subject) (p : Prop) (hAct : Logos.Age
 /-- Step 4: Master Agential Theorem.
     Under the performative retorsive hypothesis, actual volitional reality is established:
     `Asserts s p → Act s p → Chooses s p q → FreeWill s → FreeSubject s → Person s ∧ Will (subjectWill s) ∧ ActualEntity (EntityOf s)`.
-    Footprint: `{AxIntentionalChoice, Initiates, Means, State, Subject, Will, subjectWill, will_individuation}`. -/
+    Footprint: `{AxIntentionalChoice, Initiates, Means, NecessarySubjectKind, State, Subject, Will, subjectWill, will_individuation}`. -/
 theorem established_will_reality (hAssert : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Asserts s p) :
     ∃ s : Subject, (∃ w : Will, w = subjectWill s) ∧ FreeWill s ∧ FreeSubject s ∧ Person s ∧ ActualEntity (EntityOf s) := by
   obtain ⟨s, p, hAss⟩ := hAssert
@@ -229,13 +242,13 @@ theorem established_will_reality (hAssert : ∃ s : Subject, ∃ p : Prop, Logos
   have hWill : ∃ w : Will, w = subjectWill s' := ⟨subjectWill s', rfl⟩
   have hActual : ActualEntity (EntityOf s') := by
     change Logos.Entity.SubjectExistsAt actualWorld s'
-    exact rfl
+    exact Or.inr rfl
   exact ⟨s', hWill, hFreeWill, hFreeSubj, hPerson, hActual⟩
 
 /-- Epistemic Discovery: Master Agential Theorem without AxIntentionalChoice.
     Under the performative normative stance, actual volitional reality is established:
     `ClaimsNormativeCorrectness s p → Chooses s (Correct s p) (Incorrect s p) → FreeWill s → FreeSubject s → Person s ∧ Will (subjectWill s) ∧ ActualEntity (EntityOf s)`.
-    Footprint: `{Classical.choice, Initiates, Means, Quot.sound, State, Subject, Will, propext, subjectWill, will_individuation}` (0 substantive axioms, completely free of AxIntentionalChoice). -/
+    Footprint: `{Classical.choice, Initiates, Means, NecessarySubjectKind, Quot.sound, State, Subject, Will, propext, subjectWill, will_individuation}` (0 substantive axioms, completely free of AxIntentionalChoice). -/
 theorem established_normative_person
     (hClaims : ∃ s : Subject, ∃ p : Prop, Logos.NormativeOrder.ClaimsNormativeCorrectness s p) :
     ∃ s : Subject, (∃ w : Will, w = subjectWill s) ∧ FreeWill s ∧ FreeSubject s ∧ Person s ∧ ActualEntity (EntityOf s) := by
@@ -246,7 +259,7 @@ theorem established_normative_person
   have hWill : ∃ w : Will, w = subjectWill s := ⟨subjectWill s, rfl⟩
   have hActual : ActualEntity (EntityOf s) := by
     change Logos.Entity.SubjectExistsAt actualWorld s
-    exact rfl
+    exact Or.inr rfl
   exact ⟨s, hWill, hFW, hFreeSubj, hPerson, hActual⟩
 
 /-- Spine 7: Necessary Truth exists (resident in Semantics, C59). -/
@@ -281,5 +294,6 @@ theorem de_dicto_not_implies_de_re :
 #print axioms step1_necessary_truth_exists
 #print axioms step3_personal_logical_inseparability
 #print axioms de_dicto_not_implies_de_re
+#print axioms necessary_person_derived_from_bridge
 
 end Logos.NecessaryPersonalGround

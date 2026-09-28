@@ -196,9 +196,9 @@ obtém" — continua **BLOCKED**, e a ressalva da prosa (`README-OLD.md:263`; `C
 §15) fica **mantida mas estreitada a este sentido causal**, já que o sentido
 não-contraditório está agora PROVEN. Γ não declara qualquer relação de produção de
 nível de entidade: a única relação de iniciação é `Agency.Initiates :
-Subject → State → State → Prop → Prop` (`Agency.lean:150`, VOCAB), que é indexada por
+Subject → State → State → Prop → Prop` (`Agency.lean:168`, VOCAB), que é indexada por
 sujeito, e `Entity.ofGround` é provadamente não correlato de sujeito algum
-(`ofGround_ne_ofSubject`, `NecessityEternity.lean:155`), pelo que nem sequer pode ser
+(`ofGround_ne_ofSubject`, `NecessityEternity.lean:160`), pelo que nem sequer pode ser
 instanciada pelo fundamento. A relação mais próxima que Γ tem é a **contenção
 explicativa** `GroundsEntity` (`RecoveredOntologicalGround.lean:57`, *esse est agere*),
 e C250 já machine-checka que âmbito exaustivo não implica âmbito operativo — logo a
@@ -208,3 +208,8 @@ afirmações, por esta ordem:
   (2) DERIVAÇÃO EM FALTA: que o fundamento produz todo estado de affairs satisfazível
       (que (1) por si só não daria).
 Nenhuma ponte de produção é manufacturada neste lote.
+
+[Actualizado 2026-09-28, dois géneros: C246 passa a condicional ao género
+(`ContingentSubjectKind s`); C247 passa a `gapless_operators_are_ground_or_necessary_kind`
+(disjunção: o fundamento E os sujeitos do género necessário) — o fundamento deixou de ser
+o operador "único". Ver theorems/T32.txt.]

@@ -80,20 +80,23 @@ carries a single `witness` and every field is about it.
 The structure also carries a fourth field, `bears_meaning`. That is not decoration: love
 requires the target to bear content (`ground_love_requires_a_meaningful_target`), so
 without it the conclusion could never be reached. Its honest consequence is that
-satisfiability is **conditional on an inhabitant of `Means`** — see `cosmos_presence_model`
-— and, as of 2026-09-27, that inhabitant is *supplied by Γ* via
-`Plurality.cogito_from_T12`, so the conditionality is discharged in `cosmos_obtains`.
+satisfiability is **conditional on a contingent-kind inhabitant of `Means`** — see `cosmos_presence_model`
+— and that inhabitant is exhibited as a premise (a contingent *person* in `cosmos_obtains`;
+since 2026-09-28 the kind must be shown, and showing it subsumes the old
+`Plurality.cogito_from_T12` route).
 
 ## What is proven here — and what is deliberately not
 
-- **The existence of the cosmos** (`cosmos_obtains : CreatedRealm`), proved from the
-  plurality bridge. Footprint `{propext, Means, Subject, Will, subjectWill, AxTwoSubjects}`.
-  This is the batch's whole point: it was a `Tag: SEM` axiom until 2026-09-27 and is now
-  a theorem, with the price (`AxTwoSubjects`, `Tag: META`) named in the row.
+- **The existence of the cosmos** (`cosmos_obtains : CreatedRealm`), proved given an
+  exhibited *contingent person*. Footprint `{Means, NecessarySubjectKind, Subject, Will,
+  propext, subjectWill}`. This is the batch's whole point: it was a `Tag: SEM` axiom until
+  2026-09-27 and is now a theorem; since 2026-09-28 (two-kinds) the price is the exhibited
+  kind, not the plurality bridge — exhibiting the kind subsumes the T12 witness, so
+  `AxTwoSubjects` is no longer among the premises.
 - **The construction** (`cosmos_presence_model`): the structure is inhabited for any
-  inhabitant of `Means`, the library's primitive content vocabulary. `Means`
-  (`Agency.lean:74`) still has no derivable instance in Γ *by itself* — but Γ's plurality
-  axiom supplies one, which is what `cosmos_obtains` consumes.
+  contingent-kind inhabitant of `Means`, the library's primitive content vocabulary. `Means`
+  (`Agency.lean:92`) still has no derivable instance in Γ *by itself* — and the kind must
+  be exhibited with it, which is what `cosmos_obtains` consumes as a premise.
 - **Non-triviality of the contingency conjunct's shape**
   (`perfect_universe_has_no_contingent_realm`): in a world-rigid universe, the shape
   `ActualEntity t ∧ ∃ w, ¬ ExistsAt w t` is unsatisfiable. This says the contingent content
@@ -134,7 +137,7 @@ import Logos.Plurality
 namespace Logos.CosmicExistence
 
 open Logos.Semantics (World TV)
-open Logos.Agency (Subject)
+open Logos.Agency (Subject NecessarySubjectKind ContingentSubjectKind)
 open Logos.Entity (Entity ExistsAt EntityOf EntityExistsAt SubjectExistsAt actualWorld)
 open Logos.RecoveredOntologicalGround (EntityMeans)
 open Logos.TheologicalModalHardening
@@ -194,7 +197,7 @@ structure Realm : Type where
     `Subject`, so any inhabitant costs `AxTwoSubjects`. For the existence claim *without*
     that price see `ContingentRealmObtains` below, and for the two claims derived from each
     see `contingent_realm_obtains` and `cosmos_obtains` respectively.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 def CreatedRealm : Prop := Nonempty Realm
 
 -- ============================================================================
@@ -237,7 +240,7 @@ structure ContingentRealm : Type where
 
 /-- A contingent created realm obtains — the `Prop` form, so the ledger can name it as a
     claim while the record keeps a single witness.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 def ContingentRealmObtains : Prop := Nonempty ContingentRealm
 
 /-- Contingency-overflow: something obtains, is modal-fragile, and is not the necessary
@@ -246,7 +249,7 @@ def ContingentRealmObtains : Prop := Nonempty ContingentRealm
     The witness is an atom, reusing `LovesAsGround.an_atom_is_contingent 0`
     (`LovesAsGround.lean:171`), itself `{Subject, propext}`. The reuse is deliberate, and
     the construction is **not** vacuous: `EntityExistsAt w (ofAtom n) := w n = TV.t`
-    (`Entity.lean:45-48`) discriminates on the index, so `actualWorld 0 = TV.t` while
+    (`Entity.lean:53-56`) discriminates on the index, so `actualWorld 0 = TV.t` while
     `fun _ => TV.f` falsifies it. Contingency here is a real property of this entity, not an
     artifact of a coarse world sort.
 
@@ -259,7 +262,7 @@ def ContingentRealmObtains : Prop := Nonempty ContingentRealm
 
     This does **not** make an atom into the cosmos (C324 forbids it), and it does not say
     anything made the realm — see the structure's docstring.
-    Footprint: `{propext, Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
 theorem contingent_realm_obtains : ContingentRealmObtains := by
   obtain ⟨ha, hc⟩ := an_atom_is_contingent 0
   exact ⟨⟨Entity.ofAtom 0, ha, hc, Entity.noConfusion⟩⟩
@@ -268,14 +271,21 @@ theorem contingent_realm_obtains : ContingentRealmObtains := by
 -- Section 2: Consistency and non-triviality
 -- ============================================================================
 
-/-- **Conditional satisfiability.** The realm does obtain, for any inhabitant of `Means`.
-    The witness is a subject, which is actual at the actual world
-    (`SubjectExistsAt w s := w = actualWorld`), refuted at the all-`TV.f` world, distinct
-    from the ground by `Entity.noConfusion`, and bearing content because
-    `EntityMeans (ofSubject s) p` unfolds to `Means s p`.
+/-- **Conditional satisfiability.** The realm does obtain, for any inhabitant of `Means`
+    who is of the contingent kind. The witness is such a subject, actual at the
+    actual world (right disjunct of `SubjectExistsAt`), refuted at the all-`TV.f`
+    world (the kind disjunct fails by hypothesis, the world equation by
+    `falsityWorld_ne_actualWorld`), distinct from the ground by
+    `Entity.noConfusion`, and bearing content because `EntityMeans (ofSubject s)
+    p` unfolds to `Means s p`.
+
+    The kind premise is the honest form of "no creation without a person": a
+    contingent realm needs a *contingent* witness, and the witness's contingency
+    is its kind. Under the old kind-blind semantics this premise was invisible
+    (every subject was contingent); the two-kinds doctrine exhibits it.
 
     The `Means` hypothesis is not a technicality and is not hidden: `Means` is a primitive
-    `Tag: VOCAB` **axiom** (`Agency.lean:74`) with no derivable instance in Γ, so this
+    `Tag: VOCAB` **axiom** (`Agency.lean:92`) with no derivable instance in Γ, so this
     theorem is satisfiability *relative to* Γ's intentional vocabulary being inhabited. It
     is stated that way rather than claimed outright.
 
@@ -284,24 +294,31 @@ theorem contingent_realm_obtains : ContingentRealmObtains := by
     `bears_meaning` + `not_the_ground` together. See `cosmos_obtains` for the theorem that
     consumes it, which reads the witness as *evidence of reality's addressability* rather
     than as the cosmos itself.
-    Footprint: `{Means, Subject, propext}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject, propext}`. -/
 theorem cosmos_presence_model
-    (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Means s p) : CreatedRealm := by
-  obtain ⟨s, p, hp⟩ := h
+    (h : ∃ s : Subject, ContingentSubjectKind s ∧ ∃ p : Prop, Logos.Agency.Means s p) :
+    CreatedRealm := by
+  obtain ⟨s, hKind, p, hp⟩ := h
+  have hActual : ActualEntity (EntityOf s) := Or.inr rfl
+  have hAbsent : ¬ ExistsAt (fun _ => TV.f) (EntityOf s) := by
+    intro hEx
+    dsimp [ExistsAt, EntityExistsAt, SubjectExistsAt, EntityOf] at hEx
+    rcases hEx with hk | heq
+    · exact hKind hk
+    · exact falsityWorld_ne_actualWorld heq
   exact
     ⟨{ witness := EntityOf s
-       actual := rfl
-       contingent := ⟨(fun _ => TV.f), falsityWorld_ne_actualWorld⟩
+       actual := hActual
+       contingent := ⟨(fun _ => TV.f), hAbsent⟩
        not_the_ground := Entity.noConfusion
        bears_meaning := ⟨p, hp⟩ }⟩
 
 /-- **The realm, on the performative act-datum instead of the plurality bridge.**
-    `cosmos_presence_model` is the inhabitation; what it needs is a subject who means
-    something, and `Logos.Plurality.cogito_from_T12` gets one by paying
-    `Logos.Value.AxTwoSubjects`. That payment is **not forced**. The performative
-    act-datum gets the same witness with no bridge at all:
-    `Logos.Agency.act_datum_implies_means` turns `∃ s, ∃ p, Act s p` straight into
-    `∃ s, ∃ p, Means s p`, because `Act` already contains `Means` as a conjunct.
+    `cosmos_presence_model` is the inhabitation; what it needs is a contingent-kind
+    subject who means something. The performative act-datum gets such a witness with
+    no bridge at all, kind exhibited with the act:
+    `Logos.Agency.act_datum_implies_means` turns the act's `Means` conjunct into the
+    meaning premise for the same subject, because `Act` already contains `Means`.
 
     This is the God-lane, and it is deliberately a *new row* rather than a
     re-anchoring of `cosmos_obtains`. The two reasons, both of them the project's
@@ -321,13 +338,15 @@ theorem cosmos_presence_model
     route to a meaning-bearing realm and not the only one, which is a falsifiable
     difference: reject the bridge and C367 goes, while this row stands on the datum
     alone.
-    Footprint: `{propext, Initiates, Means, State, Subject}`. -/
+    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject, propext}`. -/
 theorem cosmos_presence_model_of_the_act_datum
-    (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) : CreatedRealm :=
-  cosmos_presence_model (Logos.Agency.act_datum_implies_means h)
+    (h : ∃ s : Subject, ContingentSubjectKind s ∧ ∃ p : Prop, Logos.Agency.Act s p) :
+    CreatedRealm := by
+  obtain ⟨s, hKind, p, ha⟩ := h
+  exact cosmos_presence_model ⟨s, hKind, p, ha.1⟩
 
 /-- **The cosmos exists** — a contingent created realm, not the necessary ground, actually
-    obtains and bears content of its own.
+    obtains and bears content of its own — given a *contingent* person.
 
     **This was a `Tag: SEM` axiom until 2026-09-27, and that was an error.**
     `AxContingentCreationObtains` was declared on the ground that the lemma it needs had no
@@ -338,26 +357,39 @@ theorem cosmos_presence_model_of_the_act_datum
         person_is_intentional        : Person s → ∃ p, Means s p
         cogito_from_T12              : ∃ s, ∃ p, Means s p                -- unconditional
 
-    so `cosmos_presence_model cogito_from_T12` inhabits `CreatedRealm` outright. The axiom
+    so `cosmos_presence_model cogito_from_T12` inhabited `CreatedRealm` outright. The axiom
     was re-charging for a commitment Γ had already made, and it is deleted.
 
-    **What Γ can now say, and cannot.** It can say the contingent realm exists: Γ is not
-    satisfiable by an empty contingent world, because Γ contains a theorem exhibiting a
-    subject who means something. It still cannot say the realm's *negation* is consistent
-    with all of Γ — that needs a full interpretation of Γ, and no such model is built here.
+    **The two-kinds correction (2026-09-28).** Under the old kind-blind semantics every
+    subject was contingent, so the T12 witness's contingency was free. It is not free:
+    a contingent realm needs a *contingent* witness, and the witness's contingency is
+    its kind (`ContingentSubjectKind`). `cogito_from_T12` exhibits a meaning subject
+    but says nothing of its kind, so this row now exhibits the kind as an explicit
+    premise — a contingent *person* — and reads the meaning off it by
+    `person_is_intentional`. `AxTwoSubjects` no longer appears in the footprint: it
+    supplied personhood and meaning, but exhibiting the kind subsumes the witness, so
+    the plurality bridge is not among this row's premises. That is not a promotion for
+    free: the kind premise is the load-bearing datum, and it is stated, not
+    manufactured. T12/`AxTwoSubjects` stay load-bearing everywhere else
+    (T13, T14, C40, C74, the moral-good lane).
+
+    **What Γ can now say, and cannot.** It can say the contingent realm exists, given a
+    contingent person who means something: Γ is not satisfiable by an empty contingent
+    world under that datum, because Γ then contains a theorem exhibiting the witness.
+    It still cannot say the realm's *negation* is consistent with all of Γ — that needs
+    a full interpretation of Γ, and no such model is built here.
 
     **The price, which is the whole cost of this row.** Existence *as such* no longer costs
     anything: see `contingent_realm_obtains` (`{propext, Subject}`), which yields the same
-    contingency-overflow with no substantive axiom. What this row costs is the *meaning* half
-    of the thesis, and it pays for it through the plurality bridge
-    `Logos.Value.AxTwoSubjects` (`Tag: META`): the reality of right-and-wrong demands at least
-    two distinct persons. That is a substantive interpersonal metaphysics, already declared
-    and paid for elsewhere in Γ, and it is *not* a semantic choice.
+    contingency-overflow with no substantive axiom. What this row costs is the *witness*:
+    a contingent person who means something — personhood, meaning, and kind, all
+    exhibited, none manufactured.
 
-    So the correct statement of the price is narrower than it was: **reject `AxTwoSubjects`
-    and the realm's *meaning-bearingness* goes, not the realm's existence.** The position is
-    tighter than the axiom was, because it is now falsifiable — but a meaning claim now leans
-    on an axiological bridge, and that is a relocation of the cost, not a removal of it.
+    So the correct statement of the price is narrower than it was: **reject the
+    contingent-person datum and the realm's *meaning-bearing inhabitation* goes, not
+    the realm's existence.** The position is tighter than the axiom was, because it is
+    now falsifiable — but a meaning claim now leans on an exhibited witness, and that
+    is a relocation of the cost, not a removal of it.
 
     **This row is C367, not C350.** The 2026-09-27 split moved the bare existence claim to
     `contingent_realm_obtains` (C350, `PROVEN`, `{propext, Subject}`) and left the
@@ -376,9 +408,13 @@ theorem cosmos_presence_model_of_the_act_datum
     `perfect_universe_has_no_contingent_realm` refutes the `Realm` shape in a world-rigid
     universe. C110's separation also survives untouched — existence is derived, and the
     deductive route from necessary ground to a creation record is still refuted.
-    Footprint: `{propext, Means, Subject, Will, subjectWill, AxTwoSubjects}`. -/
-theorem cosmos_obtains : CreatedRealm :=
-  cosmos_presence_model Logos.Plurality.cogito_from_T12
+    Footprint: `{Means, NecessarySubjectKind, Subject, Will, propext, subjectWill}`. -/
+theorem cosmos_obtains
+    (h : ∃ s : Subject, ContingentSubjectKind s ∧ Logos.Person.Person s) :
+    CreatedRealm := by
+  obtain ⟨s, hKind, hPerson⟩ := h
+  obtain ⟨p, hmp⟩ := Logos.Person.person_is_intentional s hPerson
+  exact cosmos_presence_model ⟨s, hKind, p, hmp⟩
 
 /-- **No reading of Γ satisfies an empty contingent world.** The subject the derivation
     reports is *discovered inside Γ*, not assumed and not manufactured: `cogito_from_T12`
@@ -444,7 +480,7 @@ theorem perfect_universe_has_no_contingent_realm (U : PerfectUniverse) :
     The ambient contingency it appeals to is itself a countermodel
     (`Logos.NecessityEternity.everlasting_but_contingent`), so the contingency content is not
     a triviality of Γ either.
-    Footprint: `{propext, Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
 theorem the_cosmos_existence_is_not_refutable : ¬ (ContingentRealmObtains → False) :=
   fun hh => hh contingent_realm_obtains
 
@@ -455,7 +491,7 @@ theorem the_cosmos_existence_is_not_refutable : ¬ (ContingentRealmObtains → F
 /-- Something contingent obtains. This is the whole of what is claimed about existence on
     the free route, and it no longer rides on the meaning-bearing `cosmos_obtains`: since
     2026-09-27 it is read off `contingent_realm_obtains`, which costs nothing substantive.
-    Footprint: `{propext, Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
 theorem a_created_realm_obtains : ∃ t : Entity, ActualEntity t := by
   obtain ⟨R⟩ := contingent_realm_obtains
   exact ⟨R.witness, R.actual⟩
@@ -463,7 +499,7 @@ theorem a_created_realm_obtains : ∃ t : Entity, ActualEntity t := by
 /-- The realm is contingent. The machine-checked content of the poem's
     "este mundo é necessário? Não" — now at vocabulary-only price, for the same reason as
     `a_created_realm_obtains`.
-    Footprint: `{propext, Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
 theorem a_contingent_reality_obtains : ∃ t : Entity, ContingentEntity t := by
   obtain ⟨R⟩ := contingent_realm_obtains
   exact ⟨R.witness, ⟨R.actual, R.contingent⟩⟩
@@ -472,7 +508,7 @@ theorem a_contingent_reality_obtains : ∃ t : Entity, ContingentEntity t := by
     machine-checked form of "reality is not exhausted by the ground" — and it is the step
     the deductive route (C110) cannot supply in the other direction. Free since 2026-09-27:
     the price used to be `AxTwoSubjects`, carried only by the `bears_meaning` witness.
-    Footprint: `{propext, Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
 theorem reality_is_not_exhausted_by_the_ground :
     ∃ t : Entity, ActualEntity t ∧ t ≠ Entity.ofGround := by
   obtain ⟨R⟩ := contingent_realm_obtains
@@ -489,9 +525,11 @@ theorem reality_is_not_exhausted_by_the_ground :
     `contingent_realm_obtains`. Doing so would be a vacuous proof, and the two shortcuts that
     would have made it free — rescoping love onto an atom, and relaxing `EntityMeans` so
     atoms bear content — were both considered and rejected.
-    Footprint: `{propext, Means, Subject, Will, subjectWill, AxTwoSubjects}`. -/
-theorem the_realm_bears_meaning : ∃ t : Entity, ∃ q : Prop, EntityMeans t q := by
-  obtain ⟨R⟩ := cosmos_obtains
+    Footprint: `{Means, NecessarySubjectKind, Subject, Will, propext, subjectWill}`. -/
+theorem the_realm_bears_meaning
+    (h : ∃ s : Subject, ContingentSubjectKind s ∧ Logos.Person.Person s) :
+    ∃ t : Entity, ∃ q : Prop, EntityMeans t q := by
+  obtain ⟨R⟩ := cosmos_obtains h
   exact ⟨R.witness, R.bears_meaning⟩
 
 /-- The two poles, side by side: the ground is necessary and the realm is contingent, so
@@ -500,7 +538,7 @@ theorem the_realm_bears_meaning : ∃ t : Entity, ∃ q : Prop, EntityMeans t q 
     ground" available *before* any love is claimed. **Free since 2026-09-27**: the ground's
     necessity is `{Subject}` (`ofGround_necessary`) and the realm's contingency is
     `{Subject, propext}` (`a_contingent_reality_obtains`), so no substantive axiom appears.
-    Footprint: `{propext, Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
 theorem the_ground_is_necessary_and_the_realm_is_contingent :
     NecessaryEntity Entity.ofGround ∧ ∃ t : Entity, ContingentEntity t :=
   ⟨ofGround_necessary, a_contingent_reality_obtains⟩
@@ -517,11 +555,12 @@ theorem the_ground_is_necessary_and_the_realm_is_contingent :
     pays only for the *meaning* conjunct and the two declared bridges. That is the correct
     distribution — a realm with no content could not be loved, so the content is what is
     being charged for.
-    Footprint: `{propext, Means, Subject, Will, subjectWill, AxTwoSubjects, AxGroundLovesContingentRealm, GroundBearsGood}`. -/
-theorem the_ground_loves_the_cosmos :
+    Footprint: `{Means, NecessarySubjectKind, Subject, Will, propext, subjectWill, AxGroundLovesContingentRealm, GroundBearsGood}`. -/
+theorem the_ground_loves_the_cosmos
+    (h : ∃ s : Subject, ContingentSubjectKind s ∧ Logos.Person.Person s) :
     ∃ t : Entity, ContingentEntity t ∧ (∃ q, EntityMeans t q) ∧
       ∃ p, GroundBearsGood Entity.ofGround t p := by
-  obtain ⟨R⟩ := cosmos_obtains
+  obtain ⟨R⟩ := cosmos_obtains h
   obtain ⟨q, hq⟩ := R.bears_meaning
   have hc : ContingentEntity R.witness := ⟨R.actual, R.contingent⟩
   exact ⟨R.witness, hc, ⟨q, hq⟩,
@@ -533,10 +572,11 @@ theorem the_ground_loves_the_cosmos :
     rather than merely unproved (`ground_love_cannot_be_read_as_person_love`). Kept priced
     for the same reason as `the_ground_loves_the_cosmos`: the meaning conjunct, not
     existence, is the load-bearing premise.
-    Footprint: `{propext, Means, Subject, Will, subjectWill, AxTwoSubjects, AxGroundLovesContingentRealm, GroundBearsGood}`. -/
-theorem the_ground_loves_the_cosmos_in_a_context :
+    Footprint: `{Means, NecessarySubjectKind, Subject, Will, propext, subjectWill, AxGroundLovesContingentRealm, GroundBearsGood}`. -/
+theorem the_ground_loves_the_cosmos_in_a_context
+    (h : ∃ s : Subject, ContingentSubjectKind s ∧ Logos.Person.Person s) :
     ∃ t : Entity, ContingentEntity t ∧ ∃ a : Prop, GroundLoves Entity.ofGround t a := by
-  obtain ⟨R⟩ := cosmos_obtains
+  obtain ⟨R⟩ := cosmos_obtains h
   have hc : ContingentEntity R.witness := ⟨R.actual, R.contingent⟩
   exact ⟨R.witness, hc,
     the_ground_loves_every_meaningful_contingent_reality hc R.bears_meaning⟩
@@ -573,10 +613,10 @@ theorem the_ground_loves_the_cosmos_in_a_context :
     free in axioms, not free in performance, which is the same account the retorsion
     batch gives for C375/C377. A reader who will not grant that an act occurred
     rejects this row; a reader who rejects `AxTwoSubjects` keeps it.
-    Footprint: `{propext, Initiates, Means, State, Subject, AxGroundLovesContingentRealm,
+    Footprint: `{propext, Initiates, Means, NecessarySubjectKind, State, Subject, AxGroundLovesContingentRealm,
     GroundBearsGood}`. -/
 theorem the_ground_loves_the_cosmos_from_the_act_datum
-    (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
+    (h : ∃ s : Subject, ContingentSubjectKind s ∧ ∃ p : Prop, Logos.Agency.Act s p) :
     ∃ t : Entity, ContingentEntity t ∧ (∃ q, EntityMeans t q) ∧
       ∃ p, GroundBearsGood Entity.ofGround t p := by
   obtain ⟨R⟩ := cosmos_presence_model_of_the_act_datum h
@@ -593,7 +633,7 @@ theorem the_ground_loves_the_cosmos_from_the_act_datum
     as machine-checked: the actual is not the necessary. **Free since 2026-09-27** — read off
     `contingent_realm_obtains`, so the refutation of the necessity reading never touches the
     meaning-bearing record.
-    Footprint: `{propext, Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
 theorem realm_existence_does_not_imply_realm_necessity :
     ¬ (∀ t : Entity, ActualEntity t → NecessaryEntity t) := by
   obtain ⟨R⟩ := contingent_realm_obtains
@@ -605,7 +645,7 @@ theorem realm_existence_does_not_imply_realm_necessity :
     necessary. This is why the realm's existence does not collapse C110: the ground's
     necessity still does not yield the realm's contingency, and the realm's contingency does
     not retrofeed the ground's necessity.
-    Footprint: `{Subject}`. -/
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
 theorem contingent_reality_is_not_necessary :
     ∀ t : Entity, ContingentEntity t → ¬ NecessaryEntity t :=
   fun t hc hn => necessary_not_contingent t hn hc
