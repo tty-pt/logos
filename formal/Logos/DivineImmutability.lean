@@ -99,7 +99,17 @@ theorem ofGround_stage_invariance :
 
 /-- Process & Transition Invariance: the entity is outside all succession and becoming.
     No subjective agency can bring it into existence, modify it, or transition it.
-    Footprint: `{Initiates, State, Subject}`. -/
+    Footprint: `{Initiates, State, Subject}`.
+
+    **READING, 2026-09-28 (succession audit, C458–C462).** `NotInSuccession e` is *non-correlateness*,
+    not *non-initiation*: `NecessityEternity.the_ground_not_in_succession` discards the
+    `Initiates s σ σ' p` conjunct and closes on `Entity.noConfusion hEq` alone, so what is
+    established is that the ground is no subject's correlate. C459 machine-checks that the same
+    predicate holds of every atom, so this field discriminates no more than `CapacityInvariance`
+    does — C321's exact finding, on the other field. C460 supplies the non-triviality it lacks, and
+    C461 the axiom-free countermodel. The ground's non-agency is **unstatable**, not proved (C462,
+    `BLOCKED`); its *production* is a separate relation and coexists with this field (C467).
+    Disclosure, not demotion: no badge moves. -/
 def TransitionInvariance (e : Entity) : Prop :=
   NotInSuccession e
 
@@ -148,12 +158,18 @@ theorem ofGround_capacity_invariance :
     and unused, and the body reduces to `EntityMeans e p ↔ EntityMeans e p` — discharged by
     `Iff.rfl`, the same two lines as `ofGround_capacity_invariance` (`:132-135`).
 
-    The asymmetry that makes this worth recording: all three sibling fields of
-    `DivineImmutability` genuinely quantify and do discriminate — `ModalInvariance` over
+    The asymmetry that makes this worth recording: the three sibling fields of
+    `DivineImmutability` genuinely quantify — `ModalInvariance` over
     `w₁ w₂ : World` via `ExistsAt`, `StageInvariance` over `t₁ t₂ : Time` via `ExistsAtTime`,
-    `TransitionInvariance` as the real predicate `NotInSuccession e` — and each has a `{}`
-    non-triviality countermodel on record (C197 for modal/stage invariance, alongside C192
-    simplicity, C202 omnipresence, C214 pure actuality). This field has none, because there is
+    `TransitionInvariance` as the real predicate `NotInSuccession e` — and `ModalInvariance` and
+    `StageInvariance` discriminate, each with a `{}` non-triviality countermodel on record (C197
+    for modal invariance, alongside C192 simplicity, C202 omnipresence, C214 pure actuality).
+    **Corrected 2026-09-28 (C458–C462):** the earlier version of this paragraph claimed a `{}`
+    countermodel was on record for *every* sibling, citing C197. C197 covers `ModalInvariance`
+    **only**. The `NotInSuccession` countermodel now exists and is C461 (a ground that produces
+    while `NotInSuccession g ∧ DivineImmutability g` hold, in free signature, empty footprint),
+    the live non-triviality is C460 — and the discrimination claim is false for that field too,
+    by C459. This field has none, because there is
     nothing in it to refute. Generalising the existing ground-specific theorem to all entities
     is the honest form of the disclosure: the ledger previously stated the property only where
     it could not fail, which read as if it carried weight.
@@ -173,7 +189,8 @@ theorem capacity_invariance_holds_for_every_entity (e : Entity) : CapacityInvari
     The conjunction of:
     1. Modal Invariance (unchanging existence across all possible worlds);
     2. Temporal Stage Invariance (unchanging existence across all temporal stages);
-    3. Transition Invariance (outside all initiation and state-becoming);
+    3. Transition Invariance (outside all initiation and state-becoming — read with the
+       2026-09-28 disclosure above: non-correlateness, not non-initiation);
     4. Capacity Invariance (uniform, unchanging intentional presence). -/
 structure DivineImmutability (e : Entity) : Prop where
   /-- Modal unchangeability: existence is invariant across all worlds -/
@@ -188,7 +205,11 @@ structure DivineImmutability (e : Entity) : Prop where
 /-- HEADLINE — Divine Immutability of the Ground of Reality:
     `Entity.ofGround` satisfies Classical Divine Immutability across worlds, time,
     processes, and intentional capacities.
-    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject}` (0 substantive axioms). -/
+    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject}` (0 substantive axioms).
+
+    The 2026-09-28 succession audit (C458–C462) changed the *reading* of one of the four fields
+    and no status anywhere: `transition_invariance` rests on a non-correlateness fact, and the
+    ground can still *produce* in the same theorem as it is immutable (C467). -/
 theorem ofGround_divine_immutability :
     DivineImmutability Entity.ofGround := {
   modal_invariance := ofGround_modal_invariance

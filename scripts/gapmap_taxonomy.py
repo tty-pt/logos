@@ -3,18 +3,19 @@
 
 `formal/GAPMAP.md` carries four hand-maintained tallies in its "Summary counts"
 block — truly axiom-free (`{}`), `CL`-only, vocabulary-only, and the PROVEN↑
-claim list — plus a "Net inventory" line. Those are the only status-like values
-in the corpus that are *not* machine-derived (every status/footprint cell is
-checked by `scripts/audit_footprints.py`). This script recomputes them from
+claim list — plus a "Net inventory" line, and one hand-maintained set per
+claim row (the `Pegada` cell). This script recomputes all of them from
 `formal/axiom_audit.json` (the authoritative `#print axioms` ledger) through
 `build_deduction`'s own GAPMAP parser, claim resolver and footprint splitter, so
-the numbers can be derived instead of transcribed.
+the numbers and the per-row cells can be derived instead of transcribed.
 
 Usage:
   python3 scripts/gapmap_taxonomy.py           # print the derived report
-  python3 scripts/gapmap_taxonomy.py --check   # exit 1 if the counts or the
-                                               # enumerated ID lists written
-                                               # in GAPMAP.md have drifted
+  python3 scripts/gapmap_taxonomy.py --check   # exit 1 if the counts, the
+                                                # per-row `Pegada` footprint
+                                                # cell, or the per-row *status*
+                                                # cell written in GAPMAP.md has
+                                                # drifted from the kernel
 """
 
 from __future__ import annotations
@@ -114,6 +115,131 @@ def zero_axiom_nonproven(claims: list[dict]) -> list[str]:
     return out
 
 
+# Closed-logic spellings: the Pegada cells write `CL` or `propext` for the
+# kernel's classical meta-logic axioms; all normalise to one class token.
+CL_CELL_TOKENS = {"CL", "propext", "Classical.choice", "Quot.sound"}
+
+
+def parse_claimed_footprint(cell: str) -> set | None:
+    """The `{a, b, CL}` set a GAPMAP `Pegada` cell states, or None when the
+    cell carries no stated set (empty, a bare `CL` class label, a retired /
+    demoted / killed note). Leading `**` bold markers and trailing prose are
+    ignored; `propext` is normalised to `CL`."""
+    m = re.match(r"\**\{([^{}]*)\}", (cell or "").strip())
+    if not m:
+        return None
+    out = set()
+    for tok in m.group(1).split(","):
+        tok = tok.strip().rsplit(".", 1)[-1]
+        if tok:
+            out.add("CL" if tok in CL_CELL_TOKENS else tok)
+    return out
+
+
+def derived_footprint_set(full: str) -> set:
+    subst, vocab, cl = bd.footprint_parts(full)
+    return set(subst) | set(vocab) | ({"CL"} if cl else set())
+
+
+def check_status_cells(claims: list[dict]) -> list[str]:
+    """Every GAPMAP row's *status* cell against the derived footprint bucket.
+
+    This is the check the 2026-09-28 C455/C456 correction showed was missing.
+    Both rows read `PROVEN` in the status cell while the kernel footprint
+    carried the `Tag: TRANS` axiom `performative_act_datum`, so their derived
+    bucket was `up`; the badge the reader sees is derived from the *bucket*
+    (`compute_epistemic_badge`), not from the transcribed cell, so the ledger
+    understated two axiomatic rows as proved. `check_footprint_cells` could not
+    catch it: the `Pegada` cells were already correct, it was the status word
+    that had drifted.
+
+    The invariant is symmetric, and both directions are checked:
+
+    - bucket `up` (a substantive `SEM`/`META`/`TRANS` axiom in the audited
+      footprint) requires the status cell to read `PROVEN↑`, never plain
+      `PROVEN`; and
+    - a cell may not read `PROVEN↑` when the kernel says otherwise, which would
+      overstate a vocabulary-only or axiom-free row as axiomatic.
+    """
+    bad = []
+    for c in claims:
+        status = bd._clean_status((c.get("status") or "").strip())
+        if status not in ("PROVEN", "PROVEN↑"):
+            continue
+        full = c.get("_full")
+        if not full:
+            continue
+        b = bucket_of(full)
+        if b == "up" and status == "PROVEN":
+            subst, _, _ = bd.footprint_parts(full)
+            bad.append(
+                f"{c['id']}: cell=PROVEN but kernel bucket=up "
+                f"(substantive {{', '.join(subst)}}) - understated as proved"
+            )
+        elif b != "up" and status == "PROVEN↑":
+            bad.append(
+                f"{c['id']}: cell=PROVEN↑ but kernel bucket={b} "
+                f"- overstated as axiomatic"
+            )
+    return bad
+
+
+def check_footprint_cells(claims: list[dict], decls: dict, node_map: dict) -> list[str]:
+    """Every GAPMAP row that states a `Pegada` set, compared against the
+    audited kernel footprint. Axiom rows document the cone with or without
+    the axiom itself (both spellings occur in the ledger); bare `CL` cells
+    are checked as the CL-only class claim they are. Rows whose cell states
+    one set per declaration (`A` / `B`, e.g. C232) are checked pairwise."""
+    bad = []
+
+    def one(ref_full: str | None, part: str, decl_kind: str | None) -> str | None:
+        claimed = parse_claimed_footprint(part)
+        if claimed is None or ref_full is None:
+            return None
+        real = derived_footprint_set(ref_full)
+        base = ref_full.rsplit(".", 1)[-1]
+        if claimed == real or (decl_kind == "axiom" and claimed == real - {base}):
+            return None
+        missing = sorted(real - claimed - {base})
+        extra = sorted(claimed - real)
+        return (
+            f"cell={{{', '.join(sorted(claimed))}}} "
+            f"kernel={{{', '.join(sorted(real))}}}"
+            + (f" MISSING={missing}" if missing else "")
+            + (f" EXTRA={extra}" if extra else "")
+        )
+
+    for c in claims:
+        cell = c.get("footprint") or ""
+        parts = [p.strip() for p in cell.split("/")]
+        set_parts = [p for p in parts if re.match(r"\**\{", p)]
+        if len(set_parts) > 1:
+            refs = [
+                m.group(0)
+                for span in re.findall(r"`([^`]*)`", c.get("lean_cell") or "")
+                for m in [re.search(r"[A-Za-z_][A-Za-z0-9_.]*", span)]
+                if m and not m.group(0).startswith("Logos")
+            ]
+            if len(refs) == len(set_parts):
+                for ref, part in zip(refs, set_parts):
+                    full = bd.resolve(ref, decls, node_map, c.get("level_key", ""))
+                    kind = (decls.get(full) or {}).get("kind") if full else None
+                    msg = one(full, part, kind)
+                    if msg:
+                        bad.append(f"{c['id']} ({ref}): " + msg)
+                continue
+        full = c.get("_full")
+        if not set_parts:
+            if (cell.strip() == "CL") and full and bucket_of(full) != "cl":
+                bad.append(f"{c['id']}: cell=CL kernel={bucket_of(full)}")
+            continue
+        kind = (decls.get(full) or {}).get("kind") if full else None
+        msg = one(full, set_parts[0], kind)
+        if msg:
+            bad.append(f"{c['id']} ({(full or '?').rsplit('.', 1)[-1]}): " + msg)
+    return bad
+
+
 def stated_counts(text: str) -> dict:
     out = {}
     for b, rx in STATED_RE.items():
@@ -208,6 +334,26 @@ def main() -> int:
     if nonproven:
         print(f"\nAxiom-free rows that are NOT PROVEN steps: {len(nonproven)}")
         print("  " + ", ".join(nonproven))
+
+    status_drift = check_status_cells(claims)
+    if status_drift:
+        print(f"\nStatus cells disagreeing with the kernel bucket: {len(status_drift)}")
+        for line in status_drift:
+            print("  !! " + line)
+        if check:
+            drift = True
+    elif check:
+        print("\nStatus cells: every PROVEN/PROVEN↑ cell matches its kernel bucket")
+
+    cell_drift = check_footprint_cells(claims, decls, node_map)
+    if cell_drift:
+        print(f"\nPegada cells disagreeing with the kernel: {len(cell_drift)}")
+        for line in cell_drift:
+            print("  !! " + line)
+        if check:
+            drift = True
+    elif check:
+        print("\nPegada cells: all stated sets match the kernel")
 
     if check:
         print("\nRESULT: DRIFT DETECTED" if drift else "\nRESULT: GAPMAP taxonomy matches the kernel")

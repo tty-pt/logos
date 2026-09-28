@@ -377,8 +377,8 @@ theorem the_two_denials_cannot_both_be_affirmed :
       C401/C402 (Section 4) refute it there, on the plurality bridge and on the
       act-datum respectively. The earlier form of this bullet ("stays alive and
       stays consistent" without qualification) is withdrawn as overstated;
-    * the positive claim still costs `AxTwoSubjects` (C367) for a subject that is
-      not supplied as input.
+    * the positive claim still costs a person-datum (C367, conditional) or the bridge
+      (`cogito_from_T12`, unconditional) for a subject that is not supplied as input.
 
     Gate B4 enforces this: if the three theorems above ever land without this
     one, the batch stops. Footprint: `{}`. -/
@@ -504,7 +504,11 @@ theorem noMeaning_is_refuted_from_plurality : ¬ NoMeaning := by
     ◈ registry listing is the *only* signal of the dependence — the same
     arrangement as C386/C387, and the same limitation: invisible to
     `#print axioms` by construction.
-    Footprint: `{Initiates, Means, State, Subject}`. -/
+    Footprint: `{Initiates, Means, State, Subject}`.
+
+Unconditional form: `Logos.ActCascade.noMeaning_is_refuted_unconditionally` (C480) — the act datum is itself a declared axiom of Γ
+(`Tag: TRANS`), so the hypothesis above is discharged rather than assumed; no semantic price at all.
+-/
 theorem noMeaning_is_refuted_from_the_act_datum
     (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) : ¬ NoMeaning := by
   obtain ⟨s, p, hm⟩ := Logos.Agency.act_datum_implies_means h

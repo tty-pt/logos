@@ -24,8 +24,10 @@ This module establishes, from the extended canonical sort `Logos.Entity.Entity`
    (`subject_not_everlasting`, now carrying the `ContingentSubjectKind s`
    hypothesis that was always its real content), and `Everlasting ⇏
    NecessaryEntity` (`everlasting_but_contingent`: `Entity.ofAtom 0`). The
-   ground is outside every initiation-becoming (`the_ground_not_in_succession`)
-   and provably distinct from every subject-correlate
+   ground is outside every initiation-becoming (`the_ground_not_in_succession`
+   — read with the 2026-09-28 succession audit, C458–C462: this is a *non-correlateness*
+   result, its proof discarding the `Initiates` conjunct, and C459 shows the same predicate
+   holds of every atom) and provably distinct from every subject-correlate
    (`ofGround_ne_ofSubject`) — so hypostatic identity is blocked, not hidden.
    The necessary kind of subject is everlasting instead, by
    `Plurality.necessaryKindSubject_is_necessary` with
@@ -98,7 +100,13 @@ def HasTemporalMode (e : Entity) : Prop := ¬ Atemporal e
 
 /-- Outside succession: the entity is not engaged in any initiation-becoming —
     no subject-role of it initiates a transition between states (live succession
-    vocabulary: `State`, `Initiates`). -/
+    vocabulary: `State`, `Initiates`).
+
+    **READING, 2026-09-28 (C458–C462).** The predicate quantifies genuinely and is *real*, but
+    it is **non-discriminating**: non-correlateness suffices for it (C458) and it holds of every
+    atom as well (C459), so it cannot separate the ground from an atom. Nothing in its body
+    mentions an entity-level agency relation, which is why a ground may *produce* while
+    `NotInSuccession` holds (C461, `{}`; and live, C467). -/
 def NotInSuccession (e : Entity) : Prop :=
   ¬ ∃ (s : Subject) (σ σ' : State) (p : Prop),
       e = EntityOf s ∧ Initiates s σ σ' p

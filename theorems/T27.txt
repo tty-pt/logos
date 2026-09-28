@@ -68,8 +68,8 @@ theorem ofGround_does_not_operate_contradictions (v : World) (φ : Form) :
         (fun u => Satisfies u (Form.and φ (Form.not φ)))
 ```
 
-Pegada auditada: `{propext, Subject}` (apenas vocabulário; o `propext` é herdado de
-`Semantics.nonContradiction`, C14, `CL`-only). Nenhuma contradição é operada, em
+Pegada auditada: `{NecessarySubjectKind, Subject, propext}` (apenas vocabulário; o `propext` é herdado de
+`Semantics.nonContradiction`, C14, `CL`-only; o `NecessarySubjectKind` é o artefacto `ExistsAt`). Nenhuma contradição é operada, em
 nenhum mundo. **O único sentido da onipotência aqui refutado é o da
 onipotência-contraditória**, e é refutado *pela* restrição ortodoxa.
 

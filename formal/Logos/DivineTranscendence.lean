@@ -233,7 +233,8 @@ theorem externality_to_every_system_is_consistent :
   ⟨Unit, fun _ _ => False, Entity.ofGround, fun _ h => h.elim⟩
 
 /-- At the canonical ground the quantifier swap fails concretely, not
-    hypothetically: the ground really does ground all actual reality
+    hypothetically: the ground really does ground all reality — `ActualEntity` is
+    vacuous (C457), so "actual" adds nothing —
     (`ofGround_ground_of_reality`, `NecessityEternity.lean:140`, reused verbatim),
     and it is nonetheless **inside** a perfectly ordinary membership class.
     Grounding is not externality. Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
@@ -289,8 +290,9 @@ theorem ofGround_external_to_every_class_may_still_be_ordered :
 
 /-- Grounding all reality does not deliver causal externality. Γ declares no
     production relation, and for *any* causal relation at all the ground can sit
-    inside a causal order. This is the exact missing statement the module header
-    records as item (2) of the causal gap.
+    inside a causal order. (The `ActualEntity` antecedent below is vacuous — C457 —
+    so the range is all entities, not "actual" ones.) This is the exact missing
+    statement the module header records as item (2) of the causal gap.
     Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem universal_grounding_does_not_entail_causal_externality :
     ∃ (S : Type) (Caus : S → Entity → Entity → Prop),

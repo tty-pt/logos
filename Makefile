@@ -32,7 +32,8 @@ audit: build
 	@$(MAKE) --no-print-directory taxonomy
 
 # Verify that GAPMAP.md's hand-written taxonomy tallies (the corpus's last
-# status-like numbers) still match the kernel; needs axiom_audit.json.
+# status-like numbers) still match the kernel, and that every per-row Pegada
+# footprint cell matches the audited kernel footprint; needs axiom_audit.json.
 taxonomy:
 	@echo "=== Verifying GAPMAP taxonomy tallies vs the kernel ==="
 	$(PYTHON) scripts/gapmap_taxonomy.py --check

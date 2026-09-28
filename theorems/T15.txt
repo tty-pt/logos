@@ -27,7 +27,12 @@ O argumento NÃO depende do tempo: a camada temporal (estágios Nat, `stageOf`,
 rigidez-mundo do fundamento entrega, por corolário definicional, ambas:
 Everlasting (∀ t, ExistsAtTime t Entity.ofGround) e
 Atemporal (∀ t₁ t₂, ExistsAtTime t₁ .ofGround ↔ ExistsAtTime t₂ .ofGround),
-mais a não-sucessão (the_ground_not_in_succession: fora de todo acto de iniciação).
+mais a não-sucessão (`the_ground_not_in_succession`). **Leitura exacta (2026-09-28, lote
+SUCCESSION C458–C462):** isto é *não-correlatividade*, não *não-iniciação* — a prova
+(`rintro ⟨s, σ, σ', p, ⟨hEq, _h⟩⟩`) **descarta** o conjugado `Initiates s σ σ' p` e fecha
+por `Entity.noConfusion hEq`. O chão não é o correlato de sujeito algum; se o chão inicia
+é outra pergunta, e Γ não tem vocabulário para a fazer (C462, `BLOCKED`, com a declaração
+exacta registada). A não-trivialidade do predicado é C460; a partilha com os átomos é C459.
 
 O teorema C181, `necessary_existence_is_stage_uniform`, formaliza o transporte
 condicional genérico: dada a existência em todos os mundos, uma representação

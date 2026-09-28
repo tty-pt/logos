@@ -46,7 +46,9 @@ theorem ofGround_transition_invariance :
 ```
 
 Pegada auditada: `{Initiates, State, Subject}` (apenas vocabulário). O fundamento está
-fora de qualquer sucessão iniciada por sujeitos (`the_ground_not_in_succession`); nenhuma
+fora de qualquer sucessão iniciada por sujeitos (`the_ground_not_in_succession` — **leitura
+exacta 2026-09-28: não-correlatividade, não não-iniciação**, a prova descarta o conjugado
+`Initiates`; ver C458–C462); nenhuma
 agência finita pode criá-lo, alterá-lo ou extingui-lo.
 
 C201 — Imutabilidade Divina Clássica do Fundamento (Síntese Mestre):
@@ -89,9 +91,19 @@ sujeito e átomo incluídos.
 A assimetria é o achado. Os três campos irmãos **quantificam de verdade e discriminam**:
 `ModalInvariance` sobre `w₁ w₂ : World` via `ExistsAt` (`:65`), `StageInvariance` sobre
 `t₁ t₂ : Time` via `ExistsAtTime` (`:84`), `TransitionInvariance` como o predicado real
-`NotInSuccession e` (`:101`). E cada um deles tem um contramodelo de não-trivialidade `{}`
-registado (C197 para a invariância modal/estática, e C192, C202, C214 para as outras
-mestres de atributo). Este campo **não tem nenhum, porque não há nada ali para refutar.**
+`NotInSuccession e` (`:101`). **Correcção de 2026-09-28 (lote SUCCESSION):** este parágrafo
+afirmava que os campos irmãos *todos* têm um contramodelo de não-trivialidade `{}` registado
+(C197 para a invariância modal/estática, e C192, C202, C214 para as outras mestres de atributo).
+Para `NotInSuccession` **não havia nenhum**, e C197 cobria `ModalInvariance` **apenas** — a
+alegação era um erro de livro. O contramodelo `{}` é agora **C461** (o chão *produz* enquanto
+`NotInSuccession g ∧ DivineImmutability g` se mantêm, porque o corpo de `NotInSuccession` não
+menciona nenhuma relação de agência ao nível da entidade), e a não-trivialidade na assinatura
+viva é **C460** (`PROVEN↑`, `{Initiates, Means, State, Subject, performative_act_datum}`).
+E a assimetria **repete-se um campo abaixo**: **C459** prova que `NotInSuccession` vale
+igualmente para o chão e para todo o átomo, logo o terceiro campo discrimina tão pouco como
+`capacity_invariance` — a gêmea exacta de C321, agora registada. O predicado é *real*
+(quantifica sobre `s σ σ' p` e menciona `Initiates`); o que não segue é que o chão seja um
+agente. Este campo (o quarto) **não tem** contramodelo, porque não há nada ali para refutar.
 
 Consequência para o registo: `ofGround_divine_immutability` (C201) **permanece `PROVEN` e
 intocado**. O que muda é que o ledger afirmava a propriedade apenas onde ela não podia

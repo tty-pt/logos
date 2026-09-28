@@ -244,13 +244,21 @@ theorem act_decomposition (s : Subject) (p : Prop) :
     Act s p ↔ Means s p ∧ ∃ w w' : State, Initiates s w w' p :=
   Iff.rfl
 
-/-- The performative act-datum gives intentional meaning without an extra bridge. -/
+/-- The performative act-datum gives intentional meaning without an extra bridge.
+
+Unconditional form: `Logos.ActCascade.someone_means_something` (C469) — the act datum is itself a declared axiom of Γ
+(`Tag: TRANS`), so the hypothesis above is discharged rather than assumed; the `Means` half of `Act`.
+-/
 theorem act_datum_implies_means (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
     ∃ s : Subject, ∃ p : Prop, Means s p := by
   obtain ⟨s, p, ha⟩ := h
   exact ⟨s, p, ha.1⟩
 
-/-- The performative act-datum gives initiation without an extra bridge. -/
+/-- The performative act-datum gives initiation without an extra bridge. -
+
+Unconditional form: `Logos.Agency.some_subject_initiates` (C455) — the act datum is itself a declared axiom of Γ
+(`Tag: TRANS`), so the hypothesis above is discharged rather than assumed; already unconditional in form — this row is the C455 line itself, and the cascade keeps it as a step rather than restating it.
+-/
 theorem act_datum_implies_initiates (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
     ∃ s : Subject, ∃ p : Prop, ∃ w w' : State, Initiates s w w' p := by
   obtain ⟨s, p, _, w, w', hi⟩ := h
@@ -284,13 +292,21 @@ theorem act_requires_subject (s : Subject) (p : Prop) (h : Act s p) : SubjectExi
 /-- Legacy alias for act_requires_subject. -/
 abbrev act_implies_exists := act_requires_subject
 
-/-- Existence of an act strictly entails that an actualized subject exists. -/
+/-- Existence of an act strictly entails that an actualized subject exists.
+
+Unconditional form: `Logos.ActCascade.someone_exists_as_subject` (C470) — the act datum is itself a declared axiom of Γ
+(`Tag: TRANS`), so the hypothesis above is discharged rather than assumed; the constitutive law that an act needs its subject.
+-/
 theorem subject_exists_of_act (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
     ∃ s : Subject, SubjectExists s := by
   obtain ⟨s, p, ha⟩ := h
   exact ⟨s, act_requires_subject s p ha⟩
 
-/-- The existential proposition AnActualSubjectExists follows from any act. -/
+/-- The existential proposition AnActualSubjectExists follows from any act.
+
+Unconditional form: `Logos.ActCascade.an_actual_subject_obtains` (C471) — the act datum is itself a declared axiom of Γ
+(`Tag: TRANS`), so the hypothesis above is discharged rather than assumed; definitionally the same conclusion, in the corpus’s own form.
+-/
 theorem an_actual_subject_exists_of_act (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
     AnActualSubjectExists :=
   subject_exists_of_act h
@@ -431,7 +447,11 @@ theorem Cogito {s : Subject} {p : Prop} (h : Asserts s p) :
     ∃ s' : Subject, ∃ p' : Prop, Act s' p' :=
   act_exists_of_assert h
 
-/-- T1 derived from the performative act-datum: the subject of an act exists. -/
+/-- T1 derived from the performative act-datum: the subject of an act exists.
+
+Unconditional form: `Logos.ActCascade.someone_exists_as_subject` (C470) — the act datum is itself a declared axiom of Γ
+(`Tag: TRANS`), so the hypothesis above is discharged rather than assumed; the T-chain step, with the hypothesis discharged.
+-/
 theorem T1_subjectExists_of_act (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
     ∃ s : Subject, SubjectExists s :=
   subject_exists_of_act h

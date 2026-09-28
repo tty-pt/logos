@@ -155,10 +155,12 @@ open Logos.LovesAsGround
 --
 -- `Realm` is the *meaning-bearing* realm. It carries a `bears_meaning` field, which is
 -- what makes it a possible target of a relation that is more than meaning-capacity
--- (`ground_love_requires_a_meaningful_target`) — and what makes inhabiting it cost
--- `AxTwoSubjects`, since `Subject` is an opaque sort. Nothing in this section was ever a
--- declared datum: `CreatedRealm` is a `def` over a `Type`-valued record, and its
--- inhabitation is the theorem `cosmos_obtains` (Section 2).
+-- (`ground_love_requires_a_meaningful_target`) — and what makes inhabiting it cost a
+-- subject-datum: `Subject` is an opaque sort, so the field must be exhibited (a
+-- contingent meaning-subject, person, or act — Sections 2–3b), never manufactured.
+-- Nothing in this section was ever a declared datum: `CreatedRealm` is a `def` over a
+-- `Type`-valued record, and its inhabitations are the conditional theorems of
+-- Sections 2–3b.
 -- ============================================================================
 
 /-- **The realm, as one record.** Every field is a predicate over the existing vocabulary
@@ -194,9 +196,9 @@ structure Realm : Type where
     inhabits keeps a single witness.
 
     Inhabiting this is **not** free: the `bears_meaning` field forces the witness to be a
-    `Subject`, so any inhabitant costs `AxTwoSubjects`. For the existence claim *without*
-    that price see `ContingentRealmObtains` below, and for the two claims derived from each
-    see `contingent_realm_obtains` and `cosmos_obtains` respectively.
+    `Subject`, so any inhabitant costs a subject-datum. For the existence claim *without*
+    that price see `ContingentRealmObtains` below, and for the claims derived from each
+    see `contingent_realm_obtains` and the `cosmos_*` inhabitations respectively.
     Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 def CreatedRealm : Prop := Nonempty Realm
 
@@ -211,8 +213,9 @@ def CreatedRealm : Prop := Nonempty Realm
     `Realm` (`:161`) requires `bears_meaning`, and because `EntityMeans` is `False` on
     `ofAtom` and `True` on `ofGround` — the latter excluded by `not_the_ground` — that single
     field forces the witness to be a `Subject`. `Subject` is an opaque sort
-    (`Agency.lean:43-49`), so *inhabiting* `Realm` costs `AxTwoSubjects`. **Existence does
-    not need that field.** Dropping it is a `structure` change, and it adds no axiom — which
+    (`Agency.lean:43-49`), so *inhabiting* `Realm` costs a subject-datum, priced in
+    vocabulary (the `Will`/`subjectWill` of a person, the `Initiates`/`State` of an act)
+    — never the plurality bridge. **Existence does not need that field.** Dropping it is a `structure` change, and it adds no axiom — which
     is what lets cosmos existence be derived rather than charged for.
 
     **On the word "created".** It labels the *region* of reality this record describes:
@@ -313,10 +316,10 @@ theorem cosmos_presence_model
        not_the_ground := Entity.noConfusion
        bears_meaning := ⟨p, hp⟩ }⟩
 
-/-- **The realm, on the performative act-datum instead of the plurality bridge.**
+/-- **The realm, on the performative act-datum.**
     `cosmos_presence_model` is the inhabitation; what it needs is a contingent-kind
-    subject who means something. The performative act-datum gets such a witness with
-    no bridge at all, kind exhibited with the act:
+    subject who means something. The performative act-datum supplies such a witness
+    with no bridge at all, kind exhibited with the act:
     `Logos.Agency.act_datum_implies_means` turns the act's `Means` conjunct into the
     meaning premise for the same subject, because `Act` already contains `Means`.
 
@@ -325,19 +328,20 @@ theorem cosmos_presence_model
     own:
 
     - **A theorem discovers, it does not manufacture.** Γ cannot supply a subject out
-      of nothing, and it is not being asked to: the act-datum is *assumed as given*,
-      the way `Logos.Agency` states its foundation — "the present act of reasoning is
-      *given*, not inferred" (`Agency.lean:4`). The price moves from a META bridge to
-      a TRANS datum. It does not evaporate, and the row is badged ◈ accordingly.
+      of nothing, and it is not being asked to: the contingent act is *assumed as
+      given*, the way `Logos.Agency` states its foundation — "the present act of
+      reasoning is *given*, not inferred" (`Agency.lean:4`). The price is the datum
+      itself, stated as the hypothesis. It does not evaporate.
     - **The A1 bug was exactly this made unconditional.** Deleting the act-datum and
       anchoring subject-existence on plurality made it "a consequence of plurality —
       the very datum it must precede" (`GAPMAP.md`, batch A1/M0). A1 was caught and
       reverted for that reason; re-anchoring `cosmos_obtains` now would repeat it.
 
-    So the claim is *not* that the cosmos is free. It is that `AxTwoSubjects` is one
-    route to a meaning-bearing realm and not the only one, which is a falsifiable
-    difference: reject the bridge and C367 goes, while this row stands on the datum
-    alone.
+    So the claim is *not* that the cosmos is free. It is that the meaning-datum
+    (C354), the person-datum (C367) and the act-datum (this row) are three independent
+    routes to a meaning-bearing realm — a falsifiable difference, since each row
+    stands on its own datum and falls with it — and none of them pays the plurality
+    bridge.
     Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject, propext}`. -/
 theorem cosmos_presence_model_of_the_act_datum
     (h : ∃ s : Subject, ContingentSubjectKind s ∧ ∃ p : Prop, Logos.Agency.Act s p) :
@@ -392,7 +396,7 @@ theorem cosmos_presence_model_of_the_act_datum
     is a relocation of the cost, not a removal of it.
 
     **This row is C367, not C350.** The 2026-09-27 split moved the bare existence claim to
-    `contingent_realm_obtains` (C350, `PROVEN`, `{propext, Subject}`) and left the
+    `contingent_realm_obtains` (C350, `PROVEN`, `{CL, NecessarySubjectKind, Subject}`) and left the
     meaning-bearing inhabitation here. What distinguishes the two is `bears_meaning`, and
     what identifies the derived realm as *the cosmos* is this row — not C324's atom, which
     the ledger explicitly forbids reading as the cosmos.
@@ -519,8 +523,8 @@ theorem reality_is_not_exhausted_by_the_ground :
     meaning-bearing realm from the bare atom-existence of `a_contingent_entity_exists`.
 
     **This claim keeps its price on purpose.** It is read off `cosmos_obtains` and therefore
-    inherits `AxTwoSubjects`, because `bears_meaning` needs a `Subject` and `Subject` is an
-    opaque sort. Meaning is the substantive half of the thesis; charging for it is correct,
+    inherits the person-hypothesis price (`Will`/`subjectWill`), because `bears_meaning`
+    needs a `Subject` and `Subject` is an opaque sort. Meaning is the substantive half of the thesis; charging for it is correct,
     and the 2026-09-27 change deliberately did **not** route this through
     `contingent_realm_obtains`. Doing so would be a vacuous proof, and the two shortcuts that
     would have made it free — rescoping love onto an atom, and relaxing `EntityMeans` so
@@ -582,15 +586,21 @@ theorem the_ground_loves_the_cosmos_in_a_context
     the_ground_loves_every_meaningful_contingent_reality hc R.bears_meaning⟩
 
 -- ============================================================================
--- Section 3b: The God-lane — the ground's-love line without the META bridge
+-- Section 3b: The God-lane — the ground's-love line through the act-datum
 -- ============================================================================
 
-/-- **The conclusion of C351, and the God-lane's payoff: `AxTwoSubjects` is not
-    required for the ground's love.** `the_ground_loves_the_cosmos` is C351 and reaches
-    its meaning conjunct through `cosmos_obtains`, which is the row that pays the
-    plurality bridge. Re-route the *only* step that pays it through
-    `cosmos_presence_model_of_the_act_datum` and the bridge drops out of the footprint
-    while the statement is byte-identical.
+/-- **The conclusion of C351, through the act-datum instead of the person-datum.**
+    `the_ground_loves_the_cosmos` is C351 and reaches its meaning conjunct through
+    `cosmos_obtains`, which exhibits a contingent *person*. Re-route that step through
+    `cosmos_presence_model_of_the_act_datum`, which exhibits an *act*, and the
+    conclusion is byte-identical with the person vocabulary swapped for the act
+    vocabulary.
+
+    (History, so the older "removes the bridge" telling is not misread: when this
+    row was written, C351 still paid the plurality bridge, and the row removed it.
+    The two-kinds correction of 2026-09-28 has since removed the bridge from both
+    rows — `AxTwoSubjects` occurs in neither footprint — leaving the hypothesis
+    swap as this row's content.)
 
     The love bridge `Logos.LovesAsGround.AxGroundLovesContingentRealm` and the
     relation `GroundBearsGood` remain, and must: a directional good held by the ground
@@ -598,15 +608,17 @@ theorem the_ground_loves_the_cosmos_in_a_context
     sufficiency, and the corpus has already recorded that no reading of it is `{}`
     (see `LovesAsGround.lean`'s module note).
 
-    What this row removes is the **whole plurality route** — measured, `AxTwoSubjects`
-    *and* the `Will`/`subjectWill` that entered only through it: C351's footprint is
-    `{AxGroundLovesContingentRealm, AxTwoSubjects, GroundBearsGood, Means, Subject, Will,
-    propext, subjectWill}` and this row's is `{AxGroundLovesContingentRealm,
-    GroundBearsGood, Initiates, Means, State, Subject, propext}`. Three axioms and a sort
-    fewer, statement byte-identical. That matters for a reader's verdict on the price:
-    the interpersonal metaphysics is no longer among the premises of the ground's love,
-    and the two remaining premises are independent of it, so it is *visible* as removed
-    rather than quietly absorbed.
+    What this row changes, measured: C351's footprint is
+    `{AxGroundLovesContingentRealm, GroundBearsGood, Means, NecessarySubjectKind,
+    Subject, Will, propext, subjectWill}` and this row's is
+    `{AxGroundLovesContingentRealm, GroundBearsGood, Initiates, Means,
+    NecessarySubjectKind, State, Subject, propext}` — the `Will`/`subjectWill` that
+    entered through the person-hypothesis are swapped for the `Initiates`/`State`
+    that enter through the act-hypothesis, statement byte-identical. That matters
+    for a reader's verdict on the price: the person-datum is no longer among the
+    premises of the ground's love, and the act-datum that replaces it is
+    independently priced (C454), so the swap is *visible* rather than quietly
+    absorbed.
 
     **This does not make the conclusion free, and the row is not promoted.** The price
     is relocated to the declared act-datum axiom `performative_act_datum` (C454, `Tag: TRANS`):

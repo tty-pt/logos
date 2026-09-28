@@ -1035,7 +1035,11 @@ theorem genuineChoice_exists_of_bilateral_intentionality
 /-- Genuine choice exists: an acting subject co-means contradictory alternatives under act polarity.
 
  Derived from an intentional act datum under AxActPolarity.
-    Footprint: `{AxActPolarity, Initiates, Means, State, Subject}`. -/
+    Footprint: `{AxActPolarity, Initiates, Means, State, Subject}`.
+
+Unconditional form: `Logos.ActCascade.genuineChoice_exists_of_act_datum_polarity` (C476) — the act datum is itself a declared axiom of Γ
+(`Tag: TRANS`), so the hypothesis above is discharged rather than assumed; the `AxActPolarity` price is still on the row.
+-/
 theorem genuineChoice_exists_of_act (h : ∃ s : Subject, ∃ p : Prop, Act s p) : genuineChoice_exists := by
   obtain ⟨s, p, ha⟩ := h
   have hmp : Means s p := ha.1
@@ -1044,7 +1048,11 @@ theorem genuineChoice_exists_of_act (h : ∃ s : Subject, ∃ p : Prop, Act s p)
 
 /-- Closure of genuine choice from intentional action under the constitutive thesis AxIntentionalChoice.
     Primary constitutive closure for F1b.
-    Footprint: `{AxIntentionalChoice, Initiates, Means, State, Subject}`. -/
+    Footprint: `{AxIntentionalChoice, Initiates, Means, State, Subject}`. -
+
+Unconditional form: `Logos.ActCascade.genuineChoice_exists_of_act_datum_constitutive` (C475) — the act datum is itself a declared axiom of Γ
+(`Tag: TRANS`), so the hypothesis above is discharged rather than assumed; the `AxIntentionalChoice` price is still on the row.
+-/
 theorem genuineChoice_exists_of_act_constitutive
     (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
     genuineChoice_exists := by
@@ -1054,21 +1062,33 @@ theorem genuineChoice_exists_of_act_constitutive
 
 /-- Free will derived from intentional action under the constitutive thesis AxIntentionalChoice.
     Primary target theorem closing F1b under the performative act datum and AxIntentionalChoice.
-    Footprint: `{AxIntentionalChoice, Initiates, Means, State, Subject}`. -/
+    Footprint: `{AxIntentionalChoice, Initiates, Means, State, Subject}`. -
+
+Unconditional form: `Logos.ActCascade.freeWill_exists_of_act_datum_constitutive` (C477) — the act datum is itself a declared axiom of Γ
+(`Tag: TRANS`), so the hypothesis above is discharged rather than assumed; the `AxIntentionalChoice` price is still on the row.
+-/
 theorem freeWill_exists_of_act
     (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
     ∃ s : Subject, FreeWill s :=
   freeWillExists_of_genuineChoice (genuineChoice_exists_of_act_constitutive h)
 
 /-- Free subject derived from intentional action under the constitutive thesis AxIntentionalChoice.
-    Footprint: `{AxIntentionalChoice, Initiates, Means, State, Subject}`. -/
+    Footprint: `{AxIntentionalChoice, Initiates, Means, State, Subject}`. -
+
+Unconditional form: `Logos.ActCascade.freeSubject_exists_of_act_datum` (C479) — the act datum is itself a declared axiom of Γ
+(`Tag: TRANS`), so the hypothesis above is discharged rather than assumed; `FreeSubject` is *defined* as `FreeWill`.
+-/
 theorem freeSubject_exists_of_act
     (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
     ∃ s : Subject, FreeSubject s :=
   freeWill_exists_of_act h
 
 /-- Free will exists under the stronger contradictory-negation principle AxActPolarity.
-    Footprint: `{AxActPolarity, Initiates, Means, State, Subject}`. -/
+    Footprint: `{AxActPolarity, Initiates, Means, State, Subject}`. -
+
+Unconditional form: `Logos.ActCascade.freeWill_exists_of_act_datum_polarity` (C478) — the act datum is itself a declared axiom of Γ
+(`Tag: TRANS`), so the hypothesis above is discharged rather than assumed; the `AxActPolarity` price is still on the row.
+-/
 theorem freeWill_exists_of_act_polarity (h : ∃ s : Subject, ∃ p : Prop, Act s p) :
     ∃ s : Subject, FreeWill s :=
   freeWillExists_of_genuineChoice (genuineChoice_exists_of_act h)

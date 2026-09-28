@@ -116,6 +116,35 @@ theorem subject_exists_at_actualWorld (s : Subject) : ExistsAt actualWorld (Enti
   dsimp [ExistsAt, Logos.Entity.EntityExistsAt, Logos.Entity.SubjectExistsAt, EntityOf]
   exact Or.inr rfl
 
+/-- **Vacuity disclosure (C321-class): `ActualEntity` holds of every entity, by
+    definition.** At `actualWorld := fun _ => TV.t` each constructor closes without
+    content: subject-correlates by `actualWorld = actualWorld` (`rfl` — the
+    `NecessarySubjectKind` disjunct of `SubjectExistsAt` is dead here, as in
+    `subject_exists_at_actualWorld` above), atoms by β-reduction to `TV.t = TV.t`,
+    the ground by `True`. So the predicate discriminates nothing; it is a C321-shaped
+    vacuity, recorded rather than repaired.
+
+    Consequences, all machine-checked from this row: the `ActualEntity t` conjunct
+    of `LovesAsGround.GroundLoves` does no work — the divine love's real target
+    conditions are `t ≠ ofGround` and `∃ q, EntityMeans t q` alone; the two
+    `DivineTranscendence` universal-grounding statements range over *all* entities,
+    not "actual" ones; and any future totality reading keyed on `ActualEntity`
+    collapses to `True` (so it cannot carry a "God loves everything" axiom — the
+    atom exclusion would still refute it).
+    Footprint: `{NecessarySubjectKind, Subject}` (vocabulary-only: the
+    `NecessarySubjectKind` disjunct is mentioned but never used — the proof takes
+    the `rfl` branch). -/
+theorem every_entity_is_actual (e : Entity) : ActualEntity e := by
+  dsimp [ActualEntity, ExistsAt]
+  cases e with
+  | ofSubject s =>
+      dsimp [Logos.Entity.EntityExistsAt, Logos.Entity.SubjectExistsAt, EntityOf]
+      exact Or.inr rfl
+  | ofAtom _ => rfl
+  | ofGround => trivial
+
+#print axioms Logos.RecoveredOntologicalGround.every_entity_is_actual
+
 /-- Contingent finite subjects are numerically distinct from any necessary entity.
     Prevents modal collapse and preserves the separation of the human subject from the ground. -/
 theorem contingent_subject_ne_necessary_entity

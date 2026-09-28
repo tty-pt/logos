@@ -54,7 +54,7 @@ context of evaluation. It is priced twice over: the primitive `GroundBearsGood`
 meaning now a **theorem** of Γ (`CosmicExistence.cosmos_obtains`, C367) rather than a
 declared datum `[2026-09-27: was a `Tag: SEM` datum, `AxContingentCreationObtains`;
 retired; and 2026-09-27 again, lot COSMOS-EXISTENCE-IS-FREE: this bridge now pays for the
-realm's *meaning* alone. C350 became `PROVEN` at `{propext, Subject}` — the existence is
+realm's *meaning* alone. C350 became `PROVEN` at `{CL, NecessarySubjectKind, Subject}` — the existence is
 free, so the two prices are no longer shared, and rejecting `AxTwoSubjects` no longer takes
 the realm's existence with it]`.
 

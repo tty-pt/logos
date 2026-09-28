@@ -385,9 +385,8 @@ Subject}`; e o lote MEANING-RETORSION fecha o lado da existencia com C377
 é a que o poema P3 usa), ambos `{Initiates, Means, State, Subject}` e sem axiom
 novo. Note-se a assimetria de preço, que é o ponto: a existencia de significado
 **lógico** seria a mais barata de todas, e a de significado **intencional** é a
-que paga `AxTwoSubjects` (C367, na sua conjunct `bears_meaning`) — porque
-"realidade de certo e errado" exige pelo menos duas pessoas. O lote mostra
-apenas que essa ponte é desnecessária *quando a afirmação é dada*.
+que paga o dado de pessoa (C367, na sua conjunct `bears_meaning`). O lote mostra
+apenas que esse dado é desnecessário *quando a afirmação é dada*.
 
 *A negação desta conclusão, como posição:* o mesmo lote que formaliza a
 existencia formaliza também a recusa de a poder afirmar-se. `NoMeaning : Prop :=
@@ -563,6 +562,46 @@ chooses_implies_freeWill : Chooses(s,p,q) ⇒ FreeWill(s)   [{Means, Subject} s�
 
 A liberdade não é um passo metafísico adicional a partir da escolha genuína; é a sua própria definição formal:
 o sujeito livre é aquele que possui livre-arbítrio (`FreeSubject(s) := FreeWill(s)`, `freeSubject_iff_freeWill : FreeSubject s ↔ FreeWill s`, `Iff.rfl`).
+
+**ACT-CASCADE (2026-09-28, C469–C480) — as consequências do dado já não são condicionais.**
+   Oitoeen teoremas, por cinco módulos, tinham o `performative_act_datum` (C454, `Tag: TRANS`,
+   **incondicional**) como *hipótese única*. Uma hipótese que é ela própria um axioma declarado de Γ
+   não é uma hipótese: é um vestígio de antes de o dado ser admitido. Cada um dos dezoito é um
+   corolário de uma linha de um pai que já existe e cuja prova já existe. Os dezoito colapsam em
+   **doze conclusões distintas** (`act_datum_implies_initiates` já é incondicional na forma — é
+   C455; `subject_exists_of_act` = `T1_subjectExists_of_act` = `T1_subjectExists`;
+   `intentionalSubject_exists_of_act` = `T5_intentionalSubjectExists`; `freeWill_exists_of_act` =
+   `freeWill_exists`; `freeSubject_exists_of_act` = `freeSubject_exists`; um corolário duplicado não
+   é um segundo resultado). **A cascata não é gratuita:** as doze linhas passam a **pagar
+   `performative_act_datum` na pegada**, e as cinco linhas de escolha genuína / livre-arbítrio /
+   sujeito livre continuam a pagar `AxIntentionalChoice` ou `AxActPolarity` por cima. O preço estava
+   escondido num binder; passa a ser visível e obrigatório em cada linha. É **divulgação, não
+   reforço** de Γ: Γ ganhou um teorema sobre mais uma coisa, não mais uma premissa.
+   Duas linhas não acrescentam nada a um desdobramento definicional, e di-lo-ão: **C471 é
+   definitionally C470** (`AnActualSubjectExists := ∃ s, SubjectExists s`), e C473/C474/C479 são a
+   mesma predicação sob os outros nomes do corpus (`IntentionalSubject s := ∃ p, Means s p`;
+   `Intentional := IntentionalSubject`; `FreeSubject := FreeWill`). **C472 não se lê como
+   agentividade:** `Agent (_s : Subject) := True`, logo `an_agent_exists` é exactamente tão forte
+   quanto C470 e nada mais (precedente de C321: uma propriedade de tudo não caracteriza nada);
+   descarrega o passo `T4_agentExists` da cadeia T, nada mais.
+   **A via `Asserts` fecha-se por construção, e é este o que o lote deixa em aberto.**
+   `Asserts s p := Act s p ∧ p` — C454 não produz existencial de `Asserts`, porque não há
+   proposição disponível que seja simultaneamente portadora de `Act` *e* verdadeira. A ponte
+   `act_implies_asserts_bridge` (`Choice.lean:652`) fica sem preço e **doze teoremas permanecem
+   condicionais**, deliberadamente intocados: os primeiros dez, por um princípio semântico ou pela
+   ponte; os dois últimos, por uma premissa *universal* sobre todos os actos, que uma única
+   testemunha existencial não descarrega. É o único sítio onde uma ponte seria **conteúdo substantivo
+   novo** em vez de hipótese descargada — e por isso fica fora.
+   **Correcção ao plano do lote (a máquina apanhou o erro).** O plano afirmava que a célula de
+   pegada de F1b estava desactualizada «pelo mesmo motivo que a de C455». **Não está.**
+   `Choice.freeWill_exists`, o primeiro teorema nomeado por F1b, é **incondicional** e tem pegada
+   exactamente `{AxIntentionalChoice, Initiates, Means, State, Subject}` — o que a célula já dizia.
+   Não havia hipótese a descarregar. A célula fica **como estava**; o que muda é que a cascata tem
+   agora as suas **próprias** linhas (C475/C477/C479) para exibir o preço. Consequência prática:
+   `performative_act_datum` conta **16** linhas `PROVEN↑`, não 17. E apontar F1b para a declaração
+   de C477 teria dissolvido F1b num alias (e `F7 → F1b` com ele), violando o invariante de
+   exactamente 7 aliases dissolvidos: uma linha `F` é canónica por desenho e não se aponta para
+   uma `C`.
 
 A *existência* de escolha genuína e do livre-arbítrio (F1b) é demonstrada no corpus por duas rotas formais:
 
@@ -1330,7 +1369,7 @@ O limite da fase puramente dedutiva manifesta-se onde a dedução pura encontra 
 
 - **C233–C240 (FOUNDATIONAL-OMNISCIENCE, 2026-09-26):** `DivineOmniscience.lean` formaliza a Onisciência Fundacional clássica — o fundamento como condição de toda a verdade (Aquino ST I q. 14 a. 1, README-OLD.md §263, CHARACTERISTICS.md §14) para `Entity.ofGround`. Resultados: (1) Independência metateórica exaustividade/infalibilidade (`entity_scope_exhaustiveness_is_not_infallibility`, `{}`): um âmbito pode ser exaustivo sobre toda a proposição verdadeira e ainda assim não rastrear a verdade exactamente; (2) Onisciência fundacional (`ofGround_truth_exhaustive`, `{Means, Subject}`): nenhuma proposição verdadeira está fora do âmbito do fundamento; (3) Exaustividade indexada por mundo (`ofGround_world_truth_exhaustive`, `{Means, Subject}`): nenhum estado de affairs verdadeiro em qualquer mundo possível está fora do âmbito; (4) Refutação do sentido forte (`ofGround_not_truth_tracking`, `{Means, Subject}`): como `EntityMeans .ofGround p` se reduz a `True` (estipulação ◈ `ofGround_meansAll`), a metade exclusiva `EntityMeans e p → T p` é falsa do fundamento — o âmbito é exaustivo e provadamente não é isento de erro, pelo que a leitura clássica "todas e apenas as verdadeiras" é refutada, não apenas omitida; (5) Exclusão de átomos (`atom_not_truth_exhaustive`, `{Means, Subject}`) e de sujeitos discriminadores (`discriminating_subject_not_truth_exhaustive`, `{Means, Subject}`); (6) Síntese mestre da Onisciência Fundacional (`ofGround_foundational_omniscience`, `{Means, Subject}`), com a refutação da infalibilidade transportada como campo do registo; (7) Contramodelo de não-forçamento do sentido contrafactual (`exhaustive_scope_without_counterfactual_knowledge`, `{}`); princípio tomista associado: `necessity_and_scope_yield_foundational_omniscience` (`{Means, Subject}`). A onisciência clássica/ordinária continua desmentida na prosa: Γ não tem predicado `Knows` e `Entity.ofGround` não é correlato de sujeito (`ofGround_ne_ofSubject`), pelo que nenhuma ponte de conhecimento divino é manufacturada.
 
-- **C241–C251 (FOUNDATIONAL-OMNIPOTENCE, 2026-09-26):** `DivineOmnipotence.lean` formaliza a Onipotência Fundacional clássica — o fundamento como operante *sempre e em todo o lugar* sobre o que não envolve contradição (Aquino ST I q. 25 a. 5 ad 1, *semper et ubique operans*, README-OLD.md §263, CHARACTERISTICS.md §15) para `Entity.ofGround`. **Correção de enquadramento (2026-09-26):** a primeira redacção deste lote propunha "refutar o sentido forte" da onipotência, nomeando a leitura da onipotência-contraditória como *o* sentido clássico; isso estava errado, e a leitura ortodoxa é a de Tomás — poder sobre o que não envolva contradição. Logo a restrição **afirma-se, não se refuta**: (1) Contramodelo do preço da identificação (`existence_everywhere_does_not_entail_operation`, `{}`): presença em todo o lado ⇏ operação, pelo que presença não é produção; (2) Onipotência fundacional (`ofGround_gapless_operative_scope`, `{Subject}`): nenhum estado de affairs satisfazível em qualquer mundo acessível está fechado ao âmbito operativo do fundamento; (3) Primeira face da restrição (`ofGround_operates_only_what_obtains`, `{Subject}`): nada que não obtenha — logo nada satisfazível — é operado; (4) Segunda face (`ofGround_does_not_operate_contradictions`, `{propext, Subject}`): nenhuma contradição é operada em nenhum mundo, por `Semantics.nonContradiction` (C14) — **apenas** a leitura da onipotência-contraditória é refutada, e é-o *pela* restrição ortodoxa; (5) Exclusão de átomos (`atom_not_gapless_operate`) e de sujeitos discriminadores (`discriminating_subject_not_gapless_operate`), ambos `{Subject}`; (6) O fundamento é o **único** operador sem lacunas (`ofGround_sole_gapless_operator`, `{Subject}`), pelo que a característica fica fechada contra os outros dois construtores de `Entity`; (7) Síntese mestre da Onipotência Fundacional (`ofGround_foundational_omnipotence`, `{Means, Subject, propext}`); (8) O domínio do âmbito é não-vazio e livre de contradições (`satisfiable_scope_is_nonempty_and_contradiction_free`, `{propext}`), pelo que a leitura "tudo o que não envolva contradição" é **substancial, não vaciosa**; (9) Contramodelos de delimitação (`gapless_operative_scope_without_conjunctive_power` e `exhaustive_scope_without_operative_scope`, ambos `{}`): a acessibilidade modal de Γ não é conjuntiva, e âmbito exaustivo ⇏ âmbito operativo — por isso (2) é provado da presença rígido-mundial (estipulação ◈ `ofGround_existsAt`) e nunca lido do âmbito de `FoundationalOmniscience`; princípio tomista *semper* associado: `necessity_and_presence_yield_foundational_omnipotence` (`{Means, Subject, propext}`). A identificação `OperatesAt v e P := ExistsAt v e ∧ P v` é uma *definição*, não uma derivação, e está preçada como 4.ª estipulação ◈ `operatesAt_presencePlusObtaining` (`Tag: SEM`), com o preço machine-checked por (1) e (9). O sentido **causal/criativo** ("pode trazer X à existência") permanece **BLOCKED** (GAPMAP nível 17, linha F10): Γ não declara relação de produção de entidade alguma — a única relação de iniciação, `Agency.Initiates`, é indexada por sujeito e `Entity.ofGround` não é correlato de sujeito (`ofGround_ne_ofSubject`) — e a relação mais próxima, a contenção explicativa `GroundsEntity`, não pode servir por (9). Faltam exactamente duas afirmações: (i) o vocabulário `Produces : Entity → World → Form → Prop` e (ii) a derivação de que o fundamento produz todo estado de affairs satisfazível. A ressalva da prosa (`README-OLD.md:263`) fica **mantida mas estreitada ao sentido causal**.
+- **C241–C251 (FOUNDATIONAL-OMNIPOTENCE, 2026-09-26):** `DivineOmnipotence.lean` formaliza a Onipotência Fundacional clássica — o fundamento como operante *sempre e em todo o lugar* sobre o que não envolve contradição (Aquino ST I q. 25 a. 5 ad 1, *semper et ubique operans*, README-OLD.md §263, CHARACTERISTICS.md §15) para `Entity.ofGround`. **Correção de enquadramento (2026-09-26):** a primeira redacção deste lote propunha "refutar o sentido forte" da onipotência, nomeando a leitura da onipotência-contraditória como *o* sentido clássico; isso estava errado, e a leitura ortodoxa é a de Tomás — poder sobre o que não envolva contradição. Logo a restrição **afirma-se, não se refuta**: (1) Contramodelo do preço da identificação (`existence_everywhere_does_not_entail_operation`, `{}`): presença em todo o lado ⇏ operação, pelo que presença não é produção; (2) Onipotência fundacional (`ofGround_gapless_operative_scope`, `{NecessarySubjectKind, Subject}`): nenhum estado de affairs satisfazível em qualquer mundo acessível está fechado ao âmbito operativo do fundamento; (3) Primeira face da restrição (`ofGround_operates_only_what_obtains`, `{NecessarySubjectKind, Subject}`): nada que não obtenha — logo nada satisfazível — é operado; (4) Segunda face (`ofGround_does_not_operate_contradictions`, `{NecessarySubjectKind, Subject, propext}`): nenhuma contradição é operada em nenhum mundo, por `Semantics.nonContradiction` (C14) — **apenas** a leitura da onipotência-contraditória é refutada, e é-o *pela* restrição ortodoxa; (5) Exclusão de átomos (`atom_not_gapless_operate`) e de sujeitos discriminadores (`discriminating_subject_not_gapless_operate`), ambos `{NecessarySubjectKind, Subject}`; (6) O fundamento é o **único** operador sem lacunas (`gapless_operators_are_ground_or_necessary_kind`, `{NecessarySubjectKind, Subject}`), pelo que a característica fica fechada contra os outros dois construtores de `Entity`; (7) Síntese mestre da Onipotência Fundacional (`ofGround_foundational_omnipotence`, `{CL, Means, NecessarySubjectKind, Subject}`); (8) O domínio do âmbito é não-vazio e livre de contradições (`satisfiable_scope_is_nonempty_and_contradiction_free`, `{propext}`), pelo que a leitura "tudo o que não envolva contradição" é **substancial, não vaciosa**; (9) Contramodelos de delimitação (`gapless_operative_scope_without_conjunctive_power` e `exhaustive_scope_without_operative_scope`, ambos `{}`): a acessibilidade modal de Γ não é conjuntiva, e âmbito exaustivo ⇏ âmbito operativo — por isso (2) é provado da presença rígido-mundial (estipulação ◈ `ofGround_existsAt`) e nunca lido do âmbito de `FoundationalOmniscience`; princípio tomista *semper* associado: `necessity_and_presence_yield_foundational_omnipotence` (`{CL, Means, NecessarySubjectKind, Subject}`). A identificação `OperatesAt v e P := ExistsAt v e ∧ P v` é uma *definição*, não uma derivação, e está preçada como 4.ª estipulação ◈ `operatesAt_presencePlusObtaining` (`Tag: SEM`), com o preço machine-checked por (1) e (9). O sentido **causal/criativo** ("pode trazer X à existência") permanece **BLOCKED** (GAPMAP nível 17, linha F10): Γ não declara relação de produção de entidade alguma — a única relação de iniciação, `Agency.Initiates`, é indexada por sujeito e `Entity.ofGround` não é correlato de sujeito (`ofGround_ne_ofSubject`) — e a relação mais próxima, a contenção explicativa `GroundsEntity`, não pode servir por (9). Faltam exactamente duas afirmações: (i) o vocabulário `Produces : Entity → World → Form → Prop` e (ii) a derivação de que o fundamento produz todo estado de affairs satisfazível. A ressalva da prosa (`README-OLD.md:263`) fica **mantida mas estreitada ao sentido causal**.
 
 A cadeia do poema avançou. Estado formal (theorems/T3.txt, theorems/T10–T14.txt, theorems/T19.txt, theorems/T20.txt, theorems/T21.txt, theorems/T22.txt, theorems/T23.txt, theorems/T24.txt, theorems/T25.txt, theorems/T26.txt, theorems/T27.txt, theorems/T28.txt, theorems/T29.txt):
 
@@ -1535,8 +1574,12 @@ Teologia forte da eternidade divina (eternidade metafísica "fora de toda a temp
   `stage_invariance` serem o mesmo predicado (C432) passa a ser um teorema de que a
   derivação depende, e não uma coincidência silenciosa. A exclusividade da Imutabilidade
   é a **única** que fica de fora, e fica registada como fronteira com o lema exacto
-  (C453, DEFERRED) — `capacity_invariance` é vácua por reflexibilidade e `Initiates` é um
-  campo de assinatura não restringido.
+  (C453, DEFERRED) — `capacity_invariance` é vácua por reflexibilidade e `Initiates` **era** um
+  campo de assinatura não restringido. **Actualizado 2026-09-28 (lote SUCCESSION C458–C462):**
+  C454 habitou `Initiates`, logo a justificação caiu — mas o `DEFERRED` **fica**, porque o que
+  resta é mais fraco, não mais forte: `the_ground_not_in_succession` é não-correlatividade, não
+  não-iniciação (a prova descarta o conjugado `Initiates`), e o mesmo predicado vale para todo
+  o átomo (C459).
   A distinção entre os dois termos, que o texto deixou por fazer, passou a ser
   machine-checked (lote PRECEDENCE-AND-TEMPORAL-UNICITY, 2026-09-28, C432/C436–C438):
   `everlasting_implies_atemporal` (C436) dá o passo genérico — `Everlasting e := ∀ t,
@@ -2211,8 +2254,8 @@ maneira; o **fim** e a **encarnação** não saem, e a **produção** nunca foi 
 > nenhuma:
 >
 > - **C350** passa a ser `CosmicExistence.contingent_realm_obtains : ContingentRealmObtains`
->   — `PROVEN`, `{propext, Subject}` — e é habitada por um **átomo** através de
->   `LovesAsGround.an_atom_is_contingent 0` (`{propext, Subject}`, C324), sem tocar na ponte
+>   — `PROVEN`, `{CL, NecessarySubjectKind, Subject}` — e é habitada por um **átomo** através de
+>   `LovesAsGround.an_atom_is_contingent 0` (`{CL, NecessarySubjectKind, Subject}`, C324), sem tocar na ponte
 >   pluralista. A estrutura nova `ContingentRealm` é `Realm` **sem** o campo
 >   `bears_meaning`, e é por isso que o preço não aparece: sem ponte, sem `Means` — o que
 >   resta é vocabulário declarado: o *sort* `Subject` (herdado da construção da
@@ -2262,8 +2305,8 @@ Ainda requer prova (o que falta, em termos formais):
       derivada. **Já não é verdade, e a verdade é mais forte do que a correcção anterior
       supunha.** A afirmação foi dividida: a **existência** é agora `PROVEN` sem ponte
       (**C350** `CosmicExistence.contingent_realm_obtains : ContingentRealmObtains`,
-      `{propext, Subject}`), e o **significado** é que é `PROVEN↑`
-      (**C367** `CosmicExistence.cosmos_obtains : CreatedRealm`, sob `AxTwoSubjects`). Com a
+      `{CL, NecessarySubjectKind, Subject}`), e o **significado** é que é `PROVEN`
+      (**C367** `CosmicExistence.cosmos_obtains : CreatedRealm`, dado de pessoa exibida, sem ponte). Com a
       satisfatibilidade condicional de C354 (`cosmos_presence_model`) e o contramodelo do
       formato (C353, `{}`) mantidos. A existência **não está** na zona da fé **nem** na zona
       da ponte: Rejeitar `AxTwoSubjects` deixa-a intacta. Ver item (4) e a 2.ª correcção acima.
@@ -2326,13 +2369,42 @@ Ainda requer prova (o que falta, em termos formais):
       ser um `axiom`, não um `def`, porque o preço de um `def` é invisível a `#print axioms`.
       C455 (`some_subject_initiates`) dá então a habitabilidade de `Initiates`
       incondicionalmente: alguém inicia. C367 fica intacta e
-      continua a pagar a ponte — a linha nova é *companhia*, não substituição.
+      continua a pagar o dado de pessoa — a linha nova é *companhia*, não substituição.
       **O que permanece caro é a existência incondicional** de um sujeito que significa,
-      que continua `PROVEN↑` sob `AxTwoSubjects` (C367): a ponte é excessiva *quando a
+      que continua `PROVEN` sob o dado de pessoa (C367): o dado é excessivo *quando a
       afirmação é fornecida*, não em geral. E a tese do "não há significado" **não** é
       por isso refutada quanto ao conteúdo — C382 (`{}`) é um mundo **populado** onde ela é
       verdadeira e inafirmável, e é esse o complemento que impede a leitura de trivia.
       Ver §26 item 3 (nota agora preenchida) e §10/§11.
+
+**ACT-CASCADE (2026-09-28, C469–C480) — a fila de fronteira que fica, nomeada em termos
+formais.** Lote de doze linhas novas, **zero axiomas novos** (registo imóvel em 31 = VOCAB 17 /
+SEM 6 / META 7 / TRANS 1). **Ainda requer prova**, e o que falta é exacto:
+(a) **a habitabilidade de `Asserts`**, isto é
+    `∃ s : Subject, ∃ p : Prop, Asserts s p`, para a qual falta o habitante de
+    `Logos.Choice.act_implies_asserts_bridge : (∀ s p, Act s p → Asserts s p)`
+    (`Choice.lean:652`) — hoje um `def` sem habitante, e portanto sem preço visível. Não é um
+    esquecimento: `Asserts s p := Act s p ∧ p` exige uma proposição que seja *ao mesmo tempo*
+    portadora de `Act` e verdadeira, e C454 só fornece a primeira das duas metades. **Doze**
+    teoremas dependem desta única peça: `selection_exists_of_act`,
+    `genuineChoice_exists_of_contrastive_act`, `freeWill_exists_of_contrastive_act`,
+    `freeSubject_exists_of_contrastive_act`, `genuineChoice_exists_of_doubt_bridge`,
+    `freeWill_exists_of_doubt_bridge`, `genuineChoice_exists_of_act_polarity`,
+    `genuineChoice_exists_of_bilateral_intentionality`, `deliberateResource_of_act_polarity`,
+    `deliberateResource_of_bilateral_intentionality` (os dez primeiros, por princípio semântico
+    ou pela ponte sem preço) e `act_polarity_implies_existential`,
+    `freeWill_exists_of_existential_choice` (os dois últimos, por premissa **universal** sobre
+    todos os actos — `act_polarity_principle`, `existential_intentional_choice` — que uma única
+    testemunha existencial não descarrega);
+(b) **a forma por sujeito** `∀ s, SubjectExists s → ∃ p, Act s p`, que é estritamente mais forte
+    que o existencial global de C454 e continua por demonstrating (C453). A cascata **não** a
+    fecha, e nenhuma das doze linhas a afirma;
+(c) **a universalização da produção** `(∃ w, Satisfies w φ) → ∃ v, Produces g v φ`
+    (`DivineOmnipotence.lean:55-58`) — F10 continua `BLOCKED`, e agora com contramodelo de
+    assinatura livre ao lado (C483, `{}`): as duas *formas* são independentes, o que localiza o
+    bloqueio **sem** o refutar dentro de Γ.
+Nada disto é um `?` novo: são as mesmas filas de fronteira, agora com o que falta escrito em
+`Prop` e não em prosa.
 
 Limites honestos de escopo: o lote é, em quase todo o corpo, **negativo** — das 33 linhas
 novas, **24 são `PROVEN` sobre vocabulário declarado, 6 são `PROVEN↑` sobre uma ponte

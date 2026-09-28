@@ -2,7 +2,7 @@
 
 **Repository:** Γ (Logos)  
 **Primary Formal Source:** `formal/Logos/ConditionalTheology.lean`, `formal/Logos/TheologicalModalHardening.lean`, `formal/Logos/ModalCreationAgency.lean`  
-**Kernel Status:** SPLIT INTO TWO — **existence** is `PROVEN` (C350 `CosmicExistence.contingent_realm_obtains`, `{propext, Subject}`, no bridge) and **meaning** is `PROVEN↑` (C367 `CosmicExistence.cosmos_obtains`, under the plurality bridge `AxTwoSubjects`) / PRODUCTION (F9 lane L3) DEFERRED / COUNTERMODEL ON THE *ENTAILMENT* ONLY (C110)  
+**Kernel Status:** SPLIT INTO TWO — **existence** is `PROVEN` (C350 `CosmicExistence.contingent_realm_obtains`, `{CL, NecessarySubjectKind, Subject}`, no bridge) and **meaning** is `PROVEN` (C367 `CosmicExistence.cosmos_obtains`, given an exhibited contingent person, no bridge since the two-kinds correction) / PRODUCTION (F9 lane L3) DEFERRED / COUNTERMODEL ON THE *ENTAILMENT* ONLY (C110)  
 
 ---
 
@@ -84,7 +84,7 @@ via `T12_twoPersons` (= `AxTwoSubjects rightWrongDistinction`) → `person_is_in
 
 **So Γ cannot come about in an empty contingent world** — a theorem, not a stipulation. What Γ still does *not* establish is the **consistency of the negation**: that Γ is satisfiable in an empty contingent world. That countermodel is still unbuilt (`EXISTS.md` §5, part IV). The empty world has changed status from *stipulated impossible* to *proved impossible, by a different route*.
 
-**The price moved — and then half of it vanished.** C367's footprint is `{propext, Means, Subject, Will, subjectWill, AxTwoSubjects}`: *meaning* rests on the plurality bridge `AxTwoSubjects` (`Tag: META`) — "the reality of right and wrong demands at least two distinct persons" — rather than on a semantic datum of its own, so an **ontological** claim leans on an **axiological** bridge. But as of 2026-09-27 (lot COSMOS-EXISTENCE-IS-FREE) **existence no longer rests on anything**: C350's footprint is `{propext, Subject}`. Rejecting `AxTwoSubjects` therefore does **not** reject the realm — it rejects only its being a bearer of content. Reject the interpersonal metaphysics and you lose the cosmos. That is more falsifiable, not more comfortable, and it is the honest price.
+**The price moved — and then half of it vanished.** C367's footprint is `{CL, Means, NecessarySubjectKind, Subject, Will, subjectWill}`: *meaning* rests on an exhibited contingent person — "a contingent realm needs a contingent witness" (two-kinds correction 2026-09-28) — rather than on a semantic datum of its own, so an **ontological** claim leans on an exhibited witness. But as of 2026-09-27 (lot COSMOS-EXISTENCE-IS-FREE) **existence no longer rests on anything substantive**: C350's footprint is `{CL, NecessarySubjectKind, Subject}`. Rejecting the person-datum therefore does **not** reject the realm — it rejects only its being a bearer of content. Reject the interpersonal metaphysics and you lose the *person* theorems (T13/T14, the moral lane), not the cosmos. That is more falsifiable, not more comfortable, and it is the honest price.
 
 > **Correction (2026-09-27).** This section previously answered the question with a performative bridge that has **no Lean counterpart at all**: it inferred `Creates(u, EntityOf s)` from "a contingent reality cannot be the self-subsistent ground of its own existence". That inference is unformalised — no theorem, no row, no footprint — and its premise `∃ s p, Act s p` has no producer either (`Act s p` reduces to `Means s p ∧ ∃ w w', Initiates s w w' p`, and `Initiates` is an axiom at `Agency.lean:168`). It was replaced by a datum and a 'missing lemma' — **both of which have now been
 > retired**; the route above is the live one.
@@ -102,7 +102,7 @@ Creation is not a meaningless cosmic accident. As the act of a Personal God who 
 
 | lane | claim | status |
 |---|---|---|
-| L1 | a realidade contingente obtém | **`PROVEN`** (C350, `{propext, Subject}`) |
+| L1 | a realidade contingente obtém | **`PROVEN`** (C350, `{CL, NecessarySubjectKind, Subject}`) |
 | L2a | o necessário não esgota a realidade | **`PROVEN`** (free) |
 | L2b | o fundamento ama essa realidade | **`PROVEN↑`** (C367, sob `AxTwoSubjects`) |
 | L3 | algo *a fez* — "as the act of…" | **DEFERRED, unclaimed.** No `Creates` relation, no agent, no first moment is claimed or derivable. The `Creates` fields in `TheologicalModalHardening.lean` and `ConditionalTheology.lean` belong to the *countermodel* of the entailment (C110), not to Γ. |

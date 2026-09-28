@@ -54,7 +54,9 @@ theorem ofGround_no_transition_potency :
 
 Pegada auditada: `{Initiates, State, Subject}` (apenas vocabulário). O fundamento é
 imune a qualquer devir temporal ou transição desencadeada por agência criada
-(`the_ground_not_in_succession`); nenhuma causa eficiente pode passar o fundamento
+(`the_ground_not_in_succession` — *não-correlatividade*, não *não-iniciação*, pela leitura de
+2026-09-28: a prova descarta o conjugado `Initiates`); nenhuma causa eficiente pode passar o
+fundamento
 de potência a ato.
 
 C218 — Ausência de potência intencional (Atualidade Exaustiva de Significado):

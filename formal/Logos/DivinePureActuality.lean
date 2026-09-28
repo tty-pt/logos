@@ -124,7 +124,15 @@ def PassiveTransitionPotency (e : Entity) : Prop :=
 
 /-- Theorem: The Ground of Reality has zero passive transition potency.
     `Entity.ofGround` is immune to becoming and outside agential succession.
-    Footprint: `{Initiates, State, Subject}`. -/
+    Footprint: `{Initiates, State, Subject}`.
+
+    **READING, 2026-09-28 (succession audit, C458–C462).** `PassiveTransitionPotency e := ¬
+    TransitionInvariance e` and `TransitionInvariance e := NotInSuccession e`, so this row inherits
+    C458's fact — **constructor disjointness, not a result about initiation**. What is proven is
+    that the ground is no subject's correlate; if a correlate initiates, that is a fact about the
+    subject. "Immune to agential succession" overstates the proof, and the ground's non-agency is
+    unstatable rather than established (C462, `BLOCKED`). The ground's *production* is a different
+    relation and coexists with this potency-absence in C467. No status moves. -/
 theorem ofGround_no_transition_potency :
     ¬ PassiveTransitionPotency Entity.ofGround := by
   intro h

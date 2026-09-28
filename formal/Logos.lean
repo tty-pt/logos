@@ -129,3 +129,38 @@ import Logos.Precedence
 -- (`Tag: VOCAB`) once each, in one shared lemma (`no_subject_grounds_the_ground`).
 -- Immutability is recorded as a priced boundary, not asserted.
 import Logos.CharacteristicSoleBearer
+-- The succession audit (`Logos.SuccessionAudit`, `Logos.SuccessionCountermodel`): what
+-- `NotInSuccession` actually says. `the_ground_not_in_succession` binds the initiation
+-- conjunct and discards it, so the ground's transition invariance is constructor
+-- disjointness — and every atom shares it. Four live rows, zero new axioms: the
+-- extraction lemma, the ground/atom asymmetry (C321's twin on the other field), the
+-- non-triviality instance the ledger misattributed to C197, and the author's sentence
+-- "the fact Γ exists means someone initiates" discharged with its premise explicitly
+-- inert. The countermodel is free-signature, `{}`. Disclosure, not demotion: no badge
+-- moves. The plan of record is `SUCCESSION.md`.
+import Logos.SuccessionAudit
+import Logos.SuccessionCountermodel
+-- The Thomistic love-act batch (`Logos.ThomisticAct`): the entity-level production
+-- relation F10 asks for, the subject-level love→act bridge, the ground-level
+-- love→production bridge (scoped to `Entity.ofGround`), and the two derived rows —
+-- among them the conjunction in which the ground produces and is immutable at once,
+-- which is what the succession audit made statable. Three new axioms: one `VOCAB`
+-- relation, two `META` bridges. The plan of record is `SUCCESSION.md` §4.
+import Logos.ThomisticAct
+-- The act-datum cascade (`Logos.ActCascade`): the unconditional consequences of C454.
+-- Eighteen theorems across five modules carried `∃ s p, Act s p` as their *sole* hypothesis;
+-- since the datum is a declared axiom, that is a leftover, not a premise. Twelve distinct
+-- conclusions, collected in one module with the price (`performative_act_datum`, plus
+-- `AxIntentionalChoice` or `AxActPolarity` on the two routes each) on every row. No axiom is
+-- added, no existing proof altered, no existing statement weakened. The `Asserts` lane stays
+-- closed: C454 yields no `Asserts`-existential, so twelve further theorems stay conditional by
+-- construction. C465/C467 stay conditional and F10 stays BLOCKED. The plan of record is `WIN.md`.
+import Logos.ActCascade
+-- The production countermodel (`Logos.ProductionCountermodel`): C465's shape (`∃ w φ,
+-- Produces g w φ`) and F10's missing derivation (2) (`∀ φ, (∃ w, Satisfies w φ) →
+-- ∃ v, Produces g v φ`) are independent — the ground can produce one form and fail
+-- every other satisfiable one, because `Produces` is a `Tag: VOCAB` axiom and nothing in
+-- the corpus relates it to `Satisfies`. Free-signature, so `{}`: a shape result, not a
+-- claim about Γ, and **not** a refutation of F10, which stays BLOCKED. Plan of record
+-- is `WIN.md` §2 B2.
+import Logos.ProductionCountermodel

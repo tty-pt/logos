@@ -127,8 +127,13 @@ ledgerada como C307 — o que faltava era a linha, não a prova). Preço: F15
 DEFERRED), com o lema exacto registado: `∀ s, NecessarySubjectKind s →
 ¬ (capacity_invariance (EntityOf s) ∧ NotInSuccession (EntityOf s))`. O que falta não
 é um lema provável com o vocabulário actual — é um teorema de exclusão do sujeito
-necessário, ou uma restrição de assinatura sobre `Initiates`, que é uma decisão de
-vocabulário. Divulgação obrigatória sobre C439: `EntityMeans (ofAtom _) = False` torna
+necessário. A segunda via que aqui se registava, *uma restrição de assinatura sobre
+`Initiates`*, **perdeu a sua justificação em 2026-09-28**: `Initiates` deixou de ser um campo
+não restringido quando C454 (`performative_act_datum`, `Tag: TRANS`) o habitou, e um
+contramodelo em que ninguém inicia deixou de ser admissível como modelo de Γ. Isto **não
+fecha** o braço dos sujeitos — retira-lhe a razão de ser; e o que resta do campo
+`NotInSuccession` é mais fraco do que a redacção sugere (C458–C459). O `DEFERRED` de C453
+mantém-se. Divulgação obrigatória sobre C439: `EntityMeans (ofAtom _) = False` torna
 `undivided_meaning` **vacuamente verdadeira de todo o átomo**, logo só
 `no_internal_components` é portador para a unicidade.
 

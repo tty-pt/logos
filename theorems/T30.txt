@@ -33,7 +33,7 @@ invisível para o livro-razão.
 > META 4): o **significado** do cosmos **é agora um teorema** (`C367 cosmos_obtains`),
 > derivado da ponte pluralista `AxTwoSubjects` via `Plurality.cogito_from_T12`, e a
 > **existência** é agora um teorema sem ponte nenhuma (`C350 contingent_realm_obtains`,
-> `PROVEN`, `{propext, Subject}`) — divisão feita pelo lote COSMOS-EXISTENCE-IS-FREE, que é
+> `PROVEN`, `{CL, NecessarySubjectKind, Subject}`) — divisão feita pelo lote COSMOS-EXISTENCE-IS-FREE, que é
 > a correcção seguinte. T30 continua a
 > descrever o que o lote *descobriu* — e o que descobriu estava errado. Onde este
 > ficheiro diz que C350 é um "dado declarado", lê-se hoje como registo histórico; a
@@ -49,7 +49,7 @@ invisível para o livro-razão.
 > afirmação e falso para a outra metade.** A afirmação foi **dividida**:
 >
 > - **C350** = `CosmicExistence.contingent_realm_obtains : ContingentRealmObtains` —
->   **a existência**: `PROVEN`, `{propext, Subject}`, habitada por um **átomo** via
+>   **a existência**: `PROVEN`, `{CL, NecessarySubjectKind, Subject}`, habitada por um **átomo** via
 >   `LovesAsGround.an_atom_is_contingent 0` (C324). Sem ponte, sem `Means` — resta apenas
 >   vocabulário declarado: o *sort* `Subject` (herdado da construção da testemunha) e
 >   `propext` (meta-lógica):
@@ -326,8 +326,8 @@ exclui a **potência passiva**, não o acto (Tomás, *S.Th.* I q.20 a.3).
 O lado empírico, C350–C354 mais C367, e o datum SEM (agora dividido em duas linhas):
 
 - C350 `CosmicExistence.contingent_realm_obtains : ContingentRealmObtains`
-  (`CosmicExistence.lean:254`) — **o reino contingente obtém**: algo é actual, modal-frágil
-  e não é o fundamento necessário. `PROVEN`, `{propext, Subject}`. `[era
+  (`CosmicExistence.lean:269`) — **o reino contingente obtém**: algo é actual, modal-frágil
+  e não é o fundamento necessário. `PROVEN`, `{CL, NecessarySubjectKind, Subject}`. `[era
   `axiom AxContingentCreationObtains` (`:170`, `Tag: SEM`); passou a `PROVEN↑` no lote
   COSMOS-IS-PROVEN e a `PROVEN` no lote COSMOS-EXISTENCE-IS-FREE — ver as correcções de
   lote acima]`. **Sem `bears_meaning`:** por isso não custa `AxTwoSubjects`.
@@ -378,30 +378,31 @@ O lado empírico, C350–C354 mais C367, e o datum SEM (agora dividido em duas l
   satisfatibilidade condicional é agora a *premissa* da derivação, e Γ **descobre** o
   habitante]`: nem forçada nem vazia.
 - C351 `the_ground_loves_the_cosmos`,
-  `{propext, Means, Subject, Will, subjectWill, AxTwoSubjects, AxGroundLovesContingentRealm,
+  `{propext, Means, NecessarySubjectKind, Subject, Will, subjectWill, AxGroundLovesContingentRealm,
   GroundBearsGood}` — **a conclusão, com ambos os preços à vista.** A contingência e o
   conteúdo do reino mais a ponte declarada dão um bem dirigido que o fundamento tem para
   com o cosmos: "não é meramente um fundamento matemático, mas ama". A pegada nomeia o
   preço **inteiro** — `[actualizado 2026-09-27 contra `formal/axiom_audit.json`: o dado
-  empírico saiu e entrou a ponte pluralista]`, a ponte metafísica do amor, o vocabulário
+  empírico saiu e entrou a ponte pluralista]` `[corrigido 2026-09-28: a ponte pluralista
+  saiu (dois géneros) e entrou o artefacto `ExistsAt`]`, a ponte metafísica do amor, o vocabulário
   de conteúdo e o de agency. A afirmação é sobre o fundamento **enquanto espécie**; nenhuma
   identificação hipostática é feita (C344).
 - C352 `the_ground_loves_the_cosmos_in_a_context` — a mesma conclusão na vocabulário
   *relacional* da biblioteca. Note que é a relação `GroundLoves`, **não** o amor
   interpessoal `Loves` — as duas são provavelmente disjuntas (C346) e a transferência é
   instável (C348).
-- **[2026-09-27, GOD-LANE.]** C386 `cosmos_presence_model_of_the_act_datum`,
-  `{propext, Initiates, Means, State, Subject}` — o mesmo inhabitation de `CreatedRealm`
-  que C367, com o preço movido do `Tag: META` `AxTwoSubjects` para o dado performativo
-  do acto ◈ `performativeActDatum` (`Tag: TRANS`, registry 6 → 7). É linha **nova**, não
+- **[2026-09-27, GOD-LANE; corrigido 2026-09-28.]** C386 `cosmos_presence_model_of_the_act_datum`,
+  `{propext, Initiates, Means, NecessarySubjectKind, State, Subject}` — o mesmo inhabitation de `CreatedRealm`
+  que C367, com a hipótese de pessoa trocada pela hipótese de acto (desde a correcção
+  dos dois géneros nenhuma das duas paga a ponte da pluralidade). É linha **nova**, não
   reancoragem de C367, e não a substitui — um teorema *descobre*, não fabrica, e reancorar
   seria repetir o bug de A1. C387 `the_ground_loves_the_cosmos_from_the_act_datum`,
-  `{propext, Initiates, Means, State, Subject, AxGroundLovesContingentRealm,
-  GroundBearsGood}` — a conclusão de C351 com enunciado byte-idêntico e sem a rota da
-  pluralidade: **três axiomas e um sort a menos** (`AxTwoSubjects`, `Will`,
-  `subjectWill`). A metafísica interpessoal deixa de ser premissa do amor do fundamento;
-  a ponte do amor fica, e tem de ficar. Preço relocado, não evaporado: livre em axiomas,
-  não livre em performance.
+  `{propext, Initiates, Means, NecessarySubjectKind, State, Subject, AxGroundLovesContingentRealm,
+  GroundBearsGood}` — a conclusão de C351 com enunciado byte-idêntico na conclusão: a
+  diferença está na hipótese — C351 exibe uma pessoa contingente (`Will`/`subjectWill`),
+  esta linha exibe um acto (`Initiates`/`State`). A hipótese de pessoa deixa de ser
+  premissa do amor do fundamento; a ponte do amor fica, e tem de ficar. Preço relocado
+  para o axioma declarado C454, não evaporado: um axioma, não livre em performance.
 
 Limites honestos de escopo (o que **não** se deve reclamar):
 
@@ -508,7 +509,9 @@ E, do lado do preço, **dois** compromissos e não um: `GroundBearsGood` (VOCAB,
 vocabulário relacional em falta) e `AxGroundLovesContingentRealm` (META, a substância).
 `[Actualizado 2026-09-27: era um terceiro, `AxContingentCreationObtains` (SEM, o dado
 empírico) do módulo irmão — **eliminado**. O preço da existência do cosmos passou a ser a
-ponte pluralista `AxTwoSubjects` (META), partilhada com C350/C351/C352.]` Os dois já
+ponte pluralista `AxTwoSubjects` (META), partilhada com C350/C351/C352. Corrigido
+2026-09-28 (dois géneros): a ponte não paga nenhuma das três linhas; o preço é o dado
+de pessoa exibida.]` Os dois já
 constavam do registo de axiomas; o que este lote faz é dar-lhes nome, preço e linha no
 livro-razão.
 

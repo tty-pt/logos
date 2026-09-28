@@ -254,9 +254,14 @@ theorem the_ground_is_sole_bearer_of_the_footprint_characteristics :
       `∀ p, ∀ _w₁ _w₂, EntityMeans e p ↔ EntityMeans e p` (`DivineImmutability.lean:131-132`) —
       **vacuously true of every entity by reflexivity**, the F16 wall. The only remaining field is
       `NotInSuccession e := ¬ ∃ s σ σ' p, e = EntityOf s ∧ Initiates s σ σ' p`
-      (`NecessityEternity.lean:102-104`), which cannot be refuted generically because `Initiates`
-      is an unconstrained signature field — a countermodel in which no subject initiates anything
-      is as admissible as one in which every subject does. And `NecessarySubjectKind` has **no**
+      (`NecessityEternity.lean:102-104`), which cannot be refuted generically. **Corrected
+      2026-09-28 (C458–C462):** the old justification was that `Initiates` is an unconstrained
+      signature field, and that justification expired when C454 (`performative_act_datum`,
+      `Tag: TRANS`) inhabited `Initiates` — a countermodel in which no subject initiates anything
+      is no longer admissible as a model of Γ. The field is still not refutable, and the arm is
+      still open, but for a sharper reason: the predicate is *non-discriminating*, holding of every
+      atom as well (C459), so `the_ground_not_in_succession` is a non-correlateness fact rather
+      than a non-agency one. And `NecessarySubjectKind` has **no**
       exclusion theorem anywhere in the corpus, so a necessary-kind subject is world-rigid by
       construction and is a legitimate candidate for a world-rigidity-based characteristic.
 

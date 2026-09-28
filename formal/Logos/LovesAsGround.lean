@@ -132,6 +132,7 @@ import Logos.RecoveredOntologicalGround
 import Logos.TheologicalModalHardening
 import Logos.NecessityEternity
 import Logos.FoundationalOmnipresence
+import Logos.FoundationalUnicity
 import Logos.DivineImmutability
 import Logos.DivinePureActuality
 
@@ -173,9 +174,10 @@ theorem an_atom_is_contingent (n : Nat) : ContingentEntity (Entity.ofAtom n) :=
     object of love either, since atoms bear no meaning
     (`meaningless_entities_cannot_be_loved`). The realm is handled separately and in two
     halves, neither of which is a stipulated datum: its **contingency** is `PROVEN` by
-    `CosmicExistence.contingent_realm_obtains` (C350, `{propext, Subject}`), and its
-    **meaning-bearingness** is `PROVEN↑` by `CosmicExistence.cosmos_obtains` (C367,
-    `: CreatedRealm`) under the plurality bridge `AxTwoSubjects`. Note that "created" names
+    `CosmicExistence.contingent_realm_obtains` (C350, `{CL, NecessarySubjectKind, Subject}`), and its
+    **meaning-bearingness** is `PROVEN` by `CosmicExistence.cosmos_obtains` (C367,
+    `: CreatedRealm`) given an exhibited contingent person — no bridge in either row
+    since the two-kinds correction. Note that "created" names
     the region of reality — actual, modal-fragile, and not the ground — and never an act of
     production; no `Creates` relation is claimed or derivable.
     Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
@@ -330,7 +332,10 @@ axiom GroundBearsGood : Entity → Entity → Prop → Prop
     The two content-bearing conjuncts are both load-bearing, and the module header records
     why each was added. The `GroundBearsGood` conjunct is what makes the inhabitation a
     real commitment rather than a provable one; the `EntityMeans` conjunct is what makes
-    the relation discriminating, and is why love cannot reach the meaningless.
+    the relation discriminating, and is why love cannot reach the meaningless. The
+    `ActualEntity` conjunct, by contrast, does no work: it holds of every entity by
+    definition (C457) — the target conditions with content are `t ≠ g` and
+    `∃ q, EntityMeans t q` alone.
 
     The `a : Prop` context-of-evaluation argument mirrors `Good s (_a : Prop)`
     (`MoralFrontierAudit.lean:203-204`), the library's existing idiom for a relational
@@ -366,6 +371,88 @@ theorem ground_love_bears_a_directional_good {g t : Entity} {a : Prop}
     Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject}`. -/
 theorem ground_love_requires_a_meaningful_target {g t : Entity} {a : Prop}
     (h : GroundLoves g t a) : ∃ q, EntityMeans t q := h.2.2.2.2.1
+
+/-! ### WALL localisation for the ground-love hypothesis (2026-09-28, the `ACT-CASCADE` batch)
+
+C465 `ground_love_produces` and C467 `producing_coexists_with_immutability` are stated under
+`GroundLoves Entity.ofGround t a`, and Γ cannot exhibit that hypothesis. The two theorems below do
+not change either row's status — they make the reason the hypothesis is unavailable into a
+statement the kernel checks, so that the `BLOCKED` is settled with its price named rather than
+merely asserted. Plan of record: `WIN.md` §2 B1. **No axiom is added, and no existing theorem is
+altered.**
+
+The first says *which* entity can be loved at all; the second says, for that entity, exactly what
+is still owed. -/
+
+/-- **WALL 1 localisation, part one: the ground's love can only ever reach a subject correlate.**
+
+    Case analysis on `Entity`. An atom is excluded because `EntityMeans (ofAtom _) p` reduces to
+    `False` (`atoms_bear_no_meaning`, and the same by `defeq` for every atom, not just `0`); the
+    ground is excluded by the `t ≠ g` conjunct of `GroundLoves` itself. So the only surviving
+    constructor is `ofSubject`, and the reduction is a case split, not a lemma: nothing here is
+    about the metaphysics of love.
+
+    **What this does NOT do.** It does not show that any subject *is* loved. It shows that if the
+    ground loves anything at all, the thing loved is a subject correlate — which converts the
+    existence of a love-instance into the existence of a *contingent person who is loved*, and is
+    why WALL 2 below cannot be routed around. It adds no axiom, and C465/C467 keep their status
+    (`PROVEN↑`, i.e. axiomatic under a declared bridge) and their footprints.
+
+    Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject, propext}` - the four
+    vocabulary declarations (`Tag: VOCAB`, or unconstrained primitives) that the *hypothesis's
+    type* mentions, plus `propext` for the `∃` unfolding. No `SEM` or `META` axiom: the row
+    carries no substantive price. Note the footprint is not `{}` - `GroundBearsGood` appears
+    because the type of `h` mentions it, though the proof never uses that conjunct. Corrects
+    the `{}` guessed in `WIN.md` section 2 B1, per the `SUCCESSION.md` section 10 precedent. -/
+theorem ground_love_targets_a_subject_correlate {t : Entity} {a : Prop}
+    (h : GroundLoves Entity.ofGround t a) : ∃ s : Subject, t = Entity.ofSubject s := by
+  obtain ⟨q, hq⟩ := ground_love_requires_a_meaningful_target h
+  cases t with
+  | ofSubject s => exact ⟨s, rfl⟩
+  | ofAtom n => exact absurd hq (by simp [EntityMeans])
+  | ofGround => exact ((ground_love_is_directed_at_another h).2 rfl).elim
+
+/-- **WALL 1 localisation, part two: for a subject correlate, the hypothesis reduces to exactly
+    two conjuncts — the one unavailable primitive, and a meaning.**
+
+    Reading `GroundLoves` out for `t = EntityOf s` deletes three conjuncts as *proved*, not as
+    assumed: the lover's necessity (`ofGround_necessary`), the target's actuality
+    (`every_entity_is_actual` — `ActualEntity` holds of every entity, C457), and the
+    distinctness (`ofGround_ne_ofSubject`). The `EntityMeans` conjunct reduces by `defeq` to
+    `Means s q`. What is left is
+
+    - **WALL 1** — `∃ p, GroundBearsGood Entity.ofGround (EntityOf s) p`. `GroundBearsGood` is a
+      bare `Tag: VOCAB` relation with **no inhabitant theorem anywhere in Γ**; every inhabitant in
+      the corpus is routed through the `AxGroundLovesContingentRealm` bridge, which is itself
+      unpriced, so there is nothing to extract. This conjunct is the wall.
+    - **WALL 2** — a meaning for a *contingent* subject. `Means s q` is available
+      (C469 `someone_means_something`), but only for whichever `s` the act-datum supplies, and
+      nothing relates that `s` to `ContingentSubjectKind`. `ContingentSubjectKind` is the negation
+      of `NecessarySubjectKind`, which is a primitive constrained by **no axiom at all**, so C410 /
+      C411 give only a tautological partition and no inhabitant of the contingent kind exists in Γ
+      (recorded in `NecessityEternity.lean:396`, `LovesAsGround.lean`, `CosmicExistence.lean`,
+      `T22.txt`). The `AxGroundLovesContingentRealm` route needs WALL 2 for exactly this reason.
+
+    **What this does NOT do.** It does not discharge WALL 1 or WALL 2, and it is the reason the
+    `BLOCKED` status of C465/C467 is settled rather than provisional: the residual is two named
+    primitives, both of which would be *new substantive content* to inhabit, which the author
+    declined on 2026-09-28. It does not move any badge, and the `Asserts` lane is untouched.
+
+    Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject}` - the vocabulary
+    declarations the hypothesis's type and `EntityMeans`'s unfolding mention. `GroundBearsGood`
+    is here because the *statement* names it, which is the whole point of the row. No `SEM` or
+    `META` axiom. Not `{}`, contrary to `WIN.md` section 2 B1's guess: same correction, same
+    precedent. -/
+theorem ground_love_of_a_subject_correlate_iff {s : Subject} {a : Prop} :
+    GroundLoves Entity.ofGround (EntityOf s) a ↔
+      (∃ p, GroundBearsGood Entity.ofGround (EntityOf s) p) ∧
+        (∃ q, Logos.Agency.Means s q) ∧ a := by
+  constructor
+  · intro h
+    exact ⟨h.2.2.2.1, h.2.2.2.2.1, h.2.2.2.2.2⟩
+  · rintro ⟨⟨p, hp⟩, ⟨q, hq⟩, ha⟩
+    refine ⟨ofGround_necessary, Logos.RecoveredOntologicalGround.every_entity_is_actual _,
+      Logos.FoundationalUnicity.ofGround_ne_ofSubject s, ⟨p, hp⟩, ⟨q, hq⟩, ha⟩
 
 /-- **Love cannot reach the meaningless.** A meaningless entity is not loved by the
     ground, in any context. This is the discriminating counterpart of
@@ -569,11 +656,26 @@ theorem ground_love_cannot_be_read_as_person_love :
     `DivinePureActuality`'s zero-transition-potency field is untouched. Attributing an
     *act* of love to the ground adds to `ofGround_divine_pure_actuality` rather than
     contradicting it — pure actuality excludes passive potency, not act.
-    Footprint: `{GroundBearsGood, Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
+    Footprint: `{GroundBearsGood, Initiates, Means, NecessarySubjectKind, State, Subject}`.
+
+    **The "*act* of love" prose now has partial formal content (2026-09-28, lote THOMISTIC-ACT).**
+    `Logos.ThomisticAct.ground_love_produces` (C465, `Tag: META`, *ST* I q.19 a.4) turns the
+    ground's love into `∃ w φ, Produces Entity.ofGround w φ`, and
+    `producing_coexists_with_immutability` (C467) proves the *conjunction* this row asserts by
+    another route — the ground produces **and** is immutable, in one theorem. Two things this
+    row still does not give, and must not be cited for: **essence-act identity** ("God is His
+    act" needs essence vocabulary, Class A, still blocked — so no divine simplicity follows),
+    and **universal production** (C465's `∃ w φ` is existential; the causal derivation
+    `(∃ w, Satisfies w φ) → ∃ v, Produces Entity.ofGround v φ` remains F10's missing statement).
+    Read with the succession audit: the `ofGround_no_transition_potency` this row inherits is a
+    *non-correlateness* fact (C458), which is precisely why production, not initiation, is the
+    relation the ground-level agency claim needs. -/
 theorem ground_love_preserves_pure_actuality {t : Entity} {a : Prop}
     (_h : GroundLoves Entity.ofGround t a) : ¬ PassiveTransitionPotency Entity.ofGround :=
   ofGround_no_transition_potency
 
+#print axioms ground_love_targets_a_subject_correlate
+#print axioms ground_love_of_a_subject_correlate_iff
 end Logos.LovesAsGround
 
 -- Axiom footprint audit

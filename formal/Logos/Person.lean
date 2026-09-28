@@ -238,13 +238,21 @@ theorem intentional_implies_subjectExists_of_bridge
   exact ⟨p, hm, hBridge s p hm⟩
 
 /-- The existence of an act entails that an intentional subject exists (formerly nominal T5).
-    Footprint: `{Initiates, Means, State, Subject}` (VOCAB). -/
+    Footprint: `{Initiates, Means, State, Subject}` (VOCAB).
+
+Unconditional form: `Logos.ActCascade.an_intentional_subject_exists` (C473) — the act datum is itself a declared axiom of Γ
+(`Tag: TRANS`), so the hypothesis above is discharged rather than assumed; `IntentionalSubject` is *defined* as `∃ p, Means s p`.
+-/
 theorem intentionalSubject_exists_of_act (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
     ∃ s : Subject, IntentionalSubject s := by
   obtain ⟨s, p, ha⟩ := h
   exact ⟨s, act_implies_intentionalSubject ha⟩
 
-/-- Backward-compatibility alias for intentional subject existence. -/
+/-- Backward-compatibility alias for intentional subject existence.
+
+Unconditional form: `Logos.ActCascade.intentionality_is_instantiated` (C474) — the act datum is itself a declared axiom of Γ
+(`Tag: TRANS`), so the hypothesis above is discharged rather than assumed; `Intentional` is *defined* as `IntentionalSubject`.
+-/
 theorem intentional_exists_of_act (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
     ∃ s : Subject, Intentional s :=
   intentionalSubject_exists_of_act h

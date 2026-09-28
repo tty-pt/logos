@@ -450,6 +450,7 @@ def parse_gapmap() -> list:
                  "level_key": _level_key(cur["title"])}
         if len(cells) >= 5:
             _, claim["prose"], lean_cell, status, footprint = cells[:5]
+            claim["lean_cell"] = lean_cell
             claim["lean_ref"] = _extract_lean_ref(lean_cell)
             claim["status"] = _clean_status(status)
             claim["footprint"] = re.sub(r"`+", "", footprint).strip()
@@ -864,6 +865,9 @@ CHAIN_LISTS = [
     ("TEMPORAL-SEPARATION", "TEMPORALITY_STEPS"),
     ("SOLE-BEARER", "SOLE_BEARER_STEPS"),
     ("INHABITED", "INHABITED_STEPS"),
+    ("SUCCESSION-AUDIT", "SUCCESSION_AUDIT_STEPS"),
+    ("THOMISTIC-ACT", "THOMISTIC_ACT_STEPS"),
+    ("ACT-CASCADE", "ACT_CASCADE_STEPS"),
 ]
 
 
@@ -901,6 +905,50 @@ CHAIN_REQUIRED_DECLS = {
         "C455 — Initiates inhabited, unconditionally",
     "Logos.Agency.not_noAct":
         "C456 — the denial refuted by the datum",
+    "Logos.SuccessionAudit.non_correlate_is_outside_succession":
+        "C458 — non-correlateness suffices for `NotInSuccession`",
+    "Logos.SuccessionAudit.the_ground_and_every_atom_are_outside_succession":
+        "C459 — the ground/atom sharing; C321's twin, on the other field",
+    "Logos.SuccessionAudit.someone_is_in_succession":
+        "C460 — the non-triviality the ledger misattributed to C197",
+    "Logos.SuccessionCountermodel.a_ground_can_produce_while_outside_succession":
+        "C461 — the `{}` countermodel the ledger claimed was on record",
+    "Logos.SuccessionAudit.existence_implies_someone_initiates":
+        "C468 — the author's first sentence, with an inert premise",
+    "Logos.ThomisticAct.Produces":
+        "C463 — the production relation (F10 item 1), the batch's VOCAB price",
+    "Logos.ThomisticAct.love_implies_act":
+        "C464 — love implies an act; implication, never identity",
+    "Logos.ThomisticAct.ground_love_produces":
+        "C465 — the ground's love is productive, scoped to `ofGround`",
+    "Logos.ThomisticAct.loving_subject_initiates":
+        "C466 — a loving subject initiates",
+    "Logos.ThomisticAct.producing_coexists_with_immutability":
+        "C467 — the ground produces *and* is immutable, in one theorem",
+    "Logos.ActCascade.someone_means_something":
+        "C469 — the cheapest cascade row: meaning from the datum alone",
+    "Logos.ActCascade.someone_exists_as_subject":
+        "C470 — someone exists as a subject, from the datum alone",
+    "Logos.ActCascade.an_actual_subject_obtains":
+        "C471 — the corpus's existential proposition, definitionally C470",
+    "Logos.ActCascade.an_agent_exists":
+        "C472 — `Agent := True`; discharges T4 and is no stronger than C470",
+    "Logos.ActCascade.an_intentional_subject_exists":
+        "C473 — an intentional subject exists, under the subject-side name",
+    "Logos.ActCascade.intentionality_is_instantiated":
+        "C474 — the same predication under the corpus's second name",
+    "Logos.ActCascade.genuineChoice_exists_of_act_datum_constitutive":
+        "C475 — free will, constitutive route (the `AxIntentionalChoice` price made visible)",
+    "Logos.ActCascade.genuineChoice_exists_of_act_datum_polarity":
+        "C476 — free will, polarity route; a second price, not a substitute",
+    "Logos.ActCascade.freeWill_exists_of_act_datum_constitutive":
+        "C477 — the corpus's own \"free will exists\" from the performative datum",
+    "Logos.ActCascade.freeWill_exists_of_act_datum_polarity":
+        "C478 — the same conclusion, independent route, different price",
+    "Logos.ActCascade.freeSubject_exists_of_act_datum":
+        "C479 — a free subject exists; `FreeSubject` is defined as `FreeWill`",
+    "Logos.ActCascade.noMeaning_is_refuted_unconditionally":
+        "C480 — meaninglessness refuted with no semantic price at all",
 }
 
 
@@ -5430,9 +5478,9 @@ CLASSICAL_ATTRIBUTES = [
                   "for the axiom's meaning hypothesis); and the `GroundLoves → Loves` transfer is "
                   "**unstatable, not merely unproved** (C348), so bridge #9 / C228 is untouched "
                   "and F3, F6/Trinity and the personal-monotheism frontier do not move. "
-                  "The cosmos it loves now *exists by theorem* — free, in fact: C350 "
-                  "`contingent_realm_obtains` at `{propext, Subject}`, with the plurality "
-                  "bridge paying only for the realm's *content* (C367 `cosmos_obtains`, given an exhibited contingent person) — "
+                  "The cosmos it loves now *exists by theorem* — free of substantive axioms, in fact: C350 "
+                  "`contingent_realm_obtains` at `{CL, NecessarySubjectKind, Subject}`, with a contingent-person "
+                  "datum paying only for the realm's *content* (C367 `cosmos_obtains`, given an exhibited contingent person) — "
                   "which is not an entailment from the ground."),
     },
     {
@@ -5702,7 +5750,10 @@ CLASSICAL_ATTRIBUTES = [
                  "Logos.NecessityEternity.everlasting_but_contingent"],
         "sense": ("`NecessaryEntity e → Atemporal e` (`ExistsAtTime t₁ e ↔ ExistsAtTime t₂ e`); "
                   "the ground is also outside every initiation-act "
-                  "(`the_ground_not_in_succession`, `{Initiates, State, Subject}`). Separation is "
+                  "(`the_ground_not_in_succession`, `{Initiates, State, Subject}` — a "
+                  "*non-correlateness* result: the proof never uses the `Initiates` conjunct, so "
+                  "read C458–C459 and C460 before treating it as non-agency evidence, and C467 "
+                  "for why the ground can still *produce*). Separation is "
                   "honest: atoms/subjects are time-modulated (`atom_has_temporal_mode`) and "
                   "`Everlasting` does not collapse into necessity (`everlasting_but_contingent`). "
                   "What is PROVEN is stage-unmodulated world-rigid existence — not a full "
@@ -6060,21 +6111,35 @@ CLASSICAL_ATTRIBUTES = [
         "scope": "Divine Being / Ground",
         "expected": "ABSENT",
         "checks": [{"type": "absent",
+                    # `Produces` left this guard on 2026-09-28: the relation is now
+                    # DECLARED (C463, `Tag: VOCAB`), so it can no longer proxy the
+                    # attribute — its existence is not creative power. What is still
+                    # missing is the *derivation*, and these two fragments are what
+                    # would fire if it ever lands.
                     "fragments": ["all_conceivable", "unrestricted_creative_power",
-                                  "power_over_all_possible", "Produces"],
+                                  "power_over_all_possible", "production_from",
+                                  "produces_from"],
                     "allow": []}],
         "refs": [],
         "sense": ("No live theorem, and the prose disclaimer (`README-OLD.md:263`; `CHARS.md` §15) is "
                   "**retained — but narrowed to this causal sense only**, since the non-contradictory sense "
                   "above is now PROVEN. Γ declares no entity-level production relation: the only initiation "
-                  "relation is `Agency.Initiates : Subject → State → State → Prop → Prop` "
+                  "relation was `Agency.Initiates : Subject → State → State → Prop → Prop` "
                   "(`Agency.lean:168`, VOCAB), which is subject-indexed, and `Entity.ofGround` is provably not "
-                  "a subject correlate (`ofGround_ne_ofSubject`, `NecessityEternity.lean:160`), so it cannot be "
-                  "instantiated by the ground at all. The closest relation Γ has is explanatory containment "
+                  "a subject correlate (`ofGround_ne_ofSubject`, `NecessityEternity.lean:160`), so it could not "
+                  "be instantiated by the ground at all. **One of F10's two missing statements was delivered on "
+                  "2026-09-28 (C463):** `Logos.ThomisticAct.Produces : Entity → World → Form → Prop` "
+                  "(`Tag: VOCAB`) is declared, and C465/C467 give it a *conditional* use — the ground's love "
+                  "is productive. **A declared relation is not a causal power**, and this row stays "
+                  "**ABSENT**: what is still missing is the derivation "
+                  "`∀ φ, (∃ w, Satisfies w φ) → ∃ v, Produces Entity.ofGround v φ`, which is the whole "
+                  "content of the causal sense, and the existential `∃ w φ` of C465 does not supply it. The "
+                  "closest relation Γ has is explanatory containment "
                   "`GroundsEntity` (`RecoveredOntologicalGround.lean:57`, *esse est agere*), and "
                   "`exhaustive_scope_without_operative_scope` (`{}`) already machine-checks that omni-scope does "
-                  "not entail selection power, so it must not be weakened to that. BLOCKED with both exact "
-                  "missing statements recorded (GAPMAP Level 17, row F10)."),
+                  "not entail selection power, so `Produces` must not be weakened to that either. BLOCKED with "
+                  "the exact missing statement recorded (GAPMAP Level 17, row F10; `README-OLD.md:263` / "
+                  "`CHARS.md` §15 keep the disclaimer, narrowed to the causal sense)."),
     },
     {
         "attribute": "**Creator of contingent reality**",
@@ -6496,10 +6561,11 @@ LOVE_STEPS = [
      "the kind is exhibited with it (2026-09-28, two-kinds). "
      "Re-anchoring `cosmos_obtains` would repeat the A1 bug exactly"),
     ("L2b", "C387", "Logos.CosmicExistence.the_ground_loves_the_cosmos_from_the_act_datum", "decl",
-     "**THE GOD-LANE's payoff — the ground's love, byte-identical statement, plurality route gone**: "
-     "the `Will`/`subjectWill` that entered only through `AxTwoSubjects` are gone with it. "
-     "The interpersonal metaphysics is no longer a premise here, and the remaining "
-     "premises are independent of it, so the removal is *visible* rather than absorbed. The love "
+     "**THE GOD-LANE's payoff — the ground's love, byte-identical conclusion, person-datum swapped for act-datum**: "
+     "C351 exhibits a contingent person (`Will`/`subjectWill`); this row exhibits an act "
+     "(`Initiates`/`State`). Neither pays the plurality bridge since the two-kinds correction — "
+     "the swap, not a removal, is this row's content. "
+     "The love "
      "bridge stays, and must: a directional good held by the ground is not in Γ's grounding "
      "vocabulary. Relocated price: the declared act-datum axiom C454 — one axiom, not free in performance"),
     ("🧱", "C353", "Logos.CosmicExistence.perfect_universe_has_no_contingent_realm", "countermodel",
@@ -6856,7 +6922,8 @@ def render_meaning_retorsion_chain(decls: dict, node_map: dict) -> list[str]:
     ap("5. **Price of the positive claim is unmoved.** Nothing here carries `AxTwoSubjects` or")
     ap("   `transcendental_reflection_intentional` — that is Batch B's one substantive claim")
     ap("   about its own cost, and gate B2 verifies it rather than assuming it. But the")
-    ap("   *unconditional* existence of a meaning still costs `AxTwoSubjects` (C367); what is")
+    ap("   *unconditional* existence of a meaning still costs a person-datum (C367: `Will`/`subjectWill`,")
+    ap("   vocabulary, no bridge); what is")
     ap("   shown is that it is over-strong whenever an affirmation is supplied as input.")
     ap("")
     return lines
@@ -7403,6 +7470,293 @@ def render_inhabited_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     return lines
 
+SUCCESSION_AUDIT_STEPS = [
+    ("S", "C458", "Logos.SuccessionAudit.non_correlate_is_outside_succession", "decl",
+     "**the extraction, and the finding.** `NotInSuccession e` follows from `e` not being the "
+     "correlate of any subject — *non-correlateness suffices*. This is what makes the vacuity "
+     "legible: `the_ground_not_in_succession` is this lemma plus the type fact that the ground is "
+     "no subject's correlate, and the `Initiates` conjunct of its own statement is never used. "
+     "Audited footprint `{Initiates, State, Subject}` — vocabulary only, so `PROVEN`; the `{}` "
+     "prediction is wrong because the witness is genuinely consumed"),
+    ("S", "C459", "Logos.SuccessionAudit.the_ground_and_every_atom_are_outside_succession", "decl",
+     "**the asymmetry, machine-checked: the ground's twin of C321.** The same predicate holds for "
+     "the ground and for *every atom*, so `NotInSuccession` cannot distinguish them — both close by "
+     "the same constructor disjointness. C321 found exactly this for `capacity_invariance` (a "
+     "tautology for all entities) and it was not on record for the other field. Disclosure, not "
+     "demotion: `ofGround_divine_immutability` and C217 keep their badges and footprints"),
+    ("R", "C460", "Logos.SuccessionAudit.someone_is_in_succession", "decl",
+     "**someone is in succession** — the non-triviality result the ledger attributed to C197, "
+     "obtained from the simplest possible witness: the correlate of the subject C455 exhibits. "
+     "Note the honest asymmetry with C459: the predicate is trivial *for the ground and the "
+     "atoms*, and is **not** trivial as a predicate on all entities. C197 covers `ModalInvariance` "
+     "only; it never covered this field"),
+    ("M", "C461", "Logos.SuccessionCountermodel.a_ground_can_produce_while_outside_succession",
+     "decl",
+     "**the `{}` countermodel that was claimed to be on record and was not.** A ground that "
+     "*produces* while `NotInSuccession g ∧ DivineImmutability g` both hold, because the body of "
+     "`NotInSuccession` mentions no entity-level agency relation at all. The C321 technique "
+     "(`{}` footprint, free signature) applied to the field the ledger had left uncovered"),
+    ("S", "C468", "Logos.SuccessionAudit.existence_implies_someone_initiates", "decl",
+     "**\"the fact that Γ exists means someone initiates\" — and the premise does no work.** The "
+     "consequent is unconditional (C455), the existence side is free in its own right (C350), and "
+     "the hypothesis is named `_hExistence` for exactly that reason. The honest ledger entry for "
+     "the author's sentence is *yes, and the 'if' is superfluous*, not a new price. The "
+     "antecedent is the explicit structure `Nonempty ContingentRealm`, not the `def` "
+     "`ContingentRealmObtains`, so the row owes no invisible def-as-premise and its footprint "
+     "is exactly C455's cone — the existence half costs nothing"),
+]
+
+
+THOMISTIC_ACT_STEPS = [
+    ("\u25c6", "C463", "Logos.ThomisticAct.Produces", "axiom",
+     "**PRICE 1, VOCABULARY.** `Produces : Entity \u2192 World \u2192 Form \u2192 Prop` \u2014 F10 "
+     "item (1), the production relation, with the immediate precedent of `Initiates`. The first "
+     "world-indexed relation over `Entity` in the library. Its footprint is `{Subject}`, not `{}`, "
+     "for the ground-level reason `FoundationalUnicity.groundsEntity_reflexive` is not `{}` either: "
+     "`Entity`'s `ofSubject` constructor carries the `Subject` sort-axiom"),
+    ("\u25c6", "C464", "Logos.ThomisticAct.love_implies_act", "axiom",
+     "**PRICE 2, METAPHYSICAL.** *ST* I-II q.28 a.5 \u2014 the love of God is *ipso facto* an act. An "
+     "**implication, never an identity**: what may love that is not an act (a preference without "
+     "execution, a sentiment) is left outside, and the price is visible in C466's footprint"),
+    ("\u25c6", "C465", "Logos.ThomisticAct.ground_love_produces", "axiom",
+     "**PRICE 3, METAPHYSICAL.** *ST* I q.19 a.4 \u2014 the love of heaven is productive. Deliberately "
+     "scoped to `Entity.ofGround`: the unrestricted form leaks through C228's "
+     "`AxGroundLovesContingentRealm`, whose target-side is true of *every* entity and would make "
+     "the bridge a tautology plus a claim that God creates atoms"),
+    ("\u03a3", "C466", "Logos.ThomisticAct.loving_subject_initiates", "decl",
+     "**to love is to initiate**, at the subject level. C464 composed with "
+     "`act_implies_initiates`. The footprint is C464's cone and nothing else: no new axiom, and "
+     "the extraction is an `obtain`"),
+    ("\u03a3", "C467", "Logos.ThomisticAct.producing_coexists_with_immutability", "decl",
+     "**the ground produces *and* is immutable, in one theorem.** This is the deliverable of the "
+     "milestone. Nothing in `NotInSuccession` quantifies over `Produces`, so the two are proved "
+     "*together* rather than against each other \u2014 the formal resolution of the tension the "
+     "succession audit uncovered. The row is **conditional**, and had to be: \u0393 has no "
+     "unconditional witness of ground-love (`EntityMeans (ofAtom _)` is `False` for every atom, and "
+     "the contingent-person datum needs a `ContingentSubjectKind` inhabitant that the corpus does "
+     "not have \u2014 C404 supplies only the *necessary* kind). The immutability conjunct is "
+     "unconditional inside the row; the production conjunct is what the hypothesis pays for"),
+    ("\u03a3", "C468", "Logos.SuccessionAudit.existence_implies_someone_initiates", "decl",
+     "the author's first sentence, with an inert premise"),
+]
+
+# Chain 12 (C469-C480). The twelve distinct conclusions of the act datum. Note the
+# two C4xx rows below that restate a row already proved unconditionally: C471 is
+# definitionally C470, and C473/C474/C479 are the same predication under the
+# corpus's other names. They are kept as separate steps because the corpus
+# enuncates them in those forms, and each row's text says so.
+ACT_CASCADE_STEPS = [
+    ("\u03a3", "C469", "Logos.ActCascade.someone_means_something", "decl",
+     "**something means something.** From the datum alone, through the `Means` half of the "
+     "definition of `Act`. A *global* existential: it does not say *which* subject, so C453's "
+     "per-subject form stays open, it licenses no `Means \u2192 Initiates`, and it does not make the "
+     "ground an agent"),
+    ("\u03a3", "C470", "Logos.ActCascade.someone_exists_as_subject", "decl",
+     "**someone exists as a subject.** From the datum alone, through the constitutive law that an "
+     "act does not occur without the subject performing it"),
+    ("\u03a3", "C471", "Logos.ActCascade.an_actual_subject_obtains", "decl",
+     "the corpus's *existential proposition* obtains. **Definitionally the same claim as C470** "
+     "(`AnActualSubjectExists := \u2203 s, SubjectExists s`): the row exists because the corpus "
+     "enuncates the proposition in that form, not to add a second result"),
+    ("\u03a3", "C472", "Logos.ActCascade.an_agent_exists", "decl",
+     "**an agent exists, in the T4 sense \u2014 and that sense is empty.** `Agent (_s) := True`, so the "
+     "second conjunct is unconditionally true and **this row is exactly as strong as C470, and "
+     "nothing more** (C321's precedent: a property of everything characterises nothing). It "
+     "discharges the `T4_agentExists` step of the T chain; it is **not evidence of agency** in any "
+     "sense the word carries outside that `def`"),
+    ("\u03a3", "C473", "Logos.ActCascade.an_intentional_subject_exists", "decl",
+     "**an intentional subject exists.** Nothing beyond C469: `IntentionalSubject s` is *defined* as "
+     "\u2203 p, Means s p, so this is C469 with the witness reordered \u2014 the subject-side form of the "
+     "T chain"),
+    ("\u03a3", "C474", "Logos.ActCascade.intentionality_is_instantiated", "decl",
+     "`Intentional := IntentionalSubject`, so this is C473 under the corpus's second name for the "
+     "same predication. **The weakest reading of \"intentional\" the corpus has** \u2014 not "
+     "intentionality *of a particular act*"),
+    ("\u03a3", "C475", "Logos.ActCascade.genuineChoice_exists_of_act_datum_constitutive", "decl",
+     "**genuine choice exists, by the constitutive route.** Datum **plus** the paid `AxIntentionalChoice` "
+     "(`Tag: SEM`): the datum supplies the witness, the semantic axiom supplies the constitutive "
+     "assertion that an intentional subject is genuinely choosing. **Two prices, both on the row; "
+     "the semantic price is not removed**"),
+    ("\u03a3", "C476", "Logos.ActCascade.genuineChoice_exists_of_act_datum_polarity", "decl",
+     "**genuine choice exists, by the polarity route.** Datum **plus** the paid `AxActPolarity` "
+     "(`Tag: SEM`): an act is polar \u2014 acting on `p` is also acting on `\u00acp` \u2014 which is what "
+     "makes the choice genuine rather than merely unimpeded. A *different semantic choice* from the "
+     "constitutive one, **not a stronger one**, and no substitute for it"),
+    ("\u03a3", "C477", "Logos.ActCascade.freeWill_exists_of_act_datum_constitutive", "decl",
+     "**free will exists, by the constitutive route.** Datum **plus** the paid `AxIntentionalChoice` "
+     "(`Tag: SEM`). This is the row that discharges the corpus's own \"free will exists\" from the "
+     "performative datum. An existential over subjects: not *which* subject, not all of them, and "
+     "no `Wills \u2192 Initiates`. A *consequence* of the datum \u2014 citing it for the datum is circular "
+     "(C456's precedent)"),
+    ("\u03a3", "C478", "Logos.ActCascade.freeWill_exists_of_act_datum_polarity", "decl",
+     "the same conclusion by the `AxActPolarity` route. A second, independent route with a *different* "
+     "price; the batch pays twice, not once, and both remain declared"),
+    ("\u03a3", "C479", "Logos.ActCascade.freeSubject_exists_of_act_datum", "decl",
+     "**a free subject exists.** Datum **plus** the paid `AxIntentionalChoice`. `FreeSubject` is "
+     "*defined* as `FreeWill s`, so this is C477 under the corpus's third name for the same "
+     "predication. **Not free subjectivity** in any sense the `def` does not authorise: no capacity, "
+     "no `Asiety`, no F15 limit"),
+    ("\u03a3", "C480", "Logos.ActCascade.noMeaning_is_refuted_unconditionally", "decl",
+     "**meaninglessness is refuted, unconditionally.** The cheapest row in the batch: meaning is "
+     "neither a bridge nor a semantic axiom here. It does not enumerate what is meaningful, does not "
+     "say which subject means, and does not bound the meanings (F15 untouched)"),
+]
+
+
+def render_succession_audit_chain(decls: dict, node_map: dict) -> list[str]:
+    """Reader-facing chain for the 2026-09-28 succession-audit batch (C458\u2013C462)."""
+    lines: list[str] = []
+    ap = lines.append
+    ap("### Chain 10 \u2014 What \"the ground does not initiate\" actually proved")
+    ap("")
+    ap("> **The finding, in one proof.** `the_ground_not_in_succession`")
+    ap("> (`NecessityEternity.lean:196-198`) opens with `rintro \u27e8s, \u03c3, \u03c3', p, \u27e8hEq, _h\u27e9\u27e9` and closes with")
+    ap("> `Entity.noConfusion hEq`. **The initiation witness is discarded.** The kernel term is sound,")
+    ap("> which is why it survived every audit: what it establishes is that the ground is *no")
+    ap("> subject's correlate*, and the negation of `Initiates` in its statement is inherited rather")
+    ap("> than demonstrated. So \"the ground does not initiate\" is **unstatable**, not refuted \u2014 and")
+    ap("> the refutation that was on record proved nothing about initiation.")
+    ap("")
+    ap("> Author, 2026-09-28, verbatim: *\"No more excuses - The fact Gamma exists means Someone")
+    ap("> Initiates!!!!\"* and *\"The ground Initiates is refuted because there's a mistake in the proof.\"*")
+    ap("> The first half is **already a theorem** (C455, and C468 below). The second is repaired here.")
+    ap("")
+    ap("**This is disclosure, not demotion** \u2014 the F16 precedent "
+       "(`DivineImmutability.lean:142-165`).")
+    ap("`ofGround_divine_immutability` stays `PROVEN` with its footprint untouched, C217 stays")
+    ap("`PROVEN`, C453 stays `DEFERRED`. No badge moves anywhere; what changes is the *reading* of")
+    ap("one of the four immutability fields, and the status of one sentence.")
+    ap("")
+    ap("`S` = the vacuity and the extraction \u00b7 `R` = the non-triviality result \u00b7 "
+       "`M` = the free-signature countermodel.")
+    ap("")
+    ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
+    ap("|---|---|---|---|---|---|")
+    for kind, cid, full, atype, text in SUCCESSION_AUDIT_STEPS:
+        live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
+        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
+           f"{status} | {kernel_fp_text(full)} |")
+    ap("")
+    ap("**C462 is `BLOCKED`, and deliberately has no row.** \"The ground does not initiate\" as a")
+    ap("substantive claim needs an entity-level agency predicate \u2014 `EntityInitiates : Entity \u2192 "
+       "State \u2192 State \u2192 Prop \u2192 Prop`")
+    ap("together with the negative instance for `Entity.ofGround`; the alternative route,")
+    ap("`GroundIsSubject : Subject`, is *forbidden* by the corpus (`ofGround_ne_ofSubject`, C441).")
+    ap("Any honest version of the sentence therefore costs a new `META` bridge, and the exact")
+    ap("statement is written in the GAPMAP row rather than left implicit. The formulation that")
+    ap("*does* exist is `the_ground_not_in_succession`, and it is `PROVEN` for a different reason.")
+    ap("")
+    ap("**What this chain does not say.** Not that the ground is mutable: `NotInSuccession` holds")
+    ap("for it (C458). Not that `NotInSuccession` is empty of content: it is a real predicate, just")
+    ap("a non-discriminating one (C459). Not that no one initiates \u2014 someone does, and C460 is")
+    ap("the row the ledger was missing. The `Initiates := False` countermodels of `INHABITED.md`")
+    ap("\u00a70.1 are unaffected: they refute the *inhabitance* being derivable, and C454 is what")
+    ap("closes them.")
+    ap("")
+    return lines
+
+
+def render_thomistic_act_chain(decls: dict, node_map: dict) -> list[str]:
+    """Reader-facing chain for the 2026-09-28 Thomistic production batch (C463\u2013C468)."""
+    lines: list[str] = []
+    ap = lines.append
+    ap("### Chain 11 \u2014 To produce without succeeding")
+    ap("")
+    ap("> **The problem this batch answers.** After Chain 10, \"God acts at the level of the ground\"")
+    ap("> is **unstatable**: `Initiates` is indexed by a subject, and the ground is provably not one.")
+    ap("> The Thomistically correct way to say it at ground level is *production*, which is a")
+    ap("> different relation \u2014 and Chain 10 had already proved, as a byproduct, that nothing in")
+    ap("> `NotInSuccession` could exclude it. What was missing was the machine-checked form, and it")
+    ap("> is **C467**: the ground produces **and** is immutable, in a single theorem.")
+    ap("")
+    ap("`\u25c6` = the three declared prices (one `VOCAB`, two `META`) \u00b7 `\u03a3` = what they buy.")
+    ap("")
+    ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
+    ap("|---|---|---|---|---|---|")
+    for kind, cid, full, atype, text in THOMISTIC_ACT_STEPS:
+        live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
+        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
+           f"{status} | {kernel_fp_text(full)} |")
+    ap("")
+    ap("**What this chain does not say.**")
+    ap("")
+    ap("- **Not universal production.** C465\u2019s `\u2203 w \u03c6` is *existential*. The derivation "
+       "`(\u2203 w, Satisfies w \u03c6) \u2192 \u2203 v, Produces g v \u03c6`")
+    ap("  (`DivineOmnipotence.lean:55-58`) stays open, so **F10 stays \u274c/\U0001f9f1** and Creator is")
+    ap("  untouched. C306 still refutes that grounding entails causal externality.")
+    ap("- **Not essence\u2013act identity.** \"God is His act\" needs essence vocabulary (Class A,")
+    ap("  blocked). C465 must never be described as establishing divine simplicity.")
+    ap("- **Not immutability\u2019s exclusivity.** C453 stays `DEFERRED`; this batch adds the")
+    ap("  disclosure its `ofSubject` arm was already missing, not the missing lemma.")
+    ap("- **Not a ground that is a subject.** `ofGround_ne_ofSubject` is untouched, and `Produces`")
+    ap("  is subject-free precisely so that nothing here contradicts it.")
+    ap("- **Not that loving is identical with acting.** C464 is an implication in one direction")
+    ap("  only; love without act is left open, and C178's moral close is unaffected.")
+    ap("")
+    return lines
+
+
+def render_act_cascade_chain(decls: dict, node_map: dict) -> list[str]:
+    """Reader-facing chain for the 2026-09-28 act-datum cascade batch (C469\u2013C480)."""
+    lines: list[str] = []
+    ap = lines.append
+    ap("### Chain 12 \u2014 The consequences of the datum, no longer conditional")
+    ap("")
+    ap("> **The problem this batch answers.** `performative_act_datum` (C454) is **unconditional**,")
+    ap("> and yet **eighteen theorems** across five modules still carried it as their *sole*")
+    ap("> hypothesis. A hypothesis that is itself a declared axiom of \u0393 is not a hypothesis: it is a")
+    ap("> leftover from before the datum was admitted. Each of the eighteen is a one-line corollary of")
+    ap("> a parent that already exists and whose proof already exists.")
+    ap("")
+    ap("**The eighteen collapse into twelve distinct conclusions.** `act_datum_implies_initiates` is")
+    ap("already unconditional in form (it is C455); `subject_exists_of_act` = `T1_subjectExists_of_act`")
+    ap("= `T1_subjectExists`; `intentionalSubject_exists_of_act` = `T5_intentionalSubjectExists`;")
+    ap("`freeWill_exists_of_act` = `freeWill_exists`; `freeSubject_exists_of_act` =")
+    ap("`freeSubject_exists`; and each of the two choice routes collapses to one row because a")
+    ap("duplicated corollary is not a second result.")
+    ap("")
+    ap("**This cascade is not free.** Every row now **pays `performative_act_datum` in its")
+    ap("footprint**, and the six free-will / genuine-choice / free-subject rows still pay")
+    ap("`AxIntentionalChoice` or `AxActPolarity` on top. The conditional parents let a reader believe")
+    ap("the act was still in question; the price was hidden in a binder. It is now **visible and")
+    ap("mandatory on every row**. That is a disclosure, not a strengthening of \u0393: \u0393 gained a")
+    ap("theorem about one more thing, not one more premise.")
+    ap("")
+    ap("\u25c6 = a declared price \u00b7 \u03a3 = what the prices buy.")
+    ap("")
+    ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
+    ap("|---|---|---|---|---|---|")
+    for kind, cid, full, atype, text in ACT_CASCADE_STEPS:
+        live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
+        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
+           f"{status} | {kernel_fp_text(full)} |")
+    ap("")
+    ap("**The `Asserts` lane stays closed by construction.** `Asserts s p := Act s p \u2227 p`, so the")
+    ap("datum yields no existential of `Asserts`: there is no proposition available that is both")
+    ap("`Act`-bearing *and* true. The bridge `act_implies_asserts_bridge` (`Choice.lean:653`) stays")
+    ap("unpriced, and **twelve theorems remain conditional** by construction, deliberately untouched")
+    ap("by this batch. The first ten are blocked by a semantic principle or by the unpriced bridge;")
+    ap("the last two by a *universal* premise over all acts, which a single existential witness cannot")
+    ap("discharge. That is the one place where a bridge would be **new substantive content** rather")
+    ap("than a discharged hypothesis, and it is why the lane is closed.")
+    ap("")
+    ap("**What this chain does not say.**")
+    ap("")
+    ap("- **Not universalisation.** The datum is a *global* existential, so C453's per-subject form")
+    ap("  is strictly stronger and stays open.")
+    ap("- **Not a free ground.** `ofGround_ne_ofSubject` is untouched; F10, `Produces`, C462 and")
+    ap("  C465/C467 keep their status and their footprints.")
+    ap("- **Not agency.** C472's `Agent` is `True`; the row discharges a step of the T chain and is")
+    ap("  no stronger than C470.")
+    ap("- **Not a refutation from the void.** The free-will rows are *consequences* of the datum;")
+    ap("  citing them in its favour is circular (C456's precedent, `INHABITED.md` \u00a70).")
+    ap("")
+    return lines
+
+
 def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     """Emits the classical-attributes table block (placed after Branch C, before
     the Further Investigations catalogue). Statuses are live-derived, never
@@ -7455,6 +7809,9 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     lines.extend(render_temporality_chain(decls, node_map))
     lines.extend(render_sole_bearer_chain(decls, node_map))
     lines.extend(render_inhabited_chain(decls, node_map))
+    lines.extend(render_succession_audit_chain(decls, node_map))
+    lines.extend(render_thomistic_act_chain(decls, node_map))
+    lines.extend(render_act_cascade_chain(decls, node_map))
     ap("_Synthesis — the strongest current profile._ The theory has established, of a")
     ap("**personal, rational, free, authoritative-over-its-acts, independently individuated**")
     ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")
@@ -7468,14 +7825,15 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("domain is machine-checked non-empty and contradiction-free), and **Divine love** (the ground as "
        "lover of contingent reality — ⚠️ AXIOMATIC under the VOCAB primitive `GroundBearsGood` and the "
        "META bridge `AxGroundLovesContingentRealm`, with the cosmos's existence a **free theorem** "
-       "(C350, `{propext, Subject}`, no bridge) and only its content-bearinghood priced on "
-       "`AxTwoSubjects` (C367); see the LOVE chain block).")
+       "(C350, `{CL, NecessarySubjectKind, Subject}`, no bridge) and only its content-bearinghood priced on "
+       "a contingent-person datum (C367); see the LOVE chain block).")
     ap("Crucially, the theory **strictly separates** these machine-verified")
     ap("foundational/functional attributes from their unproven physical, psychological, and scholastic counterparts:")
     ap("**physical/spatial omnipresence**, **psychological personality**, **scholastic simplicity**,")
     ap("**infallible or counterfactual omniscience**, **causal / creative omnipotence** (the presence-plus-")
-    ap("obtaining reading above is priced ◈ `operatesAt_presencePlusObtaining`, and a production relation plus")
-    ap("its derivation remain BLOCKED), and")
+    ap("obtaining reading above is priced ◈ `operatesAt_presencePlusObtaining`; the production relation is now")
+    ap("declared — C463, `Tag: VOCAB` — while its *derivation* from satisfaction remains BLOCKED, and a")
+    ap("declared relation is not a power), and")
     ap("**psychological impassibility** remain separate targets (❌ NOT ESTABLISHED or 🔴 INDEPENDENT).")
     ap("The remaining divine attributes — **unity / monotheism**,")
     ap("**perfect moral goodness** (the moral pole itself now obtains under the single declared "
@@ -7484,7 +7842,7 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("**creation as entailment** — remain **separate proof targets**")
     ap("(`⏸` / `❌`) or explicit **countermodel frontiers** (`🧱`) until the live kernel proves them. "
        "Contingent creation *as existence* is no longer among them: it is a **free theorem** "
-       "(C350 `contingent_realm_obtains`, `{propext, Subject}`), witnessed by an atom, with no "
+       "(C350 `contingent_realm_obtains`, `{CL, NecessarySubjectKind, Subject}`), witnessed by an atom, with no "
        "bridge and no substantive axiom. Only the realm's *content* is priced, on an exhibited "
        "contingent person (C367 `cosmos_obtains`) — the kind premise the two-kinds doctrine "
        "exhibits, not a semantic "

@@ -78,6 +78,95 @@
  "Logos.A14SemanticAudit.separation_repr_without_eval": [],
  "Logos.A14SemanticAudit.separation_self_attr_without_causal": [],
  "Logos.A14SemanticAudit.separation_settle_without_authorship": [],
+ "Logos.ActCascade.an_actual_subject_obtains": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum"
+ ],
+ "Logos.ActCascade.an_agent_exists": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum"
+ ],
+ "Logos.ActCascade.an_intentional_subject_exists": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum"
+ ],
+ "Logos.ActCascade.freeSubject_exists_of_act_datum": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum",
+  "Logos.Choice.AxIntentionalChoice"
+ ],
+ "Logos.ActCascade.freeWill_exists_of_act_datum_constitutive": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum",
+  "Logos.Choice.AxIntentionalChoice"
+ ],
+ "Logos.ActCascade.freeWill_exists_of_act_datum_polarity": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum",
+  "Logos.Choice.AxActPolarity"
+ ],
+ "Logos.ActCascade.genuineChoice_exists_of_act_datum_constitutive": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum",
+  "Logos.Choice.AxIntentionalChoice"
+ ],
+ "Logos.ActCascade.genuineChoice_exists_of_act_datum_polarity": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum",
+  "Logos.Choice.AxActPolarity"
+ ],
+ "Logos.ActCascade.intentionality_is_instantiated": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum"
+ ],
+ "Logos.ActCascade.noMeaning_is_refuted_unconditionally": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum"
+ ],
+ "Logos.ActCascade.someone_exists_as_subject": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum"
+ ],
+ "Logos.ActCascade.someone_means_something": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum"
+ ],
  "Logos.ActionChoiceDefinitions.Action": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
@@ -6359,6 +6448,12 @@
   "Logos.Agency.Subject",
   "Logos.LovesAsGround.GroundBearsGood"
  ],
+ "Logos.LovesAsGround.ground_love_of_a_subject_correlate_iff": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
  "Logos.LovesAsGround.ground_love_preserves_pure_actuality": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
@@ -6374,6 +6469,13 @@
   "Logos.LovesAsGround.GroundBearsGood"
  ],
  "Logos.LovesAsGround.ground_love_requires_a_necessary_lover": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood"
+ ],
+ "Logos.LovesAsGround.ground_love_targets_a_subject_correlate": [
+  "propext",
   "Logos.Agency.Means",
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject",
@@ -9294,6 +9396,16 @@
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject"
  ],
+ "Logos.ProductionCountermodel.ModelProducesEverySatisfiable": [],
+ "Logos.ProductionCountermodel.ModelProducesSomething": [],
+ "Logos.ProductionCountermodel.ProducesOneFormOnly.c465_holds": [],
+ "Logos.ProductionCountermodel.ProducesOneFormOnly.casesOn": [],
+ "Logos.ProductionCountermodel.ProducesOneFormOnly.distinct": [],
+ "Logos.ProductionCountermodel.ProducesOneFormOnly.f10_fails": [],
+ "Logos.ProductionCountermodel.ProducesOneFormOnly.recOn": [],
+ "Logos.ProductionCountermodel.ProducesOneFormOnly.φ₀_satisfiable": [],
+ "Logos.ProductionCountermodel.ProducesOneFormOnly.φ₁_satisfiable": [],
+ "Logos.ProductionCountermodel.producing_something_does_not_produce_every_satisfiable_form": [],
  "Logos.ProofPresentationRetorsion.Checker": [],
  "Logos.ProofPresentationRetorsion.Derivation.below": [],
  "Logos.ProofPresentationRetorsion.Derivation.brecOn": [],
@@ -9597,6 +9709,10 @@
   "Logos.Agency.subjectWill"
  ],
  "Logos.RecoveredOntologicalGround.contingent_subject_ne_necessary_entity": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.RecoveredOntologicalGround.every_entity_is_actual": [
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject"
  ],
@@ -11266,6 +11382,43 @@
  "Logos.SubContrastFoundations.vertical_sort_separation": [
   "Logos.Agency.Subject"
  ],
+ "Logos.SuccessionAudit.existence_implies_someone_initiates": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum"
+ ],
+ "Logos.SuccessionAudit.non_correlate_is_outside_succession": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SuccessionAudit.ofAtom_is_not_a_subject_correlate": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SuccessionAudit.ofGround_is_not_a_subject_correlate": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SuccessionAudit.someone_is_in_succession": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum"
+ ],
+ "Logos.SuccessionAudit.the_ground_and_every_atom_are_outside_succession": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.SuccessionCountermodel.GroundProducesCountermodel.casesOn": [],
+ "Logos.SuccessionCountermodel.GroundProducesCountermodel.g_is_no_correlate": [],
+ "Logos.SuccessionCountermodel.GroundProducesCountermodel.g_outside_succession": [],
+ "Logos.SuccessionCountermodel.GroundProducesCountermodel.g_produces": [],
+ "Logos.SuccessionCountermodel.GroundProducesCountermodel.recOn": [],
+ "Logos.SuccessionCountermodel.ModelNotInSuccession": [],
+ "Logos.SuccessionCountermodel.a_ground_can_produce_while_outside_succession": [],
  "Logos.TheologicalModalHardening.ActualEntity": [
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject"
@@ -11600,6 +11753,42 @@
  "Logos.TheologicalModalHardening.subject_not_entails_agency": [],
  "Logos.TheologicalModalHardening.u1_independence_exclusion_forces_uniqueness": [],
  "Logos.TheologicalModalHardening.uniform_witness_yields_necessary_entity": [],
+ "Logos.ThomisticAct.Produces": [
+  "Logos.Agency.Subject",
+  "Logos.ThomisticAct.Produces"
+ ],
+ "Logos.ThomisticAct.ground_love_produces": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood",
+  "Logos.ThomisticAct.Produces",
+  "Logos.ThomisticAct.ground_love_produces"
+ ],
+ "Logos.ThomisticAct.love_implies_act": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.ThomisticAct.love_implies_act"
+ ],
+ "Logos.ThomisticAct.loving_subject_initiates": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.ThomisticAct.love_implies_act"
+ ],
+ "Logos.ThomisticAct.producing_coexists_with_immutability": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.LovesAsGround.GroundBearsGood",
+  "Logos.ThomisticAct.Produces",
+  "Logos.ThomisticAct.ground_love_produces"
+ ],
  "Logos.UndeniableNormativeDerivation.ConstitutiveRightWrong": [
   "Logos.Agency.Subject"
  ],
