@@ -218,7 +218,62 @@ theorem necessity_and_atemporality_yield_immutability (e : Entity)
 }
 
 -- ============================================================================
--- Section 7: Metatheoretic Independence / Countermodel (Contingent Entities Are Mutable)
+-- Section 7: F16 priced — the wall is vocabulary, not a missing proof
+--
+-- The F16 frontier row (GAPMAP.md) says the substantive reading of Immutability
+-- ("the ground's meaning capacity cannot vary from world to world") cannot even be
+-- *stated*, because `EntityMeans : Entity → Prop → Prop` has no `World` argument.
+-- That diagnosis is right, and this section makes the diagnosis itself a theorem:
+-- no relation that agrees with `EntityMeans` at every world can exhibit
+-- world-varying capacity. So F16's variation, if it is to exist, must come from
+-- NEW VOCABULARY — and new vocabulary is the author's decision at `Tag: SEM` at
+-- minimum, not a lemma this batch may supply.
+--
+-- F16 therefore STAYS BLOCKED. What changes is that its price is now a `{}`-class
+-- result rather than a sentence in a ledger cell. The plan of record is AUDIT.md §4.
+-- ============================================================================
+
+/-- **No world-indexed extension of Γ's meaning relation can vary.**
+    Suppose `R : Entity → World → Prop → Prop` agrees with `EntityMeans` at every
+    entity, world and proposition. Then capacity is a function of the entity alone,
+    and `R e w₁ p ↔ R e w₂ p` for any two worlds — world-variation is impossible.
+    Hence a world-relative meaning relation, were one added, could not be an
+    extension of `EntityMeans`, and the substantive F16 reading has to be priced on
+    new vocabulary rather than proved from the present one.
+
+    This is the machine-checked form of F16's stated reason. It is *not* a proof of
+    F16 and must not be read as one: F16 stays BLOCKED, and what is proved here is
+    the stronger, sharper statement that the blocking is forced.
+    Footprint: `{Means, Subject}`. -/
+theorem no_world_indexed_extension_of_meaning_can_vary :
+    ¬ ∃ (R : Entity → World → Prop → Prop),
+        (∀ e : Entity, ∀ w : World, ∀ p : Prop, R e w p ↔ EntityMeans e p) ∧
+        (∃ e : Entity, ∃ w₁ w₂ : World, ∃ p : Prop,
+            R e w₁ p ∧ ¬ R e w₂ p) := by
+  rintro ⟨R, hExt, ⟨e, w₁, w₂, p, h₁p, h₂neg⟩⟩
+  exact h₂neg (hExt e w₂ p |>.mpr (hExt e w₁ p |>.mp h₁p))
+
+/-- **The constructive half: any extension of `EntityMeans` IS world-constant.**
+    The positive content of the previous row, stated so that the ledger can point
+    at the invariance rather than only at its impossibility: if `R` agrees with
+    `EntityMeans` at every world, then `R e w₁ p ↔ R e w₂ p` for any two worlds.
+
+    Note what this is *not*: it is not a claim that the ground's meaning cannot
+    change, because there is no world-indexed meaning in Γ to change. It is the
+    statement that any future world-indexed relation which *extends* the present one
+    would be world-constant, which is precisely why F16's variation would need a
+    relation that does not extend it. C321
+    (`capacity_invariance_holds_for_every_entity`) is the same fact about
+    `CapacityInvariance`; this row is its conditional form.
+    Footprint: `{Means, Subject}`. -/
+theorem world_indexed_extension_of_meaning_is_world_constant
+    (R : Entity → World → Prop → Prop)
+    (hExt : ∀ e : Entity, ∀ w : World, ∀ p : Prop, R e w p ↔ EntityMeans e p)
+    (e : Entity) (w₁ w₂ : World) (p : Prop) : R e w₁ p ↔ R e w₂ p :=
+  (hExt e w₁ p).trans (hExt e w₂ p).symm
+
+-- ============================================================================
+-- Section 8: Metatheoretic Independence / Countermodel (Contingent Entities Are Mutable)
 -- ============================================================================
 
 /-- Metatheoretic Independence / Countermodel:
@@ -245,5 +300,7 @@ theorem contingent_entity_fails_immutability :
 #print axioms ofGround_divine_immutability
 #print axioms necessity_and_atemporality_yield_immutability
 #print axioms contingent_entity_fails_immutability
+#print axioms no_world_indexed_extension_of_meaning_can_vary
+#print axioms world_indexed_extension_of_meaning_is_world_constant
 
 end Logos.DivineImmutability

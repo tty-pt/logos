@@ -662,9 +662,92 @@ theorem the_ground_is_not_personal : ¬ PersonalEntity Entity.ofGround := by
   rintro ⟨s, hs, _⟩
   exact ofGround_ne_ofSubject s hs
 
-end Logos.CosmicExistence
+-- ============================================================================
+-- Section 4b: §18 — pantheism, in the one form it can be stated in
+--
+-- `CHARACTERISTICS.md` §18 asks for the exclusion of pantheism and records it as
+-- ❌ not established, with two gaps: there is no `Universe` predicate at all, and the
+-- prose does not say whether "the universe" is the whole aggregate or the ground
+-- itself. The second gap is a question about *which* claim, and this section answers
+-- it by refusing to choose.
+--
+-- `Universe` below is the **identity** form and nothing else: "whatever obtains IS e".
+-- The aggregate reading ("the universe is not an entity at all") is not a proposition
+-- about `Entity`, so it is unstatable here rather than refuted; and the *grounding*
+-- form is not pantheism, and is separated by the cited rows (C110's countermodel, C328
+-- on the meaningless) rather than re-proved.
+--
+-- The section adds no axiom, no primitive, and no stipulation. `Universe` occurs in
+-- CONCLUSIONS only — it is defined here and consumed by the three theorems below, so
+-- it needs no ◈ registration and no `Tag:`. The plan of record is AUDIT.md §3.3/§4.
+-- ============================================================================
 
--- Axiom footprint audit
+/-- **Pantheism in its only well-formed identity form: whatever obtains IS `e`.**
+
+    Deliberately not `NecessaryEntity` (which is `∀ w, ExistsAt w e`, i.e. C330's
+    proposition under a second name — the corpus forbids two names for one
+    proposition) and deliberately not an "aggregate universe" `Type`, which `Entity`
+    has no constructor for. Identity is the reading on which the claim can be false
+    or true of something in Γ's ontology at all.
+
+    Read the three theorems below for what they do **not** say: the realm's
+    contingency is untouched, and `SUBJECTS.md` §4's
+    `∀ w ∀ s, Creates s w → ∃ t, ContingentSubjectKind t ∧ Person t` remains BLOCKED
+    and is cited there, not re-proved here. -/
+def Universe (e : Entity) : Prop :=
+  ∀ (w : World) (x : Entity), ExistsAt w x → e = x
+
+/-- **No entity is identical to the totality of what obtains.** For every entity there
+    is something else that obtains, so the identity form of pantheism fails for all
+    three constructors of `Entity` at once.
+
+    The proof is the three-constructor exhaustion, and it is worth reading carefully
+    because it is *type-theoretic*, not metaphysical: `ofGround ≠ ofAtom n` and
+    `ofGround ≠ ofSubject s` are `Entity.noConfusion`, and the ground exists at
+    every world while `ofAtom 0` exists at `actualWorld` (`actualWorld 0 = TV.t`
+    computes). The refutation is therefore not an empty-world artifact — the same
+    witness `LovesAsGround.an_atom_is_contingent` (C323) already uses.
+
+    **This is cheap, and should be read as cheap.** It says that Γ's `Entity` is an
+    inductive with distinguishable constructors, not that an ontology of the universe
+    has been philosophically adjudicated. The ledger row records it at that strength.
+    Footprint: `{NecessarySubjectKind, Subject}` (the `ExistsAt` artifact of Section 1b). -/
+theorem no_entity_is_identical_to_the_whole (e : Entity) :
+    ∃ (w : World) (x : Entity), ExistsAt w x ∧ x ≠ e := by
+  cases e with
+  | ofSubject s => exact ⟨Entity.actualWorld, Entity.ofGround, trivial, Entity.noConfusion⟩
+  | ofAtom n => exact ⟨Entity.actualWorld, Entity.ofGround, trivial, Entity.noConfusion⟩
+  | ofGround => exact ⟨Entity.actualWorld, Entity.ofAtom 0, rfl, Entity.noConfusion⟩
+
+/-- **The ground of reality is not the universe.** The headline of §18's identity
+    form, read off the previous row at `e := Entity.ofGround`.
+
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem the_ground_is_not_the_universe : ¬ Universe Entity.ofGround := by
+  intro h
+  obtain ⟨w, x, hxw, hne⟩ := no_entity_is_identical_to_the_whole Entity.ofGround
+  exact hne (h w x hxw).symm
+
+/-- **Founding and identifying are not compatible alternatives.** For every entity,
+    being grounded by the ground does not make it identical with the totality — so
+    §18's second stated gap ("it does not specify whether founded and identical are
+    compatible") is machine-checked as *incompatible*.
+
+    The antecedent is the whole of `GroundsEntity`, and under Γ's definitions it holds
+    for every entity (C328), so this row's content is entirely in the `¬ Universe e`
+    half. It is stated as an implication because that is the form the prose gap is
+    about; a reader looking for a constraint on `GroundsEntity` will not find one
+    here, and should not. Its dependency on `Means` is inherited from
+    `GroundsEntity`; nothing in the antecedent is read in the proof.
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
+theorem grounding_never_yields_identity_of_the_totality (e : Entity) :
+    Logos.RecoveredOntologicalGround.GroundsEntity Entity.ofGround e →
+    ¬ Universe e := by
+  intro _hGrounds h
+  obtain ⟨w, x, hxw, hne⟩ := no_entity_is_identical_to_the_whole e
+  exact hne (h w x hxw).symm
+
+end Logos.CosmicExistence
 #print axioms Logos.CosmicExistence.Realm
 #print axioms Logos.CosmicExistence.CreatedRealm
 #print axioms Logos.CosmicExistence.ContingentRealm
@@ -687,3 +770,7 @@ end Logos.CosmicExistence
 #print axioms Logos.CosmicExistence.realm_existence_does_not_imply_realm_necessity
 #print axioms Logos.CosmicExistence.contingent_reality_is_not_necessary
 #print axioms Logos.CosmicExistence.the_ground_is_not_personal
+#print axioms Logos.CosmicExistence.Universe
+#print axioms Logos.CosmicExistence.no_entity_is_identical_to_the_whole
+#print axioms Logos.CosmicExistence.the_ground_is_not_the_universe
+#print axioms Logos.CosmicExistence.grounding_never_yields_identity_of_the_totality

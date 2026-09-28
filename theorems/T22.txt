@@ -105,6 +105,24 @@ Ainda requer prova (F16): a leitura substantiva — «a capacidade de significad
 `EntityMeansAt` **e** a prova de que a sua variação é não-vazia. É vocabulário novo, não
 prova nova; **não foi adicionado.**
 
+**Actualização 2026-09-28 (C427/C428) — o preço de F16 passou a ser teorema; o bloqueio
+continua.** `DivineImmutability.no_world_indexed_extension_of_meaning_can_vary` (C427,
+`{Means, Subject}`) enuncia por extenso
+
+    ¬ ∃ R : Entity → World → Prop → Prop,
+        (∀ e w p, R e w p ↔ EntityMeans e p) ∧ (∃ e w₁ w₂ p, R e w₁ p ∧ ¬ R e w₂ p)
+
+isto é: **nenhuma** relação que concorde com `EntityMeans` em todo o mundo pode exibir
+capacidade variável. `world_indexed_extension_of_meaning_is_world_constant` (C428, mesma
+pegada) é a metade construtiva — a invariância, e não só a sua impossibilidade.
+
+O que estas duas linhas acrescentam **não** é a imutabilidade, que C201 já tinha; é a
+certeza de que a imutabilidade *não pode* ser obtida por re-leitura do vocabulário
+existente. A variação, se existir, tem de vir de vocabulário novo, e a instrução formal
+que falta continua exactamente a mesma: `EntityMeansAt` **mais** uma capacidade exibida
+que varie. `EntityMeansAt` **não** foi adicionado e `ofGround_divine_immutability` (C201)
+permanece `PROVEN` e intocado.
+
 Limites honestos de escopo:
 A demonstração estabelece a imutabilidade modal, temporal, de processo e de capacidade
 de `Entity.ofGround` no sistema ontológico de Γ. Não pretende demonstrar impassibilidade

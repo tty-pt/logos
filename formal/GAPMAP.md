@@ -90,6 +90,180 @@ como condicionais ao género; não liga a ponte ao habitante do mundo; não toca
 `AxTwoSubjects` (que sai de C367/C351/C352/C42/C44/C45 por um motivo independente
 e registado na 5.ª correcção: exibir o género subsume a testemunha).
 
+## Batch precedence (§9) e §18 (2026-09-28) — a precedência à distinção, e o panteísmo por identidade
+
+Duas características abrem hoje sem uma única linha no livro-razão. **§9** (a
+precedência do Fundamento à distinção entre certo e errado) era a única das dezenove
+características com **zero** teoremas, zero claim, e **zero linha** na tabela gerada
+`CLASSICAL_ATTRIBUTES` (`scripts/build_deduction.py:5268`) — por isso era invisível
+para quem lê. **§18** (exclusão do panteísmo) era ❌ não estabelecida, por não haver
+predicado `Universe` nenhum.
+
+O lote traz **15 linhas novas, 0 axiomas novos, 0 primitivas novas, 0 estipulações
+novas, 0 registos ◈ novos**. O total declarado fica em **27**.
+
+**Uma correcção, e ela é o achado mais honesto do lote.** A via de `base.txt` §9 passa
+por um "mundo vazio" — um mundo onde a distinção não está instanciada em lado nenhum,
+que o fundamento teria de preceder. O plano (`AUDIT.md` §4, Stage 0) propunha como
+primeiro lema `{}` a linha
+
+    no_form_satisfied_at_falsity_world (φ : Form) : ¬ Satisfies falsityWorld φ
+
+**Essa linha é falsa e não foi provada**, porque `Satisfies` é fechada sob negação: no
+mundo todo-`TV.f` vale `Satisfies (Form.not (Form.atom 0))`. Não há mundo nenhum que não
+satisfaça nenhuma forma, e **C418 é a refutação machine-checked disso**. O livro-razão
+passa por isso a levar a forma **verdadeira e mais fraca** — um mundo onde **nenhum
+átomo** é verdadeiro — e a levar a refutação da leitura forte como linha própria
+(C418). O argumento de §9 não fica enfraquecido: fica enunciado com precisão pela
+primeira vez. O que muda é que a "ausência" passa a ser um teorema, não um adjectivo.
+
+`base.txt` §9 nunca foi reescrito por esta via: a characteristic continua sendo a do
+autor; o que muda é o que Γ pode dizer dela.
+
+| Claim | Secao | Declaracao | Status | Pegada |
+|---|---|---|---|---|
+| C417 | §9 | `Precedence.no_atom_is_true_at_falsityWorld (n : Nat) : ¬ Satisfies Entity.falsityWorld (Form.atom n)` — nenhum átomo é verdadeiro no mundo da falsidade: a valuation todo-`TV.f` é o ponto do espaço-mundos onde a distinção não está instanciada em nenhum conteúdo **atómico**. Esta é a forma honesta de "um mundo onde nada se dá" | PROVEN | `{}` |
+| C418 | §9 | `Precedence.every_world_satisfies_some_form (w : World) : ∃ φ : Form, Satisfies w φ` — **a refutação da leitura "mundo vazio"**: para todo o mundo há uma forma satisfeita (o átomo `0` se o mundo o põe verdadeiro, a sua negação caso contrário). Construtiva — o ramo é sobre `w 0 = TV.t` e `TV` deriva `DecidableEq` — logo **sem `Classical.choice`**. É a linha que substitui o lema falso que o plano propunha, e a razão de a precedência se enunciar sobre conteúdo **atómico** e não sobre formas satisfeitas | PROVEN | `{}` |
+| C419 | §9 | `Precedence.ofGround_obtains_where_no_atom_is_true : ∃ w : World, (∀ n : Nat, ¬ Satisfies w (Form.atom n)) ∧ ExistsAt w Entity.ofGround` — **precedência no sentido positivo**: o fundamento obtém onde nenhum átomo é verdadeiro. O mundo é `Entity.falsityWorld` e a obtensão é o braço `ofGround` de `EntityExistsAt` (`Entity.lean:66`), logo `True.intro`; o resto é C417. O preço vocabulary-only é o artefacto de `ExistsAt` desenrolar para `EntityExistsAt` — a prova nunca lê o predicado de género | PROVEN | `{NecessarySubjectKind, Subject}` |
+| C420 | §9 | `Precedence.ground_existence_does_not_entail_any_truth : ¬ (∀ w : World, ∀ φ : Form, ExistsAt w Entity.ofGround → Satisfies w φ)` — a obtensão do fundamento **não_entra** nenhuma verdade: a distinção não é um filtro sobre o fundamento nem uma condição dele. Testemunha `falsityWorld` e o átomo `0`. É a **conversa** do que uma leitura de "precedência" precisaria, e é a razão de §9 ser uma separação e não um filtro | PROVEN | `{NecessarySubjectKind, Subject}` |
+| C421 | §9 | `Precedence.ground_existence_is_invariant_while_content_varies` — a forma conjoined de C419 e C420 numa linha, para que o leitor veja as duas metades juntas: o que é verdadeiro varia de mundo para mundo (a invariância do agente, `HardenedInvariance` C180), a obtensão do fundamento não | PROVEN | `{NecessarySubjectKind, Subject}` |
+| C422 | §9 | `Precedence.ground_scope_is_not_the_truth_set : ¬ (∀ p : Prop, EntityMeans Entity.ofGround p ↔ T p)` — o âmbito do fundamento **não** é o conjunto das verdadeiras: a distinção não se levanta sobre ele. Refuta-se com uma instância, `p := False` (`EntityMeans ofGround p` reduz a `True`, `T p := p`). É C236 lido ao contrário — a linha anterior excluía o fundamento do truth-tracking por um argumento de conteúdo, esta exclui-o pela definição do lado do significado | PROVEN | `{Means, Subject}` |
+| C423 | §9 | `Precedence.ground_conditions_every_content_bearer (w : World) (e : Entity) : ExistsAt w e → (∃ p : Prop, EntityMeans e p) → GroundsEntity Entity.ofGround e` — a metade positiva de §9: o fundamento **condiciona** todo portador de conteúdo, na relação `GroundsEntity` que Γ já tem. **A hipótese de significado não é necessária** — `GroundsEntity Entity.ofGround e` é `∀ p, EntityMeans e p → True`, que vale para toda a entidade; a hipótese é carregada porque §9 diz "todo o que se levanta sob a distinção". O facto mais forte que isso implica é o relatório: sob as definições de Γ o fundamento condiciona **tudo**, com ou sem significado. É o mesmo facto que C328 regista para os sem-significado, citado e não re-provado | PROVEN | `{Means, NecessarySubjectKind, Subject}` |
+| C424 | §9 | `Precedence.atom_fails_precedence : ¬ ∃ w : World, (∀ n : Nat, ¬ Satisfies w (Form.atom n)) ∧ ExistsAt w (Entity.ofAtom 0)` — a metade **discriminante**, no idioma das separações do corpus: o predicado vale do fundamento e falha de um átomo mundano, com as duas metades provadas. `EntityExistsAt w (ofAtom 0)` *é* `w 0 = TV.t`, que *é* `Satisfies w (Form.atom 0)`: a existência de um átomo é a sua própria verdade, e nenhum mundo pode satisfazer e negar ao mesmo tempo | PROVEN | `{NecessarySubjectKind, Subject}` |
+| C425 | §9 | `Precedence.ofGround_precedes_the_right_wrong_distinction : PrecedesRightWrong Entity.ofGround` — **a manchete de §9**: os quatro sentidos num `structure`, para que nenhum predicado-guarda-chuva tenha de carregar a claim inteira. Os três campos juntos são a lacuna-2 de §9 num objecto: o fundamento precede a distinção *e* discrimina-a *e* não é discriminado por ela. "Precede" é deliberadamente `GroundsEntity` — uma condição — e nunca uma derivação | PROVEN | `{Means, NecessarySubjectKind, Subject}` |
+| C426 | §9 | `Precedence.rightWrongDistinction_is_world_invariant (_w : World) : ¬ N_T ∧ ¬ N_F` — **o limite, e a razão de §9 não ser um PROVEN simples**: `Core.T p := p` é a identidade em `Prop`, logo `N_T` e `N_F` são afirmações sem índice de mundo. O argumento-mundo na Cottage é **inerte de propósito**: exibe que uma precedência relativa-a-mundo à distinção ao nível de `Prop` não é bem-formada sob o vocabulário actual. §9 está estabelecida na camada semântica (`Satisfies`, C419–C425) e **não** na camada do predicado de verdade; levantar a linha para PROVEN simples exigiria um `T` indexado por mundo, que é vocabulário novo a `Tag: SEM` no mínimo e é decisão do autor | PROVEN | `{}` |
+| C427 | §16 item 3 | `DivineImmutability.no_world_indexed_extension_of_meaning_can_vary : ¬ ∃ (R : Entity → World → Prop → Prop), (∀ e w p, R e w p ↔ EntityMeans e p) ∧ (∃ e w₁ w₂ p, R e w₁ p ∧ ¬ R e w₂ p)` — **F16 pelo preço, não pela prova**: nenhuma relação que concorde com `EntityMeans` em todo o mundo pode exibir capacidade variável. Isto torna a razão declarada de F16 um teorema em vez de uma frase numa célula do livro-razão. **F16 continua BLOCKED** — o que se prova aqui é que o bloqueio é forçado: a variação, se existir, tem de vir de **vocabulário novo**, e isso é decisão do autor | PROVEN | `{Means, Subject}` |
+| C428 | §16 item 3 | `DivineImmutability.world_indexed_extension_of_meaning_is_world_constant (R) (hExt) (e w₁ w₂ p) : R e w₁ p ↔ R e w₂ p` — a metade **construtiva** de C427, para que o livro-razão possa apontar para a invariância e não só para a sua impossibilidade. C321 (`capacity_invariance_holds_for_every_entity`) é o mesmo facto sobre `CapacityInvariance`; esta é a forma condicional. **Não** é uma afirmação de que o significado do fundamento não muda: não há significado indexado por mundo em Γ que pudesse mudar | PROVEN | `{Means, Subject}` |
+| C429 | §18 | `CosmicExistence.no_entity_is_identical_to_the_whole (e : Entity) : ∃ (w : World) (x : Entity), ExistsAt w x ∧ x ≠ e` — a forma de **identidade** do panteísmo falha para os três construtores de `Entity` de uma vez. A prova é a exaustão dos três construtores e é **barata, e deve ser lida como barata**: diz que o `Entity` de Γ é um indutivo com construtores distinguíveis, não que uma ontologia do universo foi adjudicada filosoficamente. Não é um artefacto de mundo vazio: a testemunha é a mesma de C323 | PROVEN | `{NecessarySubjectKind, Subject}` |
+| C430 | §18 | `CosmicExistence.the_ground_is_not_the_universe : ¬ Universe Entity.ofGround` — a manchete da forma de identidade de §18, lida de C429 em `e := Entity.ofGround`. `Universe e := ∀ w x, ExistsAt w x → e = x` ("o que obtém **é** e") é a única leitura de identidade bem-formada sobre o tipo de entidade de Γ; a leitura **agregada** ("o universo não é uma entidade") não é uma proposição sobre `Entity` e fica por isso **não-enunciável**, não refutada | PROVEN | `{NecessarySubjectKind, Subject}` |
+| C431 | §18 | `CosmicExistence.grounding_never_yields_identity_of_the_totality (e : Entity) : GroundsEntity Entity.ofGround e → ¬ Universe e` — **fundar e identificar não são alternativas compatíveis**: a segunda lacuna declarada de §18 ("não especifica se fundado e idêntico são compatíveis") fica machine-checked como **incompatíveis**. O antecedente é o todo de `GroundsEntity`, que sob as definições de Γ vale para toda a entidade (C328), logo o conteúdo da linha está inteiramente na metade `¬ Universe e` | PROVEN | `{Means, NecessarySubjectKind, Subject}` |
+
+Também neste lote, sem C-id por serem `def`s e não claims: `Precedence.PrecedesRightWrong`
+(a `structure` de C425) e `CosmicExistence.Universe` (o `def` de C430/C431). `Universe`
+aparece **só em conclusões** — é definido aqui e consumido pelas três linhas acima —
+pelo que não precisa de registo ◈ nem de `Tag:`. Este é o ponto de `AUDIT.md` §3.3:
+o plano original definia `Universe e := NecessaryEntity e` e thereby re-provava C330
+sob um nome novo, o que o corpus proíbe.
+
+#### O que este lote **não** fecha
+
+* **A contingência do realm.** C429–C431 não a tocam. `SUBJECTS.md` §4
+  (`∀ w ∀ s, Creates s w → ∃ t, ContingentSubjectKind t ∧ Person t`) continua BLOCKED
+  e é citada aí, não re-provada aqui.
+* **F16.** Continua BLOCKED. A instrução formal que falta continua a ser, por extenso,
+  `EntityMeansAt : Entity → World → Prop → Prop` **mais** uma capacidade exibida que
+  varie — e C427 é a prova de que essa variação não pode vir de re-ler a relação actual.
+* **§9 ao nível de `Prop`.** Ver C426. O estado de §9 é o **split**: PROVEN na camada
+  semântica, não estabelecida na camada do predicado de verdade.
+* **A leitura agregada de §18.** Não enunciável sobre `Entity` (ver C430). Se o autor
+  a quiser formalizada, é uma linha diferente e mais fraca, e deve ser adicionada
+  explicitamente em vez de ser enfiada no `def`.
+
+## Batch precedence-unicity & temporal-separation (2026-09-28) — a articulação que faltava entre §9 e §8, e os dois sentidos da eternidade
+
+Sete linhas novas, **C432–C438**, em dois módulos já existentes, mais a reparação de duas
+frases obsoletas (F15 e a nota de Level 14). Invariante do lote: **0 axiomas novos, 0
+`Tag:` novos, 0 ◈ novos, 0 sorts novos**. O registo fica em **27 declarados (VOCAB 16 /
+SEM 6 / META 5)**.
+
+O lote nasce de duas afirmações que o documento para o leitor ainda escrevia no
+**presente** como abertas, e que este corpus consegue fechar sem vocabulário novo:
+
+* `CHARACTERISTICS.md:353` — *"a relação entre precedência sobre a avaliação e
+  precedência sobre o tempo não está articulada"*.
+* `CHARACTERISTICS.md:313` — *"o texto não distingue atemporalidade de perenidade"*.
+
+| Claim | Secao | Declaracao | Status | Pegada |
+|---|---|---|---|---|
+| C432 | §9/§8 | `Precedence.stage_invariance_iff_atemporal (e) : StageInvariance e ↔ Atemporal e` — **dois nomes para um predicado**: `StageInvariance` e `Atemporal` desenrolam para a mesma proposição. Achado, não contribuição; importa para ler §8, porque a "atemporalidade" e o segundo campo do mestre da imutabilidade não são dois passos | PROVEN | `{NecessarySubjectKind, Subject}` |
+| C433 | §9 | `Precedence.ofGround_sole_precedes_right_wrong : ∀ e, PrecedesRightWrong e → e = Entity.ofGround` — **a unicidade de §9**: o fundamento é a única entidade que precede a distinção. O braço `ofAtom n` é C424 verbatim (`{}`); o braço `ofSubject s` é onde está o preço, e o preço **é F15** | PROVEN | `{Means, NecessarySubjectKind, SemanticFinitude, Subject}` |
+| C434 | §9/§8 | `Precedence.stage_invariance_does_not_uniquely_identify_the_ground : StageInvariance Entity.ofGround ∧ ¬ (∀ e, StageInvariance e → e = Entity.ofGround)` — **o contraexemplo**: `Entity.ofAtom 0` é stage-invariant (`0 ≤ t` em todos os estágios) e não é o fundamento, logo as duas precedências diferem em poder discriminante | PROVEN | `{propext, NecessarySubjectKind, Subject}` |
+| C435 | §9/§8 | `Precedence.precedence_identifies_the_ground_where_stage_invariance_does_not` — a **articulação** que `CHARACTERISTICS.md:353` dava por aberta, enunciada como **separação de poder discriminante**, não como identificação: os predicados têm extensões diferentes e só `PrecedesRightWrong` singulariza o fundamento | PROVEN | `{propext, Means, NecessarySubjectKind, SemanticFinitude, Subject}` |
+| C436 | §8 | `NecessityEternity.everlasting_implies_atemporal (e) : Everlasting e → Atemporal e` — **o passo genérico**, que faltava porque o módulo só tinha as instâncias ao nível do fundamento (`the_ground_everlasting`, `the_ground_atemporal`), ambas por `ofGround_necessary` | PROVEN | `{NecessarySubjectKind, Subject}` |
+| C437 | §8 | `NecessityEternity.contingent_subject_is_timeless_but_not_everlasting (s) (hKind) : Atemporal (EntityOf s) ∧ ¬ Everlasting (EntityOf s)` — **o contraexemplo discriminante**. A segunda conjunção é `subject_not_everlasting`; a primeira é nova e **vácua**: sob `ContingentSubjectKind s` a cláusula de existência reduz a `stageOf t = actualWorld`, falsa em todo `t` | PROVEN | `{NecessarySubjectKind, Subject}` |
+| C438 | §8 | `NecessityEternity.everlastingness_and_timelessness_are_distinct` — o fecho de C436∧C437, discharging `CHARACTERISTICS.md:313` e a fronteira `NÃO reivindicada` de `base.txt:1521-1524`. **Limite declarado**: Γ não tem teorema que habite `ContingentSubjectKind`, logo a região separadora está habitada nos modelos e não no kernel | PROVEN | `{NecessarySubjectKind, Subject}` |
+
+**C432 — um achado, não uma contribuição.** `StageInvariance`
+(`DivineImmutability.lean:86`) e `Atemporal` (`NecessityEternity.lean:92`) desenrolam
+para a **mesma** proposição, `∀ t₁ t₂, ExistsAtTime t₁ e ↔ ExistsAtTime t₂ e`. O corpus
+tem, portanto, dois nomes para o segundo campo do mestre da imutabilidade. Isto importa
+para ler §8: a "atemporalidade" e esse campo **não são dois passos, são um**. O que
+realmente funciona é o contraste **unidimensional**, porque
+`Everlasting e := ∀ t, ExistsAtTime t e` tem outra forma — é C436. A linha é `{}` quanto
+ao teorema, mas a pegada auditada é `{NecessarySubjectKind, Subject}`: os predicados que
+desenrolam não sãolivres de axiomas.
+
+**C433 — a unicidade de §9 é corolário do mesmo lema que fechou F15.** Os três
+construtores de `Entity` esgotam o caso:
+
+* `ofAtom n` é C424 verbatim e não custa nada (`{}`): o primeiro campo entrega um mundo
+  `w` onde `ExistsAt w (ofAtom n)`, que *é* `Satisfies w (Form.atom n)`
+  definitionualmente, e entrega também a sua negação.
+* `ofSubject s` é onde está o preço, e o preço **é F15**. O segundo campo
+  `conditions_every_bearer` é universal na entidade condicionada, logo instanciá-lo em
+  `ofGround` — que obtém em todo o lado e significa tudo — força
+  `GroundsEntity (EntityOf s) ofGround`, isto é `∀ p, Means s p`.
+  `SemanticFinitude` (`SemanticFinitude.lean:151`, o limite declarado `Tag: VOCAB`
+  `∀ s, ∃ p, ¬ Means s p`) é exactamente a negação disso. **Uma ограниченная, duas
+  características**: o mesmo limite que fechou a unicidade fundacional de F15 fecha
+  agora a unicidade da precedência de §9.
+* `ofGround` é o objectivo.
+
+A ponte #9 da pessoa (`base.txt:1526`, `Ground(e, personal) → Personal(e)`, ledgerada
+BLOCKED em C228) **não é usada e não é precisa**: a pessoahood é irrelevante para a
+precedência aqui, e a linha foi deliberadamente escrita para ser provável sem ela.
+
+**C434/C435 — a articulação, como separação e não como conjunção.** `Entity.ofAtom 0` é
+stage-invariant (`EntityExistsAt (stageOf t) (ofAtom 0)` reduz a `(stageOf t) 0 = TV.t`,
+isto é `0 ≤ t`, que se verifica em todos os estágios) e não é o fundamento. Logo as duas
+precedências **diferem em poder discriminante**, e é isso que C435 enuncia: só
+`PrecedesRightWrong` singulariza o fundamento; `StageInvariance` tem pelo menos duas
+instâncias. `propext` entra por `simp` a reduzir `stageOf t 0` e é o próprio axiom
+fundacional de Lean, não uma premissa.
+
+**A confusão que estas duas linhas existem para impedir.** A maneira óbvia de
+"articular" §9 contra §8 é conjuntar `PrecedesRightWrong Entity.ofGround` com
+`StageInvariance Entity.ofGround`. Essa conjunção é uma re-instanciação de dois factos
+já provados (C425 e `ofGround_stage_invariance`) e **não discrimina nada** — é
+exactamente o defeito que `CapacityInvariance` carrega e que C321 já reporta como
+vácuo. A separação é a forma honesta.
+
+**C436–C438 — os dois sentidos da eternidade, e a vacacidade que é o ponto.** C436 é o
+passo genérico (uma linha: o `↔` desfaz-se nas duas instâncias unidireccionais), e
+estava ausente porque o módulo só tinha as instâncias ao nível do fundamento
+(`the_ground_everlasting`, `the_ground_atemporal`), ambas por `ofGround_necessary`.
+C437 é o contraexemplo discriminante; a segunda conjunção é `subject_not_everlasting` (o
+mesmo módulo) e a primeira é nova, com uma razão que tem de ser declarada e não
+suavizada: sob `ContingentSubjectKind s` a cláusula de existência reduz a
+`stageOf t = actualWorld`, que é **falsa em todo** `t` (no índice `t+1` tem-se
+`stageOf t (t+1) = TV.f` contra `actualWorld (t+1) = TV.t`). Ambos os lados do `↔` de
+`Atemporal` são falsos, e `Atemporal` é satisfeita **vacuamente**. Essa vacacidade é o
+ponto da linha, não um defeito: é exactamente assim que uma entidade pode ser
+"atemporal" sem existir em todo o lado.
+
+**O limite que C438 tem de declarar, e que o enunciado não pode deixar ler-se:** Γ
+**não tem** nenhum teorema que habite `ContingentSubjectKind`. Todas as ocorrências no
+corpo são hipóteses — `LovesAsGround.lean:196`, `CosmicExistence.lean:299` e seguintes,
+com a linha do `Creates` em `CosmicExistence.lean:695` ainda BLOCKED numa relação
+`Creates` que Γ não tem. A região separadora está habitada nos **modelos**, não no
+**kernel**: o fecho prova que o vocabulário *distingue* as duas noções, **não** que
+algum sujeito de Γ caia na diferença. O esquema incondicional
+`¬ (Atemporal e → Everlasting e)` **não é derivável** e não é enunciado de propósito — o
+fundamento é atemporal e perene, e `Entity.ofAtom 0` também.
+
+#### O que este lote **não** fecha
+
+* **Nada no `F10`–`F16`.** Cada uma dessas linhas está ou bloqueada por vocabulário novo
+  (`Produces`, `EntityMeansAt`, `Code`/`Subst`/`Diag`/`Truth`) ou já **machine-refutada**
+  como não-derivável (F11 C273/C274, F12 C299, F13 C294). Este lote não as toca, e
+  re-provar o bloqueio delas seria mais fraco do que os contra-modelos que já existem.
+* **As duas linhas sem gloss.** `DivineImmutability.necessity_and_atemporality_yield_immutability`
+  e `FoundationalOmnipresence.omnipresence_from_universal_ground_and_aseity` continuam
+  **provadas sem linha no ledger**, logo invisíveis ao leitor. Fora do âmbito aprovado
+  deste lote; registado em `PLAN.md` como achado não acted on.
+* **F15 por provação.** Continua `AXIOM` (C388). C433 *consome* o limite, não o
+  substitui.
+
 ## Batch meaning-retorsion (2026-09-27) — a tese do "não há significado" refutada como resposta
 
 O novo módulo `Logos/MeaningRetorsion.lean` (lote B de 2026-09-27) enuncia a tese do
@@ -1289,11 +1463,15 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
 
 - **PROVEN** (status PROVEN/PROVEN↑ whose audit footprint carries **no SEM/META
   axiom** — machine re-derived from `formal/axiom_audit.json`, 2026-09-25):
-  - **52 truly axiom-free** (`{}`): C379, C380, C381, C383, C1, C2, C4, C5, C6, C7, C8, C9,
+  - **55 truly axiom-free** (`{}`): C379, C380, C381, C383, C1, C2, C4, C5, C6, C7, C8, C9,
     C183, C11, C179,
     C17, C181, C22, C26, C27, C31, C35, C36, C95, C96, C182, C184, C185, C38, C50,
     C180, C63, C108, C111, C166, C167, C226, C227, C231, C259, C260, C272, C309,
     C310, C353, C355, C356, C361, C364, C365, C366,
+    **C417, C418, C426** (the 2026-09-28 precedence batch: no atom is true at the
+    falsity world, no world satisfies no form, and the world-invariance of the
+    Prop-level right/wrong distinction. C418 is the refutation of the batch's own
+    first draft lemma, which was **false** — see the batch section above),
     `EvalSettlement` (`ExecutiveDeliberativeFrontier.M_det`, added 2026-09-28 — this
     row was in the ledger but silently dropped by the generator's claim-id regex,
     see the correction below). (C175 is also `{}`, but its
@@ -1329,7 +1507,17 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   - **11 `CL`-only**: C3, C10, C12, C13, C14, C16, C37, C59, C93, C251, C322. (C251 is the
     non-emptiness + contradiction-freedom of the satisfiable scope domain; its `propext`
     cost is inherited from C14, deliberately, so the graph shows the C251 → C14 edge.)
-  - **211 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+  - **230 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+    C419, C420, C421, C422, C423, C424, C425, C427, C428, C429, C430, C431
+    (the 2026-09-28 precedence / §18 batch — twelve rows, 0 substantive axioms;
+    the `NecessarySubjectKind` in C419–C421/C424/C429/C430 is the `ExistsAt` artifact
+    and the `Means` in C422/C423/C425/C428/C431 is `EntityMeans`/`GroundsEntity`),
+    C432, C433, C434, C435, C436, C437, C438
+    (**the 2026-09-28 precedence-unicity / temporal-separation batch — seven rows,
+    0 substantive axioms, 0 new `Tag:`, 0 new ◈.** `propext` in C434/C435 is Lean's
+    own foundational axiom, not a premise; `NecessarySubjectKind` in C432/C436–C438 is
+    the `ExistsAtTime → ExistsAt → SubjectExistsAt` unfolding. C433/C435 are the first
+    §9 rows to price `SemanticFinitude`, still `Tag: VOCAB`, so the badge is `PROVEN`),
     C368, C369, C370, C371, C372, C373, C374, C375, C376, C377, C378, C384, C386,
     C389, C390, C391, C392, C393, C394, C395, C396, C397, C398, C400, C402,
     C410, C411, C412, C413, C414, C415, C405, C406,
@@ -2283,8 +2471,15 @@ aberto.**
 > C318 proves that hypothesis *is* the exclusion of maximal capacity among non-ground entities,
 > so the price is one named predicate, not a new bridge. C319 re-synthesises the attribute with
 > a plain-identity unicity field, and **C320 states Classical Monotheism outright** (existence
-> unconditional, uniqueness under the one named hypothesis). The hypothesis is **not yet
-> asserted in Γ** — it is tracked as frontier row **F15** and is the single open decision.
+> unconditional, uniqueness under the one named hypothesis). ~~The hypothesis is **not yet
+> asserted in Γ** — it is tracked as frontier row **F15** and is the single open decision.~~
+> **CORRECTION 2026-09-28 (lote SEMANTIC-FINITUDE-PROMOTION):** a hipótese **é** agora
+> asserta em Γ, como o axioma declarado `SemanticFinitude.SemanticFinitude`
+> (`SemanticFinitude.lean:151`, `Tag: VOCAB`, C388), e C389
+> (`exactly_one_universal_modal_ground_stipulated`) é o teorema de unicidade
+> **incondicional** — sem parâmetro de hipótese. F15 é `AXIOM`, não uma decisão em
+> aberto. O que continua genuinamente em aberto é a monoteia *ao nível da pessoa* e a
+> ponte #9 (`C228`), e nenhuma das duas é esta frase.
 
 ---
 
@@ -2539,8 +2734,8 @@ aberto.**
 | — | §33 | `DivineTranscendence.CausalExternality (S : Type) (Caus : S → Entity → Entity → Prop) (e : Entity) : Prop := ∀ σ, ∀ g, ¬ Caus σ g e` — **the causal sense**, stated over an abstract relation because Γ declares no production relation | VOCABULARY | `{Subject}` |
 
 | F14 | §33 the Gödel/Tarski/Turing route as a *transcendental* argument: a system cannot supply its own evaluative foundation, therefore the foundation lies external to every system | BLOCKED | **now nameable, bounded, and its in-Γ evidence points the other way.** *What is machine-checked:* (i) the self-referential **shape** is already formalized in Γ — `NegativeRetorsionAudit.DiagonalSpec` (`NegativeRetorsionAudit.lean:515`), `D ↔ ¬ ∃ s, Means s D`, with four `{}` consequences now ledgered at C309–C312; (ii) **the diagonal is never paradoxical** in either direction (C311 true-and-unmeant, C312 false-and-meant), so it yields no contradiction and therefore no forced foundation; (iii) granting the *whole* diagonal still does not deliver an entity external to every system (C308), because the diagonal's externality is from *entertainment* and `OutsideEverySystem` is from *membership*. *The missing lemma, verbatim:* a fixed-point coding — `Code : Nat → Form`, `Subst : Form → Code → Form`, `Diag : Form → Code`, and an internal truth predicate `Truth : Form → Prop` with `Truth (quote φ) ↔ φ` and `∀ φ, ¬ Truth (Diag φ)` — of which Γ declares **none**; `Form`, `Satisfies` and `NecessarilyTrue` (`Semantics.lean:22,44,58`) are meta-level and no `Form → Prop` truth predicate exists anywhere in `Logos/`. *Correction to the record:* the module header of `Logos.DivineTranscendence` previously dismissed the diagonal by claiming self-application "is not expressible in Lean 4's `Prop`". **That was wrong and is retracted in place** — self-application is expressible; the real obstacle is the absent coding vocabulary. *Scope limit:* this does **not** show the route is hopeless, only that it is a **missing-vocabulary** problem whose available in-Γ evidence does not favour it, and that the liar remains blocked for the independent reason recorded at `base.txt:219` (no self-referential proposition is assumed) |
-| F15 | §28 Foundational Unicity: the ground of reality is the **sole** universal ground — no subject of total meaning-capacity competes with it | AXIOM | **DECLARED 2026-09-28 — no longer `BLOCKED`.** The missing lemma is now the declared axiom `SemanticFinitude` (C388, `Tag: VOCAB`), the 27th axiom; the ten unicity/attribute lines C389–C398 are unconditional theorems of Γ. Status changed `BLOCKED` → `AXIOM` by author decision: the sentence is *not derivable* and is not claimed to be — it is a priced, declared, machine-audited restriction of the meaning vocabulary. The price is now visible in every dependent footprint, where before (as a `def`-stipulation) it was invisible to `#print axioms`. *Original assessment, retained:* **now nameable, and no new axiom is needed.** *What is machine-checked:* (i) C210 (`Logos.FoundationalUnicity.ofGround_sole_universal_ground`) already excludes every entity **except** one case it cannot touch — a subject meaning *every* proposition, which no uninterpreted `Logos.Agency.Means` can be shown not to be; (ii) C314 (`Logos.FoundationalUnicity.grounds_ground_iff_maximal`) proves that "grounds the ground" **is** `Logos.FoundationalOmnipresence.MaximalCapacity` (`FoundationalOmnipresence.lean:119`), so the needed notion was already in the corpus and `GroundMaximal` is withdrawn as an invention; (iii) C317 (`Logos.FoundationalUnicity.ofGround_unicity_from_no_discriminating_subject`) closes the last case from the single hypothesis `∀ s, ∃ p, ¬ Means s p`, and **C320 (`Logos.FoundationalUnicity.exactly_one_universal_modal_ground`) states Classical Monotheism outright** (existence unconditional, uniqueness under that one hypothesis). *The missing lemma, verbatim:* `∀ s : Subject, ∃ p : Prop, ¬ Means s p` — i.e. **every subject is meaning-restricted**. *Why it is not derivable:* `Logos.Agency.Means` is VOCAB (`Agency.lean:49` declares `Logos.Agency.Subject` as a nullary uninterpreted sort) and is unconstrained above; nothing in Γ bounds a subject's propositional reach, and the `Existential`-style universality results elsewhere do not apply because the needed bound is per-subject, not global. *The price, stated honestly — and it is NOT a new payment:* this is a **restriction on the meaning vocabulary**, i.e. it says no creature is semantically omnipotent. It is *not* a META bridge and *not* a new definition — it is one quantified sentence over existing vocabulary, and C318 proves it equivalent to the exclusion of maximal capacity among non-ground entities. **Correction (2026-09-27, found while landing C320): the identical hypothesis is ALREADY the standing premise of the corpus.** `DivineSimplicity.canonical_aseity_conditional` (`DivineSimplicity.lean:79`), `DivineSimplicity.ofGround_divine_simplicity` (`:180`) and `DivineSimplicity.ofGround_divine_simplicity_and_transcendence` (`:191`) all take `hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p` — the *same sentence, character for character* — and C195/C196 are ledgered on it. **Second correction (2026-09-27, same day): "three call sites" was a file-local count and badly understated the case.** The hypothesis shape `∀ s : Subject, ∃ p : Prop, ¬ Means s p` occurs **20 times across 5 files** — `DivinePureActuality` 5, `FoundationalUnicity` 7, `CanonicalAseity` 4, `AsieticChoice` 1, `DivineSimplicity` 3. So the corpus pays this exact price for **five** attribute arguments (aseity, simplicity, pure actuality, choice/freedom, unicity), not two, and the already-paid case is *stronger* than the first correction claimed. Γ is no richer for it. F15 was therefore **not a new act of faith**: before the declaration it was an *unnamed* commitment, passed ad hoc wherever a bounded meaning capacity was needed — which is why declaring it once is a consolidation rather than an addition.  *What the batch explicitly did **not** do:* it did not weaken C207 or C211 (both remain PROVEN as conditional theorems) and did not delete them; C316 records that their shared premise is unsatisfiable, and C317–C320 supersede the route rather than the rows. **What remains is bookkeeping, not belief:** because no *axiom* asserts it — it is passed as an explicit argument at each of the 20 ad-hoc call sites — C320 cannot consume it unconditionally, so F15 stays a frontier row. The fix is to consolidate the ad-hoc premises into **one named ◈ stipulation** (`Tag: VOCAB`) and re-point C320 at it (the other 19 users incrementally), which would make C320 an unconditional corollary and retire this row. That is a single, already-paid sentence rather than a new bridge, but it does move the registry from 25 declared axioms, so it is put to the author rather than done silently. |
-| F16 | §28 Immutability: meaning capacity is constant *across worlds* (the substantive reading of the capacity-invariance predicate) | BLOCKED | **missing vocabulary, not a missing proof.** The substantive claim cannot be *stated*, because the meaning relation is `Logos.RecoveredOntologicalGround.EntityMeans (e : Entity) (p : Prop) : Prop` (`RecoveredOntologicalGround.lean:46`) — world-independent by construction. There is no `Entity → World → Prop → Prop` relation anywhere in the library, so "capacity varies / invariance across worlds" has no denotation. C321 proves the world-free reading is a tautology; F16 is the reading the classical text actually wants (Aquino *ST* I q. 9 a. 3, *idem actus semper et similiter est*), and it stays open. *The missing statement, verbatim:* a relation indexed by world, `EntityMeansAt : Entity → World → Prop → Prop`, together with a proof that some entity's meaning capacity genuinely *fails* to be world-constant — so that the invariance is a discriminator. *Why it is not derivable:* adding the world index is a new primitive, so the price is new vocabulary, and tagging it honestly would cost `SEM` at minimum. **Not added — author decision.** The same wall as F10's missing `Produces` relation. |
+| F15 | §28 Foundational Unicity: the ground of reality is the **sole** universal ground — no subject of total meaning-capacity competes with it | AXIOM | **DECLARED 2026-09-28 — no longer `BLOCKED`.** The missing lemma is now the declared axiom `SemanticFinitude` (C388, `Tag: VOCAB`), the 27th axiom; the ten unicity/attribute lines C389–C398 are unconditional theorems of Γ. Status changed `BLOCKED` → `AXIOM` by author decision: the sentence is *not derivable* and is not claimed to be — it is a priced, declared, machine-audited restriction of the meaning vocabulary. The price is now visible in every dependent footprint, where before (as a `def`-stipulation) it was invisible to `#print axioms`. *Original assessment, retained:* **now nameable, and no new axiom is needed.** *What is machine-checked:* (i) C210 (`Logos.FoundationalUnicity.ofGround_sole_universal_ground`) already excludes every entity **except** one case it cannot touch — a subject meaning *every* proposition, which no uninterpreted `Logos.Agency.Means` can be shown not to be; (ii) C314 (`Logos.FoundationalUnicity.grounds_ground_iff_maximal`) proves that "grounds the ground" **is** `Logos.FoundationalOmnipresence.MaximalCapacity` (`FoundationalOmnipresence.lean:119`), so the needed notion was already in the corpus and `GroundMaximal` is withdrawn as an invention; (iii) C317 (`Logos.FoundationalUnicity.ofGround_unicity_from_no_discriminating_subject`) closes the last case from the single hypothesis `∀ s, ∃ p, ¬ Means s p`, and **C320 (`Logos.FoundationalUnicity.exactly_one_universal_modal_ground`) states Classical Monotheism outright** (existence unconditional, uniqueness under that one hypothesis). *The missing lemma, verbatim:* `∀ s : Subject, ∃ p : Prop, ¬ Means s p` — i.e. **every subject is meaning-restricted**. *Why it is not derivable:* `Logos.Agency.Means` is VOCAB (`Agency.lean:49` declares `Logos.Agency.Subject` as a nullary uninterpreted sort) and is unconstrained above; nothing in Γ bounds a subject's propositional reach, and the `Existential`-style universality results elsewhere do not apply because the needed bound is per-subject, not global. *The price, stated honestly — and it is NOT a new payment:* this is a **restriction on the meaning vocabulary**, i.e. it says no creature is semantically omnipotent. It is *not* a META bridge and *not* a new definition — it is one quantified sentence over existing vocabulary, and C318 proves it equivalent to the exclusion of maximal capacity among non-ground entities. **Correction (2026-09-27, found while landing C320): the identical hypothesis is ALREADY the standing premise of the corpus.** `DivineSimplicity.canonical_aseity_conditional` (`DivineSimplicity.lean:79`), `DivineSimplicity.ofGround_divine_simplicity` (`:180`) and `DivineSimplicity.ofGround_divine_simplicity_and_transcendence` (`:191`) all take `hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p` — the *same sentence, character for character* — and C195/C196 are ledgered on it. **Second correction (2026-09-27, same day): "three call sites" was a file-local count and badly understated the case.** The hypothesis shape `∀ s : Subject, ∃ p : Prop, ¬ Means s p` occurs **20 times across 5 files** — `DivinePureActuality` 5, `FoundationalUnicity` 7, `CanonicalAseity` 4, `AsieticChoice` 1, `DivineSimplicity` 3. So the corpus pays this exact price for **five** attribute arguments (aseity, simplicity, pure actuality, choice/freedom, unicity), not two, and the already-paid case is *stronger* than the first correction claimed. Γ is no richer for it. F15 was therefore **not a new act of faith**: before the declaration it was an *unnamed* commitment, passed ad hoc wherever a bounded meaning capacity was needed — which is why declaring it once is a consolidation rather than an addition.  *What the batch explicitly did **not** do:* it did not weaken C207 or C211 (both remain PROVEN as conditional theorems) and did not delete them; C316 records that their shared premise is unsatisfiable, and C317–C320 supersede the route rather than the rows. ~~**What remains is bookkeeping, not belief:** because no *axiom* asserts it — it is passed as an explicit argument at each of the 20 ad-hoc call sites — C320 cannot consume it unconditionally, so F15 stays a frontier row. The fix is to consolidate the ad-hoc premises into **one named ◈ stipulation** (`Tag: VOCAB`) and re-point C320 at it (the other 19 users incrementally), which would make C320 an unconditional corollary and retire this row. That is a single, already-paid sentence rather than a new bridge, but it does move the registry from 25 declared axioms, so it is put to the author rather than done silently.~~ **SUPERSEDED 2026-09-28, on all four counts** (this paragraph was still printed inside the row it contradicts): the sentence is now a **declared `axiom`** (C388), the unicity is **unconditional** (C389, no hypothesis parameter), the ◈ `semanticFinitude` was registered and then **retired** (`Stipulations.lean:20`, 8 → 7), and the registry is **27**, not 25. The only residue that is still real is incremental: 19 ad-hoc call sites still pass the bound as an explicit argument instead of reading the axiom, which `scripts/census_semantic_finitude.py --check` counts (`any = 19`, `forall = 14`) and which is cosmetic, not a gap. |
+| F16 | §28 Immutability: meaning capacity is constant *across worlds* (the substantive reading of the capacity-invariance predicate) | BLOCKED | **missing vocabulary, not a missing proof.** The substantive claim cannot be *stated*, because the meaning relation is `Logos.RecoveredOntologicalGround.EntityMeans (e : Entity) (p : Prop) : Prop` (`RecoveredOntologicalGround.lean:46`) — world-independent by construction. There is no `Entity → World → Prop → Prop` relation anywhere in the library, so "capacity varies / invariance across worlds" has no denotation. C321 proves the world-free reading is a tautology; F16 is the reading the classical text actually wants (Aquino *ST* I q. 9 a. 3, *idem actus semper et similiter est*), and it stays open. **O preço de F16 passou a ser teorema (2026-09-28, C427/C428):** `DivineImmutability.no_world_indexed_extension_of_meaning_can_vary` (C427, `{Means, Subject}`) prova que **nenhuma** relação que concorde com `EntityMeans` em todo o mundo pode exibir capacidade variável, e `world_indexed_extension_of_meaning_is_world_constant` (C428, mesma pegada) dá a invariância em forma construtiva. O que muda não é o estado de F16 — continua BLOCKED, e `EntityMeansAt` continua por adicionar — mas a **certeza de que o bloqueio é forçado**: a variação, se existir, tem de vir de vocabulário novo, e não de uma re-leitura do existente. A linha que falta é a mesma, por extenso, e a justificativa passou de frase a proposição verificada. *The missing statement, verbatim:* a relation indexed by world, `EntityMeansAt : Entity → World → Prop → Prop`, together with a proof that some entity's meaning capacity genuinely *fails* to be world-constant — so that the invariance is a discriminator. *Why it is not derivable:* adding the world index is a new primitive, so the price is new vocabulary, and tagging it honestly would cost `SEM` at minimum. **Not added — author decision.** The same wall as F10's missing `Produces` relation. |
 
 > Batch SYSTEM-EXTERNALITY (2026-09-27): this batch is about **what the word "external" was doing**, and it is deliberately mostly negative. **0 new axioms, 0 new `Tag:` axioms**; the tally is unmoved at **25 declared (VOCAB 14 / SEM 7 / META 4)** — and unlike ASIETY-FREEDOM this invariance **is** a genuine test here, because no `def` is used as a premise: the ◈ caveat of the previous batch has no purchase on any row below.
 > **(1) The refutation is of an inference, never of the thesis.** C301 machine-refutes the passage `∀ σ, ∃ e, ¬ In σ e ⟹ ∃ e, ∀ σ, ¬ In σ e` that `CHARACTERISTICS.md:64` itself names as "asserted rather than demonstrated". C302 then exhibits a model in which the **conclusion** is true, so the batch bounds a real claim. A reader must not take C301 as having refuted system-externality itself, and `base.txt` §33 says so in the same breath.

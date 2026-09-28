@@ -307,6 +307,103 @@ theorem claimE :
   obtain ⟨s, hP, hG⟩ := the_personal_type_grounding
   exact ⟨Entity.ofGround, s, ofGround_necessary, ofGround_necessary_ground_of_reality, hP, hG⟩
 
+-- ============================================================================
+-- Section 6: timelessness vs everlastingness — the two notions separated
+-- ============================================================================
+-- Section 6: timelessness vs everlastingness — the two notions separated
+-- ============================================================================
+
+/-- **Everlasting implies timeless.** The generic step, at the level of the
+    predicates and not only at the ground.
+
+    `Everlasting e := ∀ t, ExistsAtTime t e` and
+    `Atemporal e := ∀ t₁ t₂, ExistsAtTime t₁ e ↔ ExistsAtTime t₂ e`, so the
+    second is literally the first stated twice, and the `↔` is discharged by the
+    two one-directional instances. The corpus previously had only the
+    ground-level instances (`the_ground_everlasting`, `the_ground_atemporal`,
+    both routed through `ofGround_necessary`), which is why
+    `CHARACTERISTICS.md` §8 could still list "the text does not distinguish
+    timelessness from everlastingness" as open: nothing stated the relation.
+
+    Footprint: `{NecessarySubjectKind, Subject}`. The step is one line, but the
+    *predicates* it unfolds are not axiom-free: `ExistsAtTime` → `ExistsAt` →
+    `EntityExistsAt` → `SubjectExistsAt` → `NecessarySubjectKind`. The row reads
+    no predicate, and this is the same reason `necessary_implies_everlasting` is
+    `{NecessarySubjectKind, Subject}` rather than `{}`.
+    -/
+theorem everlasting_implies_atemporal (e : Entity) :
+    Everlasting e → Atemporal e := by
+  intro h t₁ t₂
+  exact ⟨fun _ => h t₂, fun _ => h t₁⟩
+
+/-- **A contingent-kind subject is timeless but not everlasting.** The
+    discriminating counterexample: §8's two notions are not coextensive.
+
+    The second conjunct is `subject_not_everlasting` (this module), which already
+    refutes everlastingness at stage 0. The first conjunct is new, and it holds
+    for a reason that must be disclosed rather than glossed: under
+    `ContingentSubjectKind s` the existence clause reduces to
+    `stageOf t = actualWorld`, which is **false at every** `t` — at index `t+1`
+    one has `stageOf t (t+1) = TV.f` while `actualWorld (t+1) = TV.t`. So both
+    sides of `Atemporal`'s `↔` are false and `Atemporal` is satisfied
+    *vacuously*.
+
+    That vacuity is the point of the row, not a defect: it is precisely how an
+    entity can be "timeless" while not existing everywhere. A reader who wants
+    non-vacuous timelessness in Γ must go through `necessary_implies_atemporal`,
+    which is the *necessary* kind, not the contingent one.
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem contingent_subject_is_timeless_but_not_everlasting (s : Subject)
+    (hKind : ContingentSubjectKind s) :
+    Atemporal (EntityOf s) ∧ ¬ Everlasting (EntityOf s) := by
+  have hNo : ∀ t : Time, ¬ ExistsAtTime t (EntityOf s) := by
+    intro t h
+    have h' : NecessarySubjectKind s ∨ Logos.NecessityEternity.stageOf t = actualWorld := by
+      simpa [ExistsAtTime, ExistsAt, Logos.Entity.EntityExistsAt,
+        Logos.Entity.SubjectExistsAt, EntityOf] using h
+    rcases h' with hk | heq
+    · exact hKind hk
+    · have hn : ¬ (t + 1 ≤ t) := by
+        intro hc
+        exact absurd (Nat.lt_of_lt_of_le (Nat.lt_succ_self t) hc) (Nat.lt_irrefl _)
+      have hstage : TV.f = (Logos.NecessityEternity.stageOf t) (t + 1) := by
+        rw [Logos.NecessityEternity.stageOf, ite_eq_right hn]
+      have hact : actualWorld (t + 1) = TV.t := rfl
+      exact TV.noConfusion
+        (hstage.trans ((congrArg (fun w : World => w (t + 1)) heq).trans hact))
+  exact ⟨fun t₁ t₂ => ⟨fun h => False.elim (hNo t₁ h), fun h => False.elim (hNo t₂ h)⟩,
+    subject_not_everlasting s hKind⟩
+
+/-- **Reader-facing: §8's two temporal notions are distinct, and how.**
+    The bundle of the generic implication with the separating counterexample,
+    discharging `CHARACTERISTICS.md` §8's "the text does not distinguish
+    timelessness from everlastingness" together with the `NÃO reivindicada`
+    boundary of `base.txt:1521-1524`.
+
+    **What is established:** `Everlasting` is strictly stronger than `Atemporal`
+    *as a shape of statement*, and Γ's vocabulary supplies a kind of entity that
+    satisfies the weaker without the stronger.
+
+    **What is NOT established, and must not be read into this row:** Γ has **no
+    theorem inhabiting `ContingentSubjectKind`**. Every occurrence of it in the
+    corpus is a hypothesis — `LovesAsGround.lean:196`, `CosmicExistence.lean:299`
+    and following, with the `Creates` row at `CosmicExistence.lean:695` still
+    BLOCKED on a `Creates` relation Γ does not have. So the separating region is
+    inhabited in the *models*, not in the *kernel*: this bundle proves the
+    vocabulary distinguishes the two notions, **not** that some subject of Γ
+    actually falls in the difference. The unconditional schema
+    `¬ (Atemporal e → Everlasting e)` is **not derivable** and is deliberately
+    not stated — the ground is atemporal and everlasting, and so is
+    `Entity.ofAtom 0`.
+
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem everlastingness_and_timelessness_are_distinct :
+    (∀ e : Entity, Everlasting e → Atemporal e) ∧
+      (∀ s : Subject, ContingentSubjectKind s →
+        Atemporal (EntityOf s) ∧ ¬ Everlasting (EntityOf s)) :=
+  ⟨everlasting_implies_atemporal, fun s hKind =>
+    contingent_subject_is_timeless_but_not_everlasting s hKind⟩
+
 end Logos.NecessityEternity
 
 -- Axiom footprint audit (see AGENTS.md: record every footprint in GAPMAP.md)
@@ -328,3 +425,6 @@ end Logos.NecessityEternity
 #print axioms Logos.NecessityEternity.everlasting_but_contingent
 #print axioms Logos.NecessityEternity.the_personal_type_grounding
 #print axioms Logos.NecessityEternity.claimE
+#print axioms Logos.NecessityEternity.everlasting_implies_atemporal
+#print axioms Logos.NecessityEternity.contingent_subject_is_timeless_but_not_everlasting
+#print axioms Logos.NecessityEternity.everlastingness_and_timelessness_are_distinct

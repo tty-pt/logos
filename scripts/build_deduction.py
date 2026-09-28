@@ -860,6 +860,8 @@ CHAIN_LISTS = [
     ("MEANING-RETORSION", "MEANING_RETORSION_STEPS"),
     ("LOVE", "LOVE_STEPS"),
     ("TWO-KINDS", "TWO_KINDS_STEPS"),
+    ("PRECEDENCE", "PRECEDENCE_STEPS"),
+    ("TEMPORAL-SEPARATION", "TEMPORALITY_STEPS"),
 ]
 
 
@@ -5700,6 +5702,42 @@ CLASSICAL_ATTRIBUTES = [
                   "without instantiating the canonical `Entity` sort."),
     },
     {
+        "attribute": "**Precedence to Right/Wrong** (the ground precedes the true/false distinction)",
+        "scope": "Divine Being / Ground",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.Precedence.ofGround_precedes_the_right_wrong_distinction"}],
+        "refs": ["Logos.Precedence.ofGround_obtains_where_no_atom_is_true",
+                 "Logos.Precedence.ground_scope_is_not_the_truth_set",
+                 "Logos.Precedence.atom_fails_precedence",
+                 "Logos.Precedence.ground_existence_does_not_entail_any_truth"],
+        "sense": ("The ground obtains in a world where no **atom** is true, conditions every "
+                  "meaning-bearing bearer via `GroundsEntity`, and does not itself stand under "
+                  "the distinction — a four-field reading in `Precedence.PrecedesRightWrong` "
+                  "(§9, C425). 'Precedes' is a **condition**, never a derivation, and the "
+                  "positive direction (the ground obtains where nothing atomic is true) is "
+                  "vacuous on this signature — so the discriminating force lives in the "
+                  "*negative* direction `atom_fails_precedence` and in the vacuity report "
+                  "`every_world_satisfies_some_form` (C418). Vocabulary-only: 0 substantive axioms."),
+    },
+    {
+        "attribute": "**Exclusion of pantheism** (the ground is not the universe)",
+        "scope": "Divine Being / Ground",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.CosmicExistence.the_ground_is_not_the_universe"}],
+        "refs": ["Logos.CosmicExistence.no_entity_is_identical_to_the_whole",
+                 "Logos.CosmicExistence.grounding_never_yields_identity_of_the_totality"],
+        "sense": ("In the only identity form well-formed over Γ's `Entity` — `Universe e := "
+                  "∀ w x, ExistsAt w x → e = x`, 'whatever obtains **is** e' — the ground of "
+                  "reality does not exhaust the whole (§18, C430), and founding and identifying "
+                  "are not compatible alternatives (C431). **What this row is not:** an "
+                  "adjudication of the aggregate reading ('the universe is not an entity'), which "
+                  "is not a proposition over `Entity` at all and is therefore left unstatable "
+                  "rather than refuted. Nor does it touch realm contingency, still BLOCKED in "
+                  "SUBJECTS.md §4."),
+    },
+    {
         "attribute": "**Divine simplicity**",
         "scope": "Divine Being / Ground",
         "expected": "PROVEN",
@@ -6922,6 +6960,251 @@ def render_two_kinds_chain(decls: dict, node_map: dict) -> list[str]:
     return lines
 
 
+# 2026-09-28. The §9 precedence batch (C417–C426), the F16 price (C427–C428) and
+# the §18 identity form (C429–C431). Membership is hand-maintained (AGENTS.md).
+# Kinds: `R` = refutation/valuation row · `L1` = a theorem on vocabulary alone ·
+# `Σ` = the headline · `D` = a def/structure, no claim id · `S` = a separation.
+PRECEDENCE_STEPS = [
+    ("R", "C417", "Logos.Precedence.no_atom_is_true_at_falsityWorld", "decl",
+     "the **form true and weaker than the one the prose wanted**: in the all-`TV.f` world no "
+     "*atom* is true. This is the honest reading of 'a world where the distinction is not "
+     "instantiated' — a valuation, not an absence of forms"),
+    ("R", "C418", "Logos.Precedence.every_world_satisfies_some_form", "decl",
+     "**the refutation of this batch's own first draft.** `AUDIT.md` proposed as its opening "
+     "`{}` lemma that no form is satisfied at the falsity world; that lemma is **false**, "
+     "because `Satisfies` is closed under negation. This row is the machine-checked reason: "
+     "for *every* world some form is satisfied, and the branching is constructive — the atom 0 "
+     "if the world sets it true, its negation otherwise — so there is no `Classical.choice` "
+     "anywhere in §9's foundational half"),
+    ("L1", "C419", "Logos.Precedence.ofGround_obtains_where_no_atom_is_true", "decl",
+     "**precedence, positively**: the ground obtains in a world where no atom is true. The "
+     "obtaining is the `ofGround` arm of `EntityExistsAt`, so the price is the artefact of "
+     "`ExistsAt` unfolding — the proof never reads the kind predicate"),
+    ("L1", "C420", "Logos.Precedence.ground_existence_does_not_entail_any_truth", "decl",
+     "and it does **not** entail any truth. This is the converse a precedence reading would "
+     "need, and it is what makes §9 a *separation* rather than a filter: the distinction is "
+     "not a condition on the ground"),
+    ("L1", "C421", "Logos.Precedence.ground_existence_is_invariant_while_content_varies", "decl",
+     "the two halves in one line: what is *true* varies across worlds (the invariance of the "
+     "agent, C180), the ground's *obtaining* does not"),
+    ("L1", "C422", "Logos.Precedence.ground_scope_is_not_the_truth_set", "decl",
+     "the ground's scope is **not** the set of the true — refuted at `p := False`, where "
+     "`EntityMeans ofGround p` reduces to `True` and `T p` to `p`. This is C236 read from the "
+     "other side: previously the ground was kept off the truth-tracking relation by an argument "
+     "about content; here by the definition of the meaning side"),
+    ("L1", "C423", "Logos.Precedence.ground_conditions_every_content_bearer", "decl",
+     "**the positive half of §9**: the ground *conditions* every content-bearing entity through "
+     "`GroundsEntity`. Read the report as carefully as the claim — under Γ's definitions "
+     "`GroundsEntity ofGround e` is `∀ p, EntityMeans e p → True`, so the ground conditions "
+     "**everything**, meaning-bearing or not (the same fact C328 records for the "
+     "meaningless). The meaning hypothesis is carried because §9 says 'everything that arises "
+     "under the distinction', and it is *not* used"),
+    ("S", "C424", "Logos.Precedence.atom_fails_precedence", "decl",
+     "**the discriminating half, in the corpus's own separation idiom**: the predicate holds of "
+     "the ground and fails of a worldly atom. `EntityExistsAt w (ofAtom 0)` *is* `w 0 = TV.t`, "
+     "which *is* `Satisfies w (Form.atom 0)` — a mundane atom's obtaining at a world is its own "
+     "truth, so no world can both satisfy and deny it"),
+    ("Σ", "C425", "Logos.Precedence.ofGround_precedes_the_right_wrong_distinction", "decl",
+     "**§9's headline**, the three fields in one object: the ground precedes the distinction, "
+     "discriminates it, and is not discriminated by it. 'Precedes' is deliberately `GroundsEntity` "
+     "— a condition, never a derivation. Vocabulary-only, **0 substantive axioms**"),
+    ("R", "C426", "Logos.Precedence.rightWrongDistinction_is_world_invariant", "decl",
+     "**the limit, and the reason §9 is a split rather than a bare ✅**: `Core.T p := p` is the "
+     "identity on `Prop`, so `N_T` and `N_F` carry no world index. The world-relative argument "
+     "of §9 is therefore **inert by design** — it exhibits that a world-relative precedence at "
+     "the level of the truth predicate is not well-formed on the current vocabulary. §9 is "
+     "established in the semantic layer (`Satisfies`) and *not* in the truth-predicate layer; a "
+     "world-indexed `T` would be new vocabulary at `Tag: SEM` at minimum, and that is the "
+     "author's decision"),
+    ("L1", "C427", "Logos.DivineImmutability.no_world_indexed_extension_of_meaning_can_vary",
+     "decl",
+     "**F16 by its price, not by its proof**: no relation that agrees with `EntityMeans` in every "
+     "world can exhibit a varying capacity. This turns F16's declared reason into a theorem "
+     "instead of a sentence in a ledger cell. **F16 itself stays BLOCKED** — what is proved here "
+     "is that the block is *forced*: variation, if it exists, has to come from new vocabulary"),
+    ("L1", "C428", "Logos.DivineImmutability.world_indexed_extension_of_meaning_is_world_constant",
+     "decl",
+     "the constructive half of C427, so the ledger can point at the invariance and not only at "
+     "its impossibility. C321 (`capacity_invariance_holds_for_every_entity`) is the same fact "
+     "over `CapacityInvariance`; this is the conditional form. It is **not** a claim that the "
+     "ground's meaning does not change — there is no world-indexed meaning in Γ that could"),
+    ("L1", "C429", "Logos.CosmicExistence.no_entity_is_identical_to_the_whole", "decl",
+     "the **identity** form of pantheism fails for all three `Entity` constructors at once, by "
+     "exhaustion. Read it as the cheap thing it is: it says Γ's `Entity` is an inductive with "
+     "distinguishable constructors, **not** that an ontology of the universe has been "
+     "adjudicated. It is not an empty-world artefact — the witness is the same one C323 uses"),
+    ("Σ", "C430", "Logos.CosmicExistence.the_ground_is_not_the_universe", "decl",
+     "**§18's identity-form headline**, read off C429 at the ground. `Universe e := ∀ w x, "
+     "ExistsAt w x → e = x` ('whatever obtains **is** e') is the only identity reading "
+     "well-formed over `Entity`. `Universe` appears **only in conclusions** — no axiom, no `Tag`, "
+     "no ◈ registration"),
+    ("L1", "C431", "Logos.CosmicExistence.grounding_never_yields_identity_of_the_totality",
+     "decl",
+     "**founding and identifying are not compatible alternatives** — §18's second stated gap "
+     "('it does not specify whether founded and identical are compatible') is machine-checked as "
+     "*incompatible*. The antecedent is the whole of `GroundsEntity`, which under Γ's "
+     "definitions holds for every entity (C328), so the row's content is entirely in the "
+     "`¬ Universe e` half"),
+    ("R", "C432", "Logos.Precedence.stage_invariance_iff_atemporal", "decl",
+     "**a finding, not a contribution**: `StageInvariance` (`DivineImmutability.lean:86`) and "
+     "`Atemporal` (`NecessityEternity.lean:92`) unfold to the *same* proposition. The corpus has "
+     "two names for the second field of the immutability master, so §8's 'timelessness' and that "
+     "field are not two steps. What *does* work is the one-dimensional contrast, because "
+     "`Everlasting := ∀ t, ExistsAtTime t e` is a different shape — that is C436"),
+    ("L1", "C433", "Logos.Precedence.ofGround_sole_precedes_right_wrong", "decl",
+     "**§9's unicity**: the ground is the *only* entity preceding the distinction. The `ofAtom n` "
+     "arm is C424 verbatim and free; the `ofSubject s` arm instantiates `conditions_every_bearer` "
+     "at the ground, forcing `∀ p, Means s p`, and **the bound that refutes that is F15's** — "
+     "`SemanticFinitude`. So §9's unicity is a corollary of the same sentence that closed F15's "
+     "foundational unicity. The person bridge #9 is neither used nor needed"),
+    ("S", "C434", "Logos.Precedence.stage_invariance_does_not_uniquely_identify_the_ground", "decl",
+     "**the counterexample that makes the articulation possible**: `Entity.ofAtom 0` *is* "
+     "stage-invariant (`(stageOf t) 0 = TV.t`, i.e. `0 ≤ t`, at every stage) and is not the "
+     "ground. So the two precedences differ in discriminating power"),
+    ("Σ", "C435", "Logos.Precedence.precedence_identifies_the_ground_where_stage_invariance_does_not",
+     "decl",
+     "**the articulation `CHARACTERISTICS.md:353` still listed as open**, stated as a *separation "
+     "of discriminating power* and not as an identification: the two notions have different "
+     "extensions, and only `PrecedesRightWrong` picks the ground out. Conjoining them would be "
+     "the `CapacityInvariance` tautology defect C321 already reports"),
+]
+
+
+def render_precedence_chain(decls: dict, node_map: dict) -> list[str]:
+    """Reader-facing chain for the 2026-09-28 §9 / F16-price / §18-identity batch."""
+    lines: list[str] = []
+    ap = lines.append
+    ap("### Chain 6 — Precedence to Right/Wrong (§9), the price of F16, and pantheism by identity (§18)")
+    ap("")
+    ap("> **What the foundation is to the right/wrong distinction, and what the ground is not.**")
+    ap("> §9 was the only one of the nineteen characteristics with **zero** theorems, zero claim")
+    ap("> and **no row at all** in the table above; §18 had no `Universe` predicate to exclude")
+    ap("> anything with. Both now have machine-checked rows, on **0 new axioms, 0 new")
+    ap("> primitives, 0 new stipulations, 0 new ◈ registrations**.")
+    ap(">")
+    ap("> **And the first lemma this batch planned was false.** `AUDIT.md` opened with")
+    ap("> `no_form_satisfied_at_falsity_world`; `Satisfies` is closed under negation, so the")
+    ap("> falsity world satisfies every negated form. C418 is the refutation, and the positive")
+    ap("> reading that replaced it — *no **atom** is true* — is what the precedence is now")
+    ap("> stated over. The argument of §9 is not weakened by this; it is stated precisely for the")
+    ap("> first time. The author has not been asked to rewrite `base.txt` §9: the characteristic")
+    ap("> remains his; what changes is what Γ can say about it.")
+    ap("")
+    ap("`R` = a valuation/refutation row · `L1` = a theorem on vocabulary alone, **0 substantive")
+    ap("axioms** · `S` = a separation (the corpus's `∃`-form, not a claim) · `Σ` = the headline.")
+    ap("")
+    ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
+    ap("|---|---|---|---|---|---|")
+    for kind, cid, full, atype, text in PRECEDENCE_STEPS:
+        live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
+        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
+           f"{status} | {kernel_fp_text(full)} |")
+    ap("")
+    ap("**Six limits the badges alone do not convey — the reason this block exists:**")
+    ap("")
+    ap("1. **The positive half of §9 is vacuous on this signature, and that is reported, not")
+    ap("   hidden.** C419 says the ground obtains where no atom is true. Every world satisfies")
+    ap("   some form (C418), and every world with a false atom 0 is a world where the ground's")
+    ap("   obtaining is guaranteed anyway by the `ofGround` arm of `EntityExistsAt`. So the")
+    ap("   *vacuity* is the finding: on Γ's current semantics there is no world in which the")
+    ap("   ground's precedence is doing work, and the discriminating force is entirely in the")
+    ap("   negative direction (C424) and in the vacuity report itself. A reader who wants §9 to")
+    ap("   *bite* needs a semantics where some form is left unassigned — that is new vocabulary.")
+    ap("2. **C423 is stronger than §9 asks, and weaker than it looks.** Its meaning hypothesis")
+    ap("   is not used: `GroundsEntity ofGround e` is `∀ p, EntityMeans e p → True`, so the")
+    ap("   ground conditions *every* entity. That is the same fact C328 records for the")
+    ap("   meaningless, cited rather than re-proved.")
+    ap("3. **§9's status is a split, and the table reports the generous half.** C419–C425 are")
+    ap("   `✅ PROVEN` in the semantic layer. C426 is the reason the split is real: `Core.T p := p`")
+    ap("   is the identity on `Prop`, so `N_T`/`N_F` have no world index and a world-relative")
+    ap("   precedence at the truth-predicate layer is not well-formed. A bare ✅ for §9 would be")
+    ap("   a transcription; the split is the derived fact.")
+    ap("4. **F16 is still BLOCKED, and C427/C428 are about the block, not the claim.** What is")
+    ap("   proved is that the block is *forced*: no world-indexed relation can agree with")
+    ap("   `EntityMeans` everywhere and still vary. The missing instruction is still")
+    ap("   `EntityMeansAt` **plus** a varying capacity — vocabulary the author has not granted.")
+    ap("5. **C430 excludes one reading of pantheism, not the reading a reader may have meant.**")
+    ap("   The identity form ('whatever obtains **is** the ground') fails over `Entity`. The")
+    ap("   aggregate form ('the universe is not an entity') is **not a proposition over")
+    ap("   `Entity` at all**, so it is left *unstatable* rather than refuted, and must be")
+    ap("   formalized as a separate, weaker row if it is wanted. Realm contingency — the other")
+    ap("   half of §18 — is untouched and still BLOCKED in `SUBJECTS.md` §4.")
+    ap("6. **The price of the whole batch is vocabulary only.** Twelve of the fifteen rows are")
+    ap("   vocabulary-only, three are `{}`; `NecessarySubjectKind` appears wherever `ExistsAt`")
+    ap("   is unfolded and `Means` wherever `EntityMeans`/`GroundsEntity` is, and **no** row")
+    ap("   carries a `SEM` or `META` axiom. `Precedence.PrecedesRightWrong` is a `structure` and")
+    ap("   `CosmicExistence.Universe` a `def` used only in conclusions, so neither needs a `Tag:`")
+    ap("   or a ◈ entry.")
+    ap("")
+    return lines
+
+
+TEMPORALITY_STEPS = [
+    ("L1", "C436", "Logos.NecessityEternity.everlasting_implies_atemporal", "decl",
+     "**the generic step, which was missing**: `Everlasting → Atemporal`. The module only had the "
+     "ground-level instances (`the_ground_everlasting`, `the_ground_atemporal`), both routed "
+     "through `ofGround_necessary`, which is why §8 could still list 'the text does not "
+     "distinguish timelessness from everlastingness' as an open gap: nothing stated the relation"),
+    ("S", "C437", "Logos.NecessityEternity.contingent_subject_is_timeless_but_not_everlasting",
+     "decl",
+     "**the separating counterexample**, and its `Atemporal` half holds *vacuously* — under "
+     "`ContingentSubjectKind s` the existence clause reduces to `stageOf t = actualWorld`, false "
+     "at every `t` (at index `t+1`, `stageOf t (t+1) = TV.f` against "
+     "`actualWorld (t+1) = TV.t`), so both sides of the `↔` are false. That vacuity is the point, "
+     "not a defect: it is how an entity can be 'timeless' without existing everywhere"),
+    ("Σ", "C438", "Logos.NecessityEternity.everlastingness_and_timelessness_are_distinct", "decl",
+     "**reader-facing bundle**, discharging `CHARACTERISTICS.md:313` together with the "
+     "`NÃO reivindicada` boundary of `base.txt:1521-1524`: `Everlasting` is strictly stronger "
+     "than `Atemporal` as a shape of statement, and Γ's vocabulary supplies a kind of entity "
+     "satisfying the weaker without the stronger"),
+]
+
+
+def render_temporality_chain(decls: dict, node_map: dict) -> list[str]:
+    """Reader-facing chain for the 2026-09-28 §8 temporal-separation batch."""
+    lines: list[str] = []
+    ap = lines.append
+    ap("### Chain 7 — Timelessness vs everlastingness (§8): two notions the corpus had never related")
+    ap("")
+    ap("> **What §8's two words for the ground's relation to time actually are.** `CHARACTERISTICS.md` §8")
+    ap("> listed *\"the text does not distinguish timelessness from everlastingness\"* as a standing gap,")
+    ap("> and `base.txt:1521-1524` drew the corresponding boundary (\"NÃO reivindicada\" — what is")
+    ap("> PROVEN is stage-rigid existence not modulated by stages). Both are now machine-checked,")
+    ap("> on **0 new axioms, 0 new primitives, 0 new stipulations**.")
+    ap("")
+    ap("`L1` = a theorem on vocabulary alone, **0 substantive axioms** · `S` = a separation · `Σ` = the headline.")
+    ap("")
+    ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
+    ap("|---|---|---|---|---|---|")
+    for kind, cid, full, atype, text in TEMPORALITY_STEPS:
+        live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
+        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
+           f"{status} | {kernel_fp_text(full)} |")
+    ap("")
+    ap("**Two limits, without which the headline would overstate the result:**")
+    ap("")
+    ap("1. **Γ has no theorem inhabiting `ContingentSubjectKind`.** Every occurrence of it in the")
+    ap("   corpus is a hypothesis — `LovesAsGround.lean:196`, `CosmicExistence.lean:299` and")
+    ap("   following, with the `Creates` row at `CosmicExistence.lean:695` still BLOCKED on a")
+    ap("   `Creates` relation Γ does not have. The separating region is therefore inhabited in")
+    ap("   the *models*, not in the *kernel*: this chain proves the vocabulary **distinguishes**")
+    ap("   the two notions, **not** that some subject of Γ falls in the difference.")
+    ap("2. **The unconditional schema is not derivable and is deliberately not stated.**")
+    ap("   `¬ (Atemporal e → Everlasting e)` is false in Γ twice over: the ground is atemporal")
+    ap("   *and* everlasting, and so is `Entity.ofAtom 0`. A reader who wants non-vacuous")
+    ap("   timelessness must go through `necessary_implies_atemporal` — the **necessary** kind,")
+    ap("   not the contingent one.")
+    ap("")
+    ap("**And a vocabulary finding, because it changes how §8 reads:** C432 (in Chain 6) shows")
+    ap("`StageInvariance` and `Atemporal` are the *same predicate under two names*. So the")
+    ap("immutability master's second field and §8's 'timelessness' are one step, not two, and")
+    ap("the contrast that does real work is the one-dimensional `Everlasting`.")
+    ap("")
+    return lines
+
+
 def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     """Emits the classical-attributes table block (placed after Branch C, before
     the Further Investigations catalogue). Statuses are live-derived, never
@@ -6970,6 +7253,8 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     lines.extend(render_meaning_retorsion_chain(decls, node_map))
     lines.extend(render_love_chain(decls, node_map))
     lines.extend(render_two_kinds_chain(decls, node_map))
+    lines.extend(render_precedence_chain(decls, node_map))
+    lines.extend(render_temporality_chain(decls, node_map))
     ap("_Synthesis — the strongest current profile._ The theory has established, of a")
     ap("**personal, rational, free, authoritative-over-its-acts, independently individuated**")
     ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")

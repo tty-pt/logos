@@ -3172,6 +3172,10 @@
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject"
  ],
+ "Logos.CosmicExistence.Universe": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
  "Logos.CosmicExistence.a_contingent_reality_obtains": [
   "propext",
   "Logos.Agency.NecessarySubjectKind",
@@ -3220,6 +3224,15 @@
   "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
+ "Logos.CosmicExistence.grounding_never_yields_identity_of_the_totality": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CosmicExistence.no_entity_is_identical_to_the_whole": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
  "Logos.CosmicExistence.perfect_universe_actual_is_necessary": [],
  "Logos.CosmicExistence.perfect_universe_has_no_contingent_realm": [],
  "Logos.CosmicExistence.reality_is_not_exhausted_by_the_ground": [
@@ -3247,6 +3260,10 @@
   "Logos.Agency.Subject",
   "Logos.Agency.Will",
   "Logos.Agency.subjectWill"
+ ],
+ "Logos.CosmicExistence.the_ground_is_not_the_universe": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
  ],
  "Logos.CosmicExistence.the_ground_loves_the_cosmos": [
   "propext",
@@ -3913,6 +3930,10 @@
   "Logos.Agency.State",
   "Logos.Agency.Subject"
  ],
+ "Logos.DivineImmutability.no_world_indexed_extension_of_meaning_can_vary": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.DivineImmutability.ofGround_capacity_invariance": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -3935,6 +3956,10 @@
  "Logos.DivineImmutability.ofGround_transition_invariance": [
   "Logos.Agency.Initiates",
   "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineImmutability.world_indexed_extension_of_meaning_is_world_constant": [
+  "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
  "Logos.DivineOmnipotence.ConjunctivePower": [],
@@ -6934,11 +6959,23 @@
   "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
+ "Logos.NecessityEternity.contingent_subject_is_timeless_but_not_everlasting": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
  "Logos.NecessityEternity.everlasting_and_atemporal_ground": [
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject"
  ],
  "Logos.NecessityEternity.everlasting_but_contingent": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.everlasting_implies_atemporal": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessityEternity.everlastingness_and_timelessness_are_distinct": [
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject"
  ],
@@ -9110,6 +9147,84 @@
  "Logos.PostA14Frontier.separation_volition_without_agency": [],
  "Logos.PostA14Frontier.settlement_plus_aim_horn_yields_volition": [],
  "Logos.PostA14Frontier.settlement_plus_horn_yields_commitment": [],
+ "Logos.Precedence.PrecedesRightWrong.casesOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Precedence.PrecedesRightWrong.conditions_every_bearer": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Precedence.PrecedesRightWrong.not_evaluated_by_it": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Precedence.PrecedesRightWrong.obtains_where_no_atom_is_true": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Precedence.PrecedesRightWrong.recOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Precedence.atom_fails_precedence": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Precedence.every_world_satisfies_some_form": [],
+ "Logos.Precedence.ground_conditions_every_content_bearer": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Precedence.ground_existence_does_not_entail_any_truth": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Precedence.ground_existence_is_invariant_while_content_varies": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Precedence.ground_scope_is_not_the_truth_set": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Precedence.no_atom_is_true_at_falsityWorld": [],
+ "Logos.Precedence.ofGround_obtains_where_no_atom_is_true": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Precedence.ofGround_precedes_the_right_wrong_distinction": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Precedence.ofGround_sole_precedes_right_wrong": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
+ "Logos.Precedence.precedence_identifies_the_ground_where_stage_invariance_does_not": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
+ "Logos.Precedence.rightWrongDistinction_is_world_invariant": [],
+ "Logos.Precedence.stage_invariance_does_not_uniquely_identify_the_ground": [
+  "propext",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Precedence.stage_invariance_iff_atemporal": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
  "Logos.ProofPresentationRetorsion.Checker": [],
  "Logos.ProofPresentationRetorsion.Derivation.below": [],
  "Logos.ProofPresentationRetorsion.Derivation.brecOn": [],

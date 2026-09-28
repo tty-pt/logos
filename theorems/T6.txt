@@ -43,3 +43,73 @@ Portanto:
 Correct ≠ Incorrect.
 
 A realidade racional contém distinções normativas objectivas.
+
+---
+
+Nota de estado formal (§8 — atemporalidade *vs* eternidade, lote
+`PRECEDENCE-AND-TEMPORAL-UNICITY`, 2026-09-28)
+
+Depende de: formal/Logos/NecessityEternity.lean §6 (namespace Logos.NecessityEternity)
++ formal/Logos/Precedence.lean §7 (namespace Logos.Precedence) para o par
+`StageInvariance`/`Atemporal`; GAPMAP.md C432–C438. PROVEN (VOCAB) — pegadas
+{NecessarySubjectKind, Subject} / {Means, NecessarySubjectKind, SemanticFinitude,
+Subject} / {propext, …}, zero axiomas substantivos.
+
+O texto original deixava por distinguir duas noções que aqui recebem nomes
+diferentes:
+
+  Eterno(e)    := ∀ t, ExistsAtTime t e
+  Atemporal(e) := ∀ t₁ t₂, [ExistsAtTime t₁ e ↔ ExistsAtTime t₂ e]
+
+A segunda é a primeira dita duas vezes, e o passo genérico é agora teorema:
+
+```lean
+theorem everlasting_implies_atemporal (e : Entity) : Everlasting e → Atemporal e
+```
+
+(C436, `everlasting_implies_atemporal`, pegada {NecessarySubjectKind, Subject} —
+`NecessarySubjectKind` vem do desdobramento ExistsAtTime → ExistsAt →
+EntityExistsAt → SubjectExistsAt, não de uma premissa substantiva.) O módulo só
+tinha até aqui os casos do fundamento (`the_ground_everlasting`,
+`the_ground_atemporal`), ambos roteados por `ofGround_necessary`; a forma
+genérica faltava.
+
+A separação entre os dois termos é o contraexemplo:
+
+```lean
+theorem contingent_subject_is_timeless_but_not_everlasting
+    (s) (hKind : ContingentSubjectKind s) :
+    Atemporal (EntityOf s) ∧ ¬ Everlasting (EntityOf s)
+```
+
+(C437; e C438, `everlastingness_and_timelessness_are_distinct`, é o fecho do
+conjunto C436 ∧ C437.) A metade `Atemporal` é satisfeita **vacuamente**: sob
+`ContingentSubjectKind s` a cláusula de existência reduz a `stageOf t = actualWorld`,
+falsa em todo `t` (no índice t+1, `stageOf t (t+1) = TV.f` contra
+`actualWorld (t+1) = TV.t`), logo os dois lados da `↔` são falsos. É essa
+vacuidade que constitui o ponto: uma entidade pode ser "atemporal" sem existir
+em toda parte. A metade `¬ Everlasting` é a instância genérica já registada em
+`subject_not_everlasting`.
+
+Limite obrigatório (também em C438): Γ não tem **teorema** que habite
+`ContingentSubjectKind` — todas as ocorrências no corpus são hipóteses
+(`LovesAsGround.lean:196`, `CosmicExistence.lean:299` e seguintes, com a linha
+`Creates` em `CosmicExistence.lean:695` ainda BLOQUEADA). Logo o que está
+PROVEN é que o vocabulário **distingue** as duas noções, não que algum sujeito
+de Γ habite a região separadora. O esquema incondicional
+`¬ (Atemporal e → Everlasting e)` **não é derivável** e não é enunciado: o
+fundamento é atemporal *e* eterno, e `Entity.ofAtom 0` também.
+
+Achado de vocabulário com efeito de leitura (§9, C432): `StageInvariance` e
+`Atemporal` são **o mesmo predicado sob dois nomes** (`stage_invariance_iff_atemporal`,
+Iff.rfl). O segundo campo do mestre da Imutabilidade (T22) e a "atemporalidade"
+de §8 são um passo só, não dois — o que muda a contagem de distinguishability
+do que o texto aparentava guardar.
+
+Continua NÃO preventivo / ainda requer prova (nada disto foi avançado por este lote):
+a teologia forte da eternidade metafísica "fora de toda a temporalidade" (§8,
+README-OLD.md:161), a consequência causal de a existência temporal implicar
+submissão a causalidade (assumida no texto, `README-OLD.md:161`), e o par C432–C435
+(Precedence.lean) não toca nestas: ele articula a §9 com a §8, não as deriva.
+A identidade hipostática g = EntityOf s permanece BLOQUEADA
+(`ofGround_ne_ofSubject`, T15).

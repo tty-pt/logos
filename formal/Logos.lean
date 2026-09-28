@@ -117,3 +117,9 @@ import Logos.SemanticFinitude
 -- The meaninglessness batch of 2026-09-27. 19 declarations — 16 theorems
 -- and 3 `def`s (`NoMeaning`, `NoWeakActIn`, `Voices`) — and zero new axioms.
 import Logos.MeaningRetorsion
+-- §9 — precedence to the true/false distinction, in four senses with four verdicts
+-- (`Logos.Precedence`), plus the refutation of the "empty world" reading the prose
+-- route needed: no world satisfies no form. Ten declarations, one `structure`, zero new
+-- axioms. `Core.T p := p` is world-free, so the row's status is a split, not a bare
+-- PROVEN. The plan of record is AUDIT.md.
+import Logos.Precedence
