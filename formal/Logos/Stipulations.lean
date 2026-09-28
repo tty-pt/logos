@@ -29,6 +29,16 @@ audited footprint, in the axiom registry, and in `formal/axiom_audit.json`. The 
 the prose corpus — but they are no longer stipulations and carry no ◈ badge. The
 governing rule going forward: **a premise load-bearing enough to need a badge should
 be an `axiom`, not a `def`**, because a `def` premise is not auditable.
+
+**Retired 2026-09-28: `performativeActDatum` (registry 7 → 6).** The performative act-datum
+`∃ s : Subject, ∃ p : Prop, Act s p` was registered here as a ◈ on 2026-09-27. It is now a
+**declared `Tag: TRANS` axiom** (`Agency.performative_act_datum`, C454), on the author's
+legislation that `Initiates` cannot be uninhabited. The three theorems that took it as a named
+hypothesis (`cosmos_presence_model_of_the_act_datum`, `the_ground_loves_the_cosmos_from_the_act_datum`,
+`noMeaning_is_refuted_from_the_act_datum`) keep their existing conditional statements — a
+conditional theorem whose hypothesis is now provable is still true — and their `#print axioms`
+footprints are unchanged, because the ◈ was a `def`-premise and contributed nothing to any
+footprint. Same governing rule as above.
 -/
 
 namespace Logos.Stipulations
@@ -157,52 +167,6 @@ def asietyFreedom_ofGroundFreedom : Stipulation where
   dependents := ["asietyFreedom_yields_trueChoice", "asietyFreedom_yields_asietyFreeWill", "asietyFreeWill_yields_trueChoice", "asietyFreedom_summary"]
 
 /-- Tag: TRANS
-The performative act-datum: `∃ s : Subject, ∃ p : Prop, Act s p` — an act occurred.
-
-This is the one stipulation that is neither a definitional value nor a declared axiom. It
-is the datum `Logos.Agency` has always named as the foundation of the system: "the present
-act of reasoning is *given*, not inferred" (`Agency.lean:4`), whose denial is self-refuting
-(`noCogito_selfRefutes`, C58). It is registered here rather than as a 27th axiom because
-the act-datum is **given**, not asserted: Γ does not manufacture it, and it does not
-discover it either — it is what any derivation *starts from*, and the fifteen-odd theorems
-that take it as a hypothesis have always said so.
-
-**Why register it now (2026-09-27).** The God-lane found that `Logos.Value.AxTwoSubjects`
-was being paid to reach a meaning-bearing realm (`cosmos_obtains`, C367) when the act-datum
-reaches the same witness with no bridge at all, since `Act` already contains `Means`. Left
-unregistered, that relocation would have been invisible: a hypothesis is a hypothesis, and
-`#print axioms` cannot see one. `cosmos_presence_model_of_the_act_datum` and
-`the_ground_loves_the_cosmos_from_the_act_datum` are the two dependents, and the ◈ badge
-is the only signal. The same limitation applies: the price here is invisible to
-`#print axioms` by construction. (This was also true of the `semanticFinitude` entry, which
-was retired on 2026-09-28 when that bound was promoted from a `def` to a declared axiom —
-precisely so its price would stop being invisible. See `SemanticFinitude.lean`.)
-
-**The price, stated honestly.** `AxTwoSubjects` is a `Tag: META` bridge and this is not;
-the two are not interchangeable and neither is free. The act-datum is free *in axioms* and
-not free *in performance* — the same account `MeaningRetorsion` gives for the retorsion
-batch, and the reason C375's affirmation is called the *input* to its own contradiction.
-Reject this datum and both dependents go; reject `AxTwoSubjects` and they stand. The
-transition from one to the other is a relocation of the cost, and it is falsifiable in
-both directions, which is more than either premise could claim alone.
-
-Consistency model: the reading is not vacuous and not over-strong. It does **not** yield
-unconditional subject-existence — no theorem in Γ concludes `∃ s, ∃ p, Act s p` from
-nothing, precisely because Γ does not fabricate — so C350/C367 keep their own prices and
-this row is a *companion* to them, never a replacement. And it does not touch `Act`'s
-content: `Meanless` worlds (`Means := False`) cannot host the datum either, which is why
-the declared axiom `SemanticFinitude` and this stipulation are separate commitments rather
-than one.
-Footprint: `{}`. -/
-def performativeActDatum : Stipulation where
-  name := "performativeActDatum"
-  location := "Agency.lean:4"
-  anchor := "The performative datum of §1"
-  tag := StipulationTag.TRANS
-  cost := "The performative act-datum (someone acted), assumed as given rather than declared or derived, since a theorem discovers and does not manufacture. Registered so the God-lane's relocation of C367's price from the META bridge AxTwoSubjects to this datum is visible at all: a hypothesis is invisible to #print axioms, so the badge is the only signal. Free in axioms, not free in performance. Reject it and both dependents go; reject AxTwoSubjects and they stand."
-  dependents := ["cosmos_presence_model_of_the_act_datum", "the_ground_loves_the_cosmos_from_the_act_datum", "noMeaning_is_refuted_from_the_act_datum"]
-
-/-- Tag: TRANS
 The world-datum: this world — the one I am writing the proof in — exists, and it
 is contingent.
 
@@ -218,8 +182,8 @@ axioms, they rule out the one possibility the world-datum alone can kill.
 **Why it is a datum and not a bridge.** The world's existence is not derived:
 the author's line is "it is my stipulation that this world I'm writing the proof
 in exists. But given that it does, consequences are in due." The consequences are
-entailed; the existence is given. So this is `Tag: TRANS` — assumed as given, like
-`performativeActDatum` — and NOT a `Tag: META` bridge, which would claim Γ
+entailed; the existence is given. So this is `Tag: TRANS` — assumed as given, like the former `performativeActDatum` ◈
+(now the declared axiom `Agency.performative_act_datum`, C454) — and NOT a `Tag: META` bridge, which would claim Γ
 *infers* it, and NOT `Tag: VOCAB`, which would claim the valuation `def` decides
 the question. What the `def actualWorld` decides is which world, not whether.
 
@@ -261,6 +225,6 @@ def contingentWorldDatum : Stipulation where
 def registeredStipulations : List Stipulation :=
   [ofGround_existsAt, ofGround_meansAll, ofGround_noInternalComponents,
    operatesAt_presencePlusObtaining, asietyFreedom_ofGroundFreedom,
-   performativeActDatum, contingentWorldDatum]
+   contingentWorldDatum]
 
 end Logos.Stipulations

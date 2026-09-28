@@ -476,7 +476,9 @@ theorem model_S7_decision_without_alternative :
 
 /-- Model S8: Volition without Action (Paralyzed will).
     An agent actively wills a proposition (`Wills s p`), but no physical transition is initiated.
-    Status: COUNTERMODEL. -/
+    Status: COUNTERMODEL — over the local `VolitionWithoutActionModel` signature, which has no
+    `NecessarySubjectKind` field and is not Γ. Unchanged by C454 (`performative_act_datum`,
+    2026-09-28): the datum is an existential, so the non-entailment `Wills ↛ Initiates` stands. -/
 structure VolitionWithoutActionModel where
   Wills : Unit → Prop → Prop
   Initiates : Unit → Nat → Nat → Prop → Prop

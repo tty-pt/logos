@@ -609,8 +609,8 @@ theorem the_ground_loves_the_cosmos_in_a_context
     rather than quietly absorbed.
 
     **This does not make the conclusion free, and the row is not promoted.** The price
-    is relocated to the performative act-datum ◈ `performativeActDatum` (`Tag: TRANS`):
-    free in axioms, not free in performance, which is the same account the retorsion
+    is relocated to the declared act-datum axiom `performative_act_datum` (C454, `Tag: TRANS`):
+    one axiom, not free in performance, which is the same account the retorsion
     batch gives for C375/C377. A reader who will not grant that an act occurred
     rejects this row; a reader who rejects `AxTwoSubjects` keeps it.
     Footprint: `{propext, Initiates, Means, NecessarySubjectKind, State, Subject, AxGroundLovesContingentRealm,

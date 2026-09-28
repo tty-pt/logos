@@ -2319,8 +2319,13 @@ Ainda requer prova (o que falta, em termos formais):
       (`the_ground_loves_the_cosmos_from_the_act_datum`, com a ponte do amor mas sem a
       rota da pluralidade — caem `AxTwoSubjects`, `Will` e `subjectWill`) leva a mesma
       substituição à conclusão do amor, com enunciado byte-idêntico ao de C351. O preço
-      relocou-se para o dado performativo ◈ `performativeActDatum` (`Tag: TRANS`,
-      registry 6 → 7): livre em axiomas, não livre em performance. C367 fica intacta e
+      relocou-se para o dado performativo declarado `performative_act_datum` (C454, `Tag: TRANS`,
+      28.º axioma): um axioma, não livre em performance. O ◈ `performativeActDatum` foi
+      **reformado** (registry 7 → 6) na mesma data, pelo mesmo motivo da reforma do ◈
+      `semanticFinitude` — uma premissa com carga suficiente para precisar de distintivo deve
+      ser um `axiom`, não um `def`, porque o preço de um `def` é invisível a `#print axioms`.
+      C455 (`some_subject_initiates`) dá então a habitabilidade de `Initiates`
+      incondicionalmente: alguém inicia. C367 fica intacta e
       continua a pagar a ponte — a linha nova é *companhia*, não substituição.
       **O que permanece caro é a existência incondicional** de um sujeito que significa,
       que continua `PROVEN↑` sob `AxTwoSubjects` (C367): a ponte é excessiva *quando a

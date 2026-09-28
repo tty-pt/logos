@@ -863,6 +863,7 @@ CHAIN_LISTS = [
     ("PRECEDENCE", "PRECEDENCE_STEPS"),
     ("TEMPORAL-SEPARATION", "TEMPORALITY_STEPS"),
     ("SOLE-BEARER", "SOLE_BEARER_STEPS"),
+    ("INHABITED", "INHABITED_STEPS"),
 ]
 
 
@@ -894,6 +895,12 @@ CHAIN_REQUIRED_DECLS = {
         "C151 — the unconditional personal-ground flagship",
     "Logos.PersonalGroundOfReality.personal_ground_of_right_exists":
         "C152 — a personal ground of right exists",
+    "Logos.Agency.performative_act_datum":
+        "C454 — the TRANS act-datum; the batch's only substantive price",
+    "Logos.Agency.some_subject_initiates":
+        "C455 — Initiates inhabited, unconditionally",
+    "Logos.Agency.not_noAct":
+        "C456 — the denial refuted by the datum",
 }
 
 
@@ -3017,7 +3024,7 @@ def render_retired(all_claims: list) -> list:
        "on seven, and the remaining one (`SubjectNecessityNotEntity`) needs the contingent-inhabitation "
        "lemma, which is BLOCKED, not priced. The eliminations inside the catalogue come from the kind "
        "bridge and the content bridges, not from the world's existence. Note also that the world-datum is "
-       "**not** the act-datum ◈ `performativeActDatum`; the two were conflated here until 2026-09-28. "
+       "**not** the act-datum (formerly ◈ `performativeActDatum`, now the declared axiom C454); the two were conflated here until 2026-09-28. "
        "The no-meaning family (M1/C294/C382) is **WRONG as the actual world** on the act-datum alone "
        "(C402; also outright on the plurality bridge, C401) — while C382's *attack* (bare-vocabulary "
        "consistency of the form) stands untouched. It *satisfies* the world-datum: a world can hold "
@@ -6494,7 +6501,7 @@ LOVE_STEPS = [
      "The interpersonal metaphysics is no longer a premise here, and the remaining "
      "premises are independent of it, so the removal is *visible* rather than absorbed. The love "
      "bridge stays, and must: a directional good held by the ground is not in Γ's grounding "
-     "vocabulary. Relocated price ◈ `performativeActDatum` — free in axioms, not free in performance"),
+     "vocabulary. Relocated price: the declared act-datum axiom C454 — one axiom, not free in performance"),
     ("🧱", "C353", "Logos.CosmicExistence.perfect_universe_has_no_contingent_realm", "countermodel",
      "**countermodel, `{}`**: the contingency shape is refutable in a world-rigid universe — "
      "on an **unrelated free structure, not a model of Γ**"),
@@ -6715,7 +6722,7 @@ MEANING_RETORSION_STEPS = [
     ("4", "C402", "Logos.MeaningRetorsion.noMeaning_is_refuted_from_the_act_datum", "decl",
      "**the same refutation on the act-datum, no META bridge**: whoever grants that an act occurred "
      "grants the falsity with it, since `Act` already contains `Means`. Conditional, bridge-free, price "
-     "relocated to ◈ `performativeActDatum` — free in axioms, not free in performance"),
+     "relocated to the declared act-datum axiom C454 — one axiom, not free in performance"),
 ]
 
 
@@ -7332,10 +7339,69 @@ def render_sole_bearer_chain(decls: dict, node_map: dict) -> list[str]:
     ap("BLOCKED**. And **not** immutability: `capacity_invariance` is vacuous by reflexivity (the")
     ap("F16 wall) and `Initiates` is an unconstrained signature field, so the necessary-kind subject")
     ap("arm is not closable here. Immutability is recorded as ledger row **C453, `DEFERRED`**, with")
-    ap("the exact missing lemma written out — a priced boundary, not a silent omission.")
+    ap("the exact missing lemma written out — a priced boundary, not a silent omission. Note what")
+    ap("Chain 9 does *not* change about this: `Initiates` is now inhabited (some subject initiates),")
+    ap("but it is still unconstrained *per subject* — no theorem says every necessary-kind subject")
+    ap("initiates — so the subject arm stays open and C453 stays `DEFERRED`.")
     ap("")
     return lines
 
+
+INHABITED_STEPS = [
+    ("T", "C454", "Logos.Agency.performative_act_datum", "decl",
+     "**the 28th declared axiom, and the first `Tag: TRANS` since the registry began.** "
+     "The performative act-datum — an act occurs — declared rather than derived, because no "
+     "derivation exists: every axiom mentioning `Act` takes an act as a premise, and the two "
+     "existential axioms stop at `Means` and `BearingOf`. Author's legislation, 2026-09-28: "
+     "`Initiates` cannot be uninhabited; to initiate is to be inhabited"),
+    ("Σ", "C455", "Logos.Agency.some_subject_initiates", "decl",
+     "**someone initiates.** `∃ s p w w', Initiates s w w' p`, unconditionally, in one step via "
+     "`act_datum_implies_initiates`. This is the inhabited thing itself — not `Wills`, not "
+     "`Chooses`, not `Act`, not `Asserts`. Audited footprint "
+     "`{Initiates, Means, State, Subject, performative_act_datum}`: vocabulary plus the datum, "
+     "so unlike the retired `semanticFinitude` ◈ the price is visible"),
+    ("Σ", "C456", "Logos.Agency.not_noAct", "decl",
+     "**the denial is refuted — by the datum.** `¬ NoAct`, a consequence of C454 and not a "
+     "refutation from nothing (`INHABITED.md` §0): it must never be cited in the datum's favour. "
+     "What it establishes is practical — \"no act occurs\" is unavailable as a premise anywhere "
+     "in Γ"),
+]
+
+
+def render_inhabited_chain(decls: dict, node_map: dict) -> list[str]:
+    """Reader-facing chain for the 2026-09-28 inhabited-initiation batch."""
+    lines: list[str] = []
+    ap = lines.append
+    ap("### Chain 9 — Someone initiates: `Initiates` is inhabited")
+    ap("")
+    ap("> **What it means for a relation to be inhabited, and what it costs.** Until this batch,")
+    ap("> `Initiates` was the only load-bearing relation in Γ with no inhabitant provable from the")
+    ap("> axioms: every route to an act was circular (`Act` and `Asserts` both contain an initiation),")
+    ap("> and the two existential axioms stop one layer short (`IntentionalSubject` is `Means`-only,")
+    ap("> `Helps` is bearing-only). Three fragment countermodels exhibit `Initiates := False`, so the")
+    ap("> inhabitance is not derivable — it is legislated, as the 28th axiom (`Tag: TRANS`), on the")
+    ap("> author's ground that to initiate is to be inhabited. The price is one axiom and the end of")
+    ap("> the 0-new-axioms invariant; the compensation is that the price is *visible*, in every")
+    ap("> dependent footprint, which is the defect that retired the `semanticFinitude` ◈.")
+    ap("")
+    ap("`T` = the TRANS datum itself · `Σ` = what it buys.")
+    ap("")
+    ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
+    ap("|---|---|---|---|---|---|")
+    for kind, cid, full, atype, text in INHABITED_STEPS:
+        live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
+        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
+           f"{status} | {kernel_fp_text(full)} |")
+    ap("")
+    ap("**What this chain does not say.** Not that any *particular* subject initiates — the datum")
+    ap("is a global existential, and the necessary kind has no provable unique inhabitant, so the")
+    ap("per-subject form stays open and **C453 stays `DEFERRED`**. Not that the ground acts:")
+    ap("`ofGround` is provably not a subject, so nothing here bears on F10 `Produces` or on Creator.")
+    ap("Not that willing, meaning or loving entails acting: the datum is an existential, not an")
+    ap("implication, so every volition-without-action separation stands.")
+    ap("")
+    return lines
 
 def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     """Emits the classical-attributes table block (placed after Branch C, before
@@ -7388,6 +7454,7 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     lines.extend(render_precedence_chain(decls, node_map))
     lines.extend(render_temporality_chain(decls, node_map))
     lines.extend(render_sole_bearer_chain(decls, node_map))
+    lines.extend(render_inhabited_chain(decls, node_map))
     ap("_Synthesis — the strongest current profile._ The theory has established, of a")
     ap("**personal, rational, free, authoritative-over-its-acts, independently individuated**")
     ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")

@@ -388,7 +388,13 @@ structure ActOntology where
 
 /- Hostile Countermodel 1c: Intentional meaning without initiation.
    Shows that pure semantic meaning does not logically entail initiation of movement,
-   nor strong Act (Means ↛ Initiates and Means alone ↛ Act). -/
+   nor strong Act (Means ↛ Initiates and Means alone ↛ Act).
+
+   Disclosure (2026-09-28, C454): this is a countermodel over a *fragment* signature —
+   its `Subject`/`Initiates` are local definitions, not Γ's axioms — so it is not a model
+   of Γ, which now declares `performative_act_datum` (`Tag: TRANS`). What it shows, and
+   keeps showing, is the *non-entailment*: meaning does not force initiation. That
+   conclusion is untouched by C454, which is an existential, not an implication. -/
 namespace CountermodelMeaningWithoutInitiation
 
 def Entity : Type := Unit

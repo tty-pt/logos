@@ -167,6 +167,7 @@ Vocabulary: the initiation relation — a subject initiates a transition between
  `Initiates s w w' p`: subject s initiates a transition from state w to state w' positing proposition p. -/
 axiom Initiates : Subject → State → State → Prop → Prop
 
+
 /-- `Act s p`: strong act: meaningful initiation of movement.
     An act is a meaningful initiation: its constitutive content is intentional meaning,
     and its evental character is initiation. -/
@@ -175,6 +176,61 @@ def Act (s : Subject) (p : Prop) : Prop :=
 
 /-- Legacy alias for Act across the library. -/
 abbrev A := Act
+
+/--Tag: TRANS
+The performative act-datum: an act occurs.
+
+  The unconditioned transcendental datum of base.txt §1. `Act` is a conjunction
+  (`Means s p ∧ ∃ w w', Initiates s w w' p`), so no inhabitant of `Act` can be
+  manufactured: a witness for the act *is* a witness for the initiation. This axiom
+  supplies the one input that cannot be derived — that the bundle is instantiated at all.
+
+  **Why it is a datum and not a theorem.** The occurrence of the act of reasoning is
+  given, not inferred; a proof discovers, it does not manufacture. This is the
+  `Tag: TRANS` reading recorded in the module header and priced in the
+  `performativeActDatum` ◈ (`Stipulations.lean:197`) — declared here rather than left as a
+  ◈ so that the price is visible to `#print axioms` in every dependent, which is the same
+  correction that retired the `semanticFinitude` ◈ on 2026-09-28.
+
+  **Why inhabitance, and why here.** Author's legislation, 2026-09-28, quoted verbatim:
+  *"`Initiates` cannot be uninhabited. To initiate is to be inhabited."* Initiation, by its
+  nature, requires an initiator; an empty initiation relation misinterprets the concept it
+  names. This is a requirement on admissible interpretations, not a discovery — it rules out
+  the `Initiates := False` fragment models as models of Γ (see `INHABITED.md` §5) rather than
+  refuting them as non-entailment results.
+
+  **Admission test (`INHABITED.md` §0).** The strong sense of "its denial is self-refuting"
+  — refuted from nothing — is *not* available and is not claimed: refuting the denial needs an
+  inhabitant of `Act`, and the full statement of all 27 axioms was surveyed for one. Every
+  axiom mentioning `Act` is conditional on an act; the two that posit something existential
+  (`transcendental_reflection_intentional`, `AxBenevolentBearingObtains`) reach `Means` and
+  `BearingOf` and stop short of `Initiates`. The weak, speaker-relative sense
+  (`noCogito_selfRefutes`) does hold and is what the module header means by it. On that
+  evidence this is admitted as an axiom — deliberately, and subject to demotion if a
+  derivation is later found.
+
+  **Denial is refutable, and this is not the same as self-refuting.** `noCogito_selfRefutes`
+  refutes "no act occurs" *given a speaker who asserts it*, which is the weak sense only —
+  the strong sense (refuted from nothing) is impossible here, since refuting the denial
+  requires an inhabitant of `Act`. See `INHABITED.md` §0, which records why the axiom survives
+  the admission test. Do not read C456 as discharging this axiom: C456 is a *consequence* of
+  it, and citing C456 in the axiom's own favour would be circular.
+
+  **What it does NOT do.**
+  - It does NOT say *which* subject acts, nor that any *particular* subject acts. A global
+    existential. The per-subject form is a different and stronger claim (`INHABITED.md` §7).
+  - It does NOT license `Wills → Initiates`, `Means → Initiates` or `Loves → Initiates`.
+    It is an existential, not an implication, so every existing separation between
+    volition, meaning and initiation survives untouched.
+  - It does NOT make the ground an agent: `Entity.ofGround` is still provably not a subject
+    (`ofGround_ne_ofSubject`), so nothing here bears on `F10` `Produces` or on
+    `Creator of contingent reality`.
+  - It does NOT assert the denials it forbids are *false* in every world; it asserts the
+    bundle is instantiated.
+  Footprint: `{Initiates, Means, State, Subject}` plus itself — the vocabulary of `Act`'s
+  definition (`Means s p ∧ ∃ w w', Initiates s w w' p`). Unlike the retired `semanticFinitude`
+  ◈, whose price was invisible, the datum's price is visible in every dependent footprint. -/
+axiom performative_act_datum : ∃ s : Subject, ∃ p : Prop, Act s p
 
 /-- Definitional consequence: an act entails an initiation of movement. -/
 theorem act_implies_initiates {s : Subject} {p : Prop} (h : Act s p) :
@@ -199,6 +255,7 @@ theorem act_datum_implies_initiates (h : ∃ s : Subject, ∃ p : Prop, Act s p)
     ∃ s : Subject, ∃ p : Prop, ∃ w w' : State, Initiates s w w' p := by
   obtain ⟨s, p, _, w, w', hi⟩ := h
   exact ⟨s, p, w, w', hi⟩
+
 
 -- ===========================================================================
 -- Ontological Distinction: Sort vs. Actuality Predicate vs. Existential Claim
@@ -297,6 +354,37 @@ theorem Cogito_of_bridge (hBridge : weak_act_implies_strong_act)
 
 /-- No strong act occurs: the thesis that no intentional meaning-act occurs. -/
 def NoAct : Prop := ¬ ∃ s : Subject, ∃ p : Prop, Act s p
+
+/-- C455 — **Someone initiates.** The initiation relation `Initiates` is inhabited: there is
+    a subject, a content, and a pair of states such that the subject initiates the
+    transition positing that content. Unconditional.
+
+    This is the inhabited thing itself — not `Wills`, not `Chooses`, not `Act`, not
+    `Asserts`. Every one of those is either a proxy for it or, as shown in
+    `INHABITED.md` §1.2, circular with respect to it.
+
+    Priced `Tag: TRANS` (the performative act-datum, C454). The price is visible in the
+    footprint, unlike the retired `semanticFinitude` ◈.
+    Footprint: `{Initiates, Means, State, Subject, performative_act_datum}`. -/
+theorem some_subject_initiates :
+    ∃ s : Subject, ∃ p : Prop, ∃ w w' : State, Initiates s w w' p :=
+  act_datum_implies_initiates performative_act_datum
+
+/-- C456 — **The denial of the act-datum is refuted — by the act-datum.**
+
+    `NoAct` is `¬ ∃ s p, Act s p`, so this is `¬ ¬ ∃ s p, Act s p`.
+
+    **Read the reason for its existence carefully.** It is a consequence of C454, not a
+    refutation of the denial *from nothing*. Under the admission rule of `INHABITED.md` §0,
+    it therefore does **not** show the datum is a theorem and must never be cited in the
+    datum's favour. What it does establish is the local consequence: once the datum is
+    declared, "no act occurs" is unavailable as a premise anywhere in Γ.
+    Footprint: `{Initiates, Means, State, Subject, performative_act_datum}`. -/
+theorem not_noAct : ¬ NoAct := fun h => h performative_act_datum
+
+#print axioms performative_act_datum
+#print axioms some_subject_initiates
+#print axioms not_noAct
 
 /-- Asserting NoAct refutes itself under a weak assertion ONLY given the bridge from weak act to strong Act. -/
 theorem noAct_conditional_selfRefutes (hBridge : weak_act_implies_strong_act)

@@ -497,8 +497,8 @@ theorem noMeaning_is_refuted_from_plurality : ¬ NoMeaning := by
     grants that an act occurred grants the thesis's falsity with it. The
     God-lane twin of C401: C401 is unconditional on the plurality bridge, this
     row is conditional on the performative datum and free of every bridge,
-    price relocated to ◈ `performativeActDatum` (`Tag: TRANS`) — free in axioms,
-    not free in performance.
+    price relocated to the declared act-datum axiom `performative_act_datum` (C454,
+    `Tag: TRANS`) — one axiom, not free in performance.
 
     The hypothesis is anonymous (`∃ s, ∃ p, Act s p`, not a named `def`), so the
     ◈ registry listing is the *only* signal of the dependence — the same

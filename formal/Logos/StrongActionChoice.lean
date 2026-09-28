@@ -561,7 +561,9 @@ theorem libertarian_chooses_conflicts_with_d5
   · exact hNotP hSetP
 
 /-- Target 4: Volition without Physical Action (Paralyzed Will).
-    Status: COUNTERMODEL. -/
+    Status: COUNTERMODEL — over the local `VolitionalArchitecture`/`StrongActContext`
+    signatures, not Γ. Unchanged by C454 (`performative_act_datum`, 2026-09-28): the datum
+    is an existential, so volition-without-action stays consistent as a fragment. -/
 theorem volition_without_action :
     ∃ (vArch : VolitionalArchitecture Unit) (actCtx : StrongActContext Unit Nat),
       Volition vArch () True ∧ ¬ ∃ w w', actCtx.Initiates () w w' True := by

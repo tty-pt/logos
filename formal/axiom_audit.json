@@ -703,6 +703,27 @@
   "Logos.Agency.Subject",
   "Logos.Agency.act"
  ],
+ "Logos.Agency.not_noAct": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum"
+ ],
+ "Logos.Agency.performative_act_datum": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum"
+ ],
+ "Logos.Agency.some_subject_initiates": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum"
+ ],
  "Logos.Agency.strong_act_of_weak_act": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
@@ -10632,7 +10653,6 @@
  "Logos.Stipulations.ofGround_meansAll": [],
  "Logos.Stipulations.ofGround_noInternalComponents": [],
  "Logos.Stipulations.operatesAt_presencePlusObtaining": [],
- "Logos.Stipulations.performativeActDatum": [],
  "Logos.Stipulations.registeredStipulations": [],
  "Logos.StrongActionChoice.ActLegacy": [
   "Logos.Agency.Initiates",

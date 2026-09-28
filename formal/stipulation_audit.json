@@ -76,19 +76,6 @@
    ]
   },
   {
-   "def": "performativeActDatum",
-   "name": "performativeActDatum",
-   "location": "Agency.lean:4",
-   "anchor": "The performative datum of §1",
-   "tag": "TRANS",
-   "cost": "The performative act-datum (someone acted), assumed as given rather than declared or derived, since a theorem discovers and does not manufacture. Registered so the God-lane's relocation of C367's price from the META bridge AxTwoSubjects to this datum is visible at all: a hypothesis is invisible to #print axioms, so the badge is the only signal. Free in axioms, not free in performance. Reject it and both dependents go; reject AxTwoSubjects and they stand.",
-   "dependents": [
-    "cosmos_presence_model_of_the_act_datum",
-    "the_ground_loves_the_cosmos_from_the_act_datum",
-    "noMeaning_is_refuted_from_the_act_datum"
-   ]
-  },
-  {
    "def": "contingentWorldDatum",
    "name": "contingentWorldDatum",
    "location": "Entity.lean:34",

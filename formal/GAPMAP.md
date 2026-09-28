@@ -333,6 +333,21 @@ O mesmo guard é a razão de não haver aqui uma linha nova para a transcendênc
 uma declaração ledgerizada é um erro de bookkeeping, não uma contribuição.** O que
 contribui é a linha que faltava na tabela.
 
+### Lote INHABITED (2026-09-28, C454–C456) — `Initiates` habitado
+
+Três linhas novas, **C454–C456**, num módulo já existente (`Agency.lean`), e **um axioma
+novo** — o primeiro desde a promoção de `SemanticFinitude`. O registo move-se **27 → 28**,
+`TRANS 1 → 2`. A legislação do autor, 2026-09-28, citada verbatim: *"`Initiates` cannot be
+uninhabited. To initiate is to be inhabited."* Modelos com `Initiates := False` são
+inadmissíveis como modelos de Γ — não porque uma refutação tenha sido encontrada (não foi:
+`Initiates` ocorre num único axioma, ele próprio; ver `INHABITED.md` §0.1), mas porque o
+conceito de iniciação exige um iniciador. A necessidade do axioma, essa sim, é um facto
+verificável; a decisão é do autor, e fica registada como tal.
+
+| C454 | §1–§2 | `Agency.performative_act_datum : ∃ s : Subject, ∃ p : Prop, Act s p` — **o dado performativo declarado** (`Tag: TRANS`). O cabeçalho do módulo dizia desde 2026-09-15 que o dado era "declarado como o dado transcendental não-condicionado cuja negação é auto-refutante"; o que existia era um ◈ (`performativeActDatum`, `Stipulations.lean:197`) mais três dependentes com o dado por hipótese. Este axioma completa a relocalização: o preço passa a ser visível a `#print axioms` em cada dependente | AXIOM | `{Initiates, Means, State, Subject}` + si próprio |
+| C455 | §1–§2 | `Agency.some_subject_initiates : ∃ s : Subject, ∃ p : Prop, ∃ w w' : State, Initiates s w w' p` — **alguém inicia.** A relação `Initiates` é habitada, incondicionalmente, em três linhas via `act_datum_implies_initiates`. Isto é a coisa habitada em si — não `Wills`, não `Chooses`, não `Act`, não `Asserts` | PROVEN | `{Initiates, Means, State, Subject, performative_act_datum}` |
+| C456 | §1–§2 | `Agency.not_noAct : ¬ NoAct` — a negação do dado é refutada **pelo** dado. Consequência de C454, não refutação da negação a partir do nada (`INHABITED.md` §0): não conta como evidência da necessidade do axioma e nunca deve ser citada a favor dele. O que estabelece, de útil, é que "nenhum acto ocorre" deixa de estar disponível como premissa em Γ | PROVEN | `{Initiates, Means, State, Subject, performative_act_datum}` |
+
 | C453 | §8/§12 | **DEFERRED, sem declaração.** Unicidade da imutabilidade: `∀ e, DivineImmutability e → e = Entity.ofGround`. O braço `ofAtom n` é fechável (`EntityExistsAt w (ofAtom n) = w n = TV.t`, `World := Nat → TV`, logo um mundo que nega `n` quebra `ModalInvariance`); o braço `ofSubject s` **não é fechável com o vocabulário actual**, e o lema que falta está escrito abaixo | DEFERRED | `{Initiates, Means, NecessarySubjectKind, State, Subject}` (a pegada que o teorema teria, por herança da estrutura) |
 
 ### Por que é que a prova é a mesma quatro vezes
@@ -1777,8 +1792,8 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     (canonical rigid love); C77 DEMOTED → DEFERRED (ae7f4bd); C78/C79 BLOCKED —
     see the BLOCKED/retired blocks and the `## Formal Frontiers` inventory.
     Of that range only C74 (`aloneExcluded`) survives, as PROVEN↑ (below).
-- **PROVEN↑** (fully machine-verified under the flagged SEM/META axiom shown —
-  no foundation axiom remains): **41 claims** —
+- **PROVEN↑** (fully machine-verified under the flagged SEM/META/TRANS axiom shown —
+  no foundation axiom remains): **43 claims** —
   `AxTwoSubjects` (17): C28, C29, C40, C41, C43, C46, C47, C48, C54, C61, C74, C277, C278, C279, C286, F4,
   **C401**;
   `necessaryPersonalSubjectExists` (3): C407, C408, C409 (the necessary-kind inhabitant and its two readings, Batch two-kinds 2026-09-28)
@@ -1835,6 +1850,9 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   the plurality bridge `AxTwoSubjects` (META) in its place, and are the **only** place in
   the corpus where a META bridge and a META bridge are consumed together. The two rows'
   price cells are updated accordingly.
+  `performative_act_datum` (2): C455, C456 (the inhabitance of `Initiates` and the refutation
+  of its denial, Batch INHABITED 2026-09-28 — the first rows priced on a `Tag: TRANS` datum;
+  the whole price of both rows is the single TRANS axiom C454).
   (`Cogito` is proven — the M0 forced-foundation axiom is retired, its
   degenerate `fun h => h Cogito` with it. `actualWorld` is a def;
   `Exists`/`Content`/`Agent`/`Rational` are analytical defs; `Affects` is the A3
