@@ -1,0 +1,63 @@
+T33 — O FORMATO DO REINO NECESSÁRIO, A TRINDADE NELE, E A ASSIMETRIA DA RETORSÃO (C515–C524)
+=========================================================================================
+2026-09-29. Lote NECESSARY, dez linhas, **zero axiomas**: o registo fica 35 → 35.
+Escrito sem alvo exacto (a instrução foi «prova o que se puder provar»), o que se
+pôde provar cabe em três frentes.
+
+**Frente 1 — a FORMA do reino necessário** (C515–C517, `NecessaryKindAudit.lean`,
+§2/§14). Não é quem o habita: é **de que forma é feito**.
+- C515 `no_necessary_atom (n : Nat) : ¬ NecessaryEntity (Entity.ofAtom n)` — nenhum
+  átomo é necessário, `{NecessarySubjectKind, Subject, propext}`. O `propext` é
+  axiomata fundacional (a Prova irrelevante entra pela negação do que é atómico),
+  **não** preço substantivo.
+- C516 `necessary_exhaustion` — a **forma** do reino: `e = Entity.ofGround ∨ ∃ s,
+  NecessarySubjectKind s ∧ e = EntityOf s`. Nenhum terceiro género.
+- C517 `necessary_realm_is_two_genera` — a disjunção, isolada num teorema só.
+A habitação continua nomeada como lacuna: `necessary_exhaustion` diz a **forma**
+do reino necessário, nunca que ele esteja povoado. No lado contingente, Γ não tem
+habitante do género contingente (WALL 2) — e por isso o espelho formal da
+habitação continua na lista de «ainda requer prova», e é uma **ponte** («o género
+contingente está habitado»), não uma prova.
+
+**Frente 2 — a Trindade entra no reino necessário** (C518–C520,
+`DivineAgape.lean:351-380`, §28/§7). O sort `DivinePerson` do lote TRINITY é
+reusado: não há necessidade de um novo divine-sort, e é a mesma pinsão.
+- C518 `subsisting_centre_is_necessary {d} (h : Subsists d) :
+  NecessaryEntity d.deiformEntity`, `{NecessarySubjectKind, Subject}`.
+- C519 `co_subsistence_is_co_location {a b} : a.deiformEntity = b.deiformEntity`,
+  `{Subject}` — dois centros subsistentes têm a **mesma** entidade de localização.
+- C520 `the_three_centres_are_one_necessary_reality` — as três instâncias de C518
+  mais as coincidências de C519: uma só realidade necessária, três centros.
+  `PROVEN↑` e não `PROVEN` porque as instâncias de `Subsists` vêm do **dado
+  declarado** (C504/C506), não do vocabulário: o preço é o do Ágape, herdado, não
+  novo.
+O não-colapso de C212 é preservado (três centros distintos, uma realidade) e a
+consubstantialidade de naturas continua **não** afirmada: C519 é identidade de
+*localização* apenas.
+
+**Frente 3 — a assimetria da retorsão, registada** (C521–C524, §27). A família da
+retorsão de C93/C94 (a necessidade) fica completa nas duas direcções, com os gémeos
+da contingência.
+- C521 `Semantics.noContingency_selfRefutes` — a negação da contingência é
+  livre-logicamente inconsistente, `{}` (via C96).
+- C522 `contingency_and_its_denial` — a ligação das duas metades.
+- C523 `Choice.noContingency_assertable_refutes` — e **assertar** a negação
+  refuta-se, `{Initiates, Means, State, Subject}`.
+- C524 `Choice.asserting_modal_pair_is_refuted` — a negação de um par modal.
+**C523 é mais barata do que C94**, porque C521 não paga nada — a contingência tem
+testemunha atómica (`Form.atom 0`, de C95/C96) enquanto a necessidade só tem a
+tautologia do meio excluído (`CL`, em C93). A assimetria estava implícita nas
+pegadas desde C93; está agora escrita, com a razão.
+
+O que isto NÃO faz: *não* dá habitante ao género contingente (o espelho formal da
+WALL 2 continua aberta, e é nomeada como tal); *não* deriva a necessidade da
+Trindade de vocabulário (C518–C520 repousam no dado do Ágape, com o preço
+herdado); *não* afirma consubstantialidade de naturas nem unidade de actuação;
+*não* toca C228 (identidade hipostática, bloqueada), o Verbo/Encarnação (F8), nem
+o nível-`Entity` → sujeito; *não* toca o espelho das Separações. Zero axiomas novos:
+nenhum dos dez resultados custa um datum, e as pegadas `propext`/`CL` são
+fundacionais.
+
+Ver: `formal/GAPMAP.md` (linhas C515–C524 + lote NECESSARY), `formal/Logos/NecessaryKindAudit.lean`,
+`formal/Logos/DivineAgape.lean:351-380`, `base.txt` §28 (nota formal sobre a forma do reino
+necessário), `NECESSARY.md`, `TRINITY.md` (o corredor que C518–C520 estendem).

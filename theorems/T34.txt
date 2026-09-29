@@ -1,0 +1,61 @@
+T34 — O CASO DO ÁGAPE PARA A TRINDADE, E O SEU PREÇO EXACTO (C504–C514)
+======================================================================
+2026-09-29. Lote TRINITY, duas fases. **Três axiomas `META` declarados (Stage A) e
+quatro separações `{}` (Stage B)**: o registo fica 35 → 35 em ambas. O objecto do
+lote não é provar a Trindade — é mostrar **o que ela custa** e que nada mais barato
+a produz.
+
+**Stage A — o caso, não a dedução** (`DivineAgape.lean`, §28/§7). Sort novo
+`DivinePerson` (uma `structure`, zero axiomas), `Subsists`/`is_divine` como `def`s,
+`DivineLove`/`IsWord`/`IsSpirit` como `opaque` (o padrão `BearingOf`).
+- C504 `AxAgapeEssence : ∃ f, Subsists f ∧ (∃ o, o ≠ f ∧ Subsists o ∧ DivineLove f o)`
+  — **o dado**: o amor da fonte-fonte é auto-doação *essencial* e atinge um centro
+  pessoal **distinto e subsistente**. `Tag: META`.
+- C505 `AxProcessionWord : IsWord the_beloved` — o amado *é* o Verbo. `Tag: META`.
+- C506 `AxProcessionSpirit : ∃ σ, IsSpirit σ ∧ Subsists σ ∧ σ ≠ the_father ∧
+  (∀ w, IsWord w → σ ≠ w)` — o dom regressa por um terceiro centro, distinto da
+  fonte e de todo Verbo. `Tag: META`, o eixo de todo o caso.
+- C507 `essential_love_has_necessary_object` — o objecto do amor essencial é
+  necessário; C508 `agape_beloved_is_not_creature` — um centro subsistente não é
+  contingente nemuno; C509 `divine_object_subsists_in_godhead` — subsiste dentro da
+  realidade divina (uma pinsão, `is_divine o divineReality`, `divineReality :=
+  Entity.ofGround`).
+- C510 `agape_entails_tripersonality : ∃ t : TrinitarianStructure DivinePerson
+  Entity, t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord
+  the_beloved ∧ IsSpirit the_spirit` — **o caso**: existe uma `TrinitarianStructure`
+  de C108 cujo tripé de centros distintos são exactamente a fonte, o amado-como-Verbo
+  e o Espírito que regressa, todos na única realidade divina. `PROVEN↑` — repousa
+  nos três axiomas META declarados, não no vocabulário. **Não é derivação.**
+
+**Stage B — as quatro separações `{}`** (`TrinitySeparations.lean`, assinatura
+livre: cada leitura mais barata do caso é consistente com o vocabulário inteiro).
+- C511 `unitarian_self_love_gives_no_second_centre` — **narcisista**: um só centro,
+  amor reflexivo, nenhum segundo centro. O dado de C504 é uma *escolha*, não uma
+  consequência da unicidade.
+- C512 `creature_love_gives_no_divine_beloved` — **amor-criatura**: o amor atinge
+  um outro que é criatura e **não** subsiste; o conteúdo de C508/C509 é um
+  conjuncto, não um nome, e não se lê ao contrário.
+- C513 `attribute_love_gives_no_subsistent_word` — **amor-atributivo**: o objecto do
+  amor é distinto e amado, mas não subsistir. O conjuncto de subsistência de C505
+  é o que carrega o peso — o «passo 6» agustiniano fica **exibido**, não afirmado.
+- C514 `agape_and_word_without_spirit_is_binitarian` — **binitariana, a peça que
+  importa**: a fonte ama, o amado é nomeado Verbo, **não há Espírito**
+  (`∀ d, ¬ IsS d`), e todo centro subsistente é um dos dois (a forma de máquina de
+  «no máximo dois»). Logo ***três* é exactamente o preço do Espírito** (C506), e nada
+  mais barato o produz. Um leitor que rejeite C506 fica com a leitura binitariana —
+  é a fronteira honesta do caso.
+
+O que isto NÃO faz: *não* deriva a Trindade do Ágape (o corredor é condicional às
+três premissas nomeadas, e a dedução incondicional continua em falta — as lemmas
+exactas estão nomeadas em F6); *não* refuta nenhum dos três axiomas declarados (cada
+modelo do Stage B *falha* um conjuncto do dado, e é esse o preço); *não* diz nada
+sobre o Verbo-como-Encarnação (F8 intacto: o Verbo de C510 não é a Encarnação); *não*
+toca C228 (identidade hipostática, bloqueada) nem a WALL 2 do nível contingente; *não*
+força a Trindade a custo zero — a regra do autor manda não forçar o que a lógica não
+força, e a Separação de cada leitura mais barata é exactamente o que torna o preço
+legível. Nenhum axioma novo: as quatro separações são `{}`, as três premissas são as
+únicas, e o registo 35 → 35 atravessa as duas fases.
+
+Ver: `formal/GAPMAP.md` (linhas C504–C514 + lote TRINITY, Stage A e Stage B), `formal/Logos/DivineAgape.lean`,
+`formal/Logos/TrinitySeparations.lean`, `base.txt` §28 (corredor do Ágape), `TRINITY.md` (plano de
+record), `TRINITY2.md` (Stage B), `theorems/T33.txt` (C518–C520, o mesmo sort `DivinePerson`).

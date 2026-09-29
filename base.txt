@@ -1555,7 +1555,14 @@ ponte é um compromisso pago, com o seu próprio contramodelo. O polo negativo `
    uniformemente `unbearing`, exactamente como nenhum se ajuda (C176) — e permanece **não-afirmada**,
    pois nenhuma ponte paralela "algum prejuízo ocorre" foi comissionada. A teleologia
    deôntica F2 permanece em aberto, em conexão com T12/T13.
-Trinity — DEFERRED, sem argumento (§28/§29).
+Trinity — **CASO, não dedução** (condicional; §28/§29): sob três premissas META declaradas e
+  precificadas (o amor essencial ama um centro distinto e subsistente; esse amado é o Verbo; o dom
+  regressa por um terceiro centro), existe uma Trindade no vocabulário (`DivineAgape`, C504–C510,
+  `PROVEN↑`) — e **cada leitura mais barata é consistente no kernel** (C511–C514, `{}`): o
+  unicitarismo, o amor-criatura, o amor-atributivo e o **binitarismo**. Logo *três* é exactamente o
+  preço do Espírito, e nada mais barato o produz. A dedução **incondicional** não existe: as suas
+  três lemmas exactas estão nomeadas por extenso na nota formal abaixo. A Encarnação (F8) não é
+  tocada — o Verbo de C510 não é a Encarnação, e C228 (identidade hipostática) continua bloqueada.
 Identidade hipostática do fundamento com uma pessoa (g = EntityOf s enquanto pessoa) — BLOQUEADA:
   `ofGround_ne_ofSubject` (`Entity.noConfusion`). O fundamento é necessário como *entidade*
   (mundo-rígida) e o *tipo*-fundamento é pessoal — sem linha de identidade entre as duas.
@@ -1708,6 +1715,40 @@ Conjectura nomeada OpenBridgeNormativity (§0.10) — a ponte positiva bivalênc
   a rota axiom-free de postura completa exige o dado de postura (C164/C165); `¬NoGN` incondicional não é derivável.
 
 Nenhuma destas passagens deve ser simplesmente assumida.
+
+Nota formal sobre o CASO do Ágape para a Trindade (2026-09-29 — lote TRINITY, Stage A + B;
+planos `TRINITY.md`/`TRINITY2.md`; GAPMAP C504–C514; ver `theorems/T34.txt`): o que se pode dizer do
+Ágape e da Trindade é um **caso**, nunca uma dedução — e o seu preço é **exacto**. Três passos, e
+nada mais:
+  (1) **O dado, declarado e precificado** (C504–C506, três axiomas `Tag: META` — preço escrito por
+      extenso, não vocabulário): (a) o amor da fonte é auto-doação *essencial* e atinge um centro
+      **distinto e subsistente** (`AxAgapeEssence`); (b) esse amado **é** o Verbo
+      (`AxProcessionWord`); (c) o dom regressa por um **terceiro** centro, distinto da fonte e de
+      todo Verbo (`AxProcessionSpirit`). Nenhum destes é forçável: são *datums*, e o registo paga-os.
+  (2) **O corredor, sob essas premissas** (C507–C510, `PROVEN↑`): o objecto do amor essencial é
+      **necessário** (C507); um centro subsistente não é contingente por acidente (C508); subsiste
+      na **mesma** realidade divina — uma pinsão (C509); e portanto existe uma
+      `TrinitarianStructure` (C108) de três centros distintos que são exactamente a fonte, o
+      amado-como-Verbo e o Espírito que regressa (C510). O não-colapso de C212 é preservado (três
+      centros, uma realidade).
+  (3) **O preço é exacto: três é o preço do Espírito** (C511–C514, quatro separações `{}`): o
+      mundo **narcisista** — um só centro, amor reflexivo, nenhum segundo centro, logo o dado é uma
+      *escolha*; o **amor-criatura** — o amado é criatura e **não** subsiste, logo amar o outro não
+      fabrica um centro subsistente; o **amor-atributivo** — o objecto do amor é distinto e amado,
+      mas **não subsistir**, logo o conjuncto de subsistência de C505 é o que carrega o peso; e o
+      **binitarismo** (C514, a peça que importa) — a fonte ama, o amado é nomeado Verbo, **não há
+      Espírito**, e todo centro subsistente é um dos dois: um Deus binitariano é legal. Estas quatro
+      linhas são contramodelos de **assinatura livre**: `DivineLove`, `IsWord` e `IsSpirit` são
+      `opaque` (padrão `BearingOf`), logo nenhum modelo de Γ os pode instanciar. São resultados de
+      forma, não afirmações sobre a consistência de Γ, e **não refutam** nenhum dos três axiomas —
+      cada mundo *falha* um conjuncto do dado, e é esse o preço.
+
+Ainda requer prova (o que falta, em termos formais): a derivação **incondicional** Ágape → Trindade.
+As suas três lemmas exactas, nenhuma delas vocabulário: (a) `∃ f : DivinePerson, Subsists f ∧
+(∃ o : DivinePerson, o ≠ f ∧ Subsists o ∧ DivineLove f o)`; (b) `IsWord the_beloved`; (c)
+`∃ σ : DivinePerson, IsSpirit σ ∧ Subsists σ ∧ σ ≠ the_father ∧ (∀ w : DivinePerson, IsWord w →
+σ ≠ w)`. Cada uma delas é hoje um axioma declarado, e o espelho formal continua aberto: a
+derivação é *válida sob premissas declaradas*, **nunca forçada**.
 
 Nota formal: A pluralidade (T12, C40) e o amor relacional
 (T13/T14, C41–C45) exigem a ponte metafísica explícita AxTwoSubjects (Tag: META,

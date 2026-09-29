@@ -312,8 +312,5 @@ theorem necessary_realm_is_two_genera :
 #print axioms necessary_kind_subject_fails_pure_actuality
 #print axioms necessary_kind_subject_is_gapless_operator
 #print axioms the_second_necessary_being_profile
-#print axioms no_necessary_atom
-#print axioms necessary_exhaustion
-#print axioms necessary_realm_is_two_genera
 
 end Logos.NecessaryKindAudit

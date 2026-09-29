@@ -197,3 +197,7 @@ import Logos.SecondPersonGoodAttempt
 -- vocabulary, no Γ axiom touched. Stage B: the separations C511–C514 land in
 -- `Logos.TrinitySeparations`.
 import Logos.DivineAgape
+-- Stage B, landed: the four axiom-free separations C511–C514 (narcissist,
+-- creature-love, attribute-love, binitarian) — all `{}`, zero axioms, the exact
+-- price of the case (three is exactly the price of the Spirit).
+import Logos.TrinitySeparations
