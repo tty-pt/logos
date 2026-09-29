@@ -1625,6 +1625,10 @@ A campanha em `Logos.AxiomNegationAudit` executou a busca sistemática por neces
 | C94 | §27 | `Choice.noStrongTruth_assertable_refutes : Asserts speaker (¬ ∃ τ : Semantics.Form, Semantics.NecessarilyTrue τ) → False` — retorsão assertiva do dado mundial: ninguém pode asserir que não existe verdade forte (o ato de negar o dado é destruído por ele) | PROVEN | **`{Initiates, Means, State, Subject, CL}`** (via C93 + Asserts) |
 | C95 | §27 | `Semantics.atoms_are_modally_free : ∀ n : Nat, ¬ NecessarilyTrue (Form.atom n) ∧ ¬ NecessarilyFalse (Form.atom n)` — a parede dos átomos (fronteira de C59): nenhum átomo é fixado no percurso modal — a verdade forte fixa leis, não conteúdos | PROVEN | **`{}`** (Vocab puro, sem axiomas; `strongTruth_is_not_atomic` leva `{CL}`) |
 | C96 | §27 | `Semantics.some_formula_contingent : ∃ τ : Semantics.Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ` — conteúdo contingente existe (contrapeso de C59): há fórmula nem necessariamente-verdadeira nem necessariamente-falsa — o percurso modal não é degenerado | PROVEN | **`{}`** (via C95; `strongTruth_and_contingent_content` leva `{CL}`) |
+| C521 | §27 | `Semantics.noContingency_selfRefutes : ¬ (¬ ∃ τ : Semantics.Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ)` — **o gêmeo de C93, na direcção contingente (aditado 2026-09-29, lote NECESSARY+RETORSION)**: negar o conteúdo contingente refuta-se a si mesmo. Fecha a família da retorsão nos **dois** sentidos e **sem preço**: C93 pagou `CL` porque o testemunho de C59 é a tautologia da lei do meio excluído; C521 reusa o testemunho atómico de C96 (`Form.atom 0`, `{}`), logo a metade contingente da família é vocabulary-only onde a metade necessária ainda paga `CL`. **A assimetria é real e vale registada:** a contingência tem testemunho atómico, a necessidade não | PROVEN | **`{}`** (via C96) |
+| C522 | §27 | `Semantics.contingency_and_its_denial : (∃ τ : Semantics.Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ) ∧ (¬ (¬ ∃ τ : Semantics.Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ))` — a junção positivo/negativa de C96 e C521, imagem espelhada de `strongTruth_and_contingent_content` (C97) | PROVEN | **`{}`** |
+| C523 | §27 | `Choice.noContingency_assertable_refutes : Asserts speaker (¬ ∃ τ : Semantics.Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ) → False` — **o gêmeo de C94 na direcção contingente**: ninguém pode asserir que não existe conteúdo contingente. Fecha a família da retorsão também ao nível da **asserção**, exactamente como C94 a fechou na direcção necessária | PROVEN | **`{Initiates, Means, State, Subject}`** (via C521 + `Asserts`; *mais barato* que C94, que paga `CL`) |
+| C524 | §27 | `Choice.asserting_modal_pair_is_refuted (speaker : Subject) : (Asserts speaker (¬ ∃ τ : Form, NecessarilyTrue τ) → False) ∧ (Asserts speaker (¬ ∃ τ : Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ) → False)` — a **linha de registo** da família: assertar qualquer um dos chifres do par modal é refutado, logo nenhuma proposição do par reflexivo sobrevive ao nível assertivo. Herda o `CL` de C94 — é junção, não preço novo | PROVEN | **`{CL, Initiates, Means, State, Subject}`** (via C94 + C523; `propext`/`Quot.sound` herdados do `CL` de C94) |
 | C182 | §28/CHARACTERISTICS | `ModalPossibilityFrontier.aseity_does_not_force_any_volition_alternatives` — generic `Aseity` is compatible with the absence of every Level-3 volitional alternative | PROVEN | `{}` (pure logic; generic Unit/False countermodel) |
 | C184 | §28/CHARACTERISTICS | `ModalPossibilityFrontier.volitional_alternative_does_not_force_aseity` — a Level-3 volitional alternative is compatible with failure of generic `Aseity` | PROVEN | `{}` (pure logic; generic Bool/True countermodel) |
 | C185 | §28/CHARACTERISTICS | `CanonicalAseity.false_meaning_cannot_ground_true_meaning` — generic model-theoretic exclusion: an entity with false meaning capacity cannot ground true meaning | PROVEN | `{}` (pure logic) |
@@ -1902,9 +1906,9 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
 
 - **PROVEN** (status PROVEN/PROVEN↑ whose audit footprint carries **no SEM/META
   axiom** — machine re-derived from `formal/axiom_audit.json`, 2026-09-25):
-  - **57 truly axiom-free** (`{}`): C379, C380, C381, C383, C1, C2, C4, C5, C6, C7, C8, C9,
+  - **59 truly axiom-free** (`{}`): C379, C380, C381, C383, C1, C2, C4, C5, C6, C7, C8, C9,
     C183, C11, C179,
-    C17, C181, C22, C26, C27, C31, C35, C36, C95, C96, C182, C184, C185, C38, C50,
+    C17, C181, C22, C26, C27, C31, C35, C36, C95, C96, **C521, C522**, C182, C184, C185, C38, C50,
     C180, C63, C108, C111, C166, C167, C226, C227, C231, C259, C260, C272, C309,
     C310, C353, C355, C356, C361, C364, C365, C366,
     **C417, C418, C426** (the 2026-09-28 precedence batch: no atom is true at the
@@ -1949,7 +1953,7 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   - **11 `CL`-only**: C3, C10, C12, C13, C14, C16, C37, C59, C93, C251, C322. (C251 is the
     non-emptiness + contradiction-freedom of the satisfiable scope domain; its `propext`
     cost is inherited from C14, deliberately, so the graph shows the C251 → C14 edge.)
-  - **255 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`): (**C176** was dropped
+  - **264 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`): (**C176** was dropped
     from this bucket 2026-09-29 — its status is now COUNTERMODEL, the `{}` value-layer
     countermodel (`BearingOf` re-opened as an `opaque` constant), so like C175/C382/C385
     it is a separation boundary, not a PROVEN step, and is not counted here.
@@ -1957,6 +1961,27 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     `GoodDenial.good_denial_is_free_logically_consistent`: the vocabulary-only footprint
     `{Initiates, Means, State, Subject}` is exactly the reality-hook vocabulary, inherited
     from `correct_tracks_reality` via the pole-freedom herald; `PROVEN`, never `PROVEN↑`.)
+    **C508, C509 added 2026-09-29** — the two `PROVEN` corridor steps of the Trinity batch
+    (`DivineAgape`): the beloved is not a creature (`{NecessarySubjectKind, Subject}`, via
+    `ofGround_necessary` + `necessary_not_contingent`) and a subsistent centre *is* a divine
+    centre (`{Subject}`, pure unfolding of `is_divine o divineReality`). Both were predicted
+    `PROVEN↑` in `TRINITY.md` §3.1 and are **cheaper than predicted**: neither pays a META
+    axiom, so the honest cell is `PROVEN`. *Vocabulary-only* 255 → **257**; the
+    *axiom-free* and *`CL`-only* tallies do not move.)
+    **C515–C519, C523, C524 added 2026-09-29** — the NECESSARY batch. The
+    positive closure of the necessary-kind audit: C515 (`no_necessary_atom`, C323 +
+    `necessary_not_contingent`), C516 (`necessary_exhaustion` — the whole necessary
+    realm is the ground or a necessary-kind correlate), C517
+    (`necessary_realm_is_two_genera` — the two disjuncts are exclusive both ways), all
+    `{NecessarySubjectKind, Subject, propext}`, `propext` inherited from C323's cone and
+    not a premise. C518/C519 are the Trinity bridge (`DivineAgape`): a subsistent
+    centre is necessary, and co-subsistence is co-location (`{Subject}` — location
+    identity only, **not** consubstantiality of natures). C523/C524 are the assertive
+    contingency-retorsion twins of C94 (`{Initiates, Means, State, Subject}` and
+    `{Classical.choice, …}`). *Vocabulary-only* 257 → **264**; **axiom-free**
+    57 → **59** (C521, C522 — the performative twins of C93 are `{}`, cheaper than
+    their siblings, because the atom witness of C95/C96 costs nothing where the
+    tautology witness of C59 costs `CL`); the *`CL`-only* tally does not move.
     C419, C420, C421, C422, C423, C424, C425, C427, C428, C429, C430, C431
     (the 2026-09-28 precedence / §18 batch — twelve rows, 0 substantive axioms;
     the `NecessarySubjectKind` in C419–C421/C424/C429/C430 is the `ExistsAt` artifact
@@ -2085,9 +2110,20 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     see the BLOCKED/retired blocks and the `## Formal Frontiers` inventory.
     Of that range only C74 (`aloneExcluded`) survives, as PROVEN↑ (below).
 - **PROVEN↑** (fully machine-verified under the flagged SEM/META/TRANS axiom shown —
-  no foundation axiom remains): **62 claims** —
+  no foundation axiom remains): **65 claims** —
   `AxTwoSubjects` (17): C28, C29, C40, C41, C43, C46, C47, C48, C54, C61, C74, C277, C278, C279, C286, F4,
   **C401**;
+  `AxAgapeEssence` (3): C507, C510, **C520** (lote TRINITY, 2026-09-29 — o dado do Ágape é a
+   fonte e o amado; C507 é o corredor «o objecto do amor essencial é necessário»,
+   C510 o caso completo, ambos `PROVEN↑` e nenhum dos dois `PROVEN` como a previsão
+   do plano `TRINITY.md` §3.1 supunha; **C520** (lote NECESSARY) é a leitura modal
+   do mesmo dado — os três centros são necessários, com o preço herdado e não novo);
+  `AxProcessionWord` (1): C510 (o amado do dado **é** o Verbo — a ponte nomeia, não
+   cria; sem ela o verso continua sendo apenas «outro amado»);
+  `AxProcessionSpirit` (2): C510, **C520** (o terceiro centro, distinto da fonte e de todo
+   Verbo — **o preço exacto do «três»**: Ágape + Verbo deixam um Deus binitariano
+   legal, separation C514 em Stage B; **C520** herda-o do mesmo lote NECESSARY, porque a
+   «realidade necessária única» de C520 tem de ser a do Espírito regresso);
   `necessaryPersonalSubjectExists` (5): C407, C408, C409 (the necessary-kind inhabitant and its two readings, Batch two-kinds 2026-09-28),
    **C494, C495** (lote NECESSARY-KIND-AUDIT, 2026-09-29 — a não-unicidade do ser necessário
    e a linha de grau: duas novas linhas sob a ponte META C404; a pegada de ambas é a mesma,
@@ -2298,6 +2334,24 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   **sobe** por uma razão de *rigor* e não de *conteúdo novo* — nenhum enunciado foi
   acrescentado, nenhum status mudou, e as dez linhas C389–C398 e C400 mantêm
   `PROVEN` e o seu badge.
+  **CORRECÇÃO (2026-09-29, lote TRINITY — e ela fecha uma dívida de contabilidade
+  que esta secção vinha acumulando):** a linha «Net inventory» acima continua a dizer
+  **27 declarados** (VOCAB 16 / SEM 6 / META 5), o que era verdade a 2026-09-27 e
+  **não** é verdade hoje. O estado actual, re-derivado por
+  `python3 scripts/gapmap_taxonomy.py`, é **35 declarados, todos etiquetados** —
+  `Tag: VOCAB` (17), `Tag: SEM` (6), `Tag: META` (11), `Tag: TRANS` (1) — mais
+  `Classical.choice`, `Quot.sound`, `propext`. O caminho 27 → 35 atravessa seis lotes
+  em que esta secção não foi tocada: o lote thomístico (uma relação `VOCAB` + duas
+  pontes `META`), a cascata do act-datum (`performative_act_datum`, `TRANS`), o fecho
+  das características, a auditoria do género necessário
+  (`necessaryPersonalSubjectExists`, `META`), o lote OTHER (que promoveu
+  `performativeActDatum` a axioma declarado) e agora o lote TRINITY (**+3 `META`**:
+  `AxAgapeEssence`, `AxProcessionWord`, `AxProcessionSpirit`, linhas C504–C506). É uma
+  dívida de *livro*, não de kernel: o registo que o leitor vê como fonte (o README) é
+  derivado, e `gapmap_taxonomy.py --check` continua a bater porque só verifica as
+  quatro contagens de claims, as células por linha e as células de estado — o
+  inventário de axiomas é de manutenção manual, como sempre foi. A entrada de 27 fica
+  como registo histórico datado, exactamente como as correcções anteriores mandam.
 - `sorryAx` count across all modules: **0**.
 - Verification: `lake build` green (36 jobs, seconds, Lean core only); zero
   errors, zero warnings.
@@ -2817,6 +2871,93 @@ aberto.**
 | C501 | §28/§5 | `SecondPersonGoodAttempt.lone_will_is_vacuously_individual : ∃ (M : PersonhoodVocab) (s : M.Subj), IndependentWill M s ∧ ∀ t : M.Subj, t = s` — **o gémeo do Universo Solitário no lado da pessoalidade (aditado 2026-09-29, lote OTHER; plano `OTHER.md`)**: a retorsão «se uma vontade é individual mas não há mais ninguém de quem ser individual, como pode sequer existir uma pessoa?» é **refutada por vacuidade**. `IndependentWill s := ∀ s', s' ≠ s → subjectWill s' ≠ subjectWill s` quantifica sobre a classe dos *outros*; para uma vontade solitária o `∀` esvazia-se e o conjuncto é vacuamente verdadeiro — o mundo de um só elemento (`Subject := Unit`, `WillOf := ()`) em que o sujeito possui a própria vontade unicamente e está sozinho é um modelo legal. Divulgação (padrão C457/C498): a individualidade da vontade solitária **não tem conteúdo contrastivo** — refuta «uma pessoa só não pode existir», não «uma pessoa só é uma pessoa robusta». `will_individuation` corre distinção → distinção-de-vontade (pressupõe pluralidade, nunca a gera — `WillIndividuationAudit`, `{}`), e Γ não tem teorema `Person s → ∃ t, t ≠ s`. Assinatura livre (`PersonhoodVocab`, como C294/C499), `{}` | COUNTERMODEL | `{}` |
 | C502 | §28/§5 | `SecondPersonGoodAttempt.two_persons_do_not_force_good_obtains : ∃ (S : Type) (P : S → Prop) (B : S → S → InterpersonalBearing), (∃ s₁ s₂ : S, s₁ ≠ s₂ ∧ P s₁ ∧ P s₂) ∧ ¬ ∃ (s : S) (a : Prop), ∃ t : S, t ≠ s ∧ P t ∧ B s t = InterpersonalBearing.benevolent ∧ ¬ (B s t = InterpersonalBearing.harmful)` — **a resposta à hipótese do autor «se provarmos uma segunda pessoa, provamos o Bem» é NÃO (aditado 2026-09-29, lote OTHER; plano `OTHER.md`)**: a leitura da instanciação da pluralidade de C176 (`{}`). Duas pessoas distintas (`S := Unit ⊕ Unit`, `P` verdadeira em toda a parte) podem existir e o Bem nunca obter, porque o dado em falta é o **valor do bearing** (`BearingOf` opaco), não o Outro — um mundo com duas pessoas e bearing uniformemente `unbearing` em todas as direcções é um modelo legal. O censo: nenhum teorema ou axioma de Γ conclui `BearingOf _ _ = InterpersonalBearing.benevolent` excepto a própria ponte META C177. Assinatura livre, `{}`: resultado de forma, **não** refutação de C178, que permanece PROVEN↑ sob C177 | COUNTERMODEL | `{}` |
 | C503 | §28/§5 | **BLOCKED, sem declaração (aditado 2026-09-29, lote OTHER; plano `OTHER.md`).** O passo tentado «o chão ama uma pessoa» não tem carril. **Lemma exacta em falta** (instância da WALL 2, `LovesAsGround`): `∃ s : Subject, ContingentSubjectKind s ∧ (∃ q : Prop, Means s q) ∧ Person s` — Γ não tem habitante do género contingente nem um significado para um tal sujeito. Além disso, a WALL 1 (`∃ p, GroundBearsGood Entity.ofGround (EntityOf s) p` — sem habitante fora da ponte não-orçada `AxGroundLovesContingentRealm`) e a **projecção em falta** de um amor de nível-`Entity` para `BearingOf = benevolent` ao nível do sujeito (seria uma ponte forçada nova). Citado contra C404/C469 e a localização WALL 1/2 de `LovesAsGround`. Nenhuma ponte nova foi comissionada — a regra do autor manda não forçar o que a lógica não força | BLOCKED | — |
+
+| C504 | §28/§7 | `DivineAgape.AxAgapeEssence : ∃ f : DivinePerson, Subsists f ∧ (∃ o : DivinePerson, o ≠ f ∧ Subsists o ∧ DivineLove f o)` — **o dado do Ágape (aditado 2026-09-29, lote TRINITY; plano `TRINITY.md`)**: o amor do centro-fonte é auto-doação *essencial* e atinge um centro pessoal **distinto** que também subsiste na realidade divina única. Axioma declarado, `Tag: META`, com preço e nota de consistência no docstring. **Não é derivado**: o modelo de recusa (mundo narcisista — `DivineLove` uniformemente falso) é legal, e a unicidade de C212 é precisamente o que deixa a fronteira aberta. Sort novo `DivinePerson` (estrutura, **zero axiomas**); a realidade divina é `Entity.ofGround` (def, unicidade de C320 preservada — três centros, uma realidade). A relação de amor é `opaque` (`DivineLove`, padrão `BearingOf`), logo o amor nunca é um acidente definicional | AXIOM | `{Subject, AxAgapeEssence}` |
+| C505 | §28/§7 | `DivineAgape.AxProcessionWord : IsWord the_beloved` — **ponte META do Verbo (aditado 2026-09-29, lote TRINITY)**: o amado do amor essencial subsiste *como* o Verbo — o objecto pessoal da auto-doação não é um objecto-de-amor acidental, é uma pessoa divina com nome próprio (processão intelectual). O dado C504 já fornece a existência e a subsistência do amado; esta ponte só o **nomeia** Verbo (a leitura honesta do passo «o outro é o Verbo»). Preço: substantivo por conta própria; sem ela o verso continua sendo apenas «outro amado», não «Verbo». Modelo de recusa: o amor atributivo (autoconhecimento/amor-de-si como estado intrínseco, sem centro subsistente) é legal | AXIOM | `{Subject, AxAgapeEssence, AxProcessionWord, CL}` |
+| C506 | §28/§7 | `DivineAgape.AxProcessionSpirit : ∃ σ : DivinePerson, IsSpirit σ ∧ Subsists σ ∧ σ ≠ the_father ∧ (∀ w : DivinePerson, IsWord w → σ ≠ w)` — **a ponte META do Espírito (aditado 2026-09-29, lote TRINITY), o eixo de todo o caso**: o dom regressa — um terceiro centro subsiste, distinto da fonte e de **todo** Verbo. O dado dá **dois** centros (fonte e amado); nada força um terceiro. O Espírito é o preço adicional, e a separação binitariana de Stage B (C514, `{}`) prova que «três» é exactamente este preço: Ágape + Verbo sozinhos deixam um Deus binitariano legal. Modelo de recusa: binitarianismo (Agape + Verbo, sem modalidade de Espírito) | AXIOM | `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` |
+| C507 | §28/§7 | `DivineAgape.essential_love_has_necessary_object : ∃ f o : DivinePerson, f ≠ o ∧ Subsists f ∧ Subsists o ∧ DivineLove f o` — **o objecto do amor essencial é necessário (aditado 2026-09-29, lote TRINITY)**: sob o dado, o amor da fonte atinge um centro pessoal distinto que *subsiste* — o seu ser é a realidade divina necessária. O objecto é tão necessário quanto o próprio amor: não é buscado no reino contingente que as WALLs guardam (C481/C482, C503), está na Divindade por **declaração**, e a projecção em falta de C503 é o que este corredor evita — a pluralidade é *expressada* (três `DivinePerson`), nunca forçada por escolha de tipo | PROVEN↑ | `{Subject, AxAgapeEssence, CL}` |
+| C508 | §28/§7 | `DivineAgape.agape_beloved_is_not_creature {o : DivinePerson} (h : Subsists o) : ¬ ContingentEntity o.deiformEntity ∧ (∀ n : Nat, o.deiformEntity ≠ Entity.ofAtom n)` — **a resposta ao nível da Divindade à WALL 2 (aditado 2026-09-29, lote TRINITY)**: todo centro subsistente tem, no lugar de uma realidade contingente, o chão necessário, e não é átomo — as três formas de criatura da ontologia `Entity` de Γ estão exauridas. O amado **não** é um sujeito de género contingente (não é `Subject` sequer), não vive numa entidade contingente, não é átomo. **Provado, não pago**: decorre do vocabulário assim que a subsistência holds, e por isso a linha é PROVEN e não PROVEN↑ — nenhum axioma META é pago aqui (cf. o precedente C457/C498: o que é gratuito é dito, não suposto) | PROVEN | `{NecessarySubjectKind, Subject}` |
+| C509 | §28/§7 | `DivineAgape.divine_object_subsists_in_godhead {o : DivinePerson} (h : Subsists o) : is_divine o divineReality` — **o passo «6» da via agostiniana, agora *dito* e descarregado (aditado 2026-09-29, lote TRINITY)**: um centro subsistente é um centro divino — `is_divine o divineReality` holds por definição de subsistência. A subsistência **é** o conteúdo de `Subsists` (igualdade de localização na realidade divina única), pelo que o passo que a rota tinha de deixar em aberto é aqui uma definição, não uma ponte. **Provado, não pago**: puro desdobramento (PROVEN, não PROVEN↑); a vacuidade é declarada, nada mais — `Subject` entra porque `is_divine o divineReality` nomeia o sort `Entity`, cujo construtor do chão traz `Subject` | PROVEN | `{Subject}` |
+| C515 | §2, §14 | `NecessaryKindAudit.no_necessary_atom (n : Nat) : ¬ NecessaryEntity (Entity.ofAtom n)` — **nenhum átomo é necessário (aditado 2026-09-29, lote NECESSARY; plano `NECESSARY.md`)**. Composição de C323 (`LovesAsGround.an_atom_is_contingent`) com `TheologicalModalHardening.necessary_not_contingent`: o necessário nunca é contingente, logo nenhum átomo — qualquer que seja o seu número — é necessário. **Preço: nenhum**; o `propext` é herdado do cone de C323 (axioma fundacional do próprio Lean, não uma premissa). Descarregado uma vez e nomeado, para o fecho abaixo ler limpo. **Prova:** `fun hNec => necessary_not_contingent _ hNec (an_atom_is_contingent n)` | PROVEN | `{NecessarySubjectKind, Subject, propext}` |
+| C516 | §2, §14 | `NecessaryKindAudit.necessary_exhaustion (e : Entity) (hNec : NecessaryEntity e) : e = Entity.ofGround ∨ ∃ s : Subject, NecessarySubjectKind s ∧ e = EntityOf s` — **o fecho positivo da auditoria (aditado 2026-09-29, lote NECESSARY)**: tudo o que é necessário é o chão ou o correlato de um sujeito da espécie necessária — sem átomos necessários, sem matéria necessária, sem **terceira forma** necessária. C495 mostrou que o universal «só o chão» é *falso*; C496/C497 traçaram o perfil do segundo ser necessário; esta linha diz que o segundo disjuncto não é *um* segundo ser necessário mas *todo o resto* do reino necessário. **Incondicional e gratuita**: `PROVEN`, sem axioma, sem hipótese além de `NecessaryEntity e`; braço do sujeito pela partição que o kernel já interpreta (C410, sentido `.mpr`, sobre a defeq `NecessarySubject s ≡ NecessaryEntity (EntityOf s)` documentada no cabeçalho de `Modal.lean`), braço do chão por `rfl`, braço do átomo por C515; `cases` sobre a indutiva fechada `Entity`, o mesmo idioma de C508. **O que NÃO diz:** nada sobre *quem* é o chão — o primeiro disjuncto é lido como chão, seja o leitor um princípio ou (pela posição do autor de 2026-09-29) uma Trindade; o teorema não força nenhuma das leituras. A habitação do género contingente continua o espelho aberto e intacto | PROVEN | `{NecessarySubjectKind, Subject, propext}` |
+| C517 | §2, §14 | `NecessaryKindAudit.necessary_realm_is_two_genera` — **o reino necessário são dois géneros, ou nada (aditado 2026-09-29, lote NECESSARY)**: C516 lida como afirmação de *forma* — os dois disjunctos são exclusivos (`ofGround_ne_ofSubject`, e o chão não é o correlato de nenhum sujeito em nenhuma das duas direcções), logo o fecho é uma partição genuína e não uma cobertura sobreposta. Preço: nenhum | PROVEN | `{NecessarySubjectKind, Subject, propext}` |
+| C518 | §28/§7 | `DivineAgape.subsisting_centre_is_necessary {d : DivinePerson} (h : Subsists d) : NecessaryEntity d.deiformEntity` — **um centro subsistente é um ser necessário (aditado 2026-09-29, lote NECESSARY)**: o dado do Ágape põe os centros divinos *dentro* do reino necessário, não apenas em algum lugar real. O corolário de uma linha do primeiro conjuncto de C508, isolado e nomeado porque é o que permite aplicar ao caso TRINITY o fecho de dois géneros de C516 — o `deiformEntity` de um `DivinePerson` subsistente é o chão, logo os centros estão no **primeiro** género. **Provado, não pago** (precedente C457/C498): `Subsists` é igualdade de localização com `divineReality = Entity.ofGround`, e `ofGround_necessary` é vocabulário — nenhum axioma META é suposto, a subsistência é uma *hipótese* do teorema, não uma ponte | PROVEN | `{NecessarySubjectKind, Subject}` |
+| C519 | §28/§7 | `DivineAgape.co_subsistence_is_co_location {a b : DivinePerson} (ha : Subsists a) (hb : Subsists b) : a.deiformEntity = b.deiformEntity` — **co-subsistência é co-localização (aditado 2026-09-29, lote NECESSARY)**: dois centros subsistentes têm a *mesma* entidade de localização. Lida com C518, é o «uma realidade, três centros» de C510 no vocabulário modal, isolado para que a coincidência seja um facto nomeado e reutilizável e não uma condição lateral. **Identidade de localização apenas** — nenhuma afirmação sobre natureza, propriedade ou acto partilhados (a consubstantialidade de naturas não está no vocabulário do sort) | PROVEN | `{Subject}` |
+| C520 | §28/§7 | `DivineAgape.the_three_centres_are_one_necessary_reality : NecessaryEntity the_father.deiformEntity ∧ NecessaryEntity the_beloved.deiformEntity ∧ NecessaryEntity the_spirit.deiformEntity ∧ the_father.deiformEntity = the_beloved.deiformEntity ∧ the_beloved.deiformEntity = the_spirit.deiformEntity` — **os três centros são necessários, e uma só realidade necessária (aditado 2026-09-29, lote NECESSARY)**: as instanciações de C518 nos três centros, mais as coincidências de C519. `PROVEN↑` e não `PROVEN` porque as instâncias de `Subsists` vêm do **dado declarado** (C504/C506), não do vocabulário — o preço é o do Ágape, herdado, não novo. O não-colapso de C212 é preservado (três centros distintos, uma realidade) e a consubstantialidade de naturas continua **não** afirmada | PROVEN↑ | `{Subject, AxAgapeEssence, AxProcessionSpirit, NecessarySubjectKind, CL}` |
+| C510 | §28/§7 | `DivineAgape.agape_entails_tripersonality : ∃ t : TrinitarianStructure DivinePerson Entity, t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit` — **o caso (não a dedução) para a Trindade a partir do Ágape (aditado 2026-09-29, lote TRINITY)**: sob os três axiomas META declarados, há uma `TrinitarianStructure` (C108) no sort divino cujos três centros pessoais distintos são *exactamente* a fonte, o amado-como-Verbo e o Espírito que regressa, todos partilhando a única realidade divina. A forma é `∃ t` porque `TrinitarianStructure` é uma `structure` em `Type`, não uma `Prop` (o idioma `∃ (_t : TrinitarianStructure Subj Ent), True` de `ConditionalTheology`); os conjunctos de papel estão no enunciado para que o preço inteiro sature a pegada. **Não é derivação**: repousa em três premissas META declaradas, e todas as leituras mais baratas (narcisista, amor-criatura, amor-atributivo, binitariana) ficam provadas consistentes pelas separações de Stage B. A unicidade é preservada (uma realidade divina, três centros dentro dela — o não-colapso de C212); o Verbo aqui **não** é a Encarnação (F8 intacto) | PROVEN↑ | `{Subject, AxAgapeEssence, AxProcessionWord, AxProcessionSpirit, CL}` |
+
+> **Lote TRINITY (2026-09-29, Stage A — o caso, não a dedução; plano `TRINITY.md`).
+> Três axiomas `META` declarados, e nada mais.** C504 (dado do Ágape: a fonte ama um
+> centro distinto que subsiste), C505 (esse amado **é** o Verbo), C506 (um terceiro
+> centro, o Espírito, distinto da fonte e de todo Verbo) → C507 (o objecto do amor
+> essencial é necessário) e C510 (existe uma `TrinitarianStructure` de C108 cujos três
+> centros são exactamente fonte, Verbo e Espírito). Os dois degraus mais baratos do
+> corredor — C508 (o amado não é criatura) e C509 (um centro subsistente *é* divino)
+> — saíram **vocabulary-only**: o que era gratuito é *dito*, não suposto.
+> **O que este lote não faz:** não deriva a Trindade, não toca em nenhum axioma de Γ, e
+> não move a unicidade (`Entity.ofGround` continua a ser a realidade divina única, C320;
+> os três centros estão **dentro** dela — o não-colapso de C212). O Verbo aqui não é a
+> Encarnação: F8 e as vias de F9 ficam intactas, e o corredor de C503 (o beloved
+> Jacquemart) continua murado, porque aqui a pluralidade é *expressa* num sort divino
+> novo (`DivinePerson`, estrutura — zero axiomas) e não projectada no nível do sujeito.
+> **O que ainda falta (Stage B):** as quatro separações `{}` — narcisista, amor-criatura,
+> amor-atributivo e **binitariana** (C511–C514). A última é a que importa: ela é a
+> prova de que *três* é exactamente o preço do Espírito, e que Ágape + Verbo, sozinhos,
+> deixam um Deus binitariano legal.
+
+> **Lote NECESSARY (2026-09-29, C515–C524 — o fecho positivo, em três frentes;
+> plano `NECESSARY.md`). Dez linhas, ZERO axiomas: o registo fica 35 → 35.** O
+> lote foi escrito sem alvo exacto — a instrução foi «prova o que se puder
+> provar» — e o que se pôde provar cabe em três frases.
+>
+> **1. A auditoria da espécie necessária passa de refutação a partição.**
+> C495 tinha provado que a necessidade não destaca o chão; C496/C497 tinham
+> traçado o perfil do segundo ser necessário. C515–C517 dizem agora **qual é a
+> forma** do reino necessário: o chão *ou* o correlato de um sujeito da espécie
+> necessária, e nada mais — sem átomo necessário (C515), sem matéria necessária,
+> sem terceira forma (C516), e com os dois disjunctos **exclusivos** nas duas
+> direcções (C517). Todas `PROVEN`, nenhuma paga axioma: o que era gratuito é
+> *dito*, não suposto. **O espelho continua aberto e é nomeado como tal:** a
+> *habitação do género contingente* é a única peça que falta, e `base.txt` §28
+> continua a apontá-la. Fechar o que a linguagem permite deixa a lacuna mais
+> nítida, não menos.
+>
+> **2. A Trindade entra no reino necessário — e é aqui que os dois lotes se
+> amarram.** C518–C520 são o corolário modal do corredor de Stage A. Por C518 e
+> C520, o `deiformEntity` dos três centros satisfaz `NecessaryEntity`, e pelo
+> fecho de C516 cai na **primeira** disjunção: os centros do Ágape estão no
+> reino necessário, do lado do chão, não no lado dos correlatos de sujeito. É
+> exactamente o que a posição do autor (o chão **é** pessoal) usaria e não tinha:
+> *a Trindade é necessária, e a necessidade é do chão.* **O que isto NÃO é:** C519
+> é coincidência de **localização** (duas subsistências são a mesma entidade), e
+> é exactamente isso que o texto da linha diz. Consubstantialidade de naturas,
+> partilha de propriedade e de acto **permanecem não afirmadas** — não estão no
+> vocabulário do sort, e nada as supõe.
+>
+> **3. A família da retorsão fecha nas duas direcções, e com uma assimetria
+> registada.** C521/C522 (performativa) e C523/C524 (assertiva) são os gémeos de
+> C93/C94. O achado é o **preço assimétrico**: C523 é **mais barata** do que
+> C94, porque C521 é `{}` e C93 paga `CL`. A contingência tem testemunha atómica
+> (`Form.atom 0`, de C95/C96); a necessidade só tem a tautologia da lei do meio
+> excluído. A assimetria estava implícita nas pegadas desde C93/C96; está agora
+> *escrita*, com a razão.
+>
+> **O que este lote não faz:** não deriva a Trindade (C520 é `PROVEN↑` como
+> C510, e repousa nos três axiomas META de Stage A, com o preço declarado); não
+> habita a espécie contingente; não identifica hipostaticamente os centros (C228
+> continua `BLOCKED`, F9 intacta); não toca na Encarnação (F8 intacta); e não
+> executa o Stage B de `TRINITY.md`, cujas quatro separações continuam reservadas
+> para C511–C514.
+>
+> **Nota de método, registada porque muda o plano seguinte:** as três linhas
+> mais seguras do plano (C515, C518, C521) correram sem qualquer atrito; o atrito
+> real esteve em **três erros de assinatura**, nenhum deles lógico — o
+> `ofGround_ne_ofSubject` tem a orientação `EntityOf s = Entity.ofGround` (e não
+> o inverso), `Subsists` é um `def` e portanto não se comporta como igualdade
+> definicional nos lemmas (precisa de `dsimp [Subsists, divineReality]`), e
+> `NecessarilyFalse` não estava no `open Logos.Semantics` de `Choice.lean`.
+> Nenhum deles foi uma falha da lógica: a lógica estava certa nos três casos, e o
+> plano é que tinha de ser revisto.
 
 > Batch REALITY-HOOK & MORAL-FRONTIER (2026-09-24): a tese cética "certo/errado
 > proposicional nada tem a ver com realidade" é **refutada no kernel** —

@@ -171,6 +171,33 @@ theorem strongTruth_and_contingent_content :
   obtain ⟨σ, hσN, hσF⟩ := some_formula_contingent
   exact ⟨τ, hτ, σ, hσN, hσF⟩
 
+/--Denying contingent content refutes itself: it cannot be the case that no
+  formula is contingent — the act of denying the contingency of content is
+  destroyed by the contingency of content (performative retorsion of C96, the
+  twin of C59's `noStrongTruth_selfRefutes`, footprint {}).
+
+  The retorsion family is now complete in both directions and at both levels:
+  C93 self-refutes the denial of strong truth, C521 self-refutes the denial of
+  contingency, and C94/C522 do the same at the assertion level. **Freeer than
+  its C93 sibling**: C93 needed the classical tautology witness and pays `CL`,
+  while C521 reuses C96's atom witness `Form.atom 0`, which is built from
+  `False.elim`-free falsity-world reasoning and pays nothing. The retorsion is
+  the performative one — the denial of a modal fact is refuted by that fact —
+  not a derivation of contingency from the self-reference.
+  Footprint: {}. -/
+theorem noContingency_selfRefutes :
+    ¬ (¬ ∃ τ : Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ) :=
+  fun hDenial => hDenial some_formula_contingent
+
+/--Contingency and its denial cannot coexist: some formula is contingent and
+  the denial of contingency is unsatisfiable — the positive/negative junction
+  of C96 and C521, the mirror-image of `strongTruth_and_contingent_content`
+  (footprint {}). -/
+theorem contingency_and_its_denial :
+    (∃ τ : Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ) ∧
+      (¬ (¬ ∃ τ : Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ)) :=
+  ⟨some_formula_contingent, noContingency_selfRefutes⟩
+
 end Logos.Semantics
 
 -- Axiom footprint audit
@@ -185,3 +212,5 @@ end Logos.Semantics
 #print axioms Logos.Semantics.strongTruth_is_not_atomic
 #print axioms Logos.Semantics.some_formula_contingent
 #print axioms Logos.Semantics.strongTruth_and_contingent_content
+#print axioms Logos.Semantics.noContingency_selfRefutes
+#print axioms Logos.Semantics.contingency_and_its_denial

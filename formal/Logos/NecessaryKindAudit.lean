@@ -33,8 +33,14 @@ operative* (it ties the ground there — the reason C443's `universal_ground` fi
 transcendence, maximal capacity, and pure actuality. The last two are the `SemanticFinitude`
 price C445 already pays; nothing new is charged here.
 
+Section 6 (added 2026-09-29) closes the audit **positively**: C515 rules out the necessary atom,
+C516 proves the necessary realm is *exhausted* by the ground and the necessary-kind correlates,
+and C517 makes the two disjuncts exclusive — the module's final statement is a two-genera
+partition, not only a refutation. Those three rows are `PROVEN` and vocabulary-only: the audit
+needed no inhabitation axiom to say what the necessary realm *is*, only to say it is *populated*.
+
 **0 new axioms.** The register stays 32. This module only *reads* the kind vocabulary and one
-already-declared META bridge; it declares no axioms — its eight theorems are the only additions.
+already-declared META bridge; it declares no axioms — its eleven theorems are the only additions.
 -/
 
 import Logos.Core
@@ -53,6 +59,7 @@ import Logos.SemanticFinitude
 import Logos.DivinePureActuality
 import Logos.DivineOmnipotence
 import Logos.TheologicalModalHardening
+import Logos.LovesAsGround
 
 namespace Logos.NecessaryKindAudit
 
@@ -69,7 +76,9 @@ open Logos.FoundationalOmnipresence (MaximalCapacity)
 open Logos.SemanticFinitude (SemanticFinitude)
 open Logos.DivinePureActuality (DivinePureActuality discriminating_subject_fails_pure_actuality)
 open Logos.DivineOmnipotence (GaplessOperate OperatesAt PossibleAt)
-open Logos.TheologicalModalHardening (UniversalFrame)
+open Logos.TheologicalModalHardening (UniversalFrame necessary_not_contingent)
+open Logos.LovesAsGround (an_atom_is_contingent)
+open Logos.Plurality (kinds_are_the_modal_partition)
 
 -- ============================================================================
 -- Section 1 — The lift: a necessary-kind subject's correlate is a necessary entity
@@ -230,14 +239,81 @@ theorem the_second_necessary_being_profile (s : Subject)
    necessary_kind_subject_lacks_maximal_capacity s hKind,
    necessary_kind_subject_fails_pure_actuality s hKind⟩
 
+-- ============================================================================
+-- Section 6 — The positive closure: the necessary realm has no third shape
+-- ============================================================================
+
+/-- **No atom is necessary (C515).** Atoms are contingent (C323, read from `LovesAsGround`) and
+    the necessary is never contingent, so no atom — however many, whatever its number — is
+    necessary. This is the atom case of the closure below, discharged once and named.
+    The footprint is exactly the two vocabulary axioms the statement's own derivation reads,
+    plus `propext` (inherited from C323's cone; see GAPMAP's `CL`/raw-grafia note).
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
+theorem no_necessary_atom (n : Nat) : ¬ NecessaryEntity (Entity.ofAtom n) :=
+  fun hNec => necessary_not_contingent _ hNec (an_atom_is_contingent n)
+
+/-- **The necessary is exhausted by the ground and the necessary-kind subjects (C516).**
+    Everything necessary is either the ground or a necessary-kind subject's correlate: no
+    necessary atom, no necessary matter, no third necessary shape. This is the **positive
+    closure** of the audit — C495 showed the ground-only universal is *false*, C496/C497
+    profiled the second necessary being, and this row says the second disjunct is not merely
+    *a* second necessary being but *all* the rest of the necessary realm.
+
+    Unconditional and free: `PROVEN`, no axiom, no hypothesis beyond `NecessaryEntity e`. The
+    subject arm is the partition the kernel already interprets (C410, `.mpr` direction — the
+    kernel documents `NecessarySubject s` and `NecessaryEntity (EntityOf s)` as the same
+    proposition); the ground arm is `rfl`; the atom arm is C515. Cases analysis on the closed
+    `Entity` inductive, the same idiom as C508 (whose row the author filed in the TRINITY
+    lote as `C508`; the ids C515–C517 here are the NECESSARY follow-on).
+
+    What it does **not** say: nothing about *who* the ground is, and nothing about inhabiting
+    the necessary kind. The first disjunct is read as the ground whatever the reader takes the
+    ground to be — a principle, or (per the author's position of 2026-09-29) a Trinity; the
+    theorem forces neither reading. Contingent-kind inhabitation remains the open mirror and
+    is untouched here.
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
+theorem necessary_exhaustion (e : Entity) (hNec : NecessaryEntity e) :
+    e = Entity.ofGround ∨ ∃ s : Subject, NecessarySubjectKind s ∧ e = EntityOf s := by
+  cases e with
+  | ofSubject s =>
+      exact Or.inr ⟨s, (kinds_are_the_modal_partition s).mpr hNec, rfl⟩
+  | ofAtom n => exact False.elim (no_necessary_atom n hNec)
+  | ofGround => exact Or.inl rfl
+
+/-- **The necessary realm is the ground and the necessary kind, or nothing (C517).** C516 read
+    as a shape statement: the two disjuncts are exclusive (`ofGround_ne_ofSubject`) and the
+    ground is not itself a subject's correlate, so the closure is a genuine partition of the
+    necessary realm into two genera rather than an overlapping cover. Exclusive, not covering
+    twice: nothing is both the ground and a correlate, in either direction.
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
+theorem necessary_realm_is_two_genera :
+    (∀ e : Entity, NecessaryEntity e → e = Entity.ofGround ∨
+        (∃ s : Subject, NecessarySubjectKind s ∧ e = EntityOf s)) ∧
+    (∀ e : Entity, NecessaryEntity e →
+        (e = Entity.ofGround → ∀ s : Subject, e = EntityOf s → False) ∧
+        (∀ s : Subject, NecessarySubjectKind s → e = EntityOf s → e ≠ Entity.ofGround)) := by
+  refine ⟨necessary_exhaustion, ?_⟩
+  intro e _hNec
+  constructor
+  · intro hGround s hEq
+    exact ofGround_ne_ofSubject s (hEq.symm.trans hGround)
+  · intro s _hKind hEq hGround
+    exact ofGround_ne_ofSubject s (hEq.symm.trans hGround)
+
 -- Axiom footprint audit
 #print axioms necessary_kind_correlate_is_necessary
 #print axioms necessity_is_not_sole_bearer_of_the_ground
+#print axioms no_necessary_atom
+#print axioms necessary_exhaustion
+#print axioms necessary_realm_is_two_genera
 #print axioms the_ground_is_not_the_only_necessary_being
 #print axioms necessary_kind_subject_is_not_transcendent
 #print axioms necessary_kind_subject_lacks_maximal_capacity
 #print axioms necessary_kind_subject_fails_pure_actuality
 #print axioms necessary_kind_subject_is_gapless_operator
 #print axioms the_second_necessary_being_profile
+#print axioms no_necessary_atom
+#print axioms necessary_exhaustion
+#print axioms necessary_realm_is_two_genera
 
 end Logos.NecessaryKindAudit

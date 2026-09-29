@@ -190,3 +190,10 @@ import Logos.GoodDenial
 -- BLOCKED love-lane probe (C503). No axiom changes; the Good stays PROVEN↑
 -- under the single disclosed META bridge C177. Plan of record: `OTHER.md`.
 import Logos.SecondPersonGoodAttempt
+-- The Trinity case (`Logos.DivineAgape`, plan `TRINITY.md`): the conditional
+-- corridor from self-giving Agape to `TrinitarianStructure` (C510) under three
+-- disclosed `Tag: META` axioms (C504–C506), plus the corridor theorems C507–C509.
+-- New abstract sort `DivinePerson` (a `structure`, zero axioms), opaque role
+-- vocabulary, no Γ axiom touched. Stage B: the separations C511–C514 land in
+-- `Logos.TrinitySeparations`.
+import Logos.DivineAgape

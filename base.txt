@@ -1562,6 +1562,96 @@ Identidade hipostática do fundamento com uma pessoa (g = EntityOf s enquanto pe
 Claim D ("sujeito necessário", ∃ s, NecessarySubject s ∧ Person s) — REFUTADO
   (`CountermodelPersonNotNecessary`); `Person → NecessarySubject` permanece simples hipótese
   (`Love.PersonStabilityPrinciple`), nunca teorema.
+**O reino necessário está esgotado (C515–C520, aditado a 2026-09-29, lote NECESSARY; plano `NECESSARY.md`).
+Dez linhas, ZERO axiomas novos — o registo fica 35 → 35.** A auditoria da espécie necessária vinha
+de uma série negativa (C494/C495: a necessidade não é exclusiva do chão; C496/C497: o segundo ser
+necessário carece de transcendência, de capacidade máxima e de acto puro), e o lote acrescenta o
+**fecho positivo**, que é a afirmação de *forma*:
+1. **Nenhum átomo é necessário** (C515, `NecessaryKindAudit.no_necessary_atom`,
+   `{NecessarySubjectKind, Subject, propext}`) — de C323 (o átomo é contingente) mais
+   `necessary_not_contingent` (o necessário nunca é contingente). Sem átomos necessários e sem
+   matéria necessária: nada de-elementar é mundo-rígido.
+2. **O reino necessário está exaurido** (C516, `necessary_exhaustion`, mesma pegada): tudo o que é
+   necessário é o chão **ou** o correlato de um sujeito da espécie necessária. **Gratuito e
+   incondicional** — `PROVEN`, sem axioma e sem hipótese além de `NecessaryEntity e`. C495 tinha
+   provado que o universal «só o chão» é *falso*; C516 diz que o segundo disjuncto não é *um*
+   segundo ser necessário mas *todo o resto*.
+3. **Os dois disjunctos são exclusivos** (C517, `necessary_realm_is_two_genera`): `ofGround ≠
+   EntityOf s` nos dois sentidos, logo é uma partição e não uma cobertura sobreposta.
+4. **Um centro subsistente é um ser necessário** (C518, `DivineAgape.subsisting_centre_is_necessary`,
+   `{NecessarySubjectKind, Subject}`), e **co-subsistência é co-localização** (C519,
+   `co_subsistence_is_co_location`, `{Subject}`).
+5. **Os três centros são necessários, e uma só realidade necessária** (C520,
+   `the_three_centres_are_one_necessary_reality`, `PROVEN↑` sob o dado e a processão do Espírito —
+   o preço é herdado, não novo).
+**A Amarração dos dois lotes, e o que ela NÃO diz.** Por C518/C520 e pelo fecho de C516, o
+`deiformEntity` dos três centros do Ágape satisfaz `NecessaryEntity` e cai na **primeira** disjunção:
+os centros estão no reino necessário, do lado do chão. É o passo que a posição do autor — «o chão
+**é** pessoal» — usaria e antes não tinha: *a Trindade é necessária, e a necessidade é a do chão.*
+**Isto não é consubstantialidade de naturas.** C519 é coincidência de *localização* (duas
+subsistências são a mesma entidade de `Entity`), e é exactamente isso que a linha diz. Partilha de
+natureza, de propriedade e de acto **permanecem não-afirmadas** — não estão no vocabulário do
+sort `DivinePerson`, e nada as supõe. C520 é `PROVEN↑` como C510: repousa nos três axiomas META
+declarados, e o corredor continua a ser um **caso**, não uma dedução.
+**O espelho continua aberto, e é nomeado como tal.** A *habitação do género contingente* é a única
+peça que falta: `necessary_exhaustion` diz a **forma** do reino necessário, nunca que ele esteja
+povoado. Habitar o género contingente seria uma **ponte** («o género contingente está habitado»), não
+uma prova — e por isso continua na lista de «ainda requer prova». Fechar o que a linguagem permite
+deixa a lacuna nomeada mais nítida, não menos: é o registo de que a auditoria de *forma* está
+completa e a de *inhabitação* não.
+**A assimetria registada da retorsão (C521–C524).** A família da retorsão de C93/C94 (a
+necessidade) está agora completa nas duas direcções, com os gémeos da contingência: C521
+(`noContingency_selfRefutes`, `{}`) e C523 (`noContingency_assertable_refutes`,
+`{Initiates, Means, State, Subject}`). **C523 é mais barata do que C94**, porque C521 não paga nada
+— a contingência tem testemunha atómica (`Form.atom 0`, de C95/C96) enquanto a necessidade só tem a
+tautologia da lei do meio excluído (`CL`, em C93). A assimetria estava implícita nas pegadas desde
+C93; está agora escrita, com a razão.
+
+(Nota formal sobre a FORMA do reino necessário, 2026-09-29 — lote NECESSARY, C515–C520;
+plano `NECESSARY.md`; GAPMAP C515–C520, `theorems/T33.txt`): o que Γ sabe do reino
+necessário não é apenas quem o habita, mas também **de que forma é feito**. Três resultados
+novos, **todos PROVEN sem nenhum axioma novo** — o registo fica 35 → 35:
+  (1) **Nenhum átomo é necessário** (`NecessaryKindAudit.no_necessary_atom`, C515,
+      `{NecessarySubjectKind, Subject, propext}` — o `propext` é axiomata fundacional do
+      Lean herdado de C323, não premissa). O átomo é contingente por C323 e o necessário
+      nunca é contingente.
+  (2) **O reino necessário está esgotado** (`necessary_exhaustion`, C516, mesma pegada):
+      `NecessaryEntity e → (e = Entity.ofGround ∨ ∃ s, NecessarySubjectKind s ∧ e = EntityOf s)`.
+      Incondicional, sem hipótese além de `NecessaryEntity e`; por `cases` sobre a indutiva
+      fechada `Entity`, com o braço do sujeito pela partição que o kernel já interpreta
+      (C410) e o do átomo por C515. **Não é matéria necessária, nem cosmos necessário, nem
+      uma terceira forma**: o que é necessário é o chão **ou** o correlato de um sujeito da
+      espécie necessária. Lido com `necessary_realm_is_two_genera` (C517, exclusividade nas
+      duas direcções por `ofGround_ne_ofSubject`), o fecho é uma **partição** e não uma
+      cobertura sobreposta.
+  (3) **A Trindade entra no reino necessário** (`DivineAgape`, C518–C520): um centro
+      subsistente é um ser necessário (C518, `{NecessarySubjectKind, Subject}` — o corolário
+      modal de C508), a co-subsistência é co-localização (C519, `{Subject}`) e os três
+      centros são necessários com uma única realidade necessária (C520, PROVEN↑, herdando o
+      preço do dado do Ágape). Pelo fecho de C516, os centros caem na **primeira** disjunção:
+      a necessidade dos centros é a necessidade do chão.
+  **O que isto NÃO é, e é a ressalva que acompanha cada uma das linhas:** a disjunção
+  `e = Entity.ofGround` **não diz quem é o chão** — o teorema força nem a leitura de um
+  princípio impersonal, nem (pela posição do autor) a de uma Trindade; e a coincidência de
+  C519 é de **localização**, não de natureza: consubstantialidade de naturas, partilha de
+  propriedade e de acto **permanecem não afirmadas**, por não estarem no vocabulário do sort.
+  **O espelho continua aberto e é nomeado como tal:** a *habitação do género contingente*
+  (a WALL 2 de C503) é a única peça que falta, e é dela que a remoção da fronteira depende.
+  Fechar o que a linguagem permite deixa essa lacuna mais nítida, não menos. A Trindade, o
+  amor e o Espírito continuam `DEFERRED` sem argumento (§28/§29): este lote **não** deriva a
+  Trindade e não toca na Encarnação (F8 intacta).
+
+(Nota formal sobre a RETORSÃO do polo contingente, 2026-09-29 — C521–C524; GAPMAP C521–C524):
+  a família da retorsão fica **completa nas duas direcções e nos dois níveis**, e com uma
+  assimetria de preço que merece registo. C521 (`noContingency_selfRefutes`) e C522
+  (`contingency_and_its_denial`) são os gémeos de C93/C94 no polo contingente, e são
+  **`{}`**; C523 (`noContingency_assertable_refutes`) e C524 (`asserting_modal_pair_is_refuted`)
+  são os gémeos assertivos. A assimetria: a contingência tem **testemunha atómica**
+  (`Form.atom 0`, de C95/C96) e por isso custa zero; a necessidade só tem a tautologia da lei
+  do meio excluído (C59) e por isso paga `CL`. Em suma, **a metade contingente da família da
+  retorsão é vocabulary-only, e a metade necessária paga metateoria** — o que é a primeira
+  vez que as pegadas registam uma assimetria que a lógica já impunha.
+
 Teologia forte da eternidade divina (eternidade metafísica "fora de toda a temporalidade",
   sem começo nem cessação para além da rigidez de estágios) — NÃO reivindicada: o que está
   PROVEN é existência mundo-rígida não modulada por estágios (`Everlasting`/`Atemporal`,

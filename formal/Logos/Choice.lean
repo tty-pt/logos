@@ -81,7 +81,7 @@ namespace Logos.Choice
 open Logos.Agency (Subject Means A Act Asserts State Initiates IntentionalSubject Intentional)
 open Logos.Alternatives (Incompatible)
 open Logos.Necessity (Dia Necessity someWorld)
-open Logos.Semantics (Form NecessarilyTrue)
+open Logos.Semantics (Form NecessarilyTrue NecessarilyFalse)
 
 /-
 ### Core Conceptual Distinctions (Preserved Invariants):
@@ -1212,6 +1212,34 @@ theorem noStrongTruth_assertable_refutes (speaker : Subject) :
   intro h
   exact Logos.Semantics.noStrongTruth_selfRefutes h.2
 
+/--No one can assert "there is no contingent content": the act of denying the
+  contingency of content is destroyed by the datum itself (assertive retorsion
+  of C96, completing the retorsion family in the contingent direction, exactly
+  as C94 completed it in the necessary direction).
+
+  **Freeer than C94**: the denial is refuted by C521, whose footprint is empty —
+  C94 had to reach for C93's `CL`-paying tautology witness. So the whole
+  contingent half of the family is priced at vocabulary only, while the
+  necessary half still pays `CL`. The asymmetry is real and worth recording:
+  contingency has an atom witness, necessity does not.
+  Footprint: {Initiates, Means, State, Subject}. -/
+theorem noContingency_assertable_refutes (speaker : Subject) :
+    Asserts speaker (¬ ∃ τ : Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ) → False := by
+  intro h
+  exact Logos.Semantics.noContingency_selfRefutes h.2
+
+/--A speaker who asserts the impossibility of contingent content asserts a
+  falsehood: from C523 and C94, asserting either horn of the modal pair is
+  refuted, so no proposition in the reflexive pair `τ`/`¬τ` — necessary content,
+  contingent content, or their negations — survives being asserted at the
+  world level. The conjunction therefore inherits C94's `CL` and C523's
+  vocabulary: the junction row, not a new price.
+  Footprint: {Classical.choice, Initiates, Means, Quot.sound, State, Subject, propext}. -/
+theorem asserting_modal_pair_is_refuted (speaker : Subject) :
+    (Asserts speaker (¬ ∃ τ : Form, NecessarilyTrue τ) → False) ∧
+      (Asserts speaker (¬ ∃ τ : Form, ¬ NecessarilyTrue τ ∧ ¬ NecessarilyFalse τ) → False) :=
+  ⟨noStrongTruth_assertable_refutes speaker, noContingency_assertable_refutes speaker⟩
+
 /-- Self-denial of choice: an intentional act positing that this very act contains no genuine choice. -/
 def SelfDenialOfChoice (s : Subject) (p : Prop) : Prop :=
   Act s p ∧ (p ↔ ∀ q : Prop, ¬ Chooses s p q)
@@ -1358,6 +1386,8 @@ end Logos.Choice
 #print axioms Logos.Choice.noChoiceField_selfRefutes
 #print axioms Logos.Choice.noSubject_selfRefutes
 #print axioms Logos.Choice.noStrongTruth_assertable_refutes
+#print axioms Logos.Choice.noContingency_assertable_refutes
+#print axioms Logos.Choice.asserting_modal_pair_is_refuted
 #print axioms Logos.Choice.Selects
 #print axioms Logos.Choice.asserts_selects
 #print axioms Logos.Choice.asserts_selects_all_incompatible

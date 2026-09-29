@@ -1940,6 +1940,15 @@
   "Logos.Agency.State",
   "Logos.Agency.Subject"
  ],
+ "Logos.Choice.asserting_modal_pair_is_refuted": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
  "Logos.Choice.asserting_noChoiceField_is_choiceField": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
@@ -2382,6 +2391,12 @@
   "Logos.Agency.Subject"
  ],
  "Logos.Choice.noChoiceField_selfRefutes": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.Choice.noContingency_assertable_refutes": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
   "Logos.Agency.State",
@@ -4046,6 +4061,183 @@
   "Logos.Agency.Subject"
  ],
  "Logos.DirectNormativeRetorsion.sig_model_c_normative_denial_is_impossible": [],
+ "Logos.DivineAgape.AxAgapeEssence": [
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence"
+ ],
+ "Logos.DivineAgape.AxProcessionSpirit": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence",
+  "Logos.DivineAgape.AxProcessionSpirit"
+ ],
+ "Logos.DivineAgape.AxProcessionWord": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence",
+  "Logos.DivineAgape.AxProcessionWord"
+ ],
+ "Logos.DivineAgape.DivinePerson.casesOn": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.DivinePerson.ctorIdx": [],
+ "Logos.DivineAgape.DivinePerson.deiformEntity": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.DivinePerson.mk.inj": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.DivinePerson.mk.injEq": [
+  "propext",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.DivinePerson.mk.noConfusion": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.DivinePerson.mk.sizeOf_spec": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.DivinePerson.noConfusion": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.DivinePerson.noConfusionType": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.DivinePerson.recOn": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.Subsists": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.agape_beloved_is_not_creature": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.agape_entails_tripersonality": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence",
+  "Logos.DivineAgape.AxProcessionSpirit",
+  "Logos.DivineAgape.AxProcessionWord"
+ ],
+ "Logos.DivineAgape.co_subsistence_is_co_location": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.divineReality": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.divine_object_subsists_in_godhead": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.essential_love_has_necessary_object": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence"
+ ],
+ "Logos.DivineAgape.is_divine": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.subsisting_centre_is_necessary": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.the_beloved": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence"
+ ],
+ "Logos.DivineAgape.the_beloved_distinct": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence"
+ ],
+ "Logos.DivineAgape.the_beloved_is_divine": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence"
+ ],
+ "Logos.DivineAgape.the_beloved_subsists": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence"
+ ],
+ "Logos.DivineAgape.the_father": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence"
+ ],
+ "Logos.DivineAgape.the_father_is_divine": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence"
+ ],
+ "Logos.DivineAgape.the_father_subsists": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence"
+ ],
+ "Logos.DivineAgape.the_source_loves_the_beloved": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence"
+ ],
+ "Logos.DivineAgape.the_spirit": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence",
+  "Logos.DivineAgape.AxProcessionSpirit"
+ ],
+ "Logos.DivineAgape.the_spirit_is_divine": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence",
+  "Logos.DivineAgape.AxProcessionSpirit"
+ ],
+ "Logos.DivineAgape.the_spirit_is_spirit": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence",
+  "Logos.DivineAgape.AxProcessionSpirit"
+ ],
+ "Logos.DivineAgape.the_spirit_ne_any_word": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence",
+  "Logos.DivineAgape.AxProcessionSpirit"
+ ],
+ "Logos.DivineAgape.the_spirit_ne_beloved": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence",
+  "Logos.DivineAgape.AxProcessionSpirit",
+  "Logos.DivineAgape.AxProcessionWord"
+ ],
+ "Logos.DivineAgape.the_spirit_ne_father": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence",
+  "Logos.DivineAgape.AxProcessionSpirit"
+ ],
+ "Logos.DivineAgape.the_spirit_subsists": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence",
+  "Logos.DivineAgape.AxProcessionSpirit"
+ ],
+ "Logos.DivineAgape.the_three_centres_are_one_necessary_reality": [
+  "Classical.choice",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence",
+  "Logos.DivineAgape.AxProcessionSpirit"
+ ],
+ "Logos.DivineAgape.trinitarian_inhabitation": [
+  "Classical.choice",
+  "Logos.Agency.Subject",
+  "Logos.DivineAgape.AxAgapeEssence",
+  "Logos.DivineAgape.AxProcessionSpirit",
+  "Logos.DivineAgape.AxProcessionWord"
+ ],
  "Logos.DivineImmutability.CapacityInvariance": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -6986,6 +7178,11 @@
   "Logos.Agency.subjectWill",
   "Logos.MoralFrontierAudit.Evil"
  ],
+ "Logos.NecessaryKindAudit.necessary_exhaustion": [
+  "propext",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
  "Logos.NecessaryKindAudit.necessary_kind_correlate_is_necessary": [
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject"
@@ -7012,6 +7209,11 @@
   "Logos.Agency.Subject",
   "Logos.SemanticFinitude.SemanticFinitude"
  ],
+ "Logos.NecessaryKindAudit.necessary_realm_is_two_genera": [
+  "propext",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
  "Logos.NecessaryKindAudit.necessity_is_not_sole_bearer_of_the_ground": [
   "Logos.Agency.Means",
   "Logos.Agency.NecessarySubjectKind",
@@ -7019,6 +7221,11 @@
   "Logos.Agency.Will",
   "Logos.Agency.subjectWill",
   "Logos.Plurality.necessaryPersonalSubjectExists"
+ ],
+ "Logos.NecessaryKindAudit.no_necessary_atom": [
+  "propext",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
  ],
  "Logos.NecessaryKindAudit.the_ground_is_not_the_only_necessary_being": [
   "Logos.Agency.Means",
@@ -10794,6 +11001,7 @@
   "Classical.choice",
   "Quot.sound"
  ],
+ "Logos.Semantics.contingency_and_its_denial": [],
  "Logos.Semantics.instDecidableEqForm": [],
  "Logos.Semantics.instDecidableEqForm.decEq": [],
  "Logos.Semantics.instDecidableEqTV": [],
@@ -10806,6 +11014,7 @@
   "Classical.choice",
   "Quot.sound"
  ],
+ "Logos.Semantics.noContingency_selfRefutes": [],
  "Logos.Semantics.noStrongTruth_selfRefutes": [
   "propext",
   "Classical.choice",
