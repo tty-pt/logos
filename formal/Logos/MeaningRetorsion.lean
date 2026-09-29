@@ -380,11 +380,28 @@ theorem the_two_denials_cannot_both_be_affirmed :
     * the positive claim still costs a person-datum (C367, conditional) or the bridge
       (`cogito_from_T12`, unconditional) for a subject that is not supplied as input.
 
+    **CORRECTED 2026-09-29 — the earlier version of this witness was incoherent.**
+    It set `EO := True` with `Means := fun _ _ => False` and `DependsOn := fun _ _ => False`,
+    so `EverythingObjective` (`Retorsion.lean:259`) held in a world where **nothing
+    means anything**: the absolute right/wrong order alongside total meaninglessness.
+    That is not a countermodel, it is a contradiction of the FACT — *right and wrong
+    cannot exist in meaninglessness*. The root cause was that `NegativeRetorsionSignature.EO`
+    was an uninterpreted field with no constraint tying objectivity to a meaning-act.
+    The signature now carries `Free` and `objectivity_grounded`
+    (`NegativeRetorsionAudit.lean:65-97`), and **this witness sets `EO := False`**:
+    a world without a being for which meaning can mean has no objective right/wrong
+    order either. That is what "meaningless" has to mean for the world to be coherent,
+    and the incoherent version is now a compile error by design. See
+    `objectivity_cannot_obtain_in_a_meaningless_world`
+    (`NegativeRetorsionAudit.lean:141`) for the `{}` refutation of the incoherent
+    combination. The `{}` footprint, the id and the `COUNTERMODEL` badge are unchanged;
+    only the witness and this gloss are.
+
     Gate B4 enforces this: if the three theorems above ever land without this
     one, the batch stops. Footprint: `{}`. -/
 theorem the_meaningless_world_remains_a_model :
     ∃ (S : NegativeRetorsionSignature), (∃ _s : S.Subject, True) ∧
-      S.NoI ∧ (∀ s : S.Subject, ¬ S.Asserts s S.NoI) := by
+      S.NoI ∧ (∀ s : S.Subject, ¬ S.Asserts s S.NoI) ∧ ¬ S.EO := by
   let S1 : NegativeRetorsionSignature := {
     Subject    := Unit
     Means      := fun _ _ => False
@@ -394,22 +411,29 @@ theorem the_meaningless_world_remains_a_model :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False
-    EO         := True
+    Free       := fun _ => False
+    EO         := False
+    objectivity_grounded := fun h => h.elim
   }
-  refine ⟨S1, ⟨(), trivial⟩, ?_, ?_⟩
+  refine ⟨S1, ⟨(), trivial⟩, ?_, ?_, ?_⟩
   · rintro ⟨_, _p, hMeans⟩
     exact hMeans
   · intro _s hAss
     exact hAss.1.1
+  · exact fun h => h
 
 /-- The two halves read together, as a single machine-checked statement: the
     countermodel's world is a world in which the thesis is true, and the thesis
     cannot be affirmed anywhere — including there. The conjunction is the
     honest form of "the countermodel is wrong".
+
+    The trailing `¬ S.EO` is the correction of 2026-09-29: the meaningless world
+    **denies** the objective right/wrong order rather than preserving it, since a
+    world with no being for which meaning can mean cannot host one.
     Footprint: `{}`. -/
 theorem countermodel_is_a_world_where_the_thesis_is_unutterable :
     (∃ (S : NegativeRetorsionSignature), (∃ _s : S.Subject, True) ∧
-        S.NoI ∧ (∀ s : S.Subject, ¬ S.Asserts s S.NoI)) ∧
+        S.NoI ∧ (∀ s : S.Subject, ¬ S.Asserts s S.NoI) ∧ ¬ S.EO) ∧
       (∀ (S : NegativeRetorsionSignature), S.NoI → ¬ ∃ s : S.Subject, S.Asserts s S.NoI) :=
   ⟨the_meaningless_world_remains_a_model, no_countermodel_can_affirm_the_thesis⟩
 
@@ -441,11 +465,19 @@ C382's world with one field changed — the walk-back of C383's name.
     awaiting a 27th axiom; that framing was wrong, and it is withdrawn.
     `Subject` is a nullary uninterpreted sort, so Γ also cannot name *which*
     subject the model inhabits, but nothing in the retorsion needs it to.
+
+    **CORRECTED 2026-09-29** — same defect as C382, same repair: the earlier
+    witness set `EO := True` in a world with `Means := fun _ _ => False`, i.e. the
+    absolute right/wrong order inside a meaningless world. It now sets `EO := False`
+    and carries `¬ S.EO` explicitly. A world in which the thesis can be *uttered*
+    but nothing can be *meant* is also a world with no objective order. The
+    constraint that forbids the incoherent version is the signature field
+    `objectivity_grounded` (`NegativeRetorsionAudit.lean:65-97`).
     Footprint: `{}`. -/
 theorem the_thesis_is_utterable_though_not_assertable :
     ∃ (S : NegativeRetorsionSignature), (∃ _s : S.Subject, True) ∧
       S.NoI ∧ (∃ s : S.Subject, S.act s S.NoI) ∧
-      (∀ s : S.Subject, ¬ S.Asserts s S.NoI) := by
+      (∀ s : S.Subject, ¬ S.Asserts s S.NoI) ∧ ¬ S.EO := by
   let S1 : NegativeRetorsionSignature := {
     Subject    := Unit
     Means      := fun _ _ => False
@@ -455,13 +487,16 @@ theorem the_thesis_is_utterable_though_not_assertable :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False
-    EO         := True
+    Free       := fun _ => False
+    EO         := False
+    objectivity_grounded := fun h => h.elim
   }
-  refine ⟨S1, ⟨(), trivial⟩, ?_, ⟨(), trivial⟩, ?_⟩
+  refine ⟨S1, ⟨(), trivial⟩, ?_, ⟨(), trivial⟩, ?_, ?_⟩
   · rintro ⟨_, _p, hMeans⟩
     exact hMeans
   · intro _s hAss
     exact hAss.1.1
+  · exact fun h => h
 
 -- ============================================================================
 -- Section 4: the refutation — the no-meaning world is not possible in Γ

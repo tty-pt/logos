@@ -76,6 +76,28 @@ cd .. && python3 scripts/audit_footprints.py && python3 scripts/build_deduction.
 - Lean 4 (no mathlib dependency — removed as unused; no file uses any Mathlib
   lemma. Re-add only if a future formalization truly needs it). Project root `formal/`.
 - Verification command: `lake build` (run from `formal/`).
+- **Meaning-coherence audit for free-signature countermodels (binding, 2026-09-29).**
+  Before any `{}` countermodel is reported, check that it actually instantiates the
+  vocabulary it is supposed to deny. A model that grants an order while denying
+  every act of signification (`Means := fun _ _ => False` alongside `EO := True`)
+  is **not a countermodel** — it is a self-refuting artifact of an uninterpreted
+  signature field, and reporting it overstates the ledger. It was exactly this
+  defect in `NegativeRetorsionSignature` that made C382/C385 read as though they
+  preserved the very order they were built to refute
+  (`investigations/right-and-wrong.md` §4b). The general rule: *check that the
+  model instantiates the vocabulary it denies.*
+- **Signature models are not candidate states (binding, 2026-09-29).** A
+  free-signature countermodel witnesses that a constraint is underivable from a
+  signature; it is never evidence about a state of affairs. Γ’s core vocabulary
+  (`Subject`, `Prop`, `State`, `Means`, `Initiates`) contains no `World` sort, so no
+  expression of Γ denotes a world-state. Reading an inhabitant of a record (M0, M1,
+  M6) as a possible world is a category error — ledgered as C559
+  (`EpistemicNecessity.signature_model_reading_discipline`), which governs every
+  countermodel row.
+- **Alethic discipline (binding, 2026-09-29).** In normative contexts “true” means
+  truth-to-a-subject (`TrueTo`/`Correct`, C562: `Correct → TrueTo → T`), never bare-`T`
+  satisfaction. `T p` is being-the-case and is free; being-true is disclosure and is
+  always to someone. Do not call satisfaction “true” where right/wrong is at issue.
 - Axiom footprint of every claim must be inspected via `#print axioms` and recorded in
   `formal/GAPMAP.md`. Theorem statuses: `PROVEN`, `PROVEN↑` (proven under flagged axioms),
   `AXIOM`, `BLOCKED`, `DEFERRED`.

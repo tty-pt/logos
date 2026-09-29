@@ -1251,6 +1251,77 @@ deixar ler-se como uma refutação do conteúdo. Corolário: o contramodelo M1 �
 refutado como **resposta** (C379/C381, ambos `{}`) e preservado como **modelo**
 (C382). Zero axiomas novos declarados.)
 
+(Nota formal §26, item 3 (bis) — preenchida 2026-09-29, lote EPISTEMIC-NECESSITY.
+O FACT do autor, e desta vez na sua forma inteira, verificada: **nada pode ser
+epistemologicamente certo ou errado sem um ser não-mecânico (Free) para quem o
+significado possa significar.** Três linhas novas, `formal/Logos/EpistemicNecessity.lean`,
+todas `PROVEN` a preço de vocabulário, **zero axiomas substântivos novos**, o
+registo inalterado em 35. C553 (`epistemic_right_wrong_requires_a_free_being_for_which_
+meaning_can_mean`) traz a frase do autor com **todas** as suas conjunções
+presentes numa só linha — os pólos `Correct`/`Incorrect` são significáveis
+(`Means` de **ambos**, a leitura a dois níveis do mesmo ato, não uma ponte), manter
+ambos é escolha livre entre eles, e a vontade é individuada para que o ser seja
+pessoa. É projeção de C140 (`claims_normative_correctness_derives_free_will`,
+`NormativeOrder.lean`, já `{}` em substância) mais `freeWill_implies_person`: o
+leitor deixa de ter de montar a frase à mão a partir de C140 e C222. C554
+(`the_epistemic_dependence_runs_both_ways`) declara as **duas** setas como teoremas
+distintos com pegadas distintas — a da necessidade (C140) e a da fundamentação
+(C527) — o que é a resposta verificada à nota *Two directions, not one* do
+README: o que não é decidível pela máquina é a leitura *interpretativa*
+da conjunção como ontologia, e C554 **não a afirma**. C555 tira o FACT da
+forma pontual para a existencial. **Restrição de honestidade vinculativa:** o
+antecedente — a postura epistémica — **fica** nas três. Nada em Γ mostra
+que ela obtenha, e este lote não o tenta; **um teorema condicional não é uma
+afirmação incondicional**, e nenhuma das três linhas ç vestida como se
+fosse. A forma **incondicional** do mesmo princípio é de outra espécie e vive
+do outro lado: é uma restrição sobre mundos, e não um teorema em Γ. C556
+(`epistemic_order_requires_a_free_meaning_being`) fecha-a do lado `T`/`IsFalse` por
+`order_needs_a_meaning_being`, um campo de assinatura; e do lado
+`Correct`/`Incorrect`, C382/C385 perderam a testemunha que afirmava a ordem objectiva
+num mundo onde `Means := fun _ _ => False`. Um mundo onde o certo e o errado obtêm sem
+ser não-mecânico algum para quem o significado possa significar **agora é um
+erro de compilação** — ver §0.6 e a correção de 2026-09-29. Zero
+axiomas novos declarados; preço úmico, `will_individuation` (vocabulário).
+
+**O dado do acto é necessário, não estipulado (C557, 2026-09-29).** O argumento do
+autor, e cada passo numa linha verificada: (1) o certo e o errado não podem existir
+sem significado (C556 + a reparação das assinaturas); (2) o significado não pode
+existir sem uma pessoa livre (`order_needs_a_meaning_being`); (3) uma pessoa livre
+depende do dado do acto — C557 (`epistemic_order_makes_the_act_datum_necessary`):
+se a ordem epistémica obtém, alguém actua, a `{Initiates, Means, State, Subject}`
+— vocabulário, sem nem `CL`; (4) logo o dado do acto é **entra como consequência**,
+e não como premissa. Disponível porque a postura **contém** o acto
+(`ClaimsNormativeCorrectness s p := Act s p ∧ ⋅`, `NormativeOrder.lean:168`):
+o acto é o primeiro conjuncto da própria postura. **Correcção de linguagem,
+vinculativa:** a palavra *preço* está retirada desta direcção — preço é o que
+se paga por uma conclusão que não se deriva, e aqui o dado deriva-se. Ler
+`performative_act_datum` (C454, `Tag: TRANS`) como o preço do argumento do autor era
+errado; a rota da ordem não o invoca. A cadeia fica `{}` de ponta a ponta: ordem
+(C557) → escolha entre os pólos, cujo `Incompatible (Correct s p) (Incorrect s p)`
+é **derivado** (`NormativeOrder.lean:136`) e não assumido (C140) → `FreeWill` →
+`Person` (C553). Axiomas substantivos nesta direcção: **nenhum**. O que continua a
+pagar C454 é só o `∃ s, Act s p` **incondicional** — outra questão, que fica
+aberta nos seus próprios termos (`F1bUncond` continua `BLOCKED`).
+
+**O mundo vazio é ininteligível, não por verificar (C558–C561, 2026-09-29).** O
+vocabulário nuclear de Γ não tem nenhum sort `World`: "o mundo vazio obtém?" não
+tem valor de verdade. Um modelo de assinatura nunca é um estado candidato (C559).
+C558: a negação do mundo vazio, vozeada como juízo, exige um **Sujeito Livre**
+(`FreeWill` por C140, `Person`, `Act` — e a tese morre pela C57). Duas camadas: (1)
+o sujeito, concedido por qualquer negador, determinista ou livre — até uma coisa
+determinista que negue precisa de um sujeito; (2) o realmente Livre (Tier9, livre do
+determinismo: poder-ter-assentado-de-outro-modo + fonte autoral), requisito do autor
+sobre o juízo genuíno, registado com a sua independência da base de Γ.
+C560 (`{}`, contrapositiva de C49): sem significado, sem certo/errado. C561: sem
+sujeito que signifique, sem certo/errado epistémico em lado nenhum.
+
+**Ser-verdadeiro é ser-verdadeiro *para* (C562, 2026-09-29).** `TrueTo s p :=
+Means s p ∧ T p`: o ser-o-caso (`T`) é livre, o ser-verdadeiro é desvelamento para
+alguém. Cadeia `Correct → TrueTo → T` — o correto implica o verdadeiro-para, este
+implica o verdadeiro, e as conversas falham. Três camadas (ser-o-caso / ser-verdadeiro /
+julgar bem), cada uma com o seu requisito. Disciplina: "verdadeiro" em contexto
+normativo é `TrueTo`/`Correct`; a satisfação nua não se chama verdade.)
+
 (Nota formal §26, verbos — preenchida 2026-09-27, lote MEANING-RETORSION. A
 distinção acima é entre *afirmação* e *conteúdo*; falta a distinção entre
 *afirmar* e *afirmar correctamente*, e é a que o texto do verso exige. Todo o

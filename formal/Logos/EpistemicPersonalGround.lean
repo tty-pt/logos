@@ -50,7 +50,9 @@ What this does NOT claim, each verified against the source:
   (iv)  the Person → ground direction of C527 is **stance-guarded**: `Person s`
         alone does NOT pin the pole pair (see the theorem's own docstring).
   (v)   C528 is a FREE-signature separation, not a model of Γ, and not a claim
-        that the epistemic order is unreal.
+        that the epistemic order is unreal. (Discipline now ledgered as C559,
+        `EpistemicNecessity.signature_model_reading_discipline`, which governs
+        this module and `NegativeRetorsionAudit` alike.)
   (vi)  C228 (`normative_ground_is_personal`) stays BLOCKED. That is the
         **entity-level** relation `GenericGroundsRightWrong g → PersonalEntity g`;
         this module is **subject-level** and does not discharge it.
@@ -202,37 +204,78 @@ namespace Model
 /-- The free signature of the separation: a subject sort, a content sort, a truth
     and a falsity predicate, a grounding predicate, and the three facts the
     separation turns on — the epistemic order, its non-vacuity, and the absence
-    of any ground. Footprint: `{}`. -/
+    of any ground. Footprint: `{}`.
+
+    **The last field, `order_needs_a_meaning_being`, is the FACT (2026-09-29).**
+    `TrueAt`/`FalseAt` are the propositional right/wrong order — the `T`/`IsFalse`
+    half of the author's scope decision — and before this field the signature tied
+    them to nothing: `M` set `Grounds := False` and the order still obtained, which
+    is a world in which something is right and something is wrong with no being for
+    which anything can mean. The field excludes exactly that assignment, by the same
+    argument as `NegativeRetorsionSignature.objectivity_grounded`
+    (`NegativeRetorsionAudit.lean:65-97`). It constrains witnesses, not premises of
+    Γ, so the register does not move. Footprint: `{}`. -/
 structure Signature where
   Subject : Type
   Content : Type
   TrueAt : Content → Prop
   FalseAt : Content → Prop
   Grounds : Subject → Prop
+  Means : Subject → Content → Prop
+  Free : Subject → Prop
   epistemic_order : ∀ c, TrueAt c ∨ FalseAt c
   right_wrong_not_vacuous : (∃ c, TrueAt c) ∧ (∃ c, FalseAt c)
   no_personal_ground : ¬ ∃ s, Grounds s
+  order_needs_a_meaning_being :
+    (∃ c, TrueAt c) → ∃ s, Free s ∧ ∃ c, Means s c
 end Model
 
 /-- The separating model: `Content := Bool` decides bivalence, `Grounds := False`
-    leaves the ground sort empty. -/
+    leaves the ground sort empty.
+
+    `Free`/`Means` supply the being the order requires, and `Grounds := False`
+    records that it does not *ground* anything. The separation is therefore
+    **not** "the order obtains in a world with no being" — that is now
+    unrepresentable — but "the being that the order requires need not be a ground".
+    Both are genuine, and the second is the weaker, honest claim. -/
 def M : Model.Signature where
   Subject := Unit
   Content := Bool
   TrueAt := fun c => c = true
   FalseAt := fun c => c = false
   Grounds := fun _ => False
+  Means := fun _ _ => True
+  Free := fun _ => True
   epistemic_order := fun c => by cases c <;> first | exact Or.inl rfl | exact Or.inr rfl
   right_wrong_not_vacuous := ⟨⟨true, rfl⟩, ⟨false, rfl⟩⟩
   no_personal_ground := fun h => by obtain ⟨_, hg⟩ := h; exact hg
+  order_needs_a_meaning_being := fun _ => ⟨(), trivial, true, trivial⟩
 
 /-- Both halves, at `{}`: the epistemic order is real and non-vacuous, and the
     personal ground is empty. The conjunction C151 asserts is therefore a
     conjunction of independent facts, not a derivation between them.
+
+    **RE-WORDED 2026-09-29 (author's scope decision).** This is *not* a claim that
+    the epistemic order can obtain in a world without a being for which meaning
+    can mean — the signature field `order_needs_a_meaning_being` makes that
+    assignment inadmissible. It is a separation **within the signature**: the order
+    and the *ground* are independent, because the being the order requires is not
+    the same as a being that grounds. The two statements are not in tension; the
+    first is the FACT and the second is this row.
     Footprint: `{}`. -/
 theorem epistemic_order_without_personal_ground :
     (∀ c : Bool, (c = true) ∨ (c = false)) ∧ ¬ ∃ _ : Unit, False :=
   ⟨M.epistemic_order, M.no_personal_ground⟩
+
+/-- The FACT on the propositional side, at `{}`: the `T`/`IsFalse` order, once
+    non-vacuous, entails a non-mechanical being for which meaning can mean.
+    The `T`/`IsFalse` counterpart of C140, and the row that discharges the
+    "meaningfulness" half of the author's scope decision at the propositional
+    level rather than only at the judgmental one.
+    Footprint: `{}`. -/
+theorem epistemic_order_requires_a_free_meaning_being :
+    ∀ M : Model.Signature, ∃ s : M.Subject, M.Free s ∧ ∃ c : M.Content, M.Means s c :=
+  fun M => M.order_needs_a_meaning_being M.right_wrong_not_vacuous.1
 
 end Logos.EpistemicPersonalGround
 
@@ -242,8 +285,11 @@ end Logos.EpistemicPersonalGround
   C526 `{Initiates, Means, State, Subject, Will, subjectWill, will_individuation}`
   C527 the union of the two
   C528 `{}`
+  C556 `{}` (`epistemic_order_requires_a_free_meaning_being`, the propositional
+  half of the FACT, added 2026-09-29 with `Model.Signature.order_needs_a_meaning_being`)
 -/
 #print axioms Logos.EpistemicPersonalGround.epistemic_polarity_is_personally_grounded
 #print axioms Logos.EpistemicPersonalGround.epistemic_ground_is_personal
 #print axioms Logos.EpistemicPersonalGround.the_person_grounds_the_epistemic_right_wrong
 #print axioms Logos.EpistemicPersonalGround.epistemic_order_without_personal_ground
+#print axioms Logos.EpistemicPersonalGround.epistemic_order_requires_a_free_meaning_being

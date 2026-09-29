@@ -1,0 +1,156 @@
+T36 — O FACT, POR INTEIRO: NADA PODE SER EPISTEMOLOGICAMENTE CERTO OU ERRADO SEM
+UM SER NÃO-MECÂNICO PARA QUEM O SIGNIFICADO POSSA SIGNIFICAR (C553–C556)
+======================================================================
+2026-09-29. Lote EPISTEMIC-NECESSITY. **Zero axiomas novos** — o registo fica
+35 → 35 (17 VOCAB / 18 substantivos). O objecto do lote **não** é provar nada
+novo: C140 já era `{}` em substância. É tornar a frase do autor **impossível de
+ignorar** — escrever numa única linha, com preços explícitos, aquilo que o leitor
+tinha de montar à mão a partir de C140 e C222, e responder com a máquina à nota
+*Two directions, not one* do README.
+
+O que o ledger tinha, e o que não tinha
+----------------------------------------------------------------------
+A frase do autor aparecia no README em **três** sítios gerados — o pilar 2 da
+Arquitectura (`README.md:20`), o antecedente da Rota A (`:35`), o preço (`:38-41`) e
+a linha de atributo *Personal — the epistemic sibling* (`:1879`) — mas **C140 em si
+nunca aparecia como linha da cadeia com badge**. Só surgia dentro da narração de
+tácticas (`:753`, `:820`, `:838`). O resultado era assimétrico e enganador: a seta
+de **fundamentação** tinha linha própria (C525–C528, T35), e a seta de
+**necessidade** — a que o autor chama de FACT — não tinha nenhuma. Um leitor
+racional podia concluir que a necessidade era matéria de fé.
+
+**Stage A — visibilidade** (`formal/Logos/EpistemicNecessity.lean`, módulo novo)
+- C553 `epistemic_right_wrong_requires_a_free_being_for_which_meaning_can_mean` —
+  **o FACT, com todas as conjunções numa só afirmação.** Os pólos epistemológicos
+  são *constituídos* por um acto de significar: `Means s (Correct s p) ∧ Means s
+  (Incorrect s p)`, e a leitura correcta é a de **dois níveis do mesmo acto**, não
+  a de uma ponte entre níveis. Manter ambos os pólos é escolha livre entre eles
+  (C140), e a vontade individuada é o que faz do ser uma pessoa.
+  **Preço:** `{Initiates, Means, State, Subject, Will, subjectWill,
+  will_individuation, CL}` — `CL` é a metaluógica do próprio Lean, e a única lei
+  nomeada é `will_individuation`, que é VOCAB. **Zero substântivos.**
+- C554 `the_epistemic_dependence_runs_both_ways` — as **duas** setas como teoremas
+  distintos e com pegadas distintas: necessidade (C140) e fundamentação (C527). É a
+  resposta verificada à nota *Two directions, not one*: o que **não** é decidível
+  pela máquina é a leitura *interpretativa* da conjunção como ontologia (a seta `▼`
+  descendente de C527), e **esta linha não a afirma** — afirma apenas que ambas as
+  implicações são teoremas, que é exactamente o que se convida o leitor a não crer.
+- C555 `epistemic_normativity_somewhere_yields_a_free_being` — a forma **existencial**.
+  Tira o FACT da forma pontual (onde `s` é fornecido como entrada) sem descarregar o
+  antecedente.
+
+**A restrição de honestidade que vincula as três**
+----------------------------------------------------------------------
+O antecedente — a **postura epistémica** — **fica** nas três linhas, e nenhuma delas
+é vestida como incondicional. Nada em Γ mostra que a postura obtenha, e este lote
+não o tenta: `ClaimsNormativeCorrectness` é a postura, não um pressuposto auxiliar.
+**Um teorema condicional não é uma afirmação incondicional**, e a linha que o
+dissesse seria uma mentira de badge, não uma prova mais forte. O que Γ oferece são
+duas coisas distintas e ambas verificadas: a **forma** do FACT, condicional
+(C553–C555) e a **impossibilidade do mundo** que o nega (C556, e a reparação de
+C382/C385 em T35/§0.6). Derivar e habitar são perguntas diferentes.
+
+**Stage B — a forma incondicional, que é de outra espécie** (C556)
+C556 `epistemic_order_requires_a_free_meaning_being` fecha o FACT do lado
+`T`/`IsFalse`, que o texto herdado só fechava no nível judicativo
+(`Correct`/`Incorrect`). Não é uma ponte nova em Γ: é o mesmo argumento de campo
+de assinatura de C140, instanciado ao nível proposicional, e sai a `{}`. O campo
+`order_needs_a_meaning_being` torna **inadmissível** o mundo em que a ordem obtém
+sem ser não-mecânico para quem o significado possa significar — que é a correção do
+autor, *o certo e o errado não podem existir no sem-significado*, feita erro de
+compilação. Do lado deôntico, a mesma correção descrita em
+`NIHILISM_DIE.md` §11.2: as **vinte** testemunhas de mundo sem-significado
+re-escritas — `EO := False` nos que nada significam, e `Free`/`Means`/`EO := True`
+com uma Discharge explícita nos que têm ser não-mecânico algum. Isto é o fecho do §7 do
+plano, não uma afirmação nova: a **forma incondicional do FACT é uma restrição
+sobre mundos, e vive nos campos de assinatura**, não num teorema de Γ.
+
+O preço, lido nas contagens
+----------------------------------------------------------------------
+Nenhuma linha do lote paga um axioma substantivo novo; a única lei nomeada é
+`will_individuation` (VOCAB), e `CL` é a metaluógica do Lean. *Vocabulary-only*
+283 → **286** (+3: C553, C554, C555), *truly axiom-free* 59 → **60** (+1: C556),
+`CL`-only e `PROVEN↑` **não se movem**. A previsão de pegada de C555 no plano
+(`{Initiates, Means, State, Subject, CL}`) estava **errada** e foi corrigida pela
+auditoria: `Person` traz `Will`, `subjectWill` e `will_individuation`, que
+`FreeWill` sozinho não traz — mas a *bucket* (vocabulário) não muda, e é isso que a
+classificação lê. Derivar, não classificar à mão: a contagem é o script, a célula é
+a auditoria.
+
+Ver: `formal/GAPMAP.md` (C553–C556, e a correcção de C382/C383/C385/C528 de
+2026-09-29), `formal/Logos/EpistemicNecessity.lean` (módulo novo, Stage A),
+`formal/Logos/EpistemicPersonalGround.lean` (C556, C528 e a sua reparação),
+`formal/Logos/NegativeRetorsionAudit.lean` (o campo `objectivity_grounded`, e a
+recusa por compilação da testemunha antiga), `formal/Logos/NormativeOrder.lean`
+(C140, TruthNorm), `base.txt` §26 item 3 (bis), `README.md` (as cinco superfícies
+de leitura, geradas) e `NIHILISM_DIE.md` §11 (as cinco correcções do kernel ao
+plano, incluindo a que este parágrafo acaba de registar).
+
+O DADO DO ACTO É NECESSÁRIO, NÃO ESTIPULADO (C557, 2026-09-29)
+----------------------------------------------------------------------
+O argumento do autor, em quatro passos, e cada passo numa linha verificada:
+
+1. o certo e o errado não podem existir sem significado (C556 + a reparação das assinaturas);
+2. o significado não pode existir sem uma pessoa livre;
+3. uma pessoa livre depende do dado do acto — **agora C557**
+   (`epistemic_order_makes_the_act_datum_necessary`): se a ordem epistémica obtém,
+   alguém actua, a `{Initiates, Means, State, Subject}` — vocabulário, sem nem `CL`;
+4. logo o dado do acto é necessário — e a cadeia fica `{}` de ponta a ponta: ordem →
+   acto (C557) → escolha entre os pólos (C140, cujo `Incompatible (Correct s p)
+   (Incorrect s p)` é **derivado** em `NormativeOrder.lean:136`, não assumido) →
+   `FreeWill` → `Person` (C553).
+
+C557 é uma linha porque a postura **contém** o acto: `ClaimsNormativeCorrectness s p
+:= Act s p ∧ Means s (Correct s p) ∧ Means s (Incorrect s p)` — o acto é o primeiro
+conjuncto da própria postura, não uma premissa separada. A consequência é de linguagem,
+e é vinculativa: a palavra *preço* está retirada desta direcção. Preço é o que se
+paga por uma conclusão que não se deriva; aqui o dado deriva-se. Ler
+`performative_act_datum` (C454, `Tag: TRANS`) como o preço do argumento do autor era
+errado — a rota da ordem não o invoca. O que continua a pagar C454 é só o
+`∃ s, Act s p` **incondicional**, que é outra questão: o FACT é uma afirmação de
+necessidade, não de existência incondicional. Por isso o *vocabulary-only* move
+286 → **287** e o *axiom-free* não se mexe: C557 é vocabulário, sem nem `CL`.
+
+A forma pontual, `the_epistemic_stance_is_an_act`, fica na cadeia como corolário —
+a postura **É** um acto, não uma ponte para um: quem está na postura já actuou.
+
+O MUNDO VAZIO É ININTELIGÍVEL, NÃO POR VERIFICAR (C558–C561, 2026-09-29)
+----------------------------------------------------------------------
+O vocabulário nuclear de Γ é `Subject`, `Prop`, `State`, `Means`, `Initiates` — não
+há nenhum sort `World`, logo nenhuma expressão de Γ denota um estado-mundo. "O mundo
+vazio obtém?" não tem valor de verdade; é a pergunta errada. Um modelo de assinatura
+(M0, M1, M6) é um modelo de um **fragmento com uma restrição**, nunca um estado
+candidato — C559 (`signature_model_reading_discipline`, `def` de apresentação,
+precedente C552). M0 satisfaz `NoI` e não diz nada sobre estado algum.
+
+C558 (`empty_world_denial_voiced_as_judgment_requires_a_free_subject`): a negação
+do mundo vazio, vozeada como juízo, exige um Sujeito Livre — `FreeWill` por C140,
+`Person` por `freeWill_implies_person`, `Act` por `claims_normative_correctness_is_act`
+— e a tese morre na sua própria performance (C57). Duas camadas, por ordem: (1) o
+sujeito é concedido por *qualquer* negador, determinista ou livre — até uma coisa
+determinista que negue já precisa de um sujeito, porque negar exige asserir; o
+determinismo não é refúgio da subjetividade, anterior à liberdade. (2) O
+realmente Livre (Tier9) é o requisito do autor sobre o juízo genuíno; a linha deriva
+Tier6 a `{}`-substância e regista Tier9 com a sua independência da base de Γ.
+`M_Deliberator` é o motivo: co-significar incompatíveis não basta, o deliberador
+determinista emite sem julgar.
+
+C560 (`no_meaning_no_correctness`, `{}`): a terceira perna — contrapositiva de C49.
+C561 (`no_subject_who_means_no_epistemic_right_wrong`): a cadeia composta — sem
+sujeito que signifique, sem certo/errado epistémico em lado nenhum. Contagens:
+*vocabulary-only* 287 → **290**; *axiom-free* fica em 60 (C560 é `{Means, Subject}`,
+vocabulário — a máquina teve razão: só pegada vazia é *axiom-free*).
+`F1bUncond` continua `BLOCKED`: pergunta por um mundo povoado, e estas linhas são sobre
+o vazio.
+
+SER-VERDADEIRO É SER-VERDADEIRO *PARA* (C562, 2026-09-29)
+----------------------------------------------------------------------
+`TrueTo s p := Means s p ∧ T p`: o ser-o-caso é livre; o ser-verdadeiro é
+desvelamento, e desvelamento é sempre para alguém. A cadeia `Correct → TrueTo → T`
+é um enfraquecimento atrás do outro — o correto implica o verdadeiro-para, o
+verdadeiro-para implica o verdadeiro, e as conversas falham. Três camadas:
+ser-o-caso (nada exige), ser-verdadeiro (um sujeito que signifique, C49/C560),
+julgar bem (um Sujeito Livre que escolha, C140/C553). Disciplina vinculativa: a
+palavra "verdadeiro" em contexto normativo pertence a `TrueTo`/`Correct`; a
+satisfação nua de `T` não se chama verdade. A prosa P2/C59 fica marcada como linha
+de satisfação, para lote futuro.

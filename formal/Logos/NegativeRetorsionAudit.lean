@@ -22,6 +22,18 @@ Classification taxonomy:
 - `SEMANTIC`: Involves semantic bridge or evaluation principles.
 - `COUNTERMODEL`: Machine-checked model establishing independence / non-entailment.
 - `DISSOLVED`: Elimination of an apparent paradox or category error.
+
+**Discipline (binding, 2026-09-29 — C559, `EpistemicNecessity.signature_model_reading_discipline`).**
+A `COUNTERMODEL` in this file is a witness about the *signature*: it shows a
+constraint is underivable from stated fields. It is never evidence about a *state
+of affairs*. M0 (`Subject := Empty`), M1, M6 and the mechanical-trace model satisfy
+`NoI`, and that is all they do — this record has no field for assertion, stance or
+meaning, so no inhabitant of it is a world, a possible state, or a candidate for
+reality. Γ's core vocabulary (`Subject`, `Prop`, `State`, `Means`, `Initiates`)
+contains no `World` sort, so there is no expression in Γ denoting a world-state at
+all. Reading an inhabitant of this record as a possible world is a category error.
+(Cf. the same discipline at `EpistemicPersonalGround.lean:193`, now cross-linked
+rather than restated.)
 -/
 
 import Logos.Core
@@ -61,7 +73,25 @@ theorem noi_canonical_iff_pointwise : NoI_canonical ↔ NoI_pointwise_canonical 
 -- Part II: General Mathematical Signature for Model-Theoretic Audit
 -- ===========================================================================
 
-/-- Abstract signature for auditing the negative space without presupposing Γ's axioms. -/
+/-- Abstract signature for auditing the negative space without presupposing Γ's axioms.
+
+    The last field, `objectivity_grounded`, is the **FACT** installed as a constraint
+    on worlds: the objective right/wrong order `EO` cannot obtain except where a
+    *non-mechanical* (`Free`) being exists for which meaning can mean. It is the
+    model-level image of `Logos.NormativeOrder.claims_normative_correctness_derives_free_will`
+    (C140), and it is a field of an audit signature — not a premise of Γ — so the
+    axiom register is unaffected.
+
+    **Why this field exists (defect disclosure, 2026-09-29).** `EO : Prop` was an
+    *uninterpreted* field with no constraint tying it to `Means`, so a witness could
+    set `EO := True` together with `Means := fun _ _ => False` and thereby obtain the
+    absolute objective order (`EverythingObjective` follows from `DependsOn := False`)
+    in a world where nothing means anything. The `the_meaningless_world_remains_a_model`
+    and `the_thesis_is_utterable_though_not_assertable` witnesses did exactly that.
+    Such a world is incoherent: right and wrong cannot exist in meaninglessness.
+    The constraint makes it **unrepresentable** — the incoherent witness is now a
+    compile error by design, and `objectivity_cannot_obtain_in_a_meaningless_world`
+    proves at `{}` that a meaning-free world can never ground the order. -/
 structure NegativeRetorsionSignature where
   Subject    : Type
   Means      : Subject → Prop → Prop
@@ -71,7 +101,9 @@ structure NegativeRetorsionSignature where
   DomainItem : Type
   ofProp     : Prop → DomainItem
   DependsOn  : DomainItem → Subject → Prop
+  Free       : Subject → Prop
   EO         : Prop
+  objectivity_grounded : EO → ∃ s : Subject, Free s ∧ ∃ p : Prop, Means s p
 
 namespace NegativeRetorsionSignature
 
@@ -119,6 +151,42 @@ theorem noi_iff_pointwise (S : NegativeRetorsionSignature) :
 
 end NegativeRetorsionSignature
 
+/-- **THE FACT, machine-checked at the model level: right and wrong cannot exist
+    in meaninglessness.**
+
+    A world that admits no being for which anything can mean satisfies `S.NoI`, and
+    the signature's `objectivity_grounded` field then delivers a `Free` subject that
+    means something — which is exactly an `IntentionalSubject`, contradicting `S.NoI`.
+    So no world in this signature can ground the objective right/wrong order while
+    denying all meaning.
+
+    This is the form of *"right and wrong can't exist in meaninglessness"*, and it is
+    what the pre-2026-09-29 witnesses could not be checked against: they set
+    `EO := True` with `Means := fun _ _ => False`, so the order obtained in a
+    meaningless world. They are excluded by the field, not by convention.
+
+    `NoI` is used rather than a bare `∀ s, ¬ ∃ p, Means s p` because it is the
+    signature's own negation of intentionality and unfolds to exactly that.
+
+    `hEO` is the objective right/wrong order *obtaining*; the conclusion is `False`,
+    not a negation, because `NoI` and a grounded `EO` are outright incompatible.
+
+    Classification: DEFINITIONAL. Footprint: `{}`. -/
+theorem objectivity_cannot_obtain_in_a_meaningless_world
+    (S : NegativeRetorsionSignature) (hNoI : S.NoI) (hEO : S.EO) : False := by
+  obtain ⟨s, _, p, hMeans⟩ := S.objectivity_grounded hEO
+  exact hNoI ⟨s, p, hMeans⟩
+
+/-- The same fact in the direction the reader cares about: the objective order
+    entails the existence of a non-mechanical being for which meaning can mean.
+    The mirror image of the previous row, stated over the whole signature class.
+
+    Classification: DEFINITIONAL. Footprint: `{}`. -/
+theorem objectivity_grounded_yields_a_free_meaning_being
+    (S : NegativeRetorsionSignature) (hEO : S.EO) :
+    ∃ s : S.Subject, S.Free s ∧ ∃ p : Prop, S.Means s p :=
+  S.objectivity_grounded hEO
+
 -- ===========================================================================
 -- Level 0: Bare Ontological Negation
 -- ===========================================================================
@@ -143,7 +211,9 @@ theorem level0_model_M0_empty_subject_satisfies_noi :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ s => by cases s
-    EO         := True
+    Free       := fun s => by cases s
+    EO         := False
+    objectivity_grounded := fun h => h.elim
   }
   have hNoI : S0.NoI := by
     rintro ⟨s, _⟩
@@ -165,7 +235,9 @@ theorem level0_model_M1_inanimate_universe_satisfies_noi :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False
-    EO         := True
+    Free       := fun _ => False
+    EO         := False
+    objectivity_grounded := fun h => h.elim
   }
   have hExists : ∃ _s : S1.Subject, True := ⟨(), trivial⟩
   have hNoI : S1.NoI := by
@@ -304,7 +376,9 @@ theorem unassertability_does_not_imply_falsity :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ s => by cases s
-    EO         := True
+    Free       := fun s => by cases s
+    EO         := False
+    objectivity_grounded := fun h => h.elim
   }
   have hNoI : S0.NoI := by
     rintro ⟨s, _⟩
@@ -367,7 +441,9 @@ theorem level3_act_noi_consistent_with_false_noi :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False
+    Free       := fun _ => True
     EO         := True
+    objectivity_grounded := fun _ => ⟨(), trivial, True, trivial⟩
   }
   have hAct : S_act.Act () S_act.NoI := ⟨trivial, (), (), trivial⟩
   have hP : S_act.P := ⟨(), S_act.NoI, trivial⟩
@@ -417,7 +493,9 @@ theorem level4_proof_occurrence_without_subject :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ s => by cases s
-    EO         := True
+    Free       := fun s => by cases s
+    EO         := False
+    objectivity_grounded := fun h => h.elim
   }
   let cert := FormalProofCert.axiomStep S0.NoI
   have hConc : CertConclusion cert = S0.NoI := rfl
@@ -441,7 +519,9 @@ theorem level4_mechanical_presentation_without_intentionality :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False
-    EO         := True
+    Free       := fun _ => False
+    EO         := False
+    objectivity_grounded := fun h => h.elim
   }
   have hEmit : ∃ s : S_mech.Subject, S_mech.act s S_mech.NoI := ⟨(), trivial⟩
   have hNoI : S_mech.NoI := by
@@ -656,7 +736,9 @@ theorem countermodel_neg_a17_does_not_imply_noi :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False -- objective realism: propositions depend on no subject!
+    Free       := fun _ => True
     EO         := True
+    objectivity_grounded := fun _ => ⟨(), trivial, True, trivial⟩
   }
   have hNegA17 : Neg_A17 S_realist := by
     rintro ⟨_, _, hDep⟩
@@ -680,7 +762,9 @@ theorem countermodel_neg_no_thinker_eo_does_not_imply_noi :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False
+    Free       := fun _ => True
     EO         := True
+    objectivity_grounded := fun _ => ⟨(), trivial, False, rfl⟩
   }
   have hNoEO : Neg_NoThinkerEO S_math := by
     rintro ⟨u, hEq⟩
@@ -704,7 +788,9 @@ theorem countermodel_neg_a17_compatible_with_asserting_eo :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False
+    Free       := fun _ => True
     EO         := True
+    objectivity_grounded := fun _ => ⟨(), trivial, True, trivial⟩
   }
   have hNegA17 : Neg_A17 S_assert := by
     rintro ⟨_, _, hDep⟩
@@ -784,7 +870,9 @@ theorem converse_trap_unmeant_does_not_imply_noi :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False
+    Free       := fun _ => True
     EO         := True
+    objectivity_grounded := fun _ => ⟨(), trivial, True, rfl⟩
   }
   have hP : S_trap.P := ⟨(), True, rfl⟩
   have hNotNoI : ¬ S_trap.NoI := fun hNoI => hNoI hP
@@ -826,7 +914,9 @@ theorem converse_trap_P_does_not_imply_means_noi :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False
+    Free       := fun _ => True
     EO         := True
+    objectivity_grounded := fun _ => ⟨(), trivial, True, rfl⟩
   }
   have hP : S_trap.P := ⟨(), True, rfl⟩
   have hNotNoI : ¬ S_trap.NoI := fun hNoI => hNoI hP
@@ -923,7 +1013,9 @@ theorem converse_step2_fails :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False
+    Free       := fun _ => True
     EO         := True
+    objectivity_grounded := fun _ => ⟨(), trivial, True, trivial⟩
   }
   have hNoAct : ∀ s : S_contemplate.Subject, ¬ S_contemplate.Act s S_contemplate.NoI := by
     rintro s ⟨_, w, _, _⟩
@@ -949,7 +1041,9 @@ theorem converse_step3_fails :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False
+    Free       := fun _ => True
     EO         := True
+    objectivity_grounded := fun _ => ⟨(), trivial, True, trivial⟩
   }
   have hP : S_act.P := ⟨(), True, trivial⟩
   have hNotNoI : ¬ S_act.NoI := fun hNoI => hNoI hP
@@ -1000,7 +1094,9 @@ theorem model_M0_specs :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ s => by cases s
-    EO         := True
+    Free       := fun s => by cases s
+    EO         := False
+    objectivity_grounded := fun h => h.elim
   }
   refine ⟨S0, ?_, ?_, ?_, ?_, ?_⟩
   · rintro ⟨s, _⟩; cases s
@@ -1027,7 +1123,9 @@ theorem model_M1_specs :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False
-    EO         := True
+    Free       := fun _ => False
+    EO         := False
+    objectivity_grounded := fun h => h.elim
   }
   refine ⟨S1, ⟨(), trivial⟩, ?_, ?_, ?_, ?_⟩
   · rintro ⟨_, _, hm⟩; exact hm
@@ -1052,7 +1150,9 @@ theorem model_M2_specs :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False
+    Free       := fun _ => True
     EO         := True
+    objectivity_grounded := fun _ => ⟨(), trivial, True, rfl⟩
   }
   have hP : S_trap.P := ⟨(), True, rfl⟩
   have hNotNoI : ¬ S_trap.NoI := fun hNoI => hNoI hP
@@ -1112,7 +1212,9 @@ theorem model_M6_specs :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ s => by cases s
-    EO         := True
+    Free       := fun s => by cases s
+    EO         := False
+    objectivity_grounded := fun h => h.elim
   }
   let cert := FormalProofCert.axiomStep S0.NoI
   have hConc : CertConclusion cert = S0.NoI := rfl
@@ -1145,7 +1247,9 @@ theorem model_M7_specs :
     DomainItem := Unit
     ofProp     := fun _ => ()
     DependsOn  := fun _ _ => False
+    Free       := fun _ => True
     EO         := True
+    objectivity_grounded := fun _ => ⟨(), trivial, True, trivial⟩
   }
   let cert := FormalProofCert.axiomStep S_perf.NoI
   have hConc : CertConclusion cert = S_perf.NoI := rfl
@@ -1253,5 +1357,7 @@ end Logos.NegativeRetorsionAudit
 #print axioms Logos.NegativeRetorsionAudit.regime_M5_is_provably_incoherent
 #print axioms Logos.NegativeRetorsionAudit.model_M6_specs
 #print axioms Logos.NegativeRetorsionAudit.model_M7_specs
+#print axioms Logos.NegativeRetorsionAudit.objectivity_cannot_obtain_in_a_meaningless_world
+#print axioms Logos.NegativeRetorsionAudit.objectivity_grounded_yields_a_free_meaning_being
 #print axioms Logos.NegativeRetorsionAudit.negative_retorsion_master_synthesis
 

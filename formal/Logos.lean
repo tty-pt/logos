@@ -205,3 +205,9 @@ import Logos.TrinitySeparations
 -- `(Correct, Incorrect)` is personal, and the epistemic order needs no ground
 -- (C528, `{}`).
 import Logos.EpistemicPersonalGround
+-- The necessity direction made unmissable (C553-C555): the author's FACT —
+-- "nothing can be epistemologically right or wrong without a non-mechanical
+-- (Free) being for which meaning can mean" — as three badged rows, plus the
+-- propositional `T`/`IsFalse` half (C556). A visibility batch, not a proof
+-- batch: C140 was already `{}`-substance. Zero axioms; register stays 35.
+import Logos.EpistemicNecessity

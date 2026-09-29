@@ -4844,10 +4844,105 @@
  "Logos.Entity.sat_imp": [],
  "Logos.Entity.sat_not": [],
  "Logos.Entity.sat_or": [],
+ "Logos.EpistemicNecessity.TrueTo": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.EpistemicNecessity.being_true_is_being_true_to": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.EpistemicNecessity.empty_world_denial_voiced_as_judgment_requires_a_free_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
+ ],
+ "Logos.EpistemicNecessity.epistemic_normativity_somewhere_yields_a_free_being": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
+ ],
+ "Logos.EpistemicNecessity.epistemic_normativity_somewhere_yields_an_individuated_free_being": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
+ ],
+ "Logos.EpistemicNecessity.epistemic_order_makes_the_act_datum_necessary": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.EpistemicNecessity.epistemic_right_wrong_requires_a_free_being_for_which_meaning_can_mean": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
+ ],
+ "Logos.EpistemicNecessity.no_meaning_no_correctness": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.EpistemicNecessity.no_subject_who_means_no_epistemic_right_wrong": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.EpistemicNecessity.signature_model_reading_discipline": [],
+ "Logos.EpistemicNecessity.the_epistemic_dependence_runs_both_ways": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation"
+ ],
+ "Logos.EpistemicNecessity.the_epistemic_stance_is_an_act": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
  "Logos.EpistemicPersonalGround.M": [],
  "Logos.EpistemicPersonalGround.Model.Signature.Content": [],
  "Logos.EpistemicPersonalGround.Model.Signature.FalseAt": [],
+ "Logos.EpistemicPersonalGround.Model.Signature.Free": [],
  "Logos.EpistemicPersonalGround.Model.Signature.Grounds": [],
+ "Logos.EpistemicPersonalGround.Model.Signature.Means": [],
  "Logos.EpistemicPersonalGround.Model.Signature.Subject": [],
  "Logos.EpistemicPersonalGround.Model.Signature.TrueAt": [],
  "Logos.EpistemicPersonalGround.Model.Signature.casesOn": [],
@@ -4862,6 +4957,7 @@
  "Logos.EpistemicPersonalGround.Model.Signature.noConfusion": [],
  "Logos.EpistemicPersonalGround.Model.Signature.noConfusionType": [],
  "Logos.EpistemicPersonalGround.Model.Signature.no_personal_ground": [],
+ "Logos.EpistemicPersonalGround.Model.Signature.order_needs_a_meaning_being": [],
  "Logos.EpistemicPersonalGround.Model.Signature.recOn": [],
  "Logos.EpistemicPersonalGround.Model.Signature.right_wrong_not_vacuous": [],
  "Logos.EpistemicPersonalGround.epistemic_ground_is_personal": [
@@ -4873,6 +4969,7 @@
   "Logos.Agency.subjectWill",
   "Logos.Agency.will_individuation"
  ],
+ "Logos.EpistemicPersonalGround.epistemic_order_requires_a_free_meaning_being": [],
  "Logos.EpistemicPersonalGround.epistemic_order_without_personal_ground": [],
  "Logos.EpistemicPersonalGround.epistemic_polarity_is_personally_grounded": [
   "propext",
@@ -7639,6 +7736,7 @@
  "Logos.NegativeRetorsionAudit.NegativeRetorsionSignature.DependsOn": [],
  "Logos.NegativeRetorsionAudit.NegativeRetorsionSignature.DomainItem": [],
  "Logos.NegativeRetorsionAudit.NegativeRetorsionSignature.EO": [],
+ "Logos.NegativeRetorsionAudit.NegativeRetorsionSignature.Free": [],
  "Logos.NegativeRetorsionAudit.NegativeRetorsionSignature.Initiates": [],
  "Logos.NegativeRetorsionAudit.NegativeRetorsionSignature.IntentionalSubject": [],
  "Logos.NegativeRetorsionAudit.NegativeRetorsionSignature.Means": [],
@@ -7660,6 +7758,7 @@
  "Logos.NegativeRetorsionAudit.NegativeRetorsionSignature.noConfusion": [],
  "Logos.NegativeRetorsionAudit.NegativeRetorsionSignature.noConfusionType": [],
  "Logos.NegativeRetorsionAudit.NegativeRetorsionSignature.noi_iff_pointwise": [],
+ "Logos.NegativeRetorsionAudit.NegativeRetorsionSignature.objectivity_grounded": [],
  "Logos.NegativeRetorsionAudit.NegativeRetorsionSignature.ofProp": [],
  "Logos.NegativeRetorsionAudit.NegativeRetorsionSignature.recOn": [],
  "Logos.NegativeRetorsionAudit.NoI_canonical": [
@@ -7783,6 +7882,8 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.NegativeRetorsionAudit.objectivity_cannot_obtain_in_a_meaningless_world": [],
+ "Logos.NegativeRetorsionAudit.objectivity_grounded_yields_a_free_meaning_being": [],
  "Logos.NegativeRetorsionAudit.performed_denial_gradient": [],
  "Logos.NegativeRetorsionAudit.regime_M5_is_provably_incoherent": [],
  "Logos.NegativeRetorsionAudit.unassertability_does_not_imply_falsity": [],

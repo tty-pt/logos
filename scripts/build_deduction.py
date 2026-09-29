@@ -867,6 +867,28 @@ CHAIN_REQUIRED_DECLS = {
         "C527 — CLAIM D at the epistemic poles, with the direction guarded by `ClaimsNormativeCorrectness`",
     "Logos.EpistemicPersonalGround.epistemic_order_without_personal_ground":
         "C528 — the `{}` separation: the epistemic order is necessary, the foundation is not",
+    "Logos.EpistemicPersonalGround.epistemic_order_requires_a_free_meaning_being":
+        "C556 — the FACT on the `T`/`IsFalse` side: the order, once non-vacuous, needs a Free being for which meaning can mean",
+    "Logos.EpistemicNecessity.epistemic_right_wrong_requires_a_free_being_for_which_meaning_can_mean":
+        "C553 — THE FACT: nothing can be epistemologically right or wrong without a non-mechanical (Free) being for which meaning can mean — C140, zero substantive axioms",
+    "Logos.EpistemicNecessity.the_epistemic_dependence_runs_both_ways":
+        "C554 — both arrows are theorems: the necessity one (C140) and the grounding one (C527), each with its own footprint",
+    "Logos.EpistemicNecessity.epistemic_normativity_somewhere_yields_a_free_being":
+        "C553/C555 — the FACT in the existential form, antecedent kept: it is not merely pointwise, and it is not unconditional either",
+    "Logos.EpistemicNecessity.epistemic_order_makes_the_act_datum_necessary":
+        "C557 — the act datum is NECESSARY, not stipulated: the order needs meaning, meaning needs a Free person, a Free person needs an act",
+    "Logos.EpistemicNecessity.signature_model_reading_discipline":
+        "C559 — a signature model is not a candidate state: a `{}` countermodel witnesses underivability from a signature, never a state of affairs (no `World` sort in Γ)",
+    "Logos.EpistemicNecessity.empty_world_denial_voiced_as_judgment_requires_a_free_subject":
+        "C558 — the empty-world denial voiced as judgment requires a Free Subject (Tier6 derived; Tier9 recorded with independence)",
+    "Logos.EpistemicNecessity.no_meaning_no_correctness":
+        "C560 — the third leg: no meaning, no right/wrong (contrapositive of C49, `{}`)",
+    "Logos.EpistemicNecessity.no_subject_who_means_no_epistemic_right_wrong":
+        "C561 — the chain composed: no subject who means, no epistemic right/wrong",
+    "Logos.EpistemicNecessity.being_true_is_being_true_to":
+        "C562 — being true is being true *to*: the alethic chain Correct → TrueTo → T (truth lives at the subject-indexed layers)",
+    "Logos.EpistemicNecessity.the_epistemic_stance_is_an_act":
+        "C557 — the step, pointwise: the stance's first conjunct IS an act (`ClaimsNormativeCorrectness := Act s p ∧ ⋂`)",
     "Logos.Agency.performative_act_datum":
         "C454 — the TRANS act-datum; the batch's only substantive price",
     "Logos.Agency.some_subject_initiates":
@@ -4943,7 +4965,18 @@ def render_reading_guide() -> list[str]:
     ap("agency grounds Right/Wrong). The kernel proves the one dependence")
     ap("`RightWrong ⇒ Person`; the downward `▼` ontological-grounding arrow is the")
     ap("interpretive reading of that same proved subjunction, not an additional theorem —")
-    ap("the direction is not machine-decidable.")
+    ap("*that reading* is not machine-decidable, and this chart does not claim it is.")
+    ap("")
+    ap("**What is machine-checked is the two implications, each as its own theorem.**")
+    ap("The *necessity* arrow runs the other way from the chart's `▲`: C140")
+    ap("(`claims_normative_correctness_derives_free_will`) derives `FreeWill s` **from** the")
+    ap("epistemic stance at 0 substantive axioms, and C553")
+    ap("(`epistemic_right_wrong_requires_a_free_being_for_which_meaning_can_mean`) puts the whole")
+    ap("sentence in one row — **nothing can be epistemologically right or wrong without a")
+    ap("non-mechanical (Free) being for which meaning can mean**. The *grounding* arrow is C527.")
+    ap("C554 (`the_epistemic_dependence_runs_both_ways`) states both together, with two footprints.")
+    ap("The antecedent is kept in every one of them: a conditional theorem is not an unconditional")
+    ap("claim, and nothing here says the epistemic stance obtains.")
     ap("")
     ap("> **What this proof does and does not show**")
     ap(">")
@@ -5233,7 +5266,9 @@ CLASSICAL_ATTRIBUTES = [
         "checks": [{"type": "decl",
                     "full": "Logos.EpistemicPersonalGround.epistemic_ground_is_personal"}],
         "refs": ["Logos.PersonalGroundOfReality.the_person_supports_the_reality_of_right",
-                 "Logos.EpistemicPersonalGround.epistemic_polarity_is_personally_grounded"],
+                 "Logos.EpistemicPersonalGround.epistemic_polarity_is_personally_grounded",
+                 "Logos.NormativeOrder.claims_normative_correctness_derives_free_will",
+                 "Logos.EpistemicNecessity.epistemic_right_wrong_requires_a_free_being_for_which_meaning_can_mean"],
         "sense": ("`∀ s, (Correct s p ∨ Incorrect s p) → PersonalNormativeGround.RightWrong s`, "
                   "and personhood of that ground follows. **Why this is a separate attribute and "
                   "not the row above restated:** the deontic claim does *not* transfer by unfolding, "
@@ -5242,7 +5277,24 @@ CLASSICAL_ATTRIBUTES = [
                   "so the two live at different levels of the same four-level structure. The sibling's "
                   "full price is declared, not hidden: `will_individuation`, plus `Initiates` and "
                   "`State`, which `Correct`/`Incorrect` pick up through `A s p` where C225 paid neither. "
-                  "Epistemic *correctness* is not moral goodness — see the four-level note in `base.txt`."),
+                  "**The necessity direction points the other way and is machine-checked too:** C140 "
+                  "(`claims_normative_correctness_derives_free_will`) derives `FreeWill s` *from* the "
+                  "epistemic stance at zero substantive axioms, and C553 "
+                  "(`epistemic_right_wrong_requires_a_free_being_for_which_meaning_can_mean`) puts the "
+                  "whole sentence in one row — nothing can be epistemologically right or wrong without "
+                  "a non-mechanical (Free) being for which meaning can mean. This attribute row therefore "
+                  "covers **both** arrows, not only the grounding one: C554 "
+                  "(`the_epistemic_dependence_runs_both_ways`) states them as two theorems with two "
+                  "footprints. The antecedent is kept in all of them — a conditional theorem is not an "
+                  "unconditional claim. Epistemic *correctness* is not moral goodness — see the "
+                  "four-level note in `base.txt`. "
+                  "**No `World` sort, no world-states (C559):** \u0393\u2019s core vocabulary "
+                  "(`Subject`, `Prop`, `State`, `Means`, `Initiates`) contains no `World` sort, so "
+                  "no expression of \u0393 denotes a world-state \u2014 a signature model (M0, M1, M6) is "
+                  "never a candidate state, only a witness about a signature. The empty world is "
+                  "unintelligible as a state, not unchecked: its denial voiced as judgment requires "
+                  "a Free Subject (C558), and without a meaning subject there is no epistemic "
+                  "right/wrong anywhere (C561)."),
     },
     {
         "attribute": "**Psychological personality** (humanoid consciousness, stream of experience)",
@@ -6559,6 +6611,97 @@ TWO_KINDS_STEPS = [
      "signature the epistemic order still holds (non-emptiness and contradiction-freedom) with "
      "*no* personal ground at all. `T`/`IsFalse` are independent of the ground: no ledger line "
      "connects them. `Classical.em` is banned from the countermodel and the build must stay green"),
+    ("L1", "C556", "Logos.EpistemicPersonalGround.epistemic_order_requires_a_free_meaning_being", "decl",
+     "**THE SAME `{}` SEPARATION, READ IN THE OTHER DIRECTION \u2014 `{}`**: C528 above separates the "
+     "order from the *foundation* (nothing grounds it, and that is admissible); this row separates "
+     "it from the *being for which meaning can mean*, and that separation is **closed**. "
+     "`order_needs_a_meaning_being` is a signature constraint, so a world where `T`/`IsFalse` "
+     "obtains with no Free being for which meaning can mean has no inhabitant \u2014 the author's "
+     "correction, *right and wrong can't exist in meaninglessness*, made a compile error. "
+     "Zero substantive axioms: this is C140's signature argument at the `T`/`IsFalse` level, not a "
+     "new bridge in \u0393"),
+    ("L1", "C553", "Logos.EpistemicNecessity.epistemic_right_wrong_requires_a_free_being_for_which_meaning_can_mean", "decl",
+     "**THE FACT, IN ONE STATEMENT \u2014 zero substantive axioms**: nothing can be epistemologically "
+     "right or wrong without a non-mechanical (Free) being for which meaning can mean. The "
+     "epistemic poles are constituted by a meaning-act (`Means` of both `Correct` and `Incorrect`), "
+     "holding both of them is free choice between them, and the will is individuated so the being "
+     "is a person \u2014 C140 plus `freeWill_implies_person`. Every conjunct of the sentence is "
+     "present in **one** row, where a reader previously had to assemble it from C140 and C222 by hand"),
+    ("L1", "C554", "Logos.EpistemicNecessity.the_epistemic_dependence_runs_both_ways", "decl",
+     "**BOTH DIRECTIONS ARE MACHINE-CHECKED, EACH WITH ITS OWN FOOTPRINT**: the necessity arrow "
+     "(C140, the antecedent is the epistemic stance) and the grounding arrow (C527, the being that "
+     "grounds the poles). This is the machine-checked answer to the *Two directions, not one* note: "
+     "the two **implications** are both theorems, so neither direction is a matter of trust. What "
+     "is not machine-decidable is the *interpretive* reading of the conjunction as ontology "
+     "(C527's downward arrow), and this row does not assert it"),
+    ("L1", "C555", "Logos.EpistemicNecessity.epistemic_normativity_somewhere_yields_a_free_being", "decl",
+     "**THE FACT IS NOT MERELY POINTWISE**: if the epistemic stance obtains *somewhere* \u2014 some "
+     "subject claims normative correctness of some content \u2014 a non-mechanical personal being "
+     "exists, and it means both poles. The antecedent is kept and the claim is not made "
+     "unconditional: nothing in \u0393 shows the epistemic stance obtains, and this batch does not "
+     "attempt it. A conditional theorem is not an unconditional claim, and this row is not dressed "
+     "up as one"),
+    ("L1", "C557", "Logos.EpistemicNecessity.epistemic_order_makes_the_act_datum_necessary", "decl",
+     "**THE ACT DATUM IS NECESSARY, NOT STIPULATED — vocabulary-only, no `CL`, zero substantive**: "
+     "if the epistemic order obtains, someone acts. This is step 3 of the author\u2019s argument, "
+     "isolated and machine-checked: the order needs meaning, meaning needs a Free person, a Free "
+     "person needs an act, therefore the act datum is **entailed**. It is one line because the "
+     "stance contains the act — `ClaimsNormativeCorrectness s p := Act s p ∧ Means s (Correct s p) ∧ "
+     "Means s (Incorrect s p)`, so the act is its own first conjunct. **Consequence for the "
+     "wording:** calling `performative_act_datum` (C454, `Tag: TRANS`) a *price* on this direction "
+     "is wrong — a price is what you pay for a conclusion you cannot derive, and this is "
+     "derived. The order route never invokes C454. With this row the necessity chain is `{}` end "
+     "to end: order → act (C557) → choice between the poles (C140, whose `Incompatible (Correct s p) "
+     "(Incorrect s p)` is **derived** at `NormativeOrder.lean:136`, not assumed) → `FreeWill` → `Person` "
+     "(C553). **Not discharged by this row:** the *unconditional* `∃ s, Act s p` still rests on C454, "
+     "and `F1bUncond` stays `BLOCKED` on `rejectedHornCoMeant`. Those are statements of the form "
+     "“∃ something in every world regardless of the order”; the FACT is a statement of necessity, so "
+     "they are a different question, not a price on this one"),
+    ("L1", "C557", "Logos.EpistemicNecessity.the_epistemic_stance_is_an_act", "decl",
+     "**THE SAME STEP, POINTWISE \u2014 NO CHOICE ABOUT IT**: the stance IS an act, not a "
+     "bridge to one. `ClaimsNormativeCorrectness s p` unfolds to `Act s p \u2227 \u22c5`, so whoever "
+     "is in the stance has already acted \u2014 the reader is not asked to supply a premise, only "
+     "to read the first conjunct. Corollary of C557, same footprint, kept in the chain so the "
+     "step cannot be silently dropped"),
+    ("L1", "C559", "Logos.EpistemicNecessity.signature_model_reading_discipline", "decl",
+     "**READ THIS BEFORE ANY COUNTERMODEL ROW \u2014 A SIGNATURE MODEL IS NOT A CANDIDATE STATE**: "
+     "a `{}` countermodel witnesses that a constraint is underivable from a signature; it is never "
+     "evidence about a state of affairs. \u0393\u2019s core vocabulary (`Subject`, `Prop`, `State`, "
+     "`Means`, `Initiates`) contains no `World` sort, so no expression of \u0393 denotes a world-state. "
+     "Reading an inhabitant of a record (M0, M1, M6) as a possible world is a category error \u2014 "
+     "this row governs every countermodel row in the chart, and it is the row that would have caught "
+     "the meaningless-world misreading and the empty-world misreading alike"),
+    ("L1", "C558", "Logos.EpistemicNecessity.empty_world_denial_voiced_as_judgment_requires_a_free_subject", "decl",
+     "**THE EMPTY-WORLD DENIAL, VOICED AS JUDGMENT, REQUIRES A FREE SUBJECT**: holding the normative "
+     "stance on `NoSubject` yields a Free, personal, acting speaker \u2014 `FreeWill` by C140, `Person` by "
+     "`freeWill_implies_person`, `Act` by `claims_normative_correctness_is_act` \u2014 and the thesis dies "
+     "in its own performance (C57). Two tiers, in order: Tier 1 (subject) is conceded by *any* denier, "
+     "deterministic or free, because denying requires asserting and what asserts is a subject "
+     "\u2014 determinism is no refuge from subjecthood, which is prior to freedom. Tier 2 (really Free, "
+     "Tier9: could-have-settled-otherwise + sourcehood) is the author\u2019s requirement on genuine judgment; "
+     "this row derives Tier6 at `{}`-substance and records Tier9 with its independence from \u0393\u2019s base. "
+     "`M_Deliberator` is why Tier6 alone does not settle it: the deterministic deliberator emits without judging"),
+    ("L1", "C560", "Logos.EpistemicNecessity.no_meaning_no_correctness", "decl",
+     "**THE THIRD LEG \u2014 NO MEANING, NO RIGHT/WRONG (`{}`)**: the contrapositive of C49. `Meaning_I p` "
+     "*is* `\u2203 s, Means s p` definitionally, so where nothing means, nothing is correct and nothing is "
+     "incorrect. Right/wrong needs meaning (C62) \u2192 meaning needs a subject (C49) \u2192 no meaning, "
+     "no right/wrong \u2014 the author\u2019s three-premise chain, and this row is the leg it was missing"),
+    ("L1", "C561", "Logos.EpistemicNecessity.no_subject_who_means_no_epistemic_right_wrong", "decl",
+     "**THE CHAIN, COMPOSED \u2014 NO SUBJECT WHO MEANS, NO EPISTEMIC RIGHT/WRONG**: if no subject means "
+     "anything, correctness obtains nowhere and incorrectness obtains nowhere (C62 + C49 in one "
+     "statement). Full composition at vocabulary-only footprint \u2014 a `{}` version would be a weaker claim "
+     "wearing its name. Together with C558 this closes the empty world twice over: unvoiceable (no speaker "
+     "without a subject) and uninhabitable-by-the-order (no right/wrong without a meaning subject)"),
+    ("L1", "C562", "Logos.EpistemicNecessity.being_true_is_being_true_to", "decl",
+     "**BEING TRUE IS BEING TRUE *TO* \u2014 THE ALETHIC CHAIN `Correct \u2192 TrueTo \u2192 T`**: "
+     "`TrueTo s p := Means s p \u2227 T p`. Being-the-case (`T p`, satisfaction) is free; being-true is "
+     "disclosure, and disclosure is always to someone. The chain is one weakening after another "
+     "(drop `Initiates`, then drop `Means`): correctness entails truth-to, truth-to entails truth "
+     "\u2014 while the converses fail. **Vocabulary discipline, binding:** no ledger row may call bare-`T` "
+     "satisfaction \u201ctrue\u201d in a normative context \u2014 that word now belongs to `TrueTo`/`Correct`. "
+     "Three layers: being-the-case (requires nothing), being-true (requires a meaning subject, C49/C560), "
+     "judging rightly (requires a Free Subject who chooses, C140/C553). Truth lives at the middle layer "
+     "and above, never at the bottom alone"),
 ]
 
 def _stipulation_entry(name: str):
@@ -6831,8 +6974,9 @@ def render_meaning_retorsion_chain(decls: dict, node_map: dict) -> list[str]:
     ap("   to all of them. The batch's novelty is C369 (the re-index), C373 (the `Correct` rung),")
     ap("   C380 (the signature-general weak retorsion) and C382 (the populated complement).")
     ap("4. **Why an *answer* and not a *model*.** A countermodel is not a counterexample; it is")
-    ap("   a description of a world. An answer is a move made inside discourse. M1 and C294")
-    ap("   describe worlds where no move is ever made (`Means := False` *and* `act := False`),")
+    ap("   a witness about a signature, never a state of affairs (C559 \u2014 \u0393 has no `World` sort, so no "
+    "expression of \u0393 denotes a world-state). An answer is a move made inside discourse. M1 and C294 "
+    "are inhabitants of a record where no move is ever made (`Means := False` *and* `act := False`),")
     ap("   so they cannot contain the affirmation of their own silence. A content nobody can")
     ap("   hold as correct is not a position; it is a description of a world in which nothing is")
     ap("   ever held. **This is not a claim that meaninglessness is false.**")

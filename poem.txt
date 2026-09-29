@@ -108,6 +108,46 @@ declarada (só SEM/META).
   retirada. `Subject` continua uma espécie sem interpretação e `()` a testemunha,
   pelo que Γ não consegue *nomear* o sujeito do modelo — e nada na retorsão precisa
   que o nomeie.
+  **Correcção do modelo sem-significado (2026-09-29, lote EPISTEMIC-NECESSITY —
+  «right and wrong can't exist in meaninglessness», agora por construção):** o
+  verso L18 diz *«há certo e há errado → há significado → há alguém para
+  quem algo significar», e a cadeia estava bem, mas o **modelo** que a
+  auditava dava `EO := True` a um mundo com `Means := fun _ _ => False` — ou
+  seja, um mundo onde a distinção objectiva obtêm e **nada significa nada**.
+  Isso não era um contramodelo, era uma contradição do verso. As vinte
+  testemunhas foram re-escritas e o defeito **fechou-se no compilador**: um mundo
+  que negue o significado já não tem como negar a ordem, porque
+  `objectivity_grounded` é um campo de assinatura, não um comentário.
+  **O FACT, agora por inteiro e numa só linha (C553, `{}`-substância, preço
+  único `will_individuation`):** nada pode ser **epistemologicamente** certo ou
+  errado sem um ser **não-mecânico** para quem o significado possa significar —
+  os pólos são constituídos por um acto de significar (`Means` de *ambos*), manter
+  ambos é escolha livre entre eles, e a vontade individuada faz do ser uma
+  pessoa. C554 declara as duas setas como teoremas distintos; C555 tira o FACT da
+  forma pontual; C556 fecha o lado `T`/`IsFalse`. **O antecedente fica:** nada em
+  Γ mostra que a postura epistémica obtenha, e o verso não o presume — um
+  teorema condicional não é uma afirmação incondicional, e nenhuma das
+  linhas novas é vestida como se o fosse.
+  **O dado do acto é necessário, não estipulado (C557, 2026-09-29):** o argumento
+  do autor em quatro passos verificados — (1) certo/errado sem significado é
+  impossível (C556 + assinaturas); (2) significado sem pessoa livre é impossível;
+  (3) pessoa livre depende do acto (C557: a ordem epistémica **contém** o acto, porque
+  a postura é `Act s p ∧ ⋅`); (4) logo o acto é **necessário**. A palavra *preço*
+  está retirada desta direcção: preço é o que se paga pelo que não se deriva, e
+  aqui deriva-se — a cadeia fica `{}` de ponta a ponta (`{Initiates, Means, State,
+  Subject}` no elo do acto, sem nem `CL`). A forma pontual,
+  `the_epistemic_stance_is_an_act`, fica na cadeia como corolário: **a postura É
+  um acto, não uma ponte para um** — quem está na postura já actuou.
+  **O mundo vazio é ininteligível (C558–C561, 2026-09-29):** Γ não tem sort `World`,
+  logo "o mundo vazio" não é um objeto de Γ — um modelo de assinatura nunca é um
+  estado candidato (C559). A negação, vozeada como juízo, exige um **Sujeito Livre**
+  (C558: `FreeWill`, `Person`, `Act` — e a tese morre pela C57); até um negador
+  determinista concede o sujeito, porque negar exige asserir. O realmente Livre
+  (Tier9) é o requisito do autor sobre o juízo, registado com independência.
+  Sem significado, sem certo/errado (C560, `{}`); sem sujeito que signifique, sem
+  certo/errado em lado nenhum (C561).
+  **Ser-verdadeiro é ser-verdadeiro *para* (C562):** `TrueTo s p := Means s p ∧ T p`
+  — o ser-o-caso é livre, o desvelamento é sempre para alguém (`Correct → TrueTo → T`).
 - L20 (P4): "para haver alguém é preciso haver escolha" → PROVEN como CAMPO (escolha fraca: alternativas incompatíveis presentes)
   ✔: C51 (`person_hasChoiceField`, `{Means, Subject}`; reparação 2026-09-18 —
   é o campo de escolha `ChoiceField`, não a escolha genuína `Chooses`). A escolha genuína / forte
