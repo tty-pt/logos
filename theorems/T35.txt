@@ -1,0 +1,130 @@
+T35 — O FUNDAMENTO PESSOAL DA POLARIDADE EPISTÉMICA: O PÉ DA ESCADA, E O SEU
+PREÇO EXACTO (C525–C552)
+======================================================================
+2026-09-29. Lote EPISTEMIC-GROUND. **Zero axiomas novos** — o registo fica 35 → 35
+(17 VOCAB / 18 substantivos). O objecto do lote não é provar que o fundamento é
+pessoal: é mostrar **que o pé da escada estava escrito só pela metade**, qual é o
+preço exacto da metade que faltava, e que a ordem epistémica **não** depende de
+nada disso.
+
+O que o ledger tinha, e o que não tinha
+----------------------------------------------------------------------
+Γ tem **duas** noções de certo/errado, e o módulo separa-as uma vez, em código:
+- EPISTÉMICA — `Core.T p` / `Core.IsFalse p`: a correcção objectiva de juízos
+  *sobre* a realidade. Nos polos do acto, `Order.Correct s p := A s p ∧ T p` e
+  `Order.Incorrect s p := A s p ∧ IsFalse p`; sob a TruthNorm epistémica
+  (`NormativeOrder.lean:72-75`) elas **são** verdade e falsidade.
+- DEÔNTICA — `PersonalNormativeGround.RightWrong s := ∃ p q, RightWrongAt s p q`,
+  que se desdobra em `∃ p q, Incompatible p q ∧ p ≠ q ∧ Means s p ∧ Means s q`.
+  **Não há `T`, não há `IsFalse`, não há `TruthNorm`, não há `Ought`** em toda essa
+  cadeia. O *nome* é epistémico; a *definição* é deôntica.
+
+A personal-fundação do ledger (C171, C223–C225) é **toda** da segunda: cada
+teorema lê `RightWrong s → Person s`, num par de polos existencial e não
+especificado. A ponte que permite apontar a estrutura deôntica para os polos
+epistémicos corre **dentro** da camada deôntica, não entre camadas
+(`claims_normative_correctness_derives_genuine_normativity` instancia
+`GenuineNormativity` em `(Correct s p, Incorrect s p)`). O par epistémico é uma
+*instância* da estrutura deôntica — e essa instância nunca fora escrita. O lote
+escreve-a, e escreve também a metade negativa que o ledger nunca teve.
+
+**Stage A — o que se ganha** (`EpistemicPersonalGround.lean`)
+- C525 `epistemic_polarity_is_personally_grounded` — o fundamento indexado está
+  **nos próprios polos epistémicos**: `GroundsRightWrongAt s (Correct s p)
+  (Incorrect s p)`. C171, instanciado. `{}`-classe, só vocabulário.
+  Pegada `{propext, Classical.choice, Quot.sound, Initiates, Means, State, Subject}`.
+- C526 `epistemic_ground_is_personal` — o fundamento é uma **Pessoa**, como
+  *teorema com preço declarado* e nunca como campo de registo: C225
+  (`groundsRightWrongAt_entails_person`) instanciado. O preço é a lei nomeada
+  `will_individuation` (VOCAB) e nada mais.
+  Pegada `{Initiates, Means, State, Subject, Will, subjectWill, will_individuation}`.
+  **Nota de pé, porque é mais pesada que a gémea deôntica:** C225 é enunciada em
+  polos `p q` arbitrários, logo nunca os desdobra e herda só `{Means, Subject}` de
+  C171. Esta é enunciada nos polos *epistémicos*, e desdobrar
+  `Correct s p := A s p ∧ T p` arrasta `A s p`, logo `Initiates` e `State`. O
+  custo extra são **os próprios polos epistémicos**, não um compromisso novo.
+- C527 `the_person_grounds_the_epistemic_right_wrong` — o cabeçalho, nas duas
+  direcções, com a guarda **exibida** e não escondida.
+  Pegada: a união das duas acima.
+- C528 `epistemic_order_without_personal_ground` — **Stage B**, ver abaixo.
+
+**Stage B — a separação `{}`** (`Model.Signature` + `Model.M`, assinatura livre:
+o mesmo predicado lido como falso, sem subjecto nenhum).
+- C528 — a ordem epistémica **realiza-se e não é vacuosa** enquanto **não existe
+  nenhum subjecto e nenhum fundamento pessoal**. É a razão de máquina de C151 ser
+  uma **conjunção** e não uma dedução: os conjunctos `T`/`IsFalse` são
+  discharged por teoremas de `Core` que nunca mencionam `Subject`, e o conjuncto
+  `GroundsRightWrong` por `person_grounds_normative_order`, que nunca menciona `T`.
+  **Nenhum passo do ledger liga `T`/`IsFalse` a `GroundsRightWrong`.** `{}`.
+  *Disciplina:* é um modelo de **assinatura livre**, não um modelo de Γ (as
+  convenções `TrinitySeparations`/`HostileSemantics`): o sort de conteúdo é `Bool`,
+  o que torna a bivalência **decidível** — e é isso que segura a pegada em `{}`.
+  Recorrer a `Classical.em` aqui importaria `propext, Classical.choice,
+  Quot.sound` em silêncio e partiria a promessa.
+
+A guarda de C527, e porque é a guarda certa
+----------------------------------------------------------------------
+A segunda direcção (Pessoa → o fundamento é uma escolha genuína no par epistémico)
+é **guardada pela postura**, e a guarda está escrita no teorema em vez de escondida.
+O teorema não afirmado
+    `Person s → GroundsRightWrongAt s (Correct s p) (Incorrect s p)`
+**não** é afirmado e **não** é provável a partir de `Person s` sozinho — e a razão
+é estrutural, não uma lacuna do kernel: `Person s → FreeWill s` dá
+`∃ p' q', Chooses s p' q'` com os polos **existenciais**, logo não fornece
+`Chooses s (Correct s p) (Incorrect s p)`. O que fixa o par é
+`claims_normative_correctness_derives_free_will` (`NormativeOrder.lean:190-193`),
+e ele **exige** a postura epistémica. A guarda `ClaimsNormativeCorrectness s p` é
+a própria postura epistémica, não um pressuposto auxiliar — a mesma forma das
+corolárias guardadas da casa (C152 e a irmã `…_of_claims`), pelo precedente de
+enunciar uma afirmação *com* a sua premissa (C269) em vez de a converter em
+silêncio.
+
+O que isto NÃO faz, cada ponto verificado contra a fonte
+----------------------------------------------------------------------
+(i) **Não** é uma afirmação de criação de existência: não se introduz nenhum
+`∀ x, Exists x → CausedByGround x` (`PersonalGroundOfReality.lean:11-13`;
+`base.txt:304`). (ii) **Não** é endos moral do mal: «certo» aqui é a correcção
+objectiva de um juízo sobre a realidade, nunca bem/mal (`base.txt:313-315`, a
+distinção de quatro níveis da própria casa) — e a âncora epistémica é por
+**instanciação**, nunca por extensão do predicado de fundamentação, porque
+acrescentar um campo epistémico a `GroundsRightWrong` quebraria a transparência
+de C168 e o alinhamento de índice de C171. (iii) fundamentar ≠ identificar, logo
+nada aqui reintroduz autolegislação nem o colapso de
+`OughtRetorsion.self_grounded_ought_collapses`. (iv) C228
+(`normative_ground_is_personal`) **continua bloqueado**: essa é a relação de
+**nível-entidade** `GenericGroundsRightWrong g → PersonalEntity g`; este lote é
+de **nível-sujeito** e não a descarrega.
+
+A varredura: 24 declarações sem linha (C529–C552)
+----------------------------------------------------------------------
+Vinte **teoremas** e quatro **`def`s** — o plano dizia «24 teoremas» e estava
+errado (deviation 1, registada no plano). As quatro definições são ledgered `—`,
+sem `C-id` e sem estado, pelo precedente de `AsietyFreedomOfGround`/`TrueChoice`:
+*uma `def` não é uma afirmação*. C529 `ClaimA_NecessaryTruth`, C530
+`ImpersonalEntity`, C531 `ObjectiveNormativeOrder`, C552 `direction_stack`.
+Do lado epistémico-entram-no-ledger: C535 `de_dicto_not_implies_de_re` é uma
+**separação** (`COUNTERMODEL`, `{}`) — pôr um contramodelo existencial na lista
+afirmativa seria desonesto. E C537 `established_will_reality` é `PROVEN↑`: uma
+pessoa estabelecida por um simples ato de assertiva, sem a postura normativa, pelo
+que a escolha constitutiva (`AxIntentionalChoice`, SEM) é o seu único preço
+substantivo — e **não** é o preço de C525–C527, que fecham `{}`/vocabulário.
+
+O preço, lido nas contagens
+----------------------------------------------------------------------
+Nenhuma linha do lote paga um axioma substantivo novo, e a única lei nomeada
+presente é `will_individuation` (VOCAB). O `PROVEN↑` do lote é exactamente um
+(C537), por uma razão externa ao tema do lote. As contagens movem-se onde o
+plano previu — `CL`-only 11 → 13 (C540, C541), *vocabulary-only* 264 → 283 (+19),
+`PROVEN↑` 65 → 66 (C537), `AxIntentionalChoice` 4 → 5 (C537) — mas **não** onde
+o plano previu: *truly axiom-free* **fica em 59**, porque `gapmap_taxonomy.derive()`
+conta só linhas `PROVEN`/`PROVEN↑` e uma linha `COUNTERMODEL` não entra em
+bucket nenhum (como C511–C514). C528 é `{}` e ainda assim invisível para as
+contagens — a consequência honesta de ser uma contramodelagem.
+
+Ver: `formal/GAPMAP.md` (Level 8b C525–C528, Level 8c C529–C545, e as linhas
+C546–C552 do Level 8), `formal/Logos/EpistemicPersonalGround.lean`,
+`formal/Logos/PersonalNormativeGround.lean` (C171, C225), `formal/Logos/Order.lean`
+(os polos), `formal/Logos/NormativeOrder.lean` (TruthNorm, C140, a escolha guardada),
+`base.txt` §28 (nota de cabeçalho, reescrita) e a nota de distinção de quatro
+níveis, `EPISTEMIC_GROUND.md` (plano de record, com as cinco correcções do kernel),
+`theorems/T34.txt` (C504–C514, o precedente de Stage A/Stage B).

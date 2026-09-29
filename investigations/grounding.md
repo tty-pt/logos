@@ -313,3 +313,30 @@ no causal principle `∀ x, Exists x → CausedByGround x`, `Act` remains absent
 discovery → grounding chain, entity-level Claim E (`GroundOfReality`) stays
 annotated-only (never a theorem), and nothing new is axiomatized. `GroundsRightWrong`
 grounds the normative/truth order only.
+
+**The second clause is now backed by a theorem (2026-09-29, EPISTEMIC-GROUND).**
+Until this batch the claim "`GroundsRightWrong` grounds the normative/truth order"
+above had *no* theorem behind it, because every personal-ground theorem in the
+kernel read `RightWrong s → Person s` at an existential, unspecified pole pair — a
+*deontic* order, which unfolds with no `T` and no `IsFalse` in it. The epistemic
+poles are the same order by **instantiation** (`Correct s p := A s p ∧ T p` is a
+`GenuineNormativity` pair), and the instance is now written down
+(`formal/Logos/EpistemicPersonalGround.lean`):
+
+- **C525** `epistemic_polarity_is_personally_grounded` — the indexed ground sits at
+  the epistemic poles themselves.
+- **C526** `epistemic_ground_is_personal` — that ground is a **Person**, as a priced
+  theorem and never as a record field. The price is the named law
+  `will_individuation` (VOCAB); the deontic twin C225 does *not* transfer by
+  unfolding, so this is a new row rather than a restatement of C171/C225.
+- **C527** `the_person_grounds_the_epistemic_right_wrong` — both directions, with
+  the `ClaimsNormativeCorrectness` stance guard **displayed**, not hidden.
+- **C528** `epistemic_order_without_personal_ground` — the honest half, and the
+  reason the boundary statement above still holds: `{}`, machine-checked, the
+  epistemic order obtains with **no** personal ground at all. No ledger line links
+  `T`/`IsFalse` to `GroundsRightWrong`.
+
+So the scope limit was never in question — only its *evidence* was missing. The
+scope is now priced rather than asserted: see `theorems/T35.txt`. Note that
+**C228** (`normative_ground_is_personal`, entity-level) stays **BLOCKED** — this
+batch is subject-level and does not discharge it.

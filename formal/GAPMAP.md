@@ -1950,10 +1950,10 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     **C498** (2026-09-29 NECESSARY-KIND-AUDIT) is the `{}` **PROVEN** row that is a *pure-logic
     tautology with both predicates unbound* (`∃ P Q, P ∧ ¬ Q`), kept and disclosed rather than
     deleted — see the batch section and `DivinePureActuality.lean`.)
-  - **11 `CL`-only**: C3, C10, C12, C13, C14, C16, C37, C59, C93, C251, C322. (C251 is the
+  - **13 `CL`-only**: C3, C10, C12, C13, C14, C16, C37, C59, C93, C251, C322, **C540**, **C541**. (C251 is the
     non-emptiness + contradiction-freedom of the satisfiable scope domain; its `propext`
     cost is inherited from C14, deliberately, so the graph shows the C251 → C14 edge.)
-  - **264 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`): (**C176** was dropped
+  - **283 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`): (**C176** was dropped
     from this bucket 2026-09-29 — its status is now COUNTERMODEL, the `{}` value-layer
     countermodel (`BearingOf` re-opened as an `opaque` constant), so like C175/C382/C385
     it is a separation boundary, not a PROVEN step, and is not counted here.
@@ -2110,7 +2110,7 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     see the BLOCKED/retired blocks and the `## Formal Frontiers` inventory.
     Of that range only C74 (`aloneExcluded`) survives, as PROVEN↑ (below).
 - **PROVEN↑** (fully machine-verified under the flagged SEM/META/TRANS axiom shown —
-  no foundation axiom remains): **65 claims** —
+  no foundation axiom remains): **66 claims** —
   `AxTwoSubjects` (17): C28, C29, C40, C41, C43, C46, C47, C48, C54, C61, C74, C277, C278, C279, C286, F4,
   **C401**;
   `AxAgapeEssence` (3): C507, C510, **C520** (lote TRINITY, 2026-09-29 — o dado do Ágape é a
@@ -2171,10 +2171,14 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   `AxJudicativeBipolarity` (11): C106, C157–C159, C266, C267, C268, C269, C270,
   C271, C286;
   `AxSecondPersonalAddress` (2): C118, C119;
-  `AxIntentionalChoice` (4): F1b (`freeWill_exists` — **unchanged**: the parent was already
+  `AxIntentionalChoice` (5): F1b (`freeWill_exists` — **unchanged**: the parent was already
   unconditional, see the ACT-CASCADE correction below), C475, C477, C479 (**ACT-CASCADE
   2026-09-28**: the three genuine-choice/free-will/free-subject rows whose route closes
-  constitutively, each now paying the datum as well);
+  constitutively, each now paying the datum as well), **C537** (lote EPISTEMIC-GROUND,
+  2026-09-29: `established_will_reality` — a pessoa estabelecida por um simples ato de
+  assertiva, sem a postura normativa, pelo que a escolha constitutiva é o seu único
+  preço substantivo; **não** é o preço das linhas C525–C527, que fecham a `{}`/
+  vocábulo e cujas pegadas são as de C171/C225);
   `AxActPolarity` (2): C476, C478 (**ACT-CASCADE 2026-09-28**: the two *polarity*-route rows. The
   polarity reading is a different semantic choice from the constitutive one, not a stronger one, and
   both remain declared; neither substitutes for the other, so the batch pays twice, not once);
@@ -2806,6 +2810,13 @@ that the ground creates existents, makes evil exist, or morally legitimizes what
 | C152 | §28/§29 | `PersonalGroundOfReality.personal_ground_of_right_exists (hDatum : ∃ s, RightWrong s) : ∃ s, Person s ∧ NecessaryNormativeOrder ∧ GroundsRightWrong s` — existential corollary, datum-guarded: a personal ground exists | PROVEN | `{Initiates, Means, State, Subject, Will, subjectWill, will_individuation}` |
 | C153 | §28/§29 | `PersonalGroundOfReality.person_yields_personal_grounding_of_reality` — instance form (datum-guarded): the derived Person witnesses the personal ground of the objective normative/truth order governing judgments about reality (grounding correctness about reality; not creation of existents) (historical compatibility alias: `present_act_yields_personal_grounding_of_reality`) | PROVEN | `{Initiates, Means, State, Subject, Will, subjectWill}` |
 | C172 | §28/§29 | `PersonalGroundOfReality.personal_ground_of_right_wrong : ∀ s, RightWrong s → Person s` — the 'simple thing' in one universal: wherever Right/Wrong is real, its ground-type is personal; via the priced discovery theorem (`normative_datum_forces_person`) | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
+| C546 | §28/§29 | `PersonalGroundOfReality.free_subject_grounds_normative_order {s : Subject} {p q : Prop} (hRW : RightWrongAt s p q) : GroundsRightWrong s` — o sujeito **livre** endereçado por uma oposição normativa objectiva instancia o fundamento pessoal do Certo/Errado pela rota da descoberta (`forward_modus_ponens_derivation`), nunca por estipulação. `GroundsRightWrong` continua a ser o registo de campo único e transparente (C168: `∃ p q, Chooses s p q`), pelo que aqui não se acrescenta conteúdo — o que é pessoal é o **teorema precificado** `grounding_right_wrong_entails_person` (C169), pelo preço nomeado `will_individuation` | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
+| C547 | §28/§29 | `PersonalGroundOfReality.person_grounds_initial_normative_datum (s : Subject) (p q : Prop) (h0 : RightWrongAt s p q) : Person s ∧ GroundsRightWrong s` — o mesmo elo em forma de tupla, no **par inicial** `⟨p, q⟩` do dado: a Pessoal e o fundamento agencial como uma só proposição, para que a cadeia possa ler-se sem desdobrar a conjunção. Preço idêntico a C546: a pessoalidade é derivada, nunca um campo | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
+| C548 | §28/§29 | `PersonalGroundOfReality.forward_normative_derivation_to_personal_ground (s : Subject) (p q : Prop) (h0 : RightWrongAt s p q) : Person s ∧ GroundsRightWrong s` — C547 com o nome da **direcção** no nome do teorema (`forward_…`): deriva normativa para o groundwork pessoal, lida na sentido da ontologia e não da descoberta. Registada à parte de C547 porque as duas direcções do bloco são numbered claims distintas e não se devem fundir numa só | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
+| C549 | §28/§29 | `PersonalGroundOfReality.forward_pipeline (s : Subject) (p q : Prop) : RightWrongAt s p q → Person s ∧ GroundsRightWrong s` — o pipeline explícito de dois elos, com a seta **visível na assinatura** em vez de escondida na tupla. Serve ao leitor que quer o caminho sem abreviaturas: `RightWrongAt` → `Person` → `GroundsRightWrong`, ambos os elos já precificados acima | PROVEN | `{Means, Subject, Will, subjectWill, will_individuation}` |
+| C550 | §28/§29 | `PersonalGroundOfReality.every_judicative_act_grounds_its_own_polarity : ∀ (s : Subject) (q : Prop), Act s q → JudicativeNormativePolarity s q` — **cada acto judicativo realizado realiza a sua própria polaridade**: `JudicativeNormativePolarity s q := DeonticOpposition (Correct s q) (Incorrect s q)` (`PersonalNormativeGround.lean:173`), isto é, a oposição entre o juízo correcto e o incorrecto **sobre esse mesmo conteúdo**. É o que torna a pergunta do autor bem formada: a polaridade é por acto, logo pode ser indexada por `s` e `q`. A fundamentação pessoal vem depois, pela Pessoal (C150) | PROVEN | `{CL, Initiates, Means, State, Subject}`
+| C551 | §28/§29 | `PersonalGroundOfReality.personal_ground_of_right_exists_of_claims (hDatum : ∃ s : Subject, ∃ p : Prop, ClaimsNormativeCorrectness s p) : ∃ s : Subject, Person s ∧ NecessaryNormativeOrder ∧ GroundsRightWrong s` — o corolário existencial de C152 com a **premissa epistémica** `ClaimsNormativeCorrectness` em vez do `RightWrong` genérico. A guarda é explícita e é o que a distingue: o datum é a *postura* sobre `(Correct, Incorrect)`, não um par existencial qualquer. **É o precedente directo de C527**, e é por isso que C527 também não converte a guarda em silêncio | PROVEN | `{CL, Initiates, Means, State, Subject, Will, subjectWill, will_individuation}`
+| C552 | §28/§29 | `PersonalGroundOfReality.direction_stack : List (String × String)` — a tabela de direcções (descoberta vs ontologia) como `def`, isto é, **dados de apresentação, não uma afirmação**: as duas entradas são prosa que resume o que C166–C172 e C546–C549 já provam. **Uma `def` não é uma afirmação**, e é por isso que esta linha não tem `C-id` nem estado | — | `{}` |
 
 > **GroundsRightWrong package (§4.3; emenda 2026-09-25):** `GroundsRightWrong` is a single-field RECORD —
 > `agential_foundation := ∃p q, Chooses s p q` (transparent, C168; NO `person`,
@@ -2855,6 +2866,69 @@ precisão: **solo de fundamentação modal único, provado condicionalmente; uni
 aberto.**
 
 ---
+
+
+## Level 8b — Personal grounding of the epistemic poles (`Logos.EpistemicPersonalGround`)
+
+Γ has **two** right/wrong notions, and until this batch the ledger stated the
+personal-ground theorem for only one of them. **Epistemic**: `T p` / `IsFalse p` — the
+objective correctness of judgments *about* reality, with `N_T`/`N_F` as the hypotheses that
+are refuted and `∀ p, T p ∨ IsFalse p` as bivalence — surfaced at the act level as
+`Correct s p` / `Incorrect s p`, which under the epistemic `TruthNorm`
+(`prescribes a := T a.content`, `prohibits a := IsFalse a.content`) **are** truth and
+falsity: `Correct s p → Ought TruthNorm ⟨s, p⟩` is C137. **Deontic**:
+`RightWrong s := ∃ p q, RightWrongAt s p q`, which unfolds to
+`Incompatible p q ∧ p ≠ q ∧ Means s p ∧ Means s q` with no `T`, no `IsFalse` and no
+`TruthNorm` anywhere in the chain. *The name is epistemic; the definition is deontic.*
+The bridge between the two layers runs **inside** the deontic one:
+`claims_normative_correctness_derives_genuine_normativity` (C140) instantiates
+`GenuineNormativity` at `(Correct s p, Incorrect s p)`, so the epistemic pair is one
+**instance** of the deontic structure. C525–C528 state that instance, price it, and
+machine-check the negative half: the order does **not** depend on the ground. The
+epistemic/moral distinction is the house's own four-level one (`base.txt:313-315`):
+"correct" here is the objective correctness of a judgment about reality, never good/evil.
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C525 | §28/§29 | `EpistemicPersonalGround.epistemic_polarity_is_personally_grounded (s : Subject) (p : Prop) (h : ClaimsNormativeCorrectness s p) : GroundsRightWrongAt s (Correct s p) (Incorrect s p)` — **o elo que faltava**: o fundamento **indexado** nos próprios polos epistémicos. Os teoremas de fundamentação existentes dizem `RightWrong s → Person s`, e `RightWrong s := ∃ p q, RightWrongAt s p q` com o par *existencial*; nada no ledger dizia que o fundamento assenta **nesses** polos nomeados. Aqui a premissa é a **postura epistémica** `ClaimsNormativeCorrectness s p`, cujos dois conjunctos `Means` já estão em `Correct`/`Incorrect` (`NormativeOrder.lean:168-170`), e a conclusão nomeia esses mesmos dois polos. É C171 instanciado nesse par: nenhuma relação nova, nenhum campo novo, **nenhuma hipótese `Person`**. A ancoragem epistémica é por **instanciação, nunca por extensão** — acrescentar um campo epistémico a `GroundsRightWrong` quebraria a transparência de C168 e o alinhamento de índice de C171 | PROVEN | `{CL, Initiates, Means, State, Subject}`
+| C526 | §28/§29 | `EpistemicPersonalGround.epistemic_ground_is_personal (s : Subject) (p : Prop) : GroundsRightWrongAt s (Correct s p) (Incorrect s p) → Person s` — a pessoalidade do fundamento epistémico, **só por teorema com preço, nunca por campo**: a lei nomeada `will_individuation`, declarada na pegada. **Nota de honestidade de pegada**: custa **mais** que o gémeo C225, e não por causa da pessoalidade. C225 é enunciado em polos `p q` arbitrários, logo não os desdobra e herda só `{Means, Subject}`; C526 desdobra `Correct`/`Incorrect` e portanto `A s p`, o que traz `Initiates` e `State`. O custo extra são **os polos epistémicos**, não um compromisso filosófico novo — `Initiates`/`Means`/`State`/`Subject` são VOCAB, e `will_individuation` é o mesmo preço de C225 | PROVEN | `{Initiates, Means, State, Subject, Will, subjectWill, will_individuation}` |
+| C527 | §28/§29 | `EpistemicPersonalGround.the_person_grounds_the_epistemic_right_wrong (s : Subject) (p : Prop) (h : ClaimsNormativeCorrectness s p) : GroundsRightWrongAt s (Correct s p) (Incorrect s p) ∧ Person s` — a tese do autor, nos dois sentidos, com a **guarda declarada e visível**. O sentido 1 (postura → fundamento → Pessoal) é C525 seguido de C526. O sentido 2 é **guardado**, e o porquê é estrutural, não uma lacuna: `Person s → FreeWill s` dá `∃ p' q', Chooses s p' q'` com os polos **existenciais**, logo **não** fornece `Chooses s (Correct s p) (Incorrect s p)`; o que fixa o par é a **postura epistémica** (via `claims_normative_correctness_derives_free_will`). A forma declarada `Person s → GroundsRightWrongAt s (Correct s p) (Incorrect s p)` **não é afirmada e não é provável** só de `Person s`. Mesma forma dos corolários guardados C152 e C551, e o precedente de enunciar *com* a premissa (C269) em vez de a converter em silêncio | PROVEN | `{CL, Initiates, Means, State, Subject, Will, subjectWill, will_individuation}`
+| C528 | §28/§29 | `EpistemicPersonalGround.epistemic_order_without_personal_ground` — **a contraprova da honestidade, `{}`**: o Certo/Errado epistémico pode ser real e **não-vacuoso** (há um conteúdo verdadeiro e um falso) **sem qualquer sujeito e sem qualquer fundamento pessoal em existência**. **Porque isto importa:** a conjunção de C151 é uma conjunção, não uma derivação — nenhum passo do ledger liga `T`/`IsFalse` a `GroundsRightWrong`, e esta é a razão machine-checked de `base.txt:1471` ter de ser reescrita. **Não** afirma que a ordem epistémica seja irreal, **nem** que o fundamento esteja vazio em Γ: as duas metades do modelozam-se, simplesmente não estão ligadas. `Content := Bool` torna a bivalência *decidível*, e é isso que segura a pegada em `{}` — recorrer a `Classical.em` importaria `propext, Classical.choice, Quot.sound` e quebraria a promessa. Modelo de assinatura **livre**, logo uma separação em teoria de modelos pura: nada diz sobre a satisfatibilidade de Γ (convenção `TrinitySeparations`/`HostileSemantics`) | COUNTERMODEL | `{}` |
+| — | §28/§29 | `EpistemicPersonalGround.M : EpistemicPersonalGround.Model.Signature` — o **aparato** do contraexemplo de C528, não uma afirmação. `Model.Signature` (a `structure`) e os seus campos (`Subject`, `Content`, `TrueAt`, `FalseAt`, `Grounds`, e as três projecções-facto `epistemic_order`, `right_wrong_not_vacuous`, `no_personal_ground`), mais os projectores/recursores gerados pelo compilador, são a assinatura **livre**; `M` é o seu inhabitant (`Content := Bool`, `Grounds := False`). **Uma `structure` ou `def` não é uma afirmação**, e é por isso que esta linha não tem `C-id` nem estado — o que se afirma é C528, a separação. Precedente: a única linha de `AsieticChoice.SingleContentSignature`. Todos `{}` | — | `{}` |
+
+## Level 8c — Necessary personal ground (`Logos.NecessaryPersonalGround`)
+
+The necessary side of the same question: the necessity of the truth (`NecessarilyTrue`),
+of the objective normative order, and of the personal ground that the order requires — plus
+the negative half that **an atom grounds no subject at all**. These declarations were
+`PROVEN` in the kernel and **absent from the ledger** until this batch; the rows are pure
+ledgering, with no signature, statement or status change. Note the two rows that the
+reader must not conflate: `necessary_normative_order` unfolds the modal necessity
+`∀ w : World, NormativeOrderAt w`, and `necessary_normative_order_is_necessary` is its
+**plain restatement** (`:= necessary_normative_order`) — not a second, stronger claim. The
+world index is genuinely unused, since `NormativeOrderAt (_w : World) := ObjectiveNormativeOrder`,
+so the two coincide by construction. `established_will_reality` is the one row of the sweep
+that rests on a substantive axiom and is therefore `PROVEN↑`.
+
+| ID | Prose | Lean theorem | Status | Axiom footprint |
+|----|-------|--------------|--------|-----------------|
+| C529 | §27 | `NecessaryPersonalGround.ClaimA_NecessaryTruth (φ : Form) : Prop := NecessarilyTrue φ` — o **Claim A** do lote (verdadeiro necessariamente) como `def`, isto é, **o predicado, não a afirmação**: um `def` não é uma afirmação, e é invisível a `#print axioms`, pelo que nenhuma ferramenta de contagem o marcaria. A afirmação é C540 | — | `{}` |
+| C530 | §2, §14 | `NecessaryPersonalGround.ImpersonalEntity (e : Entity) : Prop := ∃ n : Nat, e = Entity.ofAtom n` — o lado **impessoal** do género: uma entidade é impessoal exactamente quando é um átomo. **Definição, não afirmação.** É a contraparte do C469 (`necessaryPersonalSubjectExists`) e o que torna legível C533/C534: o que não é átomo é sujeito | — | `{Subject}` |
+| C531 | §28/§29 | `NecessaryPersonalGround.ObjectiveNormativeOrder : Prop` — o **conteúdo** da ordem normativa objectiva, como `def`: `(¬ N_T ∧ ¬ N_F) ∧ (∀ a, Incompatible (Ought TruthNorm a) (OughtNot TruthNorm a)) ∧ (∀ s p, Incompatible (Correct s p) (Incorrect s p))`. **Definição, não afirmação**; a afirmação é C542. O terceiro conjuncto é a incompatibilidade dos **polos epistémicos** `Correct`/`Incorrect` — a instância epistémica da `DeonticOpposition`, distinta da deôntica de C144 | — | `{Initiates, Means, State, Subject}` |
+| C532 | §2, §14 | `NecessaryPersonalGround.atom_cannot_ground_intentional_subject (n : Nat) (s : Subject) (p : Prop) (hm : Means s p) : ¬ GroundsEntity (Entity.ofAtom n) (EntityOf s)` — **um átomo não fundamenta um sujeito intencional**, e a recusa não vem de `Person` (que aqui não aparece) mas de `Means`: se o átomo fundamentasse, `EntityMeans (ofAtom n) p := True` (C440) tornaria o sujeito vazio de conteúdo, o que é impossível | PROVEN | `{Means, Subject}` |
+| C533 | §2, §14 | `NecessaryPersonalGround.atom_cannot_ground_person (n : Nat) (s : Subject) (hPerson : Person s) : ¬ GroundsEntity (Entity.ofAtom n) (EntityOf s)` — **o mesmo por um caminho mais curto**: com `Person s` à mão, a contradição é directa (uma pessoa tem livre-arbítrio e um átomo não), sem passar por `Means`. Os dois juntos é que fecham o caso: nem um sujeito qualquer, nem uma pessoa | PROVEN | `{Means, Subject, Will, subjectWill}` |
+| C534 | §2, §14 | `NecessaryPersonalGround.ofAtom_ne_ofSubject (n : Nat) (s : Subject) : Entity.ofAtom n ≠ EntityOf s` — **a disjuncção de construtores fecha o caso**: um átomo nunca *é* um sujeito. É a razão de C532/C533 serem recusas — um átomo não *é* um sujeito, logo não pode ocupar o papel de fundamento nem o de pessoa — e é o que torna `GroundIsSubject` proibido (C441) | PROVEN | `{Subject}` |
+| C535 | §27 | `NecessaryPersonalGround.de_dicto_not_implies_de_re : ∃ (W : Type) (S : Type) (ExistsAt : W → S → Prop) (Pers : S → Prop), (∀ w, ∃ s, ExistsAt w s ∧ Pers s) ∧ ¬ (∃ s, (∀ w, ExistsAt w s) ∧ Pers s)` — **o limite da necessidade**: a verdade de-dicta (algo necessário em cada mundo, com um sujeito **por** mundo) **não implica** a verdade de-re (um **único** sujeito em todos os mundos). É a separação que impede o lote de deslizar de "necessário" para "necessário para o mesmo sujeito", e é a razão de `Claim E` (o sujeito contingente) ficar anotado em vez de ser resolvido | COUNTERMODEL | `{}` |
+| C536 | §28/§29 | `NecessaryPersonalGround.established_normative_person (hClaims : ∃ s p, ClaimsNormativeCorrectness s p) : ∃ s, (∃ w : Will, w = subjectWill s) ∧ FreeWill s ∧ FreeSubject s ∧ Person s ∧ ActualEntity (EntityOf s)` — **a pessoa estabelecida pela postura normativa**: se alguém ocupa a postura sobre `(Correct, Incorrect)`, existe um sujeito com vontade, livre-arbítrio, genus livre, **pessoal**, e uma entidade actual correspondente. A `ActualEntity` é o que impede que a pessoa estabelecida seja apenas uma espécie abstracta; a pessoalidade é o teorema precificado, pelo preço `will_individuation` | PROVEN | `{CL, Initiates, Means, NecessarySubjectKind, State, Subject, Will, subjectWill, will_individuation}`
+| C537 | §28/§29 | `NecessaryPersonalGround.established_will_reality (hAssert : ∃ s p, Asserts s p) : ∃ s, (∃ w : Will, w = subjectWill s) ∧ FreeWill s ∧ FreeSubject s ∧ Person s ∧ ActualEntity (EntityOf s)` — **a pessoa estabelecida por um simples ato de assertiva**, sem a postura normativa. **A única linha do lote que carrega um axoma substantivo** e portanto é `PROVEN↑`: `AxIntentionalChoice` (`Tag: SEM`), o preço de que a escolha genuína é constitutiva do ato intencional. Registada como tal para que a dependência seja visível na linha e não apenas num contador | PROVEN↑ | `{AxIntentionalChoice, Initiates, Means, NecessarySubjectKind, State, Subject, Will, subjectWill, will_individuation}` |
+| C538 | §28/§29 | `NecessaryPersonalGround.necessary_normative_order : NecessaryNormativeOrder` — **a ordem normativa necessária, a preço zero**: sai de `rightWrongDistinction`, `ought_and_oughtNot_incompatible` e `correctness_incompatible`, sem nenhum axioma substantivo. O **índice de mundo é não usado** (`NormativeOrderAt` é constante) — e é exactamente isso que C528 mede: a ordem não recebe nada do fundamento | PROVEN | `{Initiates, Means, State, Subject}` |
+| C539 | §28/§29 | `NecessaryPersonalGround.necessary_normative_order_is_necessary : NecessaryNormativeOrder` — **a mesma ordem, agora com o "necessário" explícito** no nome, para o leitor ver a necessidade e não a inferir. Não é uma afirmação mais forte que C538: o conteúdo é o mesmo, e a distinção é de **leitura**, não de prova. Fica registada à parte para que a lista de claims não sugira que a segunda unlocks the first | PROVEN | `{Initiates, Means, State, Subject}` |
+| C540 | §27 | `NecessaryPersonalGround.necessary_truth_exists : ∃ τ : Form, NecessarilyTrue τ` — **existe verdade necessariamente**: o Claim A do lote, agora como afirmação. O preço é só o da **meta-lógica clássica** (`propext`, `Classical.choice`, `Quot.sound`): nenhum axioma de Γ, nenhum substantivo. É a metade de existência de `ClaimA_NecessaryTruth` (C529) | PROVEN | `{CL}`
+| C541 | §27 | `NecessaryPersonalGround.step1_necessary_truth_exists : ∃ τ : Form, NecessarilyTrue τ` — **o mesmo, rotulado `step1`**: a Existence Necessary Truth como **primeiro passo** de uma cadeia são o gémeo de C540 e C545. Registada à parte porque um passo numerado é a unidade que o leitor cita ao seguir a cadeia, e porque um `step1` sem nome é impossível de referenciar | PROVEN | `{CL}`
+| C542 | §28/§29 | `NecessaryPersonalGround.objective_normative_order_holds : ObjectiveNormativeOrder` — **o conteúdo de C531 preenchido**: os três conjunctos da ordem normativa objectiva, cada um do seu próprio teorema de `Core`/`NormativeOrder`, nenhum deles mencionando um sujeito ou um fundamento | PROVEN | `{Initiates, Means, State, Subject}` |
+| C543 | §28/§29 | `NecessaryPersonalGround.normative_order_is_grounded_in_personal_nature {s : Subject} {p : Prop} (h : ClaimsNormativeCorrectness s p) : NecessaryNormativeOrder ∧ Person s` — **a ordem normativa tem base de natureza pessoal**, na forma da **tupla**, com a premissa explícita. Registada porque é a linha onde a **ordem** e a **personalidade** aparecem juntas pela primeira vez no ledger — e é precisamente por isso que C528 é necessária: juntas na conjunção não é o mesmo que ligadas por um derivação | PROVEN | `{CL, Initiates, Means, State, Subject, Will, subjectWill, will_individuation}`
+| C544 | §15 | `NecessaryPersonalGround.rational_act_carries_personal (s : Subject) (p : Prop) (hAct : Act s p) : CarriesPersonalFeature p` — **todo acto racional transporta a característica pessoal**: o predicado `p` do qual o sujeito é o portador é ele próprio portador de `CarriesPersonalFeature`. O preço é meta-lógica mais vocabulário, zero substantivo | PROVEN | `{CL, Initiates, Means, State, Subject}`
+| C545 | §15 | `NecessaryPersonalGround.step3_personal_logical_inseparability (a : Prop) (hAct : RationalAct a) : CarriesPersonalFeature a ↔ CarriesLogicalFeature a` — **a inseparabilidade lógico-pessoal**: o que é acto racional é lógico **e** pessoal, e o que é pessoal é lógico **e** racional. Este é o degrau que impede que a racionalidade seja lida como impersonal: a pessoa e o conteúdo não se separam sem quebrar o acto. Preço meta-lógico, zero substantivo | PROVEN | `{CL, Initiates, Means, State, Subject}`
 
 ## Level 9 — Reality-Hook & Moral Frontier (`RealityHookAudit`, `MoralFrontierAudit`)
 

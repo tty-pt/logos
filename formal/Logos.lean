@@ -201,3 +201,7 @@ import Logos.DivineAgape
 -- creature-love, attribute-love, binitarian) — all `{}`, zero axioms, the exact
 -- price of the case (three is exactly the price of the Spirit).
 import Logos.TrinitySeparations
+-- The epistemic poles of the personal ground (C525-C528): the indexed ground at
+-- `(Correct, Incorrect)` is personal, and the epistemic order needs no ground
+-- (C528, `{}`).
+import Logos.EpistemicPersonalGround

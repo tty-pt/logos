@@ -859,6 +859,14 @@ CHAIN_REQUIRED_DECLS = {
         "C151 — the unconditional personal-ground flagship",
     "Logos.PersonalGroundOfReality.personal_ground_of_right_exists":
         "C152 — a personal ground of right exists",
+    "Logos.EpistemicPersonalGround.epistemic_polarity_is_personally_grounded":
+        "C525 — the epistemic form of the personal ground: the polarity at the epistemic poles is grounded",
+    "Logos.EpistemicPersonalGround.epistemic_ground_is_personal":
+        "C526 — the ground of the polarity is of a personal type, at the named `will_individuation` price",
+    "Logos.EpistemicPersonalGround.the_person_grounds_the_epistemic_right_wrong":
+        "C527 — CLAIM D at the epistemic poles, with the direction guarded by `ClaimsNormativeCorrectness`",
+    "Logos.EpistemicPersonalGround.epistemic_order_without_personal_ground":
+        "C528 — the `{}` separation: the epistemic order is necessary, the foundation is not",
     "Logos.Agency.performative_act_datum":
         "C454 — the TRANS act-datum; the batch's only substantive price",
     "Logos.Agency.some_subject_initiates":
@@ -5219,6 +5227,24 @@ CLASSICAL_ATTRIBUTES = [
                   "Established of the personal ground/type, not of a particular divine person."),
     },
     {
+        "attribute": "**Personal** — the epistemic sibling: the ground-type is personal *at the epistemic poles*",
+        "scope": "Personal ground / person-type",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.EpistemicPersonalGround.epistemic_ground_is_personal"}],
+        "refs": ["Logos.PersonalGroundOfReality.the_person_supports_the_reality_of_right",
+                 "Logos.EpistemicPersonalGround.epistemic_polarity_is_personally_grounded"],
+        "sense": ("`∀ s, (Correct s p ∨ Incorrect s p) → PersonalNormativeGround.RightWrong s`, "
+                  "and personhood of that ground follows. **Why this is a separate attribute and "
+                  "not the row above restated:** the deontic claim does *not* transfer by unfolding, "
+                  "because `RightWrong` has no `T`/`IsFalse` to unfold — `Correct`/`Incorrect` are the "
+                  "*epistemic instance* of the same deontic order (under `TruthNorm` they are `T`/`IsFalse`), "
+                  "so the two live at different levels of the same four-level structure. The sibling's "
+                  "full price is declared, not hidden: `will_individuation`, plus `Initiates` and "
+                  "`State`, which `Correct`/`Incorrect` pick up through `A s p` where C225 paid neither. "
+                  "Epistemic *correctness* is not moral goodness — see the four-level note in `base.txt`."),
+    },
+    {
         "attribute": "**Psychological personality** (humanoid consciousness, stream of experience)",
         "scope": "Personal ground / person-type",
         "expected": "COUNTERMODEL",
@@ -6511,6 +6537,28 @@ TWO_KINDS_STEPS = [
      "load-bearing theorem the whole personal-ground route rests on"),
     ("L1", "C152", "Logos.PersonalGroundOfReality.personal_ground_of_right_exists", "decl",
      "a **personal ground of right** exists — `{}`-class, vocabulary alone"),
+    ("L1", "C525", "Logos.EpistemicPersonalGround.epistemic_polarity_is_personally_grounded", "decl",
+     "**THE SAME GROUND, IN ITS EPISTEMIC FORM — 0 substantive axioms**: the deontic order was "
+     "polarity on *arbitrary* poles; here the poles are the epistemic ones (`Correct`/`Incorrect` "
+     "unfold `T`/`IsFalse` under `TruthNorm`). The foot of the grounding is the subject's "
+     "truth-level norm, so the claim is the one C151's `GroundsRightWrong` only covered in "
+     "deontic form"),
+    ("L1", "C526", "Logos.EpistemicPersonalGround.epistemic_ground_is_personal", "decl",
+     "**the ground-type is personal, at the epistemic poles** — C151's `GroundsRightWrong ⇒ "
+     "Person` did *not* transfer by unfolding (deontic has no `T`/`IsFalse` to unfold), so this "
+     "closes the gap and declares the whole price: `will_individuation`. `Correct`/`Incorrect` "
+     "unfolding through `A s p` costs `Initiates` and `State` on top of C225's set"),
+    ("L1", "C527", "Logos.EpistemicPersonalGround.the_person_grounds_the_epistemic_right_wrong", "decl",
+     "**CLAIM D AT THE EPISTEMIC POLES, IN THE RIGHT DIRECTION** — `Person s → ClaimsNormative"
+     "Correctness s → (Correct s p ∧ ¬Correct s ¬p ∨ Incorrect s p ∧ ¬Incorrect s ¬p)`. The "
+     "guard is *not* cosmetic: the Person→grounded direction is the transparency axiom of C168 "
+     "C171, not the deontic `GroundsRightWrong`, and the index may not be widened (that would "
+     "break C171's and C168's transparency)"),
+    ("L1", "C528", "Logos.EpistemicPersonalGround.epistemic_order_without_personal_ground", "decl",
+     "**THE PRICE OF THE CLAIM IS THE FOUNDATION, NOT THE ORDER — `{}`**: under a free "
+     "signature the epistemic order still holds (non-emptiness and contradiction-freedom) with "
+     "*no* personal ground at all. `T`/`IsFalse` are independent of the ground: no ledger line "
+     "connects them. `Classical.em` is banned from the countermodel and the build must stay green"),
 ]
 
 def _stipulation_entry(name: str):
