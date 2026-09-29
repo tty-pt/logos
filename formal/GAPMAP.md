@@ -1949,10 +1949,14 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   - **11 `CL`-only**: C3, C10, C12, C13, C14, C16, C37, C59, C93, C251, C322. (C251 is the
     non-emptiness + contradiction-freedom of the satisfiable scope domain; its `propext`
     cost is inherited from C14, deliberately, so the graph shows the C251 → C14 edge.)
-  - **254 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`): (**C176** was dropped
+  - **255 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`): (**C176** was dropped
     from this bucket 2026-09-29 — its status is now COUNTERMODEL, the `{}` value-layer
     countermodel (`BearingOf` re-opened as an `opaque` constant), so like C175/C382/C385
-    it is a separation boundary, not a PROVEN step, and is not counted here.)
+    it is a separation boundary, not a PROVEN step, and is not counted here.
+    **C500 added 2026-09-29** — the Good-denial binding theorem
+    `GoodDenial.good_denial_is_free_logically_consistent`: the vocabulary-only footprint
+    `{Initiates, Means, State, Subject}` is exactly the reality-hook vocabulary, inherited
+    from `correct_tracks_reality` via the pole-freedom herald; `PROVEN`, never `PROVEN↑`.)
     C419, C420, C421, C422, C423, C424, C425, C427, C428, C429, C430, C431
     (the 2026-09-28 precedence / §18 batch — twelve rows, 0 substantive axioms;
     the `NecessarySubjectKind` in C419–C421/C424/C429/C430 is the `ExistsAt` artifact
@@ -2809,6 +2813,7 @@ aberto.**
 | C177 | §28/§5 | `Value.AxBenevolentBearingObtains : ∃ s t, s ≠ t ∧ Person t ∧ Helps s t` — **META bridge** (poem P6 "ajuda" as world-fact, not only definition): some person is *actually* helped. Declared, tagged `META`, priced in the footprint; not forced (C176 is its countermodel). The one honest price of the positive moral close | AXIOM | `{AxBenevolentBearingObtains, Means, Subject, Will, subjectWill}` |
 | C178 | §28/§5 | `MoralFrontierAudit.moral_good_obtains : ∃ s a, Good s a` — **the positive close of F3**: the moral pole is a *fair definition* (`Good s a := ∃ t ≠ s, Person t ∧ Helps s t ∧ ¬ Harms s t` — helpfulness toward the other, per the declared content) and it **obtains** under C177. `Good` itself is vocabulary-only (`{Means, Subject, Will, subjectWill}` — `Person` in the definiens); the inhabitation carries the bridge openly | PROVEN↑ | `{Means, Subject, Will, subjectWill, AxBenevolentBearingObtains}` |
 | C499 | §28/§5 | `Value.no_harm_in_uniformly_unbearing_layer : (∀ s t : S, B s t = unbearing) → ¬ ∃ s t : S, s ≠ t ∧ B s t = harmful` — **the harm twin** of the empty-layer countermodel (REPAIRED 2026-09-29, `INCONSISTENT.md`): in every world whose bearing is uniformly `unbearing`, no distinct pair is joined by harm — for any subject vocabulary `S`. Machine witness that the negative pole `Evil`'s fair reading ("harms another person") is *no more forced* than the positive pole's (C176): inhabiting Evil would require a separate disclosed "some harm occurs" bridge, which was **not commissioned** — SEM datum by declaration | COUNTERMODEL | `{}` |
+| C500 | §28/§5 | `GoodDenial.good_denial_is_free_logically_consistent : (∃ G E : Subject → Prop → Prop, (¬ ∃ s p, G s p) ∧ (¬ ∃ s p, E s p) ∧ ∀ s p, Correct s p → p) ∧ (∃ (Subj : Type) (CS : FineCognitiveSubject Subj) (Reg : Subj → Prop → Prop) (s : Subj) (p : Prop), Reg s (¬ CS.CommitsTo s p) ∧ ¬ CS.CommitsTo s p)` — **the retorsion question for the Good, machine-answered** (new 2026-09-29, binding theorem): denying `∃ Good` neither contradicts the normative relying structure (left: poles False everywhere with the reality-hook `Correct s p → p` intact — `moral_pole_postulate_is_not_a_consequence`, C175 family) nor self-destructs performatively (right: a cognitive subject asserts its own non-commitment without instantiating commitment — `retorsion_denial_does_not_commit_to_content`, `{}`). The classical retorsion fails for the substantive poles; what retorsion refutes unconditionally is the normative *field* (`NormativeTruth`, Right/Wrong — `{}`), never the poles | PROVEN | `{Initiates, Means, State, Subject}` |
 
 > Batch REALITY-HOOK & MORAL-FRONTIER (2026-09-24): a tese cética "certo/errado
 > proposicional nada tem a ver com realidade" é **refutada no kernel** —

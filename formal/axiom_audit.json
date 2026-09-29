@@ -5459,6 +5459,12 @@
  "Logos.FreeWillInvariance.model_FW9_consistent": [],
  "Logos.FreeWillInvariance.performative_datum_not_entails_freewill": [],
  "Logos.FreeWillInvariance.retorsion_under_determinism_valid": [],
+ "Logos.GoodDenial.good_denial_is_free_logically_consistent": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
  "Logos.GroundPerson.IsPresentPersonalFeature": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",

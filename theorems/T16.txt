@@ -6,15 +6,22 @@ axiom `Evil`, Tag: SEM) + formal/Logos/Value.lean (theorems contramodelo
 `no_help_in_uniformly_unbearing_layer`, pegada `{}` (C176), e o seu gémeo
 `no_harm_in_uniformly_unbearing_layer`, pegada `{}` (C499); axiom
 `AxBenevolentBearingObtains`, Tag: META; theorem `some_person_is_helped`, pegada
-`{AxBenevolentBearingObtains, Means, Subject}`; `help_not_harm` / C85, `{Subject}`).
-PROVEN↑ sob a ponte META declarada `AxBenevolentBearingObtains`.
+`{AxBenevolentBearingObtains, Means, Subject}`; `help_not_harm` / C85, `{Subject}`) +
+formal/Logos/GoodDenial.lean (theorem de ligação `good_denial_is_free_logically_consistent`,
+pegada só-vocabulário `{Initiates, Means, State, Subject}` (C500): **a negação do Bem é
+livre-logicamente consistente e não performativamente auto-refutadora** — funde
+`moral_pole_postulate_is_not_a_consequence` com
+`retorsion_denial_does_not_commit_to_content`, `{}`).
+PROVEN↑ sob a ponte META declarada `AxBenevolentBearingObtains` (o próprio C500 é PROVEN, sem ponte).
 
 Verificado em: formal/Logos/MoralFrontierAudit.lean (Good :207, moral_good_obtains :216,
 moral_pole_postulate_is_not_a_consequence :266), formal/Logos/Value.lean (no_help_in_uniformly_unbearing_layer :104,
 no_harm_in_uniformly_unbearing_layer :123 (gémeo, C499), AxBenevolentBearingObtains :201,
-some_person_is_helped :207), GAPMAP.md F3 + C176–C178 e C499
-(§28/§5, secção Level 9), base.txt §21 e §28. Desenho e decisões: MORAL.md §8b–§8e.
-Reparação do fecho 2026-09-29: ver INCONSISTENT.md.
+some_person_is_helped :207), formal/Logos/GoodDenial.lean (good_denial_is_free_logically_consistent :54),
+formal/Logos/CognitiveToAgencyFrontier.lean (FineCognitiveSubject :44) e
+formal/Logos/DefinitiveAgencyFrontier.lean (retorsion_denial_does_not_commit_to_content :164),
+GAPMAP.md F3 + C176–C178, C499 e C500 (§28/§5, secção Level 9), base.txt §21 e §28.
+Desenho e decisões: MORAL.md §8b–§8e. Reparação do fecho 2026-09-29: ver INCONSISTENT.md.
 sorryAx: 0.
 
 Enunciado:

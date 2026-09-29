@@ -111,9 +111,9 @@ decision: `scripts/census_stipulated_defs.py`.
 
 | **Won** | **Still open** |
 |---|---|
-| **381 affirmative claims derived** out of **495** ledger claims — 320 ✅ kernel-verified, 61 ⚠️ derived under a substantive (`SEM`/`META`) axiom, each ⚠️ row naming the bridge it rests on. | **14 blocked** ✖ — named individually |
+| **382 affirmative claims derived** out of **496** ledger claims — 321 ✅ kernel-verified, 61 ⚠️ derived under a substantive (`SEM`/`META`) axiom, each ⚠️ row naming the bridge it rests on. | **14 blocked** ✖ — named individually |
 | **52 countermodel boundaries** 🧱 — a hostile model in which the claim *fails*. These are won results about the limit of the theory, not gaps. | &nbsp;&nbsp;· **C228** — any entity that grounds Right/Wrong is a Personal Entity |
-| **953 of 1739 theorems in `formal/Logos/` rest on no Γ axiom at all** (55%) — counted from `formal/axiom_audit.json`, not claimed. | &nbsp;&nbsp;· **C462** — BLOCKED, with no declaration, and deliberately so: the ground does not initiate is not refutable in Gamma and is not evidence of non-agency either |
+| **953 of 1740 theorems in `formal/Logos/` rest on no Γ axiom at all** (55%) — counted from `formal/axiom_audit.json`, not claimed. | &nbsp;&nbsp;· **C462** — BLOCKED, with no declaration, and deliberately so: the ground does not initiate is not refutable in Gamma and is not evidence of non-agency either |
 | **The whole price is 32 declared axioms**: 17 are `VOCAB` (the vocabulary the statements need in order to be sayable) and 15 are substantive. Only the 15 are philosophical commitments; the rest are the theory's definitions of its own words, which is a different thing from a premise. | &nbsp;&nbsp;· **C73** — Plurality without bridges is blocked: unit countermodel settles that 1 act does not entail plurality; requires AxTwoSubjects |
 | **10 attribute corollaries became unconditional theorems** (C389–C398) — they were conditional on a `def` until F15 was declared, so this is a *strengthening*: fewer hidden premises, same conclusions. | &nbsp;&nbsp;· **C75** — Propositional personhood is blocked: content existence does not entail personhood |
 |  | &nbsp;&nbsp;· **C79** — Ultimate ground existence is blocked: infinite descending chains have no ultimate element without a well-foundedness axiom |
@@ -2664,7 +2664,7 @@ The remaining divine attributes — **unity / monotheism**,
 ### Retorsions
 
 <details>
-<summary>Retorsion catalogue — 97 machine-checked retorsion theorems (click to expand)</summary>
+<summary>Retorsion catalogue — 98 machine-checked retorsion theorems (click to expand)</summary>
 
 * **Performative_Boundary_Theorem:** `performative_boundary_theorem` (`formal/Logos/A14SemanticAudit.lean`) — PERFORMATIVE BOUNDARY THEOREM: Performative retorsion forces an intentional subject (Considers, Assumes, Derives, Affirms, Rejects) and asymmetric cognitive resolution (SettlementChoice), but strictly stops before executive aiming (AimsAt), action execution
 * **Noact_Conditional_Selfrefutes:** `noAct_conditional_selfRefutes` (`formal/Logos/Agency.lean`) — Asserting NoAct refutes itself under a weak assertion ONLY given the bridge from weak act to strong Act.
@@ -2693,6 +2693,7 @@ The remaining divine attributes — **unity / monotheism**,
 * **Retorsion_Nofreewill_Consistent:** `retorsion_NoFreeWill_consistent` (`formal/Logos/ExecutiveDeliberativeFrontier.lean`) — Group 2 Theorem: Asserting NoFreeWill is completely consistent and non-self-refuting.
 * **Schema_S4_Satisfiable_And_Non_Self_Refuting:** `schema_S4_satisfiable_and_non_self_refuting` (`formal/Logos/ExecutiveDeliberativeFrontier.lean`) — Schema S4 Theorem: Denying deliberative choice is NOT performatively self-refuting! A deterministic agent can assert with complete truth that it does not deliberate.
 * **Trackb_Selfdenialofexecutivechoice_Selfrefutes:** `trackB_selfDenialOfExecutiveChoice_selfRefutes` (`formal/Logos/ExecutiveDeliberativeFrontier.lean`) — Re-verifying the retorsion theorem for executive choice in this module.
+* **Good_Denial_Is_Free_Logically_Consistent:** `good_denial_is_free_logically_consistent` (`formal/Logos/GoodDenial.lean`) — Denying the existence of the moral Good is consistent with Γ's full normative relying structure, and the denial itself carries no performative self-refutation.
 * **Contextual_Retorsion_Datum:** `contextual_retorsion_datum` (`formal/Logos/HardenedInvariance.lean`) — Contextual Retorsion: Denying that any deduction is developed in any context refutes itself performatively when that denial is asserted as a step within an inquiry context.
 * **Retorsion_Does_Not_Imply_Doubt:** `retorsion_does_not_imply_doubt` (`formal/Logos/HostileSemantics.lean`) — Transcendental retorsion holds fully in TwoPersons, yet Cartesian doubt is empty.
 * **A6_A7_Synergistic_Forcing:** `A6_A7_synergistic_forcing` (`formal/Logos/JointForcing.lean`) — Synergy Forcing Theorem: A6 (universal_thesis_claims_objectivity) + A7 (transcendental_reflection_intentional) jointly force NonTrivialOntology under the standard retorsive bridges.

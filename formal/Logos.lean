@@ -183,3 +183,4 @@ import Logos.ImmutabilitySoleBearer
 -- necessary being: it has necessity and gapless operativeness but lacks transcendence, maximal
 -- capacity, and pure actuality. The plan of record is `PLAN3.md`.
 import Logos.NecessaryKindAudit
+import Logos.GoodDenial
