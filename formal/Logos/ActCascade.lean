@@ -63,8 +63,8 @@ which a single existential witness cannot discharge.
 
 Also unchanged, and stated here so no row below is read as more than it is:
 
-- **C453 stays open.** The datum is a global existential. The per-subject form of initiation is a
-  different and stronger claim and is not proved here; `noCogito_selfRefutes` (C456) records this.
+- **C453 stayed open in this batch.** The datum is a global existential. The per-subject form of initiation is a
+  different and stronger claim and was not proved here; `noCogito_selfRefutes` (C456) records this. Chain 13 now closes that stronger universal as non-derivable through C489–C490.
 - **Nothing here says which subject acts.** Same reason, same `INHABITED.md` §7 boundary.
 - **No `Wills → Initiates`, `Means → Initiates`, `Chooses → Initiates` or `Loves → Initiates`
   bridge** is licensed. These are existentials, not implications, so every separation between
@@ -72,7 +72,7 @@ Also unchanged, and stated here so no row below is read as more than it is:
 - **The ground is not made an agent.** `Entity.ofGround` is still provably not a subject
   (`ofGround_ne_ofSubject`). Nothing here bears on F10 `Produces`, on C462, or on `Creator of
   contingent reality`, and no row about the ground is asserted anywhere in this module.
-- **C465/C467 stay conditional** and **F10 stays `BLOCKED`.** Both walls are named and
+- **C465/C467 stay conditional** and **F10 stayed `BLOCKED` in this batch** (since closed by the declared C493 bridge, which changes nothing here). Both walls are named and
   machine-checked in `WIN.md` §2; neither is touched here.
 - **`NotInSuccession` is not revisited.** Batch S's diagnosis stands untouched.
 - **The free-will rows are consequences of C454, not a refutation of C454's denial from nothing.**
@@ -111,9 +111,9 @@ so applying the parent is `exact` and nothing else. -/
     `Agency.act_datum_implies_means` — which is the `Act`/`Means` half of `Act`'s own definition.
 
     **What it does NOT do.** It does not say *which* subject means, or what it means: a global
-    existential, so C453's per-subject form stays open (`INHABITED.md` §7). It licenses no
+    existential, so C453's per-subject form stayed open in this batch (`INHABITED.md` §7, later closed as non-derivable by Chain 13). It licenses no
     `Means → Initiates` bridge. It does not make the ground an agent, so F10 `Produces` and C462
-    are untouched. It does not close C453. It is a consequence of C454, **not** a refutation of
+    are untouched. It did not close C453 in this batch. It is a consequence of C454, **not** a refutation of
     C454's denial from nothing — refuting that denial needs an inhabitant of `Act`, which is what
     C454 supplies and what is unavailable without it (`INHABITED.md` §0), so citing this row in
     the datum's own favour would be circular. The price is `performative_act_datum`, now **visible
@@ -234,7 +234,7 @@ differ, and the corpus prices them separately. -/
     `AxIntentionalChoice` (each is separately declared, `Tag: SEM`). It is an existential: it does
     not say *who* chooses, and it licenses no `Chooses → Initiates` bridge, so the corpus's
     separation between choice and initiation survives untouched. It does not make the ground a
-    chooser, so F10 `Produces`, C462, C465/C467 are untouched. It does not close C453. It is a
+    chooser, so F10 `Produces`, C462, C465/C467 are untouched. It did not close C453 in this batch. It is a
     consequence of C454, **not** a refutation of C454's denial from nothing, and citing it in the
     datum's favour would be circular. The price is `performative_act_datum` **and**
     `AxIntentionalChoice`, both visible and mandatory, where the conditional parent hid both in
@@ -274,7 +274,7 @@ theorem genuineChoice_exists_of_act_datum_polarity : Choice.genuineChoice_exists
     subjects: it does not say *which* subject has free will, does not assert that every subject
     does, and licenses no `Wills → Initiates` or `Chooses → Initiates` bridge. It does not make
     the ground a chooser — `Entity.ofGround` is provably not a subject — so F10 `Produces`, C462,
-    C465/C467 are untouched. It does not close C453. It is a consequence of C454, **not** a
+    C465/C467 are untouched. It did not close C453 in this batch. It is a consequence of C454, **not** a
     refutation of C454's denial from nothing, and citing it in the datum's favour would be
     circular. The price is `performative_act_datum` **and** `AxIntentionalChoice`, both visible
     and mandatory, where the conditional parent hid the first in a binder.
@@ -331,7 +331,7 @@ theorem freeSubject_exists_of_act_datum : ∃ s : Agency.Subject, Choice.FreeSub
     **What it does NOT do.** It does not enumerate what is meaningful, does not say which subject
     means, and does not bound the meanings (F15 `SemanticFinitude` is untouched and separate). It
     licenses no `Means → Initiates` bridge and does not make the ground meaningful, so F10
-    `Produces`, C462, C465/C467 are untouched. It does not close C453. A consequence of C454, so
+    `Produces`, C462, C465/C467 are untouched. It did not close C453 in this batch. A consequence of C454, so
     circular to cite in the datum's favour. The price is `performative_act_datum`, now visible and
     mandatory.
 

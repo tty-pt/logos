@@ -45,10 +45,12 @@ which is a different, weaker claim; see the module note in `FoundationalUnicity.
   batch added no theorem for it. What was missing was the reader-facing attributes row, which the
   generator now emits; the correction is recorded in `GAPMAP.md`. It is re-exported
   here in the master theorem (C446) so that all six stand side by side.
-* **Divine Immutability** has **no** discriminating form in this batch, and the reason is recorded
+* **Divine Immutability** had **no** discriminating form in this batch, and the reason was recorded
   in `DivineImmutability.lean` and in `ImmutabilitySoleBounded` below: `capacity_invariance` is
   vacuous by reflexivity and `Initiates` is an unconstrained signature field, so the necessary-kind
-  subject arm is not closable here. It is reported as a boundary, not quietly dropped.
+  subject arm was not closable here. It was reported as a boundary, not quietly dropped. That
+  boundary is now closed in the other direction by `Logos.ImmutabilitySoleBearer`: C453 is
+  `COUNTERMODEL`, not `DEFERRED`.
 -/
 
 import Logos.Core
@@ -139,8 +141,10 @@ theorem ofGround_sole_foundational_omniscience :
 
     **Disclosure — this is the operative sense, not the causal one.** `OperatesAt v e P` is
     *presence plus obtaining*, a priced identification of Γ's only operation relation
-    (`DivineOmnipotence.lean:120`); Γ has no production relation, so causal/creative omnipotence
-    stays BLOCKED at F10 and this theorem must not be read as touching it. The
+    (`DivineOmnipotence.lean:120`); in this batch Γ had no production relation, so causal/creative
+    omnipotence stayed BLOCKED at F10 and this theorem must not be read as touching it. The
+    production relation (C463) and the universal production bridge (C493) came later and leave
+    this row's footprint untouched. The
     `existence_everywhere_does_not_entail_operation` countermodel (`:150`) is the machine-checked
     statement of that gap.
 

@@ -28,9 +28,10 @@ Produces g v φ`, and nothing in the vocabulary relates them.
 - the ground produces *something* (C465's conclusion holds), and
 - the ground fails to produce a *second satisfiable form* (F10's (2) fails),
 
-so the two shapes are independent. There is no derivation of (2) from (1) and C465's shape, and
-any future attempt must supply a new bridge relating satisfiability to production — which is
-precisely the new substantive content the author declined on 2026-09-28.
+  so the two shapes are independent. There is no derivation of (2) from (1) and C465's shape, and
+  closing (2) requires a new bridge relating satisfiability to production — which is precisely the
+  new substantive content declared as C493 on 2026-09-29. This model remains the proof that the
+  bridge was needed; it is not falsified by paying for it.
 
 ## Why the counter-interpretation is admissible
 
@@ -42,8 +43,8 @@ unconstrained relation, and `SuccessionCountermodel` uses exactly this device fo
 itself. A row whose conclusion depended on `Produces` being richer than the corpus requires would
 be a claim about the axiom, not about Γ's derivability, and would have to be priced.
 
-**Governed distinction.** The absence of a bridge here is *not* a refutation of F10. F10's status
-stays `BLOCKED`, and the corpus's own note stands: (1) alone would not yield (2), and
+  **Governed distinction.** The absence of a bridge here is *not* a refutation of F10. F10's former
+  `BLOCKED` status is now replaced by the declared C493 bridge, and the corpus's standing note is that (1) alone would not have yielded (2), and
 `means_does_not_imply_means_selection` (`HostileSemantics.lean:1861`) already machine-checks that
 omni-scope does not entail selection power. What this module buys is that the blockage is now
 **settled with its price named** — two named primitives (`Satisfies`, `Produces`) and no bridge

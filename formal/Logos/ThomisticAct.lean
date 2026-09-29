@@ -139,10 +139,11 @@ The ground's love is efficacious: it produces.
  would silently cross the blocked necessary-personal-ground frontier (C228). Scoping refuses to
  generalise over the kind. `Tag: META` for C464's reason, one lane over (love → production).
 
- **The `∃ w φ` is existential and must stay so.** The distance between this row and F10's missing
- derivation — `(∃ w, Satisfies w φ) → ∃ v, Produces g v φ` (`DivineOmnipotence.lean:58`) — is the
- whole remaining Creator question. C306 already machine-checks that universal grounding entails no
- causal externality whatever, so the universal form is not a consequence of anything here.
+  **The `∃ w φ` is existential and stays so.** The universal production sentence is separately
+  declared as C493, not derived from this row: C306 already machine-checks that universal grounding
+  entails no causal externality whatever, and C483 shows that C465's existential shape does not entail
+  the universal shape. The remaining Creator question is still separate, because production is not
+  creation.
 
  **What it does NOT do.** It does not make the ground an initiator: production is not succession,
  and `NotInSuccession` is untouched by it (C461). It does not identify the ground's producing with
@@ -199,7 +200,7 @@ theorem loving_subject_initiates : ∀ s t : Subject, Loves s t →
  and no atom bears meaning (`EntityMeans (ofAtom _) = False`, `RecoveredOntologicalGround.lean:48-50`),
  while the person-datum route (C367) is not available without a contingent-kind subject, which
  `NecessarySubjectKind` supplies no instance of. So this row is **conditional**, exactly like C387,
- and no unconditional claim about the ground's production is made anywhere in the corpus.
+  and no unconditional claim about the ground's production is made by this conditional row; the unconditional universal is separately declared as C493.
 
  That the compatibility is not an artefact of the hypothesis is C461's job: in a free signature a
  ground produces *and* satisfies the succession field, for an arbitrary production relation.
@@ -215,10 +216,43 @@ theorem producing_coexists_with_immutability {t : Entity} {a : Prop}
     DivineImmutability Entity.ofGround ∧ ∃ w : World, ∃ φ : Form, Produces Entity.ofGround w φ :=
   ⟨ofGround_divine_immutability, ground_love_produces t a h⟩
 
+-- ===========================================================================
+-- Part IV: the universal derivation (C493)
+-- ===========================================================================
+
+/--Tag: META
+Universal production by the ground: every satisfiable form is produced somewhere.
+
+  F10's missing derivation (2), declared rather than derived. The denial is consistent:
+  C483 exhibits a free-signature interpretation in which the ground produces exactly one of two
+  satisfiable forms, while C465's existential shape still holds. The exact universal is therefore
+  new substantive content, not a consequence of the declared production relation plus the
+  existential love-production bridge.
+
+  `Tag: META`: it connects `Satisfies` and `Produces`, so `VOCAB`'s "asserts no connection" rule
+  excludes it; it is a claim about what the ground's production does, not a choice about what
+  production or satisfaction *means*, so `SEM` is excluded. It is deliberately scoped to
+  `Entity.ofGround`, as C465 is, and it does not identify production with creation: `Produces`
+  is not `Creates`, and C110's separation stands.
+
+  Consistency model: extend the present interpretation by taking the ground's production to be
+  satisfaction-indexed — for `Entity.ofGround`, produce exactly the satisfiable forms — while
+  leaving all other relations and entities untouched. C465's existential conclusion is then a
+  consequence of the universal, and C483 remains true as a shape-level independence result about
+  an *unconstrained* production relation. The price is one declared metaphysical bridge.
+
+  Footprint: `{Produces, Subject}` plus itself — the production relation it constrains and the
+  `Entity`-layer `Subject` floor. No SEM price is removed or added elsewhere.
+  -/
+axiom ground_produces_every_satisfiable_form :
+    ∀ φ : Form, (∃ w : World, Logos.Semantics.Satisfies w φ) →
+      ∃ v : World, Produces Entity.ofGround v φ
+
 #print axioms Produces
 #print axioms love_implies_act
 #print axioms ground_love_produces
 #print axioms loving_subject_initiates
 #print axioms producing_coexists_with_immutability
+#print axioms ground_produces_every_satisfiable_form
 
 end Logos.ThomisticAct

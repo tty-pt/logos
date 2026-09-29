@@ -210,28 +210,33 @@ exact ⟨greatResult, noBothTrueAndFalse⟩
 
 ### 7. Simplicity and non-compositeness
 
-- **Current status:** ✅ **PROVEN** in `formal/Logos/DivineSimplicity.lean` (C192–C196; audited footprints `{}` and `{Means, Subject, propext}`).
+- **Current status:** ✅ **PROVEN** in `formal/Logos/DivineSimplicity.lean` (C192–C196; audited footprints `{}` and `{Means, Subject, propext}`), with the last conditional form discharged in `formal/Logos/CharacteristicClosure.lean` (C484–C486, C491–C492).
 - **Results:**
   1. `ProperPart p e := p ≠ e ∧ GroundsEntity p e`, `NonComposite e := ¬ ∃ p, ProperPart p e`, proving `non_composite_iff_canonical_aseity` and `ofGround_non_composite` (`{Means, Subject, propext}`);
   2. Structural Inextension: `ofGround_has_no_internal_components` (C193, `{Subject}`);
   3. Intentional Simplicity: `ofGround_undivided_meaning` (C194, `{Means, Subject}`) and `discriminating_subject_not_undivided`;
   4. Ontological Transcendence: `ofGround_transcendent` (C195, `{Subject}`);
   5. The Master Synthesis: `ofGround_divine_simplicity` (C196, `{Means, Subject, propext}`, 0 substantive axioms);
-  6. Metatheoretic Independence: `composite_entity_fails_simplicity` (C192, `{}`).
+  6. Metatheoretic Independence: `composite_entity_fails_simplicity` (C192, `{}`);
+  7. Unconditional Simplicity: `the_ground_is_divinely_simple` (C484), `some_entity_is_divinely_simple` (C485), and `the_ground_is_sole_bearer_of_divine_simplicity` (C486), all vocabulary-only with declared F15;
+  8. Thomistic Principle: `transcendence_and_semantic_finitude_yield_divine_simplicity` (C491) for every transcendent entity, given F15;
+  9. Bound Independence: `the_semantic_bound_does_not_close_the_grounding_arm` (C492, `{}`), separating `Means`-side and `GroundsEntity`-side finitude.
 - **Honest boundary:** this establishes mereological, structural, and intentional simplicity of `Entity.ofGround` — it does not establish identity of essence and existence or exhaustive formal simplicity. Scholastic simplicity (essence-existence identity) is explicitly separated in the attributes table as `❌ NOT ESTABLISHED`.
 
 ### 8. Eternity, timelessness, and ontological precedence
 
 - **Completed live layer:** C181 and canonical corollaries in `NecessityEternity.lean:101-188`: stage uniformity, everlasting, atemporal, and non-succession results. **Leitura exacta (2026-09-28, lote SUCCESSION C458–C462):** a não-sucessão é *não-correlatividade*, não *não-iniciação* — `the_ground_not_in_succession` descarta o conjugado `Initiates`; C459 mostra que o mesmo predicado vale para todo o átomo, e C460 a sua não-trivialidade.
-- **Divine Immutability completed:** ✅ **PROVEN** in `formal/Logos/DivineImmutability.lean` (C197–C201; footprints `{}` and `{Initiates, Means, State, Subject}`). Results:
+- **Divine Immutability completed:** ✅ **PROVEN** in `formal/Logos/DivineImmutability.lean` (C197–C201; footprints `{}` and `{Initiates, Means, State, Subject}`), with the transition-field refuter and sole-bearer separation in `formal/Logos/CharacteristicClosure.lean` and `formal/Logos/ImmutabilitySoleBearer.lean` (C487–C490, F17). Results:
   1. `ModalInvariance` (`ofGround_modal_invariance`, C198, `{Subject}`);
   2. `StageInvariance` (`ofGround_stage_invariance`, C199, `{Subject}`);
   3. `TransitionInvariance` (`ofGround_transition_invariance`, C200, `{Initiates, State, Subject}`);
   4. `CapacityInvariance` (`ofGround_capacity_invariance`, `{Means, Subject}`);
   5. The Master Synthesis: `ofGround_divine_immutability` (C201, `{Initiates, Means, State, Subject}`, 0 substantive axioms);
   6. The Thomistic Principle: `necessity_and_atemporality_yield_immutability` (ST I q. 9 a. 1–2);
-  7. Metatheoretic Independence: `contingent_entity_fails_immutability` (C197, `{}`).
-- **Honest boundary:** establishes modal, temporal, process, and capacity unchangeability in Γ; does not claim psychological impassibility or constrain relational intentionality. Psychological impassibility is explicitly separated in the attributes table as `❌ NOT ESTABLISHED`.
+  7. Metatheoretic Independence: `contingent_entity_fails_immutability` (C197, `{}`);
+  8. Transition Non-Vacuity: `some_entity_is_in_succession` (C487, `PROVEN↑`) and `a_subject_that_acts_is_in_succession` (C488, vocabulary-only);
+  9. Sole-Bearer Separation: `immutability_is_not_sole_bearer` (C489, `{}`) and `the_act_datum_does_not_entail_every_subject_acts` (C490, `{}`), with frontier F17 naming the unavailable per-necessary-kind-subject universal.
+- **Honest boundary:** establishes modal, temporal, process, and capacity unchangeability in Γ; it no longer claims unique immutability. It does not claim psychological impassibility or constrain relational intentionality. Psychological impassibility is explicitly separated in the attributes table as `❌ NOT ESTABLISHED`.
 
 ### 9. Precedence to the true/false distinction
 
@@ -290,9 +295,9 @@ exact ⟨greatResult, noBothTrueAndFalse⟩
 
 - **Completed live layer:** `formal/Logos/DivineOmnipotence.lean` proves the *orthodox non-contradictory* sense for `Entity.ofGround` (C241–C251, 0 substantive axioms): no satisfiable state of affairs is closed to the ground's operative scope (`ofGround_gapless_operative_scope`, `{NecessarySubjectKind, Subject}`), with both faces of the restriction explicit — nothing unobtained is operated (`ofGround_operates_only_what_obtains`, `{NecessarySubjectKind, Subject}`) and no contradiction is ever operated (`ofGround_does_not_operate_contradictions`, `{NecessarySubjectKind, Subject, propext}`) — plus the master synthesis `ofGround_foundational_omnipotence` (`{CL, Means, NecessarySubjectKind, Subject}`) and the *semper* principle `necessity_and_presence_yield_foundational_omnipotence`.
 - **Reframed, not overstated (2026-09-26):** the batch's first draft proposed to refute "the strong sense of omnipotence" by naming contradiction-omni as *the* classical sense. That was wrong — Aquinas' sense is power over whatever does not involve a contradiction (*ST* I q. 25 a. 5 ad 1) — so the restriction is **affirmed**, and only the contradiction-omni reading is refuted (C244), by the restriction itself.
-- **The price is disclosed:** Γ has no production relation, so `OperatesAt` reads "operates" as presence plus obtaining, priced as ◈ `operatesAt_presencePlusObtaining` (`Tag: SEM`). The price is machine-checked, not asserted: `existence_everywhere_does_not_entail_operation` (`{}`) — presence everywhere ⇏ operation; `exhaustive_scope_without_operative_scope` (`{}`) — exhaustive scope ⇏ operative scope; `gapless_operative_scope_without_conjunctive_power` (`{}`) — gapless scope ⇏ conjunctive power.
-- **Honest boundary:** causal/creative omnipotence ("can bring X about") stays 🔴 **BLOCKED**, and the prose disclaimer (`README-OLD.md:263`) is retained **narrowed to that sense only** (GAPMAP Level 17, row F10). Two statements are missing, in order: the vocabulary `Produces : Entity → World → Form → Prop`, and the derivation that the ground produces every satisfiable state of affairs. `Agency.Initiates` is subject-indexed and `Entity.ofGround` is not a subject correlate (`ofGround_ne_ofSubject`); `GroundsEntity` cannot substitute, by C250.
-- **Do not claim:** causal or creative power for the ground, and do not read Foundational Omnipotence as a claim about bringing contingent beings into existence.
+- **The price is disclosed:** in this batch Γ had no production relation, so `OperatesAt` reads "operates" as presence plus obtaining, priced as ◈ `operatesAt_presencePlusObtaining` (`Tag: SEM`). The price is machine-checked, not asserted: `existence_everywhere_does_not_entail_operation` (`{}`) — presence everywhere ⇏ operation; `exhaustive_scope_without_operative_scope` (`{}`) — exhaustive scope ⇏ operative scope; `gapless_operative_scope_without_conjunctive_power` (`{}`) — gapless scope ⇏ conjunctive power. The relation (C463) and the universal (C493) have since been declared; the weakened reading and its price stay exactly as stated for the non-contradictory sense.
+- **Honest boundary:** causal/creative omnipotence ("can bring X about") was 🔴 **BLOCKED** until 2026-09-29, and is now **declared, not derived** (GAPMAP Level 17, row F10 now `AXIOM`). The two statements both landed, in order: the vocabulary `Produces : Entity → World → Form → Prop` (C463, `Tag: VOCAB`), and the universal `ground_produces_every_satisfiable_form` (C493, `Tag: META`) — every satisfiable form is produced by the ground somewhere. C483 remains the proof the bridge was new content. `Agency.Initiates` is subject-indexed and `Entity.ofGround` is not a subject correlate (`ofGround_ne_ofSubject`); `GroundsEntity` cannot substitute, by C250. Production is still not creation (C110 stands).
+- **Do not claim:** that universal production derives creation, or read Foundational Omnipotence as a claim about bringing contingent beings into existence. The causal sense now rests on the named C493 bridge; reject the bridge and the sense goes with it.
 
 ### 16. Benevolence and ordinary moral perfection
 
@@ -305,7 +310,7 @@ exact ⟨greatResult, noBothTrueAndFalse⟩
 - **Completed thin result:** `ofGround_ground_of_reality` is definitional grounding, not efficient causation.
 - **Existing separation:** `ConditionalTheology.necessary_ground_not_entails_contingent_creation` (`formal/Logos/ConditionalTheology.lean:417-424`) is a countermodel.
 - **2026-09-27 — the existence half is now a *free theorem*, still not an entailment.** Two rows, split: `CosmicExistence.contingent_realm_obtains : ContingentRealmObtains` (**C350**) derives the realm's **existence** inside Γ with footprint `{CL, NecessarySubjectKind, Subject}` — no bridge at all — from `LovesAsGround.an_atom_is_contingent 0`; and `CosmicExistence.cosmos_obtains : CreatedRealm` (**C367**) derives its **meaning** from an exhibited contingent person — footprint `{CL, Means, NecessarySubjectKind, Subject, Will, subjectWill}`, no bridge since the two-kinds correction. Rejecting the person-datum therefore no longer removes the cosmos's existence: it removes only its being a bearer of content. The old `PROVEN↑` Cosmos-existence row (C350, `cosmos_obtains`) was the 2026-09-27 intermediate state, superseded the same day (lot COSMOS-EXISTENCE-IS-FREE); an earlier draft of this line readoSubjects}` (GAPMAP Level 21, C350 `PROVEN↑`; `theorems/T30.txt`; `base.txt` §35; `CHARACTERISTICS.md` §6c). `[Earlier today this row said the cosmos was a declared `Tag: SEM` datum; that was wrong and has been retired — see batch COSMOS-IS-PROVEN.]` Conditional satisfiability is machine-checked relative to a `Means` inhabitant (C354); the contingency shape is non-trivial (C353, `{}`). What F9's existence half does **not** become: an entailment from the necessary ground (the C110 separation stands), a purpose claim, or an incarnation claim. It also does not become axiom-free — an ontological claim now rests on declared vocabulary (an exhibited witness).
-- **Next work:** creation ex nihilo *as entailment* still requires a creator/creation relation, temporal beginning or contingency semantics, and a bridge from necessary ground to production — all still BLOCKED. Purpose remains deliberately unformalized.
+- **Next work:** creation ex nihilo *as entailment* still requires a creator/creation relation, temporal beginning or contingency semantics — all still BLOCKED. The bridge from necessary ground to *production* now exists (C493, declared); what is still missing is any bridge from production to *creation*. Purpose remains deliberately unformalized.
 - **Do not claim:** that grounding validity creates entities, or that the realm's existence derives *from the ground*. **(Re-split 2026-09-27: an earlier version of this line said it "derives from plurality" — that was the pre-split reading and is now false for existence.)** Existence (C350) derives from a **bare atom witness** (`LovesAsGround.an_atom_is_contingent 0`), with no bridge and no plurality. Plurality (`AxTwoSubjects`) pays only for the *meaning* (C367).
 
 ### 18. Pantheism as the excluded alternative

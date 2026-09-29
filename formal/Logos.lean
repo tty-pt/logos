@@ -164,3 +164,14 @@ import Logos.ActCascade
 -- claim about Γ, and **not** a refutation of F10, which stays BLOCKED. Plan of record
 -- is `WIN.md` §2 B2.
 import Logos.ProductionCountermodel
+-- The last two structural gaps in the characteristic family, closed at 0 new axioms.
+-- `Logos.CharacteristicClosure`: Divine Simplicity was the last *conditional* instantiated
+-- form, and its premise turned out to be the now-declared F15 `SemanticFinitude` (C484-C486);
+-- `TransitionInvariance` is shown refutable, the one field C321's vacuity finding did not
+-- reach (C487-C488); and the Thomistic principle form the characteristic was missing is
+-- supplied together with the machine-checked finding that F15 bounds the wrong relation
+-- for it (C491-C492). `Logos.ImmutabilitySoleBearer`: C453 is refuted, not deferred — a
+-- second entity bears all four immutability fields while the act datum stays saturated
+-- (C489), and the exact per-subject statement C454 does not give is named (C490).
+import Logos.CharacteristicClosure
+import Logos.ImmutabilitySoleBearer

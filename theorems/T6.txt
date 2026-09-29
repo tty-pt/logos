@@ -133,9 +133,18 @@ não restringido quando C454 (`performative_act_datum`, `Tag: TRANS`) o habitou,
 contramodelo em que ninguém inicia deixou de ser admissível como modelo de Γ. Isto **não
 fecha** o braço dos sujeitos — retira-lhe a razão de ser; e o que resta do campo
 `NotInSuccession` é mais fraco do que a redacção sugere (C458–C459). O `DEFERRED` de C453
-mantém-se. Divulgação obrigatória sobre C439: `EntityMeans (ofAtom _) = False` torna
+mantinha-se então. Divulgação obrigatória sobre C439: `EntityMeans (ofAtom _) = False` torna
 `undivided_meaning` **vacuamente verdadeira de todo o átomo**, logo só
 `no_internal_components` é portador para a unicidade.
+
+Actualização 2026-09-29 (lote CHARACTERISTIC-CLOSURE, C484–C492): o `DEFERRED` de C453
+**não se mantém**. C489 satura o dado com um sujeito actuante e um sujeito de espécie
+necessária que nunca inicia; C490 separa o universal exacto
+`∀ s, NecessarySubjectKind s → ∃ σ σ' p, Initiates s σ σ' p` como fronteira F17.
+C453 é agora `COUNTERMODEL`, por independência de forma e sem falsidade interna de Γ.
+O mesmo lote descarrega a última forma condicional da Simplicidade (C484–C486) e fornece
+o sexto princípio tomista da família (C491); C492 mostra que F15 limita o lado de `Means`,
+não o lado de `GroundsEntity` de que um princípio mais barato precisaria.
 
 Continua NÃO preventivo / ainda requer prova (nada disto foi avançado por este lote):
 a teologia forte da eternidade metafísica "fora de toda a temporalidade" (§8,

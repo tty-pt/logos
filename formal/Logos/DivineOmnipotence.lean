@@ -40,22 +40,20 @@ This module formalizes the characteristic of **Foundational Omnipotence**
   the orthodox restriction, not against it: `φ ∧ ¬φ` is unsatisfiable in every
   world of Γ's classical valuation semantics, so it can never be operated. This
   is a coherence result of the framework, not a criticism of any doctrine.
-- **The causal/creative sense remains BLOCKED** and is *not* claimed here. "Can
-  bring X about" needs a production relation Γ does not have: the only initiation
-  relation is `Agency.Initiates : Subject → State → State → Prop → Prop`
-  (`Agency.lean:168`), a declared VOCAB axiom, and it is **subject**-indexed while
-  `Entity.ofGround` is provably not a subject correlate
-  (`ofGround_ne_ofSubject`, `NecessityEternity.lean:160`). The exact missing
-  statements are recorded in `formal/GAPMAP.md` (Level 17) and `theorems/T27.txt`
-  (written here without the `axiom`/`def` keywords on purpose — a line starting
-  with `axiom` inside this header is parsed as a real axiom declaration by `depviz`
-  and by `scripts/build_deduction.py`, which would register a phantom axiom):
+- **The causal/creative sense is now declared, not derived.** "Can bring X about" uses the
+  entity-level production relation `Logos.ThomisticAct.Produces : Entity → World → Form → Prop`
+  (C463, `Tag: VOCAB`); the only initiation relation remains `Agency.Initiates`
+  (`Agency.lean:168`), which is **subject**-indexed while `Entity.ofGround` is provably not a
+  subject correlate (`ofGround_ne_ofSubject`, `NecessityEternity.lean:160`). The two F10 items
+  are recorded in `formal/GAPMAP.md` (Level 17) and `theorems/T27.txt`:
 
-      (1) MISSING VOCABULARY — a production relation, one level down from `Initiates`:
-          Produces : Entity → World → Form → Prop
-      (2) MISSING DERIVATION — the causal sense, which (1) alone does not give:
-          for all g : Entity and all φ : Form,
-            (∃ w, Satisfies w φ) → ∃ v, Produces g v φ
+      (1) VOCABULARY — a production relation, one level down from `Initiates`:
+          Produces : Entity → World → Form → Prop (C463, declared);
+      (2) DERIVATION — the causal sense, which (1) alone does not give and which is now separately
+          declared, not derived: `Logos.ThomisticAct.ground_produces_every_satisfiable_form` (C493,
+          `Tag: META`). It closes F10's universal sentence as a priced metaphysical bridge, while C483
+          remains the shape-level proof that (1) plus C465's existential shape would not have entailed
+          it. Production is still not creation: C110's `Creates` separation stands.
 
   Note that (1) alone would not yield (2): `GroundsEntity`
   (`RecoveredOntologicalGround.lean:57`) is explanatory containment (*esse est
@@ -109,11 +107,13 @@ def PossibleAt (frame : KripkeFrame World) (w : World) (P : WProp) : Prop :=
   ∃ v, frame.R w v ∧ P v
 
 /-- **THE PRICED IDENTIFICATION — the founding decision of this batch.**
-    Γ has no causal production relation (see the module header), so the canonical
+    In this batch Γ had no causal production relation (see the module header), so the canonical
     operation relation is *presence plus obtaining*: the entity is present at `v`
     and the content P obtains at `v`. This is a **definition**, not a derivation:
-    C241 machine-checks that the price is real (presence ⇏ production), and the
-    causal/creative sense stays BLOCKED.
+    C241 machine-checks that the price is real (presence ⇏ production). The causal/creative sense
+    has since been closed by declaration, not by this definition: C463 declares the production
+    relation and C493 (`Tag: META`) declares universal production, while this row keeps its
+    weakened reading and footprint.
     Footprint: `{NecessarySubjectKind, Subject}`. -/
 def OperatesAt (v : World) (e : Entity) (P : WProp) : Prop :=
   ExistsAt v e ∧ P v

@@ -55,7 +55,6 @@ DEPGRAPH_PATH = FORMAL / "depgraph.json"
 OUT_PATH = ROOT / "README.md"
 PRESENTATION_SPINE_PATH = FORMAL / "presentation_spine.json"
 
-
 def load_presentation_spine(path: Path = None) -> dict | None:
     """Loads declarative presentation spine metadata defining the human presentation DAG."""
     if path is None:
@@ -67,7 +66,6 @@ def load_presentation_spine(path: Path = None) -> dict | None:
             print(f"Warning: failed to load presentation spine from {path}: {e}")
             return None
     return None
-
 
 CONT_CHARS = ("-", ",", "→", "∧", "∨", "↔", ":", "(", "{", "[", "=", "+")
 
@@ -81,7 +79,6 @@ STATUS_ORDER = ["PROVEN", "PROVEN↑", "AXIOM", "BLOCKED", "DEFERRED"]
 # ---------------------------------------------------------------------------
 # 1. Lean source parsing
 # ---------------------------------------------------------------------------
-
 
 def strip_block_comments(text: str) -> str:
     """Remove /- ... -/ block comments and -- line comments from Lean text."""
@@ -101,7 +98,6 @@ def strip_block_comments(text: str) -> str:
         out.append(text[i])
         i += 1
     return "".join(out)
-
 
 def parse_lean_sources() -> dict:
     """Return {fullName: info} for every user-authored declaration.
@@ -215,15 +211,12 @@ def parse_lean_sources() -> dict:
 
     return decls
 
-
 TAG_RE = re.compile(r"^Tag:\s*([A-Za-z_][A-Za-z0-9_]*)\s*$", re.M)
-
 
 def _tag_for(doc: str) -> str:
     """Axiom-type tag declared on the docstring's `Tag:` line (VOCAB/SEM/META)."""
     m = TAG_RE.search(doc or "")
     return m.group(1) if m else ""
-
 
 def _doc_for(doc: str) -> str:
     """First paragraph of a doc comment, trimmed to ~260 chars.
@@ -252,7 +245,6 @@ def _doc_for(doc: str) -> str:
         para = cut.rstrip(" ,;:.") + "…"
     return para
 
-
 def _claim_gloss_for(doc: str) -> str:
     """First paragraph of a doc comment, *uncapped* (FORMAT.md §4.1).
 
@@ -272,7 +264,6 @@ def _claim_gloss_for(doc: str) -> str:
                 para += "."
     return " ".join(para.split())
 
-
 def _doc_full_for(doc: str) -> str:
     """Full doc comment (all paragraphs), with only the mechanical `Tag:` line
     dropped. Paragraphs are preserved so `Philosophical cost:` text (appended
@@ -285,7 +276,6 @@ def _doc_full_for(doc: str) -> str:
         doc = doc[m.end():]
     return doc.strip()
 
-
 def _cost_for(doc_full: str) -> str:
     """The `Philosophical cost:` paragraph of an axiom docstring, if present."""
     m = re.search(r"Philosophical cost:\s*(.*)", doc_full or "", re.S)
@@ -293,7 +283,6 @@ def _cost_for(doc_full: str) -> str:
         return ""
     txt = " ".join(m.group(1).split())
     return (txt[0].upper() + txt[1:]) if txt else txt
-
 
 def _capture_statement(lines: list, start: int, kind: str) -> tuple[str, int]:
     """Return (statement_text, last_consumed_line_index) for a declaration."""
@@ -340,7 +329,6 @@ def _capture_statement(lines: list, start: int, kind: str) -> tuple[str, int]:
             break
     return statement.strip(), i
 
-
 # ---------------------------------------------------------------------------
 # 2. GAPMAP parsing
 # ---------------------------------------------------------------------------
@@ -365,7 +353,6 @@ _NOT_CLAIM_ID = {
     "Section", "Level", "Passage", "Item", "Batch", "Cid Pegada",
 }
 
-
 def _is_claim_id_cell(cell: str) -> bool:
     """True when a GAPMAP first-column cell is a claim id rather than a header.
 
@@ -384,7 +371,6 @@ def _is_claim_id_cell(cell: str) -> bool:
         if not re.match(r"^(FAITH-\d+)\s*$", c):
             return False
     return True
-
 
 def parse_gapmap() -> list:
     """Return sections: [{title, claims:[{...}]}]. claims entries without
@@ -469,7 +455,6 @@ def parse_gapmap() -> list:
         cur["claims"].append(claim)
     return sections
 
-
 _LEVEL_MODULES = {
     "Level 0": {"Core"},
     "Level 1": {"Necessity", "Semantics", "Entity", "Modal"},
@@ -477,11 +462,9 @@ _LEVEL_MODULES = {
     "Level 3": {"Choice", "Value", "Plurality", "Love"},
 }
 
-
 def _level_key(title: str) -> str:
     m = re.match(r"^Level\s+\d", title)
     return m.group(0) if m else ""
-
 
 def _extract_lean_ref(cell: str) -> str:
     """Pull the Lean declaration name out of a GAPMAP cell.
@@ -500,18 +483,15 @@ def _extract_lean_ref(cell: str) -> str:
             return tok
     return ""
 
-
 def _clean_status(s: str) -> str:
     for st in sorted(STATUS_ORDER, key=len, reverse=True):  # longest first: PROVEN↑ before PROVEN
         if s.startswith(st):
             return st
     return s.split()[0] if s else ""
 
-
 # ---------------------------------------------------------------------------
 # 3. Depgraph loading
 # ---------------------------------------------------------------------------
-
 
 def load_depgraph() -> dict:
     data = json.loads(DEPGRAPH_PATH.read_text(encoding="utf-8"))
@@ -531,11 +511,9 @@ def load_depgraph() -> dict:
             inn[t].add(s)
     return {"node_map": node_map, "out": dict(out), "in": dict(inn)}
 
-
 # ---------------------------------------------------------------------------
 # 4. Resolution: GAPMAP claim <-> kernel declaration
 # ---------------------------------------------------------------------------
-
 
 def resolve(lean_ref: str, decls: dict, node_map: dict, level_key: str = "") -> str | None:
     if not lean_ref:
@@ -560,7 +538,6 @@ def resolve(lean_ref: str, decls: dict, node_map: dict, level_key: str = "") -> 
                 return preferred[0]
         return sorted(matches)[0]  # deterministic fallback; noted in the report
     return None
-
 
 # ---------------------------------------------------------------------------
 # 5. Render
@@ -639,17 +616,14 @@ RETIRED_AXIOMS = {
     "divine_nature_is_personal", "divine_person_is_necessary",
 }
 
-
 def _short(name: str) -> str:
     """Bare identifier for CL classification (`Init.Core.propext` → propext)."""
     return name.rsplit(".", 1)[-1]
-
 
 def audit_footprint(full: str) -> list:
     """Exact, transitive kernel axiom set of a declaration (empty if the decl
     is not an audited kernel node)."""
     return _AUDIT.get(full) or []
-
 
 def footprint_parts(full: str) -> tuple[list, list, list]:
     """Split the audited kernel footprint → (substantive, vocab, cl)."""
@@ -681,7 +655,6 @@ def footprint_parts(full: str) -> tuple[list, list, list]:
             raise SystemExit(f"FATAL: unrecognized axiom `{a}` in footprint of `{full}`")
     return sorted(set(subst)), sorted(set(vocab)), sorted(cl)
 
-
 def is_vocab_only(full: str) -> bool:
     """True when a claim's kernel footprint carries only declared vocabulary
     axioms (VOCAB) of the statement itself and no substantive axiom (SEM/META/TRANS).
@@ -689,13 +662,11 @@ def is_vocab_only(full: str) -> bool:
     subst, vocab, _ = footprint_parts(full)
     return bool(vocab) and not subst
 
-
 def kernel_fp_text(full: str) -> str:
     """Rendered kernel footprint: Logos axiom bases + `CL` for meta-logic."""
     subst, vocab, cl = footprint_parts(full)
     names = subst + vocab + (["CL"] if cl else [])
     return "{" + ", ".join(names) + "}" if names else "{}"
-
 
 def load_axiom_registry(decls: dict, node_map: dict) -> dict:
     """{axiom base name: {tag, gloss, full}} from the Lean docstrings.
@@ -719,13 +690,11 @@ def load_axiom_registry(decls: dict, node_map: dict) -> dict:
         }
     return registry
 
-
 def load_audit() -> dict:
     if not AUDIT_PATH.exists():
         raise SystemExit(f"ERROR: {AUDIT_PATH} missing. Run "
                          "`python3 scripts/audit_footprints.py` first (see AGENTS.md).")
     return json.loads(AUDIT_PATH.read_text(encoding="utf-8"))
-
 
 def expand_footprint(cid: str, fp_by_id: dict, seen=None) -> str:
     """Resolve an inherited GAPMAP footprint (`as C18`, `via C40`) recursively
@@ -738,21 +707,17 @@ def expand_footprint(cid: str, fp_by_id: dict, seen=None) -> str:
         return expand_footprint(m.group(1), fp_by_id, seen | {cid})
     return fp
 
-
 def curated_footprint(c: dict) -> str:
     """GAPMAP footprint transcription (kept for the annex / consistency check
     only — the badge never consults it)."""
     return c.get("_curated_fp", c.get("footprint") or "")
 
-
 def le_line(file: str, line: int) -> str:
     return f"[{file}#L{line}](formal/Logos/{file}#L{line})"
-
 
 def claim_lookup(claims_by_id, fullname):
     """Return claim dict whose resolved fullName == fullname, else None."""
     return claims_by_id.get(fullname)
-
 
 def dep_list(fullnames, claims_by_id, decls):
     """Name the dependencies, preferring claim IDs, then axioms, then raw."""
@@ -775,7 +740,6 @@ def dep_list(fullnames, claims_by_id, decls):
             pieces.append(f"`{f.replace('Logos.', '') if f.startswith('Logos.') else f}`")
     return ", ".join(pieces) if pieces else "—"
 
-
 def _closure_axioms(full: str, graph: dict, node_map: dict) -> set:
     """Transitive Logos-axiom set reachable over the graph's dependency edges
     (in-edges), for tool-fidelity cross-checking against the audit."""
@@ -794,7 +758,6 @@ def _closure_axioms(full: str, graph: dict, node_map: dict) -> set:
                 stack.append(t)
     return ax
 
-
 def derived_for(c: dict, node_map: dict) -> str | None:
     """The kernel-derived status of a claim, or None when no deduction exists
     to analyze (no kernel node, or the row is a curator cross-reference:
@@ -809,7 +772,6 @@ def derived_for(c: dict, node_map: dict) -> str | None:
         return "AXIOM"
     subst, _, _ = footprint_parts(full)
     return "PROVEN↑" if subst else "PROVEN"
-
 
 def classify_claims(all_claims: list[dict], decls: dict, node_map: dict) -> dict[str, list[dict]]:
     """Partition claims into FOUND, RETIRED_BLOCKED, and MISSING (3-way distinction).
@@ -830,7 +792,6 @@ def classify_claims(all_claims: list[dict], decls: dict, node_map: dict) -> dict
         "MISSING": missing,
     }
 
-
 def compute_detailed_badges(all_claims: list[dict], decls: dict, node_map: dict) -> dict[str, str]:
     """Compute the displayed status badge for each claim as emitted in README.md."""
     already_seen = {}
@@ -847,9 +808,7 @@ def compute_detailed_badges(all_claims: list[dict], decls: dict, node_map: dict)
             detailed_badges[c["id"]] = badge_for(c, decls, node_map)
     return detailed_badges
 
-
 ALL_CHAIN_STEPS = None  # bound in main() once the lists above are defined
-
 
 # The reader-facing narrative chains, in the order they are emitted. Membership is
 # hand-maintained (AGENTS.md); badges and footprints inside each row are derived.
@@ -868,8 +827,8 @@ CHAIN_LISTS = [
     ("SUCCESSION-AUDIT", "SUCCESSION_AUDIT_STEPS"),
     ("THOMISTIC-ACT", "THOMISTIC_ACT_STEPS"),
     ("ACT-CASCADE", "ACT_CASCADE_STEPS"),
+    ("CHARACTERISTIC-CLOSURE", "CHARACTERISTIC_CLOSURE_STEPS"),
 ]
-
 
 # Declarations that a reader must be able to find in the rendered deduction, and
 # the chain lists that are therefore not allowed to drop them. This is the small,
@@ -921,6 +880,8 @@ CHAIN_REQUIRED_DECLS = {
         "C464 — love implies an act; implication, never identity",
     "Logos.ThomisticAct.ground_love_produces":
         "C465 — the ground's love is productive, scoped to `ofGround`",
+    "Logos.ThomisticAct.ground_produces_every_satisfiable_form":
+        "C493 — universal production, F10 item (2) declared as a META bridge",
     "Logos.ThomisticAct.loving_subject_initiates":
         "C466 — a loving subject initiates",
     "Logos.ThomisticAct.producing_coexists_with_immutability":
@@ -949,8 +910,25 @@ CHAIN_REQUIRED_DECLS = {
         "C479 — a free subject exists; `FreeSubject` is defined as `FreeWill`",
     "Logos.ActCascade.noMeaning_is_refuted_unconditionally":
         "C480 — meaninglessness refuted with no semantic price at all",
+    "Logos.CharacteristicClosure.the_ground_is_divinely_simple":
+        "C484 — unconditional Divine Simplicity, paying declared F15",
+    "Logos.CharacteristicClosure.some_entity_is_divinely_simple":
+        "C485 — simplicity instantiated",
+    "Logos.CharacteristicClosure.the_ground_is_sole_bearer_of_divine_simplicity":
+        "C486 — unconditional attributes-table form",
+    "Logos.CharacteristicClosure.some_entity_is_in_succession":
+        "C487 — the first refuter for transition invariance",
+    "Logos.CharacteristicClosure.a_subject_that_acts_is_in_succession":
+        "C488 — the refuter in conditional form",
+    "Logos.ImmutabilitySoleBearer.immutability_is_not_sole_bearer":
+        "C489 — C453 separated, not deferred",
+    "Logos.ImmutabilitySoleBearer.the_act_datum_does_not_entail_every_subject_acts":
+        "C490 — the global datum does not entail necessary-kind initiation",
+    "Logos.CharacteristicClosure.transcendence_and_semantic_finitude_yield_divine_simplicity":
+        "C491 — the missing Thomistic principle form",
+    "Logos.CharacteristicClosure.the_semantic_bound_does_not_close_the_grounding_arm":
+        "C492 — F15 bounds the wrong relation",
 }
-
 
 def verify_chain_coverage(node_map: dict, claims_by_id: dict) -> None:
     """Hard-fail the build on two chain-list defects, and report coverage.
@@ -1013,7 +991,6 @@ def verify_chain_coverage(node_map: dict, claims_by_id: dict) -> None:
     print(f"  ✓ chain coverage: all {len(CHAIN_REQUIRED_DECLS)} required declarations "
           f"present ({len(listed)} distinct declarations listed).")
 
-
 def verify_gloss_relations(all_claims: list[dict], decls: dict, graph: dict):
     """Ensure that prose glosses do not claim relations (like active loving)
     unless that relation actually occurs in the formal statement or kernel dependencies."""
@@ -1046,9 +1023,7 @@ def verify_gloss_relations(all_claims: list[dict], decls: dict, graph: dict):
     if errors:
         raise AssertionError("Gloss relation consistency verification failed:\n" + "\n".join(errors))
 
-
 STIPULATION_AUDIT_PATH = FORMAL / "stipulation_audit.json"
-
 
 def render_stipulation_badge() -> list[str]:
     """◈ badge rows for the registered definitional stipulations.
@@ -1074,7 +1049,6 @@ def render_stipulation_badge() -> list[str]:
     if not lines:
         lines.append("- (no stipulations registered)")
     return lines
-
 
 def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_info, glosses):
     L = []
@@ -1271,7 +1245,6 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
     L += render_ledger_tables(sections)
     return L
 
-
 def render_code_annex(sections, claims_by_id, decls, node_map, graph):
     """Per-claim code references: Lean decl, file:line, kernel footprint,
     Lean dependencies and usage. Everything technical the philosopher-facing
@@ -1317,7 +1290,6 @@ def render_code_annex(sections, claims_by_id, decls, node_map, graph):
     ap("---")
     return L
 
-
 def render_appendix(sections, decls, node_map, claims_by_id, graph, level_map):
     L = []
     ap = L.append
@@ -1347,7 +1319,6 @@ def render_appendix(sections, decls, node_map, claims_by_id, graph, level_map):
     ap("---")
     return L
 
-
 def render_provenance() -> list:
     L = []
     ap = L.append
@@ -1374,16 +1345,13 @@ def render_provenance() -> list:
     ap("---")
     return L
 
-
 # ---------------------------------------------------------------------------
 # helpers
 # ---------------------------------------------------------------------------
 
-
 def trim_stmt(s: str) -> str:
     s = re.sub(r"\s+", " ", s).strip()
     return s[:180] + " …" if len(s) > 180 else s
-
 
 def short_stmt(s: str) -> str:
     """Declaration header without the leading `theorem`/`def`/etc. keyword."""
@@ -1395,7 +1363,6 @@ def short_stmt(s: str) -> str:
             break
     return s
 
-
 def render_prose_link(prose: str) -> str:
     if not prose:
         return "—"
@@ -1406,7 +1373,6 @@ def render_prose_link(prose: str) -> str:
     if re.match(r"^[\dT]", prose):  # section-ish ref like "T3 …" or "13–15 …"
         return f"[§{prose.strip()}](base.txt)"
     return f"[{prose.strip()}](base.txt)"
-
 
 def strip_theorem_head(s: str) -> str:
     """Drop `Name (binder)* :` from a theorem statement, keeping the body.
@@ -1446,20 +1412,17 @@ def strip_theorem_head(s: str) -> str:
         j += 1
     return s
 
-
 def kernel_axiom_names(full: str, node_map: dict) -> list:
     """Sorted short names of the audited kernel axiom footprint (Logos axioms
     only; meta-logic `CL` is handled by `footprint_parts`)."""
     subst, vocab, _ = footprint_parts(full)
     return sorted(set(subst) | set(vocab))
 
-
 def kernel_axiom_text(full: str, node_map: dict) -> str:
     """Axiom names + tags, e.g. `Ground` (VOCAB), `AxTwoSubjects` (META)."""
     tags = [f"`{a}` ({_REGISTRY[a]['tag']})" if a in _REGISTRY else f"`{a}`"
             for a in kernel_axiom_names(full, node_map)]
     return ", ".join(tags)
-
 
 def badge_for(c: dict, decls: dict, node_map: dict) -> str:
     """Display status, DERIVED from the kernel for every step of the deduction
@@ -1475,7 +1438,6 @@ def badge_for(c: dict, decls: dict, node_map: dict) -> str:
         return STATUS_BADGE["BLOCKED"]  # "✖"
     return STATUS_BADGE.get(st, st or "?")
 
-
 def build_ax_id(sections, node_map):
     """A1..An in doc order of first use by a claim."""
     ax_id = {}
@@ -1489,17 +1451,14 @@ def build_ax_id(sections, node_map):
                     ax_id[base] = f"A{len(ax_id) + 1}"
     return ax_id
 
-
 def axiom_full_map(node_map):
     return {n["fullName"].rsplit(".", 1)[-1]: n["fullName"]
             for n in node_map.values() if n.get("kind") == "axiom"}
-
 
 def axiom_ref(base, ax_id):
     if ax_id and base in ax_id:
         return f"**{ax_id[base]}**"
     return f"`{base}`"
-
 
 def axiom_refs_sorted(bases, ax_id):
     """Kernel-footprint axiom refs ordered by A# (unmapped raws last)."""
@@ -1508,7 +1467,6 @@ def axiom_refs_sorted(bases, ax_id):
             return (0, int(ax_id[b][1:]))
         return (1, b)
     return [axiom_ref(b, ax_id) for b in sorted(bases, key=key)]
-
 
 # ---------------------------------------------------------------------------
 # Logic-symbol rendering ("humanise")
@@ -1533,7 +1491,6 @@ def _read_group(s: str, j: int):
                 return s[j + 1:k], k + 1
     return s[j + 1:], len(s)
 
-
 def _simple(x: str) -> bool:
     x = x.strip()
     if not x:
@@ -1545,22 +1502,17 @@ def _simple(x: str) -> bool:
     core = x[1:] if x.startswith("¬") else x
     return bool(re.fullmatch(r"[\w.']+", core))
 
-
 def _wrap(x: str) -> str:
     x = x.strip()
     return x if _simple(x) else "(" + x + ")"
 
-
 def _sub_n(n: str) -> str:
     return "p" + n.translate(_SUB)
 
-
 _FBARE = r"[A-Za-z_α-ωΑ-Ω][A-Za-z0-9_α-ωΑ-Ω]*"
-
 
 def _bin_sym(op: str) -> str:
     return {"and": "∧", "or": "∨", "imp": "→"}[op]
-
 
 def _rewrite_form_ops(s: str) -> str:
     """Iterative regex rewrite of Form.not/and/or/imp/atom → logic symbols.
@@ -1592,7 +1544,6 @@ def _rewrite_form_ops(s: str) -> str:
         ):
             s = re.sub(pat, lambda m: _mk(_bin_sym(m.group(1)))(m), s)
     return s
-
 
 def _rewrite_ops(s: str) -> str:
     """Rewrite NecessarilyTrue/False, TrueAt/Satisfies/FalseAt, Necessity/PH, Dia."""
@@ -1663,11 +1614,9 @@ def _rewrite_ops(s: str) -> str:
         i += 1
     return "".join(out)
 
-
 def _humanise(s: str) -> str:
     out = _rewrite_ops(_rewrite_form_ops(s))
     return re.sub(r"\((atom [A-Za-z0-9_]+)\)", r"\1", out)
-
 
 def humanise(stmt: str) -> str:
     """Public entry: Lean statement text → logic-symbol notation."""
@@ -1675,10 +1624,8 @@ def humanise(stmt: str) -> str:
         return ""
     return _humanise(stmt)
 
-
 def find_t_refs(prose: str) -> list:
     return re.findall(r"\bT\d+\b", prose or "")
-
 
 def first_sentence(s: str) -> str:
     s = " ".join(s.split())
@@ -1687,10 +1634,8 @@ def first_sentence(s: str) -> str:
             s = s.split(cut, 1)[0]
     return s[:200]
 
-
 def restore_cur(cur=""):
     return cur
-
 
 # ---------------------------------------------------------------------------
 # Presentation layer (FORMAT.md §2–§9): stages, transitions, countermodels,
@@ -2025,7 +1970,6 @@ WORLD_STANCE_LEGEND = {
         "`falsityWorld_holds_no_contingent_subject` against `contingent_realm_obtains`.",
 }
 
-
 def _ns_block(ns: str) -> str:
     """The source of the namespace `ns` (by its last component), for cross-checks."""
     tail = ns.rsplit(".", 1)[-1]
@@ -2033,7 +1977,6 @@ def _ns_block(ns: str) -> str:
     m = re.search(r"^namespace %s\b(.*?)^end %s\s*$" % (re.escape(tail), re.escape(tail)),
                   text, re.S | re.M)
     return m.group(0) if m else ""
-
 
 def verify_world_stances() -> dict:
     """Cross-check each catalogued model's `worldStance` against its own structure.
@@ -2085,7 +2028,6 @@ def verify_world_stances() -> dict:
                 f"world-stance check: {ns} claims .{ctor} but declares no world sort")
         out[key] = ctor
     return out
-
 
 WORLD_STANCES = verify_world_stances()
 
@@ -2204,7 +2146,6 @@ DEFINITIONS = {
     ],
 }
 
-
 # §5 argument-at-a-glance: every arrow carries a status, validated at build.
 TRANSITIONS = [
     # Classical / Logical Core (independent of performative act)
@@ -2293,7 +2234,6 @@ OPEN_BRIDGES = (
 
 _CTX: dict = {}
 
-
 def stage_for(c: dict) -> str:
     if c["id"] in STAGE_OF:
         return STAGE_OF[c["id"]]
@@ -2301,7 +2241,6 @@ def stage_for(c: dict) -> str:
     if full.startswith("Logos."):
         return MODULE_STAGE.get(full.split(".")[1], "IX")
     return "IX"
-
 
 def philo_status_of_full(full: str, node_map: dict) -> str:
     n = node_map.get(full)
@@ -2319,7 +2258,6 @@ def philo_status_of_full(full: str, node_map: dict) -> str:
     if vocab:
         return "DEFINITIONAL"
     return "LOGICAL"
-
 
 def build_canonical_map(all_claims: list) -> dict:
     """Return {claim id -> canonical claim id} for every non-canonical row.
@@ -2354,7 +2292,6 @@ def build_canonical_map(all_claims: list) -> dict:
         canon[a] = canon.get(b, b)
     return canon
 
-
 def philo_status(c: dict, node_map: dict) -> str:
     if c["id"] in _CTX.get("canonical_of", {}):
         return "DISSOLVED"
@@ -2369,13 +2306,11 @@ def philo_status(c: dict, node_map: dict) -> str:
         return "COUNTERMODEL"
     return "OPEN"
 
-
 def status_label(c: dict) -> str:
     s = philo_status(c, _CTX["node_map"])
     if c["id"] in CONDITIONAL_CLAIMS and not s.endswith("CONDITIONAL"):
         s += " / CONDITIONAL"
     return s
-
 
 def _short_gloss(c: dict, n: int = 220) -> str:
     s = re.sub(r"\s+", " ", (c.get("_gloss") or "")).strip()
@@ -2385,7 +2320,6 @@ def _short_gloss(c: dict, n: int = 220) -> str:
     if " " in cut:
         cut = cut.rsplit(" ", 1)[0]
     return cut.rstrip(" ,;:.") + "…"
-
 
 def _spine_lead(doc: str, n: int = 260) -> str:
     """A clean sentence-boundary lead for a proof doc paragraph.
@@ -2421,9 +2355,7 @@ def _spine_lead(doc: str, n: int = 260) -> str:
         cut = cut.rsplit(" ", 1)[0]
     return cut.rstrip(" ,;:.") + "…"
 
-
 TITLE_CAP = 110
-
 
 def _clause_segments(s: str) -> list:
     """Split on `.`/`:`/`;` followed by whitespace, but never inside parens."""
@@ -2438,7 +2370,6 @@ def _clause_segments(s: str) -> list:
             start = i + 1
     segs.append(s[start:])
     return segs
-
 
 def split_claim(c: dict) -> tuple:
     """Partition a claim's displayed gloss into (heading title, extra detail).
@@ -2499,10 +2430,8 @@ def split_claim(c: dict) -> tuple:
         extra = extra[0].upper() + extra[1:]
     return (title or c["id"]), extra
 
-
 def claim_title(c: dict) -> str:
     return split_claim(c)[0]
-
 
 def formal_of(full: str) -> str:
     d = _CTX["decls"].get(full)
@@ -2512,7 +2441,6 @@ def formal_of(full: str) -> str:
     if d["kind"] == "theorem":
         raw = strip_theorem_head(raw)
     return short_stmt(humanise(trim_stmt(raw)))
-
 
 def predecessor_ids(full: str) -> list:
     decls = _CTX["decls"]
@@ -2525,7 +2453,6 @@ def predecessor_ids(full: str) -> list:
                 out.append(i)
     return sorted(out)
 
-
 def proof_claimed_class(proof, node_map: dict) -> str:
     """Kernel-derivable class of a rendered proof: PROVEN / PROVEN↑ / AXIOM.
     Used to keep curated route-group labels honest about what the kernel implies."""
@@ -2535,7 +2462,6 @@ def proof_claimed_class(proof, node_map: dict) -> str:
         return "AXIOM"
     subst, _, _ = footprint_parts(full)
     return "PROVEN↑" if subst else "PROVEN"
-
 
 def _select_strongest(proofs: list, node_map: dict) -> list:
     """Derived, kernel-first selection for one narrative slot (a section's
@@ -2562,7 +2488,6 @@ def _select_strongest(proofs: list, node_map: dict) -> list:
         else:
             out.append(min(cands, key=lambda q: (len(q.steps), len(q.assumptions))))
     return out
-
 
 def route_definition_proofs(proofs: list, decls: dict, node_map: dict, graph: dict, def_registry: dict) -> list:
     """Definition steps used by the rendered goals of a section but not surfaced
@@ -2600,7 +2525,6 @@ def route_definition_proofs(proofs: list, decls: dict, node_map: dict, graph: di
             out.append(pr)
     return out
 
-
 def assumption_text(full: str) -> str:
     if not full or full not in _CTX["node_map"]:
         return "—"
@@ -2623,23 +2547,18 @@ def assumption_text(full: str) -> str:
                 + "); no substantive assumption.")
     return "None — logic alone (meta-logic `CL` only)."
 
-
 SORTS = {'Prop', 'Subject', 'Entity', 'World', 'Form', 'Nat', 'String', 'Type', 'Sort', 'Unit', 'S', 'Int', 'Bool', 'State'}
-
 
 def is_sort(t: str) -> bool:
     t = t.strip()
     return t in SORTS or bool(re.match(r'^[A-Z]\d*$', t))
 
-
 def strip_ns(s: str) -> str:
     return re.sub(r'\bLogos\.(?:[A-Za-z0-9_]+\.)+([A-Za-z0-9_]+)', r'\1', s)
-
 
 BINDER_RE = re.compile(
     r'([\u2203\u2200])\s+(((?:[A-Za-z_α-ωΑ-Ω][A-Za-z0-9_\'₀-₉]*\s+)*)'
     r'[A-Za-z_α-ωΑ-Ω][A-Za-z0-9_\'₀-₉]*)\s*:\s*[A-Za-z_][A-Za-z0-9_]*\s*,?')
-
 
 
 def extract_symbol_table(decls: dict) -> dict:
@@ -2682,7 +2601,6 @@ def extract_symbol_table(decls: dict) -> dict:
     table["IsFalse"] = 1
     table["Initiates"] = 4
     return table
-
 
 def format_discrete_math(s: str, table: dict = None) -> str:
     if not s:
@@ -2814,7 +2732,6 @@ def split_theorem_head(raw: str):
             i += 1
     return antes, body
 
-
 def math_statement(full: str, cid: str = None) -> str:
     if cid and cid in STATEMENT_OVERRIDES:
         return STATEMENT_OVERRIDES[cid]
@@ -2855,20 +2772,16 @@ def math_statement(full: str, cid: str = None) -> str:
         s = re.sub(r'^(?:def|abbrev)\s+', '', s).strip()
         return mathify(humanise(s))
 
-
 def displmath(s: str) -> str:
     return f"\\[ {s} \\]"
 
-
 def inlmath(s: str) -> str:
     return f"\\({s}\\)"
-
 
 def math_lean_ref(d: dict) -> str:
     if not d or not d.get("file"):
         return "n/a"
     return f"{Path(d['file']).name}#L{d['line']}"
-
 
 def math_uses(c: dict) -> str:
     full = c.get("_full")
@@ -2887,7 +2800,6 @@ def math_uses(c: dict) -> str:
     unmapped.sort()
     return ", ".join(mapped + unmapped)
 
-
 def math_metadata(c: dict) -> str:
     full = c.get("_full")
     decls = _CTX["decls"]
@@ -2902,11 +2814,9 @@ def math_metadata(c: dict) -> str:
     parts.append(f"{st_lbl} {badge}")
     return "`" + " · ".join(parts) + "`"
 
-
 def kind_of(c: dict) -> str:
     st = philo_status(c, _CTX["node_map"])
     return KIND_OF.get(c["id"], DEFAULT_KIND.get(st, "Proposition"))
-
 
 
 def synthesize_proof(c: dict) -> str:
@@ -3014,10 +2924,8 @@ def synthesize_proof(c: dict) -> str:
         res += "."
     return f"{res} ∎"
 
-
 def proof_of(c: dict) -> str:
     return synthesize_proof(c)
-
 
 def load_countermodels(decls: dict) -> dict:
     out = {}
@@ -3032,14 +2940,12 @@ def load_countermodels(decls: dict) -> dict:
             out.setdefault(name[:-len("_survives")], {})["survives"] = sv
     return out
 
-
 def _ns_line(short: str):
     path = LEAN_DIR / "HostileSemantics.lean"
     for i, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         if re.match(r"^namespace\s+" + re.escape(short) + r"\s*$", line.strip()):
             return i
     return None
-
 
 def render_retired(all_claims: list) -> list:
     L = []
@@ -3121,7 +3027,6 @@ def render_retired(all_claims: list) -> list:
     ap("")
     return L
 
-
 def render_compact_axiom_ledger() -> list:
     L = []
     ap = L.append
@@ -3147,7 +3052,6 @@ def render_compact_axiom_ledger() -> list:
     ap("")
     return L
 
-
 def is_internal_lean_decl(name: str) -> bool:
     if not name:
         return True
@@ -3162,7 +3066,6 @@ def is_internal_lean_decl(name: str) -> bool:
     if re.search(r'\.(?:eq_\d+|proof_\d+|match_\d+|injEq|recOn|casesOn|noConfusion)$', name):
         return True
     return False
-
 
 def definition_body(d: dict) -> str:
     path = LEAN_DIR / d["file"]
@@ -3189,7 +3092,6 @@ def definition_body(d: dict) -> str:
     raw = re.sub(r"--.*$", "", raw).strip()
     return format_discrete_math(humanise(strip_ns(raw)))
 
-
 class Rule(Enum):
     ASSUMPTION = "assumption"
     PREMISE = "premise"
@@ -3204,7 +3106,6 @@ class Rule(Enum):
     BOUNDARY = "boundary"
     CONCLUSION = "conclusion"
 
-
 @dataclass
 class ProofStepIR:
     var_name: str
@@ -3212,7 +3113,6 @@ class ProofStepIR:
     rule: Rule
     premises: list[str] = field(default_factory=list)
     description: str = ""
-
 
 @dataclass
 class ProofIR:
@@ -3587,7 +3487,6 @@ def compile_lean_proof(full: str, decls: dict, node_map: dict, graph: dict, def_
 
     return proof
 
-
 def discover_human_narrative(base_path: Path = None, theorems_dir: Path = None) -> tuple[list[dict], dict[str, dict]]:
     """Discovers the canonical human narrative sections from base.txt and theorems/T*.txt
     without relying on fixed or uniform headers.
@@ -3656,7 +3555,6 @@ def discover_human_narrative(base_path: Path = None, theorems_dir: Path = None) 
 
     return sections, theorems
 
-
 @dataclass
 class CandidateRoute:
     target_concepts: set[str]
@@ -3670,7 +3568,6 @@ class CandidateRoute:
     countermodel_blocked: bool = False
     is_conditional_route: bool = False
     is_route_composition: bool = False
-
 
 def extract_consequent(prop: str) -> str:
     """Extracts the final consequent of an implication or statement, stripping outermost
@@ -3721,7 +3618,6 @@ def extract_consequent(prop: str) -> str:
         break
     return p
 
-
 def extract_target_concepts(prop: str) -> set[str]:
     """Extracts target head predicates/relations from a proposition string,
     stripping outermost quantifiers, hypotheses, and implications.
@@ -3744,7 +3640,6 @@ def extract_target_concepts(prop: str) -> set[str]:
                 concepts.add(head)
     return concepts
 
-
 def extract_separation_pairs(decls: dict) -> list[tuple[str, str, str]]:
     """Extracts separation boundary pairs (premise, target, theorem_name) from
     all hostile countermodels and independence theorems in the corpus.
@@ -3766,7 +3661,6 @@ def extract_separation_pairs(decls: dict) -> list[tuple[str, str, str]]:
                 pairs.append((p1, p2, name))
     return pairs
 
-
 def is_route_countermodel_blocked(premises: list[str], target_concepts: set[str], subst_axioms: set[str], separation_pairs: list[tuple[str, str, str]]) -> bool:
     """Verifies whether an inference attempts to cross a countermodel-separated
     boundary without an audited substantive bridging axiom (SEM / META).
@@ -3781,7 +3675,6 @@ def is_route_countermodel_blocked(premises: list[str], target_concepts: set[str]
                     if not subst_axioms:
                         return True
     return False
-
 
 def compare_routes(r1: CandidateRoute, r2: CandidateRoute) -> str:
     """Compares two candidate routes establishing the same or subsumed target concepts
@@ -3840,7 +3733,6 @@ def compare_routes(r1: CandidateRoute, r2: CandidateRoute) -> str:
 
     return "INCOMPARABLE"
 
-
 def select_strongest_routes(routes: list[CandidateRoute]) -> tuple[list[CandidateRoute], list[CandidateRoute]]:
     """Partitions candidate routes into undominated (primary) and dominated (alternative) routes."""
     if not routes:
@@ -3859,7 +3751,6 @@ def select_strongest_routes(routes: list[CandidateRoute]) -> tuple[list[Candidat
             undominated.append(r)
     return undominated, dominated
 
-
 def extract_boundary_generically(proof_name: str, doc: str = "", statement: str = "") -> tuple[str, str]:
     """Extracts independence boundary (left ⇏ right) generically from theorem name,
     docstring, or AST statement without hard-coding any domain substrings.
@@ -3877,7 +3768,6 @@ def extract_boundary_generically(proof_name: str, doc: str = "", statement: str 
                 return parts[0].strip(), parts[1].strip()
 
     return format_discrete_math(humanise(strip_ns(proof_name))), "Independence"
-
 
 def classify_proof_edge(proof: ProofIR, graph: dict = None, decls: dict = None) -> tuple[str, str]:
     """Classifies the local deductive status of a proof transition edge into one of:
@@ -3910,7 +3800,6 @@ def classify_proof_edge(proof: ProofIR, graph: dict = None, decls: dict = None) 
     else:
         return "PROVEN", "PROVEN | 0 substantive axioms"
 
-
 def resolve_proof_by_name(name: str, compiled_by_id: dict, decls: dict, graph: dict) -> ProofIR | None:
     for cid, (c, p) in compiled_by_id.items():
         if p.name == name or p.full_name.endswith(f".{name}"):
@@ -3919,7 +3808,6 @@ def resolve_proof_by_name(name: str, compiled_by_id: dict, decls: dict, graph: d
         if d["name"] == name or full.endswith(f".{name}"):
             return compile_lean_proof(full, decls, graph.get("node_map", {}), graph, {})
     return None
-
 
 def select_global_proof_spine(
     compiled_by_id: dict[str, tuple[dict, ProofIR]],
@@ -4273,7 +4161,6 @@ def select_global_proof_spine(
 
     return spine_sections, detailed_sections, alternative_proofs, assigned_cids
 
-
 def discover_deduction_sections(gapmap_sections: list[dict], decls: dict, node_map: dict, graph: dict, def_registry: dict) -> list[dict]:
     """Discovers the main deduction path and sections dynamically from the canonical
     human narrative (base.txt and theorems/) and formal Lean AST corpus.
@@ -4408,7 +4295,6 @@ def discover_deduction_sections(gapmap_sections: list[dict], decls: dict, node_m
 
     return spine_sections + detailed_sections + countermodel_sections + frontier_sections
 
-
 def discover_investigations(investigations_dir: Path = None, decls: dict = None) -> dict:
     """Dynamically discovers and categorizes investigation documents and formal artifacts
     without hard-coding any specific filenames.
@@ -4467,7 +4353,6 @@ def discover_investigations(investigations_dir: Path = None, decls: dict = None)
         "detailed_docs": detailed_docs,
         "technical_docs": technical_docs,
     }
-
 
 def render_further_investigations(decls: dict = None, investigations_dir: Path = None) -> list[str]:
     """Renders the comprehensive, uninterrupted navigation catalogue into the proof research
@@ -4555,7 +4440,6 @@ def render_further_investigations(decls: dict = None, investigations_dir: Path =
 
     return L
 
-
 def pick_primary_milestone_proof(proofs: list[ProofIR]) -> ProofIR | None:
     """Selects the most representative, strongest milestone proof for a section
     prioritizing existential/composite master theorems, retorsive turning points,
@@ -4571,7 +4455,6 @@ def pick_primary_milestone_proof(proofs: list[ProofIR]) -> ProofIR | None:
         is_contradiction = 1 if (p.conclusion and p.conclusion.rule == Rule.CONTRADICTION) else 0
         return (is_contradiction, is_master, is_existential, len(concepts), is_theorem)
     return max(proofs, key=score)
-
 
 def compute_epistemic_badge(proofs: list[ProofIR], registry: dict = None) -> str:
     """Computes an authoritative epistemic badge for a set of proofs against the axiom registry."""
@@ -4596,7 +4479,6 @@ def compute_epistemic_badge(proofs: list[ProofIR], registry: dict = None) -> str
     elif all(p.kind in ("def", "structure") for p in proofs):
         return "DEFINITIONAL"
     return "PROVEN · 0 substantive axioms"
-
 
 def generate_ascii_chart(
     spine_nodes: list[dict],
@@ -4711,7 +4593,6 @@ def generate_ascii_chart(
 
     return lines
 
-
 # ---------------------------------------------------------------------------
 # Phase 4 — the two-column score block. Every figure below is DERIVED, never
 # transcribed (AGENTS.md: a hardcoded number in generated prose is a
@@ -4817,7 +4698,6 @@ def derive_score_data(all_claims: list[dict], decls: dict, node_map: dict) -> di
         f"({len(all_claims)})")
     return data
 
-
 # A ledger gloss often opens with its own status before the statement, e.g.
 # "BLOCKED (AC5 unmet, D1′ recorded not executed): any entity that grounds ...".
 # Splitting on the first sentence would surface the status, not the claim, so
@@ -4825,7 +4705,6 @@ def derive_score_data(all_claims: list[dict], decls: dict, node_map: dict) -> di
 _SCORE_STATUS_RE = re.compile(
     r"^\**(?:BLOCKED|DEFERRED|RETIRED|AXIOM|PROVEN|OPEN|NOT ESTABLISHED)\**"
     r"\s*(?:\([^)]*\))?\s*[:\u2014-]\s*", re.I)
-
 
 def _score_label(row: dict, limit: int = 150) -> str:
     """One-line, human-checkable name for an open or retired claim row.
@@ -4851,7 +4730,6 @@ def _score_label(row: dict, limit: int = 150) -> str:
         if t:
             return t
     return f"`{row['ref']}`" if row.get("ref") else row["id"]
-
 
 def _def_bridge_debt() -> dict | None:
     """The inherited `def`-as-bridge debt, read from the allowlist at generation
@@ -4881,7 +4759,6 @@ def _def_bridge_debt() -> dict | None:
         "reviewed": len(reviewed),
         "worst": max((len(e.get("dependents", [])) for e in entries), default=0),
     }
-
 
 def render_score_block(sd: dict) -> list[str]:
     """The two-column Won / Still-open score block for README.md.
@@ -5013,7 +4890,6 @@ def render_score_block(sd: dict) -> list[str]:
         ap("")
     return L
 
-
 def render_reading_guide() -> list[str]:
     """Emits the "How to Read This Deduction" block between the title and the
     Argument-at-a-Glance chart: the arc in one breath, the two directions (discovery vs
@@ -5111,7 +4987,6 @@ def render_reading_guide() -> list[str]:
     ap("")
     return lines
 
-
 def generate_argument_at_a_glance(spine_sections: list[dict], frontiers: list[dict] = None, countermodels: list[dict] = None) -> list[str]:
     """Synthesizes an immediate, compact, conceptual visual flowchart of the strongest argument,
     answering 'What happens?' in ordinary human-readable philosophical steps with subordinate
@@ -5165,7 +5040,6 @@ def generate_argument_at_a_glance(spine_sections: list[dict], frontiers: list[di
     ap("")
     return lines
 
-
 def status_icon(edge_badge: str) -> str:
     """Map a display badge string to its one-emoji chart/ledger icon."""
     if edge_badge.startswith("DEFERRED"):
@@ -5180,7 +5054,6 @@ def status_icon(edge_badge: str) -> str:
         return "⚠️"
     return edge_badge
 
-
 def proof_cert_line(proof: ProofIR, edge_badge: str) -> str:
     """One-line clickable footer: `{icon[ + axis/boundary]} · [file#name](formal/Logos/file#Lline)`."""
     icon = status_icon(edge_badge)
@@ -5191,7 +5064,6 @@ def proof_cert_line(proof: ProofIR, edge_badge: str) -> str:
     else:
         head = icon
     return f"{head} · [{proof.file}#{proof.name}](formal/Logos/{proof.file}#L{proof.line})"
-
 
 def render_proof_body_spine(proof: ProofIR, ap):
     """Renders a proof on the Main Proof Spine as an integral, readable part of the
@@ -5259,7 +5131,6 @@ def render_proof_body_spine(proof: ProofIR, ap):
         ap("</details>")
         ap("")
 
-
 def render_proof_body(proof: ProofIR, ap, detailed: bool = False):
     """Renders an individual proof's assumptions, steps, conclusion, badges, and Lean citation.
     In high-level spine mode (detailed=False), focuses on conceptual explanation, formal consequence,
@@ -5309,7 +5180,6 @@ def render_proof_body(proof: ProofIR, ap, detailed: bool = False):
     else:
         ap(proof_cert_line(proof, edge_badge))
         ap("")
-
 
 # ---------------------------------------------------------------------------
 # Classical-attributes status table (reader-facing, generated after Branch C)
@@ -5802,16 +5672,21 @@ CLASSICAL_ATTRIBUTES = [
         "expected": "PROVEN",
         "checks": [{"type": "decl",
                     "full": "Logos.DivineSimplicity.divine_simplicity_sole_bearer"}],
-        "refs": ["Logos.DivineSimplicity.ofGround_divine_simplicity",
-                 "Logos.DivineSimplicity.divine_simplicity_is_unique_to_the_ground",
-                 "Logos.DivineSimplicity.ofGround_has_no_internal_components",
-                 "Logos.DivineSimplicity.ofGround_undivided_meaning",
-                 "Logos.DivineSimplicity.ofGround_simplicity_and_transcendence",
-                 "Logos.DivineSimplicity.non_composite_iff_canonical_aseity",
-                 "Logos.DivineSimplicity.composite_entity_fails_simplicity"],
-        "sense": ("In `DivineSimplicity.lean` (footprint `{Means, Subject, propext}` — VOCAB + CL), "
-                  "`ofGround_divine_simplicity` proves that `Entity.ofGround` satisfies classical Divine "
-                  "Simplicity under finite subjectivity (`∀ s, ∃ p, ¬ Means s p`): "
+                 "refs": ["Logos.CharacteristicClosure.the_ground_is_divinely_simple",
+                  "Logos.CharacteristicClosure.some_entity_is_divinely_simple",
+                  "Logos.CharacteristicClosure.the_ground_is_sole_bearer_of_divine_simplicity",
+                  "Logos.CharacteristicClosure.transcendence_and_semantic_finitude_yield_divine_simplicity",
+                  "Logos.CharacteristicClosure.the_semantic_bound_does_not_close_the_grounding_arm",
+                  "Logos.DivineSimplicity.ofGround_divine_simplicity",
+                  "Logos.DivineSimplicity.divine_simplicity_is_unique_to_the_ground",
+                  "Logos.DivineSimplicity.ofGround_has_no_internal_components",
+                  "Logos.DivineSimplicity.ofGround_undivided_meaning",
+                  "Logos.DivineSimplicity.ofGround_simplicity_and_transcendence",
+                  "Logos.DivineSimplicity.non_composite_iff_canonical_aseity",
+                  "Logos.DivineSimplicity.composite_entity_fails_simplicity"],
+        "sense": ("In `DivineSimplicity.lean` and `CharacteristicClosure.lean` (footprint `{Means, Subject, propext}` — VOCAB + CL), "
+                   "`ofGround_divine_simplicity` proves that `Entity.ofGround` satisfies classical Divine "
+                   "Simplicity under finite subjectivity (`∀ s, ∃ p, ¬ Means s p`); C484 makes the ground's result unconditional by paying declared F15: "
                   "(1) Mereological Non-Compositeness (`NonComposite e ↔ CanonicalAseity e`, no proper grounding parts); "
                   "(2) Structural Inextension (`ofGround_has_no_internal_components`, atomic nullary constructor with zero internal decomposition); "
                   "(3) Intentional Simplicity (`ofGround_undivided_meaning`, uniform meaning capacity across all propositions); "
@@ -5823,7 +5698,8 @@ CLASSICAL_ATTRIBUTES = [
                   "Subject}`), the cheapest sole-bearership in the corpus. Disclosure: `EntityMeans "
                   "(ofAtom _) = False` makes `undivided_meaning` **vacuously true of every atom**, so only "
                   "`no_internal_components` is load-bearing for unicity. "
-                  "Honest boundary: this establishes mereological, structural, and intentional simplicity — not identity of essence and existence."),
+                   "Chain 13 makes the table form unconditional (C486), adds the missing principle for transcendent entities (C491), and proves the cheaper grounding-side alternative needs undeclared vocabulary (C492). "
+                   "Honest boundary: this establishes mereological, structural, and intentional simplicity — not identity of essence and existence."),
     },
     {
         "attribute": "**Ontological transcendence** (neither an atomic worldly state nor any subject-correlate)",
@@ -5867,13 +5743,17 @@ CLASSICAL_ATTRIBUTES = [
         "expected": "PROVEN",
         "checks": [{"type": "decl",
                     "full": "Logos.DivineImmutability.ofGround_divine_immutability"}],
-        "refs": ["Logos.DivineImmutability.ofGround_modal_invariance",
-                 "Logos.DivineImmutability.ofGround_stage_invariance",
-                 "Logos.DivineImmutability.ofGround_transition_invariance",
-                 "Logos.DivineImmutability.ofGround_capacity_invariance",
-                 "Logos.DivineImmutability.capacity_invariance_holds_for_every_entity",
-                 "Logos.DivineImmutability.necessity_and_atemporality_yield_immutability",
-                 "Logos.DivineImmutability.contingent_entity_fails_immutability"],
+                 "refs": ["Logos.CharacteristicClosure.some_entity_is_in_succession",
+                  "Logos.CharacteristicClosure.a_subject_that_acts_is_in_succession",
+                  "Logos.ImmutabilitySoleBearer.immutability_is_not_sole_bearer",
+                  "Logos.ImmutabilitySoleBearer.the_act_datum_does_not_entail_every_subject_acts",
+                  "Logos.DivineImmutability.ofGround_modal_invariance",
+                  "Logos.DivineImmutability.ofGround_stage_invariance",
+                  "Logos.DivineImmutability.ofGround_transition_invariance",
+                  "Logos.DivineImmutability.ofGround_capacity_invariance",
+                  "Logos.DivineImmutability.capacity_invariance_holds_for_every_entity",
+                  "Logos.DivineImmutability.necessity_and_atemporality_yield_immutability",
+                  "Logos.DivineImmutability.contingent_entity_fails_immutability"],
         "sense": ("In `DivineImmutability.lean` (footprint `{Initiates, Means, State, Subject}` — VOCAB only), "
                   "`ofGround_divine_immutability` establishes Classical Divine Immutability (Aquinas *ST* I, q. 9) "
                   "for `Entity.ofGround`: "
@@ -5882,7 +5762,8 @@ CLASSICAL_ATTRIBUTES = [
                   "(3) Transition Invariance (`ofGround_transition_invariance`, `{Initiates, State, Subject}`, outside all initiation and state becoming); "
                   "(4) Capacity Invariance (`ofGround_capacity_invariance`, `{Means, Subject}`, uniform intentional capacity across reality). "
                   "The Thomistic principle is proven: necessity, atemporality, and non-succession entail immutability. "
-                  "Contingent entities provably fail immutability (`contingent_entity_fails_immutability`, `{}`). "
+                   "Contingent entities provably fail immutability (`contingent_entity_fails_immutability`, `{}`). "
+                   "The transition field is nevertheless refutable (C487), and the stronger universal uniqueness claim is non-derivable (C489): the ground remains immutable, but unique immutability is not established. "
                   "**Vacuity disclosure (C321):** field (4) discriminates nothing — "
                   "`capacity_invariance_holds_for_every_entity` proves it holds for *every* entity, because `EntityMeans` "
                   "takes no world argument, so the two worlds in `CapacityInvariance` are bound and unused and the body is "
@@ -6109,37 +5990,24 @@ CLASSICAL_ATTRIBUTES = [
     {
         "attribute": "**Causal / creative omnipotence** (\"can bring X about\", not \"is present where X obtains\")",
         "scope": "Divine Being / Ground",
-        "expected": "ABSENT",
-        "checks": [{"type": "absent",
-                    # `Produces` left this guard on 2026-09-28: the relation is now
-                    # DECLARED (C463, `Tag: VOCAB`), so it can no longer proxy the
-                    # attribute — its existence is not creative power. What is still
-                    # missing is the *derivation*, and these two fragments are what
-                    # would fire if it ever lands.
-                    "fragments": ["all_conceivable", "unrestricted_creative_power",
-                                  "power_over_all_possible", "production_from",
-                                  "produces_from"],
-                    "allow": []}],
-        "refs": [],
-        "sense": ("No live theorem, and the prose disclaimer (`README-OLD.md:263`; `CHARS.md` §15) is "
-                  "**retained — but narrowed to this causal sense only**, since the non-contradictory sense "
-                  "above is now PROVEN. Γ declares no entity-level production relation: the only initiation "
-                  "relation was `Agency.Initiates : Subject → State → State → Prop → Prop` "
-                  "(`Agency.lean:168`, VOCAB), which is subject-indexed, and `Entity.ofGround` is provably not "
-                  "a subject correlate (`ofGround_ne_ofSubject`, `NecessityEternity.lean:160`), so it could not "
-                  "be instantiated by the ground at all. **One of F10's two missing statements was delivered on "
-                  "2026-09-28 (C463):** `Logos.ThomisticAct.Produces : Entity → World → Form → Prop` "
-                  "(`Tag: VOCAB`) is declared, and C465/C467 give it a *conditional* use — the ground's love "
-                  "is productive. **A declared relation is not a causal power**, and this row stays "
-                  "**ABSENT**: what is still missing is the derivation "
-                  "`∀ φ, (∃ w, Satisfies w φ) → ∃ v, Produces Entity.ofGround v φ`, which is the whole "
-                  "content of the causal sense, and the existential `∃ w φ` of C465 does not supply it. The "
-                  "closest relation Γ has is explanatory containment "
-                  "`GroundsEntity` (`RecoveredOntologicalGround.lean:57`, *esse est agere*), and "
-                  "`exhaustive_scope_without_operative_scope` (`{}`) already machine-checks that omni-scope does "
-                  "not entail selection power, so `Produces` must not be weakened to that either. BLOCKED with "
-                  "the exact missing statement recorded (GAPMAP Level 17, row F10; `README-OLD.md:263` / "
-                  "`CHARS.md` §15 keep the disclaimer, narrowed to the causal sense)."),
+        "expected": "AXIOM",
+        "checks": [{"type": "decl",
+                    # F10 item (2) landed on 2026-09-29 as a declared META bridge
+                    # (C493), not as a derivation: the anchor is the axiom itself.
+                    "full": "Logos.ThomisticAct.ground_produces_every_satisfiable_form"}],
+        "refs": ["Logos.ThomisticAct.Produces",
+                 "Logos.ThomisticAct.ground_love_produces",
+                 "Logos.ProductionCountermodel.producing_something_does_not_produce_every_satisfiable_form"],
+        "sense": ("**Declared, not derived — and priced as a bridge.** F10's two missing statements "
+                  "both landed: the production relation (C463, `Tag: VOCAB`, 2026-09-28) and now the "
+                  "universal derivation itself, `Logos.ThomisticAct.ground_produces_every_satisfiable_form` "
+                  "(C493, `Tag: META`, 2026-09-29): every satisfiable form is produced by the ground "
+                  "somewhere. C483 remains the proof that the universal was *new* content — C465's "
+                  "existential shape plus the declared relation does not entail it. The row is therefore "
+                  "`AXIOM`, never `PROVEN`: causal omnipotence rests on the named bridge, and the reader "
+                  "who rejects it rejects exactly one sentence. Production is still not creation: "
+                  "C110's `Creates` separation stands, and the non-contradictory sense above stays PROVEN "
+                  "on its own footing."),
     },
     {
         "attribute": "**Creator of contingent reality**",
@@ -6219,7 +6087,6 @@ _CA_STATUS_TEXT = {
     "ABSENT": "❌ NOT ESTABLISHED",
 }
 
-
 def _classical_anchor_live(anchor: dict, decls: dict, node_map: dict) -> str:
     """Current live bucket of one CLASSICAL_ATTRIBUTES anchor (never raises;
     anomalies surface as descriptive strings that the `verify_…` guard turns
@@ -6262,9 +6129,7 @@ def _classical_anchor_live(anchor: dict, decls: dict, node_map: dict) -> str:
         return "ABSENT"
     return "UNKNOWN"
 
-
 _STIP_DEPENDENTS_CACHE: set = set()
-
 
 def stipulation_dependents() -> set:
     """Every declaration named as a `dependents` entry by a registered ◈
@@ -6287,7 +6152,6 @@ def stipulation_dependents() -> set:
     _STIP_DEPENDENTS_CACHE = deps
     return deps
 
-
 def _stip_marker(names) -> str:
     """` ◈` when any of `names` is a registered ◈ dependent, else ``."""
     deps = stipulation_dependents()
@@ -6300,11 +6164,9 @@ def _stip_marker(names) -> str:
             return " ◈"
     return ""
 
-
 def _classical_row_status(row: dict, decls: dict, node_map: dict) -> str:
     live = _classical_anchor_live(row["checks"][0], decls, node_map)
     return _CA_STATUS_TEXT.get(live, "?")
-
 
 def _classical_decl_link(full: str, decls: dict) -> str:
     d = decls.get(full)
@@ -6312,7 +6174,6 @@ def _classical_decl_link(full: str, decls: dict) -> str:
         return f"`{full}`"
     return (f"[{d['file']}#{d['name']}]"
             f"(formal/Logos/{d['file']}#L{d['line']}), footprint {kernel_fp_text(full)}")
-
 
 def render_defense_against_attacks() -> list[str]:
     """Emits the systematic defense guide showing why the six most common skeptical
@@ -6352,7 +6213,6 @@ def render_defense_against_attacks() -> list[str]:
     ap("| **7. Origin of Normativity (The Proof-Self Retorsion)**<br>\"Where does the initial normative claim come from? Why grant that any normative judgment exists?\" | Bare syntax checking alone does not force normativity (`M_inanimate_checker`, `{}`). But any agent *presenting* a derivation as sound (`PresentsAsSound`) co-means correctness and error, deriving `FreeWill` and `Person` with 0 substantive axioms. Furthermore, an adversarial critic who attacks Γ by presenting an objection argumentatively as sound *themselves* instantiates the normative stance (`critic_presenting_objection_is_person`). | [`presents_as_sound_derives_personhood`](formal/Logos/ProofPresentationRetorsion.lean#L140)<br>[`critic_presenting_objection_is_person`](formal/Logos/ProofPresentationRetorsion.lean#L180)<br>[`syntactic_validity_without_subject_or_normativity`](formal/Logos/ProofPresentationRetorsion.lean#L100) | `{Initiates, Means, State, Subject, CL}`<br>**(0 substantive axioms)** |")
     ap("")
     return lines
-
 
 # --- ASIETY-FREEDOM chain: every step priced, so the ◈ step cannot be read as
 # --- a theorem. Badges and footprints are DERIVED (kernel audit / ◈ registry);
@@ -6399,7 +6259,6 @@ ASIETY_FREEDOM_STEPS = [
      "the ◈ step is `BLOCKED`. Scope limit: relations of *other* shape stay open (F12(1))"),
 ]
 
-
 # --- SEMANTIC-FINITUDE chain: the F15 bound, consolidated and
 # --- badged. Badges and footprints are DERIVED (kernel audit / ◈ registry); nothing
 # --- here is transcribed. See AGENTS.md.
@@ -6440,7 +6299,6 @@ SEMANTIC_FINITUDE_STEPS = [
      "coherence: `ofGround_meansAll` gives the ground *every* proposition, so the bound is "
      "exactly what keeps the ground off the `Subject` sort"),
 ]
-
 
 # --- LOVE chain: two prices, different in kind, so the table prices both.
 # --- Badges and footprints are DERIVED (kernel audit / axiom registry);
@@ -6576,7 +6434,6 @@ LOVE_STEPS = [
      "kind exhibited, stated, not glossed as unconditional"),
 ]
 
-
 # --- TWO-KINDS chain (batch two-kinds, 2026-09-28). The plan of record is
 # --- `SUBJECTS.md`. This list exists because the batch's most load-bearing rows —
 # --- the derived necessary Person (C404 -> C407/C408/C409) and the personal-ground
@@ -6639,7 +6496,6 @@ TWO_KINDS_STEPS = [
      "a **personal ground of right** exists — `{}`-class, vocabulary alone"),
 ]
 
-
 def _stipulation_entry(name: str):
     """One ◈ registry entry by name, or None (derived from the audit file)."""
     if not STIPULATION_AUDIT_PATH.exists():
@@ -6652,7 +6508,6 @@ def _stipulation_entry(name: str):
         if e.get("name") == name:
             return e
     return None
-
 
 def render_asiety_freedom_chain(decls: dict, node_map: dict) -> list[str]:
     """The ASIETY-FREEDOM chain, step by step, with the price of every step.
@@ -6717,7 +6572,6 @@ def render_asiety_freedom_chain(decls: dict, node_map: dict) -> list[str]:
     ap("(C273/C274).")
     ap("")
     return lines
-
 
 MEANING_RETORSION_STEPS = [
     ("§0", "C368", "Logos.MeaningRetorsion.NoMeaning", "decl",
@@ -6791,7 +6645,6 @@ MEANING_RETORSION_STEPS = [
      "relocated to the declared act-datum axiom C454 — one axiom, not free in performance"),
 ]
 
-
 def render_semantic_finitude_chain(decls: dict, node_map: dict) -> list[str]:
     """The SEMANTIC-FINITUDE chain, step by step.
 
@@ -6857,7 +6710,6 @@ def render_semantic_finitude_chain(decls: dict, node_map: dict) -> list[str]:
     ap("   already `PROVEN` unconditionally.")
     ap("")
     return lines
-
 
 def render_meaning_retorsion_chain(decls: dict, node_map: dict) -> list[str]:
     """The MEANING-RETORSION chain, step by step.
@@ -6928,7 +6780,6 @@ def render_meaning_retorsion_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     return lines
 
-
 def _axiom_row_status(full: str, decls: dict) -> str:
     """`◆ AXIOM (TAG)` for one declared axiom, tag derived from the Lean docstring.
     A bare `◆ AXIOM` carries no tag, so axiom rows in the LOVE chain get their own
@@ -6936,7 +6787,6 @@ def _axiom_row_status(full: str, decls: dict) -> str:
     d = decls.get(full) or {}
     tag = (d.get("tag") or "UNTAGGED").strip()
     return f"◆ AXIOM ({tag}) — a declared axiom, **not a theorem**"
-
 
 def render_love_chain(decls: dict, node_map: dict) -> list[str]:
     """The LOVE chain, step by step, with both prices on every step.
@@ -6991,7 +6841,6 @@ def render_love_chain(decls: dict, node_map: dict) -> list[str]:
        "`Means` inhabitant.")
     ap("")
     return lines
-
 
 def render_two_kinds_chain(decls: dict, node_map: dict) -> list[str]:
     """The TWO-KINDS chain, step by step, with the price of every step.
@@ -7064,7 +6913,6 @@ def render_two_kinds_chain(decls: dict, node_map: dict) -> list[str]:
     ap("   modal grounding* (C319/C320) is unaffected by this batch and rests on F15 alone.")
     ap("")
     return lines
-
 
 # 2026-09-28. The §9 precedence batch (C417–C426), the F16 price (C427–C428) and
 # the §18 identity form (C429–C431). Membership is hand-maintained (AGENTS.md).
@@ -7175,7 +7023,6 @@ PRECEDENCE_STEPS = [
      "the `CapacityInvariance` tautology defect C321 already reports"),
 ]
 
-
 def render_precedence_chain(decls: dict, node_map: dict) -> list[str]:
     """Reader-facing chain for the 2026-09-28 §9 / F16-price / §18-identity batch."""
     lines: list[str] = []
@@ -7245,7 +7092,6 @@ def render_precedence_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     return lines
 
-
 TEMPORALITY_STEPS = [
     ("L1", "C436", "Logos.NecessityEternity.everlasting_implies_atemporal", "decl",
      "**the generic step, which was missing**: `Everlasting → Atemporal`. The module only had the "
@@ -7265,7 +7111,6 @@ TEMPORALITY_STEPS = [
      "than `Atemporal` as a shape of statement, and Γ's vocabulary supplies a kind of entity "
      "satisfying the weaker without the stronger"),
 ]
-
 
 def render_temporality_chain(decls: dict, node_map: dict) -> list[str]:
     """Reader-facing chain for the 2026-09-28 §8 temporal-separation batch."""
@@ -7310,7 +7155,6 @@ def render_temporality_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     return lines
 
-
 SOLE_BEARER_STEPS = [
     ("L1", "C441", "Logos.CharacteristicSoleBearer.no_subject_grounds_the_ground", "decl",
      "**the one place this batch pays F15.** `SemanticFinitude` turns the *hypothesis* "
@@ -7347,7 +7191,6 @@ SOLE_BEARER_STEPS = [
      "describing it. The conjunction is a record, not a new inference; what is new is that it is "
      "available as one statement"),
 ]
-
 
 def render_sole_bearer_chain(decls: dict, node_map: dict) -> list[str]:
     """Reader-facing chain for the 2026-09-28 sole-bearer & derivability batch."""
@@ -7398,21 +7241,21 @@ def render_sole_bearer_chain(decls: dict, node_map: dict) -> list[str]:
     ap("definitional stipulation, so `undivided_meaning` is **vacuously true of every atom** (an")
     ap("atom has uniform meaning capacity because it has none), and a subject that discriminates")
     ap("*nothing* also satisfies `undivided_meaning`. The structure is satisfied vacuously for the")
-    ap("wrong reasons by non-ground entities; only `no_internal_components` is load-bearing here.")
+    ap("wrong reasons by non-ground entities; only `no_internal_components` is load-bearing here. Chain 13 adds the unconditional simplicity rows without changing this unicity disclosure.")
     ap("")
     ap("**What this chain does not say.** Not that the ground is the unique *ground* — that is")
     ap("`FoundationalUnicity.unicity` (C199), which needs `AsymmetricGrounding` and is a weaker")
-    ap("claim. Not that any of this is causal: the six are structural and modal, and **F10 stays")
-    ap("BLOCKED**. And **not** immutability: `capacity_invariance` is vacuous by reflexivity (the")
+    ap("claim. Not that any of this is causal: the six are structural and modal, and **F10 stayed")
+    ap("`BLOCKED` in this batch — it has since been closed by declaration (C493), not by derivation. "
+       "And **not** immutability: `capacity_invariance` is vacuous by reflexivity (the")
     ap("F16 wall) and `Initiates` is an unconstrained signature field, so the necessary-kind subject")
-    ap("arm is not closable here. Immutability is recorded as ledger row **C453, `DEFERRED`**, with")
+    ap("arm is not closable here. Immutability is now ledger row **C453, `COUNTERMODEL`**, refuted by C489, with")
     ap("the exact missing lemma written out — a priced boundary, not a silent omission. Note what")
     ap("Chain 9 does *not* change about this: `Initiates` is now inhabited (some subject initiates),")
     ap("but it is still unconstrained *per subject* — no theorem says every necessary-kind subject")
-    ap("initiates — so the subject arm stays open and C453 stays `DEFERRED`.")
+    ap("initiates — so the universal claim is non-derivable and C453 is `COUNTERMODEL`.")
     ap("")
     return lines
-
 
 INHABITED_STEPS = [
     ("T", "C454", "Logos.Agency.performative_act_datum", "decl",
@@ -7433,7 +7276,6 @@ INHABITED_STEPS = [
      "What it establishes is practical — \"no act occurs\" is unavailable as a premise anywhere "
      "in Γ"),
 ]
-
 
 def render_inhabited_chain(decls: dict, node_map: dict) -> list[str]:
     """Reader-facing chain for the 2026-09-28 inhabited-initiation batch."""
@@ -7463,8 +7305,8 @@ def render_inhabited_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     ap("**What this chain does not say.** Not that any *particular* subject initiates — the datum")
     ap("is a global existential, and the necessary kind has no provable unique inhabitant, so the")
-    ap("per-subject form stays open and **C453 stays `DEFERRED`**. Not that the ground acts:")
-    ap("`ofGround` is provably not a subject, so nothing here bears on F10 `Produces` or on Creator.")
+    ap("per-subject form was open here, and **C453 has since been refuted as `COUNTERMODEL`**. Not that the ground acts:")
+    ap("`ofGround` is provably not a subject, so nothing in this batch bears on F10 `Produces` or on Creator.")
     ap("Not that willing, meaning or loving entails acting: the datum is an existential, not an")
     ap("implication, so every volition-without-action separation stands.")
     ap("")
@@ -7506,7 +7348,6 @@ SUCCESSION_AUDIT_STEPS = [
      "is exactly C455's cone — the existence half costs nothing"),
 ]
 
-
 THOMISTIC_ACT_STEPS = [
     ("\u25c6", "C463", "Logos.ThomisticAct.Produces", "axiom",
      "**PRICE 1, VOCABULARY.** `Produces : Entity \u2192 World \u2192 Form \u2192 Prop` \u2014 F10 "
@@ -7523,6 +7364,10 @@ THOMISTIC_ACT_STEPS = [
      "scoped to `Entity.ofGround`: the unrestricted form leaks through C228's "
      "`AxGroundLovesContingentRealm`, whose target-side is true of *every* entity and would make "
      "the bridge a tautology plus a claim that God creates atoms"),
+    ("◆", "C493", "Logos.ThomisticAct.ground_produces_every_satisfiable_form", "axiom",
+     "**PRICE 4, METAPHYSICAL.** F10 item (2), declared rather than derived: every satisfiable "
+     "form is produced by the ground somewhere. C483 proves this universal was new content; "
+     "production is still not creation, so C110 stands"),
     ("\u03a3", "C466", "Logos.ThomisticAct.loving_subject_initiates", "decl",
      "**to love is to initiate**, at the subject level. C464 composed with "
      "`act_implies_initiates`. The footprint is C464's cone and nothing else: no new axiom, and "
@@ -7548,8 +7393,9 @@ THOMISTIC_ACT_STEPS = [
 ACT_CASCADE_STEPS = [
     ("\u03a3", "C469", "Logos.ActCascade.someone_means_something", "decl",
      "**something means something.** From the datum alone, through the `Means` half of the "
-     "definition of `Act`. A *global* existential: it does not say *which* subject, so C453's "
-     "per-subject form stays open, it licenses no `Means \u2192 Initiates`, and it does not make the "
+     "definition of `Act`. A *global* existential: it does not say *which* subject, and Chain 13 "
+     "shows the needed per-necessary-kind-subject universal is separated rather than open. It licenses no "
+     "`Means \u2192 Initiates`, and it does not make the "
      "ground an agent"),
     ("\u03a3", "C470", "Logos.ActCascade.someone_exists_as_subject", "decl",
      "**someone exists as a subject.** From the datum alone, through the constitutive law that an "
@@ -7602,6 +7448,55 @@ ACT_CASCADE_STEPS = [
      "say which subject means, and does not bound the meanings (F15 untouched)"),
 ]
 
+# Chain 13 (C484-C492). The last structural gaps in the footprint-characteristic family.
+# C484-C486 and C491 are PROVEN because SemanticFinitude has Tag VOCAB; C487 pays TRANS;
+# C488 is conditional vocabulary-only; C489, C490 and C492 are free-signature countermodels.
+CHARACTERISTIC_CLOSURE_STEPS = [
+    ("Σ", "C484", "Logos.CharacteristicClosure.the_ground_is_divinely_simple", "decl",
+     "**the ground is divinely simple, unconditionally.** C196's anonymous F15-shaped hypothesis "
+     "has been declared as `SemanticFinitude`, so the price is now in the audited footprint "
+     "instead of an argument. Mereological, structural, and intentional simplicity — not essence–"
+     "existence identity"),
+    ("Σ", "C485", "Logos.CharacteristicClosure.some_entity_is_divinely_simple", "decl",
+     "C484 in existence form: **something is divinely simple**. The same vocabulary-only F15 price, "
+     "without saying which metaphysical commitment would remove it"),
+    ("Σ", "C486",
+     "Logos.CharacteristicClosure.the_ground_is_sole_bearer_of_divine_simplicity", "decl",
+     "**the attributes-table form, unconditional.** C440 with its anonymous F15 premise discharged. "
+     "Unicity was already C439; the combined row inherits the vocabulary-only bound rather than "
+     "becoming axiomatic"),
+    ("Σ", "C487", "Logos.CharacteristicClosure.some_entity_is_in_succession", "decl",
+     "**something is in succession.** The act datum supplies an initiation, refuting "
+     "`NotInSuccession` at the acting subject's correlate. The first refuter for field 3 — unlike "
+     "C321's vacuity and C459's ground/atom sharing. One refuter is content, not unicity"),
+    ("Σ", "C488",
+     "Logos.CharacteristicClosure.a_subject_that_acts_is_in_succession", "decl",
+     "the same refutation in conditional form: *given* an act, that subject is in succession. It "
+     "pays only the vocabulary of `Act`, not the datum; it does not supply the missing "
+     "necessary-kind initiation universal"),
+    ("M", "C489", "Logos.ImmutabilitySoleBearer.immutability_is_not_sole_bearer", "decl",
+     "**Divine immutability is not sole-bearing.** A free-signature model satisfies all four fields "
+     "at a second entity while one subject acts and a necessary-kind subject never initiates. This "
+     "separates C453 without refuting Γ, because the act datum stays saturated rather than being "
+     "set to `False`"),
+    ("M", "C490",
+     "Logos.ImmutabilitySoleBearer.the_act_datum_does_not_entail_every_subject_acts", "decl",
+     "**the global datum does not entail initiation by every necessary-kind subject.** "
+     "`∃ s, ∃ p, Act s p` is available; the needed per-necessary-kind-subject initiation universal "
+     "is exactly what C453 needs and exactly what is not given. The missing bound would be new "
+     "content, and is an author decision"),
+    ("Σ", "C491",
+     "Logos.CharacteristicClosure.transcendence_and_semantic_finitude_yield_divine_simplicity",
+     "decl",
+     "**the Thomistic principle form Simplicity was missing.** Every transcendent entity is simple "
+     "given F15: atoms and subject correlates contradict transcendence, and the ground arm closes "
+     "through C484. The bound does real work and is not removable by restating it"),
+    ("M", "C492",
+     "Logos.CharacteristicClosure.the_semantic_bound_does_not_close_the_grounding_arm", "decl",
+     "**F15 bounds the wrong relation for a cheaper principle.** A model can satisfy the exact "
+     "`Means`-side shape while a subject still externally grounds another entity. The grounding-side "
+     "finitude simplicity needs has never been declared"),
+]
 
 def render_succession_audit_chain(decls: dict, node_map: dict) -> list[str]:
     """Reader-facing chain for the 2026-09-28 succession-audit batch (C458\u2013C462)."""
@@ -7624,7 +7519,7 @@ def render_succession_audit_chain(decls: dict, node_map: dict) -> list[str]:
     ap("**This is disclosure, not demotion** \u2014 the F16 precedent "
        "(`DivineImmutability.lean:142-165`).")
     ap("`ofGround_divine_immutability` stays `PROVEN` with its footprint untouched, C217 stays")
-    ap("`PROVEN`, C453 stays `DEFERRED`. No badge moves anywhere; what changes is the *reading* of")
+    ap("`PROVEN`; C453 has since been refuted as `COUNTERMODEL` by Chain 13. No badge relevant to the ground moves; what changed here was the *reading* of")
     ap("one of the four immutability fields, and the status of one sentence.")
     ap("")
     ap("`S` = the vacuity and the extraction \u00b7 `R` = the non-triviality result \u00b7 "
@@ -7656,7 +7551,6 @@ def render_succession_audit_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     return lines
 
-
 def render_thomistic_act_chain(decls: dict, node_map: dict) -> list[str]:
     """Reader-facing chain for the 2026-09-28 Thomistic production batch (C463\u2013C468)."""
     lines: list[str] = []
@@ -7670,7 +7564,7 @@ def render_thomistic_act_chain(decls: dict, node_map: dict) -> list[str]:
     ap("> `NotInSuccession` could exclude it. What was missing was the machine-checked form, and it")
     ap("> is **C467**: the ground produces **and** is immutable, in a single theorem.")
     ap("")
-    ap("`\u25c6` = the three declared prices (one `VOCAB`, two `META`) \u00b7 `\u03a3` = what they buy.")
+    ap("`\u25c6` = the four declared prices (one `VOCAB`, three `META`) \u00b7 `\u03a3` = what they buy.")
     ap("")
     ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
     ap("|---|---|---|---|---|---|")
@@ -7682,13 +7576,12 @@ def render_thomistic_act_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     ap("**What this chain does not say.**")
     ap("")
-    ap("- **Not universal production.** C465\u2019s `\u2203 w \u03c6` is *existential*. The derivation "
+    ap("- **Not universal production from C465.** C465\u2019s `\u2203 w \u03c6` is *existential*. The derivation "
        "`(\u2203 w, Satisfies w \u03c6) \u2192 \u2203 v, Produces g v \u03c6`")
-    ap("  (`DivineOmnipotence.lean:55-58`) stays open, so **F10 stays \u274c/\U0001f9f1** and Creator is")
-    ap("  untouched. C306 still refutes that grounding entails causal externality.")
+    ap("  (`DivineOmnipotence.lean:55-58`) stayed open in this batch; F10 has since been closed by declaration (C493). The remaining Creator question \u2014 production is not creation \u2014 is untouched, and C306 still refutes that grounding entails causal externality.")
     ap("- **Not essence\u2013act identity.** \"God is His act\" needs essence vocabulary (Class A,")
     ap("  blocked). C465 must never be described as establishing divine simplicity.")
-    ap("- **Not immutability\u2019s exclusivity.** C453 stays `DEFERRED`; this batch adds the")
+    ap("- **Not immutability\u2019s exclusivity.** C453 has since been refuted as `COUNTERMODEL` by Chain 13; this batch had added the")
     ap("  disclosure its `ofSubject` arm was already missing, not the missing lemma.")
     ap("- **Not a ground that is a subject.** `ofGround_ne_ofSubject` is untouched, and `Produces`")
     ap("  is subject-free precisely so that nothing here contradicts it.")
@@ -7696,7 +7589,6 @@ def render_thomistic_act_chain(decls: dict, node_map: dict) -> list[str]:
     ap("  only; love without act is left open, and C178's moral close is unaffected.")
     ap("")
     return lines
-
 
 def render_act_cascade_chain(decls: dict, node_map: dict) -> list[str]:
     """Reader-facing chain for the 2026-09-28 act-datum cascade batch (C469\u2013C480)."""
@@ -7745,10 +7637,10 @@ def render_act_cascade_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     ap("**What this chain does not say.**")
     ap("")
-    ap("- **Not universalisation.** The datum is a *global* existential, so C453's per-subject form")
-    ap("  is strictly stronger and stays open.")
-    ap("- **Not a free ground.** `ofGround_ne_ofSubject` is untouched; F10, `Produces`, C462 and")
-    ap("  C465/C467 keep their status and their footprints.")
+    ap("- **Not universalisation.** The datum is a *global* existential, so C453's per-subject form was")
+    ap("  was strictly stronger; Chain 13 now proves it false rather than merely open.")
+    ap("- **Not a free ground.** `ofGround_ne_ofSubject` is untouched; `Produces`, C462 and")
+    ap("  C465/C467 keep their status and their footprints (F10's own row has since moved to `AXIOM` by C493).")
     ap("- **Not agency.** C472's `Agent` is `True`; the row discharges a step of the T chain and is")
     ap("  no stronger than C470.")
     ap("- **Not a refutation from the void.** The free-will rows are *consequences* of the datum;")
@@ -7756,6 +7648,43 @@ def render_act_cascade_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     return lines
 
+def render_characteristic_closure_chain(decls: dict, node_map: dict) -> list[str]:
+    """Reader-facing chain for the 2026-09-29 characteristic-closure batch (C484\u2013C492)."""
+    lines: list[str] = []
+    ap = lines.append
+    ap("### Chain 13 \u2014 The last gaps, not the last axioms")
+    ap("")
+    ap("> **The problem this batch answers.** Two footprint characteristics had survived every "
+       "previous batch with a formal defect. **Divine Simplicity** was the only instantiated "
+       "characteristic still conditional (C196); its hypothesis is now the declared F15 bound. "
+       "**Divine Immutability** was the only characteristic without a discriminating result — and "
+       "that absence turns out to be a theorem in the other direction. The batch uses no new "
+       "axiom, and it closes C453 instead of leaving it deferred.")
+    ap("")
+    ap("`\u03a3` = proved of the ground or its vocabulary \u00b7 `M` = machine-checked independence.")
+    ap("")
+    ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
+    ap("|---|---|---|---|---|---|")
+    for kind, cid, full, atype, text in CHARACTERISTIC_CLOSURE_STEPS:
+        live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
+        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
+           f"{status} | {kernel_fp_text(full)} |")
+    ap("")
+    ap("**What this chain does not say.**")
+    ap("")
+    ap("- **Not axiomatic simplicity.** C484\u2013C486 and C491 pay F15, but F15 is `Tag: VOCAB`; "
+       "the reader therefore sees `PROVEN`, not `AXIOMATIC`. The price is in the row, and "
+       "essence\u2013existence identity is untouched.")
+    ap("- **Not unicity of immutability.** C489 separates C453. The ground stays immutable (C201); "
+       "it is no longer claimed to be uniquely immutable.")
+    ap("- **Not every necessary-kind subject initiates.** C487 refutes `NotInSuccession` once; "
+       "C490 shows the datum cannot be promoted from one acting subject to necessary-kind "
+       "initiation.")
+    ap("- **Not a cheaper simplicity principle.** C491 is the missing principle form; C492 proves "
+       "its F15 premise cannot be replaced by the same `Means` information in another shape.")
+    ap("")
+    return lines
 
 def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     """Emits the classical-attributes table block (placed after Branch C, before
@@ -7812,6 +7741,7 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     lines.extend(render_succession_audit_chain(decls, node_map))
     lines.extend(render_thomistic_act_chain(decls, node_map))
     lines.extend(render_act_cascade_chain(decls, node_map))
+    lines.extend(render_characteristic_closure_chain(decls, node_map))
     ap("_Synthesis — the strongest current profile._ The theory has established, of a")
     ap("**personal, rational, free, authoritative-over-its-acts, independently individuated**")
     ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")
@@ -7832,8 +7762,8 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("**physical/spatial omnipresence**, **psychological personality**, **scholastic simplicity**,")
     ap("**infallible or counterfactual omniscience**, **causal / creative omnipotence** (the presence-plus-")
     ap("obtaining reading above is priced ◈ `operatesAt_presencePlusObtaining`; the production relation is now")
-    ap("declared — C463, `Tag: VOCAB` — while its *derivation* from satisfaction remains BLOCKED, and a")
-    ap("declared relation is not a power), and")
+    ap("declared — C463, `Tag: VOCAB` — and its *derivation* from satisfaction has since been declared as C493 (`Tag: META`), so the causal sense now rests on a named bridge rather than a proof; a")
+    ap("declared relation alone was not a power, and production is still not creation), and")
     ap("**psychological impassibility** remain separate targets (❌ NOT ESTABLISHED or 🔴 INDEPENDENT).")
     ap("The remaining divine attributes — **unity / monotheism**,")
     ap("**perfect moral goodness** (the moral pole itself now obtains under the single declared "
@@ -7852,7 +7782,6 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("")
     return lines
 
-
 def verify_classical_attribute_status(decls: dict, node_map: dict) -> None:
     """Regeneration guard: every CLASSICAL_ATTRIBUTES row's live-derived bucket
     must still equal its expected bucket. A future theorem that establishes a
@@ -7865,7 +7794,6 @@ def verify_classical_attribute_status(decls: dict, node_map: dict) -> None:
             f"{row['expected']} but the live kernel/ledger derives {got}. "
             f"Upgrade the CHAR.md table row only together with the real formal "
             f"change; never transcribe status text over the kernel.")
-
 
 def render_deduction_sections(sections: list[dict], decls: dict = None, node_map: dict = None,
                           investigations_dir: Path = None,
@@ -8198,7 +8126,6 @@ def render_ledger_tables(sections: list) -> list:
     ap("")
     return L
 
-
 def render_notation() -> list:
     L = []
     ap = L.append
@@ -8239,11 +8166,9 @@ def render_notation() -> list:
     ap("")
     return L
 
-
 # ---------------------------------------------------------------------------
 # main
 # ---------------------------------------------------------------------------
-
 
 def main():
     global _AUDIT, _REGISTRY
@@ -8529,7 +8454,6 @@ def main():
     body = "\n".join(lines).rstrip() + "\n"
     OUT_PATH.write_text(body, encoding="utf-8")
     print(f"wrote {OUT_PATH} ({len(body.splitlines())} lines)")
-
 
 if __name__ == "__main__":
     raise SystemExit(main())

@@ -1569,6 +1569,44 @@
   "Logos.Agency.Subject"
  ],
  "Logos.CanonicalAseity.unconditional_aseity_independent_of_bare_agency": [],
+ "Logos.CharacteristicClosure.a_subject_that_acts_is_in_succession": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.CharacteristicClosure.some_entity_is_divinely_simple": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
+ "Logos.CharacteristicClosure.some_entity_is_in_succession": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum"
+ ],
+ "Logos.CharacteristicClosure.the_ground_is_divinely_simple": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
+ "Logos.CharacteristicClosure.the_ground_is_sole_bearer_of_divine_simplicity": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
+ "Logos.CharacteristicClosure.the_semantic_bound_does_not_close_the_grounding_arm": [],
+ "Logos.CharacteristicClosure.transcendence_and_semantic_finitude_yield_divine_simplicity": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
  "Logos.CharacteristicSoleBearer.no_subject_grounds_the_ground": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
@@ -6150,6 +6188,17 @@
  "Logos.HostileSemantics.Γ_act": [],
  "Logos.HostileSemantics.Γ_means": [],
  "Logos.HostileSemantics.Γ_person": [],
+ "Logos.ImmutabilitySoleBearer.ImmutabilityCountermodel.capacity_invariance": [],
+ "Logos.ImmutabilitySoleBearer.ImmutabilityCountermodel.casesOn": [],
+ "Logos.ImmutabilitySoleBearer.ImmutabilityCountermodel.distinct": [],
+ "Logos.ImmutabilitySoleBearer.ImmutabilityCountermodel.modal_invariance": [],
+ "Logos.ImmutabilitySoleBearer.ImmutabilityCountermodel.necessary_non_acting_subject": [],
+ "Logos.ImmutabilitySoleBearer.ImmutabilityCountermodel.recOn": [],
+ "Logos.ImmutabilitySoleBearer.ImmutabilityCountermodel.some_act": [],
+ "Logos.ImmutabilitySoleBearer.ImmutabilityCountermodel.stage_invariance": [],
+ "Logos.ImmutabilitySoleBearer.ImmutabilityCountermodel.transition_invariance": [],
+ "Logos.ImmutabilitySoleBearer.immutability_is_not_sole_bearer": [],
+ "Logos.ImmutabilitySoleBearer.the_act_datum_does_not_entail_every_subject_acts": [],
  "Logos.IndubitableNormativeFreeWill.AgentialDeonticAddress": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -11764,6 +11813,11 @@
   "Logos.LovesAsGround.GroundBearsGood",
   "Logos.ThomisticAct.Produces",
   "Logos.ThomisticAct.ground_love_produces"
+ ],
+ "Logos.ThomisticAct.ground_produces_every_satisfiable_form": [
+  "Logos.Agency.Subject",
+  "Logos.ThomisticAct.Produces",
+  "Logos.ThomisticAct.ground_produces_every_satisfiable_form"
  ],
  "Logos.ThomisticAct.love_implies_act": [
   "Logos.Agency.Initiates",

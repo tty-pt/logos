@@ -1,11 +1,15 @@
 T22 — IMUTABILIDADE DIVINA E INVARIÂNCIA ONTOLÓGICA DO FUNDAMENTO
 
-Depende de: `formal/Logos/DivineImmutability.lean`, formalizando a característica
+Depende de: `formal/Logos/DivineImmutability.lean`,
+`formal/Logos/CharacteristicClosure.lean` e
+`formal/Logos/ImmutabilitySoleBearer.lean`, formalizando a característica
 clássica da Imutabilidade Divina (Tomás de Aquino ST I q. 9, Boécio, Agostinho, README-OLD.md §160-161)
 para o fundamento da realidade `Entity.ofGround`.
 
-Verificado em: `formal/Logos/DivineImmutability.lean`; auditoria `#print axioms`
-em `:195-206`; `formal/GAPMAP.md` C197–C201; `base.txt` §28.
+Verificado em: `formal/Logos/DivineImmutability.lean`,
+`formal/Logos/CharacteristicClosure.lean` e
+`formal/Logos/ImmutabilitySoleBearer.lean`; auditoria `#print axioms`
+das declarações abaixo; `formal/GAPMAP.md` C197–C201, C487–C490 e F17; `base.txt` §28.
 
 C197 — Contramodelo de independência metateórica:
 
@@ -59,6 +63,51 @@ theorem ofGround_divine_immutability :
 ```
 
 Pegada auditada: `{Initiates, Means, State, Subject}` (0 axiomas substantivos).
+
+C487–C488 — Primeiro refutador do campo da transição:
+
+```lean
+theorem some_entity_is_in_succession :
+    ∃ e : Entity, ¬ NotInSuccession e
+
+theorem a_subject_that_acts_is_in_succession {s : Subject} {p : Prop} (h : Act s p) :
+    ¬ NotInSuccession (EntityOf s)
+```
+
+Pegadas auditadas: `{Initiates, Means, State, Subject, performative_act_datum}` e
+`{Initiates, Means, State, Subject}`. Uma testemunha basta para conteúdo, não para
+unicidade.
+
+C489–C490 e F17 — Separação do portador único:
+
+```lean
+theorem immutability_is_not_sole_bearer :
+    ∃ (Entity Subject State World Time : Type)
+      (EntityOf : Subject → Entity)
+      (ExistsAt : World → Entity → Prop)
+      (ExistsAtTime : Time → Entity → Prop)
+      (EntityMeans : Entity → Prop → Prop)
+      (Means : Subject → Prop → Prop)
+      (Initiates : Subject → State → State → Prop → Prop)
+      (NecessaryKind : Subject → Prop)
+      (e g : Entity),
+      ImmutabilityCountermodel Entity Subject State World Time
+        EntityOf ExistsAt ExistsAtTime EntityMeans Means Initiates NecessaryKind e g
+
+theorem the_act_datum_does_not_entail_every_subject_acts :
+    ∃ (Subject State : Type)
+      (Means : Subject → Prop → Prop)
+      (Initiates : Subject → State → State → Prop → Prop)
+      (NecessaryKind : Subject → Prop),
+      (∃ s : Subject, ∃ p : Prop, Means s p ∧ ∃ w w' : State, Initiates s w w' p) ∧
+      (∃ s : Subject, NecessaryKind s ∧
+        ¬ ∃ σ σ' : State, ∃ p : Prop, Initiates s σ σ' p)
+```
+
+Pegadas auditadas: `{}` e `{}`. O universal exacto em falta é
+`∀ s : Subject, NecessarySubjectKind s → ∃ σ σ' : State, ∃ p : Prop,
+Initiates s σ σ' p`; C490 separa-o do dado global num modelo saturado de assinatura
+livre. Isto é independência de forma, não falsidade interna de Γ.
 
 Teoremas canónicos associados:
 

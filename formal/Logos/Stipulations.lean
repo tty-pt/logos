@@ -130,7 +130,7 @@ def operatesAt_presencePlusObtaining : Stipulation where
   location := "DivineOmnipotence.lean:118"
   anchor := "def OperatesAt"
   tag := StipulationTag.SEM
-  cost := "Operation identified with presence-plus-obtaining: foundational omnipotence is proved over the weakened reading; the causal/creative sense stays BLOCKED."
+  cost := "Operation identified with presence-plus-obtaining: foundational omnipotence is proved over the weakened reading; the causal/creative sense was BLOCKED until C493 declared universal production as a META bridge."
   dependents := ["ofGround_gapless_operative_scope", "ofGround_operates_only_what_obtains", "ofGround_does_not_operate_contradictions", "gapless_operators_are_ground_or_necessary_kind", "ofGround_foundational_omnipotence", "necessity_and_presence_yield_foundational_omnipotence"]
 
 /-- Tag: META

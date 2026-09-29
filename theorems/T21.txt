@@ -1,11 +1,13 @@
 T21 — SIMPLICIDADE DIVINA E TRANSCENDÊNCIA ONTOLÓGICA DO FUNDAMENTO
 
-Depende de: `formal/Logos/DivineSimplicity.lean`, formalizando a característica
+Depende de: `formal/Logos/DivineSimplicity.lean` e
+`formal/Logos/CharacteristicClosure.lean`, formalizando a característica
 clássica da Simplicidade Divina (Aquino ST I q. 3, Boécio, Agostinho, README-OLD.md §164)
 e a Transcendência Ontológica para o fundamento da realidade `Entity.ofGround`.
 
-Verificado em: `formal/Logos/DivineSimplicity.lean`; auditoria `#print axioms`
-em `:215-229`; `formal/GAPMAP.md` C192–C196; `base.txt` §28.
+Verificado em: `formal/Logos/DivineSimplicity.lean` e
+`formal/Logos/CharacteristicClosure.lean`; auditoria `#print axioms`
+das declarações abaixo; `formal/GAPMAP.md` C192–C196 e C484–C486/C491–C492; `base.txt` §28.
 
 C192 — Contramodelo de independência metateórica:
 
@@ -59,6 +61,44 @@ theorem ofGround_divine_simplicity
 ```
 
 Pegada auditada: `{Means, Subject, propext}` (0 axiomas substantivos).
+
+C484–C486 — Forma incondicional e forma da tabela de atributos:
+
+```lean
+theorem the_ground_is_divinely_simple :
+    DivineSimplicity Entity.ofGround
+
+theorem some_entity_is_divinely_simple :
+    ∃ e : Entity, DivineSimplicity e
+
+theorem the_ground_is_sole_bearer_of_divine_simplicity :
+    DivineSimplicity Entity.ofGround ∧
+      (∀ e : Entity, DivineSimplicity e → e = Entity.ofGround)
+```
+
+Pegada auditada: `{Means, SemanticFinitude, Subject, propext}`. Como `SemanticFinitude`
+tem `Tag: VOCAB`, o distintivo derivado é `PROVEN`, não `PROVEN↑`; o preço declarado
+permanece na pegada. A unicidade já era C439; C486 apenas torna a linha legível
+incondicional.
+
+C491–C492 — Princípio tomista e limite do preço:
+
+```lean
+theorem transcendence_and_semantic_finitude_yield_divine_simplicity :
+    ∀ e : Entity, TranscendentGround e → DivineSimplicity e
+
+theorem the_semantic_bound_does_not_close_the_grounding_arm :
+    ∃ (Subject Entity : Type)
+      (EntityOf : Subject → Entity)
+      (Means : Subject → Prop → Prop)
+      (GroundsEntity : Entity → Entity → Prop),
+      (∀ s : Subject, ∃ p : Prop, ¬ Means s p) ∧
+      (∃ s : Subject, ∃ g e : Entity, g = EntityOf s ∧ e ≠ g ∧ GroundsEntity g e)
+```
+
+Pegadas auditadas: `{Means, SemanticFinitude, Subject, propext}` e `{}`. C491 é a forma
+de princípio que faltava para entidades transcendentes, dado F15; C492 mostra que a
+finitude do lado de `Means` e a finitude do lado de `GroundsEntity` são independentes.
 
 Teoremas canónicos associados:
 

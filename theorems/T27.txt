@@ -1,13 +1,15 @@
  T27 — ONIPOTÊNCIA FUNDACIONAL E A RESTRIÇÃO NÃO-CONTRADITÓRIA DO FUNDAMENTO DA REALIDADE
 
-Depende de: `formal/Logos/DivineOmnipotence.lean`, formalizando a característica
+Depende de: `formal/Logos/DivineOmnipotence.lean` e
+`formal/Logos/ThomisticAct.lean`, formalizando a característica
 clássica fundacional da onipotência — o fundamento como operante *sempre e em todo
 lugar* sobre o que não envolve contradição (Tomás de Aquino ST I q. 25 a. 5 ad 1,
 *De potentia Dei*, *semper et ubique operans*) para o fundamento da realidade
 `Entity.ofGround`.
 
-Verificado em: `formal/Logos/DivineOmnipotence.lean`; auditoria `#print axioms`
-em `:391-402`; `formal/GAPMAP.md` C241–C251 (nível 17) e linha F10;
+Verificado em: `formal/Logos/DivineOmnipotence.lean` e
+`formal/Logos/ThomisticAct.lean`; auditoria `#print axioms`
+das declarações abaixo; `formal/GAPMAP.md` C241–C251 e C493 (nível 17) e linha F10;
 `base.txt` §28.
 
 Correção que governa este lote (2026-09-26):
@@ -18,8 +20,9 @@ e o próprio corpus de Γ dá a razão: a leitura Ortodoxa é a de Tomás de Aqu
 sobre o que não envolva contradição. Logo, a restrição **afirma-se, não se refuta**: a
 leitura não-contraditória é PROVEN (C242), e **apenas** a leitura da
 onipotência-contraditória é refutada (C244) — refutada *por causa da* restrição
-ortodoxa, não contra ela. O sentido **causal/criativo** permanece BLOCKED (§ Limites
-honestos abaixo), com as duas afirmações em falta registadas por extenso.
+ortodoxa, não contra ela. O sentido **causal/criativo** permanecia BLOCKED neste lote (§ Limites
+honestos abaixo), com as duas afirmações em falta registadas por extenso; foi depois fechado
+por declaração (C493, `Tag: META`) — ver actualização no fim do ficheiro.
 
 C241 — Contramodelo: a presença em todo o lado não implica operação:
 
@@ -183,10 +186,12 @@ Teoremas canónicos associados:
    âmbito operativo.
 
 4. A identificação **`OperatesAt v e P := ExistsAt v e ∧ P v`** é uma *definição*, não
-   uma derivação: Γ não possui relação de produção, logo "opera" é lido como
+   uma derivação: neste lote Γ não possuía relação de produção, logo "opera" é lido como
    *presença mais obtenção*. Está registada e **preçada** como 4.ª estipulação
    ◈ `operatesAt_presencePlusObtaining` (`Tag: SEM`), e o seu preço está
-   machine-checked por C241, C249 e C250.
+   machine-checked por C241, C249 e C250. A relação de produção foi depois declarada
+   (C463) e o universal causal declarado como ponte (C493); a definição enfraquecida e o
+   seu preço mantêm-se para o sentido não-contraditório.
 
 Limites honestos de escopo (o que **não** se deve reclamar):
 A demonstração estabelece a Onipotência Fundacional de `Entity.ofGround` no sentido
@@ -213,3 +218,13 @@ Nenhuma ponte de produção é manufacturada neste lote.
 (`ContingentSubjectKind s`); C247 passa a `gapless_operators_are_ground_or_necessary_kind`
 (disjunção: o fundamento E os sujeitos do género necessário) — o fundamento deixou de ser
 o operador "único". Ver theorems/T32.txt.]
+
+[Actualizado 2026-09-29, produção universal: o sentido causal/criativo deixou de estar
+BLOCKED — F10 é agora `AXIOM`, não por derivação mas por declaração. C493
+(`ThomisticAct.ground_produces_every_satisfiable_form`,
+`∀ φ : Form, (∃ w : World, Satisfies w φ) → ∃ v : World, Produces Entity.ofGround v φ`)
+declara o universal como ponte `Tag: META`, com pegada auditada
+`{Produces, Subject}` mais si próprio. C483 continua a valer como prova de que a ponte
+era conteúdo novo: a forma existencial de C465 mais a relação declarada não implicam o
+universal. Produção continua a não ser criação — a separação `Creates` (C110) mantém-se,
+e nada aqui toca F9.]
