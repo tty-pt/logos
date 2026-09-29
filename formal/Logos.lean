@@ -175,3 +175,11 @@ import Logos.ProductionCountermodel
 -- (C489), and the exact per-subject statement C454 does not give is named (C490).
 import Logos.CharacteristicClosure
 import Logos.ImmutabilitySoleBearer
+-- The necessary-kind audit (`Logos.NecessaryKindAudit`): what `NecessarySubjectKind` being
+-- inhabited does to the theory. Reads the kind vocabulary and one declared META bridge, adds
+-- zero axioms. C494 refutes the extensional reading of *ST* I q.19 a.4 (`∀ Q, Q ofGround →
+-- ∀ e, NecessaryEntity e → Q e`), C495 is the grade statement (necessity is the one footprint
+-- characteristic that does *not* pick the ground out), and C496/C497 profile the second
+-- necessary being: it has necessity and gapless operativeness but lacks transcendence, maximal
+-- capacity, and pure actuality. The plan of record is `PLAN3.md`.
+import Logos.NecessaryKindAudit

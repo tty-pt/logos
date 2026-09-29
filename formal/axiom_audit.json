@@ -6980,6 +6980,56 @@
   "Logos.Agency.subjectWill",
   "Logos.MoralFrontierAudit.Evil"
  ],
+ "Logos.NecessaryKindAudit.necessary_kind_correlate_is_necessary": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessaryKindAudit.necessary_kind_subject_fails_pure_actuality": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
+ "Logos.NecessaryKindAudit.necessary_kind_subject_is_gapless_operator": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessaryKindAudit.necessary_kind_subject_is_not_transcendent": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.NecessaryKindAudit.necessary_kind_subject_lacks_maximal_capacity": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
+ "Logos.NecessaryKindAudit.necessity_is_not_sole_bearer_of_the_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Plurality.necessaryPersonalSubjectExists"
+ ],
+ "Logos.NecessaryKindAudit.the_ground_is_not_the_only_necessary_being": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Plurality.necessaryPersonalSubjectExists"
+ ],
+ "Logos.NecessaryKindAudit.the_second_necessary_being_profile": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.SemanticFinitude"
+ ],
  "Logos.NecessaryPersonalGround.ActualEntity": [
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject"

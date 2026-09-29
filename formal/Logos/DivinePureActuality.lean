@@ -38,8 +38,13 @@ and `CHARS.md:243`.
 
 5. **Honest Demarcation:**
    - **Metatheoretic Independence:** Entities with passive potency fail Pure Actuality (`entity_with_potency_fails_pure_actuality`, footprint `{}`).
-   - **Category Demarcation:** Metaphysical Pure Actuality is strictly distinguished from physical kinetic motion
-     or thermodynamic energy (`pure_actuality_independent_of_physical_energy`, footprint `{}`).
+   - **Category Demarcation (C498, disclosed):** the separation of Metaphysical Pure Actuality from
+     physical kinetic motion or thermodynamic energy (`pure_actuality_independent_of_physical_energy`).
+     **Disclosure: this is a pure-logic tautology.** Both propositional variables are unbound, so the
+     statement is `∃ P Q, P ∧ ¬ Q` with no reference to pure actuality or to energy; it demarcates
+     nothing on its own. It is ledgered as C498 and kept visible rather than deleted, so the
+     category reading is neither silently emptied nor silently upgraded (class A `Kinetic` semantics
+     were declined F18). Γ has no theory of physical energy; see `PLAN3.md` Task 3.
 -/
 
 import Logos.Core
@@ -271,9 +276,15 @@ theorem ofGround_sole_pure_actuality
 -- Section 4: Category Demarcation
 -- ============================================================================
 
-/-- Category Demarcation: Pure Actuality in Γ does not imply physical kinetic energy.
+/-- Category Demarcation (C498, disclosed): Pure Actuality in Γ does not imply physical kinetic energy.
     Metaphysical Actus Purus is absence of passive potency and sustaining ground of reality;
     it does not establish thermodynamic energy, kinetic movement, or physical work.
+
+    **Disclosure: this is a pure-logic tautology.** Both propositional variables are unbound, so the
+    statement is `∃ P Q, P ∧ ¬ Q` with no reference to pure actuality or to energy; it demarcates
+    nothing on its own. It is ledgered as C498 and kept visible rather than deleted, so the
+    category reading is neither silently emptied nor silently upgraded (class A `Kinetic` semantics
+    were declined F18). Γ has no theory of physical energy; see `PLAN3.md` Task 3.
     Footprint: `{}`. -/
 theorem pure_actuality_independent_of_physical_energy :
     ∃ (PureAct PhysicalEnergy : Prop),

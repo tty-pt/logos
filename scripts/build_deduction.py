@@ -828,6 +828,7 @@ CHAIN_LISTS = [
     ("THOMISTIC-ACT", "THOMISTIC_ACT_STEPS"),
     ("ACT-CASCADE", "ACT_CASCADE_STEPS"),
     ("CHARACTERISTIC-CLOSURE", "CHARACTERISTIC_CLOSURE_STEPS"),
+    ("NECESSARY-KIND-AUDIT", "NECESSARY_KIND_AUDIT_STEPS"),
 ]
 
 # Declarations that a reader must be able to find in the rendered deduction, and
@@ -928,6 +929,16 @@ CHAIN_REQUIRED_DECLS = {
         "C491 — the missing Thomistic principle form",
     "Logos.CharacteristicClosure.the_semantic_bound_does_not_close_the_grounding_arm":
         "C492 — F15 bounds the wrong relation",
+    "Logos.NecessaryKindAudit.the_ground_is_not_the_only_necessary_being":
+        "C494 — the ground is not the only necessary being; the batch's headline refutation",
+    "Logos.NecessaryKindAudit.necessity_is_not_sole_bearer_of_the_ground":
+        "C495 — the grade statement: necessity does not pick the ground out",
+    "Logos.NecessaryKindAudit.necessary_kind_subject_is_not_transcendent":
+        "C496 — the second necessary being is not transcendent (control case, free)",
+    "Logos.NecessaryKindAudit.the_second_necessary_being_profile":
+        "C497 — the profile: has necessity and gapless operativeness, lacks transcendence/maximal capacity/pure actuality",
+    "Logos.DivinePureActuality.pure_actuality_independent_of_physical_energy":
+        "C498 — the physical-energy tautology, disclosed as vacuous",
 }
 
 def verify_chain_coverage(node_map: dict, claims_by_id: dict) -> None:
@@ -5882,7 +5893,10 @@ CLASSICAL_ATTRIBUTES = [
         "refs": ["Logos.DivinePureActuality.pure_actuality_independent_of_physical_energy"],
         "sense": ("Pure Actuality in Γ is metaphysical (absence of passive potency and universal modal grounding, "
                   "`DivinePureActuality.lean`). Physical kinetic motion, thermodynamic energy, and material "
-                  "work are not derived and are explicitly demarcated (`pure_actuality_independent_of_physical_energy`, `{}`)."),
+                  "work are not derived and are explicitly demarcated (`pure_actuality_independent_of_physical_energy`, `{}`, "
+                  "**ledgered C498; disclosed vacuous**: both propositional variables are unbound, so the statement is "
+                  "`∃ P Q, P ∧ ¬ Q` — a pure-logic tautology that demarcates nothing on its own (Γ has no theory of "
+                  "physical energy; class A `Kinetic` semantics declined). It is kept and labeled rather than deleted."),
     },
     {
         "attribute": "**Foundational omniscience** (truth-exhaustive scope — the condition of all truth)",
@@ -7498,6 +7512,52 @@ CHARACTERISTIC_CLOSURE_STEPS = [
      "finitude simplicity needs has never been declared"),
 ]
 
+# Chain 14 — 2026-09-29 necessary-kind audit (C494–C498). Read the kind vocabulary
+# and one declared META bridge; adds zero axioms. C494 refutes the extensional
+# reading of *ST* I q.19 a.4, C495 is the grade statement (necessity is the one
+# footprint characteristic that does NOT pick the ground out), C496/C497 profile
+# the second necessary being (it has necessity and gapless operativeness but lacks
+# transcendence, maximal capacity, pure actuality), and C498 is the disclosed
+# vacuous physical-energy tautology.
+NECESSARY_KIND_AUDIT_STEPS = [
+    ("Σ", "C494", "Logos.NecessaryKindAudit.the_ground_is_not_the_only_necessary_being",
+     "decl",
+     "**the ground is not the only necessary being.** The extensional reading of *ST* I q.19 a.4 — "
+     "every property of God is shared by every necessary being — is *false*: with "
+     "`Q := fun e => e = Entity.ofGround`, the necessary-kind subject's correlate is a "
+     "counterexample. This is the `ofGround_not_truth_tracking` genre applied to a classical "
+     "reading: **refuted, not merely unproved**. `PROVEN↑` under the META inhabitation bridge "
+     "C404; rejecting it returns the row to open"),
+    ("Σ", "C495", "Logos.NecessaryKindAudit.necessity_is_not_sole_bearer_of_the_ground",
+     "decl",
+     "**the grade statement: necessity is grade at most 2.** `∀ e, NecessaryEntity e → "
+     "e = Entity.ofGround` is false, so necessity is the one footprint characteristic that does "
+     "not pick the ground out — the honest counterpart of the six discriminating results "
+     "(C442–C446, C486, C307, C210, C433). C494 is the reader-facing refutation; this row is "
+     "the ledger-facing grade. `PROVEN↑`; the price is C404, the same META bridge"),
+    ("Σ", "C496", "Logos.NecessaryKindAudit.necessary_kind_subject_is_not_transcendent",
+     "decl",
+     "**the second necessary being is not transcendent.** Free, and the control case: "
+     "`TranscendentGround` is *defined* as non-atom and non-correlate, so denying the necessary-"
+     "kind subject that property is a definitional contradiction. Footprint is just the two "
+     "vocabulary axioms of the statement — nothing larger. Shows the exclusion is not uniformly "
+     "hard"),
+    ("Σ", "C497", "Logos.NecessaryKindAudit.the_second_necessary_being_profile",
+     "decl",
+     "**the profile of the second necessary being.** Its correlate **has** `NecessaryEntity` and "
+     "`GaplessOperate` (it *ties the ground* on operativeness — exactly why C443 needed the "
+     "`universal_ground` field), and **lacks** `TranscendentGround` (free), `MaximalCapacity` and "
+     "`DivinePureActuality` (both the same `SemanticFinitude` price C445 pays). The necessary kind "
+     "is a near-ground, cut off from every discriminating characteristic except operativeness"),
+    ("∅", "C498", "Logos.DivinePureActuality.pure_actuality_independent_of_physical_energy",
+     "decl",
+     "**the physical-energy row, disclosed as vacuous.** `∃ (PureAct PhysicalEnergy : Prop), "
+     "PureAct ∧ ¬ PhysicalEnergy` is a pure-logic tautology — both propositional variables are "
+     "unbound, so it demarcates nothing on its own. Kept and labeled rather than deleted: the "
+     "category reading is neither silently emptied nor silently upgraded, and Γ has no theory of "
+     "physical energy (class A `Kinetic` semantics were declined)"),
+]
+
 def render_succession_audit_chain(decls: dict, node_map: dict) -> list[str]:
     """Reader-facing chain for the 2026-09-28 succession-audit batch (C458\u2013C462)."""
     lines: list[str] = []
@@ -7682,7 +7742,57 @@ def render_characteristic_closure_chain(decls: dict, node_map: dict) -> list[str
        "C490 shows the datum cannot be promoted from one acting subject to necessary-kind "
        "initiation.")
     ap("- **Not a cheaper simplicity principle.** C491 is the missing principle form; C492 proves "
-       "its F15 premise cannot be replaced by the same `Means` information in another shape.")
+        "its F15 premise cannot be replaced by the same `Means` information in another shape.")
+    ap("")
+    return lines
+
+def render_necessary_kind_audit_chain(decls: dict, node_map: dict) -> list[str]:
+    """Reader-facing chain for the 2026-09-29 necessary-kind audit (C494–C498).
+
+    Reads the kind vocabulary and the existing META inhabitation bridge; adds zero
+    axioms (register stays 32). C494 is a *refutation of a reading*, C495 the grade
+    statement, C496/C497 the profile of the second necessary being, C498 a
+    disclosed vacuous tautology.
+    """
+    lines: list[str] = []
+    ap = lines.append
+    ap("### Chain 14 \u2014 Necessity does not pick the ground out (and the second necessary being)")
+    ap("")
+    ap("> **The question this chain answers.** `NecessarySubjectKind` is the ground of reality in "
+        "its Personal Type — and it is *inhabited* by the `Tag: META` bridge C404. Any subject of "
+        "that kind has an entity-correlate present in every world, hence a `NecessaryEntity`; and "
+        "a subject's correlate is provably not the ground (`ofGround_ne_ofSubject`). Two things "
+        "follow that no other characteristic forces: the ground is **not the only necessary "
+        "being**, and necessity is the **one** footprint characteristic that does not pick the "
+        "ground out. The batch profiles that second necessary being, and it adds zero axioms.")
+    ap("")
+    ap("`\u03a3` = proved, of the ground or of the necessary being \u00b7 `\u2205` = a disclosed "
+        "vacuity, kept and labeled rather than deleted.")
+    ap("")
+    ap("| # | Ledger | Declaration | Step | Status | Kernel footprint |")
+    ap("|---|---|---|---|---|---|")
+    for kind, cid, full, atype, text in NECESSARY_KIND_AUDIT_STEPS:
+        live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
+        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
+           f"{status} | {kernel_fp_text(full)} |")
+    ap("")
+    ap("**What this chain does not say.**")
+    ap("")
+    ap("- **Not two Gods, and not a Γ-inconsistency.** C494 is a *refutation of a reading* — the "
+        "extensional version of *ST* I q.19 a.4 (`∀ Q, Q ofGround → ∀ e, NecessaryEntity e → Q e`) "
+        "— resting on the one `Tag: META` inhabitation axiom. Reject C404 and the refutation and the "
+        "grade statement both disappear, leaving the question open. The necessity *of* the ground "
+        "(`ofGround_necessary`) stands.")
+    ap("- **Not a demoted characteristic.** C495 says the *uniqueness* of the necessary being is "
+        "false, not that the ground fails to be necessary. The six discriminating characteristics "
+        "(C442\u2013C446, C486, C307, C210, C433) are untouched, and C446 still collects them.")
+    ap("- **Not cheaper than C445.** C497's `MaximalCapacity` and `DivinePureActuality` cells pay "
+        "the *same* `SemanticFinitude` price C445 pays for the same exclusion; nothing new is "
+        "charged, and the payout is visible in each row's footprint.")
+    ap("- **Not a physical-energy theory.** C498 is a pure-logic tautology — `∃ P Q, P ∧ ¬ Q` with "
+        "both variables unbound. Γ has no theory of physical energy; the row is disclosed rather "
+        "than silently emptied or silently upgraded.")
     ap("")
     return lines
 
@@ -7742,6 +7852,7 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     lines.extend(render_thomistic_act_chain(decls, node_map))
     lines.extend(render_act_cascade_chain(decls, node_map))
     lines.extend(render_characteristic_closure_chain(decls, node_map))
+    lines.extend(render_necessary_kind_audit_chain(decls, node_map))
     ap("_Synthesis — the strongest current profile._ The theory has established, of a")
     ap("**personal, rational, free, authoritative-over-its-acts, independently individuated**")
     ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")

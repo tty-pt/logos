@@ -440,6 +440,33 @@ convivem; o que lhe faltava era a prova *machine-checked*, feita de uma vez.
 
 | C493 | §15 | `ThomisticAct.ground_produces_every_satisfiable_form : ∀ φ : Form, (∃ w : World, Satisfies w φ) → ∃ v : World, Produces Entity.ofGround v φ` — **PRICE 4, METAPHYSICAL (2026-09-29): o item (2) de F10, declarado em vez de derivado.** A negação é consistente: C483 exibe uma interpretação livre em que o chão produz exactamente uma de duas formas satisfazíveis, com a forma existencial de C465 intacta — logo o universal é conteúdo substantivo novo, não consequência da relação declarada mais a ponte existencial do amor. Deliberadamente restrito a `Entity.ofGround`, como C465; **não identifica produção com criação** (`Produces` não é `Creates`, e a separação C110 mantém-se). Modelo de consistência: interpretar a produção do chão como indexada pela satisfação, produzindo exactamente as formas satisfazíveis; C465 passa então a consequência do universal, e C483 continua verdadeiro como independência de forma sobre uma relação *não restringida*. Preço: uma ponte metafísica declarada | AXIOM | `{Produces, Subject}` + si próprio |
 
+| C494 | §2, §14, §15 | `NecessaryKindAudit.the_ground_is_not_the_only_necessary_being` — **o chão não é o único ser necessário.** A leitura extensional de *ST* I q.19 a.4 ("toda a propriedade de Deus é partilhada por todo o ser necessário") é **refutada, não meramente não provada**: tomando `Q := fun e => e = Entity.ofGround`, o correlato de um sujeito da espécie necessária (habitada pela ponte META C404) é um contra-exemplo. Género `ofGround_not_truth_tracking`, aplicado a uma leitura clássica. **O que isto NÃO é:** não é "dois deuses", não é inconsistência de Γ — é uma refutação de *leitura*, `PROVEN↑` sob a ponte de inhitação C404; rejeitar C404 remove a refutação e a linha de grau fica em aberto. A necessidade *do* chão (`ofGround_necessary`) mantém-se | PROVEN↑ | `{Means, NecessarySubjectKind, Subject, Will, subjectWill, necessaryPersonalSubjectExists}` |
+| C495 | §2, §14, §15 | `NecessaryKindAudit.necessity_is_not_sole_bearer_of_the_ground` — **a linha de grau: a necessidade não identifica o chão.** `∀ e, NecessaryEntity e → e = Entity.ofGround` é falso, logo a necessidade é *a única* característica de pegada que não destaca o chão — o contraponto honesto das seis discriminativas (C442–C446, C486, C307, C210, C433). C494 é a refutação legível; esta é o facto de registo. `PROVEN↑`; o preço é C404, a mesma ponte META | PROVEN↑ | `{Means, NecessarySubjectKind, Subject, Will, subjectWill, necessaryPersonalSubjectExists}` |
+| C496 | §2, §14 | `NecessaryKindAudit.necessary_kind_subject_is_not_transcendent` — **o segundo ser necessário não é transcendente.** Gratuito e caso de controlo: `TranscendentGround` é *definida* como não-átomo e não-correlato, logo negar essa propriedade ao correlato da espécie necessária é uma contradição definicional. A pegada é exactamente o vocabulário do enunciado (`NecessarySubjectKind`, `Subject`), nada maior — mostra que a exclusão não é uniformemente cara | PROVEN | `{NecessarySubjectKind, Subject}` |
+| C497 | §2, §14 | `NecessaryKindAudit.the_second_necessary_being_profile` — **o perfil do segundo ser necessário.** O correlato **tem** `NecessaryEntity` e `GaplessOperate` (empata com o chão na operatividade — exactamente por isso C443 precisou do campo `universal_ground`), e **carece** de `TranscendentGround` (grátis), `MaximalCapacity` e `DivinePureActuality` (ambos o mesmo preço F15 que C445 paga pela mesma exclusão). A espécie necessária é um *quase-chão*, cortada de todas as discriminativas excepto a operatividade. Nada de novo é cobrado: a pegada é F15 mais o vocabulário | PROVEN | `{Initiates, Means, NecessarySubjectKind, State, Subject, SemanticFinitude}` |
+| C498 | §2, §14 | `DivinePureActuality.pure_actuality_independent_of_physical_energy` — **a linha da energia física, declarada vazia.** `∃ (PureAct PhysicalEnergy : Prop), PureAct ∧ ¬ PhysicalEnergy` é uma tautologia de lógica pura: **ambas as variáveis proposicionais estão livres**, logo o enunciado é `∃ P Q, P ∧ ¬ Q`, que nada demarca por si. Mantida e etiquetada em vez de apagada, para a leitura categorial não ficar nem silenciosamente esvaziada nem silenciosamente promovida — Γ não tem teoria da energia física (a semântica de classe A `Kinetic` foi recusada em F18). Preço: nenhum | PROVEN | `{}` |
+
+### Lote NECESSARY-KIND-AUDIT (2026-09-29, C494–C498) — a necessidade não escolhe o chão
+
+Cinco linhas novas, **C494–C498**, num módulo novo (`NecessaryKindAudit.lean`) mais uma linha
+já existente tornada visível (`DivinePureActuality.pure_actuality_independent_of_physical_energy`,
+que era uma dos 135 teoremas invisíveis). **Nenhum axioma novo** — o registo fica **32 → 32**. O
+lote pergunta o que muda quando a `NecessarySubjectKind` (o chão de realidade no seu Tipo
+Pessoal) está habitada pela ponte META C404. Resposta: o chão deixa de ser o único ser
+necessário (C494), a necessidade passa a ser a única característica de pegada que não o destaca
+(C495), e o segundo ser necessário ganha um perfil completo: tem necessidade e operatividade sem
+lacunas, mas carece de transcendência, capacidade máxima e acto puro (C496/C497). A linha C498
+é a rectificação de uma delimitação categorial vazia descoberta por este lote.
+
+**C494 e C495 descansam sobre a ponte META C404, e o plano disse-o por escrito.** A
+`NecessarySubjectKind` é habitada por `necessaryPersonalSubjectExists` (`Tag: META`); sem essa
+ponte, a refutação e a linha de grau desaparecem e a pergunta volta a ficar em aberto. **F19 foi
+retirado.** O plano anterior propunha nomear a exclusão em falta da espécie necessária como
+fronteira pagável F19. A medição de C496/C497 mostra que a exclusão não é necessária em lado
+nenhum: o campo `universal_ground` fecha três braços, F15 fecha simplicidade e acto puro, e a
+cláusula da transcendência é grátis. **Uma fronteira vazia regista-se como fronteira vazia** —
+F19 não é fabricado, e a retirada é o resultado (ver `PLAN3.md` §0b).
+
 **C467 é condicional, e teve de ser.** A primeira redacção deste plano escrevia a linha sem
 hipótese (`DivineImmutability ofGround ∧ ∃ w φ, Produces …`) e era **inprovável**: Γ não tem
 testemunha incondicional de amor do céu, porque `EntityMeans (ofAtom _)` é `False` para todo o
@@ -1875,7 +1902,7 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
 
 - **PROVEN** (status PROVEN/PROVEN↑ whose audit footprint carries **no SEM/META
   axiom** — machine re-derived from `formal/axiom_audit.json`, 2026-09-25):
-  - **56 truly axiom-free** (`{}`): C379, C380, C381, C383, C1, C2, C4, C5, C6, C7, C8, C9,
+  - **57 truly axiom-free** (`{}`): C379, C380, C381, C383, C1, C2, C4, C5, C6, C7, C8, C9,
     C183, C11, C179,
     C17, C181, C22, C26, C27, C31, C35, C36, C95, C96, C182, C184, C185, C38, C50,
     C180, C63, C108, C111, C166, C167, C226, C227, C231, C259, C260, C272, C309,
@@ -1916,10 +1943,13 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     machine-checked theorem. The *separations* around them (C357, C358, C360,
     C362, C363) keep COUNTERMODEL status and stay out of this bucket, as does
     the rebuilt C110.
+    **C498** (2026-09-29 NECESSARY-KIND-AUDIT) is the `{}` **PROVEN** row that is a *pure-logic
+    tautology with both predicates unbound* (`∃ P Q, P ∧ ¬ Q`), kept and disclosed rather than
+    deleted — see the batch section and `DivinePureActuality.lean`.)
   - **11 `CL`-only**: C3, C10, C12, C13, C14, C16, C37, C59, C93, C251, C322. (C251 is the
     non-emptiness + contradiction-freedom of the satisfiable scope domain; its `propext`
     cost is inherited from C14, deliberately, so the graph shows the C251 → C14 edge.)
-  - **253 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
+  - **255 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`):
     C419, C420, C421, C422, C423, C424, C425, C427, C428, C429, C430, C431
     (the 2026-09-28 precedence / §18 batch — twelve rows, 0 substantive axioms;
     the `NecessarySubjectKind` in C419–C421/C424/C429/C430 is the `ExistsAt` artifact
@@ -1982,6 +2012,14 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     do contador consome `Initiates`, logo a pegada é `{Initiates, State, Subject}`, não `{}`;
     o que é `{}`-shaped é o *uso* do nível do chão, pelo apelido `ofGround_ne_ofSubject`.
     C459, o seu gêmeo, fica de fora por ser `COUNTERMODEL` — badge não é bucket).
+    **C496, C497** (lote NECESSARY-KIND-AUDIT, 2026-09-29 — o perfil do segundo ser
+    necessário, C496/C497, **vocabulary-only**: a pegada de ambos é subconjunto de
+    `VOCAB` — `{NecessarySubjectKind, Subject}` em C496 (o kind é um artefacto
+    `ExistsAt`; a linha é PROVEN, não PROVEN↑), e a de C497 é F15-priced igual a
+    C445, `{Initiates, Means, NecessarySubjectKind, State, Subject, SemanticFinitude}`,
+    todo o custo em `SemanticFinitude` (`Tag: VOCAB`) mais as vocábulos herdadas do
+    acto puro — nenhuma ponte SEM/META. As duas entram aqui como **PROVEN**, nunca
+    `PROVEN↑`.)
     (**lote ACTUALITY, 2026-09-28** — uma linha: a vacuidade de `ActualEntity`,
     `{NecessarySubjectKind, Subject}`; o `NecessarySubjectKind` é o artefacto
     `ExistsAt`, mencionado mas nunca usado — a prova toma o ramo `rfl`).
@@ -2040,10 +2078,15 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     see the BLOCKED/retired blocks and the `## Formal Frontiers` inventory.
     Of that range only C74 (`aloneExcluded`) survives, as PROVEN↑ (below).
 - **PROVEN↑** (fully machine-verified under the flagged SEM/META/TRANS axiom shown —
-  no foundation axiom remains): **60 claims** —
+  no foundation axiom remains): **62 claims** —
   `AxTwoSubjects` (17): C28, C29, C40, C41, C43, C46, C47, C48, C54, C61, C74, C277, C278, C279, C286, F4,
   **C401**;
-  `necessaryPersonalSubjectExists` (3): C407, C408, C409 (the necessary-kind inhabitant and its two readings, Batch two-kinds 2026-09-28)
+  `necessaryPersonalSubjectExists` (5): C407, C408, C409 (the necessary-kind inhabitant and its two readings, Batch two-kinds 2026-09-28),
+   **C494, C495** (lote NECESSARY-KIND-AUDIT, 2026-09-29 — a não-unicidade do ser necessário
+   e a linha de grau: duas novas linhas sob a ponte META C404; a pegada de ambas é a mesma,
+   `{Means, NecessarySubjectKind, Subject, Will, subjectWill, necessaryPersonalSubjectExists}` —
+   todo o custo substantivo reside na ponte, o resto é vocabulário herdado. C494 é a refutação
+   da leitura extensional de *ST* I q.19 a.4; C495 é a afirmação de grau que a motiva)
    (F4 shares the C41 decl, `T13_someoneLovable`; C351–C352 entered this list on
    2026-09-27 when the SEM datum `AxContingentCreationObtains` was deleted; **C350 left it
    the same day and C367 entered**, when existence and meaning were split. **The
