@@ -11,13 +11,19 @@ formal/Logos/GoodDenial.lean (theorem de ligação `good_denial_is_free_logicall
 pegada só-vocabulário `{Initiates, Means, State, Subject}` (C500): **a negação do Bem é
 livre-logicamente consistente e não performativamente auto-refutadora** — funde
 `moral_pole_postulate_is_not_a_consequence` com
-`retorsion_denial_does_not_commit_to_content`, `{}`).
+`retorsion_denial_does_not_commit_to_content`, `{}`) +
+formal/Logos/SecondPersonGoodAttempt.lean (theorems de testemunha
+`lone_will_is_vacuously_individual` (C501, `{}`) e
+`two_persons_do_not_force_good_obtains` (C502, `{}`), mais a sonda BLOCKED C503;
+nenhum axioma novo — plano `OTHER.md`).
 PROVEN↑ sob a ponte META declarada `AxBenevolentBearingObtains` (o próprio C500 é PROVEN, sem ponte).
 
 Verificado em: formal/Logos/MoralFrontierAudit.lean (Good :207, moral_good_obtains :216,
 moral_pole_postulate_is_not_a_consequence :266), formal/Logos/Value.lean (no_help_in_uniformly_unbearing_layer :104,
 no_harm_in_uniformly_unbearing_layer :123 (gémeo, C499), AxBenevolentBearingObtains :201,
 some_person_is_helped :207), formal/Logos/GoodDenial.lean (good_denial_is_free_logically_consistent :54),
+formal/Logos/SecondPersonGoodAttempt.lean (lone_will_is_vacuously_individual,
+two_persons_do_not_force_good_obtains),
 formal/Logos/CognitiveToAgencyFrontier.lean (FineCognitiveSubject :44) e
 formal/Logos/DefinitiveAgencyFrontier.lean (retorsion_denial_does_not_commit_to_content :164),
 GAPMAP.md F3 + C176–C178, C499 e C500 (§28/§5, secção Level 9), base.txt §21 e §28.
@@ -76,3 +82,20 @@ O que NÃO muda (permanece honesto e perene):
   simétrica do polo negativo é o próximo passo aberto.
 - A teleologia deôntica F2 continua em aberto; a Trindade continua DEFERRED
   (`preceding_theory_not_entails_trinity`, `{}`).
+
+A tentativa «se provarmos uma segunda pessoa, provamos o Bem» (plano `OTHER.md`,
+lote OTHER 2026-09-29, C501–C503): **recusada com testemunhas no kernel, sem forçar
+nada.** (a) A retorsão da pessoalidade relacional — «se uma vontade é individual mas
+não há mais ninguém de quem ser individual, como pode sequer existir uma pessoa?» —
+cai por vacuidade: `IndependentWill` é unicidade sobre a classe dos outros, e para
+uma vontade solitária o `∀` esvazia-se (C501 `{}`; a individualidade solitária não
+tem conteúdo contrastivo — divulgação, padrão C457/C498). (b) Mesmo com duas pessoas
+distintas, o Bem não se segue: o dado em falta é o valor do bearing (`BearingOf`
+opaco), não o Outro — C502 (`{}`) exibe um mundo de duas pessoas com bearing
+uniformemente `unbearing`, e o censo confirma que nenhum teorema ou axioma conclui
+`BearingOf _ _ = benevolent` excepto a própria ponte META C177. (c) O passo «o chão
+ama uma pessoa» permanece BLOCKED (C503): falta a instância da WALL 2
+(`∃ s : Subject, ContingentSubjectKind s ∧ (∃ q : Prop, Means s q) ∧ Person s`), a
+WALL 1 e a projecção Entity→sujeito para `BearingOf = benevolent`. **O Bem permanece
+PROVEN↑ sob a única ponte declarada C177, agora com o preço triplamente nomeado.**
+Nenhuma ponte nova foi comissionada.

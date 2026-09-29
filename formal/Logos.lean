@@ -184,3 +184,9 @@ import Logos.ImmutabilitySoleBearer
 -- capacity, and pure actuality. The plan of record is `PLAN3.md`.
 import Logos.NecessaryKindAudit
 import Logos.GoodDenial
+-- The second-person attempt (`Logos.SecondPersonGoodAttempt`): TWO `{}`
+-- countermodel witnesses — a lone will is vacuously individual (C501), and
+-- two distinct persons still do not force the moral Good (C502) — plus the
+-- BLOCKED love-lane probe (C503). No axiom changes; the Good stays PROVEN↑
+-- under the single disclosed META bridge C177. Plan of record: `OTHER.md`.
+import Logos.SecondPersonGoodAttempt
