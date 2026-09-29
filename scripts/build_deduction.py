@@ -2231,7 +2231,8 @@ FRONTIER_INTRO = (
     "C175, `{}`), making F3 a countermodel frontier, not a gap. The *positive* moral "
     "pole is separately obtained under one disclosed, priced META bridge "
     "(`Value.AxBenevolentBearingObtains`, C177 → `moral_good_obtains`, C178); the bare "
-    "value layer is machine-proven empty (C176), so the bridge is a paid commitment "
+    "value layer is a `{}`-countermodel (C176, `BearingOf` re-opened as an `opaque` "
+    "constant 2026-09-29), so the bridge is a paid commitment "
     "rather than a hidden derivation, and the negative pole `Evil` remains a declared "
     "SEM datum (its fair reading needs a parallel harm bridge, not declared)."
 )
@@ -4955,7 +4956,8 @@ def render_reading_guide() -> list[str]:
     ap(">    honestly: `Good` is a *fair definition* (helping another person, vocabulary-only, ")
     ap(">    `{Means, Subject}`) and `moral_good_obtains` (C178) is PROVEN↑ under the single declared ")
     ap(">    META bridge `AxBenevolentBearingObtains` (C177, \"some person is actually helped\"), whose ")
-    ap(">    price is machine-visible (the bare value layer is empty, C176). The negative pole `Evil` ")
+    ap(">    price is machine-visible (the bare value layer is a `{}`-countermodel, C176 — `BearingOf` ")
+    ap(">    re-opened as an `opaque` constant 2026-09-29). The negative pole `Evil` ")
     ap(">    remains a declared SEM datum. The epistemic reality-hook itself is ")
     ap(">    unconditional and vocabulary-only (`correct_tracks_reality`, C173/C174).")
     ap("")
@@ -5578,7 +5580,7 @@ CLASSICAL_ATTRIBUTES = [
                  "Logos.MoralFrontierAudit.Good",
                  "Logos.MoralFrontierAudit.moral_pole_postulate_is_not_a_consequence",
                  "Logos.Value.AxBenevolentBearingObtains",
-                 "Logos.Value.no_help_obtains"],
+                 "Logos.Value.no_help_in_uniformly_unbearing_layer"],
         "sense": ("GAPMAP ledger row `F3 §28 (Good)` = COUNTERMODEL (🧱) via C175: the "
                   "`M_amoral` model (`{}`) satisfies epistemic agential normativity with no "
                   "practical obligation — the separation is permanent "
@@ -5590,8 +5592,9 @@ CLASSICAL_ATTRIBUTES = [
                   "nothing) and `moral_good_obtains` (C178) is PROVEN↑ under the single "
                   "disclosed META bridge `AxBenevolentBearingObtains` (C177, \"some person is "
                   "actually helped\"). The bridge is a paid commitment, not a hidden derivation: "
-                  "the bare value layer is machine-proven empty (`no_help_obtains`, C176, "
-                  "`{Subject}`), which is the bridge's own countermodel. The negative pole `Evil` "
+                  "the bare value layer is a `{}`-countermodel (`no_help_in_uniformly_unbearing_layer`, "
+                  "C176 — `BearingOf` re-opened as an `opaque` constant 2026-09-29), which is the "
+                  "bridge's own countermodel. The negative pole `Evil` "
                   "remains a declared SEM datum (its fair reading needs a parallel harm bridge, "
                   "not declared). What stays a countermodel frontier is the *attribution* of this "
                   "goodness to the Divine Being — that remains a separate target."),
@@ -7533,7 +7536,8 @@ NECESSARY_KIND_AUDIT_STEPS = [
      "**the grade statement: necessity is grade at most 2.** `∀ e, NecessaryEntity e → "
      "e = Entity.ofGround` is false, so necessity is the one footprint characteristic that does "
      "not pick the ground out — the honest counterpart of the six discriminating results "
-     "(C442–C446, C486, C307, C210, C433). C494 is the reader-facing refutation; this row is "
+     "(C439, C442–C445, C307, collected by C446); this proves `NecessaryEntity` cannot be C446's "
+     "seventh conjunct while the kind is inhabited. C494 is the reader-facing refutation; this row is "
      "the ledger-facing grade. `PROVEN↑`; the price is C404, the same META bridge"),
     ("Σ", "C496", "Logos.NecessaryKindAudit.necessary_kind_subject_is_not_transcendent",
      "decl",
@@ -7786,7 +7790,8 @@ def render_necessary_kind_audit_chain(decls: dict, node_map: dict) -> list[str]:
         "(`ofGround_necessary`) stands.")
     ap("- **Not a demoted characteristic.** C495 says the *uniqueness* of the necessary being is "
         "false, not that the ground fails to be necessary. The six discriminating characteristics "
-        "(C442\u2013C446, C486, C307, C210, C433) are untouched, and C446 still collects them.")
+        "(C439, C442–C445, C307, collected by C446) are untouched, and C446 still collects them; "
+        "C495 proves `NecessaryEntity` cannot be C446's seventh conjunct while the kind is inhabited.")
     ap("- **Not cheaper than C445.** C497's `MaximalCapacity` and `DivinePureActuality` cells pay "
         "the *same* `SemanticFinitude` price C445 pays for the same exclusion; nothing new is "
         "charged, and the payout is visible in each row's footprint.")

@@ -11996,9 +11996,6 @@
   "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
- "Logos.Value.BearingOf": [
-  "Logos.Agency.Subject"
- ],
  "Logos.Value.Harms": [
   "Logos.Agency.Subject"
  ],
@@ -12029,9 +12026,6 @@
   "Logos.Agency.Will",
   "Logos.Agency.subjectWill"
  ],
- "Logos.Value.affects_unobtainable": [
-  "Logos.Agency.Subject"
- ],
  "Logos.Value.aloneExcluded": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
@@ -12048,21 +12042,14 @@
  "Logos.Value.harm_affects": [
   "Logos.Agency.Subject"
  ],
- "Logos.Value.harms_unobtainable": [
-  "Logos.Agency.Subject"
- ],
  "Logos.Value.help_affects": [
   "Logos.Agency.Subject"
  ],
  "Logos.Value.help_not_harm": [
   "Logos.Agency.Subject"
  ],
- "Logos.Value.helps_unobtainable": [
-  "Logos.Agency.Subject"
- ],
- "Logos.Value.no_help_obtains": [
-  "Logos.Agency.Subject"
- ],
+ "Logos.Value.no_harm_in_uniformly_unbearing_layer": [],
+ "Logos.Value.no_help_in_uniformly_unbearing_layer": [],
  "Logos.Value.some_person_is_helped": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",

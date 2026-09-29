@@ -22,8 +22,10 @@ corpus records:
   `necessaryPersonalSubjectExists` and the refutation and the grade statement both disappear,
   leaving the question open.
 - **necessity is the one characteristic that does not pick the ground out.** The six
-  discriminating characteristics each satisfy `∀ e, P e → e = Entity.ofGround` (C442–C446, C486,
-  C307, C210, C433); `NecessaryEntity` does not, and cannot while the necessary kind is inhabited.
+  discriminating characteristics each satisfy `∀ e, P e → e = Entity.ofGround` (C439,
+  C442–C445, C307 — collected by C446); `NecessaryEntity` does not, and cannot while the
+  necessary kind is inhabited: C495 proves `NecessaryEntity` cannot be C446's seventh
+  conjunct under that inhabitation.
 
 It also gives the **profile of the second necessary being**: it is necessary and *gaplessly
 operative* (it ties the ground there — the reason C443's `universal_ground` field, not
@@ -32,7 +34,7 @@ transcendence, maximal capacity, and pure actuality. The last two are the `Seman
 price C445 already pays; nothing new is charged here.
 
 **0 new axioms.** The register stays 32. This module only *reads* the kind vocabulary and one
-already-declared META bridge; it declares nothing.
+already-declared META bridge; it declares no axioms — its eight theorems are the only additions.
 -/
 
 import Logos.Core
@@ -94,11 +96,17 @@ theorem necessary_kind_correlate_is_necessary (s : Subject)
     bridge `necessaryPersonalSubjectExists` inhabits the necessary kind and
     `ofGround_ne_ofSubject` denies that its correlate is the ground. So among the footprint
     characteristics, *necessity is the one that does not pick the ground out* — the honest
-    counterpart of the six discriminating results (C442–C446, C486, C307, C210, C433).
+    counterpart of the six discriminating results (C439, C442–C445, C307 — collected by C446).
+    It proves that `NecessaryEntity` cannot be C446's seventh conjunct while the necessary kind is
+    inhabited.
 
     This is `PROVEN↑` under the META bridge, not a refutation of Γ: it says the ground is not the
     *only* necessary being, not that the ground fails to be necessary (`ofGround_necessary`
     stands). Reject `necessaryPersonalSubjectExists` and this row returns to open.
+    Contrast with C489/C490: those are free-signature *countermodels* (`{}`) separating a
+    per-kind-subject form from the act-datum without touching Γ, while this row is a *proof inside
+    Γ* — the negation is witnessed by the bridge-inhabited necessary kind, so its status is
+    `PROVEN↑`, not separation.
     Footprint: `{Means, NecessarySubjectKind, Subject, Will, subjectWill,
       necessaryPersonalSubjectExists}`. -/
 theorem necessity_is_not_sole_bearer_of_the_ground :
@@ -205,6 +213,9 @@ theorem necessary_kind_subject_is_gapless_operator (s : Subject)
     but is cut off from every discriminating characteristic except operativeness — and there it
     is not cut off at all, which is why the `universal_ground` field exists. The conjunction is a
     new statement about a second necessary being; its cells are the existing vocabulary results.
+    Note that "second" is shorthand for "other": the theorem is universal over the kind
+    (`∀ s, NecessarySubjectKind s → …`), so it describes *every* non-ground necessary subject's
+    correlate, not one particular being.
     Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject, SemanticFinitude}`. -/
 theorem the_second_necessary_being_profile (s : Subject)
     (hKind : NecessarySubjectKind s) :

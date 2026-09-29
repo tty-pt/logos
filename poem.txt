@@ -132,8 +132,9 @@ declarada (só SEM/META).
 - L22/L24 (P5/P6) — o polo moral: "não ajuda nem prejudica ninguém" lido relacionalmente dá a
   **definição justa** `Good s a := ∃ t ≠ s, Person t ∧ Helps s t ∧ ¬ Harms s t` (só vocabulário,
   `{Means, Subject}`), e o bem moral **existe**: `moral_good_obtains` (C178) PROVEN↑ sob a ponte META
-  declarada `AxBenevolentBearingObtains` (C177, "alguma pessoa é de facto ajudada"); a camada de valor
-  nua é machine-vazia (C176 `no_help_obtains`, `{Subject}`) — a ponte é um compromisso pago, com o seu
+  declarada `AxBenevolentBearingObtains` (C177, "alguma pessoa é de facto ajudada"); a camada de
+  valor nua é um **contramodelo** (C176, `{}` — `BearingOf` re-aberto como `opaque` a 2026-09-29,
+  ver INCONSISTENT.md) — a ponte é um compromisso pago, com o seu
   próprio contramodelo. O polo negativo `Evil` permanece um datum **SEM declarado**. (T16, GAPMAP F3.)
 - L24 (P6): "não é impessoal, e não é sózinho" → C40/C73/C74 (C73 BLOCKED, C40/C74 PROVEN↑ sob
   `AxTwoSubjects`); "Amar é escolhido e

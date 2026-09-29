@@ -872,9 +872,9 @@ Nota formal sobre o polo moral (2026-09-24 — fecho positivo de F3; `Logos.Mora
 `Logos.Value`; GAPMAP C175–C178; ver `theorems/T16.txt`):
 1. **O bem moral é uma DEFINIÇÃO JUSTA, não um postulado:** `Good s a := ∃ t ≠ s, Person t ∧ Helps s t ∧ ¬ Harms s t` — "ajudar o outro é o bem moral", o conteúdo declarado do polo positivo. A sua própria pegada é `{Means, Subject}` (só vocabulário): a definição não transporta nenhuma conclusão escondida.
 2. **O bem moral EXISTE — sob uma única ponte declarada:** `moral_good_obtains : ∃ s a, Good s a` (C178) sob `AxBenevolentBearingObtains` (C177, `Tag: META` — "alguma pessoa é de facto ajudada"), com pegada `{AxBenevolentBearingObtains, Means, Subject}`: o preço escrito por extenso.
-3. **A ponte é um compromisso pago, não uma dedução disfarçada:** a camada de valor nua é machine-vazia (`BearingOf := unbearing`; `helps_unobtainable`, `harms_unobtainable`, `affects_unobtainable`, `no_help_obtains`, C176, `{Subject}`) — esse é o contramodelo da própria ponte.
+3. **A ponte é um compromisso pago, não uma dedução disfarçada:** a camada de valor nua é um **contramodelo**, não um teorema de Γ — a 2026-09-29 o `BearingOf` foi re-aberto como constante `opaque` (a definição fechada com valor `unbearing` tornava a ponte META inconsistente, Γ ⊢ ⊥, ver `INCONSISTENT.md`); a camada vazia sobrevive como a testemunha esquemática `{}` `no_help_in_uniformly_unbearing_layer` (C176): num mundo onde o bearing é uniformemente `unbearing`, nenhum par distinto se ajuda — esse é precisamente o contramodelo da própria ponte.
 4. **A separação epistémica permanece permanente:** a normatividade agencial epistémica não força obrigação prática (`M_amoral`, C175, `{}`), e nenhum polo é consequência da estrutura de apoio (`moral_pole_postulate_is_not_a_consequence`, `{Initiates, Means, State, Subject}`).
-5. **Assimetria declarada:** o polo negativo `Evil` continua a ser um datum SEM declarado — a sua leitura relacional justa ("prejudicar outra pessoa") não é habitada sem a ponte paralela "algum prejuízo ocorre", que não foi declarada.
+5. **Assimetria declarada:** o polo negativo `Evil` continua a ser um datum SEM declarado — a sua leitura relacional justa ("prejudicar outra pessoa") **nunca é forçada**: no contramodelo gémeo `no_harm_in_uniformly_unbearing_layer` (C499, `{}`, aditado a 2026-09-29) nenhum par se prejudica numa camada uniformemente `unbearing`, exactamente como nenhum se ajuda (C176) — e permanece **não-afirmada** em Γ: nenhuma ponte paralela "algum prejuízo ocorre" foi comissionada, pelo que o polo negativo se mantém datum SEM por declaração.
 
 Teorema: ver theorems/T16.txt.
 
@@ -1545,11 +1545,14 @@ Good (o bem como objeto moral da relação) — F3: **fronteira de contramodelo*
   `Good` é uma **definição justa** (ajudar o outro; só vocabulário, `{Means, Subject}`) e a sua
   *inhabitação* repousa numa **única ponte META declarada e precificada**,
   `AxBenevolentBearingObtains` ("alguma pessoa é de facto ajudada", C177); `moral_good_obtains`
-  (C178) é PROVEN↑ sob essa ponte. A camada de valor nua é machine-vazia (C176, `{Subject}`) — a
-  ponte é um compromisso pago, com o seu próprio contramodelo. O polo negativo `Evil` permanece um
-  datum **SEM declarado** (a sua leitura relacional justa não é habitada sem a ponte paralela
-  "algum prejuízo ocorre", não declarada). A teleologia
-  deôntica F2 permanece em aberto, em conexão com T12/T13.
+  (C178) é PROVEN↑ sob essa ponte. A camada de valor nua é um contramodelo (C176, `{}` — o
+  `BearingOf` foi re-aberto como `opaque` a 2026-09-29) — a
+ponte é um compromisso pago, com o seu próprio contramodelo. O polo negativo `Evil` permanece um
+   datum **SEM declarado**: a sua leitura relacional justa não é forçada — no contramodelo gémeo
+   `no_harm_in_uniformly_unbearing_layer` (C499, `{}`) nenhum par se prejudica numa camada
+   uniformemente `unbearing`, exactamente como nenhum se ajuda (C176) — e permanece **não-afirmada**,
+   pois nenhuma ponte paralela "algum prejuízo ocorre" foi comissionada. A teleologia
+   deôntica F2 permanece em aberto, em conexão com T12/T13.
 Trinity — DEFERRED, sem argumento (§28/§29).
 Identidade hipostática do fundamento com uma pessoa (g = EntityOf s enquanto pessoa) — BLOQUEADA:
   `ofGround_ne_ofSubject` (`Entity.noConfusion`). O fundamento é necessário como *entidade*

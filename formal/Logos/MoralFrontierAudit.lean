@@ -27,10 +27,14 @@ poles. But the *positive* pole no longer has to be **postulated**. Following the
 toward another *person* (`∃ t ≠ s, Person t ∧ Helps s t ∧ ¬ Harms s t`) — and it
 **obtains** (`moral_good_obtains`) under one disclosed, priced META bridge
 `AxBenevolentBearingObtains` ("some person is actually helped"). The bare value layer
-is provably empty (`Logos.Value.helps_unobtainable`, `no_help_obtains`), so the bridge
+is a `{}`-countermodel (`Logos.Value.no_help_in_uniformly_unbearing_layer`; `BearingOf`
+re-opened as an `opaque` constant 2026-09-29, see INCONSISTENT.md), so the bridge
 is a genuine paid commitment, carried openly in the footprint — not a hidden derivation.
 The negative pole `Evil` remains a declared SEM datum (its fair relational reading is
-uninhabited without a parallel "some harm occurs" bridge — not yet declared).
+never forced — the harm twin countermodel `no_harm_in_uniformly_unbearing_layer`, C499,
+`{}`, shows no harm obtains in a uniformly-unbearing world, exactly as no help obtains,
+C176 — and it stays **unasserted** in Γ, since no parallel "some harm occurs" bridge was
+commissioned).
 
 ## Structural difference (why the method flips — recorded, not re-derived)
 `Ought` is an axiom (`OughtRetorsion.lean:72`) while `Correct` is a **def**. Stage 1
@@ -217,12 +221,13 @@ theorem moral_good_obtains : ∃ s : Subject, ∃ a : Prop, Good s a := by
 Tag: SEM
 Evil: the negative moral pole of a subject's practical action — a declared semantic datum.
 
-The negative pole is still *declared*, not yet derived: the fair relational reading of
-Evil ("harms another person") is uninhabited in the pure theory, because `Harms` is
-refutable for every pair (`Logos.Value.harms_unobtainable`) — harm does not obtain
-without a disclosed datum parallel to `AxBenevolentBearingObtains`. Until that parallel
-"some harm occurs" bridge is declared and disclosed, the negative moral pole keeps its
-declared SEM status. The positive pole `Good` is already derived (see `moral_good_obtains`).
+The negative pole is still *declared*, not yet derived: its fair relational reading of
+Evil ("harms another person") is **never forced** — in a uniformly-unbearing world no
+harm obtains, by the harm twin countermodel `no_harm_in_uniformly_unbearing_layer` (C499,
+`{}`), the exact mirror of the help twin (C176). And it stays **unasserted** in Γ, since
+no parallel datum to `AxBenevolentBearingObtains` — a "some harm occurs" bridge — was
+declared and disclosed. Until that bridge is commissioned, the negative moral pole keeps
+its declared SEM status. The positive pole `Good` is already derived (see `moral_good_obtains`).
 
 The poles are genuinely additional, never forced: the consistency witness
 `moral_pole_postulate_is_not_a_consequence` interprets any poles as false everywhere

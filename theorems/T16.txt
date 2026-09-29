@@ -2,16 +2,19 @@ T16 — O BEM MORAL EXISTE (o fecho positivo do polo moral, poema P5/P6)
 
 Depende de: formal/Logos/MoralFrontierAudit.lean (def `Good`, pegada `{Means, Subject}` — só
 vocabulário; theorem `moral_good_obtains`, pegada `{AxBenevolentBearingObtains, Means, Subject}`;
-axiom `Evil`, Tag: SEM) + formal/Logos/Value.lean (theorems `helps_unobtainable`,
-`harms_unobtainable`, `affects_unobtainable`, `no_help_obtains`, pegada `{Subject}`; axiom
+axiom `Evil`, Tag: SEM) + formal/Logos/Value.lean (theorems contramodelo
+`no_help_in_uniformly_unbearing_layer`, pegada `{}` (C176), e o seu gémeo
+`no_harm_in_uniformly_unbearing_layer`, pegada `{}` (C499); axiom
 `AxBenevolentBearingObtains`, Tag: META; theorem `some_person_is_helped`, pegada
 `{AxBenevolentBearingObtains, Means, Subject}`; `help_not_harm` / C85, `{Subject}`).
 PROVEN↑ sob a ponte META declarada `AxBenevolentBearingObtains`.
 
-Verificado em: formal/Logos/MoralFrontierAudit.lean (Good :203, moral_good_obtains :212,
-moral_pole_postulate_is_not_a_consequence :261), formal/Logos/Value.lean (no_help_obtains,
-AxBenevolentBearingObtains :183, some_person_is_helped :189), GAPMAP.md F3 + C176–C178
+Verificado em: formal/Logos/MoralFrontierAudit.lean (Good :207, moral_good_obtains :216,
+moral_pole_postulate_is_not_a_consequence :266), formal/Logos/Value.lean (no_help_in_uniformly_unbearing_layer :104,
+no_harm_in_uniformly_unbearing_layer :123 (gémeo, C499), AxBenevolentBearingObtains :201,
+some_person_is_helped :207), GAPMAP.md F3 + C176–C178 e C499
 (§28/§5, secção Level 9), base.txt §21 e §28. Desenho e decisões: MORAL.md §8b–§8e.
+Reparação do fecho 2026-09-29: ver INCONSISTENT.md.
 sorryAx: 0.
 
 Enunciado:
@@ -24,7 +27,10 @@ axiom AxBenevolentBearingObtains :
 
 theorem moral_good_obtains : ∃ s : Subject, ∃ a : Prop, Good s a
 
-theorem no_help_obtains : ¬ ∃ s t : Subject, s ≠ t ∧ Helps s t
+theorem no_help_in_uniformly_unbearing_layer {S : Type}
+  (B : S → S → InterpersonalBearing) :
+  (∀ s t : S, B s t = InterpersonalBearing.unbearing) →
+    ¬ ∃ s t : S, s ≠ t ∧ B s t = InterpersonalBearing.benevolent
 
 O que muda em relação a F3: `Good` **deixou de ser um axioma SEM** e passou a ser uma
 *definição justa* — o conteúdo declarado do polo positivo é precisamente "ajudar o outro"
@@ -36,10 +42,13 @@ ao facto de a bondade **ocorrer** no mundo.
 Fecho (o único preço): `moral_good_obtains` é PROVEN↑ sob a ponte META declarada e
 precificada `AxBenevolentBearingObtains` — "alguma pessoa é de facto ajudada" — com a
 pegada `{AxBenevolentBearingObtains, Means, Subject}` escrita por extenso. A ponte é um
-compromisso pago, não uma dedução disfarçada: a camada de valor nua é machine-vazia
-(`BearingOf := unbearing`; `helps_unobtainable`, `harms_unobtainable`,
-`affects_unobtainable`, `no_help_obtains`, C176, `{Subject}`) e esse é precisamente o
-contramodelo da ponte.
+compromisso pago, não uma dedução disfarçada: a camada de valor nua é um **contramodelo**,
+não um teorema de Γ (C176, `{}` — o `BearingOf` foi **re-aberto** como constante `opaque`
+a 2026-09-29; a definição fechada com valor `unbearing` tornava a ponte inconsistente,
+Γ ⊢ ⊥, ver `INCONSISTENT.md`). A camada vazia sobrevive como a testemunha esquemática
+`no_help_in_uniformly_unbearing_layer`: num mundo onde o bearing é uniformemente
+`unbearing`, nenhum par distinto se ajuda — e esse é precisamente o contramodelo da ponte:
+a benevolência nunca é forçada, e o polo moral habitado paga a ponte declarada.
 
 O que NÃO muda (permanece honesto e perene):
 - A separação epistémica é machine-permanente: a normatividade agencial epistémica não
@@ -52,8 +61,11 @@ O que NÃO muda (permanece honesto e perene):
   implica qualquer avaliação moral: "o mal existe" pode ser objectivamente correcto sem
   que o mal moralmente o seja.
 - `Evil` (o polo negativo) **permanece um datum SEM declarado**: a sua leitura relacional
-  justa ("prejudicar outra pessoa") não é habitada sem a ponte paralela "algum prejuízo
-  ocorre", que não foi declarada. A assimetria é declarada, não escondida; a derivação
+  justa ("prejudicar outra pessoa") **nunca é forçada** — no contramodelo gémeo
+  `no_harm_in_uniformly_unbearing_layer` (C499, `{}`, aditado a 2026-09-29) nenhum par se
+  prejudica numa camada uniformemente `unbearing`, exactamente como nenhum se ajuda (C176)
+  — e permanece **não-afirmada** em Γ: nenhuma ponte paralela "algum prejuízo ocorre" foi
+  comissionada. A assimetria é declarada, não escondida; a derivação
   simétrica do polo negativo é o próximo passo aberto.
 - A teleologia deôntica F2 continua em aberto; a Trindade continua DEFERRED
   (`preceding_theory_not_entails_trinity`, `{}`).

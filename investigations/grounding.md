@@ -300,7 +300,10 @@ morally right." Moral good/evil is machine-separated from epistemic normativity
 is obtained under one disclosed, priced META bridge: the fair definition
 `Good s a := ∃ t ≠ s, Person t ∧ Helps s t ∧ ¬ Harms s t` (vocabulary-only) plus
 `moral_good_obtains` (C178) under `AxBenevolentBearingObtains` (C177), whose price is
-machine-visible (the bare value layer is empty, C176); the negative pole `Evil` remains
+machine-visible: the bare value layer is a `{}`-countermodel (C176 — `BearingOf` is an
+`opaque` constant since 2026-09-29, see `INCONSISTENT.md`), and its harm twin
+`no_harm_in_uniformly_unbearing_layer` (C499, `{}`) shows the negative pole's fair
+reading is never forced either; the negative pole `Evil` remains
 a declared SEM datum. Deontic teleology (F2) remains open.
 
 ### Boundary statement

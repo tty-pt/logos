@@ -21,11 +21,14 @@ metaphysical bridge `AxTwoSubjects` (META: from right-and-wrong to two
 distinct persons). `valueInterpersonal_of_split` recovers the exact old
 statement; no strength is lost.
 
-2026-09-24: the *value layer itself* is provably empty in the pure theory
-(`BearingOf` is a closed def returning `unbearing`, so `Helps`/`Harms`/`Affects`
-are refutable for every pair — `helps_unobtainable`, `no_help_obtains`). The
-positive moral close therefore carries the disclosed META bridge
-`AxBenevolentBearingObtains` ("some person is actually helped").
+2026-09-24 set the moral frontier: the positive close carries the disclosed META
+bridge `AxBenevolentBearingObtains` ("some person is actually helped"). That lease
+was REPAIRED 2026-09-29 (see `INCONSISTENT.md`): `BearingOf` had been a closed def
+returning `unbearing`, which made `Helps`/`Harms`/`Affects` refutable for every
+pair — and since the bridge asserts an instance, Γ proved `False`. `BearingOf` is
+now `opaque` (kernel-inaccessible value), so the "empty value layer" is a
+*{}-countermodel* (C176), not a Γ theorem; the old refutations are replaced by the
+schema independence lemma `no_help_in_uniformly_unbearing_layer`.
 -/
 
 import Logos.Core
@@ -44,9 +47,14 @@ inductive InterpersonalBearing : Type
   | benevolent : InterpersonalBearing
   | harmful : InterpersonalBearing
 
-/-- The uninterpreted interpersonal bearing of s toward t:
-    by default, a distinct subject does not automatically affect or help another. -/
-def BearingOf (_s _t : Subject) : InterpersonalBearing :=
+/-- The interpersonal bearing of s toward t — RE-OPENED 2026-09-29 (see
+    `INCONSISTENT.md`): an `opaque` constant. The historical body `unbearing` is
+    preserved only as the minimal semantic reading; because the declaration is
+    opaque, the kernel cannot reduce on it, so `Helps`/`Harms`/`Affects` are NOT
+    refutable from the definitions alone, and the META bridge
+    `AxBenevolentBearingObtains` is a genuine, priced commitment. The "empty
+    value layer" is a `{}`-countermodel (C176), not a Γ theorem. -/
+opaque BearingOf (_s _t : Subject) : InterpersonalBearing :=
   InterpersonalBearing.unbearing
 
 /-- Affects: what s does bears on t (through help, harm, or pure affectivity).
@@ -83,33 +91,44 @@ theorem help_not_harm : ∀ {s t : Subject}, Helps s t → ¬ Harms s t := by
   rw [hh] at hharm
   cases hharm
 
-/-- The bare value layer is empty: in the pure theory no subject helps any subject.
-    `BearingOf` is a *closed* definition returning `unbearing`, so `Helps s t` reduces to
-    `unbearing = benevolent`, which is refutable for every pair. Help does not obtain
-    without a disclosed datum; this is the machine-witness for why the positive moral
-    close carries the META bridge `AxBenevolentBearingObtains`. -/
-theorem helps_unobtainable (s t : Subject) : ¬ Helps s t := by
-  intro h
-  dsimp [Helps, BearingOf] at h
-  exact nomatch h
+/-- The empty value layer is a *countermodel*, not a Γ fact (REPAIRED 2026-09-29,
+    `INCONSISTENT.md`): in every world whose bearing is uniformly `unbearing`, no
+    pair of distinct subjects is joined by help — whatever that world's subject
+    vocabulary `S`. Parameterised over `S`, so it mentions no Γ axiom (`{}`) and
+    constrains nothing about Γ's `BearingOf` (opaque since 2026-09-29): it refutes
+    only the claim that benevolence is *forced*. This is the machine-witness for
+why the positive close pays the META bridge `AxBenevolentBearingObtains`
+     (C177) as a price, not a derivation — the bridge's own countermodel (C176).
+     Its harm twin is `no_harm_in_uniformly_unbearing_layer` (C499).
+     Footprint: `{}` (pure logic). -/
+theorem no_help_in_uniformly_unbearing_layer {S : Type}
+    (B : S → S → InterpersonalBearing) :
+    (∀ s t : S, B s t = InterpersonalBearing.unbearing) →
+      ¬ ∃ s t : S, s ≠ t ∧ B s t = InterpersonalBearing.benevolent := by
+  intro hB hE
+  rcases hE with ⟨s, t, _, hhelp⟩
+  have hs := hB s t
+  rw [hhelp] at hs
+  cases hs
 
-/-- Likewise, no subject harms any subject in the pure theory. -/
-theorem harms_unobtainable (s t : Subject) : ¬ Harms s t := by
-  intro h
-  dsimp [Harms, BearingOf] at h
-  exact nomatch h
-
-/-- Likewise, no subject affects any subject in the pure theory. -/
-theorem affects_unobtainable (s t : Subject) : ¬ Affects s t := by
-  intro h
-  dsimp [Affects, BearingOf] at h
-  rcases h with h | h | h <;> nomatch h
-
-/-- The helping existential required by the fair moral poles is refuted in the pure theory:
-    there is no pair of distinct subjects with `Helps` between them. -/
-theorem no_help_obtains : ¬ ∃ s t : Subject, s ≠ t ∧ Helps s t := by
-  rintro ⟨s, t, _, h⟩
-  exact helps_unobtainable s t h
+/-- The harm twin of the empty-layer countermodel (REPAIRED 2026-09-29,
+    `INCONSISTENT.md`, C499): in every world whose bearing is uniformly
+    `unbearing`, no pair of distinct subjects is joined by harm. The machine
+    witness that the negative moral pole's fair reading ("harms another person")
+    is *no more forced* than the positive pole's (twin C176): inhabiting Evil
+    would require a separate disclosed "some harm occurs" bridge, which was not
+    commissioned — SEM datum by declaration.
+    Classification: COUNTERMODEL.
+    Footprint: `{}` (pure logic). -/
+theorem no_harm_in_uniformly_unbearing_layer {S : Type}
+    (B : S → S → InterpersonalBearing) :
+    (∀ s t : S, B s t = InterpersonalBearing.unbearing) →
+      ¬ ∃ s t : S, s ≠ t ∧ B s t = InterpersonalBearing.harmful := by
+  intro hB hE
+  rcases hE with ⟨s, t, _, hharm⟩
+  have hs := hB s t
+  rw [hharm] at hs
+  cases hs
 
 /-- `OtherAffects s`: `s`'s doings bear on some *other* subject. -/
 def OtherAffects (s : Subject) : Prop := ∃ t : Subject, t ≠ s ∧ Affects s t
@@ -167,15 +186,14 @@ theorem aloneExcluded : ¬ ∃ s : Subject, Person s ∧ Alone s := by
 Some person is actually helped: benevolence is not merely definable but obtains.
   The *reality* of interpersonal value demands that at least one subject actually
   helps another distinct person (the positive moral datum the poem's "ajuda" asserts
-  in the world, not only in the definition). Without this bridge the value layer is
-  provably empty (`no_help_obtains`: `BearingOf := unbearing` refutes every `Helps`),
-  so no moral pole that is defined as helping another person could ever obtain.
+  in the world, not only in the definition). This is a genuine, disclosed price:
+  `BearingOf` is open (`opaque` since 2026-09-29), so nothing forces a help relation.
 
-  Consistency-model note: the bridge is not forced by any earlier premise (the empty
-  pure theory is a model of them all, by `helps_unobtainable`/`no_help_obtains`), so this
-  is a genuine, paid commitment — not a hidden derivation. The hostile local universes
-  (`M_amoral`, the Unit models) live in *separate* `S` and are untouched by this global
-  value-layer datum.
+  Consistency-model note: the bridge is not forced by any earlier premise — the empty
+  value layer is a `{}`-countermodel (`no_help_in_uniformly_unbearing_layer`, C176:
+  in a world whose bearing is uniformly `unbearing`, no help ever obtains), so the
+  hostile local universes (`M_amoral`, the Unit models) live in *separate* `S` and
+  are untouched by this global value-layer datum.
 
   Philosophical cost: a substantive interpersonal-value metaphysics — that benevolence
   occurs in the world, not only in the definitions. Bought with this declared bridge,
@@ -210,10 +228,8 @@ end Logos.Value
 -- Axiom footprint audit
 #print axioms Logos.Value.alone_no_other_help_harm
 #print axioms Logos.Value.AxTwoSubjects
-#print axioms Logos.Value.helps_unobtainable
-#print axioms Logos.Value.harms_unobtainable
-#print axioms Logos.Value.affects_unobtainable
-#print axioms Logos.Value.no_help_obtains
+#print axioms Logos.Value.no_help_in_uniformly_unbearing_layer
+#print axioms Logos.Value.no_harm_in_uniformly_unbearing_layer
 #print axioms Logos.Value.AxBenevolentBearingObtains
 #print axioms Logos.Value.some_person_is_helped
 #print axioms Logos.Value.aloneExcluded
