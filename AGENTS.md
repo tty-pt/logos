@@ -20,12 +20,21 @@ Whenever the formalization changes:
 Concrete practice: after each milestone, re-read the affected prose files and patch them so the
 prose and the Lean theorem ledger agree (see `formal/GAPMAP.md`).
 
-## README.md (auto-generated map)
+## README.md + investigations/ledger.md (two-tier generated surface)
 
-`README.md` (repo root) is the generated visualization of the deduction. Statuses
-are **derived, never transcribed**: each step's badge is a pure function of (kernel node
-kind, audited `#print axioms` footprint, declared axiom `Tag:`). The GAPMAP status/footprint
-cells are checked against the derived values, never used as their source. **Never edit it by hand.**
+`README.md` (repo root) is the generated **argument**: ~500 fully-visible lines,
+zero collapsed blocks, the thesis (C553 FACT) by line 60. `investigations/ledger.md`
+is the generated **audit**: the 14 step-by-step chain blocks, the 39 classical-attribute
+rows with full prose, all 40 natural-deduction traces, the ASCII flowchart, the
+frontier list, and the full per-step prose. Both files are emitted by one pass of
+`scripts/build_deduction.py` over the kernel; the ledger is a superset of the old
+single document, and that is machine-checked (`scripts/ledger_superset.py` against
+`.snapshots/README.pre-split.md`, plus `scripts/test_argument_surface.py`), not promised.
+
+Statuses are **derived, never transcribed**: each step's badge is a pure function of
+(kernel node kind, audited `#print axioms` footprint, declared axiom `Tag:`). The GAPMAP
+status/footprint cells are checked against the derived values, never used as their source.
+**Never edit either file by hand.** Plan of record: `READINGPATH.md`.
 
 Regeneration (after any Lean/GAPMAP change):
 
@@ -35,6 +44,19 @@ cd formal && lake exe depviz --roots Logos --json-out depgraph.json --dot-out de
 cd .. && python3 scripts/audit_footprints.py && python3 scripts/build_deduction.py
 ```
 
+- **The Cremation is derivation, not badge (binding, 2026-09-30; `CREMATION.md`,
+  `NIHILISM_DIE.md` §17).** Every row of README §13 that claims a death must print the
+  compiled premises, the steps, a **derived** terminator and the audited footprint, with the
+  Lean anchor. The three terminator kinds (`⊥ CONTRADICTION`, `⊘ DENIAL REFUTED`,
+  `COLLAPSE — INCOHERENT`) are selected by `refutation_kind` from the audited goal shape and
+  footprint — never typed into JSON. Five gates fail the build: an unresolvable target, a
+  substantive axiom on a row claiming a *free* death, a `denial_hypothesis` that is not a real
+  premise of the theorem, a `✅` price line that does not read "0 substantive axioms", and a
+  dead branch presented as a table row. A priced route is declared `"priced": true` and printed
+  `⚠️ AXIOMATIC (<axiom>)` — it is never laundered into a `✅`, which is the defect
+  `_GLANCE_RANK` had (it keyed a display string against internal categories, so every §13 link
+  read `0 substantive axioms`). A `{}` proof over `NegativeRetorsionSignature`-style premises is
+  a **signature artifact**, not a death: see AGENTS.md, 2026-09-29.
 - `scripts/build_deduction.py` has a **hand-authored** chain list per batch
   (`ASIETY_FREEDOM_STEPS`): badges and footprints in that block are derived, but the list's
   *membership* is maintained by hand. **Adding a declaration to a chain module does not add it to
@@ -98,6 +120,23 @@ cd .. && python3 scripts/audit_footprints.py && python3 scripts/build_deduction.
   truth-to-a-subject (`TrueTo`/`Correct`, C562: `Correct → TrueTo → T`), never bare-`T`
   satisfaction. `T p` is being-the-case and is free; being-true is disclosure and is
   always to someone. Do not call satisfaction “true” where right/wrong is at issue.
+- **README intelligibility (binding, 2026-09-29).** `README.md` is generated; the reading
+  path is the argument. No prose block may stand above a table without a C-id or Lean
+  anchor in it (no facade); table prose cells are capped at 900 chars (full text one click
+  away via footer links); the retorsion/countermodel catalogues live in
+  `investigations/catalogues.md`, never in `README.md`. Score block stays verbatim.
+  `scripts/build_deduction.py::_lint_readme` enforces caps, catalogue absence, and banned
+  snippets machine-checked; the facade rule is enforced in review.
+- **Two-tier split (binding, 2026-09-29; see `READINGPATH.md`).** The reading path is
+  the argument and nothing else: ≤700 visible lines (amended 2026-09-30, twice: 520 → 522, then 522 → 700 when the cremation became derivations rather than badges), zero `<details>`, no chain blocks,
+  no ASCII art, no retired rows, no paragraph over 300 chars outside the locked score
+  block, FACT by line 60. Everything moved out lives in generated
+  `investigations/ledger.md`, and the move is checked, not asserted
+  (`scripts/ledger_superset.py`, `scripts/test_argument_surface.py`,
+  `_lint_surfaces`). A block is routed by exactly one `include_*` flag in
+  `formal/presentation_spine.json` `presentation_policy`; a block that reaches neither
+  sink fails the build. `audience: "full"` restores the pre-split document for
+  regression testing only.
 - Axiom footprint of every claim must be inspected via `#print axioms` and recorded in
   `formal/GAPMAP.md`. Theorem statuses: `PROVEN`, `PROVEN↑` (proven under flagged axioms),
   `AXIOM`, `BLOCKED`, `DEFERRED`.

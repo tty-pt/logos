@@ -83,7 +83,7 @@ open Logos.Semantics (Form)
 open Logos.Entity (Entity EntityOf)
 open Logos.Agency (Subject Means)
 open Logos.Alternatives (Incompatible)
-open Logos.Choice (ChoiceField Chooses FreeWill Doubts
+open Logos.Choice (ChoiceField Chooses FreeWill FreeSubject Doubts
   incompatible_self_negation rejectedHornCoMeant genuineChoice_of_doubt)
 open Logos.TheologicalModalHardening (ContingentEntity)
 open Logos.RecoveredOntologicalGround (GroundsEntity
@@ -472,6 +472,23 @@ theorem trueChoice_exists : ∃ s : Subject, ∃ p q : Prop, TrueChoice s p q :=
 theorem freeWill_exists : ∃ s : Subject, FreeWill s := by
   obtain ⟨s, hPerson⟩ := T5_personExists_from_plurality
   exact ⟨s, hPerson.2.2⟩
+
+/-- The same existence as `freeWill_exists`, read at the other name. `FreeSubject` is
+    *defined* as `FreeWill` (`Logos.Choice.FreeSubject s := FreeWill s`, `Choice.lean:185`;
+    `freeSubject_iff_freeWill` is `Iff.rfl`), so the free subject exists exactly when free
+    will does, at exactly the same price.
+
+    Registered 2026-09-30 because the asymmetry it repairs was a surface defect, not a
+    logical one. The kernel had unconditional `freeWill_exists` (C278, `{AxTwoSubjects}`)
+    but only act-routed `Logos.Choice.freeSubject_exists` (`{AxIntentionalChoice}`), so the
+    generated surfaces priced the Free Subject dearer than free will for the identical
+    predicate. A price attaches to the *route* that reaches a predicate, never to a name;
+    after this corollary both names carry the same footprint by construction.
+
+    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
+theorem freeSubject_exists : ∃ s : Subject, FreeSubject s := by
+  obtain ⟨s, hFW⟩ := freeWill_exists
+  exact ⟨s, hFW⟩
 
 /-- Asiety obtains: true freedom is exhibited somewhere, by definition out of `trueChoice_exists`.
     Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/

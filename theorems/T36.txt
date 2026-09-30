@@ -140,8 +140,10 @@ C561 (`no_subject_who_means_no_epistemic_right_wrong`): a cadeia composta — se
 sujeito que signifique, sem certo/errado epistémico em lado nenhum. Contagens:
 *vocabulary-only* 287 → **290**; *axiom-free* fica em 60 (C560 é `{Means, Subject}`,
 vocabulário — a máquina teve razão: só pegada vazia é *axiom-free*).
-`F1bUncond` continua `BLOCKED`: pergunta por um mundo povoado, e estas linhas são sobre
-o vazio.
+`F1bUncond` passou a `SUPERSEDED` (2026-09-30): C278 prova a existência **incondicional** de um
+sujeito livre a partir de `AxTwoSubjects`, e `freeSubject_exists` estende-a ao nome `FreeSubject` — a mesma
+pegada, o mesmo preço `META`. A pergunta por um mundo povoado estava respondida desde C278; o que fica
+aberto são as Claims, não esta existência.
 
 SER-VERDADEIRO É SER-VERDADEIRO *PARA* (C562, 2026-09-29)
 ----------------------------------------------------------------------

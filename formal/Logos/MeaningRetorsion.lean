@@ -533,7 +533,10 @@ theorem noMeaning_is_refuted_from_plurality : ¬ NoMeaning := by
     God-lane twin of C401: C401 is unconditional on the plurality bridge, this
     row is conditional on the performative datum and free of every bridge,
     price relocated to the declared act-datum axiom `performative_act_datum` (C454,
-    `Tag: TRANS`) — one axiom, not free in performance.
+    `Tag: TRANS`) — one axiom, not free in performance. Route distinction (binding):
+    this price belongs to the *refutation-from-datum* route only; the
+    *necessity-from-order* route (C557, `EpistemicNecessity.epistemic_order_makes_the_act_datum_necessary`)
+    derives the datum from the order and never invokes C454.
 
     The hypothesis is anonymous (`∃ s, ∃ p, Act s p`, not a named `def`), so the
     ◈ registry listing is the *only* signal of the dependence — the same

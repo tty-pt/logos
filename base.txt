@@ -1301,7 +1301,7 @@ errado; a rota da ordem não o invoca. A cadeia fica `{}` de ponta a ponta: orde
 é **derivado** (`NormativeOrder.lean:136`) e não assumido (C140) → `FreeWill` →
 `Person` (C553). Axiomas substantivos nesta direcção: **nenhum**. O que continua a
 pagar C454 é só o `∃ s, Act s p` **incondicional** — outra questão, que fica
-aberta nos seus próprios termos (`F1bUncond` continua `BLOCKED`).
+aberta nos seus próprios termos. **Correcção de 2026-09-30:** essa mesma linha (`F1bUncond`) já não é `BLOCKED` — passou a `SUPERSEDED`, porque C278 prova `∃ s, FreeWill s` a partir de `AxTwoSubjects`, e o corolário `AsieticChoice.freeSubject_exists` (`{AxTwoSubjects, Means, Subject, Will, subjectWill}`) estende-o ao nome `FreeSubject` (`FreeSubject := FreeWill`). O que sobrevive é o *preço*, não a dúvida: uma ponte `META` (`AxTwoSubjects`, realidade pessoal plural), nunca `PROVEN` puro.
 
 **O mundo vazio é ininteligível, não por verificar (C558–C561, 2026-09-29).** O
 vocabulário nuclear de Γ não tem nenhum sort `World`: "o mundo vazio obtém?" não

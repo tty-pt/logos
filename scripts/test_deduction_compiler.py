@@ -110,7 +110,8 @@ end TestModule
                 "conclusion": "PremiseC ∧ ⊥",
                 "investigations": []
             }]
-            rendered = "\n".join(render_deduction_sections(mock_section, mock_decls, {}))
+            _doc = render_deduction_sections(mock_section, mock_decls, {})
+            rendered = "\n".join(_doc.get("readme")) + "\n" + "\n".join(_doc.get("ledger"))
             assert "Assume PremiseA, and PremiseA → PremiseB, and PremiseB → PremiseC:" in rendered
             assert "1. PremiseB  (modus ponens via hAB)" in rendered
             assert "∴ PremiseC" in rendered
@@ -126,7 +127,8 @@ def test_provenance(decls: dict, node_map: dict, graph: dict):
     assert text.startswith("# Γ — The Deduction\n"), "README.md must start on line 1"
     
     # 1. Distinction: NoRight retorsion is axiom-free, AxJudicativeBipolarity is priced at the bridge
-    assert "NoRight ≡ ¬NormativeRightExists" in text
+    ledger = (ROOT / "investigations" / "ledger.md").read_text(encoding="utf-8")
+    assert "NoRight ≡ ¬NormativeRightExists" in ledger, "NoRight definition gloss lives in the ledger"
     assert "claims_correct_no_right_self_refuting" in text
     assert "DirectNormativeRetorsion" in text
     
@@ -240,7 +242,8 @@ def test_sensitivity(decls: dict, node_map: dict, graph: dict, sections: list):
     print("Testing dynamic sensitivity to proof mutations…")
     def_reg = {}
     baseline_secs = discover_deduction_sections(sections, decls, node_map, graph, def_reg)
-    baseline_text = "\n".join(render_deduction_sections(baseline_secs, decls, node_map))
+    _base = render_deduction_sections(baseline_secs, decls, node_map)
+    baseline_text = "\n".join(_base.get("readme")) + "\n" + "\n".join(_base.get("ledger"))
     
     # 1. Mutate theorem statement in memory
     mutated_decls = copy.deepcopy(decls)
@@ -249,7 +252,8 @@ def test_sensitivity(decls: dict, node_map: dict, graph: dict, sections: list):
     mutated_decls[target]["statement"] = orig_stmt + " ∧ True"
     _CTX["decls"] = mutated_decls
     mutated_secs = discover_deduction_sections(sections, mutated_decls, node_map, graph, {})
-    mutated_text = "\n".join(render_deduction_sections(mutated_secs, mutated_decls, node_map))
+    _mut = render_deduction_sections(mutated_secs, mutated_decls, node_map)
+    mutated_text = "\n".join(_mut.get("readme")) + "\n" + "\n".join(_mut.get("ledger"))
     _CTX["decls"] = decls
     assert mutated_text != baseline_text
     print("  ✓ Sensitivity verified: hypothesis mutation dynamically updated deduction output.")
@@ -258,7 +262,8 @@ def test_sensitivity(decls: dict, node_map: dict, graph: dict, sections: list):
     orig_audit = list(bd._AUDIT.get(target, []))
     bd._AUDIT[target] = orig_audit + ["Logos.Value.AxTwoSubjects"]
     mutated_secs2 = discover_deduction_sections(sections, decls, node_map, graph, {})
-    mutated_text2 = "\n".join(render_deduction_sections(mutated_secs2, decls, node_map))
+    _mut2 = render_deduction_sections(mutated_secs2, decls, node_map)
+    mutated_text2 = "\n".join(_mut2.get("readme")) + "\n" + "\n".join(_mut2.get("ledger"))
     bd._AUDIT[target] = orig_audit
     assert mutated_text2 != baseline_text
     assert "AxTwoSubjects" in mutated_text2

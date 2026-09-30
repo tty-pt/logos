@@ -2363,7 +2363,7 @@ def _short_gloss(c: dict, n: int = 220) -> str:
         cut = cut.rsplit(" ", 1)[0]
     return cut.rstrip(" ,;:.") + "…"
 
-def _spine_lead(doc: str, n: int = 260) -> str:
+def _spine_lead(doc: str, n: int = 260, hard: int | None = None) -> str:
     """A clean sentence-boundary lead for a proof doc paragraph.
 
     `ProofIR.doc_lead` is the uncapped first doc paragraph (`doc_claim`), so this can
@@ -2382,6 +2382,14 @@ def _spine_lead(doc: str, n: int = 260) -> str:
     # by a space with a fresh sentence. Leads that start mid-sentence may carry on
     # a little past `n` (bounded window) so they reach the end of that sentence
     # instead of stopping at an arbitrary word boundary with "…".
+    if hard and len(s) > hard:
+        # Reading-path mode (READINGPATH.md §6): a theorem-row gloss is not
+        # allowed to be a wall either. Cut hard at the cap; the full gloss
+        # stays in the Lean docstring, one click away via the row footer.
+        cut = s[:hard]
+        if " " in cut:
+            cut = cut.rsplit(" ", 1)[0]
+        return cut.rstrip(" ,;:.") + "…"
     ends = [i for i in range(len(s))
             if s[i] == "." and (i + 1 == len(s) or s[i + 1] == " ")]
     for e in ends:
@@ -3843,11 +3851,26 @@ def classify_proof_edge(proof: ProofIR, graph: dict = None, decls: dict = None) 
         return "PROVEN", "PROVEN | 0 substantive axioms"
 
 def resolve_proof_by_name(name: str, compiled_by_id: dict, decls: dict, graph: dict) -> ProofIR | None:
+    """Resolve a declared target name to its compiled proof.
+
+    A name may be bare (`bivalence`), fully qualified
+    (`Logos.Choice.meaning_I_needs_subject`), or *namespace-relative*
+    (`AsieticChoice.freeWill_exists`). The relative form exists because some
+    short names are genuinely ambiguous in the kernel — `freeWill_exists` is
+    declared both in `Choice` (act-routed, `AxIntentionalChoice`) and in
+    `AsieticChoice` (plurality-routed, `AxTwoSubjects`), and they carry
+    different footprints. Before 2026-09-30 there was no way to name the
+    second one in the presentation metadata, so the reading path could only
+    reach the dearer route. Bare names keep their old resolution order (no
+    new ambiguity is introduced); a dotted name is matched by suffix, which
+    is unambiguous in practice and fails loudly through the stale-ref check.
+    """
+    dotted = "." in name
     for cid, (c, p) in compiled_by_id.items():
-        if p.name == name or p.full_name.endswith(f".{name}"):
+        if p.name == name or p.full_name.endswith(f".{name}") or (dotted and p.full_name.endswith(name)):
             return p
     for full, d in decls.items():
-        if d["name"] == name or full.endswith(f".{name}"):
+        if d["name"] == name or full.endswith(f".{name}") or (dotted and full.endswith(name)):
             return compile_lean_proof(full, decls, graph.get("node_map", {}), graph, {})
     return None
 
@@ -4112,6 +4135,7 @@ def select_global_proof_spine(
                     "edge_label": b.get("edge_label", ""),
                     "continuation_label": b.get("continuation_label", ""),
                     "summary": b.get("summary", ""),
+                    "summary_short": b.get("summary_short", ""),
                     "investigation_link": b.get("investigation_link", ""),
                     "status": b.get("status", ""),
                     "defer_note": b.get("defer_note", ""),
@@ -4127,6 +4151,12 @@ def select_global_proof_spine(
                 "title": node["title"],
                 "explanation": node.get("explanation", ""),
                 "summary": node["summary"],
+                # READINGPATH.md §5: the reading-path prose, propagated from the
+                # declarative spine so the renderer can stay data-driven.
+                "summary_short": node.get("summary_short", ""),
+                "pushback_short": node.get("pushback_short", ""),
+                "reply_short": node.get("reply_short", ""),
+                "disclosure": node.get("disclosure", ""),
                 "formula": node.get("formula", ""),
                 "investigation_link": node.get("investigation_link", ""),
                 "pushback": node.get("pushback", ""),
@@ -4201,7 +4231,107 @@ def select_global_proof_spine(
         print(f"WARNING: spine targets with no compiled Lean proof (not marked "
               f"deferred): {detail}", file=sys.stderr)
 
-    return spine_sections, detailed_sections, alternative_proofs, assigned_cids
+    # The ledger keeps the *previous* reading spine verbatim (2026-09-30). The
+    # argument route changed — the deontic spine began at `¬N_T ∧ ¬N_F`, a
+    # statement about satisfaction, which needs no person and therefore could
+    # not carry a deduction about one. Nothing is lost: the same declarations,
+    # the same derived statuses and the same full prose are re-rendered from
+    # `ledger_spine_nodes`, and `scripts/ledger_superset.py` proves the move
+    # against the pre-split snapshot.
+    ledger_spine = _ledger_spine_sections(
+        (presentation_data or {}).get("ledger_spine_nodes", []),
+        compiled_by_id, decls, graph,
+    )
+
+    return spine_sections, detailed_sections, alternative_proofs, assigned_cids, ledger_spine
+
+
+def _ledger_spine_sections(nodes: list[dict], compiled_by_id: dict, decls: dict,
+                           graph: dict) -> list[dict]:
+    """Compile `ledger_spine_nodes` into sections for the audit ledger.
+
+    Same field set as the reading-path spine (the renderer is data-driven), so
+    the deontic chain prints in the ledger exactly as it used to print on the
+    reading path — but resolved against the *current* kernel, which is what
+    makes the move auditable: if a footprint drifted, the ledger row drifts
+    too, instead of preserving a stale transcription.
+    """
+    out = []
+    node_map = graph.get("node_map", {})
+    for node in nodes:
+        primary = [p for p in (resolve_proof_by_name(n, compiled_by_id, decls, graph)
+                               for n in node.get("primary_targets", node.get("target_names", []))) if p]
+        primary = _select_strongest(primary, node_map)
+        supporting = _select_strongest([p for p in (resolve_proof_by_name(n, compiled_by_id, decls, graph)
+                                                   for n in node.get("supporting_targets", [])) if p], node_map)
+        obstruction = [p for p in (resolve_proof_by_name(n, compiled_by_id, decls, graph)
+                                   for n in node.get("obstructions", [])) if p]
+        branches = []
+        for b in node.get("branches", []):
+            bp = [p for p in (resolve_proof_by_name(n, compiled_by_id, decls, graph)
+                              for n in b.get("primary_targets", [])) if p]
+            bp = _select_strongest(bp, node_map)
+            bo = [p for p in (resolve_proof_by_name(n, compiled_by_id, decls, graph)
+                              for n in b.get("obstructions", [])) if p]
+            if bp or bo:
+                branches.append({
+                    "id": b.get("id", ""), "label": b.get("label", ""),
+                    "title": b.get("title", b.get("label", "")),
+                    "formula": b.get("formula", ""), "edge_label": b.get("edge_label", ""),
+                    "status": b.get("status", ""),
+                    "summary": b.get("summary", ""),
+                    "summary_short": b.get("summary_short", ""),
+                    "defer_note": b.get("defer_note", ""),
+                    "investigation_link": b.get("investigation_link", ""),
+                    "primary_proofs": bp, "obstruction_proofs": bo, "proofs": bp or bo,
+                })
+        subs = []
+        for sub in node.get("supporting_defense", []):
+            sp = _select_strongest([p for p in (resolve_proof_by_name(n, compiled_by_id, decls, graph)
+                                                for n in sub.get("target_names", [])) if p], node_map)
+            groups = []
+            for g in sub.get("groups", []):
+                gp = [p for p in (resolve_proof_by_name(n, compiled_by_id, decls, graph)
+                                  for n in g.get("target_names", [])) if p]
+                if gp:
+                    groups.append({"label": g.get("label", ""), "proofs": gp})
+            kept = _select_strongest(sp + [p for g in groups for p in g["proofs"]], node_map)
+            names = {p.full_name for p in kept}
+            subs.append({
+                "title": sub.get("title", ""), "summary": sub.get("summary", ""),
+                "formula": sub.get("formula", ""),
+                "proofs": [p for p in sp if p.full_name in names],
+                "groups": [{"label": g["label"], "proofs": [p for p in g["proofs"] if p.full_name in names]}
+                           for g in groups if any(p.full_name in names for p in g["proofs"])],
+            })
+        out.append({
+            "id": node.get("id", ""),
+            "label": node.get("label", ""),
+            "title": node.get("title", ""),
+            "summary": node.get("summary", ""),
+            "summary_short": node.get("summary_short", ""),
+            "pushback": node.get("pushback", ""),
+            "reply": node.get("reply", ""),
+            "pushback_short": node.get("pushback_short", ""),
+            "reply_short": node.get("reply_short", ""),
+            "disclosure": node.get("disclosure", ""),
+            "formula": node.get("formula", ""),
+            "explanation": node.get("explanation", ""),
+            "investigation_link": node.get("investigation_link", ""),
+            "rebuttal_target": node.get("rebuttal_target", ""),
+            "rebuttal_formula": node.get("rebuttal_formula", ""),
+            "primary_proofs": primary, "supporting_proofs": supporting,
+            "obstruction_proofs": obstruction, "proofs": primary,
+            "branches": branches, "subsections": subs,
+            "route_definitions": route_definition_proofs(
+                primary + supporting + [p for s in subs for p in s["proofs"]]
+                + [p for s in subs for g in s["groups"] for p in g["proofs"]],
+                decls, node_map, graph, {}),
+            "conclusion": primary[-1].goal if primary else "",
+            "category": "spine_ledger",
+        })
+    return out
+
 
 def discover_deduction_sections(gapmap_sections: list[dict], decls: dict, node_map: dict, graph: dict, def_registry: dict) -> list[dict]:
     """Discovers the main deduction path and sections dynamically from the canonical
@@ -4254,7 +4384,10 @@ def discover_deduction_sections(gapmap_sections: list[dict], decls: dict, node_m
     narrative_secs, theorems_dict = discover_human_narrative(base_path, theorems_dir)
     all_claims = [c for s in gapmap_sections for c in s.get("claims", [])]
 
-    compiled_by_id = {}
+    # Published for the derived reading-path tables (§11–§13), which resolve
+    # their declared targets through the same resolver the spine uses.
+    _CTX["compiled"] = {}
+    compiled_by_id = _CTX["compiled"]
     for c in all_claims:
         full = c.get("_full")
         if not full or full not in decls or is_internal_lean_decl(full):
@@ -4269,7 +4402,8 @@ def discover_deduction_sections(gapmap_sections: list[dict], decls: dict, node_m
         compiled_by_id[c["id"]] = (c, proof)
 
     separation_pairs = extract_separation_pairs(decls)
-    spine_sections, detailed_sections, alternative_proofs, assigned_cids = select_global_proof_spine(
+    (spine_sections, detailed_sections, alternative_proofs, assigned_cids,
+     ledger_spine_sections) = select_global_proof_spine(
         compiled_by_id, narrative_secs, theorems_dict, graph, decls, separation_pairs
     )
 
@@ -4335,7 +4469,10 @@ def discover_deduction_sections(gapmap_sections: list[dict], decls: dict, node_m
             "category": "frontier",
         })
 
-    return spine_sections + detailed_sections + countermodel_sections + frontier_sections
+    # The ledger spine rides along in the same list under its own category, so
+    # the renderer can route it without a second discovery pass.
+    return (spine_sections + detailed_sections + countermodel_sections
+            + frontier_sections + ledger_spine_sections)
 
 def discover_investigations(investigations_dir: Path = None, decls: dict = None) -> dict:
     """Dynamically discovers and categorizes investigation documents and formal artifacts
@@ -4746,7 +4883,7 @@ def derive_score_data(all_claims: list[dict], decls: dict, node_map: dict) -> di
 # strip the status prefix and keep the statement that follows the first colon.
 _SCORE_STATUS_RE = re.compile(
     r"^\**(?:BLOCKED|DEFERRED|RETIRED|AXIOM|PROVEN|OPEN|NOT ESTABLISHED)\**"
-    r"\s*(?:\([^)]*\))?\s*[:\u2014-]\s*", re.I)
+    r"\s*(?:\([^)]*\))?\s*[:—-]\s*", re.I)
 
 def _score_label(row: dict, limit: int = 150) -> str:
     """One-line, human-checkable name for an open or retired claim row.
@@ -4900,10 +5037,13 @@ def render_score_block(sd: dict) -> list[str]:
     ap(f"**Read the two columns together and the shape is precise: Γ won the metaphysics")
     ap(f"of the ground and lost the soteriology.** Established: genuine normativity has a")
     ap(f"personal ground; that ground is unique and necessary; it possesses canonical")
-    ap(f"aseity, simplicity, and pure actuality. Not established: that the person of that")
-    ap(f"ground is *one*. Strict monotheism, the Trinity, the Incarnation, and creation")
-    ap(f"each remain open, and each is named above with its missing lemma rather than")
-    ap(f"absorbed into an average. That is the honest ledger, and the left column is")
+    ap(f"aseity, simplicity, and pure actuality. What is *not* free: the three divine")
+    ap(f"Persons of the Trinity (three declared META premises, C510), and what is still")
+    ap(f"open: the Incarnation, contingent creation as such, and the entity-level")
+    ap(f"projection C228. Strict monotheism — the ground as a *single* person — is no")
+    ap(f"longer on this list: it is refuted as a consequence (one ground, and every ground")
+    ap(f"bears at least two distinct persons). Each open row is named above with its")
+    ap(f"missing lemma rather than absorbed into an average, and the left column is")
     ap(f"larger because the ground-theory was proved, not because the open rows were")
     ap(f"rounded down.")
     ap("")
@@ -4932,25 +5072,85 @@ def render_score_block(sd: dict) -> list[str]:
         ap("")
     return L
 
-def render_reading_guide() -> list[str]:
-    """Emits the "How to Read This Deduction" block between the title and the
-    Argument-at-a-Glance chart: the arc in one breath, the two directions (discovery vs
-    grounding), and a badge legend explaining every status symbol that follows.
+def render_reading_guide():
+    """The how-to-read block.
+
+    Returns `(lines, full_lines)`. The reading path keeps the arc in one breath
+    plus the badge legend (~25 lines); the dialectical architecture, the two
+    directions and the "does and does not show" prose go to the ledger, where
+    the argument sections already state everything they say (READINGPATH.md §5).
+    Under `audience: "full"` the pre-split guide is reproduced exactly.
     """
     lines = []
     ap = lines.append
-    ap("> **Γ is a machine-checked deduction**: genuine normativity — an objective right/wrong")
-    ap("> binding our judgments — forces a *personal* ground. Free will is *derived, never")
-    ap("> assumed* (`GenuineNormativity ⇒ Chooses ⇒ FreeWill ⇒ FreeSubject ⇒ Person`);")
-    ap("> wherever right/wrong is real, its ground-type is personal (`RightWrong ⇒ Person`).")
+    ap("> **Γ is a machine-checked deduction.** Right and wrong are real — and satisfaction is free:")
+    ap("> `¬N_T ∧ ¬N_F` needs no one. But being *true* is being true **to** someone, right and wrong")
+    ap("> require meaning, meaning requires a subject, and a subject that means both poles of an")
+    ap("> incompatibility is free. So the order forces a person")
+    ap("> (`Order ⇒ Meaning ⇒ Free Subject ⇒ Person`), and its ground-type is personal")
+    ap("> (`RightWrong ⇒ Person`) — the epistemic poles, not the deontic ones.")
+    ap(">")
+    ap("> Nothing can be epistemologically right or wrong without a Free being **for which "
+       "meaning can mean** (C553, the FACT — zero substantive axioms).")
+    ap("")
+    ap("**How to read a step.** Claim in words first, machine rendering beneath:")
+    ap("- `∴` introduces the symbolic rendering that follows. `≡` reads \"by definition\" (`📘`);")
+    ap("  `→` and `↔` mean implication and equivalence; `⇒` chains steps into one argument;")
+    ap("  `⇏` marks a demonstrated *non-consequence* (a countermodel frontier, `🧱`).")
+    ap("- a **backticked name** is the Lean declaration that verifies the line; footers like")
+    ap("  `✅ · File.lean#name` link to it under `formal/Logos/`.")
+    ap("- each section reads: claim → the skeptic's move → the reply → one theorem row.")
+    ap("- the chain `Order ⇒ Meaning ⇒ Free Subject ⇒ Person` is the same argument the numbered")
+    ap("  sections build link by link; the earlier *deontic* route is kept whole in the ledger.")
+    ap("")
+    ap("**Badge legend.** Every icon on a formal consequence is machine-derived from")
+    ap("the Lean kernel (see `formal/GAPMAP.md` and the investigations) — never transcribed:")
+    ap("")
+    ap("| icon | meaning |")
+    ap("|---|---|")
+    ap("| `✅` | PROVEN — verified by pure logic; footprint contains only classical meta-logic (`CL`) and the claim's own vocabulary (0 substantive axioms) |")
+    ap("| `⚠️ (AxName)` | AXIOMATIC — machine-verified, yet deliberately rests on the named declared axiom (`SEM` semantic choice / `META` metaphysical bridge) — **not unproved** |")
+    ap("| `📘` | DEFINITIONAL — true by definition of the term being introduced |")
+    ap("| `⏸` | DEFERRED — a claimed result whose Lean declaration is not in the live kernel; annotated surface only (see GAPMAP + source notes), **NOT a theorem in this repository** |")
+    ap("| `🧱 X ⇏ Y` | COUNTERMODEL — a model forces X nowhere near Y: an explicit boundary, not a failure |")
+    ap("")
+    ap("Axioms appear as `◆` in the audit ledger. `AXIOM` (the claim *is itself* a declared")
+    ap("axiom) is distinct from `AXIOMATIC` (the claim is *derived under* an axiom).")
+    ap("")
+
+    full = _render_reading_guide_full()
+    if _argument_audience():
+        return lines, full
+    return lines + full, []
+
+
+def _render_reading_guide_full() -> list[str]:
+    """The pre-split how-to-read block, verbatim (ledger material)."""
+    lines = []
+    ap = lines.append
     ap("> A necessary Divine Being/Ground is **proven** (✅): it exists unconditionally as the sole")
     ap("> universal modal grounding ground (`ofGround_universal_modal_ground` C319,")
     ap("> `exactly_one_universal_modal_ground` C320) and possesses Canonical Aseity")
     ap("> (`conditional_canonical_aseity`). A **necessary Person** is likewise derived (⚠️) on the")
     ap("> single declared `META` bridge `necessaryPersonalSubjectExists` (C404 → Claim D, C409).")
-    ap("> What is **not** established is monotheism *at the level of the Person*: C212 proves")
-    ap("> ground-unicity does not force a unitary monad, and the personal-identification bridge C228")
-    ap("> remains `BLOCKED`. Every other claim is definitional, derived, or a declared axiom.")
+    ap("> At the level of the Person the position is now settled in Γ's favour: C212")
+    ap("> (`unicity_does_not_force_unitarian_monad`, `{}`) shows that ground-unicity *forces* a plurality of")
+    ap("> persons, so the single-person monad is refuted rather than open; and C510 derives three divine")
+    ap("> Persons on three declared `META` premises (one God in three Persons, not three Gods). What")
+    ap("> is still **not** established is the entity-level bridge C228 (`GenericGroundsRightWrong g →")
+    ap("> PersonalEntity g`), which remains `BLOCKED`. Every other claim is definitional, derived, or a")
+    ap("> declared axiom.")
+    ap("")
+    ap("")
+    ap("**The argument in one paragraph — premises with rows.** Nothing can be epistemologically right or wrong "
+       "without a Free being for whom meaning can mean (C553, the FACT, zero substantive axioms). The order needs "
+       "meaning, meaning needs a subject, and the act datum is entailed by the order rather than stipulated (C556, "
+       "C557). The empty world is unintelligible as a state, not unchecked — its denial voiced as judgment requires "
+       "a Free Subject (C558), signature models are never candidate states (C559), and without a meaning subject "
+       "there is no epistemic right/wrong anywhere (C560, C561). Being true is being true *to* (`Correct \u2192 "
+       "`TrueTo` \u2192 `T`, C562): satisfaction is free, disclosure is always to someone. All twelve rows sit "
+       "together in the L1 chain below (C556, C553\u2013C555, C557\u2013C562), each with its derived footprint; every "
+       "antecedent is kept, so nothing here says the stance obtains.")
     ap("")
     ap("Every section below answers the same question — *what is the status of this claim?*")
     ap("")
@@ -5002,97 +5202,510 @@ def render_reading_guide() -> list[str]:
     ap(">    remains a declared SEM datum. The epistemic reality-hook itself is ")
     ap(">    unconditional and vocabulary-only (`correct_tracks_reality`, C173/C174).")
     ap("")
-    ap("**Badge legend.** Every icon on a formal consequence is machine-derived from")
-    ap("the Lean kernel (see `formal/GAPMAP.md` and the investigations) — never transcribed:")
-    ap("")
-    ap("| icon | meaning |")
-    ap("|---|---|")
-    ap("| `✅` | PROVEN — verified by pure logic; footprint contains only classical meta-logic (`CL`) and the claim's own vocabulary (0 substantive axioms) |")
-    ap("| `⚠️ (AxName)` | AXIOMATIC — machine-verified, yet deliberately rests on the named declared axiom (`SEM` semantic choice / `META` metaphysical bridge) — **not unproved** |")
-    ap("| `📘` | DEFINITIONAL — true by definition of the term being introduced |")
-    ap("| `⏸` | DEFERRED — a claimed result whose Lean declaration is not in the live kernel; annotated surface only (see GAPMAP + source notes), **NOT a theorem in this repository** |")
-    ap("| `🧱 X ⇏ Y` | COUNTERMODEL — a model forces X nowhere near Y: an explicit boundary, not a failure |")
-    ap("")
-    ap("Axioms appear as `◆` in the audit ledger. `AXIOM` (the claim *is itself* a declared")
-    ap("axiom) is distinct from `AXIOMATIC` (the claim is *derived under* an axiom).")
-    ap("")
-    ap("The badge marks that **step's own** axiom cost, recomputed per declaration from")
-    ap("`#print axioms` — it is never inherited from a neighbouring step. A `✅` that")
-    ap("immediately follows a `⚠️` step is provably axiom-free on its own; badges do not")
-    ap("\"propagate\" down the chain — the kernel footprint is the transitive closure, so")
-    ap("a `✅` after a `⚠️` means the two share no proof edge: the marker between them is")
-    ap("narration, not inference.")
-    ap("")
-    ap("> `✅ · File.lean#name`-style footers point at the exact Lean declaration behind each")
-    ap("> consequence: the anchor is the declaration name, and the link jumps to its line under")
-    ap("> `formal/Logos/`. Follow the `investigations` links for the deeper countermodel and")
-    ap("> retorsion analyses.")
-    ap("")
-    ap("**How to read a step.** Claim in words first, machine rendering beneath:")
-    ap("- `∴` introduces the symbolic rendering that follows. `≡` reads \"by definition\" (`📘`);")
-    ap("  `→` and `↔` mean implication and equivalence; `⇒` chains steps into one argument;")
-    ap("  `⇏` marks a demonstrated *non-consequence* (a countermodel frontier, `🧱`).")
-    ap("- a **backticked name** is the Lean declaration that verifies the line; footers like")
-    ap("  `✅ · File.lean#name` link to it under `formal/Logos/`.")
-    ap("- each section reads: summary → the skeptic's attack & the reply → definitions used")
-    ap("  → the steps. §4–§6 are the gentlest introduction.")
-    ap("- the chain `GenuineNormativity ⇒ Chooses ⇒ FreeWill ⇒ FreeSubject ⇒ Person` is the")
-    ap("  same argument the numbered sections build link by link.")
-    ap("")
+
     return lines
 
-def generate_argument_at_a_glance(spine_sections: list[dict], frontiers: list[dict] = None, countermodels: list[dict] = None) -> list[str]:
-    """Synthesizes an immediate, compact, conceptual visual flowchart of the strongest argument,
-    answering 'What happens?' in ordinary human-readable philosophical steps with subordinate
-    formal certification and local edge badges, explicitly distinguishing the discovery direction
-    from the ontological grounding direction.
+def _negated_core(goal: str) -> str:
+    """`goal` with its outer negation(s) stripped — the proposition a `⊘`/`↯`
+    derivation denies. `⊥`/`False` and non-negations return `""`."""
+    g = (goal or "").strip()
+    while True:
+        if g.startswith("¬∃"):
+            return g[2:].strip()
+        if g.startswith("¬"):
+            return g[1:].strip()
+        return ""
+
+
+def _denial_core(hypothesis: str) -> str:
+    """The denial's own thesis, as a proposition to compare against
+    `_negated_core`. For an implication-shaped premise the *antecedent* is the
+    thesis (D3 states the descriptive-only reading as `hDescriptiveOnly → …`,
+    and denies `hDescriptiveOnly`); otherwise the premise is the thesis."""
+    h = (hypothesis or "").strip()
+    if "→" in h:
+        h = h.split("→", 1)[0].strip()
+    return h
+
+
+def refutation_kind(proof: ProofIR, denial_hypothesis: str | None = None) -> str:
+    """How a branch of the denial is stopped — DERIVED, never authored.
+
+    The reading path states that nihilism is *cremated*: every branch that is
+    voiced as a judgment, or held as a coherent order, ends in `⊥` or in a
+    definitional fallacy. That claim is only worth anything if the kind in
+    each row is a function of the audited goal and footprint rather than a
+    word the author chose, so it is computed here from three facts:
+
+    - the audited **goal**: `False`/`⊥` is a contradiction, a `¬`/`∃`
+      conclusion is a *separation* (which is a countermodel when it is free);
+    - the **substantive** axioms in the footprint (`SEM`/`META`/`TRANS`): a
+      free separation is a countermodel, a priced one is not;
+    - a GAPMAP `BLOCKED`/deferred claim, which yields NOT STOPPED — the row
+      that refuses to pretend.
+
+    `COUNTERMODEL` rows are boundaries, never refutations, and the renderer
+    says so in the row note. A 🧱 that reads as a victory would be the one
+    overclaim this table exists to prevent.
+
+    A `denial_hypothesis` (the row's V3-validated thesis premise) adds one more
+    kind for goals that are *negations* rather than `⊥`, because a `¬`-goal with
+    a free footprint otherwise reads as a countermodel — and a refutation of a
+    denial is not a countermodel. The two `¬` shapes are separated by shape, not
+    by judgement: if the derivation returns the denial's own thesis negated
+    (`⊢ ¬D` with `D` a premise), the denial is **REFUTED** (`⊘`); if it returns
+    a *different* negation (`⊢ D → ¬G`), then the denial entails the loss of
+    the normativity it claims to keep — an impersonal normativity is no genuine
+    normativity, an ungraspable command does not address — which is the same
+    shape as the Euthyphro collapse and takes that kind.
+    """
+    goal = (proof.goal or "").strip()
+    fp = audit_footprint(proof.full_name) or []
+    subst = [a for a in fp if (_REGISTRY.get(a.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META", "TRANS")]
+    if goal in ("False", "⊥") or "⊥" in goal:
+        return "⊥ CONTRADICTION"
+    if denial_hypothesis and subst:
+        return "❌ NOT STOPPED"
+    core = _negated_core(goal)
+    if denial_hypothesis and core:
+        thesis = _denial_core(denial_hypothesis)
+        if thesis and thesis == core:
+            # `⊢ ¬D` with D a premise: the denial returns as its own negation.
+            return "⊘ DENIAL REFUTED"
+        # `⊢ D → ¬G` with G ≠ D: the denial entails the loss of the very
+        # normativity it claims to keep (impersonal normativity is not genuine
+        # normativity; an ungraspable command does not address). That is the
+        # same shape as the Euthyphro collapse, so it takes that kind rather
+        # than borrowing the strength of a refutation.
+        return "COLLAPSE — INCOHERENT"
+    if goal.startswith("¬") or goal.startswith("∃") or goal.startswith("¬∃"):
+        return "DEFINITIONAL FALLACY" if subst else "COUNTERMODEL · ⇏"
+    # A proved theorem whose goal is neither a contradiction nor a separation:
+    # the branch dies by *collapse*, not by ⊥ — the identification it needs
+    # destroys the notion it claims (Euthyphro: `Wills s p = Ought s p` makes
+    # violation impossible). Proved, but in a weaker mode, and the row says so
+    # rather than borrowing the strength of `⊥`.
+    if classify_proof_edge(proof)[0].startswith("PROVEN"):
+        return "COLLAPSE — INCOHERENT"
+    return "❌ NOT STOPPED"
+
+
+_KIND_ICON = {
+    "⊥ CONTRADICTION": "⊥",
+    "⊘ DENIAL REFUTED": "⊘",
+    "DEFINITIONAL FALLACY": "⌐",
+    "COUNTERMODEL · ⇏": "🧱",
+    "COLLAPSE — INCOHERENT": "💥",
+    "❌ NOT STOPPED": "❌",
+}
+
+
+def _worst_badge(proofs: list[ProofIR]) -> tuple[str, str]:
+    """(category, badge) of the costliest link in `proofs`, by the same rank
+    the ten-step table uses: a step inherits the price of its costliest link."""
+    worst = None
+    for pr in proofs:
+        cat, badge = classify_proof_edge(pr)
+        rank = _GLANCE_RANK.get(cat.split("|")[0].split("(")[0].strip(), 9)
+        if worst is None or rank < worst[0]:
+            worst = (rank, cat, badge)
+    return (worst[1], worst[2]) if worst else ("", "")
+
+
+def _footprint_cell(proofs: list[ProofIR]) -> str:
+    """The union of the audited footprints of `proofs`, as a reader cell.
+
+    Derived from `formal/axiom_audit.json`, so it cannot drift from
+    `#print axioms`. A union is the honest reading for a row whose targets
+    are several theorems: the row costs at least as much as its most
+    expensive link, and at most the union of all of them.
+    """
+    subst, vocab, cl = set(), set(), False
+    for pr in proofs:
+        s, v, c = footprint_parts(pr.full_name)
+        subst |= {a.rsplit(".", 1)[-1] for a in s}
+        vocab |= {a.rsplit(".", 1)[-1] for a in v}
+        cl = cl or bool(c)
+    parts = sorted(vocab) + (sorted(subst) if subst else []) + (["CL"] if cl else [])
+    if not parts:
+        return "`{}`"
+    return "`{" + ", ".join(parts) + "}`"
+
+
+def _status_cell(proofs: list[ProofIR]) -> str:
+    """Reader-facing status for a multi-target row: the worst link's badge,
+    with every target named and linked. `AXIOMATIC (X)` names the axiom (the
+    AGENTS.md display rule); the internal category strings are untouched so
+    the test suites stay stable."""
+    cat, badge = _worst_badge(proofs)
+    icon = status_icon(badge)
+    if badge.startswith("AXIOMATIC ("):
+        head = f"{icon} **AXIOMATIC ({badge[len('AXIOMATIC ('):-1]})**"
+    elif badge == "DEFINITIONAL":
+        head = f"{icon} **DEFINITIONAL**"
+    elif badge.startswith("COUNTERMODEL"):
+        head = f"{icon} **{badge}**"
+    elif badge.startswith("PROVEN"):
+        head = f"{icon} **PROVEN** · 0 substantive axioms"
+    else:
+        head = f"{icon} **{badge}**"
+    links = " ".join(_classical_decl_link(p.full_name, _CTX.get("decls", {})) for p in proofs)
+    return f"{head} · {_footprint_cell(proofs)} · {links}"
+
+
+def render_derived_price_table(rows: list[dict], title: str = "") -> list[str]:
+    """The price table (§11) and the Trinity table (§12).
+
+    Every row's status, footprint and Lean link is derived; only the row label
+    and the gloss are authored prose. A row whose targets do not resolve fails
+    loudly through the same stale-reference path the spine uses, so a renamed
+    theorem cannot quietly leave a row priced at nothing.
+    """
+    L: list[str] = []
+    if title:
+        L += [title, ""]
+    L += ["| What it costs | What it settles | Derived status · footprint · source |",
+          "|---|---|---|"]
+    for r in rows:
+        proofs = [p for p in (resolve_proof_by_name(t, _CTX.get("compiled", {}),
+                                                     _CTX.get("decls", {}), _CTX.get("graph", {}))
+                              for t in r.get("targets", [])) if p]
+        if not proofs:
+            raise SystemExit(
+                f"FATAL: derived table row '{r.get('row', '')}' names no resolvable "
+                f"target {r.get('targets', [])} — a price row with no source is worse "
+                f"than no row, because it reads as a price of nothing.")
+        L.append(f"| {r['row']} | {r.get('gloss', '')} | {_status_cell(proofs)} |")
+    L.append("")
+    return L
+
+
+def _branch_substantive(proof: ProofIR) -> list[str]:
+    """The substantive (`SEM`/`META`/`TRANS`) axioms in a branch proof's audited
+    footprint — the price of a claimed death, which must be zero for §13."""
+    fp = audit_footprint(proof.full_name) or []
+    return [a for a in fp if (_REGISTRY.get(a.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META", "TRANS")]
+
+
+def _cremation_price(proof: ProofIR) -> list[str]:
+    """The price of a branch, on two short lines: the derived status and the
+    audited footprint, then the clickable Lean anchor. Every field is computed —
+    `classify_proof_edge` walks the audited footprint, `refutation_kind` walks
+    the audited goal — and the two are kept apart so a `✅` can never sit on the
+    same line as a substantive axiom (the bug V2 exists to prevent)."""
+    cat, badge = classify_proof_edge(proof)
+    n_subst = len(_branch_substantive(proof))
+    price = "0 substantive axioms" if n_subst == 0 else \
+        f"{n_subst} substantive axiom{'' if n_subst == 1 else 's'}: " + \
+        ", ".join(sorted({a.rsplit('.', 1)[-1] for a in _branch_substantive(proof)}))
+    head = status_icon(badge)
+    if badge.startswith("AXIOMATIC ("):
+        head = f"{head} **AXIOMATIC ({badge[len('AXIOMATIC ('):-1]})**"
+    elif badge.startswith("COUNTERMODEL | "):
+        head = f"{head} **{badge[len('COUNTERMODEL | '):]}**"
+    elif badge.startswith("PROVEN"):
+        head = f"{head} **PROVEN**"
+    else:
+        head = f"{head} **{badge}**"
+    fp = audit_footprint(proof.full_name) or []
+    fp_cell = "`{" + ", ".join(sorted({a.rsplit('.', 1)[-1] for a in fp})) + "}`"
+    return [f"> {head} — {price} · {fp_cell}",
+            proof_cert_line(proof, badge)]
+
+
+_GLOSS_CAP = 260  # the parser's own docstring cap; full prose is one click away
+
+
+def _gloss_line(doc_lead: str) -> str:
+    """The English gloss on a branch header: the theorem's first docstring
+    paragraph, with the `Footprint:` tail dropped (the price line below states
+    it, derived) and a bare `Theorem:` prefix removed. Capped at `_GLOSS_CAP` on
+    a word boundary — a display cap, not a content cap; the untruncated prose is
+    in `investigations/ledger.md`."""
+    t = (doc_lead or "").strip().split("\n")[0].strip()
+    t = re.sub(r"\s*Footprint:\s*`\{[^}]*\}`\.?\s*$", "", t).strip()
+    t = re.sub(r"^(?:Theorem|Lemma|Corollary)\s*:\s*", "", t).strip()
+    if len(t) > _GLOSS_CAP:
+        cut = t.rfind(" ", 0, _GLOSS_CAP)
+        t = (t[:cut if cut > 0 else _GLOSS_CAP]).rstrip(" ,;:") + "…"
+    return t
+
+
+def render_cremation_derivation(proof: ProofIR, denial_hypothesis: str, *, branch: str,
+                                objection: str = "", voice: str = "", voice_gloss: str = "",
+                                index: int | None = None, require_free: bool = True,
+                                price_note: str = "") -> list[str]:
+    """One branch of the denial, with its premises, its steps, and its death.
+
+    The whole point of this renderer (CREMATION.md): a §13 row used to state
+    the *kind* of a branch's death (`⊥ CONTRADICTION`) without showing the
+    derivation, so the reading path reported a cremation it did not read. Here
+    the premises come from the theorem's parsed signature, the numbered steps
+    from the compiled `ProofIR`, and the terminator from the audited goal shape
+    — with build-failing validations so the page can never assert a death the
+    kernel does not check:
+
+    V1 the target is a live kernel declaration whose audited footprint exists;
+    V2 that footprint has no substantive axiom (a priced branch is a boundary,
+    not a free death); V3 the `denial_hypothesis` labels exactly one *real*
+    premise of that theorem — the load-bearing check, since it is what stops
+    this renderer narrating a death instead of reading one; V4 the block ends in
+    a derived `⊥`/`⊘`/collapse terminator; V5 every printed line is an
+    assumption, a step, or the terminator of the compiled proof.
+    """
+    decls = _CTX.get("decls", {})
+    if proof.full_name not in decls or not audit_footprint(proof.full_name):
+        raise SystemExit(
+            f"FATAL: cremation branch '{branch}': derivation target '{proof.name}' is "
+            f"not a live kernel declaration with an audited footprint — an "
+            f"unresolvable branch must not read as an unrefuted one.")
+    subst = _branch_substantive(proof)
+    if subst and require_free:
+        raise SystemExit(
+            f"FATAL: cremation branch '{branch}': '{proof.name}' rests on the "
+            f"substantive axiom(s) {sorted(subst)} — a priced branch is a boundary, "
+            f"not a free death, and belongs in the boundary table. Declare it as a "
+            f"`priced` secondary derivation instead, so the price is shown.")
+    premises = [a.proposition for a in proof.assumptions]
+    # Compare up to *formatting* only (parenthesisation, spacing, commas): the
+    # JSON may name a premise in the author's punctuation, but V3 must still
+    # prove it is the same premise the kernel parsed. Formatting is not content.
+    def _key(t: str) -> str:
+        return re.sub(r"[\s(),.]+", "", t or "").lower()
+    matches = [i for i, pr in enumerate(premises) if _key(pr) == _key(denial_hypothesis)]
+    if len(matches) != 1:
+        raise SystemExit(
+            f"FATAL: cremation branch '{branch}': denial_hypothesis "
+            f"'{denial_hypothesis}' matches {len(matches)} of the premises of "
+            f"'{proof.name}' (which are: {premises}). The thesis label must be "
+            f"exactly one real premise, or the section would be transcribing a "
+            f"derivation instead of reading it.")
+    thesis_i = matches[0]
+    kind = refutation_kind(proof, denial_hypothesis)
+    icon = _KIND_ICON.get(kind, "?")
+    if kind not in ("⊥ CONTRADICTION", "⊘ DENIAL REFUTED", "COLLAPSE — INCOHERENT"):
+        raise SystemExit(
+            f"FATAL: cremation branch '{branch}': '{proof.name}' does not end in a "
+            f"derived ⊥/⊘ terminator (kind was {kind!r}) — the reading path may not "
+            f"claim a death it cannot show.")
+
+    gloss = _gloss_line(proof.doc_lead) or branch
+    L: list[str] = []
+    head = f"**{index}. {branch}**" if index else f"**{branch}**"
+    if objection:
+        head += f" — {objection}"
+    L.append(head)
+    L.append("")
+    L.append(f"> **{kind}** — {gloss}")
+    L.append("")
+    for i, pr in enumerate(premises):
+        if i == thesis_i:
+            tail = "  ← the denial's own thesis"
+        elif voice and _key(pr) == _key(voice):
+            tail = f"  ← {voice_gloss or 'voicing the denial as correct'}"
+        else:
+            tail = ""
+        L.append(f"    Assume {pr}{tail}")
+    for n, st in enumerate(proof.steps, 1):
+        L.append(f"      {n}. {st.proposition}  ({st.description})")
+    if kind == "⊥ CONTRADICTION":
+        L.append("    ⊥")
+    elif kind == "⊘ DENIAL REFUTED":
+        L.append(f"    ⊘ {proof.goal}  — the denial's own negation")
+    else:
+        L.append(f"    {proof.goal}  — the denial, followed, destroys what it claims to keep")
+    L.append("")
+    L.extend(_cremation_price(proof))
+    if price_note:
+        L.append(f"> {price_note}")
+    L.append("")
+    return L
+
+
+def render_cremation_blocks(rows: list[dict]) -> list[str]:
+    """§13, the cremation: every branch of the denial, each read as a derivation
+    — premises, steps, terminator, price — with the boundary rows (rows without
+    a `derivation_target`) collected into one small table."""
+    dead = [r for r in rows if r.get("derivation_target")]
+    bounds = [r for r in rows if not r.get("derivation_target")]
+    L: list[str] = []
+    for i, r in enumerate(dead, 1):
+        tgt = r["derivation_target"]
+        proof = resolve_proof_by_name(tgt, _CTX.get("compiled", {}),
+                                      _CTX.get("decls", {}), _CTX.get("graph", {}))
+        if proof is None:
+            raise SystemExit(
+                f"FATAL: cremation branch '{r.get('branch', '')}': derivation target "
+                f"'{tgt}' does not resolve to a compiled proof — an unresolvable "
+                f"branch must not read as an unrefuted one.")
+        L.extend(render_cremation_derivation(
+            proof, r.get("denial_hypothesis", ""), branch=r.get("branch", ""),
+            objection=r.get("objection", ""), voice=r.get("objection_voice", ""),
+            voice_gloss=r.get("objection_voice_gloss", ""), index=i))
+        for sec in r.get("secondary_derivations", []):
+            proof2 = resolve_proof_by_name(sec["derivation_target"], _CTX.get("compiled", {}),
+                                           _CTX.get("decls", {}), _CTX.get("graph", {}))
+            if proof2 is None:
+                raise SystemExit(
+                    f"FATAL: cremation branch '{r.get('branch', '')}': secondary "
+                    f"target '{sec['derivation_target']}' does not resolve.")
+            L.extend(render_cremation_derivation(
+                proof2, sec.get("denial_hypothesis", ""),
+                branch=f"{r.get('branch', '')} — {sec.get('label', 'the second route')}",
+                index=None, require_free=not sec.get("priced", False),
+                price_note=sec.get("price_note", "")))
+        if r.get("note"):
+            L.append(f"> {r['note']}")
+            L.append("")
+    if bounds:
+        L.extend(render_cremation_table(bounds))
+    return L
+
+
+def render_cremation_table(rows: list[dict]) -> list[str]:
+    """§13, the cremation: every branch of the denial, with its kind derived
+    from the audited goal and footprint by `refutation_kind`."""
+    L: list[str] = [
+        "| Branch of the denial | The objection | How it is stopped (derived) | Status · footprint · source |",
+        "|---|---|---|---|",
+    ]
+    for r in rows:
+        proofs = [p for p in (resolve_proof_by_name(t, _CTX.get("compiled", {}),
+                                                     _CTX.get("decls", {}), _CTX.get("graph", {}))
+                              for t in r.get("targets", [])) if p]
+        if not proofs:
+            raise SystemExit(
+                f"FATAL: cremation branch '{r.get('branch', '')}' names no resolvable "
+                f"target {r.get('targets', [])} — an unresolvable branch must not read "
+                f"as an unrefuted one.")
+        kind = refutation_kind(proofs[0])
+        icon = _KIND_ICON.get(kind, "?")
+        label = f"{icon} **{kind}**"
+        if r.get("note"):
+            label += f" — {r['note']}"
+        L.append(f"| **{r['branch']}** | {r.get('objection', '')} | {label} | {_status_cell(proofs)} |")
+    L.append("")
+    return L
+
+
+# Most demanding first: a step/row inherits the price of its costliest link.
+# The keys are the INTERNAL category strings `classify_proof_edge` returns
+# (AGENTS.md: `SEMANTIC`/`METAPHYSICAL` stay unchanged for the test suites and
+# the IL compilers), NOT the reader-facing display words. Keying this by the
+# display words was a live honesty bug (found 2026-09-30 by the §13 V2 price
+# check): `METAPHYSICAL`/`SEMANTIC` missed the table, fell to the default rank
+# 9 — the *least* demanding — so a row holding both a free and a priced link
+# displayed the free one. The "Normativity is stipulative" row of the cremation
+# read "0 substantive axioms" while its own footprint cell printed
+# `AxJudicativeBipolarity`. `AXIOMATIC`/`PROVEN |` are kept as aliases so a
+# display string can never be the key again.
+_GLANCE_RANK = {
+    "METAPHYSICAL": 0,
+    "SEMANTIC": 0,
+    "AXIOMATIC": 0,
+    "COUNTERMODEL": 1,
+    "PROVEN": 2,
+    "DEFINITIONAL": 3,
+}
+
+
+def _glance_rows(spine_sections: list[dict]) -> list[str]:
+    """The ten-step roadmap, with every status DERIVED from the kernel.
+
+    The old table transcribed `✅ PROVEN · 0 substantive axioms` by hand, which
+    is exactly what AGENTS.md forbids. Each row is now a pure function of
+    (node kind, audited footprint, declared tag) over the step's *primary*
+    proofs, and names the declaration it read. A step whose costliest link
+    rests on a declared axiom is shown as AXIOMATIC, not as a clean ✅.
+    """
+    rows = []
+    for sec in spine_sections:
+        title = sec.get("title", "")
+        m = re.match(r"^\s*(\d+)\s*[.)]\s*(.*)$", title)
+        if not m:
+            continue
+        no, bare = m.group(1), m.group(2).strip()
+        label = sec.get("label") or bare
+        proofs = sec.get("primary_proofs", sec.get("proofs", []))
+        if not proofs:
+            continue
+        worst = None
+        for p in proofs:
+            cat, badge = classify_proof_edge(p)
+            rank = _GLANCE_RANK.get(cat.split("|")[0].split("(")[0].strip(), 9)
+            if worst is None or rank < worst[0]:
+                worst = (rank, p, badge)
+        if worst is None:
+            continue
+        _rank, proof, badge = worst
+        icon = status_icon(badge)
+        formula = (sec.get("formula") or proof.goal or "").strip()
+        formula = formula.split("\n")[0][:110]
+        decl_link = _classical_decl_link(proof.full_name, _CTX.get("decls", {}))
+        if badge.startswith("AXIOMATIC ("):
+            status = f"{icon} **AXIOMATIC ({badge[len('AXIOMATIC ('):-1]})**"
+        elif badge == "DEFINITIONAL":
+            status = f"{icon} **DEFINITIONAL**"
+        elif badge.startswith("COUNTERMODEL"):
+            status = f"{icon} **{badge}**"
+        else:
+            status = f"{icon} **PROVEN** · 0 substantive axioms"
+        rows.append(f"| **{no}** | **{label}** — {bare} | `{formula}` | {status} · {decl_link} |")
+    return rows
+
+
+def generate_argument_at_a_glance(spine_sections: list[dict], frontiers: list[dict] = None,
+                               countermodels: list[dict] = None,
+                               chart_nodes: str = None, chart_edges: str = None):
+    """Synthesizes a compact, conceptual roadmap of the strongest argument.
+
+    Returns `(lines, chart_lines)`. The roadmap table is the reading path
+    (READINGPATH.md §5: kept, statuses derived from the kernel, not
+    transcribed); the 100-line ASCII flowchart is the same ten steps in one
+    box-drawing map and is routed to `investigations/ledger.md` by
+    `include_chart_art`.
     """
     lines = []
     ap = lines.append
-    ap("## The Argument at a Glance")
+    chart_lines = []
+    cap = chart_lines.append
+    ap("## The Argument in Ten Steps")
     ap("")
-    ap("This chart is the whole argument in one map. Each box is a claim; each arrow shows a forced consequence; each icon states the claim's machine-derived status. Read it, then walk the numbered sections below.")
+    ap("One row per step, every status derived from the kernel — never transcribed. "
+       "Click any name for its Lean source.")
     ap("")
-    ap("Central Distinction: the upward arrows are *discovery* (from the datum to its ground);")
-    ap("the downward arrows are *ontological grounding* (from the ground to the datum) — the")
-    ap("same proved dependence, read in two directions (see the note above).")
-    ap("")
-    ap("<details>")
-    ap("<summary><b>Linear Deductive Roadmap (Steps 1–10 at a glance)</b></summary>")
-    ap("")
-    ap("| Step | Milestone | Core Formula | Epistemic Status |")
+    ap("| # | Step | Core formula | Derived status |")
     ap("|---|---|---|---|")
-    ap("| **§1** | Objective Right/Wrong | `¬N_T ∧ ¬N_F` | `✅` PROVEN · 0 substantive axioms |")
-    ap("| **§2** | Agential Ought | `Ought TruthNorm ⟨s, p⟩` | `✅` PROVEN · 0 substantive axioms |")
-    ap("| **§3** | Genuine Choice | `Chooses s p q ∧ CommittedChoice s p q r` | `✅` PROVEN (Route A / Route B) |")
-    ap("| **§4** | Free Will | `FreeWill(s)` | `✅` PROVEN · 0 substantive axioms |")
-    ap("| **§5** | Free Subject | `FreeSubject(s) ≡ FreeWill(s)` | `📖` DEFINITIONAL |")
-    ap("| **§6** | Person | `Person(s) ↔ Boethian-Thomistic Core` | `✅` PROVEN · 0 substantive axioms |")
-    ap("| **§7** | Personal Will | `FreeIndependentWill(s)` | `✅` PROVEN · 0 substantive axioms |")
-    ap("| **§8** | Ground of Right/Wrong | `GroundsRightWrong(s)` | `✅` PROVEN · 0 substantive axioms |")
-    ap("| **§9** | Necessary Truth | `□ τ ∧ GroundOfReality Entity.ofGround` | `✅` PROVEN · 0 substantive axioms |")
-    ap("| **§10** | Constructive Ground | `PersonalGroundOfReality Entity.ofGround` | `✅` PROVEN · 0 substantive axioms |")
+    for row in _glance_rows(spine_sections):
+        ap(row)
     ap("")
-    ap("</details>")
+    ap("Edges are typed, and the two directions are not the same move: **[distinction]** separates "
+       "levels (step 1 gives the personless order away on purpose), **[discovery]** carries the "
+       "chain forward, and **[grounding]** is the person→pole dependence. §13 then closes the whole "
+       "thing by retorsion.")
     ap("")
-    ap("```text")
 
     presentation_data = load_presentation_spine()
-    if presentation_data and "spine_nodes" in presentation_data:
+    # `nodes_key`/`edges_key` select which reading spine the chart draws; the
+    # deontic route is charted from the preserved ledger nodes (2026-09-30).
+    nodes_key = chart_nodes or "spine_nodes"
+    edges_key = chart_edges or "edges"
+    if presentation_data and nodes_key in presentation_data:
         spine_proofs = {s.get("id", ""): s.get("proofs", []) for s in spine_sections}
         spine_sections_dict = {s.get("id", ""): s for s in spine_sections}
-        chart_lines = generate_ascii_chart(
-            presentation_data["spine_nodes"],
-            presentation_data.get("edges", []),
+        cap("```text")
+        cap("")
+        for cl in generate_ascii_chart(
+            presentation_data[nodes_key],
+            presentation_data.get(edges_key, []),
             presentation_data.get("terminal_branches", []),
             spine_proofs,
             spine_sections_dict=spine_sections_dict
-        )
-        for cl in chart_lines:
-            ap(cl)
-    ap("```")
-    ap("")
-    return lines
+        ):
+            cap(cl)
+        cap("```")
+        cap("")
+    return lines, chart_lines
 
 def status_icon(edge_badge: str) -> str:
     """Map a display badge string to its one-emoji chart/ledger icon."""
@@ -5136,7 +5749,8 @@ def render_proof_body_spine(proof: ProofIR, ap):
             doc_lines.append(line_str)
 
     if doc_lines:
-        ap(_spine_lead(" ".join(doc_lines)))
+        ap(_spine_lead(" ".join(doc_lines),
+                       hard=README_PARA_CAP if _argument_audience() else None))
         ap("")
 
     if proof.boundary:
@@ -5165,25 +5779,43 @@ def render_proof_body_spine(proof: ProofIR, ap):
     ap(proof_cert_line(proof, edge_badge))
     ap("")
 
-    if proof.steps:
-        subst_cost = "0 substantive axioms" if not proof.subst_axioms else f"substantive axioms: {', '.join(sorted({ax.rsplit('.', 1)[-1] for ax in proof.subst_axioms}))}"
-        ap("<details>")
-        ap(f"<summary>Formal Derivation ({len(proof.steps)} step{'s' if len(proof.steps) != 1 else ''}, natural deduction, {subst_cost})</summary>")
+    # The statement, its consequence line and its audited badge stay on the
+    # reading path; the natural-deduction trace is ledger material
+    # (READINGPATH.md §1: 40 blocks / 13k chars, seven of them a single `rfl`).
+    # The sink is resolved from the presentation policy, so `audience: "full"`
+    # still renders it inline and the refactor stays behaviour-preserving.
+    _derivation_sink = _block_sink(_CTX.get("policy", {}), "include_natural_deduction")
+    if proof.steps and _derivation_sink == "readme":
+        with ap.at("readme", "derivation"):
+            _emit_natural_deduction(proof, ap)
+    elif proof.steps:
+        # The trace itself is the ledger; the reading path does not spend a
+        # line per theorem saying so (READINGPATH.md §5). The single ledger
+        # pointer lives in "Where the Rest of the Ledger Lives".
+        with ap.at("ledger", "derivation"):
+            _emit_natural_deduction(proof, ap)
+
+
+def _emit_natural_deduction(proof: ProofIR, ap) -> None:
+    """The collapsible natural-deduction trace for one declaration."""
+    subst_cost = "0 substantive axioms" if not proof.subst_axioms else f"substantive axioms: {', '.join(sorted({ax.rsplit('.', 1)[-1] for ax in proof.subst_axioms}))}"
+    ap("<details>")
+    ap(f"<summary>Formal Derivation ({len(proof.steps)} step{'s' if len(proof.steps) != 1 else ''}, natural deduction, {subst_cost})</summary>")
+    ap("")
+    if proof.assumptions:
+        ap(f"Assume {', and '.join(a.proposition for a in proof.assumptions)}:")
         ap("")
-        if proof.assumptions:
-            ap(f"Assume {', and '.join(a.proposition for a in proof.assumptions)}:")
-            ap("")
-        for s_idx, step in enumerate(proof.steps, 1):
-            ap(f"    {s_idx}. {step.proposition}  ({step.description})")
+    for s_idx, step in enumerate(proof.steps, 1):
+        ap(f"    {s_idx}. {step.proposition}  ({step.description})")
+    ap("")
+    if proof.conclusion:
+        if proof.conclusion.rule == Rule.CONTRADICTION:
+            ap(f"    Contradiction: {proof.conclusion.description} (→ ⊥)")
+        else:
+            ap(f"    ∴ {proof.conclusion.proposition}")
         ap("")
-        if proof.conclusion:
-            if proof.conclusion.rule == Rule.CONTRADICTION:
-                ap(f"    Contradiction: {proof.conclusion.description} (→ ⊥)")
-            else:
-                ap(f"    ∴ {proof.conclusion.proposition}")
-            ap("")
-        ap("</details>")
-        ap("")
+    ap("</details>")
+    ap("")
 
 def render_proof_body(proof: ProofIR, ap, detailed: bool = False):
     """Renders an individual proof's assumptions, steps, conclusion, badges, and Lean citation.
@@ -5290,7 +5922,7 @@ CLASSICAL_ATTRIBUTES = [
                   "four-level note in `base.txt`. "
                   "**No `World` sort, no world-states (C559):** \u0393\u2019s core vocabulary "
                   "(`Subject`, `Prop`, `State`, `Means`, `Initiates`) contains no `World` sort, so "
-                  "no expression of \u0393 denotes a world-state \u2014 a signature model (M0, M1, M6) is "
+                  "no expression of \u0393 denotes a world-state — a signature model (M0, M1, M6) is "
                   "never a candidate state, only a witness about a signature. The empty world is "
                   "unintelligible as a state, not unchecked: its denial voiced as judgment requires "
                   "a Free Subject (C558), and without a meaning subject there is no epistemic "
@@ -5603,51 +6235,49 @@ CLASSICAL_ATTRIBUTES = [
                   "Honest boundary: strictly separated from numerical unitarianism (which would rule out Trinitarian relations) and pantheism."),
     },
     {
-        "attribute": "**Strict numerical unitarianism** (ruling out relational internal plurality/persons)",
+        "attribute": "**Strict monotheism** (the ground is a *single* Person — a unitarian monad)",
         "scope": "Divine Being / Ground",
         "expected": "COUNTERMODEL",
         "checks": [{"type": "countermodel",
                     "full": "Logos.FoundationalUnicity.unicity_does_not_force_unitarian_monad"}],
         "refs": ["Logos.TheologicalModalHardening.necessary_existence_not_entails_uniqueness",
                  "Logos.Plurality.T12_twoPersons"],
-        "sense": ("Proving that the universal ground of reality is structurally unique does not force that the "
-                  "internal life of the ground is a solitary, relationless monad (`unicity_does_not_force_unitarian_monad`, "
-                  "footprint `{}`). The relational plurality of persons remains an open, non-collapsed frontier."),
+        "sense": ("**Refuted as a consequence, not merely unproven** (2026-09-30). "
+                  "`unicity_does_not_force_unitarian_monad` (`{}`) builds one ground and requires of "
+                  "*every* ground at least two distinct persons: a unitarian monad is not a reading left "
+                  "open, it is a reading the countermodel forbids. This is why “the ground is one "
+                  "person” is not the frontier it used to be \u2014 and why one God in three Persons "
+                  "(“Three Divine Persons”) is the reading Γ reaches. What stays open is the "
+                  "entity-level projection C228, a different question."),
     },
     {
-        "attribute": "**One God / strict monotheism** (unity of the Divine Being)",
+        "attribute": "**One God** — unity of the Divine Being (one ground, one nature)",
         "scope": "Divine Being / Ground",
-        "expected": "DEFERRED",
-        "checks": [{"type": "branch", "id": "monotheism"},
-                   {"type": "decl",
-                    "full": "Logos.FoundationalUnicity.exactly_one_universal_modal_ground"}],
-        "refs": ["Logos.FoundationalUnicity.exactly_one_universal_modal_ground",
-                 "Logos.FoundationalUnicity.ofGround_sole_universal_grounding",
+        "expected": "PROVEN",
+        "checks": [{"type": "decl",
+                    "full": "Logos.FoundationalUnicity.exactly_one_universal_modal_ground"},
+                   {"type": "branch", "id": "monotheism"}],
+        "refs": ["Logos.FoundationalUnicity.ofGround_sole_universal_grounding",
                  "Logos.FoundationalUnicity.ofGround_unicity_from_no_discriminating_subject",
+                 "Logos.FoundationalUnicity.exactly_one_universal_modal_ground_stipulated",
                  "Logos.FoundationalUnicity.unicity_does_not_force_unitarian_monad",
+                 "Logos.DivineSimplicity.divine_simplicity_sole_bearer",
+                 "Logos.ConditionalTheology.preceding_theory_not_entails_trinity",
                  "Logos.TheologicalModalHardening.necessary_existence_not_entails_uniqueness"],
-        # Phase 5: the half that is won leads; the half that is still deferred
-        # follows. The label is split first because the reader needs to know
-        # which half they are reading. F15 is now declared (see Correction 12),
-        # so "not yet asserted in Γ" is false and is replaced.
-        "sense": ("**This label was carrying two claims; only one of them is still open (corrected "
-                  "2026-09-27).** (1) *Uniqueness of the universal ground* is **PROVEN**: "
-                  "`exactly_one_universal_modal_ground` (C320) proves that exactly one universal modal "
-                  "ground exists — **existence unconditional**, uniqueness under the single named "
-                  "hypothesis `∀ s, ∃ p, ¬ Means s p`, which is now the **declared axiom** "
-                  "`SemanticFinitude` (C388, `Tag: VOCAB`, ledger row F15) and is consumed "
-                  "unconditionally by `exactly_one_universal_modal_ground_stipulated` (C389). "
-                  "That is the mathematical content of monotheism at the level of the Divine Being. "
-                  "(2) *Person-level monotheism* — one God as numerically one Person, and its "
-                  "compatibility with three Persons — **remains DEFERRED**: `monotheism_of_god_and_uniqueness` "
-                  "and `monotheism_compatible_with_trinity` are still out of the live kernel and no "
-                  "compiled declaration exists for either, because they need the person bridge C228, which "
-                  "is BLOCKED. The scope limit is unchanged and machine-checked: unicity of the ground does "
-                  "not force a solitary, relationless monad (`unicity_does_not_force_unitarian_monad`, C212, "
-                  "`{}`), so the Trinitarian frontier stays open. The older justification for the deferral — "
-                  "that \"uniqueness is provably NOT a kernel consequence\" — held only of the *modal* route "
-                  "(`TheologicalModalHardening.necessary_existence_not_entails_uniqueness`, `{}`: bare necessity "
-                  "does not entail uniqueness). It did not hold of the grounding route, which now closes."),
+        # 2026-09-30: this label carried two claims and read DEFERRED. Split, and
+        # each half is read at its own price: unity of the ground is PROVEN here;
+        # strict (person-level) monotheism is REFUTED as a consequence and lives
+        # in the "strict monotheism" row above; the Trinity is priced, in
+        # "Three Divine Persons". Badges are derived, so a future theorem that
+        # moves either half fails this row in the same change.
+        "sense": ("**Unity of the ground and of the nature** — one God, *una natura*. "
+                  "`exactly_one_universal_modal_ground` (C320) proves `∃! g, UniversalModalGround g`: "
+                  "existence unconditional, uniqueness on the declared VOCAB bound `SemanticFinitude` "
+                  "(“no subject means every proposition”), with an unconditional corollary (C389). "
+                  "The nature is one by divine simplicity (`divine_simplicity_sole_bearer`, C440, "
+                  "`{}` with CL), with aseity and *actus purus*. The bare-name branch `monotheism` "
+                  "keeps the deferred half — the *person-count* question — which the "
+                  "“strict monotheism” row answers as a refutation, not a gap."),
     },
     {
         "attribute": "**Perfect (moral) goodness**",
@@ -6146,15 +6776,41 @@ CLASSICAL_ATTRIBUTES = [
     },
     # ---- Ground 3 — Divine Personhood (open) ----
     {
-        "attribute": "**Three Divine Persons (Trinity)**",
+        "attribute": "**Three Divine Persons (Trinity)** — one God, in three Persons",
         "scope": "Divine Personhood",
-        "expected": "COUNTERMODEL",
-        "checks": [{"type": "countermodel",
+        "expected": "PROVEN\u2191",
+        "checks": [{"type": "decl",
+                    "full": "Logos.DivineAgape.agape_entails_tripersonality"},
+                   {"type": "countermodel",
                     "full": "Logos.ConditionalTheology.preceding_theory_not_entails_trinity"}],
-        "refs": [],
-        "sense": ("`preceding_theory ⇏ trinity` (Binitarian separation model, footprint `{}`). "
-                  "A separate claim, distinct from necessity and from unity. (F6/F8 DEFERRED; "
-                  "plurality `T12_twoPersons` is at most generic persons under `AxTwoSubjects`.)"),
+        "refs": ["Logos.DivineAgape.the_father_is_divine",
+                 "Logos.DivineAgape.the_beloved_is_divine",
+                 "Logos.DivineAgape.the_spirit_is_divine",
+                 "Logos.DivineAgape.the_beloved_distinct",
+                 "Logos.DivineAgape.the_spirit_ne_father",
+                 "Logos.DivineAgape.the_spirit_ne_beloved",
+                 "Logos.DivineAgape.the_spirit_ne_any_word",
+                 "Logos.DivineAgape.agape_and_word_without_spirit_is_binitarian",
+                 "Logos.DivineAgape.unitarian_self_love_gives_no_second_centre"],
+        # 2026-09-30: this row read `{} COUNTERMODEL`, which was honest about the
+        # separation and misleading about the result: `agape_entails_tripersonality`
+        # (C510) derives three distinct divine Persons on three declared META
+        # premises, and the row now says so at that price. The `{}` separation is
+        # kept as a second check and in the prose: the premises are needed, so the
+        # Trinity is not free. Consubstantiality (one shared `divineReality`) is
+        # what keeps this from tritheism — one God, in three Persons.
+        "sense": ("**One God, in three Persons** — *unus Deus, tres Personae*, and not three Gods. "
+                  "`agape_entails_tripersonality` (C510): `t.P1 = the_father ∧ t.P2 = the_beloved ∧ "
+                  "t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit`, on three "
+                  "**declared META premises** — `AxAgapeEssence`, `AxProcessionSpirit`, `AxProcessionWord`. "
+                  "Consubstantiality: all three are `is_divine _ divineReality` (`the_father_is_divine`, "
+                  "`the_beloved_is_divine`, `the_spirit_is_divine`), with one ground (C320) and one "
+                  "nature (C440) — so the three are distinct *personally* (`the_beloved \u2260 the_father`, "
+                  "`the_spirit \u2260 the_father`, `the_spirit \u2260 the_beloved`, `the_spirit \u2260 any word`), "
+                  "not three grounds. **The price is not optional:** "
+                  "`preceding_theory ⇏ trinity` (`{}`, binitarian separation model) with "
+                  "C511\u2013C514 isolating each premise, so the author's faith supplies the Persons and the "
+                  "kernel prices them. Incarnation remains the open frontier."),
     },
     {
         "attribute": "**Incarnation**",
@@ -6202,7 +6858,8 @@ def _classical_anchor_live(anchor: dict, decls: dict, node_map: dict) -> str:
         return "PROVEN↑" if subst else "PROVEN"
     if t == "branch":
         pd = load_presentation_spine()
-        for node in (pd or {}).get("spine_nodes", []):
+        nodes = list((pd or {}).get("spine_nodes", [])) + list((pd or {}).get("ledger_spine_nodes", []))
+        for node in nodes:
             for b in node.get("branches", []):
                 if b.get("id") == anchor["id"]:
                     return "DEFERRED" if b.get("status") == "deferred" else "LIVE"
@@ -6270,15 +6927,23 @@ def _classical_decl_link(full: str, decls: dict) -> str:
     return (f"[{d['file']}#{d['name']}]"
             f"(formal/Logos/{d['file']}#L{d['line']}), footprint {kernel_fp_text(full)}")
 
+_NUMBER_WORDS = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six",
+                 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten"}
+
+
 def render_defense_against_attacks() -> list[str]:
-    """Emits the systematic defense guide showing why the six most common skeptical
+    """Emits the systematic defense guide showing why the most common skeptical
     attacks against Γ fail in the Lean 4 kernel with 0 substantive axioms.
+
+    The count in the heading is DERIVED from the rows actually emitted below, not
+    typed: the guide grew a seventh pillar (proof-self retorsion) while the title
+    still said "Six", and a reader who counted was right to distrust it.
     """
     lines = []
     ap = lines.append
     ap("---")
     ap("")
-    ap("## Why Common Skeptical Attacks Fail (The Six Pillars of Formal Defense)")
+    ap("@@PILLARS@@")
     ap("")
     ap("> **Adversarial Guide for Critics and Agents:** External agents evaluating or attacking")
     ap("> Γ often mistake its conclusions for ungrounded metaphysical assumptions. Every common")
@@ -6307,6 +6972,11 @@ def render_defense_against_attacks() -> list[str]:
     ap("| **6. Physicalist / Atomic Ground**<br>\"The ultimate ground could be a physical particle, matter, or an atom.\" | An entity with false meaning capacity cannot ground an entity with true meaning capacity. Atomic factual entities are unconditionally excluded from grounding `Entity.ofGround`, and the ground possesses Canonical Aseity. | [`atom_cannot_ground_the_ground`](formal/Logos/CanonicalAseity.lean#L96)<br>[`conditional_canonical_aseity`](formal/Logos/CanonicalAseity.lean#L133)<br>`⊢ CanonicalAseity Entity.ofGround` | `{Means, Subject}`<br>**(0 substantive axioms)** |")
     ap("| **7. Origin of Normativity (The Proof-Self Retorsion)**<br>\"Where does the initial normative claim come from? Why grant that any normative judgment exists?\" | Bare syntax checking alone does not force normativity (`M_inanimate_checker`, `{}`). But any agent *presenting* a derivation as sound (`PresentsAsSound`) co-means correctness and error, deriving `FreeWill` and `Person` with 0 substantive axioms. Furthermore, an adversarial critic who attacks Γ by presenting an objection argumentatively as sound *themselves* instantiates the normative stance (`critic_presenting_objection_is_person`). | [`presents_as_sound_derives_personhood`](formal/Logos/ProofPresentationRetorsion.lean#L140)<br>[`critic_presenting_objection_is_person`](formal/Logos/ProofPresentationRetorsion.lean#L180)<br>[`syntactic_validity_without_subject_or_normativity`](formal/Logos/ProofPresentationRetorsion.lean#L100) | `{Initiates, Means, State, Subject, CL}`<br>**(0 substantive axioms)** |")
     ap("")
+    n_pillars = sum(1 for ln in lines if re.match(r"^\| \*\*\d+\. ", ln))
+    lines = [ln.replace("@@PILLARS@@",
+                        f"## Why Common Skeptical Attacks Fail "
+                        f"(The {_NUMBER_WORDS[n_pillars]} Pillars of Formal Defense)")
+             for ln in lines]
     return lines
 
 # --- ASIETY-FREEDOM chain: every step priced, so the ◈ step cannot be read as
@@ -6333,7 +7003,9 @@ ASIETY_FREEDOM_STEPS = [
      "is forced, not lazy"),
     ("🧱", "C294", "Logos.AsietyFreedom.rightWrongFactYieldsNoChooser", "countermodel",
      "countermodel: `¬ N_T ∧ ¬ N_F` with **no** subject meaning anything — **no axiom-free "
-     "existence of a chooser**"),
+     "existence of a chooser. Both this and C561 are true, at different levels: the Prop-level "
+     "distinction (`¬N_T ∧ ¬N_F`, satisfaction) needs no subject; epistemic right/wrong "
+     "(`Correct`/`Incorrect`, truth-to) does (C561)"),
     ("✓", "C295", "Logos.AsietyFreedom.groundIsNotASharerOfAsietyFreeWill", "decl",
      "coherence: the ground is still **not** a chooser (C285 preserved)"),
     ("Σ", "C296", "Logos.AsietyFreedom.asietyFreedom_summary", "decl",
@@ -6612,20 +7284,20 @@ TWO_KINDS_STEPS = [
      "*no* personal ground at all. `T`/`IsFalse` are independent of the ground: no ledger line "
      "connects them. `Classical.em` is banned from the countermodel and the build must stay green"),
     ("L1", "C556", "Logos.EpistemicPersonalGround.epistemic_order_requires_a_free_meaning_being", "decl",
-     "**THE SAME `{}` SEPARATION, READ IN THE OTHER DIRECTION \u2014 `{}`**: C528 above separates the "
+     "**THE SAME `{}` SEPARATION, READ IN THE OTHER DIRECTION — `{}`**: C528 above separates the "
      "order from the *foundation* (nothing grounds it, and that is admissible); this row separates "
      "it from the *being for which meaning can mean*, and that separation is **closed**. "
      "`order_needs_a_meaning_being` is a signature constraint, so a world where `T`/`IsFalse` "
-     "obtains with no Free being for which meaning can mean has no inhabitant \u2014 the author's "
+     "obtains with no Free being for which meaning can mean has no inhabitant — the author's "
      "correction, *right and wrong can't exist in meaninglessness*, made a compile error. "
      "Zero substantive axioms: this is C140's signature argument at the `T`/`IsFalse` level, not a "
      "new bridge in \u0393"),
     ("L1", "C553", "Logos.EpistemicNecessity.epistemic_right_wrong_requires_a_free_being_for_which_meaning_can_mean", "decl",
-     "**THE FACT, IN ONE STATEMENT \u2014 zero substantive axioms**: nothing can be epistemologically "
+     "**THE FACT, IN ONE STATEMENT — zero substantive axioms**: nothing can be epistemologically "
      "right or wrong without a non-mechanical (Free) being for which meaning can mean. The "
      "epistemic poles are constituted by a meaning-act (`Means` of both `Correct` and `Incorrect`), "
      "holding both of them is free choice between them, and the will is individuated so the being "
-     "is a person \u2014 C140 plus `freeWill_implies_person`. Every conjunct of the sentence is "
+     "is a person — C140 plus `freeWill_implies_person`. Every conjunct of the sentence is "
      "present in **one** row, where a reader previously had to assemble it from C140 and C222 by hand"),
     ("L1", "C554", "Logos.EpistemicNecessity.the_epistemic_dependence_runs_both_ways", "decl",
      "**BOTH DIRECTIONS ARE MACHINE-CHECKED, EACH WITH ITS OWN FOOTPRINT**: the necessity arrow "
@@ -6635,70 +7307,62 @@ TWO_KINDS_STEPS = [
      "is not machine-decidable is the *interpretive* reading of the conjunction as ontology "
      "(C527's downward arrow), and this row does not assert it"),
     ("L1", "C555", "Logos.EpistemicNecessity.epistemic_normativity_somewhere_yields_a_free_being", "decl",
-     "**THE FACT IS NOT MERELY POINTWISE**: if the epistemic stance obtains *somewhere* \u2014 some "
-     "subject claims normative correctness of some content \u2014 a non-mechanical personal being "
+     "**THE FACT IS NOT MERELY POINTWISE**: if the epistemic stance obtains *somewhere* — some "
+     "subject claims normative correctness of some content — a non-mechanical personal being "
      "exists, and it means both poles. The antecedent is kept and the claim is not made "
      "unconditional: nothing in \u0393 shows the epistemic stance obtains, and this batch does not "
      "attempt it. A conditional theorem is not an unconditional claim, and this row is not dressed "
      "up as one"),
     ("L1", "C557", "Logos.EpistemicNecessity.epistemic_order_makes_the_act_datum_necessary", "decl",
-     "**THE ACT DATUM IS NECESSARY, NOT STIPULATED — vocabulary-only, no `CL`, zero substantive**: "
-     "if the epistemic order obtains, someone acts. This is step 3 of the author\u2019s argument, "
-     "isolated and machine-checked: the order needs meaning, meaning needs a Free person, a Free "
-     "person needs an act, therefore the act datum is **entailed**. It is one line because the "
-     "stance contains the act — `ClaimsNormativeCorrectness s p := Act s p ∧ Means s (Correct s p) ∧ "
-     "Means s (Incorrect s p)`, so the act is its own first conjunct. **Consequence for the "
-     "wording:** calling `performative_act_datum` (C454, `Tag: TRANS`) a *price* on this direction "
-     "is wrong — a price is what you pay for a conclusion you cannot derive, and this is "
-     "derived. The order route never invokes C454. With this row the necessity chain is `{}` end "
-     "to end: order → act (C557) → choice between the poles (C140, whose `Incompatible (Correct s p) "
-     "(Incorrect s p)` is **derived** at `NormativeOrder.lean:136`, not assumed) → `FreeWill` → `Person` "
-     "(C553). **Not discharged by this row:** the *unconditional* `∃ s, Act s p` still rests on C454, "
-     "and `F1bUncond` stays `BLOCKED` on `rejectedHornCoMeant`. Those are statements of the form "
-     "“∃ something in every world regardless of the order”; the FACT is a statement of necessity, so "
-     "they are a different question, not a price on this one"),
+     "**THE ACT DATUM IS NECESSARY, NOT STIPULATED — vocabulary-only, no `CL`**: if the epistemic "
+     "order obtains, someone acts — the stance contains the act (`ClaimsNormativeCorrectness := Act "
+     "\u2227 Means Correct \u2227 Means Incorrect`), so the datum is **entailed** and the order route never "
+     "invokes C454. Chain `{}` end to end: order \u2192 act (C557) \u2192 choice (C140, `Incompatible` derived, "
+     "not assumed) \u2192 `FreeWill` \u2192 `Person` (C553). **Not discharged:** unconditional `\u2203 s, Act s p` "
+     "still rests on C454 — and `F1bUncond` is now `SUPERSEDED`, since C278 proves `∃ s, FreeWill s` "
+     "on the one META bridge; the *unconditional act datum* is a different question, not this price"),
     ("L1", "C557", "Logos.EpistemicNecessity.the_epistemic_stance_is_an_act", "decl",
-     "**THE SAME STEP, POINTWISE \u2014 NO CHOICE ABOUT IT**: the stance IS an act, not a "
+     "**THE SAME STEP, POINTWISE — NO CHOICE ABOUT IT**: the stance IS an act, not a "
      "bridge to one. `ClaimsNormativeCorrectness s p` unfolds to `Act s p \u2227 \u22c5`, so whoever "
-     "is in the stance has already acted \u2014 the reader is not asked to supply a premise, only "
+     "is in the stance has already acted — the reader is not asked to supply a premise, only "
      "to read the first conjunct. Corollary of C557, same footprint, kept in the chain so the "
      "step cannot be silently dropped"),
     ("L1", "C559", "Logos.EpistemicNecessity.signature_model_reading_discipline", "decl",
-     "**READ THIS BEFORE ANY COUNTERMODEL ROW \u2014 A SIGNATURE MODEL IS NOT A CANDIDATE STATE**: "
+     "**GOVERNS EVERY COUNTERMODEL ROW — A SIGNATURE MODEL IS NOT A CANDIDATE STATE**: "
      "a `{}` countermodel witnesses that a constraint is underivable from a signature; it is never "
      "evidence about a state of affairs. \u0393\u2019s core vocabulary (`Subject`, `Prop`, `State`, "
      "`Means`, `Initiates`) contains no `World` sort, so no expression of \u0393 denotes a world-state. "
-     "Reading an inhabitant of a record (M0, M1, M6) as a possible world is a category error \u2014 "
+     "Reading an inhabitant of a record (M0, M1, M6) as a possible world is a category error — "
      "this row governs every countermodel row in the chart, and it is the row that would have caught "
      "the meaningless-world misreading and the empty-world misreading alike"),
     ("L1", "C558", "Logos.EpistemicNecessity.empty_world_denial_voiced_as_judgment_requires_a_free_subject", "decl",
      "**THE EMPTY-WORLD DENIAL, VOICED AS JUDGMENT, REQUIRES A FREE SUBJECT**: holding the normative "
-     "stance on `NoSubject` yields a Free, personal, acting speaker \u2014 `FreeWill` by C140, `Person` by "
-     "`freeWill_implies_person`, `Act` by `claims_normative_correctness_is_act` \u2014 and the thesis dies "
+     "stance on `NoSubject` yields a Free, personal, acting speaker — `FreeWill` by C140, `Person` by "
+     "`freeWill_implies_person`, `Act` by `claims_normative_correctness_is_act` — and the thesis dies "
      "in its own performance (C57). Two tiers, in order: Tier 1 (subject) is conceded by *any* denier, "
      "deterministic or free, because denying requires asserting and what asserts is a subject "
-     "\u2014 determinism is no refuge from subjecthood, which is prior to freedom. Tier 2 (really Free, "
+     "— determinism is no refuge from subjecthood, which is prior to freedom. Tier 2 (really Free, "
      "Tier9: could-have-settled-otherwise + sourcehood) is the author\u2019s requirement on genuine judgment; "
      "this row derives Tier6 at `{}`-substance and records Tier9 with its independence from \u0393\u2019s base. "
      "`M_Deliberator` is why Tier6 alone does not settle it: the deterministic deliberator emits without judging"),
     ("L1", "C560", "Logos.EpistemicNecessity.no_meaning_no_correctness", "decl",
-     "**THE THIRD LEG \u2014 NO MEANING, NO RIGHT/WRONG (`{}`)**: the contrapositive of C49. `Meaning_I p` "
+     "**THE THIRD LEG — NO MEANING, NO RIGHT/WRONG (`{}`)**: the contrapositive of C49. `Meaning_I p` "
      "*is* `\u2203 s, Means s p` definitionally, so where nothing means, nothing is correct and nothing is "
      "incorrect. Right/wrong needs meaning (C62) \u2192 meaning needs a subject (C49) \u2192 no meaning, "
-     "no right/wrong \u2014 the author\u2019s three-premise chain, and this row is the leg it was missing"),
+     "no right/wrong — the author\u2019s three-premise chain, and this row is the leg it was missing"),
     ("L1", "C561", "Logos.EpistemicNecessity.no_subject_who_means_no_epistemic_right_wrong", "decl",
-     "**THE CHAIN, COMPOSED \u2014 NO SUBJECT WHO MEANS, NO EPISTEMIC RIGHT/WRONG**: if no subject means "
+     "**THE CHAIN, COMPOSED — NO SUBJECT WHO MEANS, NO EPISTEMIC RIGHT/WRONG**: if no subject means "
      "anything, correctness obtains nowhere and incorrectness obtains nowhere (C62 + C49 in one "
-     "statement). Full composition at vocabulary-only footprint \u2014 a `{}` version would be a weaker claim "
+     "statement). Full composition at vocabulary-only footprint — a `{}` version would be a weaker claim "
      "wearing its name. Together with C558 this closes the empty world twice over: unvoiceable (no speaker "
      "without a subject) and uninhabitable-by-the-order (no right/wrong without a meaning subject)"),
     ("L1", "C562", "Logos.EpistemicNecessity.being_true_is_being_true_to", "decl",
-     "**BEING TRUE IS BEING TRUE *TO* \u2014 THE ALETHIC CHAIN `Correct \u2192 TrueTo \u2192 T`**: "
+     "**BEING TRUE IS BEING TRUE *TO* — THE ALETHIC CHAIN `Correct \u2192 TrueTo \u2192 T`**: "
      "`TrueTo s p := Means s p \u2227 T p`. Being-the-case (`T p`, satisfaction) is free; being-true is "
      "disclosure, and disclosure is always to someone. The chain is one weakening after another "
      "(drop `Initiates`, then drop `Means`): correctness entails truth-to, truth-to entails truth "
-     "\u2014 while the converses fail. **Vocabulary discipline, binding:** no ledger row may call bare-`T` "
-     "satisfaction \u201ctrue\u201d in a normative context \u2014 that word now belongs to `TrueTo`/`Correct`. "
+     "— while the converses fail. **Vocabulary discipline, binding:** no ledger row may call bare-`T` "
+     "satisfaction \u201ctrue\u201d in a normative context — that word now belongs to `TrueTo`/`Correct`. "
      "Three layers: being-the-case (requires nothing), being-true (requires a meaning subject, C49/C560), "
      "judging rightly (requires a Free Subject who chooses, C140/C553). Truth lives at the middle layer "
      "and above, never at the bottom alone"),
@@ -6974,7 +7638,7 @@ def render_meaning_retorsion_chain(decls: dict, node_map: dict) -> list[str]:
     ap("   to all of them. The batch's novelty is C369 (the re-index), C373 (the `Correct` rung),")
     ap("   C380 (the signature-general weak retorsion) and C382 (the populated complement).")
     ap("4. **Why an *answer* and not a *model*.** A countermodel is not a counterexample; it is")
-    ap("   a witness about a signature, never a state of affairs (C559 \u2014 \u0393 has no `World` sort, so no "
+    ap("   a witness about a signature, never a state of affairs (C559 — \u0393 has no `World` sort, so no "
     "expression of \u0393 denotes a world-state). An answer is a move made inside discourse. M1 and C294 "
     "are inhabitants of a record where no move is ever made (`Means := False` *and* `act := False`),")
     ap("   so they cannot contain the affirmation of their own silence. A content nobody can")
@@ -7075,6 +7739,13 @@ def render_two_kinds_chain(decls: dict, node_map: dict) -> list[str]:
     ap("> introduces a free predicate for a subject's **kind**, proves that the two kinds are")
     ap("> exactly the two modal profiles, and then — on **one** declared `META` bridge — derives")
     ap("> that the necessary kind is inhabited by a **Person**. The whole price is the `◆` row.")
+    ap("")
+    ap("**First attempts that failed, kept because the failures carry information.** The 2026-09-29 necessity batch "
+       "first counted 10 witness sites (there are 20), sketched its signature field as `Means s EO` (does not compile "
+       "— the FACT asks for *some* meaning, not meaning *of the order*), predicted C555\u2019s footprint without "
+       "`Will` (the audit corrected it: `Person` brings `will_individuation`), and twice miscounted its own tallies "
+       "(C560 is vocabulary, not `{}`; 287+3=290, not 291). Each correction is in its row; this sentence exists so no "
+       "reader mistakes the finished chain for a first draft.")
     ap("")
     ap("`V` = the `VOCAB` axiom (a free predicate, asserting no existence) · `D` = its `def`")
     ap("complement · `L1` = a theorem on vocabulary alone, **0 substantive axioms** · `◆` = the")
@@ -7559,17 +8230,17 @@ SUCCESSION_AUDIT_STEPS = [
 
 THOMISTIC_ACT_STEPS = [
     ("\u25c6", "C463", "Logos.ThomisticAct.Produces", "axiom",
-     "**PRICE 1, VOCABULARY.** `Produces : Entity \u2192 World \u2192 Form \u2192 Prop` \u2014 F10 "
+     "**PRICE 1, VOCABULARY.** `Produces : Entity \u2192 World \u2192 Form \u2192 Prop` — F10 "
      "item (1), the production relation, with the immediate precedent of `Initiates`. The first "
      "world-indexed relation over `Entity` in the library. Its footprint is `{Subject}`, not `{}`, "
      "for the ground-level reason `FoundationalUnicity.groundsEntity_reflexive` is not `{}` either: "
      "`Entity`'s `ofSubject` constructor carries the `Subject` sort-axiom"),
     ("\u25c6", "C464", "Logos.ThomisticAct.love_implies_act", "axiom",
-     "**PRICE 2, METAPHYSICAL.** *ST* I-II q.28 a.5 \u2014 the love of God is *ipso facto* an act. An "
+     "**PRICE 2, METAPHYSICAL.** *ST* I-II q.28 a.5 — the love of God is *ipso facto* an act. An "
      "**implication, never an identity**: what may love that is not an act (a preference without "
      "execution, a sentiment) is left outside, and the price is visible in C466's footprint"),
     ("\u25c6", "C465", "Logos.ThomisticAct.ground_love_produces", "axiom",
-     "**PRICE 3, METAPHYSICAL.** *ST* I q.19 a.4 \u2014 the love of heaven is productive. Deliberately "
+     "**PRICE 3, METAPHYSICAL.** *ST* I q.19 a.4 — the love of heaven is productive. Deliberately "
      "scoped to `Entity.ofGround`: the unrestricted form leaks through C228's "
      "`AxGroundLovesContingentRealm`, whose target-side is true of *every* entity and would make "
      "the bridge a tautology plus a claim that God creates atoms"),
@@ -7584,11 +8255,11 @@ THOMISTIC_ACT_STEPS = [
     ("\u03a3", "C467", "Logos.ThomisticAct.producing_coexists_with_immutability", "decl",
      "**the ground produces *and* is immutable, in one theorem.** This is the deliverable of the "
      "milestone. Nothing in `NotInSuccession` quantifies over `Produces`, so the two are proved "
-     "*together* rather than against each other \u2014 the formal resolution of the tension the "
+     "*together* rather than against each other — the formal resolution of the tension the "
      "succession audit uncovered. The row is **conditional**, and had to be: \u0393 has no "
      "unconditional witness of ground-love (`EntityMeans (ofAtom _)` is `False` for every atom, and "
      "the contingent-person datum needs a `ContingentSubjectKind` inhabitant that the corpus does "
-     "not have \u2014 C404 supplies only the *necessary* kind). The immutability conjunct is "
+     "not have — C404 supplies only the *necessary* kind). The immutability conjunct is "
      "unconditional inside the row; the production conjunct is what the hypothesis pays for"),
     ("\u03a3", "C468", "Logos.SuccessionAudit.existence_implies_someone_initiates", "decl",
      "the author's first sentence, with an inert premise"),
@@ -7614,18 +8285,18 @@ ACT_CASCADE_STEPS = [
      "(`AnActualSubjectExists := \u2203 s, SubjectExists s`): the row exists because the corpus "
      "enuncates the proposition in that form, not to add a second result"),
     ("\u03a3", "C472", "Logos.ActCascade.an_agent_exists", "decl",
-     "**an agent exists, in the T4 sense \u2014 and that sense is empty.** `Agent (_s) := True`, so the "
+     "**an agent exists, in the T4 sense — and that sense is empty.** `Agent (_s) := True`, so the "
      "second conjunct is unconditionally true and **this row is exactly as strong as C470, and "
      "nothing more** (C321's precedent: a property of everything characterises nothing). It "
      "discharges the `T4_agentExists` step of the T chain; it is **not evidence of agency** in any "
      "sense the word carries outside that `def`"),
     ("\u03a3", "C473", "Logos.ActCascade.an_intentional_subject_exists", "decl",
      "**an intentional subject exists.** Nothing beyond C469: `IntentionalSubject s` is *defined* as "
-     "\u2203 p, Means s p, so this is C469 with the witness reordered \u2014 the subject-side form of the "
+     "\u2203 p, Means s p, so this is C469 with the witness reordered — the subject-side form of the "
      "T chain"),
     ("\u03a3", "C474", "Logos.ActCascade.intentionality_is_instantiated", "decl",
      "`Intentional := IntentionalSubject`, so this is C473 under the corpus's second name for the "
-     "same predication. **The weakest reading of \"intentional\" the corpus has** \u2014 not "
+     "same predication. **The weakest reading of \"intentional\" the corpus has** — not "
      "intentionality *of a particular act*"),
     ("\u03a3", "C475", "Logos.ActCascade.genuineChoice_exists_of_act_datum_constitutive", "decl",
      "**genuine choice exists, by the constitutive route.** Datum **plus** the paid `AxIntentionalChoice` "
@@ -7634,14 +8305,14 @@ ACT_CASCADE_STEPS = [
      "the semantic price is not removed**"),
     ("\u03a3", "C476", "Logos.ActCascade.genuineChoice_exists_of_act_datum_polarity", "decl",
      "**genuine choice exists, by the polarity route.** Datum **plus** the paid `AxActPolarity` "
-     "(`Tag: SEM`): an act is polar \u2014 acting on `p` is also acting on `\u00acp` \u2014 which is what "
+     "(`Tag: SEM`): an act is polar — acting on `p` is also acting on `\u00acp` — which is what "
      "makes the choice genuine rather than merely unimpeded. A *different semantic choice* from the "
      "constitutive one, **not a stronger one**, and no substitute for it"),
     ("\u03a3", "C477", "Logos.ActCascade.freeWill_exists_of_act_datum_constitutive", "decl",
      "**free will exists, by the constitutive route.** Datum **plus** the paid `AxIntentionalChoice` "
      "(`Tag: SEM`). This is the row that discharges the corpus's own \"free will exists\" from the "
      "performative datum. An existential over subjects: not *which* subject, not all of them, and "
-     "no `Wills \u2192 Initiates`. A *consequence* of the datum \u2014 citing it for the datum is circular "
+     "no `Wills \u2192 Initiates`. A *consequence* of the datum — citing it for the datum is circular "
      "(C456's precedent)"),
     ("\u03a3", "C478", "Logos.ActCascade.freeWill_exists_of_act_datum_polarity", "decl",
      "the same conclusion by the `AxActPolarity` route. A second, independent route with a *different* "
@@ -7758,21 +8429,21 @@ def render_succession_audit_chain(decls: dict, node_map: dict) -> list[str]:
     """Reader-facing chain for the 2026-09-28 succession-audit batch (C458\u2013C462)."""
     lines: list[str] = []
     ap = lines.append
-    ap("### Chain 10 \u2014 What \"the ground does not initiate\" actually proved")
+    ap("### Chain 10 — What \"the ground does not initiate\" actually proved")
     ap("")
     ap("> **The finding, in one proof.** `the_ground_not_in_succession`")
     ap("> (`NecessityEternity.lean:196-198`) opens with `rintro \u27e8s, \u03c3, \u03c3', p, \u27e8hEq, _h\u27e9\u27e9` and closes with")
     ap("> `Entity.noConfusion hEq`. **The initiation witness is discarded.** The kernel term is sound,")
     ap("> which is why it survived every audit: what it establishes is that the ground is *no")
     ap("> subject's correlate*, and the negation of `Initiates` in its statement is inherited rather")
-    ap("> than demonstrated. So \"the ground does not initiate\" is **unstatable**, not refuted \u2014 and")
+    ap("> than demonstrated. So \"the ground does not initiate\" is **unstatable**, not refuted — and")
     ap("> the refutation that was on record proved nothing about initiation.")
     ap("")
     ap("> Author, 2026-09-28, verbatim: *\"No more excuses - The fact Gamma exists means Someone")
     ap("> Initiates!!!!\"* and *\"The ground Initiates is refuted because there's a mistake in the proof.\"*")
     ap("> The first half is **already a theorem** (C455, and C468 below). The second is repaired here.")
     ap("")
-    ap("**This is disclosure, not demotion** \u2014 the F16 precedent "
+    ap("**This is disclosure, not demotion** — the F16 precedent "
        "(`DivineImmutability.lean:142-165`).")
     ap("`ofGround_divine_immutability` stays `PROVEN` with its footprint untouched, C217 stays")
     ap("`PROVEN`; C453 has since been refuted as `COUNTERMODEL` by Chain 13. No badge relevant to the ground moves; what changed here was the *reading* of")
@@ -7790,7 +8461,7 @@ def render_succession_audit_chain(decls: dict, node_map: dict) -> list[str]:
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
     ap("**C462 is `BLOCKED`, and deliberately has no row.** \"The ground does not initiate\" as a")
-    ap("substantive claim needs an entity-level agency predicate \u2014 `EntityInitiates : Entity \u2192 "
+    ap("substantive claim needs an entity-level agency predicate — `EntityInitiates : Entity \u2192 "
        "State \u2192 State \u2192 Prop \u2192 Prop`")
     ap("together with the negative instance for `Entity.ofGround`; the alternative route,")
     ap("`GroundIsSubject : Subject`, is *forbidden* by the corpus (`ofGround_ne_ofSubject`, C441).")
@@ -7800,7 +8471,7 @@ def render_succession_audit_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     ap("**What this chain does not say.** Not that the ground is mutable: `NotInSuccession` holds")
     ap("for it (C458). Not that `NotInSuccession` is empty of content: it is a real predicate, just")
-    ap("a non-discriminating one (C459). Not that no one initiates \u2014 someone does, and C460 is")
+    ap("a non-discriminating one (C459). Not that no one initiates — someone does, and C460 is")
     ap("the row the ledger was missing. The `Initiates := False` countermodels of `INHABITED.md`")
     ap("\u00a70.1 are unaffected: they refute the *inhabitance* being derivable, and C454 is what")
     ap("closes them.")
@@ -7811,12 +8482,12 @@ def render_thomistic_act_chain(decls: dict, node_map: dict) -> list[str]:
     """Reader-facing chain for the 2026-09-28 Thomistic production batch (C463\u2013C468)."""
     lines: list[str] = []
     ap = lines.append
-    ap("### Chain 11 \u2014 To produce without succeeding")
+    ap("### Chain 11 — To produce without succeeding")
     ap("")
     ap("> **The problem this batch answers.** After Chain 10, \"God acts at the level of the ground\"")
     ap("> is **unstatable**: `Initiates` is indexed by a subject, and the ground is provably not one.")
     ap("> The Thomistically correct way to say it at ground level is *production*, which is a")
-    ap("> different relation \u2014 and Chain 10 had already proved, as a byproduct, that nothing in")
+    ap("> different relation — and Chain 10 had already proved, as a byproduct, that nothing in")
     ap("> `NotInSuccession` could exclude it. What was missing was the machine-checked form, and it")
     ap("> is **C467**: the ground produces **and** is immutable, in a single theorem.")
     ap("")
@@ -7834,7 +8505,7 @@ def render_thomistic_act_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     ap("- **Not universal production from C465.** C465\u2019s `\u2203 w \u03c6` is *existential*. The derivation "
        "`(\u2203 w, Satisfies w \u03c6) \u2192 \u2203 v, Produces g v \u03c6`")
-    ap("  (`DivineOmnipotence.lean:55-58`) stayed open in this batch; F10 has since been closed by declaration (C493). The remaining Creator question \u2014 production is not creation \u2014 is untouched, and C306 still refutes that grounding entails causal externality.")
+    ap("  (`DivineOmnipotence.lean:55-58`) stayed open in this batch; F10 has since been closed by declaration (C493). The remaining Creator question — production is not creation — is untouched, and C306 still refutes that grounding entails causal externality.")
     ap("- **Not essence\u2013act identity.** \"God is His act\" needs essence vocabulary (Class A,")
     ap("  blocked). C465 must never be described as establishing divine simplicity.")
     ap("- **Not immutability\u2019s exclusivity.** C453 has since been refuted as `COUNTERMODEL` by Chain 13; this batch had added the")
@@ -7850,7 +8521,7 @@ def render_act_cascade_chain(decls: dict, node_map: dict) -> list[str]:
     """Reader-facing chain for the 2026-09-28 act-datum cascade batch (C469\u2013C480)."""
     lines: list[str] = []
     ap = lines.append
-    ap("### Chain 12 \u2014 The consequences of the datum, no longer conditional")
+    ap("### Chain 12 — The consequences of the datum, no longer conditional")
     ap("")
     ap("> **The problem this batch answers.** `performative_act_datum` (C454) is **unconditional**,")
     ap("> and yet **eighteen theorems** across five modules still carried it as their *sole*")
@@ -7908,7 +8579,7 @@ def render_characteristic_closure_chain(decls: dict, node_map: dict) -> list[str
     """Reader-facing chain for the 2026-09-29 characteristic-closure batch (C484\u2013C492)."""
     lines: list[str] = []
     ap = lines.append
-    ap("### Chain 13 \u2014 The last gaps, not the last axioms")
+    ap("### Chain 13 — The last gaps, not the last axioms")
     ap("")
     ap("> **The problem this batch answers.** Two footprint characteristics had survived every "
        "previous batch with a formal defect. **Divine Simplicity** was the only instantiated "
@@ -7952,7 +8623,7 @@ def render_necessary_kind_audit_chain(decls: dict, node_map: dict) -> list[str]:
     """
     lines: list[str] = []
     ap = lines.append
-    ap("### Chain 14 \u2014 Necessity does not pick the ground out (and the second necessary being)")
+    ap("### Chain 14 — Necessity does not pick the ground out (and the second necessary being)")
     ap("")
     ap("> **The question this chain answers.** `NecessarySubjectKind` is the ground of reality in "
         "its Personal Type — and it is *inhabited* by the `Tag: META` bridge C404. Any subject of "
@@ -7993,11 +8664,16 @@ def render_necessary_kind_audit_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     return lines
 
-def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
+def render_classical_attribute_status(decls: dict, node_map: dict) -> tuple[list[str], list[str]]:
     """Emits the classical-attributes table block (placed after Branch C, before
     the Further Investigations catalogue). Statuses are live-derived, never
-    transcribed."""
+    transcribed.
+
+    Returns `(table_and_chains, synthesis)`: READINGPATH.md §5 routes the first
+    list to `investigations/ledger.md` (56 rows × full prose + the 15
+    step-by-step chain blocks) and keeps the second on the reading path."""
     lines = []
+    synthesis: list[str] = []
     ap = lines.append
     ap("---")
     ap("")
@@ -8050,6 +8726,7 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     lines.extend(render_act_cascade_chain(decls, node_map))
     lines.extend(render_characteristic_closure_chain(decls, node_map))
     lines.extend(render_necessary_kind_audit_chain(decls, node_map))
+    ap = synthesis.append
     ap("_Synthesis — the strongest current profile._ The theory has established, of a")
     ap("**personal, rational, free, authoritative-over-its-acts, independently individuated**")
     ap("**normative ground / person-type**, that its objective Right/Wrong order is the object")
@@ -8073,10 +8750,13 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
     ap("declared — C463, `Tag: VOCAB` — and its *derivation* from satisfaction has since been declared as C493 (`Tag: META`), so the causal sense now rests on a named bridge rather than a proof; a")
     ap("declared relation alone was not a power, and production is still not creation), and")
     ap("**psychological impassibility** remain separate targets (❌ NOT ESTABLISHED or 🔴 INDEPENDENT).")
-    ap("The remaining divine attributes — **unity / monotheism**,")
-    ap("**perfect moral goodness** (the moral pole itself now obtains under the single declared "
-       "META bridge, C178; its attribution to the Divine Being stays a 🧱 frontier), the "
-       "**Trinity**, the **Incarnation**, and contingent")
+    ap("The remaining divine attributes — **perfect moral goodness** (the moral pole "
+       "itself now obtains under the single declared META bridge, C178; its attribution to "
+       "the Divine Being stays a 🧱 frontier), the **Incarnation**, and contingent")
+    ap("**unity** (no longer a target: C320/C389 prove one ground and C440 one nature) nor "
+       "**strict monotheism** (refuted as a consequence — C212, `{}`, `unicity_does_not_force_unitarian_monad`: "
+       "every ground bears at least two distinct persons) nor the **Trinity** (priced on three "
+       "declared META premises in C510, and `{}` in C109 proves they are not free), nor contingent")
     ap("**creation as entailment** — remain **separate proof targets**")
     ap("(`⏸` / `❌`) or explicit **countermodel frontiers** (`🧱`) until the live kernel proves them. "
        "Contingent creation *as existence* is no longer among them: it is a **free theorem** "
@@ -8088,7 +8768,148 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> list[str]:
        "no agent, no first moment. So the cost was relocated and then, for existence itself, "
        "dissolved — but the act was never ours to claim.")
     ap("")
-    return lines
+    return lines, synthesis
+
+def render_reading_sections(policy: dict) -> list[str]:
+    """The argument sections that are not spine steps (READINGPATH.md §5).
+
+    Prose is authored in `formal/presentation_spine.json` and always carries its
+    C-ids, per the AGENTS.md facade rule. The claim table underneath each is
+    DERIVED: `philo_status` over the live kernel, never the authored `status`
+    field. A claim id that no longer resolves fails the build here rather than
+    rendering as a dangling reference.
+    """
+    data = load_presentation_spine() or {}
+    sections = data.get("reading_sections", [])
+    if not sections:
+        return []
+    L: list[str] = []
+    ap = L.append
+    for sec in sections:
+        ap(f"## {sec['title']}")
+        ap("")
+        for para in sec.get("body", []):
+            ap(para)
+            ap("")
+        if sec.get("price_table"):
+            # §11/§12: every status, footprint and Lean link derived from
+            # `formal/axiom_audit.json`; only the row label and gloss are prose.
+            L.extend(render_derived_price_table(sec["price_table"]))
+        if sec.get("cremation"):
+            # §13: every branch read as a derivation (CREMATION.md). The badge
+            # table it replaces reported each death without showing it.
+            L.extend(render_cremation_blocks(sec["cremation"]))
+        cids = sec.get("claims") or []
+        if cids:
+            by_id = _CTX.get("by_id", {})
+            ap("| Claim | Derived status | What it settles |")
+            ap("|---|---|---|")
+            for cid in cids:
+                c = by_id.get(cid)
+                if c is None:
+                    raise AssertionError(
+                        f"reading_sections[{sec['id']}] names claim {cid}, which is not "
+                        f"in GAPMAP. Remove it or add the claim row; a dangling C-id on "
+                        f"the reading path is exactly the kind of overclaim the split "
+                        f"exists to prevent.")
+                full = c.get("_full") or ""
+                link = _classical_decl_link(full, _CTX.get("decls", {})) if full else "—"
+                gloss = (c.get("_gloss_display") or c.get("prose") or "").strip()
+                ap(f"| `{cid}` | {_readable_status(c)} · {link} | {gloss[:220]} |")
+            ap("")
+        if sec.get("def_bridge_census"):
+            for line in _render_def_bridge_census():
+                ap(line)
+    return L
+
+
+_READABLE_WORD = {
+    "✅": "PROVEN", "⚠️": "AXIOMATIC", "◆": "AXIOM", "✖": "BLOCKED",
+    "➖": "DEFERRED", "🧱": "COUNTERMODEL", "📘": "DEFINITIONAL",
+    "—": "STATED (no bucket: a governing discipline, not a claim)",
+}
+
+
+def _readable_status(c: dict) -> str:
+    """One reader-facing badge for a GAPMAP claim, derived from the kernel.
+
+    Uses `badge_for` — the same derived display the ledger's tables use — so a
+    row cannot read one way in the argument and another way in the audit.
+    AXIOMATIC never means unproved: it is machine-verified and rests on the
+    named declared axiom, which is printed.
+    """
+    icon = badge_for(c, _CTX.get("decls", {}), _CTX.get("node_map", {}))
+    word = _READABLE_WORD.get(icon, icon)
+    out = f"{icon} **{word}**"
+    full = c.get("_full")
+    if full and icon in ("⚠️", "◆"):
+        subst, _vocab, _cl = footprint_parts(full)
+        named = sorted({a.rsplit(".", 1)[-1] for a in subst} |
+                       ({full.rsplit(".", 1)[-1]} if icon == "◆" else set()))
+        if named:
+            out += f" — rests on {', '.join(f'`{n}`' for n in named)}"
+    return out
+
+
+def _render_def_bridge_census() -> list[str]:
+    """The def-as-bridge census, counted from scripts/stipulated_def_allowlist.json."""
+    L: list[str] = []
+    ap = L.append
+    debt = _def_bridge_debt()
+    if not debt:
+        ap("_(the `def`-as-bridge allowlist is absent, so this census degrades rather "
+           "than failing — see `scripts/stipulated_def_allowlist.json`)_")
+        ap("")
+        return L
+    ap(f"| Declared-`def` bridges | Theorems they underwrite | Reviewed | Promoted to a declared axiom |")
+    ap(f"|---|---|---|---|")
+    ap(f"| **{debt['total']}** | **{debt['theorems']}** (largest: {debt['worst']}) | "
+       f"**{debt['reviewed']}** | **0** |")
+    ap("")
+    ap("Full census with each bridge, its dependents and its justification: "
+       "[investigations/ledger.md](investigations/ledger.md); the open three-way "
+       "decision is tracked by `scripts/census_stipulated_defs.py`.")
+    ap("")
+    return L
+
+
+def render_established_profile(decls: dict, node_map: dict) -> list[str]:
+    """The reading-path answer to "which classical attributes do we already have?".
+
+    One line per characteristic: name, scope, and the DERIVED status. The
+    ledger keeps the full `sense` prose and every reference; the prose column
+    was 57k chars of the 302k README and is not what makes the table readable
+    (READINGPATH.md §1). Keeping the rows themselves is the point: a reader can
+    see at a glance which attributes are established, which are axiom-priced,
+    and which are countermodel-separated, including the ones that cut against
+    the theory (C494/C495: the ground is not the only necessary being).
+    """
+    L: list[str] = []
+    ap = L.append
+    ap("## What Is Established of the Ground, and of the Person")
+    ap("")
+    ap("Every row derived from the kernel, never transcribed (icons as in the legend "
+       "above; `◈` = a registered `def`-as-premise, a price not a warning).")
+    ap("")
+    ap("Two rows cut **against** the classical reading and are kept here: the ground "
+       "is **not the only necessary being** (C494), so necessity does **not** pick "
+       "the ground out (C495).")
+    ap("")
+    ap("| Classical characteristic | Scope | Derived status |")
+    ap("|---|---|---|")
+    for row in CLASSICAL_ATTRIBUTES:
+        primary = row["checks"][0].get("full")
+        marked = [c.get("full") for c in row["checks"]] + list(row.get("refs", []))
+        link = _classical_decl_link(primary, decls) if primary else "—"
+        ap(f"| {row['attribute']} | {row['scope']} | "
+           f"{_classical_row_status(row, decls, node_map)}{_stip_marker(marked)} · {link} |")
+    ap("")
+    ap("The full prose for every row — the exact sense established, every "
+       "reference, and the 14 step-by-step chain blocks that price each bridge — "
+       "is in [investigations/ledger.md](investigations/ledger.md).")
+    ap("")
+    return L
+
 
 def verify_classical_attribute_status(decls: dict, node_map: dict) -> None:
     """Regeneration guard: every CLASSICAL_ATTRIBUTES row's live-derived bucket
@@ -8103,17 +8924,240 @@ def verify_classical_attribute_status(decls: dict, node_map: dict) -> None:
             f"Upgrade the CHAR.md table row only together with the real formal "
             f"change; never transcribe status text over the kernel.")
 
+class _SinkScope:
+    """Context manager for `_TwoSink.at` (restores sink + block name on exit)."""
+
+    def __init__(self, doc, sink: str, block: str):
+        self.doc = doc
+        self.sink = sink
+        self.block = block
+        self.prev_sink = self.prev_block = None
+
+    def __enter__(self):
+        self.prev_sink, self.prev_block = self.doc.sink, self.doc.block
+        self.doc.sink, self.doc.block = self.sink, self.block
+        return self.doc
+
+    def __exit__(self, *exc):
+        self.doc.sink, self.doc.block = self.prev_sink, self.prev_block
+        return False
+
+
+class _TwoSink:
+    """Two-sink line buffer: the reader-facing argument vs. the audit ledger.
+
+    READINGPATH.md §1/§5. The renderer emits every line exactly once; the sink
+    decides whether it belongs in `README.md` (the argument, fully visible) or
+    in `investigations/ledger.md` (chains, tables, derivations, full prose). One
+    `include_*` policy flag per block, so a block can never fall out of *both*
+    sinks by accident: `_lint_surfaces` fails the build if a gated block
+    reached neither. `audience: "full"` in `formal/presentation_spine.json`
+    restores the pre-split single-document behaviour (README byte-identical),
+    which is how the split is regression-tested.
+    """
+
+    SINKS = ("readme", "ledger")
+
+    def __init__(self) -> None:
+        self.parts: dict[str, list[str]] = {s: [] for s in self.SINKS}
+        self.sink = "readme"
+        self.block = "root"
+        self.seen: dict[str, set[str]] = {s: set() for s in self.SINKS}
+
+    def __call__(self, line: str = "") -> None:
+        self.parts[self.sink].append(line)
+        if self.sink == "ledger":
+            self.seen["ledger"].add(self.block)
+        else:
+            self.seen["readme"].add(self.block)
+
+    def extend(self, lines, sink: str = None) -> None:
+        target = sink or self.sink
+        self.parts[target].extend(lines)
+        self.seen[target].add(self.block)
+
+    def at(self, sink: str, block: str):
+        return _SinkScope(self, sink, block)
+
+    def get(self, sink: str) -> list[str]:
+        return self.parts[sink]
+
+    def mark(self) -> int:
+        return len(self.parts["ledger"])
+
+
+def _argument_audience() -> bool:
+    """True when the reading path is the argument (two-tier split active)."""
+    return ((_CTX.get("policy") or {}).get("audience") or "full") == "argument"
+
+
+def _block_sink(policy: dict, key: str) -> str:
+    """Where the block named by `key` belongs.
+
+    `audience: "argument"` (the reading path) sends a block to the ledger
+    unless its `include_*` flag is true; `audience: "full"` keeps the legacy
+    single-document behaviour so the split can be regression-tested.
+    """
+    if (policy.get("audience") or "full") == "ledger":
+        return "readme"
+    return "readme" if policy.get(key, True) else "ledger"
+
+
+def _emit_ledger_spine(sections: list[dict], ap) -> None:
+    """Render the ledger's deontic spine: every step, every branch, every price.
+
+    Flat and uncollapsed on purpose — this is the audit surface, and its reader
+    is the one who wants the whole chain in order, with the full prose, the
+    derived statuses and the def-as-premise disclosures. Derivations and
+    route definitions still land in their own ledger blocks, so a reader can
+    tell a step from its trace.
+    """
+    for sec in sections:
+        title = sec.get("title", "")
+        ap(f"### {title}")
+        ap("")
+        # The step's reader-facing gloss, then the short form only if there is no
+        # long one. (2026-09-30: this comparison was against itself, so the prose
+        # was silently dropped and the moved-out route lost its summaries.)
+        prose = (sec.get("summary") or "").strip() or (sec.get("summary_short") or "").strip()
+        if prose:
+            ap(prose)
+            ap("")
+        if (sec.get("explanation") or "").strip():
+            ap(sec["explanation"].strip())
+            ap("")
+        if sec.get("formula"):
+            ap(f"`⊢ {sec['formula']}`")
+            ap("")
+        if sec.get("disclosure"):
+            ap(f"> ⚠️ **Price disclosed —** {sec['disclosure']}")
+            ap("")
+        for label, key in (("The skeptic tries", "pushback"), ("The reply", "reply")):
+            text = (sec.get(key) or "").strip()
+            if text:
+                ap(f"> **{label} —** {text}")
+                ap("")
+        if sec.get("rebuttal_target") and sec.get("rebuttal_formula"):
+            ap(f"> **Machine-checked —** `{sec['rebuttal_target']}`: `⊢ {sec['rebuttal_formula']}`")
+            ap("")
+        if sec.get("investigation_link"):
+            ap(f"*(Technical proof & model analysis: [{sec['investigation_link']}]({sec['investigation_link']}))*")
+            ap("")
+        for proof in sec.get("primary_proofs", []):
+            render_proof_body_spine(proof, ap)
+        for b in sec.get("branches", []):
+            if b.get("pushback") or b.get("label"):
+                ap(f"#### Branch {b.get('label', '')}: {b.get('title', '')}")
+                ap("")
+            if (b.get("summary") or "").strip():
+                ap(b["summary"].strip())
+                ap("")
+            if (b.get("pushback") or "").strip():
+                ap(f"> **The skeptic tries —** {b['pushback']}")
+                ap("")
+            if (b.get("reply") or "").strip():
+                ap(f"> **The reply —** {b['reply']}")
+                ap("")
+            if b.get("rebuttal_target") and b.get("rebuttal_formula"):
+                ap(f"> **Machine-checked —** `{b['rebuttal_target']}`: `\u22a2 {b['rebuttal_formula']}`")
+                ap("")
+            for proof in b.get("supporting_proofs", []):
+                render_proof_body_spine(proof, ap)
+            for proof in b.get("obstruction_proofs", []):
+                ap(f"#### Obstruction / Formal Boundary: `{proof.name}`")
+                ap("")
+                render_proof_body_spine(proof, ap)
+        if sec.get("supporting_proofs"):
+            ap(f"#### Supporting Infrastructure \u2014 {len(sec['supporting_proofs'])} auxiliary theorem(s) beneath this step")
+            ap("")
+            for proof in sec["supporting_proofs"]:
+                render_proof_body_spine(proof, ap)
+        for proof in sec.get("obstruction_proofs", []):
+            ap(f"#### Obstruction / Formal Boundary: `{proof.name}`")
+            ap("")
+            render_proof_body_spine(proof, ap)
+        if sec.get("route_definitions"):
+            ap("<details>")
+            ap(f"<summary>Definitions used in this step ({len(sec['route_definitions'])})</summary>")
+            ap("")
+            for d in sec["route_definitions"]:
+                render_proof_body_spine(d, ap)
+            ap("</details>")
+            ap("")
+        if sec.get("supporting_proofs"):
+            with ap.at("ledger", "supporting"):
+                ap("<details>")
+                ap(f"<summary>Supporting infrastructure — {len(sec['supporting_proofs'])} theorem(s)</summary>")
+                ap("")
+                for proof in sec["supporting_proofs"]:
+                    render_proof_body_spine(proof, ap)
+                ap("</details>")
+                ap("")
+        if sec.get("obstruction_proofs"):
+            with ap.at("ledger", "obstruction"):
+                ap("<details>")
+                ap(f"<summary>Obstructions / separations — {len(sec['obstruction_proofs'])}</summary>")
+                ap("")
+                for proof in sec["obstruction_proofs"]:
+                    render_proof_body_spine(proof, ap)
+                ap("</details>")
+                ap("")
+        for sub in sec.get("subsections", []):
+            with ap.at("ledger", "subsection"):
+                ap("#### " + sub.get("title", "Supporting defense"))
+                ap("")
+                if sub.get("summary"):
+                    ap(sub["summary"])
+                    ap("")
+                for g in sub.get("groups", []) or ([{"label": "", "proofs": sub.get("proofs", [])}]
+                                                   if sub.get("proofs") else []):
+                    if g.get("label"):
+                        ap(f"*{g['label']}*")
+                        ap("")
+                    for proof in g.get("proofs", []):
+                        render_proof_body_spine(proof, ap)
+        for b in sec.get("branches", []):
+            ap(f"#### {b.get('title') or b.get('label', '')}")
+            ap("")
+            claim = (b.get("summary_short") or b.get("summary") or "").strip()
+            if claim:
+                ap(claim)
+                ap("")
+            if b.get("status") == "deferred" and not b.get("primary_proofs"):
+                ap("> " + (b.get("defer_note") or "⏸ **DEFERRED** — annotated surface only."))
+                ap("")
+            if b.get("summary") and b.get("summary") != claim:
+                ap(b["summary"])
+                ap("")
+            if b.get("investigation_link"):
+                ap(f"*(Technical proof & model analysis: [{b['investigation_link']}]({b['investigation_link']}))*")
+                ap("")
+            for proof in b.get("primary_proofs", []):
+                render_proof_body_spine(proof, ap)
+            if b.get("obstruction_proofs"):
+                with ap.at("ledger", "obstruction"):
+                    ap("<details>")
+                    ap(f"<summary>Obstruction / separation</summary>")
+                    ap("")
+                    for proof in b["obstruction_proofs"]:
+                        render_proof_body_spine(proof, ap)
+                    ap("</details>")
+                    ap("")
+        ap("---")
+        ap("")
+
+
 def render_deduction_sections(sections: list[dict], decls: dict = None, node_map: dict = None,
                           investigations_dir: Path = None,
-                          score_claims: list[dict] = None) -> list[str]:
+                          score_claims: list[dict] = None) -> "_TwoSink":
     """Renders compiled ProofIR sections into README.md in 3 simultaneous layers:
 
     1. Ordinary English conceptual movement (from declaration docstrings)
     2. Clear philosophical transitions and local premise pricing
     3. Explicit UTF-8 mathematical derivations with visible step-by-step chains
     """
-    L = []
-    ap = L.append
+    L = _TwoSink()
+    ap = L
     ap("# Γ — The Deduction")
     ap("")
 
@@ -8121,26 +9165,13 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
     detailed = [s for s in sections if s.get("category") == "detailed"]
     countermodels = [s for s in sections if s.get("category") == "countermodel"]
     frontiers = [s for s in sections if s.get("category") == "frontier"]
+    # The previous (deontic) reading spine, re-resolved against the current
+    # kernel and routed to the ledger by `include_deontic_spine` (2026-09-30).
+    ledger_spine = [s for s in sections if s.get("category") == "spine_ledger"]
 
     is_synthetic = not detailed and not countermodels and not frontiers and all(s.get("category") != "spine" for s in sections)
     if is_synthetic:
         spine = sections
-
-    # Opening: how-to-read, then The Argument at a Glance (only in full document mode)
-    if not is_synthetic:
-        for gl in render_reading_guide():
-            ap(gl)
-        # Phase 4: the two-column score. `score_claims` must be the GAPMAP claim
-        # rows, NOT the discovered ProofIR sections: those carry `proofs`, and
-        # reading `claims` off them silently yields an empty list, which is how
-        # 4b shipped as dead code behind a green build (VISIBILITY.md
-        # Correction 10). main() passes the real inventory.
-        if score_claims:
-            for gl in render_score_block(derive_score_data(score_claims, decls, node_map)):
-                ap(gl)
-        glance_lines = generate_argument_at_a_glance(spine, frontiers, countermodels)
-        for gl in glance_lines:
-            ap(gl)
 
     presentation_data = load_presentation_spine()
     policy = presentation_data.get("presentation_policy", {}) if presentation_data else {}
@@ -8152,6 +9183,79 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
     include_countermodels = policy.get("include_countermodels_appendix", False) if presentation_data else True
     include_frontiers = policy.get("include_frontiers_appendix", False) if presentation_data else True
     include_further = policy.get("include_further_investigations", True)
+    # READINGPATH.md §5: the reading path is the argument; the audit material
+    # (chain blocks, attribute table, natural deduction, definitions, ASCII
+    # chart) is gated into investigations/ledger.md by these flags.
+    _CTX["policy"] = policy
+    SINK_DEFS = _block_sink(policy, "include_definitions")
+    SINK_DERIV = _block_sink(policy, "include_natural_deduction")
+    SINK_SUPPORT = _block_sink(policy, "include_supporting_infrastructure")
+    SINK_OBSTRUCT = _block_sink(policy, "include_obstruction_details")
+    SINK_SUBSECT = _block_sink(policy, "include_subsections")
+    SINK_FRONTIERS = _block_sink(policy, "include_frontier_list")
+    SINK_ATTRIBUTES = _block_sink(policy, "include_attributes_table")
+    SINK_SYNTHESIS = _block_sink(policy, "include_synthesis_paragraph")
+    SINK_ART = _block_sink(policy, "include_chart_art")
+    SINK_PUSHBACK = _block_sink(policy, "include_full_pushback")
+    SINK_SUMMARY = _block_sink(policy, "include_summary_full")
+    SINK_GUIDE = _block_sink(policy, "include_full_guide")
+    SINK_DEONTIC = _block_sink(policy, "include_deontic_spine")
+    SINK_PILLARS = _block_sink(policy, "include_skeptical_pillars")
+    ARGUMENT_AUDIENCE = _argument_audience()
+
+    # Opening: how-to-read, then The Argument at a Glance (only in full document mode)
+    if not is_synthetic:
+        with ap.at(SINK_GUIDE, "guide"):
+            pass
+        guide_lines, guide_full = render_reading_guide()
+        for gl in guide_lines:
+            ap(gl)
+        if guide_full:
+            with ap.at(SINK_GUIDE, "guide"):
+                ap("---")
+                ap("")
+                ap("## How to Read This Deduction (full guide)")
+                ap("")
+                ap.extend(guide_full)
+        # Phase 4: the two-column score. `score_claims` must be the GAPMAP claim
+        # rows, NOT the discovered ProofIR sections: those carry `proofs`, and
+        # reading `claims` off them silently yields an empty list, which is how
+        # 4b shipped as dead code behind a green build (VISIBILITY.md
+        # Correction 10). main() passes the real inventory.
+        if score_claims:
+            for gl in render_score_block(derive_score_data(score_claims, decls, node_map)):
+                ap(gl)
+        glance_lines, glance_art = generate_argument_at_a_glance(spine, frontiers, countermodels)
+        for gl in glance_lines:
+            ap(gl)
+        with ap.at(SINK_ART, "chart"):
+            ap("---")
+            ap("")
+            ap("## The Whole Argument in One Map")
+            ap("")
+            ap("The ten steps above as a single box-drawing flowchart. Same derived "
+               "statuses, same nodes; kept here because it is the one view that "
+               "shows the whole deduction at once, and because 100 lines of ASCII "
+               "is not something to put in front of a reader on a phone.")
+            ap("")
+        ap.extend(glance_art, SINK_ART)
+        # The deontic route moved to the ledger with its map: the old flowchart
+        # described the old ten steps, so it moves with them rather than being
+        # replaced by the new one (2026-09-30).
+        if ledger_spine and SINK_DEONTIC == "ledger":
+            _lg_glance, _lg_art = generate_argument_at_a_glance(
+                ledger_spine, frontiers, countermodels,
+                chart_nodes="ledger_spine_nodes", chart_edges="ledger_edges")
+            with ap.at(SINK_DEONTIC, "deontic_spine"):
+                ap("")
+                ap("### The Deontic Route in One Map (the previous reading spine)")
+                ap("")
+                ap("The deontic ten steps as a single box-drawing flowchart, with the "
+                   "same derived statuses. Kept beside the route itself so the older "
+                   "argument can still be read as one whole chain.")
+                ap("")
+                ap.extend(_lg_art)
+                ap("")
 
     # 1. Main Proof Spine
     dedupe_defs = bool(policy.get("dedupe_shared_definitions", False))
@@ -8201,70 +9305,123 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
 
     for i, sec in enumerate(spine):
         sec_no, sec_bare = _section_ref(sec.get("title", ""))
+        ledger_mark = ap.mark()
         ap(f"## {sec['title']}")
         ap("")
-        if sec.get("summary"):
-            ap(sec["summary"])
+        # READINGPATH.md §5: the reading path gets the short, load-bearing claim
+        # (authored in formal/presentation_spine.json, always carrying a Lean
+        # anchor); the full multi-paragraph prose is ledger material, not a wall
+        # above the theorem rows.
+        claim = (sec.get("summary_short") or sec.get("explanation")
+                 or sec.get("summary") or "").strip()
+        if claim:
+            ap(claim)
             ap("")
+        if ARGUMENT_AUDIENCE and sec.get("disclosure"):
+            ap(f"> ⚠️ **Price disclosed —** {sec['disclosure']}")
+            ap("")
+        if sec.get("summary"):
+            with ap.at(SINK_SUMMARY, "summary"):
+                ap(sec["summary"])
+                ap("")
 
         if sec.get("investigation_link"):
             ap(f"*(Detailed technical proof & model analysis: [{sec['investigation_link']}]({sec['investigation_link']}))*")
             ap("")
 
-        if sec.get("pushback"):
-            ap("<details>")
-            ap("<summary>The skeptic's attack & the reply</summary>")
-            ap("")
-            ap(f"> **The skeptic tries —** {sec['pushback']}")
-            if sec.get("reply"):
-                ap(f"> **The reply / the frontier —** {sec['reply']}")
-            reb_target = sec.get("rebuttal_target")
-            reb_form = sec.get("rebuttal_formula")
-            if reb_target and decls and reb_target in decls:
-                reb_decl = decls[reb_target]
-                reb_file = reb_decl.get("file", "")
-                reb_name = reb_decl.get("name", reb_target.rsplit(".", 1)[-1])
-                reb_line = reb_decl.get("line", 1)
-                subst, vocab, cl = footprint_parts(reb_target)
-                fp_str = "0 substantive axioms" if not subst else f"substantive axioms: {', '.join(sorted({ax.rsplit('.', 1)[-1] for ax in subst}))}"
-                ap(">")
-                ap(f"> **Machine-Checked Kernel Rebuttal —** [`{reb_name}`](formal/Logos/{reb_file}#L{reb_line}) (Footprint: {fp_str}):")
-                if reb_form:
-                    ap(f"> `⊢ {reb_form}`")
-            ap("</details>")
-            ap("")
-        elif sec.get("reply"):
-            ap("<details>")
-            ap("<summary>The reply / the frontier</summary>")
-            ap("")
-            ap(f"> **The reply / the frontier —** {sec['reply']}")
-            ap("</details>")
-            ap("")
-
-        _render_route_definitions(sec, sec_no, sec_bare)
+        # The skeptic's move and the reply stay on the reading path — but
+        # uncollapsed: a hidden <details> buries the one thing the reader came
+        # for. Under `audience: "argument"` the README gets two plain lines
+        # drawn from the authored `*_short` fields and the ledger gets the full
+        # exchange plus the machine-checked kernel rebuttal. Under
+        # `audience: "full"` the pre-split <details> block is reproduced exactly,
+        # which is how READINGPATH.md §1 measures the refactor as
+        # behaviour-preserving.
+        pb_full = (sec.get("pushback") or "").strip()
+        rp_full = (sec.get("reply") or "").strip()
+        if SINK_PUSHBACK == "readme":
+            if pb_full or rp_full:
+                ap("<details>")
+                ap("<summary>The skeptic's attack & the reply</summary>" if pb_full
+                   else "<summary>The reply / the frontier</summary>")
+                ap("")
+                if pb_full:
+                    ap(f"> **The skeptic tries —** {pb_full}")
+                if rp_full:
+                    ap(f"> **The reply / the frontier —** {rp_full}")
+                reb_target = sec.get("rebuttal_target")
+                reb_form = sec.get("rebuttal_formula")
+                if reb_target and decls and reb_target in decls:
+                    reb_decl = decls[reb_target]
+                    reb_file = reb_decl.get("file", "")
+                    reb_name = reb_decl.get("name", reb_target.rsplit(".", 1)[-1])
+                    reb_line = reb_decl.get("line", 1)
+                    subst, vocab, cl = footprint_parts(reb_target)
+                    fp_str = "0 substantive axioms" if not subst else f"substantive axioms: {', '.join(sorted({ax.rsplit('.', 1)[-1] for ax in subst}))}"
+                    ap(">")
+                    ap(f"> **Machine-Checked Kernel Rebuttal —** [`{reb_name}`](formal/Logos/{reb_file}#L{reb_line}) (Footprint: {fp_str}):")
+                    if reb_form:
+                        ap(f"> `⊢ {reb_form}`")
+                ap("</details>")
+                ap("")
+        else:
+            pb = (sec.get("pushback_short") or pb_full).strip()
+            rp = (sec.get("reply_short") or rp_full).strip()
+            if pb:
+                ap(f"> **The skeptic tries —** {pb}")
+            if rp:
+                ap(f"> **The reply —** {rp}")
+            if pb or rp:
+                ap("")
+            with ap.at(SINK_PUSHBACK, "pushback"):
+                if pb_full:
+                    ap(f"> **The skeptic tries —** {pb_full}")
+                if rp_full:
+                    ap(f"> **The reply / the frontier —** {rp_full}")
+                reb_target = sec.get("rebuttal_target")
+                reb_form = sec.get("rebuttal_formula")
+                if reb_target and decls and reb_target in decls:
+                    reb_decl = decls[reb_target]
+                    reb_file = reb_decl.get("file", "")
+                    reb_name = reb_decl.get("name", reb_target.rsplit(".", 1)[-1])
+                    reb_line = reb_decl.get("line", 1)
+                    subst, vocab, cl = footprint_parts(reb_target)
+                    fp_str = "0 substantive axioms" if not subst else f"substantive axioms: {', '.join(sorted({ax.rsplit('.', 1)[-1] for ax in subst}))}"
+                    ap("")
+                    ap(f"**Machine-Checked Kernel Rebuttal —** [`{reb_name}`](formal/Logos/{reb_file}#L{reb_line}) (Footprint: {fp_str}):")
+                    if reb_form:
+                        ap(f"`⊢ {reb_form}`")
+        with ap.at(SINK_DEFS, "definitions"):
+            _render_route_definitions(sec, sec_no, sec_bare)
 
         for proof in sec.get("primary_proofs", sec.get("proofs", [])):
             _render_step(proof, sec_no, sec_bare)
 
         if sec.get("supporting_proofs"):
-            ap("<details>")
-            ap(f"<summary>Supporting Infrastructure — {len(sec['supporting_proofs'])} auxiliary theorem(s) beneath this step</summary>")
-            ap("")
-            for proof in sec.get("supporting_proofs", []):
-                _render_step(proof, sec_no, sec_bare)
-            ap("</details>")
-            ap("")
+            with ap.at(SINK_SUPPORT, "supporting"):
+                ap("<details>")
+                ap(f"<summary>Supporting Infrastructure — {len(sec['supporting_proofs'])} auxiliary theorem(s) beneath this step</summary>")
+                ap("")
+                for proof in sec.get("supporting_proofs", []):
+                    _render_step(proof, sec_no, sec_bare)
+                ap("</details>")
+                ap("")
 
         for proof in sec.get("obstruction_proofs", []):
-            ap("<details>")
-            ap(f"<summary>Obstruction / Formal Boundary: `{proof.name}`</summary>")
-            ap("")
-            ap(f"### Obstruction / Formal Boundary: `{proof.name}`")
-            ap("")
-            _render_step(proof, sec_no, sec_bare)
-            ap("</details>")
-            ap("")
-
+            with ap.at(SINK_OBSTRUCT, "obstruction"):
+                ap("<details>")
+                ap(f"<summary>Obstruction / Formal Boundary: `{proof.name}`</summary>")
+                ap("")
+                ap(f"### Obstruction / Formal Boundary: `{proof.name}`")
+                ap("")
+                _render_step(proof, sec_no, sec_bare)
+                ap("</details>")
+                ap("")
+            if SINK_OBSTRUCT == "ledger":
+                ap(f"> 🚧 **Formal boundary —** `{proof.name}` is proved *not* to follow; "
+                   f"the countermodel and its full pricing are in "
+                   f"[the ledger](investigations/ledger.md).")
+                ap("")
         for sub in sec.get("subsections", []):
             sub_proofs = []
             if sub.get("groups"):
@@ -8273,38 +9430,47 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
             else:
                 sub_proofs = sub.get("proofs", [])
             thm_count = len(sub_proofs)
-            count_str = f" ({thm_count} machine-checked theorems)" if thm_count else ""
-
-            ap("<details>")
-            ap(f"<summary><b>{sub['title']}</b>{count_str} — click to expand</summary>")
-            ap("")
-            ap(f"### {sub['title']}")
-            ap("")
-            if sub.get("summary"):
-                ap(sub["summary"])
+            with ap.at(SINK_SUBSECT, "subsection"):
+                count_str = f" ({thm_count} machine-checked theorems)" if thm_count else ""
+                ap("<details>")
+                ap(f"<summary><b>{sub['title']}</b>{count_str} — click to expand</summary>")
                 ap("")
-            groups = sub.get("groups")
-            if groups:
-                for g in groups:
-                    if not g.get("proofs"):
-                        continue
-                    if g.get("label"):
-                        ap(g["label"])
-                        ap("")
-                    for proof in g.get("proofs", []):
+                ap(f"### {sub['title']}")
+                ap("")
+                if sub.get("summary"):
+                    ap(sub["summary"])
+                    ap("")
+                groups = sub.get("groups")
+                if groups:
+                    for g in groups:
+                        if not g.get("proofs"):
+                            continue
+                        if g.get("label"):
+                            ap(g["label"])
+                            ap("")
+                        for proof in g.get("proofs", []):
+                            _render_step(proof, sec_no, sec_bare)
+                else:
+                    for proof in sub.get("proofs", []):
                         _render_step(proof, sec_no, sec_bare)
-            else:
-                for proof in sub.get("proofs", []):
-                    _render_step(proof, sec_no, sec_bare)
-            ap("</details>")
-            ap("")
-
+                ap("</details>")
+                ap("")
+            if SINK_SUBSECT == "ledger" and thm_count:
+                ap(f"> 📚 **{sub['title']}** — {thm_count} machine-checked theorems; "
+                   f"the proofs and their full prose are in "
+                   f"[the ledger](investigations/ledger.md).")
+                ap("")
         for b in sec.get("branches", []):
+            b_claim = (b.get("summary_short") or b.get("summary") or "").strip()
             ap(f"### {b['title']}")
             ap("")
-            if b.get("summary"):
-                ap(b["summary"])
+            if b_claim:
+                ap(b_claim)
                 ap("")
+            if b.get("summary"):
+                with ap.at(SINK_SUMMARY, "summary"):
+                    ap(b["summary"])
+                    ap("")
             if b.get("investigation_link"):
                 ap(f"*(Detailed technical proof & model analysis: [{b['investigation_link']}]({b['investigation_link']}))*")
                 ap("")
@@ -8318,20 +9484,22 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
             for proof in b.get("primary_proofs", []):
                 _render_step(proof, sec_no, sec_bare)
             if b.get("supporting_proofs"):
-                ap("<details>")
-                ap(f"<summary>Supporting Infrastructure — {len(b['supporting_proofs'])} auxiliary theorem(s) beneath this branch</summary>")
-                ap("")
-                for proof in b.get("supporting_proofs", []):
-                    _render_step(proof, sec_no, sec_bare)
-                ap("</details>")
-                ap("")
+                with ap.at(SINK_SUPPORT, "supporting"):
+                    ap("<details>")
+                    ap(f"<summary>Supporting Infrastructure — {len(b['supporting_proofs'])} auxiliary theorem(s) beneath this branch</summary>")
+                    ap("")
+                    for proof in b.get("supporting_proofs", []):
+                        _render_step(proof, sec_no, sec_bare)
+                    ap("</details>")
+                    ap("")
             for proof in b.get("obstruction_proofs", []):
-                ap("<details>")
-                ap(f"<summary>Obstruction / Formal Boundary: `{proof.name}`</summary>")
-                ap("")
-                _render_step(proof, sec_no, sec_bare)
-                ap("</details>")
-                ap("")
+                with ap.at(SINK_OBSTRUCT, "obstruction"):
+                    ap("<details>")
+                    ap(f"<summary>Obstruction / Formal Boundary: `{proof.name}`</summary>")
+                    ap("")
+                    _render_step(proof, sec_no, sec_bare)
+                    ap("</details>")
+                    ap("")
 
         out_edges = edges_by_from.get(sec.get("id"), [])
         for e in out_edges:
@@ -8343,11 +9511,38 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
                 dir_label = "▲ Discovery" if direction == "discovery" else ("▼ Ontological Grounding" if direction == "grounding" else "➔ Continuation")
                 rel = e.get("relation", "")
                 ap(f"> ➔ **Linear Forward Transition to Step {to_no} ({to_bare}):** [{dir_label} · *{rel}*]")
-                ap("")
 
-        if i < len(spine) - 1:
-            ap("---")
+        # READINGPATH.md §5: stamp the ledger's per-section heading only if this
+        # section actually contributed ledger material, so the ledger carries no
+        # empty shells.
+        if ARGUMENT_AUDIENCE and len(ap.get("ledger")) > ledger_mark:
+            ap.get("ledger")[ledger_mark:ledger_mark] = [
+                f"## §{sec_no} — {sec_bare}", "",
+            ]
+    # 1b. The argument sections that are not spine steps: the epistemics batch,
+    #     the necessary-ground profile, the instrument limits, the boundaries.
+    if ARGUMENT_AUDIENCE:
+        for line in render_reading_sections(policy):
+            ap(line)
+        ap("---")
+        ap("")
+
+    # 1c. The previous (deontic) reading spine, in full, in the ledger.
+    #     READINGPATH.md §7 / NIHILISM_DIE.md §16: the reading path is the
+    #     meaning route; this chain is kept whole, priced step by step, because
+    #     it is the route that established ought, choice and personal grounding,
+    #     and the ledger's job is to lose nothing.
+    if ARGUMENT_AUDIENCE and ledger_spine and SINK_DEONTIC == "ledger":
+        with ap.at("ledger", "deontic_spine"):
+            ap("## The Deontic Route, in Full (the previous reading spine)")
             ap("")
+            ap("The reading path now argues by meaning (`Order → Meaning → Free Subject → Person`). "
+               "This is the earlier spine — ought, choice, free will, personal grounding — kept "
+               "verbatim and re-resolved against the current kernel, every step priced. Nothing here "
+               "was deleted: `scripts/ledger_superset.py` checks this chain against the pre-split "
+               "snapshot.")
+            ap("")
+            _emit_ledger_spine(ledger_spine, ap)
 
     # 2. Detailed Deductions (only if requested by presentation policy)
     if detailed and include_detailed:
@@ -8388,35 +9583,308 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
                 ap("")
                 render_proof_body(proof, ap)
 
-    # 4. Formal Frontiers (only if requested by presentation policy)
+    # 4. Formal Frontiers (only if requested by presentation policy). 15 of the
+    #    33 rows are RETIRED routes — settled negatives, not open questions — so
+    #    under the argument audience the whole list is ledger material and the
+    #    README keeps only the live count and a pointer.
     if frontiers and include_frontiers:
-        ap("---")
-        ap("")
-        ap("## Formal Frontiers")
-        ap("")
-        ap(FRONTIER_INTRO)
-        ap("")
-        for sec in frontiers:
-            for proof in sec.get("proofs", []):
-                doc_str = f" — {proof.doc}" if proof.doc else ""
-                ap(f"* **`{proof.name}`** (`{proof.goal}`){doc_str}")
-        ap("")
-        ap(OPEN_BRIDGES)
-        ap("")
+        with ap.at(SINK_FRONTIERS, "frontiers"):
+            ap("---")
+            ap("")
+            ap("## Formal Frontiers")
+            ap("")
+            ap(FRONTIER_INTRO)
+            ap("")
+            for sec in frontiers:
+                for proof in sec.get("proofs", []):
+                    doc_str = f" — {proof.doc}" if proof.doc else ""
+                    ap(f"* **`{proof.name}`** (`{proof.goal}`){doc_str}")
+            ap("")
+            ap(OPEN_BRIDGES)
+            ap("")
+        if SINK_FRONTIERS == "ledger":
+            n_rows = sum(len(s.get("proofs", [])) for s in frontiers)
+            ap(f"**{n_rows} formal frontiers** — every unproved step, every "
+               f"countermodel separation and every open bridge, with its exact "
+               f"missing lemma — are listed in "
+               f"[investigations/ledger.md](investigations/ledger.md). Nothing in "
+               f"that list is established; nothing in this file claims otherwise.")
+            ap("")
 
-    # 5. Classical-attributes status table (after the whole core deduction,
-    #    before the Further Investigations catalogue) — real-repository mode only.
+    # 5. Classical-attributes table + the 15 chain blocks are ledger material
+    #    (READINGPATH.md §1: 737 chain lines + 57k of attribute prose). The reading
+    #    path keeps the prose-free status table and the six pillars.
     if not is_synthetic and decls and len(decls) > 10 and _AUDIT:
-        for line in render_classical_attribute_status(decls, node_map):
+        attr_lines, synth_lines = render_classical_attribute_status(decls, node_map)
+        with ap.at(SINK_ATTRIBUTES, "attributes"):
+            ap.extend(attr_lines)
+        for line in render_established_profile(decls, node_map):
             ap(line)
-        for line in render_defense_against_attacks():
-            ap(line)
+        with ap.at(SINK_SYNTHESIS, "synthesis"):
+            ap.extend(synth_lines)
+        # The six-pillars table is the same seven attacks the cremation table now
+        # carries as DERIVED rows (§13). Keeping both would print the reader's
+        # sceptic twice and transcribe a footprint the kernel owns; the full
+        # table stays in the ledger, which is where hand-transcribed prose
+        # belongs now.
+        if SINK_PILLARS == "ledger":
+            with ap.at("ledger", "pillars"):
+                ap.extend(render_defense_against_attacks())
 
     if include_further:
         further = render_further_investigations(decls, investigations_dir)
-        L.extend(further)
+        # Catalogues live in investigations/catalogues.md (generated, same source);
+        # README keeps a pointer so the reading path stays the argument.
+        cat_path = ROOT / "investigations" / "catalogues.md"
+        cat_body = ("# Catalogues (generated — do not hand-edit)\n\n"
+                    "> Reference material moved out of `README.md` 2026-09-29 so the reading "
+                    "path stays the argument. Same generator, same derived statuses.\n\n"
+                    + "\n".join(further).rstrip() + "\n")
+        cat_path.write_text(cat_body, encoding="utf-8")
+        print(f"wrote {cat_path} ({len(cat_body.splitlines())} lines)")
+        ap("## Where the Rest of the Ledger Lives")
+        ap("")
+        ap("| What was moved out of the reading path | Where it lives |")
+        ap("|---|---|")
+        ap("| Every natural-deduction proof (40 blocks), the 14 step-by-step chain "
+           "blocks (206 rows), the 39 classical-attribute rows with full prose, the "
+           "ASCII flowchart, and the full per-step prose | "
+           "[investigations/ledger.md](investigations/ledger.md) |")
+        ap("| 100 retorsion theorems, the independence-frontier catalogue, the "
+           "countermodel catalogue and the investigation index | "
+           "[investigations/catalogues.md](investigations/catalogues.md) |")
+        ap("| The complete kernel audit, the axiom inventory (all 35, with tags and "
+           "dependents), the dependency ledger, the consistency checks and the code "
+           "annex | [investigations/kernel-audit.md](investigations/kernel-audit.md) |")
+        ap("")
+        ap("Generated, not editorial: one pass over the kernel emits both files, and the "
+           "superset check fails the build if anything is missing from their union. "
+           "Plan of record: [READINGPATH.md](READINGPATH.md).")
+        ap("")
 
     return L
+
+CELL_CAP = 900
+
+# The ledger is reference material, not the reading path, so a 7-link
+# classical-attribute row is not truncated there. The cap exists in the ledger
+# only to keep a runaway cell from swallowing a page; the full text is never
+# more than one click away and is never *absent*.
+LEDGER_CELL_CAP = 4000
+
+# Blocks that must reach the ledger when the audience is `argument`
+# (READINGPATH.md §6). `_lint_surfaces` fails the build if a gated block
+# reached neither sink, so the split cannot silently lose material.
+# Reading-path budgets (READINGPATH.md §5/§6). Visible = lines that are not
+# inside a <details> block; under the argument audience that is every line.
+# READINGPATH.md §5. 2026-09-30: 520 -> 522. The re-spool added two sections that
+# carry their own claim load (the price table of §11 and the One-God-in-three-Persons
+# row set of §12) and split one attribute row that had been carrying two claims; the
+# budget is amended rather than the material thinned, because the added rows are
+# exactly the price disclosures the split exists to make visible.
+# READINGPATH.md §5, 2026-09-30 (the Cremation): 522 -> 700. §13 stopped being a
+# badge table and became twelve derivations, each printing its premises, its
+# steps, its terminator and its price. That is ~169 lines the reader can check
+# instead of ~17 they must trust. The budget is amended rather than the proofs
+# thinned, because CREMATION.md's whole point is that a bare "PROVEN" badge
+# asserts what no reader can verify.
+README_VISIBLE_BUDGET = 700
+README_TOTAL_BUDGET = 710
+README_PARA_CAP = 300
+README_FACT_DEADLINE = 60
+
+LEDGER_REQUIRED_BLOCKS = (
+    "derivation", "definitions", "supporting", "obstruction", "subsection",
+    "frontiers", "attributes", "synthesis", "pushback", "summary",
+    "chart", "guide", "root", "pillars",
+    # 2026-09-30: the reading path now carries the *meaning* route. The previous
+    # deontic spine is not deleted — it is re-rendered from
+    # `ledger_spine_nodes` and must reach the ledger on every build, or the move
+    # would read as a deletion. `scripts/ledger_superset.py` is its check.
+    "deontic_spine",
+)
+
+BANNED_README_SNIPPETS = (
+    "describe worlds where no move",   # grants worldhood to a signature model (fixed 2026-09-29)
+    "READ THIS BEFORE ANY COUNTERMODEL",  # false in reading order; say GOVERNS (fixed 2026-09-29)
+)
+
+
+LEDGER_HEADER = """# The Ledger (generated — do not hand-edit)
+
+> Everything the reading path in [`README.md`](../README.md) deliberately does not
+> carry: every natural-deduction proof, all 14 step-by-step chain blocks with
+> every step priced, the 39 classical-attribute rows with their full prose and
+> references, the ASCII flowchart, the formal frontiers, and the full per-step
+> prose. Generated by the same pass over the same kernel as the README, with the
+> same derived statuses — there is no second source of truth and no
+> transcription. The plan of record is [`READINGPATH.md`](../READINGPATH.md).
+
+**Reading order if you are new:** read `README.md` first. Come here when a step
+says “full pricing”, “formal boundary”, or “supporting
+infrastructure”, or when you want the countermodel that stops a claim.
+"""
+
+def _lint_readme(lines: list[str]) -> None:
+    """Intelligibility gate (2026-09-29): the README must stay readable.
+
+    Fails the build on: any BANNED_README_SNIPPETS regression; any table cell
+    over CELL_CAP outside the score block (i.e. `_cap_table_cells` was bypassed);
+    any `## Further Investigations` catalogue body left in README (catalogues live
+    in investigations/catalogues.md). Facade rule (convention, enforced in review
+    not here): no prose block may stand above a table without a C-id or Lean
+    anchor in it — see AGENTS.md.
+    """
+    text = "\n".join(lines)
+    for bad in BANNED_README_SNIPPETS:
+        assert bad not in text, f"README regression: banned snippet present: {bad!r}"
+    in_score = False
+    for ln in lines:
+        s = ln.strip()
+        if s.startswith("## "):
+            in_score = s.startswith("## The score")
+            continue
+        if s.startswith("|") and not in_score:
+            for c in ln.split("|")[1:-1]:
+                head = c.split(" — [", 1)[0] if " — [" in c else c
+                if "](formal/" in c and head.strip() == c.strip():
+                    continue  # pure footer cell: exempt
+                assert len(head) <= CELL_CAP + 8, f"README cell over cap: {head[:80]!r}…"
+    assert "Retorsion catalogue —" not in text, "catalogues belong in investigations/catalogues.md"
+    assert "Countermodel catalogue —" not in text, "catalogues belong in investigations/catalogues.md"
+
+    # READINGPATH.md §6 — the reading path is the argument, and nothing else. These
+    # gates are what stop it rotting back into a ledger on the next edit.
+    policy = _CTX.get("policy", {}) or {}
+    if (policy.get("audience") or "full") != "argument":
+        return
+    assert "<details>" not in text and "</details>" not in text, (
+        "README is the argument audience and must have no collapsed <details> "
+        "(READINGPATH.md §5): every collapsed block belongs in investigations/ledger.md")
+    assert "step by step" not in text, (
+        "chain blocks belong in investigations/ledger.md, not on the reading path")
+    assert "\u2502" not in text and "\u250c" not in text, (
+        "the box-drawing ASCII flowchart belongs in investigations/ledger.md")
+    retired_rows = [l for l in lines
+                    if l.lstrip().startswith("* **`")
+                    and "RETIRED" in l.upper()]
+    assert not retired_rows, (
+        f"{len(retired_rows)} retired frontier row(s) on the reading path: retired "
+        f"routes are settled negatives, not open questions; they belong in "
+        f"investigations/ledger.md")
+    visible = [l for l in lines
+               if not l.strip().startswith("<") and not l.strip().startswith("</")]
+    assert len(visible) <= README_VISIBLE_BUDGET, (
+        f"README has {len(visible)} visible lines, budget is {README_VISIBLE_BUDGET} "
+        f"(READINGPATH.md §5). Move material to investigations/ledger.md; do not "
+        f"raise the budget without amending READINGPATH.md.")
+    in_score = False
+    for ln in lines:
+        s_ = ln.strip()
+        if s_.startswith("## "):
+            in_score = s_.startswith("## The score")
+            continue
+        if in_score or s_.startswith("|") or s_.startswith(">"):
+            continue
+        if len(ln) > README_PARA_CAP:
+            head = ln[:110]
+            raise AssertionError(
+                f"README paragraph over {README_PARA_CAP} chars: {head!r}… "
+                f"(READINGPATH.md §6). Move the detail to investigations/ledger.md.")
+    fact_at = text.find("for which meaning can mean")
+    if fact_at != -1:
+        line_no = text[:fact_at].count("\n") + 1
+        assert line_no <= README_FACT_DEADLINE, (
+            f"the thesis sentence appears at line {line_no}, budget is line "
+            f"{README_FACT_DEADLINE} (READINGPATH.md §6)")
+    else:
+        raise AssertionError(
+            "README must state the thesis sentence ‘for which meaning can "
+            "mean’ (the C553 FACT) — that is the one thing the file is for")
+
+
+def _lint_surfaces(doc: "_TwoSink", readme: list[str], ledger: list[str]) -> None:
+    """Nothing may fall out of both sinks (READINGPATH.md §6).
+
+    `_block_sink` decides a block’s destination; this asserts the decision was
+    actually carried out, so a typo in a flag name cannot quietly delete the
+    ledger (a missing flag defaults to the reading path, which is the safe
+    direction, but an *unknown* block name must not read as a pass)."""
+    policy = _CTX.get("policy", {}) or {}
+    if (policy.get("audience") or "full") != "argument":
+        assert not ledger, (
+            f"audience is 'full' but {len(ledger)} ledger lines were emitted")
+        return
+    got = doc.seen["ledger"]
+    missing = [b for b in LEDGER_REQUIRED_BLOCKS if b not in got]
+    assert not missing, (
+        f"gated blocks reached neither sink: {missing}. Every block named in "
+        f"LEDGER_REQUIRED_BLOCKS must be routed somewhere.")
+    assert ledger, "argument audience produced an empty ledger"
+    assert any(l.strip() for l in ledger), "argument audience produced a blank ledger"
+    assert len(readme) <= README_TOTAL_BUDGET, (
+        f"README is {len(readme)} lines total, budget is {README_TOTAL_BUDGET}")
+
+
+
+def _cap_table_cells(lines: list[str], cap: int = CELL_CAP) -> list[str]:
+    """Truncate over-long table prose cells (readability cap, 2026-09-29).
+
+    Applies to `|`-rows outside the score block (which stays verbatim): any cell
+    longer than `cap` chars and not a header/separator row is capped. Pure
+    footer cells (no prose before the first ` — [` link run) are exempt; mixed
+    prose+footer cells (attributes table) are split at the first ` — [` and only
+    the prose head is capped, footers preserved. Cut at the last sentence end
+    (else last space) before the cap, stray `**` closed, ` […]` appended. Full
+    text stays one click away via the row's existing Lean footer link, so this is
+    presentation, never content loss. Keeps short rows (incl. the whole necessity
+    batch) intact.
+
+    The gate is on the *prose head* of a cell, not its total length: a cell that
+    is mostly footer links must not be truncated (fixed 2026-09-29 — the length
+    test used to run over the whole cell, which clipped the C181 sentence).
+    """
+    out: list[str] = []
+    in_score = False
+    for ln in lines:
+        s = ln.strip()
+        if s.startswith("## "):
+            in_score = s.startswith("## The score")
+            out.append(ln)
+            continue
+        if not s.startswith("|") or in_score:
+            out.append(ln)
+            continue
+        cells = ln.split("|")
+        body_cells = [c for c in cells[1:-1]]
+        if not body_cells or all(set(c.strip()) <= {"-", "—", ""} for c in body_cells):
+            out.append(ln)  # separator row
+            continue
+        changed = False
+        new_cells = []
+        for c in body_cells:
+            stripped = c.strip()
+            if not stripped or stripped.startswith("---"):
+                new_cells.append(c)
+                continue
+            head, sep, tail = c.partition(" — [")
+            if not sep:
+                new_cells.append(c)  # pure footer/links cell: exempt
+                continue
+            if len(head) <= cap:
+                new_cells.append(c)  # prose fits; long footers are links, not prose
+                continue
+            cut = head.rfind(". ", 0, cap)
+            if cut < cap // 2:
+                cut = head.rfind(" ", 0, cap)
+            head = head[:cut].rstrip() + " [\u2026]"
+            if head.count("**") % 2:
+                head += "**"
+            new_cells.append(head + sep + tail)
+            changed = True
+        out.append("|" + "|".join(new_cells) + "|" if changed else ln)
+    return out
+
 
 def render_ledger_tables(sections: list) -> list:
     L = []
@@ -8650,8 +10118,17 @@ def main():
 
     dissolved = [c["id"] for c in all_claims
                  if philo_status(c, node_map) == "DISSOLVED"]
-    assert len(dissolved) == 7, (
-        f"expected 7 dissolved aliases (F1a, F3, F4, F5, F7, FAITH-1, FAITH-2), "
+    # `F1bUncond` joined this set on 2026-09-30, and not by fiat: it now resolves
+    # to the same kernel node as C278 (`AsieticChoice.freeWill_exists`), because
+    # that is what proves it. `build_canonical_map` dissolves rows that share a
+    # node, so the machine derived "this frontier row is the claim that answers
+    # it" before anyone wrote it down. The GAPMAP row keeps the word SUPERSEDED
+    # and the full correction; the *displayed* status is the derived DISSOLVED
+    # cross-reference, which is the honest reading in both directions.
+    expected_dissolved = {"F1a", "F1bUncond", "F3", "F4", "F5", "F7",
+                          "FAITH-1", "FAITH-2"}
+    assert set(dissolved) == expected_dissolved, (
+        f"expected exactly the dissolved aliases {sorted(expected_dissolved)}, "
         f"got {len(dissolved)}: {sorted(dissolved)}")
     for a, b in canonical_of.items():
         assert b in all_ids, f"alias {a} targets unknown claim {b}"
@@ -8689,6 +10166,10 @@ def main():
     reading_order_list = READING_ORDER or [c["id"] for c in all_claims]
     _CTX.update({
         "decls": decls, "node_map": node_map, "graph": graph,
+        # `compiled` was published by `build_all_sections` (it is built there,
+        # not in `main`); declared here so the derived tables fail loudly rather
+        # than silently resolving against an empty table.
+        "compiled": _CTX.get("compiled", {}),
         "claims_by_id": claims_by_id, "by_full": by_full, "by_id": by_id,
         "glosses": glosses, "ax_id": ax_id, "ax_shown": set(),
         "axiom_full": axiom_full, "countermodels": countermodels, "seen": {},
@@ -8732,12 +10213,21 @@ def main():
     print("rendering README.md…")
     def_registry = {}
     deduction_sections = discover_deduction_sections(sections, decls, node_map, graph, def_registry)
-    lines = render_deduction_sections(deduction_sections, decls, node_map, score_claims=all_claims)
+    # Two sinks, one pass (READINGPATH.md §1/§5): the reader-facing argument and the audit
+    # ledger are emitted by the same render, so a block cannot be edited out of
+    # one and forgotten in the other.
+    doc = render_deduction_sections(deduction_sections, decls, node_map, score_claims=all_claims)
+    readme_lines = doc.get("readme")
+    ledger_lines = doc.get("ledger")
 
     # Classical-attributes table honesty: live kernel/ledger must still match the
     # declared buckets (a future theorem would fail regeneration loudly here).
     verify_classical_attribute_status(decls, node_map)
 
+    # `ax_shown` is seeded by render_compact_axiom_ledger() above, which
+    # introduces all 35 axioms in investigations/kernel-audit.md, so this check
+    # is satisfied by the audit surface rather than by the README. It is kept
+    # here as the "no axiom is unaccounted for anywhere" guard.
     missing_ax = set(ax_id) - _CTX["ax_shown"]
     assert not missing_ax, f"axioms never introduced inline: {sorted(missing_ax)}"
 
@@ -8751,7 +10241,7 @@ def main():
         p = proof_of(c)
         assert p and p.endswith("∎"), f"Active claim {c['id']} generated invalid proof: {repr(p)}"
         
-    out_text = "\n".join(lines)
+    out_text = "\n".join(readme_lines)
     sec3_start = out_text.find("## 3. A dedução")
     sec3_end = out_text.find("## 4. O mapa da dedução")
     if sec3_start != -1 and sec3_end != -1:
@@ -8759,9 +10249,20 @@ def main():
         for bad in (r"\;", r"\,", r"\neg", r"\forall", r"\exists", r"\land", r"\lor"):
             assert bad not in sec3_text, f"Found LaTeX artifact {bad} in Section 3 of README.md"
 
-    body = "\n".join(lines).rstrip() + "\n"
+    readme_lines = _cap_table_cells(readme_lines)
+    ledger_lines = _cap_table_cells(ledger_lines, cap=LEDGER_CELL_CAP)
+    _lint_readme(readme_lines)
+    _lint_surfaces(doc, readme_lines, ledger_lines)
+    body = "\n".join(readme_lines).rstrip() + "\n"
     OUT_PATH.write_text(body, encoding="utf-8")
-    print(f"wrote {OUT_PATH} ({len(body.splitlines())} lines)")
+    print(f"wrote {OUT_PATH} ({len(body.splitlines())} lines, "
+          f"{sum(1 for l in readme_lines if not l.strip().startswith('<') and not l.strip().startswith('</'))} visible)")
+
+    ledger_path = ROOT / "investigations" / "ledger.md"
+    ledger_lines = LEDGER_HEADER.splitlines() + [""] + ledger_lines
+    ledger_body = "\n".join(ledger_lines).rstrip() + "\n"
+    ledger_path.write_text(ledger_body, encoding="utf-8")
+    print(f"wrote {ledger_path} ({len(ledger_body.splitlines())} lines)")
 
 if __name__ == "__main__":
     raise SystemExit(main())

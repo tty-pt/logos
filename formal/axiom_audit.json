@@ -1178,6 +1178,13 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
+ "Logos.AsieticChoice.freeSubject_exists": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Value.AxTwoSubjects"
+ ],
  "Logos.AsieticChoice.freeWill_exists": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",

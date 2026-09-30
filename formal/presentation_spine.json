@@ -4,14 +4,659 @@
   "project": "Logos",
   "title": "Authoritative Deductive Presentation Spine",
   "presentation_policy": {
+    "audience": "argument",
+    "ledger_target": "investigations/ledger.md",
     "include_main_spine": true,
     "include_detailed_appendix": false,
     "include_countermodels_appendix": false,
     "include_frontiers_appendix": true,
     "investigations_directory": "investigations",
-    "dedupe_shared_definitions": true
+    "dedupe_shared_definitions": true,
+    "include_full_pushback": false,
+    "include_summary_full": false,
+    "include_natural_deduction": false,
+    "include_definitions": false,
+    "include_supporting_infrastructure": false,
+    "include_obstruction_details": false,
+    "include_subsections": false,
+    "include_frontier_list": false,
+    "include_attributes_table": false,
+    "include_synthesis_paragraph": false,
+    "include_chart_art": false,
+    "include_full_guide": false,
+    "include_deontic_spine": false,
+    "include_skeptical_pillars": false
   },
   "spine_nodes": [
+    {
+      "id": "satisfaction_free",
+      "label": "SATISFACTION",
+      "title": "1. Satisfaction Is Free",
+      "formula": "¬N_T ∧ ¬N_F · bivalence: ∀ p, T p ∨ IsFalse p",
+      "explanation": "Right and wrong both obtain and every proposition is either the case or not; no subject appears in either statement.",
+      "summary": "The deduction begins by *giving away* the strongest point available to the nihilist. Right and wrong both obtain (`Core.rightWrongDistinction : ¬ N_T ∧ ¬ N_F`) and bivalence holds (`Core.bivalence : ∀ p, T p ∨ IsFalse p`, claim C12). Neither statement mentions a subject, and neither needs one. So the denial of the person is perfectly available at the level of satisfaction, and Γ does not pretend otherwise. What Γ does is refuse to stop there: being the case is free, being *true to someone* is not, and everything below is the machine-checked passage from the first to the second.",
+      "summary_short": "Right and wrong both obtain, and every proposition is either the case or not — with no subject anywhere in either statement. The denial of the person is available at exactly this level, so the argument must earn the next step rather than assume it.",
+      "pushback": "\"Satisfaction needs nobody. On your own first line, nothing binds you to a person — so the rest is rhetoric.\"",
+      "pushback_short": "\"Satisfaction needs nobody — on your own first line nothing binds you to a person.\"",
+      "reply": "Agreed, and this is why the argument does not rest here. Right and wrong as *satisfaction* are free; right and wrong as *disclosure* are right/wrong **to** a subject (step 2). The poles are at the act level (`Correct s p := A s p ∧ T p`), so the order is a structure someone stands in.",
+      "reply_short": "Agreed — and that is the point: satisfaction is free, disclosure is *to* someone. The poles are act-level, so the order is a structure someone stands in.",
+      "rebuttal_target": "Logos.DirectNormativeRetorsion.claims_correct_no_right_self_refuting",
+      "rebuttal_formula": "ClaimsCorrect s NoRight ∧ NoRight → ⊥",
+      "primary_targets": [
+        "rightWrongDistinction",
+        "bivalence"
+      ],
+      "disclosure": "0 substantive axioms. The concession costs nothing.",
+      "investigation_link": "investigations/right-and-wrong.md"
+    },
+    {
+      "id": "disclosure_to_someone",
+      "label": "DISCLOSURE",
+      "title": "2. Being True Is Being True To Someone",
+      "formula": "Correct s p → TrueTo s p → T p,  where TrueTo s p := Means s p ∧ T p",
+      "explanation": "Disclosure is right/wrong to a subject; satisfaction is free. The two are different levels, and only the second has a subject in it.",
+      "summary": "C562 `being_true_is_being_true_to`: the being-the-case is free, being-true is disclosure, and disclosure is always *to* someone. `TrueTo s p := Means s p ∧ T p`, and `Correct s p := A s p ∧ T p` is act-level, so the epistemic poles already carry a subject in their very definition. The chain `Correct → TrueTo → T` is a weakening twice over: what is correct is true-to, and what is true-to is the case. What the reader must not do is call bare `T p` satisfaction *true*; in a normative context \"true\" means truth-to-a-subject (C562), never satisfaction.",
+      "summary_short": "Disclosure is right/wrong **to** someone: `Correct → TrueTo → T`, where `TrueTo s p := Means s p ∧ T p`. The epistemic poles are act-level, so the order already carries a subject in its definition. Satisfaction is free; being-true is not.",
+      "pushback": "\"Truth-to-a-subject is just what you call truth when you have already assumed a subject.\"",
+      "pushback_short": "\"Truth-to-a-subject is just truth with a subject smuggled in.\"",
+      "reply": "It is a *definition*, not an assumption, and the direction of derivation is what matters: the order is real and person-independent (`¬N_T ∧ ¬N_F`), and what is real in that order is disclosure — an act performed to someone. Read the next two steps before answering: the order *forces* meaning, and meaning *forces* a subject.",
+      "reply_short": "A definition, not an assumption — and the derivation runs from the personless order to the personful consequence. Read the next two steps before answering.",
+      "rebuttal_target": "Logos.EpistemicNecessity.being_true_is_being_true_to",
+      "rebuttal_formula": "Correct s p → TrueTo s p → T p",
+      "primary_targets": [
+        "being_true_is_being_true_to"
+      ],
+      "supporting_targets": [
+        "Correct"
+      ],
+      "disclosure": "0 substantive axioms.",
+      "investigation_link": "investigations/right-and-wrong.md"
+    },
+    {
+      "id": "right_wrong_requires_meaning",
+      "label": "MEANING",
+      "title": "3. Right and Wrong Cannot Obtain Without Meaning",
+      "formula": "(∃ s p, Correct s p) ∨ (∃ s p, Incorrect s p) → ∃ p, Meaning_I p",
+      "explanation": "If right or wrong obtains anywhere, there is a content that is being meant. There is no reading of right/wrong on which meaning is optional.",
+      "summary": "C62 `rightWrong_implies_meaning`: a world in which correctness or incorrectness obtains anywhere is a world in which something is *meant*. This is the hinge of the whole deduction and it is why the deontic route (ought → choice) is not the spine: the epistemic poles are the ones the satisfaction-level concession cannot reach. Meaning is the term in which the denial fails first.",
+      "summary_short": "C62: right/wrong anywhere ⇒ something is meant. Meaning is the term in which the denial fails first — which is why the epistemic poles, not the deontic ones, carry the argument.",
+      "pushback": "\"A world of pure brute facts can still have correct and incorrect judgements — 'correct' just means 'fits the facts'.\"",
+      "pushback_short": "\"Brute facts alone can still be 'correct' — 'correct' just means 'fits the facts'.\"",
+      "reply": "Then 'correct' means conformity to a standard, and a standard is not a brute fact: it is what makes some things fit and others not, and it is meant. The kernel does not need your word for it; it needs `Meaning_I`, and right/wrong supplies it.",
+      "reply_short": "Then \"correct\" means conformity to a standard — and a standard is not a brute fact. It is what makes some things fit and others not, and it is meant.",
+      "rebuttal_target": "Logos.Order.rightWrong_implies_meaning",
+      "rebuttal_formula": "(∃ s p, Correct s p) ∨ (∃ s p, Incorrect s p) → ∃ p, Meaning_I p",
+      "primary_targets": [
+        "rightWrong_implies_meaning"
+      ],
+      "disclosure": "0 substantive axioms.",
+      "investigation_link": "investigations/right-and-wrong.md"
+    },
+    {
+      "id": "meaning_requires_subject",
+      "label": "SUBJECT",
+      "title": "4. Meaning Requires a Subject",
+      "formula": "Meaning_I p → ∃ s, Means s p",
+      "explanation": "There is no meaning without someone for whom it means. The contrapositive is the retraction: no subject who means, no right or wrong.",
+      "summary": "C49 `meaning_I_needs_subject : Meaning_I p → ∃ s, Means s p`, and its contrapositive as C560 `no_meaning_no_correctness`. Meaning is an act, `Means s p`, and an act has an agent. This is the structural reason the deduction reaches a person and not merely a law: not that a person is assumed, but that the notion of meaning has no content without one.",
+      "summary_short": "C49 `meaning_I_needs_subject`, contrapositive C560 `no_meaning_no_correctness`. Meaning is the act `Means s p`, and an act has an agent — this is why the deduction reaches a person and not merely a law.",
+      "pushback": "\"Meaning can be a feature of a language, a text, a world — not of a person.\"",
+      "pushback_short": "\"Meaning belongs to a language or a text, not to a person.\"",
+      "reply": "Then state the subject of `Means` and it is whatever does the meaning — and there is no candidate in the kernel's vocabulary that is not a subject. A text means *to* someone; the language means *for* someone. The kernel has one sort for this and it is `Subject`.",
+      "reply_short": "Then fill in the subject of `Means` and it is whatever does the meaning — a text means *to* someone, a language means *for* someone. The kernel has exactly one sort for this: `Subject`.",
+      "rebuttal_target": "Logos.Choice.meaning_I_needs_subject",
+      "rebuttal_formula": "Meaning_I p → ∃ s, Means s p",
+      "primary_targets": [
+        "meaning_I_needs_subject",
+        "no_meaning_no_correctness"
+      ],
+      "disclosure": "0 substantive axioms (`{Means, Subject}` for C49).",
+      "investigation_link": "investigations/contrastive-choice.md"
+    },
+    {
+      "id": "incompatible_poles",
+      "label": "INCOMPATIBILITY",
+      "title": "5. The Two Poles Cannot Both Be Correct",
+      "formula": "Incompatible (Correct s p) (Incorrect s p)",
+      "explanation": "Derived from Ought and OughtNot, never assumed. It is what makes the next step a determination rather than a verbal flourish.",
+      "summary": "`NormativeOrder.correctness_incompatible (s) (p)` is *derived* from `Ought`/`OughtNot` under `TruthNorm` (`NormativeOrder.lean:136`), never assumed. Its role is to make step 6 an inference about structure: a subject that means both poles is holding an incompatibility, and the act of holding one is the constitutive structure of choice, not an epithet.",
+      "summary_short": "Derived, not assumed: `Incompatible (Correct s p) (Incorrect s p)` from `Ought`/`OughtNot`. It is what makes step 6 a determination rather than a verbal flourish.",
+      "pushback": "\"Two propositions can both be false; 'incompatible' here is just logical disjointness, and holding a disjunction is trivial.\"",
+      "pushback_short": "\"'Incompatible' is just logical disjointness — and holding a disjunction is trivial.\"",
+      "reply": "Then what is trivial is the fact that *correct* and *incorrect* are mutually exclusive, which is normativity and not logic: the mutual exclusivity is of an ought and an ought-not. Meaning both poles is holding a norm that must be settled one way or the other.",
+      "reply_short": "Then the triviality is of an ought and an ought-not being exclusive — that is normativity, not logic. Meaning both poles is holding a norm that must be settled one way or the other.",
+      "rebuttal_target": "Logos.NormativeOrder.correctness_incompatible",
+      "rebuttal_formula": "Incompatible (Correct s p) (Incorrect s p)",
+      "primary_targets": [
+        "correctness_incompatible"
+      ],
+      "disclosure": "0 substantive axioms.",
+      "investigation_link": "investigations/contrastive-choice.md"
+    },
+    {
+      "id": "free_will",
+      "label": "FREE WILL",
+      "title": "6. Co-Meaning Both Poles Is Free Will",
+      "formula": "ClaimsNormativeCorrectness s p → Chooses s (Correct s p) (Incorrect s p) ∧ FreeWill s",
+      "explanation": "Free will, in the only sense the kernel can mean: non-determinism between incompatible alternatives, not the absence of causes.",
+      "summary": "C140 `claims_normative_correctness_derives_free_will`: `ClaimsNormativeCorrectness s p → Chooses s (Correct s p) (Incorrect s p) ∧ FreeWill s`, with `FreeWill s := ∃ p q, Chooses s p q` and `Chooses s p q := Means s p ∧ Means s q ∧ Incompatible p q`. This is the author's step, machine-checked. The price is conditionality on the epistemic stance and zero substantive axioms. Note what capital-F *Free* means here: freedom between incompatible alternatives, which is **not** the absence of a cause and **not** the word 'axiom-free'. A deterministic delayer may still co-mean an incompatibility and so still emits `FreeWill` — the kernel separates deliberative freedom from physical indeterminism (`hostile_model_b_determinism_precludes_alternative_availability` excludes only the deliberation-free case).",
+      "summary_short": "C140: a stance co-meaning both poles emits `Chooses` and `FreeWill`. Capital-F *Free* is non-determinism between incompatible alternatives — not absence of cause, and not 'axiom-free'.",
+      "pushback": "\"This is definitional inflation. You have renamed 'grasping a dilemma' as free will.\"",
+      "pushback_short": "\"Definitional inflation — you renamed 'grasping a dilemma' as free will.\"",
+      "reply": "The renaming is the classical claim, and the kernel does not leave it as a renaming: `FreeWill` is `∃ p q, Chooses s p q`, `Chooses` is the *constitutive* condition of choice, and denying the co-grasp while accepting the choice is a contradiction (`d7_co_grasp_is_definitionally_choice`). What the critic owes is an account of choice in which that is not the case.",
+      "reply_short": "`Chooses` is the *constitutive* condition of choice: deny the co-grasp while accepting the choice and you have a contradiction (`d7_co_grasp_is_definitionally_choice`). The critic owes an account of choice in which that is not so.",
+      "rebuttal_target": "Logos.NormativeOrder.claims_normative_correctness_derives_free_will",
+      "rebuttal_formula": "ClaimsNormativeCorrectness s p → Chooses s (Correct s p) (Incorrect s p) ∧ FreeWill s",
+      "primary_targets": [
+        "claims_normative_correctness_derives_free_will"
+      ],
+      "disclosure": "conditional on `ClaimsNormativeCorrectness`; **0 substantive axioms**. Unconditional existence of a free subject is §11's third row.",
+      "investigation_link": "investigations/free-will.md"
+    },
+    {
+      "id": "person",
+      "label": "PERSON",
+      "title": "7. Free Will Is a Person",
+      "formula": "FreeWill s → Person s",
+      "explanation": "Person is the Thomistic core: an individual substance of a rational nature with dominion over its acts.",
+      "summary": "C221 `freeWill_implies_person`, `Person s := ThomisticPersonCore s` — the Boethius–Aquinas criterion: individual substance, rational nature, dominion over acts. The price is the declared **VOCAB** law `will_individuation`, and the kernel checks that this law is *underivable*: the model `SharedWillModel` (`{}`, C226) satisfies the pre-will spine — `Subject := Bool`, `subjectWill := fun _ => ()` — and there the law is false. So personhood is a theorem with a named and checked price, not an identity smuggled in.",
+      "summary_short": "C221 `freeWill_implies_person`; `Person := ThomisticPersonCore` (substance, rational nature, dominion over acts). The price is the VOCAB law `will_individuation`, and the kernel *checks* it is underivable (`SharedWillModel`, `{}`).",
+      "pushback": "\"That is exactly the anthropomorphic smuggling you promised to avoid.\"",
+      "pushback_short": "\"That is the anthropomorphic smuggling you promised to avoid.\"",
+      "reply": "The price is named, tagged VOCAB, and separated machine-checked — which is the opposite of smuggling. If personhood were free, `free_subject_is_person` would need no axiom; it needs exactly one, and the kernel exhibits the model in which that axiom fails.",
+      "reply_short": "The price is named, tagged VOCAB and machine-separated. If personhood were free the theorem would need no axiom; it needs exactly one, and `SharedWillModel` exhibits where it fails.",
+      "rebuttal_target": "Logos.Person.freeWill_implies_person",
+      "rebuttal_formula": "FreeWill s → Person s",
+      "primary_targets": [
+        "freeWill_implies_person",
+        "person_iff_thomisticCore"
+      ],
+      "disclosure": "priced on the declared VOCAB law `will_individuation`; 0 substantive axioms. The price is checked to be underivable (`SharedWillModel`, `{}`).",
+      "investigation_link": "investigations/divine-personhood.md"
+    },
+    {
+      "id": "person_grounds_poles",
+      "label": "GROUNDING",
+      "title": "8. That Person Grounds the Poles",
+      "formula": "GroundsRightWrongAt s (Correct s p) (Incorrect s p) ∧ Person s",
+      "explanation": "Grounding is neither identity nor causation. The person is indexed at the pole pair — the reverse direction is stance-guarded by design.",
+      "summary": "C525 `epistemic_polarity_is_personally_grounded` and C527 `the_person_grounds_the_epistemic_right_wrong`. The content that grounds the right/wrong distinction at the epistemic poles is a person, not a law of nature and not an atom. Grounding is neither identity nor efficient causation: the Person is *indexed at the pole pair*, `GroundsRightWrongAt s (Correct s p) (Incorrect s p)`, and C527's reverse direction is stance-guarded by design, so the grounding is read in one direction only. `EntityMeans Entity.ofGround := True` is the kernel's own word for the irrelevance of efficient causation here — a `def` bridge, disclosed rather than hidden.",
+      "summary_short": "C525/C527: what grounds right/wrong **at the epistemic poles** is a person. Grounding is neither identity nor causation; the Person is indexed at the pole pair and the reverse direction is stance-guarded by design.",
+      "pushback": "\"Grounding a distinction is just being an instance of it. You have made a category into a cause.\"",
+      "pushback_short": "\"Grounding a distinction is just being an instance of it — a category dressed as a cause.\"",
+      "reply": "The kernel refuses both halves of that. It refuses identity (`GroundsRightWrong` is not `=`) and it refuses causation (`EntityMeans Entity.ofGround := True`, so causal contact is irrelevant by construction). The pole pair is what the Person grounds; that is the whole claim, and it is narrower than a cause and stronger than an instance.",
+      "reply_short": "It refuses identity (`GroundsRightWrong` is not `=`) and causation (`EntityMeans ofGround := True`). The Person grounds the *pole pair* — narrower than a cause, stronger than an instance.",
+      "rebuttal_target": "Logos.EpistemicPersonalGround.the_person_grounds_the_epistemic_right_wrong",
+      "rebuttal_formula": "GroundsRightWrongAt s (Correct s p) (Incorrect s p) ∧ Person s",
+      "primary_targets": [
+        "epistemic_polarity_is_personally_grounded",
+        "the_person_grounds_the_epistemic_right_wrong"
+      ],
+      "disclosure": "0 substantive axioms; the `def` bridge `EntityMeans ofGround := True` is disclosed in §13.",
+      "investigation_link": "investigations/grounding.md"
+    },
+    {
+      "id": "the_fact",
+      "label": "THE FACT",
+      "title": "9. The Fact",
+      "formula": "ClaimsNormativeCorrectness s p → (∃ w, w = subjectWill s) ∧ FreeWill s ∧ FreeSubject s ∧ Person s ∧ Means s (Correct s p) ∧ Means s (Incorrect s p)",
+      "explanation": "The whole deduction in one sentence, in three formally distinct strengths: pointwise-conditional, existential, and propositional.",
+      "summary": "C553, in three strengths, and the difference between them is the difference between honesty and overclaim. **Pointwise, conditional** (C553): given the epistemic stance at `s`, the subject is num individuated (`∃ w, w = subjectWill s`), free (`FreeWill`), free as a *subject* (`FreeSubject` — the same predicate, `FreeSubject := FreeWill`), a person, and the meaner of both poles. **Existential** (C555): the order obtains somewhere, so a free being obtains somewhere. **Propositional** (C556, footprint `{}`): in every model of the signature, some subject is free and some content is meant — this last one discharges `order_needs_a_meaning_being` and is the form in which the order is a premise rather than a conclusion. All three are 0 substantive axioms; the price is `will_individuation` plus the stance.",
+      "summary_short": "C553 pointwise-conditional, C555 existential, C556 propositional (`{}`). Three strengths, one sentence: the order entails a free being for which meaning can mean.",
+      "pushback": "\"A conditional on a stance you inserted is not a conclusion.\"",
+      "pushback_short": "\"A conditional on an inserted stance is not a conclusion.\"",
+      "reply": "Then use C556, which has no stance: in every model of the signature some subject is free and some content is meant. And the unconditional existence statement is §11's third row — priced on one META bridge, which is where a price belongs: on the route, named, never hidden in a predicate.",
+      "reply_short": "Then use C556: no stance, and in every model some subject is free and some content is meant. The unconditional existence row is §11's third — one META bridge, named.",
+      "rebuttal_target": "Logos.EpistemicPersonalGround.epistemic_order_requires_a_free_meaning_being",
+      "rebuttal_formula": "∀ M : Model.Signature, ∃ s, M.Free s ∧ ∃ c, M.Means s c",
+      "primary_targets": [
+        "epistemic_right_wrong_requires_a_free_being_for_which_meaning_can_mean",
+        "epistemic_normativity_somewhere_yields_a_free_being",
+        "epistemic_order_requires_a_free_meaning_being"
+      ],
+      "disclosure": "**0 substantive axioms.** Existence *from Γ's primitives alone* is §11's third row, priced on one META bridge (`AxTwoSubjects`).",
+      "investigation_link": "investigations/grounding.md"
+    },
+    {
+      "id": "composed_chain",
+      "label": "THE CHAIN, COMPOSED",
+      "title": "10. The Chain, Composed — Both Directions",
+      "formula": "¬(∃ s, Means s p) → ¬(∃ s p, Correct s p) ∧ ¬(∃ s p, Incorrect s p)",
+      "explanation": "No subject who means, no epistemic right or wrong anywhere; and in the other direction the order entails the act, so the performative axiom is not this argument's price.",
+      "summary": "C561 `no_subject_who_means_no_epistemic_right_wrong`: without a subject who means, correctness obtains nowhere and incorrectness obtains nowhere. And C557 `epistemic_order_makes_the_act_datum_necessary`: the order **entails** `∃ s p, Act s p` at `{Initiates, Means, State, Subject}`. That second one is what stops the performative axiom from being mistaken for the price of this direction: `performative_act_datum` (C454, the single `Tag: TRANS` axiom of Γ) pays for the *unconditional* `∃ s, Act s p`, which is a different question. The GAPMAP row `F1bUncond` used to claim the unconditional existence of a free subject was still BLOCKED on `rejectedHornCoMeant` — a lemma that belongs to F11 and never blocked it; C278 had already proved it. The row is now marked SUPERSEDED.",
+      "summary_short": "C561 (no subject who means → no right/wrong anywhere) and C557 (the order *entails* the act). The single TRANS axiom pays for the unconditional `∃ s, Act s p` — a different question. `F1bUncond`: SUPERSEDED.",
+      "pushback": "\"Your whole argument is a contrapositive about meaning. Nothing here touches physics.\"",
+      "pushback_short": "\"A contrapositive about meaning. Nothing here touches physics.\"",
+      "reply": "It does not need to. What Γ claims is that a world in which the epistemic order obtains and no one means anything is not a world with a different physics but a world with no such state — and the countermodels that could show otherwise are exactly the ones §12 lists as bounded, not open.",
+      "reply_short": "It does not need to: the claim is that the meaningless world is not a world with different physics but a world with no such state. The countermodels that could show otherwise are §12's bounded rows.",
+      "rebuttal_target": "Logos.EpistemicNecessity.epistemic_order_makes_the_act_datum_necessary",
+      "rebuttal_formula": "(∃ s, ∃ p, ClaimsNormativeCorrectness s p) → ∃ s, ∃ p, Act s p",
+      "primary_targets": [
+        "no_subject_who_means_no_epistemic_right_wrong",
+        "epistemic_order_makes_the_act_datum_necessary"
+      ],
+      "disclosure": "0 substantive axioms in both directions.",
+      "investigation_link": "investigations/right-and-wrong.md"
+    }
+  ],
+  "edges": [
+    {
+      "from": "satisfaction_free",
+      "to": "disclosure_to_someone",
+      "relation": "satisfaction is free; disclosure is not",
+      "direction": "distinction"
+    },
+    {
+      "from": "disclosure_to_someone",
+      "to": "right_wrong_requires_meaning",
+      "relation": "right/wrong is right/wrong-to-someone",
+      "direction": "discovery"
+    },
+    {
+      "from": "right_wrong_requires_meaning",
+      "to": "meaning_requires_subject",
+      "relation": "rightWrong_implies_meaning",
+      "direction": "discovery"
+    },
+    {
+      "from": "meaning_requires_subject",
+      "to": "incompatible_poles",
+      "relation": "a subject that means holds a norm",
+      "direction": "discovery"
+    },
+    {
+      "from": "incompatible_poles",
+      "to": "free_will",
+      "relation": "co-meaning an incompatibility IS choice",
+      "direction": "discovery"
+    },
+    {
+      "from": "free_will",
+      "to": "person",
+      "relation": "priced theorem [Person := ThomisticPersonCore; via will_individuation]",
+      "direction": "discovery"
+    },
+    {
+      "from": "person",
+      "to": "person_grounds_poles",
+      "relation": "the Person grounds the epistemic pole pair",
+      "direction": "grounding"
+    },
+    {
+      "from": "person_grounds_poles",
+      "to": "the_fact",
+      "relation": "THE FACT — the composed statement",
+      "direction": "conclusion"
+    },
+    {
+      "from": "the_fact",
+      "to": "composed_chain",
+      "relation": "contrapositives composed [C557 entailment, C561 retraction]",
+      "direction": "retorsion"
+    }
+  ],
+  "reading_sections": [
+    {
+      "id": "necessity_and_its_price",
+      "title": "11. Necessity, and Exactly What It Costs",
+      "body": [
+        "Three rows, because they are three different facts. **The order is necessary with no premise at all.** A free subject exists on **one** META bridge. A necessary *person* is a **second** META axiom. Merging them into one claim is how an honest price becomes a dishonest boast.",
+        "The price attaches to the route, never to the name: `FreeSubject` is *defined* as `FreeWill` (`Choice.lean:185`, `freeSubject_iff_freeWill` is `Iff.rfl`), so `freeSubject_exists` and `freeWill_exists` carry the same footprint.",
+        "Before 2026-09-30 the surface priced the Free Subject dearer than free will for one identical predicate.",
+        "Necessity is the ground's, and the ground is not a subject-correlate: `ofGround_ne_ofSubject` (`{}`).",
+        "So \"the Free Subject is necessarily true\" is true of the *order* and of the *subject's existence* — and the necessary-person row is the one that would need C404. Say which, and the sentence is true."
+      ],
+      "price_table": [
+        {
+          "row": "The normative order is **necessary**",
+          "gloss": "∀ w, NormativeOrderAt w — at every world, unconditionally.",
+          "targets": [
+            "necessary_normative_order"
+          ]
+        },
+        {
+          "row": "The ground is **necessary**",
+          "gloss": "`Entity.ofGround` is modal-fragile-free; a `def` bridge (`NecessarySubjectKind`) is disclosed in §13.",
+          "targets": [
+            "NecessityEternity.ofGround_necessary_ground_of_reality"
+          ]
+        },
+        {
+          "row": "A **free subject exists**",
+          "gloss": "Unconditional existence, via `freeWill_exists`. The one META bridge is `AxTwoSubjects` — plural personal reality.",
+          "targets": [
+            "AsieticChoice.freeSubject_exists"
+          ]
+        },
+        {
+          "row": "**Free will** exists",
+          "gloss": "The same predicate under the other name; identical footprint by construction, not by coincidence.",
+          "targets": [
+            "AsieticChoice.freeWill_exists"
+          ]
+        },
+        {
+          "row": "A **person** has free will",
+          "gloss": "`Person s → FreeWill s`: 0 substantive axioms. Dominion over acts *is* free will (`Person.lean:56`).",
+          "targets": [
+            "Person.person_has_free_will"
+          ]
+        },
+        {
+          "row": "A **necessary person** exists",
+          "gloss": "C404/C407: the second META bridge (`necessaryPersonalSubjectExists`). This is the row that would have to be paid for a necessary Free Subject.",
+          "targets": [
+            "Plurality.necessarySubject_exists"
+          ]
+        },
+        {
+          "row": "The ground is **not** a subject-correlate",
+          "gloss": "`Entity.ofGround ≠ EntityOf s` for every `s`. The two necessities above are not identified.",
+          "targets": [
+            "NecessityEternity.ofGround_ne_ofSubject"
+          ]
+        }
+      ],
+      "claims": [
+        "C404",
+        "C407",
+        "C494",
+        "C495"
+      ]
+    },
+    {
+      "id": "one_god_three_persons",
+      "title": "12. One God, in Three Persons",
+      "body": [
+        "**One God; three Persons; one nature.** Γ's result is not a unitarian monad and not a trinity of three gods: it is one ground, of one nature, in which there are three distinct divine Persons.",
+        "All three are divine of the *same* `divineReality` (`the_father_is_divine`, `the_beloved_is_divine`, `the_spirit_is_divine`). Distinctness is personal, not substantial: the Persons are separated, while one ground and one nature carry the unity.",
+        "This is the Catholic and Nicene reading — *unus Deus, tres Personae*: one divine being in three persons, consubstantial, distinguished by procession and not by essence. The author is a **Catholic**; this is the reading he reads Γ as supporting.",
+        "The faith supplies the Persons; the kernel prices them (C510 rests on three declared META premises) and proves at `{}` that it cannot supply them for free (C109).",
+        "**What this is not.** Not three Gods: one ground (C320/C389), one nature (C440, *actus purus*, aseity), one shared `divineReality`. And not that Γ *proves* the Trinity — it proves the three Persons on declared premises, and proves that the premises are needed."
+      ],
+      "price_table": [
+        {
+          "row": "**One ground** of reality",
+          "targets": [
+            "FoundationalUnicity.exactly_one_universal_modal_ground"
+          ],
+          "gloss": "C320/C389: `∃! g, UniversalModalGround g`. Existence unconditional; uniqueness on the declared VOCAB bound `SemanticFinitude`."
+        },
+        {
+          "row": "**One nature** (una natura, *actus purus*)",
+          "targets": [
+            "DivineSimplicity.divine_simplicity_sole_bearer",
+            "CanonicalAseity.conditional_canonical_aseity"
+          ],
+          "gloss": "C440 divine simplicity as the sole bearer; aseity non-derived. 0 substantive axioms."
+        },
+        {
+          "row": "**Three distinct Persons**",
+          "targets": [
+            "DivineAgape.agape_entails_tripersonality"
+          ],
+          "gloss": "C510: `t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit`. **Priced on three declared META premises.**"
+        },
+        {
+          "row": "All three are **God** (one `divineReality`)",
+          "targets": [
+            "DivineAgape.the_father_is_divine",
+            "DivineAgape.the_beloved_is_divine",
+            "DivineAgape.the_spirit_is_divine"
+          ],
+          "gloss": "Consubstantiality, the anti-tritheism half: `is_divine the_father divineReality ∧ is_divine the_beloved divineReality ∧ is_divine the_spirit divineReality`. Same price as C510."
+        },
+        {
+          "row": "The Persons are **distinct** (not three gods)",
+          "targets": [
+            "DivineAgape.the_beloved_distinct",
+            "DivineAgape.the_spirit_ne_father",
+            "DivineAgape.the_spirit_ne_beloved",
+            "DivineAgape.the_spirit_ne_any_word"
+          ],
+          "gloss": "Personal distinctness by personal property, not by essence: `≠` in every pair, and the Spirit is no word."
+        },
+        {
+          "row": "**One Person** is forbidden",
+          "targets": [
+            "FoundationalUnicity.unicity_does_not_force_unitarian_monad"
+          ],
+          "gloss": "One ground, and every ground bears at least two distinct persons. The unitarian monad is a reading the countermodel forbids — which is why single-person monotheism is not merely unproven."
+        },
+        {
+          "row": "The Trinity is **not free**",
+          "targets": [
+            "ConditionalTheology.preceding_theory_not_entails_trinity"
+          ],
+          "gloss": "C109: the preceding theory does not entail three Persons. This is the price, stated as a countermodel."
+        },
+        {
+          "row": "The **Incarnation** is open",
+          "targets": [
+            "ConditionalTheology.preceding_theory_not_entails_incarnation"
+          ],
+          "gloss": "C112: the preceding theory is consistent with an unincarnate ground. The frontier, named."
+        }
+      ]
+    },
+    {
+      "id": "cremation",
+      "title": "13. The Cremation — Every Branch of the Denial",
+      "body": [
+        "Every branch of the denial is **derived dead on this page**: the premises it needs, the steps, and the `⊥` — or the negation of its own thesis.",
+        "Each block's price and kind are derived; where a priced route to the same death also exists, it is shown and priced separately.",
+        "Every line below is compiled from the Lean proof term. The branch, the objection, and which premise is *the thesis* are the only authored strings.",
+        "How a death is classified is derived from the audited goal and footprint, never typed: `⊥` when the goal is `False`; `⊘` when the derivation returns the denial's own negation.",
+        "💥 **COLLAPSE — INCOHERENT** when the denial, followed, destroys the very normativity it claims to keep (Euthyphro, and the D3–D6 family).",
+        "Three axes, because a countermodel makes three claims (C559): the **attack** (a derivability claim, which stands unless Γ derives the inference), the **model** (a description), and the world-datum ◈ `contingentWorldDatum`.",
+        "One former row is gone: “objectivity in a meaningless world”. Its theorem is `{}`, but its premises are `NegativeRetorsionSignature`, `S.NoI`, `S.EO` — a **free-signature artifact**, not a claim about a world (AGENTS.md, 2026-09-29).",
+        "Which models are wrong *given that the world exists*: WRONG outright (the no-meaning world, on the act datum), WRONG ONLY IF an axiom is insisted (plurality, love, choice bridges), NOT ESTABLISHED, or UNANSWERED. A signature model is never a candidate world.",
+        "The last three rows are **boundaries, not refutations**, and the second is a **win**: unicity does not force a single person, so “the ground is one person” is a consequence, not a gap.",
+        "Full normal forms: [Adversarial Denial Normal Forms (D1–D8), the catalogue, and the Pillars of formal defense](investigations/ledger.md)."
+      ],
+      "cremation": [
+        {
+          "branch": "No right or wrong at all",
+          "objection": "“There is no objective right and wrong.”",
+          "targets": [
+            "claims_correct_no_right_self_refuting",
+            "retorsion_no_truth"
+          ],
+          "derivation_target": "claims_correct_no_right_self_refuting",
+          "denial_hypothesis": "NoRight",
+          "objection_voice": "ClaimsCorrect s NoRight",
+          "objection_voice_gloss": "voicing the denial as correct"
+        },
+        {
+          "branch": "No meaning",
+          "objection": "“Reality is brute; nothing is meant.”",
+          "targets": [
+            "proof_criticism_nihilism_self_refuting",
+            "objectivity_cannot_obtain_in_a_meaningless_world"
+          ],
+          "derivation_target": "proof_criticism_nihilism_self_refuting",
+          "denial_hypothesis": "NoRight",
+          "objection_voice": "ClaimsCorrect s NoRight",
+          "objection_voice_gloss": "voicing the denial as correct",
+          "note": "A free-signature model is a separate, secondary result: it is a statement about an uninterpreted field, not about a state of affairs."
+        },
+        {
+          "branch": "No subject; the empty world",
+          "objection": "“There is no one here.”",
+          "targets": [
+            "noSubject_performative_selfRefutes",
+            "retorsion_no_subject"
+          ],
+          "derivation_target": "noSubject_performative_selfRefutes",
+          "denial_hypothesis": "Asserts speaker NoSubject"
+        },
+        {
+          "branch": "No act — everything is mechanical",
+          "objection": "“No one acts; there are only events.”",
+          "targets": [
+            "retorsion_no_act",
+            "retorsion_no_weak_act",
+            "noAct_conditional_selfRefutes"
+          ],
+          "derivation_target": "noAct_conditional_selfRefutes",
+          "denial_hypothesis": "asserts speaker NoAct"
+        },
+        {
+          "branch": "No choice (eliminativism)",
+          "objection": "“Normative address does not imply genuine choice.”",
+          "targets": [
+            "d7_co_grasp_is_definitionally_choice",
+            "dnf7_cannot_deny_choice_from_co_meaning"
+          ],
+          "derivation_target": "d7_co_grasp_is_definitionally_choice",
+          "denial_hypothesis": "¬Chooses s p q"
+        },
+        {
+          "branch": "No choice (determinism)",
+          "objection": "“Freedom requires physical indeterminism.”",
+          "targets": [
+            "d8_choice_is_definitionally_free_will",
+            "hostile_model_b_determinism_precludes_alternative_availability"
+          ],
+          "derivation_target": "d8_choice_is_definitionally_free_will",
+          "denial_hypothesis": "¬FreeWill s"
+        },
+        {
+          "branch": "Normativity is stipulative",
+          "objection": "“Moral norms are just stipulations.”",
+          "targets": [
+            "normative_denial_of_normativity_is_self_refuting",
+            "denial_of_genuine_normativity_is_self_refuting"
+          ],
+          "derivation_target": "normative_denial_of_normativity_is_self_refuting",
+          "denial_hypothesis": "NoGN",
+          "objection_voice": "ClaimsNormativeCorrectness s NoGN",
+          "objection_voice_gloss": "voicing the denial as correct",
+          "secondary_derivations": [
+            {
+              "derivation_target": "denial_of_genuine_normativity_is_self_refuting",
+              "denial_hypothesis": "NoGN",
+              "price_note": "A second, independently sufficient refutation — but priced on one SEM choice (`AxJudicativeBipolarity`), so the free route is the one read above.",
+              "priced": true,
+              "label": "a second, priced route"
+            }
+          ]
+        },
+        {
+          "branch": "Voluntarism (Euthyphro)",
+          "objection": "“Ought is just will; the person invents morality.”",
+          "targets": [
+            "will_identity_collapses_normativity",
+            "self_grounded_assertion_incoherent"
+          ],
+          "derivation_target": "self_grounded_assertion_incoherent",
+          "denial_hypothesis": "Ought s s a",
+          "secondary_derivations": [
+            {
+              "derivation_target": "will_identity_collapses_normativity",
+              "denial_hypothesis": "∀ r, Ought r s a → r = s",
+              "label": "the collapse itself"
+            }
+          ]
+        },
+        {
+          "branch": "Descriptivism (D3)",
+          "objection": "“Truth is only descriptive; there is no deontic guidance at all.”",
+          "targets": [
+            "d3_descriptive_truth_lacks_deontic_guidance"
+          ],
+          "derivation_target": "d3_descriptive_truth_lacks_deontic_guidance",
+          "denial_hypothesis": "hDescriptiveOnly → ∀ s, ¬AgentialDeonticAddress s p q"
+        },
+        {
+          "branch": "Impersonal normativity (D4)",
+          "objection": "“An ought can bind no one; normativity needs no subject.”",
+          "targets": [
+            "d4_impersonal_normativity_fails_relationality"
+          ],
+          "derivation_target": "d4_impersonal_normativity_fails_relationality",
+          "denial_hypothesis": "∀ s, ¬AgentialDeonticAddress s p q"
+        },
+        {
+          "branch": "Monolithic command (D5)",
+          "objection": "“A command with no alternative is still a command.”",
+          "targets": [
+            "d5_monolithic_command_lacks_opposition"
+          ],
+          "derivation_target": "d5_monolithic_command_lacks_opposition",
+          "denial_hypothesis": "∀ q, ¬Incompatible p q"
+        },
+        {
+          "branch": "Ungraspable command (D6)",
+          "objection": "“A command nobody can grasp is still a command.”",
+          "targets": [
+            "d6_ungraspable_command_fails_agential_address"
+          ],
+          "derivation_target": "d6_ungraspable_command_fails_agential_address",
+          "denial_hypothesis": "¬(Means s p ∧ Means s q)"
+        },
+        {
+          "branch": "The ground is just an atom",
+          "objection": "“The ultimate ground is a particle.”",
+          "targets": [
+            "atom_cannot_ground_the_ground"
+          ],
+          "note": "A countermodel is a **boundary**: it says the reading cannot ground the ground, not that the reading is incoherent."
+        },
+        {
+          "branch": "The ground is a *single* Person",
+          "objection": "“One God = one person, full stop.”",
+          "targets": [
+            "unicity_does_not_force_unitarian_monad"
+          ],
+          "note": "Refuted **as a consequence**: one ground, and every ground bears at least two distinct persons. This is why single-person monotheism is not merely unproven (§14)."
+        },
+        {
+          "branch": "A free subject's existence is open",
+          "objection": "“No one has shown a free subject exists.”",
+          "targets": [
+            "AsieticChoice.freeWill_exists",
+            "epistemic_order_makes_the_act_datum_necessary"
+          ],
+          "note": "Row SUPERSEDED in GAPMAP (`F1bUncond`): C278 already proved it, and the corollary `freeSubject_exists` extends it to the `FreeSubject` name at the same price."
+        }
+      ]
+    },
+    {
+      "id": "limits",
+      "title": "14. What the Instrument Cannot See",
+      "body": [
+        "`#print axioms` reads the kernel's dependency graph. It cannot see a **`def` used as a premise by name** — so the census below counts every such inherited bridge, the theorems it underwrites, and how many have been reviewed.",
+        "A `✅` therefore means *kernel-verified conditional on a bridge the kernel does not charge*.",
+        "This is disclosure, not payment: nothing is promoted to a declared axiom, and the three-way decision (promote / declare / retire) is still open.",
+        "`EntityMeans Entity.ofGround := True` — the irrelevance of causal contact to the grounding of §8 — is one of them."
+      ],
+      "def_bridge_census": true
+    },
+    {
+      "id": "boundaries",
+      "title": "15. What Is Not Established",
+      "body": [
+        "**Single-person monotheism is not on this list, because it is refuted rather than open** (§12): one ground, and every ground bears at least two distinct persons.",
+        "What remains open is the **entity-level** projection C228 (`GenericGroundsRightWrong g → PersonalEntity g`), still `BLOCKED` — a different question, and not what stands between Γ and monotheism.",
+        "**Trinity is priced, not free** (§12): three Persons on three declared META premises, with C109 at `{}`. **Incarnation is open** (C112, `{}`).",
+        "**The Incarnation is the open frontier.** C112 (`preceding_theory_not_entails_incarnation`, `{}`): the preceding theory is consistent with an unincarnate ground. C111 shows the *structure* is available; the *entailment* is not.",
+        "Contingent creation *as existence* is a free theorem (C350, `{}`); only the realm's content is priced (C367). Nothing above should be read as claiming any of it."
+      ],
+      "claims": [
+        "C109",
+        "C112",
+        "C151",
+        "C228",
+        "C320",
+        "C350",
+        "C367",
+        "C440",
+        "C510"
+      ]
+    }
+  ],
+  "ledger_spine_nodes": [
     {
       "id": "right_wrong",
       "pushback": "Deny Right/Wrong at all — adopt NoRight, claiming 'there is no correct standard' as if that were itself correct.",
@@ -39,7 +684,11 @@
             "performative_normative_denial_establishes_normative_right"
           ]
         }
-      ]
+      ],
+      "summary_short": "Right and wrong both obtain: the binary normative distinction is real (`¬N_T ∧ ¬N_F`). `Right`/`Wrong` here are the objective truth/correctness polarity, not moral good/evil — that is a separate, separately-priced layer.",
+      "pushback_short": "Deny Right/Wrong at all — adopt NoRight, claiming 'there is no correct standard' as if that were itself correct.",
+      "reply_short": "Retorsive: claiming the denial as *correct* while it is true is a constructive contradiction. Downplaying to a bare assertion forfeits the claim to correctness.",
+      "disclosure": "the extensional distinction (`¬N_T ∧ ¬N_F`) and the agential stance-conditional form (`RightWrong s`) are **two different formal objects**; only the second needs a subject. The moral pole is a separate, priced layer — see the attributes table."
     },
     {
       "id": "ought",
@@ -59,7 +708,10 @@
         "TruthNorm",
         "correct_implies_ought",
         "incorrect_implies_oughtNot"
-      ]
+      ],
+      "summary_short": "Objective correctness determines agential standards: `Ought` vs. `Ought-Not`. Under the objective epistemic `TruthNorm`, correct judgment implies what the subject ought to affirm, and incorrect judgment what it ought not to.",
+      "pushback_short": "'Ought' is nothing but a relabel of 'correct' — no genuinely normative force is added.",
+      "reply_short": "The deontic opposition is *derived* under `TruthNorm` (correct → ought to affirm; incorrect → ought not), so it is a new relation, not a relabel. The irreducible practical Ought of *actions* stays a separate primitive."
     },
     {
       "id": "choice",
@@ -214,7 +866,11 @@
           ]
         }
       ],
-      "investigation_link": "investigations/contrastive-choice.md"
+      "investigation_link": "investigations/contrastive-choice.md",
+      "summary_short": "Apprehending incompatible alternatives within a committed stance constitutes Choice: the agent co-means both horns (`Chooses s p q`) while committing to one. `FreeWill s := ∃ p q, Chooses s p q` is definitional — commitment is *not* inside `Chooses`.",
+      "pushback_short": "Genuine Normativity is a stipulation — the chain GN → Chooses → FreeWill may be valid but empty.",
+      "reply_short": "Retorsive: claiming the denial of genuine normativity *as correct* (`ClaimsCorrect s NoGN`) yields a term of the identical GenuineNormativity structure — `denial_of_genuine_normativity_is_self_refuting`.",
+      "disclosure": "the retorsion block is a **supporting investigation**, not the load-bearing step. The load-bearing step is the axiom-free stance-level derivation, which does not presuppose the conclusion."
     },
     {
       "id": "free_will",
@@ -246,7 +902,11 @@
           ]
         }
       ],
-      "investigation_link": "investigations/free-will.md"
+      "investigation_link": "investigations/free-will.md",
+      "summary_short": "We did not assume a free subject. Free Will is **derived**, not assumed: from the reality of genuine normative address and rational choice it follows by pure logic, with zero substantive axioms (`indubitable_normative_free_will`).",
+      "pushback_short": "You assumed freedom — a free will was smuggled in as a premise.",
+      "reply_short": "The starting point is normative *address*, not a free subject. Freedom is the conclusion of the chain, and the chain is axiom-free.",
+      "disclosure": "the chain starts from the **declared** act-datum C454 (axiom 28, `Tag: TRANS`, the one performative price in the series). Citing the free-will rows as evidence for the datum would be circular — see the epistemics section."
     },
     {
       "id": "free_subject",
@@ -264,7 +924,10 @@
       ],
       "supporting_targets": [
         "chooses_implies_freeSubject"
-      ]
+      ],
+      "summary_short": "A subject is definitionally a free subject iff it possesses free will (`FreeSubject(s) ↔ FreeWill(s)`, `Iff.rfl`). The recognition runs strictly **forward**: free will first, the free subject only after it.",
+      "pushback_short": "A definitional manoeuvre — the free subject is bought by a definition, not proven.",
+      "reply_short": "Precisely — the 'manoeuvre' *is* the theorem. The equivalence is `Iff.rfl`, which is exactly why nothing can get in front of free will."
     },
     {
       "id": "person",
@@ -285,7 +948,11 @@
         "person_iff_freeSubject",
         "person_has_free_will"
       ],
-      "investigation_link": "investigations/divine-personhood.md"
+      "investigation_link": "investigations/divine-personhood.md",
+      "summary_short": "A free subject is constitutively an authoritative Person. `Person s := ThomisticPersonCore s` — the classical Boethius–Aquinas criterion of an individual substance of a rational nature with dominion over its own acts.",
+      "pushback_short": "A loaded, theological word smuggled into the deduction.",
+      "reply_short": "Classical, not novel: the term follows Boethius and Aquinas rather than theological invention. Nothing theological is *assumed*; theology enters only downstream, in the branches — and is there bounded by countermodels.",
+      "disclosure": "minimal personhood in Γ is **functional**, not psychological. `faithful_model_satisfies_free_will_without_opaque_person` is a countermodel satisfying free will with substantive psychological personality removed, so §6 does **not** establish a mind, a body or a stream of experience."
     },
     {
       "id": "personal_will",
@@ -305,7 +972,11 @@
         "independent_will_of_subject",
         "person_has_free_independent_will",
         "freeIndependentWill_iff_thomisticCore"
-      ]
+      ],
+      "summary_short": "Distinct persons have numerically distinct wills. By the law of numerical individuation, `subjectWill s₁ ≠ subjectWill s₂`; a Person is constitutively a subject with an independently individuated will.",
+      "pushback_short": "Two persons could share one will — individuation is not forced.",
+      "reply_short": "Individuation is a constitutive meaning-postulate, not a derived construction: `will_individuation` is a **declared** injectivity law, not a theorem. Given it, `Person ↔ FreeIndependentWill` follows with 0 substantive axioms.",
+      "disclosure": "`will_individuation` is a **declared VOCAB law, and it is kernel-checked as underivable**: the hostile model `Subject := Bool`, `subjectWill := fun _ => ()` satisfies the pre-will spine and there the law arrives at a contradiction. It is a price, paid openly."
     },
     {
       "id": "ground_right_wrong",
@@ -332,7 +1003,10 @@
       "obstructions": [
         "HostileModels.model_b_separation"
       ],
-      "investigation_link": "investigations/grounding.md"
+      "investigation_link": "investigations/grounding.md",
+      "summary_short": "Personal free agency ontologically grounds the normative order: the ground of objective normativity is **personal in kind**. Grounding is neither identity nor individual causation — `RightWrong s → Person s` says who grounds it, not what produced it.",
+      "pushback_short": "Principle-of-Sufficient-Reason smuggling: this makes the Person (or the argument) the causal creator of morality.",
+      "reply_short": "Grounding ≠ identity and ≠ causation. The bare ought survives the impersonal model; the personal ground is forced *within* the normative order, and the countermodel marks exactly what the antecedent does and does not reach."
     },
     {
       "id": "necessary_truth",
@@ -348,7 +1022,11 @@
       "primary_targets": [
         "step1_necessary_truth_exists"
       ],
-      "supporting_targets": []
+      "supporting_targets": [],
+      "summary_short": "The objective logical and normative order entails necessary truth: `∃ τ, □ τ` (`Semantics.strongTruthExists`, C59, footprint `{CL}`).",
+      "pushback_short": "Quietly assumes modal metaphysics — necessity is a contested fragment, not a consequence.",
+      "reply_short": "This is the *logical* continuation of the classical meta-logic in Core/Semantics, not a theorem derived from the normative chain. The normative world-level continuation is recorded separately and never claimed to entail `∃ τ, □ τ`.",
+      "disclosure": "§9 is a **separate logical continuation**, not a link in the normative chain. Do not read the ten steps as one derivation: the normative run is §1–§8 and §10; §9 runs on `{CL}` alone."
     },
     {
       "id": "constructive_personal_ground",
@@ -382,7 +1060,8 @@
             "ofGround_necessary_ground_of_reality"
           ],
           "summary": "Live theorem: the ground is world-rigid (`NecessaryEntity Entity.ofGround`, `∀ w, ExistsAt w .ofGround`, definitional `EntityExistsAt w .ofGround := True`, footprint `{Means, Subject}`), **everlasting**, **atemporal**, and possesses **Canonical Aseity** (`conditional_canonical_aseity`, `{Means, Subject}`: `¬ ∃ g, ExternalGrounding g .ofGround`). Claim E is the *non-hypostatic* pairing (`∃ g s, NecessaryEntity g ∧ NecessaryGroundOfReality g ∧ Person s ∧ GroundsRightWrong s`): entity-necessity conjunct PROVEN; personal-kind conjunct honestly `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (PROVEN↑ under META `AxTwoSubjects`). Hypostatic identity, a 'necessary Person', Trinity and monotheism are NOT claimed — `ofGround_ne_ofSubject` blocks the identity line.",
-          "defer_note": "✅ **PROVEN** (entity-level necessity, eternity, and canonical aseity) — machine-checked in `formal/Logos/NecessityEternity.lean` and `formal/Logos/CanonicalAseity.lean`; hypostatic identity of the ground with a person remains blocked (`ofGround_ne_ofSubject`) and Claim D ('necessary Subject') is still refuted (`CountermodelPersonNotNecessary`)."
+          "defer_note": "✅ **PROVEN** (entity-level necessity, eternity, and canonical aseity) — machine-checked in `formal/Logos/NecessityEternity.lean` and `formal/Logos/CanonicalAseity.lean`; hypostatic identity of the ground with a person remains blocked (`ofGround_ne_ofSubject`) and Claim D ('necessary Subject') is still refuted (`CountermodelPersonNotNecessary`).",
+          "summary_short": "Live theorem: the ground is world-rigid, **everlasting**, **atemporal**, with **Canonical Aseity** — all on `{Means, Subject}`. The pairing is *non-hypostatic*: entity-necessity is PROVEN; the personal-kind conjunct is PROVEN↑ under META `AxTwoSubjects`. No 'necessary Person' is claimed."
         },
         {
           "id": "monotheism",
@@ -397,7 +1076,8 @@
             "Logos.FoundationalUnicity.exactly_one_universal_modal_ground"
           ],
           "summary": "Two different claims were being carried under one label, and only one of them is still open. (1) UNIQUENESS OF THE UNIVERSAL GROUND is now machine-checked: `Logos.FoundationalUnicity.exactly_one_universal_modal_ground` (C320) proves that exactly one universal modal ground exists, with existence unconditional and uniqueness under the single named hypothesis of frontier row F15. (2) PERSON-LEVEL MONOTHEISM — one God as numerically one Person, and its compatibility with three Persons — remains DEFERRED: it needs the person bridge C228, which is BLOCKED, so `monotheism_of_god_and_uniqueness` and `monotheism_compatible_with_trinity` are still out of the live kernel and no compiled declaration exists for either. The deferral of this branch is therefore NARROWED to claim (2).",
-          "defer_note": "⏸ **DEFERRED, NARROWED (2026-09-27)** — the ground-unicity half is no longer deferred: C320 (`Logos.FoundationalUnicity.exactly_one_universal_modal_ground`) proves exactly one universal modal ground exists, existence unconditionally and uniqueness under frontier hypothesis F15 — now the declared axiom `SemanticFinitude` (C388, `Tag: VOCAB`, the 27th), which C389 consumes unconditionally. What remains deferred is the Person-level claim — one God as numerically one Person, and trinity-compatibility — which needs the person bridge C228 (`BLOCKED`); no compiled declaration exists for `monotheism_of_god_and_uniqueness` or `monotheism_compatible_with_trinity`, and the generic non-collapse of unicity into a solitary monad is already checked at C212 (`{}`)."
+          "defer_note": "⏸ **DEFERRED, NARROWED (2026-09-27)** — the ground-unicity half is no longer deferred: C320 (`Logos.FoundationalUnicity.exactly_one_universal_modal_ground`) proves exactly one universal modal ground exists, existence unconditionally and uniqueness under frontier hypothesis F15 — now the declared axiom `SemanticFinitude` (C388, `Tag: VOCAB`, the 27th), which C389 consumes unconditionally. What remains deferred is the Person-level claim — one God as numerically one Person, and trinity-compatibility — which needs the person bridge C228 (`BLOCKED`); no compiled declaration exists for `monotheism_of_god_and_uniqueness` or `monotheism_compatible_with_trinity`, and the generic non-collapse of unicity into a solitary monad is already checked at C212 (`{}`).",
+          "summary_short": "Two claims under one label. (1) UNIQUENESS OF THE UNIVERSAL GROUND is machine-checked — C320 proves exactly one universal modal ground exists. (2) PERSON-LEVEL MONOTHEISM remains DEFERRED: it needs the BLOCKED person bridge C228."
         },
         {
           "id": "frontiers",
@@ -412,13 +1092,18 @@
             "preceding_theory_not_entails_incarnation"
           ],
           "investigation_link": "investigations/countermodels.md",
-          "summary": "The power of a formal system lies as much in what it refrains from claiming as in what it proves. The deduction strictly distinguishes established theorems from open frontiers. Machine-checked independence countermodels prove that preceding theory does NOT logically entail: (1) The Trinitarian structure of Three Divine Persons; (2) Contingent creation of a temporal cosmos; or (3) The Incarnation. These remain independent theological frontiers — for the deep technical proofs, countermodel models, and exhaustive dependency matrices, consult the Further Investigations catalogue at the end of this document."
+          "summary": "The power of a formal system lies as much in what it refrains from claiming as in what it proves. The deduction strictly distinguishes established theorems from open frontiers. Machine-checked independence countermodels prove that preceding theory does NOT logically entail: (1) The Trinitarian structure of Three Divine Persons; (2) Contingent creation of a temporal cosmos; or (3) The Incarnation. These remain independent theological frontiers — for the deep technical proofs, countermodel models, and exhaustive dependency matrices, consult the Further Investigations catalogue at the end of this document.",
+          "summary_short": "Machine-checked countermodels prove the preceding theory does NOT entail the Trinity, contingent creation, or the Incarnation. These are independent frontiers, not gaps."
         }
       ],
-      "investigation_link": "investigations/divine-personhood.md"
+      "investigation_link": "investigations/divine-personhood.md",
+      "summary_short": "The machine-proved dependence: wherever Right/Wrong is real, its ground-type is personal — `∀ s, RightWrong s → Person s` (C526), via the priced discovery theorem. The constructive form needs no grounding axiom.",
+      "pushback_short": "You still quietly pick a contingent author of morality — some particular person who happens to ground Right/Wrong.",
+      "reply_short": "The indexing encodes *dependence without nomination*: RightWrong is indexed by a personal kind, not by an arbitrary contingent individual. Which particular person — and whether there is only one — is not claimed.",
+      "disclosure": "the ground of Right/Wrong is personal **in kind**; no individual is nominated, and no numerical claim is made. That the person-level *monotheism* step is `BLOCKED` (C228) is stated in the boundaries section below."
     }
   ],
-  "edges": [
+  "ledger_edges": [
     {
       "from": "right_wrong",
       "to": "ought",
