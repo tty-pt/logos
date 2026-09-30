@@ -273,7 +273,7 @@ def main() -> int:
 
     # the redesigned ten-step table covers the same ten facts
     readme = NEW_README.read_text(encoding="utf-8")
-    ten_sec = readme.split("## The Argument in Ten Steps")[1].split("## ", 1)[0]
+    ten_sec = readme.split("### The ten steps at a glance")[1].split("## ", 1)[0]
     ten = re.findall(r"^\| \*\*(\d+)\*\*", ten_sec, re.M)
     if sorted(int(t) for t in ten) != list(range(1, 11)):
         errors.append(f"ten-step table rows: got {sorted(ten)}, want 1-10")

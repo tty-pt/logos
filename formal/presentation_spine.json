@@ -15,7 +15,8 @@
     "include_full_pushback": false,
     "include_summary_full": false,
     "include_natural_deduction": false,
-    "include_definitions": false,
+    "include_definitions": true,
+    "include_characteristics": true,
     "include_supporting_infrastructure": false,
     "include_obstruction_details": false,
     "include_subsections": false,
@@ -30,6 +31,9 @@
   "spine_nodes": [
     {
       "id": "satisfaction_free",
+      "milestones": [
+        {"theorem": "rightWrongDistinction", "words": "the personless order, given away"}
+      ],
       "label": "SATISFACTION",
       "title": "1. Satisfaction Is Free",
       "formula": "¬N_T ∧ ¬N_F · bivalence: ∀ p, T p ∨ IsFalse p",
@@ -51,6 +55,9 @@
     },
     {
       "id": "disclosure_to_someone",
+      "milestones": [
+        {"theorem": "being_true_is_being_true_to", "words": "the order as disclosure"}
+      ],
       "label": "DISCLOSURE",
       "title": "2. Being True Is Being True To Someone",
       "formula": "Correct s p → TrueTo s p → T p,  where TrueTo s p := Means s p ∧ T p",
@@ -74,6 +81,9 @@
     },
     {
       "id": "right_wrong_requires_meaning",
+      "milestones": [
+        {"theorem": "rightWrong_implies_meaning", "words": "right/wrong requires meaning"}
+      ],
       "label": "MEANING",
       "title": "3. Right and Wrong Cannot Obtain Without Meaning",
       "formula": "(∃ s p, Correct s p) ∨ (∃ s p, Incorrect s p) → ∃ p, Meaning_I p",
@@ -94,6 +104,9 @@
     },
     {
       "id": "meaning_requires_subject",
+      "milestones": [
+        {"theorem": "meaning_I_needs_subject", "words": "meaning requires a subject"}
+      ],
       "label": "SUBJECT",
       "title": "4. Meaning Requires a Subject",
       "formula": "Meaning_I p → ∃ s, Means s p",
@@ -135,6 +148,9 @@
     },
     {
       "id": "free_will",
+      "milestones": [
+        {"theorem": "claims_normative_correctness_derives_free_will", "words": "co-meaning both poles is free will"}
+      ],
       "label": "FREE WILL",
       "title": "6. Co-Meaning Both Poles Is Free Will",
       "formula": "ClaimsNormativeCorrectness s p → Chooses s (Correct s p) (Incorrect s p) ∧ FreeWill s",
@@ -155,6 +171,9 @@
     },
     {
       "id": "person",
+      "milestones": [
+        {"theorem": "freeWill_implies_person", "words": "the free subject is a person"}
+      ],
       "label": "PERSON",
       "title": "7. Free Will Is a Person",
       "formula": "FreeWill s → Person s",
@@ -176,6 +195,9 @@
     },
     {
       "id": "person_grounds_poles",
+      "milestones": [
+        {"theorem": "the_person_grounds_the_epistemic_right_wrong", "words": "that person grounds the poles"}
+      ],
       "label": "GROUNDING",
       "title": "8. That Person Grounds the Poles",
       "formula": "GroundsRightWrongAt s (Correct s p) (Incorrect s p) ∧ Person s",
@@ -219,6 +241,9 @@
     },
     {
       "id": "composed_chain",
+      "milestones": [
+        {"theorem": "no_subject_who_means_no_epistemic_right_wrong", "words": "and with no subject, no right/wrong anywhere"}
+      ],
       "label": "THE CHAIN, COMPOSED",
       "title": "10. The Chain, Composed — Both Directions",
       "formula": "¬(∃ s, Means s p) → ¬(∃ s p, Correct s p) ∧ ¬(∃ s p, Incorrect s p)",
@@ -243,64 +268,66 @@
     {
       "from": "satisfaction_free",
       "to": "disclosure_to_someone",
-      "relation": "satisfaction is free; disclosure is not",
-      "direction": "distinction"
+      "gloss": "satisfaction is free; disclosure is not",
+      "kind": "distinction"
     },
     {
       "from": "disclosure_to_someone",
       "to": "right_wrong_requires_meaning",
-      "relation": "right/wrong is right/wrong-to-someone",
-      "direction": "discovery"
+      "gloss": "right/wrong is right/wrong-to-someone",
+      "kind": "discovery"
     },
     {
       "from": "right_wrong_requires_meaning",
       "to": "meaning_requires_subject",
-      "relation": "rightWrong_implies_meaning",
-      "direction": "discovery"
+      "gloss": "rightWrong_implies_meaning",
+      "kind": "discovery"
     },
     {
       "from": "meaning_requires_subject",
       "to": "incompatible_poles",
-      "relation": "a subject that means holds a norm",
-      "direction": "discovery"
+      "gloss": "a subject that means holds a norm",
+      "kind": "discovery"
     },
     {
       "from": "incompatible_poles",
       "to": "free_will",
-      "relation": "co-meaning an incompatibility IS choice",
-      "direction": "discovery"
+      "gloss": "co-meaning an incompatibility IS choice",
+      "kind": "discovery"
     },
     {
       "from": "free_will",
       "to": "person",
-      "relation": "priced theorem [Person := ThomisticPersonCore; via will_individuation]",
-      "direction": "discovery"
+      "gloss": "priced theorem [Person := ThomisticPersonCore; via will_individuation]",
+      "kind": "discovery"
     },
     {
       "from": "person",
       "to": "person_grounds_poles",
-      "relation": "the Person grounds the epistemic pole pair",
-      "direction": "grounding"
+      "gloss": "the Person grounds the epistemic pole pair",
+      "kind": "grounding"
     },
     {
       "from": "person_grounds_poles",
       "to": "the_fact",
-      "relation": "THE FACT — the composed statement",
-      "direction": "conclusion"
+      "gloss": "THE FACT — the composed statement",
+      "kind": "conclusion"
     },
     {
       "from": "the_fact",
       "to": "composed_chain",
-      "relation": "contrapositives composed [C557 entailment, C561 retraction]",
-      "direction": "retorsion"
+      "gloss": "contrapositives composed [C557 entailment, C561 retraction]",
+      "kind": "retorsion"
     }
   ],
   "reading_sections": [
     {
       "id": "necessity_and_its_price",
+      "part": "II",
+      "heading": "### Necessity, and Exactly What It Costs",
       "title": "11. Necessity, and Exactly What It Costs",
       "body": [
-        "Three rows, because they are three different facts. **The order is necessary with no premise at all.** A free subject exists on **one** META bridge. A necessary *person* is a **second** META axiom. Merging them into one claim is how an honest price becomes a dishonest boast.",
+        "{row_count} rows, because each is a different fact. **The order is necessary with no premise at all.** A free subject exists on **one** META bridge. A necessary *person* is a **second** META axiom. Merging them into one claim is how an honest price becomes a dishonest boast.",
         "The price attaches to the route, never to the name: `FreeSubject` is *defined* as `FreeWill` (`Choice.lean:185`, `freeSubject_iff_freeWill` is `Iff.rfl`), so `freeSubject_exists` and `freeWill_exists` carry the same footprint.",
         "Before 2026-09-30 the surface priced the Free Subject dearer than free will for one identical predicate.",
         "Necessity is the ground's, and the ground is not a subject-correlate: `ofGround_ne_ofSubject` (`{}`).",
@@ -366,6 +393,8 @@
     },
     {
       "id": "one_god_three_persons",
+      "part": "II",
+      "heading": "### One God, in Three Persons",
       "title": "12. One God, in Three Persons",
       "body": [
         "**One God; three Persons; one nature.** Γ's result is not a unitarian monad and not a trinity of three gods: it is one ground, of one nature, in which there are three distinct divine Persons.",
@@ -441,22 +470,24 @@
     },
     {
       "id": "cremation",
-      "title": "13. The Cremation — Every Branch of the Denial",
+      "part": "III",
+      "heading": "## Part III \u2014 The refutations: every branch of the denial, read",
+      "title": "Part III — The refutations: every branch of the denial, read",
       "body": [
-        "Every branch of the denial is **derived dead on this page**: the premises it needs, the steps, and the `⊥` — or the negation of its own thesis.",
-        "Each block's price and kind are derived; where a priced route to the same death also exists, it is shown and priced separately.",
-        "Every line below is compiled from the Lean proof term. The branch, the objection, and which premise is *the thesis* are the only authored strings.",
-        "How a death is classified is derived from the audited goal and footprint, never typed: `⊥` when the goal is `False`; `⊘` when the derivation returns the denial's own negation.",
-        "💥 **COLLAPSE — INCOHERENT** when the denial, followed, destroys the very normativity it claims to keep (Euthyphro, and the D3–D6 family).",
-        "Three axes, because a countermodel makes three claims (C559): the **attack** (a derivability claim, which stands unless Γ derives the inference), the **model** (a description), and the world-datum ◈ `contingentWorldDatum`.",
+        "Sixteen entries, R1–R16. Each names the step it makes impossible (`KILLS`) and then shows the derivation: the premises it needs, the steps, the `⊥` — or the negation of its own thesis.",
+        "Every line below is compiled from the Lean proof term; the branch, the objection, and which premise is *the thesis* are the only authored strings. Each block's price and kind are derived, and where a priced second route to the same death exists it is shown and priced separately.",
+        "A death is classified by derivation, never typed: `⊥` when the goal is `False`; `⊘` when the derivation returns the denial's own negation; 💥 **COLLAPSE** when the denial, followed, destroys the normativity it claims to keep.",
+        "{role_split}",
+        "A boundary is not a refutation: a `{}` countermodel bounds the reading, it does not contradict it, so those blocks print no `KILLS`. Where unicity does not force a single person, “the ground is one person” is a consequence, not an absence — that is the boundary's own note, not a gap in the chain.",
         "One former row is gone: “objectivity in a meaningless world”. Its theorem is `{}`, but its premises are `NegativeRetorsionSignature`, `S.NoI`, `S.EO` — a **free-signature artifact**, not a claim about a world (AGENTS.md, 2026-09-29).",
-        "Which models are wrong *given that the world exists*: WRONG outright (the no-meaning world, on the act datum), WRONG ONLY IF an axiom is insisted (plurality, love, choice bridges), NOT ESTABLISHED, or UNANSWERED. A signature model is never a candidate world.",
-        "The last three rows are **boundaries, not refutations**, and the second is a **win**: unicity does not force a single person, so “the ground is one person” is a consequence, not a gap.",
-        "Full normal forms: [Adversarial Denial Normal Forms (D1–D8), the catalogue, and the Pillars of formal defense](investigations/ledger.md)."
+        "The three-axes reading of each model — attack / model / world-datum, with the WRONG-outright vs WRONG-only-if-an-axiom verdict — is with the catalogue: [investigations/catalogues.md](investigations/catalogues.md)."
       ],
       "cremation": [
         {
           "branch": "No right or wrong at all",
+          "attacks": "satisfaction_free",
+          "role": "derivation",
+          "pillars": [1],
           "objection": "“There is no objective right and wrong.”",
           "targets": [
             "claims_correct_no_right_self_refuting",
@@ -469,6 +500,8 @@
         },
         {
           "branch": "No meaning",
+          "attacks": "right_wrong_requires_meaning",
+          "role": "derivation",
           "objection": "“Reality is brute; nothing is meant.”",
           "targets": [
             "proof_criticism_nihilism_self_refuting",
@@ -482,6 +515,8 @@
         },
         {
           "branch": "No subject; the empty world",
+          "attacks": "meaning_requires_subject",
+          "role": "derivation",
           "objection": "“There is no one here.”",
           "targets": [
             "noSubject_performative_selfRefutes",
@@ -492,6 +527,8 @@
         },
         {
           "branch": "No act — everything is mechanical",
+          "attacks": "free_will",
+          "role": "derivation",
           "objection": "“No one acts; there are only events.”",
           "targets": [
             "retorsion_no_act",
@@ -503,6 +540,9 @@
         },
         {
           "branch": "No choice (eliminativism)",
+          "attacks": "free_will",
+          "role": "derivation",
+          "pillars": [2],
           "objection": "“Normative address does not imply genuine choice.”",
           "targets": [
             "d7_co_grasp_is_definitionally_choice",
@@ -513,6 +553,9 @@
         },
         {
           "branch": "No choice (determinism)",
+          "attacks": "free_will",
+          "role": "derivation",
+          "pillars": [3],
           "objection": "“Freedom requires physical indeterminism.”",
           "targets": [
             "d8_choice_is_definitionally_free_will",
@@ -522,7 +565,9 @@
           "denial_hypothesis": "¬FreeWill s"
         },
         {
-          "branch": "Normativity is stipulative",
+          "branch": "Normativity is only stipulated",
+          "attacks": "incompatible_poles",
+          "role": "derivation",
           "objection": "“Moral norms are just stipulations.”",
           "targets": [
             "normative_denial_of_normativity_is_self_refuting",
@@ -544,6 +589,9 @@
         },
         {
           "branch": "Voluntarism (Euthyphro)",
+          "attacks": "person_grounds_poles",
+          "role": "derivation",
+          "pillars": [5],
           "objection": "“Ought is just will; the person invents morality.”",
           "targets": [
             "will_identity_collapses_normativity",
@@ -561,6 +609,8 @@
         },
         {
           "branch": "Descriptivism (D3)",
+          "attacks": "disclosure_to_someone",
+          "role": "derivation",
           "objection": "“Truth is only descriptive; there is no deontic guidance at all.”",
           "targets": [
             "d3_descriptive_truth_lacks_deontic_guidance"
@@ -569,7 +619,9 @@
           "denial_hypothesis": "hDescriptiveOnly → ∀ s, ¬AgentialDeonticAddress s p q"
         },
         {
-          "branch": "Impersonal normativity (D4)",
+          "branch": "No subject for normativity (D4)",
+          "attacks": "disclosure_to_someone",
+          "role": "derivation",
           "objection": "“An ought can bind no one; normativity needs no subject.”",
           "targets": [
             "d4_impersonal_normativity_fails_relationality"
@@ -579,6 +631,8 @@
         },
         {
           "branch": "Monolithic command (D5)",
+          "attacks": "incompatible_poles",
+          "role": "derivation",
           "objection": "“A command with no alternative is still a command.”",
           "targets": [
             "d5_monolithic_command_lacks_opposition"
@@ -588,6 +642,8 @@
         },
         {
           "branch": "Ungraspable command (D6)",
+          "attacks": "free_will",
+          "role": "derivation",
           "objection": "“A command nobody can grasp is still a command.”",
           "targets": [
             "d6_ungraspable_command_fails_agential_address"
@@ -597,14 +653,19 @@
         },
         {
           "branch": "The ground is just an atom",
+          "attacks": "person_grounds_poles",
+          "role": "boundary",
+          "pillars": [6],
           "objection": "“The ultimate ground is a particle.”",
           "targets": [
             "atom_cannot_ground_the_ground"
           ],
-          "note": "A countermodel is a **boundary**: it says the reading cannot ground the ground, not that the reading is incoherent."
+          "note": "An entity with no meaning capacity cannot ground one that has: `EntityMeans Entity.ofGround False` against `EntityMeans (ofAtom n) False`."
         },
         {
           "branch": "The ground is a *single* Person",
+          "attacks": "person_grounds_poles",
+          "role": "boundary",
           "objection": "“One God = one person, full stop.”",
           "targets": [
             "unicity_does_not_force_unitarian_monad"
@@ -612,18 +673,57 @@
           "note": "Refuted **as a consequence**: one ground, and every ground bears at least two distinct persons. This is why single-person monotheism is not merely unproven (§14)."
         },
         {
-          "branch": "A free subject's existence is open",
+          "branch": "That a free subject exists is unestablished",
+          "attacks": "the_fact",
+          "role": "derivation",
+          "pillars": [4],
           "objection": "“No one has shown a free subject exists.”",
           "targets": [
             "AsieticChoice.freeWill_exists",
             "epistemic_order_makes_the_act_datum_necessary"
           ],
-          "note": "Row SUPERSEDED in GAPMAP (`F1bUncond`): C278 already proved it, and the corollary `freeSubject_exists` extends it to the `FreeSubject` name at the same price."
+          "note": "CLEARER.md §8. Renamed from “A free subject’s existence is open”, which was the one branch label that could be read as a *finding* rather than a *denial*: every sibling names a position that is killed, this one named a gap, and in a one-line index row with no gloss the gap was the only thing on the page. The label now states the objection in denial form. Role `derivation`: the target proves `∃ s, FreeWill(s)` outright at one META axiom, so the objection is answered rather than bounded, and the price is shown, never laundered into a ✅. The second target is the necessity half and is free. Row SUPERSEDED in GAPMAP (`F1bUncond`): C278 already proved it, and the corollary `freeSubject_exists` extends it to the `FreeSubject` name at the same price."
+        },
+        {
+          "branch": "The critic who presents the objection is himself a person",
+          "attacks": "disclosure_to_someone",
+          "role": "pillar",
+          "pillars": [7],
+          "objection": "“This objection is a sound argument, so it carries no personal stance.”",
+          "targets": [
+            "critic_presenting_objection_is_person"
+          ],
+          "derivation_target": "critic_presenting_objection_is_person",
+          "denial_hypothesis": "PresentsAsSound critic objection",
+          "note": "Pillar 7. The kernel anchor is `ProofPresentationRetorsion.lean:206`; the footprint is free, so the critic's own stance is derived at the same price as every other entry here."
         }
       ]
     },
     {
+      "id": "seam",
+      "part": "IV",
+      "heading": "## Part IV — the seam: where the deduction stops",
+      "title": "Part IV — the seam",
+      "body": [
+        "The deduction runs on the **epistemic** route: meaning, disclosure to a subject, the person, the grounding of the poles.",
+        "It does **not** run on the older deontic route — ought, choice, free will, personal grounding — which asserted far more and is kept whole in [the ledger](investigations/ledger.md).",
+        "The seam is where the two routes do not meet. It is stated here rather than left for the reader to infer from what is absent. Three lines carry it, and all three are named in GAPMAP.",
+        "**C228 — the ground's personalhood, at the entity level: BLOCKED.**",
+        "`normative_ground_is_personal (g) (hGr : GenericGroundsRightWrong g) : PersonalEntity g` is **not** proved. The missing lemma is named verbatim in `base.txt:1345-1346`:",
+        "> `#9  Ground(e, personal) → Personal(e)`  — together with its target #10.",
+        "Personhood in Γ is a three-step field projection: `grounds_normativity` gives the `GenericGroundingRelation`, `explanatory` forces `g = EntityOf s`, `personal_ground` gives `Person s`. The two fields that would seal it, `explanatory` and `asymmetric`, are the named blockers.",
+        "**C228 is about `Entity`, not about `Person`.** Whether the ground is *one* person is a separate question with a machine-checked answer: `unicity_does_not_force_unitarian_monad` says a unique ground can bear two or more distinct persons. That is R14 below.",
+        "**C110 — a necessary ground does not entail contingent creation: countermodel, `{}`.** `¬ (∀ Subj Ent World, GroundEntailsCreation Subj Ent World)` — nothing in the deduction produces a world or a creation event.",
+        "**C112 — the preceding theory does not entail the incarnation: countermodel, `{}`.** Nothing in the deduction requires the ground to enter a body.",
+        "**C109 — the preceding theory does not entail the Trinity: DEMOTED.** Its 2-element-Boolean cardinality artifact is superseded by `monotheism_compatible_with_trinity`; the row is kept so the supersession stays visible.",
+        "The 32 formal frontiers — every unproved step, every countermodel separation, every open bridge, each with its exact missing lemma — are in [the ledger](investigations/ledger.md). Nothing there is established."
+      ],
+      "claims": ["C228", "C110", "C112", "C109"]
+    },
+    {
       "id": "limits",
+      "part": "IV",
+      "heading": "### What the Instrument Cannot See",
       "title": "14. What the Instrument Cannot See",
       "body": [
         "`#print axioms` reads the kernel's dependency graph. It cannot see a **`def` used as a premise by name** — so the census below counts every such inherited bridge, the theorems it underwrites, and how many have been reviewed.",
@@ -635,6 +735,8 @@
     },
     {
       "id": "boundaries",
+      "part": "IV",
+      "heading": "### What Is Not Established",
       "title": "15. What Is Not Established",
       "body": [
         "**Single-person monotheism is not on this list, because it is refuted rather than open** (§12): one ground, and every ground bears at least two distinct persons.",
@@ -1107,56 +1209,56 @@
     {
       "from": "right_wrong",
       "to": "ought",
-      "relation": "normative standard specification",
-      "direction": "discovery"
+      "gloss": "normative standard specification",
+      "kind": "discovery"
     },
     {
       "from": "ought",
       "to": "choice",
-      "relation": "apprehension of incompatible alternatives",
-      "direction": "discovery"
+      "gloss": "apprehension of incompatible alternatives",
+      "kind": "discovery"
     },
     {
       "from": "choice",
       "to": "free_will",
-      "relation": "PURE LOGIC · 0 substantive axioms",
-      "direction": "discovery"
+      "gloss": "PURE LOGIC · 0 substantive axioms",
+      "kind": "discovery"
     },
     {
       "from": "free_will",
       "to": "free_subject",
-      "relation": "definitional equivalence [FreeSubject(s) ≡ FreeWill(s)]",
-      "direction": "discovery"
+      "gloss": "definitional equivalence [FreeSubject(s) ≡ FreeWill(s)]",
+      "kind": "discovery"
     },
     {
       "from": "free_subject",
       "to": "person",
-      "relation": "priced theorem [Person := ThomisticPersonCore; via will_individuation]",
-      "direction": "discovery"
+      "gloss": "priced theorem [Person := ThomisticPersonCore; via will_individuation]",
+      "kind": "discovery"
     },
     {
       "from": "person",
       "to": "personal_will",
-      "relation": "numerical individuation [will_individuation]",
-      "direction": "discovery"
+      "gloss": "numerical individuation [will_individuation]",
+      "kind": "discovery"
     },
     {
       "from": "personal_will",
       "to": "ground_right_wrong",
-      "relation": "ONTOLOGICAL GROUNDING ARROW [Grounding ≠ Identity]",
-      "direction": "grounding"
+      "gloss": "ONTOLOGICAL GROUNDING ARROW [Grounding ≠ Identity]",
+      "kind": "grounding"
     },
     {
       "from": "ground_right_wrong",
       "to": "necessary_truth",
-      "relation": "modal continuation from normative truth",
-      "direction": "continuation"
+      "gloss": "modal continuation from normative truth",
+      "kind": "continuation"
     },
     {
       "from": "necessary_truth",
       "to": "constructive_personal_ground",
-      "relation": "constructive discovery [ObjectiveNormativity ⇒ Person]",
-      "direction": "discovery"
+      "gloss": "constructive discovery [ObjectiveNormativity ⇒ Person]",
+      "kind": "discovery"
     }
   ]
 }

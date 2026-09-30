@@ -1547,6 +1547,99 @@ def _wrap(x: str) -> str:
     x = x.strip()
     return x if _simple(x) else "(" + x + ")"
 
+
+def _wrap_para(text: str, cap: int) -> list[str]:
+    """Soft-wrap a prose line to `cap` characters at word boundaries.
+
+    `README_PARA_CAP` is a hard assert in `_lint_readme`, so any generated prose
+    longer than the cap fails the build. Wrapping rather than truncating: a
+    truncated gloss is a false statement about the declaration, and a hard
+    failure in the middle of a document is worse than a paragraph of a slightly
+    different length. `cap` is checked, not assumed — a single word longer than
+    the cap is emitted alone rather than being split mid-word.
+    """
+    text = re.sub(r"\s+", " ", (text or "").strip())
+    if not text:
+        return []
+    out, line = [], ""
+    for word in text.split(" "):
+        if not line:
+            line = word
+        elif len(line) + 1 + len(word) <= cap:
+            line += " " + word
+        else:
+            out.append(line)
+            line = word
+    if line:
+        out.append(line)
+    return out
+
+
+def _definition_gloss(d: ProofIR, cap: int = 260) -> str:
+    """The declaration's own first sentence, for a definition row.
+
+    Read from `doc_lead`/`doc` — the Lean docstring, not a `ClaimMeanings`
+    string — so a `def`'s gloss cannot drift from the declaration it glosses.
+    Only the *first* sentence is used: a definition's meaning is one clause, and
+    a docstring's second paragraph is usually about a proof or a model. A first
+    sentence longer than `cap` is elided at a word boundary with `…`, which is
+    the only cut made anywhere in this file's prose — cutting mid-clause
+    produced a line that read as a finished statement and was not one.
+    """
+    doc = (d.doc_lead or d.doc or "").strip()
+    if not doc:
+        return ""
+    m = re.match(r"^(.+?[.!?])(\s|$)", doc, re.S)
+    first = (m.group(1) if m else doc).strip()
+    if len(first) > cap:
+        first = _wrap_para(first, cap)[0].rstrip(",;:—- ") + " …"
+    return first
+
+
+# A compiled goal that is a *declaration header* rather than an equation. The
+# compiler returns the head statement for a `structure`/`inductive`/`abbrev`
+# whose body is not a term, e.g. `structure Signature where`, and printing that
+# after a `∴` would assert that the structure is defined by the word "where".
+_NOT_AN_EQUATION = ("structure ", "inductive ", "abbrev ", "def ", "class ",
+                    "instance ", "where")
+
+
+def _definition_equation(d: ProofIR) -> str:
+    """The equation a definition fixes — or `""` when it does not fix one.
+
+    A `def` has an equation (`Correct ≡ A s p ∧ T p`). An `axiom` primitive has
+    none: `Means` is a declared relation, not a definition, and the honest row
+    is its docstring alone. A `structure` has a field list, which the glossary
+    row does not reproduce — printing the compiler's `structure X where` after a
+    `∴` would be a fabricated equation, and a structure's fields belong in the
+    characteristic block that owns them, not in a step's vocabulary.
+    """
+    if d.kind in ("axiom", "structure", "inductive", "class"):
+        return ""
+    goal = re.sub(r"\s+", " ", (d.goal or "").strip())
+    if not goal or goal.startswith(_NOT_AN_EQUATION):
+        return ""
+    if not any(sym in goal for sym in (" ≡ ", " ↔ ", " ⇔ ", " := ")):
+        return ""
+    return goal
+
+
+def _compacted_goal(proof: ProofIR, cap: int = 200) -> str:
+    """A definition's equation on one short line, or `""`.
+
+    Wrapped rather than cut, because a cut equation reads as a different one.
+    The one cut taken is at a logical connective, which preserves the part that
+    was printed as a well-formed fragment, and it is marked with `…`.
+    """
+    goal = _definition_equation(proof)
+    if not goal or len(goal) <= cap:
+        return goal
+    for sym in (" ∧ ", " ↔ ", " ⇔ ", " → ", " ∨ "):
+        idx = goal.rfind(sym, 0, cap)
+        if idx > cap // 3:
+            return goal[:idx].rstrip() + " …"
+    return " ".join(_wrap_para(goal, cap)[:1])
+
 def _sub_n(n: str) -> str:
     return "p" + n.translate(_SUB)
 
@@ -2539,23 +2632,69 @@ def _select_strongest(proofs: list, node_map: dict) -> list:
             out.append(min(cands, key=lambda q: (len(q.steps), len(q.assumptions))))
     return out
 
+# Namespaces that hold a *model*, not Γ's vocabulary. A definition row on the
+# reading path states what a symbol means in the theory; a symbol taken from one
+# of these namespaces states what it means in a structure built to make some
+# other inference fail, and printing it as the reader's vocabulary is the
+# C559 category error (AGENTS.md, "Signature models are not candidate states").
+#
+# This list was four entries and was wrong. `Logos.MoralFrontierAudit.M_amoral`
+# declares its own `Means`, and its path contains none of the four, so it won the
+# name collision against Γ's `Means` — which is an *axiom* (`Agency.lean:92`),
+# and the old docstring's claim that "axioms never match, kinds differ" was
+# exactly the hole the countermodel fell through. `EpistemicPersonalGround.M`
+# and `...Model.Signature` are the C556 separation's own signature, not Γ's
+# vocabulary, and they were likewise being printed as step 9's definitions.
+COUNTERMODEL_NAMESPACES = (
+    "HostileSemantics", "Countermodel", "UnitPlurality", "ModelHierarchy",
+    "M_amoral", "EpistemicPersonalGround.M", "EpistemicPersonalGround.Model",
+)
+
+# A definition row's gloss may come from any of these. `axiom` is included
+# deliberately: Γ's core primitives (`Means`, `Initiates`, `Subject`) are
+# declared as axioms with docstrings and have no defining equation, so the row
+# is the docstring alone and no `∴` line — which is the honest rendering of a
+# primitive, and better than substituting another theory's `def` of the same
+# name.
+_DEFINITION_GLOSS_KINDS = ("def", "abbrev", "opaque", "inductive", "structure", "axiom")
+
+
+def is_countermodel_declaration(full: str) -> bool:
+    return any(m in full for m in COUNTERMODEL_NAMESPACES)
+
+
 def route_definition_proofs(proofs: list, decls: dict, node_map: dict, graph: dict, def_registry: dict) -> list:
     """Definition steps used by the rendered goals of a section but not surfaced
-    as their own step. Derived, never transcribed: short-name tokens of the
-    humanised goals are intersected with glossed Logos `def`/`inductive`/`opaque`
-    nodes; name collisions (hostile-model twins) resolve to the canonical,
-    non-hostile module. Axioms (Means, Initiates, …) never match — kinds differ."""
+    as their own step.
+
+    Derived, never transcribed: short-name tokens of the humanised goals are
+    intersected with glossed `Logos` declarations, restricted to Γ's own
+    vocabulary. Two rules, both of which a countermodel broke before they
+    existed:
+
+    - **A countermodel or signature-model namespace never supplies a row**, and
+      there is no fallback to one. If Γ declares the symbol only as an axiom, the
+      row is the axiom's docstring with no equation; if nobody declares it, the
+      row is absent. A `def` in a model namespace is not a weaker match, it is a
+      different symbol that happens to share a name.
+    - **A Γ-core `axiom` does supply a row.** Excluding axioms on kind was what
+      let a hostile twin through: Γ's `Means` is `axiom Means` in `Agency.lean`
+      and the only *other* `Means` with a docstring was
+      `Logos.MoralFrontierAudit.M_amoral.Means`, which the old four-marker
+      filter did not recognise as a model.
+    """
     tokens = set()
     for p in proofs:
         tokens |= set(re.findall(r"[A-Za-z_][A-Za-z0-9_]*", p.goal or ""))
     if not tokens:
         return []
-    hostile_markers = ("Hostile", "Countermodel", "UnitPlurality", "ModelHierarchy")
     cand = {}
     for full, nd in node_map.items():
         if not full.startswith("Logos."):
             continue
-        if nd.get("kind") not in ("def", "inductive", "opaque"):
+        if nd.get("kind") not in _DEFINITION_GLOSS_KINDS:
+            continue
+        if is_countermodel_declaration(full):
             continue
         base = full.rsplit(".", 1)[-1]
         if base not in tokens or not decls.get(full, {}).get("doc"):
@@ -2566,8 +2705,10 @@ def route_definition_proofs(proofs: list, decls: dict, node_map: dict, graph: di
     shown = {p.full_name for p in proofs}
     out = []
     for base in sorted(cand):
-        fds = sorted(cand[base])
-        chosen = next((f for f in fds if not any(h in f for h in hostile_markers)), fds[0])
+        # Shortest path wins: a declaration in a nested namespace is a special
+        # case of the one above it. Both are Γ's, so this is a tiebreak, not a
+        # hostility test.
+        chosen = min(sorted(cand[base]), key=lambda f: (f.count("."), f))
         if chosen in shown:
             continue
         pr = compile_lean_proof(chosen, decls, node_map, graph, def_registry)
@@ -2659,7 +2800,17 @@ def format_discrete_math(s: str, table: dict = None) -> str:
         table = _CTX.get("symbol_table", {})
     
     # Clean LaTeX escape sequences
-    s = s.replace(r"\;", " ").replace(r"\,", ", ").replace("_w", "w")
+    s = s.replace(r"\;", " ").replace(r"\,", ", ")
+    # `_w` is a discarded Lean binder (`assume _w _e`). Strip the underscore, but
+    # only on a *standalone* token: a global substring replace also ate the `_w`
+    # inside every identifier that contains it, so `ofGround_world_rigid_presence`
+    # rendered as `ofGroundworld_rigid_presence` — a name that is not in the
+    # kernel, which then failed the component lookup and made a real theorem
+    # report itself as "a term of the record, not a named theorem".
+    s = re.sub(r"(?<![A-Za-z0-9_])_w(?![A-Za-z0-9_])", "w", s)
+    # (`?_` needs no guard here: witness tuples are built in the tactic parser,
+    # which is the only place a `refine` hole appears, and it is spelled out there
+    # with the `exact` that fills it. See CLEARER.md §3, 0.3.)
     s = re.sub(r"\\(?:text|mathrm)\{([^}]*)\}", r"\1", s)
     s = s.replace(r"\neg", "¬").replace(r"\land", "∧").replace(r"\lor", "∨")
     s = s.replace(r"\to", "→").replace(r"\leftrightarrow", "↔")
@@ -3404,12 +3555,15 @@ def compile_lean_proof(full: str, decls: dict, node_map: dict, graph: dict, def_
                 ))
                 continue
 
+            # A bare token with no space is taken as a premise. When the token is
+            # empty there is nothing to cite, so the step prints without a
+            # justification rather than as the empty `(from )` (CLEARER.md §3, 0.4).
             proof.steps.append(ProofStepIR(
                 var_name=v_name,
                 proposition=prop_fm,
                 rule=Rule.PREMISE,
-                premises=[term],
-                description=f"from {term}",
+                premises=[term] if term else [],
+                description=f"from {term}" if term else "",
             ))
             continue
 
@@ -3452,6 +3606,14 @@ def compile_lean_proof(full: str, decls: dict, node_map: dict, graph: dict, def_
         m_refine = re.match(r"^\s*refine\s+⟨(.*?)⟩", l)
         if m_refine:
             args = [x.strip() for x in m_refine.group(1).split(",")]
+            # A `?_` in a `refine` names no data: the tactic has fixed every data
+            # field and left the last *proof obligation* to the `exact` on the next
+            # line (FoundationalUnicity.lean:320). Printing the bare hole told the
+            # reader nothing; dropping it would hide how the countermodel is built.
+            # So it is spelled out here, where the `refine` gives it meaning
+            # (CLEARER.md §3, 0.3).
+            args = [("(proof of this field, from the next line)"
+                     if a == "?_" else a) for a in args]
             proof.steps.append(ProofStepIR(
                 var_name="",
                 proposition=f"witness tuple ⟨{', '.join(args)}⟩",
@@ -3849,6 +4011,94 @@ def classify_proof_edge(proof: ProofIR, graph: dict = None, decls: dict = None) 
         return "SEMANTIC", f"AXIOMATIC ({req})"
     else:
         return "PROVEN", "PROVEN | 0 substantive axioms"
+
+
+# CLEARER.md §6 (Phase 3): what the compiled proof *is*, as a label on the proof
+# body. Closed vocabulary, and a category outside it fails the build rather than
+# defaulting — the same rule as `_REFTABLE`, for the same reason: a silent
+# default is how a boundary becomes a death.
+#
+# The two internal priced categories (`METAPHYSICAL`, `SEMANTIC`) collapse to one
+# glyph on purpose: the reader is told *paid*, and which axiom was paid in is
+# named on the PRICE line below it, so the collapse loses no information. It is
+# the one place the display is coarser than the category, and it is coarser
+# where the extra detail is on the next line.
+_PROOF_KINDS = {
+    "DEFINITIONAL": ("📘", "📘 DEFINITIONAL"),
+    "DERIVATION":   ("⚙️", "⚙️ DERIVATION"),
+    "COUNTERMODEL": ("🧱", "🧱 COUNTERMODEL"),
+    "PRICED":       ("💰", "💰 PRICED"),
+    "OPEN":         ("⏸", "⏸ OPEN"),
+}
+
+# A step that *is* an identity. The structural signal is the compiler's own rule
+# tag (`DEFINITION_UNFOLD`, set at every point the compiler reads `rfl`,
+# `Iff.rfl`, `Eq.refl` or a bare name as the whole step), so this is not a
+# judgement about the step's text: a proof made only of these is definitional
+# whatever its goal says. That is §6's claim about `person_iff_thomisticCore`,
+# whose Lean body is literally `Iff.rfl` and which the compiler had already
+# labelled `definitional equality / reflection` before this phase existed.
+# §6 also claimed the Trinity block is "three `rfl`s"; it is six steps of which
+# three are `rfl`, the other three being a named theorem, an axiom and a
+# projection — so the label correctly refuses it, and that correction is in §11.
+_IDENTITY_RULES = ("definition_unfold",)
+_IDENTITY_STEP = re.compile(r"^\s*(?:definitional (?:equality|identity)|"
+                            r"(?:Iff\.rfl|Eq\.refl|rfl|propext)\b)")
+
+
+def _is_identity_step(st) -> bool:
+    if (getattr(st, "rule", "") or "") in _IDENTITY_RULES:
+        return True
+    return bool(_IDENTITY_STEP.match(st.description or ""))
+
+
+def proof_kind(proof: ProofIR) -> tuple[str, str]:
+    """`(kind_key, one-line reason)` for a proof body, both derived.
+
+    The category half comes from `classify_proof_edge`, so a proof cannot be
+    labelled a derivation by hand; the reason half reads the *body*, so the label
+    says what the trace actually is rather than repeating the status line. This
+    **reveals**: `person_grounds_normative_polarity` is one projection and the
+    Trinity block is three identities, and a reader can see that instead of taking
+    a padded trace at face value. It never contradicts the status line — a proof
+    labelled 📘 is still ✅ PROVEN, and the label is the more specific of the two
+    facts, not a competing one.
+    """
+    cat, _badge = classify_proof_edge(proof)
+    if cat == "COUNTERMODEL":
+        key = "COUNTERMODEL"
+    elif cat == "DEFINITIONAL":
+        key = "DEFINITIONAL"
+    elif cat in ("METAPHYSICAL", "SEMANTIC"):
+        key = "PRICED"
+    elif cat == "PROVEN":
+        key = "DERIVATION"
+    else:
+        key = "OPEN"
+
+    steps = proof.steps or []
+    if key == "DERIVATION" and steps and all(_is_identity_step(st) for st in steps):
+        key = "DEFINITIONAL"
+
+    icon, label = _PROOF_KINDS[key]
+    n = len(steps)
+    if key == "COUNTERMODEL":
+        reason = "a hostile model, not a proved claim"
+    elif not steps and key == "DEFINITIONAL":
+        reason = "a definition, with no step to show"
+    elif not steps:
+        reason = "discharged directly, with no intermediate step"
+    elif key == "DEFINITIONAL":
+        reason = ("1 step, an identity" if n == 1
+                  else f"{n} steps, every one an identity")
+    elif n == 1:
+        reason = "one step, a projection"
+    elif key == "PRICED":
+        reason = f"{n} steps, on a declared axiom"
+    else:
+        reason = f"{n} compiled steps"
+    return label, reason
+
 
 def resolve_proof_by_name(name: str, compiled_by_id: dict, decls: dict, graph: dict) -> ProofIR | None:
     """Resolve a declared target name to its compiled proof.
@@ -4739,14 +4989,9 @@ def generate_ascii_chart(
         # Outgoing edges
         out_edges = edges_by_from.get(node_id, [])
         for e in out_edges:
-            direction = e.get("direction", "discovery")
-            rel = e.get("relation", "")
-            if direction == "grounding":
-                dir_tag = f"[{direction.upper()} · {rel}]"
-            elif direction == "continuation":
-                dir_tag = f"[{direction} · {rel}]"
-            else:
-                dir_tag = f"[{direction} · {rel}]"
+            kind = e.get("kind", "discovery")
+            rel = e.get("gloss", "")
+            dir_tag = f"[{kind.upper()} · {rel}]" if kind == "grounding" else f"[{kind} · {rel}]"
             lines.append("        │")
             lines.append(f"        │ {dir_tag}")
             lines.append("        ▼")
@@ -5111,6 +5356,8 @@ def render_reading_guide():
     ap("| `✅` | PROVEN — verified by pure logic; footprint contains only classical meta-logic (`CL`) and the claim's own vocabulary (0 substantive axioms) |")
     ap("| `⚠️ (AxName)` | AXIOMATIC — machine-verified, yet deliberately rests on the named declared axiom (`SEM` semantic choice / `META` metaphysical bridge) — **not unproved** |")
     ap("| `📘` | DEFINITIONAL — true by definition of the term being introduced |")
+    ap("| `⚙️` | DERIVATION — machine-verified from its premises, 0 substantive axioms |")
+    ap("| `💰` | PRICED — the same, resting on a declared axiom, named on the PRICE line |")
     ap("| `⏸` | DEFERRED — a claimed result whose Lean declaration is not in the live kernel; annotated surface only (see GAPMAP + source notes), **NOT a theorem in this repository** |")
     ap("| `🧱 X ⇏ Y` | COUNTERMODEL — a model forces X nowhere near Y: an explicit boundary, not a failure |")
     ap("")
@@ -5262,7 +5509,14 @@ def refutation_kind(proof: ProofIR, denial_hypothesis: str | None = None) -> str
     goal = (proof.goal or "").strip()
     fp = audit_footprint(proof.full_name) or []
     subst = [a for a in fp if (_REGISTRY.get(a.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META", "TRANS")]
-    if goal in ("False", "⊥") or "⊥" in goal:
+    # A goal is a contradiction when its *conclusion* is `False`, whether that is
+    # written bare (`⊢ False`) or as the consequent of an implication
+    # (`⊢ NormativeViolation s a → False`, the Euthyphro collapse). The earlier
+    # test only looked for a literal `⊥` in the string, so the implication form
+    # fell through to the positive branch below and was reported as an
+    # *instantiation* — the opposite claim.
+    if goal in ("False", "⊥") or "⊥" in goal or \
+            re.search(r"(?:→|->)\s*(?:False|⊥)\s*$", goal):
         return "⊥ CONTRADICTION"
     if denial_hypothesis and subst:
         return "❌ NOT STOPPED"
@@ -5279,14 +5533,45 @@ def refutation_kind(proof: ProofIR, denial_hypothesis: str | None = None) -> str
         # than borrowing the strength of a refutation.
         return "COLLAPSE — INCOHERENT"
     if goal.startswith("¬") or goal.startswith("∃") or goal.startswith("¬∃"):
+        # A **separation** and a **positive existence** claim are both `∃`-shaped
+        # and were being given the same two kinds, which is how R15 ended up
+        # labelled `⌐ DEFINITIONAL FALLACY`: its goal is `∃ s, FreeWill(s)`, a
+        # positive claim that a free subject exists, proved at `AxTwoSubjects`.
+        # Nothing about it is a fallacy, and nothing about it is a countermodel
+        # either — it is the objection answered, at a price. So the polarity
+        # decides:
+        #
+        #   - a `¬…` or `⇏`-shaped goal is a *separation*: it exhibits a case
+        #     where the reading fails. Free ⇒ countermodel (a bound). Priced ⇒
+        #     `DEFINITIONAL FALLACY`, unchanged.
+        #   - a bare `∃ …` goal is a *positive* claim that the thing the denial
+        #     doubts is there. Priced ⇒ the denial is answered and the price is
+        #     named; free ⇒ still a countermodel, because a free witness to a
+        #     positive claim is exactly the model that has it.
+        if goal.startswith("∃") and not goal.startswith("∃¬") and subst:
+            return "⚠️ PRICED — the objection answered, at a price"
         return "DEFINITIONAL FALLACY" if subst else "COUNTERMODEL · ⇏"
-    # A proved theorem whose goal is neither a contradiction nor a separation:
-    # the branch dies by *collapse*, not by ⊥ — the identification it needs
-    # destroys the notion it claims (Euthyphro: `Wills s p = Ought s p` makes
-    # violation impossible). Proved, but in a weaker mode, and the row says so
-    # rather than borrowing the strength of `⊥`.
+    # A proved theorem whose goal is neither a contradiction nor a separation.
+    # Two different things land here and conflating them is an overclaim, so the
+    # shapes are separated:
+    #
+    #   - the goal is a *negation* of something the denial wanted (Euthyphro:
+    #     `Wills s p = Ought s p` makes violation impossible). The branch dies by
+    #     collapse — proved, but in a weaker mode than `⊥`, and the row says so
+    #     rather than borrowing the strength of a refutation;
+    #   - the goal is a *positive* proposition. Nothing collapsed: assuming the
+    #     denial yielded an instance of the very thing the denial denies. That is
+    #     the proof-self retorsion (`critic_presenting_objection_is_person`:
+    #     presenting the objection as sound derives `Person ∧ FreeWill`), and it
+    #     is not a death. Reading it as `COLLAPSE` claimed the kernel had refuted
+    #     something it had in fact identified, so the kind says "not a death" in
+    #     its own text rather than in a note.
+    if goal.startswith("¬") or goal.startswith("∃") or goal.startswith("¬∃"):
+        if classify_proof_edge(proof)[0].startswith("PROVEN"):
+            return "COLLAPSE — INCOHERENT"
+        return "DEFINITIONAL FALLACY" if subst else "COUNTERMODEL · ⇏"
     if classify_proof_edge(proof)[0].startswith("PROVEN"):
-        return "COLLAPSE — INCOHERENT"
+        return "🪞 INSTANTIATION — not a death"
     return "❌ NOT STOPPED"
 
 
@@ -5294,8 +5579,10 @@ _KIND_ICON = {
     "⊥ CONTRADICTION": "⊥",
     "⊘ DENIAL REFUTED": "⊘",
     "DEFINITIONAL FALLACY": "⌐",
+    "⚠️ PRICED — the objection answered, at a price": "⚠️",
     "COUNTERMODEL · ⇏": "🧱",
     "COLLAPSE — INCOHERENT": "💥",
+    "🪞 INSTANTIATION — not a death": "🪞",
     "❌ NOT STOPPED": "❌",
 }
 
@@ -5349,7 +5636,16 @@ def _status_cell(proofs: list[ProofIR]) -> str:
         head = f"{icon} **PROVEN** · 0 substantive axioms"
     else:
         head = f"{icon} **{badge}**"
-    links = " ".join(_classical_decl_link(p.full_name, _CTX.get("decls", {})) for p in proofs)
+    # Several declarations can back one row. `_classical_decl_link` was built for
+    # a single link and re-states the word `footprint` on each, so four of them ran
+    # together as `[a](…) , footprint {…} [b](…) , footprint {…} …` with no
+    # separator. The cell above already carries the block's own footprint, so
+    # here the links are separated by ` · ` and the repeated label is dropped
+    # (CLEARER.md §3, 0.11).
+    links = " · ".join(
+        _classical_decl_link(p.full_name, _CTX.get("decls", {}))
+        .replace(", footprint ", " ")
+        for p in proofs)
     return f"{head} · {_footprint_cell(proofs)} · {links}"
 
 
@@ -5434,7 +5730,8 @@ def _gloss_line(doc_lead: str) -> str:
 def render_cremation_derivation(proof: ProofIR, denial_hypothesis: str, *, branch: str,
                                 objection: str = "", voice: str = "", voice_gloss: str = "",
                                 index: int | None = None, require_free: bool = True,
-                                price_note: str = "") -> list[str]:
+                                price_note: str = "", kills: str = "",
+                                gives: str = "", role: str = "derivation") -> list[str]:
     """One branch of the denial, with its premises, its steps, and its death.
 
     The whole point of this renderer (CREMATION.md): a §13 row used to state
@@ -5483,21 +5780,32 @@ def render_cremation_derivation(proof: ProofIR, denial_hypothesis: str, *, branc
     thesis_i = matches[0]
     kind = refutation_kind(proof, denial_hypothesis)
     icon = _KIND_ICON.get(kind, "?")
-    if kind not in ("⊥ CONTRADICTION", "⊘ DENIAL REFUTED", "COLLAPSE — INCOHERENT"):
+    # V4. A *refutation* must end in a derived terminator, or the reading path is
+    # claiming a death it cannot show. A **pillar** row is the one exception and
+    # the exception is narrow: the proof-self retorsion does not refute the
+    # objection, it identifies the critic as an instance of the person, and
+    # forcing that through the three death kinds is what made R16 read as a
+    # `COLLAPSE`. It is admitted only under the `🪞 INSTANTIATION` kind, which is
+    # itself derived from the goal's shape, so this cannot become a door for a
+    # goal that merely looks unusual.
+    if role == "derivation" and kind not in (
+            "⊥ CONTRADICTION", "⊘ DENIAL REFUTED", "COLLAPSE — INCOHERENT"):
         raise SystemExit(
             f"FATAL: cremation branch '{branch}': '{proof.name}' does not end in a "
-            f"derived ⊥/⊘ terminator (kind was {kind!r}) — the reading path may not "
+            f"derived ⊥/⊘/collapse terminator (kind was {kind!r}) — the reading path may not "
             f"claim a death it cannot show.")
+    if role == "pillar" and kind != "🪞 INSTANTIATION — not a death":
+        raise SystemExit(
+            f"FATAL: pillar row '{branch}': '{proof.name}' was declared a pillar "
+            f"retorsion but its derived kind is {kind!r}. A pillar row must be the "
+            f"instantiation shape; if it now ends in ⊥ it is a refutation and "
+            f"`role` should say `derivation`, so it is priced and gated as one.")
 
     gloss = _gloss_line(proof.doc_lead) or branch
-    L: list[str] = []
-    head = f"**{index}. {branch}**" if index else f"**{branch}**"
-    if objection:
-        head += f" — {objection}"
-    L.append(head)
-    L.append("")
-    L.append(f"> **{kind}** — {gloss}")
-    L.append("")
+    # V5: every line below is an assumption, a compiled step, or the derived
+    # terminator. Built here so the wrapper can hand the block renderer a body it
+    # has already checked, rather than the block renderer inventing one.
+    body: list[str] = []
     for i, pr in enumerate(premises):
         if i == thesis_i:
             tail = "  ← the denial's own thesis"
@@ -5505,87 +5813,992 @@ def render_cremation_derivation(proof: ProofIR, denial_hypothesis: str, *, branc
             tail = f"  ← {voice_gloss or 'voicing the denial as correct'}"
         else:
             tail = ""
-        L.append(f"    Assume {pr}{tail}")
+        body.append(f"    Assume {pr}{tail}")
     for n, st in enumerate(proof.steps, 1):
-        L.append(f"      {n}. {st.proposition}  ({st.description})")
+        body.append(f"      {n}. {st.proposition}  ({st.description})")
     if kind == "⊥ CONTRADICTION":
-        L.append("    ⊥")
+        body.append("    ⊥")
     elif kind == "⊘ DENIAL REFUTED":
-        L.append(f"    ⊘ {proof.goal}  — the denial's own negation")
+        body.append(f"    ⊘ {proof.goal}  — the denial's own negation")
+    elif kind == "🪞 INSTANTIATION — not a death":
+        body.append(f"    {proof.goal}  — the objection, made by a critic, is an "
+                    f"instance of the person; nothing is refuted")
     else:
-        L.append(f"    {proof.goal}  — the denial, followed, destroys what it claims to keep")
-    L.append("")
-    L.extend(_cremation_price(proof))
+        body.append(f"    {proof.goal}  — the denial, followed, destroys what it claims to keep")
+    # No trailing restatement of `kind`: the block's gloss line above already names
+    # it, and printing `⊥ CONTRADICTION` twice — once as a label, once as the last
+    # line of the proof — reads as two separate facts about the derivation.
+
+    # DEDUCTION.md §8.2: the wrapper. §13's block is now the document's only
+    # block, so the refutation entries in Part III are rendered by
+    # `render_derivation_block` and the five gates stay here, above the call,
+    # where they can still fail the build. `require_free` is passed through: the
+    # wrapper defaults it to `True` (a §13 branch claiming a *free* death must be
+    # free) while the general renderer does not, because a characteristic block
+    # is allowed to be priced.
+    title = branch if not objection else f"{branch} — {objection}"
+    # Each field of the block carries exactly one fact, and none of them repeats
+    # the line above it: the paragraph names the kind and quotes the objection,
+    # so DEPENDS ON names the thesis the refutation needs, GIVES the death (or
+    # the bound), and KILLS the step it makes impossible.
+    #
+    # KILLS is emitted only for a 💥 derivation (CLEARER.md gate 8). The 🪞
+    # pillar block reaches this renderer too, and it does have a target step —
+    # but the critic being an instance of the person is not that step being
+    # impossible, and a `KILLS [step 2]` under a PILLAR RETORSION header is the
+    # one line in the document that would make a pillar look like a death. The
+    # `GIVES` line above already carries what the instantiation does.
+    return render_derivation_block(
+        proof, role=_ROLE_HEADLINE, title=title,
+        gloss=f"**{kind}** — {gloss}",
+        depends_on=f"the denial: `{denial_hypothesis}`" if denial_hypothesis else "—",
+        gives=gives or ("🪞 the critic is an instance of the person — not a death"
+                        if kind == "🪞 INSTANTIATION — not a death"
+                        else "⊥ — the denial, refuted"),
+        kills=(kills or branch) if role == "derivation" else "",
+        proof_lines=body,
+        price_note=price_note,
+    )
+
+
+# ============================================================================
+# DEDUCTION.md — the one block shape. Every theorem in every generated surface
+# is rendered by `render_derivation_block`; §13's cremation derivation is the
+# `death` role of it (see `render_cremation_derivation` below, which now routes
+# through this function for its premises/steps/terminator/price). The reason
+# this exists: the reading path used to state conclusions and link to proofs it
+# forbade the reader to open, so the file read as a list of results with badges
+# instead of a deduction. The rules below are asserts, not conventions.
+# ============================================================================
+
+# The closed relation vocabulary for the spine's edges (DEDUCTION.md §4). The
+# edges' old `relation` values were English sentences — the hand-off was prose
+# with nothing checking it against the steps it connected. `kind` is now the
+# checked structure; `gloss` is the display text beside it.
+#
+# Measured against the data rather than invented: the nine `edges` and nine
+# `ledger_edges` in `formal/presentation_spine.json` already carried a
+# controlled `direction` field with six values, so the plan's proposed eight
+# (`distinction`, `disclosure`, `requirement`, `identification`, `grounding`,
+# `composition`, `retorsion`, `conclusion`) would have been a *second*
+# vocabulary sitting next to the first, and `_lint_graph` would then have been
+# checking a field nothing used. `direction` was therefore renamed to `kind` and
+# the English `relation` demoted to `gloss`, so there is one vocabulary and it
+# is the one the data already used. Adding a value is a decision, and each
+# value below says what kind of move it licenses.
+#
+#   distinction  — the step separates two things the previous step conflated
+#   discovery    — the step is read off the previous step; a derivation
+#   grounding    — the step makes one thing depend on another
+#   continuation — the step carries the chain forward without a new result
+#   conclusion   — the step states the composed fact
+#   retorsion    — the step turns the chain's own premise back on itself
+EDGE_KINDS = (
+    "distinction",
+    "discovery",
+    "grounding",
+    "continuation",
+    "conclusion",
+    "retorsion",
+)
+
+_ROLE_HEADLINE = "headline"   # full six-line block, with a title and a gloss
+_ROLE_COMPONENT = "component"  # compact four-line form, no title, no gloss
+_ROLE_DECLARED = "declared"   # an axiom: no PROOF line, DECLARED + price instead
+
+# The *refutation* role of a Part III row — distinct from the layout `_ROLE_*`
+# above, and confused with it often enough to be worth naming apart. It says what
+# kind of thing the row does to the objection, and the icon is the only place a
+# scanning reader learns which. Closed vocabulary (CLEARER.md §7 gate 7): a new
+# role must be added here with its icon, and must also answer gate 8 — whether it
+# invalidates anything.
+#
+# `kills` is whether the role may appear in a `KILLS` line. This is the whole
+# content of gate 8, declared as data rather than re-encoded in two lints: a
+# 🧱 countermodel bounds the reading and a 🪞 instantiation places the critic
+# inside it, and neither makes a step impossible. Only 💥 does.
+_REFTABLE = {
+    "derivation": ("💥", "💥 DERIVATION", True),
+    "boundary":   ("🧱", "🧱 BOUNDARY", False),
+    "pillar":     ("🪞", "🪞 PILLAR RETORSION", False),
+}
+
+# Every anchor the document actually emits, filled in by `emit_anchor`. A
+# generated link is checked against it rather than against a regex over the
+# text, so an index cannot point at a block that does not exist (CLEARER.md §5).
+_RENDERED_ANCHORS: set[str] = set()
+
+
+def emit_anchor(proof: ProofIR) -> str:
+    """The stable HTML anchor for a block, so any block is linkable from
+    anywhere and from any of the generated surfaces (DEDUCTION.md B5).
+
+    This is also the single point where an anchor comes into existence, so it
+    records the id. An index may only link to ids in that registry: a link to
+    an anchor no block emits is a dead `#fragment` that no linter or viewer
+    will ever flag, and `verify_characteristic_index` turns the whole class of
+    them into a failed build (CLEARER.md §5).
+    """
+    _RENDERED_ANCHORS.add(proof.name)
+    return f'<a id="{proof.name}"></a>'
+
+
+def spine_step_ref(title: str) -> tuple[int | None, str]:
+    """`"7. Free Will Is a Person"` → `(7, "Free Will Is a Person")`.
+
+    The one place a spine section's authored title is split into its step number
+    and its bare title. Three call sites need this (the glance table, the step
+    map, and the heading itself) and `scripts/test_deduction_dependencies.py`
+    needs it to assert the heading, so it is a named function rather than a regex
+    copied into each place: a copied regex is how the test and the generator
+    silently disagree about what a step heading is (DEDUCTION.md §4).
+    """
+    m = re.match(r"^\s*(\d+)\s*[.)]\s*(.*)$", title or "")
+    return (int(m.group(1)), m.group(2).strip()) if m else (None, (title or "").strip())
+
+
+def _short_index(decls: dict) -> dict:
+    """Short declaration name → the full name, for the namespace-relative
+    lookups `resolve_proof_by_name` and `record_components` both need."""
+    idx: dict[str, str] = {}
+    for full in decls:
+        short = full.rsplit(".", 1)[-1]
+        # first wins, matching `resolve_proof_by_name`'s bare-name order, so
+        # both resolvers agree on which declaration a bare name means.
+        idx.setdefault(short, full)
+    return idx
+
+
+def record_components(proof: ProofIR) -> list[tuple[str, str]]:
+    """The named components of a record-valued headline theorem.
+
+    Every classical characteristic is a record, and its kernel theorem builds
+    the record from named component theorems, e.g.
+
+        ofGround_divine_immutability : DivineImmutability Entity.ofGround := {
+          modal_invariance := ofGround_modal_invariance
+          stage_invariance := ofGround_stage_invariance … }
+
+    so the headline on its own states a conclusion with no derivation behind
+    it. This returns `(field_name, component_name, is_declaration)` in source
+    order, read via the existing `definition_body` (which re-reads the file,
+    because `_capture_statement` truncates a declaration at its first `:=` and
+    so drops the record literal). Returns `[]` for a direct proof and for an
+    axiom — an axiom has no components and is rendered in the declared role.
+
+    A field may hold a *term* rather than a named theorem (`atom_exclusion :=
+    fun e h => …`). It is still part of the record and must be reported, but it
+    has no separate derivation, so it is returned with `is_declaration=False`
+    rather than dropped or presented as a component proof.
+    """
+    decls = _CTX.get("decls", {})
+    d = decls.get(proof.full_name)
+    if not d or d.get("kind") == "axiom":
+        return []
+    body = definition_body(d)
+    if not body or ":=" not in body:
+        return []
+    short_ix = _short_index(decls)
+    out: list[tuple[str, str, bool]] = []
+    for field, target in re.findall(r"([A-Za-z_][\w']*)\s*:=\s*([A-Za-z_][\w'.]*)", body):
+        if target in ("True", "False") or field == "where":
+            continue
+        short = target.rsplit(".", 1)[-1]
+        out.append((field, short, short in short_ix and short not in _LEAN_TERMS))
+    return out
+
+
+_LEAN_TERMS = frozenset({
+    "fun", "by", "rfl", "id", "ite", "if", "match", "let", "do", "pure",
+    "sorry", "default", "Classical", "Function",
+})
+
+
+def _heading_slug(heading: str) -> str:
+    """A stable anchor id for a spine heading: lowercase, non-alphanumerics to
+    `-`, collapsed. Deterministic so a reference and its target cannot drift."""
+    h = heading.lstrip("#").strip()
+    h = re.sub(r"[^0-9A-Za-z]+", "-", h).strip("-").lower()
+    return f"sec-{h}"
+
+
+# The pre-2026-09-30 reading path was numbered `## 1.` … `## 15.`; the reading-order
+# work replaced that with Parts I–IV and unnumbered `###` headings, which left 13
+# `§N` cross-references pointing at headings that no longer exist. Each entry is the
+# legacy token, the live target, and — where the target is *this* sentence's own
+# subject — the replacement wording. Three of them (`§13` as the def-bridge census,
+# `§13` as the Simplicity row, `§15` as the definitions census) point at material
+# that left the reading path, and are routed to the ledger map rather than dressed up
+# as if it were still here (CLEARER.md §3, 0.9).
+_LEGACY_SECTION_REFS: list[tuple[str, str, str]] = [
+    ("the grounding of §8", "Part I — The deduction", "Part I"),
+    ("§11's third row", "Necessity, and Exactly What It Costs",
+     "the Necessity table's free-subject row"),
+    ("§11's third", "Necessity, and Exactly What It Costs",
+     "the Necessity table's free-subject row"),
+    ("§12's bounded rows", "One God — unity of the Divine Being", "the One God rows"),
+    ("§12", "One God, in Three Persons", "the Trinity table"),
+    ("§13 Simplicity", "Where the Rest of the Ledger Lives",
+     "the Divine Simplicity row in the ledger"),
+    ("§13 then closes", "Part III — the refutations", "Part III"),
+    ("§13.", "Where the Rest of the Ledger Lives",
+     "the declared-`def` census in the ledger"),
+    ("§14", "Part IV — the seam", "Part IV"),
+    ("§15", "Where the Rest of the Ledger Lives", "the definitions census in the ledger"),
+]
+
+
+def _heading_anchor_index(lines: list[str]) -> dict[str, str]:
+    """Map each heading's text — and each of its word-prefixes — to the anchor that
+    precedes it, so a reference resolves against the heading actually on the page
+    rather than against a slug this module remembered to type. Prefix keys are
+    what let a mapping entry name `Part IV — the seam` and still find
+    `Part IV — the seam: where the deduction stops`."""
+    idx: dict[str, str] = {}
+
+    def add(text: str, anchor: str) -> None:
+        words = text.split()
+        for n in range(len(words), 0, -1):
+            # A colon binds to the preceding word (`refutations:`, `seam:`), so the
+            # prefix is also stored without trailing sentence punctuation — that is
+            # what lets a mapping entry name `Part IV — the seam`.
+            pref = " ".join(words[:n])
+            for key in (pref, pref.rstrip(" :,.;—")):
+                if key:
+                    idx.setdefault(key, anchor)
+
+    last_anchor = ""
+    for ln in lines:
+        m = re.match(r'<a id="([^"]+)"></a>\s*$', ln)
+        if m:
+            last_anchor = m.group(1)
+            continue
+        h = re.match(r"^(#{1,6})\s+(.*?)\s*$", ln)
+        if h:
+            text = h.group(2)
+            add(text, last_anchor or _heading_slug(text))
+    return idx
+
+
+def _repoint_legacy_refs(lines: list[str]) -> list[str]:
+    """Rewrite the dead `§N` cross-references to live anchors.
+
+    A reference is only rewritten when its target heading is actually present, so
+    a target that has itself left the page cannot be faked into a working link. A
+    `base.txt §11` is a reference into the Portuguese prose corpus, which exists
+    and is numbered, and is left exactly as written.
+    """
+    idx = _heading_anchor_index(lines)
+    lookup = {k.casefold(): v for k, v in idx.items()}
+    out: list[str] = []
+    for ln in lines:
+        if "base.txt §" not in ln:
+            for token, heading, wording in _LEGACY_SECTION_REFS:
+                if token not in ln:
+                    continue
+                anchor = lookup.get(heading.casefold())
+                if anchor is None:
+                    continue
+                ln = ln.replace(token, f"[{wording}](#{anchor})")
+        out.append(ln)
+    return out
+
+
+def _block_price_lines(proof: ProofIR, *, label: str = "PRICE") -> list[str]:
+    """The derived price of a block, on one line, with the footprint.
+
+    B4: the `✅ … 0 substantive axioms` form is emitted only when the audited
+    substantive set is empty, and a substantive axiom never renders as `✅`.
+    """
+    cat, badge = classify_proof_edge(proof)
+    n_subst = len(_branch_substantive(proof))
+    price = "0 substantive axioms" if n_subst == 0 else \
+        f"{n_subst} substantive axiom{'' if n_subst == 1 else 's'}: " + \
+        ", ".join(sorted({a.rsplit('.', 1)[-1] for a in _branch_substantive(proof)}))
+    fp = audit_footprint(proof.full_name) or []
+    fp_cell = "`{" + ", ".join(sorted({a.rsplit('.', 1)[-1] for a in fp})) + "}`"
+    if badge.startswith("COUNTERMODEL | "):
+        # A countermodel is a *hostile model*, not a proved claim: it says the
+        # claim fails to follow, and it prices nothing. The `✅` here was the
+        # same defect `_GLANCE_RANK` had — a display string keyed against an
+        # internal category, so a boundary read "0 substantive axioms" and got
+        # a green tick. The icon is the wall, and the refuted relation is named
+        # on its own line instead of occupying the status slot
+        # (CLEARER.md §3, 0.7).
+        relation = badge[len('COUNTERMODEL | '):]
+        return [f"{label}      {COUNTERMODEL_BADGE} **COUNTERMODEL** — a hostile "
+                f"model, not a price",
+                f"{label}      refutes: {relation}",
+                f"{label}      {price} · {fp_cell}"]
+    if badge.startswith("AXIOMATIC ("):
+        head = f"⚠️ **AXIOMATIC ({badge[len('AXIOMATIC ('):-1]})**"
+    elif badge.startswith("PROVEN"):
+        head = f"✅ **PROVEN**"
+    else:
+        head = f"**{badge}**"
+    return [f"{label}      {head} — {price} · {fp_cell}"]
+
+
+def _proof_lines(proof: ProofIR, *, indent: str = "    ") -> list[str]:
+    """The PROOF body: the real premises from the parsed signature, then the
+    real numbered steps from the compiled `ProofIR`, then the real goal (B3).
+    No authored prose can enter here — every line is a compiled fact.
+
+    A theorem the compiler decomposed into no steps prints an explicit note
+    rather than a bare `∴`: an empty PROOF section would read as a proof that
+    was withheld, which is the one thing this redesign exists to stop doing."""
+    label, reason = proof_kind(proof)
+    L: list[str] = [f"{indent}{label} — {reason}"]
+    for a in proof.assumptions:
+        L.append(f"{indent}Assume {a.proposition}")
+    for n, st in enumerate(proof.steps, 1):
+        # A step whose proposition *is* the goal restates the claim the `∴` line
+        # already prints. Its description is the load-bearing part — it names the
+        # theorem that does the work (`definitional identity via the_ground_atemporal`)
+        # — so the proposition is dropped and the justification kept on its own
+        # (CLEARER.md §3, 0.5). A step with no description and no distinct
+        # proposition is pure padding and is dropped outright.
+        if st.proposition == proof.goal:
+            if st.description:
+                L.append(f"{indent}  {n}. {st.description}")
+            continue
+        desc = f"  ({st.description})" if st.description else ""
+        L.append(f"{indent}  {n}. {st.proposition}{desc}")
+    # A step-free theorem needs no filler: the block header already reads
+    # `Premises: 0 · 0 steps`, and the `∴` line below still shows the claim, so
+    # the PROOF is not empty and cannot be mistaken for a withheld proof
+    # (CLEARER.md §3, 0.6). The old parenthetical repeated that fifteen times.
+    L.append(f"{indent}∴ {proof.goal}")
+    return L
+
+
+def render_derivation_block(proof: ProofIR, *, role: str = _ROLE_HEADLINE,
+                            title: str = "", gloss: str = "", depends_on: str = "",
+                            gives: str = "", kills: str = "", backlink: str = "",
+                            price_note: str = "", anchor: bool = True,
+                            proof_lines: list[str] | None = None,
+                            price_label: str = "PRICE      ") -> list[str]:
+    """The one rendering of a theorem, for every surface (DEDUCTION.md §2).
+
+    Headline (a step, a characteristic, a refutation):
+
+        ### 7. Free Will Is a Person            ← the point
+        <gloss>                                ← the point, in English
+        DEPENDS ON   step 6: …                  ← what it consumes
+        GIVES        …                          ← what it hands on
+        KILLS        … → R5                     ← what it invalidates
+        PROOF
+            Assume … / 1. … / ∴ …              ← the logic, one step at a time
+        PRICE      ✅ PROVEN — 0 substantive axioms · {…}
+        SOURCE     [file#name](…#Lnn)
+
+    Component (a record field of a characteristic) drops the title and gloss
+    and compresses to one line of prose plus the proof it is, so that a
+    characteristic with four components costs four lines, not four blocks.
+
+    Declared (an axiom) has no PROOF line at all and cannot render `✅`.
+
+    B1 `DEPENDS ON`/`GIVES` are required on every headline — a block with no
+    hand-off is a dead end, and the reader has to reconstruct the inference
+    that does not exist. B2 `KILLS` names a refutation id or is `—`.
+    """
+    if role == _ROLE_COMPONENT:
+        return _render_component_block(proof, title=title, backlink=backlink)
+    L: list[str] = []
+    if anchor:
+        L.append(emit_anchor(proof))
+    if title:
+        L.append(f"### {title}")
+        L.append("")
+    if gloss:
+        L.append(gloss)
+        L.append("")
+    if role == _ROLE_DECLARED:
+        L.append(f"DEPENDS ON   {depends_on or '—'}")
+        L.append(f"GIVES        {gives or '—'}")
+        L.append(f"KILLS        {kills or '—'}")
+        L.append("")
+        L.extend(_block_price_lines(proof, label="DECLARED"))
+        if price_note:
+            L.append(f"             {price_note}")
+    else:
+        # B1: on a headline, the hand-off is required. Not a convention — a
+        # step that consumes nothing and hands on nothing is the defect this
+        # whole redesign exists to remove (DEDUCTION.md D1).
+        if not (depends_on or "").strip() or not (gives or "").strip():
+            raise SystemExit(
+                f"FATAL: block '{title or proof.name}' has DEPENDS ON="
+                f"{(depends_on or '').strip()!r} / GIVES={(gives or '').strip()!r}. "
+                f"Every headline block must state what it consumes and what it "
+                f"hands on (DEDUCTION.md B1); a block with no hand-off reads as "
+                f"a result, not as a step in a deduction.")
+        L.append(f"DEPENDS ON   {depends_on}")
+        L.append(f"GIVES        {gives}")
+        # KILLS is omitted when empty, never printed as `—` (DEDUCTION.md §3). A
+        # 🧱 boundary invalidates nothing — that is what a bound *is* — so a `KILLS
+        # —` on a countermodel block would assert the one thing the row exists to
+        # deny.
+        if kills:
+            L.append(f"KILLS        {kills}")
+        L.append("")
+        L.append("PROOF")
+        # `proof_lines` is the one seam that lets §13's death block route
+        # through this renderer (DEDUCTION.md §8.2). It is not an escape hatch:
+        # a caller passing it is `render_cremation_derivation`, which has already
+        # run V1–V5 — every line it passes is an assumption, a compiled step, or
+        # the derived terminator, so B3 still holds by a different check. Anyone
+        # else passing authored text here would be asserting a proof the kernel
+        # does not carry, so the only accepted source is the cremation.
+        L.extend(proof_lines if proof_lines is not None else _proof_lines(proof))
+        L.append("")
+        L.extend(_block_price_lines(proof, label=price_label))
     if price_note:
         L.append(f"> {price_note}")
+    L.append(f"SOURCE     {proof_cert_line(proof, classify_proof_edge(proof)[1])}")
+    if backlink:
+        L.append(backlink)
+    L.append("")
+    return L
+
+
+def _render_component_block(proof: ProofIR, *, title: str = "",
+                            backlink: str = "") -> list[str]:
+    """A record field's own derivation, on one line of prose plus its logic.
+
+    The `premises: … · N steps` summary is *derived* (the premise count is the
+    compiled signature, the step count the compiled `ProofIR`), so a
+    component cannot claim a derivation it does not have; the full form is one
+    click away at its anchor.
+
+    The anchor is `emit_anchor`, the same string a headline block gets, so
+    `ofGround_modal_invariance` is linkable and not merely present
+    (CLEARER.md §5). Forty-one components were unreachable by link before this;
+    the characteristic index now points at them, and a reader can cite a
+    component by name. It costs nothing against the reading-path budget: the
+    test's `visible` filter drops lines starting with `<`.
+    """
+    L: list[str] = [emit_anchor(proof)]
+    n_steps = len(proof.steps)
+    head = f"    ▸ {title}" if title else "    ▸"
+    L.append(f"{head}  ·  Premises: {len(proof.assumptions)} · {n_steps} step"
+             f"{'' if n_steps == 1 else 's'}")
+    L.extend(_proof_lines(proof, indent="        "))
+    L.extend(_block_price_lines(proof, label="        PRICE"))
+    L.append(f"        SOURCE  {proof_cert_line(proof, classify_proof_edge(proof)[1])}")
+    if backlink:
+        L.append(f"        {backlink}")
+    L.append("")
+    return L
+
+
+_PERSONAL_SCOPE = "Personal ground / person-type"
+
+
+def _spine_theorem_names(spine: list[dict]) -> set:
+    return {p.name for s in spine
+            for p in s.get("primary_proofs", s.get("proofs", []))}
+
+
+def _depends_on_spine(full_name: str, spine_names: set) -> list:
+    """Which spine theorems `full_name` transitively depends on.
+
+    Walks the depgraph's `in` map (premise → dependents' direction is `out`;
+    here we want premises, so `in`), cycle-guarded. Returns the *names*, so the
+    caller can decide what to say about them.
+    """
+    inn = (_CTX.get("graph") or {}).get("in") or {}
+    seen, out, q = set(), [], [full_name]
+    while q:
+        cur = q.pop()
+        if cur in seen:
+            continue
+        seen.add(cur)
+        for dep in inn.get(cur, ()):  # dep is a premise of cur
+            if dep in spine_names:
+                out.append(dep)
+            else:
+                q.append(dep)
+    return sorted(set(out))
+
+
+def L_part1_earnings(spine: list[dict], ap) -> None:
+    """The personal-scope attributes, at the foot of Part I (DEDUCTION.md D9).
+
+    D9 was decided as "the eight personal-scope attributes belong to Part I, to
+    the steps that earn them". The depgraph does not support the second half, and
+    saying so is the point of building this: none of the eight is *downstream* of
+    any of the ten spine theorems. They are proved from the same vocabulary and
+    the same sorts, in parallel — `person_iff_thomisticCore` has no theorem
+    premise at all (it is an equality on the structures), and
+    `personal_ground_of_right_wrong` is downstream of `normative_datum_forces_person`,
+    which is off the spine. So attaching each to a step would assert a dependency
+    the kernel does not have, which is the overclaim AGENTS.md and the lint above
+    exist to prevent.
+
+    So they are printed as what they are — reached by the same route, not by these
+    ten steps — and the claim is *derived* and checked rather than asserted: if a
+    future theorem ever does put one of them downstream of a step, the note below
+    changes and says which step, and a lint fails while it still claims otherwise.
+    """
+    rows = [r for r in CLASSICAL_ATTRIBUTES
+            if r.get("scope") == _PERSONAL_SCOPE
+            and any(c.get("type") == "decl" for c in r.get("checks", []))]
+    if not rows:
+        return
+    ap("### What the same route also establishes of the person")
+    ap("")
+    spine_names = _spine_theorem_names(spine)
+    downstream: dict = {}
+    for r in rows:
+        for c in r.get("checks", []):
+            if c.get("type") != "decl":
+                continue
+            hits = _depends_on_spine(c["full"], spine_names)
+            if hits:
+                downstream[c["full"]] = hits
+    ap(f"Eight attributes of a *person* rather than of the ground as such. The "
+       f"census classifies them as `Personal ground / person-type`, and each is a "
+       f"proved theorem, so each gets its price like everything else on this page.")
+    ap("")
+    if downstream:
+        ap(f"**{len(downstream)} of these now depend on a spine step**, stated "
+           f"here rather than hidden: "
+           + ", ".join(f"`{f.rsplit('.', 1)[-1]}` on {', '.join(sorted(set(hits)))}"
+                       for f, hits in sorted(downstream.items()))
+           + ".")
+    else:
+        ap("**One thing stated plainly, because it is the easy thing to get wrong:** "
+           "these are *not* consequences of the ten steps above.")
+        ap("")
+        ap("The depgraph says so — none of the eight has a spine theorem anywhere in "
+           "its dependency closure. They are reached by the same route and the same "
+           "vocabulary, in parallel. They are printed here rather than under Part II "
+           "because they concern a person and Part II concerns `Entity.ofGround`.")
+        ap("")
+        ap("Attaching each one to a numbered step would have been tidier, and false.")
+    ap("")
+    n = 0
+    for r in rows:
+        for c in r.get("checks", []):
+            if c.get("type") != "decl":
+                continue
+            proof = resolve_proof_by_name(
+                c["full"].rsplit(".", 1)[-1], _CTX.get("compiled", {}),
+                _CTX.get("decls", {}), _CTX.get("graph", {}))
+            if proof is None:
+                raise SystemExit(
+                    f"FATAL: personal-scope attribute check {c['full']} does not "
+                    f"resolve to a compiled proof, so it cannot be priced. Either the "
+                    f"declaration was renamed or it was never compiled (DEDUCTION.md D9).")
+            n += 1
+            for line in render_derivation_block(
+                    proof, role=_ROLE_COMPONENT,
+                    title=(r.get("attribute") or proof.name).split("—")[0].strip(),
+                    backlink="↑ a personal-scope attribute; reached in parallel with "
+                             "the spine, not by it"):
+                ap(line)
+    ap(f"*{n} attribute theorems, each priced above. The rows with no `decl` check "
+       f"— and the two countermodels that cut against this reading — are in Part II's "
+       f"honest list and in the ledger's attribute table.*")
+    ap("")
+
+
+def _lint_graph(policy: dict) -> None:
+    if (policy.get("audience") or "full") != "argument":
+        return
+    edges = _CTX.get("spine_edges") or []
+    nodes = _CTX.get("spine_nodes") or []
+    if not edges or not nodes:
+        return  # full-audience regression mode, or no spine loaded
+    bad_kind = [e for e in edges if e.get("kind") not in EDGE_KINDS]
+    if bad_kind:
+        raise SystemExit(
+            f"FATAL: {len(bad_kind)} spine edge(s) name a relation kind outside the "
+            f"closed vocabulary {EDGE_KINDS}: "
+            f"{[(e.get('from'), e.get('to'), e.get('kind')) for e in bad_kind[:3]]}. "
+            f"The hand-off must be a checked kind, not an English sentence "
+            f"(DEDUCTION.md §4).")
+    # A `kind` with no `gloss` renders a hand-off with nothing in it: "step 4: ",
+    # which is worse than no line, because it looks like a real hand-off.
+    mute = [e for e in edges if not (e.get("gloss") or "").strip()]
+    if mute:
+        raise SystemExit(
+            f"FATAL: {len(mute)} spine edge(s) have a kind but no gloss: "
+            f"{[(e.get('from'), e.get('to')) for e in mute[:3]]}. The kind is the "
+            f"checked structure and the gloss is what the reader sees; a kind with "
+            f"no gloss renders an empty hand-off (DEDUCTION.md §4).")
+    ids = {n["id"] for n in nodes}
+    for n in nodes:
+        inc = [e for e in edges if e.get("to") == n["id"]]
+        out = [e for e in edges if e.get("from") == n["id"]]
+        if not inc and n["id"] not in (nodes[0]["id"],):
+            raise SystemExit(
+                f"FATAL: spine node '{n['id']}' has no incoming edge — a step that "
+                f"consumes nothing is a result, not a step (DEDUCTION.md B1).")
+        if not out and n["id"] != nodes[-1]["id"]:
+            raise SystemExit(
+                f"FATAL: spine node '{n['id']}' has no outgoing edge — a step that "
+                f"hands on nothing is a dead end (DEDUCTION.md B1).")
+    unknown = {e.get("from") for e in edges} | {e.get("to") for e in edges} - ids
+    unknown = {u for u in unknown if u not in ids}
+    if unknown:
+        raise SystemExit(
+            f"FATAL: spine edge(s) reference unknown node(s) {sorted(unknown)}; "
+            f"known ids are {sorted(ids)}.")
+
+
+def _refutation_index(*, role: str | None = "derivation") -> dict[str, list[tuple[str, str]]]:
+    """The inverse of the refutations' `attacks`: spine step id → [(R-label, branch)].
+
+    DEDUCTION.md §6 requires `KILLS BACK` on every refutation — the step whose
+    claim it makes impossible. The same fact read in the other direction is a
+    step's `KILLS`, and it is *derived* here rather than transcribed onto the
+    step: a hand-written `kills` list on a spine node is a second source of
+    truth that would silently disagree with the refutations the moment either
+    side moved. `_lint_refutation_wiring` fails the build if the two ever do.
+
+    `role` filters to the rows that actually kill. This is the load-bearing
+    correction of CLEARER.md gate 8: `attacks` says *which step an objection is
+    about*, and a 🧱 boundary or a 🪞 pillar is legitimately about a step while
+    invalidating none of its content. A countermodel says the step does not go
+    so far; an instantiation says the critic is already inside the step's result.
+    Neither makes anything impossible, so neither may appear in a `KILLS` line —
+    and `role=None` returns every row for the wiring check, which does want to
+    know that the objection is attached to a real step.
+    """
+    out: dict[str, list[tuple[str, str]]] = {}
+    sec = next((s for s in _CTX.get("spine", {}).get("reading_sections", [])
+                if s.get("cremation")), None)
+    for i, r in enumerate(sec["cremation"] if sec else [], 1):
+        if role is not None and r.get("role", "derivation") != role:
+            continue
+        out.setdefault(r["attacks"], []).append((f"R{i}", r["branch"]))
+    return out
+
+
+def _lint_refutation_wiring() -> None:
+    """D6: every refutation names a real step, every step is killable, and no
+    `kills` is transcribed onto a spine node. All three are silent-omission
+    failures otherwise: a typo in `attacks` would render `KILLS BACK → step ?`
+    and a dropped row would just not appear anywhere."""
+    spine = _CTX.get("spine", {})
+    nodes = {n["id"]: n for n in spine.get("spine_nodes", [])}
+    sec = next((s for s in spine.get("reading_sections", []) if s.get("cremation")), None)
+    if sec is None:
+        raise SystemExit("FATAL: no reading section carries `cremation`; Part III "
+                         "would render empty while the document still claims to "
+                         "cremate every branch of the denial.")
+    for n in nodes.values():
+        if n.get("kills"):
+            raise SystemExit(
+                f"FATAL: spine node '{n['id']}' carries a hand-written `kills` list. "
+                f"A step's KILLS is derived from the refutations that attack it "
+                f"(_refutation_index); transcribing it here would be a second "
+                f"source of truth that can disagree with Part III.")
+    for i, r in enumerate(sec["cremation"], 1):
+        if r.get("attacks") not in nodes:
+            raise SystemExit(
+                f"FATAL: R{i} '{r.get('branch', '')}' names attacks="
+                f"'{r.get('attacks')}', which is not a spine node. KILLS BACK must "
+                f"point at a step that exists; {sorted(nodes)[:3]}… are the ids.")
+    for pid in [p for r in sec["cremation"] for p in r.get("pillars", [])]:
+        if not 1 <= pid <= 7:
+            raise SystemExit(f"FATAL: R-? carries pillar {pid}; the Seven Pillars are 1–7.")
+
+
+def _pillar_titles() -> dict[int, str]:
+    """`{1: "Normative Nihilism", …}` parsed out of the pillars table itself.
+
+    The titles are authored once, in `render_defense_against_attacks`. Part III
+    indexes the Seven Pillars onto the R-entries, and if it carried its own copy
+    of the titles the two would drift — a pillar renamed in the table and not in
+    the index, with nothing to notice. So the index reads them from the source
+    rather than repeating them.
+    """
+    out: dict[int, str] = {}
+    for ln in render_defense_against_attacks():
+        m = re.match(r"\| \*\*(\d+)\. ([^*]+)\*\*", ln)
+        if m:
+            out[int(m.group(1))] = m.group(2).strip()
+    return out
+
+
+# What a role does to an objection, in the plural, for the index's one-line
+# tally. Closed with the role vocabulary: a fourth role must answer this map as
+# well as `_REFTABLE`, or the tally silently omits it. Every plural ends in "s",
+# so the non-killing cell's singular is the same word without it — one
+# declaration, not two that can drift.
+_REFT_NOUNS = {
+    "derivation": "deaths",
+    "boundary":   "bounds",
+    "pillar":     "instantiations",
+}
+
+
+def _reft_icon(role: str) -> str:
+    """The glyph for a role. `role` defaults to `derivation` because that is what
+    a row without a `role` field is read as everywhere else in this file — the
+    default is the *dangerous* one, and `_lint_roles` exists to make sure no row
+    relies on it silently."""
+    return _REFTABLE.get(role, _REFTABLE["derivation"])[0]
+
+
+def _reft_tally(rows: list[dict]) -> str:
+    """`"13 deaths, 2 bounds, 1 instantiation"` — counted from the rows, and
+    singular where the count is one.
+
+    Never typed. A prose tally is a number nobody re-reads, and §4's own note
+    said "12" while the table above it said 13; deriving it is the only version
+    of this sentence that cannot go stale. The singular is the same word without
+    its final "s" — every noun in the map is plural — so `1 instantiation` and
+    `2 instantiations` come from one declaration rather than two that can drift."""
+    parts = []
+    for role, noun in _REFT_NOUNS.items():
+        n = sum(1 for r in rows if r.get("role", "derivation") == role)
+        parts.append(f"{n} {noun if n != 1 else noun[:-1]}")
+    return ", ".join(parts)
+
+
+def render_refutation_index(rows: list[dict]) -> list[str]:
+    """The front-matter index of Part III (CLEARER.md §4): one row per denial,
+    four columns — the denial verbatim, its kind, the R-entry, and the step it
+    makes impossible.
+
+    Two facts are kept apart here that a one-line table would otherwise read as
+    one. *What kind of thing a row is* is `role`, and it earns the icon; *what
+    it kills* is `may_kill`, which is the same flag gate 8 reads from the same
+    table, so this index cannot assert a kill that the Part III block denies. A
+    🧱 row does have `attacks` — a countermodel is *about* a step — so printing
+    that step here as a kill would put a false death in the most-read table in
+    the document. Hence the cell is gated on the flag, and the non-killing rows
+    say what they are instead of naming a victim they do not have.
+
+    The first column is a `branch` value verbatim, never a result or a summary:
+    a branch label is the *denial's* name, and the first draft of this table put
+    a result there next to fifteen denials, which read as though the document had
+    left existence open. Gate 10 compares it against the spine both ways.
+    """
+    if not rows:
+        return []
+    nodes = {n["id"]: n for n in _CTX.get("spine", {}).get("spine_nodes", [])}
+    L: list[str] = []
+    L.append('<a id="refutation-index"></a>')
+    L.append(f"## The {len(rows)} denials, indexed")
+    L.append("")
+    # Two paragraphs, not one: the front-matter cap is 300 characters per
+    # paragraph, and folding the vocabulary into the tally sentence put it over.
+    # The second paragraph is also what keeps this block from being a facade — a
+    # gloss standing over a table with no anchor in it, which the README rule
+    # forbids — and `formal/GAPMAP.md` is the same anchor the badge legend above
+    # uses for the same job.
+    L.append(
+        f"Every objection the deduction meets, and what is done to it: "
+        f"{_reft_tally(rows)}. The derivations are worked in "
+        f"[Part III](#part-iii-the-refutations-every-branch-of-the-denial-read); "
+        f"each names the step it makes impossible.")
+    L.append("")
+    L.append(
+        "The rest name none, because they have none. 💥 kills a step, 🧱 bounds a "
+        "reading, 🪞 places the critic inside it — roles and per-row prices are in "
+        "`formal/GAPMAP.md`.")
+    L.append("")
+    L.append("| The denial | Kind | Where it is answered | What it kills |")
+    L.append("|---|---|---|---|")
+    for i, r in enumerate(rows, 1):
+        role = r.get("role", "derivation")
+        may_kill = _REFTABLE.get(role, _REFTABLE["derivation"])[2]
+        if may_kill:
+            node = nodes.get(r["attacks"])
+            if node is None:
+                raise SystemExit(
+                    f"FATAL: R{i} attacks an unknown step; see _lint_refutation_wiring.")
+            step_no = node["title"].split(".", 1)[0]
+            kills = f"[step {step_no}](#step-{step_no})"
+        else:
+            kills = f"— {_REFT_NOUNS[role][:-1]}"
+        L.append(f"| {r['branch']} | {_reft_icon(role)} | "
+                 f"[R{i}](#r{i}) | {kills} |")
     L.append("")
     return L
 
 
 def render_cremation_blocks(rows: list[dict]) -> list[str]:
-    """§13, the cremation: every branch of the denial, each read as a derivation
-    — premises, steps, terminator, price — with the boundary rows (rows without
-    a `derivation_target`) collected into one small table."""
+    """Part III, the refutations: every branch of the denial promoted to a
+    titled `### R`-entry and read as a derivation — premises, steps, terminator,
+    price — with `KILLS BACK` naming the step it makes impossible.
+
+    The three boundary rows are rendered here too, and *not* in a second table.
+    They were a table because a table cell cannot hold a derivation, and a
+    `🧱 BOUNDARY` countermodel has one; keeping them in the same list is what
+    lets the reader compare a death and a bound in one reading order instead of
+    finding them in two places, and it retires the duplicate the table caused.
+    """
+    spine = _CTX.get("spine", {})
+    nodes = {n["id"]: n for n in spine.get("spine_nodes", [])}
+    L: list[str] = []
     dead = [r for r in rows if r.get("derivation_target")]
     bounds = [r for r in rows if not r.get("derivation_target")]
-    L: list[str] = []
-    for i, r in enumerate(dead, 1):
-        tgt = r["derivation_target"]
-        proof = resolve_proof_by_name(tgt, _CTX.get("compiled", {}),
-                                      _CTX.get("decls", {}), _CTX.get("graph", {}))
-        if proof is None:
-            raise SystemExit(
-                f"FATAL: cremation branch '{r.get('branch', '')}': derivation target "
-                f"'{tgt}' does not resolve to a compiled proof — an unresolvable "
-                f"branch must not read as an unrefuted one.")
-        L.extend(render_cremation_derivation(
-            proof, r.get("denial_hypothesis", ""), branch=r.get("branch", ""),
-            objection=r.get("objection", ""), voice=r.get("objection_voice", ""),
-            voice_gloss=r.get("objection_voice_gloss", ""), index=i))
-        for sec in r.get("secondary_derivations", []):
-            proof2 = resolve_proof_by_name(sec["derivation_target"], _CTX.get("compiled", {}),
-                                           _CTX.get("decls", {}), _CTX.get("graph", {}))
-            if proof2 is None:
+    pillars_at = {p: i for i, r in enumerate(rows, 1) for p in r.get("pillars", [])}
+
+    # The Seven Pillars are not a section: they are seven of these entries, and
+    # the index below is derived from the `pillars` field each row carries. A
+    # pillar with no R-entry cannot be listed, which is the honest way for the
+    # plan's "one pillar needs new work" to show up — as an absence in a table
+    # that is generated, rather than as a sentence nobody re-reads.
+    titles = _pillar_titles()
+    if titles:
+        L.append("| Pillar of the Seven | Where it is answered |")
+        L.append("|---|---|")
+        for p in sorted(titles):
+            r_i = pillars_at.get(p)
+            # The icon leads the link, in this cell, because it is a property of
+            # the R-entry and not of the pillar's authored name: `4. Moral
+            # Knowledge` is answered by a 💥 derivation, and a reader must see
+            # that before the title rather than infer it from a link target. The
+            # index in the front matter carries the same glyph in the same
+            # position, so the vocabulary is learned once.
+            L.append(f"| {p}. {titles[p]} | "
+                     + (f"{_reft_icon(rows[r_i - 1].get('role', 'derivation'))} "
+                        f"[R{r_i} — {rows[r_i - 1]['branch']}](#r{r_i})"
+                        if r_i else "🧱 **not refuted here — it bounds**")
+                     + " |")
+        L.append("")
+    for i, r in enumerate(rows, 1):
+        node = nodes.get(r["attacks"])
+        if node is None:
+            raise SystemExit(f"FATAL: R{i} attacks an unknown step; see _lint_refutation_wiring.")
+        step_no = node["title"].split(".", 1)[0]
+        title = f"### R{i}. {r['branch']}"
+        L.append(f'<a id="r{i}"></a>')
+        L.append(title)
+        L.append("")
+        # The gloss is the one place a reader learns what kind of thing this is
+        # before meeting the proof: a derivation, a bound, or the pillar retorsion.
+        # It quotes the objection and nothing else — the block below carries
+        # DEPENDS ON / GIVES / KILLS, so repeating the kill here would be the
+        # same fact twice in three lines.
+        label = _REFTABLE.get(r.get("role", "derivation"),
+                              _REFTABLE["derivation"])[1]
+        line = f"**{label}** — {r.get('objection', '')}"
+        if r.get("pillars"):
+            ps = ", ".join(str(p) for p in r["pillars"])
+            line += f" **Pillar {ps}** of the Seven."
+        L.append(line)
+        L.append("")
+        step_ref = f"[step {step_no}](#step-{step_no}) — {node['title'].split('. ', 1)[1]}"
+        tgt = r.get("derivation_target")
+        if tgt:
+            proof = resolve_proof_by_name(tgt, _CTX.get("compiled", {}),
+                                          _CTX.get("decls", {}), _CTX.get("graph", {}))
+            if proof is None:
                 raise SystemExit(
-                    f"FATAL: cremation branch '{r.get('branch', '')}': secondary "
-                    f"target '{sec['derivation_target']}' does not resolve.")
+                    f"FATAL: R{i} '{r.get('branch', '')}': derivation target "
+                    f"'{tgt}' does not resolve to a compiled proof — an unresolvable "
+                    f"branch must not read as an unrefuted one.")
             L.extend(render_cremation_derivation(
-                proof2, sec.get("denial_hypothesis", ""),
-                branch=f"{r.get('branch', '')} — {sec.get('label', 'the second route')}",
-                index=None, require_free=not sec.get("priced", False),
-                price_note=sec.get("price_note", "")))
+                proof, r.get("denial_hypothesis", ""), branch="",
+                objection="", voice=r.get("objection_voice", ""),
+                voice_gloss=r.get("objection_voice_gloss", ""), index=None,
+                kills=step_ref, role=r.get("role", "derivation")))
+            for sec in r.get("secondary_derivations", []):
+                proof2 = resolve_proof_by_name(
+                    sec["derivation_target"], _CTX.get("compiled", {}),
+                    _CTX.get("decls", {}), _CTX.get("graph", {}))
+                if proof2 is None:
+                    raise SystemExit(
+                        f"FATAL: R{i} '{r.get('branch', '')}': secondary target "
+                        f"'{sec['derivation_target']}' does not resolve.")
+                L.extend(render_cremation_derivation(
+                    proof2, sec.get("denial_hypothesis", ""),
+                    branch=sec.get("label", "the second route"), index=None,
+                    require_free=not sec.get("priced", False),
+                    price_note=sec.get("price_note", ""), kills=step_ref))
+        else:
+            # A row with `targets` but no `derivation_target`: the compiled
+            # statements are shown and the row's *kind* is derived from them,
+            # rather than narrated. The prose under the heading used to be the
+            # fixed sentence "a countermodel bounds the reading; it does not
+            # contradict it", which is true of a 🧱 and false of a priced `∃`:
+            # R15 was rendered under that sentence while its own kind said
+            # `DEFINITIONAL FALLACY`, i.e. the row contradicted itself in the
+            # two lines above its proof. So the sentence is now a function of
+            # the derived kind.
+            proofs = [p for p in (resolve_proof_by_name(
+                t, _CTX.get("compiled", {}), _CTX.get("decls", {}), _CTX.get("graph", {}))
+                for t in r.get("targets", [])) if p]
+            if not proofs:
+                raise SystemExit(
+                    f"FATAL: R{i} '{r.get('branch', '')}' names no resolvable "
+                    f"target {r.get('targets', [])} — an unresolvable branch must not "
+                    f"read as an unrefuted one.")
+            kind = refutation_kind(proofs[0])
+            icon, _, may_kill = _REFTABLE[r.get("role", "derivation")]
+            priced_row = kind == "⚠️ PRICED — the objection answered, at a price"
+            if priced_row:
+                gloss = (f"> **{kind}** — the objection is **answered**, not merely "
+                         f"bounded: a free subject *exists*, and the price of that "
+                         f"existence is named below. This row is a **result at a "
+                         f"price**, not a gap in the deduction.")
+            else:
+                gloss = (f"> **{kind}** — a countermodel **bounds** the reading; it "
+                         f"does not contradict it. What follows is the compiled "
+                         f"statement, not a `⊥`.")
+            L.append(gloss)
+            L.append("")
+            for p in proofs:
+                # `GIVES` is derived per *proof*, not per row. A priced row may
+                # carry a free second target (R15 pairs the priced
+                # `∃ s, FreeWill(s)` with a free necessity half), and a row-level
+                # string would have printed "at the price below" over a block
+                # whose own PRICE line says `0 substantive axioms` — the same
+                # document disagreeing with itself that the heading prose did.
+                _k = refutation_kind(p)
+                # Priced-ness is read from this proof's own footprint, not from
+                # the derived kind and not from the row. Both of those leak: the
+                # kind is a function of the goal *shape*, so R15's free second
+                # target (`∃ s, p, Act s p`) also derives the priced kind while
+                # its PRICE line says `0 substantive axioms`; and the row-level
+                # kind is the *first* target's, which here is the priced one. So
+                # a free target in a priced row was printing "at the price below"
+                # directly above `✅ PROVEN — 0 substantive axioms`.
+                if _branch_substantive(p):
+                    _gives = ("💰 the objection answered — a free subject exists, "
+                              "at the price below"
+                              if _k == "⚠️ PRICED — the objection answered, at a price"
+                              else "💰 a priced result — the objection dies, and the price is named")
+                elif priced_row:
+                    # The free half of a priced row: it answers its own half of
+                    # the objection, at no cost. Saying 🧱 here would be wrong
+                    # (the row is a derivation) and saying 💰 would be wrong too
+                    # (this block costs nothing), so it says what it does.
+                    _gives = ("✅ this half of the objection is answered **free** — "
+                              "0 substantive axioms")
+                else:
+                    _gives = "🧱 a bound on the reading, not a death"
+                L.extend(render_derivation_block(
+                    p, role=_ROLE_HEADLINE, title="", gloss="",
+                    depends_on="— the modelled denial",
+                    gives=_gives,
+                    # A countermodel invalidates nothing (AGENTS.md C559); a priced
+                    # result does invalidate the denial, and gate 8 admits it here
+                    # because its role may kill.
+                    kills=step_ref if may_kill else "",
+                    price_label="PRICE      "))
+                L.append("")
         if r.get("note"):
             L.append(f"> {r['note']}")
             L.append("")
-    if bounds:
-        L.extend(render_cremation_table(bounds))
     return L
 
 
-def render_cremation_table(rows: list[dict]) -> list[str]:
-    """§13, the cremation: every branch of the denial, with its kind derived
-    from the audited goal and footprint by `refutation_kind`."""
-    L: list[str] = [
-        "| Branch of the denial | The objection | How it is stopped (derived) | Status · footprint · source |",
-        "|---|---|---|---|",
-    ]
-    for r in rows:
-        proofs = [p for p in (resolve_proof_by_name(t, _CTX.get("compiled", {}),
-                                                     _CTX.get("decls", {}), _CTX.get("graph", {}))
-                              for t in r.get("targets", [])) if p]
-        if not proofs:
-            raise SystemExit(
-                f"FATAL: cremation branch '{r.get('branch', '')}' names no resolvable "
-                f"target {r.get('targets', [])} — an unresolvable branch must not read "
-                f"as an unrefuted one.")
-        kind = refutation_kind(proofs[0])
-        icon = _KIND_ICON.get(kind, "?")
-        label = f"{icon} **{kind}**"
-        if r.get("note"):
-            label += f" — {r['note']}"
-        L.append(f"| **{r['branch']}** | {r.get('objection', '')} | {label} | {_status_cell(proofs)} |")
-    L.append("")
-    return L
+# `render_cremation_table` was deleted 2026-09-30 (CLEARER.md §5, owed in §10). It was
+# the *other* caller of `refutation_kind` and it had no call site: the cremation is
+# `render_cremation_derivation`, one rendered block per branch, not a table — a table
+# cell cannot hold a compiled proof body, and the block is what carries the derived
+# terminator, the premises and the steps. Left as a tombstone rather than removed
+# silently, because it is the one place a reader would look for "the Cremation is a
+# table", and the answer is that §13 stopped being a table on purpose (AGENTS.md,
+# 2026-09-30: "the Cremation is derivation, not badge").
 
 
 # Most demanding first: a step/row inherits the price of its costliest link.
@@ -5595,7 +6808,8 @@ def render_cremation_table(rows: list[dict]) -> list[str]:
 # display words was a live honesty bug (found 2026-09-30 by the §13 V2 price
 # check): `METAPHYSICAL`/`SEMANTIC` missed the table, fell to the default rank
 # 9 — the *least* demanding — so a row holding both a free and a priced link
-# displayed the free one. The "Normativity is stipulative" row of the cremation
+# displayed the free one. The R7 row of the cremation (then labelled "Normativity
+# is stipulative", renamed "Normativity is only stipulated" on 2026-09-30)
 # read "0 substantive axioms" while its own footprint cell printed
 # `AxJudicativeBipolarity`. `AXIOMATIC`/`PROVEN |` are kept as aliases so a
 # display string can never be the key again.
@@ -5607,6 +6821,40 @@ _GLANCE_RANK = {
     "PROVEN": 2,
     "DEFINITIONAL": 3,
 }
+
+
+def _derived_status_cell(badge: str) -> str:
+    """The one status cell every index in the document renders from a badge.
+
+    `_glance_rows` and `render_characteristic_index` both need a *derived*
+    status, and they are the same fact about the same audited footprint. Written
+    once here so the two indexes cannot drift — which is exactly how
+    `_GLANCE_RANK` came to key a display string against internal categories and
+    print "0 substantive axioms" on every row (CLEARER.md §3, 0.7). The ladder
+    is closed: `AXIOMATIC` names the axiom, `DEFINITIONAL` is its own word,
+    `COUNTERMODEL` keeps its relation off the status slot, and `PROVEN` is the
+    only branch that may say "0 substantive axioms" — and it says it because
+    `_branch_substantive` walked the footprint to find it empty, not because the
+    string says so.
+    """
+    if badge.startswith("AXIOMATIC ("):
+        return f"⚠️ **AXIOMATIC ({badge[len('AXIOMATIC ('):-1]})**"
+    if badge == "DEFINITIONAL":
+        return f"{DEFINITIONAL_BADGE} **DEFINITIONAL**"
+    if badge.startswith("COUNTERMODEL"):
+        return f"{COUNTERMODEL_BADGE} **{badge}**"
+    return f"{status_icon(badge)} **PROVEN** · 0 substantive axioms"
+
+
+def _derived_price_cell(proof: ProofIR) -> str:
+    """The one price cell: the substantive set walked off the audited
+    footprint. Shared with `_block_price_lines` for the same no-drift reason, and
+    it can never read "0 substantive axioms" over a non-empty set."""
+    n_subst = len(_branch_substantive(proof))
+    if n_subst == 0:
+        return "0 substantive axioms"
+    return (f"{n_subst} substantive axiom{'' if n_subst == 1 else 's'}: "
+            + ", ".join(sorted({a.rsplit('.', 1)[-1] for a in _branch_substantive(proof)})))
 
 
 def _glance_rows(spine_sections: list[dict]) -> list[str]:
@@ -5621,10 +6869,10 @@ def _glance_rows(spine_sections: list[dict]) -> list[str]:
     rows = []
     for sec in spine_sections:
         title = sec.get("title", "")
-        m = re.match(r"^\s*(\d+)\s*[.)]\s*(.*)$", title)
-        if not m:
+        no, bare = spine_step_ref(title)
+        if no is None:
             continue
-        no, bare = m.group(1), m.group(2).strip()
+        no = str(no)
         label = sec.get("label") or bare
         proofs = sec.get("primary_proofs", sec.get("proofs", []))
         if not proofs:
@@ -5638,18 +6886,10 @@ def _glance_rows(spine_sections: list[dict]) -> list[str]:
         if worst is None:
             continue
         _rank, proof, badge = worst
-        icon = status_icon(badge)
         formula = (sec.get("formula") or proof.goal or "").strip()
         formula = formula.split("\n")[0][:110]
         decl_link = _classical_decl_link(proof.full_name, _CTX.get("decls", {}))
-        if badge.startswith("AXIOMATIC ("):
-            status = f"{icon} **AXIOMATIC ({badge[len('AXIOMATIC ('):-1]})**"
-        elif badge == "DEFINITIONAL":
-            status = f"{icon} **DEFINITIONAL**"
-        elif badge.startswith("COUNTERMODEL"):
-            status = f"{icon} **{badge}**"
-        else:
-            status = f"{icon} **PROVEN** · 0 substantive axioms"
+        status = _derived_status_cell(badge)
         rows.append(f"| **{no}** | **{label}** — {bare} | `{formula}` | {status} · {decl_link} |")
     return rows
 
@@ -5669,7 +6909,10 @@ def generate_argument_at_a_glance(spine_sections: list[dict], frontiers: list[di
     ap = lines.append
     chart_lines = []
     cap = chart_lines.append
-    ap("## The Argument in Ten Steps")
+    # A `###`, not a `##`: this is the index *of* a part (Part I on the reading
+    # path, the deontic route's own section in the ledger), and a `##` here
+    # claimed to be a top-level section of its own. DEDUCTION.md §3.
+    ap("### The ten steps at a glance")
     ap("")
     ap("One row per step, every status derived from the kernel — never transcribed. "
        "Click any name for its Lean source.")
@@ -5679,10 +6922,9 @@ def generate_argument_at_a_glance(spine_sections: list[dict], frontiers: list[di
     for row in _glance_rows(spine_sections):
         ap(row)
     ap("")
-    ap("Edges are typed, and the two directions are not the same move: **[distinction]** separates "
-       "levels (step 1 gives the personless order away on purpose), **[discovery]** carries the "
-       "chain forward, and **[grounding]** is the person→pole dependence. §13 then closes the whole "
-       "thing by retorsion.")
+    ap("Edges are typed, and the two directions are not the same move: **[distinction]** "
+       "separates levels, **[discovery]** carries the chain forward, and **[grounding]** "
+       "is the person→pole dependence. §13 then closes the thing by retorsion.")
     ap("")
 
     presentation_data = load_presentation_spine()
@@ -8770,7 +10012,106 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> tuple[list
     ap("")
     return lines, synthesis
 
-def render_reading_sections(policy: dict) -> list[str]:
+# The declared reading order (DEDUCTION.md §3). The reading path is Parts I–IV in
+# that order, and a section's position is *declared* on the section
+# (`formal/presentation_spine.json`) rather than falling out of the order its keys
+# happen to sit in the file. That was not a cosmetic fix: the generator emitted
+# `reading_sections` in file order, so the necessity, the Trinity, the refutations,
+# the instrument limits and the open questions all printed *before* Part II, and a
+# reader scrolling down met the appendix of a part they had not reached yet.
+# `_lint_reading_order` fails the build if a section has no part, names an unknown
+# one, or breaks the sequence.
+_PART_ORDER = ("II", "III", "IV")
+
+
+def _ordered_reading_sections(sections: list[dict]) -> list[dict]:
+    """`reading_sections` sorted into the declared Parts I–IV order, stable within
+    a part. A section that omits `part` is a validation error, not something to
+    sort to the end: the whole point of the declaration is that an unplaced
+    section is visible."""
+    def key(s: dict) -> tuple[int, int]:
+        part = s.get("part")
+        if part not in _PART_ORDER:
+            raise SystemExit(
+                f"FATAL: reading section '{s.get('id')}' declares part={part!r}. "
+                f"Every section must declare one of {_PART_ORDER}; Part I is the "
+                f"ten-step spine and is emitted separately.")
+        return (_PART_ORDER.index(part), sections.index(s))
+    return sorted(sections, key=key)
+
+
+def _lint_reading_order(sections: list[dict]) -> None:
+    """B4 for the document's skeleton: the parts must appear as I–IV, each
+    section must carry the heading it is rendered with, and no two parts may
+    interleave. Without this, a section added to the JSON lands wherever the file
+    happens to put it and the only symptom is a reader meeting Part IV first."""
+    seen = [s.get("part") for s in _ordered_reading_sections(sections)]
+    ranks = [_PART_ORDER.index(p) for p in seen]
+    if ranks != sorted(ranks):
+        raise SystemExit(f"FATAL: reading sections interleave across parts: {seen}.")
+    for s in sections:
+        if not s.get("heading"):
+            raise SystemExit(
+                f"FATAL: reading section '{s.get('id')}' has no `heading`. The "
+                f"heading is declared with the section so its level and its place "
+                f"in the document are data, not an inference from the title.")
+
+
+def _substitute_placeholders(para: str, subs: dict[str, str]) -> str:
+    """Replace only the *named* placeholders, leaving every other brace alone.
+
+    `str.format_map` is the obvious tool and the wrong one here: the authored
+    prose is full of literal `{}` — "its theorem is `{}`, but its premises are …"
+    — and a formatter would read each as an empty field and raise. Only
+    `{word_underscore}` tokens are placeholders, which is also what the check
+    above validates, so the two agree on the grammar by construction.
+    """
+    return re.sub(r"\{[a-z_]+\}", lambda m: subs.get(m.group(0), m.group(0)), para)
+
+
+def _derived_role_split(cremation: list[dict]) -> str:
+    """The death/boundary/pillar split, derived from the rows' declared roles.
+
+    The Part III intro used to *author* the split — "R13, R14 and R15 are 🧱
+    **BOUNDARIES**" — and it was wrong: R15's role is `derivation` and its own
+    note says so. An authored status in front matter is the defect AGENTS.md
+    forbids, and here it contradicted the table it introduced.
+
+    So the ids and the counts are derived from `cremation[i]["role"]`, with the
+    R-number being the 1-based position `render_cremation_blocks` assigns, and
+    only the interpretation stays in the JSON. The clause about unicity is
+    R14's, and R14's note already carries it, so nothing is lost by not
+    restating it here (CLEARER.md §5, owed in §10).
+    """
+    by_role: dict[str, list[int]] = {}
+    for i, r in enumerate(cremation, start=1):
+        by_role.setdefault(r.get("role") or "derivation", []).append(i)
+    def _name(ns: list[int]) -> str:
+        if not ns:
+            return "none"
+        if len(ns) == 1:
+            return f"R{ns[0]}"
+        return ", ".join(f"R{n}" for n in ns[:-1]) + f" and R{ns[-1]}"
+    parts = []
+    bounds = by_role.get("boundary", [])
+    if bounds:
+        many = len(bounds) > 1
+        parts.append(f"🧱 {_name(bounds)} {'are' if many else 'is'} "
+                     f"**BOUNDAR{'IES' if many else 'Y'}**")
+    pillars = by_role.get("pillar", [])
+    if pillars:
+        many = len(pillars) > 1
+        parts.append(f"🪞 {_name(pillars)} {'are' if many else 'is'} the pillar "
+                     f"retorsion{'s' if many else ''}")
+    derivs = by_role.get("derivation", [])
+    if derivs:
+        one = len(derivs) == 1
+        parts.append(f"💥 the other {'' if one else len(derivs)} "
+                     f"{'is a' if one else 'are'} **DERIVATION{'' if one else 'S'}**")
+    return "; ".join(parts) + "."
+
+
+def render_reading_sections(policy: dict, parts: tuple[str, ...] | None = None) -> list[str]:
     """The argument sections that are not spine steps (READINGPATH.md §5).
 
     Prose is authored in `formal/presentation_spine.json` and always carries its
@@ -8783,13 +10124,46 @@ def render_reading_sections(policy: dict) -> list[str]:
     sections = data.get("reading_sections", [])
     if not sections:
         return []
+    _lint_reading_order(sections)
+    sections = _ordered_reading_sections(sections)
+    # `parts` selects which declared parts to emit *here*. The parts are emitted
+    # from different places in the generator — the Part II material follows the
+    # eighteen characteristic blocks, Part III and IV follow those — so the filter
+    # is how the declared order (§3) becomes the file's order. Rendering all of
+    # them at one call site is what put Part II after Part IV.
+    if parts is not None:
+        sections = [s for s in sections if s.get("part") in parts]
     L: list[str] = []
     ap = L.append
     for sec in sections:
-        ap(f"## {sec['title']}")
+        # Every spine `###` heading gets a slug anchor so prose can cite it. The
+        # legacy `§N` references are rewritten to these by `_repoint_legacy_refs`
+        # below; without an anchor a repointed reference is a dead link wearing a
+        # link's clothes (CLEARER.md §3, 0.9).
+        ap(f'<a id="{_heading_slug(sec["heading"])}"></a>')
+        ap(sec["heading"])
         ap("")
+        # Authored prose may name its own table's size, or the death/boundary
+        # split above the cremation; both numbers are derived from the rows that
+        # actually resolve, never transcribed. A `{placeholder}` that is not
+        # substituted here would surface literally, and a table that lost rows —
+        # or a role that changed — would otherwise keep claiming the old count
+        # (CLEARER.md §3, 0.8; §5, owed in §10). An unknown placeholder is now a
+        # failed build rather than a literal `{row_count}` in front matter.
+        n_rows = len(sec.get("price_table") or ())
+        subs = {"{row_count}": str(n_rows)}
+        if sec.get("cremation"):
+            subs["{role_split}"] = _derived_role_split(sec["cremation"])
         for para in sec.get("body", []):
-            ap(para)
+            for ph in re.findall(r"\{[a-z_]+\}", para):
+                if ph not in subs:
+                    raise AssertionError(
+                        f"reading_sections[{sec['id']}] uses {ph}, which is not a "
+                        f"derived placeholder ({sorted(subs)}). Derive the number or "
+                        f"write the sentence without it — a placeholder that survives "
+                        f"into README is a transcribed claim wearing a variable's "
+                        f"clothes (CLEARER.md §3, 0.8).")
+            ap(_substitute_placeholders(para, subs))
             ap("")
         if sec.get("price_table"):
             # §11/§12: every status, footprint and Lean link derived from
@@ -8909,6 +10283,364 @@ def render_established_profile(decls: dict, node_map: dict) -> list[str]:
        "is in [investigations/ledger.md](investigations/ledger.md).")
     ap("")
     return L
+
+
+# ============================================================================
+# DEDUCTION.md §5 — Part II: the characteristics of the ground, each with its
+# own complete deduction. `CLASSICAL_ATTRIBUTES` above is the *status* census
+# (39 rows: a table, which cannot hold a deduction). The list below is the
+# *deduction* census: the rows that have a headline theorem get a block, with
+# every component of a record-valued headline rendered as its own sub-block.
+#
+# Measured against `CLASSICAL_ATTRIBUTES` (2026-09-30): 28 of the 39 rows carry
+# a `decl` check and 11 do not. Of the 28, eight are `Personal ground /
+# person-type` and belong to Part I (they are what the chain *earns*), one is
+# the proof-architecture row, and the remaining 19 decl checks resolve to the 18
+# distinct headlines below (foundational unicity contributes two).
+#
+# This list lives here rather than in `formal/presentation_spine.json` because
+# `CLASSICAL_ATTRIBUTES` and its `_classical_row_status` machinery already live
+# here; splitting the attribute data across two files would let the table and
+# the deductions disagree. The `verify_characteristic_sections` guard below
+# fails the build if the two ever do.
+# ============================================================================
+
+# (title, headline target, one-line note). The target is resolved through
+# `resolve_proof_by_name`, so a bare or namespace-relative name is fine.
+CHARACTERISTIC_SECTIONS = [
+    ("The ground is necessary", "ofGround_necessary_ground_of_reality",
+     "existence that does not depend on anything else"),
+    ("The ground has aseity", "conditional_canonical_aseity",
+     "non-derived, non-dependent — and, read conditionally, priced"),
+    ("Foundational unicity", "ofGround_foundational_unicity",
+     "what unicity means before it is read as one God"),
+    ("Sole universal grounding", "ofGround_sole_universal_grounding",
+     "one ground bears the modal structure, not several"),
+    ("One God", "exactly_one_universal_modal_ground",
+     "unity of the Divine Being, with the multi-ground countermodel beside it"),
+    ("The ground is eternal — ever-present", "the_ground_everlasting",
+     "existence outside the whole of time, not merely endless in it"),
+    ("The ground is atemporal", "the_ground_atemporal",
+     "existence is not time-modulated at all"),
+    ("The ground precedes right and wrong", "ofGround_precedes_the_right_wrong_distinction",
+     "the ordering claim Part I needs, stated about the ground"),
+    ("The ground is not the universe", "the_ground_is_not_the_universe",
+     "exclusion of pantheism: not identical with the totality"),
+    ("The ground is simple", "divine_simplicity_sole_bearer",
+     "simplicity as the sole bearer of the attribute"),
+    ("The ground is transcendent", "ofGround_sole_transcendent_ground",
+     "neither an atom nor a member of the totality"),
+    ("The ground is immutable", "ofGround_divine_immutability",
+     "four invariances, each its own derivation"),
+    ("The ground is omnipresent", "ofGround_foundational_omnipresence",
+     "sustaining presence, derived from the ground's own operation"),
+    ("The ground is pure actuality", "ofGround_divine_pure_actuality",
+     "*Actus Purus*: no potentiality in it"),
+    ("The ground is omniscient (foundational)", "ofGround_foundational_omniscience",
+     "truth-exhausting, and — read at once — *not* truth-tracking"),
+    ("The ground can do all it can (foundational)", "ofGround_foundational_omnipotence",
+     "operative scope: what it can do is what actually obtains"),
+    ("The ground can bring about the satisfiable (causal)", "ground_produces_every_satisfiable_form",
+     "declared, not derived: C493, and the reason is C483"),
+    ("One God in three Persons", "agape_entails_tripersonality",
+     "Trinity, from the ground's love of the contingent"),
+]
+
+# The 11 rows with no `decl` check: one honest line each, no fake section, no
+# fabricated derivation. `kind` is the *declared* check type, so the status is
+# not authored here either.
+NOT_ESTABLISHED_LINES = [
+    ("Psychological personality", "countermodel", "countermodel — the claim is separated, not established"),
+    ("Strict monotheism", "countermodel", "countermodel — refuted as a *consequence*; unicity does not force one Person"),
+    ("Perfect (moral) goodness", "claim", "no kernel declaration at all"),
+    ("Scholastic simplicity", "absent", "not established — strict identity of essence is not proved"),
+    ("Psychological impassibility", "absent", "not established — no kernel declaration"),
+    ("Physical omnipresence", "absent", "not established — spatial presence is a different claim"),
+    ("Quantitative metric infinity", "absent", "not established — an infinite *magnitude* is not derived"),
+    ("Physical / kinetic energy", "absent", "not established — thermodynamic scope is outside the vocabulary"),
+    ("Infallible / counterfactual omniscience", "absent",
+     "**refuted** — it is a field of the proved omniscience, where `ofGround_not_truth_tracking` denies it"),
+    ("Creator of contingent reality", "countermodel", "countermodel — `Produces` is not `Creates` (C110 stands)"),
+    ("Incarnation", "countermodel", "countermodel — the C112 frontier, one God in three Persons with no human instance"),
+]
+
+_SEAM_NOTE = (
+    "**The seam, stated once and not hidden.** Part I established a *person* who "
+    "grounds the right/wrong poles. These eighteen blocks are about "
+    "`Entity.ofGround` — the ground *as such*.",
+    "The bridge between the two objects is **C228, and it is BLOCKED**: not one "
+    "line of the corpus derives `GenericGroundsRightWrong g → PersonalEntity g`.",
+    "",
+    "So a characteristic proved here is a characteristic of the ground, and the "
+    "claim that it is a characteristic of *the person Part I reached* is open. "
+    "Every block below states which object it is about.",
+)
+
+
+def _derived_depends_on(proof: ProofIR) -> str:
+    """What a block consumes, DERIVED from the compiled signature.
+
+    For a characteristic this is its real premise list; for a spine step the
+    caller passes the incoming edge glosses instead. Either way it is compiled
+    fact, not authored prose (DEDUCTION.md B1)."""
+    if not proof.assumptions:
+        return "no premises — a closed theorem"
+    names = [a.proposition for a in proof.assumptions[:3]]
+    more = len(proof.assumptions) - len(names)
+    return "; ".join(names) + (f"; +{more} more" if more else "")
+
+
+def _derived_gives(proof: ProofIR) -> str:
+    """What a block hands on, DERIVED from the depgraph's forward edges.
+
+    The consumers are the declarations that actually use this one, so a
+    hand-off cannot be asserted where the kernel has none. When nothing uses it
+    the block says so, which is the honest terminal and still satisfies B1
+    (non-empty, and true)."""
+    decls = _CTX.get("decls", {})
+    graph = _CTX.get("graph", {})
+    consumers = []
+    for f in sorted(graph.get("out", {}).get(proof.full_name, set()) or ()):
+        d = decls.get(f)
+        if d and d.get("kind") in ("theorem", "axiom") and f != proof.full_name:
+            consumers.append(d["name"])
+    if not consumers:
+        return "the established attribute; nothing downstream in the corpus consumes it"
+    shown = consumers[:3]
+    more = len(consumers) - len(shown)
+    return "used by " + ", ".join(f"`{n}`" for n in shown) + (f" (+{more} more)" if more else "")
+
+
+def _resolve_block_proof(target: str, where: str) -> ProofIR:
+    proof = resolve_proof_by_name(target, _CTX.get("compiled", {}),
+                                  _CTX.get("decls", {}), _CTX.get("graph", {}))
+    if proof is None:
+        raise SystemExit(
+            f"FATAL: {where}: target '{target}' does not resolve to a compiled proof. "
+            f"A characteristic with no derivation must not be printed as a deduction.")
+    return proof
+
+
+def render_characteristic_index() -> list[str]:
+    """Part II's index, the counterpart of Part I's `at a glance` (CLEARER.md §5).
+
+    Part I has ten rows and Part II had none, so characteristic #14 —
+    *The ground is pure actuality* — was unreachable: present at
+    `README:877` with nothing linking to it and no way to cite it. Eighteen
+    rows here, each with the characteristic linking to its own block anchor,
+    its status derived from the kernel, its price walked off the audited
+    footprint, and the record components it is built from.
+
+    Both columns are the *same functions* `_glance_rows` uses
+    (`_derived_status_cell`, `_derived_price_cell`), so the two indexes cannot
+    disagree about the same theorem — the drift risk that produced
+    `_GLANCE_RANK`'s uniform "0 substantive axioms" in the first place. The row
+    count is `len(CHARACTERISTIC_SECTIONS)`, not a literal, and
+    `verify_characteristic_index` fails the build if the table and the section
+    list ever differ.
+    """
+    L: list[str] = []
+    ap = L.append
+    ap('<a id="characteristic-index"></a>')
+    ap("### The eighteen characteristics at a glance")
+    ap("")
+    ap("One row per characteristic, every status derived from the kernel — never "
+       "transcribed. Click any name to reach its derivation.")
+    ap("")
+    ap("| # | Characteristic | Derived status | Price | Components |")
+    ap("|---|---|---|---|---|")
+    for i, (title, target, _note) in enumerate(CHARACTERISTIC_SECTIONS, start=1):
+        proof = _resolve_block_proof(target, f"Part II index '{title}'")
+        _cat, badge = classify_proof_edge(proof)
+        comps = record_components(proof)
+        if comps:
+            n_terms = sum(1 for _f, _c, is_decl in comps if not is_decl)
+            comp_cell = f"{len(comps)} sub-derivations"
+            if n_terms:
+                comp_cell += f" ({n_terms} a term, not a theorem)"
+        else:
+            comp_cell = "—"
+        ap(f"| **{i}** | [{title}](#{proof.name}) | {_derived_status_cell(badge)} | "
+           f"{_derived_price_cell(proof)} | {comp_cell} |")
+    ap("")
+    return L
+
+
+def verify_characteristic_index(lines: list[str],
+                                component_blocks: list[tuple[ProofIR, str]] | None = None) -> None:
+    """Gate 11's first half: the index and the blocks it indexes cannot diverge.
+
+    A navigation table is a *promise* that N things are reachable, so the two
+    halves are checked against each other rather than trusted: the table must
+    have exactly `len(CHARACTERISTIC_SECTIONS)` rows, each pointing at an anchor
+    that the document actually emits, and every row's status cell must be the
+    badge the kernel gives — recomputed here, not read back off the text.
+
+    The second check is the one a link cannot make, and mutation M4 is why it
+    exists: deleting a component's anchor leaves the index intact, because the
+    index only links to *headlines*, so every link still resolves and the build
+    goes green with `ofGround_modal_invariance` unreachable. Passing the
+    component proofs in and requiring each to be in the registry closes that.
+
+    The second half of gate 11 (`R15`'s target order) is in the cremation
+    section; this is the part that keeps the eighteen rows honest.
+    """
+    if (policy_audience := ((_CTX.get("policy") or {}).get("audience") or "full")) != "argument":
+        return
+    rendered = "\n".join(lines)
+    rows = [ln for ln in lines if re.match(r"^\| \*\*\d+\*\* \| \[", ln)]
+    expected = len(CHARACTERISTIC_SECTIONS)
+    if len(rows) != expected:
+        raise SystemExit(
+            f"FATAL: the characteristic index has {len(rows)} rows but Part II has "
+            f"{expected} characteristics. An index that is not a function of "
+            f"CHARACTERISTIC_SECTIONS is a transcribed table (CLEARER.md §5).")
+    for i, ((title, target, _n), row) in enumerate(
+            zip(CHARACTERISTIC_SECTIONS, rows), start=1):
+        proof = _resolve_block_proof(target, f"verify_characteristic_index('{title}')")
+        _cat, badge = classify_proof_edge(proof)
+        for fragment in (f"| **{i}** | ", f"(#{proof.name})",
+                         _derived_status_cell(badge), _derived_price_cell(proof)):
+            if fragment not in row:
+                raise SystemExit(
+                    f"FATAL: characteristic index row {i} ({title!r}) does not carry "
+                    f"{fragment!r} — the row and the kernel disagree, so one of them "
+                    f"is transcribed (CLEARER.md §5).")
+    if f'<a id="{CHARACTERISTIC_SECTIONS[13][1]}"' not in rendered:
+        # Characteristic #14 specifically: the one CLEARER.md §5 names as
+        # unreachable, so its reachability is asserted rather than assumed.
+        raise SystemExit(
+            "FATAL: characteristic #14 is indexed but its block anchor is missing "
+            "from Part II (CLEARER.md §5).")
+    missing = [m for m in re.findall(r"\(#([A-Za-z0-9_']+)\)", rendered)
+               if m not in _RENDERED_ANCHORS]
+    if missing:
+        raise SystemExit(
+            f"FATAL: the characteristic index links to {len(missing)} anchor(s) that "
+            f"no block emits: {sorted(set(missing))[:5]} (CLEARER.md §5).")
+    for cproof, parent in (component_blocks or []):
+        if cproof.name not in _RENDERED_ANCHORS:
+            raise SystemExit(
+                f"FATAL: component {cproof.name!r} of {parent!r} is rendered but "
+                f"emits no anchor, so it cannot be cited — the index links only to "
+                f"headlines, so nothing else would notice (CLEARER.md §5).")
+
+
+def render_characteristic_sections(decls: dict, node_map: dict) -> list[str]:
+    """DEDUCTION.md §5 — Part II of the reading path.
+
+    Eighteen characteristics, each a titled block carrying its own premises,
+    steps, goal, price and Lean anchor, with every component of a record-valued
+    headline expanded underneath as its own sub-block; then the eleven rows that
+    have no headline theorem, as one honest line each. Replaces the 39-row
+    status table on the reading path — the table stays in the ledger, where a
+    table belongs.
+    """
+    L: list[str] = []
+    ap = L.append
+    ap("## Part II — The characteristics of the ground")
+    ap("")
+    ap("Eighteen characteristics, each with the deduction that establishes it. A "
+       "headline that is a *record* is not one conclusion but a set of them, so "
+       "each component is expanded in place under its own name; nothing here is "
+       "asserted without the steps behind it.")
+    ap("")
+    L.extend(render_characteristic_index())
+    ap(_SEAM_NOTE[0])
+    ap(_SEAM_NOTE[1])
+    ap("")
+    ap(_SEAM_NOTE[3])
+    ap("")
+    n_comp = 0
+    n_term = 0
+    component_blocks: list[tuple[ProofIR, str]] = []
+    for title, target, note in CHARACTERISTIC_SECTIONS:
+        proof = _resolve_block_proof(target, f"Part II characteristic '{title}'")
+        role = _ROLE_DECLARED if proof.kind == "axiom" else _ROLE_HEADLINE
+        L.extend(render_derivation_block(
+            proof, role=role, title=f"{title} — {note}.",
+            depends_on=_derived_depends_on(proof), gives=_derived_gives(proof)))
+        for field, comp_name, is_decl in record_components(proof):
+            cproof = (resolve_proof_by_name(comp_name, _CTX.get("compiled", {}),
+                                            _CTX.get("decls", {}), _CTX.get("graph", {}))
+                      if is_decl else None)
+            if cproof is None:
+                # A field holding a *term* (a lambda, an opaque application) has
+                # no separate derivation to expand. Saying so is honest; printing
+                # it as an unresolved component would read as a missing proof.
+                n_term += 1
+                ap(f"    ▸ {field}  ·  a term of the record (`{comp_name}`), not a "
+                   f"named theorem — no separate derivation")
+                ap("")
+                continue
+            n_comp += 1
+            component_blocks.append((cproof, proof.name))
+            L.extend(render_derivation_block(
+                cproof, role=_ROLE_COMPONENT, title=field,
+                backlink=f"↑ a component of {proof.name}"))
+    ap("### What is not established about the ground")
+    ap("")
+    ap("Eleven of the thirty-nine classical rows have no headline theorem in the "
+       "kernel. Each gets one line and no section — the honest form of the answer.")
+    ap("")
+    ap("| Not established | Declared kind | What is actually the case |")
+    ap("|---|---|---|")
+    # The kind cell uses the legend's own vocabulary and casing (`COUNTERMODEL`,
+    # `DEFERRED`, …). It was lower-case here while the legend was upper-case, so a
+    # reader could not tell whether the two were the same label (CLEARER.md §3, 0.10).
+    # An unrecognised kind fails loudly rather than printing an unlabelled word.
+    _KINDS = {"countermodel": f"{COUNTERMODEL_BADGE} COUNTERMODEL",
+              "absent": "❌ NOT ESTABLISHED",
+              "claim": "⏸ DEFERRED",
+              "deferred": "⏸ DEFERRED",
+              "blocked": "⛔ BLOCKED"}
+    for label, kind, why in NOT_ESTABLISHED_LINES:
+        if kind not in _KINDS:
+            raise SystemExit(
+                f"FATAL: unknown declared kind {kind!r} for {label!r}; add it to the "
+                f"legend vocabulary or fix the row (CLEARER.md §3, 0.10).")
+        ap(f"| **{label}** | {_KINDS[kind]} | {why} |")
+    ap("")
+    ap(f"*Part II: {len(CHARACTERISTIC_SECTIONS)} characteristics, {n_comp} component "
+       f"sub-derivations expanded in place, {n_term} record fields holding a term "
+       f"rather than a named theorem, and {len(NOT_ESTABLISHED_LINES)} rows honestly "
+       f"not established.*")
+    ap("")
+    verify_characteristic_index(L, component_blocks)
+    return L
+
+
+def verify_characteristic_sections(decls: dict, node_map: dict) -> None:
+    """Regeneration guard: every `CHARACTERISTIC_SECTIONS` headline and every
+    record component must still resolve, and the section list must still
+    partition the `decl`-bearing rows of `CLASSICAL_ATTRIBUTES` (28 rows: 8
+    personal-scope to Part I, 1 proof-architecture, 19 checks → these 18
+    headlines). A drift between the two lists fails the build instead of
+    quietly printing a subset."""
+    if (policy_audience := ((_CTX.get("policy") or {}).get("audience") or "full")) != "argument":
+        return
+    for title, target, _note in CHARACTERISTIC_SECTIONS:
+        _resolve_block_proof(target, f"verify_characteristic_sections('{title}')")
+    short = _short_index(decls)
+    for _title, target, _note in CHARACTERISTIC_SECTIONS:
+        full = short.get(target)
+        d = decls.get(full) if full else None
+        if not d:
+            continue
+        for _field, comp, is_decl in record_components(
+                type("P", (), {"full_name": full, "name": target, "kind": d["kind"]})()):
+            if is_decl and comp not in short:
+                raise SystemExit(
+                    f"FATAL: characteristic '{target}' has a component '{comp}' that is "
+                    f"not a declaration — the record is not decomposed as Part II claims.")
+    n_decl_rows = sum(1 for row in CLASSICAL_ATTRIBUTES
+                      if any(c.get("type") == "decl" for c in row["checks"]))
+    n_sections = len(CHARACTERISTIC_SECTIONS)
+    if n_decl_rows != 28:
+        raise SystemExit(
+            f"FATAL: expected 28 CLASSICAL_ATTRIBUTES rows carrying a `decl` check, "
+            f"found {n_decl_rows}. Part II's census (and DEDUCTION.md §5.1) must be "
+            f"re-measured before the reading path is regenerated.")
 
 
 def verify_classical_attribute_status(decls: dict, node_map: dict) -> None:
@@ -9177,8 +10909,29 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
     policy = presentation_data.get("presentation_policy", {}) if presentation_data else {}
     spine_edges = presentation_data.get("edges", []) if presentation_data else []
     edges_by_from = {}
+    edges_by_to = {}
     for e in spine_edges:
         edges_by_from.setdefault(e.get("from"), []).append(e)
+        edges_by_to.setdefault(e.get("to"), []).append(e)
+    # `_lint_graph` reads these from `_CTX`; it checks the spine's edge kinds and
+    # its in/out degrees, and is inert for `audience: "full"`.
+    _CTX["spine_edges"] = spine_edges
+    _CTX["spine_nodes"] = (presentation_data or {}).get("spine_nodes", [])
+    _CTX["spine"] = presentation_data or {}
+    _lint_graph(policy)
+    # §6: the refutation ↔ step wiring. Checked here rather than inside the Part
+    # III renderer so a broken `attacks` is a validation failure, not a rendered
+    # string that happens to be wrong.
+    _lint_refutation_wiring()
+    # DEDUCTION.md §4: the step number a node id refers to, so a hand-off can be
+    # rendered as "step N" instead of as the node's internal id. Parsed here
+    # rather than via `_section_ref` (defined below) because the map is needed
+    # before the step loop runs.
+    _step_no = {}
+    for _s in spine:
+        _n, _b = spine_step_ref(_s.get("title", ""))
+        if _n is not None:
+            _step_no[_s.get("id")] = (_n, _b)
     include_detailed = policy.get("include_detailed_appendix", False) if presentation_data else True
     include_countermodels = policy.get("include_countermodels_appendix", False) if presentation_data else True
     include_frontiers = policy.get("include_frontiers_appendix", False) if presentation_data else True
@@ -9194,6 +10947,7 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
     SINK_SUBSECT = _block_sink(policy, "include_subsections")
     SINK_FRONTIERS = _block_sink(policy, "include_frontier_list")
     SINK_ATTRIBUTES = _block_sink(policy, "include_attributes_table")
+    SINK_CHARACTERISTICS = _block_sink(policy, "include_characteristics")
     SINK_SYNTHESIS = _block_sink(policy, "include_synthesis_paragraph")
     SINK_ART = _block_sink(policy, "include_chart_art")
     SINK_PUSHBACK = _block_sink(policy, "include_full_pushback")
@@ -9217,14 +10971,32 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
                 ap("## How to Read This Deduction (full guide)")
                 ap("")
                 ap.extend(guide_full)
+        # The index of the sixteen denials, above the fold and before Part I
+        # (CLEARER.md §4). It is the one place a reader learns which of them are
+        # deaths before meeting one, and the count of non-deaths is the argument
+        # for it: front matter that said only "Part III refutes every objection"
+        # would be the same overclaim the index exists to stop. Emitted under
+        # `ap.at("readme", ...)` and NOT under `SINK_GUIDE` — that constant is
+        # `_block_sink(policy, "include_full_guide")`, and `include_full_guide`
+        # is false, so it resolves to the ledger, which is where the *full* guide
+        # goes and not where front matter goes.
+        if ARGUMENT_AUDIENCE:
+            with ap.at("readme", "refutation_index"):
+                ap.extend(render_refutation_index(_refutation_rows()))
         # Phase 4: the two-column score. `score_claims` must be the GAPMAP claim
         # rows, NOT the discovered ProofIR sections: those carry `proofs`, and
         # reading `claims` off them silently yields an empty list, which is how
         # 4b shipped as dead code behind a green build (VISIBILITY.md
         # Correction 10). main() passes the real inventory.
-        if score_claims:
-            for gl in render_score_block(derive_score_data(score_claims, decls, node_map)):
-                ap(gl)
+        if ARGUMENT_AUDIENCE:
+            ap("## Part I — The deduction: a personal kind of ground is forced")
+            ap("")
+            ap("Ten steps, contiguous and in order. Each one is a block: what it "
+               "consumes, what it hands on, the premises and steps behind it, and "
+               "its price. The running state under each step is what has been "
+               "established *so far*, so the chain can be checked at any point "
+               "rather than taken on trust at the end.")
+            ap("")
         glance_lines, glance_art = generate_argument_at_a_glance(spine, frontiers, countermodels)
         for gl in glance_lines:
             ap(gl)
@@ -9261,9 +11033,9 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
     dedupe_defs = bool(policy.get("dedupe_shared_definitions", False))
     surfaced = {}
 
-    def _section_ref(title):
-        m = re.match(r'^\s*(\d+)\s*[.)]\s*(.*)$', title)
-        return (int(m.group(1)), m.group(2).strip()) if m else (None, title.strip())
+    # `spine_step_ref` is the module-level one; this local name stays because the
+    # step loop and the ledger transition both call it by the old name.
+    _section_ref = spine_step_ref
 
     def _surface(proof, sec_no, sec_bare, kind):
         surfaced.setdefault(proof.name, (sec_no, sec_bare, kind))
@@ -9273,7 +11045,83 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
         if dedupe_defs:
             _surface(proof, sec_no, sec_bare, "step")
 
+    def _shared_route_definitions():
+        """The symbols two or more steps use, with the steps that use them.
+
+        Derived from the step sections' own `route_definitions`, so the glossary
+        cannot list a symbol the steps do not use and cannot omit one they do.
+        The threshold is *shared by two or more steps* rather than a promised
+        "~12": a count in the plan is an estimate, and this is the measurement
+        of it. A symbol one step uses belongs to that step, and printing it here
+        too would be the same definition in two places.
+        """
+        uses: dict[str, list[int]] = {}
+        by_name: dict[str, object] = {}
+        for s in spine:
+            no, _ = spine_step_ref(s.get("title", ""))
+            if no is None:
+                continue
+            for d in (s.get("route_definitions") or []):
+                uses.setdefault(d.name, []).append(no)
+                by_name.setdefault(d.name, d)
+        shared = [(n, by_name[n], sorted(set(v))) for n, v in uses.items() if len(set(v)) > 1]
+        # Most-used first, then alphabetical, so the load-bearing vocabulary is
+        # the part a skimming reader reaches.
+        shared.sort(key=lambda t: (-len(t[2]), t[0]))
+        return shared
+
+    def _render_part_one_glossary():
+        """The vocabulary the steps share, defined once, at the head of Part I.
+
+        DEDUCTION.md D7: the steps used `TrueTo`, `Correct`, `N_T` and their
+        neighbours with nothing saying what they meant. Two things follow from
+        putting the shared ones here:
+
+        - each is defined **once**, and the steps that use it say so, because the
+          glossary is seeded into `surfaced` before the first step renders. A
+          symbol appearing under step 2 and again under step 9 is two renderings
+          of one declaration, and the second can be read as a second claim.
+        - a step's own `Vocabulary` block is then only what is *new* at that step,
+          which is the useful part: what this step adds to the language.
+        """
+        shared = _shared_route_definitions()
+        if not shared:
+            return
+        first, last = min(s[2][0] for s in shared), max(s[2][-1] for s in shared)
+        ap("### The shared vocabulary of the ten steps")
+        ap("")
+        ap(f"{len(shared)} symbols are used by more than one step, so they are "
+           f"defined once here and cross-referenced below rather than restated "
+           f"under each step that uses them. A symbol only one step uses is "
+           f"defined in that step's own vocabulary block. Between them they run "
+           f"from step {first} to step {last}.")
+        ap("")
+        for i, (name, d, steps) in enumerate(shared):
+            if i:
+                ap("")
+            ap.extend(_definition_line(
+                d, footnote="↳ used at step" + ("s" if len(steps) > 1 else "")
+                + " " + ", ".join(str(x) for x in steps)))
+            if dedupe_defs:
+                # `surfaced` is keyed by name and read by `_render_route_definitions`
+                # to decide new-vs-already-shown; "glossary" is the sentinel that
+                # makes the cross-reference say so.
+                surfaced[d.name] = ("glossary", "the shared vocabulary", "def")
+        ap("---")
+        ap("")
+
     def _render_route_definitions(sec, sec_no, sec_bare):
+        """The step's own vocabulary, on the reading path, collapsed to lines
+        rather than to `<details>` (DEDUCTION.md D7, B6, D3).
+
+        The pre-split file hid these in a `<details>` block, and `_lint_readme`
+        bans that on the reading path — the ban stays, so the definitions move
+        *into* the document instead of being collapsed. A `def` has no inference
+        in it: it is a gloss and the equation it fixes, so a definition is
+        rendered as one `▸` line carrying the gloss and the `∴` — the component
+        form of §2, minus the price, because a definition's footprint is the
+        vocabulary it mentions and that is disclosed on the step that uses it.
+        """
         if not sec.get("route_definitions") or is_synthetic:
             return
         new_defs, refs = [], []
@@ -9286,27 +11134,155 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
                     _surface(d, sec_no, sec_bare, "def")
         if not new_defs and not refs:
             return
-        ap("<details>")
-        if refs:
-            ap(f"<summary>Definitions used in this section ({len(new_defs) + len(refs)}; "
-               f"{len(new_defs)} new, {len(refs)} already shown)</summary>")
+        n_new = len(new_defs)
+        n_ref = len(refs)
+        if n_new and n_ref:
+            head = f"**Vocabulary of this step** — {n_new} defined here, {n_ref} above"
+        elif n_new:
+            head = f"**Vocabulary of this step** — {n_new} defined here"
         else:
-            ap(f"<summary>Definitions used in this section ({len(new_defs)})</summary>")
+            head = "**Vocabulary of this step** — all defined above"
+        ap(head)
         ap("")
         for d in new_defs:
-            render_proof_body_spine(d, ap)
-        for d in refs:
-            ref_no, ref_bare, ref_kind = surfaced[d.name]
-            verb = "defined" if ref_kind == "def" else "first shown"
-            ap(f"    ∴ {d.goal} — {verb} in §{ref_no}. {ref_bare}.")
+            for line in _definition_line(d):
+                ap(line)
+        if refs:
+            # One line, not one row each: a `▸` row is the shape a *definition*
+            # takes here, so a cross-reference printed as one would read as a
+            # second, weaker definition of the same symbol. Grouped by where each
+            # was defined, so the list is one clause per source rather than one
+            # repeated phrase per symbol.
+            groups: dict[str, list[str]] = {}
+            for d in refs:
+                where = ("in the shared vocabulary" if surfaced[d.name][0] == "glossary"
+                         else f"at step {surfaced[d.name][0]}")
+                groups.setdefault(where, []).append(f"`{d.name}`")
+            ap("↳ Already defined above — " + "; ".join(
+                f"{', '.join(sorted(names))} {where}" for where, names in groups.items()) + ".")
             ap("")
-        ap("</details>")
-        ap("")
 
+    def _definition_line(d, footnote: str = ""):
+        """One definition as two lines: the gloss, then the equation it fixes.
+
+        Both are derived — the gloss is the declaration's own docstring, the
+        equation is its compiled `ProofIR` goal — so a definition line cannot
+        assert an equation the kernel does not carry, and cannot gloss a symbol
+        the declaration does not define. `footnote` is an optional `↳` line that
+        belongs to the same visual unit, so it goes inside it rather than after
+        the blank line that closes it.
+        """
+        head = _definition_gloss(d)
+        out = []
+        if head:
+            out.extend(_wrap_para(f"    ▸ {d.name}  {head}", README_PARA_CAP))
+        else:
+            out.append(f"    ▸ {d.name}")
+        goal = _compacted_goal(d)
+        if goal:
+            out.extend(f"        {g}" for g in _wrap_para(f"∴ {goal}", README_PARA_CAP - 8))
+        # B5: a definition row carries its Lean anchor, on the same line as the
+        # footnote so the row costs three lines and not four. The anchor is also
+        # what lets `_lint_reading_path_vocabulary` see which module a row came
+        # from — without it, a countermodel's `Means` is indistinguishable from
+        # Γ's by anything in the output.
+        src = f"📘 [{d.file}#{d.name}](formal/Logos/{d.file}#L{d.line})"
+        tail = " · ".join(x for x in (footnote, src) if x)
+        if tail:
+            out.append(f"        {tail}")
+        out.append("")
+        return out
+
+    def _handoff(sec_id, edges, key):
+        """One hand-off line, derived from the spine graph (DEDUCTION.md §4).
+
+        `DEPENDS ON` is the `from`-edges arriving at this step; `GIVES` is the
+        `to`-edges leaving it. Both are read off `formal/presentation_spine.json`'s
+        edges, whose `kind` is checked against the closed `EDGE_KINDS` by
+        `_lint_graph`, so a hand-off is a checked structure rather than an English
+        sentence that could claim a dependency the graph does not have. A step
+        with no edge in that direction says so instead of implying one.
+        """
+        parts = []
+        for e in edges:
+            # `key` is the direction of the *lookup*: "from" for the in-edges
+            # that make up DEPENDS ON, "to" for the out-edges behind GIVES. The
+            # endpoint to name is the one that is not this step.
+            other = e.get("from") if key == "from" else e.get("to")
+            ref = _step_no.get(other)
+            where = f"step {ref[0]}" if ref else (other or "?")
+            if key == "from":
+                parts.append(f"{where}: {e.get('gloss', '')}".rstrip(": "))
+            else:
+                parts.append(f"{e.get('gloss', '')}, taken up by {where}".strip(", "))
+        return "; ".join(parts)
+
+    def _kills_line(sec):
+        """What this step makes impossible, DERIVED from Part III (DEDUCTION.md §6).
+
+        The direction matters: not "this objection is answered" but "this step is
+        what makes the objection impossible". So the field is read off the
+        refutations that name this step in their `attacks` — never transcribed
+        onto the node, which is what `_lint_refutation_wiring` forbids. Returns
+        `None` when no refutation attacks the step, and the field is then
+        *omitted* rather than printed as `—`: a `KILLS —` line reads as "this step
+        invalidates nothing", which is a claim, and step 10 (the composed chain)
+        genuinely has no refutation of its own.
+        """
+        hits = _refutation_index().get(sec.get("id"), [])
+        return ", ".join(f"[`{lbl}`](#{lbl.lower()})" for lbl, _ in hits) if hits else None
+
+    # DEDUCTION.md §4: the running state. Each step's `milestones` are declared
+    # on the node in `formal/presentation_spine.json` as `{theorem, words}`, and
+    # the *step* is not declared: it is where the theorem actually is. The
+    # assertion below fails the build if a node claims a milestone theorem that is
+    # not among its own theorems, so a claim like "step 4 reaches the person" is
+    # checked against the kernel instead of trusted. The running state then
+    # accumulates the milestones of every step up to this one.
+    _milestone_step = {}   # theorem name -> step number
+    _milestone_words = {}  # theorem name -> the words
+    for _s in spine:
+        _no = _step_no.get(_s.get("id"), (None, ""))[0]
+        if _no is None:
+            continue
+        _names = {p.name for p in _s.get("primary_proofs", _s.get("proofs", []))}
+        for _m in _s.get("milestones") or []:
+            _thm = _m.get("theorem")
+            _words = _m.get("words") or _thm
+            if _thm not in _names:
+                if not ARGUMENT_AUDIENCE:
+                    continue
+                raise SystemExit(
+                    f"FATAL: step {_no} ({_s.get('id')}) claims the milestone "
+                    f"`{_thm}`, which is not one of its own theorems {sorted(_names)}. "
+                    f"The `SO FAR` line is derived by looking each milestone theorem up "
+                    f"in the step that proves it (DEDUCTION.md §4); a milestone on a "
+                    f"step that does not prove it would be a state line that lies.")
+            if _thm in _milestone_step:
+                raise SystemExit(
+                    f"FATAL: milestone `{_thm}` is claimed by two steps "
+                    f"({_milestone_step[_thm]} and {_no}).")
+            _milestone_step[_thm] = _no
+            _milestone_words[_thm] = _words
+    # Display order is step order, then declaration order within a step.
+    _ms_order = sorted(_milestone_words, key=lambda t: (_milestone_step[t],
+                                                         list(_milestone_words).index(t)))
+
+    if ARGUMENT_AUDIENCE:
+        _render_part_one_glossary()
     for i, sec in enumerate(spine):
         sec_no, sec_bare = _section_ref(sec.get("title", ""))
         ledger_mark = ap.mark()
-        ap(f"## {sec['title']}")
+        # DEDUCTION.md §3/§4: the steps are `###` under one `##` part, not ten
+        # `##` sections. §11–§15 used to continue the step numbering, so a reader
+        # scrolling past "## 11. Necessity" could not tell a step from a coda.
+        # The anchor is emitted only when the title actually yields a step number.
+        # A synthetic/mock section (test_deduction_compiler's genericity test)
+        # has no number, and `%d` on None is a TypeError that would make the
+        # genericity test fail for a reason unrelated to genericity.
+        if sec_no is not None:
+            ap('<a id="step-%d"></a>' % sec_no)
+        ap(f"### Step {sec_no} — {sec_bare}")
         ap("")
         # READINGPATH.md §5: the reading path gets the short, load-bearing claim
         # (authored in formal/presentation_spine.json, always carrying a Lean
@@ -9316,6 +11292,15 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
                  or sec.get("summary") or "").strip()
         if claim:
             ap(claim)
+            ap("")
+        # DEDUCTION.md §4: the hand-off fields, before the price, so a reader can
+        # see what a step consumes and produces without reading its proof.
+        if ARGUMENT_AUDIENCE:
+            ap(f"DEPENDS ON   {_handoff(sec.get('id'), edges_by_to.get(sec.get('id'), []), 'from') or '— this is the first step'}")
+            ap(f"GIVES        {_handoff(sec.get('id'), edges_by_from.get(sec.get('id'), []), 'to') or '— this is the last step'}")
+            _kl = _kills_line(sec)
+            if _kl:
+                ap(f"KILLS        {_kl}")
             ap("")
         if ARGUMENT_AUDIENCE and sec.get("disclosure"):
             ap(f"> ⚠️ **Price disclosed —** {sec['disclosure']}")
@@ -9501,16 +11486,36 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
                     ap("</details>")
                     ap("")
 
-        out_edges = edges_by_from.get(sec.get("id"), [])
-        for e in out_edges:
-            to_id = e.get("to")
-            to_sec = next((s for s in spine if s.get("id") == to_id), None)
-            if to_sec:
-                to_no, to_bare = _section_ref(to_sec.get("title", ""))
-                direction = e.get("direction", "discovery")
-                dir_label = "▲ Discovery" if direction == "discovery" else ("▼ Ontological Grounding" if direction == "grounding" else "➔ Continuation")
-                rel = e.get("relation", "")
-                ap(f"> ➔ **Linear Forward Transition to Step {to_no} ({to_bare}):** [{dir_label} · *{rel}*]")
+        # The forward transition is the *old* way of stating the hand-off, and the
+        # `GIVES` field is the new one (DEDUCTION.md §4). Printing both on the
+        # reading path said the same thing twice in two different vocabularies,
+        # so the transition is ledger material now; the reading path's `GIVES`
+        # names the same edge with its checked `kind`.
+        if not ARGUMENT_AUDIENCE:
+            out_edges = edges_by_from.get(sec.get("id"), [])
+            for e in out_edges:
+                to_id = e.get("to")
+                to_sec = next((s for s in spine if s.get("id") == to_id), None)
+                if to_sec:
+                    to_no, to_bare = _section_ref(to_sec.get("title", ""))
+                    kind = e.get("kind", "discovery")
+                    dir_label = "▲ Discovery" if kind == "discovery" else (
+                        "▼ Ontological Grounding" if kind == "grounding" else "➔ Continuation")
+                    rel = e.get("gloss", "")
+                    ap(f"> ➔ **Linear Forward Transition to Step {to_no} ({to_bare}):** "
+                       f"[{dir_label} · *{rel}*]")
+                    ap("")
+
+        # The running state, at the foot of the step: what the chain has actually
+        # established by here, read off the milestones whose theorems the steps up
+        # to this one carry (DEDUCTION.md §4).
+        if ARGUMENT_AUDIENCE and _ms_order:
+            here = _step_no.get(sec.get("id"), (None, ""))[0]
+            if here is not None:
+                bits = [f"{'✓' if _milestone_step[t] <= here else '⬜'} {_milestone_words[t]}"
+                        for t in _ms_order]
+                ap("SO FAR       " + " · ".join(bits))
+                ap("")
 
         # READINGPATH.md §5: stamp the ledger's per-section heading only if this
         # section actually contributed ledger material, so the ledger carries no
@@ -9519,13 +11524,14 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
             ap.get("ledger")[ledger_mark:ledger_mark] = [
                 f"## §{sec_no} — {sec_bare}", "",
             ]
+
+    if ARGUMENT_AUDIENCE:
+        L_part1_earnings(spine, ap)
     # 1b. The argument sections that are not spine steps: the epistemics batch,
     #     the necessary-ground profile, the instrument limits, the boundaries.
-    if ARGUMENT_AUDIENCE:
-        for line in render_reading_sections(policy):
-            ap(line)
-        ap("---")
-        ap("")
+    # 1b. (Parts III and IV are emitted after Part II, below — the declared order
+    #     in DEDUCTION.md §3 is I → II → III → IV, and Part II's eighteen
+    #     characteristic blocks are generated later in this function.)
 
     # 1c. The previous (deontic) reading spine, in full, in the ledger.
     #     READINGPATH.md §7 / NIHILISM_DIE.md §16: the reading path is the
@@ -9616,10 +11622,34 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
     #    path keeps the prose-free status table and the six pillars.
     if not is_synthetic and decls and len(decls) > 10 and _AUDIT:
         attr_lines, synth_lines = render_classical_attribute_status(decls, node_map)
+        # DEDUCTION.md §5: the 39-row status *table* is a ledger surface (a cell
+        # cannot hold a deduction); the reading path gets the eighteen
+        # characteristic blocks instead, each with its own derivation.
         with ap.at(SINK_ATTRIBUTES, "attributes"):
             ap.extend(attr_lines)
-        for line in render_established_profile(decls, node_map):
-            ap(line)
+        with ap.at(SINK_CHARACTERISTICS, "characteristics"):
+            ap.extend(render_characteristic_sections(decls, node_map))
+        # The declared Part II material (necessity and its price, one God in three
+        # persons) belongs *inside* Part II, after the eighteen blocks — not in a
+        # batch emitted earlier in the generator, which is what put it before the
+        # refutations and left the document reading I → III → IV → II.
+        if ARGUMENT_AUDIENCE:
+            for line in render_reading_sections(policy, parts=("II",)):
+                ap(line)
+        # Parts III and IV follow Part II, per the declared order. This is the
+        # only place in the generator where I, II, III and IV are all in sequence,
+        # which is the point: the reading path's shape is now the declared shape.
+        if ARGUMENT_AUDIENCE:
+            for line in render_reading_sections(policy, parts=("III", "IV")):
+                ap(line)
+        # The 39-row status table is the same 39 facts the eighteen characteristic
+        # blocks and Part I's eight personal blocks now derive, so on the reading
+        # path it is a third presentation of them. It goes to the ledger with the
+        # rest of the attribute prose: a table cell cannot hold a deduction, and
+        # the deductions are already on the path.
+        with ap.at(SINK_ATTRIBUTES, "established_profile"):
+            for line in render_established_profile(decls, node_map):
+                ap(line)
         with ap.at(SINK_SYNTHESIS, "synthesis"):
             ap.extend(synth_lines)
         # The six-pillars table is the same seven attacks the cremation table now
@@ -9642,12 +11672,25 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
                     + "\n".join(further).rstrip() + "\n")
         cat_path.write_text(cat_body, encoding="utf-8")
         print(f"wrote {cat_path} ({len(cat_body.splitlines())} lines)")
+        # DEDUCTION.md §3: the score goes LAST, after Parts I–IV, not first. It
+        # was the first thing on the page, which made the opening claim of the
+        # document a table of results rather than the argument that earns them —
+        # the exact reading the redesign exists to remove. A reader now meets the
+        # thesis at line ~40, the deduction, the refutations and the open seam, and
+        # only then the tally. `score_claims` is still the GAPMAP claim rows and
+        # still derived (Phase 4 comment, VISIBILITY.md Correction 10).
+        if score_claims:
+            for gl in render_score_block(derive_score_data(score_claims, decls, node_map)):
+                ap(gl)
+        ap(f'<a id="{_heading_slug("## Where the Rest of the Ledger Lives")}"></a>')
         ap("## Where the Rest of the Ledger Lives")
         ap("")
         ap("| What was moved out of the reading path | Where it lives |")
         ap("|---|---|")
         ap("| Every natural-deduction proof (40 blocks), the 14 step-by-step chain "
-           "blocks (206 rows), the 39 classical-attribute rows with full prose, the "
+           "blocks (206 rows) — including the **Adversarial Denial Normal Forms "
+           "(D1–D8)**, the exhaustive proof of inevitability that the chain diagram "
+           "abbreviates — the 39 classical-attribute rows with full prose, the "
            "ASCII flowchart, and the full per-step prose | "
            "[investigations/ledger.md](investigations/ledger.md) |")
         ap("| 100 retorsion theorems, the independence-frontier catalogue, the "
@@ -9688,13 +11731,65 @@ LEDGER_CELL_CAP = 4000
 # instead of ~17 they must trust. The budget is amended rather than the proofs
 # thinned, because CREMATION.md's whole point is that a bare "PROVEN" badge
 # asserts what no reader can verify.
-README_VISIBLE_BUDGET = 700
-README_TOTAL_BUDGET = 710
+#
+# DEDUCTION.md §8 (the Deduction, 2026-09-30): 700 -> 1400. Part II replaced the
+# 39-row status table — a cell cannot hold a deduction — with eighteen
+# characteristics, each printing its premises, steps, goal, price and anchor,
+# and each record component expanded in place: +448 lines measured. The same
+# reasoning holds: the table asserted 39 statuses a reader could not check; the
+# blocks derive 18 of them and name the other 11. The reading path's constraint
+# is the shape invariants (B1-B6, no `<details>`, unique titles), not this
+# number; the number exists only to catch a block becoming a wall.
+#
+# CLEARER.md §3 (Phase 0, 2026-09-30): 1600 -> 1650. `format_discrete_math` was
+# doing a global substring `s.replace("_w", "w")`, intended for the discarded Lean
+# binder `assume _w _e`, which also ate the `_w` inside every identifier containing
+# it. 241 declarations were rendered under a mangled name, and because the record-
+# component lookup keys on that name, four *real theorems* failed to resolve and
+# reported themselves as "a term of the record, not a named theorem". Scoping the
+# replace to a standalone token restored them: 4 components now resolve (22 -> 26
+# sub-derivations) and the 7 that remain are all anonymous `fun` lambdas, which is
+# what they are. The 24 lines are those four components printing the price and
+# source they were never showing. The budget is amended rather than the resolved
+# theorems dropped, because a reader was being told a proved theorem had no name.
+# The reading path's length budgets. Two amendments, each with its reason at the
+# constant, because a cap raised without one is a cap that never binds again.
+#
+# 1600 → 1650 (Phase 0, §3): scoping the `_w` replace recovered four real theorems
+# that were being reported as unnamed, and each recovery costs a PRICE and a SOURCE.
+#
+# 1715 → 1740 visible / 1740 → 1800 total (Phase 2, §5, 2026-09-30): Part II's
+# eighteen-row index (characteristic #14 was present at `README:877` with nothing
+# linking to it and no way to cite it) and an `<a id>` on all 41 `▸` components, so
+# `ofGround_modal_invariance` is linkable rather than merely present. 20 visible
+# lines and 41 invisible anchor lines, 61 total. The anchors cost nothing against the
+# visible cap because the test's `visible` filter drops lines starting with `<` — which
+# is the only reason 41 anchors fit under a 25-line rise. The rise is navigation, the
+# one thing a reading path is *for*: a derivation a reader cannot reach is a derivation
+# they will not check.
+#
+# 1650 → 1715 visible / 1670 → 1740 total (Phase 3, §6, 2026-09-30): every proof body
+# now opens with a *derived* kind line — 📘 DEFINITIONAL, ⚙️ DERIVATION, 🧱 COUNTERMODEL,
+# 💰 PRICED — so a reader can see that a block is one projection or three identities
+# rather than taking a padded trace at face value. The cost is one line per proof body,
+# ~65 blocks, and it is the price of the label being readable rather than authored.
+# `scripts/test_argument_surface.py` carries a third, tighter number (1600 visible) that
+# was the real binding cap for a while; it is raised to the same figure in the same
+# change, because a generator budget and a test budget that disagree only mean the
+# looser one is decorative.
+README_VISIBLE_BUDGET = 1740
+README_TOTAL_BUDGET = 1800
 README_PARA_CAP = 300
 README_FACT_DEADLINE = 60
 
 LEDGER_REQUIRED_BLOCKS = (
-    "derivation", "definitions", "supporting", "obstruction", "subsection",
+    # `definitions` moved to READING_PATH_REQUIRED_BLOCKS on 2026-09-30
+    # (DEDUCTION.md D7): the per-step vocabulary now travels with the step, and
+    # a copy in the ledger would be a second rendering of one declaration rather
+    # than an audit of it. `ledger_superset.py` reports definition summaries
+    # without a threshold for the same reason — the ledger is no longer where
+    # they live, and their move is checked by the sink lint, not by a count.
+    "derivation", "supporting", "obstruction", "subsection",
     "frontiers", "attributes", "synthesis", "pushback", "summary",
     "chart", "guide", "root", "pillars",
     # 2026-09-30: the reading path now carries the *meaning* route. The previous
@@ -9702,6 +11797,41 @@ LEDGER_REQUIRED_BLOCKS = (
     # `ledger_spine_nodes` and must reach the ledger on every build, or the move
     # would read as a deletion. `scripts/ledger_superset.py` is its check.
     "deontic_spine",
+)
+
+# DEDUCTION.md §8: the reading path is becoming the *argument* in full — the
+# derivations, the definitions and now the characteristics are moving onto it —
+# so "must reach the ledger" is no longer the right invariant for them. What
+# must hold is that every gated block reaches *some* sink, so nothing is
+# deleted by accident, and that a named block reaches the reading path when the
+# reading path is what carries it. The two assertions below replace the single
+# ledger-membership check they were folded into.
+READING_PATH_REQUIRED_BLOCKS = (
+    # moved onto the reading path 2026-09-30: the 39-row attribute table cannot
+    # hold a deduction, so the eighteen characteristic blocks are on the path
+    # and the table stays in the ledger.
+    "characteristics",
+    # DEDUCTION.md D7: the ten steps used `TrueTo`, `Correct`, `N_T`,
+    # `Meaning_I`, `GroundsRightWrongAt` with nothing saying what they mean,
+    # while the definitions that fix them sat in a `<details>` block the reading
+    # path's own lint forbids. The ban stays and the definitions move onto the
+    # path, so "gated into the ledger" and "must be readable" stop conflicting.
+    # `derivation` is deliberately NOT here: DEDUCTION.md §7 keeps the 69
+    # natural-deduction traces in the ledger (they are the audit surface, and
+    # `ledger_superset.py` requires 40 of them there), while §4 fills each step's
+    # `PROOF` from the compiled `ProofIR` inline. Traces on the path, logic per
+    # step on the path, the long traces in the ledger — that is the split.
+    "definitions",
+)
+
+# Blocks that must reach BOTH sinks: the reading path carries the block, and the
+# ledger keeps it as the audit surface. A block in neither list must reach
+# exactly one, and reaching both is only allowed for the names here.
+BOTH_SINK_BLOCKS = (
+    # `attributes` is the 39-row status table + the full per-row prose: the
+    # reading path no longer prints the table, but the ledger keeps both, and
+    # the reading path's Part II links the rows that matter.
+    "attributes",
 )
 
 BANNED_README_SNIPPETS = (
@@ -9724,6 +11854,206 @@ LEDGER_HEADER = """# The Ledger (generated — do not hand-edit)
 says “full pricing”, “formal boundary”, or “supporting
 infrastructure”, or when you want the countermodel that stops a claim.
 """
+
+def _lint_no_midtoken_cut(text: str, kernel_ids: list[str], where: str) -> None:
+    """Gate 6 (CLEARER.md §7). A capped cell ends with ` [ … ]` and the last word
+    before that marker is a strict prefix of a longer kernel identifier.
+    """
+    for m in re.finditer(r"([A-Za-z0-9_]+)\s+\[\u2026\]", text):
+        word = m.group(1)
+        if not word.isidentifier():
+            continue
+        for kid in kernel_ids:
+            if len(kid) > len(word) and kid.startswith(word):
+                raise AssertionError(
+                    f"{where}: table cell truncated mid-token — `{word}` is a "
+                    f"prefix of `{kid}` (CLEARER.md §7, gate 6)")
+
+
+
+def _refutation_rows() -> list[dict]:
+    """The Part III rows, in R-number order, from the spine JSON."""
+    sec = next((s for s in _CTX.get("spine", {}).get("reading_sections", [])
+                if s.get("cremation")), None)
+    return list(sec["cremation"]) if sec else []
+
+
+def _lint_roles(text: str) -> None:
+    """CLEARER.md §7, gates 7 and 8.
+
+    Gate 7 — every Part III entry header carries its role's icon. The header is
+    the only place a reader scanning the section sees the *kind* of a row before
+    committing to reading it, and an unlabelled 🧱 row reads as a 💥 row.
+
+    Gate 8 — no boundary or pillar appears in a `KILLS` line, in either
+    direction. The two directions are the same defect seen from the two ends, and
+    a fix to one without the other leaves the document contradicting itself: R13
+    on a `KILLS` line says step 8 is dead, while R13's own block says it bounds
+    step 8. `_REFTABLE`'s `kills` flag is the single declaration of which is
+    which, so this reads the rule rather than re-typing it.
+    """
+    rows = _refutation_rows()
+    # A role outside the closed vocabulary must fail here, not render as a 💥 by
+    # default — the silent default is how a boundary becomes a death.
+    for i, r in enumerate(rows, 1):
+        if r.get("role", "derivation") not in _REFTABLE:
+            raise AssertionError(
+                f"R{i} declares role={r.get('role')!r}, which is not in the closed "
+                f"vocabulary {sorted(_REFTABLE)}. Add the role to `_REFTABLE` with "
+                f"its icon and with whether it may appear in a KILLS line "
+                f"(CLEARER.md §7, gate 7)")
+
+    # Gate 7. The header is `### Rn. <branch>` followed by a blank line and the
+    # bolded label, so the check is on the label line within each entry.
+    labels = {f"R{i}": _REFTABLE[r.get("role", "derivation")][1]
+              for i, r in enumerate(rows, 1)}
+    for rlabel, lab in labels.items():
+        icon, _, _ = next(v for v in _REFTABLE.values() if v[1] == lab)
+        pat = re.compile(
+            rf'<a id="{rlabel.lower()}"></a>\n### {rlabel}\.[^\n]*\n\n\*\*{re.escape(icon)} ')
+        assert pat.search(text), (
+            f"Part III entry {rlabel} does not open with its role icon "
+            f"({icon}); a reader scanning the section cannot tell a death from a "
+            f"bound without reading it (CLEARER.md §7, gate 7)")
+
+    # Gate 8, direction 1: a KILLS line may only name 💥 entries. `hits` come from
+    # `_refutation_index` with no role filter; this re-derives the permitted set
+    # independently rather than trusting that the same code produced both.
+    killing = {f"R{i}" for i, r in enumerate(rows, 1)
+               if _REFTABLE[r.get("role", "derivation")][2]}
+    for m in re.finditer(r"^KILLS\s+(.*)$", text, re.M):
+        named = {n.upper() for n in re.findall(r"#(r\d+)\)", m.group(1).lower())}
+        bad = named - killing
+        assert not bad, (
+            f"a KILLS line names {sorted(bad)}, which "
+            f"{'is a 🧱/🪞' if len(bad) == 1 else 'are 🧱/🪞'} not a 💥: "
+            f"{m.group(0)[:88]!r}. A countermodel bounds the reading and an "
+            f"instantiation places the critic inside it; neither makes a step "
+            f"impossible (CLEARER.md §7, gate 8)")
+
+    # Gate 8, direction 2: a non-💥 entry must contain no KILLS line at all —
+    # including the *step*-facing form `KILLS [step 2] — …`, which direction 1's
+    # `#rN` pattern cannot see. This one is positional: it partitions the text at
+    # each `<a id="rN">` and asks what sits inside the boundary and pillar spans.
+    # A pattern would have to know every shape a kill can take, and a shape added
+    # later would then pass unchecked; the span cannot.
+    spans: list[tuple[int, int, str]] = []
+    marks = [(m.start(), m.group(1).upper())
+             for m in re.finditer(r'<a id="(r\d+)"></a>', text)]
+    for i, (pos, lab) in enumerate(marks):
+        end = marks[i + 1][0] if i + 1 < len(marks) else len(text)
+        spans.append((pos, end, lab))
+    for pos, end, lab in spans:
+        if lab in killing:
+            continue
+        body = text[pos:end]
+        for m in re.finditer(r"^KILLS\s+.*$", body, re.M):
+            raise AssertionError(
+                f"Part III entry {lab} is a "
+                f"{_REFTABLE[rows[int(lab[1:]) - 1].get('role', 'derivation')][0]} "
+                f"and its block still prints {m.group(0)[:70]!r}. The block's own "
+                f"header says it does not refute, so a KILLS line inside it is the "
+                f"document contradicting itself in six lines (CLEARER.md §7, gate 8)")
+
+
+def _lint_refutation_index(text: str) -> None:
+    """CLEARER.md §7, gate 10: the front-matter index must carry every label the
+    spine has, no label it does not, and no kill the role forbids.
+
+    Linted from the **rendered** text, not from the data that produced it. The
+    failure it exists to catch is a rendering bug — a column filled from the
+    wrong field, a row dropped by a filter, a `#step-` link printed for a row
+    that bounds — and asserting on the data would have passed the 9-of-16 first
+    draft, which was a perfectly valid list of the wrong nine rows. Both
+    directions are checked, and as an *ordered list* rather than a set: a row
+    dropped and another repeated must not cancel out.
+
+    The kills cell is in scope because gate 8 cannot see this table. Gate 8 reads
+    the `KILLS` lines inside the Part III blocks; the index is elsewhere, so an
+    un-gated cell would put a false death in the most-read table in the document
+    with every other gate green.
+    """
+    if not _argument_audience():
+        # Emitted only for the argument audience, so the pre-split document is
+        # not expected to have it. The call site sits above the audience
+        # early-return with gates 1–8, and carries this guard for that reason.
+        return
+    rows = _refutation_rows()
+    if not rows:
+        return
+    start = text.find('<a id="refutation-index"></a>')
+    if start == -1:
+        raise AssertionError(
+            "the front-matter refutation index is missing from the argument "
+            "audience README (CLEARER.md §7, gate 10). It is the one place a "
+            "reader learns which objections are deaths before meeting one")
+    # Bound the block at the next heading or the next anchor, whichever comes
+    # first, and keep the index's *own* heading. A scan for anchors alone runs on
+    # into Part I's tables and reads their cells as index rows; a scan for
+    # headings alone stops on the index's own title. Both happened while writing
+    # this, which is why the bound is line-wise and takes a minimum.
+    block: list[str] = []
+    for ln in text[start:].splitlines()[1:]:
+        if ln.startswith("<a id=") or (ln.startswith("## ") and block):
+            break
+        block.append(ln)
+    cells: list[list[str]] = []
+    for ln in block:
+        if ln.startswith("|"):
+            # The separator is kept, so `body_cells` is literally "past header
+            # and separator" and cannot be off by one. Filtering the separator
+            # out here instead cost the first data row, and the row it cost was
+            # R1 — the gate reported a missing denial for a document that had all
+            # sixteen, which is the only advertisement this lint will ever get.
+            cells.append([c.strip() for c in ln.strip().strip("|").split("|")])
+    if len(cells) < 2:
+        raise AssertionError(
+            f"the refutation index rendered no table (got {len(cells)} lines, "
+            f"CLEARER.md §7, gate 10)")
+    body_cells = cells[2:]
+    got = [c[0] for c in body_cells if c]
+    want = [r["branch"] for r in rows]
+    if got != want:
+        missing = [b for b in want if b not in got]
+        extra = [b for b in got if b not in want]
+        raise AssertionError(
+            f"the refutation index does not carry the spine's denials verbatim "
+            f"(CLEARER.md §7, gate 10). {len(got)} rows rendered against "
+            f"{len(want)} in the spine, and the lists are compared in order so a "
+            f"drop cannot hide behind a repeat. Missing: {missing[:3]}. "
+            f"Not a `branch` value: {extra[:3]}")
+    for i, (r, c) in enumerate(zip(rows, body_cells), 1):
+        role = r.get("role", "derivation")
+        may_kill = _REFTABLE[role][2]
+        if len(c) < 4:
+            raise AssertionError(
+                f"the refutation index row for R{i} has {len(c)} cells, not 4 "
+                f"(CLEARER.md §7, gate 10)")
+        if f"[R{i}](#r{i})" not in c[2]:
+            raise AssertionError(
+                f"the refutation index row for R{i} does not link its own entry "
+                f"(got {c[2]!r}, CLEARER.md §7, gate 10)")
+        linked = re.search(r"\[step (\d+)\]\(#step-(\d+)\)", c[3])
+        if may_kill:
+            node = {n["id"]: n for n in _CTX.get("spine", {}).get(
+                "spine_nodes", [])}.get(r["attacks"])
+            if node is None:
+                raise AssertionError(
+                    f"R{i} attacks an unknown step; see _lint_refutation_wiring")
+            want_step = node["title"].split(".", 1)[0]
+            if linked is None or linked.group(1) != want_step \
+                    or linked.group(2) != want_step:
+                raise AssertionError(
+                    f"the refutation index row for R{i} is a {_REFTABLE[role][1]} "
+                    f"and must name the step it kills, step {want_step} (got "
+                    f"{c[3]!r}, CLEARER.md §7, gate 10)")
+        elif linked is not None or "#step-" in c[3]:
+            raise AssertionError(
+                f"the refutation index row for R{i} is a {_REFTABLE[role][1]} and "
+                f"prints a step as killed: {c[3]!r}. A countermodel bounds the "
+                f"reading and an instantiation places the critic inside it; "
+                f"neither makes a step impossible (CLEARER.md §7, gates 8 and 10)")
+
 
 def _lint_readme(lines: list[str]) -> None:
     """Intelligibility gate (2026-09-29): the README must stay readable.
@@ -9752,6 +12082,77 @@ def _lint_readme(lines: list[str]) -> None:
                 assert len(head) <= CELL_CAP + 8, f"README cell over cap: {head[:80]!r}…"
     assert "Retorsion catalogue —" not in text, "catalogues belong in investigations/catalogues.md"
     assert "Countermodel catalogue —" not in text, "catalogues belong in investigations/catalogues.md"
+
+    # CLEARER.md §7, gates 1–6. Each of these is a defect that shipped once; the
+    # gate is what makes the repair permanent rather than a one-time edit.
+    assert "?_" not in text, (
+        "a bare `?_` reached the reading path. A `refine` hole is a proof "
+        "obligation discharged by the next tactic line and must be spelled out "
+        "(CLEARER.md §7, gate 1)")
+    assert "(from )" not in text, (
+        "an empty justification rendered as `(from )` (CLEARER.md §7, gate 2)")
+    for _m in re.finditer(r"^\s*PRICE\s+✅.*(?:⇏|COUNTERMODEL)", text, re.M):
+        raise AssertionError(
+            f"a countermodel is priced with a ✅: {_m.group(0)[:90]!r}. A "
+            f"countermodel is a hostile model, not a proved claim, and must read "
+            f"🧱 COUNTERMODEL (CLEARER.md §7, gate 4)")
+    # A `§N` that survives is either a reference into a real file that is numbered
+    # (`base.txt §11`, `CLEARER.md §7` — those exist and are numbered) or a dead
+    # reference into this document.
+    for _m in re.finditer(r"§\d+", text):
+        _ls = text.rfind("\n", 0, _m.start()) + 1
+        _le = text.find("\n", _m.end())
+        _line = text[_ls:_le if _le != -1 else len(text)]
+        if re.search(r"[\w./-]+\.(?:md|txt|lean|json)\s*§", _line):
+            continue
+        raise AssertionError(
+            f"dead cross-reference {_m.group(0)!r} on the reading path: "
+            f"{_line.strip()[:90]!r} (CLEARER.md §7, gate 5)")
+    # Gate 3 and gate 6 both need the set of names the kernel actually has, so it
+    # is built once here.
+    _kernel_ids: set[str] = set()
+    for _f in sorted(Path(_CTX.get("lean_dir", "formal/Logos")).glob("*.lean")):
+        _src = _f.read_text(encoding="utf-8", errors="replace")
+        _kernel_ids.update(re.findall(r"[A-Za-z_][A-Za-z0-9_]*", _src))
+    _kernel_ids_sorted = sorted(_kernel_ids)
+
+    # Gate 3: a rendered identifier must be a name the kernel has. The `_w` mangling
+    # shipped 241 of them (`ofGroundworld_rigid_presence`) precisely because
+    # nothing asked that question. The check is on backticked snake_case tokens
+    # against *every* identifier the kernel defines — not just top-level
+    # declarations, because a structure field (`grounds_normativity`) is a real
+    # kernel name too and must not be reported as invented.
+    _aux = {"base", "txt", "lean", "json", "md"}
+    # Names the surface itself discloses as *not* Γ facts. Each is listed rather
+    # than pattern-matched so that a newly-invented identifier still fails the
+    # gate: adding to this set is a claim that a reader can check.
+    _disclosed_artefacts = {"parse_lean_sources"}
+    for _m in re.finditer(r"`([a-z][A-Za-z0-9]*_[A-Za-z0-9_]+)`", text):
+        _tok = _m.group(1)
+        if _tok in _kernel_ids or _tok in _aux or _tok in _disclosed_artefacts:
+            continue
+        raise AssertionError(
+            f"rendered identifier `{_tok}` is not a kernel declaration "
+            f"(CLEARER.md §7, gate 3). A name here that the kernel does not have is "
+            f"a mangled or renamed declaration, not a fact.")
+
+    # Gate 6: a truncated cell must not end mid-token. The rendering is `… [ … ]`
+    # with a space before the marker, so this cannot be a pattern on the output —
+    # it has to be a question about the cut: is the last surviving word a *complete*
+    # word, or a strict prefix of a longer kernel identifier? The second is a cell
+    # quoting a name that names nothing, which is the same defect the `_w` mangling
+    # was (a name altered until it stopped being a name).
+    _lint_no_midtoken_cut(text, _kernel_ids_sorted, "README.md")
+
+    # CLEARER.md §7, gates 7 and 8. The role vocabulary is closed and the icon for
+    # each role is derived from the same table the Part III headers render from, so
+    # a role cannot be added without deciding what it looks like.
+    _lint_roles(text)
+
+    # CLEARER.md §7, gate 10: the front-matter index's labels, in order, both
+    # directions, and its kills cells against the same `may_kill` flag gate 8
+    # reads. Guarded internally for the pre-split audience, like the gates above.
+    _lint_refutation_index(text)
 
     # READINGPATH.md §6 — the reading path is the argument, and nothing else. These
     # gates are what stop it rotting back into a ledger on the next edit.
@@ -9801,6 +12202,66 @@ def _lint_readme(lines: list[str]) -> None:
         raise AssertionError(
             "README must state the thesis sentence ‘for which meaning can "
             "mean’ (the C553 FACT) — that is the one thing the file is for")
+    _lint_reading_path_vocabulary(lines)
+
+
+def _lint_reading_path_vocabulary(lines: list[str]) -> None:
+    """No countermodel's declaration may be presented as Γ's vocabulary.
+
+    A `▸` row in a "Vocabulary" block states what a symbol means *in this
+    theory*. Before this check, step 9 printed `M ≡ Unit Content := Bool …` and
+    `Means ≡ True` from `EpistemicPersonalGround` and `M_amoral` respectively —
+    a countermodel's separating model and a hostile model of moral amoralism,
+    both wearing the vocabulary block's authority. That is the C559 category
+    error (AGENTS.md: "Signature models are not candidate states") and it was
+    invisible while the block sat in a `<details>` in the ledger.
+
+    The unit checked is the *row*, not the line: a row opens with `▸` and its
+    `∴` and its `📘` anchor are the following lines, so a per-line test skips
+    exactly the line that names the source module.
+
+    Scope, honestly stated: a source link names the **file**, so this catches a
+    row sourced from a countermodel's own file (`HostileSemantics.lean` and the
+    other top-level model files). A countermodel *nested inside* a Γ module
+    (`MoralFrontierAudit.lean`'s `M_amoral`, `EpistemicPersonalGround.lean`'s
+    `M`) is invisible in the link, so it is caught by the collection filter in
+    `route_definition_proofs` and asserted in
+    `scripts/test_argument_surface.py` against the generated output, where the
+    full declaration name is resolvable. Neither check subsumes the other.
+    """
+    bad: list[tuple[str, str]] = []
+    row: list[str] = []
+    for ln in list(lines) + [""]:
+        stripped = ln.strip()
+        if stripped.startswith("▸"):
+            if row:
+                bad.extend(_countermodel_rows(row))
+            row = [ln]
+        elif row and stripped == "":
+            bad.extend(_countermodel_rows(row))
+            row = []
+        elif row:
+            row.append(ln)
+    assert not bad, (
+        f"{len(bad)} reading-path vocabulary row(s) sourced from a countermodel file: "
+        f"{bad[:3]}. A `▸` row says what a symbol means in Γ; a declaration from a "
+        f"countermodel file says what it means in a structure built to make some "
+        f"other inference fail (AGENTS.md, C559). Either the row is dropped or it "
+        f"is a real gap in Γ's own declaration of that symbol.")
+
+
+def _countermodel_rows(row: list[str]) -> list[tuple[str, str]]:
+    hits = []
+    for ln in row:
+        # Only the source link identifies the module; a gloss may legitimately
+        # discuss a countermodel in prose, and `M_amoral` as a word in a
+        # sentence is not a declaration.
+        for m in re.finditer(r"formal/Logos/([A-Za-z0-9_.]+)#L\d+", ln):
+            path = m.group(1)
+            if any(mark in path for mark in ("HostileSemantics", "Countermodel",
+                                             "ModelHierarchy", "UnitPlurality")):
+                hits.append((path, row[0].strip()[:80]))
+    return hits
 
 
 def _lint_surfaces(doc: "_TwoSink", readme: list[str], ledger: list[str]) -> None:
@@ -9820,6 +12281,17 @@ def _lint_surfaces(doc: "_TwoSink", readme: list[str], ledger: list[str]) -> Non
     assert not missing, (
         f"gated blocks reached neither sink: {missing}. Every block named in "
         f"LEDGER_REQUIRED_BLOCKS must be routed somewhere.")
+    # DEDUCTION.md §8: blocks the reading path is meant to carry. Checked
+    # separately from the ledger tuple, because the two-tier split is being
+    # re-cut from "ledger = everything" to "ledger = the audit surface, reading
+    # path = the argument", and a single ledger-membership assertion cannot
+    # express that.
+    on_path = doc.seen["readme"]
+    absent = [b for b in READING_PATH_REQUIRED_BLOCKS if b not in on_path]
+    assert not absent, (
+        f"blocks the reading path must carry reached neither sink: {absent}. "
+        f"READING_PATH_REQUIRED_BLOCKS names the blocks the deduction is made of; "
+        f"a missing one means the argument silently lost a part.")
     assert ledger, "argument audience produced an empty ledger"
     assert any(l.strip() for l in ledger), "argument audience produced a blank ledger"
     assert len(readme) <= README_TOTAL_BUDGET, (
@@ -10250,7 +12722,20 @@ def main():
             assert bad not in sec3_text, f"Found LaTeX artifact {bad} in Section 3 of README.md"
 
     readme_lines = _cap_table_cells(readme_lines)
+    # Repoint after capping: the cap rewrites cell text, so repointing first could
+    # have its `§N` tokens cut away or its links truncated mid-markdown.
+    readme_lines = _repoint_legacy_refs(readme_lines)
     ledger_lines = _cap_table_cells(ledger_lines, cap=LEDGER_CELL_CAP)
+    # Gate 6 on both surfaces: the reading path's 900-char cap bites on nothing
+    # today, so checking it alone would be a gate that cannot fail.
+    _kernel_ids: set[str] = set()
+    for _f in sorted(Path(_CTX.get("lean_dir", "formal/Logos")).glob("*.lean")):
+        _kernel_ids.update(re.findall(
+            r"[A-Za-z_][A-Za-z0-9_]*", _f.read_text(encoding="utf-8", errors="replace")))
+    _kernel_ids_sorted = sorted(_kernel_ids)
+    _lint_no_midtoken_cut("\n".join(readme_lines), _kernel_ids_sorted, "README.md")
+    _lint_no_midtoken_cut("\n".join(ledger_lines), _kernel_ids_sorted,
+                          "investigations/ledger.md")
     _lint_readme(readme_lines)
     _lint_surfaces(doc, readme_lines, ledger_lines)
     body = "\n".join(readme_lines).rstrip() + "\n"

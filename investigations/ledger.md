@@ -281,35 +281,6 @@ The deduction begins by *giving away* the strongest point available to the nihil
 **Machine-Checked Kernel Rebuttal —** [`claims_correct_no_right_self_refuting`](formal/Logos/DirectNormativeRetorsion.lean#L60) (Footprint: 0 substantive axioms):
 `⊢ ClaimsCorrect s NoRight ∧ NoRight → ⊥`
 <details>
-<summary>Definitions used in this section (4)</summary>
-
-Falsity under bivalence: a proposition is false iff it is not true.
-
-    ∴ IsFalse ≡ ¬T(p)
-
-📘 · [Core.lean#IsFalse](formal/Logos/Core.lean#L52)
-
-N_F := "no proposition is false" (bivalence: falsity is untruth).
-
-    ∴ N_F ≡ ∀ p, T(p)
-
-📘 · [Core.lean#N_F](formal/Logos/Core.lean#L49)
-
-N_T := "no proposition is true".
-
-    ∴ N_T ≡ ∀ p, ¬T(p)
-
-📘 · [Core.lean#N_T](formal/Logos/Core.lean#L46)
-
-Truth, *defined* as identity (E0): `T p` is `p` itself.
-
-    ∴ T ≡ p
-
-📘 · [Core.lean#T](formal/Logos/Core.lean#L40)
-
-</details>
-
-<details>
 <summary>Formal Derivation (2 steps, natural deduction, 0 substantive axioms)</summary>
 
     1. notNothingTrue  (component witness 1: notNothingTrue)
@@ -337,40 +308,6 @@ C562 `being_true_is_being_true_to`: the being-the-case is free, being-true is di
 
 **Machine-Checked Kernel Rebuttal —** [`being_true_is_being_true_to`](formal/Logos/EpistemicNecessity.lean#L406) (Footprint: 0 substantive axioms):
 `⊢ Correct s p → TrueTo s p → T p`
-<details>
-<summary>Definitions used in this section (4; 3 new, 1 already shown)</summary>
-
-Legacy alias for Act across the library.
-
-    ∴ abbrev A
-
-✅ · [Agency.lean#A](formal/Logos/Agency.lean#L178)
-
-<details>
-<summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
-
-    1. abbrev A  (definitional identity via Act)
-
-    ∴ abbrev A
-
-</details>
-
-Correctness: a subject's act of judging p is correct iff p is true. The act is constitutive: an act is a meaningful initiation (`A s p := Means s p ∧ ∃ w w', Initiates s w w' p`), so every correct judgment embodies intentional meaning.
-
-    ∴ Correct ≡ A(s, p) ∧ T(p)
-
-📘 · [Order.lean#Correct](formal/Logos/Order.lean#L29)
-
-Truth-to-a-subject: `p` is true *to* `s` — meant by `s`, and the case.
-
-    ∴ TrueTo ≡ Means(s, p) ∧ T(p)
-
-📘 · [EpistemicNecessity.lean#TrueTo](formal/Logos/EpistemicNecessity.lean#L395)
-
-    ∴ T ≡ p — defined in §1. Satisfaction Is Free.
-
-</details>
-
 <details>
 <summary>Formal Derivation (3 steps, natural deduction, 0 substantive axioms)</summary>
 
@@ -401,17 +338,6 @@ C62 `rightWrong_implies_meaning`: a world in which correctness or incorrectness 
 **Machine-Checked Kernel Rebuttal —** [`rightWrong_implies_meaning`](formal/Logos/Order.lean#L89) (Footprint: 0 substantive axioms):
 `⊢ (∃ s p, Correct s p) ∨ (∃ s p, Incorrect s p) → ∃ p, Meaning_I p`
 <details>
-<summary>Definitions used in this section (1)</summary>
-
-`Meaning_I p`: intentional meaning — some subject means `p` (base.txt §11).
-
-    ∴ Meaning_I ≡ ∃ s, Means(s, p)
-
-📘 · [Choice.lean#Meaning_I](formal/Logos/Choice.lean#L131)
-
-</details>
-
-<details>
 <summary>Formal Derivation (9 steps, natural deduction, 0 substantive axioms)</summary>
 
 Assume (∃ s, p, Correct(s, p)) ∨ (∃ s, p, Incorrect(s, p)):
@@ -439,19 +365,6 @@ C49 `meaning_I_needs_subject : Meaning_I p → ∃ s, Means s p`, and its contra
 
 **Machine-Checked Kernel Rebuttal —** [`meaning_I_needs_subject`](formal/Logos/Choice.lean#L139) (Footprint: 0 substantive axioms):
 `⊢ Meaning_I p → ∃ s, Means s p`
-<details>
-<summary>Definitions used in this section (2; 1 new, 1 already shown)</summary>
-
-Local means-relation: the subject's judgement always reaches any content.
-
-    ∴ Means ≡ True
-
-📘 · [MoralFrontierAudit.lean#Means](formal/Logos/MoralFrontierAudit.lean#L84)
-
-    ∴ Meaning_I ≡ ∃ s, Means(s, p) — defined in §3. Right and Wrong Cannot Obtain Without Meaning.
-
-</details>
-
 <details>
 <summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
 
@@ -484,25 +397,6 @@ Assume ¬∃ s, Means(s, p):
 **Machine-Checked Kernel Rebuttal —** [`correctness_incompatible`](formal/Logos/NormativeOrder.lean#L135) (Footprint: 0 substantive axioms):
 `⊢ Incompatible (Correct s p) (Incorrect s p)`
 <details>
-<summary>Definitions used in this section (3; 2 new, 1 already shown)</summary>
-
-`p` and `q` are incompatible contents.
-
-    ∴ Incompatible ≡ ¬(p ∧ q)
-
-📘 · [Alternatives.lean#Incompatible](formal/Logos/Alternatives.lean#L17)
-
-Incorrectness: a subject's act of *meaning* p is incorrect iff p is false. Same as `Correct`: the meaning-act `A s p` is a conjunct, hence unavoidable.
-
-    ∴ Incorrect ≡ A(s, p) ∧ IsFalse(p)
-
-📘 · [Order.lean#Incorrect](formal/Logos/Order.lean#L49)
-
-    ∴ Correct ≡ A(s, p) ∧ T(p) — defined in §2. Being True Is Being True To Someone.
-
-</details>
-
-<details>
 <summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
 
     1. unpack components ⟨hC, hI⟩  (pattern-match hypothesis ⟨hC, hI⟩)
@@ -520,27 +414,6 @@ C140 `claims_normative_correctness_derives_free_will`: `ClaimsNormativeCorrectne
 
 **Machine-Checked Kernel Rebuttal —** [`claims_normative_correctness_derives_free_will`](formal/Logos/NormativeOrder.lean#L190) (Footprint: 0 substantive axioms):
 `⊢ ClaimsNormativeCorrectness s p → Chooses s (Correct s p) (Incorrect s p) ∧ FreeWill s`
-<details>
-<summary>Definitions used in this section (4; 2 new, 2 already shown)</summary>
-
-`Chooses s p q`: strong choice: the subject co-means incompatible alternatives.
-
-    ∴ Chooses ≡ Means(s, p) ∧ Means(s, q) ∧ Incompatible(p, q)
-
-📘 · [Choice.lean#Chooses](formal/Logos/Choice.lean#L116)
-
-§15 — freedom (DEFINITION; freedom/choice fix, 2026-09-18): a subject is free iff it genuinely chooses between some incompatible pair. The implication choice → freedom is definitional (`chooses_implies_freeWill`).
-
-    ∴ FreeWill ≡ ∃ p, q, Chooses(s, p, q)
-
-📘 · [Choice.lean#FreeWill](formal/Logos/Choice.lean#L177)
-
-    ∴ Correct ≡ A(s, p) ∧ T(p) — defined in §2. Being True Is Being True To Someone.
-
-    ∴ Incorrect ≡ A(s, p) ∧ IsFalse(p) — defined in §5. The Two Poles Cannot Both Be Correct.
-
-</details>
-
 ## §7 — Free Will Is a Person
 
 C221 `freeWill_implies_person`, `Person s := ThomisticPersonCore s` — the Boethius–Aquinas criterion: individual substance, rational nature, dominion over acts. The price is the declared **VOCAB** law `will_individuation`, and the kernel checks that this law is *underivable*: the model `SharedWillModel` (`{}`, C226) satisfies the pre-will spine — `Subject := Bool`, `subjectWill := fun _ => ()` — and there the law is false. So personhood is a theorem with a named and checked price, not an identity smuggled in.
@@ -550,23 +423,6 @@ C221 `freeWill_implies_person`, `Person s := ThomisticPersonCore s` — the Boet
 
 **Machine-Checked Kernel Rebuttal —** [`freeWill_implies_person`](formal/Logos/Person.lean#L135) (Footprint: 0 substantive axioms):
 `⊢ FreeWill s → Person s`
-<details>
-<summary>Definitions used in this section (2)</summary>
-
-Person: an individual substance of a rational nature, possessed of dominion over its own acts (Boethius; Aquinas, ST I q.29 a.3).
-
-    ∴ Person ≡ ThomisticPersonCore(s)
-
-📘 · [Person.lean#Person](formal/Logos/Person.lean#L127)
-
-Thomistic person core: the Boethius–Aquinas conditions of personhood — "individual substance of a rational nature" possessed of dominion over its own acts — formalized through their operative distinguishing features.
-
-    ∴ ThomisticPersonCore ≡ IndividualSubstance(s) ∧ RationalNature(s) ∧ DominionOverActs(s)
-
-📘 · [Person.lean#ThomisticPersonCore](formal/Logos/Person.lean#L93)
-
-</details>
-
 <details>
 <summary>Formal Derivation (3 steps, natural deduction, 0 substantive axioms)</summary>
 
@@ -599,23 +455,6 @@ C525 `epistemic_polarity_is_personally_grounded` and C527 `the_person_grounds_th
 **Machine-Checked Kernel Rebuttal —** [`the_person_grounds_the_epistemic_right_wrong`](formal/Logos/EpistemicPersonalGround.lean#L165) (Footprint: 0 substantive axioms):
 `⊢ GroundsRightWrongAt s (Correct s p) (Incorrect s p) ∧ Person s`
 <details>
-<summary>Definitions used in this section (4; 1 new, 3 already shown)</summary>
-
-GroundsRightWrongAt: Subject s witnesses the grounding relation indexed to a specific normative opposition (p, q).
-
-    ∴ structure GroundsRightWrongAt (s : Subject) (p q : Prop) : Prop where
-
-📘 · [PersonalNormativeGround.lean#GroundsRightWrongAt](formal/Logos/PersonalNormativeGround.lean#L304)
-
-    ∴ Correct ≡ A(s, p) ∧ T(p) — defined in §2. Being True Is Being True To Someone.
-
-    ∴ Incorrect ≡ A(s, p) ∧ IsFalse(p) — defined in §5. The Two Poles Cannot Both Be Correct.
-
-    ∴ Person ≡ ThomisticPersonCore(s) — defined in §7. Free Will Is a Person.
-
-</details>
-
-<details>
 <summary>Formal Derivation (2 steps, natural deduction, 0 substantive axioms)</summary>
 
 Assume ClaimsNormativeCorrectness(s, p):
@@ -636,45 +475,6 @@ C553, in three strengths, and the difference between them is the difference betw
 
 **Machine-Checked Kernel Rebuttal —** [`epistemic_order_requires_a_free_meaning_being`](formal/Logos/EpistemicPersonalGround.lean#L276) (Footprint: 0 substantive axioms):
 `⊢ ∀ M : Model.Signature, ∃ s, M.Free s ∧ ∃ c, M.Means s c`
-<details>
-<summary>Definitions used in this section (9; 4 new, 5 already shown)</summary>
-
-Content-ness: `Content p` — p is (a) a propositional content.
-
-    ∴ Content ≡ True
-
-📘 · [Agency.lean#Content](formal/Logos/Agency.lean#L72)
-
-A subject is a free subject iff it possesses free will (definitionally, genuinely chooses).
-
-    ∴ FreeSubject ≡ FreeWill(s)
-
-📘 · [Choice.lean#FreeSubject](formal/Logos/Choice.lean#L185)
-
-The separating model: `Content := Bool` decides bivalence, `Grounds := False` leaves the ground sort empty.
-
-    ∴ M ≡ Unit Content := Bool TrueAt := fun c => c = true FalseAt := fun c => c = false Grounds := fun _ => False Means := fun _ _ => True Free := fun _ => True epistemic_order := fun c => by cases c <;> first | exact Or.inl rfl | exact Or.inr rfl rightwrong_not_vacuous := ⟨⟨true, rfl⟩, ⟨false, rfl⟩⟩ no_personal_ground := fun h => by obtain ⟨_, hg⟩ := h; exact hg order_needs_a_meaning_being := fun _ => ⟨(), trivial, true, trivial⟩
-
-📘 · [EpistemicPersonalGround.lean#M](formal/Logos/EpistemicPersonalGround.lean#L241)
-
-The free signature of the separation: a subject sort, a content sort, a truth and a falsity predicate, a grounding predicate, and the three facts the separation turns on — the epistemic order, its non-vacuity, and the absence of any ground. Footprint: `{}`.
-
-    ∴ structure Signature where
-
-📘 · [EpistemicPersonalGround.lean#Signature](formal/Logos/EpistemicPersonalGround.lean#L218)
-
-    ∴ Correct ≡ A(s, p) ∧ T(p) — defined in §2. Being True Is Being True To Someone.
-
-    ∴ FreeWill ≡ ∃ p, q, Chooses(s, p, q) — defined in §6. Co-Meaning Both Poles Is Free Will.
-
-    ∴ Incorrect ≡ A(s, p) ∧ IsFalse(p) — defined in §5. The Two Poles Cannot Both Be Correct.
-
-    ∴ Means ≡ True — defined in §4. Meaning Requires a Subject.
-
-    ∴ Person ≡ ThomisticPersonCore(s) — defined in §7. Free Will Is a Person.
-
-</details>
-
 <details>
 <summary>Formal Derivation (2 steps, natural deduction, 0 substantive axioms)</summary>
 
@@ -723,21 +523,6 @@ C561 `no_subject_who_means_no_epistemic_right_wrong`: without a subject who mean
 
 **Machine-Checked Kernel Rebuttal —** [`epistemic_order_makes_the_act_datum_necessary`](formal/Logos/EpistemicNecessity.lean#L235) (Footprint: 0 substantive axioms):
 `⊢ (∃ s, ∃ p, ClaimsNormativeCorrectness s p) → ∃ s, ∃ p, Act s p`
-<details>
-<summary>Definitions used in this section (3; 1 new, 2 already shown)</summary>
-
-`Act s p`: strong act: meaningful initiation of movement.
-
-    ∴ Act ≡ Means(s, p) ∧ ∃ w, w', Initiates s w w' p
-
-📘 · [Agency.lean#Act](formal/Logos/Agency.lean#L174)
-
-    ∴ Correct ≡ A(s, p) ∧ T(p) — defined in §2. Being True Is Being True To Someone.
-
-    ∴ Incorrect ≡ A(s, p) ∧ IsFalse(p) — defined in §5. The Two Poles Cannot Both Be Correct.
-
-</details>
-
 <details>
 <summary>Formal Derivation (9 steps, natural deduction, 0 substantive axioms)</summary>
 
@@ -1168,11 +953,11 @@ Incorrect delimitation in a judicative signature (mirrors Order.Incorrect).
 
 📘 · [BipolarityRetorsion.lean#JudSigIncorrect](formal/Logos/BipolarityRetorsion.lean#L267)
 
-Local means-relation: the subject's judgement always reaches any content.
+Vocabulary: the meaning-act relation — a subject means a proposition.
 
-    ∴ Means ≡ True
+    ∴ Means : Subject → Prop → Prop
 
-📘 · [MoralFrontierAudit.lean#Means](formal/Logos/MoralFrontierAudit.lean#L84)
+✅ · [Agency.lean#Means](formal/Logos/Agency.lean#L92)
 
 N_F := "no proposition is false" (bivalence: falsity is untruth).
 
@@ -1273,8 +1058,8 @@ Assume ∃ s, p, ClaimsNormativeCorrectness(s, p):
 
     1. assume hNoGN  (hypothesis assumption for conditional/reductio proof)
     2. witness components ⟨s, p, hClaim⟩  (existential elimination from h)
-    3. GenuineNormativity s (Correct(s, p)) (Incorrect(s, p))  (from )
-    4. GenuineNormativityExists  (from )
+    3. GenuineNormativity s (Correct(s, p)) (Incorrect(s, p))  ()
+    4. GenuineNormativityExists  ()
 
     ∴ ¬NoGN
 
@@ -1330,7 +1115,7 @@ Direct witness (`M_inanimate`): an inanimate universe is extensionally bivalent 
 <details>
 <summary>Formal Derivation (3 steps, natural deduction, 0 substantive axioms)</summary>
 
-    1. witness tuple ⟨Empty, fun e _ => False, Logos.Core.rightWrongDistinction, ?_⟩  (existential/conjunction refinement with Empty, fun e _ => False, Logos.Core.rightWrongDistinction, ?_)
+    1. witness tuple ⟨Empty, fun e _ => False, Logos.Core.rightWrongDistinction, (proof of this field, from the next line)⟩  (existential/conjunction refinement with Empty, fun e _ => False, Logos.Core.rightWrongDistinction, (proof of this field, from the next line))
     2. assume ⟨s, _p, _q, _hInc, _hNeq, _hMeansP, _hMeansQ⟩  (hypothesis assumption for conditional/reductio proof)
     3. vacuous contradiction on empty s  (elimination of empty type s (→ ⊥))
 
@@ -1484,7 +1269,7 @@ Master Theorem of Proof Presentation: An agent presenting a formal derivation as
 
 Assume Derivation, and PresentsAsSound(s, d):
 
-    1. Chooses(s, Correct(s, DerivationSound(d)), Incorrect(s, DerivationSound(d)))  (from )
+    1. Chooses(s, Correct(s, DerivationSound(d)), Incorrect(s, DerivationSound(d)))  ()
     2. FreeWill(s)  (elimination of 2 from hFWTuple)
     3. FreeSubject(s)  (modus ponens via (freeSubject_iff_freeWill)
     4. Person(s)  (modus ponens via free_subject_is_person)
@@ -1547,14 +1332,14 @@ Assume Derivation, and PresentsAsSound(critic, objection):
 
 Hostile Model 1 (`M_inanimate_checker`): An uninhabited universe with zero subjects.
 
-    syntactic_validitywithout_subject_or_normativity ⇏ Independence
+    syntactic_validity_without_subject_or_normativity ⇏ Independence
 
-🧱 syntactic_validitywithout_subject_or_normativity ⇏ Independence · [ProofPresentationRetorsion.lean#syntactic_validity_without_subject_or_normativity](formal/Logos/ProofPresentationRetorsion.lean#L97)
+🧱 syntactic_validity_without_subject_or_normativity ⇏ Independence · [ProofPresentationRetorsion.lean#syntactic_validity_without_subject_or_normativity](formal/Logos/ProofPresentationRetorsion.lean#L97)
 
 <details>
 <summary>Formal Derivation (5 steps, natural deduction, 0 substantive axioms)</summary>
 
-    1. witness tuple ⟨Empty, fun e _ => False, Derivation.leaf True, ?_⟩  (existential/conjunction refinement with Empty, fun e _ => False, Derivation.leaf True, ?_)
+    1. witness tuple ⟨Empty, fun e _ => False, Derivation.leaf True, (proof of this field, from the next line)⟩  (existential/conjunction refinement with Empty, fun e _ => False, Derivation.leaf True, (proof of this field, from the next line))
     2. rfl  (conjunction conjunct 1: rfl)
     3. fun e _ => id  (conjunction conjunct 2: fun e _ => id)
     4. fun e  (conjunction conjunct 3: fun e)
@@ -1573,7 +1358,7 @@ Hostile Model 2: Mechanical execution in `JudicativeSig` using `M_oneway`.
 <details>
 <summary>Formal Derivation (1 step, natural deduction, 0 substantive axioms)</summary>
 
-    1. witness tuple ⟨M_oneway, (), Derivation.leaf True, rfl, ?_, m_oneway_stance_fails⟩  (existential/conjunction refinement with M_oneway, (), Derivation.leaf True, rfl, ?_, m_oneway_stance_fails)
+    1. witness tuple ⟨M_oneway, (), Derivation.leaf True, rfl, (proof of this field, from the next line), m_oneway_stance_fails⟩  (existential/conjunction refinement with M_oneway, (), Derivation.leaf True, rfl, (proof of this field, from the next line), m_oneway_stance_fails)
 
     ∴ ∃ sig, s, d, Checker(d) = true ∧ VoiceSig(sig, s, conclusion(d)) ∧ ¬sig.Means(s, JudSigIncorrect(sig, s, conclusion(d)))
 
@@ -2368,7 +2153,7 @@ Binitarian Separation Model (Toy Cardinality Model over Bool): Demonstrates that
 <details>
 <summary>Formal Derivation (3 steps, natural deduction, 0 substantive axioms)</summary>
 
-    1. witness tuple ⟨Bool, Unit, fun _ _ _ => True, fun _ _ => True, fun _ _ => True, ?_⟩  (existential/conjunction refinement with Bool, Unit, fun _ _ _ => True, fun _ _ => True, fun _ _ => True, ?_)
+    1. witness tuple ⟨Bool, Unit, fun _ _ _ => True, fun _ _ => True, fun _ _ => True, (proof of this field, from the next line)⟩  (existential/conjunction refinement with Bool, Unit, fun _ _ _ => True, fun _ _ => True, fun _ _ => True, (proof of this field, from the next line))
     2. witness tuple ⟨⟨true, false, fun h => by cases h⟩  (existential/conjunction refinement with ⟨true, false, fun h => by cases h)
     3. vacuous contradiction on empty p1  (elimination of empty type p1 (→ ⊥))
 
@@ -2387,7 +2172,7 @@ Binitarian Separation Model (Toy Cardinality Model over Bool): Demonstrates that
 <details>
 <summary>Formal Derivation (2 steps, natural deduction, 0 substantive axioms)</summary>
 
-    1. Nonempty (CreationRecord populatedCreationWorld)  (from )
+    1. Nonempty (CreationRecord populatedCreationWorld)  ()
     2. witness components ⟨c⟩  (existential elimination from hRec)
 
     ∴ ¬(∀ (Subj Ent World : Type), GroundEntailsCreation(Subj, Ent, World))
@@ -2405,7 +2190,7 @@ Unincarnate Hostile Model: The existing theory (necessary divine ground, human a
 <details>
 <summary>Formal Derivation (2 steps, natural deduction, 0 substantive axioms)</summary>
 
-    1. witness tuple ⟨Bool, Bool, Unit, fun _ _ _ => True, fun s n => s = n, ?_⟩  (existential/conjunction refinement with Bool, Bool, Unit, fun _ _ _ => True, fun s n => s = n, ?_)
+    1. witness tuple ⟨Bool, Bool, Unit, fun _ _ _ => True, fun s n => s = n, (proof of this field, from the next line)⟩  (existential/conjunction refinement with Bool, Bool, Unit, fun _ _ _ => True, fun s n => s = n, (proof of this field, from the next line))
     2. witness tuple ⟨⟨true, false, fun h => by cases h⟩  (existential/conjunction refinement with ⟨true, false, fun h => by cases h)
 
     ∴ ∃ Subj, Nature, _Ent, Chooses, HasNature, -- Distinct divine and human natures exist (∃ d, h, d ≠ h) ∧ -- Divine reality and human choosers exist (∃ s, p, q, Chooses(s, p, q)) ∧ -- Zero subjects combine both natures ¬(∃ _i, True)
@@ -2506,11 +2291,11 @@ Person: an individual substance of a rational nature, possessed of dominion over
 
 📘 · [Person.lean#Person](formal/Logos/Person.lean#L127)
 
-Right and Wrong distinction indexed by Person: The normative distinction is genuinely addressed to and held by the person.
+Objective Right/Wrong for subject s: There exist incompatible alternatives between which s is addressed by normative opposition.
 
-    ∴ RightWrong ≡ ∃ a, b, GenuineNormativity p.subject a b
+    ∴ RightWrong ≡ ∃ p, q, RightWrongAt(s, p, q)
 
-📘 · [PersonalNormativeGround.lean#RightWrong](formal/Logos/PersonalNormativeGround.lean#L96)
+📘 · [PersonalNormativeGround.lean#RightWrong](formal/Logos/PersonalNormativeGround.lean#L160)
 
 Truth, *defined* as identity (E0): `T p` is `p` itself.
 
@@ -2633,7 +2418,7 @@ Binitarian Separation Model (Toy Cardinality Model over Bool): Demonstrates that
 <details>
 <summary>Formal Derivation (3 steps, natural deduction, 0 substantive axioms)</summary>
 
-    1. witness tuple ⟨Bool, Unit, fun _ _ _ => True, fun _ _ => True, fun _ _ => True, ?_⟩  (existential/conjunction refinement with Bool, Unit, fun _ _ _ => True, fun _ _ => True, fun _ _ => True, ?_)
+    1. witness tuple ⟨Bool, Unit, fun _ _ _ => True, fun _ _ => True, fun _ _ => True, (proof of this field, from the next line)⟩  (existential/conjunction refinement with Bool, Unit, fun _ _ _ => True, fun _ _ => True, fun _ _ => True, (proof of this field, from the next line))
     2. witness tuple ⟨⟨true, false, fun h => by cases h⟩  (existential/conjunction refinement with ⟨true, false, fun h => by cases h)
     3. vacuous contradiction on empty p1  (elimination of empty type p1 (→ ⊥))
 
@@ -2650,7 +2435,7 @@ Binitarian Separation Model (Toy Cardinality Model over Bool): Demonstrates that
 <details>
 <summary>Formal Derivation (2 steps, natural deduction, 0 substantive axioms)</summary>
 
-    1. Nonempty (CreationRecord populatedCreationWorld)  (from )
+    1. Nonempty (CreationRecord populatedCreationWorld)  ()
     2. witness components ⟨c⟩  (existential elimination from hRec)
 
     ∴ ¬(∀ (Subj Ent World : Type), GroundEntailsCreation(Subj, Ent, World))
@@ -2666,7 +2451,7 @@ Unincarnate Hostile Model: The existing theory (necessary divine ground, human a
 <details>
 <summary>Formal Derivation (2 steps, natural deduction, 0 substantive axioms)</summary>
 
-    1. witness tuple ⟨Bool, Bool, Unit, fun _ _ _ => True, fun s n => s = n, ?_⟩  (existential/conjunction refinement with Bool, Bool, Unit, fun _ _ _ => True, fun s n => s = n, ?_)
+    1. witness tuple ⟨Bool, Bool, Unit, fun _ _ _ => True, fun s n => s = n, (proof of this field, from the next line)⟩  (existential/conjunction refinement with Bool, Bool, Unit, fun _ _ _ => True, fun s n => s = n, (proof of this field, from the next line))
     2. witness tuple ⟨⟨true, false, fun h => by cases h⟩  (existential/conjunction refinement with ⟨true, false, fun h => by cases h)
 
     ∴ ∃ Subj, Nature, _Ent, Chooses, HasNature, -- Distinct divine and human natures exist (∃ d, h, d ≠ h) ∧ -- Divine reality and human choosers exist (∃ s, p, q, Chooses(s, p, q)) ∧ -- Zero subjects combine both natures ¬(∃ _i, True)
@@ -3496,6 +3281,56 @@ than a discharged hypothesis, and it is why the lane is closed.
 - **Not a demoted characteristic.** C495 says the *uniqueness* of the necessary being is false, not that the ground fails to be necessary. The six discriminating characteristics (C439, C442–C445, C307, collected by C446) are untouched, and C446 still collects them; C495 proves `NecessaryEntity` cannot be C446's seventh conjunct while the kind is inhabited.
 - **Not cheaper than C445.** C497's `MaximalCapacity` and `DivinePureActuality` cells pay the *same* `SemanticFinitude` price C445 pays for the same exclusion; nothing new is charged, and the payout is visible in each row's footprint.
 - **Not a physical-energy theory.** C498 is a pure-logic tautology — `∃ P Q, P ∧ ¬ Q` with both variables unbound. Γ has no theory of physical energy; the row is disclosed rather than silently emptied or silently upgraded.
+
+## What Is Established of the Ground, and of the Person
+
+Every row derived from the kernel, never transcribed (icons as in the legend above; `◈` = a registered `def`-as-premise, a price not a warning).
+
+Two rows cut **against** the classical reading and are kept here: the ground is **not the only necessary being** (C494), so necessity does **not** pick the ground out (C495).
+
+| Classical characteristic | Scope | Derived status |
+|---|---|---|
+| **Personal** — the ground-type is personal | Personal ground / person-type | ✅ PROVEN · [PersonalGroundOfReality.lean#personal_ground_of_right_wrong](formal/Logos/PersonalGroundOfReality.lean#L100), footprint {Means, Subject, Will, subjectWill, will_individuation} |
+| **Personal** — the epistemic sibling: the ground-type is personal *at the epistemic poles* | Personal ground / person-type | ✅ PROVEN · [EpistemicPersonalGround.lean#epistemic_ground_is_personal](formal/Logos/EpistemicPersonalGround.lean#L133), footprint {Initiates, Means, State, Subject, Will, subjectWill, will_individuation} |
+| **Psychological personality** (humanoid consciousness, stream of experience) | Personal ground / person-type | 🧱 INDEPENDENT · [PersonhoodOntologyAudit.lean#faithful_model_satisfies_free_will_without_opaque_person](formal/Logos/PersonhoodOntologyAudit.lean#L182), footprint {} |
+| **Rational** — formally equivalent to the Thomistic core containing RationalNature | Personal ground / person-type | ✅ PROVEN · [Person.lean#person_iff_thomisticCore](formal/Logos/Person.lean#L183), footprint {Means, Subject, Will, subjectWill} |
+| **Free** — genuine normativity yields genuine choice and free will | Personal ground / person-type | ✅ PROVEN · [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will](formal/Logos/IndubitableNormativeFreeWill.lean#L115), footprint {Means, Subject} |
+| **Asiety** — true freedom (true choice) | Personal ground / person-type | ⚠️ AXIOMATIC · [AsieticChoice.lean#asietic_summary](formal/Logos/AsieticChoice.lean#L563), footprint {AxJudicativeBipolarity, AxTwoSubjects, Initiates, Means, State, Subject, Will, subjectWill} |
+| **Shared freedom of the ground** (`AsietyFreedom` — the ground's freedom, shared) | Divine Being / Ground | ✅ PROVEN ◈ · [AsietyFreedom.lean#asietyFreedom_summary](formal/Logos/AsietyFreedom.lean#L296), footprint {Means, Subject} |
+| **Divine love** (the ground as lover of contingent reality) | Divine Being / Ground | ⚠️ AXIOMATIC · [LovesAsGround.lean#the_ground_is_a_necessary_and_chosen_lover](formal/Logos/LovesAsGround.lean#L580), footprint {AxGroundLovesContingentRealm, GroundBearsGood, Means, NecessarySubjectKind, Subject, CL} |
+| **Independent will** — with numerical individuation | Personal ground / person-type | ✅ PROVEN · [Person.lean#person_iff_freeIndependentWill](formal/Logos/Person.lean#L166), footprint {Means, Subject, Will, subjectWill} |
+| **Dominion over acts** / authoritative personhood | Personal ground / person-type | ✅ PROVEN · [Person.lean#DominionOverActs](formal/Logos/Person.lean#L56), footprint {Means, Subject} |
+| **Ground of objective normativity (Right and Wrong)** | Personal ground / person-type | ✅ PROVEN · [PersonalNormativeGround.lean#person_grounds_normative_polarity](formal/Logos/PersonalNormativeGround.lean#L529), footprint {Means, Subject, Will, subjectWill} |
+| **Non-relative core** — strict architectural invariance only | Proof architecture (not divine scope) | ✅ PROVEN · [HardenedInvariance.lean#agent_invariant_core_is_strictly_inside_freewill_invariant_core](formal/Logos/HardenedInvariance.lean#L226), footprint {} |
+| **Necessary Divine Being / Ground** | Divine Being / Ground | ✅ PROVEN ◈ · [NecessityEternity.lean#ofGround_necessary_ground_of_reality](formal/Logos/NecessityEternity.lean#L161), footprint {Means, NecessarySubjectKind, Subject} |
+| **Aseity** — non-derived / non-dependent | Divine Being / Ground | ✅ PROVEN · [CanonicalAseity.lean#conditional_canonical_aseity](formal/Logos/CanonicalAseity.lean#L133), footprint {Means, Subject} |
+| **Foundational unicity** (structural unicity of the universal ground of reality) | Divine Being / Ground | ✅ PROVEN · [FoundationalUnicity.lean#ofGround_foundational_unicity](formal/Logos/FoundationalUnicity.lean#L215), footprint {Means, NecessarySubjectKind, Subject, CL} |
+| **Strict monotheism** (the ground is a *single* Person — a unitarian monad) | Divine Being / Ground | 🧱 INDEPENDENT · [FoundationalUnicity.lean#unicity_does_not_force_unitarian_monad](formal/Logos/FoundationalUnicity.lean#L317), footprint {} |
+| **One God** — unity of the Divine Being (one ground, one nature) | Divine Being / Ground | ✅ PROVEN · [FoundationalUnicity.lean#exactly_one_universal_modal_ground](formal/Logos/FoundationalUnicity.lean#L301), footprint {Means, NecessarySubjectKind, Subject} |
+| **Perfect (moral) goodness** | Divine Being / Ground | 🧱 INDEPENDENT · — |
+| **Eternal — ever-present** (everlasting existence) | Divine Being / Ground | ✅ PROVEN ◈ · [NecessityEternity.lean#the_ground_everlasting](formal/Logos/NecessityEternity.lean#L195), footprint {NecessarySubjectKind, Subject} |
+| **Atemporal** (existence not time-modulated; outside succession) | Divine Being / Ground | ✅ PROVEN ◈ · [NecessityEternity.lean#the_ground_atemporal](formal/Logos/NecessityEternity.lean#L199), footprint {NecessarySubjectKind, Subject} |
+| **Precedence to Right/Wrong** (the ground precedes the true/false distinction) | Divine Being / Ground | ✅ PROVEN · [Precedence.lean#ofGround_precedes_the_right_wrong_distinction](formal/Logos/Precedence.lean#L263), footprint {Means, NecessarySubjectKind, Subject} |
+| **Exclusion of pantheism** (the ground is not the universe) | Divine Being / Ground | ✅ PROVEN · [CosmicExistence.lean#the_ground_is_not_the_universe](formal/Logos/CosmicExistence.lean#L739), footprint {NecessarySubjectKind, Subject} |
+| **Divine simplicity** | Divine Being / Ground | ✅ PROVEN ◈ · [DivineSimplicity.lean#divine_simplicity_sole_bearer](formal/Logos/DivineSimplicity.lean#L246), footprint {Means, Subject, CL} |
+| **Ontological transcendence** (neither an atomic worldly state nor any subject-correlate) | Divine Being / Ground | ✅ PROVEN · [DivineTranscendence.lean#ofGround_sole_transcendent_ground](formal/Logos/DivineTranscendence.lean#L317), footprint {Subject} |
+| **Scholastic simplicity** (strict identity of essence and existence) | Divine Being / Ground | ❌ NOT ESTABLISHED · — |
+| **Divine immutability** (ontological, temporal, and process unchangeability) | Divine Being / Ground | ✅ PROVEN · [DivineImmutability.lean#ofGround_divine_immutability](formal/Logos/DivineImmutability.lean#L213), footprint {Initiates, Means, NecessarySubjectKind, State, Subject} |
+| **Psychological impassibility** (incapacity for relational affect or compassion) | Divine Being / Ground | ❌ NOT ESTABLISHED · — |
+| **Foundational omnipresence** (sustaining presence to all beings across modal reality) | Divine Being / Ground | ✅ PROVEN · [FoundationalOmnipresence.lean#ofGround_foundational_omnipresence](formal/Logos/FoundationalOmnipresence.lean#L154), footprint {Means, NecessarySubjectKind, Subject} |
+| **Physical omnipresence** (spatial presence throughout physical spacetime coordinates) | Divine Being / Ground | ❌ NOT ESTABLISHED · — |
+| **Quantitative metric infinity** (infinite physical magnitude or cardinal size) | Divine Being / Ground | ❌ NOT ESTABLISHED · — |
+| **Divine pure actuality** (*Actus Purus* / perfection) | Divine Being / Ground | ✅ PROVEN · [DivinePureActuality.lean#ofGround_divine_pure_actuality](formal/Logos/DivinePureActuality.lean#L195), footprint {Initiates, Means, NecessarySubjectKind, State, Subject} |
+| **Physical / kinetic energy** (thermodynamic or kinetic physical motion) | Divine Being / Ground | ❌ NOT ESTABLISHED · — |
+| **Foundational omniscience** (truth-exhaustive scope — the condition of all truth) | Divine Being / Ground | ✅ PROVEN ◈ · [DivineOmniscience.lean#ofGround_foundational_omniscience](formal/Logos/DivineOmniscience.lean#L200), footprint {Means, NecessarySubjectKind, Subject} |
+| **Infallible / counterfactual omniscience** ("all and only truths", ordinary knowledge of all truth) | Divine Being / Ground | ❌ NOT ESTABLISHED ◈ · — |
+| **Foundational omnipotence** (operative scope: no non-contradictory state of affairs is closed to the ground) | Divine Being / Ground | ✅ PROVEN ◈ · [DivineOmnipotence.lean#ofGround_foundational_omnipotence](formal/Logos/DivineOmnipotence.lean#L306), footprint {Means, NecessarySubjectKind, Subject, CL} |
+| **Causal / creative omnipotence** ("can bring X about", not "is present where X obtains") | Divine Being / Ground | ◆ AXIOM · [ThomisticAct.lean#ground_produces_every_satisfiable_form](formal/Logos/ThomisticAct.lean#L247), footprint {ground_produces_every_satisfiable_form, Produces, Subject} |
+| **Creator of contingent reality** | Divine Being / Ground | 🧱 INDEPENDENT · [ConditionalTheology.lean#necessary_ground_not_entails_contingent_creation](formal/Logos/ConditionalTheology.lean#L616), footprint {} |
+| **Three Divine Persons (Trinity)** — one God, in three Persons | Divine Personhood | ⚠️ AXIOMATIC · [DivineAgape.lean#agape_entails_tripersonality](formal/Logos/DivineAgape.lean#L331), footprint {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} |
+| **Incarnation** | Divine Personhood | 🧱 INDEPENDENT · [ConditionalTheology.lean#preceding_theory_not_entails_incarnation](formal/Logos/ConditionalTheology.lean#L380), footprint {} |
+
+The full prose for every row — the exact sense established, every reference, and the 14 step-by-step chain blocks that price each bridge — is in [investigations/ledger.md](investigations/ledger.md).
 
 _Synthesis — the strongest current profile._ The theory has established, of a
 **personal, rational, free, authoritative-over-its-acts, independently individuated**
