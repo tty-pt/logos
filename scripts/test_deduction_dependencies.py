@@ -389,7 +389,8 @@ def test_readability_invariants():
     # refuted as a consequence — so it is checked against the badge legend instead
     # of being demanded of the table it no longer has.
     for bucket in ("✅ PROVEN", "❌ NOT ESTABLISHED", "🧱 INDEPENDENT"):
-        assert bucket in attr_text, f"Table must report status bucket '{bucket}'"
+        assert (bucket in attr_text or f"{bucket.split()[0]} **{bucket.split()[1]}**" in attr_text), (
+            f"Table must report status bucket '{bucket}'")
     assert "DEFERRED — a claimed result whose Lean declaration is not in the live kernel" in text, (
         "the badge legend must keep defining DEFERRED even though no attribute row uses it")
     assert "**One God** — unity of the Divine Being" in attr_text, (

@@ -1,0 +1,1070 @@
+{
+  "slots": [
+    {
+      "surface": "classical_attributes",
+      "id": "Personal",
+      "claims": [
+        "Logos.PersonalGroundOfReality.personal_ground_of_right_wrong"
+      ],
+      "routes_considered": 399,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 397
+      },
+      "winner": "Logos.PersonalGroundOfReality.personal_ground_of_right_wrong",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{Means, Subject, Will, subjectWill, will_individuation}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Personal",
+      "claims": [
+        "Logos.EpistemicPersonalGround.epistemic_ground_is_personal"
+      ],
+      "routes_considered": 399,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 398
+      },
+      "winner": "Logos.EpistemicPersonalGround.epistemic_ground_is_personal",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{Initiates, Means, State, Subject, Will, subjectWill, will_individuation}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Psychological personality",
+      "claims": [
+        "Logos.PersonhoodOntologyAudit.faithful_model_satisfies_free_will_without_opaque_person"
+      ],
+      "routes_considered": 385,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 384
+      },
+      "winner": "Logos.PersonhoodOntologyAudit.faithful_model_satisfies_free_will_without_opaque_person",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Rational",
+      "claims": [
+        "Logos.Person.person_iff_thomisticCore"
+      ],
+      "routes_considered": 474,
+      "routes_rejected": {
+        "countermodel_namespace": 71,
+        "foreign_sort": 0,
+        "incomparable": 473
+      },
+      "winner": "Logos.Person.person_iff_thomisticCore",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{Means, Subject, Will, subjectWill}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Free",
+      "claims": [
+        "Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will"
+      ],
+      "routes_considered": 390,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 387
+      },
+      "winner": "Logos.PersonalNormativeGround.discovery_independent_of_grounding",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** _(conditional on GenuineNormativity s p q)_ \u00b7 0 substantive axioms \u00b7 `{Means, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Asiety",
+      "claims": [
+        "Logos.AsietyFreedom.weakChoice_implies_asiety"
+      ],
+      "routes_considered": 385,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 384
+      },
+      "winner": "Logos.AsietyFreedom.weakChoice_implies_asiety",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** _(conditional on GenuineNormativity s p q)_ \u00b7 0 substantive axioms \u00b7 `{Means, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Shared freedom of the ground",
+      "claims": [
+        "Logos.AsietyFreedom.asietyFreedom_yields_asietyFreeWill"
+      ],
+      "routes_considered": 385,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 384
+      },
+      "winner": "Logos.AsietyFreedom.asietyFreedom_yields_asietyFreeWill",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": true,
+      "rendered_badge": "\u2705 **PROVEN** _(conditional on Asiety (EntityOf(s)), AsietyFreedomOfGround, GroundsEntity Entity.ofGround (EntityOf(s)))_ \u00b7 0 substantive axioms \u00b7 `{Means, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Divine love",
+      "claims": [
+        "Logos.LovesAsGround.the_ground_is_a_necessary_and_chosen_lover"
+      ],
+      "routes_considered": 385,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 384
+      },
+      "winner": "Logos.LovesAsGround.the_ground_is_a_necessary_and_chosen_lover",
+      "verdict": "AXIOMATIC",
+      "substantive": [
+        "Logos.LovesAsGround.AxGroundLovesContingentRealm"
+      ],
+      "stipulated": false,
+      "rendered_badge": "\u26a0\ufe0f **AXIOMATIC (AxGroundLovesContingentRealm)** \u00b7 1 substantive axiom: AxGroundLovesContingentRealm \u00b7 `{GroundBearsGood, Means, NecessarySubjectKind, Subject, AxGroundLovesContingentRealm, CL}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Independent will",
+      "claims": [
+        "Logos.Person.person_iff_freeIndependentWill"
+      ],
+      "routes_considered": 474,
+      "routes_rejected": {
+        "countermodel_namespace": 71,
+        "foreign_sort": 0,
+        "incomparable": 473
+      },
+      "winner": "Logos.Person.person_iff_freeIndependentWill",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{Means, Subject, Will, subjectWill}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Dominion over acts",
+      "claims": [
+        "Logos.PersonalNormativeGround.rightwrong_gives_rational_domination"
+      ],
+      "routes_considered": 386,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 385
+      },
+      "winner": "Logos.PersonalNormativeGround.rightwrong_gives_rational_domination",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** _(conditional on RightWrong s)_ \u00b7 0 substantive axioms \u00b7 `{Means, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Ground of objective normativity",
+      "claims": [
+        "Logos.PersonalNormativeGround.person_grounds_normative_polarity"
+      ],
+      "routes_considered": 390,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 389
+      },
+      "winner": "Logos.PersonalNormativeGround.person_grounds_normative_polarity",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** _(conditional on Person s)_ \u00b7 0 substantive axioms \u00b7 `{Means, Subject, Will, subjectWill}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Non-relative core",
+      "claims": [
+        "Logos.HardenedInvariance.agent_invariant_core_is_strictly_inside_freewill_invariant_core"
+      ],
+      "routes_considered": 385,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 384
+      },
+      "winner": "Logos.HardenedInvariance.agent_invariant_core_is_strictly_inside_freewill_invariant_core",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Necessary Divine Being",
+      "claims": [
+        "Logos.NecessityEternity.ofGround_necessary_ground_of_reality"
+      ],
+      "routes_considered": 385,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 384
+      },
+      "winner": "Logos.NecessityEternity.ofGround_necessary_ground_of_reality",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": true,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{Means, NecessarySubjectKind, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Aseity",
+      "claims": [
+        "Logos.CanonicalAseity.conditional_canonical_aseity"
+      ],
+      "routes_considered": 386,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 385
+      },
+      "winner": "Logos.CanonicalAseity.conditional_canonical_aseity",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** _(conditional on \u2200 s, \u2203 p, \u00acMeans s p)_ \u00b7 0 substantive axioms \u00b7 `{Means, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Foundational unicity",
+      "claims": [
+        "Logos.FoundationalUnicity.ofGround_foundational_unicity"
+      ],
+      "routes_considered": 385,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 384
+      },
+      "winner": "Logos.FoundationalUnicity.ofGround_foundational_unicity",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{Means, NecessarySubjectKind, Subject, CL}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Strict monotheism",
+      "claims": [
+        "Logos.FoundationalUnicity.unicity_does_not_force_unitarian_monad"
+      ],
+      "routes_considered": 385,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 384
+      },
+      "winner": "Logos.FoundationalUnicity.unicity_does_not_force_unitarian_monad",
+      "verdict": "COUNTERMODEL",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\ud83e\uddf1 **COUNTERMODEL** \u00b7 0 substantive axioms \u00b7 `{}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "One God",
+      "claims": [
+        "Logos.FoundationalUnicity.exactly_one_universal_modal_ground"
+      ],
+      "routes_considered": 386,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 385
+      },
+      "winner": "Logos.FoundationalUnicity.exactly_one_universal_modal_ground",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** _(conditional on \u2200 s, \u2203 p, \u00acMeans s p)_ \u00b7 0 substantive axioms \u00b7 `{Means, NecessarySubjectKind, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Perfect",
+      "claims": [],
+      "routes_considered": 0,
+      "routes_rejected": {
+        "countermodel_namespace": 0,
+        "foreign_sort": 0,
+        "incomparable": 0
+      },
+      "winner": null,
+      "verdict": "COUNTERMODEL",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "?"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Eternal",
+      "claims": [
+        "Logos.NecessityEternity.the_ground_everlasting"
+      ],
+      "routes_considered": 386,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 385
+      },
+      "winner": "Logos.NecessityEternity.the_ground_everlasting",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": true,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{NecessarySubjectKind, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Atemporal",
+      "claims": [
+        "Logos.NecessityEternity.the_ground_atemporal"
+      ],
+      "routes_considered": 387,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 386
+      },
+      "winner": "Logos.NecessityEternity.the_ground_atemporal",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": true,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{NecessarySubjectKind, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Precedence to Right",
+      "claims": [
+        "Logos.Precedence.ofGround_precedes_the_right_wrong_distinction"
+      ],
+      "routes_considered": 385,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 384
+      },
+      "winner": "Logos.Precedence.ofGround_precedes_the_right_wrong_distinction",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{Means, NecessarySubjectKind, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Exclusion of pantheism",
+      "claims": [
+        "Logos.CosmicExistence.the_ground_is_not_the_universe"
+      ],
+      "routes_considered": 384,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 383
+      },
+      "winner": "Logos.CosmicExistence.the_ground_is_not_the_universe",
+      "verdict": "COUNTERMODEL",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\ud83e\uddf1 **COUNTERMODEL** \u00b7 0 substantive axioms \u00b7 `{NecessarySubjectKind, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Divine simplicity",
+      "claims": [
+        "Logos.DivineSimplicity.divine_simplicity_sole_bearer"
+      ],
+      "routes_considered": 386,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 385
+      },
+      "winner": "Logos.DivineSimplicity.divine_simplicity_sole_bearer",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** _(conditional on \u2200 s, \u2203 p, \u00acMeans s p)_ \u00b7 0 substantive axioms \u00b7 `{Means, Subject, CL}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Ontological transcendence",
+      "claims": [
+        "Logos.DivineTranscendence.ofGround_sole_transcendent_ground"
+      ],
+      "routes_considered": 404,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 403
+      },
+      "winner": "Logos.DivineTranscendence.ofGround_sole_transcendent_ground",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** _(conditional on TranscendentGround e)_ \u00b7 0 substantive axioms \u00b7 `{Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Scholastic simplicity",
+      "claims": [],
+      "routes_considered": 0,
+      "routes_rejected": {
+        "countermodel_namespace": 0,
+        "foreign_sort": 0,
+        "incomparable": 0
+      },
+      "winner": null,
+      "verdict": "ABSENT",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u274c NOT ESTABLISHED"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Divine immutability",
+      "claims": [
+        "Logos.DivineImmutability.ofGround_divine_immutability"
+      ],
+      "routes_considered": 386,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 385
+      },
+      "winner": "Logos.DivineImmutability.ofGround_divine_immutability",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{Initiates, Means, NecessarySubjectKind, State, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Psychological impassibility",
+      "claims": [],
+      "routes_considered": 0,
+      "routes_rejected": {
+        "countermodel_namespace": 0,
+        "foreign_sort": 0,
+        "incomparable": 0
+      },
+      "winner": null,
+      "verdict": "ABSENT",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u274c NOT ESTABLISHED"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Foundational omnipresence",
+      "claims": [
+        "Logos.FoundationalOmnipresence.ofGround_foundational_omnipresence"
+      ],
+      "routes_considered": 386,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 385
+      },
+      "winner": "Logos.FoundationalOmnipresence.ofGround_foundational_omnipresence",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{Means, NecessarySubjectKind, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Physical omnipresence",
+      "claims": [],
+      "routes_considered": 0,
+      "routes_rejected": {
+        "countermodel_namespace": 0,
+        "foreign_sort": 0,
+        "incomparable": 0
+      },
+      "winner": null,
+      "verdict": "ABSENT",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u274c NOT ESTABLISHED"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Quantitative metric infinity",
+      "claims": [],
+      "routes_considered": 0,
+      "routes_rejected": {
+        "countermodel_namespace": 0,
+        "foreign_sort": 0,
+        "incomparable": 0
+      },
+      "winner": null,
+      "verdict": "ABSENT",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u274c NOT ESTABLISHED"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Divine pure actuality",
+      "claims": [
+        "Logos.DivinePureActuality.ofGround_divine_pure_actuality"
+      ],
+      "routes_considered": 387,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 386
+      },
+      "winner": "Logos.DivinePureActuality.ofGround_divine_pure_actuality",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** _(conditional on \u2200 s, \u2203 p, \u00acMeans s p)_ \u00b7 0 substantive axioms \u00b7 `{Initiates, Means, NecessarySubjectKind, State, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Physical",
+      "claims": [],
+      "routes_considered": 0,
+      "routes_rejected": {
+        "countermodel_namespace": 0,
+        "foreign_sort": 0,
+        "incomparable": 0
+      },
+      "winner": null,
+      "verdict": "ABSENT",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u274c NOT ESTABLISHED"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Foundational omniscience",
+      "claims": [
+        "Logos.DivineOmniscience.ofGround_foundational_omniscience"
+      ],
+      "routes_considered": 386,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 385
+      },
+      "winner": "Logos.DivineOmniscience.ofGround_foundational_omniscience",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": true,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{Means, NecessarySubjectKind, Subject}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Infallible",
+      "claims": [],
+      "routes_considered": 0,
+      "routes_rejected": {
+        "countermodel_namespace": 0,
+        "foreign_sort": 0,
+        "incomparable": 0
+      },
+      "winner": null,
+      "verdict": "ABSENT",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u274c NOT ESTABLISHED"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Foundational omnipotence",
+      "claims": [
+        "Logos.DivineOmnipotence.ofGround_foundational_omnipotence"
+      ],
+      "routes_considered": 386,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 385
+      },
+      "winner": "Logos.DivineOmnipotence.ofGround_foundational_omnipotence",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": true,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms \u00b7 `{Means, NecessarySubjectKind, Subject, CL}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Causal",
+      "claims": [
+        "Logos.ThomisticAct.ground_produces_every_satisfiable_form"
+      ],
+      "routes_considered": 385,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 384
+      },
+      "winner": "Logos.ThomisticAct.ground_produces_every_satisfiable_form",
+      "verdict": "AXIOM",
+      "substantive": [
+        "Logos.ThomisticAct.ground_produces_every_satisfiable_form"
+      ],
+      "stipulated": false,
+      "rendered_badge": "\u25c6 **AXIOM** \u00b7 1 substantive axiom: ground_produces_every_satisfiable_form \u00b7 `{Produces, Subject, ground_produces_every_satisfiable_form}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Creator of contingent reality",
+      "claims": [
+        "Logos.TheologicalModalHardening.necessary_entity_not_forces_contingent_creation"
+      ],
+      "routes_considered": 385,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 384
+      },
+      "winner": "Logos.TheologicalModalHardening.necessary_entity_not_forces_contingent_creation",
+      "verdict": "COUNTERMODEL",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\ud83e\uddf1 **COUNTERMODEL** \u00b7 0 substantive axioms \u00b7 `{}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Three Divine Persons",
+      "claims": [
+        "Logos.DivineAgape.agape_entails_tripersonality"
+      ],
+      "routes_considered": 385,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 384
+      },
+      "winner": "Logos.DivineAgape.agape_entails_tripersonality",
+      "verdict": "AXIOMATIC",
+      "substantive": [
+        "Logos.DivineAgape.AxAgapeEssence",
+        "Logos.DivineAgape.AxProcessionSpirit",
+        "Logos.DivineAgape.AxProcessionWord"
+      ],
+      "stipulated": false,
+      "rendered_badge": "\u26a0\ufe0f **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** \u00b7 3 substantive axioms: AxAgapeEssence, AxProcessionSpirit, AxProcessionWord \u00b7 `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}`"
+    },
+    {
+      "surface": "classical_attributes",
+      "id": "Incarnation",
+      "claims": [
+        "Logos.ConditionalTheology.preceding_theory_not_entails_incarnation"
+      ],
+      "routes_considered": 385,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "foreign_sort": 0,
+        "incomparable": 384
+      },
+      "winner": "Logos.ConditionalTheology.preceding_theory_not_entails_incarnation",
+      "verdict": "COUNTERMODEL",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\ud83e\uddf1 **COUNTERMODEL** \u00b7 0 substantive axioms \u00b7 `{}`"
+    },
+    {
+      "surface": "seven_pillars",
+      "id": "Pillar_1_Normative Nihilism",
+      "claims": [
+        "Logos.DirectNormativeRetorsion.claims_correct_no_right_self_refuting"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.DirectNormativeRetorsion.claims_correct_no_right_self_refuting",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "`{Initiates, Means, State, Subject}`<br>**(0 substantive axioms)**"
+    },
+    {
+      "surface": "seven_pillars",
+      "id": "Pillar_2_Eliminativism of Choice",
+      "claims": [
+        "Logos.UndeniableNormativeDerivation.d7_co_grasp_is_definitionally_choice"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.UndeniableNormativeDerivation.d7_co_grasp_is_definitionally_choice",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "`{Means, Subject}`<br>**(0 substantive axioms)**"
+    },
+    {
+      "surface": "seven_pillars",
+      "id": "Pillar_3_Determinism / Incompatibilism",
+      "claims": [
+        "Logos.UndeniableNormativeDerivation.d8_choice_is_definitionally_free_will",
+        "Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will"
+      ],
+      "routes_considered": 2,
+      "routes_rejected": {},
+      "winner": "Logos.UndeniableNormativeDerivation.d8_choice_is_definitionally_free_will",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "`{Means, Subject}`<br>**(0 substantive axioms)**"
+    },
+    {
+      "surface": "seven_pillars",
+      "id": "Pillar_4_Theological Smuggling",
+      "claims": [
+        "Logos.Person.freeWill_implies_person"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.Person.freeWill_implies_person",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "`{Means, Subject, Will, subjectWill, will_individuation}`<br>**(0 substantive axioms)**"
+    },
+    {
+      "surface": "seven_pillars",
+      "id": "Pillar_5_Euthyphro / Voluntarism",
+      "claims": [
+        "Logos.PersonalNormativeGround.will_identity_collapses_normativity"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.PersonalNormativeGround.will_identity_collapses_normativity",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "`{Ought, Subject, Wills}`<br>**(0 substantive axioms)**"
+    },
+    {
+      "surface": "seven_pillars",
+      "id": "Pillar_6_Physicalist / Atomic Ground",
+      "claims": [
+        "Logos.CanonicalAseity.atom_cannot_ground_the_ground",
+        "Logos.CanonicalAseity.conditional_canonical_aseity"
+      ],
+      "routes_considered": 2,
+      "routes_rejected": {},
+      "winner": "Logos.CanonicalAseity.atom_cannot_ground_the_ground",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "`{Means, Subject}`<br>**(0 substantive axioms)**"
+    },
+    {
+      "surface": "seven_pillars",
+      "id": "Pillar_7_Origin of Normativity (The Proof-Self Retorsion)",
+      "claims": [
+        "Logos.ProofPresentationRetorsion.presents_as_sound_derives_personhood",
+        "Logos.ProofPresentationRetorsion.critic_presenting_objection_is_person",
+        "Logos.ProofPresentationRetorsion.syntactic_validity_without_subject_or_normativity"
+      ],
+      "routes_considered": 3,
+      "routes_rejected": {},
+      "winner": "Logos.ProofPresentationRetorsion.presents_as_sound_derives_personhood",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "`{Initiates, Means, State, Subject, Will, subjectWill, will_individuation, CL}`<br>**(0 substantive axioms)**"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_1_The ground is necessary",
+      "claims": [
+        "Logos.NecessityEternity.ofGround_necessary_ground_of_reality"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.NecessityEternity.ofGround_necessary_ground_of_reality",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": true,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_2_The ground has aseity",
+      "claims": [
+        "Logos.CanonicalAseity.conditional_canonical_aseity"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.CanonicalAseity.conditional_canonical_aseity",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_3_Foundational unicity",
+      "claims": [
+        "Logos.FoundationalUnicity.ofGround_foundational_unicity"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.FoundationalUnicity.ofGround_foundational_unicity",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_4_Sole universal grounding",
+      "claims": [
+        "Logos.FoundationalUnicity.ofGround_sole_universal_grounding"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.FoundationalUnicity.ofGround_sole_universal_grounding",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_5_One God",
+      "claims": [
+        "Logos.FoundationalUnicity.exactly_one_universal_modal_ground"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.FoundationalUnicity.exactly_one_universal_modal_ground",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_6_The ground is eternal \u2014 ever-present",
+      "claims": [
+        "Logos.NecessityEternity.the_ground_everlasting"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.NecessityEternity.the_ground_everlasting",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": true,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_7_The ground is atemporal",
+      "claims": [
+        "Logos.NecessityEternity.the_ground_atemporal"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.NecessityEternity.the_ground_atemporal",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": true,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_8_The ground precedes right and wrong",
+      "claims": [
+        "Logos.Precedence.ofGround_precedes_the_right_wrong_distinction"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.Precedence.ofGround_precedes_the_right_wrong_distinction",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_9_The ground is not the universe",
+      "claims": [
+        "Logos.CosmicExistence.the_ground_is_not_the_universe"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.CosmicExistence.the_ground_is_not_the_universe",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_10_The ground is simple",
+      "claims": [
+        "Logos.DivineSimplicity.divine_simplicity_sole_bearer"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.DivineSimplicity.divine_simplicity_sole_bearer",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_11_The ground is transcendent",
+      "claims": [
+        "Logos.DivineTranscendence.ofGround_sole_transcendent_ground"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.DivineTranscendence.ofGround_sole_transcendent_ground",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_12_The ground is immutable",
+      "claims": [
+        "Logos.DivineImmutability.ofGround_divine_immutability"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.DivineImmutability.ofGround_divine_immutability",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_13_The ground is omnipresent",
+      "claims": [
+        "Logos.FoundationalOmnipresence.ofGround_foundational_omnipresence"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.FoundationalOmnipresence.ofGround_foundational_omnipresence",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_14_The ground is pure actuality",
+      "claims": [
+        "Logos.DivinePureActuality.ofGround_divine_pure_actuality"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.DivinePureActuality.ofGround_divine_pure_actuality",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_15_The ground is omniscient (foundational)",
+      "claims": [
+        "Logos.DivineOmniscience.ofGround_foundational_omniscience"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.DivineOmniscience.ofGround_foundational_omniscience",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": true,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_16_The ground can do all it can (foundational)",
+      "claims": [
+        "Logos.DivineOmnipotence.ofGround_foundational_omnipotence"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.DivineOmnipotence.ofGround_foundational_omnipotence",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": true,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_17_The ground can bring about the satisfiable (causal)",
+      "claims": [
+        "Logos.ThomisticAct.ground_produces_every_satisfiable_form"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.ThomisticAct.ground_produces_every_satisfiable_form",
+      "verdict": "AXIOMATIC",
+      "substantive": [
+        "Logos.ThomisticAct.ground_produces_every_satisfiable_form"
+      ],
+      "stipulated": false,
+      "rendered_badge": "\u26a0\ufe0f **AXIOMATIC (ground_produces_every_satisfiable_form)**"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_18_One God in three Persons",
+      "claims": [
+        "Logos.DivineAgape.agape_entails_tripersonality"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.DivineAgape.agape_entails_tripersonality",
+      "verdict": "AXIOMATIC",
+      "substantive": [
+        "Logos.DivineAgape.AxAgapeEssence",
+        "Logos.DivineAgape.AxProcessionSpirit",
+        "Logos.DivineAgape.AxProcessionWord"
+      ],
+      "stipulated": false,
+      "rendered_badge": "\u26a0\ufe0f **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)**"
+    }
+  ],
+  "totals": {
+    "slots": 64,
+    "PROVEN": 48,
+    "AXIOMATIC": 4,
+    "CONTRADICTION": 0,
+    "COUNTERMODEL": 5,
+    "AXIOM": 1,
+    "OPEN": 0,
+    "ABSENT": 6
+  }
+}

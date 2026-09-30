@@ -489,15 +489,15 @@ Attaching each one to a numbered step would have been tidier, and false.
     ▸ **Personal**  ·  Premises: 0 · 0 steps
         ⚙️ DERIVATION — discharged directly, with no intermediate step
         ∴ RightWrong(s) → Person(s)
-        PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject, Will, subjectWill, will_individuation}`
-        SOURCE  ✅ · [PersonalGroundOfReality.lean#personal_ground_of_right_wrong](formal/Logos/PersonalGroundOfReality.lean#L100)
+        PRICE      ✅ **PROVEN** · 0 substantive axioms · `{Means, Subject, Will, subjectWill, will_individuation}`
+        SOURCE  ✅ · [PersonalGroundOfReality.lean#personal_ground_of_right_wrong](formal/Logos/PersonalGroundOfReality.lean#L100) (+1 co-route at the same price — see ledger)
         ↑ a personal-scope attribute; reached in parallel with the spine, not by it
 
 <a id="epistemic_ground_is_personal"></a>
     ▸ **Personal**  ·  Premises: 0 · 0 steps
         ⚙️ DERIVATION — discharged directly, with no intermediate step
         ∴ GroundsRightWrongAt s (Correct(s, p)) (Incorrect(s, p)) → Person(s)
-        PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Initiates, Means, State, Subject, Will, subjectWill, will_individuation}`
+        PRICE      ✅ **PROVEN** · 0 substantive axioms · `{Initiates, Means, State, Subject, Will, subjectWill, will_individuation}`
         SOURCE  ✅ · [EpistemicPersonalGround.lean#epistemic_ground_is_personal](formal/Logos/EpistemicPersonalGround.lean#L133)
         ↑ a personal-scope attribute; reached in parallel with the spine, not by it
 
@@ -506,7 +506,7 @@ Attaching each one to a numbered step would have been tidier, and false.
         📘 DEFINITIONAL — 1 step, an identity
           1. definitional equality / reflection
         ∴ Person(s) ↔ ThomisticPersonCore(s)
-        PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject, Will, subjectWill}`
+        PRICE      ✅ **PROVEN** · 0 substantive axioms · `{Means, Subject, Will, subjectWill}`
         SOURCE  ✅ · [Person.lean#person_iff_thomisticCore](formal/Logos/Person.lean#L183)
         ↑ a personal-scope attribute; reached in parallel with the spine, not by it
 
@@ -522,41 +522,45 @@ Attaching each one to a numbered step would have been tidier, and false.
           6. hChooses  (conjunction conjunct 1: hChooses)
           7. hFreeWill  (conjunction conjunct 2: hFreeWill)
         ∴ Chooses(s, p, q) ∧ FreeWill(s)
-        PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will](formal/Logos/IndubitableNormativeFreeWill.lean#L115)
+        PRICE      ✅ **PROVEN** _(conditional on GenuineNormativity s p q)_ · 0 substantive axioms · `{Means, Subject}`
+        SOURCE  ✅ · [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will](formal/Logos/IndubitableNormativeFreeWill.lean#L115) (+2 co-routes at the same price — see ledger)
         ↑ a personal-scope attribute; reached in parallel with the spine, not by it
 
-<a id="asietic_summary"></a>
-    ▸ **Asiety**  ·  Premises: 0 · 3 steps
-        💰 PRICED — 3 steps, on a declared axiom
-          1. fun _s p hF hJ => weakChoice_implies_chooses (p := p) (q := ¬ p) hF hJ  (component witness 1: fun _s p hF hJ => weakChoice_implies_chooses (p := p) (q := ¬ p) hF hJ)
-          2. fun _ _ _ h => chooses_implies_trueChoice h  (component witness 2: fun _ _ _ h => chooses_implies_trueChoice h)
-          3. trueChoice_exists  (component witness 3: trueChoice_exists)
-        ∴ (∀ s, p, ChoiceField(s, p, ¬p) → ClaimsCorrect(s, p) → Chooses(s, p, ¬p)) ∧ (∀ s,{p q : Prop}, Chooses(s, p, q) → TrueChoice(s, p, q)) ∧ (∃ s, p, q, TrueChoice(s, p, q))
-        PRICE      ⚠️ **AXIOMATIC (AxTwoSubjects)** — 2 substantive axioms: AxJudicativeBipolarity, AxTwoSubjects · `{AxJudicativeBipolarity, AxTwoSubjects, Initiates, Means, State, Subject, Will, subjectWill}`
-        SOURCE  ⚠️ AxTwoSubjects · [AsieticChoice.lean#asietic_summary](formal/Logos/AsieticChoice.lean#L563)
+<a id="weakChoice_implies_asiety"></a>
+    ▸ **Asiety**  ·  Premises: 1 · 5 steps
+        ⚙️ DERIVATION — 5 compiled steps
+        Assume GenuineNormativity s p q
+          1. s  (component witness 1: s)
+          2. p  (component witness 2: p)
+          3. q  (component witness 3: q)
+          4. rfl  (component witness 4: rfl)
+          5. ⟨⟨h.address.1, h.address.2, h.opposition.1⟩, h.opposition.1, contested_content⟩  (component witness 5: ⟨⟨h.address.1, h.address.2, h.opposition.1⟩, h.opposition.1, contested_content⟩)
+        ∴ Asiety(EntityOf(s))
+        PRICE      ✅ **PROVEN** _(conditional on GenuineNormativity s p q)_ · 0 substantive axioms · `{Means, Subject}`
+        SOURCE  ✅ · [AsietyFreedom.lean#weakChoice_implies_asiety](formal/Logos/AsietyFreedom.lean#L150)
         ↑ a personal-scope attribute; reached in parallel with the spine, not by it
 
 <a id="person_iff_freeIndependentWill"></a>
-    ▸ **Independent will**  ·  Premises: 0 · 6 steps
-        ⚙️ DERIVATION — 6 compiled steps
-          1. fun h => ⟨h.2.2  (component witness 1: fun h => ⟨h.2.2)
-          2. h.1⟩  (component witness 2: h.1⟩)
-          3. fun ⟨hFW  (component witness 3: fun ⟨hFW)
-          4. hI⟩ => ⟨hI  (component witness 4: hI⟩ => ⟨hI)
-          5. freeWill_implies_rationalNature s hFW  (component witness 5: freeWill_implies_rationalNature s hFW)
-          6. hFW⟩  (component witness 6: hFW⟩)
+    ▸ **Independent will**  ·  Premises: 0 · 2 steps
+        ⚙️ DERIVATION — 2 compiled steps
+          1. fun h => ⟨h.2.2, h.1⟩  (component witness 1: fun h => ⟨h.2.2, h.1⟩)
+          2. fun ⟨hFW, hI⟩ => ⟨hI, freeWill_implies_rationalNature s hFW, hFW⟩  (component witness 2: fun ⟨hFW, hI⟩ => ⟨hI, freeWill_implies_rationalNature s hFW, hFW⟩)
         ∴ Person(s) ↔ FreeIndependentWill(s)
-        PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject, Will, subjectWill}`
+        PRICE      ✅ **PROVEN** · 0 substantive axioms · `{Means, Subject, Will, subjectWill}`
         SOURCE  ✅ · [Person.lean#person_iff_freeIndependentWill](formal/Logos/Person.lean#L166)
         ↑ a personal-scope attribute; reached in parallel with the spine, not by it
 
-<a id="DominionOverActs"></a>
-    ▸ **Dominion over acts** / authoritative personhood  ·  Premises: 0 · 0 steps
-        📘 DEFINITIONAL — a definition, with no step to show
-        ∴ DominionOverActs ≡ FreeWill(s)
-        PRICE      **DEFINITIONAL** — 0 substantive axioms · `{Means, Subject}`
-        SOURCE  📘 · [Person.lean#DominionOverActs](formal/Logos/Person.lean#L56)
+<a id="rightwrong_gives_rational_domination"></a>
+    ▸ **Dominion over acts** / authoritative personhood  ·  Premises: 1 · 4 steps
+        ⚙️ DERIVATION — 4 compiled steps
+        Assume RightWrong(s)
+          1. witness components ⟨p, q, h0⟩  (existential elimination from h)
+          2. witness components ⟨hChooses, hFreeWill⟩  (existential elimination from indubitable_normative_free_will h0)
+          3. ⟨⟨p, hChooses.1⟩, ⟨p, q, hChooses.1, hChooses.2.1, Or.inr hChooses.2.2⟩⟩  (conjunction conjunct 1: ⟨⟨p, hChooses.1⟩, ⟨p, q, hChooses.1, hChooses.2.1, Or.inr hChooses.2.2⟩⟩)
+          4. hFreeWill  (conjunction conjunct 2: hFreeWill)
+        ∴ RationalNature(s) ∧ DominionOverActs(s)
+        PRICE      ✅ **PROVEN** _(conditional on RightWrong(s))_ · 0 substantive axioms · `{Means, Subject}`
+        SOURCE  ✅ · [PersonalNormativeGround.lean#rightwrong_gives_rational_domination](formal/Logos/PersonalNormativeGround.lean#L455)
         ↑ a personal-scope attribute; reached in parallel with the spine, not by it
 
 <a id="person_grounds_normative_polarity"></a>
@@ -564,7 +568,7 @@ Attaching each one to a numbered step would have been tidier, and false.
         ⚙️ DERIVATION — discharged directly, with no intermediate step
         Assume Person(s)
         ∴ GroundsRightWrong s
-        PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject, Will, subjectWill}`
+        PRICE      ✅ **PROVEN** _(conditional on Person(s))_ · 0 substantive axioms · `{Means, Subject, Will, subjectWill}`
         SOURCE  ✅ · [PersonalNormativeGround.lean#person_grounds_normative_polarity](formal/Logos/PersonalNormativeGround.lean#L529)
         ↑ a personal-scope attribute; reached in parallel with the spine, not by it
 
@@ -1551,7 +1555,7 @@ GIVES        🧱 a bound on the reading, not a death
 
 PROOF
     🧱 COUNTERMODEL — a hostile model, not a proved claim
-      1. witness tuple ⟨Unit, fun _ => Bool, (proof of this field, from the next line), fun _ => ⟨true, false, Bool.noConfusion⟩  (existential/conjunction refinement with Unit, fun _ => Bool, (proof of this field, from the next line), fun _ => ⟨true, false, Bool.noConfusion)
+      1. witness tuple ⟨Unit, fun _ => Bool, (proof of this field, from the next line), fun _ => ⟨true, false, Bool.noConfusion⟩⟩  (existential/conjunction refinement with Unit, fun _ => Bool, (proof of this field, from the next line), fun _ => ⟨true, false, Bool.noConfusion⟩)
       2. ()  (conjunction conjunct 1: ())
       3. fun y => Subsingleton.elim y ()  (conjunction conjunct 2: fun y => Subsingleton.elim y ())
     ∴ ∃ Ground, Persons, (∃ g, ∀ g', g' = g) ∧ (∀ g, ∃ (p1 p2 : Persons g), p1 ≠ p2)

@@ -36,7 +36,9 @@ from scripts.build_deduction import (
     _CTX,
     axiom_full_map,
     AX_ID,
-    OUT_PATH
+    OUT_PATH,
+    build_boundary_by_decl,
+    INCOMPARABLE,
 )
 
 
@@ -270,6 +272,224 @@ def test_sensitivity(decls: dict, node_map: dict, graph: dict, sections: list):
     print("  ✓ Sensitivity verified: axiom footprint mutation dynamically updated local bridge pricing.")
 
 
+def test_classifier_agreement(decls, node_map, graph, sections):
+    """`strength_of` and `refutation_kind` must agree on every routed declaration,
+    and the gate must fire when they are forced apart.
+
+    Both classify one fact — machine-refutation vs bound — and while they could
+    disagree silently a row could print a `🧱` beside a `✅`. They did: the
+    `refutation_kind` separation test was `goal.startswith("∃")`, so any
+    existential-headed theorem read as a countermodel. That returned
+    `COUNTERMODEL · ⇏` for `exactly_one_universal_modal_ground`
+    (`∃! g, UniversalModalGround g` — the one-ground claim Γ actually proves) and
+    for `the_creation_countermodel_is_a_populated_contingent_world`, while
+    `strength_of` said `PROVEN` for both.
+    """
+    build_boundary_by_decl(sections, decls)
+    bd._COMPILED_BY_FULL.clear()
+    bd._CTX["compiled"] = {}
+
+    routed, disagreements = 0, []
+    for row in bd.CLASSICAL_ATTRIBUTES:
+        claim = bd._classical_claim_of(row)
+        if not claim:
+            continue
+        cp = bd.compiled_proof(claim)
+        if not cp:
+            continue
+        shape = bd.claim_shape_of(claim, premises=bd.route_premises(cp))
+        try:
+            tier = bd.select_route(shape, bd.route_candidates(shape))
+        except SystemExit:
+            continue
+        sep = bd.claim_is_separation(shape)
+        for p in tier:
+            routed += 1
+            cls = bd.strength_of(p, shape)
+            kind = bd.refutation_kind(p)
+            if (cls == "CONTRADICTION") != (kind in bd._REFUTATION_KINDS):
+                disagreements.append(f"{p.full_name}: {cls} vs {kind}")
+            elif sep and kind in bd._NOT_A_BOUND_KINDS:
+                disagreements.append(f"{p.full_name}: separation badged {cls} but kind {kind}")
+            elif not sep and kind == "COUNTERMODEL · ⇏":
+                disagreements.append(f"{p.full_name}: kind {kind} but claim not a separation")
+    assert not disagreements, (
+        "strength ladder and refutation kind disagree on routed declarations: "
+        + "; ".join(disagreements))
+    assert routed > 0, "no routed declarations found — the census proved nothing"
+
+    # The two positive-existence theorems that the `∃` proxy used to misread. Named
+    # explicitly: a count going to zero would also mean the check stopped running.
+    for full, expected_kind in (
+        ("Logos.FoundationalUnicity.exactly_one_universal_modal_ground",
+         "🪞 INSTANTIATION — not a death"),
+        ("Logos.ConditionalTheology."
+         "the_creation_countermodel_is_a_populated_contingent_world",
+         "🪞 INSTANTIATION — not a death"),
+        ("Logos.FoundationalUnicity.unicity_does_not_force_unitarian_monad",
+         "COUNTERMODEL · ⇏"),
+    ):
+        p = bd.compiled_proof(full)
+        assert p is not None, f"{full} is not compiled — the census is not exercising it"
+        assert bd.refutation_kind(p) == expected_kind, (
+            f"{full}: refutation_kind is {bd.refutation_kind(p)!r}, "
+            f"expected {expected_kind!r}")
+        assert bd._shape_polarity(p) == "positive", (
+            f"{full}: expected audited polarity 'positive', got "
+            f"{bd._shape_polarity(p)!r} — the ∃ proxy is back if this is 'separation'")
+    print(f"  ✓ Classifier agreement: {routed} routed declarations, 0 disagreements; "
+          f"∃-proxy regression asserted by name.")
+
+    # The gate itself. Three ways it must fail, one per clause it asserts, so a
+    # future edit that weakens one clause is caught by its own scenario.
+    COUNTER = "Logos.FoundationalUnicity.unicity_does_not_force_unitarian_monad"
+    cp = bd.compiled_proof(COUNTER)
+    claim = bd.claim_shape_of(COUNTER, premises=bd.route_premises(cp))
+    entries = [(cp, bd.claim_shape_of(COUNTER, premises=bd.route_premises(cp)),
+                bd._relation_of(cp, claim))]
+    saved = (bd.strength_of, bd.refutation_kind, bd.claim_is_separation)
+    try:
+        # (a) the 🧱-beside-✅ defect: a separation claim whose terminator label
+        #     reads as a proof.
+        bd.refutation_kind = lambda pr, denial_hypothesis=None: "🪞 INSTANTIATION — not a death"
+        _expect_gate_failure(entries, claim, "a 🧱 row labelled an instantiation")
+        bd.refutation_kind = saved[1]
+
+        # (b) a claim that is not a separation reading as a countermodel.
+        bd.claim_is_separation = lambda cl: False
+        _expect_gate_failure(entries, claim, "a non-separation claim read as a countermodel")
+        bd.claim_is_separation = saved[2]
+
+        # (c) a refutation terminator with no CONTRADICTION class.
+        bd.strength_of = lambda pr, cl, **kw: "PROVEN"
+        bd.refutation_kind = lambda pr, denial_hypothesis=None: "⊥ CONTRADICTION"
+        _expect_gate_failure(entries, claim, "a ⊥ terminator not badged CONTRADICTION")
+    finally:
+        bd.strength_of, bd.refutation_kind, bd.claim_is_separation = saved
+    print("  ✓ Agreement gate fails loudly on all three forced disagreements.")
+
+
+def _expect_gate_failure(entries, claim, why):
+    try:
+        bd._check_classifier_agreement(entries, claim, "selftest")
+    except SystemExit as e:
+        assert "disagree" in str(e), f"gate failed for the wrong reason ({why}): {e}"
+    else:
+        raise AssertionError(
+            f"_check_classifier_agreement did not fail on: {why}")
+
+
+def test_claim_relative_ladder(decls, node_map, graph, sections):
+    """`strength_of` must be a function of (route, **claim**), and the claim must
+    actually reach it.
+
+    Threading the claim through the ladder is a **no-op on the current artifact**,
+    and that is the trap: on all 32 routed `CLASSICAL_ATTRIBUTES` rows the winning
+    route *is* the claim declaration, so every assertion about the resulting
+    badges passes identically whether the claim is threaded or ignored. A census
+    cannot tell the two implementations apart. These assertions can.
+    """
+    import dataclasses
+
+    build_boundary_by_decl(sections, decls)
+    bd._COMPILED_BY_FULL.clear()
+    bd._CTX["compiled"] = {}
+
+    ONE_GROUND = "Logos.FoundationalUnicity.exactly_one_universal_modal_ground"
+    COUNTER = "Logos.FoundationalUnicity.unicity_does_not_force_unitarian_monad"
+
+    # (1) The same route, two claims: flipping ONLY the claim's polarity flips the
+    #     class. If `claim` were ignored, both calls would agree and this fails.
+    pr = bd.compiled_proof(ONE_GROUND)
+    assert pr is not None, f"{ONE_GROUND} is not compiled"
+    own = bd.claim_shape_of(ONE_GROUND, premises=bd.route_premises(pr))
+    as_sep = dataclasses.replace(own, polarity="separation")
+    assert own.polarity == "positive", (
+        f"expected the one-ground claim to audit as positive, got {own.polarity!r}")
+    assert bd.strength_of(pr, own) == "PROVEN"
+    assert bd.strength_of(pr, as_sep) == "COUNTERMODEL", (
+        "strength_of ignored the claim: a free route to a separation-claim read as "
+        "the same class it takes for a positive claim")
+    print("  ✓ strength_of is claim-relative: one route, two claims, two classes.")
+
+    # (2) Both separation channels are load-bearing, and each is asserted on a
+    #     declaration where the OTHER channel alone would answer wrongly. C212
+    #     concludes a *positive* ∃ and is a countermodel only by GAPMAP's register;
+    #     pantheism's claim is a separation by audited polarity and is not in the
+    #     boundary register.
+    cp = bd.compiled_proof(COUNTER)
+    assert cp is not None, f"{COUNTER} is not compiled"
+    counter_claim = bd.claim_shape_of(COUNTER, premises=bd.route_premises(cp))
+    assert bd._shape_polarity(cp) == "positive"
+    assert bd.claim_is_separation(counter_claim) is True, (
+        "C212 must be a separation via GAPMAP's register even though its goal audits "
+        "as positive — the polarity channel alone would make Strict monotheism read "
+        "as PROVEN")
+    assert bd.strength_of(cp, counter_claim) == "COUNTERMODEL"
+
+    PANTHEISM = "Logos.CosmicExistence.the_ground_is_not_the_universe"
+    pp = bd.compiled_proof(PANTHEISM)
+    assert pp is not None, f"{PANTHEISM} is not compiled"
+    pant = bd.claim_shape_of(PANTHEISM, premises=bd.route_premises(pp))
+    assert pant.polarity == "separation"
+    assert PANTHEISM not in bd.boundary_by_decl(), (
+        "the pantheism claim is expected NOT to be in the boundary register; if it "
+        "now is, this test no longer isolates the polarity channel")
+    assert bd.claim_is_separation(pant) is True
+    print("  ✓ Both separation channels asserted on the declaration that needs them.")
+
+    # (3) A terminator with no claim to refute must fail the build, not be badged.
+    #     A route that merely *proves* something has no terminator, so the guard
+    #     cannot be exercised with it — it takes a `⊥`-concluding theorem.
+    refuter = None
+    for full, rec in bd.load_goal_audit().items():
+        if full.startswith("Logos.") and (rec.get("goal") or "").strip() == "False":
+            cand = bd.compiled_proof(full)
+            if cand is not None and bd.refutation_kind(cand) in bd._REFUTATION_KINDS:
+                refuter, refuter_full = cand, full
+                break
+    assert refuter is not None, (
+        "no Logos declaration with a `False` goal was compiled — the refutation "
+        "guard cannot be exercised on this artifact")
+    print(f"  ✓ refutation guard exercised on {refuter_full.rsplit('.', 1)[-1]}")
+    stale_claim = dataclasses.replace(
+        own, conjuncts=tuple(
+            dataclasses.replace(c, head="SomeOtherHead")
+            for c in own.conjuncts))
+    assert bd._relation_of(refuter, stale_claim) == INCOMPARABLE, (
+        "the guard's precondition does not hold: the refuter is not INCOMPARABLE "
+        "to the substituted claim, so this scenario tests nothing")
+    try:
+        bd.strength_of(refuter, stale_claim)
+    except SystemExit as e:
+        assert INCOMPARABLE in str(e), f"failed for the wrong reason: {e}"
+    else:
+        raise AssertionError(
+            "strength_of accepted a `⊥` route that is INCOMPARABLE to the named "
+            "claim; the refutation guard does not fire")
+    print("  ✓ A terminator that bears on no named claim fails the build.")
+
+
+def test_select_slot_route(decls, node_map):
+    # Assertion: no multi-claim slot in CLASSICAL_ATTRIBUTES
+    multi = [r.get("attribute") for r in bd.CLASSICAL_ATTRIBUTES if r.get("claims") or r.get("subclaims")]
+    assert len(multi) == 0, f"unexpected multi-claim rows: {multi}"
+
+    # Test select_slot_route logic
+    p_free = bd.compiled_proof("Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will")
+    claim = bd.claim_shape_of("Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will", premises=bd.route_premises(p_free))
+
+    # All conjunct routes PROVEN -> PROVEN
+    weak_cls, tier = bd.select_slot_route(claim, [[p_free], [p_free]], node_map=node_map)
+    assert weak_cls == "PROVEN", f"expected PROVEN, got {weak_cls}"
+
+    # One conjunct route missing -> OPEN
+    weak_cls2, tier2 = bd.select_slot_route(claim, [[p_free], []], node_map=node_map)
+    assert weak_cls2 == "OPEN", f"expected OPEN, got {weak_cls2}"
+    assert len(tier2) == 0
+    print("  ✓ select_slot_route (Level 2) verified; no multi-claim slot in CLASSICAL_ATTRIBUTES asserted.")
+
+
 def main():
     decls = parse_lean_sources()
     sections = parse_gapmap()
@@ -302,6 +522,9 @@ def main():
     test_minimal_assumption_dominance()
     test_provenance(decls, node_map, graph)
     test_sensitivity(decls, node_map, graph, sections)
+    test_select_slot_route(decls, node_map)
+    test_classifier_agreement(decls, node_map, graph, sections)
+    test_claim_relative_ladder(decls, node_map, graph, sections)
     print("\nALL GENERITY, PROVENANCE, AND SENSITIVITY TESTS PASSED SUCCESSFULLY! (0 errors)")
 
 

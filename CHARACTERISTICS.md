@@ -242,7 +242,7 @@ Formalized in `Logos.FoundationalUnicity` (`formal/Logos/FoundationalUnicity.lea
 > `def` it leaves the axiom count at 25 and raises the stipulation registry from 5 to 6), which would
 > make C320 an unconditional corollary and retire the row.
 
-Separation: `TheologicalModalHardening.necessary_existence_not_entails_uniqueness` (`formal/Logos/TheologicalModalHardening.lean:406`, `{}`) proves uniqueness does not follow from bare necessity alone. Generated `README.md` corroborates: Foundational unicity ✅ PROVEN, Strict numerical unitarianism ⊨ INDEPENDENT, One God / strict monotheism ⏸ DEFERRED.
+Separation: `TheologicalModalHardening.necessary_existence_not_entails_uniqueness` (`formal/Logos/TheologicalModalHardening.lean:406`, `{}`) proves uniqueness does not follow from bare necessity alone. Generated `README.md` corroborates: Foundational unicity ✅ PROVEN, Strict monotheism 🧱 INDEPENDENT, One God ✅ PROVEN.
 
 ### Argument
 

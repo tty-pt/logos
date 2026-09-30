@@ -41,7 +41,7 @@ Regeneration (after any Lean/GAPMAP change):
 ```sh
 export PATH="$HOME/.elan/bin:$PATH"
 cd formal && lake exe depviz --roots Logos --json-out depgraph.json --dot-out depgraph.dot
-cd .. && python3 scripts/audit_footprints.py && python3 scripts/build_deduction.py
+cd .. && python3 scripts/audit_footprints.py && python3 scripts/audit_goals.py && python3 scripts/build_deduction.py
 ```
 
 - **The Cremation is derivation, not badge (binding, 2026-09-30; `CREMATION.md`,
@@ -62,6 +62,67 @@ cd .. && python3 scripts/audit_footprints.py && python3 scripts/build_deduction.
   *membership* is maintained by hand. **Adding a declaration to a chain module does not add it to
   `README.md`** — extend the list in the same change, or the reader-facing chain silently omits
   the new step. (`kernel-audit.md` is unaffected; it reads GAPMAP.)
+- **`scripts/audit_goals.py` performance is measured, not guessed**
+  (`ASIETY_ROUTE_SELECTION_PLAN.md` §12b.0). The full 6 397-declaration walk takes
+  **33 s**. The 30-minute figure that preceded it was **not a slow reader**: `headSym`'s
+  catch-all matched on `e.getAppFn` but passed the **whole application** to `getFVar!`,
+  so a conclusion whose function is a local variable panicked
+  (`Lean.Expr.fvarId! … fvar expected`). Every generated recursor's conclusion after
+  `forallTelescope` is `motive t` — an applied fvar — so every recursor panicked, and each
+  panic formatted a backtrace hundreds of frames deep. Lesson: **a probe measures the
+  declaration you point it at**, and seven probes aimed at one constant-headed theorem
+  could not have found a branch they never entered. Take the shape from the backtrace.
+  Also measured and now settled: **`PrettyPrinter.ppExpr` is 0.4 % of the walk** (the
+  longest goal over all 6 397 records is 112 chars, the median 9 — do not "optimise" the
+  width). Run **one** `lake env lean` at a time — two overlapping processes on the same
+  `.lake` tree produced a 21 % swing between identical configurations.
+- `formal/goal_audit.json` is produced by `scripts/audit_goals.py`: a temp module
+  importing `Logos`, run through `lake env lean`, which emits one `GA`-prefixed line
+  per declaration per field. Two Lean facts drive its shape and both are expensive to
+  relearn. (1) `→` elaborates to a `forallE` whose binder carries a **hygienic numeral
+  name** (`a._@._internal._hyg.0`), *not* `` `Arrow `` — so an implication must be
+  detected by binder name (`isArrowBinder`), or its antecedent is peeled as a Π-binder
+  and recorded as a sort the claim ranges over, which is a false shape for gate G2.
+  (2) `Exists α pred`: `pred` is `two[1]`, not `two[0]`; reading `two[0]` takes the
+  binder *type* as the body and a refutation's whole spine collapses to the bound
+  variable. **Quantifiers are peeled before `And` is split** — otherwise a `def` whose
+  body is `∃ s p q, e = … ∧ P s p q` records `valueHeads == ["And"]` and its content
+  is gone. Record shape: `conjuncts` (ordered: `quant`, `sorts`, `head`, `spine`) is
+  the field the selector is built on; `headSyms` is display-only; `boundSorts` holds
+  sorts **only**, premises live in `hypothesis[].head`/`.spine`. **(3) Two reader scope
+  limits, both asserted in `test_goal_audit.py`:** `Meta.forallTelescope` peels only
+  *leading* binders, so `hypothesis` is **not** a premise inventory — a premise under a
+  conjunction is invisible (`BipolarityRetorsion.A18_is_independent_optional_semantic_premise`);
+  and a bare `Exists` in `conjuncts[].sorts` is a binder *named by* an `∃` proposition,
+  not a sort. G1/G2 must not read either channel as one. **(4) Do not pre-peel a `def`'s
+  value** — hand the body to `conjunctShapes`, which peels `lam`/`forallE`/`letE` itself
+  and records each binder's sorts. A dedicated peel loses them: `∀ t₁ t₂ : Time, P ↔ Q`
+  was reported as an unquantified `Iff`. **(5) `letE` must be peeled with `withLetDecl`**,
+  never by substitution: an inlined body refers to an `fvar` the local context does not
+  hold, and `get!` throws.
+  **`scripts/test_goal_audit.py` gates the artifact.** Any claim about
+  `goal_audit.json` — in code, in `ASIETY_ROUTE_SELECTION_PLAN.md`, in a review — must
+  be asserted there; do not read records and assert by eye. Six eye-checked spot-checks
+  were all wrong and one had a truncated string's tail filled in by hand
+  (`STUPID_SIMON_SAYS.md`; plan §12b). Four of the assertions added during that work were
+  themselves wrong — a bare-`_uniq` substring that matched the user name `means_unique`,
+  `Iff` banned outright when a biconditional is a legitimate claim, `opaque` excluded from
+  the value channel though it has a value, and an unquantified-`Iff` rule Γ violates.
+  Narrowing a detector to the string the compiler actually emits is legitimate; deleting a
+  claim to get green is not. Note that `lake env lean` block-buffers stdout, so
+  a backgrounded run shows nothing until it exits — time anything you measure from
+  inside Lean via `IO.FS.writeFile`, and kill background jobs by PID (`pkill -f` matches
+  its own shell). Six eye-checked spot-checks
+  were all wrong and one had a truncated string's tail filled in by hand
+  (`STUPID_SIMON_SAYS.md`; plan §12b). Four of the assertions added during that work were
+  themselves wrong — a bare-`_uniq` substring that matched the user name `means_unique`,
+  `Iff` banned outright when a biconditional is a legitimate claim, `opaque` excluded from
+  the value channel though it has a value, and an unquantified-`Iff` rule Γ violates.
+  Narrowing a detector to the string the compiler actually emits is legitimate; deleting a
+  claim to get green is not. Note that `lake env lean` block-buffers stdout, so
+  a backgrounded run shows nothing until it exits — time anything you measure from
+  inside Lean via `IO.FS.writeFile`, and kill background jobs by PID (`pkill -f` matches
+  its own shell).
 - `formal/depgraph.json`/`.dot` are produced by the LeanDepViz dep (see `formal/lakefile.toml`),
   rebuilt with `lake build depviz` after a toolchain/dependency change.
 - `formal/axiom_audit.json` is produced by `scripts/audit_footprints.py`: a temp

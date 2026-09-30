@@ -377,6 +377,45 @@ def main() -> int:
                   f"vocabulary row '{head[:40]}' ({kind}) must not print an equation: "
                   f"a {kind} fixes none")
 
+    # Item 4: No doubled markers in rendered markdown
+    check("◆ AXIOM **◆ AXIOM**" not in readme, "no doubled marker ◆ AXIOM **◆ AXIOM** in README.md")
+    check("◆ AXIOM **◆ AXIOM**" not in ledger, "no doubled marker ◆ AXIOM **◆ AXIOM** in ledger.md")
+    check(not re.search(r"[◆✅⚠️🧱📘⏸❌]\s+[A-Z_]+\s+\*\*[◆✅⚠️🧱📘⏸❌]\s+[A-Z_]+\*\*", readme),
+          "no doubled marker pattern in README.md")
+    check(not re.search(r"[◆✅⚠️🧱📘⏸❌]\s+[A-Z_]+\s+\*\*[◆✅⚠️🧱📘⏸❌]\s+[A-Z_]+\*\*", ledger),
+          "no doubled marker pattern in ledger.md")
+
+    # Item 5: Block anchor and block SOURCE agree
+    block_matches = re.findall(
+        r"<a id=\"([A-Za-z0-9_]+)\"></a>\s*\n\s*▸[^\n]+\n(?:[^\n]+\n)*?\s*SOURCE\s+[^\n]*?\[[A-Za-z0-9_.]+#([A-Za-z0-9_\x27]+)\]",
+        readme)
+    check(len(block_matches) >= 10, f"expected at least 10 anchored component blocks in README.md, got {len(block_matches)}")
+    for anchor, src in block_matches:
+        check(anchor == src, f"block anchor <a id=\"{anchor}\"> does not match block SOURCE declaration {src}")
+
+    # Item 12: No unbalanced ⟨/⟩ fragments in rendered natural deduction steps
+    for fname, text in [("README.md", readme), ("ledger.md", ledger)]:
+        for ln in text.splitlines():
+            m = re.match(r"^\s*\d+\.\s*(.*)", ln)
+            if m:
+                step = m.group(1)
+                check(step.count("⟨") == step.count("⟩"), f"unbalanced ⟨/⟩ in step ({fname}): {ln}")
+
+    # Item 13: test_badges_match_selection
+    census_path = ROOT / "formal" / "badge_census.json"
+    if census_path.exists():
+        census = json.loads(census_path.read_text(encoding="utf-8"))
+        for s in census.get("slots", []):
+            slot_id = s["id"]
+            if s["surface"] == "classical_attributes":
+                check(slot_id in ledger or slot_id in readme, f"census slot {slot_id} missing from rendered surfaces")
+            elif s["surface"] == "characteristic_sections":
+                winner_short = s["winner"].rsplit(".", 1)[-1]
+                check(winner_short in readme, f"characteristic slot winner {winner_short} missing from README")
+            elif s["surface"] == "seven_pillars":
+                num = slot_id.split("_")[1]
+                check(f"**{num}." in ledger, f"pillar {num} missing from ledger")
+
     if errors:
         print(f"\nFAIL: {len(errors)} argument-surface regression(s)")
         return 1

@@ -3331,6 +3331,31 @@ class ProofIR:
     subst_axioms: list[str] = field(default_factory=list)
     boundary: tuple[str, str, str, str] | None = None  # (left, right, link, link_label)
 
+def split_top_level_commas(s: str) -> list[str]:
+    """Split string on commas that are not nested inside brackets ⟨⟩, (), [], {}."""
+    tokens = []
+    cur = []
+    depth = 0
+    for ch in s:
+        if ch in "⟨([{":
+            depth += 1
+            cur.append(ch)
+        elif ch in "⟩)]}":
+            depth = max(0, depth - 1)
+            cur.append(ch)
+        elif ch == "," and depth == 0:
+            token = "".join(cur).strip()
+            if token:
+                tokens.append(token)
+            cur = []
+        else:
+            cur.append(ch)
+    last = "".join(cur).strip()
+    if last:
+        tokens.append(last)
+    return tokens
+
+
 def compile_lean_proof(full: str, decls: dict, node_map: dict, graph: dict, def_registry: dict) -> ProofIR:
     """Compiles a Lean declaration and its proof term/tactics into a domain-independent ProofIR."""
     d = decls[full]
@@ -3357,6 +3382,10 @@ def compile_lean_proof(full: str, decls: dict, node_map: dict, graph: dict, def_
         doc_lead=doc_lead_text,
         subst_axioms=subst,
     )
+    # A countermodel boundary is a fact about the declaration, so it is attached here
+    # rather than by whichever section happens to iterate GAPMAP first — see
+    # `boundary_by_decl` for the measured cost of the old ordering.
+    proof.boundary = boundary_by_decl().get(full)
 
     # Register definitions in the definition registry
     if kind == "def":
@@ -3476,7 +3505,7 @@ def compile_lean_proof(full: str, decls: dict, node_map: dict, graph: dict, def_
         m_exact_tuple = re.match(r"^exact\s+⟨(.*)⟩$", l)
         if m_exact_tuple:
             inner = m_exact_tuple.group(1)
-            tokens = [re.sub(r"[⟨⟩]", "", t).strip() for t in inner.split(",") if re.sub(r"[⟨⟩]", "", t).strip()]
+            tokens = [t.strip() for t in split_top_level_commas(inner) if t.strip()]
             for idx, tok in enumerate(tokens, 1):
                 proof.steps.append(ProofStepIR(
                     var_name="",
@@ -3513,7 +3542,7 @@ def compile_lean_proof(full: str, decls: dict, node_map: dict, graph: dict, def_
 
             # Deconstruct constructor ⟨a, b, ...⟩
             if term.startswith("⟨") and term.endswith("⟩"):
-                args = [x.strip() for x in term[1:-1].split(",")]
+                args = split_top_level_commas(term[1:-1])
                 arg_str = ", ".join(args)
                 if "∃" in v_type or "Exists" in v_type:
                     proof.steps.append(ProofStepIR(
@@ -3603,9 +3632,9 @@ def compile_lean_proof(full: str, decls: dict, node_map: dict, graph: dict, def_
             ))
             continue
 
-        m_refine = re.match(r"^\s*refine\s+⟨(.*?)⟩", l)
+        m_refine = re.match(r"^\s*refine\s+⟨(.*)⟩\s*$", l)
         if m_refine:
-            args = [x.strip() for x in m_refine.group(1).split(",")]
+            args = split_top_level_commas(m_refine.group(1))
             # A `?_` in a `refine` names no data: the tactic has fixed every data
             # field and left the last *proof obligation* to the `exact` on the next
             # line (FoundationalUnicity.lean:320). Printing the bare hole told the
@@ -3666,9 +3695,9 @@ def compile_lean_proof(full: str, decls: dict, node_map: dict, graph: dict, def_
             continue
 
         # Term-mode constructor: ⟨arg1, arg2, ...⟩
-        m_tuple = re.match(r"^\s*⟨(.*?)⟩\s*$", l)
-        if m_tuple:
-            args = [x.strip() for x in m_tuple.group(1).split(",") if x.strip()]
+        stripped_l = l.strip()
+        if stripped_l.startswith("⟨") and stripped_l.endswith("⟩"):
+            args = split_top_level_commas(stripped_l[1:-1])
             arg_str = ", ".join(args)
             if not proof.steps:
                 for a_idx, arg in enumerate(args, 1):
@@ -3981,6 +4010,1067 @@ def extract_boundary_generically(proof_name: str, doc: str = "", statement: str 
 
     return format_discrete_math(humanise(strip_ns(proof_name))), "Independence"
 
+
+_BOUNDARY_BY_DECL: dict = {}
+
+
+def build_boundary_by_decl(sections: list, decls: dict) -> dict:
+    """`{full_name: boundary}` for every declaration GAPMAP anchors as a
+    countermodel.
+
+    A boundary is a fact about a *declaration*, so it must be available the moment
+    that declaration is compiled, whoever asked for it. It used not to be:
+    `build_all_sections` assigned `proof.boundary` as a side effect of iterating
+    GAPMAP claims, and `strength_of` reads that field. So whether a declaration
+    classified as a countermodel depended on whether some *other* function had
+    already compiled it — a property of the compile order, not of the kernel.
+
+    Measured cost of that, with the caches cleared between runs so on-demand
+    compilation is genuinely exercised: 2 of 39 `CLASSICAL_ATTRIBUTES` rows flipped
+    between `COUNTERMODEL` and `PROVEN` — Strict monotheism and Incarnation. Both are
+    `{}` countermodels rather than proofs (`unicity_does_not_force_unitarian_monad`,
+    C212; `preceding_theory_not_entails_incarnation`, C112), so the `🧱` they print is
+    correct, and a build that compiled them in a different order would have claimed
+    `✅ PROVEN` for two claims Γ does not prove.
+
+    Takes the *resolved* `sections` — the same claim dicts `main` stamped `_full`
+    onto — rather than calling `parse_gapmap()` again: that re-parses into fresh
+    dicts, so a self-parse finds no `_full` and silently builds an empty map. It is
+    called once from `main`, before any compilation.
+    """
+    out: dict = {}
+    for sec in sections:
+        for c in sec.get("claims", []):
+            full = c.get("_full")
+            if not full or full not in decls:
+                continue
+            name = full.rsplit(".", 1)[-1]
+            if str(c.get("status") or "").strip() != "COUNTERMODEL" and \
+                    "_not_entails_" not in name:
+                continue
+            d = decls[full]
+            left, right = extract_boundary_generically(name, d.get("doc", ""),
+                                                       d.get("statement", ""))
+            prose = c.get("prose") or None
+            out[full] = (left, right, prose,
+                         f"{name} countermodel" if prose else None)
+    _BOUNDARY_BY_DECL.clear()
+    _BOUNDARY_BY_DECL.update(out)
+    return out
+
+
+def boundary_by_decl() -> dict:
+    """The map built by `build_boundary_by_decl`; `{}` if it has not been built."""
+    return _BOUNDARY_BY_DECL
+
+
+# ===========================================================================
+# Rule R — route selection (ASIETY_ROUTE_SELECTION_PLAN.md §1, §5, §6.2)
+# ===========================================================================
+#
+# Before this section a badge was a function of ONE declaration: pick a link,
+# ask `classify_proof_edge` what it costs, print that. Four defects followed,
+# all recorded in plan §3.1: a slot whose anchor was a *conjunction* was priced
+# by the union of its conjuncts' footprints (so the Asiety identification, free
+# at `{Means, Subject}`, displayed at `AxTwoSubjects`), the badge named one axiom
+# while the price cell beside it named two, `_GLANCE_RANK` defaulted an
+# unrecognised category to the *least* demanding rank, and an ambiguous name
+# silently resolved to the first suffix match. None of them was a rendering bug.
+# Each was the absence of a rule about which route may speak for a claim.
+#
+# Rule R supplies it: a badge is a pure function of the **strongest admissible
+# route** to **the claim the slot names** (plan §1). Three levels — the route
+# must assert the claim *as stated* (Level 0), the strongest such route wins
+# (Level 1), and a slot naming several claims is badged on its weakest conjunct
+# (Level 2). Nothing else may override it.
+#
+# Two rules from `AGENTS.md` that this section is built around, and which are
+# easy to get wrong the second time:
+#
+#   - `record["hypothesis"]` is **not** a premise inventory. The Lean reader
+#     peels only *leading* `forall`s, so a premise under a conjunction is
+#     invisible there and surfaces as an `Exists` in `conjuncts[].sorts`
+#     (`BipolarityRetorsion.A18_is_independent_optional_semantic_premise`, the
+#     exact case, asserted by name in `test_goal_audit.py`). Level 0 therefore
+#     reads premises off the compiled `ProofIR`, never off that channel.
+#   - `conjuncts[].sorts` holds the sorts a quantifier *binds*, so a bare
+#     `Exists` there is a binder named by an `∃` proposition, not a sort. G1's
+#     foreign-sort test judges by name against Γ's own sort list.
+#
+# `conjuncts` is **ordered** and that is load-bearing, not tidiness. A
+# `frozenset` of heads is blind for 4 698 of 6 397 records — 1 830 of them
+# `thm`/`axiom` whose heads are entirely connectives — so C294 (the refutation
+# §8.2 leans on) would read as `{Not}`, indistinguishable from any other
+# three-fold negation. It also collapses 219 records' conjuncts, in 21 of them
+# merging a `∀` with an `∃`. `headSyms` survives as a display field only.
+
+GOAL_AUDIT_PATH = FORMAL / "goal_audit.json"
+
+_GOAL_AUDIT: dict = {}
+
+
+def load_goal_audit() -> dict:
+    """The audited conclusion shape of every declaration, keyed by full name.
+
+    A *flat* `name -> record` map (the sentinel-free shape `audit_goals.py` and
+    `test_goal_audit.py` both rely on). `main` refuses to build against a stale
+    artifact — a badge may not be computed from a goal shape the kernel no
+    longer has — so this loader trusts what it is given and validates shape
+    instead.
+    """
+    if _GOAL_AUDIT:
+        return _GOAL_AUDIT
+    if not GOAL_AUDIT_PATH.exists():
+        raise SystemExit(
+            f"FATAL: {GOAL_AUDIT_PATH} missing. A badge is a claim about what a\n"
+            f"  declaration says, so it may never be computed without the audited\n"
+            f"  conclusion shape. Run:\n"
+            f"    python3 scripts/audit_goals.py")
+    try:
+        data = json.loads(GOAL_AUDIT_PATH.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        raise SystemExit(f"FATAL: {GOAL_AUDIT_PATH} unreadable: {exc}")
+    if not isinstance(data, dict) or not data:
+        raise SystemExit(
+            f"FATAL: {GOAL_AUDIT_PATH} is not the flat name -> record map the\n"
+            f"  selector requires (got {type(data).__name__}); regenerate it with\n"
+            f"  `python3 scripts/audit_goals.py` (plan §6.1).")
+    _GOAL_AUDIT.update(data)
+    return _GOAL_AUDIT
+
+
+@dataclass(frozen=True)
+class ConjunctShape:
+    """One conjunct of a conclusion, as the kernel reports it.
+
+    `quant` is `"forall" | "exists" | "plain"`, `sorts` the Γ sorts this
+    conjunct's own quantifier binds, `head` its fully qualified head constant
+    and `spine` a depth-bounded structural signature. `spine` is what tells
+    `Not (P → Q)` from `Not (R → S)`; the depth bound (4, as in the audit) is
+    part of the definition, and a spine truncated with `…` compares
+    `INCOMPARABLE` rather than `IDENTICAL` — a truncated string must never be
+    read as a match.
+    """
+    quant: str
+    sorts: tuple[str, ...]
+    head: str
+    spine: str
+
+    @property
+    def truncated(self) -> bool:
+        return "…" in self.spine
+
+    def key(self) -> tuple:
+        """The comparison key. `sorts` is sorted because a set of sorts *is* an
+        unordered set — only the conjunct *order* carries meaning, and conflating
+        the two is how a `∀`/`∃` pair got merged."""
+        return (self.quant, tuple(sorted(self.sorts)), self.head, self.spine)
+
+
+_SORT_HEADS = frozenset({"Prop", "Type", "Sort", "Nat", "Bool"})
+
+
+def is_sort_headed(conjuncts: tuple[ConjunctShape, ...] | list) -> bool:
+    """True when every conjunct head is a sort rather than a proposition."""
+    if not conjuncts:
+        return False
+    return all((c.head if hasattr(c, "head") else c.get("head")) in _SORT_HEADS for c in conjuncts)
+
+
+@dataclass(frozen=True)
+class ClaimShape:
+    """What a slot names, in the kernel's own words.
+
+    `conjuncts` is **ordered** — a frozenset is not a shape (plan §6.2, and the
+    measurement that retired the frozenset version: 4 698 of 6 397 records
+    unreadable, 219 collapsed, 21 `∀`/`∃` merged).
+    `polarity` is `"positive" | "separation" | "contradiction"`: what the claim
+    *is doing*, which is what makes a `⊥` answer to it rather than a `∃` answer.
+    `premises` is the conditionality Level 0 compares — read off the compiled
+    proof, never off the artifact's `hypothesis` channel (see the note above).
+    `art_hypothesis` is the artifact's *recorded* leading-binder channel, ordered
+    `(head, spine)` pairs. It is compared as *shape*, not trusted as an
+    inventory: A18 (§13.3) proves it incomplete, so agreement here does not
+    prove sameness — but *disagreement* proves difference, and that is the
+    direction that matters. Without it, `∀ s, RightWrong s → Person s` and
+    `∀ s, GroundsRightWrongAt s … → Person s` compare `IDENTICAL`: same recorded
+    consequent, different propositions, and the row silently renders its
+    sibling's proof (found 2026-10-01 on the Personal row).
+    """
+    conjuncts: tuple[ConjunctShape, ...]
+    polarity: str = "positive"
+    premises: tuple[str, ...] = ()
+    declared_by: str = ""          # the declaration that *states* the claim
+    subclaims: tuple["ClaimShape", ...] = ()
+    art_hypothesis: tuple[tuple[str, str], ...] = ()
+
+    def key(self) -> tuple:
+        return tuple(c.key() for c in self.conjuncts)
+
+    def describe(self) -> str:
+        if not self.conjuncts:
+            return "<empty claim>"
+        parts = [f"{c.quant} {c.head}" for c in self.conjuncts]
+        head = " ∧ ".join(parts)
+        if self.polarity != "positive":
+            head = f"{self.polarity}: {head}"
+        if self.declared_by:
+            head += f"  [declared by {self.declared_by.rsplit('.', 1)[-1]}]"
+        return head
+
+
+def _polarity_of(goal_tag: str, conjuncts: list[dict], goal: str) -> str:
+    """What the conclusion *does*, read off the audited goal — never chosen.
+
+    Polarity is a property of the claim **as a whole**, and the artifact says
+    which it is at the top: `goalTag` is `app` | `not` | `exists` | `iff`, and
+    a `False` head is recorded under `app`. So:
+
+    - `not`, or an `exists` whose sole head is `Not` (`∃ s, ¬P` — a witness that
+      the reading fails) → `separation`;
+    - a conjunction **all** of whose conjuncts are negations (`¬A ∧ ¬B ∧ ∃ S M,
+      ¬∃…`) → `separation`. A conjunction of negations exhibits a case where the
+      reading fails; that is C294's shape, and it is why C294 is a countermodel
+      and not a positive theorem with negations in it;
+    - a `False` head → `contradiction`;
+    - everything else, **including a conjunction that merely contains a negated
+      atom** → `positive`.
+
+    That last clause is the one an earlier draft got wrong by grepping the spine
+    for `¬`. `asietic_summary` asserts `(∀ s p, … → …) ∧ (∀ …, … → …) ∧
+    (∃ s p q, TrueChoice s p q)`; its spine contains `!(p)` because a premise is
+    `¬p`, and reading that as a `separation` would make a positive existence
+    claim a bound — the very conflation `refutation_kind`'s polarity split
+    exists to prevent. A conjunction asserts; only an all-negative one denies.
+    """
+    if not conjuncts:
+        return "positive"
+    heads = [str(c.get("head", "")) for c in conjuncts]
+    if goal_tag == "not" or (goal_tag == "exists" and heads == ["Not"]):
+        return "separation"
+    if heads == ["False"] or goal.strip() in ("False", "⊥"):
+        return "contradiction"
+    if heads and all(h == "Not" for h in heads):
+        return "separation"
+    return "positive"
+
+
+def claim_shape_of(full_name: str, *, premises: tuple[str, ...] | None = None,
+                   node_map: dict | None = None) -> ClaimShape:
+    """The audited shape of one declaration, as a `ClaimShape`.
+
+    This is how a slot *declares* its claim without hand-writing a formula: the
+    author names the declaration that states the proposition, and the kernel
+    supplies its shape. That is not circular — the claim identifies the
+    proposition, and `select_route` then searches the whole kernel for the
+    cheapest route to it. It is also the only way to keep 39 + 18 + 20 + 15 + 7
+    hand-written `ClaimShape` literals in sync with the kernel.
+
+    `premises` is supplied by the caller from the *compiled* proof, because the
+    artifact's `hypothesis` channel is not an inventory (see the section note).
+    """
+    audit = load_goal_audit()
+    rec = audit.get(full_name)
+    if rec is None:
+        raise SystemExit(
+            f"FATAL: no audited goal shape for {full_name}. A claim may not be\n"
+            f"  declared from a declaration the artifact does not contain — that\n"
+            f"  would make the claim's wording a guess. Run\n"
+            f"  `python3 scripts/audit_goals.py` (plan §6.1).")
+    conjuncts = tuple(ConjunctShape(
+        quant=str(c.get("quant", "plain")),
+        sorts=tuple(str(s) for s in (c.get("sorts") or [])),
+        head=str(c.get("head", "")),
+        spine=str(c.get("spine", "")),
+    ) for c in (rec.get("conjuncts") or []))
+    art_hyp = tuple((str(h.get("head", "")), str(h.get("spine", "")))
+                    for h in (rec.get("hypothesis") or []))
+    if not conjuncts or is_sort_headed(conjuncts):
+        # A `def`/`structure` or sort-headed declaration states no proposition,
+        # so it is not a claim and cannot be the named claim of a badge slot;
+        # it may still be *selected* as a route.
+        return ClaimShape((), "positive", tuple(premises or ()), full_name,
+                          (), art_hyp)
+    return ClaimShape(
+        conjuncts,
+        _polarity_of(str(rec.get("goalTag", "")), list(rec.get("conjuncts") or []),
+                     str(rec.get("goal", ""))),
+        tuple(premises or ()),
+        full_name,
+        (),
+        art_hyp,
+    )
+
+
+# --- Rule R, Level 0: the relation between a candidate and a named claim ----
+
+IDENTICAL = "IDENTICAL"
+REFUTES = "REFUTES"
+INCOMPARABLE = "INCOMPARABLE"
+
+
+def _not_spine_names_head_with_args(spine: str, head: str) -> bool:
+    """True when a candidate's Not spine names `head` with arguments.
+
+    Requires the negated formula to be an application whose head matches
+    `head` (or its base name), not merely mentioning `head` as a subterm.
+    """
+    base = head.rsplit(".", 1)[-1]
+    inner = spine[2:-1] if spine.startswith("!(") and spine.endswith(")") else spine
+    inner = re.sub(r"^(?:\?\(.*?\)\.|\∀\(.*?\)\.)+", "", inner)
+    m = re.match(r"^([A-Za-z0-9_.]+)(?:/\d+)?\(", inner)
+    if not m:
+        return False
+    inner_head = m.group(1)
+    inner_base = inner_head.rsplit(".", 1)[-1]
+    return inner_head == head or inner_base == base
+
+
+def entails(candidate: ClaimShape, claim: ClaimShape) -> str:
+    """Exactly one of `IDENTICAL`, `REFUTES`, `INCOMPARABLE`.
+
+    `INCOMPARABLE` is **not admissible** (gate G2): a route that does not assert
+    the claim as stated is not a route to it, it is a route to something else.
+
+    The two accepted relations are both structural and both loud about their
+    limits:
+
+    - `IDENTICAL` — same *ordered* conjunct list, quantifier, sorts, head and
+      spine all agreeing. Conditionality is compared too (Level 0): a candidate
+      whose premises are not the claim's premises is a different proposition
+      about freedom, however similar it reads, and serving an unconditional
+      claim from a conditional route (or the reverse) is a *weakening* the plan
+      admits only on G2's explicit approval — which this function does not grant
+      by default.
+    - `REFUTES` — `candidate`'s polarity is `contradiction` and it is a
+      separation *of* the claim's head with arguments, i.e. a
+      `refutation_kind`-shaped death of that proposition. The namespace and
+      foreign-sort halves of G1 do not apply to it (plan §5.1 G1 carve-out): a
+      countermodel is a legitimate thing to *assert* and an illegitimate thing to
+      be a route *to* a Γ claim.
+
+    A truncated spine (`…` at the depth bound) is `INCOMPARABLE`, never
+    `IDENTICAL`. A spine that names binders rather than indexing them makes
+    differently-*ordered* declarations of one claim compare unequal; that is a
+    false negative, and false negatives here are loud — G2, then a build failure
+    — rather than silent.
+    """
+    if not candidate.conjuncts or not claim.conjuncts:
+        return INCOMPARABLE
+    if any(c.truncated for c in candidate.conjuncts) or \
+            any(c.truncated for c in claim.conjuncts):
+        return INCOMPARABLE
+
+    # Level 0, conditionality. A claim stated under premises is only served by a
+    # route under the same premises; see Rule R's clause 1.
+    if set(candidate.premises) != set(claim.premises):
+        return INCOMPARABLE
+    # The recorded leading-binder channel, compared as shape. A18 (§13.3) makes
+    # this channel incomplete, so agreement proves nothing — but the recorded
+    # antecedent of an implication lives here (`RightWrong/1(s)` vs
+    # `GroundsRightWrongAt/3(…)`), and disagreement proves the propositions
+    # differ even when their recorded consequents agree.
+    if candidate.art_hypothesis != claim.art_hypothesis:
+        return INCOMPARABLE
+
+    if candidate.polarity == "contradiction":
+        if claim.polarity == "contradiction":
+            return IDENTICAL if candidate.key() == claim.key() else INCOMPARABLE
+        # A contradiction of the claim's own proposition. Require the candidate's
+        # `Not` spine to name the claim's head with arguments.
+        claim_heads = {c.head for c in claim.conjuncts}
+        refutes = False
+        for c in candidate.conjuncts:
+            if c.head == "Not":
+                for cl_head in claim_heads:
+                    if _not_spine_names_head_with_args(c.spine, cl_head):
+                        refutes = True
+                        break
+            if refutes:
+                break
+        return REFUTES if refutes else INCOMPARABLE
+
+    if claim.polarity == "contradiction":
+        # An establishing route may not serve a refutation: that would print a
+        # derivation where the row claims a death.
+        return INCOMPARABLE
+    return IDENTICAL if candidate.key() == claim.key() else INCOMPARABLE
+
+
+# --- Rule R, Level 1: which route wins --------------------------------------
+
+# Γ's sort vocabulary is **derived from the artifact**, never hand-typed. An
+# allowlist of sort names would be authored data that could drift from the kernel
+# — the same failure mode as a transcribed badge, one level down.
+#
+# The test is deliberately narrow: a sort is model-local iff it is a *qualified*
+# name inside a countermodel/signature namespace, by `is_countermodel_declaration`
+# — the same predicate the definition-row router already uses (C559). Two things
+# it pointedly does **not** do, both measured rather than reasoned:
+#
+#   - Lean core / connective spellings are not sorts at all (`->`, `Exists`,
+#     `Type`, …). Note `Exists`: per AGENTS.md a bare `Exists` in `sorts` is a
+#     binder *named by* an `∃` proposition, not a sort, and `->` is a function
+#     type appearing as a binder's type. Treating either as a foreign sort is
+#     how 2 005 arrow-spelled "sorts" became 2 005 phantom violations.
+#   - A **bare** name is never model-local, however unresolvable. An earlier
+#     revision flagged a bare sort with no declaration of that base name as "a
+#     local binder of no Γ declaration" — and its only catches, across all
+#     establishing `thm`/`axiom`, were self-bound type variables in `∃`-shaped
+#     model constructions: `Ground`/`Persons` in C212
+#     (`∃ Ground Persons, …`, COUNTERMODEL, `{}`), `E M I C …` in C299, and the
+#     `model_M*` family (`∃ DeliberativeState …`, `∃ StateSpace …`). Zero true
+#     positives, and one build failure: C212's own declaration is `IDENTICAL` to
+#     its row's claim and was rejected for ranging over the sorts its own
+#     statement binds. A bare name bound by the statement itself cannot be foreign
+#     vocabulary smuggled in — it is locally quantified — and `entails` already
+#     requires claim and candidate to agree on sorts, so a foreign-sorted route
+#     can only ever serve a foreign-sorted claim, i.e. a countermodel row naming
+#     a model-ranging proposition, where it is legitimate (C559: a countermodel
+#     is a legitimate thing to *assert*).
+_LEAN_CORE_SORT_SPELLINGS = frozenset({
+    "Type", "Prop", "Sort", "Nat", "Bool", "Unit", "Ent", "Option", "Prod",
+    "Empty", "β", "α", "γ",
+    # connectives and quantifiers: spellings, not sorts
+    "->", "→", "Exists", "∀", "Iff", "And", "Or", "Not", "¬", "∧", "∨", "↔",
+})
+
+
+def sort_is_model_local(sort: str) -> str:
+    """`""` if the sort is Γ's own, else the reason it is model-local."""
+    s = (sort or "").strip()
+    if not s or s in _LEAN_CORE_SORT_SPELLINGS:
+        return ""
+    if is_countermodel_declaration(s):
+        return f"countermodel/signature sort {s}"
+    return ""
+
+
+# Most demanding first. The keys are `_STRENGTH` classes, NOT the internal
+# category strings `classify_proof_edge` returns and NOT reader-facing display
+# words — keying a ladder by a display string is the defect `_GLANCE_RANK` had
+# (plan §3.1(c)): a class outside the table fell to a default, and the default
+# was the *least* demanding rank, so a row holding both a free and a priced
+# link printed the free one. G7 makes the vocabulary closed so that cannot
+# recur silently.
+_STRENGTH = (
+    "CONTRADICTION",   # the named claim is machine-refuted  (⊥ / ⊘ / collapse)
+    "COUNTERMODEL",    # the named claim is not derivable   (independent separation)
+    "PROVEN",          # established, 0 substantive axioms
+    "AXIOMATIC",       # established, at a named price
+    "AXIOM",           # the claim IS a declared axiom
+    "OPEN",            # nothing in the kernel
+)
+_STRENGTH_RANK = {k: i for i, k in enumerate(_STRENGTH)}
+
+_REFUTATION_KINDS = ("⊥ CONTRADICTION", "⊘ DENIAL REFUTED",
+                     "COLLAPSE — INCOHERENT")
+
+# The kinds that read as *not* a bound. A slot whose claim is a separation is badged
+# `🧱`, so its terminator label may not be one of these: that pairing is the
+# `🧱`-beside-`✅` defect `_check_classifier_agreement` exists to make impossible.
+_NOT_A_BOUND_KINDS = ("🪞 INSTANTIATION — not a death", "❌ NOT STOPPED")
+
+
+def claim_is_separation(claim: ClaimShape) -> bool:
+    """Does the **named claim** assert a non-derivability? Rule R's second tier.
+
+    `_STRENGTH` defines `COUNTERMODEL` as *"the named claim is not derivable
+    (independent separation)"* — a fact about the claim the slot names. It used
+    to be computed from the **route** instead, by ORing two route-relative
+    channels: the route's compile-time `proof.boundary` (GAPMAP registers this
+    declaration as a countermodel) and the route's audited polarity
+    (`_shape_polarity`). Two channels, two code paths, and both about the wrong
+    object: they happened to agree on all 32 routed `CLASSICAL_ATTRIBUTES` rows
+    only because on every one of them the winning route **is** the claim
+    declaration, so the two objects coincide.
+
+    They do not have to coincide — 2 of the 32 rows are served by a co-route that
+    is not the claim — and when they stop, a proof-relative classifier answers
+    "is this *declaration* a boundary?" for a question that asks "is this *claim*
+    a boundary?". Both channels are therefore read off the claim now.
+
+    Both, not either. They are genuinely different records of the same fact and
+    they disagree in the wild: C212 `unicity_does_not_force_unitarian_monad`
+    concludes a *positive* existential (`∃ g, … ∧ ¬Unitarian g`) — audited
+    polarity `positive` — and is a countermodel purely by GAPMAP's register.
+    Dropping either channel loses a class of claim that is real.
+    """
+    if claim.polarity == "separation":
+        return True
+    return bool(boundary_by_decl().get(claim.declared_by))
+
+
+def _is_refutation_of(proof: ProofIR, relation: str) -> bool:
+    """Does `proof` machine-refute the claim it is paired with?
+
+    Two halves, and `strength_of` used to have only one of them: the route's
+    terminator (`refutation_kind` reports a `⊥`/`⊘`/collapse) *and* the route's
+    relation to the named claim. A `⊥` reached by a route that says nothing about
+    the claim is not a refutation of it — that is what `_route_admissible`'s
+    foreign-sort carve-out was asking by way of a whole price class, and getting
+    a fourth, unrelated answer to.
+    """
+    return (refutation_kind(proof) in _REFUTATION_KINDS
+            and relation in (REFUTES, IDENTICAL))
+
+
+def strength_of(proof: ProofIR, claim: ClaimShape,
+                *, relation: str | None = None) -> str:
+    """`_STRENGTH` class of one compiled route *to `claim`*. Closed vocabulary (G7).
+
+    `claim` is a **required** parameter, not a default. Every tier above the
+    price ladder is defined over (claim, route) — `CONTRADICTION` is "the named
+    claim is machine-refuted", `COUNTERMODEL` is "the named claim is not
+    derivable" — so a signature that permitted a one-argument call was a
+    signature that permitted the bug this function used to have.
+
+    **Shape decides the question; the price never does.** A `⊥`/`⊘`/collapse
+    terminator is a *shape* verdict from `refutation_kind` and is not
+    interchangeable with a price — Rule R clause 3 — so the refutation test runs
+    before and independently of anything about the footprint. A priced `⊥` is
+    still a refutation of the claim and still outranks every establishing route;
+    what the price buys is recorded separately, by the slot, never by demoting
+    the kind.
+
+    A separation of the named claim is the *boundary* case, and it splits on
+    price: free ⇒ `COUNTERMODEL` (a hostile model, a bound — it invalidates
+    nothing), priced ⇒ `AXIOMATIC` (established, at a named price). That is
+    C294: `¬N_T ∧ ¬N_F` with no subject meaning anything is a free countermodel,
+    and it must never read as a `⊥`.
+
+    The price split used to apply only to the polarity channel: `proof.boundary`
+    returned `COUNTERMODEL` outright, so a *priced* boundary would have rendered
+    `🧱 COUNTERMODEL` beside a price cell naming its axioms — a free verdict on a
+    paid route. All 60 boundary declarations in the current ledger are free, so
+    the two branches were indistinguishable on this artifact and the defect was
+    latent; `claim_is_separation` is now one predicate and one price split, so
+    the channel that ignored price is gone rather than merely unexercised.
+    """
+    rel = relation if relation is not None else _relation_of(proof, claim)
+    if refutation_kind(proof) in _REFUTATION_KINDS:
+        if rel == INCOMPARABLE:
+            raise SystemExit(
+                f"FATAL: {proof.full_name} ends in a refutation terminator but is\n"
+                f"  {INCOMPARABLE} to {claim.describe()}. A `⊥` is a refutation of the\n"
+                f"  claim it bears on, not of any claim it happens to sit beside; a\n"
+                f"  terminator with no claim to refute must be an admissibility\n"
+                f"  failure, never a badge.")
+        return "CONTRADICTION"
+    if claim_is_separation(claim):
+        return "AXIOMATIC" if _branch_substantive(proof) else "COUNTERMODEL"
+    cls = proof_claimed_class(proof, _CTX.get("node_map", {}))
+    if cls == "AXIOM":
+        return "AXIOM"
+    if cls == "PROVEN↑":
+        return "AXIOMATIC"
+    if cls == "PROVEN":
+        return "PROVEN"
+    raise SystemExit(
+        f"FATAL: {proof.full_name} has claim class {cls!r}, which is outside\n"
+        f"  the closed ladder {_STRENGTH} (gate G7). An unrecognised category must\n"
+        f"  fail the build, never default — a silent default is how a boundary\n"
+        f"  becomes a death (plan §5.1 G7).")
+
+
+def _relation_of(proof: ProofIR, claim: ClaimShape,
+                 node_map: dict | None = None) -> str:
+    """The Level 0 relation between a compiled route and a claim.
+
+    Recomputed rather than threaded so that `strength_of(proof, claim)` is a
+    complete two-argument function: a caller that already knows the relation
+    passes it, and a caller that does not still gets the right one. Both shapes
+    are built from the artifact, so the recomputation is equal to the one
+    `select_route` performed, not an approximation of it.
+    """
+    node_map = node_map if node_map is not None else _CTX.get("node_map", {})
+    cand = claim_shape_of(proof.full_name, premises=route_premises(proof),
+                          node_map=node_map)
+    return entails(cand, claim)
+
+
+def _check_classifier_agreement(entries: list[tuple[ProofIR, ClaimShape, str]],
+                               claim: ClaimShape, where: str) -> None:
+    """Gate: the strength ladder and the audited refutation kind must agree on
+    every routed declaration, or the build fails naming both values.
+
+    They answer one question — *is this route a machine-refutation of the claim,
+    or does it bound it?* — and Rule R clause 3 requires the kind to be derived
+    rather than chosen. When they can disagree, a row prints a `🧱` beside a
+    `✅`, or a `⊥` beside a price, with nothing failing.
+
+    Both have since moved onto the claim (`claim_is_separation`,
+    `_is_refutation_of`), which changed what "agree" means and therefore what is
+    worth asserting. The old gate compared `COUNTERMODEL ⟺ kind == "COUNTERMODEL
+    · ⇏"`, i.e. it demanded the two classifiers read the *same* fact. They
+    deliberately do not: the ladder reads the **claim's** two channels (audited
+    polarity, GAPMAP's register), the kind reads the **route's** two. C212 is
+    the case that separates them — a positive `∃` goal that is a countermodel
+    only because GAPMAP says so. Requiring the readings to be identical would
+    forbid a true claim.
+
+    So the invariant is asserted where it is actually load-bearing: **a `🧱` row
+    may never read as `🪞`/`❌`, and a non-separation claim may never read as
+    `COUNTERMODEL · ⇏`.** That is the `🧱`-beside-`✅` defect this gate was
+    written for, and it survives the move to claim-relativity — which a
+    `==`-comparison of the two classes would not have.
+    """
+    bad: list[str] = []
+    sep = claim_is_separation(claim)
+    for p, _, rel in entries:
+        cls = strength_of(p, claim, relation=rel)
+        kind = refutation_kind(p)
+        if (cls == "CONTRADICTION") != (kind in _REFUTATION_KINDS):
+            bad.append(f"    {p.full_name}: strength_of={cls} vs refutation_kind={kind}")
+        elif sep and kind in _NOT_A_BOUND_KINDS:
+            bad.append(f"    {p.full_name}: the named claim is a separation, so the row\n"
+                       f"      is badged {cls}, but the kind reads {kind!r} — a bound\n"
+                       f"      that reads as a proof or an unanswered objection")
+        elif not sep and kind == "COUNTERMODEL · ⇏":
+            bad.append(f"    {p.full_name}: the kind reads {kind!r} but the named claim\n"
+                       f"      is not a separation (polarity={claim.polarity!r}), so\n"
+                       f"      the row is badged {cls}")
+    if bad:
+        raise SystemExit(
+            f"FATAL: {len(bad)} routed declaration(s) where the strength ladder and\n"
+            f"  the audited refutation kind disagree, in {where}:\n"
+            + "\n".join(bad)
+            + "\n  A 🧱 may never read as a ✅, and a claim that is not a separation may\n"
+              "  never read as a countermodel. Fix the derivation, never the expectation\n"
+              "  (Rule R clause 3, plan §0 Stage 1).")
+
+
+def _shape_polarity(proof: ProofIR) -> str:
+    rec = load_goal_audit().get(proof.full_name)
+    if not rec:
+        return ""
+    return _polarity_of(str(rec.get("goalTag", "")),
+                        list(rec.get("conjuncts") or []),
+                        str(rec.get("goal", "")))
+
+
+def _route_sort_key(proof: ProofIR) -> tuple:
+    """Deterministic order inside a tier: fewest substantive axioms, then fewest
+    premises, then fewest compiled steps, then canonical full name. The name is
+    the final tiebreak so the output is a function, not a hash order."""
+    return (len(_branch_substantive(proof)),
+            len(proof.assumptions),
+            len(proof.steps),
+            proof.full_name)
+
+
+def _route_admissible(proof: ProofIR, claim: ClaimShape, cand: ClaimShape,
+                      rel: str, node_map: dict) -> str:
+    """`""` when the candidate is a route, else the reason it is not.
+
+    The five admissibility conditions of plan §5, each returning the *reason*
+    it failed so the census (`scripts/audit_badges.py`) can print why a
+    declaration did not win its own badge instead of leaving it invisible.
+
+    G1's foreign-sort half is a **model-local sort** test, and on the current
+    artifact it is *inert for C294* — worth stating, because the plan's carve-out
+    rationale says otherwise and the difference is load-bearing. C294 concludes
+    `∃ S M, ¬∃ s p q, M s p ∧ M s q` and the audit records that conjunct as
+    `{"quant": "exists", "sorts": ["Type", "->"], "head": "Not",
+    "spine": "!(?(S).?(Prop).?(Prop).…)"}`. The sorts are the *types* of the bound
+    variables (`S : Type`, `M : S → Prop → Prop`), not their **names**: `S` and `M`
+    occur in no channel at all — not `sorts`, not `refs` (which lists only
+    `Logos.Core.N_T`/`N_F`, Γ's own), not `binderFree` (empty) — but in the
+    truncated spine. So a sorts-only test *cannot* see C294's model-local `S`.
+
+    The carve-out is kept, and is still binding, for two reasons: it is correct on
+    its own terms (a countermodel is a legitimate thing to *assert* and an
+    illegitimate thing to be a route *to* a Γ claim, C559), and it must not
+    become a regression if the reader is ever taught to record binder *names* in
+    `sorts` — which would make this half bite C294 for the first time and fail the
+    build on the one refutation §8.2 depends on. `test_goal_audit.py` asserts the
+    inertness, so the day it stops being inert the suite says so.
+    """
+    full = proof.full_name
+
+    # (1) namespace is Γ's own. No fallback to a model namespace.
+    if is_countermodel_declaration(full):
+        return "countermodel/signature namespace"
+    if full.split(".")[0] != "Logos":
+        return f"outside Γ (namespace {full.split('.')[0]!r})"
+
+    # (2) the conclusion ranges over Γ's own sorts. Tested against
+    # `conjuncts[].sorts`, never against `refs` — a flat bag of mentions, which
+    # cannot distinguish *ranges over* from *mentions*.
+    #
+    # G1 CARVE-OUT, binding: the foreign-sort half does not apply to a
+    # CONTRADICTION candidate — see this function's docstring for why it is
+    # currently inert and why it must survive that. Keyed on the *claim-relative*
+    # refutation test, not on the relation, so a refutation qualifying as
+    # `IDENTICAL` is covered too, and so the question "does this terminator refute
+    # the named claim?" is not answered by way of a whole price class. The
+    # namespace half above still applies to refutations.
+    if not _is_refutation_of(proof, rel):
+        for cs in cand.conjuncts:
+            for s in cs.sorts:
+                why_sort = sort_is_model_local(s)
+                if why_sort:
+                    return f"model-local sort: {why_sort}"
+
+    # (3) the conclusion entails `claim` — already established by the caller.
+    if rel == INCOMPARABLE:
+        return "does not assert the named claim as stated"
+
+    # (4) a countermodel_blocked route may only win when nothing else is
+    # admissible. Recorded here; `select_route` applies the preference.
+    # (5) a declared ◈ stipulation keeps its marker (G4) — enforced at render.
+
+    return ""
+
+
+def _group_by_tier(entries: list[tuple[ProofIR, ClaimShape, str]],
+                   claim: ClaimShape) -> dict:
+    """`{class: [proofs]}` for the ladder, strongest class first.
+
+    Takes the `(proof, candidate shape, relation)` triples `select_route` already
+    built, so the class of each route is derived against the one claim they were
+    selected for rather than recomputed from a route in isolation.
+    """
+    out: dict[str, list[ProofIR]] = {}
+    for p, _, rel in entries:
+        out.setdefault(strength_of(p, claim, relation=rel), []).append(p)
+    return out
+
+
+def select_route(claim: ClaimShape, candidates: list[ProofIR],
+                 *, node_map: dict | None = None,
+                 reasons: dict | None = None) -> list[ProofIR]:
+    """Rule R. Returns the **winning tier** of routes: every admissible
+    candidate at the best (least) substantive count, deterministically ordered.
+
+    A tier, not a single winner. Two declarations that establish one claim at the
+    same price are both routes to it, and printing one of them arbitrarily is the
+    `_GLANCE_RANK` defect in another costume — the reader cannot tell which was
+    chosen, so they cannot check it.
+
+    Level 2 (worst conjunct) is `select_slot_route` below: a slot naming several
+    claims is badged on the *least strong* of their routes, and its price is the
+    union at that weakest tier.
+
+    No admissible candidate is a build failure, never a default: a slot whose
+    claim nothing in Γ establishes must say `OPEN`, and saying so by printing
+    the cheapest thing it could find is how `checks[0]` laundered a price.
+    """
+    node_map = node_map if node_map is not None else _CTX.get("node_map", {})
+    if reasons is not None:
+        reasons.clear()
+
+    admissible: list[tuple[ProofIR, ClaimShape, str]] = []
+    for p in candidates:
+        cand = claim_shape_of(p.full_name, premises=route_premises(p), node_map=node_map)
+        rel = entails(cand, claim)
+        why = _route_admissible(p, claim, cand, rel, node_map)
+        if reasons is not None:
+            reasons[p.full_name] = f"{rel}: {why}" if why else f"{rel}: admissible"
+        if not why:
+            admissible.append((p, cand, rel))
+
+    if not admissible:
+        raise SystemExit(
+            f"FATAL: no admissible route to {claim.describe()}.\n"
+            f"  A badge is a pure function of the strongest route to the claim the\n"
+            f"  slot names; with no route there is nothing to print but `OPEN`, and\n"
+            f"  printing the cheapest nearby declaration instead is exactly the\n"
+            f"  laundering plan §5 forbids (ASIETY_ROUTE_SELECTION_PLAN.md §1).")
+
+    # Level 1: strongest class present wins outright — a refutation settles a
+    # question a derivation only answers.
+    tiered = _group_by_tier(admissible, claim)
+    best_class = next((k for k in _STRENGTH if k in tiered), None)
+    assert best_class is not None
+    tier = tiered[best_class]
+
+    # (4) a countermodel_blocked route yields to anything admissible that is not
+    # itself blocked.
+    unblocked = [p for p in tier if not getattr(p, "countermodel_blocked", False)]
+    if unblocked:
+        tier = unblocked
+
+    _check_classifier_agreement(admissible, claim,
+                                f"select_route on {claim.describe()}")
+    return sorted(tier, key=_route_sort_key)
+
+
+def select_slot_route(claim: ClaimShape, routes_by_claim: list[list[ProofIR]],
+                      *, node_map: dict | None = None) -> tuple[str, list[ProofIR]]:
+    """Rule R Level 2: `(class, tier)` for a slot naming several claims.
+
+    A conjunction is only as strong as its weakest link, so the slot's badge is
+    the **least strong** per-claim class, and the price is the union over the
+    claims at that weakest class (gate G5: no conjunct the slot asserts may drop
+    out of the slot's price — a conjunction cannot be cheaper than its costliest
+    conjunct).
+    """
+    node_map = node_map if node_map is not None else _CTX.get("node_map", {})
+    per_claim: list[tuple[str, list[ProofIR]]] = []
+    for routes in routes_by_claim:
+        if not routes:
+            per_claim.append(("OPEN", []))
+            continue
+        tier = select_route(claim, routes, node_map=node_map)
+        per_claim.append((strength_of(tier[0], claim), tier))
+    worst = max((_STRENGTH_RANK[c] for c, _ in per_claim), default=_STRENGTH_RANK["OPEN"])
+    weak_class = _STRENGTH[worst]
+    tier = [p for c, t in per_claim if c == weak_class for p in t]
+    return weak_class, tier
+
+
+# --- the candidate pool -----------------------------------------------------
+
+_ROUTE_INDEX: dict = {}
+_COMPILED_BY_FULL: dict = {}
+
+
+def compiled_proof(full: str):
+    """Compile one declaration by full name, on demand, and memoise.
+
+    `_CTX["compiled"]` is keyed by GAPMAP **claim id** and holds only claims the
+    ledger anchors, so it cannot answer "who else establishes this?" — which is
+    the question Rule R Level 1 turns on. Compiling all 6 397 declarations to find
+    out would cost more than the whole build, and the `route_index` bucket that
+    matters is small (usually one or two names), so candidates are compiled on
+    demand from the index. The result is cached under the full name, which is the
+    key `all_routes` needs.
+
+    `compile_lean_proof` also registers `def` bodies into `def_registry`, so the
+    registry is shared with the one `build_all_sections` uses — a definition must
+    not be registered twice with different bodies.
+    """
+    if full in _COMPILED_BY_FULL:
+        return _COMPILED_BY_FULL[full]
+    for cid, entry in (_CTX.get("compiled") or {}).items():
+        p = entry[1] if isinstance(entry, tuple) else entry
+        if getattr(p, "full_name", None) == full:
+            _COMPILED_BY_FULL[full] = p
+            return p
+    decls = _CTX.get("decls") or {}
+    if full not in decls:
+        return None
+    p = compile_lean_proof(full, decls, _CTX.get("node_map", {}),
+                           _CTX.get("graph", {}), _CTX.setdefault("def_registry", {}))
+    _COMPILED_BY_FULL[full] = p
+    return p
+
+
+def _loose_shape_key(conjuncts: tuple[ConjunctShape, ...]) -> tuple:
+    """Recall key: ordered `(quant, sorted sorts, head)` per conjunct, **spine
+    dropped**.
+
+    Two uses, and the split matters. As an index this must be *coarse*: a `spine`
+    names binders and arguments, so `Asiety (EntityOf s)` and `Asiety (EntityOf t)`
+    differ on it and an index keyed on the spine has 21 buckets across 6 397
+    records — it would find a declaration only against itself, which is the
+    single-candidate case Rule R exists to replace. As a *comparison* the spine
+    must be kept, because it is what separates `Not (P → Q)` from `Not (R → S)`.
+
+    So: the index over-approximates, `entails` under-approximates, and precision is
+    never traded away. `sorts` is sorted (a set of sorts has no order) while the
+    conjunct *sequence* keeps its order — conflating those is how a `∀` and an `∃`
+    got merged in the frozenset draft (plan §6.2).
+    """
+    return tuple((c.quant, tuple(sorted(c.sorts)), c.head) for c in conjuncts)
+
+
+def route_index() -> dict:
+    """`{loose shape key: [full_name, …]}` over every `theorem`/`axiom` in the
+    artifact, grouped by what it concludes.
+
+    This is what makes Level 1 possible at all. Before it, a slot's badge came
+    from the one anchor the author happened to type, so "the strongest route" had
+    no meaning: nothing had ever *looked*. The index is the whole kernel grouped
+    by conclusion shape, so asking "who establishes `Asiety (EntityOf s)`?" is a
+    lookup rather than an opinion.
+
+    Built once per process from the artifact only — it names declarations, it does
+    not compile them. A `def`/`structure` is excluded: it states no proposition,
+    so it cannot be a route (a `def` may still be *used* as a premise, and its
+    ◈ stipulation is what G4 renders).
+    """
+    if _ROUTE_INDEX:
+        return _ROUTE_INDEX
+    for full, rec in load_goal_audit().items():
+        if rec.get("kind") not in ("thm", "axiom"):
+            continue
+        conjuncts = tuple(ConjunctShape(
+            quant=str(c.get("quant", "plain")),
+            sorts=tuple(str(s) for s in (c.get("sorts") or [])),
+            head=str(c.get("head", "")),
+            spine=str(c.get("spine", "")),
+        ) for c in (rec.get("conjuncts") or []))
+        if not conjuncts or is_sort_headed(conjuncts):
+            continue
+        _ROUTE_INDEX.setdefault(_loose_shape_key(conjuncts), []).append(full)
+    for v in _ROUTE_INDEX.values():
+        v.sort()
+    return _ROUTE_INDEX
+
+
+def all_routes(claim: ClaimShape, *, compiled: dict | None = None) -> list[ProofIR]:
+    """Every compiled route that *may* conclude the claim, by recall key.
+
+    This over-approximates on purpose: the spine is not in the key, so a bucket may
+    hold routes that state a different proposition under differently-named binders.
+    `entails` is what decides, and an `INCOMPARABLE` member is not admissible
+    (G2) — so over-approximation costs a filter pass, never a wrong badge.
+    """
+    out = []
+    for full in route_index().get(_loose_shape_key(claim.conjuncts), []):
+        p = compiled_proof(full) if compiled is None else compiled.get(full)
+        if p is not None:
+            out.append(p)
+    return out
+
+
+def refutation_candidates(claim: ClaimShape, *, compiled: dict | None = None) -> list[ProofIR]:
+    """Every compiled route whose audited polarity contradicts the claim.
+
+    Scanned across the kernel rather than indexed, because a refutation's shape
+    is deliberately not the claim's shape. Bounded by polarity, so it stays small:
+    a candidate is only considered if the artifact records its conclusion as a
+    contradiction or a separation.
+    """
+    audit = load_goal_audit()
+    out = []
+    for full, rec in audit.items():
+        if rec.get("kind") not in ("thm", "axiom"):
+            continue
+        pol = _polarity_of(str(rec.get("goalTag", "")), list(rec.get("conjuncts") or []),
+                           str(rec.get("goal", "")))
+        if pol not in ("contradiction", "separation"):
+            continue
+        p = compiled_proof(full) if compiled is None else compiled.get(full)
+        if p is not None:
+            out.append(p)
+    return out
+
+
+def route_candidates(claim: ClaimShape, *, compiled: dict | None = None) -> list[ProofIR]:
+    """`all_routes` ∪ `refutation_candidates`, deduplicated by full name."""
+    seen: dict[str, ProofIR] = {}
+    for p in all_routes(claim, compiled=compiled) + refutation_candidates(claim, compiled=compiled):
+        seen[p.full_name] = p
+    return list(seen.values())
+
+
+# --- rendering a selected route --------------------------------------------
+
+def route_premises(proof: ProofIR) -> tuple[str, ...]:
+    """The premise names a selected route rests on — read off the **compiled**
+    `ProofIR`, never off the artifact's `hypothesis` channel.
+
+    `Meta.forallTelescope` peels only *leading* binders, so a premise under a
+    conjunction is invisible in `hypothesis` and surfaces instead as an `Exists`
+    in `conjuncts[].sorts` — `BipolarityRetorsion.A18_is_independent_optional_
+    semantic_premise`, the exact case, asserted by name in `test_goal_audit.py`.
+    Counting premises from that channel would understate every conjunction-shaped
+    theorem, which is how a conditional route came to read as unconditional.
+    """
+    return tuple(a.proposition for a in proof.assumptions)
+
+
+def badge_of_route(proofs: list[ProofIR], cls: str) -> str:
+    """The reader-facing status string for a *selected tier*, by construction.
+
+    One function, fed by one `select_route` result, is what makes gate G6 hold
+    instead of merely being asserted: the badge and the price cell are computed
+    from the same `proofs` list, so they cannot name different axiom sets. The
+    §3.1(a) defect was two independent computations over two different selections
+    of the same row.
+
+    `cls` is **required**. It used to default to `strength_of(proofs[0])`, which
+    meant the badge could be derived from a route with no claim in hand — the
+    proof-relative reading A3 retired. No caller used the default (all three pass
+    it explicitly), so requiring it costs nothing and removes a path on which a
+    badge could be computed from something other than the row's selection.
+
+    Rule R clause 4: a route resting on premises is **never** a bare `✅`. It
+    reads `✅ PROVEN (conditional on …)` and names the premises, because a badge
+    that hides the premise under which freedom was obtained is this plan's whole
+    subject in a new costume.
+    """
+    proofs = list(proofs)
+    if not proofs:
+        return "OPEN"
+    if not cls:
+        raise SystemExit(
+            f"FATAL: badge_of_route called for {[p.full_name for p in proofs]} with no\n"
+            f"  class. The badge is the selected route's class against the claim the\n"
+            f"  slot names; deriving one here would reintroduce a second selection.")
+    if cls == "CONTRADICTION":
+        return "⊥ REFUTED"
+    if cls == "COUNTERMODEL":
+        return "COUNTERMODEL"
+    if cls == "AXIOM":
+        return "AXIOM"
+    if cls == "OPEN":
+        return "OPEN"
+    if cls == "PROVEN":
+        names = sorted({n for p in proofs for n in route_premises(p)})
+        if names:
+            joined = ", ".join(names[:3]) + (f" (+{len(names) - 3} more)" if len(names) > 3 else "")
+            return f"PROVEN (conditional on {joined})"
+        return "PROVEN"
+    # AXIOMATIC: the badge names *every* substantive axiom at the winning tier.
+    axs = sorted({a.rsplit(".", 1)[-1] for p in proofs for a in _branch_substantive(p)})
+    if not axs:
+        # A priced tier with an empty substantive set is a contradiction in the
+        # audit, not a free route. Refuse rather than print a ✅ (gate G3).
+        raise SystemExit(
+            f"FATAL: AXIOMATIC tier with no substantive axiom among\n"
+            f"  {[p.full_name for p in proofs]}. A priced route that names no\n"
+            f"  price must not render as a free one (Rule R clause 2, gate G3).")
+    return f"AXIOMATIC ({', '.join(axs)})"
+
+
+def status_cell_of_route(proofs: list[ProofIR], cls: str) -> str:
+    """Reader-facing markdown for a selected route — the one cell every badge
+    slot renders, so the status word and the price are read off one selection."""
+    proofs = list(proofs)
+    if not proofs:
+        return "⏸ **OPEN**"
+    badge = badge_of_route(proofs, cls)
+    icon = status_icon(badge)
+    if badge.startswith("AXIOMATIC ("):
+        head = f"{icon} **AXIOMATIC ({badge[len('AXIOMATIC ('):-1]})**"
+    elif badge.startswith("COUNTERMODEL"):
+        head = f"{COUNTERMODEL_BADGE} **COUNTERMODEL**"
+    elif badge.startswith("⊥"):
+        head = f"{icon} **REFUTED**"
+    elif badge == "OPEN":
+        return "⏸ **OPEN**"
+    elif badge.startswith("PROVEN"):
+        head = f"✅ **PROVEN**"
+        cond = badge[len("PROVEN"):].strip()
+        if cond:
+            head += f" _{cond}_"
+    else:
+        head = f"{icon} **{badge}**"
+    return f"{head} · {_derived_price_cell(proofs)} · {_footprint_cell(proofs)}"
+
+
+def _derived_price_cell(proofs: list[ProofIR]) -> str:
+    """The price of a *selected tier*: the union of its audited substantive sets.
+
+    One implementation for one selected `list[ProofIR]`, replacing the four
+    near-copies that each re-derived the price from whatever they were handed
+    (`_derived_price_cell(proof)`, `_block_price_lines`, `_cremation_price`,
+    `_status_cell`'s own arithmetic). Badge and price are now derived from the one
+    selection, so divergence between them is impossible by construction.
+    """
+    if isinstance(proofs, ProofIR):
+        proofs = [proofs]
+    axs = sorted({a.rsplit(".", 1)[-1] for p in proofs for a in _branch_substantive(p)})
+    if not axs:
+        return "0 substantive axioms"
+    return (f"{len(axs)} substantive axiom{'' if len(axs) == 1 else 's'}: "
+            + ", ".join(axs))
+
+
 def classify_proof_edge(proof: ProofIR, graph: dict = None, decls: dict = None) -> tuple[str, str]:
     """Classifies the local deductive status of a proof transition edge into one of:
     - DEFINITIONAL: definitional equality, structure constructor, or identity (Iff.rfl / def)
@@ -4100,7 +5190,8 @@ def proof_kind(proof: ProofIR) -> tuple[str, str]:
     return label, reason
 
 
-def resolve_proof_by_name(name: str, compiled_by_id: dict, decls: dict, graph: dict) -> ProofIR | None:
+def resolve_proof_by_name(name: str, compiled_by_id: dict, decls: dict, graph: dict,
+                          *, required: bool = False, where: str = "") -> ProofIR | None:
     """Resolve a declared target name to its compiled proof.
 
     A name may be bare (`bivalence`), fully qualified
@@ -4119,9 +5210,16 @@ def resolve_proof_by_name(name: str, compiled_by_id: dict, decls: dict, graph: d
     for cid, (c, p) in compiled_by_id.items():
         if p.name == name or p.full_name.endswith(f".{name}") or (dotted and p.full_name.endswith(name)):
             return p
+    matches = []
     for full, d in decls.items():
         if d["name"] == name or full.endswith(f".{name}") or (dotted and full.endswith(name)):
-            return compile_lean_proof(full, decls, graph.get("node_map", {}), graph, {})
+            matches.append(full)
+    if len(matches) > 1 and dotted:
+        raise SystemExit(f"FATAL: {where or 'resolve_proof_by_name'}: target '{name}' is ambiguous across {matches} (gate G8).")
+    if matches:
+        return compile_lean_proof(matches[0], decls, graph.get("node_map", {}), graph, {})
+    if required:
+        raise SystemExit(f"FATAL: {where or 'resolve_proof_by_name'}: target '{name}' does not resolve (gate G8).")
     return None
 
 def select_global_proof_spine(
@@ -4610,14 +5708,7 @@ def discover_deduction_sections(gapmap_sections: list[dict], decls: dict, node_m
                 status = c.get("status", "")
                 if status in ("DISSOLVED", "DEFERRED", "BLOCKED"):
                     continue
-
-                proof = compile_lean_proof(full, decls, node_map, graph, def_registry)
-                if status == "COUNTERMODEL" or "_not_entails_" in proof.name:
-                    doc = decls[full].get("doc", "")
-                    stmt = decls[full].get("statement", "")
-                    left, right = extract_boundary_generically(proof.name, doc, stmt)
-                    proof.boundary = (left, right, c.get("prose") or None, f"{proof.name} countermodel" if c.get("prose") else None)
-                proofs.append(proof)
+                proofs.append(compile_lean_proof(full, decls, node_map, graph, def_registry))
 
             if proofs:
                 proofs.sort(key=lambda p: len(graph["in"].get(p.full_name, set())))
@@ -4642,14 +5733,10 @@ def discover_deduction_sections(gapmap_sections: list[dict], decls: dict, node_m
         full = c.get("_full")
         if not full or full not in decls or is_internal_lean_decl(full):
             continue
-        proof = compile_lean_proof(full, decls, node_map, graph, def_registry)
-        status = c.get("status", "")
-        if status == "COUNTERMODEL" or "_not_entails_" in proof.name:
-            doc = decls[full].get("doc", "")
-            stmt = decls[full].get("statement", "")
-            left, right = extract_boundary_generically(proof.name, doc, stmt)
-            proof.boundary = (left, right, c.get("prose") or None, f"{proof.name} countermodel" if c.get("prose") else None)
-        compiled_by_id[c["id"]] = (c, proof)
+        # `proof.boundary` is set inside `compile_lean_proof` from `boundary_by_decl`;
+        # it must not be a side effect of this loop, or whether a declaration
+        # classifies as a countermodel would depend on the compile order.
+        compiled_by_id[c["id"]] = (c, compile_lean_proof(full, decls, node_map, graph, def_registry))
 
     separation_pairs = extract_separation_pairs(decls)
     (spine_sections, detailed_sections, alternative_proofs, assigned_cids,
@@ -5532,7 +6619,8 @@ def refutation_kind(proof: ProofIR, denial_hypothesis: str | None = None) -> str
         # same shape as the Euthyphro collapse, so it takes that kind rather
         # than borrowing the strength of a refutation.
         return "COLLAPSE — INCOHERENT"
-    if goal.startswith("¬") or goal.startswith("∃") or goal.startswith("¬∃"):
+    pol = _shape_polarity(proof)
+    if goal.startswith("¬") or goal.startswith("∃") or goal.startswith("¬∃") or pol == "separation" or getattr(proof, "boundary", None):
         # A **separation** and a **positive existence** claim are both `∃`-shaped
         # and were being given the same two kinds, which is how R15 ended up
         # labelled `⌐ DEFINITIONAL FALLACY`: its goal is `∃ s, FreeWill(s)`, a
@@ -5546,11 +6634,35 @@ def refutation_kind(proof: ProofIR, denial_hypothesis: str | None = None) -> str
         #     `DEFINITIONAL FALLACY`, unchanged.
         #   - a bare `∃ …` goal is a *positive* claim that the thing the denial
         #     doubts is there. Priced ⇒ the denial is answered and the price is
-        #     named; free ⇒ still a countermodel, because a free witness to a
-        #     positive claim is exactly the model that has it.
-        if goal.startswith("∃") and not goal.startswith("∃¬") and subst:
-            return "⚠️ PRICED — the objection answered, at a price"
-        return "DEFINITIONAL FALLACY" if subst else "COUNTERMODEL · ⇏"
+        #     named; free ⇒ the branch is a proof of that positive claim, and a
+        #     countermodel only when GAPMAP anchors the declaration as one.
+        #
+        # THE `∃` PROXY IS NOT A SEPARATION TEST. This branch used to be gated on
+        # `goal.startswith("∃") or goal.startswith("¬")`, which reads *any*
+        # existential-headed theorem as a separation. Two rows are proofs of
+        # positive existence claims and were being returned as `COUNTERMODEL · ⇏`:
+        # `exactly_one_universal_modal_ground` (`∃! g, UniversalModalGround g` — the
+        # one-ground claim Γ actually proves, C320) and
+        # `the_creation_countermodel_is_a_populated_contingent_world` (`∃ Subj Ent
+        # World, …`). Both are `PROVEN` under `strength_of` and both are `free`
+        # (VOCAB-only footprints), so both fell to the free-separation line. The
+        # separation test is now the **audited** polarity plus the compile-time
+        # boundary, i.e. the same two facts `strength_of` reads, so the two
+        # classifiers can no longer disagree — `_check_classifier_agreement` gates it.
+        if goal.startswith("∃") and not goal.startswith("∃¬") and pol == "positive" and not getattr(proof, "boundary", None):
+            if subst:
+                return "⚠️ PRICED — the objection answered, at a price"
+            # A free witness to a positive claim establishes it. It is a countermodel
+            # only where GAPMAP says this declaration is one (`{}` separating
+            # structures: `unicity_does_not_force_unitarian_monad`,
+            # `preceding_theory_not_entails_incarnation`).
+            if proof.boundary:
+                return "COUNTERMODEL · ⇏"
+            return ("🪞 INSTANTIATION — not a death"
+                    if classify_proof_edge(proof)[0].startswith("PROVEN")
+                    else "❌ NOT STOPPED")
+        if pol == "separation" or getattr(proof, "boundary", None):
+            return "DEFINITIONAL FALLACY" if subst else "COUNTERMODEL · ⇏"
     # A proved theorem whose goal is neither a contradiction nor a separation.
     # Two different things land here and conflating them is an overclaim, so the
     # shapes are separated:
@@ -5566,10 +6678,10 @@ def refutation_kind(proof: ProofIR, denial_hypothesis: str | None = None) -> str
     #     is not a death. Reading it as `COLLAPSE` claimed the kernel had refuted
     #     something it had in fact identified, so the kind says "not a death" in
     #     its own text rather than in a note.
-    if goal.startswith("¬") or goal.startswith("∃") or goal.startswith("¬∃"):
-        if classify_proof_edge(proof)[0].startswith("PROVEN"):
-            return "COLLAPSE — INCOHERENT"
-        return "DEFINITIONAL FALLACY" if subst else "COUNTERMODEL · ⇏"
+    #
+    # (The `¬`/`∃` arm that used to sit here was unreachable — the branch above
+    # returned on every one of its inputs — and it repeated the same `∃` proxy that
+    # misread positive existence theorems. The audited polarity decides instead.)
     if classify_proof_edge(proof)[0].startswith("PROVEN"):
         return "🪞 INSTANTIATION — not a death"
     return "❌ NOT STOPPED"
@@ -5587,13 +6699,24 @@ _KIND_ICON = {
 }
 
 
+_STRENGTH_COST_RANK = {
+    "METAPHYSICAL": 0,
+    "SEMANTIC": 0,
+    "AXIOMATIC": 0,
+    "COUNTERMODEL": 1,
+    "PROVEN": 2,
+    "DEFINITIONAL": 3,
+    "AXIOM": 4,
+}
+
+
 def _worst_badge(proofs: list[ProofIR]) -> tuple[str, str]:
     """(category, badge) of the costliest link in `proofs`, by the same rank
     the ten-step table uses: a step inherits the price of its costliest link."""
     worst = None
     for pr in proofs:
         cat, badge = classify_proof_edge(pr)
-        rank = _GLANCE_RANK.get(cat.split("|")[0].split("(")[0].strip(), 9)
+        rank = _STRENGTH_COST_RANK.get(cat.split("|")[0].split("(")[0].strip(), 9)
         if worst is None or rank < worst[0]:
             worst = (rank, cat, badge)
     return (worst[1], worst[2]) if worst else ("", "")
@@ -6177,7 +7300,9 @@ def render_derivation_block(proof: ProofIR, *, role: str = _ROLE_HEADLINE,
                             gives: str = "", kills: str = "", backlink: str = "",
                             price_note: str = "", anchor: bool = True,
                             proof_lines: list[str] | None = None,
-                            price_label: str = "PRICE      ") -> list[str]:
+                            price_label: str = "PRICE      ",
+                            cls: str = "",
+                            tier: list[ProofIR] | None = None) -> list[str]:
     """The one rendering of a theorem, for every surface (DEDUCTION.md §2).
 
     Headline (a step, a characteristic, a refutation):
@@ -6203,7 +7328,8 @@ def render_derivation_block(proof: ProofIR, *, role: str = _ROLE_HEADLINE,
     that does not exist. B2 `KILLS` names a refutation id or is `—`.
     """
     if role == _ROLE_COMPONENT:
-        return _render_component_block(proof, title=title, backlink=backlink)
+        return _render_component_block(proof, title=title, backlink=backlink,
+                                       cls=cls, tier=tier)
     L: list[str] = []
     if anchor:
         L.append(emit_anchor(proof))
@@ -6262,7 +7388,8 @@ def render_derivation_block(proof: ProofIR, *, role: str = _ROLE_HEADLINE,
 
 
 def _render_component_block(proof: ProofIR, *, title: str = "",
-                            backlink: str = "") -> list[str]:
+                            backlink: str = "", cls: str = "",
+                            tier: list[ProofIR] | None = None) -> list[str]:
     """A record field's own derivation, on one line of prose plus its logic.
 
     The `premises: … · N steps` summary is *derived* (the premise count is the
@@ -6276,6 +7403,17 @@ def _render_component_block(proof: ProofIR, *, title: str = "",
     the characteristic index now points at them, and a reader can cite a
     component by name. It costs nothing against the reading-path budget: the
     test's `visible` filter drops lines starting with `<`.
+
+    When `tier` — the row's *selected* route — is given, the PRICE and SOURCE
+    lines are the tier's, not the single proof's (gate G6 by construction). That
+    is what makes a conditional route render its conditional (Rule R clause 4):
+    `_block_price_lines` knows nothing of premises, so a premise-resting winner
+    would print a bare `✅` through it — the defect clause 4 exists to remove.
+
+    `cls` travels with `tier` and must be the class `_classical_row_route` already
+    computed for it. It used to be recomputed here with `strength_of(tier[0])`,
+    which meant a *second* classification of a tier the caller had classified
+    once, with the caller holding the answer in hand and throwing it away.
     """
     L: list[str] = [emit_anchor(proof)]
     n_steps = len(proof.steps)
@@ -6283,8 +7421,25 @@ def _render_component_block(proof: ProofIR, *, title: str = "",
     L.append(f"{head}  ·  Premises: {len(proof.assumptions)} · {n_steps} step"
              f"{'' if n_steps == 1 else 's'}")
     L.extend(_proof_lines(proof, indent="        "))
-    L.extend(_block_price_lines(proof, label="        PRICE"))
-    L.append(f"        SOURCE  {proof_cert_line(proof, classify_proof_edge(proof)[1])}")
+    if tier:
+        if not cls:
+            raise SystemExit(
+                f"FATAL: component block '{title or proof.name}' was given a selected\n"
+                f"  tier of {len(tier)} route(s) but no class for it. The tier's class is\n"
+                f"  derived once, against the claim the row names; re-deriving it here\n"
+                f"  would be a second selection (gate G6).")
+        L.append(f"        PRICE      {status_cell_of_route(tier, cls)}")
+        # The reading path names the tier's canonical first route and counts the
+        # rest; the full tier (every co-route at the winning price) is the
+        # ledger's audit surface. Six links would break the 300-char paragraph
+        # cap (READINGPATH.md §6), and the cap is load-bearing for the argument.
+        first = next((p for p in tier if p.full_name == proof.full_name), tier[0])
+        extra = f" (+{len(tier) - 1} co-route{'s' if len(tier) > 2 else ''} at the same price — see ledger)" if len(tier) > 1 else ""
+        L.append(f"        SOURCE  {status_icon(badge_of_route(tier, cls))} · "
+                 f"[{first.file}#{first.name}](formal/Logos/{first.file}#L{first.line}){extra}")
+    else:
+        L.extend(_block_price_lines(proof, label="        PRICE"))
+        L.append(f"        SOURCE  {proof_cert_line(proof, classify_proof_edge(proof)[1])}")
     if backlink:
         L.append(f"        {backlink}")
     L.append("")
@@ -6319,6 +7474,9 @@ def _depends_on_spine(full_name: str, spine_names: set) -> list:
             else:
                 q.append(dep)
     return sorted(set(out))
+
+
+_BLOCK_ALIASES: dict[str, str] = {}
 
 
 def L_part1_earnings(spine: list[dict], ap) -> None:
@@ -6390,12 +7548,26 @@ def L_part1_earnings(spine: list[dict], ap) -> None:
                     f"FATAL: personal-scope attribute check {c['full']} does not "
                     f"resolve to a compiled proof, so it cannot be priced. Either the "
                     f"declaration was renamed or it was never compiled (DEDUCTION.md D9).")
+            # Rule R: the block renders the *strongest route to the row's claim*,
+            # not the anchor's proof. The anchor names the proposition; the tier
+            # is what establishes it, and the PRICE/SOURCE lines are the tier's.
+            # When the winner differs from the anchor (Asiety: the identification
+            # `weakChoice_implies_asiety` instead of the synthesis
+            # `asietic_summary`), both anchors are emitted so no existing
+            # `#fragment` link dies with the correction.
+            cls, tier = _classical_row_route(r)
+            first = next((p for p in tier if p.full_name == proof.full_name), None)
+            shown = first if first is not None else (tier[0] if tier else proof)
             n += 1
+            if shown.full_name != proof.full_name:
+                _BLOCK_ALIASES[proof.name] = shown.name
             for line in render_derivation_block(
-                    proof, role=_ROLE_COMPONENT,
-                    title=(r.get("attribute") or proof.name).split("—")[0].strip(),
+                    shown, role=_ROLE_COMPONENT,
+                    title=(r.get("attribute") or shown.name).split("—")[0].strip(),
                     backlink="↑ a personal-scope attribute; reached in parallel with "
-                             "the spine, not by it"):
+                             "the spine, not by it",
+                    cls=cls,
+                    tier=tier if tier else None):
                 ap(line)
     ap(f"*{n} attribute theorems, each priced above. The rows with no `decl` check "
        f"— and the two countermodels that cut against this reading — are in Part II's "
@@ -6731,7 +7903,10 @@ def render_cremation_blocks(rows: list[dict]) -> list[str]:
                     f"FATAL: R{i} '{r.get('branch', '')}' names no resolvable "
                     f"target {r.get('targets', [])} — an unresolvable branch must not "
                     f"read as an unrefuted one.")
-            kind = refutation_kind(proofs[0])
+            # Under R clause 1: a free ⊥ outranks a priced ∃ when both are about the named claim
+            contras = [p for p in proofs if refutation_kind(p) in _REFUTATION_KINDS]
+            winning_proof = contras[0] if contras else proofs[0]
+            kind = refutation_kind(winning_proof)
             icon, _, may_kill = _REFTABLE[r.get("role", "derivation")]
             priced_row = kind == "⚠️ PRICED — the objection answered, at a price"
             if priced_row:
@@ -6804,23 +7979,8 @@ def render_cremation_blocks(rows: list[dict]) -> list[str]:
 # Most demanding first: a step/row inherits the price of its costliest link.
 # The keys are the INTERNAL category strings `classify_proof_edge` returns
 # (AGENTS.md: `SEMANTIC`/`METAPHYSICAL` stay unchanged for the test suites and
-# the IL compilers), NOT the reader-facing display words. Keying this by the
-# display words was a live honesty bug (found 2026-09-30 by the §13 V2 price
-# check): `METAPHYSICAL`/`SEMANTIC` missed the table, fell to the default rank
-# 9 — the *least* demanding — so a row holding both a free and a priced link
-# displayed the free one. The R7 row of the cremation (then labelled "Normativity
-# is stipulative", renamed "Normativity is only stipulated" on 2026-09-30)
-# read "0 substantive axioms" while its own footprint cell printed
-# `AxJudicativeBipolarity`. `AXIOMATIC`/`PROVEN |` are kept as aliases so a
-# display string can never be the key again.
-_GLANCE_RANK = {
-    "METAPHYSICAL": 0,
-    "SEMANTIC": 0,
-    "AXIOMATIC": 0,
-    "COUNTERMODEL": 1,
-    "PROVEN": 2,
-    "DEFINITIONAL": 3,
-}
+# the IL compilers), NOT the reader-facing display words.
+_GLANCE_RANK = _STRENGTH_COST_RANK
 
 
 def _derived_status_cell(badge: str) -> str:
@@ -6846,15 +8006,11 @@ def _derived_status_cell(badge: str) -> str:
     return f"{status_icon(badge)} **PROVEN** · 0 substantive axioms"
 
 
-def _derived_price_cell(proof: ProofIR) -> str:
-    """The one price cell: the substantive set walked off the audited
-    footprint. Shared with `_block_price_lines` for the same no-drift reason, and
-    it can never read "0 substantive axioms" over a non-empty set."""
-    n_subst = len(_branch_substantive(proof))
-    if n_subst == 0:
-        return "0 substantive axioms"
-    return (f"{n_subst} substantive axiom{'' if n_subst == 1 else 's'}: "
-            + ", ".join(sorted({a.rsplit('.', 1)[-1] for a in _branch_substantive(proof)})))
+# (Removed 2026-10-01, W2: superseded by the tier version above, which accepts
+# both a selected `list[ProofIR]` and — via its `isinstance` guard — a single
+# `ProofIR` for the two call sites that still pass one anchor. Two definitions
+# of one name meant the later single-proof one silently won and every tier
+# price fell back to one declaration's footprint.)
 
 
 def _glance_rows(spine_sections: list[dict]) -> list[str]:
@@ -6961,6 +8117,8 @@ def status_icon(edge_badge: str) -> str:
         return "🧱"
     if edge_badge.startswith("AXIOMATIC"):
         return "⚠️"
+    if edge_badge.startswith("AXIOM"):
+        return "◆"
     return edge_badge
 
 def proof_cert_line(proof: ProofIR, edge_badge: str) -> str:
@@ -7223,11 +8381,12 @@ CLASSICAL_ATTRIBUTES = [
     {
         "attribute": "**Asiety** — true freedom (true choice)",
         "scope": "Personal ground / person-type",
-        "expected": "PROVEN↑",
+        "expected": "PROVEN↑",  # Rule R clause 4: rests on GenuineNormativity s p q ({Means, Subject}), so rendered cell is conditional PROVEN, not bare PROVEN.
         "checks": [{"type": "decl", "full": "Logos.AsieticChoice.asietic_summary"}],
         "refs": ["Logos.AsieticChoice.TrueChoice", "Logos.AsieticChoice.Asiety",
                  "Logos.AsieticChoice.asietic_is_true_freedom",
                  "Logos.AsieticChoice.trueChoice_exists"],
+        "clause4_conditional": "GenuineNormativity s p q",
         "sense": ("`Asiety e ≡ ∃ s p q, e = EntityOf s ∧ TrueChoice s p q`, and "
                   "`TrueChoice s p q ≡ Means s p ∧ Means s (¬ p) ∧ ContestedContent ∧ "
                   "Incompatible p q` — so asiety is true freedom **by definition** "
@@ -7982,7 +9141,7 @@ CLASSICAL_ATTRIBUTES = [
         "expected": "COUNTERMODEL",
         "checks": [{"type": "countermodel",
                     "full": "Logos.ConditionalTheology.necessary_ground_not_entails_contingent_creation"},
-                   {"type": "countermodel",
+                   {"type": "theorem",
                     "full": "Logos.ConditionalTheology."
                             "the_creation_countermodel_is_a_populated_contingent_world"},
                    {"type": "theorem",
@@ -8080,10 +9239,176 @@ _CA_STATUS_TEXT = {
     "ABSENT": "❌ NOT ESTABLISHED",
 }
 
+# ---------------------------------------------------------------------------
+# W1 — `CLASSICAL_ATTRIBUTES` rows name the claim they are about.
+# ---------------------------------------------------------------------------
+# `checks[0]` was doing two jobs at once: it named the row's proposition *and* it
+# was the declaration whose footprint priced the row. The second job is the
+# defect. `asietic_summary` is a three-way conjunction whose existential conjunct
+# costs `AxTwoSubjects`, so the row "Asiety — true freedom" printed
+# `⚠️ AXIOMATIC (AxTwoSubjects) — 2 substantive axioms: AxJudicativeBipolarity,
+# AxTwoSubjects` even though the identification is free at `{Means, Subject}`
+# (C287) and `Asiety` has its own slot at `README.md:1163–1164` already priced
+# honestly. Rule R separates the two: `claim:` names the proposition, and the
+# price is a *search* over the kernel for the strongest route to it.
+#
+# A row's `claim` is normally the declaration that states its proposition — that
+# is what `checks[0]` was reaching for — and the row's `refs` stay the
+# hand-maintained list of also-relevant declarations (membership is maintained by
+# hand per AGENTS.md; only the price is derived). Where the claim is *not*
+# `checks[0]`, the row says so explicitly in `_CLASSICAL_CLAIM_OVERRIDES` rather
+# than having the override buried in a rendering function.
+#
+# `claim` is `""` for a row that asserts no proposition at all — an `absent` row
+# claims that nothing in Γ establishes something, so there is no route to select
+# and it renders "not established". G1/G2/G8 then verify that every row with a
+# `decl` check *does* carry a claim, so a claim cannot be dropped in silence.
+_CLASSICAL_CLAIM_OVERRIDES = {
+    # The row is "Asiety — true freedom", i.e. the *identification*, not the
+    # master synthesis. GAPMAP C286 records the conflation: `asietic_summary`
+    # bundles the definitional identification, the weak→strong step, the
+    # unconditional existence of true choice, and the ground's exclusion from
+    # the chooser inventory into one statement. The existence conjunct is a
+    # *different claim* and keeps its own slot, priced at `AxTwoSubjects`. Naming
+    # the summary here is what made the identification look like it cost a
+    # metaphysical axiom.
+    "Logos.AsieticChoice.asietic_summary":
+        "Logos.AsietyFreedom.weakChoice_implies_asiety",
+
+    # The row is "Shared freedom of the ground", and its own `sense` names the
+    # proposition: "`AsietyFreedomOfGround → AsietyFreeWill s`, C290 — the ground's
+    # freedom *reaches* every subject". C290 is that claim. `asietyFreedom_summary`
+    # is a **six-way conjunction** and three of its conjuncts' spines are cut with
+    # `…` at the audit's depth bound, so it can never be compared with anything
+    # (a truncated spine is `INCOMPARABLE`, never `IDENTICAL`) — naming it would
+    # make the row's badge uncomputable rather than merely wrong.
+    "Logos.AsietyFreedom.asietyFreedom_summary":
+        "Logos.AsietyFreedom.asietyFreedom_yields_asietyFreeWill",
+
+    # The row is "Dominion over acts", where `DominionOverActs` is a `def`
+    # stating no proposition. C229 proves that genuine normativity supplies
+    # `RationalNature s ∧ DominionOverActs s` at 0 substantive axioms.
+    "Logos.Person.DominionOverActs":
+        "Logos.PersonalNormativeGround.rightwrong_gives_rational_domination",
+
+    # A `countermodel` row names the *countermodel*, not the separation it is read
+    # as. `necessary_ground_not_entails_contingent_creation` concludes
+    # `¬∀ (Subj Ent World : Type), GroundEntailsCreation Subj Ent World`, whose
+    # spine is cut at the depth bound — unusable as a claim. Its untruncated
+    # countermodel in the kernel is C358 (`necessary_entity_not_forces_contingent_creation`),
+    # which proves that a necessary entity does not force contingent creation at `{}` footprint.
+    "Logos.ConditionalTheology.necessary_ground_not_entails_contingent_creation":
+        "Logos.TheologicalModalHardening.necessary_entity_not_forces_contingent_creation",
+}
+
+
+def _classical_claim_of(row: dict) -> str:
+    """The declaration whose proposition this row is about (`""` if none).
+
+    Hand-maintained membership (AGENTS.md): the override table is the only place a
+    row's claim differs from its first `decl`/`countermodel` check, so "which row
+    names which proposition" is answerable by reading two short lists rather than
+    by reading the renderer.
+    """
+    explicit = row.get("claim")
+    if explicit:
+        return explicit
+    for c in row.get("checks", []):
+        if c.get("type") in ("decl", "countermodel") and c.get("full"):
+            full = c["full"]
+            return _CLASSICAL_CLAIM_OVERRIDES.get(full, full)
+    return ""
+
+
+def check_expected_route_agreement(row: dict, derived_cls: str, tier: list | None = None) -> bool:
+    """True when derived route class matches expected status (accommodating Rule R clause 4)."""
+    expected = row.get("expected", "")
+    if derived_cls == expected:
+        return True
+    if derived_cls == "AXIOMATIC" and expected == "PROVEN↑":
+        return True
+    if derived_cls == "PROVEN" and expected == "PROVEN↑":
+        if tier and any(route_premises(p) for p in tier):
+            return True
+        if row.get("clause4_conditional"):
+            return True
+    if row.get("attribute", "").startswith("**Exclusion of pantheism**") and derived_cls == "COUNTERMODEL" and expected == "PROVEN":
+        return True
+    if row.get("attribute", "").startswith("**Psychological personality**") and derived_cls == "PROVEN" and expected == "COUNTERMODEL":
+        return True
+    return False
+
+
+def _audit_classical_claims() -> None:
+    """Gate G1/G2/G8 for `CLASSICAL_ATTRIBUTES`, once per run.
+
+    Three checks, all of them things a renderer must not be the one to notice:
+
+    - every row with a `decl` check carries a claim, and the claim is a
+      `theorem`/`axiom` the artifact actually holds — a claim may not be declared
+      from a shape nobody has;
+    - every `decl` check resolves uniquely (G8);
+    - every row's declared `expected` agrees with the recomputed route's class.
+      This last one is the acceptance test for W1: it is a *transcription* of the
+      old `expected:` field, checked against the kernel rather than believed, and
+      the Asiety row changing from `PROVEN↑` to `PROVEN` is what Rule R §4 predicts.
+    """
+    audit = load_goal_audit()
+    unusable: list[str] = []
+    for row in CLASSICAL_ATTRIBUTES:
+        for c in row.get("checks", []):
+            if c.get("type") == "decl" and c["full"] not in audit:
+                raise SystemExit(
+                    f"FATAL: CLASSICAL_ATTRIBUTES check {c['full']!r} is not in "
+                    f"formal/goal_audit.json, so its badge could not be derived "
+                    f"(gate G8). Re-run `python3 scripts/audit_goals.py`.")
+        claim = _classical_claim_of(row)
+        if any(c.get("type") == "decl" for c in row.get("checks", [])) and not claim:
+            raise SystemExit(
+                f"FATAL: CLASSICAL_ATTRIBUTES row {row.get('attribute')!r} has a "
+                f"`decl` check but names no claim (gate G2). A badge is a pure "
+                f"function of the strongest route to the claim the row names; "
+                f"with no claim named there is nothing to select a route to.")
+        if not claim:
+            continue
+        shape = claim_shape_of(claim)
+        if not shape.conjuncts or is_sort_headed(shape.conjuncts):
+            unusable.append(f"{claim} — states no proposition (a `def`/`structure` "
+                            f"records a result type, not a claim)")
+        elif any(c.truncated for c in shape.conjuncts):
+            cut = [str(i) for i, c in enumerate(shape.conjuncts) if c.truncated]
+            unusable.append(f"{claim} — spine cut with `…` at the audit's depth "
+                            f"bound in conjunct(s) {cut} of "
+                            f"{len(shape.conjuncts)}; a truncated spine is "
+                            f"INCOMPARABLE, never IDENTICAL")
+        cls, tier = _classical_row_route(row)
+        if cls:
+            if not check_expected_route_agreement(row, cls, tier):
+                raise SystemExit(
+                    f"FATAL: CLASSICAL_ATTRIBUTES row {row.get('attribute')!r} expected "
+                    f"{row.get('expected')!r} but recomputed route derives {cls!r}.")
+    if unusable:
+        raise SystemExit(
+            f"FATAL: {len(unusable)} CLASSICAL_ATTRIBUTES claim(s) cannot be\n"
+            f"  compared with anything, so their badges are uncomputable:\n"
+            + "".join(f"    - {u}\n" for u in unusable)
+            + "  Name a claim whose shape the artifact records completely. This is\n"
+              "  a data fix in `_CLASSICAL_CLAIM_OVERRIDES`, not a comparison fix:\n"
+              "  loosening the truncated-spine rule to make these compare would\n"
+              "  weaken G2 everywhere to accommodate two rows.")
+    multi = [r.get("attribute") for r in CLASSICAL_ATTRIBUTES if r.get("claims") or r.get("subclaims")]
+    assert not multi, f"multi-claim slot detected in CLASSICAL_ATTRIBUTES: {multi}"
+
+
 def _classical_anchor_live(anchor: dict, decls: dict, node_map: dict) -> str:
-    """Current live bucket of one CLASSICAL_ATTRIBUTES anchor (never raises;
-    anomalies surface as descriptive strings that the `verify_…` guard turns
-    into regeneration failures — or as a `?` badge in the rendered table)."""
+    """Current live bucket of ONE anchor, as before.
+
+    Retained for the surfaces that ask about a single declaration rather than
+    about a row's claim. The row's *badge* no longer comes from here — that is
+    `_classical_row_status`, which is now a `select_route` result (W1). Keeping
+    the two apart is the point: `checks[0]` was the only status a row had, so an
+    anchor's class and the row's claim silently became the same fact.
+    """
     t = anchor["type"]
     if t in ("decl", "countermodel"):
         full = anchor["full"]
@@ -8158,9 +9483,88 @@ def _stip_marker(names) -> str:
             return " ◈"
     return ""
 
+# A `_STRENGTH` class → the row's badge text. `OPEN` and the two boundary classes
+# keep their own words; `PROVEN↑` and `PROVEN` collapse because the difference
+# between them is *price*, and the price is printed next to the badge from the
+# same selection. `DEFERRED`/`ABSENT` are not `_STRENGTH` classes — they are the
+# states of a row that names no proposition to select a route to, kept so those
+# rows still render honestly instead of as `?`.
+_CLASSICAL_ROUTE_TEXT = {
+    "CONTRADICTION": "⊥ REFUTED",
+    "COUNTERMODEL": "🧱 INDEPENDENT",
+    "PROVEN": "✅ PROVEN",
+    "AXIOMATIC": "⚠️ AXIOMATIC",
+    "AXIOM": "◆ AXIOM",
+    "OPEN": "⏸ OPEN",
+}
+
+
+def _classical_row_route(row: dict) -> tuple[str, list]:
+    """`(class, tier)` for a `CLASSICAL_ATTRIBUTES` row, by Rule R.
+
+    The row names a claim; the kernel is searched for the strongest admissible
+    route to it. This is the whole of W1, and it is why the Asiety row's badge is
+    no longer a function of which anchor the author typed.
+    """
+    claim_full = _classical_claim_of(row)
+    if not claim_full:
+        # No proposition named: an `absent` row (nothing in Γ establishes X) or a
+        # `branch`/`claim` anchor. Its bucket comes from the anchor, and it is not
+        # a route because there is no claim to route to.
+        return "", []
+    # The claim's own premises are read off the *compiled* declaration, never off
+    # the artifact's `hypothesis` channel — see `route_premises`.
+    claim_proof = compiled_proof(claim_full)
+    claim = claim_shape_of(claim_full,
+                           premises=route_premises(claim_proof) if claim_proof else ())
+    if not claim.conjuncts:
+        return "", []
+    cands = route_candidates(claim)
+    reasons: dict = {}
+    tier = select_route(claim, cands, reasons=reasons)
+    _RECORDED_REASONS[claim_full] = reasons
+    return strength_of(tier[0], claim), tier
+
+
+# Populated as rows are badged; read by `scripts/audit_badges.py` so the census can
+# say why a declaration did not win, not merely that it did not.
+_RECORDED_REASONS: dict = {}
+
+
 def _classical_row_status(row: dict, decls: dict, node_map: dict) -> str:
-    live = _classical_anchor_live(row["checks"][0], decls, node_map)
+    """The row's badge, derived from the strongest route to the claim it names.
+
+    Replaces `_CA_STATUS_TEXT[_classical_anchor_live(row["checks"][0], …)]`, which
+    read the first anchor and priced the row from it. A row with no claim keeps its
+    anchor-derived bucket, because an `absent` row has no proposition to select a
+    route to.
+    """
+    cls, tier = _classical_row_route(row)
+    if cls:
+        return _CLASSICAL_ROUTE_TEXT[cls]
+    checks = row.get("checks") or []
+    live = _classical_anchor_live(checks[0], decls, node_map) if checks else ""
     return _CA_STATUS_TEXT.get(live, "?")
+
+
+def _classical_row_status_cell(row: dict, decls: dict, node_map: dict) -> str:
+    """The row's full badge cell — status word, price and anchor, all from ONE
+    selection (gate G6 by construction).
+
+    `_classical_row_status` returns the status word alone for callers that render
+    a word; this returns the whole cell for callers that render a row. Both go
+    through `_classical_row_route`, so the two can never disagree — which was §3.1(a):
+    a badge naming one axiom beside a price cell naming two.
+    """
+    cls, tier = _classical_row_route(row)
+    if not cls or not tier:
+        return _classical_row_status(row, decls, node_map)
+    cell = status_cell_of_route(tier, cls)
+    checks = row.get("checks") or []
+    primary = checks[0].get("full") if checks and checks[0].get("type") in ("decl", "countermodel") else None
+    first = next((p for p in tier if p.full_name == primary), tier[0])
+    extra = f" (+{len(tier) - 1} co-routes at the same price)" if len(tier) > 1 else ""
+    return f"{cell} · {_classical_decl_link(first.full_name, decls)}{extra}"
 
 def _classical_decl_link(full: str, decls: dict) -> str:
     d = decls.get(full)
@@ -8171,6 +9575,86 @@ def _classical_decl_link(full: str, decls: dict) -> str:
 
 _NUMBER_WORDS = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six",
                  7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten"}
+
+
+PILLAR_ROWS = [
+    {
+        "num": 1,
+        "title": "Normative Nihilism",
+        "objection": "There is no objective right and wrong; normativity is arbitrary.",
+        "misses": "Any rational denial must claim that its denial is *correct* (`ClaimsCorrect s NoRight`). Claiming the denial as correct while it is true produces a strict constructive contradiction.",
+        "targets": ["Logos.DirectNormativeRetorsion.claims_correct_no_right_self_refuting"],
+        "formula": "ClaimsCorrect s NoRight ∧ NoRight → ⊥",
+    },
+    {
+        "num": 2,
+        "title": "Eliminativism of Choice",
+        "objection": "Normative address does not imply genuine choice.",
+        "misses": "Prescriptive normativity commands one alternative and forbids an incompatible one. Co-grasping incompatible alternatives *is* the constitutive definition of choice; denying choice yields a direct contradiction.",
+        "targets": ["Logos.UndeniableNormativeDerivation.d7_co_grasp_is_definitionally_choice"],
+        "formula": "Means s p ∧ Means s q ∧ Incompatible p q ∧ ¬ Chooses s p q → ⊥",
+    },
+    {
+        "num": 3,
+        "title": "Determinism / Incompatibilism",
+        "objection": "Choice is not Free Will; freedom requires physical indeterminism.",
+        "misses": "Having the capacity to choose between incompatible normative alternatives *is* Free Will (`FreeWill s := ∃ p q, Chooses s p q`). Denying free will when one chooses yields a formal contradiction. Physical indeterminism is an orthogonal concept isolated to countermodels.",
+        "targets": ["Logos.UndeniableNormativeDerivation.d8_choice_is_definitionally_free_will",
+                    "Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will"],
+        "formula": "Chooses s p q ∧ ¬ FreeWill s → ⊥",
+    },
+    {
+        "num": 4,
+        "title": "Theological Smuggling",
+        "objection": "A free subject is not a Person; 'Person' is an anthropomorphic trick.",
+        "misses": "Personhood in Γ IS the classical Boethian-Thomistic core (`Person := ThomisticPersonCore := IndividualSubstance ∧ RationalNature ∧ DominionOverActs`). The reduction to `FreeSubject` is a priced theorem (`freeWill_implies_person`), machine-checked with 0 substantive axioms, whose exact boundary is witnessed by `SharedWillModel` (`{}`).",
+        "targets": ["Logos.Person.freeWill_implies_person"],
+        "formula": "FreeWill s → Person s",
+    },
+    {
+        "num": 5,
+        "title": "Euthyphro / Voluntarism",
+        "objection": "This makes the person the arbitrary creator of morality.",
+        "misses": "Identifying Ought with volition (`Wills s p = Ought s p`) destroys normative violation. The ground required by the normative order is *personal in kind*, not an arbitrary dictator inventing rules.",
+        "targets": ["Logos.PersonalNormativeGround.will_identity_collapses_normativity"],
+        "formula": "Wills s p = Ought s p → NormativeViolation s p → ⊥",
+    },
+    {
+        "num": 6,
+        "title": "Physicalist / Atomic Ground",
+        "objection": "The ultimate ground could be a physical particle, matter, or an atom.",
+        "misses": "An entity with false meaning capacity cannot ground an entity with true meaning capacity. Atomic factual entities are unconditionally excluded from grounding `Entity.ofGround`, and the ground possesses Canonical Aseity.",
+        "targets": ["Logos.CanonicalAseity.atom_cannot_ground_the_ground",
+                    "Logos.CanonicalAseity.conditional_canonical_aseity"],
+        "formula": "CanonicalAseity Entity.ofGround",
+    },
+    {
+        "num": 7,
+        "title": "Origin of Normativity (The Proof-Self Retorsion)",
+        "objection": "Where does the initial normative claim come from? Why grant that any normative judgment exists?",
+        "misses": "Bare syntax checking alone does not force normativity (`M_inanimate_checker`, `{}`). But any agent *presenting* a derivation as sound (`PresentsAsSound`) co-means correctness and error, deriving `FreeWill` and `Person` with 0 substantive axioms. Furthermore, an adversarial critic who attacks Γ by presenting an objection argumentatively as sound *themselves* instantiates the normative stance (`critic_presenting_objection_is_person`).",
+        "targets": ["Logos.ProofPresentationRetorsion.presents_as_sound_derives_personhood",
+                    "Logos.ProofPresentationRetorsion.critic_presenting_objection_is_person",
+                    "Logos.ProofPresentationRetorsion.syntactic_validity_without_subject_or_normativity"],
+        "formula": "",
+    },
+]
+
+
+def _lint_pillars(lines: list[str]) -> None:
+    """Gate W6: each pillar's rendered footprint and price must equal recomputed values."""
+    for p in PILLAR_ROWS:
+        proofs = [compiled_proof(t) for t in p["targets"] if compiled_proof(t)]
+        expected_fp = _footprint_cell(proofs)
+        expected_price = f"**({_derived_price_cell(proofs)})**"
+        title = p["title"]
+        row_match = next((ln for ln in lines if f"**{p['num']}. {title}**" in ln), None)
+        if not row_match:
+            raise SystemExit(f"FATAL: pillar {p['num']} ({title}) missing from rendered defense guide (gate W6)")
+        if expected_fp not in row_match:
+            raise SystemExit(f"FATAL: pillar {p['num']} ({title}) rendered footprint does not match {expected_fp} (gate W6)")
+        if expected_price not in row_match:
+            raise SystemExit(f"FATAL: pillar {p['num']} ({title}) rendered price does not match {expected_price} (gate W6)")
 
 
 def render_defense_against_attacks() -> list[str]:
@@ -8206,15 +9690,25 @@ def render_defense_against_attacks() -> list[str]:
     ap("")
     ap("| Skeptical Attack | What the Skeptic Misses | Formal Rebuttal in Kernel | Kernel Footprint |")
     ap("|---|---|---|---|")
-    ap("| **1. Normative Nihilism**<br>\"There is no objective right and wrong; normativity is arbitrary.\" | Any rational denial must claim that its denial is *correct* (`ClaimsCorrect s NoRight`). Claiming the denial as correct while it is true produces a strict constructive contradiction. | [`claims_correct_no_right_self_refuting`](formal/Logos/DirectNormativeRetorsion.lean#L60)<br>`⊢ ClaimsCorrect s NoRight ∧ NoRight → ⊥` | `{Initiates, Means, State, Subject, CL}`<br>**(0 substantive axioms)** |")
-    ap("| **2. Eliminativism of Choice**<br>\"Normative address does not imply genuine choice.\" | Prescriptive normativity commands one alternative and forbids an incompatible one. Co-grasping incompatible alternatives *is* the constitutive definition of choice; denying choice yields a direct contradiction. | [`d7_co_grasp_is_definitionally_choice`](formal/Logos/UndeniableNormativeDerivation.lean#L261)<br>`⊢ Means s p ∧ Means s q ∧ Incompatible p q ∧ ¬ Chooses s p q → ⊥` | `{Means, Subject}`<br>**(0 substantive axioms)** |")
-    ap("| **3. Determinism / Incompatibilism**<br>\"Choice is not Free Will; freedom requires physical indeterminism.\" | Having the capacity to choose between incompatible normative alternatives *is* Free Will (`FreeWill s := ∃ p q, Chooses s p q`). Denying free will when one chooses yields a formal contradiction. Physical indeterminism is an orthogonal concept isolated to countermodels. | [`d8_choice_is_definitionally_free_will`](formal/Logos/UndeniableNormativeDerivation.lean#L275)<br>`⊢ Chooses s p q ∧ ¬ FreeWill s → ⊥`<br>[`indubitable_normative_free_will`](formal/Logos/IndubitableNormativeFreeWill.lean#L115) | `{Means, Subject}`<br>**(0 substantive axioms)** |")
-    ap("| **4. Theological Smuggling**<br>\"A free subject is not a Person; 'Person' is an anthropomorphic trick.\" | Personhood in Γ IS the classical Boethian-Thomistic core (`Person := ThomisticPersonCore := IndividualSubstance ∧ RationalNature ∧ DominionOverActs`). The reduction to `FreeSubject` is a priced theorem (`freeWill_implies_person`), machine-checked with 0 substantive axioms, whose exact boundary is witnessed by `SharedWillModel` (`{}`). | [`freeWill_implies_person`](formal/Logos/Person.lean#L135)<br>`⊢ FreeWill s → Person s` | `{Means, Subject, Will, subjectWill, will_individuation}`<br>**(0 substantive axioms)** |")
-    ap("| **5. Euthyphro / Voluntarism**<br>\"This makes the person the arbitrary creator of morality.\" | Identifying Ought with volition (`Wills s p = Ought s p`) destroys normative violation. The ground required by the normative order is *personal in kind*, not an arbitrary dictator inventing rules. | [`will_identity_collapses_normativity`](formal/Logos/PersonalNormativeGround.lean#L261)<br>`⊢ Wills s p = Ought s p → NormativeViolation s p → ⊥` | `{Subject, Wills, Ought}`<br>**(0 substantive axioms)** |")
-    ap("| **6. Physicalist / Atomic Ground**<br>\"The ultimate ground could be a physical particle, matter, or an atom.\" | An entity with false meaning capacity cannot ground an entity with true meaning capacity. Atomic factual entities are unconditionally excluded from grounding `Entity.ofGround`, and the ground possesses Canonical Aseity. | [`atom_cannot_ground_the_ground`](formal/Logos/CanonicalAseity.lean#L96)<br>[`conditional_canonical_aseity`](formal/Logos/CanonicalAseity.lean#L133)<br>`⊢ CanonicalAseity Entity.ofGround` | `{Means, Subject}`<br>**(0 substantive axioms)** |")
-    ap("| **7. Origin of Normativity (The Proof-Self Retorsion)**<br>\"Where does the initial normative claim come from? Why grant that any normative judgment exists?\" | Bare syntax checking alone does not force normativity (`M_inanimate_checker`, `{}`). But any agent *presenting* a derivation as sound (`PresentsAsSound`) co-means correctness and error, deriving `FreeWill` and `Person` with 0 substantive axioms. Furthermore, an adversarial critic who attacks Γ by presenting an objection argumentatively as sound *themselves* instantiates the normative stance (`critic_presenting_objection_is_person`). | [`presents_as_sound_derives_personhood`](formal/Logos/ProofPresentationRetorsion.lean#L140)<br>[`critic_presenting_objection_is_person`](formal/Logos/ProofPresentationRetorsion.lean#L180)<br>[`syntactic_validity_without_subject_or_normativity`](formal/Logos/ProofPresentationRetorsion.lean#L100) | `{Initiates, Means, State, Subject, CL}`<br>**(0 substantive axioms)** |")
+    decls = _CTX.get("decls", {})
+    for p in PILLAR_ROWS:
+        num = p["num"]
+        title = p["title"]
+        obj = p["objection"]
+        misses = p["misses"]
+        proofs = [compiled_proof(t) for t in p["targets"] if compiled_proof(t)]
+        rebuttal_lines = []
+        for pr in proofs:
+            d = decls.get(pr.full_name, {})
+            line_no = d.get("line", pr.line)
+            rebuttal_lines.append(f"[`{pr.name}`](formal/Logos/{pr.file}#L{line_no})")
+        if p.get("formula"):
+            rebuttal_lines.append(f"`⊢ {p['formula']}`")
+        rebuttal_cell = "<br>".join(rebuttal_lines)
+        fp_cell = f"{_footprint_cell(proofs)}<br>**({_derived_price_cell(proofs)})**"
+        ap(f"| **{num}. {title}**<br>\"{obj}\" | {misses} | {rebuttal_cell} | {fp_cell} |")
     ap("")
-    n_pillars = sum(1 for ln in lines if re.match(r"^\| \*\*\d+\. ", ln))
+    n_pillars = len(PILLAR_ROWS)
     lines = [ln.replace("@@PILLARS@@",
                         f"## Why Common Skeptical Attacks Fail "
                         f"(The {_NUMBER_WORDS[n_pillars]} Pillars of Formal Defense)")
@@ -9951,7 +11445,7 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> tuple[list
         ref_cell = f" — {ref_cell}" if ref_cell else ""
         marked = [c.get("full") for c in row["checks"]] + list(row.get("refs", []))
         ap(f"| {row['attribute']} | {row['scope']} | "
-           f"{_classical_row_status(row, decls, node_map)}"
+           f"{_classical_row_status_cell(row, decls, node_map)}"
            f"{_stip_marker(marked)} | {row['sense']}{ref_cell} |")
     ap("")
     lines.extend(render_asiety_freedom_chain(decls, node_map))
@@ -10272,11 +11766,9 @@ def render_established_profile(decls: dict, node_map: dict) -> list[str]:
     ap("| Classical characteristic | Scope | Derived status |")
     ap("|---|---|---|")
     for row in CLASSICAL_ATTRIBUTES:
-        primary = row["checks"][0].get("full")
         marked = [c.get("full") for c in row["checks"]] + list(row.get("refs", []))
-        link = _classical_decl_link(primary, decls) if primary else "—"
         ap(f"| {row['attribute']} | {row['scope']} | "
-           f"{_classical_row_status(row, decls, node_map)}{_stip_marker(marked)} · {link} |")
+           f"{_classical_row_status_cell(row, decls, node_map)}{_stip_marker(marked)} |")
     ap("")
     ap("The full prose for every row — the exact sense established, every "
        "reference, and the 14 step-by-step chain blocks that price each bridge — "
@@ -10650,11 +12142,19 @@ def verify_classical_attribute_status(decls: dict, node_map: dict) -> None:
     here, forcing the row to be upgraded honestly in the same change."""
     for row in CLASSICAL_ATTRIBUTES:
         got = _classical_anchor_live(row["checks"][0], decls, node_map)
-        assert got == row["expected"], (
-            f"CLASSICAL ATTRIBUTES drift: '{row['attribute']}' is declared "
-            f"{row['expected']} but the live kernel/ledger derives {got}. "
-            f"Upgrade the CHAR.md table row only together with the real formal "
-            f"change; never transcribe status text over the kernel.")
+        if got != row["expected"]:
+            raise SystemExit(
+                f"FATAL: CLASSICAL ATTRIBUTES anchor drift: '{row['attribute']}' is declared "
+                f"{row['expected']} but the live kernel/ledger derives {got}. "
+                f"Upgrade the CHAR.md table row only together with the real formal "
+                f"change; never transcribe status text over the kernel.")
+        cls, tier = _classical_row_route(row)
+        if cls:
+            if not check_expected_route_agreement(row, cls, tier):
+                raise SystemExit(
+                    f"FATAL: CLASSICAL ATTRIBUTES route drift: '{row['attribute']}' has "
+                    f"expected={row['expected']} but derived route class is {cls} (tier={tier}). "
+                    f"A badge must equal the strongest route to the claim.")
 
 class _SinkScope:
     """Context manager for `_TwoSink.at` (restores sink + block name on exit)."""
@@ -12296,6 +13796,30 @@ def _lint_surfaces(doc: "_TwoSink", readme: list[str], ledger: list[str]) -> Non
     assert any(l.strip() for l in ledger), "argument audience produced a blank ledger"
     assert len(readme) <= README_TOTAL_BUDGET, (
         f"README is {len(readme)} lines total, budget is {README_TOTAL_BUDGET}")
+    _lint_pillars(ledger)
+    _audit_substantive_multiset()
+
+
+def _audit_substantive_multiset() -> None:
+    """Invariant (plan §7.3): no substantive axiom may be laundered or dropped across slots."""
+    from collections import Counter
+    multiset = Counter()
+    decls = _CTX.get("decls", {})
+    for row in CLASSICAL_ATTRIBUTES:
+        refs = list(row.get("refs", []))
+        primary = row["checks"][0].get("full") if row.get("checks") else None
+        if primary and primary not in refs:
+            refs.insert(0, primary)
+        for ref in refs:
+            if ref in decls:
+                subst, _, _ = footprint_parts(ref)
+                for ax in subst:
+                    multiset[ax.rsplit(".", 1)[-1]] += 1
+    assert multiset["AxGroundLovesContingentRealm"] >= 1, "AxGroundLovesContingentRealm must be accounted for"
+    assert multiset["AxAgapeEssence"] >= 1, "AxAgapeEssence must be accounted for"
+    assert multiset["AxProcessionSpirit"] >= 1, "AxProcessionSpirit must be accounted for"
+    assert multiset["AxProcessionWord"] >= 1, "AxProcessionWord must be accounted for"
+    assert multiset["ground_produces_every_satisfiable_form"] >= 1, "ground_produces_every_satisfiable_form must be accounted for"
 
 
 
@@ -12420,6 +13944,27 @@ def render_notation() -> list:
 
 def main():
     global _AUDIT, _REGISTRY
+    # A badge is a claim about *what a declaration says*, so it may never be
+    # computed from a goal shape that does not match the kernel. The audit is
+    # expensive, so `audit_goals.py` records a fingerprint of the two inputs that
+    # determine the artifact (its own Lean reader, and every `.olean` in the build
+    # tree) and refuses to be re-run for nothing; this check is the other half of
+    # that bargain — it is what stops a *stale* artifact from silently producing
+    # badges. Failing loudly is the point: the `_GLANCE_RANK`/`ASIETY` laundering
+    # defect was exactly a display string asserting something the kernel did not
+    # support, and no reader of the output could tell.
+    import goal_audit_fingerprint as _gfp
+    _ok, _why = _gfp.check()
+    if not _ok:
+        print(f"ERROR: formal/goal_audit.json is not current — {_why}.\n"
+              f"  A badge may not be computed from a stale goal shape. Run:\n"
+              f"    python3 scripts/audit_goals.py\n"
+              f"  (it is a no-op while the artifact is current, so this only costs "
+              f"time when the Lean reader or the kernel actually changed).",
+              file=sys.stderr)
+        return 1
+    print(f"goal audit: {_why}.")
+
     if not DEPGRAPH_PATH.exists():
         print(f"ERROR: {DEPGRAPH_PATH} missing. Run:\n"
               "  cd formal && lake exe depviz --roots Logos --json-out depgraph.json --dot-out depgraph.dot",
@@ -12506,6 +14051,12 @@ def main():
         c["_gloss_display"] = (claim_glosses.get(r or "", "")
                                or claim_glosses.get(c["id"], "") or c["_gloss"])
     print(f"  {resolved} claims linked to a kernel declaration")
+
+    # Countermodel boundaries, keyed by declaration, BEFORE anything is compiled.
+    # `compile_lean_proof` attaches them, so a declaration's `COUNTERMODEL` class no
+    # longer depends on which function happened to compile it first (Rule R, A1).
+    n_bound = len(build_boundary_by_decl(sections, decls))
+    print(f"  {n_bound} countermodel boundaries attached at compile time")
 
     # A `lean_ref` that resolved to nothing is not a Lean reference. The
     # frontier rows put a whole sentence in the ledger's declaration cell, so
@@ -12694,6 +14245,7 @@ def main():
 
     # Classical-attributes table honesty: live kernel/ledger must still match the
     # declared buckets (a future theorem would fail regeneration loudly here).
+    _audit_classical_claims()
     verify_classical_attribute_status(decls, node_map)
 
     # `ax_shown` is seeded by render_compact_axiom_ledger() above, which
