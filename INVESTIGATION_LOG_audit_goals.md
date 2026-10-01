@@ -1,4 +1,4 @@
-> **⚠️ SUPERSEDED IN PART — read `ASIETY_ROUTE_SELECTION_PLAN.md` §12a first.**
+> **⚠️ SUPERSEDED IN PART — read `RULE_R_CORRECTION_PLAN.md` §12.9 first.**
 > This log is the record of what was *tried*. Its §3.15 and §9 prescribe a fix
 > ("hoist the `maxBVarAt` guard above `withLocalDeclsDND`") that was already
 > present and could not have worked, and its §4 pins the two guards that were
@@ -15,7 +15,7 @@ It exists because the failure modes below are *not* recoverable from the diff: m
 of them produce no traceback that points at the cause, two of them are uncatchable
 Lean panics, and the correct API was the opposite of what I assumed three times.
 
-Companion to `ASIETY_ROUTE_SELECTION_PLAN.md` §12a. That section is the short
+Companion to `RULE_R_CORRECTION_PLAN.md` §12.9. That section is the short
 version; **this is the long version, with the errors verbatim.**
 
 ---
@@ -436,7 +436,7 @@ Logos.AsietyFreedom.weakChoice_implies_asiety
 Logos.PersonalGroundOfReality.personal_ground_of_right_wrong
   goal  Logos.Person.Person s
   ← This is the whole point. The old Python extractor produced "Subject"
-    (ASIETY_ROUTE_SELECTION_PLAN.md §2.1). The Lean walker does not.
+    (RULE_R_CORRECTION_PLAN.md §12.2). The Lean walker does not.
 
 Logos.AsieticChoice.asietic_summary
   goal  (∀ s p, ChoiceField s p ¬p → ClaimsCorrect s p → Chooses s p ¬p)
@@ -557,7 +557,7 @@ The `lake` lookup mirrors `audit_footprints.py`: try `which lake`, else fall bac
 - [ ] Confirm 5 951 records, zero `GA ERROR`, and the §5 spot-checks.
 - [ ] Add `python3 scripts/audit_goals.py` to the regeneration block in `AGENTS.md`,
       between `audit_footprints.py` and `build_deduction.py`.
-- [ ] **Only then** implement `ASIETY_ROUTE_SELECTION_PLAN.md` §7.2 step 2:
+- [ ] **Only then** implement `RULE_R_CORRECTION_PLAN.md` §7.2:
       `ClaimShape`, `_STRENGTH`, `verdict_of`, `select_route`, gates G1–G8 — then
       W1–W10.
 

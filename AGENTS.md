@@ -63,7 +63,7 @@ cd .. && python3 scripts/audit_footprints.py && python3 scripts/audit_goals.py &
   `README.md`** — extend the list in the same change, or the reader-facing chain silently omits
   the new step. (`kernel-audit.md` is unaffected; it reads GAPMAP.)
 - **`scripts/audit_goals.py` performance is measured, not guessed**
-  (`ASIETY_ROUTE_SELECTION_PLAN.md` §12b.0). The full 6 397-declaration walk takes
+  (`RULE_R_CORRECTION_PLAN.md` §12.9). The full 6 397-declaration walk takes
   **33 s**. The 30-minute figure that preceded it was **not a slow reader**: `headSym`'s
   catch-all matched on `e.getAppFn` but passed the **whole application** to `getFVar!`,
   so a conclusion whose function is a local variable panicked
@@ -101,7 +101,7 @@ cd .. && python3 scripts/audit_footprints.py && python3 scripts/audit_goals.py &
   never by substitution: an inlined body refers to an `fvar` the local context does not
   hold, and `get!` throws.
   **`scripts/test_goal_audit.py` gates the artifact.** Any claim about
-  `goal_audit.json` — in code, in `ASIETY_ROUTE_SELECTION_PLAN.md`, in a review — must
+  `goal_audit.json` — in code, in `RULE_R_CORRECTION_PLAN.md`, in a review — must
   be asserted there; do not read records and assert by eye. Six eye-checked spot-checks
   were all wrong and one had a truncated string's tail filled in by hand
   (`STUPID_SIMON_SAYS.md`; plan §12b). Four of the assertions added during that work were

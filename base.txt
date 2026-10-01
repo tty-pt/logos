@@ -545,7 +545,8 @@ weakChoice_implies_asiety : GenuineNormativity s p q → Asiety (EntityOf s)   [
 `GenuineNormativity` (`IndubitableNormativeFreeWill.lean:84`) é a escolha fraca **sem `Act`**: os
 seus campos são `Incompatible p q ∧ p ≠ q` e `Means s p ∧ Means s q` — não há `Act`, nem
 `Initiates`, nem `ClaimsCorrect` em nenhum deles. Por isso esta rota custa `{Means, Subject}`, isto
-é, só vocabulário: **zero axiomas**, e nenhuma premissa escrita. Ela não *fecha* o `?` acima
+é, só vocabulário: **zero axiomas**, condicional sob a hipótese de endereço normativo genuíno
+`GenuineNormativity s p q` (Rule R, cláusula 4). Ela não *fecha* o `?` acima
 — contorna-o, começando por uma hipótese que já contém os dois cornos. A forma nua continua
 refutada (C273/C274) e o `?` continua fechado apenas sob a sua premissa: nada disto deve ser lido
 como se houvessemos fechado o `?` sem preço.
@@ -2005,7 +2006,7 @@ nível 19, C287–C296; theorems/T29.txt. **Zero axiomas novos** — o registo c
 Este lote faz o que o §30 deixou em aberto, em **dois passos de preço deliberadamente desigual**,
 e a desigualdade é o conteúdo do capítulo, não um defeito dele.
 
-**L1 — a asieticidade vem da escolha fraca sem `Act`, sem axioma e sem premissa escrita.** A escolha fraca
+**L1 — a asieticidade vem da escolha fraca sem `Act`, sem axioma substantivo e condicional sob `GenuineNormativity`.** A escolha fraca
 `Act`-independente que o §30 deixara "já feita" é `GenuineNormativity`
 (`IndubitableNormativeFreeWill.lean:84`), cujos campos são
 
@@ -2019,7 +2020,8 @@ weakChoice_implies_freeWill : GenuineNormativity s p q → FreeWill s          [
 
 O único conteúdo para além das duas conjunções `Means` é o facto de quadro `ContestedContent`
 (C259, `{}`): a **abertura**. Sem `AxJudicativeBipolarity` (ao contrário de C266/C267), sem
-`AxTwoSubjects` (ao contrário de C277–C279), sem `Act`, sem `Initiates`, sem pré-missa escrita.
+`AxTwoSubjects` (ao contrário de C277–C279), sem `Act`, sem `Initiates`, condicional sob a
+hipótese explícita `GenuineNormativity s p q` (Rule R, cláusula 4).
 
 **A honestidade deste passo, declarada antes de ser usado:** C287 está *muito perto* de uma
 projecção, porque `AgentialDeonticAddress` **já é** `Means s p ∧ Means s q` — a co-significação

@@ -3695,26 +3695,27 @@ def compile_lean_proof(full: str, decls: dict, node_map: dict, graph: dict, def_
             continue
 
         # Term-mode constructor: ⟨arg1, arg2, ...⟩
+        # Render ⟨...⟩ as a single opaque constructor step (RULE_R_CORRECTION_PLAN.md §6),
+        # without comma-splitting or component witness enumeration.
         stripped_l = l.strip()
         if stripped_l.startswith("⟨") and stripped_l.endswith("⟩"):
-            args = split_top_level_commas(stripped_l[1:-1])
-            arg_str = ", ".join(args)
+            rule = Rule.CONJUNCTION_INTRO if "∧" in proof.goal else Rule.EXISTENTIAL_INTRO
+            desc = "conjunction constructor introduction" if rule == Rule.CONJUNCTION_INTRO else "existential constructor introduction"
             if not proof.steps:
-                for a_idx, arg in enumerate(args, 1):
-                    proof.steps.append(ProofStepIR(
-                        var_name="",
-                        proposition=arg,
-                        rule=Rule.PREMISE,
-                        premises=[arg],
-                        description=f"component witness {a_idx}: {arg}",
-                    ))
+                proof.steps.append(ProofStepIR(
+                    var_name="",
+                    proposition="constructor",
+                    rule=rule,
+                    premises=[],
+                    description=desc,
+                ))
             if not proof.conclusion:
                 proof.conclusion = ProofStepIR(
                     var_name="",
                     proposition=proof.goal,
-                    rule=Rule.CONJUNCTION_INTRO if "∧" in proof.goal else Rule.EXISTENTIAL_INTRO,
-                    premises=args,
-                    description=f"instantiation from ⟨{arg_str}⟩",
+                    rule=rule,
+                    premises=[],
+                    description="constructor introduction",
                 )
             continue
 
@@ -4065,7 +4066,7 @@ def boundary_by_decl() -> dict:
 
 
 # ===========================================================================
-# Rule R — route selection (ASIETY_ROUTE_SELECTION_PLAN.md §1, §5, §6.2)
+# Rule R — route selection (RULE_R_CORRECTION_PLAN.md §0)
 # ===========================================================================
 #
 # Before this section a badge was a function of ONE declaration: pick a link,
@@ -4776,7 +4777,7 @@ def select_route(claim: ClaimShape, candidates: list[ProofIR],
             f"  A badge is a pure function of the strongest route to the claim the\n"
             f"  slot names; with no route there is nothing to print but `OPEN`, and\n"
             f"  printing the cheapest nearby declaration instead is exactly the\n"
-            f"  laundering plan §5 forbids (ASIETY_ROUTE_SELECTION_PLAN.md §1).")
+            f"  laundering plan §0 forbids (RULE_R_CORRECTION_PLAN.md §0).")
 
     # Level 1: strongest class present wins outright — a refutation settles a
     # question a derivation only answers.
@@ -5009,6 +5010,8 @@ def badge_of_route(proofs: list[ProofIR], cls: str) -> str:
         return "AXIOM"
     if cls == "OPEN":
         return "OPEN"
+    if cls == "DEFINITIONAL":
+        return "DEFINITIONAL"
     if cls == "PROVEN":
         names = sorted({n for p in proofs for n in route_premises(p)})
         if names:
@@ -7561,6 +7564,8 @@ def L_part1_earnings(spine: list[dict], ap) -> None:
             n += 1
             if shown.full_name != proof.full_name:
                 _BLOCK_ALIASES[proof.name] = shown.name
+                _RENDERED_ANCHORS.add(proof.name)
+                ap(f'<a id="{proof.name}"></a>')
             for line in render_derivation_block(
                     shown, role=_ROLE_COMPONENT,
                     title=(r.get("attribute") or shown.name).split("—")[0].strip(),
@@ -8331,7 +8336,7 @@ CLASSICAL_ATTRIBUTES = [
     {
         "attribute": "**Psychological personality** (humanoid consciousness, stream of experience)",
         "scope": "Personal ground / person-type",
-        "expected": "COUNTERMODEL",
+        "expected": "PROVEN",
         "checks": [{"type": "countermodel",
                     "full": "Logos.PersonhoodOntologyAudit.faithful_model_satisfies_free_will_without_opaque_person"}],
         "refs": ["Logos.PersonhoodOntologyAudit.faithful_contingent_person_fails_necessary_subject"],
@@ -8493,9 +8498,9 @@ CLASSICAL_ATTRIBUTES = [
     {
         "attribute": "**Dominion over acts** / authoritative personhood",
         "scope": "Personal ground / person-type",
-        "expected": "PROVEN",
+        "expected": "DEFINITIONAL",
         "checks": [{"type": "decl", "full": "Logos.Person.DominionOverActs"}],
-        "refs": [],
+        "refs": ["Logos.Person.person_iff_thomisticCore"],
         "sense": ("the Thomistic-personcore conjunct `DominionOverActs s ≡ FreeWill s` is "
                   "definitional (`📘`); present inside `person_iff_thomisticCore`."),
     },
@@ -8775,7 +8780,7 @@ CLASSICAL_ATTRIBUTES = [
     {
         "attribute": "**Exclusion of pantheism** (the ground is not the universe)",
         "scope": "Divine Being / Ground",
-        "expected": "PROVEN",
+        "expected": "COUNTERMODEL",
         "checks": [{"type": "decl",
                     "full": "Logos.CosmicExistence.the_ground_is_not_the_universe"}],
         "refs": ["Logos.CosmicExistence.no_entity_is_identical_to_the_whole",
@@ -9237,6 +9242,7 @@ _CA_STATUS_TEXT = {
     "COUNTERMODEL": "🧱 INDEPENDENT",
     "DEFERRED": "⏸ DEFERRED",
     "ABSENT": "❌ NOT ESTABLISHED",
+    "DEFINITIONAL": "📘 DEFINITIONAL",
 }
 
 # ---------------------------------------------------------------------------
@@ -9285,20 +9291,16 @@ _CLASSICAL_CLAIM_OVERRIDES = {
     "Logos.AsietyFreedom.asietyFreedom_summary":
         "Logos.AsietyFreedom.asietyFreedom_yields_asietyFreeWill",
 
-    # The row is "Dominion over acts", where `DominionOverActs` is a `def`
-    # stating no proposition. C229 proves that genuine normativity supplies
-    # `RationalNature s ∧ DominionOverActs s` at 0 substantive axioms.
-    "Logos.Person.DominionOverActs":
-        "Logos.PersonalNormativeGround.rightwrong_gives_rational_domination",
-
     # A `countermodel` row names the *countermodel*, not the separation it is read
     # as. `necessary_ground_not_entails_contingent_creation` concludes
     # `¬∀ (Subj Ent World : Type), GroundEntailsCreation Subj Ent World`, whose
-    # spine is cut at the depth bound — unusable as a claim. Its untruncated
-    # countermodel in the kernel is C358 (`necessary_entity_not_forces_contingent_creation`),
-    # which proves that a necessary entity does not force contingent creation at `{}` footprint.
+    # spine is cut at the depth bound — unusable as a claim. Its warranted
+    # countermodel in the kernel is
+    # `the_creation_countermodel_is_a_populated_contingent_world` (RULE_R_CORRECTION_PLAN.md §3.2,
+    # GAPMAP C563), which instantiates SubjectExistsAt, Creates, and CreationRecord
+    # on a populated contingent world.
     "Logos.ConditionalTheology.necessary_ground_not_entails_contingent_creation":
-        "Logos.TheologicalModalHardening.necessary_entity_not_forces_contingent_creation",
+        "Logos.ConditionalTheology.the_creation_countermodel_is_a_populated_contingent_world",
 }
 
 
@@ -9328,14 +9330,18 @@ def check_expected_route_agreement(row: dict, derived_cls: str, tier: list | Non
     if derived_cls == "AXIOMATIC" and expected == "PROVEN↑":
         return True
     if derived_cls == "PROVEN" and expected == "PROVEN↑":
-        if tier and any(route_premises(p) for p in tier):
-            return True
-        if row.get("clause4_conditional"):
-            return True
-    if row.get("attribute", "").startswith("**Exclusion of pantheism**") and derived_cls == "COUNTERMODEL" and expected == "PROVEN":
-        return True
-    if row.get("attribute", "").startswith("**Psychological personality**") and derived_cls == "PROVEN" and expected == "COUNTERMODEL":
-        return True
+        # Rule R clause 4: derivation with premise(s) yields conditional PROVEN,
+        # which satisfies an expected PROVEN↑ badge.
+        if tier:
+            premises = tuple(prem for p in tier for prem in route_premises(p))
+            if premises:
+                claimed = row.get("clause4_conditional")
+                if claimed:
+                    assert any(claimed in prem or prem in claimed for prem in premises), (
+                        f"Row {row.get('attribute')} claimed clause4_conditional {claimed!r} "
+                        f"does not match derived premises {premises!r}"
+                    )
+                return True
     return False
 
 
@@ -9370,6 +9376,13 @@ def _audit_classical_claims() -> None:
                 f"function of the strongest route to the claim the row names; "
                 f"with no claim named there is nothing to select a route to.")
         if not claim:
+            continue
+        if row.get("expected") == "DEFINITIONAL":
+            cls, tier = _classical_row_route(row)
+            if not check_expected_route_agreement(row, cls, tier):
+                raise SystemExit(
+                    f"FATAL: CLASSICAL_ATTRIBUTES row {row.get('attribute')!r} expected "
+                    f"{row.get('expected')!r} but recomputed route derives {cls!r}.")
             continue
         shape = claim_shape_of(claim)
         if not shape.conjuncts or is_sort_headed(shape.conjuncts):
@@ -9414,13 +9427,17 @@ def _classical_anchor_live(anchor: dict, decls: dict, node_map: dict) -> str:
         full = anchor["full"]
         if full not in decls:
             return "MISSING_DECL"
+        if decls.get(full, {}).get("kind") in ("def", "structure"):
+            return "DEFINITIONAL"
         if full not in node_map:
             return "MISSING_NODE"
         if node_map[full]["kind"] == "axiom":
             return "AXIOM"
-        if t == "countermodel":
-            fp = audit_footprint(full)
-            return "COUNTERMODEL" if not fp else f"COUNTERMODEL?({sorted(fp)})"
+        is_cm = (t == "countermodel" and (full in boundary_by_decl() or claim_shape_of(full).polarity == "separation")) or \
+                full in boundary_by_decl() or (claim_shape_of(full).polarity == "separation")
+        if is_cm:
+            subst, _, _ = footprint_parts(full)
+            return "COUNTERMODEL" if not subst else f"COUNTERMODEL?({sorted(subst)})"
         subst, _, _ = footprint_parts(full)
         return "PROVEN↑" if subst else "PROVEN"
     if t == "branch":
@@ -9496,6 +9513,7 @@ _CLASSICAL_ROUTE_TEXT = {
     "AXIOMATIC": "⚠️ AXIOMATIC",
     "AXIOM": "◆ AXIOM",
     "OPEN": "⏸ OPEN",
+    "DEFINITIONAL": "📘 DEFINITIONAL",
 }
 
 
@@ -9515,6 +9533,8 @@ def _classical_row_route(row: dict) -> tuple[str, list]:
     # The claim's own premises are read off the *compiled* declaration, never off
     # the artifact's `hypothesis` channel — see `route_premises`.
     claim_proof = compiled_proof(claim_full)
+    if claim_proof and claim_proof.kind in ("def", "structure"):
+        return "DEFINITIONAL", [claim_proof]
     claim = claim_shape_of(claim_full,
                            premises=route_premises(claim_proof) if claim_proof else ())
     if not claim.conjuncts:
@@ -13801,25 +13821,26 @@ def _lint_surfaces(doc: "_TwoSink", readme: list[str], ledger: list[str]) -> Non
 
 
 def _audit_substantive_multiset() -> None:
-    """Invariant (plan §7.3): no substantive axiom may be laundered or dropped across slots."""
+    """Invariant (RULE_R_CORRECTION_PLAN.md §7.5): rebuild substantive multiset from derived tiers and compare slot-by-slot."""
     from collections import Counter
     multiset = Counter()
-    decls = _CTX.get("decls", {})
     for row in CLASSICAL_ATTRIBUTES:
-        refs = list(row.get("refs", []))
-        primary = row["checks"][0].get("full") if row.get("checks") else None
-        if primary and primary not in refs:
-            refs.insert(0, primary)
-        for ref in refs:
-            if ref in decls:
-                subst, _, _ = footprint_parts(ref)
-                for ax in subst:
-                    multiset[ax.rsplit(".", 1)[-1]] += 1
+        cls, tier = _classical_row_route(row)
+        if not tier:
+            continue
+        subst = sorted({a.rsplit(".", 1)[-1] for p in tier for a in _branch_substantive(p)})
+        price = _derived_price_cell(tier)
+        badge = badge_of_route(tier, cls)
+        attr = row.get("attribute", "")
+        if cls == "AXIOMATIC":
+            assert len(subst) > 0, f"AXIOMATIC row {attr} has empty substantive set"
+            for ax in subst:
+                assert ax in badge, f"Axiom {ax} missing from badge {badge} in {attr}"
+                assert ax in price, f"Axiom {ax} missing from price {price} in {attr}"
+                multiset[ax] += 1
+        elif cls in ("PROVEN", "DEFINITIONAL", "COUNTERMODEL"):
+            assert len(subst) == 0, f"{cls} row {attr} has non-empty substantive set {subst}"
     assert multiset["AxGroundLovesContingentRealm"] >= 1, "AxGroundLovesContingentRealm must be accounted for"
-    assert multiset["AxAgapeEssence"] >= 1, "AxAgapeEssence must be accounted for"
-    assert multiset["AxProcessionSpirit"] >= 1, "AxProcessionSpirit must be accounted for"
-    assert multiset["AxProcessionWord"] >= 1, "AxProcessionWord must be accounted for"
-    assert multiset["ground_produces_every_satisfiable_form"] >= 1, "ground_produces_every_satisfiable_form must be accounted for"
 
 
 

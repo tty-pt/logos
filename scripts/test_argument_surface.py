@@ -392,29 +392,82 @@ def main() -> int:
     check(len(block_matches) >= 10, f"expected at least 10 anchored component blocks in README.md, got {len(block_matches)}")
     for anchor, src in block_matches:
         check(anchor == src, f"block anchor <a id=\"{anchor}\"> does not match block SOURCE declaration {src}")
+    check('<a id="asietic_summary"></a>' in readme,
+          "alias anchor #asietic_summary must be rendered in README.md (RULE_R_CORRECTION_PLAN.md §7.4)")
 
-    # Item 12: No unbalanced ⟨/⟩ fragments in rendered natural deduction steps
+    # Item 12 (RULE_R_CORRECTION_PLAN.md §6): Natural deduction trace constructor rendering
+    # No rendered step may be a bare proof-term subterm (reject ^\d+\.\s+(s|p|q|rfl)$ and
+    # any step containing ⟨ or ⟩ in constructor traces), and each step must correspond to a
+    # recorded ProofIR step kind.
+    asiety_block_m = re.search(
+        r'<a id="weakChoice_implies_asiety"></a>.*?(?=<a id=|\Z)',
+        readme, re.DOTALL)
+    check(bool(asiety_block_m), "weakChoice_implies_asiety block missing from README.md")
+    if asiety_block_m:
+        asiety_block = asiety_block_m.group(0)
+        asiety_steps = re.findall(r"^\s*(\d+\.\s*.*)", asiety_block, re.MULTILINE)
+        check(len(asiety_steps) > 0, "no rendered steps found in weakChoice_implies_asiety block")
+        for step in asiety_steps:
+            check(not re.search(r"^\d+\.\s*(s|p|q|rfl)\b", step.strip()),
+                  f"bare proof-term subterm found in weakChoice_implies_asiety: {step}")
+            check("⟨" not in step and "⟩" not in step,
+                  f"unresolved constructor bracket found in weakChoice_implies_asiety: {step}")
+
+    # Globally across rendered surfaces: no unbalanced brackets, and no bare subterm component witnesses
     for fname, text in [("README.md", readme), ("ledger.md", ledger)]:
         for ln in text.splitlines():
             m = re.match(r"^\s*\d+\.\s*(.*)", ln)
             if m:
                 step = m.group(1)
-                check(step.count("⟨") == step.count("⟩"), f"unbalanced ⟨/⟩ in step ({fname}): {ln}")
+                check(step.count("⟨") == step.count("⟩"), f"balanced ⟨/⟩ in step ({fname}): {step[:60]}")
+                check(not re.search(r"component witness \d+:\s*(s|p|q|rfl)$", step.strip()),
+                      f"no bare component witness in step ({fname}): {step[:60]}")
 
-    # Item 13: test_badges_match_selection
+    # Item 13 (RULE_R_CORRECTION_PLAN.md §7.2, §7.3): test_badges_match_selection & census reconciliation
     census_path = ROOT / "formal" / "badge_census.json"
     if census_path.exists():
         census = json.loads(census_path.read_text(encoding="utf-8"))
         for s in census.get("slots", []):
             slot_id = s["id"]
+            verdict = s["verdict"]
+
+            # Census reconciliation: considered >= sum(rejected)
+            rej = s.get("routes_rejected", {})
+            check(s["routes_considered"] >= sum(rej.values()),
+                  f"census slot {slot_id} routes_considered >= sum(rejected)")
+
             if s["surface"] == "classical_attributes":
-                check(slot_id in ledger or slot_id in readme, f"census slot {slot_id} missing from rendered surfaces")
+                pattern = rf"^\|\s*\*\*{re.escape(slot_id)}[^*]*\*\*[^\n]*"
+                m = re.search(pattern, ledger, re.MULTILINE)
+                check(bool(m), f"classical attribute {slot_id} found in ledger.md")
+                if m:
+                    cells = [c.strip() for c in m.group(0).split("|")]
+                    status_cell = cells[3] if len(cells) > 3 else ""
+                    if verdict == "PROVEN":
+                        check("PROVEN" in status_cell, f"{slot_id} status cell verified as PROVEN")
+                    elif verdict == "AXIOMATIC":
+                        check("AXIOMATIC" in status_cell, f"{slot_id} status cell verified as AXIOMATIC")
+                    elif verdict == "COUNTERMODEL":
+                        check("COUNTERMODEL" in status_cell or "INDEPENDENT" in status_cell,
+                              f"{slot_id} status cell verified as COUNTERMODEL")
+                    elif verdict == "DEFINITIONAL":
+                        check("DEFINITIONAL" in status_cell, f"{slot_id} status cell verified as DEFINITIONAL")
+                    elif verdict == "AXIOM":
+                        check("AXIOM" in status_cell, f"{slot_id} status cell verified as AXIOM")
+                    elif verdict in ("ABSENT", "NOT ESTABLISHED"):
+                        check("NOT ESTABLISHED" in status_cell or "ABSENT" in status_cell,
+                              f"{slot_id} status cell verified as NOT ESTABLISHED")
+                    elif verdict == "DEFERRED":
+                        check("DEFERRED" in status_cell, f"{slot_id} status cell verified as DEFERRED")
             elif s["surface"] == "characteristic_sections":
                 winner_short = s["winner"].rsplit(".", 1)[-1]
-                check(winner_short in readme, f"characteristic slot winner {winner_short} missing from README")
+                check(winner_short in readme, f"characteristic slot winner {winner_short} found in README")
+                check(s["rendered_badge"] in readme or s["rendered_badge"] in ledger,
+                      f"characteristic slot {slot_id} rendered_badge verified on surface")
             elif s["surface"] == "seven_pillars":
                 num = slot_id.split("_")[1]
-                check(f"**{num}." in ledger, f"pillar {num} missing from ledger")
+                check(f"**{num}." in ledger, f"pillar {num} found in ledger")
+                check(s["rendered_badge"] in ledger, f"pillar {num} rendered_badge verified in ledger")
 
     if errors:
         print(f"\nFAIL: {len(errors)} argument-surface regression(s)")

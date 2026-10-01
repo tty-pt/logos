@@ -14,6 +14,7 @@ Validates:
 """
 
 import sys
+import re
 import copy
 import tempfile
 from pathlib import Path
@@ -318,14 +319,18 @@ def test_classifier_agreement(decls, node_map, graph, sections):
         + "; ".join(disagreements))
     assert routed > 0, "no routed declarations found — the census proved nothing"
 
-    # The two positive-existence theorems that the `∃` proxy used to misread. Named
+    # The positive-existence theorems that the `∃` proxy used to misread. Named
     # explicitly: a count going to zero would also mean the check stopped running.
+    # Note (RULE_R_CORRECTION_PLAN.md §3.3): the_creation_countermodel_is_a_populated_contingent_world
+    # audits polarity 'positive' (an ∃ statement) but is registered as a COUNTERMODEL
+    # in GAPMAP (C563), so its refutation_kind is 'COUNTERMODEL · ⇏', exactly like
+    # unicity_does_not_force_unitarian_monad (C212).
     for full, expected_kind in (
         ("Logos.FoundationalUnicity.exactly_one_universal_modal_ground",
          "🪞 INSTANTIATION — not a death"),
         ("Logos.ConditionalTheology."
          "the_creation_countermodel_is_a_populated_contingent_world",
-         "🪞 INSTANTIATION — not a death"),
+         "COUNTERMODEL · ⇏"),
         ("Logos.FoundationalUnicity.unicity_does_not_force_unitarian_monad",
          "COUNTERMODEL · ⇏"),
     ):
@@ -438,6 +443,30 @@ def test_claim_relative_ladder(decls, node_map, graph, sections):
     assert bd.claim_is_separation(pant) is True
     print("  ✓ Both separation channels asserted on the declaration that needs them.")
 
+    # (2b) Populated creation countermodel (§3): registered in GAPMAP (C563) so
+    #      proof.boundary is non-None, claim_is_separation is True, and strength_of
+    #      is COUNTERMODEL. Both positive and negative counterparts named in row.
+    POPULATED = "Logos.ConditionalTheology.the_creation_countermodel_is_a_populated_contingent_world"
+    pop_p = bd.compiled_proof(POPULATED)
+    assert pop_p is not None, f"{POPULATED} is not compiled"
+    pop_claim = bd.claim_shape_of(POPULATED, premises=bd.route_premises(pop_p))
+    assert bd.claim_is_separation(pop_claim) is True, (
+        f"{POPULATED} must be a separation via GAPMAP registration"
+    )
+    assert pop_p.boundary is not None, (
+        f"{POPULATED} proof.boundary must be non-None with kind countermodel"
+    )
+    assert bd.strength_of(pop_p, pop_claim) == "COUNTERMODEL", (
+        f"{POPULATED} must evaluate to COUNTERMODEL"
+    )
+    creator_row = next(r for r in bd.CLASSICAL_ATTRIBUTES if r.get("attribute", "").startswith("**Creator of contingent reality**"))
+    check_decls = [c.get("full") for c in creator_row.get("checks", [])]
+    assert POPULATED in check_decls, f"{POPULATED} must be named in Creator row checks"
+    assert "Logos.ConditionalTheology.a_populated_contingent_world_can_also_carry_creation" in check_decls, (
+        "Positive counterpart a_populated_contingent_world_can_also_carry_creation must be named in Creator row checks"
+    )
+    print("  ✓ Populated creation countermodel asserted: boundary present, separation True, both directions named.")
+
     # (3) A terminator with no claim to refute must fail the build, not be badged.
     #     A route that merely *proves* something has no terminator, so the guard
     #     cannot be exercised with it — it takes a `⊥`-concluding theorem.
@@ -490,6 +519,112 @@ def test_select_slot_route(decls, node_map):
     print("  ✓ select_slot_route (Level 2) verified; no multi-claim slot in CLASSICAL_ATTRIBUTES asserted.")
 
 
+def test_expected_route_agreement():
+    import inspect
+    print("Testing check_expected_route_agreement discipline (RULE_R_CORRECTION_PLAN.md §4)…")
+    src = inspect.getsource(bd.check_expected_route_agreement)
+    assert 'startswith("**' not in src, (
+        "check_expected_route_agreement must contain no hardcoded row-name escapes"
+    )
+
+    pant_row = next(r for r in bd.CLASSICAL_ATTRIBUTES if r.get("attribute", "").startswith("**Exclusion of pantheism**"))
+    assert pant_row.get("expected") == "COUNTERMODEL", (
+        "Exclusion of pantheism must expect COUNTERMODEL per kernel polarity separation"
+    )
+    assert bd.check_expected_route_agreement(pant_row, "COUNTERMODEL") is True
+    assert bd.check_expected_route_agreement(pant_row, "PROVEN") is False, (
+        "Pantheism row must not pass with PROVEN against expected COUNTERMODEL"
+    )
+
+    psych_row = next(r for r in bd.CLASSICAL_ATTRIBUTES if r.get("attribute", "").startswith("**Psychological personality**"))
+    assert psych_row.get("expected") == "PROVEN", (
+        "Psychological personality must expect PROVEN per kernel derivation at {}"
+    )
+    assert bd.check_expected_route_agreement(psych_row, "PROVEN") is True
+    assert bd.check_expected_route_agreement(psych_row, "COUNTERMODEL") is False, (
+        "Psychological personality row must not pass with COUNTERMODEL against expected PROVEN"
+    )
+
+    # Clause 4 conditional testing:
+    asiety_row = next(r for r in bd.CLASSICAL_ATTRIBUTES if r.get("attribute", "").startswith("**Asiety**"))
+    p_mock = bd.ProofIR(
+        full_name="mock", name="mock", kind="thm", file="", line=0, goal="", doc="",
+        assumptions=[bd.ProofStepIR(var_name="h", proposition="GenuineNormativity s p q", rule=bd.Rule.ASSUMPTION)],
+    )
+    assert bd.check_expected_route_agreement(asiety_row, "PROVEN", tier=[p_mock]) is True
+
+    p_bad = bd.ProofIR(
+        full_name="mock", name="mock", kind="thm", file="", line=0, goal="", doc="",
+        assumptions=[bd.ProofStepIR(var_name="h", proposition="UnrelatedPremise", rule=bd.Rule.ASSUMPTION)],
+    )
+    try:
+        bd.check_expected_route_agreement(asiety_row, "PROVEN", tier=[p_bad])
+        raise AssertionError("Expected AssertionError for mismatched clause4_conditional")
+    except AssertionError as e:
+        assert "does not match derived premises" in str(e)
+
+    p_empty = bd.ProofIR(full_name="mock", name="mock", kind="thm", file="", line=0, goal="", doc="")
+    assert bd.check_expected_route_agreement(asiety_row, "PROVEN", tier=[p_empty]) is False
+
+    print("  ✓ check_expected_route_agreement verified: no row-name escapes, derived == expected, clause4 validated.")
+
+
+def test_dominion_row_definitional():
+    print("Testing Dominion over acts definitional status (RULE_R_CORRECTION_PLAN.md §5)…")
+    row = next(r for r in bd.CLASSICAL_ATTRIBUTES if r.get("attribute", "").startswith("**Dominion over acts**"))
+    assert row.get("expected") == "DEFINITIONAL", f"Dominion row expected must be DEFINITIONAL, got {row.get('expected')}"
+    assert "Logos.Person.person_iff_thomisticCore" in row.get("refs", []), (
+        "person_iff_thomisticCore must be in Dominion row refs"
+    )
+    cls, tier = bd._classical_row_route(row)
+    assert cls == "DEFINITIONAL", f"Dominion row derived class must be DEFINITIONAL, got {cls}"
+    assert tier and tier[0].boundary is None, "Dominion row proof.boundary must be None"
+
+    decls = bd.parse_lean_sources()
+    dep_data = bd.load_depgraph()
+    node_map = dep_data.get("node_map", {})
+    cell = bd._classical_row_status_cell(row, decls, node_map)
+    assert "conditional on RightWrong" not in cell, (
+        f"Dominion row cell must not contain 'conditional on RightWrong', got: {cell}"
+    )
+    assert "📘 **DEFINITIONAL**" in cell, f"Dominion row cell must contain 📘 **DEFINITIONAL**, got: {cell}"
+    print("  ✓ Dominion row verified: class DEFINITIONAL, boundary None, no conditional.")
+
+
+def test_constructor_rendering():
+    print("Testing ND trace constructor rendering discipline (RULE_R_CORRECTION_PLAN.md §6)…")
+    decls = bd.parse_lean_sources()
+    p = bd.compile_lean_proof("Logos.AsietyFreedom.weakChoice_implies_asiety", decls, {}, {}, {})
+    assert len(p.steps) == 1, f"Expected 1 opaque constructor step, got {len(p.steps)}"
+    step = p.steps[0]
+    assert step.proposition == "constructor", f"Expected proposition 'constructor', got {step.proposition!r}"
+    assert step.rule in (bd.Rule.EXISTENTIAL_INTRO, bd.Rule.CONJUNCTION_INTRO), (
+        f"Step rule {step.rule} must be a constructor introduction rule"
+    )
+    assert not any(re.match(r"^(s|p|q|rfl)$", s.proposition) for s in p.steps), (
+        "No step proposition may be a bare variable or rfl"
+    )
+    assert not any("⟨" in s.proposition or "⟩" in s.proposition for s in p.steps), (
+        "No step proposition may contain brackets ⟨ or ⟩"
+    )
+    print("  ✓ Constructor rendering verified: single opaque constructor step, no subterm fragments.")
+
+
+def test_sort_headed_axiom_refused():
+    print("Testing refusal of sort-headed axioms (RULE_R_CORRECTION_PLAN.md §7.1)…")
+    shape = bd.claim_shape_of("Logos.Agency.Means")
+    assert shape.conjuncts == (), (
+        "claim_shape_of must refuse sort-headed axiom Logos.Agency.Means with empty conjuncts"
+    )
+    routes = bd.all_routes(shape)
+    assert routes == [], f"all_routes must yield no candidates for sort-headed axiom, got {routes}"
+    idx = bd.route_index()
+    assert not any("Logos.Agency.Means" in names for names in idx.values()), (
+        "Logos.Agency.Means must not be indexed in route_index"
+    )
+    print("  ✓ Sort-headed axiom refusal verified.")
+
+
 def main():
     decls = parse_lean_sources()
     sections = parse_gapmap()
@@ -525,6 +660,10 @@ def main():
     test_select_slot_route(decls, node_map)
     test_classifier_agreement(decls, node_map, graph, sections)
     test_claim_relative_ladder(decls, node_map, graph, sections)
+    test_expected_route_agreement()
+    test_dominion_row_definitional()
+    test_constructor_rendering()
+    test_sort_headed_axiom_refused()
     print("\nALL GENERITY, PROVENANCE, AND SENSITIVITY TESTS PASSED SUCCESSFULLY! (0 errors)")
 
 

@@ -9,8 +9,7 @@
       "routes_considered": 399,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 397
+        "incomparable": 327
       },
       "winner": "Logos.PersonalGroundOfReality.personal_ground_of_right_wrong",
       "verdict": "PROVEN",
@@ -27,8 +26,7 @@
       "routes_considered": 399,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 398
+        "incomparable": 328
       },
       "winner": "Logos.EpistemicPersonalGround.epistemic_ground_is_personal",
       "verdict": "PROVEN",
@@ -45,8 +43,7 @@
       "routes_considered": 385,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 384
+        "incomparable": 314
       },
       "winner": "Logos.PersonhoodOntologyAudit.faithful_model_satisfies_free_will_without_opaque_person",
       "verdict": "PROVEN",
@@ -63,8 +60,7 @@
       "routes_considered": 474,
       "routes_rejected": {
         "countermodel_namespace": 71,
-        "foreign_sort": 0,
-        "incomparable": 473
+        "incomparable": 402
       },
       "winner": "Logos.Person.person_iff_thomisticCore",
       "verdict": "PROVEN",
@@ -81,8 +77,7 @@
       "routes_considered": 390,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 387
+        "incomparable": 317
       },
       "winner": "Logos.PersonalNormativeGround.discovery_independent_of_grounding",
       "verdict": "PROVEN",
@@ -99,8 +94,7 @@
       "routes_considered": 385,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 384
+        "incomparable": 314
       },
       "winner": "Logos.AsietyFreedom.weakChoice_implies_asiety",
       "verdict": "PROVEN",
@@ -117,8 +111,7 @@
       "routes_considered": 385,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 384
+        "incomparable": 314
       },
       "winner": "Logos.AsietyFreedom.asietyFreedom_yields_asietyFreeWill",
       "verdict": "PROVEN",
@@ -135,8 +128,7 @@
       "routes_considered": 385,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 384
+        "incomparable": 314
       },
       "winner": "Logos.LovesAsGround.the_ground_is_a_necessary_and_chosen_lover",
       "verdict": "AXIOMATIC",
@@ -155,8 +147,7 @@
       "routes_considered": 474,
       "routes_rejected": {
         "countermodel_namespace": 71,
-        "foreign_sort": 0,
-        "incomparable": 473
+        "incomparable": 402
       },
       "winner": "Logos.Person.person_iff_freeIndependentWill",
       "verdict": "PROVEN",
@@ -168,19 +159,18 @@
       "surface": "classical_attributes",
       "id": "Dominion over acts",
       "claims": [
-        "Logos.PersonalNormativeGround.rightwrong_gives_rational_domination"
+        "Logos.Person.DominionOverActs"
       ],
-      "routes_considered": 386,
+      "routes_considered": 0,
       "routes_rejected": {
-        "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 385
+        "countermodel_namespace": 0,
+        "incomparable": 0
       },
-      "winner": "Logos.PersonalNormativeGround.rightwrong_gives_rational_domination",
-      "verdict": "PROVEN",
+      "winner": "Logos.Person.DominionOverActs",
+      "verdict": "DEFINITIONAL",
       "substantive": [],
       "stipulated": false,
-      "rendered_badge": "\u2705 **PROVEN** _(conditional on RightWrong s)_ \u00b7 0 substantive axioms \u00b7 `{Means, Subject}`"
+      "rendered_badge": "\ud83d\udcd8 **DEFINITIONAL** \u00b7 0 substantive axioms \u00b7 `{Means, Subject}`"
     },
     {
       "surface": "classical_attributes",
@@ -191,8 +181,7 @@
       "routes_considered": 390,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 389
+        "incomparable": 319
       },
       "winner": "Logos.PersonalNormativeGround.person_grounds_normative_polarity",
       "verdict": "PROVEN",
@@ -209,8 +198,7 @@
       "routes_considered": 385,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 384
+        "incomparable": 314
       },
       "winner": "Logos.HardenedInvariance.agent_invariant_core_is_strictly_inside_freewill_invariant_core",
       "verdict": "PROVEN",
@@ -227,8 +215,7 @@
       "routes_considered": 385,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 384
+        "incomparable": 314
       },
       "winner": "Logos.NecessityEternity.ofGround_necessary_ground_of_reality",
       "verdict": "PROVEN",
@@ -245,8 +232,7 @@
       "routes_considered": 386,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 385
+        "incomparable": 315
       },
       "winner": "Logos.CanonicalAseity.conditional_canonical_aseity",
       "verdict": "PROVEN",
@@ -263,8 +249,7 @@
       "routes_considered": 385,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 384
+        "incomparable": 314
       },
       "winner": "Logos.FoundationalUnicity.ofGround_foundational_unicity",
       "verdict": "PROVEN",
@@ -281,8 +266,7 @@
       "routes_considered": 385,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 384
+        "incomparable": 314
       },
       "winner": "Logos.FoundationalUnicity.unicity_does_not_force_unitarian_monad",
       "verdict": "COUNTERMODEL",
@@ -299,8 +283,7 @@
       "routes_considered": 386,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 385
+        "incomparable": 315
       },
       "winner": "Logos.FoundationalUnicity.exactly_one_universal_modal_ground",
       "verdict": "PROVEN",
@@ -315,7 +298,6 @@
       "routes_considered": 0,
       "routes_rejected": {
         "countermodel_namespace": 0,
-        "foreign_sort": 0,
         "incomparable": 0
       },
       "winner": null,
@@ -333,8 +315,7 @@
       "routes_considered": 386,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 385
+        "incomparable": 315
       },
       "winner": "Logos.NecessityEternity.the_ground_everlasting",
       "verdict": "PROVEN",
@@ -351,8 +332,7 @@
       "routes_considered": 387,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 386
+        "incomparable": 316
       },
       "winner": "Logos.NecessityEternity.the_ground_atemporal",
       "verdict": "PROVEN",
@@ -369,8 +349,7 @@
       "routes_considered": 385,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 384
+        "incomparable": 314
       },
       "winner": "Logos.Precedence.ofGround_precedes_the_right_wrong_distinction",
       "verdict": "PROVEN",
@@ -387,8 +366,7 @@
       "routes_considered": 384,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 383
+        "incomparable": 313
       },
       "winner": "Logos.CosmicExistence.the_ground_is_not_the_universe",
       "verdict": "COUNTERMODEL",
@@ -405,8 +383,7 @@
       "routes_considered": 386,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 385
+        "incomparable": 315
       },
       "winner": "Logos.DivineSimplicity.divine_simplicity_sole_bearer",
       "verdict": "PROVEN",
@@ -423,8 +400,7 @@
       "routes_considered": 404,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 403
+        "incomparable": 333
       },
       "winner": "Logos.DivineTranscendence.ofGround_sole_transcendent_ground",
       "verdict": "PROVEN",
@@ -439,7 +415,6 @@
       "routes_considered": 0,
       "routes_rejected": {
         "countermodel_namespace": 0,
-        "foreign_sort": 0,
         "incomparable": 0
       },
       "winner": null,
@@ -457,8 +432,7 @@
       "routes_considered": 386,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 385
+        "incomparable": 315
       },
       "winner": "Logos.DivineImmutability.ofGround_divine_immutability",
       "verdict": "PROVEN",
@@ -473,7 +447,6 @@
       "routes_considered": 0,
       "routes_rejected": {
         "countermodel_namespace": 0,
-        "foreign_sort": 0,
         "incomparable": 0
       },
       "winner": null,
@@ -491,8 +464,7 @@
       "routes_considered": 386,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 385
+        "incomparable": 315
       },
       "winner": "Logos.FoundationalOmnipresence.ofGround_foundational_omnipresence",
       "verdict": "PROVEN",
@@ -507,7 +479,6 @@
       "routes_considered": 0,
       "routes_rejected": {
         "countermodel_namespace": 0,
-        "foreign_sort": 0,
         "incomparable": 0
       },
       "winner": null,
@@ -523,7 +494,6 @@
       "routes_considered": 0,
       "routes_rejected": {
         "countermodel_namespace": 0,
-        "foreign_sort": 0,
         "incomparable": 0
       },
       "winner": null,
@@ -541,8 +511,7 @@
       "routes_considered": 387,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 386
+        "incomparable": 316
       },
       "winner": "Logos.DivinePureActuality.ofGround_divine_pure_actuality",
       "verdict": "PROVEN",
@@ -557,7 +526,6 @@
       "routes_considered": 0,
       "routes_rejected": {
         "countermodel_namespace": 0,
-        "foreign_sort": 0,
         "incomparable": 0
       },
       "winner": null,
@@ -575,8 +543,7 @@
       "routes_considered": 386,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 385
+        "incomparable": 315
       },
       "winner": "Logos.DivineOmniscience.ofGround_foundational_omniscience",
       "verdict": "PROVEN",
@@ -591,7 +558,6 @@
       "routes_considered": 0,
       "routes_rejected": {
         "countermodel_namespace": 0,
-        "foreign_sort": 0,
         "incomparable": 0
       },
       "winner": null,
@@ -609,8 +575,7 @@
       "routes_considered": 386,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 385
+        "incomparable": 315
       },
       "winner": "Logos.DivineOmnipotence.ofGround_foundational_omnipotence",
       "verdict": "PROVEN",
@@ -627,8 +592,7 @@
       "routes_considered": 385,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 384
+        "incomparable": 314
       },
       "winner": "Logos.ThomisticAct.ground_produces_every_satisfiable_form",
       "verdict": "AXIOM",
@@ -642,15 +606,14 @@
       "surface": "classical_attributes",
       "id": "Creator of contingent reality",
       "claims": [
-        "Logos.TheologicalModalHardening.necessary_entity_not_forces_contingent_creation"
+        "Logos.ConditionalTheology.the_creation_countermodel_is_a_populated_contingent_world"
       ],
       "routes_considered": 385,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 384
+        "incomparable": 314
       },
-      "winner": "Logos.TheologicalModalHardening.necessary_entity_not_forces_contingent_creation",
+      "winner": "Logos.ConditionalTheology.the_creation_countermodel_is_a_populated_contingent_world",
       "verdict": "COUNTERMODEL",
       "substantive": [],
       "stipulated": false,
@@ -665,8 +628,7 @@
       "routes_considered": 385,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 384
+        "incomparable": 314
       },
       "winner": "Logos.DivineAgape.agape_entails_tripersonality",
       "verdict": "AXIOMATIC",
@@ -687,8 +649,7 @@
       "routes_considered": 385,
       "routes_rejected": {
         "countermodel_namespace": 70,
-        "foreign_sort": 0,
-        "incomparable": 384
+        "incomparable": 314
       },
       "winner": "Logos.ConditionalTheology.preceding_theory_not_entails_incarnation",
       "verdict": "COUNTERMODEL",
@@ -1059,12 +1020,13 @@
   ],
   "totals": {
     "slots": 64,
-    "PROVEN": 48,
+    "PROVEN": 47,
     "AXIOMATIC": 4,
     "CONTRADICTION": 0,
     "COUNTERMODEL": 5,
     "AXIOM": 1,
     "OPEN": 0,
+    "DEFINITIONAL": 1,
     "ABSENT": 6
   }
 }

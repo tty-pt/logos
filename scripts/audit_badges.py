@@ -63,9 +63,12 @@ def generate_badge_census() -> dict:
 
         routes_rejected = {
             "countermodel_namespace": sum(1 for w in reasons.values() if "countermodel" in w),
-            "foreign_sort": sum(1 for w in reasons.values() if "model-local" in w or "foreign" in w),
-            "incomparable": sum(1 for w in reasons.values() if "INCOMPARABLE" in w or "does not assert" in w),
+            "incomparable": sum(1 for w in reasons.values() if "does not assert" in w),
         }
+        assert len(reasons) >= sum(routes_rejected.values()), (
+            f"Census slot {cid} rejection categories must not exceed considered: "
+            f"{len(reasons)} < {routes_rejected}"
+        )
 
         verdict = cls if cls else (row.get("expected") or "OPEN")
         if verdict not in totals:

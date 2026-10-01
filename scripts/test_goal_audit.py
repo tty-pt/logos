@@ -8,7 +8,7 @@ wrong. One of those spot-checks had a truncated goal string with its tail filled
 in by hand. **No claim about this artifact may be made without an assertion here.**
 
 Each check below corresponds to a measured defect recorded in
-`ASIETY_ROUTE_SELECTION_PLAN.md` §13.3. If one of them starts failing, the
+`RULE_R_CORRECTION_PLAN.md` §12.3. If one of them starts failing, the
 artifact is drifting — do not relax the assertion to make the suite green; find
 the cause in `scripts/audit_goals.py`.
 

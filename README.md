@@ -526,41 +526,32 @@ Attaching each one to a numbered step would have been tidier, and false.
         SOURCE  ✅ · [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will](formal/Logos/IndubitableNormativeFreeWill.lean#L115) (+2 co-routes at the same price — see ledger)
         ↑ a personal-scope attribute; reached in parallel with the spine, not by it
 
+<a id="asietic_summary"></a>
 <a id="weakChoice_implies_asiety"></a>
-    ▸ **Asiety**  ·  Premises: 1 · 5 steps
-        ⚙️ DERIVATION — 5 compiled steps
+    ▸ **Asiety**  ·  Premises: 1 · 1 step
+        ⚙️ DERIVATION — one step, a projection
         Assume GenuineNormativity s p q
-          1. s  (component witness 1: s)
-          2. p  (component witness 2: p)
-          3. q  (component witness 3: q)
-          4. rfl  (component witness 4: rfl)
-          5. ⟨⟨h.address.1, h.address.2, h.opposition.1⟩, h.opposition.1, contested_content⟩  (component witness 5: ⟨⟨h.address.1, h.address.2, h.opposition.1⟩, h.opposition.1, contested_content⟩)
+          1. constructor  (existential constructor introduction)
         ∴ Asiety(EntityOf(s))
         PRICE      ✅ **PROVEN** _(conditional on GenuineNormativity s p q)_ · 0 substantive axioms · `{Means, Subject}`
         SOURCE  ✅ · [AsietyFreedom.lean#weakChoice_implies_asiety](formal/Logos/AsietyFreedom.lean#L150)
         ↑ a personal-scope attribute; reached in parallel with the spine, not by it
 
 <a id="person_iff_freeIndependentWill"></a>
-    ▸ **Independent will**  ·  Premises: 0 · 2 steps
-        ⚙️ DERIVATION — 2 compiled steps
-          1. fun h => ⟨h.2.2, h.1⟩  (component witness 1: fun h => ⟨h.2.2, h.1⟩)
-          2. fun ⟨hFW, hI⟩ => ⟨hI, freeWill_implies_rationalNature s hFW, hFW⟩  (component witness 2: fun ⟨hFW, hI⟩ => ⟨hI, freeWill_implies_rationalNature s hFW, hFW⟩)
+    ▸ **Independent will**  ·  Premises: 0 · 1 step
+        ⚙️ DERIVATION — one step, a projection
+          1. constructor  (existential constructor introduction)
         ∴ Person(s) ↔ FreeIndependentWill(s)
         PRICE      ✅ **PROVEN** · 0 substantive axioms · `{Means, Subject, Will, subjectWill}`
         SOURCE  ✅ · [Person.lean#person_iff_freeIndependentWill](formal/Logos/Person.lean#L166)
         ↑ a personal-scope attribute; reached in parallel with the spine, not by it
 
-<a id="rightwrong_gives_rational_domination"></a>
-    ▸ **Dominion over acts** / authoritative personhood  ·  Premises: 1 · 4 steps
-        ⚙️ DERIVATION — 4 compiled steps
-        Assume RightWrong(s)
-          1. witness components ⟨p, q, h0⟩  (existential elimination from h)
-          2. witness components ⟨hChooses, hFreeWill⟩  (existential elimination from indubitable_normative_free_will h0)
-          3. ⟨⟨p, hChooses.1⟩, ⟨p, q, hChooses.1, hChooses.2.1, Or.inr hChooses.2.2⟩⟩  (conjunction conjunct 1: ⟨⟨p, hChooses.1⟩, ⟨p, q, hChooses.1, hChooses.2.1, Or.inr hChooses.2.2⟩⟩)
-          4. hFreeWill  (conjunction conjunct 2: hFreeWill)
-        ∴ RationalNature(s) ∧ DominionOverActs(s)
-        PRICE      ✅ **PROVEN** _(conditional on RightWrong(s))_ · 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [PersonalNormativeGround.lean#rightwrong_gives_rational_domination](formal/Logos/PersonalNormativeGround.lean#L455)
+<a id="DominionOverActs"></a>
+    ▸ **Dominion over acts** / authoritative personhood  ·  Premises: 0 · 0 steps
+        📘 DEFINITIONAL — a definition, with no step to show
+        ∴ DominionOverActs ≡ FreeWill(s)
+        PRICE      📘 **DEFINITIONAL** · 0 substantive axioms · `{Means, Subject}`
+        SOURCE  📘 · [Person.lean#DominionOverActs](formal/Logos/Person.lean#L56)
         ↑ a personal-scope attribute; reached in parallel with the spine, not by it
 
 <a id="person_grounds_normative_polarity"></a>
@@ -618,9 +609,8 @@ DEPENDS ON   no premises — a closed theorem
 GIVES        used by `the_ground_grounds_a_contingent_true_chooser`, `claimE`
 
 PROOF
-    ⚙️ DERIVATION — 2 compiled steps
-      1. ofGround_necessary  (component witness 1: ofGround_necessary)
-      2. ofGround_ground_of_reality  (component witness 2: ofGround_ground_of_reality)
+    ⚙️ DERIVATION — one step, a projection
+      1. constructor  (existential constructor introduction)
     ∴ NecessaryGroundOfReality Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
@@ -706,11 +696,9 @@ DEPENDS ON   ∀ s, ∃ p, ¬Means(s, p)
 GIVES        used by `exactly_one_universal_modal_ground_stipulated`
 
 PROOF
-    ⚙️ DERIVATION — 3 compiled steps
+    ⚙️ DERIVATION — one step, a projection
     Assume ∀ s, ∃ p, ¬Means(s, p)
-      1. Entity.ofGround  (component witness 1: Entity.ofGround)
-      2. ofGround_universal_modal_ground  (component witness 2: ofGround_universal_modal_ground)
-      3. fun g' hU' => ofGround_unicity_from_no_discriminating_subject hNoTotal g' actualWorld hU'  (component witness 3: fun g' hU' => ofGround_unicity_from_no_discriminating_subject hNoTotal g' actualWorld hU')
+      1. constructor  (conjunction constructor introduction)
     ∴ ∃ g, UniversalModalGround(g) ∧ (∀ g', UniversalModalGround(g') → g' = g)
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
@@ -756,11 +744,9 @@ PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySu
 SOURCE     ✅ · [Precedence.lean#ofGround_precedes_the_right_wrong_distinction](formal/Logos/Precedence.lean#L263)
 
 <a id="ofGround_obtains_where_no_atom_is_true"></a>
-    ▸ obtains_where_no_atom_is_true  ·  Premises: 0 · 3 steps
-        ⚙️ DERIVATION — 3 compiled steps
-          1. falsityWorld  (component witness 1: falsityWorld)
-          2. fun n => no_atom_is_true_at_falsityWorld n  (component witness 2: fun n => no_atom_is_true_at_falsityWorld n)
-          3. trivial  (component witness 3: trivial)
+    ▸ obtains_where_no_atom_is_true  ·  Premises: 0 · 1 step
+        ⚙️ DERIVATION — one step, a projection
+          1. constructor  (conjunction constructor introduction)
         ∴ ∃ w, (∀ n, ¬w ⊨ atom(n)) ∧ ExistsAt(w, Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
         SOURCE  ✅ · [Precedence.lean#ofGround_obtains_where_no_atom_is_true](formal/Logos/Precedence.lean#L122)
@@ -799,10 +785,9 @@ DEPENDS ON   ∀ s, ∃ p, ¬Means(s, p)
 GIVES        used by `the_ground_is_sole_bearer_of_divine_simplicity`
 
 PROOF
-    ⚙️ DERIVATION — 2 compiled steps
+    ⚙️ DERIVATION — one step, a projection
     Assume ∀ s, ∃ p, ¬Means(s, p)
-      1. ofGround_divine_simplicity hFinite  (component witness 1: ofGround_divine_simplicity hFinite)
-      2. divine_simplicity_is_unique_to_the_ground  (component witness 2: divine_simplicity_is_unique_to_the_ground)
+      1. constructor  (conjunction constructor introduction)
     ∴ DivineSimplicity Entity.ofGround ∧ (∀ e, DivineSimplicity e → e = Entity.ofGround)
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject, propext}`
@@ -905,10 +890,9 @@ SOURCE     ✅ · [FoundationalOmnipresence.lean#ofGround_foundational_omniprese
         ↑ a component of ofGround_foundational_omnipresence
 
 <a id="ofGround_non_reciprocal_ground"></a>
-    ▸ non_reciprocal  ·  Premises: 0 · 2 steps
-        ⚙️ DERIVATION — 2 compiled steps
-          1. atom_cannot_ground_the_ground  (component witness 1: atom_cannot_ground_the_ground)
-          2. discriminating_subject_cannot_ground_the_ground  (component witness 2: discriminating_subject_cannot_ground_the_ground)
+    ▸ non_reciprocal  ·  Premises: 0 · 1 step
+        ⚙️ DERIVATION — one step, a projection
+          1. constructor  (existential constructor introduction)
         ∴ NonReciprocalGround(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
         SOURCE  ✅ · [FoundationalOmnipresence.lean#ofGround_non_reciprocal_ground](formal/Logos/FoundationalOmnipresence.lean#L108)
@@ -1115,13 +1099,8 @@ DEPENDS ON   no premises — a closed theorem
 GIVES        the established attribute; nothing downstream in the corpus consumes it
 
 PROOF
-    💰 PRICED — 6 steps, on a declared axiom
-      1. trinitarian_inhabitation  (component witness 1: trinitarian_inhabitation)
-      2. rfl  (component witness 2: rfl)
-      3. rfl  (component witness 3: rfl)
-      4. rfl  (component witness 4: rfl)
-      5. AxProcessionWord  (component witness 5: AxProcessionWord)
-      6. the_spirit_is_spirit  (component witness 6: the_spirit_is_spirit)
+    💰 PRICED — one step, a projection
+      1. constructor  (conjunction constructor introduction)
     ∴ ∃ t,DivinePerson Entity, t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** — 3 substantive axioms: AxAgapeEssence, AxProcessionSpirit, AxProcessionWord · `{AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, choice}`
@@ -1732,8 +1711,8 @@ decision: `scripts/census_stipulated_defs.py`.
 
 | **Won** | **Still open** |
 |---|---|
-| **426 affirmative claims derived** out of **558** ledger claims — 362 ✅ kernel-verified, 64 ⚠️ derived under a substantive (`SEM`/`META`) axiom, each ⚠️ row naming the bridge it rests on. | **14 blocked** ✖ — named individually |
-| **60 countermodel boundaries** 🧱 — a hostile model in which the claim *fails*. These are won results about the limit of the theory, not gaps. | &nbsp;&nbsp;· **C228** — any entity that grounds Right/Wrong is a Personal Entity |
+| **426 affirmative claims derived** out of **559** ledger claims — 362 ✅ kernel-verified, 64 ⚠️ derived under a substantive (`SEM`/`META`) axiom, each ⚠️ row naming the bridge it rests on. | **14 blocked** ✖ — named individually |
+| **61 countermodel boundaries** 🧱 — a hostile model in which the claim *fails*. These are won results about the limit of the theory, not gaps. | &nbsp;&nbsp;· **C228** — any entity that grounds Right/Wrong is a Personal Entity |
 | **965 of 1790 theorems in `formal/Logos/` rest on no Γ axiom at all** (54%) — counted from `formal/axiom_audit.json`, not claimed. | &nbsp;&nbsp;· **C462** — BLOCKED, with no declaration, and deliberately so: the ground does not initiate is not refutable in Gamma and is not evidence of non-agency either |
 | **The whole price is 35 declared axioms**: 17 are `VOCAB` (the vocabulary the statements need in order to be sayable) and 18 are substantive. Only the 18 are philosophical commitments; the rest are the theory's definitions of its own words, which is a different thing from a premise. | &nbsp;&nbsp;· **C503** — A love-lane step for deriving the Good from a second person is BLOCKED, with no declaration (lote OTHER, 2026-09-29; plan OTHER.md): the step 'the… |
 | **10 attribute corollaries became unconditional theorems** (C389–C398) — they were conditional on a `def` until F15 was declared, so this is a *strengthening*: fewer hidden premises, same conclusions. | &nbsp;&nbsp;· **C73** — Plurality without bridges is blocked: unit countermodel settles that 1 act does not entail plurality; requires AxTwoSubjects |

@@ -50,12 +50,12 @@ theorem weakChoice_implies_asiety {s : Subject} {p q : Prop}
     (h : GenuineNormativity s p q) : Asiety (EntityOf s)
 ```
 
-Pegada auditada: `{Means, Subject}` — so vocabulario. **Zero axiomas**, nenhuma premissa
-escrita, nenhuma `Act`, nenhum `Initiates`, nenhum `ClaimsCorrect`, nenhuma
-estipulacao. O unico conteudo para alem das duas conjuncoes `Means` e o facto de quadro
-`ContestedContent` (C259, `{}`): a **abertura**. Compare-se com C266/C267, que precisam de
-`AxJudicativeBipolarity` (SEM) *e* da premissa `ClaimsCorrect s p`, e com C277-C279, que
-precisam de `AxTwoSubjects` (META).
+Pegada auditada: `{Means, Subject}` — so vocabulario. **Zero axiomas**, condicional sob a
+hipotese de endereco normativo genuino `GenuineNormativity s p q` (Rule R, clausula 4), nenhuma
+`Act`, nenhum `Initiates`, nenhum `ClaimsCorrect`, nenhuma estipulacao. O unico conteudo para
+alem das duas conjuncoes `Means` e o facto de quadro `ContestedContent` (C259, `{}`): a
+**abertura**. Compare-se com C266/C267, que precisam de `AxJudicativeBipolarity` (SEM) *e* da
+premissa `ClaimsCorrect s p`, e com C277-C279, que precisam de `AxTwoSubjects` (META).
 
 C288 — O mesmo passo lido na direccao da liberdade:
 
