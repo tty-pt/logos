@@ -122,9 +122,13 @@ INTENTIONAL_REVISIONS: list[tuple[str, str, str]] = [
     ),
     (
         "**Strict numerical unitarianism** (ruling out relational internal plurality/persons)",
-        "**Strict monotheism** (the ground is a *single* Person — a unitarian monad)",
-        "Retitled to the question it actually asks, and its status changed from open to "
-        "refuted-as-a-consequence (C212, `unicity_does_not_force_unitarian_monad`, `{}`).",
+        "**Numerical unitarianism** (the ground as a *single* Person — a unitarian monad)",
+        "Retitled to the question it actually asks. The 2026-09-30 retitle to "
+        "'Strict monotheism' was itself the regression and is reverted here: the word "
+        "'monotheism' names unity of the Divine Being (one God — PROVEN, C320), so putting it on a "
+        "person-count row made that row's 🧱 read as a verdict on monotheism. The row's own text now "
+        "says what C212 says — a separation model: unicity does not entail a single Person, so the "
+        "person-count is left open (`unicity_does_not_force_unitarian_monad`, `{}`).",
     ),
     (
         "**This label was carrying two claims; only one of them is still open",
@@ -133,8 +137,10 @@ INTENTIONAL_REVISIONS: list[tuple[str, str, str]] = [
     ),
     (
         "Proving that the universal ground of reality is structurally unique does not force that the internal life",
-        "**Refuted as a consequence, not merely unproven**",
-        "The unitarian monad is no longer an open frontier: the countermodel forbids it.",
+        "**Independence, not refutation:**",
+        "The 2026-09-30 sense cell claimed the countermodel *forbids* the unitarian monad, "
+        "which inverts C212: it shows unicity does not *entail* a single-Person ground, "
+        "leaving the person-count open. Corrected 2026-10-01 (DISAMB.md).",
     ),
     (
         "`preceding_theory ⇏ trinity` (Binitarian separation model, footprint `{}`). A separate claim",

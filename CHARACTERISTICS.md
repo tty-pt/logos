@@ -208,7 +208,7 @@ Formalized in `Logos.FoundationalUnicity` (`formal/Logos/FoundationalUnicity.lea
 (3) Discriminating Subject Exclusion: `no_discriminating_subject_is_universal_modal_ground` (C209, `{Means, Subject}`), proving no finite subject can be a universal ground;
 (4) Sole Universal Ground: `ofGround_sole_universal_ground` (C210, `{Means, Subject}`), proving `Entity.ofGround` is the unique universal ground candidate in Γ;
 (5) Master Synthesis: `ofGround_foundational_unicity` (C211, `{CL, Means, Subject}`, 0 substantive axioms);
-(6) Metatheoretic Independence: `unicity_does_not_force_unitarian_monad` (C212, `{}`), proving that foundational unicity does not force a solitary, relationless monad, keeping the Trinitarian frontier open;
+(6) Metatheoretic Independence: `unicity_does_not_force_unitarian_monad` (C212, `{}`), proving that foundational unicity does not force a solitary, relationless monad, keeping the Trinitarian frontier open. This is a **separation, not a refutation**: the person-count is left undetermined by unicity, and the positive plural reading is the declared META axiom `AxAgapeEssence` (C504), not this countermodel;
 (7) Ontological Transcendence: `unicity_strictly_transcends_world` (C213, `{Subject}`), confirming that the unique ground strictly transcends the world.
 > **⚠ CORRECTION (2026-09-27, C313–C320 / F15).** Items (1) and (5) above rested on
 > `AsymmetricGrounding`, which **C316 (`not_asymmetric_grounding`, COUNTERMODEL) proves
@@ -242,7 +242,7 @@ Formalized in `Logos.FoundationalUnicity` (`formal/Logos/FoundationalUnicity.lea
 > `def` it leaves the axiom count at 25 and raises the stipulation registry from 5 to 6), which would
 > make C320 an unconditional corollary and retire the row.
 
-Separation: `TheologicalModalHardening.necessary_existence_not_entails_uniqueness` (`formal/Logos/TheologicalModalHardening.lean:406`, `{}`) proves uniqueness does not follow from bare necessity alone. Generated `README.md` corroborates: Foundational unicity ✅ PROVEN, Strict monotheism 🧱 INDEPENDENT, One God ✅ PROVEN.
+Separation: `TheologicalModalHardening.necessary_existence_not_entails_uniqueness` (`formal/Logos/TheologicalModalHardening.lean:406`, `{}`) proves uniqueness does not follow from bare necessity alone. Generated `README.md` corroborates: Foundational unicity ✅ PROVEN, Numerical unitarianism 🧱 INDEPENDENT (separation: unicity does not entail a single-Person ground), One God ✅ PROVEN.
 
 ### Argument
 

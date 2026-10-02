@@ -395,9 +395,19 @@ def test_readability_invariants():
         "the badge legend must keep defining DEFERRED even though no attribute row uses it")
     assert "**One God** — unity of the Divine Being" in attr_text, (
         "the monotheism row must be split: unity of the ground is its own PROVEN row")
-    assert "**Strict monotheism**" in attr_text and "Refuted as a consequence" in attr_text, (
-        "the person-level reading must be reported as refuted, not as an open frontier")
-    assert "One God / strict monotheism" not in attr_text, (
+    # 2026-10-01 (DISAMB.md): this assertion used to require the person-level
+    # reading to be reported as "Refuted as a consequence". That was the
+    # confusion itself — C212 shows unicity does not *entail* a single-Person
+    # ground (a separation model), which leaves the person-count open rather
+    # than forbidding the unitarian reading, and calling the row "monotheism"
+    # made its 🧱 read as a verdict on one God (PROVEN, C320). The row must
+    # now be a separation under the name of the question it asks.
+    assert "**Numerical unitarianism**" in attr_text and "Independence, not refutation" in attr_text, (
+        "the person-level reading must be reported as a separation (not entailed), "
+        "and must not borrow the name 'monotheism', which is the PROVEN unity of the ground")
+    assert "Refuted as a consequence" not in attr_text, (
+        "no attribute row may claim a consequence-refutation the kernel does not derive")
+    assert "one God / strict monotheism" not in attr_text.lower(), (
         "the two-claims label must not come back")
     assert "**Three Divine Persons (Trinity)** — one God, in three Persons" in attr_text, (
         "the Trinity row must state the one-God-in-three-Persons reading")

@@ -529,7 +529,7 @@ Attaching each one to a numbered step would have been tidier, and false.
 <a id="asietic_summary"></a>
 <a id="weakChoice_implies_asiety"></a>
     ▸ **Asiety**  ·  Premises: 1 · 1 step
-        ⚙️ DERIVATION — one step, a projection
+        ⚙️ DERIVATION — one step, a constructor
         Assume GenuineNormativity s p q
           1. constructor  (existential constructor introduction)
         ∴ Asiety(EntityOf(s))
@@ -539,7 +539,7 @@ Attaching each one to a numbered step would have been tidier, and false.
 
 <a id="person_iff_freeIndependentWill"></a>
     ▸ **Independent will**  ·  Premises: 0 · 1 step
-        ⚙️ DERIVATION — one step, a projection
+        ⚙️ DERIVATION — one step, a constructor
           1. constructor  (existential constructor introduction)
         ∴ Person(s) ↔ FreeIndependentWill(s)
         PRICE      ✅ **PROVEN** · 0 substantive axioms · `{Means, Subject, Will, subjectWill}`
@@ -609,7 +609,7 @@ DEPENDS ON   no premises — a closed theorem
 GIVES        used by `the_ground_grounds_a_contingent_true_chooser`, `claimE`
 
 PROOF
-    ⚙️ DERIVATION — one step, a projection
+    ⚙️ DERIVATION — one step, a constructor
       1. constructor  (existential constructor introduction)
     ∴ NecessaryGroundOfReality Entity.ofGround
 
@@ -643,7 +643,7 @@ PROOF
     ∴ FoundationalUnicity Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject, choice, propext, sound}`
-SOURCE     ✅ · [FoundationalUnicity.lean#ofGround_foundational_unicity](formal/Logos/FoundationalUnicity.lean#L215)
+SOURCE     ✅ · [FoundationalUnicity.lean#ofGround_foundational_unicity](formal/Logos/FoundationalUnicity.lean#L218)
 
 <a id="ofGround_universal_modal_ground"></a>
     ▸ universal_ground  ·  Premises: 0 · 1 step
@@ -672,7 +672,7 @@ PROOF
     ∴ SoleUniversalGrounding Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-SOURCE     ✅ · [FoundationalUnicity.lean#ofGround_sole_universal_grounding](formal/Logos/FoundationalUnicity.lean#L284)
+SOURCE     ✅ · [FoundationalUnicity.lean#ofGround_sole_universal_grounding](formal/Logos/FoundationalUnicity.lean#L287)
 
 <a id="ofGround_universal_modal_ground"></a>
     ▸ universal_ground  ·  Premises: 0 · 1 step
@@ -696,13 +696,13 @@ DEPENDS ON   ∀ s, ∃ p, ¬Means(s, p)
 GIVES        used by `exactly_one_universal_modal_ground_stipulated`
 
 PROOF
-    ⚙️ DERIVATION — one step, a projection
+    ⚙️ DERIVATION — one step, a constructor
     Assume ∀ s, ∃ p, ¬Means(s, p)
       1. constructor  (conjunction constructor introduction)
     ∴ ∃ g, UniversalModalGround(g) ∧ (∀ g', UniversalModalGround(g') → g' = g)
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-SOURCE     ✅ · [FoundationalUnicity.lean#exactly_one_universal_modal_ground](formal/Logos/FoundationalUnicity.lean#L301)
+SOURCE     ✅ · [FoundationalUnicity.lean#exactly_one_universal_modal_ground](formal/Logos/FoundationalUnicity.lean#L304)
 
 <a id="the_ground_everlasting"></a>
 ### The ground is eternal — ever-present — existence outside the whole of time, not merely endless in it.
@@ -745,7 +745,7 @@ SOURCE     ✅ · [Precedence.lean#ofGround_precedes_the_right_wrong_distinction
 
 <a id="ofGround_obtains_where_no_atom_is_true"></a>
     ▸ obtains_where_no_atom_is_true  ·  Premises: 0 · 1 step
-        ⚙️ DERIVATION — one step, a projection
+        ⚙️ DERIVATION — one step, a constructor
           1. constructor  (conjunction constructor introduction)
         ∴ ∃ w, (∀ n, ¬w ⊨ atom(n)) ∧ ExistsAt(w, Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
@@ -785,7 +785,7 @@ DEPENDS ON   ∀ s, ∃ p, ¬Means(s, p)
 GIVES        used by `the_ground_is_sole_bearer_of_divine_simplicity`
 
 PROOF
-    ⚙️ DERIVATION — one step, a projection
+    ⚙️ DERIVATION — one step, a constructor
     Assume ∀ s, ∃ p, ¬Means(s, p)
       1. constructor  (conjunction constructor introduction)
     ∴ DivineSimplicity Entity.ofGround ∧ (∀ e, DivineSimplicity e → e = Entity.ofGround)
@@ -891,7 +891,7 @@ SOURCE     ✅ · [FoundationalOmnipresence.lean#ofGround_foundational_omniprese
 
 <a id="ofGround_non_reciprocal_ground"></a>
     ▸ non_reciprocal  ·  Premises: 0 · 1 step
-        ⚙️ DERIVATION — one step, a projection
+        ⚙️ DERIVATION — one step, a constructor
           1. constructor  (existential constructor introduction)
         ∴ NonReciprocalGround(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
@@ -1099,7 +1099,7 @@ DEPENDS ON   no premises — a closed theorem
 GIVES        the established attribute; nothing downstream in the corpus consumes it
 
 PROOF
-    💰 PRICED — one step, a projection
+    💰 PRICED — one step, a constructor
       1. constructor  (conjunction constructor introduction)
     ∴ ∃ t,DivinePerson Entity, t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit
 
@@ -1113,7 +1113,7 @@ Eleven of the thirty-nine classical rows have no headline theorem in the kernel.
 | Not established | Declared kind | What is actually the case |
 |---|---|---|
 | **Psychological personality** | 🧱 COUNTERMODEL | countermodel — the claim is separated, not established |
-| **Strict monotheism** | 🧱 COUNTERMODEL | countermodel — refuted as a *consequence*; unicity does not force one Person |
+| **Numerical unitarianism** | 🧱 COUNTERMODEL | countermodel — separation model; unicity does not entail a single Person (person-count left open) |
 | **Perfect (moral) goodness** | ⏸ DEFERRED | no kernel declaration at all |
 | **Scholastic simplicity** | ❌ NOT ESTABLISHED | not established — strict identity of essence is not proved |
 | **Psychological impassibility** | ❌ NOT ESTABLISHED | not established — no kernel declaration |
@@ -1171,12 +1171,12 @@ The faith supplies the Persons; the kernel prices them (C510 rests on three decl
 
 | What it costs | What it settles | Derived status · footprint · source |
 |---|---|---|
-| **One ground** of reality | C320/C389: `∃! g, UniversalModalGround g`. Existence unconditional; uniqueness on the declared VOCAB bound `SemanticFinitude`. | ✅ **PROVEN** · 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}` · [FoundationalUnicity.lean#exactly_one_universal_modal_ground](formal/Logos/FoundationalUnicity.lean#L301) {Means, NecessarySubjectKind, Subject} |
+| **One ground** of reality | C320/C389: `∃! g, UniversalModalGround g`. Existence unconditional; uniqueness on the declared VOCAB bound `SemanticFinitude`. | ✅ **PROVEN** · 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}` · [FoundationalUnicity.lean#exactly_one_universal_modal_ground](formal/Logos/FoundationalUnicity.lean#L304) {Means, NecessarySubjectKind, Subject} |
 | **One nature** (una natura, *actus purus*) | C440 divine simplicity as the sole bearer; aseity non-derived. 0 substantive axioms. | ✅ **PROVEN** · 0 substantive axioms · `{Means, Subject, CL}` · [DivineSimplicity.lean#divine_simplicity_sole_bearer](formal/Logos/DivineSimplicity.lean#L246) {Means, Subject, CL} · [CanonicalAseity.lean#conditional_canonical_aseity](formal/Logos/CanonicalAseity.lean#L133) {Means, Subject} |
 | **Three distinct Persons** | C510: `t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit`. **Priced on three declared META premises.** | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineAgape.lean#agape_entails_tripersonality](formal/Logos/DivineAgape.lean#L331) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} |
 | All three are **God** (one `divineReality`) | Consubstantiality, the anti-tritheism half: `is_divine the_father divineReality ∧ is_divine the_beloved divineReality ∧ is_divine the_spirit divineReality`. Same price as C510. | ⚠️ **AXIOMATIC (AxAgapeEssence)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` · [DivineAgape.lean#the_father_is_divine](formal/Logos/DivineAgape.lean#L274) {AxAgapeEssence, Subject, CL} · [DivineAgape.lean#the_beloved_is_divine](formal/Logos/DivineAgape.lean#L279) {AxAgapeEssence, Subject, CL} · [DivineAgape.lean#the_spirit_is_divine](formal/Logos/DivineAgape.lean#L284) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
 | The Persons are **distinct** (not three gods) | Personal distinctness by personal property, not by essence: `≠` in every pair, and the Spirit is no word. | ⚠️ **AXIOMATIC (AxAgapeEssence)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineAgape.lean#the_beloved_distinct](formal/Logos/DivineAgape.lean#L151) {AxAgapeEssence, Subject, CL} · [DivineAgape.lean#the_spirit_ne_father](formal/Logos/DivineAgape.lean#L210) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} · [DivineAgape.lean#the_spirit_ne_beloved](formal/Logos/DivineAgape.lean#L218) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} · [DivineAgape.lean#the_spirit_ne_any_word](formal/Logos/DivineAgape.lean#L214) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
-| **One Person** is forbidden | One ground, and every ground bears at least two distinct persons. The unitarian monad is a reading the countermodel forbids — which is why single-person monotheism is not merely unproven. | 🧱 **COUNTERMODEL | unicity_does_not_force_unitarian_monad ⇏ Independence** · `{}` · [FoundationalUnicity.lean#unicity_does_not_force_unitarian_monad](formal/Logos/FoundationalUnicity.lean#L317) {} |
+| **A single-Person reading is not entailed** | Separation model, not a refutation: one ground, and a model in which that ground bears two distinct persons. Ground-unicity therefore does not entail a single-Person ground — the person-count is left open by unicity, and the ascription of personhood to the entity is the separate, still-blocked question C228. | 🧱 **COUNTERMODEL | unicity_does_not_force_unitarian_monad ⇏ Independence** · `{}` · [FoundationalUnicity.lean#unicity_does_not_force_unitarian_monad](formal/Logos/FoundationalUnicity.lean#L332) {} |
 | The Trinity is **not free** | C109: the preceding theory does not entail three Persons. This is the price, stated as a countermodel. | 🧱 **COUNTERMODEL | preceding_theory ⇏ trinity** · `{}` · [ConditionalTheology.lean#preceding_theory_not_entails_trinity](formal/Logos/ConditionalTheology.lean#L336) {} |
 | The **Incarnation** is open | C112: the preceding theory is consistent with an unincarnate ground. The frontier, named. | 🧱 **COUNTERMODEL | preceding_theory ⇏ incarnation** · `{}` · [ConditionalTheology.lean#preceding_theory_not_entails_incarnation](formal/Logos/ConditionalTheology.lean#L380) {} |
 
@@ -1542,10 +1542,10 @@ PROOF
 PRICE            🧱 **COUNTERMODEL** — a hostile model, not a price
 PRICE            refutes: unicity_does_not_force_unitarian_monad ⇏ Independence
 PRICE            0 substantive axioms · `{}`
-SOURCE     🧱 unicity_does_not_force_unitarian_monad ⇏ Independence · [FoundationalUnicity.lean#unicity_does_not_force_unitarian_monad](formal/Logos/FoundationalUnicity.lean#L317)
+SOURCE     🧱 unicity_does_not_force_unitarian_monad ⇏ Independence · [FoundationalUnicity.lean#unicity_does_not_force_unitarian_monad](formal/Logos/FoundationalUnicity.lean#L332)
 
 
-> Refuted **as a consequence**: one ground, and every ground bears at least two distinct persons. This is why single-person monotheism is not merely unproven ([Part IV](#sec-part-iv-the-seam-where-the-deduction-stops)).
+> Not entailed **by unicity**: `unicity_does_not_force_unitarian_monad` (`{}`) is a separation model — one ground, and a model in which that ground bears two distinct persons. Unicity alone leaves the person-count open; the positive plural reading is the priced META datum `AxAgapeEssence` (C504), not this countermodel ([Part IV](#sec-part-iv-the-seam-where-the-deduction-stops)).
 
 <a id="r15"></a>
 ### R15. That a free subject exists is unestablished
@@ -1667,9 +1667,13 @@ Full census with each bridge, its dependents and its justification: [investigati
 <a id="sec-what-is-not-established"></a>
 ### What Is Not Established
 
-**Single-person monotheism is not on this list, because it is refuted rather than open** ([the Trinity table](#sec-one-god-in-three-persons)): one ground, and every ground bears at least two distinct persons.
+**Monotheism — one God — is not on this list, because it is PROVEN** ([the Trinity table](#sec-one-god-in-three-persons)): C320 proves one universal modal ground exists, C440 one nature.
 
-What remains open is the **entity-level** projection C228 (`GenericGroundsRightWrong g → PersonalEntity g`), still `BLOCKED` — a different question, and not what stands between Γ and monotheism.
+The *person-count* of that one God is a different, unsettled question: C212 shows unicity does not entail a single Person.
+
+The positive plural reading is priced, not free: the declared META datum `AxAgapeEssence` (C504) → C510 ([the Trinity table](#sec-one-god-in-three-persons)).
+
+What remains open is C228 (`GenericGroundsRightWrong g → PersonalEntity g`), still `BLOCKED` — whether the ground is personal *at all*, which is upstream of the person-count.
 
 **Trinity is priced, not free** ([the Trinity table](#sec-one-god-in-three-persons)): three Persons on three declared META premises, with C109 at `{}`. **Incarnation is open** (C112, `{}`).
 
@@ -1683,7 +1687,7 @@ Contingent creation *as existence* is a free theorem (C350, `{}`); only the real
 | `C112` | 🧱 **COUNTERMODEL** · [ConditionalTheology.lean#preceding_theory_not_entails_incarnation](formal/Logos/ConditionalTheology.lean#L380), footprint {} | Unincarnate Hostile Model: The existing theory (necessary divine ground, human agency, free will) is completely consistent with God remaining purely transcendent and unincarnate. |
 | `C151` | ✅ **PROVEN** · [PersonalGroundOfReality.lean#the_person_supports_the_reality_of_right](formal/Logos/PersonalGroundOfReality.lean#L153), footprint {Initiates, Means, State, Subject, Will, subjectWill, will_individuation, CL} | HEADLINE — THE PERSON SUPPORTS THE REALITY OF RIGHT. |
 | `C228` | ✖ **BLOCKED** · [PersonalNormativeGround.lean#normative_ground_is_personal](formal/Logos/PersonalNormativeGround.lean#L262), footprint {Means, Subject, Will, subjectWill} | BLOCKED (AC5 unmet, D1′ recorded not executed): any entity that grounds Right/Wrong is a Personal Entity — but the personalness is a THREE-STEP FIELD PROJECTION, not a free-standing theorem: `grounds_normativity` supplie |
-| `C320` | ✅ **PROVEN** · [FoundationalUnicity.lean#exactly_one_universal_modal_ground](formal/Logos/FoundationalUnicity.lean#L301), footprint {Means, NecessarySubjectKind, Subject} | Master Synthesis (existential form): exactly one universal modal ground exists. |
+| `C320` | ✅ **PROVEN** · [FoundationalUnicity.lean#exactly_one_universal_modal_ground](formal/Logos/FoundationalUnicity.lean#L304), footprint {Means, NecessarySubjectKind, Subject} | Master Synthesis (existential form): exactly one universal modal ground exists. |
 | `C350` | ✅ **PROVEN** · [CosmicExistence.lean#contingent_realm_obtains](formal/Logos/CosmicExistence.lean#L269), footprint {NecessarySubjectKind, Subject, CL} | Contingency-overflow: something obtains, is modal-fragile, and is not the necessary ground — and Γ derives it outright, resting on nothing substantive. |
 | `C367` | ✅ **PROVEN** · [CosmicExistence.lean#cosmos_obtains](formal/Logos/CosmicExistence.lean#L416), footprint {Means, NecessarySubjectKind, Subject, Will, subjectWill, CL} | **The cosmos exists** — a contingent created realm, not the necessary ground, actually obtains and bears content of its own — given a *contingent* person. |
 | `C440` | ✅ **PROVEN** · [DivineSimplicity.lean#divine_simplicity_sole_bearer](formal/Logos/DivineSimplicity.lean#L246), footprint {Means, Subject, CL} | C440 — the attributes-table form: the ground is the sole bearer of Divine Simplicity, stated together with the existence half so a reader-facing row can cite a single declaration. This is the [the Divine Simplicity row in the ledger](#sec-where-the-rest-of-the-ledger-lives) analogue of C |
@@ -1738,9 +1742,9 @@ personal ground; that ground is unique and necessary; it possesses canonical
 aseity, simplicity, and pure actuality. What is *not* free: the three divine
 Persons of the Trinity (three declared META premises, C510), and what is still
 open: the Incarnation, contingent creation as such, and the entity-level
-projection C228. Strict monotheism — the ground as a *single* person — is no
-longer on this list: it is refuted as a consequence (one ground, and every ground
-bears at least two distinct persons). Each open row is named above with its
+projection C228. A *single-person* reading of the ground is not entailed by
+unicity: `unicity_does_not_force_unitarian_monad` ({}) is a separation model, so
+unicity leaves the person-count open. Each open row is named above with its
 missing lemma rather than absorbed into an average, and the left column is
 larger because the ground-theory was proved, not because the open rows were
 rounded down.

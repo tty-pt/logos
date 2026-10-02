@@ -4028,7 +4028,7 @@ def build_boundary_by_decl(sections: list, decls: dict) -> dict:
 
     Measured cost of that, with the caches cleared between runs so on-demand
     compilation is genuinely exercised: 2 of 39 `CLASSICAL_ATTRIBUTES` rows flipped
-    between `COUNTERMODEL` and `PROVEN` — Strict monotheism and Incarnation. Both are
+    between `COUNTERMODEL` and `PROVEN` — Numerical unitarianism and Incarnation. Both are
     `{}` countermodels rather than proofs (`unicity_does_not_force_unitarian_monad`,
     C212; `preceding_theory_not_entails_incarnation`, C112), so the `🧱` they print is
     correct, and a build that compiled them in a different order would have claimed
@@ -5184,6 +5184,9 @@ def proof_kind(proof: ProofIR) -> tuple[str, str]:
     elif key == "DEFINITIONAL":
         reason = ("1 step, an identity" if n == 1
                   else f"{n} steps, every one an identity")
+    elif any(st.rule in (Rule.CONJUNCTION_INTRO, Rule.EXISTENTIAL_INTRO) for st in steps):
+        reason = ("one step, a constructor" if n == 1
+                  else f"{n} steps, constructor introduction")
     elif n == 1:
         reason = "one step, a projection"
     elif key == "PRICED":
@@ -6375,9 +6378,9 @@ def render_score_block(sd: dict) -> list[str]:
     ap(f"aseity, simplicity, and pure actuality. What is *not* free: the three divine")
     ap(f"Persons of the Trinity (three declared META premises, C510), and what is still")
     ap(f"open: the Incarnation, contingent creation as such, and the entity-level")
-    ap(f"projection C228. Strict monotheism — the ground as a *single* person — is no")
-    ap(f"longer on this list: it is refuted as a consequence (one ground, and every ground")
-    ap(f"bears at least two distinct persons). Each open row is named above with its")
+    ap(f"projection C228. A *single-person* reading of the ground is not entailed by")
+    ap("unicity: `unicity_does_not_force_unitarian_monad` ({}) is a separation model, so".format("{}"))
+    ap(f"unicity leaves the person-count open. Each open row is named above with its")
     ap(f"missing lemma rather than absorbed into an average, and the left column is")
     ap(f"larger because the ground-theory was proved, not because the open rows were")
     ap(f"rounded down.")
@@ -6470,13 +6473,13 @@ def _render_reading_guide_full() -> list[str]:
     ap("> `exactly_one_universal_modal_ground` C320) and possesses Canonical Aseity")
     ap("> (`conditional_canonical_aseity`). A **necessary Person** is likewise derived (⚠️) on the")
     ap("> single declared `META` bridge `necessaryPersonalSubjectExists` (C404 → Claim D, C409).")
-    ap("> At the level of the Person the position is now settled in Γ's favour: C212")
-    ap("> (`unicity_does_not_force_unitarian_monad`, `{}`) shows that ground-unicity *forces* a plurality of")
-    ap("> persons, so the single-person monad is refuted rather than open; and C510 derives three divine")
-    ap("> Persons on three declared `META` premises (one God in three Persons, not three Gods). What")
-    ap("> is still **not** established is the entity-level bridge C228 (`GenericGroundsRightWrong g →")
-    ap("> PersonalEntity g`), which remains `BLOCKED`. Every other claim is definitional, derived, or a")
-    ap("> declared axiom.")
+    ap("> At the level of the Person, C212 (`unicity_does_not_force_unitarian_monad`, `{}`) shows that")
+    ap("> ground-unicity does *not* entail a single-person ground: it is a separation model, leaving the")
+    ap("> person-count open. The positive case for distinct divine Persons is C510, derived on three")
+    ap("> declared `META` premises (`AxAgapeEssence`, `AxProcessionWord`, `AxProcessionSpirit` — one God in")
+    ap("> three Persons, not three Gods); it does not rest on C212. What is still **not** established is")
+    ap("> the entity-level bridge C228 (`GenericGroundsRightWrong g → PersonalEntity g`), which remains")
+    ap("> `BLOCKED`. Every other claim is definitional, derived, or a declared axiom.")
     ap("")
     ap("")
     ap("**The argument in one paragraph — premises with rows.** Nothing can be epistemologically right or wrong "
@@ -6703,6 +6706,9 @@ _KIND_ICON = {
 
 
 _STRENGTH_COST_RANK = {
+    # Note: classify_proof_edge returns only METAPHYSICAL, SEMANTIC, PROVEN,
+    # DEFINITIONAL, or COUNTERMODEL; CONTRADICTION is never returned by
+    # classify_proof_edge and therefore unreachable here.
     "METAPHYSICAL": 0,
     "SEMANTIC": 0,
     "AXIOMATIC": 0,
@@ -7985,6 +7991,7 @@ def render_cremation_blocks(rows: list[dict]) -> list[str]:
 # The keys are the INTERNAL category strings `classify_proof_edge` returns
 # (AGENTS.md: `SEMANTIC`/`METAPHYSICAL` stay unchanged for the test suites and
 # the IL compilers), NOT the reader-facing display words.
+# Retained alias (AGENTS.md): _GLANCE_RANK is read by _glance_rows.
 _GLANCE_RANK = _STRENGTH_COST_RANK
 
 
@@ -8641,20 +8648,19 @@ CLASSICAL_ATTRIBUTES = [
                   "Honest boundary: strictly separated from numerical unitarianism (which would rule out Trinitarian relations) and pantheism."),
     },
     {
-        "attribute": "**Strict monotheism** (the ground is a *single* Person — a unitarian monad)",
+        "attribute": "**Numerical unitarianism** (the ground as a *single* Person — a unitarian monad)",
         "scope": "Divine Being / Ground",
         "expected": "COUNTERMODEL",
         "checks": [{"type": "countermodel",
                     "full": "Logos.FoundationalUnicity.unicity_does_not_force_unitarian_monad"}],
         "refs": ["Logos.TheologicalModalHardening.necessary_existence_not_entails_uniqueness",
                  "Logos.Plurality.T12_twoPersons"],
-        "sense": ("**Refuted as a consequence, not merely unproven** (2026-09-30). "
-                  "`unicity_does_not_force_unitarian_monad` (`{}`) builds one ground and requires of "
-                  "*every* ground at least two distinct persons: a unitarian monad is not a reading left "
-                  "open, it is a reading the countermodel forbids. This is why “the ground is one "
-                  "person” is not the frontier it used to be \u2014 and why one God in three Persons "
-                  "(“Three Divine Persons”) is the reading Γ reaches. What stays open is the "
-                  "entity-level projection C228, a different question."),
+        "sense": ("**Independence, not refutation:** foundational unicity does *not* entail a single-person "
+                  "ground. `unicity_does_not_force_unitarian_monad` (`{}`) is a separation model: unicity leaves "
+                  "the person-count open. The claim \"the ground is a single Person\" is not a consequence "
+                  "of Γ's unicity proof and cannot be derived from C212 alone; the ascription of personhood "
+                  "to the entity is the BLOCKED projection `C228`. For the positive Trinitarian datum about "
+                  "distinct subsisting centers, see `DivineAgape.AxAgapeEssence` (C504)."),
     },
     {
         "attribute": "**One God** — unity of the Divine Being (one ground, one nature)",
@@ -8672,10 +8678,10 @@ CLASSICAL_ATTRIBUTES = [
                  "Logos.TheologicalModalHardening.necessary_existence_not_entails_uniqueness"],
         # 2026-09-30: this label carried two claims and read DEFERRED. Split, and
         # each half is read at its own price: unity of the ground is PROVEN here;
-        # strict (person-level) monotheism is REFUTED as a consequence and lives
-        # in the "strict monotheism" row above; the Trinity is priced, in
-        # "Three Divine Persons". Badges are derived, so a future theorem that
-        # moves either half fails this row in the same change.
+        # the person-count reading is NOT entailed by unicity (a separation model,
+        # C212) and lives in the "Numerical unitarianism" row above; the Trinity is
+        # priced, in "Three Divine Persons". Badges are derived, so a future theorem
+        # that moves either half fails this row in the same change.
         "sense": ("**Unity of the ground and of the nature** — one God, *una natura*. "
                   "`exactly_one_universal_modal_ground` (C320) proves `∃! g, UniversalModalGround g`: "
                   "existence unconditional, uniqueness on the declared VOCAB bound `SemanticFinitude` "
@@ -8683,7 +8689,8 @@ CLASSICAL_ATTRIBUTES = [
                   "The nature is one by divine simplicity (`divine_simplicity_sole_bearer`, C440, "
                   "`{}` with CL), with aseity and *actus purus*. The bare-name branch `monotheism` "
                   "keeps the deferred half — the *person-count* question — which the "
-                  "“strict monotheism” row answers as a refutation, not a gap."),
+                  "“Numerical unitarianism” row clarifies as independence (not entailed), not a "
+                  "refutation; person-level identification remains separate (C228, BLOCKED)."),
     },
     {
         "attribute": "**Perfect (moral) goodness**",
@@ -9296,7 +9303,7 @@ _CLASSICAL_CLAIM_OVERRIDES = {
     # `¬∀ (Subj Ent World : Type), GroundEntailsCreation Subj Ent World`, whose
     # spine is cut at the depth bound — unusable as a claim. Its warranted
     # countermodel in the kernel is
-    # `the_creation_countermodel_is_a_populated_contingent_world` (RULE_R_CORRECTION_PLAN.md §3.2,
+    # `the_creation_countermodel_is_a_populated_contingent_world` (RULE_R_CORRECTION_PLAN.md §12.14,
     # GAPMAP C563), which instantiates SubjectExistsAt, Creates, and CreationRecord
     # on a populated contingent world.
     "Logos.ConditionalTheology.necessary_ground_not_entails_contingent_creation":
@@ -9337,10 +9344,11 @@ def check_expected_route_agreement(row: dict, derived_cls: str, tier: list | Non
             if premises:
                 claimed = row.get("clause4_conditional")
                 if claimed:
-                    assert any(claimed in prem or prem in claimed for prem in premises), (
-                        f"Row {row.get('attribute')} claimed clause4_conditional {claimed!r} "
-                        f"does not match derived premises {premises!r}"
-                    )
+                    if not any(claimed in prem or prem in claimed for prem in premises):
+                        raise SystemExit(
+                            f"FATAL: row {row.get('attribute')} claimed clause4_conditional {claimed!r} "
+                            f"does not match derived premises {premises!r}"
+                        )
                 return True
     return False
 
@@ -9351,8 +9359,8 @@ def _audit_classical_claims() -> None:
     Three checks, all of them things a renderer must not be the one to notice:
 
     - every row with a `decl` check carries a claim, and the claim is a
-      `theorem`/`axiom` the artifact actually holds — a claim may not be declared
-      from a shape nobody has;
+      `theorem`/`axiom` (or constitutive `def`/`structure`) the artifact
+      actually holds — a claim may not be declared from a shape nobody has;
     - every `decl` check resolves uniquely (G8);
     - every row's declared `expected` agrees with the recomputed route's class.
       This last one is the acceptance test for W1: it is a *transcription* of the
@@ -9377,7 +9385,8 @@ def _audit_classical_claims() -> None:
                 f"with no claim named there is nothing to select a route to.")
         if not claim:
             continue
-        if row.get("expected") == "DEFINITIONAL":
+        claim_p = compiled_proof(claim)
+        if claim_p and claim_p.kind in ("def", "structure"):
             cls, tier = _classical_row_route(row)
             if not check_expected_route_agreement(row, cls, tier):
                 raise SystemExit(
@@ -9433,8 +9442,11 @@ def _classical_anchor_live(anchor: dict, decls: dict, node_map: dict) -> str:
             return "MISSING_NODE"
         if node_map[full]["kind"] == "axiom":
             return "AXIOM"
-        is_cm = (t == "countermodel" and (full in boundary_by_decl() or claim_shape_of(full).polarity == "separation")) or \
-                full in boundary_by_decl() or (claim_shape_of(full).polarity == "separation")
+        # Two-channel separation: a declaration is a COUNTERMODEL anchor if either
+        # (1) it is registered in GAPMAP as a countermodel boundary (boundary_by_decl), or
+        # (2) its audited claim shape polarity is 'separation' (e.g. the_ground_is_not_the_universe).
+        # A positive theorem without boundary registration derives PROVEN/PROVEN↑.
+        is_cm = full in boundary_by_decl() or (claim_shape_of(full).polarity == "separation")
         if is_cm:
             subst, _, _ = footprint_parts(full)
             return "COUNTERMODEL" if not subst else f"COUNTERMODEL?({sorted(subst)})"
@@ -10544,9 +10556,10 @@ def render_two_kinds_chain(decls: dict, node_map: dict) -> list[str]:
     ap("   *constructor* is not a `Subject`. Conflating the two is the error `LovesAsGround.lean`")
     ap("   retracts in its own docstring.")
     ap("5. **What this batch does NOT close.** C228 — identifying the normative ground with a")
-    ap("   *Person* — remains `BLOCKED`, and C212 proves ground-unicity does not force a unitary")
-    ap("   monad. Monotheism *at the level of the Person* is open; the ground's *sole universal")
-    ap("   modal grounding* (C319/C320) is unaffected by this batch and rests on F15 alone.")
+    ap("   *Person* — remains `BLOCKED`, and C212 shows ground-unicity does not entail a unitary")
+    ap("   monad (a separation model, not a refutation). The person-count question is open; the")
+    ap("   ground's *sole universal modal grounding* (C319/C320) is unaffected by this batch and")
+    ap("   rests on F15 alone.")
     ap("")
     return lines
 
@@ -11509,9 +11522,10 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> tuple[list
     ap("The remaining divine attributes — **perfect moral goodness** (the moral pole "
        "itself now obtains under the single declared META bridge, C178; its attribution to "
        "the Divine Being stays a 🧱 frontier), the **Incarnation**, and contingent")
-    ap("**unity** (no longer a target: C320/C389 prove one ground and C440 one nature) nor "
-       "**strict monotheism** (refuted as a consequence — C212, `{}`, `unicity_does_not_force_unitarian_monad`: "
-       "every ground bears at least two distinct persons) nor the **Trinity** (priced on three "
+    ap(       "**unity** (no longer a target: C320/C389 prove one ground and C440 one nature) nor a "
+       "**single-person reading** of the ground (not entailed by unicity — C212, `{}`, "
+       "`unicity_does_not_force_unitarian_monad` is a separation model: it leaves the person-count open) "
+       "nor the **Trinity** (priced on three "
        "declared META premises in C510, and `{}` in C109 proves they are not free), nor contingent")
     ap("**creation as entailment** — remain **separate proof targets**")
     ap("(`⏸` / `❌`) or explicit **countermodel frontiers** (`🧱`) until the live kernel proves them. "
@@ -11863,7 +11877,8 @@ CHARACTERISTIC_SECTIONS = [
 # not authored here either.
 NOT_ESTABLISHED_LINES = [
     ("Psychological personality", "countermodel", "countermodel — the claim is separated, not established"),
-    ("Strict monotheism", "countermodel", "countermodel — refuted as a *consequence*; unicity does not force one Person"),
+    ("Numerical unitarianism", "countermodel",
+     "countermodel — separation model; unicity does not entail a single Person (person-count left open)"),
     ("Perfect (moral) goodness", "claim", "no kernel declaration at all"),
     ("Scholastic simplicity", "absent", "not established — strict identity of essence is not proved"),
     ("Psychological impassibility", "absent", "not established — no kernel declaration"),
@@ -13357,7 +13372,38 @@ BOTH_SINK_BLOCKS = (
 BANNED_README_SNIPPETS = (
     "describe worlds where no move",   # grants worldhood to a signature model (fixed 2026-09-29)
     "READ THIS BEFORE ANY COUNTERMODEL",  # false in reading order; say GOVERNS (fixed 2026-09-29)
+    # 2026-10-01 (DISAMB.md). The retitle of 2026-09-30 attached the word
+    # "monotheism" to a *person-count* claim, and readers took the row's 🧱
+    # badge as a verdict on monotheism itself: "one God" is PROVEN (C320), so
+    # "monotheism is dead" is a contradiction, not a conclusion. These phrases
+    # are the two halves of the confusion in its sentence form.
+    "Strict monotheism",
+    "refuted as a consequence",
 )
+
+# Same defect, one level up: the `CLASSICAL_ATTRIBUTES` row list. A row may not
+# name a person-count claim with the word "monotheism" — that word is reserved
+# for the unity of the Divine Being, which is its own row and is PROVEN. The
+# person-count row is "Numerical unitarianism". This is the invariant the 2026-09-30
+# retitle broke, asserted where a future edit has to pass through.
+def _assert_no_person_count_monotheism() -> None:
+    for row in CLASSICAL_ATTRIBUTES:
+        attr = row.get("attribute", "")
+        if "Strict monotheism" in attr:
+            raise SystemExit(
+                f"FATAL: attribute row {attr!r} is the 2026-09-30 regression: "
+                "'monotheism' names unity of the Divine Being (one God, PROVEN at "
+                "C320), not a person count. The person-count row is 'Numerical "
+                "unitarianism' — see DISAMB.md.")
+        low = attr.lower()
+        person_count = ("unitarian" in low or "single person" in low
+                        or "single-person" in low or "one person" in low)
+        if person_count and "monotheism" in low:
+            raise SystemExit(
+                f"FATAL: person-count claim labelled with 'monotheism': {attr!r}. "
+                "These are different claims; conflating them makes a 🧱 row on the "
+                "person count read as a verdict on one God (DISAMB.md).")
+
 
 
 LEDGER_HEADER = """# The Ledger (generated — do not hand-edit)
@@ -13588,6 +13634,15 @@ def _lint_readme(lines: list[str]) -> None:
     text = "\n".join(lines)
     for bad in BANNED_README_SNIPPETS:
         assert bad not in text, f"README regression: banned snippet present: {bad!r}"
+    # The entailment C212 does *not* carry, in the one phrasing that states it.
+    # A countermodel of `unicity ⇒ one Person` is evidence that the entailment
+    # fails; it is not a refutation of a single-Person ground, and it is not a
+    # verdict on monotheism (one God, PROVEN at C320).
+    for m in re.finditer(r"forces? a plurality of persons", text):
+        raise AssertionError(
+            f"entailment inverted: {m.group(0)!r}. `unicity_does_not_force_unitarian_monad` "
+            "shows unicity does NOT entail a single-Person ground; the model has one "
+            "ground with two persons. It does not force plurality either (DISAMB.md).")
     in_score = False
     for ln in lines:
         s = ln.strip()
@@ -13817,30 +13872,27 @@ def _lint_surfaces(doc: "_TwoSink", readme: list[str], ledger: list[str]) -> Non
     assert len(readme) <= README_TOTAL_BUDGET, (
         f"README is {len(readme)} lines total, budget is {README_TOTAL_BUDGET}")
     _lint_pillars(ledger)
-    _audit_substantive_multiset()
+    _audit_substantive_footprint()
+    _assert_no_person_count_monotheism()
 
 
-def _audit_substantive_multiset() -> None:
-    """Invariant (RULE_R_CORRECTION_PLAN.md §7.5): rebuild substantive multiset from derived tiers and compare slot-by-slot."""
-    from collections import Counter
-    multiset = Counter()
+def _audit_substantive_footprint() -> None:
+    """Invariant (RULE_R_CORRECTION_PLAN.md §7.5): compare each slot's substantive set for equality against the tier's recomputed footprint."""
     for row in CLASSICAL_ATTRIBUTES:
         cls, tier = _classical_row_route(row)
         if not tier:
             continue
-        subst = sorted({a.rsplit(".", 1)[-1] for p in tier for a in _branch_substantive(p)})
-        price = _derived_price_cell(tier)
-        badge = badge_of_route(tier, cls)
+        subst = {a.rsplit(".", 1)[-1] for p in tier for a in _branch_substantive(p)}
         attr = row.get("attribute", "")
         if cls == "AXIOMATIC":
             assert len(subst) > 0, f"AXIOMATIC row {attr} has empty substantive set"
-            for ax in subst:
-                assert ax in badge, f"Axiom {ax} missing from badge {badge} in {attr}"
-                assert ax in price, f"Axiom {ax} missing from price {price} in {attr}"
-                multiset[ax] += 1
+            badge = badge_of_route(tier, cls)
+            m = re.match(r"^AXIOMATIC \((.*)\)$", badge)
+            assert m, f"AXIOMATIC row {attr} badge malformed: {badge}"
+            badge_axs = {x.strip() for x in m.group(1).split(",") if x.strip()}
+            assert badge_axs == subst, f"AXIOMATIC row {attr} badge axioms {badge_axs} != footprint {subst}"
         elif cls in ("PROVEN", "DEFINITIONAL", "COUNTERMODEL"):
             assert len(subst) == 0, f"{cls} row {attr} has non-empty substantive set {subst}"
-    assert multiset["AxGroundLovesContingentRealm"] >= 1, "AxGroundLovesContingentRealm must be accounted for"
 
 
 

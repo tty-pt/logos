@@ -78,8 +78,15 @@ theorem unicity_does_not_force_unitarian_monad :
 ```
 
 Pegada auditada: `{}` (lógica pura). Demonstrar a unicidade estrita do fundamento universal
-não implica um monadismo solitário e desprovido de relações internas. A fronteira relacional
-da Trindade (`T12_twoPersons`, `T14_eternalRelation_conditional`) permanece aberta e não-colapsada.
+não implica um monadismo solitário e desprovido de relações internas.
+
+**Correção de leitura (2026-10-01) — esta é uma SEPARAÇÃO, não uma refutação.** O modelo tem
+um fundamento único e, nele, duas pessoas distintas; logo a direcção é `unicidade ⇏ uma só
+pessoa`: a unicidade **deixa a contagem de pessoas indeterminada**. Dela **não** se segue que o
+mônada unitário seja falso, e em particular **não** se segue que o monoteísmo (um só Deus) esteja
+morto — o monoteísmo é C320, e está provado. O que permanece em aberto é a *contagem de pessoas*
+desse só Deus; o dado positivo plural é o axioma META declarado `AxAgapeEssence` (C504) → C510,
+e a personalidade do solo é C228 (BLOCKED), que é **a montante** desta pergunta.
 
 C213 — Transcendência contra o colapso panteísta:
 
@@ -93,8 +100,10 @@ entes do universo (panteísmo), preservando a sua transcendência real perante o
 
 Limites honestos de escopo:
 A demonstração estabelece a unicidade fundacional ontológica do princípio explicativo universal
-(Monoteísmo formal, Aquino ST I q. 11 a. 3). Distingue-se expressamente do unitarismo numérico
-monádico (que excluiria a pluralidade interna trinitária) e do monismo panteísta.
+(**Monoteísmo formal**, Aquino ST I q. 11 a. 3 — *um só Deus*, `Entity.ofGround`, o único solo de
+fundamentação modal). Distingue-se expressamente do **unitarismo numérico monádico** (uma leitura
+distinta, sobre quantas *pessoas* esse só Deus contém, que C212 mostra *não ser implicada* pela
+unicidade — logo em aberto, não refutada) e do monismo panteísta.
 
 ================================================================================
 CORRECÇÃO (2026-09-27) — C207/C211 rested on uma premissa IMPAGÁVEL; a rota

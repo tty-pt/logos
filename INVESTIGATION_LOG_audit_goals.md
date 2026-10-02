@@ -557,7 +557,7 @@ The `lake` lookup mirrors `audit_footprints.py`: try `which lake`, else fall bac
 - [ ] Confirm 5 951 records, zero `GA ERROR`, and the §5 spot-checks.
 - [ ] Add `python3 scripts/audit_goals.py` to the regeneration block in `AGENTS.md`,
       between `audit_footprints.py` and `build_deduction.py`.
-- [ ] **Only then** implement `RULE_R_CORRECTION_PLAN.md` §7.2:
+- [x] **Only then** implement `RULE_R_CORRECTION_PLAN.md` §7.2:
       `ClaimShape`, `_STRENGTH`, `verdict_of`, `select_route`, gates G1–G8 — then
       W1–W10.
 

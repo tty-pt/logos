@@ -2377,9 +2377,13 @@ subiu 26 → 27 (VOCAB 15 → 16) — a primeira subida por *rigor* e não por c
 corpus. Os números de inventário impressos no cabeçalho desta secção (25 declarados, VOCAB 14 /
 SEM 7 / META 4) são o **registo histórico de 2026-09-27** e ficam como estavam, pela convenção do
 ficheiro: estão correctos para o que era verdade nessa data. O inventário corrente está em
-`GAPMAP.md` e é conferido por `scripts/gapmap_taxonomy.py --check`. C228 (monoteísmo **ao nível
-da Pessoa**) continua `BLOCKED` e não foi tocado; nem o unitarismo numérico monádico (C212) nem o
-monismo panteísta (C213).
+`GAPMAP.md` e é conferido por `scripts/gapmap_taxonomy.py --check`. C228 (a **personalidade** do
+fundamento) continua `BLOCKED` e não foi tocado — e é *a montante* da contagem de pessoas, porque
+sem ela a pergunta «quantas pessoas?» nem sequer está bem posta sobre `Entity.ofGround`. O
+**Monoteísmo** (um só Deus) não é C228 e não é C212: é C320, e está provado. O que C212 deixa em
+aberto é a *contagem de pessoas* desse só Deus — como **separação** (a unicidade não implica um mônada
+unitário), não como refutação; e o dado positivo plural é o axioma META declarado `AxAgapeEssence`
+(C504), não o contramodelo. O monismo panteísta (C213) continua separado.
 
 35. O FUNDAMENTO COMO AMANTE, E OS DOIS PREÇOS DESSA AFIRMAÇÃO
 

@@ -321,7 +321,7 @@ def test_classifier_agreement(decls, node_map, graph, sections):
 
     # The positive-existence theorems that the `∃` proxy used to misread. Named
     # explicitly: a count going to zero would also mean the check stopped running.
-    # Note (RULE_R_CORRECTION_PLAN.md §3.3): the_creation_countermodel_is_a_populated_contingent_world
+    # Note (RULE_R_CORRECTION_PLAN.md §12.14): the_creation_countermodel_is_a_populated_contingent_world
     # audits polarity 'positive' (an ∃ statement) but is registered as a COUNTERMODEL
     # in GAPMAP (C563), so its refutation_kind is 'COUNTERMODEL · ⇏', exactly like
     # unicity_does_not_force_unitarian_monad (C212).
@@ -428,8 +428,8 @@ def test_claim_relative_ladder(decls, node_map, graph, sections):
     assert bd._shape_polarity(cp) == "positive"
     assert bd.claim_is_separation(counter_claim) is True, (
         "C212 must be a separation via GAPMAP's register even though its goal audits "
-        "as positive — the polarity channel alone would make Strict monotheism read "
-        "as PROVEN")
+        "as positive — the polarity channel alone would make the numerical-unitarianism "
+        "row read as PROVEN")
     assert bd.strength_of(cp, counter_claim) == "COUNTERMODEL"
 
     PANTHEISM = "Logos.CosmicExistence.the_ground_is_not_the_universe"
@@ -559,8 +559,8 @@ def test_expected_route_agreement():
     )
     try:
         bd.check_expected_route_agreement(asiety_row, "PROVEN", tier=[p_bad])
-        raise AssertionError("Expected AssertionError for mismatched clause4_conditional")
-    except AssertionError as e:
+        raise AssertionError("Expected SystemExit for mismatched clause4_conditional")
+    except SystemExit as e:
         assert "does not match derived premises" in str(e)
 
     p_empty = bd.ProofIR(full_name="mock", name="mock", kind="thm", file="", line=0, goal="", doc="")
@@ -607,6 +607,9 @@ def test_constructor_rendering():
     assert not any("⟨" in s.proposition or "⟩" in s.proposition for s in p.steps), (
         "No step proposition may contain brackets ⟨ or ⟩"
     )
+    kind_label, kind_reason = bd.proof_kind(p)
+    assert "constructor" in kind_reason, f"proof_kind reason must name constructor, got: {kind_reason!r}"
+    assert "projection" not in kind_reason, f"proof_kind reason must not contain 'projection', got: {kind_reason!r}"
     print("  ✓ Constructor rendering verified: single opaque constructor step, no subterm fragments.")
 
 
@@ -623,6 +626,39 @@ def test_sort_headed_axiom_refused():
         "Logos.Agency.Means must not be indexed in route_index"
     )
     print("  ✓ Sort-headed axiom refusal verified.")
+
+
+def test_classical_anchor_live_two_channel():
+    print("Testing _classical_anchor_live two-channel separation…")
+    decls = bd.parse_lean_sources()
+    dep_data = bd.load_depgraph()
+    node_map = dep_data.get("node_map", {})
+
+    # Side 1: the_ground_is_not_the_universe is polarity separation -> COUNTERMODEL
+    pant_anchor = {"type": "decl", "full": "Logos.CosmicExistence.the_ground_is_not_the_universe"}
+    res_pant = bd._classical_anchor_live(pant_anchor, decls, node_map)
+    assert res_pant == "COUNTERMODEL", f"Expected COUNTERMODEL for pantheism anchor, got: {res_pant}"
+
+    # Side 2: an ordinary theorem's decl anchor -> PROVEN
+    ord_anchor = {"type": "decl", "full": "Logos.Person.person_iff_thomisticCore"}
+    res_ord = bd._classical_anchor_live(ord_anchor, decls, node_map)
+    assert res_ord == "PROVEN", f"Expected PROVEN for ordinary decl anchor, got: {res_ord}"
+    print("  ✓ Two-channel separation verified: polarity separation yields COUNTERMODEL, ordinary yields PROVEN.")
+
+
+def test_definitional_derived_signal():
+    print("Testing derived signal for definitional rows in _audit_classical_claims…")
+    fake_row = {
+        "attribute": "**Fake Theorem as Definition**",
+        "expected": "DEFINITIONAL",
+        "checks": [{"type": "decl", "full": "Logos.Person.person_iff_thomisticCore"}],
+    }
+    cls, tier = bd._classical_row_route(fake_row)
+    assert cls == "PROVEN", f"Expected PROVEN for theorem, got {cls}"
+    assert bd.check_expected_route_agreement(fake_row, cls, tier) is False, (
+        "Theorem claiming expected: DEFINITIONAL must not agree with derived PROVEN"
+    )
+    print("  ✓ Definitional derived signal verified.")
 
 
 def main():
@@ -664,6 +700,8 @@ def main():
     test_dominion_row_definitional()
     test_constructor_rendering()
     test_sort_headed_axiom_refused()
+    test_classical_anchor_live_two_channel()
+    test_definitional_derived_signal()
     print("\nALL GENERITY, PROVENANCE, AND SENSITIVITY TESTS PASSED SUCCESSFULLY! (0 errors)")
 
 

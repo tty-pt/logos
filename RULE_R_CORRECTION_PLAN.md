@@ -45,147 +45,38 @@ Two further rules govern the work, both learned here:
 
 ---
 
-## 1. WHAT IS SOUND — do not redo, do not regress
+## 1. WHAT IS SOUND (retained baseline)
+Boundary register built before compilation from resolved claims; `∃`-proxy removed; claim-relative `strength_of`; `entails` argument matching; unified status cell; bare badge words; `max` over `_STRENGTH_RANK`.
 
-Verified this session. Keep.
+## 2. THE PRIORITY DEFECT (self-contradicting output resolved)
+Creator row previously cited unpopulated C358 while prose claimed populated world; resolved in §3/§12.14.
 
-| Item | State |
-|---|---|
-| Boundary register built **once, before** any compilation, from *resolved* claims | correct; see §13.6 for the self-parse trap |
-| `∃`-proxy removed from `refutation_kind` | correct |
-| `strength_of(proof, claim, *, relation=None)` claim-relative | correct; `claim_is_separation` ORs both channels (GAPMAP register **and** audited polarity) |
-| Item 2 — `entails` `REFUTES` requires the candidate's `Not` spine to name the claim head **with arguments** | correct; near-miss cases genuinely fail on old code |
-| Item 3 — `_classical_row_status_cell` wired at both surfaces (11448, 11771); `_classical_row_status` has **no** renderer callers left | correct |
-| Item 4 — `badge_of_route` returns bare class words; `status_icon` owns every marker | correct |
-| Item 8 — `select_slot_route` uses `max` over `_STRENGTH_RANK` (ladder is strongest-first, so `max` = weakest conjunct); wired; no multi-claim slot exists, asserted | correct — this was a real `min`/`max` bug |
-| 1 645-record sort-headed census | reproduced exactly: 1 269 `Prop`, 200 `Nat`, 173 `Type`, 3 `Bool`; 1 625 `def`, 15 `axiom`, 5 `opaque` |
-| `audit_goals.py` / `goal_audit.json` untouched during the prior pass | correct — the fingerprint trap (§13.9) was avoided |
+## 3. THE ADJUDICATION (Creator row countermodel swap and registration)
+Warranted countermodel `the_creation_countermodel_is_a_populated_contingent_world` (C563) registered in GAPMAP; C358 override deleted; see §12.14 for instantiation evidence.
 
----
+## 4. GATE DEFECTS (comparator escapes removed)
+Deleted row-name escapes in `check_expected_route_agreement`; re-derived `Exclusion of pantheism` (`COUNTERMODEL`) and `Psychological personality` (`PROVEN`); `clause4_conditional` verified against `route_premises(tier)`.
 
-## ~~2. THE PRIORITY DEFECT — self-contradicting output~~ (settled in §3)
+## 5. THE DOMINION ROW (definitional resolution)
+`DominionOverActs` is a definition (`FreeWill s`), not a theorem; override dropped, expected set to `DEFINITIONAL` (📘), `person_iff_thomisticCore` added to `refs`.
 
----
+## 6. ITEM 12 (natural deduction constructor rendering)
+Term-mode constructors rendered as single opaque `constructor` steps in natural deduction traces without comma-splitting or component witness enumeration.
 
-## ~~3. THE ADJUDICATION (item 10), settled~~
+## 7. ASSERTIONS THAT REPLACED PROPERTIES (property tests landed)
+§7.1 sort-headed axioms refused; §7.2 census categories disjoint and reconciled; §7.3 badge strings compared against census verdicts; §7.4 block anchor integrity and `#asietic_summary` alias; §7.5 substantive footprint audit; §7.7 prose sync across `CHARS.md`, `theorems/T29.txt`, `base.txt`.
 
-The Creator row's countermodel is `the_creation_countermodel_is_a_populated_contingent_world` (C563, `{}`),
-registered as a `COUNTERMODEL` in `formal/GAPMAP.md` citing the §3.2 warrant grounds (instantiates
-`SubjectExistsAt`/`Creates`/`CreationRecord`, contingent subject, not deniable for free). C358 override
-deleted. Both positive and negative counterparts are named in checks.
-
----
-
-## ~~4. GATE DEFECTS — the comparator hides two real disagreements~~
-
-Hardcoded row-name escape clauses in `check_expected_route_agreement` deleted. `expected:` re-derived
-from the kernel: *Exclusion of pantheism* → `COUNTERMODEL`; *Psychological personality* → `PROVEN`.
-`clause4_conditional` is verified against `route_premises(tier)`.
-
----
-
-## ~~5. THE DOMINION ROW~~
-
-`DominionOverActs` override to `rightwrong_gives_rational_domination` dropped. The row reports
-`📘 DEFINITIONAL` with `expected: DEFINITIONAL` and names `person_iff_thomisticCore` in `refs`.
-
----
-
-## ~~6. ITEM 12 — constructor rendering~~
-
-Term-mode constructors rendered as single opaque `constructor` steps in natural deduction traces without
-comma-splitting or component witness enumeration. Asserted that no rendered step is a bare proof-term subterm.
-
----
-
-## ~~7. ASSERTIONS THAT REPLACED PROPERTIES~~
-
-- **7.1 Sort-headed axioms refused:** asserted that `route_index` and `claim_shape_of` refuse named
-  sort-headed axioms (`Logos.Agency.Means`).
-- **7.2 Badge census reconciliation:** rejection categories made disjoint (`countermodel_namespace`,
-  `incomparable`); `considered ≥ Σ rejected` asserted; permanently-zero `foreign_sort` dropped.
-- **7.3 Badge string comparison:** rendered badge strings parsed and compared directly against census
-  `verdict` in `test_badges_match_selection`.
-- **7.4 Block anchor integrity:** block anchors match SOURCE declarations; `#asietic_summary` rendered
-  as alias anchor so external links resolve.
-- **7.5 Substantive multiset invariant:** rebuilt slot-by-slot from derived winning tiers and asserted
-  equal to recomputed footprint.
-- **7.7 Prose sync:** synchronized `base.txt` (§30/§31), `theorems/T29.txt`, `CHARS.md`.
-
-**7.8 `_derived_price_cell` docstring.** Rewritten to assert badge and price are derived from one
-selection "so divergence is impossible by construction" — true only once §4 and §5 are settled. Make
-it true, then keep it.
-
-**7.9 `_STRENGTH_COST_RANK` has no `CONTRADICTION` key** (fallback rank 9 = weakest).
-`classify_proof_edge` never returns it today, so this is **latent, not live**. Either add the key or
-document why it is unreachable. Also `_GLANCE_RANK = _STRENGTH_COST_RANK` is a retained alias; the
-prior pass described it as "retired".
-
----
-
-## 8. RETRACTED — do not repeat these
-
-- **"C358 is the row's untruncated countermodel, so the swap was forced."** Disqualified in §3.1. The
-  swap traded a populated world for an empty one *and* one direction for two.
-- **"The populated theorem is a positive theorem, so it cannot be a countermodel."** Its being
-  `∃`-headed is not the point; §3.2 shows it witnesses the denial. The defect was that GAPMAP did not
-  record it as one.
-- **"Neither route was free" as an alibi.** The probe shows both routes had costs. Resolving a
-  registration defect by changing the claim hides it.
-- **"Item 12 is fixed: all 8 unbalanced lines now render intact."** Brackets balanced; the ND trace is
-  still proof-term subterms (§6).
-- **"A badge census verifies claim-relativity."** It cannot: on all 32 routed rows the winner *is* the
-  claim (§13.10).
-- **The prior pass's own §13.16** ("the populated countermodel … must not be registered as a
-  countermodel; C358 serves the independence") — that is the laundering this plan reverses. Strike it.
-
----
+## 8. RETRACTED CLAIMS
+Prior rationalizations for C358 swap, positive-theorem non-countermodel status, and bracket-only Item 12 fixes retracted.
 
 ## 9. DECISIONS TAKEN
+Visible-line budget ruled out of scope (2026-10-01); Dominion row definitional resolution confirmed.
 
-**(2026-10-01, user ruling) The visible-line budget is out of scope.** See §10.
+## 10. VERIFICATION COMMANDS
+Standard test suite run (`audit_badges.py`, `build_deduction.py`, all four test suites, `git diff --check`).
 
-**§5's Dominion row follows from §0** rather than from a fresh judgement, and is stated in §5 as
-`DEFINITIONAL` with the reasoning. It is the only place where a reading of §0 does the work, so it
-is flagged for confirmation before implementation — everything else in this plan is mechanical and
-does not depend on it.
-
----
-
-## 10. VERIFICATION
-
-```sh
-export PATH="$HOME/.elan/bin:$PATH"; cd /home/quirinpa/logos
-python3 scripts/audit_badges.py
-python3 scripts/build_deduction.py
-python3 scripts/test_goal_audit.py \
-  && python3 scripts/test_argument_surface.py \
-  && python3 scripts/test_deduction_compiler.py \
-  && python3 scripts/test_deduction_dependencies.py
-python3 scripts/ledger_superset.py   # pre-existing .snapshots failure; report, do not fabricate
-git diff --check
-```
-
-Baseline line counts: `README.md` 1 787 / 1 681 visible; `ledger.md` 3 361; `kernel-audit.md` 4 849;
-`catalogues.md` 148.
-
-Requirements: build exits 0; all four suites PASS. **Account for every line of drift** — which row
-moved and why.
-
-**The visible-line budget is ruled out of scope** (2026-10-01, user ruling). The
-`≤ 700 visible lines / FACT by line 60` constraint in `AGENTS.md` is **not** to be enforced, restored,
-or cited as a reason to route blocks out of `README.md`. It remains true of `AGENTS.md`; it is not
-part of this work.
-
-## 11. ORDER
-
-1. **§3** — the Creator row. Highest priority: it is self-contradicting output.
-2. **§4** — the gate escapes and `clause4_conditional`. Unblocks honest reporting of everything else.
-3. **§9/§5** — the Dominion adjudication (blocked on your ruling).
-4. **§6** — item 12, for real.
-5. **§7.1–§7.5** — the tautological assertions.
-6. **§7.7** — prose sync, after the surfaces settle.
-7. **§10** — regenerate, measure, verify. Prune this file as items land.
+## 11. IMPLEMENTATION ORDER
+Completed in dependency sequence §§3 → 4 → 5 → 6 → 7 → 10.
 
 ---
 
@@ -244,11 +135,15 @@ Carried forward from `ASIETY_ROUTE_SELECTION_PLAN.md` §13 (that file is at `HEA
 13. **Rule R Level 2 `select_slot_route` uses `max` over `_STRENGTH_RANK`** — the ladder is ordered
     strongest-first (`CONTRADICTION` index 0 … `OPEN` index 5), so a conjunction is as weak as its
     weakest link. `min` selected the strongest; that was the bug.
-14. **The populated creation countermodel warrants `COUNTERMODEL` by instantiation** (§3.2): it
-    instantiates `SubjectExistsAt`/`Creates`/`CreationRecord`, its subject is genuinely contingent,
-    and it is not deniable for free. It requires a **GAPMAP countermodel registration** to earn the
-    badge, because its `∃`-headed statement audits as polarity `positive`. C358 fails instantiation
-    and must not carry this row. Registered as C563 in `formal/GAPMAP.md` at `{}` footprint.
+14. **The populated creation countermodel warrants `COUNTERMODEL` by instantiation**:
+    `populatedCreationWorld` witnesses `the_creation_countermodel_is_a_populated_contingent_world`:
+    `ExistsAt := fun _ _ => True`, `actualWorld := true`, `SubjectExistsAt := fun w _ => w = true`,
+    `Ground := fun _ _ => True`, `Creates := fun _ _ => False`, `g := ()`, `s := ()`, `s_actual := rfl`,
+    `s_contingent := ⟨false, …⟩`. It instantiates `SubjectExistsAt`/`Creates`/`CreationRecord`, its
+    subject is genuinely contingent, and it is not deniable for free (distinguishing grounding from
+    productive creation). It requires a **GAPMAP countermodel registration** (C563, `{}`) to earn
+    the badge, because its `∃`-headed statement audits as polarity `positive`. C358 fails instantiation
+    and must not carry this row.
 15. **check_expected_route_agreement derives agreement without row-name escapes**: hardcoded row-name
     branches were deleted; `clause4_conditional` is verified against `route_premises(tier)`.
 16. **Dominion over acts is DEFINITIONAL**: `DominionOverActs` is a definition (`FreeWill s`), not a

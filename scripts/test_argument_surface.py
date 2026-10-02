@@ -385,15 +385,27 @@ def main() -> int:
     check(not re.search(r"[◆✅⚠️🧱📘⏸❌]\s+[A-Z_]+\s+\*\*[◆✅⚠️🧱📘⏸❌]\s+[A-Z_]+\*\*", ledger),
           "no doubled marker pattern in ledger.md")
 
-    # Item 5: Block anchor and block SOURCE agree
-    block_matches = re.findall(
-        r"<a id=\"([A-Za-z0-9_]+)\"></a>\s*\n\s*▸[^\n]+\n(?:[^\n]+\n)*?\s*SOURCE\s+[^\n]*?\[[A-Za-z0-9_.]+#([A-Za-z0-9_\x27]+)\]",
+    # Item 5 & Item 8 (RULE_R_CORRECTION_PLAN.md §7.4): Discriminating anchor integrity
+    # (1) Every anchor immediately preceding a '▸' block must match that block's SOURCE
+    discrim_matches = re.findall(
+        r'(?:<a id="([A-Za-z0-9_]+)"></a>\s*\n\s*)?<a id="([A-Za-z0-9_]+)"></a>\s*\n\s*▸[^\n]+\n(?:[^\n]+\n)*?\s*SOURCE\s+[^\n]*?\[[A-Za-z0-9_.]+#([A-Za-z0-9_\x27]+)\]',
         readme)
-    check(len(block_matches) >= 10, f"expected at least 10 anchored component blocks in README.md, got {len(block_matches)}")
-    for anchor, src in block_matches:
-        check(anchor == src, f"block anchor <a id=\"{anchor}\"> does not match block SOURCE declaration {src}")
-    check('<a id="asietic_summary"></a>' in readme,
-          "alias anchor #asietic_summary must be rendered in README.md (RULE_R_CORRECTION_PLAN.md §7.4)")
+    check(len(discrim_matches) >= 10, f"expected at least 10 anchored component blocks in README.md, got {len(discrim_matches)}")
+    for alias_opt, imm_anchor, src in discrim_matches:
+        check(imm_anchor == src, f"immediate block anchor <a id=\"{imm_anchor}\"> does not match block SOURCE declaration {src}")
+
+    # (2) Assert the alias property deliberately: asietic_summary is rendered as an alias
+    #     preceding weakChoice_implies_asiety, while the block's SOURCE is weakChoice_implies_asiety.
+    alias_block_m = re.search(
+        r'<a id="([A-Za-z0-9_]+)"></a>\s*\n\s*<a id="([A-Za-z0-9_]+)"></a>\s*\n\s*▸\s*\*\*Asiety\*\*.*?\s*SOURCE\s+[^\n]*?\[[A-Za-z0-9_.]+#([A-Za-z0-9_\x27]+)\]',
+        readme, re.DOTALL)
+    check(bool(alias_block_m), "alias block for Asiety found in README.md")
+    if alias_block_m:
+        alias_anchor, primary_anchor, block_src = alias_block_m.groups()
+        check(alias_anchor == "asietic_summary", f"expected alias anchor 'asietic_summary', got {alias_anchor!r}")
+        check(primary_anchor == "weakChoice_implies_asiety", f"expected primary anchor 'weakChoice_implies_asiety', got {primary_anchor!r}")
+        check(block_src == "weakChoice_implies_asiety", f"expected SOURCE 'weakChoice_implies_asiety', got {block_src!r}")
+        check(alias_anchor != block_src, f"alias anchor {alias_anchor!r} must differ from block SOURCE {block_src!r}")
 
     # Item 12 (RULE_R_CORRECTION_PLAN.md §6): Natural deduction trace constructor rendering
     # No rendered step may be a bare proof-term subterm (reject ^\d+\.\s+(s|p|q|rfl)$ and
@@ -427,7 +439,39 @@ def main() -> int:
     census_path = ROOT / "formal" / "badge_census.json"
     if census_path.exists():
         census = json.loads(census_path.read_text(encoding="utf-8"))
-        for s in census.get("slots", []):
+
+        def parse_badge_span(cell_str: str) -> str:
+            m = re.search(r"\b(PROVEN|AXIOMATIC|COUNTERMODEL|INDEPENDENT|DEFINITIONAL|AXIOM|NOT ESTABLISHED|ABSENT|DEFERRED)\b", cell_str.strip())
+            return m.group(1) if m else cell_str.strip().split()[0]
+
+        def badge_matches_verdict(badge: str, verdict: str) -> bool:
+            if badge == verdict:
+                return True
+            # _CLASSICAL_ROUTE_TEXT maps COUNTERMODEL to "🧱 INDEPENDENT" for rows
+            # without a route selection (e.g. claim-type rows like Perfect)
+            if verdict == "COUNTERMODEL" and badge == "INDEPENDENT":
+                return True
+            if verdict in ("ABSENT", "NOT ESTABLISHED") and badge in ("ABSENT", "NOT ESTABLISHED"):
+                return True
+            return False
+
+        # Negative self-test: flipped verdicts must fail comparison
+        check(not badge_matches_verdict("PROVEN", "COUNTERMODEL"), "negative self-test: PROVEN does not match COUNTERMODEL")
+        check(not badge_matches_verdict("COUNTERMODEL", "PROVEN"), "negative self-test: COUNTERMODEL does not match PROVEN")
+        check(not badge_matches_verdict("DEFINITIONAL", "PROVEN"), "negative self-test: DEFINITIONAL does not match PROVEN")
+
+        # Extract the 39-row classical attributes table from ledger.md
+        table_start = ledger.find("| Classical characteristic | Scope | Status |")
+        check(table_start != -1, "classical attributes table found in ledger.md")
+        table_end = ledger.find("\n\n", table_start)
+        table_text = ledger[table_start:table_end if table_end != -1 else len(ledger)]
+        table_lines = [l for l in table_text.splitlines() if l.startswith("| **")]
+        check(len(table_lines) == 39, f"expected 39 classical attribute rows in ledger table, got {len(table_lines)}")
+
+        ca_slots = [s for s in census.get("slots", []) if s.get("surface") == "classical_attributes"]
+        check(len(ca_slots) == 39, f"expected 39 classical attribute census slots, got {len(ca_slots)}")
+
+        for slot_idx, s in enumerate(ca_slots):
             slot_id = s["id"]
             verdict = s["verdict"]
 
@@ -436,30 +480,30 @@ def main() -> int:
             check(s["routes_considered"] >= sum(rej.values()),
                   f"census slot {slot_id} routes_considered >= sum(rejected)")
 
-            if s["surface"] == "classical_attributes":
-                pattern = rf"^\|\s*\*\*{re.escape(slot_id)}[^*]*\*\*[^\n]*"
-                m = re.search(pattern, ledger, re.MULTILINE)
-                check(bool(m), f"classical attribute {slot_id} found in ledger.md")
-                if m:
-                    cells = [c.strip() for c in m.group(0).split("|")]
-                    status_cell = cells[3] if len(cells) > 3 else ""
-                    if verdict == "PROVEN":
-                        check("PROVEN" in status_cell, f"{slot_id} status cell verified as PROVEN")
-                    elif verdict == "AXIOMATIC":
-                        check("AXIOMATIC" in status_cell, f"{slot_id} status cell verified as AXIOMATIC")
-                    elif verdict == "COUNTERMODEL":
-                        check("COUNTERMODEL" in status_cell or "INDEPENDENT" in status_cell,
-                              f"{slot_id} status cell verified as COUNTERMODEL")
-                    elif verdict == "DEFINITIONAL":
-                        check("DEFINITIONAL" in status_cell, f"{slot_id} status cell verified as DEFINITIONAL")
-                    elif verdict == "AXIOM":
-                        check("AXIOM" in status_cell, f"{slot_id} status cell verified as AXIOM")
-                    elif verdict in ("ABSENT", "NOT ESTABLISHED"):
-                        check("NOT ESTABLISHED" in status_cell or "ABSENT" in status_cell,
-                              f"{slot_id} status cell verified as NOT ESTABLISHED")
-                    elif verdict == "DEFERRED":
-                        check("DEFERRED" in status_cell, f"{slot_id} status cell verified as DEFERRED")
-            elif s["surface"] == "characteristic_sections":
+            # Anchored label matching: **{slot_id}** followed by [/(·—|] or end of cell,
+            # or within bold followed by [/—(]
+            pattern = rf"^\|\s*\*\*{re.escape(slot_id)}(?:\*\*(?:\s*[/(·—|]|$)|(?:\s*[/—(]|/))"
+            matching_lines = [l for l in table_lines if re.search(pattern, l)]
+            if slot_id == "Personal":
+                # Two Personal rows in the table; match by slot index (0 -> first, 1 -> second)
+                check(len(matching_lines) == 2, f"expected 2 Personal rows, got {len(matching_lines)}")
+                target_line = matching_lines[0 if slot_idx == 0 else 1]
+            else:
+                check(len(matching_lines) == 1,
+                      f"classical attribute {slot_id} must hit exactly 1 row, got {len(matching_lines)}")
+                target_line = matching_lines[0] if matching_lines else None
+
+            if target_line:
+                cells = [c.strip() for c in target_line.split("|")]
+                status_cell = cells[3] if len(cells) > 3 else ""
+                parsed_badge = parse_badge_span(status_cell)
+                check(badge_matches_verdict(parsed_badge, verdict),
+                      f"{slot_id} parsed badge span {parsed_badge!r} matches verdict {verdict!r}")
+
+        # Characteristic sections and seven pillars slots
+        for s in census.get("slots", []):
+            slot_id = s["id"]
+            if s["surface"] == "characteristic_sections":
                 winner_short = s["winner"].rsplit(".", 1)[-1]
                 check(winner_short in readme, f"characteristic slot winner {winner_short} found in README")
                 check(s["rendered_badge"] in readme or s["rendered_badge"] in ledger,

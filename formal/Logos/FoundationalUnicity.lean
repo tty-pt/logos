@@ -34,9 +34,12 @@ for the necessary Ground of Reality (`Entity.ofGround`).
 4. **Strict Separation of Categories:**
    In accordance with the project's strict non-overclaiming rules:
    - **Foundational Unicity** (PROVEN): The impossibility of multiple universal grounding principles.
-   - **Numerical Unitarianism** (SEPARATED / NOT PROVEN): Does not force a solitary, relationless
-     monad; internal relational plurality (the Trinitarian frontier) remains an open, non-collapsed
-     theological question.
+    - **Numerical Unitarianism** (SEPARATED / NOT PROVEN): Does not force a solitary, relationless
+      monad; internal relational plurality (the Trinitarian frontier) remains an open, non-collapsed
+      theological question. Note the direction: this separation says unicity does not *imply* a
+      single-Person ground, leaving the person-count undetermined. It does not refute the
+      single-Person reading, and it says nothing against monotheism in its primary sense (one God,
+      C320) — the two are distinct claims, and `Monotheism` is the *proven* one.
    - **Pantheism / Monism** (SEPARATED / EXCLUDED): The unique ground is transcendent (`TranscendentGround`),
      strictly distinct from empirical atoms and finite subjects.
 -/
@@ -309,10 +312,22 @@ theorem exactly_one_universal_modal_ground
 -- Section 4: Category Boundary Separations (Honest Demarcation)
 -- ============================================================================
 
-/-- Separation Model: Foundational Unicity Does Not Imply Numerical Unitarianism.
+/-- Separation Model: Foundational Unicity Does Not Imply a Single-Person Ground.
     Proving that there is exactly one universal grounding principle does not logically
     force that the internal life of that ground is solitary or lacks relational plurality.
-    The Trinitarian frontier remains open and non-collapsed.
+
+    **Read the entailment direction carefully — this is a separation, not a refutation.**
+    The model has one ground, and in it that ground bears at least two distinct persons; so
+    *unicity does not entail* a single-Person ground. It does **not** follow that a single-Person
+    ground is false: the person-count is left *undetermined* by unicity. Two further
+    consequences, each load-bearing against a common misreading:
+      - **Monotheism is not this claim.** Monotheism is one *God* — one universal modal ground —
+        and that is `exactly_one_universal_modal_ground` (C320), PROVEN. This declaration is about
+        how many *Persons* that one God bears, which is a different question, and it stays open here.
+      - **The positive plural reading is priced elsewhere.** Distinct subsisting centres come from
+        the declared META axiom `DivineAgape.AxAgapeEssence` (C504), not from this countermodel.
+        Whether the ground is personal *at all* is `C228` (BLOCKED), and that is upstream: a
+        person-count is not well posed until personality is settled.
     Footprint: `{}`. -/
 theorem unicity_does_not_force_unitarian_monad :
     ∃ (Ground : Type) (Persons : Ground → Type),

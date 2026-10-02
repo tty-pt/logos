@@ -32,7 +32,7 @@ The project status vocabulary is:
 
 ## 2. Current strategic conclusion
 
-The project has a strong formal performative core and has established Canonical Aseity (`conditional_canonical_aseity`, `{Means, Subject}`) and atom exclusion (`atom_cannot_ground_the_ground`), but it does **not** yet have a cheap route to positive divine characteristics such as transcendence, strict monotheism, simplicity, omniscience, omnipotence, benevolence, or ordinary personhood.
+The project has a strong formal performative core and has established Canonical Aseity (`conditional_canonical_aseity`, `{Means, Subject}`) and atom exclusion (`atom_cannot_ground_the_ground`), but it does **not** yet have a cheap route to positive divine characteristics such as transcendence, unity of the divine Being (monotheism — since **PROVEN** via C320), simplicity, omniscience, omnipotence, benevolence, or ordinary personhood. The person-*count* of that one God (numerical unitarianism) is a separate question, left **open** rather than settled either way.
 
 The easiest remaining work is therefore mostly one of the following:
 
@@ -204,9 +204,9 @@ exact ⟨greatResult, noBothTrueAndFalse⟩
   5. The Master Synthesis: `ofGround_foundational_unicity` (C211, `{CL, Means, Subject}`, 0 substantive axioms);
   6. Metatheoretic Independence: `unicity_does_not_force_unitarian_monad` (C212, `{}`) — foundational unicity of universal grounding does not force a solitary, relationless monad, keeping the Trinitarian frontier open;
   7. Ontological Transcendence: `unicity_strictly_transcends_world` (C213, `{Subject}`) — strictly excludes pantheistic conflation with the world.
-- **Honest boundary:** establishes foundational unicity of universal grounding in reality (Aquinas *ST* I, q. 11, a. 3); strictly separated from numerical unitarianism (which would rule out Trinitarian relations, separated as `🧱 INDEPENDENT` via C212) and theological identification (One God ✅ **PROVEN** via C301/C302).
+- **Honest boundary:** establishes foundational unicity of universal grounding in reality (Aquinas *ST* I, q. 11, a. 3); strictly separated from numerical unitarianism (the person-count of that one ground, separated as `🧱 INDEPENDENT` via C212 — *not entailed by unicity, not refuted by it*) and theological identification (One God ✅ **PROVEN** via C301/C302).
 - **Existing separation:** `TheologicalModalHardening.necessary_existence_not_entails_uniqueness` (`formal/Logos/TheologicalModalHardening.lean:405-414`) has footprint `{}` and supplies a two-ground countermodel for bare necessity.
-- **Do not conflate:** foundational unicity (one universal ground of all reality) with numerical unitarianism (which collapses internal Trinitarian relations) or pantheism (which collapses the ground into the world).
+- **Do not conflate:** foundational unicity (one universal ground of all reality — this *is* monotheism, one God, ✅ PROVEN) with numerical unitarianism (how many Persons that one God bears — a distinct question that unicity leaves **open**, 🧱 INDEPENDENT via C212, neither entailed nor refuted) or pantheism (which collapses the ground into the world). The positive plural reading is the declared META axiom `AxAgapeEssence` (C504), not C212.
 
 ### 7. Simplicity and non-compositeness
 

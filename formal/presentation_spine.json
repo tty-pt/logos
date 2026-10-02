@@ -446,11 +446,11 @@
           "gloss": "Personal distinctness by personal property, not by essence: `≠` in every pair, and the Spirit is no word."
         },
         {
-          "row": "**One Person** is forbidden",
+          "row": "**A single-Person reading is not entailed**",
           "targets": [
             "FoundationalUnicity.unicity_does_not_force_unitarian_monad"
           ],
-          "gloss": "One ground, and every ground bears at least two distinct persons. The unitarian monad is a reading the countermodel forbids — which is why single-person monotheism is not merely unproven."
+          "gloss": "Separation model, not a refutation: one ground, and a model in which that ground bears two distinct persons. Ground-unicity therefore does not entail a single-Person ground — the person-count is left open by unicity, and the ascription of personhood to the entity is the separate, still-blocked question C228."
         },
         {
           "row": "The Trinity is **not free**",
@@ -670,7 +670,7 @@
           "targets": [
             "unicity_does_not_force_unitarian_monad"
           ],
-          "note": "Refuted **as a consequence**: one ground, and every ground bears at least two distinct persons. This is why single-person monotheism is not merely unproven (§14)."
+          "note": "Not entailed **by unicity**: `unicity_does_not_force_unitarian_monad` (`{}`) is a separation model — one ground, and a model in which that ground bears two distinct persons. Unicity alone leaves the person-count open; the positive plural reading is the priced META datum `AxAgapeEssence` (C504), not this countermodel (§14)."
         },
         {
           "branch": "That a free subject exists is unestablished",
@@ -739,8 +739,10 @@
       "heading": "### What Is Not Established",
       "title": "15. What Is Not Established",
       "body": [
-        "**Single-person monotheism is not on this list, because it is refuted rather than open** (§12): one ground, and every ground bears at least two distinct persons.",
-        "What remains open is the **entity-level** projection C228 (`GenericGroundsRightWrong g → PersonalEntity g`), still `BLOCKED` — a different question, and not what stands between Γ and monotheism.",
+        "**Monotheism — one God — is not on this list, because it is PROVEN** (§12): C320 proves one universal modal ground exists, C440 one nature.",
+        "The *person-count* of that one God is a different, unsettled question: C212 shows unicity does not entail a single Person.",
+        "The positive plural reading is priced, not free: the declared META datum `AxAgapeEssence` (C504) → C510 (§12).",
+        "What remains open is C228 (`GenericGroundsRightWrong g → PersonalEntity g`), still `BLOCKED` — whether the ground is personal *at all*, which is upstream of the person-count.",
         "**Trinity is priced, not free** (§12): three Persons on three declared META premises, with C109 at `{}`. **Incarnation is open** (C112, `{}`).",
         "**The Incarnation is the open frontier.** C112 (`preceding_theory_not_entails_incarnation`, `{}`): the preceding theory is consistent with an unincarnate ground. C111 shows the *structure* is available; the *entailment* is not.",
         "Contingent creation *as existence* is a free theorem (C350, `{}`); only the realm's content is priced (C367). Nothing above should be read as claiming any of it."
