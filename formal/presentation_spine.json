@@ -32,7 +32,10 @@
     {
       "id": "satisfaction_free",
       "milestones": [
-        {"theorem": "rightWrongDistinction", "words": "the personless order, given away"}
+        {
+          "theorem": "rightWrongDistinction",
+          "words": "the personless order, given away"
+        }
       ],
       "label": "SATISFACTION",
       "title": "1. Satisfaction Is Free",
@@ -56,7 +59,10 @@
     {
       "id": "disclosure_to_someone",
       "milestones": [
-        {"theorem": "being_true_is_being_true_to", "words": "the order as disclosure"}
+        {
+          "theorem": "being_true_is_being_true_to",
+          "words": "the order as disclosure"
+        }
       ],
       "label": "DISCLOSURE",
       "title": "2. Being True Is Being True To Someone",
@@ -82,7 +88,10 @@
     {
       "id": "right_wrong_requires_meaning",
       "milestones": [
-        {"theorem": "rightWrong_implies_meaning", "words": "right/wrong requires meaning"}
+        {
+          "theorem": "rightWrong_implies_meaning",
+          "words": "right/wrong requires meaning"
+        }
       ],
       "label": "MEANING",
       "title": "3. Right and Wrong Cannot Obtain Without Meaning",
@@ -105,7 +114,10 @@
     {
       "id": "meaning_requires_subject",
       "milestones": [
-        {"theorem": "meaning_I_needs_subject", "words": "meaning requires a subject"}
+        {
+          "theorem": "meaning_I_needs_subject",
+          "words": "meaning requires a subject"
+        }
       ],
       "label": "SUBJECT",
       "title": "4. Meaning Requires a Subject",
@@ -149,7 +161,10 @@
     {
       "id": "free_will",
       "milestones": [
-        {"theorem": "claims_normative_correctness_derives_free_will", "words": "co-meaning both poles is free will"}
+        {
+          "theorem": "claims_normative_correctness_derives_free_will",
+          "words": "co-meaning both poles is free will"
+        }
       ],
       "label": "FREE WILL",
       "title": "6. Co-Meaning Both Poles Is Free Will",
@@ -172,7 +187,10 @@
     {
       "id": "person",
       "milestones": [
-        {"theorem": "freeWill_implies_person", "words": "the free subject is a person"}
+        {
+          "theorem": "freeWill_implies_person",
+          "words": "the free subject is a person"
+        }
       ],
       "label": "PERSON",
       "title": "7. Free Will Is a Person",
@@ -196,7 +214,10 @@
     {
       "id": "person_grounds_poles",
       "milestones": [
-        {"theorem": "the_person_grounds_the_epistemic_right_wrong", "words": "that person grounds the poles"}
+        {
+          "theorem": "the_person_grounds_the_epistemic_right_wrong",
+          "words": "that person grounds the poles"
+        }
       ],
       "label": "GROUNDING",
       "title": "8. That Person Grounds the Poles",
@@ -242,7 +263,10 @@
     {
       "id": "composed_chain",
       "milestones": [
-        {"theorem": "no_subject_who_means_no_epistemic_right_wrong", "words": "and with no subject, no right/wrong anywhere"}
+        {
+          "theorem": "no_subject_who_means_no_epistemic_right_wrong",
+          "words": "and with no subject, no right/wrong anywhere"
+        }
       ],
       "label": "THE CHAIN, COMPOSED",
       "title": "10. The Chain, Composed — Both Directions",
@@ -409,7 +433,7 @@
           "targets": [
             "FoundationalUnicity.exactly_one_universal_modal_ground"
           ],
-          "gloss": "C320/C389: `∃! g, UniversalModalGround g`. Existence unconditional; uniqueness on the declared VOCAB bound `SemanticFinitude`."
+          "gloss": "C320/C389: `∃! g, UniversalModalGround g`. Existence unconditional; uniqueness on the declared META bound `GroundTranscendence`."
         },
         {
           "row": "**One nature** (una natura, *actus purus*)",
@@ -471,7 +495,7 @@
     {
       "id": "cremation",
       "part": "III",
-      "heading": "## Part III \u2014 The refutations: every branch of the denial, read",
+      "heading": "## Part III — The refutations: every branch of the denial, read",
       "title": "Part III — The refutations: every branch of the denial, read",
       "body": [
         "Sixteen entries, R1–R16. Each names the step it makes impossible (`KILLS`) and then shows the derivation: the premises it needs, the steps, the `⊥` — or the negation of its own thesis.",
@@ -487,7 +511,9 @@
           "branch": "No right or wrong at all",
           "attacks": "satisfaction_free",
           "role": "derivation",
-          "pillars": [1],
+          "pillars": [
+            1
+          ],
           "objection": "“There is no objective right and wrong.”",
           "targets": [
             "claims_correct_no_right_self_refuting",
@@ -542,7 +568,9 @@
           "branch": "No choice (eliminativism)",
           "attacks": "free_will",
           "role": "derivation",
-          "pillars": [2],
+          "pillars": [
+            2
+          ],
           "objection": "“Normative address does not imply genuine choice.”",
           "targets": [
             "d7_co_grasp_is_definitionally_choice",
@@ -555,7 +583,9 @@
           "branch": "No choice (determinism)",
           "attacks": "free_will",
           "role": "derivation",
-          "pillars": [3],
+          "pillars": [
+            3
+          ],
           "objection": "“Freedom requires physical indeterminism.”",
           "targets": [
             "d8_choice_is_definitionally_free_will",
@@ -591,7 +621,9 @@
           "branch": "Voluntarism (Euthyphro)",
           "attacks": "person_grounds_poles",
           "role": "derivation",
-          "pillars": [5],
+          "pillars": [
+            5
+          ],
           "objection": "“Ought is just will; the person invents morality.”",
           "targets": [
             "will_identity_collapses_normativity",
@@ -655,7 +687,9 @@
           "branch": "The ground is just an atom",
           "attacks": "person_grounds_poles",
           "role": "boundary",
-          "pillars": [6],
+          "pillars": [
+            6
+          ],
           "objection": "“The ultimate ground is a particle.”",
           "targets": [
             "atom_cannot_ground_the_ground"
@@ -673,10 +707,22 @@
           "note": "Not entailed **by unicity**: `unicity_does_not_force_unitarian_monad` (`{}`) is a separation model — one ground, and a model in which that ground bears two distinct persons. Unicity alone leaves the person-count open; the positive plural reading is the priced META datum `AxAgapeEssence` (C504), not this countermodel (§14)."
         },
         {
+          "branch": "Meaning is unrestricted",
+          "attacks": "meaning_requires_subject",
+          "role": "boundary",
+          "objection": "“Whatever means anything is a free subject.”",
+          "targets": [
+            "unrestricted_meaning_thesis_is_refuted"
+          ],
+          "note": "Not an incoherence to repair, but a thesis that **overclaims**: without the `PassiveIntentionalPotency` guard the antecedent holds of the ground itself (`EntityMeans Entity.ofGround p := True`), and injectivity kills it. What a free subject is required for is therefore **bounded** meaning, not meaning as such (plan step S3, D-3, `Tag: TRANS`). The guarded form is consistent on a signature that *instantiates* signification — `boundedMeaningModel` grants a subject two incompatible contents, so `boundedMeaningRequiresFreeSubject_is_consistent_and_nonVacuous` (`{}`) proves the axiom holds there with the guard's antecedent witnessed, and the consistency is not an artefact of an inert meaning field (`AGENTS.md`, 2026-09-29)."
+        },
+        {
           "branch": "That a free subject exists is unestablished",
           "attacks": "the_fact",
           "role": "derivation",
-          "pillars": [4],
+          "pillars": [
+            4
+          ],
           "objection": "“No one has shown a free subject exists.”",
           "targets": [
             "AsieticChoice.freeWill_exists",
@@ -688,7 +734,9 @@
           "branch": "The critic who presents the objection is himself a person",
           "attacks": "disclosure_to_someone",
           "role": "pillar",
-          "pillars": [7],
+          "pillars": [
+            7
+          ],
           "objection": "“This objection is a sound argument, so it carries no personal stance.”",
           "targets": [
             "critic_presenting_objection_is_person"
@@ -709,16 +757,21 @@
         "It does **not** run on the older deontic route — ought, choice, free will, personal grounding — which asserted far more and is kept whole in [the ledger](investigations/ledger.md).",
         "The seam is where the two routes do not meet. It is stated here rather than left for the reader to infer from what is absent. Three lines carry it, and all three are named in GAPMAP.",
         "**C228 — the ground's personalhood, at the entity level: BLOCKED.**",
-        "`normative_ground_is_personal (g) (hGr : GenericGroundsRightWrong g) : PersonalEntity g` is **not** proved. The missing lemma is named verbatim in `base.txt:1345-1346`:",
+        "`normative_ground_is_personal (g) (hGr : GenericGroundsRightWrong g) : PersonCorrelate g` is **not** proved. The missing lemma is named verbatim in `base.txt:1345-1346`:",
         "> `#9  Ground(e, personal) → Personal(e)`  — together with its target #10.",
         "Personhood in Γ is a three-step field projection: `grounds_normativity` gives the `GenericGroundingRelation`, `explanatory` forces `g = EntityOf s`, `personal_ground` gives `Person s`. The two fields that would seal it, `explanatory` and `asymmetric`, are the named blockers.",
         "**C228 is about `Entity`, not about `Person`.** Whether the ground is *one* person is a separate question with a machine-checked answer: `unicity_does_not_force_unitarian_monad` says a unique ground can bear two or more distinct persons. That is R14 below.",
         "**C110 — a necessary ground does not entail contingent creation: countermodel, `{}`.** `¬ (∀ Subj Ent World, GroundEntailsCreation Subj Ent World)` — nothing in the deduction produces a world or a creation event.",
         "**C112 — the preceding theory does not entail the incarnation: countermodel, `{}`.** Nothing in the deduction requires the ground to enter a body.",
-        "**C109 — the preceding theory does not entail the Trinity: DEMOTED.** Its 2-element-Boolean cardinality artifact is superseded by `monotheism_compatible_with_trinity`; the row is kept so the supersession stays visible.",
+        "**C109 — preceding theory ⇏ Trinity: DEMOTED.** Its `Bool` countermodel is a truncated signature — an artifact, not evidence about Γ. Not superseded by `monotheism_compatible_with_trinity`, which is not a kernel declaration. Γ omits the Trinity because hypostasis→subject is unasserted.",
         "The 32 formal frontiers — every unproved step, every countermodel separation, every open bridge, each with its exact missing lemma — are in [the ledger](investigations/ledger.md). Nothing there is established."
       ],
-      "claims": ["C228", "C110", "C112", "C109"]
+      "claims": [
+        "C228",
+        "C110",
+        "C112",
+        "C109"
+      ]
     },
     {
       "id": "limits",
@@ -729,7 +782,7 @@
         "`#print axioms` reads the kernel's dependency graph. It cannot see a **`def` used as a premise by name** — so the census below counts every such inherited bridge, the theorems it underwrites, and how many have been reviewed.",
         "A `✅` therefore means *kernel-verified conditional on a bridge the kernel does not charge*.",
         "This is disclosure, not payment: nothing is promoted to a declared axiom, and the three-way decision (promote / declare / retire) is still open.",
-        "`EntityMeans Entity.ofGround := True` — the irrelevance of causal contact to the grounding of §8 — is one of them."
+        "`EntityMeans Entity.ofGround := True` — the irrelevance of causal contact to the grounding of §8 — is tracked by the separate, machine-audited `Stipulations.lean` registry (`scripts/audit_stipulations.py`), not by the 28-entry allowlist above."
       ],
       "def_bridge_census": true
     },
@@ -742,8 +795,10 @@
         "**Monotheism — one God — is not on this list, because it is PROVEN** (§12): C320 proves one universal modal ground exists, C440 one nature.",
         "The *person-count* of that one God is a different, unsettled question: C212 shows unicity does not entail a single Person.",
         "The positive plural reading is priced, not free: the declared META datum `AxAgapeEssence` (C504) → C510 (§12).",
-        "What remains open is C228 (`GenericGroundsRightWrong g → PersonalEntity g`), still `BLOCKED` — whether the ground is personal *at all*, which is upstream of the person-count.",
+        "What remains open is C228 (`GenericGroundsRightWrong g → PersonCorrelate g`), still `BLOCKED` — whether the ground is personal *at all*, which is upstream of the person-count.",
+        "One instantiation is settled: for `g := Entity.ofGround`, `ofGround_not_a_person_correlate` (C564) proves `¬ PersonCorrelate Entity.ofGround` outright — a flat no for that one ground, not an answer to C228's general question.",
         "**Trinity is priced, not free** (§12): three Persons on three declared META premises, with C109 at `{}`. **Incarnation is open** (C112, `{}`).",
+        "**The three divine Persons are denied full omniscience too** — `NecessaryKindAudit.necessary_kind_subject_lacks_maximal_capacity`, priced at `GroundTranscendence` (META). The finitude split re-tagged that denial from VOCAB to META; it did not withdraw it.",
         "**The Incarnation is the open frontier.** C112 (`preceding_theory_not_entails_incarnation`, `{}`): the preceding theory is consistent with an unincarnate ground. C111 shows the *structure* is available; the *entailment* is not.",
         "Contingent creation *as existence* is a free theorem (C350, `{}`); only the realm's content is priced (C367). Nothing above should be read as claiming any of it."
       ],
@@ -1165,7 +1220,7 @@
           ],
           "summary": "Live theorem: the ground is world-rigid (`NecessaryEntity Entity.ofGround`, `∀ w, ExistsAt w .ofGround`, definitional `EntityExistsAt w .ofGround := True`, footprint `{Means, Subject}`), **everlasting**, **atemporal**, and possesses **Canonical Aseity** (`conditional_canonical_aseity`, `{Means, Subject}`: `¬ ∃ g, ExternalGrounding g .ofGround`). Claim E is the *non-hypostatic* pairing (`∃ g s, NecessaryEntity g ∧ NecessaryGroundOfReality g ∧ Person s ∧ GroundsRightWrong s`): entity-necessity conjunct PROVEN; personal-kind conjunct honestly `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (PROVEN↑ under META `AxTwoSubjects`). Hypostatic identity, a 'necessary Person', Trinity and monotheism are NOT claimed — `ofGround_ne_ofSubject` blocks the identity line.",
           "defer_note": "✅ **PROVEN** (entity-level necessity, eternity, and canonical aseity) — machine-checked in `formal/Logos/NecessityEternity.lean` and `formal/Logos/CanonicalAseity.lean`; hypostatic identity of the ground with a person remains blocked (`ofGround_ne_ofSubject`) and Claim D ('necessary Subject') is still refuted (`CountermodelPersonNotNecessary`).",
-          "summary_short": "Live theorem: the ground is world-rigid, **everlasting**, **atemporal**, with **Canonical Aseity** — all on `{Means, Subject}`. The pairing is *non-hypostatic*: entity-necessity is PROVEN; the personal-kind conjunct is PROVEN↑ under META `AxTwoSubjects`. No 'necessary Person' is claimed."
+          "summary_short": "Live theorem: the ground is world-rigid, **everlasting**, **atemporal**, with **Canonical Aseity** — all on `{Means, Subject}`. The pairing is *non-hypostatic*: entity-necessity is PROVEN; the personal-kind conjunct is PROVEN↑ under META `AxTwoSubjects`. **Necessary Subjects ARE claimed**: `one_necessary_ground_three_free_necessary_persons` concludes `NecessarySubject a ∧ NecessarySubject b ∧ NecessarySubject c`. What is **not** claimed is *hypostatic identity* — which `DivineHypostasis` each divine Subject is (X2) — and the ground is provably not one of them (`ofGround_ne_ofSubject`). Corrected 2026-10-03: this line previously read \"No 'necessary Person' is claimed\", which was false."
         },
         {
           "id": "monotheism",

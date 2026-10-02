@@ -54,7 +54,7 @@ What this does NOT claim, each verified against the source:
         `EpistemicNecessity.signature_model_reading_discipline`, which governs
         this module and `NegativeRetorsionAudit` alike.)
   (vi)  C228 (`normative_ground_is_personal`) stays BLOCKED. That is the
-        **entity-level** relation `GenericGroundsRightWrong g → PersonalEntity g`;
+        **entity-level** relation `GenericGroundsRightWrong g → PersonCorrelate g`;
         this module is **subject-level** and does not discharge it.
 
 No new axiom: the register stays at 35 declared (17 VOCAB / 18 substantive).

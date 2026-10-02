@@ -20,7 +20,7 @@ habitação continua na lista de «ainda requer prova», e é uma **ponte** («o
 contingente está habitado»), não uma prova.
 
 **Frente 2 — a Trindade entra no reino necessário** (C518–C520,
-`DivineAgape.lean:351-380`, §28/§7). O sort `DivinePerson` do lote TRINITY é
+`DivineAgape.lean:351-380`, §28/§7). O sort `DivineHypostasis` do lote TRINITY é
 reusado: não há necessidade de um novo divine-sort, e é a mesma pinsão.
 - C518 `subsisting_centre_is_necessary {d} (h : Subsists d) :
   NecessaryEntity d.deiformEntity`, `{NecessarySubjectKind, Subject}`.

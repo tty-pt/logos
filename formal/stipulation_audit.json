@@ -64,10 +64,10 @@
   {
    "def": "asietyFreedom_ofGroundFreedom",
    "name": "asietyFreedom_ofGroundFreedom",
-   "location": "AsietyFreedom.lean:119",
+   "location": "AsietyFreedom.lean:141",
    "anchor": "def AsietyFreedomOfGround",
    "tag": "META",
-   "cost": "The ground's being the ground of freedom is declared, not derived: GroundsEntity is vacuous, GroundsRightWrong is definitionally FreeWill (C168), and substantive grounding is BLOCKED (C228). Priced by three {} countermodels; the universal reading is strictly stronger than the existential one.",
+   "cost": "The ground's being the ground of freedom is declared, not derived: OneEssence is vacuous, GroundsRightWrong is definitionally FreeWill (C168), and substantive grounding is BLOCKED (C228). Priced by three {} countermodels; the universal reading is strictly stronger than the existential one.",
    "dependents": [
     "asietyFreedom_yields_trueChoice",
     "asietyFreedom_yields_asietyFreeWill",

@@ -26,7 +26,6 @@ import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-OLD = ROOT / ".snapshots" / "README.pre-split.md"
 NEW_README = ROOT / "README.md"
 LEDGER = ROOT / "investigations" / "ledger.md"
 SPINE = ROOT / "formal" / "presentation_spine.json"
@@ -40,27 +39,8 @@ IDENT_RE = re.compile(r"`([A-Za-z_][A-Za-z0-9_'.]*?)`")
 CLAIM_RE = re.compile(r"\b([CF](?:AITH)?-?\d+[a-z]?)\b")
 
 
-def identifiers(text: str) -> set[str]:
-    out = set()
-    for m in IDENT_RE.finditer(text):
-        tok = m.group(1).strip(".,;:!?")
-        if not tok or tok.lower() in STOPWORDS:
-            continue
-        if "." in tok or "_" in tok:
-            out.add(tok)
-        elif re.fullmatch(r"[A-Z][A-Za-z]{2,}", tok):
-            out.add(tok)
-    return out
 
 
-def claims(text: str) -> set[str]:
-    return set(CLAIM_RE.findall(text))
-
-
-# Cells of the pre-split "Linear Deductive Roadmap" table (READINGPATH.md §1:
-# it was transcribed by hand and is replaced by the derived ten-step table).
-# The facts it carried (ten steps, formulas, statuses) are checked structurally
-# below; its label/header cells are presentation, not content.
 ROADMAP_CELLS = {
     "**§1**", "**§2**", "**§3**", "**§4**", "**§5**",
     "**§6**", "**§7**", "**§8**", "**§9**", "**§10**",
@@ -186,52 +166,26 @@ def table_cells(text: str) -> set[str]:
 
 def main() -> int:
     errors: list[str] = []
-    old = OLD.read_text(encoding="utf-8")
-    new = NEW_README.read_text(encoding="utf-8") + "\n" + LEDGER.read_text(encoding="utf-8")
 
-    # 1. identifiers
-    old_ids = identifiers(old)
-    missing_ids = sorted(i for i in old_ids if i not in new)
-    print(f"identifiers in old README: {len(old_ids)}, missing from union: {len(missing_ids)}")
-    for i in missing_ids[:40]:
-        errors.append(f"identifier lost: {i}")
-    if len(missing_ids) > 40:
-        errors.append(f"... and {len(missing_ids) - 40} more identifiers")
-
-    # 2. claim ids
-    old_claims = claims(old)
-    missing_claims = sorted(c for c in old_claims if c not in new)
-    print(f"claim ids in old README: {len(old_claims)}, missing from union: {len(missing_claims)}")
-    for c in missing_claims:
-        errors.append(f"claim id lost: {c}")
-
-    # 3. table cells (substring-tolerant: a re-capped cell passes iff it kept
-    #    every old cell's content)
-    old_cells = {c for c in table_cells(old) if c not in ROADMAP_CELLS}
-    new_flat = re.sub(r"\s+", " ", new)
-    # Documented, kernel-driven revisions: an old cell is excused only when the
-    # entry names a replacement that the new surface actually carries.
-    excused, missing_replacements = set(), []
-    for old_head, replacement, _why in INTENTIONAL_REVISIONS:
-        hit = [c for c in old_cells if c.startswith(old_head)]
-        if hit:
-            excused.update(hit)
-        if replacement not in new_flat:
-            missing_replacements.append(replacement)
-    missing_cells = sorted(c for c in old_cells if c not in new_flat and c not in excused)
-    print(f"table cells in old README: {len(old_cells)}, missing from union: {len(missing_cells)}")
-    print(f"  ({len(excused)} cell(s) retired by the 2026-09-30 documented revisions)")
-    for c in missing_cells[:20]:
-        errors.append(f"table cell lost: {c[:120]}")
-    if len(missing_cells) > 20:
-        errors.append(f"... and {len(missing_cells) - 20} more cells")
-    for r in missing_replacements:
-        errors.append(
-            f"INTENTIONAL_REVISIONS entry has no replacement in the new surface: {r[:100]!r} "
-            f"— an allowance may not hide a deletion")
-    for old_head, _r, why in INTENTIONAL_REVISIONS:
-        if old_head not in re.sub(r"\s+", " ", old):
-            errors.append(f"INTENTIONAL_REVISIONS entry no longer matches the snapshot: {old_head[:80]!r}")
+    # --- WHAT THIS SCRIPT NO LONGER CHECKS, AND WHY --------------------------------------
+    # Checks 1-3 compared the union (README + ledger) against `.snapshots/README.pre-split.md`,
+    # the pre-split README, to prove the 2026-09-30 two-tier move lost nothing: every identifier,
+    # claim id and table cell of the old document had to reappear in one of the two new sinks.
+    #
+    # That baseline **was never committed** (`git log --all -- .snapshots/` is empty), so the
+    # comparison could never run: the script raised FileNotFoundError on every invocation and was
+    # not in `make`'s path, which is why the breakage went unnoticed. A check that has never
+    # executed is not evidence, so those three checks are removed rather than left as dead code
+    # that only crashes.
+    #
+    # The consequence is stated rather than papered over: **the superset property is no longer
+    # machine-checked.** Nothing below verifies that the split preserved the old README, and no
+    # green run of this script should be read as saying it did. Checks 4-5 survive because they
+    # read the ledger and `presentation_spine.json` only. Restoring the property needs the
+    # pre-split README itself — regenerate it with `audience: "full"` in
+    # `formal/presentation_spine.json` and commit it under `.snapshots/`, then restore checks 1-3.
+    print("NOTE: superset-vs-pre-split check is UNVERIFIED — the baseline "
+          "`.snapshots/README.pre-split.md` does not exist in this repository. Checks 4-5 only.")
 
     # 4. full spine summaries verbatim in the ledger
     ledger = LEDGER.read_text(encoding="utf-8")
@@ -262,8 +216,18 @@ def main() -> int:
         "chain block headings": (r"^### .*([Cc]hain, step by step|Chain \d+)", 14),
         "classical-attribute rows": (r"^\| \*\*", None),  # reported, threshold below
         # 33 -> 32 on 2026-09-30: F1bUncond's frontier row was retired when the
-        # claim became SUPERSEDED (C278 + freeSubject_exists). The count is
-        # checked against the snapshot minus the retired rows, not by wish.
+        # claim became SUPERSEDED (C278 + freeSubject_exists).
+        # 31 -> 32 on 2026-10-03: C573 (strict perichoresis) entered the frontier as an
+        # OPEN row. It is an *undefined predicate*, not an unproved lemma — nothing was
+        # proved and no price changed; the corpus now names the missing relation instead
+        # of leaving the gap implied by a predicate called `Perichoretic` that means
+        # homoousios. Paired with the 31 it reverses: one withdrawal, one honest addition.
+        # 32 -> 31 on 2026-10-03: C572 left the frontier when plan §24 withdrew it
+        # as Modalism. The frontier is generated from statuses BLOCKED/DEFERRED/OPEN
+        # (build_deduction.py:5820), so a withdrawn claim correctly stops being an
+        # open question. This is a reduction in the *frontier*, not a resolved step:
+        # nothing was proved, and C572 must never be counted as discharged. The count
+        # is checked against the pin minus retired rows, never by wish.
         "frontier rows": (r"^\* \*\*`", 32),
         "derivation summaries": (r"^<summary>Formal Derivation", 40),
         "definition summaries": (r"^<summary>Definitions used in this section", None),
@@ -291,8 +255,8 @@ def main() -> int:
         for e in errors:
             print(f"  - {e}")
         return 1
-    print("\nOK: the union of README.md + investigations/ledger.md covers every "
-          "machine-identifiable content item of the pre-split README.")
+    print("\nOK: the ledger's spine summaries are verbatim and its block inventory is complete. "
+          "This does NOT certify the pre-split superset property (see the NOTE above).")
     return 0
 
 

@@ -86,7 +86,7 @@ open Logos.Alternatives (Incompatible)
 open Logos.Choice (ChoiceField Chooses FreeWill FreeSubject Doubts
   incompatible_self_negation rejectedHornCoMeant genuineChoice_of_doubt)
 open Logos.TheologicalModalHardening (ContingentEntity)
-open Logos.RecoveredOntologicalGround (GroundsEntity
+open Logos.RecoveredOntologicalGround (OneEssence
   ground_of_reality_grounds_finite_subject)
 open Logos.NecessityEternity (ofGround_necessary_ground_of_reality ofGround_ne_ofSubject)
 open Logos.CanonicalAseity (ExternalGrounding CanonicalAseity conditional_canonical_aseity)
@@ -224,14 +224,22 @@ theorem weakChoice_implies_trueChoice {s : Subject} {p q : Prop}
     `Choice.lean:247`; only the consequent was ever a Lean `def`. This is the implication itself,
     stated once so the ledger can cite the blocker by name.
 
-    **BLOCKED, and refuted.** No axiom of Γ reaches `Means s (¬ p)` from `Means s p`. The
-    antecedent is `Means`-existence, while every route to a literal negation
-    (`AxJudicativeBipolarity`, `AxActPolarity`, `AxIntentionalChoice`,
-    `ClaimsNormativeCorrectness`) is `Act`-gated, and `Act` is `Initiates`-gated, with no
-    `Initiates` witness anywhere in Γ. `bareRejectedHornCoMeant_is_not_derivable` (Section 3c)
-    closes it outright. The two forms that *are* discharged are the `ClaimsCorrect`-conditional one
-    (`derives_rejectedHornCoMeant`) and the retorsion-event one
-    (`retorsion_implies_rejectedHornCoMeant`).
+    **DERIVED in Γ** — this `def` was recorded `BLOCKED` until 2026-10-03 and that was wrong.
+    See `bareRejectedHornCoMeant_is_derivable` (Section 3c): the unconditional datum
+    `performative_act_datum` together with `AxActPolarity` reaches `Means s p ∧ Means s (¬ p)` in
+    two steps, at the price of one TRANS and one SEM axiom.
+
+    What the old note got wrong was the scope of its own claim. The `ClaimsCorrect`-gated routes
+    (`AxJudicativeBipolarity`) really are `Initiates`-gated with no witness in Γ — but
+    `AxActPolarity` reads the act directly and needs no gate, so "no axiom of Γ reaches
+    `Means s (¬ p)` from `Means s p`" was a statement about *two* routes, silently generalised to
+    all of them.
+
+    The honest residual is narrower and survives: the horn is **not derivable from the meaning
+    vocabulary alone**. `singleContentModelRefutesBareRejectedHorn` (C273) refutes it in every
+    single-content model, and `gammaMeans_is_not_single_valued` proves Γ's own `Means` is *not*
+    single-valued. So the horn is discharged **because** meaning is many-valued here — see the
+    dialectic table in Section 3c.
 
     Footprint and status are orthogonal: the marker below is what the definition *depends on*,
     `BLOCKED` is that it is not discharged. Being a `def`, it states the frontier, not that the
@@ -301,10 +309,10 @@ theorem retorsion_yields_genuine_normativity_on_its_own_content
     in that the content need not be arbitrary — the denial supplies its own pair, so the conclusion
     is a *performative* refutation of the denial rather than a general semantic bridge.
 
-    **The bare form `bareRejectedHornCoMeant` stays BLOCKED**, and is refuted in Section 3c. The
-    gap is *not* horn-saturation and *not* this entailment: it is that no axiom of Γ supplies an
-    `Initiates` witness, so Γ never reaches `Means s (¬ p)` at all without either a
-    correctness-judgment (`AxJudicativeBipolarity`) or a retorsion event.
+    **The bare form `bareRejectedHornCoMeant` does not need this premise.** It is derived outright
+    in Section 3c (`bareRejectedHornCoMeant_is_derivable`), because `AxActPolarity` reads the act
+    directly and so does not wait on an `Initiates` witness. This theorem is the *narrower* route:
+    it needs a correctness-judgment, where the bare route needs only that an act occurred.
 
     Footprint: `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`. -/
 theorem retorsion_implies_rejectedHornCoMeant
@@ -314,18 +322,54 @@ theorem retorsion_implies_rejectedHornCoMeant
     AxJudicativeBipolarity s NoGN hClaim⟩
 
 /-!
-## Section 3c: the bare horn is refuted, not merely unproved
+## Section 3c: the bare horn — refuted under single-valued meaning, derived in Γ
 
-`bareRejectedHornCoMeant` is `BLOCKED`, and the block is machine-backed rather than merely
-asserted. The model follows the `NegativeRetorsionSignature` pattern already used at
-`NegativeRetorsionAudit.lean:65`: a `structure` carrying interpretation fields, a `def` for the
-sentence under audit, and a theorem exhibiting a model. `NegativeRetorsionAudit.lean` is
-referenced for the idiom only; it is not imported and none of its definitions are used.
+`bareRejectedHornCoMeant` is **derived in Γ**, at a stated price. This section also refutes it in
+every single-content model. Those two facts are not in conflict; together they are the corpus's
+sharpest result about meaning, and reading either alone gives the wrong answer.
+
+### The dialectic
+
+| | meaning is **single-valued** (one content per subject) | meaning is **many-valued** (Γ) |
+|---|---|---|
+| the bare rejected horn | **REFUTED** — `singleContentModelRefutesBareRejectedHorn` (C273) | **DERIVED** — `bareRejectedHornCoMeant_is_derivable` (below) |
+| so co-meaning, hence `TrueChoice` from co-meaning | **unavailable** | **available** |
+
+The horn is not a truth hidden behind Γ's axioms; it is a *consequence* of Γ refusing to make
+meaning single-valued. `AxActPolarity` (`Choice.lean:796`) says an intentional act carries its own
+polarity: `Act s p → Means s (¬ p)`. Together with the unconditional datum
+`performative_act_datum : ∃ s p, Act s p`, Γ reaches `Means s p ∧ Means s (¬ p)` outright. What
+C273/C274 refute is the horn over the *bare* meaning vocabulary `<Subject, Means>` plus
+propositional non-triviality — that is, meaning **without** the act-polarity apparatus.
+
+So the honest form of the negative result is the narrow one: **the bare horn is not a consequence
+of the meaning vocabulary alone.** Γ reaches it only by paying for polarity, and the price is
+visible: one TRANS axiom (`performative_act_datum`) and one SEM axiom (`AxActPolarity`).
+
+The consequence worth stating plainly: *there is no reading of "meaning" on which Γ both keeps
+meaning single-valued and has genuine choice.* Single-valuedness buys the refutation and costs the
+choice; many-valuedness buys the choice and costs the refutation. That is a real trade, and
+before 2026-10-03 this module asserted the first horn of it while the kernel sat on the second.
+
+The `NegativeRetorsionSignature` pattern is followed for the refutation: a `structure` carrying
+interpretation fields, a `def` for the sentence under audit, and theorems exhibiting a model.
+`NegativeRetorsionAudit.lean` is referenced for the idiom only; it is not imported and none of its
+definitions are used.
 
 **Scope, stated honestly.** This is a model of the *meaning relation*: the `Means`/`Subject`
-vocabulary, plus faithfulness of meaning, plus propositional non-triviality. It is **not** a total
+vocabulary, plus single-valuedness of meaning, plus propositional non-triviality. It is **not** a total
 model of Γ. The claim proved is the precise one — the bare horn is **not derivable** from the
 meaning vocabulary and `incompatible_self_negation` — which is strictly more than "not yet proved".
+
+**Repaired 2026-10-03 (ISSUE_K Step 2(i)).** The field was `faithful : means s p → p`, and the
+canonical model had `means := fun _ p => p` -- so every subject meant **every** proposition, and
+`faithful` held only because `means s p → p` was the identity there. That is exactly the artifact
+AGENTS.md forbids: a model that does not instantiate the vocabulary it is used to deny, here by
+granting total meaning while claiming single content. The field is now genuine single-valuedness,
+`single : means s p → p = content s`, which is what the structure's own name promised, and
+`singleContentModel` has `means := fun _ p => p = True`.
+`singleContentModel_is_genuinely_single_content` machine-checks the difference, and the pre-repair
+witness is now a **compile error**.
 
 **Why this strengthens the batch rather than shrinking it.** The batch's positive claim is that Γ
 derives true choice with no new axiom. That claim is only as credible as Γ's negative results, so a
@@ -333,33 +377,87 @@ machine-checked refutation of the one form that does *not* follow is the stronge
 evidence that nothing positive here rests on a hidden assumption.
 -/
 
-/-- A single-content model of the meaning relation: every subject is assigned exactly one
-    `Prop`, and `means` is faithful (it never asserts a falsehood). Co-signification of a content
-    and its negation is therefore impossible, while meaning-existence is guaranteed by
-    `witnessContent`.
+/-- ★★★ **The bare rejected horn IS derived in Γ**, and this is the positive half of the dialectic
+    recorded in the section header. `F11` moves `BLOCKED` → `DERIVED` at a stated price.
 
-    Faithfulness is the load-bearing field. Single-valuedness alone would not do: from
-    `p = ¬ p` no contradiction follows in general, because `p` need not be provable. What closes
-    the model is `Faithful`, which turns `means t p` into a proof of `p` and so yields `p ∧ ¬ p`
-    against `incompatible_self_negation`.
-{}`. -/
+    The route is two steps, both short. `Agency.performative_act_datum` (`Agency.lean:233`,
+    `Tag: TRANS`) is **unconditional** — `∃ s p, Act s p` — so no `Initiates` witness has to be
+    hunted for; and `Choice.AxActPolarity` (`Choice.lean:796`, `Tag: SEM`) turns that act into its
+    own polarity, `Act s p → Means s (¬ p)`. The act's subject already means `p` via
+    `Agency.Act.1`, so the conjunction is immediate.
+
+    This is why the module used to say "no `Initiates` witness anywhere in Γ": that was true of the
+    *correctness* and *retorsion* routes, which are `ClaimsCorrect`-gated and therefore need an
+    `Initiates`-gated premise — but the polarity route reads the act directly, so the unconditional
+    datum discharges it. The price is **one TRANS and one SEM axiom**, and it is visible on the row
+    rather than assumed away.
+
+    What is NOT claimed: that the horn follows from the meaning vocabulary alone. It does not, and
+    `singleContentModelRefutesBareRejectedHorn` (C273) below proves the negative counterpart. Read
+    the two together — §3c's table is the honest summary.
+
+    Footprint: `{AxActPolarity, Initiates, Means, State, Subject, performative_act_datum}`. -/
+theorem bareRejectedHornCoMeant_is_derivable : bareRejectedHornCoMeant :=
+  fun _h => by
+    obtain ⟨s, p, hAct⟩ := Agency.performative_act_datum
+    exact ⟨s, p, hAct.1, Choice.AxActPolarity s p hAct⟩
+
+/-- The same act-polarity step, kept separate so the price is legible on its own: an intentional
+    act alone delivers co-meaning, with no hypothesis about what is true. This is the whole content
+    of `AxActPolarity`, and it is what `bareRejectedHornCoMeant_is_derivable` consumes.
+    Footprint: `{AxActPolarity, Initiates, Means, State, Subject}`. -/
+theorem act_alone_yields_polarity {s : Subject} {p : Prop}
+    (hAct : Agency.Act s p) : Means s p ∧ Means s (¬ p) :=
+  ⟨hAct.1, Choice.AxActPolarity s p hAct⟩
+
+/-- The dialectic in one line, as a *theorem about Γ's own `Means`*: Γ has genuine co-meaning, and
+    so its meaning relation is provably **not** single-valued. Read against C273, which refutes the
+    horn in every single-valued model, this pins the trade: the horn is discharged **because**
+    meaning is many-valued here.
+    Footprint: `{AxActPolarity, Initiates, Means, State, Subject, performative_act_datum, CL}`. -/
+theorem gammaMeans_is_not_single_valued :
+    ¬ (∀ (s : Subject) (p q : Prop), Means s p → Means s q → p = q) :=
+  fun hSingle => by
+    obtain ⟨s, p, hAct⟩ := Agency.performative_act_datum
+    have hNeg : Means s (¬ p) := Choice.AxActPolarity s p hAct
+    have hEq : p = ¬ p := hSingle s p (¬ p) hAct.1 hNeg
+    have hiff : p ↔ ¬ p := Iff.of_eq hEq
+    rcases Classical.em p with hp | hn
+    · exact (hiff.mp hp) hp
+    · exact hn (hiff.mpr hn)
+
+/-- A single-content model of the meaning relation: every subject is assigned exactly one
+    `Prop`, and `means` is single-valued -- it can mean only that subject's assigned content.
+    Co-signification of a content and its negation is therefore impossible, while
+    meaning-existence is guaranteed by `witnessContent`.
+
+    `single` is the load-bearing field, and it is now the honest version of it. It was `faithful`
+    (`means s p → p`) until 2026-10-03, and that version was defeatable: with
+    `means := fun _ p => p` a model satisfied the field while meaning every proposition, so the
+    "single content" claim was vacuous. See `singleContentModel_is_genuinely_single_content`.
+
+    Single-valuedness does close the model, but *classically*: it turns the two meanings into
+    `q = content t` and `¬ q = content t`, hence `q = ¬ q` as propositions, and `q ↔ ¬ q` is
+    refutable only via the excluded middle. Faithfulness closed it constructively by producing two
+    proofs outright. That is the one respect in which the repair is weaker, and it costs `CL`
+    (not a substantive price; the footprint is the meta-logic trio alone). -/
 structure SingleContentSignature where
   Subject : Type
   content : Subject → Prop
   means : Subject → Prop → Prop
   witness : Subject
   witnessContent : Prop
-  faithful : ∀ (s : Subject) (p : Prop), means s p → p
+  single : ∀ (s : Subject) (p : Prop), means s p → p = content s
 
 namespace SingleContentSignature
 
-/-- `means` never asserts a falsehood in `S`. The faithfulness condition, named. This is the
-    field that makes the countermodel close: it turns `means t p ∧ means t (¬ p)` into `p ∧ ¬ p`,
-    which `incompatible_self_negation` forbids. Single-valuedness alone would not suffice, since
-    `p = ¬ p` yields no contradiction for a `p` that is not provable.
+/-- `means` is single-valued in `S`: anything `s` means is `s`'s assigned content. This is what
+    makes the countermodel close, by turning `means t q ∧ means t (¬ q)` into `q = ¬ q`. Replaces
+    `Faithful`, which admitted the degenerate `means := fun _ p => p` -- a model satisfying the
+    field while meaning every proposition (AGENTS.md, binding 2026-09-29).
     Footprint: `{}`. -/
-def Faithful (S : SingleContentSignature) : Prop :=
-  ∀ (s : S.Subject) (p : Prop), S.means s p → p
+def SingleValued (S : SingleContentSignature) : Prop :=
+  ∀ (s : S.Subject) (p : Prop), S.means s p → p = S.content s
 
 /-- The bare rejected-horn implication, read inside the model `S`. Mirrors
     `bareRejectedHornCoMeant` above, with `S.means` in place of `Means`.
@@ -380,10 +478,10 @@ def antecedentHolds (S : SingleContentSignature) : Prop :=
 def singleContentModel : SingleContentSignature where
   Subject := Bool
   content := fun _ => True
-  means := fun _ p => p
+  means := fun _ p => p = True
   witness := false
   witnessContent := True
-  faithful := fun _ _ h => h
+  single := fun _ _ h => h
 
 /-- The antecedent of the bare horn holds in the canonical model: something is meant, so the
     blocked implication is not vacuously true and its refutation is a real counterexample rather
@@ -391,33 +489,64 @@ def singleContentModel : SingleContentSignature where
     Footprint: `{}`. -/
 theorem antecedentHolds_in_canonicalModel :
     singleContentModel.antecedentHolds :=
-  ⟨true, True, trivial⟩
+  ⟨true, True, rfl⟩
+
+/-- **Meaning-coherence check for the repaired model (AGENTS.md, binding 2026-09-29).** A
+    countermodel is evidence only if it *instantiates the vocabulary it is used to deny*. The
+    pre-repair model failed this: `means := fun _ p => p` let every subject mean **every**
+    proposition, so it was not a single-content model at all and its `faithful` field held only
+    because `means s p → p` was the identity there -- a self-refuting artifact of an
+    uninterpreted signature field, the `NegativeRetorsionSignature` genre.
+
+    The repaired model has `means := fun _ p => p = True`, so each subject means exactly one
+    proposition, and this theorem says exactly that: two contents meant by one subject are equal.
+    The countermodel is therefore honest, and what is refuted is the bare horn rather than a
+    degenerate reading of `means`.
+    Footprint: `{}`. -/
+theorem singleContentModel_is_genuinely_single_content :
+    ∀ s : singleContentModel.Subject, ∀ p q : Prop,
+      singleContentModel.means s p → singleContentModel.means s q → p = q := by
+  intro s p q hp hq
+  exact hp.trans hq.symm
 
 end SingleContentSignature
 
-/-- ★★★ **The bare rejected horn is refuted, not merely unproved.** In a faithful single-content
-    model the antecedent holds — some subject means some content — while the consequent requires a
-    subject to mean both a content and its negation, which faithfulness makes unsatisfiable. So
-    `¬ bareHorn` is proved outright, and the frontier row is machine-backed.
+/-- ★★★ **The bare rejected horn is refuted wherever meaning is single-valued** — the negative
+    half of the dialectic in the section header. In a single-content model the antecedent holds —
+    some subject means some content — while the consequent requires a subject to mean both a content
+    and its negation, which single-valuedness makes unsatisfiable. So `¬ bareHorn` is proved
+    outright.
 
-    This is the formal content of the prose at `Choice.lean:36-40`: "`Means` is an opaque relation,
-    and `AxTwoSubjects` yields two *different* subjects, each with a single content."
+    Read this against `bareRejectedHornCoMeant_is_derivable`, which derives the same sentence in Γ.
+    The two are not rivals: this theorem says meaning *cannot* be single-valued and support the
+    horn, and the other says Γ's meaning *is* many-valued and so does. Nothing is left over.
 
-    What is refuted is the *implication* in the models constructed here, not `rejectedHornCoMeant`
-    (its consequent, which two theorems above do establish, under stated premises), and not the
-    ledger's `BLOCKED` verdict. The block remains: Γ does not derive the bare form.
-    Footprint: `{}`. -/
+    What is refuted is the *implication* over a **single-valued** meaning relation, not
+    `rejectedHornCoMeant` (its consequent) and not the bare horn as Γ states it. The earlier
+    version of this note closed with "Γ does not derive the bare form" — **that was false**, and it
+    is what kept the frontier row `BLOCKED` for three days. Γ does derive it:
+    `bareRejectedHornCoMeant_is_derivable`, at `{performative_act_datum, AxActPolarity}`.
+
+    The two results are complementary, not competing, and together they are the real claim:
+    **the horn holds in Γ because Γ's meaning is many-valued** (`gammaMeans_is_not_single_valued`),
+    **and is unsatisfiable wherever meaning is single-valued** (this theorem). There is no reading
+    of "meaning" that keeps single-valuedness and genuine co-meaning together.
+    Footprint: `{CL, propext, Quot.sound}`. -/
 theorem singleContentModelRefutesBareRejectedHorn
-    (S : SingleContentSignature) (hFaith : S.Faithful)
+    (S : SingleContentSignature) (hSingle : S.SingleValued)
     (hAntec : S.antecedentHolds) : ¬ S.bareHorn := by
   intro hHorn
   obtain ⟨t, q, hq1, hq2⟩ := hHorn hAntec
-  exact absurd (hFaith t q hq1) (hFaith t (¬ q) hq2)
+  have hEq : q = ¬ q := (hSingle t q hq1).trans (hSingle t (¬ q) hq2).symm
+  have hiff : q ↔ ¬ q := Iff.of_eq hEq
+  rcases Classical.em q with hq | hnq
+  · exact (hiff.mp hq) hq
+  · exact hnq (hiff.mpr hnq)
 
 /-- The bare horn is refuted, concretely, in the canonical single-content model. The frontier is
     therefore machine-backed: the blocker is not an artefact of an unsuccessful search but a
     sentence that is false in a model of the meaning vocabulary.
-    Footprint: `{}`. -/
+    Footprint: `{CL, propext, Quot.sound}`. -/
 theorem bareRejectedHornCoMeant_is_not_derivable :
     ¬ SingleContentSignature.singleContentModel.bareHorn :=
   singleContentModelRefutesBareRejectedHorn _ (fun _ _ h => h)
@@ -514,7 +643,7 @@ theorem asietic_is_true_freedom {s : Subject} {p q : Prop}
     Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem the_ground_grounds_a_contingent_true_chooser {s : Subject} {p q : Prop}
     (_h : TrueChoice s p q) (hCont : ContingentEntity (EntityOf s)) :
-    GroundsEntity Entity.ofGround (EntityOf s) :=
+    OneEssence Entity.ofGround (EntityOf s) :=
   ground_of_reality_grounds_finite_subject Entity.ofGround
     ofGround_necessary_ground_of_reality s hCont.2 hCont.1
 
@@ -568,5 +697,34 @@ theorem asietic_summary :
   ⟨fun _s p hF hJ => weakChoice_implies_chooses (p := p) (q := ¬ p) hF hJ,
    fun _ _ _ h => chooses_implies_trueChoice h,
    trueChoice_exists⟩
+/-- **DOCTRINE ROW 4 (plan §20.1): `Asiety` means Freedom, and Freedom means Personal.**
+
+Every `Person` is *asietic*, i.e. true freedom exhibited at their own entity — and the
+entailment is **free of substantive axioms**: three definitional steps and one tautology, no
+declared axiom consumed. The `{Means, Subject, Will, subjectWill}` footprint is the four vocabulary
+declarations the route runs through, which is why this is priced the same as `Person` itself.
+
+    `Person s`            = `IndividualSubstance s ∧ RationalNature s ∧ DominionOverActs s`
+    `DominionOverActs s`  = `FreeWill s`                         (definitional, `Person.lean:56`)
+    `FreeWill s`          = `∃ p q, Chooses s p q`             (the body, `Choice.lean:188`)
+    `Chooses s p q`       → `TrueChoice s p q`                (pure logic, above)
+
+So `Person s → ∃ p q, TrueChoice s p q`, which is `Asiety (EntityOf s)` by the body of
+`Asiety` — witnessed at `s` itself. This is the link plan §20.1 argued in prose and
+§20.5 wrongly listed as established; it is established **here**.
+
+The direction matters and is the cheap one: `Person → Asiety` is the projection above and costs
+nothing, whereas the converse would need the pair `p q` extracted from the existential and is not
+attempted. `FreeWill → Person` is likewise a separate priced row (`freeWill_implies_person`,
+resting on `will_individuation`); this theorem is the other direction and does not consume it.
+
+Consequence for §20: the doctrine's *kind* — personality as true freedom — is free, and so
+is `the_ground_is_not_void_of_personhood`. Applying this to a person `a` of the ground's
+perichoretic trio gives `Asiety (EntityOf a)` at the same vocabulary-only price, i.e. **the
+Persons are asietic, and being one with the essence does not cost freedom.**
+Footprint: `{Means, Subject, Will, subjectWill}`. -/
+theorem person_is_asietic (s : Subject) (hP : Person s) : Asiety (EntityOf s) := by
+  obtain ⟨p, q, hCh⟩ := hP.2.2
+  exact ⟨s, ⟨p, q, rfl, chooses_implies_trueChoice hCh⟩⟩
 
 end Logos.AsieticChoice

@@ -73,10 +73,10 @@ open Logos.Entity (Entity EntityOf)
 open Logos.Agency (Subject State Means Initiates Act act_implies_initiates
   performative_act_datum)
 open Logos.NecessityEternity (NotInSuccession)
-open Logos.RecoveredOntologicalGround (GroundsEntity)
+open Logos.RecoveredOntologicalGround (OneEssence)
 open Logos.DivineSimplicity (DivineSimplicity TranscendentGround
   ofGround_divine_simplicity divine_simplicity_sole_bearer)
-open Logos.SemanticFinitude (SemanticFinitude)
+open Logos.SemanticFinitude (GroundTranscendence)
 
 -- ============================================================================
 -- Section 1: the last conditional instantiated form, discharged
@@ -99,13 +99,13 @@ open Logos.SemanticFinitude (SemanticFinitude)
     simplicity — no distinct entity externally grounds `e`. It is not the identity of essence and
     existence (`CHARS.md` §13's honest boundary), and nothing here moves that boundary.
 
-    Footprint: `{propext, Means, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, Subject, propext}`. -/
 theorem the_ground_is_divinely_simple : DivineSimplicity Entity.ofGround :=
-  ofGround_divine_simplicity SemanticFinitude
+  ofGround_divine_simplicity GroundTranscendence
 
 /-- C485 — the same result in existence form, so the characteristic is instantiated rather than
     merely held of a named entity: **something in Γ is divinely simple.**
-    Footprint: `{propext, Means, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, Subject, propext}`. -/
 theorem some_entity_is_divinely_simple : ∃ e : Entity, DivineSimplicity e :=
   ⟨Entity.ofGround, the_ground_is_divinely_simple⟩
 
@@ -125,11 +125,11 @@ theorem some_entity_is_divinely_simple : ∃ e : Entity, DivineSimplicity e :=
     bound. That is the opposite of the pattern in C442–C445, where the `universal_ground` field
     made the subject arm the hard one. Recorded rather than smoothed over.
 
-    Footprint: `{propext, Means, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, Subject, propext}`. -/
 theorem the_ground_is_sole_bearer_of_divine_simplicity :
     DivineSimplicity Entity.ofGround ∧
       (∀ e : Entity, DivineSimplicity e → e = Entity.ofGround) :=
-  divine_simplicity_sole_bearer SemanticFinitude
+  divine_simplicity_sole_bearer GroundTranscendence
 
 -- ============================================================================
 -- Section 2: the field that is not vacuous
@@ -196,19 +196,19 @@ theorem a_subject_that_acts_is_in_succession {s : Subject} {p : Prop} (h : Act s
     Because F15 carries `Tag: VOCAB`, the ledger display is `PROVEN`, not `PROVEN↑`; the bound
     remains part of the machine-checked price.
 
-    Footprint: `{propext, Means, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, Subject, propext}`. -/
 theorem transcendence_and_semantic_finitude_yield_divine_simplicity :
     ∀ e : Entity, TranscendentGround e → DivineSimplicity e := by
   intro e h
   cases e with
-  | ofGround => exact ofGround_divine_simplicity SemanticFinitude
+  | ofGround => exact ofGround_divine_simplicity GroundTranscendence
   | ofAtom n => exact False.elim (h.1 n rfl)
   | ofSubject s => exact False.elim (h.2 s rfl)
 
 /-- C492 — the point of C491, machine-checked: **F15 bounds the wrong relation.** The bound it
     declares is on `Means` (`∀ s, ∃ p, ¬ Means s p`), and it is what makes
     `ofGround_non_composite` close. But the mereological field's *content* is about
-    `GroundsEntity` — `NonComposite e := ¬ ∃ p, p ≠ e ∧ GroundsEntity p e` — and the countermodel
+    `OneEssence` — `NonComposite e := ¬ ∃ p, p ≠ e ∧ OneEssence p e` — and the countermodel
     below exhibits an interpretation in which every subject is `Means`-discriminating, F15's shape
     holds exactly, and a subject nonetheless externally grounds a non-ground entity. So the two
     finitudes are independent, and the price of simplicity is a *grounding* finitude that Γ has
@@ -217,17 +217,25 @@ theorem transcendence_and_semantic_finitude_yield_divine_simplicity :
     **Why this is worth having.** It converts "simplicity is priced by F15" from an observation
     about one proof into a statement about the vocabulary: the characteristic cannot be had at a
     weaker price, and no reformulation of the existing bound removes it. The honest options are
-    therefore exactly two — declare a `GroundsEntity`-side finitude (`Tag: VOCAB` at minimum, an
+    therefore exactly two — declare a `OneEssence`-side finitude (`Tag: VOCAB` at minimum, an
     author decision), or keep paying F15. Both are recorded; neither is taken here.
+
+    **Naming.** The binder `GroundRel` below is an *arbitrary* relation of that shape, not the
+    corpus predicate `Logos.RecoveredOntologicalGround.OneEssence`. The distinction matters:
+    the statement quantifies over every relation `Entity → Entity → Prop`, so it says no relation
+    of that shape closes the grounding arm. Reading the binder as the corpus's own predicate would
+    narrow the theorem to a single relation and overstate what it proves. (The corpus predicate
+    was renamed `GroundsEntity` → `OneEssence` on 2026-10-02; this binder predates and does not
+    follow that rename.)
 
     Footprint: `{}`. -/
 theorem the_semantic_bound_does_not_close_the_grounding_arm :
     ∃ (Subject Entity : Type)
       (EntityOf : Subject → Entity)
       (Means : Subject → Prop → Prop)
-      (GroundsEntity : Entity → Entity → Prop),
+      (GroundRel : Entity → Entity → Prop),
       (∀ s : Subject, ∃ p : Prop, ¬ Means s p) ∧
-      (∃ s : Subject, ∃ g e : Entity, g = EntityOf s ∧ e ≠ g ∧ GroundsEntity g e) := by
+      (∃ s : Subject, ∃ g e : Entity, g = EntityOf s ∧ e ≠ g ∧ GroundRel g e) := by
   refine ⟨Bool, Nat, fun s => if s then 0 else 1, fun _ _ => False,
     fun _ e => e = 0, ?_⟩
   refine ⟨?_, ?_⟩

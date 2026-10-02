@@ -86,7 +86,7 @@ As duas definicoes do lote, sem id C (linhas `—` do GAPMAP nivel 19):
 
 ```lean
 def AsietyFreedomOfGround : Prop :=
-  forall (s : Subject) (p q : Prop), GroundsEntity Entity.ofGround (EntityOf s) ->
+  forall (s : Subject) (p q : Prop), OneEssence Entity.ofGround (EntityOf s) ->
     Asiety (EntityOf s) -> TrueChoice s p q
 
 def AsietyFreeWill (s : Subject) : Prop :=
@@ -100,7 +100,7 @@ sujeito sao duas coisas diferentes, conjoinadas.
 
 Isto **nao e derivavel**, por tres bloqueios independentes:
 
-(i) `GroundsEntity` e **vacuo**: `EntityMeans Entity.ofGround p` e `True` pelo braco de
+(i) `OneEssence` e **vacuo**: `EntityMeans Entity.ofGround p` e `True` pelo braco de
     casamento do construtor, pelo que `ground_grounds_every_entity` e `intro p _; exact
     True.intro` (`formal/Logos/LovesAsGround.lean:194`) e o fundamento fundamenta ate
     entidades sem significado. O modulo que o declara diz que a transferencia "e vacua, e
@@ -120,7 +120,7 @@ C289 — A liberdade do fundamento alcanca o sujeito:
 
 ```lean
 theorem asietyFreedom_yields_trueChoice (h : AsietyFreedomOfGround) {s : Subject} {p q : Prop}
-    (hG : GroundsEntity Entity.ofGround (EntityOf s)) (hA : Asiety (EntityOf s)) :
+    (hG : OneEssence Entity.ofGround (EntityOf s)) (hA : Asiety (EntityOf s)) :
     TrueChoice s p q
 ```
 
@@ -128,7 +128,7 @@ C290 — O partilhamento, "que e connosco partilhado pelo criador":
 
 ```lean
 theorem asietyFreedom_yields_asietyFreeWill (h : AsietyFreedomOfGround) {s : Subject}
-    (_hG : GroundsEntity Entity.ofGround (EntityOf s)) (hA : Asiety (EntityOf s)) :
+    (_hG : OneEssence Entity.ofGround (EntityOf s)) (hA : Asiety (EntityOf s)) :
     AsietyFreeWill s
 ```
 
@@ -137,7 +137,7 @@ a `AsietyFreeWill`", lida na outra direccao:
 
 ```lean
 theorem asietyFreeWill_yields_trueChoice {s : Subject} {p q : Prop} (h : AsietyFreeWill s)
-    (hG : GroundsEntity Entity.ofGround (EntityOf s)) : TrueChoice s p q
+    (hG : OneEssence Entity.ofGround (EntityOf s)) : TrueChoice s p q
 ```
 
 C290 e a leitura do autor — o mecanismo pelo nome do livro-razao, o partilhamento pelo nome
@@ -235,7 +235,7 @@ Limites honestos de escopo (o que **nao** se deve reclamar):
 atenuacao dela. (ii) `AsietyFreedomOfGround` e um `def`, logo invisivel a toda a
 auditoria de axiomas; a sua legitimidade e inteiramente ◈, e nada mais a sustenta.
 (iii) Nao ha existencia axiomatica de escolhedor (C294), e o partilhamento pelo Criador e
-condicional. (iv) A premissa `GroundsEntity` e **vacia** em tres das quatro
+condicional. (iv) A premissa `OneEssence` e **vacia** em tres das quatro
 transferencias: e mantida porque e a relacao de fundamentacao da propria biblioteca, e
 nomeada como vacua (`_hG`) em vez de apagada em silencio, para que a pegada nao pareca
 profundidade. (v) A leitura universal (C289/C290/C291) e estritamente mais forte que a
@@ -340,7 +340,7 @@ sobre **qualquer** relacao de forma de **contencao** (`forall v, M e v -> M g v`
 um artefacto da vacuidade de `formal/Logos/LovesAsGround.lean:194`. O contramodelo **concede a
 premissa na integridade** — um fundamento de capacidade de significado total (`forall v, M g v`,
 que e exactamente o que a estipulacao `ofGround_meansAll` compra para `Entity.ofGround`) e a
-premissa de contencao **em todas as entidades** (`forall e v, M e v -> M g v`, `GroundsEntity`
+premissa de contencao **em todas as entidades** (`forall e v, M e v -> M g v`, `OneEssence`
 verbatim, logo valida tambem para o segundo sujeito `s1`) — e ainda assim nega a conclusao **no
 mesmo par**, para um primeiro sujeito com asieticidade genuina.
 
@@ -366,7 +366,7 @@ F12 — a justificacao em falta para a estipulacao: status **BLOCKED**, fila de 
 
   (1) VOCABULARIO EM FALTA: uma relacao de fundamentacao *substantiva* que ligue
       `Entity.ofGround` ao conteudo normativo de um sujeito. Gamma nao declara nenhuma.
-      `GroundsEntity` (`formal/Logos/RecoveredOntologicalGround.lean:57`) e vacuua do lado do
+      `OneEssence` (`formal/Logos/RecoveredOntologicalGround.lean:57`) e vacuua do lado do
       fundamento porque `EntityMeans Entity.ofGround p := True`; o unico predicado de
       fundamentacao nao-vacuio, `GroundsRightWrong`, e definitionamente
       `exists p q, Chooses s p q` (C168) — ja liberdade livre, portanto usá-lo como
@@ -374,7 +374,7 @@ F12 — a justificacao em falta para a estipulacao: status **BLOCKED**, fila de 
       lema nomeado verbatim.
   (2) DERIVACAO EM FALTA: de tal relacao mais `Asiety (EntityOf s)`, derivar `TrueChoice s p
       q` a **todo** o par incompativel. **C299 e a razao machine-checked de isto nao se
-      descarregar de uma premissa da forma de `GroundsEntity`.**
+      descarregar de uma premissa da forma de `OneEssence`.**
 
 F13 — a afirmacao de existencia do partilha pelo Criador: status **BLOCKED**, e **refutada
 como derivavel** em vez de aberta. A obrigacao tem agora nome, seguindo o precedente de F11:

@@ -5,10 +5,14 @@ export PATH := $(HOME)/.elan/bin:$(PATH)
 
 PYTHON ?= python3
 
-.PHONY: all build depviz audit stip stipdef sync taxonomy deduction test check clean zip help
+.PHONY: all build depviz audit goals stip stipdef sync taxonomy deduction test \
+        consistency axiomcensus boundscope horndialectic surface priceprose census check \
+        personalgroundkind \
+       clean zip help
 
 # Default target runs the complete formal build, audit, deduction generation, and test verification.
-all: build depviz audit stip stipdef census deduction test
+all: build depviz audit goals stip stipdef census deduction test priceprose \
+     consistency axiomcensus boundscope horndialectic surface personalgroundkind
 	@echo "=== Γ / Logos: Full build and verification pipeline complete (0 errors) ==="
 
 # Build the formal Lean 4 library in formal/
@@ -37,6 +41,16 @@ audit: build
 taxonomy:
 	@echo "=== Verifying GAPMAP taxonomy tallies vs the kernel ==="
 	$(PYTHON) scripts/gapmap_taxonomy.py --check
+
+# Regenerate formal/goal_audit.json and gate it. This target was MISSING until
+# 2026-10-03: `deduction` runs build_deduction.py, which refuses to compute a
+# badge from a stale goal_audit.json ("run scripts/audit_goals.py"). Nothing in
+# the Makefile produced that file, so `make all` failed at `deduction` on any
+# fresh checkout or after any Lean edit. One Lean process at a time.
+goals: build
+	@echo "=== Auditing goal shapes + gating the artifact ==="
+	$(PYTHON) scripts/audit_goals.py
+	$(PYTHON) scripts/test_goal_audit.py
 
 # Standalone convenience: verify docstring footprint markers against a
 # pre-existing formal/axiom_audit.json (run scripts/audit_footprints.py first).
@@ -80,8 +94,58 @@ census:
 	@echo "=== Checking the inherited def-as-bridge census against the ledger ==="
 	$(PYTHON) scripts/census_stipulated_defs.py --check
 
+# Consistency gate (binding): the kernel must not derive False, and no axiom may
+# equate a subject with the ground. formal/consistency/ sits OUTSIDE lean_lib
+# Logos, so `lake build` never sees the guard -- a GREEN compile of the guard is
+# a FAILURE, and check_consistency.py is what distinguishes that from a real pass.
+consistency: build
+	@echo "=== Consistency gate (kernel must not derive False) ==="
+	$(PYTHON) scripts/check_consistency.py
+
+# The axiom census is DERIVED here and nowhere else. Never assert a count by eye.
+axiomcensus:
+	@echo "=== Deriving and checking the declared-axiom census ==="
+	$(PYTHON) scripts/test_axiom_census.py
+
+# Which finitude bound the corpus actually uses. Guards the §17 correction: `SemanticFinitude`
+# (contingent-scoped, VOCAB) must have ZERO dependents, because §1.7/§10/§11's claim that the
+# divine Persons' omniscience is "unasserted" rests on that narrowing having taken effect, and
+# it has not. A count cannot see this; only the dependent distribution can.
+boundscope:
+	@echo "=== Checking which finitude bound the corpus uses (plan §17) ==="
+	$(PYTHON) scripts/test_finitude_bound_scope.py
+
+# The bare rejected horn: derived in Gamma AND refuted under single-valued meaning. Both halves
+# must be live, and no ledger may still call the step open. The gate that would have caught the
+# 2026-10-03 defect, where F11 sat BLOCKED for three days while the kernel derived it.
+horndialectic:
+	@echo "=== Checking the bare-rejected-horn dialectic (ISSUE_K Step 2(ii)) ==="
+	$(PYTHON) scripts/test_horn_dialectic.py
+
+# plan §20 — doctrine rows 3 and 4: ONE ESSENCE, THREE PERSONS. The gate that stops an audit
+# from re-reading OneEssence as a vacuous relation and re-reporting the ground's personality
+# as empty (which is what §14 did before §20.3 withdrew it). It pins the zero-substantive
+# price on seven declarations, the `indwells` field of `PersonalGround`, the co-occurrence of
+# `PersonalGround Entity.ofGround` with `¬ Asiety Entity.ofGround`, and that
+# `Consubstantial` stays a relational `def` rather than an axiom or a `True`.
+personalgroundkind:
+	@echo "=== Checking one essence, three Persons, both free (plan §20) ==="
+	$(PYTHON) scripts/test_personal_ground_kind.py
+
+# Reader-surface contract (facade rule, caps, catalogue absence).
+surface: deduction
+	@echo "=== Checking the argument surface contract ==="
+	$(PYTHON) scripts/test_argument_surface.py
+
+# Prices typed into prose do not fail when a bound is re-tagged (S5 moved unicity
+# from SemanticFinitude/VOCAB to GroundTranscendence/META in THREE files and every
+# derived badge moved correctly). This catches tag MISMATCHES only -- see plan §15.3.
+priceprose:
+	@echo "=== Checking hand-written price prose against the census ==="
+	$(PYTHON) scripts/test_generator_price_prose.py
+
 # Generate README.md and investigations/kernel-audit.md
-deduction: audit depviz stip
+deduction: audit depviz stip goals
 	@echo "=== Compiling README.md and investigations/kernel-audit.md ==="
 	$(PYTHON) scripts/build_deduction.py
 
@@ -119,7 +183,13 @@ help:
 	@echo "  stipdef    Enforce ◈ discipline for premise-defs (audit_stipulated_defs.py; F-2)"
 	@echo "  taxonomy   Verify GAPMAP taxonomy tallies vs the kernel (scripts/gapmap_taxonomy.py --check)"
 	@echo "  sync       Verify docstring footprint markers vs formal/axiom_audit.json only"
+	@echo "  goals      Regenerate formal/goal_audit.json + gate it (required by deduction)"
 	@echo "  deduction  Compile README.md and investigations/kernel-audit.md"
+	@echo "  consistency  Consistency gate: kernel must not derive False"
+	@echo "  axiomcensus  Derive and check the declared-axiom census (39)"
+	@echo "  boundscope Check which finitude bound the corpus uses (plan §17)"
+	@echo "  surface    Check the argument-surface contract"
+	@echo "  priceprose Check hand-written price prose against the census"
 	@echo "  test       Run verification test suites"
 	@echo "  check      Alias for test"
 	@echo "  clean      Clean Lake build artifacts and python cache"

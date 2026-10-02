@@ -156,12 +156,45 @@ def main() -> int:
     # This is the record §4.1 item 2 and §8.2 make load-bearing.
     if C294_REFUTATION in by_name:
         spines = [c.get("spine", "") for c in by_name[C294_REFUTATION]["conjuncts"]]
-        check(len(set(spines)) == len(spines) and len(spines) == 3,
-              f"{C294_REFUTATION}: the three conjuncts are not distinct: {spines}")
+        check(len(set(spines)) == len(spines),
+              f"{C294_REFUTATION}: the conjuncts are not distinct: {spines}")
         joined = " ".join(spines)
         check("N_T" in joined and "N_F" in joined,
               f"{C294_REFUTATION}: the T/F distinction is absent from the spines "
               f"— two different refutations would compare IDENTICAL (§13.3 #8)")
+
+        # C294's witness was repaired 2026-10-03 (plan §21.5 / Finding 2c). The old second
+        # conjunct was `¬ ∃ s p q, M s p ∧ M s q` with no `p ≠ q`, which is *equivalent* to
+        # meaninglessness — `AsietyFreedom.pairwise_denied_forces_meaninglessness` proves the
+        # old form admitted only worlds where nothing is meant. So `M := fun _ _ => False` was
+        # forced on the statement, not chosen, and the row was an uninterpreted-signature
+        # artifact reported at `{}`.
+        #
+        # The exact conjunct COUNT is not asserted (it was pinned at 3 for the old arity and
+        # pins nothing); distinctness and the T/F pair above are the §13.3 #8 claim and are
+        # kept. What is asserted instead is the *repair*, by the three spines that only the
+        # repaired statement produces. Reverting C294 to the degenerate form deletes all three
+        # and fails here — a stronger gate than the one it replaces, not a loosened one.
+        # These are the strings the compiler emits: the model conjunct `M/2(s, p)`, the order
+        # conjunct `Alternatives.Incompatible/2(p, q)`, and the distinctness guard
+        # `Ne/3(Prop, p, q)` that makes the denial non-degenerate.
+        for label, marker, why in (
+            ("signification instantiated", "M/2(s, p)",
+             "the repaired model must MEAN something — the old form could not"),
+            ("order granted", "Incompatible/2(p, q)",
+             "the repaired model must grant order while denying pairwise signification"),
+            ("distinctness guard", "Ne/3(Prop, p, q)",
+             "the `p ≠ q` guard is what stops the statement collapsing to meaninglessness"),
+        ):
+            check(any(marker in s for s in spines),
+                  f"{C294_REFUTATION}: {label} is absent from the conjunct spines — "
+                  f"{why}; spines were {spines}")
+
+        # The evidence lemma for the repair must exist, or the "was forced" claim is prose.
+        check("Logos.AsietyFreedom.pairwise_denied_forces_meaninglessness" in by_name,
+              "AsietyFreedom.pairwise_denied_forces_meaninglessness is missing — it is the "
+              "kernel proof that C294's pre-repair form admitted only degenerate models, so "
+              "without it the repair's necessity is asserted rather than checked")
 
     # --- the records the badge machinery actually reads (§4.0) ---
     if ASIETY in by_name:
@@ -203,7 +236,26 @@ def main() -> int:
         check(name in by_name, f"{name} is missing from the artifact — the corpus "
               f"was renamed and §4 of the plan is now stale")
 
-    # §13.5 / Item 1 — sort-headed goals contract (1 645 records, 20 axiom/opaque).
+    # §13.5 / Item 1 — sort-headed goals contract (1 657 records, 20 axiom/opaque).
+    #
+    # 1 645 → 1 647 at S2 (the personal-ground work): the whole delta was
+    # two `def`s, `GroundByBeing` and `Perichoretic`.
+    #
+    # 1 647 → 1 657 at S3, and again the whole delta is accounted for: seven
+    # `Prop`-valued `def`s (`means`, `potency`, `boundedMeaning`, `entityMeansIn`,
+    # `freeWillIn`, `guardAntecedentHolds`, `meansInstantiated`), plus three generated
+    # structure artefacts from `BoundedMeaningSignature` — its two sort projections
+    # `Subject`/`Entity` (`Type`) and `ctorIdx` (`Nat`). That is +7 `Prop`, +2 `Type`,
+    # +1 `Nat`, and +10 `def`, all from one module. Every binder survives in
+    # `boundSorts`, so the rule that a `def`'s value goes to `conjunctShapes`
+    # un-pre-peeled is holding; `Bool`, `axiom` and `opaque` are unmoved throughout.
+    # S4 added exactly ONE sort-headed record from `TrinitarianSubjectBridge`:
+    # `DivineRole.ctorIdx` (`Nat`-headed `def`), the generated recursor artefact
+    # of the three-constructor `DivineRole` inductive. Hence +1 sort-headed, +1 `Nat`
+    # and +1 `def` are the *same* record, not three. The module's two axioms do
+    # NOT appear here — `DivineSubjectRole : Subject → DivineRole` has
+    # `conjuncts[0].head == DivineRole`, not a sort head, and `axiom` records are
+    # counted separately below. Verified record-by-record before bumping.
     sorts_set = {"Prop", "Nat", "Type", "Bool", "Sort"}
     sort_headed = {}
     for nm, r in records:
@@ -211,8 +263,15 @@ def main() -> int:
         if cs and all(c.get("head") in sorts_set for c in cs):
             sort_headed[nm] = r
 
-    check(len(sort_headed) == 1645,
-          f"expected 1645 sort-headed records in goal_audit, got {len(sort_headed)}")
+    # 1659 -> 1658 on 2026-10-03: -4 declarations with the `Consubstantial` family deleted in
+    # plan §24, of which -1 was sort-headed (each of the four was a Prop-headed or def-headed
+    # record; `consubstantial_comm` was the sort-bearing one and `the_three_persons_are_consubstantial`
+    # the def-valued one). Recorded here rather than left implicit: every count in this file moved
+    # down for the same single reason, and a count that drifts for no stated cause is the failure
+    # mode AGENTS.md warns about for the axiom census.
+    # (C294's repair evidence). Every count below moves together with any added declaration.
+    check(len(sort_headed) == 1658,
+          f"expected 1658 sort-headed records in goal_audit, got {len(sort_headed)}")
 
     sh_heads = {}
     sh_kinds = {}
@@ -222,12 +281,12 @@ def main() -> int:
         k = r.get("kind")
         sh_kinds[k] = sh_kinds.get(k, 0) + 1
 
-    check(sh_heads.get("Prop") == 1269, f"expected 1269 Prop-headed records, got {sh_heads.get('Prop')}")
-    check(sh_heads.get("Nat") == 200, f"expected 200 Nat-headed records, got {sh_heads.get('Nat')}")
-    check(sh_heads.get("Type") == 173, f"expected 173 Type-headed records, got {sh_heads.get('Type')}")
+    check(sh_heads.get("Prop") == 1278, f"expected 1278 Prop-headed records, got {sh_heads.get('Prop')}")
+    check(sh_heads.get("Nat") == 202, f"expected 202 Nat-headed records, got {sh_heads.get('Nat')}")
+    check(sh_heads.get("Type") == 175, f"expected 175 Type-headed records, got {sh_heads.get('Type')}")
     check(sh_heads.get("Bool") == 3, f"expected 3 Bool-headed records, got {sh_heads.get('Bool')}")
 
-    check(sh_kinds.get("def") == 1625, f"expected 1625 def sort-headed records, got {sh_kinds.get('def')}")
+    check(sh_kinds.get("def") == 1638, f"expected 1638 def sort-headed records, got {sh_kinds.get('def')}")
     check(sh_kinds.get("axiom") == 15, f"expected 15 axiom sort-headed records, got {sh_kinds.get('axiom')}")
     check(sh_kinds.get("opaque") == 5, f"expected 5 opaque sort-headed records, got {sh_kinds.get('opaque')}")
 

@@ -105,6 +105,31 @@ import Logos.DivineTranscendence
 -- `AsietyFreedomOfGround` is a definitional stipulation (Tag: META, registered in
 -- Logos.Stipulations), not an axiom, so the declared-axiom count is unchanged.
 import Logos.AsietyFreedom
+-- The personal ground (`Logos.TrinitarianPersonalGround`): the ground is not void of
+-- personhood, at zero substantive axioms. Two grounding routes are named — `GroundByBeing`
+-- (presence-grounding, the non-vacuous one, which covers the atoms for a reason nobody chose;
+-- ST I q. 44 a. 1) and `OneEssence` (providential indwelling) — and conjoined in `PersonalGround`,
+-- with `Perichoretic` as perichoresis over the existing asymmetric relation. Nothing in
+-- `EntityMeans` moves; §6.1 records why the match arm must not move. Twelve declarations
+-- (3 declarations of vocabulary, 9 theorems), zero new axioms, so the declared-axiom count is
+-- unchanged.
+-- Its machine-checked basis is `GAPMAP.md` and the audit suite; the governing workflow is
+-- `investigations/trinitarian-probe.lean` (audit artifact, never compiled by `lake build`).
+import Logos.TrinitarianPersonalGround
+import Logos.BoundedMeaning
+-- The Trinitarian subject bridge (`Logos.TrinitarianSubjectBridge`, plan S4, D-1 + D-2): the
+-- missing link between the divine-hypostasis sort and `Subject`. `DivineSubjectRole`
+-- (`Tag: VOCAB`) is the relation of origin that distinguishes the three persons, re-declared on
+-- the `Subject` sort because `DivineAgape.IsWord`/`IsSpirit` are indexed by `DivineHypostasis`
+-- and cannot be applied there. `TrinitarianPersonalBridge` (`Tag: META`) asserts the three
+-- persons are necessary persons sharing the one ground, and exhausts `NecessarySubjectKind` — so
+-- there is no fourth. It deliberately does NOT route through `GroundsRightWrong`, which is
+-- definitionally free will already and would be circular. The three `FreeSubject` conjuncts
+-- therefore trace to this `META` bridge and not to the `TRANS` bounded-meaning axiom; plan §5.1's
+-- draft identified the persons by `DivineHypostasis.P1 = a`, which does not elaborate (no such
+-- field, and no common sort), so identification is by role instead. Two new axioms; distinctness
+-- is derived from the role assignment at zero cost.
+import Logos.TrinitarianSubjectBridge
 -- Semantic finitude (`SemanticFinitude`, Tag: VOCAB, registered in Logos.Stipulations as
 -- ◈ `semanticFinitude`): the per-subject meaning bound F15 named, consolidated and badged,
 -- with ten priced corollaries. A premise carried on each corollary, not a new axiom, so the
@@ -193,7 +218,7 @@ import Logos.SecondPersonGoodAttempt
 -- The Trinity case (`Logos.DivineAgape`, plan `TRINITY.md`): the conditional
 -- corridor from self-giving Agape to `TrinitarianStructure` (C510) under three
 -- disclosed `Tag: META` axioms (C504–C506), plus the corridor theorems C507–C509.
--- New abstract sort `DivinePerson` (a `structure`, zero axioms), opaque role
+-- New abstract sort `DivineHypostasis` (a `structure`, zero axioms), opaque role
 -- vocabulary, no Γ axiom touched. Stage B: the separations C511–C514 land in
 -- `Logos.TrinitySeparations`.
 import Logos.DivineAgape

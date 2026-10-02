@@ -261,7 +261,7 @@ C281 — O escolhedo verdadeiro contingente e fundamentado externamente:
 ```lean
 theorem the_ground_grounds_a_contingent_true_chooser {s : Subject} {p q : Prop}
     (_h : TrueChoice s p q) (hCont : ContingentEntity (EntityOf s)) :
-    GroundsEntity Entity.ofGround (EntityOf s)
+    OneEssence Entity.ofGround (EntityOf s)
 ```
 
 Pegada auditada: `{Means, Subject}`. Por `ExternalGrounding`.

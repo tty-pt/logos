@@ -139,7 +139,7 @@ ground grounds, and that is asietic, makes a true choice at **every** incompatib
 ground's freedom is shared with what it grounds, as `AsietyFreeWill`.
 
 Philosophical cost: this is the metaphysical bridge of the chain, and it is **declared, not
-derived**, because Γ's grounding vocabulary cannot support it. `GroundsEntity` is vacuous
+derived**, because Γ's grounding vocabulary cannot support it. `OneEssence` is vacuous
 (`EntityMeans .ofGround p := True`, so `ground_grounds_every_entity` is `intro p _; exact
 True.intro`), the only non-vacuous grounding predicate, `GroundsRightWrong`, is definitionally
 `∃ p q, Chooses s p q` and so already collapsed to free will (C168), and the substantive grounding
@@ -148,10 +148,19 @@ relation is BLOCKED (C228). The price is machine-checked in three directions:
 pair, so the universal quantifier over subjects is doing real work and the weaker existential
 reading is strictly cheaper), `frameContingencyDoesNotBindAPair` (the frame's contingency is
 `Form`-level and does not bind a given `Prop`-level pair), and `rightWrongFactYieldsNoChooser`
-(the right/wrong fact is compatible with a meaning-vocabulary in which no subject means anything,
-so **no axiom-free existence of a chooser** — the unconditional existence half still costs
+(the right/wrong fact is compatible with a meaning-vocabulary that has **order and signification
+and no chooser** — every subject means at most one content, so the fact
+does not by itself deliver **any axiom-free existence of a chooser** — the unconditional existence half still costs
 `AxTwoSubjects`, META). Separately, the ground is not thereby made a chooser: C285 stands, and
 `groundIsNotASharerOfAsietyFreeWill` restates it here.
+
+**The vacuity of `OneEssence` is load-bearing, not a defect** (re-annotated at S2, 2026-10-02;
+`TrinitarianPersonalGround.lean (DOCTRINE ROW 3 / AUTHOR DECISION note)`). It is the marker that the ground's freedom is
+*transferred* to the three persons and not *exercised* by a fourth chooser: the ground is provably
+not asietic (`TrinitarianPersonalGround.ground_is_not_a_fourth_chooser`, `{}`) and its total scope
+is not freedom (`TrinitarianPersonalGround.ground_scope_does_contain_incompatibles`, `{}`),
+because freedom here is `Asiety` and `Asiety` requires being a `Subject`. Read as shallowness the
+vacuity says the opposite of what it is evidence for.
 
 Note what an audit can and cannot see: because this is a `def` and not an `axiom`, `#print axioms`
 reports `{Means, Subject}` — vocabulary only — and **no axiom-counting tool will ever flag it**.
@@ -160,10 +169,10 @@ Consistency model: Γ's own classical valuation semantics; every countermodel ab
 one- or two-element carrier, so the reading is consistent. -/
 def asietyFreedom_ofGroundFreedom : Stipulation where
   name := "asietyFreedom_ofGroundFreedom"
-  location := "AsietyFreedom.lean:119"
+  location := "AsietyFreedom.lean:141"
   anchor := "def AsietyFreedomOfGround"
   tag := StipulationTag.META
-  cost := "The ground's being the ground of freedom is declared, not derived: GroundsEntity is vacuous, GroundsRightWrong is definitionally FreeWill (C168), and substantive grounding is BLOCKED (C228). Priced by three {} countermodels; the universal reading is strictly stronger than the existential one."
+  cost := "The ground's being the ground of freedom is declared, not derived: OneEssence is vacuous, GroundsRightWrong is definitionally FreeWill (C168), and substantive grounding is BLOCKED (C228). Priced by three {} countermodels; the universal reading is strictly stronger than the existential one."
   dependents := ["asietyFreedom_yields_trueChoice", "asietyFreedom_yields_asietyFreeWill", "asietyFreeWill_yields_trueChoice", "asietyFreedom_summary"]
 
 /-- Tag: TRANS

@@ -47,7 +47,7 @@ open Logos.Core
 open Logos.Semantics (World)
 open Logos.Entity (Entity EntityOf ExistsAt)
 open Logos.Agency (Subject)
-open Logos.RecoveredOntologicalGround (EntityMeans GroundsEntity ActualEntity GroundOfReality)
+open Logos.RecoveredOntologicalGround (EntityMeans OneEssence ActualEntity GroundOfReality)
 open Logos.NecessityEternity (ofGround_necessary ofGround_ground_of_reality)
 open Logos.CanonicalAseity (CanonicalAseity atom_cannot_ground_the_ground discriminating_subject_cannot_ground_the_ground conditional_canonical_aseity)
 open Logos.DivineSimplicity (TranscendentGround ofGround_transcendent)
@@ -61,12 +61,31 @@ open Logos.DivineImmutability (ModalInvariance ofGround_modal_invariance)
     The entity grounds every entity that exists across EVERY possible world.
     Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 def UniversalModalGround (g : Entity) : Prop :=
-  ∀ (w : World) (e : Entity), ExistsAt w e → e = g ∨ GroundsEntity g e
+  ∀ (w : World) (e : Entity), ExistsAt w e → e = g ∨ OneEssence g e
 
 /-- The Ground of Reality is a Universal Modal Ground:
     For every possible world `w` and every entity `e` existing in `w`,
     `Entity.ofGround` grounds `e`.
-    Footprint: `{Means, NecessarySubjectKind, Subject}` (0 substantive axioms). -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}` (0 substantive axioms).
+
+    **READ THIS AS A WEAKER CLAIM THAN THE SENTENCE SUGGESTS (2026-10-03, X1).** The proof
+    ignores `w`, `e` and `ExistsAt` alike, and discharges the *grounding* disjunct
+    definitionally: `EntityMeans (Entity.ofGround) p` reduces to `True`, so
+    `OneEssence Entity.ofGround e` holds for **every** entity, grounding or not. The disjunct is
+    therefore also **provably redundant** — unicity alone gives this theorem:
+
+    ```lean
+    theorem probe_umg_disjunct_is_redundant
+        (huniq : ∀ w e, ExistsAt w e → e = Entity.ofGround) :
+        UniversalModalGround Entity.ofGround := fun w e h => Or.inl (huniq w e h)
+    ```
+
+    So this establishes the ground is the **only** entity present, and does **not** establish that
+    it *grounds* what is present — the relation does no discriminating work at this point. This is
+    the C-1 vacuity recorded at `LovesAsGround.lean:215` and `plan §14`; it is disclosed here
+    rather than repaired, because repairing `OneEssence` would make grounded Persons rival grounds
+    and that trade has not been decided. The reported footprint is the conservative closure of
+    unfolding `EntityMeans` (whose `ofSubject` arm mentions `Means`), not a substantive dependency. -/
 theorem ofGround_universal_modal_ground :
     UniversalModalGround Entity.ofGround := by
   intro _w _e _hExists
@@ -99,8 +118,8 @@ theorem ofGround_world_rigid_presence :
     finite discriminating subject grounds it.
     Footprint: `{Means, Subject}`. -/
 def NonReciprocalGround (g : Entity) : Prop :=
-  (∀ n : Nat, ¬ GroundsEntity (Entity.ofAtom n) g) ∧
-  (∀ s : Subject, (∃ p, ¬ Logos.Agency.Means s p) → ¬ GroundsEntity (EntityOf s) g)
+  (∀ n : Nat, ¬ OneEssence (Entity.ofAtom n) g) ∧
+  (∀ s : Subject, (∃ p, ¬ Logos.Agency.Means s p) → ¬ OneEssence (EntityOf s) g)
 
 /-- The Ground of Reality possesses Non-Reciprocal Grounding:
     neither atomic worldly states nor finite discriminating subjects can ground it.

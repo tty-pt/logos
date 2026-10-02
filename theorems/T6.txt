@@ -52,7 +52,7 @@ Nota de estado formal (§8 — atemporalidade *vs* eternidade, lote
 Depende de: formal/Logos/NecessityEternity.lean §6 (namespace Logos.NecessityEternity)
 + formal/Logos/Precedence.lean §7 (namespace Logos.Precedence) para o par
 `StageInvariance`/`Atemporal`; GAPMAP.md C432–C438. PROVEN (VOCAB) — pegadas
-{NecessarySubjectKind, Subject} / {Means, NecessarySubjectKind, SemanticFinitude,
+{NecessarySubjectKind, Subject} / {GroundTranscendence, Means, NecessarySubjectKind,
 Subject} / {propext, …}, zero axiomas substantivos.
 
 O texto original deixava por distinguir duas noções que aqui recebem nomes
@@ -144,7 +144,7 @@ necessária que nunca inicia; C490 separa o universal exacto
 C453 é agora `COUNTERMODEL`, por independência de forma e sem falsidade interna de Γ.
 O mesmo lote descarrega a última forma condicional da Simplicidade (C484–C486) e fornece
 o sexto princípio tomista da família (C491); C492 mostra que F15 limita o lado de `Means`,
-não o lado de `GroundsEntity` de que um princípio mais barato precisaria.
+não o lado de `OneEssence` de que um princípio mais barato precisaria.
 
 Continua NÃO preventivo / ainda requer prova (nada disto foi avançado por este lote):
 a teologia forte da eternidade metafísica "fora de toda a temporalidade" (§8,
@@ -153,3 +153,20 @@ submissão a causalidade (assumida no texto, `README-OLD.md:161`), e o par C432�
 (Precedence.lean) não toca nestas: ele articula a §9 com a §8, não as deriva.
 A identidade hipostática g = EntityOf s permanece BLOQUEADA
 (`ofGround_ne_ofSubject`, T15).
+
+**Actualização 2026-10-03 (lote FINITUDE-SPLIT) — preços corrigidos contra a auditoria.**
+Duas linhas acima estavam desactualizadas no PRESENTE. O registo de 2026-09-28 fica como estava,
+pela convenção do ficheiro; o que muda é o preço corrente, lido de `formal/axiom_audit.json` e
+não de memória:
+
+- `ofGround_sole_precedes_right_wrong` e `precedence_identifies_the_ground_where_stage_invariance_does_not`
+  já **não** pagam `SemanticFinitude`: pagam **`GroundTranscendence`**, `Tag: META`. Passam de
+  `PROVEN` (só-vocabulário) a `PROVEN↑`, que o leitor vê como
+  `⚠️ AXIOMATIC (GroundTranscendence)`.
+- A frase «preço: F15 (`SemanticFinitude`, `Tag: VOCAB`) em quatro das seis» tem de ser lida com
+  cuidado: das linhas de `Precedence`, **duas** pagam o limite irrestrito (`META`), e as restantes
+  pagam apenas vocabulário ou nada. O limite **irrestrito** é `GroundTranscendence`; o
+  `SemanticFinitude` que ficou `VOCAB` é o **estreitado** (só sujeitos contingentes).
+
+`GroundTranscendence → SemanticFinitude`, não o inverso: é um refinamento do limite, não uma
+alternativa independente. Nenhum enunciado se estreitou. Ver `plan §8.2` e `§14`.

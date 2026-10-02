@@ -205,9 +205,9 @@ Subject → State → State → Prop → Prop` (`Agency.lean:168`, VOCAB), que �
 sujeito, e `Entity.ofGround` é provadamente não correlato de sujeito algum
 (`ofGround_ne_ofSubject`, `NecessityEternity.lean:160`), pelo que nem sequer pode ser
 instanciada pelo fundamento. A relação mais próxima que Γ tem é a **contenção
-explicativa** `GroundsEntity` (`RecoveredOntologicalGround.lean:57`, *esse est agere*),
+explicativa** `OneEssence` (`RecoveredOntologicalGround.lean:57`, *esse est agere*),
 e C250 já machine-checka que âmbito exaustivo não implica âmbito operativo — logo a
-relação causal não pode ser enfraquecida até `GroundsEntity`. Faltam exactamente duas
+relação causal não pode ser enfraquecida até `OneEssence`. Faltam exactamente duas
 afirmações, por esta ordem:
   (1) VOCABULÁRIO EM FALTA: uma relação de produção `Produces : Entity → World → Form → Prop`;
   (2) DERIVAÇÃO EM FALTA: que o fundamento produz todo estado de affairs satisfazível

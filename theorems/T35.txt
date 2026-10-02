@@ -92,7 +92,7 @@ de C168 e o alinhamento de índice de C171. (iii) fundamentar ≠ identificar, l
 nada aqui reintroduz autolegislação nem o colapso de
 `OughtRetorsion.self_grounded_ought_collapses`. (iv) C228
 (`normative_ground_is_personal`) **continua bloqueado**: essa é a relação de
-**nível-entidade** `GenericGroundsRightWrong g → PersonalEntity g`; este lote é
+**nível-entidade** `GenericGroundsRightWrong g → PersonCorrelate g`; este lote é
 de **nível-sujeito** e não a descarrega.
 
 A varredura: 24 declarações sem linha (C529–C552)

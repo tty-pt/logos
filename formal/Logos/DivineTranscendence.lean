@@ -75,7 +75,7 @@ says the ground *is* transcendent, C213 repeats it.
   production relation: the only initiation relation is
   `Agency.Initiates : Subject → State → State → Prop → Prop`
   (`Agency.lean:168`), a declared VOCAB axiom, and it is subject-indexed;
-  `GroundsEntity` (`RecoveredOntologicalGround.lean:57`) is explanatory
+  `OneEssence` (`RecoveredOntologicalGround.lean:57`) is explanatory
   containment (*esse est agere*), not production. C306 is therefore stated over
   an abstract causal relation. The missing statements are recorded here without
   the `axiom`/`def` keywords on purpose — a line starting with `axiom` inside
@@ -149,7 +149,7 @@ open Logos.Entity (Entity EntityOf ExistsAt)
 open Logos.Modal (NecessaryEntity)
 open Logos.Agency (Subject)
 open Logos.RecoveredOntologicalGround
-    (GroundsEntity GroundOfReality ActualEntity)
+    (OneEssence GroundOfReality ActualEntity)
 open Logos.NecessityEternity (ofGround_ground_of_reality)
 open Logos.CanonicalAseity (ExternalGrounding CanonicalAseity)
 open Logos.DivineSimplicity (TranscendentGround ofGround_transcendent)
@@ -240,7 +240,7 @@ theorem externality_to_every_system_is_consistent :
     Grounding is not externality. Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem universal_grounding_places_the_ground_inside_a_system :
     ∃ (S : Type) (In : S → Entity → Prop),
-      (∀ e : Entity, ActualEntity e → e = Entity.ofGround ∨ GroundsEntity Entity.ofGround e)
+      (∀ e : Entity, ActualEntity e → e = Entity.ofGround ∨ OneEssence Entity.ofGround e)
       ∧ ¬ OutsideEverySystem S In Entity.ofGround := by
   refine ⟨Unit, fun _ e => e = Entity.ofGround, ?_, ?_⟩
   · intro e hAct
@@ -296,7 +296,7 @@ theorem ofGround_external_to_every_class_may_still_be_ordered :
     Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem universal_grounding_does_not_entail_causal_externality :
     ∃ (S : Type) (Caus : S → Entity → Entity → Prop),
-      (∀ e : Entity, ActualEntity e → e = Entity.ofGround ∨ GroundsEntity Entity.ofGround e)
+      (∀ e : Entity, ActualEntity e → e = Entity.ofGround ∨ OneEssence Entity.ofGround e)
       ∧ ¬ CausalExternality S Caus Entity.ofGround := by
   refine ⟨Unit, fun _ g _ => g = Entity.ofAtom 0, ?_, ?_⟩
   · intro e hAct

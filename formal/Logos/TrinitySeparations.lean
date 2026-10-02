@@ -15,7 +15,7 @@ mirror is:
 
 | divine sort/predicate | shadow |
 | --- | --- |
-| `DivinePerson` | `β` |
+| `DivineHypostasis` | `β` |
 | `Subsists` | `Sub` |
 | `DivineLove` | `Love` |
 | `IsWord` | `IsW` |

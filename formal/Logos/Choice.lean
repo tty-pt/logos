@@ -39,20 +39,31 @@ under one name: `rejectedHornCoMeant` below is **the consequent only** — a
 
 The bare implication now has that name as a real `def` in
 `Logos.AsieticChoice.bareRejectedHornCoMeant` (footprint `{Means, Subject}`;
-GAPMAP F11), so it is citable rather than quoted as prose — and it is recorded
-as **BLOCKED *and refuted***: `singleContentModelRefutesBareRejectedHorn`
-(C273) / `bareRejectedHornCoMeant_is_not_derivable` (C274) build a model of
-the meaning vocabulary in which the antecedent holds and the consequent does
-not. Two *premise-named* discharges do go through: `derives_rejectedHornCoMeant`
-(C268) from a correctness-judgment, and `retorsion_implies_rejectedHornCoMeant`
-(C271) from the retorsion event. Neither is derivable in Γ, since both premises
-are `Act`-gated.
+GAPMAP F11), so it is citable rather than quoted as prose. **It is DERIVED in Γ**
+— `bareRejectedHornCoMeant_is_derivable` (`AsieticChoice.lean`, Section 3c), at
+`{performative_act_datum, AxActPolarity}`: the unconditional act datum plus
+`AxActPolarity`'s "an act carries its own polarity" gives `Means s p ∧ Means s (¬ p)`
+in two steps. This module recorded the step `BLOCKED` until 2026-10-03 and that was
+wrong; the note's own reasoning overreached, since it established that the
+*`ClaimsCorrect`-gated* routes need an `Initiates` witness and generalised that to all
+routes, while `AxActPolarity` reads the act directly.
 
-Nothing in the tree forces one meaning-act to come with the meaning of its
-negation: `Means` is an opaque relation (`Agency.lean`), and `AxTwoSubjects`
-yields two *different* subjects, each with a single content. Hence the
-*existence* of a genuine chooser is blocked, while the implication
-choice → freedom is free. The explicit target is declared as the
+The narrow negative result does survive, and it is a different claim:
+`singleContentModelRefutesBareRejectedHorn` (C273) refutes the horn in every
+**single-valued** model of the meaning vocabulary, and
+`gammaMeans_is_not_single_valued` proves Γ's own `Means` is not single-valued. So the
+horn is discharged **because** meaning is many-valued here. Neither of those two
+premise-named routes is needed: `derives_rejectedHornCoMeant` (C268) from a
+correctness-judgment, and `retorsion_implies_rejectedHornCoMeant` (C271) from the
+retorsion event, remain useful as narrower routes that need no polarity axiom.
+
+`Means` is an opaque relation (`Agency.lean`), and `AxTwoSubjects` yields two
+*different* subjects — which used to be read as "each with a single content", and
+that reading was the error. Nothing in the tree *forces* an act to carry its
+negation: `AxActPolarity` **assumes** an act and delivers `Means s (¬ p)` from it.
+What the tree does is supply acts unconditionally (`performative_act_datum`), and
+from there co-meaning follows. Existence of a genuine chooser was never blocked on
+the choice→freedom step, which is free by definition (`Chooses` unfolds `FreeWill`). The explicit target is declared as the
 `def`-proposition `genuineChoice_exists` (F1b, BLOCKED) and the frontier is
 the theorem `freeWillExists_of_genuineChoice : genuineChoice_exists →
 ∃ s, FreeWill s` — the first implication is the substantive step still to

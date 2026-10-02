@@ -12,7 +12,7 @@ bridges, at both levels the doctrine needs, and it keeps them apart on purpose.
 
 The operative Thomistic principle is *agere sequitur esse* — action follows being. (`ST I q.2 a.3`;
 the corpus's `RecoveredOntologicalGround.lean:57` writes the loose Latin "*esse est agere*" for
-`GroundsEntity`.) Acting corresponds to kind, and the two kinds have different vocabularies:
+`OneEssence`.) Acting corresponds to kind, and the two kinds have different vocabularies:
 
 * a **subject**, whose being is subjecthood, **initiates** — `Initiates : Subject → State → State →
   Prop → Prop` (`Agency.lean:168`), and `Act s p := Means s p ∧ ∃ w w', Initiates s w w' p`;

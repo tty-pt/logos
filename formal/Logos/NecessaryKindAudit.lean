@@ -73,7 +73,7 @@ open Logos.Plurality (NecessarySubject necessaryPersonalSubjectExists)
 open Logos.FoundationalUnicity (ofGround_ne_ofSubject)
 open Logos.DivineSimplicity (TranscendentGround)
 open Logos.FoundationalOmnipresence (MaximalCapacity)
-open Logos.SemanticFinitude (SemanticFinitude)
+open Logos.SemanticFinitude (GroundTranscendence)
 open Logos.DivinePureActuality (DivinePureActuality discriminating_subject_fails_pure_actuality)
 open Logos.DivineOmnipotence (GaplessOperate OperatesAt PossibleAt)
 open Logos.TheologicalModalHardening (UniversalFrame necessary_not_contingent)
@@ -168,11 +168,11 @@ theorem necessary_kind_subject_is_not_transcendent (s : Subject)
     denies. This is the same `SemanticFinitude` price C445 and C444 pay for the same exclusion;
     nothing new is charged. Footprint: the `SemanticFinitude` bridge plus the vocabulary the
     statement mentions (`Means`, `NecessarySubjectKind`, `Subject`).
-    Footprint: `{Means, NecessarySubjectKind, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`. -/
 theorem necessary_kind_subject_lacks_maximal_capacity (s : Subject)
     (_hKind : NecessarySubjectKind s) :
     ¬ MaximalCapacity (EntityOf s) := by
-  obtain ⟨p, hp⟩ := SemanticFinitude s
+  obtain ⟨p, hp⟩ := GroundTranscendence s
   intro hMC
   exact hp (hMC p)
 
@@ -182,11 +182,11 @@ theorem necessary_kind_subject_lacks_maximal_capacity (s : Subject)
     Footprint is shared with that theorem: `SemanticFinitude` plus the four vocabulary axioms
     `DivinePureActuality` itself carries (`Initiates`, `Means`, `State`, `Subject`) and the two of
     this statement (`NecessarySubjectKind`).
-    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject, SemanticFinitude}`. -/
+    Footprint: `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
 theorem necessary_kind_subject_fails_pure_actuality (s : Subject)
     (_hKind : NecessarySubjectKind s) :
     ¬ DivinePureActuality (EntityOf s) :=
-  discriminating_subject_fails_pure_actuality s (SemanticFinitude s)
+  discriminating_subject_fails_pure_actuality s (GroundTranscendence s)
 
 -- ============================================================================
 -- Section 4 — What the second necessary being has: the operativeness tie
@@ -225,7 +225,7 @@ theorem necessary_kind_subject_is_gapless_operator (s : Subject)
     Note that "second" is shorthand for "other": the theorem is universal over the kind
     (`∀ s, NecessarySubjectKind s → …`), so it describes *every* non-ground necessary subject's
     correlate, not one particular being.
-    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject, SemanticFinitude}`. -/
+    Footprint: `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
 theorem the_second_necessary_being_profile (s : Subject)
     (hKind : NecessarySubjectKind s) :
     NecessaryEntity (EntityOf s) ∧

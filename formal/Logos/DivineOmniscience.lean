@@ -100,7 +100,8 @@ theorem entity_scope_exhaustiveness_is_not_infallibility :
 
 /-- Foundational omniscience, permissive half: no true proposition is closed to
     the entity's scope — the ground is the condition of all truth.
-    Footprint: `{Means, Subject}`. -/
+    Direction, stated so it cannot be misread against `TruthTracking` below:
+    `T p → EntityMeans e p` (truth implies scope). Footprint: `{Means, Subject}`. -/
 def TruthExhaustive (e : Entity) : Prop :=
   ∀ p : Prop, T p → EntityMeans e p
 
@@ -112,7 +113,11 @@ def WorldTruthExhaustive (e : Entity) : Prop :=
 
 /-- Infallibility, the exclusive half: the entity's scope tracks truth exactly
     (what is borne, and nothing but what is true).
-    Footprint: `{Means, Subject}`. -/
+    Direction, stated so it cannot be misread against `TruthExhaustive` above:
+    `EntityMeans e p → T p` (scope implies truth) — the **opposite** arrow.
+    `TruthExhaustive` alone never yields `TruthTracking`: a scope can contain
+    every truth and also contain falsehoods (that is exactly what makes the
+    ground's scope total rather than selective). Footprint: `{Means, Subject}`. -/
 def TruthTracking (e : Entity) : Prop :=
   ∀ p : Prop, EntityMeans e p → T p
 

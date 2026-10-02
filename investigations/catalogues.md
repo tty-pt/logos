@@ -143,6 +143,7 @@
 
 ### Technical
 
+* [Issue K — Step 1: the meaning-coherence audit of the two countermodels](investigations/issue-k-meaning-coherence-audit.md) — Complete kernel audit, transitive axiom footprints, dependency ledger, and consistency checks.
 * [Technical Appendix: Kernel Audit, Consistency & Code Annex](investigations/kernel-audit.md) — Complete kernel audit, transitive axiom footprints, dependency ledger, and consistency checks.
 * [Formal Dependency Graph (JSON)](formal/depgraph.json) / [(DOT)](formal/depgraph.dot) — LeanDepViz transitive kernel dependency DAG.
 * [Theorem Ledger (GAPMAP)](formal/GAPMAP.md) — Formal correspondence mapping across formal and prose corpora.

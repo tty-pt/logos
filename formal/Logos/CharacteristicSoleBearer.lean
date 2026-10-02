@@ -75,7 +75,7 @@ namespace Logos.CharacteristicSoleBearer
 open Logos.Semantics (World)
 open Logos.Entity (Entity EntityOf ExistsAt actualWorld)
 open Logos.Agency (Subject Means)
-open Logos.RecoveredOntologicalGround (EntityMeans GroundsEntity)
+open Logos.RecoveredOntologicalGround (EntityMeans OneEssence)
 open Logos.NecessityEternity (ofGround_ground_of_reality)
 open Logos.CanonicalAseity (discriminating_subject_cannot_ground_the_ground)
 open Logos.DivineSimplicity (DivineSimplicity TranscendentGround
@@ -88,21 +88,21 @@ open Logos.DivinePureActuality (DivinePureActuality atom_fails_pure_actuality
 open Logos.DivineOmniscience (FoundationalOmniscience atom_not_truth_exhaustive)
 open Logos.DivineOmnipotence (FoundationalOmnipotence atom_not_gapless_operate)
 open Logos.DivineTranscendence (ofGround_sole_transcendent_ground)
-open Logos.SemanticFinitude (SemanticFinitude)
+open Logos.SemanticFinitude (GroundTranscendence)
 
 /-- C441 — the shared subject arm, in the exact form the three `universal_ground` routes need: a
     subject-correlate that grounds `Entity.ofGround` would have to mean every proposition, and
     `SemanticFinitude` denies that. This is the one place the batch pays the 27th axiom; the
-    `hG` it is handed is the `GroundsEntity` disjunct of a `UniversalModalGround` witness
+    `hG` it is handed is the `OneEssence` disjunct of a `UniversalModalGround` witness
     instantiated at `(actualWorld, Entity.ofGround)`.
 
     Every `ExistsAt` premise discharged here is the ◈ stipulation `ofGround_existsAt`; the
-    `GroundsEntity` disjunct is the *other* branch of `UniversalModalGround`, so no assumption
+    `OneEssence` disjunct is the *other* branch of `UniversalModalGround`, so no assumption
     about the subject's world-relative existence is made or needed.
-    Footprint: `{Means, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, Subject}`. -/
 theorem no_subject_grounds_the_ground (s : Subject) :
-    ¬ GroundsEntity (EntityOf s) Entity.ofGround := by
-  obtain ⟨p, hp⟩ := SemanticFinitude s
+    ¬ OneEssence (EntityOf s) Entity.ofGround := by
+  obtain ⟨p, hp⟩ := GroundTranscendence s
   exact discriminating_subject_cannot_ground_the_ground s ⟨p, hp⟩
 
 /-- C442 — **the ground alone is omniscient**: no entity other than `Entity.ofGround` is
@@ -119,7 +119,7 @@ theorem no_subject_grounds_the_ground (s : Subject) :
     (`DivineOmniscience.lean:144`) refutes `TruthTracking Entity.ofGround`, because the ground's
     scope bears every proposition including `False` by the constructor's match arm. Unicity of
     the *permissive* sense therefore coexists with refutation of the *strong* one.
-    Footprint: `{Means, NecessarySubjectKind, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`. -/
 theorem ofGround_sole_foundational_omniscience :
     ∀ e, FoundationalOmniscience e → e = Entity.ofGround := by
   intro e h
@@ -156,7 +156,7 @@ theorem ofGround_sole_foundational_omniscience :
     `universal_ground` field, paid for by `SemanticFinitude`, that removes the second possibility.
     This is the sharpest statement in the batch of why a structure's fields are not
     interchangeable with its doctrine.
-    Footprint: `{Means, NecessarySubjectKind, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`. -/
 theorem ofGround_sole_foundational_omnipotence :
     ∀ e, FoundationalOmnipotence e → e = Entity.ofGround := by
   intro e h
@@ -182,7 +182,7 @@ theorem ofGround_sole_foundational_omnipotence :
     (`FoundationalOmnipresence.lean:1-31`). Physical omnipresence (spatial extension) and
     quantitative metric infinity remain ❌: `Space`, `Spatial`, `Metric`, `Cardinal` and `Infinity`
     have no declarations in `formal/Logos/` at all, so no proof could close them.
-    Footprint: `{Means, NecessarySubjectKind, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`. -/
 theorem ofGround_sole_foundational_omnipresence :
     ∀ e, FoundationalOmnipresence e → e = Entity.ofGround := by
   intro e h
@@ -190,7 +190,7 @@ theorem ofGround_sole_foundational_omnipresence :
   | ofGround => rfl
   | ofAtom _ => exact False.elim (h.maximal_capacity True)
   | ofSubject s =>
-      obtain ⟨p, hp⟩ := SemanticFinitude s
+      obtain ⟨p, hp⟩ := GroundTranscendence s
       exact False.elim (hp (h.maximal_capacity p))
 
 /-- C445 — **the ground alone is Actus Purus**: no entity other than `Entity.ofGround` has zero
@@ -206,7 +206,7 @@ theorem ofGround_sole_foundational_omnipresence :
     `∃ p, ¬ Means s p`, and for *all* subjects that is `SemanticFinitude` and nothing else. The
     price is not incidental: it is the price of the ground's `EntityMeans _ p := True` stipulation,
     which is what makes "no passive intentional potency" and "means everything" the same sentence.
-    Footprint: `{Initiates, Means, NecessarySubjectKind, SemanticFinitude, State, Subject}`. -/
+    Footprint: `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
 theorem ofGround_sole_divine_pure_actuality :
     ∀ e, DivinePureActuality e → e = Entity.ofGround := by
   intro e h
@@ -214,7 +214,7 @@ theorem ofGround_sole_divine_pure_actuality :
   | ofGround => rfl
   | ofAtom n => exact False.elim (atom_fails_pure_actuality n h)
   | ofSubject s =>
-      obtain ⟨p, hp⟩ := SemanticFinitude s
+      obtain ⟨p, hp⟩ := GroundTranscendence s
       exact False.elim (discriminating_subject_fails_pure_actuality s ⟨p, hp⟩ h)
 
 /-- C446 — the batch's master theorem: **the ground is the sole bearer of all six footprint
@@ -231,7 +231,7 @@ theorem ofGround_sole_divine_pure_actuality :
     **What it does not say.** Not that the ground is the unique *ground* — that is
     `FoundationalUnicity.unicity` (C199), which needs `AsymmetricGrounding` and is a weaker claim.
     Not that any of this is causal: the six are structural and modal, and F10 remains BLOCKED.
-    Footprint: `{Initiates, Means, NecessarySubjectKind, SemanticFinitude, State, Subject}`. -/
+    Footprint: `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
 theorem the_ground_is_sole_bearer_of_the_footprint_characteristics :
     (∀ e, FoundationalOmnipresence e → e = Entity.ofGround) ∧
     (∀ e, FoundationalOmniscience e → e = Entity.ofGround) ∧

@@ -86,11 +86,11 @@ C336 — A fundamentação chega onde o amor não chega:
 
 ```lean
 theorem grounding_reaches_what_love_cannot :
-    GroundsEntity Entity.ofGround (Entity.ofAtom 0) ∧
+    OneEssence Entity.ofGround (Entity.ofAtom 0) ∧
       ¬ ∃ a : Prop, GroundLoves Entity.ofGround (Entity.ofAtom 0) a
 ```
 
-A founding relation do Ground of Reality é `GroundsEntity g e := ∀ p, EntityMeans e p →
+A founding relation do Ground of Reality é `OneEssence g e := ∀ p, EntityMeans e p →
 EntityMeans g p`, e `EntityMeans Entity.ofGround p` é `True` pelo braço de casamento do
 construtor. Daí a transferência ser **indiscriminada**: `ground_grounds_every_entity`
 (C326) fecha por `intro p _; exact True.intro`, e `ground_grounds_the_meaningless`
@@ -202,7 +202,7 @@ axiom GroundBearsGood : Entity → Entity → Prop → Prop
 *Um portador necessário tem um bem dirigido para com um alvo, de conteúdo `p`.* **Porque
 um primitivo e não uma definição justa:** a relação do fundamento com o cosmos supõe-se
 **dirigida** — bom *para com* alguma coisa — e a vocabulário de fundamentação da
-biblioteca só exprime suficiência **não dirigida** (`GroundsEntity g e := ∀ p,
+biblioteca só exprime suficiência **não dirigida** (`OneEssence g e := ∀ p,
 EntityMeans e p → EntityMeans g p`), que o fundamento satisfaz **vacuamente** (C328). O
 único predicado de conteúdo disponível, `EntityMeans`, é uma *capacidade* do alvo, não uma
 *atitude* do portador, pelo que não distingue um portador que ama de um que apenas
@@ -451,7 +451,7 @@ Ainda requer prova (as três afirmações que faltam, em termos formais):
       **[NOTA 2026-09-28 — o estado não mudou, a justificação passou a ser verificada.]**
       A Fase 6 de `VISIBILITY.md` testou uma rota alternativa para C228 (o lote
       "two kinds", C403–C415) que atingiria fundamento pessoal *sem* forçar
-      `g = EntityOf s`; é impossível, porque `PersonalEntity` é *definida* como
+      `g = EntityOf s`; é impossível, porque `PersonCorrelate` é *definida* como
       `∃ s, g = EntityOf s ∧ Person s` (`PersonalNormativeGround.lean:228`). O
       resultado negativo registado é mais forte: `asymmetric` bloqueia o
       contraexemplo do *átomo*, mas não o do *fundamento* — `Entity` tem três

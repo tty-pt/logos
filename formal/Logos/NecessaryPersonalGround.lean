@@ -15,27 +15,43 @@ Status (Batch THIS_IS_PERSONAL, 2026-09-22; plan `THIS_IS_PERSONAL.md` §11.7/§
    every existent, nor that it makes evil exist or morally legitimizes evil.
    It is proved in `Logos.PersonalGroundOfReality.person_yields_personal_grounding_of_reality`
    (historical compatibility alias: `present_act_yields_personal_grounding_of_reality`,
-   footprint `{Initiates, Means, State, Subject, CL}`). Claim E
-   (`∃ g, NecessaryEntity g ∧ NecessaryPersonalGround g`) is **annotated only**,
-   never a theorem (obstacle registry, `THIS_IS_PERSONAL.md` §12.1).
-2. **Trinitarian / monotheism block DEFERRED.** The strict-monotheism and
-    trinitarian-architecture material (axioms `PersonalNature`,
-    `personal_nature_iff_person`, `DivineNature`, `divine_nature_is_personal`,
-    `divine_person_is_necessary`, `universal_ground_unique`, duplicate
-    `GroundsEntity`/`explanatory_adequacy`, `explanatory_adequacy_normative_order`,
-    and the derived theorems `divine_subject_is_person`, `God`, `Monotheism`,
-    `divine_uniqueness`, `monotheism_derived`, `TrinitarianGodhead`,
-    `trinitarian_*`, `necessary_person_derived`, `claim_e_implies_claim_d`, …) is
-    deferred out of the live kernel and is **currently absent from the repository**
-    (no `scratch/` directory exists). Once authored, it will live in
-    `scratch/Trinitarian_deferred.lean`, never imported by the build; it may not
-    compile (that is acceptable). Nothing trinitarian/monotheistic is a theorem of
-    this build.
-3. **Claim-E surface kept as annotations.** The definitions
-   `GroundsPersonalReality`, `PersonalGround`, `NecessaryPersonalGround`, the five
-   claim definitions, and the pure-logic claim entailments stay as the annotated
-   entity-level surface (`THIS_IS_PERSONAL.md` §12.1); no entity-level theorem is
-   fabricated over them.
+   footprint `{Initiates, Means, State, Subject, CL}`).
+2. **RETIRED at S2 (2026-10-02), plan `TrinitarianPersonalGround.lean (DOCTRINE ROW 3 / AUTHOR DECISION note)`.** Two paragraphs
+   of this header used to say, and no longer say:
+   - *Claim E is "annotated only, never a theorem".* **False as of S2.**
+     `Logos.TrinitarianPersonalGround` proves the entity-level Claim E in the form that is
+     actually statable in Γ's vocabulary: `PersonalGround Entity.ofGround`
+     (`the_ground_is_not_void_of_personhood`), a structure with two fields — `sustains`
+     (`GroundByBeing`, presence-grounding) and `indwells` (`OneEssence`, providential
+     indwelling) — at **zero substantive axioms**, with `GroundOfReality` already proved as
+     `ofGround_necessary_ground_of_reality`.
+   - *"The strict-monotheism and trinitarian-architecture material is deferred out of the live
+     kernel and is currently absent from the repository … Nothing trinitarian/monotheistic is a
+     theorem of this build."* **False as of 2026-09-27 and falsified outright at S2.**
+     `Logos.DivineAgape` (C504–C509) and `Logos.TrinitySeparations` (C511–C514) are in the
+     build, and `Logos.TrinitarianPersonalGround` adds the personal-ground ontology. The
+     enumeration of *names that genuinely do not exist* is retained below, because those are
+     still true; the blanket claim that nothing trinitarian is a theorem is not.
+3. **The Claim-E surface named by `THIS_IS_PERSONAL.md` §12.1 is still absent**, as a separate
+   fact from (2). The definitions `GroundsPersonalReality`, `PersonalGround` (in *this* module's
+   old reading), `NecessaryPersonalGround`, the five claim definitions, and the pure-logic claim
+   entailments were dropped in an earlier batch and are **not** in the live kernel. `NecessaryPersonalGround`
+   survives only as the namespace of this module.
+
+   ⚠ **Name collision, disambiguated.** `Logos.TrinitarianPersonalGround.PersonalGround` (S2) is
+   **not** the `PersonalGround` of `THIS_IS_PERSONAL.md` §12.1. The former is the two-field
+   structure `sustains`/`indwells`; the latter was a never-declared annotation. Nothing in the
+   kernel binds the old meaning, so the reuse is unambiguous — but a reader who arrives from
+   §12.1 will expect a different field list, and is wrong to.
+4. **Names that genuinely do not exist** (retained from the retired paragraph (2), because these
+   half of it is still true). The strict-monotheism and trinitarian-architecture material
+   `PersonalNature`, `personal_nature_iff_person`, `DivineNature`, `divine_nature_is_personal`,
+   `divine_person_is_necessary`, `universal_ground_unique`, duplicate
+   `OneEssence`/`explanatory_adequacy`, `explanatory_adequacy_normative_order`, and the derived
+   theorems `divine_subject_is_person`, `God`, `Monotheism`, `divine_uniqueness`,
+   `monotheism_derived`, `TrinitarianGodhead`, `trinitarian_*`, `necessary_person_derived`,
+   `claim_e_implies_claim_d` is **still absent** from the repository, and no `scratch/` directory
+   exists. What replaced it is named above.
 -/
 
 import Logos.Core
@@ -62,7 +78,7 @@ open Logos.Person (Person person_is_intentional)
 open Logos.Entity (Entity ExistsAt TrueAt NecessarilyTrue EntityOf)
 open Logos.Modal (NecessaryEntity Contingent actualWorld)
 open Logos.Plurality (NecessarySubject)
-open Logos.RecoveredOntologicalGround (GroundsEntity explanatory_adequacy)
+open Logos.RecoveredOntologicalGround (OneEssence explanatory_adequacy)
 
 -- ============================================================================
 -- 1. Unified Ontological Framework (Subject, Nature, Will, Entity)
@@ -178,7 +194,7 @@ scratch/Trinitarian_deferred.lean (DEFERRED); the canonical theorem
     Footprint: `{Means, Subject}`. -/
 theorem atom_cannot_ground_intentional_subject
     (n : Nat) (s : Subject) (p : Prop) (hm : Means s p) :
-    ¬ GroundsEntity (Entity.ofAtom n) (EntityOf s) := by
+    ¬ OneEssence (Entity.ofAtom n) (EntityOf s) := by
   intro hGr
   have hSub := explanatory_adequacy (Entity.ofAtom n) (EntityOf s) hGr
   have hMeanS : EntityMeans (EntityOf s) p := hm
@@ -190,7 +206,7 @@ theorem atom_cannot_ground_intentional_subject
     Hence, by explanatory adequacy, no empirical atom can ground a Person.
     Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem atom_cannot_ground_person (n : Nat) (s : Subject) (hPerson : Person s) :
-    ¬ GroundsEntity (Entity.ofAtom n) (EntityOf s) := by
+    ¬ OneEssence (Entity.ofAtom n) (EntityOf s) := by
   have hInt : IntentionalSubject s := Logos.Person.person_is_intentional s hPerson
   obtain ⟨p, hm⟩ := hInt
   exact atom_cannot_ground_intentional_subject n s p hm

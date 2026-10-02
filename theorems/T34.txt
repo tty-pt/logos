@@ -6,7 +6,7 @@ lote não é provar a Trindade — é mostrar **o que ela custa** e que nada mai
 a produz.
 
 **Stage A — o caso, não a dedução** (`DivineAgape.lean`, §28/§7). Sort novo
-`DivinePerson` (uma `structure`, zero axiomas), `Subsists`/`is_divine` como `def`s,
+`DivineHypostasis` (uma `structure`, zero axiomas), `Subsists`/`is_divine` como `def`s,
 `DivineLove`/`IsWord`/`IsSpirit` como `opaque` (o padrão `BearingOf`).
 - C504 `AxAgapeEssence : ∃ f, Subsists f ∧ (∃ o, o ≠ f ∧ Subsists o ∧ DivineLove f o)`
   — **o dado**: o amor da fonte-fonte é auto-doação *essencial* e atinge um centro
@@ -20,7 +20,7 @@ a produz.
   contingente nemuno; C509 `divine_object_subsists_in_godhead` — subsiste dentro da
   realidade divina (uma pinsão, `is_divine o divineReality`, `divineReality :=
   Entity.ofGround`).
-- C510 `agape_entails_tripersonality : ∃ t : TrinitarianStructure DivinePerson
+- C510 `agape_entails_tripersonality : ∃ t : TrinitarianStructure DivineHypostasis
   Entity, t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord
   the_beloved ∧ IsSpirit the_spirit` — **o caso**: existe uma `TrinitarianStructure`
   de C108 cujo tripé de centros distintos são exactamente a fonte, o amado-como-Verbo
@@ -58,4 +58,4 @@ legível. Nenhum axioma novo: as quatro separações são `{}`, as três premiss
 
 Ver: `formal/GAPMAP.md` (linhas C504–C514 + lote TRINITY, Stage A e Stage B), `formal/Logos/DivineAgape.lean`,
 `formal/Logos/TrinitySeparations.lean`, `base.txt` §28 (corredor do Ágape), `TRINITY.md` (plano de
-record), `TRINITY2.md` (Stage B), `theorems/T33.txt` (C518–C520, o mesmo sort `DivinePerson`).
+record), `TRINITY2.md` (Stage B), `theorems/T33.txt` (C518–C520, o mesmo sort `DivineHypostasis`).

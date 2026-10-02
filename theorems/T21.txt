@@ -76,9 +76,16 @@ theorem the_ground_is_sole_bearer_of_divine_simplicity :
       (∀ e : Entity, DivineSimplicity e → e = Entity.ofGround)
 ```
 
-Pegada auditada: `{Means, SemanticFinitude, Subject, propext}`. Como `SemanticFinitude`
-tem `Tag: VOCAB`, o distintivo derivado é `PROVEN`, não `PROVEN↑`; o preço declarado
-permanece na pegada. A unicidade já era C439; C486 apenas torna a linha legível
+Pegada auditada: `{GroundTranscendence, Means, Subject, propext}`.
+
+**Actualizado 2026-10-03 (lote FINITUDE-SPLIT).** A pegada mudou de
+`{Means, SemanticFinitude, Subject, propext}` para o que está acima: o braço dos
+sujeitos passou a pagar `GroundTranscendence` (`Tag: META`) em vez de
+`SemanticFinitude` (`Tag: VOCAB`). Consequência de leitura: o distintivo derivado
+passou de `PROVEN` (só-vocabulário) a `PROVEN↑`, que o leitor vê como
+**AXIOMATIC (GroundTranscendence)**. O enunciado não mudou, nada foi retirado, e
+nenhuma derivação se moveu — o que mudou é que o preço é agora uma compra
+metafísica visível. A unicidade já era C439; C486 apenas torna a linha legível
 incondicional.
 
 C491–C492 — Princípio tomista e limite do preço:
@@ -91,14 +98,20 @@ theorem the_semantic_bound_does_not_close_the_grounding_arm :
     ∃ (Subject Entity : Type)
       (EntityOf : Subject → Entity)
       (Means : Subject → Prop → Prop)
-      (GroundsEntity : Entity → Entity → Prop),
+      (OneEssence : Entity → Entity → Prop),
       (∀ s : Subject, ∃ p : Prop, ¬ Means s p) ∧
-      (∃ s : Subject, ∃ g e : Entity, g = EntityOf s ∧ e ≠ g ∧ GroundsEntity g e)
+      (∃ s : Subject, ∃ g e : Entity, g = EntityOf s ∧ e ≠ g ∧ OneEssence g e)
 ```
 
-Pegadas auditadas: `{Means, SemanticFinitude, Subject, propext}` e `{}`. C491 é a forma
+Pegadas auditadas: `{GroundTranscendence, Means, Subject, propext}` e `{}`. C491 é a forma
 de princípio que faltava para entidades transcendentes, dado F15; C492 mostra que a
-finitude do lado de `Means` e a finitude do lado de `GroundsEntity` são independentes.
+finitude do lado de `Means` e a finitude do lado de `OneEssence` são independentes.
+
+Actualizado 2026-10-03 (lote FINITUDE-SPLIT): C491 passou a pagar `GroundTranscendence`
+(`Tag: META`), logo `PROVEN↑` / **AXIOMATIC (GroundTranscendence)** em vez do
+`PROVEN` só-vocabulário. Oobjectivo de C492 não muda — é `{}` e continua a mostrar
+que o limite semântico não fecha o braço do grounding — mas note-se que o limite que
+C492 exibe é o **irrestrito**, que é precisamente `GroundTranscendence`.
 
 Teoremas canónicos associados:
 

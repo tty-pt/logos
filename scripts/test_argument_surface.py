@@ -80,7 +80,7 @@ def main() -> int:
     # score-position checks below; this number catches a block becoming a wall.
     # It tracks `build_deduction.README_VISIBLE_BUDGET` deliberately: when the two
     # disagreed, the looser one was decoration.
-    check(len(visible) <= 1740, f"README visible lines {len(visible)} <= 1740")
+    check(len(visible) <= 1715, f"README visible lines {len(visible)} <= 1715")
     check(readme.startswith("# Γ — The Deduction\n"),
           "README opens with the title")
     fact_at = readme.find("for which meaning can mean")
@@ -178,15 +178,15 @@ def main() -> int:
     # terminator lets the reader check it. Both are required.
     cre = readme.partition("## Part III — The refutations")[2].partition("## Part IV")[0]
     check(cre, "README carries the refutations section")
-    # DEDUCTION.md §6: all sixteen are titled `### R`-entries, so they are
+    # DEDUCTION.md §6: all seventeen are titled `### R`-entries, so they are
     # findable and linkable. The three 🧱 boundaries used to be the only rows in
     # a table, because a table cell cannot hold a derivation — and a `{}`
     # countermodel has one. They are entries now, and the check is that *no*
     # branch is a table row any more.
     entries = re.findall(r"^### R(\d+)\. (.+)$", cre, re.M)
-    check(len(entries) == 16, f"Part III promotes all sixteen branches to entries ({len(entries)})")
-    check([int(n) for n, _ in entries] == list(range(1, 17)),
-          "the R-entries are numbered 1..16 with no gap")
+    check(len(entries) == 17, f"Part III promotes all seventeen branches to entries ({len(entries)})")
+    check([int(n) for n, _ in entries] == list(range(1, 18)),
+          "the R-entries are numbered 1..17 with no gap")
     _rows = [ln for ln in cre.splitlines() if ln.startswith("| **")]
     check(not _rows, f"no branch is a table row any more ({len(_rows)} left)")
     for _dead in _branches(("No right or wrong at all", "Voluntarism",
@@ -460,16 +460,16 @@ def main() -> int:
         check(not badge_matches_verdict("COUNTERMODEL", "PROVEN"), "negative self-test: COUNTERMODEL does not match PROVEN")
         check(not badge_matches_verdict("DEFINITIONAL", "PROVEN"), "negative self-test: DEFINITIONAL does not match PROVEN")
 
-        # Extract the 39-row classical attributes table from ledger.md
+        # Extract the 40-row classical attributes table from ledger.md
         table_start = ledger.find("| Classical characteristic | Scope | Status |")
         check(table_start != -1, "classical attributes table found in ledger.md")
         table_end = ledger.find("\n\n", table_start)
         table_text = ledger[table_start:table_end if table_end != -1 else len(ledger)]
         table_lines = [l for l in table_text.splitlines() if l.startswith("| **")]
-        check(len(table_lines) == 39, f"expected 39 classical attribute rows in ledger table, got {len(table_lines)}")
+        check(len(table_lines) == 40, f"expected 40 classical attribute rows in ledger table, got {len(table_lines)}")
 
         ca_slots = [s for s in census.get("slots", []) if s.get("surface") == "classical_attributes"]
-        check(len(ca_slots) == 39, f"expected 39 classical attribute census slots, got {len(ca_slots)}")
+        check(len(ca_slots) == 40, f"expected 40 classical attribute census slots, got {len(ca_slots)}")
 
         for slot_idx, s in enumerate(ca_slots):
             slot_id = s["id"]
@@ -512,6 +512,28 @@ def main() -> int:
                 num = slot_id.split("_")[1]
                 check(f"**{num}." in ledger, f"pillar {num} found in ledger")
                 check(s["rendered_badge"] in ledger, f"pillar {num} rendered_badge verified in ledger")
+
+    # No reader-facing row may carry an undetermined badge. `_CA_STATUS_TEXT.get(live, "?")` is
+    # a silent fallback, and it fired on 14 chain rows until 2026-10-03, from two causes: an
+    # `axiom` anchor type `_classical_anchor_live` never handled, and a countermodel resting on a
+    # substantive axiom returning the un-renderable "COUNTERMODEL?([...])". A `?` is the worst
+    # thing this pipeline can print -- it tells a reader nothing about whether a step is proved,
+    # priced, or refused -- and nothing else in the suite would have caught it, because the chain
+    # integrity gate checks that a row *resolves to a live node*, not that its status renders.
+    for label, text in (("README.md", readme), ("investigations/ledger.md", ledger)):
+        for n, line in enumerate(text.split("\n"), 1):
+            if not line.startswith("|"):
+                continue
+            cells = [c.strip() for c in line.split("|")]
+            # A claim row is one carrying a C-/F- id; only those have an epistemic status at all.
+            cid = next((c for c in cells if re.fullmatch(r"[CF]\d+[a-z]?", c)), None)
+            if cid is None or "?" not in cells:
+                continue
+            # A standalone "?" cell is the `_CA_STATUS_TEXT.get(live, "?")` fallback. A prose cell
+            # holding a "?" is a long sentence, so the stripped-equality test cannot false-fire.
+            check(False, f"{label}:{n} row {cid} renders an undetermined `?` badge "
+                         f"(cell {cells.index('?') + 1} of {len(cells)}) -- every row must state "
+                         f"PROVEN / AXIOMATIC(X) / AXIOM / INDEPENDENT / REFUTED")
 
     if errors:
         print(f"\nFAIL: {len(errors)} argument-surface regression(s)")

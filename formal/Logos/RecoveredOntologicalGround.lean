@@ -49,12 +49,27 @@ def EntityMeans (e : Entity) (p : Prop) : Prop :=
   | Entity.ofAtom _ => False
   | Entity.ofGround => True
 
-/-- GroundsEntity: ontological entities-relation l ge. DEFINITION (meaning-
-    containment, esse est agere at the entity level): g grounds e iff g
-    possesses at least e's intentional/agential capacity (means everything e
-    means). `∀ p, EntityMeans e p → EntityMeans g p`.
+/-- `OneEssence`: the ontological grounding relation, renamed from `GroundsEntity`
+    on 2026-10-02. DEFINITION (meaning-containment, *esse est agere* at the entity
+    level): `g` grounds `e` iff `g` possesses at least `e`'s intentional/agential
+    capacity — it means everything `e` means. `∀ p, EntityMeans e p → EntityMeans g p`.
+
+    The rename is **naming only**: the definition is unchanged, so every footprint,
+    every countermodel and every `{}`-theorem that reads this predicate is unaffected.
+    The reason for the new name is that this relation carries the whole Nicene claim —
+    one essence indwelt by three persons (`Perichoretic`) — and `GroundsEntity` read as
+    "the entity grounds the entity", which is the same word for a strictly weaker claim
+    than the one the corpus actually pays for.
+
+    KNOWN DEFECT, recorded not fixed: because `EntityMeans Entity.ofGround p` reduces to
+    `True` (see above), this predicate is `True` for every `e`, including atoms, so its
+    ground side is vacuous and `ofGround_universal_modal_ground` closes by `True.intro`
+    (`FoundationalOmnipresence.lean:73`). Repairing that was deferred as its own item when the
+    personal-ground plan was retired (recorded in `AGENTS.md`); it is a separate change from this
+    rename, and the vacuity is disclosed here rather than repaired.
+
     Footprint: `{Means, Subject}`. -/
-def GroundsEntity (g e : Entity) : Prop :=
+def OneEssence (g e : Entity) : Prop :=
   ∀ p : Prop, EntityMeans e p → EntityMeans g p
 
 /-- Ontological Distinction: Atomic entities are provably distinct from any subject correlate. -/
@@ -63,17 +78,17 @@ theorem ofAtom_ne_ofSubject (n : Nat) (s : Subject) :
   fun h => Entity.noConfusion h
 
 /-- Explanatory Adequacy of Grounding: theorem (definitional consequence of
-    `GroundsEntity`). The ground g of e possesses e's account-carrying meaning.
+    `OneEssence`). The ground g of e possesses e's account-carrying meaning.
     Footprint: `{Means, Subject}`. -/
 theorem explanatory_adequacy
-    (g e : Entity) (hGr : GroundsEntity g e) (p : Prop) (hEM : EntityMeans e p) :
+    (g e : Entity) (hGr : OneEssence g e) (p : Prop) (hEM : EntityMeans e p) :
     EntityMeans g p :=
   hGr p hEM
 
 /-- Theorem: An impersonal atomic entity cannot ground a personal subject. -/
 theorem atom_cannot_ground_person
     (n : Nat) (s : Subject) (hPers : Person s) :
-    ¬ GroundsEntity (Entity.ofAtom n) (EntityOf s) := by
+    ¬ OneEssence (Entity.ofAtom n) (EntityOf s) := by
   intro hGr
   have hMeans : ∃ p : Prop, Means s p := person_is_intentional s hPers
   obtain ⟨p, hp⟩ := hMeans
@@ -88,7 +103,7 @@ theorem atom_cannot_ground_person
 
 /-- GroundOfReality: an entity g ontologically grounds every actual entity distinct from itself. -/
 def GroundOfReality (g : Entity) : Prop :=
-  ∀ e : Entity, ActualEntity e → e = g ∨ GroundsEntity g e
+  ∀ e : Entity, ActualEntity e → e = g ∨ OneEssence g e
 
 /-- NecessaryGroundOfReality: an entity is necessary and is the ontological ground of reality. -/
 structure NecessaryGroundOfReality (g : Entity) : Prop where
@@ -161,7 +176,7 @@ theorem ground_of_reality_grounds_finite_subject
     (g : Entity) (hg : NecessaryGroundOfReality g)
     (s : Subject) (hCont : ∃ w : World, ¬ ExistsAt w (EntityOf s))
     (hActual : ActualEntity (EntityOf s)) :
-    GroundsEntity g (EntityOf s) := by
+    OneEssence g (EntityOf s) := by
   have hDisj := hg.grounds_reality (EntityOf s) hActual
   cases hDisj with
   | inl hEq =>

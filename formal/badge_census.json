@@ -376,6 +376,23 @@
     },
     {
       "surface": "classical_attributes",
+      "id": "Exclusion from personhood",
+      "claims": [
+        "Logos.CosmicExistence.ofGround_not_a_person_correlate"
+      ],
+      "routes_considered": 384,
+      "routes_rejected": {
+        "countermodel_namespace": 70,
+        "incomparable": 313
+      },
+      "winner": "Logos.CosmicExistence.ofGround_not_a_person_correlate",
+      "verdict": "COUNTERMODEL",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\ud83e\uddf1 **COUNTERMODEL** \u00b7 0 substantive axioms \u00b7 `{Means, Subject, Will, subjectWill}`"
+    },
+    {
+      "surface": "classical_attributes",
       "id": "Divine simplicity",
       "claims": [
         "Logos.DivineSimplicity.divine_simplicity_sole_bearer"
@@ -887,7 +904,21 @@
     },
     {
       "surface": "characteristic_sections",
-      "id": "Char_10_The ground is simple",
+      "id": "Char_10_The ground is not a person-correlate",
+      "claims": [
+        "Logos.CosmicExistence.ofGround_not_a_person_correlate"
+      ],
+      "routes_considered": 1,
+      "routes_rejected": {},
+      "winner": "Logos.CosmicExistence.ofGround_not_a_person_correlate",
+      "verdict": "PROVEN",
+      "substantive": [],
+      "stipulated": false,
+      "rendered_badge": "\u2705 **PROVEN** \u00b7 0 substantive axioms"
+    },
+    {
+      "surface": "characteristic_sections",
+      "id": "Char_11_The ground is simple",
       "claims": [
         "Logos.DivineSimplicity.divine_simplicity_sole_bearer"
       ],
@@ -901,7 +932,7 @@
     },
     {
       "surface": "characteristic_sections",
-      "id": "Char_11_The ground is transcendent",
+      "id": "Char_12_The ground is transcendent",
       "claims": [
         "Logos.DivineTranscendence.ofGround_sole_transcendent_ground"
       ],
@@ -915,7 +946,7 @@
     },
     {
       "surface": "characteristic_sections",
-      "id": "Char_12_The ground is immutable",
+      "id": "Char_13_The ground is immutable",
       "claims": [
         "Logos.DivineImmutability.ofGround_divine_immutability"
       ],
@@ -929,7 +960,7 @@
     },
     {
       "surface": "characteristic_sections",
-      "id": "Char_13_The ground is omnipresent",
+      "id": "Char_14_The ground is omnipresent",
       "claims": [
         "Logos.FoundationalOmnipresence.ofGround_foundational_omnipresence"
       ],
@@ -943,7 +974,7 @@
     },
     {
       "surface": "characteristic_sections",
-      "id": "Char_14_The ground is pure actuality",
+      "id": "Char_15_The ground is pure actuality",
       "claims": [
         "Logos.DivinePureActuality.ofGround_divine_pure_actuality"
       ],
@@ -957,7 +988,7 @@
     },
     {
       "surface": "characteristic_sections",
-      "id": "Char_15_The ground is omniscient (foundational)",
+      "id": "Char_16_The ground is omniscient (foundational)",
       "claims": [
         "Logos.DivineOmniscience.ofGround_foundational_omniscience"
       ],
@@ -971,7 +1002,7 @@
     },
     {
       "surface": "characteristic_sections",
-      "id": "Char_16_The ground can do all it can (foundational)",
+      "id": "Char_17_The ground can do all it can (foundational)",
       "claims": [
         "Logos.DivineOmnipotence.ofGround_foundational_omnipotence"
       ],
@@ -985,7 +1016,7 @@
     },
     {
       "surface": "characteristic_sections",
-      "id": "Char_17_The ground can bring about the satisfiable (causal)",
+      "id": "Char_18_The ground can bring about the satisfiable (causal)",
       "claims": [
         "Logos.ThomisticAct.ground_produces_every_satisfiable_form"
       ],
@@ -1001,7 +1032,7 @@
     },
     {
       "surface": "characteristic_sections",
-      "id": "Char_18_One God in three Persons",
+      "id": "Char_19_One God in three Persons",
       "claims": [
         "Logos.DivineAgape.agape_entails_tripersonality"
       ],
@@ -1019,11 +1050,11 @@
     }
   ],
   "totals": {
-    "slots": 64,
-    "PROVEN": 47,
+    "slots": 66,
+    "PROVEN": 48,
     "AXIOMATIC": 4,
     "CONTRADICTION": 0,
-    "COUNTERMODEL": 5,
+    "COUNTERMODEL": 6,
     "AXIOM": 1,
     "OPEN": 0,
     "DEFINITIONAL": 1,

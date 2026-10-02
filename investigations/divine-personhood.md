@@ -12,7 +12,7 @@ Can the ground of the normative order and reality be impersonal—such as an unc
 
 In Γ's formalization, impersonalism is strictly excluded across multiple independent axes:
 1. **Normative Grounding Requires Personal Agency:**  
-   In `formal/Logos/PersonalNormativeGround.lean`, `atom_cannot_ground_person` proves that an impersonal atomic entity cannot ground a personal agent (`∀ n s, Person s → ¬ GroundsEntity (Entity.ofAtom n) (EntityOf s)`). The capacity for intentional meaning and normative distinction belongs constitutively to personal agency.
+   In `formal/Logos/PersonalNormativeGround.lean`, `atom_cannot_ground_person` proves that an impersonal atomic entity cannot ground a personal agent (`∀ n s, Person s → ¬ OneEssence (Entity.ofAtom n) (EntityOf s)`). The capacity for intentional meaning and normative distinction belongs constitutively to personal agency.
 2. **Anti-Self-Legislation & Prescriptive Address:**  
    As proved in `formal/Logos/OughtRetorsion.lean` (`self_grounded_ought_collapses`), identifying Ought with current volition collapses normative violation. Prescriptive normativity constitutively involves personal address, choice, and judgment.
 3. **The Personal Headline:**  

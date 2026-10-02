@@ -233,7 +233,7 @@ structure GenericGroundsRightWrong (g : Entity) : Prop where
   personal_ground : ∀ s : Subject, g = EntityOf s → Person s
 
 /-- Personal Entity: an entity that is the ontological correlate of an authoritative Person. -/
-def PersonalEntity (g : Entity) : Prop :=
+def PersonCorrelate (g : Entity) : Prop :=
   ∃ s : Subject, g = EntityOf s ∧ Person s
 
 /-- The canonical grounding relation witnessed by an intentional subject. -/
@@ -261,7 +261,7 @@ def canonicalSubjectGrounding (s : Subject) : GenericGroundingRelation where
     Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem normative_ground_is_personal
     (g : Entity) (hGr : GenericGroundsRightWrong g) :
-    PersonalEntity g := by
+    PersonCorrelate g := by
   have hDeontic : DeonticOpposition True False := ⟨fun ⟨_, h2⟩ => h2, fun h => h ▸ trivial⟩
   obtain ⟨gr, hGrounds⟩ := hGr.grounds_normativity True False hDeontic
   obtain ⟨s, hg⟩ := gr.explanatory g (True ∧ ¬False) hGrounds
@@ -845,7 +845,7 @@ theorem model_c_self_legislation_collapses
 
     The two-kinds batch (C403–C415) was proposed as a route to personal ground that does
     not force any grounder to be an `EntityOf s`. That route cannot exist, and the reason
-    is checkable here: `PersonalEntity` is *defined* as `∃ s, g = EntityOf s ∧ Person s`
+    is checkable here: `PersonCorrelate` is *defined* as `∃ s, g = EntityOf s ∧ Person s`
     (`PersonalNormativeGround.lean:228`), so a theorem of personal ground for an entity
     `g` must in every case deliver `g = EntityOf s` for some `s`. An approach that
     "reaches personal ground without ever producing `g = EntityOf s`" is not a harder
@@ -857,7 +857,7 @@ theorem model_c_self_legislation_collapses
     The witness is `Entity.ofGround`, the world-rigid ground of reality. It is not an
     atom, so it satisfies `asymmetric` (`∀ n, ofGround ≠ ofAtom n` holds by constructor
     disjointness); and by `ofGround_ne_ofSubject` it is not the correlate of any subject
-    either, so it is not `PersonalEntity`. Read with the caution already recorded in
+    either, so it is not `PersonCorrelate`. Read with the caution already recorded in
     `LovesAsGround.lean`, that constructor separation is a *modelling seam* and not a
     metaphysical verdict about whether reality's necessary ground is personal — the claim
     proved here is only that `Entity`'s three constructors make `asymmetric` insufficient

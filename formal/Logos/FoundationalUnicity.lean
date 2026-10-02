@@ -63,7 +63,7 @@ open Logos.Core (T IsFalse)
 open Logos.Semantics (World Form Satisfies)
 open Logos.Agency (Subject Means)
 open Logos.Entity (Entity ExistsAt EntityOf actualWorld)
-open Logos.RecoveredOntologicalGround (EntityMeans GroundsEntity ActualEntity GroundOfReality)
+open Logos.RecoveredOntologicalGround (EntityMeans OneEssence ActualEntity GroundOfReality)
 open Logos.NecessityEternity (ofGround_necessary ofGround_ground_of_reality)
 open Logos.CanonicalAseity (CanonicalAseity atom_cannot_ground_the_ground discriminating_subject_cannot_ground_the_ground)
 open Logos.DivineSimplicity (TranscendentGround ofGround_transcendent)
@@ -78,7 +78,7 @@ open Logos.FoundationalOmnipresence (UniversalModalGround ofGround_universal_mod
     Ontological grounding is an asymmetric dependency relation.
     Footprint: `{Means, Subject}`. -/
 def AsymmetricGrounding : Prop :=
-  ∀ (g1 g2 : Entity), GroundsEntity g1 g2 → ¬ GroundsEntity g2 g1
+  ∀ (g1 g2 : Entity), OneEssence g1 g2 → ¬ OneEssence g2 g1
 
 /-- Master Metaphysical Theorem: Universal Ground Unicity.
     Two distinct entities cannot both be universal modal grounds under asymmetric grounding.
@@ -95,11 +95,11 @@ theorem universal_ground_unicity
     g1 = g2 := open Classical in by
   by_cases hEq : g1 = g2
   · exact hEq
-  · have h12 : GroundsEntity g1 g2 := by
+  · have h12 : OneEssence g1 g2 := by
       cases hU1 w g2 hEx2 with
       | inl h1 => exact False.elim (hEq h1.symm)
       | inr h2 => exact h2
-    have h21 : GroundsEntity g2 g1 := by
+    have h21 : OneEssence g2 g1 := by
       cases hU2 w g1 hEx1 with
       | inl h1 => exact False.elim (hEq h1)
       | inr h2 => exact h2
@@ -109,11 +109,11 @@ theorem universal_ground_unicity
 -- Section 1b: Semantic Repair — the Asymmetry Premise is Refutable
 -- ============================================================================
 
-/-- Semantic Lemma: `GroundsEntity` is reflexive at every entity.
+/-- Semantic Lemma: `OneEssence` is reflexive at every entity.
     Grounding is meaning-containment, so an entity trivially possesses every
     capacity it already has. No relation of this form can be irreflexive.
     Footprint: `{Means, Subject}`. -/
-theorem groundsEntity_reflexive (e : Entity) : GroundsEntity e e :=
+theorem groundsEntity_reflexive (e : Entity) : OneEssence e e :=
   fun _ hx => hx
 
 /-- Semantic Lemma: an entity grounds the Ground of Reality exactly when it has
@@ -122,7 +122,7 @@ theorem groundsEntity_reflexive (e : Entity) : GroundsEntity e e :=
     collapses to maximal capacity.
     Footprint: `{Means, Subject}`. -/
 theorem grounds_ground_iff_maximal (e : Entity) :
-    GroundsEntity e Entity.ofGround ↔ MaximalCapacity e := by
+    OneEssence e Entity.ofGround ↔ MaximalCapacity e := by
   constructor
   · intro h p
     exact h p trivial
@@ -136,7 +136,7 @@ theorem ofGround_ne_ofSubject (s : Subject) : EntityOf s ≠ Entity.ofGround := 
   cases hEq
 
 /-- Countermodel: `AsymmetricGrounding` as stated is UNSATISFIABLE.
-    It reads `∀ g1 g2, GroundsEntity g1 g2 → ¬ GroundsEntity g2 g1` with no
+    It reads `∀ g1 g2, OneEssence g1 g2 → ¬ OneEssence g2 g1` with no
     `g1 ≠ g2` guard, but grounding is reflexive, so `g1 = g2 = ofGround` refutes
     it. This is not a price the theory could ever pay: the `hAsym` argument of
     `universal_ground_unicity` reduces against a false statement, so that route

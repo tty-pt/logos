@@ -143,7 +143,7 @@ open Logos.RecoveredOntologicalGround (EntityMeans)
 open Logos.TheologicalModalHardening
     (ActualEntity ContingentEntity NecessaryEntity necessary_not_contingent)
 open Logos.NecessityEternity (ofGround_necessary ofGround_ne_ofSubject)
-open Logos.PersonalNormativeGround (PersonalEntity)
+open Logos.PersonalNormativeGround (PersonCorrelate)
 open Logos.LovesAsGround
     (GroundBearsGood GroundLoves AxGroundLovesContingentRealm
      the_ground_loves_every_meaningful_contingent_reality
@@ -670,7 +670,7 @@ theorem contingent_reality_is_not_necessary :
     carried one and then ignored it — the proof never used the hypothesis — so the
     antecedent was decoration that made the theorem look like it constrained the realm.
     Footprint: `{Means, Subject, Will, subjectWill}`. -/
-theorem the_ground_is_not_personal : ¬ PersonalEntity Entity.ofGround := by
+theorem ofGround_not_a_person_correlate : ¬ PersonCorrelate Entity.ofGround := by
   rintro ⟨s, hs, _⟩
   exact ofGround_ne_ofSubject s hs
 
@@ -746,15 +746,15 @@ theorem the_ground_is_not_the_universe : ¬ Universe Entity.ofGround := by
     §18's second stated gap ("it does not specify whether founded and identical are
     compatible") is machine-checked as *incompatible*.
 
-    The antecedent is the whole of `GroundsEntity`, and under Γ's definitions it holds
+    The antecedent is the whole of `OneEssence`, and under Γ's definitions it holds
     for every entity (C328), so this row's content is entirely in the `¬ Universe e`
     half. It is stated as an implication because that is the form the prose gap is
-    about; a reader looking for a constraint on `GroundsEntity` will not find one
+    about; a reader looking for a constraint on `OneEssence` will not find one
     here, and should not. Its dependency on `Means` is inherited from
-    `GroundsEntity`; nothing in the antecedent is read in the proof.
+    `OneEssence`; nothing in the antecedent is read in the proof.
     Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem grounding_never_yields_identity_of_the_totality (e : Entity) :
-    Logos.RecoveredOntologicalGround.GroundsEntity Entity.ofGround e →
+    Logos.RecoveredOntologicalGround.OneEssence Entity.ofGround e →
     ¬ Universe e := by
   intro _hGrounds h
   obtain ⟨w, x, hxw, hne⟩ := no_entity_is_identical_to_the_whole e
@@ -782,7 +782,7 @@ end Logos.CosmicExistence
 #print axioms Logos.CosmicExistence.the_ground_loves_the_cosmos_in_a_context
 #print axioms Logos.CosmicExistence.realm_existence_does_not_imply_realm_necessity
 #print axioms Logos.CosmicExistence.contingent_reality_is_not_necessary
-#print axioms Logos.CosmicExistence.the_ground_is_not_personal
+#print axioms Logos.CosmicExistence.ofGround_not_a_person_correlate
 #print axioms Logos.CosmicExistence.Universe
 #print axioms Logos.CosmicExistence.no_entity_is_identical_to_the_whole
 #print axioms Logos.CosmicExistence.the_ground_is_not_the_universe

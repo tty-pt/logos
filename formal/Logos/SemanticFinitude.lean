@@ -25,6 +25,11 @@ corollaries lose their `hf` parameter and become unconditional theorems of Γ. T
 price is now visible in every footprint, in `#print axioms`, in the axiom registry,
 and in `formal/axiom_audit.json`.
 
+## The tag is `VOCAB`, and after 2026-10-03 it is finally the right one
+
+See `GroundTranscendence` below: the unrestricted half of this sentence was always a
+`META` bridge, and the split is what makes the two prices separately visible.
+
 ## The tag is `VOCAB`, deliberately, and this is a considered decision
 
 `SemanticFinitude` bounds one uninterpreted relation (`Means`) on one nullary sort
@@ -137,8 +142,16 @@ open Logos.AsieticChoice
 -- ============================================================================
 
 /--Tag: VOCAB
-    **Semantic finitude.** No subject means every proposition: no creature is
-    semantically omnipotent.
+    **Semantic finitude, over contingent subjects.** No *contingent* subject means every
+    proposition: no creature is semantically omnipotent.
+
+    **Scoped on 2026-10-03.** This was `∀ s, ∃ p, ¬ Means s p`. It is now
+    `∀ s, ContingentSubjectKind s → ∃ p, ¬ Means s p`, so that the three divine Persons —
+    who are of the *necessary* kind, by D-2 — are not denied total meaning-capacity by a
+    premise whose subject is a creature. The scope the corpus's own theorems need was
+    moved, not weakened, into `GroundTranscendence` immediately below; that axiom's
+    docstring gives the measurement which forced the split. No claim was withdrawn here
+    and none was added.
 
     This is the sentence F15 named as the missing lemma, and the corpus already paid
     it seventeen times as an anonymous explicit premise before it was ever declared.
@@ -158,8 +171,53 @@ open Logos.AsieticChoice
 
     **Provenance.** Declared 2026-09-28, promoted from a ◈ `def`-stipulation because a
     `def` premise is invisible to `#print axioms` and no footprint tool in the
-    repository could price it.  Footprint: `{Means, Subject}`. -/
-axiom SemanticFinitude : ∀ s : Subject, ∃ p : Prop, ¬ Means s p
+    repository could price it.  Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
+axiom SemanticFinitude : ∀ s : Subject, ContingentSubjectKind s → ∃ p : Prop, ¬ Means s p
+
+/--Tag: META
+    **Subject finitude in the unrestricted form, purchased as what it actually is.**
+
+    Stated as `∀ s, ∃ p, ¬ Means s p` — no subject of either kind means every
+    proposition — because that is the form the corpus consumes, and consumed it for a
+    reason that is *not* the one the `VOCAB` tag advertises.
+
+    **Why this had to be split out (2026-10-03, measured).** `SemanticFinitude` was
+    carrying two incompatible jobs. Its advertised job is a semantic bound on contingent
+    subjects. Its load-bearing job is that a subject with total meaning-capacity
+    *inherits* the ground's total meaning through a grounding relation
+    (`discriminating_subject_cannot_ground_the_ground`, `CanonicalAseity.lean:113-120`),
+    and that inheritance is the only thing that lets Γ prove the ground is not a subject,
+    is not externally grounded, and is the sole bearer of the divine attributes. Narrowing
+    `SemanticFinitude` to contingent subjects therefore breaks not one theorem but the
+    whole lane: `canonical_aseity`, `no_grounding_potency`, `divine_pure_actuality`,
+    `divine_simplicity`, `exactly_one_universal_modal_ground` and the six
+    `ofGround_sole_*` bearers all consume the bound applied to an *arbitrary* subject.
+
+    **The tag was the tell.** `VOCAB` is defined as asserting no connection between
+    entities (`AGENTS.md`). An axiom whose consequence is that nothing grounds the ground
+    and the ground alone bears the divine attributes does assert a connection — it is a
+    metaphysical bridge wearing a vocabulary label, and thirteen theorems were being
+    priced at `{Means, Subject}` for a claim that was never vocabulary. The split does not
+    change what Γ derives; it changes what Γ is *seen* to pay.
+
+    **What is bought, exactly.** One `META` axiom. Rejecting it admits a semantically
+    total subject, which then grounds the ground and can share its attributes, collapsing
+    `CanonicalAseity`, `SoleUniversalGrounding` and every `ofGround_sole_*` bearer at
+    once. `subject_finitude_is_consistent` below is that model.
+
+    **Relationship to `SemanticFinitude`.** `GroundTranscendence` is the *stronger* of the
+    two, and it entails the scoped one: a subject that means every proposition fails
+    `SemanticFinitude` whatever its kind, so `GroundTranscendence` alone implies
+    `SemanticFinitude`. The converse does not hold, which is the whole content of
+    `subject_finitude_is_consistent` below — a necessary subject may be all-seeing while
+    `SemanticFinitude` still holds, because it has no contingent subject to deny.
+
+    So this is a *refinement*, not an independence: together they are exactly the old single
+    axiom, and neither drops a commitment Γ already had. `SemanticFinitude` is the honest
+    *semantic* reading and `GroundTranscendence` the *transcendence* reading, and the corpus
+    now says which is which instead of charging a metaphysical price to a vocabulary tag.
+    Footprint: `{Means, Subject}`. -/
+axiom GroundTranscendence : ∀ s : Subject, ∃ p : Prop, ¬ Means s p
 
 -- ============================================================================
 -- Section 1: The ten corollaries
@@ -177,108 +235,134 @@ axiom SemanticFinitude : ∀ s : Subject, ∃ p : Prop, ¬ Means s p
 
 /-- Exactly one universal modal ground exists — the unicity conjunct now rests on the
     *declared* finitude axiom rather than an anonymous premise.
-    Footprint: `{Means, NecessarySubjectKind, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`. -/
 theorem exactly_one_universal_modal_ground_stipulated :
     ∃ g : Entity, UniversalModalGround g ∧
       (∀ g' : Entity, UniversalModalGround g' → g' = g) :=
-  exactly_one_universal_modal_ground SemanticFinitude
+  exactly_one_universal_modal_ground GroundTranscendence
 
 /-- The ground of reality is the sole universal grounding principle, on the declared
     finitude axiom.
-    Footprint: `{Means, NecessarySubjectKind, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`. -/
 theorem ofGround_sole_universal_grounding_stipulated :
     SoleUniversalGrounding Entity.ofGround :=
-  ofGround_sole_universal_grounding SemanticFinitude
+  ofGround_sole_universal_grounding GroundTranscendence
 
 /-- Canonical Aseity of the ground, on the declared finitude axiom.
-    Footprint: `{Means, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, Subject}`. -/
 theorem conditional_canonical_aseity_stipulated :
     CanonicalAseity Entity.ofGround :=
-  conditional_canonical_aseity SemanticFinitude
+  conditional_canonical_aseity GroundTranscendence
 
 /-- Modal Aseity of the ground with respect to `CanonicalExtDepAt`, on the declared
     finitude axiom.
-    Footprint: `{Means, NecessarySubjectKind, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`. -/
 theorem ofGround_modal_aseity_conditional_stipulated :
     Aseity World Entity CanonicalExtDepAt Entity.ofGround :=
-  ofGround_modal_aseity_conditional SemanticFinitude
+  ofGround_modal_aseity_conditional GroundTranscendence
 
 /-- Divine Pure Actuality of the ground (actus purus), on the declared finitude axiom.
-    Footprint: `{Initiates, Means, NecessarySubjectKind, SemanticFinitude, State, Subject}`. -/
+    Footprint: `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
 theorem ofGround_divine_pure_actuality_stipulated :
     DivinePureActuality Entity.ofGround :=
-  ofGround_divine_pure_actuality SemanticFinitude
+  ofGround_divine_pure_actuality GroundTranscendence
 
 /-- The ground has zero passive grounding potency, on the declared finitude axiom.
-    Footprint: `{Means, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, Subject}`. -/
 theorem ofGround_no_grounding_potency_stipulated :
     ¬ PassiveGroundingPotency Entity.ofGround :=
-  ofGround_no_grounding_potency SemanticFinitude
+  ofGround_no_grounding_potency GroundTranscendence
 
 /-- Divine Simplicity of the ground, on the declared finitude axiom.
-    Footprint: `{Means, SemanticFinitude, Subject, propext}`. -/
+    Footprint: `{GroundTranscendence, Means, Subject, propext}`. -/
 theorem ofGround_divine_simplicity_stipulated :
     DivineSimplicity Entity.ofGround :=
-  ofGround_divine_simplicity SemanticFinitude
+  ofGround_divine_simplicity GroundTranscendence
 
 /-- The ground is non-composite (no proper ontological parts), on the declared finitude
     axiom.
-    Footprint: `{Means, SemanticFinitude, Subject, propext}`. -/
+    Footprint: `{GroundTranscendence, Means, Subject, propext}`. -/
 theorem ofGround_non_composite_stipulated :
     NonComposite Entity.ofGround :=
-  ofGround_non_composite SemanticFinitude
+  ofGround_non_composite GroundTranscendence
 
 /-- Divine Simplicity and Transcendence of the ground, on the declared finitude axiom.
-    Footprint: `{Means, SemanticFinitude, Subject, propext}`. -/
+    Footprint: `{GroundTranscendence, Means, Subject, propext}`. -/
 theorem ofGround_simplicity_and_transcendence_stipulated :
     DivineSimplicity Entity.ofGround ∧ TranscendentGround Entity.ofGround :=
-  ofGround_simplicity_and_transcendence SemanticFinitude
+  ofGround_simplicity_and_transcendence GroundTranscendence
 
 /-- The ground is canonically aseitous but not itself asietic, on the declared finitude
     axiom.
-    Footprint: `{Means, SemanticFinitude, Subject}`. -/
+    Footprint: `{GroundTranscendence, Means, Subject}`. -/
 theorem ground_is_canonically_aseitous_but_not_asietic_stipulated :
     CanonicalAseity Entity.ofGround ∧ ¬ Asiety Entity.ofGround :=
-  ground_is_canonically_aseitous_but_not_asietic SemanticFinitude
+  ground_is_canonically_aseitous_but_not_asietic GroundTranscendence
 
 -- ============================================================================
 -- Section 2: The bound is load-bearing in both directions, machine-checked
 -- ============================================================================
 
-/-- **Falsifiability (the `ofGround`-side counter-reading).** A semantically
-    omnipotent carrier is a model of the negation of `SemanticFinitude`: take
-    `S := Unit` and `M := fun _ _ => True`, so every subject means every
-    proposition and `¬ (∀ s, ∃ p, ¬ M s p)` holds. The declared axiom is therefore
-    falsifiable, not vacuous — which is why the unicity of C320 really rests on it
-    and must be priced rather than assumed.
+/-- **Falsifiability of the semantic bound (the contingent reading).** A semantically
+    omnipotent *creature* is a model of the negation of `SemanticFinitude`: take
+    `S := Unit`, `NecessarySubjectKind := fun _ => False` so every subject is contingent,
+    and `M := fun _ _ => True`, so the sole subject means every proposition. Then
+    `SemanticFinitude` is refutable, so the semantic reading is falsifiable rather than
+    vacuous.
+
+    The model instantiates the vocabulary it denies: the kind predicate is inhabited and
+    put on the contingent side, so the refutation is of the *scoped* sentence and not an
+    artifact of an uninterpreted field (`AGENTS.md`, meaning-coherence audit).
     Footprint: `{}`. -/
 theorem semantic_omnipotence_is_consistent :
-    ∃ (S : Type) (M : S → Prop → Prop),
-      (∀ s p, M s p) ∧ ¬ (∀ s, ∃ p, ¬ M s p) := by
-  refine ⟨Unit, fun _ _ => True, fun _ _ => trivial, ?_⟩
+    ∃ (S : Type) (NK : S → Prop) (M : S → Prop → Prop),
+      (∀ s, ¬ NK s) ∧ (∀ s p, M s p) ∧
+      ¬ (∀ s, (¬ NK s → ∃ p, ¬ M s p)) := by
+  refine ⟨Unit, fun _ => False, fun _ _ => True, fun _ h => h, fun _ _ => trivial, ?_⟩
+  intro hall
+  obtain ⟨p, hp⟩ := hall () (fun h => h)
+  exact hp trivial
+
+/-- **Falsifiability of the transcendence bound.** A semantically total subject is a model
+    of the negation of `GroundTranscendence`, and such a subject is not a harmless
+    counterexample: by `discriminating_subject_cannot_ground_the_ground`
+    (`CanonicalAseity.lean:113`) it inherits the ground's total meaning through any
+    grounding relation to the ground, so it can ground the ground and share its
+    attributes. This is the collapse the axiom prevents, exhibited as a model.
+
+    Here the single subject is put on the *necessary* side, which is exactly the case the
+    scoped `SemanticFinitude` no longer rules out. So this model satisfies
+    `SemanticFinitude` — vacuously, since it has no contingent subject — while refuting
+    `GroundTranscendence`. That witnesses `SemanticFinitude ⇏ GroundTranscendence`, and it
+    does *not* witness independence in the other direction: `GroundTranscendence` entails
+    `SemanticFinitude` outright, so no model can witness its converse.
+    Footprint: `{}`. -/
+theorem subject_finitude_is_consistent :
+    ∃ (S : Type) (NK : S → Prop) (M : S → Prop → Prop),
+      (∀ s, NK s) ∧ (∀ s p, M s p) ∧
+      ¬ (∀ s, ∃ p, ¬ M s p) := by
+  refine ⟨Unit, fun _ => True, fun _ _ => True, fun _ => trivial, fun _ _ => trivial, ?_⟩
   intro hall
   obtain ⟨p, hp⟩ := hall ()
   exact hp trivial
 
-/-- **The bound does real work (the `ofGround_meansAll` side).** The registered
-    match arm `EntityMeans .ofGround p := True` gives the ground *every*
-    proposition, so the finitude axiom is exactly what keeps the ground off the
-    `Subject` sort: if some subject were the ground, that subject would mean
-    every proposition, contradicting the axiom at that subject. The proof is
-    routed through the axiom so the dependence is visible. (The conclusion is
-    also available unconditionally from `ofGround_ne_ofSubject`; the point of
-    stating it here is that it is the *bound* that forbids it, on the same
-    reading of the ground that the rest of Γ uses.)
-    Footprint: `{Means, SemanticFinitude, Subject}`. -/
+/-- **The bound does real work (the `ofGround`-side reading).** The registered match arm
+    `EntityMeans .ofGround p := True` gives the ground *every* proposition, so the
+    transcendence bound is exactly what keeps the ground off the `Subject` sort: if some
+    subject were the ground, that subject would mean every proposition, contradicting the
+    bound at that subject. The proof is routed through `GroundTranscendence` so the
+    dependence is visible and the price appears in the footprint. (The conclusion is also
+    available unconditionally from `ofGround_ne_ofSubject`; the point of stating it here is
+    that it is the *bound* that forbids it, on the same reading of the ground that the
+    rest of Γ uses.)
+    Footprint: `{GroundTranscendence, Means, Subject}`. -/
 theorem semanticFinitude_excludes_ground_from_subjects (s : Subject) :
     EntityOf s ≠ Entity.ofGround := by
   intro hEq
-  obtain ⟨p, hp⟩ := SemanticFinitude s
+  obtain ⟨p, hp⟩ := GroundTranscendence s
   have hMeans : Means s p := by
     have hAll : EntityMeans (EntityOf s) p := by
       rw [hEq]
       exact True.intro
     exact hAll
   exact hp hMeans
-
-end Logos.SemanticFinitude

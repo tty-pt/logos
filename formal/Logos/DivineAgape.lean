@@ -22,7 +22,7 @@ by projection from the subject level.
 
 Design decisions (locked with the author 2026-09-29):
 
-  * **New sort, real ontology untouched.** `DivinePerson` is a fresh abstract
+  * **New sort, real ontology untouched.** `DivineHypostasis` is a fresh abstract
     sort. The ground is provably not a `Subject` (`ofGround_ne_ofSubject`) and
     no contingent-kind subject is necessary
     (`no_subject_is_a_necessary_entity`), so a "divine person as `Subject`"
@@ -74,20 +74,20 @@ def divineReality : Entity := Entity.ofGround
     structure does not force the location; that is the content of the priced
     axioms below, where each centered person is asserted to *subsist in*
     `divineReality`. -/
-structure DivinePerson where
+structure DivineHypostasis where
   deiformEntity : Entity
 
 /-- Subsistence: a divine person has its being in the one divine reality.
     (VOCAB predicate; the "in the Godhead" conjunct every centered person
     carries.) Defined as a location-equality — by contrast, an *attribute*
     reading (self-knowledge/self-love as an intrinsic non-subsistent state)
-    carries no `DivinePerson` at all, which is the separation of Stage B. -/
-def Subsists (d : DivinePerson) : Prop :=
+    carries no `DivineHypostasis` at all, which is the separation of Stage B. -/
+def Subsists (d : DivineHypostasis) : Prop :=
   d.deiformEntity = divineReality
 
 /-- `is_divine d e`: the `TrinitarianStructure` relation — the personal center
     `d` is in the divine reality `e`. -/
-def is_divine (d : DivinePerson) (e : Entity) : Prop :=
+def is_divine (d : DivineHypostasis) (e : Entity) : Prop :=
   d.deiformEntity = e
 
 /-- The source's love of a personal object, inside the Godhead. An `opaque`
@@ -95,17 +95,17 @@ def is_divine (d : DivinePerson) (e : Entity) : Prop :=
     the love datum is a genuine commitment, never a definitional accident.
     The value `True` is hidden; the semantic content lives in this docstring:
     self-giving love — agape — aimed at a personal center. -/
-opaque DivineLove (_f _o : DivinePerson) : Prop := True
+opaque DivineLove (_f _o : DivineHypostasis) : Prop := True
 
 /-- The Word: an opaque role predicate (BearingOf pattern) whose content is
     "the subsistent divine person that is the beloved object of the essential
     self-giving" — the intellectual procession, the object. -/
-opaque IsWord (_d : DivinePerson) : Prop := True
+opaque IsWord (_d : DivineHypostasis) : Prop := True
 
 /-- The Spirit: an opaque role predicate (BearingOf pattern) whose content is
     "the subsistent divine person through whom the gift returns" — the
     receptive/returning procession, the third center. -/
-opaque IsSpirit (_d : DivinePerson) : Prop := True
+opaque IsSpirit (_d : DivineHypostasis) : Prop := True
 
 -- ============================================================================
 -- Section 2: The three priced axioms (all `Tag: META`)
@@ -118,7 +118,7 @@ The divine source's love is essential self-giving: it reaches, and sustains,
 
   Content: some divine person `f` (the source, the Father) subsists in the one
   divine reality, and its love (`DivineLove`) reaches an `o` distinct from it
-  that also subsists there. The object is *personal* (a `DivinePerson`, not a
+  that also subsists there. The object is *personal* (a `DivineHypostasis`, not a
   contingent creature, not an attribute), and the love is *directed*, in the
   `GroundBearsGood`/`DivineLove` idiom.
 
@@ -133,14 +133,14 @@ The divine source's love is essential self-giving: it reaches, and sustains,
   self-giving* — not self-love, not an intrinsic attribute. A reader who
   rejects the price rejects this axiom, and with it the whole corridor. -/
 axiom AxAgapeEssence :
-    ∃ f : DivinePerson,
-      Subsists f ∧ (∃ o : DivinePerson, o ≠ f ∧ Subsists o ∧ DivineLove f o)
+    ∃ f : DivineHypostasis,
+      Subsists f ∧ (∃ o : DivineHypostasis, o ≠ f ∧ Subsists o ∧ DivineLove f o)
 
 /-- The source center (the Father), extracted from the datum by choice. -/
-noncomputable def the_father : DivinePerson := Classical.choose AxAgapeEssence
+noncomputable def the_father : DivineHypostasis := Classical.choose AxAgapeEssence
 
 /-- The beloved center, extracted from the datum by choice. -/
-noncomputable def the_beloved : DivinePerson :=
+noncomputable def the_beloved : DivineHypostasis :=
   Classical.choose (Classical.choose_spec AxAgapeEssence).2
 
 /-- The datum unwrapped: the source subsists. -/
@@ -165,7 +165,7 @@ The beloved of the essential love subsists as the Word: the personal object of
   person in its own right, the intellectual procession — named, not invented.
 
   Refusal model (the attribute-love world): self-knowledge/self-love as an
-  intrinsic non-subsistent state — a Godhead with no `DivinePerson` at all
+  intrinsic non-subsistent state — a Godhead with no `DivineHypostasis` at all
   beyond the source's enacted content — satisfies the vocabulary and the datum's
   *agent* half while nothing is a Word. The subsistence conjunct of the
   procession is therefore load-bearing, and the "step 6" gap of the Augustinian
@@ -192,11 +192,11 @@ The self-gift returns: a third divine person, the Spirit, subsists in the
   beloved. A reader who stops at the procession of the Word rejects this axiom
   — and with it the *full* Trinity, keeping a binitarian reading. -/
 axiom AxProcessionSpirit :
-    ∃ σ : DivinePerson,
-      IsSpirit σ ∧ Subsists σ ∧ σ ≠ the_father ∧ (∀ w : DivinePerson, IsWord w → σ ≠ w)
+    ∃ σ : DivineHypostasis,
+      IsSpirit σ ∧ Subsists σ ∧ σ ≠ the_father ∧ (∀ w : DivineHypostasis, IsWord w → σ ≠ w)
 
 /-- The Spirit, extracted by choice. -/
-noncomputable def the_spirit : DivinePerson := Classical.choose AxProcessionSpirit
+noncomputable def the_spirit : DivineHypostasis := Classical.choose AxProcessionSpirit
 
 /-- The Spirit is the returning gift (role). -/
 theorem the_spirit_is_spirit : IsSpirit the_spirit :=
@@ -211,7 +211,7 @@ theorem the_spirit_ne_father : the_spirit ≠ the_father :=
   (Classical.choose_spec AxProcessionSpirit).2.2.1
 
 /-- The Spirit is other than every Word (role-distinction, second half). -/
-theorem the_spirit_ne_any_word : ∀ w : DivinePerson, IsWord w → the_spirit ≠ w :=
+theorem the_spirit_ne_any_word : ∀ w : DivineHypostasis, IsWord w → the_spirit ≠ w :=
   (Classical.choose_spec AxProcessionSpirit).2.2.2
 
 /-- The Spirit is other than the Word (instantiated at the beloved). -/
@@ -230,7 +230,7 @@ theorem the_spirit_ne_beloved : the_spirit ≠ the_beloved :=
     Footprint: `{Subject, AxAgapeEssence, Classical.choice}` (the datum; `Subject`
     and `Classical.choice` are vocabulary — the extractor's choice operator). -/
 theorem essential_love_has_necessary_object :
-    ∃ f o : DivinePerson, f ≠ o ∧ Subsists f ∧ Subsists o ∧ DivineLove f o := by
+    ∃ f o : DivineHypostasis, f ≠ o ∧ Subsists f ∧ Subsists o ∧ DivineLove f o := by
   refine ⟨the_father, the_beloved, the_beloved_distinct.symm, the_father_subsists,
     the_beloved_subsists, the_source_loves_the_beloved⟩
 
@@ -244,7 +244,7 @@ theorem essential_love_has_necessary_object :
     PROVEN↑ — no META axiom is paid here.
     Footprint: `{NecessarySubjectKind, Subject}` (vocabulary only, via
     `ofGround_necessary` and `necessary_not_contingent`). -/
-theorem agape_beloved_is_not_creature {o : DivinePerson} (h : Subsists o) :
+theorem agape_beloved_is_not_creature {o : DivineHypostasis} (h : Subsists o) :
     ¬ ContingentEntity o.deiformEntity ∧ (∀ n : Nat, o.deiformEntity ≠ Entity.ofAtom n) := by
   constructor
   · intro hc
@@ -265,7 +265,7 @@ theorem agape_beloved_is_not_creature {o : DivinePerson} (h : Subsists o) :
     priced**: pure unfolding, so the row is PROVEN, not PROVEN↑.
     Footprint: `{Subject}` (vocabulary only: `is_divine o divineReality` names
     the `Entity` sort, whose ground constructor carries `Subject`). -/
-theorem divine_object_subsists_in_godhead {o : DivinePerson} (h : Subsists o) :
+theorem divine_object_subsists_in_godhead {o : DivineHypostasis} (h : Subsists o) :
     is_divine o divineReality := by
   dsimp [Subsists, is_divine, divineReality] at h ⊢
   exact h
@@ -293,7 +293,7 @@ theorem the_spirit_is_divine : is_divine the_spirit divineReality := by
     pairwise distinctness and mutual relational distinction, sharing the one
     divine reality. `relational_distinction` is taken as distinctness itself —
     the minimal, content-honest reading available at kernel level. -/
-noncomputable def trinitarian_inhabitation : TrinitarianStructure DivinePerson Entity :=
+noncomputable def trinitarian_inhabitation : TrinitarianStructure DivineHypostasis Entity :=
   { P1 := the_father
     P2 := the_beloved
     P3 := the_spirit
@@ -305,7 +305,7 @@ noncomputable def trinitarian_inhabitation : TrinitarianStructure DivinePerson E
     divine_1 := the_father_is_divine
     divine_2 := the_beloved_is_divine
     divine_3 := the_spirit_is_divine
-    relational_distinction := fun (a b : DivinePerson) => a ≠ b
+    relational_distinction := fun (a b : DivineHypostasis) => a ≠ b
     rel_12 := the_beloved_distinct.symm
     rel_23 := the_spirit_ne_beloved.symm
     rel_13 := the_spirit_ne_father.symm
@@ -329,7 +329,7 @@ noncomputable def trinitarian_inhabitation : TrinitarianStructure DivinePerson E
     Footprint: `{Subject, AxAgapeEssence, AxProcessionWord, AxProcessionSpirit,
     Classical.choice}`. -/
 theorem agape_entails_tripersonality :
-    ∃ t : TrinitarianStructure DivinePerson Entity,
+    ∃ t : TrinitarianStructure DivineHypostasis Entity,
       t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧
         IsWord the_beloved ∧ IsSpirit the_spirit :=
   ⟨trinitarian_inhabitation, rfl, rfl, rfl, AxProcessionWord, the_spirit_is_spirit⟩
@@ -338,7 +338,7 @@ theorem agape_entails_tripersonality :
     puts the divine centers inside the necessary realm, not merely somewhere
     real. The one-line corollary of C508's first conjunct, isolated and named
     because it is what lets the NECESSARY audit's two-genera closure (C516)
-    apply to the Trinity: a subsistent `DivinePerson`'s `deiformEntity` is
+    apply to the Trinity: a subsistent `DivineHypostasis`'s `deiformEntity` is
     either the ground or a necessary-kind subject's correlate — and by
     `Subsists` it is the ground, so the centers sit in the *first* genus.
 
@@ -348,7 +348,7 @@ theorem agape_entails_tripersonality :
     modal vocabulary, and it is filed separately because the author's position
     (the ground *is* personal) needs the modal form to be legible.
     Footprint: `{NecessarySubjectKind, Subject}`. -/
-theorem subsisting_centre_is_necessary {d : DivinePerson} (h : Subsists d) :
+theorem subsisting_centre_is_necessary {d : DivineHypostasis} (h : Subsists d) :
     NecessaryEntity d.deiformEntity := by
   dsimp [Subsists, divineReality] at h
   rw [h]
@@ -360,7 +360,7 @@ theorem subsisting_centre_is_necessary {d : DivinePerson} (h : Subsists d) :
     named, reusable fact rather than a side condition. Location identity only —
     no claim about shared nature, property or act.
     Footprint: `{Subject}`. -/
-theorem co_subsistence_is_co_location {a b : DivinePerson} (ha : Subsists a) (hb : Subsists b) :
+theorem co_subsistence_is_co_location {a b : DivineHypostasis} (ha : Subsists a) (hb : Subsists b) :
     a.deiformEntity = b.deiformEntity := by
   dsimp [Subsists, divineReality] at ha hb
   exact ha.trans hb.symm

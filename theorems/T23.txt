@@ -37,7 +37,7 @@ theorem ofGround_universal_modal_ground :
 
 Pegada auditada: `{Means, Subject}` (apenas vocabulário). Para todo o mundo possível `w`
 e toda a entidade `e` existente em `w`, `Entity.ofGround` fundamenta ontologicamente `e`
-(`GroundsEntity Entity.ofGround e`).
+(`OneEssence Entity.ofGround e`).
 
 C205 — Fundamentação assimétrica e não-recíproca:
 

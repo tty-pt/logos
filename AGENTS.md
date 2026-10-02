@@ -24,7 +24,7 @@ prose and the Lean theorem ledger agree (see `formal/GAPMAP.md`).
 
 `README.md` (repo root) is the generated **argument**: ~500 fully-visible lines,
 zero collapsed blocks, the thesis (C553 FACT) by line 60. `investigations/ledger.md`
-is the generated **audit**: the 14 step-by-step chain blocks, the 39 classical-attribute
+is the generated **audit**: the 14 step-by-step chain blocks, the 40 classical-attribute
 rows with full prose, all 40 natural-deduction traces, the ASCII flowchart, the
 frontier list, and the full per-step prose. Both files are emitted by one pass of
 `scripts/build_deduction.py` over the kernel; the ledger is a superset of the old
@@ -130,6 +130,44 @@ cd .. && python3 scripts/audit_footprints.py && python3 scripts/audit_goals.py &
   `lake env lean`, giving the exact transitive kernel axiom set (incl. CL) for every
   node. The graph's own `customAxioms` field undercounts transitively and is used
   only for the dependency edges, never for footprints.
+- **Consistency gate (binding, 2026-10-03).** `scripts/check_consistency.py` fails the build if
+  the kernel derives `False`. `audit_footprints.py` forbids only `sorryAx`, and `#print axioms`
+  reports a declaration's axiom set without ever asking whether the theory is *consistent* — an
+  inconsistent theory prints the same "0 substantive axioms" rows as a sound one. That is exactly
+  how S4's `TrinitarianPersonalBridge` came to assert `EntityOf a = divineReality`, which
+  `ofGround_ne_ofSubject` (`FoundationalUnicity.lean:134`) refutes; the whole corpus derived
+  `False` and every badge and price in the tree was vacuous. Two gates, complementary because
+  neither suffices alone: (A) `formal/consistency/FalseNotDerivable.lean` closes `False` from the
+  bridge plus that theorem and **must fail to compile** — the script rejects a timeout, an OOM kill
+  and a depth-limit crash as non-answers, and rejects any error raised inside `Logos/` (a broken
+  import makes the guard fail for an unrelated reason); (B) a syntactic scan rejects
+  `EntityOf _ = divineReality`, `EntityOf _ = Entity.ofGround` and the reversed orientations in any
+  `axiom` statement, which covers the positions and spellings the probe is pinned away from. Gate B
+  is generated as a *product* of the two spellings (`EntityOf` is a definition for
+  `Entity.ofSubject`, `Entity.lean:29`) and the two orientations — hand-listing the shapes is how
+  three of the eight went missing, one of which a negative test showed slipping through. Gate B
+  also rejects an `axiom` with a missing or out-of-vocabulary `Tag:`, and rejects any declared-axiom
+  count other than the pinned `EXPECTED_AXIOM_STATEMENTS` (39: 18 VOCAB / 6 SEM / 13 META /
+  2 TRANS). **The axiom count is pinned deliberately** — deleting an axiom is the one edit that
+  silently lowers every price in the corpus, since no badge moves and no other audit notices. Bump
+  the constant in the same change as a deliberate addition or removal. The audit *sizes*
+  (`axiom_audit.json`, `goal_audit.json`) are deliberately **not** pinned there; they move with every
+  theorem and are checked by `scripts/test_goal_audit.py`.
+  `formal/consistency/` sits outside `lean_lib Logos`, so `lake build` never sees it. **A green
+  compile of the guard is a failure, not a success.** Run it before trusting any regenerated
+  artifact; a footprint table computed from an unsound kernel is void even though nothing in it
+  looks wrong.
+  **The census is itself gated (binding, 2026-10-03).** The pin was 40 until
+  `scripts/test_axiom_census.py` showed the parser was counting prose: `Logos/AsieticChoice.lean:19`
+  is `axiom of Γ**:` inside a `/- -/` comment and matched as an axiom named `of`, tagged `SEM` by
+  docstring inheritance — so the old "40" was 39 axioms plus a phantom and the old "7 SEM" was 6 plus
+  the phantom. `lean_comment_lines` now skips line, block and nested comments (tracking string
+  literals), and the true census is **39 = 18 VOCAB + 6 SEM + 13 META + 2 TRANS**, cross-checked
+  against `depgraph.json`'s 39 `axiom` nodes. This also closed a laundering vector in the one edit
+  the pin exists to catch: delete a real axiom, add any comment line beginning `axiom `, and the
+  count used to hold steady. **Never assert an axiom count by eye — run
+  `python3 scripts/test_axiom_census.py`, which is the only place the number is derived.** A count
+  cannot see a phantom, which is why this needed its own gate.
 - The script is stdlib-only; it parses `formal/Logos/*.lean` (declarations + line numbers),
   `formal/GAPMAP.md` (claim IDs, prose refs), `axiom_audit.json` (authoritative
   footprints), and `depgraph.json` (nodes with kinds, edges), and renders
@@ -189,7 +227,7 @@ cd .. && python3 scripts/audit_footprints.py && python3 scripts/audit_goals.py &
   `scripts/build_deduction.py::_lint_readme` enforces caps, catalogue absence, and banned
   snippets machine-checked; the facade rule is enforced in review.
 - **Two-tier split (binding, 2026-09-29; see `READINGPATH.md`).** The reading path is
-  the argument and nothing else: ≤700 visible lines (amended 2026-09-30, twice: 520 → 522, then 522 → 700 when the cremation became derivations rather than badges), zero `<details>`, no chain blocks,
+  the argument and nothing else: ≤1715 visible lines (amended repeatedly as the argument grew: 520 → 522, then 522 → 700 when the cremation became derivations rather than badges, then to the enforced 1715 via Phase 2/3 and plan S3 — see `README_VISIBLE_BUDGET` in `scripts/build_deduction.py:13546`, enforced by `scripts/test_argument_surface.py:83`), zero `<details>`, no chain blocks,
   no ASCII art, no retired rows, no paragraph over 300 chars outside the locked score
   block, FACT by line 60. Everything moved out lives in generated
   `investigations/ledger.md`, and the move is checked, not asserted

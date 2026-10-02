@@ -141,7 +141,7 @@ namespace Logos.LovesAsGround
 open Logos.Semantics (World TV)
 open Logos.Agency (Subject State Initiates NecessarySubjectKind ContingentSubjectKind)
 open Logos.Entity (Entity ExistsAt EntityOf EntityExistsAt SubjectExistsAt actualWorld)
-open Logos.RecoveredOntologicalGround (EntityMeans GroundsEntity)
+open Logos.RecoveredOntologicalGround (EntityMeans OneEssence)
 open Logos.Love (Loves)
 open Logos.TheologicalModalHardening
     (ActualEntity ContingentEntity NecessaryEntity necessary_not_contingent)
@@ -211,11 +211,11 @@ theorem a_meaningful_contingent_entity_exists
 -- Section 1: The ground as "merely a mathematical ground", machine-checked
 -- ============================================================================
 
-/-- The ground of reality grounds every entity whatsoever: `GroundsEntity` transfers
+/-- The ground of reality grounds every entity whatsoever: `OneEssence` transfers
     meaning, and the ground's meaning-capacity is stipulated to bear all of it.
     Footprint: `{Means, Subject}` (vocabulary-only — the transfer is vacuous, which is
     exactly the point of the next theorem). -/
-theorem ground_grounds_every_entity (t : Entity) : GroundsEntity Entity.ofGround t := by
+theorem ground_grounds_every_entity (t : Entity) : OneEssence Entity.ofGround t := by
   intro p _hEM
   exact True.intro
 
@@ -231,7 +231,7 @@ theorem atoms_bear_no_meaning (p : Prop) : ¬ EntityMeans (Entity.ofAtom 0) p :=
     to bear.
     Footprint: `{Means, Subject}`. -/
 theorem ground_grounds_the_meaningless :
-    GroundsEntity Entity.ofGround (Entity.ofAtom 0) :=
+    OneEssence Entity.ofGround (Entity.ofAtom 0) :=
   ground_grounds_every_entity (Entity.ofAtom 0)
 
 /-- Universal modal grounding of the ground, in the library's own form. Retained so the
@@ -298,7 +298,7 @@ A necessary bearer holds a directional good toward a target, with content `p`.
 
 **Why a primitive and not a fair definition.** The ground's relation to the cosmos is
 supposed to be *directional* — good *toward* something — and the library's grounding
-vocabulary can express only undirected sufficiency (`GroundsEntity g e := ∀ p,
+vocabulary can express only undirected sufficiency (`OneEssence g e := ∀ p,
 EntityMeans e p → EntityMeans g p`, which the ground satisfies vacuously, including for an
 entity bearing no meaning at all: `ground_grounds_the_meaningless`). The one content
 predicate available, `EntityMeans`, is a *capacity* of the target, not an attitude of the
@@ -315,7 +315,7 @@ below fails. It therefore introduces no inconsistency and forces nothing; it onl
 the relational shape that the vocabulary lacked.
 
 Philosophical cost: Γ acquires a primitive directed relation at the entity level. This is
-new vocabulary, and it is admitted as such — it is *not* reducible to `GroundsEntity`,
+new vocabulary, and it is admitted as such — it is *not* reducible to `OneEssence`,
 whose `∀ p, …` form cannot express a direction. Note it does not conflict with
 `ofGround_meansAll` (`Stipulations.lean:60-61`), which fixes the ground's
 `EntityMeans` at `True`: `GroundBearsGood` is a relation over a *pair* with a content
@@ -470,7 +470,7 @@ theorem meaningless_entities_cannot_be_loved :
     ground": the two relations differ, and they differ on an entity bearing no meaning.
     Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject}`. -/
 theorem grounding_reaches_what_love_cannot :
-    GroundsEntity Entity.ofGround (Entity.ofAtom 0) ∧
+    OneEssence Entity.ofGround (Entity.ofAtom 0) ∧
       ¬ ∃ a : Prop, GroundLoves Entity.ofGround (Entity.ofAtom 0) a :=
   ⟨ground_grounds_the_meaningless, meaningless_entities_cannot_be_loved⟩
 
@@ -478,7 +478,7 @@ theorem grounding_reaches_what_love_cannot :
     every contingent entity is loved.
     Footprint: `{GroundBearsGood, Means, NecessarySubjectKind, Subject, propext}`. -/
 theorem grounding_is_total_but_love_is_not :
-    (∀ t : Entity, GroundsEntity Entity.ofGround t) ∧
+    (∀ t : Entity, OneEssence Entity.ofGround t) ∧
       ¬ (∀ t : Entity, ContingentEntity t → ∃ a : Prop, GroundLoves Entity.ofGround t a) := by
   refine ⟨ground_grounds_every_entity, ?_⟩
   rintro hall

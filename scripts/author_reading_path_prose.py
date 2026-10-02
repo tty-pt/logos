@@ -141,7 +141,7 @@ d["reading_sections"] = [
         "title": "12. The Necessary Ground, and Where Necessity Stops Working",
         "body": [
             "`Entity.ofGround` is necessary and the **sole universal modal ground**, on one "
-            "declared VOCAB bound (`SemanticFinitude`: no subject means every proposition). "
+            "declared META bound (`GroundTranscendence`: no subject means every proposition, unrestricted). "
             "From it follow aseity, simplicity, pure actuality, foundational "
             "omnipresence/omniscience/omnipotence, immutability, and everlasting/atemporal — "
             "the last two as definitional corollaries of world-rigid existence, with **no "

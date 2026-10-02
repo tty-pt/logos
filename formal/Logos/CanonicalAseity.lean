@@ -42,7 +42,7 @@ open Logos.Core
 open Logos.Semantics (World)
 open Logos.Entity (Entity EntityOf ExistsAt)
 open Logos.Agency (Subject Means)
-open Logos.RecoveredOntologicalGround (EntityMeans GroundsEntity ActualEntity)
+open Logos.RecoveredOntologicalGround (EntityMeans OneEssence ActualEntity)
 open Logos.ModalPossibilityFrontier (Aseity)
 
 -- ============================================================================
@@ -53,7 +53,7 @@ open Logos.ModalPossibilityFrontier (Aseity)
     and `g` is distinct from `e`.
     Footprint: `{Means, Subject}`. -/
 def ExternalGrounding (g e : Entity) : Prop :=
-  g ≠ e ∧ GroundsEntity g e
+  g ≠ e ∧ OneEssence g e
 
 /-- Canonical aseity of an entity: no distinct entity ontologically grounds `e`.
     Footprint: `{Means, Subject}`. -/
@@ -94,7 +94,7 @@ theorem false_meaning_cannot_ground_true_meaning
     (including `False`), while an atomic entity means no proposition.
     Footprint: `{Means, Subject}`. -/
 theorem atom_cannot_ground_the_ground (n : Nat) :
-    ¬ GroundsEntity (Entity.ofAtom n) Entity.ofGround := by
+    ¬ OneEssence (Entity.ofAtom n) Entity.ofGround := by
   intro hGr
   have hEM : EntityMeans Entity.ofGround False := trivial
   have hGM : EntityMeans (Entity.ofAtom n) False := hGr False hEM
@@ -112,7 +112,7 @@ theorem no_atom_externally_grounds_the_ground (n : Nat) :
     Footprint: `{Means, Subject}`. -/
 theorem discriminating_subject_cannot_ground_the_ground (s : Subject)
     (hDiscrim : ∃ p : Prop, ¬ Means s p) :
-    ¬ GroundsEntity (EntityOf s) Entity.ofGround := by
+    ¬ OneEssence (EntityOf s) Entity.ofGround := by
   intro hGr
   obtain ⟨p, hNotMeans⟩ := hDiscrim
   have hEM : EntityMeans Entity.ofGround p := trivial

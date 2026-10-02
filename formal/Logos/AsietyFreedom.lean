@@ -24,11 +24,21 @@ stipulation, no `Act`, no `Initiates`, and no `AxTwoSubjects`.
 **L2 is a declared stipulation, not a derivation.** It cannot be derived, for three independent
 reasons, all recorded in `AsietyFreedom.md` §2.2:
 
-1. `GroundsEntity` is **vacuous**: `EntityMeans Entity.ofGround p` is `True` by the
+1. `OneEssence` is **vacuous**: `EntityMeans Entity.ofGround p` is `True` by the
    world-rigid constructor's match arm, so `ground_grounds_every_entity` is
    `intro p _; exact True.intro` (`LovesAsGround.lean:194`) and the ground even grounds
    meaningless entities. The module that declares it says the transfer "is vacuous, which is
-   exactly the point".
+   exactly the point". **RE-ANNOTATED at S2 (2026-10-02), plan
+   `TrinitarianPersonalGround.lean (DOCTRINE ROW 3 / AUTHOR DECISION note)`:** the vacuity is not a defect to be repaired and not
+   a reason the transfer is weak — it is **load-bearing**, and it is what marks the sharing as
+   *transferred* rather than *exercised*. Read as evidence of shallowness it says the opposite of
+   what it is evidence of. Concretely: the ground is *not* an asietic entity
+   (`TrinitarianPersonalGround.ground_is_not_a_fourth_chooser`, `{}`), and its scope is total
+   while it is not a chooser (`TrinitarianPersonalGround.ground_scope_does_contain_incompatibles`,
+   `{}`) — **plenitude of scope is not freedom**, because freedom in Γ is `Asiety`, which
+   requires being a `Subject`. So there is nothing for the ground to *do* here that is not the
+   three persons' doing; the whole content of the stipulation is the transfer. Deleting the
+   vacuous premise would make the signature cleaner and the doctrine weaker.
 2. `GroundsRightWrong` is **definitionally** `∃ p q, Chooses s p q` (C168) — subject-level,
    already collapsed to free will, carrying no ground content.
 3. The **substantive** grounding relation is `BLOCKED` with a named lemma (C228).
@@ -43,8 +53,11 @@ in §3 below.
 
 - **Not an existence theorem.** The right/wrong fact `Core.rightWrongDistinction : ¬ N_T ∧ ¬ N_F`
   (`:145`) is a fact about *contents*; it quantifies over no `Subject`, and
-  `rightWrongFactYieldsNoChooser` proves it is compatible with a meaning-vocabulary in which no
-  subject means anything. So the Creator-sharing step is **conditional**, and its existence half is
+  `rightWrongFactYieldsNoChooser` proves it is compatible with a meaning-vocabulary that **has
+  order and has signification and still has no chooser** — every subject means at most one content.
+  (Repaired 2026-10-03: the witness used to mean *nothing*, and that was forced on it —
+  `pairwise_denied_forces_meaninglessness` proves the old form admitted only degenerate models.)
+  So the Creator-sharing step is **conditional**, and its existence half is
   recorded as not derivable rather than asserted. The pre-existing unconditional route still costs
   `AxTwoSubjects` (META), as `AsieticChoice.trueChoice_exists` already discloses.
 - **Not a claim that the ground chooses.** `AsietyFreedomOfGround` quantifies over *subjects* and
@@ -87,7 +100,7 @@ open Logos.Entity (Entity EntityOf)
 open Logos.Agency (Subject Means)
 open Logos.Alternatives (Incompatible)
 open Logos.Choice (Chooses FreeWill)
-open Logos.RecoveredOntologicalGround (GroundsEntity)
+open Logos.RecoveredOntologicalGround (OneEssence)
 open Logos.NecessityEternity (ofGround_ne_ofSubject)
 open Logos.AsieticChoice (ContestedContent contested_content OpenAlternative TrueChoice Asiety)
 open Logos.IndubitableNormativeFreeWill (GenuineNormativity)
@@ -102,13 +115,22 @@ open Logos.IndubitableNormativeFreeWill (GenuineNormativity)
 
     This is a **stipulation ◈** (`Tag: META`), registered as `asietyFreedom_ofGroundFreedom` in
     `Stipulations.lean`. It is not an axiom and does not move the declared-axiom count, and it is
-    not derivable: `GroundsEntity` is vacuous, `GroundsRightWrong` is definitionally `FreeWill`
+    not derivable: `OneEssence` is vacuous, `GroundsRightWrong` is definitionally `FreeWill`
     (C168), and the substantive grounding relation is `BLOCKED` (C228).
 
-    The `GroundsEntity` premise is retained because it is the library's own grounding relation,
+    The `OneEssence` premise is retained because it is the library's own grounding relation,
     and it is **vacuous by construction** — `EntityMeans Entity.ofGround p` is `True`. All the
     weight therefore sits in the leading universal quantifier, and the countermodels below price
     exactly that quantifier.
+
+    **The vacuity is load-bearing, not a defect** (re-annotated at S2, plan
+    `TrinitarianPersonalGround.lean (DOCTRINE ROW 3 / AUTHOR DECISION note)`). It is the marker that the ground's freedom is
+    **transferred** to the three persons and not **exercised** by a fourth chooser: the ground is
+    provably not asietic (`TrinitarianPersonalGround.ground_is_not_a_fourth_chooser`, `{}`), and
+    the ground's scope, though total, is not freedom
+    (`TrinitarianPersonalGround.ground_scope_does_contain_incompatibles`, `{}`) because freedom
+    here is `Asiety`, which requires being a `Subject`. So the premise is kept *and* named vacuous
+    — deleting it would tidy the signature and weaken the doctrine it is evidence for.
 
     **Read the footprint with this in mind.** `{Means, Subject}` is *only* Γ's vocabulary: those
     are the two axioms the word `Subject` and the word `Means` carry, nothing more. The
@@ -117,7 +139,7 @@ open Logos.IndubitableNormativeFreeWill (GenuineNormativity)
     `Stipulations.lean` and badged in the README: the badge is the only place the price is visible.
     Footprint: `{Means, Subject}` (vocabulary only; the stipulation is a `def`, not an `axiom`). -/
 def AsietyFreedomOfGround : Prop :=
-  ∀ (s : Subject) (p q : Prop), GroundsEntity Entity.ofGround (EntityOf s) →
+  ∀ (s : Subject) (p q : Prop), OneEssence Entity.ofGround (EntityOf s) →
     Asiety (EntityOf s) → TrueChoice s p q
 
 /-- `AsietyFreeWill s`: `s`'s true freedom is the ground's freedom, shared with `s` — the
@@ -169,12 +191,12 @@ theorem weakChoice_implies_freeWill {s : Subject} {p q : Prop}
     extension beyond the witness is the entire content of the stipulation and the reason it is not
     free (`asietyAloneDoesNotYieldTrueChoice`).
 
-    The `GroundsEntity` premise is vacuous (`EntityMeans Entity.ofGround p` is `True`), so what
+    The `OneEssence` premise is vacuous (`EntityMeans Entity.ofGround p` is `True`), so what
     remains after the vocabulary is exactly the stipulated universal — and, being a `def`, it does
     not appear in the footprint at all.
     Footprint: `{Means, Subject}` (vocabulary only; the stipulation is a `def`, not an `axiom`). -/
 theorem asietyFreedom_yields_trueChoice (h : AsietyFreedomOfGround) {s : Subject} {p q : Prop}
-    (hG : GroundsEntity Entity.ofGround (EntityOf s)) (hA : Asiety (EntityOf s)) :
+    (hG : OneEssence Entity.ofGround (EntityOf s)) (hA : Asiety (EntityOf s)) :
     TrueChoice s p q :=
   h s p q hG hA
 
@@ -184,23 +206,26 @@ theorem asietyFreedom_yields_trueChoice (h : AsietyFreedomOfGround) {s : Subject
     author's phrasing reads the same inference as "which is shared with us by the creator". Two
     declarations for it would be one proposition wearing two C-ids, so there is one.
 
-    The `GroundsEntity` premise is **vacuous** (`EntityMeans Entity.ofGround p` is `True`), which
+    The `OneEssence` premise is **vacuous** (`EntityMeans Entity.ofGround p` is `True`), which
     is why it is named `_hG`: it is retained because it is the library's own grounding relation,
     and it is named as vacuous rather than deleted so that the `{}` footprint cannot be mistaken
-    for depth (rule R3).
+    for depth (rule R3). The vacuity is load-bearing, not a defect — it marks the freedom as
+    *transferred* rather than *exercised*, since the ground is provably no chooser
+    (`TrinitarianPersonalGround.ground_is_not_a_fourth_chooser`, `{}`). Re-annotated at S2 per
+    `TrinitarianPersonalGround.lean (DOCTRINE ROW 3 / AUTHOR DECISION note)`.
     Footprint: `{Means, Subject}` (vocabulary only). -/
 theorem asietyFreedom_yields_asietyFreeWill (h : AsietyFreedomOfGround) {s : Subject}
-    (_hG : GroundsEntity Entity.ofGround (EntityOf s)) (hA : Asiety (EntityOf s)) :
+    (_hG : OneEssence Entity.ofGround (EntityOf s)) (hA : Asiety (EntityOf s)) :
     AsietyFreeWill s :=
   ⟨h, hA⟩
 
 /-- `AsietyFreeWill` yields true choice — the direction the author described as "gives rise to
     true choice". The whole step rests on the stipulated first conjunct; the second conjunct
-    supplies the witness. The `GroundsEntity` premise is vacuous again (R3), and is used here
+    supplies the witness. The `OneEssence` premise is vacuous again (R3), and is used here
     because the transfer does consume it, not merely to keep the signature uniform.
     Footprint: `{Means, Subject}` (vocabulary only). -/
 theorem asietyFreeWill_yields_trueChoice {s : Subject} {p q : Prop} (h : AsietyFreeWill s)
-    (hG : GroundsEntity Entity.ofGround (EntityOf s)) : TrueChoice s p q :=
+    (hG : OneEssence Entity.ofGround (EntityOf s)) : TrueChoice s p q :=
   h.1 s p q hG h.2
 
 /-!
@@ -247,16 +272,46 @@ theorem frameContingencyDoesNotBindAPair :
   intro h
   exact h
 
+/-- **The old witness was FORCED to be degenerate — a theorem, not a reading.** The pre-repair
+    second conjunct was `¬ (∃ s : S, ∃ p q : Prop, M s p ∧ M s q)`, which does **not** require
+    `p` and `q` to be distinct. So `p := q` witnesses it, and the conjunct is *equivalent* to
+    `¬ ∃ s p, M s p` — meaninglessness. Every possible witness of the old statement was therefore
+    a world in which nothing is meant, which is exactly the uninterpreted-signature artifact
+    `AGENTS.md`'s meaning-coherence rule forbids, and it is why `M := fun _ _ => False` was not a
+    lazy choice but the only one. Keep this lemma: it is the evidence that the repair was
+    necessary rather than cosmetic, and it is what `rightWrongFactYieldsNoChooser`'s `p ≠ q`
+    conjunct now excludes.
+    Footprint: `{}`. -/
+theorem pairwise_denied_forces_meaninglessness (M : Unit → Prop → Prop)
+    (h : ¬ (∃ s : Unit, ∃ p q : Prop, M s p ∧ M s q)) : ¬ (∃ s : Unit, ∃ p : Prop, M s p) :=
+  fun ⟨s, p, hM⟩ => h ⟨s, p, p, hM, hM⟩
+
 /-- The right/wrong fact — "right and wrong cannot not exist",
     `Core.rightWrongDistinction : ¬ N_T ∧ ¬ N_F` (`Core.lean:145`, `{}`) — is a fact about
-    **contents**. It is compatible with a meaning-vocabulary in which no subject means anything,
-    so it cannot by itself deliver the co-signification of any pair, and the existence half of the
-    Creator-sharing step is not derivable from it.
+    **contents**. It does not deliver the co-signification of any pair, so the existence half of the
+    Creator-sharing step is not derivable from it. **Repaired 2026-10-03: the witness now
+    instantiates the vocabulary it denies.**
 
-    The first conjunct is the author's named fact, already `PROVEN` in pure logic; the second
-    **exhibits** a one-element subject sort and a meaning-vocabulary that means nothing, in which
-    no subject means any pair. They are joined because the joint statement is the honest one: the
-    fact holds, and it is silent on choosers.
+    The repair, and why the old form had to be replaced rather than re-witnessed. The previous
+    second conjunct was `¬ (∃ s p q, M s p ∧ M s q)`. With no `p ≠ q`, that is *equivalent* to
+    `¬ ∃ s p, M s p` (see `pairwise_denied_forces_meaninglessness`, proved above from `p := q`), so
+    it admits **only** models in which nothing is meant — a self-refuting artifact of an
+    uninterpreted signature field, reported at `{}`. There was no meaning-coherent witness to find.
+
+    The repaired model is a world that **has** order, **has** signification, and still has no
+    chooser: some subject means `True` (signification instantiated), `True` and `False` are
+    granted as incompatible contents (order instantiated, via Γ's own
+    `Alternatives.Incompatible p q := ¬ (p ∧ q)`), and no subject ever means **two distinct**
+    contents — each subject means at most one, witnessed by `M := fun _ p => p = True`. So order
+    and meaning are present and the denial survives. This is the shape
+    `NegativeRetorsionSignature.objectivity_grounded` uses for C382/C385, and the reason the
+    `_uniq` here is not cosmetic.
+
+    **Why the denial is honest.** `M` and `T` share no vocabulary: the right/wrong fact
+    quantifies only over truth, so it cannot constrain a meaning relation at all. The model shows
+    a vocabulary with genuine order and genuine signification in which no chooser exists, so the
+    truth-facts cannot manufacture one. `{}` is now a real price for a real statement — **not** the
+    `{}` of a `True` proposition.
 
     A note on the shape. The second conjunct is `∃`, not `∀` over vocabularies: no `False` follows
     from `M s p` for an arbitrary `M`, so a universally quantified form would have been unsound
@@ -264,10 +319,16 @@ theorem frameContingencyDoesNotBindAPair :
     Footprint: `{}`. -/
 theorem rightWrongFactYieldsNoChooser :
     (¬ N_T ∧ ¬ N_F) ∧
-      ∃ (S : Type) (M : S → Prop → Prop), ¬ (∃ s : S, ∃ p q : Prop, M s p ∧ M s q) :=
-  ⟨rightWrongDistinction, Unit, fun _ _ => False, fun h => by
-    obtain ⟨s, p, q, hM⟩ := h
-    exact hM.1⟩
+      ∃ (S : Type) (M : S → Prop → Prop),
+        (∃ s : S, ∃ p : Prop, M s p) ∧
+        (∃ p q : Prop, Incompatible p q ∧ p ≠ q) ∧
+        (¬ ∃ s : S, ∃ p q : Prop, p ≠ q ∧ M s p ∧ M s q) :=
+  ⟨rightWrongDistinction, Unit, fun _ p => p = True,
+    ⟨(), True, rfl⟩,
+    ⟨True, False, fun h => h.2, fun h => h.mp trivial⟩,
+    by
+      rintro ⟨s, p, q, hpq, h1, h2⟩
+      exact hpq (h1.trans h2.symm)⟩
 
 /-- **Coherence with the previous batch: the ground is still not a chooser.** C285 proved
     `¬ ∃ s, EntityOf s = Entity.ofGround`; this restates it in the present vocabulary, so the new
@@ -296,9 +357,9 @@ theorem groundIsNotASharerOfAsietyFreeWill :
 theorem asietyFreedom_summary :
     (∀ (s : Subject) (p q : Prop), GenuineNormativity s p q → Asiety (EntityOf s)) ∧
       ((h : AsietyFreedomOfGround) → ∀ (s : Subject) (p q : Prop),
-        GroundsEntity Entity.ofGround (EntityOf s) → Asiety (EntityOf s) → TrueChoice s p q) ∧
+        OneEssence Entity.ofGround (EntityOf s) → Asiety (EntityOf s) → TrueChoice s p q) ∧
       (∀ (s : Subject) (p q : Prop), AsietyFreeWill s →
-        GroundsEntity Entity.ofGround (EntityOf s) → TrueChoice s p q) ∧
+        OneEssence Entity.ofGround (EntityOf s) → TrueChoice s p q) ∧
       (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) ∧
       (¬ ∃ s : Subject, EntityOf s = Entity.ofGround ∧ AsietyFreeWill s) :=
   ⟨fun _s _p _q h => weakChoice_implies_asiety h,
@@ -401,14 +462,14 @@ theorem asiety_yields_freeWill {s : Subject} (h : Asiety (EntityOf s)) : FreeWil
     deliver true choice to a subject that lacks it.**
 
     This is the machine-checked reason the ◈ step is `BLOCKED` rather than merely unasserted, and
-    it is stated over *any* relation of `GroundsEntity`'s shape rather than over Γ's particular
+    it is stated over *any* relation of `OneEssence`'s shape rather than over Γ's particular
     one, so it is not an artefact of the vacuity at `LovesAsGround.lean:194`. The countermodel
     grants, in full:
 
     - a ground `g` whose meaning-capacity is **total** — `∀ v, M g v`, which is exactly what
       ◈ `ofGround_meansAll` buys for `Entity.ofGround`;
     - the containment premise **at every entity**, `∀ e v, M e v → M g v`, which is
-      `GroundsEntity`'s definition verbatim and therefore holds at the second subject `s₁` as
+      `OneEssence`'s definition verbatim and therefore holds at the second subject `s₁` as
       well;
     - a first subject `s₀` with `I p q`, `C` and both `Means` conjuncts — genuine asiety, witnessed
       at the pair `p q`;
@@ -440,8 +501,12 @@ theorem groundingCannotDeliverTrueChoice :
 
     It is `BLOCKED` and its derivation is **refuted, not merely open**: `Core.rightWrongDistinction`
     is a fact about contents that quantifies over no `Subject`, and
-    `rightWrongFactYieldsNoChooser` (C294, `{}`) exhibits a meaning-vocabulary in which no subject
-    means anything, so the fact does not deliver the existence of a sharer. The unconditional
+    `rightWrongFactYieldsNoChooser` (C294, `{}`) exhibits a meaning-vocabulary which **grants order
+    and instantiates signification** — some subject means `True`, and `True`/`False` are granted as
+    incompatible — in which **no subject ever means two distinct contents**. So the fact does not
+    deliver the existence of a sharer. The model is *amoral rather than voiceless*: order is
+    present and only one pole is ever grasped. (Pre-2026-10-03 the witness meant *nothing*; that was
+    forced on it, not chosen — see `pairwise_denied_forces_meaninglessness`.) The unconditional
     route still costs `AxTwoSubjects` (META), as `AsieticChoice.trueChoice_exists` discloses.
 
     Naming this does not advance it. It is here so the batch's strongest negative result is a

@@ -43,7 +43,7 @@ open Logos.Core
 open Logos.Semantics (World)
 open Logos.Entity (Entity EntityOf ExistsAt)
 open Logos.Agency (Subject Means)
-open Logos.RecoveredOntologicalGround (EntityMeans GroundsEntity ActualEntity NecessaryGroundOfReality)
+open Logos.RecoveredOntologicalGround (EntityMeans OneEssence ActualEntity NecessaryGroundOfReality)
 open Logos.CanonicalAseity (ExternalGrounding CanonicalAseity conditional_canonical_aseity)
 open Logos.NecessityEternity (ofGround_necessary_ground_of_reality)
 
@@ -55,7 +55,7 @@ open Logos.NecessityEternity (ofGround_necessary_ground_of_reality)
     an entity `p` distinct from `e` that ontologically grounds `e`.
     Footprint: `{Means, Subject}`. -/
 def ProperPart (p e : Entity) : Prop :=
-  p ≠ e ∧ GroundsEntity p e
+  p ≠ e ∧ OneEssence p e
 
 /-- Mereological non-compositeness: entity `e` is not composed of any
     proper ontological parts (has no external grounding constituents).

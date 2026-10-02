@@ -37,7 +37,7 @@ is stated accurately for the first time.
   * C422 — the ground's scope is **not** the truth set (`T p := p`, so
     `p := False` refutes it), i.e. the distinction does not stand over it. This
     is C236 read in the other direction.
-  * C423 — the ground **conditions** every content-bearer (`GroundsEntity`). The
+  * C423 — the ground **conditions** every content-bearer (`OneEssence`). The
     other half of §9's gap-2: it precedes and discriminates, and is not
     discriminated by.
   * C424 — an atom does **not** obtain at such a world: the corpus's separations
@@ -62,7 +62,7 @@ namespace Logos.Precedence
 open Logos.Core (T N_T N_F rightWrongDistinction)
 open Logos.Semantics (Form World Satisfies TV)
 open Logos.Entity (Entity ExistsAt actualWorld falsityWorld)
-open Logos.RecoveredOntologicalGround (EntityMeans GroundsEntity)
+open Logos.RecoveredOntologicalGround (EntityMeans OneEssence)
 open Logos.Agency (Means)
 open Logos.NecessityEternity (Time ExistsAtTime Everlasting Atemporal)
 open Logos.DivineImmutability (StageInvariance ofGround_stage_invariance)
@@ -199,9 +199,9 @@ theorem ground_scope_is_not_the_truth_set :
 
 /-- **The ground conditions every content-bearer.** Whatever obtains at a world
     and means something is grounded by the ground, in the corpus's existing
-    `GroundsEntity` relation.
+    `OneEssence` relation.
 
-    Note that the meaning hypothesis is **not needed** — `GroundsEntity
+    Note that the meaning hypothesis is **not needed** — `OneEssence
     Entity.ofGround e` is `∀ p, EntityMeans e p → True`, which holds for every
     entity. The hypothesis is carried because §9's prose says "every being that
     stands under the distinction", and stating it makes the row readable as that
@@ -211,7 +211,7 @@ theorem ground_scope_is_not_the_truth_set :
     and it is cited there rather than re-proved for atoms.
     Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem ground_conditions_every_content_bearer (w : World) (e : Entity) :
-    ExistsAt w e → (∃ p : Prop, EntityMeans e p) → GroundsEntity Entity.ofGround e :=
+    ExistsAt w e → (∃ p : Prop, EntityMeans e p) → OneEssence Entity.ofGround e :=
   fun _ _ _ _ => trivial
 
 -- ============================================================================
@@ -230,7 +230,7 @@ theorem ground_conditions_every_content_bearer (w : World) (e : Entity) :
 
     The three fields together are §9's gap-2 in one object: the foundation
     precedes the distinction *and* discriminates it *and* is not discriminated by
-    it. "Precedes" is deliberately phrased as `GroundsEntity` — a condition — and
+    it. "Precedes" is deliberately phrased as `OneEssence` — a condition — and
     never as a derivation; `ground_scope_is_not_the_truth_set` is the field that
     keeps the ground from standing under the distinction, and
     `ground_existence_does_not_entail_any_truth` is what forbids reading the
@@ -246,7 +246,7 @@ structure PrecedesRightWrong (e : Entity) : Prop where
     ∃ w : World, (∀ n : Nat, ¬ Satisfies w (Form.atom n)) ∧ ExistsAt w e
   /-- D-positive: every meaning-bearing entity that obtains is conditioned by it. -/
   conditions_every_bearer : ∀ w : World, ∀ e' : Entity,
-    ExistsAt w e' → (∃ p : Prop, EntityMeans e' p) → GroundsEntity e e'
+    ExistsAt w e' → (∃ p : Prop, EntityMeans e' p) → OneEssence e e'
   /-- D-negative: the distinction does not stand over it. -/
   not_evaluated_by_it : ¬ (∀ p : Prop, EntityMeans e p ↔ T p)
 
@@ -328,7 +328,7 @@ theorem stage_invariance_iff_atemporal (e : Entity) :
     - `ofSubject s` is where the price sits, and the price is **F15**. The second
       field `conditions_every_bearer` is universal in the conditioned entity, so
       instantiating it at `ofGround` — which obtains everywhere and means
-      everything — forces `GroundsEntity (EntityOf s) ofGround`, i.e.
+      everything — forces `OneEssence (EntityOf s) ofGround`, i.e.
       `∀ p, Means s p`. `SemanticFinitude` (`SemanticFinitude.lean:151`, the
       declared `Tag: VOCAB` bound, `∀ s, ∃ p, ¬ Means s p`) is exactly the denial
       of that. So **§9's unicity is a corollary of the same sentence that closed
@@ -344,7 +344,7 @@ theorem stage_invariance_iff_atemporal (e : Entity) :
     badge is `PROVEN` and no substantive axiom is used; but it is the first time
     that axiom is priced inside the §9 lane, which previously ran on `{}` and
     vocabulary alone, and the reader is entitled to know that.
-    Footprint: `{Means, NecessarySubjectKind, SemanticFinitude, Subject}`.
+    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`.
     `NecessarySubjectKind` rides along because the field
     `conditions_every_bearer` is typed over `ExistsAt`, which unfolds to
     `SubjectExistsAt`; the proof reads no predicate.
@@ -354,13 +354,13 @@ theorem ofGround_sole_precedes_right_wrong :
   intro e h
   cases e with
   | ofSubject s =>
-      have hGrounds : GroundsEntity (Entity.EntityOf s) Entity.ofGround :=
+      have hGrounds : OneEssence (Entity.EntityOf s) Entity.ofGround :=
         h.conditions_every_bearer Entity.actualWorld Entity.ofGround trivial
           ⟨True, trivial⟩
       have hAll : ∀ p : Prop, Means s p := by
         intro p
         exact hGrounds p trivial
-      obtain ⟨p, hp⟩ := Logos.SemanticFinitude.SemanticFinitude s
+      obtain ⟨p, hp⟩ := Logos.SemanticFinitude.GroundTranscendence s
       exact False.elim (hp (hAll p))
   | ofAtom n =>
       obtain ⟨w, hnone, hAt⟩ := h.obtains_where_no_atom_is_true
@@ -413,7 +413,7 @@ theorem stage_invariance_does_not_uniquely_identify_the_ground :
     with *different* extension, and C432 already records that one of the corpus's
     names for the second (`StageInvariance`) is a synonym of `Atemporal`.
 
-    Footprint: `{propext, Means, NecessarySubjectKind, SemanticFinitude, Subject}`.
+    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject, propext}`.
     Still `PROVEN`: the only axiom in the set that is not vocabulary is
     `SemanticFinitude`, `Tag: VOCAB`, and `propext` is Lean's own.
     -/

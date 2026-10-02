@@ -846,6 +846,15 @@ CHAIN_LISTS = [
 # guard. This set is therefore explicit, tiny, and hard-failing, and it is checked
 # against the *rendered* chain lists rather than against module membership.
 CHAIN_REQUIRED_DECLS = {
+    "Logos.AsieticChoice.bareRejectedHornCoMeant_is_derivable":
+        "C565 — the bare horn is DERIVED; a surface reporting only the refutation says the "
+        "step is open when the kernel closed it",
+    "Logos.AsieticChoice.gammaMeans_is_not_single_valued":
+        "C566 — reconciles C565 with C273/C274 into one dialectic",
+    "Logos.AsieticChoice.singleContentModelRefutesBareRejectedHorn":
+        "C273 — the other horn of the same dialectic; omitting it overstates the corpus",
+    "Logos.AsieticChoice.bareRejectedHornCoMeant_is_not_derivable":
+        "C274 — ditto",
     "Logos.Plurality.necessaryPersonalSubjectExists": "C404 — the batch's only substantive price",
     "Logos.Plurality.necessarySubject_exists": "C407 — a necessary subject exists",
     "Logos.Plurality.necessaryPersonalSubject_derived": "C408 — a necessary Person exists",
@@ -969,6 +978,9 @@ CHAIN_REQUIRED_DECLS = {
         "C497 — the profile: has necessity and gapless operativeness, lacks transcendence/maximal capacity/pure actuality",
     "Logos.DivinePureActuality.pure_actuality_independent_of_physical_energy":
         "C498 — the physical-energy tautology, disclosed as vacuous",
+    # plan §20 — doctrine rows 3 and 4: one essence, three Persons, both free.
+    "Logos.AsieticChoice.person_is_asietic":
+        "C567 — Asiety means Freedom, Freedom means Personal, at 0 substantive axioms",
 }
 
 def verify_chain_coverage(node_map: dict, claims_by_id: dict) -> None:
@@ -1120,10 +1132,24 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
     ap("")
     ap(f"- GAPMAP claims with a kernel declaration located (FOUND): "
        f"**{len(found_claims)}** / {len(all_claims)}")
-    glossed = [c for c in all_claims if c.get("_gloss")]
-    ap(f"- Steps with an **English meaning in code**: **{len(glossed)}** / {len(all_claims)}"
-       + ("" if len(glossed) == len(all_claims)
-          else f" · **no gloss:** {', '.join(c['id'] for c in all_claims if not c.get('_gloss'))}"))
+    # A claim whose declaration was DELETED has nothing to gloss: the English sentence lived in
+    # the Lean docstring that no longer exists. Counting those in the denominator reported the
+    # §24 deletion as five missing glosses — i.e. the honest removal of four vacuous declarations
+    # read as five regressions. RETIRED is the status vocabulary for a claim with no live kernel
+    # node; plan §24 moved C568–C571 there when `Consubstantial` was deleted and C572 when it was
+    # withdrawn as Modalism. Kept out of the denominator, and named here so the exclusion is
+    # visible rather than a quiet subtraction.
+    RETIRED_STATUS = re.compile(r"DELETED|WITHDRAWN|REMOVED", re.I)
+    live_claims = [c for c in all_claims if not RETIRED_STATUS.search(c.get("status") or "")]
+    retired_claims = [c for c in all_claims if RETIRED_STATUS.search(c.get("status") or "")]
+    glossed = [c for c in live_claims if c.get("_gloss")]
+    ap(f"- Steps with an **English meaning in code**: **{len(glossed)}** / {len(live_claims)}"
+       + ("" if len(glossed) == len(live_claims)
+          else f" · **no gloss:** {', '.join(c['id'] for c in live_claims if not c.get('_gloss'))}"))
+    if retired_claims:
+        ap(f"- Retired claims (no kernel node, so no gloss is owed): "
+           f"**{len(retired_claims)}** — {', '.join(c['id'] for c in retired_claims)} "
+           "(deleted or withdrawn in plan §24; the prose in their GAPMAP rows is the record)")
 
     if missing_claims:
         ap(f"- **Claims whose referenced theorem is missing (MISSING) ({len(missing_claims)}):**")
@@ -6373,12 +6399,18 @@ def render_score_block(sd: dict) -> list[str]:
 
     ap("")
     ap(f"**Read the two columns together and the shape is precise: Γ won the metaphysics")
-    ap(f"of the ground and lost the soteriology.** Established: genuine normativity has a")
-    ap(f"personal ground; that ground is unique and necessary; it possesses canonical")
-    ap(f"aseity, simplicity, and pure actuality. What is *not* free: the three divine")
+    ap(f"of the ground and lost the soteriology.** Established, as two separate objects,")
+    ap(f"never merged: genuine normativity has a personal ground (a `Subject` satisfying")
+    ap(f"`Person`) — and Γ's distinct metaphysical ground of reality, `Entity.ofGround`, is")
+    ap(f"unique and necessary, and possesses canonical aseity, simplicity, and pure")
+    ap(f"actuality. The two are kept apart on purpose: `Entity.ofGround` is itself provably")
+    ap(f"**not** a person-correlate (C564, `ofGround_not_a_person_correlate`), so a reader")
+    ap(f"who takes \"the ground\" above to be the same object both times already has the")
+    ap(f"wrong reading. Whether some person *is* that metaphysical ground — the")
+    ap(f"entity-level bridge C228 — remains BLOCKED. What is *not* free: the three divine")
     ap(f"Persons of the Trinity (three declared META premises, C510), and what is still")
-    ap(f"open: the Incarnation, contingent creation as such, and the entity-level")
-    ap(f"projection C228. A *single-person* reading of the ground is not entailed by")
+    ap(f"open: the Incarnation, contingent creation as such, and C228 itself. A *single-person*")
+    ap(f"reading of the personal ground is not entailed by")
     ap("unicity: `unicity_does_not_force_unitarian_monad` ({}) is a separation model, so".format("{}"))
     ap(f"unicity leaves the person-count open. Each open row is named above with its")
     ap(f"missing lemma rather than absorbed into an average, and the left column is")
@@ -6478,7 +6510,7 @@ def _render_reading_guide_full() -> list[str]:
     ap("> person-count open. The positive case for distinct divine Persons is C510, derived on three")
     ap("> declared `META` premises (`AxAgapeEssence`, `AxProcessionWord`, `AxProcessionSpirit` — one God in")
     ap("> three Persons, not three Gods); it does not rest on C212. What is still **not** established is")
-    ap("> the entity-level bridge C228 (`GenericGroundsRightWrong g → PersonalEntity g`), which remains")
+    ap("> the entity-level bridge C228 (`GenericGroundsRightWrong g → PersonCorrelate g`), which remains")
     ap("> `BLOCKED`. Every other claim is definitional, derived, or a declared axiom.")
     ap("")
     ap("")
@@ -6529,8 +6561,67 @@ def _render_reading_guide_full() -> list[str]:
     ap(">    is personal* — is machine-proved with 0 substantive axioms. Reading the")
     ap(">    subjunction as a direction of ontology is interpretive, as 'Two directions, not")
     ap(">    one.' above explains.")
-    ap("> 3. Divine Personhood and Strict Monotheism — **DEFERRED** (⏸), not proved here; a necessary")
-    ap(">    Divine Being/Ground (world-rigid, everlasting, atemporal) is its entity-level **PROVEN** claim (✅).")
+    ap("> 3. **Personhood of the ground — PROVEN, but narrower than it reads (plan §5.3, "
+       "2026-10-03).** This item was `DEFERRED` and is now stale in that form:")
+    ap(">    `TrinitarianPersonalGround.the_ground_is_not_void_of_personhood : PersonalGround Entity.ofGround` "
+       "is a live kernel declaration at **0 substantive axioms** — the ground `sustains` all actual being and "
+       "`indwells` every person; `ground_is_not_a_fourth_chooser` and `no_person_is_the_ground` follow, also free.")
+    ap(">    **Read `indwells` correctly (X1 withdrawn as a criticism, plan §20.3):** an audit read "
+       "`OneEssence Entity.ofGround (EntityOf s)` — directional, `∀ p, EntityMeans e p → EntityMeans g p`, "
+       "reducing to `True` on the ground arm — as a relation that “constrains nothing,” hence vacuous. "
+       "**That reading was wrong and is withdrawn.** `True` on the ground arm is the ground’s *unrestricted "
+       "meaning* (divine comprehensiveness), which makes `OneEssence` proper **subsumption** — the ground "
+       "contains everything the person contains. That is what *ground* means, and it is what `indwells` "
+       "asserts: the Persons are **one with** the essence (`homoousios`), not merely co-located with it.")
+    ap(">    **The mutuality anchor was DELETED, and the deletion is the result (plan §24).** A "
+       "`Consubstantial g a b := OneEssence g a ∧ OneEssence g b` was added for §20.1 on the "
+       "reasoning that `OneEssence` is directional and cannot express the mutuality between the "
+       "Persons. Instantiated at `g = Entity.ofGround` it is **provably `True` for arbitrary `e f`** — "
+       "including `(ofGround, ofAtom 0)`, with no person involved — because "
+       "`EntityMeans Entity.ofGround p := True`. Its `{}` footprint looked like a win and was the "
+       "tell: **a `{}` price on a `True` proposition is a null result, not a proof.** There is no "
+       "non-vacuous version to repair, because “both are one with the ground” *is* `True`. The "
+       "family (C568, C569, C570, C571) is removed from the kernel; `test_personal_ground_kind.py` "
+       "G9 keeps it removed.")
+    ap(">    **The two halves of the doctrine are both in the kernel, at different prices.** "
+       "*One essence*: `indwells` — every Person is one with the one ground, free on "
+       "`{Means, Subject, Will, subjectWill}`. *Three Persons, not one*: "
+       "`roles_make_the_three_persons_distinct` (`TrinitarianSubjectBridge.lean:279`) is free on "
+       "`{DivineSubjectRole, Subject}` and is already a conjunct of the §5.1 master theorem — three "
+       "Persons bearing three distinct roles cannot be collapsed into one, which closes the "
+       "Modalism failure mode. Nothing was missing; the vacuous `Consubstantial` was standing in "
+       "for content that had never been absent.")
+    ap(">    **C572 is WITHDRAWN as wrongly shaped — it is Modalism, not homoousios.** The claim "
+       "`∀ a b, ∀ p, EntityMeans (EntityOf a) p ↔ EntityMeans (EntityOf b) p` — that the three "
+       "Persons share one *meaning* — was filed as an open lemma. It is not one: identical meaning "
+       "across the Persons makes them interchangeable, so the Son becomes “the one the Father is,” "
+       "which is the heresy the doctrine exists to deny. `BLOCKED` implied a lemma we failed to "
+       "prove; it is a claim we should not want. `Perichoretic` is **kept** as the master theorem’s "
+       "last conjunct and is honestly labelled a *form*: it is *homoousios* — one ground indwelling "
+       "three Persons — and **not** strict perichoresis, the *kyklos*. The refusal is **Modalism, "
+       "not asymmetry**: mutual `OneEssence` between two Persons is literally the C572 biconditional. "
+       "The reason this module previously gave — that `OneEssence` is asymmetric — was **false and is "
+       "retracted** (2026-10-03): `PersonalGround` has no `asymmetric` field, `OneEssence` is "
+       "*reflexive* (`groundsEntity_reflexive`), and `AsymmetricGrounding` is **proved unsatisfiable** "
+       "by C316. Gate G8 was pinning that refuted premise and has been rewritten to require the true "
+       "reason plus the retraction.")
+    ap(">    **The residual is DEFERRED (⏸), and it is a correspondence gap, not a missing role** (X2). "
+       "Both halves of the Nicene formula are already in the kernel: the three roles are borne "
+       "(`three_divine_persons_exist_with_roles`, a witness projection of the META bridge) and the "
+       "three bearers are distinct (`roles_make_the_three_persons_distinct`, free). What is missing is "
+       "the **cross-sort identification**: the corpus has *two* representations of the three Persons — "
+       "`DivineHypostasis` with `the_father` / `the_beloved` / `the_spirit` (`agape_entails_tripersonality`, "
+       "`DivineAgape.lean`) and `Subject` with `DivineRole.source` / `.word` / `.spirit` "
+       "(`DivineSubjectRole`, `TrinitarianSubjectBridge.lean`) — and **no map between the two sorts**. "
+       "`DivineAgape.IsWord`/`IsSpirit` classify `DivineHypostasis`, which `Entity.ofSubject` does not "
+       "embed into, so `the_father` is never identified with the `Subject` bearing `DivineRole.source`. "
+       "Closing it means a new correspondence commitment, and **not** an identity one: an earlier "
+       "revision that equated a subject with the ground made `False` derivable and was deleted "
+       "(GAPMAP C509, guard `formal/consistency/FalseNotDerivable.lean`). Paid as: not proved here.")
+    ap(">    **Strict perichoresis is a named frontier row (C573, OPEN), and it is a missing PREDICATE.** "
+       "`∀ a b : Subject, a ≠ b → MutualIndwelling a b` would need a new symmetric primitive that is "
+       "deliberately not a meaning-containment order; `OneEssence` cannot carry it (that is C572) and "
+       "asymmetry cannot be used to rule it out (C316). Named rather than implied.")
     ap("> 4. Moral good/evil — machine-separated from epistemic normativity (permanent ")
     ap(">    countermodel frontier 🧱, C175): the faithful model `M_amoral` satisfies the whole epistemic ")
     ap(">    agential reality-hook with zero practical obligation. The positive pole is then obtained ")
@@ -8446,6 +8537,14 @@ CLASSICAL_ATTRIBUTES = [
                   "and `rightWrongFactYieldsNoChooser` (C294). **No axiom-free existence of a "
                   "chooser**: `¬ N_T ∧ ¬ N_F` is `Prop`-level and quantifies over no `Subject`, so "
                   "the Creator step is conditional and its existence half is *not derivable*. "
+                  "**C294's witness was repaired 2026-10-03 and is now meaning-coherent:** the "
+                  "old form denied `∃ s p q, M s p ∧ M s q` with no `p ≠ q`, which is *equivalent* "
+                  "to meaninglessness — `pairwise_denied_forces_meaninglessness` proves the old "
+                  "form admitted **only** worlds where nothing is meant, so the constant-false "
+                  "relation was forced on it, not chosen. The repaired model grants order "
+                  "(`True`/`False` incompatible) and instantiates signification (a subject means "
+                  "`True`) while no subject ever means two distinct contents: **amoral, not "
+                  "voiceless.** Still `{}`. "
                   "**The ground is still not a chooser** (C295 = C285 preserved, by "
                   "`ofGround_ne_ofSubject`): the ground *reaches* subjects, it is not one of them. "
                   "Its `GroundsEntity` premise is **vacuous** (`ground_grounds_the_meaningless`), "
@@ -8671,7 +8770,7 @@ CLASSICAL_ATTRIBUTES = [
                    {"type": "branch", "id": "monotheism"}],
         "refs": ["Logos.FoundationalUnicity.ofGround_sole_universal_grounding",
                  "Logos.FoundationalUnicity.ofGround_unicity_from_no_discriminating_subject",
-                 "Logos.FoundationalUnicity.exactly_one_universal_modal_ground_stipulated",
+                 "Logos.SemanticFinitude.exactly_one_universal_modal_ground_stipulated",
                  "Logos.FoundationalUnicity.unicity_does_not_force_unitarian_monad",
                  "Logos.DivineSimplicity.divine_simplicity_sole_bearer",
                  "Logos.ConditionalTheology.preceding_theory_not_entails_trinity",
@@ -8682,10 +8781,34 @@ CLASSICAL_ATTRIBUTES = [
         # C212) and lives in the "Numerical unitarianism" row above; the Trinity is
         # priced, in "Three Divine Persons". Badges are derived, so a future theorem
         # that moves either half fails this row in the same change.
+        # CAVEAT (2026-10-03): that guarantee covers the BADGE only. The `sense` prose
+        # below is hand-written and does NOT fail when a bound is re-tagged -- S5 moved
+        # unicity from `SemanticFinitude` (VOCAB) to `GroundTranscendence` (META) and this
+        # sentence still said VOCAB. See plan §15.
+        #
+        # PRICE PRESENTATION, CORRECTED (2026-10-03). This row carried the SAME proposition
+        # (`∀ s, ∃ p, ¬ Means s p`) in two guises and never said so: the badge is derived from
+        # the `decl` check `exactly_one_universal_modal_ground`, whose footprint is
+        # `{Means, NecessarySubjectKind, Subject}` -- no `SemanticFinitude`, no
+        # `GroundTranscendence` -- so it reads "0 substantive axioms, conditional on
+        # ∀ s, ∃ p, ¬Means(s, p)", while the prose called unicity "the declared META bound
+        # GroundTranscendence". A reader who trusts the badge concludes the bound is free;
+        # a reader who trusts the prose concludes it costs a META axiom. Both are true of
+        # different routes to one statement, which is exactly what has to be spelled out.
         "sense": ("**Unity of the ground and of the nature** — one God, *una natura*. "
                   "`exactly_one_universal_modal_ground` (C320) proves `∃! g, UniversalModalGround g`: "
-                  "existence unconditional, uniqueness on the declared VOCAB bound `SemanticFinitude` "
-                  "(“no subject means every proposition”), with an unconditional corollary (C389). "
+                  "existence unconditional, unicity **conditional** on `∀ s, ∃ p, ¬ Means s p`, which is "
+                  "carried as a hypothesis — hence this row's derived price of **0 substantive axioms** "
+                  "on `{Means, NecessarySubjectKind, Subject}`. "
+                  "**The same proposition is also a declared axiom, at a different price, and the row "
+                  "used to conflate the two.** `SemanticFinitude.GroundTranscendence` (`Tag: META`) has "
+                  "the identical statement; buying it instead makes unicity **unconditional** via "
+                  "`SemanticFinitude.exactly_one_universal_modal_ground_stipulated` (C389), at a price of "
+                  "**one META axiom** (`GroundTranscendence`, footprint "
+                  "`{Means, GroundTranscendence, Subject}`). The weaker reading of the same bound is "
+                  "declared as `SemanticFinitude` (`Tag: VOCAB`, C388). So: *free if you keep it as a "
+                  "hypothesis, one META axiom if you want it unconditional* — and the badge above prices "
+                  "the conditional route, which is the one the `decl` check names. "
                   "The nature is one by divine simplicity (`divine_simplicity_sole_bearer`, C440, "
                   "`{}` with CL), with aseity and *actus purus*. The bare-name branch `monotheism` "
                   "keeps the deferred half — the *person-count* question — which the "
@@ -8792,15 +8915,35 @@ CLASSICAL_ATTRIBUTES = [
                     "full": "Logos.CosmicExistence.the_ground_is_not_the_universe"}],
         "refs": ["Logos.CosmicExistence.no_entity_is_identical_to_the_whole",
                  "Logos.CosmicExistence.grounding_never_yields_identity_of_the_totality"],
-        "sense": ("In the only identity form well-formed over Γ's `Entity` — `Universe e := "
-                  "∀ w x, ExistsAt w x → e = x`, 'whatever obtains **is** e' — the ground of "
-                  "reality does not exhaust the whole (§18, C430), and founding and identifying "
-                  "are not compatible alternatives (C431). **What this row is not:** an "
-                  "adjudication of the aggregate reading ('the universe is not an entity'), which "
-                  "is not a proposition over `Entity` at all and is therefore left unstatable "
-                  "rather than refuted. Nor does it touch realm contingency, still BLOCKED in "
-                  "SUBJECTS.md §4."),
-    },
+         "sense": ("In the only identity form well-formed over Γ's `Entity` — `Universe e := "
+                   "∀ w x, ExistsAt w x → e = x`, 'whatever obtains **is** e' — the ground of "
+                   "reality does not exhaust the whole (§18, C430), and founding and identifying "
+                   "are not compatible alternatives (C431). **What this row is not:** an "
+                   "adjudication of the aggregate reading ('the universe is not an entity'), which "
+                   "is not a proposition over `Entity` at all and is therefore left unstatable "
+                   "rather than refuted. Nor does it touch realm contingency, still BLOCKED in "
+                   "SUBJECTS.md §4."),
+     },
+     {
+         "attribute": "**Exclusion from personhood** (the ground is not a person-correlate)",
+         "scope": "Divine Being / Ground",
+         "expected": "COUNTERMODEL",
+         "checks": [{"type": "decl",
+                     "full": "Logos.CosmicExistence.ofGround_not_a_person_correlate"}],
+         "refs": ["Logos.NecessityEternity.ofGround_ne_ofSubject",
+                  "Logos.PersonalNormativeGround.PersonCorrelate"],
+         "sense": ("`PersonCorrelate g := ∃ s, g = EntityOf s ∧ Person s` — 'is this entity "
+                   "identical to a person-correlated subject'. `Entity.ofGround` is provably "
+                   "not one (C564): same constructor-disjointness family as the pantheism row "
+                   "above, same cheap reading. **What this row is not:** a rich denial of "
+                   "personality — the proof discards the `Person s` conjunct entirely and "
+                   "reduces to `Entity.ofGround ≠ EntityOf s`. **What this row does not settle:** "
+                   "C228 (`GenericGroundsRightWrong g → PersonCorrelate g`), still `BLOCKED` for "
+                   "arbitrary `g` — this closes only the single instantiation `g := "
+                   "Entity.ofGround`, negatively, which is sharper than 'open' for that one case "
+                   "but says nothing about the general bridge. See the seam note above Part II "
+                   "for how this relates to the Part I personal ground."),
+     },
     {
         "attribute": "**Divine simplicity**",
         "scope": "Divine Being / Ground",
@@ -9064,7 +9207,7 @@ CLASSICAL_ATTRIBUTES = [
                  "Logos.DivineOmniscience.exhaustive_scope_without_counterfactual_knowledge",
                  "Logos.DeepModalFrontier.Omniscience_AllTruths",
                  "Logos.DeepModalFrontier.Omniscience_Counterfactuals"],
-        "sense": ("The strong sense is not merely unproven but **refuted** for the canonical ground: "
+        "sense": ("**One characteristic read twice** — not two findings, and not a limit on God (§6.1). The strong sense is not merely unproven but **refuted** for the canonical ground: "
                   "`ofGround_not_truth_tracking` (`{Means, Subject}`) proves `¬ TruthTracking Entity.ofGround`, "
                   "because `EntityMeans (Entity.ofGround) p` reduces to `True` (definitional stipulation "
                   "◈ `ofGround_meansAll`), so the ground's scope bears every proposition — including `False` — "
@@ -9077,7 +9220,8 @@ CLASSICAL_ATTRIBUTES = [
                   "`Omniscience_Counterfactuals` (`DeepModalFrontier`) remain frontier vocabulary definitions, "
                   "and `Entity.ofGround` is not a subject correlate (`ofGround_ne_ofSubject`) — the prose "
                   "disclaimer (`README-OLD.md:263`; `CHARS.md` §14) is preserved, no divine knowledge bridge "
-                  "is manufactured."),
+                  "is manufactured. "
+                  "**The three divine Persons are denied full capacity as well, and that denial is priced.** `Plurality.kinds_are_the_modal_partition` (free, `{NecessarySubjectKind, Subject}`) reads each `NecessarySubject p` as `NecessarySubjectKind p`, so `NecessaryKindAudit.necessary_kind_subject_lacks_maximal_capacity` yields `¬ MaximalCapacity (EntityOf p)` for each of the three Persons — footprint `{DivineSubjectRole, GroundTranscendence, TrinitarianPersonalBridge, Will, subjectWill, Means, NecessarySubjectKind, Subject}`, i.e. **two META axioms**. Established by probe, not by reading: the chain compiles with **no `sorryAx`**. So §8.2 re-tagged this denial from VOCAB to META; it did **not** withdraw it. Plan §10 row 6 and §11 previously said the Persons' omniscience was \"unasserted\"; that was wrong — see §17."),
     },
     {
         "attribute": "**Foundational omnipotence** (operative scope: no non-contradictory state of affairs is closed to the ground)",
@@ -9203,8 +9347,8 @@ CLASSICAL_ATTRIBUTES = [
                  "Logos.DivineAgape.the_spirit_ne_father",
                  "Logos.DivineAgape.the_spirit_ne_beloved",
                  "Logos.DivineAgape.the_spirit_ne_any_word",
-                 "Logos.DivineAgape.agape_and_word_without_spirit_is_binitarian",
-                 "Logos.DivineAgape.unitarian_self_love_gives_no_second_centre"],
+                 "Logos.TrinitySeparations.agape_and_word_without_spirit_is_binitarian",
+                 "Logos.TrinitySeparations.unitarian_self_love_gives_no_second_centre"],
         # 2026-09-30: this row read `{} COUNTERMODEL`, which was honest about the
         # separation and misleading about the result: `agape_entails_tripersonality`
         # (C510) derives three distinct divine Persons on three declared META
@@ -9242,6 +9386,13 @@ _CA_BADGE = {
     "COUNTERMODEL": "🧱", "DEFERRED": "⏸", "ABSENT": "❌",
 }
 
+# A countermodel that rests on a substantive axiom is NOT free. It used to return the
+# un-renderable string "COUNTERMODEL?([...])", which fell through `_CA_STATUS_TEXT.get(live, "?")`
+# and printed a bare `?` in the reader-facing ledger -- an undetermined epistemic status on 14
+# chain rows. Per AGENTS.md ("the Cremation is derivation, not badge") a priced route prints
+# AXIOMATIC with its axiom named, and is never laundered into a ✅.
+PRICED_COUNTERMODEL = "COUNTERMODEL_AXIOMATIC"
+
 _CA_STATUS_TEXT = {
     "PROVEN": "✅ PROVEN",
     "PROVEN↑": "⚠️ AXIOMATIC",
@@ -9250,7 +9401,22 @@ _CA_STATUS_TEXT = {
     "DEFERRED": "⏸ DEFERRED",
     "ABSENT": "❌ NOT ESTABLISHED",
     "DEFINITIONAL": "📘 DEFINITIONAL",
+    PRICED_COUNTERMODEL: "⚠️ AXIOMATIC — a countermodel that COSTS",
 }
+
+
+def _status_text(live: str, full: str = "") -> str:
+    """Display string for an anchor's live bucket, naming the axioms when the row is priced.
+
+    The one case needing more than a dict lookup is `PRICED_COUNTERMODEL`: AGENTS.md requires
+    `AXIOMATIC (X)` with `X` the named axiom, and the axiom names live in the audited footprint
+    rather than in the bucket. Every other bucket is a constant.
+    """
+    if live == PRICED_COUNTERMODEL and full:
+        subst, _, _ = footprint_parts(full)
+        return "⚠️ AXIOMATIC (" + ", ".join(subst) + ") — a countermodel that COSTS"
+    return _CA_STATUS_TEXT.get(live, "?")
+
 
 # ---------------------------------------------------------------------------
 # W1 — `CLASSICAL_ATTRIBUTES` rows name the claim they are about.
@@ -9449,9 +9615,19 @@ def _classical_anchor_live(anchor: dict, decls: dict, node_map: dict) -> str:
         is_cm = full in boundary_by_decl() or (claim_shape_of(full).polarity == "separation")
         if is_cm:
             subst, _, _ = footprint_parts(full)
-            return "COUNTERMODEL" if not subst else f"COUNTERMODEL?({sorted(subst)})"
+            return "COUNTERMODEL" if not subst else PRICED_COUNTERMODEL
         subst, _, _ = footprint_parts(full)
         return "PROVEN↑" if subst else "PROVEN"
+    if t == "axiom":
+        # An `axiom` anchor names a declared axiom of the vocabulary itself. It was never handled
+        # here, so every such row fell through to `UNKNOWN` and printed `?`. Resolved through the
+        # node map so a typo becomes MISSING_NODE rather than a silent `◆`.
+        full = anchor["full"]
+        if full not in decls:
+            return "MISSING_DECL"
+        if full not in node_map:
+            return "MISSING_NODE"
+        return "AXIOM" if node_map[full]["kind"] == "axiom" else "MISSING_NODE"
     if t == "branch":
         pd = load_presentation_spine()
         nodes = list((pd or {}).get("spine_nodes", [])) + list((pd or {}).get("ledger_spine_nodes", []))
@@ -9576,7 +9752,7 @@ def _classical_row_status(row: dict, decls: dict, node_map: dict) -> str:
         return _CLASSICAL_ROUTE_TEXT[cls]
     checks = row.get("checks") or []
     live = _classical_anchor_live(checks[0], decls, node_map) if checks else ""
-    return _CA_STATUS_TEXT.get(live, "?")
+    return _status_text(live, checks[0].get("full", "") if checks else "")
 
 
 def _classical_row_status_cell(row: dict, decls: dict, node_map: dict) -> str:
@@ -9792,6 +9968,73 @@ ASIETY_FREEDOM_STEPS = [
      "countermodel: **no grounding premise of containment shape can deliver true choice** — the "
      "grounding premise is granted *in full* and the conclusion still fails. Machine-checked reason "
      "the ◈ step is `BLOCKED`. Scope limit: relations of *other* shape stay open (F12(1))"),
+    # --- The bare rejected horn: the DIALECTIC (ISSUE_K Step 2(ii), 2026-10-03). These four rows
+    # --- are one result, not four, and the table is the only place a reader can see that. F11 sat
+    # --- `BLOCKED` for three days while the kernel derived it, because every surface reported only
+    # --- one horn of this. C565/C566 and C273/C274 must therefore be read together:
+    ("L1", "C565", "Logos.AsieticChoice.bareRejectedHornCoMeant_is_derivable", "decl",
+     "**the bare rejected horn IS DERIVED in Γ** — `performative_act_datum` (unconditional) + "
+     "`AxActPolarity` (`Act s p → Means s (¬ p)`) give `Means s p ∧ Means s (¬ p)` in two steps. "
+     "**Discharges F11**, which was recorded `BLOCKED` on a false universal: the old note showed "
+     "the `ClaimsCorrect`-gated routes need an `Initiates` witness and generalised that to all "
+     "routes, but `AxActPolarity` reads the act directly and needs no gate"),
+    ("✓", "C566", "Logos.AsieticChoice.gammaMeans_is_not_single_valued", "decl",
+     "coherence: **Γ's own `Means` is provably NOT single-valued**, from the same datum. This is "
+     "the half that makes the next two rows one result rather than three: the horn is discharged "
+     "here *because* co-meaning is available. Proof note: `p = ¬ p` is satisfiable when `p` is "
+     "undecided, so the refutation needs excluded middle — hence `CL`"),
+    ("🧱", "C273", "Logos.AsieticChoice.singleContentModelRefutesBareRejectedHorn", "countermodel",
+     "countermodel: **the horn is unsatisfiable wherever meaning is single-valued** — one content "
+     "per subject turns `means t p ∧ means t (¬ p)` into `p = ¬ p`. Quantifies over an ABSTRACT "
+     "`SingleContentSignature`, so it says nothing about Γ — that is the whole point"),
+    ("🧱", "C274", "Logos.AsieticChoice.bareRejectedHornCoMeant_is_not_derivable", "countermodel",
+     "the same refutation in the canonical model. **Together C565/C566 with C273/C274: there is no "
+     "reading of \"meaning\" on which Γ both keeps meaning single-valued and has genuine "
+     "co-meaning.** Single-valuedness buys the refutation and costs the choice; many-valuedness "
+     "buys the choice and costs the refutation. Gated by `scripts/test_horn_dialectic.py`"),
+    # --- plan §20/§24: the personal ground. Membership here is hand-maintained (AGENTS.md); the
+    # badges and footprints are derived. `person_is_asietic` is in `CHAIN_REQUIRED_DECLS` but had
+    # no row until now — the §20 work added the declaration and the coverage entry without
+    # extending the list, which is the drift `verify_chain_coverage` exists to catch. The other
+    # §20 rows ride along because the §24 prose tells the reader they are the two halves of the
+    # doctrine, and a chain that omits them leaves the prose describing rows the ledger never shows.
+    ("L1", "C567", "Logos.AsieticChoice.person_is_asietic", "decl",
+     "**DOCTRINE ROW 4 — Asiety means Freedom, Freedom means Personal.** Every Person is asietic: "
+     "`Person s` projects to `DominionOverActs s` = `FreeWill s` = `∃ p q, Chooses s p q`, and "
+     "`chooses_implies_trueChoice` is pure logic. The price is four VOCAB axioms "
+     "(`{Means, Subject, Will, subjectWill}`), so **no substantive axiom** — which is *not* the "
+     "literal `{}`. The Persons are free, and free at their own entity rather than as instruments "
+     "of the ground."),
+    ("L1", "—", "Logos.TrinitarianPersonalGround.ofGround_grounds_every_person", "decl",
+     "**DOCTRINE ROW 3 — one essence, three Persons (`indwells`).** Every Person is one with the "
+     "one ground: `OneEssence Entity.ofGround (EntityOf s)`. Read the ground arm correctly — "
+     "`EntityMeans Entity.ofGround p := True` makes this *unrestricted meaning*, i.e. proper "
+     "**subsumption**: the ground contains everything the Person contains. That is what *ground* "
+     "means, and the X1 reading of this row as a relation that \"constrains nothing, hence "
+     "vacuous\" is withdrawn. Priced on four VOCAB axioms; no substantive axiom."),
+    ("L2", "—", "Logos.TrinitarianPersonalGround.the_ground_is_not_void_of_personhood", "decl",
+     "**The headline.** `PersonalGround Entity.ofGround`: the ground sustains all being and "
+     "indwells every Person, so it is **not void of personhood** — and `¬ Asiety Entity.ofGround`, "
+     "because the ground is not a fourth chooser. Both halves are free and both are needed: "
+     "`indwells` alone would permit a demiurge plus three unrelated saints."),
+    ("✓", "—", "Logos.TrinitarianPersonalGround.ofGround_is_perichoretic", "decl",
+     "**A FORM, not a doctrine row — read it that way.** `Perichoretic g a b c` is definitionally "
+     "`OneEssence g a ∧ OneEssence g b ∧ OneEssence g c`, so at the ground it is `True` of atoms "
+     "and its `{}` price is a null result rather than a proof. It is the master theorem's last "
+     "conjunct, and it does **not** mean the Persons ground one another: `OneEssence` is "
+     "asymmetric and the Persons are distinguished by relations, not essences (*ST* I q. 28 a. 3). "
+     "The disclosure is pinned by `test_personal_ground_kind.py` G8."),
+    ("Σ", "—", "Logos.TrinitarianPersonalGround.trinitarianPersonalGround_summary", "decl",
+     "**The whole doctrine in one row.** The ground is a personal ground — it sustains all being "
+     "and indwells every Person, not void of personhood and not a fourth chooser. **Deleted "
+     "(plan §24):** the `Consubstantial` anchor, because `Consubstantial Entity.ofGround e f` is "
+     "provably `True` for arbitrary `e f` including atoms — a `{}` price on a `True` proposition "
+     "is a null result, not a proof, and no non-vacuous version of \"both one with the ground\" "
+     "exists, because that is `True`. **C572 is withdrawn as Modalism**, not carried as an open "
+     "lemma: identical meaning across the Persons makes them interchangeable, which is the heresy "
+     "the doctrine denies. The distinction half — three Persons cannot be collapsed into one — is "
+     "free in `roles_make_the_three_persons_distinct` and is already a conjunct of the §5.1 master "
+     "theorem."),
 ]
 
 # --- SEMANTIC-FINITUDE chain: the F15 bound, consolidated and
@@ -9831,8 +10074,12 @@ SEMANTIC_FINITUDE_STEPS = [
      "countermodel: a semantically omnipotent carrier is a model of the negation — the bound "
      "is **falsifiable, not vacuous**, so the unicity really rests on it"),
     ("✓", "C400", "Logos.SemanticFinitude.semanticFinitude_excludes_ground_from_subjects", "decl",
-     "coherence: `ofGround_meansAll` gives the ground *every* proposition, so the bound is "
-     "exactly what keeps the ground off the `Subject` sort"),
+     "coherence: `ofGround_meansAll` gives the ground *every* proposition, so a bound is "
+     "exactly what keeps the ground off the `Subject` sort. **Read which bound.** The theorem's "
+     "footprint is `{GroundTranscendence, Means, Subject}` — it consumes **`GroundTranscendence` "
+     "(META)**, not `SemanticFinitude` (VOCAB), which does none of this work despite the theorem's "
+     "name. Crediting this coherence result to the VOCAB bound would misprice the chain: this row "
+     "costs one META axiom, alongside the ten `L2` rows it stands beside."),
 ]
 
 # --- LOVE chain: two prices, different in kind, so the table prices both.
@@ -10179,7 +10426,7 @@ def render_asiety_freedom_chain(decls: dict, node_map: dict) -> list[str]:
         else:
             live = _classical_anchor_live({"type": atype, "full": full},
                                           decls, node_map)
-            status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+            status = _status_text(live, full) + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
@@ -10208,8 +10455,11 @@ def render_asiety_freedom_chain(decls: dict, node_map: dict) -> list[str]:
     ap("an existential one (\"shared with *someone*\"), and nothing here shows the stronger")
     ap("reading is the correct one; no axiom-free existence of a chooser (C294 **refutes** it,")
     ap("it is not merely open); and the Act-free `?` around `base.txt`'s `ClaimsCorrect`-free")
-    ap("weak→strong step is **bypassed, not closed** — the bare form stays machine-refuted")
-    ap("(C273/C274).")
+    ap("weak→strong step needs no bypass — **the bare rejected horn is DERIVED in Γ**")
+    ap("(`bareRejectedHornCoMeant_is_derivable`, C565, at `{performative_act_datum, AxActPolarity}`).")
+    ap("What survives as machine-refuted is narrower: the horn is not a consequence of the")
+    ap("meaning vocabulary **alone**, since it is unsatisfiable in every single-content model")
+    ap("(C273/C274) and Γ's own `Means` is provably not single-valued (C566). See ISSUE_K Step 2(ii).")
     ap("")
     return lines
 
@@ -10310,7 +10560,7 @@ def render_semantic_finitude_chain(decls: dict, node_map: dict) -> list[str]:
     ap("|---|---|---|---|---|---|")
     for kind, cid, full, atype, text in SEMANTIC_FINITUDE_STEPS:
         live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
-        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        status = _status_text(live, full) + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
@@ -10379,7 +10629,7 @@ def render_meaning_retorsion_chain(decls: dict, node_map: dict) -> list[str]:
     ap("|---|---|---|---|---|---|")
     for kind, cid, full, atype, text in MEANING_RETORSION_STEPS:
         live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
-        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        status = _status_text(live, full) + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
@@ -10459,7 +10709,7 @@ def render_love_chain(decls: dict, node_map: dict) -> list[str]:
         else:
             live = _classical_anchor_live({"type": atype, "full": full},
                                           decls, node_map)
-            status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+            status = _status_text(live, full) + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
@@ -10524,7 +10774,7 @@ def render_two_kinds_chain(decls: dict, node_map: dict) -> list[str]:
     ap("|---|---|---|---|---|---|")
     for kind, cid, full, atype, text in TWO_KINDS_STEPS:
         live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
-        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        status = _status_text(live, full) + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
@@ -10699,7 +10949,7 @@ def render_precedence_chain(decls: dict, node_map: dict) -> list[str]:
     ap("|---|---|---|---|---|---|")
     for kind, cid, full, atype, text in PRECEDENCE_STEPS:
         live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
-        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        status = _status_text(live, full) + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
@@ -10779,7 +11029,7 @@ def render_temporality_chain(decls: dict, node_map: dict) -> list[str]:
     ap("|---|---|---|---|---|---|")
     for kind, cid, full, atype, text in TEMPORALITY_STEPS:
         live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
-        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        status = _status_text(live, full) + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
@@ -10865,7 +11115,7 @@ def render_sole_bearer_chain(decls: dict, node_map: dict) -> list[str]:
     ap("|---|---|---|---|---|---|")
     for kind, cid, full, atype, text in SOLE_BEARER_STEPS:
         live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
-        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        status = _status_text(live, full) + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
@@ -10948,7 +11198,7 @@ def render_inhabited_chain(decls: dict, node_map: dict) -> list[str]:
     ap("|---|---|---|---|---|---|")
     for kind, cid, full, atype, text in INHABITED_STEPS:
         live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
-        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        status = _status_text(live, full) + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
@@ -11225,7 +11475,7 @@ def render_succession_audit_chain(decls: dict, node_map: dict) -> list[str]:
     ap("|---|---|---|---|---|---|")
     for kind, cid, full, atype, text in SUCCESSION_AUDIT_STEPS:
         live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
-        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        status = _status_text(live, full) + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
@@ -11266,7 +11516,7 @@ def render_thomistic_act_chain(decls: dict, node_map: dict) -> list[str]:
     ap("|---|---|---|---|---|---|")
     for kind, cid, full, atype, text in THOMISTIC_ACT_STEPS:
         live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
-        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        status = _status_text(live, full) + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
@@ -11318,7 +11568,7 @@ def render_act_cascade_chain(decls: dict, node_map: dict) -> list[str]:
     ap("|---|---|---|---|---|---|")
     for kind, cid, full, atype, text in ACT_CASCADE_STEPS:
         live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
-        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        status = _status_text(live, full) + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
@@ -11363,7 +11613,7 @@ def render_characteristic_closure_chain(decls: dict, node_map: dict) -> list[str
     ap("|---|---|---|---|---|---|")
     for kind, cid, full, atype, text in CHARACTERISTIC_CLOSURE_STEPS:
         live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
-        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        status = _status_text(live, full) + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
@@ -11409,7 +11659,7 @@ def render_necessary_kind_audit_chain(decls: dict, node_map: dict) -> list[str]:
     ap("|---|---|---|---|---|---|")
     for kind, cid, full, atype, text in NECESSARY_KIND_AUDIT_STEPS:
         live = _classical_anchor_live({"type": atype, "full": full}, decls, node_map)
-        status = _CA_STATUS_TEXT.get(live, "?") + _stip_marker([full])
+        status = _status_text(live, full) + _stip_marker([full])
         ap(f"| {kind} | {cid} | {_classical_decl_link(full, decls)} | {text} | "
            f"{status} | {kernel_fp_text(full)} |")
     ap("")
@@ -11818,10 +12068,10 @@ def render_established_profile(decls: dict, node_map: dict) -> list[str]:
 # *deduction* census: the rows that have a headline theorem get a block, with
 # every component of a record-valued headline rendered as its own sub-block.
 #
-# Measured against `CLASSICAL_ATTRIBUTES` (2026-09-30): 28 of the 39 rows carry
-# a `decl` check and 11 do not. Of the 28, eight are `Personal ground /
+# Measured against `CLASSICAL_ATTRIBUTES` (2026-10-02): 29 of the 40 rows carry
+# a `decl` check and 11 do not. Of the 29, eight are `Personal ground /
 # person-type` and belong to Part I (they are what the chain *earns*), one is
-# the proof-architecture row, and the remaining 19 decl checks resolve to the 18
+# the proof-architecture row, and the remaining 20 decl checks resolve to the 19
 # distinct headlines below (foundational unicity contributes two).
 #
 # This list lives here rather than in `formal/presentation_spine.json` because
@@ -11852,6 +12102,8 @@ CHARACTERISTIC_SECTIONS = [
      "the ordering claim Part I needs, stated about the ground"),
     ("The ground is not the universe", "the_ground_is_not_the_universe",
      "exclusion of pantheism: not identical with the totality"),
+    ("The ground is not a person-correlate", "ofGround_not_a_person_correlate",
+     "exclusion of personhood: not identical with a person-correlated subject"),
     ("The ground is simple", "divine_simplicity_sole_bearer",
      "simplicity as the sole bearer of the attribute"),
     ("The ground is transcendent", "ofGround_sole_transcendent_ground",
@@ -11896,11 +12148,15 @@ _SEAM_NOTE = (
     "grounds the right/wrong poles. These eighteen blocks are about "
     "`Entity.ofGround` — the ground *as such*.",
     "The bridge between the two objects is **C228, and it is BLOCKED**: not one "
-    "line of the corpus derives `GenericGroundsRightWrong g → PersonalEntity g`.",
+    "line of the corpus derives `GenericGroundsRightWrong g → PersonCorrelate g`.",
     "",
     "So a characteristic proved here is a characteristic of the ground, and the "
     "claim that it is a characteristic of *the person Part I reached* is open. "
     "Every block below states which object it is about.",
+    "One instantiation is settled: for `g := Entity.ofGround`, "
+    "`ofGround_not_a_person_correlate` (C564) proves `¬ PersonCorrelate "
+    "Entity.ofGround` outright — not C228 answered generally, but a flat no "
+    "for the one ground every block below is about.",
 )
 
 
@@ -12078,6 +12334,8 @@ def render_characteristic_sections(decls: dict, node_map: dict) -> list[str]:
     ap("")
     ap(_SEAM_NOTE[3])
     ap("")
+    ap(_SEAM_NOTE[4])
+    ap("")
     n_comp = 0
     n_term = 0
     component_blocks: list[tuple[ProofIR, str]] = []
@@ -12134,7 +12392,40 @@ def render_characteristic_sections(decls: dict, node_map: dict) -> list[str]:
        f"not established.*")
     ap("")
     verify_characteristic_index(L, component_blocks)
+    verify_classical_refs(decls)
     return L
+
+
+def verify_classical_refs(decls: dict) -> None:
+    """Every `refs` entry of every `CLASSICAL_ATTRIBUTES` row must name a real declaration.
+
+    Added 2026-10-03 after the "One God" row shipped a ref to
+    `Logos.FoundationalUnicity.exactly_one_universal_modal_ground_stipulated`, which has never
+    existed — the declaration is `Logos.SemanticFinitude.exactly_one_universal_modal_ground_stipulated`
+    (`SemanticFinitude.lean:239`). It survived because `_classical_decl_link` DEGRADES AN
+    UNRESOLVABLE NAME to a bare code span (`` `Name` ``) instead of failing, so a typo renders as
+    unlinked text and the build stays green. That is the silent-drift shape this repo keeps
+    paying for: the reader loses the anchor and the price, and nothing reports it.
+
+    The same applies to each row's `checks`. `check_consistency`-style strictness here is cheap:
+    these are hand-maintained tables, and a name that stops resolving is always either a rename
+    we should record or a mistake we should fix.
+    """
+    problems: list[str] = []
+    for row in CLASSICAL_ATTRIBUTES:
+        attr = row["attribute"][:60]
+        for full in list(row.get("refs", [])):
+            if full not in decls:
+                problems.append(f"{attr}: ref `{full}` does not resolve to a declaration")
+        for chk in row.get("checks", []):
+            full = chk.get("full")
+            if full and chk.get("type") == "decl" and full not in decls:
+                problems.append(f"{attr}: decl check `{full}` does not resolve to a declaration")
+    if problems:
+        raise SystemExit(
+            "FATAL: CLASSICAL_ATTRIBUTES names declarations that do not exist. `_classical_decl_link` "
+            "renders an unresolvable name as bare text, so this drift is otherwise invisible:\n  - "
+            + "\n  - ".join(problems))
 
 
 def verify_characteristic_sections(decls: dict, node_map: dict) -> None:
@@ -12163,9 +12454,9 @@ def verify_characteristic_sections(decls: dict, node_map: dict) -> None:
     n_decl_rows = sum(1 for row in CLASSICAL_ATTRIBUTES
                       if any(c.get("type") == "decl" for c in row["checks"]))
     n_sections = len(CHARACTERISTIC_SECTIONS)
-    if n_decl_rows != 28:
+    if n_decl_rows != 29:
         raise SystemExit(
-            f"FATAL: expected 28 CLASSICAL_ATTRIBUTES rows carrying a `decl` check, "
+            f"FATAL: expected 29 CLASSICAL_ATTRIBUTES rows carrying a `decl` check, "
             f"found {n_decl_rows}. Part II's census (and DEDUCTION.md §5.1) must be "
             f"re-measured before the reading path is regenerated.")
 
@@ -12506,7 +12797,7 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
                 ap("## How to Read This Deduction (full guide)")
                 ap("")
                 ap.extend(guide_full)
-        # The index of the sixteen denials, above the fold and before Part I
+        # The index of the seventeen denials, above the fold and before Part I
         # (CLEARER.md §4). It is the one place a reader learns which of them are
         # deaths before meeting one, and the count of non-deaths is the argument
         # for it: front matter that said only "Part III refutes every objection"
@@ -13231,9 +13522,9 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
         ap("| 100 retorsion theorems, the independence-frontier catalogue, the "
            "countermodel catalogue and the investigation index | "
            "[investigations/catalogues.md](investigations/catalogues.md) |")
-        ap("| The complete kernel audit, the axiom inventory (all 35, with tags and "
-           "dependents), the dependency ledger, the consistency checks and the code "
-           "annex | [investigations/kernel-audit.md](investigations/kernel-audit.md) |")
+        ap(f"| The complete kernel audit, the axiom inventory (all {len(_REGISTRY)}, "
+           "with tags and dependents), the dependency ledger, the consistency checks and "
+           "the code annex | [investigations/kernel-audit.md](investigations/kernel-audit.md) |")
         ap("")
         ap("Generated, not editorial: one pass over the kernel emits both files, and the "
            "superset check fails the build if anything is missing from their union. "
@@ -13312,8 +13603,20 @@ LEDGER_CELL_CAP = 4000
 # was the real binding cap for a while; it is raised to the same figure in the same
 # change, because a generator budget and a test budget that disagree only mean the
 # looser one is decorative.
-README_VISIBLE_BUDGET = 1740
-README_TOTAL_BUDGET = 1800
+#
+# 1740 -> 1715 visible / 1800 -> 1825 total (plan S3, 2026-10-02): a seventeenth
+# `R`-entry, `R15. Meaning is unrestricted` — the countermodel row for
+# `unrestricted_meaning_thesis_is_refuted`, which kills the *unrestricted* meaning thesis
+# without touching the guarded one (D-3, `Tag: TRANS`). +25 total, +24 visible (the
+# `<a id>` anchor is invisible). The budget is amended rather than the row dropped or the
+# existing derivations thinned, for the reason the Cremation amendment gives: a bound that a
+# real countermodel cannot fit inside stops binding at all, and this row is the machine-checked
+# form of *praeter hoc, quod unus est, tres sunt* — the claim that what needs a free subject is
+# **bounded** meaning. Removing it to save 25 lines would remove the one thing the reading path
+# exists to let a reader check. Measured 1710 visible / 1819 total, so the new caps carry 5 and 6
+# lines of headroom.
+README_VISIBLE_BUDGET = 1715
+README_TOTAL_BUDGET = 1825
 README_PARA_CAP = 300
 README_FACT_DEADLINE = 60
 
@@ -14322,9 +14625,9 @@ def main():
     verify_classical_attribute_status(decls, node_map)
 
     # `ax_shown` is seeded by render_compact_axiom_ledger() above, which
-    # introduces all 35 axioms in investigations/kernel-audit.md, so this check
-    # is satisfied by the audit surface rather than by the README. It is kept
-    # here as the "no axiom is unaccounted for anywhere" guard.
+    # introduces every axiom in _REGISTRY in investigations/kernel-audit.md, so
+    # this check is satisfied by the audit surface rather than by the README. It
+    # is kept here as the "no axiom is unaccounted for anywhere" guard.
     missing_ax = set(ax_id) - _CTX["ax_shown"]
     assert not missing_ax, f"axioms never introduced inline: {sorted(missing_ax)}"
 

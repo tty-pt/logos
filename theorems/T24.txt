@@ -113,7 +113,7 @@ PROVEN como teoremas condicionais.
 --------------------------------------------------------------------------------
 
 O que estava errado. `AsymmetricGrounding` lia-se
-`∀ g1 g2, GroundsEntity g1 g2 → ¬ GroundsEntity g2 g1` **sem a guarda `g1 ≠ g2`**, e a
+`∀ g1 g2, OneEssence g1 g2 → ¬ OneEssence g2 g1` **sem a guarda `g1 ≠ g2`**, e a
 fundamentação é contenção de significado, logo reflexiva. Tomando `g1 = g2 = ofGround`, a
 premissa é refutada. Uma premissa que ninguém pode pagar não sustenta um atributo: o
 `PROVEN` de C207/C211 é verdadeiro *como inferência*, mas o atributo que lhes era creditado
@@ -125,13 +125,13 @@ C316 — A premissa de assimetria é INSATISFAZÍVEL (COUNTERMODEL, `{Means, Sub
 theorem not_asymmetric_grounding : ¬ AsymmetricGrounding
 ```
 
-com C313 `groundsEntity_reflexive : ∀ e, GroundsEntity e e` a fechar o diagnose.
+com C313 `groundsEntity_reflexive : ∀ e, OneEssence e e` a fechar o diagnose.
 
 C314 — A noção que a prova precisava JÁ EXISTIA (`{Means, Subject}`):
 
 ```lean
 theorem grounds_ground_iff_maximal (e : Entity) :
-    GroundsEntity e Entity.ofGround ↔ MaximalCapacity e
+    OneEssence e Entity.ofGround ↔ MaximalCapacity e
 ```
 
 Como `Entity.ofGround` significa toda a proposição, "fundamentar o fundamento" é exactamente
@@ -237,3 +237,35 @@ declarado `Tag: VOCAB`** (o 27º; 26 → 27, VOCAB 15 → 16), o registo ◈ foi
 linhas passaram a **incondicionais**, mantendo `PROVEN`. A regra que Γ devia ter seguido desde o
 começo, e que este lote formula: *o corpus não pode provar o que não vê* — uma premissa com carga
 suficiente para precisar de selo tem de ser um `axiom`, não um `def`.
+
+**Actualização 2026-10-03 (lote FINITUDE-SPLIT) — o que mudou no PRESENTE.**
+Tudo o que está acima continua exactamente verdadeiro para 2026-09-28 e fica como estava, pela
+convenção do ficheiro. O que mudou é o estado actual, e a correcção é de leitura:
+
+O limite `SemanticFinitude` foi **dividido em dois axiomas**. `SemanticFinitude` passou a
+`∀ s, ContingentSubjectKind s → ∃ p, ¬ Means s p` (continua `Tag: VOCAB`), e foi criado
+`GroundTranscendence : ∀ s : Subject, ∃ p, ¬ Means s p` (`Tag: META`). **Juntas** são exactamente
+o limite antigo — nada se perdeu, nenhum enunciado se estreitou, nenhuma derivação se moveu.
+O que muda é que **24 linhas deixaram de ser só-vocabulário**: onde antes se pagava
+`SemanticFinitude` a `Tag: VOCAB` e o distintivo lia `PROVEN`, agora paga-se
+`GroundTranscendence` a `Tag: META` e o distintivo lê `PROVEN↑`, que o leitor vê como
+`⚠️ AXIOMATIC (GroundTranscendence)`. A contagem de axiomas subiu **38 → 39**
+(18 `VOCAB` / 6 `SEM` / 13 `META` / 2 `TRANS`).
+
+Duas precisões que evitam duas leituras erradas:
+
+1. **A afirmação «as dez linhas mantêm o distintivo `PROVEN` porque `VOCAB` não é substantivo»
+   deixou de valer para o presente.** Valeu em 2026-09-28, quando era verdade. As linhas C389–C398
+   e C400 que dependiam do limite **irrestrito** pagam agora `GroundTranscendence`. O que
+   permanece `PROVEN` é o que a dependência *estreitada* ainda cobre.
+2. **A negação da omnisciência das pessoas divinas NÃO foi removida — foi reatribuída.** O
+   `SemanticFinitude` estreitado já não a nega a um sujeito necessário, mas `GroundTranscendence`
+   nega-a a **todo** sujeito, e os teoremas de `NecessaryKindAudit` continuam a derivar-se dele. A
+   conclusão de Γ sobre as três Pessoas divinas é **inalterada**. Ver GAPMAP C388–C400 e
+   `plan §8.2`/`§14`.
+
+Correcção de censor, na mesma data: o registo contava **40** axiomas e **7 SEM**, quando o
+verdadeiro é **39** e **6 SEM**. `Logos/AsieticChoice.lean:19` é a linha de prosa `axiom of Γ**:`
+dentro de um comentário `/- -/`, e o analisador do gate contava-a como um axioma chamado `of`,
+herdando `SEM` do docstring anterior. Confirmado por três fontes independentes. O movimento de S5
+é portanto **38 → 39**, não 39 → 40.

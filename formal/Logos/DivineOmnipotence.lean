@@ -55,7 +55,7 @@ This module formalizes the characteristic of **Foundational Omnipotence**
           remains the shape-level proof that (1) plus C465's existential shape would not have entailed
           it. Production is still not creation: C110's `Creates` separation stands.
 
-  Note that (1) alone would not yield (2): `GroundsEntity`
+  Note that (1) alone would not yield (2): `OneEssence`
   (`RecoveredOntologicalGround.lean:57`) is explanatory containment (*esse est
   agere*), and `means_does_not_imply_means_selection` (`HostileSemantics.lean:1861`)
   already machine-checks that omni-scope does not entail selection power.
@@ -89,7 +89,7 @@ open Logos.Entity (Entity EntityOf ExistsAt actualWorld)
 open Logos.Modal (NecessaryEntity)
 open Logos.Agency (Subject NecessarySubjectKind ContingentSubjectKind)
 open Logos.Necessity (WProp)
-open Logos.RecoveredOntologicalGround (GroundsEntity)
+open Logos.RecoveredOntologicalGround (OneEssence)
 open Logos.FoundationalOmnipresence
     (WorldRigidPresence UniversalModalGround ofGround_universal_modal_ground)
 open Logos.TheologicalModalHardening (KripkeFrame UniversalFrame)

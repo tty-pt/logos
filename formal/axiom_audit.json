@@ -1100,7 +1100,7 @@
  ],
  "Logos.AsieticChoice.ContestedContent": [],
  "Logos.AsieticChoice.OpenAlternative": [],
- "Logos.AsieticChoice.SingleContentSignature.Faithful": [],
+ "Logos.AsieticChoice.SingleContentSignature.SingleValued": [],
  "Logos.AsieticChoice.SingleContentSignature.Subject": [],
  "Logos.AsieticChoice.SingleContentSignature.antecedentHolds": [],
  "Logos.AsieticChoice.SingleContentSignature.antecedentHolds_in_canonicalModel": [],
@@ -1108,7 +1108,6 @@
  "Logos.AsieticChoice.SingleContentSignature.casesOn": [],
  "Logos.AsieticChoice.SingleContentSignature.content": [],
  "Logos.AsieticChoice.SingleContentSignature.ctorIdx": [],
- "Logos.AsieticChoice.SingleContentSignature.faithful": [],
  "Logos.AsieticChoice.SingleContentSignature.means": [],
  "Logos.AsieticChoice.SingleContentSignature.mk.inj": [],
  "Logos.AsieticChoice.SingleContentSignature.mk.injEq": [
@@ -1119,12 +1118,21 @@
  "Logos.AsieticChoice.SingleContentSignature.noConfusion": [],
  "Logos.AsieticChoice.SingleContentSignature.noConfusionType": [],
  "Logos.AsieticChoice.SingleContentSignature.recOn": [],
+ "Logos.AsieticChoice.SingleContentSignature.single": [],
  "Logos.AsieticChoice.SingleContentSignature.singleContentModel": [],
+ "Logos.AsieticChoice.SingleContentSignature.singleContentModel_is_genuinely_single_content": [],
  "Logos.AsieticChoice.SingleContentSignature.witness": [],
  "Logos.AsieticChoice.SingleContentSignature.witnessContent": [],
  "Logos.AsieticChoice.TrueChoice": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
+ ],
+ "Logos.AsieticChoice.act_alone_yields_polarity": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Choice.AxActPolarity"
  ],
  "Logos.AsieticChoice.an_asietic_entity_exists": [
   "Logos.Agency.Means",
@@ -1151,7 +1159,19 @@
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
- "Logos.AsieticChoice.bareRejectedHornCoMeant_is_not_derivable": [],
+ "Logos.AsieticChoice.bareRejectedHornCoMeant_is_derivable": [
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum",
+  "Logos.Choice.AxActPolarity"
+ ],
+ "Logos.AsieticChoice.bareRejectedHornCoMeant_is_not_derivable": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
  "Logos.AsieticChoice.chooses_implies_trueChoice": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -1192,6 +1212,17 @@
   "Logos.Agency.subjectWill",
   "Logos.Value.AxTwoSubjects"
  ],
+ "Logos.AsieticChoice.gammaMeans_is_not_single_valued": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Initiates",
+  "Logos.Agency.Means",
+  "Logos.Agency.State",
+  "Logos.Agency.Subject",
+  "Logos.Agency.performative_act_datum",
+  "Logos.Choice.AxActPolarity"
+ ],
  "Logos.AsieticChoice.genuineNormativity_implies_trueChoice": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -1204,6 +1235,12 @@
   "Logos.Agency.Subject"
  ],
  "Logos.AsieticChoice.open_alternative_is_incompatible": [],
+ "Logos.AsieticChoice.person_is_asietic": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
  "Logos.AsieticChoice.retorsion_implies_rejectedHornCoMeant": [
   "Logos.Agency.Initiates",
   "Logos.Agency.Means",
@@ -1218,7 +1255,11 @@
   "Logos.Agency.Subject",
   "Logos.RetorsiveNormativity.AxJudicativeBipolarity"
  ],
- "Logos.AsieticChoice.singleContentModelRefutesBareRejectedHorn": [],
+ "Logos.AsieticChoice.singleContentModelRefutesBareRejectedHorn": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
  "Logos.AsieticChoice.strongChoice_iff_trueChoice": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -1311,6 +1352,7 @@
   "Logos.Agency.Subject"
  ],
  "Logos.AsietyFreedom.groundingCannotDeliverTrueChoice": [],
+ "Logos.AsietyFreedom.pairwise_denied_forces_meaninglessness": [],
  "Logos.AsietyFreedom.rightWrongFactYieldsNoChooser": [],
  "Logos.AsietyFreedom.weakChoice_implies_asiety": [
   "Logos.Agency.Means",
@@ -1531,6 +1573,59 @@
  ],
  "Logos.BipolarityRetorsion.voice_to_stance_not_forced_by_primitive_judicative_gamma": [],
  "Logos.BipolarityRetorsion.voice_without_normative_stance": [],
+ "Logos.BoundedMeaning.BoundedMeaningRequiresFreeSubject": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.BoundedMeaning.BoundedMeaningRequiresFreeSubject"
+ ],
+ "Logos.BoundedMeaning.BoundedMeaningSignature.Entity": [],
+ "Logos.BoundedMeaning.BoundedMeaningSignature.Subject": [],
+ "Logos.BoundedMeaning.BoundedMeaningSignature.casesOn": [],
+ "Logos.BoundedMeaning.BoundedMeaningSignature.ctorIdx": [],
+ "Logos.BoundedMeaning.BoundedMeaningSignature.entityOf": [],
+ "Logos.BoundedMeaning.BoundedMeaningSignature.means": [],
+ "Logos.BoundedMeaning.BoundedMeaningSignature.mk.inj": [],
+ "Logos.BoundedMeaning.BoundedMeaningSignature.mk.injEq": [
+  "propext"
+ ],
+ "Logos.BoundedMeaning.BoundedMeaningSignature.mk.noConfusion": [],
+ "Logos.BoundedMeaning.BoundedMeaningSignature.mk.sizeOf_spec": [],
+ "Logos.BoundedMeaning.BoundedMeaningSignature.noConfusion": [],
+ "Logos.BoundedMeaning.BoundedMeaningSignature.noConfusionType": [],
+ "Logos.BoundedMeaning.BoundedMeaningSignature.potency": [],
+ "Logos.BoundedMeaning.BoundedMeaningSignature.recOn": [],
+ "Logos.BoundedMeaning.boundedMeaning": [],
+ "Logos.BoundedMeaning.boundedMeaningModel": [],
+ "Logos.BoundedMeaning.boundedMeaningRequiresFreeSubject_is_consistent": [],
+ "Logos.BoundedMeaning.boundedMeaningRequiresFreeSubject_is_consistent_and_nonVacuous": [],
+ "Logos.BoundedMeaning.boundedMeaning_in_canonicalModel": [],
+ "Logos.BoundedMeaning.boundedMeaning_summary": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.BoundedMeaning.BoundedMeaningRequiresFreeSubject"
+ ],
+ "Logos.BoundedMeaning.entityMeansIn": [],
+ "Logos.BoundedMeaning.freeWillIn": [],
+ "Logos.BoundedMeaning.guardAntecedentHolds": [],
+ "Logos.BoundedMeaning.guardAntecedentHolds_in_canonicalModel": [],
+ "Logos.BoundedMeaning.guard_excludes_exactly_the_impersonal_cases": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.BoundedMeaning.meansInstantiated": [],
+ "Logos.BoundedMeaning.meansInstantiated_in_canonicalModel": [],
+ "Logos.BoundedMeaning.means_is_instantiated_in_canonicalModel": [],
+ "Logos.BoundedMeaning.potency_guard_excludes_the_atoms": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.BoundedMeaning.potency_guard_excludes_the_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.BoundedMeaning.unrestricted_meaning_thesis_is_refuted": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
  "Logos.CanonicalAseity.CanonicalAseity": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject"
@@ -1586,7 +1681,7 @@
   "propext",
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.CharacteristicClosure.some_entity_is_in_succession": [
   "Logos.Agency.Initiates",
@@ -1599,25 +1694,25 @@
   "propext",
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.CharacteristicClosure.the_ground_is_sole_bearer_of_divine_simplicity": [
   "propext",
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.CharacteristicClosure.the_semantic_bound_does_not_close_the_grounding_arm": [],
  "Logos.CharacteristicClosure.transcendence_and_semantic_finitude_yield_divine_simplicity": [
   "propext",
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.CharacteristicSoleBearer.no_subject_grounds_the_ground": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.CharacteristicSoleBearer.ofGround_sole_divine_pure_actuality": [
   "Logos.Agency.Initiates",
@@ -1625,25 +1720,25 @@
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.State",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omnipotence": [
   "Logos.Agency.Means",
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omnipresence": [
   "Logos.Agency.Means",
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omniscience": [
   "Logos.Agency.Means",
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.CharacteristicSoleBearer.the_ground_is_sole_bearer_of_the_footprint_characteristics": [
   "Logos.Agency.Initiates",
@@ -1651,7 +1746,7 @@
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.State",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.Choice.AlternativeSensitivity": [
   "Logos.Agency.Means",
@@ -3442,6 +3537,12 @@
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject"
  ],
+ "Logos.CosmicExistence.ofGround_not_a_person_correlate": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
  "Logos.CosmicExistence.perfect_universe_actual_is_necessary": [],
  "Logos.CosmicExistence.perfect_universe_has_no_contingent_realm": [],
  "Logos.CosmicExistence.reality_is_not_exhausted_by_the_ground": [
@@ -3463,12 +3564,6 @@
   "propext",
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject"
- ],
- "Logos.CosmicExistence.the_ground_is_not_personal": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject",
-  "Logos.Agency.Will",
-  "Logos.Agency.subjectWill"
  ],
  "Logos.CosmicExistence.the_ground_is_not_the_universe": [
   "Logos.Agency.NecessarySubjectKind",
@@ -4084,33 +4179,35 @@
   "Logos.DivineAgape.AxAgapeEssence",
   "Logos.DivineAgape.AxProcessionWord"
  ],
- "Logos.DivineAgape.DivinePerson.casesOn": [
+ "Logos.DivineAgape.DivineHypostasis.casesOn": [
   "Logos.Agency.Subject"
  ],
- "Logos.DivineAgape.DivinePerson.ctorIdx": [],
- "Logos.DivineAgape.DivinePerson.deiformEntity": [
+ "Logos.DivineAgape.DivineHypostasis.ctorIdx": [
   "Logos.Agency.Subject"
  ],
- "Logos.DivineAgape.DivinePerson.mk.inj": [
+ "Logos.DivineAgape.DivineHypostasis.deiformEntity": [
   "Logos.Agency.Subject"
  ],
- "Logos.DivineAgape.DivinePerson.mk.injEq": [
+ "Logos.DivineAgape.DivineHypostasis.mk.inj": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.DivineHypostasis.mk.injEq": [
   "propext",
   "Logos.Agency.Subject"
  ],
- "Logos.DivineAgape.DivinePerson.mk.noConfusion": [
+ "Logos.DivineAgape.DivineHypostasis.mk.noConfusion": [
   "Logos.Agency.Subject"
  ],
- "Logos.DivineAgape.DivinePerson.mk.sizeOf_spec": [
+ "Logos.DivineAgape.DivineHypostasis.mk.sizeOf_spec": [
   "Logos.Agency.Subject"
  ],
- "Logos.DivineAgape.DivinePerson.noConfusion": [
+ "Logos.DivineAgape.DivineHypostasis.noConfusion": [
   "Logos.Agency.Subject"
  ],
- "Logos.DivineAgape.DivinePerson.noConfusionType": [
+ "Logos.DivineAgape.DivineHypostasis.noConfusionType": [
   "Logos.Agency.Subject"
  ],
- "Logos.DivineAgape.DivinePerson.recOn": [
+ "Logos.DivineAgape.DivineHypostasis.recOn": [
   "Logos.Agency.Subject"
  ],
  "Logos.DivineAgape.Subsists": [
@@ -7348,7 +7445,7 @@
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.State",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.NecessaryKindAudit.necessary_kind_subject_is_gapless_operator": [
   "Logos.Agency.NecessarySubjectKind",
@@ -7362,7 +7459,7 @@
   "Logos.Agency.Means",
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.NecessaryKindAudit.necessary_realm_is_two_genera": [
   "propext",
@@ -7396,7 +7493,7 @@
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.State",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.NecessaryPersonalGround.ActualEntity": [
   "Logos.Agency.NecessarySubjectKind",
@@ -9205,7 +9302,7 @@
   "Logos.Agency.Subject"
  ],
  "Logos.PersonalNormativeGround.NormativePolarity": [],
- "Logos.PersonalNormativeGround.PersonalEntity": [
+ "Logos.PersonalNormativeGround.PersonCorrelate": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
   "Logos.Agency.Will",
@@ -9848,14 +9945,14 @@
   "Logos.Agency.Means",
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.Precedence.precedence_identifies_the_ground_where_stage_invariance_does_not": [
   "propext",
   "Logos.Agency.Means",
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.Precedence.rightWrongDistinction_is_world_invariant": [],
  "Logos.Precedence.stage_invariance_does_not_uniquely_identify_the_ground": [
@@ -10147,10 +10244,6 @@
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject"
  ],
- "Logos.RecoveredOntologicalGround.GroundsEntity": [
-  "Logos.Agency.Means",
-  "Logos.Agency.Subject"
- ],
  "Logos.RecoveredOntologicalGround.ImpersonalEntity": [
   "Logos.Agency.Subject"
  ],
@@ -10171,6 +10264,10 @@
  "Logos.RecoveredOntologicalGround.NecessaryGroundOfReality.recOn": [
   "Logos.Agency.Means",
   "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.RecoveredOntologicalGround.OneEssence": [
+  "Logos.Agency.Means",
   "Logos.Agency.Subject"
  ],
  "Logos.RecoveredOntologicalGround.atom_cannot_ground_person": [
@@ -11017,26 +11114,32 @@
  "Logos.SecondPersonGoodAttempt.LoneWillModel": [],
  "Logos.SecondPersonGoodAttempt.lone_will_is_vacuously_individual": [],
  "Logos.SecondPersonGoodAttempt.two_persons_do_not_force_good_obtains": [],
+ "Logos.SemanticFinitude.GroundTranscendence": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.SemanticFinitude.GroundTranscendence"
+ ],
  "Logos.SemanticFinitude.SemanticFinitude": [
   "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject",
   "Logos.SemanticFinitude.SemanticFinitude"
  ],
  "Logos.SemanticFinitude.conditional_canonical_aseity_stipulated": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.SemanticFinitude.exactly_one_universal_modal_ground_stipulated": [
   "Logos.Agency.Means",
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.SemanticFinitude.ground_is_canonically_aseitous_but_not_asietic_stipulated": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.SemanticFinitude.ofGround_divine_pure_actuality_stipulated": [
   "Logos.Agency.Initiates",
@@ -11044,49 +11147,50 @@
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.State",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.SemanticFinitude.ofGround_divine_simplicity_stipulated": [
   "propext",
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.SemanticFinitude.ofGround_modal_aseity_conditional_stipulated": [
   "Logos.Agency.Means",
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.SemanticFinitude.ofGround_no_grounding_potency_stipulated": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.SemanticFinitude.ofGround_non_composite_stipulated": [
   "propext",
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.SemanticFinitude.ofGround_simplicity_and_transcendence_stipulated": [
   "propext",
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.SemanticFinitude.ofGround_sole_universal_grounding_stipulated": [
   "Logos.Agency.Means",
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.SemanticFinitude.semanticFinitude_excludes_ground_from_subjects": [
   "Logos.Agency.Means",
   "Logos.Agency.Subject",
-  "Logos.SemanticFinitude.SemanticFinitude"
+  "Logos.SemanticFinitude.GroundTranscendence"
  ],
  "Logos.SemanticFinitude.semantic_omnipotence_is_consistent": [],
+ "Logos.SemanticFinitude.subject_finitude_is_consistent": [],
  "Logos.Semantics.FalseAt": [],
  "Logos.Semantics.Form.and.elim": [],
  "Logos.Semantics.Form.and.inj": [],
@@ -12269,6 +12373,230 @@
   "Logos.LovesAsGround.GroundBearsGood",
   "Logos.ThomisticAct.Produces",
   "Logos.ThomisticAct.ground_love_produces"
+ ],
+ "Logos.TrinitarianPersonalGround.GroundByBeing": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.TrinitarianPersonalGround.Perichoretic": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.TrinitarianPersonalGround.PersonalGround.casesOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
+ "Logos.TrinitarianPersonalGround.PersonalGround.indwells": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
+ "Logos.TrinitarianPersonalGround.PersonalGround.recOn": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
+ "Logos.TrinitarianPersonalGround.PersonalGround.sustains": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
+ "Logos.TrinitarianPersonalGround.ground_is_not_a_fourth_chooser": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.TrinitarianPersonalGround.ground_scope_does_contain_incompatibles": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.TrinitarianPersonalGround.no_person_is_the_ground": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.TrinitarianPersonalGround.ofGround_grounds_every_being_by_presence": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.TrinitarianPersonalGround.ofGround_grounds_every_person": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
+ "Logos.TrinitarianPersonalGround.ofGround_is_perichoretic": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
+ "Logos.TrinitarianPersonalGround.ofGround_leaves_nothing_ungrounded": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.TrinitarianPersonalGround.the_ground_is_not_void_of_personhood": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
+ "Logos.TrinitarianPersonalGround.trinitarianPersonalGround_summary": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
+ "Logos.TrinitarianSubjectBridge.DivineRole.casesOn": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.ctorElim": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.ctorElimType": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.ctorIdx": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.noConfusion": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.noConfusionType": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.ofNat": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.ofNat_ctorIdx": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.recOn": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.source.elim": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.source.sizeOf_spec": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.source_ne_spirit": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.source_ne_word": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.spirit.elim": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.spirit.sizeOf_spec": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.word.elim": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.word.sizeOf_spec": [],
+ "Logos.TrinitarianSubjectBridge.DivineRole.word_ne_spirit": [],
+ "Logos.TrinitarianSubjectBridge.DivineSubjectRole": [
+  "Logos.Agency.Subject",
+  "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+ ],
+ "Logos.TrinitarianSubjectBridge.TrinitarianPersonalBridge": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+  "Logos.TrinitarianSubjectBridge.TrinitarianPersonalBridge"
+ ],
+ "Logos.TrinitarianSubjectBridge.d3s_antecedent_cannot_fire_on_the_impersonal": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.TrinitarianSubjectBridge.instDecidableEqDivineRole": [],
+ "Logos.TrinitarianSubjectBridge.instReprDivineRole": [],
+ "Logos.TrinitarianSubjectBridge.instReprDivineRole.repr": [],
+ "Logos.TrinitarianSubjectBridge.no_divine_person_is_the_ground": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.TrinitarianSubjectBridge.one_necessary_ground_three_free_necessary_persons": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.SemanticFinitude.GroundTranscendence",
+  "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+  "Logos.TrinitarianSubjectBridge.TrinitarianPersonalBridge"
+ ],
+ "Logos.TrinitarianSubjectBridge.person_is_freeSubject": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
+ "Logos.TrinitarianSubjectBridge.role_exhausts_the_sort": [
+  "propext"
+ ],
+ "Logos.TrinitarianSubjectBridge.roles_make_the_three_persons_distinct": [
+  "Logos.Agency.Subject",
+  "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+ ],
+ "Logos.TrinitarianSubjectBridge.s4_does_not_make_the_ground_a_fourth_chooser": [
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.TrinitarianSubjectBridge.the_bridge_asserts_freedom_independently_of_groundsRightWrong": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+  "Logos.TrinitarianSubjectBridge.TrinitarianPersonalBridge"
+ ],
+ "Logos.TrinitarianSubjectBridge.the_three_persons_freedom_is_asserted_not_earned": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.BoundedMeaning.BoundedMeaningRequiresFreeSubject",
+  "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+  "Logos.TrinitarianSubjectBridge.TrinitarianPersonalBridge"
+ ],
+ "Logos.TrinitarianSubjectBridge.the_three_persons_share_the_one_ground": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+  "Logos.TrinitarianSubjectBridge.TrinitarianPersonalBridge"
+ ],
+ "Logos.TrinitarianSubjectBridge.three_divine_persons_are_free_subjects": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+  "Logos.TrinitarianSubjectBridge.TrinitarianPersonalBridge"
+ ],
+ "Logos.TrinitarianSubjectBridge.three_divine_persons_are_necessary": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+  "Logos.TrinitarianSubjectBridge.TrinitarianPersonalBridge"
+ ],
+ "Logos.TrinitarianSubjectBridge.three_divine_persons_are_persons": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+  "Logos.TrinitarianSubjectBridge.TrinitarianPersonalBridge"
+ ],
+ "Logos.TrinitarianSubjectBridge.three_divine_persons_exhaust_the_necessary_kind": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+  "Logos.TrinitarianSubjectBridge.TrinitarianPersonalBridge"
+ ],
+ "Logos.TrinitarianSubjectBridge.three_divine_persons_exist_with_roles": [
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+  "Logos.TrinitarianSubjectBridge.TrinitarianPersonalBridge"
  ],
  "Logos.TrinitySeparations.agape_and_word_without_spirit_is_binitarian": [],
  "Logos.TrinitySeparations.attribute_love_gives_no_subsistent_word": [],
