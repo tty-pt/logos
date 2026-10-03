@@ -206,6 +206,7 @@
       "rebuttal_formula": "FreeWill s → Person s",
       "primary_targets": [
         "freeWill_implies_person",
+        "a_genuine_free_person_exists",
         "person_iff_thomisticCore"
       ],
       "disclosure": "priced on the declared VOCAB law `will_individuation`; 0 substantive axioms. The price is checked to be underivable (`SharedWillModel`, `{}`).",
@@ -424,7 +425,10 @@
         "**One God; three Persons; one nature.** Γ's result is not a unitarian monad and not a trinity of three gods: it is one ground, of one nature, in which there are three distinct divine Persons.",
         "All three are divine of the *same* `divineReality` (`the_father_is_divine`, `the_beloved_is_divine`, `the_spirit_is_divine`). Distinctness is personal, not substantial: the Persons are separated, while one ground and one nature carry the unity.",
         "This is the Catholic and Nicene reading — *unus Deus, tres Personae*: one divine being in three persons, consubstantial, distinguished by procession and not by essence. The author is a **Catholic**; this is the reading he reads Γ as supporting.",
-        "The faith supplies the Persons; the kernel prices them (C510 rests on three declared META premises) and proves at `{}` that it cannot supply them for free (C109).",
+        "Read *consubstantial* here as **faith, not a Γ result**. Three things it is not:",
+        "the `Consubstantial` anchor was deleted — it was `True` of arbitrary entities, and G9 in `test_personal_ground_kind.py` refuses its return; C573's `MutualIndwelling` was never declared; and C572, the nearest kernel-shaped attempt at the formula, was **withdrawn as Modalism**.",
+        "What Γ carries is the *homoousios* half, at a price: one ground that `indwells` every Person, three Persons distinct by role, and the shared **personal property** now derived for free (`two_subsisting_share_one_location`, `{Subject}`).",
+        "The shared **nature** is still not in the vocabulary of the sort. C519 and C520 say so in those words.",
         "**What this is not.** Not three Gods: one ground (C320/C389), one nature (C440, *actus purus*, aseity), one shared `divineReality`. And not that Γ *proves* the Trinity — it proves the three Persons on declared premises, and proves that the premises are needed."
       ],
       "price_table": [
@@ -457,7 +461,7 @@
             "DivineAgape.the_beloved_is_divine",
             "DivineAgape.the_spirit_is_divine"
           ],
-          "gloss": "Consubstantiality, the anti-tritheism half: `is_divine the_father divineReality ∧ is_divine the_beloved divineReality ∧ is_divine the_spirit divineReality`. Same price as C510."
+          "gloss": "The anti-tritheism half: `is_divine the_father divineReality ∧ is_divine the_beloved divineReality ∧ is_divine the_spirit divineReality`. **Not the price of C510, and cheaper than it** — `the_father_is_divine` and `the_beloved_is_divine` rest on `{Subject, AxAgapeEssence, CL}` (one META), `the_spirit_is_divine` on `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` (two META), so this row's union is two META axioms where C510 needs three. The word *consubstantial* is not used for this row: the `Consubstantial` anchor was deleted because `Consubstantial Entity.ofGround e f` is `True` of arbitrary entities including atoms — a `{}` price on a `True` proposition is a null result, which is why G9 in `test_personal_ground_kind.py` refuses its re-declaration. The one-ness Γ actually carries is `indwells`, and the shared *nature* is still not in the vocabulary of the sort."
         },
         {
           "row": "The Persons are **distinct** (not three gods)",
@@ -498,7 +502,7 @@
       "heading": "## Part III — The refutations: every branch of the denial, read",
       "title": "Part III — The refutations: every branch of the denial, read",
       "body": [
-        "Sixteen entries, R1–R16. Each names the step it makes impossible (`KILLS`) and then shows the derivation: the premises it needs, the steps, the `⊥` — or the negation of its own thesis.",
+        "Twenty-one entries, R1–R21. Each names the step it makes impossible (`KILLS`) and then shows the derivation: the premises it needs, the steps, the `⊥` — or the negation of its own thesis.",
         "Every line below is compiled from the Lean proof term; the branch, the objection, and which premise is *the thesis* are the only authored strings. Each block's price and kind are derived, and where a priced second route to the same death exists it is shown and priced separately.",
         "A death is classified by derivation, never typed: `⊥` when the goal is `False`; `⊘` when the derivation returns the denial's own negation; 💥 **COLLAPSE** when the denial, followed, destroys the normativity it claims to keep.",
         "{role_split}",
@@ -725,6 +729,7 @@
           ],
           "objection": "“No one has shown a free subject exists.”",
           "targets": [
+            "a_genuine_free_person_exists",
             "AsieticChoice.freeWill_exists",
             "epistemic_order_makes_the_act_datum_necessary"
           ],
@@ -744,6 +749,58 @@
           "derivation_target": "critic_presenting_objection_is_person",
           "denial_hypothesis": "PresentsAsSound critic objection",
           "note": "Pillar 7. The kernel anchor is `ProofPresentationRetorsion.lean:206`; the footprint is free, so the critic's own stance is derived at the same price as every other entry here."
+        },
+        {
+          "branch": "A Single Person could only give to contingent beings, so its self-giving would depend on them",
+          "attacks": "person_grounds_poles",
+          "role": "derivation",
+          "objection": "“If the Ground were one Person, it could only give to contingent (temporal) beings — so its self-giving would depend on them, and it would thereby become contingent too.”",
+          "targets": [
+            "self_gift_cannot_depend_on_a_contingent_person",
+            "donation_terminus_is_as_necessary_as_the_donor",
+            "donation_makes_contingency_is_refuted",
+            "single_person_denial_is_refuted"
+          ],
+          "derivation_target": "self_gift_cannot_depend_on_a_contingent_person",
+          "denial_hypothesis": "∃ f, o, ∃ s, SelfDonation(f, o) ∧ o.deiformEntity = EntityOf(s)",
+          "note": "**The hinge, and the row the previous batch never had.** The objection is a four-step chain — (1) one Person, (2) therefore only contingent recipients, (3) therefore the self-giving *depends on* the contingent, (4) therefore contingent — against a Ground already determined Eternal, Necessary, Free and Immutable. **Step 3 is where it dies**, and it dies free: `SelfDonation` puts the recipient at `divineReality := Entity.ofGround`, so no `Subject` can be the recipient of a donation. The hypothesis here is that dependence as a proposition and the compiled derivation is C579 (`{Subject}`), whose primary is the premise step itself (`single_person_denial_is_refuted`, also `{Subject}`): assume the author's step 1 and `False` follows, because `Entity.ofGround` is no `Subject`'s entity. **No `AxAgapeEssence` appears on this row.** The donation's *existence* is priced on its own row below and is deliberately not used to refute an objection that grants it; a row that refuted the objection by way of the datum it also prices would be the datum. What the free rows say is that the gift's terminus is the necessary ground (`donation_terminus_is_as_necessary_as_the_donor`, `{NecessarySubjectKind, Subject}`), so the contingency conclusion has no premise (`donation_makes_contingency_is_refuted`). “It cannot be only one” is a *separate* paid row — `Plurality.notAlone` (T12) costs `AxTwoSubjects` — and is not folded into this row's price. The terminology the earlier batch collapsed is restored here: the ground **is personal** (C362, `PersonalGround`, whose `indwells` is `OneEssence` for *every* `Subject`), it **is** the nature those Persons are OneEssence in, and it is **no Person among them** (C519). “The ground is not a person” is the third of those, not a denial of the first."
+        },
+        {
+          "branch": "Denying the donation of the Self",
+          "attacks": "person_grounds_poles",
+          "role": "derivation",
+          "objection": "“So the Ground does not donate the Self to itself.”",
+          "targets": [
+            "agape_is_self_donation"
+          ],
+          "derivation_target": "denying_self_donation_is_absurd",
+          "denial_hypothesis": "¬∃ f, o, SelfDonation(f, o)",
+          "note": "The denial is a **real premise** of the compiled theorem — `denying_self_donation_is_absurd`, C576 — which is what makes this row a derivation and not a badge asserted over it. **Its kind is `⚠️ PRICED`, not `⊥ CONTRADICTION`, and the difference is not cosmetic.** `AxAgapeEssence` is priced, so a world exists in which the denial holds (the Narcissus world, C511, where the source loves only itself): the denial is *available* and is contradicted only by what is **declared**. Γ does not claim the donation is a theorem of logic. This row is mounted for that reason and not as the answer to the author — the answer is the free row above, which does not mention the donation.",
+          "priced": true
+        },
+        {
+          "branch": "A self-gift is impossible because the donor and the recipient are two things",
+          "attacks": "person_grounds_poles",
+          "role": "derivation",
+          "objection": "“A gift of the Self is a category mistake: it needs two relata, and two relata cannot be one thing.”",
+          "targets": [
+            "denying_shared_location_is_absurd",
+            "two_subsisting_share_one_location"
+          ],
+          "note": "The stronger form, and the part that costs nothing extra: grant a donor and a recipient, grant that both subsist, grant that the love holds — and the denial *still* has to deny that they share one location-entity, which is `{}`. So the two-relata objection is refuted by arithmetic, not by a purchase. Same footprint as the row above ({Subject, AxAgapeEssence, Classical.choice}, one META): the price buys the gift, and the gift is not two things. This row has no thesis premise to label because the theorem's whole conclusion is the denial — so it prints the compiled statement and the derived kind rather than transcribing one.",
+          "denial_proposition": "∀ f, o, Subsists(f) → Subsists(o) → DivineLove f o → f.deiformEntity ≠ o.deiformEntity"
+        },
+        {
+          "branch": "The Ground cannot give at all, because it is not a person who chooses",
+          "attacks": "person_grounds_poles",
+          "role": "derivation",
+          "objection": "“Only a chooser gives. The Ground is not a chooser, so the donation is empty.”",
+          "targets": [
+            "self_donation_needs_no_personhood_of_the_ground",
+            {"target": "ground_is_not_a_fourth_chooser", "role": "premise"},
+            "agape_is_self_donation"
+          ],
+          "note": "**The row that restores what a laundering sentence had removed.** The corpus answered this with a label — “the one essence is not a fourth chooser; its freedom is their freedom, shared rather than duplicated” — and commit `4a59173` then claimed the label was an absent predicate presented as an argument, deleted the ground’s freedom from the doctrine, and rebuilt the reading on that. The predicate is **not** absent: `AsietyFreedom.asietyFreedomOfGround` (`AsietyFreedom.lean:141`) is the ◈ `def` that states the sharing, `asietyFreedom_summary` (`:357`) consumes it, and three docstrings in that module say the vacuity of `OneEssence` is *load-bearing* because it marks the ground’s freedom as **transferred** rather than **exercised**. A `def` premise is invisible to `#print axioms`, and from that invisibility the commit inferred that nothing was there. `LOVE-2.md` D1 withdraws that inference. So this row is a **conjunction, both halves machine-checked**, plus a granted premise: the ground is **not** a fourth chooser (free at `{Means, Subject}`, and marked role=premise — it is the *objection’s* premise, so it is printed as granted and kills nothing), **and** the donation of the Self stands anyway (C575, one META axiom). What the price buys is the gift and nothing more: it does not buy a fourth chooser, and it does not buy the ground’s personhood at the entity level, which C228 leaves `BLOCKED`. The ground **is** personal — C362, C140 — and `¬ Asiety Entity.ofGround` is `ofGround_ne_ofSubject`, i.e. C519: the nature is not one of its instances."
         }
       ]
     },

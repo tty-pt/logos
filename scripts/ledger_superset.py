@@ -228,7 +228,24 @@ def main() -> int:
         # open question. This is a reduction in the *frontier*, not a resolved step:
         # nothing was proved, and C572 must never be counted as discharged. The count
         # is checked against the pin minus retired rows, never by wish.
-        "frontier rows": (r"^\* \*\*`", 32),
+        # 33 -> 32 on 2026-10-03: C573 (strict perichoresis) left the frontier when S1 showed
+        # its content is already derived and free (`two_subsisting_share_one_location`,
+        # `each_subsisting_person_is_in_the_other`, both `{Subject}`), leaving only the question
+        # of whether to *name* what is already `=`. Its status is `WITHDRAWN (undefined
+        # predicate)` — the C572 precedent — which means "not an open question", NOT "proved":
+        # no `MutualIndwelling` primitive is declared and the mutual-indwelling formula is still
+        # not a theorem of Γ. C574 enters as the OPEN row inheriting the residual naming
+        # question, so the net movement is one withdrawal and one honest addition, same as the
+        # C572/C573 pair above. Measured: 33 before, 32 after; the pin value is unchanged at 32
+        # and the check below is `got < want`, so an under-count fails and an over-count is
+        # reported by the printed count rather than silently tolerated.
+        # 32 -> 33 on 2026-10-03: C580 (the `Subject`/`DivineHypostasis` correspondence) entered
+        # the frontier as the AMOR/2 batch's BLOCKED row, with its missing lemma named and no
+        # declaration bought. It is the only movement: C579 sits beside it and is `PROVEN`, so
+        # it does not belong in a list of what the corpus cannot reach. Same convention as the
+        # C572/C573 pairs above — the pin tracks the measured count and the check below is
+        # `got < want`, so a withdrawal fails loudly and an addition is visible in the printout.
+        "frontier rows": (r"^\* \*\*`", 33),
         "derivation summaries": (r"^<summary>Formal Derivation", 40),
         "definition summaries": (r"^<summary>Definitions used in this section", None),
     }

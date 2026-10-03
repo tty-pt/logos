@@ -55,7 +55,7 @@ hipotese de endereco normativo genuino `GenuineNormativity s p q` (Rule R, claus
 `Act`, nenhum `Initiates`, nenhum `ClaimsCorrect`, nenhuma estipulacao. O unico conteudo para
 alem das duas conjuncoes `Means` e o facto de quadro `ContestedContent` (C259, `{}`): a
 **abertura**. Compare-se com C266/C267, que precisam de `AxJudicativeBipolarity` (SEM) *e* da
-premissa `ClaimsCorrect s p`, e com C277-C279, que precisam de `AxTwoSubjects` (META).
+premissa `ClaimsCorrect s p`, e com C277-C279, que precisam de `AxTwoNecessaryPersonalCentres` (META).
 
 C288 — O mesmo passo lido na direccao da liberdade:
 
@@ -197,7 +197,7 @@ nenhum `Subject`. Logo e compativel com um vocabulario de significado em que **n
 sujeito significa nada alguma**, e portanto **nao ha existencia axiomatica de
 escolhedor**. O passo do partilhamento pelo Criador e por isso *condicional*, e a sua
 metade existencial fica registada como nao derivavel em vez de afirmada; a metade
-incondicional continua a ser a rota `AxTwoSubjects` (META) de C277-C279.
+incondicional continua a ser a rota `AxTwoNecessaryPersonalCentres` (META) de C277-C279.
 
 Nota de forma, registada porque a primeira redaccao a errou: o quantificador e `∃`, nao
 `∀` sobre vocabularios. De `M s p`, para `M` arbitrario, nao segue `False` — logo uma

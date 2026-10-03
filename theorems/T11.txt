@@ -47,7 +47,7 @@ rightWrong_implies_meaning / rightDistinctWrong_implies_meaning — `{Means, Sub
 meaning_I_needs_subject — `{Means, Subject}` (PROVEN, C49);
 choiceField_exists — `{Means, Subject}` (PROVEN, C52, derivado de C68);
 noChoiceField_selfRefutes — `{Means, Subject}` (PROVEN, C53, retorsão performativa do campo);
-JUDGE_HAS_CHOICE_FIELD — `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (PROVEN↑, C54, via AxTwoSubjects h);
+JUDGE_HAS_CHOICE_FIELD — `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}` (PROVEN↑, C54, via AxTwoNecessaryPersonalCentres h);
 retorsion_derives_free_will — `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` (PROVEN↑, rota normativa retorsiva: a negação de normatividade genuína refuta-se performativamente como asserção correta sob AxJudicativeBipolarity, derivando FreeWill sem A14);
   retorsion_conclusion_is_the_very_genuine_normativity_structure / retorsion_address_uses_only_means /
   retorsion_opposition_is_pure_logic — `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` (PROVEN↑, testemunhas de
@@ -64,7 +64,7 @@ retorsion_derives_free_will — `{AxJudicativeBipolarity, Initiates, Means, Stat
   dado constitutivo; o campo não está vazio porque se tenta a prova de dentro dele); `¬NoGN` incondicional não é derivável
   (testemunha direta `M_inanimate`, C167); os cornos
   `NoGN`/`¬NoGN` são meta-nível — deliberação de objeto/ação exige a rota deliberativa separada;
-judge_commits / rightWrongDistinction_implies_meaning — `CL + {AxTwoSubjects, Means, Subject}`;
+judge_commits / rightWrongDistinction_implies_meaning — `{Initiates, Means, State, Subject, CL}`;
 chooses_implies_freeWill / chooses_implies_freeSubject — `{Means, Subject}` (só vocabulário), por definição;
 freeSubject_implies_intentionalSubject — `{Means, Subject}` (definicional; pessoalidade substantiva permanece independente);
 deliberateChoice_negation_decomposition — `{Initiates, Means, State, Subject}`;
@@ -72,6 +72,7 @@ AxIntentionalChoice — `{AxIntentionalChoice, Initiates, Means, State, Subject}
 genuineChoice_exists_of_act_constitutive, freeWill_exists_of_act, freeSubject_exists_of_act,
 freeWill_exists, freeSubject_exists — `{AxIntentionalChoice, Initiates, Means, State, Subject}` (PROVEN↑, F1b fechado);
 AxActPolarity, genuineChoice_exists_of_act, freeWill_exists_of_act_polarity — `{AxActPolarity, Initiates, Means, State, Subject}` (SEM, tese de polaridade contraditória opcional mais forte);
+a_genuine_free_person_exists — `{AxActPolarity, Initiates, Means, State, Subject, Will, performative_act_datum, subjectWill, will_individuation}` (PROVEN, C587, derivada sem axiomas META a partir de C565 e C221);
 act_polarity_implies_intentional_choice, intentional_choice_implies_contrastive,
 contrastive_implies_intentional_choice, act_polarity_implies_contrastive,
 contrastive_agency_implies_existential, genuineChoice_exists_of_contrastive_act,

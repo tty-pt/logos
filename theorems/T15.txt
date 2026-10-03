@@ -7,7 +7,7 @@ Entity.ofGround; EntityExistsAt w .ofGround := True; correspondências EntityMea
 PROVEN (VOCAB) — pegadas {Means, Subject} / {Subject} / {Initiates, State, Subject},
 zero axiomas substantivos; C181 `necessary_existence_is_stage_uniform` é PROVEN
 com pegada `{}` (transporte modal genérico); conjuncto pessoal da Proposição E:
-PROVEN↑ sob { AxTwoSubjects, Means, Subject, Will, subjectWill } (META anunciada; sem `will_individuation` — a rota do fundamento passa pelo livre-arbítrio).
+PROVEN↑ sob {AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill} (META anunciada; sem `will_individuation` — a rota do fundamento passa pelo livre-arbítrio).
 
 Verificado em: formal/Logos/NecessityEternity.lean (ofGround_necessary,
 ofGround_ground_of_reality, ofGround_necessary_ground_of_reality,
@@ -61,5 +61,6 @@ sem linha de identidade — a identidade hipostática g = EntityOf s é BLOQUEAD
 (ofGround_ne_ofSubject). Claim D ("sujeito necessário") continua REFUTADO
 (CountermodelPersonNotNecessary). Teologia forte da eternidade divina além da rigidez
 de estágios: não reivindicada (fronteira, §28).
+Nota (lote LOVE-4 / C587): a pessoa s de claimE é agora demonstrada como Pessoa Livre a 0 axiomas META via `NoMeanerNoFalsity.a_genuine_free_person_exists` (C587), sob a polaridade do próprio ato performativo.
 
 sorryAx: 0.

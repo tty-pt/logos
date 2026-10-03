@@ -799,7 +799,7 @@ structure ModelBSignature where
 /-- Theorem: Model B is mathematically satisfiable.
     Proves that `FreeIndependentWill s ⇏ GroundProp (EntityOf s) Polarity` in bare model theory,
     rigorously isolating the necessity of the semantic bridge `AxPersonalNormativeGround`
-    (historical name — no longer in the kernel; the current axiom is `AxTwoSubjects`).
+    (historical name — no longer in the kernel; the current axiom is `AxTwoNecessaryPersonalCentres`, C584).
     Footprint: `{}`. -/
 theorem model_b_satisfiable : ∃ M : ModelBSignature, True := by
   let M : ModelBSignature := {

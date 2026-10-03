@@ -21,6 +21,12 @@ hypothesis `PluralityLovePrinciple` (a `def` that is never proved anywhere):
 So T14 = `PROVEN↑ under {AxTwoSubjects, Means, Subject}`, **conditional on
 `PluralityLovePrinciple`**. The "chosen" component depends on F1 (freedom,
 DEFERRED). See MORAL.md §8c Finding 1.
+
+**Updated 2026-10-04 (LOVE-3/S4):** `AxTwoSubjects` was retired and replaced by
+`AxTwoNecessaryPersonalCentres` (C584). The quoted audit above is kept as the 2026-09-24 record; today
+`#print axioms Logos.Love.T14_content_conditional` =
+`[AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill]`
+(C43; C42/C44/C45 carry no substantive bridge). The conditionality stands; the bridge moved.
 -/
 
 import Logos.Core
@@ -155,6 +161,62 @@ theorem T14_content_conditional (hLove : PluralityLovePrinciple) :
   obtain ⟨p, q, hp, hq, hne⟩ := Logos.Plurality.T12_twoPersons
   exact ⟨p, q, hp, hq, hne, hLove p q hp hq hne⟩
 
+/-- T14 with the PAIR premise discharged by the necessity bridge (new 2026-10-04,
+    batch LOVE-3/S4) — this is the honest unconditional core of T14.
+
+  `T14_eternalRelation_conditional` above needs THREE premises: person stability,
+  the plurality-love principle, AND an exhibited pair of necessary-kind subjects.
+  The third is exactly what `AxTwoNecessaryPersonalCentres` now supplies, so it
+  goes; and with it the first, since the bridge yields `NecessarySubject`
+  (world-rigidity) directly rather than via `PersonStabilityPrinciple`. Only the
+  LOVE relation is still assumed.
+
+  So T14 has been reduced from three assumptions to one, and the remaining one is
+  `PluralityLovePrinciple` — an explicit `def` that is proved NOWHERE in the corpus.
+  That is the honest residual: the two necessary persons are PROVEN to exist
+  (Plurality.two_necessary_persons, 1 META); that they LOVE one another is still
+  assumed, and no row may claim it otherwise. Note on freedom (LOVE-4 / C587): a Free
+  Person is derived at 0 META via `NoMeanerNoFalsity.a_genuine_free_person_exists`.
+
+  Note `PersonStabilityPrinciple` is NOT discharged by this and is NOT refuted: it
+  says every necessary-kind person is world-rigid, which C405 proves for any
+  subject of the necessary kind. The bridge was stated over the kind precisely so
+  that no extra premise is needed here.
+  Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
+theorem T14_eternalRelation_love_only
+    (hLove : PluralityLovePrinciple) :
+    ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
+      Loves s₁ s₂ ∧ NecessarySubject s₁ ∧ NecessarySubject s₂ := by
+  obtain ⟨p, q, hp, hq, hne, hkp, hkq⟩ :=
+    Logos.TwoNecessaryPersonalCentres.AxTwoNecessaryPersonalCentres
+  exact ⟨p, q, hp, hq, hne, hLove p q hp hq hne,
+    Logos.Plurality.necessaryKindSubject_is_necessary p hkp,
+    Logos.Plurality.necessaryKindSubject_is_necessary q hkq⟩
+
+/-- Necessarily, two distinct persons stand in a love relation — `T14_eternalRelation_love_only`
+    read through `Necessity`. Still conditional on the plurality-love principle.
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
+theorem T14_eternalRelation_necessary_conditional
+    (hLove : PluralityLovePrinciple) :
+    Necessity
+      (∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ Loves s₁ s₂) := by
+  intro _w
+  obtain ⟨p, q, hp, hq, hne, hl, _, _⟩ := T14_eternalRelation_love_only hLove
+  exact ⟨p, q, hp, hq, hne, hl⟩
+
+/-- In every world, two distinct NECESSARY persons stand in a love relation — the
+    world-indexed form of `T14_eternalRelation_love_only`, at 1 META.
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
+theorem T14_world_love_only
+    (hLove : PluralityLovePrinciple) :
+    NecessityPH
+      (fun _w : World =>
+        ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
+          Loves s₁ s₂ ∧ ExistsAt _w (EntityOf s₁) ∧ ExistsAt _w (EntityOf s₂)) := by
+  obtain ⟨p, q, hp, hq, hne, hl, hNs, hNq⟩ := T14_eternalRelation_love_only hLove
+  intro w
+  exact ⟨p, q, hp, hq, hne, hl, hNs w, hNq w⟩
+
 end Logos.Love
 
 -- Axiom footprint audit
@@ -166,3 +228,6 @@ end Logos.Love
 #print axioms Logos.Love.T14_world_conditional
 #print axioms Logos.Love.T14_square_conditional
 #print axioms Logos.Love.T14_content_conditional
+#print axioms Logos.Love.T14_eternalRelation_love_only
+#print axioms Logos.Love.T14_eternalRelation_necessary_conditional
+#print axioms Logos.Love.T14_world_love_only

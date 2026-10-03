@@ -12,7 +12,7 @@ Key Results:
    agential/normative bridge.
 2. The Three Legitimate Agential Bridges:
    - The Constitutive Normative Bridge (Right/Wrong means genuine prescriptive directive)
-   - The Metaphysical Plurality Bridge (AxTwoSubjects)
+   - The Metaphysical Plurality Bridge (AxTwoNecessaryPersonalCentres)
    - The Performative Retorsion Bridge (judge_commits)
 3. Circularity Audit: Proves strict DAG ordering from primitives {Subject, Means, Incompatible}
    through GenuineNormativity to Chooses and FreeWill (zero circular definitions).
@@ -120,7 +120,7 @@ theorem extensional_bivalence_insufficient_for_genuine_normativity :
 To reach agential Free Will, Γ provides four distinct paths:
 1. Bridge A (Constitutive Normative Semantics): The premise "Há certo e há errado"
    is constitutively understood as Strong Normativity (ConstitutiveRightWrong).
-2. Bridge B (Metaphysical Plurality Bridge): AxTwoSubjects (Value.lean) yields persons.
+2. Bridge B (Metaphysical Plurality Bridge): AxTwoNecessaryPersonalCentres (TwoNecessaryPersonalCentres.lean) yields persons.
 3. Bridge C (Performative Retorsion Bridge): The assertion of right-and-wrong is an act
    by a judge (Order.lean: judge_commits).
 4. Bridge D (Transcendental Retorsion of Genuine Normativity): The skeptical denial of
@@ -136,8 +136,8 @@ theorem bridge_a_constitutive_normativity_derives_free_will
   obtain ⟨s, p, q, hNorm⟩ := h
   exact ⟨s, (indubitable_normative_free_will hNorm).2⟩
 
-/-- Bridge B: Metaphysical Plurality Bridge (AxTwoSubjects) derives ChoiceField.
-    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
+/-- Bridge B: Metaphysical Plurality Bridge (AxTwoNecessaryPersonalCentres) derives ChoiceField.
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
 theorem bridge_b_plurality_yields_choice_field
     (hExt : ExtensionalRightWrong) :
     ∃ (s : Subject) (p q : Prop), ChoiceField s p q :=

@@ -151,16 +151,40 @@ reading is strictly cheaper), `frameContingencyDoesNotBindAPair` (the frame's co
 (the right/wrong fact is compatible with a meaning-vocabulary that has **order and signification
 and no chooser** — every subject means at most one content, so the fact
 does not by itself deliver **any axiom-free existence of a chooser** — the unconditional existence half still costs
-`AxTwoSubjects`, META). Separately, the ground is not thereby made a chooser: C285 stands, and
+`AxTwoNecessaryPersonalCentres`, META, C584). Separately, the ground is not thereby made a chooser: C285 stands, and
 `groundIsNotASharerOfAsietyFreeWill` restates it here.
 
-**The vacuity of `OneEssence` is load-bearing, not a defect** (re-annotated at S2, 2026-10-02;
-`TrinitarianPersonalGround.lean (DOCTRINE ROW 3 / AUTHOR DECISION note)`). It is the marker that the ground's freedom is
-*transferred* to the three persons and not *exercised* by a fourth chooser: the ground is provably
-not asietic (`TrinitarianPersonalGround.ground_is_not_a_fourth_chooser`, `{}`) and its total scope
-is not freedom (`TrinitarianPersonalGround.ground_scope_does_contain_incompatibles`, `{}`),
-because freedom here is `Asiety` and `Asiety` requires being a `Subject`. Read as shallowness the
-vacuity says the opposite of what it is evidence for.
+**The vacuity of `OneEssence` is why the price is zero, not an argument that it is zero** (re-annotated
+2026-10-03, and corrected the same day — `LOVE-2.md` D1). Two successive claims about this vacuity
+are retracted here, and they were retracted in opposite directions, which is the tell. The first said
+the vacuity was "load-bearing, not a defect" and the "marker that the ground's freedom is
+*transferred* to the three persons and not *exercised* by a fourth chooser". The second over-corrected
+and denied any relation at all: "there is no relation in Γ between the ground's scope and any
+subject's freedom, so nothing is transferred, recorded or blocked".
+
+**The relation exists, and it is this entry.** `AsietyFreedomOfGround` (`AsietyFreedom.lean:141`) is
+the relation between the ground's scope and a subject's freedom; `AsietyFreeWill` is the predicate
+the corpus gives to the freedom so shared; `asietyFreedom_summary` (`:357`) consumes it. The price is
+zero because it is a `def` and not an `axiom`, **not** because nothing is transferred. The first
+version's word *marker* was the only over-claim in it, and it over-claimed for a checkable reason: a
+`def` is invisible to `#print axioms`, so nothing but this ◈ entry will ever flag it.
+
+What the vacuity does support is narrower, and it is worth stating without embarrassment. The ground
+is provably not asietic (`TrinitarianPersonalGround.ground_is_not_a_fourth_chooser`, `{Means,
+Subject}`) and its total scope is not freedom
+(`TrinitarianPersonalGround.ground_scope_does_contain_incompatibles`, `{Means, Subject}`), because
+`Asiety` requires being a `Subject` (`AsieticChoice.lean:147-148`) — and the `≠` that discharges it
+is `ofGround_ne_ofSubject`, which is the very fact `LovesAsGround.the_ground_is_not_a_person`
+(`LovesAsGround.lean:604`) states. That is a limit of the predicate's reach over the ground. It is
+not a refutation of freedom, and the limit does not touch the donation: a predicate that does not
+reach the ground cannot deny the ground's gift either.
+
+What the vacuity does *not* do is touch the donation. `self_donation_needs_no_personhood_of_the_ground`
+(C578) holds the refusal and the gift together, and `denying_self_donation_is_absurd` (C576) closes
+the absurdity: the ground is not a chooser **and** Agape is a gift between two distinct personal
+properties of one location-entity (`agape_is_self_donation`, C575, one META axiom). Reading the
+vacuity as shallowness says the opposite of what it is evidence for — and reading it as a transferred
+freedom says something the kernel *does* contain, in a `def` no audit can see.
 
 Note what an audit can and cannot see: because this is a `def` and not an `axiom`, `#print axioms`
 reports `{Means, Subject}` — vocabulary only — and **no axiom-counting tool will ever flag it**.
@@ -203,7 +227,7 @@ it is the necessary-subjects-only world, not an empty one. It does **not** reach
 a world of necessary subjects only in general — that exclusion needs the
 contingent-inhabitation lemma, which is BLOCKED and is recorded as a gap
 (`SUBJECTS.md` §4), not as a price. And it does **not** touch the plurality of
-subjects: `AxTwoSubjects` (`Tag: META`) is a separate bridge on a separate ground,
+subjects: `AxTwoNecessaryPersonalCentres` (`Tag: META`, C584) is a separate bridge on a separate ground,
 per the author's "No, not yet a world of two persons. Unless something else in the
 proof demands it."
 
@@ -227,7 +251,7 @@ def contingentWorldDatum : Stipulation where
   location := "Entity.lean:34"
   anchor := "def actualWorld"
   tag := StipulationTag.TRANS
-  cost := "The world-datum (this world exists, and it is contingent), assumed as given rather than derived: the author stipulates the world the proof is written in exists, and only the consequences are in due. Registered so the world-datum is not silently merged with the performative act-datum in the C.1 preamble. Free in axioms, not free in performance. It eliminates the falsity world read as the actual world (WorldStance.falsityWorldAsActual) and settles that the falsity world is the necessary-subjects-only world; it does NOT reach a world of necessary subjects in general, which needs the BLOCKED contingent-inhabitation lemma, and it does NOT touch plurality (AxTwoSubjects is a separate META bridge). Reject it and the falsity-world elimination goes; the attack verdicts stand."
+  cost := "The world-datum (this world exists, and it is contingent), assumed as given rather than derived: the author stipulates the world the proof is written in exists, and only the consequences are in due. Registered so the world-datum is not silently merged with the performative act-datum in the C.1 preamble. Free in axioms, not free in performance. It eliminates the falsity world read as the actual world (WorldStance.falsityWorldAsActual) and settles that the falsity world is the necessary-subjects-only world; it does NOT reach a world of necessary subjects in general, which needs the BLOCKED contingent-inhabitation lemma, and it does NOT touch plurality (AxTwoNecessaryPersonalCentres is a separate META bridge, C584). Reject it and the falsity-world elimination goes; the attack verdicts stand."
   dependents := ["falsityWorld_holds_no_contingent_subject", "contingentSubject_might_not_have_existed", "nothing_contingent_at_its_actual"]
 
 /-- The registered stipulations, in audit order. -/

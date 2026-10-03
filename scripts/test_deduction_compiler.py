@@ -263,13 +263,13 @@ def test_sensitivity(decls: dict, node_map: dict, graph: dict, sections: list):
     
     # 2. Mutate axiom footprint in memory
     orig_audit = list(bd._AUDIT.get(target, []))
-    bd._AUDIT[target] = orig_audit + ["Logos.Value.AxTwoSubjects"]
+    bd._AUDIT[target] = orig_audit + ["Logos.TwoNecessaryPersonalCentres.AxTwoNecessaryPersonalCentres"]
     mutated_secs2 = discover_deduction_sections(sections, decls, node_map, graph, {})
     _mut2 = render_deduction_sections(mutated_secs2, decls, node_map)
     mutated_text2 = "\n".join(_mut2.get("readme")) + "\n" + "\n".join(_mut2.get("ledger"))
     bd._AUDIT[target] = orig_audit
     assert mutated_text2 != baseline_text
-    assert "AxTwoSubjects" in mutated_text2
+    assert "AxTwoNecessaryPersonalCentres" in mutated_text2
     print("  ✓ Sensitivity verified: axiom footprint mutation dynamically updated local bridge pricing.")
 
 

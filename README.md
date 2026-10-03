@@ -36,9 +36,9 @@ Axioms appear as `◆` in the audit ledger. `AXIOM` (the claim *is itself* a dec
 axiom) is distinct from `AXIOMATIC` (the claim is *derived under* an axiom).
 
 <a id="refutation-index"></a>
-## The 17 denials, indexed
+## The 21 denials, indexed
 
-Every objection the deduction meets, and what is done to it: 13 deaths, 3 bounds, 1 instantiation. The derivations are worked in [Part III](#part-iii-the-refutations-every-branch-of-the-denial-read); each names the step it makes impossible.
+Every objection the deduction meets, and what is done to it: 17 deaths, 3 bounds, 1 instantiation. The derivations are worked in [Part III](#part-iii-the-refutations-every-branch-of-the-denial-read); each names the step it makes impossible.
 
 The rest name none, because they have none. 💥 kills a step, 🧱 bounds a reading, 🪞 places the critic inside it — roles and per-row prices are in `formal/GAPMAP.md`.
 
@@ -61,6 +61,10 @@ The rest name none, because they have none. 💥 kills a step, 🧱 bounds a rea
 | Meaning is unrestricted | 🧱 | [R15](#r15) | — bound |
 | That a free subject exists is unestablished | 💥 | [R16](#r16) | [step 9](#step-9) |
 | The critic who presents the objection is himself a person | 🪞 | [R17](#r17) | — instantiation |
+| A Single Person could only give to contingent beings, so its self-giving would depend on them | 💥 | [R18](#r18) | [step 8](#step-8) |
+| Denying the donation of the Self | 💥 | [R19](#r19) | [step 8](#step-8) |
+| A self-gift is impossible because the donor and the recipient are two things | 💥 | [R20](#r20) | [step 8](#step-8) |
+| The Ground cannot give at all, because it is not a person who chooses | 💥 | [R21](#r21) | [step 8](#step-8) |
 
 ## Part I — The deduction: a personal kind of ground is forced
 
@@ -354,6 +358,31 @@ Master Correspondence: Personhood IS the Thomistic person core — honestly `rfl
 
 ✅ · [Person.lean#person_iff_thomisticCore](formal/Logos/Person.lean#L183)
 
+<a id="step-7b"></a>
+### Step 7b — The Act Carries Its Own Polarity, So a Free Person Is Derived
+
+The performative act datum (`Agency.performative_act_datum`, 1 TRANS) carries its own polarity (`Choice.AxActPolarity`, 1 SEM) to derive co-meaning (`AsieticChoice.bareRejectedHornCoMeant_is_derivable`, C565). A genuine Free Person is derived unconditionally, with zero META axioms.
+
+> ⚠️ **Price disclosed —** derived with 0 META axioms; priced at 1 TRANS (`performative_act_datum`) + 1 SEM (`AxActPolarity`).
+
+<a id="a_genuine_free_person_exists"></a>
+### A genuine Free Person exists, derived without META axioms
+
+DEPENDS ON   step 7: Free Will Is a Person · performative_act_datum · AxActPolarity
+GIVES        a genuine Free Person (C587) — hands on to step 8
+KILLS        [`R16`](#r16)
+
+PROOF
+    💰 PRICED — 3 steps, on a declared axiom
+      1. witness components ⟨s, hfw⟩  (existential elimination from a_free_will_exists_derived)
+      2. s  (conjunction conjunct 1: s)
+      3. freeWill_implies_person s hfw  (conjunction conjunct 2: freeWill_implies_person s hfw)
+    ∴ ∃ s, Person(s)
+
+PRICE            ⚠️ **AXIOMATIC (AxActPolarity)** — 2 substantive axioms: AxActPolarity, performative_act_datum · `{AxActPolarity, Initiates, Means, State, Subject, Will, performative_act_datum, subjectWill, will_individuation}`
+SOURCE     ⚠️ AxActPolarity · [NoMeanerNoFalsity.lean#a_genuine_free_person_exists](formal/Logos/NoMeanerNoFalsity.lean#L97)
+
+
 <a id="step-8"></a>
 ### Step 8 — That Person Grounds the Poles
 
@@ -361,7 +390,7 @@ C525/C527: what grounds right/wrong **at the epistemic poles** is a person. Grou
 
 DEPENDS ON   step 7: the Person grounds the epistemic pole pair
 GIVES        THE FACT — the composed statement, taken up by step 9
-KILLS        [`R8`](#r8)
+KILLS        [`R8`](#r8), [`R18`](#r18), [`R19`](#r19), [`R20`](#r20), [`R21`](#r21)
 
 > ⚠️ **Price disclosed —** 0 substantive axioms; the `def` bridge `EntityMeans ofGround := True` is disclosed in [the declared-`def` census in the ledger](#sec-where-the-rest-of-the-ledger-lives)
 
@@ -566,7 +595,7 @@ Attaching each one to a numbered step would have been tidier, and false.
 
 *8 attribute theorems, each priced above. The rows with no `decl` check — and the two countermodels that cut against this reading — are in Part II's honest list and in the ledger's attribute table.*
 
-**32 formal frontiers** — every unproved step, every countermodel separation and every open bridge, with its exact missing lemma — are listed in [investigations/ledger.md](investigations/ledger.md). Nothing in that list is established; nothing in this file claims otherwise.
+**33 formal frontiers** — every unproved step, every countermodel separation and every open bridge, with its exact missing lemma — are listed in [investigations/ledger.md](investigations/ledger.md). Nothing in that list is established; nothing in this file claims otherwise.
 
 ## Part II — The characteristics of the ground
 
@@ -610,7 +639,7 @@ One instantiation is settled: for `g := Entity.ofGround`, `ofGround_not_a_person
 ### The ground is necessary — existence that does not depend on anything else.
 
 DEPENDS ON   no premises — a closed theorem
-GIVES        used by `the_ground_grounds_a_contingent_true_chooser`, `claimE`, `one_necessary_ground_three_free_necessary_persons`
+GIVES        used by `the_ground_grounds_a_contingent_true_chooser`, `claimE`, `singlePersonDenial_summary` (+2 more)
 
 PROOF
     ⚙️ DERIVATION — one step, a constructor
@@ -780,7 +809,7 @@ PROOF
     ∴ ¬Universe(Entity).ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
-SOURCE     ✅ · [CosmicExistence.lean#the_ground_is_not_the_universe](formal/Logos/CosmicExistence.lean#L739)
+SOURCE     ✅ · [CosmicExistence.lean#the_ground_is_not_the_universe](formal/Logos/CosmicExistence.lean#L738)
 
 <a id="ofGround_not_a_person_correlate"></a>
 ### The ground is not a person-correlate — exclusion of personhood: not identical with a person-correlated subject.
@@ -793,7 +822,7 @@ PROOF
     ∴ ¬PersonCorrelate(Entity).ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject, Will, subjectWill}`
-SOURCE     ✅ · [CosmicExistence.lean#ofGround_not_a_person_correlate](formal/Logos/CosmicExistence.lean#L673)
+SOURCE     ✅ · [CosmicExistence.lean#ofGround_not_a_person_correlate](formal/Logos/CosmicExistence.lean#L672)
 
 <a id="divine_simplicity_sole_bearer"></a>
 ### The ground is simple — simplicity as the sole bearer of the attribute.
@@ -1121,7 +1150,7 @@ PROOF
     ∴ ∃ t,DivineHypostasis Entity, t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** — 3 substantive axioms: AxAgapeEssence, AxProcessionSpirit, AxProcessionWord · `{AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence, AxProcessionSpirit, AxProcessionWord · [DivineAgape.lean#agape_entails_tripersonality](formal/Logos/DivineAgape.lean#L331)
+SOURCE     ⚠️ AxAgapeEssence, AxProcessionSpirit, AxProcessionWord · [DivineAgape.lean#agape_entails_tripersonality](formal/Logos/DivineAgape.lean#L376)
 
 ### What is not established about the ground
 
@@ -1160,16 +1189,16 @@ So "the Free Subject is necessarily true" is true of the *order* and of the *sub
 |---|---|---|
 | The normative order is **necessary** | ∀ w, NormativeOrderAt w — at every world, unconditionally. | ✅ **PROVEN** · 0 substantive axioms · `{Initiates, Means, State, Subject}` · [NecessaryPersonalGround.lean#necessary_normative_order](formal/Logos/NecessaryPersonalGround.lean#L126) {Initiates, Means, State, Subject} |
 | The ground is **necessary** | `Entity.ofGround` is modal-fragile-free; a `def` bridge (`NecessarySubjectKind`) is disclosed in [the declared-`def` census in the ledger](#sec-where-the-rest-of-the-ledger-lives) | ✅ **PROVEN** · 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}` · [NecessityEternity.lean#ofGround_necessary_ground_of_reality](formal/Logos/NecessityEternity.lean#L161) {Means, NecessarySubjectKind, Subject} |
-| A **free subject exists** | Unconditional existence, via `freeWill_exists`. The one META bridge is `AxTwoSubjects` — plural personal reality. | ⚠️ **AXIOMATIC (AxTwoSubjects)** · `{Means, Subject, Will, subjectWill, AxTwoSubjects}` · [AsieticChoice.lean#freeSubject_exists](formal/Logos/AsieticChoice.lean#L618) {AxTwoSubjects, Means, Subject, Will, subjectWill} |
-| **Free will** exists | The same predicate under the other name; identical footprint by construction, not by coincidence. | ⚠️ **AXIOMATIC (AxTwoSubjects)** · `{Means, Subject, Will, subjectWill, AxTwoSubjects}` · [AsieticChoice.lean#freeWill_exists](formal/Logos/AsieticChoice.lean#L601) {AxTwoSubjects, Means, Subject, Will, subjectWill} |
+| A **free subject exists** | Unconditional existence, via `freeWill_exists`. The one META bridge is `AxTwoSubjects` — plural personal reality. | ⚠️ **AXIOMATIC (AxTwoNecessaryPersonalCentres)** · `{Means, NecessarySubjectKind, Subject, Will, subjectWill, AxTwoNecessaryPersonalCentres}` · [AsieticChoice.lean#freeSubject_exists](formal/Logos/AsieticChoice.lean#L618) {AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill} |
+| **Free will** exists | The same predicate under the other name; identical footprint by construction, not by coincidence. | ⚠️ **AXIOMATIC (AxTwoNecessaryPersonalCentres)** · `{Means, NecessarySubjectKind, Subject, Will, subjectWill, AxTwoNecessaryPersonalCentres}` · [AsieticChoice.lean#freeWill_exists](formal/Logos/AsieticChoice.lean#L601) {AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill} |
 | A **person** has free will | `Person s → FreeWill s`: 0 substantive axioms. Dominion over acts *is* free will (`Person.lean:56`). | ✅ **PROVEN** · 0 substantive axioms · `{Means, Subject, Will, subjectWill}` · [Person.lean#person_has_free_will](formal/Logos/Person.lean#L157) {Means, Subject, Will, subjectWill} |
-| A **necessary person** exists | C404/C407: the second META bridge (`necessaryPersonalSubjectExists`). This is the row that would have to be paid for a necessary Free Subject. | ⚠️ **AXIOMATIC (necessaryPersonalSubjectExists)** · `{Means, NecessarySubjectKind, Subject, Will, subjectWill, necessaryPersonalSubjectExists}` · [Plurality.lean#necessarySubject_exists](formal/Logos/Plurality.lean#L189) {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} |
+| A **necessary person** exists | C404/C407: the second META bridge (`necessaryPersonalSubjectExists`). This is the row that would have to be paid for a necessary Free Subject. | ⚠️ **AXIOMATIC (necessaryPersonalSubjectExists)** · `{Means, NecessarySubjectKind, Subject, Will, subjectWill, necessaryPersonalSubjectExists}` · [Plurality.lean#necessarySubject_exists](formal/Logos/Plurality.lean#L192) {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} |
 | The ground is **not** a subject-correlate | `Entity.ofGround ≠ EntityOf s` for every `s`. The two necessities above are not identified. | ✅ **PROVEN** · 0 substantive axioms · `{Subject}` · [NecessityEternity.lean#ofGround_ne_ofSubject](formal/Logos/NecessityEternity.lean#L168) {Subject} |
 
 | Claim | Derived status | What it settles |
 |---|---|---|
-| `C404` | ◆ **AXIOM** — rests on `necessaryPersonalSubjectExists` · [Plurality.lean#necessaryPersonalSubjectExists](formal/Logos/Plurality.lean#L185), footprint {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} | Metaphysical bridge: the necessary kind of subject is inhabited by a person. |
-| `C407` | ⚠️ **AXIOMATIC** — rests on `necessaryPersonalSubjectExists` · [Plurality.lean#necessarySubject_exists](formal/Logos/Plurality.lean#L189), footprint {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} | A necessary subject exists, from the bridge. Footprint: `{Means, NecessarySubjectKind, Subject, Will, necessaryPersonalSubjectExists, subjectWill}`. |
+| `C404` | ◆ **AXIOM** — rests on `necessaryPersonalSubjectExists` · [Plurality.lean#necessaryPersonalSubjectExists](formal/Logos/Plurality.lean#L188), footprint {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} | Metaphysical bridge: the necessary kind of subject is inhabited by a person. |
+| `C407` | ⚠️ **AXIOMATIC** — rests on `necessaryPersonalSubjectExists` · [Plurality.lean#necessarySubject_exists](formal/Logos/Plurality.lean#L192), footprint {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} | A necessary subject exists, from the bridge. Footprint: `{Means, NecessarySubjectKind, Subject, Will, necessaryPersonalSubjectExists, subjectWill}`. |
 | `C494` | ⚠️ **AXIOMATIC** — rests on `necessaryPersonalSubjectExists` · [NecessaryKindAudit.lean#the_ground_is_not_the_only_necessary_being](formal/Logos/NecessaryKindAudit.lean#L139), footprint {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} | **The ground is not the only necessary being (C494)** — the refutation of *ST* I q.19 a.4 in its extensional reading. The claim that every property of God is shared by every necessary being is false: taking `Q := fun e = |
 | `C495` | ⚠️ **AXIOMATIC** — rests on `necessaryPersonalSubjectExists` · [NecessaryKindAudit.lean#necessity_is_not_sole_bearer_of_the_ground](formal/Logos/NecessaryKindAudit.lean#L121), footprint {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} | **Necessity is not sole-bearer of the ground (C495).** No other characteristic in the corpus has this shape: `∀ e, NecessaryEntity e → e = Entity.ofGround` is **false**, because the META bridge `necessaryPersonalSubjectE |
 
@@ -1182,7 +1211,13 @@ All three are divine of the *same* `divineReality` (`the_father_is_divine`, `the
 
 This is the Catholic and Nicene reading — *unus Deus, tres Personae*: one divine being in three persons, consubstantial, distinguished by procession and not by essence. The author is a **Catholic**; this is the reading he reads Γ as supporting.
 
-The faith supplies the Persons; the kernel prices them (C510 rests on three declared META premises) and proves at `{}` that it cannot supply them for free (C109).
+Read *consubstantial* here as **faith, not a Γ result**. Three things it is not:
+
+the `Consubstantial` anchor was deleted — it was `True` of arbitrary entities, and G9 in `test_personal_ground_kind.py` refuses its return; C573's `MutualIndwelling` was never declared; and C572, the nearest kernel-shaped attempt at the formula, was **withdrawn as Modalism**.
+
+What Γ carries is the *homoousios* half, at a price: one ground that `indwells` every Person, three Persons distinct by role, and the shared **personal property** now derived for free (`two_subsisting_share_one_location`, `{Subject}`).
+
+The shared **nature** is still not in the vocabulary of the sort. C519 and C520 say so in those words.
 
 **What this is not.** Not three Gods: one ground (C320/C389), one nature (C440, *actus purus*, aseity), one shared `divineReality`. And not that Γ *proves* the Trinity — it proves the three Persons on declared premises, and proves that the premises are needed.
 
@@ -1190,9 +1225,9 @@ The faith supplies the Persons; the kernel prices them (C510 rests on three decl
 |---|---|---|
 | **One ground** of reality | C320/C389: `∃! g, UniversalModalGround g`. Existence unconditional; uniqueness on the declared META bound `GroundTranscendence`. | ✅ **PROVEN** · 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}` · [FoundationalUnicity.lean#exactly_one_universal_modal_ground](formal/Logos/FoundationalUnicity.lean#L304) {Means, NecessarySubjectKind, Subject} |
 | **One nature** (una natura, *actus purus*) | C440 divine simplicity as the sole bearer; aseity non-derived. 0 substantive axioms. | ✅ **PROVEN** · 0 substantive axioms · `{Means, Subject, CL}` · [DivineSimplicity.lean#divine_simplicity_sole_bearer](formal/Logos/DivineSimplicity.lean#L246) {Means, Subject, CL} · [CanonicalAseity.lean#conditional_canonical_aseity](formal/Logos/CanonicalAseity.lean#L133) {Means, Subject} |
-| **Three distinct Persons** | C510: `t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit`. **Priced on three declared META premises.** | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineAgape.lean#agape_entails_tripersonality](formal/Logos/DivineAgape.lean#L331) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} |
-| All three are **God** (one `divineReality`) | Consubstantiality, the anti-tritheism half: `is_divine the_father divineReality ∧ is_divine the_beloved divineReality ∧ is_divine the_spirit divineReality`. Same price as C510. | ⚠️ **AXIOMATIC (AxAgapeEssence)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` · [DivineAgape.lean#the_father_is_divine](formal/Logos/DivineAgape.lean#L274) {AxAgapeEssence, Subject, CL} · [DivineAgape.lean#the_beloved_is_divine](formal/Logos/DivineAgape.lean#L279) {AxAgapeEssence, Subject, CL} · [DivineAgape.lean#the_spirit_is_divine](formal/Logos/DivineAgape.lean#L284) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
-| The Persons are **distinct** (not three gods) | Personal distinctness by personal property, not by essence: `≠` in every pair, and the Spirit is no word. | ⚠️ **AXIOMATIC (AxAgapeEssence)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineAgape.lean#the_beloved_distinct](formal/Logos/DivineAgape.lean#L151) {AxAgapeEssence, Subject, CL} · [DivineAgape.lean#the_spirit_ne_father](formal/Logos/DivineAgape.lean#L210) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} · [DivineAgape.lean#the_spirit_ne_beloved](formal/Logos/DivineAgape.lean#L218) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} · [DivineAgape.lean#the_spirit_ne_any_word](formal/Logos/DivineAgape.lean#L214) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
+| **Three distinct Persons** | C510: `t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit`. **Priced on three declared META premises.** | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineAgape.lean#agape_entails_tripersonality](formal/Logos/DivineAgape.lean#L376) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} |
+| All three are **God** (one `divineReality`) | The anti-tritheism half: `is_divine the_father divineReality ∧ is_divine the_beloved divineReality ∧ is_divine the_spirit divineReality`. **Not the price of C510, and cheaper than it** — `the_father_is_divine` and `the_beloved_is_divine` rest on `{Subject, AxAgapeEssence, CL}` (one META), `the_spirit_is_divine` on `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` (two META), so this row's union is two META axioms where C510 needs three. The word *consubstantial* is not used for this row: the `Consubstantial` anchor was deleted because `Consubstantial Entity.ofGround e f` is `True` of arbitrary entities including atoms — a `{}` price on a `True` proposition is a null result, which is why G9 in `test_personal_ground_kind.py` refuses its re-declaration. The one-ness Γ actually carries is `indwells`, and the shared *nature* is still not in the vocabulary of the sort. | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` · [DivineAgape.lean#the_father_is_divine](formal/Logos/DivineAgape.lean#L319) {AxAgapeEssence, Subject, CL} · [DivineAgape.lean#the_beloved_is_divine](formal/Logos/DivineAgape.lean#L324) {AxAgapeEssence, Subject, CL} · [DivineAgape.lean#the_spirit_is_divine](formal/Logos/DivineAgape.lean#L329) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
+| The Persons are **distinct** (not three gods) | Personal distinctness by personal property, not by essence: `≠` in every pair, and the Spirit is no word. | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineAgape.lean#the_beloved_distinct](formal/Logos/DivineAgape.lean#L196) {AxAgapeEssence, Subject, CL} · [DivineAgape.lean#the_spirit_ne_father](formal/Logos/DivineAgape.lean#L255) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} · [DivineAgape.lean#the_spirit_ne_beloved](formal/Logos/DivineAgape.lean#L263) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} · [DivineAgape.lean#the_spirit_ne_any_word](formal/Logos/DivineAgape.lean#L259) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
 | **A single-Person reading is not entailed** | Separation model, not a refutation: one ground, and a model in which that ground bears two distinct persons. Ground-unicity therefore does not entail a single-Person ground — the person-count is left open by unicity, and the ascription of personhood to the entity is the separate, still-blocked question C228. | 🧱 **COUNTERMODEL | unicity_does_not_force_unitarian_monad ⇏ Independence** · `{}` · [FoundationalUnicity.lean#unicity_does_not_force_unitarian_monad](formal/Logos/FoundationalUnicity.lean#L332) {} |
 | The Trinity is **not free** | C109: the preceding theory does not entail three Persons. This is the price, stated as a countermodel. | 🧱 **COUNTERMODEL | preceding_theory ⇏ trinity** · `{}` · [ConditionalTheology.lean#preceding_theory_not_entails_trinity](formal/Logos/ConditionalTheology.lean#L336) {} |
 | The **Incarnation** is open | C112: the preceding theory is consistent with an unincarnate ground. The frontier, named. | 🧱 **COUNTERMODEL | preceding_theory ⇏ incarnation** · `{}` · [ConditionalTheology.lean#preceding_theory_not_entails_incarnation](formal/Logos/ConditionalTheology.lean#L380) {} |
@@ -1200,13 +1235,13 @@ The faith supplies the Persons; the kernel prices them (C510 rests on three decl
 <a id="sec-part-iii-the-refutations-every-branch-of-the-denial-read"></a>
 ## Part III — The refutations: every branch of the denial, read
 
-Sixteen entries, R1–R16. Each names the step it makes impossible (`KILLS`) and then shows the derivation: the premises it needs, the steps, the `⊥` — or the negation of its own thesis.
+Twenty-one entries, R1–R21. Each names the step it makes impossible (`KILLS`) and then shows the derivation: the premises it needs, the steps, the `⊥` — or the negation of its own thesis.
 
 Every line below is compiled from the Lean proof term; the branch, the objection, and which premise is *the thesis* are the only authored strings. Each block's price and kind are derived, and where a priced second route to the same death exists it is shown and priced separately.
 
 A death is classified by derivation, never typed: `⊥` when the goal is `False`; `⊘` when the derivation returns the denial's own negation; 💥 **COLLAPSE** when the denial, followed, destroys the normativity it claims to keep.
 
-🧱 R13, R14 and R15 are **BOUNDARIES**; 🪞 R17 is the pillar retorsion; 💥 the other 13 are **DERIVATIONS**.
+🧱 R13, R14 and R15 are **BOUNDARIES**; 🪞 R17 is the pillar retorsion; 💥 the other 17 are **DERIVATIONS**.
 
 A boundary is not a refutation: a `{}` countermodel bounds the reading, it does not contradict it, so those blocks print no `KILLS`. Where unicity does not force a single person, “the ground is one person” is a consequence, not an absence — that is the boundary's own note, not a gap in the chain.
 
@@ -1376,10 +1411,10 @@ SOURCE     ✅ · [RetorsiveNormativity.lean#normative_denial_of_normativity_is_
 <a id="denial_of_genuine_normativity_is_self_refuting"></a>
 ### a second, priced route
 
-**⊥ CONTRADICTION** — Non-vacuous self-refutation of the denial of GenuineNormativity.
+**⚠️ PRICED — the denial refuted, at a declared price** — Non-vacuous self-refutation of the denial of GenuineNormativity.
 
 DEPENDS ON   the denial: `NoGN`
-GIVES        ⊥ — the denial, refuted
+GIVES        the denial is refuted, at the price named below
 KILLS        [step 5](#step-5) — The Two Poles Cannot Both Be Correct
 
 PROOF
@@ -1387,7 +1422,7 @@ PROOF
     Assume NoGN  ← the denial's own thesis
       1. GenuineNormativity s NoGN (¬NoGN)  ()
       2. GenuineNormativityExists  (existential introduction with witness s)
-    ⊥
+    False  — refuted, at the declared price on the PRICE line
 
 PRICE            ⚠️ **AXIOMATIC (AxJudicativeBipolarity)** — 1 substantive axiom: AxJudicativeBipolarity · `{AxJudicativeBipolarity, Initiates, Means, State, Subject}`
 > A second, independently sufficient refutation — but priced on one SEM choice (`AxJudicativeBipolarity`), so the free route is the one read above.
@@ -1443,7 +1478,7 @@ SOURCE     ✅ · [PersonalNormativeGround.lean#will_identity_collapses_normativ
 **⊘ DENIAL REFUTED** — D3: Denial of Prescriptivity — asserting that Right/Wrong is merely descriptive truth lacks deontic guidance and is refuted by genuine normativity.
 
 DEPENDS ON   the denial: `hDescriptiveOnly → ∀ s, ¬AgentialDeonticAddress s p q`
-GIVES        ⊥ — the denial, refuted
+GIVES        ⊘ — the denial, refuted
 KILLS        [step 2](#step-2) — Being True Is Being True To Someone
 
 PROOF
@@ -1465,7 +1500,7 @@ SOURCE     ✅ · [UndeniableNormativeDerivation.lean#d3_descriptive_truth_lacks
 **COLLAPSE — INCOHERENT** — D4: Denial of Agential Address — impersonal ought without an addressed subject fails relationality.
 
 DEPENDS ON   the denial: `∀ s, ¬AgentialDeonticAddress s p q`
-GIVES        ⊥ — the denial, refuted
+GIVES        ⊥ — the order cannot be kept, and collapses
 KILLS        [step 2](#step-2) — Being True Is Being True To Someone
 
 PROOF
@@ -1484,7 +1519,7 @@ SOURCE     ✅ · [UndeniableNormativeDerivation.lean#d4_impersonal_normativity_
 **COLLAPSE — INCOHERENT** — D5: Denial of Incompatible Alternatives — a monolithic command without opposition lacks choice.
 
 DEPENDS ON   the denial: `∀ q, ¬Incompatible p q`
-GIVES        ⊥ — the denial, refuted
+GIVES        ⊥ — the order cannot be kept, and collapses
 KILLS        [step 5](#step-5) — The Two Poles Cannot Both Be Correct
 
 PROOF
@@ -1503,7 +1538,7 @@ SOURCE     ✅ · [UndeniableNormativeDerivation.lean#d5_monolithic_command_lack
 **COLLAPSE — INCOHERENT** — D6: Denial of Cognitive Grasp — an ungraspable command fails agential address.
 
 DEPENDS ON   the denial: `¬(Means s p ∧ Means s q)`
-GIVES        ⊥ — the denial, refuted
+GIVES        ⊥ — the order cannot be kept, and collapses
 KILLS        [step 6](#step-6) — Co-Meaning Both Poles Is Free Will
 
 PROOF
@@ -1592,11 +1627,27 @@ SOURCE     ✅ · [BoundedMeaning.lean#unrestricted_meaning_thesis_is_refuted](f
 
 **💥 DERIVATION** — “No one has shown a free subject exists.” **Pillar 4** of the Seven.
 
-> **⚠️ PRICED — the objection answered, at a price** — the objection is **answered**, not merely bounded: a free subject *exists*, and the price of that existence is named below. This row is a **result at a price**, not a gap in the deduction.
+> **⚠️ PRICED — the objection answered, at a price** — the objection is **answered**, not merely bounded: the claim it doubts obtains, and the price of that is named below. This row is a **result at a price**, not a gap in the deduction.
+
+<a id="a_genuine_free_person_exists"></a>
+DEPENDS ON   — the modelled denial
+GIVES        💰 the objection answered — the claim it doubts obtains, at the price below
+KILLS        [step 9](#step-9) — The Fact
+
+PROOF
+    💰 PRICED — 3 steps, on a declared axiom
+      1. witness components ⟨s, hfw⟩  (existential elimination from a_free_will_exists_derived)
+      2. s  (conjunction conjunct 1: s)
+      3. freeWill_implies_person s hfw  (conjunction conjunct 2: freeWill_implies_person s hfw)
+    ∴ ∃ s, Person(s)
+
+PRICE            ⚠️ **AXIOMATIC (AxActPolarity)** — 2 substantive axioms: AxActPolarity, performative_act_datum · `{AxActPolarity, Initiates, Means, State, Subject, Will, performative_act_datum, subjectWill, will_individuation}`
+SOURCE     ⚠️ AxActPolarity · [NoMeanerNoFalsity.lean#a_genuine_free_person_exists](formal/Logos/NoMeanerNoFalsity.lean#L97)
+
 
 <a id="freeWill_exists"></a>
 DEPENDS ON   — the modelled denial
-GIVES        💰 the objection answered — a free subject exists, at the price below
+GIVES        💰 the objection answered — the claim it doubts obtains, at the price below
 KILLS        [step 9](#step-9) — The Fact
 
 PROOF
@@ -1606,8 +1657,8 @@ PROOF
       3. hPerson.2.2  (conjunction conjunct 2: hPerson.2.2)
     ∴ ∃ s, FreeWill(s)
 
-PRICE            ⚠️ **AXIOMATIC (AxTwoSubjects)** — 1 substantive axiom: AxTwoSubjects · `{AxTwoSubjects, Means, Subject, Will, subjectWill}`
-SOURCE     ⚠️ AxTwoSubjects · [AsieticChoice.lean#freeWill_exists](formal/Logos/AsieticChoice.lean#L601)
+PRICE            ⚠️ **AXIOMATIC (AxTwoNecessaryPersonalCentres)** — 1 substantive axiom: AxTwoNecessaryPersonalCentres · `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`
+SOURCE     ⚠️ AxTwoNecessaryPersonalCentres · [AsieticChoice.lean#freeWill_exists](formal/Logos/AsieticChoice.lean#L601)
 
 
 <a id="epistemic_order_makes_the_act_datum_necessary"></a>
@@ -1652,6 +1703,139 @@ PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Initiates, Means, 
 SOURCE     ✅ · [ProofPresentationRetorsion.lean#critic_presenting_objection_is_person](formal/Logos/ProofPresentationRetorsion.lean#L206)
 
 > Pillar 7. The kernel anchor is `ProofPresentationRetorsion.lean:206`; the footprint is free, so the critic's own stance is derived at the same price as every other entry here.
+
+<a id="r18"></a>
+### R18. A Single Person could only give to contingent beings, so its self-giving would depend on them
+
+**💥 DERIVATION** — “If the Ground were one Person, it could only give to contingent (temporal) beings — so its self-giving would depend on them, and it would thereby become contingent too.”
+
+<a id="self_gift_cannot_depend_on_a_contingent_person"></a>
+**⊥ CONTRADICTION** — **Step 3 — the dependence — is refuted (C579, PROVEN, free).** This is the row the objection dies on. The claim was: *a Single Person can only give to contingent beings, so its self-giving is dependent on the contingent beings.* The hypothesis is that claim…
+
+DEPENDS ON   the denial: `∃ f, o, ∃ s, SelfDonation(f, o) ∧ o.deiformEntity = EntityOf(s)`
+GIVES        ⊥ — the denial, refuted
+KILLS        [step 8](#step-8) — That Person Grounds the Poles
+
+PROOF
+    Assume ∃ f, o, ∃ s, SelfDonation(f, o) ∧ o.deiformEntity = EntityOf(s)  ← the denial's own thesis
+      1. witness components ⟨_f, o, s, hSD, hEq⟩  (existential elimination from dependence)
+      2. witness components ⟨_hne, _hf, ho, _hlove, _hloc⟩  (existential elimination from hSD)
+    ⊥
+
+PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Subject}`
+SOURCE     ✅ · [SinglePersonDenial.lean#self_gift_cannot_depend_on_a_contingent_person](formal/Logos/SinglePersonDenial.lean#L194)
+
+> **The hinge, and the row the previous batch never had.** The objection is a four-step chain — (1) one Person, (2) therefore only contingent recipients, (3) therefore the self-giving *depends on* the contingent, (4) therefore contingent — against a Ground already determined Eternal, Necessary, Free and Immutable. **Step 3 is where it dies**, and it dies free: `SelfDonation` puts the recipient at `divineReality := Entity.ofGround`, so no `Subject` can be the recipient of a donation. The hypothesis here is that dependence as a proposition and the compiled derivation is C579 (`{Subject}`), whose primary is the premise step itself (`single_person_denial_is_refuted`, also `{Subject}`): assume the author's step 1 and `False` follows, because `Entity.ofGround` is no `Subject`'s entity. **No `AxAgapeEssence` appears on this row.** The donation's *existence* is priced on its own row below and is deliberately not used to refute an objection that grants it; a row that refuted the objection by way of the datum it also prices would be the datum. What the free rows say is that the gift's terminus is the necessary ground (`donation_terminus_is_as_necessary_as_the_donor`, `{NecessarySubjectKind, Subject}`), so the contingency conclusion has no premise (`donation_makes_contingency_is_refuted`). “It cannot be only one” is a *separate* paid row — `Plurality.notAlone` (T12) costs `AxTwoSubjects` — and is not folded into this row's price. The terminology the earlier batch collapsed is restored here: the ground **is personal** (C362, `PersonalGround`, whose `indwells` is `OneEssence` for *every* `Subject`), it **is** the nature those Persons are OneEssence in, and it is **no Person among them** (C519). “The ground is not a person” is the third of those, not a denial of the first.
+
+<a id="r19"></a>
+### R19. Denying the donation of the Self
+
+**💥 DERIVATION** — “So the Ground does not donate the Self to itself.”
+
+<a id="denying_self_donation_is_absurd"></a>
+**⚠️ PRICED — the denial refuted, at a declared price** — **Denying that the donation of the Self occurs is a declared, not derived, absurdity (C576, PROVEN↑).** Read the claim narrowly: assume there is *no* donation at all and `False` follows.
+
+DEPENDS ON   the denial: `¬∃ f, o, SelfDonation(f, o)`
+GIVES        the denial is refuted, at the price named below
+KILLS        [step 8](#step-8) — That Person Grounds the Poles
+
+PROOF
+    Assume ¬∃ f, o, SelfDonation(f, o)  ← the denial's own thesis
+    False  — refuted, at the declared price on the PRICE line
+
+PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Subject, choice}`
+SOURCE     ⚠️ AxAgapeEssence · [DivineAgape.lean#denying_self_donation_is_absurd](formal/Logos/DivineAgape.lean#L507)
+
+> The denial is a **real premise** of the compiled theorem — `denying_self_donation_is_absurd`, C576 — which is what makes this row a derivation and not a badge asserted over it. **Its kind is `⚠️ PRICED`, not `⊥ CONTRADICTION`, and the difference is not cosmetic.** `AxAgapeEssence` is priced, so a world exists in which the denial holds (the Narcissus world, C511, where the source loves only itself): the denial is *available* and is contradicted only by what is **declared**. Γ does not claim the donation is a theorem of logic. This row is mounted for that reason and not as the answer to the author — the answer is the free row above, which does not mention the donation.
+
+<a id="r20"></a>
+### R20. A self-gift is impossible because the donor and the recipient are two things
+
+**💥 DERIVATION** — “A gift of the Self is a category mistake: it needs two relata, and two relata cannot be one thing.”
+
+> **⊘ DENIAL REFUTED** — the objection is **refuted**, not merely bounded: the block below is the compiled derivation, and its terminator is derived from the audited goal. The price, if any, is named on its own PRICE line.
+
+<a id="denying_shared_location_is_absurd"></a>
+DEPENDS ON   — the modelled denial
+GIVES        💰 a priced result — the objection dies, and the price is named
+KILLS        [step 8](#step-8) — That Person Grounds the Poles
+
+PROOF
+    💰 PRICED — one step, a projection
+      1. witness components ⟨f, o, _, hf, ho, hlove, hloc⟩  (existential elimination from agape_is_self_donation)
+    ∴ ¬∀ f, o, Subsists(f) → Subsists(o) → DivineLove f o → f.deiformEntity ≠ o.deiformEntity
+
+PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Subject, choice}`
+SOURCE     ⚠️ AxAgapeEssence · [DivineAgape.lean#denying_shared_location_is_absurd](formal/Logos/DivineAgape.lean#L518)
+
+
+<a id="two_subsisting_share_one_location"></a>
+DEPENDS ON   — the modelled denial
+GIVES        🧱 a bound on the reading, not a death
+KILLS        [step 8](#step-8) — That Person Grounds the Poles
+
+PROOF
+    ⚙️ DERIVATION — discharged directly, with no intermediate step
+    Assume DivineHypostasis
+    Assume Subsists(f)
+    Assume Subsists(o)
+    ∴ f.deiformEntity = o.deiformEntity
+
+PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Subject}`
+SOURCE     ✅ · [DivineAgape.lean#two_subsisting_share_one_location](formal/Logos/DivineAgape.lean#L118)
+
+
+> The stronger form, and the part that costs nothing extra: grant a donor and a recipient, grant that both subsist, grant that the love holds — and the denial *still* has to deny that they share one location-entity, which is `{}`. So the two-relata objection is refuted by arithmetic, not by a purchase. Same footprint as the row above ({Subject, AxAgapeEssence, Classical.choice}, one META): the price buys the gift, and the gift is not two things. This row has no thesis premise to label because the theorem's whole conclusion is the denial — so it prints the compiled statement and the derived kind rather than transcribing one.
+
+<a id="r21"></a>
+### R21. The Ground cannot give at all, because it is not a person who chooses
+
+**💥 DERIVATION** — “Only a chooser gives. The Ground is not a chooser, so the donation is empty.”
+
+> **⚠️ PRICED — the objection answered, at a price** — the objection is **answered**, not merely bounded: the claim it doubts obtains, and the price of that is named below. This row is a **result at a price**, not a gap in the deduction.
+
+<a id="self_donation_needs_no_personhood_of_the_ground"></a>
+DEPENDS ON   — the modelled denial
+GIVES        💰 the objection answered — the claim it doubts obtains, at the price below
+KILLS        [step 8](#step-8) — That Person Grounds the Poles
+
+PROOF
+    💰 PRICED — one step, a constructor
+      1. constructor  (conjunction constructor introduction)
+    ∴ ¬Asiety(Entity).ofGround ∧ (∃ f, o, SelfDonation(f, o))
+
+PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Means, Subject, choice}`
+SOURCE     ⚠️ AxAgapeEssence · [TrinitarianPersonalGround.lean#self_donation_needs_no_personhood_of_the_ground](formal/Logos/TrinitarianPersonalGround.lean#L264)
+
+
+<a id="ground_is_not_a_fourth_chooser"></a>
+DEPENDS ON   — the modelled denial
+GIVES        🤝 the objection's premise is **granted** — 0 substantive axioms. This is the limit of the row, not an answer to it
+
+PROOF
+    ⚙️ DERIVATION — 2 compiled steps
+      1. assume h  (hypothesis assumption for conditional/reductio proof)
+      2. witness components ⟨s, _p, _q, hs, _⟩  (existential elimination from h)
+    ∴ ¬Asiety(Entity).ofGround
+
+PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
+SOURCE     ✅ · [TrinitarianPersonalGround.lean#ground_is_not_a_fourth_chooser](formal/Logos/TrinitarianPersonalGround.lean#L226)
+
+
+<a id="agape_is_self_donation"></a>
+DEPENDS ON   — the modelled denial
+GIVES        💰 the objection answered — the claim it doubts obtains, at the price below
+
+PROOF
+    💰 PRICED — one step, a constructor
+      1. constructor  (existential constructor introduction)
+    ∴ ∃ f, o, SelfDonation(f, o)
+
+PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Subject, choice}`
+SOURCE     ⚠️ AxAgapeEssence · [DivineAgape.lean#agape_is_self_donation](formal/Logos/DivineAgape.lean#L471)
+
+
+> **The row that restores what a laundering sentence had removed.** The corpus answered this with a label — “the one essence is not a fourth chooser; its freedom is their freedom, shared rather than duplicated” — and commit `4a59173` then claimed the label was an absent predicate presented as an argument, deleted the ground’s freedom from the doctrine, and rebuilt the reading on that. The predicate is **not** absent: `AsietyFreedom.asietyFreedomOfGround` (`AsietyFreedom.lean:141`) is the ◈ `def` that states the sharing, `asietyFreedom_summary` (`:357`) consumes it, and three docstrings in that module say the vacuity of `OneEssence` is *load-bearing* because it marks the ground’s freedom as **transferred** rather than **exercised**. A `def` premise is invisible to `#print axioms`, and from that invisibility the commit inferred that nothing was there. `LOVE-2.md` D1 withdraws that inference. So this row is a **conjunction, both halves machine-checked**, plus a granted premise: the ground is **not** a fourth chooser (free at `{Means, Subject}`, and marked role=premise — it is the *objection’s* premise, so it is printed as granted and kills nothing), **and** the donation of the Self stands anyway (C575, one META axiom). What the price buys is the gift and nothing more: it does not buy a fourth chooser, and it does not buy the ground’s personhood at the entity level, which C228 leaves `BLOCKED`. The ground **is** personal — C362, C140 — and `¬ Asiety Entity.ofGround` is `ofGround_ne_ofSubject`, i.e. C519: the nature is not one of its instances.
 
 <a id="sec-part-iv-the-seam-where-the-deduction-stops"></a>
 ## Part IV — the seam: where the deduction stops
@@ -1732,10 +1916,10 @@ Contingent creation *as existence* is a free theorem (C350, `{}`); only the real
 | `C151` | ✅ **PROVEN** · [PersonalGroundOfReality.lean#the_person_supports_the_reality_of_right](formal/Logos/PersonalGroundOfReality.lean#L153), footprint {Initiates, Means, State, Subject, Will, subjectWill, will_individuation, CL} | HEADLINE — THE PERSON SUPPORTS THE REALITY OF RIGHT. |
 | `C228` | ✖ **BLOCKED** · [PersonalNormativeGround.lean#normative_ground_is_personal](formal/Logos/PersonalNormativeGround.lean#L262), footprint {Means, Subject, Will, subjectWill} | BLOCKED (AC5 unmet, D1′ recorded not executed): any entity that grounds Right/Wrong is a Personal Entity — but the personalness is a THREE-STEP FIELD PROJECTION, not a free-standing theorem: `grounds_normativity` supplie |
 | `C320` | ✅ **PROVEN** · [FoundationalUnicity.lean#exactly_one_universal_modal_ground](formal/Logos/FoundationalUnicity.lean#L304), footprint {Means, NecessarySubjectKind, Subject} | Master Synthesis (existential form): exactly one universal modal ground exists. |
-| `C350` | ✅ **PROVEN** · [CosmicExistence.lean#contingent_realm_obtains](formal/Logos/CosmicExistence.lean#L269), footprint {NecessarySubjectKind, Subject, CL} | Contingency-overflow: something obtains, is modal-fragile, and is not the necessary ground — and Γ derives it outright, resting on nothing substantive. |
-| `C367` | ✅ **PROVEN** · [CosmicExistence.lean#cosmos_obtains](formal/Logos/CosmicExistence.lean#L416), footprint {Means, NecessarySubjectKind, Subject, Will, subjectWill, CL} | **The cosmos exists** — a contingent created realm, not the necessary ground, actually obtains and bears content of its own — given a *contingent* person. |
+| `C350` | ✅ **PROVEN** · [CosmicExistence.lean#contingent_realm_obtains](formal/Logos/CosmicExistence.lean#L268), footprint {NecessarySubjectKind, Subject, CL} | Contingency-overflow: something obtains, is modal-fragile, and is not the necessary ground — and Γ derives it outright, resting on nothing substantive. |
+| `C367` | ✅ **PROVEN** · [CosmicExistence.lean#cosmos_obtains](formal/Logos/CosmicExistence.lean#L415), footprint {Means, NecessarySubjectKind, Subject, Will, subjectWill, CL} | **The cosmos exists** — a contingent created realm, not the necessary ground, actually obtains and bears content of its own — given a *contingent* person. |
 | `C440` | ✅ **PROVEN** · [DivineSimplicity.lean#divine_simplicity_sole_bearer](formal/Logos/DivineSimplicity.lean#L246), footprint {Means, Subject, CL} | C440 — the attributes-table form: the ground is the sole bearer of Divine Simplicity, stated together with the existence half so a reader-facing row can cite a single declaration. This is the [the Divine Simplicity row in the ledger](#sec-where-the-rest-of-the-ledger-lives) analogue of C |
-| `C510` | ⚠️ **AXIOMATIC** — rests on `AxAgapeEssence`, `AxProcessionSpirit`, `AxProcessionWord` · [DivineAgape.lean#agape_entails_tripersonality](formal/Logos/DivineAgape.lean#L331), footprint {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} | Agape entails tripersonality (C510, PROVEN↑): under the three disclosed Agape axioms — the datum, the procession of the Word, the procession of the Spirit — there is a `TrinitarianStructure` (C108) on the divine sort who |
+| `C510` | ⚠️ **AXIOMATIC** — rests on `AxAgapeEssence`, `AxProcessionSpirit`, `AxProcessionWord` · [DivineAgape.lean#agape_entails_tripersonality](formal/Logos/DivineAgape.lean#L376), footprint {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} | Agape entails tripersonality (C510, PROVEN↑): under the three disclosed Agape axioms — the datum, the procession of the Word, the procession of the Spirit — there is a `TrinitarianStructure` (C108) on the divine sort who |
 
 ## The score: what Γ has won, and what is still open
 
@@ -1759,11 +1943,12 @@ decision: `scripts/census_stipulated_defs.py`.
 
 | **Won** | **Still open** |
 |---|---|
-| **427 affirmative claims derived** out of **568** ledger claims — 339 ✅ kernel-verified, 88 ⚠️ derived under a substantive (`SEM`/`META`) axiom, each ⚠️ row naming the bridge it rests on. | **13 blocked** ✖ — named individually |
+| **438 affirmative claims derived** out of **581** ledger claims — 341 ✅ kernel-verified, 97 ⚠️ derived under a substantive (`SEM`/`META`) axiom, each ⚠️ row naming the bridge it rests on. | **14 blocked** ✖ — named individually |
 | **61 countermodel boundaries** 🧱 — a hostile model in which the claim *fails*. These are won results about the limit of the theory, not gaps. | &nbsp;&nbsp;· **C228** — any entity that grounds Right/Wrong is a Personal Entity |
-| **978 of 1835 theorems in `formal/Logos/` rest on no Γ axiom at all** (53%) — counted from `formal/axiom_audit.json`, not claimed. | &nbsp;&nbsp;· **C462** — BLOCKED, with no declaration, and deliberately so: the ground does not initiate is not refutable in Gamma and is not evidence of non-agency either |
+| **981 of 1871 theorems in `formal/Logos/` rest on no Γ axiom at all** (52%) — counted from `formal/axiom_audit.json`, not claimed. | &nbsp;&nbsp;· **C462** — BLOCKED, with no declaration, and deliberately so: the ground does not initiate is not refutable in Gamma and is not evidence of non-agency either |
 | **The whole price is 39 declared axioms**: 18 are `VOCAB` (the vocabulary the statements need in order to be sayable) and 21 are substantive. Only the 21 are philosophical commitments; the rest are the theory's definitions of its own words, which is a different thing from a premise. | &nbsp;&nbsp;· **C503** — A love-lane step for deriving the Good from a second person is BLOCKED, with no declaration (lote OTHER, 2026-09-29; plan OTHER.md): the step 'the… |
-| **10 attribute corollaries became unconditional theorems** (C389–C398) — they were conditional on a `def` until F15 was declared, so this is a *strengthening*: fewer hidden premises, same conclusions. | &nbsp;&nbsp;· **C73** — Plurality without bridges is blocked: unit countermodel settles that 1 act does not entail plurality; requires AxTwoSubjects |
+| **10 attribute corollaries became unconditional theorems** (C389–C398) — they were conditional on a `def` until F15 was declared, so this is a *strengthening*: fewer hidden premises, same conclusions. | &nbsp;&nbsp;· **C580** — The Subject/DivineHypostasis correspondence is BLOCKED, with no declaration (AMOR/2 batch, 2026-10-03; LOVE-2.md D6) |
+|  | &nbsp;&nbsp;· **C73** — Plurality without bridges is blocked: unit countermodel settles that 1 act does not entail plurality; requires AxTwoNecessaryPersonalCentres |
 |  | &nbsp;&nbsp;· **C75** — Propositional personhood is blocked: content existence does not entail personhood |
 |  | &nbsp;&nbsp;· **C79** — Ultimate ground existence is blocked: infinite descending chains have no ultimate element without a well-foundedness axiom |
 |  | &nbsp;&nbsp;· **C89** — Ultimate ground by initiation is blocked: non-entailed without well-foundedness |
@@ -1804,8 +1989,6 @@ Four qualifications, stated rather than hidden:
 2. **The 39 declared axioms are inputs, not wins.** Counting them as results would be the same error as counting a hypothesis as a proof. They are listed so the reader can price Γ exactly, and `VOCAB` is separated from `SEM`/`META` because only the latter are commitments.
 3. **A 🧱 is a win about a boundary, not about the claim.** Γ building a model in which monotheism fails is a real theorem — and a theorem *against* monotheism. The columns keep those apart on purpose.
 4. **The 15 retired routes are counted as neither won nor open.** Their ledger notes say the step was destroyed under hostile semantics; that is a settled negative. Filing them under "still open" would overstate the debt, and filing them as won would overstate the theory, so they get their own line.
-
-<sub>Declaration count excludes 5 parsed names with no `#print axioms` footprint; they are `parse_lean_sources` artefacts and are excluded from the denominator rather than scored axiom-free.</sub>
 
 <a id="sec-where-the-rest-of-the-ledger-lives"></a>
 ## Where the Rest of the Ledger Lives

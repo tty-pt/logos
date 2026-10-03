@@ -4,7 +4,9 @@
 T12 — there are at least two distinct persons.
 Reconstructed under hostile semantics: agency and personhood do not entail
 plurality by logic alone (settled by the Unit countermodel in `HostileSemantics`).
-Plurality is therefore derived under the explicit META bridge `AxTwoSubjects`.
+Plurality is therefore derived under the explicit META bridge
+`TwoNecessaryPersonalCentres.AxTwoNecessaryPersonalCentres` (2026-10-04, batch
+LOVE-3/S4, replacing the retired `Value.AxTwoSubjects`).
 
 Also hosts the Q2 bridge `EntityOf : Subject → Entity` (each person has an
 entity-correlate), decided to close the Subject/Entity gap so the love layer
@@ -13,7 +15,7 @@ can attach necessity to the relata (T14).
 The existence theorems `T1_subjectExists`, `T4_agentExists`, and `T5_personExists`
 are anchored directly on the performative foundation `Agency.Cogito`.
 `T12_twoPersons`, `notAlone`, and `T12_directedPair` are the genuine plurality
-claims, standing honestly on `{AxTwoSubjects}`.
+claims, standing honestly on `{AxTwoNecessaryPersonalCentres}`.
 -/
 
 import Logos.Core
@@ -29,7 +31,8 @@ open Logos.Agency (Subject NecessarySubjectKind ContingentSubjectKind)
 open Logos.Person (Person)
 open Logos.Entity (Entity ExistsAt actualWorld falsityWorld)
 open Logos.Semantics (World)
-open Logos.Value (AxTwoSubjects Affects PersonsAffectPrinciple)
+open Logos.Value (Affects PersonsAffectPrinciple)
+open Logos.TwoNecessaryPersonalCentres (AxTwoNecessaryPersonalCentres two_persons)
 
 /-- Q2 bridge: canonical embedding of subjects into the general entity type. -/
 def EntityOf : Subject → Entity := Logos.Entity.EntityOf
@@ -199,14 +202,76 @@ theorem necessaryPersonalSubject_derived :
   obtain ⟨s, hKind, hPerson⟩ := necessaryPersonalSubjectExists
   exact ⟨s, necessaryKindSubject_is_necessary s hKind, hPerson⟩
 
+/--At least two NECESSARY, ETERNAL persons exist — the author's target sentence.
+
+  C585 (new 2026-10-04, batch LOVE-3/S4). UNCONDITIONAL, and `PROVEN↑` at exactly
+  one META axiom (`AxTwoNecessaryPersonalCentres`) — the price is on the bridge,
+  never on this row.
+
+  This is `two_necessary_persons_of_kind` restated over WORLD-RIGIDITY rather than
+  over the kind predicate, and the rewrite costs nothing: `NecessarySubjectKind s`
+  and `NecessarySubject s` are the same predicate in this corpus, proved by
+  `kinds_are_the_modal_partition` (C411) above. So the two statements are
+  equivalent in the kernel and the bridge could have been stated either way; it is
+  stated over the primitive because of the import cycle documented in
+  `TwoNecessaryPersonalCentres.lean`.
+
+  What "eternal" costs: nothing further. `NecessarySubject s := ∀ w, ExistsAt w
+  (EntityOf s)` is world-rigidity by definition, and `NecessityEternity`
+  (`ofGround_necessary_ground_of_reality`, C161) is what ties the necessary kind
+  to eternity on the ground side. This row asserts eternity of the two PERSONS
+  in the world-rigid sense, which is the only sense `Plurality.NecessarySubject`
+  carries — it does not assert that the persons are the ground, and
+  `ofGround_ne_ofSubject` is untouched.
+
+  It is NOT derived from `necessaryPersonalSubjectExists` (which yields ONE
+  witness, and stays declared and independent) nor from T12 (which carries no
+  necessity). Reject `AxTwoNecessaryPersonalCentres` and this row goes together
+  with T12; there is no reading on which it survives for free.
+  Note on the freedom half (LOVE-4 / C587): a derived, META-free route now exists for
+  the existence of a Free Person (`NoMeanerNoFalsity.a_genuine_free_person_exists`, C587)
+  from the act datum and polarity (`{performative_act_datum, AxActPolarity}`).
+  `AxTwoNecessaryPersonalCentres` (C584) remains the declared META bridge that supplies
+  personal plurality and modal necessity.
+  Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
+theorem two_necessary_persons :
+    ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
+      NecessarySubject s₁ ∧ NecessarySubject s₂ := by
+  obtain ⟨s₁, s₂, hp, hq, hne, hk₁, hk₂⟩ :=
+    Logos.TwoNecessaryPersonalCentres.AxTwoNecessaryPersonalCentres
+  exact ⟨s₁, s₂, hp, hq, hne,
+    necessaryKindSubject_is_necessary s₁ hk₁,
+    necessaryKindSubject_is_necessary s₂ hk₂⟩
+
+/--Two distinct persons of the NECESSARY kind exist — `two_necessary_persons`
+    with world-rigidity replaced by its equivalent kind predicate (C411).
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
+theorem two_necessary_persons_kind_form :
+    ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
+      NecessarySubjectKind s₁ ∧ NecessarySubjectKind s₂ :=
+  Logos.TwoNecessaryPersonalCentres.two_necessary_persons_of_kind
+
+/--The two necessary persons are of DIFFERENT kinds from no third thing: the
+    distinctness in `two_necessary_persons` is between two persons, not between a
+    person and the ground. Recorded so that no reader may read the new bridge as
+    identifying a subject with the ground-constructor: `ofGround ≠ EntityOf s`
+    still holds for every `s` (`FoundationalUnicity.ofGround_ne_ofSubject`).
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
+theorem two_necessary_persons_are_both_persons :
+    ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ :=
+  two_persons
+
 /--There are at least two distinct persons.
 
-  T12 — there is more than one person (poem P5/P7; PROVEN↑ under `AxTwoSubjects`):
-    the reality of right-and-wrong demands plurality. A single act does not entail
-    plurality (settled by the Unit countermodel in HostileSemantics). Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
+  T12 — there is more than one person (poem P5/P7; PROVEN↑ under
+  `AxTwoNecessaryPersonalCentres`). Re-derived 2026-10-04 (LOVE-3/S4): the
+    plurality is no longer *inferred from* right-and-wrong — it is read off the
+    necessary-person bridge, which is strictly stronger (it also yields
+    necessity). A single act still does not entail plurality (settled by the Unit
+    countermodel in HostileSemantics). Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
 theorem T12_twoPersons :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ :=
-  AxTwoSubjects Logos.Core.rightWrongDistinction
+  two_persons
 
 /-- "Not alone": some pair of distinct persons exists (the same result,
     restated in the poem's vocabulary). -/
@@ -226,7 +291,7 @@ theorem cogito_from_T12 : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Means s p 
 
   T1 (C21) — the subject of the present act exists:
   derived from the existence of an intentional act (C68) via the constitutive rule
-  `act_requires_subject` (Case B). Footprint: `{Initiates, Means, State, Subject}` (VOCAB only; decoupled from AxTwoSubjects). -/
+  `act_requires_subject` (Case B). Footprint: `{Initiates, Means, State, Subject}` (VOCAB only; decoupled from the plurality bridge). -/
 theorem T1_subjectExists (h : ∃ s : Subject, ∃ p : Prop, Logos.Agency.Act s p) :
     ∃ s : Subject, Logos.Agency.SubjectExists s :=
   Logos.Agency.subject_exists_of_act h
@@ -294,15 +359,15 @@ theorem T12_directedPair_conditional
 
 /-- Right-and-wrong commits a choice field: where there is truth and error,
     someone is before an incompatible pair.
-    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
 theorem JUDGE_HAS_CHOICE_FIELD (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
     ∃ s : Subject, ∃ p q : Prop, Logos.Choice.ChoiceField s p q := by
-  obtain ⟨s₁, _, hp₁, _, _⟩ := Logos.Value.AxTwoSubjects h
+  obtain ⟨s₁, _, hp₁, _, _⟩ := two_persons
   obtain ⟨p, q, hch⟩ := Logos.Person.person_hasChoiceField hp₁
   exact ⟨s₁, p, q, hch⟩
 
 /-- Right-and-wrong implies someone who means.
-    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
 theorem rightWrong_implies_someone_means (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
     ∃ s : Subject, ∃ p : Prop, Logos.Agency.Means s p := by
   obtain ⟨s, p, _, hch⟩ := JUDGE_HAS_CHOICE_FIELD h
@@ -319,6 +384,8 @@ end Logos.Plurality
 #print axioms Logos.Plurality.T1_subjectExists
 #print axioms Logos.Plurality.T4_agentExists
 #print axioms Logos.Plurality.T5_intentionalSubjectExists
+#print axioms Logos.Plurality.two_necessary_persons
+#print axioms Logos.Plurality.two_necessary_persons_kind_form
 #print axioms Logos.Plurality.T12_twoPersons
 #print axioms Logos.Plurality.T12_directedPair_conditional
 #print axioms Logos.Plurality.cogito_from_T12

@@ -521,7 +521,7 @@ theorem the_thesis_is_utterable_though_not_assertable :
     retorsion, the complement and the utterance model all stand exactly as
     stated; this row is what they were missing — the content's falsity, on the
     record, at the price the record already pays elsewhere.
-    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
 theorem noMeaning_is_refuted_from_plurality : ¬ NoMeaning := by
   obtain ⟨s, p, hmp⟩ := Logos.Plurality.cogito_from_T12
   exact fun h => h ⟨p, ⟨s, hmp⟩⟩

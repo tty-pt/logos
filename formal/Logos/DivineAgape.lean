@@ -70,12 +70,34 @@ open Logos.TheologicalModalHardening
 def divineReality : Entity := Entity.ofGround
 
 /-- A divine person: a fresh abstract sort (real Γ ontologies untouched),
-    equipped with its location-entity — the one reality it shares. The
-    structure does not force the location; that is the content of the priced
-    axioms below, where each centered person is asserted to *subsist in*
-    `divineReality`. -/
+    equipped with its location-entity — the one reality it shares — and with a
+    **mark of personal distinction**. The structure does not force the location;
+    that is the content of the priced axioms below, where each centered person
+    is asserted to *subsist in* `divineReality`.
+
+    **The second field is load-bearing, and its absence was a soundness defect.**
+    With `deiformEntity` alone, `DivineHypostasis` *is* `Entity` up to eta, so
+    `Subsists` (a location-equality against the constant `divineReality`) had a
+    **singleton** subsatisfying subset: any two subsisting hypostases were
+    provably equal at `{}` — `two_subsisting_are_equal` below. `AxAgapeEssence`
+    then asserts `o ≠ f` with both subsisting, `AxProcessionSpirit` asserts
+    `σ ≠ the_father` with both subsisting, and **the whole kernel derived
+    `False`** (2026-10-03). Every badge and price in the corpus was vacuous for
+    the whole window, and the consistency gate did not notice: Gate A was pinned
+    to the S4 bridge and Gate B scans axiom *statements*, while the defect lived
+    in a `def` plus a structure's *arity*. `scripts/check_consistency.py` Gates C
+    and D now close both holes.
+
+    `personalProperty : Prop` is a *marker of distinction*, not the content of a
+    role: `IsWord` and `IsSpirit` remain the authoritative role predicates, and a
+    typed `DivineRole` field would add vocabulary without adding anything Γ can
+    then say. What the field buys is precisely the thing the corpus was missing —
+    two *distinct* personal properties of one location-entity, which is what
+    `SelfDonation` (below) is made of, and what makes `IsWord`/`IsSpirit`
+    non-vacuous for a second center. -/
 structure DivineHypostasis where
   deiformEntity : Entity
+  personalProperty : Prop
 
 /-- Subsistence: a divine person has its being in the one divine reality.
     (VOCAB predicate; the "in the Godhead" conjunct every centered person
@@ -84,6 +106,29 @@ structure DivineHypostasis where
     carries no `DivineHypostasis` at all, which is the separation of Stage B. -/
 def Subsists (d : DivineHypostasis) : Prop :=
   d.deiformEntity = divineReality
+
+/-- **Two subsisting divine persons are at one and the same location-entity.**
+    This is the "of the Self" half of Agape — *doação de Si próprio* — and it is
+    free: the footprint is the transitivity of `=` and nothing else, no axiom.
+    Read with `agape_is_self_donation` (C575) it is what makes the gift a gift
+    **of the Self** rather than a gift between two things.
+
+    Distinct from `co_subsistence_is_co_location` (C519) in scope, not in content:
+    this is the two-person form, C519 is the general one. Both are `{Subject}`. -/
+theorem two_subsisting_share_one_location (f o : DivineHypostasis)
+    (hf : Subsists f) (ho : Subsists o) : f.deiformEntity = o.deiformEntity := by
+  have hf' : f.deiformEntity = divineReality := hf
+  have ho' : o.deiformEntity = divineReality := ho
+  exact hf'.trans ho'.symm
+
+/-- Each of two subsisting persons is *in* the other: the mutual indwelling that
+    perichoresis names, as numerical identity of location. Free (`{}`), and the
+    reason C573's strict form is not needed for its content. -/
+theorem each_subsisting_person_is_in_the_other (f o : DivineHypostasis)
+    (hf : Subsists f) (ho : Subsists o) :
+    o.deiformEntity = f.deiformEntity ∧ f.deiformEntity = o.deiformEntity :=
+  ⟨two_subsisting_share_one_location o f ho hf,
+   two_subsisting_share_one_location f o hf ho⟩
 
 /-- `is_divine d e`: the `TrinitarianStructure` relation — the personal center
     `d` is in the divine reality `e`. -/
@@ -386,6 +431,97 @@ theorem the_three_centres_are_one_necessary_reality :
    co_subsistence_is_co_location the_father_subsists the_beloved_subsists,
    co_subsistence_is_co_location the_beloved_subsists the_spirit_subsists⟩
 
+-- ============================================================================
+-- Section 5: The donation of the Self (C575–C577)
+-- ============================================================================
+--
+-- `SelfDonation` is the sentence the corpus asserted only in prose. It is what
+-- `base.txt:1811` calls *auto-doação essencial* and what the author calls
+-- *doação de Si próprio*: the gift is not between two things, but between two
+-- personal properties of **one** thing. The conjunct order is the argument:
+-- distinct personal properties, both subsisting, a gift between them, and the
+-- shared location that makes the gift *of the Self*.
+
+/-- **SelfDonation** — the donation of the Self (*doação de Si próprio*): a gift
+    between two **distinct** personal properties of **one** location-entity.
+
+    The last conjunct is the whole point and it is the **free** one
+    (`two_subsisting_share_one_location`, `{Subject}`): what the three META axioms
+    buy is the gift between two distinct subsisting centers, and what they do *not*
+    buy is that they are two things. Both are the ground.
+
+    Note what this definition deliberately does **not** say. It does not say the
+    ground is a `Subject`, that it chooses, or that it acts in time: those are
+    refuted (§3–§4 of `LOVE.md`) or unstatable (C462/C463), and folding any of
+    them in here would make the donation pay for a metaphysical bridge it does not
+    need. The donation is on the entity, under personal properties. -/
+def SelfDonation (f o : DivineHypostasis) : Prop :=
+  f ≠ o ∧ Subsists f ∧ Subsists o ∧ DivineLove f o ∧ f.deiformEntity = o.deiformEntity
+
+/-- **Agape is the donation of the Self (C575, PROVEN↑).** Under the datum there
+    is a gift between two distinct personal properties of one location-entity —
+    which is C507 with the "of the Self" conjunct named rather than inherited.
+
+    The price is exactly C507's: `{Subject, AxAgapeEssence, CL}`,
+    **one META axiom**. The last conjunct of `SelfDonation` is
+    `two_subsisting_share_one_location`, at `{}`; `DivineLove` is `opaque`; and
+    `DivineHypostasis`'s second field is what makes the distinctness satisfiable at
+    all (before 2026-10-03 this conjunct was **unsatisfiable**, and the whole kernel
+    derived `False`). -/
+theorem agape_is_self_donation : ∃ f o : DivineHypostasis, SelfDonation f o :=
+  ⟨the_father, the_beloved, the_beloved_distinct.symm, the_father_subsists,
+    the_beloved_subsists, the_source_loves_the_beloved,
+    two_subsisting_share_one_location the_father the_beloved
+      the_father_subsists the_beloved_subsists⟩
+
+/-- **Denying that the donation of the Self occurs is a declared, not derived,
+    absurdity (C576, PROVEN↑).** Read the claim narrowly: assume there is *no*
+    donation at all and `False` follows.
+
+    **This is not the author's absurdity.** The objection the author names is the
+    four-step chain — one Person, therefore only contingent recipients, therefore
+    the self-giving *depends* on the contingent, therefore the Ground is
+    contingent — and the step that dies is the third one, which dies **free**
+    (C579, `SinglePersonDenial.self_gift_cannot_depend_on_a_contingent_person`).
+    This row is mounted beside it, not in place of it, and the two must not be
+    confused: C579 refutes the dependence *without mentioning the gift at all*,
+    because `SelfDonation` puts the recipient at `divineReality := Entity.ofGround`
+    and no `Subject` is that entity. So a row that refuted the objection by way of
+    the datum it also prices would be the datum.
+
+    The `denial` hypothesis is a **real premise**, not a rhetorical one: it is the
+    proposition actually refuted, which is what makes the Cremation row a
+    derivation rather than a badge. The refutation is `agape_is_self_donation`
+    alone — no classical reasoning, no `Decidable`, no new choice principle.
+
+    **What this is honestly worth, and why the row is priced.** `AxAgapeEssence`
+    is a substantive axiom, so there is a world — the Narcissus world (C511),
+    which assigns `Love` so that the source loves only itself — in which the
+    denial holds. The denial is therefore *available*, and it is contradicted only
+    by what is **declared**: Γ does not claim the donation is a theorem of logic.
+    Consequently the row's derived kind is `⚠️ PRICED`, not `⊥ CONTRADICTION`. The
+    distinction is load-bearing rather than cosmetic — `⊥` says logic closed the
+    branch, while the price says a world in which the branch survives was ruled
+    out by fiat. Printing the free glyph here is the laundering this row's price
+    line exists to prevent. -/
+theorem denying_self_donation_is_absurd
+    (denial : ¬ ∃ f o : DivineHypostasis, SelfDonation f o) : False :=
+  denial agape_is_self_donation
+
+/-- **And the denial fails even when its own premises are granted (C577,
+    PROVEN↑).** The stronger form: grant a donor and a recipient, grant that both
+    subsist, grant that the love holds — and the denial *still* has to deny that
+    they are at one location, which is `{}`.
+
+    So "it cannot be a self-gift because the donor and the recipient are two
+    things" is refuted with no additional price at all. Same footprint as C575. -/
+theorem denying_shared_location_is_absurd :
+    ¬ ∀ f o : DivineHypostasis, Subsists f → Subsists o → DivineLove f o →
+      f.deiformEntity ≠ o.deiformEntity := by
+  rintro h
+  obtain ⟨f, o, _, hf, ho, hlove, hloc⟩ := agape_is_self_donation
+  exact h f o hf ho hlove hloc
+
 end Logos.DivineAgape
 
 -- ---------------------------------------------------------------------------
@@ -408,3 +544,8 @@ end Logos.DivineAgape
 #print axioms Logos.DivineAgape.subsisting_centre_is_necessary
 #print axioms Logos.DivineAgape.co_subsistence_is_co_location
 #print axioms Logos.DivineAgape.the_three_centres_are_one_necessary_reality
+#print axioms Logos.DivineAgape.two_subsisting_share_one_location
+#print axioms Logos.DivineAgape.each_subsisting_person_is_in_the_other
+#print axioms Logos.DivineAgape.agape_is_self_donation
+#print axioms Logos.DivineAgape.denying_self_donation_is_absurd
+#print axioms Logos.DivineAgape.denying_shared_location_is_absurd

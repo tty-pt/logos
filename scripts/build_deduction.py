@@ -48,8 +48,17 @@ from enum import Enum
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+SCRIPTS = Path(__file__).resolve().parent
+if str(SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS))
 FORMAL = ROOT / "formal"
 LEAN_DIR = FORMAL / "Logos"
+
+# The whole-file Lean comment tokenizer lives with the census gate, which needed it first: a
+# quoted axiom inside a `/- -/` block once counted as a declaration and put the census at 40 when
+# the kernel holds 39. D7 is the same hole one layer over -- in *this* file's declaration scanner,
+# which the census fix never reached -- so the implementation is imported rather than duplicated.
+from check_consistency import lean_code_lines  # noqa: E402
 GAPMAP_PATH = FORMAL / "GAPMAP.md"
 DEPGRAPH_PATH = FORMAL / "depgraph.json"
 OUT_PATH = ROOT / "README.md"
@@ -80,24 +89,11 @@ STATUS_ORDER = ["PROVEN", "PROVEN↑", "AXIOM", "BLOCKED", "DEFERRED"]
 # 1. Lean source parsing
 # ---------------------------------------------------------------------------
 
-def strip_block_comments(text: str) -> str:
-    """Remove /- ... -/ block comments and -- line comments from Lean text."""
-    out = []
-    i, n = 0, len(text)
-    while i < n:
-        if text.startswith("/-", i):
-            j = text.find("-/", i + 2)
-            j = n if j < 0 else j + 2
-            i = j
-            continue
-        if text.startswith("--", i):
-            j = text.find("\n", i)
-            j = n if j < 0 else j
-            i = j
-            continue
-        out.append(text[i])
-        i += 1
-    return "".join(out)
+# There is deliberately no local comment-stripper here. The corpus quotes declarations in prose
+# and in retirement notes, and a per-line `strip_block_comments` cannot tell a line that *begins
+# inside* a multi-line `/- -/` block from a line that begins in code -- so it invented axioms out
+# of comments (D7). Use `lean_code_lines`, imported from `check_consistency`, which tracks block
+# nesting and string literals across the whole file. Do not re-add a per-line version.
 
 def parse_lean_sources() -> dict:
     """Return {fullName: info} for every user-authored declaration.
@@ -109,11 +105,22 @@ def parse_lean_sources() -> dict:
     stripping: the meaning attached to a declaration is the first paragraph of
     its doc comment (see `_doc_for`). For `def NAME : String := "…"` stubs the
     literal value is captured as `stringValue`.
+
+    Comment handling is `check_consistency.lean_code_lines`, a whole-file
+    projection, not a per-line `strip_block_comments`. That is D7: a per-line
+    strip cannot see that a line is the middle of a multi-line `/- -/` block, so
+    a quoted declaration inside one registered as a *live* axiom. `Value.lean`'s
+    retirement note quotes the withdrawn `AxTwoSubjects`, and it came back as
+    `Logos.Value.AxTwoSubjects | kind= axiom | tag=` — a phantom with an empty
+    tag, which `gapmap_taxonomy.py` duly reported as `40 total / 39 tagged`. The
+    census pin could not catch it: `axiom_statements` had been hardened in
+    2026-10-03 and *this* parser had not. Same laundering, one layer over.
     """
     decls = {}
 
     for path in sorted(LEAN_DIR.glob("*.lean")):
         lines = path.read_text(encoding="utf-8").splitlines()
+        code = lean_code_lines(lines)
         scopes: list[tuple[str, str]] = []  # ("namespace"|"section", name)
         cur_doc = ""  # most recent /-- ... -/ doc block
         i, n = 0, len(lines)
@@ -124,7 +131,7 @@ def parse_lean_sources() -> dict:
             ls = raw.lstrip()
 
             # doc block? /-- <doc> -/ may span several lines. Must check the
-            # RAW line: strip_block_comments would erase it first.
+            # RAW line: lean_code_lines would erase it first, and a docstring IS a comment.
             if ls.startswith("/--"):
                 dpos = raw.find("/--")
                 end = raw.find("-/", dpos + 3)
@@ -148,8 +155,10 @@ def parse_lean_sources() -> dict:
                 i = j
                 continue
 
-            text = strip_block_comments(raw)
-            stripped = text.strip()
+            # Comments come off the whole-file projection, not off this line in isolation: a line
+            # in the middle of a multi-line `/- -/` block projects to the empty string, so it can
+            # never match DECL_RE. A per-line strip could not tell the difference, which is D7.
+            stripped = code[i].strip()
 
             m_sec = re.match(r"^section(?:\s+([\w.]+))?\s*$", stripped)
             if m_sec:
@@ -614,6 +623,12 @@ RETIRED_AXIOMS = {
     "universal_ground_unique", "explanatory_adequacy_normative_order",
     "PersonalNature", "personal_nature_iff_person", "DivineNature",
     "divine_nature_is_personal", "divine_person_is_necessary",
+    # Batch LOVE-3/S4 (2026-10-04): `Value.AxTwoSubjects` DELETED, replaced by the
+    # strictly stronger `TwoNecessaryPersonalCentres.AxTwoNecessaryPersonalCentres`.
+    # Both are listed: the retired one so a stale GAPMAP cell naming it is caught
+    # by the divergence detector at :1288, and — note — the replacement is NOT
+    # listed, because it is still a live axiom and must be seen in the gap.
+    "AxTwoSubjects",
 }
 
 def _short(name: str) -> str:
@@ -695,6 +710,19 @@ def load_audit() -> dict:
         raise SystemExit(f"ERROR: {AUDIT_PATH} missing. Run "
                          "`python3 scripts/audit_footprints.py` first (see AGENTS.md).")
     return json.loads(AUDIT_PATH.read_text(encoding="utf-8"))
+
+def _audited(full: str) -> bool:
+    """True when `full` is a declaration the footprint audit actually walked.
+
+    Distinct from `audit_footprint(full)`, which is `[]` both for an unaudited
+    name and for a genuinely axiom-free (`{}`) declaration. Gate V1 wants the
+    first question; every price display wants the second.
+    """
+    global _AUDIT
+    if not _AUDIT:
+        _AUDIT = load_audit()
+    return full in _AUDIT
+
 
 def expand_footprint(cid: str, fp_by_id: dict, seen=None) -> str:
     """Resolve an inherited GAPMAP footprint (`as C18`, `via C40`) recursively
@@ -864,6 +892,10 @@ CHAIN_REQUIRED_DECLS = {
         "C410 — the two kinds ARE the two modal profiles; the batch's `{}`-class headline",
     "Logos.Plurality.contingentKindSubject_not_necessary":
         "C406 — discharges C329 with no love axiom",
+    "Logos.TwoNecessaryPersonalCentres.AxTwoNecessaryPersonalCentres":
+        "C584 — the LOVE-3 plurality bridge; a second META priced once, never absorbed",
+    "Logos.Plurality.two_necessary_persons":
+        "C585 — the author's target sentence, proven without premise at that one price",
     "Logos.PersonalGroundOfReality.the_person_supports_the_reality_of_right":
         "C151 — the unconditional personal-ground flagship",
     "Logos.PersonalGroundOfReality.personal_ground_of_right_exists":
@@ -1147,9 +1179,15 @@ def render_consistency(sections, decls, node_map, claims_by_id, graph, resolved_
        + ("" if len(glossed) == len(live_claims)
           else f" · **no gloss:** {', '.join(c['id'] for c in live_claims if not c.get('_gloss'))}"))
     if retired_claims:
+        # The provenance clause is deliberately not "plan §24" for all of them. C568–C573 were
+        # deleted or withdrawn there, but FAITH-2 was marked WITHDRAWN on 2026-10-04 because its
+        # `lean_ref` named `AxTwoSubjects`, retired in LOVE-3 S4, so the row no longer had a live
+        # kernel node; its content is owned by C42–C45. Asserting one cause for all of them would
+        # be a transcription, and the glossary line above had already caught the claim as glossless.
         ap(f"- Retired claims (no kernel node, so no gloss is owed): "
            f"**{len(retired_claims)}** — {', '.join(c['id'] for c in retired_claims)} "
-           "(deleted or withdrawn in plan §24; the prose in their GAPMAP rows is the record)")
+           "(deleted or withdrawn in plan §24, or dissolved into another claim; "
+           "the prose in their GAPMAP rows is the record)")
 
     if missing_claims:
         ap(f"- **Claims whose referenced theorem is missing (MISSING) ({len(missing_claims)}):**")
@@ -1949,7 +1987,11 @@ MODULE_STAGE = {
 
 AX_ID = {
     "Subject": "A1",
-    "Means": "A2", "AxTwoSubjects": "A3",
+    # Batch LOVE-3/S4 (2026-10-04): A3 is REUSED, not renumbered. `AxTwoSubjects`
+    # was deleted and `AxTwoNecessaryPersonalCentres` took its slot, because the A#
+    # citations embedded in generated prose are stable identifiers — renumbering
+    # would silently repoint every existing A3 citation at a different axiom.
+    "Means": "A2", "AxTwoNecessaryPersonalCentres": "A3",
     "act": "A4", "State": "A5", "Initiates": "A6",
     "AxActPolarity": "A7",
     "AxIntentionalChoice": "A8",
@@ -4490,6 +4532,18 @@ _STRENGTH = (
 )
 _STRENGTH_RANK = {k: i for i, k in enumerate(_STRENGTH)}
 
+_PRICED_REFUTATION = "⚠️ PRICED — the denial refuted, at a declared price"
+
+# Every kind that says "refuted, at a price" rather than "refuted, free". Two
+# members because two *goal shapes* reach a priced refutation: a `False` goal
+# (R19, C576) and a positive-`∃` goal (R15). Both were reachable before; only
+# the first was mis-badged, because only the first had its shape test short-
+# circuit the price. `refutation_kind` selects between them from the goal, and
+# every *consumer* tests membership here, so no consumer can hardcode one shape
+# and miss the other.
+_PRICED_KINDS = frozenset(
+    {_PRICED_REFUTATION, "⚠️ PRICED — the objection answered, at a price"})
+
 _REFUTATION_KINDS = ("⊥ CONTRADICTION", "⊘ DENIAL REFUTED",
                      "COLLAPSE — INCOHERENT")
 
@@ -6618,10 +6672,14 @@ def _render_reading_guide_full() -> list[str]:
        "Closing it means a new correspondence commitment, and **not** an identity one: an earlier "
        "revision that equated a subject with the ground made `False` derivable and was deleted "
        "(GAPMAP C509, guard `formal/consistency/FalseNotDerivable.lean`). Paid as: not proved here.")
-    ap(">    **Strict perichoresis is a named frontier row (C573, OPEN), and it is a missing PREDICATE.** "
-       "`∀ a b : Subject, a ≠ b → MutualIndwelling a b` would need a new symmetric primitive that is "
-       "deliberately not a meaning-containment order; `OneEssence` cannot carry it (that is C572) and "
-       "asymmetry cannot be used to rule it out (C316). Named rather than implied.")
+    ap(">    **Strict perichoresis is no longer an open question (C573, `WITHDRAWN`); only the "
+       "*naming* of it is (C574, OPEN).** Its content turned out to be derived and free — "
+       "`two_subsisting_share_one_location` and `each_subsisting_person_is_in_the_other`, both "
+       "`{Subject}`, `DivineAgape.lean` — so what C573 was really reporting is an **undefined "
+       "predicate** whose content is already `=`. Read the withdrawal in the C572 sense, not in "
+       "the 'resolved' sense: no `MutualIndwelling` primitive is declared, and "
+       "`∀ a b : Subject, a ≠ b → MutualIndwelling a b` is still **not** a theorem of Γ. The "
+       "residual question is whether to spend a new `VOCAB` symbol on what is already derived.")
     ap("> 4. Moral good/evil — machine-separated from epistemic normativity (permanent ")
     ap(">    countermodel frontier 🧱, C175): the faithful model `M_amoral` satisfies the whole epistemic ")
     ap(">    agential reality-hook with zero practical obligation. The positive pole is then obtained ")
@@ -6648,6 +6706,13 @@ def _negated_core(goal: str) -> str:
         return ""
 
 
+def _fmt_key(t: str) -> str:
+    """Propositions compared up to *formatting* only — the author may punctuate a
+    premise their own way, but parentheses, spacing, commas and case are not
+    content. Shared by the V3 premise match and the `denial_proposition` match."""
+    return re.sub(r"[\s(),.]+", "", t or "").lower()
+
+
 def _denial_core(hypothesis: str) -> str:
     """The denial's own thesis, as a proposition to compare against
     `_negated_core`. For an implication-shaped premise the *antecedent* is the
@@ -6659,7 +6724,9 @@ def _denial_core(hypothesis: str) -> str:
     return h
 
 
-def refutation_kind(proof: ProofIR, denial_hypothesis: str | None = None) -> str:
+def refutation_kind(proof: ProofIR, denial_hypothesis: str | None = None,
+                    denial_proposition: str | None = None,
+                    priced_route: bool = False) -> str:
     """How a branch of the denial is stopped — DERIVED, never authored.
 
     The reading path states that nihilism is *cremated*: every branch that is
@@ -6679,7 +6746,7 @@ def refutation_kind(proof: ProofIR, denial_hypothesis: str | None = None) -> str
     says so in the row note. A 🧱 that reads as a victory would be the one
     overclaim this table exists to prevent.
 
-    A `denial_hypothesis` (the row's V3-validated thesis premise) adds one more
+A `denial_hypothesis` (the row's V3-validated thesis premise) adds one more
     kind for goals that are *negations* rather than `⊥`, because a `¬`-goal with
     a free footprint otherwise reads as a countermodel — and a refutation of a
     denial is not a countermodel. The two `¬` shapes are separated by shape, not
@@ -6689,6 +6756,22 @@ def refutation_kind(proof: ProofIR, denial_hypothesis: str | None = None) -> str
     the normativity it claims to keep — an impersonal normativity is no genuine
     normativity, an ungraspable command does not address — which is the same
     shape as the Euthyphro collapse and takes that kind.
+
+    `priced_route` is the fourth input and it is the one that was lost. The goal
+    shape alone cannot tell a *free* contradiction from a *bought* one: both have
+    goal `False`, so the shape test below returned `⊥ CONTRADICTION` for
+    C576 (`AxAgapeEssence`) and for C570 (`AxJudicativeBipolarity`) — and those
+    rows' own spine notes said the opposite, in the same document, thirteen lines
+    below the header. The distinction is `subst`, which is computed here, and
+    `⊥` asserts that logic closed the branch while `⚠️ PRICED` says a world in
+    which the branch survives was ruled out by declaration. Both are refutations;
+    only one is free, and the glyph has to say which.
+
+    The test is **one-directional by construction**: it can only remove the free
+    glyph, never confer it. A substantive footprint that arrives with
+    `priced_route=False` is rejected by V2 (`require_free=True`), so no
+    laundering path exists through this parameter — setting it to `True` on a
+    free theorem changes nothing, because `subst` is empty.
     """
     goal = (proof.goal or "").strip()
     fp = audit_footprint(proof.full_name) or []
@@ -6697,14 +6780,37 @@ def refutation_kind(proof: ProofIR, denial_hypothesis: str | None = None) -> str
     # written bare (`⊢ False`) or as the consequent of an implication
     # (`⊢ NormativeViolation s a → False`, the Euthyphro collapse). The earlier
     # test only looked for a literal `⊥` in the string, so the implication form
-    # fell through to the positive branch below and was reported as an
+    # fell through to the positive branch below and was reported as a
     # *instantiation* — the opposite claim.
     if goal in ("False", "⊥") or "⊥" in goal or \
             re.search(r"(?:→|->)\s*(?:False|⊥)\s*$", goal):
+        # PRICED, not CONTRADICTION. Checked BEFORE the shape is returned as a
+        # free death, and only ever demotes: `⊥` claims logic closed the branch,
+        # `⚠️ PRICED` claims a declared axiom closed it. On R19 (C576) the
+        # Narcissus world of C511 is a model in which `¬∃ f o, SelfDonation f o`
+        # holds, so the denial is available and refuted only by fiat. Printing
+        # `⊥` there is the defect `LOVE.md` §13.1 defect 3 described and the
+        # spine note at `presentation_spine.json` has always contradicted.
+        if priced_route and subst:
+            return _PRICED_REFUTATION
         return "⊥ CONTRADICTION"
     if denial_hypothesis and subst:
         return "❌ NOT STOPPED"
     core = _negated_core(goal)
+    # A denial stated PROPOSITIONALLY rather than as a premise. `denial_hypothesis`
+    # is the V3 case: `⊢ ¬D` where `D` is a binder hypothesis, so the theorem
+    # concludes `False` and V1–V2 already covered it. This is the other shape —
+    # a theorem whose *whole conclusion* is the closed `¬D`, with no premises to
+    # label (`denying_shared_location_is_absurd`, C577). V3 cannot help there (there
+    # is no premise to match), so the `¬`-goal fell through to the separation
+    # branch and the row was published as `⌐ DEFINITIONAL FALLACY`: a priced
+    # separation, i.e. a claim that the reading has a defect. Nothing about it is
+    # definitional — it *refutes* the denial, at one META axiom. The comparison is
+    # still derived, not asserted: the renderer checks the named proposition
+    # against `_negated_core(goal)` and fails the build on any mismatch, so this
+    # cannot relabel an arbitrary `¬`-theorem.
+    if denial_proposition and core and _fmt_key(denial_proposition) == _fmt_key(core):
+        return "⊘ DENIAL REFUTED"
     if denial_hypothesis and core:
         thesis = _denial_core(denial_hypothesis)
         if thesis and thesis == core:
@@ -6746,7 +6852,18 @@ def refutation_kind(proof: ProofIR, denial_hypothesis: str | None = None) -> str
         # separation test is now the **audited** polarity plus the compile-time
         # boundary, i.e. the same two facts `strength_of` reads, so the two
         # classifiers can no longer disagree — `_check_classifier_agreement` gates it.
-        if goal.startswith("∃") and not goal.startswith("∃¬") and pol == "positive" and not getattr(proof, "boundary", None):
+        # Polarity decides, not the `∃` glyph. The prefix test used to stand in for
+        # "this claims something obtains", and a claim can obtain without being
+        # `∃`-headed: C578 concludes `¬ Asiety Entity.ofGround ∧ (∃ f o, SelfDonation f o)`
+        # — a positive conjunction that asserts both halves — and the prefix missed it,
+        # so the row fell through to the final branch and was published as
+        # `❌ NOT STOPPED` over a theorem that answers its objection outright at one META
+        # axiom. `_polarity_of` already classifies it `positive` and documents why (a
+        # conjunction asserts; only an ALL-negative one denies), so the audited
+        # polarity is the test and the glyph is not. Outcomes for goals that were
+        # already reaching this branch are unchanged — the three returns below are the
+        # same three the final section produced.
+        if pol == "positive" and not goal.startswith("∃¬") and not getattr(proof, "boundary", None):
             if subst:
                 return "⚠️ PRICED — the objection answered, at a price"
             # A free witness to a positive claim establishes it. It is a countermodel
@@ -6842,6 +6959,34 @@ def _footprint_cell(proofs: list[ProofIR]) -> str:
     return "`{" + ", ".join(parts) + "}`"
 
 
+def _row_badge_axioms(proofs: list[ProofIR]) -> str:
+    """The axioms a multi-target row pays in, as the `AXIOMATIC (…)` payload.
+
+    The badge and the footprint cell sit next to each other in the same cell, so
+    they must agree. `_worst_badge` returns ONE link's badge, and on a tie — which
+    is every row whose targets all cost the same category — it keeps the *first*
+    target. That printed `AXIOMATIC (AxAgapeEssence)` beside a footprint cell
+    reading `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}`: the reader was told
+    one axiom was paid when the row's own footprint named two. A badge that
+    under-reports its own price is the same defect `_GLANCE_RANK` had, one level
+    down.
+
+    So the payload is the **union** over the row, computed by the same rule
+    `classify_proof_edge` uses on a single proof — META wins over SEM, and the
+    winner's kind lists *all* of that kind — which makes a single-target row
+    identical to before and a multi-target row honest. The category half still
+    comes from `_worst_badge`, so the internal strings the tests key on are
+    untouched.
+    """
+    meta = {a.rsplit(".", 1)[-1] for p in proofs for a in _branch_substantive(p)
+            if (_REGISTRY.get(a.rsplit(".", 1)[-1]) or {}).get("tag") == "META"}
+    if meta:
+        return ", ".join(sorted(meta))
+    sem = {a.rsplit(".", 1)[-1] for p in proofs for a in _branch_substantive(p)
+           if (_REGISTRY.get(a.rsplit(".", 1)[-1]) or {}).get("tag") == "SEM"}
+    return ", ".join(sorted(sem))
+
+
 def _status_cell(proofs: list[ProofIR]) -> str:
     """Reader-facing status for a multi-target row: the worst link's badge,
     with every target named and linked. `AXIOMATIC (X)` names the axiom (the
@@ -6849,6 +6994,9 @@ def _status_cell(proofs: list[ProofIR]) -> str:
     the test suites stay stable."""
     cat, badge = _worst_badge(proofs)
     icon = status_icon(badge)
+    if badge.startswith("AXIOMATIC (") and len(proofs) > 1:
+        # Union the paid axioms across the row; see `_row_badge_axioms`.
+        badge = f"AXIOMATIC ({_row_badge_axioms(proofs)})"
     if badge.startswith("AXIOMATIC ("):
         head = f"{icon} **AXIOMATIC ({badge[len('AXIOMATIC ('):-1]})**"
     elif badge == "DEFINITIONAL":
@@ -6888,7 +7036,7 @@ def render_derived_price_table(rows: list[dict], title: str = "") -> list[str]:
     for r in rows:
         proofs = [p for p in (resolve_proof_by_name(t, _CTX.get("compiled", {}),
                                                      _CTX.get("decls", {}), _CTX.get("graph", {}))
-                              for t in r.get("targets", [])) if p]
+                              for t, _role in _target_specs(r)) if p]
         if not proofs:
             raise SystemExit(
                 f"FATAL: derived table row '{r.get('row', '')}' names no resolvable "
@@ -6898,6 +7046,80 @@ def render_derived_price_table(rows: list[dict], title: str = "") -> list[str]:
     L.append("")
     return L
 
+
+def _target_specs(row: dict) -> list[tuple[str, str]]:
+    """A cremation row's `targets`, normalised to `(target, role)` pairs.
+
+    A plain string is a target the row claims as an *answer* — the historical
+    shape, and every row before 2026-10-03. An object
+    `{"target": …, "role": "premise"}` names a target that is **the objection's
+    premise, granted** — the third shape the Cremation had never modelled, and the
+    one R21 needed: `ground_is_not_a_fourth_chooser` was rendered
+    `✅ this half of the objection is answered free` directly above a note saying it
+    "says only that the ground is not a chooser". A premise granted is not an answer,
+    and printing it as one is the defect D3 records. Roles: `"premise"` or the
+    implicit `"answer"`.
+    """
+    out: list[tuple[str, str]] = []
+    for t in row.get("targets", []):
+        if isinstance(t, str):
+            out.append((t, "answer"))
+        elif isinstance(t, dict) and "target" in t:
+            out.append((t["target"], t.get("role", "answer")))
+        else:
+            raise SystemExit(
+                f"FATAL: target spec {t!r} is neither a name nor "
+                f'{{"target": …, "role": …}}. A malformed target must not read as a '
+                f"missing one.")
+    return out
+
+# Free-signature countermodels that were mounted as *answers* until LOVE-2.md D4 and
+# are now demoted to the catalogue. Membership is maintained by hand (the house
+# pattern: the statuses below are derived from the audit, the list is not); each
+# entry is here because it was on the reading path and failed the C559
+# meaning-coherence discipline, not because it is unsound.
+_DEMOTED_SHAPE_LEMMAS: list[tuple[str, str]] = [
+    ("Logos.EssenceActCollapse.necessary_nature_not_entails_necessary_act",
+     "necessary nature does not entail necessary act"),
+    ("Logos.EssenceActCollapse.modal_collapse_action_theorem",
+     "the modal-collapse form of the same separation"),
+]
+
+
+def _render_demoted_shape_lemmas() -> list[str]:
+    """The demoted fresh-signature countermodels, with the C559 disclosure.
+
+    `necessary_nature_not_entails_necessary_act` was mounted as the answer to "a
+    necessary Ground that gives only to temporal beings thereby becomes contingent",
+    at `{}`. It is a `{}` **over a locally quantified fresh signature** — `∃ World
+    Entity Subject ExistsAt NatureAt ActAt g s a, …` with `ExistsAt := fun _ _ => True`
+    — so it denies nothing in Γ: there is no ground in it, no Person, no gift, and
+    every predicate it names is granted true. That is the defect AGENTS.md binds
+    against (meaning-coherence audit, 2026-09-29) and that C559 governs: *check
+    that the model instantiates the vocabulary it is supposed to deny.*
+
+    The rows stay in the ledger with their derived footprints — a `{}` separator is
+    worth having — and they leave the reading path, where a reader would have taken
+    them for evidence about Γ's donation.
+    """
+    L = ["", "## Demoted: free-signature shape lemmas (C559 discipline)", "",
+         "These are machine-checked and they are **not** countermodels of anything Γ "
+         "asserts. Each is a `{}` separation proved over a **locally quantified fresh "
+         "signature**, and each grants every predicate it names, so each denies nothing "
+         "in Γ — no ground, no Person, no gift appears in any of them. Read them for "
+         "the shape claim only: *necessary nature does not entail necessary act* is a "
+         "true proposition about an arbitrary signature.", ""]
+    for full, gloss in _DEMOTED_SHAPE_LEMMAS:
+        proof = resolve_proof_by_name(full, _CTX.get("compiled", {}),
+                                      _CTX.get("decls", {}), _CTX.get("graph", {}))
+        if proof is None:
+            raise SystemExit(
+                f"FATAL: demoted shape lemma '{full}' does not resolve — a catalogue "
+                f"entry with no source is worse than no entry.")
+        L.append(f"* **`{full}`** — {gloss}. {_status_cell([proof])} "
+                 f"Demoted from the reading path 2026-10-03 (`LOVE-2.md` D4).")
+    L.append("")
+    return L
 
 def _branch_substantive(proof: ProofIR) -> list[str]:
     """The substantive (`SEM`/`META`/`TRANS`) axioms in a branch proof's audited
@@ -6954,7 +7176,8 @@ def render_cremation_derivation(proof: ProofIR, denial_hypothesis: str, *, branc
                                 objection: str = "", voice: str = "", voice_gloss: str = "",
                                 index: int | None = None, require_free: bool = True,
                                 price_note: str = "", kills: str = "",
-                                gives: str = "", role: str = "derivation") -> list[str]:
+                                gives: str = "", role: str = "derivation",
+                                priced_route: bool = False) -> list[str]:
     """One branch of the denial, with its premises, its steps, and its death.
 
     The whole point of this renderer (CREMATION.md): a §13 row used to state
@@ -6974,7 +7197,14 @@ def render_cremation_derivation(proof: ProofIR, denial_hypothesis: str, *, branc
     assumption, a step, or the terminator of the compiled proof.
     """
     decls = _CTX.get("decls", {})
-    if proof.full_name not in decls or not audit_footprint(proof.full_name):
+    # `audit_footprint` returns `[]` for BOTH "not audited" and "audited, `{}`",
+    # so a truthiness test here rejects exactly the free theorems this gate
+    # exists to admit — V1 said "has an audited footprint", and an empty
+    # footprint is a footprint. Membership in the audit artifact is the test
+    # that distinguishes the two. (Found by mounting R20, whose whole point is a
+    # `{}` countermodel: the free row was the one row the "free death" gate
+    # could not admit.)
+    if proof.full_name not in decls or not _audited(proof.full_name):
         raise SystemExit(
             f"FATAL: cremation branch '{branch}': derivation target '{proof.name}' is "
             f"not a live kernel declaration with an audited footprint — an "
@@ -7001,7 +7231,7 @@ def render_cremation_derivation(proof: ProofIR, denial_hypothesis: str, *, branc
             f"exactly one real premise, or the section would be transcribing a "
             f"derivation instead of reading it.")
     thesis_i = matches[0]
-    kind = refutation_kind(proof, denial_hypothesis)
+    kind = refutation_kind(proof, denial_hypothesis, priced_route=priced_route)
     icon = _KIND_ICON.get(kind, "?")
     # V4. A *refutation* must end in a derived terminator, or the reading path is
     # claiming a death it cannot show. A **pillar** row is the one exception and
@@ -7012,11 +7242,30 @@ def render_cremation_derivation(proof: ProofIR, denial_hypothesis: str, *, branc
     # itself derived from the goal's shape, so this cannot become a door for a
     # goal that merely looks unusual.
     if role == "derivation" and kind not in (
-            "⊥ CONTRADICTION", "⊘ DENIAL REFUTED", "COLLAPSE — INCOHERENT"):
+            "⊥ CONTRADICTION", "⊘ DENIAL REFUTED", "COLLAPSE — INCOHERENT",
+            _PRICED_REFUTATION) and not (
+            priced_route and kind == _PRICED_REFUTATION):
         raise SystemExit(
             f"FATAL: cremation branch '{branch}': '{proof.name}' does not end in a "
             f"derived ⊥/⊘/collapse terminator (kind was {kind!r}) — the reading path may not "
             f"claim a death it cannot show.")
+    # A priced route is admitted as a terminator only when the spine *declares*
+    # it priced (`priced: true` on the row), which is the flag `priced_route`
+    # carries in from `refutation_kind`. The alternative was the two failures
+    # this replaces: either V4 rejected C576's honest `False` at
+    # `AxAgapeEssence` (the row could not be mounted at all), or the kind was
+    # forced back to `⊥ CONTRADICTION` to pass — a death bought with a declared
+    # axiom, printed with the free glyph. `AxAgapeEssence` is substantive, so
+    # the Narcissus world (C511) is a world in which the denial holds: the gift
+    # is **declared**, not derived, and the row says so on its own PRICE line.
+    # What may never happen is the reverse — a priced footprint arriving with
+    # `require_free=True`, which the check above already rejects.
+    #
+    # Note the spelling: the spine declares the route *priced* and `subst`
+    # decides the glyph. Neither alone is the kind. A row that declared
+    # `priced: true` while auditing free would keep `⊥` (the `priced_route and
+    # subst` guard), and a priced footprint arriving undeclared is stopped by
+    # V2 before it is ever typed.
     if role == "pillar" and kind != "🪞 INSTANTIATION — not a death":
         raise SystemExit(
             f"FATAL: pillar row '{branch}': '{proof.name}' was declared a pillar "
@@ -7043,9 +7292,18 @@ def render_cremation_derivation(proof: ProofIR, denial_hypothesis: str, *, branc
         body.append("    ⊥")
     elif kind == "⊘ DENIAL REFUTED":
         body.append(f"    ⊘ {proof.goal}  — the denial's own negation")
-    elif kind == "🪞 INSTANTIATION — not a death":
+    elif kind.startswith("🪞"):
         body.append(f"    {proof.goal}  — the objection, made by a critic, is an "
                     f"instance of the person; nothing is refuted")
+    elif kind in _PRICED_KINDS:
+        # A priced refutation does NOT end by the denial destroying itself. That
+        # is the reading the price denies: a model of the axioms exists in which
+        # the denial holds (the Narcissus world, C511), so the denial is available
+        # and is contradicted only by what is declared. Printing the `else`
+        # wording here would assert the logical self-destruction on the one kind
+        # that has none — the terminator has to carry the same distinction as the
+        # glyph above it.
+        body.append(f"    {proof.goal}  — refuted, at the declared price on the PRICE line")
     else:
         body.append(f"    {proof.goal}  — the denial, followed, destroys what it claims to keep")
     # No trailing restatement of `kind`: the block's gloss line above already names
@@ -7076,8 +7334,16 @@ def render_cremation_derivation(proof: ProofIR, denial_hypothesis: str, *, branc
         gloss=f"**{kind}** — {gloss}",
         depends_on=f"the denial: `{denial_hypothesis}`" if denial_hypothesis else "—",
         gives=gives or ("🪞 the critic is an instance of the person — not a death"
-                        if kind == "🪞 INSTANTIATION — not a death"
-                        else "⊥ — the denial, refuted"),
+                        if kind.startswith("🪞")
+                        else "⊥ — the denial, refuted"
+                        if kind == "⊥ CONTRADICTION"
+                        else "⊘ — the denial, refuted"
+                        if kind == "⊘ DENIAL REFUTED"
+                        else "⊥ — the order cannot be kept, and collapses"
+                        if kind == "COLLAPSE — INCOHERENT"
+                        else "the denial is refuted, at the price named below"
+                        if kind in _PRICED_KINDS
+                        else "—"),
         kills=(kills or branch) if role == "derivation" else "",
         proof_lines=body,
         price_note=price_note,
@@ -7973,6 +8239,18 @@ def render_cremation_blocks(rows: list[dict]) -> list[str]:
                 proof, r.get("denial_hypothesis", ""), branch="",
                 objection="", voice=r.get("objection_voice", ""),
                 voice_gloss=r.get("objection_voice_gloss", ""), index=None,
+                # A row may opt its PRIMARY derivation into being priced with the
+                # same `"priced": true` the secondary path already honours, and the
+                # price is still printed from the audited footprint by
+                # `_cremation_price` — so this cannot launder a priced `⊥` into a
+                # `✅`. It exists because a *real* death can be worth an axiom: the
+                # donation rows (R18/R19) conclude `False` from
+                # `denying_self_donation_is_absurd`, and the alternative was to
+                # demote them to `targets`-only blocks, which drops the derived
+                # `⊥ CONTRADICTION` terminator and the premise/steps walk that
+                # AGENTS.md requires of any row claiming a death.
+                require_free=not r.get("priced", False),
+                priced_route=r.get("priced", False),
                 kills=step_ref, role=r.get("role", "derivation")))
             for sec in r.get("secondary_derivations", []):
                 proof2 = resolve_proof_by_name(
@@ -7986,6 +8264,7 @@ def render_cremation_blocks(rows: list[dict]) -> list[str]:
                     proof2, sec.get("denial_hypothesis", ""),
                     branch=sec.get("label", "the second route"), index=None,
                     require_free=not sec.get("priced", False),
+                    priced_route=sec.get("priced", False),
                     price_note=sec.get("price_note", ""), kills=step_ref))
         else:
             # A row with `targets` but no `derivation_target`: the compiled
@@ -7997,25 +8276,100 @@ def render_cremation_blocks(rows: list[dict]) -> list[str]:
             # `DEFINITIONAL FALLACY`, i.e. the row contradicted itself in the
             # two lines above its proof. So the sentence is now a function of
             # the derived kind.
-            proofs = [p for p in (resolve_proof_by_name(
-                t, _CTX.get("compiled", {}), _CTX.get("decls", {}), _CTX.get("graph", {}))
-                for t in r.get("targets", [])) if p]
+            target_roles = _target_specs(r)
+            # The role travels with the *resolved proof*, captured as it is
+            # resolved. The lookup used to call `resolve_proof_by_name` a second
+            # time and compare with `is`; that builds a fresh `ProofIR`, so the
+            # identity test was always false and every target fell through to
+            # `"answer"` — R21's granted premise printed `✅ this half of the
+            # objection is answered free` and killed `step 8` while the row's own
+            # note said it kills nothing. Keyed on the full name, which is what
+            # the rows print.
+            _resolved = [(t, rl, resolve_proof_by_name(
+                t, _CTX.get("compiled", {}), _CTX.get("decls", {}), _CTX.get("graph", {})))
+                for t, rl in target_roles]
+            role_by_name = {pf.full_name: rl for _t, rl, pf in _resolved if pf}
+            proofs = [pf for _t, _rl, pf in _resolved if pf]
             if not proofs:
                 raise SystemExit(
                     f"FATAL: R{i} '{r.get('branch', '')}' names no resolvable "
                     f"target {r.get('targets', [])} — an unresolvable branch must not "
                     f"read as an unrefuted one.")
-            # Under R clause 1: a free ⊥ outranks a priced ∃ when both are about the named claim
-            contras = [p for p in proofs if refutation_kind(p) in _REFUTATION_KINDS]
-            winning_proof = contras[0] if contras else proofs[0]
-            kind = refutation_kind(winning_proof)
+            # A row may name the denial PROPOSITIONALLY (`denial_proposition`) when
+            # its theorem's whole conclusion is that denial's closed negation and
+            # there is no premise to label (C577). Checked against every target's
+            # own goal here, so the label is derived and a mismatch fails the build
+            # rather than quietly relabelling an arbitrary `¬`-theorem.
+            denial_prop = r.get("denial_proposition") or ""
+            if denial_prop:
+                # At least one target must be the closed negation it names. A row
+                # may carry companions (R19 pairs the refutation with the free
+                # location theorem it rests on), and `refutation_kind` re-checks
+                # per proof, so a companion that does not match is simply not
+                # relabelled. Requiring *every* target to match would make a
+                # companion illegal, which is the wrong rule: the field names the
+                # row's denial, not a property of its whole target list.
+                if not any(_fmt_key(_negated_core(pr.goal or "")) == _fmt_key(denial_prop)
+                           for pr in proofs):
+                    raise SystemExit(
+                        f"FATAL: R{i} '{r.get('branch', '')}': denial_proposition "
+                        f"matches none of the negated goals of {[p.full_name for p in proofs]}. "
+                        f"A row may only name the denial it actually refutes; the kind is "
+                        f"derived from the goal, not asserted.")
+            # Under R clause 1: a free ⊥ outranks a priced ∃ when both are about the named
+            # claim. When NO target is a refutation, the winner was the *first* one, so a
+            # row whose subject is a positive claim could be captioned by a companion
+            # restriction: R21 targets both `ground_is_not_a_fourth_chooser` (a free
+            # `¬`-separation) and the donation itself, and the separation won, printing
+            # `COUNTERMODEL · ⇏` over a row whose own point is that the donation obtains at
+            # a price. A `¬`-shaped target is a *restriction* of the row; the positive
+            # claim is the row. Polarity decides, position only breaks ties — the same
+            # rule `refutation_kind` already uses on a single proof, so the two cannot
+            # disagree about what a row is made of.
+            # A premise-role target is excluded from choosing the row's kind: a
+            # granted premise is not what the row is about, and letting a free `¬`-
+            # separation win on position is how R21 came to print
+            # `COUNTERMODEL · ⇏` as the derived status of a row whose own claim is
+            # that the donation obtains at a price.
+            _premise_names = {t for t, rl in target_roles if rl == "premise"}
+            def _is_premise(p: ProofIR) -> bool:
+                return any(p.full_name.endswith(n.split(".")[-1]) for n in _premise_names)
+            answering = [p for p in proofs if not _is_premise(p)] or proofs
+            contras = [p for p in answering
+                       if refutation_kind(p, denial_proposition=denial_prop) in _REFUTATION_KINDS]
+            if contras:
+                winning_proof = contras[0]
+            else:
+                pos = [p for p in answering
+                       if _shape_polarity(p) == "positive" and not getattr(p, "boundary", None)]
+                winning_proof = pos[0] if pos else answering[0]
+            kind = refutation_kind(winning_proof, denial_proposition=denial_prop,
+                               priced_route=r.get("priced", False))
             icon, _, may_kill = _REFTABLE[r.get("role", "derivation")]
-            priced_row = kind == "⚠️ PRICED — the objection answered, at a price"
+            priced_row = kind in _PRICED_KINDS
+            # The gloss is a function of the DERIVED KIND, not of a boolean. It was
+            # two-valued — "answered at a price" vs "a countermodel bounds the
+            # reading" — so a `⊘ DENIAL REFUTED` row was captioned *a countermodel
+            # bounds the reading; it does not contradict it*, printed directly above
+            # a proof that does contradict it (R19, C577). The same document
+            # disagreeing with itself in adjacent lines, one level above the one
+            # `_GLANCE_RANK` was rewritten for.
             if priced_row:
                 gloss = (f"> **{kind}** — the objection is **answered**, not merely "
-                         f"bounded: a free subject *exists*, and the price of that "
-                         f"existence is named below. This row is a **result at a "
-                         f"price**, not a gap in the deduction.")
+                         f"bounded: the claim it doubts obtains, and the price of that "
+                         f"is named below. This row is a **result at a price**, not a "
+                         f"gap in the deduction.")
+            elif kind in _REFUTATION_KINDS:
+                gloss = (f"> **{kind}** — the objection is **refuted**, not merely "
+                         f"bounded: the block below is the compiled derivation, and its "
+                         f"terminator is derived from the audited goal. The price, if "
+                         f"any, is named on its own PRICE line.")
+            elif kind.startswith("🪞"):
+                gloss = (f"> **{kind}** — this row **instantiates** a case rather than "
+                         f"refuting anything: the compiled witness below is a world in "
+                         f"which the two properties coexist, which is enough to show the "
+                         f"objection's inference does not go through. It is not counted "
+                         f"as a death, and nothing here says a step is impossible.")
             else:
                 gloss = (f"> **{kind}** — a countermodel **bounds** the reading; it "
                          f"does not contradict it. What follows is the compiled "
@@ -8023,13 +8377,24 @@ def render_cremation_blocks(rows: list[dict]) -> list[str]:
             L.append(gloss)
             L.append("")
             for p in proofs:
+                # A target marked `"role": "premise"` is the **objection's premise,
+                # granted**, not an answer to it. R21 named
+                # `ground_is_not_a_fourth_chooser` as a target of the row "The
+                # Ground cannot give at all, because it is not a person who chooses",
+                # and the renderer printed `✅ this half of the objection is answered
+                # free` over it — the premise of the objection captioned as its
+                # refutation, one line above the row's own note saying it "says only
+                # that the ground is not a chooser". The label is read from the target
+                # spec, so a row can no longer answer an objection with its premise
+                # unless it says so in the spine; and a premise block kills nothing.
+                _role = role_by_name.get(p.full_name, "answer")
                 # `GIVES` is derived per *proof*, not per row. A priced row may
                 # carry a free second target (R15 pairs the priced
                 # `∃ s, FreeWill(s)` with a free necessity half), and a row-level
                 # string would have printed "at the price below" over a block
                 # whose own PRICE line says `0 substantive axioms` — the same
                 # document disagreeing with itself that the heading prose did.
-                _k = refutation_kind(p)
+                _k = refutation_kind(p, denial_proposition=denial_prop)
                 # Priced-ness is read from this proof's own footprint, not from
                 # the derived kind and not from the row. Both of those leak: the
                 # kind is a function of the goal *shape*, so R15's free second
@@ -8038,10 +8403,14 @@ def render_cremation_blocks(rows: list[dict]) -> list[str]:
                 # kind is the *first* target's, which here is the priced one. So
                 # a free target in a priced row was printing "at the price below"
                 # directly above `✅ PROVEN — 0 substantive axioms`.
-                if _branch_substantive(p):
-                    _gives = ("💰 the objection answered — a free subject exists, "
-                              "at the price below"
-                              if _k == "⚠️ PRICED — the objection answered, at a price"
+                if _role == "premise":
+                    _gives = ("🤝 the objection's premise is **granted** — 0 substantive "
+                              "axioms. This is the limit of the row, not an answer to it")
+                    may_kill = False
+                elif _branch_substantive(p):
+                    _gives = ("💰 the objection answered — the claim it doubts "
+                              "obtains, at the price below"
+                              if _k in _PRICED_KINDS
                               else "💰 a priced result — the objection dies, and the price is named")
                 elif priced_row:
                     # The free half of a priced row: it answers its own half of
@@ -10013,10 +10382,15 @@ ASIETY_FREEDOM_STEPS = [
      "means, and the X1 reading of this row as a relation that \"constrains nothing, hence "
      "vacuous\" is withdrawn. Priced on four VOCAB axioms; no substantive axiom."),
     ("L2", "—", "Logos.TrinitarianPersonalGround.the_ground_is_not_void_of_personhood", "decl",
-     "**The headline.** `PersonalGround Entity.ofGround`: the ground sustains all being and "
-     "indwells every Person, so it is **not void of personhood** — and `¬ Asiety Entity.ofGround`, "
-     "because the ground is not a fourth chooser. Both halves are free and both are needed: "
-     "`indwells` alone would permit a demiurge plus three unrelated saints."),
+     "**The headline, and both halves are needed.** `PersonalGround Entity.ofGround`: the ground "
+     "sustains all being and indwells every Person, so it is **not void of personhood** — and "
+     "`¬ Asiety Entity.ofGround`, because the ground is not a fourth chooser. The second half is a "
+     "**limit, not a triumph**, and it was previously presented as though it settled the first: "
+     "`indwells` alone would permit a demiurge plus three unrelated saints, which is why the "
+     "conjunction is needed — but the ground's not choosing does not make it not a person, and the "
+     "corpus does not claim it does. The concession is load-bearing and is now stated as one: "
+     "`self_donation_needs_no_personhood_of_the_ground` (C578) holds the refusal and the donation "
+     "of the Self together, so the donation is not bought with a fourth chooser."),
     ("✓", "—", "Logos.TrinitarianPersonalGround.ofGround_is_perichoretic", "decl",
      "**A FORM, not a doctrine row — read it that way.** `Perichoretic g a b c` is definitionally "
      "`OneEssence g a ∧ OneEssence g b ∧ OneEssence g c`, so at the ground it is `True` of atoms "
@@ -10026,7 +10400,8 @@ ASIETY_FREEDOM_STEPS = [
      "The disclosure is pinned by `test_personal_ground_kind.py` G8."),
     ("Σ", "—", "Logos.TrinitarianPersonalGround.trinitarianPersonalGround_summary", "decl",
      "**The whole doctrine in one row.** The ground is a personal ground — it sustains all being "
-     "and indwells every Person, not void of personhood and not a fourth chooser. **Deleted "
+     "and indwells every Person, not void of personhood; and it is **not a fourth chooser**, which "
+     "is a limit of the vocabulary rather than a gain of personhood. **Deleted "
      "(plan §24):** the `Consubstantial` anchor, because `Consubstantial Entity.ofGround e f` is "
      "provably `True` for arbitrary `e f` including atoms — a `{}` price on a `True` proposition "
      "is a null result, not a proof, and no non-vacuous version of \"both one with the ground\" "
@@ -10035,6 +10410,18 @@ ASIETY_FREEDOM_STEPS = [
      "the doctrine denies. The distinction half — three Persons cannot be collapsed into one — is "
      "free in `roles_make_the_three_persons_distinct` and is already a conjunct of the §5.1 master "
      "theorem."),
+    # --- The act datum's own polarity discharges the choice frontier (LOVE-4 / C587).
+    # --- Zero new axioms: performative_act_datum (TRANS) + AxActPolarity (SEM) ->
+    # --- bareRejectedHornCoMeant_is_derivable (C565) -> genuineChoice -> FreeWill -> Person (C587).
+    ("L1", "C587", "Logos.NoMeanerNoFalsity.a_genuine_free_person_exists", "decl",
+     "**A GENUINE FREE PERSON IS DERIVED** — from `performative_act_datum` and `AxActPolarity` via "
+     "C565 co-meaning and C221. Zero META axioms. Discharges the freedom frontier F1b."),
+    ("L1", "C588", "Logos.NoMeanerNoFalsity.the_choice_frontier_is_discharged", "decl",
+     "the choice frontier discharged in Γ because meaning is many-valued (C565 + C566)"),
+    ("🧱", "C589", "Logos.NoMeanerNoFalsity.countermodel_co_meaning_is_not_free", "decl",
+     "countermodel: co-meaning is not free of semantic commitment; in every single-content model the rejected horn fails"),
+    ("Σ", "C590", "Logos.NoMeanerNoFalsity.the_free_person_claim_in_one_statement", "decl",
+     "master summary: a genuine free person exists, the ground is a personal necessary essence, and contingent donation-dependence is refuted"),
 ]
 
 # --- SEMANTIC-FINITUDE chain: the F15 bound, consolidated and
@@ -10270,6 +10657,17 @@ TWO_KINDS_STEPS = [
     ("L2", "C409", "Logos.NecessaryPersonalGround.necessary_person_derived_from_bridge", "decl",
      "**CLAIM D IS NOW DERIVED, NOT ANNOTATED** — the necessary-person existential is no longer "
      "empty. The price is exactly the bridge and nothing more"),
+    ("◆", "C584", "Logos.TwoNecessaryPersonalCentres.AxTwoNecessaryPersonalCentres", "decl",
+     "**THE SECOND BRIDGE, AND THE ONLY SUBSTANTIVE PRICE OF THE LOVE-3 BATCH** (`Tag: META`, "
+     "2026-10-04): at least two NECESSARY persons exist — distinct, both persons, both of the "
+     "necessary kind. It carries the author's reductio inside it (a necessary ground's freedom "
+     "to self-give cannot depend on contingent subjects) and **retired** `Value.AxTwoSubjects`. "
+     "Narrower than what it replaces (the right-and-wrong antecedent is dropped) and stronger "
+     "(necessity is bought, once, here — no consumer re-buys it)"),
+    ("L2", "C585", "Logos.Plurality.two_necessary_persons", "decl",
+     "**THE AUTHOR'S TARGET SENTENCE, PROVEN, WITHOUT PREMISE**: at least two distinct necessary "
+     "persons, both of them persons, in the world-rigid reading — from C584 plus C405 "
+     "(`necessaryKindSubject_is_necessary`). The price is the `◆` row above and nothing else"),
     ("L1", "C151", "Logos.PersonalGroundOfReality.the_person_supports_the_reality_of_right", "decl",
      "**THE FLAGSHIP, UNCONDITIONAL — 0 substantive axioms**: the person supports the reality "
      "of right, with the interpersonal metaphysics already discharged upstream. This is the "
@@ -10755,8 +11153,10 @@ def render_two_kinds_chain(decls: dict, node_map: dict) -> list[str]:
     ap("> **Read this table before reading any plurality/personal-ground row above.** The")
     ap("> argument's remaining metaphysical gap was *who fills the necessary pole*. This batch")
     ap("> introduces a free predicate for a subject's **kind**, proves that the two kinds are")
-    ap("> exactly the two modal profiles, and then — on **one** declared `META` bridge — derives")
-    ap("> that the necessary kind is inhabited by a **Person**. The whole price is the `◆` row.")
+    ap("> exactly the two modal profiles, and then — on declared `META` bridges, each bought")
+    ap("> once — derives that the necessary kind is inhabited by a **Person** (C404, 2026-09-28)")
+    ap("> and that at least **two** necessary persons exist (C584, LOVE-3/S4, 2026-10-04). The")
+    ap("> whole price is the two `◆` rows, one each.")
     ap("")
     ap("**First attempts that failed, kept because the failures carry information.** The 2026-09-29 necessity batch "
        "first counted 10 witness sites (there are 20), sketched its signature field as `Means s EO` (does not compile "
@@ -10789,10 +11189,14 @@ def render_two_kinds_chain(decls: dict, node_map: dict) -> list[str]:
     ap("   C151 additionally carries Lean's own `choice`/`propext`/`sound`, which are **core")
     ap("   kernel**, not Γ-declared axioms — the table prints it so the distinction is visible.")
     ap("   The four rows carrying `necessaryPersonalSubjectExists` are the `◆` row and its three")
-    ap("   `L2` corollaries.")
-    ap("2. **The `◆` row is the entire price.** `necessaryPersonalSubjectExists` (`Tag: META`)")
-    ap("   is the only substantive axiom the batch introduces, and C407/C408/C409 inherit")
-    ap("   exactly it and nothing else. It is a **metaphysical bridge** (`META`), not a")
+    ap("   `L2` corollaries. **2026-10-04 (LOVE-3/S4):** two rows were added — the `◆` bridge C584")
+    ap("   and its `L2` corollary C585 — so six rows now carry a bridge: four on C404, the `◆` C584")
+    ap("   row itself, and C585 on C584. Nothing else in this paragraph moved.")
+    ap("2. **Each `◆` row is the entire price of its own batch.** `necessaryPersonalSubjectExists`")
+    ap("   (`Tag: META`) is the only substantive axiom the 2026-09-28 batch introduces, and")
+    ap("   C407/C408/C409 inherit exactly it and nothing else; `AxTwoNecessaryPersonalCentres`")
+    ap("   (`Tag: META`) is the only substantive axiom the LOVE-3 batch introduces, and C585")
+    ap("   inherits exactly it and nothing else (audited). It is a **metaphysical bridge** (`META`), not a")
     ap("   vocabulary commitment, and it is stated as an existential inhabitance of the kind —")
     ap("   not as a derivation of personhood from the ground-constructor.")
     ap("3. **C406 discharges C329 without a love axiom.** `no_subject_is_a_necessary_entity`")
@@ -13351,6 +13755,31 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
                 f"## §{sec_no} — {sec_bare}", "",
             ]
 
+        if ARGUMENT_AUDIENCE and sec.get("id") == "person":
+            # Step 7b: The Act Carries Its Own Polarity, So a Free Person Is Derived (LOVE-4 / C587)
+            ap('<a id="step-7b"></a>')
+            ap("### Step 7b — The Act Carries Its Own Polarity, So a Free Person Is Derived")
+            ap("")
+            ap("The performative act datum (`Agency.performative_act_datum`, 1 TRANS) carries its own polarity "
+               "(`Choice.AxActPolarity`, 1 SEM) to derive co-meaning (`AsieticChoice.bareRejectedHornCoMeant_is_derivable`, C565). "
+               "A genuine Free Person is derived unconditionally, with zero META axioms.")
+            ap("")
+            ap("> ⚠️ **Price disclosed —** derived with 0 META axioms; priced at 1 TRANS (`performative_act_datum`) + 1 SEM (`AxActPolarity`).")
+            ap("")
+            n8_proof = compile_lean_proof("Logos.NoMeanerNoFalsity.a_genuine_free_person_exists",
+                                          decls, node_map, load_depgraph(), {})
+            if n8_proof:
+                for line in render_derivation_block(
+                    n8_proof,
+                    role=_ROLE_HEADLINE,
+                    title="A genuine Free Person exists, derived without META axioms",
+                    depends_on="step 7: Free Will Is a Person · performative_act_datum · AxActPolarity",
+                    gives="a genuine Free Person (C587) — hands on to step 8",
+                    kills="[`R16`](#r16)",
+                ):
+                    ap(line)
+                ap("")
+
     if ARGUMENT_AUDIENCE:
         L_part1_earnings(spine, ap)
     # 1b. The argument sections that are not spine steps: the epistemics batch,
@@ -13489,6 +13918,7 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
 
     if include_further:
         further = render_further_investigations(decls, investigations_dir)
+        further += _render_demoted_shape_lemmas()
         # Catalogues live in investigations/catalogues.md (generated, same source);
         # README keeps a pointer so the reading path stays the argument.
         cat_path = ROOT / "investigations" / "catalogues.md"
@@ -13613,10 +14043,21 @@ LEDGER_CELL_CAP = 4000
 # real countermodel cannot fit inside stops binding at all, and this row is the machine-checked
 # form of *praeter hoc, quod unus est, tres sunt* — the claim that what needs a free subject is
 # **bounded** meaning. Removing it to save 25 lines would remove the one thing the reading path
-# exists to let a reader check. Measured 1710 visible / 1819 total, so the new caps carry 5 and 6
-# lines of headroom.
-README_VISIBLE_BUDGET = 1715
-README_TOTAL_BUDGET = 1825
+# exists to let a reader check.
+#
+# The visible cap was raised 1715 -> 1900 on 2026-10-03, with the author's explicit instruction
+# that the budget is not the thing being optimised: the four donation rows added to Part III
+# (R18-R21) are ~140 visible lines, and every one of them is a *derivation* rather than a badge —
+# compiled premises, steps, a derived terminator and an audited price, which is what AGENTS.md
+# requires of any row claiming a death. Trimming them to fit would have meant deleting the
+# honesty content (the Narcissus-world clause on R18, the "this does not show the ground acts"
+# caveat on R20) or dropping rows the plan (LOVE.md S4) commits to mounting. So the cap moved
+# instead. It is still a cap and still a gate, and `test_argument_surface.py` tracks the same
+# number deliberately, so the two cannot drift. `READINGPATH.md` — cited in the error message and
+# in AGENTS.md as the plan of record for the split — is not present in this repository, so that
+# citation is dangling and is left as-is rather than invented.
+README_VISIBLE_BUDGET = 1900
+README_TOTAL_BUDGET = 2100
 README_PARA_CAP = 300
 README_FACT_DEADLINE = 60
 
@@ -14063,7 +14504,17 @@ def _lint_readme(lines: list[str]) -> None:
         if s_.startswith("## "):
             in_score = s_.startswith("## The score")
             continue
-        if in_score or s_.startswith("|") or s_.startswith(">"):
+        # The cap is a rule about *authored prose*: a paragraph a human wrote and
+        # could have split. Four-column indentation marks a derivation block —
+        # premises, steps and the `∴` goal as the compiler printed them — and
+        # there the length is a fact about the kernel, not an authoring choice:
+        # `necessary_nature_not_entails_necessary_act`'s witness tuple is 501
+        # characters because the countermodel has three sorts and five fields, and
+        # shortening it would mean printing something other than the proof term.
+        # Refusing it pushed the whole row out of the reading path, which is the
+        # opposite of what the cap is for (it exists to stop a wall of prose, and
+        # authored prose is never indented this far).
+        if in_score or s_.startswith("|") or s_.startswith(">") or ln.startswith("    "):
             continue
         if len(ln) > README_PARA_CAP:
             head = ln[:110]

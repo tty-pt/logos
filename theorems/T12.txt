@@ -1,14 +1,14 @@
 T12 — MAIS DO QUE UMA PESSOA (o passo central do poema)
 
-Depende de: axioma metafísico AxTwoSubjects (Tag: META) + T3 (rightWrongDistinction)
+Depende de: axioma metafísico AxTwoNecessaryPersonalCentres (Tag: META, C584) — sem antecedente do direito-e-erro (LOVE-3/S4)
 
 Verificado em: formal/Logos/Plurality.lean (T12_twoPersons, C40; T12_directedPair, C47),
-formal/Logos/Value.lean (AxTwoSubjects, C40), GAPMAP.md C40, C47, C73, C74.
-Pegada: `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (o `Person` no enunciado carrega o vocabulário da vontade; sem axiomas substantivos novos).
+formal/Logos/TwoNecessaryPersonalCentres.lean (AxTwoNecessaryPersonalCentres, C584), GAPMAP.md C40, C47, C73, C74, C584, C585.
+Pegada: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}` (o `Person` no enunciado carrega o vocabulário da vontade; a necessidade vem da ponte; sem axiomas substantivos novos).
 
 Enunciado:
 
-Da inegabilidade da distinção entre certo e errado e da ponte metafísica AxTwoSubjects segue:
+Da ponte metafísica AxTwoNecessaryPersonalCentres segue:
 
 ∃s₁∃s₂ [Person(s₁) ∧ Person(s₂) ∧ s₁ ≠ s₂].
 
@@ -29,6 +29,11 @@ foi formalmente refutada sob semântica hostil:
 
 Por conseguinte, a passagem para além da solidão solitária ("não é sózinho")
 não é um truque definicional, mas uma ponte metafísica explícita:
-`axiom AxTwoSubjects : (¬ N_T ∧ ¬ N_F) → ∃ s₁ s₂, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂` (`Tag: META`).
+`axiom AxTwoNecessaryPersonalCentres : ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧ NecessarySubjectKind s₁ ∧ NecessarySubjectKind s₂` (`Tag: META`).
 O passo do poema é assim preservado com toda a sua gravidade ontológica:
-a pluralidade de pessoas é afirmada como exigência metafísica real da ordem do certo e do errado.
+a pluralidade de pessoas necessárias é afirmada como exigência metafísica real do chão pessoal necessário e livre — não da ordem do certo e do errado, que já não a sustenta.
+
+Nota de liberdade (lote LOVE-4 / C587): a existência de uma Pessoa Livre é agora derivada
+independentemente sem axiomas META a partir da polaridade do ato
+(`NoMeanerNoFalsity.a_genuine_free_person_exists`, C587). A pluralidade e a necessidade
+modal permanecem ancoradas na ponte metafísica C584 (`AxTwoNecessaryPersonalCentres`).

@@ -1,9 +1,9 @@
 T13 — HÁ QUEM SE POSSA AMAR
 
-Depende de: T12 (sob a ponte META AxTwoSubjects)
+Depende de: T12 (sob a ponte META AxTwoNecessaryPersonalCentres)
 
 Verificado em: formal/Logos/Love.lean (T13_someoneLovable), GAPMAP.md C41.
-Pegada: `{AxTwoSubjects, Means, Subject, Will, subjectWill}` (herda de T12; sorryAx: 0).
+Pegada: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}` (herda de T12; sorryAx: 0).
 
 Enunciado:
 
@@ -20,4 +20,8 @@ A realidade necessária não é impessoal (T8) e há quem se possa amar (T13).
 Juntos: "não é impessoal, e não é sózinho".
 
 NOTA: esse amor é atual e eterno na estrutura interpessoal — a T14 herda a
-pegada `{AxTwoSubjects, Means, Subject, Will, subjectWill}` — ver theorems/T14.txt.
+pegada `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}` — ver theorems/T14.txt.
+
+Nota (lote LOVE-4 / C587): a pessoa livre que ama tem a sua liberdade derivada a 0
+axiomas META via `NoMeanerNoFalsity.a_genuine_free_person_exists` (C587), enquanto a
+pluralidade do par interpessoal herda a ponte META C584 (`AxTwoNecessaryPersonalCentres`).

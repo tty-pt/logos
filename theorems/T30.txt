@@ -9,7 +9,10 @@ via escondida, o que C348 prova ser **instatável**.
 
 Verificado em: `formal/Logos/LovesAsGround.lean` e `formal/Logos/CosmicExistence.lean`;
 auditoria `#print axioms` (5666 declarações no total do corpus, via
-`scripts/audit_footprints.py`; reverificado 2026-09-27 com C322–C354); marcadores
+`scripts/audit_footprints.py`; reverificado 2026-09-27 com C322–C354;
+**actualização 2026-10-04, LOVE-3/S4:** `AxTwoSubjects` foi retired e substituído por
+`AxTwoNecessaryPersonalCentres` (C584); onde este ficheiro diz `AxTwoSubjects` como ponte viva, lê-se a ponte nova —
+as entradas datadas de lote ficam como registo histórico; marcadores
 `Footprint:` conferidos por `scripts/sync_docstring_footprints.py` ("0 mismatches");
 `formal/GAPMAP.md` nível 21, C322–C354 mais 4 linhas de exibição `—`; `base.txt` §35.
 
@@ -276,8 +279,8 @@ Os habitantes, todos PROVEN↑, todos com a pegada a nomear o preço:
   com a necessidade no amante e a escolha na ponte. **Esta é a assimetria honesta da
   linha:** a metade *necessária* é `ofGround_necessary` (`trivial`) e é forçada pela
   ontologia; a metade *escolhida* é **exactamente** `AxGroundLovesContingentRealm` e nada
-  mais — **nenhum axioma de livre-arbítrio está escondido aqui**, e nenhum `AxTwoSubjects`
-  é consumido.
+  mais — **nenhum axioma de livre-arbítrio está escondido aqui**, e nenhuma ponte de pluralidade
+  é consumida.
 
 **Advertência de leitura, e é a razão de L3 existir.** A pegada de C343 nomeia o preço
 inteiro, mas o emblema de uma linha PROVEN↑ **nomeia só o axioma substantivo**: o
@@ -330,10 +333,12 @@ O lado empírico, C350–C354 mais C367, e o datum SEM (agora dividido em duas l
   e não é o fundamento necessário. `PROVEN`, `{CL, NecessarySubjectKind, Subject}`. `[era
   `axiom AxContingentCreationObtains` (`:170`, `Tag: SEM`); passou a `PROVEN↑` no lote
   COSMOS-IS-PROVEN e a `PROVEN` no lote COSMOS-EXISTENCE-IS-FREE — ver as correcções de
-  lote acima]`. **Sem `bears_meaning`:** por isso não custa `AxTwoSubjects`.
+  lote acima]`. **Sem `bears_meaning`:** por isso não custa ponte de pluralidade nenhuma.
 - C367 `CosmicExistence.cosmos_obtains : CreatedRealm` (`CosmicExistence.lean:340`) —
-  **o mesmo reino, portador de conteúdo de seu**: `PROVEN↑` sob `AxTwoSubjects`, derivado de
-  `Plurality.cogito_from_T12`. **É esta a linha que continua a pagar a ponte**, e a
+  **o mesmo reino, portador de conteúdo de seu**: `PROVEN`, sem ponte substantiva
+  (`{Means, NecessarySubjectKind, Subject, Will, propext, subjectWill}`) — a testemunha é a
+  hipótese `h`, e o preço vive em quem a exibe (`Plurality.cogito_from_T12`, que assenta
+  na ponte `AxTwoNecessaryPersonalCentres`). Já não é esta a linha que paga a ponte, e a
   identificação do reino com *o* cosmos.
   ~~**É um dado declarado, não um teorema**, e a redutio do utilizador força-o~~ — esta
   frase foi **retirada por ser falsa**. A redutio que a sustentava (`poem.txt:26`, o

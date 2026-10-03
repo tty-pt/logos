@@ -37,7 +37,7 @@ This module establishes, from the extended canonical sort `Logos.Entity.Entity`
    nd the personal ground-type as separate conjuncts: there is a necessary ground
    of reality and a Person grounding Right/Wrong — with no identity line between
    them. The personal conjunct rests on the declared META plurality axiom
-   `AxTwoSubjects` (via `T5_personExists_from_plurality`); the necessity conjunct
+   `AxTwoNecessaryPersonalCentres` (via `T5_personExists_from_plurality`); the necessity conjunct
    is `{}`.
 
 Axiom policy: no section axiom, no re-opened a deleted axiom, no resurrection of
@@ -294,10 +294,10 @@ theorem everlasting_but_contingent : ∃ e : Entity, Everlasting e ∧ ¬ Necess
 
 /-- A personal ground-type exists: some subject is a Person and grounds
     Right/Wrong (via `Person s → GroundsRightWrong s`). The Person-existence
-    conjunct rests on the declared META plurality axiom `AxTwoSubjects` (through
-    `T5_personExists_from_plurality`); it is the kind-witness for Claim E, never
+    conjunct rests on the declared META plurality axiom `AxTwoNecessaryPersonalCentres` (through
+    `T5_personExists_from_plurality`; retired `AxTwoSubjects`, LOVE-3/S4); it is the kind-witness for Claim E, never
     an identification of the necessary ground with a subject.
-    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
 theorem the_personal_type_grounding : ∃ s : Subject, Person s ∧ GroundsRightWrong s := by
   obtain ⟨s, hP⟩ := T5_personExists_from_plurality
   exact ⟨s, hP, person_grounds_normative_order s hP⟩
@@ -308,7 +308,7 @@ theorem the_personal_type_grounding : ∃ s : Subject, Person s ∧ GroundsRight
     `g = EntityOf s ∧ NecessaryEntity g` is impossible for any subject.
     Necessity conjunct: `{Means, Subject}` (via `ofGround_necessary` and
     `ofGround_necessary_ground_of_reality`); the personal conjunct (via
-    `the_personal_type_grounding`) is `{AxTwoSubjects, Means, Subject}`. -/
+    `the_personal_type_grounding`) is `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
 theorem claimE :
     ∃ g : Entity, ∃ s : Subject,
       NecessaryEntity g ∧ NecessaryGroundOfReality g ∧ Person s ∧ GroundsRightWrong s := by

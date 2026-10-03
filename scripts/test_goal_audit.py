@@ -270,8 +270,12 @@ def main() -> int:
     # down for the same single reason, and a count that drifts for no stated cause is the failure
     # mode AGENTS.md warns about for the axiom census.
     # (C294's repair evidence). Every count below moves together with any added declaration.
-    check(len(sort_headed) == 1658,
-          f"expected 1658 sort-headed records in goal_audit, got {len(sort_headed)}")
+    # 1658 -> 1660 on 2026-10-03: +2 sort-headed records from the LOVE.md S1/S2 batch —
+    # `DivineHypostasis.personalProperty` (the new structure field) and `SelfDonation` (the
+    # new `def`), both Prop-headed `def` records. The five new theorems are not sort-headed
+    # (their conjunct heads are `SelfDonation`/`False`/`Not`/`Eq`), so they move no counter here.
+    check(len(sort_headed) == 1660,
+          f"expected 1660 sort-headed records in goal_audit, got {len(sort_headed)}")
 
     sh_heads = {}
     sh_kinds = {}
@@ -281,12 +285,12 @@ def main() -> int:
         k = r.get("kind")
         sh_kinds[k] = sh_kinds.get(k, 0) + 1
 
-    check(sh_heads.get("Prop") == 1278, f"expected 1278 Prop-headed records, got {sh_heads.get('Prop')}")
+    check(sh_heads.get("Prop") == 1280, f"expected 1280 Prop-headed records, got {sh_heads.get('Prop')}")
     check(sh_heads.get("Nat") == 202, f"expected 202 Nat-headed records, got {sh_heads.get('Nat')}")
     check(sh_heads.get("Type") == 175, f"expected 175 Type-headed records, got {sh_heads.get('Type')}")
     check(sh_heads.get("Bool") == 3, f"expected 3 Bool-headed records, got {sh_heads.get('Bool')}")
 
-    check(sh_kinds.get("def") == 1638, f"expected 1638 def sort-headed records, got {sh_kinds.get('def')}")
+    check(sh_kinds.get("def") == 1640, f"expected 1640 def sort-headed records, got {sh_kinds.get('def')}")
     check(sh_kinds.get("axiom") == 15, f"expected 15 axiom sort-headed records, got {sh_kinds.get('axiom')}")
     check(sh_kinds.get("opaque") == 5, f"expected 5 opaque sort-headed records, got {sh_kinds.get('opaque')}")
 

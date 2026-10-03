@@ -5,7 +5,7 @@ T31 — A REFUTAÇÃO (C401/C402)
 (C375/C379/C381), é aqui refutada *como conteúdo de Γ*.
 
 - C401 `MeaningRetorsion.noMeaning_is_refuted_from_plurality : ¬ NoMeaning` —
-  incondicional, `{AxTwoSubjects, Means, Subject, Will, subjectWill}`, `PROVEN↑`.
+  incondicional, `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`, `PROVEN↑`.
   `Meaning_I p` é por definição `∃ s, Means s p`, logo `cogito_from_T12` já era
   um contra-exemplo; três linhas nunca escritas. O mundo-sem-significado não é
   possível *dada a ponte da pluralidade*.

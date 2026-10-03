@@ -80,7 +80,7 @@ def main() -> int:
     # score-position checks below; this number catches a block becoming a wall.
     # It tracks `build_deduction.README_VISIBLE_BUDGET` deliberately: when the two
     # disagreed, the looser one was decoration.
-    check(len(visible) <= 1715, f"README visible lines {len(visible)} <= 1715")
+    check(len(visible) <= 1900, f"README visible lines {len(visible)} <= 1900")
     check(readme.startswith("# Γ — The Deduction\n"),
           "README opens with the title")
     fact_at = readme.find("for which meaning can mean")
@@ -178,15 +178,15 @@ def main() -> int:
     # terminator lets the reader check it. Both are required.
     cre = readme.partition("## Part III — The refutations")[2].partition("## Part IV")[0]
     check(cre, "README carries the refutations section")
-    # DEDUCTION.md §6: all seventeen are titled `### R`-entries, so they are
+    # DEDUCTION.md §6: all twenty-one are titled `### R`-entries, so they are
     # findable and linkable. The three 🧱 boundaries used to be the only rows in
     # a table, because a table cell cannot hold a derivation — and a `{}`
     # countermodel has one. They are entries now, and the check is that *no*
     # branch is a table row any more.
     entries = re.findall(r"^### R(\d+)\. (.+)$", cre, re.M)
-    check(len(entries) == 17, f"Part III promotes all seventeen branches to entries ({len(entries)})")
-    check([int(n) for n, _ in entries] == list(range(1, 18)),
-          "the R-entries are numbered 1..17 with no gap")
+    check(len(entries) == 21, f"Part III promotes all twenty-one branches to entries ({len(entries)})")
+    check([int(n) for n, _ in entries] == list(range(1, 22)),
+          "the R-entries are numbered 1..21 with no gap")
     _rows = [ln for ln in cre.splitlines() if ln.startswith("| **")]
     check(not _rows, f"no branch is a table row any more ({len(_rows)} left)")
     for _dead in _branches(("No right or wrong at all", "Voluntarism",

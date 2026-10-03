@@ -42,6 +42,12 @@ def load_gate():
     return module
 
 
+def load_builder():
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import build_deduction
+    return build_deduction
+
+
 CC = load_gate()
 FAILURES: list[str] = []
 
@@ -199,6 +205,201 @@ def main() -> int:
         f"tag census == {expected}",
         census == expected,
         f"got {census}",
+    )
+
+    print()
+    print("D7: the declaration scanner must not read comments either")
+    BD = load_builder()
+    with tempfile.TemporaryDirectory() as td:
+        tmp = Path(td)
+
+        def scan(name: str, body: str) -> dict:
+            """parse_lean_sources over a one-module directory."""
+            d = tmp / name
+            d.mkdir()
+            write(d, f"{name}.lean", body)
+            saved, BD.LEAN_DIR = BD.LEAN_DIR, d
+            try:
+                return BD.parse_lean_sources()
+            finally:
+                BD.LEAN_DIR = saved
+
+        def axiom_names(parsed: dict) -> list[str]:
+            return [k.split(".")[-1] for k, v in parsed.items() if v.get("kind") == "axiom"]
+
+        # The shipped D7 repro, verbatim in shape: a retirement note quoting the withdrawn
+        # declaration, with the keyword at the start of an indented line inside a block comment.
+        # `build_deduction.parse_lean_sources` used a *per-line* `strip_block_comments`, which
+        # cannot see that a line is the middle of a multi-line `/- -/` block, so this came back as
+        # a live axiom with an empty tag -- and `gapmap_taxonomy.py` printed `40 total / 39 tagged`
+        # while the kernel held 39. The census pin could not see it: `axiom_statements` had been
+        # hardened on 2026-10-03 and this parser had not. Same laundering, one layer over.
+        retirement = scan(
+            "Retirement",
+            "/- RETIRED. The declaration below was DELETED, not re-tagged:\n"
+            "\n"
+            "    axiom AxWithdrawn :\n"
+            "        ∀ x : Nat, x = x\n"
+            "\n"
+            "  Replaced by something else. -/\n"
+            "/-- Tag: VOCAB -/\naxiom AxLive : ∀ x : Nat, x = x\n",
+        )
+        check(
+            "a quoted axiom inside a block comment is not a declaration",
+            axiom_names(retirement) == ["AxLive"],
+            f"got {axiom_names(retirement)}",
+        )
+
+        nested_quote = scan(
+            "Nested",
+            "/- outer /- inner -/\n"
+            "    axiom AxBuried : True\n"
+            "-/ still outer -/\n"
+            "/-- Tag: VOCAB -/\naxiom AxLive : ∀ x : Nat, x = x\n",
+        )
+        check(
+            "a quoted axiom inside a *nested* block comment is not a declaration",
+            axiom_names(nested_quote) == ["AxLive"],
+            f"got {axiom_names(nested_quote)}",
+        )
+
+        docstring_quote = scan(
+            "DocQuote",
+            "/-- Tag: SEM\n"
+            "See `Axioms.AxJudicativeBipolarity`, which is already an\n"
+            "axiom of Γ:\n"
+            "-/\naxiom AxLive : ∀ x : Nat, x = x\n",
+        )
+        check(
+            "a quoted axiom inside a docstring is not a declaration",
+            axiom_names(docstring_quote) == ["AxLive"],
+            f"got {axiom_names(docstring_quote)}",
+        )
+
+        line_quote = scan(
+            "LineQuote",
+            "-- axiom AxSneaky : True\n"
+            "axiom AxLive : ∀ x : Nat, x = x\n",
+        )
+        check(
+            "a quoted axiom on a line-comment is not a declaration",
+            axiom_names(line_quote) == ["AxLive"],
+            f"got {axiom_names(line_quote)}",
+        )
+
+        # A comment must not *hide* real code either: the projection is per-line code, so an
+        # inline `/- note -/` before a declaration leaves the declaration visible.
+        inline = scan(
+            "Inline",
+            "/- the next line is code, despite the leading comment -/ axiom AxLive : ∀ x : Nat, x = x\n",
+        )
+        check(
+            "an inline comment does not hide the declaration after it",
+            axiom_names(inline) == ["AxLive"],
+            f"got {axiom_names(inline)}",
+        )
+
+    # The assertion that would have caught it on the real tree: the declaration scanner that
+    # feeds GAPMAP, the spine, the chain steps and the badges must report exactly the same
+    # axioms as the census gate and as depgraph.json. A phantom breaks this even when every
+    # count still balances, because the phantom is in the *name set*.
+    printed = {k.split(".")[-1]: v for k, v in BD.parse_lean_sources().items() if v.get("kind") == "axiom"}
+    printed_names = set(printed)
+    loc_of = {n: (p, l - 1) for n, p, l in counted}
+    check(
+        "declaration scanner sees exactly EXPECTED_AXIOM_STATEMENTS axioms",
+        len(printed_names) == CC.EXPECTED_AXIOM_STATEMENTS,
+        f"scanner {len(printed_names)} != pin {CC.EXPECTED_AXIOM_STATEMENTS}",
+    )
+    check(
+        "declaration scanner and census gate agree on axiom NAMES",
+        printed_names == names,
+        f"scanner-only {sorted(printed_names - names)}, gate-only {sorted(names - printed_names)}",
+    )
+    check(
+        "declaration scanner and depgraph agree on axiom NAMES",
+        printed_names == {n for n in dep_names if n},
+        f"scanner-only {sorted(printed_names - dep_names)}, depgraph-only {sorted(n for n in dep_names if n and n not in printed_names)}",
+    )
+    untagged = sorted(n for n in printed_names if CC.axiom_tag(*loc_of[n]) is None)
+    check(
+        "every axiom the declaration scanner sees carries a Tag",
+        not untagged,
+        f"untagged: {untagged}",
+    )
+
+    print()
+    print("D9: every `Tag:` reader must agree with the census, TAG BY TAG")
+    # `check_consistency.axiom_tag` is the census reader and is authoritative. Three other scripts
+    # read the same tags independently: `build_deduction._tag_for` (an anchored whole-line regex
+    # over the extracted docstring), `audit_stipulated_defs.axiom_tags`, and
+    # `test_personal_ground_kind.axiom_tags`. Independence is what makes the cross-check worth
+    # anything -- if they all called one helper, comparing them would prove nothing.
+    #
+    # On 2026-10-04 the last of these disagreed with the census on 3 of the 39 axioms while all
+    # four counted 39 in total. It took whichever tag token appeared first in the order
+    # (VOCAB, SEM, META, TRANS) on the nearest `Tag:`-bearing line above the declaration, so a
+    # docstring's PROSE about a different tag beat the real opener: `ThomisticAct.lean:111` reads
+    # "`Tag: META`: it connects two relations, so `VOCAB`'s 'asserts no connection' rule excludes
+    # it", and that `VOCAB` mention made `love_implies_act` read VOCAB. The reimplementation is
+    # deleted; this assertion is why the next one cannot be written.
+    #
+    # The damage was never the count. That map is what `substantive_in` uses to decide which
+    # footprints count as priced, so `ThomisticAct.loving_subject_initiates` -- PROVEN↑ at one
+    # META, via `love_implies_act` -- was certified FREE, and twelve declarations resting on the
+    # VOCAB classifier `DivineSubjectRole` were read as paid. A gate that mislabels which rows
+    # are free is worse than no gate.
+    #
+    # So compare the name -> tag MAPS. Four readers agreeing on 39 is not evidence; four readers
+    # agreeing on 39 *assignments* is.
+    census_map = {n: CC.axiom_tag(p, l) for n, p, l in counted}
+    readers: dict[str, dict[str, str | None]] = {
+        "build_deduction": {
+            k.rsplit(".", 1)[-1]: (v.get("tag") or None)
+            for k, v in BD.parse_lean_sources().items() if v.get("kind") == "axiom"
+        },
+    }
+    for modname in ("audit_stipulated_defs", "test_personal_ground_kind"):
+        spec = importlib.util.spec_from_file_location(
+            modname, ROOT / "scripts" / f"{modname}.py"
+        )
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        readers[modname] = {k.rsplit(".", 1)[-1]: v for k, v in module.axiom_tags().items()}
+    spec = importlib.util.spec_from_file_location(
+        "test_finitude_bound_scope", ROOT / "scripts" / "test_finitude_bound_scope.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    readers["test_finitude_bound_scope"] = {
+        k.rsplit(".", 1)[-1]: v for k, v in module.declared_tags().items()
+    }
+    for reader, got in readers.items():
+        diff = {
+            n: (census_map.get(n), got.get(n))
+            for n in sorted(set(census_map) | set(got))
+            if census_map.get(n) != got.get(n)
+        }
+        check(
+            f"{reader} agrees with the census on every axiom's Tag",
+            not diff,
+            f"{len(diff)} disagreement(s), first few: {sorted(diff.items())[:4]}",
+        )
+
+    # Risk 6 (LOVE-3.md §6), machine-checked. `axiom_statements` returns a 1-based line and
+    # `axiom_tag` indexes a 0-based list, so callers disagree by one: `gate_b_syntactic_scan`
+    # passes `line`, `test_axiom_census` and `ledger_superset` pass `line - 1`. That has been
+    # harmless only because every axiom's docstring opener sits at least two lines above it, and
+    # a docstring written on ONE line (`/--Tag: VOCAB -/` immediately above `axiom`) makes the
+    # two conventions return different tags -- silently, for whichever caller is wrong. Assert the
+    # answer is insensitive to the convention, so the off-by-one can never become load-bearing.
+    convention_sensitive = sorted(
+        n for n, p, l in counted if CC.axiom_tag(p, l) != CC.axiom_tag(p, l - 1)
+    )
+    check(
+        "no axiom's Tag depends on the caller's line convention (LOVE-3 Risk 6)",
+        not convention_sensitive,
+        f"one-line docstring, so `line` and `line - 1` disagree: {convention_sensitive}",
     )
 
     print()

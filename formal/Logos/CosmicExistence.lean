@@ -13,15 +13,15 @@ of that a **theorem of Γ** while leaving purpose and the incarnation in faith.
     ∃ s : Subject, ∃ p : Prop, Means s p
 
 That ground was **false**. The lemma is already an unconditional theorem —
-`Plurality.cogito_from_T12`, of `{Means, Subject, Will, subjectWill, AxTwoSubjects}` — via
-`T12_twoPersons` (= `AxTwoSubjects rightWrongDistinction`) and `person_is_intentional`, and
+`Plurality.cogito_from_T12`, of `{Means, NecessarySubjectKind, Subject, Will, subjectWill, AxTwoNecessaryPersonalCentres}` — via
+`T12_twoPersons` (unconditional on `AxTwoNecessaryPersonalCentres`, LOVE-3/S4) and `person_is_intentional`, and
 `Logos.Core.rightWrongDistinction` is itself axiom-free. The axiom was therefore
 **redundant**: it re-charged for a commitment Γ had already made. It is deleted, and
 `cosmos_obtains` is the theorem that replaces it.
 
 So the answer to "does the cosmos exist?" is no longer stipulated. **Γ is not satisfiable by
 an empty contingent world**, because Γ contains a theorem that *discovers* a subject: from
-two distinct persons (`AxTwoSubjects`, `Tag: META`) a person means something
+two distinct necessary persons (`AxTwoNecessaryPersonalCentres`, `Tag: META`) a person means something
 (`person_is_intentional`), a meaning subject witnesses a realm (`cosmos_presence_model`).
 
 Note the verb, and it is load-bearing throughout this module. A theorem **discovers**; it
@@ -32,8 +32,7 @@ discovery, never as a construction: see `Logos.Agency`'s module note, which stat
 principle for the act-datum and disowns the term "manufacturing" for exactly this reason.
 
 **The price, stated plainly.** Existence now rests on the **plurality bridge**:
-`Logos.Value.AxTwoSubjects` — "the reality of right-and-wrong demands at least two distinct
-persons". That is a substantive interpersonal metaphysics already declared and paid for
+`Logos.TwoNecessaryPersonalCentres.AxTwoNecessaryPersonalCentres` — "a necessary ground's freedom to self-give cannot depend on contingent subjects". That is a substantive interpersonal metaphysics already declared and paid for
 elsewhere in Γ, and it is a `Tag: META` commitment, not a semantic one. Reject it and the
 cosmos's existence goes with it. This is a real relocation of the cost — an ontological
 claim now leans on an axiological bridge — and it is *tighter* than the axiom was, because
@@ -374,7 +373,7 @@ theorem cosmos_presence_model_of_the_act_datum
     supplied personhood and meaning, but exhibiting the kind subsumes the witness, so
     the plurality bridge is not among this row's premises. That is not a promotion for
     free: the kind premise is the load-bearing datum, and it is stated, not
-    manufactured. T12/`AxTwoSubjects` stay load-bearing everywhere else
+    manufactured. T12/the plurality bridge stays load-bearing everywhere else
     (T13, T14, C40, C74, the moral-good lane).
 
     **What Γ can now say, and cannot.** It can say the contingent realm exists, given a
@@ -427,7 +426,7 @@ theorem cosmos_obtains
     the "cannot come about in an empty world" claim is checkable on its own, rather than
     only as a side effect of the row above. (No `propext`: it is `cogito_from_T12` verbatim,
     and the `propext` in `cosmos_obtains` enters only through `Realm`'s record fields.)
-    Footprint: `{Means, Subject, Will, subjectWill, AxTwoSubjects}`. -/
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
 theorem gamma_exhibits_a_meaning_subject :
     ∃ s : Subject, ∃ p : Prop, Logos.Agency.Means s p :=
   Logos.Plurality.cogito_from_T12
@@ -624,7 +623,7 @@ theorem the_ground_loves_the_cosmos_in_a_context
     is relocated to the declared act-datum axiom `performative_act_datum` (C454, `Tag: TRANS`):
     one axiom, not free in performance, which is the same account the retorsion
     batch gives for C375/C377. A reader who will not grant that an act occurred
-    rejects this row; a reader who rejects `AxTwoSubjects` keeps it.
+    rejects this row; a reader who rejects `AxTwoNecessaryPersonalCentres` keeps it.
     Footprint: `{propext, Initiates, Means, NecessarySubjectKind, State, Subject, AxGroundLovesContingentRealm,
     GroundBearsGood}`. -/
 theorem the_ground_loves_the_cosmos_from_the_act_datum

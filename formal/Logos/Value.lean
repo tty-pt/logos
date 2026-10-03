@@ -16,10 +16,13 @@ The poem's *leap* (P5, "para haver escolha com significado, é preciso mais do
 que uma pessoa") — the reality of right-and-wrong is *interpersonal* — is NOT
 derivable from a single act or Cogito alone (proven by the Unit countermodel
 in `HostileSemantics`). The former pseudo-proof via `otherSubject` (swapping
-`Sum.inl` and `Sum.inr`) is destroyed. Plurality requires the explicit
-metaphysical bridge `AxTwoSubjects` (META: from right-and-wrong to two
-distinct persons). `valueInterpersonal_of_split` recovers the exact old
-statement; no strength is lost.
+`Sum.inl` and `Sum.inr`) is destroyed. Plurality requires an explicit
+metaphysical bridge — until 2026-10-04 that was `AxTwoSubjects` (META: from
+right-and-wrong to two distinct persons), now RETIRED and replaced by
+`TwoNecessaryPersonalCentres.AxTwoNecessaryPersonalCentres`, which carries the
+author's necessity argument instead of a right-and-wrong assertion and yields
+necessity as well as plurality. `valueInterpersonal_of_split` recovers the exact
+old statement; no strength is lost.
 
 2026-09-24 set the moral frontier: the positive close carries the disclosed META
 bridge `AxBenevolentBearingObtains` ("some person is actually helped"). That lease
@@ -34,6 +37,7 @@ schema independence lemma `no_help_in_uniformly_unbearing_layer`.
 import Logos.Core
 import Logos.Agency
 import Logos.Person
+import Logos.TwoNecessaryPersonalCentres
 
 namespace Logos.Value
 
@@ -153,30 +157,46 @@ theorem alone_no_other_help_harm {s : Subject} (ha : Alone s) :
   · rintro ⟨t, hne, _⟩
     exact hne (ha t)
 
-/--Tag: META
-AxTwoSubjects (META; poem P5/P7, failure traces in DESIGN.md D14 and
-    HostileSemantics): the *reality* of right-and-wrong demands that there be
-    at least two distinct persons. Narrower than the former single bridge
-    `AxValueInterpersonal` (plurality only; affectivity is AxPersonsAffect).
-    A single act does not entail plurality (settled by the Unit countermodel).
+/- RETIRED 2026-10-04 (batch LOVE-3/S4). The declaration below was DELETED, not
+re-tagged. It is quoted here so the reader can see what was withdrawn.
 
- Philosophical cost: a substantive interpersonal metaphysics. A lone judging
-    subject, and the unit world of a single act, remain logically consistent
-    with every earlier premise, so the demand for a second distinct person is
-    posited, not deduced. Plural personal reality is bought with this declared
-    bridge. -/
-axiom AxTwoSubjects :
-    (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) →
-      ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂
+  The quote deliberately does NOT put the keyword at the start of a line. That was
+  a workaround for D7 — `build_deduction.parse_lean_sources` had no block-comment
+  tracking, so this very note registered a *live* phantom axiom with an empty tag
+  and `gapmap_taxonomy.py` read 40 where the kernel holds 39. D7 is fixed
+  (2026-10-04: the scanner now uses `check_consistency.lean_code_lines`, a
+  whole-file projection, and `test_axiom_census.py` asserts it), so the constraint
+  no longer binds; the wording is kept because it reads better anyway. With
+  `Tag: META` the withdrawn statement read:
+
+    AxTwoSubjects :                       -- Tag: META
+        (¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) →
+          ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂
+
+  Original justification, kept for the record: "the *reality* of right-and-wrong
+  demands that there be at least two distinct persons ... A single act does not
+  entail plurality (settled by the Unit countermodel)." Philosophical cost: a
+  substantive interpersonal metaphysics; plural personal reality was bought with
+  this declared bridge.
+
+  Replaced by `TwoNecessaryPersonalCentres.AxTwoNecessaryPersonalCentres`, which
+  drops the right-and-wrong antecedent (so rejecting `Core.rightWrongDistinction`
+  no longer costs plurality) and ADDS `NecessarySubjectKind` to both witnesses
+  (so necessity is bought once, explicitly, instead of separately per consumer).
+  The bridge is a re-statement of the author's reason, not of the conclusion. -/
 
 /--No person is alone: there is no personal lone subject under the plurality bridge.
 
- `aloneExcluded` — under `AxTwoSubjects`, a lone person is excluded:
+  `aloneExcluded` — under `AxTwoNecessaryPersonalCentres`, a lone person is excluded:
     there exist distinct persons, so no single subject can encompass all subjects.
-    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
+    Re-derived 2026-10-04 (LOVE-3/S4): the proof is unchanged in shape, but it now
+    reads the necessary-person bridge instead of `AxTwoSubjects rightWrongDistinction`,
+    so it no longer needs the right-and-wrong premise. `Alone` lives here, so the
+    theorem stays here rather than moving to the new module.
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
 theorem aloneExcluded : ¬ ∃ s : Subject, Person s ∧ Alone s := by
   intro ⟨s, _, ha⟩
-  obtain ⟨s₁, s₂, _, _, hne⟩ := AxTwoSubjects Logos.Core.rightWrongDistinction
+  obtain ⟨s₁, s₂, _, _, hne⟩ := Logos.TwoNecessaryPersonalCentres.two_persons
   have h1 := ha s₁
   have h2 := ha s₂
   subst h1 h2
@@ -214,20 +234,24 @@ def PersonsAffectPrinciple : Prop :=
   ∀ (s₁ s₂ : Subject), Person s₁ → Person s₂ → s₁ ≠ s₂ → Affects s₁ s₂ ∨ Affects s₂ s₁
 
 /-- Right-and-wrong yields two distinct persons who bear on each other,
-    conditional on the PersonsAffectPrinciple. -/
+    conditional on the PersonsAffectPrinciple.
+    Re-derived 2026-10-04 (LOVE-3/S4) off `AxTwoNecessaryPersonalCentres`; the
+    `h` premise is now unused, because the bridge no longer runs on
+    right-and-wrong. Kept as a premise so the call sites stay source-compatible.
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
 theorem valueInterpersonal_of_split_conditional
     (hAffect : PersonsAffectPrinciple)
     (h : ¬ Logos.Core.N_T ∧ ¬ Logos.Core.N_F) :
     ∃ s₁ s₂ : Subject, Person s₁ ∧ Person s₂ ∧ s₁ ≠ s₂ ∧
       (Affects s₁ s₂ ∨ Affects s₂ s₁) := by
-  obtain ⟨s₁, s₂, hs₁, hs₂, hne⟩ := AxTwoSubjects h
+  obtain ⟨s₁, s₂, hs₁, hs₂, hne⟩ := Logos.TwoNecessaryPersonalCentres.two_persons
   exact ⟨s₁, s₂, hs₁, hs₂, hne, hAffect s₁ s₂ hs₁ hs₂ hne⟩
 
 end Logos.Value
 
 -- Axiom footprint audit
 #print axioms Logos.Value.alone_no_other_help_harm
-#print axioms Logos.Value.AxTwoSubjects
+#print axioms Logos.TwoNecessaryPersonalCentres.AxTwoNecessaryPersonalCentres
 #print axioms Logos.Value.no_help_in_uniformly_unbearing_layer
 #print axioms Logos.Value.no_harm_in_uniformly_unbearing_layer
 #print axioms Logos.Value.AxBenevolentBearingObtains

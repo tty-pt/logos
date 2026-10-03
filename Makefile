@@ -7,12 +7,12 @@ PYTHON ?= python3
 
 .PHONY: all build depviz audit goals stip stipdef sync taxonomy deduction test \
         consistency axiomcensus boundscope horndialectic surface priceprose census check \
-        personalgroundkind \
+        personalgroundkind twoeternalpersons \
        clean zip help
 
 # Default target runs the complete formal build, audit, deduction generation, and test verification.
 all: build depviz audit goals stip stipdef census deduction test priceprose \
-     consistency axiomcensus boundscope horndialectic surface personalgroundkind
+     consistency axiomcensus boundscope horndialectic surface personalgroundkind twoeternalpersons
 	@echo "=== Γ / Logos: Full build and verification pipeline complete (0 errors) ==="
 
 # Build the formal Lean 4 library in formal/
@@ -131,6 +131,11 @@ horndialectic:
 personalgroundkind:
 	@echo "=== Checking one essence, three Persons, both free (plan §20) ==="
 	$(PYTHON) scripts/test_personal_ground_kind.py
+
+# LOVE-4 / C587 — genuine Free Person derived at zero META axioms.
+twoeternalpersons: audit
+	@echo "=== Checking Free Person derivation and plurality architecture (LOVE-4 / C587) ==="
+	$(PYTHON) scripts/test_two_eternal_persons.py
 
 # Reader-surface contract (facade rule, caps, catalogue absence).
 surface: deduction

@@ -59,7 +59,7 @@ in §3 below.
   `pairwise_denied_forces_meaninglessness` proves the old form admitted only degenerate models.)
   So the Creator-sharing step is **conditional**, and its existence half is
   recorded as not derivable rather than asserted. The pre-existing unconditional route still costs
-  `AxTwoSubjects` (META), as `AsieticChoice.trueChoice_exists` already discloses.
+  `AxTwoNecessaryPersonalCentres` (META, C584), as `AsieticChoice.trueChoice_exists` already discloses.
 - **Not a claim that the ground chooses.** `AsietyFreedomOfGround` quantifies over *subjects* and
   says the ground's freedom reaches them. It does not make the ground a chooser: C285
   (`ground_is_not_a_true_chooser`) stands, and `groundIsNotASharerOfAsietyFreeWill` restates it in
@@ -507,7 +507,7 @@ theorem groundingCannotDeliverTrueChoice :
     deliver the existence of a sharer. The model is *amoral rather than voiceless*: order is
     present and only one pole is ever grasped. (Pre-2026-10-03 the witness meant *nothing*; that was
     forced on it, not chosen — see `pairwise_denied_forces_meaninglessness`.) The unconditional
-    route still costs `AxTwoSubjects` (META), as `AsieticChoice.trueChoice_exists` discloses.
+    route still costs `AxTwoNecessaryPersonalCentres` (META, C584), as `AsieticChoice.trueChoice_exists` discloses.
 
     Naming this does not advance it. It is here so the batch's strongest negative result is a
     citable frontier row rather than a footnote inside a module.

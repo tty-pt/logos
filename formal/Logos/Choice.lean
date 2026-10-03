@@ -28,7 +28,7 @@ vocabulary into two relations and a definitional freedom:
     VOCAB only). Level 3 (counterfactual possibility of selecting otherwise) is not
     forced by deterministic agency.
 
-The exact missing step (F1b, BLOCKED) is the co-meaning of the rejected horn.
+The former missing step (F1b, formerly BLOCKED, now DERIVED via C565) is the co-meaning of the rejected horn.
 Note the two distinct objects, which this module docstring used to conflate
 under one name: `rejectedHornCoMeant` below is **the consequent only** — a
 `def` at `Choice.lean:247` — while the *implication* is the blocked step:
@@ -57,17 +57,17 @@ premise-named routes is needed: `derives_rejectedHornCoMeant` (C268) from a
 correctness-judgment, and `retorsion_implies_rejectedHornCoMeant` (C271) from the
 retorsion event, remain useful as narrower routes that need no polarity axiom.
 
-`Means` is an opaque relation (`Agency.lean`), and `AxTwoSubjects` yields two
+`Means` is an opaque relation (`Agency.lean`), and `AxTwoNecessaryPersonalCentres` yields two
 *different* subjects — which used to be read as "each with a single content", and
 that reading was the error. Nothing in the tree *forces* an act to carry its
 negation: `AxActPolarity` **assumes** an act and delivers `Means s (¬ p)` from it.
 What the tree does is supply acts unconditionally (`performative_act_datum`), and
 from there co-meaning follows. Existence of a genuine chooser was never blocked on
 the choice→freedom step, which is free by definition (`Chooses` unfolds `FreeWill`). The explicit target is declared as the
-`def`-proposition `genuineChoice_exists` (F1b, BLOCKED) and the frontier is
+`def`-proposition `genuineChoice_exists` (F1b, DERIVED in Γ via C565 at
+`{performative_act_datum, AxActPolarity}`) and the frontier is discharged by
 the theorem `freeWillExists_of_genuineChoice : genuineChoice_exists →
-∃ s, FreeWill s` — the first implication is the substantive step still to
-establish. This replaces the vague "world-varying
+∃ s, FreeWill s`. This replaces the vague "world-varying
 alternativity" wording with the prop-level statement; the world-level
 `ChoiceAt : World → Subject → Prop → Prop` remains the (future) SEM bridge.
 
@@ -181,10 +181,10 @@ theorem canChoose_unfold {s : Subject} {p : Prop} :
 /-- §15 — freedom (DEFINITION; freedom/choice fix, 2026-09-18): a subject is
     free iff it genuinely chooses between some incompatible pair. The
     implication choice → freedom is definitional (`chooses_implies_freeWill`).
-    The *existence* half is BLOCKED on the exact missing lemma
-    `rejectedHornCoMeant` (no axiom forces `A s p` to come with `A s (¬p)`),
-    so `freeWillExists` is not derivable unconditionally; see the module
-    header and GAPMAP F1b. -/
+    The *existence* half is DERIVED via `bareRejectedHornCoMeant_is_derivable`
+    (C565, `{performative_act_datum, AxActPolarity}`), which discharges
+    `rejectedHornCoMeant` and delivers unconditional `freeWillExists`;
+    see the module header, `NoMeanerNoFalsity.lean`, and GAPMAP F1b. -/
 def FreeWill (s : Subject) : Prop := ∃ p q : Prop, Chooses s p q
 
 /-- A subject is a free subject iff it possesses free will (definitionally, genuinely chooses).
@@ -227,56 +227,39 @@ theorem freeSubject_implies_intentional (s : Subject) (h : FreeSubject s) :
   freeSubject_implies_intentionalSubject s h
 
 /--Freedom exists as soon as a genuine choice witness is supplied. This is the
-    formal shape of the target `freeWillExists`; it is *conditional* because
-    the unconditional witness is exactly the blocked `rejectedHornCoMeant`. -/
+    formal shape of the target `freeWillExists`; its unconditional witness is
+    discharged by `bareRejectedHornCoMeant_is_derivable` (C565) at the price
+    `{performative_act_datum, AxActPolarity}`. -/
 theorem freeWillExists_of_chooses (h : ∃ s : Subject, ∃ p q : Prop, Chooses s p q) :
     ∃ s : Subject, FreeWill s := by
   obtain ⟨s, p, q, hc⟩ := h
   exact ⟨s, chooses_implies_freeWill hc⟩
 
-/--Genuine choice exists: some subject co-means two incompatible
-    contents; that existence itself remains blocked. The modal side of
-    openness is settled and inert — `atoms_are_modally_free` (C95) and
-    `some_formula_contingent` (C96), both `{}`, prove content-openness,
-    yet even fuelled as an extra datum the modal channel cannot force
-    co-meaning (`modal_openness_does_not_entail_genuine_choice(_and_plurality)`,
-    `{}`, HostileSemantics); the block is solely `rejectedHornCoMeant`
-    (agency-side, option 3), not any modal determination.
+/--Genuine choice exists: some subject co-means two incompatible contents.
 
-  The precise missing lemma of the freedom frontier (F1b, BLOCKED).
+  DERIVED in Γ via `NoMeanerNoFalsity.genuine_choice_exists_derived` from
+  `bareRejectedHornCoMeant_is_derivable` (C565) at `{performative_act_datum, AxActPolarity}`.
 
-  This is the explicit existence target: `∃ s : Subject, ∃ p q : Prop,
-    Chooses s p q`. It is NOT yet derived from the performative datum — the
-    exact route is `rejectedHornCoMeant` (nothing forces a meaning-act `A s p`
-    to come with `A s (¬ p)`; `AxTwoSubjects` yields two *different* subjects,
-    each with one content). It is a `def`-proposition, not a theorem: adding
-    it as an axiom or `sorry` is forbidden; the deduction ledger records it as
-    BLOCKED. The free direction below is `freeWillExists_of_genuineChoice`. -/
+  This is the explicit existence target: `∃ s : Subject, ∃ p q : Prop, Chooses s p q`.
+  Discharged from the performative datum via act polarity (`AxActPolarity`), which
+  yields `Means s p ∧ Means s (¬ p)`. The free direction below is `freeWillExists_of_genuineChoice`. -/
 def genuineChoice_exists : Prop := ∃ s : Subject, ∃ p q : Prop, Chooses s p q
 
-/--The precise missing resource (F1b, BLOCKED): one subject co-meaning a content
-    and its negation — the same-subject dual meaning-act.
+/--The dual meaning-act: one subject co-meaning a content and its negation.
 
-  `rejectedHornCoMeant : ∃ s p, A s p ∧ A s (¬ p)` — the single irreducible
-     resource of the freedom frontier (hostile milestone, 2026-09-18). Every
-     candidate route collapses onto it: the performative act is a *single*
-     meaning (`Act s p := Means s p`), asserting p is truth-laden
-     (`Asserts s p := Act s p ∧ p`, so no one can assert both horns,
-     `assertion_consistency`), meaning can be *veridical* in a model
-     (`Means s p → p` kills co-meaning, `genuineChoice_requires_error_possibility`),
-     and even plurality + right-and-wrong give only `ChoiceField` (one horn
-     co-meant against pure logic). It is a `def`-proposition, not a theorem:
-     adding it as an axiom is forbidden; README records it BLOCKED. Its
-     consequent is exactly `genuineChoice_exists`
-     (`rejectedHornCoMeant_implies_genuineChoice`). -/
+  `rejectedHornCoMeant : ∃ s p, A s p ∧ A s (¬ p)` — DERIVED in Γ via
+  `NoMeanerNoFalsity.the_act_carries_its_own_polarity` from
+  `bareRejectedHornCoMeant_is_derivable` (C565) at `{performative_act_datum, AxActPolarity}`.
+  Its consequent is exactly `genuineChoice_exists`
+  (`rejectedHornCoMeant_implies_genuineChoice`). -/
 def rejectedHornCoMeant : Prop := ∃ s : Subject, ∃ p : Prop, Means s p ∧ Means s (¬ p)
 
 /--The formal frontier: genuine choice implies free will.
 
   `freeWillExists` FOLLOWS from `genuineChoice_exists` — definitional
      (`FreeWill s := ∃ p q, Chooses s p q`) — and is never used as a premise.
-     The missing substance is `genuineChoice_exists` itself (F1b, BLOCKED on
-     `rejectedHornCoMeant`). Footprint: `{Means, Subject}` (VOCAB only). -/
+     Unconditionally derived via C565 at `{performative_act_datum, AxActPolarity}`.
+     Footprint: `{Means, Subject}` (VOCAB only). -/
 theorem freeWillExists_of_genuineChoice : genuineChoice_exists → ∃ s : Subject, FreeWill s := by
   intro h
   exact freeWillExists_of_chooses h

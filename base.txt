@@ -139,7 +139,7 @@ Assim:
 - `FreeSubject → Person`: PROVEN (`free_subject_is_person`, `{Means, Subject}`).
 - `Person → FreeWill`: PROVEN (`person_has_free_will`, `{Means, Subject}`).
 - `Person ⇏ NecessarySubject`: REFUTADO por modelo modal fiel (`faithful_contingent_person_fails_necessary_subject`, `{}`). A necessidade pessoal exige as pontes modais de fundamentação. **Correcção 2026-09-28 (dois géneros):** o modelo fiel exibe o género *contingente*; a implicação incondicional continua refutada, e é por isso que a estabilidade é relativa-ao-género (`PersonStabilityPrinciple : Person s → NecessarySubjectKind s → NecessarySubject s`, `Love.lean:101`). A pessoa necessária é do outro género (C404/C408/C409, ponte META `necessaryPersonalSubjectExists`), nunca consequência lógica da pessoalidade.
-A pluralidade interpessoal apoia-se na ponte de segunda pessoa `AxSecondPersonalAddress` (META) ou em `AxTwoSubjects` (META).
+A pluralidade interpessoal apoia-se na ponte de segunda pessoa `AxSecondPersonalAddress` (META) ou em `AxTwoNecessaryPersonalCentres` (META).
 
 2. T1 — O SUJEITO DO ATO EXISTE → theorems/T1.txt
 
@@ -276,8 +276,8 @@ implementado: `Correct s p := A s p ∧ T p` e `Incorrect s p := A s p ∧
 IsFalse p` (`Logos.Order`). O ato é constitutivo — `A s p := Means s p`
 (compactação Tier-1), logo **todo juízo correcto/incorrecto é já um
 ato de significado**. Consequências:
-- C30 `correctness_distinct` (`Correct ≠ Incorrect`): PROVEN↑,
-  `CL + {AxTwoSubjects, Means, Subject}`;
+- C30 `correctness_distinct` (`Correct ≠ Incorrect`): PROVEN,
+  `{Initiates, Means, State, Subject, CL}`;
 - C62 `rightWrong_implies_meaning`: PROVEN, `{Means, Subject}` (só
   vocabulário) — "direito e errado precisam de significado": a negação é
   contradição por definição, em qualquer modelo.
@@ -1042,7 +1042,7 @@ Esquerda para direita (L → P):
 
 (Nota formal: a inseparabilidade em §24b/§25, demonstrada em `Person.inseparability_24b`,
 opera no nível do Sujeito Intencional e do conteúdo significado; a pessoalidade
-substantiva independente `SubstantivePerson` permanece não forçada sem `AxTwoSubjects`.)
+substantiva independente `SubstantivePerson` permanece não forçada sem `AxTwoNecessaryPersonalCentres`.)
 
 Portanto:
 
@@ -1132,10 +1132,12 @@ Certo e errado necessários (T10)
 → relação eterna de amor (T14).
 
 (Nota formal §25, emendada 2026-09-24 pela auditoria de axiomas: T12–T14 **não** são
-PROVEN sem ponte — são PROVEN↑ sob a ponte META `AxTwoSubjects`
-(`{AxTwoSubjects, Means, Subject}`). A alegação "plurality-discharge 2026-09-17" foi
+PROVEN sem ponte — são PROVEN↑ sob a ponte META `AxTwoNecessaryPersonalCentres`
+(`{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`). A alegação "plurality-discharge 2026-09-17" foi
 refutada: C73 (par canónico origem+destinatário) está **BLOCKED**, `AxTwoSubjects` NÃO
-foi retired (é a ponte viva por trás de 15 claims PROVEN↑) e os teoremas T14 são
+foi retired (é a ponte viva por trás de 15 claims PROVEN↑;
+**actualização 2026-10-04, LOVE-3/S4:** foi retired e substituído por `AxTwoNecessaryPersonalCentres`
+(C584) — a ponte viva está por trás de 18 claims PROVEN↑) e os teoremas T14 são
 adicionalmente **condicionais** ao `PluralityLovePrinciple` (nunca provado). O que é
 teorema: a invalidação da solidão (C74, sob a mesma ponte) e a persistência
 (`AxPersonStability`, esse est agere); a ponte FAITH `AxEternalLove` e o axioma `Loves`
@@ -1160,16 +1162,16 @@ analítica "significado → sujeito" é C49 (`meaning_needs_subject` /
 `meaning_I_needs_subject`, `{}` — ✔); L20 (P4)
 "para haver alguém é preciso haver escolha" é C51 (`person_hasChoiceField`, campo de escolha, `{Means, Subject}` — reparação 2026-09-18: é o *campo*, não a escolha genuína),
 e "escolha com significado → mais do que uma pessoa" é PROVEN↑ sob a ponte META
-`AxTwoSubjects` — C40 (C73 está **BLOCKED**, não `{}`; auditoria 2026-09-24); L22
+`AxTwoNecessaryPersonalCentres` — C40 (C73 está **BLOCKED**, não `{}`; auditoria 2026-09-24); L22
 (P5) "um Ser sózinho não ajuda nem prejudica ninguém" é C56
 (`alone_no_other_help_harm`, `{Subject}`; o antigo preço AxPersonsAffect foi
 dissolvido em M1), e "nenhum sujeito está sózinho" apoia-se honestamente na ponte
-metafísica de pluralidade `AxTwoSubjects` (C40, C74), pois um ato isolado
+metafísica de pluralidade `AxTwoNecessaryPersonalCentres` (C40, C74), pois um ato isolado
 não força logicamente pluralidade (teorema de separação `not_entails_plurality`
 em `HostileSemantics`); "tem de haver este Ser, e o certo e o errado" é C68 (Cogito
 teorema derivado de ato performativo) + C37/C38, e "tem de haver quem se possa Amar" é C41
-(via T12 sob AxTwoSubjects); L24 (P6) "Amar é escolhido e também é necessário (de
-alguma forma)" é C42–C45 + C76 (T14 com par de género-necessário exibido, 2026-09-28; C43 segue sob AxTwoSubjects); L38 ("Escolho admitir que: Sou") é o
+(via T12 sob AxTwoNecessaryPersonalCentres); L24 (P6) "Amar é escolhido e também é necessário (de
+alguma forma)" é C42–C45 + C76 (T14 com par de género-necessário exibido, 2026-09-28; C43 segue sob AxTwoNecessaryPersonalCentres); L38 ("Escolho admitir que: Sou") é o
 dado performativo C68 — a sua negação refuta-se por retorção (`noCogito_selfRefutes`, C58).
 Ficam fora da demonstração as linhas 26–30: "este mundo é necessário? Não" é uma negação
 não reivindicada, e "a criação existe / há propósito" pertence à zona de fé
@@ -1238,7 +1240,7 @@ generalização desce um degrau a exclusão, não a remove. C378
 o texto acima não distinguishia:** a *afirmação* é refutada; o *conteúdo* não o era
 *do vocabulário nu*. **Correcção 2026-09-27 (REFUTAÇÃO, C401/C402):** `¬ NoMeaning`
 **é** derivável *em Γ* — C401 refuta a tese na ponte da pluralidade
-(`{AxTwoSubjects, Means, Subject, Will, subjectWill}`, incondicional) e C402 no
+(`{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`, incondicional) e C402 no
 dado-do-acto (`{Initiates, Means, State, Subject}`, condicional). O que C382 mostra,
 e continua a mostrar, é que nada no vocabulário nu a refuta: uma assinatura livre
 satisfaz a sua própria forma da tese, e isso é consistência-da-forma, não
@@ -1302,7 +1304,7 @@ errado; a rota da ordem não o invoca. A cadeia fica `{}` de ponta a ponta: orde
 é **derivado** (`NormativeOrder.lean:136`) e não assumido (C140) → `FreeWill` →
 `Person` (C553). Axiomas substantivos nesta direcção: **nenhum**. O que continua a
 pagar C454 é só o `∃ s, Act s p` **incondicional** — outra questão, que fica
-aberta nos seus próprios termos. **Correcção de 2026-09-30:** essa mesma linha (`F1bUncond`) já não é `BLOCKED` — passou a `SUPERSEDED`, porque C278 prova `∃ s, FreeWill s` a partir de `AxTwoSubjects`, e o corolário `AsieticChoice.freeSubject_exists` (`{AxTwoSubjects, Means, Subject, Will, subjectWill}`) estende-o ao nome `FreeSubject` (`FreeSubject := FreeWill`). O que sobrevive é o *preço*, não a dúvida: uma ponte `META` (`AxTwoSubjects`, realidade pessoal plural), nunca `PROVEN` puro.
+aberta nos seus próprios termos. **Correcção de 2026-09-30:** essa mesma linha (`F1bUncond`) já não é `BLOCKED` — passou a `SUPERSEDED`, porque C278 prova `∃ s, FreeWill s` a partir de `AxTwoNecessaryPersonalCentres`, e o corolário `AsieticChoice.freeSubject_exists` (`{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`) estende-o ao nome `FreeSubject` (`FreeSubject := FreeWill`). O que sobrevive é o *preço*, não a dúvida: uma ponte `META` (`AxTwoNecessaryPersonalCentres`, realidade pessoal plural), nunca `PROVEN` puro.
 
 **O mundo vazio é ininteligível, não por verificar (C558–C561, 2026-09-29).** O
 vocabulário nuclear de Γ não tem nenhum sort `World`: "o mundo vazio obtém?" não
@@ -1367,7 +1369,7 @@ nomeie.)
 Temos:
 
 ∃s [Exists(s) ∧ Agent(s) ∧ IntentionalSubject(s)]
-(Nota formal: a pessoalidade substantiva plena `Person(s)` exige a ponte `AxTwoSubjects`;
+(Nota formal: a pessoalidade substantiva plena `Person(s)` exige a ponte `AxTwoNecessaryPersonalCentres`;
 o resultado irrefutável do ato performativo singular é o Sujeito Intencional `IntentionalSubject(s)`).
 
 e:
@@ -1414,7 +1416,7 @@ há mais do que uma pessoa (T12);
 há quem se possa amar (T13);
 há uma relação eterna de amor (T14).
 
-(Nota formal: Os itens de pluralidade, amor e eternidade (T12–T14) utilizam `AxTwoSubjects`
+(Nota formal: Os itens de pluralidade, amor e eternidade (T12–T14) utilizam `AxTwoNecessaryPersonalCentres`
 (META), pois a agência isolada não implica pluralidade (contramodelo `UnitPluralityCountermodel`).
 Ver theorems/T7.txt, theorems/T8.txt, theorems/T12–T14.txt.)
 
@@ -1459,14 +1461,14 @@ JUDGE_HAS_CHOICE_FIELD/judge_commits (sem certo e errado não há campo de
   escolha). A escolha genuína `Chooses(s,p,q) := Means(s,p) ∧ Means(s,q) ∧
   Incompatible(p,q)` e a liberdade definicional `FreeWill(s) := ∃p q, Chooses`
   (chooses_implies_freeWill, `{Means, Subject}`, só vocabulário) estão em Choice.lean; a sua *existência*
-  está provada (PROVEN↑) sob o princípio constitutivo semântico AxIntentionalChoice (Choice.freeWill_exists sob {AxIntentionalChoice, Initiates, Means, State, Subject}) — ver
-   theorems/T11.txt e formal/GAPMAP.md C49–C57/F1b.
-T12 (mais do que uma pessoa) — PROVEN↑ sob a ponte META `AxTwoSubjects`:
+  está provada sob a polaridade do ato de significado (`NoMeanerNoFalsity.a_genuine_free_person_exists` sob `{performative_act_datum, AxActPolarity}`, 0 axiomas META — C587) — ver
+   theorems/T11.txt e formal/GAPMAP.md C49–C57/F1b/C587.
+T12 (mais do que uma pessoa) — PROVEN↑ sob a ponte META `AxTwoNecessaryPersonalCentres`:
   a pluralidade exige uma ponte metafísica, demonstrada indispensável pelo
   contramodelo `UnitPluralityCountermodel` em `HostileSemantics` (um único
   sujeito satisfaz plenamente agência e pessoa).
-T13 (quem se possa amar) — PROVEN↑ (via T12, herdando `{AxTwoSubjects}`).
-T14 (relação eterna de amor) — PROVEN↑ sob `{AxTwoSubjects}`:
+T13 (quem se possa amar) — PROVEN↑ (via T12, herdando `{AxTwoNecessaryPersonalCentres}`).
+T14 (relação eterna de amor) — PROVEN↑ sob `{AxTwoNecessaryPersonalCentres}`:
   o par de amantes e a sua persistência são demonstrados com base em T12
   e na definição de amor benevolente (`Loves s t := Helps s t ∧ ¬ Harms s t`).
 
@@ -1521,6 +1523,9 @@ está **refutada** — os footprints `{AxTwoSubjects, …}` deste período são 
 os footprints actuais de C40/C41/C42–C45/C54/C61/C74; C73 está BLOCKED e T14 é
 condicional a `PluralityLovePrinciple`. Ver GAPMAP.md C73/C74 e a entrada
 `AxTwoSubjects` no bloco "Summary counts".)
+(**Actualização 2026-10-04, LOVE-3/S4:** `AxTwoSubjects` foi retired (C584); os footprints
+actuais levam `AxTwoNecessaryPersonalCentres` em C40/C41/C43/C54/C61/C74, e C42/C44/C45
+são sem ponte substantiva. Ver GAPMAP.md C584/C585.)
 
 Nota (Tier1, 2026-09-16; emendada 2026-09-23, PERSON.md): Agent e Rational deixaram também de ser axiomas —
 Agent é definição analítica (Agent(s) := True); Rational é agora piso DERIVADO
@@ -1560,7 +1565,7 @@ natureza pessoal judicativa livre), NÃO a necessidade da entidade em todos os m
 teorema como **par não-hipostático** — `NecessityEternity.claimE`:
 `∃ g s, NecessaryEntity g ∧ NecessaryGroundOfReality g ∧ Person s ∧ GroundsRightWrong s`.
 O conjuncto de necessidade-ente é `{Means, Subject}` (PROVEN, VOCAB); o conjuncto pessoal
-é `{AxTwoSubjects, Means, Subject}` (PROVEN↑ sob a ponte META anunciada `AxTwoSubjects`);
+é `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}` (PROVEN↑ sob a ponte META anunciada `AxTwoNecessaryPersonalCentres`);
 a linha de identidade é bloqueada por `ofGround_ne_ofSubject`. A refutação pré-extension
 `retorsion_fails_against_no_necessary_entity` aplica-se ao sort antigo sem `ofGround`,
 não ao atual). Corolário existencial (C152) e forma-instância
@@ -1838,8 +1843,9 @@ As suas três lemmas exactas, nenhuma delas vocabulário: (a) `∃ f : DivineHyp
 derivação é *válida sob premissas declaradas*, **nunca forçada**.
 
 Nota formal: A pluralidade (T12, C40) e o amor relacional
-(T13/T14, C41–C45) exigem a ponte metafísica explícita AxTwoSubjects (Tag: META,
-pegada `{AxTwoSubjects, Means, Subject}` — as tentativas de derivação a custo zero
+(T13/T14, C41–C45) exigem, onde exigem, a ponte metafísica explícita AxTwoNecessaryPersonalCentres
+(Tag: META, C584) — C41 e C43 sob `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind,
+Subject, Will, subjectWill}`, C42/C44/C45 sem ponte substantiva — as tentativas de derivação a custo zero
 foram refutadas sob semântica hostil por UnitPluralityCountermodel e PluralityWithoutLove;
 C73/C76 foram retirados); o amor benevolente C85/C86 tem pegada `{Subject}`.
 
@@ -1973,8 +1979,8 @@ de Γ fornece uma testemunha de `Initiates` (`ProofPresentationRetorsion.lean:95
 `¬p`), e `ClaimsNormativeCorrectness` (premissa `Act s p ∧ …`); `Doubts` é *ele próprio*
 `Means s p ∧ Means s (¬p)`, logo circular.
 
-A existência, essa, é gratuita e demonstrada por duas vias (C277–C279, PROVEN↑, `{AxTwoSubjects,
-Means, Subject, Will, subjectWill}`): `trueChoice_exists`, `freeWill_exists`,
+A existência, essa, é gratuita e demonstrada por duas vias (C277–C279, PROVEN↑, `{AxTwoNecessaryPersonalCentres,
+Means, NecessarySubjectKind, Subject, Will, subjectWill}): `trueChoice_exists`, `freeWill_exists`,
 `an_asietic_entity_exists`. E a tese, sem preço, é `asietic_is_true_freedom` (C280):
 a asieticidade *é* a liberdade verdadeira. O preço está nas linhas existenciais, que é onde
 pertence.
@@ -1994,7 +2000,7 @@ Limites honestos de escopo (o que **não** se deve reclamar): (i) `TrueChoice` n
 força a `Chooses`, por C265 e pelo carácter global de `ContestedContent`; (ii) a passagem
 escolha-fraca → escolha-forte **exige** o juízo de correção, e a forma nua é refutada (C273/C274);
 (iii) a deliberação de conteúdo de objecto/ação continua por responder; (iv) a existência de
-escolha verdadeira carrega honestamente `{AxTwoSubjects, Will, subjectWill}` — não é `{}`;
+escolha verdadeira carrega honestamente `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}` — não é `{}`;
 (v) a forma *meta-nível* está fechada **em conteúdo fixado** (`NoGN`/`¬NoGN`), o que não é o
 mesmo que fechar a deliberação em geral. Nenhuma destas cinco coisas deve ser lida como
 resolvida por este lote.
@@ -2022,7 +2028,7 @@ weakChoice_implies_freeWill : GenuineNormativity s p q → FreeWill s          [
 
 O único conteúdo para além das duas conjunções `Means` é o facto de quadro `ContestedContent`
 (C259, `{}`): a **abertura**. Sem `AxJudicativeBipolarity` (ao contrário de C266/C267), sem
-`AxTwoSubjects` (ao contrário de C277–C279), sem `Act`, sem `Initiates`, condicional sob a
+`AxTwoNecessaryPersonalCentres` (ao contrário de C277–C279), sem `Act`, sem `Initiates`, condicional sob a
 hipótese explícita `GenuineNormativity s p q` (Rule R, cláusula 4).
 
 **A honestidade deste passo, declarada antes de ser usado:** C287 está *muito perto* de uma
@@ -2085,7 +2091,7 @@ C294 `rightWrongFactYieldsNoChooser` — o facto do autor, `Core.rightWrongDisti
    significa nada alguma** (`S := Unit`, `M := fun _ _ => False`), e portanto **não há existência
    axiomática de escolhedor**. O passo do partilhamento pelo Criador é por isso *condicional*, e a
    sua metade existencial fica registada como não derivável em vez de afirmada; a metade
-   incondicional continua a ser a rota `AxTwoSubjects` (META) de C277–C279. Nota de forma: o
+   incondicional continua a ser a rota `AxTwoNecessaryPersonalCentres` (META) de C277–C279. Nota de forma: o
    quantificador é `∃`, não `∀` — de `M s p` para `M` arbitrário não segue `False`, pelo que uma
    forma universalmente quantificada teria sido **não-sólida** em vez de forte.
 
@@ -2212,7 +2218,7 @@ Ainda requer prova (o que falta, em termos formais): (a) qualquer derivação de
 forma exacta: uma relação de fundamentação substantiva que não seja nem vacua nem circular (o
 vocabulário), mais a derivação da extensão a todo o par (a derivação), com **C299** a mostrar que
 nenhuma premissa da forma de `OneEssence` chega lá; (b) a existência de um sujeito que partilhe a
-liberdade — **F13**, refutada como derivável por C294, e a rota incondicional continua `AxTwoSubjects`
+liberdade — **F13**, refutada como derivável por C294, e a rota incondicional continua `AxTwoNecessaryPersonalCentres`
 (META) de C277–C279; (c) a passagem, par a par, de `ContestedContent` para `OpenAlternative p q` —
 bloqueada pela ausência de ponte `Prop ↔ Form`, e registrada por C293. Nenhum destes é um `?` novo:
 são os mesmos três bloqueios de §31, agora **nomeados, machine-checked onde é possível, e com o
@@ -2499,8 +2505,7 @@ o bem tem de ser dirigido. Quem rejeita o preço rejeita este axioma e, com ele,
 
 E há um **terceiro** preço, do módulo irmão, que não é um axioma deste lote: o
 **significado** do cosmos **não é um dado, é um teorema** (`cosmos_obtains`, **C367**),
-derivado da ponte pluralista `AxTwoSubjects` (`Tag: META`) via
-`Plurality.cogito_from_T12`. E a própria **existência** vai ainda mais longe: já **não custa
+derivado com a testemunha exibida via `Plurality.cogito_from_T12` (que assenta na ponte pluralista `AxTwoNecessaryPersonalCentres`, `Tag: META`). E a própria **existência** vai ainda mais longe: já **não custa
 preço nenhum** (C350 `CosmicExistence.contingent_realm_obtains`, `PROVEN`, `{propext,
 Subject}`). Logo a **existência** e o **significado** saem ambos da zona da fé, cada um à sua
 maneira; o **fim** e a **encarnação** não saem, e a **produção** nunca foi afirmada.
@@ -2552,6 +2557,24 @@ maneira; o **fim** e a **encarnação** não saem, e a **produção** nunca foi 
 > **região** da realidade que é actual, modal-frágil e não é o solo. Nenhuma relação
 > `Creates` é reivindicada ou derivável, e `C110` continua a refutar que o fundamentamento
 > implique registo de criação.
+>
+> **Correcção de 2026-10-04, 3.ª (lote LOVE-3/S4).** As duas correcções acima falam da ponte
+> pluralista pelo seu nome antigo, `AxTwoSubjects`, e uma das frases que citam já não descreve
+> o kernel. **O que mudou:** `AxTwoSubjects` foi **retired** e substituído por
+> `AxTwoNecessaryPersonalCentres` (C584, `Tag: META`) — a mesma troca META-por-META que o resto
+> do corpus regista, sem mover o censo. **O que isso faz às frases acima:**
+> `T12_twoPersons` **já não é** `AxTwoSubjects rightWrongDistinction` — é incondicional sobre a
+> ponte nova (C585); o antecedente do direito-e-erro caiu, e rejeitá-lo já não custa a
+> pluralidade. `cogito_from_T12` assenta agora nessa ponte (pegada auditada
+> `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`).
+> **C367 continua sem ponte na sua pegada auditada**
+> (`{Means, NecessarySubjectKind, Subject, Will, propext, subjectWill}`) — a testemunha é a
+> hipótese `h`, e o preço vive em quem a exibe, não nesta linha. **A consequência que interessa
+> mantém-se, com o nome actualizado:** rejeitar a metafísica interpessoal
+> (`AxTwoNecessaryPersonalCentres`) **não** rejeita a existência do cosmos (C350, intacta);
+> rejeita o seu **significado** e, com ele, T12, T13, `notAlone`, `aloneExcluded` e todas as
+> linhas de pluralidade pessoal do caminho de leitura. O que sobrevive à rejeição é a metade
+> livre: `Core.rightWrongDistinction`, a necessidade livre da doação e o absurdo livre C579.
 
 Duas afirmações que o livro-razão agora carrega e que **não** são a favor da tese sem
 preço. C338 (`meaningful_love_bridge_is_refuted`): a forma **não restrita** e mais
@@ -2588,7 +2611,7 @@ Ainda requer prova (o que falta, em termos formais):
       (**C367** `CosmicExistence.cosmos_obtains : CreatedRealm`, dado de pessoa exibida, sem ponte). Com a
       satisfatibilidade condicional de C354 (`cosmos_presence_model`) e o contramodelo do
       formato (C353, `{}`) mantidos. A existência **não está** na zona da fé **nem** na zona
-      da ponte: Rejeitar `AxTwoSubjects` deixa-a intacta. Ver item (4) e a 2.ª correcção acima.
+      da ponte: Rejeitar `AxTwoNecessaryPersonalCentres` deixa-a intacta. Ver item (4) e a 2.ª correcção acima.
   (4) ~~**LEMA EM FALTA**~~ **[CORRIGIDO 2026-09-27]**: esta entrada afirmava que
       `∃ s : Subject, ∃ p : Prop, Means s p` era "o **único** obstáculo" porque `Subject`
       (`Agency.lean:49`, `Tag: VOCAB`) e `Means` (`Agency.lean:92`, `Tag: VOCAB`) não têm
@@ -2768,3 +2791,118 @@ com o `Subject` que bore `DivineRole.source`. Fechar isto é um compromisso de c
 `False` derivável e foi apagada (GAPMAP C509, guarda `formal/consistency/FalseNotDerivable.lean`).
 Nada disto foi comprado agora: a decisão é **deixar as lacunas nomeadas e pagar por elas quando
 chegarem**, não comprá-las já.
+
+37. A DOAÇÃO DE SI PRÓPRIO — E O KERNEL QUE DERIVAVA `False`
+
+(2026-10-03, lote AMOR; GAPMAP C574–C578 + nota de incidente de consistência; Lean
+`formal/Logos/DivineAgape.lean` (C575–C577), `formal/Logos/TrinitarianPersonalGround.lean`
+(C578), `scripts/check_consistency.py` Gates C+D, `scripts/test_personal_ground_kind.py`
+G10–G12. **Zero axiomas novos** — o registo continua **39 declarados** (18 VOCAB / 6 SEM /
+13 META / 2 TRANS).)
+
+**O incidente.** `DivineHypostasis` tinha **um** campo, `deiformEntity`, e `Subsists` é uma
+igualdade de localização contra a constante `divineReality`. Logo o subconjunto subsistente de
+`DivineHypostasis` era um **singleton**: dois centros subsistentes eram iguais em `{}` (eta de
+estrutura). `AxAgapeEssence` afirma `o ≠ f` com ambos subsistentes; `AxProcessionSpirit` afirma
+`σ ≠ the_father` com ambos subsistentes. **O kernel inteiro derivava `False`** — e nenhum
+emblema o denunciava, porque `#print axioms` relata o conjunto de axiomas sem perguntar se a
+teoria é consistente: uma teoria inconsistente imprime as mesmas linhas «0 axiomas
+substanciais» que uma teoria sã. A última execução verde não certificava nada.
+
+**A correcção.** `DivineHypostasis` ganhou um segundo campo `personalProperty : Prop` — um
+**marcador de distinção**, não o conteúdo de um papel (`IsWord`/`IsSpirit` continuam
+autoritativos). C507, C519 e C520 mantêm as declarações exactas; o censo não se move (uma
+`structure` não é um `axiom`). E a correcção é também o gate: `check_consistency.py` ganhou
+**Gate C** (sondas `P → False` por axioma, com gémea `P → True` obrigatória) e **Gate D**
+(varrimento de estruturas de um campo presas a constantes), ambas red→green na reparação.
+
+**A doação.** O que o corpus afirmava só em prosa passou a sentença: `SelfDonation f o` é uma
+dádiva entre duas **propriedades pessoais distintas** de **uma** entidade de localização
+(C575, `agape_is_self_donation`, um axioma META — o mesmo preço de C507). Negar a doação é
+absurdo (C576, `denying_self_donation_is_absurd`, `⊥ CONTRADICTION`, linha R18 da Cremação) —
+absurdo *relativo à declaração*: existe um mundo em que a negação se verifica (o mundo
+Narciso, C511), pelo que a negação é refutada pelo que está *declarado*, não pela lógica. E a
+negação falha mesmo com as suas próprias premissas concedidas: conceda doador e destinatário,
+conceda que ambos subsistem, conceda o amor — e resta negar a localização partilhada, que é
+`{}` (C577, `⊘ DENIAL REFUTED`, linha R19).
+
+**O que a doação não compra.** «Não pode dar porque não é pessoa que escolhe» é refutado *como
+rota*, não anotado: C578 (`self_donation_needs_no_personhood_of_the_ground`, linha R21) é a
+conjunção `¬ Asiety Entity.ofGround ∧ ∃ f o, SelfDonation f o` — o chão **não** é entidade
+asiética (primeiro conjuncto livre), **e** a doação mantém-se (segundo conjuncto, um META). O
+preço compra a dádiva e nada mais: nem um quarto que escolhe, nem a pessoalidade do chão (C228
+continua `BLOCKED` ao nível da entidade). A forma modal — *necessário ⇒ acto necessário* —
+também não atravessa: `necessary_nature_not_entails_necessary_act` (`{}`, linha R20) separa a
+entidade necessária `g` do sujeito actuante `s`, pelo que mostra exactamente o que mostra
+(necessidade da natureza não implica necessidade do acto) e não mostra que o chão actue.
+
+**C573 sai da fronteira.** Com o segundo campo, o *conteúdo* da pericorese está derivado e é
+gratuito (`two_subsisting_share_one_location`, `each_subsisting_person_is_in_the_other`,
+ambos `{Subject}`) — a linha C573 nunca carecia de prova de uma afirmação real; nomeava um
+**predicado indefinido** cujo conteúdo já é `=`. O seu estatuto passa a `WITHDRAWN (undefined
+predicate)`, no precedente de C572 — *não resolvido*, nunca contado como passo descarregado,
+porque nenhum primitivo `MutualIndwelling` é declarado. A pergunta residual — vale a pena
+*nomear* o que já está provado? — é C574 (OPEN): o preço da resposta é um símbolo `VOCAB`
+novo sem ganho de afirmação. A fronteira move-se `33 → 32` nesta mudança.
+
+38. A DEPENDÊNCIA — ONDE A CADEIA DO AUTOR MORRE (lote AMOR/2, 2026-10-03; `LOVE-2.md`)
+
+O §37 errou o alvo. O que o corpus affiliou à Cremação não era a cadeia do autor: era um
+`axiom → ¬¬axiom` apresentado como contradição, uma premissa da objeção apresentada como resposta, e
+um contra-modelo de assinatura que não negava nada de Γ. A cadeia do autor, reconstruída nos
+seus quatro passos, é outra coisa:
+
+  1. **uma só pessoa** — logo não há outro a quem dar;
+  2. logo só poderia doar a seres **contingentes (temporais)**;
+  3. logo a sua autosdoação seria **dependente dos seres contingentes**;
+  4. logo seria também contingente — contra um Chão já determinado Eterno, Necessário, Livre e
+     Imutável.
+
+**O passo 3 é a charneira**, e é onde Γ tem a resposta, gratuita. `SelfDonation f o` põe o
+destinatário em `divineReality := Entity.ofGround`; logo nenhum `Subject` pode ser o destinatário
+de uma doação. `SinglePersonDenial.self_gift_cannot_depend_on_a_contingent_person` (C579,
+`{Subject}`) enuncia essa dependência como proposição e refuta-a. **A hipótese foi enunciada na
+forma mais forte de propósito**: o autor diz *contingentes*, e Γ refuta que o destinatário seja um
+`Subject` **qualquer** — pelo que a qualificação temporal nunca foi a parte carregada. Sem
+`AxAgapeEssence`: a linha vale para qualquer `SelfDonation`, e é isso que a torna refutação e não
+restatement do dado. O passo 4 cai sozinho — `donation_makes_contingency_is_refuted`,
+`donation_terminus_is_as_necessary_as_the_donor` (`{NecessarySubjectKind, Subject}`) — e o passo 1
+é impossível: `single_person_denial_is_refuted`, `{Subject}`.
+
+**«O chão não é uma pessoa» — a terminologia.** Quatro afirmações que se confundiam, e que o
+lote/commit `4a59173` separou para conveniência do modelo:
+
+  - o chão **é pessoal**: `PersonalGround Entity.ofGround` (C362), cuja `indwells` é `OneEssence`
+    para **todo** `Subject` (C140) — é o chão *OneEssence* que é pessoal, com três Pessoas por
+    baixo dessa natureza;
+  - a **liberdade do chão é partilhada**: `AsietyFreedomOfGround` (`AsietyFreedom.lean:141`), um
+    `def` ◈ — e é aqui que a comissão errada tinha removido a asiety;
+  - o chão **não é uma Pessoa** entre as três: `no_person_is_the_ground` (C519, `{Subject}`) — a
+    natureza não é nenhuma das suas instâncias;
+  - «não pode doar porque não é pessoa que escolhe»: `¬ Asiety Entity.ofGround` é
+    `ofGround_ne_ofSubject`, ou seja a terceira afirmação, e **não** uma refutação da liberdade.
+
+O commit `4a59173` («try to improve personhood clarity») acrescentou em `Stipulations.lean` e em
+`TrinitarianPersonalGround.lean` que «não há relação em Γ entre o âmbito do chão e a liberdade de
+qualquer sujeito, logo nada é transferido». Isso é **falso**: a relação existe, tem nome
+(`AsietyFreedomOfGround`) e é consumida por `asietyFreedom_summary`. Uma premissa `def` é
+invisível a `#print axioms`, e da invisibilidade se inferiu que não havia nada ali. Nada foi
+removido; um **preço** foi lido como profundidade, e a liberdade do chão saiu da doutrina. O
+`LOVE-2.md` D1 retira as duas frases e restaura a leitura de `AsietyFreedom.lean` (`load-bearing`,
+*transferred*).
+
+**C580 sai BLOCKED.** A correspondência entre o `Subject` da ponte e o `DivineHypostasis` da
+doação não está descarregada (`TrinitarianSubjectBridge.lean` §11). Falta, exactamente:
+`HypostasisOf : Subject → DivineHypostasis → Prop`, com `HypostasisOf s d → Subsists d`, e com
+dois dos três sujeitos da ponte a corresponderem aos dois relata de `SelfDonation`. **Não foi
+comissionado nada**, e a lacuna não pode ser preenchida como identidade: `EntityOf _ =
+Entity.ofGround` é rejeitado pelo Gate B em qualquer `axiom` e é refutado por
+`ofGround_ne_ofSubject`. A fronteira move-se `32 → 33`.
+
+**O que sai do caminho de leitura.** `necessary_nature_not_entails_necessary_act` (linha R20) é um
+`{}` sobre uma **assinatura fresca** e localement quantificada (`∃ World Entity Subject …`, com
+`ExistsAt := fun _ _ => True`), sem chão, sem pessoas, sem doação, e que concede
+todos os predicados que menciona. É a forma *necessidade da natureza não implica necessidade do
+acto*, e nada mais. Desmontado da §13; vai para o catálogo com a disciplina C559 (um
+contra-modelo tem de instanciar o vocabulário que nega). `modal_collapse_action_theorem` vai com
+ele.

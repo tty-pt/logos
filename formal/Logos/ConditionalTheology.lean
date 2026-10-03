@@ -246,7 +246,7 @@ section Sector4_PluralityIndependence
 
 /-!
 Investigates whether A14 interacts with the plurality architecture.
-`AxTwoSubjects` (A10) is an explicit META commitment.
+`AxTwoNecessaryPersonalCentres` (A10; retired `AxTwoSubjects`, LOVE-3/S4) is an explicit META commitment.
 Does A14 derive plurality without A10?
 -/
 
@@ -636,7 +636,7 @@ inductive InferenceStatus
   | PROVEN          -- Derived by pure logic or machine-verified theorems
   | DEFINITIONAL    -- Definitional expansion (rfl / iff)
   | SEMANTIC        -- Substantive semantic axiom (e.g. A14 AxIntentionalChoice)
-  | METAPHYSICAL    -- Metaphysical bridge (e.g. A10 AxTwoSubjects)
+  | METAPHYSICAL    -- Metaphysical bridge (e.g. A10 AxTwoNecessaryPersonalCentres)
   | COUNTERMODEL    -- Formally independent; separated by machine-checked hostile countermodel
   | OPEN            -- Unresolved formal status
 
@@ -648,7 +648,7 @@ def edge_NecessaryTruth_to_SomeGround : InferenceStatus := InferenceStatus.PROVE
 def edge_SomeGround_to_NecessaryGround : InferenceStatus := InferenceStatus.PROVEN -- via A6/T7
 def edge_NecessaryGround_to_UltimateGround : InferenceStatus := InferenceStatus.COUNTERMODEL -- separated by a14_not_eliminates_infinite_ground_chain
 def edge_UltimateGround_to_PersonalGround : InferenceStatus := InferenceStatus.COUNTERMODEL -- separated by a14_plus_ultimate_ground_not_entails_personal_ultimate_ground
-def edge_PersonalGround_to_Plurality : InferenceStatus := InferenceStatus.METAPHYSICAL -- requires A10 (AxTwoSubjects)
+def edge_PersonalGround_to_Plurality : InferenceStatus := InferenceStatus.METAPHYSICAL -- requires A10 (AxTwoNecessaryPersonalCentres)
 def edge_Plurality_to_Love : InferenceStatus := InferenceStatus.METAPHYSICAL -- requires AxPersonsAffect
 def edge_Love_to_Trinity : InferenceStatus := InferenceStatus.COUNTERMODEL -- separated by preceding_theory_not_entails_trinity
 def edge_DivineGround_to_Creation : InferenceStatus := InferenceStatus.COUNTERMODEL -- separated by necessary_ground_not_entails_contingent_creation (on a populated world, not an empty one)

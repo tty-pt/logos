@@ -85,7 +85,7 @@ inductive DependencyLayer
   | L2_IntentionalMeaning   -- Means s p
   | L3_IntentionalSubject   -- Subject exists, intentionality
   | L4_TruthSemantics       -- Entity semantics, strong truth
-  | L5_ObjectiveNormativity -- AxTwoSubjects, Order, T6 Fallibility
+  | L5_ObjectiveNormativity -- AxTwoNecessaryPersonalCentres, Order, T6 Fallibility
   | L6_Retorsion            -- Transcendental self-refutation
   | L7_Modality             -- T7 Necessary Reality, S5
   | L8_Grounding            -- T8 Personal Ground, GroundProp

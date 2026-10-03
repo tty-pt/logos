@@ -223,7 +223,7 @@ C277 — A existencia de escolha verdadeira, incondicional:
 theorem trueChoice_exists : ∃ s : Subject, ∃ p q : Prop, TrueChoice s p q
 ```
 
-Pegada auditada: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. Uma pessoa existe
+Pegada auditada: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. Uma pessoa existe
 (C14, `T5_personExists_from_plurality`), `Person` agrupa `FreeWill`
 (`DominionOverActs s := FreeWill s`), logo existe uma testemunha de `Chooses`, e a secao 2
 promove-a. Segunda via a um resultado ja `PROVEN↑` (F1b), e genuinamente derivacional —
@@ -235,7 +235,7 @@ C278 — A existencia de livre-arbitrio, mesma via um passo antes:
 theorem freeWill_exists : ∃ s : Subject, FreeWill s
 ```
 
-Pegada auditada: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. **Nao** e `{}`.
+Pegada auditada: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. **Nao** e `{}`.
 
 C279 — Existe uma entidade asietica:
 
@@ -243,7 +243,7 @@ C279 — Existe uma entidade asietica:
 theorem an_asietic_entity_exists : ∃ e : Entity, Asiety e
 ```
 
-Pegada auditada: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`, com
+Pegada auditada: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`, com
 `Asiety e := ∃ s p q, e = EntityOf s ∧ TrueChoice s p q`, e a testemunha em `EntityOf s`.
 
 C280 — **A tese**: a asieticidade e a liberdade verdadeira:
@@ -318,8 +318,8 @@ theorem asietic_summary :
     (∃ s : Subject, ∃ p q : Prop, TrueChoice s p q)
 ```
 
-Pegada auditada: `{AxJudicativeBipolarity, AxTwoSubjects, Initiates, Means, State, Subject,
-Will, subjectWill}`. Confunde: a identificacao definicional (linhas so-vocabulario), o
+Pegada auditada: `{AxJudicativeBipolarity, AxTwoNecessaryPersonalCentres, Initiates, Means,
+NecessarySubjectKind, State, Subject, Will, subjectWill}`. Confunde: a identificacao definicional (linhas so-vocabulario), o
 passo fraco -> forte sob a premissa nomeada, a existencia incondicional de escolha
 verdadeira, e a exclusao do fundamento do inventario de escolhedores.
 
@@ -346,7 +346,7 @@ passagem escolha-fraca -> escolha-forte **exige** `ClaimsCorrect s p`, e a forma
 refutada (C273/C274) — nao apenas nao provada. (iii) A deliberacao sobre conteudo de
 objecto/accao continua por responder (rota `DeliberateChoice`/`ClaimsNormativeCorrectness`,
 C140/C141). (iv) A existencia de escolha verdadeira carrega honestamente
-`{AxTwoSubjects, Will, subjectWill}`; nao e `{}`. (v) A forma meta-nivel esta fechada **em
+`{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`; nao e `{}`. (v) A forma meta-nivel esta fechada **em
 conteudo fixado** (`NoGN`/`¬NoGN`), o que nao e o mesmo que fechar a deliberacao em geral.
 (vi) A unica lacuna a montante e a **existencia de `Initiates`** (`∃ s p, Act s p`): as quatro
 rotas de Γ a `Means s (¬p)` sao todas `Act`-gateadas

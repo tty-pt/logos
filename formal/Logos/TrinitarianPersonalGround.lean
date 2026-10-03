@@ -83,6 +83,7 @@ import Logos.Person
 import Logos.RecoveredOntologicalGround
 import Logos.NecessityEternity
 import Logos.AsieticChoice
+import Logos.DivineAgape
 
 namespace Logos.TrinitarianPersonalGround
 
@@ -95,6 +96,7 @@ open Logos.Person (Person)
 open Logos.RecoveredOntologicalGround (ActualEntity EntityMeans OneEssence)
 open Logos.NecessityEternity (ofGround_ne_ofSubject)
 open Logos.AsieticChoice (Asiety)
+open Logos.DivineAgape (DivineHypostasis SelfDonation agape_is_self_donation)
 
 /-! ## Section 1: presence-grounding, the route that covers the atoms -/
 
@@ -176,15 +178,44 @@ theorem ground_scope_does_contain_incompatibles :
     ∃ p q : Prop, EntityMeans Entity.ofGround p ∧ EntityMeans Entity.ofGround q ∧ Incompatible p q :=
   ⟨True, False, trivial, trivial, fun h => h.2⟩
 
-/-- **The ground is not an asietic entity: no subject, so no true choice at the ground.** This is
-    doctrine, not a defect — the one essence is not a fourth instance of choosing alongside the
-    three; its freedom is their freedom, shared rather than duplicated (`AsietyFreedomOfGround`,
-    `Tag: META`, priced and registered ◈ in `Stipulations.lean`).
+/-- **The ground is not an asietic entity: no subject, so no true choice at the ground.** The ground
+    does not choose. That is a real limit of the vocabulary, and it is stated here as a limit.
 
-    This is *praeter hoc, quod unus est, tres sunt* as a machine-checked row: besides the fact
-    that there is one, there are three — and the one is not a fourth. Reading `ofGround`'s `True`
-    arm as freedom would be the deist mistake of counting the substrate as a chooser, which is the
-    opposite error from `ground_scope_does_contain_incompatibles`.
+    Two earlier versions of this docstring are retracted here (2026-10-03; `LOVE-2.md` D1), and
+    they were retracted in opposite directions, which is the tell. The first called this "doctrine,
+    not a defect" and added that "its freedom is their freedom, shared rather than duplicated"
+    (`AsietyFreedomOfGround`, `Tag: META`, registered ◈ in `Stipulations.lean`). The second then
+    over-corrected and denied that any such relation existed at all: "there is no relation here
+    between the ground's scope and any subject's choice".
+
+    **Both are false, and the relation is named.** `AsietyFreedom.asietyFreedomOfGround` — the ◈
+    `def` at `AsietyFreedom.lean:141` — relates the ground's scope to each subject's true choice,
+    and `AsietyFreedom.asietyFreeWill` is the predicate this corpus gives to that shared freedom.
+    The restored reading is the one `AsietyFreedom.lean` states three times (`:113`, `:128`,
+    `:210`) and that commit `4a59173` deleted from the two files that are read first: **the
+    ground's freedom is *transferred* to the three Persons and not *exercised* by a fourth chooser,
+    and the vacuity of `OneEssence` is the marker of that transfer.** The theorem, its statement
+    and its `{Means, Subject}` footprint are unchanged by this correction; only the reading is.
+
+    What the row says, precisely: `¬ Asiety Entity.ofGround` unfolds through `Asiety`
+    (`AsieticChoice.lean:147-148`, `∃ s : Subject, ∃ p q : Prop, e = EntityOf s ∧ TrueChoice s p q`)
+    to `ofGround_ne_ofSubject` — the **same fact** as `LovesAsGround.the_ground_is_not_a_person`
+    (`LovesAsGround.lean:604`) and as `no_person_is_the_ground` (C519, `{Subject}`). It is a
+    statement about `Subject`-indexing: the ground is no *fourth chooser*, and it is the
+    **nature** those Persons are OneEssence in, not an instance of it. It is **not** a refutation
+    of freedom and **not** a denial of the ground's personhood — `the_ground_is_not_void_of_personhood`
+    (C362) asserts that in the next line, and the transfer is `AsietyFreedomOfGround`'s content.
+
+    What replaces the reassurance is not a weaker claim but a stronger neighbour: the donation of
+    the Self holds anyway. `self_donation_needs_no_personhood_of_the_ground` (C578) conjoins this
+    row with `agape_is_self_donation` (C575), so "it cannot give because it is not a person who
+    chooses" is refuted as a route rather than annotated, and `denying_self_donation_is_absurd`
+    (C576) closes the absurdity itself.
+
+    The asymmetry with `ground_scope_does_contain_incompatibles` is worth keeping, and it needs no
+    label to state: the ground's *scope* is unrestricted meaning — it holds `True` and `False`
+    together — while its *agency* is absent altogether. One is a maximum, the other is a zero, and
+    the two are different claims about different vocabularies.
 
     Distinct from its two neighbours by scope, not by content: `AsieticChoice.ground_is_not_a_true_chooser`
     (C285) denies the weaker `∃ s, EntityOf s = Entity.ofGround` (no *chooser*), this denies
@@ -196,6 +227,43 @@ theorem ground_is_not_a_fourth_chooser : ¬ Asiety Entity.ofGround := by
   intro h
   obtain ⟨s, _p, _q, hs, _⟩ := h
   exact ofGround_ne_ofSubject s hs
+
+/-- **The donation of the Self does not require the ground to be a person — C578.**
+    Both halves of the absurdity, in one row: the ground is **not** an asietic
+    entity (no subject, so no true choice — the first conjunct is
+    `ground_is_not_a_fourth_chooser`, at `{}`), **and** Agape is a gift between two
+    distinct personal properties of one location-entity (the second conjunct is
+    `agape_is_self_donation`, C575).
+
+    This row is **not** a replacement for the sentence "the one essence is not a
+    fourth chooser; its freedom is their freedom, shared rather than duplicated". An
+    earlier version of this docstring claimed to replace it on the ground that it
+    "answered the author's objection with a label while conceding its premise, and it
+    presented an *absent* predicate as an argument". **That was false, and is retracted**
+    (2026-10-03, `LOVE-2.md` D1): the predicate is not absent —
+    `AsietyFreedom.asietyFreedomOfGround` (`AsietyFreedom.lean:141`) is the ◈ `def` that states
+    the sharing, and `asietyFreedom_summary` (`:357`) consumes it. A `def` premise is invisible to
+    `#print axioms`, so an audit could not see it, and commit `4a59173` inferred from that
+    invisibility that there was nothing there. Nothing was removed; a price was
+    misread as a depth, and the ground's freedom was deleted from the doctrine to make the
+    model convenient.
+
+    The conjunction below is therefore **additional**, not a substitute. What it does add is the
+    second half the label could not carry: the ground is not a chooser **and** Agape is a gift
+    between two distinct personal properties of one location-entity. "It cannot give because it is
+    not a person who chooses" is refuted *as a route*; the sharing is the ground's own freedom,
+    which is what makes the gift its own.
+
+    **Price.** The first conjunct is free. The second is `{Subject,
+    AxAgapeEssence, CL}` — one META axiom, which is the same price
+    C507/C510 carry and is *not* avoided here. What this row shows is that the
+    price buys the gift and nothing more; the ground is **not a fourth chooser**, and the
+    denial of the gift is refuted by `denying_self_donation_is_absurd` (C576).
+
+    Footprint: `{Means, Subject, AxAgapeEssence, Classical.choice}` (only `Classical.choice` of the CL trio — no `Quot.sound`, no `propext`). -/
+theorem self_donation_needs_no_personhood_of_the_ground :
+    ¬ Asiety Entity.ofGround ∧ (∃ f o : DivineHypostasis, SelfDonation f o) :=
+  ⟨ground_is_not_a_fourth_chooser, agape_is_self_donation⟩
 
 /-- **No person is the ground.** Hypostatic *identity* is not merely unproved but unstatable:
     `Entity.ofGround` and `Entity.ofSubject _` are distinct constructors, so `Entity.noConfusion`

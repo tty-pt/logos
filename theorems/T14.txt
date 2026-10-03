@@ -1,14 +1,16 @@
 T14 — RELAÇÃO ETERNA (o "Amar é escolhido e necessário", poema)
 
-Depende de: T12_directedPair (T12, sob ponte META AxTwoSubjects) + esse est agere
-(AxPersonStability é teorema). PROVEN↑ sob `{AxTwoSubjects, Means, Subject, Will, subjectWill}`.
+Depende de: `T14_eternalRelation_love_only (hLove : PluralityLovePrinciple)` — UMA hipótese
+(`PersonStabilityPrinciple` retirado, LOVE-3/S4). PROVEN↑ sob `{NEWSET}`.
 
 Verificado em: formal/Logos/Love.lean (T14_eternalRelation_conditional / C42, T14_world_conditional / C44,
 T14_square_conditional / C45, T14_content_conditional / C43), GAPMAP.md C42–C45, F5,
-DESIGN.md D13/D14b/D-C4. Pegada: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`.
+DESIGN.md D13/D14b/D-C4. Pegadas: C42/C44/C45 sem ponte substantiva
+(`{Means, NecessarySubjectKind, Subject, Will, subjectWill}`); C43 sob a ponte nova.
 
-O par de amantes decorre de T12 (que se apoia na ponte META `AxTwoSubjects`)
-e a sua persistência em cada mundo decorre da persistência das pessoas (AxPersonStability).
+O par de amantes decorre de T12 (que se apoia na ponte META `AxTwoNecessaryPersonalCentres`)
+e a sua persistência em cada mundo decorre da leitura rígida-mundo via C405
+(`necessaryKindSubject_is_necessary`); o amor mútuo é a hipótese `PluralityLovePrinciple`.
 Amor benevolente: `Loves s t` é definido como ajuda sem prejuízo
 (`Helps s t ∧ ¬ Harms s t`, GAPMAP C86); o prejuízo não tem realidade ontológica
 no fundamento (`Harms s t := False`), de modo que ajuda exclui prejuízo
@@ -17,8 +19,8 @@ no fundamento (`Harms s t := False`), de modo que ajuda exclui prejuízo
 Sob semântica hostil, o contramodelo `CountermodelPluralityWithoutLove`
 (em `formal/Logos/HostileSemantics.lean`) comprova que a mera existência de duas
 pessoas distintas não implica logicamente amor sem a estrutura relacional de benevolência.
-Com a ponte `AxTwoSubjects` e as definições analíticas de afeto/ajuda,
-`T14_eternalRelation` é provado no kernel com pegada `{AxTwoSubjects, Means, Subject}`.
+Com a ponte `AxTwoNecessaryPersonalCentres` e as definições analíticas de afeto/ajuda,
+`T14_eternalRelation_love_only` é provado no kernel com pegada `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`.
 sorryAx: 0.
 
 CONDICIONALIDADE (auditoria de axiomas, 2026-09-24 — Love.lean:11-23): todos os teoremas
@@ -27,7 +29,8 @@ adicionalmente a hipótese `PluralityLovePrinciple` (`Love.lean`, `def` nunca pr
 nenhum ponto — apenas passada como argumento). Um cabeçalho anterior afirmava
 "T14 é PROVEN (plurality-discharge, `AxTwoSubjects` retirado)"; a auditoria refuta essa
 afirmação — `#print axioms Logos.Love.T14_content_conditional` = `[Means, Subject,
-AxTwoSubjects]`. Ver MORAL.md §8c (Finding 1).
+AxTwoSubjects]` (auditoria de 2026-09-24; **actualização 2026-10-04, LOVE-3/S4:**
+hoje é `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}` — a condicionalidade mantém-se, a ponte mudou). Ver MORAL.md §8c (Finding 1).
 
 Enunciado (forma de base, com relata necessários):
 
@@ -49,9 +52,14 @@ Pela cláusula T do alias □ (Necessity), há ainda a imagem □(∃ par que se
 HONESTIDADE (§28/§29 — estatuto epistémico de T14):
 A relação é estrutural (Loves := Helps ∧ ¬Harms, benevolência mútua);
 a existência do par apoia-se honestamente na ponte metafísica de pluralidade
-`AxTwoSubjects` (pois uma agência isolada não implica pluralidade, conforme
+`AxTwoNecessaryPersonalCentres` (pois uma agência isolada não implica pluralidade, conforme
 provado pelo contramodelo `UnitPluralityCountermodel`), e a persistência
-em todos os mundos vem da estabilidade das pessoas (AxPersonStability).
+em todos os mundos vem da leitura rígida-mundo via C405 (`necessaryKindSubject_is_necessary`;
+`PersonStabilityPrinciple` retirado, LOVE-3/S4).
 A componente "escolhido" depende ainda de F1 (liberdade, DEFERRED).
+Nota de liberdade (lote LOVE-4 / C587): a existência de uma Pessoa Livre com
+livre-arbítrio é agora derivada a 0 axiomas META via
+`NoMeanerNoFalsity.a_genuine_free_person_exists` (C587), enquanto a necessidade
+e pluralidade do par apoiam-se na ponte `AxTwoNecessaryPersonalCentres` (C584).
 O passo do poema é assim preservado com clareza entre o que é dedução
 formal e o que são pontes metafísicas declaradas.

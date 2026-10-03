@@ -130,6 +130,13 @@ import Logos.BoundedMeaning
 -- field, and no common sort), so identification is by role instead. Two new axioms; distinctness
 -- is derived from the role assignment at zero cost.
 import Logos.TrinitarianSubjectBridge
+-- The single-person denial refuted at the chain's hinge (`Logos.SinglePersonDenial`, C579,
+-- `LOVE-2.md` D5): the ground is a personal necessary essence indwelt by every Person and no
+-- Person itself; a donation's terminus is the necessary ground, so the self-giving cannot depend
+-- on a contingent being and the contingency conclusion has no premise. Zero new axioms and no
+-- `AxAgapeEssence` on the refutation rows — the datum is priced on C575's own row and is not
+-- used to refute the objection that grants it.
+import Logos.SinglePersonDenial
 -- Semantic finitude (`SemanticFinitude`, Tag: VOCAB, registered in Logos.Stipulations as
 -- ◈ `semanticFinitude`): the per-subject meaning bound F15 named, consolidated and badged,
 -- with ten priced corollaries. A premise carried on each corollary, not a new axiom, so the
@@ -236,3 +243,7 @@ import Logos.EpistemicPersonalGround
 -- propositional `T`/`IsFalse` half (C556). A visibility batch, not a proof
 -- batch: C140 was already `{}`-substance. Zero axioms; register stays 35.
 import Logos.EpistemicNecessity
+-- The act datum's own polarity discharges the choice frontier (C565, C587):
+-- a genuine Free Person derived with zero META axioms from performative_act_datum
+-- and AxActPolarity via co-meaning and free will.
+import Logos.NoMeanerNoFalsity

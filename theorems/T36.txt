@@ -141,7 +141,7 @@ sujeito que signifique, sem certo/errado epistémico em lado nenhum. Contagens:
 *vocabulary-only* 287 → **290**; *axiom-free* fica em 60 (C560 é `{Means, Subject}`,
 vocabulário — a máquina teve razão: só pegada vazia é *axiom-free*).
 `F1bUncond` passou a `SUPERSEDED` (2026-09-30): C278 prova a existência **incondicional** de um
-sujeito livre a partir de `AxTwoSubjects`, e `freeSubject_exists` estende-a ao nome `FreeSubject` — a mesma
+sujeito livre a partir de `AxTwoNecessaryPersonalCentres` (C584), e `freeSubject_exists` estende-a ao nome `FreeSubject` — a mesma
 pegada, o mesmo preço `META`. A pergunta por um mundo povoado estava respondida desde C278; o que fica
 aberto são as Claims, não esta existência.
 

@@ -39,7 +39,7 @@ def UnitPlurality_refutes : String :=
   "A single act (one subject) cannot force a plurality of subjects: the unit model with `Person := True` satisfies act and personhood but has no second subject."
 
 def UnitPlurality_survives : String :=
-  "Plurality rests on `AxTwoSubjects` (the reality of right-and-wrong demands two subjects), not on the mere act. World-datum note: the model declares no world sort, so the datum is silent on it — but read with its one subject as of the contingent kind, it *is* a contingent world of one person, and therefore admissible given that the contingent world exists. The world-datum does not touch it; only the plurality bridge separates it from ours."
+  "Plurality rests on `AxTwoNecessaryPersonalCentres` (a necessary ground's freedom to self-give cannot depend on contingent subjects), not on the mere act. World-datum note: the model declares no world sort, so the datum is silent on it — but read with its one subject as of the contingent kind, it *is* a contingent world of one person, and therefore admissible given that the contingent world exists. The world-datum does not touch it; only the plurality bridge separates it from ours."
 
 -- CountermodelContentWithoutPerson / not_entails_content_person
 
@@ -87,6 +87,6 @@ def PluralityWithoutLove_refutes : String :=
   "Plurality of distinct persons does not entail love: `Bool` with `Person := True` and `Loves := False`."
 
 def PluralityWithoutLove_survives : String :=
-  "Love follows in Γ from the definitions plus `AxTwoSubjects` — substantive relational bridges, not a logical consequence of plurality."
+  "Love follows in Γ from the definitions plus `AxTwoNecessaryPersonalCentres` — substantive relational bridges, not a logical consequence of plurality."
 
 end Logos.CountermodelMeanings

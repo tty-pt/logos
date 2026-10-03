@@ -147,3 +147,11 @@
 * [Technical Appendix: Kernel Audit, Consistency & Code Annex](investigations/kernel-audit.md) — Complete kernel audit, transitive axiom footprints, dependency ledger, and consistency checks.
 * [Formal Dependency Graph (JSON)](formal/depgraph.json) / [(DOT)](formal/depgraph.dot) — LeanDepViz transitive kernel dependency DAG.
 * [Theorem Ledger (GAPMAP)](formal/GAPMAP.md) — Formal correspondence mapping across formal and prose corpora.
+
+
+## Demoted: free-signature shape lemmas (C559 discipline)
+
+These are machine-checked and they are **not** countermodels of anything Γ asserts. Each is a `{}` separation proved over a **locally quantified fresh signature**, and each grants every predicate it names, so each denies nothing in Γ — no ground, no Person, no gift appears in any of them. Read them for the shape claim only: *necessary nature does not entail necessary act* is a true proposition about an arbitrary signature.
+
+* **`Logos.EssenceActCollapse.necessary_nature_not_entails_necessary_act`** — necessary nature does not entail necessary act. ✅ **PROVEN** · 0 substantive axioms · `{}` · [EssenceActCollapse.lean#necessary_nature_not_entails_necessary_act](formal/Logos/EssenceActCollapse.lean#L97) {} Demoted from the reading path 2026-10-03 (`LOVE-2.md` D4).
+* **`Logos.EssenceActCollapse.modal_collapse_action_theorem`** — the modal-collapse form of the same separation. ✅ **PROVEN** · 0 substantive axioms · `{}` · [EssenceActCollapse.lean#modal_collapse_action_theorem](formal/Logos/EssenceActCollapse.lean#L261) {} Demoted from the reading path 2026-10-03 (`LOVE-2.md` D4).

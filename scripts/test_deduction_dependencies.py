@@ -134,9 +134,11 @@ def test_correspondence(decls: dict, node_map: dict, graph: dict, sections: list
     assert "FreeWill" in glance_text, (
         "'The ten steps at a glance' must visibly feature the minimal-assumption Free Will milestone"
     )
-    # The ASCII flowchart (with AxTwoSubjects and the ⇏ frontiers) is ledger
+    # The ASCII flowchart (with the plurality bridge and the ⇏ frontiers) is ledger
     # material; the ten-step table carries the same ten steps derived.
-    assert "AxTwoSubjects" in ledger_text, "ledger chart must feature the AxTwoSubjects bridge"
+    assert "AxTwoNecessaryPersonalCentres" in ledger_text, (
+        "ledger chart must feature the plurality bridge"
+    )
     assert "preceding_theory ⇏ trinity" in ledger_text, "ledger must carry the theological-frontier boundaries"
 
     assert "## Level 0" not in text and "## Level 1" not in text, (
@@ -213,7 +215,7 @@ def test_correspondence(decls: dict, node_map: dict, graph: dict, sections: list
     sec11 = text.partition("### Necessity, and Exactly What It Costs")[2].partition("### ")[0]
     assert "freeWill_exists" in sec11 and "freeSubject_exists" in sec11, (
         "the necessity section must price both unconditional-existence routes")
-    assert "AXIOMATIC (AxTwoSubjects)" in sec11, (
+    assert "AXIOMATIC (AxTwoNecessaryPersonalCentres)" in sec11, (
         "§11 must display the one META bridge that prices unconditional free-will/free-subject existence"
     )
     assert "indubitable_normative_free_will" not in sec11, (
@@ -559,7 +561,7 @@ def test_readability_invariants():
                     "Euthyphro / Voluntarism", "Physicalist / Atomic Ground"):
         assert _pillar in ledger_text, f"the ledger must carry the pillar '{_pillar}'"
     # …and the cremation on the reading path must cover the same attacks. The
-    # Cremation is no longer a numbered `## 13.` section: it is Part III, the R1–R16
+    # Cremation is no longer a numbered `## 13.` section: it is Part III, the R1–R21
     # refutations (CLEARER.md §4), where R5/R8/R13/R14 answer the atomic,
     # voluntarist, monotheist and physicalist attacks.
     _cremation = text.partition("## Part III")[2].partition("## Part IV")[0]
@@ -1023,12 +1025,12 @@ def test_sensitivity(decls: dict, node_map: dict, graph: dict, sections: list) -
     
     # 3. Mutate an axiom footprint in memory
     orig_audit = list(bd._AUDIT.get(target, []))
-    bd._AUDIT[target] = orig_audit + ["Logos.Value.AxTwoSubjects"]
+    bd._AUDIT[target] = orig_audit + ["Logos.TwoNecessaryPersonalCentres.AxTwoNecessaryPersonalCentres"]
     mutated_secs3 = discover_deduction_sections(sections, decls, node_map, graph, {})
     mutated_output3 = _rendered_surface(mutated_secs3, decls, node_map)
     bd._AUDIT[target] = orig_audit
     assert mutated_output3 != baseline, "Mutating axiom footprint did not alter generated deduction output!"
-    assert "AxTwoSubjects" in mutated_output3
+    assert "AxTwoNecessaryPersonalCentres" in mutated_output3
     print("  ✓ Axiom footprint mutation test passed: introducing new axiom dynamically priced local bridge.")
 
 

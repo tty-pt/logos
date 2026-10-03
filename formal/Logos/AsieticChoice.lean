@@ -48,7 +48,7 @@ bare universal form is not folded in silently.
 
 `Person.lean:56` sets `DominionOverActs s := FreeWill s`, and `ThomisticPersonCore` conjoins it, so
 `Person s → FreeWill s` by projection. The free-will existence content was therefore already
-carried by the pre-existing META axiom `AxTwoSubjects`. `trueChoice_exists` is a genuine
+carried by the pre-existing META axiom `AxTwoNecessaryPersonalCentres` (C584). `trueChoice_exists` is a genuine
 unconditional derivation, but it is a *definitional* one, and it is disclosed as such rather than
 presented as a discovery about the world.
 
@@ -586,9 +586,9 @@ theorem genuineNormativity_implies_trueChoice {s : Subject} {p q : Prop}
     `TrueChoice` by pure logic in Section 2.
 
     Honest disclosure: the free-will existence content was already carried by the pre-existing
-    META axiom `AxTwoSubjects`, because `Person` bundles `FreeWill`. This is a genuine derivation
+    META axiom `AxTwoNecessaryPersonalCentres`, because `Person` bundles `FreeWill`. This is a genuine derivation
     and a definitional one, and it is presented as both.
-    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
 theorem trueChoice_exists : ∃ s : Subject, ∃ p q : Prop, TrueChoice s p q := by
   obtain ⟨s, hPerson⟩ := T5_personExists_from_plurality
   obtain ⟨p, q, hChooses⟩ := hPerson.2.2
@@ -597,7 +597,7 @@ theorem trueChoice_exists : ∃ s : Subject, ∃ p q : Prop, TrueChoice s p q :=
 /-- A free subject exists, on the same route and for the same reason: `Person → FreeWill` is
     definitional and plurality is already paid for. Recorded so that the existence half is
     legible without unfolding `TrueChoice`.
-    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
 theorem freeWill_exists : ∃ s : Subject, FreeWill s := by
   obtain ⟨s, hPerson⟩ := T5_personExists_from_plurality
   exact ⟨s, hPerson.2.2⟩
@@ -608,19 +608,19 @@ theorem freeWill_exists : ∃ s : Subject, FreeWill s := by
     will does, at exactly the same price.
 
     Registered 2026-09-30 because the asymmetry it repairs was a surface defect, not a
-    logical one. The kernel had unconditional `freeWill_exists` (C278, `{AxTwoSubjects}`)
+    logical one. The kernel had unconditional `freeWill_exists` (C278, `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`)
     but only act-routed `Logos.Choice.freeSubject_exists` (`{AxIntentionalChoice}`), so the
     generated surfaces priced the Free Subject dearer than free will for the identical
     predicate. A price attaches to the *route* that reaches a predicate, never to a name;
     after this corollary both names carry the same footprint by construction.
 
-    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
 theorem freeSubject_exists : ∃ s : Subject, FreeSubject s := by
   obtain ⟨s, hFW⟩ := freeWill_exists
   exact ⟨s, hFW⟩
 
 /-- Asiety obtains: true freedom is exhibited somewhere, by definition out of `trueChoice_exists`.
-    Footprint: `{AxTwoSubjects, Means, Subject, Will, subjectWill}`. -/
+    Footprint: `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`. -/
 theorem an_asietic_entity_exists : ∃ e : Entity, Asiety e := by
   obtain ⟨s, p, q, hTC⟩ := trueChoice_exists
   exact ⟨EntityOf s, s, p, q, rfl, hTC⟩
@@ -688,7 +688,7 @@ theorem ground_is_not_a_true_chooser : ¬ ∃ s : Subject, EntityOf s = Entity.o
 /-- ★ The module in one line. Asiety is true freedom, weak choice implies strong choice, and true
     choice follows — with no axiom introduced, the co-signification of the rejected horn coming
     from `AxJudicativeBipolarity` as `base.txt:460` already recorded.
-    Footprint: `{AxJudicativeBipolarity, AxTwoSubjects, Initiates, Means, State, Subject, Will, subjectWill}`. -/
+    Footprint: `{AxJudicativeBipolarity, AxTwoNecessaryPersonalCentres, Initiates, Means, NecessarySubjectKind, State, Subject, Will, subjectWill}`. -/
 theorem asietic_summary :
     (∀ (s : Subject) (p : Prop), ChoiceField s p (¬ p) → ClaimsCorrect s p →
         Chooses s p (¬ p))
