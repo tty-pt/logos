@@ -513,6 +513,17 @@ Assume ∃ s, p, ClaimsNormativeCorrectness(s, p):
 
 </details>
 
+<details>
+<summary>Supporting Infrastructure — 1 auxiliary theorem(s) beneath this step</summary>
+
+TEOREMA PÚBLICO: SE ESTA PROVA EXISTE, EXISTE SUJEITO LIVRE.
+
+    ProofExists.{u_s, u_w, u_o} C → ∃ s, FinalNonCircularClosure.FreeSubject(C) s
+
+✅ · [CompleteLibertarianFreedomArgument.lean#proof_exists_implies_existence_of_free_subject](formal/Logos/CompleteLibertarianFreedomArgument.lean#L2426)
+
+</details>
+
 ## §10 — The Chain, Composed — Both Directions
 
 C561 `no_subject_who_means_no_epistemic_right_wrong`: without a subject who means, correctness obtains nowhere and incorrectness obtains nowhere. And C557 `epistemic_order_makes_the_act_datum_necessary`: the order **entails** `∃ s p, Act s p` at `{Initiates, Means, State, Subject}`. That second one is what stops the performative axiom from being mistaken for the price of this direction: `performative_act_datum` (C454, the single `Tag: TRANS` axiom of Γ) pays for the *unconditional* `∃ s, Act s p`, which is a different question. The GAPMAP row `F1bUncond` used to claim the unconditional existence of a free subject was still BLOCKED on `rejectedHornCoMeant` — a lemma that belongs to F11 and never blocked it; C278 had already proved it. The row is now marked SUPERSEDED.

@@ -2866,6 +2866,521 @@
  "Logos.CognitiveToAgencyFrontier.reductio_necessarily_asymmetric": [],
  "Logos.CognitiveToAgencyFrontier.reductio_proves_settlement_1": [],
  "Logos.CognitiveToAgencyFrontier.settlement_1_does_not_imply_settlement_3": [],
+ "Logos.CompleteLibertarianFreedomArgument.DemonstrativeProofOccurrence": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ConstitutiveActDetermination": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ContingentDetermination": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ContingentSubject": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ContingentWorld": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence.casesOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence.ctorIdx": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence.instanceOfJudgment": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence.mk.inj": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence.mk.injEq": [
+  "propext"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence.mk.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence.mk.sizeOf_spec": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence.noConfusionType": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence.recOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationOriginatedBySubject": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationReceivedFromPriorState": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.Determines": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.Node": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.Prior": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.casesOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.ctorIdx": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.determinationRespectsPriority": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.mk.inj": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.mk.injEq": [
+  "propext"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.mk.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.mk.sizeOf_spec": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.noConfusionType": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.priorWellFounded": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.recOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminesAncestrally.below.casesOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminesAncestrally.brecOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminesAncestrally.casesOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminesAncestrally.recOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ExternalSourceOfJudgment": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.FreeSubject": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.FreeWillAt": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.FullyInternallyDetermined": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentAlternativeSensitive": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.IsActOf": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.Outcome": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.OutcomeOf": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.act_ancestral_determination_is_agential": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.casesOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.ctorIdx": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.determination_exhaustive": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.determines_propagates": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.external_node_fixed_by_prior_state": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.judgmentActDeterminesVerdict": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.judgmentActIsActOf": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.judgmentActNode": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.mk.inj": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.mk.injEq": [
+  "propext"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.mk.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.mk.sizeOf_spec": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.noConfusionType": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.recOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.toDeterminationSystem": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.verdictNode": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.verdict_tracks": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.verdict_tracks_alternative": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.LibertarianFreeChoiceAt": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.MechanicalDeterminationChain.casesOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.MechanicalDeterminationChain.ctorIdx": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.MechanicalDeterminationChain.isForced": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.MechanicalDeterminationChain.mk.inj": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.MechanicalDeterminationChain.mk.injEq": [
+  "propext"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.MechanicalDeterminationChain.mk.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.MechanicalDeterminationChain.mk.sizeOf_spec": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.MechanicalDeterminationChain.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.MechanicalDeterminationChain.noConfusionType": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.MechanicalDeterminationChain.recOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.MechanicalDeterminationChain.toDeterminationSystem": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.MechanicalDeterminationChain.verdictNode": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.MechanicallyForced": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.NecessarySubject": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.NormativelySensitive": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofExists": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.casesOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.chain": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.ctorIdx": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.mk.inj": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.mk.injEq": [
+  "propext"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.mk.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.mk.sizeOf_spec": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.noConfusionType": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.proposition": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.recOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.subject": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.SelfOrigin": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.Accessible": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.ApprehendsAt": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.AssentsAt": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.MeansAt": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.ReasonSupports": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.SameCompletePriorState": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.ThinkingMindAt": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.WithholdsAt": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.World": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.actualWorld": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.casesOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.ctorIdx": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.exclusive": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.mk.inj": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.mk.injEq": [
+  "propext"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.mk.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.mk.sizeOf_spec": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.noConfusionType": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.recOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.SubjectSourceOfJudgment": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoNodes.act.elim": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoNodes.act.sizeOf_spec": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoNodes.casesOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoNodes.ctorElim": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoNodes.ctorElimType": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoNodes.ctorIdx": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoNodes.ext.elim": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoNodes.ext.sizeOf_spec": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoNodes.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoNodes.noConfusionType": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoNodes.ofNat": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoNodes.ofNat_ctorIdx": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoNodes.recOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoWorlds.actual.elim": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoWorlds.actual.sizeOf_spec": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoWorlds.alternative.elim": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoWorlds.alternative.sizeOf_spec": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoWorlds.casesOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoWorlds.ctorElim": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoWorlds.ctorElimType": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoWorlds.ctorIdx": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoWorlds.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoWorlds.noConfusionType": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoWorlds.ofNat": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoWorlds.ofNat_ctorIdx": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.TwoWorlds.recOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UltimateInternalSource": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UltimateSourceOfJudgmentVerdict": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.IsActOf": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.Outcome": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.OutcomeOf": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.casesOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.ctorIdx": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.determination_exhaustive": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.determines_propagates": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.external_node_fixed_by_prior_state": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.judgmentActDeterminesVerdict": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.judgmentActIsActOf": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.judgmentActNode": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.mk.inj": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.mk.injEq": [
+  "propext"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.mk.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.mk.sizeOf_spec": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.noConfusion": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.noConfusionType": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.recOn": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.toDeterminationSystem": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.verdictNode": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.verdict_tracks": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UnrestrictedJudgmentDeterminationChain.verdict_tracks_alternative": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.accessible_same_past_alternative_exists": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.agential_alternative_has_subjective_source": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.agential_alternative_is_not_detached_luck": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.agential_constitutive_source_dilemma": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.alternative_changes_verdict": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.antecedent_prior_state_does_not_entail_act_received_determination": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.candidate_source_constitutive_dilemma": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.complete_libertarian_freedom_argument": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.complete_prior_state_subsumes_multiple_antecedent_factors": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.constitutive_act_determination_incompatible_with_mechanical_forcing": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.constitutive_act_determination_source_is_act_of_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.constitutive_chain_entails_free_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.contingent_determination_constructs_positive_libertarian_choice": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.contingent_determination_yields_normative_sensitivity": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.demonstration_occurrence_implies_existence_of_free_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.demonstration_occurrence_yields_proof_instance": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.determination_cannot_be_self_directed": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.determination_propagates_outcome": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.determines_ancestrally_has_direct_predecessor": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.determines_ancestrally_trans": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.epistemic_or_unforced_indeterminacy_fails_libertarian_choice": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.exhaustive_determination_requires_determines_or_heteronomy": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.exists_ultimate_internal_source": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.exists_ultimate_source": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.exists_ultimate_source_of_judgment_act": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.external_cause_excluded_from_constitutive_ancestry": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.external_node_determination_received_from_prior_state": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.external_source_fixed_by_prior_state": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.external_source_implies_mechanically_forced": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.external_source_implies_verdict_invariant": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.external_source_implies_verdict_outcome_invariant": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.external_source_is_external": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.free_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.free_will": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.freedom_is_not_merely_unforced": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.fully_internally_determined_is_impossible": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.hostile_model_with_fixed_agential_ultimate_source_is_incoherent": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.indeterminacy_without_polar_alternative_fails_libertarian_choice": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.instDecidableEqTwoNodes": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.instDecidableEqTwoWorlds": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.instReprTwoNodes": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.instReprTwoNodes.repr": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.instReprTwoWorlds": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.instReprTwoWorlds.repr": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.judgment_act_source_exhaustion": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.judgment_determination_chain_satisfies_constitutive_act_determination": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.libertarian_free_choice": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.mechanical_chain_cannot_self_ground": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.mechanical_chain_has_ultimate_internal_source": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.mechanical_judgment_chain_with_external_ultimate_source": [
+  "propext"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.mere_indeterminism_insufficient_for_libertarian_freedom": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.necessary_subject_and_contingent_determination_coexist": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.node_has_ancestral_ultimate_source": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.non_mechanical_excludes_external_judgment_source": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.non_mechanical_yields_libertarian_freedom": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.non_mechanical_yields_subject_source_of_judgment": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.non_received_determination_excludes_mechanical_forcing": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.normative_sensitivity_implies_libertarian_choice_direct": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.not_all_internally_determined": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.not_received_determination_iff_exists_divergent_accessible_world": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ontological_determination_yields_libertarian_freedom": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.originated_contingent_determination_yields_free_will": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.originated_contingent_determination_yields_libertarian_choice": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.performative_proof_instantiates_libertarian_freedom": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.priorTwoNodes": [
+  "propext"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.priorTwoNodes_wf": [
+  "propext"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.proof_exists_implies_existence_of_free_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.proof_instance_implies_existence_of_free_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.proof_instance_implies_free_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.proof_instance_nonempty_implies_existence_of_free_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.reaches_judgment_act_implies_reaches_verdict": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.reaches_propagates_outcome": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.reasons_determination_dilemma": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.received_determination_external_branch_contradicts_agential_ancestry": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.received_determination_internal_branch_contradicts_ultimate_source": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.self_origin_derived": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.subject_source_yields_contingent_determination_direct": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.subject_source_yields_not_mechanically_forced": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.toy_model_consistency_witness": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ultimate_internal_act_source_is_not_received_from_prior_state": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ultimate_source_cannot_be_exhaustively_fixed_by_prior_state": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ultimate_source_is_act_of_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ultimate_source_is_agential": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ultimate_source_is_not_received_from_prior_state": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ultimate_source_not_received_or_external": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ultimate_source_reaches_judgment_act": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.unforced_alone_does_not_provide_libertarian_alternative": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.well_foundedness": [],
+ "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.without_determination_exhaustive_prior_fixing_escapes_chain": [],
+ "Logos.CompleteLibertarianFreedomArgument.ProofExists": [],
+ "Logos.CompleteLibertarianFreedomArgument.ProofInstance": [],
+ "Logos.CompleteLibertarianFreedomArgument.agential_alternative_has_subjective_source": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.agential_alternative_is_not_detached_luck": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.agential_constitutive_source_dilemma": [],
+ "Logos.CompleteLibertarianFreedomArgument.antecedent_prior_state_does_not_entail_act_received_determination": [],
+ "Logos.CompleteLibertarianFreedomArgument.candidate_source_constitutive_dilemma": [],
+ "Logos.CompleteLibertarianFreedomArgument.complete_libertarian_freedom_argument": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.complete_prior_state_subsumes_multiple_antecedent_factors": [],
+ "Logos.CompleteLibertarianFreedomArgument.constitutive_act_determination_incompatible_with_mechanical_forcing": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.constitutive_chain_entails_free_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.contingent_determination_constructs_positive_libertarian_choice": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.demonstration_occurrence_implies_existence_of_free_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.demonstration_occurrence_yields_proof_instance": [],
+ "Logos.CompleteLibertarianFreedomArgument.epistemic_or_unforced_indeterminacy_fails_libertarian_choice": [],
+ "Logos.CompleteLibertarianFreedomArgument.exhaustive_determination_requires_determines_or_heteronomy": [],
+ "Logos.CompleteLibertarianFreedomArgument.external_cause_excluded_from_constitutive_ancestry": [],
+ "Logos.CompleteLibertarianFreedomArgument.hostile_model_with_fixed_agential_ultimate_source_is_incoherent": [],
+ "Logos.CompleteLibertarianFreedomArgument.indeterminacy_without_polar_alternative_fails_libertarian_choice": [],
+ "Logos.CompleteLibertarianFreedomArgument.judgment_determination_chain_satisfies_constitutive_act_determination": [],
+ "Logos.CompleteLibertarianFreedomArgument.mere_indeterminism_insufficient_for_libertarian_freedom": [],
+ "Logos.CompleteLibertarianFreedomArgument.non_mechanical_yields_libertarian_freedom": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.not_received_determination_iff_exists_divergent_accessible_world": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.ontological_determination_yields_libertarian_freedom": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.performative_proof_instantiates_libertarian_freedom": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.proof_exists_implies_existence_of_free_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.proof_instance_implies_existence_of_free_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.proof_instance_implies_free_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.proof_instance_nonempty_implies_existence_of_free_subject": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.reasons_determination_dilemma": [],
+ "Logos.CompleteLibertarianFreedomArgument.toy_model_consistency_witness": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "Logos.CompleteLibertarianFreedomArgument.ultimate_source_cannot_be_exhaustively_fixed_by_prior_state": [],
+ "Logos.CompleteLibertarianFreedomArgument.unforced_alone_does_not_provide_libertarian_alternative": [],
+ "Logos.CompleteLibertarianFreedomArgument.without_determination_exhaustive_prior_fixing_escapes_chain": [],
  "Logos.ConditionalTheology.CreationRecord.casesOn": [],
  "Logos.ConditionalTheology.CreationRecord.contingent_created": [],
  "Logos.ConditionalTheology.CreationRecord.created": [],

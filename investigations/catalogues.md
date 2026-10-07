@@ -7,8 +7,12 @@
 ### Retorsions
 
 <details>
-<summary>Retorsion catalogue — 100 machine-checked retorsion theorems (click to expand)</summary>
+<summary>Retorsion catalogue — 104 machine-checked retorsion theorems (click to expand)</summary>
 
+* **Complete_Retorsion:** `complete_retorsion` (`formal/Logos/DefinitionalMeaningRetorsion.lean`) — Complete result:
+* **Meaning_Cannot_Not_Exist:** `meaning_cannot_not_exist` (`formal/Logos/DefinitionalMeaningRetorsion.lean`) — The retorsive conclusion in existential form:
+* **Retorsion:** `retorsion` (`formal/Logos/DefinitionalMeaningRetorsion.lean`) — The denial of meaning defeats itself whenever it is both meaningful and assumed true.
+* **Retorsion_Yields_Free_Subject:** `retorsion_yields_free_subject` (`formal/Logos/DefinitionalMeaningRetorsion.lean`) — A subject who meaningfully entertains the denial of meaning is a free subject.
 * **Performative_Boundary_Theorem:** `performative_boundary_theorem` (`formal/Logos/A14SemanticAudit.lean`) — PERFORMATIVE BOUNDARY THEOREM: Performative retorsion forces an intentional subject (Considers, Assumes, Derives, Affirms, Rejects) and asymmetric cognitive resolution (SettlementChoice), but strictly stops before executive aiming (AimsAt), action execution
 * **Noact_Conditional_Selfrefutes:** `noAct_conditional_selfRefutes` (`formal/Logos/Agency.lean`) — Asserting NoAct refutes itself under a weak assertion ONLY given the bridge from weak act to strong Act.
 * **Nocogito_Selfrefutes:** `noCogito_selfRefutes` (`formal/Logos/Agency.lean`) — Step 4 (C58 strong shortcut): Retorsion — asserting that no act occurs refutes itself.
@@ -145,6 +149,8 @@
 
 * [Issue K — Step 1: the meaning-coherence audit of the two countermodels](investigations/issue-k-meaning-coherence-audit.md) — Complete kernel audit, transitive axiom footprints, dependency ledger, and consistency checks.
 * [Technical Appendix: Kernel Audit, Consistency & Code Annex](investigations/kernel-audit.md) — Complete kernel audit, transitive axiom footprints, dependency ledger, and consistency checks.
+* [Epistemic and Architectural Audit: Definitional Meaning Retorsion vs. Γ's Transcendental Routes to a Free Subject](investigations/meaning_retorsion_audit.md) — Complete kernel audit, transitive axiom footprints, dependency ledger, and consistency checks.
+* [Auditoria Formal da Fronteira Performativa: A Lacuna entre a Existência da Prova e a Autonomia Causal do Juízo](investigations/performative_gap_audit.md) — Complete kernel audit, transitive axiom footprints, dependency ledger, and consistency checks.
 * [Formal Dependency Graph (JSON)](formal/depgraph.json) / [(DOT)](formal/depgraph.dot) — LeanDepViz transitive kernel dependency DAG.
 * [Theorem Ledger (GAPMAP)](formal/GAPMAP.md) — Formal correspondence mapping across formal and prose corpora.
 

@@ -421,7 +421,7 @@ HEADLINE. The epistemic right/wrong has a grounding of a personal kind, at its o
 <a id="step-9"></a>
 ### Step 9 — The Fact
 
-C553 pointwise-conditional, C555 existential, C556 propositional (`{}`). Three strengths, one sentence: the order entails a free being for which meaning can mean.
+C553 conditional, C555 existential, C556 propositional. If this proof exists, a Free Subject exists: `proof_exists_implies_existence_of_free_subject` derives `∃ s, FreeSubject s` from `ProofExists` as an anonymous existence claim, without personal attribution or claims about all humans.
 
 DEPENDS ON   step 8: THE FACT — the composed statement
 GIVES        contrapositives composed [C557 entailment, C561 retraction], taken up by step 10
@@ -1945,7 +1945,7 @@ decision: `scripts/census_stipulated_defs.py`.
 |---|---|
 | **438 affirmative claims derived** out of **581** ledger claims — 341 ✅ kernel-verified, 97 ⚠️ derived under a substantive (`SEM`/`META`) axiom, each ⚠️ row naming the bridge it rests on. | **14 blocked** ✖ — named individually |
 | **61 countermodel boundaries** 🧱 — a hostile model in which the claim *fails*. These are won results about the limit of the theory, not gaps. | &nbsp;&nbsp;· **C228** — any entity that grounds Right/Wrong is a Personal Entity |
-| **981 of 1871 theorems in `formal/Logos/` rest on no Γ axiom at all** (52%) — counted from `formal/axiom_audit.json`, not claimed. | &nbsp;&nbsp;· **C462** — BLOCKED, with no declaration, and deliberately so: the ground does not initiate is not refutable in Gamma and is not evidence of non-agency either |
+| **1095 of 1985 theorems in `formal/Logos/` rest on no Γ axiom at all** (55%) — counted from `formal/axiom_audit.json`, not claimed. | &nbsp;&nbsp;· **C462** — BLOCKED, with no declaration, and deliberately so: the ground does not initiate is not refutable in Gamma and is not evidence of non-agency either |
 | **The whole price is 39 declared axioms**: 18 are `VOCAB` (the vocabulary the statements need in order to be sayable) and 21 are substantive. Only the 21 are philosophical commitments; the rest are the theory's definitions of its own words, which is a different thing from a premise. | &nbsp;&nbsp;· **C503** — A love-lane step for deriving the Good from a second person is BLOCKED, with no declaration (lote OTHER, 2026-09-29; plan OTHER.md): the step 'the… |
 | **10 attribute corollaries became unconditional theorems** (C389–C398) — they were conditional on a `def` until F15 was declared, so this is a *strengthening*: fewer hidden premises, same conclusions. | &nbsp;&nbsp;· **C580** — The Subject/DivineHypostasis correspondence is BLOCKED, with no declaration (AMOR/2 batch, 2026-10-03; LOVE-2.md D6) |
 |  | &nbsp;&nbsp;· **C73** — Plurality without bridges is blocked: unit countermodel settles that 1 act does not entail plurality; requires AxTwoNecessaryPersonalCentres |
@@ -1989,6 +1989,8 @@ Four qualifications, stated rather than hidden:
 2. **The 39 declared axioms are inputs, not wins.** Counting them as results would be the same error as counting a hypothesis as a proof. They are listed so the reader can price Γ exactly, and `VOCAB` is separated from `SEM`/`META` because only the latter are commitments.
 3. **A 🧱 is a win about a boundary, not about the claim.** Γ building a model in which monotheism fails is a real theorem — and a theorem *against* monotheism. The columns keep those apart on purpose.
 4. **The 15 retired routes are counted as neither won nor open.** Their ledger notes say the step was destroyed under hostile semantics; that is a settled negative. Filing them under "still open" would overstate the debt, and filing them as won would overstate the theory, so they get their own line.
+
+<sub>Declaration count excludes 11 parsed names with no `#print axioms` footprint; they are `parse_lean_sources` artefacts and are excluded from the denominator rather than scored axiom-free.</sub>
 
 <a id="sec-where-the-rest-of-the-ledger-lives"></a>
 ## Where the Rest of the Ledger Lives

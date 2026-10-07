@@ -84,10 +84,20 @@ CANONICAL_FREEDOM_THEOREMS = {
     "complete_libertarian_freedom_argument",
     "performative_proof_instantiates_libertarian_freedom",
     "proof_instance_implies_existence_of_free_subject",
+    "proof_instance_implies_free_subject",
     "proof_instance_nonempty_implies_existence_of_free_subject",
     "demonstration_occurrence_implies_existence_of_free_subject",
     "proof_exists_implies_existence_of_free_subject",
     "freedom_is_not_merely_unforced",
+    "epistemic_or_unforced_indeterminacy_fails_libertarian_choice",
+    "indeterminacy_without_polar_alternative_fails_libertarian_choice",
+    "unforced_alone_does_not_provide_libertarian_alternative",
+    "mere_indeterminism_insufficient_for_libertarian_freedom",
+    "contingent_determination_constructs_positive_libertarian_choice",
+    "constitutive_chain_entails_free_subject",
+    "libertarian_free_choice",
+    "free_will",
+    "free_subject",
     "toy_model_consistency_witness",
 }
 
@@ -102,12 +112,22 @@ PUBLIC_WRAPPERS = {
     "complete_libertarian_freedom_argument",
     "performative_proof_instantiates_libertarian_freedom",
     "proof_instance_implies_existence_of_free_subject",
+    "proof_instance_implies_free_subject",
     "proof_instance_nonempty_implies_existence_of_free_subject",
     "demonstration_occurrence_implies_existence_of_free_subject",
     "proof_exists_implies_existence_of_free_subject",
+    "epistemic_or_unforced_indeterminacy_fails_libertarian_choice",
+    "indeterminacy_without_polar_alternative_fails_libertarian_choice",
+    "unforced_alone_does_not_provide_libertarian_alternative",
+    "mere_indeterminism_insufficient_for_libertarian_freedom",
+    "contingent_determination_constructs_positive_libertarian_choice",
+    "constitutive_chain_entails_free_subject",
+    "libertarian_free_choice",
+    "free_will",
+    "free_subject",
     "toy_model_consistency_witness",
 }
-FNC_PREFIX = "CompleteLibertarianFreedomArgument.FinalNonCircularClosure"
+FNC_PREFIX = "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure"
 
 # The legacy circular theorems that were deleted. Asserting their
 # absence is the point: a reintroduction is the regression.

@@ -246,7 +246,7 @@
       "formula": "ClaimsNormativeCorrectness s p → (∃ w, w = subjectWill s) ∧ FreeWill s ∧ FreeSubject s ∧ Person s ∧ Means s (Correct s p) ∧ Means s (Incorrect s p)",
       "explanation": "The whole deduction in one sentence, in three formally distinct strengths: pointwise-conditional, existential, and propositional.",
       "summary": "C553, in three strengths, and the difference between them is the difference between honesty and overclaim. **Pointwise, conditional** (C553): given the epistemic stance at `s`, the subject is num individuated (`∃ w, w = subjectWill s`), free (`FreeWill`), free as a *subject* (`FreeSubject` — the same predicate, `FreeSubject := FreeWill`), a person, and the meaner of both poles. **Existential** (C555): the order obtains somewhere, so a free being obtains somewhere. **Propositional** (C556, footprint `{}`): in every model of the signature, some subject is free and some content is meant — this last one discharges `order_needs_a_meaning_being` and is the form in which the order is a premise rather than a conclusion. All three are 0 substantive axioms; the price is `will_individuation` plus the stance.",
-      "summary_short": "C553 pointwise-conditional, C555 existential, C556 propositional (`{}`). Three strengths, one sentence: the order entails a free being for which meaning can mean.",
+      "summary_short": "C553 conditional, C555 existential, C556 propositional. If this proof exists, a Free Subject exists: `proof_exists_implies_existence_of_free_subject` derives `∃ s, FreeSubject s` from `ProofExists` as an anonymous existence claim, without personal attribution or claims about all humans.",
       "pushback": "\"A conditional on a stance you inserted is not a conclusion.\"",
       "pushback_short": "\"A conditional on an inserted stance is not a conclusion.\"",
       "reply": "Then use C556, which has no stance: in every model of the signature some subject is free and some content is meant. And the unconditional existence statement is §11's third row — priced on one META bridge, which is where a price belongs: on the route, named, never hidden in a predicate.",
@@ -257,6 +257,9 @@
         "epistemic_right_wrong_requires_a_free_being_for_which_meaning_can_mean",
         "epistemic_normativity_somewhere_yields_a_free_being",
         "epistemic_order_requires_a_free_meaning_being"
+      ],
+      "supporting_targets": [
+        "CompleteLibertarianFreedomArgument.proof_exists_implies_existence_of_free_subject"
       ],
       "disclosure": "**0 substantive axioms.** Existence *from Γ's primitives alone* is §11's third row, priced on one META bridge (`AxTwoSubjects`).",
       "investigation_link": "investigations/grounding.md"

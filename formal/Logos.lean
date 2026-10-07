@@ -247,3 +247,8 @@ import Logos.EpistemicNecessity
 -- a genuine Free Person derived with zero META axioms from performative_act_datum
 -- and AxActPolarity via co-meaning and free will.
 import Logos.NoMeanerNoFalsity
+-- Complete libertarian freedom argument: the direct ontological derivation of
+-- libertarian free choice, free will, and the Free Subject from the well-founded
+-- constitutive determination chain of judgment, plus the performative-existential
+-- theorem: if this proof exists, a Free Subject exists.
+import Logos.CompleteLibertarianFreedomArgument
