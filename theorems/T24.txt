@@ -86,7 +86,7 @@ pessoa`: a unicidade **deixa a contagem de pessoas indeterminada**. Dela **não*
 mônada unitário seja falso, e em particular **não** se segue que o monoteísmo (um só Deus) esteja
 morto — o monoteísmo é C320, e está provado. O que permanece em aberto é a *contagem de pessoas*
 desse só Deus; o dado positivo plural é o axioma META declarado `AxAgapeEssence` (C504) → C510,
-e a personalidade do solo é C228 (BLOCKED), que é **a montante** desta pergunta.
+e a personalidade do solo está confirmada em duas âncoras (C228 e PersonalGround em C590), restando aberta a contagem de Pessoas.
 
 C213 — Transcendência contra o colapso panteísta:
 
@@ -269,3 +269,17 @@ verdadeiro é **39** e **6 SEM**. `Logos/AsieticChoice.lean:19` é a linha de pr
 dentro de um comentário `/- -/`, e o analisador do gate contava-a como um axioma chamado `of`,
 herdando `SEM` do docstring anterior. Confirmado por três fontes independentes. O movimento de S5
 é portanto **38 → 39**, não 39 → 40.
+
+**Actualização 2026-10-08 (lote SEMANTIC-FINITUDE-DIVINE-FULLNESS).**
+O limite `SemanticFinitude` foi definitivamente restringido às criaturas contingentes
+(`ContingentSubjectKind s`), e a capacidade semântica total das três Pessoas divinas foi
+afirmada pelo novo axioma `DivinePersonsTotalMeaning` (`Tag: META`, homoousios). O axioma
+irrestrito `GroundTranscendence` foi inteiramente eliminado.
+
+1. A negação da omnisciência das Pessoas divinas foi revogada: `necessary_kind_subject_has_maximal_capacity`
+   estabelece `MaximalCapacity (EntityOf s)` para todo sujeito de espécie necessária.
+2. As 24 linhas anteriores (asseidade, simplicidade, unicidade e características) foram
+   reformuladas modulo as três Pessoas divinas (`EntityOf a`, `EntityOf b`, `EntityOf c`),
+   pagando a ponte `TrinitarianPersonalBridge` (META) e `SemanticFinitude` (VOCAB).
+3. A contagem total de axiomas permanece invariante em exatamente **39**
+   (18 `VOCAB` / 6 `SEM` / 13 `META` / 2 `TRANS`).

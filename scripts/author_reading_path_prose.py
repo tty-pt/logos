@@ -140,13 +140,13 @@ d["reading_sections"] = [
         "id": "necessary_ground",
         "title": "12. The Necessary Ground, and Where Necessity Stops Working",
         "body": [
-            "`Entity.ofGround` is necessary and the **sole universal modal ground**, on one "
-            "declared META bound (`GroundTranscendence`: no subject means every proposition, unrestricted). "
+            "`Entity.ofGround` is necessary and the **universal modal ground** modulo the three divine Persons, on the "
+            "declared META bridge `TrinitarianPersonalBridge` and creaturely finitude (`SemanticFinitude`). "
             "From it follow aseity, simplicity, pure actuality, foundational "
             "omnipresence/omniscience/omnipotence, immutability, and everlasting/atemporal — "
             "the last two as definitional corollaries of world-rigid existence, with **no "
-            "temporal premise imported**. The **person** side needs exactly one `META` "
-            "bridge, C404 `necessaryPersonalSubjectExists`.",
+            "temporal premise imported**. The **necessary person** side needs exactly one `META` "
+            "bridge, C404 `necessaryPersonalSubjectExists` (C409).",
             "Two results cut **against** the classical reading, and the theory reports them "
             "itself. Immutability is not sole-bearing (C453, C489). And the ground is **not "
             "the only necessary being** (C494), so necessity is precisely the one "

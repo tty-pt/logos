@@ -143,7 +143,7 @@
       "dependents": [
         "universal_ground_unicity"
       ],
-      "disposition": "REFUTED 2026-10-03: `AsymmetricGrounding` is proved unsatisfiable by C316 (`FoundationalUnicity.not_asymmetric_grounding`, FoundationalUnicity.lean:145), because `OneEssence` is reflexive (`groundsEntity_reflexive`). Its sole dependent `universal_ground_unicity` therefore rests on a false premise; the live unicity route is `ofGround_unicity_from_no_discriminating_subject` via GroundTranscendence/SemanticFinitude (GAPMAP C320/C389). This entry is kept so the refutation stays visible, not because the bridge is usable. Do NOT promote to axiom (it is false) and do NOT mark reviewed as if compliant."
+      "disposition": "REFUTED 2026-10-03: `AsymmetricGrounding` is proved unsatisfiable by C316 (`FoundationalUnicity.not_asymmetric_grounding`, FoundationalUnicity.lean:145), because `OneEssence` is reflexive (`groundsEntity_reflexive`). Its sole dependent `universal_ground_unicity` therefore rests on a false premise; the live unicity route is `ofGround_unicity_from_no_discriminating_subject` via SemanticFinitude and TrinitarianPersonalBridge (GAPMAP C320/C389). This entry is kept so the refutation stays visible, not because the bridge is usable. Do NOT promote to axiom (it is false) and do NOT mark reviewed as if compliant."
     },
     {
       "def": "Logos.Love.PersonStabilityPrinciple",

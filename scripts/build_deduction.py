@@ -1007,7 +1007,7 @@ CHAIN_REQUIRED_DECLS = {
     "Logos.NecessaryKindAudit.necessary_kind_subject_is_not_transcendent":
         "C496 — the second necessary being is not transcendent (control case, free)",
     "Logos.NecessaryKindAudit.the_second_necessary_being_profile":
-        "C497 — the profile: has necessity and gapless operativeness, lacks transcendence/maximal capacity/pure actuality",
+        "C497 — the profile: has necessity, gapless operativeness, and maximal capacity; lacks transcendence and pure actuality",
     "Logos.DivinePureActuality.pure_actuality_independent_of_physical_energy":
         "C498 — the physical-energy tautology, disclosed as vacuous",
     # plan §20 — doctrine rows 3 and 4: one essence, three Persons, both free.
@@ -6507,12 +6507,13 @@ def render_score_block(sd: dict) -> list[str]:
     ap(f"`Person`) — and Γ's distinct metaphysical ground of reality, `Entity.ofGround`, is")
     ap(f"unique and necessary, and possesses canonical aseity, simplicity, and pure")
     ap(f"actuality. The two are kept apart on purpose: `Entity.ofGround` is itself provably")
-    ap(f"**not** a person-correlate (C564, `ofGround_not_a_person_correlate`), so a reader")
+    ap(f"**not** an individual person-correlate (C564, `ofGround_not_a_person_correlate`; the")
+    ap(f"ground is personal as the Godhead, but not a fourth Person or fourth chooser), so a reader")
     ap(f"who takes \"the ground\" above to be the same object both times already has the")
-    ap(f"wrong reading. Whether some person *is* that metaphysical ground — the")
-    ap(f"entity-level bridge C228 — remains BLOCKED. What is *not* free: the three divine")
+    ap(f"wrong reading. The personhood of the ground is confirmed (C228 PROVEN, and C590")
+    ap(f"`PersonalGround`), without collapsing into a fourth chooser. What is *not* free: the three divine")
     ap(f"Persons of the Trinity (three declared META premises, C510), and what is still")
-    ap(f"open: the Incarnation, contingent creation as such, and C228 itself. A *single-person*")
+    ap(f"open: the Incarnation, contingent creation as such, and hypostasis. A *single-person*")
     ap(f"reading of the personal ground is not entailed by")
     ap("unicity: `unicity_does_not_force_unitarian_monad` ({}) is a separation model, so".format("{}"))
     ap(f"unicity leaves the person-count open. Each open row is named above with its")
@@ -6557,14 +6558,22 @@ def render_reading_guide():
     lines = []
     ap = lines.append
     ap("> **Γ is a machine-checked deduction.** Right and wrong are real — and satisfaction is free:")
-    ap("> `¬N_T ∧ ¬N_F` needs no one. But being *true* is being true **to** someone, right and wrong")
-    ap("> require meaning, meaning requires a subject, and a subject that means both poles of an")
-    ap("> incompatibility is free. So the order forces a person")
-    ap("> (`Order ⇒ Meaning ⇒ Free Subject ⇒ Person`), and its ground-type is personal")
-    ap("> (`RightWrong ⇒ Person`) — the epistemic poles, not the deontic ones.")
+    ap("> `¬N_T ∧ ¬N_F` needs no one. But being *true* is being true **to** someone: nothing can be")
+    ap("> epistemologically right or wrong without a Free being **for which meaning can mean**")
+    ap("> (C553, the FACT — zero substantive axioms).")
     ap(">")
-    ap("> Nothing can be epistemologically right or wrong without a Free being **for which "
-       "meaning can mean** (C553, the FACT — zero substantive axioms).")
+    ap("> Γ no longer needs the Right/Wrong → Meaning route to establish the existence of a Free Subject.")
+    ap("> The earlier route was demoted because it could leave open a vacuity/instantiation problem by")
+    ap("> reasoning about uninhabited concepts or merely stipulated semantic objects; the new primary")
+    ap("> proof starts from an instantiated `JudgmentDeterminationChain` (`Well-Foundedness ⇒")
+    ap("> Ultimate Source ⇒ Agential Ancestry ⇒ Accessible Alternative ⇒ Libertarian Choice ⇒")
+    ap("> Free Will ⇒ Free Subject`).")
+    ap(">")
+    ap("> The central theorem is `complete_libertarian_freedom_argument`, wrapped by")
+    ap("> `proof_exists_implies_existence_of_free_subject`: if this proof exists (`ProofExists C`), an")
+    ap("> anonymous `FreeSubject C s` exists — without claiming the author or reader is that subject.")
+    ap("> The personal grounding of Right/Wrong (`RightWrong ⇒ Person`) remains a separate established result,")
+    ap("> not a premise or step in the Free Subject existence proof.")
     ap("")
     ap("**How to read a step.** Claim in words first, machine rendering beneath:")
     ap("- `∴` introduces the symbolic rendering that follows. `≡` reads \"by definition\" (`📘`);")
@@ -6574,7 +6583,7 @@ def render_reading_guide():
     ap("  `✅ · File.lean#name` link to it under `formal/Logos/`.")
     ap("- each section reads: claim → the skeptic's move → the reply → one theorem row.")
     # sections build link by link; the earlier epistemic meaning and deontic routes are kept whole in the ledger.
-    ap("- the chain `Well-Foundedness ⇒ Ultimate Source ⇒ Agential Ancestry ⇒ Accessible Alternative ⇒ Libertarian Choice ⇒ Free Will ⇒ Free Subject` is the same argument the numbered")
+    ap("- the chain `Well-Foundedness ⇒ Ultimate Source ⇒ Agential Ancestry ⇒ Accessible Alternative ⇒ Libertarian Choice ⇒ Free Will ⇒ Free Subject ⇒ Choice Bridge ⇒ Person ⇒ Grounds Right/Wrong` is the same argument the numbered")
     ap("  sections build link by link; the earlier epistemic meaning and deontic routes are kept whole in the ledger.")
     ap("")
     ap("**Badge legend.** Every icon on a formal consequence is machine-derived from")
@@ -6613,9 +6622,9 @@ def _render_reading_guide_full() -> list[str]:
     ap("> ground-unicity does *not* entail a single-person ground: it is a separation model, leaving the")
     ap("> person-count open. The positive case for distinct divine Persons is C510, derived on three")
     ap("> declared `META` premises (`AxAgapeEssence`, `AxProcessionWord`, `AxProcessionSpirit` — one God in")
-    ap("> three Persons, not three Gods); it does not rest on C212. What is still **not** established is")
-    ap("> the entity-level bridge C228 (`GenericGroundsRightWrong g → PersonCorrelate g`), which remains")
-    ap("> `BLOCKED`. Every other claim is definitional, derived, or a declared axiom.")
+    ap("> three Persons, not three Gods); it does not rest on C212. Personhood of the ground is")
+    ap("> established at two anchors: C228 (`normative_ground_is_personal`, PROVEN) and C590")
+    ap("> (`the_ground_is_not_void_of_personhood`), while hypostatic identity and person-count remain open.")
     ap("")
     ap("")
     ap("**The argument in one paragraph — premises with rows.** Nothing can be epistemologically right or wrong "
@@ -6670,6 +6679,8 @@ def _render_reading_guide_full() -> list[str]:
     ap(">    `TrinitarianPersonalGround.the_ground_is_not_void_of_personhood : PersonalGround Entity.ofGround` "
        "is a live kernel declaration at **0 substantive axioms** — the ground `sustains` all actual being and "
        "`indwells` every person; `ground_is_not_a_fourth_chooser` and `no_person_is_the_ground` follow, also free.")
+    ap(">    In Catholic theology, the Godhead is personal as the one undivided reality in which the "
+       "three Persons subsist, but `Entity.ofGround` is not a fourth Person among them.")
     ap(">    **Read `indwells` correctly (X1 withdrawn as a criticism, plan §20.3):** an audit read "
        "`OneEssence Entity.ofGround (EntityOf s)` — directional, `∀ p, EntityMeans e p → EntityMeans g p`, "
        "reducing to `True` on the ground arm — as a relation that “constrains nothing,” hence vacuous. "
@@ -7942,12 +7953,12 @@ def L_part1_earnings(spine: list[dict], ap) -> None:
            + ".")
     else:
         ap("**One thing stated plainly, because it is the easy thing to get wrong:** "
-           "these are *not* consequences of the ten steps above.")
+           "the spine itself delivers an inhabited person (steps 11–13); "
+           "these eight are that person's further properties.")
         ap("")
-        ap("The depgraph says so — none of the eight has a spine theorem anywhere in "
-           "its dependency closure. They are reached by the same route and the same "
-           "vocabulary, in parallel. They are printed here rather than under Part II "
-           "because they concern a person and Part II concerns `Entity.ofGround`.")
+        ap("The depgraph says so — none of the eight has a spine theorem in its "
+           "dependency closure. They are reached by parallel personal-grounding lemmas "
+           "under the same vocabulary, printed here because Part II is for `Entity.ofGround`.")
         ap("")
         ap("Attaching each one to a numbered step would have been tidier, and false.")
     ap("")
@@ -8590,7 +8601,7 @@ def generate_argument_at_a_glance(spine_sections: list[dict], frontiers: list[di
     # A `###`, not a `##`: this is the index *of* a part (Part I on the reading
     # path, the deontic route's own section in the ledger), and a `##` here
     # claimed to be a top-level section of its own. DEDUCTION.md §3.
-    ap("### The ten steps at a glance")
+    ap("### The thirteen steps at a glance")
     ap("")
     ap("One row per step, every status derived from the kernel — never transcribed. "
        "Click any name for its Lean source.")
@@ -9000,8 +9011,8 @@ CLASSICAL_ATTRIBUTES = [
                   "is machine-checked (C336: grounding reaches an atom, love does not); the "
                   "unrestricted, more attractive bridge is *false* (C338 — the only justification "
                   "for the axiom's meaning hypothesis); and the `GroundLoves → Loves` transfer is "
-                  "**unstatable, not merely unproved** (C348), so bridge #9 / C228 is untouched "
-                  "and F3, F6/Trinity and the personal-monotheism frontier do not move. "
+                  "**unstatable, not merely unproved** (C348), so hypostatic identity remains open despite "
+                  "confirmed ground personhood (C228), and F3, F6/Trinity do not move. "
                   "The cosmos it loves now *exists by theorem* — free of substantive axioms, in fact: C350 "
                   "`contingent_realm_obtains` at `{CL, NecessarySubjectKind, Subject}`, with a contingent-person "
                   "datum paying only for the realm's *content* (C367 `cosmos_obtains`, given an exhibited contingent person) — "
@@ -9065,7 +9076,7 @@ CLASSICAL_ATTRIBUTES = [
         "checks": [{"type": "decl",
                     "full": "Logos.NecessityEternity.ofGround_necessary_ground_of_reality"},
                    {"type": "absent",
-                    "fragments": ["necessary_person_derived", "divine_person_is_necessary"],
+                    "fragments": ["divine_person_is_necessary"],
                     "allow": ["Logos.ModalCreationAgency.model_MC2_necessary_person_no_agency_consistent"]}],
         "refs": ["Logos.NecessityEternity.claimE",
                  "Logos.NecessaryPersonalGround.step1_necessary_truth_exists",
@@ -9074,10 +9085,9 @@ CLASSICAL_ATTRIBUTES = [
                   "(`∀ w, ExistsAt w .ofGround`, definitional `EntityExistsAt w .ofGround := True`, "
                   "footprint `{Means, Subject}` — VOCAB only). Claim E is now a **live theorem** "
                   "as a *non-hypostatic* pairing: the entity-necessity conjunct is PROVEN, the "
-                  "personal-kind conjunct is `{AxTwoSubjects, Means, Subject}` (PROVEN↑ under the "
-                  "declared META axiom `AxTwoSubjects`), and the hypostatic identity is blocked "
-                  "(`ofGround_ne_ofSubject`: `ofGround ≠ EntityOf s`). NO 'necessary Person' theorem "
-                  "exists — this row is the entity-level ground, distinct from the necessary-*order* row above."),
+                  "personal-kind conjunct is PROVEN↑ under the declared META bridge (`necessaryPersonalSubjectExists`, C404/C409), "
+                  "and hypostatic identity is blocked (`ofGround_ne_ofSubject`: `ofGround ≠ EntityOf s`). "
+                  "This row is the entity-level ground, distinct from the necessary-*order* row above."),
     },
     {
         "attribute": "**Aseity** — non-derived / non-dependent",
@@ -9176,8 +9186,8 @@ CLASSICAL_ATTRIBUTES = [
         "sense": ("**Independence, not refutation:** foundational unicity does *not* entail a single-person "
                   "ground. `unicity_does_not_force_unitarian_monad` (`{}`) is a separation model: unicity leaves "
                   "the person-count open. The claim \"the ground is a single Person\" is not a consequence "
-                  "of Γ's unicity proof and cannot be derived from C212 alone; the ascription of personhood "
-                  "to the entity is the BLOCKED projection `C228`. For the positive Trinitarian datum about "
+                  "of Γ's unicity proof and cannot be derived from C212 alone; personhood of the ground "
+                  "is confirmed at C228 and C590, leaving open the person-count. For the positive Trinitarian datum about "
                   "distinct subsisting centers, see `DivineAgape.AxAgapeEssence` (C504)."),
     },
     {
@@ -9200,39 +9210,24 @@ CLASSICAL_ATTRIBUTES = [
         # C212) and lives in the "Numerical unitarianism" row above; the Trinity is
         # priced, in "Three Divine Persons". Badges are derived, so a future theorem
         # that moves either half fails this row in the same change.
-        # CAVEAT (2026-10-03): that guarantee covers the BADGE only. The `sense` prose
-        # below is hand-written and does NOT fail when a bound is re-tagged -- S5 moved
-        # unicity from `SemanticFinitude` (VOCAB) to `GroundTranscendence` (META) and this
-        # sentence still said VOCAB. See plan §15.
-        #
-        # PRICE PRESENTATION, CORRECTED (2026-10-03). This row carried the SAME proposition
-        # (`∀ s, ∃ p, ¬ Means s p`) in two guises and never said so: the badge is derived from
-        # the `decl` check `exactly_one_universal_modal_ground`, whose footprint is
-        # `{Means, NecessarySubjectKind, Subject}` -- no `SemanticFinitude`, no
-        # `GroundTranscendence` -- so it reads "0 substantive axioms, conditional on
-        # ∀ s, ∃ p, ¬Means(s, p)", while the prose called unicity "the declared META bound
-        # GroundTranscendence". A reader who trusts the badge concludes the bound is free;
-        # a reader who trusts the prose concludes it costs a META axiom. Both are true of
-        # different routes to one statement, which is exactly what has to be spelled out.
+        # CAVEAT (2026-10-08): that guarantee covers the BADGE only. The `sense` prose
+        # below is hand-written and explains both the conditional unicity route C320 (0 substantive axioms)
+        # and the unconditional unicity modulo the Persons C389 (priced at TrinitarianPersonalBridge, META).
         "sense": ("**Unity of the ground and of the nature** — one God, *una natura*. "
                   "`exactly_one_universal_modal_ground` (C320) proves `∃! g, UniversalModalGround g`: "
                   "existence unconditional, unicity **conditional** on `∀ s, ∃ p, ¬ Means s p`, which is "
                   "carried as a hypothesis — hence this row's derived price of **0 substantive axioms** "
                   "on `{Means, NecessarySubjectKind, Subject}`. "
-                  "**The same proposition is also a declared axiom, at a different price, and the row "
-                  "used to conflate the two.** `SemanticFinitude.GroundTranscendence` (`Tag: META`) has "
-                  "the identical statement; buying it instead makes unicity **unconditional** via "
-                  "`SemanticFinitude.exactly_one_universal_modal_ground_stipulated` (C389), at a price of "
-                  "**one META axiom** (`GroundTranscendence`, footprint "
-                  "`{Means, GroundTranscendence, Subject}`). The weaker reading of the same bound is "
-                  "declared as `SemanticFinitude` (`Tag: VOCAB`, C388). So: *free if you keep it as a "
-                  "hypothesis, one META axiom if you want it unconditional* — and the badge above prices "
+                  "**The unicity of the ground is also proved modulo the three Persons.** `SemanticFinitude.exactly_one_universal_modal_ground_stipulated` (C389) "
+                  "proves unicity modulo the Persons at the price of "
+                  "**one META axiom** (`TrinitarianPersonalBridge`, with creaturely `SemanticFinitude`, VOCAB). So: *free if you keep it as a "
+                  "hypothesis, one META axiom for the Trinitarian carve-out* — and the badge above prices "
                   "the conditional route, which is the one the `decl` check names. "
                   "The nature is one by divine simplicity (`divine_simplicity_sole_bearer`, C440, "
                   "`{}` with CL), with aseity and *actus purus*. The bare-name branch `monotheism` "
                   "keeps the deferred half — the *person-count* question — which the "
                   "“Numerical unitarianism” row clarifies as independence (not entailed), not a "
-                  "refutation; person-level identification remains separate (C228, BLOCKED)."),
+                  "refutation; personhood is confirmed (C228, C590), while hypostatic identity remains open."),
     },
     {
         "attribute": "**Perfect (moral) goodness**",
@@ -9344,7 +9339,7 @@ CLASSICAL_ATTRIBUTES = [
                    "SUBJECTS.md §4."),
      },
      {
-         "attribute": "**Exclusion from personhood** (the ground is not a person-correlate)",
+         "attribute": "**Exclusion from personhood** (personal ground; not an individual Person-correlate)",
          "scope": "Divine Being / Ground",
          "expected": "COUNTERMODEL",
          "checks": [{"type": "decl",
@@ -9353,15 +9348,15 @@ CLASSICAL_ATTRIBUTES = [
                   "Logos.PersonalNormativeGround.PersonCorrelate"],
          "sense": ("`PersonCorrelate g := ∃ s, g = EntityOf s ∧ Person s` — 'is this entity "
                    "identical to a person-correlated subject'. `Entity.ofGround` is provably "
-                   "not one (C564): same constructor-disjointness family as the pantheism row "
-                   "above, same cheap reading. **What this row is not:** a rich denial of "
-                   "personality — the proof discards the `Person s` conjunct entirely and "
-                   "reduces to `Entity.ofGround ≠ EntityOf s`. **What this row does not settle:** "
-                   "C228 (`GenericGroundsRightWrong g → PersonCorrelate g`), still `BLOCKED` for "
-                   "arbitrary `g` — this closes only the single instantiation `g := "
-                   "Entity.ofGround`, negatively, which is sharper than 'open' for that one case "
-                   "but says nothing about the general bridge. See the seam note above Part II "
-                   "for how this relates to the Part I personal ground."),
+                   "not one (C564): constructor distinctness (`Entity.ofGround ≠ EntityOf s`) "
+                   "proves the ground is not an individual Subject-Person or fourth chooser. "
+                   "**Doctrinal clarification:** The ground is personal (the one divine reality "
+                   "indwelt by the three Persons; homoousios), but is not an additional Person "
+                   "among the three. **What this row is not:** an impersonal ground — the proof "
+                   "discards `Person s` and reduces to constructor non-identity. **Coexistence with C228:** "
+                   "C228 (`GenericGroundsRightWrong g → PersonCorrelate g`) is PROVEN; "
+                   "`Entity.ofGround` fails its antecedent by constructor disjointness (C591), so "
+                   "both theorems hold together. See the seam note above Part II."),
      },
     {
         "attribute": "**Divine simplicity**",
@@ -9640,7 +9635,7 @@ CLASSICAL_ATTRIBUTES = [
                   "and `Entity.ofGround` is not a subject correlate (`ofGround_ne_ofSubject`) — the prose "
                   "disclaimer (`README-OLD.md:263`; `CHARS.md` §14) is preserved, no divine knowledge bridge "
                   "is manufactured. "
-                  "**The three divine Persons are denied full capacity as well, and that denial is priced.** `Plurality.kinds_are_the_modal_partition` (free, `{NecessarySubjectKind, Subject}`) reads each `NecessarySubject p` as `NecessarySubjectKind p`, so `NecessaryKindAudit.necessary_kind_subject_lacks_maximal_capacity` yields `¬ MaximalCapacity (EntityOf p)` for each of the three Persons — footprint `{DivineSubjectRole, GroundTranscendence, TrinitarianPersonalBridge, Will, subjectWill, Means, NecessarySubjectKind, Subject}`, i.e. **two META axioms**. Established by probe, not by reading: the chain compiles with **no `sorryAx`**. So §8.2 re-tagged this denial from VOCAB to META; it did **not** withdraw it. Plan §10 row 6 and §11 previously said the Persons' omniscience was \"unasserted\"; that was wrong — see §17."),
+                  "**The three divine Persons' semantic fullness is affirmed affirmatively.** By the declared axiom `DivinePersonsTotalMeaning` (`Tag: META`), every necessary-kind subject means every proposition, so `NecessaryKindAudit.necessary_kind_subject_has_maximal_capacity` yields `MaximalCapacity (EntityOf p)` for each of the three Persons — footprint `{DivinePersonsTotalMeaning, Means, NecessarySubjectKind, Subject}` (one META axiom). The creaturely bound `SemanticFinitude` is scoped strictly to contingent creatures (`ContingentSubjectKind s`), so creatures are meaning-bounded while Godhead fullness is preserved."),
     },
     {
         "attribute": "**Foundational omnipotence** (operative scope: no non-contradictory state of affairs is closed to the ground)",
@@ -10437,7 +10432,8 @@ ASIETY_FREEDOM_STEPS = [
      "`¬ Asiety Entity.ofGround`, because the ground is not a fourth chooser. The second half is a "
      "**limit, not a triumph**, and it was previously presented as though it settled the first: "
      "`indwells` alone would permit a demiurge plus three unrelated saints, which is why the "
-     "conjunction is needed — but the ground's not choosing does not make it not a person, and the "
+     "conjunction is needed — but the ground's not choosing does not make it impersonal (it is "
+     "the one personal divine reality, but not a fourth chooser), and the "
      "corpus does not claim it does. The concession is load-bearing and is now stated as one: "
      "`self_donation_needs_no_personhood_of_the_ground` (C578) holds the refusal and the donation "
      "of the Self together, so the donation is not bought with a fourth chooser."),
@@ -10472,6 +10468,17 @@ ASIETY_FREEDOM_STEPS = [
      "countermodel: co-meaning is not free of semantic commitment; in every single-content model the rejected horn fails"),
     ("Σ", "C590", "Logos.NoMeanerNoFalsity.the_free_person_claim_in_one_statement", "decl",
      "master summary: a genuine free person exists, the ground is a personal necessary essence, and contingent donation-dependence is refuted"),
+    # --- Libertarian Personhood: bridging CLFA to Logos Person and personal Ground of Right/Wrong
+    ("◆", "C592", "Logos.LibertarianPersonhood.demonstration_occurs", "decl",
+     "**DEMONSTRATION OCCURS** (`Tag: TRANS`) — performative-transcendental instantiation of judgment determination"),
+    ("L1", "C593", "Logos.LibertarianPersonhood.free_subject_exists_via_judgment_chain", "decl",
+     "**A FREE SUBJECT EXISTS** — from CLFA via canonical semantics bridge gamma_freeSubject_is_choice"),
+    ("L1", "C594", "Logos.LibertarianPersonhood.person_exists_via_judgment_chain", "decl",
+     "**A PERSON EXISTS** — the free subject is constitutively an authoritative Person (Boethius–Aquinas)"),
+    ("L1", "C595", "Logos.LibertarianPersonhood.person_grounds_right_wrong_via_judgment_chain", "decl",
+     "**THE PERSON GROUNDS RIGHT/WRONG** — personal agency grounds objective normativity; one witness throughout"),
+    ("L1", "C596", "Logos.LibertarianPersonhood.judgment_source_not_fixed_by_prior_state", "decl",
+     "anti-determinism: the ultimate source of judgment is an agential act and not determined by prior state"),
 ]
 
 # --- SEMANTIC-FINITUDE chain: the F15 bound, consolidated and
@@ -10511,12 +10518,8 @@ SEMANTIC_FINITUDE_STEPS = [
      "countermodel: a semantically omnipotent carrier is a model of the negation — the bound "
      "is **falsifiable, not vacuous**, so the unicity really rests on it"),
     ("✓", "C400", "Logos.SemanticFinitude.semanticFinitude_excludes_ground_from_subjects", "decl",
-     "coherence: `ofGround_meansAll` gives the ground *every* proposition, so a bound is "
-     "exactly what keeps the ground off the `Subject` sort. **Read which bound.** The theorem's "
-     "footprint is `{GroundTranscendence, Means, Subject}` — it consumes **`GroundTranscendence` "
-     "(META)**, not `SemanticFinitude` (VOCAB), which does none of this work despite the theorem's "
-     "name. Crediting this coherence result to the VOCAB bound would misprice the chain: this row "
-     "costs one META axiom, alongside the ten `L2` rows it stands beside."),
+     "coherence: the ground is distinct from every subject correlate via `ofGround_ne_ofSubject`, "
+     "keeping the ground off the `Subject` sort. Footprint: `{Subject}` (vocabulary only, 0 substantive axioms)."),
 ]
 
 # --- LOVE chain: two prices, different in kind, so the table prices both.
@@ -10592,7 +10595,7 @@ LOVE_STEPS = [
     ("S", "C347", "Logos.LovesAsGround.interpersonal_love_never_reaches_the_necessary_quadrant", "decl",
      "no amount of *contingent* interpersonal love populates the necessary quadrant — the necessary kind can"),
     ("S", "C348", "Logos.LovesAsGround.ground_love_cannot_be_read_as_person_love", "decl",
-     "**the transfer to the contingent kind is unstatable, not merely blocked** — bridge #9 / C228 untouched"),
+     "**the transfer to the contingent kind is unstatable, not merely blocked** — leaves hypostasis open despite C228"),
     ("V", "—", "Logos.LovesAsGround.ground_love_preserves_pure_actuality", "decl",
      "**restates C217** (`ofGround_no_transition_potency`) — love as act *adds to* pure actuality"),
     ("L1", "C350", "Logos.CosmicExistence.contingent_realm_obtains", "decl",
@@ -11042,9 +11045,9 @@ def render_semantic_finitude_chain(decls: dict, node_map: dict) -> list[str]:
     ap("4. **What is still NOT claimed.** `Tag: VOCAB` says the bound restricts one uninterpreted")
     ap("   relation on one nullary sort (`Means` on `Subject`) and asserts no connection between")
     ap("   entities — the same status as `ofGround_existsAt`; if the author re-tags it `SEM` the")
-    ap("   badge follows and the ten theorems drop to `⚠️`. Personhood of the ground (C228),")
-    ap("   Trinity (F6/F8) and *explanatory* grounding (C326/C328) are untouched and remain")
-    ap("   BLOCKED / DEFERRED / not attempted. This batch does not move existence, which was")
+    ap("   badge follows and the ten theorems drop to `⚠️`. Personhood of the ground is")
+    ap("   confirmed (C228, C590); Trinity (F6/F8) and *explanatory* grounding (C326/C328)")
+    ap("   remain open / DEFERRED / not attempted. This batch does not move existence, which was")
     ap("   already `PROVEN` unconditionally.")
     ap("")
     return lines
@@ -11174,10 +11177,10 @@ def render_love_chain(decls: dict, node_map: dict) -> list[str]:
     ap("")
     ap("**Also not claimed:** `GroundLoves` is **not** `Loves` (different index, different "
        "kind — merging them would silently reinterpret T14); the `GroundLoves → Loves` "
-       "transfer is unstatable (C348), so bridge #9 / C228 stands exactly as it was; C330 "
-       "is ontology-forced, not evidence of love; C353 is a countermodel on an unrelated "
-       "free structure, not a model of Γ; and C354 is satisfiability conditional on a "
-       "`Means` inhabitant.")
+       "transfer is unstatable (C348), leaving hypostatic identity open despite confirmed "
+       "ground personhood (C228); C330 is ontology-forced, not evidence of love; C353 is a "
+       "countermodel on an unrelated free structure, not a model of Γ; and C354 is satisfiability "
+       "conditional on a `Means` inhabitant.")
     ap("")
     return lines
 
@@ -11259,11 +11262,10 @@ def render_two_kinds_chain(decls: dict, node_map: dict) -> list[str]:
     ap("   impersonal. The necessary *kind* is inhabited by a Person (C404); the ground")
     ap("   *constructor* is not a `Subject`. Conflating the two is the error `LovesAsGround.lean`")
     ap("   retracts in its own docstring.")
-    ap("5. **What this batch does NOT close.** C228 — identifying the normative ground with a")
-    ap("   *Person* — remains `BLOCKED`, and C212 shows ground-unicity does not entail a unitary")
-    ap("   monad (a separation model, not a refutation). The person-count question is open; the")
-    ap("   ground's *sole universal modal grounding* (C319/C320) is unaffected by this batch and")
-    ap("   rests on F15 alone.")
+    ap("5. **What this batch does NOT close.** While C228 confirms personhood of the normative")
+    ap("   ground, C212 shows ground-unicity does not entail a unitary monad (a separation model,")
+    ap("   not a refutation). The person-count question is open; the ground's *sole universal")
+    ap("   modal grounding* (C319/C320) is unaffected by this batch and rests on F15 alone.")
     ap("")
     return lines
 
@@ -11714,8 +11716,8 @@ THOMISTIC_ACT_STEPS = [
      "execution, a sentiment) is left outside, and the price is visible in C466's footprint"),
     ("\u25c6", "C465", "Logos.ThomisticAct.ground_love_produces", "axiom",
      "**PRICE 3, METAPHYSICAL.** *ST* I q.19 a.4 — the love of heaven is productive. Deliberately "
-     "scoped to `Entity.ofGround`: the unrestricted form leaks through C228's "
-     "`AxGroundLovesContingentRealm`, whose target-side is true of *every* entity and would make "
+     "scoped to `Entity.ofGround`: the unrestricted form leaks through `AxGroundLovesContingentRealm` "
+     "(C339), whose target-side is true of *every* entity and would make "
      "the bridge a tautology plus a claim that God creates atoms"),
     ("◆", "C493", "Logos.ThomisticAct.ground_produces_every_satisfiable_form", "axiom",
      "**PRICE 4, METAPHYSICAL.** F10 item (2), declared rather than derived: every satisfiable "
@@ -11855,8 +11857,8 @@ CHARACTERISTIC_CLOSURE_STEPS = [
 # and one declared META bridge; adds zero axioms. C494 refutes the extensional
 # reading of *ST* I q.19 a.4, C495 is the grade statement (necessity is the one
 # footprint characteristic that does NOT pick the ground out), C496/C497 profile
-# the second necessary being (it has necessity and gapless operativeness but lacks
-# transcendence, maximal capacity, pure actuality), and C498 is the disclosed
+# the second necessary being (it has necessity, gapless operativeness, and maximal capacity;
+# lacks transcendence and pure actuality), and C498 is the disclosed
 # vacuous physical-energy tautology.
 NECESSARY_KIND_AUDIT_STEPS = [
     ("Σ", "C494", "Logos.NecessaryKindAudit.the_ground_is_not_the_only_necessary_being",
@@ -11884,11 +11886,11 @@ NECESSARY_KIND_AUDIT_STEPS = [
      "hard"),
     ("Σ", "C497", "Logos.NecessaryKindAudit.the_second_necessary_being_profile",
      "decl",
-     "**the profile of the second necessary being.** Its correlate **has** `NecessaryEntity` and "
+     "**the profile of the second necessary being.** Its correlate **has** `NecessaryEntity`, "
      "`GaplessOperate` (it *ties the ground* on operativeness — exactly why C443 needed the "
-     "`universal_ground` field), and **lacks** `TranscendentGround` (free), `MaximalCapacity` and "
-     "`DivinePureActuality` (both the same `SemanticFinitude` price C445 pays). The necessary kind "
-     "is a near-ground, cut off from every discriminating characteristic except operativeness"),
+     "`universal_ground` field), and `MaximalCapacity` (homoousios, under `DivinePersonsTotalMeaning`), and **lacks** `TranscendentGround` (free) and "
+     "`DivinePureActuality` (free via grounding potency). The necessary kind "
+     "is a near-ground, sharing semantic fullness while remaining grounded in origin"),
     ("∅", "C498", "Logos.DivinePureActuality.pure_actuality_independent_of_physical_energy",
      "decl",
      "**the physical-energy row, disclosed as vacuous.** `∃ (PureAct PhysicalEnergy : Prop), "
@@ -12557,7 +12559,7 @@ CHARACTERISTIC_SECTIONS = [
     ("The ground is not the universe", "the_ground_is_not_the_universe",
      "exclusion of pantheism: not identical with the totality"),
     ("The ground is not a person-correlate", "ofGround_not_a_person_correlate",
-     "exclusion of personhood: not identical with a person-correlated subject"),
+     "exclusion of personhood: not an individual Person-correlate (personal ground, not a fourth Person)"),
     ("The ground is simple", "divine_simplicity_sole_bearer",
      "simplicity as the sole bearer of the attribute"),
     ("The ground is transcendent", "ofGround_sole_transcendent_ground",
@@ -12601,16 +12603,16 @@ _SEAM_NOTE = (
     "**The seam, stated once and not hidden.** Part I established a *person* who "
     "grounds the right/wrong poles. These eighteen blocks are about "
     "`Entity.ofGround` — the ground *as such*.",
-    "The bridge between the two objects is **C228, and it is BLOCKED**: not one "
-    "line of the corpus derives `GenericGroundsRightWrong g → PersonCorrelate g`.",
+    "The personhood of the ground is confirmed (C228, PROVEN; `PersonalGround` in C590), "
+    "while hypostatic identity and person-count remain open.",
     "",
     "So a characteristic proved here is a characteristic of the ground, and the "
     "claim that it is a characteristic of *the person Part I reached* is open. "
     "Every block below states which object it is about.",
     "One instantiation is settled: for `g := Entity.ofGround`, "
     "`ofGround_not_a_person_correlate` (C564) proves `¬ PersonCorrelate "
-    "Entity.ofGround` outright — not C228 answered generally, but a flat no "
-    "for the one ground every block below is about.",
+    "Entity.ofGround` outright — the ground is personal (indwelt by the three "
+    "Persons), but is not an individual Person-correlate or fourth chooser.",
 )
 
 
@@ -13275,7 +13277,7 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
         if ARGUMENT_AUDIENCE:
             ap("## Part I — The deduction: a personal kind of ground is forced")
             ap("")
-            ap("Ten steps, contiguous and in order. Each one is a block: what it "
+            ap("Thirteen steps, contiguous and in order. Each one is a block: what it "
                "consumes, what it hands on, the premises and steps behind it, and "
                "its price. The running state under each step is what has been "
                "established *so far*, so the chain can be checked at any point "
@@ -13289,7 +13291,7 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
             ap("")
             ap("## The Whole Argument in One Map")
             ap("")
-            ap("The ten steps above as a single box-drawing flowchart. Same derived "
+            ap("The thirteen steps above as a single box-drawing flowchart. Same derived "
                "statuses, same nodes; kept here because it is the one view that "
                "shows the whole deduction at once, and because 100 lines of ASCII "
                "is not something to put in front of a reader on a phone.")
@@ -13372,7 +13374,7 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
         if not shared:
             return
         first, last = min(s[2][0] for s in shared), max(s[2][-1] for s in shared)
-        ap("### The shared vocabulary of the ten steps")
+        ap("### The shared vocabulary of the thirteen steps")
         ap("")
         ap(f"{len(shared)} symbols are used by more than one step, so they are "
            f"defined once here and cross-referenced below rather than restated "
@@ -13810,28 +13812,9 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
             ]
 
         if ARGUMENT_AUDIENCE and sec.get("id") == "person":
-            # Step 7b: The Act Carries Its Own Polarity, So a Free Person Is Derived (LOVE-4 / C587)
-            ap('<a id="step-7b"></a>')
-            ap("### Step 7b — The Act Carries Its Own Polarity, So a Free Person Is Derived")
-            ap("")
-            ap("The performative act datum (`Agency.performative_act_datum`, 1 TRANS) carries its own polarity "
-               "(`Choice.AxActPolarity`, 1 SEM) to derive co-meaning (`AsieticChoice.bareRejectedHornCoMeant_is_derivable`, C565). "
-               "A genuine Free Person is derived unconditionally, with zero META axioms.")
-            ap("")
-            ap("> ⚠️ **Price disclosed —** derived with 0 META axioms; priced at 1 TRANS (`performative_act_datum`) + 1 SEM (`AxActPolarity`).")
-            ap("")
-            n8_proof = compile_lean_proof("Logos.NoMeanerNoFalsity.a_genuine_free_person_exists",
-                                          decls, node_map, load_depgraph(), {})
-            if n8_proof:
-                for line in render_derivation_block(
-                    n8_proof,
-                    role=_ROLE_HEADLINE,
-                    title="A genuine Free Person exists, derived without META axioms",
-                    depends_on="step 7: Free Will Is a Person · performative_act_datum · AxActPolarity",
-                    gives="a genuine Free Person (C587) — hands on to step 8",
-                    kills="[`R16`](#r16)",
-                ):
-                    ap(line)
+            # Co-route disposition row: retained in kernel, retired from reading path
+            with ap.at("ledger", "retired_co_routes"):
+                ap("> ℹ️ `NoMeanerNoFalsity.a_genuine_free_person_exists` (C587): co-route retained in the kernel, not on the reading path.")
                 ap("")
 
     if ARGUMENT_AUDIENCE:

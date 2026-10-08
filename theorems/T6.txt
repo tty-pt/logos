@@ -170,3 +170,9 @@ não de memória:
 
 `GroundTranscendence → SemanticFinitude`, não o inverso: é um refinamento do limite, não uma
 alternativa independente. Nenhum enunciado se estreitou. Ver `plan §8.2` e `§14`.
+
+**Actualização 2026-10-08 (lote SEMANTIC-FINITUDE-DIVINE-FULLNESS).**
+Com a eliminação de `GroundTranscendence` e a consagração do limite modulo as Pessoas divinas,
+`ofGround_sole_precedes_right_wrong` e `precedence_identifies_the_ground_where_stage_invariance_does_not`
+pagam a ponte metafísica `TrinitarianPersonalBridge` (META) e o limite criatural `SemanticFinitude` (VOCAB),
+estabelecendo a precedência única do fundamento modulo as três Pessoas divinas.

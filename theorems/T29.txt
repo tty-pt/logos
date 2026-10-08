@@ -108,8 +108,7 @@ Isto **nao e derivavel**, por tres bloqueios independentes:
 (ii) o unico predicado de fundamentacao nao vacuo, `GroundsRightWrong`, e
     **definicionalmente** `∃ p q, Chooses s p q` (C168) — ja colapsado a liberdade, sem
     qualquer conteudo de fundamento;
-(iii) a relacao de fundamentacao **substantiva** esta `BLOCKED`, com lema nomeado (C228,
-     GAPMAP nivel 15).
+(iii) nenhuma relacao de fundamentacao substantiva sobre `Entity.ofGround` esta disponivel (C591; C228 vale para qualquer entidade que satisfaca `GenericGroundsRightWrong`).
 
 Por isso `AsietyFreedomOfGround` fica registada como **estipulacao definicional ◈** em
 `formal/Logos/Stipulations.lean` (`Tag: META`, 5.ª entrada, pelo precedente de
@@ -245,8 +244,8 @@ continua refutada (C273/C274): L1 contorna o `?`, nao o fecha.
 
 Ainda requer prova (as tres afirmacoes que faltam, em termos formais):
   (1) DERIVACAO EM FALTA: `AsietyFreedomOfGround` a partir do vocabulario de
-      fundamentacao de Γ. Bloqueada por (i)-(iii) acima; a relacao substantiva continua
-      `BLOCKED` sob C228.
+      fundamentacao de Γ. Bloqueada por (i)-(iii) acima; nenhuma relacao substantiva
+      sobre `Entity.ofGround` esta disponivel (C591).
   (2) EXISTENCIA EM FALTA: um sujeito asiético a partir de `¬ N_T ∧ ¬ N_F` sozinha.
       **Refutada** por C294, nao apenas em aberto.
   (3) PONTE EM FALTA: `ContestedContent` -> `OpenAlternative p q` par a par. Bloqueada
@@ -370,8 +369,9 @@ F12 — a justificacao em falta para a estipulacao: status **BLOCKED**, fila de 
       fundamento porque `EntityMeans Entity.ofGround p := True`; o unico predicado de
       fundamentacao nao-vacuio, `GroundsRightWrong`, e definitionamente
       `exists p q, Chooses s p q` (C168) — ja liberdade livre, portanto usá-lo como
-      antecedente seria circular. A relacao substantiva continua `BLOCKED` em C228, com o seu
-      lema nomeado verbatim.
+      antecedente seria circular. Nenhuma relacao de fundamentacao substantiva sobre
+      `Entity.ofGround` esta disponivel (C591; C228 vale para qualquer entidade que satisfaca
+      `GenericGroundsRightWrong`).
   (2) DERIVACAO EM FALTA: de tal relacao mais `Asiety (EntityOf s)`, derivar `TrueChoice s p
       q` a **todo** o par incompativel. **C299 e a razao machine-checked de isto nao se
       descarregar de uma premissa da forma de `OneEssence`.**

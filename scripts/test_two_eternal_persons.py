@@ -57,16 +57,16 @@ def main() -> int:
 
     # 2. Census inventory
     inventory = cc.axiom_inventory()
-    check(len(inventory) == 39, f"Total axioms == 39 (got {len(inventory)})")
+    check(len(inventory) == 40, f"Total axioms == 40 (got {len(inventory)})")
     tag_counts = {}
     axioms_by_tag = {"VOCAB": set(), "SEM": set(), "META": set(), "TRANS": set()}
     for name, stmt, lno, path, tag, ns in inventory:
         tag_counts[tag] = tag_counts.get(tag, 0) + 1
         if tag in axioms_by_tag:
             axioms_by_tag[tag].add(name)
-    expected_tags = {"VOCAB": 18, "SEM": 6, "META": 13, "TRANS": 2}
+    expected_tags = {"VOCAB": 18, "SEM": 6, "META": 13, "TRANS": 3}
     check(tag_counts == expected_tags,
-          f"Census matches 18 VOCAB / 6 SEM / 13 META / 2 TRANS (got {tag_counts})")
+          f"Census matches 18 VOCAB / 6 SEM / 13 META / 3 TRANS (got {tag_counts})")
 
     # 3. Audit check
     check(AUDIT.exists(), "formal/axiom_audit.json exists")

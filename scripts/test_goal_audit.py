@@ -274,8 +274,19 @@ def main() -> int:
     # freedom modules (A14DerivationAudit, AgencyDeterminismConsequences, DeepContrastiveFrontier,
     # DeterministicReductioFrontier, JointForcing) to formal/archive/exploratory_freedom/:
     # delta is -84 Prop, -15 Nat, -12 Type, and -111 def (Bool, axiom, opaque unmoved).
-    check(len(sort_headed) == 1549,
-          f"expected 1549 sort-headed records in goal_audit, got {len(sort_headed)}")
+    # 1549 -> 1553 on 2026-10-08: +4 sort-headed def records (CanonicalAseityModuloPersons,
+    # NonCompositeModuloPersons, DivineSimplicityModuloPersons, DivinePureActualityModuloPersons)
+    # in DivineTrinitarianAttributes: delta is +4 Prop, +4 def.
+    # 1553 -> 1558 on 2026-10-08: +5 sort-headed def records (TrinitarianProcession,
+    # AlienPassiveGroundingPotency, CanonicalAseityCatholic in DivineClassicalAttributes;
+    # MutualIndwellingCatholic, SubjectMutualIndwellingCatholic in DivineTrinitarianAttributes):
+    # delta is +5 Prop, +5 def.
+    # 1558 -> 1559 on 2026-10-08: +1 sort-headed def record from LibertarianPersonhood:
+    # delta is +1 Nat, +1 def.
+    # 1559 -> 1560 on 2026-10-09: +1 sort-headed def record from DivineTrinitarianAttributes (HypostasisOf):
+    # delta is +1 Prop, +1 def.
+    check(len(sort_headed) == 1560,
+          f"expected 1560 sort-headed records in goal_audit, got {len(sort_headed)}")
 
     sh_heads = {}
     sh_kinds = {}
@@ -285,12 +296,12 @@ def main() -> int:
         k = r.get("kind")
         sh_kinds[k] = sh_kinds.get(k, 0) + 1
 
-    check(sh_heads.get("Prop") == 1196, f"expected 1196 Prop-headed records, got {sh_heads.get('Prop')}")
-    check(sh_heads.get("Nat") == 187, f"expected 187 Nat-headed records, got {sh_heads.get('Nat')}")
+    check(sh_heads.get("Prop") == 1206, f"expected 1206 Prop-headed records, got {sh_heads.get('Prop')}")
+    check(sh_heads.get("Nat") == 188, f"expected 188 Nat-headed records, got {sh_heads.get('Nat')}")
     check(sh_heads.get("Type") == 163, f"expected 163 Type-headed records, got {sh_heads.get('Type')}")
     check(sh_heads.get("Bool") == 3, f"expected 3 Bool-headed records, got {sh_heads.get('Bool')}")
 
-    check(sh_kinds.get("def") == 1529, f"expected 1529 def sort-headed records, got {sh_kinds.get('def')}")
+    check(sh_kinds.get("def") == 1540, f"expected 1540 def sort-headed records, got {sh_kinds.get('def')}")
     check(sh_kinds.get("axiom") == 15, f"expected 15 axiom sort-headed records, got {sh_kinds.get('axiom')}")
     check(sh_kinds.get("opaque") == 5, f"expected 5 opaque sort-headed records, got {sh_kinds.get('opaque')}")
 

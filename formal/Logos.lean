@@ -194,6 +194,9 @@ import Logos.NoMeanerNoFalsity
 -- constitutive determination chain of judgment, plus the performative-existential
 -- theorem: if this proof exists, a Free Subject exists.
 import Logos.CompleteLibertarianFreedomArgument
+-- Bridge and derivation of unified Boethian-Thomistic Personhood and personal
+-- normative grounding directly from the complete libertarian freedom argument.
+import Logos.LibertarianPersonhood
 
 -- Consolidated Divine Characteristics Modules
 import Logos.DivineClassicalAttributes

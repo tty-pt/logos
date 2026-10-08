@@ -338,5 +338,5 @@ poles are the same order by **instantiation** (`Correct s p := A s p ∧ T p` is
 
 So the scope limit was never in question — only its *evidence* was missing. The
 scope is now priced rather than asserted: see `theorems/T35.txt`. Note that
-**C228** (`normative_ground_is_personal`, entity-level) stays **BLOCKED** — this
-batch is subject-level and does not discharge it.
+**C228** (`normative_ground_is_personal`, entity-level, PROVEN) is a separate
+entity-level theorem — this batch is subject-level and operates independently.

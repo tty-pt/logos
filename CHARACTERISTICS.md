@@ -244,7 +244,7 @@ Formalized in `Logos.FoundationalUnicity` (`formal/Logos/FoundationalUnicity.lea
 
 Separation: `TheologicalModalHardening.necessary_existence_not_entails_uniqueness` (`formal/Logos/TheologicalModalHardening.lean:406`, `{}`) proves uniqueness does not follow from bare necessity alone. Generated `README.md` corroborates: Foundational unicity ✅ PROVEN, Numerical unitarianism 🧱 INDEPENDENT (separation: unicity does not entail a single-Person ground), One God ✅ PROVEN.
 
-> **Addendum (2026-10-02, ledgered as C564): `Entity.ofGround` itself is provably not a person-correlate.** `CosmicExistence.ofGround_not_a_person_correlate : ¬ PersonCorrelate Entity.ofGround` (`PersonCorrelate g := ∃ s, g = EntityOf s ∧ Person s`) was `PROVEN` but had **no ledger row at all** until this date (see `ISSUE_C_PLAN.md`). Read narrowly: the proof is the same construtor-disjointness argument as (2)–(4) above and C429–C431 — it discards the `Person s` conjunct entirely and reduces to `Entity.ofGround ≠ EntityOf s`. It is **not** a rich denial of personality, and it does **not** resolve C228 (`GenericGroundsRightWrong g → PersonCorrelate g`, still `BLOCKED` for arbitrary `g`): it only closes the single instantiation `g := Entity.ofGround`, negatively. It is the natural companion to this section's (6) `unicity_does_not_force_unitarian_monad`: unicity leaves the person-count of the one ground open, and this row adds that whatever that count turns out to be, it is not read off `Entity.ofGround` itself being identical to a person.
+> **Addendum (2026-10-02, ledgered as C564): `Entity.ofGround` itself is provably not a person-correlate.** `CosmicExistence.ofGround_not_a_person_correlate : ¬ PersonCorrelate Entity.ofGround` (`PersonCorrelate g := ∃ s, g = EntityOf s ∧ Person s`) was `PROVEN` but had **no ledger row at all** until this date (see `ISSUE_C_PLAN.md`). Read narrowly: the proof is the same construtor-disjointness argument as (2)–(4) above and C429–C431 — it discards the `Person s` conjunct entirely and reduces to `Entity.ofGround ≠ EntityOf s`. It is **not** a rich denial of personality: it coexists with C228 (`GenericGroundsRightWrong g → PersonCorrelate g`, PROVEN) because `Entity.ofGround` fails its antecedent by constructor disjointness (C591). It is the natural companion to this section's (6) `unicity_does_not_force_unitarian_monad`: unicity leaves the person-count of the one ground open, and this row adds that whatever that count turns out to be, it is not read off `Entity.ofGround` itself being identical to a person.
 
 ### Argument
 
@@ -949,8 +949,8 @@ visible. This is a limitation of the instrument, declared rather than exploited.
 is `intro p _; exact True.intro` (`LovesAsGround.lean:194`) and the ground grounds even
 meaningless entities (`ground_grounds_the_meaningless`). (ii) The only non-vacuous grounding
 predicate, `GroundsRightWrong`, is **definitionally** `∃ p q, Chooses s p q` (C168) — already
-collapsed to free will, with no Ground content. (iii) The substantive grounding relation is
-`BLOCKED` with a named lemma (C228). Hence: declared, priced, and registered.
+collapsed to free will, with no Ground content. (iii) No substantive grounding relation over `Entity.ofGround` is available (C591;
+C228 holds for any entity satisfying `GenericGroundsRightWrong`). Hence: declared, priced, and registered.
 
 **No dishonest definitions (the R1 test).** `AsietyFreeWill s := AsietyFreedomOfGround ∧
 Asiety (EntityOf s)` does **not** make `TrueChoice` a conjunct of the proposition that is
@@ -985,7 +985,7 @@ argue for next is **not** another transfer but the *substantive* grounding relat
 
 **Formal status: ⚠️ AXIOMATIC (AxGroundLovesContingentRealm) — see the 2026-09-27 notes
 below; ❌ the `GroundLoves → Loves` transfer is unstatable, not merely unproved (C348);
-C228 / bridge #9 untouched.**
+hypostatic identity untouched despite confirmed C228.**
 
 Modules `formal/Logos/LovesAsGround.lean` and `formal/Logos/CosmicExistence.lean`;
 GAPMAP Level 21, C322–C354 + 4 `—` display rows; `theorems/T30.txt`; `base.txt` §35.
@@ -1043,7 +1043,7 @@ What this batch is **mostly**, and why that is the finding:
 |---|---|---|
 | C336 `grounding_reaches_what_love_cannot` | The separation in one statement: grounding reaches an atom, love does not | The machine-checked content of "not *merely* a mathematical ground" |
 | C338 `meaningful_love_bridge_is_refuted` | The unrestricted bridge — the stronger, more attractive form — is **false** | The *only* machine-checked justification for the axiom's meaning hypothesis; the module **declines** the attractive form rather than quietly stating the weaker one |
-| C346/C348 | `Loves` and `GroundLoves` are provably disjoint; the transfer is **unstatable** | No route from the ground's love to a created person exists here; bridge #9 (C228) stands exactly as it was, so F3, F6/Trinity and the personal-monotheism frontier do not move |
+| C346/C348 | `Loves` and `GroundLoves` are provably disjoint; the transfer is **unstatable** | No route from the ground's love to a created person exists here; hypostatic identity remains open despite confirmed ground personhood (C228), so F3, F6/Trinity and the personal-monotheism frontier do not move |
 
 Limits that belong to the row, not to a footnote:
 

@@ -37,7 +37,7 @@
   {
    "def": "ofGround_noInternalComponents",
    "name": "ofGround_noInternalComponents",
-   "location": "DivineClassicalAttributes.lean:734",
+   "location": "DivineClassicalAttributes.lean:741",
    "anchor": "Entity.ofGround => False",
    "tag": "VOCAB",
    "cost": "Indivisibility stipulated by match arm: the simplicity theorem unfolds this False.",
@@ -48,7 +48,7 @@
   {
    "def": "operatesAt_presencePlusObtaining",
    "name": "operatesAt_presencePlusObtaining",
-   "location": "DivineClassicalAttributes.lean:2643",
+   "location": "DivineClassicalAttributes.lean:2734",
    "anchor": "def OperatesAt",
    "tag": "SEM",
    "cost": "Operation identified with presence-plus-obtaining: foundational omnipotence is proved over the weakened reading; the causal/creative sense was BLOCKED until C493 declared universal production as a META bridge.",
@@ -67,7 +67,7 @@
    "location": "AsietyFreedom.lean:141",
    "anchor": "def AsietyFreedomOfGround",
    "tag": "META",
-   "cost": "The ground's being the ground of freedom is declared, not derived: OneEssence is vacuous, GroundsRightWrong is definitionally FreeWill (C168), and substantive grounding is BLOCKED (C228). Priced by three {} countermodels; the universal reading is strictly stronger than the existential one.",
+   "cost": "The ground's being the ground of freedom is declared, not derived: OneEssence is vacuous, GroundsRightWrong is definitionally FreeWill (C168), and no grounding relation over Entity.ofGround is available (C591). Priced by three {} countermodels; the universal reading is strictly stronger than the existential one.",
    "dependents": [
     "asietyFreedom_yields_trueChoice",
     "asietyFreedom_yields_asietyFreeWill",

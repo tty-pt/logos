@@ -1433,7 +1433,7 @@ O limite da fase puramente dedutiva manifesta-se onde a dedução pura encontra 
 - **C184 (PROVEN, 2026-09-25):** `ModalPossibilityFrontier.volitional_alternative_does_not_force_aseity` é o contramodelo complementar, com `World := Bool`, `ExtDepAt := True` e `WillsAt w _ _ := w = true`; a alternativa existe em `true`/`false`, enquanto a dependência externa em `true` refuta `Aseity`. A pegada auditada é `{}`. C182/C184 dão independência lógica bidirecional para os predicados genéricos, não um resultado de aseidade divina.
 - **C183 (PROVEN, 2026-09-25):** `Core.rightWrong_nonempty_and_nonconflating` é o fecho lógico que agrupa `greatResult` e `noBothTrueAndFalse`, com a pegada auditada `{}`. É quase definicional (`T p := p`), apenas fecha C8/C9 e não constitui uma prova transcendental nova.
 - **C185 (PROVEN, 2026-09-25):** `CanonicalAseity.false_meaning_cannot_ground_true_meaning` é a exclusão modelar genérica segundo a qual uma entidade com capacidade falsa de significado para `p` não pode fundamentar outra que tenha capacidade verdadeira para `p`. Pegada auditada: `{}`.
-- **C186 (PROVEN, 2026-09-25):** `CanonicalAseity.conditional_canonical_aseity` demonstra que `Entity.ofGround` possui aseidade canónica (`CanonicalAseity Entity.ofGround`, sem nenhum fundamento ontológico externo `ExternalGrounding g .ofGround`), sob a premissa de que os sujeitos são discriminadores (`∀ s, ∃ p, ¬ Means s p`). Teoremas auxiliares: exclusão incondicional de átomos (`atom_cannot_ground_the_ground`, `{Means, Subject}`) e exclusão de sujeitos discriminadores (`discriminating_subject_cannot_ground_the_ground`, `{Means, Subject}`). A aseidade incondicional não se deduz da lógica de agência pura sem postulado de finitude intencional (`unconditional_aseity_independent_of_bare_agency`, `{}`). Pegada auditada: `{Means, Subject}` (vocabulário).
+- **C186 (PROVEN, 2026-09-25):** `CanonicalAseity.conditional_canonical_aseity` demonstra que `Entity.ofGround` possui aseidade canónica (`CanonicalAseity Entity.ofGround`, sem nenhum fundamento ontológico externo `ExternalGrounding g .ofGround`), sob a premissa de que os sujeitos são discriminadores (`∀ s, ∃ p, ¬ Means s p`). Teoremas auxiliares: exclusão incondicional de átomos (`atom_cannot_ground_the_ground`, `{Means, Subject}`) e exclusão de sujeitos discriminadores (`discriminating_subject_cannot_ground_the_ground`, `{Means, Subject}`). A refutação do fundamento atómico (R13) é uma refutação livre direta (`atom_grounding_the_ground_yields_contradiction`, ⊥ CONTRADICTION, `{Means, Subject}`) e distinção estrita de construtores (`ofGround_ne_ofAtom`, `{Subject}`). A aseidade incondicional não se deduz da lógica de agência pura sem postulado de finitude intencional (`unconditional_aseity_independent_of_bare_agency`, `{}`). Pegada auditada: `{Means, Subject}` (vocabulário).
 - **C187–C191 (PROOF-PRESENTATION-RETORSION, 2026-09-25):** `ProofPresentationRetorsion.lean` estabelece que a mera verificação sintáctica (`Checker d = true`) não força postura normativa (`M_inanimate_checker`, C187, `{}` e `M_oneway`, C188, `{}`), mas a apresentação argumentativa da prova (`PresentsAsSound s d`, C189, `{Initiates, Means, State, Subject}`) instancia a postura normativo-judicativa e deriva a pessoa (C190, `{Initiates, Means, State, Subject, CL}`) sem axiomas substantivos.
 - **C192–C196 (DIVINE-SIMPLICITY-TRANSCENDENCE, 2026-09-25):** `DivineSimplicity.lean` formaliza a Simplicidade Divina clássica (Aquino ST I q. 3, README-OLD.md §164) e Transcendência Ontológica para `Entity.ofGround`. Resultados: (1) Não-composição mereológica (`ofGround_non_composite`, `{Means, Subject, CL}`): o fundamento não possui partes ontológicas próprias/externas mais básicas que ele próprio (`NonComposite e ↔ CanonicalAseity e`); (2) Inextensão estrutural (`ofGround_has_no_internal_components`, `{Subject}`): construtor nulo sem decomposição interna; (3) Simplicidade intencional (`ofGround_undivided_meaning`, `{Means, Subject}`): capacidade intencional uniforme e indivisa; (4) Transcendência ontológica (`ofGround_transcendent`, `{Subject}`): distinção estrita de todo o átomo e sujeito finito; (5) Síntese mestre da Simplicidade Divina (`ofGround_divine_simplicity`, C196, `{Means, Subject, CL}`), comprovada com zero axiomas substantivos; (6) Independência metateórica (`composite_entity_fails_simplicity`, C192, `{}`).
 - **C197–C201 (DIVINE-IMMUTABILITY, 2026-09-25):** `DivineImmutability.lean` formaliza a Imutabilidade Divina clássica (Aquino ST I q. 9, README-OLD.md §160-161) e Invariância Ontológica para `Entity.ofGround`. Resultados: (1) Invariância modal (`ofGround_modal_invariance`, `{Subject}`): existência invariante em todos os mundos possíveis; (2) Invariância temporal / estágios (`ofGround_stage_invariance`, `{Subject}`): existência invariante ao longo do tempo; (3) Invariância de processo e transição (`ofGround_transition_invariance`, `{Initiates, State, Subject}`): o fundamento está fora de qualquer sucessão iniciada por sujeitos; (4) Invariância intencional (`ofGround_capacity_invariance`, `{Means, Subject}`): capacidade de significado constante; (5) Síntese mestre da Imutabilidade Divina (`ofGround_divine_immutability`, C201, `{Initiates, Means, State, Subject}`), comprovada com zero axiomas substantivos; (6) Independência metateórica (`contingent_entity_fails_immutability`, C197, `{}`).
@@ -1442,7 +1442,7 @@ O limite da fase puramente dedutiva manifesta-se onde a dedução pura encontra 
 - **C202–C206 (FOUNDATIONAL-OMNIPRESENCE, 2026-09-25):** `FoundationalOmnipresence.lean` formaliza a Onipresença Fundacional clássica (Aquino ST I q. 8, README-OLD.md §163-164, §253) e Fundamentação Modal Universal para `Entity.ofGround`. Resultados: (1) Presença rígida através do espaço modal (`ofGround_world_rigid_presence`, `{Subject}`): presente em todos os mundos possíveis; (2) Fundamentação modal universal (`ofGround_universal_modal_ground`, `{Means, Subject}`): o fundamento sustenta ontologicamente todo o ente em qualquer mundo; (3) Fundamentação não-recíproca (`ofGround_non_reciprocal_ground`, `{Means, Subject}`): nenhum ente mundano atómico ou sujeito discriminador fundamenta o fundamento; (4) Capacidade intencional máxima (`ofGround_maximal_capacity`, `{Means, Subject}`): alcance proposicional exaustivo; (5) Síntese mestre da Onipresença Fundacional (`ofGround_foundational_omnipresence`, C206, `{Means, Subject}`), comprovada com zero axiomas substantivos; (6) Independência metateórica (`finite_entity_fails_omnipresence`, C202, `{}`).
 - **C207–C213 (FOUNDATIONAL-UNICITY, 2026-09-25):** `FoundationalUnicity.lean` formaliza a Unicidade Fundacional clássica (Aquino ST I q. 11 a. 3, Monoteísmo Estrutural) para `Entity.ofGround`. Resultados: (1) Unicidade do fundamento universal sob fundamentação assimétrica (`universal_ground_unicity`, C207, `{CL, Means, Subject}`): dois fundamentos universais distintos não podem coexistir; (2) Exclusão de átomos (`no_atom_is_universal_modal_ground`, C208, `{Means, Subject}`); (3) Exclusão de mentes finitas (`no_discriminating_subject_is_universal_modal_ground`, C209, `{Means, Subject}`); (4) Candidato fundacional único no inventário ontológico de Γ (`ofGround_sole_universal_ground`, C210, `{Means, Subject}`); (5) Síntese mestre da Unicidade Fundacional (`ofGround_foundational_unicity`, C211, `{CL, Means, Subject}`), comprovada com zero axiomas substantivos; (6) Separação metateórica de não-colapso unitarista (`unicity_does_not_force_unitarian_monad`, C212, `{}`): a unicidade do fundamento não força um monadismo relacionalmente solitário, mantendo aberta a fronteira trinitária; (7) Transcendência real perante o mundo contra o panteísmo (`unicity_strictly_transcends_world`, C213, `{Subject}`). **CORRIGIDO em §34:** os itens (1) e (5) repousavam sobre `AsymmetricGrounding`, que C316 prova **insatisfazível** (a fundamentação é reflexiva, C313, e faltava a guarda `g1 ≠ g2`); a unicidade foi refeita em C317–C320 sobre a hipótese pagável e nomeada de F15, e o preço é `MaximalCapacity`, que já existia (C314).
 - **C429–C431 (panteísmo por identidade, §18, 2026-09-28):** `CosmicExistence.lean` introduz o predicado `Universe e := ∀ w x, ExistsAt w x → e = x` ("o que obtém **é** e") — a única leitura de identidade bem-formada sobre o tipo `Entity` de Γ — e fecha a exclusão do panteísmo nessa forma. (1) `no_entity_is_identical_to_the_whole` (C429, `{NecessarySubjectKind, Subject}`): a forma de identidade falha para os três construtores de `Entity` de uma vez, pela exaustão dos construtores — barata, e deve ser lida como barata: diz que `Entity` é um indutivo com construtores distinguíveis, não que uma ontologia do universo foi adjudicada filosoficamente. (2) `the_ground_is_not_the_universe` (C430, mesma pegada): a manchete, lida de C429 em `e := Entity.ofGround`. (3) `grounding_never_yields_identity_of_the_totality` (C431, `{Means, NecessarySubjectKind, Subject}`): fundar e identificar não são alternativas compatíveis — o antecedente de `OneEssence` vale para toda a entidade (C328), logo o conteúdo da linha está inteiramente na metade `¬ Universe e`. **O que fica por alcance:** a leitura agregada ("o universo não é uma entidade") não é uma proposição sobre `Entity` e fica por isso não-enunciável, não refutada; a contingência do domínio permanece BLOCKED em `SUBJECTS.md` §4.
-- **C564 (ledgered 2026-10-02, PROVEN desde antes mas invisível ao livro-razão):** `CosmicExistence.ofGround_not_a_person_correlate : ¬ PersonCorrelate Entity.ofGround`, com `PersonCorrelate g := ∃ s, g = EntityOf s ∧ Person s` (renomeado de `PersonalEntity` no mesmo lote, para coincidir com a linguagem de "correlato" já usada noutras linhas, p.ex. `ofGround_ne_ofSubject`). A prova descarta inteiramente o conjunto `Person s` e reduz-se à mesma disjunção de construtor de C429–C431: `Entity.ofGround ≠ EntityOf s` por `Entity.noConfusion`. Pegada auditada: `{Means, Subject, Will, subjectWill}`. **Da mesma família que C430** — exclusão/transcendência barata, não uma negação rica de personalidade. **Não resolve C228** (`GenericGroundsRightWrong g → PersonCorrelate g`, continua `BLOCKED` para `g` arbitrário): esta linha fecha apenas a instância `g := Entity.ofGround`, negativamente — mais forte do que "em aberto" só para esse caso específico. Ver `ISSUE_C_PLAN.md` para o historial completo deste lote (três renomeações e o preenchimento deste parágrafo).
+- **C564 (ledgered 2026-10-02, PROVEN desde antes mas invisível ao livro-razão):** `CosmicExistence.ofGround_not_a_person_correlate : ¬ PersonCorrelate Entity.ofGround`, com `PersonCorrelate g := ∃ s, g = EntityOf s ∧ Person s` (renomeado de `PersonalEntity` no mesmo lote, para coincidir com a linguagem de "correlato" já usada noutras linhas, p.ex. `ofGround_ne_ofSubject`). A prova descarta inteiramente o conjunto `Person s` e reduz-se à mesma disjunção de construtor de C429–C431: `Entity.ofGround ≠ EntityOf s` por `Entity.noConfusion`. Pegada auditada: `{Means, Subject, Will, subjectWill}`. **Da mesma família que C430** — exclusão/transcendência barata, não uma negação rica de personalidade. **Coexiste provadamente com C228** (`GenericGroundsRightWrong g → PersonCorrelate g`, PROVEN): por C591 (`ofGround_not_generic_grounds_right_wrong`), `Entity.ofGround` não instancia `GenericGroundsRightWrong`, pelo que o solo não é um quarto correlato-indivíduo de sujeito e a sua pessoalidade é afirmada via `PersonalGround` (C590). Ver `ISSUE_C_PLAN.md` para o historial completo deste lote (três renomeações e o preenchimento deste parágrafo).
 - **C214–C220 (DIVINE-PURE-ACTUALITY, 2026-09-25):** `DivinePureActuality.lean` formaliza o Ato Puro e Perfeição Divina clássica (Aquino ST I q. 3-4, Aristóteles Metaph. XII.7, *Actus Purus*) para `Entity.ofGround`. Resultados: (1) Ausência de potência existencial passiva (`ofGround_no_existential_potency`, `{Subject}`): existência necessária em todos os mundos; (2) Ausência de potência de fundamentação passiva (`ofGround_no_grounding_potency`, `{Means, Subject}`): independência ontológica absoluta e asseidade no ato; (3) Ausência de potência de transição e devir (`ofGround_no_transition_potency`, `{Initiates, State, Subject}`): imunidade à sucessão e devir criado; (4) Ausência de potência intencional (`ofGround_no_intentional_potency`, `{Means, Subject}`): significado proposicional exaustivo; (5) Síntese mestre do Ato Puro Divino (`ofGround_divine_pure_actuality`, C219, `{Initiates, Means, State, Subject}`), comprovada com zero axiomas substantivos; (6) Incorporeidade e imaterialidade divina (`ofGround_incorporeal`, C220, `{Subject}`): exclusão de átomos e matéria corpórea; (7) Independência metateórica (`entity_with_potency_fails_pure_actuality`, C214, `{}`).
 
 - **C233–C240 (FOUNDATIONAL-OMNISCIENCE, 2026-09-26):** `DivineOmniscience.lean` formaliza a Onisciência Fundacional clássica — o fundamento como condição de toda a verdade (Aquino ST I q. 14 a. 1, README-OLD.md §263, CHARACTERISTICS.md §14) para `Entity.ofGround`. Resultados: (1) Independência metateórica exaustividade/infalibilidade (`entity_scope_exhaustiveness_is_not_infallibility`, `{}`): um âmbito pode ser exaustivo sobre toda a proposição verdadeira e ainda assim não rastrear a verdade exactamente; (2) Onisciência fundacional (`ofGround_truth_exhaustive`, `{Means, Subject}`): nenhuma proposição verdadeira está fora do âmbito do fundamento; (3) Exaustividade indexada por mundo (`ofGround_world_truth_exhaustive`, `{Means, Subject}`): nenhum estado de affairs verdadeiro em qualquer mundo possível está fora do âmbito; (4) Refutação do sentido forte (`ofGround_not_truth_tracking`, `{Means, Subject}`): como `EntityMeans .ofGround p` se reduz a `True` (estipulação ◈ `ofGround_meansAll`), a metade exclusiva `EntityMeans e p → T p` é falsa do fundamento — o âmbito é exaustivo e provadamente não é isento de erro, pelo que a leitura clássica "todas e apenas as verdadeiras" é refutada, não apenas omitida; (5) Exclusão de átomos (`atom_not_truth_exhaustive`, `{Means, Subject}`) e de sujeitos discriminadores (`discriminating_subject_not_truth_exhaustive`, `{Means, Subject}`); (6) Síntese mestre da Onisciência Fundacional (`ofGround_foundational_omniscience`, `{Means, Subject}`), com a refutação da infalibilidade transportada como campo do registo; (7) Contramodelo de não-forçamento do sentido contrafactual (`exhaustive_scope_without_counterfactual_knowledge`, `{}`); princípio tomista associado: `necessity_and_scope_yield_foundational_omniscience` (`{Means, Subject}`). A onisciência clássica/ordinária continua desmentida na prosa: Γ não tem predicado `Knows` e `Entity.ofGround` não é correlato de sujeito (`ofGround_ne_ofSubject`), pelo que nenhuma ponte de conhecimento divino é manufacturada.
@@ -1461,8 +1461,7 @@ JUDGE_HAS_CHOICE_FIELD/judge_commits (sem certo e errado não há campo de
   escolha). A escolha genuína `Chooses(s,p,q) := Means(s,p) ∧ Means(s,q) ∧
   Incompatible(p,q)` e a liberdade definicional `FreeWill(s) := ∃p q, Chooses`
   (chooses_implies_freeWill, `{Means, Subject}`, só vocabulário) estão em Choice.lean; a sua *existência*
-  está provada sob a polaridade do ato de significado (`NoMeanerNoFalsity.a_genuine_free_person_exists` sob `{performative_act_datum, AxActPolarity}`, 0 axiomas META — C587) — ver
-   theorems/T11.txt e formal/GAPMAP.md C49–C57/F1b/C587.
+  está provada primariamente pela cadeia bem-fundada de determinação constitutiva em treze passos (steps 1–13: `LibertarianPersonhood.free_subject_exists_via_judgment_chain`, `person_exists_via_judgment_chain`, `person_grounds_right_wrong_via_judgment_chain` sob o axioma transcendental `demonstration_occurs`, `Tag: TRANS`, C592–C595), retendo-se no kernel a rota co-preservada de polaridade do ato (`NoMeanerNoFalsity.a_genuine_free_person_exists`, C587) — ver theorems/T11.txt e formal/GAPMAP.md §33.
 T12 (mais do que uma pessoa) — PROVEN↑ sob a ponte META `AxTwoNecessaryPersonalCentres`:
   a pluralidade exige uma ponte metafísica, demonstrada indispensável pelo
   contramodelo `UnitPluralityCountermodel` em `HostileSemantics` (um único
@@ -1654,7 +1653,7 @@ Trinity — **CASO, não dedução** (condicional; §28/§29): sob três premiss
   unicitarismo, o amor-criatura, o amor-atributivo e o **binitarismo**. Logo *três* é exactamente o
   preço do Espírito, e nada mais barato o produz. A dedução **incondicional** não existe: as suas
   três lemmas exactas estão nomeadas por extenso na nota formal abaixo. A Encarnação (F8) não é
-  tocada — o Verbo de C510 não é a Encarnação, e C228 (identidade hipostática) continua bloqueada.
+  tocada — o Verbo de C510 não é a Encarnação, e a identidade hipostática do solo (distinta de C228) continua bloqueada.
 Identidade hipostática do fundamento com uma pessoa (g = EntityOf s enquanto pessoa) — BLOQUEADA:
   `ofGround_ne_ofSubject` (`Entity.noConfusion`). O fundamento é necessário como *entidade*
   (mundo-rígida) e o *tipo*-fundamento é pessoal — sem linha de identidade entre as duas.
@@ -1797,9 +1796,12 @@ Teologia forte da eternidade divina (eternidade metafísica "fora de toda a temp
   (o segundo campo do mestre da imutabilidade e a "atemporalidade" de §8 são um passo, não
   dois). A teologia forte continua NÃO reivindicada — o que mudou foi a fronteira, que
   deixou de ser uma frase para ser um teorema.
-Pontes abertas nomeadas #7/#9 (ligado ao Apêndice Formal Frontiers do README gerado):
-  #7 `NecessaryEntity e → ∃ τ, Ground e τ` e o seu alvo oposto #8; #9 `Ground(e, personal) → Personal(e)`
-  e o seu alvo #10. Nenhuma delas é provada nem assumida; estão enumeradas como fronteira aberta nomeada.
+Pontes abertas (#7 ligada ao Apêndice Formal Frontiers do README gerado; #9 resolvida em C228):
+  #7 `NecessaryEntity e → ∃ τ, Ground e τ` e o seu alvo oposto #8 permanecem em aberto.
+  A ponte #9 `Ground(e, personal) → Personal(e)` (C228) está PROVEN em duas âncoras:
+  (1) `normative_ground_is_personal` para qualquer entidade que satisfaça `GenericGroundsRightWrong`,
+  e (2) `PersonalGround Entity.ofGround` (`the_ground_is_not_void_of_personhood`, C590),
+  coexistindo com C564 através de C591. Em aberto permanece a identidade hipostática e a contagem de Pessoas.
 Conjectura nomeada OpenBridgeNormativity (§0.10) — a ponte positiva bivalência → normatividade genuína,
   proposta como `∀ s p, Judge s p → GenuineNormativity s p (¬p)` (ou a variante com antecedente de postura):
   BLOQUEADA sob bivalência nua — `M_inanimate` testemunha bivalência sem forma-GN (C167, `{}`);
@@ -2056,7 +2058,7 @@ do construtor, pelo que `ground_grounds_every_entity` é `intro p _; exact True.
 declara diz que a transferência "é vacua, e é exactamente esse o ponto";
 (ii) o único predicado de fundamentação não vacuo, `GroundsRightWrong`, é **definicionalmente**
 `∃ p q, Chooses s p q` (C168) — já colapsado à liberdade, sem qualquer conteúdo de fundamento;
-(iii) a relação de fundamentação **substantiva** está `BLOCKED`, com lema nomeado (C228).
+(iii) nenhuma relação de fundamentação substantiva sobre `Entity.ofGround` está disponível (C591; C228 vale para qualquer entidade que satisfaça `GenericGroundsRightWrong`).
 
 Por isso `AsietyFreedomOfGround` fica registada como **estipulação definicional ◈**
 (`Stipulations.lean`, `Tag: META`), pelo precedente de `operatesAt_presencePlusObtaining`. Daí
@@ -2123,7 +2125,7 @@ correcta. Nenhuma destas cinco coisas deve ser lida como resolvida por este lote
 
 Ainda requer prova (o que falta, em termos formais): (a) qualquer derivação de
 `AsietyFreedomOfGround` a partir do vocabulário de fundamentação de Γ — bloqueada por (i)–(iii)
-acima, e a relação substantiva continua `BLOCKED` sob C228; (b) a existência de um sujeito
+acima, e nenhuma relação substantiva de fundamentação sobre `Entity.ofGround` está disponível (C591); (b) a existência de um sujeito
 asiético a partir de `¬ N_T ∧ ¬ N_F` sozinha — refutada por C294; (c) a passagem, par a par, de
 `ContestedContent` para `OpenAlternative p q` — bloqueada pela ausência de ponte `Prop ↔ Form`,
 e registrada por C293. Nenhum destes três é um `?` novo: são os mesmos três bloqueios, nomeados.
@@ -2199,7 +2201,7 @@ prova" passa a dizer, e é a formulação correcta.
 fundamentação *substantiva* que ligue `Entity.ofGround` ao conteúdo normativo de um sujeito — Γ não
 declara nenhuma, porque `OneEssence` é vacua e `GroundsRightWrong` é definitionamente `∃ p q,
 Chooses s p q` (C168), ou seja já é livre-arbítrio e usá-la como antecedente seria circular; e a
-relação substantiva continua `BLOCKED` sob C228, com a sua lemma nomeada verbatim. **(2) derivação
+nenhuma relação de fundamentação substantiva sobre `Entity.ofGround` está disponível (C591; C228 vale para qualquer entidade que satisfaça `GenericGroundsRightWrong`). **(2) derivação
 em falta**, de tal relação mais `Asiety (EntityOf s)` para `TrueChoice s p q` a todo o par
 incompatível — e C299 é a refutação machine-checked de que isto não se descarrega de uma premissa da
 forma de `OneEssence`. (ii) **F13** (`BLOCKED`, e **refutado como derivável**, não apenas
@@ -2386,8 +2388,7 @@ corpus. Os números de inventário impressos no cabeçalho desta secção (25 de
 SEM 7 / META 4) são o **registo histórico de 2026-09-27** e ficam como estavam, pela convenção do
 ficheiro: estão correctos para o que era verdade nessa data. O inventário corrente está em
 `GAPMAP.md` e é conferido por `scripts/gapmap_taxonomy.py --check`. C228 (a **personalidade** do
-fundamento) continua `BLOCKED` e não foi tocado — e é *a montante* da contagem de pessoas, porque
-sem ela a pergunta «quantas pessoas?» nem sequer está bem posta sobre `Entity.ofGround`. O
+fundamento) está PROVEN em duas âncoras (C228 e PersonalGround em C590), restando aberta a contagem de Pessoas (C212) e a identificação hipostática. O
 **Monoteísmo** (um só Deus) não é C228 e não é C212: é C320, e está provado. O que C212 deixa em
 aberto é a *contagem de pessoas* desse só Deus — como **separação** (a unicidade não implica um mônada
 unitário), não como refutação; e o dado positivo plural é o axioma META declarado `AxAgapeEssence`
@@ -2435,13 +2436,32 @@ vindos de um analisador Lean real, o registo do gerador, e `scripts/test_axiom_c
 fechou também um vector de lavagem: apagar um axioma real e acrescentar uma linha de comentário que
 comece por `axiom ` mantinha a contagem — precisamente a edição que o pin existe para apanhar.
 
+**§34 ter, actualizada em 2026-10-08 (lote SEMANTIC-FINITUDE-DIVINE-FULLNESS).** A restrição
+de `SemanticFinitude` às criaturas contingentes foi consumada e a plenitude semântica das três
+Pessoas divinas foi positivamente afirmada (`DivinePersonsTotalMeaning`, `Tag: META`), enquanto
+`GroundTranscendence` foi inteiramente eliminado do núcleo.
+
+1. **A plenitude semântica das Pessoas divinas é afirmada, não apenas isentada.** Pelo novo axioma
+   declarado `DivinePersonsTotalMeaning` (`∀ s : Subject, NecessarySubjectKind s → ∀ p : Prop, Means s p`),
+   as três Pessoas divinas significam toda a proposição (homoousios). A negação anterior em
+   `necessary_kind_subject_lacks_maximal_capacity` foi revogada e invertida em
+   `necessary_kind_subject_has_maximal_capacity`.
+
+2. **A unicidade e os atributos divinos são reformulados modulo as três Pessoas.** Sob a ortodoxia
+   católica, a procissão intratrinitária das Pessoas a partir da fonte não é dependência alienígena.
+   As 24 linhas anteriores foram reescritas modulo os correlatos das três Pessoas (`EntityOf a`,
+   `EntityOf b`, `EntityOf c`), pagando a ponte `TrinitarianPersonalBridge` (META) e o limite
+   criatural `SemanticFinitude` (VOCAB).
+
+A contagem de axiomas mantém-se rigidamente invariante em **39** (18 `VOCAB` / 6 `SEM` / 13 `META` / 2 `TRANS`).
+
 35. O FUNDAMENTO COMO AMANTE, E OS DOIS PREÇOS DESSA AFIRMAÇÃO
 
 (2026-09-27, lote LOVESASGROUND-CATCHUP. `formal/Logos/LovesAsGround.lean` e
 `formal/Logos/CosmicExistence.lean`; GAPMAP nível 21, C322–C354 mais 4 linhas `—`;
 `theorems/T30.txt`. **Zero axiomas novos** — o registo continua **25 declarados** (VOCAB
 14 / SEM 7 / META 4). Tudo é **estritamente aditivo**: nenhuma afirmação anterior foi
-removida, nenhum `PROVEN` foi rebaixado, e C228 **não foi tocado**.)
+removida, nenhum `PROVEN` foi rebaixado, e C228 está provado sob duas âncoras.)
 
 `poem.txt:24` diz que o Ser não é "só um fundamento" — e acrescentava, na mesma linha,
 "amar é escolhido e também é necessário (de alguma forma)". A segunda metade já tinha
@@ -2598,9 +2618,8 @@ Ainda requer prova (o que falta, em termos formais):
       `∀ g t : Entity, a : Prop, GroundLoves g t a → ∃ s u : Subject, g = EntityOf s ∧
       t = EntityOf u ∧ Loves s u`. Não é apenas não provada: é **instável** (C348). A
       única forma de a tornar bem-formada é uma **identificação hipostática**, que a
-      biblioteca não tem. Esta é a **ponte #9 / C228**, e por isso **F3, F6/Trindade e a
-      fronteira do monoteísmo pessoal não se movem** — o que é o resultado honesto, e não
-      uma demissão.
+      biblioteca não tem (distinta de C228, provada sob as duas âncoras), e por isso a
+      passagem de amor interpessoal continua aberta sem demissão.
   (3) ~~**DADO EM FALTA**~~ **[RESOLVIDO 2026-09-27, lote COSMOS-IS-PROVEN; refundido
       2026-09-27 pelo lote COSMOS-EXISTENCE-IS-FREE]**: esta entrada dizia que a existência
       de um reino contingente portador de conteúdo é `AXIOM` (C350, `Tag: SEM`), não
@@ -2830,8 +2849,8 @@ conceda que ambos subsistem, conceda o amor — e resta negar a localização pa
 rota*, não anotado: C578 (`self_donation_needs_no_personhood_of_the_ground`, linha R21) é a
 conjunção `¬ Asiety Entity.ofGround ∧ ∃ f o, SelfDonation f o` — o chão **não** é entidade
 asiética (primeiro conjuncto livre), **e** a doação mantém-se (segundo conjuncto, um META). O
-preço compra a dádiva e nada mais: nem um quarto que escolhe, nem a pessoalidade do chão (C228
-continua `BLOCKED` ao nível da entidade). A forma modal — *necessário ⇒ acto necessário* —
+preço compra a dádiva e nada mais: nem um quarto que escolhe, enquanto a pessoalidade do chão
+está confirmada em C228 e PersonalGround (C590) sem fazer do chão um quarto escolhedor. A forma modal — *necessário ⇒ acto necessário* —
 também não atravessa: `necessary_nature_not_entails_necessary_act` (`{}`, linha R20) separa a
 entidade necessária `g` do sujeito actuante `s`, pelo que mostra exactamente o que mostra
 (necessidade da natureza não implica necessidade do acto) e não mostra que o chão actue.
@@ -2891,13 +2910,12 @@ removido; um **preço** foi lido como profundidade, e a liberdade do chão saiu 
 `LOVE-2.md` D1 retira as duas frases e restaura a leitura de `AsietyFreedom.lean` (`load-bearing`,
 *transferred*).
 
-**C580 sai BLOCKED.** A correspondência entre o `Subject` da ponte e o `DivineHypostasis` da
-doação não está descarregada (`TrinitarianSubjectBridge.lean` §11). Falta, exactamente:
-`HypostasisOf : Subject → DivineHypostasis → Prop`, com `HypostasisOf s d → Subsists d`, e com
-dois dos três sujeitos da ponte a corresponderem aos dois relata de `SelfDonation`. **Não foi
-comissionado nada**, e a lacuna não pode ser preenchida como identidade: `EntityOf _ =
-Entity.ofGround` é rejeitado pelo Gate B em qualquer `axiom` e é refutado por
-`ofGround_ne_ofSubject`. A fronteira move-se `32 → 33`.
+**C580 descarregado como PROVEN↑ (2026-10-09).** A correspondência entre o `Subject` da ponte e
+o `DivineHypostasis` da doação está agora definida por relação de origem (`HypostasisOf`, def sem axiomas):
+`HypostasisOf s d → Subsists d` prova-se gratuitamente, e `bridge_subjects_correspond` conecta
+os três sujeitos necessários da ponte ao Pai, ao Amado e ao Espírito sem qualquer identidade de
+entidade (`ofGround_ne_ofSubject` permanece intacto). Juntamente com `self_giving_necessitates_a_distinct_necessary_other`
+(C597, `{NecessarySubjectKind, Subject}`, 0 axiomas substantivos), o Outro distinto e necessário é provado.
 
 **O que sai do caminho de leitura.** `necessary_nature_not_entails_necessary_act` (linha R20) é um
 `{}` sobre uma **assinatura fresca** e localement quantificada (`∃ World Entity Subject …`, com

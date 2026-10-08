@@ -234,9 +234,82 @@
       "rebuttal_target": "Logos.CompleteLibertarianFreedomArgument.proof_exists_implies_existence_of_free_subject",
       "rebuttal_formula": "ProofExists C → ∃ s, FreeSubject C s",
       "supporting_targets": [
-        "CompleteLibertarianFreedomArgument.FinalNonCircularClosure.FreeSubject",
-        "CompleteLibertarianFreedomArgument.FinalNonCircularClosure.FreeWillAt",
-        "Agency.Subject"
+        "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.FreeSubject",
+        "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.FreeWillAt",
+        "Logos.Agency.Subject"
+      ]
+    },
+    {
+      "id": "step11_bridge_free_subject",
+      "label": "CHOICE BRIDGE",
+      "title": "11. Canonical Bridge: Libertarian Freedom to Genuine Choice",
+      "formula": "FreeSubject gammaSem s → Choice.FreeSubject s",
+      "explanation": "Libertarian freedom in the canonical two-world semantics strictly derives genuine choice between incompatible alternatives.",
+      "summary": "Libertarian freedom in the canonical two-world semantics gammaSem strictly derives the genuine choice and Free Subject of Choice.lean (`Logos.LibertarianPersonhood.gamma_freeSubject_is_choice`). Discharged with 0 substantive axioms via incompatible self-negation (`incompatible_self_negation`).",
+      "summary_short": "Libertarian freedom in the canonical semantics strictly derives genuine choice (`gamma_freeSubject_is_choice`).",
+      "primary_targets": [
+        "LibertarianPersonhood.gamma_freeSubject_is_choice"
+      ],
+      "disclosure": "0 substantive axioms. Pure logic.",
+      "investigation_link": "investigations/free-will.md",
+      "pushback": "\"A modal divergence across possible worlds does not yield genuine cognitive choice between incompatible contents.\"",
+      "pushback_short": "\"Modal divergence across worlds does not yield genuine cognitive choice.\"",
+      "reply": "The canonical semantics defines assent as meaning the proposition and withholding as meaning its negation; divergence yields co-meaning of incompatible alternatives, which is definitionally Choice.",
+      "reply_short": "Divergence under the canonical semantics yields co-meaning of incompatible horns, which definitionally constitutes Choice.",
+      "rebuttal_target": "Logos.LibertarianPersonhood.gamma_freeSubject_is_choice",
+      "rebuttal_formula": "FreeSubject gammaSem s → Choice.FreeSubject s",
+      "supporting_targets": [
+        "Logos.Choice.FreeSubject",
+        "Logos.Choice.Chooses",
+        "Logos.Alternatives.Incompatible"
+      ]
+    },
+    {
+      "id": "step12_person",
+      "label": "PERSON",
+      "title": "12. The Free Subject Is an Authoritative Person",
+      "formula": "Person s",
+      "explanation": "The Free Subject delivered by the judgment-determination chain is constitutively an authoritative Person in the Boethian-Thomistic sense.",
+      "summary": "The Free Subject delivered by the judgment-determination chain is constitutively an authoritative Person (`Logos.LibertarianPersonhood.person_exists_via_judgment_chain`). Derived under the performative demonstration axiom (`demonstration_occurs`, Tag: TRANS).",
+      "summary_short": "The Free Subject is constitutively an authoritative Person (`person_exists_via_judgment_chain`).",
+      "primary_targets": [
+        "LibertarianPersonhood.person_exists_via_judgment_chain"
+      ],
+      "disclosure": "0 substantive axioms; 1 TRANS (`demonstration_occurs`).",
+      "investigation_link": "investigations/divine-personhood.md",
+      "pushback": "\"A choosing agent is merely an epistemic operator, not a full substance with individual personhood.\"",
+      "pushback_short": "\"A choosing agent is an epistemic operator, not an individual person.\"",
+      "reply": "By the Boethius-Aquinas criterion, dominion over acts combined with will individuation strictly constitutes Personhood (`free_subject_is_person`).",
+      "reply_short": "Dominion over acts with individuated will strictly constitutes Personhood (`free_subject_is_person`).",
+      "rebuttal_target": "Logos.LibertarianPersonhood.person_exists_via_judgment_chain",
+      "rebuttal_formula": "∃ s, Person s",
+      "supporting_targets": [
+        "Logos.Person.Person",
+        "Logos.Person.free_subject_is_person"
+      ]
+    },
+    {
+      "id": "step13_grounds_right_wrong",
+      "label": "GROUNDS RIGHT/WRONG",
+      "title": "13. Personal Agency Grounds Objective Right and Wrong",
+      "formula": "Person s ∧ GroundsRightWrong s",
+      "explanation": "The Person established by the judgment-determination chain grounds objective Right and Wrong, with one single witness satisfying all conditions.",
+      "summary": "The Person established by the judgment-determination chain grounds objective Right and Wrong (`Logos.LibertarianPersonhood.person_grounds_right_wrong_via_judgment_chain`). One individual witness satisfies free subjecthood, personhood, and normative grounding simultaneously.",
+      "summary_short": "The Person established by judgment determination grounds objective Right/Wrong (`person_grounds_right_wrong_via_judgment_chain`).",
+      "primary_targets": [
+        "LibertarianPersonhood.person_grounds_right_wrong_via_judgment_chain"
+      ],
+      "disclosure": "0 substantive axioms; 1 TRANS (`demonstration_occurs`).",
+      "investigation_link": "investigations/grounding.md",
+      "pushback": "\"Even if a person exists, objective correctness might remain ungrounded or grounded in an impersonal platonic structure.\"",
+      "pushback_short": "\"Objective correctness might remain grounded in an impersonal structure.\"",
+      "reply": "Normative grounding is transparently forced by personhood (`person_grounds_normative_polarity`), establishing that the ontological ground is personal in kind.",
+      "reply_short": "Normative grounding is transparently forced by personhood (`person_grounds_normative_polarity`).",
+      "rebuttal_target": "Logos.LibertarianPersonhood.person_grounds_right_wrong_via_judgment_chain",
+      "rebuttal_formula": "∃ s, Person s ∧ GroundsRightWrong s",
+      "supporting_targets": [
+        "Logos.PersonalNormativeGround.GroundsRightWrong",
+        "Logos.PersonalNormativeGround.person_grounds_normative_polarity"
       ]
     }
   ],
@@ -294,6 +367,24 @@
       "to": "step10_free_subject",
       "gloss": "free will in the actual world concludes the Free Subject",
       "kind": "discovery"
+    },
+    {
+      "from": "step10_free_subject",
+      "to": "step11_bridge_free_subject",
+      "gloss": "libertarian freedom bridges to genuine choice",
+      "kind": "discovery"
+    },
+    {
+      "from": "step11_bridge_free_subject",
+      "to": "step12_person",
+      "gloss": "the free subject is constitutively a person",
+      "kind": "discovery"
+    },
+    {
+      "from": "step12_person",
+      "to": "step13_grounds_right_wrong",
+      "gloss": "the person grounds objective right and wrong",
+      "kind": "grounding"
     }
   ],
   "reading_sections": [
@@ -303,11 +394,12 @@
       "heading": "### Necessity, and Exactly What It Costs",
       "title": "11. Necessity, and Exactly What It Costs",
       "body": [
-        "{row_count} rows, because each is a different fact. **The order is necessary with no premise at all.** A free subject exists on **one** META bridge. A necessary *person* is a **second** META axiom. Merging them into one claim is how an honest price becomes a dishonest boast.",
+        "{row_count} rows, each a different fact. **The order is necessary with no premise at all.** A free subject and an authoritative Person both exist on the **free main route** (1 TRANS `demonstration_occurs`, 0 substantive axioms).",
+        "World-rigid modal necessity (`NecessarySubject s := ∀ w, ExistsAt w (EntityOf s)`) across all possible worlds is a separate modal predicate, priced at the declared bridge `necessaryPersonalSubjectExists` (C404/C409).",
         "The price attaches to the route, never to the name: `FreeSubject` is *defined* as `FreeWill` (`Choice.lean:185`, `freeSubject_iff_freeWill` is `Iff.rfl`), so `freeSubject_exists` and `freeWill_exists` carry the same footprint.",
         "Before 2026-09-30 the surface priced the Free Subject dearer than free will for one identical predicate.",
         "Necessity is the ground's, and the ground is not a subject-correlate: `ofGround_ne_ofSubject` (`{}`).",
-        "So \"the Free Subject is necessarily true\" is true of the *order* and of the *subject's existence* — and the necessary-person row is the one that would need C404. Say which, and the sentence is true."
+        "So \"the Person is necessarily true\" is true of the *order* and of the *person's agential existence* (0 substantive axioms) — and the world-rigid row is the one that needs C404. Say which, and the sentence is true."
       ],
       "price_table": [
         {
@@ -326,16 +418,23 @@
         },
         {
           "row": "A **free subject exists**",
-          "gloss": "Unconditional existence, via `freeWill_exists`. The one META bridge is `AxTwoSubjects` — plural personal reality.",
+          "gloss": "Unconditional existence under the stipulated proof, via `free_subject_exists_via_judgment_chain`. 0 substantive axioms, 1 TRANS (`demonstration_occurs`).",
           "targets": [
-            "AsieticChoice.freeSubject_exists"
+            "LibertarianPersonhood.free_subject_exists_via_judgment_chain"
           ]
         },
         {
           "row": "**Free will** exists",
-          "gloss": "The same predicate under the other name; identical footprint by construction, not by coincidence.",
+          "gloss": "The same predicate under the other name; identical 1 TRANS footprint by construction (`free_will_exists_via_judgment_chain`).",
           "targets": [
-            "AsieticChoice.freeWill_exists"
+            "LibertarianPersonhood.free_will_exists_via_judgment_chain"
+          ]
+        },
+        {
+          "row": "An authoritative **person exists**",
+          "gloss": "Unconditional existence under the stipulated proof, via `person_exists_via_judgment_chain`. 0 substantive axioms, 1 TRANS (`demonstration_occurs`).",
+          "targets": [
+            "LibertarianPersonhood.person_exists_via_judgment_chain"
           ]
         },
         {
@@ -346,10 +445,10 @@
           ]
         },
         {
-          "row": "A **necessary person** exists",
-          "gloss": "C404/C407: the second META bridge (`necessaryPersonalSubjectExists`). This is the row that would have to be paid for a necessary Free Subject.",
+          "row": "A **necessary person** exists (world-rigid)",
+          "gloss": "C404/C409: derived under the declared META bridge `necessaryPersonalSubjectExists` via `necessary_person_derived_from_bridge`. World-rigid persistence across all possible worlds.",
           "targets": [
-            "Plurality.necessarySubject_exists"
+            "NecessaryPersonalGround.necessary_person_derived_from_bridge"
           ]
         },
         {
@@ -388,7 +487,7 @@
           "targets": [
             "FoundationalUnicity.exactly_one_universal_modal_ground"
           ],
-          "gloss": "C320/C389: `∃! g, UniversalModalGround g`. Existence unconditional; uniqueness on the declared META bound `GroundTranscendence`."
+          "gloss": "C320/C389: `∃! g, UniversalModalGround g` (conditional form) / unicity modulo the Persons via `TrinitarianPersonalBridge` (META) and creaturely `SemanticFinitude` (VOCAB)."
         },
         {
           "row": "**One nature** (una natura, *actus purus*)",
@@ -429,7 +528,7 @@
           "targets": [
             "FoundationalUnicity.unicity_does_not_force_unitarian_monad"
           ],
-          "gloss": "Separation model, not a refutation: one ground, and a model in which that ground bears two distinct persons. Ground-unicity therefore does not entail a single-Person ground — the person-count is left open by unicity, and the ascription of personhood to the entity is the separate, still-blocked question C228."
+          "gloss": "Separation model, not a refutation: one ground, and a model in which that ground bears two distinct persons. Ground-unicity therefore does not entail a single-Person ground — the person-count is left open by unicity. The Godhead is personal (sustaining being and indwelling every Person), but is not an individual Person-correlate among the three."
         },
         {
           "row": "The Trinity is **not free**",
@@ -641,14 +740,17 @@
         {
           "branch": "The ground is just an atom",
           "attacks": "step8_libertarian_free_choice",
-          "role": "boundary",
+          "role": "derivation",
           "pillars": [
             6
           ],
           "objection": "“The ultimate ground is a particle.”",
           "targets": [
+            "atom_grounding_the_ground_yields_contradiction",
             "atom_cannot_ground_the_ground"
           ],
+          "derivation_target": "atom_grounding_the_ground_yields_contradiction",
+          "denial_hypothesis": "OneEssence (Entity.ofAtom n) Entity.ofGround",
           "note": "An entity with no meaning capacity cannot ground one that has: `EntityMeans Entity.ofGround False` against `EntityMeans (ofAtom n) False`."
         },
         {
@@ -710,6 +812,7 @@
           "targets": [
             "self_gift_cannot_depend_on_a_contingent_person",
             "donation_terminus_is_as_necessary_as_the_donor",
+            "self_giving_necessitates_a_distinct_necessary_other",
             "donation_makes_contingency_is_refuted",
             "single_person_denial_is_refuted"
           ],
@@ -755,7 +858,7 @@
             },
             "agape_is_self_donation"
           ],
-          "note": "**The row that restores what a laundering sentence had removed.** The corpus answered this with a label — “the one essence is not a fourth chooser; its freedom is their freedom, shared rather than duplicated” — and commit `4a59173` then claimed the label was an absent predicate presented as an argument, deleted the ground’s freedom from the doctrine, and rebuilt the reading on that. The predicate is **not** absent: `AsietyFreedom.asietyFreedomOfGround` (`AsietyFreedom.lean:141`) is the ◈ `def` that states the sharing, `asietyFreedom_summary` (`:357`) consumes it, and three docstrings in that module say the vacuity of `OneEssence` is *load-bearing* because it marks the ground’s freedom as **transferred** rather than **exercised**. A `def` premise is invisible to `#print axioms`, and from that invisibility the commit inferred that nothing was there. `LOVE-2.md` D1 withdraws that inference. So this row is a **conjunction, both halves machine-checked**, plus a granted premise: the ground is **not** a fourth chooser (free at `{Means, Subject}`, and marked role=premise — it is the *objection’s* premise, so it is printed as granted and kills nothing), **and** the donation of the Self stands anyway (C575, one META axiom). What the price buys is the gift and nothing more: it does not buy a fourth chooser, and it does not buy the ground’s personhood at the entity level, which C228 leaves `BLOCKED`. The ground **is** personal — C362, C140 — and `¬ Asiety Entity.ofGround` is `ofGround_ne_ofSubject`, i.e. C519: the nature is not one of its instances."
+          "note": "**The row that restores what a laundering sentence had removed.** The corpus answered this with a label — “the one essence is not a fourth chooser; its freedom is their freedom, shared rather than duplicated” — and commit `4a59173` then claimed the label was an absent predicate presented as an argument, deleted the ground’s freedom from the doctrine, and rebuilt the reading on that. The predicate is **not** absent: `AsietyFreedom.asietyFreedomOfGround` (`AsietyFreedom.lean:141`) is the ◈ `def` that states the sharing, `asietyFreedom_summary` (`:357`) consumes it, and three docstrings in that module say the vacuity of `OneEssence` is *load-bearing* because it marks the ground’s freedom as **transferred** rather than **exercised**. A `def` premise is invisible to `#print axioms`, and from that invisibility the commit inferred that nothing was there. `LOVE-2.md` D1 withdraws that inference. So this row is a **conjunction, both halves machine-checked**, plus a granted premise: the ground is **not** a fourth chooser (free at `{Means, Subject}`, and marked role=premise — it is the *objection’s* premise, so it is printed as granted and kills nothing), **and** the donation of the Self stands anyway (C575, one META axiom). What the price buys is the gift and nothing more: it does not buy a fourth chooser, while the ground's personhood is confirmed by C228 and C590 without making the ground a fourth chooser. The ground **is** personal — C362, C140 — and `¬ Asiety Entity.ofGround` is `ofGround_ne_ofSubject`, i.e. C519: the nature is not one of its instances."
         }
       ]
     },
@@ -765,14 +868,14 @@
       "heading": "## Part IV — the seam: where the deduction stops",
       "title": "Part IV — the seam",
       "body": [
-        "The deduction runs on the **epistemic** route: meaning, disclosure to a subject, the person, the grounding of the poles.",
-        "It does **not** run on the older deontic route — ought, choice, free will, personal grounding — which asserted far more and is kept whole in [the ledger](investigations/ledger.md).",
-        "The seam is where the two routes do not meet. It is stated here rather than left for the reader to infer from what is absent. Three lines carry it, and all three are named in GAPMAP.",
-        "**C228 — the ground's personalhood, at the entity level: BLOCKED.**",
-        "`normative_ground_is_personal (g) (hGr : GenericGroundsRightWrong g) : PersonCorrelate g` is **not** proved. The missing lemma is named verbatim in `base.txt:1345-1346`:",
-        "> `#9  Ground(e, personal) → Personal(e)`  — together with its target #10.",
-        "Personhood in Γ is a three-step field projection: `grounds_normativity` gives the `GenericGroundingRelation`, `explanatory` forces `g = EntityOf s`, `personal_ground` gives `Person s`. The two fields that would seal it, `explanatory` and `asymmetric`, are the named blockers.",
-        "**C228 is about `Entity`, not about `Person`.** Whether the ground is *one* person is a separate question with a machine-checked answer: `unicity_does_not_force_unitarian_monad` says a unique ground can bear two or more distinct persons. That is R14 below.",
+        "The primary proof of a Free Subject is the concrete, instantiated well-foundedness argument (`complete_libertarian_freedom_argument`, `proof_exists_implies_existence_of_free_subject`).",
+        "The older Right/Wrong → Meaning route was demoted because it could leave open an instantiation/vacuity problem; the previous deontic route is kept whole in [the ledger](investigations/ledger.md).",
+        "The personal grounding of Right/Wrong (C228) remains a distinct, parallel established result. The seam is where the formal deduction stops and unproved extensions begin; three lines carry it in GAPMAP.",
+        "**C228 — personhood of the ground, confirmed at two anchors: PROVEN.**",
+        "`normative_ground_is_personal (g) (hGr : GenericGroundsRightWrong g) : PersonCorrelate g` is proved (0 substantive axioms) alongside `TrinitarianPersonalGround.the_ground_is_not_void_of_personhood` (`PersonalGround Entity.ofGround`).",
+        "Personhood in Γ is a three-step field projection through D1′: `grounds_normativity` gives the `GenericGroundingRelation`, `explanatory` forces `g = EntityOf s`, `personal_ground` gives `Person s`.",
+        "Coexistence with C564 (`¬ PersonCorrelate Entity.ofGround`) is machine-checked by C591 (`¬ GenericGroundsRightWrong Entity.ofGround`), and `PersonalGround` is distinct from `PersonCorrelate`.",
+        "**What remains open is hypostasis and person-count, not personhood.** Whether the ground is *one* person is a separate question with a machine-checked answer: `unicity_does_not_force_unitarian_monad` says a unique ground can bear two or more distinct persons. That is R14 below.",
         "**C110 — a necessary ground does not entail contingent creation: countermodel, `{}`.** `¬ (∀ Subj Ent World, GroundEntailsCreation Subj Ent World)` — nothing in the deduction produces a world or a creation event.",
         "**C112 — the preceding theory does not entail the incarnation: countermodel, `{}`.** Nothing in the deduction requires the ground to enter a body.",
         "**C109 — preceding theory ⇏ Trinity: DEMOTED.** Its `Bool` countermodel is a truncated signature — an artifact, not evidence about Γ. Not superseded by `monotheism_compatible_with_trinity`, which is not a kernel declaration. Γ omits the Trinity because hypostasis→subject is unasserted.",
@@ -807,10 +910,10 @@
         "**Monotheism — one God — is not on this list, because it is PROVEN** (§12): C320 proves one universal modal ground exists, C440 one nature.",
         "The *person-count* of that one God is a different, unsettled question: C212 shows unicity does not entail a single Person.",
         "The positive plural reading is priced, not free: the declared META datum `AxAgapeEssence` (C504) → C510 (§12).",
-        "What remains open is C228 (`GenericGroundsRightWrong g → PersonCorrelate g`), still `BLOCKED` — whether the ground is personal *at all*, which is upstream of the person-count.",
-        "One instantiation is settled: for `g := Entity.ofGround`, `ofGround_not_a_person_correlate` (C564) proves `¬ PersonCorrelate Entity.ofGround` outright — a flat no for that one ground, not an answer to C228's general question.",
+        "Personhood of the ground is confirmed under both anchors (C228, PROVEN; PersonalGround in C590), while hypostatic identity and person-count remain open.",
+        "One instantiation is settled: for `g := Entity.ofGround`, `ofGround_not_a_person_correlate` (C564) proves `¬ PersonCorrelate Entity.ofGround` outright — the ground is personal (indwelt by the three Persons), but is not an individual Person-correlate or fourth chooser (C591).",
         "**Trinity is priced, not free** (§12): three Persons on three declared META premises, with C109 at `{}`. **Incarnation is open** (C112, `{}`).",
-        "**The three divine Persons are denied full omniscience too** — `NecessaryKindAudit.necessary_kind_subject_lacks_maximal_capacity`, priced at `GroundTranscendence` (META). The finitude split re-tagged that denial from VOCAB to META; it did not withdraw it.",
+        "**The three divine Persons' semantic fullness is affirmed** — `NecessaryKindAudit.necessary_kind_subject_has_maximal_capacity`, priced at `DivinePersonsTotalMeaning` (META), while creaturely finitude is restricted to contingent subjects (`SemanticFinitude`, VOCAB).",
         "**The Incarnation is the open frontier.** C112 (`preceding_theory_not_entails_incarnation`, `{}`): the preceding theory is consistent with an unincarnate ground. C111 shows the *structure* is available; the *entailment* is not.",
         "Contingent creation *as existence* is a free theorem (C350, `{}`); only the realm's content is priced (C367). Nothing above should be read as claiming any of it."
       ],
@@ -1246,9 +1349,9 @@
             "monotheism_compatible_with_trinity",
             "Logos.FoundationalUnicity.exactly_one_universal_modal_ground"
           ],
-          "summary": "Two different claims were being carried under one label, and only one of them is still open. (1) UNIQUENESS OF THE UNIVERSAL GROUND is now machine-checked: `Logos.FoundationalUnicity.exactly_one_universal_modal_ground` (C320) proves that exactly one universal modal ground exists, with existence unconditional and uniqueness under the single named hypothesis of frontier row F15. (2) PERSON-LEVEL MONOTHEISM — one God as numerically one Person, and its compatibility with three Persons — remains DEFERRED: it needs the person bridge C228, which is BLOCKED, so `monotheism_of_god_and_uniqueness` and `monotheism_compatible_with_trinity` are still out of the live kernel and no compiled declaration exists for either. The deferral of this branch is therefore NARROWED to claim (2).",
-          "defer_note": "⏸ **DEFERRED, NARROWED (2026-09-27)** — the ground-unicity half is no longer deferred: C320 (`Logos.FoundationalUnicity.exactly_one_universal_modal_ground`) proves exactly one universal modal ground exists, existence unconditionally and uniqueness under frontier hypothesis F15 — now the declared axiom `SemanticFinitude` (C388, `Tag: VOCAB`, the 27th), which C389 consumes unconditionally. What remains deferred is the Person-level claim — one God as numerically one Person, and trinity-compatibility — which needs the person bridge C228 (`BLOCKED`); no compiled declaration exists for `monotheism_of_god_and_uniqueness` or `monotheism_compatible_with_trinity`, and the generic non-collapse of unicity into a solitary monad is already checked at C212 (`{}`).",
-          "summary_short": "Two claims under one label. (1) UNIQUENESS OF THE UNIVERSAL GROUND is machine-checked — C320 proves exactly one universal modal ground exists. (2) PERSON-LEVEL MONOTHEISM remains DEFERRED: it needs the BLOCKED person bridge C228."
+          "summary": "Two different claims were being carried under one label, and only one of them is still open. (1) UNIQUENESS OF THE UNIVERSAL GROUND is now machine-checked: `Logos.FoundationalUnicity.exactly_one_universal_modal_ground` (C320) proves that exactly one universal modal ground exists, with existence unconditional and uniqueness under the single named hypothesis of frontier row F15. (2) PERSON-LEVEL MONOTHEISM — one God as numerically one Person, and its compatibility with three Persons — remains DEFERRED: while personhood of the ground is confirmed (C228, C590), the person-count and hypostatic mapping remain unsettled, so `monotheism_of_god_and_uniqueness` and `monotheism_compatible_with_trinity` are still out of the live kernel and no compiled declaration exists for either. The deferral of this branch is therefore NARROWED to claim (2).",
+          "defer_note": "⏸ **DEFERRED, NARROWED (2026-09-27)** — the ground-unicity half is no longer deferred: C320 (`Logos.FoundationalUnicity.exactly_one_universal_modal_ground`) proves exactly one universal modal ground exists, existence unconditionally and uniqueness under frontier hypothesis F15 — now the declared axiom `SemanticFinitude` (C388, `Tag: VOCAB`, the 27th), which C389 consumes unconditionally. What remains deferred is the Person-level claim — one God as numerically one Person, and trinity-compatibility — which turns on the open question of person-count and hypostatic correspondence rather than personhood itself (confirmed in C228 and C590); no compiled declaration exists for `monotheism_of_god_and_uniqueness` or `monotheism_compatible_with_trinity`, and the generic non-collapse of unicity into a solitary monad is already checked at C212 (`{}`).",
+          "summary_short": "Two claims under one label. (1) UNIQUENESS OF THE UNIVERSAL GROUND is machine-checked — C320 proves exactly one universal modal ground exists. (2) PERSON-LEVEL MONOTHEISM remains DEFERRED: it turns on the open person-count/hypostasis question."
         },
         {
           "id": "frontiers",
@@ -1271,7 +1374,7 @@
       "summary_short": "The machine-proved dependence: wherever Right/Wrong is real, its ground-type is personal — `∀ s, RightWrong s → Person s` (C526), via the priced discovery theorem. The constructive form needs no grounding axiom.",
       "pushback_short": "You still quietly pick a contingent author of morality — some particular person who happens to ground Right/Wrong.",
       "reply_short": "The indexing encodes *dependence without nomination*: RightWrong is indexed by a personal kind, not by an arbitrary contingent individual. Which particular person — and whether there is only one — is not claimed.",
-      "disclosure": "the ground of Right/Wrong is personal **in kind**; no individual is nominated, and no numerical claim is made. That the person-level *monotheism* step is `BLOCKED` (C228) is stated in the boundaries section below."
+      "disclosure": "the ground of Right/Wrong is personal **in kind**; no individual is nominated, and no numerical claim is made. That the person-level *monotheism* step remains open in its person-count (C212) is stated in the boundaries section below."
     }
   ],
   "ledger_edges": [
@@ -1399,8 +1502,8 @@
       "title": "3. Right and Wrong Cannot Obtain Without Meaning",
       "formula": "(∃ s p, Correct s p) ∨ (∃ s p, Incorrect s p) → ∃ p, Meaning_I p",
       "explanation": "If right or wrong obtains anywhere, there is a content that is being meant. There is no reading of right/wrong on which meaning is optional.",
-      "summary": "C62 `rightWrong_implies_meaning`: a world in which correctness or incorrectness obtains anywhere is a world in which something is *meant*. This is the hinge of the whole deduction and it is why the deontic route (ought → choice) is not the spine: the epistemic poles are the ones the satisfaction-level concession cannot reach. Meaning is the term in which the denial fails first.",
-      "summary_short": "C62: right/wrong anywhere ⇒ something is meant. Meaning is the term in which the denial fails first — which is why the epistemic poles, not the deontic ones, carry the argument.",
+      "summary": "C62 `rightWrong_implies_meaning`: a world in which correctness or incorrectness obtains anywhere is a world in which something is *meant*. In the meaning route, the epistemic poles are the ones the satisfaction-level concession cannot reach: meaning is the term in which the denial fails first.",
+      "summary_short": "C62: right/wrong anywhere ⇒ something is meant. Meaning is the term in which the denial fails first — right/wrong forces meaning without uninstantiated stipulations.",
       "pushback": "\"A world of pure brute facts can still have correct and incorrect judgements — 'correct' just means 'fits the facts'.\"",
       "pushback_short": "\"Brute facts alone can still be 'correct' — 'correct' just means 'fits the facts'.\"",
       "reply": "Then 'correct' means conformity to a standard, and a standard is not a brute fact: it is what makes some things fit and others not, and it is meant. The kernel does not need your word for it; it needs `Meaning_I`, and right/wrong supplies it.",

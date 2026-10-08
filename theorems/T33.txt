@@ -53,7 +53,7 @@ O que isto NÃO faz: *não* dá habitante ao género contingente (o espelho form
 WALL 2 continua aberta, e é nomeada como tal); *não* deriva a necessidade da
 Trindade de vocabulário (C518–C520 repousam no dado do Ágape, com o preço
 herdado); *não* afirma consubstantialidade de naturas nem unidade de actuação;
-*não* toca C228 (identidade hipostática, bloqueada), o Verbo/Encarnação (F8), nem
+*não* toca a identidade hipostática do solo (distinta de C228, provada), o Verbo/Encarnação (F8), nem
 o nível-`Entity` → sujeito; *não* toca o espelho das Separações. Zero axiomas novos:
 nenhum dos dez resultados custa um datum, e as pegadas `propext`/`CL` são
 fundacionais.

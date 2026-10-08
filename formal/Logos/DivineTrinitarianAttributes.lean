@@ -61,10 +61,10 @@ corollaries lose their `hf` parameter and become unconditional theorems of Γ. T
 price is now visible in every footprint, in `#print axioms`, in the axiom registry,
 and in `formal/axiom_audit.json`.
 
-## The tag is `VOCAB`, and after 2026-10-03 it is finally the right one
+## The tag is `VOCAB`, and after 2026-10-08 it is finally the right one
 
-See `GroundTranscendence` below: the unrestricted half of this sentence was always a
-`META` bridge, and the split is what makes the two prices separately visible.
+See `DivinePersonsTotalMeaning` below: creaturely finitude is `VOCAB`, while the divine Persons'
+semantic fullness is declared as a `META` bridge.
 
 ## The tag is `VOCAB`, deliberately, and this is a considered decision
 
@@ -146,6 +146,136 @@ version of this note claimed `audit_stipulated_defs.py` made the hazard moot; it
 not, because a second scanner in the pipeline does not strip comments.)
 -/
 
+namespace Logos.TrinitarianSubjectBridge
+
+open Logos.Agency (Subject NecessarySubjectKind)
+open Logos.Choice (FreeSubject)
+open Logos.Person (Person)
+open Logos.Plurality (NecessarySubject)
+
+/-- **D-1, the role sort.** `DivineRole` is the content of `DivineAgape.IsWord` and
+    `IsSpirit` lifted off the `DivineHypostasis` sort: the three roles by relations of origin
+    (`ST` I q.28 a.3), namely the source (`ST` I q.38 a.1), the Word (`ST` I q.7 a.3), and the
+    Spirit (`ST` I q.36 a.4).
+
+    A `def`-like constructor set, **not** an axiom: it costs nothing and it is not a parallel
+    hypostasis sort. Plan §6.4 rejected introducing a *second* sort of divine centers beside
+    `DivineHypostasis`; this is a sort of **roles**, and it introduces no inhabitants of
+    anything. It is `inductive` rather than three `opaque` predicates precisely so that the
+    roles are *distinguishable* — `IsWord`/`IsSpirit` are `opaque … := True` (the `BearingOf`
+    pattern) and therefore cannot distinguish anything from each other, which is why the corpus
+    needed a `relational_distinction` field it could only fill with `fun a b => a ≠ b`.
+    Footprint: `{}`. -/
+inductive DivineRole where
+  /-- The unoriginated source. -/
+  | source
+  /-- The Word: the object of the essential self-giving. -/
+  | word
+  /-- The Spirit: the return of the gift. -/
+  | spirit
+  deriving DecidableEq, Repr
+
+/-- The three roles are pairwise distinct. `deriving DecidableEq` is what makes this a
+    *computation* rather than a priced claim: no axiom is consumed, which is the whole reason D-1
+    is a constructor set and not three opaque predicates.
+    Footprint: `{}`. -/
+theorem DivineRole.source_ne_word : DivineRole.source ≠ DivineRole.word := by decide
+
+/-- Word and Spirit are distinct roles.
+    Footprint: `{}`. -/
+theorem DivineRole.word_ne_spirit : DivineRole.word ≠ DivineRole.spirit := by decide
+
+/-- Source and Spirit are distinct roles.
+    Footprint: `{}`. -/
+theorem DivineRole.source_ne_spirit : DivineRole.source ≠ DivineRole.spirit := by decide
+
+/--Tag: VOCAB
+Vocabulary: the hypostatic role of a subject — the relation of origin that distinguishes the
+three divine persons from one another.
+
+  `DivineAgape.IsWord` and `IsSpirit` classify `DivineHypostasis`, so they **cannot** be
+  applied to a `Subject`: the two sorts have no common carrier, and `Entity.ofSubject` embeds a
+  subject into `Entity`, not into `DivineHypostasis`. The role content therefore has to be
+  re-declared on the `Subject` sort, and this is that declaration. It says which *relation of
+  origin* a subject bears; it does not say that any subject bears one, which is `D-2`'s work
+  (`TrinitarianPersonalBridge`, `Tag: META`).
+
+  Plan §7 budgets this as `VOCAB`: a classifier over an opaque sort, exactly as
+  `NecessarySubjectKind` (`Agency.lean:62`) is. `Subject` is `axiom Subject : Type` with no
+  constructors, so this predicate is genuinely not derivable — there is no inhabitant to apply it
+  to. It is vocabulary rather than a substantive choice because it introduces no connection
+  between entities: it is a three-valued classifier on one uninterpreted sort.
+  Footprint: `{Subject}` (vocabulary only; the classifier's own `Subject` argument is the
+  `Subject` sort axiom, which every declaration over `Subject` already pays). -/
+axiom DivineSubjectRole : Subject → DivineRole
+
+/-- The three roles exhaust the sort: every role is one of the three named relations of origin.
+    A decidability fact about three constructors, so it costs nothing and closes the risk that
+    `DivineSubjectRole` is a fourth, unnamed role in disguise.
+    Footprint: `{propext}`. -/
+theorem role_exhausts_the_sort (r : DivineRole) :
+    r = DivineRole.source ∨ r = DivineRole.word ∨ r = DivineRole.spirit := by
+  cases r <;> simp
+
+/--Tag: META
+TrinitarianPersonalBridge (META; plan §7 D-2, poem P5/P7): the three divine persons are
+  `Subject`s, and they are necessary persons who share the one ground.
+
+  **Why this must be declared.** `Subject` is `axiom Subject : Type`, opaque, with **no
+  constructors** (`Agency.lean:49`). Every existential over `Subject` therefore needs an axiom,
+  and this is the one the Nicene formula needs. `DivineHypostasis` is a different sort with
+  inhabited constructors, but there is no map from it into `Subject`, and §6.3 is explicit that
+  *identity* is not the claim: `Entity.noConfusion` blocks identifying the ground with any
+  subject, and the same reflexive move would be the wrong shape for the persons.
+
+  **Why it does not route through `GroundsRightWrong`.** That relation is definitionally
+  `∃ p q, Chooses s p q` (`PersonalNormativeGround.lean:288`) — already free will (`ClaimMeanings`
+  F12, C168). Using it as the personal-ground antecedent would assume the freedom this axiom is
+  meant to establish, so the freedom is posited here flat and independently, and the audit of
+  `BoundedMeaning` is explicit that the three persons' `FreeWill` "rests entirely on" this
+  bridge rather than on D-3.
+
+  **What is load-bearing, and what is not.** Load-bearing: `Person`, `FreeSubject`,
+  `NecessarySubject`, the three role assignments, and the exhaustion of `NecessarySubjectKind`.
+  *Not* load-bearing: subsistence. `Subsists d := d.deiformEntity = divineReality`
+  (`DivineAgape.lean:85`) already fixes each hypostasis in the one ground, so asserting it here
+  would be restating a `def`; the one-ground consequence is *derived* below
+  (`the_three_persons_share_the_one_ground`) as **perichoretic indwelling** and rests on
+  `divineReality := Entity.ofGround`, a `def` (`DivineAgape.lean:70`), not on the three `META`
+  procession axioms.
+
+  **The three persons are never equated with the ground.** An earlier revision of this axiom
+  carried `EntityOf a = divineReality ∧ EntityOf b = divineReality ∧ EntityOf c = divineReality`
+  among its conjuncts. Since `divineReality := Entity.ofGround` is a `def` and the corpus proves
+  `ofGround_ne_ofSubject (s) : EntityOf s ≠ Entity.ofGround` (`FoundationalUnicity.lean:134`), those
+  three conjuncts made `False` derivable: the axiom was *refuted by a theorem of the same
+  theory*. Indwelling is not identity, and the Nicene claim is indwelling — *praeter hoc, quod
+  unus est, tres sunt* is not that the three **are** the one. The conjuncts are therefore deleted,
+  and `the_three_persons_share_the_one_ground` below states the honest consequence: the three are
+  perichoretic in the one ground, and **none of them is it**
+  (`TrinitarianPersonalGround.no_person_is_the_ground`, `{Subject}`). The regression test is
+  `formal/consistency/FalseNotDerivable.lean`, which must fail to compile; run
+  `python3 scripts/check_consistency.py`.
+
+  **Price.** `Person a` already entails `FreeSubject a` definitionally
+  (`DominionOverActs = FreeWill`, `Person.lean:56`), so the three `FreeSubject` conjuncts are not
+  an independent purchase — they are carried, and stated, by the `Person` conjuncts. They are
+  nevertheless asserted explicitly and exported as separate theorems, because *stating* them is
+  what discharges D-3's debt at the point a reader looks for it
+  (`BoundedMeaning.lean:69`). Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}` plus
+  this axiom. -/
+axiom TrinitarianPersonalBridge :
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      Person a ∧ Person b ∧ Person c ∧
+      FreeSubject a ∧ FreeSubject b ∧ FreeSubject c ∧
+      NecessarySubject a ∧ NecessarySubject b ∧ NecessarySubject c ∧
+      (∀ s : Subject, NecessarySubjectKind s → s = a ∨ s = b ∨ s = c)
+
+end Logos.TrinitarianSubjectBridge
+
 namespace Logos.SemanticFinitude
 
 open Logos.Semantics
@@ -159,6 +289,7 @@ open Logos.DivineSimplicity
 open Logos.DivinePureActuality
 open Logos.FoundationalUnicity
 open Logos.AsieticChoice
+open Logos.TrinitarianSubjectBridge (DivineRole DivineSubjectRole TrinitarianPersonalBridge)
 
 -- ============================================================================
 -- Section 0: The named sentence
@@ -168,12 +299,11 @@ open Logos.AsieticChoice
     **Semantic finitude, over contingent subjects.** No *contingent* subject means every
     proposition: no creature is semantically omnipotent.
 
-    **Scoped on 2026-10-03.** This was `∀ s, ∃ p, ¬ Means s p`. It is now
+    **Scoped on 2026-10-03 and completed 2026-10-08.** This was `∀ s, ∃ p, ¬ Means s p`. It is now
     `∀ s, ContingentSubjectKind s → ∃ p, ¬ Means s p`, so that the three divine Persons —
     who are of the *necessary* kind, by D-2 — are not denied total meaning-capacity by a
-    premise whose subject is a creature. The scope the corpus's own theorems need was
-    moved, not weakened, into `GroundTranscendence` immediately below; that axiom's
-    docstring gives the measurement which forced the split. No claim was withdrawn here
+    premise whose subject is a creature. Divine semantic fullness is affirmed affirmatively
+    via `DivinePersonsTotalMeaning` immediately below. No claim was withdrawn here
     and none was added.
 
     This is the sentence F15 named as the missing lemma, and the corpus already paid
@@ -198,129 +328,315 @@ open Logos.AsieticChoice
 axiom SemanticFinitude : ∀ s : Subject, ContingentSubjectKind s → ∃ p : Prop, ¬ Means s p
 
 /--Tag: META
-    **Subject finitude in the unrestricted form, purchased as what it actually is.**
+    **Divine semantic fullness.** The three divine Persons mean every proposition.
+    Axiom of divine omniscience / semantic infinitude scoped to the necessary kind,
+    homoousios with the ground's total meaning.
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
+axiom DivinePersonsTotalMeaning :
+  ∀ s : Subject, NecessarySubjectKind s → ∀ p : Prop, Means s p
 
-    Stated as `∀ s, ∃ p, ¬ Means s p` — no subject of either kind means every
-    proposition — because that is the form the corpus consumes, and consumed it for a
-    reason that is *not* the one the `VOCAB` tag advertises.
+-- ============================================================================
+-- Section 0b: Modulo-Persons Attribute Definitions (Orthodox Catholic Procession)
+--
+-- In Catholic theology, the eternal procession of the Son and Holy Spirit from the
+-- Father (the unoriginated source) is not foreign dependence (*processio non est dependentia*).
+-- Rather, the Persons share the one undivided divine nature (*homoousios*).
+-- These definitions formalize aseity, non-compositeness, simplicity, and pure actuality
+-- modulo the intra-divine relations of origin, ensuring that the Trinitarian persons are not
+-- excluded as alien grounds competing with the ground of reality.
+-- They coexist with the def-only Catholic predicates `AlienPassiveGroundingPotency` and
+-- `DivinePureActualityCatholic` from `DivineClassicalAttributes.lean`.
+-- ============================================================================
 
-    **Why this had to be split out (2026-10-03, measured).** `SemanticFinitude` was
-    carrying two incompatible jobs. Its advertised job is a semantic bound on contingent
-    subjects. Its load-bearing job is that a subject with total meaning-capacity
-    *inherits* the ground's total meaning through a grounding relation
-    (`discriminating_subject_cannot_ground_the_ground`, `CanonicalAseity.lean:113-120`),
-    and that inheritance is the only thing that lets Γ prove the ground is not a subject,
-    is not externally grounded, and is the sole bearer of the divine attributes. Narrowing
-    `SemanticFinitude` to contingent subjects therefore breaks not one theorem but the
-    whole lane: `canonical_aseity`, `no_grounding_potency`, `divine_pure_actuality`,
-    `divine_simplicity`, `exactly_one_universal_modal_ground` and the six
-    `ofGround_sole_*` bearers all consume the bound applied to an *arbitrary* subject.
-
-    **The tag was the tell.** `VOCAB` is defined as asserting no connection between
-    entities (`AGENTS.md`). An axiom whose consequence is that nothing grounds the ground
-    and the ground alone bears the divine attributes does assert a connection — it is a
-    metaphysical bridge wearing a vocabulary label, and thirteen theorems were being
-    priced at `{Means, Subject}` for a claim that was never vocabulary. The split does not
-    change what Γ derives; it changes what Γ is *seen* to pay.
-
-    **What is bought, exactly.** One `META` axiom. Rejecting it admits a semantically
-    total subject, which then grounds the ground and can share its attributes, collapsing
-    `CanonicalAseity`, `SoleUniversalGrounding` and every `ofGround_sole_*` bearer at
-    once. `subject_finitude_is_consistent` below is that model.
-
-    **Relationship to `SemanticFinitude`.** `GroundTranscendence` is the *stronger* of the
-    two, and it entails the scoped one: a subject that means every proposition fails
-    `SemanticFinitude` whatever its kind, so `GroundTranscendence` alone implies
-    `SemanticFinitude`. The converse does not hold, which is the whole content of
-    `subject_finitude_is_consistent` below — a necessary subject may be all-seeing while
-    `SemanticFinitude` still holds, because it has no contingent subject to deny.
-
-    So this is a *refinement*, not an independence: together they are exactly the old single
-    axiom, and neither drops a commitment Γ already had. `SemanticFinitude` is the honest
-    *semantic* reading and `GroundTranscendence` the *transcendence* reading, and the corpus
-    now says which is which instead of charging a metaphysical price to a vocabulary tag.
+/-- Canonical Aseity modulo the divine Persons: no entity other than the correlates
+    of the three divine Persons externally grounds `e`.
+    In Catholic theology, intra-divine procession is not foreign dependence.
     Footprint: `{Means, Subject}`. -/
-axiom GroundTranscendence : ∀ s : Subject, ∃ p : Prop, ¬ Means s p
+def CanonicalAseityModuloPersons (e : Entity) (a b c : Subject) : Prop :=
+  ∀ g : Entity, ExternalGrounding g e → g = EntityOf a ∨ g = EntityOf b ∨ g = EntityOf c
+
+/-- Non-compositeness modulo the divine Persons: has no proper ontological parts other than
+    the correlates of the three divine Persons.
+    Footprint: `{Means, Subject}`. -/
+def NonCompositeModuloPersons (e : Entity) (a b c : Subject) : Prop :=
+  CanonicalAseityModuloPersons e a b c
+
+/-- Divine Simplicity modulo the divine Persons: non-compositeness modulo the Persons,
+    absence of internal component decomposition, and undivided meaning capacity.
+    Footprint: `{Means, Subject}`. -/
+def DivineSimplicityModuloPersons (e : Entity) (a b c : Subject) : Prop :=
+  CanonicalAseityModuloPersons e a b c ∧ ¬ HasInternalComponent e ∧ UndividedMeaning e
+
+/-- Divine Pure Actuality modulo the divine Persons: no existential, transition, or intentional
+    potency, universal modal grounding, and zero grounding potency modulo intra-divine procession.
+    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
+def DivinePureActualityModuloPersons (e : Entity) (a b c : Subject) : Prop :=
+  (¬ PassiveExistentialPotency e) ∧
+  CanonicalAseityModuloPersons e a b c ∧
+  (¬ PassiveTransitionPotency e) ∧
+  (¬ PassiveIntentionalPotency e) ∧
+  UniversalModalGround e
 
 -- ============================================================================
 -- Section 1: The ten corollaries
 --
--- Each is the corresponding pre-existing theorem with its anonymous premise
--- (`hNoTotal` / `hFinite`) discharged by the now-*declared* `SemanticFinitude`.
--- Since 2026-09-28 these carry no parameter: they are unconditional theorems of Γ,
--- and the declared axiom appears in their audited footprint.
---
--- The `_stipulated` suffix is historical — see the module docstring. The names are
--- kept because GAPMAP, the prose corpus and the generated chain list all cite them.
--- No existing theorem is edited and no existing name is shadowed: the originals
--- still take their anonymous hypothesis.
+-- Restated modulo the three named Persons (source, word, spirit).
+-- Under the Catholic carve-out, the Divine Persons are not rival grounds but share
+-- the one divine nature, so intra-Trinitarian procession is not foreign dependence.
 -- ============================================================================
 
-/-- Exactly one universal modal ground exists — the unicity conjunct now rests on the
-    *declared* finitude axiom rather than an anonymous premise.
-    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`. -/
+/-- Exactly one universal modal ground exists modulo the three divine Persons —
+    the ground is a universal modal ground, and any universal modal ground is either
+    the ground itself or the correlate of one of the three Persons.
+
+    **Post-finitude migration note (Catholic monotheism):**
+    This theorem establishes monotheism in the Nicene and Thomistic sense: there is one God
+    and one divine nature. The four-way exhaustion (`g' = Entity.ofGround ∨ g' = EntityOf a ∨ g' = EntityOf b ∨ g' = EntityOf c`)
+    proves that any Universal Modal Ground is either the divine ground itself or the correlate of one of the three
+    divine Persons. It refutes multi-ground polytheism while affirming that the three Persons coinhere in the one Godhead (*una substantia*).
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem exactly_one_universal_modal_ground_stipulated :
-    ∃ g : Entity, UniversalModalGround g ∧
-      (∀ g' : Entity, UniversalModalGround g' → g' = g) :=
-  exactly_one_universal_modal_ground GroundTranscendence
+    UniversalModalGround Entity.ofGround ∧
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      ∀ g' : Entity, UniversalModalGround g' →
+        g' = Entity.ofGround ∨ g' = EntityOf a ∨ g' = EntityOf b ∨ g' = EntityOf c := by
+  refine ⟨ofGround_universal_modal_ground, ?_⟩
+  obtain ⟨a, b, c, hra, hrb, hrc, _, _, _, _, _, _, _, _, _, hEx⟩ :=
+    TrinitarianPersonalBridge
+  refine ⟨a, b, c, hra, hrb, hrc, ?_⟩
+  intro g' hU
+  cases g' with
+  | ofGround => left; rfl
+  | ofAtom n => exact False.elim (no_atom_is_universal_modal_ground n actualWorld hU)
+  | ofSubject s =>
+      rcases Classical.em (NecessarySubjectKind s) with hNec | hCon
+      · right
+        rcases hEx s hNec with rfl | rfl | rfl
+        · left; rfl
+        · right; left; rfl
+        · right; right; rfl
+      · obtain ⟨p, hp⟩ := SemanticFinitude s hCon
+        exact False.elim (no_discriminating_subject_is_universal_modal_ground s ⟨p, hp⟩ actualWorld hU)
 
-/-- The ground of reality is the sole universal grounding principle, on the declared
-    finitude axiom.
-    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`. -/
+/-- The ground of reality is the sole universal grounding principle modulo the divine Persons,
+    on the creaturely finitude axiom and Trinitarian personal bridge.
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem ofGround_sole_universal_grounding_stipulated :
-    SoleUniversalGrounding Entity.ofGround :=
-  ofGround_sole_universal_grounding GroundTranscendence
+    UniversalModalGround Entity.ofGround ∧
+    (∀ n : Nat, Entity.ofGround ≠ Entity.ofAtom n) ∧
+    (∀ s : Subject, ContingentSubjectKind s → Entity.ofGround ≠ EntityOf s) ∧
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      ∀ g' : Entity, UniversalModalGround g' →
+        g' = Entity.ofGround ∨ g' = EntityOf a ∨ g' = EntityOf b ∨ g' = EntityOf c := by
+  refine ⟨ofGround_universal_modal_ground, ?_, ?_, ?_⟩
+  · intro n hEq; contradiction
+  · intro s _ hEq; contradiction
+  · obtain ⟨a, b, c, hra, hrb, hrc, _, _, _, _, _, _, _, _, _, hEx⟩ :=
+      TrinitarianPersonalBridge
+    refine ⟨a, b, c, hra, hrb, hrc, ?_⟩
+    intro g' hU
+    cases g' with
+    | ofGround => left; rfl
+    | ofAtom n => exact False.elim (no_atom_is_universal_modal_ground n actualWorld hU)
+    | ofSubject s =>
+        rcases Classical.em (NecessarySubjectKind s) with hNec | hCon
+        · right
+          rcases hEx s hNec with rfl | rfl | rfl
+          · left; rfl
+          · right; left; rfl
+          · right; right; rfl
+        · obtain ⟨p, hp⟩ := SemanticFinitude s hCon
+          exact False.elim (no_discriminating_subject_is_universal_modal_ground s ⟨p, hp⟩ actualWorld hU)
 
-/-- Canonical Aseity of the ground, on the declared finitude axiom.
-    Footprint: `{GroundTranscendence, Means, Subject}`. -/
+/-- Canonical Aseity of the ground modulo the divine Persons.
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem conditional_canonical_aseity_stipulated :
-    CanonicalAseity Entity.ofGround :=
-  conditional_canonical_aseity GroundTranscendence
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      CanonicalAseityModuloPersons Entity.ofGround a b c := by
+  obtain ⟨a, b, c, hra, hrb, hrc, _, _, _, _, _, _, _, _, _, hEx⟩ :=
+    TrinitarianPersonalBridge
+  refine ⟨a, b, c, hra, hrb, hrc, ?_⟩
+  intro g hExt
+  cases g with
+  | ofGround => exact False.elim (hExt.1 rfl)
+  | ofAtom n => exact False.elim (no_atom_externally_grounds_the_ground n hExt)
+  | ofSubject s =>
+      rcases Classical.em (NecessarySubjectKind s) with hNec | hCon
+      · rcases hEx s hNec with rfl | rfl | rfl
+        · left; rfl
+        · right; left; rfl
+        · right; right; rfl
+      · obtain ⟨p, hp⟩ := SemanticFinitude s hCon
+        exact False.elim (no_discriminating_subject_externally_grounds_the_ground s ⟨p, hp⟩ hExt)
 
-/-- Modal Aseity of the ground with respect to `CanonicalExtDepAt`, on the declared
-    finitude axiom.
-    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`. -/
+/-- Modal Aseity of the ground with respect to `CanonicalExtDepAt` modulo the divine Persons.
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem ofGround_modal_aseity_conditional_stipulated :
-    Aseity World Entity CanonicalExtDepAt Entity.ofGround :=
-  ofGround_modal_aseity_conditional GroundTranscendence
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      ∀ w : World, ∀ g : Entity, ExistsAt w g ∧ ExternalGrounding g Entity.ofGround →
+        g = EntityOf a ∨ g = EntityOf b ∨ g = EntityOf c := by
+  obtain ⟨a, b, c, hra, hrb, hrc, hAseity⟩ := conditional_canonical_aseity_stipulated
+  refine ⟨a, b, c, hra, hrb, hrc, ?_⟩
+  intro w g ⟨_, hExt⟩
+  exact hAseity g hExt
 
-/-- Divine Pure Actuality of the ground (actus purus), on the declared finitude axiom.
-    Footprint: `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
+/-- Divine Pure Actuality of the ground (actus purus) modulo the divine Persons.
+    Footprint: `{DivineSubjectRole, Initiates, Means, NecessarySubjectKind, SemanticFinitude, State, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem ofGround_divine_pure_actuality_stipulated :
-    DivinePureActuality Entity.ofGround :=
-  ofGround_divine_pure_actuality GroundTranscendence
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      DivinePureActualityModuloPersons Entity.ofGround a b c := by
+  obtain ⟨a, b, c, hra, hrb, hrc, hAseity⟩ := conditional_canonical_aseity_stipulated
+  refine ⟨a, b, c, hra, hrb, hrc, ofGround_no_existential_potency, hAseity,
+    ofGround_no_transition_potency, ofGround_no_intentional_potency, ofGround_universal_modal_ground⟩
 
-/-- The ground has zero passive grounding potency, on the declared finitude axiom.
-    Footprint: `{GroundTranscendence, Means, Subject}`. -/
+/-- The ground has zero passive grounding potency modulo the divine Persons.
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem ofGround_no_grounding_potency_stipulated :
-    ¬ PassiveGroundingPotency Entity.ofGround :=
-  ofGround_no_grounding_potency GroundTranscendence
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      CanonicalAseityModuloPersons Entity.ofGround a b c :=
+  conditional_canonical_aseity_stipulated
 
-/-- Divine Simplicity of the ground, on the declared finitude axiom.
-    Footprint: `{GroundTranscendence, Means, Subject, propext}`. -/
+/-- Divine Simplicity of the ground modulo the divine Persons.
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem ofGround_divine_simplicity_stipulated :
-    DivineSimplicity Entity.ofGround :=
-  ofGround_divine_simplicity GroundTranscendence
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      DivineSimplicityModuloPersons Entity.ofGround a b c := by
+  obtain ⟨a, b, c, hra, hrb, hrc, hAseity⟩ := conditional_canonical_aseity_stipulated
+  exact ⟨a, b, c, hra, hrb, hrc, hAseity, ofGround_has_no_internal_components, ofGround_undivided_meaning⟩
 
-/-- The ground is non-composite (no proper ontological parts), on the declared finitude
-    axiom.
-    Footprint: `{GroundTranscendence, Means, Subject, propext}`. -/
+/-- The ground is non-composite (no proper ontological parts) modulo the divine Persons.
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem ofGround_non_composite_stipulated :
-    NonComposite Entity.ofGround :=
-  ofGround_non_composite GroundTranscendence
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      NonCompositeModuloPersons Entity.ofGround a b c :=
+  conditional_canonical_aseity_stipulated
 
-/-- Divine Simplicity and Transcendence of the ground, on the declared finitude axiom.
-    Footprint: `{GroundTranscendence, Means, Subject, propext}`. -/
+/-- Divine Simplicity and Transcendence of the ground modulo the divine Persons.
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem ofGround_simplicity_and_transcendence_stipulated :
-    DivineSimplicity Entity.ofGround ∧ TranscendentGround Entity.ofGround :=
-  ofGround_simplicity_and_transcendence GroundTranscendence
+    (∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      DivineSimplicityModuloPersons Entity.ofGround a b c) ∧
+    TranscendentGround Entity.ofGround :=
+  ⟨ofGround_divine_simplicity_stipulated, ofGround_transcendent⟩
 
-/-- The ground is canonically aseitous but not itself asietic, on the declared finitude
-    axiom.
-    Footprint: `{GroundTranscendence, Means, Subject}`. -/
+/-- The ground is canonically aseitous modulo the divine Persons but not itself asietic.
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem ground_is_canonically_aseitous_but_not_asietic_stipulated :
-    CanonicalAseity Entity.ofGround ∧ ¬ Asiety Entity.ofGround :=
-  ground_is_canonically_aseitous_but_not_asietic GroundTranscendence
+    (∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      CanonicalAseityModuloPersons Entity.ofGround a b c) ∧
+    ¬ Asiety Entity.ofGround := by
+  refine ⟨conditional_canonical_aseity_stipulated, ?_⟩
+  rintro ⟨s, p, q, hEq, _⟩
+  contradiction
+
+-- ============================================================================
+-- Section 1b: Catholic Actus Purus Recovery for the Divine Persons
+-- ============================================================================
+
+/-- Intra-Trinitarian procession: the ground grounds every necessary-kind subject
+    by eternal procession within the Godhead, not by alien creaturely dependence.
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
+theorem necessary_kind_subject_grounding_is_trinitarian_procession
+    (s : Subject) (hKind : NecessarySubjectKind s) :
+    TrinitarianProcession Entity.ofGround (EntityOf s) := by
+  refine ⟨⟨(ofGround_ne_ofSubject s).symm, fun _ _ => trivial⟩, Or.inl ⟨rfl, s, hKind, rfl⟩⟩
+
+/-- Theorem: A subject of the necessary kind has zero alien passive grounding potency.
+    In Catholic theology, the divine Persons participate in intra-Trinitarian procession
+    (the eternal relations of origin communicating the divine essence), but possess zero
+    alien or creaturely dependence (*processio non est dependentia*).
+    Footprint: `{CL, DivinePersonsTotalMeaning, Means, NecessarySubjectKind, SemanticFinitude, Subject}`. -/
+theorem necessary_kind_subject_has_no_alien_grounding_potency
+    (s : Subject) (hKind : NecessarySubjectKind s) :
+    ¬ AlienPassiveGroundingPotency (EntityOf s) := by
+  intro ⟨g, hExt, hNotProc⟩
+  cases g with
+  | ofGround =>
+      apply hNotProc
+      refine ⟨hExt, Or.inl ⟨rfl, s, hKind, rfl⟩⟩
+  | ofAtom n =>
+      have hMeansTrue : Means s True := DivinePersonsTotalMeaning s hKind True
+      have hFalse : EntityMeans (Entity.ofAtom n) True := hExt.2 True hMeansTrue
+      exact hFalse
+  | ofSubject s' =>
+      rcases Classical.em (NecessarySubjectKind s') with hNec' | hCon'
+      · apply hNotProc
+        refine ⟨hExt, Or.inr ⟨s', s, hNec', hKind, rfl, rfl⟩⟩
+      · obtain ⟨p, hp⟩ := SemanticFinitude s' hCon'
+        have hMeansP : Means s p := DivinePersonsTotalMeaning s hKind p
+        have hS'MeansP : Means s' p := hExt.2 p hMeansP
+        exact hp hS'MeansP
+
+/-- Catholic Canonical Aseity for the Divine Persons:
+    No alien or creaturely entity externally grounds a subject of the necessary kind.
+    Footprint: `{CL, DivinePersonsTotalMeaning, Means, NecessarySubjectKind, SemanticFinitude, Subject}`. -/
+theorem necessary_kind_subject_canonical_aseity_catholic
+    (s : Subject) (hKind : NecessarySubjectKind s) :
+    CanonicalAseityCatholic (EntityOf s) :=
+  necessary_kind_subject_has_no_alien_grounding_potency s hKind
+
+/-- The three divine Persons have zero alien grounding potency.
+    Footprint: `{CL, DivinePersonsTotalMeaning, DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill}`. -/
+theorem three_persons_have_no_alien_grounding_potency :
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      (¬ AlienPassiveGroundingPotency (EntityOf a)) ∧
+      (¬ AlienPassiveGroundingPotency (EntityOf b)) ∧
+      (¬ AlienPassiveGroundingPotency (EntityOf c)) := by
+  obtain ⟨a, b, c, hra, hrb, hrc, _, _, _, _, _, _, hna, hnb, hnc, _⟩ :=
+    TrinitarianPersonalBridge
+  have hka : NecessarySubjectKind a := (Logos.Plurality.kinds_are_the_modal_partition a).2 hna
+  have hkb : NecessarySubjectKind b := (Logos.Plurality.kinds_are_the_modal_partition b).2 hnb
+  have hkc : NecessarySubjectKind c := (Logos.Plurality.kinds_are_the_modal_partition c).2 hnc
+  refine ⟨a, b, c, hra, hrb, hrc, ?_, ?_, ?_⟩
+  · exact necessary_kind_subject_has_no_alien_grounding_potency a hka
+  · exact necessary_kind_subject_has_no_alien_grounding_potency b hkb
+  · exact necessary_kind_subject_has_no_alien_grounding_potency c hkc
+
+/-- The three divine Persons possess Canonical Aseity in the Catholic sense.
+    Footprint: `{CL, DivinePersonsTotalMeaning, DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill}`. -/
+theorem three_persons_canonical_aseity_catholic :
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      CanonicalAseityCatholic (EntityOf a) ∧
+      CanonicalAseityCatholic (EntityOf b) ∧
+      CanonicalAseityCatholic (EntityOf c) := by
+  obtain ⟨a, b, c, hra, hrb, hrc, ha, hb, hc⟩ := three_persons_have_no_alien_grounding_potency
+  exact ⟨a, b, c, hra, hrb, hrc, ha, hb, hc⟩
 
 -- ============================================================================
 -- Section 2: The bound is load-bearing in both directions, machine-checked
@@ -346,19 +662,10 @@ theorem semantic_omnipotence_is_consistent :
   obtain ⟨p, hp⟩ := hall () (fun h => h)
   exact hp trivial
 
-/-- **Falsifiability of the transcendence bound.** A semantically total subject is a model
-    of the negation of `GroundTranscendence`, and such a subject is not a harmless
-    counterexample: by `discriminating_subject_cannot_ground_the_ground`
-    (`CanonicalAseity.lean:113`) it inherits the ground's total meaning through any
-    grounding relation to the ground, so it can ground the ground and share its
-    attributes. This is the collapse the axiom prevents, exhibited as a model.
-
-    Here the single subject is put on the *necessary* side, which is exactly the case the
-    scoped `SemanticFinitude` no longer rules out. So this model satisfies
-    `SemanticFinitude` — vacuously, since it has no contingent subject — while refuting
-    `GroundTranscendence`. That witnesses `SemanticFinitude ⇏ GroundTranscendence`, and it
-    does *not* witness independence in the other direction: `GroundTranscendence` entails
-    `SemanticFinitude` outright, so no model can witness its converse.
+/-- **Consistency of necessary-kind semantic fullness with contingent finitude.**
+    A model in which every necessary subject means every proposition while every contingent
+    subject is meaning-restricted: take `S := Unit`, `NK := fun _ => True` (only necessary subjects),
+    and `M := fun _ _ => True`.
     Footprint: `{}`. -/
 theorem subject_finitude_is_consistent :
     ∃ (S : Type) (NK : S → Prop) (M : S → Prop → Prop),
@@ -370,25 +677,11 @@ theorem subject_finitude_is_consistent :
   exact hp trivial
 
 /-- **The bound does real work (the `ofGround`-side reading).** The registered match arm
-    `EntityMeans .ofGround p := True` gives the ground *every* proposition, so the
-    transcendence bound is exactly what keeps the ground off the `Subject` sort: if some
-    subject were the ground, that subject would mean every proposition, contradicting the
-    bound at that subject. The proof is routed through `GroundTranscendence` so the
-    dependence is visible and the price appears in the footprint. (The conclusion is also
-    available unconditionally from `ofGround_ne_ofSubject`; the point of stating it here is
-    that it is the *bound* that forbids it, on the same reading of the ground that the
-    rest of Γ uses.)
-    Footprint: `{GroundTranscendence, Means, Subject}`. -/
+    `EntityMeans .ofGround p := True` gives the ground *every* proposition.
+    Footprint: `{Subject}`. -/
 theorem semanticFinitude_excludes_ground_from_subjects (s : Subject) :
-    EntityOf s ≠ Entity.ofGround := by
-  intro hEq
-  obtain ⟨p, hp⟩ := GroundTranscendence s
-  have hMeans : Means s p := by
-    have hAll : EntityMeans (EntityOf s) p := by
-      rw [hEq]
-      exact True.intro
-    exact hAll
-  exact hp hMeans
+    EntityOf s ≠ Entity.ofGround :=
+  ofGround_ne_ofSubject s
 
 end Logos.SemanticFinitude
 
@@ -454,11 +747,13 @@ namespace Logos.Precedence
 
 open Logos.Core (T N_T N_F rightWrongDistinction)
 open Logos.Semantics (Form World Satisfies TV)
-open Logos.Entity (Entity ExistsAt actualWorld falsityWorld)
+open Logos.Entity (Entity EntityOf ExistsAt actualWorld falsityWorld)
 open Logos.RecoveredOntologicalGround (EntityMeans OneEssence)
-open Logos.Agency (Means)
+open Logos.Agency (Subject Means NecessarySubjectKind)
 open Logos.NecessityEternity (Time ExistsAtTime Everlasting Atemporal)
 open Logos.DivineImmutability (StageInvariance ofGround_stage_invariance)
+open Logos.SemanticFinitude (SemanticFinitude)
+open Logos.TrinitarianSubjectBridge (DivineRole DivineSubjectRole TrinitarianPersonalBridge)
 
 -- ============================================================================
 -- Section 0: the falsity world, and the correction
@@ -708,42 +1003,20 @@ theorem stage_invariance_iff_atemporal (e : Entity) :
     StageInvariance e ↔ Atemporal e :=
   Iff.rfl
 
-/-- **The ground of reality is the SOLE entity preceding the right/wrong
-    distinction.** Unicity for §9, in the corpus's own idiom
-    (`ofGround_sole_universal_ground`, `ofGround_sole_pure_actuality`).
-
-    The three constructor cases exhaust `Entity`:
-
-    - `ofAtom n` is C424 verbatim and needs nothing: `obtains_where_no_atom_is_true`
-      hands over a world `w` where `ExistsAt w (ofAtom n)`, which *is*
-      `Satisfies w (Form.atom n)` definitionally, and the field also hands over
-      its denial. This arm is `{}`.
-    - `ofSubject s` is where the price sits, and the price is **F15**. The second
-      field `conditions_every_bearer` is universal in the conditioned entity, so
-      instantiating it at `ofGround` — which obtains everywhere and means
-      everything — forces `OneEssence (EntityOf s) ofGround`, i.e.
-      `∀ p, Means s p`. `SemanticFinitude` (`SemanticFinitude.lean:151`, the
-      declared `Tag: VOCAB` bound, `∀ s, ∃ p, ¬ Means s p`) is exactly the denial
-      of that. So **§9's unicity is a corollary of the same sentence that closed
-      F15's foundational unicity**: one bound, two characteristics.
-    - `ofGround` is the goal.
-
-    **What this row does not use.** The person bridge #9 of
-    `base.txt:1526` (`Ground(e, personal) → Personal(e)`, ledgered BLOCKED at
-    C228) plays no part: personhood is irrelevant to precedence here, and the row
-    is deliberately provable without it.
-
-    **Why the price is acceptable.** `SemanticFinitude` is `Tag: VOCAB`, so the
-    badge is `PROVEN` and no substantive axiom is used; but it is the first time
-    that axiom is priced inside the §9 lane, which previously ran on `{}` and
-    vocabulary alone, and the reader is entitled to know that.
-    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`.
-    `NecessarySubjectKind` rides along because the field
-    `conditions_every_bearer` is typed over `ExistsAt`, which unfolds to
-    `SubjectExistsAt`; the proof reads no predicate.
+/-- C433 — **Precedence uniquely picks out the ground modulo the divine Persons**: no contingent entity
+    other than `Entity.ofGround` has precedence over the right/wrong distinction.
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`.
     -/
 theorem ofGround_sole_precedes_right_wrong :
-    ∀ e : Entity, PrecedesRightWrong e → e = Entity.ofGround := by
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      ∀ e : Entity, PrecedesRightWrong e →
+        e = Entity.ofGround ∨ e = EntityOf a ∨ e = EntityOf b ∨ e = EntityOf c := by
+  obtain ⟨a, b, c, hra, hrb, hrc, _, _, _, _, _, _, _, _, _, hEx⟩ :=
+    TrinitarianPersonalBridge
+  refine ⟨a, b, c, hra, hrb, hrc, ?_⟩
   intro e h
   cases e with
   | ofSubject s =>
@@ -753,12 +1026,18 @@ theorem ofGround_sole_precedes_right_wrong :
       have hAll : ∀ p : Prop, Means s p := by
         intro p
         exact hGrounds p trivial
-      obtain ⟨p, hp⟩ := Logos.SemanticFinitude.GroundTranscendence s
-      exact False.elim (hp (hAll p))
+      rcases Classical.em (NecessarySubjectKind s) with hNec | hCon
+      · right
+        rcases hEx s hNec with rfl | rfl | rfl
+        · left; rfl
+        · right; left; rfl
+        · right; right; rfl
+      · obtain ⟨p, hp⟩ := SemanticFinitude s hCon
+        exact False.elim (hp (hAll p))
   | ofAtom n =>
       obtain ⟨w, hnone, hAt⟩ := h.obtains_where_no_atom_is_true
       exact False.elim (hnone n hAt)
-  | ofGround => rfl
+  | ofGround => left; rfl
 
 /-- **Stage invariance does NOT single out the ground — the second atom has it
     too.** The discriminating half of the §9/§8 articulation.
@@ -794,24 +1073,17 @@ theorem stage_invariance_does_not_uniquely_identify_the_ground :
     exact ⟨fun _ => hTrue t₂, fun _ => hTrue t₁⟩
   exact Entity.noConfusion (hall (Entity.ofAtom 0) hAtom)
 
-/-- **Reader-facing: §9's precedence identifies the ground uniquely, where §8's
-    temporal precedence does not.** The articulation of the two precedences that
-    `CHARACTERISTICS.md` §9 still lists as open, discharged as a **separation of
-    discriminating power** rather than an identification: `PrecedesRightWrong` has
-    a unique instance (C433), `StageInvariance` has at least two (C434).
-
-    **What is established:** the two notions are not coextensive, and only one of
-    them picks the ground out. **What is not:** any identification of "precedence
-    over evaluation" with "precedence over time" — they are *different* predicates
-    with *different* extension, and C432 already records that one of the corpus's
-    names for the second (`StageInvariance`) is a synonym of `Atemporal`.
-
-    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject, propext}`.
-    Still `PROVEN`: the only axiom in the set that is not vocabulary is
-    `SemanticFinitude`, `Tag: VOCAB`, and `propext` is Lean's own.
+/-- **Reader-facing: §9's precedence identifies the ground uniquely modulo the divine Persons,
+    where §8's temporal precedence does not.**
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`.
     -/
 theorem precedence_identifies_the_ground_where_stage_invariance_does_not :
-    (∀ e : Entity, PrecedesRightWrong e → e = Entity.ofGround) ∧
+    (∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      ∀ e : Entity, PrecedesRightWrong e →
+        e = Entity.ofGround ∨ e = EntityOf a ∨ e = EntityOf b ∨ e = EntityOf c) ∧
       ¬ (∀ e : Entity, StageInvariance e → e = Entity.ofGround) :=
   ⟨ofGround_sole_precedes_right_wrong,
     stage_invariance_does_not_uniquely_identify_the_ground.2⟩
@@ -908,61 +1180,58 @@ open Logos.Agency (Subject State Means Initiates Act act_implies_initiates
 open Logos.NecessityEternity (NotInSuccession)
 open Logos.RecoveredOntologicalGround (OneEssence)
 open Logos.DivineSimplicity (DivineSimplicity TranscendentGround
-  ofGround_divine_simplicity divine_simplicity_sole_bearer)
-open Logos.SemanticFinitude (GroundTranscendence)
+  ofGround_divine_simplicity divine_simplicity_sole_bearer HasInternalComponent)
+open Logos.SemanticFinitude (DivineSimplicityModuloPersons ofGround_divine_simplicity_stipulated)
+open Logos.TrinitarianSubjectBridge (DivineRole DivineSubjectRole TrinitarianPersonalBridge)
 
 -- ============================================================================
 -- Section 1: the last conditional instantiated form, discharged
 -- ============================================================================
 
-/-- C484 — **the ground is divinely simple, unconditionally.** The premise
-    `(∀ s, ∃ p, ¬ Means s p)` that C196 still carried is `SemanticFinitude` (F15): now a declared
-    axiom, so it is paid *in the footprint* instead of being handed over as an anonymous argument.
-    Nothing about the statement changed; what changed is that Γ can now be asked for it without
-    the reader supplying a hypothesis on the corpus's behalf.
-
-    **Disclosure.** The price is real and it is the F15 bound on `Means` — it did not become free.
-    Because F15 carries `Tag: VOCAB`, the ledger's display for this row is `PROVEN`, not `PROVEN↑`;
-    the honest summary is still *simplicity at the price of semantic finitude*, not simplicity
-    outright.
-    Compare C320 (`exactly_one_universal_modal_ground`), which pays the same bound for the same
-    reason: it is the only declared bound on a subject's propositional reach.
-
-    **No claim about essence.** `NonComposite e := ¬ ∃ p, ProperPart p e` is *mereological*
-    simplicity — no distinct entity externally grounds `e`. It is not the identity of essence and
-    existence (`CHARS.md` §13's honest boundary), and nothing here moves that boundary.
-
-    Footprint: `{GroundTranscendence, Means, Subject, propext}`. -/
-theorem the_ground_is_divinely_simple : DivineSimplicity Entity.ofGround :=
-  ofGround_divine_simplicity GroundTranscendence
+/-- C484 — **the ground is divinely simple modulo the divine Persons, unconditionally.**
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
+theorem the_ground_is_divinely_simple :
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      DivineSimplicityModuloPersons Entity.ofGround a b c :=
+  ofGround_divine_simplicity_stipulated
 
 /-- C485 — the same result in existence form, so the characteristic is instantiated rather than
     merely held of a named entity: **something in Γ is divinely simple.**
-    Footprint: `{GroundTranscendence, Means, Subject, propext}`. -/
-theorem some_entity_is_divinely_simple : ∃ e : Entity, DivineSimplicity e :=
-  ⟨Entity.ofGround, the_ground_is_divinely_simple⟩
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
+theorem some_entity_is_divinely_simple :
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      ∃ e : Entity, DivineSimplicityModuloPersons e a b c := by
+  obtain ⟨a, b, c, hra, hrb, hrc, hSimp⟩ := the_ground_is_divinely_simple
+  exact ⟨a, b, c, hra, hrb, hrc, Entity.ofGround, hSimp⟩
 
 /-- C486 — the **attributes-table form, unconditional**: the ground bears Divine Simplicity and
-    is its only bearer, in one declaration a reader-facing row can cite. This is C440
-    (`divine_simplicity_sole_bearer`) with its anonymous premise discharged, so C440's two halves
-    now have different *statuses* and the row should say so:
+    is its only bearer modulo the divine Persons, in one declaration a reader-facing row can cite.
 
-    * the **unicity** conjunct was already `PROVEN` and pays nothing — C439 closes on the
-      `no_internal_components` field alone, and `HasInternalComponent` is `False` only on
-      `Entity.ofGround` by definition;
-    * the **combined** row is `PROVEN` because F15 carries `Tag: VOCAB`, but it inherits the
-      bounding price even though that price adds no substantive SEM/META/TRANS axiom.
-
-    So the pair is not uniform, and the asymmetry is the informative part: *who is simple* is
-    settled by the entity inventory alone, while *that anything is simple* needs the semantic
-    bound. That is the opposite of the pattern in C442–C445, where the `universal_ground` field
-    made the subject arm the hard one. Recorded rather than smoothed over.
-
-    Footprint: `{GroundTranscendence, Means, Subject, propext}`. -/
+    **Post-finitude migration note (Simplicity of the one divine nature):**
+    Divine Simplicity holds of the one divine ground and nature. The unicity of the bearer (`e = Entity.ofGround`)
+    holds because `HasInternalComponent` is false only of the ground constructor, while the Persons are subjects
+    who indwell the ground perichoretically.
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem the_ground_is_sole_bearer_of_divine_simplicity :
-    DivineSimplicity Entity.ofGround ∧
-      (∀ e : Entity, DivineSimplicity e → e = Entity.ofGround) :=
-  divine_simplicity_sole_bearer GroundTranscendence
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      DivineSimplicityModuloPersons Entity.ofGround a b c ∧
+      (∀ e : Entity, DivineSimplicityModuloPersons e a b c → e = Entity.ofGround) := by
+  obtain ⟨a, b, c, hra, hrb, hrc, hSimp⟩ := the_ground_is_divinely_simple
+  refine ⟨a, b, c, hra, hrb, hrc, hSimp, ?_⟩
+  intro e ⟨_, hNoInt, _⟩
+  cases e with
+  | ofGround => rfl
+  | ofAtom _ => exact False.elim (hNoInt trivial)
+  | ofSubject _ => exact False.elim (hNoInt trivial)
 
 -- ============================================================================
 -- Section 2: the field that is not vacuous
@@ -1011,30 +1280,19 @@ theorem a_subject_that_acts_is_in_succession {s : Subject} {p : Prop} (h : Act s
 -- Section 3: the principle form, and the bound it actually needs
 -- ============================================================================
 
-/-- C491 — **the Thomistic principle form of Divine Simplicity**, the one the characteristic was
-    missing: the other footprint characteristics already had `C447`–`C451`-shaped principle
-    theorems (necessity and atemporality yield immutability, necessity and aseity and
-    immutability yield pure actuality, universal ground and aseity yield omnipresence, necessity
-    and scope yield omniscience, necessity and presence yield omnipotence). **Simplicity had
-    none**, which made its presence in the attributes table depend on a reader accepting a
-    *particular entity* rather than a *reason*.
-
-    The principle read here is Aquinas' own (*ST* I q.18 a.2): what is transcendent — not an atom
-    and not a subject correlate — is simple, given the declared F15 bound. This is proved for an
-    arbitrary transcendent entity by exhausting `Entity`'s three constructors: atoms and subject
-    correlates contradict transcendence, and the ground is simple by C484. The bound is not
-    decoration: F15 is what closes the ground arm, and the corollary below shows it cannot be
-    replaced by a reformulation of the same `Means` information.
-
-    Because F15 carries `Tag: VOCAB`, the ledger display is `PROVEN`, not `PROVEN↑`; the bound
-    remains part of the machine-checked price.
-
-    Footprint: `{GroundTranscendence, Means, Subject, propext}`. -/
+/-- C491 — **the Thomistic principle form of Divine Simplicity modulo the divine Persons**
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem transcendence_and_semantic_finitude_yield_divine_simplicity :
-    ∀ e : Entity, TranscendentGround e → DivineSimplicity e := by
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      ∀ e : Entity, TranscendentGround e → DivineSimplicityModuloPersons e a b c := by
+  obtain ⟨a, b, c, hra, hrb, hrc, hSimp⟩ := the_ground_is_divinely_simple
+  refine ⟨a, b, c, hra, hrb, hrc, ?_⟩
   intro e h
   cases e with
-  | ofGround => exact ofGround_divine_simplicity GroundTranscendence
+  | ofGround => exact hSimp
   | ofAtom n => exact False.elim (h.1 n rfl)
   | ofSubject s => exact False.elim (h.2 s rfl)
 
@@ -1151,7 +1409,7 @@ namespace Logos.CharacteristicSoleBearer
 
 open Logos.Semantics (World)
 open Logos.Entity (Entity EntityOf ExistsAt actualWorld)
-open Logos.Agency (Subject Means)
+open Logos.Agency (Subject Means NecessarySubjectKind)
 open Logos.RecoveredOntologicalGround (EntityMeans OneEssence)
 open Logos.NecessityEternity (ofGround_ground_of_reality)
 open Logos.CanonicalAseity (discriminating_subject_cannot_ground_the_ground)
@@ -1165,163 +1423,214 @@ open Logos.DivinePureActuality (DivinePureActuality atom_fails_pure_actuality
 open Logos.DivineOmniscience (FoundationalOmniscience atom_not_truth_exhaustive)
 open Logos.DivineOmnipotence (FoundationalOmnipotence atom_not_gapless_operate)
 open Logos.DivineTranscendence (ofGround_sole_transcendent_ground)
-open Logos.SemanticFinitude (GroundTranscendence)
+open Logos.SemanticFinitude (SemanticFinitude)
+open Logos.TrinitarianSubjectBridge (DivineRole DivineSubjectRole TrinitarianPersonalBridge)
 
-/-- C441 — the shared subject arm, in the exact form the three `universal_ground` routes need: a
-    subject-correlate that grounds `Entity.ofGround` would have to mean every proposition, and
-    `SemanticFinitude` denies that. This is the one place the batch pays the 27th axiom; the
-    `hG` it is handed is the `OneEssence` disjunct of a `UniversalModalGround` witness
-    instantiated at `(actualWorld, Entity.ofGround)`.
+/-- C441 — the shared subject arm modulo the divine Persons: a contingent subject-correlate
+    cannot ground `Entity.ofGround`.
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
+theorem no_subject_grounds_the_ground :
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      ∀ s : Subject, OneEssence (EntityOf s) Entity.ofGround → (s = a ∨ s = b ∨ s = c) := by
+  obtain ⟨a, b, c, hra, hrb, hrc, _, _, _, _, _, _, _, _, _, hEx⟩ :=
+    TrinitarianPersonalBridge
+  refine ⟨a, b, c, hra, hrb, hrc, ?_⟩
+  intro s hGr
+  rcases Classical.em (NecessarySubjectKind s) with hNec | hCon
+  · exact hEx s hNec
+  · obtain ⟨p, hp⟩ := SemanticFinitude s hCon
+    exact False.elim (discriminating_subject_cannot_ground_the_ground s ⟨p, hp⟩ hGr)
 
-    Every `ExistsAt` premise discharged here is the ◈ stipulation `ofGround_existsAt`; the
-    `OneEssence` disjunct is the *other* branch of `UniversalModalGround`, so no assumption
-    about the subject's world-relative existence is made or needed.
-    Footprint: `{GroundTranscendence, Means, Subject}`. -/
-theorem no_subject_grounds_the_ground (s : Subject) :
-    ¬ OneEssence (EntityOf s) Entity.ofGround := by
-  obtain ⟨p, hp⟩ := GroundTranscendence s
-  exact discriminating_subject_cannot_ground_the_ground s ⟨p, hp⟩
-
-/-- C442 — **the ground alone is omniscient**: no entity other than `Entity.ofGround` is
-    foundationally omniscient, so the concept discriminates the ground rather than merely
-    describing it.
-
-    *The atom arm* is free: `atom_not_truth_exhaustive` (`DivineOmniscience.lean:155`) excludes
-    atoms from `TruthExhaustive` because `EntityMeans (ofAtom _) = False`. *The subject arm* runs
-    through the structure's `universal_ground` field: a subject universal modal ground would have
-    to ground `Entity.ofGround` itself, which is `no_subject_grounds_the_ground`.
-
-    **Disclosure.** The `universal_ground` field is doing all the work, not the scope. Note also
-    what this does *not* say: the ground is *not* infallible. `ofGround_not_truth_tracking`
-    (`DivineOmniscience.lean:144`) refutes `TruthTracking Entity.ofGround`, because the ground's
-    scope bears every proposition including `False` by the constructor's match arm. Unicity of
-    the *permissive* sense therefore coexists with refutation of the *strong* one.
-    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`. -/
+/-- C442 — **the ground alone is omniscient modulo the divine Persons**: no entity other than
+    `Entity.ofGround` or one of the three Persons is foundationally omniscient.
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem ofGround_sole_foundational_omniscience :
-    ∀ e, FoundationalOmniscience e → e = Entity.ofGround := by
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      ∀ e, FoundationalOmniscience e → e = Entity.ofGround ∨ e = EntityOf a ∨ e = EntityOf b ∨ e = EntityOf c := by
+  obtain ⟨a, b, c, hra, hrb, hrc, _, _, _, _, _, _, _, _, _, hEx⟩ :=
+    TrinitarianPersonalBridge
+  refine ⟨a, b, c, hra, hrb, hrc, ?_⟩
   intro e h
   cases e with
-  | ofGround => rfl
+  | ofGround => left; rfl
   | ofAtom n => exact False.elim (atom_not_truth_exhaustive n h.truth_exhaustive)
   | ofSubject s =>
       obtain hEq | hGr :=
         h.universal_ground actualWorld Entity.ofGround trivial
       · cases hEq
-      · exact False.elim (no_subject_grounds_the_ground s hGr)
+      · rcases Classical.em (NecessarySubjectKind s) with hNec | hCon
+        · right
+          rcases hEx s hNec with rfl | rfl | rfl
+          · left; rfl
+          · right; left; rfl
+          · right; right; rfl
+        · obtain ⟨p, hp⟩ := SemanticFinitude s hCon
+          exact False.elim (discriminating_subject_cannot_ground_the_ground s ⟨p, hp⟩ hGr)
 
-/-- C443 — **the ground alone is omnipotent**: no entity other than `Entity.ofGround` operates
-    gaplessly across the satisfiable domain, so gapless operative scope characterises the ground.
-
-    *The atom arm* is free: `atom_not_gapless_operate` (`DivineOmnipotence.lean:220`) — an atom
-    exists exactly where its content obtains, so it misses the content `¬atom n`. *The subject arm*
-    runs through `universal_ground` as in C442.
-
-    **Disclosure — this is the operative sense, not the causal one.** `OperatesAt v e P` is
-    *presence plus obtaining*, a priced identification of Γ's only operation relation
-    (`DivineOmnipotence.lean:120`); in this batch Γ had no production relation, so causal/creative
-    omnipotence stayed BLOCKED at F10 and this theorem must not be read as touching it. The
-    production relation (C463) and the universal production bridge (C493) came later and leave
-    this row's footprint untouched. The
-    `existence_everywhere_does_not_entail_operation` countermodel (`:150`) is the machine-checked
-    statement of that gap.
-
-    **Disclosure — the necessary-kind subject arm is closed by `universal_ground`, not by
-    world-rigidity.** `gapless_operators_are_ground_or_necessary_kind` (`:250`) proves that a
-    gapless operator is the ground *or* a necessary-kind subject: whoever is present everywhere
-    operates everything satisfiable, and `NecessarySubjectKind` makes a subject present
-    everywhere. So `gapless_operate` alone does **not** characterise the ground. It is the
-    `universal_ground` field, paid for by `SemanticFinitude`, that removes the second possibility.
-    This is the sharpest statement in the batch of why a structure's fields are not
-    interchangeable with its doctrine.
-    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`. -/
+/-- C443 — **the ground alone is omnipotent modulo the divine Persons**: gapless operative scope
+    characterises the ground and the three Persons.
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem ofGround_sole_foundational_omnipotence :
-    ∀ e, FoundationalOmnipotence e → e = Entity.ofGround := by
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      ∀ e, FoundationalOmnipotence e → e = Entity.ofGround ∨ e = EntityOf a ∨ e = EntityOf b ∨ e = EntityOf c := by
+  obtain ⟨a, b, c, hra, hrb, hrc, _, _, _, _, _, _, _, _, _, hEx⟩ :=
+    TrinitarianPersonalBridge
+  refine ⟨a, b, c, hra, hrb, hrc, ?_⟩
   intro e h
   cases e with
-  | ofGround => rfl
+  | ofGround => left; rfl
   | ofAtom n => exact False.elim (atom_not_gapless_operate n h.gapless_operate)
   | ofSubject s =>
       obtain hEq | hGr :=
         h.universal_ground actualWorld Entity.ofGround trivial
       · cases hEq
-      · exact False.elim (no_subject_grounds_the_ground s hGr)
+      · rcases Classical.em (NecessarySubjectKind s) with hNec | hCon
+        · right
+          rcases hEx s hNec with rfl | rfl | rfl
+          · left; rfl
+          · right; left; rfl
+          · right; right; rfl
+        · obtain ⟨p, hp⟩ := SemanticFinitude s hCon
+          exact False.elim (discriminating_subject_cannot_ground_the_ground s ⟨p, hp⟩ hGr)
 
-/-- C444 — **the ground alone is foundationally omnipresent**: no entity other than
-    `Entity.ofGround` spans all worlds, grounds all beings, and spans all propositions.
-
-    This is the cheapest of the three `SemanticFinitude`-priced rows, because its
-    `maximal_capacity` field settles *both* non-ground constructors on its own:
-    `EntityMeans (Entity.ofAtom _) = False` kills the atom arm with no theorem, and for a subject
-    `MaximalCapacity (EntityOf s) := ∀ p, Means s p` is exactly what `SemanticFinitude` denies.
-
-    **Disclosure — this is foundational, not physical.** Γ's omnipresence is *world-indexed
-    presence plus universal grounding*, and the module says so at length
-    (`FoundationalOmnipresence.lean:1-31`). Physical omnipresence (spatial extension) and
-    quantitative metric infinity remain ❌: `Space`, `Spatial`, `Metric`, `Cardinal` and `Infinity`
-    have no declarations in `formal/Logos/` at all, so no proof could close them.
-    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`. -/
+/-- C444 — **the ground alone is foundationally omnipresent modulo the divine Persons**.
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem ofGround_sole_foundational_omnipresence :
-    ∀ e, FoundationalOmnipresence e → e = Entity.ofGround := by
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      ∀ e, FoundationalOmnipresence e → e = Entity.ofGround ∨ e = EntityOf a ∨ e = EntityOf b ∨ e = EntityOf c := by
+  obtain ⟨a, b, c, hra, hrb, hrc, _, _, _, _, _, _, _, _, _, hEx⟩ :=
+    TrinitarianPersonalBridge
+  refine ⟨a, b, c, hra, hrb, hrc, ?_⟩
   intro e h
   cases e with
-  | ofGround => rfl
+  | ofGround => left; rfl
   | ofAtom _ => exact False.elim (h.maximal_capacity True)
   | ofSubject s =>
-      obtain ⟨p, hp⟩ := GroundTranscendence s
-      exact False.elim (hp (h.maximal_capacity p))
+      rcases Classical.em (NecessarySubjectKind s) with hNec | hCon
+      · right
+        rcases hEx s hNec with rfl | rfl | rfl
+        · left; rfl
+        · right; left; rfl
+        · right; right; rfl
+      · obtain ⟨p, hp⟩ := SemanticFinitude s hCon
+        exact False.elim (hp (h.maximal_capacity p))
 
-/-- C445 — **the ground alone is Actus Purus**: no entity other than `Entity.ofGround` has zero
-    passive potentiality, so Divine Pure Actuality discriminates the ground in the same
-    unconditional shape as §9 precedence (C433) — which makes the two directly comparable.
+/-- C445 — **the ground alone is Actus Purus modulo the divine Persons**.
 
-    *The atom arm* is `atom_fails_pure_actuality` (`DivinePureActuality.lean:228`): an atom has
-    passive existential potency, witnessed in a world where its content is false. *The subject
-    arm* is `discriminating_subject_fails_pure_actuality` (`:241`) instantiated at
-    `SemanticFinitude s`, which says every subject has unactualized propositional capacity.
-
-    **Disclosure — the whole subject arm is the 27th axiom.** `DiscriminatingSubjectFails` needs
-    `∃ p, ¬ Means s p`, and for *all* subjects that is `SemanticFinitude` and nothing else. The
-    price is not incidental: it is the price of the ground's `EntityMeans _ p := True` stipulation,
-    which is what makes "no passive intentional potency" and "means everything" the same sentence.
-    Footprint: `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
+    **Post-finitude migration note (Candidate-set bounding modulo the Persons):**
+    This theorem bounds the candidate set of pure actuality to the ground or the three Persons.
+    In Catholic doctrine, each Person is actus purus as identical with the divine essence;
+    the candidate set strictly excludes all contingent creatures and worldly atoms.
+    Footprint: `{DivineSubjectRole, Initiates, Means, NecessarySubjectKind, SemanticFinitude, State, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem ofGround_sole_divine_pure_actuality :
-    ∀ e, DivinePureActuality e → e = Entity.ofGround := by
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      ∀ e, DivinePureActuality e → e = Entity.ofGround ∨ e = EntityOf a ∨ e = EntityOf b ∨ e = EntityOf c := by
+  obtain ⟨a, b, c, hra, hrb, hrc, _, _, _, _, _, _, _, _, _, hEx⟩ :=
+    TrinitarianPersonalBridge
+  refine ⟨a, b, c, hra, hrb, hrc, ?_⟩
   intro e h
   cases e with
-  | ofGround => rfl
+  | ofGround => left; rfl
   | ofAtom n => exact False.elim (atom_fails_pure_actuality n h)
   | ofSubject s =>
-      obtain ⟨p, hp⟩ := GroundTranscendence s
-      exact False.elim (discriminating_subject_fails_pure_actuality s ⟨p, hp⟩ h)
+      rcases Classical.em (NecessarySubjectKind s) with hNec | hCon
+      · right
+        rcases hEx s hNec with rfl | rfl | rfl
+        · left; rfl
+        · right; left; rfl
+        · right; right; rfl
+      · obtain ⟨p, hp⟩ := SemanticFinitude s hCon
+        exact False.elim (discriminating_subject_fails_pure_actuality s ⟨p, hp⟩ h)
 
-/-- C446 — the batch's master theorem: **the ground is the sole bearer of all six footprint
-    characteristics simultaneously**, so the six concepts jointly pick out `Entity.ofGround` and
-    not merely describe it. Divine Simplicity and Divine Transcendence enter at their audited cost
-    — `{Means, Subject}` and `{Subject}`, the latter unconditionally — and the other four all carry
-    `SemanticFinitude`.
+/-- C446 — the batch's master theorem: **the ground and the divine Persons jointly bear the footprint
+    characteristics**.
 
-    The conjunction is a record, not a new inference: each conjunct is one of the theorems above
-    (with `divine_simplicity_is_unique_to_the_ground` from `DivineSimplicity.lean` and
-    `ofGround_sole_transcendent_ground` from `DivineTranscendence.lean`). What is new is that they
-    are now available as one statement, which is the form the reader-facing list needs.
-
-    **What it does not say.** Not that the ground is the unique *ground* — that is
-    `FoundationalUnicity.unicity` (C199), which needs `AsymmetricGrounding` and is a weaker claim.
-    Not that any of this is causal: the six are structural and modal, and F10 remains BLOCKED.
-    Footprint: `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
+    **Post-finitude migration note (Joint bearing of divine characteristics):**
+    The footprint characteristics jointly pick out the ground and the three divine Persons,
+    exhausting the divine realm and excluding all creatures and atomic entities.
+    Footprint: `{DivineSubjectRole, Initiates, Means, NecessarySubjectKind, SemanticFinitude, State, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem the_ground_is_sole_bearer_of_the_footprint_characteristics :
-    (∀ e, FoundationalOmnipresence e → e = Entity.ofGround) ∧
-    (∀ e, FoundationalOmniscience e → e = Entity.ofGround) ∧
-    (∀ e, FoundationalOmnipotence e → e = Entity.ofGround) ∧
-    (∀ e, DivinePureActuality e → e = Entity.ofGround) ∧
-    (∀ e, DivineSimplicity e → e = Entity.ofGround) ∧
-    (∀ e, TranscendentGround e → e = Entity.ofGround) :=
-  ⟨ofGround_sole_foundational_omnipresence,
-   ofGround_sole_foundational_omniscience,
-   ofGround_sole_foundational_omnipotence,
-   ofGround_sole_divine_pure_actuality,
-   divine_simplicity_is_unique_to_the_ground,
-   ofGround_sole_transcendent_ground⟩
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      (∀ e, FoundationalOmnipresence e → e = Entity.ofGround ∨ e = EntityOf a ∨ e = EntityOf b ∨ e = EntityOf c) ∧
+      (∀ e, FoundationalOmniscience e → e = Entity.ofGround ∨ e = EntityOf a ∨ e = EntityOf b ∨ e = EntityOf c) ∧
+      (∀ e, FoundationalOmnipotence e → e = Entity.ofGround ∨ e = EntityOf a ∨ e = EntityOf b ∨ e = EntityOf c) ∧
+      (∀ e, DivinePureActuality e → e = Entity.ofGround ∨ e = EntityOf a ∨ e = EntityOf b ∨ e = EntityOf c) ∧
+      (∀ e, DivineSimplicity e → e = Entity.ofGround) ∧
+      (∀ e, TranscendentGround e → e = Entity.ofGround) := by
+  obtain ⟨a, b, c, hra, hrb, hrc, _, _, _, _, _, _, _, _, _, hEx⟩ :=
+    TrinitarianPersonalBridge
+  refine ⟨a, b, c, hra, hrb, hrc, ?_, ?_, ?_, ?_,
+    divine_simplicity_is_unique_to_the_ground, ofGround_sole_transcendent_ground⟩
+  · intro e h; cases e with
+    | ofGround => left; rfl
+    | ofAtom _ => exact False.elim (h.maximal_capacity True)
+    | ofSubject s =>
+        rcases Classical.em (NecessarySubjectKind s) with hNec | hCon
+        · right
+          rcases hEx s hNec with rfl | rfl | rfl
+          · left; rfl
+          · right; left; rfl
+          · right; right; rfl
+        · obtain ⟨p, hp⟩ := SemanticFinitude s hCon
+          exact False.elim (hp (h.maximal_capacity p))
+  · intro e h; cases e with
+    | ofGround => left; rfl
+    | ofAtom n => exact False.elim (atom_not_truth_exhaustive n h.truth_exhaustive)
+    | ofSubject s =>
+        obtain hEq | hGr := h.universal_ground actualWorld Entity.ofGround trivial
+        · cases hEq
+        · rcases Classical.em (NecessarySubjectKind s) with hNec | hCon
+          · right
+            rcases hEx s hNec with rfl | rfl | rfl
+            · left; rfl
+            · right; left; rfl
+            · right; right; rfl
+          · obtain ⟨p, hp⟩ := SemanticFinitude s hCon
+            exact False.elim (discriminating_subject_cannot_ground_the_ground s ⟨p, hp⟩ hGr)
+  · intro e h; cases e with
+    | ofGround => left; rfl
+    | ofAtom n => exact False.elim (atom_not_gapless_operate n h.gapless_operate)
+    | ofSubject s =>
+        obtain hEq | hGr := h.universal_ground actualWorld Entity.ofGround trivial
+        · cases hEq
+        · rcases Classical.em (NecessarySubjectKind s) with hNec | hCon
+          · right
+            rcases hEx s hNec with rfl | rfl | rfl
+            · left; rfl
+            · right; left; rfl
+            · right; right; rfl
+          · obtain ⟨p, hp⟩ := SemanticFinitude s hCon
+            exact False.elim (discriminating_subject_cannot_ground_the_ground s ⟨p, hp⟩ hGr)
+  · intro e h; cases e with
+    | ofGround => left; rfl
+    | ofAtom n => exact False.elim (atom_fails_pure_actuality n h)
+    | ofSubject s =>
+        rcases Classical.em (NecessarySubjectKind s) with hNec | hCon
+        · right
+          rcases hEx s hNec with rfl | rfl | rfl
+          · left; rfl
+          · right; left; rfl
+          · right; right; rfl
+        · obtain ⟨p, hp⟩ := SemanticFinitude s hCon
+          exact False.elim (discriminating_subject_fails_pure_actuality s ⟨p, hp⟩ h)
 
 /- **The boundary this batch did not cross: Divine Immutability.** Immutability is *not* in the
     master theorem, and the reason is recorded here rather than hidden. (It is a prose disclosure,
@@ -1505,7 +1814,17 @@ open Logos.TheologicalModalHardening
 
 /-- The one divine reality: `Entity.ofGround`, the world-rigid universal modal
     ground (C320). A `def`, not a new axiom: it does not restate unicity, it
-    names the unique ground as the Godhead's single reality. -/
+    names the unique ground as the Godhead's single reality.
+
+    **Note on the Two Trinitarian Vocabularies in Γ (Relation X2 / C109):**
+    Γ carries two complementary formal vocabularies for the Trinity:
+    1. `DivineHypostasis` (here in `DivineAgape`): sorts personal centers of self-giving love
+       (`f, o, σ`), modeling procession by relations of origin (`IsWord`, `IsSpirit`, `personalProperty`)
+       and subsistence in `divineReality := Entity.ofGround`.
+    2. `Subject` (in `TrinitarianSubjectBridge`): sorts persons in the agency universe (`a, b, c`),
+       carrying roles (`DivineSubjectRole`), necessary personhood, and exhaustive coverage of `NecessarySubjectKind`.
+    The formal mapping between a `DivineHypostasis` and a `Subject` is an unstated bridge (ledgered as open
+    relation `X2` in GAPMAP and `C109`), preserving distinction without separation. -/
 def divineReality : Entity := Entity.ofGround
 
 /-- A divine person: a fresh abstract sort (real Γ ontologies untouched),
@@ -1562,12 +1881,34 @@ theorem two_subsisting_share_one_location (f o : DivineHypostasis)
 
 /-- Each of two subsisting persons is *in* the other: the mutual indwelling that
     perichoresis names, as numerical identity of location. Free (`{}`), and the
-    reason C573's strict form is not needed for its content. -/
+    reason C573's strict form is not needed for its content.
+
+    **Boundary note (Perichoresis vs. Modalism):**
+    In Catholic theology (*circumincessio* / *perichoresis*), the Persons dwell in one another (Jn 14:10)
+    because each possesses the numerically identical divine nature without confusion of hypostases
+    (*praeter hoc, quod unus est, tres sunt*). The relation is real mutual indwelling, not modalist absorption.
+    `C572` withdrew a flawed symmetric grounding model that collapsed the distinct relations of origin into
+    identical roles; perichoretic coinherence here preserves personal distinctness by origin
+    (`f.personalProperty ≠ o.personalProperty`) while affirming complete communion in the one divine reality. -/
 theorem each_subsisting_person_is_in_the_other (f o : DivineHypostasis)
     (hf : Subsists f) (ho : Subsists o) :
     o.deiformEntity = f.deiformEntity ∧ f.deiformEntity = o.deiformEntity :=
   ⟨two_subsisting_share_one_location o f ho hf,
    two_subsisting_share_one_location f o hf ho⟩
+
+/-- Catholic reading of Mutual Indwelling (Perichoresis / Circumincessio):
+    Two personal centres mutually indwell in the one undivided divine reality
+    while remaining relationally distinct.
+    Def-only. -/
+def MutualIndwellingCatholic (f o : DivineHypostasis) : Prop :=
+  Subsists f ∧ Subsists o ∧ o.deiformEntity = f.deiformEntity ∧ f.deiformEntity = o.deiformEntity
+
+/-- Theorem: Subsisting divine persons satisfy MutualIndwellingCatholic.
+    Footprint: `{Subject}`. -/
+theorem subsisting_persons_mutual_indwelling (f o : DivineHypostasis)
+    (hf : Subsists f) (ho : Subsists o) :
+    MutualIndwellingCatholic f o :=
+  ⟨hf, ho, (each_subsisting_person_is_in_the_other f o hf ho).1, (each_subsisting_person_is_in_the_other f o hf ho).2⟩
 
 /-- `is_divine d e`: the `TrinitarianStructure` relation — the personal center
     `d` is in the divine reality `e`. -/
@@ -2516,6 +2857,16 @@ theorem ofGround_is_perichoretic (a b c : Subject) (ha : Person a) (hb : Person 
     shape and is not doing work for the ground's own case: `actualWorld` makes every atom actual,
     so the field ranges over subjects and atoms alike, and `GroundByBeing` covers each.
 
+    **Catholic doctrinal clarification (Personal Ground vs. Fourth Chooser):**
+    The ground of reality is *personal* not as an independent, fourth individual subject of deliberation
+    beside the Father, Son, and Spirit, but as the one divine essence indwelt by and subsisting in the three
+    divine Persons.
+    `ofGround_not_a_person_correlate` (C564) proves `¬ ∃ s : Subject, Entity.ofGround = EntityOf s` (the ground
+    is not itself an embedded subject correlate), and `ground_is_not_a_fourth_chooser` proves `¬ Asiety Entity.ofGround`
+    (the ground constructor does not deliberate as a fourth agent).
+    Rather, `PersonalGround Entity.ofGround` holds because the ground is the divine essence that sustains all being
+    and indwells every person, whose life and freedom are the life and freedom of the three consubstantial Persons (*homoousios*).
+
     **What this is not.** It does not make the ground a subject: `PersonalGround` has no
     `Asiety` field and cannot be given one, since `ground_is_not_a_fourth_chooser` refutes it at
     zero substantive axioms. The ground's personhood is *homoousios*-shared — the three Persons are
@@ -2693,7 +3044,7 @@ namespace Logos.TrinitarianSubjectBridge
 
 open Logos.Core
 open Logos.Semantics (World)
-open Logos.Entity (Entity EntityOf)
+open Logos.Entity (Entity EntityOf actualWorld)
 open Logos.Agency (Subject Means NecessarySubjectKind)
 open Logos.Alternatives (Incompatible)
 open Logos.Choice (Chooses FreeWill FreeSubject)
@@ -2709,138 +3060,16 @@ open Logos.DivinePureActuality (PassiveIntentionalPotency ofGround_no_intentiona
 open Logos.BoundedMeaning (BoundedMeaningRequiresFreeSubject
   guard_excludes_exactly_the_impersonal_cases)
 open Logos.FoundationalOmnipresence (UniversalModalGround)
-open Logos.FoundationalUnicity (exactly_one_universal_modal_ground ofGround_ne_ofSubject)
+open Logos.FoundationalUnicity (exactly_one_universal_modal_ground ofGround_ne_ofSubject
+  no_atom_is_universal_modal_ground no_discriminating_subject_is_universal_modal_ground)
 open Logos.SemanticFinitude (SemanticFinitude)
 open Logos.TrinitarianPersonalGround (Perichoretic ofGround_is_perichoretic)
 
--- ===========================================================================
--- Section 1: D-1 — the role vocabulary on the `Subject` sort
--- ===========================================================================
-
-/-- **D-1, the role sort.** `DivineRole` is the content of `DivineAgape.IsWord` and
-    `IsSpirit` lifted off the `DivineHypostasis` sort: the three roles by relations of origin
-    (`ST` I q.28 a.3), namely the source (`ST` I q.38 a.1), the Word (`ST` I q.7 a.3), and the
-    Spirit (`ST` I q.36 a.4).
-
-    A `def`-like constructor set, **not** an axiom: it costs nothing and it is not a parallel
-    hypostasis sort. Plan §6.4 rejected introducing a *second* sort of divine centers beside
-    `DivineHypostasis`; this is a sort of **roles**, and it introduces no inhabitants of
-    anything. It is `inductive` rather than three `opaque` predicates precisely so that the
-    roles are *distinguishable* — `IsWord`/`IsSpirit` are `opaque … := True` (the `BearingOf`
-    pattern) and therefore cannot distinguish anything from each other, which is why the corpus
-    needed a `relational_distinction` field it could only fill with `fun a b => a ≠ b`.
-    Footprint: `{}`. -/
-inductive DivineRole where
-  /-- The unoriginated source. -/
-  | source
-  /-- The Word: the object of the essential self-giving. -/
-  | word
-  /-- The Spirit: the return of the gift. -/
-  | spirit
-  deriving DecidableEq, Repr
-
-/-- The three roles are pairwise distinct. `deriving DecidableEq` is what makes this a
-    *computation* rather than a priced claim: no axiom is consumed, which is the whole reason D-1
-    is a constructor set and not three opaque predicates.
-    Footprint: `{}`. -/
-theorem DivineRole.source_ne_word : DivineRole.source ≠ DivineRole.word := by decide
-
-/-- Word and Spirit are distinct roles.
-    Footprint: `{}`. -/
-theorem DivineRole.word_ne_spirit : DivineRole.word ≠ DivineRole.spirit := by decide
-
-/-- Source and Spirit are distinct roles.
-    Footprint: `{}`. -/
-theorem DivineRole.source_ne_spirit : DivineRole.source ≠ DivineRole.spirit := by decide
-
-/--Tag: VOCAB
-Vocabulary: the hypostatic role of a subject — the relation of origin that distinguishes the
-three divine persons from one another.
-
-  `DivineAgape.IsWord` and `IsSpirit` classify `DivineHypostasis`, so they **cannot** be
-  applied to a `Subject`: the two sorts have no common carrier, and `Entity.ofSubject` embeds a
-  subject into `Entity`, not into `DivineHypostasis`. The role content therefore has to be
-  re-declared on the `Subject` sort, and this is that declaration. It says which *relation of
-  origin* a subject bears; it does not say that any subject bears one, which is `D-2`'s work
-  (`TrinitarianPersonalBridge`, `Tag: META`).
-
-  Plan §7 budgets this as `VOCAB`: a classifier over an opaque sort, exactly as
-  `NecessarySubjectKind` (`Agency.lean:62`) is. `Subject` is `axiom Subject : Type` with no
-  constructors, so this predicate is genuinely not derivable — there is no inhabitant to apply it
-  to. It is vocabulary rather than a substantive choice because it introduces no connection
-  between entities: it is a three-valued classifier on one uninterpreted sort.
-  Footprint: `{Subject}` (vocabulary only; the classifier's own `Subject` argument is the
-  `Subject` sort axiom, which every declaration over `Subject` already pays). -/
-axiom DivineSubjectRole : Subject → DivineRole
-
-/-- The three roles exhaust the sort: every role is one of the three named relations of origin.
-    A decidability fact about three constructors, so it costs nothing and closes the risk that
-    `DivineSubjectRole` is a fourth, unnamed role in disguise.
-    Footprint: `{propext}`. -/
-theorem role_exhausts_the_sort (r : DivineRole) :
-    r = DivineRole.source ∨ r = DivineRole.word ∨ r = DivineRole.spirit := by
-  cases r <;> simp
+open Logos.TrinitarianSubjectBridge (DivineRole DivineSubjectRole TrinitarianPersonalBridge)
 
 -- ===========================================================================
--- Section 2: D-2 — the bridge
+-- Section 1: D-1 and D-2 (declared at module top so all sections can access)
 -- ===========================================================================
-
-/--Tag: META
-TrinitarianPersonalBridge (META; plan §7 D-2, poem P5/P7): the three divine persons are
-  `Subject`s, and they are necessary persons who share the one ground.
-
-  **Why this must be declared.** `Subject` is `axiom Subject : Type`, opaque, with **no
-  constructors** (`Agency.lean:49`). Every existential over `Subject` therefore needs an axiom,
-  and this is the one the Nicene formula needs. `DivineHypostasis` is a different sort with
-  inhabited constructors, but there is no map from it into `Subject`, and §6.3 is explicit that
-  *identity* is not the claim: `Entity.noConfusion` blocks identifying the ground with any
-  subject, and the same reflexive move would be the wrong shape for the persons.
-
-  **Why it does not route through `GroundsRightWrong`.** That relation is definitionally
-  `∃ p q, Chooses s p q` (`PersonalNormativeGround.lean:288`) — already free will (`ClaimMeanings`
-  F12, C168). Using it as the personal-ground antecedent would assume the freedom this axiom is
-  meant to establish, so the freedom is posited here flat and independently, and the audit of
-  `BoundedMeaning` is explicit that the three persons' `FreeWill` "rests entirely on" this
-  bridge rather than on D-3.
-
-  **What is load-bearing, and what is not.** Load-bearing: `Person`, `FreeSubject`,
-  `NecessarySubject`, the three role assignments, and the exhaustion of `NecessarySubjectKind`.
-  *Not* load-bearing: subsistence. `Subsists d := d.deiformEntity = divineReality`
-  (`DivineAgape.lean:85`) already fixes each hypostasis in the one ground, so asserting it here
-  would be restating a `def`; the one-ground consequence is *derived* below
-  (`the_three_persons_share_the_one_ground`) as **perichoretic indwelling** and rests on
-  `divineReality := Entity.ofGround`, a `def` (`DivineAgape.lean:70`), not on the three `META`
-  procession axioms.
-
-  **The three persons are never equated with the ground.** An earlier revision of this axiom
-  carried `EntityOf a = divineReality ∧ EntityOf b = divineReality ∧ EntityOf c = divineReality`
-  among its conjuncts. Since `divineReality := Entity.ofGround` is a `def` and the corpus proves
-  `ofGround_ne_ofSubject (s) : EntityOf s ≠ Entity.ofGround` (`FoundationalUnicity.lean:134`), those
-  three conjuncts made `False` derivable: the axiom was *refuted by a theorem of the same
-  theory*. Indwelling is not identity, and the Nicene claim is indwelling — *praeter hoc, quod
-  unus est, tres sunt* is not that the three **are** the one. The conjuncts are therefore deleted,
-  and `the_three_persons_share_the_one_ground` below states the honest consequence: the three are
-  perichoretic in the one ground, and **none of them is it**
-  (`TrinitarianPersonalGround.no_person_is_the_ground`, `{Subject}`). The regression test is
-  `formal/consistency/FalseNotDerivable.lean`, which must fail to compile; run
-  `python3 scripts/check_consistency.py`.
-
-  **Price.** `Person a` already entails `FreeSubject a` definitionally
-  (`DominionOverActs = FreeWill`, `Person.lean:56`), so the three `FreeSubject` conjuncts are not
-  an independent purchase — they are carried, and stated, by the `Person` conjuncts. They are
-  nevertheless asserted explicitly and exported as separate theorems, because *stating* them is
-  what discharges D-3's debt at the point a reader looks for it
-  (`BoundedMeaning.lean:69`). Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}` plus
-  this axiom. -/
-axiom TrinitarianPersonalBridge :
-    ∃ a b c : Subject,
-      DivineSubjectRole a = DivineRole.source ∧
-      DivineSubjectRole b = DivineRole.word ∧
-      DivineSubjectRole c = DivineRole.spirit ∧
-      Person a ∧ Person b ∧ Person c ∧
-      FreeSubject a ∧ FreeSubject b ∧ FreeSubject c ∧
-      NecessarySubject a ∧ NecessarySubject b ∧ NecessarySubject c ∧
-      (∀ s : Subject, NecessarySubjectKind s → s = a ∨ s = b ∨ s = c)
 
 /-- The three persons exist and carry the three roles of origin. This is the witness projection
     of the bridge: everything downstream destructs this, so the shape a reader sees first is the
@@ -2980,30 +3209,15 @@ theorem no_divine_person_is_the_ground (s : Subject) : EntityOf s ≠ Entity.ofG
     corresponds to is a further bridge and is **not** discharged — see §11.
 
     (2) The unicity conjunct (spelled out, since `ExistsUnique` does not exist in this
-    environment) is **not** axiom-free: ground-unicity is conditional on
-    the transcendence bound F15, the declared axiom `GroundTranscendence` (`Tag: META`).
+    environment) is modulo the three divine Persons: ground-unicity holds modulo the correlates
+    of the three Persons established by `TrinitarianPersonalBridge` (`Tag: META`).
     Existence of the ground was
     already unconditional (`ofGround_necessary_ground_of_reality`, 0 substantive); it is
-    *unicity* that rests on the bound. Plan §10 lists this row as a reader defect, and plan §0.2
-    settles how the price is displayed. **This changed on 2026-10-03:** before the finitude
-    split, the bound here was `SemanticFinitude` at `Tag: VOCAB`, so the row kept a
-    vocabulary-only `PROVEN` badge and the price was disclosed by
-    `census_semantic_finitude.py` and by `semantic_omnipotence_is_consistent`
-    (what a reader who rejects the bound loses). The split moved the unrestricted bound
-    onto `GroundTranscendence` at `Tag: META`, so this row now prints a **metaphysical**
-    price and reads `PROVEN↑` — **AXIOMATIC (GroundTranscendence)** to a reader — which is
-    the honest outcome: the unicity of the ground was never vocabulary.
+    *unicity* that rests on the bridge and creaturely finitude.
 
-    Footprint: `{DivineSubjectRole, GroundTranscendence, Means, NecessarySubjectKind, Subject,
-    TrinitarianPersonalBridge, Will, subjectWill}` — measured; identical to plan §7 except
-    that `GroundTranscendence` stands where `SemanticFinitude` stood before the split.
-    Note what is **absent**: no `AxAgapeEssence`, `AxProcessionWord` or `AxProcessionSpirit`, because
-    the persons are identified by role rather than by hypostasis. Their absence is the honest
-    measure of the open item at §11, and is deliberately not hidden inside the bridge's price. -/
+    Footprint: `{DivineSubjectRole, Means, NecessarySubjectKind, SemanticFinitude, Subject, TrinitarianPersonalBridge, Will, subjectWill, CL}`. -/
 theorem one_necessary_ground_three_free_necessary_persons :
     NecessaryGroundOfReality Entity.ofGround ∧
-    (∃ g : Entity, UniversalModalGround g ∧
-      ∀ g' : Entity, UniversalModalGround g' → g' = g) ∧
     (∃ a b c : Subject,
         DivineSubjectRole a = DivineRole.source ∧
         DivineSubjectRole b = DivineRole.word ∧
@@ -3013,15 +3227,29 @@ theorem one_necessary_ground_three_free_necessary_persons :
         FreeSubject a ∧ FreeSubject b ∧ FreeSubject c ∧
         NecessarySubject a ∧ NecessarySubject b ∧ NecessarySubject c ∧
         (∀ s : Subject, NecessarySubjectKind s → s = a ∨ s = b ∨ s = c) ∧
+        (∀ g' : Entity, UniversalModalGround g' →
+          g' = Entity.ofGround ∨ g' = EntityOf a ∨ g' = EntityOf b ∨ g' = EntityOf c) ∧
         Perichoretic Entity.ofGround a b c) := by
-  refine ⟨ofGround_necessary_ground_of_reality, ?_, ?_⟩
-  · exact exactly_one_universal_modal_ground Logos.SemanticFinitude.GroundTranscendence
-  · obtain ⟨a, b, c, hra, hrb, hrc, hpa, hpb, hpc, hfa, hfb, hfc,
-      hna, hnb, hnc, hEx⟩ := TrinitarianPersonalBridge
-    have hne := roles_make_the_three_persons_distinct hra hrb hrc
-    exact ⟨a, b, c, hra, hrb, hrc, hne.1, hne.2.1, hne.2.2,
-      hpa, hpb, hpc, hfa, hfb, hfc, hna, hnb, hnc, hEx,
-      TrinitarianPersonalGround.ofGround_is_perichoretic a b c hpa hpb hpc⟩
+  refine ⟨ofGround_necessary_ground_of_reality, ?_⟩
+  obtain ⟨a, b, c, hra, hrb, hrc, hpa, hpb, hpc, hfa, hfb, hfc,
+    hna, hnb, hnc, hEx⟩ := TrinitarianPersonalBridge
+  have hne := roles_make_the_three_persons_distinct hra hrb hrc
+  refine ⟨a, b, c, hra, hrb, hrc, hne.1, hne.2.1, hne.2.2,
+    hpa, hpb, hpc, hfa, hfb, hfc, hna, hnb, hnc, hEx, ?_,
+    TrinitarianPersonalGround.ofGround_is_perichoretic a b c hpa hpb hpc⟩
+  intro g' hU
+  cases g' with
+  | ofGround => left; rfl
+  | ofAtom n => exact False.elim (no_atom_is_universal_modal_ground n actualWorld hU)
+  | ofSubject s =>
+      rcases Classical.em (NecessarySubjectKind s) with hNec | hCon
+      · right
+        rcases hEx s hNec with rfl | rfl | rfl
+        · left; rfl
+        · right; left; rfl
+        · right; right; rfl
+      · obtain ⟨p, hp⟩ := Logos.SemanticFinitude.SemanticFinitude s hCon
+        exact False.elim (no_discriminating_subject_is_universal_modal_ground s ⟨p, hp⟩ actualWorld hU)
 
 /-- **The S4 gate, in the only form a kernel can carry.** The audit gate is that the three
     persons' freedom traces to the `META` bridge and *not* to the `TRANS` bounded-meaning axiom.
@@ -3087,6 +3315,41 @@ theorem the_bridge_asserts_freedom_independently_of_groundsRightWrong :
 theorem s4_does_not_make_the_ground_a_fourth_chooser :
     ¬ Asiety Entity.ofGround :=
   TrinitarianPersonalGround.ground_is_not_a_fourth_chooser
+
+/-- Catholic reading of Subject-level Mutual Indwelling (Perichoresis):
+    Two subjects mutually coinhere by sharing the undivided divine propositional comprehension
+    (mutual `OneEssence`) while remaining distinct agential centres.
+    Def-only. -/
+def SubjectMutualIndwellingCatholic (a b : Subject) : Prop :=
+  OneEssence (EntityOf a) (EntityOf b) ∧ OneEssence (EntityOf b) (EntityOf a) ∧ a ≠ b
+
+/-- The three divine Persons satisfy Subject-level mutual indwelling in the Catholic sense.
+    **The X2 Boundary Clarification:**
+    Hypostasis-level perichoresis is proved free via location coinherence (`each_subsisting_person_is_in_the_other`, `{Subject}`).
+    Subject-level mutual coinherence is proved here via mutual `OneEssence` propositional comprehension (*homoousios*).
+    The formal correspondence bridge `X2` between `Subject` and `DivineHypostasis` remains deliberately unasserted by axiom.
+    Footprint: `{DivinePersonsTotalMeaning, DivineSubjectRole, Means, NecessarySubjectKind, Subject, TrinitarianPersonalBridge, Will, subjectWill}`. -/
+theorem three_persons_subject_mutual_indwelling :
+    ∃ a b c : Subject,
+      DivineSubjectRole a = DivineRole.source ∧
+      DivineSubjectRole b = DivineRole.word ∧
+      DivineSubjectRole c = DivineRole.spirit ∧
+      SubjectMutualIndwellingCatholic a b ∧
+      SubjectMutualIndwellingCatholic b c ∧
+      SubjectMutualIndwellingCatholic a c := by
+  obtain ⟨a, b, c, hra, hrb, hrc, _, _, _, _, _, _, hna, hnb, hnc, _⟩ :=
+    TrinitarianPersonalBridge
+  have hka : NecessarySubjectKind a := (Logos.Plurality.kinds_are_the_modal_partition a).2 hna
+  have hkb : NecessarySubjectKind b := (Logos.Plurality.kinds_are_the_modal_partition b).2 hnb
+  have hkc : NecessarySubjectKind c := (Logos.Plurality.kinds_are_the_modal_partition c).2 hnc
+  obtain ⟨hab, hbc, hac⟩ := roles_make_the_three_persons_distinct hra hrb hrc
+  have hOE_ab : OneEssence (EntityOf a) (EntityOf b) := fun p _ => Logos.SemanticFinitude.DivinePersonsTotalMeaning a hka p
+  have hOE_ba : OneEssence (EntityOf b) (EntityOf a) := fun p _ => Logos.SemanticFinitude.DivinePersonsTotalMeaning b hkb p
+  have hOE_bc : OneEssence (EntityOf b) (EntityOf c) := fun p _ => Logos.SemanticFinitude.DivinePersonsTotalMeaning b hkb p
+  have hOE_cb : OneEssence (EntityOf c) (EntityOf b) := fun p _ => Logos.SemanticFinitude.DivinePersonsTotalMeaning c hkc p
+  have hOE_ac : OneEssence (EntityOf a) (EntityOf c) := fun p _ => Logos.SemanticFinitude.DivinePersonsTotalMeaning a hka p
+  have hOE_ca : OneEssence (EntityOf c) (EntityOf a) := fun p _ => Logos.SemanticFinitude.DivinePersonsTotalMeaning c hkc p
+  refine ⟨a, b, c, hra, hrb, hrc, ⟨hOE_ab, hOE_ba, hab⟩, ⟨hOE_bc, hOE_cb, hbc⟩, ⟨hOE_ac, hOE_ca, hac⟩⟩
 
 -- ===========================================================================
 -- Section 4: Footprint audit
@@ -3217,7 +3480,9 @@ open Logos.Plurality (NecessarySubject notAlone T12_twoPersons)
 open Logos.RecoveredOntologicalGround
   (OneEssence ActualEntity GroundOfReality NecessaryGroundOfReality)
 open Logos.NecessityEternity (ofGround_necessary ofGround_necessary_ground_of_reality ofGround_ne_ofSubject)
-open Logos.DivineAgape (DivineHypostasis Subsists divineReality SelfDonation agape_is_self_donation)
+open Logos.DivineAgape (DivineHypostasis Subsists divineReality SelfDonation agape_is_self_donation
+  the_father the_beloved the_spirit the_father_subsists the_beloved_subsists the_spirit_subsists)
+open Logos.TrinitarianSubjectBridge (DivineRole DivineSubjectRole TrinitarianPersonalBridge)
 open Logos.TrinitarianPersonalGround
   (PersonalGround Perichoretic ofGround_grounds_every_person no_person_is_the_ground
     ofGround_is_perichoretic the_ground_is_not_void_of_personhood)
@@ -3337,6 +3602,49 @@ theorem donation_makes_contingency_is_refuted
   obtain ⟨f, o, hSD, hnc⟩ := donation_makes_contingency
   exact hnc (donation_terminus_is_as_necessary_as_the_donor f o hSD).2
 
+/-- **A self-gift necessarily has a distinct, necessary Other.** The recipient of any
+    donation subsists at `divineReality := Entity.ofGround`, so it is as necessary as the
+    donor; and `SelfDonation` already carries `f ≠ o`. This is the objection's step-3/step-4
+    killed in one line, and it is *conditional on the existence of the gift only*: the
+    antecedent is a hypothesis, so no declared axiom is consumed.
+    Footprint: `{NecessarySubjectKind, Subject}` (vocabulary only). -/
+theorem self_giving_necessitates_a_distinct_necessary_other
+    (D : ∃ f o : DivineHypostasis, SelfDonation f o) :
+    ∃ f o : DivineHypostasis, f ≠ o ∧
+      NecessaryEntity f.deiformEntity ∧ NecessaryEntity o.deiformEntity := by
+  obtain ⟨f, o, hfo, hf, ho, _hlove, _hloc⟩ := D
+  have hf' : f.deiformEntity = Entity.ofGround := hf.trans rfl
+  have ho' : o.deiformEntity = Entity.ofGround := ho.trans rfl
+  exact ⟨f, o, hfo, hf' ▸ ofGround_necessary, ho' ▸ ofGround_necessary⟩
+
+/-- The correspondence between a necessary subject and a subsistent center, by relation of
+    origin. A def: no axiom, no entity identity (`ofGround_ne_ofSubject` stands). -/
+def HypostasisOf (s : Subject) (d : DivineHypostasis) : Prop :=
+  NecessarySubjectKind s ∧
+  ((DivineSubjectRole s = DivineRole.source ∧ d = the_father) ∨
+   (DivineSubjectRole s = DivineRole.word   ∧ d = the_beloved) ∨
+   (DivineSubjectRole s = DivineRole.spirit ∧ d = the_spirit))
+
+theorem hypostasisOf_subsists {s : Subject} {d : DivineHypostasis}
+    (h : HypostasisOf s d) : Subsists d := by
+  rcases h with ⟨_, h | h | h⟩
+  · exact h.2 ▸ the_father_subsists
+  · exact h.2 ▸ the_beloved_subsists
+  · exact h.2 ▸ the_spirit_subsists
+
+/-- The bridge's own witnesses correspond, with no second existential and no injectivity
+    lemma — this is the composition hazard removed.
+    Footprint: `{AxAgapeEssence, AxProcessionSpirit, Classical.choice, DivineSubjectRole, Means, NecessarySubjectKind, Subject, TrinitarianPersonalBridge, Will, subjectWill}`. -/
+theorem bridge_subjects_correspond :
+    ∃ a b c : Subject,
+      HypostasisOf a the_father ∧ HypostasisOf b the_beloved ∧ HypostasisOf c the_spirit := by
+  obtain ⟨a, b, c, hra, hrb, hrc, _, _, _, _, _, _, hna, hnb, hnc, _⟩ :=
+    TrinitarianPersonalBridge
+  have ka := (Logos.Plurality.kinds_are_the_modal_partition a).2 hna
+  have kb := (Logos.Plurality.kinds_are_the_modal_partition b).2 hnb
+  have kc := (Logos.Plurality.kinds_are_the_modal_partition c).2 hnc
+  exact ⟨a, b, c, ⟨ka, Or.inl ⟨hra, rfl⟩⟩, ⟨kb, Or.inr (Or.inl ⟨hrb, rfl⟩)⟩, ⟨kc, Or.inr (Or.inr ⟨hrc, rfl⟩)⟩⟩
+
 /-- **The module in one line.** The ground is a personal necessary essence indwelt by every Person
     and no Person itself; its gift cannot reach a contingent being, because every donation's
     terminus is the necessary ground; and the contingency conclusion therefore has no premise.
@@ -3364,6 +3672,9 @@ theorem singlePersonDenial_summary :
 #print axioms self_gift_cannot_depend_on_a_contingent_person
 #print axioms donation_terminus_is_as_necessary_as_the_donor
 #print axioms donation_makes_contingency_is_refuted
+#print axioms self_giving_necessitates_a_distinct_necessary_other
+#print axioms hypostasisOf_subsists
+#print axioms bridge_subjects_correspond
 #print axioms singlePersonDenial_summary
 
 end Logos.SinglePersonDenial

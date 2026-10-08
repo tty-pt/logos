@@ -113,6 +113,12 @@ Actualizado 2026-10-03 (lote FINITUDE-SPLIT): C491 passou a pagar `GroundTransce
 que o limite semântico não fecha o braço do grounding — mas note-se que o limite que
 C492 exibe é o **irrestrito**, que é precisamente `GroundTranscendence`.
 
+**Actualizado 2026-10-08 (lote SEMANTIC-FINITUDE-DIVINE-FULLNESS).**
+Com a eliminação de `GroundTranscendence` e a consagração do limite modulo as Pessoas divinas,
+`the_ground_is_sole_bearer_of_divine_simplicity` (C486) e `transcendence_and_semantic_finitude_yield_divine_simplicity` (C491)
+passam a pagar a ponte `TrinitarianPersonalBridge` (META) e o limite criatural `SemanticFinitude` (VOCAB),
+estabelecendo a simplicidade da única natureza divina modulo as três Pessoas divinas.
+
 Teoremas canónicos associados:
 
 1. Equivalência mereológica e aseidade (`non_composite_iff_canonical_aseity`, `{Means, Subject}`):

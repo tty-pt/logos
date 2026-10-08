@@ -53,9 +53,9 @@ What this does NOT claim, each verified against the source:
         that the epistemic order is unreal. (Discipline now ledgered as C559,
         `EpistemicNecessity.signature_model_reading_discipline`, which governs
         this module and `NegativeRetorsionAudit` alike.)
-  (vi)  C228 (`normative_ground_is_personal`) stays BLOCKED. That is the
-        **entity-level** relation `GenericGroundsRightWrong g → PersonCorrelate g`;
-        this module is **subject-level** and does not discharge it.
+  (vi)  C228 (`normative_ground_is_personal`) is the distinct **entity-level**
+        relation `GenericGroundsRightWrong g → PersonCorrelate g` (PROVEN);
+        this module is **subject-level** and operates independently.
 
 No new axiom: the register stays at 35 declared (17 VOCAB / 18 substantive).
 -/

@@ -54,12 +54,25 @@ def EntityMeans (e : Entity) (p : Prop) : Prop :=
     level): `g` grounds `e` iff `g` possesses at least `e`'s intentional/agential
     capacity — it means everything `e` means. `∀ p, EntityMeans e p → EntityMeans g p`.
 
-    The rename is **naming only**: the definition is unchanged, so every footprint,
-    every countermodel and every `{}`-theorem that reads this predicate is unaffected.
-    The reason for the new name is that this relation carries the whole Nicene claim —
-    one essence indwelt by three persons (`Perichoretic`) — and `GroundsEntity` read as
-    "the entity grounds the entity", which is the same word for a strictly weaker claim
-    than the one the corpus actually pays for.
+    **Direction of meaning containment:**
+    `OneEssence g e` asserts that `g` comprehends the entire propositional grasp of `e`.
+    When `g` is `Entity.ofGround`, since `EntityMeans Entity.ofGround p := True`, the condition
+    `EntityMeans e p → True` holds trivially for any entity `e`. Conversely, for `OneEssence (EntityOf s) Entity.ofGround`,
+    the condition requires `True → Means s p`, which holds if and only if `s` is semantically omniscient
+    (`∀ p, Means s p`). Under `DivinePersonsTotalMeaning`, every necessary-kind subject (each divine Person)
+    satisfies this.
+
+    **Catholic doctrinal note (homoousios vs. constructor identity):**
+    For the divine Persons and the ground, mutual `OneEssence` holds in both directions:
+    `OneEssence Entity.ofGround (EntityOf s) ∧ OneEssence (EntityOf s) Entity.ofGround`.
+    In Catholic theology, this mutual comprehension of the full divine meaning corresponds to
+    consubstantiality (*homoousios*, *una substantia* / *una essentia*): the three Persons share
+    the one undivided divine essence with the ground.
+    Crucially, **mutual `OneEssence` is distinct from numerical constructor identity**:
+    `EntityOf s = Entity.ofGround` is strictly refuted by `ofGround_ne_ofSubject s`
+    (`FoundationalUnicity.lean:134`). The Godhead is one in nature/ousia, not one collapsed constructor.
+    (Note on Gate G9: `scripts/test_personal_ground_kind.py` forbids introducing a dedicated top-level
+    symbol named `Consubstantial`; consubstantiality is expressed canonically via mutual `OneEssence`.)
 
     KNOWN DEFECT, recorded not fixed: because `EntityMeans Entity.ofGround p` reduces to
     `True` (see above), this predicate is `True` for every `e`, including atoms, so its

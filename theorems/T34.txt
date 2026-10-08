@@ -50,7 +50,7 @@ três premissas nomeadas, e a dedução incondicional continua em falta — as l
 exactas estão nomeadas em F6); *não* refuta nenhum dos três axiomas declarados (cada
 modelo do Stage B *falha* um conjuncto do dado, e é esse o preço); *não* diz nada
 sobre o Verbo-como-Encarnação (F8 intacto: o Verbo de C510 não é a Encarnação); *não*
-toca C228 (identidade hipostática, bloqueada) nem a WALL 2 do nível contingente; *não*
+toca a identidade hipostática do solo (distinta de C228, provada) nem a WALL 2 do nível contingente; *não*
 força a Trindade a custo zero — a regra do autor manda não forçar o que a lógica não
 força, e a Separação de cada leitura mais barata é exactamente o que torna o preço
 legível. Nenhum axioma novo: as quatro separações são `{}`, as três premissas são as
@@ -59,3 +59,11 @@ legível. Nenhum axioma novo: as quatro separações são `{}`, as três premiss
 Ver: `formal/GAPMAP.md` (linhas C504–C514 + lote TRINITY, Stage A e Stage B), `formal/Logos/DivineAgape.lean`,
 `formal/Logos/TrinitySeparations.lean`, `base.txt` §28 (corredor do Ágape), `TRINITY.md` (plano de
 record), `TRINITY2.md` (Stage B), `theorems/T33.txt` (C518–C520, o mesmo sort `DivineHypostasis`).
+
+Aditamento (2026-10-09):
+- C597 `self_giving_necessitates_a_distinct_necessary_other`: provado em `SinglePersonDenial`
+  a 0 axiomas substantivos (`{NecessarySubjectKind, Subject}`). O destinatário de qualquer doação
+  subsiste no Chão necessário (`divineReality := Entity.ofGround`), logo é tão necessário quanto o doador,
+  com `f ≠ o` garantido por `SelfDonation`.
+- C580: descarregado como `PROVEN↑` via `HypostasisOf` (def sem axiomas) e `bridge_subjects_correspond`,
+  conectando os três sujeitos da ponte aos três centros hipostáticos sem violar `ofGround_ne_ofSubject`.

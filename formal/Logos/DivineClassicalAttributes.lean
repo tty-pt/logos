@@ -515,7 +515,14 @@ def ExternalGrounding (g e : Entity) : Prop :=
   g ≠ e ∧ OneEssence g e
 
 /-- Canonical aseity of an entity: no distinct entity ontologically grounds `e`.
-    Footprint: `{Means, Subject}`. -/
+    Footprint: `{Means, Subject}`.
+
+    **Disambiguation note (Aseity vs. Asiety):**
+    `CanonicalAseity` is ontological ungroundedness (*a se* / self-existence): `e` is not externally
+    grounded by any prior or distinct being (`¬ ∃ g, ExternalGrounding g e`). This is strictly distinct from
+    **Asiety** (`Asiety` / `TrueChoice` in `AsieticChoice.lean`), which is the agential capacity of free
+    judgment and deliberate election between alternatives. The ground possesses `CanonicalAseity` while lacking
+    `Asiety` (`ground_is_canonically_aseitous_but_not_asietic`). -/
 def CanonicalAseity (e : Entity) : Prop :=
   ¬ ∃ g : Entity, ExternalGrounding g e
 
@@ -558,6 +565,12 @@ theorem atom_cannot_ground_the_ground (n : Nat) :
   have hEM : EntityMeans Entity.ofGround False := trivial
   have hGM : EntityMeans (Entity.ofAtom n) False := hGr False hEM
   exact hGM
+
+/-- Direct refutation: assuming an atom ontologically grounds the ground derives False.
+    Footprint: `{Means, Subject}`. -/
+theorem atom_grounding_the_ground_yields_contradiction (n : Nat)
+    (h : OneEssence (Entity.ofAtom n) Entity.ofGround) : False :=
+  atom_cannot_ground_the_ground n h
 
 /-- No atomic entity is an external ground of `Entity.ofGround`.
     Footprint: `{Means, Subject}`. -/
@@ -631,6 +644,7 @@ theorem unconditional_aseity_independent_of_bare_agency :
 #print axioms canonical_aseity_implies_modal_aseity
 #print axioms false_meaning_cannot_ground_true_meaning
 #print axioms atom_cannot_ground_the_ground
+#print axioms atom_grounding_the_ground_yields_contradiction
 #print axioms no_atom_externally_grounds_the_ground
 #print axioms discriminating_subject_cannot_ground_the_ground
 #print axioms no_discriminating_subject_externally_grounds_the_ground
@@ -1692,7 +1706,17 @@ open Logos.DivineImmutability (ModalInvariance ofGround_modal_invariance)
 
 /-- Universal Modal Grounding:
     The entity grounds every entity that exists across EVERY possible world.
-    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
+    Footprint: `{Means, NecessarySubjectKind, Subject}`.
+
+    **Catholic doctrinal note (coinherence vs. solitary exclusion post-finitude migration):**
+    Under the 2026-10-08 finitude migration, `DivinePersonsTotalMeaning` affirms that the divine Persons have
+    maximal meaning capacity, and each is world-rigid (`necessaryKind_existsAt_every_world`). Consequently,
+    the divine Persons are not rival foreign grounds that compete with or exclude the ground, but share
+    coinherently in the one divine grounding nature (*homoousios*). In `DivineTrinitarianAttributes.lean`,
+    `exactly_one_universal_modal_ground_stipulated` establishes that any Universal Modal Ground `g'` must be
+    either `Entity.ofGround` or one of the three divine Persons (`EntityOf a ∨ EntityOf b ∨ EntityOf c`).
+    Monotheism in Catholic orthodoxy is the unicity of the divine ousia (*una substantia*), not an impersonal
+    solitude. -/
 def UniversalModalGround (g : Entity) : Prop :=
   ∀ (w : World) (e : Entity), ExistsAt w e → e = g ∨ OneEssence g e
 
@@ -2025,7 +2049,9 @@ theorem no_atom_is_universal_modal_ground (n : Nat) (w : World) :
 
 /-- Theorem: No Finite Discriminating Subject Can Be a Universal Modal Ground.
     A subject with finite propositional grasp cannot ground Entity.ofGround,
-    hence cannot ground all beings across modal space.
+    hence cannot ground all beings across modal space. Under the finitude migration,
+    this exclusion strictly governs contingent creatures (via `SemanticFinitude`),
+    while the divine Persons mean all propositions.
     Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem no_discriminating_subject_is_universal_modal_ground
     (s : Subject) (hDisc : ∃ p, ¬ Logos.Agency.Means s p) (w : World) :
@@ -2159,6 +2185,13 @@ theorem ofGround_sole_universal_grounding
     of the claim visible in a single line. The `∃!` notation and `ExistsUnique`
     are absent from this Lean core, so the standard unique-existence conjunction
     is written out.
+
+    **Post-finitude migration note:**
+    This theorem is the conditional form taking an unrestricted hypothesis `hNoTotal`.
+    In the live Trinitarian theory, `exactly_one_universal_modal_ground_stipulated` in
+    `DivineTrinitarianAttributes.lean` replaces the unrestricted premise with creaturely
+    `SemanticFinitude` and `TrinitarianPersonalBridge`, establishing unicity of the ground
+    modulo the three divine Persons who coinhere in the one Godhead (*una substantia*).
     Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
 theorem exactly_one_universal_modal_ground
     (hNoTotal : ∀ s : Subject, ∃ p, ¬ Means s p) :
@@ -2185,8 +2218,8 @@ theorem exactly_one_universal_modal_ground
         how many *Persons* that one God bears, which is a different question, and it stays open here.
       - **The positive plural reading is priced elsewhere.** Distinct subsisting centres come from
         the declared META axiom `DivineAgape.AxAgapeEssence` (C504), not from this countermodel.
-        Whether the ground is personal *at all* is `C228` (BLOCKED), and that is upstream: a
-        person-count is not well posed until personality is settled.
+        Personhood of the ground is confirmed (C228, C590), while the person-count question
+        is left open by unicity.
     Footprint: `{}`. -/
 theorem unicity_does_not_force_unitarian_monad :
     ∃ (Ground : Type) (Persons : Ground → Type),
@@ -2283,7 +2316,7 @@ namespace Logos.DivinePureActuality
 
 open Logos.Core (T IsFalse)
 open Logos.Semantics (World Form Satisfies)
-open Logos.Agency (Subject Means State Initiates)
+open Logos.Agency (Subject Means State Initiates NecessarySubjectKind)
 open Logos.Entity (Entity ExistsAt EntityOf)
 open Logos.RecoveredOntologicalGround (EntityMeans OneEssence ActualEntity GroundOfReality)
 open Logos.NecessityEternity (ofGround_necessary the_ground_everlasting the_ground_atemporal the_ground_not_in_succession)
@@ -2338,6 +2371,37 @@ theorem ofGround_no_grounding_potency
     (hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p) :
     ¬ PassiveGroundingPotency Entity.ofGround :=
   conditional_canonical_aseity hFinite
+
+/-- Intra-Trinitarian procession grounding: entity `g` ontologically grounds entity `e`
+    by eternal procession within the Godhead (not alien or creaturely dependence).
+    In Catholic theology, the eternal relations of origin (paternitas, filiatio, spiratio; ST I q.28 a.3)
+    communicate the undivided divine essence without creating passive potency or defect (*processio non est dependentia*).
+    Def-only. -/
+def TrinitarianProcession (g e : Entity) : Prop :=
+  ExternalGrounding g e ∧
+  ((g = Entity.ofGround ∧ ∃ s : Subject, NecessarySubjectKind s ∧ e = EntityOf s) ∨
+   (∃ s₁ s₂ : Subject, NecessarySubjectKind s₁ ∧ NecessarySubjectKind s₂ ∧ g = EntityOf s₁ ∧ e = EntityOf s₂))
+
+/-- Alien (non-Trinitarian) passive grounding potency: entity `e` is grounded by
+    an external entity distinct from itself through alien or creaturely dependence,
+    excluding eternal intra-Trinitarian procession within the Godhead.
+    Def-only. -/
+def AlienPassiveGroundingPotency (e : Entity) : Prop :=
+  ∃ g : Entity, ExternalGrounding g e ∧ ¬ TrinitarianProcession g e
+
+/-- Catholic reading of Canonical Aseity: no alien or creaturely entity externally grounds `e`.
+    Permits intra-Trinitarian relations of origin (*processio non est dependentia*).
+    Def-only. -/
+def CanonicalAseityCatholic (e : Entity) : Prop :=
+  ¬ AlienPassiveGroundingPotency e
+
+/-- Theorem: The Ground of Reality has zero alien passive grounding potency.
+    Footprint: `{Means, NecessarySubjectKind, Subject}`. -/
+theorem ofGround_no_alien_grounding_potency
+    (hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p) :
+    ¬ AlienPassiveGroundingPotency Entity.ofGround := by
+  intro ⟨g, hExt, _⟩
+  exact ofGround_no_grounding_potency hFinite ⟨g, hExt⟩
 
 /-- Passive transition potency: entity `e` is subject to temporal change,
     process transition, or agential initiation becoming.
@@ -2438,6 +2502,40 @@ theorem necessity_aseity_and_immutability_yield_pure_actuality
   no_transition_potency := fun h => h hTrans
   no_intentional_potency := fun ⟨p, hp⟩ => hp (hMax p)
   universal_ground := hUniv
+}
+
+/-- Classical Catholic Divine Pure Actuality (Actus Purus, Aquinas ST I q. 3 a. 1-2, ST I q. 4 a. 1-2):
+    The entity possesses zero passive potentiality:
+    (1) no existential potency to non-being across modal space;
+    (2) zero alien grounding potency from external creatures/alien entities
+        (permitting eternal intra-Trinitarian procession within the Godhead);
+    (3) no passive transition potency (outside becoming and succession);
+    (4) no passive intentional potency (exhaustive propositional actuality);
+    and positively, is a universal modal ground sustaining reality.
+    Def-only. -/
+structure DivinePureActualityCatholic (g : Entity) : Prop where
+  /-- Zero existential potency: necessarily actualized in all worlds -/
+  no_existential_potency : ¬ PassiveExistentialPotency g
+  /-- Zero alien grounding potency: ungrounded by alien or creaturely entities -/
+  no_alien_grounding_potency : ¬ AlienPassiveGroundingPotency g
+  /-- Zero transition potency: immune to agential succession and temporal becoming -/
+  no_transition_potency : ¬ PassiveTransitionPotency g
+  /-- Zero intentional potency: complete, undivided propositional meaning -/
+  no_intentional_potency : ¬ PassiveIntentionalPotency g
+  /-- Universal actuality: actively grounds all beings across modal space -/
+  universal_ground : UniversalModalGround g
+
+/-- Master Synthesis Theorem (Catholic Reading): The Ground of Reality possesses
+    Divine Pure Actuality in the Catholic sense.
+    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject}` (0 substantive axioms). -/
+theorem ofGround_divine_pure_actuality_catholic
+    (hFinite : ∀ s : Subject, ∃ p : Prop, ¬ Means s p) :
+    DivinePureActualityCatholic Entity.ofGround := {
+  no_existential_potency := ofGround_no_existential_potency
+  no_alien_grounding_potency := ofGround_no_alien_grounding_potency hFinite
+  no_transition_potency := ofGround_no_transition_potency
+  no_intentional_potency := ofGround_no_intentional_potency
+  universal_ground := ofGround_universal_modal_ground
 }
 
 -- ============================================================================
@@ -4575,7 +4673,8 @@ theorem contingent_reality_is_not_necessary :
     ∀ t : Entity, ContingentEntity t → ¬ NecessaryEntity t :=
   fun t hc hn => necessary_not_contingent t hn hc
 
-/-- The ground is not a person. The hypostatic identification stays blocked: ledger bridge
+/-- The ground is not an individual Person-correlate (it is personal as the Godhead, but not a fourth Person).
+    The hypostatic identification stays blocked: ledger bridge
     #9 (`Ground(e, personal) → Personal(e)`) is untouched, and the ground is provably no
     subject's correlate regardless of what obtains.
 

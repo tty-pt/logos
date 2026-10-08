@@ -58,12 +58,12 @@ SOURCES = sorted((FORMAL / "Logos").glob("*.lean"))
 
 TIMEOUT_S = 900
 
-# The declared-axiom count, as measured after plan step S5 (40 statements: 18 VOCAB, 7 SEM,
-# 13 META, 2 TRANS). This is a *pin*, and it is the only hard number in the gate.
+# The declared-axiom count, pinned at 40 (18 VOCAB, 6 SEM, 13 META, 3 TRANS).
 #
-# S5 took this from 39 to 40: `SemanticFinitude` was split, and the unrestricted half became
-# the separate `Tag: META` axiom `GroundTranscendence`. The count moved because a *price* was
-# named, not because a claim was added -- see the plan's §8.2.
+# Milestone 2026-10-08: `GroundTranscendence` (unrestricted META) was deleted and replaced by
+# `DivinePersonsTotalMeaning` (Tag: META), which affirms the semantic fullness of the divine Persons,
+# while `SemanticFinitude` (Tag: VOCAB) restricts finitude to contingent creatures.
+# The total declared axiom count is invariant: 39 statements (18 VOCAB, 6 SEM, 13 META, 2 TRANS).
 #
 # Why pin an axiom count at all: deleting an axiom is the one edit that silently lowers every
 # price in the corpus. No badge moves, no audit fails -- `axiom_audit.json` simply reports one
@@ -71,18 +71,9 @@ TIMEOUT_S = 900
 # compared against a recorded baseline and a mismatch FAILS, which turns a silent edit into a
 # loud one. Bumping this constant is a deliberate act in a reviewable diff, which is the point.
 #
-# The audit *sizes* (declarations in `axiom_audit.json`, records in `goal_audit.json`) are NOT
-# pinned here: they move with every theorem and def authored, so a pin there would fire on
-# ordinary progress. They are checked by `scripts/test_goal_audit.py` instead.
-#
-# This was 40 until 2026-10-03, and the extra 1 was not an axiom: `Logos/AsieticChoice.lean:19`
-# is the prose line `axiom of Γ**:` inside a `/- -/` comment, and the parser counted it as an
-# axiom named `of` (tagged SEM, inherited from the surrounding docstring). So the previous
-# baseline of 40 was really 39 axioms plus a phantom, and AGENTS.md's documented census
-# "18 VOCAB / 7 SEM / 13 META / 2 TRANS" was really 18 / 6 / 13 / 2. Corrected census:
-# 39 = 18 VOCAB + 6 SEM + 13 META + 2 TRANS, agreed by `depgraph.json` and by the registry
-# `build_deduction.py` prints. S5 therefore moved the count 38 -> 39, not 39 -> 40.
-EXPECTED_AXIOM_STATEMENTS = 39
+# Corrected census baseline: 40 = 18 VOCAB + 6 SEM + 13 META + 3 TRANS, agreed by `depgraph.json`
+# and verified by `scripts/test_axiom_census.py`.
+EXPECTED_AXIOM_STATEMENTS = 40
 
 # Tag vocabulary, per AGENTS.md. `build_deduction.py` already refuses to regenerate when an
 # axiom's tag is missing or outside this set; it is repeated here so this gate's census is

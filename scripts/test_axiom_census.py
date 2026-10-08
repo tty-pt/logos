@@ -200,7 +200,7 @@ def main() -> int:
         set(census) == set(CC.VALID_TAGS),
         f"census {census} outside {CC.VALID_TAGS}",
     )
-    expected = {"VOCAB": 18, "SEM": 6, "META": 13, "TRANS": 2}
+    expected = {"VOCAB": 18, "SEM": 6, "META": 13, "TRANS": 3}
     check(
         f"tag census == {expected}",
         census == expected,

@@ -147,8 +147,8 @@ cd .. && python3 scripts/audit_footprints.py && python3 scripts/audit_goals.py &
   `Entity.ofSubject`, `Entity.lean:29`) and the two orientations — hand-listing the shapes is how
   three of the eight went missing, one of which a negative test showed slipping through. Gate B
   also rejects an `axiom` with a missing or out-of-vocabulary `Tag:`, and rejects any declared-axiom
-  count other than the pinned `EXPECTED_AXIOM_STATEMENTS` (39: 18 VOCAB / 6 SEM / 13 META /
-  2 TRANS). **The axiom count is pinned deliberately** — deleting an axiom is the one edit that
+  count other than the pinned `EXPECTED_AXIOM_STATEMENTS` (40: 18 VOCAB / 6 SEM / 13 META /
+  3 TRANS). **The axiom count is pinned deliberately** — deleting an axiom is the one edit that
   silently lowers every price in the corpus, since no badge moves and no other audit notices. Bump
   the constant in the same change as a deliberate addition or removal. The audit *sizes*
   (`axiom_audit.json`, `goal_audit.json`) are deliberately **not** pinned there; they move with every
@@ -162,8 +162,8 @@ cd .. && python3 scripts/audit_footprints.py && python3 scripts/audit_goals.py &
   is `axiom of Γ**:` inside a `/- -/` comment and matched as an axiom named `of`, tagged `SEM` by
   docstring inheritance — so the old "40" was 39 axioms plus a phantom and the old "7 SEM" was 6 plus
   the phantom. `lean_comment_lines` now skips line, block and nested comments (tracking string
-  literals), and the true census is **39 = 18 VOCAB + 6 SEM + 13 META + 2 TRANS**, cross-checked
-  against `depgraph.json`'s 39 `axiom` nodes. This also closed a laundering vector in the one edit
+  literals), and the true census is **40 = 18 VOCAB + 6 SEM + 13 META + 3 TRANS**, cross-checked
+  against `depgraph.json`'s 40 `axiom` nodes. This also closed a laundering vector in the one edit
   the pin exists to catch: delete a real axiom, add any comment line beginning `axiom `, and the
   count used to hold steady. **Never assert an axiom count by eye — run
   `python3 scripts/test_axiom_census.py`, which is the only place the number is derived.** A count

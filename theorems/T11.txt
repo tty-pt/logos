@@ -73,6 +73,12 @@ genuineChoice_exists_of_act_constitutive, freeWill_exists_of_act, freeSubject_ex
 freeWill_exists, freeSubject_exists — `{AxIntentionalChoice, Initiates, Means, State, Subject}` (PROVEN↑, F1b fechado);
 AxActPolarity, genuineChoice_exists_of_act, freeWill_exists_of_act_polarity — `{AxActPolarity, Initiates, Means, State, Subject}` (SEM, tese de polaridade contraditória opcional mais forte);
 a_genuine_free_person_exists — `{AxActPolarity, Initiates, Means, State, Subject, Will, performative_act_datum, subjectWill, will_individuation}` (PROVEN, C587, derivada sem axiomas META a partir de C565 e C221);
+demonstration_occurs — `{Means, Subject}` + si próprio (AXIOM, Tag: TRANS, C592);
+gamma_freeSubject_is_choice — `{Means, Subject}` (PROVEN, pure logic);
+free_subject_exists_via_judgment_chain, free_will_exists_via_judgment_chain — `{CL, Means, Subject, demonstration_occurs}` (PROVEN↑, C593);
+person_exists_via_judgment_chain — `{CL, Means, Subject, Will, subjectWill, will_individuation, demonstration_occurs}` (PROVEN↑, C594);
+person_grounds_right_wrong_via_judgment_chain — `{CL, Means, Subject, Will, subjectWill, will_individuation, demonstration_occurs}` (PROVEN↑, C595);
+judgment_source_not_fixed_by_prior_state — `{CL, Means, Subject, demonstration_occurs}` (PROVEN↑, C596);
 act_polarity_implies_intentional_choice, intentional_choice_implies_contrastive,
 contrastive_implies_intentional_choice, act_polarity_implies_contrastive,
 contrastive_agency_implies_existential, genuineChoice_exists_of_contrastive_act,

@@ -30,6 +30,18 @@ def EntityOf (s : Subject) : Entity := Entity.ofSubject s
 
 instance : Coe Subject Entity := ⟨EntityOf⟩
 
+/-- Constructor disjointness: the ground is not an atomic factual entity.
+    Pure logic, footprint `{Subject}`. -/
+theorem ofGround_ne_ofAtom (n : Nat) : Entity.ofGround ≠ Entity.ofAtom n := by
+  intro h
+  cases h
+
+/-- Constructor disjointness: an atomic factual entity is not the ground.
+    Pure logic, footprint `{Subject}`. -/
+theorem ofAtom_ne_ofGround (n : Nat) : Entity.ofAtom n ≠ Entity.ofGround := by
+  intro h
+  cases h
+
 /-- The actual world valuation: all atoms true. -/
 def actualWorld : World := fun _ => Logos.Semantics.TV.t
 
@@ -124,6 +136,9 @@ theorem nonContradiction (φ : Form) : NecessarilyFalse (Form.and φ (Form.not �
   intro w
   rintro ⟨h1, h2⟩
   exact h2 h1
+
+#print axioms ofGround_ne_ofAtom
+#print axioms ofAtom_ne_ofGround
 
 end Logos.Entity
 

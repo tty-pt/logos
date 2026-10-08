@@ -1,6 +1,20 @@
 /-
 # Logos.AsieticChoice — True Choice, and the closing of the `?` in the choice chain
 
+## Disambiguation note: Asiety vs. Aseity (Homophone Discipline)
+
+> **Asiety (agential freedom) ≠ Aseity (ontological ungroundedness).**
+> - **Asiety** (`Asiety`, `TrueChoice` in this module and `AsietyFreedom`):
+>   The agential property of genuine free self-determination in judgment. A subject has asiety
+>   when it deliberates and chooses between incompatible alternatives (`TrueChoice s p q`).
+> - **Aseity / Canonical Aseity** (`CanonicalAseity` in `DivineClassicalAttributes.lean`):
+>   The ontological property of being ungrounded by any distinct or external entity
+>   (`¬ ∃ g, ExternalGrounding g e`).
+>
+> The two concepts must never be conflated. Indeed, `ground_is_canonically_aseitous_but_not_asietic`
+> proves that the ground of reality possesses *Canonical Aseity* while lacking *Asiety*, precisely
+> because the ground does not act as an individual deliberating subject.
+
 ## The thesis
 
 > **Asiety is true freedom. Weak choice implies strong choice. True choice follows.**

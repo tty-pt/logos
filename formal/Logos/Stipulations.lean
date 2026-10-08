@@ -103,7 +103,7 @@ Philosophical cost: structural simplicity of the ground (`¬ HasInternalComponen
 Simplicity is therefore stipulated by the match arm, never derived. -/
 def ofGround_noInternalComponents : Stipulation where
   name := "ofGround_noInternalComponents"
-  location := "DivineClassicalAttributes.lean:734"
+  location := "DivineClassicalAttributes.lean:741"
   anchor := "Entity.ofGround => False"
   tag := StipulationTag.VOCAB
   cost := "Indivisibility stipulated by match arm: the simplicity theorem unfolds this False."
@@ -127,7 +127,7 @@ Consistency model: Γ's own classical valuation semantics with `EntityExistsAt`
 consistent. -/
 def operatesAt_presencePlusObtaining : Stipulation where
   name := "operatesAt_presencePlusObtaining"
-  location := "DivineClassicalAttributes.lean:2643"
+  location := "DivineClassicalAttributes.lean:2734"
   anchor := "def OperatesAt"
   tag := StipulationTag.SEM
   cost := "Operation identified with presence-plus-obtaining: foundational omnipotence is proved over the weakened reading; the causal/creative sense was BLOCKED until C493 declared universal production as a META bridge."
@@ -142,8 +142,8 @@ Philosophical cost: this is the metaphysical bridge of the chain, and it is **de
 derived**, because Γ's grounding vocabulary cannot support it. `OneEssence` is vacuous
 (`EntityMeans .ofGround p := True`, so `ground_grounds_every_entity` is `intro p _; exact
 True.intro`), the only non-vacuous grounding predicate, `GroundsRightWrong`, is definitionally
-`∃ p q, Chooses s p q` and so already collapsed to free will (C168), and the substantive grounding
-relation is BLOCKED (C228). The price is machine-checked in three directions:
+`∃ p q, Chooses s p q` and so already collapsed to free will (C168), and no substantive grounding
+relation over `Entity.ofGround` is available (C591). The price is machine-checked in three directions:
 `asietyAloneDoesNotYieldTrueChoice` (asiety at one witness does not give true choice at every
 pair, so the universal quantifier over subjects is doing real work and the weaker existential
 reading is strictly cheaper), `frameContingencyDoesNotBindAPair` (the frame's contingency is
@@ -196,7 +196,7 @@ def asietyFreedom_ofGroundFreedom : Stipulation where
   location := "AsietyFreedom.lean:141"
   anchor := "def AsietyFreedomOfGround"
   tag := StipulationTag.META
-  cost := "The ground's being the ground of freedom is declared, not derived: OneEssence is vacuous, GroundsRightWrong is definitionally FreeWill (C168), and substantive grounding is BLOCKED (C228). Priced by three {} countermodels; the universal reading is strictly stronger than the existential one."
+  cost := "The ground's being the ground of freedom is declared, not derived: OneEssence is vacuous, GroundsRightWrong is definitionally FreeWill (C168), and no grounding relation over Entity.ofGround is available (C591). Priced by three {} countermodels; the universal reading is strictly stronger than the existential one."
   dependents := ["asietyFreedom_yields_trueChoice", "asietyFreedom_yields_asietyFreeWill", "asietyFreeWill_yields_trueChoice", "asietyFreedom_summary"]
 
 /-- Tag: TRANS

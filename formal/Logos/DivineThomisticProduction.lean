@@ -157,7 +157,7 @@ The ground's love is efficacious: it produces.
  **Scoped to `Entity.ofGround`, deliberately.** The general form over `g` would assert production for
  any necessary-kind person-entity standing in the love relation, and
  `LovesAsGround.lean:546-551` records that the necessary quadrant *can* be so populated — which
- would silently cross the blocked necessary-personal-ground frontier (C228). Scoping refuses to
+ would silently cross the hypostatic frontier without an identification bridge. Scoping refuses to
  generalise over the kind. `Tag: META` for C464's reason, one lane over (love → production).
 
   **The `∃ w φ` is existential and stays so.** The universal production sentence is separately
@@ -489,14 +489,15 @@ open Logos.Semantics (World)
 open Logos.Necessity (WProp)
 open Logos.Entity (Entity EntityOf ExistsAt actualWorld)
 open Logos.Agency (Subject Means NecessarySubjectKind)
-open Logos.RecoveredOntologicalGround (EntityMeans)
+open Logos.RecoveredOntologicalGround (EntityMeans OneEssence)
 open Logos.Modal (NecessaryEntity)
 open Logos.Plurality (NecessarySubject necessaryPersonalSubjectExists)
 open Logos.FoundationalUnicity (ofGround_ne_ofSubject)
 open Logos.DivineSimplicity (TranscendentGround)
 open Logos.FoundationalOmnipresence (MaximalCapacity)
-open Logos.SemanticFinitude (GroundTranscendence)
-open Logos.DivinePureActuality (DivinePureActuality discriminating_subject_fails_pure_actuality)
+open Logos.CanonicalAseity (ExternalGrounding)
+open Logos.SemanticFinitude (DivinePersonsTotalMeaning)
+open Logos.DivinePureActuality (DivinePureActuality PassiveGroundingPotency)
 open Logos.DivineOmnipotence (GaplessOperate OperatesAt PossibleAt)
 open Logos.TheologicalModalHardening (UniversalFrame necessary_not_contingent)
 open Logos.LovesAsGround (an_atom_is_contingent)
@@ -585,30 +586,42 @@ theorem necessary_kind_subject_is_not_transcendent (s : Subject)
   intro hT
   exact hT.2 s rfl
 
-/-- **A necessary-kind subject is not a maximal-capacity entity (F15).** `MaximalCapacity` is
-    `∀ p, EntityMeans e p`; for a subject that is `∀ p, Means s p`, exactly what `SemanticFinitude`
-    denies. This is the same `SemanticFinitude` price C445 and C444 pay for the same exclusion;
-    nothing new is charged. Footprint: the `SemanticFinitude` bridge plus the vocabulary the
-    statement mentions (`Means`, `NecessarySubjectKind`, `Subject`).
-    Footprint: `{GroundTranscendence, Means, NecessarySubjectKind, Subject}`. -/
-theorem necessary_kind_subject_lacks_maximal_capacity (s : Subject)
-    (_hKind : NecessarySubjectKind s) :
-    ¬ MaximalCapacity (EntityOf s) := by
-  obtain ⟨p, hp⟩ := GroundTranscendence s
-  intro hMC
-  exact hp (hMC p)
+/-- **A necessary-kind subject HAS maximal capacity (homoousios).** By the declared
+    `DivinePersonsTotalMeaning` axiom, every necessary-kind subject means every proposition.
+    Footprint: `{DivinePersonsTotalMeaning, Means, NecessarySubjectKind, Subject}`. -/
+theorem necessary_kind_subject_has_maximal_capacity (s : Subject)
+    (hKind : NecessarySubjectKind s) :
+    MaximalCapacity (EntityOf s) := by
+  intro p
+  exact DivinePersonsTotalMeaning s hKind p
 
-/-- **A necessary-kind subject is not pure actuality (F15).** By the existing
-    `discriminating_subject_fails_pure_actuality`: a subject with any content it does not mean has
-    passive intentional potency, and the whole necessary kind is subject to `SemanticFinitude`.
-    Footprint is shared with that theorem: `SemanticFinitude` plus the four vocabulary axioms
-    `DivinePureActuality` itself carries (`Initiates`, `Means`, `State`, `Subject`) and the two of
-    this statement (`NecessarySubjectKind`).
-    Footprint: `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
+/-- Helper: every subject correlate is externally grounded by Entity.ofGround. -/
+theorem subject_has_passive_grounding_potency (s : Subject) :
+    PassiveGroundingPotency (EntityOf s) := by
+  have hNe : Entity.ofGround ≠ EntityOf s := (ofGround_ne_ofSubject s).symm
+  have hOE : OneEssence Entity.ofGround (EntityOf s) := fun _ _ => trivial
+  exact ⟨Entity.ofGround, hNe, hOE⟩
+
+/-- **A necessary-kind subject is not pure actuality in Γ's formal sense (free).**
+    Because Entity.ofGround externally grounds every subject correlate, the subject has passive
+    grounding potency in Γ's technical vocabulary, which contradicts the `no_grounding_potency`
+    field of `DivinePureActuality`.
+
+    **Catholic theological disclosure (Actus Purus and Procession):**
+    In classical Thomistic theology (ST I q.3 a.1-2, q.28 a.3), each Person is *actus purus*
+    (*processio non est dependentia*). Intra-Trinitarian procession communicates the divine essence
+    without introducing passive potentiality or foreign dependence.
+
+    **Dual Coexistence:**
+    Both readings coexist by vocabulary distinction: Γ's technical `DivinePureActuality` records
+    grounding potency from `ExternalGrounding`, while `DivinePureActualityCatholic` and
+    `necessary_kind_subject_has_no_alien_grounding_potency` recover the orthodox reading.
+    Footprint: `{Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
 theorem necessary_kind_subject_fails_pure_actuality (s : Subject)
     (_hKind : NecessarySubjectKind s) :
-    ¬ DivinePureActuality (EntityOf s) :=
-  discriminating_subject_fails_pure_actuality s (GroundTranscendence s)
+    ¬ DivinePureActuality (EntityOf s) := by
+  intro hDPA
+  exact hDPA.no_grounding_potency (subject_has_passive_grounding_potency s)
 
 -- ============================================================================
 -- Section 4 — What the second necessary being has: the operativeness tie
@@ -636,29 +649,21 @@ theorem necessary_kind_subject_is_gapless_operator (s : Subject)
 /-- **The profile of the second necessary being (C497).** For a subject of the necessary kind,
     its entity-correlate:
 
-    - **has** `NecessaryEntity` and `GaplessOperate` — it ties the ground on operativeness;
-    - **lacks** `TranscendentGround` (free), `MaximalCapacity` and `DivinePureActuality` (both
-      `SemanticFinitude`).
+    - **has** `NecessaryEntity`, `GaplessOperate`, and `MaximalCapacity` (homoousios);
+    - **lacks** `TranscendentGround` (free) and `DivinePureActuality` (free via grounding potency).
 
-    The combination is the batch's transferable statement: the necessary kind is a *near-ground*
-    but is cut off from every discriminating characteristic except operativeness — and there it
-    is not cut off at all, which is why the `universal_ground` field exists. The conjunction is a
-    new statement about a second necessary being; its cells are the existing vocabulary results.
-    Note that "second" is shorthand for "other": the theorem is universal over the kind
-    (`∀ s, NecessarySubjectKind s → …`), so it describes *every* non-ground necessary subject's
-    correlate, not one particular being.
-    Footprint: `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
+    Footprint: `{DivinePersonsTotalMeaning, Initiates, Means, NecessarySubjectKind, State, Subject}`. -/
 theorem the_second_necessary_being_profile (s : Subject)
     (hKind : NecessarySubjectKind s) :
     NecessaryEntity (EntityOf s) ∧
     GaplessOperate (UniversalFrame World) OperatesAt (EntityOf s) ∧
     ¬ TranscendentGround (EntityOf s) ∧
-    ¬ MaximalCapacity (EntityOf s) ∧
+    MaximalCapacity (EntityOf s) ∧
     ¬ DivinePureActuality (EntityOf s) :=
   ⟨necessary_kind_correlate_is_necessary s hKind,
    necessary_kind_subject_is_gapless_operator s hKind,
    necessary_kind_subject_is_not_transcendent s hKind,
-   necessary_kind_subject_lacks_maximal_capacity s hKind,
+   necessary_kind_subject_has_maximal_capacity s hKind,
    necessary_kind_subject_fails_pure_actuality s hKind⟩
 
 -- ============================================================================
@@ -730,7 +735,7 @@ theorem necessary_realm_is_two_genera :
 #print axioms necessary_realm_is_two_genera
 #print axioms the_ground_is_not_the_only_necessary_being
 #print axioms necessary_kind_subject_is_not_transcendent
-#print axioms necessary_kind_subject_lacks_maximal_capacity
+#print axioms necessary_kind_subject_has_maximal_capacity
 #print axioms necessary_kind_subject_fails_pure_actuality
 #print axioms necessary_kind_subject_is_gapless_operator
 #print axioms the_second_necessary_being_profile

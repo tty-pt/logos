@@ -294,8 +294,7 @@ L3 — AS SEPARAÇÕES, E O QUE LÁ NÃO FOI FEITO
 
 C344 `the_ground_is_not_a_person`, `{Subject}` — o fundamento não é uma entidade pessoal.
 Logo a conclusão atribui amor ao fundamento **enquanto espécie** e não introduz
-nenhuma identificação hipostática; a **ponte #9 do livro-razão**
-(`Ground(e, personal) → Personal(e)`, C228) **não é tocada**.
+nenhuma identificação hipostática; a pessoalidade do fundamento está provada sob duas âncoras (C228, PersonalGround em C590), restando aberta a identificação hipostática.
 
 C345 `ground_love_does_not_identify_a_person`, `{Subject}` — **a separação, numa
 afirmação:** a habitação não pode ser lida como afirmação sobre uma pessoa.
@@ -450,9 +449,9 @@ Ainda requer prova (as três afirmações que faltam, em termos formais):
       **Não é apenas não provada: é instável** (C348). `Loves` é indexada por `Subject`, o
       fundamento é provadamente nenhum sujeito (C344/C345), e o alvo de um `GroundLoves`
       é uma `Entity` arbitrária. A única forma de a tornar bem-formada é uma
-      **identificação hipostática**, que a biblioteca não tem. Esta é a **ponte #9 /
-      C228**, que **continua exactamente como estava** e por isso F3, F6/Trindade e a
-      fronteira do monoteísmo pessoal não se movem.
+      **identificação hipostática**, que a biblioteca não tem. Esta é a questão
+      hipostática (distinta de C228, confirmada sob as duas âncoras), pelo que a
+      passagem de amor interpessoal permanece aberta.
       **[NOTA 2026-09-28 — o estado não mudou, a justificação passou a ser verificada.]**
       A Fase 6 de `VISIBILITY.md` testou uma rota alternativa para C228 (o lote
       "two kinds", C403–C415) que atingiria fundamento pessoal *sem* forçar
@@ -464,8 +463,8 @@ Ainda requer prova (as três afirmações que faltam, em termos formais):
       nenhum `s`, e `personal_ground` não o salva (a hipótese é insatisfazível ali).
       Ver `HostileModels.model_d_asymmetric_leaves_ofGround_standing`, linha C416 do
       `GAPMAP.md`. Portanto os dois campos selantes **não** são redundantes e D1′ é uma
-      decisão semântica, não um refactor pendente. **C228 continua `BLOCKED`;** a ponte
-      #9 não é tocada por nada disto.
+      decisão semântica, não um refactor pendente. C228 deriva a pessoalidade através da
+      estrutura completa (PROVEN), e C591 machine-checka a exclusão de `Entity.ofGround`.
   (3) ~~DADO EM FALTA~~ **[RESOLVIDO 2026-09-27; refundido pelo lote
       COSMOS-EXISTENCE-IS-FREE]**: a existência de um reino contingente portador de conteúdo
       era `AXIOM` (C350, `Tag: SEM`), e o que faltava era "a **derivação** de `CreatedRealm`

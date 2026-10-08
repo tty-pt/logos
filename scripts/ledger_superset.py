@@ -239,13 +239,12 @@ def main() -> int:
         # C572/C573 pair above. Measured: 33 before, 32 after; the pin value is unchanged at 32
         # and the check below is `got < want`, so an under-count fails and an over-count is
         # reported by the printed count rather than silently tolerated.
-        # 32 -> 33 on 2026-10-03: C580 (the `Subject`/`DivineHypostasis` correspondence) entered
-        # the frontier as the AMOR/2 batch's BLOCKED row, with its missing lemma named and no
-        # declaration bought. It is the only movement: C579 sits beside it and is `PROVEN`, so
-        # it does not belong in a list of what the corpus cannot reach. Same convention as the
-        # C572/C573 pairs above — the pin tracks the measured count and the check below is
-        # `got < want`, so a withdrawal fails loudly and an addition is visible in the printout.
-        "frontier rows": (r"^\* \*\*`", 33),
+        # 33 -> 32 on 2026-10-08: C228 promoted from BLOCKED to PROVEN (both anchors
+        # cited: normative_ground_is_personal and PersonalGround in C590), removing it
+        # from the BLOCKED/DEFERRED/OPEN set.
+        # 32 -> 31 on 2026-10-09: C580 promoted from BLOCKED to PROVEN↑ via HypostasisOf
+        # and bridge_subjects_correspond, discharging the Subject/DivineHypostasis correspondence.
+        "frontier rows": (r"^\* \*\*`", 31),
         "derivation summaries": (r"^<summary>Formal Derivation", 40),
         "definition summaries": (r"^<summary>Definitions used in this section", None),
     }
@@ -258,14 +257,14 @@ def main() -> int:
     if attr_rows < 39:
         errors.append(f"ledger classical-attribute rows: got {attr_rows}, want >= 39")
 
-    # the redesigned ten-step table covers the same ten facts
+    # the redesigned thirteen-step table covers the same facts
     readme = NEW_README.read_text(encoding="utf-8")
-    ten_sec = readme.split("### The ten steps at a glance")[1].split("## ", 1)[0]
+    ten_sec = readme.split("### The thirteen steps at a glance")[1].split("## ", 1)[0]
     ten = re.findall(r"^\| \*\*(\d+)\*\*", ten_sec, re.M)
-    if sorted(int(t) for t in ten) != list(range(1, 11)):
-        errors.append(f"ten-step table rows: got {sorted(ten)}, want 1-10")
+    if sorted(int(t) for t in ten) != list(range(1, 14)):
+        errors.append(f"thirteen-step table rows: got {sorted(ten)}, want 1-13")
     else:
-        print(f"ten-step table: rows 1-10 present in README")
+        print(f"thirteen-step table: rows 1-13 present in README")
 
     if errors:
         print(f"\nFAIL: {len(errors)} problem(s):")

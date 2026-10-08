@@ -92,6 +92,9 @@ def main() -> int:
     # their order is asserted, which is the part that actually matters.
     for sec in ["### Step 1 — Well-Foundedness of Constitutive Determination",
                 "### Step 10 — Free Will Concludes the Free Subject",
+                "### Step 11 — Canonical Bridge: Libertarian Freedom to Genuine Choice",
+                "### Step 12 — The Free Subject Is an Authoritative Person",
+                "### Step 13 — Personal Agency Grounds Objective Right and Wrong",
                 "## Part I — The deduction",
                 "## Part II — The characteristics of the ground",
                 "## Part III — The refutations",
@@ -143,9 +146,9 @@ def main() -> int:
     check("not three gods" in readme.lower(), "README must foreclose tritheism explicitly")
     check("one God in three Persons" in readme or "One God, in Three Persons" in readme,
           "README must state one God in three Persons")
-    ten = re.findall(r"^\| \*\*(\d+)\*\*", readme.split("### The ten steps at a glance")[1].split("### Step 1")[0], re.M)
-    check(sorted(int(t) for t in ten) == list(range(1, 11)),
-          "ten-step table covers steps 1-10")
+    ten = re.findall(r"^\| \*\*(\d+)\*\*", readme.split("### The thirteen steps at a glance")[1].split("### Step 1")[0], re.M)
+    check(sorted(int(t) for t in ten) == list(range(1, 14)),
+          "thirteen-step table covers steps 1-13")
 
     # --- the ledger surface ---
     check(LEDGER.exists() and len(ledger.splitlines()) > 2000,
@@ -325,7 +328,7 @@ def main() -> int:
     # `MoralFrontierAudit.lean`, so a `[file#name]` link cannot see it. The
     # rendered-text lint catches the top-level countermodel files; this catches
     # the nested ones.
-    glossary_start = readme.find("### The shared vocabulary of the ten steps")
+    glossary_start = readme.find("### The shared vocabulary of the thirteen steps")
     check(glossary_start != -1,
           "Part I opens with the shared-vocabulary block (DEDUCTION.md D3/D7)")
     if glossary_start != -1:

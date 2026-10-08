@@ -199,9 +199,9 @@ theorem judicative_normative_polarity_of_act (s : Subject) (p : Prop) (hAct : Ac
     atom, but `Entity` has three constructors and the world-rigid `ofGround`
     survives it while being no `EntityOf s` for any `s` — so Model D is a
     counterexample to the stronger claim that only `explanatory` is load-bearing.
-    Consequence: `normative_ground_is_personal` stays a field projection (BLOCKED,
-    bridge #9 verbatim in `base.txt:1524-1525`, GAPMAP/W8), and AC5 stays unmet —
-    recorded as a gap, never silenced. -/
+    Consequence: `normative_ground_is_personal` operates as a field projection through
+    `explanatory` and `personal_ground` (PROVEN, 0 substantive axioms), with the
+    negative model-theoretic limit that it does not apply to `Entity.ofGround` (C591). -/
 structure GenericGroundingRelation where
   /-- g grounds proposition p -/
   Grounds : Entity → Prop → Prop
@@ -244,20 +244,19 @@ def canonicalSubjectGrounding (s : Subject) : GenericGroundingRelation where
     cases hAtom
   explanatory := fun g p hg => ⟨s, hg⟩
 
-/-- BLOCKED (AC5 unmet, D1′ recorded not executed): any entity that grounds
-    Right/Wrong is a Personal Entity — but the personalness is a THREE-STEP FIELD
-    PROJECTION, not a free-standing theorem: `grounds_normativity` supplies the
+/-- PROVEN (0 substantive axioms, C228): any entity that grounds
+    Right/Wrong is a Personal Entity — the personalness is a THREE-STEP FIELD
+    PROJECTION: `grounds_normativity` supplies the
     `GenericGroundingRelation`, `explanatory` forces `g = EntityOf s`, and
-    `personal_ground` then supplies `Person s`. The two sealing fields are the
-    named blockers: `explanatory` forecloses every in-theory countermodel by
-    forcing each ground to be `EntityOf s`, and `asymmetric` forbids every atom
-    from grounding by definition. **Phase 6 (2026-09-28) sharpened this, without changing the
-    status**: `asymmetric` blocks only the atom countermodel, not the ground one, so the
-    `ofGround` grounder of `HostileModels.model_d_asymmetric_leaves_ofGround_standing` (C416)
-    is a live in-theory witness that `asymmetric` is not by itself enough. D1′ is therefore
-    a decision, not a pending refactor. The missing lemma is bridge #9, verbatim from
-    `base.txt:1524-1525`: `Ground(e, personal) → Personal(e)` (and its target #10).
-    Recorded as BLOCKED (ledger row C228), never deferred into silence.
+    `personal_ground` then supplies `Person s`. The two sealing fields make the
+    entailment explicit: `explanatory` ensures each ground is an `EntityOf s`, and `asymmetric`
+    forbids every atom from grounding by definition.
+    **Two anchors confirm the personhood of the ground**: (1) this theorem for any entity
+    satisfying `GenericGroundsRightWrong`; and (2) `TrinitarianPersonalGround.the_ground_is_not_void_of_personhood`
+    (PersonalGround Entity.ofGround).
+    Coexists provably with C564 (`¬ PersonCorrelate Entity.ofGround`) via C591
+    (`ofGround_not_generic_grounds_right_wrong`), because `Entity.ofGround` does not satisfy
+    `GenericGroundsRightWrong`.
     Footprint: `{Means, Subject, Will, subjectWill}`. -/
 theorem normative_ground_is_personal
     (g : Entity) (hGr : GenericGroundsRightWrong g) :
@@ -267,6 +266,21 @@ theorem normative_ground_is_personal
   obtain ⟨s, hg⟩ := gr.explanatory g (True ∧ ¬False) hGrounds
   have hPerson : Person s := hGr.personal_ground s hg
   exact ⟨s, hg, hPerson⟩
+
+/-- C591: The world-rigid ground of reality does not satisfy GenericGroundsRightWrong.
+    Explanatory adequacy (gr.explanatory) requires any entity grounding normativity
+    to be a subject correlate (g = EntityOf s), whereas Entity.ofGround is disjoint
+    from every EntityOf s by constructor distinctness.
+    This machine-checks that C228 does not apply to Entity.ofGround, guaranteeing
+    coexistence with C564 (¬ PersonCorrelate Entity.ofGround).
+    Footprint: {Means, Subject, Will, subjectWill} (VOCAB only, 0 substantive axioms). -/
+theorem ofGround_not_generic_grounds_right_wrong :
+    ¬ GenericGroundsRightWrong Entity.ofGround := by
+  intro hGr
+  have hDeontic : DeonticOpposition True False := ⟨fun ⟨_, h2⟩ => h2, fun h => h ▸ trivial⟩
+  obtain ⟨gr, hGrounds⟩ := hGr.grounds_normativity True False hDeontic
+  obtain ⟨s, hg⟩ := gr.explanatory Entity.ofGround (True ∧ ¬False) hGrounds
+  cases hg
 
 /-- GroundsRightWrong:
     Objective Right/Wrong is ontologically grounded in an agential basis:
@@ -864,7 +878,9 @@ theorem model_c_self_legislation_collapses
     on its own, which is why `explanatory` and `personal_ground` are load-bearing.
 
     D1′ is therefore confirmed as a semantic decision rather than an unfinished refactor:
-    the two sealing fields are not redundant, and C228 stays BLOCKED. Footprint:
+    the two sealing fields are not redundant. Model D proves that `asymmetric` alone does not
+    suffice for `Entity.ofGround` (formalized in C591), while C228 derives personhood through
+    the full structure. Footprint:
     `{Means, Subject, Will, subjectWill}` — the `Means`/`Will`/`subjectWill` axioms enter
     through `Person` in the third conjunct, which is the conjunct that matters: it is what
     shows `personal_ground` cannot rescue `ofGround` either, since its hypothesis

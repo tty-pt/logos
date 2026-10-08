@@ -41,7 +41,7 @@ reasons, all recorded in `AsietyFreedom.md` §2.2:
    vacuous premise would make the signature cleaner and the doctrine weaker.
 2. `GroundsRightWrong` is **definitionally** `∃ p q, Chooses s p q` (C168) — subject-level,
    already collapsed to free will, carrying no ground content.
-3. The **substantive** grounding relation is `BLOCKED` with a named lemma (C228).
+3. No substantive grounding relation over `Entity.ofGround` is available (C591; C228 holds for any entity satisfying `GenericGroundsRightWrong`).
 
 So `AsietyFreedomOfGround` is registered as a **definitional stipulation ◈** in
 `Stipulations.lean` with `Tag: META`, following the precedent of
@@ -116,7 +116,7 @@ open Logos.IndubitableNormativeFreeWill (GenuineNormativity)
     This is a **stipulation ◈** (`Tag: META`), registered as `asietyFreedom_ofGroundFreedom` in
     `Stipulations.lean`. It is not an axiom and does not move the declared-axiom count, and it is
     not derivable: `OneEssence` is vacuous, `GroundsRightWrong` is definitionally `FreeWill`
-    (C168), and the substantive grounding relation is `BLOCKED` (C228).
+    (C168), and no substantive grounding relation holds over `Entity.ofGround` (C591).
 
     The `OneEssence` premise is retained because it is the library's own grounding relation,
     and it is **vacuous by construction** — `EntityMeans Entity.ofGround p` is `True`. All the

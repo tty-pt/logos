@@ -38983,6 +38983,47 @@
    "Logos.RecoveredOntologicalGround.OneEssence"
   ]
  },
+ "Logos.CanonicalAseity.atom_grounding_the_ground_yields_contradiction": {
+  "kind": "thm",
+  "goal": "False",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "False",
+    "spine": "False"
+   }
+  ],
+  "headSyms": [
+   "False"
+  ],
+  "headShorts": [
+   "False"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Nat"
+  ],
+  "binderFree": [
+   "n",
+   "h"
+  ],
+  "hypothesis": [
+   {
+    "binder": "h",
+    "head": "Logos.RecoveredOntologicalGround.OneEssence",
+    "spine": "Logos.RecoveredOntologicalGround.OneEssence/2(Logos.Entity.Entity.ofAtom/1(…), Logos.Entity.Entity.ofGround)"
+   }
+  ],
+  "refs": [
+   "Logos.Entity.Entity.ofAtom",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.RecoveredOntologicalGround.OneEssence"
+  ]
+ },
  "Logos.CanonicalAseity.canonical_aseity_implies_modal_aseity": {
   "kind": "thm",
   "goal": "Logos.ModalPossibilityFrontier.Aseity Logos.Semantics.World Logos.Entity.Entity Logos.CanonicalAseity.CanonicalExtDepAt e",
@@ -39599,24 +39640,61 @@
  },
  "Logos.CharacteristicClosure.some_entity_is_divinely_simple": {
   "kind": "thm",
-  "goal": "∃ e, Logos.DivineSimplicity.DivineSimplicity e",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ ∃ e, Logos.SemanticFinitude.DivineSimplicityModuloPersons e a b c",
   "goalTag": "exists",
   "quant": "exists",
   "conjuncts": [
    {
     "quant": "exists",
     "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
      "Logos.Entity.Entity"
     ],
-    "head": "Logos.DivineSimplicity.DivineSimplicity",
-    "spine": "Logos.DivineSimplicity.DivineSimplicity/1(e)"
+    "head": "Logos.SemanticFinitude.DivineSimplicityModuloPersons",
+    "spine": "Logos.SemanticFinitude.DivineSimplicityModuloPersons/4(e, a, b, c)"
    }
   ],
   "headSyms": [
-   "Logos.DivineSimplicity.DivineSimplicity"
+   "Eq",
+   "Eq",
+   "Eq",
+   "Logos.SemanticFinitude.DivineSimplicityModuloPersons"
   ],
   "headShorts": [
-   "DivineSimplicity"
+   "DivineSimplicityModuloPersons",
+   "Eq"
   ],
   "valueConjuncts": [],
   "valueHeads": [],
@@ -39624,8 +39702,14 @@
   "binderFree": [],
   "hypothesis": [],
   "refs": [
-   "Logos.DivineSimplicity.DivineSimplicity",
-   "Logos.Entity.Entity"
+   "Logos.Agency.Subject",
+   "Logos.Entity.Entity",
+   "Logos.SemanticFinitude.DivineSimplicityModuloPersons",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ]
  },
  "Logos.CharacteristicClosure.some_entity_is_in_succession": {
@@ -39661,71 +39745,227 @@
  },
  "Logos.CharacteristicClosure.the_ground_is_divinely_simple": {
   "kind": "thm",
-  "goal": "Logos.DivineSimplicity.DivineSimplicity Logos.Entity.Entity.ofGround",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ Logos.SemanticFinitude.DivineSimplicityModuloPersons Logos.Entity.Entity.ofGround a b c",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.SemanticFinitude.DivineSimplicityModuloPersons",
+    "spine": "Logos.SemanticFinitude.DivineSimplicityModuloPersons/4(Logos.Entity.Entity.ofGround, a, b, c)"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "Logos.SemanticFinitude.DivineSimplicityModuloPersons"
+  ],
+  "headShorts": [
+   "DivineSimplicityModuloPersons",
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.SemanticFinitude.DivineSimplicityModuloPersons",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
+ },
+ "Logos.CharacteristicClosure.the_ground_is_sole_bearer_of_divine_simplicity": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ Logos.SemanticFinitude.DivineSimplicityModuloPersons Logos.Entity.Entity.ofGround a b c ∧ ∀ (e : Logos.Entity.Entity), Logos.SemanticFinitude.DivineSimplicityModuloPersons e a b c → e = Logos.Entity.Entity.ofGround",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.SemanticFinitude.DivineSimplicityModuloPersons",
+    "spine": "Logos.SemanticFinitude.DivineSimplicityModuloPersons/4(Logos.Entity.Entity.ofGround, a, b, c)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.SemanticFinitude.DivineSimplicityModuloPersons/4(e, a, b, c) , =(Logos.Entity.Entity , e))"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "Logos.SemanticFinitude.DivineSimplicityModuloPersons",
+   "->"
+  ],
+  "headShorts": [
+   "->",
+   "DivineSimplicityModuloPersons",
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Entity.Entity",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.SemanticFinitude.DivineSimplicityModuloPersons",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
+ },
+ "Logos.CharacteristicClosure.the_ground_is_sole_bearer_of_divine_simplicity.match_1_1": {
+  "kind": "def",
+  "goal": "motive h✝",
   "goalTag": "app",
   "quant": "plain",
   "conjuncts": [
    {
     "quant": "plain",
     "sorts": [],
-    "head": "Logos.DivineSimplicity.DivineSimplicity",
-    "spine": "Logos.DivineSimplicity.DivineSimplicity/1(Logos.Entity.Entity.ofGround)"
+    "head": "motive",
+    "spine": "motive/1(_)"
    }
   ],
   "headSyms": [
-   "Logos.DivineSimplicity.DivineSimplicity"
+   "motive"
   ],
   "headShorts": [
-   "DivineSimplicity"
+   "motive"
   ],
-  "valueConjuncts": [],
-  "valueHeads": [],
-  "boundSorts": [],
-  "binderFree": [],
-  "hypothesis": [],
-  "refs": [
-   "Logos.DivineSimplicity.DivineSimplicity",
-   "Logos.Entity.Entity.ofGround"
-  ]
- },
- "Logos.CharacteristicClosure.the_ground_is_sole_bearer_of_divine_simplicity": {
-  "kind": "thm",
-  "goal": "Logos.DivineSimplicity.DivineSimplicity Logos.Entity.Entity.ofGround ∧ ∀ (e : Logos.Entity.Entity), Logos.DivineSimplicity.DivineSimplicity e → e = Logos.Entity.Entity.ofGround",
-  "goalTag": "app",
-  "quant": "mixed",
-  "conjuncts": [
+  "valueConjuncts": [
    {
     "quant": "plain",
-    "sorts": [],
-    "head": "Logos.DivineSimplicity.DivineSimplicity",
-    "spine": "Logos.DivineSimplicity.DivineSimplicity/1(Logos.Entity.Entity.ofGround)"
-   },
-   {
-    "quant": "forall",
-    "sorts": [
-     "Logos.Entity.Entity"
-    ],
-    "head": "->",
-    "spine": "->(Logos.DivineSimplicity.DivineSimplicity/1(e) , =(Logos.Entity.Entity , e))"
+    "head": "And.casesOn"
    }
   ],
-  "headSyms": [
-   "Logos.DivineSimplicity.DivineSimplicity",
+  "valueHeads": [
+   "And.casesOn"
+  ],
+  "boundSorts": [
+   "Logos.Agency.Subject",
+   "Logos.Agency.Subject",
+   "Logos.Agency.Subject",
+   "Logos.Entity.Entity",
    "->"
   ],
-  "headShorts": [
-   "->",
-   "DivineSimplicity"
+  "binderFree": [
+   "a",
+   "b",
+   "c",
+   "e",
+   "motive",
+   "_",
+   "h_1"
   ],
-  "valueConjuncts": [],
-  "valueHeads": [],
-  "boundSorts": [],
-  "binderFree": [],
-  "hypothesis": [],
+  "hypothesis": [
+   {
+    "binder": "_",
+    "head": "Logos.SemanticFinitude.DivineSimplicityModuloPersons",
+    "spine": "Logos.SemanticFinitude.DivineSimplicityModuloPersons/4(e, a, b, c)"
+   },
+   {
+    "binder": "h_1",
+    "head": "->",
+    "spine": "->(Logos.SemanticFinitude.CanonicalAseityModuloPersons/4(…, …, …, …) , ∀(Not).…)"
+   }
+  ],
   "refs": [
-   "Logos.DivineSimplicity.DivineSimplicity",
+   "Logos.Agency.Subject",
+   "Logos.DivineSimplicity.HasInternalComponent",
+   "Logos.DivineSimplicity.UndividedMeaning",
    "Logos.Entity.Entity",
-   "Logos.Entity.Entity.ofGround"
+   "Logos.SemanticFinitude.CanonicalAseityModuloPersons",
+   "Logos.SemanticFinitude.DivineSimplicityModuloPersons"
   ]
  },
  "Logos.CharacteristicClosure.the_semantic_bound_does_not_close_the_grounding_arm": {
@@ -39815,309 +40055,61 @@
  },
  "Logos.CharacteristicClosure.transcendence_and_semantic_finitude_yield_divine_simplicity": {
   "kind": "thm",
-  "goal": "Logos.DivineSimplicity.DivineSimplicity e",
-  "goalTag": "app",
-  "quant": "plain",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ ∀ (e : Logos.Entity.Entity), Logos.DivineSimplicity.TranscendentGround e → Logos.SemanticFinitude.DivineSimplicityModuloPersons e a b c",
+  "goalTag": "exists",
+  "quant": "exists",
   "conjuncts": [
    {
-    "quant": "plain",
-    "sorts": [],
-    "head": "Logos.DivineSimplicity.DivineSimplicity",
-    "spine": "Logos.DivineSimplicity.DivineSimplicity/1(e)"
-   }
-  ],
-  "headSyms": [
-   "Logos.DivineSimplicity.DivineSimplicity"
-  ],
-  "headShorts": [
-   "DivineSimplicity"
-  ],
-  "valueConjuncts": [],
-  "valueHeads": [],
-  "boundSorts": [
-   "Logos.Entity.Entity"
-  ],
-  "binderFree": [
-   "e",
-   "_"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "Logos.DivineSimplicity.TranscendentGround",
-    "spine": "Logos.DivineSimplicity.TranscendentGround/1(e)"
-   }
-  ],
-  "refs": [
-   "Logos.DivineSimplicity.DivineSimplicity",
-   "Logos.DivineSimplicity.TranscendentGround",
-   "Logos.Entity.Entity"
-  ]
- },
- "Logos.CharacteristicSoleBearer.no_subject_grounds_the_ground": {
-  "kind": "thm",
-  "goal": "¬Logos.RecoveredOntologicalGround.OneEssence (Logos.Entity.EntityOf s) Logos.Entity.Entity.ofGround",
-  "goalTag": "not",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "Not",
-    "spine": "!(Logos.RecoveredOntologicalGround.OneEssence/2(Logos.Entity.EntityOf/1(s), Logos.Entity.Entity.ofGround))"
-   }
-  ],
-  "headSyms": [
-   "Not"
-  ],
-  "headShorts": [
-   "Not"
-  ],
-  "valueConjuncts": [],
-  "valueHeads": [],
-  "boundSorts": [
-   "Logos.Agency.Subject"
-  ],
-  "binderFree": [
-   "s"
-  ],
-  "hypothesis": [],
-  "refs": [
-   "Logos.Agency.Subject",
-   "Logos.Entity.Entity.ofGround",
-   "Logos.Entity.EntityOf",
-   "Logos.RecoveredOntologicalGround.OneEssence"
-  ]
- },
- "Logos.CharacteristicSoleBearer.ofGround_sole_divine_pure_actuality": {
-  "kind": "thm",
-  "goal": "e = Logos.Entity.Entity.ofGround",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
     "head": "Eq",
-    "spine": "=(Logos.Entity.Entity , e)"
-   }
-  ],
-  "headSyms": [
-   "Eq"
-  ],
-  "headShorts": [
-   "Eq"
-  ],
-  "valueConjuncts": [],
-  "valueHeads": [],
-  "boundSorts": [
-   "Logos.Entity.Entity"
-  ],
-  "binderFree": [
-   "e",
-   "_"
-  ],
-  "hypothesis": [
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
    {
-    "binder": "_",
-    "head": "Logos.DivinePureActuality.DivinePureActuality",
-    "spine": "Logos.DivinePureActuality.DivinePureActuality/1(e)"
-   }
-  ],
-  "refs": [
-   "Logos.DivinePureActuality.DivinePureActuality",
-   "Logos.Entity.Entity",
-   "Logos.Entity.Entity.ofGround"
-  ]
- },
- "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omnipotence": {
-  "kind": "thm",
-  "goal": "e = Logos.Entity.Entity.ofGround",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
     "head": "Eq",
-    "spine": "=(Logos.Entity.Entity , e)"
-   }
-  ],
-  "headSyms": [
-   "Eq"
-  ],
-  "headShorts": [
-   "Eq"
-  ],
-  "valueConjuncts": [],
-  "valueHeads": [],
-  "boundSorts": [
-   "Logos.Entity.Entity"
-  ],
-  "binderFree": [
-   "e",
-   "_"
-  ],
-  "hypothesis": [
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
    {
-    "binder": "_",
-    "head": "Logos.DivineOmnipotence.FoundationalOmnipotence",
-    "spine": "Logos.DivineOmnipotence.FoundationalOmnipotence/1(e)"
-   }
-  ],
-  "refs": [
-   "Logos.DivineOmnipotence.FoundationalOmnipotence",
-   "Logos.Entity.Entity",
-   "Logos.Entity.Entity.ofGround"
-  ]
- },
- "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omnipresence": {
-  "kind": "thm",
-  "goal": "e = Logos.Entity.Entity.ofGround",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
     "head": "Eq",
-    "spine": "=(Logos.Entity.Entity , e)"
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.DivineSimplicity.TranscendentGround/1(e) , Logos.SemanticFinitude.DivineSimplicityModuloPersons/4(e, a, b, c))"
    }
   ],
   "headSyms": [
-   "Eq"
-  ],
-  "headShorts": [
-   "Eq"
-  ],
-  "valueConjuncts": [],
-  "valueHeads": [],
-  "boundSorts": [
-   "Logos.Entity.Entity"
-  ],
-  "binderFree": [
-   "e",
-   "_"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "Logos.FoundationalOmnipresence.FoundationalOmnipresence",
-    "spine": "Logos.FoundationalOmnipresence.FoundationalOmnipresence/1(e)"
-   }
-  ],
-  "refs": [
-   "Logos.Entity.Entity",
-   "Logos.Entity.Entity.ofGround",
-   "Logos.FoundationalOmnipresence.FoundationalOmnipresence"
-  ]
- },
- "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omniscience": {
-  "kind": "thm",
-  "goal": "e = Logos.Entity.Entity.ofGround",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "Eq",
-    "spine": "=(Logos.Entity.Entity , e)"
-   }
-  ],
-  "headSyms": [
-   "Eq"
-  ],
-  "headShorts": [
-   "Eq"
-  ],
-  "valueConjuncts": [],
-  "valueHeads": [],
-  "boundSorts": [
-   "Logos.Entity.Entity"
-  ],
-  "binderFree": [
-   "e",
-   "_"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "Logos.DivineOmniscience.FoundationalOmniscience",
-    "spine": "Logos.DivineOmniscience.FoundationalOmniscience/1(e)"
-   }
-  ],
-  "refs": [
-   "Logos.DivineOmniscience.FoundationalOmniscience",
-   "Logos.Entity.Entity",
-   "Logos.Entity.Entity.ofGround"
-  ]
- },
- "Logos.CharacteristicSoleBearer.the_ground_is_sole_bearer_of_the_footprint_characteristics": {
-  "kind": "thm",
-  "goal": "(∀ (e : Logos.Entity.Entity), Logos.FoundationalOmnipresence.FoundationalOmnipresence e → e = Logos.Entity.Entity.ofGround) ∧ (∀ (e : Logos.Entity.Entity), Logos.DivineOmniscience.FoundationalOmniscience e → e = Logos.Entity.Entity.ofGround) ∧ (∀ (e : Logos.Entity.Entity), Logos.DivineOmnipotence.FoundationalOmnipotence e → e = Logos.Entity.Entity.ofGround) ∧ (∀ (e : Logos.Entity.Entity), Logos.DivinePureActuality.DivinePureActuality e → e = Logos.Entity.Entity.ofGround) ∧ (∀ (e : Logos.Entity.Entity), Logos.DivineSimplicity.DivineSimplicity e → e = Logos.Entity.Entity.ofGround) ∧ ∀ (e : Logos.Entity.Entity), Logos.DivineSimplicity.TranscendentGround e → e = Logos.Entity.Entity.ofGround",
-  "goalTag": "app",
-  "quant": "forall",
-  "conjuncts": [
-   {
-    "quant": "forall",
-    "sorts": [
-     "Logos.Entity.Entity"
-    ],
-    "head": "->",
-    "spine": "->(Logos.FoundationalOmnipresence.FoundationalOmnipresence/1(e) , =(Logos.Entity.Entity , e))"
-   },
-   {
-    "quant": "forall",
-    "sorts": [
-     "Logos.Entity.Entity"
-    ],
-    "head": "->",
-    "spine": "->(Logos.DivineOmniscience.FoundationalOmniscience/1(e) , =(Logos.Entity.Entity , e))"
-   },
-   {
-    "quant": "forall",
-    "sorts": [
-     "Logos.Entity.Entity"
-    ],
-    "head": "->",
-    "spine": "->(Logos.DivineOmnipotence.FoundationalOmnipotence/1(e) , =(Logos.Entity.Entity , e))"
-   },
-   {
-    "quant": "forall",
-    "sorts": [
-     "Logos.Entity.Entity"
-    ],
-    "head": "->",
-    "spine": "->(Logos.DivinePureActuality.DivinePureActuality/1(e) , =(Logos.Entity.Entity , e))"
-   },
-   {
-    "quant": "forall",
-    "sorts": [
-     "Logos.Entity.Entity"
-    ],
-    "head": "->",
-    "spine": "->(Logos.DivineSimplicity.DivineSimplicity/1(e) , =(Logos.Entity.Entity , e))"
-   },
-   {
-    "quant": "forall",
-    "sorts": [
-     "Logos.Entity.Entity"
-    ],
-    "head": "->",
-    "spine": "->(Logos.DivineSimplicity.TranscendentGround/1(e) , =(Logos.Entity.Entity , e))"
-   }
-  ],
-  "headSyms": [
-   "->",
-   "->",
-   "->",
-   "->",
-   "->",
+   "Eq",
+   "Eq",
+   "Eq",
    "->"
   ],
   "headShorts": [
-   "->"
+   "->",
+   "Eq"
   ],
   "valueConjuncts": [],
   "valueHeads": [],
@@ -40125,6 +40117,521 @@
   "binderFree": [],
   "hypothesis": [],
   "refs": [
+   "Logos.Agency.Subject",
+   "Logos.DivineSimplicity.TranscendentGround",
+   "Logos.Entity.Entity",
+   "Logos.SemanticFinitude.DivineSimplicityModuloPersons",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
+ },
+ "Logos.CharacteristicSoleBearer.no_subject_grounds_the_ground": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ ∀ (s : Logos.Agency.Subject), Logos.RecoveredOntologicalGround.OneEssence (Logos.Entity.EntityOf s) Logos.Entity.Entity.ofGround → s = a ∨ s = b ∨ s = c",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "->",
+    "spine": "->(Logos.RecoveredOntologicalGround.OneEssence/2(Logos.Entity.EntityOf/1(s), Logos.Entity.Entity.ofGround) , |(=(Logos.Agency.Subject , s) , |(=(… , …) , =(… , …))))"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "->"
+  ],
+  "headShorts": [
+   "->",
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.Entity.EntityOf",
+   "Logos.RecoveredOntologicalGround.OneEssence",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
+ },
+ "Logos.CharacteristicSoleBearer.ofGround_sole_divine_pure_actuality": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ ∀ (e : Logos.Entity.Entity), Logos.DivinePureActuality.DivinePureActuality e → e = Logos.Entity.Entity.ofGround ∨ e = Logos.Entity.EntityOf a ∨ e = Logos.Entity.EntityOf b ∨ e = Logos.Entity.EntityOf c",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.DivinePureActuality.DivinePureActuality/1(e) , |(=(Logos.Entity.Entity , e) , |(=(… , …) , |(… , …))))"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "->"
+  ],
+  "headShorts": [
+   "->",
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.DivinePureActuality.DivinePureActuality",
+   "Logos.Entity.Entity",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.Entity.EntityOf",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
+ },
+ "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omnipotence": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ ∀ (e : Logos.Entity.Entity), Logos.DivineOmnipotence.FoundationalOmnipotence e → e = Logos.Entity.Entity.ofGround ∨ e = Logos.Entity.EntityOf a ∨ e = Logos.Entity.EntityOf b ∨ e = Logos.Entity.EntityOf c",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.DivineOmnipotence.FoundationalOmnipotence/1(e) , |(=(Logos.Entity.Entity , e) , |(=(… , …) , |(… , …))))"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "->"
+  ],
+  "headShorts": [
+   "->",
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.DivineOmnipotence.FoundationalOmnipotence",
+   "Logos.Entity.Entity",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.Entity.EntityOf",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
+ },
+ "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omnipresence": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ ∀ (e : Logos.Entity.Entity), Logos.FoundationalOmnipresence.FoundationalOmnipresence e → e = Logos.Entity.Entity.ofGround ∨ e = Logos.Entity.EntityOf a ∨ e = Logos.Entity.EntityOf b ∨ e = Logos.Entity.EntityOf c",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.FoundationalOmnipresence.FoundationalOmnipresence/1(e) , |(=(Logos.Entity.Entity , e) , |(=(… , …) , |(… , …))))"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "->"
+  ],
+  "headShorts": [
+   "->",
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Entity.Entity",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.Entity.EntityOf",
+   "Logos.FoundationalOmnipresence.FoundationalOmnipresence",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
+ },
+ "Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omniscience": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ ∀ (e : Logos.Entity.Entity), Logos.DivineOmniscience.FoundationalOmniscience e → e = Logos.Entity.Entity.ofGround ∨ e = Logos.Entity.EntityOf a ∨ e = Logos.Entity.EntityOf b ∨ e = Logos.Entity.EntityOf c",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.DivineOmniscience.FoundationalOmniscience/1(e) , |(=(Logos.Entity.Entity , e) , |(=(… , …) , |(… , …))))"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "->"
+  ],
+  "headShorts": [
+   "->",
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.DivineOmniscience.FoundationalOmniscience",
+   "Logos.Entity.Entity",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.Entity.EntityOf",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
+ },
+ "Logos.CharacteristicSoleBearer.the_ground_is_sole_bearer_of_the_footprint_characteristics": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ (∀ (e : Logos.Entity.Entity), Logos.FoundationalOmnipresence.FoundationalOmnipresence e → e = Logos.Entity.Entity.ofGround ∨ e = Logos.Entity.EntityOf a ∨ e = Logos.Entity.EntityOf b ∨ e = Logos.Entity.EntityOf c) ∧ (∀ (e : Logos.Entity.Entity), Logos.DivineOmniscience.FoundationalOmniscience e → e = Logos.Entity.Entity.ofGround ∨ e = Logos.Entity.EntityOf a ∨ e = Logos.Entity.EntityOf b ∨ e = Logos.Entity.EntityOf c) ∧ (∀ (e : Logos.Entity.Entity), Logos.DivineOmnipotence.FoundationalOmnipotence e → e = Logos.Entity.Entity.ofGround ∨ e = Logos.Entity.EntityOf a ∨ e = Logos.Entity.EntityOf b ∨ e = Logos.Entity.EntityOf c) ∧ (∀ (e : Logos.Entity.Entity), Logos.DivinePureActuality.DivinePureActuality e → e = Logos.Entity.Entity.ofGround ∨ e = Logos.Entity.EntityOf a ∨ e = Logos.Entity.EntityOf b ∨ e = Logos.Entity.EntityOf c) ∧ (∀ (e : Logos.Entity.Entity), Logos.DivineSimplicity.DivineSimplicity e → e = Logos.Entity.Entity.ofGround) ∧ ∀ (e : Logos.Entity.Entity), Logos.DivineSimplicity.TranscendentGround e → e = Logos.Entity.Entity.ofGround",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.FoundationalOmnipresence.FoundationalOmnipresence/1(e) , |(=(Logos.Entity.Entity , e) , |(=(… , …) , |(… , …))))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.DivineOmniscience.FoundationalOmniscience/1(e) , |(=(Logos.Entity.Entity , e) , |(=(… , …) , |(… , …))))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.DivineOmnipotence.FoundationalOmnipotence/1(e) , |(=(Logos.Entity.Entity , e) , |(=(… , …) , |(… , …))))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.DivinePureActuality.DivinePureActuality/1(e) , |(=(Logos.Entity.Entity , e) , |(=(… , …) , |(… , …))))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.DivineSimplicity.DivineSimplicity/1(e) , =(Logos.Entity.Entity , e))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.DivineSimplicity.TranscendentGround/1(e) , =(Logos.Entity.Entity , e))"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "->",
+   "->",
+   "->",
+   "->",
+   "->",
+   "->"
+  ],
+  "headShorts": [
+   "->",
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
    "Logos.DivineOmnipotence.FoundationalOmnipotence",
    "Logos.DivineOmniscience.FoundationalOmniscience",
    "Logos.DivinePureActuality.DivinePureActuality",
@@ -40132,7 +40639,13 @@
    "Logos.DivineSimplicity.TranscendentGround",
    "Logos.Entity.Entity",
    "Logos.Entity.Entity.ofGround",
-   "Logos.FoundationalOmnipresence.FoundationalOmnipresence"
+   "Logos.Entity.EntityOf",
+   "Logos.FoundationalOmnipresence.FoundationalOmnipresence",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ]
  },
  "Logos.Choice.AlternativeSensitivity": {
@@ -107964,6 +108477,65 @@
    "Logos.DivineAgape.DivineHypostasis"
   ]
  },
+ "Logos.DivineAgape.MutualIndwellingCatholic": {
+  "kind": "def",
+  "goal": "Prop",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Prop",
+    "spine": "Prop"
+   }
+  ],
+  "headSyms": [
+   "Prop"
+  ],
+  "headShorts": [
+   "Prop"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.DivineAgape.Subsists"
+   },
+   {
+    "quant": "plain",
+    "head": "Logos.DivineAgape.Subsists"
+   },
+   {
+    "quant": "plain",
+    "head": "Eq"
+   },
+   {
+    "quant": "plain",
+    "head": "Eq"
+   }
+  ],
+  "valueHeads": [
+   "Logos.DivineAgape.Subsists",
+   "Logos.DivineAgape.Subsists",
+   "Eq",
+   "Eq"
+  ],
+  "boundSorts": [
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.DivineHypostasis"
+  ],
+  "binderFree": [
+   "f",
+   "o"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.DivineHypostasis.deiformEntity",
+   "Logos.DivineAgape.Subsists",
+   "Logos.Entity.Entity"
+  ]
+ },
  "Logos.DivineAgape.SelfDonation": {
   "kind": "def",
   "goal": "Prop",
@@ -108637,6 +109209,55 @@
    "Logos.DivineAgape.DivineHypostasis.deiformEntity",
    "Logos.DivineAgape.Subsists",
    "Logos.TheologicalModalHardening.NecessaryEntity"
+  ]
+ },
+ "Logos.DivineAgape.subsisting_persons_mutual_indwelling": {
+  "kind": "thm",
+  "goal": "Logos.DivineAgape.MutualIndwellingCatholic f o",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.DivineAgape.MutualIndwellingCatholic",
+    "spine": "Logos.DivineAgape.MutualIndwellingCatholic/2(f, o)"
+   }
+  ],
+  "headSyms": [
+   "Logos.DivineAgape.MutualIndwellingCatholic"
+  ],
+  "headShorts": [
+   "MutualIndwellingCatholic"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.DivineHypostasis"
+  ],
+  "binderFree": [
+   "f",
+   "o",
+   "hf",
+   "ho"
+  ],
+  "hypothesis": [
+   {
+    "binder": "hf",
+    "head": "Logos.DivineAgape.Subsists",
+    "spine": "Logos.DivineAgape.Subsists/1(f)"
+   },
+   {
+    "binder": "ho",
+    "head": "Logos.DivineAgape.Subsists",
+    "spine": "Logos.DivineAgape.Subsists/1(o)"
+   }
+  ],
+  "refs": [
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.MutualIndwellingCatholic",
+   "Logos.DivineAgape.Subsists"
   ]
  },
  "Logos.DivineAgape.the_beloved": {
@@ -112099,6 +112720,92 @@
    "Logos.Entity.Entity.ofGround"
   ]
  },
+ "Logos.DivinePureActuality.AlienPassiveGroundingPotency": {
+  "kind": "def",
+  "goal": "Prop",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Prop",
+    "spine": "Prop"
+   }
+  ],
+  "headSyms": [
+   "Prop"
+  ],
+  "headShorts": [
+   "Prop"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "exists",
+    "head": "Logos.CanonicalAseity.ExternalGrounding"
+   },
+   {
+    "quant": "exists",
+    "head": "Not"
+   }
+  ],
+  "valueHeads": [
+   "Logos.CanonicalAseity.ExternalGrounding",
+   "Not"
+  ],
+  "boundSorts": [
+   "Logos.Entity.Entity"
+  ],
+  "binderFree": [
+   "e"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.CanonicalAseity.ExternalGrounding",
+   "Logos.DivinePureActuality.TrinitarianProcession",
+   "Logos.Entity.Entity"
+  ]
+ },
+ "Logos.DivinePureActuality.CanonicalAseityCatholic": {
+  "kind": "def",
+  "goal": "Prop",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Prop",
+    "spine": "Prop"
+   }
+  ],
+  "headSyms": [
+   "Prop"
+  ],
+  "headShorts": [
+   "Prop"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Not"
+   }
+  ],
+  "valueHeads": [
+   "Not"
+  ],
+  "boundSorts": [
+   "Logos.Entity.Entity"
+  ],
+  "binderFree": [
+   "e"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.DivinePureActuality.AlienPassiveGroundingPotency",
+   "Logos.Entity.Entity"
+  ]
+ },
  "Logos.DivinePureActuality.DivinePureActuality.casesOn": {
   "kind": "def",
   "goal": "motive t",
@@ -112420,6 +113127,327 @@
    "Logos.FoundationalOmnipresence.UniversalModalGround"
   ]
  },
+ "Logos.DivinePureActuality.DivinePureActualityCatholic.casesOn": {
+  "kind": "def",
+  "goal": "motive t",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(t)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.DivinePureActuality.DivinePureActualityCatholic.rec"
+   }
+  ],
+  "valueHeads": [
+   "Logos.DivinePureActuality.DivinePureActualityCatholic.rec"
+  ],
+  "boundSorts": [
+   "Logos.Entity.Entity",
+   "∀",
+   "∀"
+  ],
+  "binderFree": [
+   "g",
+   "motive",
+   "t",
+   "mk"
+  ],
+  "hypothesis": [
+   {
+    "binder": "t",
+    "head": "Logos.DivinePureActuality.DivinePureActualityCatholic",
+    "spine": "Logos.DivinePureActuality.DivinePureActualityCatholic/1(g)"
+   }
+  ],
+  "refs": [
+   "Logos.DivinePureActuality.AlienPassiveGroundingPotency",
+   "Logos.DivinePureActuality.DivinePureActualityCatholic",
+   "Logos.DivinePureActuality.DivinePureActualityCatholic.mk",
+   "Logos.DivinePureActuality.DivinePureActualityCatholic.rec",
+   "Logos.DivinePureActuality.PassiveExistentialPotency",
+   "Logos.DivinePureActuality.PassiveIntentionalPotency",
+   "Logos.DivinePureActuality.PassiveTransitionPotency",
+   "Logos.Entity.Entity",
+   "Logos.FoundationalOmnipresence.UniversalModalGround"
+  ]
+ },
+ "Logos.DivinePureActuality.DivinePureActualityCatholic.no_alien_grounding_potency": {
+  "kind": "thm",
+  "goal": "¬Logos.DivinePureActuality.AlienPassiveGroundingPotency g",
+  "goalTag": "not",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Not",
+    "spine": "!(Logos.DivinePureActuality.AlienPassiveGroundingPotency/1(g))"
+   }
+  ],
+  "headSyms": [
+   "Not"
+  ],
+  "headShorts": [
+   "Not"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.Entity.Entity"
+  ],
+  "binderFree": [
+   "g",
+   "self"
+  ],
+  "hypothesis": [
+   {
+    "binder": "self",
+    "head": "Logos.DivinePureActuality.DivinePureActualityCatholic",
+    "spine": "Logos.DivinePureActuality.DivinePureActualityCatholic/1(g)"
+   }
+  ],
+  "refs": [
+   "Logos.DivinePureActuality.AlienPassiveGroundingPotency",
+   "Logos.DivinePureActuality.DivinePureActualityCatholic",
+   "Logos.Entity.Entity"
+  ]
+ },
+ "Logos.DivinePureActuality.DivinePureActualityCatholic.no_existential_potency": {
+  "kind": "thm",
+  "goal": "¬Logos.DivinePureActuality.PassiveExistentialPotency g",
+  "goalTag": "not",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Not",
+    "spine": "!(Logos.DivinePureActuality.PassiveExistentialPotency/1(g))"
+   }
+  ],
+  "headSyms": [
+   "Not"
+  ],
+  "headShorts": [
+   "Not"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.Entity.Entity"
+  ],
+  "binderFree": [
+   "g",
+   "self"
+  ],
+  "hypothesis": [
+   {
+    "binder": "self",
+    "head": "Logos.DivinePureActuality.DivinePureActualityCatholic",
+    "spine": "Logos.DivinePureActuality.DivinePureActualityCatholic/1(g)"
+   }
+  ],
+  "refs": [
+   "Logos.DivinePureActuality.DivinePureActualityCatholic",
+   "Logos.DivinePureActuality.PassiveExistentialPotency",
+   "Logos.Entity.Entity"
+  ]
+ },
+ "Logos.DivinePureActuality.DivinePureActualityCatholic.no_intentional_potency": {
+  "kind": "thm",
+  "goal": "¬Logos.DivinePureActuality.PassiveIntentionalPotency g",
+  "goalTag": "not",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Not",
+    "spine": "!(Logos.DivinePureActuality.PassiveIntentionalPotency/1(g))"
+   }
+  ],
+  "headSyms": [
+   "Not"
+  ],
+  "headShorts": [
+   "Not"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.Entity.Entity"
+  ],
+  "binderFree": [
+   "g",
+   "self"
+  ],
+  "hypothesis": [
+   {
+    "binder": "self",
+    "head": "Logos.DivinePureActuality.DivinePureActualityCatholic",
+    "spine": "Logos.DivinePureActuality.DivinePureActualityCatholic/1(g)"
+   }
+  ],
+  "refs": [
+   "Logos.DivinePureActuality.DivinePureActualityCatholic",
+   "Logos.DivinePureActuality.PassiveIntentionalPotency",
+   "Logos.Entity.Entity"
+  ]
+ },
+ "Logos.DivinePureActuality.DivinePureActualityCatholic.no_transition_potency": {
+  "kind": "thm",
+  "goal": "¬Logos.DivinePureActuality.PassiveTransitionPotency g",
+  "goalTag": "not",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Not",
+    "spine": "!(Logos.DivinePureActuality.PassiveTransitionPotency/1(g))"
+   }
+  ],
+  "headSyms": [
+   "Not"
+  ],
+  "headShorts": [
+   "Not"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.Entity.Entity"
+  ],
+  "binderFree": [
+   "g",
+   "self"
+  ],
+  "hypothesis": [
+   {
+    "binder": "self",
+    "head": "Logos.DivinePureActuality.DivinePureActualityCatholic",
+    "spine": "Logos.DivinePureActuality.DivinePureActualityCatholic/1(g)"
+   }
+  ],
+  "refs": [
+   "Logos.DivinePureActuality.DivinePureActualityCatholic",
+   "Logos.DivinePureActuality.PassiveTransitionPotency",
+   "Logos.Entity.Entity"
+  ]
+ },
+ "Logos.DivinePureActuality.DivinePureActualityCatholic.recOn": {
+  "kind": "def",
+  "goal": "motive t",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(t)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.DivinePureActuality.DivinePureActualityCatholic.rec"
+   }
+  ],
+  "valueHeads": [
+   "Logos.DivinePureActuality.DivinePureActualityCatholic.rec"
+  ],
+  "boundSorts": [
+   "Logos.Entity.Entity",
+   "∀",
+   "∀"
+  ],
+  "binderFree": [
+   "g",
+   "motive",
+   "t",
+   "mk"
+  ],
+  "hypothesis": [
+   {
+    "binder": "t",
+    "head": "Logos.DivinePureActuality.DivinePureActualityCatholic",
+    "spine": "Logos.DivinePureActuality.DivinePureActualityCatholic/1(g)"
+   }
+  ],
+  "refs": [
+   "Logos.DivinePureActuality.AlienPassiveGroundingPotency",
+   "Logos.DivinePureActuality.DivinePureActualityCatholic",
+   "Logos.DivinePureActuality.DivinePureActualityCatholic.mk",
+   "Logos.DivinePureActuality.DivinePureActualityCatholic.rec",
+   "Logos.DivinePureActuality.PassiveExistentialPotency",
+   "Logos.DivinePureActuality.PassiveIntentionalPotency",
+   "Logos.DivinePureActuality.PassiveTransitionPotency",
+   "Logos.Entity.Entity",
+   "Logos.FoundationalOmnipresence.UniversalModalGround"
+  ]
+ },
+ "Logos.DivinePureActuality.DivinePureActualityCatholic.universal_ground": {
+  "kind": "thm",
+  "goal": "Logos.FoundationalOmnipresence.UniversalModalGround g",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.FoundationalOmnipresence.UniversalModalGround",
+    "spine": "Logos.FoundationalOmnipresence.UniversalModalGround/1(g)"
+   }
+  ],
+  "headSyms": [
+   "Logos.FoundationalOmnipresence.UniversalModalGround"
+  ],
+  "headShorts": [
+   "UniversalModalGround"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.Entity.Entity"
+  ],
+  "binderFree": [
+   "g",
+   "self"
+  ],
+  "hypothesis": [
+   {
+    "binder": "self",
+    "head": "Logos.DivinePureActuality.DivinePureActualityCatholic",
+    "spine": "Logos.DivinePureActuality.DivinePureActualityCatholic/1(g)"
+   }
+  ],
+  "refs": [
+   "Logos.DivinePureActuality.DivinePureActualityCatholic",
+   "Logos.Entity.Entity",
+   "Logos.FoundationalOmnipresence.UniversalModalGround"
+  ]
+ },
  "Logos.DivinePureActuality.PassiveExistentialPotency": {
   "kind": "def",
   "goal": "Prop",
@@ -112579,6 +113607,57 @@
   "refs": [
    "Logos.DivineImmutability.TransitionInvariance",
    "Logos.Entity.Entity"
+  ]
+ },
+ "Logos.DivinePureActuality.TrinitarianProcession": {
+  "kind": "def",
+  "goal": "Prop",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Prop",
+    "spine": "Prop"
+   }
+  ],
+  "headSyms": [
+   "Prop"
+  ],
+  "headShorts": [
+   "Prop"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.CanonicalAseity.ExternalGrounding"
+   },
+   {
+    "quant": "plain",
+    "head": "Or"
+   }
+  ],
+  "valueHeads": [
+   "Logos.CanonicalAseity.ExternalGrounding",
+   "Or"
+  ],
+  "boundSorts": [
+   "Logos.Entity.Entity",
+   "Logos.Entity.Entity"
+  ],
+  "binderFree": [
+   "g",
+   "e"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.NecessarySubjectKind",
+   "Logos.Agency.Subject",
+   "Logos.CanonicalAseity.ExternalGrounding",
+   "Logos.Entity.Entity",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.Entity.EntityOf"
   ]
  },
  "Logos.DivinePureActuality.atom_fails_pure_actuality": {
@@ -112977,6 +114056,45 @@
    "Logos.Entity.Entity.ofGround"
   ]
  },
+ "Logos.DivinePureActuality.ofGround_divine_pure_actuality_catholic": {
+  "kind": "thm",
+  "goal": "Logos.DivinePureActuality.DivinePureActualityCatholic Logos.Entity.Entity.ofGround",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.DivinePureActuality.DivinePureActualityCatholic",
+    "spine": "Logos.DivinePureActuality.DivinePureActualityCatholic/1(Logos.Entity.Entity.ofGround)"
+   }
+  ],
+  "headSyms": [
+   "Logos.DivinePureActuality.DivinePureActualityCatholic"
+  ],
+  "headShorts": [
+   "DivinePureActualityCatholic"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [
+   "hFinite"
+  ],
+  "hypothesis": [
+   {
+    "binder": "hFinite",
+    "head": "∀",
+    "spine": "∀(Logos.Agency.Subject).?(Prop).…"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.Means",
+   "Logos.Agency.Subject",
+   "Logos.DivinePureActuality.DivinePureActualityCatholic",
+   "Logos.Entity.Entity.ofGround"
+  ]
+ },
  "Logos.DivinePureActuality.ofGround_incorporeal": {
   "kind": "thm",
   "goal": "Logos.Entity.Entity.ofGround ≠ Logos.Entity.Entity.ofAtom n",
@@ -113008,6 +114126,101 @@
   "refs": [
    "Logos.Entity.Entity",
    "Logos.Entity.Entity.ofAtom",
+   "Logos.Entity.Entity.ofGround"
+  ]
+ },
+ "Logos.DivinePureActuality.ofGround_no_alien_grounding_potency": {
+  "kind": "thm",
+  "goal": "¬Logos.DivinePureActuality.AlienPassiveGroundingPotency Logos.Entity.Entity.ofGround",
+  "goalTag": "not",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Not",
+    "spine": "!(Logos.DivinePureActuality.AlienPassiveGroundingPotency/1(Logos.Entity.Entity.ofGround))"
+   }
+  ],
+  "headSyms": [
+   "Not"
+  ],
+  "headShorts": [
+   "Not"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [
+   "hFinite"
+  ],
+  "hypothesis": [
+   {
+    "binder": "hFinite",
+    "head": "∀",
+    "spine": "∀(Logos.Agency.Subject).?(Prop).…"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.Means",
+   "Logos.Agency.Subject",
+   "Logos.DivinePureActuality.AlienPassiveGroundingPotency",
+   "Logos.Entity.Entity.ofGround"
+  ]
+ },
+ "Logos.DivinePureActuality.ofGround_no_alien_grounding_potency.match_1_1": {
+  "kind": "def",
+  "goal": "motive h✝",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(_)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Exists.casesOn"
+   }
+  ],
+  "valueHeads": [
+   "Exists.casesOn"
+  ],
+  "boundSorts": [
+   "->"
+  ],
+  "binderFree": [
+   "motive",
+   "_",
+   "h_1"
+  ],
+  "hypothesis": [
+   {
+    "binder": "_",
+    "head": "Logos.DivinePureActuality.AlienPassiveGroundingPotency",
+    "spine": "Logos.DivinePureActuality.AlienPassiveGroundingPotency/1(Logos.Entity.Entity.ofGround)"
+   },
+   {
+    "binder": "h_1",
+    "head": "∀",
+    "spine": "∀(Logos.Entity.Entity).∀(Logos.CanonicalAseity.ExternalGrounding).…"
+   }
+  ],
+  "refs": [
+   "Logos.CanonicalAseity.ExternalGrounding",
+   "Logos.DivinePureActuality.AlienPassiveGroundingPotency",
+   "Logos.DivinePureActuality.TrinitarianProcession",
+   "Logos.Entity.Entity",
    "Logos.Entity.Entity.ofGround"
   ]
  },
@@ -116654,6 +117867,74 @@
    "Logos.Semantics.Form",
    "Logos.Semantics.Form.and",
    "Logos.Semantics.Form.not"
+  ]
+ },
+ "Logos.Entity.ofAtom_ne_ofGround": {
+  "kind": "thm",
+  "goal": "Logos.Entity.Entity.ofAtom n ≠ Logos.Entity.Entity.ofGround",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Ne",
+    "spine": "Ne/3(Logos.Entity.Entity, Logos.Entity.Entity.ofAtom/1(n), Logos.Entity.Entity.ofGround)"
+   }
+  ],
+  "headSyms": [
+   "Ne"
+  ],
+  "headShorts": [
+   "Ne"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Nat"
+  ],
+  "binderFree": [
+   "n"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Entity.Entity",
+   "Logos.Entity.Entity.ofAtom",
+   "Logos.Entity.Entity.ofGround"
+  ]
+ },
+ "Logos.Entity.ofGround_ne_ofAtom": {
+  "kind": "thm",
+  "goal": "Logos.Entity.Entity.ofGround ≠ Logos.Entity.Entity.ofAtom n",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Ne",
+    "spine": "Ne/3(Logos.Entity.Entity, Logos.Entity.Entity.ofGround, Logos.Entity.Entity.ofAtom/1(n))"
+   }
+  ],
+  "headSyms": [
+   "Ne"
+  ],
+  "headShorts": [
+   "Ne"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Nat"
+  ],
+  "binderFree": [
+   "n"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Entity.Entity",
+   "Logos.Entity.Entity.ofAtom",
+   "Logos.Entity.Entity.ofGround"
   ]
  },
  "Logos.Entity.sat_and": {
@@ -181102,6 +182383,1209 @@
    "Logos.Initiation.IsTransfer"
   ]
  },
+ "Logos.LibertarianPersonhood.GammaWorld.actual.elim": {
+  "kind": "def",
+  "goal": "motive t",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(t)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.LibertarianPersonhood.GammaWorld.ctorElim"
+   }
+  ],
+  "valueHeads": [
+   "Logos.LibertarianPersonhood.GammaWorld.ctorElim"
+  ],
+  "boundSorts": [
+   "∀",
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "motive"
+  ],
+  "binderFree": [
+   "motive",
+   "t",
+   "h",
+   "actual"
+  ],
+  "hypothesis": [
+   {
+    "binder": "h",
+    "head": "Eq",
+    "spine": "=(Nat , Logos.LibertarianPersonhood.GammaWorld.ctorIdx/1(…))"
+   }
+  ],
+  "refs": [
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.actual",
+   "Logos.LibertarianPersonhood.GammaWorld.ctorElim",
+   "Logos.LibertarianPersonhood.GammaWorld.ctorIdx"
+  ]
+ },
+ "Logos.LibertarianPersonhood.GammaWorld.actual.sizeOf_spec": {
+  "kind": "thm",
+  "goal": "sizeOf Logos.LibertarianPersonhood.GammaWorld.actual = 1",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Eq",
+    "spine": "=(Nat , SizeOf.sizeOf/3(Logos.LibertarianPersonhood.GammaWorld, Logos.LibertarianPersonhood.GammaWorld._sizeOf_inst, Logos.LibertarianPersonhood.GammaWorld.actual))"
+   }
+  ],
+  "headSyms": [
+   "Eq"
+  ],
+  "headShorts": [
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld._sizeOf_inst",
+   "Logos.LibertarianPersonhood.GammaWorld.actual"
+  ]
+ },
+ "Logos.LibertarianPersonhood.GammaWorld.alternative.elim": {
+  "kind": "def",
+  "goal": "motive t",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(t)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.LibertarianPersonhood.GammaWorld.ctorElim"
+   }
+  ],
+  "valueHeads": [
+   "Logos.LibertarianPersonhood.GammaWorld.ctorElim"
+  ],
+  "boundSorts": [
+   "∀",
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "motive"
+  ],
+  "binderFree": [
+   "motive",
+   "t",
+   "h",
+   "alternative"
+  ],
+  "hypothesis": [
+   {
+    "binder": "h",
+    "head": "Eq",
+    "spine": "=(Nat , Logos.LibertarianPersonhood.GammaWorld.ctorIdx/1(…))"
+   }
+  ],
+  "refs": [
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.alternative",
+   "Logos.LibertarianPersonhood.GammaWorld.ctorElim",
+   "Logos.LibertarianPersonhood.GammaWorld.ctorIdx"
+  ]
+ },
+ "Logos.LibertarianPersonhood.GammaWorld.alternative.sizeOf_spec": {
+  "kind": "thm",
+  "goal": "sizeOf Logos.LibertarianPersonhood.GammaWorld.alternative = 1",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Eq",
+    "spine": "=(Nat , SizeOf.sizeOf/3(Logos.LibertarianPersonhood.GammaWorld, Logos.LibertarianPersonhood.GammaWorld._sizeOf_inst, Logos.LibertarianPersonhood.GammaWorld.alternative))"
+   }
+  ],
+  "headSyms": [
+   "Eq"
+  ],
+  "headShorts": [
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld._sizeOf_inst",
+   "Logos.LibertarianPersonhood.GammaWorld.alternative"
+  ]
+ },
+ "Logos.LibertarianPersonhood.GammaWorld.casesOn": {
+  "kind": "def",
+  "goal": "motive t",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(t)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.LibertarianPersonhood.GammaWorld.rec"
+   }
+  ],
+  "valueHeads": [
+   "Logos.LibertarianPersonhood.GammaWorld.rec"
+  ],
+  "boundSorts": [
+   "∀",
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "motive",
+   "motive"
+  ],
+  "binderFree": [
+   "motive",
+   "t",
+   "actual",
+   "alternative"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.actual",
+   "Logos.LibertarianPersonhood.GammaWorld.alternative",
+   "Logos.LibertarianPersonhood.GammaWorld.rec"
+  ]
+ },
+ "Logos.LibertarianPersonhood.GammaWorld.ctorElim": {
+  "kind": "def",
+  "goal": "motive t",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(t)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.LibertarianPersonhood.GammaWorld.casesOn"
+   }
+  ],
+  "valueHeads": [
+   "Logos.LibertarianPersonhood.GammaWorld.casesOn"
+  ],
+  "boundSorts": [
+   "∀",
+   "Nat",
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.ctorElimType"
+  ],
+  "binderFree": [
+   "motive",
+   "ctorIdx",
+   "t",
+   "h",
+   "k"
+  ],
+  "hypothesis": [
+   {
+    "binder": "h",
+    "head": "Eq",
+    "spine": "=(Nat , ctorIdx)"
+   }
+  ],
+  "refs": [
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.actual",
+   "Logos.LibertarianPersonhood.GammaWorld.alternative",
+   "Logos.LibertarianPersonhood.GammaWorld.casesOn",
+   "Logos.LibertarianPersonhood.GammaWorld.ctorElimType",
+   "Logos.LibertarianPersonhood.GammaWorld.ctorIdx"
+  ]
+ },
+ "Logos.LibertarianPersonhood.GammaWorld.ctorElimType": {
+  "kind": "def",
+  "goal": "Sort (max 1 u)",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "(sort)",
+    "spine": "(sort)"
+   }
+  ],
+  "headSyms": [
+   "(sort)"
+  ],
+  "headShorts": [
+   "(sort)"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "cond"
+   }
+  ],
+  "valueHeads": [
+   "cond"
+  ],
+  "boundSorts": [
+   "∀",
+   "Nat"
+  ],
+  "binderFree": [
+   "motive",
+   "ctorIdx"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.actual",
+   "Logos.LibertarianPersonhood.GammaWorld.alternative"
+  ]
+ },
+ "Logos.LibertarianPersonhood.GammaWorld.ctorIdx": {
+  "kind": "def",
+  "goal": "Nat",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Nat",
+    "spine": "Nat"
+   }
+  ],
+  "headSyms": [
+   "Nat"
+  ],
+  "headShorts": [
+   "Nat"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.LibertarianPersonhood.GammaWorld.casesOn"
+   }
+  ],
+  "valueHeads": [
+   "Logos.LibertarianPersonhood.GammaWorld.casesOn"
+  ],
+  "boundSorts": [
+   "Logos.LibertarianPersonhood.GammaWorld"
+  ],
+  "binderFree": [
+   "_"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.casesOn"
+  ]
+ },
+ "Logos.LibertarianPersonhood.GammaWorld.noConfusion": {
+  "kind": "def",
+  "goal": "Logos.LibertarianPersonhood.GammaWorld.noConfusionType P x y",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.LibertarianPersonhood.GammaWorld.noConfusionType",
+    "spine": "Logos.LibertarianPersonhood.GammaWorld.noConfusionType/3(P, x, y)"
+   }
+  ],
+  "headSyms": [
+   "Logos.LibertarianPersonhood.GammaWorld.noConfusionType"
+  ],
+  "headShorts": [
+   "noConfusionType"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "noConfusionEnum"
+   }
+  ],
+  "valueHeads": [
+   "noConfusionEnum"
+  ],
+  "boundSorts": [
+   "(sort)",
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld"
+  ],
+  "binderFree": [
+   "P",
+   "x",
+   "y",
+   "h"
+  ],
+  "hypothesis": [
+   {
+    "binder": "h",
+    "head": "Eq",
+    "spine": "=(Logos.LibertarianPersonhood.GammaWorld , x)"
+   }
+  ],
+  "refs": [
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.ctorIdx",
+   "Logos.LibertarianPersonhood.GammaWorld.noConfusionType"
+  ]
+ },
+ "Logos.LibertarianPersonhood.GammaWorld.noConfusionType": {
+  "kind": "def",
+  "goal": "Sort v✝",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "(sort)",
+    "spine": "(sort)"
+   }
+  ],
+  "headSyms": [
+   "(sort)"
+  ],
+  "headShorts": [
+   "(sort)"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "noConfusionTypeEnum"
+   }
+  ],
+  "valueHeads": [
+   "noConfusionTypeEnum"
+  ],
+  "boundSorts": [
+   "(sort)",
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld"
+  ],
+  "binderFree": [
+   "P",
+   "x",
+   "y"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.ctorIdx"
+  ]
+ },
+ "Logos.LibertarianPersonhood.GammaWorld.ofNat": {
+  "kind": "def",
+  "goal": "Logos.LibertarianPersonhood.GammaWorld",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.LibertarianPersonhood.GammaWorld",
+    "spine": "Logos.LibertarianPersonhood.GammaWorld"
+   }
+  ],
+  "headSyms": [
+   "Logos.LibertarianPersonhood.GammaWorld"
+  ],
+  "headShorts": [
+   "GammaWorld"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "cond"
+   }
+  ],
+  "valueHeads": [
+   "cond"
+  ],
+  "boundSorts": [
+   "Nat"
+  ],
+  "binderFree": [
+   "_"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.actual",
+   "Logos.LibertarianPersonhood.GammaWorld.alternative"
+  ]
+ },
+ "Logos.LibertarianPersonhood.GammaWorld.ofNat_ctorIdx": {
+  "kind": "thm",
+  "goal": "Logos.LibertarianPersonhood.GammaWorld.ofNat x.ctorIdx = x",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Eq",
+    "spine": "=(Logos.LibertarianPersonhood.GammaWorld , Logos.LibertarianPersonhood.GammaWorld.ofNat/1(Logos.LibertarianPersonhood.GammaWorld.ctorIdx/1(x)))"
+   }
+  ],
+  "headSyms": [
+   "Eq"
+  ],
+  "headShorts": [
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.LibertarianPersonhood.GammaWorld"
+  ],
+  "binderFree": [
+   "x"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.ctorIdx",
+   "Logos.LibertarianPersonhood.GammaWorld.ofNat"
+  ]
+ },
+ "Logos.LibertarianPersonhood.GammaWorld.recOn": {
+  "kind": "def",
+  "goal": "motive t",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(t)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.LibertarianPersonhood.GammaWorld.rec"
+   }
+  ],
+  "valueHeads": [
+   "Logos.LibertarianPersonhood.GammaWorld.rec"
+  ],
+  "boundSorts": [
+   "∀",
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "motive",
+   "motive"
+  ],
+  "binderFree": [
+   "motive",
+   "t",
+   "actual",
+   "alternative"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.actual",
+   "Logos.LibertarianPersonhood.GammaWorld.alternative",
+   "Logos.LibertarianPersonhood.GammaWorld.rec"
+  ]
+ },
+ "Logos.LibertarianPersonhood.demonstration_occurs": {
+  "kind": "axiom",
+  "goal": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence Logos.LibertarianPersonhood.gammaSem",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence",
+    "spine": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence/2(Logos.Agency.Subject, Logos.LibertarianPersonhood.gammaSem)"
+   }
+  ],
+  "headSyms": [
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence"
+  ],
+  "headShorts": [
+   "DemonstrativeProofOccurrence"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence",
+   "Logos.LibertarianPersonhood.gammaSem"
+  ]
+ },
+ "Logos.LibertarianPersonhood.free_subject_exists_via_judgment_chain": {
+  "kind": "thm",
+  "goal": "∃ s, Logos.Choice.FreeSubject s",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.Choice.FreeSubject",
+    "spine": "Logos.Choice.FreeSubject/1(s)"
+   }
+  ],
+  "headSyms": [
+   "Logos.Choice.FreeSubject"
+  ],
+  "headShorts": [
+   "FreeSubject"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Choice.FreeSubject"
+  ]
+ },
+ "Logos.LibertarianPersonhood.free_will_exists_via_judgment_chain": {
+  "kind": "thm",
+  "goal": "∃ s, Logos.Choice.FreeWill s",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.Choice.FreeWill",
+    "spine": "Logos.Choice.FreeWill/1(s)"
+   }
+  ],
+  "headSyms": [
+   "Logos.Choice.FreeWill"
+  ],
+  "headShorts": [
+   "FreeWill"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Choice.FreeWill"
+  ]
+ },
+ "Logos.LibertarianPersonhood.gammaSem": {
+  "kind": "def",
+  "goal": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics Logos.Agency.Subject",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics",
+    "spine": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics/1(Logos.Agency.Subject)"
+   }
+  ],
+  "headSyms": [
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics"
+  ],
+  "headShorts": [
+   "Semantics"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.mk"
+   }
+  ],
+  "valueHeads": [
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.mk"
+  ],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Means",
+   "Logos.Agency.Subject",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.mk",
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.actual",
+   "Logos.LibertarianPersonhood.gammaSem._proof_1"
+  ]
+ },
+ "Logos.LibertarianPersonhood.gammaSem.match_1": {
+  "kind": "def",
+  "goal": "motive h✝",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(_)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "And.casesOn"
+   }
+  ],
+  "valueHeads": [
+   "And.casesOn"
+  ],
+  "boundSorts": [
+   "Logos.Agency.Subject",
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Prop",
+   "->"
+  ],
+  "binderFree": [
+   "s",
+   "w",
+   "x",
+   "motive",
+   "_",
+   "h_1"
+  ],
+  "hypothesis": [
+   {
+    "binder": "_",
+    "head": "And",
+    "spine": "&(&(… , …) , &(… , …))"
+   },
+   {
+    "binder": "h_1",
+    "head": "∀",
+    "spine": "∀(And).∀(And).…"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.Means",
+   "Logos.Agency.Subject",
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.actual"
+  ]
+ },
+ "Logos.LibertarianPersonhood.gamma_freeSubject_is_choice": {
+  "kind": "thm",
+  "goal": "Logos.Choice.FreeSubject s",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.Choice.FreeSubject",
+    "spine": "Logos.Choice.FreeSubject/1(s)"
+   }
+  ],
+  "headSyms": [
+   "Logos.Choice.FreeSubject"
+  ],
+  "headShorts": [
+   "FreeSubject"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.Agency.Subject"
+  ],
+  "binderFree": [
+   "s",
+   "h"
+  ],
+  "hypothesis": [
+   {
+    "binder": "h",
+    "head": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.FreeSubject",
+    "spine": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.FreeSubject/3(Logos.Agency.Subject, Logos.LibertarianPersonhood.gammaSem, s)"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Choice.FreeSubject",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.FreeSubject",
+   "Logos.LibertarianPersonhood.gammaSem"
+  ]
+ },
+ "Logos.LibertarianPersonhood.gamma_freeSubject_is_choice.match_1_1": {
+  "kind": "def",
+  "goal": "motive h✝",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(_)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Exists.casesOn"
+   }
+  ],
+  "valueHeads": [
+   "Exists.casesOn"
+  ],
+  "boundSorts": [
+   "Logos.Agency.Subject",
+   "->"
+  ],
+  "binderFree": [
+   "s",
+   "motive",
+   "_",
+   "h_1"
+  ],
+  "hypothesis": [
+   {
+    "binder": "_",
+    "head": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.FreeSubject",
+    "spine": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.FreeSubject/3(Logos.Agency.Subject, Logos.LibertarianPersonhood.gammaSem, s)"
+   },
+   {
+    "binder": "h_1",
+    "head": "∀",
+    "spine": "∀(Prop).∀(Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.LibertarianFreeChoiceAt).…"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.FreeSubject",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.LibertarianFreeChoiceAt",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.actualWorld",
+   "Logos.LibertarianPersonhood.gammaSem"
+  ]
+ },
+ "Logos.LibertarianPersonhood.instDecidableEqGammaWorld": {
+  "kind": "def",
+  "goal": "DecidableEq Logos.LibertarianPersonhood.GammaWorld",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "DecidableEq",
+    "spine": "DecidableEq/1(Logos.LibertarianPersonhood.GammaWorld)"
+   }
+  ],
+  "headSyms": [
+   "DecidableEq"
+  ],
+  "headShorts": [
+   "DecidableEq"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "dite"
+   }
+  ],
+  "valueHeads": [
+   "dite"
+  ],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.LibertarianPersonhood.GammaWorld",
+   "Logos.LibertarianPersonhood.GammaWorld.ctorIdx",
+   "Logos.LibertarianPersonhood.instDecidableEqGammaWorld._proof_1",
+   "Logos.LibertarianPersonhood.instDecidableEqGammaWorld._proof_2"
+  ]
+ },
+ "Logos.LibertarianPersonhood.judgment_source_not_fixed_by_prior_state": {
+  "kind": "thm",
+  "goal": "∃ s p J a, Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UltimateInternalSource J.toDeterminationSystem a ∧ J.IsActOf s a ∧ ¬Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationReceivedFromPriorState J a",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Prop",
+     "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain",
+     "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.Node"
+    ],
+    "head": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UltimateInternalSource",
+    "spine": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UltimateInternalSource/2(Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.toDeterminationSystem/6(Logos.Agency.Subject, Logos.LibertarianPersonhood.gammaSem, s, Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.actualWorld/2(Logos.Agency.Subject, Logos.LibertarianPersonhood.gammaSem), p, J), a)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Prop",
+     "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain",
+     "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.Node"
+    ],
+    "head": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.IsActOf",
+    "spine": "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.IsActOf/8(Logos.Agency.Subject, Logos.LibertarianPersonhood.gammaSem, s, Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.actualWorld/2(Logos.Agency.Subject, Logos.LibertarianPersonhood.gammaSem), p, J, …)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Prop",
+     "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain",
+     "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.Node"
+    ],
+    "head": "Not",
+    "spine": "!(Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationReceivedFromPriorState/7(Logos.Agency.Subject, Logos.LibertarianPersonhood.gammaSem, s, Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.actualWorld/2(Logos.Agency.Subject, Logos.LibertarianPersonhood.gammaSem), p, J, …))"
+   }
+  ],
+  "headSyms": [
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UltimateInternalSource",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.IsActOf",
+   "Not"
+  ],
+  "headShorts": [
+   "IsActOf",
+   "Not",
+   "UltimateInternalSource"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationReceivedFromPriorState",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.Node",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.IsActOf",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.toDeterminationSystem",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.actualWorld",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UltimateInternalSource",
+   "Logos.LibertarianPersonhood.gammaSem"
+  ]
+ },
+ "Logos.LibertarianPersonhood.judgment_source_not_fixed_by_prior_state.match_1_1": {
+  "kind": "def",
+  "goal": "let inst := Logos.LibertarianPersonhood.demonstration_occurs.instanceOfJudgment;\nlet J := inst.chain;\n∀ (motive : (∃ a, Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UltimateInternalSource J.toDeterminationSystem a ∧ (a = J.judgmentActNode ∨ Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminesAncestrally J.Determines a J.judgmentActNode)) → Prop) (x : ∃ a, Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UltimateInternalSource J.toDeterminationSystem a ∧ (a = J.judgmentActNode ∨ Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminesAncestrally J.Determines a J.judgmentActNode)), (∀ (a : J.Node) (haSource : Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UltimateInternalSource J.toDeterminationSystem a) (haReachAct : a = J.judgmentActNode ∨ Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminesAncestrally J.Determines a J.judgmentActNode), motive ⋯) → motive x",
+  "goalTag": "app",
+  "quant": "forall",
+  "conjuncts": [
+   {
+    "quant": "forall",
+    "sorts": [
+     "->"
+    ],
+    "head": "->",
+    "spine": "->(?(Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.Node).&(Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UltimateInternalSource/2(…, …) , |(… , …)) , ∀(∀).motive/1(#1))"
+   }
+  ],
+  "headSyms": [
+   "->"
+  ],
+  "headShorts": [
+   "->"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Exists.casesOn"
+   }
+  ],
+  "valueHeads": [
+   "Exists.casesOn"
+  ],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DemonstrativeProofOccurrence.instanceOfJudgment",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.Determines",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminationSystem.Node",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.DeterminesAncestrally",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.judgmentActNode",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.JudgmentDeterminationChain.toDeterminationSystem",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.chain",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.proposition",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.ProofInstance.subject",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.Semantics.actualWorld",
+   "Logos.CompleteLibertarianFreedomArgument.FinalNonCircularClosure.UltimateInternalSource",
+   "Logos.LibertarianPersonhood.demonstration_occurs",
+   "Logos.LibertarianPersonhood.gammaSem"
+  ]
+ },
+ "Logos.LibertarianPersonhood.person_exists_via_judgment_chain": {
+  "kind": "thm",
+  "goal": "∃ s, Logos.Person.Person s",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.Person.Person",
+    "spine": "Logos.Person.Person/1(s)"
+   }
+  ],
+  "headSyms": [
+   "Logos.Person.Person"
+  ],
+  "headShorts": [
+   "Person"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Person.Person"
+  ]
+ },
+ "Logos.LibertarianPersonhood.person_exists_via_judgment_chain.match_1_1": {
+  "kind": "def",
+  "goal": "motive x✝",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(_)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Exists.casesOn"
+   }
+  ],
+  "valueHeads": [
+   "Exists.casesOn"
+  ],
+  "boundSorts": [
+   "->"
+  ],
+  "binderFree": [
+   "motive",
+   "_",
+   "h_1"
+  ],
+  "hypothesis": [
+   {
+    "binder": "_",
+    "head": "Exists",
+    "spine": "?(Logos.Agency.Subject).Logos.Choice.FreeSubject/1(…)"
+   },
+   {
+    "binder": "h_1",
+    "head": "∀",
+    "spine": "∀(Logos.Agency.Subject).∀(Logos.Choice.FreeSubject).…"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Choice.FreeSubject"
+  ]
+ },
+ "Logos.LibertarianPersonhood.person_grounds_right_wrong_via_judgment_chain": {
+  "kind": "thm",
+  "goal": "∃ s, Logos.Person.Person s ∧ Logos.PersonalNormativeGround.GroundsRightWrong s",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.Person.Person",
+    "spine": "Logos.Person.Person/1(s)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.PersonalNormativeGround.GroundsRightWrong",
+    "spine": "Logos.PersonalNormativeGround.GroundsRightWrong/1(s)"
+   }
+  ],
+  "headSyms": [
+   "Logos.Person.Person",
+   "Logos.PersonalNormativeGround.GroundsRightWrong"
+  ],
+  "headShorts": [
+   "GroundsRightWrong",
+   "Person"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Person.Person",
+   "Logos.PersonalNormativeGround.GroundsRightWrong"
+  ]
+ },
+ "Logos.LibertarianPersonhood.person_grounds_right_wrong_via_judgment_chain.match_1_1": {
+  "kind": "def",
+  "goal": "motive x✝",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(_)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Exists.casesOn"
+   }
+  ],
+  "valueHeads": [
+   "Exists.casesOn"
+  ],
+  "boundSorts": [
+   "->"
+  ],
+  "binderFree": [
+   "motive",
+   "_",
+   "h_1"
+  ],
+  "hypothesis": [
+   {
+    "binder": "_",
+    "head": "Exists",
+    "spine": "?(Logos.Agency.Subject).Logos.Choice.FreeSubject/1(…)"
+   },
+   {
+    "binder": "h_1",
+    "head": "∀",
+    "spine": "∀(Logos.Agency.Subject).∀(Logos.Choice.FreeSubject).…"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Choice.FreeSubject"
+  ]
+ },
  "Logos.Love.Lovable": {
   "kind": "def",
   "goal": "Prop",
@@ -198396,6 +200880,48 @@
    "Logos.Entity.EntityOf"
   ]
  },
+ "Logos.NecessaryKindAudit.necessary_kind_subject_has_maximal_capacity": {
+  "kind": "thm",
+  "goal": "Logos.FoundationalOmnipresence.MaximalCapacity (Logos.Entity.EntityOf s)",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.FoundationalOmnipresence.MaximalCapacity",
+    "spine": "Logos.FoundationalOmnipresence.MaximalCapacity/1(Logos.Entity.EntityOf/1(s))"
+   }
+  ],
+  "headSyms": [
+   "Logos.FoundationalOmnipresence.MaximalCapacity"
+  ],
+  "headShorts": [
+   "MaximalCapacity"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.Agency.Subject"
+  ],
+  "binderFree": [
+   "s",
+   "hKind"
+  ],
+  "hypothesis": [
+   {
+    "binder": "hKind",
+    "head": "Logos.Agency.NecessarySubjectKind",
+    "spine": "Logos.Agency.NecessarySubjectKind/1(s)"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.NecessarySubjectKind",
+   "Logos.Agency.Subject",
+   "Logos.Entity.EntityOf",
+   "Logos.FoundationalOmnipresence.MaximalCapacity"
+  ]
+ },
  "Logos.NecessaryKindAudit.necessary_kind_subject_is_gapless_operator": {
   "kind": "thm",
   "goal": "Logos.DivineOmnipotence.GaplessOperate (Logos.TheologicalModalHardening.UniversalFrame Logos.Semantics.World) Logos.DivineOmnipotence.OperatesAt (Logos.Entity.EntityOf s)",
@@ -198482,48 +201008,6 @@
    "Logos.Agency.Subject",
    "Logos.DivineSimplicity.TranscendentGround",
    "Logos.Entity.EntityOf"
-  ]
- },
- "Logos.NecessaryKindAudit.necessary_kind_subject_lacks_maximal_capacity": {
-  "kind": "thm",
-  "goal": "¬Logos.FoundationalOmnipresence.MaximalCapacity (Logos.Entity.EntityOf s)",
-  "goalTag": "not",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "Not",
-    "spine": "!(Logos.FoundationalOmnipresence.MaximalCapacity/1(Logos.Entity.EntityOf/1(s)))"
-   }
-  ],
-  "headSyms": [
-   "Not"
-  ],
-  "headShorts": [
-   "Not"
-  ],
-  "valueConjuncts": [],
-  "valueHeads": [],
-  "boundSorts": [
-   "Logos.Agency.Subject"
-  ],
-  "binderFree": [
-   "s",
-   "_hKind"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_hKind",
-    "head": "Logos.Agency.NecessarySubjectKind",
-    "spine": "Logos.Agency.NecessarySubjectKind/1(s)"
-   }
-  ],
-  "refs": [
-   "Logos.Agency.NecessarySubjectKind",
-   "Logos.Agency.Subject",
-   "Logos.Entity.EntityOf",
-   "Logos.FoundationalOmnipresence.MaximalCapacity"
   ]
  },
  "Logos.NecessaryKindAudit.necessary_realm_is_two_genera": {
@@ -198633,6 +201117,40 @@
    "Logos.Modal.NecessaryEntity"
   ]
  },
+ "Logos.NecessaryKindAudit.subject_has_passive_grounding_potency": {
+  "kind": "thm",
+  "goal": "Logos.DivinePureActuality.PassiveGroundingPotency (Logos.Entity.EntityOf s)",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.DivinePureActuality.PassiveGroundingPotency",
+    "spine": "Logos.DivinePureActuality.PassiveGroundingPotency/1(Logos.Entity.EntityOf/1(s))"
+   }
+  ],
+  "headSyms": [
+   "Logos.DivinePureActuality.PassiveGroundingPotency"
+  ],
+  "headShorts": [
+   "PassiveGroundingPotency"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.Agency.Subject"
+  ],
+  "binderFree": [
+   "s"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.DivinePureActuality.PassiveGroundingPotency",
+   "Logos.Entity.EntityOf"
+  ]
+ },
  "Logos.NecessaryKindAudit.the_ground_is_not_the_only_necessary_being": {
   "kind": "thm",
   "goal": "¬∀ (Q : Logos.Entity.Entity → Prop), Q Logos.Entity.Entity.ofGround → ∀ (e : Logos.Entity.Entity), Logos.Modal.NecessaryEntity e → Q e",
@@ -198665,7 +201183,7 @@
  },
  "Logos.NecessaryKindAudit.the_second_necessary_being_profile": {
   "kind": "thm",
-  "goal": "Logos.Modal.NecessaryEntity (Logos.Entity.EntityOf s) ∧ Logos.DivineOmnipotence.GaplessOperate (Logos.TheologicalModalHardening.UniversalFrame Logos.Semantics.World) Logos.DivineOmnipotence.OperatesAt (Logos.Entity.EntityOf s) ∧ ¬Logos.DivineSimplicity.TranscendentGround (Logos.Entity.EntityOf s) ∧ ¬Logos.FoundationalOmnipresence.MaximalCapacity (Logos.Entity.EntityOf s) ∧ ¬Logos.DivinePureActuality.DivinePureActuality (Logos.Entity.EntityOf s)",
+  "goal": "Logos.Modal.NecessaryEntity (Logos.Entity.EntityOf s) ∧ Logos.DivineOmnipotence.GaplessOperate (Logos.TheologicalModalHardening.UniversalFrame Logos.Semantics.World) Logos.DivineOmnipotence.OperatesAt (Logos.Entity.EntityOf s) ∧ ¬Logos.DivineSimplicity.TranscendentGround (Logos.Entity.EntityOf s) ∧ Logos.FoundationalOmnipresence.MaximalCapacity (Logos.Entity.EntityOf s) ∧ ¬Logos.DivinePureActuality.DivinePureActuality (Logos.Entity.EntityOf s)",
   "goalTag": "app",
   "quant": "plain",
   "conjuncts": [
@@ -198690,8 +201208,8 @@
    {
     "quant": "plain",
     "sorts": [],
-    "head": "Not",
-    "spine": "!(Logos.FoundationalOmnipresence.MaximalCapacity/1(Logos.Entity.EntityOf/1(s)))"
+    "head": "Logos.FoundationalOmnipresence.MaximalCapacity",
+    "spine": "Logos.FoundationalOmnipresence.MaximalCapacity/1(Logos.Entity.EntityOf/1(s))"
    },
    {
     "quant": "plain",
@@ -198704,11 +201222,12 @@
    "Logos.Modal.NecessaryEntity",
    "Logos.DivineOmnipotence.GaplessOperate",
    "Not",
-   "Not",
+   "Logos.FoundationalOmnipresence.MaximalCapacity",
    "Not"
   ],
   "headShorts": [
    "GaplessOperate",
+   "MaximalCapacity",
    "NecessaryEntity",
    "Not"
   ],
@@ -230906,6 +233425,85 @@
   ],
   "refs": []
  },
+ "Logos.PersonalNormativeGround.ofGround_not_generic_grounds_right_wrong": {
+  "kind": "thm",
+  "goal": "¬Logos.PersonalNormativeGround.GenericGroundsRightWrong Logos.Entity.Entity.ofGround",
+  "goalTag": "not",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Not",
+    "spine": "!(Logos.PersonalNormativeGround.GenericGroundsRightWrong/1(Logos.Entity.Entity.ofGround))"
+   }
+  ],
+  "headSyms": [
+   "Not"
+  ],
+  "headShorts": [
+   "Not"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Entity.Entity.ofGround",
+   "Logos.PersonalNormativeGround.GenericGroundsRightWrong"
+  ]
+ },
+ "Logos.PersonalNormativeGround.ofGround_not_generic_grounds_right_wrong.match_1_1": {
+  "kind": "def",
+  "goal": "motive x✝",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(_)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "And.casesOn"
+   }
+  ],
+  "valueHeads": [
+   "And.casesOn"
+  ],
+  "boundSorts": [
+   "->"
+  ],
+  "binderFree": [
+   "motive",
+   "_",
+   "h_1"
+  ],
+  "hypothesis": [
+   {
+    "binder": "_",
+    "head": "And",
+    "spine": "&(True , False)"
+   },
+   {
+    "binder": "h_1",
+    "head": "->",
+    "spine": "->(True , ∀(False).…)"
+   }
+  ],
+  "refs": []
+ },
  "Logos.PersonalNormativeGround.person_exists_implies_global_grounded_polarity": {
   "kind": "thm",
   "goal": "Logos.PersonalNormativeGround.GlobalGroundedNormativePolarity",
@@ -239933,58 +242531,126 @@
  },
  "Logos.Precedence.ofGround_sole_precedes_right_wrong": {
   "kind": "thm",
-  "goal": "e = Logos.Entity.Entity.ofGround",
-  "goalTag": "app",
-  "quant": "plain",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ ∀ (e : Logos.Entity.Entity), Logos.Precedence.PrecedesRightWrong e → e = Logos.Entity.Entity.ofGround ∨ e = Logos.Entity.EntityOf a ∨ e = Logos.Entity.EntityOf b ∨ e = Logos.Entity.EntityOf c",
+  "goalTag": "exists",
+  "quant": "exists",
   "conjuncts": [
    {
-    "quant": "plain",
-    "sorts": [],
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
     "head": "Eq",
-    "spine": "=(Logos.Entity.Entity , e)"
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.Precedence.PrecedesRightWrong/1(e) , |(=(Logos.Entity.Entity , e) , |(=(… , …) , |(… , …))))"
    }
   ],
   "headSyms": [
-   "Eq"
+   "Eq",
+   "Eq",
+   "Eq",
+   "->"
   ],
   "headShorts": [
+   "->",
    "Eq"
   ],
   "valueConjuncts": [],
   "valueHeads": [],
-  "boundSorts": [
-   "Logos.Entity.Entity"
-  ],
-  "binderFree": [
-   "e",
-   "_"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "Logos.Precedence.PrecedesRightWrong",
-    "spine": "Logos.Precedence.PrecedesRightWrong/1(e)"
-   }
-  ],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
   "refs": [
+   "Logos.Agency.Subject",
    "Logos.Entity.Entity",
    "Logos.Entity.Entity.ofGround",
-   "Logos.Precedence.PrecedesRightWrong"
+   "Logos.Entity.EntityOf",
+   "Logos.Precedence.PrecedesRightWrong",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ]
  },
  "Logos.Precedence.precedence_identifies_the_ground_where_stage_invariance_does_not": {
   "kind": "thm",
-  "goal": "(∀ (e : Logos.Entity.Entity), Logos.Precedence.PrecedesRightWrong e → e = Logos.Entity.Entity.ofGround) ∧ ¬∀ (e : Logos.Entity.Entity), Logos.DivineImmutability.StageInvariance e → e = Logos.Entity.Entity.ofGround",
+  "goal": "(∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ ∀ (e : Logos.Entity.Entity), Logos.Precedence.PrecedesRightWrong e → e = Logos.Entity.Entity.ofGround ∨ e = Logos.Entity.EntityOf a ∨ e = Logos.Entity.EntityOf b ∨ e = Logos.Entity.EntityOf c) ∧ ¬∀ (e : Logos.Entity.Entity), Logos.DivineImmutability.StageInvariance e → e = Logos.Entity.Entity.ofGround",
   "goalTag": "app",
   "quant": "mixed",
   "conjuncts": [
    {
-    "quant": "forall",
+    "quant": "exists",
     "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
      "Logos.Entity.Entity"
     ],
     "head": "->",
-    "spine": "->(Logos.Precedence.PrecedesRightWrong/1(e) , =(Logos.Entity.Entity , e))"
+    "spine": "->(Logos.Precedence.PrecedesRightWrong/1(e) , |(=(Logos.Entity.Entity , e) , |(=(… , …) , |(… , …))))"
    },
    {
     "quant": "plain",
@@ -239994,11 +242660,15 @@
    }
   ],
   "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
    "->",
    "Not"
   ],
   "headShorts": [
    "->",
+   "Eq",
    "Not"
   ],
   "valueConjuncts": [],
@@ -240007,10 +242677,17 @@
   "binderFree": [],
   "hypothesis": [],
   "refs": [
+   "Logos.Agency.Subject",
    "Logos.DivineImmutability.StageInvariance",
    "Logos.Entity.Entity",
    "Logos.Entity.Entity.ofGround",
-   "Logos.Precedence.PrecedesRightWrong"
+   "Logos.Entity.EntityOf",
+   "Logos.Precedence.PrecedesRightWrong",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ]
  },
  "Logos.Precedence.rightWrongDistinction_is_world_invariant": {
@@ -259977,39 +262654,272 @@
    "Logos.Value.InterpersonalBearing.harmful"
   ]
  },
- "Logos.SemanticFinitude.GroundTranscendence": {
-  "kind": "axiom",
-  "goal": "∃ p, ¬Logos.Agency.Means s p",
-  "goalTag": "exists",
-  "quant": "exists",
+ "Logos.SemanticFinitude.CanonicalAseityModuloPersons": {
+  "kind": "def",
+  "goal": "Prop",
+  "goalTag": "app",
+  "quant": "plain",
   "conjuncts": [
    {
-    "quant": "exists",
-    "sorts": [
-     "Prop"
-    ],
-    "head": "Not",
-    "spine": "!(Logos.Agency.Means/2(s, p))"
+    "quant": "plain",
+    "sorts": [],
+    "head": "Prop",
+    "spine": "Prop"
    }
   ],
   "headSyms": [
-   "Not"
+   "Prop"
   ],
   "headShorts": [
-   "Not"
+   "Prop"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "forall",
+    "head": "->"
+   }
+  ],
+  "valueHeads": [
+   "->"
+  ],
+  "boundSorts": [
+   "Logos.Entity.Entity",
+   "Logos.Agency.Subject",
+   "Logos.Agency.Subject",
+   "Logos.Agency.Subject"
+  ],
+  "binderFree": [
+   "e",
+   "a",
+   "b",
+   "c"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.CanonicalAseity.ExternalGrounding",
+   "Logos.Entity.Entity",
+   "Logos.Entity.EntityOf"
+  ]
+ },
+ "Logos.SemanticFinitude.DivinePersonsTotalMeaning": {
+  "kind": "axiom",
+  "goal": "Logos.Agency.Means s p",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.Agency.Means",
+    "spine": "Logos.Agency.Means/2(s, p)"
+   }
+  ],
+  "headSyms": [
+   "Logos.Agency.Means"
+  ],
+  "headShorts": [
+   "Means"
   ],
   "valueConjuncts": [],
   "valueHeads": [],
   "boundSorts": [
+   "Logos.Agency.Subject",
+   "Prop"
+  ],
+  "binderFree": [
+   "s",
+   "_",
+   "p"
+  ],
+  "hypothesis": [
+   {
+    "binder": "_",
+    "head": "Logos.Agency.NecessarySubjectKind",
+    "spine": "Logos.Agency.NecessarySubjectKind/1(s)"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.Means",
+   "Logos.Agency.NecessarySubjectKind",
+   "Logos.Agency.Subject"
+  ]
+ },
+ "Logos.SemanticFinitude.DivinePureActualityModuloPersons": {
+  "kind": "def",
+  "goal": "Prop",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Prop",
+    "spine": "Prop"
+   }
+  ],
+  "headSyms": [
+   "Prop"
+  ],
+  "headShorts": [
+   "Prop"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Not"
+   },
+   {
+    "quant": "plain",
+    "head": "Logos.SemanticFinitude.CanonicalAseityModuloPersons"
+   },
+   {
+    "quant": "plain",
+    "head": "Not"
+   },
+   {
+    "quant": "plain",
+    "head": "Not"
+   },
+   {
+    "quant": "plain",
+    "head": "Logos.FoundationalOmnipresence.UniversalModalGround"
+   }
+  ],
+  "valueHeads": [
+   "Not",
+   "Logos.SemanticFinitude.CanonicalAseityModuloPersons",
+   "Not",
+   "Not",
+   "Logos.FoundationalOmnipresence.UniversalModalGround"
+  ],
+  "boundSorts": [
+   "Logos.Entity.Entity",
+   "Logos.Agency.Subject",
+   "Logos.Agency.Subject",
    "Logos.Agency.Subject"
   ],
   "binderFree": [
-   "s"
+   "e",
+   "a",
+   "b",
+   "c"
   ],
   "hypothesis": [],
   "refs": [
-   "Logos.Agency.Means",
+   "Logos.Agency.Subject",
+   "Logos.DivinePureActuality.PassiveExistentialPotency",
+   "Logos.DivinePureActuality.PassiveIntentionalPotency",
+   "Logos.DivinePureActuality.PassiveTransitionPotency",
+   "Logos.Entity.Entity",
+   "Logos.FoundationalOmnipresence.UniversalModalGround",
+   "Logos.SemanticFinitude.CanonicalAseityModuloPersons"
+  ]
+ },
+ "Logos.SemanticFinitude.DivineSimplicityModuloPersons": {
+  "kind": "def",
+  "goal": "Prop",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Prop",
+    "spine": "Prop"
+   }
+  ],
+  "headSyms": [
+   "Prop"
+  ],
+  "headShorts": [
+   "Prop"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.SemanticFinitude.CanonicalAseityModuloPersons"
+   },
+   {
+    "quant": "plain",
+    "head": "Not"
+   },
+   {
+    "quant": "plain",
+    "head": "Logos.DivineSimplicity.UndividedMeaning"
+   }
+  ],
+  "valueHeads": [
+   "Logos.SemanticFinitude.CanonicalAseityModuloPersons",
+   "Not",
+   "Logos.DivineSimplicity.UndividedMeaning"
+  ],
+  "boundSorts": [
+   "Logos.Entity.Entity",
+   "Logos.Agency.Subject",
+   "Logos.Agency.Subject",
    "Logos.Agency.Subject"
+  ],
+  "binderFree": [
+   "e",
+   "a",
+   "b",
+   "c"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.DivineSimplicity.HasInternalComponent",
+   "Logos.DivineSimplicity.UndividedMeaning",
+   "Logos.Entity.Entity",
+   "Logos.SemanticFinitude.CanonicalAseityModuloPersons"
+  ]
+ },
+ "Logos.SemanticFinitude.NonCompositeModuloPersons": {
+  "kind": "def",
+  "goal": "Prop",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Prop",
+    "spine": "Prop"
+   }
+  ],
+  "headSyms": [
+   "Prop"
+  ],
+  "headShorts": [
+   "Prop"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.SemanticFinitude.CanonicalAseityModuloPersons"
+   }
+  ],
+  "valueHeads": [
+   "Logos.SemanticFinitude.CanonicalAseityModuloPersons"
+  ],
+  "boundSorts": [
+   "Logos.Entity.Entity",
+   "Logos.Agency.Subject",
+   "Logos.Agency.Subject",
+   "Logos.Agency.Subject"
+  ],
+  "binderFree": [
+   "e",
+   "a",
+   "b",
+   "c"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Entity.Entity",
+   "Logos.SemanticFinitude.CanonicalAseityModuloPersons"
   ]
  },
  "Logos.SemanticFinitude.SemanticFinitude": {
@@ -260057,22 +262967,60 @@
  },
  "Logos.SemanticFinitude.conditional_canonical_aseity_stipulated": {
   "kind": "thm",
-  "goal": "Logos.CanonicalAseity.CanonicalAseity Logos.Entity.Entity.ofGround",
-  "goalTag": "app",
-  "quant": "plain",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ Logos.SemanticFinitude.CanonicalAseityModuloPersons Logos.Entity.Entity.ofGround a b c",
+  "goalTag": "exists",
+  "quant": "exists",
   "conjuncts": [
    {
-    "quant": "plain",
-    "sorts": [],
-    "head": "Logos.CanonicalAseity.CanonicalAseity",
-    "spine": "Logos.CanonicalAseity.CanonicalAseity/1(Logos.Entity.Entity.ofGround)"
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.SemanticFinitude.CanonicalAseityModuloPersons",
+    "spine": "Logos.SemanticFinitude.CanonicalAseityModuloPersons/4(Logos.Entity.Entity.ofGround, a, b, c)"
    }
   ],
   "headSyms": [
-   "Logos.CanonicalAseity.CanonicalAseity"
+   "Eq",
+   "Eq",
+   "Eq",
+   "Logos.SemanticFinitude.CanonicalAseityModuloPersons"
   ],
   "headShorts": [
-   "CanonicalAseity"
+   "CanonicalAseityModuloPersons",
+   "Eq"
   ],
   "valueConjuncts": [],
   "valueHeads": [],
@@ -260080,40 +263028,80 @@
   "binderFree": [],
   "hypothesis": [],
   "refs": [
-   "Logos.CanonicalAseity.CanonicalAseity",
-   "Logos.Entity.Entity.ofGround"
+   "Logos.Agency.Subject",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.SemanticFinitude.CanonicalAseityModuloPersons",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ]
  },
  "Logos.SemanticFinitude.exactly_one_universal_modal_ground_stipulated": {
   "kind": "thm",
-  "goal": "∃ g, Logos.FoundationalOmnipresence.UniversalModalGround g ∧ ∀ (g' : Logos.Entity.Entity), Logos.FoundationalOmnipresence.UniversalModalGround g' → g' = g",
-  "goalTag": "exists",
-  "quant": "exists",
+  "goal": "Logos.FoundationalOmnipresence.UniversalModalGround Logos.Entity.Entity.ofGround ∧ ∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ ∀ (g' : Logos.Entity.Entity), Logos.FoundationalOmnipresence.UniversalModalGround g' → g' = Logos.Entity.Entity.ofGround ∨ g' = Logos.Entity.EntityOf a ∨ g' = Logos.Entity.EntityOf b ∨ g' = Logos.Entity.EntityOf c",
+  "goalTag": "app",
+  "quant": "mixed",
   "conjuncts": [
    {
-    "quant": "exists",
-    "sorts": [
-     "Logos.Entity.Entity"
-    ],
+    "quant": "plain",
+    "sorts": [],
     "head": "Logos.FoundationalOmnipresence.UniversalModalGround",
-    "spine": "Logos.FoundationalOmnipresence.UniversalModalGround/1(g)"
+    "spine": "Logos.FoundationalOmnipresence.UniversalModalGround/1(Logos.Entity.Entity.ofGround)"
    },
    {
     "quant": "exists",
     "sorts": [
-     "Logos.Entity.Entity",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
      "Logos.Entity.Entity"
     ],
     "head": "->",
-    "spine": "->(Logos.FoundationalOmnipresence.UniversalModalGround/1(g') , =(Logos.Entity.Entity , g'))"
+    "spine": "->(Logos.FoundationalOmnipresence.UniversalModalGround/1(g') , |(=(Logos.Entity.Entity , g') , |(=(… , …) , |(… , …))))"
    }
   ],
   "headSyms": [
    "Logos.FoundationalOmnipresence.UniversalModalGround",
+   "Eq",
+   "Eq",
+   "Eq",
    "->"
   ],
   "headShorts": [
    "->",
+   "Eq",
    "UniversalModalGround"
   ],
   "valueConjuncts": [],
@@ -260122,21 +263110,63 @@
   "binderFree": [],
   "hypothesis": [],
   "refs": [
+   "Logos.Agency.Subject",
    "Logos.Entity.Entity",
-   "Logos.FoundationalOmnipresence.UniversalModalGround"
+   "Logos.Entity.Entity.ofGround",
+   "Logos.Entity.EntityOf",
+   "Logos.FoundationalOmnipresence.UniversalModalGround",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ]
  },
  "Logos.SemanticFinitude.ground_is_canonically_aseitous_but_not_asietic_stipulated": {
   "kind": "thm",
-  "goal": "Logos.CanonicalAseity.CanonicalAseity Logos.Entity.Entity.ofGround ∧ ¬Logos.AsieticChoice.Asiety Logos.Entity.Entity.ofGround",
+  "goal": "(∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ Logos.SemanticFinitude.CanonicalAseityModuloPersons Logos.Entity.Entity.ofGround a b c) ∧ ¬Logos.AsieticChoice.Asiety Logos.Entity.Entity.ofGround",
   "goalTag": "app",
-  "quant": "plain",
+  "quant": "mixed",
   "conjuncts": [
    {
-    "quant": "plain",
-    "sorts": [],
-    "head": "Logos.CanonicalAseity.CanonicalAseity",
-    "spine": "Logos.CanonicalAseity.CanonicalAseity/1(Logos.Entity.Entity.ofGround)"
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.SemanticFinitude.CanonicalAseityModuloPersons",
+    "spine": "Logos.SemanticFinitude.CanonicalAseityModuloPersons/4(Logos.Entity.Entity.ofGround, a, b, c)"
    },
    {
     "quant": "plain",
@@ -260146,11 +263176,15 @@
    }
   ],
   "headSyms": [
-   "Logos.CanonicalAseity.CanonicalAseity",
+   "Eq",
+   "Eq",
+   "Eq",
+   "Logos.SemanticFinitude.CanonicalAseityModuloPersons",
    "Not"
   ],
   "headShorts": [
-   "CanonicalAseity",
+   "CanonicalAseityModuloPersons",
+   "Eq",
    "Not"
   ],
   "valueConjuncts": [],
@@ -260159,104 +263193,105 @@
   "binderFree": [],
   "hypothesis": [],
   "refs": [
+   "Logos.Agency.Subject",
    "Logos.AsieticChoice.Asiety",
-   "Logos.CanonicalAseity.CanonicalAseity",
-   "Logos.Entity.Entity.ofGround"
-  ]
- },
- "Logos.SemanticFinitude.ofGround_divine_pure_actuality_stipulated": {
-  "kind": "thm",
-  "goal": "Logos.DivinePureActuality.DivinePureActuality Logos.Entity.Entity.ofGround",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "Logos.DivinePureActuality.DivinePureActuality",
-    "spine": "Logos.DivinePureActuality.DivinePureActuality/1(Logos.Entity.Entity.ofGround)"
-   }
-  ],
-  "headSyms": [
-   "Logos.DivinePureActuality.DivinePureActuality"
-  ],
-  "headShorts": [
-   "DivinePureActuality"
-  ],
-  "valueConjuncts": [],
-  "valueHeads": [],
-  "boundSorts": [],
-  "binderFree": [],
-  "hypothesis": [],
-  "refs": [
-   "Logos.DivinePureActuality.DivinePureActuality",
-   "Logos.Entity.Entity.ofGround"
-  ]
- },
- "Logos.SemanticFinitude.ofGround_divine_simplicity_stipulated": {
-  "kind": "thm",
-  "goal": "Logos.DivineSimplicity.DivineSimplicity Logos.Entity.Entity.ofGround",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "Logos.DivineSimplicity.DivineSimplicity",
-    "spine": "Logos.DivineSimplicity.DivineSimplicity/1(Logos.Entity.Entity.ofGround)"
-   }
-  ],
-  "headSyms": [
-   "Logos.DivineSimplicity.DivineSimplicity"
-  ],
-  "headShorts": [
-   "DivineSimplicity"
-  ],
-  "valueConjuncts": [],
-  "valueHeads": [],
-  "boundSorts": [],
-  "binderFree": [],
-  "hypothesis": [],
-  "refs": [
-   "Logos.DivineSimplicity.DivineSimplicity",
-   "Logos.Entity.Entity.ofGround"
-  ]
- },
- "Logos.SemanticFinitude.ofGround_modal_aseity_conditional_stipulated": {
-  "kind": "thm",
-  "goal": "Logos.ModalPossibilityFrontier.Aseity Logos.Semantics.World Logos.Entity.Entity Logos.CanonicalAseity.CanonicalExtDepAt Logos.Entity.Entity.ofGround",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "Logos.ModalPossibilityFrontier.Aseity",
-    "spine": "Logos.ModalPossibilityFrontier.Aseity/4(Logos.Semantics.World, Logos.Entity.Entity, Logos.CanonicalAseity.CanonicalExtDepAt, Logos.Entity.Entity.ofGround)"
-   }
-  ],
-  "headSyms": [
-   "Logos.ModalPossibilityFrontier.Aseity"
-  ],
-  "headShorts": [
-   "Aseity"
-  ],
-  "valueConjuncts": [],
-  "valueHeads": [],
-  "boundSorts": [],
-  "binderFree": [],
-  "hypothesis": [],
-  "refs": [
-   "Logos.CanonicalAseity.CanonicalExtDepAt",
-   "Logos.Entity.Entity",
    "Logos.Entity.Entity.ofGround",
-   "Logos.ModalPossibilityFrontier.Aseity",
-   "Logos.Semantics.World"
+   "Logos.SemanticFinitude.CanonicalAseityModuloPersons",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ]
  },
- "Logos.SemanticFinitude.ofGround_no_grounding_potency_stipulated": {
+ "Logos.SemanticFinitude.necessary_kind_subject_canonical_aseity_catholic": {
   "kind": "thm",
-  "goal": "¬Logos.DivinePureActuality.PassiveGroundingPotency Logos.Entity.Entity.ofGround",
+  "goal": "Logos.DivinePureActuality.CanonicalAseityCatholic (Logos.Entity.EntityOf s)",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.DivinePureActuality.CanonicalAseityCatholic",
+    "spine": "Logos.DivinePureActuality.CanonicalAseityCatholic/1(Logos.Entity.EntityOf/1(s))"
+   }
+  ],
+  "headSyms": [
+   "Logos.DivinePureActuality.CanonicalAseityCatholic"
+  ],
+  "headShorts": [
+   "CanonicalAseityCatholic"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.Agency.Subject"
+  ],
+  "binderFree": [
+   "s",
+   "hKind"
+  ],
+  "hypothesis": [
+   {
+    "binder": "hKind",
+    "head": "Logos.Agency.NecessarySubjectKind",
+    "spine": "Logos.Agency.NecessarySubjectKind/1(s)"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.NecessarySubjectKind",
+   "Logos.Agency.Subject",
+   "Logos.DivinePureActuality.CanonicalAseityCatholic",
+   "Logos.Entity.EntityOf"
+  ]
+ },
+ "Logos.SemanticFinitude.necessary_kind_subject_grounding_is_trinitarian_procession": {
+  "kind": "thm",
+  "goal": "Logos.DivinePureActuality.TrinitarianProcession Logos.Entity.Entity.ofGround (Logos.Entity.EntityOf s)",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.DivinePureActuality.TrinitarianProcession",
+    "spine": "Logos.DivinePureActuality.TrinitarianProcession/2(Logos.Entity.Entity.ofGround, Logos.Entity.EntityOf/1(s))"
+   }
+  ],
+  "headSyms": [
+   "Logos.DivinePureActuality.TrinitarianProcession"
+  ],
+  "headShorts": [
+   "TrinitarianProcession"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.Agency.Subject"
+  ],
+  "binderFree": [
+   "s",
+   "hKind"
+  ],
+  "hypothesis": [
+   {
+    "binder": "hKind",
+    "head": "Logos.Agency.NecessarySubjectKind",
+    "spine": "Logos.Agency.NecessarySubjectKind/1(s)"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.NecessarySubjectKind",
+   "Logos.Agency.Subject",
+   "Logos.DivinePureActuality.TrinitarianProcession",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.Entity.EntityOf"
+  ]
+ },
+ "Logos.SemanticFinitude.necessary_kind_subject_has_no_alien_grounding_potency": {
+  "kind": "thm",
+  "goal": "¬Logos.DivinePureActuality.AlienPassiveGroundingPotency (Logos.Entity.EntityOf s)",
   "goalTag": "not",
   "quant": "plain",
   "conjuncts": [
@@ -260264,7 +263299,7 @@
     "quant": "plain",
     "sorts": [],
     "head": "Not",
-    "spine": "!(Logos.DivinePureActuality.PassiveGroundingPotency/1(Logos.Entity.Entity.ofGround))"
+    "spine": "!(Logos.DivinePureActuality.AlienPassiveGroundingPotency/1(Logos.Entity.EntityOf/1(s)))"
    }
   ],
   "headSyms": [
@@ -260275,32 +263310,500 @@
   ],
   "valueConjuncts": [],
   "valueHeads": [],
+  "boundSorts": [
+   "Logos.Agency.Subject"
+  ],
+  "binderFree": [
+   "s",
+   "hKind"
+  ],
+  "hypothesis": [
+   {
+    "binder": "hKind",
+    "head": "Logos.Agency.NecessarySubjectKind",
+    "spine": "Logos.Agency.NecessarySubjectKind/1(s)"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.NecessarySubjectKind",
+   "Logos.Agency.Subject",
+   "Logos.DivinePureActuality.AlienPassiveGroundingPotency",
+   "Logos.Entity.EntityOf"
+  ]
+ },
+ "Logos.SemanticFinitude.necessary_kind_subject_has_no_alien_grounding_potency.match_1_1": {
+  "kind": "def",
+  "goal": "motive h✝",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(_)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Exists.casesOn"
+   }
+  ],
+  "valueHeads": [
+   "Exists.casesOn"
+  ],
+  "boundSorts": [
+   "Logos.Agency.Subject",
+   "->"
+  ],
+  "binderFree": [
+   "s",
+   "motive",
+   "_",
+   "h_1"
+  ],
+  "hypothesis": [
+   {
+    "binder": "_",
+    "head": "Logos.DivinePureActuality.AlienPassiveGroundingPotency",
+    "spine": "Logos.DivinePureActuality.AlienPassiveGroundingPotency/1(Logos.Entity.EntityOf/1(…))"
+   },
+   {
+    "binder": "h_1",
+    "head": "∀",
+    "spine": "∀(Logos.Entity.Entity).∀(Logos.CanonicalAseity.ExternalGrounding).…"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.CanonicalAseity.ExternalGrounding",
+   "Logos.DivinePureActuality.AlienPassiveGroundingPotency",
+   "Logos.DivinePureActuality.TrinitarianProcession",
+   "Logos.Entity.Entity",
+   "Logos.Entity.EntityOf"
+  ]
+ },
+ "Logos.SemanticFinitude.ofGround_divine_pure_actuality_stipulated": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ Logos.SemanticFinitude.DivinePureActualityModuloPersons Logos.Entity.Entity.ofGround a b c",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.SemanticFinitude.DivinePureActualityModuloPersons",
+    "spine": "Logos.SemanticFinitude.DivinePureActualityModuloPersons/4(Logos.Entity.Entity.ofGround, a, b, c)"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "Logos.SemanticFinitude.DivinePureActualityModuloPersons"
+  ],
+  "headShorts": [
+   "DivinePureActualityModuloPersons",
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
   "boundSorts": [],
   "binderFree": [],
   "hypothesis": [],
   "refs": [
-   "Logos.DivinePureActuality.PassiveGroundingPotency",
-   "Logos.Entity.Entity.ofGround"
+   "Logos.Agency.Subject",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.SemanticFinitude.DivinePureActualityModuloPersons",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
+ },
+ "Logos.SemanticFinitude.ofGround_divine_simplicity_stipulated": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ Logos.SemanticFinitude.DivineSimplicityModuloPersons Logos.Entity.Entity.ofGround a b c",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.SemanticFinitude.DivineSimplicityModuloPersons",
+    "spine": "Logos.SemanticFinitude.DivineSimplicityModuloPersons/4(Logos.Entity.Entity.ofGround, a, b, c)"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "Logos.SemanticFinitude.DivineSimplicityModuloPersons"
+  ],
+  "headShorts": [
+   "DivineSimplicityModuloPersons",
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.SemanticFinitude.DivineSimplicityModuloPersons",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
+ },
+ "Logos.SemanticFinitude.ofGround_modal_aseity_conditional_stipulated": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ ∀ (w : Logos.Semantics.World) (g : Logos.Entity.Entity), Logos.Entity.ExistsAt w g ∧ Logos.CanonicalAseity.ExternalGrounding g Logos.Entity.Entity.ofGround → g = Logos.Entity.EntityOf a ∨ g = Logos.Entity.EntityOf b ∨ g = Logos.Entity.EntityOf c",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Semantics.World",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(&(Logos.Entity.ExistsAt/2(w, g) , Logos.CanonicalAseity.ExternalGrounding/2(g, Logos.Entity.Entity.ofGround)) , |(=(Logos.Entity.Entity , g) , |(=(… , …) , =(… , …))))"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "->"
+  ],
+  "headShorts": [
+   "->",
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.CanonicalAseity.ExternalGrounding",
+   "Logos.Entity.Entity",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.Entity.EntityOf",
+   "Logos.Entity.ExistsAt",
+   "Logos.Semantics.World",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
+ },
+ "Logos.SemanticFinitude.ofGround_modal_aseity_conditional_stipulated.match_1_1": {
+  "kind": "def",
+  "goal": "motive h✝",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "motive",
+    "spine": "motive/1(_)"
+   }
+  ],
+  "headSyms": [
+   "motive"
+  ],
+  "headShorts": [
+   "motive"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "And.casesOn"
+   }
+  ],
+  "valueHeads": [
+   "And.casesOn"
+  ],
+  "boundSorts": [
+   "Logos.Semantics.World",
+   "Logos.Entity.Entity",
+   "->"
+  ],
+  "binderFree": [
+   "w",
+   "g",
+   "motive",
+   "_",
+   "h_1"
+  ],
+  "hypothesis": [
+   {
+    "binder": "_",
+    "head": "And",
+    "spine": "&(Logos.Entity.ExistsAt/2(…, …) , Logos.CanonicalAseity.ExternalGrounding/2(…, …))"
+   },
+   {
+    "binder": "h_1",
+    "head": "->",
+    "spine": "->(Logos.Entity.ExistsAt/2(…, …) , ∀(Logos.CanonicalAseity.ExternalGrounding).…)"
+   }
+  ],
+  "refs": [
+   "Logos.CanonicalAseity.ExternalGrounding",
+   "Logos.Entity.Entity",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.Entity.ExistsAt",
+   "Logos.Semantics.World"
+  ]
+ },
+ "Logos.SemanticFinitude.ofGround_no_grounding_potency_stipulated": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ Logos.SemanticFinitude.CanonicalAseityModuloPersons Logos.Entity.Entity.ofGround a b c",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.SemanticFinitude.CanonicalAseityModuloPersons",
+    "spine": "Logos.SemanticFinitude.CanonicalAseityModuloPersons/4(Logos.Entity.Entity.ofGround, a, b, c)"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "Logos.SemanticFinitude.CanonicalAseityModuloPersons"
+  ],
+  "headShorts": [
+   "CanonicalAseityModuloPersons",
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.SemanticFinitude.CanonicalAseityModuloPersons",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ]
  },
  "Logos.SemanticFinitude.ofGround_non_composite_stipulated": {
   "kind": "thm",
-  "goal": "Logos.DivineSimplicity.NonComposite Logos.Entity.Entity.ofGround",
-  "goalTag": "app",
-  "quant": "plain",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ Logos.SemanticFinitude.NonCompositeModuloPersons Logos.Entity.Entity.ofGround a b c",
+  "goalTag": "exists",
+  "quant": "exists",
   "conjuncts": [
    {
-    "quant": "plain",
-    "sorts": [],
-    "head": "Logos.DivineSimplicity.NonComposite",
-    "spine": "Logos.DivineSimplicity.NonComposite/1(Logos.Entity.Entity.ofGround)"
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.SemanticFinitude.NonCompositeModuloPersons",
+    "spine": "Logos.SemanticFinitude.NonCompositeModuloPersons/4(Logos.Entity.Entity.ofGround, a, b, c)"
    }
   ],
   "headSyms": [
-   "Logos.DivineSimplicity.NonComposite"
+   "Eq",
+   "Eq",
+   "Eq",
+   "Logos.SemanticFinitude.NonCompositeModuloPersons"
   ],
   "headShorts": [
-   "NonComposite"
+   "Eq",
+   "NonCompositeModuloPersons"
   ],
   "valueConjuncts": [],
   "valueHeads": [],
@@ -260308,21 +263811,61 @@
   "binderFree": [],
   "hypothesis": [],
   "refs": [
-   "Logos.DivineSimplicity.NonComposite",
-   "Logos.Entity.Entity.ofGround"
+   "Logos.Agency.Subject",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.SemanticFinitude.NonCompositeModuloPersons",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ]
  },
  "Logos.SemanticFinitude.ofGround_simplicity_and_transcendence_stipulated": {
   "kind": "thm",
-  "goal": "Logos.DivineSimplicity.DivineSimplicity Logos.Entity.Entity.ofGround ∧ Logos.DivineSimplicity.TranscendentGround Logos.Entity.Entity.ofGround",
+  "goal": "(∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ Logos.SemanticFinitude.DivineSimplicityModuloPersons Logos.Entity.Entity.ofGround a b c) ∧ Logos.DivineSimplicity.TranscendentGround Logos.Entity.Entity.ofGround",
   "goalTag": "app",
-  "quant": "plain",
+  "quant": "mixed",
   "conjuncts": [
    {
-    "quant": "plain",
-    "sorts": [],
-    "head": "Logos.DivineSimplicity.DivineSimplicity",
-    "spine": "Logos.DivineSimplicity.DivineSimplicity/1(Logos.Entity.Entity.ofGround)"
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.SemanticFinitude.DivineSimplicityModuloPersons",
+    "spine": "Logos.SemanticFinitude.DivineSimplicityModuloPersons/4(Logos.Entity.Entity.ofGround, a, b, c)"
    },
    {
     "quant": "plain",
@@ -260332,11 +263875,15 @@
    }
   ],
   "headSyms": [
-   "Logos.DivineSimplicity.DivineSimplicity",
+   "Eq",
+   "Eq",
+   "Eq",
+   "Logos.SemanticFinitude.DivineSimplicityModuloPersons",
    "Logos.DivineSimplicity.TranscendentGround"
   ],
   "headShorts": [
-   "DivineSimplicity",
+   "DivineSimplicityModuloPersons",
+   "Eq",
    "TranscendentGround"
   ],
   "valueConjuncts": [],
@@ -260345,29 +263892,101 @@
   "binderFree": [],
   "hypothesis": [],
   "refs": [
-   "Logos.DivineSimplicity.DivineSimplicity",
+   "Logos.Agency.Subject",
    "Logos.DivineSimplicity.TranscendentGround",
-   "Logos.Entity.Entity.ofGround"
+   "Logos.Entity.Entity.ofGround",
+   "Logos.SemanticFinitude.DivineSimplicityModuloPersons",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ]
  },
  "Logos.SemanticFinitude.ofGround_sole_universal_grounding_stipulated": {
   "kind": "thm",
-  "goal": "Logos.FoundationalUnicity.SoleUniversalGrounding Logos.Entity.Entity.ofGround",
+  "goal": "Logos.FoundationalOmnipresence.UniversalModalGround Logos.Entity.Entity.ofGround ∧ (∀ (n : Nat), Logos.Entity.Entity.ofGround ≠ Logos.Entity.Entity.ofAtom n) ∧ (∀ (s : Logos.Agency.Subject), Logos.Agency.ContingentSubjectKind s → Logos.Entity.Entity.ofGround ≠ Logos.Entity.EntityOf s) ∧ ∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ ∀ (g' : Logos.Entity.Entity), Logos.FoundationalOmnipresence.UniversalModalGround g' → g' = Logos.Entity.Entity.ofGround ∨ g' = Logos.Entity.EntityOf a ∨ g' = Logos.Entity.EntityOf b ∨ g' = Logos.Entity.EntityOf c",
   "goalTag": "app",
-  "quant": "plain",
+  "quant": "mixed",
   "conjuncts": [
    {
     "quant": "plain",
     "sorts": [],
-    "head": "Logos.FoundationalUnicity.SoleUniversalGrounding",
-    "spine": "Logos.FoundationalUnicity.SoleUniversalGrounding/1(Logos.Entity.Entity.ofGround)"
+    "head": "Logos.FoundationalOmnipresence.UniversalModalGround",
+    "spine": "Logos.FoundationalOmnipresence.UniversalModalGround/1(Logos.Entity.Entity.ofGround)"
+   },
+   {
+    "quant": "forall",
+    "sorts": [
+     "Nat"
+    ],
+    "head": "Ne",
+    "spine": "Ne/3(Logos.Entity.Entity, Logos.Entity.Entity.ofGround, Logos.Entity.Entity.ofAtom/1(n))"
+   },
+   {
+    "quant": "forall",
+    "sorts": [
+     "Logos.Agency.Subject"
+    ],
+    "head": "->",
+    "spine": "->(Logos.Agency.ContingentSubjectKind/1(s) , Ne/3(Logos.Entity.Entity, Logos.Entity.Entity.ofGround, Logos.Entity.EntityOf/1(s)))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.FoundationalOmnipresence.UniversalModalGround/1(g') , |(=(Logos.Entity.Entity , g') , |(=(… , …) , |(… , …))))"
    }
   ],
   "headSyms": [
-   "Logos.FoundationalUnicity.SoleUniversalGrounding"
+   "Logos.FoundationalOmnipresence.UniversalModalGround",
+   "Ne",
+   "->",
+   "Eq",
+   "Eq",
+   "Eq",
+   "->"
   ],
   "headShorts": [
-   "SoleUniversalGrounding"
+   "->",
+   "Eq",
+   "Ne",
+   "UniversalModalGround"
   ],
   "valueConjuncts": [],
   "valueHeads": [],
@@ -260375,8 +263994,18 @@
   "binderFree": [],
   "hypothesis": [],
   "refs": [
+   "Logos.Agency.ContingentSubjectKind",
+   "Logos.Agency.Subject",
+   "Logos.Entity.Entity",
+   "Logos.Entity.Entity.ofAtom",
    "Logos.Entity.Entity.ofGround",
-   "Logos.FoundationalUnicity.SoleUniversalGrounding"
+   "Logos.Entity.EntityOf",
+   "Logos.FoundationalOmnipresence.UniversalModalGround",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ]
  },
  "Logos.SemanticFinitude.semanticFinitude_excludes_ground_from_subjects": {
@@ -260526,6 +264155,196 @@
   "binderFree": [],
   "hypothesis": [],
   "refs": []
+ },
+ "Logos.SemanticFinitude.three_persons_canonical_aseity_catholic": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ Logos.DivinePureActuality.CanonicalAseityCatholic (Logos.Entity.EntityOf a) ∧ Logos.DivinePureActuality.CanonicalAseityCatholic (Logos.Entity.EntityOf b) ∧ Logos.DivinePureActuality.CanonicalAseityCatholic (Logos.Entity.EntityOf c)",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.DivinePureActuality.CanonicalAseityCatholic",
+    "spine": "Logos.DivinePureActuality.CanonicalAseityCatholic/1(Logos.Entity.EntityOf/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.DivinePureActuality.CanonicalAseityCatholic",
+    "spine": "Logos.DivinePureActuality.CanonicalAseityCatholic/1(Logos.Entity.EntityOf/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.DivinePureActuality.CanonicalAseityCatholic",
+    "spine": "Logos.DivinePureActuality.CanonicalAseityCatholic/1(Logos.Entity.EntityOf/1(c))"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "Logos.DivinePureActuality.CanonicalAseityCatholic",
+   "Logos.DivinePureActuality.CanonicalAseityCatholic",
+   "Logos.DivinePureActuality.CanonicalAseityCatholic"
+  ],
+  "headShorts": [
+   "CanonicalAseityCatholic",
+   "Eq"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.DivinePureActuality.CanonicalAseityCatholic",
+   "Logos.Entity.EntityOf",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
+ },
+ "Logos.SemanticFinitude.three_persons_have_no_alien_grounding_potency": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ ¬Logos.DivinePureActuality.AlienPassiveGroundingPotency (Logos.Entity.EntityOf a) ∧ ¬Logos.DivinePureActuality.AlienPassiveGroundingPotency (Logos.Entity.EntityOf b) ∧ ¬Logos.DivinePureActuality.AlienPassiveGroundingPotency (Logos.Entity.EntityOf c)",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Not",
+    "spine": "!(Logos.DivinePureActuality.AlienPassiveGroundingPotency/1(Logos.Entity.EntityOf/1(a)))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Not",
+    "spine": "!(Logos.DivinePureActuality.AlienPassiveGroundingPotency/1(Logos.Entity.EntityOf/1(b)))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Not",
+    "spine": "!(Logos.DivinePureActuality.AlienPassiveGroundingPotency/1(Logos.Entity.EntityOf/1(c)))"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "Not",
+   "Not",
+   "Not"
+  ],
+  "headShorts": [
+   "Eq",
+   "Not"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.DivinePureActuality.AlienPassiveGroundingPotency",
+   "Logos.Entity.EntityOf",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
  },
  "Logos.Semantics.FalseAt": {
   "kind": "def",
@@ -264224,6 +268043,120 @@
    "Logos.Semantics.NecessarilyTrue"
   ]
  },
+ "Logos.SinglePersonDenial.HypostasisOf": {
+  "kind": "def",
+  "goal": "Prop",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Prop",
+    "spine": "Prop"
+   }
+  ],
+  "headSyms": [
+   "Prop"
+  ],
+  "headShorts": [
+   "Prop"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.Agency.NecessarySubjectKind"
+   },
+   {
+    "quant": "plain",
+    "head": "Or"
+   }
+  ],
+  "valueHeads": [
+   "Logos.Agency.NecessarySubjectKind",
+   "Or"
+  ],
+  "boundSorts": [
+   "Logos.Agency.Subject",
+   "Logos.DivineAgape.DivineHypostasis"
+  ],
+  "binderFree": [
+   "s",
+   "d"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.NecessarySubjectKind",
+   "Logos.Agency.Subject",
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.the_beloved",
+   "Logos.DivineAgape.the_father",
+   "Logos.DivineAgape.the_spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
+ },
+ "Logos.SinglePersonDenial.bridge_subjects_correspond": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.SinglePersonDenial.HypostasisOf a Logos.DivineAgape.the_father ∧ Logos.SinglePersonDenial.HypostasisOf b Logos.DivineAgape.the_beloved ∧ Logos.SinglePersonDenial.HypostasisOf c Logos.DivineAgape.the_spirit",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.SinglePersonDenial.HypostasisOf",
+    "spine": "Logos.SinglePersonDenial.HypostasisOf/2(a, Logos.DivineAgape.the_father)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.SinglePersonDenial.HypostasisOf",
+    "spine": "Logos.SinglePersonDenial.HypostasisOf/2(b, Logos.DivineAgape.the_beloved)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.SinglePersonDenial.HypostasisOf",
+    "spine": "Logos.SinglePersonDenial.HypostasisOf/2(c, Logos.DivineAgape.the_spirit)"
+   }
+  ],
+  "headSyms": [
+   "Logos.SinglePersonDenial.HypostasisOf",
+   "Logos.SinglePersonDenial.HypostasisOf",
+   "Logos.SinglePersonDenial.HypostasisOf"
+  ],
+  "headShorts": [
+   "HypostasisOf"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.DivineAgape.the_beloved",
+   "Logos.DivineAgape.the_father",
+   "Logos.DivineAgape.the_spirit",
+   "Logos.SinglePersonDenial.HypostasisOf"
+  ]
+ },
  "Logos.SinglePersonDenial.donation_makes_contingency_is_refuted": {
   "kind": "thm",
   "goal": "False",
@@ -264314,6 +268247,50 @@
    "Logos.Modal.NecessaryEntity"
   ]
  },
+ "Logos.SinglePersonDenial.hypostasisOf_subsists": {
+  "kind": "thm",
+  "goal": "Logos.DivineAgape.Subsists d",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.DivineAgape.Subsists",
+    "spine": "Logos.DivineAgape.Subsists/1(d)"
+   }
+  ],
+  "headSyms": [
+   "Logos.DivineAgape.Subsists"
+  ],
+  "headShorts": [
+   "Subsists"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.Agency.Subject",
+   "Logos.DivineAgape.DivineHypostasis"
+  ],
+  "binderFree": [
+   "s",
+   "d",
+   "h"
+  ],
+  "hypothesis": [
+   {
+    "binder": "h",
+    "head": "Logos.SinglePersonDenial.HypostasisOf",
+    "spine": "Logos.SinglePersonDenial.HypostasisOf/2(s, d)"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.Subsists",
+   "Logos.SinglePersonDenial.HypostasisOf"
+  ]
+ },
  "Logos.SinglePersonDenial.not_a_single_person": {
   "kind": "thm",
   "goal": "¬(Logos.RecoveredOntologicalGround.NecessaryGroundOfReality Logos.Entity.Entity.ofGround ∧ ∃ s, Logos.Entity.Entity.ofGround = Logos.Entity.EntityOf s)",
@@ -264385,6 +268362,69 @@
    "Logos.DivineAgape.SelfDonation",
    "Logos.Entity.Entity",
    "Logos.Entity.EntityOf"
+  ]
+ },
+ "Logos.SinglePersonDenial.self_giving_necessitates_a_distinct_necessary_other": {
+  "kind": "thm",
+  "goal": "∃ f o, f ≠ o ∧ Logos.Modal.NecessaryEntity f.deiformEntity ∧ Logos.Modal.NecessaryEntity o.deiformEntity",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Ne",
+    "spine": "Ne/3(Logos.DivineAgape.DivineHypostasis, f, o)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Logos.Modal.NecessaryEntity",
+    "spine": "Logos.Modal.NecessaryEntity/1(Logos.DivineAgape.DivineHypostasis.deiformEntity/1(f))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Logos.Modal.NecessaryEntity",
+    "spine": "Logos.Modal.NecessaryEntity/1(Logos.DivineAgape.DivineHypostasis.deiformEntity/1(o))"
+   }
+  ],
+  "headSyms": [
+   "Ne",
+   "Logos.Modal.NecessaryEntity",
+   "Logos.Modal.NecessaryEntity"
+  ],
+  "headShorts": [
+   "Ne",
+   "NecessaryEntity"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [
+   "D"
+  ],
+  "hypothesis": [
+   {
+    "binder": "D",
+    "head": "Exists",
+    "spine": "?(Logos.DivineAgape.DivineHypostasis).?(Logos.DivineAgape.DivineHypostasis).…"
+   }
+  ],
+  "refs": [
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.DivineHypostasis.deiformEntity",
+   "Logos.DivineAgape.SelfDonation",
+   "Logos.Modal.NecessaryEntity"
   ]
  },
  "Logos.SinglePersonDenial.singlePersonDenial_summary": {
@@ -313315,6 +317355,59 @@
    "Logos.TrinitarianSubjectBridge.DivineRole"
   ]
  },
+ "Logos.TrinitarianSubjectBridge.SubjectMutualIndwellingCatholic": {
+  "kind": "def",
+  "goal": "Prop",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Prop",
+    "spine": "Prop"
+   }
+  ],
+  "headSyms": [
+   "Prop"
+  ],
+  "headShorts": [
+   "Prop"
+  ],
+  "valueConjuncts": [
+   {
+    "quant": "plain",
+    "head": "Logos.RecoveredOntologicalGround.OneEssence"
+   },
+   {
+    "quant": "plain",
+    "head": "Logos.RecoveredOntologicalGround.OneEssence"
+   },
+   {
+    "quant": "plain",
+    "head": "Ne"
+   }
+  ],
+  "valueHeads": [
+   "Logos.RecoveredOntologicalGround.OneEssence",
+   "Logos.RecoveredOntologicalGround.OneEssence",
+   "Ne"
+  ],
+  "boundSorts": [
+   "Logos.Agency.Subject",
+   "Logos.Agency.Subject"
+  ],
+  "binderFree": [
+   "a",
+   "b"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Entity.EntityOf",
+   "Logos.RecoveredOntologicalGround.OneEssence"
+  ]
+ },
  "Logos.TrinitarianSubjectBridge.TrinitarianPersonalBridge": {
   "kind": "axiom",
   "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ Logos.Person.Person a ∧ Logos.Person.Person b ∧ Logos.Person.Person c ∧ Logos.Choice.FreeSubject a ∧ Logos.Choice.FreeSubject b ∧ Logos.Choice.FreeSubject c ∧ Logos.Plurality.NecessarySubject a ∧ Logos.Plurality.NecessarySubject b ∧ Logos.Plurality.NecessarySubject c ∧ ∀ (s : Logos.Agency.Subject), Logos.Agency.NecessarySubjectKind s → s = a ∨ s = b ∨ s = c",
@@ -313741,7 +317834,7 @@
  },
  "Logos.TrinitarianSubjectBridge.one_necessary_ground_three_free_necessary_persons": {
   "kind": "thm",
-  "goal": "Logos.RecoveredOntologicalGround.NecessaryGroundOfReality Logos.Entity.Entity.ofGround ∧ (∃ g, Logos.FoundationalOmnipresence.UniversalModalGround g ∧ ∀ (g' : Logos.Entity.Entity), Logos.FoundationalOmnipresence.UniversalModalGround g' → g' = g) ∧ ∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ a ≠ b ∧ b ≠ c ∧ a ≠ c ∧ Logos.Person.Person a ∧ Logos.Person.Person b ∧ Logos.Person.Person c ∧ Logos.Choice.FreeSubject a ∧ Logos.Choice.FreeSubject b ∧ Logos.Choice.FreeSubject c ∧ Logos.Plurality.NecessarySubject a ∧ Logos.Plurality.NecessarySubject b ∧ Logos.Plurality.NecessarySubject c ∧ (∀ (s : Logos.Agency.Subject), Logos.Agency.NecessarySubjectKind s → s = a ∨ s = b ∨ s = c) ∧ Logos.TrinitarianPersonalGround.Perichoretic Logos.Entity.Entity.ofGround a b c",
+  "goal": "Logos.RecoveredOntologicalGround.NecessaryGroundOfReality Logos.Entity.Entity.ofGround ∧ ∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ a ≠ b ∧ b ≠ c ∧ a ≠ c ∧ Logos.Person.Person a ∧ Logos.Person.Person b ∧ Logos.Person.Person c ∧ Logos.Choice.FreeSubject a ∧ Logos.Choice.FreeSubject b ∧ Logos.Choice.FreeSubject c ∧ Logos.Plurality.NecessarySubject a ∧ Logos.Plurality.NecessarySubject b ∧ Logos.Plurality.NecessarySubject c ∧ (∀ (s : Logos.Agency.Subject), Logos.Agency.NecessarySubjectKind s → s = a ∨ s = b ∨ s = c) ∧ (∀ (g' : Logos.Entity.Entity), Logos.FoundationalOmnipresence.UniversalModalGround g' → g' = Logos.Entity.Entity.ofGround ∨ g' = Logos.Entity.EntityOf a ∨ g' = Logos.Entity.EntityOf b ∨ g' = Logos.Entity.EntityOf c) ∧ Logos.TrinitarianPersonalGround.Perichoretic Logos.Entity.Entity.ofGround a b c",
   "goalTag": "app",
   "quant": "mixed",
   "conjuncts": [
@@ -313750,23 +317843,6 @@
     "sorts": [],
     "head": "Logos.RecoveredOntologicalGround.NecessaryGroundOfReality",
     "spine": "Logos.RecoveredOntologicalGround.NecessaryGroundOfReality/1(Logos.Entity.Entity.ofGround)"
-   },
-   {
-    "quant": "exists",
-    "sorts": [
-     "Logos.Entity.Entity"
-    ],
-    "head": "Logos.FoundationalOmnipresence.UniversalModalGround",
-    "spine": "Logos.FoundationalOmnipresence.UniversalModalGround/1(g)"
-   },
-   {
-    "quant": "exists",
-    "sorts": [
-     "Logos.Entity.Entity",
-     "Logos.Entity.Entity"
-    ],
-    "head": "->",
-    "spine": "->(Logos.FoundationalOmnipresence.UniversalModalGround/1(g') , =(Logos.Entity.Entity , g'))"
    },
    {
     "quant": "exists",
@@ -313934,6 +318010,17 @@
     "sorts": [
      "Logos.Agency.Subject",
      "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Entity.Entity"
+    ],
+    "head": "->",
+    "spine": "->(Logos.FoundationalOmnipresence.UniversalModalGround/1(g') , |(=(Logos.Entity.Entity , g') , |(=(… , …) , |(… , …))))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
      "Logos.Agency.Subject"
     ],
     "head": "Logos.TrinitarianPersonalGround.Perichoretic",
@@ -313942,23 +318029,22 @@
   ],
   "headSyms": [
    "Logos.RecoveredOntologicalGround.NecessaryGroundOfReality",
-   "Logos.FoundationalOmnipresence.UniversalModalGround",
+   "Eq",
+   "Eq",
+   "Eq",
+   "Ne",
+   "Ne",
+   "Ne",
+   "Logos.Person.Person",
+   "Logos.Person.Person",
+   "Logos.Person.Person",
+   "Logos.Choice.FreeSubject",
+   "Logos.Choice.FreeSubject",
+   "Logos.Choice.FreeSubject",
+   "Logos.Plurality.NecessarySubject",
+   "Logos.Plurality.NecessarySubject",
+   "Logos.Plurality.NecessarySubject",
    "->",
-   "Eq",
-   "Eq",
-   "Eq",
-   "Ne",
-   "Ne",
-   "Ne",
-   "Logos.Person.Person",
-   "Logos.Person.Person",
-   "Logos.Person.Person",
-   "Logos.Choice.FreeSubject",
-   "Logos.Choice.FreeSubject",
-   "Logos.Choice.FreeSubject",
-   "Logos.Plurality.NecessarySubject",
-   "Logos.Plurality.NecessarySubject",
-   "Logos.Plurality.NecessarySubject",
    "->",
    "Logos.TrinitarianPersonalGround.Perichoretic"
   ],
@@ -313970,8 +318056,7 @@
    "NecessaryGroundOfReality",
    "NecessarySubject",
    "Perichoretic",
-   "Person",
-   "UniversalModalGround"
+   "Person"
   ],
   "valueConjuncts": [],
   "valueHeads": [],
@@ -313984,6 +318069,7 @@
    "Logos.Choice.FreeSubject",
    "Logos.Entity.Entity",
    "Logos.Entity.Entity.ofGround",
+   "Logos.Entity.EntityOf",
    "Logos.FoundationalOmnipresence.UniversalModalGround",
    "Logos.Person.Person",
    "Logos.Plurality.NecessarySubject",
@@ -314724,6 +318810,100 @@
    "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
    "Logos.TrinitarianSubjectBridge.DivineRole.word",
    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ]
+ },
+ "Logos.TrinitarianSubjectBridge.three_persons_subject_mutual_indwelling": {
+  "kind": "thm",
+  "goal": "∃ a b c, Logos.TrinitarianSubjectBridge.DivineSubjectRole a = Logos.TrinitarianSubjectBridge.DivineRole.source ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole b = Logos.TrinitarianSubjectBridge.DivineRole.word ∧ Logos.TrinitarianSubjectBridge.DivineSubjectRole c = Logos.TrinitarianSubjectBridge.DivineRole.spirit ∧ Logos.TrinitarianSubjectBridge.SubjectMutualIndwellingCatholic a b ∧ Logos.TrinitarianSubjectBridge.SubjectMutualIndwellingCatholic b c ∧ Logos.TrinitarianSubjectBridge.SubjectMutualIndwellingCatholic a c",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(a))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(b))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Eq",
+    "spine": "=(Logos.TrinitarianSubjectBridge.DivineRole , Logos.TrinitarianSubjectBridge.DivineSubjectRole/1(c))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.TrinitarianSubjectBridge.SubjectMutualIndwellingCatholic",
+    "spine": "Logos.TrinitarianSubjectBridge.SubjectMutualIndwellingCatholic/2(a, b)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.TrinitarianSubjectBridge.SubjectMutualIndwellingCatholic",
+    "spine": "Logos.TrinitarianSubjectBridge.SubjectMutualIndwellingCatholic/2(b, c)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject",
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.TrinitarianSubjectBridge.SubjectMutualIndwellingCatholic",
+    "spine": "Logos.TrinitarianSubjectBridge.SubjectMutualIndwellingCatholic/2(a, c)"
+   }
+  ],
+  "headSyms": [
+   "Eq",
+   "Eq",
+   "Eq",
+   "Logos.TrinitarianSubjectBridge.SubjectMutualIndwellingCatholic",
+   "Logos.TrinitarianSubjectBridge.SubjectMutualIndwellingCatholic",
+   "Logos.TrinitarianSubjectBridge.SubjectMutualIndwellingCatholic"
+  ],
+  "headShorts": [
+   "Eq",
+   "SubjectMutualIndwellingCatholic"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.TrinitarianSubjectBridge.DivineRole",
+   "Logos.TrinitarianSubjectBridge.DivineRole.source",
+   "Logos.TrinitarianSubjectBridge.DivineRole.spirit",
+   "Logos.TrinitarianSubjectBridge.DivineRole.word",
+   "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+   "Logos.TrinitarianSubjectBridge.SubjectMutualIndwellingCatholic"
   ]
  },
  "Logos.TrinitySeparations.agape_and_word_without_spirit_is_binitarian": {

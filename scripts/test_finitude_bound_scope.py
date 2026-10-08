@@ -1,38 +1,26 @@
 #!/usr/bin/env python3
 """Gate WHICH finitude bound the corpus actually uses.
 
-`scripts/test_axiom_census.py` pins how many axioms are declared. This pins something the census
-cannot see: of the two halves `SemanticFinitude` (S5's split created), which one the 27 consumer
-theorems actually rest on.
+Milestone 2026-10-08: SemanticFinitude restricted to creatures, Divine Persons affirmed in total
+meaning via DivinePersonsTotalMeaning, and GroundTranscendence eliminated.
 
-The claim asserted here is load-bearing for prose. `AGENTS.md`,
-§10 row 6 and §11 all said the divine Persons' omniscience is *unasserted*, on the premise that
-scoping `SemanticFinitude` to contingent subjects (`ContingentSubjectKind s -> ...`) exempts the
-Persons, who are necessary. On 2026-10-03 that premise was measured and found false (§17):
+`scripts/test_axiom_census.py` pins how many axioms are declared. This gate verifies what the
+census cannot see:
+  - `SemanticFinitude` (contingent-scoped, Tag VOCAB) is live and carries the creaturely branch.
+  - `DivinePersonsTotalMeaning` (Tag META) carries the Divine Persons (homoousios).
+  - `GroundTranscendence` (unrestricted, Tag META) has been completely eliminated from the kernel.
+  - The old denial `necessary_kind_subject_lacks_maximal_capacity` is absent, replaced by the
+    positive `necessary_kind_subject_has_maximal_capacity`.
+  - `Plurality.kinds_are_the_modal_partition` stays free (0 substantive axioms).
+  - Active `formal/Logos/*.lean` contains no residual unrestricted finitude axioms.
 
-  - `SemanticFinitude`  -- the contingent-scoped, `Tag: VOCAB` half -- has **0 dependents**.
-  - `GroundTranscendence` -- the unrestricted, `Tag: META` half -- carries every consumer.
-
-Nothing was ever narrowed, because nothing uses the narrowed half. The corpus therefore still
-denies the Persons' omniscience, at a META price: `Plurality.kinds_are_the_modal_partition` (free)
-reads `NecessarySubject p` as `NecessarySubjectKind p`, and
-`NecessaryKindAudit.necessary_kind_subject_lacks_maximal_capacity` then gives
-`not MaximalCapacity (EntityOf p)` for each Person.
-
-The failure mode this gate closes is the one §17 and §14 both hit: **prose describing an intended
-re-scope as though the kernel had adopted it.** A count cannot detect that, and neither can
-`#print axioms` on any single declaration -- the unrestricted bound is a legitimate axiom with a
-legitimate footprint. Only the *distribution of dependents across the two halves* shows it, and
-until now nothing computed that distribution.
-
-If a future milestone genuinely narrows the bound, this gate fails and the prose obligation
-transfers with it: §1.7/§10/§11 may then say "unasserted", and only then.
 Run: python3 scripts/test_finitude_bound_scope.py
 """
 from __future__ import annotations
 
 import collections
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -40,33 +28,27 @@ ROOT = Path(__file__).resolve().parent.parent
 AUDIT = ROOT / "formal" / "axiom_audit.json"
 
 SCOPED = "SemanticFinitude"
-UNRESTRICTED = "GroundTranscendence"
+TOTALITY = "DivinePersonsTotalMeaning"
+ELIMINATED = "GroundTranscendence"
 
-# The theorems that make the Persons' denial of maximal capacity reachable at all. Each is
-# checked here by name so that a rename cannot quietly strand the prose.
-DENIAL_CHAIN = (
+# The declarations verifying that the Divine Persons' semantic fullness is affirmed
+POSITIVE_CHAIN = (
     "Logos.Plurality.kinds_are_the_modal_partition",
-    "Logos.NecessaryKindAudit.necessary_kind_subject_lacks_maximal_capacity",
+    "Logos.NecessaryKindAudit.necessary_kind_subject_has_maximal_capacity",
     "Logos.TrinitarianSubjectBridge.one_necessary_ground_three_free_necessary_persons",
 )
 
+ABSENT_DENIAL = "Logos.NecessaryKindAudit.necessary_kind_subject_lacks_maximal_capacity"
+
 # `kinds_are_the_modal_partition` is what turns "necessary" into "necessary kind", and it must
-# stay free -- if it ever picks up an axiom, the Persons' denial is no longer reachable from
-# vocabulary alone and the §17 chain needs re-pricing.
+# stay free (vocabulary only).
 FREE_LINK = "Logos.Plurality.kinds_are_the_modal_partition"
 
-# "Free" here means *vocabulary-only*: 0 substantive axioms. The corpus's vocabulary axioms
-# (`Means`, `Subject`, `NecessarySubjectKind`, ...) are declared axioms and DO appear in
-# footprints, so subtracting only `propext`/`Classical.choice` would misreport every VOCAB-only
-# theorem as priced. The tag set comes from the same parser the census gate uses.
 FREE_TAGS = ("VOCAB", "TRANS")
 
 
 def declared_tags():
-    """Axiom short-name -> tag, from the Lean sources via the census gate's own parser.
-
-    Same derivation as `scripts/test_generator_price_prose.py`, so there is one parser, not two.
-    """
+    """Axiom short-name -> tag, from the Lean sources via the census gate's own parser."""
     ns = {"__file__": "scripts/check_consistency.py", "__name__": "census"}
     exec(compile((ROOT / "scripts" / "check_consistency.py").read_text(),
                  "check_consistency.py", "exec"), ns)
@@ -87,68 +69,97 @@ def main() -> int:
         return 1
     audit = json.loads(AUDIT.read_text())
 
-    for decl in DENIAL_CHAIN:
+    # 1. Check positive declarations
+    for decl in POSITIVE_CHAIN:
         if decl not in audit:
-            print(f"FAIL: denial-chain declaration absent from the audit: {decl}")
+            print(f"FAIL: positive-chain declaration absent from the audit: {decl}")
             return 1
+
+    # 2. Check absence of old denial
+    if ABSENT_DENIAL in audit:
+        print(f"FAIL: old denial declaration still present in the audit: {ABSENT_DENIAL}")
+        return 1
 
     tags = declared_tags()
     if not tags:
         print("FAIL: census found no axioms; the parser is broken, not the corpus")
         return 1
 
+    # 3. GroundTranscendence must be absent from declared axioms
+    if ELIMINATED in tags:
+        print(f"FAIL: {ELIMINATED} is still declared as an axiom with tag {tags[ELIMINATED]}")
+        return 1
+
+    # 4. DivinePersonsTotalMeaning must be declared as META
+    if TOTALITY not in tags:
+        print(f"FAIL: {TOTALITY} is missing from declared axioms")
+        return 1
+    if tags[TOTALITY] != "META":
+        print(f"FAIL: {TOTALITY} has tag {tags[TOTALITY]}, expected META")
+        return 1
+
     def substantive(footprint):
         """Named axioms in the footprint that are not free (VOCAB/TRANS)."""
         out = set()
         for a in short(footprint):
-            if a in ("propext", "Classical.choice"):
+            if a in ("propext", "Classical.choice", "Quot.sound"):
                 continue
             if a in tags and tags[a] not in FREE_TAGS:
                 out.add(a)
         return out
 
+    # 5. FREE_LINK must stay free
     free_foot = short(audit[FREE_LINK])
     priced = substantive(free_foot)
     if priced:
         print(f"FAIL: {FREE_LINK} must stay free (vocabulary only); it now rests on {sorted(priced)}")
-        print("       §17's chain is priced off this link being free. Re-price it before proceeding.")
         return 1
 
     def dependents(bound):
         out = []
         for name, footprint in audit.items():
             tail = name.split(".")[-1]
-            if bound in short(footprint) and tail not in (SCOPED, UNRESTRICTED):
+            if bound in short(footprint) and tail not in (SCOPED, TOTALITY, ELIMINATED):
                 out.append(name)
         return out
 
     scoped_users = dependents(SCOPED)
-    unrestricted_users = dependents(UNRESTRICTED)
+    totality_users = dependents(TOTALITY)
+    eliminated_users = dependents(ELIMINATED)
 
-    # The load-bearing assertion. A nonzero count here would mean some consumer had actually
-    # adopted the narrowed bound, and the §17 prose correction would no longer hold.
-    if scoped_users:
-        print(f"FAIL: {SCOPED} now has {len(scoped_users)} dependent(s): {sorted(scoped_users)}")
-        print("       The contingent-scoped bound is now load-bearing. §1.7/§10/§11 said the Persons'")
-        print("       omniscience is 'unasserted' on the strength of that narrowing; with live consumers")
-        print("       that claim becomes checkable, and §17's correction must be revisited on the merits.")
+    # 6. GroundTranscendence must have 0 dependents anywhere
+    if eliminated_users:
+        print(f"FAIL: {ELIMINATED} still has {len(eliminated_users)} dependent(s): {sorted(eliminated_users)}")
         return 1
 
-    if not unrestricted_users:
-        print(f"FAIL: {UNRESTRICTED} has no dependents -- expected the unrestricted bound to carry the corpus")
+    # 7. SemanticFinitude must have live dependents on the contingent branch
+    if len(scoped_users) < 10:
+        print(f"FAIL: {SCOPED} has only {len(scoped_users)} dependent(s), expected >= 10: {sorted(scoped_users)}")
         return 1
 
-    # The denial must actually be reachable through the unrestricted bound.
-    denial = "Logos.NecessaryKindAudit.necessary_kind_subject_lacks_maximal_capacity"
-    if UNRESTRICTED not in short(audit[denial]):
-        print(f"FAIL: {denial} does not rest on {UNRESTRICTED}; §17's denial chain no longer holds")
+    # 8. DivinePersonsTotalMeaning must have live dependents
+    if not totality_users:
+        print(f"FAIL: {TOTALITY} has no dependents; expected it to carry the Persons' maximal capacity")
         return 1
 
-    print("OK: the finitude bound the corpus uses is the UNRESTRICTED one.")
-    print(f"    {SCOPED} (contingent-scoped, VOCAB): 0 dependents -- inert, as §17 states.")
-    print(f"    {UNRESTRICTED} (unrestricted, META): {len(unrestricted_users)} dependents.")
-    print("    => The three divine Persons' omniscience is DENIED at a META price, not unasserted.")
-    print("       Plan §1.7 / §10 row 6 / §11 are corrected against this; see §17.")
+    # 9. Verify necessary_kind_subject_has_maximal_capacity rests on TOTALITY
+    pos_cap = "Logos.NecessaryKindAudit.necessary_kind_subject_has_maximal_capacity"
+    if TOTALITY not in short(audit[pos_cap]):
+        print(f"FAIL: {pos_cap} does not rest on {TOTALITY}")
+        return 1
+
+    # 10. §4.5 Shape Rule: check active formal/Logos/*.lean for residual unrestricted axiom
+    for path in sorted((ROOT / "formal" / "Logos").glob("*.lean")):
+        content = path.read_text()
+        if re.search(r"^\s*axiom\s+GroundTranscendence\b", content, re.M):
+            print(f"FAIL: residual `axiom GroundTranscendence` found in {path.name}")
+            return 1
+
+    print("OK: Finitude bound scoping verified.")
+    print(f"    {SCOPED} (contingent-scoped, VOCAB): {len(scoped_users)} dependents (live on creatures).")
+    print(f"    {TOTALITY} (necessary-scoped, META): {len(totality_users)} dependents (homoousios).")
+    print(f"    {ELIMINATED} (unrestricted, META): 0 dependents (eliminated from kernel).")
+    print("    => Divine Persons' semantic fullness is AFFIRMED; creatures are bounded.")
     return 0
 
 

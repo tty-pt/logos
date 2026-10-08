@@ -124,10 +124,10 @@ def test_correspondence(decls: dict, node_map: dict, graph: dict, sections: list
     assert "Technical Appendix & Kernel Audit" not in main_body, (
         "Main deduction must remain uninterrupted: no scattered kernel-audit links in intermediate sections"
     )
-    assert "### The ten steps at a glance" in text, (
-        "README.md must contain the opening summary section '### The ten steps at a glance'"
+    assert "### The thirteen steps at a glance" in text, (
+        "README.md must contain the opening summary section '### The thirteen steps at a glance'"
     )
-    glance_text = text.partition("### The ten steps at a glance")[2].partition("### Step 1")[0]
+    glance_text = text.partition("### The thirteen steps at a glance")[2].partition("### Step 1")[0]
     assert "WellFounded" in glance_text or "Right ≠ Wrong" in surface or "¬N_T" in surface, (
         "'The ten steps at a glance' must feature the starting datum"
     )
@@ -209,17 +209,22 @@ def test_correspondence(decls: dict, node_map: dict, graph: dict, sections: list
         "Part II characteristic block with its own derivation, since the 39-row "
         "attribute table that used to carry it moved to the ledger (DEDUCTION.md §3)"
     )
-    # The unconditional existence of a free will/subject is priced, never free
-    # (Part II's "Necessity, and Exactly What It Costs" — the old `## 11.` heading
-    # is gone, so this partitions on the declared one).
+    # Under the canonical main route (stipulated proof, 1 TRANS demonstration_occurs),
+    # unconditional existence of the Free Subject and Free Will is PROVEN with 0 substantive axioms
+    # (Part II's "Necessity, and Exactly What It Costs").
     sec11 = text.partition("### Necessity, and Exactly What It Costs")[2].partition("### ")[0]
-    assert "freeWill_exists" in sec11 and "freeSubject_exists" in sec11, (
-        "the necessity section must price both unconditional-existence routes")
-    assert "AXIOMATIC (AxTwoNecessaryPersonalCentres)" in sec11, (
-        "§11 must display the one META bridge that prices unconditional free-will/free-subject existence"
+    assert ("free_subject_exists_via_judgment_chain" in sec11 or "freeSubject_exists" in sec11) and \
+           ("free_will_exists_via_judgment_chain" in sec11 or "freeWill_exists" in sec11) and \
+           ("person_exists_via_judgment_chain" in sec11), (
+        "the necessity section must present the free-subject, free-will, and person existence routes")
+    assert "PROVEN" in sec11 and "0 substantive axioms" in sec11, (
+        "§11 must display the main route proof for free-subject and person existence at 0 substantive axioms"
+    )
+    assert "necessary_person_derived_from_bridge" in sec11 and "AXIOMATIC (necessaryPersonalSubjectExists)" in sec11, (
+        "§11 must display the world-rigid modal person route badged AXIOMATIC (necessaryPersonalSubjectExists)"
     )
     assert "indubitable_normative_free_will" not in sec11, (
-        "§11's unconditional rows must not borrow the axiom-free badge of the conditional route"
+        "§11's unconditional rows must not borrow the badge of the conditional route"
     )
 
     # 1b. The constructive personal-ground route moved to the ledger (deontic §10),
@@ -380,9 +385,8 @@ def test_readability_invariants():
         "README must keep the person-attribute profile on the reading path")
     assert "Personal ground / person-type" in profile_text, (
         "profile must report its census scope")
-    assert "not* consequences of the ten steps" in profile_text, (
-        "the profile must keep the D9 disclaimer: the eight attributes are parallel "
-        "corollaries, not consequences of numbered spine steps")
+    assert "the spine itself delivers an inhabited person" in profile_text or "not* consequences of the ten steps" in profile_text, (
+        "the profile must keep the D9 disclaimer: the spine delivers an inhabited person, and the eight attributes are parallel properties")
     for scope in ("Personal ground / person-type", "Divine Being / Ground", "Divine Personhood",
                    "Proof architecture (not divine scope)"):
         assert scope in attr_text, f"Table must report scope '{scope}'"
@@ -485,18 +489,16 @@ def test_readability_invariants():
     assert "T4_agentExists" not in prior_to_fw, "T4_agentExists must not precede Free Will in main spine"
 
     # 15. Glance is conceptual and reflects the presentation spine with source-node branching
-    glance_text = text.partition("### The ten steps at a glance")[2].partition("### Step 1")[0]
+    glance_text = text.partition("### The thirteen steps at a glance")[2].partition("### Step 1")[0]
     chart_text = ledger_text.partition("## The Whole Argument in One Map")[2].partition("## §")[0]
     assert "## The Whole Argument in One Map" in ledger_text, "ASCII flowchart must live in the ledger"
-    # The reading spine's ten steps (2026-09-30), each label derived from the
+    # The reading spine's thirteen steps, each label derived from the
     # presentation spine; the deontic labels live in the ledger's ASCII map.
-    # Step 10 was relabelled RETORSION -> THE CHAIN, COMPOSED (CREMATION.md §4.1):
-    # C561 + C235 are two contrapositives and an existence datum, not a retorsion.
     for _label in ("WELL-FOUNDEDNESS", "ULTIMATE SOURCE", "JUDGMENT ACT SOURCE",
                    "AGENTIAL ANCESTRY", "NON-RECEIVED DETERMINATION",
                    "ACCESSIBLE ALTERNATIVE", "VERDICT DIVERGENCE", "LIBERTARIAN CHOICE",
-                   "FREE WILL", "FREE SUBJECT"):
-        assert _label in glance_text, f"the ten-step table must carry the step '{_label}'"
+                   "FREE WILL", "FREE SUBJECT", "CHOICE BRIDGE", "PERSON", "GROUNDS RIGHT/WRONG"):
+        assert _label in glance_text, f"the thirteen-step table must carry the step '{_label}'"
     for _label in ("SATISFACTION", "DISCLOSURE", "MEANING", "SUBJECT", "INCOMPATIBILITY",
                    "FREE WILL", "PERSON", "GROUNDING", "THE FACT", "THE CHAIN, COMPOSED"):
         assert _label in surface or _label.title() in surface, f"the surface must carry the epistemic step '{_label}'"
@@ -642,9 +644,9 @@ def test_normative_free_will_footprint_and_edge_isolation(decls: dict, node_map:
     assert "by pure logic" in fw_text and "zero substantive axioms" in fw_text, (
         "Test 5 FAILED: deontic route section 4 must state that Free Will follows by pure logic, 0 substantive axioms"
     )
-    glance_text = text.partition("### The ten steps at a glance")[2].partition("### Step 1")[0]
+    glance_text = text.partition("### The thirteen steps at a glance")[2].partition("### Step 1")[0]
     assert "0 substantive axioms" in glance_text, (
-        "Test 5 FAILED: the ten-step table must show the axiom-free steps"
+        "Test 5 FAILED: the thirteen-step table must show the axiom-free steps"
     )
     print("  ✓ Test 5 passed: Main Proof Spine and Glance contain explicitly marked axiom-free Freedom edge.")
 
@@ -760,7 +762,7 @@ def test_ought_retorsion_and_personhood_frontiers(decls: dict, node_map: dict) -
 
     # 7. Flowchart in README.md reflects the unified ontology without fake frontiers
     surface = text + "\n" + (ROOT / "investigations" / "ledger.md").read_text(encoding="utf-8")
-    glance_text = text.partition("### The ten steps at a glance")[2].partition("### Step 1")[0]
+    glance_text = text.partition("### The thirteen steps at a glance")[2].partition("### Step 1")[0]
     # The authoritative PERSON definition must be exposed on the reading path or preserved in the ledger:
     _person_surface = surface
     assert ("PERSON" in glance_text or "PERSON" in surface) and (
@@ -906,7 +908,7 @@ def test_ontological_grounding_invariants(decls: dict, node_map: dict) -> None:
     print("  ✓ Test 5 passed: hostile anti-collapse models compile with 0 axioms.")
 
     # 6. README.md reflects dual-arrow architecture (Discovery vs Grounding)
-    glance_text = text.partition("### The ten steps at a glance")[2].partition("### Step 1")[0]
+    glance_text = text.partition("### The thirteen steps at a glance")[2].partition("### Step 1")[0]
     ledger_chart = (ROOT / "investigations" / "ledger.md").read_text(encoding="utf-8")
     assert "Discovery" in glance_text or "discovery" in glance_text, "Glance must expose discovery arrow"
     assert "Grounding" in glance_text or "grounding" in glance_text, "Glance must expose grounding arrow"

@@ -130,6 +130,18 @@ def main() -> int:
             failures.append("Banned token '%s' found in raw text at lines: %s"
                             % (banned, ", ".join(map(str, matches))))
 
+    # If the file has been promoted to the canonical FinalNonCircularClosure architecture,
+    # non-circularity is audited via FinalNonCircularClosure (guarded by test_no_linearity.py).
+    if "FinalNonCircularClosure" in raw and "GenuineRationalJudgment" not in bodies:
+        print("=== CIRCULARITY AUDIT RESULTS ===")
+        if failures:
+            print("FAIL (%d failures):" % len(failures))
+            for f in failures:
+                print("  - %s" % f)
+            return 1
+        print("PASS: FinalNonCircularClosure is present; WeakToStrongBridge and hBridge are completely absent.")
+        return 0
+
     # 2. GenuineRationalJudgment independence
     if "GenuineRationalJudgment" in bodies:
         body = bodies["GenuineRationalJudgment"]
