@@ -1639,56 +1639,6 @@
    {
     "binder": "_",
     "head": "And",
-    "spine": "&(True , !(…))"
-   },
-   {
-    "binder": "h_1",
-    "head": "∀",
-    "spine": "∀(True).∀(Not).…"
-   }
-  ],
-  "refs": []
- },
- "Logos.A14SemanticAudit.performative_boundary_theorem.match_1_3": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
     "spine": "&(!(…) , True)"
    },
    {
@@ -1699,7 +1649,7 @@
   ],
   "refs": []
  },
- "Logos.A14SemanticAudit.performative_boundary_theorem.match_1_5": {
+ "Logos.A14SemanticAudit.performative_boundary_theorem.match_1_3": {
   "kind": "def",
   "goal": "motive x✝",
   "goalTag": "app",
@@ -1751,7 +1701,7 @@
   ],
   "refs": []
  },
- "Logos.A14SemanticAudit.performative_boundary_theorem.match_1_7": {
+ "Logos.A14SemanticAudit.performative_boundary_theorem.match_1_5": {
   "kind": "def",
   "goal": "motive h✝",
   "goalTag": "app",
@@ -25150,56 +25100,6 @@
   "refs": []
  },
  "Logos.AgencyFrontierAudit.modalFreedom_star_is_model_theoretically_independent.match_1_3": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , !(…))"
-   },
-   {
-    "binder": "h_1",
-    "head": "∀",
-    "spine": "∀(True).∀(Not).…"
-   }
-  ],
-  "refs": []
- },
- "Logos.AgencyFrontierAudit.modalFreedom_star_is_model_theoretically_independent.match_1_5": {
   "kind": "def",
   "goal": "let CS0 := { Considers := fun x x_1 => True, Affirms := fun x p => p = ¬True, Rejects := fun x p => p = True, CommitsTo := fun x p => p = ¬True, AimsAt := fun x p => p = ¬True, SettlesFor := fun x p => p = ¬True, Assumes := fun x p => p = True, Derives := fun x x_1 x_2 => True, affirms_considers := ⋯, rejects_considers := ⋯, assumes_considers := ⋯, commits_affirms := ⋯, aims_commits := ⋯, settles_commits := ⋯, rational_non_contradiction := ⋯ };\nlet M_det := { Subj := Unit, St := Unit, World := Unit, MeansRel := fun x p => p = True, InitiatesRel := fun x x_1 x_2 x_3 => True, CS := CS0, CanAct := fun x x_1 x_2 => False, act_witness := ⋯, reductio_wit := ⋯ };\n∀ (motive : Logos.AgencyFrontierAudit.ModalFreedom_Star M_det → Prop) (h : Logos.AgencyFrontierAudit.ModalFreedom_Star M_det), (∀ (s : M_det.Subj) (p q : Prop) (w : M_det.World) (left : Logos.Alternatives.Incompatible p q) (hCanP : M_det.CanAct s p w) (right : M_det.CanAct s q w), motive ⋯) → motive h",
   "goalTag": "app",
@@ -95600,56 +95500,6 @@
    "Logos.DeepModalFrontier.Level_C1_NonDeterministic"
   ]
  },
- "Logos.DeepModalFrontier.C0_not_entails_C1.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
- },
  "Logos.DeepModalFrontier.C1_not_entails_C2": {
   "kind": "thm",
   "goal": "∃ World Subject ReasonsAt WillsAt SettlesAt s p q v u, Logos.DeepModalFrontier.Level_C1_NonDeterministic World Subject ReasonsAt WillsAt ∧ ¬Logos.DeepModalFrontier.Level_C2_AgentAttributable World Subject SettlesAt s p q v u",
@@ -97439,56 +97289,6 @@
    "Logos.TheologicalModalHardening.KripkeFrame.R"
   ]
  },
- "Logos.DeepModalFrontier.model_MC31_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
- },
  "Logos.DeepModalFrontier.model_MC32_consistent": {
   "kind": "thm",
   "goal": "∃ World Subject frame actualWorld ReasonsAt WillsAt s p q, Logos.DeepModalFrontier.Rationality_R4_Deliberative World Subject ReasonsAt WillsAt s ∧ Logos.ModalCreationAgency.Incompatible p q ∧ (∃ v, frame.R actualWorld v ∧ WillsAt v s p) ∧ ∃ u, frame.R actualWorld u ∧ WillsAt u s q",
@@ -97622,56 +97422,6 @@
    "Logos.TheologicalModalHardening.KripkeFrame.R"
   ]
  },
- "Logos.DeepModalFrontier.model_MC32_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
- },
  "Logos.DeepModalFrontier.model_MC33_consistent": {
   "kind": "thm",
   "goal": "∃ World Subject frame actualWorld IsGoodAt WillsAt s p q, (∀ (w : World), IsGoodAt w s) ∧ Logos.ModalCreationAgency.Incompatible p q ∧ (∃ v, frame.R actualWorld v ∧ WillsAt v s p) ∧ ∃ u, frame.R actualWorld u ∧ WillsAt u s q",
@@ -97804,56 +97554,6 @@
    "Logos.TheologicalModalHardening.KripkeFrame",
    "Logos.TheologicalModalHardening.KripkeFrame.R"
   ]
- },
- "Logos.DeepModalFrontier.model_MC33_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
  },
  "Logos.DeepModalFrontier.model_MC34_consistent": {
   "kind": "thm",
@@ -98075,56 +97775,6 @@
    "Logos.TheologicalModalHardening.KripkeFrame.R"
   ]
  },
- "Logos.DeepModalFrontier.model_MC35_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
- },
  "Logos.DeepModalFrontier.model_MC36_consistent": {
   "kind": "thm",
   "goal": "∃ World Entity Subject frame actualWorld NatureAt CharacterAt WillsAt g s p q, (∀ (w u : World), NatureAt w g = NatureAt u g) ∧ (∀ (w u : World), CharacterAt w s = CharacterAt u s) ∧ Logos.ModalCreationAgency.Incompatible p q ∧ (∃ v, frame.R actualWorld v ∧ WillsAt v s p) ∧ ∃ u, frame.R actualWorld u ∧ WillsAt u s q",
@@ -98299,56 +97949,6 @@
    "Logos.TheologicalModalHardening.KripkeFrame.R"
   ]
  },
- "Logos.DeepModalFrontier.model_MC36_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
- },
  "Logos.DeepModalFrontier.model_MC37_consistent": {
   "kind": "thm",
   "goal": "∃ World Subject frame actualWorld ReasonsAt WillsAt s p q, Logos.DeepModalFrontier.PSR_Level4_VolitionReason World Subject ReasonsAt WillsAt s ∧ Logos.ModalCreationAgency.Incompatible p q ∧ (∃ v, frame.R actualWorld v ∧ WillsAt v s p) ∧ (∃ u, frame.R actualWorld u ∧ WillsAt u s q) ∧ Logos.DeepModalFrontier.NonDeterministicVolition World Subject ReasonsAt WillsAt",
@@ -98501,56 +98101,6 @@
    "Logos.TheologicalModalHardening.KripkeFrame.R"
   ]
  },
- "Logos.DeepModalFrontier.model_MC37_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
- },
  "Logos.DeepModalFrontier.model_MC38_consistent": {
   "kind": "thm",
   "goal": "∃ World Subject frame actualWorld ReasonsAt WillsAt s p, Logos.DeepModalFrontier.PSR_Level6_DeterminingPSR World Subject ReasonsAt WillsAt ∧ ∀ (w : World), frame.R actualWorld w → WillsAt w s p",
@@ -98645,56 +98195,6 @@
    "Logos.DeepModalFrontier.Level_C0_PrimitiveVariation"
   ]
  },
- "Logos.DeepModalFrontier.model_MC39_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
- },
  "Logos.DeepModalFrontier.model_MC40_consistent": {
   "kind": "thm",
   "goal": "∃ World Entity Subject ExtCirc ReasonsAt HistoryAt NatureAt InternalStateAt SettlesAt ExplainsSettlement g s p q v u, Logos.DeepModalFrontier.Level_C4_ExplanatoryAgentCausal World Entity Subject ExtCirc ReasonsAt HistoryAt NatureAt InternalStateAt SettlesAt ExplainsSettlement g s p q v u",
@@ -98739,56 +98239,6 @@
   "refs": [
    "Logos.DeepModalFrontier.Level_C4_ExplanatoryAgentCausal"
   ]
- },
- "Logos.DeepModalFrontier.model_MC40_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
  },
  "Logos.DeepModalFrontier.model_MC41_consistent": {
   "kind": "thm",
@@ -98880,56 +98330,6 @@
   "refs": [
    "Logos.ModalCreationAgency.Incompatible"
   ]
- },
- "Logos.DeepModalFrontier.model_MC41_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
  },
  "Logos.DeepModalFrontier.model_MC42_consistent": {
   "kind": "thm",
@@ -99023,56 +98423,6 @@
    "Logos.ModalCreationAgency.Incompatible"
   ]
  },
- "Logos.DeepModalFrontier.model_MC42_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
- },
  "Logos.DeepModalFrontier.model_MC43_consistent": {
   "kind": "thm",
   "goal": "∃ World Subject frame actualWorld ReasonsAt WillsAt Explains s p q r, Logos.DeepModalFrontier.ExplainsChoiceNonDetermining World Subject frame actualWorld ReasonsAt WillsAt Explains s p q r ∧ Logos.DeepModalFrontier.NonDeterministicVolition World Subject ReasonsAt WillsAt",
@@ -99134,56 +98484,6 @@
    "Logos.DeepModalFrontier.NonDeterministicVolition",
    "Logos.TheologicalModalHardening.KripkeFrame"
   ]
- },
- "Logos.DeepModalFrontier.model_MC43_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
  },
  "Logos.DeepModalFrontier.model_MC44_consistent": {
   "kind": "thm",
@@ -99800,56 +99100,6 @@
    "Logos.DeepModalFrontier.ExplainsChoiceNonDetermining",
    "Logos.TheologicalModalHardening.KripkeFrame"
   ]
- },
- "Logos.DeepModalFrontier.third_regime_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
  },
  "Logos.DeepModalFrontier.unique_best_action_optimific_rationality_modal_collapse": {
   "kind": "thm",
@@ -100889,56 +100139,6 @@
    "And.casesOn"
   ],
   "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , !(…))"
-   },
-   {
-    "binder": "h_1",
-    "head": "∀",
-    "spine": "∀(True).∀(Not).…"
-   }
-  ],
-  "refs": []
- },
- "Logos.DefinitiveAgencyFrontier.libertarian_freewill_fails_to_derive_substantive_person.match_1_3": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
    "Prop",
    "->"
   ],
@@ -101624,56 +100824,6 @@
    "Logos.Alternatives.Incompatible"
   ]
  },
- "Logos.DefinitiveAgencyFrontier.model_AC4_agent_causal_without_alternatives.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , !(…))"
-   },
-   {
-    "binder": "h_1",
-    "head": "∀",
-    "spine": "∀(True).∀(Not).…"
-   }
-  ],
-  "refs": []
- },
  "Logos.DefinitiveAgencyFrontier.model_AC5_full_libertarian": {
   "kind": "thm",
   "goal": "∃ Subj AgentDet CanActRel s p q w, AgentDet s p ∧ ¬AgentDet s q ∧ Logos.Alternatives.Incompatible p q ∧ CanActRel s p w ∧ CanActRel s q w",
@@ -101772,56 +100922,6 @@
   "refs": [
    "Logos.Alternatives.Incompatible"
   ]
- },
- "Logos.DefinitiveAgencyFrontier.model_AC5_full_libertarian.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , !(…))"
-   },
-   {
-    "binder": "h_1",
-    "head": "∀",
-    "spine": "∀(True).∀(Not).…"
-   }
-  ],
-  "refs": []
  },
  "Logos.DefinitiveAgencyFrontier.model_C1_passive_truth_tracker": {
   "kind": "thm",
@@ -129875,56 +128975,6 @@
    "Logos.EssenceActCollapse.MC12_Signature"
   ]
  },
- "Logos.EssenceActCollapse.model_MC12_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
- },
  "Logos.EssenceActCollapse.model_MC7_consistent": {
   "kind": "thm",
   "goal": "∃ _M, True",
@@ -129954,56 +129004,6 @@
   "refs": [
    "Logos.EssenceActCollapse.MC7_Signature"
   ]
- },
- "Logos.EssenceActCollapse.model_MC7_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
  },
  "Logos.EssenceActCollapse.model_MC8_consistent": {
   "kind": "thm",
@@ -130064,56 +129064,6 @@
   "refs": [
    "Logos.EssenceActCollapse.MC9_Signature"
   ]
- },
- "Logos.EssenceActCollapse.model_MC9_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
  },
  "Logos.EssenceActCollapse.necessary_nature_not_entails_necessary_act": {
   "kind": "thm",
@@ -130368,56 +129318,6 @@
    "Logos.EssenceActCollapse.CandidateD_SufficientFreedom",
    "Logos.TheologicalModalHardening.KripkeFrame"
   ]
- },
- "Logos.EssenceActCollapse.sufficient_freedom_not_entails_volitional_indifference.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
  },
  "Logos.EssenceActCollapse.unexecuted_volition_consistent": {
   "kind": "thm",
@@ -149562,56 +148462,6 @@
    "Logos.TheologicalModalHardening.KripkeFrame",
    "Logos.TheologicalModalHardening.KripkeFrame.R"
   ]
- },
- "Logos.FreeWillInvariance.model_FW4_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "∀",
-    "spine": "∀(True).∀(False).…"
-   }
-  ],
-  "refs": []
  },
  "Logos.FreeWillInvariance.model_FW5_consistent": {
   "kind": "thm",
@@ -192398,7 +191248,7 @@
    "Logos.ModalCreationAgency.MC5_Signature.mk",
    "Logos.ModalCreationAgency.ModelMC5._proof_1",
    "Logos.ModalCreationAgency.ModelMC5._proof_2",
-   "Logos.ModalCreationAgency.ModelMC5._proof_3",
+   "Logos.TheologicalModalHardening.CoexistenceWithoutCreationModel._proof_1",
    "Logos.TheologicalModalHardening.KripkeFrame.mk"
   ]
  },
@@ -196891,56 +195741,6 @@
    "Logos.ModalCreationAgency.Incompatible"
   ]
  },
- "Logos.ModalPossibilityFrontier.model_MC18_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
- },
  "Logos.ModalPossibilityFrontier.model_MC19_consistent": {
   "kind": "thm",
   "goal": "∃ World Subject IsGoodAt WillsAt s a v u, Logos.ModalPossibilityFrontier.PerfectGoodness World Subject IsGoodAt s ∧ Logos.ModalPossibilityFrontier.Level3_VolitionAlternative World Subject WillsAt s a v u",
@@ -197157,56 +195957,6 @@
   "refs": [
    "Logos.ModalPossibilityFrontier.Level4_AgentCausalAlternative"
   ]
- },
- "Logos.ModalPossibilityFrontier.model_MC22_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
  },
  "Logos.ModalPossibilityFrontier.model_MC23_consistent": {
   "kind": "thm",
@@ -197509,56 +196259,6 @@
    "Logos.TheologicalModalHardening.KripkeFrame",
    "Logos.TheologicalModalHardening.KripkeFrame.R"
   ]
- },
- "Logos.ModalPossibilityFrontier.model_MC25_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
  },
  "Logos.ModalPossibilityFrontier.model_MC26_consistent": {
   "kind": "thm",
@@ -198136,56 +196836,6 @@
   ]
  },
  "Logos.ModalPossibilityFrontier.model_MC30_consistent.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
- },
- "Logos.ModalPossibilityFrontier.model_MC30_consistent.match_1_3": {
   "kind": "def",
   "goal": "motive x✝",
   "goalTag": "app",
@@ -214354,56 +213004,6 @@
    "Logos.NonLibertarianCreation.NonDeterminedEvent",
    "Logos.NonLibertarianCreation.VolitionallyFree"
   ]
- },
- "Logos.NonLibertarianCreation.nondetermined_not_entails_nonfree.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , False)"
-   },
-   {
-    "binder": "h_1",
-    "head": "->",
-    "spine": "->(True , ∀(False).…)"
-   }
-  ],
-  "refs": []
  },
  "Logos.NonLibertarianCreation.nondetermined_not_entails_random": {
   "kind": "thm",
@@ -239346,56 +237946,6 @@
    {
     "binder": "_",
     "head": "And",
-    "spine": "&(True , !(…))"
-   },
-   {
-    "binder": "h_1",
-    "head": "∀",
-    "spine": "∀(True).∀(Not).…"
-   }
-  ],
-  "refs": []
- },
- "Logos.PostA14Frontier.archetype_passive_truth_tracker.match_1_3": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
     "spine": "&(!(…) , True)"
    },
    {
@@ -239406,7 +237956,7 @@
   ],
   "refs": []
  },
- "Logos.PostA14Frontier.archetype_passive_truth_tracker.match_1_5": {
+ "Logos.PostA14Frontier.archetype_passive_truth_tracker.match_1_3": {
   "kind": "def",
   "goal": "motive x✝",
   "goalTag": "app",
@@ -240038,56 +238588,6 @@
   ]
  },
  "Logos.PostA14Frontier.post_a14_fails_to_derive_discretionary_choice.match_1_1": {
-  "kind": "def",
-  "goal": "motive x✝",
-  "goalTag": "app",
-  "quant": "plain",
-  "conjuncts": [
-   {
-    "quant": "plain",
-    "sorts": [],
-    "head": "motive",
-    "spine": "motive/1(_)"
-   }
-  ],
-  "headSyms": [
-   "motive"
-  ],
-  "headShorts": [
-   "motive"
-  ],
-  "valueConjuncts": [
-   {
-    "quant": "plain",
-    "head": "And.casesOn"
-   }
-  ],
-  "valueHeads": [
-   "And.casesOn"
-  ],
-  "boundSorts": [
-   "->"
-  ],
-  "binderFree": [
-   "motive",
-   "_",
-   "h_1"
-  ],
-  "hypothesis": [
-   {
-    "binder": "_",
-    "head": "And",
-    "spine": "&(True , !(…))"
-   },
-   {
-    "binder": "h_1",
-    "head": "∀",
-    "spine": "∀(True).∀(Not).…"
-   }
-  ],
-  "refs": []
- },
- "Logos.PostA14Frontier.post_a14_fails_to_derive_discretionary_choice.match_1_3": {
   "kind": "def",
   "goal": "motive x✝",
   "goalTag": "app",
@@ -291872,12 +290372,12 @@
   "binderFree": [],
   "hypothesis": [],
   "refs": [
+   "Logos.ActionChoiceDefinitions.M_S5_selector._proof_1",
    "Logos.StrongActionChoice.Model_M_SD",
    "Logos.StrongActionChoice.Model_M_SD.mk",
    "Logos.StrongActionChoice.StrongChoosesContext.mk",
    "Logos.StrongActionChoice.m_sd_instance._proof_1",
-   "Logos.StrongActionChoice.m_sd_instance._proof_2",
-   "Logos.StrongActionChoice.m_sd_instance._proof_3"
+   "Logos.StrongActionChoice.m_sd_instance._proof_2"
   ]
  },
  "Logos.StrongActionChoice.m_sd_instance.match_1": {

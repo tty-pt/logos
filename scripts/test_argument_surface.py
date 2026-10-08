@@ -90,8 +90,8 @@ def main() -> int:
     # the score LAST. The old assertions pinned `## 11.`–`## 15.` and the score
     # first; both were the defect, so the strings below are the new headings *and*
     # their order is asserted, which is the part that actually matters.
-    for sec in ["### Step 1 — Satisfaction Is Free",
-                "### Step 9 — The Fact",
+    for sec in ["### Step 1 — Well-Foundedness of Constitutive Determination",
+                "### Step 10 — Free Will Concludes the Free Subject",
                 "## Part I — The deduction",
                 "## Part II — The characteristics of the ground",
                 "## Part III — The refutations",

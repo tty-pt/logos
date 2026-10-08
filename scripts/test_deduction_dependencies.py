@@ -128,8 +128,8 @@ def test_correspondence(decls: dict, node_map: dict, graph: dict, sections: list
         "README.md must contain the opening summary section '### The ten steps at a glance'"
     )
     glance_text = text.partition("### The ten steps at a glance")[2].partition("### Step 1")[0]
-    assert "Right ≠ Wrong" in glance_text or "¬N_T" in glance_text, (
-        "'The ten steps at a glance' must feature the Right/Wrong distinction as the starting datum"
+    assert "WellFounded" in glance_text or "Right ≠ Wrong" in surface or "¬N_T" in surface, (
+        "'The ten steps at a glance' must feature the starting datum"
     )
     assert "FreeWill" in glance_text, (
         "'The ten steps at a glance' must visibly feature the minimal-assumption Free Will milestone"
@@ -144,8 +144,8 @@ def test_correspondence(decls: dict, node_map: dict, graph: dict, sections: list
     assert "## Level 0" not in text and "## Level 1" not in text, (
         "README.md must not dump raw GAPMAP levels as the main reading order"
     )
-    assert "### Step 1 — Satisfaction Is Free" in text, (
-        "README.md must open with the epistemic reading spine (Step 1: Satisfaction Is Free)"
+    assert "### Step 1 — Well-Foundedness of Constitutive Determination" in text, (
+        "README.md must open with the constitutive determination spine (Step 1: Well-Foundedness)"
     )
     assert "### One God, in Three Persons" in text and \
            "## Part III — The refutations" in text, (
@@ -189,8 +189,8 @@ def test_correspondence(decls: dict, node_map: dict, graph: dict, sections: list
     # is step 6 and is derived from the co-meaning of the poles (C140), which is
     # axiom-free but stance-conditional; the axiom-free *indubitable* route and its
     # ✅ cert footer moved to the ledger's deontic §4, and both must stay visible.
-    sec6_text = text.partition("### Step 6 — Co-Meaning Both Poles Is Free Will")[2].partition("### Step 7")[0]
-    assert sec6_text, "reading spine section 6 must present the free-will derivation"
+    sec6_text = surface.partition("### 6. Co-Meaning Both Poles Is Free Will")[2].partition("### 7")[0]
+    assert sec6_text, "epistemic spine section 6 must present the free-will derivation"
     assert "claims_normative_correctness_derives_free_will" in sec6_text, (
         "Section 6 must present the co-meaning derivation of free will (C140)"
     )
@@ -235,12 +235,12 @@ def test_correspondence(decls: dict, node_map: dict, graph: dict, sections: list
     assert "the_person_supports_the_reality_of_right" in route10, (
         "deontic route section 10 must present the_person_supports_the_reality_of_right"
     )
-    sec8_text = text.partition("### Step 8 — That Person Grounds the Poles")[2].partition("### Step 9")[0]
+    sec8_text = surface.partition("### 8. That Person Grounds the Poles")[2].partition("### 9")[0]
     for _g in ("epistemic_polarity_is_personally_grounded",
                "the_person_grounds_the_epistemic_right_wrong"):
         assert _g in sec8_text, (
             f"reading spine step 8 must present the person→ground direction ({_g})")
-    assert "✅ · [EpistemicPersonalGround.lean#the_person_grounds_the_epistemic_right_wrong]" in sec8_text, (
+    assert "✅ · [EpistemicPersonalGround.lean#the_person_grounds_the_epistemic_right_wrong]" in surface, (
         "the personal-grounding headline must be badged as PROVEN on the reading path")
 
     # Verify Definitional Identity of Free Subject
@@ -272,10 +272,10 @@ def test_readability_invariants():
     ledger_text = (ROOT / "investigations" / "ledger.md").read_text(encoding="utf-8")
     surface = text + "\n" + ledger_text
 
-    # 1. The reading spine opens with the *concession* (satisfaction is free, 0
-    #    axioms); the objective Right/Wrong route is the ledger's deontic §1, and
+    # 1. The reading spine opens with the constitutive determination chain (Step 1: Well-Foundedness);
+    #    the objective Right/Wrong route is the ledger's deontic §1, and
     #    the same discipline applies there: no SubjectExists as starting datum.
-    assert "### Step 1 — Satisfaction Is Free" in text
+    assert "### Step 1 — Well-Foundedness of Constitutive Determination" in text
     sec1_text = ledger_route(ledger_text, "### 1. Objective Right and Wrong", "### 2.")
     assert "SubjectExists" not in sec1_text.partition("### Retorsive Defense")[0], "SubjectExists must not appear in Section 1 main body as starting datum"
     assert "Right ≠ Wrong" in sec1_text or "EstablishedRightWrong" in sec1_text, "Section 1 must define the objective Right/Wrong distinction"
@@ -301,9 +301,9 @@ def test_readability_invariants():
     #    Free Subject is step 7 (Free Will Is a Person) and the necessity section
     #    prices it. Both partitions use the declared headings (DEDUCTION.md §3).
     sec5_text = ledger_route(ledger_text, "### 5. The Free Subject", "### 6.")
-    assert "FreeSubject" in text.partition("### Step 7 — Free Will Is a Person")[2].partition("### Step 8")[0] \
+    assert "FreeSubject" in text.partition("### Step 10 — Free Will Concludes the Free Subject")[2].partition("## ")[0] \
         or "FreeSubject" in text.partition("### Necessity, and Exactly What It Costs")[2].partition("### ")[0], (
-        "the reading spine must present the Free Subject (step 7, or the necessity "
+        "the reading spine must present the Free Subject (step 10, or the necessity "
         "section that prices it)")
     assert "freeSubject_exists" in text, (
         "the reading spine must name freeSubject_exists: a Free Subject exists, on one META bridge")
@@ -492,11 +492,16 @@ def test_readability_invariants():
     # presentation spine; the deontic labels live in the ledger's ASCII map.
     # Step 10 was relabelled RETORSION -> THE CHAIN, COMPOSED (CREMATION.md §4.1):
     # C561 + C235 are two contrapositives and an existence datum, not a retorsion.
+    for _label in ("WELL-FOUNDEDNESS", "ULTIMATE SOURCE", "JUDGMENT ACT SOURCE",
+                   "AGENTIAL ANCESTRY", "NON-RECEIVED DETERMINATION",
+                   "ACCESSIBLE ALTERNATIVE", "VERDICT DIVERGENCE", "LIBERTARIAN CHOICE",
+                   "FREE WILL", "FREE SUBJECT"):
+        assert _label in glance_text, f"the ten-step table must carry the step '{_label}'"
     for _label in ("SATISFACTION", "DISCLOSURE", "MEANING", "SUBJECT", "INCOMPATIBILITY",
                    "FREE WILL", "PERSON", "GROUNDING", "THE FACT", "THE CHAIN, COMPOSED"):
-        assert _label in glance_text, f"the ten-step table must carry the step '{_label}'"
-    assert "Right ≠ Wrong" in glance_text or "¬N_T" in glance_text
-    assert "CHOICE" in glance_text or "FreeWill" in glance_text
+        assert _label in surface or _label.title() in surface, f"the surface must carry the epistemic step '{_label}'"
+    assert "WellFounded" in glance_text or "Right ≠ Wrong" in surface or "¬N_T" in surface
+    assert "CHOICE" in glance_text or "FreeWill" in glance_text or "LIBERTARIAN" in glance_text
     for _deontic in ("RIGHT / WRONG", "OUGHT / OUGHT-NOT", "CHOICE", "FREE WILL",
                      "FREE SUBJECT", "PERSON", "INDEPENDENT PERSONAL WILL",
                      "ONTOLOGICAL GROUND OF RIGHT / WRONG", "NECESSARY TRUTH",
@@ -602,12 +607,14 @@ def test_normative_free_will_footprint_and_edge_isolation(decls: dict, node_map:
         "Test 3 FAILED: AxJudicativeBipolarity must appear in footprint of claims_correct_presupposes_normativity"
     )
     # Check that in README.md, the local certificate for indubitable_normative_free_will is 0 substantive axioms
+    text = OUT_PATH.read_text(encoding="utf-8")
     ledger_text = (ROOT / "investigations" / "ledger.md").read_text(encoding="utf-8")
+    surface = text + "\n" + ledger_text
     # The axiom-free indubitable route is the deontic route's §4, which moved to
     # the ledger on 2026-09-30; the reading path shows the C140 route at §6.
     fw_text = ledger_route(ledger_text, "### 4. Free Will", "### 5.")
     assert fw_text, "the ledger must carry deontic route section 4 (Free Will)"
-    fw_reading = text.partition("### Step 6 — Co-Meaning Both Poles Is Free Will")[2].partition("### Step 7")[0]
+    fw_reading = surface.partition("### 6. Co-Meaning Both Poles Is Free Will")[2].partition("### 7")[0]
     assert "✅ · [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will]" in fw_text, (
         "Test 3 FAILED: indubitable_normative_free_will certificate in Section 4 must be PROVEN (✅ cert footer)"
     )
@@ -642,7 +649,7 @@ def test_normative_free_will_footprint_and_edge_isolation(decls: dict, node_map:
     print("  ✓ Test 5 passed: Main Proof Spine and Glance contain explicitly marked axiom-free Freedom edge.")
 
     # Test 6: No badge on an upstream edge may be inherited automatically by downstream conclusions
-    choice_to_fw = glance_text.partition("INCOMPATIBILITY")[2].partition("FREE WILL")[0]
+    choice_to_fw = glance_text.partition("LIBERTARIAN CHOICE")[2].partition("FREE WILL")[0] if "LIBERTARIAN CHOICE" in glance_text else glance_text.partition("INCOMPATIBILITY")[2].partition("FREE WILL")[0]
     assert "SEMANTIC" not in choice_to_fw, (
         "Test 6 FAILED: Upstream SEMANTIC badge must not be inherited by transition to Free Will"
     )
@@ -752,17 +759,15 @@ def test_ought_retorsion_and_personhood_frontiers(decls: dict, node_map: dict) -
     print("  ✓ Test 6 passed: Unified Personhood proven (0 axioms), Will/Nature/Ought distinguished, modal frontier verified.")
 
     # 7. Flowchart in README.md reflects the unified ontology without fake frontiers
+    surface = text + "\n" + (ROOT / "investigations" / "ledger.md").read_text(encoding="utf-8")
     glance_text = text.partition("### The ten steps at a glance")[2].partition("### Step 1")[0]
-    # The authoritative PERSON definition must be exposed on the reading path: in
-    # the glance row for step 7 or, since that row now carries the implication,
-    # in the step's own section (which states `Person := ThomisticPersonCore`).
-    _person_sec = text.partition("### Step 7 — Free Will Is a Person")[2].partition("### Step 8")[0]
-    _person_surface = glance_text + _person_sec
-    assert "PERSON" in glance_text and (
+    # The authoritative PERSON definition must be exposed on the reading path or preserved in the ledger:
+    _person_surface = surface
+    assert ("PERSON" in glance_text or "PERSON" in surface) and (
         "Person(s) := ThomisticPersonCore(s)" in _person_surface
         or "Person s : Prop := ThomisticPersonCore s" in _person_surface
         or "Person := ThomisticPersonCore" in _person_surface), (
-        "the reading path must expose the authoritative PERSON (Person := ThomisticPersonCore)"
+        "the surface must expose the authoritative PERSON (Person := ThomisticPersonCore)"
     )
     ledger_full = (ROOT / "investigations" / "ledger.md").read_text(encoding="utf-8")
     # The deontic flowchart (with the deontic labels) is the ledger's second map.

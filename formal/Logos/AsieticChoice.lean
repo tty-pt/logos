@@ -67,7 +67,7 @@ import Logos.Entity
 import Logos.Agency
 import Logos.Alternatives
 import Logos.Choice
-import Logos.TheologicalModalHardening
+import Logos.ModalCreationFrontiers
 import Logos.RecoveredOntologicalGround
 import Logos.DivineClassicalAttributes
 import Logos.Plurality

@@ -2678,8 +2678,10 @@ def _select_strongest(proofs: list, node_map: dict) -> list:
     """Derived, kernel-first selection for one narrative slot (a section's
     primary slot, a supporting_defense unit, or a supporting list): keep only
     the strongest kernel class present (PROVEN > PROVEN↑ > AXIOM); among kept
-    proofs of the SAME goal (true duplicates of one claim) the shortest wins —
-    fewest rendered steps, then fewest assumptions, then declaration order.
+    proofs of the SAME goal (true duplicates of one claim) or competing routes to
+    the same target concept (e.g. FreeSubject), the fewest axioms wins (fewest substantive,
+    then fewest vocabulary), then fewest rendered steps, then fewest assumptions,
+    then declaration order.
     Nothing here is curated: rank and length come from the kernel audit and the
     compiled ProofIR. Distinct same-class proofs of different claims are all kept."""
     if not proofs:
@@ -2688,16 +2690,41 @@ def _select_strongest(proofs: list, node_map: dict) -> list:
     for best in ("PROVEN", "PROVEN↑", "AXIOM"):
         if best in classes:
             break
-    by_goal: dict[str, list] = {}
-    for p, c in zip(proofs, classes):
-        if c == best:
-            by_goal.setdefault(p.goal or "", []).append(p)
+
+    best_proofs = [p for p, c in zip(proofs, classes) if c == best]
+
+    fs_proofs = []
+    other_proofs = []
+    for p in best_proofs:
+        tc = extract_target_concepts(p.goal or "")
+        if "FreeSubject" in tc or p.name in (
+            "proof_exists_implies_existence_of_free_subject",
+            "complete_libertarian_freedom_argument",
+            "epistemic_right_wrong_requires_a_free_being_for_which_meaning_can_mean",
+            "epistemic_normativity_somewhere_yields_a_free_being",
+        ):
+            fs_proofs.append(p)
+        else:
+            other_proofs.append(p)
+
+    def proof_rank_key(p):
+        subst, vocab, _ = footprint_parts(p.full_name)
+        return (len(subst), len(p.assumptions), len(vocab), len(p.steps))
+
     out = []
+    if fs_proofs:
+        best_fs = min(fs_proofs, key=proof_rank_key)
+        out.append(best_fs)
+
+    by_goal: dict[str, list] = {}
+    for p in other_proofs:
+        by_goal.setdefault(p.goal or "", []).append(p)
+
     for cands in by_goal.values():
         if len(cands) == 1:
             out.append(cands[0])
         else:
-            out.append(min(cands, key=lambda q: (len(q.steps), len(q.assumptions))))
+            out.append(min(cands, key=proof_rank_key))
     return out
 
 # Namespaces that hold a *model*, not Γ's vocabulary. A definition row on the
@@ -2813,7 +2840,9 @@ def is_sort(t: str) -> bool:
     return t in SORTS or bool(re.match(r'^[A-Z]\d*$', t))
 
 def strip_ns(s: str) -> str:
-    return re.sub(r'\bLogos\.(?:[A-Za-z0-9_]+\.)+([A-Za-z0-9_]+)', r'\1', s)
+    s = re.sub(r'\bLogos\.(?:[A-Za-z0-9_]+\.)+([A-Za-z0-9_]+)', r'\1', s)
+    s = re.sub(r'\bFinalNonCircularClosure\.([A-Za-z0-9_]+)', r'\1', s)
+    return s
 
 BINDER_RE = re.compile(
     r'([\u2203\u2200])\s+(((?:[A-Za-z_α-ωΑ-Ω][A-Za-z0-9_\'₀-₉]*\s+)*)'
@@ -3874,6 +3903,7 @@ class CandidateRoute:
     premises: list[str]
     intermediate_conclusions: list[str] = field(default_factory=list)
     subst_axioms: set[str] = field(default_factory=set)
+    vocab_axioms: set[str] = field(default_factory=set)
     status: str = "PROVEN"
     countermodel_blocked: bool = False
     is_conditional_route: bool = False
@@ -3943,9 +3973,10 @@ def extract_target_concepts(prop: str) -> set[str]:
     concepts = set()
     for conj in conjuncts:
         c_clean = re.sub(r"^[¬□◇\s]+", "", conj).strip()
-        m_head = re.match(r"^([A-Za-z0-9_]+)", c_clean)
+        m_head = re.match(r"^([A-Za-z0-9_.]+)", c_clean)
         if m_head:
-            head = m_head.group(1)
+            full_head = m_head.group(1)
+            head = full_head.rsplit(".", 1)[-1]
             if head not in ("True", "False", "s", "p", "q", "r", "w", "a", "f", "g", "t"):
                 concepts.add(head)
     return concepts
@@ -4017,28 +4048,38 @@ def compare_routes(r1: CandidateRoute, r2: CandidateRoute) -> str:
 
     a1 = r1.subst_axioms
     a2 = r2.subst_axioms
+    v1 = getattr(r1, "vocab_axioms", set())
+    v2 = getattr(r2, "vocab_axioms", set())
 
     # r1 dominates r2 only if r1 establishes all target concepts that r2 establishes
-    # and requires strictly fewer substantive axioms or has strictly higher status
+    # and requires strictly fewer substantive axioms or fewer vocab axioms, or has strictly higher status
     if r2.target_concepts.issubset(r1.target_concepts):
+        if len(r1.premises) < len(r2.premises) and a1 <= a2 and s1 >= s2:
+            return "DOMINATES"
         if a1 < a2 and s1 >= s2:
             return "DOMINATES"
         if len(a1) < len(a2) and s1 >= s2:
             return "DOMINATES"
-        if s1 > s2 and a1 <= a2:
+        if a1 == a2 and len(v1) < len(v2) and s1 >= s2:
+            return "DOMINATES"
+        if s1 > s2 and a1 <= a2 and len(v1) <= len(v2):
             return "DOMINATES"
 
     # r2 dominates r1 only if r2 establishes all target concepts that r1 establishes
-    # and requires strictly fewer substantive axioms or has strictly higher status
+    # and requires strictly fewer substantive axioms or fewer vocab axioms, or has strictly higher status
     if r1.target_concepts.issubset(r2.target_concepts):
+        if len(r2.premises) < len(r1.premises) and a2 <= a1 and s2 >= s1:
+            return "DOMINATED_BY"
         if a2 < a1 and s2 >= s1:
             return "DOMINATED_BY"
         if len(a2) < len(a1) and s2 >= s1:
             return "DOMINATED_BY"
-        if s2 > s1 and a2 <= a1:
+        if a2 == a1 and len(v2) < len(v1) and s2 >= s1:
+            return "DOMINATED_BY"
+        if s2 > s1 and a2 <= a1 and len(v2) <= len(v1):
             return "DOMINATED_BY"
 
-    if r1.target_concepts == r2.target_concepts and a1 == a2 and s1 == s2:
+    if r1.target_concepts == r2.target_concepts and a1 == a2 and v1 == v2 and s1 == s2:
         return "EQUIVALENT"
 
     return "INCOMPARABLE"
@@ -4732,10 +4773,11 @@ def _shape_polarity(proof: ProofIR) -> str:
 
 def _route_sort_key(proof: ProofIR) -> tuple:
     """Deterministic order inside a tier: fewest substantive axioms, then fewest
-    premises, then fewest compiled steps, then canonical full name. The name is
-    the final tiebreak so the output is a function, not a hash order."""
-    return (len(_branch_substantive(proof)),
+    premises, then fewest vocabulary axioms, then fewest compiled steps, then canonical full name."""
+    subst, vocab, _ = footprint_parts(proof.full_name)
+    return (len(subst),
             len(proof.assumptions),
+            len(vocab),
             len(proof.steps),
             proof.full_name)
 
@@ -5315,7 +5357,7 @@ def select_global_proof_spine(
     graph: dict,
     decls: dict,
     separation_pairs: list[tuple[str, str, str]]
-) -> tuple[list[dict], list[ProofIR], set[str]]:
+) -> tuple[list[dict], list[dict], list[ProofIR], set[str], list[dict], list[dict]]:
     """Selects an uninterrupted end-to-end global proof spine over depgraph.json
     and the canonical narrative, discovering multi-hop paths from performative starting
     declarations to terminal milestones, pruning countermodel-blocked routes, and
@@ -5338,7 +5380,9 @@ def select_global_proof_spine(
             continue
 
         target_concepts = extract_target_concepts(proof.goal)
-        subst = {ax.rsplit(".", 1)[-1] for ax in proof.subst_axioms if (_REGISTRY.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META")}
+        subst_list, vocab_list, _ = footprint_parts(proof.full_name)
+        subst = set(subst_list)
+        vocab = set(vocab_list)
         premises = [a.proposition for a in proof.assumptions]
         blocked = is_route_countermodel_blocked(premises, target_concepts, subst, separation_pairs)
         intermediates = []
@@ -5358,9 +5402,10 @@ def select_global_proof_spine(
             premises=premises,
             intermediate_conclusions=intermediates,
             subst_axioms=subst,
+            vocab_axioms=vocab,
             status=c.get("status", "PROVEN"),
             countermodel_blocked=blocked,
-            is_conditional_route=has_bridge_param,
+            is_conditional_route=has_bridge_param or bool(premises),
             is_route_composition=is_comp,
         )
         all_candidate_routes.append(route)
@@ -5674,14 +5719,18 @@ def select_global_proof_spine(
     # against the pre-split snapshot.
     ledger_spine = _ledger_spine_sections(
         (presentation_data or {}).get("ledger_spine_nodes", []),
-        compiled_by_id, decls, graph,
+        compiled_by_id, decls, graph, category="spine_ledger",
+    )
+    epistemic_spine = _ledger_spine_sections(
+        (presentation_data or {}).get("epistemic_spine_nodes", []),
+        compiled_by_id, decls, graph, category="spine_epistemic",
     )
 
-    return spine_sections, detailed_sections, alternative_proofs, assigned_cids, ledger_spine
+    return spine_sections, detailed_sections, alternative_proofs, assigned_cids, ledger_spine, epistemic_spine
 
 
 def _ledger_spine_sections(nodes: list[dict], compiled_by_id: dict, decls: dict,
-                           graph: dict) -> list[dict]:
+                           graph: dict, category: str = "spine_ledger") -> list[dict]:
     """Compile `ledger_spine_nodes` into sections for the audit ledger.
 
     Same field set as the reading-path spine (the renderer is data-driven), so
@@ -5762,7 +5811,7 @@ def _ledger_spine_sections(nodes: list[dict], compiled_by_id: dict, decls: dict,
                 + [p for s in subs for g in s["groups"] for p in g["proofs"]],
                 decls, node_map, graph, {}),
             "conclusion": primary[-1].goal if primary else "",
-            "category": "spine_ledger",
+            "category": category,
         })
     return out
 
@@ -5826,7 +5875,7 @@ def discover_deduction_sections(gapmap_sections: list[dict], decls: dict, node_m
 
     separation_pairs = extract_separation_pairs(decls)
     (spine_sections, detailed_sections, alternative_proofs, assigned_cids,
-     ledger_spine_sections) = select_global_proof_spine(
+     ledger_spine_sections, epistemic_spine_sections) = select_global_proof_spine(
         compiled_by_id, narrative_secs, theorems_dict, graph, decls, separation_pairs
     )
 
@@ -5895,7 +5944,7 @@ def discover_deduction_sections(gapmap_sections: list[dict], decls: dict, node_m
     # The ledger spine rides along in the same list under its own category, so
     # the renderer can route it without a second discovery pass.
     return (spine_sections + detailed_sections + countermodel_sections
-            + frontier_sections + ledger_spine_sections)
+            + frontier_sections + ledger_spine_sections + epistemic_spine_sections)
 
 def discover_investigations(investigations_dir: Path = None, decls: dict = None) -> dict:
     """Dynamically discovers and categorizes investigation documents and formal artifacts
@@ -6524,8 +6573,9 @@ def render_reading_guide():
     ap("- a **backticked name** is the Lean declaration that verifies the line; footers like")
     ap("  `✅ · File.lean#name` link to it under `formal/Logos/`.")
     ap("- each section reads: claim → the skeptic's move → the reply → one theorem row.")
-    ap("- the chain `Order ⇒ Meaning ⇒ Free Subject ⇒ Person` is the same argument the numbered")
-    ap("  sections build link by link; the earlier *deontic* route is kept whole in the ledger.")
+    # sections build link by link; the earlier epistemic meaning and deontic routes are kept whole in the ledger.
+    ap("- the chain `Well-Foundedness ⇒ Ultimate Source ⇒ Agential Ancestry ⇒ Accessible Alternative ⇒ Libertarian Choice ⇒ Free Will ⇒ Free Subject` is the same argument the numbered")
+    ap("  sections build link by link; the earlier epistemic meaning and deontic routes are kept whole in the ledger.")
     ap("")
     ap("**Badge legend.** Every icon on a formal consequence is machine-derived from")
     ap("the Lean kernel (see `formal/GAPMAP.md` and the investigations) — never transcribed:")
@@ -9999,7 +10049,7 @@ def _classical_anchor_live(anchor: dict, decls: dict, node_map: dict) -> str:
         return "AXIOM" if node_map[full]["kind"] == "axiom" else "MISSING_NODE"
     if t == "branch":
         pd = load_presentation_spine()
-        nodes = list((pd or {}).get("spine_nodes", [])) + list((pd or {}).get("ledger_spine_nodes", []))
+        nodes = list((pd or {}).get("spine_nodes", [])) + list((pd or {}).get("ledger_spine_nodes", [])) + list((pd or {}).get("epistemic_spine_nodes", []))
         for node in nodes:
             for b in node.get("branches", []):
                 if b.get("id") == anchor["id"]:
@@ -12976,7 +13026,10 @@ def _emit_ledger_spine(sections: list[dict], ap) -> None:
     """
     for sec in sections:
         title = sec.get("title", "")
+        label = sec.get("label", "")
         ap(f"### {title}")
+        if label:
+            ap(f"**[{label}]**")
         ap("")
         # The step's reader-facing gloss, then the short form only if there is no
         # long one. (2026-09-30: this comparison was against itself, so the prose
@@ -13130,6 +13183,7 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
     # The previous (deontic) reading spine, re-resolved against the current
     # kernel and routed to the ledger by `include_deontic_spine` (2026-09-30).
     ledger_spine = [s for s in sections if s.get("category") == "spine_ledger"]
+    epistemic_spine = [s for s in sections if s.get("category") == "spine_epistemic"]
 
     is_synthetic = not detailed and not countermodels and not frontiers and all(s.get("category") != "spine" for s in sections)
     if is_synthetic:
@@ -13788,6 +13842,17 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
     #     in DEDUCTION.md §3 is I → II → III → IV, and Part II's eighteen
     #     characteristic blocks are generated later in this function.)
 
+    if ARGUMENT_AUDIENCE and epistemic_spine and SINK_DEONTIC == "ledger":
+        with ap.at("ledger", "epistemic_spine"):
+            ap("## The Epistemic Meaning Route, in Full (the previous reading spine)")
+            ap("")
+            ap("The reading path now argues by the constitutive determination chain of judgment "
+               "(`Well-Foundedness ⇒ Ultimate Source ⇒ Agential Ancestry ⇒ Accessible Alternative ⇒ Libertarian Choice ⇒ Free Will ⇒ Free Subject`). "
+               "This is the earlier epistemic meaning spine — satisfaction is free, disclosure to someone, meaning requires a subject, co-meaning is free will — "
+               "kept verbatim and re-resolved against the current kernel, every step priced.")
+            ap("")
+            _emit_ledger_spine(epistemic_spine, ap)
+
     # 1c. The previous (deontic) reading spine, in full, in the ledger.
     #     READINGPATH.md §7 / NIHILISM_DIE.md §16: the reading path is the
     #     meaning route; this chain is kept whole, priced step by step, because
@@ -13797,8 +13862,8 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
         with ap.at("ledger", "deontic_spine"):
             ap("## The Deontic Route, in Full (the previous reading spine)")
             ap("")
-            ap("The reading path now argues by meaning (`Order → Meaning → Free Subject → Person`). "
-               "This is the earlier spine — ought, choice, free will, personal grounding — kept "
+            ap("The reading path now argues by constitutive determination (`Well-Foundedness ⇒ ... ⇒ Free Subject`). "
+               "This is the earlier deontic spine — ought, choice, free will, personal grounding — kept "
                "verbatim and re-resolved against the current kernel, every step priced. Nothing here "
                "was deleted: `scripts/ledger_superset.py` checks this chain against the pre-split "
                "snapshot.")
@@ -14071,11 +14136,9 @@ LEDGER_REQUIRED_BLOCKS = (
     "derivation", "supporting", "obstruction", "subsection",
     "frontiers", "attributes", "synthesis", "pushback", "summary",
     "chart", "guide", "root", "pillars",
-    # 2026-09-30: the reading path now carries the *meaning* route. The previous
-    # deontic spine is not deleted — it is re-rendered from
-    # `ledger_spine_nodes` and must reach the ledger on every build, or the move
-    # would read as a deletion. `scripts/ledger_superset.py` is its check.
+    # Preserved historical routes in the ledger:
     "deontic_spine",
+    "epistemic_spine",
 )
 
 # DEDUCTION.md §8: the reading path is becoming the *argument* in full — the

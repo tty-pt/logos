@@ -436,37 +436,37 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 | C413 | `Logos.Plurality.contingentKind_existsAt_actualWorld_only` | [Plurality.lean#L126](formal/Logos/Plurality.lean#L126) | `{NecessarySubjectKind, Subject}` | `Agency.ContingentSubjectKind`, **C403** `NecessarySubjectKind`, axiom `Subject` (VOCAB), `Entity.SubjectExistsAt`, `Entity.actualWorld`, `Semantics.World` | — |
 | C414 | `Logos.Plurality.falsityWorld_holds_no_contingent_subject` | [Plurality.lean#L149](formal/Logos/Plurality.lean#L149) | `{NecessarySubjectKind, Subject}` | `Agency.ContingentSubjectKind`, **C403** `NecessarySubjectKind`, axiom `Subject` (VOCAB), `Entity.SubjectExistsAt`, `Entity.actualWorld`, `Entity.falsityWorld`, `Semantics.TV`, `Semantics.World` | — |
 | C415 | `Logos.Plurality.contingentSubject_might_not_have_existed` | [Plurality.lean#L163](formal/Logos/Plurality.lean#L163) | `{NecessarySubjectKind, Subject}` | `Agency.ContingentSubjectKind`, **C403** `NecessarySubjectKind`, axiom `Subject` (VOCAB), `Entity.SubjectExistsAt`, `Entity.actualWorld`, `Entity.falsityWorld`, `Semantics.TV`, `Semantics.World` | — |
-| C417 | `Logos.Precedence.no_atom_is_true_at_falsityWorld` | [DivineTrinitarianAttributes.lean#L477](formal/Logos/DivineTrinitarianAttributes.lean#L477) | `{}` | `Entity.falsityWorld`, `Semantics.Satisfies` | **C420** `ground_existence_does_not_entail_any_truth`, **C419** `ofGround_obtains_where_no_atom_is_true` |
-| C418 | `Logos.Precedence.every_world_satisfies_some_form` | [DivineTrinitarianAttributes.lean#L492](formal/Logos/DivineTrinitarianAttributes.lean#L492) | `{}` | `Semantics.Form`, `Semantics.Satisfies`, `Semantics.TV`, `Semantics.World` | — |
-| C419 | `Logos.Precedence.ofGround_obtains_where_no_atom_is_true` | [DivineTrinitarianAttributes.lean#L514](formal/Logos/DivineTrinitarianAttributes.lean#L514) | `{NecessarySubjectKind, Subject}` | **Q7.2** `ExistsAt`, `Entity.falsityWorld`, **C417** `no_atom_is_true_at_falsityWorld`, `Semantics.Satisfies`, `Semantics.World` | **C421** `ground_existence_is_invariant_while_content_varies`, **C425** `ofGround_precedes_the_right_wrong_distinction` |
-| C420 | `Logos.Precedence.ground_existence_does_not_entail_any_truth` | [DivineTrinitarianAttributes.lean#L532](formal/Logos/DivineTrinitarianAttributes.lean#L532) | `{NecessarySubjectKind, Subject}` | **Q7.2** `ExistsAt`, `Entity.falsityWorld`, **C417** `no_atom_is_true_at_falsityWorld`, `Semantics.Form`, `Semantics.Satisfies`, `Semantics.World` | **C421** `ground_existence_is_invariant_while_content_varies` |
-| C421 | `Logos.Precedence.ground_existence_is_invariant_while_content_varies` | [DivineTrinitarianAttributes.lean#L550](formal/Logos/DivineTrinitarianAttributes.lean#L550) | `{NecessarySubjectKind, Subject}` | **Q7.2** `ExistsAt`, **C420** `ground_existence_does_not_entail_any_truth`, **C419** `ofGround_obtains_where_no_atom_is_true`, `Semantics.Form`, `Semantics.Satisfies`, `Semantics.World` | — |
-| C422 | `Logos.Precedence.ground_scope_is_not_the_truth_set` | [DivineTrinitarianAttributes.lean#L587](formal/Logos/DivineTrinitarianAttributes.lean#L587) | `{Means, Subject}` | `Core.T`, `RecoveredOntologicalGround.EntityMeans` | **C425** `ofGround_precedes_the_right_wrong_distinction` |
-| C423 | `Logos.Precedence.ground_conditions_every_content_bearer` | [DivineTrinitarianAttributes.lean#L605](formal/Logos/DivineTrinitarianAttributes.lean#L605) | `{Means, NecessarySubjectKind, Subject}` | `Entity.Entity`, **Q7.2** `ExistsAt`, `RecoveredOntologicalGround.EntityMeans`, `RecoveredOntologicalGround.OneEssence`, `Semantics.World` | **C425** `ofGround_precedes_the_right_wrong_distinction` |
-| C424 | `Logos.Precedence.atom_fails_precedence` | [DivineTrinitarianAttributes.lean#L566](formal/Logos/DivineTrinitarianAttributes.lean#L566) | `{NecessarySubjectKind, Subject}` | **Q7.2** `ExistsAt`, `Semantics.Satisfies`, `Semantics.World` | — |
-| C425 | `Logos.Precedence.ofGround_precedes_the_right_wrong_distinction` | [DivineTrinitarianAttributes.lean#L655](formal/Logos/DivineTrinitarianAttributes.lean#L655) | `{Means, NecessarySubjectKind, Subject}` | `Entity.Entity`, **Q7.2** `ExistsAt`, `Precedence.PrecedesRightWrong`, **C423** `ground_conditions_every_content_bearer`, **C422** `ground_scope_is_not_the_truth_set`, **C419** `ofGround_obtains_where_no_atom_is_true`, `RecoveredOntologicalGround.EntityMeans`, `Semantics.World` | — |
-| C426 | `Logos.Precedence.rightWrongDistinction_is_world_invariant` | [DivineTrinitarianAttributes.lean#L682](formal/Logos/DivineTrinitarianAttributes.lean#L682) | `{}` | `Core.N_F`, `Core.N_T`, **C36** `rightWrongDistinction`, `Semantics.World` | — |
+| C417 | `Logos.Precedence.no_atom_is_true_at_falsityWorld` | [DivineTrinitarianAttributes.lean#L478](formal/Logos/DivineTrinitarianAttributes.lean#L478) | `{}` | `Entity.falsityWorld`, `Semantics.Satisfies` | **C420** `ground_existence_does_not_entail_any_truth`, **C419** `ofGround_obtains_where_no_atom_is_true` |
+| C418 | `Logos.Precedence.every_world_satisfies_some_form` | [DivineTrinitarianAttributes.lean#L493](formal/Logos/DivineTrinitarianAttributes.lean#L493) | `{}` | `Semantics.Form`, `Semantics.Satisfies`, `Semantics.TV`, `Semantics.World` | — |
+| C419 | `Logos.Precedence.ofGround_obtains_where_no_atom_is_true` | [DivineTrinitarianAttributes.lean#L515](formal/Logos/DivineTrinitarianAttributes.lean#L515) | `{NecessarySubjectKind, Subject}` | **Q7.2** `ExistsAt`, `Entity.falsityWorld`, **C417** `no_atom_is_true_at_falsityWorld`, `Semantics.Satisfies`, `Semantics.World` | **C421** `ground_existence_is_invariant_while_content_varies`, **C425** `ofGround_precedes_the_right_wrong_distinction` |
+| C420 | `Logos.Precedence.ground_existence_does_not_entail_any_truth` | [DivineTrinitarianAttributes.lean#L533](formal/Logos/DivineTrinitarianAttributes.lean#L533) | `{NecessarySubjectKind, Subject}` | **Q7.2** `ExistsAt`, `Entity.falsityWorld`, **C417** `no_atom_is_true_at_falsityWorld`, `Semantics.Form`, `Semantics.Satisfies`, `Semantics.World` | **C421** `ground_existence_is_invariant_while_content_varies` |
+| C421 | `Logos.Precedence.ground_existence_is_invariant_while_content_varies` | [DivineTrinitarianAttributes.lean#L551](formal/Logos/DivineTrinitarianAttributes.lean#L551) | `{NecessarySubjectKind, Subject}` | **Q7.2** `ExistsAt`, **C420** `ground_existence_does_not_entail_any_truth`, **C419** `ofGround_obtains_where_no_atom_is_true`, `Semantics.Form`, `Semantics.Satisfies`, `Semantics.World` | — |
+| C422 | `Logos.Precedence.ground_scope_is_not_the_truth_set` | [DivineTrinitarianAttributes.lean#L588](formal/Logos/DivineTrinitarianAttributes.lean#L588) | `{Means, Subject}` | `Core.T`, `RecoveredOntologicalGround.EntityMeans` | **C425** `ofGround_precedes_the_right_wrong_distinction` |
+| C423 | `Logos.Precedence.ground_conditions_every_content_bearer` | [DivineTrinitarianAttributes.lean#L606](formal/Logos/DivineTrinitarianAttributes.lean#L606) | `{Means, NecessarySubjectKind, Subject}` | `Entity.Entity`, **Q7.2** `ExistsAt`, `RecoveredOntologicalGround.EntityMeans`, `RecoveredOntologicalGround.OneEssence`, `Semantics.World` | **C425** `ofGround_precedes_the_right_wrong_distinction` |
+| C424 | `Logos.Precedence.atom_fails_precedence` | [DivineTrinitarianAttributes.lean#L567](formal/Logos/DivineTrinitarianAttributes.lean#L567) | `{NecessarySubjectKind, Subject}` | **Q7.2** `ExistsAt`, `Semantics.Satisfies`, `Semantics.World` | — |
+| C425 | `Logos.Precedence.ofGround_precedes_the_right_wrong_distinction` | [DivineTrinitarianAttributes.lean#L656](formal/Logos/DivineTrinitarianAttributes.lean#L656) | `{Means, NecessarySubjectKind, Subject}` | `Entity.Entity`, **Q7.2** `ExistsAt`, `Precedence.PrecedesRightWrong`, **C423** `ground_conditions_every_content_bearer`, **C422** `ground_scope_is_not_the_truth_set`, **C419** `ofGround_obtains_where_no_atom_is_true`, `RecoveredOntologicalGround.EntityMeans`, `Semantics.World` | — |
+| C426 | `Logos.Precedence.rightWrongDistinction_is_world_invariant` | [DivineTrinitarianAttributes.lean#L683](formal/Logos/DivineTrinitarianAttributes.lean#L683) | `{}` | `Core.N_F`, `Core.N_T`, **C36** `rightWrongDistinction`, `Semantics.World` | — |
 | C427 | `Logos.DivineImmutability.no_world_indexed_extension_of_meaning_can_vary` | [DivineClassicalAttributes.lean#L1198](formal/Logos/DivineClassicalAttributes.lean#L1198) | `{Means, Subject}` | `Entity.Entity`, `RecoveredOntologicalGround.EntityMeans`, `Semantics.World` | — |
 | C428 | `Logos.DivineImmutability.world_indexed_extension_of_meaning_is_world_constant` | [DivineClassicalAttributes.lean#L1219](formal/Logos/DivineClassicalAttributes.lean#L1219) | `{Means, Subject}` | `Entity.Entity`, `RecoveredOntologicalGround.EntityMeans`, `Semantics.World` | — |
 | C429 | `Logos.CosmicExistence.no_entity_is_identical_to_the_whole` | [DivineClassicalAttributes.lean#L4641](formal/Logos/DivineClassicalAttributes.lean#L4641) | `{NecessarySubjectKind, Subject}` | axiom `Subject` (VOCAB), `Entity.Entity`, **Q7.2** `ExistsAt`, `Entity.actualWorld`, `Semantics.TV`, `Semantics.World` | **C431** `grounding_never_yields_identity_of_the_totality`, **C430** `the_ground_is_not_the_universe` |
 | C430 | `Logos.CosmicExistence.the_ground_is_not_the_universe` | [DivineClassicalAttributes.lean#L4652](formal/Logos/DivineClassicalAttributes.lean#L4652) | `{NecessarySubjectKind, Subject}` | `CosmicExistence.Universe`, **C429** `no_entity_is_identical_to_the_whole`, `Entity.Entity`, **Q7.2** `ExistsAt`, `Semantics.World` | — |
 | C431 | `Logos.CosmicExistence.grounding_never_yields_identity_of_the_totality` | [DivineClassicalAttributes.lean#L4669](formal/Logos/DivineClassicalAttributes.lean#L4669) | `{Means, NecessarySubjectKind, Subject}` | `CosmicExistence.Universe`, **C429** `no_entity_is_identical_to_the_whole`, `Entity.Entity`, **Q7.2** `ExistsAt`, `RecoveredOntologicalGround.OneEssence`, `Semantics.World` | — |
 | C564 | `Logos.CosmicExistence.ofGround_not_a_person_correlate` | [DivineClassicalAttributes.lean#L4586](formal/Logos/DivineClassicalAttributes.lean#L4586) | `{Means, Subject, Will, subjectWill}` | axiom `Subject` (VOCAB), `Entity.Entity`, `Entity.EntityOf`, `NecessityEternity.ofGround_ne_ofSubject`, `Person.Person`, `PersonalNormativeGround.PersonCorrelate` | — |
-| C432 | `Logos.Precedence.stage_invariance_iff_atemporal` | [DivineTrinitarianAttributes.lean#L706](formal/Logos/DivineTrinitarianAttributes.lean#L706) | `{NecessarySubjectKind, Subject}` | `DivineImmutability.StageInvariance`, `Entity.Entity`, `NecessityEternity.Atemporal` | — |
-| C433 | `Logos.Precedence.ofGround_sole_precedes_right_wrong` | [DivineTrinitarianAttributes.lean#L744](formal/Logos/DivineTrinitarianAttributes.lean#L744) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Entity.Entity`, `Entity.EntityOf`, **Q7.2** `ExistsAt`, `Entity.actualWorld`, `Precedence.PrecedesRightWrong`, `RecoveredOntologicalGround.EntityMeans`, `RecoveredOntologicalGround.OneEssence`, axiom `GroundTranscendence` (META), `Semantics.Satisfies`, `Semantics.World` | **C435** `precedence_identifies_the_ground_where_stage_invariance_does_not` |
-| C434 | `Logos.Precedence.stage_invariance_does_not_uniquely_identify_the_ground` | [DivineTrinitarianAttributes.lean#L782](formal/Logos/DivineTrinitarianAttributes.lean#L782) | `{NecessarySubjectKind, Subject, CL}` | `DivineImmutability.StageInvariance`, **C199** `ofGround_stage_invariance`, `Entity.Entity`, **Q7.2** `ExistsAt`, `NecessityEternity.ExistsAtTime`, `NecessityEternity.Time`, `NecessityEternity.stageOf`, `Semantics.TV` | **C435** `precedence_identifies_the_ground_where_stage_invariance_does_not` |
-| C435 | `Logos.Precedence.precedence_identifies_the_ground_where_stage_invariance_does_not` | [DivineTrinitarianAttributes.lean#L812](formal/Logos/DivineTrinitarianAttributes.lean#L812) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject, CL}` | `DivineImmutability.StageInvariance`, `Entity.Entity`, `Precedence.PrecedesRightWrong`, **C433** `ofGround_sole_precedes_right_wrong`, **C434** `stage_invariance_does_not_uniquely_identify_the_ground` | — |
+| C432 | `Logos.Precedence.stage_invariance_iff_atemporal` | [DivineTrinitarianAttributes.lean#L707](formal/Logos/DivineTrinitarianAttributes.lean#L707) | `{NecessarySubjectKind, Subject}` | `DivineImmutability.StageInvariance`, `Entity.Entity`, `NecessityEternity.Atemporal` | — |
+| C433 | `Logos.Precedence.ofGround_sole_precedes_right_wrong` | [DivineTrinitarianAttributes.lean#L745](formal/Logos/DivineTrinitarianAttributes.lean#L745) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Entity.Entity`, `Entity.EntityOf`, **Q7.2** `ExistsAt`, `Entity.actualWorld`, `Precedence.PrecedesRightWrong`, `RecoveredOntologicalGround.EntityMeans`, `RecoveredOntologicalGround.OneEssence`, axiom `GroundTranscendence` (META), `Semantics.Satisfies`, `Semantics.World` | **C435** `precedence_identifies_the_ground_where_stage_invariance_does_not` |
+| C434 | `Logos.Precedence.stage_invariance_does_not_uniquely_identify_the_ground` | [DivineTrinitarianAttributes.lean#L783](formal/Logos/DivineTrinitarianAttributes.lean#L783) | `{NecessarySubjectKind, Subject, CL}` | `DivineImmutability.StageInvariance`, **C199** `ofGround_stage_invariance`, `Entity.Entity`, **Q7.2** `ExistsAt`, `NecessityEternity.ExistsAtTime`, `NecessityEternity.Time`, `NecessityEternity.stageOf`, `Semantics.TV` | **C435** `precedence_identifies_the_ground_where_stage_invariance_does_not` |
+| C435 | `Logos.Precedence.precedence_identifies_the_ground_where_stage_invariance_does_not` | [DivineTrinitarianAttributes.lean#L813](formal/Logos/DivineTrinitarianAttributes.lean#L813) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject, CL}` | `DivineImmutability.StageInvariance`, `Entity.Entity`, `Precedence.PrecedesRightWrong`, **C433** `ofGround_sole_precedes_right_wrong`, **C434** `stage_invariance_does_not_uniquely_identify_the_ground` | — |
 | C436 | `Logos.NecessityEternity.everlasting_implies_atemporal` | [DivineClassicalAttributes.lean#L364](formal/Logos/DivineClassicalAttributes.lean#L364) | `{NecessarySubjectKind, Subject}` | `Entity.Entity`, `NecessityEternity.Atemporal`, `NecessityEternity.Everlasting`, `NecessityEternity.ExistsAtTime`, `NecessityEternity.Time` | **C438** `everlastingness_and_timelessness_are_distinct` |
 | C437 | `Logos.NecessityEternity.contingent_subject_is_timeless_but_not_everlasting` | [DivineClassicalAttributes.lean#L386](formal/Logos/DivineClassicalAttributes.lean#L386) | `{NecessarySubjectKind, Subject}` | `Agency.ContingentSubjectKind`, **C403** `NecessarySubjectKind`, axiom `Subject` (VOCAB), `Entity.EntityOf`, `Entity.actualWorld`, `NecessityEternity.Atemporal`, `NecessityEternity.Everlasting`, `NecessityEternity.ExistsAtTime`, `NecessityEternity.Time`, `NecessityEternity.stageOf`, `NecessityEternity.subject_not_everlasting`, `Semantics.TV`, `Semantics.World` | **C438** `everlastingness_and_timelessness_are_distinct` |
 | C438 | `Logos.NecessityEternity.everlastingness_and_timelessness_are_distinct` | [DivineClassicalAttributes.lean#L430](formal/Logos/DivineClassicalAttributes.lean#L430) | `{NecessarySubjectKind, Subject}` | `Agency.ContingentSubjectKind`, axiom `Subject` (VOCAB), `Entity.Entity`, `Entity.EntityOf`, `NecessityEternity.Atemporal`, `NecessityEternity.Everlasting`, **C437** `contingent_subject_is_timeless_but_not_everlasting`, **C436** `everlasting_implies_atemporal` | — |
 | C439 | `Logos.DivineSimplicity.divine_simplicity_is_unique_to_the_ground` | [DivineClassicalAttributes.lean#L869](formal/Logos/DivineClassicalAttributes.lean#L869) | `{Means, Subject}` | axiom `Subject` (VOCAB), `DivineSimplicity.DivineSimplicity`, `Entity.Entity` | **C446** `the_ground_is_sole_bearer_of_the_footprint_characteristics`, **C440** `divine_simplicity_sole_bearer` |
 | C440 | `Logos.DivineSimplicity.divine_simplicity_sole_bearer` | [DivineClassicalAttributes.lean#L886](formal/Logos/DivineClassicalAttributes.lean#L886) | `{Means, Subject, CL}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `DivineSimplicity.DivineSimplicity`, **C439** `divine_simplicity_is_unique_to_the_ground`, **C196** `ofGround_divine_simplicity`, `Entity.Entity` | **C486** `the_ground_is_sole_bearer_of_divine_simplicity` |
-| C441 | `Logos.CharacteristicSoleBearer.no_subject_grounds_the_ground` | [DivineTrinitarianAttributes.lean#L1179](formal/Logos/DivineTrinitarianAttributes.lean#L1179) | `{GroundTranscendence, Means, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `CanonicalAseity.discriminating_subject_cannot_ground_the_ground`, `Entity.EntityOf`, `RecoveredOntologicalGround.OneEssence`, axiom `GroundTranscendence` (META) | **C443** `ofGround_sole_foundational_omnipotence`, **C442** `ofGround_sole_foundational_omniscience` |
-| C442 | `Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omniscience` | [DivineTrinitarianAttributes.lean#L1199](formal/Logos/DivineTrinitarianAttributes.lean#L1199) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject}` | axiom `Subject` (VOCAB), **C441** `no_subject_grounds_the_ground`, `DivineOmniscience.FoundationalOmniscience`, **C237** `atom_not_truth_exhaustive`, `Entity.Entity`, `Entity.actualWorld`, `RecoveredOntologicalGround.OneEssence` | **C446** `the_ground_is_sole_bearer_of_the_footprint_characteristics` |
-| C443 | `Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omnipotence` | [DivineTrinitarianAttributes.lean#L1236](formal/Logos/DivineTrinitarianAttributes.lean#L1236) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject}` | axiom `Subject` (VOCAB), **C441** `no_subject_grounds_the_ground`, `DivineOmnipotence.FoundationalOmnipotence`, **C245** `atom_not_gapless_operate`, `Entity.Entity`, `Entity.actualWorld`, `RecoveredOntologicalGround.OneEssence` | **C446** `the_ground_is_sole_bearer_of_the_footprint_characteristics` |
-| C444 | `Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omnipresence` | [DivineTrinitarianAttributes.lean#L1262](formal/Logos/DivineTrinitarianAttributes.lean#L1262) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Entity.Entity`, `FoundationalOmnipresence.FoundationalOmnipresence`, axiom `GroundTranscendence` (META) | **C446** `the_ground_is_sole_bearer_of_the_footprint_characteristics` |
-| C445 | `Logos.CharacteristicSoleBearer.ofGround_sole_divine_pure_actuality` | [DivineTrinitarianAttributes.lean#L1286](formal/Logos/DivineTrinitarianAttributes.lean#L1286) | `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `DivinePureActuality.DivinePureActuality`, `DivinePureActuality.atom_fails_pure_actuality`, `DivinePureActuality.discriminating_subject_fails_pure_actuality`, `Entity.Entity`, axiom `GroundTranscendence` (META) | **C446** `the_ground_is_sole_bearer_of_the_footprint_characteristics` |
-| C446 | `Logos.CharacteristicSoleBearer.the_ground_is_sole_bearer_of_the_footprint_characteristics` | [DivineTrinitarianAttributes.lean#L1311](formal/Logos/DivineTrinitarianAttributes.lean#L1311) | `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}` | **C445** `ofGround_sole_divine_pure_actuality`, **C443** `ofGround_sole_foundational_omnipotence`, **C444** `ofGround_sole_foundational_omnipresence`, **C442** `ofGround_sole_foundational_omniscience`, `DivineOmnipotence.FoundationalOmnipotence`, `DivineOmniscience.FoundationalOmniscience`, `DivinePureActuality.DivinePureActuality`, `DivineSimplicity.DivineSimplicity`, `DivineSimplicity.TranscendentGround`, **C439** `divine_simplicity_is_unique_to_the_ground`, **C307** `ofGround_sole_transcendent_ground`, `Entity.Entity`, `FoundationalOmnipresence.FoundationalOmnipresence` | — |
+| C441 | `Logos.CharacteristicSoleBearer.no_subject_grounds_the_ground` | [DivineTrinitarianAttributes.lean#L1180](formal/Logos/DivineTrinitarianAttributes.lean#L1180) | `{GroundTranscendence, Means, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `CanonicalAseity.discriminating_subject_cannot_ground_the_ground`, `Entity.EntityOf`, `RecoveredOntologicalGround.OneEssence`, axiom `GroundTranscendence` (META) | **C443** `ofGround_sole_foundational_omnipotence`, **C442** `ofGround_sole_foundational_omniscience` |
+| C442 | `Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omniscience` | [DivineTrinitarianAttributes.lean#L1200](formal/Logos/DivineTrinitarianAttributes.lean#L1200) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject}` | axiom `Subject` (VOCAB), **C441** `no_subject_grounds_the_ground`, `DivineOmniscience.FoundationalOmniscience`, **C237** `atom_not_truth_exhaustive`, `Entity.Entity`, `Entity.actualWorld`, `RecoveredOntologicalGround.OneEssence` | **C446** `the_ground_is_sole_bearer_of_the_footprint_characteristics` |
+| C443 | `Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omnipotence` | [DivineTrinitarianAttributes.lean#L1237](formal/Logos/DivineTrinitarianAttributes.lean#L1237) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject}` | axiom `Subject` (VOCAB), **C441** `no_subject_grounds_the_ground`, `DivineOmnipotence.FoundationalOmnipotence`, **C245** `atom_not_gapless_operate`, `Entity.Entity`, `Entity.actualWorld`, `RecoveredOntologicalGround.OneEssence` | **C446** `the_ground_is_sole_bearer_of_the_footprint_characteristics` |
+| C444 | `Logos.CharacteristicSoleBearer.ofGround_sole_foundational_omnipresence` | [DivineTrinitarianAttributes.lean#L1263](formal/Logos/DivineTrinitarianAttributes.lean#L1263) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Entity.Entity`, `FoundationalOmnipresence.FoundationalOmnipresence`, axiom `GroundTranscendence` (META) | **C446** `the_ground_is_sole_bearer_of_the_footprint_characteristics` |
+| C445 | `Logos.CharacteristicSoleBearer.ofGround_sole_divine_pure_actuality` | [DivineTrinitarianAttributes.lean#L1287](formal/Logos/DivineTrinitarianAttributes.lean#L1287) | `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `DivinePureActuality.DivinePureActuality`, `DivinePureActuality.atom_fails_pure_actuality`, `DivinePureActuality.discriminating_subject_fails_pure_actuality`, `Entity.Entity`, axiom `GroundTranscendence` (META) | **C446** `the_ground_is_sole_bearer_of_the_footprint_characteristics` |
+| C446 | `Logos.CharacteristicSoleBearer.the_ground_is_sole_bearer_of_the_footprint_characteristics` | [DivineTrinitarianAttributes.lean#L1312](formal/Logos/DivineTrinitarianAttributes.lean#L1312) | `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}` | **C445** `ofGround_sole_divine_pure_actuality`, **C443** `ofGround_sole_foundational_omnipotence`, **C444** `ofGround_sole_foundational_omnipresence`, **C442** `ofGround_sole_foundational_omniscience`, `DivineOmnipotence.FoundationalOmnipotence`, `DivineOmniscience.FoundationalOmniscience`, `DivinePureActuality.DivinePureActuality`, `DivineSimplicity.DivineSimplicity`, `DivineSimplicity.TranscendentGround`, **C439** `divine_simplicity_is_unique_to_the_ground`, **C307** `ofGround_sole_transcendent_ground`, `Entity.Entity`, `FoundationalOmnipresence.FoundationalOmnipresence` | — |
 | C447 | `Logos.DivineImmutability.necessity_and_atemporality_yield_immutability` | [DivineClassicalAttributes.lean#L1156](formal/Logos/DivineClassicalAttributes.lean#L1156) | `{Initiates, Means, NecessarySubjectKind, State, Subject}` | `DivineImmutability.CapacityInvariance`, `DivineImmutability.DivineImmutability`, `Entity.Entity`, **Q7.2** `ExistsAt`, `NecessityEternity.Atemporal`, `NecessityEternity.NotInSuccession`, `Semantics.World` | — |
 | C448 | `Logos.DivinePureActuality.necessity_aseity_and_immutability_yield_pure_actuality` | [DivineClassicalAttributes.lean#L2428](formal/Logos/DivineClassicalAttributes.lean#L2428) | `{Initiates, Means, NecessarySubjectKind, State, Subject}` | `CanonicalAseity.CanonicalAseity`, `DivineImmutability.TransitionInvariance`, `DivinePureActuality.DivinePureActuality`, `DivinePureActuality.PassiveExistentialPotency`, `DivinePureActuality.PassiveIntentionalPotency`, `DivinePureActuality.PassiveTransitionPotency`, `Entity.Entity`, **Q7.2** `ExistsAt`, `FoundationalOmnipresence.MaximalCapacity`, `FoundationalOmnipresence.UniversalModalGround`, `RecoveredOntologicalGround.EntityMeans`, `Semantics.World` | — |
 | C449 | `Logos.FoundationalOmnipresence.omnipresence_from_universal_ground_and_aseity` | [DivineClassicalAttributes.lean#L1822](formal/Logos/DivineClassicalAttributes.lean#L1822) | `{Means, NecessarySubjectKind, Subject}` | `Entity.Entity`, `FoundationalOmnipresence.FoundationalOmnipresence`, `FoundationalOmnipresence.MaximalCapacity`, `FoundationalOmnipresence.NonReciprocalGround`, `FoundationalOmnipresence.UniversalModalGround`, `FoundationalOmnipresence.WorldRigidPresence` | — |
@@ -510,15 +510,15 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 | C481 | `Logos.LovesAsGround.ground_love_targets_a_subject_correlate` | [DivineClassicalAttributes.lean#L3613](formal/Logos/DivineClassicalAttributes.lean#L3613) | `{GroundBearsGood, Means, NecessarySubjectKind, Subject, CL}` | axiom `Subject` (VOCAB), `Entity.Entity`, `LovesAsGround.GroundLoves`, **C332** `ground_love_is_directed_at_another`, **C334** `ground_love_requires_a_meaningful_target`, `RecoveredOntologicalGround.EntityMeans`, `TheologicalModalHardening.ActualEntity` | — |
 | C482 | `Logos.LovesAsGround.ground_love_of_a_subject_correlate_iff` | [DivineClassicalAttributes.lean#L3652](formal/Logos/DivineClassicalAttributes.lean#L3652) | `{GroundBearsGood, Means, NecessarySubjectKind, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Entity.Entity`, `Entity.EntityOf`, **C315** `ofGround_ne_ofSubject`, **C349** `GroundBearsGood`, `LovesAsGround.GroundLoves`, `NecessityEternity.ofGround_necessary`, `RecoveredOntologicalGround.EntityMeans`, **C457** `every_entity_is_actual`, `TheologicalModalHardening.ActualEntity`, `TheologicalModalHardening.NecessaryEntity` | — |
 | C483 | `Logos.ProductionCountermodel.producing_something_does_not_produce_every_satisfiable_form` | [DivineThomisticProduction.lean#L419](formal/Logos/DivineThomisticProduction.lean#L419) | `{}` | `ProductionCountermodel.ModelProducesEverySatisfiable`, `ProductionCountermodel.ProducesOneFormOnly` | — |
-| C484 | `Logos.CharacteristicClosure.the_ground_is_divinely_simple` | [DivineTrinitarianAttributes.lean#L935](formal/Logos/DivineTrinitarianAttributes.lean#L935) | `{GroundTranscendence, Means, Subject, CL}` | `DivineSimplicity.DivineSimplicity`, **C196** `ofGround_divine_simplicity`, axiom `GroundTranscendence` (META) | **C485** `some_entity_is_divinely_simple` |
-| C485 | `Logos.CharacteristicClosure.some_entity_is_divinely_simple` | [DivineTrinitarianAttributes.lean#L941](formal/Logos/DivineTrinitarianAttributes.lean#L941) | `{GroundTranscendence, Means, Subject, CL}` | **C484** `the_ground_is_divinely_simple`, `DivineSimplicity.DivineSimplicity`, `Entity.Entity` | — |
-| C486 | `Logos.CharacteristicClosure.the_ground_is_sole_bearer_of_divine_simplicity` | [DivineTrinitarianAttributes.lean#L961](formal/Logos/DivineTrinitarianAttributes.lean#L961) | `{GroundTranscendence, Means, Subject, CL}` | `DivineSimplicity.DivineSimplicity`, **C440** `divine_simplicity_sole_bearer`, `Entity.Entity`, axiom `GroundTranscendence` (META) | — |
-| C487 | `Logos.CharacteristicClosure.some_entity_is_in_succession` | [DivineTrinitarianAttributes.lean#L987](formal/Logos/DivineTrinitarianAttributes.lean#L987) | `{performative_act_datum, Initiates, Means, State, Subject}` | `Agency.Act`, axiom `Initiates` (VOCAB), axiom `State` (VOCAB), axiom `Subject` (VOCAB), `Agency.act_implies_initiates`, **C454** `performative_act_datum`, `Entity.Entity`, `Entity.EntityOf`, `NecessityEternity.NotInSuccession` | — |
-| C488 | `Logos.CharacteristicClosure.a_subject_that_acts_is_in_succession` | [DivineTrinitarianAttributes.lean#L1004](formal/Logos/DivineTrinitarianAttributes.lean#L1004) | `{Initiates, Means, State, Subject}` | `Agency.Act`, axiom `Initiates` (VOCAB), axiom `State` (VOCAB), axiom `Subject` (VOCAB), `Agency.act_implies_initiates`, `Entity.Entity`, `Entity.EntityOf`, `NecessityEternity.NotInSuccession` | — |
+| C484 | `Logos.CharacteristicClosure.the_ground_is_divinely_simple` | [DivineTrinitarianAttributes.lean#L936](formal/Logos/DivineTrinitarianAttributes.lean#L936) | `{GroundTranscendence, Means, Subject, CL}` | `DivineSimplicity.DivineSimplicity`, **C196** `ofGround_divine_simplicity`, axiom `GroundTranscendence` (META) | **C485** `some_entity_is_divinely_simple` |
+| C485 | `Logos.CharacteristicClosure.some_entity_is_divinely_simple` | [DivineTrinitarianAttributes.lean#L942](formal/Logos/DivineTrinitarianAttributes.lean#L942) | `{GroundTranscendence, Means, Subject, CL}` | **C484** `the_ground_is_divinely_simple`, `DivineSimplicity.DivineSimplicity`, `Entity.Entity` | — |
+| C486 | `Logos.CharacteristicClosure.the_ground_is_sole_bearer_of_divine_simplicity` | [DivineTrinitarianAttributes.lean#L962](formal/Logos/DivineTrinitarianAttributes.lean#L962) | `{GroundTranscendence, Means, Subject, CL}` | `DivineSimplicity.DivineSimplicity`, **C440** `divine_simplicity_sole_bearer`, `Entity.Entity`, axiom `GroundTranscendence` (META) | — |
+| C487 | `Logos.CharacteristicClosure.some_entity_is_in_succession` | [DivineTrinitarianAttributes.lean#L988](formal/Logos/DivineTrinitarianAttributes.lean#L988) | `{performative_act_datum, Initiates, Means, State, Subject}` | `Agency.Act`, axiom `Initiates` (VOCAB), axiom `State` (VOCAB), axiom `Subject` (VOCAB), `Agency.act_implies_initiates`, **C454** `performative_act_datum`, `Entity.Entity`, `Entity.EntityOf`, `NecessityEternity.NotInSuccession` | — |
+| C488 | `Logos.CharacteristicClosure.a_subject_that_acts_is_in_succession` | [DivineTrinitarianAttributes.lean#L1005](formal/Logos/DivineTrinitarianAttributes.lean#L1005) | `{Initiates, Means, State, Subject}` | `Agency.Act`, axiom `Initiates` (VOCAB), axiom `State` (VOCAB), axiom `Subject` (VOCAB), `Agency.act_implies_initiates`, `Entity.Entity`, `Entity.EntityOf`, `NecessityEternity.NotInSuccession` | — |
 | C489 | `Logos.ImmutabilitySoleBearer.immutability_is_not_sole_bearer` | [DivineClassicalAttributes.lean#L5150](formal/Logos/DivineClassicalAttributes.lean#L5150) | `{}` | `ImmutabilitySoleBearer.ImmutabilityCountermodel` | — |
 | C490 | `Logos.ImmutabilitySoleBearer.the_act_datum_does_not_entail_every_subject_acts` | [DivineClassicalAttributes.lean#L5200](formal/Logos/DivineClassicalAttributes.lean#L5200) | `{}` | — | — |
-| C491 | `Logos.CharacteristicClosure.transcendence_and_semantic_finitude_yield_divine_simplicity` | [DivineTrinitarianAttributes.lean#L1032](formal/Logos/DivineTrinitarianAttributes.lean#L1032) | `{GroundTranscendence, Means, Subject, CL}` | axiom `Subject` (VOCAB), `DivineSimplicity.DivineSimplicity`, `DivineSimplicity.TranscendentGround`, **C196** `ofGround_divine_simplicity`, `Entity.Entity`, `Entity.EntityOf`, axiom `GroundTranscendence` (META) | — |
-| C492 | `Logos.CharacteristicClosure.the_semantic_bound_does_not_close_the_grounding_arm` | [DivineTrinitarianAttributes.lean#L1064](formal/Logos/DivineTrinitarianAttributes.lean#L1064) | `{}` | — | — |
+| C491 | `Logos.CharacteristicClosure.transcendence_and_semantic_finitude_yield_divine_simplicity` | [DivineTrinitarianAttributes.lean#L1033](formal/Logos/DivineTrinitarianAttributes.lean#L1033) | `{GroundTranscendence, Means, Subject, CL}` | axiom `Subject` (VOCAB), `DivineSimplicity.DivineSimplicity`, `DivineSimplicity.TranscendentGround`, **C196** `ofGround_divine_simplicity`, `Entity.Entity`, `Entity.EntityOf`, axiom `GroundTranscendence` (META) | — |
+| C492 | `Logos.CharacteristicClosure.the_semantic_bound_does_not_close_the_grounding_arm` | [DivineTrinitarianAttributes.lean#L1065](formal/Logos/DivineTrinitarianAttributes.lean#L1065) | `{}` | — | — |
 | C368 | `Logos.MeaningRetorsion.NoMeaning` | [MeaningRetorsion.lean#L101](formal/Logos/MeaningRetorsion.lean#L101) | `{Means, Subject}` | `Choice.Meaning_I` | **C480** `noMeaning_is_refuted_unconditionally`, **C377** `affirms_noMeaning_yields_meaning`, **C378** `judges_noMeaning_yields_meaning`, **C374** `judgment_of_noMeaning_is_incorrect`, **C369** `noMeaning_iff_noIntentionalSubject`, **C370** `noMeaning_iff_pointwise`, **C401** `noMeaning_is_refuted_from_plurality`, **C402** `noMeaning_is_refuted_from_the_act_datum`, **C375** `noMeaning_is_unassertable`, **C371** `noMeaning_is_unmeaned`, **C372** `noMeaning_is_unperformed`, **C376** `noMeaning_ladder`, **C373** `no_correct_judgment_of_noMeaning`, `NoMeanerNoFalsity.no_meaning_world_is_impossible` |
 | C369 | `Logos.MeaningRetorsion.noMeaning_iff_noIntentionalSubject` | [MeaningRetorsion.lean#L115](formal/Logos/MeaningRetorsion.lean#L115) | `{Means, Subject}` | `Agency.IntentionalSubject`, axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Choice.Meaning_I`, **C368** `NoMeaning`, `NegativeRetorsionAudit.NoI_canonical`, `NegativeRetorsionAudit.P_canonical` | — |
 | C370 | `Logos.MeaningRetorsion.noMeaning_iff_pointwise` | [MeaningRetorsion.lean#L130](formal/Logos/MeaningRetorsion.lean#L130) | `{Means, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Choice.Meaning_I`, **C368** `NoMeaning` | — |
@@ -541,19 +541,19 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 | C402 | `Logos.MeaningRetorsion.noMeaning_is_refuted_from_the_act_datum` | [MeaningRetorsion.lean#L550](formal/Logos/MeaningRetorsion.lean#L550) | `{Initiates, Means, State, Subject}` | `Agency.Act`, axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Agency.act_datum_implies_means`, `Choice.Meaning_I`, **C368** `NoMeaning` | **C480** `noMeaning_is_refuted_unconditionally`, `NoMeanerNoFalsity.no_meaning_world_is_impossible` |
 | C386 | `Logos.CosmicExistence.cosmos_presence_model_of_the_act_datum` | [DivineClassicalAttributes.lean#L4259](formal/Logos/DivineClassicalAttributes.lean#L4259) | `{Initiates, Means, NecessarySubjectKind, State, Subject, CL}` | `Agency.Act`, `Agency.ContingentSubjectKind`, axiom `Initiates` (VOCAB), axiom `Means` (VOCAB), axiom `State` (VOCAB), axiom `Subject` (VOCAB), `CosmicExistence.CreatedRealm`, **C354** `cosmos_presence_model` | **C387** `the_ground_loves_the_cosmos_from_the_act_datum` |
 | C387 | `Logos.CosmicExistence.the_ground_loves_the_cosmos_from_the_act_datum` | [DivineClassicalAttributes.lean#L4543](formal/Logos/DivineClassicalAttributes.lean#L4543) | `{AxGroundLovesContingentRealm, GroundBearsGood, Initiates, Means, NecessarySubjectKind, State, Subject, CL}` | `Agency.Act`, `Agency.ContingentSubjectKind`, axiom `Subject` (VOCAB), `CosmicExistence.CreatedRealm`, `CosmicExistence.Realm`, **C386** `cosmos_presence_model_of_the_act_datum`, `Entity.Entity`, **Q7.2** `ExistsAt`, **C349** `GroundBearsGood`, **C341** `the_ground_bears_a_directional_good_toward_the_cosmos`, `RecoveredOntologicalGround.EntityMeans`, `Semantics.World`, `TheologicalModalHardening.ActualEntity`, `TheologicalModalHardening.ContingentEntity` | — |
-| C388 | `Logos.SemanticFinitude.SemanticFinitude` | [DivineTrinitarianAttributes.lean#L197](formal/Logos/DivineTrinitarianAttributes.lean#L197) | `{Means, NecessarySubjectKind, SemanticFinitude, Subject}` | `Agency.ContingentSubjectKind`, axiom `Means` (VOCAB), axiom `Subject` (VOCAB) | — |
-| C389 | `Logos.SemanticFinitude.exactly_one_universal_modal_ground_stipulated` | [DivineTrinitarianAttributes.lean#L261](formal/Logos/DivineTrinitarianAttributes.lean#L261) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject}` | `Entity.Entity`, `FoundationalOmnipresence.UniversalModalGround`, **C320** `exactly_one_universal_modal_ground`, axiom `GroundTranscendence` (META) | — |
-| C390 | `Logos.SemanticFinitude.ofGround_sole_universal_grounding_stipulated` | [DivineTrinitarianAttributes.lean#L269](formal/Logos/DivineTrinitarianAttributes.lean#L269) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject}` | `FoundationalUnicity.SoleUniversalGrounding`, **C319** `ofGround_sole_universal_grounding`, axiom `GroundTranscendence` (META) | — |
-| C391 | `Logos.SemanticFinitude.conditional_canonical_aseity_stipulated` | [DivineTrinitarianAttributes.lean#L275](formal/Logos/DivineTrinitarianAttributes.lean#L275) | `{GroundTranscendence, Means, Subject}` | `CanonicalAseity.CanonicalAseity`, **C186** `conditional_canonical_aseity`, axiom `GroundTranscendence` (META) | — |
-| C392 | `Logos.SemanticFinitude.ofGround_modal_aseity_conditional_stipulated` | [DivineTrinitarianAttributes.lean#L282](formal/Logos/DivineTrinitarianAttributes.lean#L282) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject}` | `CanonicalAseity.CanonicalExtDepAt`, `CanonicalAseity.ofGround_modal_aseity_conditional`, `Entity.Entity`, `ModalPossibilityFrontier.Aseity`, axiom `GroundTranscendence` (META), `Semantics.World` | — |
-| C393 | `Logos.SemanticFinitude.ofGround_divine_pure_actuality_stipulated` | [DivineTrinitarianAttributes.lean#L288](formal/Logos/DivineTrinitarianAttributes.lean#L288) | `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}` | `DivinePureActuality.DivinePureActuality`, **C219** `ofGround_divine_pure_actuality`, axiom `GroundTranscendence` (META) | — |
-| C394 | `Logos.SemanticFinitude.ofGround_no_grounding_potency_stipulated` | [DivineTrinitarianAttributes.lean#L294](formal/Logos/DivineTrinitarianAttributes.lean#L294) | `{GroundTranscendence, Means, Subject}` | `DivinePureActuality.PassiveGroundingPotency`, **C216** `ofGround_no_grounding_potency`, axiom `GroundTranscendence` (META) | — |
-| C395 | `Logos.SemanticFinitude.ofGround_divine_simplicity_stipulated` | [DivineTrinitarianAttributes.lean#L300](formal/Logos/DivineTrinitarianAttributes.lean#L300) | `{GroundTranscendence, Means, Subject, CL}` | `DivineSimplicity.DivineSimplicity`, **C196** `ofGround_divine_simplicity`, axiom `GroundTranscendence` (META) | — |
-| C396 | `Logos.SemanticFinitude.ofGround_non_composite_stipulated` | [DivineTrinitarianAttributes.lean#L307](formal/Logos/DivineTrinitarianAttributes.lean#L307) | `{GroundTranscendence, Means, Subject, CL}` | `DivineSimplicity.NonComposite`, `DivineSimplicity.ofGround_non_composite`, axiom `GroundTranscendence` (META) | — |
-| C397 | `Logos.SemanticFinitude.ofGround_simplicity_and_transcendence_stipulated` | [DivineTrinitarianAttributes.lean#L313](formal/Logos/DivineTrinitarianAttributes.lean#L313) | `{GroundTranscendence, Means, Subject, CL}` | `DivineSimplicity.DivineSimplicity`, `DivineSimplicity.TranscendentGround`, **C452** `ofGround_simplicity_and_transcendence`, axiom `GroundTranscendence` (META) | — |
-| C398 | `Logos.SemanticFinitude.ground_is_canonically_aseitous_but_not_asietic_stipulated` | [DivineTrinitarianAttributes.lean#L320](formal/Logos/DivineTrinitarianAttributes.lean#L320) | `{GroundTranscendence, Means, Subject}` | `AsieticChoice.Asiety`, **C284** `ground_is_canonically_aseitous_but_not_asietic`, `CanonicalAseity.CanonicalAseity`, axiom `GroundTranscendence` (META) | — |
-| C399 | `Logos.SemanticFinitude.semantic_omnipotence_is_consistent` | [DivineTrinitarianAttributes.lean#L339](formal/Logos/DivineTrinitarianAttributes.lean#L339) | `{}` | — | — |
-| C400 | `Logos.SemanticFinitude.semanticFinitude_excludes_ground_from_subjects` | [DivineTrinitarianAttributes.lean#L381](formal/Logos/DivineTrinitarianAttributes.lean#L381) | `{GroundTranscendence, Means, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Entity.Entity`, `Entity.EntityOf`, `RecoveredOntologicalGround.EntityMeans`, axiom `GroundTranscendence` (META) | — |
+| C388 | `Logos.SemanticFinitude.SemanticFinitude` | [DivineTrinitarianAttributes.lean#L198](formal/Logos/DivineTrinitarianAttributes.lean#L198) | `{Means, NecessarySubjectKind, SemanticFinitude, Subject}` | `Agency.ContingentSubjectKind`, axiom `Means` (VOCAB), axiom `Subject` (VOCAB) | — |
+| C389 | `Logos.SemanticFinitude.exactly_one_universal_modal_ground_stipulated` | [DivineTrinitarianAttributes.lean#L262](formal/Logos/DivineTrinitarianAttributes.lean#L262) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject}` | `Entity.Entity`, `FoundationalOmnipresence.UniversalModalGround`, **C320** `exactly_one_universal_modal_ground`, axiom `GroundTranscendence` (META) | — |
+| C390 | `Logos.SemanticFinitude.ofGround_sole_universal_grounding_stipulated` | [DivineTrinitarianAttributes.lean#L270](formal/Logos/DivineTrinitarianAttributes.lean#L270) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject}` | `FoundationalUnicity.SoleUniversalGrounding`, **C319** `ofGround_sole_universal_grounding`, axiom `GroundTranscendence` (META) | — |
+| C391 | `Logos.SemanticFinitude.conditional_canonical_aseity_stipulated` | [DivineTrinitarianAttributes.lean#L276](formal/Logos/DivineTrinitarianAttributes.lean#L276) | `{GroundTranscendence, Means, Subject}` | `CanonicalAseity.CanonicalAseity`, **C186** `conditional_canonical_aseity`, axiom `GroundTranscendence` (META) | — |
+| C392 | `Logos.SemanticFinitude.ofGround_modal_aseity_conditional_stipulated` | [DivineTrinitarianAttributes.lean#L283](formal/Logos/DivineTrinitarianAttributes.lean#L283) | `{GroundTranscendence, Means, NecessarySubjectKind, Subject}` | `CanonicalAseity.CanonicalExtDepAt`, `CanonicalAseity.ofGround_modal_aseity_conditional`, `Entity.Entity`, `ModalPossibilityFrontier.Aseity`, axiom `GroundTranscendence` (META), `Semantics.World` | — |
+| C393 | `Logos.SemanticFinitude.ofGround_divine_pure_actuality_stipulated` | [DivineTrinitarianAttributes.lean#L289](formal/Logos/DivineTrinitarianAttributes.lean#L289) | `{GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject}` | `DivinePureActuality.DivinePureActuality`, **C219** `ofGround_divine_pure_actuality`, axiom `GroundTranscendence` (META) | — |
+| C394 | `Logos.SemanticFinitude.ofGround_no_grounding_potency_stipulated` | [DivineTrinitarianAttributes.lean#L295](formal/Logos/DivineTrinitarianAttributes.lean#L295) | `{GroundTranscendence, Means, Subject}` | `DivinePureActuality.PassiveGroundingPotency`, **C216** `ofGround_no_grounding_potency`, axiom `GroundTranscendence` (META) | — |
+| C395 | `Logos.SemanticFinitude.ofGround_divine_simplicity_stipulated` | [DivineTrinitarianAttributes.lean#L301](formal/Logos/DivineTrinitarianAttributes.lean#L301) | `{GroundTranscendence, Means, Subject, CL}` | `DivineSimplicity.DivineSimplicity`, **C196** `ofGround_divine_simplicity`, axiom `GroundTranscendence` (META) | — |
+| C396 | `Logos.SemanticFinitude.ofGround_non_composite_stipulated` | [DivineTrinitarianAttributes.lean#L308](formal/Logos/DivineTrinitarianAttributes.lean#L308) | `{GroundTranscendence, Means, Subject, CL}` | `DivineSimplicity.NonComposite`, `DivineSimplicity.ofGround_non_composite`, axiom `GroundTranscendence` (META) | — |
+| C397 | `Logos.SemanticFinitude.ofGround_simplicity_and_transcendence_stipulated` | [DivineTrinitarianAttributes.lean#L314](formal/Logos/DivineTrinitarianAttributes.lean#L314) | `{GroundTranscendence, Means, Subject, CL}` | `DivineSimplicity.DivineSimplicity`, `DivineSimplicity.TranscendentGround`, **C452** `ofGround_simplicity_and_transcendence`, axiom `GroundTranscendence` (META) | — |
+| C398 | `Logos.SemanticFinitude.ground_is_canonically_aseitous_but_not_asietic_stipulated` | [DivineTrinitarianAttributes.lean#L321](formal/Logos/DivineTrinitarianAttributes.lean#L321) | `{GroundTranscendence, Means, Subject}` | `AsieticChoice.Asiety`, **C284** `ground_is_canonically_aseitous_but_not_asietic`, `CanonicalAseity.CanonicalAseity`, axiom `GroundTranscendence` (META) | — |
+| C399 | `Logos.SemanticFinitude.semantic_omnipotence_is_consistent` | [DivineTrinitarianAttributes.lean#L340](formal/Logos/DivineTrinitarianAttributes.lean#L340) | `{}` | — | — |
+| C400 | `Logos.SemanticFinitude.semanticFinitude_excludes_ground_from_subjects` | [DivineTrinitarianAttributes.lean#L382](formal/Logos/DivineTrinitarianAttributes.lean#L382) | `{GroundTranscendence, Means, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Entity.Entity`, `Entity.EntityOf`, `RecoveredOntologicalGround.EntityMeans`, axiom `GroundTranscendence` (META) | — |
 | C1 | `Logos.Core.nothingTrueRefutes` | [Core.lean#L61](formal/Logos/Core.lean#L61) | `{}` | `Core.N_T`, `Core.T`, `Core.tschema` | **C2** `notNothingTrue`, `Retorsion.retorsion_no_truth` |
 | C2 | `Logos.Core.notNothingTrue` | [Core.lean#L69](formal/Logos/Core.lean#L69) | `{}` | `Core.N_T`, `Core.T`, **C1** `nothingTrueRefutes`, `Core.tschema` | **C35** `negatedAbsolutes`, **C36** `rightWrongDistinction`, **C3** `someTrue`, `RealityHookAudit.tr_nothing_absorbs_nt_family` |
 | C3 | `Logos.Core.someTrue` | [Core.lean#L77](formal/Logos/Core.lean#L77) | `{CL}` | `Core.N_T`, `Core.T`, **C2** `notNothingTrue` | `Core.someTruthAndSomeFalsehood` |
@@ -599,7 +599,7 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 | C83 | `Logos.Order.no_correct_judgment_of_no_act` | [Order.lean#L202](formal/Logos/Order.lean#L202) | `{Initiates, Means, State, Subject}` | `Agency.A`, axiom `Subject` (VOCAB), `Core.T`, `Order.Correct`, `Order.NoAct` | `Order.judgment_of_no_act_is_incorrect` |
 | C84 | `Logos.Order.judgment_of_no_act_proves_act` | [Order.lean#L223](formal/Logos/Order.lean#L223) | `{Initiates, Means, State, Subject}` | `Agency.A`, axiom `Subject` (VOCAB), `Order.Correct`, `Order.Incorrect`, `Order.NoAct`, `Order.judgment_implies_act` | — |
 | C106 | `Logos.RetorsiveNormativity.claims_correct_presupposes_normativity` | [RetorsiveNormativity.lean#L104](formal/Logos/RetorsiveNormativity.lean#L104) | `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` | `Agency.Act`, axiom `Initiates` (VOCAB), axiom `Means` (VOCAB), axiom `State` (VOCAB), axiom `Subject` (VOCAB), `IndubitableNormativeFreeWill.DeonticOpposition`, `IndubitableNormativeFreeWill.GenuineNormativity`, `Order.Correct`, axiom `AxJudicativeBipolarity` (SEM), `RetorsiveNormativity.ClaimsCorrect`, `RetorsiveNormativity.deontic_opposition_self_negation` | `RetorsiveNormativity.claiming_denial_presupposes_genuine_normativity` |
-| C107 | `Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will` | [IndubitableNormativeFreeWill.lean#L115](formal/Logos/IndubitableNormativeFreeWill.lean#L115) | `{Means, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Alternatives.Incompatible`, `Choice.Chooses`, `Choice.FreeWill`, `IndubitableNormativeFreeWill.GenuineNormativity` | **C276** `genuineNormativity_implies_trueChoice`, `IndubitableNormativeFreeWill.necessary_normativity_implies_necessary_free_will`, **C140** `claims_normative_correctness_derives_free_will`, `NormativeOrder.deliberate_choice_derives_free_will`, `PersonalNormativeGround.Constructive.objective_normativity_holds`, **C145** `discovery_independent_of_grounding`, **C222** `genuineNormativity_implies_person`, **C229** `rightwrong_gives_rational_domination`, `RetorsiveNormativity.retorsion_derives_free_will`, `UndeniableNormativeDerivation.bridge_a_constitutive_normativity_derives_free_will`, `UndeniableNormativeDerivation.normative_free_will_local` |
+| C107 | `Logos.IndubitableNormativeFreeWill.indubitable_normative_free_will` | [IndubitableNormativeFreeWill.lean#L114](formal/Logos/IndubitableNormativeFreeWill.lean#L114) | `{Means, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `Alternatives.Incompatible`, `Choice.Chooses`, `Choice.FreeWill`, `IndubitableNormativeFreeWill.GenuineNormativity` | **C276** `genuineNormativity_implies_trueChoice`, `IndubitableNormativeFreeWill.necessary_normativity_implies_necessary_free_will`, **C140** `claims_normative_correctness_derives_free_will`, `NormativeOrder.deliberate_choice_derives_free_will`, `PersonalNormativeGround.Constructive.objective_normativity_holds`, **C145** `discovery_independent_of_grounding`, **C222** `genuineNormativity_implies_person`, **C229** `rightwrong_gives_rational_domination`, `RetorsiveNormativity.retorsion_derives_free_will`, `UndeniableNormativeDerivation.bridge_a_constitutive_normativity_derives_free_will`, `UndeniableNormativeDerivation.normative_free_will_local` |
 | C157 | `Logos.RetorsiveNormativity.retorsion_conclusion_is_the_very_genuine_normativity_structure` | [RetorsiveNormativity.lean#L235](formal/Logos/RetorsiveNormativity.lean#L235) | `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` | axiom `Subject` (VOCAB), `IndubitableNormativeFreeWill.GenuineNormativity`, `RetorsiveNormativity.ClaimsCorrect`, `RetorsiveNormativity.NoGN`, `RetorsiveNormativity.claiming_denial_presupposes_genuine_normativity` | — |
 | C158 | `Logos.RetorsiveNormativity.retorsion_address_uses_only_means` | [RetorsiveNormativity.lean#L245](formal/Logos/RetorsiveNormativity.lean#L245) | `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `IndubitableNormativeFreeWill.AgentialDeonticAddress`, axiom `AxJudicativeBipolarity` (SEM), `RetorsiveNormativity.ClaimsCorrect`, `RetorsiveNormativity.NoGN`, `RetorsiveNormativity.claiming_denial_presupposes_genuine_normativity`, `RetorsiveNormativity.claims_correct_means_content` | — |
 | C159 | `Logos.RetorsiveNormativity.retorsion_opposition_is_pure_logic` | [RetorsiveNormativity.lean#L258](formal/Logos/RetorsiveNormativity.lean#L258) | `{AxJudicativeBipolarity, Initiates, Means, State, Subject}` | axiom `Subject` (VOCAB), `Alternatives.Incompatible`, **C50** `incompatible_self_negation`, `IndubitableNormativeFreeWill.DeonticOpposition`, `RetorsiveNormativity.ClaimsCorrect`, `RetorsiveNormativity.NoGN`, `RetorsiveNormativity.claiming_denial_presupposes_genuine_normativity`, `RetorsiveNormativity.prop_neq_neg` | — |
@@ -614,7 +614,7 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 | F5 | `Logos.Love.T14_eternalRelation_conditional` | [Love.lean#L119](formal/Logos/Love.lean#L119) | `{Means, NecessarySubjectKind, Subject, Will, subjectWill}` | **C403** `NecessarySubjectKind`, axiom `Subject` (VOCAB), `Love.Loves`, `Love.PersonStabilityPrinciple`, `Love.PluralityLovePrinciple`, `Person.Person`, `Plurality.NecessarySubject` | **C45** `T14_square_conditional`, **C44** `T14_world_conditional` |
 | F6 | — | — | — | — | CONDITIONAL |
 | F1bUncond | `Logos.NoMeanerNoFalsity.a_genuine_free_person_exists` | [NoMeanerNoFalsity.lean#L94](formal/Logos/NoMeanerNoFalsity.lean#L94) | `{AxActPolarity, performative_act_datum, Initiates, Means, State, Subject, Will, subjectWill, will_individuation}` | axiom `Subject` (VOCAB), `Choice.FreeWill`, `NoMeanerNoFalsity.a_free_will_exists_derived`, `Person.Person`, **C221** `freeWill_implies_person` | **C590** `the_free_person_claim_in_one_statement` |
-| EvalSettlement | `Logos.ExecutiveDeliberativeFrontier.M_det` | [ExecutiveDeliberativeFrontier.lean#L181](formal/Logos/ExecutiveDeliberativeFrontier.lean#L181) | `{}` | `ExecutiveDeliberativeFrontier.DeterministicModel` | — |
+| EvalSettlement | `Logos.ExecutiveDeliberativeFrontier.M_det` | [AgencyAuditsAndFrontiers.lean#L3991](formal/Logos/AgencyAuditsAndFrontiers.lean#L3991) | `{}` | `ExecutiveDeliberativeFrontier.DeterministicModel` | — |
 | OpenBridgeNormativity | — | — | — | — | ✖ |
 | Q7.2 | `Logos.Entity.ExistsAt` | [Entity.lean#L69](formal/Logos/Entity.lean#L69) | `{NecessarySubjectKind, Subject}` | `Entity.Entity`, `Entity.EntityExistsAt`, `Semantics.World` | **C281** `the_ground_grounds_a_contingent_true_chooser`, `CanonicalAseity.CanonicalExtDepAt`, `CanonicalAseity.canonical_aseity_implies_modal_aseity`, `CosmicExistence.Universe`, `CosmicExistence.a_contingent_reality_obtains`, **C350** `contingent_realm_obtains`, **C354** `cosmos_presence_model`, **C431** `grounding_never_yields_identity_of_the_totality`, **C429** `no_entity_is_identical_to_the_whole`, `CosmicExistence.realm_existence_does_not_imply_realm_necessity`, **C430** `the_ground_is_not_the_universe`, **C351** `the_ground_loves_the_cosmos`, **C387** `the_ground_loves_the_cosmos_from_the_act_datum`, **C352** `the_ground_loves_the_cosmos_in_a_context`, `DivineImmutability.ModalInvariance`, **C447** `necessity_and_atemporality_yield_immutability`, **C198** `ofGround_modal_invariance`, `DivineOmnipotence.OperatesAt`, **C245** `atom_not_gapless_operate`, **C246** `discriminating_subject_not_gapless_operate`, **C247** `gapless_operators_are_ground_or_necessary_kind`, **C451** `necessity_and_presence_yield_foundational_omnipotence`, **C244** `ofGround_does_not_operate_contradictions`, **C242** `ofGround_gapless_operative_scope`, **C243** `ofGround_operates_only_what_obtains`, `DivinePureActuality.PassiveExistentialPotency`, `DivinePureActuality.atom_fails_pure_actuality`, **C448** `necessity_aseity_and_immutability_yield_pure_actuality`, **C215** `ofGround_no_existential_potency`, `FoundationalOmnipresence.UniversalModalGround`, `FoundationalOmnipresence.WorldRigidPresence`, **C204** `ofGround_universal_modal_ground`, **C208** `no_atom_is_universal_modal_ground`, **C209** `no_discriminating_subject_is_universal_modal_ground`, **C211** `ofGround_foundational_unicity`, **C207** `universal_ground_unicity`, **C44** `T14_world_conditional`, `Love.T14_world_love_only`, **C325** `a_meaningful_contingent_entity_exists`, **C323** `an_atom_is_contingent`, **C330** `necessary_entities_are_ground_or_necessary_kind`, **C329** `no_subject_is_a_necessary_entity`, `Modal.NecessaryEntity`, `NecessaryKindAudit.necessary_kind_subject_is_gapless_operator`, `NecessaryPersonalGround.ActualEntity`, `NecessityEternity.ExistsAtTime`, `NecessityEternity.atom_not_atemporal`, `NecessityEternity.atom_not_everlasting`, `NecessityEternity.everlasting_but_contingent`, `Plurality.NecessarySubject`, **C406** `contingentKindSubject_not_necessary`, **C410** `kinds_are_the_modal_partition`, **C424** `atom_fails_precedence`, **C423** `ground_conditions_every_content_bearer`, **C420** `ground_existence_does_not_entail_any_truth`, **C421** `ground_existence_is_invariant_while_content_varies`, **C419** `ofGround_obtains_where_no_atom_is_true`, **C425** `ofGround_precedes_the_right_wrong_distinction`, **C433** `ofGround_sole_precedes_right_wrong`, **C434** `stage_invariance_does_not_uniquely_identify_the_ground`, `RecoveredOntologicalGround.ActualEntity`, `RecoveredOntologicalGround.contingent_subject_ne_necessary_entity`, `RecoveredOntologicalGround.ground_of_reality_grounds_finite_subject`, `RecoveredOntologicalGround.ground_of_reality_not_impersonal`, `RecoveredOntologicalGround.subject_exists_at_actualWorld`, `TheologicalModalHardening.ActualEntity`, `TheologicalModalHardening.ContingentEntity`, `TheologicalModalHardening.NecessaryEntity`, `TheologicalModalHardening.necessary_not_contingent`, `TrinitarianPersonalGround.GroundByBeing`, `TrinitarianPersonalGround.ofGround_grounds_every_being_by_presence` |
 | C35 | `Logos.Core.negatedAbsolutes` | [Core.lean#L129](formal/Logos/Core.lean#L129) | `{}` | `Core.N_F`, `Core.N_T`, **C6** `notEverythingTrue`, **C2** `notNothingTrue` | — |
@@ -629,8 +629,8 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 | C522 | `Logos.Semantics.contingency_and_its_denial` | [Semantics.lean#L196](formal/Logos/Semantics.lean#L196) | `{}` | `Semantics.Form`, `Semantics.NecessarilyFalse`, `Semantics.NecessarilyTrue`, **C521** `noContingency_selfRefutes`, **C96** `some_formula_contingent` | — |
 | C523 | `Logos.Choice.noContingency_assertable_refutes` | [Choice.lean#L1220](formal/Logos/Choice.lean#L1220) | `{Initiates, Means, State, Subject}` | `Agency.Act`, `Agency.Asserts`, axiom `Subject` (VOCAB), `Semantics.Form`, `Semantics.NecessarilyFalse`, `Semantics.NecessarilyTrue`, **C521** `noContingency_selfRefutes` | **C524** `asserting_modal_pair_is_refuted` |
 | C524 | `Logos.Choice.asserting_modal_pair_is_refuted` | [Choice.lean#L1232](formal/Logos/Choice.lean#L1232) | `{Initiates, Means, State, Subject, CL}` | `Agency.Asserts`, axiom `Subject` (VOCAB), **C523** `noContingency_assertable_refutes`, **C94** `noStrongTruth_assertable_refutes`, `Semantics.Form`, `Semantics.NecessarilyFalse`, `Semantics.NecessarilyTrue` | — |
-| C182 | `Logos.ModalPossibilityFrontier.aseity_does_not_force_any_volition_alternatives` | [ModalPossibilityFrontier.lean#L463](formal/Logos/ModalPossibilityFrontier.lean#L463) | `{}` | `ModalPossibilityFrontier.Aseity`, `ModalPossibilityFrontier.Level3_VolitionAlternative` | — |
-| C184 | `Logos.ModalPossibilityFrontier.volitional_alternative_does_not_force_aseity` | [ModalPossibilityFrontier.lean#L485](formal/Logos/ModalPossibilityFrontier.lean#L485) | `{}` | `ModalPossibilityFrontier.Aseity`, `ModalPossibilityFrontier.Level3_VolitionAlternative` | — |
+| C182 | `Logos.ModalPossibilityFrontier.aseity_does_not_force_any_volition_alternatives` | [ModalCreationFrontiers.lean#L2392](formal/Logos/ModalCreationFrontiers.lean#L2392) | `{}` | `ModalPossibilityFrontier.Aseity`, `ModalPossibilityFrontier.Level3_VolitionAlternative` | — |
+| C184 | `Logos.ModalPossibilityFrontier.volitional_alternative_does_not_force_aseity` | [ModalCreationFrontiers.lean#L2414](formal/Logos/ModalCreationFrontiers.lean#L2414) | `{}` | `ModalPossibilityFrontier.Aseity`, `ModalPossibilityFrontier.Level3_VolitionAlternative` | — |
 | C185 | `Logos.CanonicalAseity.false_meaning_cannot_ground_true_meaning` | [DivineClassicalAttributes.lean#L544](formal/Logos/DivineClassicalAttributes.lean#L544) | `{}` | — | — |
 | C186 | `Logos.CanonicalAseity.conditional_canonical_aseity` | [DivineClassicalAttributes.lean#L592](formal/Logos/DivineClassicalAttributes.lean#L592) | `{Means, Subject}` | axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `CanonicalAseity.CanonicalAseity`, `CanonicalAseity.ExternalGrounding`, `CanonicalAseity.no_atom_externally_grounds_the_ground`, `CanonicalAseity.no_discriminating_subject_externally_grounds_the_ground`, `Entity.Entity`, `RecoveredOntologicalGround.OneEssence` | **C284** `ground_is_canonically_aseitous_but_not_asietic`, `CanonicalAseity.ofGround_modal_aseity_conditional`, **C216** `ofGround_no_grounding_potency`, `DivineSimplicity.ofGround_non_composite`, **C391** `conditional_canonical_aseity_stipulated` |
 | C38 | `Logos.Necessity.necDistinction` | [Necessity.lean#L116](formal/Logos/Necessity.lean#L116) | `{}` | `Core.N_F`, `Core.N_T`, **C36** `rightWrongDistinction`, `Necessity.Necessity`, `Semantics.World` | `Necessity.necDistinction_content` |
@@ -672,7 +672,7 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 | C85 | `Logos.Value.help_not_harm` | [Value.lean#L92](formal/Logos/Value.lean#L92) | `{Subject}` | axiom `Subject` (VOCAB), `Value.BearingOf`, `Value.Harms`, `Value.Helps`, `Value.InterpersonalBearing` | `Love.loves_of_helps`, **C178** `moral_good_obtains` |
 | C86 | `Logos.Love.love_helps` | [Love.lean#L60](formal/Logos/Love.lean#L60) | `{Subject}` | axiom `Subject` (VOCAB), `Love.Loves`, `Value.Harms`, `Value.Helps` | — |
 | C92 | — | — | — | — | ➖ |
-| C180 | `Logos.HardenedInvariance.agent_invariant_core_is_strictly_inside_freewill_invariant_core` | [HardenedInvariance.lean#L226](formal/Logos/HardenedInvariance.lean#L226) | `{}` | `FreeWillInvariance.DependencyLayer`, `HardenedInvariance.AgentInvariant`, `HardenedInvariance.AgentNeutralCore`, `HardenedInvariance.FreeWillInvariant`, `HardenedInvariance.FreeWillNeutralCore`, `HardenedInvariance.agent_invariant_iff_agent_neutral_core`, `HardenedInvariance.freewill_invariant_iff_freewill_neutral_core`, `HardenedInvariance.strict_core_inclusion` | — |
+| C180 | `Logos.HardenedInvariance.agent_invariant_core_is_strictly_inside_freewill_invariant_core` | [AgencyAuditsAndFrontiers.lean#L567](formal/Logos/AgencyAuditsAndFrontiers.lean#L567) | `{}` | `FreeWillInvariance.DependencyLayer`, `HardenedInvariance.AgentInvariant`, `HardenedInvariance.AgentNeutralCore`, `HardenedInvariance.FreeWillInvariant`, `HardenedInvariance.FreeWillNeutralCore`, `HardenedInvariance.agent_invariant_iff_agent_neutral_core`, `HardenedInvariance.freewill_invariant_iff_freewill_neutral_core`, `HardenedInvariance.strict_core_inclusion` | — |
 | C63 | `Logos.Initiation.branches_not_transfer` | [Initiation.lean#L27](formal/Logos/Initiation.lean#L27) | `{}` | `Initiation.Branches`, `Initiation.IsTransfer` | — |
 | C64 | — | — | — | — | ✖ |
 | C65 | — | — | — | — | ✖ |
@@ -791,27 +791,27 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 | C177 | `Logos.Value.AxBenevolentBearingObtains` | [Value.lean#L221](formal/Logos/Value.lean#L221) | `{AxBenevolentBearingObtains, Means, Subject, Will, subjectWill}` | axiom `Subject` (VOCAB), `Person.Person`, `Value.Helps` | `Value.some_person_is_helped` |
 | C178 | `Logos.MoralFrontierAudit.moral_good_obtains` | [MoralFrontierAudit.lean#L216](formal/Logos/MoralFrontierAudit.lean#L216) | `{AxBenevolentBearingObtains, Means, Subject, Will, subjectWill}` | axiom `Subject` (VOCAB), `MoralFrontierAudit.Good`, `Person.Person`, `Value.Harms`, `Value.Helps`, **C85** `help_not_harm`, `Value.some_person_is_helped` | — |
 | C499 | `Logos.Value.no_harm_in_uniformly_unbearing_layer` | [Value.lean#L127](formal/Logos/Value.lean#L127) | `{}` | `Value.InterpersonalBearing` | — |
-| C500 | `Logos.GoodDenial.good_denial_is_free_logically_consistent` | [DivineTrinitarianAttributes.lean#L1418](formal/Logos/DivineTrinitarianAttributes.lean#L1418) | `{Initiates, Means, State, Subject}` | axiom `Subject` (VOCAB), `CognitiveToAgencyFrontier.FineCognitiveSubject`, `DefinitiveAgencyFrontier.retorsion_denial_does_not_commit_to_content`, `MoralFrontierAudit.moral_pole_postulate_is_not_a_consequence`, `Order.Correct` | — |
+| C500 | `Logos.GoodDenial.good_denial_is_free_logically_consistent` | [DivineTrinitarianAttributes.lean#L1419](formal/Logos/DivineTrinitarianAttributes.lean#L1419) | `{Initiates, Means, State, Subject}` | axiom `Subject` (VOCAB), `CognitiveToAgencyFrontier.FineCognitiveSubject`, `DefinitiveAgencyFrontier.retorsion_denial_does_not_commit_to_content`, `MoralFrontierAudit.moral_pole_postulate_is_not_a_consequence`, `Order.Correct` | — |
 | C501 | `Logos.SecondPersonGoodAttempt.lone_will_is_vacuously_individual` | [DivineThomisticProduction.lean#L819](formal/Logos/DivineThomisticProduction.lean#L819) | `{}` | `PersonhoodOntologyAudit.PersonhoodVocab`, `PersonhoodOntologyAudit.Vocab.IndependentWill`, `SecondPersonGoodAttempt.LoneWillModel` | — |
 | C502 | `Logos.SecondPersonGoodAttempt.two_persons_do_not_force_good_obtains` | [DivineThomisticProduction.lean#L848](formal/Logos/DivineThomisticProduction.lean#L848) | `{}` | `Value.InterpersonalBearing` | — |
 | C503 | — | — | — | — | ✖ |
-| C504 | `Logos.DivineAgape.AxAgapeEssence` | [DivineTrinitarianAttributes.lean#L1618](formal/Logos/DivineTrinitarianAttributes.lean#L1618) | `{AxAgapeEssence, Subject}` | **C574** `DivineHypostasis`, `DivineAgape.DivineLove`, `DivineAgape.Subsists` | `DivineAgape.the_beloved_distinct`, `DivineAgape.the_beloved_subsists`, `DivineAgape.the_father_subsists`, `DivineAgape.the_source_loves_the_beloved` |
-| C505 | `Logos.DivineAgape.AxProcessionWord` | [DivineTrinitarianAttributes.lean#L1660](formal/Logos/DivineTrinitarianAttributes.lean#L1660) | `{AxAgapeEssence, AxProcessionWord, Subject, CL}` | `DivineAgape.IsWord` | **C510** `agape_entails_tripersonality`, `DivineAgape.the_spirit_ne_beloved` |
-| C506 | `Logos.DivineAgape.AxProcessionSpirit` | [DivineTrinitarianAttributes.lean#L1677](formal/Logos/DivineTrinitarianAttributes.lean#L1677) | `{AxAgapeEssence, AxProcessionSpirit, Subject, CL}` | **C574** `DivineHypostasis`, `DivineAgape.IsSpirit`, `DivineAgape.IsWord`, `DivineAgape.Subsists` | `DivineAgape.the_spirit_is_spirit`, `DivineAgape.the_spirit_ne_any_word`, `DivineAgape.the_spirit_ne_father`, `DivineAgape.the_spirit_subsists` |
-| C507 | `Logos.DivineAgape.essential_love_has_necessary_object` | [DivineTrinitarianAttributes.lean#L1715](formal/Logos/DivineTrinitarianAttributes.lean#L1715) | `{AxAgapeEssence, Subject, CL}` | **C574** `DivineHypostasis`, `DivineAgape.DivineLove`, `DivineAgape.Subsists`, `DivineAgape.the_beloved_distinct`, `DivineAgape.the_beloved_subsists`, `DivineAgape.the_father_subsists`, `DivineAgape.the_source_loves_the_beloved` | — |
-| C508 | `Logos.DivineAgape.agape_beloved_is_not_creature` | [DivineTrinitarianAttributes.lean#L1730](formal/Logos/DivineTrinitarianAttributes.lean#L1730) | `{NecessarySubjectKind, Subject}` | **C574** `DivineHypostasis`, `DivineAgape.Subsists`, `Entity.Entity`, `NecessityEternity.ofGround_necessary`, `TheologicalModalHardening.ContingentEntity`, `TheologicalModalHardening.NecessaryEntity`, `TheologicalModalHardening.necessary_not_contingent` | — |
-| C509 | `Logos.DivineAgape.divine_object_subsists_in_godhead` | [DivineTrinitarianAttributes.lean#L1751](formal/Logos/DivineTrinitarianAttributes.lean#L1751) | `{Subject}` | **C574** `DivineHypostasis`, `DivineAgape.Subsists`, `DivineAgape.divineReality`, `DivineAgape.is_divine` | — |
+| C504 | `Logos.DivineAgape.AxAgapeEssence` | [DivineTrinitarianAttributes.lean#L1619](formal/Logos/DivineTrinitarianAttributes.lean#L1619) | `{AxAgapeEssence, Subject}` | **C574** `DivineHypostasis`, `DivineAgape.DivineLove`, `DivineAgape.Subsists` | `DivineAgape.the_beloved_distinct`, `DivineAgape.the_beloved_subsists`, `DivineAgape.the_father_subsists`, `DivineAgape.the_source_loves_the_beloved` |
+| C505 | `Logos.DivineAgape.AxProcessionWord` | [DivineTrinitarianAttributes.lean#L1661](formal/Logos/DivineTrinitarianAttributes.lean#L1661) | `{AxAgapeEssence, AxProcessionWord, Subject, CL}` | `DivineAgape.IsWord` | **C510** `agape_entails_tripersonality`, `DivineAgape.the_spirit_ne_beloved` |
+| C506 | `Logos.DivineAgape.AxProcessionSpirit` | [DivineTrinitarianAttributes.lean#L1678](formal/Logos/DivineTrinitarianAttributes.lean#L1678) | `{AxAgapeEssence, AxProcessionSpirit, Subject, CL}` | **C574** `DivineHypostasis`, `DivineAgape.IsSpirit`, `DivineAgape.IsWord`, `DivineAgape.Subsists` | `DivineAgape.the_spirit_is_spirit`, `DivineAgape.the_spirit_ne_any_word`, `DivineAgape.the_spirit_ne_father`, `DivineAgape.the_spirit_subsists` |
+| C507 | `Logos.DivineAgape.essential_love_has_necessary_object` | [DivineTrinitarianAttributes.lean#L1716](formal/Logos/DivineTrinitarianAttributes.lean#L1716) | `{AxAgapeEssence, Subject, CL}` | **C574** `DivineHypostasis`, `DivineAgape.DivineLove`, `DivineAgape.Subsists`, `DivineAgape.the_beloved_distinct`, `DivineAgape.the_beloved_subsists`, `DivineAgape.the_father_subsists`, `DivineAgape.the_source_loves_the_beloved` | — |
+| C508 | `Logos.DivineAgape.agape_beloved_is_not_creature` | [DivineTrinitarianAttributes.lean#L1731](formal/Logos/DivineTrinitarianAttributes.lean#L1731) | `{NecessarySubjectKind, Subject}` | **C574** `DivineHypostasis`, `DivineAgape.Subsists`, `Entity.Entity`, `NecessityEternity.ofGround_necessary`, `TheologicalModalHardening.ContingentEntity`, `TheologicalModalHardening.NecessaryEntity`, `TheologicalModalHardening.necessary_not_contingent` | — |
+| C509 | `Logos.DivineAgape.divine_object_subsists_in_godhead` | [DivineTrinitarianAttributes.lean#L1752](formal/Logos/DivineTrinitarianAttributes.lean#L1752) | `{Subject}` | **C574** `DivineHypostasis`, `DivineAgape.Subsists`, `DivineAgape.divineReality`, `DivineAgape.is_divine` | — |
 | C515 | `Logos.NecessaryKindAudit.no_necessary_atom` | [DivineThomisticProduction.lean#L674](formal/Logos/DivineThomisticProduction.lean#L674) | `{NecessarySubjectKind, Subject, CL}` | **C323** `an_atom_is_contingent`, `Modal.NecessaryEntity`, `TheologicalModalHardening.necessary_not_contingent` | **C516** `necessary_exhaustion` |
 | C516 | `Logos.NecessaryKindAudit.necessary_exhaustion` | [DivineThomisticProduction.lean#L697](formal/Logos/DivineThomisticProduction.lean#L697) | `{NecessarySubjectKind, Subject, CL}` | **C403** `NecessarySubjectKind`, axiom `Subject` (VOCAB), `Entity.Entity`, `Entity.EntityOf`, `Modal.NecessaryEntity`, **C515** `no_necessary_atom`, `Plurality.NecessarySubject`, **C410** `kinds_are_the_modal_partition` | **C517** `necessary_realm_is_two_genera` |
 | C517 | `Logos.NecessaryKindAudit.necessary_realm_is_two_genera` | [DivineThomisticProduction.lean#L711](formal/Logos/DivineThomisticProduction.lean#L711) | `{NecessarySubjectKind, Subject, CL}` | **C403** `NecessarySubjectKind`, axiom `Subject` (VOCAB), `Entity.Entity`, `Entity.EntityOf`, **C315** `ofGround_ne_ofSubject`, `Modal.NecessaryEntity`, **C516** `necessary_exhaustion` | — |
-| C518 | `Logos.DivineAgape.subsisting_centre_is_necessary` | [DivineTrinitarianAttributes.lean#L1834](formal/Logos/DivineTrinitarianAttributes.lean#L1834) | `{NecessarySubjectKind, Subject}` | **C574** `DivineHypostasis`, `DivineAgape.Subsists`, `Entity.Entity`, `NecessityEternity.ofGround_necessary`, `TheologicalModalHardening.NecessaryEntity` | **C520** `the_three_centres_are_one_necessary_reality` |
-| C519 | `Logos.DivineAgape.co_subsistence_is_co_location` | [DivineTrinitarianAttributes.lean#L1846](formal/Logos/DivineTrinitarianAttributes.lean#L1846) | `{Subject}` | **C574** `DivineHypostasis`, `DivineAgape.Subsists`, `Entity.Entity` | **C520** `the_three_centres_are_one_necessary_reality` |
-| C520 | `Logos.DivineAgape.the_three_centres_are_one_necessary_reality` | [DivineTrinitarianAttributes.lean#L1860](formal/Logos/DivineTrinitarianAttributes.lean#L1860) | `{AxAgapeEssence, AxProcessionSpirit, NecessarySubjectKind, Subject, CL}` | **C519** `co_subsistence_is_co_location`, **C518** `subsisting_centre_is_necessary`, `DivineAgape.the_beloved_subsists`, `DivineAgape.the_father_subsists`, `DivineAgape.the_spirit_subsists`, `Entity.Entity`, `TheologicalModalHardening.NecessaryEntity` | — |
-| C510 | `Logos.DivineAgape.agape_entails_tripersonality` | [DivineTrinitarianAttributes.lean#L1814](formal/Logos/DivineTrinitarianAttributes.lean#L1814) | `{AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL}` | **C108** `TrinitarianStructure`, **C505** `AxProcessionWord`, **C574** `DivineHypostasis`, `DivineAgape.IsSpirit`, `DivineAgape.IsWord`, `DivineAgape.the_spirit_is_spirit`, `Entity.Entity` | — |
-| C511 | `Logos.TrinitySeparations.unitarian_self_love_gives_no_second_centre` | [DivineTrinitarianAttributes.lean#L2045](formal/Logos/DivineTrinitarianAttributes.lean#L2045) | `{}` | — | — |
-| C512 | `Logos.TrinitySeparations.creature_love_gives_no_divine_beloved` | [DivineTrinitarianAttributes.lean#L2072](formal/Logos/DivineTrinitarianAttributes.lean#L2072) | `{}` | — | — |
-| C513 | `Logos.TrinitySeparations.attribute_love_gives_no_subsistent_word` | [DivineTrinitarianAttributes.lean#L2098](formal/Logos/DivineTrinitarianAttributes.lean#L2098) | `{}` | — | — |
-| C514 | `Logos.TrinitySeparations.agape_and_word_without_spirit_is_binitarian` | [DivineTrinitarianAttributes.lean#L2124](formal/Logos/DivineTrinitarianAttributes.lean#L2124) | `{}` | — | — |
+| C518 | `Logos.DivineAgape.subsisting_centre_is_necessary` | [DivineTrinitarianAttributes.lean#L1835](formal/Logos/DivineTrinitarianAttributes.lean#L1835) | `{NecessarySubjectKind, Subject}` | **C574** `DivineHypostasis`, `DivineAgape.Subsists`, `Entity.Entity`, `NecessityEternity.ofGround_necessary`, `TheologicalModalHardening.NecessaryEntity` | **C520** `the_three_centres_are_one_necessary_reality` |
+| C519 | `Logos.DivineAgape.co_subsistence_is_co_location` | [DivineTrinitarianAttributes.lean#L1847](formal/Logos/DivineTrinitarianAttributes.lean#L1847) | `{Subject}` | **C574** `DivineHypostasis`, `DivineAgape.Subsists`, `Entity.Entity` | **C520** `the_three_centres_are_one_necessary_reality` |
+| C520 | `Logos.DivineAgape.the_three_centres_are_one_necessary_reality` | [DivineTrinitarianAttributes.lean#L1861](formal/Logos/DivineTrinitarianAttributes.lean#L1861) | `{AxAgapeEssence, AxProcessionSpirit, NecessarySubjectKind, Subject, CL}` | **C519** `co_subsistence_is_co_location`, **C518** `subsisting_centre_is_necessary`, `DivineAgape.the_beloved_subsists`, `DivineAgape.the_father_subsists`, `DivineAgape.the_spirit_subsists`, `Entity.Entity`, `TheologicalModalHardening.NecessaryEntity` | — |
+| C510 | `Logos.DivineAgape.agape_entails_tripersonality` | [DivineTrinitarianAttributes.lean#L1815](formal/Logos/DivineTrinitarianAttributes.lean#L1815) | `{AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL}` | **C108** `TrinitarianStructure`, **C505** `AxProcessionWord`, **C574** `DivineHypostasis`, `DivineAgape.IsSpirit`, `DivineAgape.IsWord`, `DivineAgape.the_spirit_is_spirit`, `Entity.Entity` | — |
+| C511 | `Logos.TrinitySeparations.unitarian_self_love_gives_no_second_centre` | [DivineTrinitarianAttributes.lean#L2046](formal/Logos/DivineTrinitarianAttributes.lean#L2046) | `{}` | — | — |
+| C512 | `Logos.TrinitySeparations.creature_love_gives_no_divine_beloved` | [DivineTrinitarianAttributes.lean#L2073](formal/Logos/DivineTrinitarianAttributes.lean#L2073) | `{}` | — | — |
+| C513 | `Logos.TrinitySeparations.attribute_love_gives_no_subsistent_word` | [DivineTrinitarianAttributes.lean#L2099](formal/Logos/DivineTrinitarianAttributes.lean#L2099) | `{}` | — | — |
+| C514 | `Logos.TrinitySeparations.agape_and_word_without_spirit_is_binitarian` | [DivineTrinitarianAttributes.lean#L2125](formal/Logos/DivineTrinitarianAttributes.lean#L2125) | `{}` | — | — |
 | C187 | `Logos.ProofPresentationRetorsion.syntactic_validity_without_subject_or_normativity` | [ProofPresentationRetorsion.lean#L97](formal/Logos/ProofPresentationRetorsion.lean#L97) | `{}` | `ProofPresentationRetorsion.Checker`, `ProofPresentationRetorsion.Derivation` | — |
 | C188 | `Logos.ProofPresentationRetorsion.checker_validity_does_not_force_normative_stance` | [ProofPresentationRetorsion.lean#L109](formal/Logos/ProofPresentationRetorsion.lean#L109) | `{}` | `BipolarityRetorsion.JudSigIncorrect`, `BipolarityRetorsion.JudicativeSig`, axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `BipolarityRetorsion.M_oneway`, `BipolarityRetorsion.VoiceSig`, `BipolarityRetorsion.m_oneway_stance_fails`, `BipolarityRetorsion.m_oneway_voice_holds`, `ProofPresentationRetorsion.Checker`, `ProofPresentationRetorsion.Derivation`, `ProofPresentationRetorsion.conclusion` | — |
 | C189 | `Logos.ProofPresentationRetorsion.presents_as_sound_implies_claims_normative_correctness` | [ProofPresentationRetorsion.lean#L134](formal/Logos/ProofPresentationRetorsion.lean#L134) | `{Initiates, Means, State, Subject}` | axiom `Subject` (VOCAB), `NormativeOrder.ClaimsNormativeCorrectness`, `ProofPresentationRetorsion.Derivation`, `ProofPresentationRetorsion.DerivationSound`, `ProofPresentationRetorsion.PresentsAsSound` | — |
@@ -899,12 +899,12 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 | C571 | — | — | — | — | DELETED |
 | C572 | — | — | — | — | WITHDRAWN |
 | C573 | — | — | — | — | WITHDRAWN |
-| C574 | `Logos.DivineAgape.DivineHypostasis` | [DivineTrinitarianAttributes.lean#L1536](formal/Logos/DivineTrinitarianAttributes.lean#L1536) | `{}` | — | **C504** `AxAgapeEssence`, **C506** `AxProcessionSpirit`, `DivineAgape.DivineLove`, `DivineAgape.IsSpirit`, `DivineAgape.IsWord`, `DivineAgape.SelfDonation`, `DivineAgape.Subsists`, **C508** `agape_beloved_is_not_creature`, **C510** `agape_entails_tripersonality`, **C575** `agape_is_self_donation`, **C519** `co_subsistence_is_co_location`, **C576** `denying_self_donation_is_absurd`, **C577** `denying_shared_location_is_absurd`, **C509** `divine_object_subsists_in_godhead`, `DivineAgape.each_subsisting_person_is_in_the_other`, **C507** `essential_love_has_necessary_object`, `DivineAgape.is_divine`, **C518** `subsisting_centre_is_necessary`, `DivineAgape.the_beloved_distinct`, `DivineAgape.the_beloved_subsists`, `DivineAgape.the_father_subsists`, `DivineAgape.the_source_loves_the_beloved`, `DivineAgape.the_spirit_is_spirit`, `DivineAgape.the_spirit_ne_any_word`, `DivineAgape.the_spirit_ne_beloved`, `DivineAgape.the_spirit_ne_father`, `DivineAgape.the_spirit_subsists`, `DivineAgape.two_subsisting_share_one_location`, `NoMeanerNoFalsity.the_dependence_step_is_refuted`, **C590** `the_free_person_claim_in_one_statement`, `SinglePersonDenial.donation_makes_contingency_is_refuted`, `SinglePersonDenial.donation_terminus_is_as_necessary_as_the_donor`, **C579** `self_gift_cannot_depend_on_a_contingent_person`, `SinglePersonDenial.singlePersonDenial_summary`, **C578** `self_donation_needs_no_personhood_of_the_ground` |
-| C575 | `Logos.DivineAgape.agape_is_self_donation` | [DivineTrinitarianAttributes.lean#L1909](formal/Logos/DivineTrinitarianAttributes.lean#L1909) | `{AxAgapeEssence, Subject, CL}` | **C574** `DivineHypostasis`, `DivineAgape.DivineLove`, `DivineAgape.SelfDonation`, `DivineAgape.Subsists`, `DivineAgape.the_beloved_distinct`, `DivineAgape.the_beloved_subsists`, `DivineAgape.the_father_subsists`, `DivineAgape.the_source_loves_the_beloved`, `DivineAgape.two_subsisting_share_one_location`, `Entity.Entity` | **C576** `denying_self_donation_is_absurd`, **C577** `denying_shared_location_is_absurd`, **C578** `self_donation_needs_no_personhood_of_the_ground` |
-| C576 | `Logos.DivineAgape.denying_self_donation_is_absurd` | [DivineTrinitarianAttributes.lean#L1945](formal/Logos/DivineTrinitarianAttributes.lean#L1945) | `{AxAgapeEssence, Subject, CL}` | **C574** `DivineHypostasis`, `DivineAgape.SelfDonation`, **C575** `agape_is_self_donation` | — |
-| C577 | `Logos.DivineAgape.denying_shared_location_is_absurd` | [DivineTrinitarianAttributes.lean#L1956](formal/Logos/DivineTrinitarianAttributes.lean#L1956) | `{AxAgapeEssence, Subject, CL}` | **C574** `DivineHypostasis`, `DivineAgape.DivineLove`, `DivineAgape.SelfDonation`, `DivineAgape.Subsists`, **C575** `agape_is_self_donation`, `Entity.Entity` | — |
-| C578 | `Logos.TrinitarianPersonalGround.self_donation_needs_no_personhood_of_the_ground` | [DivineTrinitarianAttributes.lean#L2413](formal/Logos/DivineTrinitarianAttributes.lean#L2413) | `{AxAgapeEssence, Means, Subject, CL}` | `AsieticChoice.Asiety`, **C574** `DivineHypostasis`, `DivineAgape.SelfDonation`, **C575** `agape_is_self_donation`, `TrinitarianPersonalGround.ground_is_not_a_fourth_chooser` | — |
-| C579 | `Logos.SinglePersonDenial.self_gift_cannot_depend_on_a_contingent_person` | [DivineTrinitarianAttributes.lean#L3302](formal/Logos/DivineTrinitarianAttributes.lean#L3302) | `{Subject}` | axiom `Subject` (VOCAB), **C574** `DivineHypostasis`, `DivineAgape.DivineLove`, `DivineAgape.SelfDonation`, `DivineAgape.Subsists`, `DivineAgape.divineReality`, `Entity.Entity`, `Entity.EntityOf`, `NecessityEternity.ofGround_ne_ofSubject` | `NoMeanerNoFalsity.the_dependence_step_is_refuted` |
+| C574 | `Logos.DivineAgape.DivineHypostasis` | [DivineTrinitarianAttributes.lean#L1537](formal/Logos/DivineTrinitarianAttributes.lean#L1537) | `{}` | — | **C504** `AxAgapeEssence`, **C506** `AxProcessionSpirit`, `DivineAgape.DivineLove`, `DivineAgape.IsSpirit`, `DivineAgape.IsWord`, `DivineAgape.SelfDonation`, `DivineAgape.Subsists`, **C508** `agape_beloved_is_not_creature`, **C510** `agape_entails_tripersonality`, **C575** `agape_is_self_donation`, **C519** `co_subsistence_is_co_location`, **C576** `denying_self_donation_is_absurd`, **C577** `denying_shared_location_is_absurd`, **C509** `divine_object_subsists_in_godhead`, `DivineAgape.each_subsisting_person_is_in_the_other`, **C507** `essential_love_has_necessary_object`, `DivineAgape.is_divine`, **C518** `subsisting_centre_is_necessary`, `DivineAgape.the_beloved_distinct`, `DivineAgape.the_beloved_subsists`, `DivineAgape.the_father_subsists`, `DivineAgape.the_source_loves_the_beloved`, `DivineAgape.the_spirit_is_spirit`, `DivineAgape.the_spirit_ne_any_word`, `DivineAgape.the_spirit_ne_beloved`, `DivineAgape.the_spirit_ne_father`, `DivineAgape.the_spirit_subsists`, `DivineAgape.two_subsisting_share_one_location`, `NoMeanerNoFalsity.the_dependence_step_is_refuted`, **C590** `the_free_person_claim_in_one_statement`, `SinglePersonDenial.donation_makes_contingency_is_refuted`, `SinglePersonDenial.donation_terminus_is_as_necessary_as_the_donor`, **C579** `self_gift_cannot_depend_on_a_contingent_person`, `SinglePersonDenial.singlePersonDenial_summary`, **C578** `self_donation_needs_no_personhood_of_the_ground` |
+| C575 | `Logos.DivineAgape.agape_is_self_donation` | [DivineTrinitarianAttributes.lean#L1910](formal/Logos/DivineTrinitarianAttributes.lean#L1910) | `{AxAgapeEssence, Subject, CL}` | **C574** `DivineHypostasis`, `DivineAgape.DivineLove`, `DivineAgape.SelfDonation`, `DivineAgape.Subsists`, `DivineAgape.the_beloved_distinct`, `DivineAgape.the_beloved_subsists`, `DivineAgape.the_father_subsists`, `DivineAgape.the_source_loves_the_beloved`, `DivineAgape.two_subsisting_share_one_location`, `Entity.Entity` | **C576** `denying_self_donation_is_absurd`, **C577** `denying_shared_location_is_absurd`, **C578** `self_donation_needs_no_personhood_of_the_ground` |
+| C576 | `Logos.DivineAgape.denying_self_donation_is_absurd` | [DivineTrinitarianAttributes.lean#L1946](formal/Logos/DivineTrinitarianAttributes.lean#L1946) | `{AxAgapeEssence, Subject, CL}` | **C574** `DivineHypostasis`, `DivineAgape.SelfDonation`, **C575** `agape_is_self_donation` | — |
+| C577 | `Logos.DivineAgape.denying_shared_location_is_absurd` | [DivineTrinitarianAttributes.lean#L1957](formal/Logos/DivineTrinitarianAttributes.lean#L1957) | `{AxAgapeEssence, Subject, CL}` | **C574** `DivineHypostasis`, `DivineAgape.DivineLove`, `DivineAgape.SelfDonation`, `DivineAgape.Subsists`, **C575** `agape_is_self_donation`, `Entity.Entity` | — |
+| C578 | `Logos.TrinitarianPersonalGround.self_donation_needs_no_personhood_of_the_ground` | [DivineTrinitarianAttributes.lean#L2414](formal/Logos/DivineTrinitarianAttributes.lean#L2414) | `{AxAgapeEssence, Means, Subject, CL}` | `AsieticChoice.Asiety`, **C574** `DivineHypostasis`, `DivineAgape.SelfDonation`, **C575** `agape_is_self_donation`, `TrinitarianPersonalGround.ground_is_not_a_fourth_chooser` | — |
+| C579 | `Logos.SinglePersonDenial.self_gift_cannot_depend_on_a_contingent_person` | [DivineTrinitarianAttributes.lean#L3303](formal/Logos/DivineTrinitarianAttributes.lean#L3303) | `{Subject}` | axiom `Subject` (VOCAB), **C574** `DivineHypostasis`, `DivineAgape.DivineLove`, `DivineAgape.SelfDonation`, `DivineAgape.Subsists`, `DivineAgape.divineReality`, `Entity.Entity`, `Entity.EntityOf`, `NecessityEternity.ofGround_ne_ofSubject` | `NoMeanerNoFalsity.the_dependence_step_is_refuted` |
 | C580 | — | — | — | — | ✖ |
 | C275 | `Logos.AsieticChoice.doubt_implies_trueChoice` | [AsieticChoice.lean#L561](formal/Logos/AsieticChoice.lean#L561) | `{Means, Subject}` | axiom `Subject` (VOCAB), `AsieticChoice.TrueChoice`, **C261** `chooses_implies_trueChoice`, `Choice.Doubts`, `Choice.genuineChoice_of_doubt` | — |
 | C276 | `Logos.AsieticChoice.genuineNormativity_implies_trueChoice` | [AsieticChoice.lean#L570](formal/Logos/AsieticChoice.lean#L570) | `{Means, Subject}` | axiom `Subject` (VOCAB), `AsieticChoice.TrueChoice`, **C261** `chooses_implies_trueChoice`, `Choice.Chooses`, `Choice.FreeWill`, `IndubitableNormativeFreeWill.GenuineNormativity`, **C107** `indubitable_normative_free_will` | — |
@@ -986,18 +986,18 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 | C367 | `Logos.CosmicExistence.cosmos_obtains` | [DivineClassicalAttributes.lean#L4329](formal/Logos/DivineClassicalAttributes.lean#L4329) | `{Means, NecessarySubjectKind, Subject, Will, subjectWill, CL}` | `Agency.ContingentSubjectKind`, `Agency.IntentionalSubject`, axiom `Means` (VOCAB), axiom `Subject` (VOCAB), `CosmicExistence.CreatedRealm`, **C354** `cosmos_presence_model`, `Person.Person`, `Person.person_is_intentional` | **C351** `the_ground_loves_the_cosmos`, **C352** `the_ground_loves_the_cosmos_in_a_context`, `CosmicExistence.the_realm_bears_meaning` |
 | C353 | `Logos.CosmicExistence.perfect_universe_has_no_contingent_realm` | [DivineClassicalAttributes.lean#L4379](formal/Logos/DivineClassicalAttributes.lean#L4379) | `{}` | `CosmicExistence.PerfectUniverse`, `CosmicExistence.perfect_universe_actual_is_necessary` | — |
 | C354 | `Logos.CosmicExistence.cosmos_presence_model` | [DivineClassicalAttributes.lean#L4214](formal/Logos/DivineClassicalAttributes.lean#L4214) | `{Means, NecessarySubjectKind, Subject, CL}` | `Agency.ContingentSubjectKind`, axiom `Means` (VOCAB), **C403** `NecessarySubjectKind`, axiom `Subject` (VOCAB), `CosmicExistence.CreatedRealm`, `CosmicExistence.Realm`, `Entity.EntityOf`, **Q7.2** `ExistsAt`, `Entity.actualWorld`, **C322** `falsityWorld_ne_actualWorld`, `RecoveredOntologicalGround.EntityMeans`, `Semantics.World`, `TheologicalModalHardening.ActualEntity` | **C367** `cosmos_obtains`, **C386** `cosmos_presence_model_of_the_act_datum` |
-| C355 | `Logos.TheologicalModalHardening.necessary_entity_rules_out_empty_world` | [TheologicalModalHardening.lean#L197](formal/Logos/TheologicalModalHardening.lean#L197) | `{}` | — | — |
-| C356 | `Logos.TheologicalModalHardening.empty_world_excluded_by_non_emptiness_constraint` | [TheologicalModalHardening.lean#L753](formal/Logos/TheologicalModalHardening.lean#L753) | `{}` | `TheologicalModalHardening.ModalWorldModel`, `TheologicalModalHardening.ModalWorldModel.PossibleWorld` | — |
-| C357 | `Logos.TheologicalModalHardening.non_contingent_not_entails_necessary` | [TheologicalModalHardening.lean#L85](formal/Logos/TheologicalModalHardening.lean#L85) | `{}` | `TheologicalModalHardening.ModalOntologySignature` | — |
-| C358 | `Logos.TheologicalModalHardening.necessary_entity_not_forces_contingent_creation` | [TheologicalModalHardening.lean#L208](formal/Logos/TheologicalModalHardening.lean#L208) | `{}` | `TheologicalModalHardening.ConcreteModelG`, `TheologicalModalHardening.ModelG_Signature` | — |
-| C359 | `Logos.TheologicalModalHardening.model_G_consistent` | [TheologicalModalHardening.lean#L145](formal/Logos/TheologicalModalHardening.lean#L145) | `{}` | `TheologicalModalHardening.ConcreteModelG`, `TheologicalModalHardening.ModelG_Signature` | — |
-| C360 | `Logos.TheologicalModalHardening.god_alone_has_no_creation` | [TheologicalModalHardening.lean#L342](formal/Logos/TheologicalModalHardening.lean#L342) | `{}` | `TheologicalModalHardening.GodAloneModel` | — |
-| C361 | `Logos.TheologicalModalHardening.coexistence_without_creation_relation` | [TheologicalModalHardening.lean#L358](formal/Logos/TheologicalModalHardening.lean#L358) | `{}` | `TheologicalModalHardening.CoexistenceWithoutCreationModel` | — |
-| C362 | `Logos.TheologicalModalHardening.necessary_non_emptiness_not_entails_necessary_entity` | [TheologicalModalHardening.lean#L457](formal/Logos/TheologicalModalHardening.lean#L457) | `{}` | `TheologicalModalHardening.RegimeG_Signature`, `TheologicalModalHardening.RegimeG_Signature.NecessaryEntity`, `TheologicalModalHardening.ShiftingEntityModel` | — |
-| C363 | `Logos.TheologicalModalHardening.g1_god_alone_properties` | [TheologicalModalHardening.lean#L652](formal/Logos/TheologicalModalHardening.lean#L652) | `{}` | `TheologicalModalHardening.RegimeG1_GodAlone` | — |
-| C364 | `Logos.TheologicalModalHardening.g2_creation_properties` | [TheologicalModalHardening.lean#L670](formal/Logos/TheologicalModalHardening.lean#L670) | `{}` | `TheologicalModalHardening.RegimeG2_Creation` | — |
-| C365 | `Logos.TheologicalModalHardening.g3_coexistence_no_creation_properties` | [TheologicalModalHardening.lean#L690](formal/Logos/TheologicalModalHardening.lean#L690) | `{}` | `TheologicalModalHardening.RegimeG3_CoexistenceNoCreation` | — |
-| C366 | `Logos.TheologicalModalHardening.g4_creation_is_contingent` | [TheologicalModalHardening.lean#L701](formal/Logos/TheologicalModalHardening.lean#L701) | `{}` | `TheologicalModalHardening.RegimeG2_Creation` | — |
+| C355 | `Logos.TheologicalModalHardening.necessary_entity_rules_out_empty_world` | [ModalCreationFrontiers.lean#L207](formal/Logos/ModalCreationFrontiers.lean#L207) | `{}` | — | — |
+| C356 | `Logos.TheologicalModalHardening.empty_world_excluded_by_non_emptiness_constraint` | [ModalCreationFrontiers.lean#L763](formal/Logos/ModalCreationFrontiers.lean#L763) | `{}` | `TheologicalModalHardening.ModalWorldModel`, `TheologicalModalHardening.ModalWorldModel.PossibleWorld` | — |
+| C357 | `Logos.TheologicalModalHardening.non_contingent_not_entails_necessary` | [ModalCreationFrontiers.lean#L95](formal/Logos/ModalCreationFrontiers.lean#L95) | `{}` | `TheologicalModalHardening.ModalOntologySignature` | — |
+| C358 | `Logos.TheologicalModalHardening.necessary_entity_not_forces_contingent_creation` | [ModalCreationFrontiers.lean#L218](formal/Logos/ModalCreationFrontiers.lean#L218) | `{}` | `TheologicalModalHardening.ConcreteModelG`, `TheologicalModalHardening.ModelG_Signature` | — |
+| C359 | `Logos.TheologicalModalHardening.model_G_consistent` | [ModalCreationFrontiers.lean#L155](formal/Logos/ModalCreationFrontiers.lean#L155) | `{}` | `TheologicalModalHardening.ConcreteModelG`, `TheologicalModalHardening.ModelG_Signature` | — |
+| C360 | `Logos.TheologicalModalHardening.god_alone_has_no_creation` | [ModalCreationFrontiers.lean#L352](formal/Logos/ModalCreationFrontiers.lean#L352) | `{}` | `TheologicalModalHardening.GodAloneModel` | — |
+| C361 | `Logos.TheologicalModalHardening.coexistence_without_creation_relation` | [ModalCreationFrontiers.lean#L368](formal/Logos/ModalCreationFrontiers.lean#L368) | `{}` | `TheologicalModalHardening.CoexistenceWithoutCreationModel` | — |
+| C362 | `Logos.TheologicalModalHardening.necessary_non_emptiness_not_entails_necessary_entity` | [ModalCreationFrontiers.lean#L467](formal/Logos/ModalCreationFrontiers.lean#L467) | `{}` | `TheologicalModalHardening.RegimeG_Signature`, `TheologicalModalHardening.RegimeG_Signature.NecessaryEntity`, `TheologicalModalHardening.ShiftingEntityModel` | — |
+| C363 | `Logos.TheologicalModalHardening.g1_god_alone_properties` | [ModalCreationFrontiers.lean#L662](formal/Logos/ModalCreationFrontiers.lean#L662) | `{}` | `TheologicalModalHardening.RegimeG1_GodAlone` | — |
+| C364 | `Logos.TheologicalModalHardening.g2_creation_properties` | [ModalCreationFrontiers.lean#L680](formal/Logos/ModalCreationFrontiers.lean#L680) | `{}` | `TheologicalModalHardening.RegimeG2_Creation` | — |
+| C365 | `Logos.TheologicalModalHardening.g3_coexistence_no_creation_properties` | [ModalCreationFrontiers.lean#L700](formal/Logos/ModalCreationFrontiers.lean#L700) | `{}` | `TheologicalModalHardening.RegimeG3_CoexistenceNoCreation` | — |
+| C366 | `Logos.TheologicalModalHardening.g4_creation_is_contingent` | [ModalCreationFrontiers.lean#L711](formal/Logos/ModalCreationFrontiers.lean#L711) | `{}` | `TheologicalModalHardening.RegimeG2_Creation` | — |
 | C584 | `Logos.TwoNecessaryPersonalCentres.AxTwoNecessaryPersonalCentres` | [TwoNecessaryPersonalCentres.lean#L117](formal/Logos/TwoNecessaryPersonalCentres.lean#L117) | `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}` | **C403** `NecessarySubjectKind`, axiom `Subject` (VOCAB), `Person.Person` | `Love.T14_eternalRelation_love_only`, **C585** `two_necessary_persons`, `TwoNecessaryPersonalCentres.necessary_kind_is_inhabited_by_two`, `TwoNecessaryPersonalCentres.two_necessary_persons_of_kind`, `TwoNecessaryPersonalCentres.two_persons` |
 | C585 | `Logos.Plurality.two_necessary_persons` | [Plurality.lean#L237](formal/Logos/Plurality.lean#L237) | `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}` | **C403** `NecessarySubjectKind`, axiom `Subject` (VOCAB), `Person.Person`, `Plurality.NecessarySubject`, **C405** `necessaryKindSubject_is_necessary`, **C584** `AxTwoNecessaryPersonalCentres` | — |
 | C587 | `Logos.NoMeanerNoFalsity.a_genuine_free_person_exists` | [NoMeanerNoFalsity.lean#L94](formal/Logos/NoMeanerNoFalsity.lean#L94) | `{AxActPolarity, performative_act_datum, Initiates, Means, State, Subject, Will, subjectWill, will_individuation}` | axiom `Subject` (VOCAB), `Choice.FreeWill`, `NoMeanerNoFalsity.a_free_will_exists_derived`, `Person.Person`, **C221** `freeWill_implies_person` | **C590** `the_free_person_claim_in_one_statement` |
@@ -1013,67 +1013,45 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 <details>
 <summary>All user-authored theorems/defs, by module (line and kernel axioms) →</summary>
 
-### `DefinitionalMeaningRetorsion`
-
-| Name | Kind | Line | Statement (logic) | Axioms |
-|---|---|---|---|---|
-| `FreeSubject` | def | [L111](formal/Logos/DefinitionalMeaningRetorsion.lean#L111) | `def FreeSubject (s : Subject) : Prop` | —  |
-| `FreeWill` | def | [L104](formal/Logos/DefinitionalMeaningRetorsion.lean#L104) | `def FreeWill (s : Subject) : Prop` | —  |
-| `Meaning` | def | [L88](formal/Logos/DefinitionalMeaningRetorsion.lean#L88) | `def Meaning (p : Prop) : Prop` | —  |
-| `MeaningAct` | structure | [L64](formal/Logos/DefinitionalMeaningRetorsion.lean#L64) | `structure MeaningAct where` | —  |
-| `Means` | def | [L74](formal/Logos/DefinitionalMeaningRetorsion.lean#L74) | `def Means (s : Subject) (p : Prop) : Prop` | —  |
-| `NoMeaning` | def | [L97](formal/Logos/DefinitionalMeaningRetorsion.lean#L97) | `def NoMeaning : Prop` | —  |
-| `complete_retorsion` | theorem | [L308](formal/Logos/DefinitionalMeaningRetorsion.lean#L308) | `theorem complete_retorsion (h : ∃ s : Subject, Means Chooses s (NoMeaning Choose` | —  |
-| `denial_of_meaning_is_false` | theorem | [L208](formal/Logos/DefinitionalMeaningRetorsion.lean#L208) | `theorem denial_of_meaning_is_false {s : Subject} (h : Means Chooses s (NoMeaning` | —  |
-| `exists_free_subject` | theorem | [L283](formal/Logos/DefinitionalMeaningRetorsion.lean#L283) | `theorem exists_free_subject (h : ∃ s : Subject, Means Chooses s (NoMeaning Choos` | —  |
-| `meaning_cannot_not_exist` | theorem | [L251](formal/Logos/DefinitionalMeaningRetorsion.lean#L251) | `theorem meaning_cannot_not_exist (h : ∃ s : Subject, Means Chooses s (NoMeaning ` | —  |
-| `meaning_is_to_someone` | theorem | [L168](formal/Logos/DefinitionalMeaningRetorsion.lean#L168) | `theorem meaning_is_to_someone {p : Prop} (h : Meaning Chooses p) : ∃ s : Subject` | —  |
-| `meaningful_denial_is_impossible` | theorem | [L237](formal/Logos/DefinitionalMeaningRetorsion.lean#L237) | `theorem meaningful_denial_is_impossible (h : ∃ s : Subject, Means Chooses s (NoM` | —  |
-| `means_implies_choice` | theorem | [L128](formal/Logos/DefinitionalMeaningRetorsion.lean#L128) | `theorem means_implies_choice {s : Subject} {p : Prop} (h : Means Chooses s p) : ` | —  |
-| `means_implies_free_subject` | theorem | [L140](formal/Logos/DefinitionalMeaningRetorsion.lean#L140) | `theorem means_implies_free_subject {s : Subject} {p : Prop} (h : Means Chooses s` | —  |
-| `means_implies_meaning` | theorem | [L157](formal/Logos/DefinitionalMeaningRetorsion.lean#L157) | `theorem means_implies_meaning {s : Subject} {p : Prop} (h : Means Chooses s p) :` | —  |
-| `retorsion` | theorem | [L223](formal/Logos/DefinitionalMeaningRetorsion.lean#L223) | `theorem retorsion {s : Subject} (h : Means Chooses s (NoMeaning Chooses)) (hNoMe` | —  |
-| `retorsion_yields_free_subject` | theorem | [L272](formal/Logos/DefinitionalMeaningRetorsion.lean#L272) | `theorem retorsion_yields_free_subject {s : Subject} (h : Means Chooses s (NoMean` | —  |
-
 ### `Logos.A14SemanticAudit`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `A14_Statement` | def | [L56](formal/Logos/A14SemanticAudit.lean#L56) | `def A14_Statement (Subj : Type) (ActRel : Subj → Prop → Prop) (MeansRel : Subj →` | {}  |
-| `Act_Authorial` | def | [L165](formal/Logos/A14SemanticAudit.lean#L165) | `def Act_Authorial {Subj : Type} (MeansRel : Subj → Prop → Prop) (InitiatesRel : ` | {}  |
-| `Act_Contrastive` | def | [L152](formal/Logos/A14SemanticAudit.lean#L152) | `def Act_Contrastive {Subj : Type} (MeansRel : Subj → Prop → Prop) (InitiatesRel ` | {}  |
-| `Act_Minimal` | def | [L146](formal/Logos/A14SemanticAudit.lean#L146) | `def Act_Minimal {Subj : Type} (MeansRel : Subj → Prop → Prop) (InitiatesRel : Su` | {}  |
-| `Act_Purposeful` | def | [L158](formal/Logos/A14SemanticAudit.lean#L158) | `def Act_Purposeful {Subj : Type} (MeansRel : Subj → Prop → Prop) (InitiatesRel :` | {}  |
-| `Act_Responsive` | def | [L172](formal/Logos/A14SemanticAudit.lean#L172) | `def Act_Responsive {Subj : Type} (MeansRel : Subj → Prop → Prop) (InitiatesRel :` | {}  |
-| `AimStage` | def | [L295](formal/Logos/A14SemanticAudit.lean#L295) | `def AimStage {Subj : Type} (CS : FineCognitiveSubject Subj) (SourceOf : Subj → P` | {}  |
-| `AuthorStage` | def | [L290](formal/Logos/A14SemanticAudit.lean#L290) | `def AuthorStage {Subj : Type} (CS : FineCognitiveSubject Subj) (SourceOf : Subj ` | {}  |
-| `AuthorialAction` | def | [L92](formal/Logos/A14SemanticAudit.lean#L92) | `def AuthorialAction {Subj : Type} (ActRel : Subj → Prop → Prop) (SourceOf : Subj` | {}  |
-| `CausalStage` | def | [L306](formal/Logos/A14SemanticAudit.lean#L306) | `def CausalStage {Subj : Type} (CS : FineCognitiveSubject Subj) (SourceOf : Subj ` | {}  |
-| `EvalStage` | def | [L282](formal/Logos/A14SemanticAudit.lean#L282) | `def EvalStage {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj) (p q : P` | {}  |
-| `MissingHornPrinciple` | def | [L62](formal/Logos/A14SemanticAudit.lean#L62) | `def MissingHornPrinciple (Subj : Type) (ActRel : Subj → Prop → Prop) (MeansRel :` | {}  |
-| `ModalStage` | def | [L319](formal/Logos/A14SemanticAudit.lean#L319) | `def ModalStage {Subj : Type} (CS : FineCognitiveSubject Subj) (SourceOf : Subj →` | {}  |
-| `ReasonStage` | def | [L312](formal/Logos/A14SemanticAudit.lean#L312) | `def ReasonStage {Subj : Type} (CS : FineCognitiveSubject Subj) (SourceOf : Subj ` | {}  |
-| `ReasonsResponsiveAction` | def | [L87](formal/Logos/A14SemanticAudit.lean#L87) | `def ReasonsResponsiveAction {Subj : Type} (ActRel : Subj → Prop → Prop) (Respons` | {}  |
-| `ReprStage` | def | [L278](formal/Logos/A14SemanticAudit.lean#L278) | `def ReprStage {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj) (p q : P` | {}  |
-| `SelfAttrStage` | def | [L300](formal/Logos/A14SemanticAudit.lean#L300) | `def SelfAttrStage {Subj : Type} (CS : FineCognitiveSubject Subj) (SourceOf : Sub` | {}  |
-| `SettleStage` | def | [L286](formal/Logos/A14SemanticAudit.lean#L286) | `def SettleStage {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj) (p q :` | {}  |
-| `SubstantivePerson` | def | [L228](formal/Logos/A14SemanticAudit.lean#L228) | `def SubstantivePerson (Subj : Type) (s : Subj) : Prop` | {}  |
-| `TeleologicalAction` | def | [L82](formal/Logos/A14SemanticAudit.lean#L82) | `def TeleologicalAction {Subj : Type} (ActRel : Subj → Prop → Prop) (AimsAt : Sub` | {}  |
-| `a14_iff_missing_horn_principle` | theorem | [L68](formal/Logos/A14SemanticAudit.lean#L68) | `theorem a14_iff_missing_horn_principle {Subj : Type} (ActRel : Subj → Prop → Pro` | {}  |
-| `act_contrastive_trivializes_a14` | theorem | [L179](formal/Logos/A14SemanticAudit.lean#L179) | `theorem act_contrastive_trivializes_a14 {Subj : Type} (MeansRel : Subj → Prop → ` | {}  |
-| `candidate_principles_fail_to_derive_a14` | theorem | [L100](formal/Logos/A14SemanticAudit.lean#L100) | `theorem candidate_principles_fail_to_derive_a14 : ∃ (Subj : Type) (ActRel : Subj` | {}  |
-| `contrastive_closure_of_means_fails` | theorem | [L213](formal/Logos/A14SemanticAudit.lean#L213) | `theorem contrastive_closure_of_means_fails : ∃ (Subj : Type) (MeansRel : Subj → ` | {}  |
-| `inferential_closure_of_means_fails` | theorem | [L201](formal/Logos/A14SemanticAudit.lean#L201) | `theorem inferential_closure_of_means_fails : ∃ (Subj : Type) (MeansRel : Subj → ` | {}  |
-| `irreducible_semantic_boundary_of_a14` | theorem | [L131](formal/Logos/A14SemanticAudit.lean#L131) | `theorem irreducible_semantic_boundary_of_a14 {Subj : Type} (ActRel : Subj → Prop` | {CL}  |
-| `negation_closure_of_means_fails` | theorem | [L190](formal/Logos/A14SemanticAudit.lean#L190) | `theorem negation_closure_of_means_fails : ∃ (Subj : Type) (MeansRel : Subj → Pro` | {}  |
-| `performative_boundary_theorem` | theorem | [L236](formal/Logos/A14SemanticAudit.lean#L236) | `theorem performative_boundary_theorem : ∃ (Subj : Type) (CS : FineCognitiveSubje` | {}  |
-| `separation_aim_without_self_attr` | theorem | [L416](formal/Logos/A14SemanticAudit.lean#L416) | `theorem separation_aim_without_self_attr : ∃ (Subj : Type) (CS : FineCognitiveSu` | {}  |
-| `separation_author_without_aim` | theorem | [L385](formal/Logos/A14SemanticAudit.lean#L385) | `theorem separation_author_without_aim : ∃ (Subj : Type) (CS : FineCognitiveSubje` | {}  |
-| `separation_causal_without_reason` | theorem | [L489](formal/Logos/A14SemanticAudit.lean#L489) | `theorem separation_causal_without_reason : ∃ (Subj : Type) (CS : FineCognitiveSu` | {}  |
-| `separation_reason_without_modal` | theorem | [L532](formal/Logos/A14SemanticAudit.lean#L532) | `theorem separation_reason_without_modal : ∃ (Subj : Type) (CS : FineCognitiveSub` | {}  |
-| `separation_repr_without_eval` | theorem | [L328](formal/Logos/A14SemanticAudit.lean#L328) | `theorem separation_repr_without_eval : ∃ (Subj : Type) (CS : FineCognitiveSubjec` | {}  |
-| `separation_self_attr_without_causal` | theorem | [L452](formal/Logos/A14SemanticAudit.lean#L452) | `theorem separation_self_attr_without_causal : ∃ (Subj : Type) (CS : FineCognitiv` | {}  |
-| `separation_settle_without_authorship` | theorem | [L354](formal/Logos/A14SemanticAudit.lean#L354) | `theorem separation_settle_without_authorship : ∃ (Subj : Type) (CS : FineCogniti` | {}  |
+| `A14_Statement` | def | [L4950](formal/Logos/AgencyAuditsAndFrontiers.lean#L4950) | `def A14_Statement (Subj : Type) (ActRel : Subj → Prop → Prop) (MeansRel : Subj →` | {}  |
+| `Act_Authorial` | def | [L5059](formal/Logos/AgencyAuditsAndFrontiers.lean#L5059) | `def Act_Authorial {Subj : Type} (MeansRel : Subj → Prop → Prop) (InitiatesRel : ` | {}  |
+| `Act_Contrastive` | def | [L5046](formal/Logos/AgencyAuditsAndFrontiers.lean#L5046) | `def Act_Contrastive {Subj : Type} (MeansRel : Subj → Prop → Prop) (InitiatesRel ` | {}  |
+| `Act_Minimal` | def | [L5040](formal/Logos/AgencyAuditsAndFrontiers.lean#L5040) | `def Act_Minimal {Subj : Type} (MeansRel : Subj → Prop → Prop) (InitiatesRel : Su` | {}  |
+| `Act_Purposeful` | def | [L5052](formal/Logos/AgencyAuditsAndFrontiers.lean#L5052) | `def Act_Purposeful {Subj : Type} (MeansRel : Subj → Prop → Prop) (InitiatesRel :` | {}  |
+| `Act_Responsive` | def | [L5066](formal/Logos/AgencyAuditsAndFrontiers.lean#L5066) | `def Act_Responsive {Subj : Type} (MeansRel : Subj → Prop → Prop) (InitiatesRel :` | {}  |
+| `AimStage` | def | [L5189](formal/Logos/AgencyAuditsAndFrontiers.lean#L5189) | `def AimStage {Subj : Type} (CS : FineCognitiveSubject Subj) (SourceOf : Subj → P` | {}  |
+| `AuthorStage` | def | [L5184](formal/Logos/AgencyAuditsAndFrontiers.lean#L5184) | `def AuthorStage {Subj : Type} (CS : FineCognitiveSubject Subj) (SourceOf : Subj ` | {}  |
+| `AuthorialAction` | def | [L4986](formal/Logos/AgencyAuditsAndFrontiers.lean#L4986) | `def AuthorialAction {Subj : Type} (ActRel : Subj → Prop → Prop) (SourceOf : Subj` | {}  |
+| `CausalStage` | def | [L5200](formal/Logos/AgencyAuditsAndFrontiers.lean#L5200) | `def CausalStage {Subj : Type} (CS : FineCognitiveSubject Subj) (SourceOf : Subj ` | {}  |
+| `EvalStage` | def | [L5176](formal/Logos/AgencyAuditsAndFrontiers.lean#L5176) | `def EvalStage {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj) (p q : P` | {}  |
+| `MissingHornPrinciple` | def | [L4956](formal/Logos/AgencyAuditsAndFrontiers.lean#L4956) | `def MissingHornPrinciple (Subj : Type) (ActRel : Subj → Prop → Prop) (MeansRel :` | {}  |
+| `ModalStage` | def | [L5213](formal/Logos/AgencyAuditsAndFrontiers.lean#L5213) | `def ModalStage {Subj : Type} (CS : FineCognitiveSubject Subj) (SourceOf : Subj →` | {}  |
+| `ReasonStage` | def | [L5206](formal/Logos/AgencyAuditsAndFrontiers.lean#L5206) | `def ReasonStage {Subj : Type} (CS : FineCognitiveSubject Subj) (SourceOf : Subj ` | {}  |
+| `ReasonsResponsiveAction` | def | [L4981](formal/Logos/AgencyAuditsAndFrontiers.lean#L4981) | `def ReasonsResponsiveAction {Subj : Type} (ActRel : Subj → Prop → Prop) (Respons` | {}  |
+| `ReprStage` | def | [L5172](formal/Logos/AgencyAuditsAndFrontiers.lean#L5172) | `def ReprStage {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj) (p q : P` | {}  |
+| `SelfAttrStage` | def | [L5194](formal/Logos/AgencyAuditsAndFrontiers.lean#L5194) | `def SelfAttrStage {Subj : Type} (CS : FineCognitiveSubject Subj) (SourceOf : Sub` | {}  |
+| `SettleStage` | def | [L5180](formal/Logos/AgencyAuditsAndFrontiers.lean#L5180) | `def SettleStage {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj) (p q :` | {}  |
+| `SubstantivePerson` | def | [L5122](formal/Logos/AgencyAuditsAndFrontiers.lean#L5122) | `def SubstantivePerson (Subj : Type) (s : Subj) : Prop` | {}  |
+| `TeleologicalAction` | def | [L4976](formal/Logos/AgencyAuditsAndFrontiers.lean#L4976) | `def TeleologicalAction {Subj : Type} (ActRel : Subj → Prop → Prop) (AimsAt : Sub` | {}  |
+| `a14_iff_missing_horn_principle` | theorem | [L4962](formal/Logos/AgencyAuditsAndFrontiers.lean#L4962) | `theorem a14_iff_missing_horn_principle {Subj : Type} (ActRel : Subj → Prop → Pro` | {}  |
+| `act_contrastive_trivializes_a14` | theorem | [L5073](formal/Logos/AgencyAuditsAndFrontiers.lean#L5073) | `theorem act_contrastive_trivializes_a14 {Subj : Type} (MeansRel : Subj → Prop → ` | {}  |
+| `candidate_principles_fail_to_derive_a14` | theorem | [L4994](formal/Logos/AgencyAuditsAndFrontiers.lean#L4994) | `theorem candidate_principles_fail_to_derive_a14 : ∃ (Subj : Type) (ActRel : Subj` | {}  |
+| `contrastive_closure_of_means_fails` | theorem | [L5107](formal/Logos/AgencyAuditsAndFrontiers.lean#L5107) | `theorem contrastive_closure_of_means_fails : ∃ (Subj : Type) (MeansRel : Subj → ` | {}  |
+| `inferential_closure_of_means_fails` | theorem | [L5095](formal/Logos/AgencyAuditsAndFrontiers.lean#L5095) | `theorem inferential_closure_of_means_fails : ∃ (Subj : Type) (MeansRel : Subj → ` | {}  |
+| `irreducible_semantic_boundary_of_a14` | theorem | [L5025](formal/Logos/AgencyAuditsAndFrontiers.lean#L5025) | `theorem irreducible_semantic_boundary_of_a14 {Subj : Type} (ActRel : Subj → Prop` | {CL}  |
+| `negation_closure_of_means_fails` | theorem | [L5084](formal/Logos/AgencyAuditsAndFrontiers.lean#L5084) | `theorem negation_closure_of_means_fails : ∃ (Subj : Type) (MeansRel : Subj → Pro` | {}  |
+| `performative_boundary_theorem` | theorem | [L5130](formal/Logos/AgencyAuditsAndFrontiers.lean#L5130) | `theorem performative_boundary_theorem : ∃ (Subj : Type) (CS : FineCognitiveSubje` | {}  |
+| `separation_aim_without_self_attr` | theorem | [L5310](formal/Logos/AgencyAuditsAndFrontiers.lean#L5310) | `theorem separation_aim_without_self_attr : ∃ (Subj : Type) (CS : FineCognitiveSu` | {}  |
+| `separation_author_without_aim` | theorem | [L5279](formal/Logos/AgencyAuditsAndFrontiers.lean#L5279) | `theorem separation_author_without_aim : ∃ (Subj : Type) (CS : FineCognitiveSubje` | {}  |
+| `separation_causal_without_reason` | theorem | [L5383](formal/Logos/AgencyAuditsAndFrontiers.lean#L5383) | `theorem separation_causal_without_reason : ∃ (Subj : Type) (CS : FineCognitiveSu` | {}  |
+| `separation_reason_without_modal` | theorem | [L5426](formal/Logos/AgencyAuditsAndFrontiers.lean#L5426) | `theorem separation_reason_without_modal : ∃ (Subj : Type) (CS : FineCognitiveSub` | {}  |
+| `separation_repr_without_eval` | theorem | [L5222](formal/Logos/AgencyAuditsAndFrontiers.lean#L5222) | `theorem separation_repr_without_eval : ∃ (Subj : Type) (CS : FineCognitiveSubjec` | {}  |
+| `separation_self_attr_without_causal` | theorem | [L5346](formal/Logos/AgencyAuditsAndFrontiers.lean#L5346) | `theorem separation_self_attr_without_causal : ∃ (Subj : Type) (CS : FineCognitiv` | {}  |
+| `separation_settle_without_authorship` | theorem | [L5248](formal/Logos/AgencyAuditsAndFrontiers.lean#L5248) | `theorem separation_settle_without_authorship : ∃ (Subj : Type) (CS : FineCogniti` | {}  |
 
 ### `Logos.ActCascade`
 
@@ -1096,79 +1074,79 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `Action` | def | [L88](formal/Logos/ActionChoiceDefinitions.lean#L88) | `def Action (s : Subject) (p : Prop) : Prop` | {Initiates, Means, State, Subject}  |
-| `AgentCausalSourcehood` | structure | [L282](formal/Logos/ActionChoiceDefinitions.lean#L282) | `structure AgentCausalSourcehood (Subject : Type) where` | —  |
-| `AgentialExecution` | structure | [L100](formal/Logos/ActionChoiceDefinitions.lean#L100) | `structure AgentialExecution (Subject : Type) where` | —  |
-| `AssertionWithoutChoiceModel` | structure | [L367](formal/Logos/ActionChoiceDefinitions.lean#L367) | `structure AssertionWithoutChoiceModel where` | —  |
-| `CategoricalAlternativePossibility` | structure | [L266](formal/Logos/ActionChoiceDefinitions.lean#L266) | `structure CategoricalAlternativePossibility (Subject : Type) (State : Type) wher` | —  |
-| `ChoiceWithoutAssertionModel` | structure | [L385](formal/Logos/ActionChoiceDefinitions.lean#L385) | `structure ChoiceWithoutAssertionModel where` | —  |
-| `CompulsionDistinction` | structure | [L609](formal/Logos/ActionChoiceDefinitions.lean#L609) | `structure CompulsionDistinction where` | —  |
-| `ContrastiveChoice` | def | [L154](formal/Logos/ActionChoiceDefinitions.lean#L154) | `def ContrastiveChoice (s : Subject) (p q : Prop) : Prop` | {Means, Subject}  |
-| `Decision` | structure | [L196](formal/Logos/ActionChoiceDefinitions.lean#L196) | `structure Decision (Subject : Type) (ctx : DecisionContext Subject) (s : Subject` | —  |
-| `DecisionContext` | structure | [L186](formal/Logos/ActionChoiceDefinitions.lean#L186) | `structure DecisionContext (Subject : Type) where` | —  |
-| `DeliberativeContext` | structure | [L162](formal/Logos/ActionChoiceDefinitions.lean#L162) | `structure DeliberativeContext (Subject : Type) where` | —  |
-| `DeliberatorWithoutLeeway` | structure | [L441](formal/Logos/ActionChoiceDefinitions.lean#L441) | `structure DeliberatorWithoutLeeway where` | —  |
-| `Determinism_D1` | def | [L222](formal/Logos/ActionChoiceDefinitions.lean#L222) | `def Determinism_D1 {State : Type} (step : State → State) : Prop` | {}  |
-| `Determinism_D2` | def | [L226](formal/Logos/ActionChoiceDefinitions.lean#L226) | `def Determinism_D2 {State : Type} (History : State → Nat → Prop) (NextEvent : St` | {}  |
-| `Determinism_D3` | def | [L230](formal/Logos/ActionChoiceDefinitions.lean#L230) | `def Determinism_D3 {State : Type} (Laws : Prop) (StateAt : State → Nat → Prop) :` | {}  |
-| `Determinism_D4` | def | [L234](formal/Logos/ActionChoiceDefinitions.lean#L234) | `def Determinism_D4 (MentalState : Subject → Nat → Prop) (NextMentalState : Subje` | {Subject}  |
-| `Determinism_D5` | def | [L238](formal/Logos/ActionChoiceDefinitions.lean#L238) | `def Determinism_D5 (Subject : Type) (Antecedents : Subject → Prop → Prop) (Settl` | {}  |
-| `DeterministicSelector` | structure | [L423](formal/Logos/ActionChoiceDefinitions.lean#L423) | `structure DeterministicSelector where` | —  |
-| `ExtensionalChoice` | def | [L146](formal/Logos/ActionChoiceDefinitions.lean#L146) | `def ExtensionalChoice (s : Subject) (p q : Prop) : Prop` | {Means, Subject}  |
-| `GenuineChoice` | structure | [L173](formal/Logos/ActionChoiceDefinitions.lean#L173) | `structure GenuineChoice (Subject : Type) (ctx : DeliberativeContext Subject)` | —  |
-| `GenuineIntentionalAction` | structure | [L109](formal/Logos/ActionChoiceDefinitions.lean#L109) | `structure GenuineIntentionalAction (Subject : Type) (State : Type) (E : Agential` | —  |
-| `InevitableDecisionModel` | structure | [L464](formal/Logos/ActionChoiceDefinitions.lean#L464) | `structure InevitableDecisionModel where` | —  |
-| `Layer1_LogicalAlternative` | def | [L259](formal/Logos/ActionChoiceDefinitions.lean#L259) | `def Layer1_LogicalAlternative (p q : Prop) : Prop` | {}  |
-| `Layer2_RepresentedAlternative` | def | [L262](formal/Logos/ActionChoiceDefinitions.lean#L262) | `def Layer2_RepresentedAlternative (s : Subject) (p q : Prop) : Prop` | {Means, Subject}  |
-| `LibertarianFreedom` | structure | [L297](formal/Logos/ActionChoiceDefinitions.lean#L297) | `structure LibertarianFreedom (Subject : Type) (State : Type) (ctx : Deliberative` | —  |
-| `M_S5_selector` | def | [L428](formal/Logos/ActionChoiceDefinitions.lean#L428) | `def M_S5_selector : DeterministicSelector where step` | {}  |
-| `Selection` | def | [L134](formal/Logos/ActionChoiceDefinitions.lean#L134) | `def Selection {Item : Type} (ctx : SelectionContext Item) (x : Item) : Prop` | {}  |
-| `SelectionContext` | structure | [L122](formal/Logos/ActionChoiceDefinitions.lean#L122) | `structure SelectionContext (Item : Type) where` | —  |
-| `SelectionWithoutMeaningModel` | structure | [L324](formal/Logos/ActionChoiceDefinitions.lean#L324) | `structure SelectionWithoutMeaningModel where` | —  |
-| `SinglePathActionModel` | structure | [L401](formal/Logos/ActionChoiceDefinitions.lean#L401) | `structure SinglePathActionModel where` | —  |
-| `Volition` | def | [L214](formal/Logos/ActionChoiceDefinitions.lean#L214) | `def Volition {Subject : Type} (ctx : VolitionalContext Subject) (s : Subject) (p` | {}  |
-| `VolitionWithoutActionModel` | structure | [L482](formal/Logos/ActionChoiceDefinitions.lean#L482) | `structure VolitionWithoutActionModel where` | —  |
-| `VolitionalContext` | structure | [L206](formal/Logos/ActionChoiceDefinitions.lean#L206) | `structure VolitionalContext (Subject : Type) where` | —  |
-| `WeakAct` | def | [L76](formal/Logos/ActionChoiceDefinitions.lean#L76) | `def WeakAct {Subject : Type} (ctx : WeakActContext Subject) (s : Subject) (p : P` | {}  |
-| `WeakActContext` | structure | [L68](formal/Logos/ActionChoiceDefinitions.lean#L68) | `structure WeakActContext (Subject : Type) where` | —  |
-| `action_eq_act` | theorem | [L92](formal/Logos/ActionChoiceDefinitions.lean#L92) | `theorem action_eq_act (s : Subject) (p : Prop) : Action s p ↔ Act s p` | {Initiates, Means, State, Subject}  |
-| `alternative_possibility_conflicts_with_choice_determinism` | theorem | [L558](formal/Logos/ActionChoiceDefinitions.lean#L558) | `theorem alternative_possibility_conflicts_with_choice_determinism : ∀ (Subject :` | {}  |
-| `anti_cheating_action_without_alternatives` | theorem | [L589](formal/Logos/ActionChoiceDefinitions.lean#L589) | `theorem anti_cheating_action_without_alternatives : ∃ (Subject : Type) (State : ` | {}  |
-| `anti_cheating_determinism_not_compulsion` | theorem | [L614](formal/Logos/ActionChoiceDefinitions.lean#L614) | `theorem anti_cheating_determinism_not_compulsion : ∃ (C : CompulsionDistinction)` | {}  |
-| `genuine_choice_entails_asymmetric_settlement` | theorem | [L527](formal/Logos/ActionChoiceDefinitions.lean#L527) | `theorem genuine_choice_entails_asymmetric_settlement {Subject : Type} {ctx : Del` | {}  |
-| `genuine_choice_entails_incompatible` | theorem | [L518](formal/Logos/ActionChoiceDefinitions.lean#L518) | `theorem genuine_choice_entails_incompatible {Subject : Type} {ctx : Deliberative` | {}  |
-| `genuine_intentional_action_implies_action` | theorem | [L508](formal/Logos/ActionChoiceDefinitions.lean#L508) | `theorem genuine_intentional_action_implies_action {Subject : Type} {State : Type` | {}  |
-| `libertarian_freedom_entails_alternative_possibility` | theorem | [L536](formal/Logos/ActionChoiceDefinitions.lean#L536) | `theorem libertarian_freedom_entails_alternative_possibility {Subject : Type} {St` | {}  |
-| `libertarian_freedom_entails_sourcehood` | theorem | [L546](formal/Logos/ActionChoiceDefinitions.lean#L546) | `theorem libertarian_freedom_entails_sourcehood {Subject : Type} {State : Type} {` | {}  |
-| `model_S1_selection_without_meaning` | theorem | [L330](formal/Logos/ActionChoiceDefinitions.lean#L330) | `theorem model_S1_selection_without_meaning : ∃ (M : SelectionWithoutMeaningModel` | {}  |
-| `model_S2_assertion_without_choice` | theorem | [L371](formal/Logos/ActionChoiceDefinitions.lean#L371) | `theorem model_S2_assertion_without_choice : ∃ (M : AssertionWithoutChoiceModel),` | {}  |
-| `model_S3_choice_without_assertion` | theorem | [L389](formal/Logos/ActionChoiceDefinitions.lean#L389) | `theorem model_S3_choice_without_assertion : ∃ (M : ChoiceWithoutAssertionModel),` | {}  |
-| `model_S4_action_without_choice` | theorem | [L406](formal/Logos/ActionChoiceDefinitions.lean#L406) | `theorem model_S4_action_without_choice : ∃ (M : SinglePathActionModel), (M.Means` | {}  |
-| `model_S5_deterministic_selection_verified` | theorem | [L433](formal/Logos/ActionChoiceDefinitions.lean#L433) | `theorem model_S5_deterministic_selection_verified : M_S5_selector.hDet 0 0 rfl =` | {}  |
-| `model_S6_co_representation_without_leeway` | theorem | [L448](formal/Logos/ActionChoiceDefinitions.lean#L448) | `theorem model_S6_co_representation_without_leeway : ∃ (M : DeliberatorWithoutLee` | {}  |
-| `model_S7_decision_without_alternative` | theorem | [L468](formal/Logos/ActionChoiceDefinitions.lean#L468) | `theorem model_S7_decision_without_alternative : ∃ (M : InevitableDecisionModel),` | {}  |
-| `model_S8_volition_without_action` | theorem | [L486](formal/Logos/ActionChoiceDefinitions.lean#L486) | `theorem model_S8_volition_without_action : ∃ (M : VolitionWithoutActionModel), M` | {}  |
-| `selection_not_implies_meaning` | theorem | [L353](formal/Logos/ActionChoiceDefinitions.lean#L353) | `theorem selection_not_implies_meaning : ∃ (Item : Type) (ctx : SelectionContext ` | {}  |
+| `Action` | def | [L99](formal/Logos/ActionAndNormativeChoice.lean#L99) | `def Action (s : Subject) (p : Prop) : Prop` | {Initiates, Means, State, Subject}  |
+| `AgentCausalSourcehood` | structure | [L293](formal/Logos/ActionAndNormativeChoice.lean#L293) | `structure AgentCausalSourcehood (Subject : Type) where` | —  |
+| `AgentialExecution` | structure | [L111](formal/Logos/ActionAndNormativeChoice.lean#L111) | `structure AgentialExecution (Subject : Type) where` | —  |
+| `AssertionWithoutChoiceModel` | structure | [L378](formal/Logos/ActionAndNormativeChoice.lean#L378) | `structure AssertionWithoutChoiceModel where` | —  |
+| `CategoricalAlternativePossibility` | structure | [L277](formal/Logos/ActionAndNormativeChoice.lean#L277) | `structure CategoricalAlternativePossibility (Subject : Type) (State : Type) wher` | —  |
+| `ChoiceWithoutAssertionModel` | structure | [L396](formal/Logos/ActionAndNormativeChoice.lean#L396) | `structure ChoiceWithoutAssertionModel where` | —  |
+| `CompulsionDistinction` | structure | [L620](formal/Logos/ActionAndNormativeChoice.lean#L620) | `structure CompulsionDistinction where` | —  |
+| `ContrastiveChoice` | def | [L165](formal/Logos/ActionAndNormativeChoice.lean#L165) | `def ContrastiveChoice (s : Subject) (p q : Prop) : Prop` | {Means, Subject}  |
+| `Decision` | structure | [L207](formal/Logos/ActionAndNormativeChoice.lean#L207) | `structure Decision (Subject : Type) (ctx : DecisionContext Subject) (s : Subject` | —  |
+| `DecisionContext` | structure | [L197](formal/Logos/ActionAndNormativeChoice.lean#L197) | `structure DecisionContext (Subject : Type) where` | —  |
+| `DeliberativeContext` | structure | [L173](formal/Logos/ActionAndNormativeChoice.lean#L173) | `structure DeliberativeContext (Subject : Type) where` | —  |
+| `DeliberatorWithoutLeeway` | structure | [L452](formal/Logos/ActionAndNormativeChoice.lean#L452) | `structure DeliberatorWithoutLeeway where` | —  |
+| `Determinism_D1` | def | [L233](formal/Logos/ActionAndNormativeChoice.lean#L233) | `def Determinism_D1 {State : Type} (step : State → State) : Prop` | {}  |
+| `Determinism_D2` | def | [L237](formal/Logos/ActionAndNormativeChoice.lean#L237) | `def Determinism_D2 {State : Type} (History : State → Nat → Prop) (NextEvent : St` | {}  |
+| `Determinism_D3` | def | [L241](formal/Logos/ActionAndNormativeChoice.lean#L241) | `def Determinism_D3 {State : Type} (Laws : Prop) (StateAt : State → Nat → Prop) :` | {}  |
+| `Determinism_D4` | def | [L245](formal/Logos/ActionAndNormativeChoice.lean#L245) | `def Determinism_D4 (MentalState : Subject → Nat → Prop) (NextMentalState : Subje` | {Subject}  |
+| `Determinism_D5` | def | [L249](formal/Logos/ActionAndNormativeChoice.lean#L249) | `def Determinism_D5 (Subject : Type) (Antecedents : Subject → Prop → Prop) (Settl` | {}  |
+| `DeterministicSelector` | structure | [L434](formal/Logos/ActionAndNormativeChoice.lean#L434) | `structure DeterministicSelector where` | —  |
+| `ExtensionalChoice` | def | [L157](formal/Logos/ActionAndNormativeChoice.lean#L157) | `def ExtensionalChoice (s : Subject) (p q : Prop) : Prop` | {Means, Subject}  |
+| `GenuineChoice` | structure | [L184](formal/Logos/ActionAndNormativeChoice.lean#L184) | `structure GenuineChoice (Subject : Type) (ctx : DeliberativeContext Subject)` | —  |
+| `GenuineIntentionalAction` | structure | [L120](formal/Logos/ActionAndNormativeChoice.lean#L120) | `structure GenuineIntentionalAction (Subject : Type) (State : Type) (E : Agential` | —  |
+| `InevitableDecisionModel` | structure | [L475](formal/Logos/ActionAndNormativeChoice.lean#L475) | `structure InevitableDecisionModel where` | —  |
+| `Layer1_LogicalAlternative` | def | [L270](formal/Logos/ActionAndNormativeChoice.lean#L270) | `def Layer1_LogicalAlternative (p q : Prop) : Prop` | {}  |
+| `Layer2_RepresentedAlternative` | def | [L273](formal/Logos/ActionAndNormativeChoice.lean#L273) | `def Layer2_RepresentedAlternative (s : Subject) (p q : Prop) : Prop` | {Means, Subject}  |
+| `LibertarianFreedom` | structure | [L308](formal/Logos/ActionAndNormativeChoice.lean#L308) | `structure LibertarianFreedom (Subject : Type) (State : Type) (ctx : Deliberative` | —  |
+| `M_S5_selector` | def | [L439](formal/Logos/ActionAndNormativeChoice.lean#L439) | `def M_S5_selector : DeterministicSelector where step` | {}  |
+| `Selection` | def | [L145](formal/Logos/ActionAndNormativeChoice.lean#L145) | `def Selection {Item : Type} (ctx : SelectionContext Item) (x : Item) : Prop` | {}  |
+| `SelectionContext` | structure | [L133](formal/Logos/ActionAndNormativeChoice.lean#L133) | `structure SelectionContext (Item : Type) where` | —  |
+| `SelectionWithoutMeaningModel` | structure | [L335](formal/Logos/ActionAndNormativeChoice.lean#L335) | `structure SelectionWithoutMeaningModel where` | —  |
+| `SinglePathActionModel` | structure | [L412](formal/Logos/ActionAndNormativeChoice.lean#L412) | `structure SinglePathActionModel where` | —  |
+| `Volition` | def | [L225](formal/Logos/ActionAndNormativeChoice.lean#L225) | `def Volition {Subject : Type} (ctx : VolitionalContext Subject) (s : Subject) (p` | {}  |
+| `VolitionWithoutActionModel` | structure | [L493](formal/Logos/ActionAndNormativeChoice.lean#L493) | `structure VolitionWithoutActionModel where` | —  |
+| `VolitionalContext` | structure | [L217](formal/Logos/ActionAndNormativeChoice.lean#L217) | `structure VolitionalContext (Subject : Type) where` | —  |
+| `WeakAct` | def | [L87](formal/Logos/ActionAndNormativeChoice.lean#L87) | `def WeakAct {Subject : Type} (ctx : WeakActContext Subject) (s : Subject) (p : P` | {}  |
+| `WeakActContext` | structure | [L79](formal/Logos/ActionAndNormativeChoice.lean#L79) | `structure WeakActContext (Subject : Type) where` | —  |
+| `action_eq_act` | theorem | [L103](formal/Logos/ActionAndNormativeChoice.lean#L103) | `theorem action_eq_act (s : Subject) (p : Prop) : Action s p ↔ Act s p` | {Initiates, Means, State, Subject}  |
+| `alternative_possibility_conflicts_with_choice_determinism` | theorem | [L569](formal/Logos/ActionAndNormativeChoice.lean#L569) | `theorem alternative_possibility_conflicts_with_choice_determinism : ∀ (Subject :` | {}  |
+| `anti_cheating_action_without_alternatives` | theorem | [L600](formal/Logos/ActionAndNormativeChoice.lean#L600) | `theorem anti_cheating_action_without_alternatives : ∃ (Subject : Type) (State : ` | {}  |
+| `anti_cheating_determinism_not_compulsion` | theorem | [L625](formal/Logos/ActionAndNormativeChoice.lean#L625) | `theorem anti_cheating_determinism_not_compulsion : ∃ (C : CompulsionDistinction)` | {}  |
+| `genuine_choice_entails_asymmetric_settlement` | theorem | [L538](formal/Logos/ActionAndNormativeChoice.lean#L538) | `theorem genuine_choice_entails_asymmetric_settlement {Subject : Type} {ctx : Del` | {}  |
+| `genuine_choice_entails_incompatible` | theorem | [L529](formal/Logos/ActionAndNormativeChoice.lean#L529) | `theorem genuine_choice_entails_incompatible {Subject : Type} {ctx : Deliberative` | {}  |
+| `genuine_intentional_action_implies_action` | theorem | [L519](formal/Logos/ActionAndNormativeChoice.lean#L519) | `theorem genuine_intentional_action_implies_action {Subject : Type} {State : Type` | {}  |
+| `libertarian_freedom_entails_alternative_possibility` | theorem | [L547](formal/Logos/ActionAndNormativeChoice.lean#L547) | `theorem libertarian_freedom_entails_alternative_possibility {Subject : Type} {St` | {}  |
+| `libertarian_freedom_entails_sourcehood` | theorem | [L557](formal/Logos/ActionAndNormativeChoice.lean#L557) | `theorem libertarian_freedom_entails_sourcehood {Subject : Type} {State : Type} {` | {}  |
+| `model_S1_selection_without_meaning` | theorem | [L341](formal/Logos/ActionAndNormativeChoice.lean#L341) | `theorem model_S1_selection_without_meaning : ∃ (M : SelectionWithoutMeaningModel` | {}  |
+| `model_S2_assertion_without_choice` | theorem | [L382](formal/Logos/ActionAndNormativeChoice.lean#L382) | `theorem model_S2_assertion_without_choice : ∃ (M : AssertionWithoutChoiceModel),` | {}  |
+| `model_S3_choice_without_assertion` | theorem | [L400](formal/Logos/ActionAndNormativeChoice.lean#L400) | `theorem model_S3_choice_without_assertion : ∃ (M : ChoiceWithoutAssertionModel),` | {}  |
+| `model_S4_action_without_choice` | theorem | [L417](formal/Logos/ActionAndNormativeChoice.lean#L417) | `theorem model_S4_action_without_choice : ∃ (M : SinglePathActionModel), (M.Means` | {}  |
+| `model_S5_deterministic_selection_verified` | theorem | [L444](formal/Logos/ActionAndNormativeChoice.lean#L444) | `theorem model_S5_deterministic_selection_verified : M_S5_selector.hDet 0 0 rfl =` | {}  |
+| `model_S6_co_representation_without_leeway` | theorem | [L459](formal/Logos/ActionAndNormativeChoice.lean#L459) | `theorem model_S6_co_representation_without_leeway : ∃ (M : DeliberatorWithoutLee` | {}  |
+| `model_S7_decision_without_alternative` | theorem | [L479](formal/Logos/ActionAndNormativeChoice.lean#L479) | `theorem model_S7_decision_without_alternative : ∃ (M : InevitableDecisionModel),` | {}  |
+| `model_S8_volition_without_action` | theorem | [L497](formal/Logos/ActionAndNormativeChoice.lean#L497) | `theorem model_S8_volition_without_action : ∃ (M : VolitionWithoutActionModel), M` | {}  |
+| `selection_not_implies_meaning` | theorem | [L364](formal/Logos/ActionAndNormativeChoice.lean#L364) | `theorem selection_not_implies_meaning : ∃ (Item : Type) (ctx : SelectionContext ` | {}  |
 
 ### `Logos.AdversarialReductioAudit`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `ExactUptakeGap` | def | [L271](formal/Logos/AdversarialReductioAudit.lean#L271) | `def ExactUptakeGap (Subject : Type) (CS : CognitiveSubject Subject) (MeansAt : S` | {}  |
-| `ExtendedTrace` | structure | [L110](formal/Logos/AdversarialReductioAudit.lean#L110) | `structure ExtendedTrace (Subject : Type) where` | —  |
-| `RetorsionProgression` | structure | [L120](formal/Logos/AdversarialReductioAudit.lean#L120) | `structure RetorsionProgression (Subject : Type) (s : Subject) (P : Prop) where` | —  |
-| `VolitionalAim` | def | [L80](formal/Logos/AdversarialReductioAudit.lean#L80) | `def VolitionalAim (Subject State : Type) (s : Subject) (p : Prop) (InitiatesAt :` | {}  |
-| `affirmation_to_act_derives_one_horn_only` | theorem | [L132](formal/Logos/AdversarialReductioAudit.lean#L132) | `theorem affirmation_to_act_derives_one_horn_only : ∃ (Subject : Type) (s : Subje` | {}  |
-| `model_M10_mechanical_execution_no_act` | theorem | [L224](formal/Logos/AdversarialReductioAudit.lean#L224) | `theorem model_M10_mechanical_execution_no_act : ∃ (Subject : Type) (s : Subject)` | {}  |
-| `model_M11_considered_not_act` | theorem | [L233](formal/Logos/AdversarialReductioAudit.lean#L233) | `theorem model_M11_considered_not_act : ∃ (Subject : Type) (CS : CognitiveSubject` | {}  |
-| `model_M12_contrast_without_chooses` | theorem | [L248](formal/Logos/AdversarialReductioAudit.lean#L248) | `theorem model_M12_contrast_without_chooses : ∃ (Subject : Type) (CS : CognitiveS` | {}  |
-| `model_M7_external_conclusion` | theorem | [L166](formal/Logos/AdversarialReductioAudit.lean#L166) | `theorem model_M7_external_conclusion : ∃ (Subject : Type) (CS : CognitiveSubject` | {}  |
-| `model_M8_consideration_without_meaning` | theorem | [L184](formal/Logos/AdversarialReductioAudit.lean#L184) | `theorem model_M8_consideration_without_meaning : ∃ (Subject : Type) (CS : Cognit` | {}  |
-| `model_M9_affirmation_without_meaning` | theorem | [L201](formal/Logos/AdversarialReductioAudit.lean#L201) | `theorem model_M9_affirmation_without_meaning : ∃ (Subject : Type) (CS : Cognitiv` | {}  |
-| `rational_subject_cannot_volitionally_aim_at_rejected_horn` | theorem | [L84](formal/Logos/AdversarialReductioAudit.lean#L84) | `theorem rational_subject_cannot_volitionally_aim_at_rejected_horn : ∃ (Subject S` | {}  |
-| `state_A_is_refuted` | theorem | [L276](formal/Logos/AdversarialReductioAudit.lean#L276) | `theorem state_A_is_refuted : ∃ (Subject : Type) (CS : CognitiveSubject Subject) ` | {}  |
-| `state_D_is_refuted` | theorem | [L286](formal/Logos/AdversarialReductioAudit.lean#L286) | `theorem state_D_is_refuted : ∃ (Subject : Type) (CS : CognitiveSubject Subject) ` | {}  |
-| `uptake_is_renamed_co_meaning_premise` | theorem | [L53](formal/Logos/AdversarialReductioAudit.lean#L53) | `theorem uptake_is_renamed_co_meaning_premise (Subject : Type) (CS : CognitiveSub` | {}  |
+| `ExactUptakeGap` | def | [L2509](formal/Logos/AgencyAuditsAndFrontiers.lean#L2509) | `def ExactUptakeGap (Subject : Type) (CS : CognitiveSubject Subject) (MeansAt : S` | {}  |
+| `ExtendedTrace` | structure | [L2348](formal/Logos/AgencyAuditsAndFrontiers.lean#L2348) | `structure ExtendedTrace (Subject : Type) where` | —  |
+| `RetorsionProgression` | structure | [L2358](formal/Logos/AgencyAuditsAndFrontiers.lean#L2358) | `structure RetorsionProgression (Subject : Type) (s : Subject) (P : Prop) where` | —  |
+| `VolitionalAim` | def | [L2318](formal/Logos/AgencyAuditsAndFrontiers.lean#L2318) | `def VolitionalAim (Subject State : Type) (s : Subject) (p : Prop) (InitiatesAt :` | {}  |
+| `affirmation_to_act_derives_one_horn_only` | theorem | [L2370](formal/Logos/AgencyAuditsAndFrontiers.lean#L2370) | `theorem affirmation_to_act_derives_one_horn_only : ∃ (Subject : Type) (s : Subje` | {}  |
+| `model_M10_mechanical_execution_no_act` | theorem | [L2462](formal/Logos/AgencyAuditsAndFrontiers.lean#L2462) | `theorem model_M10_mechanical_execution_no_act : ∃ (Subject : Type) (s : Subject)` | {}  |
+| `model_M11_considered_not_act` | theorem | [L2471](formal/Logos/AgencyAuditsAndFrontiers.lean#L2471) | `theorem model_M11_considered_not_act : ∃ (Subject : Type) (CS : CognitiveSubject` | {}  |
+| `model_M12_contrast_without_chooses` | theorem | [L2486](formal/Logos/AgencyAuditsAndFrontiers.lean#L2486) | `theorem model_M12_contrast_without_chooses : ∃ (Subject : Type) (CS : CognitiveS` | {}  |
+| `model_M7_external_conclusion` | theorem | [L2404](formal/Logos/AgencyAuditsAndFrontiers.lean#L2404) | `theorem model_M7_external_conclusion : ∃ (Subject : Type) (CS : CognitiveSubject` | {}  |
+| `model_M8_consideration_without_meaning` | theorem | [L2422](formal/Logos/AgencyAuditsAndFrontiers.lean#L2422) | `theorem model_M8_consideration_without_meaning : ∃ (Subject : Type) (CS : Cognit` | {}  |
+| `model_M9_affirmation_without_meaning` | theorem | [L2439](formal/Logos/AgencyAuditsAndFrontiers.lean#L2439) | `theorem model_M9_affirmation_without_meaning : ∃ (Subject : Type) (CS : Cognitiv` | {}  |
+| `rational_subject_cannot_volitionally_aim_at_rejected_horn` | theorem | [L2322](formal/Logos/AgencyAuditsAndFrontiers.lean#L2322) | `theorem rational_subject_cannot_volitionally_aim_at_rejected_horn : ∃ (Subject S` | {}  |
+| `state_A_is_refuted` | theorem | [L2514](formal/Logos/AgencyAuditsAndFrontiers.lean#L2514) | `theorem state_A_is_refuted : ∃ (Subject : Type) (CS : CognitiveSubject Subject) ` | {}  |
+| `state_D_is_refuted` | theorem | [L2524](formal/Logos/AgencyAuditsAndFrontiers.lean#L2524) | `theorem state_D_is_refuted : ∃ (Subject : Type) (CS : CognitiveSubject Subject) ` | {}  |
+| `uptake_is_renamed_co_meaning_premise` | theorem | [L2291](formal/Logos/AgencyAuditsAndFrontiers.lean#L2291) | `theorem uptake_is_renamed_co_meaning_premise (Subject : Type) (CS : CognitiveSub` | {}  |
 
 ### `Logos.Agency`
 
@@ -1245,37 +1223,37 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `Agency_Star` | def | [L326](formal/Logos/AgencyFrontierAudit.lean#L326) | `def Agency_Star (Subj : Type) (CS : FineCognitiveSubject Subj) : Prop` | {}  |
-| `AgentCausalSettlement_Star` | def | [L343](formal/Logos/AgencyFrontierAudit.lean#L343) | `def AgentCausalSettlement_Star (Subj : Type) (CS : FineCognitiveSubject Subj) (A` | {}  |
-| `AgentDeterminesHorn` | def | [L108](formal/Logos/AgencyFrontierAudit.lean#L108) | `def AgentDeterminesHorn {Subj : Type} (AgentDet : Subj → Prop → Prop) (s : Subj)` | {}  |
-| `AgentSource` | def | [L97](formal/Logos/AgencyFrontierAudit.lean#L97) | `def AgentSource {Subj : Type} (SourceOf : Subj → Prop → Prop) (s : Subj) (p : Pr` | {}  |
-| `Choice_Star` | def | [L334](formal/Logos/AgencyFrontierAudit.lean#L334) | `def Choice_Star (Subj : Type) (CS : FineCognitiveSubject Subj) (AgentDet : Subj ` | {}  |
-| `CouldHaveSettledOtherwise` | def | [L102](formal/Logos/AgencyFrontierAudit.lean#L102) | `def CouldHaveSettledOtherwise {Subj : Type} (CanSettle : Subj → Prop → Prop) (s ` | {}  |
-| `DiscretionaryChoice` | structure | [L191](formal/Logos/AgencyFrontierAudit.lean#L191) | `structure DiscretionaryChoice {Subj : Type} (CS : FineCognitiveSubject Subj)` | —  |
-| `EpistemicClassification` | inductive | [L50](formal/Logos/AgencyFrontierAudit.lean#L50) | `inductive EpistemicClassification where` | —  |
-| `ModalFreedom_Star` | def | [L339](formal/Logos/AgencyFrontierAudit.lean#L339) | `def ModalFreedom_Star (M : ExtendedGammaModel) : Prop` | {}  |
-| `SettlesForHorn` | def | [L92](formal/Logos/AgencyFrontierAudit.lean#L92) | `def SettlesForHorn {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj) (p ` | {}  |
-| `Volition_Star` | def | [L330](formal/Logos/AgencyFrontierAudit.lean#L330) | `def Volition_Star (Subj : Type) (CS : FineCognitiveSubject Subj) : Prop` | {}  |
-| `agency_star_is_model_theoretically_independent` | theorem | [L350](formal/Logos/AgencyFrontierAudit.lean#L350) | `theorem agency_star_is_model_theoretically_independent : (∃ (Subj : Type) (CS : ` | {}  |
-| `agency_without_modal_alternatives` | theorem | [L313](formal/Logos/AgencyFrontierAudit.lean#L313) | `theorem agency_without_modal_alternatives : ∃ (Subj : Type) (ActRel : Subj → Pro` | {}  |
-| `agentCausalSettlement_star_is_model_theoretically_independent` | theorem | [L494](formal/Logos/AgencyFrontierAudit.lean#L494) | `theorem agentCausalSettlement_star_is_model_theoretically_independent : (∃ (Subj` | {}  |
-| `choice_star_is_model_theoretically_independent` | theorem | [L419](formal/Logos/AgencyFrontierAudit.lean#L419) | `theorem choice_star_is_model_theoretically_independent : (∃ (Subj : Type) (CS : ` | {}  |
-| `freeWill_settlement_is_nomenclatural` | theorem | [L70](formal/Logos/AgencyFrontierAudit.lean#L70) | `theorem freeWill_settlement_is_nomenclatural {Subj : Type} (CS : FineCognitiveSu` | {}  |
-| `indeterminism_does_not_imply_choice` | theorem | [L298](formal/Logos/AgencyFrontierAudit.lean#L298) | `theorem indeterminism_does_not_imply_choice : ∃ (Event : Prop) (Undetermined : P` | {}  |
-| `modalFreedom_star_is_model_theoretically_independent` | theorem | [L451](formal/Logos/AgencyFrontierAudit.lean#L451) | `theorem modalFreedom_star_is_model_theoretically_independent : (∃ (M : ExtendedG` | {}  |
-| `modal_alternatives_without_agency` | theorem | [L304](formal/Logos/AgencyFrontierAudit.lean#L304) | `theorem modal_alternatives_without_agency : ∃ (Entity : Type) (CanOccur : Entity` | {}  |
-| `model_M27_pure_cognitive_resolver` | theorem | [L118](formal/Logos/AgencyFrontierAudit.lean#L118) | `theorem model_M27_pure_cognitive_resolver : ∃ (Subj : Type) (CS : FineCognitiveS` | {}  |
-| `model_M28_deterministic_evaluator` | theorem | [L147](formal/Logos/AgencyFrontierAudit.lean#L147) | `theorem model_M28_deterministic_evaluator : ∃ (StateSpace : Type) (Step : StateS` | {}  |
-| `model_M29_passive_truth_tracker` | theorem | [L156](formal/Logos/AgencyFrontierAudit.lean#L156) | `theorem model_M29_passive_truth_tracker : ∃ (Tracker : Prop → Prop), (∀ p, p → T` | {CL}  |
-| `model_M30_automatic_preference_mechanism` | theorem | [L170](formal/Logos/AgencyFrontierAudit.lean#L170) | `theorem model_M30_automatic_preference_mechanism : ∃ (Valuation : Prop → Nat) (S` | {CL}  |
-| `model_M31_indifferent_tie_breaker` | theorem | [L181](formal/Logos/AgencyFrontierAudit.lean#L181) | `theorem model_M31_indifferent_tie_breaker : ∃ (TieBreaker : Prop → Prop → Prop),` | {}  |
-| `model_M32_genuine_choice_candidate` | theorem | [L202](formal/Logos/AgencyFrontierAudit.lean#L202) | `theorem model_M32_genuine_choice_candidate : ∃ (Subj : Type) (CS : FineCognitive` | {}  |
-| `old_chooses_compatible_with_determinism` | theorem | [L260](formal/Logos/AgencyFrontierAudit.lean#L260) | `theorem old_chooses_compatible_with_determinism : ∃ (Subj : Type) (MeansRel : Su` | {}  |
-| `settlementChoice_compatible_with_determinism` | theorem | [L269](formal/Logos/AgencyFrontierAudit.lean#L269) | `theorem settlementChoice_compatible_with_determinism : ∃ (Subj : Type) (CS : Fin` | {}  |
-| `settlementChoice_does_not_derive_volition` | theorem | [L77](formal/Logos/AgencyFrontierAudit.lean#L77) | `theorem settlementChoice_does_not_derive_volition : ∃ (Subj : Type) (CS : FineCo` | {}  |
-| `settlementChoice_is_purely_cognitive` | theorem | [L62](formal/Logos/AgencyFrontierAudit.lean#L62) | `theorem settlementChoice_is_purely_cognitive {Subj : Type} (CS : FineCognitiveSu` | {}  |
-| `structural_choice_differentiator` | theorem | [L247](formal/Logos/AgencyFrontierAudit.lean#L247) | `theorem structural_choice_differentiator {Subj : Type} (CS : FineCognitiveSubjec` | {}  |
-| `volition_star_is_model_theoretically_independent` | theorem | [L392](formal/Logos/AgencyFrontierAudit.lean#L392) | `theorem volition_star_is_model_theoretically_independent : (∃ (Subj : Type) (CS ` | {}  |
+| `Agency_Star` | def | [L4689](formal/Logos/AgencyAuditsAndFrontiers.lean#L4689) | `def Agency_Star (Subj : Type) (CS : FineCognitiveSubject Subj) : Prop` | {}  |
+| `AgentCausalSettlement_Star` | def | [L4706](formal/Logos/AgencyAuditsAndFrontiers.lean#L4706) | `def AgentCausalSettlement_Star (Subj : Type) (CS : FineCognitiveSubject Subj) (A` | {}  |
+| `AgentDeterminesHorn` | def | [L4471](formal/Logos/AgencyAuditsAndFrontiers.lean#L4471) | `def AgentDeterminesHorn {Subj : Type} (AgentDet : Subj → Prop → Prop) (s : Subj)` | {}  |
+| `AgentSource` | def | [L4460](formal/Logos/AgencyAuditsAndFrontiers.lean#L4460) | `def AgentSource {Subj : Type} (SourceOf : Subj → Prop → Prop) (s : Subj) (p : Pr` | {}  |
+| `Choice_Star` | def | [L4697](formal/Logos/AgencyAuditsAndFrontiers.lean#L4697) | `def Choice_Star (Subj : Type) (CS : FineCognitiveSubject Subj) (AgentDet : Subj ` | {}  |
+| `CouldHaveSettledOtherwise` | def | [L4465](formal/Logos/AgencyAuditsAndFrontiers.lean#L4465) | `def CouldHaveSettledOtherwise {Subj : Type} (CanSettle : Subj → Prop → Prop) (s ` | {}  |
+| `DiscretionaryChoice` | structure | [L4554](formal/Logos/AgencyAuditsAndFrontiers.lean#L4554) | `structure DiscretionaryChoice {Subj : Type} (CS : FineCognitiveSubject Subj)` | —  |
+| `EpistemicClassification` | inductive | [L4413](formal/Logos/AgencyAuditsAndFrontiers.lean#L4413) | `inductive EpistemicClassification where` | —  |
+| `ModalFreedom_Star` | def | [L4702](formal/Logos/AgencyAuditsAndFrontiers.lean#L4702) | `def ModalFreedom_Star (M : ExtendedGammaModel) : Prop` | {}  |
+| `SettlesForHorn` | def | [L4455](formal/Logos/AgencyAuditsAndFrontiers.lean#L4455) | `def SettlesForHorn {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj) (p ` | {}  |
+| `Volition_Star` | def | [L4693](formal/Logos/AgencyAuditsAndFrontiers.lean#L4693) | `def Volition_Star (Subj : Type) (CS : FineCognitiveSubject Subj) : Prop` | {}  |
+| `agency_star_is_model_theoretically_independent` | theorem | [L4713](formal/Logos/AgencyAuditsAndFrontiers.lean#L4713) | `theorem agency_star_is_model_theoretically_independent : (∃ (Subj : Type) (CS : ` | {}  |
+| `agency_without_modal_alternatives` | theorem | [L4676](formal/Logos/AgencyAuditsAndFrontiers.lean#L4676) | `theorem agency_without_modal_alternatives : ∃ (Subj : Type) (ActRel : Subj → Pro` | {}  |
+| `agentCausalSettlement_star_is_model_theoretically_independent` | theorem | [L4857](formal/Logos/AgencyAuditsAndFrontiers.lean#L4857) | `theorem agentCausalSettlement_star_is_model_theoretically_independent : (∃ (Subj` | {}  |
+| `choice_star_is_model_theoretically_independent` | theorem | [L4782](formal/Logos/AgencyAuditsAndFrontiers.lean#L4782) | `theorem choice_star_is_model_theoretically_independent : (∃ (Subj : Type) (CS : ` | {}  |
+| `freeWill_settlement_is_nomenclatural` | theorem | [L4433](formal/Logos/AgencyAuditsAndFrontiers.lean#L4433) | `theorem freeWill_settlement_is_nomenclatural {Subj : Type} (CS : FineCognitiveSu` | {}  |
+| `indeterminism_does_not_imply_choice` | theorem | [L4661](formal/Logos/AgencyAuditsAndFrontiers.lean#L4661) | `theorem indeterminism_does_not_imply_choice : ∃ (Event : Prop) (Undetermined : P` | {}  |
+| `modalFreedom_star_is_model_theoretically_independent` | theorem | [L4814](formal/Logos/AgencyAuditsAndFrontiers.lean#L4814) | `theorem modalFreedom_star_is_model_theoretically_independent : (∃ (M : ExtendedG` | {}  |
+| `modal_alternatives_without_agency` | theorem | [L4667](formal/Logos/AgencyAuditsAndFrontiers.lean#L4667) | `theorem modal_alternatives_without_agency : ∃ (Entity : Type) (CanOccur : Entity` | {}  |
+| `model_M27_pure_cognitive_resolver` | theorem | [L4481](formal/Logos/AgencyAuditsAndFrontiers.lean#L4481) | `theorem model_M27_pure_cognitive_resolver : ∃ (Subj : Type) (CS : FineCognitiveS` | {}  |
+| `model_M28_deterministic_evaluator` | theorem | [L4510](formal/Logos/AgencyAuditsAndFrontiers.lean#L4510) | `theorem model_M28_deterministic_evaluator : ∃ (StateSpace : Type) (Step : StateS` | {}  |
+| `model_M29_passive_truth_tracker` | theorem | [L4519](formal/Logos/AgencyAuditsAndFrontiers.lean#L4519) | `theorem model_M29_passive_truth_tracker : ∃ (Tracker : Prop → Prop), (∀ p, p → T` | {CL}  |
+| `model_M30_automatic_preference_mechanism` | theorem | [L4533](formal/Logos/AgencyAuditsAndFrontiers.lean#L4533) | `theorem model_M30_automatic_preference_mechanism : ∃ (Valuation : Prop → Nat) (S` | {CL}  |
+| `model_M31_indifferent_tie_breaker` | theorem | [L4544](formal/Logos/AgencyAuditsAndFrontiers.lean#L4544) | `theorem model_M31_indifferent_tie_breaker : ∃ (TieBreaker : Prop → Prop → Prop),` | {}  |
+| `model_M32_genuine_choice_candidate` | theorem | [L4565](formal/Logos/AgencyAuditsAndFrontiers.lean#L4565) | `theorem model_M32_genuine_choice_candidate : ∃ (Subj : Type) (CS : FineCognitive` | {}  |
+| `old_chooses_compatible_with_determinism` | theorem | [L4623](formal/Logos/AgencyAuditsAndFrontiers.lean#L4623) | `theorem old_chooses_compatible_with_determinism : ∃ (Subj : Type) (MeansRel : Su` | {}  |
+| `settlementChoice_compatible_with_determinism` | theorem | [L4632](formal/Logos/AgencyAuditsAndFrontiers.lean#L4632) | `theorem settlementChoice_compatible_with_determinism : ∃ (Subj : Type) (CS : Fin` | {}  |
+| `settlementChoice_does_not_derive_volition` | theorem | [L4440](formal/Logos/AgencyAuditsAndFrontiers.lean#L4440) | `theorem settlementChoice_does_not_derive_volition : ∃ (Subj : Type) (CS : FineCo` | {}  |
+| `settlementChoice_is_purely_cognitive` | theorem | [L4425](formal/Logos/AgencyAuditsAndFrontiers.lean#L4425) | `theorem settlementChoice_is_purely_cognitive {Subj : Type} (CS : FineCognitiveSu` | {}  |
+| `structural_choice_differentiator` | theorem | [L4610](formal/Logos/AgencyAuditsAndFrontiers.lean#L4610) | `theorem structural_choice_differentiator {Subj : Type} (CS : FineCognitiveSubjec` | {}  |
+| `volition_star_is_model_theoretically_independent` | theorem | [L4755](formal/Logos/AgencyAuditsAndFrontiers.lean#L4755) | `theorem volition_star_is_model_theoretically_independent : (∃ (Subj : Type) (CS ` | {}  |
 
 ### `Logos.Alternatives`
 
@@ -1366,30 +1344,30 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `AxActPolarity_Statement` | def | [L137](formal/Logos/AxiomNegationAudit.lean#L137) | `def AxActPolarity_Statement (C : CoreAgencySignature) : Prop` | {}  |
-| `AxIntentionalChoice_Statement` | def | [L102](formal/Logos/AxiomNegationAudit.lean#L102) | `def AxIntentionalChoice_Statement (C : CoreAgencySignature) : Prop` | {}  |
-| `AxTwoSubjects_Statement` | def | [L239](formal/Logos/AxiomNegationAudit.lean#L239) | `def AxTwoSubjects_Statement (V : CoreValueSignature) : Prop` | {}  |
-| `ContingentContentExists` | def | [L87](formal/Logos/AxiomNegationAudit.lean#L87) | `def ContingentContentExists (M : CoreModalGroundingSignature) : Prop` | {}  |
-| `CoreAgencySignature` | structure | [L61](formal/Logos/AxiomNegationAudit.lean#L61) | `structure CoreAgencySignature where` | —  |
-| `CoreDatumHolds` | def | [L70](formal/Logos/AxiomNegationAudit.lean#L70) | `def CoreDatumHolds (C : CoreAgencySignature) : Prop` | {}  |
-| `CoreModalGroundingSignature` | structure | [L75](formal/Logos/AxiomNegationAudit.lean#L75) | `structure CoreModalGroundingSignature where` | —  |
-| `CoreTranscendentalReflectionSignature` | structure | [L201](formal/Logos/AxiomNegationAudit.lean#L201) | `structure CoreTranscendentalReflectionSignature where` | —  |
-| `CoreUniversalObjectivitySignature` | structure | [L169](formal/Logos/AxiomNegationAudit.lean#L169) | `structure CoreUniversalObjectivitySignature where` | —  |
-| `CoreValueSignature` | structure | [L92](formal/Logos/AxiomNegationAudit.lean#L92) | `structure CoreValueSignature where` | —  |
-| `NecessaryTruthExists` | def | [L84](formal/Logos/AxiomNegationAudit.lean#L84) | `def NecessaryTruthExists (M : CoreModalGroundingSignature) : Prop` | {}  |
-| `Neg_AxActPolarity` | def | [L142](formal/Logos/AxiomNegationAudit.lean#L142) | `def Neg_AxActPolarity (C : CoreAgencySignature) : Prop` | {}  |
-| `Neg_AxIntentionalChoice` | def | [L107](formal/Logos/AxiomNegationAudit.lean#L107) | `def Neg_AxIntentionalChoice (C : CoreAgencySignature) : Prop` | {}  |
-| `Neg_AxTwoSubjects` | def | [L244](formal/Logos/AxiomNegationAudit.lean#L244) | `def Neg_AxTwoSubjects (V : CoreValueSignature) : Prop` | {}  |
-| `Neg_TranscendentalReflectionIntentional` | def | [L215](formal/Logos/AxiomNegationAudit.lean#L215) | `def Neg_TranscendentalReflectionIntentional (R : CoreTranscendentalReflectionSig` | {}  |
-| `Neg_UniversalThesisClaimsObjectivity` | def | [L181](formal/Logos/AxiomNegationAudit.lean#L181) | `def Neg_UniversalThesisClaimsObjectivity (R : CoreUniversalObjectivitySignature)` | {}  |
-| `TranscendentalReflectionIntentional_Statement` | def | [L210](formal/Logos/AxiomNegationAudit.lean#L210) | `def TranscendentalReflectionIntentional_Statement (R : CoreTranscendentalReflect` | {}  |
-| `UniversalThesisClaimsObjectivity_Statement` | def | [L176](formal/Logos/AxiomNegationAudit.lean#L176) | `def UniversalThesisClaimsObjectivity_Statement (R : CoreUniversalObjectivitySign` | {}  |
-| `core_compatible_with_neg_a13` | theorem | [L148](formal/Logos/AxiomNegationAudit.lean#L148) | `theorem core_compatible_with_neg_a13 : ∃ (C : CoreAgencySignature), CoreDatumHol` | {}  |
-| `core_compatible_with_neg_a14` | theorem | [L113](formal/Logos/AxiomNegationAudit.lean#L113) | `theorem core_compatible_with_neg_a14 : ∃ (C : CoreAgencySignature), CoreDatumHol` | {}  |
-| `core_compatible_with_neg_a6` | theorem | [L250](formal/Logos/AxiomNegationAudit.lean#L250) | `theorem core_compatible_with_neg_a6 : ∃ (V : CoreValueSignature), Neg_AxTwoSubje` | {}  |
-| `core_compatible_with_neg_transcendental_reflection_intentional` | theorem | [L220](formal/Logos/AxiomNegationAudit.lean#L220) | `theorem core_compatible_with_neg_transcendental_reflection_intentional : ∃ (R : ` | {}  |
-| `core_compatible_with_neg_universal_thesis_claims_objectivity` | theorem | [L186](formal/Logos/AxiomNegationAudit.lean#L186) | `theorem core_compatible_with_neg_universal_thesis_claims_objectivity : ∃ (R : Co` | {}  |
-| `no_hidden_necessity_synthesis` | theorem | [L277](formal/Logos/AxiomNegationAudit.lean#L277) | `theorem no_hidden_necessity_synthesis : -- 1. A14: AxIntentionalChoice (SEM) is ` | {}  |
+| `AxActPolarity_Statement` | def | [L6819](formal/Logos/AgencyAuditsAndFrontiers.lean#L6819) | `def AxActPolarity_Statement (C : CoreAgencySignature) : Prop` | {}  |
+| `AxIntentionalChoice_Statement` | def | [L6784](formal/Logos/AgencyAuditsAndFrontiers.lean#L6784) | `def AxIntentionalChoice_Statement (C : CoreAgencySignature) : Prop` | {}  |
+| `AxTwoSubjects_Statement` | def | [L6921](formal/Logos/AgencyAuditsAndFrontiers.lean#L6921) | `def AxTwoSubjects_Statement (V : CoreValueSignature) : Prop` | {}  |
+| `ContingentContentExists` | def | [L6769](formal/Logos/AgencyAuditsAndFrontiers.lean#L6769) | `def ContingentContentExists (M : CoreModalGroundingSignature) : Prop` | {}  |
+| `CoreAgencySignature` | structure | [L6743](formal/Logos/AgencyAuditsAndFrontiers.lean#L6743) | `structure CoreAgencySignature where` | —  |
+| `CoreDatumHolds` | def | [L6752](formal/Logos/AgencyAuditsAndFrontiers.lean#L6752) | `def CoreDatumHolds (C : CoreAgencySignature) : Prop` | {}  |
+| `CoreModalGroundingSignature` | structure | [L6757](formal/Logos/AgencyAuditsAndFrontiers.lean#L6757) | `structure CoreModalGroundingSignature where` | —  |
+| `CoreTranscendentalReflectionSignature` | structure | [L6883](formal/Logos/AgencyAuditsAndFrontiers.lean#L6883) | `structure CoreTranscendentalReflectionSignature where` | —  |
+| `CoreUniversalObjectivitySignature` | structure | [L6851](formal/Logos/AgencyAuditsAndFrontiers.lean#L6851) | `structure CoreUniversalObjectivitySignature where` | —  |
+| `CoreValueSignature` | structure | [L6774](formal/Logos/AgencyAuditsAndFrontiers.lean#L6774) | `structure CoreValueSignature where` | —  |
+| `NecessaryTruthExists` | def | [L6766](formal/Logos/AgencyAuditsAndFrontiers.lean#L6766) | `def NecessaryTruthExists (M : CoreModalGroundingSignature) : Prop` | {}  |
+| `Neg_AxActPolarity` | def | [L6824](formal/Logos/AgencyAuditsAndFrontiers.lean#L6824) | `def Neg_AxActPolarity (C : CoreAgencySignature) : Prop` | {}  |
+| `Neg_AxIntentionalChoice` | def | [L6789](formal/Logos/AgencyAuditsAndFrontiers.lean#L6789) | `def Neg_AxIntentionalChoice (C : CoreAgencySignature) : Prop` | {}  |
+| `Neg_AxTwoSubjects` | def | [L6926](formal/Logos/AgencyAuditsAndFrontiers.lean#L6926) | `def Neg_AxTwoSubjects (V : CoreValueSignature) : Prop` | {}  |
+| `Neg_TranscendentalReflectionIntentional` | def | [L6897](formal/Logos/AgencyAuditsAndFrontiers.lean#L6897) | `def Neg_TranscendentalReflectionIntentional (R : CoreTranscendentalReflectionSig` | {}  |
+| `Neg_UniversalThesisClaimsObjectivity` | def | [L6863](formal/Logos/AgencyAuditsAndFrontiers.lean#L6863) | `def Neg_UniversalThesisClaimsObjectivity (R : CoreUniversalObjectivitySignature)` | {}  |
+| `TranscendentalReflectionIntentional_Statement` | def | [L6892](formal/Logos/AgencyAuditsAndFrontiers.lean#L6892) | `def TranscendentalReflectionIntentional_Statement (R : CoreTranscendentalReflect` | {}  |
+| `UniversalThesisClaimsObjectivity_Statement` | def | [L6858](formal/Logos/AgencyAuditsAndFrontiers.lean#L6858) | `def UniversalThesisClaimsObjectivity_Statement (R : CoreUniversalObjectivitySign` | {}  |
+| `core_compatible_with_neg_a13` | theorem | [L6830](formal/Logos/AgencyAuditsAndFrontiers.lean#L6830) | `theorem core_compatible_with_neg_a13 : ∃ (C : CoreAgencySignature), CoreDatumHol` | {}  |
+| `core_compatible_with_neg_a14` | theorem | [L6795](formal/Logos/AgencyAuditsAndFrontiers.lean#L6795) | `theorem core_compatible_with_neg_a14 : ∃ (C : CoreAgencySignature), CoreDatumHol` | {}  |
+| `core_compatible_with_neg_a6` | theorem | [L6932](formal/Logos/AgencyAuditsAndFrontiers.lean#L6932) | `theorem core_compatible_with_neg_a6 : ∃ (V : CoreValueSignature), Neg_AxTwoSubje` | {}  |
+| `core_compatible_with_neg_transcendental_reflection_intentional` | theorem | [L6902](formal/Logos/AgencyAuditsAndFrontiers.lean#L6902) | `theorem core_compatible_with_neg_transcendental_reflection_intentional : ∃ (R : ` | {}  |
+| `core_compatible_with_neg_universal_thesis_claims_objectivity` | theorem | [L6868](formal/Logos/AgencyAuditsAndFrontiers.lean#L6868) | `theorem core_compatible_with_neg_universal_thesis_claims_objectivity : ∃ (R : Co` | {}  |
+| `no_hidden_necessity_synthesis` | theorem | [L6959](formal/Logos/AgencyAuditsAndFrontiers.lean#L6959) | `theorem no_hidden_necessity_synthesis : -- 1. A14: AxIntentionalChoice (SEM) is ` | {}  |
 
 ### `Logos.BipolarityRetorsion`
 
@@ -1473,24 +1451,24 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `a_subject_that_acts_is_in_succession` | theorem | [L1004](formal/Logos/DivineTrinitarianAttributes.lean#L1004) | `theorem a_subject_that_acts_is_in_succession {s : Subject} {p : Prop} (h : Act s` | {Initiates, Means, State, Subject} → C488 |
-| `some_entity_is_divinely_simple` | theorem | [L941](formal/Logos/DivineTrinitarianAttributes.lean#L941) | `theorem some_entity_is_divinely_simple : ∃ e : Entity, DivineSimplicity e` | {GroundTranscendence, Means, Subject, CL} → C485 |
-| `some_entity_is_in_succession` | theorem | [L987](formal/Logos/DivineTrinitarianAttributes.lean#L987) | `theorem some_entity_is_in_succession : ∃ e : Entity, ¬ NotInSuccession e` | {performative_act_datum, Initiates, Means, State, Subject} → C487 |
-| `the_ground_is_divinely_simple` | theorem | [L935](formal/Logos/DivineTrinitarianAttributes.lean#L935) | `theorem the_ground_is_divinely_simple : DivineSimplicity Entity.ofGround` | {GroundTranscendence, Means, Subject, CL} → C484 |
-| `the_ground_is_sole_bearer_of_divine_simplicity` | theorem | [L961](formal/Logos/DivineTrinitarianAttributes.lean#L961) | `theorem the_ground_is_sole_bearer_of_divine_simplicity : DivineSimplicity Entity` | {GroundTranscendence, Means, Subject, CL} → C486 |
-| `the_semantic_bound_does_not_close_the_grounding_arm` | theorem | [L1064](formal/Logos/DivineTrinitarianAttributes.lean#L1064) | `theorem the_semantic_bound_does_not_close_the_grounding_arm : ∃ (Subject Entity ` | {} → C492 |
-| `transcendence_and_semantic_finitude_yield_divine_simplicity` | theorem | [L1032](formal/Logos/DivineTrinitarianAttributes.lean#L1032) | `theorem transcendence_and_semantic_finitude_yield_divine_simplicity : ∀ e : Enti` | {GroundTranscendence, Means, Subject, CL} → C491 |
+| `a_subject_that_acts_is_in_succession` | theorem | [L1005](formal/Logos/DivineTrinitarianAttributes.lean#L1005) | `theorem a_subject_that_acts_is_in_succession {s : Subject} {p : Prop} (h : Act s` | {Initiates, Means, State, Subject} → C488 |
+| `some_entity_is_divinely_simple` | theorem | [L942](formal/Logos/DivineTrinitarianAttributes.lean#L942) | `theorem some_entity_is_divinely_simple : ∃ e : Entity, DivineSimplicity e` | {GroundTranscendence, Means, Subject, CL} → C485 |
+| `some_entity_is_in_succession` | theorem | [L988](formal/Logos/DivineTrinitarianAttributes.lean#L988) | `theorem some_entity_is_in_succession : ∃ e : Entity, ¬ NotInSuccession e` | {performative_act_datum, Initiates, Means, State, Subject} → C487 |
+| `the_ground_is_divinely_simple` | theorem | [L936](formal/Logos/DivineTrinitarianAttributes.lean#L936) | `theorem the_ground_is_divinely_simple : DivineSimplicity Entity.ofGround` | {GroundTranscendence, Means, Subject, CL} → C484 |
+| `the_ground_is_sole_bearer_of_divine_simplicity` | theorem | [L962](formal/Logos/DivineTrinitarianAttributes.lean#L962) | `theorem the_ground_is_sole_bearer_of_divine_simplicity : DivineSimplicity Entity` | {GroundTranscendence, Means, Subject, CL} → C486 |
+| `the_semantic_bound_does_not_close_the_grounding_arm` | theorem | [L1065](formal/Logos/DivineTrinitarianAttributes.lean#L1065) | `theorem the_semantic_bound_does_not_close_the_grounding_arm : ∃ (Subject Entity ` | {} → C492 |
+| `transcendence_and_semantic_finitude_yield_divine_simplicity` | theorem | [L1033](formal/Logos/DivineTrinitarianAttributes.lean#L1033) | `theorem transcendence_and_semantic_finitude_yield_divine_simplicity : ∀ e : Enti` | {GroundTranscendence, Means, Subject, CL} → C491 |
 
 ### `Logos.CharacteristicSoleBearer`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `no_subject_grounds_the_ground` | theorem | [L1179](formal/Logos/DivineTrinitarianAttributes.lean#L1179) | `theorem no_subject_grounds_the_ground (s : Subject) : ¬ OneEssence (EntityOf s) ` | {GroundTranscendence, Means, Subject} → C441 |
-| `ofGround_sole_divine_pure_actuality` | theorem | [L1286](formal/Logos/DivineTrinitarianAttributes.lean#L1286) | `theorem ofGround_sole_divine_pure_actuality : ∀ e, DivinePureActuality e → e = E` | {GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject} → C445 |
-| `ofGround_sole_foundational_omnipotence` | theorem | [L1236](formal/Logos/DivineTrinitarianAttributes.lean#L1236) | `theorem ofGround_sole_foundational_omnipotence : ∀ e, FoundationalOmnipotence e ` | {GroundTranscendence, Means, NecessarySubjectKind, Subject} → C443 |
-| `ofGround_sole_foundational_omnipresence` | theorem | [L1262](formal/Logos/DivineTrinitarianAttributes.lean#L1262) | `theorem ofGround_sole_foundational_omnipresence : ∀ e, FoundationalOmnipresence ` | {GroundTranscendence, Means, NecessarySubjectKind, Subject} → C444 |
-| `ofGround_sole_foundational_omniscience` | theorem | [L1199](formal/Logos/DivineTrinitarianAttributes.lean#L1199) | `theorem ofGround_sole_foundational_omniscience : ∀ e, FoundationalOmniscience e ` | {GroundTranscendence, Means, NecessarySubjectKind, Subject} → C442 |
-| `the_ground_is_sole_bearer_of_the_footprint_characteristics` | theorem | [L1311](formal/Logos/DivineTrinitarianAttributes.lean#L1311) | `theorem the_ground_is_sole_bearer_of_the_footprint_characteristics : (∀ e, Found` | {GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject} → C446 |
+| `no_subject_grounds_the_ground` | theorem | [L1180](formal/Logos/DivineTrinitarianAttributes.lean#L1180) | `theorem no_subject_grounds_the_ground (s : Subject) : ¬ OneEssence (EntityOf s) ` | {GroundTranscendence, Means, Subject} → C441 |
+| `ofGround_sole_divine_pure_actuality` | theorem | [L1287](formal/Logos/DivineTrinitarianAttributes.lean#L1287) | `theorem ofGround_sole_divine_pure_actuality : ∀ e, DivinePureActuality e → e = E` | {GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject} → C445 |
+| `ofGround_sole_foundational_omnipotence` | theorem | [L1237](formal/Logos/DivineTrinitarianAttributes.lean#L1237) | `theorem ofGround_sole_foundational_omnipotence : ∀ e, FoundationalOmnipotence e ` | {GroundTranscendence, Means, NecessarySubjectKind, Subject} → C443 |
+| `ofGround_sole_foundational_omnipresence` | theorem | [L1263](formal/Logos/DivineTrinitarianAttributes.lean#L1263) | `theorem ofGround_sole_foundational_omnipresence : ∀ e, FoundationalOmnipresence ` | {GroundTranscendence, Means, NecessarySubjectKind, Subject} → C444 |
+| `ofGround_sole_foundational_omniscience` | theorem | [L1200](formal/Logos/DivineTrinitarianAttributes.lean#L1200) | `theorem ofGround_sole_foundational_omniscience : ∀ e, FoundationalOmniscience e ` | {GroundTranscendence, Means, NecessarySubjectKind, Subject} → C442 |
+| `the_ground_is_sole_bearer_of_the_footprint_characteristics` | theorem | [L1312](formal/Logos/DivineTrinitarianAttributes.lean#L1312) | `theorem the_ground_is_sole_bearer_of_the_footprint_characteristics : (∀ e, Found` | {GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject} → C446 |
 
 ### `Logos.Choice`
 
@@ -1657,36 +1635,36 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `ActionSelection` | def | [L118](formal/Logos/ChoiceRepair.lean#L118) | `def ActionSelection {Subj : Type} (CS : FineCognitiveSubject Subj) (ActRel : Sub` | {}  |
-| `AgentCausalSettlement` | def | [L123](formal/Logos/ChoiceRepair.lean#L123) | `def AgentCausalSettlement {Subj : Type} (CS : FineCognitiveSubject Subj) (ActRel` | {}  |
-| `CognitiveSettlement` | def | [L110](formal/Logos/ChoiceRepair.lean#L110) | `def CognitiveSettlement {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj` | {}  |
-| `ExtendedGammaModel` | structure | [L361](formal/Logos/ChoiceRepair.lean#L361) | `structure ExtendedGammaModel where` | —  |
-| `FreeWill_Libertarian` | def | [L386](formal/Logos/ChoiceRepair.lean#L386) | `def FreeWill_Libertarian (M : ExtendedGammaModel) (s : M.Subj) : Prop` | {}  |
-| `FreeWill_Settlement` | def | [L374](formal/Logos/ChoiceRepair.lean#L374) | `def FreeWill_Settlement (Subj : Type) (CS : FineCognitiveSubject Subj) (s : Subj` | {}  |
-| `OldChooses` | def | [L56](formal/Logos/ChoiceRepair.lean#L56) | `def OldChooses (s : Subject) (p q : Prop) : Prop` | {Means, Subject}  |
-| `OldFreeWill` | def | [L57](formal/Logos/ChoiceRepair.lean#L57) | `def OldFreeWill (s : Subject) : Prop` | {Means, Subject}  |
-| `SettlementChoice` | def | [L77](formal/Logos/ChoiceRepair.lean#L77) | `def SettlementChoice {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj) (` | {}  |
-| `TransformToDeterministicAgency` | def | [L479](formal/Logos/ChoiceRepair.lean#L479) | `def TransformToDeterministicAgency (M : ExtendedGammaModel) : ExtendedGammaModel` | {}  |
-| `VolitionalSettlement` | def | [L114](formal/Logos/ChoiceRepair.lean#L114) | `def VolitionalSettlement {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Sub` | {}  |
-| `divergence_between_intentional_resolution_and_old_choice` | theorem | [L63](formal/Logos/ChoiceRepair.lean#L63) | `theorem divergence_between_intentional_resolution_and_old_choice (s : Subject) (` | {Means, Subject}  |
-| `libertarian_freewill_is_model_theoretically_independent` | theorem | [L472](formal/Logos/ChoiceRepair.lean#L472) | `theorem libertarian_freewill_is_model_theoretically_independent : (∃ (M : Extend` | {}  |
-| `model_A_lib_with_libertarian_freewill` | theorem | [L391](formal/Logos/ChoiceRepair.lean#L391) | `theorem model_A_lib_with_libertarian_freewill : ∃ (M : ExtendedGammaModel), ∃ (s` | {}  |
-| `model_B_lib_without_libertarian_freewill` | theorem | [L430](formal/Logos/ChoiceRepair.lean#L430) | `theorem model_B_lib_without_libertarian_freewill : ∃ (M : ExtendedGammaModel), ∀` | {}  |
-| `model_M19_cognitive_resolution_without_volition` | theorem | [L134](formal/Logos/ChoiceRepair.lean#L134) | `theorem model_M19_cognitive_resolution_without_volition : ∃ (Subj : Type) (CS : ` | {}  |
-| `model_M20_volition_without_alternative_capacity` | theorem | [L162](formal/Logos/ChoiceRepair.lean#L162) | `theorem model_M20_volition_without_alternative_capacity : ∃ (Subj : Type) (CS : ` | {}  |
-| `model_M21_action_selection_without_libertarian_freedom` | theorem | [L197](formal/Logos/ChoiceRepair.lean#L197) | `theorem model_M21_action_selection_without_libertarian_freedom : ∃ (Subj : Type)` | {}  |
-| `model_M22_agent_causal_settlement` | theorem | [L205](formal/Logos/ChoiceRepair.lean#L205) | `theorem model_M22_agent_causal_settlement : ∃ (Subj : Type) (AgentDetermines : S` | {}  |
-| `model_M23_fully_deterministic_deliberator` | theorem | [L221](formal/Logos/ChoiceRepair.lean#L221) | `theorem model_M23_fully_deterministic_deliberator : ∃ (StateSpace : Type) (Step ` | {}  |
-| `model_M24_automatic_rational_evaluator` | theorem | [L228](formal/Logos/ChoiceRepair.lean#L228) | `theorem model_M24_automatic_rational_evaluator : ∃ (StateSpace : Type) (Evaluate` | {}  |
-| `model_M25_passive_truth_tracker` | theorem | [L235](formal/Logos/ChoiceRepair.lean#L235) | `theorem model_M25_passive_truth_tracker : ∃ (Tracker : Prop → Prop), (∀ p : Prop` | {CL}  |
-| `model_M26_choice_without_libertarianism` | theorem | [L250](formal/Logos/ChoiceRepair.lean#L250) | `theorem model_M26_choice_without_libertarianism : ∃ (Subj : Type) (CS : FineCogn` | {}  |
-| `reductio_derives_compatibilist_freeWill` | theorem | [L378](formal/Logos/ChoiceRepair.lean#L378) | `theorem reductio_derives_compatibilist_freeWill (Subj : Type) (CS : FineCognitiv` | {}  |
-| `reductio_derives_settlementChoice` | theorem | [L89](formal/Logos/ChoiceRepair.lean#L89) | `theorem reductio_derives_settlementChoice {Subj : Type} (CS : FineCognitiveSubje` | {}  |
-| `settlementChoice_compatible_with_case_D` | theorem | [L285](formal/Logos/ChoiceRepair.lean#L285) | `theorem settlementChoice_compatible_with_case_D : ∃ (D : Type) (Settlement : D →` | {}  |
-| `settlementChoice_does_not_entail_modal_freedom` | theorem | [L290](formal/Logos/ChoiceRepair.lean#L290) | `theorem settlementChoice_does_not_entail_modal_freedom : ∃ (Subj : Type) (CS : F` | {}  |
-| `settlementChoice_iff_settlement1` | theorem | [L82](formal/Logos/ChoiceRepair.lean#L82) | `theorem settlementChoice_iff_settlement1 {Subj : Type} (CS : FineCognitiveSubjec` | {}  |
-| `settlementChoice_is_definitional_unfolding` | theorem | [L98](formal/Logos/ChoiceRepair.lean#L98) | `theorem settlementChoice_is_definitional_unfolding {Subj : Type} (CS : FineCogni` | {}  |
-| `settlementChoice_orthogonal_to_old_chooses` | theorem | [L304](formal/Logos/ChoiceRepair.lean#L304) | `theorem settlementChoice_orthogonal_to_old_chooses : (∃ (Subj : Type) (CS : Fine` | {}  |
+| `ActionSelection` | def | [L3442](formal/Logos/AgencyAuditsAndFrontiers.lean#L3442) | `def ActionSelection {Subj : Type} (CS : FineCognitiveSubject Subj) (ActRel : Sub` | {}  |
+| `AgentCausalSettlement` | def | [L3447](formal/Logos/AgencyAuditsAndFrontiers.lean#L3447) | `def AgentCausalSettlement {Subj : Type} (CS : FineCognitiveSubject Subj) (ActRel` | {}  |
+| `CognitiveSettlement` | def | [L3434](formal/Logos/AgencyAuditsAndFrontiers.lean#L3434) | `def CognitiveSettlement {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj` | {}  |
+| `ExtendedGammaModel` | structure | [L3685](formal/Logos/AgencyAuditsAndFrontiers.lean#L3685) | `structure ExtendedGammaModel where` | —  |
+| `FreeWill_Libertarian` | def | [L3710](formal/Logos/AgencyAuditsAndFrontiers.lean#L3710) | `def FreeWill_Libertarian (M : ExtendedGammaModel) (s : M.Subj) : Prop` | {}  |
+| `FreeWill_Settlement` | def | [L3698](formal/Logos/AgencyAuditsAndFrontiers.lean#L3698) | `def FreeWill_Settlement (Subj : Type) (CS : FineCognitiveSubject Subj) (s : Subj` | {}  |
+| `OldChooses` | def | [L3380](formal/Logos/AgencyAuditsAndFrontiers.lean#L3380) | `def OldChooses (s : Subject) (p q : Prop) : Prop` | {Means, Subject}  |
+| `OldFreeWill` | def | [L3381](formal/Logos/AgencyAuditsAndFrontiers.lean#L3381) | `def OldFreeWill (s : Subject) : Prop` | {Means, Subject}  |
+| `SettlementChoice` | def | [L3401](formal/Logos/AgencyAuditsAndFrontiers.lean#L3401) | `def SettlementChoice {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj) (` | {}  |
+| `TransformToDeterministicAgency` | def | [L3803](formal/Logos/AgencyAuditsAndFrontiers.lean#L3803) | `def TransformToDeterministicAgency (M : ExtendedGammaModel) : ExtendedGammaModel` | {}  |
+| `VolitionalSettlement` | def | [L3438](formal/Logos/AgencyAuditsAndFrontiers.lean#L3438) | `def VolitionalSettlement {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Sub` | {}  |
+| `divergence_between_intentional_resolution_and_old_choice` | theorem | [L3387](formal/Logos/AgencyAuditsAndFrontiers.lean#L3387) | `theorem divergence_between_intentional_resolution_and_old_choice (s : Subject) (` | {Means, Subject}  |
+| `libertarian_freewill_is_model_theoretically_independent` | theorem | [L3796](formal/Logos/AgencyAuditsAndFrontiers.lean#L3796) | `theorem libertarian_freewill_is_model_theoretically_independent : (∃ (M : Extend` | {}  |
+| `model_A_lib_with_libertarian_freewill` | theorem | [L3715](formal/Logos/AgencyAuditsAndFrontiers.lean#L3715) | `theorem model_A_lib_with_libertarian_freewill : ∃ (M : ExtendedGammaModel), ∃ (s` | {}  |
+| `model_B_lib_without_libertarian_freewill` | theorem | [L3754](formal/Logos/AgencyAuditsAndFrontiers.lean#L3754) | `theorem model_B_lib_without_libertarian_freewill : ∃ (M : ExtendedGammaModel), ∀` | {}  |
+| `model_M19_cognitive_resolution_without_volition` | theorem | [L3458](formal/Logos/AgencyAuditsAndFrontiers.lean#L3458) | `theorem model_M19_cognitive_resolution_without_volition : ∃ (Subj : Type) (CS : ` | {}  |
+| `model_M20_volition_without_alternative_capacity` | theorem | [L3486](formal/Logos/AgencyAuditsAndFrontiers.lean#L3486) | `theorem model_M20_volition_without_alternative_capacity : ∃ (Subj : Type) (CS : ` | {}  |
+| `model_M21_action_selection_without_libertarian_freedom` | theorem | [L3521](formal/Logos/AgencyAuditsAndFrontiers.lean#L3521) | `theorem model_M21_action_selection_without_libertarian_freedom : ∃ (Subj : Type)` | {}  |
+| `model_M22_agent_causal_settlement` | theorem | [L3529](formal/Logos/AgencyAuditsAndFrontiers.lean#L3529) | `theorem model_M22_agent_causal_settlement : ∃ (Subj : Type) (AgentDetermines : S` | {}  |
+| `model_M23_fully_deterministic_deliberator` | theorem | [L3545](formal/Logos/AgencyAuditsAndFrontiers.lean#L3545) | `theorem model_M23_fully_deterministic_deliberator : ∃ (StateSpace : Type) (Step ` | {}  |
+| `model_M24_automatic_rational_evaluator` | theorem | [L3552](formal/Logos/AgencyAuditsAndFrontiers.lean#L3552) | `theorem model_M24_automatic_rational_evaluator : ∃ (StateSpace : Type) (Evaluate` | {}  |
+| `model_M25_passive_truth_tracker` | theorem | [L3559](formal/Logos/AgencyAuditsAndFrontiers.lean#L3559) | `theorem model_M25_passive_truth_tracker : ∃ (Tracker : Prop → Prop), (∀ p : Prop` | {CL}  |
+| `model_M26_choice_without_libertarianism` | theorem | [L3574](formal/Logos/AgencyAuditsAndFrontiers.lean#L3574) | `theorem model_M26_choice_without_libertarianism : ∃ (Subj : Type) (CS : FineCogn` | {}  |
+| `reductio_derives_compatibilist_freeWill` | theorem | [L3702](formal/Logos/AgencyAuditsAndFrontiers.lean#L3702) | `theorem reductio_derives_compatibilist_freeWill (Subj : Type) (CS : FineCognitiv` | {}  |
+| `reductio_derives_settlementChoice` | theorem | [L3413](formal/Logos/AgencyAuditsAndFrontiers.lean#L3413) | `theorem reductio_derives_settlementChoice {Subj : Type} (CS : FineCognitiveSubje` | {}  |
+| `settlementChoice_compatible_with_case_D` | theorem | [L3609](formal/Logos/AgencyAuditsAndFrontiers.lean#L3609) | `theorem settlementChoice_compatible_with_case_D : ∃ (D : Type) (Settlement : D →` | {}  |
+| `settlementChoice_does_not_entail_modal_freedom` | theorem | [L3614](formal/Logos/AgencyAuditsAndFrontiers.lean#L3614) | `theorem settlementChoice_does_not_entail_modal_freedom : ∃ (Subj : Type) (CS : F` | {}  |
+| `settlementChoice_iff_settlement1` | theorem | [L3406](formal/Logos/AgencyAuditsAndFrontiers.lean#L3406) | `theorem settlementChoice_iff_settlement1 {Subj : Type} (CS : FineCognitiveSubjec` | {}  |
+| `settlementChoice_is_definitional_unfolding` | theorem | [L3422](formal/Logos/AgencyAuditsAndFrontiers.lean#L3422) | `theorem settlementChoice_is_definitional_unfolding {Subj : Type} (CS : FineCogni` | {}  |
+| `settlementChoice_orthogonal_to_old_chooses` | theorem | [L3628](formal/Logos/AgencyAuditsAndFrontiers.lean#L3628) | `theorem settlementChoice_orthogonal_to_old_chooses : (∃ (Subj : Type) (CS : Fine` | {}  |
 
 ### `Logos.ClaimMeanings`
 
@@ -1866,90 +1844,90 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `AD_alone_insufficient_for_missing_horn` | theorem | [L303](formal/Logos/CognitiveDiscrimination.lean#L303) | `theorem AD_alone_insufficient_for_missing_horn : ∃ (Subject : Type) (ActAt : Sub` | {}  |
-| `Aboutness` | def | [L99](formal/Logos/CognitiveDiscrimination.lean#L99) | `def Aboutness (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
-| `AlternativeAvailable` | def | [L187](formal/Logos/CognitiveDiscrimination.lean#L187) | `def AlternativeAvailable (Available : Subject → Prop → Prop → Prop) (s : Subject` | {Subject}  |
-| `AlternativeAwareness` | def | [L149](formal/Logos/CognitiveDiscrimination.lean#L149) | `def AlternativeAwareness (Subject : Type) (MeansAt : Subject → Prop → Prop) (s :` | {}  |
-| `BR_alone_insufficient_for_missing_horn` | theorem | [L324](formal/Logos/CognitiveDiscrimination.lean#L324) | `theorem BR_alone_insufficient_for_missing_horn : ∃ (Subject : Type) (ActAt : Sub` | {}  |
-| `BareDiscrimination` | def | [L174](formal/Logos/CognitiveDiscrimination.lean#L174) | `def BareDiscrimination (Discriminates : Subject → Prop → Prop → Prop) (s : Subje` | {Subject}  |
-| `CognitiveContrastPrinciple` | def | [L271](formal/Logos/CognitiveDiscrimination.lean#L271) | `def CognitiveContrastPrinciple (Subject : Type) (ActAt : Subject → Prop → Prop) ` | {}  |
-| `CognitiveUptakePrinciple` | def | [L278](formal/Logos/CognitiveDiscrimination.lean#L278) | `def CognitiveUptakePrinciple (Subject : Type) (MeansAt : Subject → Prop → Prop) ` | {}  |
-| `Consideration` | def | [L106](formal/Logos/CognitiveDiscrimination.lean#L106) | `def Consideration (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
-| `ContentAwareness` | def | [L85](formal/Logos/CognitiveDiscrimination.lean#L85) | `def ContentAwareness (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
-| `ContentDiscrimination` | def | [L121](formal/Logos/CognitiveDiscrimination.lean#L121) | `def ContentDiscrimination (Subject : Type) (Discriminates : Subject → Prop → Pro` | {}  |
-| `ContentIndividuation` | def | [L74](formal/Logos/CognitiveDiscrimination.lean#L74) | `def ContentIndividuation (p : Prop) : Prop` | {}  |
-| `ContentRepresentation` | def | [L353](formal/Logos/CognitiveDiscrimination.lean#L353) | `def ContentRepresentation (Subject : Type) (Represents : Subject → Prop → Prop) ` | {}  |
-| `CounterfactualAvailability` | def | [L135](formal/Logos/CognitiveDiscrimination.lean#L135) | `def CounterfactualAvailability (Subject : Type) (CanEntertain : Subject → Prop →` | {}  |
-| `CounterfactualConsideration` | def | [L192](formal/Logos/CognitiveDiscrimination.lean#L192) | `def CounterfactualConsideration (Considers : Subject → Prop → Prop) (s : Subject` | {Means, Subject}  |
-| `D1_discrimination_not_entails_choice` | theorem | [L207](formal/Logos/CognitiveDiscrimination.lean#L207) | `theorem D1_discrimination_not_entails_choice : ∃ (Subject : Type) (s : Subject) ` | {}  |
-| `D2_discrimination_not_entails_meaning` | theorem | [L216](formal/Logos/CognitiveDiscrimination.lean#L216) | `theorem D2_discrimination_not_entails_meaning : ∃ (Subject : Type) (s : Subject)` | {}  |
-| `D3_discrimination_present_without_choice_or_freewill` | theorem | [L226](formal/Logos/CognitiveDiscrimination.lean#L226) | `theorem D3_discrimination_present_without_choice_or_freewill : ∃ (Subject : Type` | {}  |
-| `D4_act_not_derives_discrimination` | theorem | [L246](formal/Logos/CognitiveDiscrimination.lean#L246) | `theorem D4_act_not_derives_discrimination : ∃ (Subject : Type) (s : Subject) (p ` | {}  |
-| `DecomposedMeans` | def | [L361](formal/Logos/CognitiveDiscrimination.lean#L361) | `def DecomposedMeans (Subject : Type) (Represents Affirms : Subject → Prop → Prop` | {}  |
-| `Entertainment` | def | [L113](formal/Logos/CognitiveDiscrimination.lean#L113) | `def Entertainment (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
-| `IntentionalAffirmation` | def | [L357](formal/Logos/CognitiveDiscrimination.lean#L357) | `def IntentionalAffirmation (Subject : Type) (Affirms : Subject → Prop → Prop) (s` | {}  |
-| `Level1_ObjectiveIncompatibility` | def | [L438](formal/Logos/CognitiveDiscrimination.lean#L438) | `def Level1_ObjectiveIncompatibility (p q : Prop) : Prop` | {}  |
-| `Level2_CognitiveDistinction` | def | [L441](formal/Logos/CognitiveDiscrimination.lean#L441) | `def Level2_CognitiveDistinction (Subject : Type) (Discriminates : Subject → Prop` | {}  |
-| `Level3_AlternativeRepresentation` | def | [L445](formal/Logos/CognitiveDiscrimination.lean#L445) | `def Level3_AlternativeRepresentation (Subject : Type) (Represents : Subject → Pr` | {}  |
-| `Level4_CoMeaning` | def | [L449](formal/Logos/CognitiveDiscrimination.lean#L449) | `def Level4_CoMeaning (Subject : Type) (MeansAt : Subject → Prop → Prop) (s : Sub` | {}  |
-| `Level5_Choice` | def | [L453](formal/Logos/CognitiveDiscrimination.lean#L453) | `def Level5_Choice (Subject : Type) (ChoosesAt : Subject → Prop → Prop → Prop) (s` | {}  |
-| `Level6_FreeWill` | def | [L457](formal/Logos/CognitiveDiscrimination.lean#L457) | `def Level6_FreeWill (Subject : Type) (ChoosesAt : Subject → Prop → Prop → Prop) ` | {}  |
-| `Level7_LibertarianFreedom` | def | [L461](formal/Logos/CognitiveDiscrimination.lean#L461) | `def Level7_LibertarianFreedom (Subject : Type) (CausesAt : Subject → Prop → Prop` | {}  |
-| `MonadicIntentionalFrame` | structure | [L406](formal/Logos/CognitiveDiscrimination.lean#L406) | `structure MonadicIntentionalFrame where` | —  |
-| `ObjectiveDistinction` | def | [L179](formal/Logos/CognitiveDiscrimination.lean#L179) | `def ObjectiveDistinction (p q : Prop) : Prop` | {}  |
-| `PropIdentity` | def | [L67](formal/Logos/CognitiveDiscrimination.lean#L67) | `def PropIdentity (p : Prop) : Prop` | {}  |
-| `RecognitionOfDifference` | def | [L182](formal/Logos/CognitiveDiscrimination.lean#L182) | `def RecognitionOfDifference (Discriminates : Subject → Prop → Prop → Prop) (s : ` | {Subject}  |
-| `Representation` | def | [L92](formal/Logos/CognitiveDiscrimination.lean#L92) | `def Representation (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
-| `RepresentationalSeparation` | def | [L197](formal/Logos/CognitiveDiscrimination.lean#L197) | `def RepresentationalSeparation (Represents : Subject → Prop → Prop) (s : Subject` | {Subject}  |
-| `affirmation_not_implies_representation` | theorem | [L376](formal/Logos/CognitiveDiscrimination.lean#L376) | `theorem affirmation_not_implies_representation : ∃ (Subject : Type) (s : Subject` | {}  |
-| `discrimination_equiv_intentional_distinction` | theorem | [L561](formal/Logos/CognitiveDiscrimination.lean#L561) | `theorem discrimination_equiv_intentional_distinction (D1 D2 : Subject → Prop → P` | {Subject}  |
-| `horn_local_decomposition_blind_to_second_horn` | theorem | [L385](formal/Logos/CognitiveDiscrimination.lean#L385) | `theorem horn_local_decomposition_blind_to_second_horn : ∃ (Subject : Type) (s : ` | {}  |
-| `level1_not_implies_level2` | theorem | [L476](formal/Logos/CognitiveDiscrimination.lean#L476) | `theorem level1_not_implies_level2 : ∃ (p q : Prop) (Subject : Type) (s : Subject` | {}  |
-| `level2_not_implies_level3` | theorem | [L486](formal/Logos/CognitiveDiscrimination.lean#L486) | `theorem level2_not_implies_level3 : ∃ (Subject : Type) (s : Subject) (p q : Prop` | {}  |
-| `level3_not_implies_level4` | theorem | [L500](formal/Logos/CognitiveDiscrimination.lean#L500) | `theorem level3_not_implies_level4 : ∃ (Subject : Type) (s : Subject) (p q : Prop` | {}  |
-| `level4_not_implies_level5` | theorem | [L513](formal/Logos/CognitiveDiscrimination.lean#L513) | `theorem level4_not_implies_level5 : ∃ (Subject : Type) (s : Subject) (p q : Prop` | {}  |
-| `level5_local_choice_not_implies_global_freewill` | theorem | [L525](formal/Logos/CognitiveDiscrimination.lean#L525) | `theorem level5_local_choice_not_implies_global_freewill : ∃ (Subject : Type) (s ` | {}  |
-| `level6_freewill_not_implies_libertarian_freedom` | theorem | [L534](formal/Logos/CognitiveDiscrimination.lean#L534) | `theorem level6_freewill_not_implies_libertarian_freedom : ∃ (Subject : Type) (s ` | {}  |
-| `means_iff_aboutness` | theorem | [L101](formal/Logos/CognitiveDiscrimination.lean#L101) | `theorem means_iff_aboutness (s : Subject) (p : Prop) : Means s p ↔ Aboutness s p` | {Means, Subject}  |
-| `means_iff_awareness` | theorem | [L87](formal/Logos/CognitiveDiscrimination.lean#L87) | `theorem means_iff_awareness (s : Subject) (p : Prop) : Means s p ↔ ContentAwaren` | {Means, Subject}  |
-| `means_iff_consideration` | theorem | [L108](formal/Logos/CognitiveDiscrimination.lean#L108) | `theorem means_iff_consideration (s : Subject) (p : Prop) : Means s p ↔ Considera` | {Means, Subject}  |
-| `means_iff_entertainment` | theorem | [L115](formal/Logos/CognitiveDiscrimination.lean#L115) | `theorem means_iff_entertainment (s : Subject) (p : Prop) : Means s p ↔ Entertain` | {Means, Subject}  |
-| `means_iff_representation` | theorem | [L94](formal/Logos/CognitiveDiscrimination.lean#L94) | `theorem means_iff_representation (s : Subject) (p : Prop) : Means s p ↔ Represen` | {Means, Subject}  |
-| `means_implies_identity` | theorem | [L69](formal/Logos/CognitiveDiscrimination.lean#L69) | `theorem means_implies_identity (s : Subject) (p : Prop) (_h : Means s p) : PropI` | {Means, Subject}  |
-| `means_implies_individuation` | theorem | [L77](formal/Logos/CognitiveDiscrimination.lean#L77) | `theorem means_implies_individuation (s : Subject) (p : Prop) (_h : Means s p) : ` | {Means, Subject, CL}  |
-| `means_not_implies_alternative_awareness` | theorem | [L153](formal/Logos/CognitiveDiscrimination.lean#L153) | `theorem means_not_implies_alternative_awareness : ∃ (Subject : Type) (s : Subjec` | {}  |
-| `means_not_implies_counterfactual_availability` | theorem | [L139](formal/Logos/CognitiveDiscrimination.lean#L139) | `theorem means_not_implies_counterfactual_availability : ∃ (Subject : Type) (s : ` | {}  |
-| `means_not_implies_discrimination` | theorem | [L125](formal/Logos/CognitiveDiscrimination.lean#L125) | `theorem means_not_implies_discrimination : ∃ (Subject : Type) (s : Subject) (p :` | {}  |
-| `recognition_of_incompatibility_requires_alternative_awareness` | theorem | [L568](formal/Logos/CognitiveDiscrimination.lean#L568) | `theorem recognition_of_incompatibility_requires_alternative_awareness (s : Subje` | {Means, Subject}  |
-| `representation_not_implies_affirmation` | theorem | [L368](formal/Logos/CognitiveDiscrimination.lean#L368) | `theorem representation_not_implies_affirmation : ∃ (Subject : Type) (s : Subject` | {}  |
-| `subprinciples_derive_missing_cognitive_horn` | theorem | [L285](formal/Logos/CognitiveDiscrimination.lean#L285) | `theorem subprinciples_derive_missing_cognitive_horn (Subject : Type) (ActAt : Su` | {}  |
-| `unary_intentional_collapse` | theorem | [L414](formal/Logos/CognitiveDiscrimination.lean#L414) | `theorem unary_intentional_collapse (F : MonadicIntentionalFrame) (p : Prop) (hp ` | {}  |
+| `AD_alone_insufficient_for_missing_horn` | theorem | [L1186](formal/Logos/AgencyAuditsAndFrontiers.lean#L1186) | `theorem AD_alone_insufficient_for_missing_horn : ∃ (Subject : Type) (ActAt : Sub` | {}  |
+| `Aboutness` | def | [L982](formal/Logos/AgencyAuditsAndFrontiers.lean#L982) | `def Aboutness (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
+| `AlternativeAvailable` | def | [L1070](formal/Logos/AgencyAuditsAndFrontiers.lean#L1070) | `def AlternativeAvailable (Available : Subject → Prop → Prop → Prop) (s : Subject` | {Subject}  |
+| `AlternativeAwareness` | def | [L1032](formal/Logos/AgencyAuditsAndFrontiers.lean#L1032) | `def AlternativeAwareness (Subject : Type) (MeansAt : Subject → Prop → Prop) (s :` | {}  |
+| `BR_alone_insufficient_for_missing_horn` | theorem | [L1207](formal/Logos/AgencyAuditsAndFrontiers.lean#L1207) | `theorem BR_alone_insufficient_for_missing_horn : ∃ (Subject : Type) (ActAt : Sub` | {}  |
+| `BareDiscrimination` | def | [L1057](formal/Logos/AgencyAuditsAndFrontiers.lean#L1057) | `def BareDiscrimination (Discriminates : Subject → Prop → Prop → Prop) (s : Subje` | {Subject}  |
+| `CognitiveContrastPrinciple` | def | [L1154](formal/Logos/AgencyAuditsAndFrontiers.lean#L1154) | `def CognitiveContrastPrinciple (Subject : Type) (ActAt : Subject → Prop → Prop) ` | {}  |
+| `CognitiveUptakePrinciple` | def | [L1161](formal/Logos/AgencyAuditsAndFrontiers.lean#L1161) | `def CognitiveUptakePrinciple (Subject : Type) (MeansAt : Subject → Prop → Prop) ` | {}  |
+| `Consideration` | def | [L989](formal/Logos/AgencyAuditsAndFrontiers.lean#L989) | `def Consideration (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
+| `ContentAwareness` | def | [L968](formal/Logos/AgencyAuditsAndFrontiers.lean#L968) | `def ContentAwareness (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
+| `ContentDiscrimination` | def | [L1004](formal/Logos/AgencyAuditsAndFrontiers.lean#L1004) | `def ContentDiscrimination (Subject : Type) (Discriminates : Subject → Prop → Pro` | {}  |
+| `ContentIndividuation` | def | [L957](formal/Logos/AgencyAuditsAndFrontiers.lean#L957) | `def ContentIndividuation (p : Prop) : Prop` | {}  |
+| `ContentRepresentation` | def | [L1236](formal/Logos/AgencyAuditsAndFrontiers.lean#L1236) | `def ContentRepresentation (Subject : Type) (Represents : Subject → Prop → Prop) ` | {}  |
+| `CounterfactualAvailability` | def | [L1018](formal/Logos/AgencyAuditsAndFrontiers.lean#L1018) | `def CounterfactualAvailability (Subject : Type) (CanEntertain : Subject → Prop →` | {}  |
+| `CounterfactualConsideration` | def | [L1075](formal/Logos/AgencyAuditsAndFrontiers.lean#L1075) | `def CounterfactualConsideration (Considers : Subject → Prop → Prop) (s : Subject` | {Means, Subject}  |
+| `D1_discrimination_not_entails_choice` | theorem | [L1090](formal/Logos/AgencyAuditsAndFrontiers.lean#L1090) | `theorem D1_discrimination_not_entails_choice : ∃ (Subject : Type) (s : Subject) ` | {}  |
+| `D2_discrimination_not_entails_meaning` | theorem | [L1099](formal/Logos/AgencyAuditsAndFrontiers.lean#L1099) | `theorem D2_discrimination_not_entails_meaning : ∃ (Subject : Type) (s : Subject)` | {}  |
+| `D3_discrimination_present_without_choice_or_freewill` | theorem | [L1109](formal/Logos/AgencyAuditsAndFrontiers.lean#L1109) | `theorem D3_discrimination_present_without_choice_or_freewill : ∃ (Subject : Type` | {}  |
+| `D4_act_not_derives_discrimination` | theorem | [L1129](formal/Logos/AgencyAuditsAndFrontiers.lean#L1129) | `theorem D4_act_not_derives_discrimination : ∃ (Subject : Type) (s : Subject) (p ` | {}  |
+| `DecomposedMeans` | def | [L1244](formal/Logos/AgencyAuditsAndFrontiers.lean#L1244) | `def DecomposedMeans (Subject : Type) (Represents Affirms : Subject → Prop → Prop` | {}  |
+| `Entertainment` | def | [L996](formal/Logos/AgencyAuditsAndFrontiers.lean#L996) | `def Entertainment (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
+| `IntentionalAffirmation` | def | [L1240](formal/Logos/AgencyAuditsAndFrontiers.lean#L1240) | `def IntentionalAffirmation (Subject : Type) (Affirms : Subject → Prop → Prop) (s` | {}  |
+| `Level1_ObjectiveIncompatibility` | def | [L1321](formal/Logos/AgencyAuditsAndFrontiers.lean#L1321) | `def Level1_ObjectiveIncompatibility (p q : Prop) : Prop` | {}  |
+| `Level2_CognitiveDistinction` | def | [L1324](formal/Logos/AgencyAuditsAndFrontiers.lean#L1324) | `def Level2_CognitiveDistinction (Subject : Type) (Discriminates : Subject → Prop` | {}  |
+| `Level3_AlternativeRepresentation` | def | [L1328](formal/Logos/AgencyAuditsAndFrontiers.lean#L1328) | `def Level3_AlternativeRepresentation (Subject : Type) (Represents : Subject → Pr` | {}  |
+| `Level4_CoMeaning` | def | [L1332](formal/Logos/AgencyAuditsAndFrontiers.lean#L1332) | `def Level4_CoMeaning (Subject : Type) (MeansAt : Subject → Prop → Prop) (s : Sub` | {}  |
+| `Level5_Choice` | def | [L1336](formal/Logos/AgencyAuditsAndFrontiers.lean#L1336) | `def Level5_Choice (Subject : Type) (ChoosesAt : Subject → Prop → Prop → Prop) (s` | {}  |
+| `Level6_FreeWill` | def | [L1340](formal/Logos/AgencyAuditsAndFrontiers.lean#L1340) | `def Level6_FreeWill (Subject : Type) (ChoosesAt : Subject → Prop → Prop → Prop) ` | {}  |
+| `Level7_LibertarianFreedom` | def | [L1344](formal/Logos/AgencyAuditsAndFrontiers.lean#L1344) | `def Level7_LibertarianFreedom (Subject : Type) (CausesAt : Subject → Prop → Prop` | {}  |
+| `MonadicIntentionalFrame` | structure | [L1289](formal/Logos/AgencyAuditsAndFrontiers.lean#L1289) | `structure MonadicIntentionalFrame where` | —  |
+| `ObjectiveDistinction` | def | [L1062](formal/Logos/AgencyAuditsAndFrontiers.lean#L1062) | `def ObjectiveDistinction (p q : Prop) : Prop` | {}  |
+| `PropIdentity` | def | [L950](formal/Logos/AgencyAuditsAndFrontiers.lean#L950) | `def PropIdentity (p : Prop) : Prop` | {}  |
+| `RecognitionOfDifference` | def | [L1065](formal/Logos/AgencyAuditsAndFrontiers.lean#L1065) | `def RecognitionOfDifference (Discriminates : Subject → Prop → Prop → Prop) (s : ` | {Subject}  |
+| `Representation` | def | [L975](formal/Logos/AgencyAuditsAndFrontiers.lean#L975) | `def Representation (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
+| `RepresentationalSeparation` | def | [L1080](formal/Logos/AgencyAuditsAndFrontiers.lean#L1080) | `def RepresentationalSeparation (Represents : Subject → Prop → Prop) (s : Subject` | {Subject}  |
+| `affirmation_not_implies_representation` | theorem | [L1259](formal/Logos/AgencyAuditsAndFrontiers.lean#L1259) | `theorem affirmation_not_implies_representation : ∃ (Subject : Type) (s : Subject` | {}  |
+| `discrimination_equiv_intentional_distinction` | theorem | [L1444](formal/Logos/AgencyAuditsAndFrontiers.lean#L1444) | `theorem discrimination_equiv_intentional_distinction (D1 D2 : Subject → Prop → P` | {Subject}  |
+| `horn_local_decomposition_blind_to_second_horn` | theorem | [L1268](formal/Logos/AgencyAuditsAndFrontiers.lean#L1268) | `theorem horn_local_decomposition_blind_to_second_horn : ∃ (Subject : Type) (s : ` | {}  |
+| `level1_not_implies_level2` | theorem | [L1359](formal/Logos/AgencyAuditsAndFrontiers.lean#L1359) | `theorem level1_not_implies_level2 : ∃ (p q : Prop) (Subject : Type) (s : Subject` | {}  |
+| `level2_not_implies_level3` | theorem | [L1369](formal/Logos/AgencyAuditsAndFrontiers.lean#L1369) | `theorem level2_not_implies_level3 : ∃ (Subject : Type) (s : Subject) (p q : Prop` | {}  |
+| `level3_not_implies_level4` | theorem | [L1383](formal/Logos/AgencyAuditsAndFrontiers.lean#L1383) | `theorem level3_not_implies_level4 : ∃ (Subject : Type) (s : Subject) (p q : Prop` | {}  |
+| `level4_not_implies_level5` | theorem | [L1396](formal/Logos/AgencyAuditsAndFrontiers.lean#L1396) | `theorem level4_not_implies_level5 : ∃ (Subject : Type) (s : Subject) (p q : Prop` | {}  |
+| `level5_local_choice_not_implies_global_freewill` | theorem | [L1408](formal/Logos/AgencyAuditsAndFrontiers.lean#L1408) | `theorem level5_local_choice_not_implies_global_freewill : ∃ (Subject : Type) (s ` | {}  |
+| `level6_freewill_not_implies_libertarian_freedom` | theorem | [L1417](formal/Logos/AgencyAuditsAndFrontiers.lean#L1417) | `theorem level6_freewill_not_implies_libertarian_freedom : ∃ (Subject : Type) (s ` | {}  |
+| `means_iff_aboutness` | theorem | [L984](formal/Logos/AgencyAuditsAndFrontiers.lean#L984) | `theorem means_iff_aboutness (s : Subject) (p : Prop) : Means s p ↔ Aboutness s p` | {Means, Subject}  |
+| `means_iff_awareness` | theorem | [L970](formal/Logos/AgencyAuditsAndFrontiers.lean#L970) | `theorem means_iff_awareness (s : Subject) (p : Prop) : Means s p ↔ ContentAwaren` | {Means, Subject}  |
+| `means_iff_consideration` | theorem | [L991](formal/Logos/AgencyAuditsAndFrontiers.lean#L991) | `theorem means_iff_consideration (s : Subject) (p : Prop) : Means s p ↔ Considera` | {Means, Subject}  |
+| `means_iff_entertainment` | theorem | [L998](formal/Logos/AgencyAuditsAndFrontiers.lean#L998) | `theorem means_iff_entertainment (s : Subject) (p : Prop) : Means s p ↔ Entertain` | {Means, Subject}  |
+| `means_iff_representation` | theorem | [L977](formal/Logos/AgencyAuditsAndFrontiers.lean#L977) | `theorem means_iff_representation (s : Subject) (p : Prop) : Means s p ↔ Represen` | {Means, Subject}  |
+| `means_implies_identity` | theorem | [L952](formal/Logos/AgencyAuditsAndFrontiers.lean#L952) | `theorem means_implies_identity (s : Subject) (p : Prop) (_h : Means s p) : PropI` | {Means, Subject}  |
+| `means_implies_individuation` | theorem | [L960](formal/Logos/AgencyAuditsAndFrontiers.lean#L960) | `theorem means_implies_individuation (s : Subject) (p : Prop) (_h : Means s p) : ` | {Means, Subject, CL}  |
+| `means_not_implies_alternative_awareness` | theorem | [L1036](formal/Logos/AgencyAuditsAndFrontiers.lean#L1036) | `theorem means_not_implies_alternative_awareness : ∃ (Subject : Type) (s : Subjec` | {}  |
+| `means_not_implies_counterfactual_availability` | theorem | [L1022](formal/Logos/AgencyAuditsAndFrontiers.lean#L1022) | `theorem means_not_implies_counterfactual_availability : ∃ (Subject : Type) (s : ` | {}  |
+| `means_not_implies_discrimination` | theorem | [L1008](formal/Logos/AgencyAuditsAndFrontiers.lean#L1008) | `theorem means_not_implies_discrimination : ∃ (Subject : Type) (s : Subject) (p :` | {}  |
+| `recognition_of_incompatibility_requires_alternative_awareness` | theorem | [L1451](formal/Logos/AgencyAuditsAndFrontiers.lean#L1451) | `theorem recognition_of_incompatibility_requires_alternative_awareness (s : Subje` | {Means, Subject}  |
+| `representation_not_implies_affirmation` | theorem | [L1251](formal/Logos/AgencyAuditsAndFrontiers.lean#L1251) | `theorem representation_not_implies_affirmation : ∃ (Subject : Type) (s : Subject` | {}  |
+| `subprinciples_derive_missing_cognitive_horn` | theorem | [L1168](formal/Logos/AgencyAuditsAndFrontiers.lean#L1168) | `theorem subprinciples_derive_missing_cognitive_horn (Subject : Type) (ActAt : Su` | {}  |
+| `unary_intentional_collapse` | theorem | [L1297](formal/Logos/AgencyAuditsAndFrontiers.lean#L1297) | `theorem unary_intentional_collapse (F : MonadicIntentionalFrame) (p : Prop) (hp ` | {}  |
 
 ### `Logos.CognitiveToAgencyFrontier`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `BilateralModalFreedom` | def | [L357](formal/Logos/CognitiveToAgencyFrontier.lean#L357) | `def BilateralModalFreedom (Subject : Type) (s : Subject) (p q : Prop) (CanAct : ` | {}  |
-| `FineCognitiveSubject` | structure | [L44](formal/Logos/CognitiveToAgencyFrontier.lean#L44) | `structure FineCognitiveSubject (Subject : Type) where` | —  |
-| `LibertarianFreedom` | def | [L362](formal/Logos/CognitiveToAgencyFrontier.lean#L362) | `def LibertarianFreedom (Subject : Type) (s : Subject) (p q : Prop) (CanAct : Sub` | {}  |
-| `ReductioProgression` | structure | [L67](formal/Logos/CognitiveToAgencyFrontier.lean#L67) | `structure ReductioProgression (Subject : Type) (CS : FineCognitiveSubject Subjec` | —  |
-| `Settlement1` | def | [L91](formal/Logos/CognitiveToAgencyFrontier.lean#L91) | `def Settlement1 (Subject : Type) (CS : FineCognitiveSubject Subject) (s : Subjec` | {}  |
-| `Settlement2` | def | [L98](formal/Logos/CognitiveToAgencyFrontier.lean#L98) | `def Settlement2 (Subject : Type) (CS : FineCognitiveSubject Subject) (s : Subjec` | {}  |
-| `Settlement3` | def | [L105](formal/Logos/CognitiveToAgencyFrontier.lean#L105) | `def Settlement3 (Subject : Type) (CS : FineCognitiveSubject Subject) (MeansAt : ` | {}  |
-| `Settlement4` | def | [L112](formal/Logos/CognitiveToAgencyFrontier.lean#L112) | `def Settlement4 (Subject State : Type) (CS : FineCognitiveSubject Subject) (Mean` | {}  |
-| `Settlement5` | def | [L122](formal/Logos/CognitiveToAgencyFrontier.lean#L122) | `def Settlement5 (Subject State : Type) (CS : FineCognitiveSubject Subject) (Mean` | {}  |
-| `model_M13_dual_consideration_without_evaluation` | theorem | [L210](formal/Logos/CognitiveToAgencyFrontier.lean#L210) | `theorem model_M13_dual_consideration_without_evaluation : ∃ (Subject : Type) (CS` | {}  |
-| `model_M14_evaluation_without_commitment` | theorem | [L234](formal/Logos/CognitiveToAgencyFrontier.lean#L234) | `theorem model_M14_evaluation_without_commitment : ∃ (Subject : Type) (CS : FineC` | {}  |
-| `model_M15_settlement_without_choice` | theorem | [L260](formal/Logos/CognitiveToAgencyFrontier.lean#L260) | `theorem model_M15_settlement_without_choice : ∃ (Subject : Type) (CS : FineCogni` | {}  |
-| `model_M16_deterministic_settlement` | theorem | [L288](formal/Logos/CognitiveToAgencyFrontier.lean#L288) | `theorem model_M16_deterministic_settlement : ∃ (DeliberativeState : Type) (Step ` | {}  |
-| `model_M17_compatibilist_choice` | theorem | [L319](formal/Logos/CognitiveToAgencyFrontier.lean#L319) | `theorem model_M17_compatibilist_choice : ∃ (DeliberativeState : Type) (Step : De` | {}  |
-| `model_M18_agent_causal_settlement` | theorem | [L337](formal/Logos/CognitiveToAgencyFrontier.lean#L337) | `theorem model_M18_agent_causal_settlement : ∃ (DeliberativeState : Type) (Subjec` | {}  |
-| `reductio_cannot_collapse_to_one_horn` | theorem | [L146](formal/Logos/CognitiveToAgencyFrontier.lean#L146) | `theorem reductio_cannot_collapse_to_one_horn (Subject : Type) (CS : FineCognitiv` | {}  |
-| `reductio_frontier_status` | theorem | [L369](formal/Logos/CognitiveToAgencyFrontier.lean#L369) | `theorem reductio_frontier_status (Subject : Type) (CS : FineCognitiveSubject Sub` | {}  |
-| `reductio_induces_asymmetric_status_transition` | theorem | [L76](formal/Logos/CognitiveToAgencyFrontier.lean#L76) | `theorem reductio_induces_asymmetric_status_transition (Subject : Type) (CS : Fin` | {}  |
-| `reductio_necessarily_asymmetric` | theorem | [L158](formal/Logos/CognitiveToAgencyFrontier.lean#L158) | `theorem reductio_necessarily_asymmetric (Subject : Type) (CS : FineCognitiveSubj` | {}  |
-| `reductio_proves_settlement_1` | theorem | [L131](formal/Logos/CognitiveToAgencyFrontier.lean#L131) | `theorem reductio_proves_settlement_1 (Subject : Type) (CS : FineCognitiveSubject` | {}  |
-| `settlement_1_does_not_imply_settlement_3` | theorem | [L166](formal/Logos/CognitiveToAgencyFrontier.lean#L166) | `theorem settlement_1_does_not_imply_settlement_3 : ∃ (Subject : Type) (CS : Fine` | {}  |
+| `BilateralModalFreedom` | def | [L2906](formal/Logos/AgencyAuditsAndFrontiers.lean#L2906) | `def BilateralModalFreedom (Subject : Type) (s : Subject) (p q : Prop) (CanAct : ` | {}  |
+| `FineCognitiveSubject` | structure | [L2593](formal/Logos/AgencyAuditsAndFrontiers.lean#L2593) | `structure FineCognitiveSubject (Subject : Type) where` | —  |
+| `LibertarianFreedom` | def | [L2911](formal/Logos/AgencyAuditsAndFrontiers.lean#L2911) | `def LibertarianFreedom (Subject : Type) (s : Subject) (p q : Prop) (CanAct : Sub` | {}  |
+| `ReductioProgression` | structure | [L2616](formal/Logos/AgencyAuditsAndFrontiers.lean#L2616) | `structure ReductioProgression (Subject : Type) (CS : FineCognitiveSubject Subjec` | —  |
+| `Settlement1` | def | [L2640](formal/Logos/AgencyAuditsAndFrontiers.lean#L2640) | `def Settlement1 (Subject : Type) (CS : FineCognitiveSubject Subject) (s : Subjec` | {}  |
+| `Settlement2` | def | [L2647](formal/Logos/AgencyAuditsAndFrontiers.lean#L2647) | `def Settlement2 (Subject : Type) (CS : FineCognitiveSubject Subject) (s : Subjec` | {}  |
+| `Settlement3` | def | [L2654](formal/Logos/AgencyAuditsAndFrontiers.lean#L2654) | `def Settlement3 (Subject : Type) (CS : FineCognitiveSubject Subject) (MeansAt : ` | {}  |
+| `Settlement4` | def | [L2661](formal/Logos/AgencyAuditsAndFrontiers.lean#L2661) | `def Settlement4 (Subject State : Type) (CS : FineCognitiveSubject Subject) (Mean` | {}  |
+| `Settlement5` | def | [L2671](formal/Logos/AgencyAuditsAndFrontiers.lean#L2671) | `def Settlement5 (Subject State : Type) (CS : FineCognitiveSubject Subject) (Mean` | {}  |
+| `model_M13_dual_consideration_without_evaluation` | theorem | [L2759](formal/Logos/AgencyAuditsAndFrontiers.lean#L2759) | `theorem model_M13_dual_consideration_without_evaluation : ∃ (Subject : Type) (CS` | {}  |
+| `model_M14_evaluation_without_commitment` | theorem | [L2783](formal/Logos/AgencyAuditsAndFrontiers.lean#L2783) | `theorem model_M14_evaluation_without_commitment : ∃ (Subject : Type) (CS : FineC` | {}  |
+| `model_M15_settlement_without_choice` | theorem | [L2809](formal/Logos/AgencyAuditsAndFrontiers.lean#L2809) | `theorem model_M15_settlement_without_choice : ∃ (Subject : Type) (CS : FineCogni` | {}  |
+| `model_M16_deterministic_settlement` | theorem | [L2837](formal/Logos/AgencyAuditsAndFrontiers.lean#L2837) | `theorem model_M16_deterministic_settlement : ∃ (DeliberativeState : Type) (Step ` | {}  |
+| `model_M17_compatibilist_choice` | theorem | [L2868](formal/Logos/AgencyAuditsAndFrontiers.lean#L2868) | `theorem model_M17_compatibilist_choice : ∃ (DeliberativeState : Type) (Step : De` | {}  |
+| `model_M18_agent_causal_settlement` | theorem | [L2886](formal/Logos/AgencyAuditsAndFrontiers.lean#L2886) | `theorem model_M18_agent_causal_settlement : ∃ (DeliberativeState : Type) (Subjec` | {}  |
+| `reductio_cannot_collapse_to_one_horn` | theorem | [L2695](formal/Logos/AgencyAuditsAndFrontiers.lean#L2695) | `theorem reductio_cannot_collapse_to_one_horn (Subject : Type) (CS : FineCognitiv` | {}  |
+| `reductio_frontier_status` | theorem | [L2918](formal/Logos/AgencyAuditsAndFrontiers.lean#L2918) | `theorem reductio_frontier_status (Subject : Type) (CS : FineCognitiveSubject Sub` | {}  |
+| `reductio_induces_asymmetric_status_transition` | theorem | [L2625](formal/Logos/AgencyAuditsAndFrontiers.lean#L2625) | `theorem reductio_induces_asymmetric_status_transition (Subject : Type) (CS : Fin` | {}  |
+| `reductio_necessarily_asymmetric` | theorem | [L2707](formal/Logos/AgencyAuditsAndFrontiers.lean#L2707) | `theorem reductio_necessarily_asymmetric (Subject : Type) (CS : FineCognitiveSubj` | {}  |
+| `reductio_proves_settlement_1` | theorem | [L2680](formal/Logos/AgencyAuditsAndFrontiers.lean#L2680) | `theorem reductio_proves_settlement_1 (Subject : Type) (CS : FineCognitiveSubject` | {}  |
+| `settlement_1_does_not_imply_settlement_3` | theorem | [L2715](formal/Logos/AgencyAuditsAndFrontiers.lean#L2715) | `theorem settlement_1_does_not_imply_settlement_3 : ∃ (Subject : Type) (CS : Fine` | {}  |
 
 ### `Logos.CompleteLibertarianFreedomArgument`
 
@@ -2161,46 +2139,46 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `ConstitutiveDeonticTruth` | structure | [L181](formal/Logos/ConstitutiveNormativeFreeWill.lean#L181) | `structure ConstitutiveDeonticTruth` | —  |
-| `ConstitutiveNormativeTruth` | structure | [L67](formal/Logos/ConstitutiveNormativeFreeWill.lean#L67) | `structure ConstitutiveNormativeTruth (World : Type) where` | —  |
-| `DescriptiveTruth` | def | [L49](formal/Logos/ConstitutiveNormativeFreeWill.lean#L49) | `def DescriptiveTruth (p : Prop) : Prop` | {}  |
-| `NecessaryConstitutiveNormativity` | def | [L152](formal/Logos/ConstitutiveNormativeFreeWill.lean#L152) | `def NecessaryConstitutiveNormativity (World : Type) : Prop` | {Means, Subject}  |
-| `ObjectiveValue` | structure | [L54](formal/Logos/ConstitutiveNormativeFreeWill.lean#L54) | `structure ObjectiveValue (World : Type) (_w : World) where` | —  |
-| `T1_constitutive_normative_truth_implies_agency` | theorem | [L114](formal/Logos/ConstitutiveNormativeFreeWill.lean#L114) | `theorem T1_constitutive_normative_truth_implies_agency {World : Type} (cnt : Con` | {Means, Subject}  |
-| `T2_constitutive_normative_truth_implies_alternative` | theorem | [L125](formal/Logos/ConstitutiveNormativeFreeWill.lean#L125) | `theorem T2_constitutive_normative_truth_implies_alternative {World : Type} (cnt ` | {Means, Subject}  |
-| `T3_constitutive_normative_truth_implies_chooses` | theorem | [L136](formal/Logos/ConstitutiveNormativeFreeWill.lean#L136) | `theorem T3_constitutive_normative_truth_implies_chooses {World : Type} (cnt : Co` | {Means, Subject}  |
-| `T4_constitutive_normative_truth_implies_free_will` | theorem | [L144](formal/Logos/ConstitutiveNormativeFreeWill.lean#L144) | `theorem T4_constitutive_normative_truth_implies_free_will {World : Type} (cnt : ` | {Means, Subject}  |
-| `T5_necessary_constitutive_normativity_implies_necessary_free_will` | theorem | [L158](formal/Logos/ConstitutiveNormativeFreeWill.lean#L158) | `theorem T5_necessary_constitutive_normativity_implies_necessary_free_will {World` | {Means, Subject}  |
-| `T6_necessary_deontic_truth_implies_necessary_genuine_free_subject` | theorem | [L204](formal/Logos/ConstitutiveNormativeFreeWill.lean#L204) | `theorem T6_necessary_deontic_truth_implies_necessary_genuine_free_subject {World` | {Means, Subject}  |
-| `T7_necessary_deontic_truth_implies_not_d3` | theorem | [L218](formal/Logos/ConstitutiveNormativeFreeWill.lean#L218) | `theorem T7_necessary_deontic_truth_implies_not_d3 {World PriorState FutureState ` | {Means, Subject}  |
-| `cm22_impersonal_world_satisfies_objective_value` | def | [L91](formal/Logos/ConstitutiveNormativeFreeWill.lean#L91) | `def cm22_impersonal_world_satisfies_objective_value {World : Type} (w : World) :` | {}  |
-| `cm22_impersonal_world_strictly_fails_constitutive_normativity` | theorem | [L95](formal/Logos/ConstitutiveNormativeFreeWill.lean#L95) | `theorem cm22_impersonal_world_strictly_fails_constitutive_normativity {World : T` | {Means, Subject}  |
-| `constitutive_deontic_truth_implies_genuine_chooses` | theorem | [L193](formal/Logos/ConstitutiveNormativeFreeWill.lean#L193) | `theorem constitutive_deontic_truth_implies_genuine_chooses {World PriorState Fut` | {Means, Subject}  |
-| `hostile_model_outcome_1_compatibilist_satisfies_core_freedom_under_d3` | theorem | [L245](formal/Logos/ConstitutiveNormativeFreeWill.lean#L245) | `theorem hostile_model_outcome_1_compatibilist_satisfies_core_freedom_under_d3 {W` | {Means, Subject}  |
-| `hostile_model_outcome_2_d3_contradicts_constitutive_deontic_truth` | theorem | [L257](formal/Logos/ConstitutiveNormativeFreeWill.lean#L257) | `theorem hostile_model_outcome_2_d3_contradicts_constitutive_deontic_truth {World` | {Means, Subject}  |
-| `retorsion_establishes_normative_truth_exists` | theorem | [L279](formal/Logos/ConstitutiveNormativeFreeWill.lean#L279) | `theorem retorsion_establishes_normative_truth_exists (ctx : Logos.NormativeTruth` | {CL}  |
-| `retorsion_pragmatic_address_excludes_impersonal_model` | theorem | [L284](formal/Logos/ConstitutiveNormativeFreeWill.lean#L284) | `theorem retorsion_pragmatic_address_excludes_impersonal_model (dom : StrongNorma` | {Subject}  |
+| `ConstitutiveDeonticTruth` | structure | [L3197](formal/Logos/ActionAndNormativeChoice.lean#L3197) | `structure ConstitutiveDeonticTruth` | —  |
+| `ConstitutiveNormativeTruth` | structure | [L3083](formal/Logos/ActionAndNormativeChoice.lean#L3083) | `structure ConstitutiveNormativeTruth (World : Type) where` | —  |
+| `DescriptiveTruth` | def | [L3065](formal/Logos/ActionAndNormativeChoice.lean#L3065) | `def DescriptiveTruth (p : Prop) : Prop` | {}  |
+| `NecessaryConstitutiveNormativity` | def | [L3168](formal/Logos/ActionAndNormativeChoice.lean#L3168) | `def NecessaryConstitutiveNormativity (World : Type) : Prop` | {Means, Subject}  |
+| `ObjectiveValue` | structure | [L3070](formal/Logos/ActionAndNormativeChoice.lean#L3070) | `structure ObjectiveValue (World : Type) (_w : World) where` | —  |
+| `T1_constitutive_normative_truth_implies_agency` | theorem | [L3130](formal/Logos/ActionAndNormativeChoice.lean#L3130) | `theorem T1_constitutive_normative_truth_implies_agency {World : Type} (cnt : Con` | {Means, Subject}  |
+| `T2_constitutive_normative_truth_implies_alternative` | theorem | [L3141](formal/Logos/ActionAndNormativeChoice.lean#L3141) | `theorem T2_constitutive_normative_truth_implies_alternative {World : Type} (cnt ` | {Means, Subject}  |
+| `T3_constitutive_normative_truth_implies_chooses` | theorem | [L3152](formal/Logos/ActionAndNormativeChoice.lean#L3152) | `theorem T3_constitutive_normative_truth_implies_chooses {World : Type} (cnt : Co` | {Means, Subject}  |
+| `T4_constitutive_normative_truth_implies_free_will` | theorem | [L3160](formal/Logos/ActionAndNormativeChoice.lean#L3160) | `theorem T4_constitutive_normative_truth_implies_free_will {World : Type} (cnt : ` | {Means, Subject}  |
+| `T5_necessary_constitutive_normativity_implies_necessary_free_will` | theorem | [L3174](formal/Logos/ActionAndNormativeChoice.lean#L3174) | `theorem T5_necessary_constitutive_normativity_implies_necessary_free_will {World` | {Means, Subject}  |
+| `T6_necessary_deontic_truth_implies_necessary_genuine_free_subject` | theorem | [L3220](formal/Logos/ActionAndNormativeChoice.lean#L3220) | `theorem T6_necessary_deontic_truth_implies_necessary_genuine_free_subject {World` | {Means, Subject}  |
+| `T7_necessary_deontic_truth_implies_not_d3` | theorem | [L3234](formal/Logos/ActionAndNormativeChoice.lean#L3234) | `theorem T7_necessary_deontic_truth_implies_not_d3 {World PriorState FutureState ` | {Means, Subject}  |
+| `cm22_impersonal_world_satisfies_objective_value` | def | [L3107](formal/Logos/ActionAndNormativeChoice.lean#L3107) | `def cm22_impersonal_world_satisfies_objective_value {World : Type} (w : World) :` | {}  |
+| `cm22_impersonal_world_strictly_fails_constitutive_normativity` | theorem | [L3111](formal/Logos/ActionAndNormativeChoice.lean#L3111) | `theorem cm22_impersonal_world_strictly_fails_constitutive_normativity {World : T` | {Means, Subject}  |
+| `constitutive_deontic_truth_implies_genuine_chooses` | theorem | [L3209](formal/Logos/ActionAndNormativeChoice.lean#L3209) | `theorem constitutive_deontic_truth_implies_genuine_chooses {World PriorState Fut` | {Means, Subject}  |
+| `hostile_model_outcome_1_compatibilist_satisfies_core_freedom_under_d3` | theorem | [L3261](formal/Logos/ActionAndNormativeChoice.lean#L3261) | `theorem hostile_model_outcome_1_compatibilist_satisfies_core_freedom_under_d3 {W` | {Means, Subject}  |
+| `hostile_model_outcome_2_d3_contradicts_constitutive_deontic_truth` | theorem | [L3273](formal/Logos/ActionAndNormativeChoice.lean#L3273) | `theorem hostile_model_outcome_2_d3_contradicts_constitutive_deontic_truth {World` | {Means, Subject}  |
+| `retorsion_establishes_normative_truth_exists` | theorem | [L3295](formal/Logos/ActionAndNormativeChoice.lean#L3295) | `theorem retorsion_establishes_normative_truth_exists (ctx : Logos.NormativeTruth` | {CL}  |
+| `retorsion_pragmatic_address_excludes_impersonal_model` | theorem | [L3300](formal/Logos/ActionAndNormativeChoice.lean#L3300) | `theorem retorsion_pragmatic_address_excludes_impersonal_model (dom : StrongNorma` | {Subject}  |
 
 ### `Logos.ContextualDevelopment`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `ConceptThreshold` | inductive | [L207](formal/Logos/ContextualDevelopment.lean#L207) | `inductive ConceptThreshold` | —  |
-| `CrossContextDevelopment` | def | [L175](formal/Logos/ContextualDevelopment.lean#L175) | `def CrossContextDevelopment (c1 c2 : DeductiveContext) (GammaCore : Prop) (Devel` | {}  |
-| `DeductiveContext` | inductive | [L54](formal/Logos/ContextualDevelopment.lean#L54) | `inductive DeductiveContext` | —  |
-| `EntryLayerOf` | def | [L216](formal/Logos/ContextualDevelopment.lean#L216) | `def EntryLayerOf (th : ConceptThreshold) : DependencyLayer` | {}  |
-| `ProofDevelopment` | def | [L65](formal/Logos/ContextualDevelopment.lean#L65) | `def ProofDevelopment (c : DeductiveContext) (GammaCore : Prop) (DevelopsAt : Ded` | {}  |
-| `ProofPerformance` | def | [L61](formal/Logos/ContextualDevelopment.lean#L61) | `def ProofPerformance (Subject : Type) (s : Subject) (c : DeductiveContext) (Perf` | {}  |
-| `cross_context_development_implies_core` | theorem | [L182](formal/Logos/ContextualDevelopment.lean#L182) | `theorem cross_context_development_implies_core (c1 c2 : DeductiveContext) (Gamma` | {}  |
-| `development_not_entails_freewill` | theorem | [L82](formal/Logos/ContextualDevelopment.lean#L82) | `theorem development_not_entails_freewill : ∃ (Subject : Type) (s : Subject) (c :` | {}  |
-| `distinct_contexts_same_subject` | theorem | [L100](formal/Logos/ContextualDevelopment.lean#L100) | `theorem distinct_contexts_same_subject : ∃ (Subject : Type) (s : Subject) (c1 c2` | {}  |
-| `model_M_D_consistent` | theorem | [L122](formal/Logos/ContextualDevelopment.lean#L122) | `theorem model_M_D_consistent : ∃ (c : DeductiveContext) (Subject : Type) (s : Su` | {}  |
-| `model_M_F_consistent` | theorem | [L144](formal/Logos/ContextualDevelopment.lean#L144) | `theorem model_M_F_consistent : ∃ (c : DeductiveContext) (Subject : Type) (s : Su` | {}  |
-| `model_M_N_consistent` | theorem | [L133](formal/Logos/ContextualDevelopment.lean#L133) | `theorem model_M_N_consistent : ∃ (c : DeductiveContext) (Subject : Type) (s : Su` | {}  |
-| `model_M_S_consistent` | theorem | [L155](formal/Logos/ContextualDevelopment.lean#L155) | `theorem model_M_S_consistent : ∃ (c : DeductiveContext) (Subject : Type) (HasAge` | {}  |
-| `performance_not_entails_freewill` | theorem | [L74](formal/Logos/ContextualDevelopment.lean#L74) | `theorem performance_not_entails_freewill : ∃ (Subject : Type) (s : Subject) (c :` | {}  |
-| `presence_not_entails_free_selection` | theorem | [L90](formal/Logos/ContextualDevelopment.lean#L90) | `theorem presence_not_entails_free_selection : ∃ (Subject : Type) (s : Subject) (` | {}  |
-| `threshold_audit_correct` | theorem | [L228](formal/Logos/ContextualDevelopment.lean#L228) | `theorem threshold_audit_correct : CoreGammaLayer (EntryLayerOf ConceptThreshold.` | {}  |
+| `ConceptThreshold` | inductive | [L314](formal/Logos/AgencyAuditsAndFrontiers.lean#L314) | `inductive ConceptThreshold` | —  |
+| `CrossContextDevelopment` | def | [L282](formal/Logos/AgencyAuditsAndFrontiers.lean#L282) | `def CrossContextDevelopment (c1 c2 : DeductiveContext) (GammaCore : Prop) (Devel` | {}  |
+| `DeductiveContext` | inductive | [L161](formal/Logos/AgencyAuditsAndFrontiers.lean#L161) | `inductive DeductiveContext` | —  |
+| `EntryLayerOf` | def | [L323](formal/Logos/AgencyAuditsAndFrontiers.lean#L323) | `def EntryLayerOf (th : ConceptThreshold) : DependencyLayer` | {}  |
+| `ProofDevelopment` | def | [L172](formal/Logos/AgencyAuditsAndFrontiers.lean#L172) | `def ProofDevelopment (c : DeductiveContext) (GammaCore : Prop) (DevelopsAt : Ded` | {}  |
+| `ProofPerformance` | def | [L168](formal/Logos/AgencyAuditsAndFrontiers.lean#L168) | `def ProofPerformance (Subject : Type) (s : Subject) (c : DeductiveContext) (Perf` | {}  |
+| `cross_context_development_implies_core` | theorem | [L289](formal/Logos/AgencyAuditsAndFrontiers.lean#L289) | `theorem cross_context_development_implies_core (c1 c2 : DeductiveContext) (Gamma` | {}  |
+| `development_not_entails_freewill` | theorem | [L189](formal/Logos/AgencyAuditsAndFrontiers.lean#L189) | `theorem development_not_entails_freewill : ∃ (Subject : Type) (s : Subject) (c :` | {}  |
+| `distinct_contexts_same_subject` | theorem | [L207](formal/Logos/AgencyAuditsAndFrontiers.lean#L207) | `theorem distinct_contexts_same_subject : ∃ (Subject : Type) (s : Subject) (c1 c2` | {}  |
+| `model_M_D_consistent` | theorem | [L229](formal/Logos/AgencyAuditsAndFrontiers.lean#L229) | `theorem model_M_D_consistent : ∃ (c : DeductiveContext) (Subject : Type) (s : Su` | {}  |
+| `model_M_F_consistent` | theorem | [L251](formal/Logos/AgencyAuditsAndFrontiers.lean#L251) | `theorem model_M_F_consistent : ∃ (c : DeductiveContext) (Subject : Type) (s : Su` | {}  |
+| `model_M_N_consistent` | theorem | [L240](formal/Logos/AgencyAuditsAndFrontiers.lean#L240) | `theorem model_M_N_consistent : ∃ (c : DeductiveContext) (Subject : Type) (s : Su` | {}  |
+| `model_M_S_consistent` | theorem | [L262](formal/Logos/AgencyAuditsAndFrontiers.lean#L262) | `theorem model_M_S_consistent : ∃ (c : DeductiveContext) (Subject : Type) (HasAge` | {}  |
+| `performance_not_entails_freewill` | theorem | [L181](formal/Logos/AgencyAuditsAndFrontiers.lean#L181) | `theorem performance_not_entails_freewill : ∃ (Subject : Type) (s : Subject) (c :` | {}  |
+| `presence_not_entails_free_selection` | theorem | [L197](formal/Logos/AgencyAuditsAndFrontiers.lean#L197) | `theorem presence_not_entails_free_selection : ∃ (Subject : Type) (s : Subject) (` | {}  |
+| `threshold_audit_correct` | theorem | [L335](formal/Logos/AgencyAuditsAndFrontiers.lean#L335) | `theorem threshold_audit_correct : CoreGammaLayer (EntryLayerOf ConceptThreshold.` | {}  |
 
 ### `Logos.Core`
 
@@ -2291,128 +2269,128 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `Alt1_Outcome` | def | [L104](formal/Logos/DeepModalFrontier.lean#L104) | `def Alt1_Outcome (World : Type) (OutcomeAt : World → Prop) (v u : World) : Prop` | {}  |
-| `Alt2_Action` | def | [L107](formal/Logos/DeepModalFrontier.lean#L107) | `def Alt2_Action (World Subject : Type) (ActAt : World → Subject → Prop → Prop) (` | {}  |
-| `Alt3_Volition` | def | [L111](formal/Logos/DeepModalFrontier.lean#L111) | `def Alt3_Volition (World Subject : Type) (WillsAt : World → Subject → Prop → Pro` | {}  |
-| `Alt4_Counterfactual` | def | [L115](formal/Logos/DeepModalFrontier.lean#L115) | `def Alt4_Counterfactual (World Subject : Type) (ReasonsAt : World → Subject → Pr` | {}  |
-| `Alt5_Agentive` | def | [L121](formal/Logos/DeepModalFrontier.lean#L121) | `def Alt5_Agentive (World Subject : Type) (IntentionalAt : World → Subject → Prop` | {}  |
-| `Alt6_AgentCausal` | def | [L126](formal/Logos/DeepModalFrontier.lean#L126) | `def Alt6_AgentCausal (World Entity Subject : Type) (ExtCirc : World → Prop) (Rea` | {}  |
-| `C0_not_entails_C1` | theorem | [L182](formal/Logos/DeepModalFrontier.lean#L182) | `theorem C0_not_entails_C1 : ∃ (World Subject : Type) (ReasonsAt : World → Subjec` | {CL}  |
-| `C1_not_entails_C2` | theorem | [L202](formal/Logos/DeepModalFrontier.lean#L202) | `theorem C1_not_entails_C2 : ∃ (World Subject : Type) (ReasonsAt : World → Subjec` | {}  |
-| `ExplainsChoiceNonDetermining` | def | [L349](formal/Logos/DeepModalFrontier.lean#L349) | `def ExplainsChoiceNonDetermining (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
-| `Level_C0_PrimitiveVariation` | def | [L149](formal/Logos/DeepModalFrontier.lean#L149) | `def Level_C0_PrimitiveVariation (World Subject : Type) (WillsAt : World → Subjec` | {}  |
-| `Level_C1_NonDeterministic` | def | [L153](formal/Logos/DeepModalFrontier.lean#L153) | `def Level_C1_NonDeterministic (World Subject : Type) (ReasonsAt : World → Subjec` | {}  |
-| `Level_C2_AgentAttributable` | def | [L158](formal/Logos/DeepModalFrontier.lean#L158) | `def Level_C2_AgentAttributable (World Subject : Type) (SettlesAt : World → Subje` | {}  |
-| `Level_C3_AgentCausal` | def | [L163](formal/Logos/DeepModalFrontier.lean#L163) | `def Level_C3_AgentCausal (World Entity Subject : Type) (ExtCirc : World → Prop) ` | {}  |
-| `Level_C4_ExplanatoryAgentCausal` | def | [L171](formal/Logos/DeepModalFrontier.lean#L171) | `def Level_C4_ExplanatoryAgentCausal (World Entity Subject : Type) (ExtCirc : Wor` | {}  |
-| `ModalDifferencePrimitive` | structure | [L231](formal/Logos/DeepModalFrontier.lean#L231) | `structure ModalDifferencePrimitive (World Subject : Type)` | —  |
-| `ModalFreeWillRigid` | def | [L62](formal/Logos/DeepModalFrontier.lean#L62) | `def ModalFreeWillRigid (World Subject : Type) (frame : KripkeFrame World) (actua` | {}  |
-| `NonDeterministicVolition` | def | [L57](formal/Logos/DeepModalFrontier.lean#L57) | `def NonDeterministicVolition (World Subject : Type) (ReasonsAt : World → Subject` | {}  |
-| `Omniscience_AllTruths` | def | [L313](formal/Logos/DeepModalFrontier.lean#L313) | `def Omniscience_AllTruths (World Subject : Type) (KnowsAt : World → Subject → Pr` | {}  |
-| `Omniscience_Counterfactuals` | def | [L317](formal/Logos/DeepModalFrontier.lean#L317) | `def Omniscience_Counterfactuals (World Subject : Type) (KnowsCounterfactualAt : ` | {}  |
-| `PSR_Level3_ActReason` | def | [L332](formal/Logos/DeepModalFrontier.lean#L332) | `def PSR_Level3_ActReason (World Subject : Type) (ReasonsAt : World → Subject → P` | {}  |
-| `PSR_Level4_VolitionReason` | def | [L336](formal/Logos/DeepModalFrontier.lean#L336) | `def PSR_Level4_VolitionReason (World Subject : Type) (ReasonsAt : World → Subjec` | {}  |
-| `PSR_Level6_DeterminingPSR` | def | [L340](formal/Logos/DeepModalFrontier.lean#L340) | `def PSR_Level6_DeterminingPSR (World Subject : Type) (ReasonsAt : World → Subjec` | {}  |
-| `Rationality_R0` | def | [L272](formal/Logos/DeepModalFrontier.lean#L272) | `def Rationality_R0 (World Subject : Type) (ActAt : World → Subject → Prop → Prop` | {}  |
-| `Rationality_R1` | def | [L275](formal/Logos/DeepModalFrontier.lean#L275) | `def Rationality_R1 (World Subject : Type) (ReasonsAt : World → Subject → Prop) (` | {}  |
-| `Rationality_R4_Deliberative` | def | [L279](formal/Logos/DeepModalFrontier.lean#L279) | `def Rationality_R4_Deliberative (World Subject : Type) (ReasonsAt : World → Subj` | {}  |
-| `Rationality_R5_OptimificCompulsion` | def | [L283](formal/Logos/DeepModalFrontier.lean#L283) | `def Rationality_R5_OptimificCompulsion (World Subject : Type) (BestReasonAt : Wo` | {}  |
-| `S5UniversalFrame` | def | [L48](formal/Logos/DeepModalFrontier.lean#L48) | `def S5UniversalFrame (World : Type) : KripkeFrame World` | {}  |
-| `UniqueBestAction` | def | [L292](formal/Logos/DeepModalFrontier.lean#L292) | `def UniqueBestAction (World Subject : Type) (BestReasonAt : World → Subject → Pr` | {}  |
-| `modal_volition_iff_primitive_decomposition` | theorem | [L244](formal/Logos/DeepModalFrontier.lean#L244) | `theorem modal_volition_iff_primitive_decomposition (World Subject : Type) (frame` | {}  |
-| `model_MC31_consistent` | theorem | [L386](formal/Logos/DeepModalFrontier.lean#L386) | `theorem model_MC31_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {}  |
-| `model_MC32_consistent` | theorem | [L402](formal/Logos/DeepModalFrontier.lean#L402) | `theorem model_MC32_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {}  |
-| `model_MC33_consistent` | theorem | [L418](formal/Logos/DeepModalFrontier.lean#L418) | `theorem model_MC33_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {}  |
-| `model_MC34_consistent` | theorem | [L434](formal/Logos/DeepModalFrontier.lean#L434) | `theorem model_MC34_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {}  |
-| `model_MC35_consistent` | theorem | [L447](formal/Logos/DeepModalFrontier.lean#L447) | `theorem model_MC35_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
-| `model_MC36_consistent` | theorem | [L463](formal/Logos/DeepModalFrontier.lean#L463) | `theorem model_MC36_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
-| `model_MC37_consistent` | theorem | [L481](formal/Logos/DeepModalFrontier.lean#L481) | `theorem model_MC37_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {CL}  |
-| `model_MC38_consistent` | theorem | [L506](formal/Logos/DeepModalFrontier.lean#L506) | `theorem model_MC38_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {}  |
-| `model_MC39_consistent` | theorem | [L518](formal/Logos/DeepModalFrontier.lean#L518) | `theorem model_MC39_consistent : ∃ (World Subject : Type) (WillsAt : World → Subj` | {}  |
-| `model_MC40_consistent` | theorem | [L526](formal/Logos/DeepModalFrontier.lean#L526) | `theorem model_MC40_consistent : ∃ (World Entity Subject : Type) (ExtCirc : World` | {}  |
-| `model_MC41_consistent` | theorem | [L545](formal/Logos/DeepModalFrontier.lean#L545) | `theorem model_MC41_consistent : ∃ (World Subject : Type) (QualStateAt : World → ` | {}  |
-| `model_MC42_consistent` | theorem | [L557](formal/Logos/DeepModalFrontier.lean#L557) | `theorem model_MC42_consistent : ∃ (World Entity : Type) (RelToAllAt : World → En` | {}  |
-| `model_MC43_consistent` | theorem | [L569](formal/Logos/DeepModalFrontier.lean#L569) | `theorem model_MC43_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {CL}  |
-| `model_MC44_consistent` | theorem | [L595](formal/Logos/DeepModalFrontier.lean#L595) | `theorem model_MC44_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
-| `model_MC45_consistent` | theorem | [L621](formal/Logos/DeepModalFrontier.lean#L621) | `theorem model_MC45_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
-| `nondeterministic_not_entails_modal_freewill` | theorem | [L71](formal/Logos/DeepModalFrontier.lean#L71) | `theorem nondeterministic_not_entails_modal_freewill : ∃ (World Subject : Type) (` | {}  |
-| `s5_frame_is_equivalence` | theorem | [L51](formal/Logos/DeepModalFrontier.lean#L51) | `theorem s5_frame_is_equivalence (World : Type) : (∀ w : World, (S5UniversalFrame` | {}  |
-| `third_regime_consistent` | theorem | [L362](formal/Logos/DeepModalFrontier.lean#L362) | `theorem third_regime_consistent : ∃ (World Subject : Type) (frame : KripkeFrame ` | {}  |
-| `unique_best_action_optimific_rationality_modal_collapse` | theorem | [L297](formal/Logos/DeepModalFrontier.lean#L297) | `theorem unique_best_action_optimific_rationality_modal_collapse (World Subject :` | {}  |
+| `Alt1_Outcome` | def | [L2657](formal/Logos/ModalCreationFrontiers.lean#L2657) | `def Alt1_Outcome (World : Type) (OutcomeAt : World → Prop) (v u : World) : Prop` | {}  |
+| `Alt2_Action` | def | [L2660](formal/Logos/ModalCreationFrontiers.lean#L2660) | `def Alt2_Action (World Subject : Type) (ActAt : World → Subject → Prop → Prop) (` | {}  |
+| `Alt3_Volition` | def | [L2664](formal/Logos/ModalCreationFrontiers.lean#L2664) | `def Alt3_Volition (World Subject : Type) (WillsAt : World → Subject → Prop → Pro` | {}  |
+| `Alt4_Counterfactual` | def | [L2668](formal/Logos/ModalCreationFrontiers.lean#L2668) | `def Alt4_Counterfactual (World Subject : Type) (ReasonsAt : World → Subject → Pr` | {}  |
+| `Alt5_Agentive` | def | [L2674](formal/Logos/ModalCreationFrontiers.lean#L2674) | `def Alt5_Agentive (World Subject : Type) (IntentionalAt : World → Subject → Prop` | {}  |
+| `Alt6_AgentCausal` | def | [L2679](formal/Logos/ModalCreationFrontiers.lean#L2679) | `def Alt6_AgentCausal (World Entity Subject : Type) (ExtCirc : World → Prop) (Rea` | {}  |
+| `C0_not_entails_C1` | theorem | [L2735](formal/Logos/ModalCreationFrontiers.lean#L2735) | `theorem C0_not_entails_C1 : ∃ (World Subject : Type) (ReasonsAt : World → Subjec` | {CL}  |
+| `C1_not_entails_C2` | theorem | [L2755](formal/Logos/ModalCreationFrontiers.lean#L2755) | `theorem C1_not_entails_C2 : ∃ (World Subject : Type) (ReasonsAt : World → Subjec` | {}  |
+| `ExplainsChoiceNonDetermining` | def | [L2902](formal/Logos/ModalCreationFrontiers.lean#L2902) | `def ExplainsChoiceNonDetermining (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
+| `Level_C0_PrimitiveVariation` | def | [L2702](formal/Logos/ModalCreationFrontiers.lean#L2702) | `def Level_C0_PrimitiveVariation (World Subject : Type) (WillsAt : World → Subjec` | {}  |
+| `Level_C1_NonDeterministic` | def | [L2706](formal/Logos/ModalCreationFrontiers.lean#L2706) | `def Level_C1_NonDeterministic (World Subject : Type) (ReasonsAt : World → Subjec` | {}  |
+| `Level_C2_AgentAttributable` | def | [L2711](formal/Logos/ModalCreationFrontiers.lean#L2711) | `def Level_C2_AgentAttributable (World Subject : Type) (SettlesAt : World → Subje` | {}  |
+| `Level_C3_AgentCausal` | def | [L2716](formal/Logos/ModalCreationFrontiers.lean#L2716) | `def Level_C3_AgentCausal (World Entity Subject : Type) (ExtCirc : World → Prop) ` | {}  |
+| `Level_C4_ExplanatoryAgentCausal` | def | [L2724](formal/Logos/ModalCreationFrontiers.lean#L2724) | `def Level_C4_ExplanatoryAgentCausal (World Entity Subject : Type) (ExtCirc : Wor` | {}  |
+| `ModalDifferencePrimitive` | structure | [L2784](formal/Logos/ModalCreationFrontiers.lean#L2784) | `structure ModalDifferencePrimitive (World Subject : Type)` | —  |
+| `ModalFreeWillRigid` | def | [L2615](formal/Logos/ModalCreationFrontiers.lean#L2615) | `def ModalFreeWillRigid (World Subject : Type) (frame : KripkeFrame World) (actua` | {}  |
+| `NonDeterministicVolition` | def | [L2610](formal/Logos/ModalCreationFrontiers.lean#L2610) | `def NonDeterministicVolition (World Subject : Type) (ReasonsAt : World → Subject` | {}  |
+| `Omniscience_AllTruths` | def | [L2866](formal/Logos/ModalCreationFrontiers.lean#L2866) | `def Omniscience_AllTruths (World Subject : Type) (KnowsAt : World → Subject → Pr` | {}  |
+| `Omniscience_Counterfactuals` | def | [L2870](formal/Logos/ModalCreationFrontiers.lean#L2870) | `def Omniscience_Counterfactuals (World Subject : Type) (KnowsCounterfactualAt : ` | {}  |
+| `PSR_Level3_ActReason` | def | [L2885](formal/Logos/ModalCreationFrontiers.lean#L2885) | `def PSR_Level3_ActReason (World Subject : Type) (ReasonsAt : World → Subject → P` | {}  |
+| `PSR_Level4_VolitionReason` | def | [L2889](formal/Logos/ModalCreationFrontiers.lean#L2889) | `def PSR_Level4_VolitionReason (World Subject : Type) (ReasonsAt : World → Subjec` | {}  |
+| `PSR_Level6_DeterminingPSR` | def | [L2893](formal/Logos/ModalCreationFrontiers.lean#L2893) | `def PSR_Level6_DeterminingPSR (World Subject : Type) (ReasonsAt : World → Subjec` | {}  |
+| `Rationality_R0` | def | [L2825](formal/Logos/ModalCreationFrontiers.lean#L2825) | `def Rationality_R0 (World Subject : Type) (ActAt : World → Subject → Prop → Prop` | {}  |
+| `Rationality_R1` | def | [L2828](formal/Logos/ModalCreationFrontiers.lean#L2828) | `def Rationality_R1 (World Subject : Type) (ReasonsAt : World → Subject → Prop) (` | {}  |
+| `Rationality_R4_Deliberative` | def | [L2832](formal/Logos/ModalCreationFrontiers.lean#L2832) | `def Rationality_R4_Deliberative (World Subject : Type) (ReasonsAt : World → Subj` | {}  |
+| `Rationality_R5_OptimificCompulsion` | def | [L2836](formal/Logos/ModalCreationFrontiers.lean#L2836) | `def Rationality_R5_OptimificCompulsion (World Subject : Type) (BestReasonAt : Wo` | {}  |
+| `S5UniversalFrame` | def | [L2601](formal/Logos/ModalCreationFrontiers.lean#L2601) | `def S5UniversalFrame (World : Type) : KripkeFrame World` | {}  |
+| `UniqueBestAction` | def | [L2845](formal/Logos/ModalCreationFrontiers.lean#L2845) | `def UniqueBestAction (World Subject : Type) (BestReasonAt : World → Subject → Pr` | {}  |
+| `modal_volition_iff_primitive_decomposition` | theorem | [L2797](formal/Logos/ModalCreationFrontiers.lean#L2797) | `theorem modal_volition_iff_primitive_decomposition (World Subject : Type) (frame` | {}  |
+| `model_MC31_consistent` | theorem | [L2939](formal/Logos/ModalCreationFrontiers.lean#L2939) | `theorem model_MC31_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {}  |
+| `model_MC32_consistent` | theorem | [L2955](formal/Logos/ModalCreationFrontiers.lean#L2955) | `theorem model_MC32_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {}  |
+| `model_MC33_consistent` | theorem | [L2971](formal/Logos/ModalCreationFrontiers.lean#L2971) | `theorem model_MC33_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {}  |
+| `model_MC34_consistent` | theorem | [L2987](formal/Logos/ModalCreationFrontiers.lean#L2987) | `theorem model_MC34_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {}  |
+| `model_MC35_consistent` | theorem | [L3000](formal/Logos/ModalCreationFrontiers.lean#L3000) | `theorem model_MC35_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
+| `model_MC36_consistent` | theorem | [L3016](formal/Logos/ModalCreationFrontiers.lean#L3016) | `theorem model_MC36_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
+| `model_MC37_consistent` | theorem | [L3034](formal/Logos/ModalCreationFrontiers.lean#L3034) | `theorem model_MC37_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {CL}  |
+| `model_MC38_consistent` | theorem | [L3059](formal/Logos/ModalCreationFrontiers.lean#L3059) | `theorem model_MC38_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {}  |
+| `model_MC39_consistent` | theorem | [L3071](formal/Logos/ModalCreationFrontiers.lean#L3071) | `theorem model_MC39_consistent : ∃ (World Subject : Type) (WillsAt : World → Subj` | {}  |
+| `model_MC40_consistent` | theorem | [L3079](formal/Logos/ModalCreationFrontiers.lean#L3079) | `theorem model_MC40_consistent : ∃ (World Entity Subject : Type) (ExtCirc : World` | {}  |
+| `model_MC41_consistent` | theorem | [L3098](formal/Logos/ModalCreationFrontiers.lean#L3098) | `theorem model_MC41_consistent : ∃ (World Subject : Type) (QualStateAt : World → ` | {}  |
+| `model_MC42_consistent` | theorem | [L3110](formal/Logos/ModalCreationFrontiers.lean#L3110) | `theorem model_MC42_consistent : ∃ (World Entity : Type) (RelToAllAt : World → En` | {}  |
+| `model_MC43_consistent` | theorem | [L3122](formal/Logos/ModalCreationFrontiers.lean#L3122) | `theorem model_MC43_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {CL}  |
+| `model_MC44_consistent` | theorem | [L3148](formal/Logos/ModalCreationFrontiers.lean#L3148) | `theorem model_MC44_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
+| `model_MC45_consistent` | theorem | [L3174](formal/Logos/ModalCreationFrontiers.lean#L3174) | `theorem model_MC45_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
+| `nondeterministic_not_entails_modal_freewill` | theorem | [L2624](formal/Logos/ModalCreationFrontiers.lean#L2624) | `theorem nondeterministic_not_entails_modal_freewill : ∃ (World Subject : Type) (` | {}  |
+| `s5_frame_is_equivalence` | theorem | [L2604](formal/Logos/ModalCreationFrontiers.lean#L2604) | `theorem s5_frame_is_equivalence (World : Type) : (∀ w : World, (S5UniversalFrame` | {}  |
+| `third_regime_consistent` | theorem | [L2915](formal/Logos/ModalCreationFrontiers.lean#L2915) | `theorem third_regime_consistent : ∃ (World Subject : Type) (frame : KripkeFrame ` | {}  |
+| `unique_best_action_optimific_rationality_modal_collapse` | theorem | [L2850](formal/Logos/ModalCreationFrontiers.lean#L2850) | `theorem unique_best_action_optimific_rationality_modal_collapse (World Subject :` | {}  |
 
 ### `Logos.DefinitiveAgencyFrontier`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `AgentCausalFreeWill` | def | [L546](formal/Logos/DefinitiveAgencyFrontier.lean#L546) | `def AgentCausalFreeWill {Subj : Type} (CS : FineCognitiveSubject Subj) (ActRel :` | {}  |
-| `AuthorialFreeWill` | def | [L541](formal/Logos/DefinitiveAgencyFrontier.lean#L541) | `def AuthorialFreeWill {Subj : Type} (CS : FineCognitiveSubject Subj) (SourceOf :` | {}  |
-| `CognitiveFreeWill` | def | [L528](formal/Logos/DefinitiveAgencyFrontier.lean#L528) | `def CognitiveFreeWill {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj) ` | {}  |
-| `CompatibilistFreeWill` | def | [L536](formal/Logos/DefinitiveAgencyFrontier.lean#L536) | `def CompatibilistFreeWill {Subj : Type} (CS : FineCognitiveSubject Subj) (ActRel` | {}  |
-| `LibertarianFreeWill` | def | [L551](formal/Logos/DefinitiveAgencyFrontier.lean#L551) | `def LibertarianFreeWill {Subj : Type} (CS : FineCognitiveSubject Subj) (ActRel :` | {}  |
-| `ReasonResponsive` | def | [L428](formal/Logos/DefinitiveAgencyFrontier.lean#L428) | `def ReasonResponsive (Subj : Type) (ChoiceRel : Subj → Prop → Prop) (ReasonFor :` | {}  |
-| `SincerityPrinciple` | def | [L195](formal/Logos/DefinitiveAgencyFrontier.lean#L195) | `def SincerityPrinciple (Subj : Type) (CS : FineCognitiveSubject Subj) (AssertsRe` | {}  |
-| `T_uncommit` | def | [L647](formal/Logos/DefinitiveAgencyFrontier.lean#L647) | `def T_uncommit {Subj : Type} (CS : FineCognitiveSubject Subj) : FineCognitiveSub` | {}  |
-| `VolitionalFreeWill` | def | [L532](formal/Logos/DefinitiveAgencyFrontier.lean#L532) | `def VolitionalFreeWill {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj)` | {}  |
-| `agent_causation_does_not_imply_reason_responsiveness` | theorem | [L447](formal/Logos/DefinitiveAgencyFrontier.lean#L447) | `theorem agent_causation_does_not_imply_reason_responsiveness : ∃ (Subj : Type) (` | {}  |
-| `collapse_invariance_pre_commitment` | theorem | [L669](formal/Logos/DefinitiveAgencyFrontier.lean#L669) | `theorem collapse_invariance_pre_commitment {Subj : Type} (CS : FineCognitiveSubj` | {}  |
-| `definitive_agency_frontier_synthesis` | theorem | [L753](formal/Logos/DefinitiveAgencyFrontier.lean#L753) | `theorem definitive_agency_frontier_synthesis {Subj : Type} (CS : FineCognitiveSu` | {}  |
-| `delusion_of_agency_separation` | theorem | [L414](formal/Logos/DefinitiveAgencyFrontier.lean#L414) | `theorem delusion_of_agency_separation : ∃ (Subj : Type) (SelfAttr : Subj → Prop ` | {}  |
-| `free_will_hierarchy_implications` | theorem | [L560](formal/Logos/DefinitiveAgencyFrontier.lean#L560) | `theorem free_will_hierarchy_implications {Subj : Type} (CS : FineCognitiveSubjec` | {}  |
-| `libertarian_freewill_fails_to_derive_substantive_person` | theorem | [L683](formal/Logos/DefinitiveAgencyFrontier.lean#L683) | `theorem libertarian_freewill_fails_to_derive_substantive_person : ∃ (Subj : Type` | {}  |
-| `model_A1_puppet` | theorem | [L326](formal/Logos/DefinitiveAgencyFrontier.lean#L326) | `theorem model_A1_puppet : ∃ (Subj : Type) (CS : FineCognitiveSubject Subj) (Sour` | {}  |
-| `model_A2_external_optimizer` | theorem | [L334](formal/Logos/DefinitiveAgencyFrontier.lean#L334) | `theorem model_A2_external_optimizer : ∃ (Subj : Type) (CS : FineCognitiveSubject` | {}  |
-| `model_A3_subpersonal_execution` | theorem | [L379](formal/Logos/DefinitiveAgencyFrontier.lean#L379) | `theorem model_A3_subpersonal_execution : ∃ (Subj : Type) (CS : FineCognitiveSubj` | {}  |
-| `model_A4_authorless_execution` | theorem | [L392](formal/Logos/DefinitiveAgencyFrontier.lean#L392) | `theorem model_A4_authorless_execution : ∃ (Subj : Type) (InitiatesRel : Subj → U` | {}  |
-| `model_A5_author_without_self_attribution` | theorem | [L404](formal/Logos/DefinitiveAgencyFrontier.lean#L404) | `theorem model_A5_author_without_self_attribution : ∃ (Subj : Type) (CS : FineCog` | {}  |
-| `model_AC1_deterministic_agent_causal` | theorem | [L461](formal/Logos/DefinitiveAgencyFrontier.lean#L461) | `theorem model_AC1_deterministic_agent_causal : ∃ (Subj : Type) (AgentDet : Subj ` | {}  |
-| `model_AC2_indeterministic_chance` | theorem | [L471](formal/Logos/DefinitiveAgencyFrontier.lean#L471) | `theorem model_AC2_indeterministic_chance : ∃ (Subj : Type) (AgentDet : Subj → Pr` | {}  |
-| `model_AC3_externally_determined` | theorem | [L482](formal/Logos/DefinitiveAgencyFrontier.lean#L482) | `theorem model_AC3_externally_determined : ∃ (Subj : Type) (AgentDet : Subj → Pro` | {}  |
-| `model_AC4_agent_causal_without_alternatives` | theorem | [L492](formal/Logos/DefinitiveAgencyFrontier.lean#L492) | `theorem model_AC4_agent_causal_without_alternatives : ∃ (Subj : Type) (AgentDet ` | {}  |
-| `model_AC5_full_libertarian` | theorem | [L508](formal/Logos/DefinitiveAgencyFrontier.lean#L508) | `theorem model_AC5_full_libertarian : ∃ (Subj : Type) (AgentDet : Subj → Prop → P` | {}  |
-| `model_C1_passive_truth_tracker` | theorem | [L69](formal/Logos/DefinitiveAgencyFrontier.lean#L69) | `theorem model_C1_passive_truth_tracker : ∃ (Subj : Type) (CS : FineCognitiveSubj` | {}  |
-| `model_C2_formal_evaluator` | theorem | [L83](formal/Logos/DefinitiveAgencyFrontier.lean#L83) | `theorem model_C2_formal_evaluator : ∃ (Subj : Type) (CS : FineCognitiveSubject S` | {}  |
-| `model_C3_suspended_judgment` | theorem | [L94](formal/Logos/DefinitiveAgencyFrontier.lean#L94) | `theorem model_C3_suspended_judgment : ∃ (Subj : Type) (CS : FineCognitiveSubject` | {}  |
-| `model_C4_assertion_without_commitment` | theorem | [L106](formal/Logos/DefinitiveAgencyFrontier.lean#L106) | `theorem model_C4_assertion_without_commitment : ∃ (Subj : Type) (CS : FineCognit` | {}  |
-| `model_C5_commitment_without_assertion` | theorem | [L132](formal/Logos/DefinitiveAgencyFrontier.lean#L132) | `theorem model_C5_commitment_without_assertion : ∃ (Subj : Type) (CS : FineCognit` | {}  |
-| `model_V1_pure_theoretician` | theorem | [L215](formal/Logos/DefinitiveAgencyFrontier.lean#L215) | `theorem model_V1_pure_theoretician : ∃ (Subj : Type) (CS : FineCognitiveSubject ` | {}  |
-| `model_V2_aim_without_deliberative_settlement` | theorem | [L224](formal/Logos/DefinitiveAgencyFrontier.lean#L224) | `theorem model_V2_aim_without_deliberative_settlement : ∃ (Subj : Type) (CS : Fin` | {}  |
-| `model_V3_commitment_to_unwanted_fact` | theorem | [L250](formal/Logos/DefinitiveAgencyFrontier.lean#L250) | `theorem model_V3_commitment_to_unwanted_fact : ∃ (Subj : Type) (CS : FineCogniti` | {}  |
-| `model_V4_external_objective` | theorem | [L259](formal/Logos/DefinitiveAgencyFrontier.lean#L259) | `theorem model_V4_external_objective : ∃ (Subj : Type) (CS : FineCognitiveSubject` | {}  |
-| `model_V5_spontaneous_aim` | theorem | [L269](formal/Logos/DefinitiveAgencyFrontier.lean#L269) | `theorem model_V5_spontaneous_aim : ∃ (Subj : Type) (CS : FineCognitiveSubject Su` | {}  |
-| `performative_datum_supplies_executive_initiation` | theorem | [L310](formal/Logos/DefinitiveAgencyFrontier.lean#L310) | `theorem performative_datum_supplies_executive_initiation {Subj : Type} (CS : Fin` | {}  |
-| `reason_responsiveness_compatible_with_determinism` | theorem | [L434](formal/Logos/DefinitiveAgencyFrontier.lean#L434) | `theorem reason_responsiveness_compatible_with_determinism : ∃ (Subj : Type) (Cho` | {}  |
-| `retorsion_denial_does_not_commit_to_content` | theorem | [L164](formal/Logos/DefinitiveAgencyFrontier.lean#L164) | `theorem retorsion_denial_does_not_commit_to_content : ∃ (Subj : Type) (CS : Fine` | {}  |
-| `sincerity_is_independent` | theorem | [L201](formal/Logos/DefinitiveAgencyFrontier.lean#L201) | `theorem sincerity_is_independent : ∃ (Subj : Type) (CS : FineCognitiveSubject Su` | {}  |
-| `standalone_volition_fails_to_derive_agency` | theorem | [L297](formal/Logos/DefinitiveAgencyFrontier.lean#L297) | `theorem standalone_volition_fails_to_derive_agency : ∃ (Subj : Type) (CS : FineC` | {}  |
-| `two_sided_independence_commitment` | theorem | [L589](formal/Logos/DefinitiveAgencyFrontier.lean#L589) | `theorem two_sided_independence_commitment : (∃ (Subj : Type) (CS : FineCognitive` | {}  |
-| `two_sided_independence_volition` | theorem | [L603](formal/Logos/DefinitiveAgencyFrontier.lean#L603) | `theorem two_sided_independence_volition : (∃ (Subj : Type) (CS : FineCognitiveSu` | {}  |
+| `AgentCausalFreeWill` | def | [L6471](formal/Logos/AgencyAuditsAndFrontiers.lean#L6471) | `def AgentCausalFreeWill {Subj : Type} (CS : FineCognitiveSubject Subj) (ActRel :` | {}  |
+| `AuthorialFreeWill` | def | [L6466](formal/Logos/AgencyAuditsAndFrontiers.lean#L6466) | `def AuthorialFreeWill {Subj : Type} (CS : FineCognitiveSubject Subj) (SourceOf :` | {}  |
+| `CognitiveFreeWill` | def | [L6453](formal/Logos/AgencyAuditsAndFrontiers.lean#L6453) | `def CognitiveFreeWill {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj) ` | {}  |
+| `CompatibilistFreeWill` | def | [L6461](formal/Logos/AgencyAuditsAndFrontiers.lean#L6461) | `def CompatibilistFreeWill {Subj : Type} (CS : FineCognitiveSubject Subj) (ActRel` | {}  |
+| `LibertarianFreeWill` | def | [L6476](formal/Logos/AgencyAuditsAndFrontiers.lean#L6476) | `def LibertarianFreeWill {Subj : Type} (CS : FineCognitiveSubject Subj) (ActRel :` | {}  |
+| `ReasonResponsive` | def | [L6353](formal/Logos/AgencyAuditsAndFrontiers.lean#L6353) | `def ReasonResponsive (Subj : Type) (ChoiceRel : Subj → Prop → Prop) (ReasonFor :` | {}  |
+| `SincerityPrinciple` | def | [L6120](formal/Logos/AgencyAuditsAndFrontiers.lean#L6120) | `def SincerityPrinciple (Subj : Type) (CS : FineCognitiveSubject Subj) (AssertsRe` | {}  |
+| `T_uncommit` | def | [L6572](formal/Logos/AgencyAuditsAndFrontiers.lean#L6572) | `def T_uncommit {Subj : Type} (CS : FineCognitiveSubject Subj) : FineCognitiveSub` | {}  |
+| `VolitionalFreeWill` | def | [L6457](formal/Logos/AgencyAuditsAndFrontiers.lean#L6457) | `def VolitionalFreeWill {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj)` | {}  |
+| `agent_causation_does_not_imply_reason_responsiveness` | theorem | [L6372](formal/Logos/AgencyAuditsAndFrontiers.lean#L6372) | `theorem agent_causation_does_not_imply_reason_responsiveness : ∃ (Subj : Type) (` | {}  |
+| `collapse_invariance_pre_commitment` | theorem | [L6594](formal/Logos/AgencyAuditsAndFrontiers.lean#L6594) | `theorem collapse_invariance_pre_commitment {Subj : Type} (CS : FineCognitiveSubj` | {}  |
+| `definitive_agency_frontier_synthesis` | theorem | [L6678](formal/Logos/AgencyAuditsAndFrontiers.lean#L6678) | `theorem definitive_agency_frontier_synthesis {Subj : Type} (CS : FineCognitiveSu` | {}  |
+| `delusion_of_agency_separation` | theorem | [L6339](formal/Logos/AgencyAuditsAndFrontiers.lean#L6339) | `theorem delusion_of_agency_separation : ∃ (Subj : Type) (SelfAttr : Subj → Prop ` | {}  |
+| `free_will_hierarchy_implications` | theorem | [L6485](formal/Logos/AgencyAuditsAndFrontiers.lean#L6485) | `theorem free_will_hierarchy_implications {Subj : Type} (CS : FineCognitiveSubjec` | {}  |
+| `libertarian_freewill_fails_to_derive_substantive_person` | theorem | [L6608](formal/Logos/AgencyAuditsAndFrontiers.lean#L6608) | `theorem libertarian_freewill_fails_to_derive_substantive_person : ∃ (Subj : Type` | {}  |
+| `model_A1_puppet` | theorem | [L6251](formal/Logos/AgencyAuditsAndFrontiers.lean#L6251) | `theorem model_A1_puppet : ∃ (Subj : Type) (CS : FineCognitiveSubject Subj) (Sour` | {}  |
+| `model_A2_external_optimizer` | theorem | [L6259](formal/Logos/AgencyAuditsAndFrontiers.lean#L6259) | `theorem model_A2_external_optimizer : ∃ (Subj : Type) (CS : FineCognitiveSubject` | {}  |
+| `model_A3_subpersonal_execution` | theorem | [L6304](formal/Logos/AgencyAuditsAndFrontiers.lean#L6304) | `theorem model_A3_subpersonal_execution : ∃ (Subj : Type) (CS : FineCognitiveSubj` | {}  |
+| `model_A4_authorless_execution` | theorem | [L6317](formal/Logos/AgencyAuditsAndFrontiers.lean#L6317) | `theorem model_A4_authorless_execution : ∃ (Subj : Type) (InitiatesRel : Subj → U` | {}  |
+| `model_A5_author_without_self_attribution` | theorem | [L6329](formal/Logos/AgencyAuditsAndFrontiers.lean#L6329) | `theorem model_A5_author_without_self_attribution : ∃ (Subj : Type) (CS : FineCog` | {}  |
+| `model_AC1_deterministic_agent_causal` | theorem | [L6386](formal/Logos/AgencyAuditsAndFrontiers.lean#L6386) | `theorem model_AC1_deterministic_agent_causal : ∃ (Subj : Type) (AgentDet : Subj ` | {}  |
+| `model_AC2_indeterministic_chance` | theorem | [L6396](formal/Logos/AgencyAuditsAndFrontiers.lean#L6396) | `theorem model_AC2_indeterministic_chance : ∃ (Subj : Type) (AgentDet : Subj → Pr` | {}  |
+| `model_AC3_externally_determined` | theorem | [L6407](formal/Logos/AgencyAuditsAndFrontiers.lean#L6407) | `theorem model_AC3_externally_determined : ∃ (Subj : Type) (AgentDet : Subj → Pro` | {}  |
+| `model_AC4_agent_causal_without_alternatives` | theorem | [L6417](formal/Logos/AgencyAuditsAndFrontiers.lean#L6417) | `theorem model_AC4_agent_causal_without_alternatives : ∃ (Subj : Type) (AgentDet ` | {}  |
+| `model_AC5_full_libertarian` | theorem | [L6433](formal/Logos/AgencyAuditsAndFrontiers.lean#L6433) | `theorem model_AC5_full_libertarian : ∃ (Subj : Type) (AgentDet : Subj → Prop → P` | {}  |
+| `model_C1_passive_truth_tracker` | theorem | [L5994](formal/Logos/AgencyAuditsAndFrontiers.lean#L5994) | `theorem model_C1_passive_truth_tracker : ∃ (Subj : Type) (CS : FineCognitiveSubj` | {}  |
+| `model_C2_formal_evaluator` | theorem | [L6008](formal/Logos/AgencyAuditsAndFrontiers.lean#L6008) | `theorem model_C2_formal_evaluator : ∃ (Subj : Type) (CS : FineCognitiveSubject S` | {}  |
+| `model_C3_suspended_judgment` | theorem | [L6019](formal/Logos/AgencyAuditsAndFrontiers.lean#L6019) | `theorem model_C3_suspended_judgment : ∃ (Subj : Type) (CS : FineCognitiveSubject` | {}  |
+| `model_C4_assertion_without_commitment` | theorem | [L6031](formal/Logos/AgencyAuditsAndFrontiers.lean#L6031) | `theorem model_C4_assertion_without_commitment : ∃ (Subj : Type) (CS : FineCognit` | {}  |
+| `model_C5_commitment_without_assertion` | theorem | [L6057](formal/Logos/AgencyAuditsAndFrontiers.lean#L6057) | `theorem model_C5_commitment_without_assertion : ∃ (Subj : Type) (CS : FineCognit` | {}  |
+| `model_V1_pure_theoretician` | theorem | [L6140](formal/Logos/AgencyAuditsAndFrontiers.lean#L6140) | `theorem model_V1_pure_theoretician : ∃ (Subj : Type) (CS : FineCognitiveSubject ` | {}  |
+| `model_V2_aim_without_deliberative_settlement` | theorem | [L6149](formal/Logos/AgencyAuditsAndFrontiers.lean#L6149) | `theorem model_V2_aim_without_deliberative_settlement : ∃ (Subj : Type) (CS : Fin` | {}  |
+| `model_V3_commitment_to_unwanted_fact` | theorem | [L6175](formal/Logos/AgencyAuditsAndFrontiers.lean#L6175) | `theorem model_V3_commitment_to_unwanted_fact : ∃ (Subj : Type) (CS : FineCogniti` | {}  |
+| `model_V4_external_objective` | theorem | [L6184](formal/Logos/AgencyAuditsAndFrontiers.lean#L6184) | `theorem model_V4_external_objective : ∃ (Subj : Type) (CS : FineCognitiveSubject` | {}  |
+| `model_V5_spontaneous_aim` | theorem | [L6194](formal/Logos/AgencyAuditsAndFrontiers.lean#L6194) | `theorem model_V5_spontaneous_aim : ∃ (Subj : Type) (CS : FineCognitiveSubject Su` | {}  |
+| `performative_datum_supplies_executive_initiation` | theorem | [L6235](formal/Logos/AgencyAuditsAndFrontiers.lean#L6235) | `theorem performative_datum_supplies_executive_initiation {Subj : Type} (CS : Fin` | {}  |
+| `reason_responsiveness_compatible_with_determinism` | theorem | [L6359](formal/Logos/AgencyAuditsAndFrontiers.lean#L6359) | `theorem reason_responsiveness_compatible_with_determinism : ∃ (Subj : Type) (Cho` | {}  |
+| `retorsion_denial_does_not_commit_to_content` | theorem | [L6089](formal/Logos/AgencyAuditsAndFrontiers.lean#L6089) | `theorem retorsion_denial_does_not_commit_to_content : ∃ (Subj : Type) (CS : Fine` | {}  |
+| `sincerity_is_independent` | theorem | [L6126](formal/Logos/AgencyAuditsAndFrontiers.lean#L6126) | `theorem sincerity_is_independent : ∃ (Subj : Type) (CS : FineCognitiveSubject Su` | {}  |
+| `standalone_volition_fails_to_derive_agency` | theorem | [L6222](formal/Logos/AgencyAuditsAndFrontiers.lean#L6222) | `theorem standalone_volition_fails_to_derive_agency : ∃ (Subj : Type) (CS : FineC` | {}  |
+| `two_sided_independence_commitment` | theorem | [L6514](formal/Logos/AgencyAuditsAndFrontiers.lean#L6514) | `theorem two_sided_independence_commitment : (∃ (Subj : Type) (CS : FineCognitive` | {}  |
+| `two_sided_independence_volition` | theorem | [L6528](formal/Logos/AgencyAuditsAndFrontiers.lean#L6528) | `theorem two_sided_independence_volition : (∃ (Subj : Type) (CS : FineCognitiveSu` | {}  |
 
 ### `Logos.DirectNormativeFreeWill`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `NecessaryStrongNormativity` | def | [L273](formal/Logos/DirectNormativeFreeWill.lean#L273) | `def NecessaryStrongNormativity (dom : StrongNormativeDomain Subject World) : Pro` | {Subject}  |
-| `NormativeAgency` | structure | [L61](formal/Logos/DirectNormativeFreeWill.lean#L61) | `structure NormativeAgency` | —  |
-| `NormativeAlternative` | structure | [L72](formal/Logos/DirectNormativeFreeWill.lean#L72) | `structure NormativeAlternative` | —  |
-| `NormativeDeliberationContext` | structure | [L154](formal/Logos/DirectNormativeFreeWill.lean#L154) | `structure NormativeDeliberationContext` | —  |
-| `NormativeGraspPrinciple` | def | [L97](formal/Logos/DirectNormativeFreeWill.lean#L97) | `def NormativeGraspPrinciple (dom : StrongNormativeDomain Subject World) : Prop` | {Means, Subject}  |
-| `OughtImpliesAlternativeAvailability` | def | [L188](formal/Logos/DirectNormativeFreeWill.lean#L188) | `def OughtImpliesAlternativeAvailability (dom : StrongNormativeDomain Subject Wor` | {Subject}  |
-| `StrongNormativeDomain` | structure | [L49](formal/Logos/DirectNormativeFreeWill.lean#L49) | `structure StrongNormativeDomain (Subject : Type) (World : Type) where` | —  |
-| `hostile_model_a_impersonal_normativity_cannot_generate_agency` | theorem | [L335](formal/Logos/DirectNormativeFreeWill.lean#L335) | `theorem hostile_model_a_impersonal_normativity_cannot_generate_agency (dom : Str` | {Subject}  |
-| `hostile_model_b_determinism_precludes_alternative_availability` | theorem | [L356](formal/Logos/DirectNormativeFreeWill.lean#L356) | `theorem hostile_model_b_determinism_precludes_alternative_availability {World Pr` | {Subject}  |
-| `hostile_model_b_determinism_refutes_kantian_principle` | theorem | [L366](formal/Logos/DirectNormativeFreeWill.lean#L366) | `theorem hostile_model_b_determinism_refutes_kantian_principle (dom : StrongNorma` | {Subject}  |
-| `hostile_model_c_compatibilist_satisfies_core_freedom` | theorem | [L389](formal/Logos/DirectNormativeFreeWill.lean#L389) | `theorem hostile_model_c_compatibilist_satisfies_core_freedom (dom : StrongNormat` | {Means, Subject}  |
-| `necessary_normativity_implies_necessary_free_subject` | theorem | [L280](formal/Logos/DirectNormativeFreeWill.lean#L280) | `theorem necessary_normativity_implies_necessary_free_subject (dom : StrongNormat` | {Means, Subject}  |
-| `necessary_normativity_implies_necessary_free_will` | theorem | [L292](formal/Logos/DirectNormativeFreeWill.lean#L292) | `theorem necessary_normativity_implies_necessary_free_will (dom : StrongNormative` | {Means, Subject}  |
-| `necessary_normativity_implies_necessary_genuine_freedom` | theorem | [L304](formal/Logos/DirectNormativeFreeWill.lean#L304) | `theorem necessary_normativity_implies_necessary_genuine_freedom (dom : StrongNor` | {Subject}  |
-| `normative_alternative_implies_chooses` | theorem | [L105](formal/Logos/DirectNormativeFreeWill.lean#L105) | `theorem normative_alternative_implies_chooses (dom : StrongNormativeDomain Subje` | {Means, Subject}  |
-| `normative_alternative_implies_core_free_subject` | theorem | [L128](formal/Logos/DirectNormativeFreeWill.lean#L128) | `theorem normative_alternative_implies_core_free_subject (dom : StrongNormativeDo` | {Means, Subject}  |
-| `normative_alternative_implies_core_free_will` | theorem | [L117](formal/Logos/DirectNormativeFreeWill.lean#L117) | `theorem normative_alternative_implies_core_free_will (dom : StrongNormativeDomai` | {Means, Subject}  |
-| `normative_alternative_implies_genuine_chooses` | theorem | [L198](formal/Logos/DirectNormativeFreeWill.lean#L198) | `theorem normative_alternative_implies_genuine_chooses (dom : StrongNormativeDoma` | {Subject}  |
-| `normative_alternative_implies_genuine_free_subject` | theorem | [L214](formal/Logos/DirectNormativeFreeWill.lean#L214) | `theorem normative_alternative_implies_genuine_free_subject (dom : StrongNormativ` | {Subject}  |
-| `normative_deliberation_yields_strong_chooses` | theorem | [L168](formal/Logos/DirectNormativeFreeWill.lean#L168) | `theorem normative_deliberation_yields_strong_chooses (dom : StrongNormativeDomai` | {Subject}  |
-| `normative_route_to_metaphysical_indeterminism` | theorem | [L230](formal/Logos/DirectNormativeFreeWill.lean#L230) | `theorem normative_route_to_metaphysical_indeterminism (dom : StrongNormativeDoma` | {Subject}  |
-| `normative_route_to_not_d3` | theorem | [L246](formal/Logos/DirectNormativeFreeWill.lean#L246) | `theorem normative_route_to_not_d3 (dom : StrongNormativeDomain Subject World) {P` | {Subject}  |
+| `NecessaryStrongNormativity` | def | [L2876](formal/Logos/ActionAndNormativeChoice.lean#L2876) | `def NecessaryStrongNormativity (dom : StrongNormativeDomain Subject World) : Pro` | {Subject}  |
+| `NormativeAgency` | structure | [L2664](formal/Logos/ActionAndNormativeChoice.lean#L2664) | `structure NormativeAgency` | —  |
+| `NormativeAlternative` | structure | [L2675](formal/Logos/ActionAndNormativeChoice.lean#L2675) | `structure NormativeAlternative` | —  |
+| `NormativeDeliberationContext` | structure | [L2757](formal/Logos/ActionAndNormativeChoice.lean#L2757) | `structure NormativeDeliberationContext` | —  |
+| `NormativeGraspPrinciple` | def | [L2700](formal/Logos/ActionAndNormativeChoice.lean#L2700) | `def NormativeGraspPrinciple (dom : StrongNormativeDomain Subject World) : Prop` | {Means, Subject}  |
+| `OughtImpliesAlternativeAvailability` | def | [L2791](formal/Logos/ActionAndNormativeChoice.lean#L2791) | `def OughtImpliesAlternativeAvailability (dom : StrongNormativeDomain Subject Wor` | {Subject}  |
+| `StrongNormativeDomain` | structure | [L2652](formal/Logos/ActionAndNormativeChoice.lean#L2652) | `structure StrongNormativeDomain (Subject : Type) (World : Type) where` | —  |
+| `hostile_model_a_impersonal_normativity_cannot_generate_agency` | theorem | [L2938](formal/Logos/ActionAndNormativeChoice.lean#L2938) | `theorem hostile_model_a_impersonal_normativity_cannot_generate_agency (dom : Str` | {Subject}  |
+| `hostile_model_b_determinism_precludes_alternative_availability` | theorem | [L2959](formal/Logos/ActionAndNormativeChoice.lean#L2959) | `theorem hostile_model_b_determinism_precludes_alternative_availability {World Pr` | {Subject}  |
+| `hostile_model_b_determinism_refutes_kantian_principle` | theorem | [L2969](formal/Logos/ActionAndNormativeChoice.lean#L2969) | `theorem hostile_model_b_determinism_refutes_kantian_principle (dom : StrongNorma` | {Subject}  |
+| `hostile_model_c_compatibilist_satisfies_core_freedom` | theorem | [L2992](formal/Logos/ActionAndNormativeChoice.lean#L2992) | `theorem hostile_model_c_compatibilist_satisfies_core_freedom (dom : StrongNormat` | {Means, Subject}  |
+| `necessary_normativity_implies_necessary_free_subject` | theorem | [L2883](formal/Logos/ActionAndNormativeChoice.lean#L2883) | `theorem necessary_normativity_implies_necessary_free_subject (dom : StrongNormat` | {Means, Subject}  |
+| `necessary_normativity_implies_necessary_free_will` | theorem | [L2895](formal/Logos/ActionAndNormativeChoice.lean#L2895) | `theorem necessary_normativity_implies_necessary_free_will (dom : StrongNormative` | {Means, Subject}  |
+| `necessary_normativity_implies_necessary_genuine_freedom` | theorem | [L2907](formal/Logos/ActionAndNormativeChoice.lean#L2907) | `theorem necessary_normativity_implies_necessary_genuine_freedom (dom : StrongNor` | {Subject}  |
+| `normative_alternative_implies_chooses` | theorem | [L2708](formal/Logos/ActionAndNormativeChoice.lean#L2708) | `theorem normative_alternative_implies_chooses (dom : StrongNormativeDomain Subje` | {Means, Subject}  |
+| `normative_alternative_implies_core_free_subject` | theorem | [L2731](formal/Logos/ActionAndNormativeChoice.lean#L2731) | `theorem normative_alternative_implies_core_free_subject (dom : StrongNormativeDo` | {Means, Subject}  |
+| `normative_alternative_implies_core_free_will` | theorem | [L2720](formal/Logos/ActionAndNormativeChoice.lean#L2720) | `theorem normative_alternative_implies_core_free_will (dom : StrongNormativeDomai` | {Means, Subject}  |
+| `normative_alternative_implies_genuine_chooses` | theorem | [L2801](formal/Logos/ActionAndNormativeChoice.lean#L2801) | `theorem normative_alternative_implies_genuine_chooses (dom : StrongNormativeDoma` | {Subject}  |
+| `normative_alternative_implies_genuine_free_subject` | theorem | [L2817](formal/Logos/ActionAndNormativeChoice.lean#L2817) | `theorem normative_alternative_implies_genuine_free_subject (dom : StrongNormativ` | {Subject}  |
+| `normative_deliberation_yields_strong_chooses` | theorem | [L2771](formal/Logos/ActionAndNormativeChoice.lean#L2771) | `theorem normative_deliberation_yields_strong_chooses (dom : StrongNormativeDomai` | {Subject}  |
+| `normative_route_to_metaphysical_indeterminism` | theorem | [L2833](formal/Logos/ActionAndNormativeChoice.lean#L2833) | `theorem normative_route_to_metaphysical_indeterminism (dom : StrongNormativeDoma` | {Subject}  |
+| `normative_route_to_not_d3` | theorem | [L2849](formal/Logos/ActionAndNormativeChoice.lean#L2849) | `theorem normative_route_to_not_d3 (dom : StrongNormativeDomain Subject World) {P` | {Subject}  |
 
 ### `Logos.DirectNormativeRetorsion`
 
@@ -2445,41 +2423,41 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `AxAgapeEssence` | axiom | [L1618](formal/Logos/DivineTrinitarianAttributes.lean#L1618) | `axiom AxAgapeEssence : ∃ f : DivineHypostasis, Subsists f ∧ (∃ o : DivineHyposta` | {AxAgapeEssence, Subject} → C504 |
-| `AxProcessionSpirit` | axiom | [L1677](formal/Logos/DivineTrinitarianAttributes.lean#L1677) | `axiom AxProcessionSpirit : ∃ σ : DivineHypostasis, IsSpirit σ ∧ Subsists σ ∧ σ ≠` | {AxAgapeEssence, AxProcessionSpirit, Subject, CL} → C506 |
-| `AxProcessionWord` | axiom | [L1660](formal/Logos/DivineTrinitarianAttributes.lean#L1660) | `axiom AxProcessionWord : IsWord the_beloved` | {AxAgapeEssence, AxProcessionWord, Subject, CL} → C505 |
-| `DivineHypostasis` | structure | [L1536](formal/Logos/DivineTrinitarianAttributes.lean#L1536) | `structure DivineHypostasis where` | — → C574 |
-| `DivineLove` | opaque | [L1581](formal/Logos/DivineTrinitarianAttributes.lean#L1581) | `opaque DivineLove (_f _o : DivineHypostasis) : Prop` | —  |
-| `IsSpirit` | opaque | [L1591](formal/Logos/DivineTrinitarianAttributes.lean#L1591) | `opaque IsSpirit (_d : DivineHypostasis) : Prop` | —  |
-| `IsWord` | opaque | [L1586](formal/Logos/DivineTrinitarianAttributes.lean#L1586) | `opaque IsWord (_d : DivineHypostasis) : Prop` | —  |
-| `SelfDonation` | def | [L1896](formal/Logos/DivineTrinitarianAttributes.lean#L1896) | `def SelfDonation (f o : DivineHypostasis) : Prop` | {Subject}  |
-| `Subsists` | def | [L1545](formal/Logos/DivineTrinitarianAttributes.lean#L1545) | `def Subsists (d : DivineHypostasis) : Prop` | {Subject}  |
-| `agape_beloved_is_not_creature` | theorem | [L1730](formal/Logos/DivineTrinitarianAttributes.lean#L1730) | `theorem agape_beloved_is_not_creature {o : DivineHypostasis} (h : Subsists o) : ` | {NecessarySubjectKind, Subject} → C508 |
-| `agape_entails_tripersonality` | theorem | [L1814](formal/Logos/DivineTrinitarianAttributes.lean#L1814) | `theorem agape_entails_tripersonality : ∃ t : TrinitarianStructure DivineHypostas` | {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} → C510 |
-| `agape_is_self_donation` | theorem | [L1909](formal/Logos/DivineTrinitarianAttributes.lean#L1909) | `theorem agape_is_self_donation : ∃ f o : DivineHypostasis, SelfDonation f o` | {AxAgapeEssence, Subject, CL} → C575 |
-| `co_subsistence_is_co_location` | theorem | [L1846](formal/Logos/DivineTrinitarianAttributes.lean#L1846) | `theorem co_subsistence_is_co_location {a b : DivineHypostasis} (ha : Subsists a)` | {Subject} → C519 |
-| `denying_self_donation_is_absurd` | theorem | [L1945](formal/Logos/DivineTrinitarianAttributes.lean#L1945) | `theorem denying_self_donation_is_absurd (denial : ¬ ∃ f o : DivineHypostasis, Se` | {AxAgapeEssence, Subject, CL} → C576 |
-| `denying_shared_location_is_absurd` | theorem | [L1956](formal/Logos/DivineTrinitarianAttributes.lean#L1956) | `theorem denying_shared_location_is_absurd : ¬ ∀ f o : DivineHypostasis, Subsists` | {AxAgapeEssence, Subject, CL} → C577 |
-| `divineReality` | def | [L1508](formal/Logos/DivineTrinitarianAttributes.lean#L1508) | `def divineReality : Entity` | {Subject}  |
-| `divine_object_subsists_in_godhead` | theorem | [L1751](formal/Logos/DivineTrinitarianAttributes.lean#L1751) | `theorem divine_object_subsists_in_godhead {o : DivineHypostasis} (h : Subsists o` | {Subject} → C509 |
-| `each_subsisting_person_is_in_the_other` | theorem | [L1565](formal/Logos/DivineTrinitarianAttributes.lean#L1565) | `theorem each_subsisting_person_is_in_the_other (f o : DivineHypostasis) (hf : Su` | {Subject}  |
-| `essential_love_has_necessary_object` | theorem | [L1715](formal/Logos/DivineTrinitarianAttributes.lean#L1715) | `theorem essential_love_has_necessary_object : ∃ f o : DivineHypostasis, f ≠ o ∧ ` | {AxAgapeEssence, Subject, CL} → C507 |
-| `is_divine` | def | [L1573](formal/Logos/DivineTrinitarianAttributes.lean#L1573) | `def is_divine (d : DivineHypostasis) (e : Entity) : Prop` | {Subject}  |
-| `subsisting_centre_is_necessary` | theorem | [L1834](formal/Logos/DivineTrinitarianAttributes.lean#L1834) | `theorem subsisting_centre_is_necessary {d : DivineHypostasis} (h : Subsists d) :` | {NecessarySubjectKind, Subject} → C518 |
-| `the_beloved_distinct` | theorem | [L1634](formal/Logos/DivineTrinitarianAttributes.lean#L1634) | `theorem the_beloved_distinct : the_beloved ≠ the_father` | {AxAgapeEssence, Subject, CL}  |
-| `the_beloved_is_divine` | theorem | [L1762](formal/Logos/DivineTrinitarianAttributes.lean#L1762) | `theorem the_beloved_is_divine : is_divine the_beloved divineReality` | {AxAgapeEssence, Subject, CL}  |
-| `the_beloved_subsists` | theorem | [L1638](formal/Logos/DivineTrinitarianAttributes.lean#L1638) | `theorem the_beloved_subsists : Subsists the_beloved` | {AxAgapeEssence, Subject, CL}  |
-| `the_father_is_divine` | theorem | [L1757](formal/Logos/DivineTrinitarianAttributes.lean#L1757) | `theorem the_father_is_divine : is_divine the_father divineReality` | {AxAgapeEssence, Subject, CL}  |
-| `the_father_subsists` | theorem | [L1630](formal/Logos/DivineTrinitarianAttributes.lean#L1630) | `theorem the_father_subsists : Subsists the_father` | {AxAgapeEssence, Subject, CL}  |
-| `the_source_loves_the_beloved` | theorem | [L1642](formal/Logos/DivineTrinitarianAttributes.lean#L1642) | `theorem the_source_loves_the_beloved : DivineLove the_father the_beloved` | {AxAgapeEssence, Subject, CL}  |
-| `the_spirit_is_divine` | theorem | [L1767](formal/Logos/DivineTrinitarianAttributes.lean#L1767) | `theorem the_spirit_is_divine : is_divine the_spirit divineReality` | {AxAgapeEssence, AxProcessionSpirit, Subject, CL}  |
-| `the_spirit_is_spirit` | theorem | [L1685](formal/Logos/DivineTrinitarianAttributes.lean#L1685) | `theorem the_spirit_is_spirit : IsSpirit the_spirit` | {AxAgapeEssence, AxProcessionSpirit, Subject, CL}  |
-| `the_spirit_ne_any_word` | theorem | [L1697](formal/Logos/DivineTrinitarianAttributes.lean#L1697) | `theorem the_spirit_ne_any_word : ∀ w : DivineHypostasis, IsWord w → the_spirit ≠` | {AxAgapeEssence, AxProcessionSpirit, Subject, CL}  |
-| `the_spirit_ne_beloved` | theorem | [L1701](formal/Logos/DivineTrinitarianAttributes.lean#L1701) | `theorem the_spirit_ne_beloved : the_spirit ≠ the_beloved` | {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL}  |
-| `the_spirit_ne_father` | theorem | [L1693](formal/Logos/DivineTrinitarianAttributes.lean#L1693) | `theorem the_spirit_ne_father : the_spirit ≠ the_father` | {AxAgapeEssence, AxProcessionSpirit, Subject, CL}  |
-| `the_spirit_subsists` | theorem | [L1689](formal/Logos/DivineTrinitarianAttributes.lean#L1689) | `theorem the_spirit_subsists : Subsists the_spirit` | {AxAgapeEssence, AxProcessionSpirit, Subject, CL}  |
-| `the_three_centres_are_one_necessary_reality` | theorem | [L1860](formal/Logos/DivineTrinitarianAttributes.lean#L1860) | `theorem the_three_centres_are_one_necessary_reality : NecessaryEntity the_father` | {AxAgapeEssence, AxProcessionSpirit, NecessarySubjectKind, Subject, CL} → C520 |
-| `two_subsisting_share_one_location` | theorem | [L1556](formal/Logos/DivineTrinitarianAttributes.lean#L1556) | `theorem two_subsisting_share_one_location (f o : DivineHypostasis) (hf : Subsist` | {Subject}  |
+| `AxAgapeEssence` | axiom | [L1619](formal/Logos/DivineTrinitarianAttributes.lean#L1619) | `axiom AxAgapeEssence : ∃ f : DivineHypostasis, Subsists f ∧ (∃ o : DivineHyposta` | {AxAgapeEssence, Subject} → C504 |
+| `AxProcessionSpirit` | axiom | [L1678](formal/Logos/DivineTrinitarianAttributes.lean#L1678) | `axiom AxProcessionSpirit : ∃ σ : DivineHypostasis, IsSpirit σ ∧ Subsists σ ∧ σ ≠` | {AxAgapeEssence, AxProcessionSpirit, Subject, CL} → C506 |
+| `AxProcessionWord` | axiom | [L1661](formal/Logos/DivineTrinitarianAttributes.lean#L1661) | `axiom AxProcessionWord : IsWord the_beloved` | {AxAgapeEssence, AxProcessionWord, Subject, CL} → C505 |
+| `DivineHypostasis` | structure | [L1537](formal/Logos/DivineTrinitarianAttributes.lean#L1537) | `structure DivineHypostasis where` | — → C574 |
+| `DivineLove` | opaque | [L1582](formal/Logos/DivineTrinitarianAttributes.lean#L1582) | `opaque DivineLove (_f _o : DivineHypostasis) : Prop` | —  |
+| `IsSpirit` | opaque | [L1592](formal/Logos/DivineTrinitarianAttributes.lean#L1592) | `opaque IsSpirit (_d : DivineHypostasis) : Prop` | —  |
+| `IsWord` | opaque | [L1587](formal/Logos/DivineTrinitarianAttributes.lean#L1587) | `opaque IsWord (_d : DivineHypostasis) : Prop` | —  |
+| `SelfDonation` | def | [L1897](formal/Logos/DivineTrinitarianAttributes.lean#L1897) | `def SelfDonation (f o : DivineHypostasis) : Prop` | {Subject}  |
+| `Subsists` | def | [L1546](formal/Logos/DivineTrinitarianAttributes.lean#L1546) | `def Subsists (d : DivineHypostasis) : Prop` | {Subject}  |
+| `agape_beloved_is_not_creature` | theorem | [L1731](formal/Logos/DivineTrinitarianAttributes.lean#L1731) | `theorem agape_beloved_is_not_creature {o : DivineHypostasis} (h : Subsists o) : ` | {NecessarySubjectKind, Subject} → C508 |
+| `agape_entails_tripersonality` | theorem | [L1815](formal/Logos/DivineTrinitarianAttributes.lean#L1815) | `theorem agape_entails_tripersonality : ∃ t : TrinitarianStructure DivineHypostas` | {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} → C510 |
+| `agape_is_self_donation` | theorem | [L1910](formal/Logos/DivineTrinitarianAttributes.lean#L1910) | `theorem agape_is_self_donation : ∃ f o : DivineHypostasis, SelfDonation f o` | {AxAgapeEssence, Subject, CL} → C575 |
+| `co_subsistence_is_co_location` | theorem | [L1847](formal/Logos/DivineTrinitarianAttributes.lean#L1847) | `theorem co_subsistence_is_co_location {a b : DivineHypostasis} (ha : Subsists a)` | {Subject} → C519 |
+| `denying_self_donation_is_absurd` | theorem | [L1946](formal/Logos/DivineTrinitarianAttributes.lean#L1946) | `theorem denying_self_donation_is_absurd (denial : ¬ ∃ f o : DivineHypostasis, Se` | {AxAgapeEssence, Subject, CL} → C576 |
+| `denying_shared_location_is_absurd` | theorem | [L1957](formal/Logos/DivineTrinitarianAttributes.lean#L1957) | `theorem denying_shared_location_is_absurd : ¬ ∀ f o : DivineHypostasis, Subsists` | {AxAgapeEssence, Subject, CL} → C577 |
+| `divineReality` | def | [L1509](formal/Logos/DivineTrinitarianAttributes.lean#L1509) | `def divineReality : Entity` | {Subject}  |
+| `divine_object_subsists_in_godhead` | theorem | [L1752](formal/Logos/DivineTrinitarianAttributes.lean#L1752) | `theorem divine_object_subsists_in_godhead {o : DivineHypostasis} (h : Subsists o` | {Subject} → C509 |
+| `each_subsisting_person_is_in_the_other` | theorem | [L1566](formal/Logos/DivineTrinitarianAttributes.lean#L1566) | `theorem each_subsisting_person_is_in_the_other (f o : DivineHypostasis) (hf : Su` | {Subject}  |
+| `essential_love_has_necessary_object` | theorem | [L1716](formal/Logos/DivineTrinitarianAttributes.lean#L1716) | `theorem essential_love_has_necessary_object : ∃ f o : DivineHypostasis, f ≠ o ∧ ` | {AxAgapeEssence, Subject, CL} → C507 |
+| `is_divine` | def | [L1574](formal/Logos/DivineTrinitarianAttributes.lean#L1574) | `def is_divine (d : DivineHypostasis) (e : Entity) : Prop` | {Subject}  |
+| `subsisting_centre_is_necessary` | theorem | [L1835](formal/Logos/DivineTrinitarianAttributes.lean#L1835) | `theorem subsisting_centre_is_necessary {d : DivineHypostasis} (h : Subsists d) :` | {NecessarySubjectKind, Subject} → C518 |
+| `the_beloved_distinct` | theorem | [L1635](formal/Logos/DivineTrinitarianAttributes.lean#L1635) | `theorem the_beloved_distinct : the_beloved ≠ the_father` | {AxAgapeEssence, Subject, CL}  |
+| `the_beloved_is_divine` | theorem | [L1763](formal/Logos/DivineTrinitarianAttributes.lean#L1763) | `theorem the_beloved_is_divine : is_divine the_beloved divineReality` | {AxAgapeEssence, Subject, CL}  |
+| `the_beloved_subsists` | theorem | [L1639](formal/Logos/DivineTrinitarianAttributes.lean#L1639) | `theorem the_beloved_subsists : Subsists the_beloved` | {AxAgapeEssence, Subject, CL}  |
+| `the_father_is_divine` | theorem | [L1758](formal/Logos/DivineTrinitarianAttributes.lean#L1758) | `theorem the_father_is_divine : is_divine the_father divineReality` | {AxAgapeEssence, Subject, CL}  |
+| `the_father_subsists` | theorem | [L1631](formal/Logos/DivineTrinitarianAttributes.lean#L1631) | `theorem the_father_subsists : Subsists the_father` | {AxAgapeEssence, Subject, CL}  |
+| `the_source_loves_the_beloved` | theorem | [L1643](formal/Logos/DivineTrinitarianAttributes.lean#L1643) | `theorem the_source_loves_the_beloved : DivineLove the_father the_beloved` | {AxAgapeEssence, Subject, CL}  |
+| `the_spirit_is_divine` | theorem | [L1768](formal/Logos/DivineTrinitarianAttributes.lean#L1768) | `theorem the_spirit_is_divine : is_divine the_spirit divineReality` | {AxAgapeEssence, AxProcessionSpirit, Subject, CL}  |
+| `the_spirit_is_spirit` | theorem | [L1686](formal/Logos/DivineTrinitarianAttributes.lean#L1686) | `theorem the_spirit_is_spirit : IsSpirit the_spirit` | {AxAgapeEssence, AxProcessionSpirit, Subject, CL}  |
+| `the_spirit_ne_any_word` | theorem | [L1698](formal/Logos/DivineTrinitarianAttributes.lean#L1698) | `theorem the_spirit_ne_any_word : ∀ w : DivineHypostasis, IsWord w → the_spirit ≠` | {AxAgapeEssence, AxProcessionSpirit, Subject, CL}  |
+| `the_spirit_ne_beloved` | theorem | [L1702](formal/Logos/DivineTrinitarianAttributes.lean#L1702) | `theorem the_spirit_ne_beloved : the_spirit ≠ the_beloved` | {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL}  |
+| `the_spirit_ne_father` | theorem | [L1694](formal/Logos/DivineTrinitarianAttributes.lean#L1694) | `theorem the_spirit_ne_father : the_spirit ≠ the_father` | {AxAgapeEssence, AxProcessionSpirit, Subject, CL}  |
+| `the_spirit_subsists` | theorem | [L1690](formal/Logos/DivineTrinitarianAttributes.lean#L1690) | `theorem the_spirit_subsists : Subsists the_spirit` | {AxAgapeEssence, AxProcessionSpirit, Subject, CL}  |
+| `the_three_centres_are_one_necessary_reality` | theorem | [L1861](formal/Logos/DivineTrinitarianAttributes.lean#L1861) | `theorem the_three_centres_are_one_necessary_reality : NecessaryEntity the_father` | {AxAgapeEssence, AxProcessionSpirit, NecessarySubjectKind, Subject, CL} → C520 |
+| `two_subsisting_share_one_location` | theorem | [L1557](formal/Logos/DivineTrinitarianAttributes.lean#L1557) | `theorem two_subsisting_share_one_location (f o : DivineHypostasis) (hf : Subsist` | {Subject}  |
 
 ### `Logos.DivineImmutability`
 
@@ -2667,93 +2645,93 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `ActToCreationBridge` | def | [L137](formal/Logos/EssenceActCollapse.lean#L137) | `def ActToCreationBridge (World Entity Subject : Type) (EntityOf : Subject → Enti` | {}  |
-| `ActToVolitionBridge` | def | [L132](formal/Logos/EssenceActCollapse.lean#L132) | `def ActToVolitionBridge (World Subject : Type) (WillsAt : World → Subject → Prop` | {}  |
-| `CandidateA_VolitionalIndifference` | def | [L290](formal/Logos/EssenceActCollapse.lean#L290) | `def CandidateA_VolitionalIndifference (World Subject : Type) (frame : KripkeFram` | {}  |
-| `CandidateB_NonDeterministicVolition` | def | [L300](formal/Logos/EssenceActCollapse.lean#L300) | `def CandidateB_NonDeterministicVolition (World Subject : Type) (Circumstance : W` | {}  |
-| `CandidateC_AgentCausalSettlement` | def | [L305](formal/Logos/EssenceActCollapse.lean#L305) | `def CandidateC_AgentCausalSettlement (World Subject : Type) (frame : KripkeFrame` | {}  |
-| `CandidateD_SufficientFreedom` | def | [L317](formal/Logos/EssenceActCollapse.lean#L317) | `def CandidateD_SufficientFreedom (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
-| `ContingentAct` | def | [L91](formal/Logos/EssenceActCollapse.lean#L91) | `def ContingentAct (World Subject : Type) (ActAt : World → Subject → Prop → Prop)` | {}  |
-| `DeterministicVolitionPrinciple` | def | [L232](formal/Logos/EssenceActCollapse.lean#L232) | `def DeterministicVolitionPrinciple (World Subject : Type) (Circumstance : World ` | {}  |
-| `HardenedModalFreeWill` | structure | [L44](formal/Logos/EssenceActCollapse.lean#L44) | `structure HardenedModalFreeWill (World Subject : Type)` | —  |
-| `MC10_Signature` | structure | [L571](formal/Logos/EssenceActCollapse.lean#L571) | `structure MC10_Signature where` | —  |
-| `MC12_Signature` | structure | [L628](formal/Logos/EssenceActCollapse.lean#L628) | `structure MC12_Signature where` | —  |
-| `MC7_Signature` | structure | [L424](formal/Logos/EssenceActCollapse.lean#L424) | `structure MC7_Signature where` | —  |
-| `MC8_Signature` | structure | [L481](formal/Logos/EssenceActCollapse.lean#L481) | `structure MC8_Signature where` | —  |
-| `MC9_Signature` | structure | [L519](formal/Logos/EssenceActCollapse.lean#L519) | `structure MC9_Signature where` | —  |
-| `NecessaryAct` | def | [L88](formal/Logos/EssenceActCollapse.lean#L88) | `def NecessaryAct (World Subject : Type) (ActAt : World → Subject → Prop → Prop) ` | {}  |
-| `NecessaryEntity` | def | [L82](formal/Logos/EssenceActCollapse.lean#L82) | `def NecessaryEntity (World Entity : Type) (ExistsAt : World → Entity → Prop) (g ` | {}  |
-| `NecessaryNature` | def | [L85](formal/Logos/EssenceActCollapse.lean#L85) | `def NecessaryNature (World Entity : Type) (NatureAt : World → Entity → Prop) (g ` | {}  |
-| `SameCircumstances` | def | [L226](formal/Logos/EssenceActCollapse.lean#L226) | `def SameCircumstances (World : Type) (Circumstance : World → Prop) (w u : World)` | {}  |
-| `SameNature` | def | [L229](formal/Logos/EssenceActCollapse.lean#L229) | `def SameNature (World Entity : Type) (NatureAt : World → Entity → Prop) (g : Ent` | {}  |
-| `Statement1_PassiveNoCreation` | def | [L175](formal/Logos/EssenceActCollapse.lean#L175) | `def Statement1_PassiveNoCreation (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
-| `Statement2_WillsNotToCreate` | def | [L180](formal/Logos/EssenceActCollapse.lean#L180) | `def Statement2_WillsNotToCreate (World Subject : Type) (frame : KripkeFrame Worl` | {}  |
-| `Statement3_FreelyWillsNotToCreate` | def | [L185](formal/Logos/EssenceActCollapse.lean#L185) | `def Statement3_FreelyWillsNotToCreate (World Subject : Type) (frame : KripkeFram` | {}  |
-| `Statement4_BilateralFreeWillCreation` | def | [L191](formal/Logos/EssenceActCollapse.lean#L191) | `def Statement4_BilateralFreeWillCreation (World Subject : Type) (frame : KripkeF` | {}  |
-| `VolitionToActBridge` | def | [L127](formal/Logos/EssenceActCollapse.lean#L127) | `def VolitionToActBridge (World Subject : Type) (WillsAt : World → Subject → Prop` | {}  |
-| `VolitionToCreationBridge` | def | [L144](formal/Logos/EssenceActCollapse.lean#L144) | `def VolitionToCreationBridge (World Entity Subject : Type) (EntityOf : Subject →` | {}  |
-| `agent_causal_implies_volitional_indifference` | theorem | [L327](formal/Logos/EssenceActCollapse.lean#L327) | `theorem agent_causal_implies_volitional_indifference (World Subject : Type) (fra` | {}  |
-| `free_creation_anti_collapse` | theorem | [L403](formal/Logos/EssenceActCollapse.lean#L403) | `theorem free_creation_anti_collapse (World Subject : Type) (frame : KripkeFrame ` | {}  |
-| `hardened_modal_freedom_forces_distinct_worlds` | theorem | [L61](formal/Logos/EssenceActCollapse.lean#L61) | `theorem hardened_modal_freedom_forces_distinct_worlds (World Subject : Type) (fr` | {}  |
-| `involuntary_act_consistent` | theorem | [L153](formal/Logos/EssenceActCollapse.lean#L153) | `theorem involuntary_act_consistent : ∃ (World Subject : Type) (WillsAt : World →` | {}  |
-| `modal_collapse_action_theorem` | theorem | [L261](formal/Logos/EssenceActCollapse.lean#L261) | `theorem modal_collapse_action_theorem (World Entity Subject : Type) (frame : Kri` | {}  |
-| `modal_collapse_theorem` | theorem | [L241](formal/Logos/EssenceActCollapse.lean#L241) | `theorem modal_collapse_theorem (World Subject : Type) (frame : KripkeFrame World` | {}  |
-| `model_MC10_consistent` | theorem | [L587](formal/Logos/EssenceActCollapse.lean#L587) | `theorem model_MC10_consistent : ∃ _M : MC10_Signature, True` | {}  |
-| `model_MC11_consistent` | theorem | [L612](formal/Logos/EssenceActCollapse.lean#L612) | `theorem model_MC11_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
-| `model_MC12_consistent` | theorem | [L644](formal/Logos/EssenceActCollapse.lean#L644) | `theorem model_MC12_consistent : ∃ _M : MC12_Signature, True` | {}  |
-| `model_MC7_consistent` | theorem | [L449](formal/Logos/EssenceActCollapse.lean#L449) | `theorem model_MC7_consistent : ∃ _M : MC7_Signature, True` | {}  |
-| `model_MC8_consistent` | theorem | [L497](formal/Logos/EssenceActCollapse.lean#L497) | `theorem model_MC8_consistent : ∃ _M : MC8_Signature, True` | {}  |
-| `model_MC9_consistent` | theorem | [L542](formal/Logos/EssenceActCollapse.lean#L542) | `theorem model_MC9_consistent : ∃ _M : MC9_Signature, True` | {}  |
-| `necessary_nature_not_entails_necessary_act` | theorem | [L97](formal/Logos/EssenceActCollapse.lean#L97) | `theorem necessary_nature_not_entails_necessary_act : ∃ (World Entity Subject : T` | {}  |
-| `statement2_implies_statement1` | theorem | [L205](formal/Logos/EssenceActCollapse.lean#L205) | `theorem statement2_implies_statement1 (World Entity Subject : Type) (frame : Kri` | {}  |
-| `statement3_implies_statement2` | theorem | [L197](formal/Logos/EssenceActCollapse.lean#L197) | `theorem statement3_implies_statement2 (World Subject : Type) (frame : KripkeFram` | {}  |
-| `sufficient_freedom_not_entails_volitional_indifference` | theorem | [L369](formal/Logos/EssenceActCollapse.lean#L369) | `theorem sufficient_freedom_not_entails_volitional_indifference : ∃ (World Subjec` | {CL}  |
-| `unexecuted_volition_consistent` | theorem | [L163](formal/Logos/EssenceActCollapse.lean#L163) | `theorem unexecuted_volition_consistent : ∃ (World Subject : Type) (WillsAt : Wor` | {}  |
-| `volitional_indifference_implies_nondeterministic` | theorem | [L352](formal/Logos/EssenceActCollapse.lean#L352) | `theorem volitional_indifference_implies_nondeterministic (World Subject : Type) ` | {}  |
-| `volitional_indifference_implies_sufficient_freedom` | theorem | [L340](formal/Logos/EssenceActCollapse.lean#L340) | `theorem volitional_indifference_implies_sufficient_freedom (World Subject : Type` | {}  |
+| `ActToCreationBridge` | def | [L1406](formal/Logos/ModalCreationFrontiers.lean#L1406) | `def ActToCreationBridge (World Entity Subject : Type) (EntityOf : Subject → Enti` | {}  |
+| `ActToVolitionBridge` | def | [L1401](formal/Logos/ModalCreationFrontiers.lean#L1401) | `def ActToVolitionBridge (World Subject : Type) (WillsAt : World → Subject → Prop` | {}  |
+| `CandidateA_VolitionalIndifference` | def | [L1559](formal/Logos/ModalCreationFrontiers.lean#L1559) | `def CandidateA_VolitionalIndifference (World Subject : Type) (frame : KripkeFram` | {}  |
+| `CandidateB_NonDeterministicVolition` | def | [L1569](formal/Logos/ModalCreationFrontiers.lean#L1569) | `def CandidateB_NonDeterministicVolition (World Subject : Type) (Circumstance : W` | {}  |
+| `CandidateC_AgentCausalSettlement` | def | [L1574](formal/Logos/ModalCreationFrontiers.lean#L1574) | `def CandidateC_AgentCausalSettlement (World Subject : Type) (frame : KripkeFrame` | {}  |
+| `CandidateD_SufficientFreedom` | def | [L1586](formal/Logos/ModalCreationFrontiers.lean#L1586) | `def CandidateD_SufficientFreedom (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
+| `ContingentAct` | def | [L1360](formal/Logos/ModalCreationFrontiers.lean#L1360) | `def ContingentAct (World Subject : Type) (ActAt : World → Subject → Prop → Prop)` | {}  |
+| `DeterministicVolitionPrinciple` | def | [L1501](formal/Logos/ModalCreationFrontiers.lean#L1501) | `def DeterministicVolitionPrinciple (World Subject : Type) (Circumstance : World ` | {}  |
+| `HardenedModalFreeWill` | structure | [L1313](formal/Logos/ModalCreationFrontiers.lean#L1313) | `structure HardenedModalFreeWill (World Subject : Type)` | —  |
+| `MC10_Signature` | structure | [L1840](formal/Logos/ModalCreationFrontiers.lean#L1840) | `structure MC10_Signature where` | —  |
+| `MC12_Signature` | structure | [L1897](formal/Logos/ModalCreationFrontiers.lean#L1897) | `structure MC12_Signature where` | —  |
+| `MC7_Signature` | structure | [L1693](formal/Logos/ModalCreationFrontiers.lean#L1693) | `structure MC7_Signature where` | —  |
+| `MC8_Signature` | structure | [L1750](formal/Logos/ModalCreationFrontiers.lean#L1750) | `structure MC8_Signature where` | —  |
+| `MC9_Signature` | structure | [L1788](formal/Logos/ModalCreationFrontiers.lean#L1788) | `structure MC9_Signature where` | —  |
+| `NecessaryAct` | def | [L1357](formal/Logos/ModalCreationFrontiers.lean#L1357) | `def NecessaryAct (World Subject : Type) (ActAt : World → Subject → Prop → Prop) ` | {}  |
+| `NecessaryEntity` | def | [L1351](formal/Logos/ModalCreationFrontiers.lean#L1351) | `def NecessaryEntity (World Entity : Type) (ExistsAt : World → Entity → Prop) (g ` | {}  |
+| `NecessaryNature` | def | [L1354](formal/Logos/ModalCreationFrontiers.lean#L1354) | `def NecessaryNature (World Entity : Type) (NatureAt : World → Entity → Prop) (g ` | {}  |
+| `SameCircumstances` | def | [L1495](formal/Logos/ModalCreationFrontiers.lean#L1495) | `def SameCircumstances (World : Type) (Circumstance : World → Prop) (w u : World)` | {}  |
+| `SameNature` | def | [L1498](formal/Logos/ModalCreationFrontiers.lean#L1498) | `def SameNature (World Entity : Type) (NatureAt : World → Entity → Prop) (g : Ent` | {}  |
+| `Statement1_PassiveNoCreation` | def | [L1444](formal/Logos/ModalCreationFrontiers.lean#L1444) | `def Statement1_PassiveNoCreation (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
+| `Statement2_WillsNotToCreate` | def | [L1449](formal/Logos/ModalCreationFrontiers.lean#L1449) | `def Statement2_WillsNotToCreate (World Subject : Type) (frame : KripkeFrame Worl` | {}  |
+| `Statement3_FreelyWillsNotToCreate` | def | [L1454](formal/Logos/ModalCreationFrontiers.lean#L1454) | `def Statement3_FreelyWillsNotToCreate (World Subject : Type) (frame : KripkeFram` | {}  |
+| `Statement4_BilateralFreeWillCreation` | def | [L1460](formal/Logos/ModalCreationFrontiers.lean#L1460) | `def Statement4_BilateralFreeWillCreation (World Subject : Type) (frame : KripkeF` | {}  |
+| `VolitionToActBridge` | def | [L1396](formal/Logos/ModalCreationFrontiers.lean#L1396) | `def VolitionToActBridge (World Subject : Type) (WillsAt : World → Subject → Prop` | {}  |
+| `VolitionToCreationBridge` | def | [L1413](formal/Logos/ModalCreationFrontiers.lean#L1413) | `def VolitionToCreationBridge (World Entity Subject : Type) (EntityOf : Subject →` | {}  |
+| `agent_causal_implies_volitional_indifference` | theorem | [L1596](formal/Logos/ModalCreationFrontiers.lean#L1596) | `theorem agent_causal_implies_volitional_indifference (World Subject : Type) (fra` | {}  |
+| `free_creation_anti_collapse` | theorem | [L1672](formal/Logos/ModalCreationFrontiers.lean#L1672) | `theorem free_creation_anti_collapse (World Subject : Type) (frame : KripkeFrame ` | {}  |
+| `hardened_modal_freedom_forces_distinct_worlds` | theorem | [L1330](formal/Logos/ModalCreationFrontiers.lean#L1330) | `theorem hardened_modal_freedom_forces_distinct_worlds (World Subject : Type) (fr` | {}  |
+| `involuntary_act_consistent` | theorem | [L1422](formal/Logos/ModalCreationFrontiers.lean#L1422) | `theorem involuntary_act_consistent : ∃ (World Subject : Type) (WillsAt : World →` | {}  |
+| `modal_collapse_action_theorem` | theorem | [L1530](formal/Logos/ModalCreationFrontiers.lean#L1530) | `theorem modal_collapse_action_theorem (World Entity Subject : Type) (frame : Kri` | {}  |
+| `modal_collapse_theorem` | theorem | [L1510](formal/Logos/ModalCreationFrontiers.lean#L1510) | `theorem modal_collapse_theorem (World Subject : Type) (frame : KripkeFrame World` | {}  |
+| `model_MC10_consistent` | theorem | [L1856](formal/Logos/ModalCreationFrontiers.lean#L1856) | `theorem model_MC10_consistent : ∃ _M : MC10_Signature, True` | {}  |
+| `model_MC11_consistent` | theorem | [L1881](formal/Logos/ModalCreationFrontiers.lean#L1881) | `theorem model_MC11_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
+| `model_MC12_consistent` | theorem | [L1913](formal/Logos/ModalCreationFrontiers.lean#L1913) | `theorem model_MC12_consistent : ∃ _M : MC12_Signature, True` | {}  |
+| `model_MC7_consistent` | theorem | [L1718](formal/Logos/ModalCreationFrontiers.lean#L1718) | `theorem model_MC7_consistent : ∃ _M : MC7_Signature, True` | {}  |
+| `model_MC8_consistent` | theorem | [L1766](formal/Logos/ModalCreationFrontiers.lean#L1766) | `theorem model_MC8_consistent : ∃ _M : MC8_Signature, True` | {}  |
+| `model_MC9_consistent` | theorem | [L1811](formal/Logos/ModalCreationFrontiers.lean#L1811) | `theorem model_MC9_consistent : ∃ _M : MC9_Signature, True` | {}  |
+| `necessary_nature_not_entails_necessary_act` | theorem | [L1366](formal/Logos/ModalCreationFrontiers.lean#L1366) | `theorem necessary_nature_not_entails_necessary_act : ∃ (World Entity Subject : T` | {}  |
+| `statement2_implies_statement1` | theorem | [L1474](formal/Logos/ModalCreationFrontiers.lean#L1474) | `theorem statement2_implies_statement1 (World Entity Subject : Type) (frame : Kri` | {}  |
+| `statement3_implies_statement2` | theorem | [L1466](formal/Logos/ModalCreationFrontiers.lean#L1466) | `theorem statement3_implies_statement2 (World Subject : Type) (frame : KripkeFram` | {}  |
+| `sufficient_freedom_not_entails_volitional_indifference` | theorem | [L1638](formal/Logos/ModalCreationFrontiers.lean#L1638) | `theorem sufficient_freedom_not_entails_volitional_indifference : ∃ (World Subjec` | {CL}  |
+| `unexecuted_volition_consistent` | theorem | [L1432](formal/Logos/ModalCreationFrontiers.lean#L1432) | `theorem unexecuted_volition_consistent : ∃ (World Subject : Type) (WillsAt : Wor` | {}  |
+| `volitional_indifference_implies_nondeterministic` | theorem | [L1621](formal/Logos/ModalCreationFrontiers.lean#L1621) | `theorem volitional_indifference_implies_nondeterministic (World Subject : Type) ` | {}  |
+| `volitional_indifference_implies_sufficient_freedom` | theorem | [L1609](formal/Logos/ModalCreationFrontiers.lean#L1609) | `theorem volitional_indifference_implies_sufficient_freedom (World Subject : Type` | {}  |
 
 ### `Logos.ExecutiveDeliberativeFrontier`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `AuditVerdict` | structure | [L300](formal/Logos/ExecutiveDeliberativeFrontier.lean#L300) | `structure AuditVerdict where` | —  |
-| `BranchingWorldSignature` | structure | [L416](formal/Logos/ExecutiveDeliberativeFrontier.lean#L416) | `structure BranchingWorldSignature where` | —  |
-| `CognitiveLadder` | structure | [L386](formal/Logos/ExecutiveDeliberativeFrontier.lean#L386) | `structure CognitiveLadder (Subject : Type) where` | —  |
-| `DeterministicModel` | structure | [L165](formal/Logos/ExecutiveDeliberativeFrontier.lean#L165) | `structure DeterministicModel where` | —  |
-| `DownstreamOntology` | structure | [L518](formal/Logos/ExecutiveDeliberativeFrontier.lean#L518) | `structure DownstreamOntology where` | —  |
-| `M_det` | def | [L181](formal/Logos/ExecutiveDeliberativeFrontier.lean#L181) | `def M_det : DeterministicModel where Subject` | {} → EvalSettlement |
-| `M_det_refutes_chooses` | theorem | [L210](formal/Logos/ExecutiveDeliberativeFrontier.lean#L210) | `theorem M_det_refutes_chooses (M : DeterministicModel) : ¬ ∃ p q, M.Means M.s p ` | {}  |
-| `M_det_refutes_missing_cognitive_horn` | theorem | [L202](formal/Logos/ExecutiveDeliberativeFrontier.lean#L202) | `theorem M_det_refutes_missing_cognitive_horn (M : DeterministicModel) : ¬ ∃ q, M` | {}  |
-| `M_det_validates_executive_choice` | theorem | [L197](formal/Logos/ExecutiveDeliberativeFrontier.lean#L197) | `theorem M_det_validates_executive_choice (M : DeterministicModel) : M.Asserts M.` | {}  |
-| `MechanicalProver` | structure | [L349](formal/Logos/ExecutiveDeliberativeFrontier.lean#L349) | `structure MechanicalProver where` | —  |
-| `ProofTraceSignature` | structure | [L343](formal/Logos/ExecutiveDeliberativeFrontier.lean#L343) | `structure ProofTraceSignature where` | —  |
-| `SelfDenialOfDeliberation` | def | [L249](formal/Logos/ExecutiveDeliberativeFrontier.lean#L249) | `def SelfDenialOfDeliberation (s : Subject) (p : Prop) : Prop` | {Initiates, Means, State, Subject}  |
-| `audit_Act_to_Choice` | def | [L306](formal/Logos/ExecutiveDeliberativeFrontier.lean#L306) | `def audit_Act_to_Choice : AuditVerdict where candidateName` | {}  |
-| `audit_Act_to_Chooses` | def | [L318](formal/Logos/ExecutiveDeliberativeFrontier.lean#L318) | `def audit_Act_to_Chooses : AuditVerdict where candidateName` | {}  |
-| `audit_Choice_to_Chooses` | def | [L312](formal/Logos/ExecutiveDeliberativeFrontier.lean#L312) | `def audit_Choice_to_Chooses : AuditVerdict where candidateName` | {}  |
-| `audit_ExistentialAct_to_FreeWill` | def | [L324](formal/Logos/ExecutiveDeliberativeFrontier.lean#L324) | `def audit_ExistentialAct_to_FreeWill : AuditVerdict where candidateName` | {}  |
-| `exclusion_not_implies_representation` | theorem | [L393](formal/Logos/ExecutiveDeliberativeFrontier.lean#L393) | `theorem exclusion_not_implies_representation : ∃ (Subject : Type) (CL : Cognitiv` | {CL}  |
-| `freeAgency_not_implies_necessary_subject` | theorem | [L539](formal/Logos/ExecutiveDeliberativeFrontier.lean#L539) | `theorem freeAgency_not_implies_necessary_subject : ∃ (DO : DownstreamOntology) (` | {}  |
-| `freeAgency_not_implies_person` | theorem | [L526](formal/Logos/ExecutiveDeliberativeFrontier.lean#L526) | `theorem freeAgency_not_implies_person : ∃ (DO : DownstreamOntology) (s : DO.Subj` | {}  |
-| `freeAgency_not_implies_ultimate_ground` | theorem | [L552](formal/Logos/ExecutiveDeliberativeFrontier.lean#L552) | `theorem freeAgency_not_implies_ultimate_ground : ∃ (DO : DownstreamOntology) (s ` | {}  |
-| `mechanical_prover_lacks_deliberation` | theorem | [L355](formal/Logos/ExecutiveDeliberativeFrontier.lean#L355) | `theorem mechanical_prover_lacks_deliberation : ∃ (M : MechanicalProver), (∃ step` | {}  |
-| `modal_branching_not_induces_representation` | theorem | [L427](formal/Logos/ExecutiveDeliberativeFrontier.lean#L427) | `theorem modal_branching_not_induces_representation : ∃ (BW : BranchingWorldSigna` | {}  |
-| `retorsion_NoChoice_self_refutes` | theorem | [L472](formal/Logos/ExecutiveDeliberativeFrontier.lean#L472) | `theorem retorsion_NoChoice_self_refutes (s : Subject) (p : Prop) (hAss : Asserts` | {Initiates, Means, State, Subject}  |
-| `retorsion_NoDeliberation_consistent` | theorem | [L482](formal/Logos/ExecutiveDeliberativeFrontier.lean#L482) | `theorem retorsion_NoDeliberation_consistent : ∃ (Subject : Type) (s : Subject) (` | {}  |
-| `retorsion_NoFreeWill_consistent` | theorem | [L495](formal/Logos/ExecutiveDeliberativeFrontier.lean#L495) | `theorem retorsion_NoFreeWill_consistent : ∃ (Subject : Type) (s : Subject) (p : ` | {}  |
-| `schema_S1_performative_contradiction` | theorem | [L235](formal/Logos/ExecutiveDeliberativeFrontier.lean#L235) | `theorem schema_S1_performative_contradiction (s : Subject) (p : Prop) (hAss : As` | {Initiates, Means, State, Subject}  |
-| `schema_S2_coherent` | theorem | [L243](formal/Logos/ExecutiveDeliberativeFrontier.lean#L243) | `theorem schema_S2_coherent (s : Subject) (p : Prop) (hAss : Asserts s p) (_hSelf` | {Initiates, Means, State, Subject}  |
-| `schema_S4_satisfiable_and_non_self_refuting` | theorem | [L254](formal/Logos/ExecutiveDeliberativeFrontier.lean#L254) | `theorem schema_S4_satisfiable_and_non_self_refuting : ∃ (Subject : Type) (s : Su` | {}  |
-| `schema_S5_executive_without_deliberation_coherent` | theorem | [L266](formal/Logos/ExecutiveDeliberativeFrontier.lean#L266) | `theorem schema_S5_executive_without_deliberation_coherent : ∃ (Subject : Type) (` | {}  |
-| `trackA_act_not_implies_deliberates` | theorem | [L117](formal/Logos/ExecutiveDeliberativeFrontier.lean#L117) | `theorem trackA_act_not_implies_deliberates : ∃ (Subject : Type) (s : Subject) (p` | {}  |
-| `trackA_asserts_implies_choice` | theorem | [L61](formal/Logos/ExecutiveDeliberativeFrontier.lean#L61) | `theorem trackA_asserts_implies_choice (s : Subject) (p : Prop) (hAss : Asserts s` | {Initiates, Means, State, Subject}  |
-| `trackA_choice_implies_freeAgency` | theorem | [L66](formal/Logos/ExecutiveDeliberativeFrontier.lean#L66) | `theorem trackA_choice_implies_freeAgency (s : Subject) (p : Prop) (hChoice : Cho` | {Initiates, Means, State, Subject}  |
-| `trackA_choice_not_implies_chooses` | theorem | [L82](formal/Logos/ExecutiveDeliberativeFrontier.lean#L82) | `theorem trackA_choice_not_implies_chooses : ∃ (Subject : Type) (s : Subject) (p ` | {}  |
-| `trackA_chooses_implies_freeWill` | theorem | [L71](formal/Logos/ExecutiveDeliberativeFrontier.lean#L71) | `theorem trackA_chooses_implies_freeWill (s : Subject) (p q : Prop) (hChooses : C` | {Means, Subject}  |
-| `trackA_chooses_not_implies_choice` | theorem | [L102](formal/Logos/ExecutiveDeliberativeFrontier.lean#L102) | `theorem trackA_chooses_not_implies_choice : ∃ (Subject : Type) (s : Subject) (p ` | {}  |
-| `trackA_deliberates_iff_chooses` | theorem | [L76](formal/Logos/ExecutiveDeliberativeFrontier.lean#L76) | `theorem trackA_deliberates_iff_chooses (s : Subject) (p q : Prop) : Deliberates ` | {Means, Subject}  |
-| `trackA_freeAgency_not_implies_freeWill` | theorem | [L134](formal/Logos/ExecutiveDeliberativeFrontier.lean#L134) | `theorem trackA_freeAgency_not_implies_freeWill : ∃ (Subject : Type) (s : Subject` | {}  |
-| `trackB_selfDenialOfExecutiveChoice_selfRefutes` | theorem | [L157](formal/Logos/ExecutiveDeliberativeFrontier.lean#L157) | `theorem trackB_selfDenialOfExecutiveChoice_selfRefutes {s : Subject} {p : Prop} ` | {Initiates, Means, State, Subject}  |
+| `AuditVerdict` | structure | [L4110](formal/Logos/AgencyAuditsAndFrontiers.lean#L4110) | `structure AuditVerdict where` | —  |
+| `BranchingWorldSignature` | structure | [L4226](formal/Logos/AgencyAuditsAndFrontiers.lean#L4226) | `structure BranchingWorldSignature where` | —  |
+| `CognitiveLadder` | structure | [L4196](formal/Logos/AgencyAuditsAndFrontiers.lean#L4196) | `structure CognitiveLadder (Subject : Type) where` | —  |
+| `DeterministicModel` | structure | [L3975](formal/Logos/AgencyAuditsAndFrontiers.lean#L3975) | `structure DeterministicModel where` | —  |
+| `DownstreamOntology` | structure | [L4328](formal/Logos/AgencyAuditsAndFrontiers.lean#L4328) | `structure DownstreamOntology where` | —  |
+| `M_det` | def | [L3991](formal/Logos/AgencyAuditsAndFrontiers.lean#L3991) | `def M_det : DeterministicModel where Subject` | {} → EvalSettlement |
+| `M_det_refutes_chooses` | theorem | [L4020](formal/Logos/AgencyAuditsAndFrontiers.lean#L4020) | `theorem M_det_refutes_chooses (M : DeterministicModel) : ¬ ∃ p q, M.Means M.s p ` | {}  |
+| `M_det_refutes_missing_cognitive_horn` | theorem | [L4012](formal/Logos/AgencyAuditsAndFrontiers.lean#L4012) | `theorem M_det_refutes_missing_cognitive_horn (M : DeterministicModel) : ¬ ∃ q, M` | {}  |
+| `M_det_validates_executive_choice` | theorem | [L4007](formal/Logos/AgencyAuditsAndFrontiers.lean#L4007) | `theorem M_det_validates_executive_choice (M : DeterministicModel) : M.Asserts M.` | {}  |
+| `MechanicalProver` | structure | [L4159](formal/Logos/AgencyAuditsAndFrontiers.lean#L4159) | `structure MechanicalProver where` | —  |
+| `ProofTraceSignature` | structure | [L4153](formal/Logos/AgencyAuditsAndFrontiers.lean#L4153) | `structure ProofTraceSignature where` | —  |
+| `SelfDenialOfDeliberation` | def | [L4059](formal/Logos/AgencyAuditsAndFrontiers.lean#L4059) | `def SelfDenialOfDeliberation (s : Subject) (p : Prop) : Prop` | {Initiates, Means, State, Subject}  |
+| `audit_Act_to_Choice` | def | [L4116](formal/Logos/AgencyAuditsAndFrontiers.lean#L4116) | `def audit_Act_to_Choice : AuditVerdict where candidateName` | {}  |
+| `audit_Act_to_Chooses` | def | [L4128](formal/Logos/AgencyAuditsAndFrontiers.lean#L4128) | `def audit_Act_to_Chooses : AuditVerdict where candidateName` | {}  |
+| `audit_Choice_to_Chooses` | def | [L4122](formal/Logos/AgencyAuditsAndFrontiers.lean#L4122) | `def audit_Choice_to_Chooses : AuditVerdict where candidateName` | {}  |
+| `audit_ExistentialAct_to_FreeWill` | def | [L4134](formal/Logos/AgencyAuditsAndFrontiers.lean#L4134) | `def audit_ExistentialAct_to_FreeWill : AuditVerdict where candidateName` | {}  |
+| `exclusion_not_implies_representation` | theorem | [L4203](formal/Logos/AgencyAuditsAndFrontiers.lean#L4203) | `theorem exclusion_not_implies_representation : ∃ (Subject : Type) (CL : Cognitiv` | {CL}  |
+| `freeAgency_not_implies_necessary_subject` | theorem | [L4349](formal/Logos/AgencyAuditsAndFrontiers.lean#L4349) | `theorem freeAgency_not_implies_necessary_subject : ∃ (DO : DownstreamOntology) (` | {}  |
+| `freeAgency_not_implies_person` | theorem | [L4336](formal/Logos/AgencyAuditsAndFrontiers.lean#L4336) | `theorem freeAgency_not_implies_person : ∃ (DO : DownstreamOntology) (s : DO.Subj` | {}  |
+| `freeAgency_not_implies_ultimate_ground` | theorem | [L4362](formal/Logos/AgencyAuditsAndFrontiers.lean#L4362) | `theorem freeAgency_not_implies_ultimate_ground : ∃ (DO : DownstreamOntology) (s ` | {}  |
+| `mechanical_prover_lacks_deliberation` | theorem | [L4165](formal/Logos/AgencyAuditsAndFrontiers.lean#L4165) | `theorem mechanical_prover_lacks_deliberation : ∃ (M : MechanicalProver), (∃ step` | {}  |
+| `modal_branching_not_induces_representation` | theorem | [L4237](formal/Logos/AgencyAuditsAndFrontiers.lean#L4237) | `theorem modal_branching_not_induces_representation : ∃ (BW : BranchingWorldSigna` | {}  |
+| `retorsion_NoChoice_self_refutes` | theorem | [L4282](formal/Logos/AgencyAuditsAndFrontiers.lean#L4282) | `theorem retorsion_NoChoice_self_refutes (s : Subject) (p : Prop) (hAss : Asserts` | {Initiates, Means, State, Subject}  |
+| `retorsion_NoDeliberation_consistent` | theorem | [L4292](formal/Logos/AgencyAuditsAndFrontiers.lean#L4292) | `theorem retorsion_NoDeliberation_consistent : ∃ (Subject : Type) (s : Subject) (` | {}  |
+| `retorsion_NoFreeWill_consistent` | theorem | [L4305](formal/Logos/AgencyAuditsAndFrontiers.lean#L4305) | `theorem retorsion_NoFreeWill_consistent : ∃ (Subject : Type) (s : Subject) (p : ` | {}  |
+| `schema_S1_performative_contradiction` | theorem | [L4045](formal/Logos/AgencyAuditsAndFrontiers.lean#L4045) | `theorem schema_S1_performative_contradiction (s : Subject) (p : Prop) (hAss : As` | {Initiates, Means, State, Subject}  |
+| `schema_S2_coherent` | theorem | [L4053](formal/Logos/AgencyAuditsAndFrontiers.lean#L4053) | `theorem schema_S2_coherent (s : Subject) (p : Prop) (hAss : Asserts s p) (_hSelf` | {Initiates, Means, State, Subject}  |
+| `schema_S4_satisfiable_and_non_self_refuting` | theorem | [L4064](formal/Logos/AgencyAuditsAndFrontiers.lean#L4064) | `theorem schema_S4_satisfiable_and_non_self_refuting : ∃ (Subject : Type) (s : Su` | {}  |
+| `schema_S5_executive_without_deliberation_coherent` | theorem | [L4076](formal/Logos/AgencyAuditsAndFrontiers.lean#L4076) | `theorem schema_S5_executive_without_deliberation_coherent : ∃ (Subject : Type) (` | {}  |
+| `trackA_act_not_implies_deliberates` | theorem | [L3927](formal/Logos/AgencyAuditsAndFrontiers.lean#L3927) | `theorem trackA_act_not_implies_deliberates : ∃ (Subject : Type) (s : Subject) (p` | {}  |
+| `trackA_asserts_implies_choice` | theorem | [L3871](formal/Logos/AgencyAuditsAndFrontiers.lean#L3871) | `theorem trackA_asserts_implies_choice (s : Subject) (p : Prop) (hAss : Asserts s` | {Initiates, Means, State, Subject}  |
+| `trackA_choice_implies_freeAgency` | theorem | [L3876](formal/Logos/AgencyAuditsAndFrontiers.lean#L3876) | `theorem trackA_choice_implies_freeAgency (s : Subject) (p : Prop) (hChoice : Cho` | {Initiates, Means, State, Subject}  |
+| `trackA_choice_not_implies_chooses` | theorem | [L3892](formal/Logos/AgencyAuditsAndFrontiers.lean#L3892) | `theorem trackA_choice_not_implies_chooses : ∃ (Subject : Type) (s : Subject) (p ` | {}  |
+| `trackA_chooses_implies_freeWill` | theorem | [L3881](formal/Logos/AgencyAuditsAndFrontiers.lean#L3881) | `theorem trackA_chooses_implies_freeWill (s : Subject) (p q : Prop) (hChooses : C` | {Means, Subject}  |
+| `trackA_chooses_not_implies_choice` | theorem | [L3912](formal/Logos/AgencyAuditsAndFrontiers.lean#L3912) | `theorem trackA_chooses_not_implies_choice : ∃ (Subject : Type) (s : Subject) (p ` | {}  |
+| `trackA_deliberates_iff_chooses` | theorem | [L3886](formal/Logos/AgencyAuditsAndFrontiers.lean#L3886) | `theorem trackA_deliberates_iff_chooses (s : Subject) (p q : Prop) : Deliberates ` | {Means, Subject}  |
+| `trackA_freeAgency_not_implies_freeWill` | theorem | [L3944](formal/Logos/AgencyAuditsAndFrontiers.lean#L3944) | `theorem trackA_freeAgency_not_implies_freeWill : ∃ (Subject : Type) (s : Subject` | {}  |
+| `trackB_selfDenialOfExecutiveChoice_selfRefutes` | theorem | [L3967](formal/Logos/AgencyAuditsAndFrontiers.lean#L3967) | `theorem trackB_selfDenialOfExecutiveChoice_selfRefutes {s : Subject} {p : Prop} ` | {Initiates, Means, State, Subject}  |
 
 ### `Logos.FoundationalOmnipresence`
 
@@ -2799,68 +2777,68 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `BridgeB1` | def | [L390](formal/Logos/FreeWillIndependence.lean#L390) | `def BridgeB1 (CS : FineCognitiveSubject Subject) : Prop` | {Subject}  |
-| `BridgeB2` | def | [L394](formal/Logos/FreeWillIndependence.lean#L394) | `def BridgeB2 (CS : FineCognitiveSubject Subject) (MeansAt : Subject → Prop → Pro` | {Subject}  |
-| `BridgeB3` | def | [L398](formal/Logos/FreeWillIndependence.lean#L398) | `def BridgeB3 (MeansAt : Subject → Prop → Prop) (CanAct : Subject → Prop → Prop) ` | {Subject}  |
-| `BridgeB4` | def | [L402](formal/Logos/FreeWillIndependence.lean#L402) | `def BridgeB4 (CanAct : Subject → Prop → Prop) (AgentDetermines : Subject → Prop ` | {Subject}  |
-| `CognitiveStatus` | inductive | [L116](formal/Logos/FreeWillIndependence.lean#L116) | `inductive CognitiveStatus | Assumed | Examined | Rejected | Affirmed` | —  |
-| `DeliberativeState` | structure | [L267](formal/Logos/FreeWillIndependence.lean#L267) | `structure DeliberativeState where` | —  |
-| `F1b_Target` | def | [L50](formal/Logos/FreeWillIndependence.lean#L50) | `def F1b_Target : Prop` | {Initiates, Means, State, Subject}  |
-| `GammaCoreModel` | structure | [L138](formal/Logos/FreeWillIndependence.lean#L138) | `structure GammaCoreModel where` | —  |
-| `HasCommitment` | def | [L74](formal/Logos/FreeWillIndependence.lean#L74) | `def HasCommitment (CS : FineCognitiveSubject Subject) (s : Subject) (p : Prop) :` | {Subject}  |
-| `RationalDeliberator` | structure | [L336](formal/Logos/FreeWillIndependence.lean#L336) | `structure RationalDeliberator (Subject : Type) where` | —  |
-| `TransformToUnipolar` | def | [L247](formal/Logos/FreeWillIndependence.lean#L247) | `def TransformToUnipolar (M : GammaCoreModel) (s_witness : M.Subj) (p_witness : P` | {}  |
-| `bridge_B2_derives_choice` | theorem | [L407](formal/Logos/FreeWillIndependence.lean#L407) | `theorem bridge_B2_derives_choice (CS : FineCognitiveSubject Subject) (MeansAt : ` | {Subject}  |
-| `deterministic_status_transition_without_freewill` | theorem | [L120](formal/Logos/FreeWillIndependence.lean#L120) | `theorem deterministic_status_transition_without_freewill : ∃ (Transition : Cogni` | {}  |
-| `f1b_target_definitionally_unfolded` | theorem | [L54](formal/Logos/FreeWillIndependence.lean#L54) | `theorem f1b_target_definitionally_unfolded : F1b_Target ↔ ((∃ s : Subject, ∃ p :` | {Initiates, Means, State, Subject}  |
-| `freewill_is_model_theoretically_independent` | theorem | [L239](formal/Logos/FreeWillIndependence.lean#L239) | `theorem freewill_is_model_theoretically_independent : (∃ M : GammaCoreModel, ∃ s` | {}  |
-| `identical_deliberation_case_A` | theorem | [L290](formal/Logos/FreeWillIndependence.lean#L290) | `theorem identical_deliberation_case_A : ∃ (AgentSettles : DeliberativeState → Pr` | {}  |
-| `identical_deliberation_case_D` | theorem | [L274](formal/Logos/FreeWillIndependence.lean#L274) | `theorem identical_deliberation_case_D : ∃ (Transition : DeliberativeState → Prop` | {}  |
-| `identical_deliberation_case_M` | theorem | [L281](formal/Logos/FreeWillIndependence.lean#L281) | `theorem identical_deliberation_case_M : ∃ (Accessible : DeliberativeState → Prop` | {}  |
-| `intentional_resolution_excludes_choice_of_same_horns` | theorem | [L108](formal/Logos/FreeWillIndependence.lean#L108) | `theorem intentional_resolution_excludes_choice_of_same_horns (MeansAt : Subject ` | {Subject}  |
-| `model_A_gamma_with_freewill` | theorem | [L152](formal/Logos/FreeWillIndependence.lean#L152) | `theorem model_A_gamma_with_freewill : ∃ (M : GammaCoreModel), ∃ (s : M.Subj) (p ` | {}  |
-| `model_B_gamma_without_freewill` | theorem | [L192](formal/Logos/FreeWillIndependence.lean#L192) | `theorem model_B_gamma_without_freewill : ∃ (M : GammaCoreModel), (∀ (s : M.Subj)` | {}  |
-| `model_M14_plus_evaluation_without_commitment` | theorem | [L79](formal/Logos/FreeWillIndependence.lean#L79) | `theorem model_M14_plus_evaluation_without_commitment : ∃ (Subj : Type) (CS : Fin` | {}  |
-| `model_deterministic_rationality_without_modal_freedom` | theorem | [L345](formal/Logos/FreeWillIndependence.lean#L345) | `theorem model_deterministic_rationality_without_modal_freedom : ∃ (Subject : Typ` | {}  |
-| `model_libertarian_settlement_without_reasons` | theorem | [L359](formal/Logos/FreeWillIndependence.lean#L359) | `theorem model_libertarian_settlement_without_reasons : ∃ (Subject : Type) (RD : ` | {}  |
-| `rationality_orthogonal_to_libertarian_freedom` | theorem | [L373](formal/Logos/FreeWillIndependence.lean#L373) | `theorem rationality_orthogonal_to_libertarian_freedom : (∃ (Subj : Type) (RD : R` | {}  |
-| `settlement_1_compatible_with_no_chdo` | theorem | [L303](formal/Logos/FreeWillIndependence.lean#L303) | `theorem settlement_1_compatible_with_no_chdo : ∃ (Subject : Type) (CS : FineCogn` | {}  |
-| `settlement_1_is_assembled_package` | theorem | [L63](formal/Logos/FreeWillIndependence.lean#L63) | `theorem settlement_1_is_assembled_package (CS : FineCognitiveSubject Subject) (s` | {Subject}  |
+| `BridgeB1` | def | [L3308](formal/Logos/AgencyAuditsAndFrontiers.lean#L3308) | `def BridgeB1 (CS : FineCognitiveSubject Subject) : Prop` | {Subject}  |
+| `BridgeB2` | def | [L3312](formal/Logos/AgencyAuditsAndFrontiers.lean#L3312) | `def BridgeB2 (CS : FineCognitiveSubject Subject) (MeansAt : Subject → Prop → Pro` | {Subject}  |
+| `BridgeB3` | def | [L3316](formal/Logos/AgencyAuditsAndFrontiers.lean#L3316) | `def BridgeB3 (MeansAt : Subject → Prop → Prop) (CanAct : Subject → Prop → Prop) ` | {Subject}  |
+| `BridgeB4` | def | [L3320](formal/Logos/AgencyAuditsAndFrontiers.lean#L3320) | `def BridgeB4 (CanAct : Subject → Prop → Prop) (AgentDetermines : Subject → Prop ` | {Subject}  |
+| `CognitiveStatus` | inductive | [L3034](formal/Logos/AgencyAuditsAndFrontiers.lean#L3034) | `inductive CognitiveStatus | Assumed | Examined | Rejected | Affirmed` | —  |
+| `DeliberativeState` | structure | [L3185](formal/Logos/AgencyAuditsAndFrontiers.lean#L3185) | `structure DeliberativeState where` | —  |
+| `F1b_Target` | def | [L2968](formal/Logos/AgencyAuditsAndFrontiers.lean#L2968) | `def F1b_Target : Prop` | {Initiates, Means, State, Subject}  |
+| `GammaCoreModel` | structure | [L3056](formal/Logos/AgencyAuditsAndFrontiers.lean#L3056) | `structure GammaCoreModel where` | —  |
+| `HasCommitment` | def | [L2992](formal/Logos/AgencyAuditsAndFrontiers.lean#L2992) | `def HasCommitment (CS : FineCognitiveSubject Subject) (s : Subject) (p : Prop) :` | {Subject}  |
+| `RationalDeliberator` | structure | [L3254](formal/Logos/AgencyAuditsAndFrontiers.lean#L3254) | `structure RationalDeliberator (Subject : Type) where` | —  |
+| `TransformToUnipolar` | def | [L3165](formal/Logos/AgencyAuditsAndFrontiers.lean#L3165) | `def TransformToUnipolar (M : GammaCoreModel) (s_witness : M.Subj) (p_witness : P` | {}  |
+| `bridge_B2_derives_choice` | theorem | [L3325](formal/Logos/AgencyAuditsAndFrontiers.lean#L3325) | `theorem bridge_B2_derives_choice (CS : FineCognitiveSubject Subject) (MeansAt : ` | {Subject}  |
+| `deterministic_status_transition_without_freewill` | theorem | [L3038](formal/Logos/AgencyAuditsAndFrontiers.lean#L3038) | `theorem deterministic_status_transition_without_freewill : ∃ (Transition : Cogni` | {}  |
+| `f1b_target_definitionally_unfolded` | theorem | [L2972](formal/Logos/AgencyAuditsAndFrontiers.lean#L2972) | `theorem f1b_target_definitionally_unfolded : F1b_Target ↔ ((∃ s : Subject, ∃ p :` | {Initiates, Means, State, Subject}  |
+| `freewill_is_model_theoretically_independent` | theorem | [L3157](formal/Logos/AgencyAuditsAndFrontiers.lean#L3157) | `theorem freewill_is_model_theoretically_independent : (∃ M : GammaCoreModel, ∃ s` | {}  |
+| `identical_deliberation_case_A` | theorem | [L3208](formal/Logos/AgencyAuditsAndFrontiers.lean#L3208) | `theorem identical_deliberation_case_A : ∃ (AgentSettles : DeliberativeState → Pr` | {}  |
+| `identical_deliberation_case_D` | theorem | [L3192](formal/Logos/AgencyAuditsAndFrontiers.lean#L3192) | `theorem identical_deliberation_case_D : ∃ (Transition : DeliberativeState → Prop` | {}  |
+| `identical_deliberation_case_M` | theorem | [L3199](formal/Logos/AgencyAuditsAndFrontiers.lean#L3199) | `theorem identical_deliberation_case_M : ∃ (Accessible : DeliberativeState → Prop` | {}  |
+| `intentional_resolution_excludes_choice_of_same_horns` | theorem | [L3026](formal/Logos/AgencyAuditsAndFrontiers.lean#L3026) | `theorem intentional_resolution_excludes_choice_of_same_horns (MeansAt : Subject ` | {Subject}  |
+| `model_A_gamma_with_freewill` | theorem | [L3070](formal/Logos/AgencyAuditsAndFrontiers.lean#L3070) | `theorem model_A_gamma_with_freewill : ∃ (M : GammaCoreModel), ∃ (s : M.Subj) (p ` | {}  |
+| `model_B_gamma_without_freewill` | theorem | [L3110](formal/Logos/AgencyAuditsAndFrontiers.lean#L3110) | `theorem model_B_gamma_without_freewill : ∃ (M : GammaCoreModel), (∀ (s : M.Subj)` | {}  |
+| `model_M14_plus_evaluation_without_commitment` | theorem | [L2997](formal/Logos/AgencyAuditsAndFrontiers.lean#L2997) | `theorem model_M14_plus_evaluation_without_commitment : ∃ (Subj : Type) (CS : Fin` | {}  |
+| `model_deterministic_rationality_without_modal_freedom` | theorem | [L3263](formal/Logos/AgencyAuditsAndFrontiers.lean#L3263) | `theorem model_deterministic_rationality_without_modal_freedom : ∃ (Subject : Typ` | {}  |
+| `model_libertarian_settlement_without_reasons` | theorem | [L3277](formal/Logos/AgencyAuditsAndFrontiers.lean#L3277) | `theorem model_libertarian_settlement_without_reasons : ∃ (Subject : Type) (RD : ` | {}  |
+| `rationality_orthogonal_to_libertarian_freedom` | theorem | [L3291](formal/Logos/AgencyAuditsAndFrontiers.lean#L3291) | `theorem rationality_orthogonal_to_libertarian_freedom : (∃ (Subj : Type) (RD : R` | {}  |
+| `settlement_1_compatible_with_no_chdo` | theorem | [L3221](formal/Logos/AgencyAuditsAndFrontiers.lean#L3221) | `theorem settlement_1_compatible_with_no_chdo : ∃ (Subject : Type) (CS : FineCogn` | {}  |
+| `settlement_1_is_assembled_package` | theorem | [L2981](formal/Logos/AgencyAuditsAndFrontiers.lean#L2981) | `theorem settlement_1_is_assembled_package (CS : FineCognitiveSubject Subject) (s` | {Subject}  |
 
 ### `Logos.FreeWillInvariance`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `CoreGammaLayer` | def | [L184](formal/Logos/FreeWillInvariance.lean#L184) | `def CoreGammaLayer (l : DependencyLayer) : Prop` | {}  |
-| `DatumRequiresFreeWill` | def | [L116](formal/Logos/FreeWillInvariance.lean#L116) | `def DatumRequiresFreeWill (Subject : Type) (p : Prop) (_datum : PerformativeDatu` | {}  |
-| `DependencyLayer` | inductive | [L82](formal/Logos/FreeWillInvariance.lean#L82) | `inductive DependencyLayer` | —  |
-| `FirstFreeWillSensitiveLayer` | def | [L217](formal/Logos/FreeWillInvariance.lean#L217) | `def FirstFreeWillSensitiveLayer : DependencyLayer` | {}  |
-| `LayerRequiresFreeWill` | def | [L196](formal/Logos/FreeWillInvariance.lean#L196) | `def LayerRequiresFreeWill (l : DependencyLayer) : Prop` | {}  |
-| `PerformativeDatum` | structure | [L111](formal/Logos/FreeWillInvariance.lean#L111) | `structure PerformativeDatum (Subject : Type) (p : Prop) where` | —  |
-| `PerformerRegime` | inductive | [L58](formal/Logos/FreeWillInvariance.lean#L58) | `inductive PerformerRegime` | —  |
-| `ProofDimensions` | structure | [L73](formal/Logos/FreeWillInvariance.lean#L73) | `structure ProofDimensions (World Subject : Type) where` | —  |
-| `causal_necessity_not_entails_logical_necessity` | theorem | [L151](formal/Logos/FreeWillInvariance.lean#L151) | `theorem causal_necessity_not_entails_logical_necessity : ∃ (World : Type) (frame` | {}  |
-| `core_gamma_free_will_invariant` | theorem | [L202](formal/Logos/FreeWillInvariance.lean#L202) | `theorem core_gamma_free_will_invariant (l : DependencyLayer) (hCore : CoreGammaL` | {}  |
-| `first_freewill_sensitive_layer_is_L10` | theorem | [L220](formal/Logos/FreeWillInvariance.lean#L220) | `theorem first_freewill_sensitive_layer_is_L10 : FirstFreeWillSensitiveLayer = De` | {}  |
-| `model_FW0_consistent` | theorem | [L234](formal/Logos/FreeWillInvariance.lean#L234) | `theorem model_FW0_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
-| `model_FW10_consistent` | theorem | [L364](formal/Logos/FreeWillInvariance.lean#L364) | `theorem model_FW10_consistent : ∃ (World : Type) (frame : KripkeFrame World) (ac` | {}  |
-| `model_FW1_consistent` | theorem | [L247](formal/Logos/FreeWillInvariance.lean#L247) | `theorem model_FW1_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
-| `model_FW2_consistent` | theorem | [L262](formal/Logos/FreeWillInvariance.lean#L262) | `theorem model_FW2_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
-| `model_FW3_consistent` | theorem | [L280](formal/Logos/FreeWillInvariance.lean#L280) | `theorem model_FW3_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
-| `model_FW4_consistent` | theorem | [L292](formal/Logos/FreeWillInvariance.lean#L292) | `theorem model_FW4_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
-| `model_FW5_consistent` | theorem | [L308](formal/Logos/FreeWillInvariance.lean#L308) | `theorem model_FW5_consistent : ∃ (World : Type) (frame : KripkeFrame World) (act` | {}  |
-| `model_FW6_consistent` | theorem | [L316](formal/Logos/FreeWillInvariance.lean#L316) | `theorem model_FW6_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
-| `model_FW7_consistent` | theorem | [L331](formal/Logos/FreeWillInvariance.lean#L331) | `theorem model_FW7_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
-| `model_FW8_consistent` | theorem | [L339](formal/Logos/FreeWillInvariance.lean#L339) | `theorem model_FW8_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
-| `model_FW9_consistent` | theorem | [L351](formal/Logos/FreeWillInvariance.lean#L351) | `theorem model_FW9_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
-| `performative_datum_not_entails_freewill` | theorem | [L121](formal/Logos/FreeWillInvariance.lean#L121) | `theorem performative_datum_not_entails_freewill : ∃ (Subject : Type) (p : Prop) ` | {}  |
-| `retorsion_under_determinism_valid` | theorem | [L134](formal/Logos/FreeWillInvariance.lean#L134) | `theorem retorsion_under_determinism_valid : ∃ (World Subject : Type) (Antecedent` | {}  |
+| `CoreGammaLayer` | def | [L3850](formal/Logos/ModalCreationFrontiers.lean#L3850) | `def CoreGammaLayer (l : DependencyLayer) : Prop` | {}  |
+| `DatumRequiresFreeWill` | def | [L3782](formal/Logos/ModalCreationFrontiers.lean#L3782) | `def DatumRequiresFreeWill (Subject : Type) (p : Prop) (_datum : PerformativeDatu` | {}  |
+| `DependencyLayer` | inductive | [L3748](formal/Logos/ModalCreationFrontiers.lean#L3748) | `inductive DependencyLayer` | —  |
+| `FirstFreeWillSensitiveLayer` | def | [L3883](formal/Logos/ModalCreationFrontiers.lean#L3883) | `def FirstFreeWillSensitiveLayer : DependencyLayer` | {}  |
+| `LayerRequiresFreeWill` | def | [L3862](formal/Logos/ModalCreationFrontiers.lean#L3862) | `def LayerRequiresFreeWill (l : DependencyLayer) : Prop` | {}  |
+| `PerformativeDatum` | structure | [L3777](formal/Logos/ModalCreationFrontiers.lean#L3777) | `structure PerformativeDatum (Subject : Type) (p : Prop) where` | —  |
+| `PerformerRegime` | inductive | [L3724](formal/Logos/ModalCreationFrontiers.lean#L3724) | `inductive PerformerRegime` | —  |
+| `ProofDimensions` | structure | [L3739](formal/Logos/ModalCreationFrontiers.lean#L3739) | `structure ProofDimensions (World Subject : Type) where` | —  |
+| `causal_necessity_not_entails_logical_necessity` | theorem | [L3817](formal/Logos/ModalCreationFrontiers.lean#L3817) | `theorem causal_necessity_not_entails_logical_necessity : ∃ (World : Type) (frame` | {}  |
+| `core_gamma_free_will_invariant` | theorem | [L3868](formal/Logos/ModalCreationFrontiers.lean#L3868) | `theorem core_gamma_free_will_invariant (l : DependencyLayer) (hCore : CoreGammaL` | {}  |
+| `first_freewill_sensitive_layer_is_L10` | theorem | [L3886](formal/Logos/ModalCreationFrontiers.lean#L3886) | `theorem first_freewill_sensitive_layer_is_L10 : FirstFreeWillSensitiveLayer = De` | {}  |
+| `model_FW0_consistent` | theorem | [L3900](formal/Logos/ModalCreationFrontiers.lean#L3900) | `theorem model_FW0_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
+| `model_FW10_consistent` | theorem | [L4030](formal/Logos/ModalCreationFrontiers.lean#L4030) | `theorem model_FW10_consistent : ∃ (World : Type) (frame : KripkeFrame World) (ac` | {}  |
+| `model_FW1_consistent` | theorem | [L3913](formal/Logos/ModalCreationFrontiers.lean#L3913) | `theorem model_FW1_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
+| `model_FW2_consistent` | theorem | [L3928](formal/Logos/ModalCreationFrontiers.lean#L3928) | `theorem model_FW2_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
+| `model_FW3_consistent` | theorem | [L3946](formal/Logos/ModalCreationFrontiers.lean#L3946) | `theorem model_FW3_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
+| `model_FW4_consistent` | theorem | [L3958](formal/Logos/ModalCreationFrontiers.lean#L3958) | `theorem model_FW4_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
+| `model_FW5_consistent` | theorem | [L3974](formal/Logos/ModalCreationFrontiers.lean#L3974) | `theorem model_FW5_consistent : ∃ (World : Type) (frame : KripkeFrame World) (act` | {}  |
+| `model_FW6_consistent` | theorem | [L3982](formal/Logos/ModalCreationFrontiers.lean#L3982) | `theorem model_FW6_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
+| `model_FW7_consistent` | theorem | [L3997](formal/Logos/ModalCreationFrontiers.lean#L3997) | `theorem model_FW7_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
+| `model_FW8_consistent` | theorem | [L4005](formal/Logos/ModalCreationFrontiers.lean#L4005) | `theorem model_FW8_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
+| `model_FW9_consistent` | theorem | [L4017](formal/Logos/ModalCreationFrontiers.lean#L4017) | `theorem model_FW9_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wor` | {}  |
+| `performative_datum_not_entails_freewill` | theorem | [L3787](formal/Logos/ModalCreationFrontiers.lean#L3787) | `theorem performative_datum_not_entails_freewill : ∃ (Subject : Type) (p : Prop) ` | {}  |
+| `retorsion_under_determinism_valid` | theorem | [L3800](formal/Logos/ModalCreationFrontiers.lean#L3800) | `theorem retorsion_under_determinism_valid : ∃ (World Subject : Type) (Antecedent` | {}  |
 
 ### `Logos.GoodDenial`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `good_denial_is_free_logically_consistent` | theorem | [L1418](formal/Logos/DivineTrinitarianAttributes.lean#L1418) | `theorem good_denial_is_free_logically_consistent : (∃ G E : Subject → Prop → Pro` | {Initiates, Means, State, Subject} → C500 |
+| `good_denial_is_free_logically_consistent` | theorem | [L1419](formal/Logos/DivineTrinitarianAttributes.lean#L1419) | `theorem good_denial_is_free_logically_consistent : (∃ G E : Subject → Prop → Pro` | {Initiates, Means, State, Subject} → C500 |
 
 ### `Logos.GroundPerson`
 
@@ -2872,66 +2850,66 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `AgentCausalSettlement` | def | [L361](formal/Logos/HardenedInvariance.lean#L361) | `def AgentCausalSettlement (Subject : Type) (s : Subject) (CausesAt : Subject → P` | {}  |
-| `AgentInvariant` | def | [L102](formal/Logos/HardenedInvariance.lean#L102) | `def AgentInvariant (l : DependencyLayer) : Prop` | {}  |
-| `AgentNeutralCore` | def | [L110](formal/Logos/HardenedInvariance.lean#L110) | `def AgentNeutralCore (l : DependencyLayer) : Prop` | {}  |
-| `Checks` | inductive | [L389](formal/Logos/HardenedInvariance.lean#L389) | `inductive Checks : DeductiveContext → ProofTrace → Prop` | —  |
-| `Develops` | def | [L419](formal/Logos/HardenedInvariance.lean#L419) | `def Develops (c : DeductiveContext) (t : ProofTrace) : Prop` | {}  |
-| `FreeWillInvariant` | def | [L106](formal/Logos/HardenedInvariance.lean#L106) | `def FreeWillInvariant (l : DependencyLayer) : Prop` | {}  |
-| `FreeWillNeutralCore` | def | [L114](formal/Logos/HardenedInvariance.lean#L114) | `def FreeWillNeutralCore (l : DependencyLayer) : Prop` | {}  |
-| `HasAgent` | def | [L59](formal/Logos/HardenedInvariance.lean#L59) | `def HasAgent (r : ProofRegime) : Prop` | {}  |
-| `HasFreeWill` | def | [L68](formal/Logos/HardenedInvariance.lean#L68) | `def HasFreeWill (r : ProofRegime) : Prop` | {}  |
-| `HasIntentionality` | def | [L62](formal/Logos/HardenedInvariance.lean#L62) | `def HasIntentionality (r : ProofRegime) : Prop` | {}  |
-| `HasLibertarianAgency` | def | [L71](formal/Logos/HardenedInvariance.lean#L71) | `def HasLibertarianAgency (r : ProofRegime) : Prop` | {}  |
-| `IsDeterministic` | def | [L65](formal/Logos/HardenedInvariance.lean#L65) | `def IsDeterministic (r : ProofRegime) : Prop` | {}  |
-| `LibertarianFreedom` | def | [L364](formal/Logos/HardenedInvariance.lean#L364) | `def LibertarianFreedom (Subject : Type) (s : Subject) (CausesAt : Subject → Prop` | {}  |
-| `ProofConclusionIsLogicallyEntailed` | def | [L453](formal/Logos/HardenedInvariance.lean#L453) | `def ProofConclusionIsLogicallyEntailed (P : Prop) : Prop` | {}  |
-| `ProofConclusionIsMetaphysicallyNecessary` | def | [L455](formal/Logos/HardenedInvariance.lean#L455) | `def ProofConclusionIsMetaphysicallyNecessary (_P : Prop) : Prop` | {}  |
-| `ProofExists` | def | [L443](formal/Logos/HardenedInvariance.lean#L443) | `def ProofExists (P : Prop) : Prop` | {}  |
-| `ProofIsCausallyDetermined` | def | [L451](formal/Logos/HardenedInvariance.lean#L451) | `def ProofIsCausallyDetermined (_t : ProofTrace) : Prop` | {}  |
-| `ProofIsCorrect` | def | [L446](formal/Logos/HardenedInvariance.lean#L446) | `def ProofIsCorrect (P : Prop) : Prop` | {}  |
-| `ProofIsValid` | def | [L448](formal/Logos/HardenedInvariance.lean#L448) | `def ProofIsValid (t : ProofTrace) (P : Prop) : Prop` | {}  |
-| `ProofOccursInContext` | def | [L425](formal/Logos/HardenedInvariance.lean#L425) | `def ProofOccursInContext (c : DeductiveContext) (P : Prop) : Prop` | {}  |
-| `ProofRegime` | inductive | [L51](formal/Logos/HardenedInvariance.lean#L51) | `inductive ProofRegime` | —  |
-| `ProofTrace` | inductive | [L376](formal/Logos/HardenedInvariance.lean#L376) | `inductive ProofTrace` | —  |
-| `RealizesAt` | inductive | [L396](formal/Logos/HardenedInvariance.lean#L396) | `inductive RealizesAt : DeductiveContext → ProofTrace → Prop → Prop` | —  |
-| `RegimeAdmissible` | def | [L95](formal/Logos/HardenedInvariance.lean#L95) | `def RegimeAdmissible (r : ProofRegime) (l : DependencyLayer) : Prop` | {}  |
-| `RequiresAgent` | def | [L75](formal/Logos/HardenedInvariance.lean#L75) | `def RequiresAgent (l : DependencyLayer) : Prop` | {}  |
-| `RequiresFreeWill` | def | [L85](formal/Logos/HardenedInvariance.lean#L85) | `def RequiresFreeWill (l : DependencyLayer) : Prop` | {}  |
-| `RequiresIntentionality` | def | [L80](formal/Logos/HardenedInvariance.lean#L80) | `def RequiresIntentionality (l : DependencyLayer) : Prop` | {}  |
-| `RequiresLibertarianAgency` | def | [L90](formal/Logos/HardenedInvariance.lean#L90) | `def RequiresLibertarianAgency (l : DependencyLayer) : Prop` | {}  |
-| `TraceConclusion` | def | [L382](formal/Logos/HardenedInvariance.lean#L382) | `def TraceConclusion (t : ProofTrace) : Prop` | {}  |
-| `act_not_implies_person` | theorem | [L284](formal/Logos/HardenedInvariance.lean#L284) | `theorem act_not_implies_person : ∃ (Subject : Type) (s : Subject) (p : Prop) (Ac` | {}  |
-| `agent_invariant_core_is_strictly_inside_freewill_invariant_core` | theorem | [L226](formal/Logos/HardenedInvariance.lean#L226) | `theorem agent_invariant_core_is_strictly_inside_freewill_invariant_core : (∀ l, ` | {} → C180 |
-| `agent_invariant_iff_agent_neutral_core` | theorem | [L118](formal/Logos/HardenedInvariance.lean#L118) | `theorem agent_invariant_iff_agent_neutral_core (l : DependencyLayer) : AgentInva` | {}  |
-| `causal_determination_not_implies_logical_validity` | theorem | [L458](formal/Logos/HardenedInvariance.lean#L458) | `theorem causal_determination_not_implies_logical_validity : ∃ (t : ProofTrace) (` | {}  |
-| `chooses_not_implies_agent_causal_settlement` | theorem | [L325](formal/Logos/HardenedInvariance.lean#L325) | `theorem chooses_not_implies_agent_causal_settlement : ∃ (Subject : Type) (s : Su` | {}  |
-| `chooses_not_implies_modal_freedom` | theorem | [L316](formal/Logos/HardenedInvariance.lean#L316) | `theorem chooses_not_implies_modal_freedom : ∃ (Subject : Type) (s : Subject) (p ` | {}  |
-| `chooses_not_implies_nondeterministic` | theorem | [L307](formal/Logos/HardenedInvariance.lean#L307) | `theorem chooses_not_implies_nondeterministic : ∃ (Subject : Type) (s : Subject) ` | {}  |
-| `contextual_retorsion_datum` | theorem | [L543](formal/Logos/HardenedInvariance.lean#L543) | `theorem contextual_retorsion_datum : ¬ (∀ c : DeductiveContext, ¬ ProofOccursInC` | {}  |
-| `cross_context_development_soundness` | theorem | [L431](formal/Logos/HardenedInvariance.lean#L431) | `theorem cross_context_development_soundness (c1 c2 : DeductiveContext) (t : Proo` | {}  |
-| `first_agency_sensitive_layer_is_L1` | theorem | [L498](formal/Logos/HardenedInvariance.lean#L498) | `theorem first_agency_sensitive_layer_is_L1 : RequiresAgent DependencyLayer.L1_Pe` | {}  |
-| `first_choice_sensitive_layer_is_L10` | theorem | [L517](formal/Logos/HardenedInvariance.lean#L517) | `theorem first_choice_sensitive_layer_is_L10 : RequiresFreeWill DependencyLayer.L` | {}  |
-| `first_compatibilist_freewill_sensitive_layer_is_L11` | theorem | [L524](formal/Logos/HardenedInvariance.lean#L524) | `theorem first_compatibilist_freewill_sensitive_layer_is_L11 : RequiresFreeWill D` | {}  |
-| `first_intentionality_sensitive_layer_is_L2` | theorem | [L504](formal/Logos/HardenedInvariance.lean#L504) | `theorem first_intentionality_sensitive_layer_is_L2 : RequiresIntentionality Depe` | {}  |
-| `first_libertarian_sensitive_layer_is_L12` | theorem | [L531](formal/Logos/HardenedInvariance.lean#L531) | `theorem first_libertarian_sensitive_layer_is_L12 : RequiresLibertarianAgency Dep` | {}  |
-| `first_substantive_personhood_sensitive_layer_is_L9` | theorem | [L510](formal/Logos/HardenedInvariance.lean#L510) | `theorem first_substantive_personhood_sensitive_layer_is_L9 : DependencyLayer.L9_` | {}  |
-| `freeSubject_equiv_freeWill` | theorem | [L258](formal/Logos/HardenedInvariance.lean#L258) | `theorem freeSubject_equiv_freeWill (s : Logos.Agency.Subject) : Logos.Choice.Fre` | {Means, Subject}  |
-| `freeSubject_not_implies_person` | theorem | [L271](formal/Logos/HardenedInvariance.lean#L271) | `theorem freeSubject_not_implies_person : ∃ (Subject : Type) (s : Subject) (Means` | {}  |
-| `freewill_entails_intentionalSubject` | theorem | [L263](formal/Logos/HardenedInvariance.lean#L263) | `theorem freewill_entails_intentionalSubject (s : Logos.Agency.Subject) (h : Logo` | {Means, Subject}  |
-| `freewill_invariant_iff_freewill_neutral_core` | theorem | [L153](formal/Logos/HardenedInvariance.lean#L153) | `theorem freewill_invariant_iff_freewill_neutral_core (l : DependencyLayer) : Fre` | {}  |
-| `freewill_not_implies_agent_causal_settlement` | theorem | [L352](formal/Logos/HardenedInvariance.lean#L352) | `theorem freewill_not_implies_agent_causal_settlement : ∃ (Subject : Type) (s : S` | {}  |
-| `freewill_not_implies_modal_freedom` | theorem | [L343](formal/Logos/HardenedInvariance.lean#L343) | `theorem freewill_not_implies_modal_freedom : ∃ (Subject : Type) (s : Subject) (H` | {}  |
-| `freewill_not_implies_nondeterministic` | theorem | [L334](formal/Logos/HardenedInvariance.lean#L334) | `theorem freewill_not_implies_nondeterministic : ∃ (Subject : Type) (s : Subject)` | {}  |
-| `libertarian_freedom_iff_agent_causal_settlement` | theorem | [L367](formal/Logos/HardenedInvariance.lean#L367) | `theorem libertarian_freedom_iff_agent_causal_settlement (Subject : Type) (s : Su` | {}  |
-| `logical_validity_not_implies_metaphysical_necessity` | theorem | [L467](formal/Logos/HardenedInvariance.lean#L467) | `theorem logical_validity_not_implies_metaphysical_necessity : ∃ (t : ProofTrace)` | {}  |
-| `person_entails_intentionalSubject` | theorem | [L253](formal/Logos/HardenedInvariance.lean#L253) | `theorem person_entails_intentionalSubject (s : Logos.Agency.Subject) (h : Logos.` | {Means, Subject, Will, subjectWill}  |
-| `proof_correctness_not_implies_freewill` | theorem | [L490](formal/Logos/HardenedInvariance.lean#L490) | `theorem proof_correctness_not_implies_freewill : ∃ (P : Prop), ProofIsCorrect P ` | {}  |
-| `proof_occurrence_not_implies_freewill` | theorem | [L483](formal/Logos/HardenedInvariance.lean#L483) | `theorem proof_occurrence_not_implies_freewill : ∃ (c : DeductiveContext) (t : Pr` | {}  |
-| `proof_occurrence_not_implies_intentional_agency` | theorem | [L476](formal/Logos/HardenedInvariance.lean#L476) | `theorem proof_occurrence_not_implies_intentional_agency : ∃ (c : DeductiveContex` | {}  |
-| `realizesAt_conclusion` | theorem | [L412](formal/Logos/HardenedInvariance.lean#L412) | `theorem realizesAt_conclusion (c : DeductiveContext) (t : ProofTrace) (P : Prop)` | {}  |
-| `realizesAt_sound` | theorem | [L405](formal/Logos/HardenedInvariance.lean#L405) | `theorem realizesAt_sound (c : DeductiveContext) (t : ProofTrace) (P : Prop) (h :` | {}  |
-| `strict_core_inclusion` | theorem | [L173](formal/Logos/HardenedInvariance.lean#L173) | `theorem strict_core_inclusion : (∀ l, AgentNeutralCore l → FreeWillNeutralCore l` | {}  |
+| `AgentCausalSettlement` | def | [L702](formal/Logos/AgencyAuditsAndFrontiers.lean#L702) | `def AgentCausalSettlement (Subject : Type) (s : Subject) (CausesAt : Subject → P` | {}  |
+| `AgentInvariant` | def | [L443](formal/Logos/AgencyAuditsAndFrontiers.lean#L443) | `def AgentInvariant (l : DependencyLayer) : Prop` | {}  |
+| `AgentNeutralCore` | def | [L451](formal/Logos/AgencyAuditsAndFrontiers.lean#L451) | `def AgentNeutralCore (l : DependencyLayer) : Prop` | {}  |
+| `Checks` | inductive | [L730](formal/Logos/AgencyAuditsAndFrontiers.lean#L730) | `inductive Checks : DeductiveContext → ProofTrace → Prop` | —  |
+| `Develops` | def | [L760](formal/Logos/AgencyAuditsAndFrontiers.lean#L760) | `def Develops (c : DeductiveContext) (t : ProofTrace) : Prop` | {}  |
+| `FreeWillInvariant` | def | [L447](formal/Logos/AgencyAuditsAndFrontiers.lean#L447) | `def FreeWillInvariant (l : DependencyLayer) : Prop` | {}  |
+| `FreeWillNeutralCore` | def | [L455](formal/Logos/AgencyAuditsAndFrontiers.lean#L455) | `def FreeWillNeutralCore (l : DependencyLayer) : Prop` | {}  |
+| `HasAgent` | def | [L400](formal/Logos/AgencyAuditsAndFrontiers.lean#L400) | `def HasAgent (r : ProofRegime) : Prop` | {}  |
+| `HasFreeWill` | def | [L409](formal/Logos/AgencyAuditsAndFrontiers.lean#L409) | `def HasFreeWill (r : ProofRegime) : Prop` | {}  |
+| `HasIntentionality` | def | [L403](formal/Logos/AgencyAuditsAndFrontiers.lean#L403) | `def HasIntentionality (r : ProofRegime) : Prop` | {}  |
+| `HasLibertarianAgency` | def | [L412](formal/Logos/AgencyAuditsAndFrontiers.lean#L412) | `def HasLibertarianAgency (r : ProofRegime) : Prop` | {}  |
+| `IsDeterministic` | def | [L406](formal/Logos/AgencyAuditsAndFrontiers.lean#L406) | `def IsDeterministic (r : ProofRegime) : Prop` | {}  |
+| `LibertarianFreedom` | def | [L705](formal/Logos/AgencyAuditsAndFrontiers.lean#L705) | `def LibertarianFreedom (Subject : Type) (s : Subject) (CausesAt : Subject → Prop` | {}  |
+| `ProofConclusionIsLogicallyEntailed` | def | [L794](formal/Logos/AgencyAuditsAndFrontiers.lean#L794) | `def ProofConclusionIsLogicallyEntailed (P : Prop) : Prop` | {}  |
+| `ProofConclusionIsMetaphysicallyNecessary` | def | [L796](formal/Logos/AgencyAuditsAndFrontiers.lean#L796) | `def ProofConclusionIsMetaphysicallyNecessary (_P : Prop) : Prop` | {}  |
+| `ProofExists` | def | [L784](formal/Logos/AgencyAuditsAndFrontiers.lean#L784) | `def ProofExists (P : Prop) : Prop` | {}  |
+| `ProofIsCausallyDetermined` | def | [L792](formal/Logos/AgencyAuditsAndFrontiers.lean#L792) | `def ProofIsCausallyDetermined (_t : ProofTrace) : Prop` | {}  |
+| `ProofIsCorrect` | def | [L787](formal/Logos/AgencyAuditsAndFrontiers.lean#L787) | `def ProofIsCorrect (P : Prop) : Prop` | {}  |
+| `ProofIsValid` | def | [L789](formal/Logos/AgencyAuditsAndFrontiers.lean#L789) | `def ProofIsValid (t : ProofTrace) (P : Prop) : Prop` | {}  |
+| `ProofOccursInContext` | def | [L766](formal/Logos/AgencyAuditsAndFrontiers.lean#L766) | `def ProofOccursInContext (c : DeductiveContext) (P : Prop) : Prop` | {}  |
+| `ProofRegime` | inductive | [L392](formal/Logos/AgencyAuditsAndFrontiers.lean#L392) | `inductive ProofRegime` | —  |
+| `ProofTrace` | inductive | [L717](formal/Logos/AgencyAuditsAndFrontiers.lean#L717) | `inductive ProofTrace` | —  |
+| `RealizesAt` | inductive | [L737](formal/Logos/AgencyAuditsAndFrontiers.lean#L737) | `inductive RealizesAt : DeductiveContext → ProofTrace → Prop → Prop` | —  |
+| `RegimeAdmissible` | def | [L436](formal/Logos/AgencyAuditsAndFrontiers.lean#L436) | `def RegimeAdmissible (r : ProofRegime) (l : DependencyLayer) : Prop` | {}  |
+| `RequiresAgent` | def | [L416](formal/Logos/AgencyAuditsAndFrontiers.lean#L416) | `def RequiresAgent (l : DependencyLayer) : Prop` | {}  |
+| `RequiresFreeWill` | def | [L426](formal/Logos/AgencyAuditsAndFrontiers.lean#L426) | `def RequiresFreeWill (l : DependencyLayer) : Prop` | {}  |
+| `RequiresIntentionality` | def | [L421](formal/Logos/AgencyAuditsAndFrontiers.lean#L421) | `def RequiresIntentionality (l : DependencyLayer) : Prop` | {}  |
+| `RequiresLibertarianAgency` | def | [L431](formal/Logos/AgencyAuditsAndFrontiers.lean#L431) | `def RequiresLibertarianAgency (l : DependencyLayer) : Prop` | {}  |
+| `TraceConclusion` | def | [L723](formal/Logos/AgencyAuditsAndFrontiers.lean#L723) | `def TraceConclusion (t : ProofTrace) : Prop` | {}  |
+| `act_not_implies_person` | theorem | [L625](formal/Logos/AgencyAuditsAndFrontiers.lean#L625) | `theorem act_not_implies_person : ∃ (Subject : Type) (s : Subject) (p : Prop) (Ac` | {}  |
+| `agent_invariant_core_is_strictly_inside_freewill_invariant_core` | theorem | [L567](formal/Logos/AgencyAuditsAndFrontiers.lean#L567) | `theorem agent_invariant_core_is_strictly_inside_freewill_invariant_core : (∀ l, ` | {} → C180 |
+| `agent_invariant_iff_agent_neutral_core` | theorem | [L459](formal/Logos/AgencyAuditsAndFrontiers.lean#L459) | `theorem agent_invariant_iff_agent_neutral_core (l : DependencyLayer) : AgentInva` | {}  |
+| `causal_determination_not_implies_logical_validity` | theorem | [L799](formal/Logos/AgencyAuditsAndFrontiers.lean#L799) | `theorem causal_determination_not_implies_logical_validity : ∃ (t : ProofTrace) (` | {}  |
+| `chooses_not_implies_agent_causal_settlement` | theorem | [L666](formal/Logos/AgencyAuditsAndFrontiers.lean#L666) | `theorem chooses_not_implies_agent_causal_settlement : ∃ (Subject : Type) (s : Su` | {}  |
+| `chooses_not_implies_modal_freedom` | theorem | [L657](formal/Logos/AgencyAuditsAndFrontiers.lean#L657) | `theorem chooses_not_implies_modal_freedom : ∃ (Subject : Type) (s : Subject) (p ` | {}  |
+| `chooses_not_implies_nondeterministic` | theorem | [L648](formal/Logos/AgencyAuditsAndFrontiers.lean#L648) | `theorem chooses_not_implies_nondeterministic : ∃ (Subject : Type) (s : Subject) ` | {}  |
+| `contextual_retorsion_datum` | theorem | [L884](formal/Logos/AgencyAuditsAndFrontiers.lean#L884) | `theorem contextual_retorsion_datum : ¬ (∀ c : DeductiveContext, ¬ ProofOccursInC` | {}  |
+| `cross_context_development_soundness` | theorem | [L772](formal/Logos/AgencyAuditsAndFrontiers.lean#L772) | `theorem cross_context_development_soundness (c1 c2 : DeductiveContext) (t : Proo` | {}  |
+| `first_agency_sensitive_layer_is_L1` | theorem | [L839](formal/Logos/AgencyAuditsAndFrontiers.lean#L839) | `theorem first_agency_sensitive_layer_is_L1 : RequiresAgent DependencyLayer.L1_Pe` | {}  |
+| `first_choice_sensitive_layer_is_L10` | theorem | [L858](formal/Logos/AgencyAuditsAndFrontiers.lean#L858) | `theorem first_choice_sensitive_layer_is_L10 : RequiresFreeWill DependencyLayer.L` | {}  |
+| `first_compatibilist_freewill_sensitive_layer_is_L11` | theorem | [L865](formal/Logos/AgencyAuditsAndFrontiers.lean#L865) | `theorem first_compatibilist_freewill_sensitive_layer_is_L11 : RequiresFreeWill D` | {}  |
+| `first_intentionality_sensitive_layer_is_L2` | theorem | [L845](formal/Logos/AgencyAuditsAndFrontiers.lean#L845) | `theorem first_intentionality_sensitive_layer_is_L2 : RequiresIntentionality Depe` | {}  |
+| `first_libertarian_sensitive_layer_is_L12` | theorem | [L872](formal/Logos/AgencyAuditsAndFrontiers.lean#L872) | `theorem first_libertarian_sensitive_layer_is_L12 : RequiresLibertarianAgency Dep` | {}  |
+| `first_substantive_personhood_sensitive_layer_is_L9` | theorem | [L851](formal/Logos/AgencyAuditsAndFrontiers.lean#L851) | `theorem first_substantive_personhood_sensitive_layer_is_L9 : DependencyLayer.L9_` | {}  |
+| `freeSubject_equiv_freeWill` | theorem | [L599](formal/Logos/AgencyAuditsAndFrontiers.lean#L599) | `theorem freeSubject_equiv_freeWill (s : Logos.Agency.Subject) : Logos.Choice.Fre` | {Means, Subject}  |
+| `freeSubject_not_implies_person` | theorem | [L612](formal/Logos/AgencyAuditsAndFrontiers.lean#L612) | `theorem freeSubject_not_implies_person : ∃ (Subject : Type) (s : Subject) (Means` | {}  |
+| `freewill_entails_intentionalSubject` | theorem | [L604](formal/Logos/AgencyAuditsAndFrontiers.lean#L604) | `theorem freewill_entails_intentionalSubject (s : Logos.Agency.Subject) (h : Logo` | {Means, Subject}  |
+| `freewill_invariant_iff_freewill_neutral_core` | theorem | [L494](formal/Logos/AgencyAuditsAndFrontiers.lean#L494) | `theorem freewill_invariant_iff_freewill_neutral_core (l : DependencyLayer) : Fre` | {}  |
+| `freewill_not_implies_agent_causal_settlement` | theorem | [L693](formal/Logos/AgencyAuditsAndFrontiers.lean#L693) | `theorem freewill_not_implies_agent_causal_settlement : ∃ (Subject : Type) (s : S` | {}  |
+| `freewill_not_implies_modal_freedom` | theorem | [L684](formal/Logos/AgencyAuditsAndFrontiers.lean#L684) | `theorem freewill_not_implies_modal_freedom : ∃ (Subject : Type) (s : Subject) (H` | {}  |
+| `freewill_not_implies_nondeterministic` | theorem | [L675](formal/Logos/AgencyAuditsAndFrontiers.lean#L675) | `theorem freewill_not_implies_nondeterministic : ∃ (Subject : Type) (s : Subject)` | {}  |
+| `libertarian_freedom_iff_agent_causal_settlement` | theorem | [L708](formal/Logos/AgencyAuditsAndFrontiers.lean#L708) | `theorem libertarian_freedom_iff_agent_causal_settlement (Subject : Type) (s : Su` | {}  |
+| `logical_validity_not_implies_metaphysical_necessity` | theorem | [L808](formal/Logos/AgencyAuditsAndFrontiers.lean#L808) | `theorem logical_validity_not_implies_metaphysical_necessity : ∃ (t : ProofTrace)` | {}  |
+| `person_entails_intentionalSubject` | theorem | [L594](formal/Logos/AgencyAuditsAndFrontiers.lean#L594) | `theorem person_entails_intentionalSubject (s : Logos.Agency.Subject) (h : Logos.` | {Means, Subject, Will, subjectWill}  |
+| `proof_correctness_not_implies_freewill` | theorem | [L831](formal/Logos/AgencyAuditsAndFrontiers.lean#L831) | `theorem proof_correctness_not_implies_freewill : ∃ (P : Prop), ProofIsCorrect P ` | {}  |
+| `proof_occurrence_not_implies_freewill` | theorem | [L824](formal/Logos/AgencyAuditsAndFrontiers.lean#L824) | `theorem proof_occurrence_not_implies_freewill : ∃ (c : DeductiveContext) (t : Pr` | {}  |
+| `proof_occurrence_not_implies_intentional_agency` | theorem | [L817](formal/Logos/AgencyAuditsAndFrontiers.lean#L817) | `theorem proof_occurrence_not_implies_intentional_agency : ∃ (c : DeductiveContex` | {}  |
+| `realizesAt_conclusion` | theorem | [L753](formal/Logos/AgencyAuditsAndFrontiers.lean#L753) | `theorem realizesAt_conclusion (c : DeductiveContext) (t : ProofTrace) (P : Prop)` | {}  |
+| `realizesAt_sound` | theorem | [L746](formal/Logos/AgencyAuditsAndFrontiers.lean#L746) | `theorem realizesAt_sound (c : DeductiveContext) (t : ProofTrace) (P : Prop) (h :` | {}  |
+| `strict_core_inclusion` | theorem | [L514](formal/Logos/AgencyAuditsAndFrontiers.lean#L514) | `theorem strict_core_inclusion : (∀ l, AgentNeutralCore l → FreeWillNeutralCore l` | {}  |
 
 ### `Logos.HostileSemantics`
 
@@ -3366,30 +3344,30 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `AgentialDeonticAddress` | def | [L78](formal/Logos/IndubitableNormativeFreeWill.lean#L78) | `def AgentialDeonticAddress (s : Subject) (p q : Prop) : Prop` | {Means, Subject}  |
-| `DeonticOpposition` | def | [L72](formal/Logos/IndubitableNormativeFreeWill.lean#L72) | `def DeonticOpposition (p q : Prop) : Prop` | {}  |
-| `EstablishedRightWrong` | def | [L53](formal/Logos/IndubitableNormativeFreeWill.lean#L53) | `def EstablishedRightWrong : Prop` | {}  |
-| `GenuineNormativity` | structure | [L84](formal/Logos/IndubitableNormativeFreeWill.lean#L84) | `structure GenuineNormativity (s : Subject) (p q : Prop) : Prop where` | —  |
-| `IntelligibleRight` | def | [L42](formal/Logos/IndubitableNormativeFreeWill.lean#L42) | `def IntelligibleRight (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
-| `NecessaryGenuineNormativity` | def | [L126](formal/Logos/IndubitableNormativeFreeWill.lean#L126) | `def NecessaryGenuineNormativity (World : Type) : Prop` | {Subject}  |
-| `NormativeAgency` | def | [L91](formal/Logos/IndubitableNormativeFreeWill.lean#L91) | `def NormativeAgency (s : Subject) : Prop` | {Subject}  |
-| `NormativeAlternative` | def | [L101](formal/Logos/IndubitableNormativeFreeWill.lean#L101) | `def NormativeAlternative (p q : Prop) : Prop` | {}  |
-| `RealizedRight` | def | [L48](formal/Logos/IndubitableNormativeFreeWill.lean#L48) | `def RealizedRight (p : Prop) : Prop` | {Initiates, Means, State, Subject}  |
-| `dnf1_denial_of_existence_violates_core` | theorem | [L154](formal/Logos/IndubitableNormativeFreeWill.lean#L154) | `theorem dnf1_denial_of_existence_violates_core (hDenial : ¬ EstablishedRightWron` | {}  |
-| `dnf2_descriptive_value_lacks_prescriptive_force` | theorem | [L160](formal/Logos/IndubitableNormativeFreeWill.lean#L160) | `theorem dnf2_descriptive_value_lacks_prescriptive_force (is_evaluative_only : Pr` | {Means, Subject}  |
-| `dnf3_impersonal_ought_fails_address` | theorem | [L172](formal/Logos/IndubitableNormativeFreeWill.lean#L172) | `theorem dnf3_impersonal_ought_fails_address (p q : Prop) (hNoAddress : ∀ s : Sub` | {Means, Subject}  |
-| `dnf4_monolithic_command_lacks_opposition` | theorem | [L180](formal/Logos/IndubitableNormativeFreeWill.lean#L180) | `theorem dnf4_monolithic_command_lacks_opposition (p : Prop) (hNoAlternative : ∀ ` | {Subject}  |
-| `dnf5_ungraspable_directive_is_not_agential_address` | theorem | [L189](formal/Logos/IndubitableNormativeFreeWill.lean#L189) | `theorem dnf5_ungraspable_directive_is_not_agential_address (s : Subject) (p q : ` | {Means, Subject}  |
-| `dnf6_isolated_intelligibility_refutes_normativity` | theorem | [L197](formal/Logos/IndubitableNormativeFreeWill.lean#L197) | `theorem dnf6_isolated_intelligibility_refutes_normativity (s : Subject) (p q : P` | {Means, Subject}  |
-| `dnf7_cannot_deny_choice_from_co_meaning` | theorem | [L206](formal/Logos/IndubitableNormativeFreeWill.lean#L206) | `theorem dnf7_cannot_deny_choice_from_co_meaning (s : Subject) (p q : Prop) (hMea` | {Means, Subject}  |
-| `dnf8_cannot_deny_freewill_from_choice` | theorem | [L214](formal/Logos/IndubitableNormativeFreeWill.lean#L214) | `theorem dnf8_cannot_deny_freewill_from_choice (s : Subject) (p q : Prop) (hChoic` | {Means, Subject}  |
-| `impossibility_of_denying_chooses` | theorem | [L226](formal/Logos/IndubitableNormativeFreeWill.lean#L226) | `theorem impossibility_of_denying_chooses : ¬ ∃ (Subj : Type) (MeansRel : Subj → ` | {}  |
-| `impossibility_of_denying_freewill` | theorem | [L235](formal/Logos/IndubitableNormativeFreeWill.lean#L235) | `theorem impossibility_of_denying_freewill : ¬ ∃ (Subj : Type) (ChoosesRel : Subj` | {}  |
-| `indubitable_normative_free_will` | theorem | [L115](formal/Logos/IndubitableNormativeFreeWill.lean#L115) | `theorem indubitable_normative_free_will {s : Subject} {p q : Prop} (h : GenuineN` | {Means, Subject} → C107 |
-| `intelligibility_not_trivially_realization` | theorem | [L58](formal/Logos/IndubitableNormativeFreeWill.lean#L58) | `theorem intelligibility_not_trivially_realization : ∃ (Subj : Type) (MeansRel : ` | {}  |
-| `necessary_normativity_implies_necessary_free_will` | theorem | [L131](formal/Logos/IndubitableNormativeFreeWill.lean#L131) | `theorem necessary_normativity_implies_necessary_free_will {World : Type} (hNec :` | {Means, Subject}  |
-| `normative_agency_reduction` | theorem | [L94](formal/Logos/IndubitableNormativeFreeWill.lean#L94) | `theorem normative_agency_reduction (s : Subject) (p q : Prop) (h : GenuineNormat` | {Subject}  |
-| `normative_alternative_reduction` | theorem | [L104](formal/Logos/IndubitableNormativeFreeWill.lean#L104) | `theorem normative_alternative_reduction (s : Subject) (p q : Prop) (h : GenuineN` | {Subject}  |
+| `AgentialDeonticAddress` | def | [L77](formal/Logos/IndubitableNormativeFreeWill.lean#L77) | `def AgentialDeonticAddress (s : Subject) (p q : Prop) : Prop` | {Means, Subject}  |
+| `DeonticOpposition` | def | [L71](formal/Logos/IndubitableNormativeFreeWill.lean#L71) | `def DeonticOpposition (p q : Prop) : Prop` | {}  |
+| `EstablishedRightWrong` | def | [L52](formal/Logos/IndubitableNormativeFreeWill.lean#L52) | `def EstablishedRightWrong : Prop` | {}  |
+| `GenuineNormativity` | structure | [L83](formal/Logos/IndubitableNormativeFreeWill.lean#L83) | `structure GenuineNormativity (s : Subject) (p q : Prop) : Prop where` | —  |
+| `IntelligibleRight` | def | [L41](formal/Logos/IndubitableNormativeFreeWill.lean#L41) | `def IntelligibleRight (s : Subject) (p : Prop) : Prop` | {Means, Subject}  |
+| `NecessaryGenuineNormativity` | def | [L125](formal/Logos/IndubitableNormativeFreeWill.lean#L125) | `def NecessaryGenuineNormativity (World : Type) : Prop` | {Subject}  |
+| `NormativeAgency` | def | [L90](formal/Logos/IndubitableNormativeFreeWill.lean#L90) | `def NormativeAgency (s : Subject) : Prop` | {Subject}  |
+| `NormativeAlternative` | def | [L100](formal/Logos/IndubitableNormativeFreeWill.lean#L100) | `def NormativeAlternative (p q : Prop) : Prop` | {}  |
+| `RealizedRight` | def | [L47](formal/Logos/IndubitableNormativeFreeWill.lean#L47) | `def RealizedRight (p : Prop) : Prop` | {Initiates, Means, State, Subject}  |
+| `dnf1_denial_of_existence_violates_core` | theorem | [L153](formal/Logos/IndubitableNormativeFreeWill.lean#L153) | `theorem dnf1_denial_of_existence_violates_core (hDenial : ¬ EstablishedRightWron` | {}  |
+| `dnf2_descriptive_value_lacks_prescriptive_force` | theorem | [L159](formal/Logos/IndubitableNormativeFreeWill.lean#L159) | `theorem dnf2_descriptive_value_lacks_prescriptive_force (is_evaluative_only : Pr` | {Means, Subject}  |
+| `dnf3_impersonal_ought_fails_address` | theorem | [L171](formal/Logos/IndubitableNormativeFreeWill.lean#L171) | `theorem dnf3_impersonal_ought_fails_address (p q : Prop) (hNoAddress : ∀ s : Sub` | {Means, Subject}  |
+| `dnf4_monolithic_command_lacks_opposition` | theorem | [L179](formal/Logos/IndubitableNormativeFreeWill.lean#L179) | `theorem dnf4_monolithic_command_lacks_opposition (p : Prop) (hNoAlternative : ∀ ` | {Subject}  |
+| `dnf5_ungraspable_directive_is_not_agential_address` | theorem | [L188](formal/Logos/IndubitableNormativeFreeWill.lean#L188) | `theorem dnf5_ungraspable_directive_is_not_agential_address (s : Subject) (p q : ` | {Means, Subject}  |
+| `dnf6_isolated_intelligibility_refutes_normativity` | theorem | [L196](formal/Logos/IndubitableNormativeFreeWill.lean#L196) | `theorem dnf6_isolated_intelligibility_refutes_normativity (s : Subject) (p q : P` | {Means, Subject}  |
+| `dnf7_cannot_deny_choice_from_co_meaning` | theorem | [L205](formal/Logos/IndubitableNormativeFreeWill.lean#L205) | `theorem dnf7_cannot_deny_choice_from_co_meaning (s : Subject) (p q : Prop) (hMea` | {Means, Subject}  |
+| `dnf8_cannot_deny_freewill_from_choice` | theorem | [L213](formal/Logos/IndubitableNormativeFreeWill.lean#L213) | `theorem dnf8_cannot_deny_freewill_from_choice (s : Subject) (p q : Prop) (hChoic` | {Means, Subject}  |
+| `impossibility_of_denying_chooses` | theorem | [L225](formal/Logos/IndubitableNormativeFreeWill.lean#L225) | `theorem impossibility_of_denying_chooses : ¬ ∃ (Subj : Type) (MeansRel : Subj → ` | {}  |
+| `impossibility_of_denying_freewill` | theorem | [L234](formal/Logos/IndubitableNormativeFreeWill.lean#L234) | `theorem impossibility_of_denying_freewill : ¬ ∃ (Subj : Type) (ChoosesRel : Subj` | {}  |
+| `indubitable_normative_free_will` | theorem | [L114](formal/Logos/IndubitableNormativeFreeWill.lean#L114) | `theorem indubitable_normative_free_will {s : Subject} {p q : Prop} (h : GenuineN` | {Means, Subject} → C107 |
+| `intelligibility_not_trivially_realization` | theorem | [L57](formal/Logos/IndubitableNormativeFreeWill.lean#L57) | `theorem intelligibility_not_trivially_realization : ∃ (Subj : Type) (MeansRel : ` | {}  |
+| `necessary_normativity_implies_necessary_free_will` | theorem | [L130](formal/Logos/IndubitableNormativeFreeWill.lean#L130) | `theorem necessary_normativity_implies_necessary_free_will {World : Type} (hNec :` | {Means, Subject}  |
+| `normative_agency_reduction` | theorem | [L93](formal/Logos/IndubitableNormativeFreeWill.lean#L93) | `theorem normative_agency_reduction (s : Subject) (p q : Prop) (h : GenuineNormat` | {Subject}  |
+| `normative_alternative_reduction` | theorem | [L103](formal/Logos/IndubitableNormativeFreeWill.lean#L103) | `theorem normative_alternative_reduction (s : Subject) (p q : Prop) (h : GenuineN` | {Subject}  |
 
 ### `Logos.Initiation`
 
@@ -3498,93 +3476,93 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `ChoosesAt` | def | [L74](formal/Logos/ModalCreationAgency.lean#L74) | `def ChoosesAt (World Subject : Type) (MeansAt : World → Subject → Prop → Prop) (` | {}  |
-| `ClaimC1_ActualNoCreation` | def | [L207](formal/Logos/ModalCreationAgency.lean#L207) | `def ClaimC1_ActualNoCreation (World Entity : Type) (actualWorld : World) (Create` | {}  |
-| `ClaimC2_ModalNoCreation` | def | [L212](formal/Logos/ModalCreationAgency.lean#L212) | `def ClaimC2_ModalNoCreation (World Entity : Type) (frame : KripkeFrame World) (a` | {}  |
-| `ClaimC3_NoContingentEntitiesPossible` | def | [L218](formal/Logos/ModalCreationAgency.lean#L218) | `def ClaimC3_NoContingentEntitiesPossible (World Entity : Type) (frame : KripkeFr` | {}  |
-| `DeterministicModalModel` | structure | [L134](formal/Logos/ModalCreationAgency.lean#L134) | `structure DeterministicModalModel where` | —  |
-| `FreeVoluntaryNoCreation` | def | [L243](formal/Logos/ModalCreationAgency.lean#L243) | `def FreeVoluntaryNoCreation (World Entity Subject : Type) (frame : KripkeFrame W` | {}  |
-| `FreeWillAt` | def | [L81](formal/Logos/ModalCreationAgency.lean#L81) | `def FreeWillAt (World Subject : Type) (MeansAt : World → Subject → Prop → Prop) ` | {}  |
-| `Incompatible` | def | [L70](formal/Logos/ModalCreationAgency.lean#L70) | `def Incompatible (p q : Prop) : Prop` | {}  |
-| `MC4_Signature` | structure | [L338](formal/Logos/ModalCreationAgency.lean#L338) | `structure MC4_Signature where` | —  |
-| `MC5_Signature` | structure | [L389](formal/Logos/ModalCreationAgency.lean#L389) | `structure MC5_Signature where` | —  |
-| `ModalFreeWill` | structure | [L102](formal/Logos/ModalCreationAgency.lean#L102) | `structure ModalFreeWill (World Subject : Type)` | —  |
-| `ModelDeterministicChoice` | def | [L158](formal/Logos/ModalCreationAgency.lean#L158) | `def ModelDeterministicChoice : DeterministicModalModel where World` | {}  |
-| `ModelMC5` | def | [L414](formal/Logos/ModalCreationAgency.lean#L414) | `def ModelMC5 : MC5_Signature where World` | {}  |
-| `PassiveNoCreationAt` | def | [L230](formal/Logos/ModalCreationAgency.lean#L230) | `def PassiveNoCreationAt (World Entity : Type) (CreatesAt : World → Entity → Enti` | {}  |
-| `TargetA_NecessaryBeing` | def | [L42](formal/Logos/ModalCreationAgency.lean#L42) | `def TargetA_NecessaryBeing (World Entity : Type) (ExistsAt : World → Entity → Pr` | {}  |
-| `TargetB_NecessaryPerson` | structure | [L48](formal/Logos/ModalCreationAgency.lean#L48) | `structure TargetB_NecessaryPerson (World Entity Subject : Type)` | —  |
-| `TargetC_NecessaryFreeAgent` | structure | [L88](formal/Logos/ModalCreationAgency.lean#L88) | `structure TargetC_NecessaryFreeAgent (World Entity Subject : Type)` | —  |
-| `VoluntaryNoCreationAt` | def | [L235](formal/Logos/ModalCreationAgency.lean#L235) | `def VoluntaryNoCreationAt (World Entity Subject : Type) (CreatesAt : World → Ent` | {}  |
-| `freeWill_not_entails_modal_alternatives` | theorem | [L185](formal/Logos/ModalCreationAgency.lean#L185) | `theorem freeWill_not_entails_modal_alternatives : ∃ M : DeterministicModalModel,` | {}  |
-| `free_voluntary_implies_voluntary` | theorem | [L252](formal/Logos/ModalCreationAgency.lean#L252) | `theorem free_voluntary_implies_voluntary (World Entity Subject : Type) (frame : ` | {}  |
-| `modal_freedom_implies_local_freedom` | theorem | [L114](formal/Logos/ModalCreationAgency.lean#L114) | `theorem modal_freedom_implies_local_freedom (World Subject : Type) (frame : Krip` | {}  |
-| `modal_freedom_yields_contingency_of_creation` | theorem | [L482](formal/Logos/ModalCreationAgency.lean#L482) | `theorem modal_freedom_yields_contingency_of_creation (World Entity Subject : Typ` | {}  |
-| `model_MC1_necessary_impersonal_consistent` | theorem | [L292](formal/Logos/ModalCreationAgency.lean#L292) | `theorem model_MC1_necessary_impersonal_consistent : ∃ (World Entity Subject : Ty` | {}  |
-| `model_MC2_necessary_person_no_agency_consistent` | theorem | [L304](formal/Logos/ModalCreationAgency.lean#L304) | `theorem model_MC2_necessary_person_no_agency_consistent : ∃ (World Entity Subjec` | {}  |
-| `model_MC3_fixed_choice_consistent` | theorem | [L321](formal/Logos/ModalCreationAgency.lean#L321) | `theorem model_MC3_fixed_choice_consistent : ∃ M : DeterministicModalModel, (∀ w,` | {}  |
-| `model_MC4_necessary_creation_consistent` | theorem | [L360](formal/Logos/ModalCreationAgency.lean#L360) | `theorem model_MC4_necessary_creation_consistent : ∃ _M : MC4_Signature, True` | {}  |
-| `model_MC5_contingent_creation_consistent` | theorem | [L439](formal/Logos/ModalCreationAgency.lean#L439) | `theorem model_MC5_contingent_creation_consistent : ∃ _M : MC5_Signature, True` | {}  |
-| `model_MC6_passive_no_creation_accessible` | theorem | [L446](formal/Logos/ModalCreationAgency.lean#L446) | `theorem model_MC6_passive_no_creation_accessible : ∃ (World Entity Subject : Typ` | {}  |
-| `necessary_free_agent_not_entails_contingent_creation` | theorem | [L470](formal/Logos/ModalCreationAgency.lean#L470) | `theorem necessary_free_agent_not_entails_contingent_creation : ¬ (∀ (S : MC4_Sig` | {}  |
-| `passive_not_entails_voluntary` | theorem | [L270](formal/Logos/ModalCreationAgency.lean#L270) | `theorem passive_not_entails_voluntary : ∃ (World Entity Subject : Type) (Creates` | {}  |
-| `voluntary_implies_passive` | theorem | [L261](formal/Logos/ModalCreationAgency.lean#L261) | `theorem voluntary_implies_passive (World Entity Subject : Type) (CreatesAt : Wor` | {}  |
+| `ChoosesAt` | def | [L842](formal/Logos/ModalCreationFrontiers.lean#L842) | `def ChoosesAt (World Subject : Type) (MeansAt : World → Subject → Prop → Prop) (` | {}  |
+| `ClaimC1_ActualNoCreation` | def | [L975](formal/Logos/ModalCreationFrontiers.lean#L975) | `def ClaimC1_ActualNoCreation (World Entity : Type) (actualWorld : World) (Create` | {}  |
+| `ClaimC2_ModalNoCreation` | def | [L980](formal/Logos/ModalCreationFrontiers.lean#L980) | `def ClaimC2_ModalNoCreation (World Entity : Type) (frame : KripkeFrame World) (a` | {}  |
+| `ClaimC3_NoContingentEntitiesPossible` | def | [L986](formal/Logos/ModalCreationFrontiers.lean#L986) | `def ClaimC3_NoContingentEntitiesPossible (World Entity : Type) (frame : KripkeFr` | {}  |
+| `DeterministicModalModel` | structure | [L902](formal/Logos/ModalCreationFrontiers.lean#L902) | `structure DeterministicModalModel where` | —  |
+| `FreeVoluntaryNoCreation` | def | [L1011](formal/Logos/ModalCreationFrontiers.lean#L1011) | `def FreeVoluntaryNoCreation (World Entity Subject : Type) (frame : KripkeFrame W` | {}  |
+| `FreeWillAt` | def | [L849](formal/Logos/ModalCreationFrontiers.lean#L849) | `def FreeWillAt (World Subject : Type) (MeansAt : World → Subject → Prop → Prop) ` | {}  |
+| `Incompatible` | def | [L838](formal/Logos/ModalCreationFrontiers.lean#L838) | `def Incompatible (p q : Prop) : Prop` | {}  |
+| `MC4_Signature` | structure | [L1106](formal/Logos/ModalCreationFrontiers.lean#L1106) | `structure MC4_Signature where` | —  |
+| `MC5_Signature` | structure | [L1157](formal/Logos/ModalCreationFrontiers.lean#L1157) | `structure MC5_Signature where` | —  |
+| `ModalFreeWill` | structure | [L870](formal/Logos/ModalCreationFrontiers.lean#L870) | `structure ModalFreeWill (World Subject : Type)` | —  |
+| `ModelDeterministicChoice` | def | [L926](formal/Logos/ModalCreationFrontiers.lean#L926) | `def ModelDeterministicChoice : DeterministicModalModel where World` | {}  |
+| `ModelMC5` | def | [L1182](formal/Logos/ModalCreationFrontiers.lean#L1182) | `def ModelMC5 : MC5_Signature where World` | {}  |
+| `PassiveNoCreationAt` | def | [L998](formal/Logos/ModalCreationFrontiers.lean#L998) | `def PassiveNoCreationAt (World Entity : Type) (CreatesAt : World → Entity → Enti` | {}  |
+| `TargetA_NecessaryBeing` | def | [L810](formal/Logos/ModalCreationFrontiers.lean#L810) | `def TargetA_NecessaryBeing (World Entity : Type) (ExistsAt : World → Entity → Pr` | {}  |
+| `TargetB_NecessaryPerson` | structure | [L816](formal/Logos/ModalCreationFrontiers.lean#L816) | `structure TargetB_NecessaryPerson (World Entity Subject : Type)` | —  |
+| `TargetC_NecessaryFreeAgent` | structure | [L856](formal/Logos/ModalCreationFrontiers.lean#L856) | `structure TargetC_NecessaryFreeAgent (World Entity Subject : Type)` | —  |
+| `VoluntaryNoCreationAt` | def | [L1003](formal/Logos/ModalCreationFrontiers.lean#L1003) | `def VoluntaryNoCreationAt (World Entity Subject : Type) (CreatesAt : World → Ent` | {}  |
+| `freeWill_not_entails_modal_alternatives` | theorem | [L953](formal/Logos/ModalCreationFrontiers.lean#L953) | `theorem freeWill_not_entails_modal_alternatives : ∃ M : DeterministicModalModel,` | {}  |
+| `free_voluntary_implies_voluntary` | theorem | [L1020](formal/Logos/ModalCreationFrontiers.lean#L1020) | `theorem free_voluntary_implies_voluntary (World Entity Subject : Type) (frame : ` | {}  |
+| `modal_freedom_implies_local_freedom` | theorem | [L882](formal/Logos/ModalCreationFrontiers.lean#L882) | `theorem modal_freedom_implies_local_freedom (World Subject : Type) (frame : Krip` | {}  |
+| `modal_freedom_yields_contingency_of_creation` | theorem | [L1250](formal/Logos/ModalCreationFrontiers.lean#L1250) | `theorem modal_freedom_yields_contingency_of_creation (World Entity Subject : Typ` | {}  |
+| `model_MC1_necessary_impersonal_consistent` | theorem | [L1060](formal/Logos/ModalCreationFrontiers.lean#L1060) | `theorem model_MC1_necessary_impersonal_consistent : ∃ (World Entity Subject : Ty` | {}  |
+| `model_MC2_necessary_person_no_agency_consistent` | theorem | [L1072](formal/Logos/ModalCreationFrontiers.lean#L1072) | `theorem model_MC2_necessary_person_no_agency_consistent : ∃ (World Entity Subjec` | {}  |
+| `model_MC3_fixed_choice_consistent` | theorem | [L1089](formal/Logos/ModalCreationFrontiers.lean#L1089) | `theorem model_MC3_fixed_choice_consistent : ∃ M : DeterministicModalModel, (∀ w,` | {}  |
+| `model_MC4_necessary_creation_consistent` | theorem | [L1128](formal/Logos/ModalCreationFrontiers.lean#L1128) | `theorem model_MC4_necessary_creation_consistent : ∃ _M : MC4_Signature, True` | {}  |
+| `model_MC5_contingent_creation_consistent` | theorem | [L1207](formal/Logos/ModalCreationFrontiers.lean#L1207) | `theorem model_MC5_contingent_creation_consistent : ∃ _M : MC5_Signature, True` | {}  |
+| `model_MC6_passive_no_creation_accessible` | theorem | [L1214](formal/Logos/ModalCreationFrontiers.lean#L1214) | `theorem model_MC6_passive_no_creation_accessible : ∃ (World Entity Subject : Typ` | {}  |
+| `necessary_free_agent_not_entails_contingent_creation` | theorem | [L1238](formal/Logos/ModalCreationFrontiers.lean#L1238) | `theorem necessary_free_agent_not_entails_contingent_creation : ¬ (∀ (S : MC4_Sig` | {}  |
+| `passive_not_entails_voluntary` | theorem | [L1038](formal/Logos/ModalCreationFrontiers.lean#L1038) | `theorem passive_not_entails_voluntary : ∃ (World Entity Subject : Type) (Creates` | {}  |
+| `voluntary_implies_passive` | theorem | [L1029](formal/Logos/ModalCreationFrontiers.lean#L1029) | `theorem voluntary_implies_passive (World Entity Subject : Type) (CreatesAt : Wor` | {}  |
 
 ### `Logos.ModalPossibilityFrontier`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `Aseity` | def | [L122](formal/Logos/ModalPossibilityFrontier.lean#L122) | `def Aseity (World Entity : Type) (ExtDepAt : World → Entity → Prop) (g : Entity)` | {}  |
-| `CausalDeterminism` | def | [L169](formal/Logos/ModalPossibilityFrontier.lean#L169) | `def CausalDeterminism (World Subject : Type) (HistoryAt : World → Prop) (WillsAt` | {}  |
-| `CompleteStateDeterminism` | def | [L196](formal/Logos/ModalPossibilityFrontier.lean#L196) | `def CompleteStateDeterminism (World Entity Subject : Type) (ExtCirc : World → Pr` | {}  |
-| `DeterminingPSR` | def | [L181](formal/Logos/ModalPossibilityFrontier.lean#L181) | `def DeterminingPSR (World Subject : Type) (ReasonsAt : World → Subject → Prop) (` | {}  |
-| `ImmutableNature` | def | [L114](formal/Logos/ModalPossibilityFrontier.lean#L114) | `def ImmutableNature (World Entity : Type) (NatureAt : World → Entity → Prop) (g ` | {}  |
-| `ImmutableWill` | def | [L118](formal/Logos/ModalPossibilityFrontier.lean#L118) | `def ImmutableWill (World Subject : Type) (WillsAt : World → Subject → Prop → Pro` | {}  |
-| `Level1_OutcomeAlternative` | def | [L295](formal/Logos/ModalPossibilityFrontier.lean#L295) | `def Level1_OutcomeAlternative (World : Type) (OutcomeAt : World → Prop) (v u : W` | {}  |
-| `Level2_ActAlternative` | def | [L298](formal/Logos/ModalPossibilityFrontier.lean#L298) | `def Level2_ActAlternative (World Subject : Type) (ActAt : World → Subject → Prop` | {}  |
-| `Level3_VolitionAlternative` | def | [L302](formal/Logos/ModalPossibilityFrontier.lean#L302) | `def Level3_VolitionAlternative (World Subject : Type) (WillsAt : World → Subject` | {}  |
-| `Level4_AgentCausalAlternative` | def | [L306](formal/Logos/ModalPossibilityFrontier.lean#L306) | `def Level4_AgentCausalAlternative (World Entity Subject : Type) (ExtCirc : World` | {}  |
-| `MissingModalSettlement` | def | [L321](formal/Logos/ModalPossibilityFrontier.lean#L321) | `def MissingModalSettlement (World Subject : Type) (frame : KripkeFrame World) (a` | {}  |
-| `NecessaryKnowledge` | def | [L106](formal/Logos/ModalPossibilityFrontier.lean#L106) | `def NecessaryKnowledge (World Subject : Type) (KnowsAt : World → Subject → Prop ` | {}  |
-| `NecessaryRationality` | def | [L102](formal/Logos/ModalPossibilityFrontier.lean#L102) | `def NecessaryRationality (World Subject : Type) (IsRationalAt : World → Subject ` | {}  |
-| `PerfectGoodness` | def | [L110](formal/Logos/ModalPossibilityFrontier.lean#L110) | `def PerfectGoodness (World Subject : Type) (IsGoodAt : World → Subject → Prop) (` | {}  |
-| `ReasonDeterminism` | def | [L175](formal/Logos/ModalPossibilityFrontier.lean#L175) | `def ReasonDeterminism (World Subject : Type) (ReasonsAt : World → Subject → Prop` | {}  |
-| `RigidAgent` | structure | [L45](formal/Logos/ModalPossibilityFrontier.lean#L45) | `structure RigidAgent (World Entity Subject : Type)` | —  |
-| `SameExternalCircumstances` | def | [L65](formal/Logos/ModalPossibilityFrontier.lean#L65) | `def SameExternalCircumstances (World : Type) (ExtCirc : World → Prop) (w u : Wor` | {}  |
-| `SameHistory` | def | [L71](formal/Logos/ModalPossibilityFrontier.lean#L71) | `def SameHistory (World : Type) (HistoryAt : World → Prop) (w u : World) : Prop` | {}  |
-| `SameInternalState` | def | [L77](formal/Logos/ModalPossibilityFrontier.lean#L77) | `def SameInternalState (World Subject : Type) (InternalStateAt : World → Subject ` | {}  |
-| `SameIntrinsicNature` | def | [L74](formal/Logos/ModalPossibilityFrontier.lean#L74) | `def SameIntrinsicNature (World Entity : Type) (NatureAt : World → Entity → Prop)` | {}  |
-| `SameReasons` | def | [L68](formal/Logos/ModalPossibilityFrontier.lean#L68) | `def SameReasons (World Subject : Type) (ReasonsAt : World → Subject → Prop) (s :` | {}  |
-| `SameTotalDeliberativeState` | structure | [L80](formal/Logos/ModalPossibilityFrontier.lean#L80) | `structure SameTotalDeliberativeState (World Entity Subject : Type)` | —  |
-| `StrictDeterminism` | def | [L166](formal/Logos/ModalPossibilityFrontier.lean#L166) | `def StrictDeterminism (World : Type) (frame : KripkeFrame World) (actualWorld : ` | {}  |
-| `aseity_does_not_force_any_volition_alternatives` | theorem | [L463](formal/Logos/ModalPossibilityFrontier.lean#L463) | `theorem aseity_does_not_force_any_volition_alternatives : ∃ (World Entity Subjec` | {} → C182 |
-| `causal_determinism_modal_collapse` | theorem | [L207](formal/Logos/ModalPossibilityFrontier.lean#L207) | `theorem causal_determinism_modal_collapse (World Subject : Type) (frame : Kripke` | {}  |
-| `determining_psr_iff_reason_determinism` | theorem | [L188](formal/Logos/ModalPossibilityFrontier.lean#L188) | `theorem determining_psr_iff_reason_determinism (World Subject : Type) (ReasonsAt` | {}  |
-| `determining_psr_incompatible_with_modal_freedom` | theorem | [L241](formal/Logos/ModalPossibilityFrontier.lean#L241) | `theorem determining_psr_incompatible_with_modal_freedom (World Subject : Type) (` | {}  |
-| `immutable_will_incompatible_with_contingent_act` | theorem | [L264](formal/Logos/ModalPossibilityFrontier.lean#L264) | `theorem immutable_will_incompatible_with_contingent_act (World Subject : Type) (` | {}  |
-| `model_MC13_consistent` | theorem | [L351](formal/Logos/ModalPossibilityFrontier.lean#L351) | `theorem model_MC13_consistent : ∃ (World Subject : Type) (ExtCirc : World → Prop` | {}  |
-| `model_MC14_consistent` | theorem | [L360](formal/Logos/ModalPossibilityFrontier.lean#L360) | `theorem model_MC14_consistent : ∃ (World Subject : Type) (ExtCirc : World → Prop` | {}  |
-| `model_MC15_consistent` | theorem | [L370](formal/Logos/ModalPossibilityFrontier.lean#L370) | `theorem model_MC15_consistent : ∃ (World Subject : Type) (ExtCirc : World → Prop` | {}  |
-| `model_MC16_consistent` | theorem | [L383](formal/Logos/ModalPossibilityFrontier.lean#L383) | `theorem model_MC16_consistent : ∃ (World Entity Subject : Type) (ExtCirc : World` | {}  |
-| `model_MC17_consistent` | theorem | [L398](formal/Logos/ModalPossibilityFrontier.lean#L398) | `theorem model_MC17_consistent : ∃ (World Entity Subject : Type) (ExistsAt : Worl` | {}  |
-| `model_MC18_consistent` | theorem | [L420](formal/Logos/ModalPossibilityFrontier.lean#L420) | `theorem model_MC18_consistent : ∃ (World Subject : Type) (InfoAt : World → Subje` | {}  |
-| `model_MC19_consistent` | theorem | [L431](formal/Logos/ModalPossibilityFrontier.lean#L431) | `theorem model_MC19_consistent : ∃ (World Subject : Type) (IsGoodAt : World → Sub` | {}  |
-| `model_MC20_consistent` | theorem | [L440](formal/Logos/ModalPossibilityFrontier.lean#L440) | `theorem model_MC20_consistent : ∃ (World Entity Subject : Type) (NatureAt : Worl` | {}  |
-| `model_MC21_consistent` | theorem | [L449](formal/Logos/ModalPossibilityFrontier.lean#L449) | `theorem model_MC21_consistent : ∃ (World Entity Subject : Type) (ExtDepAt : Worl` | {}  |
-| `model_MC22_consistent` | theorem | [L500](formal/Logos/ModalPossibilityFrontier.lean#L500) | `theorem model_MC22_consistent : ∃ (World Entity Subject : Type) (ExtCirc : World` | {}  |
-| `model_MC23_consistent` | theorem | [L515](formal/Logos/ModalPossibilityFrontier.lean#L515) | `theorem model_MC23_consistent : ∃ (World Subject : Type) (Circumstance : World →` | {}  |
-| `model_MC24_consistent` | theorem | [L528](formal/Logos/ModalPossibilityFrontier.lean#L528) | `theorem model_MC24_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {CL}  |
-| `model_MC25_consistent` | theorem | [L546](formal/Logos/ModalPossibilityFrontier.lean#L546) | `theorem model_MC25_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {}  |
-| `model_MC26_consistent` | theorem | [L562](formal/Logos/ModalPossibilityFrontier.lean#L562) | `theorem model_MC26_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {}  |
-| `model_MC27_consistent` | theorem | [L574](formal/Logos/ModalPossibilityFrontier.lean#L574) | `theorem model_MC27_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Wor` | {}  |
-| `model_MC28_consistent` | theorem | [L586](formal/Logos/ModalPossibilityFrontier.lean#L586) | `theorem model_MC28_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Wor` | {}  |
-| `model_MC29_consistent` | theorem | [L596](formal/Logos/ModalPossibilityFrontier.lean#L596) | `theorem model_MC29_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
-| `model_MC30_consistent` | theorem | [L608](formal/Logos/ModalPossibilityFrontier.lean#L608) | `theorem model_MC30_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
-| `necessary_knowledge_not_entails_necessary_will` | theorem | [L127](formal/Logos/ModalPossibilityFrontier.lean#L127) | `theorem necessary_knowledge_not_entails_necessary_will : ∃ (World Subject : Type` | {CL}  |
-| `necessary_rationality_not_entails_necessary_act` | theorem | [L142](formal/Logos/ModalPossibilityFrontier.lean#L142) | `theorem necessary_rationality_not_entails_necessary_act : ∃ (World Subject : Typ` | {}  |
-| `reason_determinism_modal_collapse` | theorem | [L221](formal/Logos/ModalPossibilityFrontier.lean#L221) | `theorem reason_determinism_modal_collapse (World Subject : Type) (frame : Kripke` | {}  |
-| `target_contingent_creation_iff_missing_modal_settlement` | theorem | [L332](formal/Logos/ModalPossibilityFrontier.lean#L332) | `theorem target_contingent_creation_iff_missing_modal_settlement (World Subject :` | {}  |
-| `volitional_alternative_does_not_force_aseity` | theorem | [L485](formal/Logos/ModalPossibilityFrontier.lean#L485) | `theorem volitional_alternative_does_not_force_aseity : ∃ (World Entity Subject :` | {} → C184 |
+| `Aseity` | def | [L2051](formal/Logos/ModalCreationFrontiers.lean#L2051) | `def Aseity (World Entity : Type) (ExtDepAt : World → Entity → Prop) (g : Entity)` | {}  |
+| `CausalDeterminism` | def | [L2098](formal/Logos/ModalCreationFrontiers.lean#L2098) | `def CausalDeterminism (World Subject : Type) (HistoryAt : World → Prop) (WillsAt` | {}  |
+| `CompleteStateDeterminism` | def | [L2125](formal/Logos/ModalCreationFrontiers.lean#L2125) | `def CompleteStateDeterminism (World Entity Subject : Type) (ExtCirc : World → Pr` | {}  |
+| `DeterminingPSR` | def | [L2110](formal/Logos/ModalCreationFrontiers.lean#L2110) | `def DeterminingPSR (World Subject : Type) (ReasonsAt : World → Subject → Prop) (` | {}  |
+| `ImmutableNature` | def | [L2043](formal/Logos/ModalCreationFrontiers.lean#L2043) | `def ImmutableNature (World Entity : Type) (NatureAt : World → Entity → Prop) (g ` | {}  |
+| `ImmutableWill` | def | [L2047](formal/Logos/ModalCreationFrontiers.lean#L2047) | `def ImmutableWill (World Subject : Type) (WillsAt : World → Subject → Prop → Pro` | {}  |
+| `Level1_OutcomeAlternative` | def | [L2224](formal/Logos/ModalCreationFrontiers.lean#L2224) | `def Level1_OutcomeAlternative (World : Type) (OutcomeAt : World → Prop) (v u : W` | {}  |
+| `Level2_ActAlternative` | def | [L2227](formal/Logos/ModalCreationFrontiers.lean#L2227) | `def Level2_ActAlternative (World Subject : Type) (ActAt : World → Subject → Prop` | {}  |
+| `Level3_VolitionAlternative` | def | [L2231](formal/Logos/ModalCreationFrontiers.lean#L2231) | `def Level3_VolitionAlternative (World Subject : Type) (WillsAt : World → Subject` | {}  |
+| `Level4_AgentCausalAlternative` | def | [L2235](formal/Logos/ModalCreationFrontiers.lean#L2235) | `def Level4_AgentCausalAlternative (World Entity Subject : Type) (ExtCirc : World` | {}  |
+| `MissingModalSettlement` | def | [L2250](formal/Logos/ModalCreationFrontiers.lean#L2250) | `def MissingModalSettlement (World Subject : Type) (frame : KripkeFrame World) (a` | {}  |
+| `NecessaryKnowledge` | def | [L2035](formal/Logos/ModalCreationFrontiers.lean#L2035) | `def NecessaryKnowledge (World Subject : Type) (KnowsAt : World → Subject → Prop ` | {}  |
+| `NecessaryRationality` | def | [L2031](formal/Logos/ModalCreationFrontiers.lean#L2031) | `def NecessaryRationality (World Subject : Type) (IsRationalAt : World → Subject ` | {}  |
+| `PerfectGoodness` | def | [L2039](formal/Logos/ModalCreationFrontiers.lean#L2039) | `def PerfectGoodness (World Subject : Type) (IsGoodAt : World → Subject → Prop) (` | {}  |
+| `ReasonDeterminism` | def | [L2104](formal/Logos/ModalCreationFrontiers.lean#L2104) | `def ReasonDeterminism (World Subject : Type) (ReasonsAt : World → Subject → Prop` | {}  |
+| `RigidAgent` | structure | [L1974](formal/Logos/ModalCreationFrontiers.lean#L1974) | `structure RigidAgent (World Entity Subject : Type)` | —  |
+| `SameExternalCircumstances` | def | [L1994](formal/Logos/ModalCreationFrontiers.lean#L1994) | `def SameExternalCircumstances (World : Type) (ExtCirc : World → Prop) (w u : Wor` | {}  |
+| `SameHistory` | def | [L2000](formal/Logos/ModalCreationFrontiers.lean#L2000) | `def SameHistory (World : Type) (HistoryAt : World → Prop) (w u : World) : Prop` | {}  |
+| `SameInternalState` | def | [L2006](formal/Logos/ModalCreationFrontiers.lean#L2006) | `def SameInternalState (World Subject : Type) (InternalStateAt : World → Subject ` | {}  |
+| `SameIntrinsicNature` | def | [L2003](formal/Logos/ModalCreationFrontiers.lean#L2003) | `def SameIntrinsicNature (World Entity : Type) (NatureAt : World → Entity → Prop)` | {}  |
+| `SameReasons` | def | [L1997](formal/Logos/ModalCreationFrontiers.lean#L1997) | `def SameReasons (World Subject : Type) (ReasonsAt : World → Subject → Prop) (s :` | {}  |
+| `SameTotalDeliberativeState` | structure | [L2009](formal/Logos/ModalCreationFrontiers.lean#L2009) | `structure SameTotalDeliberativeState (World Entity Subject : Type)` | —  |
+| `StrictDeterminism` | def | [L2095](formal/Logos/ModalCreationFrontiers.lean#L2095) | `def StrictDeterminism (World : Type) (frame : KripkeFrame World) (actualWorld : ` | {}  |
+| `aseity_does_not_force_any_volition_alternatives` | theorem | [L2392](formal/Logos/ModalCreationFrontiers.lean#L2392) | `theorem aseity_does_not_force_any_volition_alternatives : ∃ (World Entity Subjec` | {} → C182 |
+| `causal_determinism_modal_collapse` | theorem | [L2136](formal/Logos/ModalCreationFrontiers.lean#L2136) | `theorem causal_determinism_modal_collapse (World Subject : Type) (frame : Kripke` | {}  |
+| `determining_psr_iff_reason_determinism` | theorem | [L2117](formal/Logos/ModalCreationFrontiers.lean#L2117) | `theorem determining_psr_iff_reason_determinism (World Subject : Type) (ReasonsAt` | {}  |
+| `determining_psr_incompatible_with_modal_freedom` | theorem | [L2170](formal/Logos/ModalCreationFrontiers.lean#L2170) | `theorem determining_psr_incompatible_with_modal_freedom (World Subject : Type) (` | {}  |
+| `immutable_will_incompatible_with_contingent_act` | theorem | [L2193](formal/Logos/ModalCreationFrontiers.lean#L2193) | `theorem immutable_will_incompatible_with_contingent_act (World Subject : Type) (` | {}  |
+| `model_MC13_consistent` | theorem | [L2280](formal/Logos/ModalCreationFrontiers.lean#L2280) | `theorem model_MC13_consistent : ∃ (World Subject : Type) (ExtCirc : World → Prop` | {}  |
+| `model_MC14_consistent` | theorem | [L2289](formal/Logos/ModalCreationFrontiers.lean#L2289) | `theorem model_MC14_consistent : ∃ (World Subject : Type) (ExtCirc : World → Prop` | {}  |
+| `model_MC15_consistent` | theorem | [L2299](formal/Logos/ModalCreationFrontiers.lean#L2299) | `theorem model_MC15_consistent : ∃ (World Subject : Type) (ExtCirc : World → Prop` | {}  |
+| `model_MC16_consistent` | theorem | [L2312](formal/Logos/ModalCreationFrontiers.lean#L2312) | `theorem model_MC16_consistent : ∃ (World Entity Subject : Type) (ExtCirc : World` | {}  |
+| `model_MC17_consistent` | theorem | [L2327](formal/Logos/ModalCreationFrontiers.lean#L2327) | `theorem model_MC17_consistent : ∃ (World Entity Subject : Type) (ExistsAt : Worl` | {}  |
+| `model_MC18_consistent` | theorem | [L2349](formal/Logos/ModalCreationFrontiers.lean#L2349) | `theorem model_MC18_consistent : ∃ (World Subject : Type) (InfoAt : World → Subje` | {}  |
+| `model_MC19_consistent` | theorem | [L2360](formal/Logos/ModalCreationFrontiers.lean#L2360) | `theorem model_MC19_consistent : ∃ (World Subject : Type) (IsGoodAt : World → Sub` | {}  |
+| `model_MC20_consistent` | theorem | [L2369](formal/Logos/ModalCreationFrontiers.lean#L2369) | `theorem model_MC20_consistent : ∃ (World Entity Subject : Type) (NatureAt : Worl` | {}  |
+| `model_MC21_consistent` | theorem | [L2378](formal/Logos/ModalCreationFrontiers.lean#L2378) | `theorem model_MC21_consistent : ∃ (World Entity Subject : Type) (ExtDepAt : Worl` | {}  |
+| `model_MC22_consistent` | theorem | [L2429](formal/Logos/ModalCreationFrontiers.lean#L2429) | `theorem model_MC22_consistent : ∃ (World Entity Subject : Type) (ExtCirc : World` | {}  |
+| `model_MC23_consistent` | theorem | [L2444](formal/Logos/ModalCreationFrontiers.lean#L2444) | `theorem model_MC23_consistent : ∃ (World Subject : Type) (Circumstance : World →` | {}  |
+| `model_MC24_consistent` | theorem | [L2457](formal/Logos/ModalCreationFrontiers.lean#L2457) | `theorem model_MC24_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {CL}  |
+| `model_MC25_consistent` | theorem | [L2475](formal/Logos/ModalCreationFrontiers.lean#L2475) | `theorem model_MC25_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {}  |
+| `model_MC26_consistent` | theorem | [L2491](formal/Logos/ModalCreationFrontiers.lean#L2491) | `theorem model_MC26_consistent : ∃ (World Subject : Type) (frame : KripkeFrame Wo` | {}  |
+| `model_MC27_consistent` | theorem | [L2503](formal/Logos/ModalCreationFrontiers.lean#L2503) | `theorem model_MC27_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Wor` | {}  |
+| `model_MC28_consistent` | theorem | [L2515](formal/Logos/ModalCreationFrontiers.lean#L2515) | `theorem model_MC28_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Wor` | {}  |
+| `model_MC29_consistent` | theorem | [L2525](formal/Logos/ModalCreationFrontiers.lean#L2525) | `theorem model_MC29_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
+| `model_MC30_consistent` | theorem | [L2537](formal/Logos/ModalCreationFrontiers.lean#L2537) | `theorem model_MC30_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
+| `necessary_knowledge_not_entails_necessary_will` | theorem | [L2056](formal/Logos/ModalCreationFrontiers.lean#L2056) | `theorem necessary_knowledge_not_entails_necessary_will : ∃ (World Subject : Type` | {CL}  |
+| `necessary_rationality_not_entails_necessary_act` | theorem | [L2071](formal/Logos/ModalCreationFrontiers.lean#L2071) | `theorem necessary_rationality_not_entails_necessary_act : ∃ (World Subject : Typ` | {}  |
+| `reason_determinism_modal_collapse` | theorem | [L2150](formal/Logos/ModalCreationFrontiers.lean#L2150) | `theorem reason_determinism_modal_collapse (World Subject : Type) (frame : Kripke` | {}  |
+| `target_contingent_creation_iff_missing_modal_settlement` | theorem | [L2261](formal/Logos/ModalCreationFrontiers.lean#L2261) | `theorem target_contingent_creation_iff_missing_modal_settlement (World Subject :` | {}  |
+| `volitional_alternative_does_not_force_aseity` | theorem | [L2414](formal/Logos/ModalCreationFrontiers.lean#L2414) | `theorem volitional_alternative_does_not_force_aseity : ∃ (World Entity Subject :` | {} → C184 |
 
 ### `Logos.MoralFrontierAudit`
 
@@ -3849,43 +3827,43 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `ActionContingency` | def | [L136](formal/Logos/NonLibertarianCreation.lean#L136) | `def ActionContingency (World Subject : Type) (ActAt : World → Subject → Prop → P` | {}  |
-| `AdmissibleByReason` | def | [L154](formal/Logos/NonLibertarianCreation.lean#L154) | `def AdmissibleByReason (Reason : Prop) (p q : Prop) : Prop` | {}  |
-| `AgentCausalSettlement` | def | [L58](formal/Logos/NonLibertarianCreation.lean#L58) | `def AgentCausalSettlement (World Subject : Type) (SettlesAt : World → Subject → ` | {}  |
-| `BruteEvent` | def | [L73](formal/Logos/NonLibertarianCreation.lean#L73) | `def BruteEvent (World : Type) (AntecedentAt : World → Prop) (ReasonAt : World → ` | {}  |
-| `ContrastiveExplanation` | def | [L209](formal/Logos/NonLibertarianCreation.lean#L209) | `def ContrastiveExplanation (World : Type) (AntecedentAt : World → Prop) (_EventA` | {}  |
-| `DeterminedEvent` | def | [L47](formal/Logos/NonLibertarianCreation.lean#L47) | `def DeterminedEvent (World : Type) (AntecedentAt : World → Prop) (EventAt : Worl` | {}  |
-| `ExplainedEvent` | def | [L63](formal/Logos/NonLibertarianCreation.lean#L63) | `def ExplainedEvent (World : Type) (ReasonAt : World → Prop) (EventAt : World → P` | {}  |
-| `ExplainsCreationSet` | def | [L157](formal/Logos/NonLibertarianCreation.lean#L157) | `def ExplainsCreationSet (World : Type) (ReasonAt : World → Prop) (CreateAt : Wor` | {}  |
-| `GroundedEvent` | def | [L66](formal/Logos/NonLibertarianCreation.lean#L66) | `def GroundedEvent (World Entity : Type) (GroundsAt : World → Entity → Prop → Pro` | {}  |
-| `NonDeterminedEvent` | def | [L50](formal/Logos/NonLibertarianCreation.lean#L50) | `def NonDeterminedEvent (World : Type) (AntecedentAt : World → Prop) (EventAt : W` | {}  |
-| `NonDeterminingGround` | def | [L190](formal/Logos/NonLibertarianCreation.lean#L190) | `def NonDeterminingGround (World Entity : Type) (frame : KripkeFrame World) (actu` | {}  |
-| `PossibilityExplanation` | def | [L206](formal/Logos/NonLibertarianCreation.lean#L206) | `def PossibilityExplanation (Reason : Prop) (Create NoCreate : Prop) : Prop` | {}  |
-| `RandomEvent` | def | [L70](formal/Logos/NonLibertarianCreation.lean#L70) | `def RandomEvent (World : Type) (EventAt : World → Prop) (ReasonAt : World → Prop` | {}  |
-| `VolitionalContingency` | def | [L140](formal/Logos/NonLibertarianCreation.lean#L140) | `def VolitionalContingency (World Subject : Type) (WillsAt : World → Subject → Pr` | {}  |
-| `VolitionallyFree` | def | [L53](formal/Logos/NonLibertarianCreation.lean#L53) | `def VolitionallyFree (World Subject : Type) (ChoosesAt : World → Subject → Prop ` | {}  |
-| `WorldContingency` | def | [L132](formal/Logos/NonLibertarianCreation.lean#L132) | `def WorldContingency (World Entity : Type) (CreatesAt : World → Entity → Entity ` | {}  |
-| `contrastive_trilemma_theorem` | theorem | [L219](formal/Logos/NonLibertarianCreation.lean#L219) | `theorem contrastive_trilemma_theorem (World Subject : Type) (AntecedentAt : Worl` | {}  |
-| `explanation_not_entails_determination` | theorem | [L163](formal/Logos/NonLibertarianCreation.lean#L163) | `theorem explanation_not_entails_determination : ∃ (World : Type) (ReasonAt : Wor` | {}  |
-| `model_NC10_consistent` | theorem | [L354](formal/Logos/NonLibertarianCreation.lean#L354) | `theorem model_NC10_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Wor` | {}  |
-| `model_NC11_consistent` | theorem | [L367](formal/Logos/NonLibertarianCreation.lean#L367) | `theorem model_NC11_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Wor` | {}  |
-| `model_NC12_consistent` | theorem | [L380](formal/Logos/NonLibertarianCreation.lean#L380) | `theorem model_NC12_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
-| `model_NC13_consistent` | theorem | [L397](formal/Logos/NonLibertarianCreation.lean#L397) | `theorem model_NC13_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
-| `model_NC14_consistent` | theorem | [L417](formal/Logos/NonLibertarianCreation.lean#L417) | `theorem model_NC14_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
-| `model_NC15_consistent` | theorem | [L434](formal/Logos/NonLibertarianCreation.lean#L434) | `theorem model_NC15_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
-| `model_NC16_consistent` | theorem | [L452](formal/Logos/NonLibertarianCreation.lean#L452) | `theorem model_NC16_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
-| `model_NC1_consistent` | theorem | [L241](formal/Logos/NonLibertarianCreation.lean#L241) | `theorem model_NC1_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
-| `model_NC2_consistent` | theorem | [L251](formal/Logos/NonLibertarianCreation.lean#L251) | `theorem model_NC2_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
-| `model_NC3_consistent` | theorem | [L264](formal/Logos/NonLibertarianCreation.lean#L264) | `theorem model_NC3_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
-| `model_NC4_consistent` | theorem | [L282](formal/Logos/NonLibertarianCreation.lean#L282) | `theorem model_NC4_consistent : ∃ (World Entity Subject : Type) (frame : KripkeFr` | {}  |
-| `model_NC5_consistent` | theorem | [L296](formal/Logos/NonLibertarianCreation.lean#L296) | `theorem model_NC5_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
-| `model_NC6_consistent` | theorem | [L309](formal/Logos/NonLibertarianCreation.lean#L309) | `theorem model_NC6_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
-| `model_NC7_consistent` | theorem | [L319](formal/Logos/NonLibertarianCreation.lean#L319) | `theorem model_NC7_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
-| `model_NC8_consistent` | theorem | [L327](formal/Logos/NonLibertarianCreation.lean#L327) | `theorem model_NC8_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
-| `model_NC9_consistent` | theorem | [L340](formal/Logos/NonLibertarianCreation.lean#L340) | `theorem model_NC9_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
-| `nondetermined_not_entails_nonfree` | theorem | [L97](formal/Logos/NonLibertarianCreation.lean#L97) | `theorem nondetermined_not_entails_nonfree : ∃ (World Subject : Type) (Antecedent` | {}  |
-| `nondetermined_not_entails_random` | theorem | [L83](formal/Logos/NonLibertarianCreation.lean#L83) | `theorem nondetermined_not_entails_random : ∃ (World : Type) (AntecedentAt : Worl` | {}  |
-| `nonfree_not_entails_random` | theorem | [L113](formal/Logos/NonLibertarianCreation.lean#L113) | `theorem nonfree_not_entails_random : ∃ (World Subject : Type) (EventAt : World →` | {}  |
+| `ActionContingency` | def | [L3328](formal/Logos/ModalCreationFrontiers.lean#L3328) | `def ActionContingency (World Subject : Type) (ActAt : World → Subject → Prop → P` | {}  |
+| `AdmissibleByReason` | def | [L3346](formal/Logos/ModalCreationFrontiers.lean#L3346) | `def AdmissibleByReason (Reason : Prop) (p q : Prop) : Prop` | {}  |
+| `AgentCausalSettlement` | def | [L3250](formal/Logos/ModalCreationFrontiers.lean#L3250) | `def AgentCausalSettlement (World Subject : Type) (SettlesAt : World → Subject → ` | {}  |
+| `BruteEvent` | def | [L3265](formal/Logos/ModalCreationFrontiers.lean#L3265) | `def BruteEvent (World : Type) (AntecedentAt : World → Prop) (ReasonAt : World → ` | {}  |
+| `ContrastiveExplanation` | def | [L3401](formal/Logos/ModalCreationFrontiers.lean#L3401) | `def ContrastiveExplanation (World : Type) (AntecedentAt : World → Prop) (_EventA` | {}  |
+| `DeterminedEvent` | def | [L3239](formal/Logos/ModalCreationFrontiers.lean#L3239) | `def DeterminedEvent (World : Type) (AntecedentAt : World → Prop) (EventAt : Worl` | {}  |
+| `ExplainedEvent` | def | [L3255](formal/Logos/ModalCreationFrontiers.lean#L3255) | `def ExplainedEvent (World : Type) (ReasonAt : World → Prop) (EventAt : World → P` | {}  |
+| `ExplainsCreationSet` | def | [L3349](formal/Logos/ModalCreationFrontiers.lean#L3349) | `def ExplainsCreationSet (World : Type) (ReasonAt : World → Prop) (CreateAt : Wor` | {}  |
+| `GroundedEvent` | def | [L3258](formal/Logos/ModalCreationFrontiers.lean#L3258) | `def GroundedEvent (World Entity : Type) (GroundsAt : World → Entity → Prop → Pro` | {}  |
+| `NonDeterminedEvent` | def | [L3242](formal/Logos/ModalCreationFrontiers.lean#L3242) | `def NonDeterminedEvent (World : Type) (AntecedentAt : World → Prop) (EventAt : W` | {}  |
+| `NonDeterminingGround` | def | [L3382](formal/Logos/ModalCreationFrontiers.lean#L3382) | `def NonDeterminingGround (World Entity : Type) (frame : KripkeFrame World) (actu` | {}  |
+| `PossibilityExplanation` | def | [L3398](formal/Logos/ModalCreationFrontiers.lean#L3398) | `def PossibilityExplanation (Reason : Prop) (Create NoCreate : Prop) : Prop` | {}  |
+| `RandomEvent` | def | [L3262](formal/Logos/ModalCreationFrontiers.lean#L3262) | `def RandomEvent (World : Type) (EventAt : World → Prop) (ReasonAt : World → Prop` | {}  |
+| `VolitionalContingency` | def | [L3332](formal/Logos/ModalCreationFrontiers.lean#L3332) | `def VolitionalContingency (World Subject : Type) (WillsAt : World → Subject → Pr` | {}  |
+| `VolitionallyFree` | def | [L3245](formal/Logos/ModalCreationFrontiers.lean#L3245) | `def VolitionallyFree (World Subject : Type) (ChoosesAt : World → Subject → Prop ` | {}  |
+| `WorldContingency` | def | [L3324](formal/Logos/ModalCreationFrontiers.lean#L3324) | `def WorldContingency (World Entity : Type) (CreatesAt : World → Entity → Entity ` | {}  |
+| `contrastive_trilemma_theorem` | theorem | [L3411](formal/Logos/ModalCreationFrontiers.lean#L3411) | `theorem contrastive_trilemma_theorem (World Subject : Type) (AntecedentAt : Worl` | {}  |
+| `explanation_not_entails_determination` | theorem | [L3355](formal/Logos/ModalCreationFrontiers.lean#L3355) | `theorem explanation_not_entails_determination : ∃ (World : Type) (ReasonAt : Wor` | {}  |
+| `model_NC10_consistent` | theorem | [L3546](formal/Logos/ModalCreationFrontiers.lean#L3546) | `theorem model_NC10_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Wor` | {}  |
+| `model_NC11_consistent` | theorem | [L3559](formal/Logos/ModalCreationFrontiers.lean#L3559) | `theorem model_NC11_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Wor` | {}  |
+| `model_NC12_consistent` | theorem | [L3572](formal/Logos/ModalCreationFrontiers.lean#L3572) | `theorem model_NC12_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
+| `model_NC13_consistent` | theorem | [L3589](formal/Logos/ModalCreationFrontiers.lean#L3589) | `theorem model_NC13_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
+| `model_NC14_consistent` | theorem | [L3609](formal/Logos/ModalCreationFrontiers.lean#L3609) | `theorem model_NC14_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
+| `model_NC15_consistent` | theorem | [L3626](formal/Logos/ModalCreationFrontiers.lean#L3626) | `theorem model_NC15_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
+| `model_NC16_consistent` | theorem | [L3644](formal/Logos/ModalCreationFrontiers.lean#L3644) | `theorem model_NC16_consistent : ∃ (World Entity Subject : Type) (frame : KripkeF` | {}  |
+| `model_NC1_consistent` | theorem | [L3433](formal/Logos/ModalCreationFrontiers.lean#L3433) | `theorem model_NC1_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
+| `model_NC2_consistent` | theorem | [L3443](formal/Logos/ModalCreationFrontiers.lean#L3443) | `theorem model_NC2_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
+| `model_NC3_consistent` | theorem | [L3456](formal/Logos/ModalCreationFrontiers.lean#L3456) | `theorem model_NC3_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
+| `model_NC4_consistent` | theorem | [L3474](formal/Logos/ModalCreationFrontiers.lean#L3474) | `theorem model_NC4_consistent : ∃ (World Entity Subject : Type) (frame : KripkeFr` | {}  |
+| `model_NC5_consistent` | theorem | [L3488](formal/Logos/ModalCreationFrontiers.lean#L3488) | `theorem model_NC5_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
+| `model_NC6_consistent` | theorem | [L3501](formal/Logos/ModalCreationFrontiers.lean#L3501) | `theorem model_NC6_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
+| `model_NC7_consistent` | theorem | [L3511](formal/Logos/ModalCreationFrontiers.lean#L3511) | `theorem model_NC7_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
+| `model_NC8_consistent` | theorem | [L3519](formal/Logos/ModalCreationFrontiers.lean#L3519) | `theorem model_NC8_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
+| `model_NC9_consistent` | theorem | [L3532](formal/Logos/ModalCreationFrontiers.lean#L3532) | `theorem model_NC9_consistent : ∃ (World Entity : Type) (frame : KripkeFrame Worl` | {}  |
+| `nondetermined_not_entails_nonfree` | theorem | [L3289](formal/Logos/ModalCreationFrontiers.lean#L3289) | `theorem nondetermined_not_entails_nonfree : ∃ (World Subject : Type) (Antecedent` | {}  |
+| `nondetermined_not_entails_random` | theorem | [L3275](formal/Logos/ModalCreationFrontiers.lean#L3275) | `theorem nondetermined_not_entails_random : ∃ (World : Type) (AntecedentAt : Worl` | {}  |
+| `nonfree_not_entails_random` | theorem | [L3305](formal/Logos/ModalCreationFrontiers.lean#L3305) | `theorem nonfree_not_entails_random : ∃ (World Subject : Type) (EventAt : World →` | {}  |
 
 ### `Logos.NormativeOrder`
 
@@ -3926,23 +3904,23 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `GenuineNormativeDomain` | structure | [L137](formal/Logos/NormativeTruth.lean#L137) | `structure GenuineNormativeDomain (Subject : Type) where` | —  |
-| `NoNormativeTruth` | def | [L35](formal/Logos/NormativeTruth.lean#L35) | `def NoNormativeTruth (NormativeTruth : Prop → Prop) : Prop` | {}  |
-| `NoNormativeTruthAt` | def | [L82](formal/Logos/NormativeTruth.lean#L82) | `def NoNormativeTruthAt (World : Type) (NormAt : World → Prop → Prop) (w : World)` | {}  |
-| `NormativeFreeGroundContext` | structure | [L167](formal/Logos/NormativeTruth.lean#L167) | `structure NormativeFreeGroundContext` | —  |
-| `NormativeTruthContext` | structure | [L41](formal/Logos/NormativeTruth.lean#L41) | `structure NormativeTruthContext where` | —  |
-| `RightWrongNormativeContext` | structure | [L106](formal/Logos/NormativeTruth.lean#L106) | `structure RightWrongNormativeContext where` | —  |
-| `context_normative_truth_exists` | theorem | [L72](formal/Logos/NormativeTruth.lean#L72) | `theorem context_normative_truth_exists (ctx : NormativeTruthContext) : ∃ p : Pro` | {CL}  |
-| `established_free_subject_defeats_d3` | theorem | [L211](formal/Logos/NormativeTruth.lean#L211) | `theorem established_free_subject_defeats_d3 {World PriorState FutureState : Type` | {Means, Subject}  |
-| `impersonal_model_excludes_genuine_normative_truth` | theorem | [L144](formal/Logos/NormativeTruth.lean#L144) | `theorem impersonal_model_excludes_genuine_normative_truth {Subject : Type} (dom ` | {}  |
-| `necessary_normative_truth_exists` | theorem | [L88](formal/Logos/NormativeTruth.lean#L88) | `theorem necessary_normative_truth_exists {World : Type} (NormAt : World → Prop →` | {CL}  |
-| `no_normative_truth_is_self_refuting` | theorem | [L51](formal/Logos/NormativeTruth.lean#L51) | `theorem no_normative_truth_is_self_refuting (NormativeTruth : Prop → Prop) (hSel` | {}  |
-| `normative_free_subject_grounds_agency` | theorem | [L175](formal/Logos/NormativeTruth.lean#L175) | `theorem normative_free_subject_grounds_agency {World PriorState FutureState : Ty` | {Means, Subject}  |
-| `normative_free_subject_implies_indeterminism` | theorem | [L186](formal/Logos/NormativeTruth.lean#L186) | `theorem normative_free_subject_implies_indeterminism {World PriorState FutureSta` | {Means, Subject}  |
-| `normative_free_subject_implies_not_d3` | theorem | [L198](formal/Logos/NormativeTruth.lean#L198) | `theorem normative_free_subject_implies_not_d3 {World PriorState FutureState : Ty` | {Means, Subject}  |
-| `normative_truth_exists` | theorem | [L62](formal/Logos/NormativeTruth.lean#L62) | `theorem normative_truth_exists (NormativeTruth : Prop → Prop) (hSelf : NoNormati` | {CL}  |
-| `right_wrong_content_and_normativity` | theorem | [L118](formal/Logos/NormativeTruth.lean#L118) | `theorem right_wrong_content_and_normativity (ctx : RightWrongNormativeContext) :` | {}  |
-| `right_wrong_is_normative_truth` | theorem | [L112](formal/Logos/NormativeTruth.lean#L112) | `theorem right_wrong_is_normative_truth (ctx : RightWrongNormativeContext) : ∃ p ` | {}  |
+| `GenuineNormativeDomain` | structure | [L2505](formal/Logos/ActionAndNormativeChoice.lean#L2505) | `structure GenuineNormativeDomain (Subject : Type) where` | —  |
+| `NoNormativeTruth` | def | [L2403](formal/Logos/ActionAndNormativeChoice.lean#L2403) | `def NoNormativeTruth (NormativeTruth : Prop → Prop) : Prop` | {}  |
+| `NoNormativeTruthAt` | def | [L2450](formal/Logos/ActionAndNormativeChoice.lean#L2450) | `def NoNormativeTruthAt (World : Type) (NormAt : World → Prop → Prop) (w : World)` | {}  |
+| `NormativeFreeGroundContext` | structure | [L2535](formal/Logos/ActionAndNormativeChoice.lean#L2535) | `structure NormativeFreeGroundContext` | —  |
+| `NormativeTruthContext` | structure | [L2409](formal/Logos/ActionAndNormativeChoice.lean#L2409) | `structure NormativeTruthContext where` | —  |
+| `RightWrongNormativeContext` | structure | [L2474](formal/Logos/ActionAndNormativeChoice.lean#L2474) | `structure RightWrongNormativeContext where` | —  |
+| `context_normative_truth_exists` | theorem | [L2440](formal/Logos/ActionAndNormativeChoice.lean#L2440) | `theorem context_normative_truth_exists (ctx : NormativeTruthContext) : ∃ p : Pro` | {CL}  |
+| `established_free_subject_defeats_d3` | theorem | [L2579](formal/Logos/ActionAndNormativeChoice.lean#L2579) | `theorem established_free_subject_defeats_d3 {World PriorState FutureState : Type` | {Means, Subject}  |
+| `impersonal_model_excludes_genuine_normative_truth` | theorem | [L2512](formal/Logos/ActionAndNormativeChoice.lean#L2512) | `theorem impersonal_model_excludes_genuine_normative_truth {Subject : Type} (dom ` | {}  |
+| `necessary_normative_truth_exists` | theorem | [L2456](formal/Logos/ActionAndNormativeChoice.lean#L2456) | `theorem necessary_normative_truth_exists {World : Type} (NormAt : World → Prop →` | {CL}  |
+| `no_normative_truth_is_self_refuting` | theorem | [L2419](formal/Logos/ActionAndNormativeChoice.lean#L2419) | `theorem no_normative_truth_is_self_refuting (NormativeTruth : Prop → Prop) (hSel` | {}  |
+| `normative_free_subject_grounds_agency` | theorem | [L2543](formal/Logos/ActionAndNormativeChoice.lean#L2543) | `theorem normative_free_subject_grounds_agency {World PriorState FutureState : Ty` | {Means, Subject}  |
+| `normative_free_subject_implies_indeterminism` | theorem | [L2554](formal/Logos/ActionAndNormativeChoice.lean#L2554) | `theorem normative_free_subject_implies_indeterminism {World PriorState FutureSta` | {Means, Subject}  |
+| `normative_free_subject_implies_not_d3` | theorem | [L2566](formal/Logos/ActionAndNormativeChoice.lean#L2566) | `theorem normative_free_subject_implies_not_d3 {World PriorState FutureState : Ty` | {Means, Subject}  |
+| `normative_truth_exists` | theorem | [L2430](formal/Logos/ActionAndNormativeChoice.lean#L2430) | `theorem normative_truth_exists (NormativeTruth : Prop → Prop) (hSelf : NoNormati` | {CL}  |
+| `right_wrong_content_and_normativity` | theorem | [L2486](formal/Logos/ActionAndNormativeChoice.lean#L2486) | `theorem right_wrong_content_and_normativity (ctx : RightWrongNormativeContext) :` | {}  |
+| `right_wrong_is_normative_truth` | theorem | [L2480](formal/Logos/ActionAndNormativeChoice.lean#L2480) | `theorem right_wrong_is_normative_truth (ctx : RightWrongNormativeContext) : ∃ p ` | {}  |
 
 ### `Logos.Order`
 
@@ -4253,43 +4231,43 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `DoxasticCommitmentHorn` | def | [L64](formal/Logos/PostA14Frontier.lean#L64) | `def DoxasticCommitmentHorn {Subj : Type} (CS : FineCognitiveSubject Subj) (s : S` | {}  |
-| `ExecutiveInitiationHorn` | def | [L74](formal/Logos/PostA14Frontier.lean#L74) | `def ExecutiveInitiationHorn {Subj : Type} (InitiatesRel : Subj → Unit → Unit → P` | {}  |
-| `TeleologicalAimHorn` | def | [L69](formal/Logos/PostA14Frontier.lean#L69) | `def TeleologicalAimHorn {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj` | {}  |
-| `agency_ladder_frontier_synthesis` | theorem | [L471](formal/Logos/PostA14Frontier.lean#L471) | `theorem agency_ladder_frontier_synthesis {Subj : Type} (CS : FineCognitiveSubjec` | {}  |
-| `archetype_deterministic_evaluator` | theorem | [L313](formal/Logos/PostA14Frontier.lean#L313) | `theorem archetype_deterministic_evaluator : ∃ (Subj : Type) (CS : FineCognitiveS` | {}  |
-| `archetype_non_reflexive_chooser` | theorem | [L418](formal/Logos/PostA14Frontier.lean#L418) | `theorem archetype_non_reflexive_chooser : ∃ (Subj : Type) (CS : FineCognitiveSub` | {}  |
-| `archetype_passive_truth_tracker` | theorem | [L276](formal/Logos/PostA14Frontier.lean#L276) | `theorem archetype_passive_truth_tracker : ∃ (Subj : Type) (CS : FineCognitiveSub` | {}  |
-| `archetype_puppet_unauthored_aims` | theorem | [L379](formal/Logos/PostA14Frontier.lean#L379) | `theorem archetype_puppet_unauthored_aims : ∃ (Subj : Type) (CS : FineCognitiveSu` | {}  |
-| `archetype_theoretical_deliberator` | theorem | [L348](formal/Logos/PostA14Frontier.lean#L348) | `theorem archetype_theoretical_deliberator : ∃ (Subj : Type) (CS : FineCognitiveS` | {}  |
-| `post_a14_derives_old_chooses` | theorem | [L204](formal/Logos/PostA14Frontier.lean#L204) | `theorem post_a14_derives_old_chooses {Subj : Type} (ActRel : Subj → Prop → Prop)` | {}  |
-| `post_a14_fails_to_derive_commitment` | theorem | [L213](formal/Logos/PostA14Frontier.lean#L213) | `theorem post_a14_fails_to_derive_commitment : ∃ (Subj : Type) (CS : FineCognitiv` | {}  |
-| `post_a14_fails_to_derive_discretionary_choice` | theorem | [L228](formal/Logos/PostA14Frontier.lean#L228) | `theorem post_a14_fails_to_derive_discretionary_choice : ∃ (Subj : Type) (CS : Fi` | {}  |
-| `separation_commitment_without_volition` | theorem | [L120](formal/Logos/PostA14Frontier.lean#L120) | `theorem separation_commitment_without_volition : ∃ (Subj : Type) (CS : FineCogni` | {}  |
-| `separation_settlement_without_commitment` | theorem | [L81](formal/Logos/PostA14Frontier.lean#L81) | `theorem separation_settlement_without_commitment : ∃ (Subj : Type) (CS : FineCog` | {}  |
-| `separation_volition_without_agency` | theorem | [L161](formal/Logos/PostA14Frontier.lean#L161) | `theorem separation_volition_without_agency : ∃ (Subj : Type) (CS : FineCognitive` | {}  |
-| `settlement_plus_aim_horn_yields_volition` | theorem | [L151](formal/Logos/PostA14Frontier.lean#L151) | `theorem settlement_plus_aim_horn_yields_volition {Subj : Type} (CS : FineCogniti` | {}  |
-| `settlement_plus_horn_yields_commitment` | theorem | [L111](formal/Logos/PostA14Frontier.lean#L111) | `theorem settlement_plus_horn_yields_commitment {Subj : Type} (CS : FineCognitive` | {}  |
+| `DoxasticCommitmentHorn` | def | [L5520](formal/Logos/AgencyAuditsAndFrontiers.lean#L5520) | `def DoxasticCommitmentHorn {Subj : Type} (CS : FineCognitiveSubject Subj) (s : S` | {}  |
+| `ExecutiveInitiationHorn` | def | [L5530](formal/Logos/AgencyAuditsAndFrontiers.lean#L5530) | `def ExecutiveInitiationHorn {Subj : Type} (InitiatesRel : Subj → Unit → Unit → P` | {}  |
+| `TeleologicalAimHorn` | def | [L5525](formal/Logos/AgencyAuditsAndFrontiers.lean#L5525) | `def TeleologicalAimHorn {Subj : Type} (CS : FineCognitiveSubject Subj) (s : Subj` | {}  |
+| `agency_ladder_frontier_synthesis` | theorem | [L5927](formal/Logos/AgencyAuditsAndFrontiers.lean#L5927) | `theorem agency_ladder_frontier_synthesis {Subj : Type} (CS : FineCognitiveSubjec` | {}  |
+| `archetype_deterministic_evaluator` | theorem | [L5769](formal/Logos/AgencyAuditsAndFrontiers.lean#L5769) | `theorem archetype_deterministic_evaluator : ∃ (Subj : Type) (CS : FineCognitiveS` | {}  |
+| `archetype_non_reflexive_chooser` | theorem | [L5874](formal/Logos/AgencyAuditsAndFrontiers.lean#L5874) | `theorem archetype_non_reflexive_chooser : ∃ (Subj : Type) (CS : FineCognitiveSub` | {}  |
+| `archetype_passive_truth_tracker` | theorem | [L5732](formal/Logos/AgencyAuditsAndFrontiers.lean#L5732) | `theorem archetype_passive_truth_tracker : ∃ (Subj : Type) (CS : FineCognitiveSub` | {}  |
+| `archetype_puppet_unauthored_aims` | theorem | [L5835](formal/Logos/AgencyAuditsAndFrontiers.lean#L5835) | `theorem archetype_puppet_unauthored_aims : ∃ (Subj : Type) (CS : FineCognitiveSu` | {}  |
+| `archetype_theoretical_deliberator` | theorem | [L5804](formal/Logos/AgencyAuditsAndFrontiers.lean#L5804) | `theorem archetype_theoretical_deliberator : ∃ (Subj : Type) (CS : FineCognitiveS` | {}  |
+| `post_a14_derives_old_chooses` | theorem | [L5660](formal/Logos/AgencyAuditsAndFrontiers.lean#L5660) | `theorem post_a14_derives_old_chooses {Subj : Type} (ActRel : Subj → Prop → Prop)` | {}  |
+| `post_a14_fails_to_derive_commitment` | theorem | [L5669](formal/Logos/AgencyAuditsAndFrontiers.lean#L5669) | `theorem post_a14_fails_to_derive_commitment : ∃ (Subj : Type) (CS : FineCognitiv` | {}  |
+| `post_a14_fails_to_derive_discretionary_choice` | theorem | [L5684](formal/Logos/AgencyAuditsAndFrontiers.lean#L5684) | `theorem post_a14_fails_to_derive_discretionary_choice : ∃ (Subj : Type) (CS : Fi` | {}  |
+| `separation_commitment_without_volition` | theorem | [L5576](formal/Logos/AgencyAuditsAndFrontiers.lean#L5576) | `theorem separation_commitment_without_volition : ∃ (Subj : Type) (CS : FineCogni` | {}  |
+| `separation_settlement_without_commitment` | theorem | [L5537](formal/Logos/AgencyAuditsAndFrontiers.lean#L5537) | `theorem separation_settlement_without_commitment : ∃ (Subj : Type) (CS : FineCog` | {}  |
+| `separation_volition_without_agency` | theorem | [L5617](formal/Logos/AgencyAuditsAndFrontiers.lean#L5617) | `theorem separation_volition_without_agency : ∃ (Subj : Type) (CS : FineCognitive` | {}  |
+| `settlement_plus_aim_horn_yields_volition` | theorem | [L5607](formal/Logos/AgencyAuditsAndFrontiers.lean#L5607) | `theorem settlement_plus_aim_horn_yields_volition {Subj : Type} (CS : FineCogniti` | {}  |
+| `settlement_plus_horn_yields_commitment` | theorem | [L5567](formal/Logos/AgencyAuditsAndFrontiers.lean#L5567) | `theorem settlement_plus_horn_yields_commitment {Subj : Type} (CS : FineCognitive` | {}  |
 
 ### `Logos.Precedence`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `PrecedesRightWrong` | structure | [L635](formal/Logos/DivineTrinitarianAttributes.lean#L635) | `structure PrecedesRightWrong (e : Entity) : Prop where` | —  |
-| `atom_fails_precedence` | theorem | [L566](formal/Logos/DivineTrinitarianAttributes.lean#L566) | `theorem atom_fails_precedence : ¬ ∃ w : World, (∀ n : Nat, ¬ w ⊨ atom n) ∧ Exist` | {NecessarySubjectKind, Subject} → C424 |
-| `every_world_satisfies_some_form` | theorem | [L492](formal/Logos/DivineTrinitarianAttributes.lean#L492) | `theorem every_world_satisfies_some_form (w : World) : ∃ φ : Form, w ⊨ φ` | {} → C418 |
-| `ground_conditions_every_content_bearer` | theorem | [L605](formal/Logos/DivineTrinitarianAttributes.lean#L605) | `theorem ground_conditions_every_content_bearer (w : World) (e : Entity) : Exists` | {Means, NecessarySubjectKind, Subject} → C423 |
-| `ground_existence_does_not_entail_any_truth` | theorem | [L532](formal/Logos/DivineTrinitarianAttributes.lean#L532) | `theorem ground_existence_does_not_entail_any_truth : ¬ (∀ w : World, ∀ φ : Form,` | {NecessarySubjectKind, Subject} → C420 |
-| `ground_existence_is_invariant_while_content_varies` | theorem | [L550](formal/Logos/DivineTrinitarianAttributes.lean#L550) | `theorem ground_existence_is_invariant_while_content_varies : (∃ w : World, (∀ n ` | {NecessarySubjectKind, Subject} → C421 |
-| `ground_scope_is_not_the_truth_set` | theorem | [L587](formal/Logos/DivineTrinitarianAttributes.lean#L587) | `theorem ground_scope_is_not_the_truth_set : ¬ (∀ p : Prop, EntityMeans Entity.of` | {Means, Subject} → C422 |
-| `no_atom_is_true_at_falsityWorld` | theorem | [L477](formal/Logos/DivineTrinitarianAttributes.lean#L477) | `theorem no_atom_is_true_at_falsityWorld (n : Nat) : ¬ falsityWorld ⊨ atom n` | {} → C417 |
-| `ofGround_obtains_where_no_atom_is_true` | theorem | [L514](formal/Logos/DivineTrinitarianAttributes.lean#L514) | `theorem ofGround_obtains_where_no_atom_is_true : ∃ w : World, (∀ n : Nat, ¬ w ⊨ ` | {NecessarySubjectKind, Subject} → C419 |
-| `ofGround_precedes_the_right_wrong_distinction` | theorem | [L655](formal/Logos/DivineTrinitarianAttributes.lean#L655) | `theorem ofGround_precedes_the_right_wrong_distinction : PrecedesRightWrong Entit` | {Means, NecessarySubjectKind, Subject} → C425 |
-| `ofGround_sole_precedes_right_wrong` | theorem | [L744](formal/Logos/DivineTrinitarianAttributes.lean#L744) | `theorem ofGround_sole_precedes_right_wrong : ∀ e : Entity, PrecedesRightWrong e ` | {GroundTranscendence, Means, NecessarySubjectKind, Subject} → C433 |
-| `precedence_identifies_the_ground_where_stage_invariance_does_not` | theorem | [L812](formal/Logos/DivineTrinitarianAttributes.lean#L812) | `theorem precedence_identifies_the_ground_where_stage_invariance_does_not : (∀ e ` | {GroundTranscendence, Means, NecessarySubjectKind, Subject, CL} → C435 |
-| `rightWrongDistinction_is_world_invariant` | theorem | [L682](formal/Logos/DivineTrinitarianAttributes.lean#L682) | `theorem rightWrongDistinction_is_world_invariant (_w : World) : ¬ Logos.Core.N_T` | {} → C426 |
-| `stage_invariance_does_not_uniquely_identify_the_ground` | theorem | [L782](formal/Logos/DivineTrinitarianAttributes.lean#L782) | `theorem stage_invariance_does_not_uniquely_identify_the_ground : StageInvariance` | {NecessarySubjectKind, Subject, CL} → C434 |
-| `stage_invariance_iff_atemporal` | theorem | [L706](formal/Logos/DivineTrinitarianAttributes.lean#L706) | `theorem stage_invariance_iff_atemporal (e : Entity) : StageInvariance e ↔ Atempo` | {NecessarySubjectKind, Subject} → C432 |
+| `PrecedesRightWrong` | structure | [L636](formal/Logos/DivineTrinitarianAttributes.lean#L636) | `structure PrecedesRightWrong (e : Entity) : Prop where` | —  |
+| `atom_fails_precedence` | theorem | [L567](formal/Logos/DivineTrinitarianAttributes.lean#L567) | `theorem atom_fails_precedence : ¬ ∃ w : World, (∀ n : Nat, ¬ w ⊨ atom n) ∧ Exist` | {NecessarySubjectKind, Subject} → C424 |
+| `every_world_satisfies_some_form` | theorem | [L493](formal/Logos/DivineTrinitarianAttributes.lean#L493) | `theorem every_world_satisfies_some_form (w : World) : ∃ φ : Form, w ⊨ φ` | {} → C418 |
+| `ground_conditions_every_content_bearer` | theorem | [L606](formal/Logos/DivineTrinitarianAttributes.lean#L606) | `theorem ground_conditions_every_content_bearer (w : World) (e : Entity) : Exists` | {Means, NecessarySubjectKind, Subject} → C423 |
+| `ground_existence_does_not_entail_any_truth` | theorem | [L533](formal/Logos/DivineTrinitarianAttributes.lean#L533) | `theorem ground_existence_does_not_entail_any_truth : ¬ (∀ w : World, ∀ φ : Form,` | {NecessarySubjectKind, Subject} → C420 |
+| `ground_existence_is_invariant_while_content_varies` | theorem | [L551](formal/Logos/DivineTrinitarianAttributes.lean#L551) | `theorem ground_existence_is_invariant_while_content_varies : (∃ w : World, (∀ n ` | {NecessarySubjectKind, Subject} → C421 |
+| `ground_scope_is_not_the_truth_set` | theorem | [L588](formal/Logos/DivineTrinitarianAttributes.lean#L588) | `theorem ground_scope_is_not_the_truth_set : ¬ (∀ p : Prop, EntityMeans Entity.of` | {Means, Subject} → C422 |
+| `no_atom_is_true_at_falsityWorld` | theorem | [L478](formal/Logos/DivineTrinitarianAttributes.lean#L478) | `theorem no_atom_is_true_at_falsityWorld (n : Nat) : ¬ falsityWorld ⊨ atom n` | {} → C417 |
+| `ofGround_obtains_where_no_atom_is_true` | theorem | [L515](formal/Logos/DivineTrinitarianAttributes.lean#L515) | `theorem ofGround_obtains_where_no_atom_is_true : ∃ w : World, (∀ n : Nat, ¬ w ⊨ ` | {NecessarySubjectKind, Subject} → C419 |
+| `ofGround_precedes_the_right_wrong_distinction` | theorem | [L656](formal/Logos/DivineTrinitarianAttributes.lean#L656) | `theorem ofGround_precedes_the_right_wrong_distinction : PrecedesRightWrong Entit` | {Means, NecessarySubjectKind, Subject} → C425 |
+| `ofGround_sole_precedes_right_wrong` | theorem | [L745](formal/Logos/DivineTrinitarianAttributes.lean#L745) | `theorem ofGround_sole_precedes_right_wrong : ∀ e : Entity, PrecedesRightWrong e ` | {GroundTranscendence, Means, NecessarySubjectKind, Subject} → C433 |
+| `precedence_identifies_the_ground_where_stage_invariance_does_not` | theorem | [L813](formal/Logos/DivineTrinitarianAttributes.lean#L813) | `theorem precedence_identifies_the_ground_where_stage_invariance_does_not : (∀ e ` | {GroundTranscendence, Means, NecessarySubjectKind, Subject, CL} → C435 |
+| `rightWrongDistinction_is_world_invariant` | theorem | [L683](formal/Logos/DivineTrinitarianAttributes.lean#L683) | `theorem rightWrongDistinction_is_world_invariant (_w : World) : ¬ Logos.Core.N_T` | {} → C426 |
+| `stage_invariance_does_not_uniquely_identify_the_ground` | theorem | [L783](formal/Logos/DivineTrinitarianAttributes.lean#L783) | `theorem stage_invariance_does_not_uniquely_identify_the_ground : StageInvariance` | {NecessarySubjectKind, Subject, CL} → C434 |
+| `stage_invariance_iff_atemporal` | theorem | [L707](formal/Logos/DivineTrinitarianAttributes.lean#L707) | `theorem stage_invariance_iff_atemporal (e : Entity) : StageInvariance e ↔ Atempo` | {NecessarySubjectKind, Subject} → C432 |
 
 ### `Logos.ProductionCountermodel`
 
@@ -4325,29 +4303,29 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `A14_Existential` | def | [L60](formal/Logos/ProofSpecificContrast.lean#L60) | `def A14_Existential (Subject : Type) (ActAt : Subject → Prop → Prop) (FreeWillAt` | {}  |
-| `A14_Universal` | def | [L56](formal/Logos/ProofSpecificContrast.lean#L56) | `def A14_Universal (Subject : Type) (ActAt : Subject → Prop → Prop) (ChoosesAt : ` | {}  |
-| `CognitiveSubject` | structure | [L89](formal/Logos/ProofSpecificContrast.lean#L89) | `structure CognitiveSubject (Subject : Type) where` | —  |
-| `PerformsRefutation` | def | [L144](formal/Logos/ProofSpecificContrast.lean#L144) | `def PerformsRefutation (Subject : Type) (CS : CognitiveSubject Subject) (s : Sub` | {}  |
-| `ProofSpecificContrast` | def | [L64](formal/Logos/ProofSpecificContrast.lean#L64) | `def ProofSpecificContrast (Subject : Type) (s : Subject) (p q : Prop) (MeansAt :` | {}  |
-| `RefutationalCognitiveUptake` | def | [L280](formal/Logos/ProofSpecificContrast.lean#L280) | `def RefutationalCognitiveUptake (Subject : Type) (CS : CognitiveSubject Subject)` | {}  |
-| `RefutationalPerformance` | def | [L105](formal/Logos/ProofSpecificContrast.lean#L105) | `def RefutationalPerformance (Subject : Type) (CS : CognitiveSubject Subject) (s ` | {}  |
-| `RefutationalTrace` | abbrev | [L135](formal/Logos/ProofSpecificContrast.lean#L135) | `abbrev RefutationalTrace : Type` | {}  |
-| `TraceContainsAssumption` | def | [L137](formal/Logos/ProofSpecificContrast.lean#L137) | `def TraceContainsAssumption (t : RefutationalTrace) (q : Prop) : Prop` | {}  |
-| `TraceContainsDischarge` | def | [L140](formal/Logos/ProofSpecificContrast.lean#L140) | `def TraceContainsDischarge (t : RefutationalTrace) (q : Prop) : Prop` | {}  |
-| `TraceStep` | inductive | [L129](formal/Logos/ProofSpecificContrast.lean#L129) | `inductive TraceStep where` | —  |
-| `a14_proof_performance_is_contrastive` | theorem | [L181](formal/Logos/ProofSpecificContrast.lean#L181) | `theorem a14_proof_performance_is_contrastive (Subject : Type) (CS : CognitiveSub` | {}  |
-| `model_M0_trace_without_subject` | theorem | [L207](formal/Logos/ProofSpecificContrast.lean#L207) | `theorem model_M0_trace_without_subject : ∃ (t : RefutationalTrace), TraceContain` | {}  |
-| `model_M2_not_implies_M3` | theorem | [L215](formal/Logos/ProofSpecificContrast.lean#L215) | `theorem model_M2_not_implies_M3 : ∃ (Subject : Type) (CS : CognitiveSubject Subj` | {}  |
-| `model_M3_not_implies_M4` | theorem | [L229](formal/Logos/ProofSpecificContrast.lean#L229) | `theorem model_M3_not_implies_M4 : ∃ (Subject : Type) (s : Subject) (q : Prop) (C` | {}  |
-| `model_M4_not_implies_M5` | theorem | [L239](formal/Logos/ProofSpecificContrast.lean#L239) | `theorem model_M4_not_implies_M5 : ∃ (Subject : Type) (s : Subject) (q : Prop) (C` | {}  |
-| `model_M5_not_implies_M6` | theorem | [L252](formal/Logos/ProofSpecificContrast.lean#L252) | `theorem model_M5_not_implies_M6 : ∃ (Subject : Type) (s : Subject) (q : Prop) (M` | {}  |
-| `performative_proof_yields_freewill` | theorem | [L286](formal/Logos/ProofSpecificContrast.lean#L286) | `theorem performative_proof_yields_freewill (Subject : Type) (CS : CognitiveSubje` | {}  |
-| `proof_specific_contrast_yields_freewill` | theorem | [L69](formal/Logos/ProofSpecificContrast.lean#L69) | `theorem proof_specific_contrast_yields_freewill (Subject : Type) (s : Subject) (` | {}  |
-| `reductio_engages_incompatible_contents` | theorem | [L111](formal/Logos/ProofSpecificContrast.lean#L111) | `theorem reductio_engages_incompatible_contents (Subject : Type) (CS : CognitiveS` | {}  |
-| `retorsion_proof_derives_F1b` | theorem | [L304](formal/Logos/ProofSpecificContrast.lean#L304) | `theorem retorsion_proof_derives_F1b (Subject : Type) (CS : CognitiveSubject Subj` | {}  |
-| `trace_occurrence_not_implies_cognitive_uptake` | theorem | [L152](formal/Logos/ProofSpecificContrast.lean#L152) | `theorem trace_occurrence_not_implies_cognitive_uptake : ∃ (t : RefutationalTrace` | {}  |
-| `universal_a14_false_for_arbitrary_acts` | theorem | [L168](formal/Logos/ProofSpecificContrast.lean#L168) | `theorem universal_a14_false_for_arbitrary_acts : ∃ (Subject : Type) (ActAt : Sub` | {}  |
+| `A14_Existential` | def | [L1986](formal/Logos/AgencyAuditsAndFrontiers.lean#L1986) | `def A14_Existential (Subject : Type) (ActAt : Subject → Prop → Prop) (FreeWillAt` | {}  |
+| `A14_Universal` | def | [L1982](formal/Logos/AgencyAuditsAndFrontiers.lean#L1982) | `def A14_Universal (Subject : Type) (ActAt : Subject → Prop → Prop) (ChoosesAt : ` | {}  |
+| `CognitiveSubject` | structure | [L2015](formal/Logos/AgencyAuditsAndFrontiers.lean#L2015) | `structure CognitiveSubject (Subject : Type) where` | —  |
+| `PerformsRefutation` | def | [L2070](formal/Logos/AgencyAuditsAndFrontiers.lean#L2070) | `def PerformsRefutation (Subject : Type) (CS : CognitiveSubject Subject) (s : Sub` | {}  |
+| `ProofSpecificContrast` | def | [L1990](formal/Logos/AgencyAuditsAndFrontiers.lean#L1990) | `def ProofSpecificContrast (Subject : Type) (s : Subject) (p q : Prop) (MeansAt :` | {}  |
+| `RefutationalCognitiveUptake` | def | [L2206](formal/Logos/AgencyAuditsAndFrontiers.lean#L2206) | `def RefutationalCognitiveUptake (Subject : Type) (CS : CognitiveSubject Subject)` | {}  |
+| `RefutationalPerformance` | def | [L2031](formal/Logos/AgencyAuditsAndFrontiers.lean#L2031) | `def RefutationalPerformance (Subject : Type) (CS : CognitiveSubject Subject) (s ` | {}  |
+| `RefutationalTrace` | abbrev | [L2061](formal/Logos/AgencyAuditsAndFrontiers.lean#L2061) | `abbrev RefutationalTrace : Type` | {}  |
+| `TraceContainsAssumption` | def | [L2063](formal/Logos/AgencyAuditsAndFrontiers.lean#L2063) | `def TraceContainsAssumption (t : RefutationalTrace) (q : Prop) : Prop` | {}  |
+| `TraceContainsDischarge` | def | [L2066](formal/Logos/AgencyAuditsAndFrontiers.lean#L2066) | `def TraceContainsDischarge (t : RefutationalTrace) (q : Prop) : Prop` | {}  |
+| `TraceStep` | inductive | [L2055](formal/Logos/AgencyAuditsAndFrontiers.lean#L2055) | `inductive TraceStep where` | —  |
+| `a14_proof_performance_is_contrastive` | theorem | [L2107](formal/Logos/AgencyAuditsAndFrontiers.lean#L2107) | `theorem a14_proof_performance_is_contrastive (Subject : Type) (CS : CognitiveSub` | {}  |
+| `model_M0_trace_without_subject` | theorem | [L2133](formal/Logos/AgencyAuditsAndFrontiers.lean#L2133) | `theorem model_M0_trace_without_subject : ∃ (t : RefutationalTrace), TraceContain` | {}  |
+| `model_M2_not_implies_M3` | theorem | [L2141](formal/Logos/AgencyAuditsAndFrontiers.lean#L2141) | `theorem model_M2_not_implies_M3 : ∃ (Subject : Type) (CS : CognitiveSubject Subj` | {}  |
+| `model_M3_not_implies_M4` | theorem | [L2155](formal/Logos/AgencyAuditsAndFrontiers.lean#L2155) | `theorem model_M3_not_implies_M4 : ∃ (Subject : Type) (s : Subject) (q : Prop) (C` | {}  |
+| `model_M4_not_implies_M5` | theorem | [L2165](formal/Logos/AgencyAuditsAndFrontiers.lean#L2165) | `theorem model_M4_not_implies_M5 : ∃ (Subject : Type) (s : Subject) (q : Prop) (C` | {}  |
+| `model_M5_not_implies_M6` | theorem | [L2178](formal/Logos/AgencyAuditsAndFrontiers.lean#L2178) | `theorem model_M5_not_implies_M6 : ∃ (Subject : Type) (s : Subject) (q : Prop) (M` | {}  |
+| `performative_proof_yields_freewill` | theorem | [L2212](formal/Logos/AgencyAuditsAndFrontiers.lean#L2212) | `theorem performative_proof_yields_freewill (Subject : Type) (CS : CognitiveSubje` | {}  |
+| `proof_specific_contrast_yields_freewill` | theorem | [L1995](formal/Logos/AgencyAuditsAndFrontiers.lean#L1995) | `theorem proof_specific_contrast_yields_freewill (Subject : Type) (s : Subject) (` | {}  |
+| `reductio_engages_incompatible_contents` | theorem | [L2037](formal/Logos/AgencyAuditsAndFrontiers.lean#L2037) | `theorem reductio_engages_incompatible_contents (Subject : Type) (CS : CognitiveS` | {}  |
+| `retorsion_proof_derives_F1b` | theorem | [L2230](formal/Logos/AgencyAuditsAndFrontiers.lean#L2230) | `theorem retorsion_proof_derives_F1b (Subject : Type) (CS : CognitiveSubject Subj` | {}  |
+| `trace_occurrence_not_implies_cognitive_uptake` | theorem | [L2078](formal/Logos/AgencyAuditsAndFrontiers.lean#L2078) | `theorem trace_occurrence_not_implies_cognitive_uptake : ∃ (t : RefutationalTrace` | {}  |
+| `universal_a14_false_for_arbitrary_acts` | theorem | [L2094](formal/Logos/AgencyAuditsAndFrontiers.lean#L2094) | `theorem universal_a14_false_for_arbitrary_acts : ∃ (Subject : Type) (ActAt : Sub` | {}  |
 
 ### `Logos.RealityHookAudit`
 
@@ -4530,21 +4508,21 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `GroundTranscendence` | axiom | [L242](formal/Logos/DivineTrinitarianAttributes.lean#L242) | `axiom GroundTranscendence : ∀ s : Subject, ∃ p : Prop, ¬ Means s p` | {GroundTranscendence, Means, Subject}  |
-| `SemanticFinitude` | axiom | [L197](formal/Logos/DivineTrinitarianAttributes.lean#L197) | `axiom SemanticFinitude : ∀ s : Subject, ContingentSubjectKind s → ∃ p : Prop, ¬ ` | {Means, NecessarySubjectKind, SemanticFinitude, Subject} → C388 |
-| `conditional_canonical_aseity_stipulated` | theorem | [L275](formal/Logos/DivineTrinitarianAttributes.lean#L275) | `theorem conditional_canonical_aseity_stipulated : CanonicalAseity Entity.ofGroun` | {GroundTranscendence, Means, Subject} → C391 |
-| `exactly_one_universal_modal_ground_stipulated` | theorem | [L261](formal/Logos/DivineTrinitarianAttributes.lean#L261) | `theorem exactly_one_universal_modal_ground_stipulated : ∃ g : Entity, UniversalM` | {GroundTranscendence, Means, NecessarySubjectKind, Subject} → C389 |
-| `ground_is_canonically_aseitous_but_not_asietic_stipulated` | theorem | [L320](formal/Logos/DivineTrinitarianAttributes.lean#L320) | `theorem ground_is_canonically_aseitous_but_not_asietic_stipulated : CanonicalAse` | {GroundTranscendence, Means, Subject} → C398 |
-| `ofGround_divine_pure_actuality_stipulated` | theorem | [L288](formal/Logos/DivineTrinitarianAttributes.lean#L288) | `theorem ofGround_divine_pure_actuality_stipulated : DivinePureActuality Entity.o` | {GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject} → C393 |
-| `ofGround_divine_simplicity_stipulated` | theorem | [L300](formal/Logos/DivineTrinitarianAttributes.lean#L300) | `theorem ofGround_divine_simplicity_stipulated : DivineSimplicity Entity.ofGround` | {GroundTranscendence, Means, Subject, CL} → C395 |
-| `ofGround_modal_aseity_conditional_stipulated` | theorem | [L282](formal/Logos/DivineTrinitarianAttributes.lean#L282) | `theorem ofGround_modal_aseity_conditional_stipulated : Aseity World Entity Canon` | {GroundTranscendence, Means, NecessarySubjectKind, Subject} → C392 |
-| `ofGround_no_grounding_potency_stipulated` | theorem | [L294](formal/Logos/DivineTrinitarianAttributes.lean#L294) | `theorem ofGround_no_grounding_potency_stipulated : ¬ PassiveGroundingPotency Ent` | {GroundTranscendence, Means, Subject} → C394 |
-| `ofGround_non_composite_stipulated` | theorem | [L307](formal/Logos/DivineTrinitarianAttributes.lean#L307) | `theorem ofGround_non_composite_stipulated : NonComposite Entity.ofGround` | {GroundTranscendence, Means, Subject, CL} → C396 |
-| `ofGround_simplicity_and_transcendence_stipulated` | theorem | [L313](formal/Logos/DivineTrinitarianAttributes.lean#L313) | `theorem ofGround_simplicity_and_transcendence_stipulated : DivineSimplicity Enti` | {GroundTranscendence, Means, Subject, CL} → C397 |
-| `ofGround_sole_universal_grounding_stipulated` | theorem | [L269](formal/Logos/DivineTrinitarianAttributes.lean#L269) | `theorem ofGround_sole_universal_grounding_stipulated : SoleUniversalGrounding En` | {GroundTranscendence, Means, NecessarySubjectKind, Subject} → C390 |
-| `semanticFinitude_excludes_ground_from_subjects` | theorem | [L381](formal/Logos/DivineTrinitarianAttributes.lean#L381) | `theorem semanticFinitude_excludes_ground_from_subjects (s : Subject) : EntityOf ` | {GroundTranscendence, Means, Subject} → C400 |
-| `semantic_omnipotence_is_consistent` | theorem | [L339](formal/Logos/DivineTrinitarianAttributes.lean#L339) | `theorem semantic_omnipotence_is_consistent : ∃ (S : Type) (NK : S → Prop) (M : S` | {} → C399 |
-| `subject_finitude_is_consistent` | theorem | [L362](formal/Logos/DivineTrinitarianAttributes.lean#L362) | `theorem subject_finitude_is_consistent : ∃ (S : Type) (NK : S → Prop) (M : S → P` | {}  |
+| `GroundTranscendence` | axiom | [L243](formal/Logos/DivineTrinitarianAttributes.lean#L243) | `axiom GroundTranscendence : ∀ s : Subject, ∃ p : Prop, ¬ Means s p` | {GroundTranscendence, Means, Subject}  |
+| `SemanticFinitude` | axiom | [L198](formal/Logos/DivineTrinitarianAttributes.lean#L198) | `axiom SemanticFinitude : ∀ s : Subject, ContingentSubjectKind s → ∃ p : Prop, ¬ ` | {Means, NecessarySubjectKind, SemanticFinitude, Subject} → C388 |
+| `conditional_canonical_aseity_stipulated` | theorem | [L276](formal/Logos/DivineTrinitarianAttributes.lean#L276) | `theorem conditional_canonical_aseity_stipulated : CanonicalAseity Entity.ofGroun` | {GroundTranscendence, Means, Subject} → C391 |
+| `exactly_one_universal_modal_ground_stipulated` | theorem | [L262](formal/Logos/DivineTrinitarianAttributes.lean#L262) | `theorem exactly_one_universal_modal_ground_stipulated : ∃ g : Entity, UniversalM` | {GroundTranscendence, Means, NecessarySubjectKind, Subject} → C389 |
+| `ground_is_canonically_aseitous_but_not_asietic_stipulated` | theorem | [L321](formal/Logos/DivineTrinitarianAttributes.lean#L321) | `theorem ground_is_canonically_aseitous_but_not_asietic_stipulated : CanonicalAse` | {GroundTranscendence, Means, Subject} → C398 |
+| `ofGround_divine_pure_actuality_stipulated` | theorem | [L289](formal/Logos/DivineTrinitarianAttributes.lean#L289) | `theorem ofGround_divine_pure_actuality_stipulated : DivinePureActuality Entity.o` | {GroundTranscendence, Initiates, Means, NecessarySubjectKind, State, Subject} → C393 |
+| `ofGround_divine_simplicity_stipulated` | theorem | [L301](formal/Logos/DivineTrinitarianAttributes.lean#L301) | `theorem ofGround_divine_simplicity_stipulated : DivineSimplicity Entity.ofGround` | {GroundTranscendence, Means, Subject, CL} → C395 |
+| `ofGround_modal_aseity_conditional_stipulated` | theorem | [L283](formal/Logos/DivineTrinitarianAttributes.lean#L283) | `theorem ofGround_modal_aseity_conditional_stipulated : Aseity World Entity Canon` | {GroundTranscendence, Means, NecessarySubjectKind, Subject} → C392 |
+| `ofGround_no_grounding_potency_stipulated` | theorem | [L295](formal/Logos/DivineTrinitarianAttributes.lean#L295) | `theorem ofGround_no_grounding_potency_stipulated : ¬ PassiveGroundingPotency Ent` | {GroundTranscendence, Means, Subject} → C394 |
+| `ofGround_non_composite_stipulated` | theorem | [L308](formal/Logos/DivineTrinitarianAttributes.lean#L308) | `theorem ofGround_non_composite_stipulated : NonComposite Entity.ofGround` | {GroundTranscendence, Means, Subject, CL} → C396 |
+| `ofGround_simplicity_and_transcendence_stipulated` | theorem | [L314](formal/Logos/DivineTrinitarianAttributes.lean#L314) | `theorem ofGround_simplicity_and_transcendence_stipulated : DivineSimplicity Enti` | {GroundTranscendence, Means, Subject, CL} → C397 |
+| `ofGround_sole_universal_grounding_stipulated` | theorem | [L270](formal/Logos/DivineTrinitarianAttributes.lean#L270) | `theorem ofGround_sole_universal_grounding_stipulated : SoleUniversalGrounding En` | {GroundTranscendence, Means, NecessarySubjectKind, Subject} → C390 |
+| `semanticFinitude_excludes_ground_from_subjects` | theorem | [L382](formal/Logos/DivineTrinitarianAttributes.lean#L382) | `theorem semanticFinitude_excludes_ground_from_subjects (s : Subject) : EntityOf ` | {GroundTranscendence, Means, Subject} → C400 |
+| `semantic_omnipotence_is_consistent` | theorem | [L340](formal/Logos/DivineTrinitarianAttributes.lean#L340) | `theorem semantic_omnipotence_is_consistent : ∃ (S : Type) (NK : S → Prop) (M : S` | {} → C399 |
+| `subject_finitude_is_consistent` | theorem | [L363](formal/Logos/DivineTrinitarianAttributes.lean#L363) | `theorem subject_finitude_is_consistent : ∃ (S : Type) (NK : S → Prop) (M : S → P` | {}  |
 
 ### `Logos.Semantics`
 
@@ -4580,13 +4558,13 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `donation_makes_contingency_is_refuted` | theorem | [L3332](formal/Logos/DivineTrinitarianAttributes.lean#L3332) | `theorem donation_makes_contingency_is_refuted (donation_makes_contingency : ∃ f ` | {NecessarySubjectKind, Subject}  |
-| `donation_terminus_is_as_necessary_as_the_donor` | theorem | [L3319](formal/Logos/DivineTrinitarianAttributes.lean#L3319) | `theorem donation_terminus_is_as_necessary_as_the_donor (f o : DivineHypostasis) ` | {NecessarySubjectKind, Subject}  |
-| `not_a_single_person` | theorem | [L3278](formal/Logos/DivineTrinitarianAttributes.lean#L3278) | `theorem not_a_single_person : ¬ (NecessaryGroundOfReality Entity.ofGround ∧ (∃ s` | {Subject}  |
-| `self_gift_cannot_depend_on_a_contingent_person` | theorem | [L3302](formal/Logos/DivineTrinitarianAttributes.lean#L3302) | `theorem self_gift_cannot_depend_on_a_contingent_person (dependence : ∃ f o : Div` | {Subject} → C579 |
-| `singlePersonDenial_summary` | theorem | [L3345](formal/Logos/DivineTrinitarianAttributes.lean#L3345) | `theorem singlePersonDenial_summary : NecessaryGroundOfReality Entity.ofGround ∧ ` | {Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
-| `single_necessary_personal_essence_three_persons` | theorem | [L3244](formal/Logos/DivineTrinitarianAttributes.lean#L3244) | `theorem single_necessary_personal_essence_three_persons : NecessaryGroundOfReali` | {Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
-| `single_person_denial_is_refuted` | theorem | [L3268](formal/Logos/DivineTrinitarianAttributes.lean#L3268) | `theorem single_person_denial_is_refuted (hSingle : ∃ s : Subject, Entity.ofGroun` | {Subject}  |
+| `donation_makes_contingency_is_refuted` | theorem | [L3333](formal/Logos/DivineTrinitarianAttributes.lean#L3333) | `theorem donation_makes_contingency_is_refuted (donation_makes_contingency : ∃ f ` | {NecessarySubjectKind, Subject}  |
+| `donation_terminus_is_as_necessary_as_the_donor` | theorem | [L3320](formal/Logos/DivineTrinitarianAttributes.lean#L3320) | `theorem donation_terminus_is_as_necessary_as_the_donor (f o : DivineHypostasis) ` | {NecessarySubjectKind, Subject}  |
+| `not_a_single_person` | theorem | [L3279](formal/Logos/DivineTrinitarianAttributes.lean#L3279) | `theorem not_a_single_person : ¬ (NecessaryGroundOfReality Entity.ofGround ∧ (∃ s` | {Subject}  |
+| `self_gift_cannot_depend_on_a_contingent_person` | theorem | [L3303](formal/Logos/DivineTrinitarianAttributes.lean#L3303) | `theorem self_gift_cannot_depend_on_a_contingent_person (dependence : ∃ f o : Div` | {Subject} → C579 |
+| `singlePersonDenial_summary` | theorem | [L3346](formal/Logos/DivineTrinitarianAttributes.lean#L3346) | `theorem singlePersonDenial_summary : NecessaryGroundOfReality Entity.ofGround ∧ ` | {Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
+| `single_necessary_personal_essence_three_persons` | theorem | [L3245](formal/Logos/DivineTrinitarianAttributes.lean#L3245) | `theorem single_necessary_personal_essence_three_persons : NecessaryGroundOfReali` | {Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
+| `single_person_denial_is_refuted` | theorem | [L3269](formal/Logos/DivineTrinitarianAttributes.lean#L3269) | `theorem single_person_denial_is_refuted (hSingle : ∃ s : Subject, Entity.ofGroun` | {Subject}  |
 
 ### `Logos.Stipulations`
 
@@ -4606,164 +4584,164 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `ActLegacy` | def | [L61](formal/Logos/StrongActionChoice.lean#L61) | `def ActLegacy (s : Subject) (p : Prop) : Prop` | {Initiates, Means, State, Subject}  |
-| `AgentCausalDeterministicModel` | structure | [L704](formal/Logos/StrongActionChoice.lean#L704) | `structure AgentCausalDeterministicModel where` | —  |
-| `AgentialComponents` | structure | [L174](formal/Logos/StrongActionChoice.lean#L174) | `structure AgentialComponents (Subject : Type) (State : Type) where` | —  |
-| `AuthorshipWithoutAlternativeModel` | structure | [L455](formal/Logos/StrongActionChoice.lean#L455) | `structure AuthorshipWithoutAlternativeModel where` | —  |
-| `Available` | def | [L850](formal/Logos/StrongActionChoice.lean#L850) | `def Available {World PriorState Subject FutureState : Type} (mctx : Metaphysical` | {}  |
-| `CandidateStatus` | inductive | [L223](formal/Logos/StrongActionChoice.lean#L223) | `inductive CandidateStatus` | —  |
-| `CategoricalLeewayContext` | structure | [L143](formal/Logos/StrongActionChoice.lean#L143) | `structure CategoricalLeewayContext (Subject : Type) (State : Type) where` | —  |
-| `ChoiceTaxonomy` | structure | [L288](formal/Logos/StrongActionChoice.lean#L288) | `structure ChoiceTaxonomy (Subject : Type) where` | —  |
-| `ChoiceWithoutAssertionModel` | structure | [L428](formal/Logos/StrongActionChoice.lean#L428) | `structure ChoiceWithoutAssertionModel where` | —  |
-| `ChoosesWeak` | def | [L64](formal/Logos/StrongActionChoice.lean#L64) | `def ChoosesWeak (s : Subject) (p q : Prop) : Prop` | {Means, Subject}  |
-| `CoRepWithoutChoiceModel` | structure | [L384](formal/Logos/StrongActionChoice.lean#L384) | `structure CoRepWithoutChoiceModel where` | —  |
-| `ContrastiveCandidateContext` | structure | [L233](formal/Logos/StrongActionChoice.lean#L233) | `structure ContrastiveCandidateContext (Subject : Type) where` | —  |
-| `CounterfactualCompatibilistModel` | structure | [L986](formal/Logos/StrongActionChoice.lean#L986) | `structure CounterfactualCompatibilistModel where` | —  |
-| `DeterministicVolitionModel` | structure | [L678](formal/Logos/StrongActionChoice.lean#L678) | `structure DeterministicVolitionModel where` | —  |
-| `DiachronicDeliberation` | structure | [L257](formal/Logos/StrongActionChoice.lean#L257) | `structure DiachronicDeliberation (Subject : Type) (State : Type) where` | —  |
-| `EpistemicObservation` | structure | [L654](formal/Logos/StrongActionChoice.lean#L654) | `structure EpistemicObservation (World : Type) (ObsState : Type) where` | —  |
-| `EpistemicUncertainty` | def | [L658](formal/Logos/StrongActionChoice.lean#L658) | `def EpistemicUncertainty {World ObsState PriorState FutureState : Type} (W : Wor` | {}  |
-| `FullDeliberativeProcess` | def | [L264](formal/Logos/StrongActionChoice.lean#L264) | `def FullDeliberativeProcess (Subject : Type) (State : Type) (D : DiachronicDelib` | {}  |
-| `FunctionalSelectionModel` | structure | [L407](formal/Logos/StrongActionChoice.lean#L407) | `structure FunctionalSelectionModel where` | —  |
-| `GenuineAct` | structure | [L871](formal/Logos/StrongActionChoice.lean#L871) | `structure GenuineAct` | —  |
-| `GenuineChooses` | structure | [L857](formal/Logos/StrongActionChoice.lean#L857) | `structure GenuineChooses` | —  |
-| `GenuineFreeSubject` | def | [L1495](formal/Logos/StrongActionChoice.lean#L1495) | `def GenuineFreeSubject {Subject World PriorState FutureState : Type} (cctx : Str` | {}  |
-| `LibertarianChooses` | structure | [L153](formal/Logos/StrongActionChoice.lean#L153) | `structure LibertarianChooses (Subject : Type) (State : Type)` | —  |
-| `MetaphysicalAvailabilityContext` | structure | [L841](formal/Logos/StrongActionChoice.lean#L841) | `structure MetaphysicalAvailabilityContext (World : Type) (PriorState : Type) (Su` | —  |
-| `MetaphysicalIndeterminism` | def | [L642](formal/Logos/StrongActionChoice.lean#L642) | `def MetaphysicalIndeterminism {World PriorState FutureState : Type} (W : WorldMo` | {}  |
-| `Model_M_SD` | structure | [L345](formal/Logos/StrongActionChoice.lean#L345) | `structure Model_M_SD where` | —  |
-| `NecessaryNormativeFreeGroundingPrinciple` | def | [L1537](formal/Logos/StrongActionChoice.lean#L1537) | `def NecessaryNormativeFreeGroundingPrinciple {Subject World PriorState FutureSta` | {}  |
-| `NoAlternativeAvailable` | def | [L1279](formal/Logos/StrongActionChoice.lean#L1279) | `def NoAlternativeAvailable {World PriorState Subject FutureState : Type} (mctx :` | {}  |
-| `NoGenuineChoice` | def | [L1270](formal/Logos/StrongActionChoice.lean#L1270) | `def NoGenuineChoice {World PriorState Subject FutureState : Type} (cctx : Strong` | {}  |
-| `NomologicalDeterminism_D3` | def | [L634](formal/Logos/StrongActionChoice.lean#L634) | `def NomologicalDeterminism_D3 {World PriorState FutureState : Type} (W : WorldMo` | {}  |
-| `NormativeFreeGroundingPrinciple` | def | [L1525](formal/Logos/StrongActionChoice.lean#L1525) | `def NormativeFreeGroundingPrinciple {Subject World PriorState FutureState : Type` | {}  |
-| `NormativeGroundingContext` | structure | [L1519](formal/Logos/StrongActionChoice.lean#L1519) | `structure NormativeGroundingContext (Subject : Type) (World : Type) where` | —  |
-| `PerformedDenial` | structure | [L1287](formal/Logos/StrongActionChoice.lean#L1287) | `structure PerformedDenial` | —  |
-| `PhysicalIndetAgentDetWorld` | structure | [L918](formal/Logos/StrongActionChoice.lean#L918) | `structure PhysicalIndetAgentDetWorld where` | —  |
-| `RetorsiveAvailability` | def | [L1429](formal/Logos/StrongActionChoice.lean#L1429) | `def RetorsiveAvailability {World PriorState Subject State FutureState : Type} (a` | {}  |
-| `SelectsOver` | def | [L238](formal/Logos/StrongActionChoice.lean#L238) | `def SelectsOver (Subject : Type) (ctx : ContrastiveCandidateContext Subject) (st` | {}  |
-| `SinglePathModel` | structure | [L315](formal/Logos/StrongActionChoice.lean#L315) | `structure SinglePathModel where` | —  |
-| `StatMechWorld` | structure | [L757](formal/Logos/StrongActionChoice.lean#L757) | `structure StatMechWorld where` | —  |
-| `StrongAct` | structure | [L93](formal/Logos/StrongActionChoice.lean#L93) | `structure StrongAct (Subject : Type) (State : Type) (ctx : StrongActContext Subj` | —  |
-| `StrongActContext` | structure | [L83](formal/Logos/StrongActionChoice.lean#L83) | `structure StrongActContext (Subject : Type) (State : Type) where` | —  |
-| `StrongChooses` | structure | [L122](formal/Logos/StrongActionChoice.lean#L122) | `structure StrongChooses (Subject : Type) (ctx : StrongChoosesContext Subject)` | —  |
-| `StrongChoosesContext` | structure | [L113](formal/Logos/StrongActionChoice.lean#L113) | `structure StrongChoosesContext (Subject : Type) where` | —  |
-| `StrongNormativeFact` | structure | [L1505](formal/Logos/StrongActionChoice.lean#L1505) | `structure StrongNormativeFact where` | —  |
-| `StrongNormativeFactAt` | structure | [L1512](formal/Logos/StrongActionChoice.lean#L1512) | `structure StrongNormativeFactAt (World : Type) (_w : World) where` | —  |
-| `SuspendedDeliberationModel` | structure | [L471](formal/Logos/StrongActionChoice.lean#L471) | `structure SuspendedDeliberationModel where` | —  |
-| `Volition` | def | [L203](formal/Logos/StrongActionChoice.lean#L203) | `def Volition {Subject : Type} (arch : VolitionalArchitecture Subject) (s : Subje` | {}  |
-| `VolitionalArchitecture` | structure | [L196](formal/Logos/StrongActionChoice.lean#L196) | `structure VolitionalArchitecture (Subject : Type) where` | —  |
-| `WeakActLegacy` | def | [L58](formal/Logos/StrongActionChoice.lean#L58) | `def WeakActLegacy (s : Subject) (p : Prop) : Prop` | {Subject, act}  |
-| `WorldModel` | structure | [L625](formal/Logos/StrongActionChoice.lean#L625) | `structure WorldModel (World : Type) (PriorState : Type) (FutureState : Type) whe` | —  |
-| `chooses_weak_eq_chooses` | theorem | [L67](formal/Logos/StrongActionChoice.lean#L67) | `theorem chooses_weak_eq_chooses (s : Subject) (p q : Prop) : ChoosesWeak s p q ↔` | {Means, Subject}  |
-| `coarse_obs` | def | [L737](formal/Logos/StrongActionChoice.lean#L737) | `def coarse_obs : EpistemicObservation (Nat × Bool) Unit where obs` | {}  |
-| `countermodel_10_epistemically_uncertain_but_deterministic_future` | theorem | [L740](formal/Logos/StrongActionChoice.lean#L740) | `theorem countermodel_10_epistemically_uncertain_but_deterministic_future : Nomol` | {}  |
-| `countermodel_11_stochastically_described_but_deterministic` | theorem | [L769](formal/Logos/StrongActionChoice.lean#L769) | `theorem countermodel_11_stochastically_described_but_deterministic : Nomological` | {}  |
-| `countermodel_12_indeterminism_without_agent` | theorem | [L900](formal/Logos/StrongActionChoice.lean#L900) | `theorem countermodel_12_indeterminism_without_agent : ∃ (W : WorldModel Bool Uni` | {}  |
-| `countermodel_13_physical_indet_agent_det` | theorem | [L927](formal/Logos/StrongActionChoice.lean#L927) | `theorem countermodel_13_physical_indet_agent_det : MetaphysicalIndeterminism phy` | {}  |
-| `countermodel_14_deterministic_maximal_deliberator` | theorem | [L943](formal/Logos/StrongActionChoice.lean#L943) | `theorem countermodel_14_deterministic_maximal_deliberator : ∃ (Subject : Type) (` | {}  |
-| `countermodel_15_deterministic_agent_causal_source` | theorem | [L954](formal/Logos/StrongActionChoice.lean#L954) | `theorem countermodel_15_deterministic_agent_causal_source : ∃ (M : AgentCausalDe` | {CL}  |
-| `countermodel_16_different_priors_not_identical_availability` | theorem | [L968](formal/Logos/StrongActionChoice.lean#L968) | `theorem countermodel_16_different_priors_not_identical_availability : ∃ (W : Wor` | {}  |
-| `countermodel_17_counterfactual_without_availability` | theorem | [L993](formal/Logos/StrongActionChoice.lean#L993) | `theorem countermodel_17_counterfactual_without_availability : ∃ (M : Counterfact` | {}  |
-| `countermodel_18_logical_possibility_without_availability` | theorem | [L1009](formal/Logos/StrongActionChoice.lean#L1009) | `theorem countermodel_18_logical_possibility_without_availability : ∃ (p q : Bool` | {}  |
-| `countermodel_19_canonical_genuine_choice` | theorem | [L1048](formal/Logos/StrongActionChoice.lean#L1048) | `theorem countermodel_19_canonical_genuine_choice : ∃ (cctx : StrongChoosesContex` | {CL}  |
-| `countermodel_19_witnesses_indeterminism` | theorem | [L1158](formal/Logos/StrongActionChoice.lean#L1158) | `theorem countermodel_19_witnesses_indeterminism : MetaphysicalIndeterminism genu` | {CL}  |
-| `countermodel_19_witnesses_neg_d3` | theorem | [L1165](formal/Logos/StrongActionChoice.lean#L1165) | `theorem countermodel_19_witnesses_neg_d3 : ¬ NomologicalDeterminism_D3 genuine_c` | {CL}  |
-| `countermodel_1_single_path_intentional_action` | theorem | [L319](formal/Logos/StrongActionChoice.lean#L319) | `theorem countermodel_1_single_path_intentional_action : ∃ (M : SinglePathModel),` | {}  |
-| `countermodel_20_d3_excludes_genuine_choice` | theorem | [L1069](formal/Logos/StrongActionChoice.lean#L1069) | `theorem countermodel_20_d3_excludes_genuine_choice {World PriorState Subject Fut` | {}  |
-| `countermodel_21_deterministic_performed_denial` | theorem | [L1332](formal/Logos/StrongActionChoice.lean#L1332) | `theorem countermodel_21_deterministic_performed_denial : ∃ (World : Type) (Prior` | {}  |
-| `countermodel_22_platonic_normative_realism` | theorem | [L1550](formal/Logos/StrongActionChoice.lean#L1550) | `theorem countermodel_22_platonic_normative_realism : ∃ (Subject : Type) (World :` | {}  |
-| `countermodel_23_deterministic_subject_normativism` | theorem | [L1597](formal/Logos/StrongActionChoice.lean#L1597) | `theorem countermodel_23_deterministic_subject_normativism : ∃ (Subject : Type) (` | {}  |
-| `countermodel_2_deterministic_pseudo_choice_verified` | theorem | [L375](formal/Logos/StrongActionChoice.lean#L375) | `theorem countermodel_2_deterministic_pseudo_choice_verified : m_sd_instance.hD1 ` | {}  |
-| `countermodel_3_deterministic_co_representation` | theorem | [L391](formal/Logos/StrongActionChoice.lean#L391) | `theorem countermodel_3_deterministic_co_representation : ∃ (M : CoRepWithoutChoi` | {}  |
-| `countermodel_4_selection_without_choice` | theorem | [L412](formal/Logos/StrongActionChoice.lean#L412) | `theorem countermodel_4_selection_without_choice : ∃ (M : FunctionalSelectionMode` | {}  |
-| `countermodel_5_choice_without_assertion` | theorem | [L434](formal/Logos/StrongActionChoice.lean#L434) | `theorem countermodel_5_choice_without_assertion : ∃ (M : ChoiceWithoutAssertionM` | {}  |
-| `countermodel_6_authorship_without_alternative` | theorem | [L459](formal/Logos/StrongActionChoice.lean#L459) | `theorem countermodel_6_authorship_without_alternative : ∃ (M : AuthorshipWithout` | {}  |
-| `countermodel_7_alternative_representation_without_choice` | theorem | [L478](formal/Logos/StrongActionChoice.lean#L478) | `theorem countermodel_7_alternative_representation_without_choice : ∃ (M : Suspen` | {}  |
-| `countermodel_8_deterministic_volition` | theorem | [L683](formal/Logos/StrongActionChoice.lean#L683) | `theorem countermodel_8_deterministic_volition : ∃ (M : DeterministicVolitionMode` | {}  |
-| `countermodel_9_agent_causal_but_deterministic_action` | theorem | [L709](formal/Logos/StrongActionChoice.lean#L709) | `theorem countermodel_9_agent_causal_but_deterministic_action : ∃ (M : AgentCausa` | {}  |
-| `denial_of_genuine_choice_is_self_refuting` | theorem | [L1459](formal/Logos/StrongActionChoice.lean#L1459) | `theorem denial_of_genuine_choice_is_self_refuting {World PriorState Subject Stat` | {}  |
-| `denial_of_no_metaphysical_alternative_is_self_refuting` | theorem | [L1441](formal/Logos/StrongActionChoice.lean#L1441) | `theorem denial_of_no_metaphysical_alternative_is_self_refuting {World PriorState` | {}  |
-| `deterministic_seed_world_model` | def | [L732](formal/Logos/StrongActionChoice.lean#L732) | `def deterministic_seed_world_model : WorldModel (Nat × Bool) Nat Bool where prio` | {}  |
-| `free_subject_conflicts_with_d3` | theorem | [L1688](formal/Logos/StrongActionChoice.lean#L1688) | `theorem free_subject_conflicts_with_d3 {Subject World PriorState FutureState : T` | {}  |
-| `free_subject_implies_metaphysical_indeterminism` | theorem | [L1676](formal/Logos/StrongActionChoice.lean#L1676) | `theorem free_subject_implies_metaphysical_indeterminism {Subject World PriorStat` | {}  |
-| `genuine_act_implies_genuine_chooses` | theorem | [L1172](formal/Logos/StrongActionChoice.lean#L1172) | `theorem genuine_act_implies_genuine_chooses {World PriorState Subject State Futu` | {}  |
-| `genuine_choice_avail_ctx` | def | [L1034](formal/Logos/StrongActionChoice.lean#L1034) | `def genuine_choice_avail_ctx : MetaphysicalAvailabilityContext Bool Unit Unit Bo` | {}  |
-| `genuine_choice_world_model` | def | [L1029](formal/Logos/StrongActionChoice.lean#L1029) | `def genuine_choice_world_model : WorldModel Bool Unit Bool where prior` | {}  |
-| `genuine_chooses_conflicts_with_d3` | theorem | [L1127](formal/Logos/StrongActionChoice.lean#L1127) | `theorem genuine_chooses_conflicts_with_d3 {World PriorState Subject FutureState ` | {}  |
-| `genuine_chooses_conflicts_with_d5` | theorem | [L1139](formal/Logos/StrongActionChoice.lean#L1139) | `theorem genuine_chooses_conflicts_with_d5 {World PriorState Subject FutureState ` | {}  |
-| `genuine_chooses_implies_metaphysical_indeterminism` | theorem | [L1111](formal/Logos/StrongActionChoice.lean#L1111) | `theorem genuine_chooses_implies_metaphysical_indeterminism {World PriorState Sub` | {}  |
-| `libertarian_chooses_conflicts_with_d3` | theorem | [L813](formal/Logos/StrongActionChoice.lean#L813) | `theorem libertarian_chooses_conflicts_with_d3 {World PriorState : Type} (W : Wor` | {}  |
-| `libertarian_chooses_conflicts_with_d5` | theorem | [L542](formal/Logos/StrongActionChoice.lean#L542) | `theorem libertarian_chooses_conflicts_with_d5 {Subject : Type} {State : Type} {c` | {}  |
-| `m_sd_instance` | def | [L354](formal/Logos/StrongActionChoice.lean#L354) | `def m_sd_instance : Model_M_SD where step` | {}  |
-| `macro_obs` | def | [L766](formal/Logos/StrongActionChoice.lean#L766) | `def macro_obs : EpistemicObservation StatMechWorld Nat where obs` | {}  |
-| `metaphysical_indeterminism_neg_d3` | theorem | [L646](formal/Logos/StrongActionChoice.lean#L646) | `theorem metaphysical_indeterminism_neg_d3 {World PriorState FutureState : Type} ` | {}  |
-| `necessary_normative_grounding_derives_necessary_free_subject` | theorem | [L1701](formal/Logos/StrongActionChoice.lean#L1701) | `theorem necessary_normative_grounding_derives_necessary_free_subject {Subject Wo` | {}  |
-| `necessary_normative_grounding_implies_not_d3` | theorem | [L1717](formal/Logos/StrongActionChoice.lean#L1717) | `theorem necessary_normative_grounding_implies_not_d3 {Subject World PriorState F` | {}  |
-| `normative_fact_not_implies_free_subject` | theorem | [L1648](formal/Logos/StrongActionChoice.lean#L1648) | `theorem normative_fact_not_implies_free_subject : ∃ (Subject : Type) (World : Ty` | {}  |
-| `normative_grounding_derives_free_subject` | theorem | [L1662](formal/Logos/StrongActionChoice.lean#L1662) | `theorem normative_grounding_derives_free_subject {Subject World PriorState Futur` | {}  |
-| `performed_denial_consistent_with_d3` | theorem | [L1413](formal/Logos/StrongActionChoice.lean#L1413) | `theorem performed_denial_consistent_with_d3 : ∃ (World : Type) (PriorState : Typ` | {}  |
-| `performed_denial_implies_act` | theorem | [L1295](formal/Logos/StrongActionChoice.lean#L1295) | `theorem performed_denial_implies_act {Subject State : Type} {actCtx : StrongActC` | {}  |
-| `performed_denial_implies_chooses` | theorem | [L1305](formal/Logos/StrongActionChoice.lean#L1305) | `theorem performed_denial_implies_chooses {Subject State : Type} {actCtx : Strong` | {}  |
-| `performed_denial_implies_cognitive_contrast` | theorem | [L1318](formal/Logos/StrongActionChoice.lean#L1318) | `theorem performed_denial_implies_cognitive_contrast {Subject State : Type} {actC` | {}  |
-| `performed_denial_not_implies_genuine_chooses` | theorem | [L1389](formal/Logos/StrongActionChoice.lean#L1389) | `theorem performed_denial_not_implies_genuine_chooses : ∃ (World : Type) (PriorSt` | {}  |
-| `performed_denial_not_implies_metaphysical_availability` | theorem | [L1376](formal/Logos/StrongActionChoice.lean#L1376) | `theorem performed_denial_not_implies_metaphysical_availability : ∃ (World : Type` | {}  |
-| `phys_indet_agent_det_model` | def | [L922](formal/Logos/StrongActionChoice.lean#L922) | `def phys_indet_agent_det_model : WorldModel PhysicalIndetAgentDetWorld Unit (Boo` | {}  |
-| `stat_mech_model` | def | [L761](formal/Logos/StrongActionChoice.lean#L761) | `def stat_mech_model : WorldModel StatMechWorld (Nat × Nat) (Nat × Nat) where pri` | {}  |
-| `strong_act_not_implies_genuine_chooses` | theorem | [L1185](formal/Logos/StrongActionChoice.lean#L1185) | `theorem strong_act_not_implies_genuine_chooses : ∃ (Subject : Type) (State : Typ` | {}  |
-| `strong_act_not_implies_strong_chooses` | theorem | [L510](formal/Logos/StrongActionChoice.lean#L510) | `theorem strong_act_not_implies_strong_chooses : ∃ (Subject : Type) (State : Type` | {}  |
-| `strong_chooses_compatible_with_d3` | theorem | [L800](formal/Logos/StrongActionChoice.lean#L800) | `theorem strong_chooses_compatible_with_d3 : ∃ (World PriorState FutureState : Ty` | {}  |
-| `strong_chooses_compatible_with_d5` | theorem | [L532](formal/Logos/StrongActionChoice.lean#L532) | `theorem strong_chooses_compatible_with_d5 : ∃ (Subject : Type) (cctx : StrongCho` | {}  |
-| `strong_chooses_not_implies_genuine_chooses` | theorem | [L1214](formal/Logos/StrongActionChoice.lean#L1214) | `theorem strong_chooses_not_implies_genuine_chooses : ∃ (Subject : Type) (cctx : ` | {CL}  |
-| `strong_chooses_without_immediate_volition` | theorem | [L591](formal/Logos/StrongActionChoice.lean#L591) | `theorem strong_chooses_without_immediate_volition : ∃ (cctx : StrongChoosesConte` | {}  |
-| `volition_without_action` | theorem | [L567](formal/Logos/StrongActionChoice.lean#L567) | `theorem volition_without_action : ∃ (vArch : VolitionalArchitecture Unit) (actCt` | {}  |
+| `ActLegacy` | def | [L697](formal/Logos/ActionAndNormativeChoice.lean#L697) | `def ActLegacy (s : Subject) (p : Prop) : Prop` | {Initiates, Means, State, Subject}  |
+| `AgentCausalDeterministicModel` | structure | [L1340](formal/Logos/ActionAndNormativeChoice.lean#L1340) | `structure AgentCausalDeterministicModel where` | —  |
+| `AgentialComponents` | structure | [L810](formal/Logos/ActionAndNormativeChoice.lean#L810) | `structure AgentialComponents (Subject : Type) (State : Type) where` | —  |
+| `AuthorshipWithoutAlternativeModel` | structure | [L1091](formal/Logos/ActionAndNormativeChoice.lean#L1091) | `structure AuthorshipWithoutAlternativeModel where` | —  |
+| `Available` | def | [L1486](formal/Logos/ActionAndNormativeChoice.lean#L1486) | `def Available {World PriorState Subject FutureState : Type} (mctx : Metaphysical` | {}  |
+| `CandidateStatus` | inductive | [L859](formal/Logos/ActionAndNormativeChoice.lean#L859) | `inductive CandidateStatus` | —  |
+| `CategoricalLeewayContext` | structure | [L779](formal/Logos/ActionAndNormativeChoice.lean#L779) | `structure CategoricalLeewayContext (Subject : Type) (State : Type) where` | —  |
+| `ChoiceTaxonomy` | structure | [L924](formal/Logos/ActionAndNormativeChoice.lean#L924) | `structure ChoiceTaxonomy (Subject : Type) where` | —  |
+| `ChoiceWithoutAssertionModel` | structure | [L1064](formal/Logos/ActionAndNormativeChoice.lean#L1064) | `structure ChoiceWithoutAssertionModel where` | —  |
+| `ChoosesWeak` | def | [L700](formal/Logos/ActionAndNormativeChoice.lean#L700) | `def ChoosesWeak (s : Subject) (p q : Prop) : Prop` | {Means, Subject}  |
+| `CoRepWithoutChoiceModel` | structure | [L1020](formal/Logos/ActionAndNormativeChoice.lean#L1020) | `structure CoRepWithoutChoiceModel where` | —  |
+| `ContrastiveCandidateContext` | structure | [L869](formal/Logos/ActionAndNormativeChoice.lean#L869) | `structure ContrastiveCandidateContext (Subject : Type) where` | —  |
+| `CounterfactualCompatibilistModel` | structure | [L1622](formal/Logos/ActionAndNormativeChoice.lean#L1622) | `structure CounterfactualCompatibilistModel where` | —  |
+| `DeterministicVolitionModel` | structure | [L1314](formal/Logos/ActionAndNormativeChoice.lean#L1314) | `structure DeterministicVolitionModel where` | —  |
+| `DiachronicDeliberation` | structure | [L893](formal/Logos/ActionAndNormativeChoice.lean#L893) | `structure DiachronicDeliberation (Subject : Type) (State : Type) where` | —  |
+| `EpistemicObservation` | structure | [L1290](formal/Logos/ActionAndNormativeChoice.lean#L1290) | `structure EpistemicObservation (World : Type) (ObsState : Type) where` | —  |
+| `EpistemicUncertainty` | def | [L1294](formal/Logos/ActionAndNormativeChoice.lean#L1294) | `def EpistemicUncertainty {World ObsState PriorState FutureState : Type} (W : Wor` | {}  |
+| `FullDeliberativeProcess` | def | [L900](formal/Logos/ActionAndNormativeChoice.lean#L900) | `def FullDeliberativeProcess (Subject : Type) (State : Type) (D : DiachronicDelib` | {}  |
+| `FunctionalSelectionModel` | structure | [L1043](formal/Logos/ActionAndNormativeChoice.lean#L1043) | `structure FunctionalSelectionModel where` | —  |
+| `GenuineAct` | structure | [L1507](formal/Logos/ActionAndNormativeChoice.lean#L1507) | `structure GenuineAct` | —  |
+| `GenuineChooses` | structure | [L1493](formal/Logos/ActionAndNormativeChoice.lean#L1493) | `structure GenuineChooses` | —  |
+| `GenuineFreeSubject` | def | [L2131](formal/Logos/ActionAndNormativeChoice.lean#L2131) | `def GenuineFreeSubject {Subject World PriorState FutureState : Type} (cctx : Str` | {}  |
+| `LibertarianChooses` | structure | [L789](formal/Logos/ActionAndNormativeChoice.lean#L789) | `structure LibertarianChooses (Subject : Type) (State : Type)` | —  |
+| `MetaphysicalAvailabilityContext` | structure | [L1477](formal/Logos/ActionAndNormativeChoice.lean#L1477) | `structure MetaphysicalAvailabilityContext (World : Type) (PriorState : Type) (Su` | —  |
+| `MetaphysicalIndeterminism` | def | [L1278](formal/Logos/ActionAndNormativeChoice.lean#L1278) | `def MetaphysicalIndeterminism {World PriorState FutureState : Type} (W : WorldMo` | {}  |
+| `Model_M_SD` | structure | [L981](formal/Logos/ActionAndNormativeChoice.lean#L981) | `structure Model_M_SD where` | —  |
+| `NecessaryNormativeFreeGroundingPrinciple` | def | [L2173](formal/Logos/ActionAndNormativeChoice.lean#L2173) | `def NecessaryNormativeFreeGroundingPrinciple {Subject World PriorState FutureSta` | {}  |
+| `NoAlternativeAvailable` | def | [L1915](formal/Logos/ActionAndNormativeChoice.lean#L1915) | `def NoAlternativeAvailable {World PriorState Subject FutureState : Type} (mctx :` | {}  |
+| `NoGenuineChoice` | def | [L1906](formal/Logos/ActionAndNormativeChoice.lean#L1906) | `def NoGenuineChoice {World PriorState Subject FutureState : Type} (cctx : Strong` | {}  |
+| `NomologicalDeterminism_D3` | def | [L1270](formal/Logos/ActionAndNormativeChoice.lean#L1270) | `def NomologicalDeterminism_D3 {World PriorState FutureState : Type} (W : WorldMo` | {}  |
+| `NormativeFreeGroundingPrinciple` | def | [L2161](formal/Logos/ActionAndNormativeChoice.lean#L2161) | `def NormativeFreeGroundingPrinciple {Subject World PriorState FutureState : Type` | {}  |
+| `NormativeGroundingContext` | structure | [L2155](formal/Logos/ActionAndNormativeChoice.lean#L2155) | `structure NormativeGroundingContext (Subject : Type) (World : Type) where` | —  |
+| `PerformedDenial` | structure | [L1923](formal/Logos/ActionAndNormativeChoice.lean#L1923) | `structure PerformedDenial` | —  |
+| `PhysicalIndetAgentDetWorld` | structure | [L1554](formal/Logos/ActionAndNormativeChoice.lean#L1554) | `structure PhysicalIndetAgentDetWorld where` | —  |
+| `RetorsiveAvailability` | def | [L2065](formal/Logos/ActionAndNormativeChoice.lean#L2065) | `def RetorsiveAvailability {World PriorState Subject State FutureState : Type} (a` | {}  |
+| `SelectsOver` | def | [L874](formal/Logos/ActionAndNormativeChoice.lean#L874) | `def SelectsOver (Subject : Type) (ctx : ContrastiveCandidateContext Subject) (st` | {}  |
+| `SinglePathModel` | structure | [L951](formal/Logos/ActionAndNormativeChoice.lean#L951) | `structure SinglePathModel where` | —  |
+| `StatMechWorld` | structure | [L1393](formal/Logos/ActionAndNormativeChoice.lean#L1393) | `structure StatMechWorld where` | —  |
+| `StrongAct` | structure | [L729](formal/Logos/ActionAndNormativeChoice.lean#L729) | `structure StrongAct (Subject : Type) (State : Type) (ctx : StrongActContext Subj` | —  |
+| `StrongActContext` | structure | [L719](formal/Logos/ActionAndNormativeChoice.lean#L719) | `structure StrongActContext (Subject : Type) (State : Type) where` | —  |
+| `StrongChooses` | structure | [L758](formal/Logos/ActionAndNormativeChoice.lean#L758) | `structure StrongChooses (Subject : Type) (ctx : StrongChoosesContext Subject)` | —  |
+| `StrongChoosesContext` | structure | [L749](formal/Logos/ActionAndNormativeChoice.lean#L749) | `structure StrongChoosesContext (Subject : Type) where` | —  |
+| `StrongNormativeFact` | structure | [L2141](formal/Logos/ActionAndNormativeChoice.lean#L2141) | `structure StrongNormativeFact where` | —  |
+| `StrongNormativeFactAt` | structure | [L2148](formal/Logos/ActionAndNormativeChoice.lean#L2148) | `structure StrongNormativeFactAt (World : Type) (_w : World) where` | —  |
+| `SuspendedDeliberationModel` | structure | [L1107](formal/Logos/ActionAndNormativeChoice.lean#L1107) | `structure SuspendedDeliberationModel where` | —  |
+| `Volition` | def | [L839](formal/Logos/ActionAndNormativeChoice.lean#L839) | `def Volition {Subject : Type} (arch : VolitionalArchitecture Subject) (s : Subje` | {}  |
+| `VolitionalArchitecture` | structure | [L832](formal/Logos/ActionAndNormativeChoice.lean#L832) | `structure VolitionalArchitecture (Subject : Type) where` | —  |
+| `WeakActLegacy` | def | [L694](formal/Logos/ActionAndNormativeChoice.lean#L694) | `def WeakActLegacy (s : Subject) (p : Prop) : Prop` | {Subject, act}  |
+| `WorldModel` | structure | [L1261](formal/Logos/ActionAndNormativeChoice.lean#L1261) | `structure WorldModel (World : Type) (PriorState : Type) (FutureState : Type) whe` | —  |
+| `chooses_weak_eq_chooses` | theorem | [L703](formal/Logos/ActionAndNormativeChoice.lean#L703) | `theorem chooses_weak_eq_chooses (s : Subject) (p q : Prop) : ChoosesWeak s p q ↔` | {Means, Subject}  |
+| `coarse_obs` | def | [L1373](formal/Logos/ActionAndNormativeChoice.lean#L1373) | `def coarse_obs : EpistemicObservation (Nat × Bool) Unit where obs` | {}  |
+| `countermodel_10_epistemically_uncertain_but_deterministic_future` | theorem | [L1376](formal/Logos/ActionAndNormativeChoice.lean#L1376) | `theorem countermodel_10_epistemically_uncertain_but_deterministic_future : Nomol` | {}  |
+| `countermodel_11_stochastically_described_but_deterministic` | theorem | [L1405](formal/Logos/ActionAndNormativeChoice.lean#L1405) | `theorem countermodel_11_stochastically_described_but_deterministic : Nomological` | {}  |
+| `countermodel_12_indeterminism_without_agent` | theorem | [L1536](formal/Logos/ActionAndNormativeChoice.lean#L1536) | `theorem countermodel_12_indeterminism_without_agent : ∃ (W : WorldModel Bool Uni` | {}  |
+| `countermodel_13_physical_indet_agent_det` | theorem | [L1563](formal/Logos/ActionAndNormativeChoice.lean#L1563) | `theorem countermodel_13_physical_indet_agent_det : MetaphysicalIndeterminism phy` | {}  |
+| `countermodel_14_deterministic_maximal_deliberator` | theorem | [L1579](formal/Logos/ActionAndNormativeChoice.lean#L1579) | `theorem countermodel_14_deterministic_maximal_deliberator : ∃ (Subject : Type) (` | {}  |
+| `countermodel_15_deterministic_agent_causal_source` | theorem | [L1590](formal/Logos/ActionAndNormativeChoice.lean#L1590) | `theorem countermodel_15_deterministic_agent_causal_source : ∃ (M : AgentCausalDe` | {CL}  |
+| `countermodel_16_different_priors_not_identical_availability` | theorem | [L1604](formal/Logos/ActionAndNormativeChoice.lean#L1604) | `theorem countermodel_16_different_priors_not_identical_availability : ∃ (W : Wor` | {}  |
+| `countermodel_17_counterfactual_without_availability` | theorem | [L1629](formal/Logos/ActionAndNormativeChoice.lean#L1629) | `theorem countermodel_17_counterfactual_without_availability : ∃ (M : Counterfact` | {}  |
+| `countermodel_18_logical_possibility_without_availability` | theorem | [L1645](formal/Logos/ActionAndNormativeChoice.lean#L1645) | `theorem countermodel_18_logical_possibility_without_availability : ∃ (p q : Bool` | {}  |
+| `countermodel_19_canonical_genuine_choice` | theorem | [L1684](formal/Logos/ActionAndNormativeChoice.lean#L1684) | `theorem countermodel_19_canonical_genuine_choice : ∃ (cctx : StrongChoosesContex` | {CL}  |
+| `countermodel_19_witnesses_indeterminism` | theorem | [L1794](formal/Logos/ActionAndNormativeChoice.lean#L1794) | `theorem countermodel_19_witnesses_indeterminism : MetaphysicalIndeterminism genu` | {CL}  |
+| `countermodel_19_witnesses_neg_d3` | theorem | [L1801](formal/Logos/ActionAndNormativeChoice.lean#L1801) | `theorem countermodel_19_witnesses_neg_d3 : ¬ NomologicalDeterminism_D3 genuine_c` | {CL}  |
+| `countermodel_1_single_path_intentional_action` | theorem | [L955](formal/Logos/ActionAndNormativeChoice.lean#L955) | `theorem countermodel_1_single_path_intentional_action : ∃ (M : SinglePathModel),` | {}  |
+| `countermodel_20_d3_excludes_genuine_choice` | theorem | [L1705](formal/Logos/ActionAndNormativeChoice.lean#L1705) | `theorem countermodel_20_d3_excludes_genuine_choice {World PriorState Subject Fut` | {}  |
+| `countermodel_21_deterministic_performed_denial` | theorem | [L1968](formal/Logos/ActionAndNormativeChoice.lean#L1968) | `theorem countermodel_21_deterministic_performed_denial : ∃ (World : Type) (Prior` | {}  |
+| `countermodel_22_platonic_normative_realism` | theorem | [L2186](formal/Logos/ActionAndNormativeChoice.lean#L2186) | `theorem countermodel_22_platonic_normative_realism : ∃ (Subject : Type) (World :` | {}  |
+| `countermodel_23_deterministic_subject_normativism` | theorem | [L2233](formal/Logos/ActionAndNormativeChoice.lean#L2233) | `theorem countermodel_23_deterministic_subject_normativism : ∃ (Subject : Type) (` | {}  |
+| `countermodel_2_deterministic_pseudo_choice_verified` | theorem | [L1011](formal/Logos/ActionAndNormativeChoice.lean#L1011) | `theorem countermodel_2_deterministic_pseudo_choice_verified : m_sd_instance.hD1 ` | {}  |
+| `countermodel_3_deterministic_co_representation` | theorem | [L1027](formal/Logos/ActionAndNormativeChoice.lean#L1027) | `theorem countermodel_3_deterministic_co_representation : ∃ (M : CoRepWithoutChoi` | {}  |
+| `countermodel_4_selection_without_choice` | theorem | [L1048](formal/Logos/ActionAndNormativeChoice.lean#L1048) | `theorem countermodel_4_selection_without_choice : ∃ (M : FunctionalSelectionMode` | {}  |
+| `countermodel_5_choice_without_assertion` | theorem | [L1070](formal/Logos/ActionAndNormativeChoice.lean#L1070) | `theorem countermodel_5_choice_without_assertion : ∃ (M : ChoiceWithoutAssertionM` | {}  |
+| `countermodel_6_authorship_without_alternative` | theorem | [L1095](formal/Logos/ActionAndNormativeChoice.lean#L1095) | `theorem countermodel_6_authorship_without_alternative : ∃ (M : AuthorshipWithout` | {}  |
+| `countermodel_7_alternative_representation_without_choice` | theorem | [L1114](formal/Logos/ActionAndNormativeChoice.lean#L1114) | `theorem countermodel_7_alternative_representation_without_choice : ∃ (M : Suspen` | {}  |
+| `countermodel_8_deterministic_volition` | theorem | [L1319](formal/Logos/ActionAndNormativeChoice.lean#L1319) | `theorem countermodel_8_deterministic_volition : ∃ (M : DeterministicVolitionMode` | {}  |
+| `countermodel_9_agent_causal_but_deterministic_action` | theorem | [L1345](formal/Logos/ActionAndNormativeChoice.lean#L1345) | `theorem countermodel_9_agent_causal_but_deterministic_action : ∃ (M : AgentCausa` | {}  |
+| `denial_of_genuine_choice_is_self_refuting` | theorem | [L2095](formal/Logos/ActionAndNormativeChoice.lean#L2095) | `theorem denial_of_genuine_choice_is_self_refuting {World PriorState Subject Stat` | {}  |
+| `denial_of_no_metaphysical_alternative_is_self_refuting` | theorem | [L2077](formal/Logos/ActionAndNormativeChoice.lean#L2077) | `theorem denial_of_no_metaphysical_alternative_is_self_refuting {World PriorState` | {}  |
+| `deterministic_seed_world_model` | def | [L1368](formal/Logos/ActionAndNormativeChoice.lean#L1368) | `def deterministic_seed_world_model : WorldModel (Nat × Bool) Nat Bool where prio` | {}  |
+| `free_subject_conflicts_with_d3` | theorem | [L2324](formal/Logos/ActionAndNormativeChoice.lean#L2324) | `theorem free_subject_conflicts_with_d3 {Subject World PriorState FutureState : T` | {}  |
+| `free_subject_implies_metaphysical_indeterminism` | theorem | [L2312](formal/Logos/ActionAndNormativeChoice.lean#L2312) | `theorem free_subject_implies_metaphysical_indeterminism {Subject World PriorStat` | {}  |
+| `genuine_act_implies_genuine_chooses` | theorem | [L1808](formal/Logos/ActionAndNormativeChoice.lean#L1808) | `theorem genuine_act_implies_genuine_chooses {World PriorState Subject State Futu` | {}  |
+| `genuine_choice_avail_ctx` | def | [L1670](formal/Logos/ActionAndNormativeChoice.lean#L1670) | `def genuine_choice_avail_ctx : MetaphysicalAvailabilityContext Bool Unit Unit Bo` | {}  |
+| `genuine_choice_world_model` | def | [L1665](formal/Logos/ActionAndNormativeChoice.lean#L1665) | `def genuine_choice_world_model : WorldModel Bool Unit Bool where prior` | {}  |
+| `genuine_chooses_conflicts_with_d3` | theorem | [L1763](formal/Logos/ActionAndNormativeChoice.lean#L1763) | `theorem genuine_chooses_conflicts_with_d3 {World PriorState Subject FutureState ` | {}  |
+| `genuine_chooses_conflicts_with_d5` | theorem | [L1775](formal/Logos/ActionAndNormativeChoice.lean#L1775) | `theorem genuine_chooses_conflicts_with_d5 {World PriorState Subject FutureState ` | {}  |
+| `genuine_chooses_implies_metaphysical_indeterminism` | theorem | [L1747](formal/Logos/ActionAndNormativeChoice.lean#L1747) | `theorem genuine_chooses_implies_metaphysical_indeterminism {World PriorState Sub` | {}  |
+| `libertarian_chooses_conflicts_with_d3` | theorem | [L1449](formal/Logos/ActionAndNormativeChoice.lean#L1449) | `theorem libertarian_chooses_conflicts_with_d3 {World PriorState : Type} (W : Wor` | {}  |
+| `libertarian_chooses_conflicts_with_d5` | theorem | [L1178](formal/Logos/ActionAndNormativeChoice.lean#L1178) | `theorem libertarian_chooses_conflicts_with_d5 {Subject : Type} {State : Type} {c` | {}  |
+| `m_sd_instance` | def | [L990](formal/Logos/ActionAndNormativeChoice.lean#L990) | `def m_sd_instance : Model_M_SD where step` | {}  |
+| `macro_obs` | def | [L1402](formal/Logos/ActionAndNormativeChoice.lean#L1402) | `def macro_obs : EpistemicObservation StatMechWorld Nat where obs` | {}  |
+| `metaphysical_indeterminism_neg_d3` | theorem | [L1282](formal/Logos/ActionAndNormativeChoice.lean#L1282) | `theorem metaphysical_indeterminism_neg_d3 {World PriorState FutureState : Type} ` | {}  |
+| `necessary_normative_grounding_derives_necessary_free_subject` | theorem | [L2337](formal/Logos/ActionAndNormativeChoice.lean#L2337) | `theorem necessary_normative_grounding_derives_necessary_free_subject {Subject Wo` | {}  |
+| `necessary_normative_grounding_implies_not_d3` | theorem | [L2353](formal/Logos/ActionAndNormativeChoice.lean#L2353) | `theorem necessary_normative_grounding_implies_not_d3 {Subject World PriorState F` | {}  |
+| `normative_fact_not_implies_free_subject` | theorem | [L2284](formal/Logos/ActionAndNormativeChoice.lean#L2284) | `theorem normative_fact_not_implies_free_subject : ∃ (Subject : Type) (World : Ty` | {}  |
+| `normative_grounding_derives_free_subject` | theorem | [L2298](formal/Logos/ActionAndNormativeChoice.lean#L2298) | `theorem normative_grounding_derives_free_subject {Subject World PriorState Futur` | {}  |
+| `performed_denial_consistent_with_d3` | theorem | [L2049](formal/Logos/ActionAndNormativeChoice.lean#L2049) | `theorem performed_denial_consistent_with_d3 : ∃ (World : Type) (PriorState : Typ` | {}  |
+| `performed_denial_implies_act` | theorem | [L1931](formal/Logos/ActionAndNormativeChoice.lean#L1931) | `theorem performed_denial_implies_act {Subject State : Type} {actCtx : StrongActC` | {}  |
+| `performed_denial_implies_chooses` | theorem | [L1941](formal/Logos/ActionAndNormativeChoice.lean#L1941) | `theorem performed_denial_implies_chooses {Subject State : Type} {actCtx : Strong` | {}  |
+| `performed_denial_implies_cognitive_contrast` | theorem | [L1954](formal/Logos/ActionAndNormativeChoice.lean#L1954) | `theorem performed_denial_implies_cognitive_contrast {Subject State : Type} {actC` | {}  |
+| `performed_denial_not_implies_genuine_chooses` | theorem | [L2025](formal/Logos/ActionAndNormativeChoice.lean#L2025) | `theorem performed_denial_not_implies_genuine_chooses : ∃ (World : Type) (PriorSt` | {}  |
+| `performed_denial_not_implies_metaphysical_availability` | theorem | [L2012](formal/Logos/ActionAndNormativeChoice.lean#L2012) | `theorem performed_denial_not_implies_metaphysical_availability : ∃ (World : Type` | {}  |
+| `phys_indet_agent_det_model` | def | [L1558](formal/Logos/ActionAndNormativeChoice.lean#L1558) | `def phys_indet_agent_det_model : WorldModel PhysicalIndetAgentDetWorld Unit (Boo` | {}  |
+| `stat_mech_model` | def | [L1397](formal/Logos/ActionAndNormativeChoice.lean#L1397) | `def stat_mech_model : WorldModel StatMechWorld (Nat × Nat) (Nat × Nat) where pri` | {}  |
+| `strong_act_not_implies_genuine_chooses` | theorem | [L1821](formal/Logos/ActionAndNormativeChoice.lean#L1821) | `theorem strong_act_not_implies_genuine_chooses : ∃ (Subject : Type) (State : Typ` | {}  |
+| `strong_act_not_implies_strong_chooses` | theorem | [L1146](formal/Logos/ActionAndNormativeChoice.lean#L1146) | `theorem strong_act_not_implies_strong_chooses : ∃ (Subject : Type) (State : Type` | {}  |
+| `strong_chooses_compatible_with_d3` | theorem | [L1436](formal/Logos/ActionAndNormativeChoice.lean#L1436) | `theorem strong_chooses_compatible_with_d3 : ∃ (World PriorState FutureState : Ty` | {}  |
+| `strong_chooses_compatible_with_d5` | theorem | [L1168](formal/Logos/ActionAndNormativeChoice.lean#L1168) | `theorem strong_chooses_compatible_with_d5 : ∃ (Subject : Type) (cctx : StrongCho` | {}  |
+| `strong_chooses_not_implies_genuine_chooses` | theorem | [L1850](formal/Logos/ActionAndNormativeChoice.lean#L1850) | `theorem strong_chooses_not_implies_genuine_chooses : ∃ (Subject : Type) (cctx : ` | {CL}  |
+| `strong_chooses_without_immediate_volition` | theorem | [L1227](formal/Logos/ActionAndNormativeChoice.lean#L1227) | `theorem strong_chooses_without_immediate_volition : ∃ (cctx : StrongChoosesConte` | {}  |
+| `volition_without_action` | theorem | [L1203](formal/Logos/ActionAndNormativeChoice.lean#L1203) | `theorem volition_without_action : ∃ (vArch : VolitionalArchitecture Unit) (actCt` | {}  |
 
 ### `Logos.SubContrastFoundations`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `AxCognitiveContrast` | def | [L466](formal/Logos/SubContrastFoundations.lean#L466) | `def AxCognitiveContrast (Subject : Type) (ActAt : Subject → Prop → Prop) (Discri` | {}  |
-| `AxCognitiveUptake` | def | [L470](formal/Logos/SubContrastFoundations.lean#L470) | `def AxCognitiveUptake (Subject : Type) (MeansAt : Subject → Prop → Prop) (Discri` | {}  |
-| `CognitiveExclusion` | def | [L250](formal/Logos/SubContrastFoundations.lean#L250) | `def CognitiveExclusion (Subject : Type) (Excludes : Subject → Prop → Prop → Prop` | {}  |
-| `CompatibleIntensional` | def | [L219](formal/Logos/SubContrastFoundations.lean#L219) | `def CompatibleIntensional (p q : WorldProp) : Prop` | {}  |
-| `IncompatibleIntensional` | def | [L222](formal/Logos/SubContrastFoundations.lean#L222) | `def IncompatibleIntensional (p q : WorldProp) : Prop` | {}  |
-| `L10_Choice` | def | [L336](formal/Logos/SubContrastFoundations.lean#L336) | `def L10_Choice (Subject : Type) (ChoosesAt : Subject → Prop → Prop → Prop) (s : ` | {}  |
-| `L11_FreeWill` | def | [L340](formal/Logos/SubContrastFoundations.lean#L340) | `def L11_FreeWill (Subject : Type) (ChoosesAt : Subject → Prop → Prop → Prop) (s ` | {}  |
-| `L12_LibertarianFreedom` | def | [L344](formal/Logos/SubContrastFoundations.lean#L344) | `def L12_LibertarianFreedom (Subject : Type) (CausesAt : Subject → Prop → Prop) (` | {}  |
-| `L1_IntentionalDirectedness` | def | [L301](formal/Logos/SubContrastFoundations.lean#L301) | `def L1_IntentionalDirectedness (Subject : Type) (MeansAt : Subject → Prop → Prop` | {}  |
-| `L2_ObjectIndividuation` | def | [L305](formal/Logos/SubContrastFoundations.lean#L305) | `def L2_ObjectIndividuation (p : Prop) : Prop` | {}  |
-| `L3_ObjectDifferentiation` | def | [L308](formal/Logos/SubContrastFoundations.lean#L308) | `def L3_ObjectDifferentiation (Subject : Type) (Distinguishes : Subject → Prop → ` | {}  |
-| `L4_CognitiveExclusion` | def | [L312](formal/Logos/SubContrastFoundations.lean#L312) | `def L4_CognitiveExclusion (Subject : Type) (Excludes : Subject → Prop → Prop → P` | {}  |
-| `L5_AlternativeDifferentiation` | def | [L316](formal/Logos/SubContrastFoundations.lean#L316) | `def L5_AlternativeDifferentiation (Subject : Type) (Discriminates : Subject → Pr` | {}  |
-| `L6_AlternativeAvailability` | def | [L320](formal/Logos/SubContrastFoundations.lean#L320) | `def L6_AlternativeAvailability (Subject : Type) (Available : Subject → Prop → Pr` | {}  |
-| `L7_AlternativeRepresentation` | def | [L324](formal/Logos/SubContrastFoundations.lean#L324) | `def L7_AlternativeRepresentation (Subject : Type) (Represents : Subject → Prop →` | {}  |
-| `L8_CoMeaning` | def | [L328](formal/Logos/SubContrastFoundations.lean#L328) | `def L8_CoMeaning (Subject : Type) (MeansAt : Subject → Prop → Prop) (s : Subject` | {}  |
-| `L9_Deliberation` | def | [L332](formal/Logos/SubContrastFoundations.lean#L332) | `def L9_Deliberation (Subject : Type) (Weighs : Subject → Prop → Prop → Prop) (s ` | {}  |
-| `MonadicSimulationFrame` | structure | [L424](formal/Logos/SubContrastFoundations.lean#L424) | `structure MonadicSimulationFrame where` | —  |
-| `ReasoningRelation` | def | [L73](formal/Logos/SubContrastFoundations.lean#L73) | `def ReasoningRelation (Subject : Type) (Infers : Subject → Prop → Prop → Prop) (` | {}  |
-| `WorldProp` | def | [L217](formal/Logos/SubContrastFoundations.lean#L217) | `def WorldProp` | {}  |
-| `act_not_implies_reasoning` | theorem | [L117](formal/Logos/SubContrastFoundations.lean#L117) | `theorem act_not_implies_reasoning : ∃ (Subject : Type) (s : Subject) (p : Prop) ` | {}  |
-| `consequence_cannot_be_incompatible` | theorem | [L167](formal/Logos/SubContrastFoundations.lean#L167) | `theorem consequence_cannot_be_incompatible (p q : Prop) (hConsist : p) (hEntails` | {}  |
-| `distinct_props_are_incompatible` | theorem | [L207](formal/Logos/SubContrastFoundations.lean#L207) | `theorem distinct_props_are_incompatible (p q : Prop) (h : p ≠ q) : Incompatible ` | {CL}  |
-| `first_unavoidable_cognitive_layer` | theorem | [L415](formal/Logos/SubContrastFoundations.lean#L415) | `theorem first_unavoidable_cognitive_layer (s : Logos.Agency.Subject) (p : Prop) ` | {Initiates, Means, State, Subject}  |
-| `generalized_expressivity_collapse` | theorem | [L438](formal/Logos/SubContrastFoundations.lean#L438) | `theorem generalized_expressivity_collapse (F : MonadicSimulationFrame) (p : Prop` | {}  |
-| `hierarchy_L1_not_implies_L3` | theorem | [L349](formal/Logos/SubContrastFoundations.lean#L349) | `theorem hierarchy_L1_not_implies_L3 : ∃ (Subject : Type) (s : Subject) (p : Prop` | {}  |
-| `hierarchy_L3_not_implies_L4` | theorem | [L360](formal/Logos/SubContrastFoundations.lean#L360) | `theorem hierarchy_L3_not_implies_L4 : ∃ (Subject : Type) (s : Subject) (p q : Pr` | {}  |
-| `hierarchy_L4_not_implies_L7` | theorem | [L373](formal/Logos/SubContrastFoundations.lean#L373) | `theorem hierarchy_L4_not_implies_L7 : ∃ (Subject : Type) (s : Subject) (p q : Pr` | {}  |
-| `hierarchy_L7_not_implies_L8` | theorem | [L385](formal/Logos/SubContrastFoundations.lean#L385) | `theorem hierarchy_L7_not_implies_L8 : ∃ (Subject : Type) (s : Subject) (p q : Pr` | {}  |
-| `hierarchy_L8_not_implies_L10` | theorem | [L396](formal/Logos/SubContrastFoundations.lean#L396) | `theorem hierarchy_L8_not_implies_L10 : ∃ (Subject : Type) (s : Subject) (p q : P` | {}  |
-| `intensional_object_diff_not_implies_alternative_diff` | theorem | [L227](formal/Logos/SubContrastFoundations.lean#L227) | `theorem intensional_object_diff_not_implies_alternative_diff : ∃ (p q : WorldPro` | {}  |
-| `intentionality_not_intrinsically_contrastive` | theorem | [L268](formal/Logos/SubContrastFoundations.lean#L268) | `theorem intentionality_not_intrinsically_contrastive : ∃ (Subject : Type) (s : S` | {}  |
-| `means_not_implies_cognitive_exclusion` | theorem | [L256](formal/Logos/SubContrastFoundations.lean#L256) | `theorem means_not_implies_cognitive_exclusion : ∃ (Subject : Type) (s : Subject)` | {}  |
-| `negation_not_inferrable_from_truth` | theorem | [L184](formal/Logos/SubContrastFoundations.lean#L184) | `theorem negation_not_inferrable_from_truth (p : Prop) (hp : p) : ¬ (p → ¬ p)` | {}  |
-| `propositional_closure_cannot_generate_incompatible_horn` | theorem | [L175](formal/Logos/SubContrastFoundations.lean#L175) | `theorem propositional_closure_cannot_generate_incompatible_horn : ∀ (p : Prop), ` | {}  |
-| `reasoning_not_implies_discrimination` | theorem | [L80](formal/Logos/SubContrastFoundations.lean#L80) | `theorem reasoning_not_implies_discrimination : ∃ (Subject : Type) (s : Subject) ` | {}  |
-| `reasoning_not_implies_distinct_contents` | theorem | [L89](formal/Logos/SubContrastFoundations.lean#L89) | `theorem reasoning_not_implies_distinct_contents : ∃ (Subject : Type) (s : Subjec` | {}  |
-| `reasoning_not_implies_means_conclusion` | theorem | [L108](formal/Logos/SubContrastFoundations.lean#L108) | `theorem reasoning_not_implies_means_conclusion : ∃ (Subject : Type) (s : Subject` | {}  |
-| `reasoning_not_implies_means_premise` | theorem | [L99](formal/Logos/SubContrastFoundations.lean#L99) | `theorem reasoning_not_implies_means_premise : ∃ (Subject : Type) (s : Subject) (` | {}  |
-| `subprinciples_jointly_sufficient_for_choice` | theorem | [L474](formal/Logos/SubContrastFoundations.lean#L474) | `theorem subprinciples_jointly_sufficient_for_choice (Subject : Type) (ActAt : Su` | {}  |
-| `vertical_asymmetry_blind_to_horizontal_distinction` | theorem | [L144](formal/Logos/SubContrastFoundations.lean#L144) | `theorem vertical_asymmetry_blind_to_horizontal_distinction : ∃ (Subject : Type) ` | {}  |
-| `vertical_sort_separation` | theorem | [L138](formal/Logos/SubContrastFoundations.lean#L138) | `theorem vertical_sort_separation (_s : Subject) (_p : Prop) : True` | {Subject}  |
+| `AxCognitiveContrast` | def | [L1909](formal/Logos/AgencyAuditsAndFrontiers.lean#L1909) | `def AxCognitiveContrast (Subject : Type) (ActAt : Subject → Prop → Prop) (Discri` | {}  |
+| `AxCognitiveUptake` | def | [L1913](formal/Logos/AgencyAuditsAndFrontiers.lean#L1913) | `def AxCognitiveUptake (Subject : Type) (MeansAt : Subject → Prop → Prop) (Discri` | {}  |
+| `CognitiveExclusion` | def | [L1693](formal/Logos/AgencyAuditsAndFrontiers.lean#L1693) | `def CognitiveExclusion (Subject : Type) (Excludes : Subject → Prop → Prop → Prop` | {}  |
+| `CompatibleIntensional` | def | [L1662](formal/Logos/AgencyAuditsAndFrontiers.lean#L1662) | `def CompatibleIntensional (p q : WorldProp) : Prop` | {}  |
+| `IncompatibleIntensional` | def | [L1665](formal/Logos/AgencyAuditsAndFrontiers.lean#L1665) | `def IncompatibleIntensional (p q : WorldProp) : Prop` | {}  |
+| `L10_Choice` | def | [L1779](formal/Logos/AgencyAuditsAndFrontiers.lean#L1779) | `def L10_Choice (Subject : Type) (ChoosesAt : Subject → Prop → Prop → Prop) (s : ` | {}  |
+| `L11_FreeWill` | def | [L1783](formal/Logos/AgencyAuditsAndFrontiers.lean#L1783) | `def L11_FreeWill (Subject : Type) (ChoosesAt : Subject → Prop → Prop → Prop) (s ` | {}  |
+| `L12_LibertarianFreedom` | def | [L1787](formal/Logos/AgencyAuditsAndFrontiers.lean#L1787) | `def L12_LibertarianFreedom (Subject : Type) (CausesAt : Subject → Prop → Prop) (` | {}  |
+| `L1_IntentionalDirectedness` | def | [L1744](formal/Logos/AgencyAuditsAndFrontiers.lean#L1744) | `def L1_IntentionalDirectedness (Subject : Type) (MeansAt : Subject → Prop → Prop` | {}  |
+| `L2_ObjectIndividuation` | def | [L1748](formal/Logos/AgencyAuditsAndFrontiers.lean#L1748) | `def L2_ObjectIndividuation (p : Prop) : Prop` | {}  |
+| `L3_ObjectDifferentiation` | def | [L1751](formal/Logos/AgencyAuditsAndFrontiers.lean#L1751) | `def L3_ObjectDifferentiation (Subject : Type) (Distinguishes : Subject → Prop → ` | {}  |
+| `L4_CognitiveExclusion` | def | [L1755](formal/Logos/AgencyAuditsAndFrontiers.lean#L1755) | `def L4_CognitiveExclusion (Subject : Type) (Excludes : Subject → Prop → Prop → P` | {}  |
+| `L5_AlternativeDifferentiation` | def | [L1759](formal/Logos/AgencyAuditsAndFrontiers.lean#L1759) | `def L5_AlternativeDifferentiation (Subject : Type) (Discriminates : Subject → Pr` | {}  |
+| `L6_AlternativeAvailability` | def | [L1763](formal/Logos/AgencyAuditsAndFrontiers.lean#L1763) | `def L6_AlternativeAvailability (Subject : Type) (Available : Subject → Prop → Pr` | {}  |
+| `L7_AlternativeRepresentation` | def | [L1767](formal/Logos/AgencyAuditsAndFrontiers.lean#L1767) | `def L7_AlternativeRepresentation (Subject : Type) (Represents : Subject → Prop →` | {}  |
+| `L8_CoMeaning` | def | [L1771](formal/Logos/AgencyAuditsAndFrontiers.lean#L1771) | `def L8_CoMeaning (Subject : Type) (MeansAt : Subject → Prop → Prop) (s : Subject` | {}  |
+| `L9_Deliberation` | def | [L1775](formal/Logos/AgencyAuditsAndFrontiers.lean#L1775) | `def L9_Deliberation (Subject : Type) (Weighs : Subject → Prop → Prop → Prop) (s ` | {}  |
+| `MonadicSimulationFrame` | structure | [L1867](formal/Logos/AgencyAuditsAndFrontiers.lean#L1867) | `structure MonadicSimulationFrame where` | —  |
+| `ReasoningRelation` | def | [L1516](formal/Logos/AgencyAuditsAndFrontiers.lean#L1516) | `def ReasoningRelation (Subject : Type) (Infers : Subject → Prop → Prop → Prop) (` | {}  |
+| `WorldProp` | def | [L1660](formal/Logos/AgencyAuditsAndFrontiers.lean#L1660) | `def WorldProp` | {}  |
+| `act_not_implies_reasoning` | theorem | [L1560](formal/Logos/AgencyAuditsAndFrontiers.lean#L1560) | `theorem act_not_implies_reasoning : ∃ (Subject : Type) (s : Subject) (p : Prop) ` | {}  |
+| `consequence_cannot_be_incompatible` | theorem | [L1610](formal/Logos/AgencyAuditsAndFrontiers.lean#L1610) | `theorem consequence_cannot_be_incompatible (p q : Prop) (hConsist : p) (hEntails` | {}  |
+| `distinct_props_are_incompatible` | theorem | [L1650](formal/Logos/AgencyAuditsAndFrontiers.lean#L1650) | `theorem distinct_props_are_incompatible (p q : Prop) (h : p ≠ q) : Incompatible ` | {CL}  |
+| `first_unavoidable_cognitive_layer` | theorem | [L1858](formal/Logos/AgencyAuditsAndFrontiers.lean#L1858) | `theorem first_unavoidable_cognitive_layer (s : Logos.Agency.Subject) (p : Prop) ` | {Initiates, Means, State, Subject}  |
+| `generalized_expressivity_collapse` | theorem | [L1881](formal/Logos/AgencyAuditsAndFrontiers.lean#L1881) | `theorem generalized_expressivity_collapse (F : MonadicSimulationFrame) (p : Prop` | {}  |
+| `hierarchy_L1_not_implies_L3` | theorem | [L1792](formal/Logos/AgencyAuditsAndFrontiers.lean#L1792) | `theorem hierarchy_L1_not_implies_L3 : ∃ (Subject : Type) (s : Subject) (p : Prop` | {}  |
+| `hierarchy_L3_not_implies_L4` | theorem | [L1803](formal/Logos/AgencyAuditsAndFrontiers.lean#L1803) | `theorem hierarchy_L3_not_implies_L4 : ∃ (Subject : Type) (s : Subject) (p q : Pr` | {}  |
+| `hierarchy_L4_not_implies_L7` | theorem | [L1816](formal/Logos/AgencyAuditsAndFrontiers.lean#L1816) | `theorem hierarchy_L4_not_implies_L7 : ∃ (Subject : Type) (s : Subject) (p q : Pr` | {}  |
+| `hierarchy_L7_not_implies_L8` | theorem | [L1828](formal/Logos/AgencyAuditsAndFrontiers.lean#L1828) | `theorem hierarchy_L7_not_implies_L8 : ∃ (Subject : Type) (s : Subject) (p q : Pr` | {}  |
+| `hierarchy_L8_not_implies_L10` | theorem | [L1839](formal/Logos/AgencyAuditsAndFrontiers.lean#L1839) | `theorem hierarchy_L8_not_implies_L10 : ∃ (Subject : Type) (s : Subject) (p q : P` | {}  |
+| `intensional_object_diff_not_implies_alternative_diff` | theorem | [L1670](formal/Logos/AgencyAuditsAndFrontiers.lean#L1670) | `theorem intensional_object_diff_not_implies_alternative_diff : ∃ (p q : WorldPro` | {}  |
+| `intentionality_not_intrinsically_contrastive` | theorem | [L1711](formal/Logos/AgencyAuditsAndFrontiers.lean#L1711) | `theorem intentionality_not_intrinsically_contrastive : ∃ (Subject : Type) (s : S` | {}  |
+| `means_not_implies_cognitive_exclusion` | theorem | [L1699](formal/Logos/AgencyAuditsAndFrontiers.lean#L1699) | `theorem means_not_implies_cognitive_exclusion : ∃ (Subject : Type) (s : Subject)` | {}  |
+| `negation_not_inferrable_from_truth` | theorem | [L1627](formal/Logos/AgencyAuditsAndFrontiers.lean#L1627) | `theorem negation_not_inferrable_from_truth (p : Prop) (hp : p) : ¬ (p → ¬ p)` | {}  |
+| `propositional_closure_cannot_generate_incompatible_horn` | theorem | [L1618](formal/Logos/AgencyAuditsAndFrontiers.lean#L1618) | `theorem propositional_closure_cannot_generate_incompatible_horn : ∀ (p : Prop), ` | {}  |
+| `reasoning_not_implies_discrimination` | theorem | [L1523](formal/Logos/AgencyAuditsAndFrontiers.lean#L1523) | `theorem reasoning_not_implies_discrimination : ∃ (Subject : Type) (s : Subject) ` | {}  |
+| `reasoning_not_implies_distinct_contents` | theorem | [L1532](formal/Logos/AgencyAuditsAndFrontiers.lean#L1532) | `theorem reasoning_not_implies_distinct_contents : ∃ (Subject : Type) (s : Subjec` | {}  |
+| `reasoning_not_implies_means_conclusion` | theorem | [L1551](formal/Logos/AgencyAuditsAndFrontiers.lean#L1551) | `theorem reasoning_not_implies_means_conclusion : ∃ (Subject : Type) (s : Subject` | {}  |
+| `reasoning_not_implies_means_premise` | theorem | [L1542](formal/Logos/AgencyAuditsAndFrontiers.lean#L1542) | `theorem reasoning_not_implies_means_premise : ∃ (Subject : Type) (s : Subject) (` | {}  |
+| `subprinciples_jointly_sufficient_for_choice` | theorem | [L1917](formal/Logos/AgencyAuditsAndFrontiers.lean#L1917) | `theorem subprinciples_jointly_sufficient_for_choice (Subject : Type) (ActAt : Su` | {}  |
+| `vertical_asymmetry_blind_to_horizontal_distinction` | theorem | [L1587](formal/Logos/AgencyAuditsAndFrontiers.lean#L1587) | `theorem vertical_asymmetry_blind_to_horizontal_distinction : ∃ (Subject : Type) ` | {}  |
+| `vertical_sort_separation` | theorem | [L1581](formal/Logos/AgencyAuditsAndFrontiers.lean#L1581) | `theorem vertical_sort_separation (_s : Subject) (_p : Prop) : True` | {Subject}  |
 
 ### `Logos.SuccessionAudit`
 
@@ -4788,72 +4766,72 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `ActualEntity` | def | [L52](formal/Logos/TheologicalModalHardening.lean#L52) | `def ActualEntity (e : Entity) : Prop` | {NecessarySubjectKind, Subject}  |
-| `BoxR` | def | [L158](formal/Logos/TheologicalModalHardening.lean#L158) | `def BoxR {W : Type} (frame : KripkeFrame W) (P : W → Prop) (w : W) : Prop` | {}  |
-| `CoexistenceWithoutCreationModel` | def | [L349](formal/Logos/TheologicalModalHardening.lean#L349) | `def CoexistenceWithoutCreationModel : CreationSignature where Entity` | {}  |
-| `ConcreteModelG` | def | [L125](formal/Logos/TheologicalModalHardening.lean#L125) | `def ConcreteModelG : ModelG_Signature where Entity` | {}  |
-| `ConstantDomainPrinciple` | def | [L486](formal/Logos/TheologicalModalHardening.lean#L486) | `def ConstantDomainPrinciple (S : RegimeG_Signature) : Prop` | {}  |
-| `ContingentEntity` | def | [L63](formal/Logos/TheologicalModalHardening.lean#L63) | `def ContingentEntity (e : Entity) : Prop` | {NecessarySubjectKind, Subject}  |
-| `ContingentSubjectRetorsionModel` | structure | [L540](formal/Logos/TheologicalModalHardening.lean#L540) | `structure ContingentSubjectRetorsionModel where` | —  |
-| `CreationSignature` | structure | [L320](formal/Logos/TheologicalModalHardening.lean#L320) | `structure CreationSignature where` | —  |
-| `DeepCreationSignature` | structure | [L631](formal/Logos/TheologicalModalHardening.lean#L631) | `structure DeepCreationSignature where` | —  |
-| `DivineSpecification` | structure | [L587](formal/Logos/TheologicalModalHardening.lean#L587) | `structure DivineSpecification (Entity : Type) where` | —  |
-| `DivineSpecification.Divine` | def | [L594](formal/Logos/TheologicalModalHardening.lean#L594) | `def DivineSpecification.Divine {Entity : Type} (spec : DivineSpecification Entit` | {}  |
-| `FrameE1` | def | [L504](formal/Logos/TheologicalModalHardening.lean#L504) | `def FrameE1 (W : Type) : KripkeFrame W where R` | {}  |
-| `FrameE2` | def | [L509](formal/Logos/TheologicalModalHardening.lean#L509) | `def FrameE2 : KripkeFrame Bool where R` | {}  |
-| `FrameE3_Signature` | structure | [L523](formal/Logos/TheologicalModalHardening.lean#L523) | `structure FrameE3_Signature where` | —  |
-| `GodAloneModel` | def | [L333](formal/Logos/TheologicalModalHardening.lean#L333) | `def GodAloneModel : CreationSignature where Entity` | {}  |
-| `KripkeFrame` | structure | [L153](formal/Logos/TheologicalModalHardening.lean#L153) | `structure KripkeFrame (W : Type) where` | —  |
-| `ModalOntologySignature` | structure | [L73](formal/Logos/TheologicalModalHardening.lean#L73) | `structure ModalOntologySignature where` | —  |
-| `ModalWorldModel` | structure | [L743](formal/Logos/TheologicalModalHardening.lean#L743) | `structure ModalWorldModel (World : Type) where` | —  |
-| `ModalWorldModel.PossibleWorld` | def | [L747](formal/Logos/TheologicalModalHardening.lean#L747) | `def ModalWorldModel.PossibleWorld {World : Type} (M : ModalWorldModel World) (w ` | {}  |
-| `ModelG_Signature` | structure | [L109](formal/Logos/TheologicalModalHardening.lean#L109) | `structure ModelG_Signature where` | —  |
-| `ModelNA_Signature` | structure | [L257](formal/Logos/TheologicalModalHardening.lean#L257) | `structure ModelNA_Signature where` | —  |
-| `ModelND_Signature` | structure | [L278](formal/Logos/TheologicalModalHardening.lean#L278) | `structure ModelND_Signature where` | —  |
-| `ModelNP_Signature` | structure | [L223](formal/Logos/TheologicalModalHardening.lean#L223) | `structure ModelNP_Signature where` | —  |
-| `NecessaryEntity` | def | [L55](formal/Logos/TheologicalModalHardening.lean#L55) | `def NecessaryEntity (e : Entity) : Prop` | {NecessarySubjectKind, Subject}  |
-| `PluralNecessaryEntitiesSignature` | structure | [L380](formal/Logos/TheologicalModalHardening.lean#L380) | `structure PluralNecessaryEntitiesSignature where` | —  |
-| `RegimeE_Signature` | structure | [L426](formal/Logos/TheologicalModalHardening.lean#L426) | `structure RegimeE_Signature where` | —  |
-| `RegimeG1_GodAlone` | def | [L643](formal/Logos/TheologicalModalHardening.lean#L643) | `def RegimeG1_GodAlone : DeepCreationSignature where Entity` | {}  |
-| `RegimeG2_Creation` | def | [L661](formal/Logos/TheologicalModalHardening.lean#L661) | `def RegimeG2_Creation : DeepCreationSignature where Entity` | {}  |
-| `RegimeG3_CoexistenceNoCreation` | def | [L681](formal/Logos/TheologicalModalHardening.lean#L681) | `def RegimeG3_CoexistenceNoCreation : DeepCreationSignature where Entity` | {}  |
-| `RegimeG_Signature` | structure | [L434](formal/Logos/TheologicalModalHardening.lean#L434) | `structure RegimeG_Signature where` | —  |
-| `RegimeG_Signature.NecessaryEntity` | def | [L440](formal/Logos/TheologicalModalHardening.lean#L440) | `def RegimeG_Signature.NecessaryEntity (S : RegimeG_Signature) (e : S.Entity) : P` | {}  |
-| `ShiftingEntityModel` | def | [L451](formal/Logos/TheologicalModalHardening.lean#L451) | `def ShiftingEntityModel : RegimeG_Signature where World` | {}  |
-| `UniformWitnessPrinciple` | def | [L475](formal/Logos/TheologicalModalHardening.lean#L475) | `def UniformWitnessPrinciple (S : RegimeG_Signature) : Prop` | {}  |
-| `UniqueExists` | def | [L375](formal/Logos/TheologicalModalHardening.lean#L375) | `def UniqueExists {α : Type} (P : α → Prop) : Prop` | {}  |
-| `UniversalFrame` | def | [L163](formal/Logos/TheologicalModalHardening.lean#L163) | `def UniversalFrame (W : Type) : KripkeFrame W where R` | {}  |
-| `accessible_worldwise_grounding_consistent` | theorem | [L176](formal/Logos/TheologicalModalHardening.lean#L176) | `theorem accessible_worldwise_grounding_consistent : let W` | {}  |
-| `boxR_universal_iff` | theorem | [L166](formal/Logos/TheologicalModalHardening.lean#L166) | `theorem boxR_universal_iff {W : Type} (P : W → Prop) (w : W) : BoxR (UniversalFr` | {}  |
-| `coexistence_without_creation_relation` | theorem | [L358](formal/Logos/TheologicalModalHardening.lean#L358) | `theorem coexistence_without_creation_relation : (∃ x : CoexistenceWithoutCreatio` | {} → C361 |
-| `constant_domain_yields_necessary_entity` | theorem | [L489](formal/Logos/TheologicalModalHardening.lean#L489) | `theorem constant_domain_yields_necessary_entity (S : RegimeG_Signature) [Inhabit` | {}  |
-| `divine_identification_theorem` | theorem | [L616](formal/Logos/TheologicalModalHardening.lean#L616) | `theorem divine_identification_theorem (Entity : Type) (spec : DivineSpecificatio` | {}  |
-| `empty_world_excluded_by_non_emptiness_constraint` | theorem | [L753](formal/Logos/TheologicalModalHardening.lean#L753) | `theorem empty_world_excluded_by_non_emptiness_constraint (World : Type) (M : Mod` | {} → C356 |
-| `frameE2_grounding_holds_at_actual` | theorem | [L512](formal/Logos/TheologicalModalHardening.lean#L512) | `theorem frameE2_grounding_holds_at_actual : let ExistsAt` | {}  |
-| `g1_god_alone_properties` | theorem | [L652](formal/Logos/TheologicalModalHardening.lean#L652) | `theorem g1_god_alone_properties : (¬ ∃ x : RegimeG1_GodAlone.Entity, RegimeG1_Go` | {} → C363 |
-| `g2_creation_properties` | theorem | [L670](formal/Logos/TheologicalModalHardening.lean#L670) | `theorem g2_creation_properties : (∃ x : RegimeG2_Creation.Entity, RegimeG2_Creat` | {} → C364 |
-| `g3_coexistence_no_creation_properties` | theorem | [L690](formal/Logos/TheologicalModalHardening.lean#L690) | `theorem g3_coexistence_no_creation_properties : (∃ x : RegimeG3_CoexistenceNoCre` | {} → C365 |
-| `g4_creation_is_contingent` | theorem | [L701](formal/Logos/TheologicalModalHardening.lean#L701) | `theorem g4_creation_is_contingent : ∃ w : RegimeG2_Creation.World, ¬ RegimeG2_Cr` | {} → C366 |
-| `god_alone_has_no_creation` | theorem | [L342](formal/Logos/TheologicalModalHardening.lean#L342) | `theorem god_alone_has_no_creation : ¬ ∃ x : GodAloneModel.Entity, GodAloneModel.` | {} → C360 |
-| `intentional_subject_not_entails_freewill` | theorem | [L308](formal/Logos/TheologicalModalHardening.lean#L308) | `theorem intentional_subject_not_entails_freewill : ¬ (∀ S : ModelND_Signature, S` | {}  |
-| `model_G_consistent` | theorem | [L145](formal/Logos/TheologicalModalHardening.lean#L145) | `theorem model_G_consistent : ∃ _M : ModelG_Signature, True` | {} → C359 |
-| `model_NA_consistent` | theorem | [L264](formal/Logos/TheologicalModalHardening.lean#L264) | `theorem model_NA_consistent : ∃ _M : ModelNA_Signature, True` | {}  |
-| `model_ND_consistent` | theorem | [L291](formal/Logos/TheologicalModalHardening.lean#L291) | `theorem model_ND_consistent : ∃ _M : ModelND_Signature, True` | {}  |
-| `model_NP_consistent` | theorem | [L234](formal/Logos/TheologicalModalHardening.lean#L234) | `theorem model_NP_consistent : ∃ _M : ModelNP_Signature, True` | {}  |
-| `necessary_being_not_entails_divine` | theorem | [L599](formal/Logos/TheologicalModalHardening.lean#L599) | `theorem necessary_being_not_entails_divine : ¬ (∀ (Entity : Type) (spec : Divine` | {}  |
-| `necessary_entity_not_entails_subject` | theorem | [L248](formal/Logos/TheologicalModalHardening.lean#L248) | `theorem necessary_entity_not_entails_subject : ¬ (∀ S : ModelNP_Signature, ∃ s :` | {}  |
-| `necessary_entity_not_forces_contingent_creation` | theorem | [L208](formal/Logos/TheologicalModalHardening.lean#L208) | `theorem necessary_entity_not_forces_contingent_creation : ∃ S : ModelG_Signature` | {} → C358 |
-| `necessary_entity_rules_out_empty_world` | theorem | [L197](formal/Logos/TheologicalModalHardening.lean#L197) | `theorem necessary_entity_rules_out_empty_world (Entity World : Type) (ExistsAt :` | {} → C355 |
-| `necessary_existence_not_entails_uniqueness` | theorem | [L406](formal/Logos/TheologicalModalHardening.lean#L406) | `theorem necessary_existence_not_entails_uniqueness : ¬ (∀ S : PluralNecessaryEnt` | {}  |
-| `necessary_ground_can_be_non_ultimate` | theorem | [L728](formal/Logos/TheologicalModalHardening.lean#L728) | `theorem necessary_ground_can_be_non_ultimate : let GroundEntity` | {}  |
-| `necessary_non_emptiness_not_entails_necessary_entity` | theorem | [L457](formal/Logos/TheologicalModalHardening.lean#L457) | `theorem necessary_non_emptiness_not_entails_necessary_entity : ¬ (∀ S : RegimeG_` | {} → C362 |
-| `necessary_not_contingent` | theorem | [L67](formal/Logos/TheologicalModalHardening.lean#L67) | `theorem necessary_not_contingent (e : Entity) : NecessaryEntity e → ¬ Contingent` | {NecessarySubjectKind, Subject}  |
-| `non_contingent_not_entails_necessary` | theorem | [L85](formal/Logos/TheologicalModalHardening.lean#L85) | `theorem non_contingent_not_entails_necessary : ¬ (∀ S : ModalOntologySignature, ` | {} → C357 |
-| `plural_necessary_entities_consistent` | theorem | [L391](formal/Logos/TheologicalModalHardening.lean#L391) | `theorem plural_necessary_entities_consistent : ∃ _M : PluralNecessaryEntitiesSig` | {}  |
-| `retorsion_not_forces_necessary_subject` | theorem | [L555](formal/Logos/TheologicalModalHardening.lean#L555) | `theorem retorsion_not_forces_necessary_subject : ∃ _M : ContingentSubjectRetorsi` | {}  |
-| `subject_not_entails_agency` | theorem | [L268](formal/Logos/TheologicalModalHardening.lean#L268) | `theorem subject_not_entails_agency : ¬ (∀ S : ModelNA_Signature, ∃ p : S.PropTyp` | {}  |
-| `u1_independence_exclusion_forces_uniqueness` | theorem | [L715](formal/Logos/TheologicalModalHardening.lean#L715) | `theorem u1_independence_exclusion_forces_uniqueness (_Entity : Type) (Nec : _Ent` | {}  |
-| `uniform_witness_yields_necessary_entity` | theorem | [L478](formal/Logos/TheologicalModalHardening.lean#L478) | `theorem uniform_witness_yields_necessary_entity (S : RegimeG_Signature) (hWit : ` | {}  |
+| `ActualEntity` | def | [L62](formal/Logos/ModalCreationFrontiers.lean#L62) | `def ActualEntity (e : Entity) : Prop` | {NecessarySubjectKind, Subject}  |
+| `BoxR` | def | [L168](formal/Logos/ModalCreationFrontiers.lean#L168) | `def BoxR {W : Type} (frame : KripkeFrame W) (P : W → Prop) (w : W) : Prop` | {}  |
+| `CoexistenceWithoutCreationModel` | def | [L359](formal/Logos/ModalCreationFrontiers.lean#L359) | `def CoexistenceWithoutCreationModel : CreationSignature where Entity` | {}  |
+| `ConcreteModelG` | def | [L135](formal/Logos/ModalCreationFrontiers.lean#L135) | `def ConcreteModelG : ModelG_Signature where Entity` | {}  |
+| `ConstantDomainPrinciple` | def | [L496](formal/Logos/ModalCreationFrontiers.lean#L496) | `def ConstantDomainPrinciple (S : RegimeG_Signature) : Prop` | {}  |
+| `ContingentEntity` | def | [L73](formal/Logos/ModalCreationFrontiers.lean#L73) | `def ContingentEntity (e : Entity) : Prop` | {NecessarySubjectKind, Subject}  |
+| `ContingentSubjectRetorsionModel` | structure | [L550](formal/Logos/ModalCreationFrontiers.lean#L550) | `structure ContingentSubjectRetorsionModel where` | —  |
+| `CreationSignature` | structure | [L330](formal/Logos/ModalCreationFrontiers.lean#L330) | `structure CreationSignature where` | —  |
+| `DeepCreationSignature` | structure | [L641](formal/Logos/ModalCreationFrontiers.lean#L641) | `structure DeepCreationSignature where` | —  |
+| `DivineSpecification` | structure | [L597](formal/Logos/ModalCreationFrontiers.lean#L597) | `structure DivineSpecification (Entity : Type) where` | —  |
+| `DivineSpecification.Divine` | def | [L604](formal/Logos/ModalCreationFrontiers.lean#L604) | `def DivineSpecification.Divine {Entity : Type} (spec : DivineSpecification Entit` | {}  |
+| `FrameE1` | def | [L514](formal/Logos/ModalCreationFrontiers.lean#L514) | `def FrameE1 (W : Type) : KripkeFrame W where R` | {}  |
+| `FrameE2` | def | [L519](formal/Logos/ModalCreationFrontiers.lean#L519) | `def FrameE2 : KripkeFrame Bool where R` | {}  |
+| `FrameE3_Signature` | structure | [L533](formal/Logos/ModalCreationFrontiers.lean#L533) | `structure FrameE3_Signature where` | —  |
+| `GodAloneModel` | def | [L343](formal/Logos/ModalCreationFrontiers.lean#L343) | `def GodAloneModel : CreationSignature where Entity` | {}  |
+| `KripkeFrame` | structure | [L163](formal/Logos/ModalCreationFrontiers.lean#L163) | `structure KripkeFrame (W : Type) where` | —  |
+| `ModalOntologySignature` | structure | [L83](formal/Logos/ModalCreationFrontiers.lean#L83) | `structure ModalOntologySignature where` | —  |
+| `ModalWorldModel` | structure | [L753](formal/Logos/ModalCreationFrontiers.lean#L753) | `structure ModalWorldModel (World : Type) where` | —  |
+| `ModalWorldModel.PossibleWorld` | def | [L757](formal/Logos/ModalCreationFrontiers.lean#L757) | `def ModalWorldModel.PossibleWorld {World : Type} (M : ModalWorldModel World) (w ` | {}  |
+| `ModelG_Signature` | structure | [L119](formal/Logos/ModalCreationFrontiers.lean#L119) | `structure ModelG_Signature where` | —  |
+| `ModelNA_Signature` | structure | [L267](formal/Logos/ModalCreationFrontiers.lean#L267) | `structure ModelNA_Signature where` | —  |
+| `ModelND_Signature` | structure | [L288](formal/Logos/ModalCreationFrontiers.lean#L288) | `structure ModelND_Signature where` | —  |
+| `ModelNP_Signature` | structure | [L233](formal/Logos/ModalCreationFrontiers.lean#L233) | `structure ModelNP_Signature where` | —  |
+| `NecessaryEntity` | def | [L65](formal/Logos/ModalCreationFrontiers.lean#L65) | `def NecessaryEntity (e : Entity) : Prop` | {NecessarySubjectKind, Subject}  |
+| `PluralNecessaryEntitiesSignature` | structure | [L390](formal/Logos/ModalCreationFrontiers.lean#L390) | `structure PluralNecessaryEntitiesSignature where` | —  |
+| `RegimeE_Signature` | structure | [L436](formal/Logos/ModalCreationFrontiers.lean#L436) | `structure RegimeE_Signature where` | —  |
+| `RegimeG1_GodAlone` | def | [L653](formal/Logos/ModalCreationFrontiers.lean#L653) | `def RegimeG1_GodAlone : DeepCreationSignature where Entity` | {}  |
+| `RegimeG2_Creation` | def | [L671](formal/Logos/ModalCreationFrontiers.lean#L671) | `def RegimeG2_Creation : DeepCreationSignature where Entity` | {}  |
+| `RegimeG3_CoexistenceNoCreation` | def | [L691](formal/Logos/ModalCreationFrontiers.lean#L691) | `def RegimeG3_CoexistenceNoCreation : DeepCreationSignature where Entity` | {}  |
+| `RegimeG_Signature` | structure | [L444](formal/Logos/ModalCreationFrontiers.lean#L444) | `structure RegimeG_Signature where` | —  |
+| `RegimeG_Signature.NecessaryEntity` | def | [L450](formal/Logos/ModalCreationFrontiers.lean#L450) | `def RegimeG_Signature.NecessaryEntity (S : RegimeG_Signature) (e : S.Entity) : P` | {}  |
+| `ShiftingEntityModel` | def | [L461](formal/Logos/ModalCreationFrontiers.lean#L461) | `def ShiftingEntityModel : RegimeG_Signature where World` | {}  |
+| `UniformWitnessPrinciple` | def | [L485](formal/Logos/ModalCreationFrontiers.lean#L485) | `def UniformWitnessPrinciple (S : RegimeG_Signature) : Prop` | {}  |
+| `UniqueExists` | def | [L385](formal/Logos/ModalCreationFrontiers.lean#L385) | `def UniqueExists {α : Type} (P : α → Prop) : Prop` | {}  |
+| `UniversalFrame` | def | [L173](formal/Logos/ModalCreationFrontiers.lean#L173) | `def UniversalFrame (W : Type) : KripkeFrame W where R` | {}  |
+| `accessible_worldwise_grounding_consistent` | theorem | [L186](formal/Logos/ModalCreationFrontiers.lean#L186) | `theorem accessible_worldwise_grounding_consistent : let W` | {}  |
+| `boxR_universal_iff` | theorem | [L176](formal/Logos/ModalCreationFrontiers.lean#L176) | `theorem boxR_universal_iff {W : Type} (P : W → Prop) (w : W) : BoxR (UniversalFr` | {}  |
+| `coexistence_without_creation_relation` | theorem | [L368](formal/Logos/ModalCreationFrontiers.lean#L368) | `theorem coexistence_without_creation_relation : (∃ x : CoexistenceWithoutCreatio` | {} → C361 |
+| `constant_domain_yields_necessary_entity` | theorem | [L499](formal/Logos/ModalCreationFrontiers.lean#L499) | `theorem constant_domain_yields_necessary_entity (S : RegimeG_Signature) [Inhabit` | {}  |
+| `divine_identification_theorem` | theorem | [L626](formal/Logos/ModalCreationFrontiers.lean#L626) | `theorem divine_identification_theorem (Entity : Type) (spec : DivineSpecificatio` | {}  |
+| `empty_world_excluded_by_non_emptiness_constraint` | theorem | [L763](formal/Logos/ModalCreationFrontiers.lean#L763) | `theorem empty_world_excluded_by_non_emptiness_constraint (World : Type) (M : Mod` | {} → C356 |
+| `frameE2_grounding_holds_at_actual` | theorem | [L522](formal/Logos/ModalCreationFrontiers.lean#L522) | `theorem frameE2_grounding_holds_at_actual : let ExistsAt` | {}  |
+| `g1_god_alone_properties` | theorem | [L662](formal/Logos/ModalCreationFrontiers.lean#L662) | `theorem g1_god_alone_properties : (¬ ∃ x : RegimeG1_GodAlone.Entity, RegimeG1_Go` | {} → C363 |
+| `g2_creation_properties` | theorem | [L680](formal/Logos/ModalCreationFrontiers.lean#L680) | `theorem g2_creation_properties : (∃ x : RegimeG2_Creation.Entity, RegimeG2_Creat` | {} → C364 |
+| `g3_coexistence_no_creation_properties` | theorem | [L700](formal/Logos/ModalCreationFrontiers.lean#L700) | `theorem g3_coexistence_no_creation_properties : (∃ x : RegimeG3_CoexistenceNoCre` | {} → C365 |
+| `g4_creation_is_contingent` | theorem | [L711](formal/Logos/ModalCreationFrontiers.lean#L711) | `theorem g4_creation_is_contingent : ∃ w : RegimeG2_Creation.World, ¬ RegimeG2_Cr` | {} → C366 |
+| `god_alone_has_no_creation` | theorem | [L352](formal/Logos/ModalCreationFrontiers.lean#L352) | `theorem god_alone_has_no_creation : ¬ ∃ x : GodAloneModel.Entity, GodAloneModel.` | {} → C360 |
+| `intentional_subject_not_entails_freewill` | theorem | [L318](formal/Logos/ModalCreationFrontiers.lean#L318) | `theorem intentional_subject_not_entails_freewill : ¬ (∀ S : ModelND_Signature, S` | {}  |
+| `model_G_consistent` | theorem | [L155](formal/Logos/ModalCreationFrontiers.lean#L155) | `theorem model_G_consistent : ∃ _M : ModelG_Signature, True` | {} → C359 |
+| `model_NA_consistent` | theorem | [L274](formal/Logos/ModalCreationFrontiers.lean#L274) | `theorem model_NA_consistent : ∃ _M : ModelNA_Signature, True` | {}  |
+| `model_ND_consistent` | theorem | [L301](formal/Logos/ModalCreationFrontiers.lean#L301) | `theorem model_ND_consistent : ∃ _M : ModelND_Signature, True` | {}  |
+| `model_NP_consistent` | theorem | [L244](formal/Logos/ModalCreationFrontiers.lean#L244) | `theorem model_NP_consistent : ∃ _M : ModelNP_Signature, True` | {}  |
+| `necessary_being_not_entails_divine` | theorem | [L609](formal/Logos/ModalCreationFrontiers.lean#L609) | `theorem necessary_being_not_entails_divine : ¬ (∀ (Entity : Type) (spec : Divine` | {}  |
+| `necessary_entity_not_entails_subject` | theorem | [L258](formal/Logos/ModalCreationFrontiers.lean#L258) | `theorem necessary_entity_not_entails_subject : ¬ (∀ S : ModelNP_Signature, ∃ s :` | {}  |
+| `necessary_entity_not_forces_contingent_creation` | theorem | [L218](formal/Logos/ModalCreationFrontiers.lean#L218) | `theorem necessary_entity_not_forces_contingent_creation : ∃ S : ModelG_Signature` | {} → C358 |
+| `necessary_entity_rules_out_empty_world` | theorem | [L207](formal/Logos/ModalCreationFrontiers.lean#L207) | `theorem necessary_entity_rules_out_empty_world (Entity World : Type) (ExistsAt :` | {} → C355 |
+| `necessary_existence_not_entails_uniqueness` | theorem | [L416](formal/Logos/ModalCreationFrontiers.lean#L416) | `theorem necessary_existence_not_entails_uniqueness : ¬ (∀ S : PluralNecessaryEnt` | {}  |
+| `necessary_ground_can_be_non_ultimate` | theorem | [L738](formal/Logos/ModalCreationFrontiers.lean#L738) | `theorem necessary_ground_can_be_non_ultimate : let GroundEntity` | {}  |
+| `necessary_non_emptiness_not_entails_necessary_entity` | theorem | [L467](formal/Logos/ModalCreationFrontiers.lean#L467) | `theorem necessary_non_emptiness_not_entails_necessary_entity : ¬ (∀ S : RegimeG_` | {} → C362 |
+| `necessary_not_contingent` | theorem | [L77](formal/Logos/ModalCreationFrontiers.lean#L77) | `theorem necessary_not_contingent (e : Entity) : NecessaryEntity e → ¬ Contingent` | {NecessarySubjectKind, Subject}  |
+| `non_contingent_not_entails_necessary` | theorem | [L95](formal/Logos/ModalCreationFrontiers.lean#L95) | `theorem non_contingent_not_entails_necessary : ¬ (∀ S : ModalOntologySignature, ` | {} → C357 |
+| `plural_necessary_entities_consistent` | theorem | [L401](formal/Logos/ModalCreationFrontiers.lean#L401) | `theorem plural_necessary_entities_consistent : ∃ _M : PluralNecessaryEntitiesSig` | {}  |
+| `retorsion_not_forces_necessary_subject` | theorem | [L565](formal/Logos/ModalCreationFrontiers.lean#L565) | `theorem retorsion_not_forces_necessary_subject : ∃ _M : ContingentSubjectRetorsi` | {}  |
+| `subject_not_entails_agency` | theorem | [L278](formal/Logos/ModalCreationFrontiers.lean#L278) | `theorem subject_not_entails_agency : ¬ (∀ S : ModelNA_Signature, ∃ p : S.PropTyp` | {}  |
+| `u1_independence_exclusion_forces_uniqueness` | theorem | [L725](formal/Logos/ModalCreationFrontiers.lean#L725) | `theorem u1_independence_exclusion_forces_uniqueness (_Entity : Type) (Nec : _Ent` | {}  |
+| `uniform_witness_yields_necessary_entity` | theorem | [L488](formal/Logos/ModalCreationFrontiers.lean#L488) | `theorem uniform_witness_yields_necessary_entity (S : RegimeG_Signature) (hWit : ` | {}  |
 
 ### `Logos.ThomisticAct`
 
@@ -4870,54 +4848,54 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `GroundByBeing` | def | [L2262](formal/Logos/DivineTrinitarianAttributes.lean#L2262) | `def GroundByBeing (g e : Entity) : Prop` | {NecessarySubjectKind, Subject}  |
-| `Perichoretic` | def | [L2481](formal/Logos/DivineTrinitarianAttributes.lean#L2481) | `def Perichoretic (g : Entity) (a b c : Subject) : Prop` | {Means, Subject}  |
-| `PersonalGround` | structure | [L2524](formal/Logos/DivineTrinitarianAttributes.lean#L2524) | `structure PersonalGround (g : Entity) : Prop where` | —  |
-| `ground_is_not_a_fourth_chooser` | theorem | [L2375](formal/Logos/DivineTrinitarianAttributes.lean#L2375) | `theorem ground_is_not_a_fourth_chooser : ¬ Asiety Entity.ofGround` | {Means, Subject}  |
-| `ground_scope_does_contain_incompatibles` | theorem | [L2326](formal/Logos/DivineTrinitarianAttributes.lean#L2326) | `theorem ground_scope_does_contain_incompatibles : ∃ p q : Prop, EntityMeans Enti` | {Means, Subject}  |
-| `no_person_is_the_ground` | theorem | [L2431](formal/Logos/DivineTrinitarianAttributes.lean#L2431) | `theorem no_person_is_the_ground (s : Subject) : ¬ (Entity.ofGround = EntityOf s)` | {Subject}  |
-| `ofGround_grounds_every_being_by_presence` | theorem | [L2273](formal/Logos/DivineTrinitarianAttributes.lean#L2273) | `theorem ofGround_grounds_every_being_by_presence (e : Entity) : GroundByBeing En` | {NecessarySubjectKind, Subject}  |
-| `ofGround_grounds_every_person` | theorem | [L2289](formal/Logos/DivineTrinitarianAttributes.lean#L2289) | `theorem ofGround_grounds_every_person (s : Subject) (_hP : Person s) : OneEssenc` | {Means, Subject, Will, subjectWill}  |
-| `ofGround_is_perichoretic` | theorem | [L2498](formal/Logos/DivineTrinitarianAttributes.lean#L2498) | `theorem ofGround_is_perichoretic (a b c : Subject) (ha : Person a) (hb : Person ` | {Means, Subject, Will, subjectWill}  |
-| `ofGround_leaves_nothing_ungrounded` | theorem | [L2304](formal/Logos/DivineTrinitarianAttributes.lean#L2304) | `theorem ofGround_leaves_nothing_ungrounded (e : Entity) (_hAct : ActualEntity e)` | {Means, NecessarySubjectKind, Subject}  |
-| `self_donation_needs_no_personhood_of_the_ground` | theorem | [L2413](formal/Logos/DivineTrinitarianAttributes.lean#L2413) | `theorem self_donation_needs_no_personhood_of_the_ground : ¬ Asiety Entity.ofGrou` | {AxAgapeEssence, Means, Subject, CL} → C578 |
-| `the_ground_is_not_void_of_personhood` | theorem | [L2537](formal/Logos/DivineTrinitarianAttributes.lean#L2537) | `theorem the_ground_is_not_void_of_personhood : PersonalGround Entity.ofGround wh` | {Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
-| `trinitarianPersonalGround_summary` | theorem | [L2545](formal/Logos/DivineTrinitarianAttributes.lean#L2545) | `theorem trinitarianPersonalGround_summary : (∀ e : Entity, GroundByBeing Entity.` | {Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
+| `GroundByBeing` | def | [L2263](formal/Logos/DivineTrinitarianAttributes.lean#L2263) | `def GroundByBeing (g e : Entity) : Prop` | {NecessarySubjectKind, Subject}  |
+| `Perichoretic` | def | [L2482](formal/Logos/DivineTrinitarianAttributes.lean#L2482) | `def Perichoretic (g : Entity) (a b c : Subject) : Prop` | {Means, Subject}  |
+| `PersonalGround` | structure | [L2525](formal/Logos/DivineTrinitarianAttributes.lean#L2525) | `structure PersonalGround (g : Entity) : Prop where` | —  |
+| `ground_is_not_a_fourth_chooser` | theorem | [L2376](formal/Logos/DivineTrinitarianAttributes.lean#L2376) | `theorem ground_is_not_a_fourth_chooser : ¬ Asiety Entity.ofGround` | {Means, Subject}  |
+| `ground_scope_does_contain_incompatibles` | theorem | [L2327](formal/Logos/DivineTrinitarianAttributes.lean#L2327) | `theorem ground_scope_does_contain_incompatibles : ∃ p q : Prop, EntityMeans Enti` | {Means, Subject}  |
+| `no_person_is_the_ground` | theorem | [L2432](formal/Logos/DivineTrinitarianAttributes.lean#L2432) | `theorem no_person_is_the_ground (s : Subject) : ¬ (Entity.ofGround = EntityOf s)` | {Subject}  |
+| `ofGround_grounds_every_being_by_presence` | theorem | [L2274](formal/Logos/DivineTrinitarianAttributes.lean#L2274) | `theorem ofGround_grounds_every_being_by_presence (e : Entity) : GroundByBeing En` | {NecessarySubjectKind, Subject}  |
+| `ofGround_grounds_every_person` | theorem | [L2290](formal/Logos/DivineTrinitarianAttributes.lean#L2290) | `theorem ofGround_grounds_every_person (s : Subject) (_hP : Person s) : OneEssenc` | {Means, Subject, Will, subjectWill}  |
+| `ofGround_is_perichoretic` | theorem | [L2499](formal/Logos/DivineTrinitarianAttributes.lean#L2499) | `theorem ofGround_is_perichoretic (a b c : Subject) (ha : Person a) (hb : Person ` | {Means, Subject, Will, subjectWill}  |
+| `ofGround_leaves_nothing_ungrounded` | theorem | [L2305](formal/Logos/DivineTrinitarianAttributes.lean#L2305) | `theorem ofGround_leaves_nothing_ungrounded (e : Entity) (_hAct : ActualEntity e)` | {Means, NecessarySubjectKind, Subject}  |
+| `self_donation_needs_no_personhood_of_the_ground` | theorem | [L2414](formal/Logos/DivineTrinitarianAttributes.lean#L2414) | `theorem self_donation_needs_no_personhood_of_the_ground : ¬ Asiety Entity.ofGrou` | {AxAgapeEssence, Means, Subject, CL} → C578 |
+| `the_ground_is_not_void_of_personhood` | theorem | [L2538](formal/Logos/DivineTrinitarianAttributes.lean#L2538) | `theorem the_ground_is_not_void_of_personhood : PersonalGround Entity.ofGround wh` | {Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
+| `trinitarianPersonalGround_summary` | theorem | [L2546](formal/Logos/DivineTrinitarianAttributes.lean#L2546) | `theorem trinitarianPersonalGround_summary : (∀ e : Entity, GroundByBeing Entity.` | {Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
 
 ### `Logos.TrinitarianSubjectBridge`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `DivineRole` | inductive | [L2732](formal/Logos/DivineTrinitarianAttributes.lean#L2732) | `inductive DivineRole where` | —  |
-| `DivineRole.source_ne_spirit` | theorem | [L2753](formal/Logos/DivineTrinitarianAttributes.lean#L2753) | `theorem DivineRole.source_ne_spirit : DivineRole.source ≠ DivineRole.spirit` | {}  |
-| `DivineRole.source_ne_word` | theorem | [L2745](formal/Logos/DivineTrinitarianAttributes.lean#L2745) | `theorem DivineRole.source_ne_word : DivineRole.source ≠ DivineRole.word` | {}  |
-| `DivineRole.word_ne_spirit` | theorem | [L2749](formal/Logos/DivineTrinitarianAttributes.lean#L2749) | `theorem DivineRole.word_ne_spirit : DivineRole.word ≠ DivineRole.spirit` | {}  |
-| `DivineSubjectRole` | axiom | [L2773](formal/Logos/DivineTrinitarianAttributes.lean#L2773) | `axiom DivineSubjectRole : Subject → DivineRole` | {DivineSubjectRole, Subject}  |
-| `TrinitarianPersonalBridge` | axiom | [L2834](formal/Logos/DivineTrinitarianAttributes.lean#L2834) | `axiom TrinitarianPersonalBridge : ∃ a b c : Subject, DivineSubjectRole a = Divin` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
-| `d3s_antecedent_cannot_fire_on_the_impersonal` | theorem | [L3062](formal/Logos/DivineTrinitarianAttributes.lean#L3062) | `theorem d3s_antecedent_cannot_fire_on_the_impersonal : (∀ (e : Entity), e = Enti` | {Means, Subject, CL}  |
-| `no_divine_person_is_the_ground` | theorem | [L2958](formal/Logos/DivineTrinitarianAttributes.lean#L2958) | `theorem no_divine_person_is_the_ground (s : Subject) : EntityOf s ≠ Entity.ofGro` | {Subject}  |
-| `one_necessary_ground_three_free_necessary_persons` | theorem | [L3002](formal/Logos/DivineTrinitarianAttributes.lean#L3002) | `theorem one_necessary_ground_three_free_necessary_persons : NecessaryGroundOfRea` | {GroundTranscendence, TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
-| `person_is_freeSubject` | theorem | [L2884](formal/Logos/DivineTrinitarianAttributes.lean#L2884) | `theorem person_is_freeSubject (s : Subject) (h : Person s) : FreeSubject s` | {Means, Subject, Will, subjectWill}  |
-| `role_exhausts_the_sort` | theorem | [L2779](formal/Logos/DivineTrinitarianAttributes.lean#L2779) | `theorem role_exhausts_the_sort (r : DivineRole) : r = DivineRole.source ∨ r = Di` | {CL}  |
-| `roles_make_the_three_persons_distinct` | theorem | [L2916](formal/Logos/DivineTrinitarianAttributes.lean#L2916) | `theorem roles_make_the_three_persons_distinct {a b c : Subject} (ha : DivineSubj` | {DivineSubjectRole, Subject}  |
-| `s4_does_not_make_the_ground_a_fourth_chooser` | theorem | [L3086](formal/Logos/DivineTrinitarianAttributes.lean#L3086) | `theorem s4_does_not_make_the_ground_a_fourth_chooser : ¬ Asiety Entity.ofGround` | {Means, Subject}  |
-| `the_bridge_asserts_freedom_independently_of_groundsRightWrong` | theorem | [L3074](formal/Logos/DivineTrinitarianAttributes.lean#L3074) | `theorem the_bridge_asserts_freedom_independently_of_groundsRightWrong : (∃ a b c` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
-| `the_three_persons_freedom_is_asserted_not_earned` | theorem | [L3045](formal/Logos/DivineTrinitarianAttributes.lean#L3045) | `theorem the_three_persons_freedom_is_asserted_not_earned : (∃ a b c : Subject, F` | {BoundedMeaningRequiresFreeSubject, TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
-| `the_three_persons_share_the_one_ground` | theorem | [L2942](formal/Logos/DivineTrinitarianAttributes.lean#L2942) | `theorem the_three_persons_share_the_one_ground : ∃ a b c : Subject, Person a ∧ P` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
-| `three_divine_persons_are_free_subjects` | theorem | [L2874](formal/Logos/DivineTrinitarianAttributes.lean#L2874) | `theorem three_divine_persons_are_free_subjects : ∃ a b c : Subject, FreeSubject ` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
-| `three_divine_persons_are_necessary` | theorem | [L2889](formal/Logos/DivineTrinitarianAttributes.lean#L2889) | `theorem three_divine_persons_are_necessary : ∃ a b c : Subject, NecessarySubject` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
-| `three_divine_persons_are_persons` | theorem | [L2860](formal/Logos/DivineTrinitarianAttributes.lean#L2860) | `theorem three_divine_persons_are_persons : ∃ a b c : Subject, Person a ∧ Person ` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
-| `three_divine_persons_exhaust_the_necessary_kind` | theorem | [L2902](formal/Logos/DivineTrinitarianAttributes.lean#L2902) | `theorem three_divine_persons_exhaust_the_necessary_kind : ∃ a b c : Subject, Per` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
-| `three_divine_persons_exist_with_roles` | theorem | [L2848](formal/Logos/DivineTrinitarianAttributes.lean#L2848) | `theorem three_divine_persons_exist_with_roles : ∃ a b c : Subject, DivineSubject` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
+| `DivineRole` | inductive | [L2733](formal/Logos/DivineTrinitarianAttributes.lean#L2733) | `inductive DivineRole where` | —  |
+| `DivineRole.source_ne_spirit` | theorem | [L2754](formal/Logos/DivineTrinitarianAttributes.lean#L2754) | `theorem DivineRole.source_ne_spirit : DivineRole.source ≠ DivineRole.spirit` | {}  |
+| `DivineRole.source_ne_word` | theorem | [L2746](formal/Logos/DivineTrinitarianAttributes.lean#L2746) | `theorem DivineRole.source_ne_word : DivineRole.source ≠ DivineRole.word` | {}  |
+| `DivineRole.word_ne_spirit` | theorem | [L2750](formal/Logos/DivineTrinitarianAttributes.lean#L2750) | `theorem DivineRole.word_ne_spirit : DivineRole.word ≠ DivineRole.spirit` | {}  |
+| `DivineSubjectRole` | axiom | [L2774](formal/Logos/DivineTrinitarianAttributes.lean#L2774) | `axiom DivineSubjectRole : Subject → DivineRole` | {DivineSubjectRole, Subject}  |
+| `TrinitarianPersonalBridge` | axiom | [L2835](formal/Logos/DivineTrinitarianAttributes.lean#L2835) | `axiom TrinitarianPersonalBridge : ∃ a b c : Subject, DivineSubjectRole a = Divin` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
+| `d3s_antecedent_cannot_fire_on_the_impersonal` | theorem | [L3063](formal/Logos/DivineTrinitarianAttributes.lean#L3063) | `theorem d3s_antecedent_cannot_fire_on_the_impersonal : (∀ (e : Entity), e = Enti` | {Means, Subject, CL}  |
+| `no_divine_person_is_the_ground` | theorem | [L2959](formal/Logos/DivineTrinitarianAttributes.lean#L2959) | `theorem no_divine_person_is_the_ground (s : Subject) : EntityOf s ≠ Entity.ofGro` | {Subject}  |
+| `one_necessary_ground_three_free_necessary_persons` | theorem | [L3003](formal/Logos/DivineTrinitarianAttributes.lean#L3003) | `theorem one_necessary_ground_three_free_necessary_persons : NecessaryGroundOfRea` | {GroundTranscendence, TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
+| `person_is_freeSubject` | theorem | [L2885](formal/Logos/DivineTrinitarianAttributes.lean#L2885) | `theorem person_is_freeSubject (s : Subject) (h : Person s) : FreeSubject s` | {Means, Subject, Will, subjectWill}  |
+| `role_exhausts_the_sort` | theorem | [L2780](formal/Logos/DivineTrinitarianAttributes.lean#L2780) | `theorem role_exhausts_the_sort (r : DivineRole) : r = DivineRole.source ∨ r = Di` | {CL}  |
+| `roles_make_the_three_persons_distinct` | theorem | [L2917](formal/Logos/DivineTrinitarianAttributes.lean#L2917) | `theorem roles_make_the_three_persons_distinct {a b c : Subject} (ha : DivineSubj` | {DivineSubjectRole, Subject}  |
+| `s4_does_not_make_the_ground_a_fourth_chooser` | theorem | [L3087](formal/Logos/DivineTrinitarianAttributes.lean#L3087) | `theorem s4_does_not_make_the_ground_a_fourth_chooser : ¬ Asiety Entity.ofGround` | {Means, Subject}  |
+| `the_bridge_asserts_freedom_independently_of_groundsRightWrong` | theorem | [L3075](formal/Logos/DivineTrinitarianAttributes.lean#L3075) | `theorem the_bridge_asserts_freedom_independently_of_groundsRightWrong : (∃ a b c` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
+| `the_three_persons_freedom_is_asserted_not_earned` | theorem | [L3046](formal/Logos/DivineTrinitarianAttributes.lean#L3046) | `theorem the_three_persons_freedom_is_asserted_not_earned : (∃ a b c : Subject, F` | {BoundedMeaningRequiresFreeSubject, TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
+| `the_three_persons_share_the_one_ground` | theorem | [L2943](formal/Logos/DivineTrinitarianAttributes.lean#L2943) | `theorem the_three_persons_share_the_one_ground : ∃ a b c : Subject, Person a ∧ P` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
+| `three_divine_persons_are_free_subjects` | theorem | [L2875](formal/Logos/DivineTrinitarianAttributes.lean#L2875) | `theorem three_divine_persons_are_free_subjects : ∃ a b c : Subject, FreeSubject ` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
+| `three_divine_persons_are_necessary` | theorem | [L2890](formal/Logos/DivineTrinitarianAttributes.lean#L2890) | `theorem three_divine_persons_are_necessary : ∃ a b c : Subject, NecessarySubject` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
+| `three_divine_persons_are_persons` | theorem | [L2861](formal/Logos/DivineTrinitarianAttributes.lean#L2861) | `theorem three_divine_persons_are_persons : ∃ a b c : Subject, Person a ∧ Person ` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
+| `three_divine_persons_exhaust_the_necessary_kind` | theorem | [L2903](formal/Logos/DivineTrinitarianAttributes.lean#L2903) | `theorem three_divine_persons_exhaust_the_necessary_kind : ∃ a b c : Subject, Per` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
+| `three_divine_persons_exist_with_roles` | theorem | [L2849](formal/Logos/DivineTrinitarianAttributes.lean#L2849) | `theorem three_divine_persons_exist_with_roles : ∃ a b c : Subject, DivineSubject` | {TrinitarianPersonalBridge, DivineSubjectRole, Means, NecessarySubjectKind, Subject, Will, subjectWill}  |
 
 ### `Logos.TrinitySeparations`
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `agape_and_word_without_spirit_is_binitarian` | theorem | [L2124](formal/Logos/DivineTrinitarianAttributes.lean#L2124) | `theorem agape_and_word_without_spirit_is_binitarian : ∃ (β : Type) (Sub : β → Pr` | {} → C514 |
-| `attribute_love_gives_no_subsistent_word` | theorem | [L2098](formal/Logos/DivineTrinitarianAttributes.lean#L2098) | `theorem attribute_love_gives_no_subsistent_word : ∃ (β : Type) (Sub : β → Prop) ` | {} → C513 |
-| `creature_love_gives_no_divine_beloved` | theorem | [L2072](formal/Logos/DivineTrinitarianAttributes.lean#L2072) | `theorem creature_love_gives_no_divine_beloved : ∃ (β : Type) (Sub Crt : β → Prop` | {} → C512 |
-| `unitarian_self_love_gives_no_second_centre` | theorem | [L2045](formal/Logos/DivineTrinitarianAttributes.lean#L2045) | `theorem unitarian_self_love_gives_no_second_centre : ∃ (β : Type) (Sub : β → Pro` | {} → C511 |
+| `agape_and_word_without_spirit_is_binitarian` | theorem | [L2125](formal/Logos/DivineTrinitarianAttributes.lean#L2125) | `theorem agape_and_word_without_spirit_is_binitarian : ∃ (β : Type) (Sub : β → Pr` | {} → C514 |
+| `attribute_love_gives_no_subsistent_word` | theorem | [L2099](formal/Logos/DivineTrinitarianAttributes.lean#L2099) | `theorem attribute_love_gives_no_subsistent_word : ∃ (β : Type) (Sub : β → Prop) ` | {} → C513 |
+| `creature_love_gives_no_divine_beloved` | theorem | [L2073](formal/Logos/DivineTrinitarianAttributes.lean#L2073) | `theorem creature_love_gives_no_divine_beloved : ∃ (β : Type) (Sub Crt : β → Prop` | {} → C512 |
+| `unitarian_self_love_gives_no_second_centre` | theorem | [L2046](formal/Logos/DivineTrinitarianAttributes.lean#L2046) | `theorem unitarian_self_love_gives_no_second_centre : ∃ (β : Type) (Sub : β → Pro` | {} → C511 |
 
 ### `Logos.TwoNecessaryPersonalCentres`
 
@@ -4985,14 +4963,14 @@ A definitional stipulation settles a philosophical question by fiat in a match a
 
 | Name | Kind | Line | Statement (logic) | Axioms |
 |---|---|---|---|---|
-| `HostileModel` | def | [L60](formal/Logos/WillIndividuationAudit.lean#L60) | `def HostileModel : PreWillSpine` | {}  |
-| `NegWillIndividuation` | def | [L54](formal/Logos/WillIndividuationAudit.lean#L54) | `def NegWillIndividuation (S : PreWillSpine) : Prop` | {}  |
-| `PreWillDatumHolds` | def | [L44](formal/Logos/WillIndividuationAudit.lean#L44) | `def PreWillDatumHolds (S : PreWillSpine) : Prop` | {}  |
-| `PreWillSpine` | structure | [L35](formal/Logos/WillIndividuationAudit.lean#L35) | `structure PreWillSpine where` | —  |
-| `WillIndividuationStatement` | def | [L49](formal/Logos/WillIndividuationAudit.lean#L49) | `def WillIndividuationStatement (S : PreWillSpine) : Prop` | {}  |
-| `hostile_model_refutes_will_individuation` | theorem | [L79](formal/Logos/WillIndividuationAudit.lean#L79) | `theorem hostile_model_refutes_will_individuation : WillIndividuationStatement Ho` | {}  |
-| `hostile_model_satisfies_prewill_spine` | theorem | [L71](formal/Logos/WillIndividuationAudit.lean#L71) | `theorem hostile_model_satisfies_prewill_spine : PreWillDatumHolds HostileModel` | {}  |
-| `will_individuation_not_forced_by_prewill_spine` | theorem | [L91](formal/Logos/WillIndividuationAudit.lean#L91) | `theorem will_individuation_not_forced_by_prewill_spine : ∃ S : PreWillSpine, Pre` | {}  |
+| `HostileModel` | def | [L79](formal/Logos/AgencyAuditsAndFrontiers.lean#L79) | `def HostileModel : PreWillSpine` | {}  |
+| `NegWillIndividuation` | def | [L73](formal/Logos/AgencyAuditsAndFrontiers.lean#L73) | `def NegWillIndividuation (S : PreWillSpine) : Prop` | {}  |
+| `PreWillDatumHolds` | def | [L63](formal/Logos/AgencyAuditsAndFrontiers.lean#L63) | `def PreWillDatumHolds (S : PreWillSpine) : Prop` | {}  |
+| `PreWillSpine` | structure | [L54](formal/Logos/AgencyAuditsAndFrontiers.lean#L54) | `structure PreWillSpine where` | —  |
+| `WillIndividuationStatement` | def | [L68](formal/Logos/AgencyAuditsAndFrontiers.lean#L68) | `def WillIndividuationStatement (S : PreWillSpine) : Prop` | {}  |
+| `hostile_model_refutes_will_individuation` | theorem | [L98](formal/Logos/AgencyAuditsAndFrontiers.lean#L98) | `theorem hostile_model_refutes_will_individuation : WillIndividuationStatement Ho` | {}  |
+| `hostile_model_satisfies_prewill_spine` | theorem | [L90](formal/Logos/AgencyAuditsAndFrontiers.lean#L90) | `theorem hostile_model_satisfies_prewill_spine : PreWillDatumHolds HostileModel` | {}  |
+| `will_individuation_not_forced_by_prewill_spine` | theorem | [L110](formal/Logos/AgencyAuditsAndFrontiers.lean#L110) | `theorem will_individuation_not_forced_by_prewill_spine : ∃ S : PreWillSpine, Pre` | {}  |
 
 </details>
 

@@ -10,7 +10,7 @@ import Logos.PersonhoodOntologyAudit
 import Logos.Plurality
 import Logos.RecoveredOntologicalGround
 import Logos.Semantics
-import Logos.TheologicalModalHardening
+import Logos.ModalCreationFrontiers
 import Logos.Value
 
 /-!

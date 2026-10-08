@@ -1,11 +1,11 @@
 import Logos.Agency
 import Logos.Choice
 import Logos.Core
-import Logos.DeepModalFrontier
+import Logos.ModalCreationFrontiers
 import Logos.Entity
 import Logos.Love
 import Logos.Modal
-import Logos.ModalPossibilityFrontier
+-- ModalPossibilityFrontier consolidated into ModalCreationFrontiers
 import Logos.Necessity
 import Logos.NegativeRetorsionAudit
 import Logos.PersonalGroundOfReality
@@ -13,7 +13,7 @@ import Logos.PersonalNormativeGround
 import Logos.Plurality
 import Logos.RecoveredOntologicalGround
 import Logos.Semantics
-import Logos.TheologicalModalHardening
+-- TheologicalModalHardening consolidated into ModalCreationFrontiers
 
 /-!
 ================================================================================

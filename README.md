@@ -16,8 +16,8 @@
 - a **backticked name** is the Lean declaration that verifies the line; footers like
   `✅ · File.lean#name` link to it under `formal/Logos/`.
 - each section reads: claim → the skeptic's move → the reply → one theorem row.
-- the chain `Order ⇒ Meaning ⇒ Free Subject ⇒ Person` is the same argument the numbered
-  sections build link by link; the earlier *deontic* route is kept whole in the ledger.
+- the chain `Well-Foundedness ⇒ Ultimate Source ⇒ Agential Ancestry ⇒ Accessible Alternative ⇒ Libertarian Choice ⇒ Free Will ⇒ Free Subject` is the same argument the numbered
+  sections build link by link; the earlier epistemic meaning and deontic routes are kept whole in the ledger.
 
 **Badge legend.** Every icon on a formal consequence is machine-derived from
 the Lean kernel (see `formal/GAPMAP.md` and the investigations) — never transcribed:
@@ -76,434 +76,285 @@ One row per step, every status derived from the kernel — never transcribed. Cl
 
 | # | Step | Core formula | Derived status |
 |---|---|---|---|
-| **1** | **SATISFACTION** — Satisfaction Is Free | `¬N_T ∧ ¬N_F · bivalence: ∀ p, T p ∨ IsFalse p` | ✅ **PROVEN** · 0 substantive axioms · [Core.lean#rightWrongDistinction](formal/Logos/Core.lean#L145), footprint {} |
-| **2** | **DISCLOSURE** — Being True Is Being True To Someone | `Correct s p → TrueTo s p → T p,  where TrueTo s p := Means s p ∧ T p` | ✅ **PROVEN** · 0 substantive axioms · [EpistemicNecessity.lean#being_true_is_being_true_to](formal/Logos/EpistemicNecessity.lean#L406), footprint {Initiates, Means, State, Subject} |
-| **3** | **MEANING** — Right and Wrong Cannot Obtain Without Meaning | `(∃ s p, Correct s p) ∨ (∃ s p, Incorrect s p) → ∃ p, Meaning_I p` | ✅ **PROVEN** · 0 substantive axioms · [Order.lean#rightWrong_implies_meaning](formal/Logos/Order.lean#L89), footprint {Initiates, Means, State, Subject} |
-| **4** | **SUBJECT** — Meaning Requires a Subject | `Meaning_I p → ∃ s, Means s p` | ✅ **PROVEN** · 0 substantive axioms · [Choice.lean#meaning_I_needs_subject](formal/Logos/Choice.lean#L150), footprint {Means, Subject} |
-| **5** | **INCOMPATIBILITY** — The Two Poles Cannot Both Be Correct | `Incompatible (Correct s p) (Incorrect s p)` | ✅ **PROVEN** · 0 substantive axioms · [NormativeOrder.lean#correctness_incompatible](formal/Logos/NormativeOrder.lean#L135), footprint {Initiates, Means, State, Subject} |
-| **6** | **FREE WILL** — Co-Meaning Both Poles Is Free Will | `ClaimsNormativeCorrectness s p → Chooses s (Correct s p) (Incorrect s p) ∧ FreeWill s` | ✅ **PROVEN** · 0 substantive axioms · [NormativeOrder.lean#claims_normative_correctness_derives_free_will](formal/Logos/NormativeOrder.lean#L190), footprint {Initiates, Means, State, Subject, CL} |
-| **7** | **PERSON** — Free Will Is a Person | `FreeWill s → Person s` | ✅ **PROVEN** · 0 substantive axioms · [Person.lean#freeWill_implies_person](formal/Logos/Person.lean#L135), footprint {Means, Subject, Will, subjectWill, will_individuation} |
-| **8** | **GROUNDING** — That Person Grounds the Poles | `GroundsRightWrongAt s (Correct s p) (Incorrect s p) ∧ Person s` | ✅ **PROVEN** · 0 substantive axioms · [EpistemicPersonalGround.lean#epistemic_polarity_is_personally_grounded](formal/Logos/EpistemicPersonalGround.lean#L107), footprint {Initiates, Means, State, Subject, CL} |
-| **9** | **THE FACT** — The Fact | `ClaimsNormativeCorrectness s p → (∃ w, w = subjectWill s) ∧ FreeWill s ∧ FreeSubject s ∧ Person s ∧ Means s (C` | ✅ **PROVEN** · 0 substantive axioms · [EpistemicNecessity.lean#epistemic_right_wrong_requires_a_free_being_for_which_meaning_can_mean](formal/Logos/EpistemicNecessity.lean#L107), footprint {Initiates, Means, State, Subject, Will, subjectWill, will_individuation, CL} |
-| **10** | **THE CHAIN, COMPOSED** — The Chain, Composed — Both Directions | `¬(∃ s, Means s p) → ¬(∃ s p, Correct s p) ∧ ¬(∃ s p, Incorrect s p)` | ✅ **PROVEN** · 0 substantive axioms · [EpistemicNecessity.lean#no_subject_who_means_no_epistemic_right_wrong](formal/Logos/EpistemicNecessity.lean#L328), footprint {Initiates, Means, State, Subject} |
+| **1** | **WELL-FOUNDEDNESS** — Well-Foundedness of Constitutive Determination | `WellFounded D.Prior` | ✅ **PROVEN** · 0 substantive axioms · [CompleteLibertarianFreedomArgument.lean#well_foundedness](formal/Logos/CompleteLibertarianFreedomArgument.lean#L605), footprint {} |
+| **2** | **ULTIMATE SOURCE** — Existence of an Ultimate Internal Source | `∃ a, UltimateInternalSource J.toDeterminationSystem a ∧ (a = x ∨ DeterminesAncestrally J.Determines a x)` | ✅ **PROVEN** · 0 substantive axioms · [CompleteLibertarianFreedomArgument.lean#exists_ultimate_source](formal/Logos/CompleteLibertarianFreedomArgument.lean#L612), footprint {CL} |
+| **3** | **JUDGMENT ACT SOURCE** — The Judgment Act Reaches an Ultimate Internal Source | `∃ a, UltimateInternalSource J.toDeterminationSystem a ∧ (a = J.judgmentActNode ∨ DeterminesAncestrally J.Deter` | ✅ **PROVEN** · 0 substantive axioms · [CompleteLibertarianFreedomArgument.lean#ultimate_source_reaches_judgment_act](formal/Logos/CompleteLibertarianFreedomArgument.lean#L623), footprint {CL} |
+| **4** | **AGENTIAL ANCESTRY** — Agential Ancestry of Judgment Determination | `J.IsActOf s a` | ✅ **PROVEN** · 0 substantive axioms · [CompleteLibertarianFreedomArgument.lean#ultimate_source_is_agential](formal/Logos/CompleteLibertarianFreedomArgument.lean#L633), footprint {} |
+| **5** | **NON-RECEIVED DETERMINATION** — Ultimate Act Source Is Not Determined by Prior State | `¬ DeterminationReceivedFromPriorState J a` | ✅ **PROVEN** · 0 substantive axioms · [CompleteLibertarianFreedomArgument.lean#ultimate_source_is_not_received_from_prior_state](formal/Logos/CompleteLibertarianFreedomArgument.lean#L644), footprint {} |
+| **6** | **ACCESSIBLE ALTERNATIVE** — Accessible Alternative Under Same Complete Prior State | `∃ w', C.Accessible w w' ∧ C.SameCompletePriorState w w' ∧ J.OutcomeOf a w' ≠ J.OutcomeOf a w` | ✅ **PROVEN** · 0 substantive axioms · [CompleteLibertarianFreedomArgument.lean#accessible_same_past_alternative_exists](formal/Logos/CompleteLibertarianFreedomArgument.lean#L656), footprint {CL} |
+| **7** | **VERDICT DIVERGENCE** — Divergence at Source Propagates to Judgment Verdict | `J.OutcomeOf J.verdictNode w' ≠ J.OutcomeOf J.verdictNode w` | ✅ **PROVEN** · 0 substantive axioms · [CompleteLibertarianFreedomArgument.lean#alternative_changes_verdict](formal/Logos/CompleteLibertarianFreedomArgument.lean#L674), footprint {} |
+| **8** | **LIBERTARIAN CHOICE** — Verdict Divergence Yields Libertarian Free Choice | `LibertarianFreeChoiceAt C s w p` | ✅ **PROVEN** · 0 substantive axioms · [CompleteLibertarianFreedomArgument.lean#libertarian_free_choice](formal/Logos/CompleteLibertarianFreedomArgument.lean#L694), footprint {CL} |
+| **9** | **FREE WILL** — Libertarian Choice Constitutes Free Will | `FreeWillAt C s w` | ✅ **PROVEN** · 0 substantive axioms · [CompleteLibertarianFreedomArgument.lean#free_will](formal/Logos/CompleteLibertarianFreedomArgument.lean#L712), footprint {CL} |
+| **10** | **FREE SUBJECT** — Free Will Concludes the Free Subject | `FreeSubject C s` | ✅ **PROVEN** · 0 substantive axioms · [CompleteLibertarianFreedomArgument.lean#complete_libertarian_freedom_argument](formal/Logos/CompleteLibertarianFreedomArgument.lean#L2352), footprint {CL} |
 
 Edges are typed, and the two directions are not the same move: **[distinction]** separates levels, **[discovery]** carries the chain forward, and **[grounding]** is the person→pole dependence. [Part III](#sec-part-iii-the-refutations-every-branch-of-the-denial-read) the thing by retorsion.
 
 ### The shared vocabulary of the ten steps
 
-7 symbols are used by more than one step, so they are defined once here and cross-referenced below rather than restated under each step that uses them. A symbol only one step uses is defined in that step's own vocabulary block. Between them they run from step 1 to step 10.
+5 symbols are used by more than one step, so they are defined once here and cross-referenced below rather than restated under each step that uses them. A symbol only one step uses is defined in that step's own vocabulary block. Between them they run from step 1 to step 10.
 
-▸ Correct Correctness: a subject's act of judging p is correct iff p is true.
-        ∴ Correct ≡ A(s, p) ∧ T(p)
-        ↳ used at steps 2, 5, 6, 8, 9, 10 · 📘 [Order.lean#Correct](formal/Logos/Order.lean#L29)
-
-
-▸ Incorrect Incorrectness: a subject's act of *meaning* p is incorrect iff p is false.
-        ∴ Incorrect ≡ A(s, p) ∧ IsFalse(p)
-        ↳ used at steps 5, 6, 8, 9, 10 · 📘 [Order.lean#Incorrect](formal/Logos/Order.lean#L49)
+▸ D The disconnection thesis: propositional correctness has nothing to do with reality.
+        ∴ D ≡ ¬∀ s, p, Correct(s, p) → p
+        ↳ used at steps 1, 2, 3 · 📘 [RealityHookAudit.lean#D](formal/Logos/RealityHookAudit.lean#L97)
 
 
-▸ Person Person: an individual substance of a rational nature, possessed of dominion over its own acts (Boethius; Aquinas, ST I q.29 a.3).
-        ∴ Person ≡ ThomisticPersonCore(s)
-        ↳ used at steps 7, 8, 9 · 📘 [Person.lean#Person](formal/Logos/Person.lean#L127)
+▸ FreeWillAt World-Slice Free Will: At world `w`, subject `s` exercises choice between some incompatible alternatives.
+        ∴ FreeWillAt ≡ ∃ p, q, ChoosesAt World Subject(MeansAt) w s p q
+        ↳ used at steps 9, 10 · 📘 [ModalCreationFrontiers.lean#FreeWillAt](formal/Logos/ModalCreationFrontiers.lean#L849)
 
 
-▸ FreeWill [the definitions census in the ledger](#sec-where-the-rest-of-the-ledger-lives) — freedom (DEFINITION; freedom/choice fix, 2026-09-18): a subject is free iff it genuinely chooses between some incompatible pair.
-        ∴ FreeWill ≡ ∃ p, q, Chooses(s, p, q)
-        ↳ used at steps 6, 9 · 📘 [Choice.lean#FreeWill](formal/Logos/Choice.lean#L188)
+▸ Subject Vocabulary: the pure sort of subjects — that which performs acts of reasoning.
+        ↳ used at steps 6, 8 · 📘 [Agency.lean#Subject](formal/Logos/Agency.lean#L49)
 
 
-▸ Meaning_I `Meaning_I p`: intentional meaning — some subject means `p` (base.txt §11).
-        ∴ Meaning_I ≡ ∃ s, Means(s, p)
-        ↳ used at steps 3, 4 · 📘 [Choice.lean#Meaning_I](formal/Logos/Choice.lean#L142)
+▸ World A possible world is a valuation of all atoms.
+        ↳ used at steps 5, 6 · 📘 [Semantics.lean#World](formal/Logos/Semantics.lean#L41)
 
 
-▸ Means Vocabulary: the meaning-act relation — a subject means a proposition.
-        ↳ used at steps 4, 9 · 📘 [Agency.lean#Means](formal/Logos/Agency.lean#L92)
-
-
-▸ T Truth, *defined* as identity (E0): `T p` is `p` itself.
-        ∴ T ≡ p
-        ↳ used at steps 1, 2 · 📘 [Core.lean#T](formal/Logos/Core.lean#L40)
+▸ actualWorld The actual world valuation: all atoms true.
+        ∴ actualWorld ≡ fun _ => t
+        ↳ used at steps 6, 10 · 📘 [Entity.lean#actualWorld](formal/Logos/Entity.lean#L34)
 
 ---
 
 <a id="step-1"></a>
-### Step 1 — Satisfaction Is Free
+### Step 1 — Well-Foundedness of Constitutive Determination
 
-Right and wrong both obtain, and every proposition is either the case or not — with no subject anywhere in either statement. The denial of the person is available at exactly this level, so the argument must earn the next step rather than assume it.
+The priority relation in constitutive determination is well-founded (`well_foundedness`), precluding an infinite regress of prior determinants.
 
 DEPENDS ON   — this is the first step
-GIVES        satisfaction is free; disclosure is not, taken up by step 2
+GIVES        well-founded priority yields an ultimate internal source, taken up by step 2
 KILLS        [`R1`](#r1)
 
-> ⚠️ **Price disclosed —** 0 substantive axioms. The concession costs nothing.
-
-*(Detailed technical proof & model analysis: [investigations/right-and-wrong.md](investigations/right-and-wrong.md))*
-
-> **The skeptic tries —** "Satisfaction needs nobody — on your own first line nothing binds you to a person."
-> **The reply —** Agreed — and that is the point: satisfaction is free, disclosure is *to* someone. The poles are act-level, so the order is a structure someone stands in.
-
-**Vocabulary of this step** — 3 defined here, 1 above
-
-▸ IsFalse Falsity under bivalence: a proposition is false iff it is not true.
-        ∴ IsFalse ≡ ¬T(p)
-        📘 [Core.lean#IsFalse](formal/Logos/Core.lean#L52)
-
-▸ N_F N_F := "no proposition is false" (bivalence: falsity is untruth).
-        ∴ N_F ≡ ∀ p, T(p)
-        📘 [Core.lean#N_F](formal/Logos/Core.lean#L49)
-
-▸ N_T N_T := "no proposition is true".
-        ∴ N_T ≡ ∀ p, ¬T(p)
-        📘 [Core.lean#N_T](formal/Logos/Core.lean#L46)
-
-↳ Already defined above — `T` in the shared vocabulary.
-
-Right and wrong both obtain: it is false that nothing is true, and false that everything is true.
-
-    ∴ ¬N_T ∧ ¬N_F
-
-✅ · [Core.lean#rightWrongDistinction](formal/Logos/Core.lean#L145)
-
-Every proposition is either true or false.
-
-    ∴ ∀ p, T(p) ∨ IsFalse(p)
-
-✅ · [Core.lean#bivalence](formal/Logos/Core.lean#L195)
-
-<a id="step-2"></a>
-### Step 2 — Being True Is Being True To Someone
-
-Disclosure is right/wrong **to** someone: `Correct → TrueTo → T`, where `TrueTo s p := Means s p ∧ T p`. The epistemic poles are act-level, so the order already carries a subject in its definition. Satisfaction is free; being-true is not.
-
-DEPENDS ON   step 1: satisfaction is free; disclosure is not
-GIVES        right/wrong is right/wrong-to-someone, taken up by step 3
-KILLS        [`R9`](#r9), [`R10`](#r10)
-
-> ⚠️ **Price disclosed —** 0 substantive axioms.
-
-*(Detailed technical proof & model analysis: [investigations/right-and-wrong.md](investigations/right-and-wrong.md))*
-
-> **The skeptic tries —** "Truth-to-a-subject is just truth with a subject smuggled in."
-> **The reply —** A definition, not an assumption — and the derivation runs from the personless order to the personful consequence. Read the next two steps before answering.
-
-**Vocabulary of this step** — 2 defined here, 2 above
-
-▸ A Legacy alias for Act across the library.
-        📘 [Agency.lean#A](formal/Logos/Agency.lean#L178)
-
-▸ TrueTo Truth-to-a-subject: `p` is true *to* `s` — meant by `s`, and the case.
-        ∴ TrueTo ≡ Means(s, p) ∧ T(p)
-        📘 [EpistemicNecessity.lean#TrueTo](formal/Logos/EpistemicNecessity.lean#L395)
-
-↳ Already defined above — `Correct`, `T` in the shared vocabulary.
-
-**The alethic chain: judging rightly is being-true, being-true is being-the-case.** `Correct s p → TrueTo s p` (drop the `Initiates` horn of the act) and `TrueTo s p → T p` (drop the meaning). So correctness entails truth-to, and truth-to entails truth — while the converses fail: `T p` with no…
-
-    ∴ (Correct(s, p) → TrueTo(s, p)) ∧ (TrueTo(s, p) → T(p))
-
-✅ · [EpistemicNecessity.lean#being_true_is_being_true_to](formal/Logos/EpistemicNecessity.lean#L406)
-
-<a id="step-3"></a>
-### Step 3 — Right and Wrong Cannot Obtain Without Meaning
-
-C62: right/wrong anywhere ⇒ something is meant. Meaning is the term in which the denial fails first — which is why the epistemic poles, not the deontic ones, carry the argument.
-
-DEPENDS ON   step 2: right/wrong is right/wrong-to-someone
-GIVES        rightWrong_implies_meaning, taken up by step 4
-KILLS        [`R2`](#r2)
-
-> ⚠️ **Price disclosed —** 0 substantive axioms.
-
-*(Detailed technical proof & model analysis: [investigations/right-and-wrong.md](investigations/right-and-wrong.md))*
-
-> **The skeptic tries —** "Brute facts alone can still be 'correct' — 'correct' just means 'fits the facts'."
-> **The reply —** Then "correct" means conformity to a standard — and a standard is not a brute fact. It is what makes some things fit and others not, and it is meant.
-
-**Vocabulary of this step** — all defined above
-
-↳ Already defined above — `Meaning_I` in the shared vocabulary.
-
-Right and wrong need meaning: the normative predicates are properties of acts, so wherever right-or-wrong is realized, meaning (and thus a subject, C49) is realized.
-
-    (∃ s, p, Correct(s, p)) ∨ (∃ s, p, Incorrect(s, p)) → ∃ p, Meaning_I(p)
-
-✅ · [Order.lean#rightWrong_implies_meaning](formal/Logos/Order.lean#L89)
-
-<a id="step-4"></a>
-### Step 4 — Meaning Requires a Subject
-
-C49 `meaning_I_needs_subject`, contrapositive C560 `no_meaning_no_correctness`. Meaning is the act `Means s p`, and an act has an agent — this is why the deduction reaches a person and not merely a law.
-
-DEPENDS ON   step 3: rightWrong_implies_meaning
-GIVES        a subject that means holds a norm, taken up by step 5
-KILLS        [`R3`](#r3)
-
-> ⚠️ **Price disclosed —** 0 substantive axioms (`{Means, Subject}` for C49).
-
-*(Detailed technical proof & model analysis: [investigations/contrastive-choice.md](investigations/contrastive-choice.md))*
-
-> **The skeptic tries —** "Meaning belongs to a language or a text, not to a person."
-> **The reply —** Then fill in the subject of `Means` and it is whatever does the meaning — a text means *to* someone, a language means *for* someone. The kernel has exactly one sort for this: `Subject`.
-
-**Vocabulary of this step** — all defined above
-
-↳ Already defined above — `Meaning_I`, `Means` in the shared vocabulary.
-
-Meaning needs a subject: intentional meaning contains its subject by definition.
-
-    Meaning_I(p) → ∃ s, Means(s, p)
-
-✅ · [Choice.lean#meaning_I_needs_subject](formal/Logos/Choice.lean#L150)
-
-**No meaning, no right/wrong.** If nothing means `p`, then `p` is not among the contents anyone means — `¬ Meaning_I p` — so `p` is neither correctly nor incorrectly judgable. The third leg of the author's chain, `{}`.
-
-    ¬∃ s, Means(s, p) → ¬Meaning_I(p)
-
-✅ · [EpistemicNecessity.lean#no_meaning_no_correctness](formal/Logos/EpistemicNecessity.lean#L307)
-
-<a id="step-5"></a>
-### Step 5 — The Two Poles Cannot Both Be Correct
-
-Derived, not assumed: `Incompatible (Correct s p) (Incorrect s p)` from `Ought`/`OughtNot`. It is what makes step 6 a determination rather than a verbal flourish.
-
-DEPENDS ON   step 4: a subject that means holds a norm
-GIVES        co-meaning an incompatibility IS choice, taken up by step 6
-KILLS        [`R7`](#r7), [`R11`](#r11)
-
-> ⚠️ **Price disclosed —** 0 substantive axioms.
-
-*(Detailed technical proof & model analysis: [investigations/contrastive-choice.md](investigations/contrastive-choice.md))*
-
-> **The skeptic tries —** "'Incompatible' is just logical disjointness — and holding a disjunction is trivial."
-> **The reply —** Then the triviality is of an ought and an ought-not being exclusive — that is normativity, not logic. Meaning both poles is holding a norm that must be settled one way or the other.
-
-**Vocabulary of this step** — 1 defined here, 2 above
-
-▸ Incompatible `p` and `q` are incompatible contents.
-        ∴ Incompatible ≡ ¬(p ∧ q)
-        📘 [Alternatives.lean#Incompatible](formal/Logos/Alternatives.lean#L17)
-
-↳ Already defined above — `Correct`, `Incorrect` in the shared vocabulary.
-
-Correctness and incorrectness are mutually incompatible, derived directly from the incompatibility of Ought and OughtNot under TruthNorm.
-
-    ∴ Incompatible(Correct s p, Incorrect s p)
-
-✅ · [NormativeOrder.lean#correctness_incompatible](formal/Logos/NormativeOrder.lean#L135)
-
-<a id="step-6"></a>
-### Step 6 — Co-Meaning Both Poles Is Free Will
-
-C140: a stance co-meaning both poles emits `Chooses` and `FreeWill`. Capital-F *Free* is non-determinism between incompatible alternatives — not absence of cause, and not 'axiom-free'.
-
-DEPENDS ON   step 5: co-meaning an incompatibility IS choice
-GIVES        priced theorem [Person := ThomisticPersonCore; via will_individuation], taken up by step 7
-KILLS        [`R4`](#r4), [`R5`](#r5), [`R6`](#r6), [`R12`](#r12)
-
-> ⚠️ **Price disclosed —** conditional on `ClaimsNormativeCorrectness`; **0 substantive axioms**. Unconditional existence of a free subject is [the Necessity table's free-subject row](#sec-necessity-and-exactly-what-it-costs).
+> ⚠️ **Price disclosed —** 0 substantive axioms. Core well-founded structural priority.
 
 *(Detailed technical proof & model analysis: [investigations/free-will.md](investigations/free-will.md))*
 
-> **The skeptic tries —** "Definitional inflation — you renamed 'grasping a dilemma' as free will."
-> **The reply —** `Chooses` is the *constitutive* condition of choice: deny the co-grasp while accepting the choice and you have a contradiction (`d7_co_grasp_is_definitionally_choice`). The critic owes an account of choice in which that is not so.
+> **The skeptic tries —** "Well-foundedness is an ungrounded postulate; priority can be infinite."
+> **The reply —** Strict priority is well-founded by definition; an infinite regress of determination is self-contradictory.
 
-**Vocabulary of this step** — 1 defined here, 3 above
+**Vocabulary of this step** — all defined above
 
-▸ Chooses `Chooses s p q`: strong choice: the subject co-means incompatible alternatives.
-        ∴ Chooses ≡ Means(s, p) ∧ Means(s, q) ∧ Incompatible(p, q)
-        📘 [Choice.lean#Chooses](formal/Logos/Choice.lean#L127)
+↳ Already defined above — `D` in the shared vocabulary.
 
-↳ Already defined above — `Correct`, `FreeWill`, `Incorrect` in the shared vocabulary.
+PASSO 1: A prioridade estrita na cadeia determinativa constitutiva é bem-fundada.
 
-Master derivation from the normative judicative stance to Choice and Free Will.
+    DeterminationSystem → WellFounded D.Prior
 
-    ClaimsNormativeCorrectness(s, p) → Chooses(s, Correct(s, p), Incorrect(s, p)) ∧ FreeWill(s)
+✅ · [CompleteLibertarianFreedomArgument.lean#well_foundedness](formal/Logos/CompleteLibertarianFreedomArgument.lean#L605)
 
-✅ · [NormativeOrder.lean#claims_normative_correctness_derives_free_will](formal/Logos/NormativeOrder.lean#L190)
+<a id="step-2"></a>
+### Step 2 — Existence of an Ultimate Internal Source
+
+By priority well-foundedness, any node in the determination chain possesses an ancestral ultimate internal source (`exists_ultimate_source`).
+
+DEPENDS ON   step 1: well-founded priority yields an ultimate internal source
+GIVES        the judgment act reaches an ultimate internal source, taken up by step 3
+KILLS        [`R9`](#r9), [`R10`](#r10)
+
+> ⚠️ **Price disclosed —** 0 substantive axioms (`{CL}`).
+
+*(Detailed technical proof & model analysis: [investigations/free-will.md](investigations/free-will.md))*
+
+> **The skeptic tries —** "Every internal source might receive determination from outside."
+> **The reply —** By well-foundedness, every node has an ancestral ultimate internal source.
+
+**Vocabulary of this step** — all defined above
+
+↳ Already defined above — `D` in the shared vocabulary.
+
+PASSO 2: Pela bem-fundação da prioridade estrita na cadeia determinativa constitutiva, qualquer nó da cadeia possui uma fonte interna última ancestral.
+
+    JudgmentDeterminationChain C s w p ∧ J.Node → ∃ a,.Node, UltimateInternalSource J.toDeterminationSystem a ∧ (a = x ∨ DeterminesAncestrally J.Determines a x)
+
+✅ · [CompleteLibertarianFreedomArgument.lean#exists_ultimate_source](formal/Logos/CompleteLibertarianFreedomArgument.lean#L612)
+
+<a id="step-3"></a>
+### Step 3 — The Judgment Act Reaches an Ultimate Internal Source
+
+The judgment act node itself reaches an ultimate internal source that determines it ancestral-wise (`ultimate_source_reaches_judgment_act`).
+
+DEPENDS ON   step 2: the judgment act reaches an ultimate internal source
+GIVES        ancestral determinants of judgment are acts of the subject, taken up by step 4
+KILLS        [`R2`](#r2)
+
+> ⚠️ **Price disclosed —** 0 substantive axioms (`{CL}`).
+
+*(Detailed technical proof & model analysis: [investigations/free-will.md](investigations/free-will.md))*
+
+**Vocabulary of this step** — all defined above
+
+↳ Already defined above — `D` in the shared vocabulary; `DeterminesAncestrally` at step 2.
+
+PASSO 3: O nó do acto de julgar (`judgmentActNode`) possui uma fonte interna última que o determina ancestralmente (ou coincide com ele).
+
+    JudgmentDeterminationChain C s w p → ∃ a,.Node, UltimateInternalSource J.toDeterminationSystem a ∧ (a = J.judgmentActNode ∨ DeterminesAncestrally J.Determines a J.judgmentActNode)
+
+✅ · [CompleteLibertarianFreedomArgument.lean#ultimate_source_reaches_judgment_act](formal/Logos/CompleteLibertarianFreedomArgument.lean#L623)
+
+<a id="step-4"></a>
+### Step 4 — Agential Ancestry of Judgment Determination
+
+Any ancestral determinant of the judgment act is constitutively an act of the subject (`ultimate_source_is_agential`).
+
+DEPENDS ON   step 3: ancestral determinants of judgment are acts of the subject
+GIVES        an ultimate act source does not receive prior determination, taken up by step 5
+KILLS        [`R3`](#r3)
+
+> ⚠️ **Price disclosed —** 0 substantive axioms.
+
+*(Detailed technical proof & model analysis: [investigations/free-will.md](investigations/free-will.md))*
+
+PASSO 4: Pela condição de ancestralidade agencial da cadeia constitutiva, qualquer determinante ancestral do acto de julgar é um acto do próprio sujeito.
+
+    JudgmentDeterminationChain C s w p ∧ a = J.judgmentActNode ∨ DeterminesAncestrally J.Determines a J.judgmentActNode → J.IsActOf s a
+
+✅ · [CompleteLibertarianFreedomArgument.lean#ultimate_source_is_agential](formal/Logos/CompleteLibertarianFreedomArgument.lean#L633)
+
+<a id="step-5"></a>
+### Step 5 — Ultimate Act Source Is Not Determined by Prior State
+
+An ultimate internal act source of the subject does not receive determination from the complete prior state (`ultimate_source_is_not_received_from_prior_state`).
+
+DEPENDS ON   step 4: an ultimate act source does not receive prior determination
+GIVES        failure of prior determination entails an accessible alternative world, taken up by step 6
+KILLS        [`R7`](#r7), [`R11`](#r11)
+
+> ⚠️ **Price disclosed —** 0 substantive axioms (`{}`).
+
+*(Detailed technical proof & model analysis: [investigations/free-will.md](investigations/free-will.md))*
+
+> **The skeptic tries —** "Prior history exhaustively fixes the internal act source."
+> **The reply —** An ultimate act source cannot receive determination from the complete prior state.
+
+**Vocabulary of this step** — all defined above
+
+↳ Already defined above — `World` in the shared vocabulary.
+
+PASSO 5: Uma fonte interna última que é um acto do próprio sujeito não recebe a sua determinação do estado antecedente completo mantido fixo.
+
+    JudgmentDeterminationChain C s w p ∧ UltimateInternalSource J.toDeterminationSystem a ∧ J.IsActOf s a → ¬DeterminationReceivedFromPriorState(J, a)
+
+✅ · [CompleteLibertarianFreedomArgument.lean#ultimate_source_is_not_received_from_prior_state](formal/Logos/CompleteLibertarianFreedomArgument.lean#L644)
+
+<a id="step-6"></a>
+### Step 6 — Accessible Alternative Under Same Complete Prior State
+
+Failure of received determination entails an accessible alternative world under the identical complete prior state (`accessible_same_past_alternative_exists`).
+
+DEPENDS ON   step 5: failure of prior determination entails an accessible alternative world
+GIVES        source outcome divergence propagates to final verdict, taken up by step 7
+KILLS        [`R4`](#r4), [`R5`](#r5), [`R6`](#r6), [`R12`](#r12)
+
+> ⚠️ **Price disclosed —** 0 substantive axioms (`{CL}`).
+
+*(Detailed technical proof & model analysis: [investigations/free-will.md](investigations/free-will.md))*
+
+**Vocabulary of this step** — all defined above
+
+↳ Already defined above — `Subject`, `World`, `actualWorld` in the shared vocabulary.
+
+PASSO 6: A falha de determinação recebida pelo passado completo acarreta a existência de um mundo acessível alternativo com o mesmo passado completo e resultado divergente.
+
+    JudgmentDeterminationChain C s w p ∧ ¬DeterminationReceivedFromPriorState(J, a) → ∃ w',.World, C.Accessible w w' ∧ C.SameCompletePriorState w w' ∧ J.OutcomeOf a w' ≠ J.OutcomeOf a w
+
+✅ · [CompleteLibertarianFreedomArgument.lean#accessible_same_past_alternative_exists](formal/Logos/CompleteLibertarianFreedomArgument.lean#L656)
 
 <a id="step-7"></a>
-### Step 7 — Free Will Is a Person
+### Step 7 — Divergence at Source Propagates to Judgment Verdict
 
-C221 `freeWill_implies_person`; `Person := ThomisticPersonCore` (substance, rational nature, dominion over acts). The price is the VOCAB law `will_individuation`, and the kernel *checks* it is underivable (`SharedWillModel`, `{}`).
+Divergence at the ancestral source propagates through the determination chain to the final judgment verdict (`alternative_changes_verdict`).
 
-DEPENDS ON   step 6: priced theorem [Person := ThomisticPersonCore; via will_individuation]
-GIVES        the Person grounds the epistemic pole pair, taken up by step 8
+DEPENDS ON   step 6: source outcome divergence propagates to final verdict
+GIVES        divergent verdict under same past yields libertarian choice, taken up by step 8
 
-> ⚠️ **Price disclosed —** priced on the declared VOCAB law `will_individuation`; 0 substantive axioms. The price is checked to be underivable (`SharedWillModel`, `{}`).
+> ⚠️ **Price disclosed —** 0 substantive axioms (`{}`).
 
-*(Detailed technical proof & model analysis: [investigations/divine-personhood.md](investigations/divine-personhood.md))*
+*(Detailed technical proof & model analysis: [investigations/free-will.md](investigations/free-will.md))*
 
-> **The skeptic tries —** "That is the anthropomorphic smuggling you promised to avoid."
-> **The reply —** The price is named, tagged VOCAB and machine-separated. If personhood were free the theorem would need no axiom; it needs exactly one, and `SharedWillModel` exhibits where it fails.
+PASSO 7: A divergência de resultado na fonte ancestral propaga-se ao veredicto final.
 
-**Vocabulary of this step** — 1 defined here, 1 above
+    JudgmentDeterminationChain C s w p ∧ a = J.judgmentActNode ∨ DeterminesAncestrally J.Determines a J.judgmentActNode ∧ J.OutcomeOf a w' ≠ J.OutcomeOf a w → J.OutcomeOf J.verdictNode w' ≠ J.OutcomeOf J.verdictNode w
 
-▸ ThomisticPersonCore Thomistic person core: the Boethius–Aquinas conditions of personhood — "individual substance of a rational nature" possessed of dominion over its own acts — formalized through their operative distinguishing features.
-        ∴ ThomisticPersonCore ≡ IndividualSubstance(s) ∧ RationalNature(s) ∧ DominionOverActs(s)
-        📘 [Person.lean#ThomisticPersonCore](formal/Logos/Person.lean#L93)
-
-↳ Already defined above — `Person` in the shared vocabulary.
-
-HEADLINE (AC2): Free will implies Personhood — as a theorem, not a definition.
-
-    FreeWill(s) → Person(s)
-
-✅ · [Person.lean#freeWill_implies_person](formal/Logos/Person.lean#L135)
-
-Master Correspondence: Personhood IS the Thomistic person core — honestly `rfl` now, since that is the definition (AC1′).
-
-    ∴ Person(s) ↔ ThomisticPersonCore(s)
-
-✅ · [Person.lean#person_iff_thomisticCore](formal/Logos/Person.lean#L183)
-
-<a id="step-7b"></a>
-### Step 7b — The Act Carries Its Own Polarity, So a Free Person Is Derived
-
-The performative act datum (`Agency.performative_act_datum`, 1 TRANS) carries its own polarity (`Choice.AxActPolarity`, 1 SEM) to derive co-meaning (`AsieticChoice.bareRejectedHornCoMeant_is_derivable`, C565). A genuine Free Person is derived unconditionally, with zero META axioms.
-
-> ⚠️ **Price disclosed —** derived with 0 META axioms; priced at 1 TRANS (`performative_act_datum`) + 1 SEM (`AxActPolarity`).
-
-<a id="a_genuine_free_person_exists"></a>
-### A genuine Free Person exists, derived without META axioms
-
-DEPENDS ON   step 7: Free Will Is a Person · performative_act_datum · AxActPolarity
-GIVES        a genuine Free Person (C587) — hands on to step 8
-KILLS        [`R16`](#r16)
-
-PROOF
-    💰 PRICED — 3 steps, on a declared axiom
-      1. witness components ⟨s, hfw⟩  (existential elimination from a_free_will_exists_derived)
-      2. s  (conjunction conjunct 1: s)
-      3. freeWill_implies_person s hfw  (conjunction conjunct 2: freeWill_implies_person s hfw)
-    ∴ ∃ s, Person(s)
-
-PRICE            ⚠️ **AXIOMATIC (AxActPolarity)** — 2 substantive axioms: AxActPolarity, performative_act_datum · `{AxActPolarity, Initiates, Means, State, Subject, Will, performative_act_datum, subjectWill, will_individuation}`
-SOURCE     ⚠️ AxActPolarity · [NoMeanerNoFalsity.lean#a_genuine_free_person_exists](formal/Logos/NoMeanerNoFalsity.lean#L94)
-
+✅ · [CompleteLibertarianFreedomArgument.lean#alternative_changes_verdict](formal/Logos/CompleteLibertarianFreedomArgument.lean#L674)
 
 <a id="step-8"></a>
-### Step 8 — That Person Grounds the Poles
+### Step 8 — Verdict Divergence Yields Libertarian Free Choice
 
-C525/C527: what grounds right/wrong **at the epistemic poles** is a person. Grounding is neither identity nor causation; the Person is indexed at the pole pair and the reverse direction is stance-guarded by design.
+Opposite judicative verdicts under identical complete prior history construct positive libertarian free choice (`libertarian_free_choice`).
 
-DEPENDS ON   step 7: the Person grounds the epistemic pole pair
-GIVES        THE FACT — the composed statement, taken up by step 9
+DEPENDS ON   step 7: divergent verdict under same past yields libertarian choice
+GIVES        libertarian choice constitutes free will, taken up by step 9
 KILLS        [`R8`](#r8), [`R18`](#r18), [`R19`](#r19), [`R20`](#r20), [`R21`](#r21)
 
-> ⚠️ **Price disclosed —** 0 substantive axioms; the `def` bridge `EntityMeans ofGround := True` is disclosed in [the declared-`def` census in the ledger](#sec-where-the-rest-of-the-ledger-lives)
+> ⚠️ **Price disclosed —** 0 substantive axioms (`{CL}`).
 
-*(Detailed technical proof & model analysis: [investigations/grounding.md](investigations/grounding.md))*
+*(Detailed technical proof & model analysis: [investigations/free-will.md](investigations/free-will.md))*
 
-> **The skeptic tries —** "Grounding a distinction is just being an instance of it — a category dressed as a cause."
-> **The reply —** It refuses identity (`GroundsRightWrong` is not `=`) and causation (`EntityMeans ofGround := True`). The Person grounds the *pole pair* — narrower than a cause, stronger than an instance.
+> **The skeptic tries —** "Indeterminacy is mere luck, not rational libertarian choice."
+> **The reply —** Libertarian choice is constructed positively from opposite judicative verdicts under identical prior history.
 
-**Vocabulary of this step** — 1 defined here, 3 above
+**Vocabulary of this step** — all defined above
 
-▸ GroundsRightWrongAt GroundsRightWrongAt: Subject s witnesses the grounding relation indexed to a specific normative opposition (p, q).
-        📘 [PersonalNormativeGround.lean#GroundsRightWrongAt](formal/Logos/PersonalNormativeGround.lean#L304)
+↳ Already defined above — `Subject` in the shared vocabulary.
 
-↳ Already defined above — `Correct`, `Incorrect`, `Person` in the shared vocabulary.
+PASSO 8: A diferença de veredicto sob o mesmo passado completo produz a escolha libertária.
 
-The epistemic right/wrong — `Correct s p` and `Incorrect s p`, which under the epistemic `TruthNorm` are `T p` and `IsFalse p` (`NormativeOrder.lean:72-75`) — is ontologically grounded, and the ground is the *indexed* one at that very pole pair. This is C171 (`grounding_forced_at_datum`)…
+    JudgmentDeterminationChain C s w p ∧ a = J.judgmentActNode ∨ DeterminesAncestrally J.Determines a J.judgmentActNode ∧ ¬DeterminationReceivedFromPriorState(J, a) → LibertarianFreeChoiceAt C s w p
 
-    ClaimsNormativeCorrectness(s, p) → GroundsRightWrongAt s (Correct(s, p)) (Incorrect(s, p))
-
-✅ · [EpistemicPersonalGround.lean#epistemic_polarity_is_personally_grounded](formal/Logos/EpistemicPersonalGround.lean#L107)
-
-HEADLINE. The epistemic right/wrong has a grounding of a personal kind, at its own poles.
-
-    ClaimsNormativeCorrectness(s, p) → GroundsRightWrongAt s (Correct(s, p)) (Incorrect(s, p)) ∧ Person(s)
-
-✅ · [EpistemicPersonalGround.lean#the_person_grounds_the_epistemic_right_wrong](formal/Logos/EpistemicPersonalGround.lean#L165)
+✅ · [CompleteLibertarianFreedomArgument.lean#libertarian_free_choice](formal/Logos/CompleteLibertarianFreedomArgument.lean#L694)
 
 <a id="step-9"></a>
-### Step 9 — The Fact
+### Step 9 — Libertarian Choice Constitutes Free Will
 
-C553 conditional, C555 existential, C556 propositional. If this proof exists, a Free Subject exists: `proof_exists_implies_existence_of_free_subject` derives `∃ s, FreeSubject s` from `ProofExists` as an anonymous existence claim, without personal attribution or claims about all humans.
+Exercising libertarian free choice over an alternative in judgment constitutes free will (`free_will`).
 
-DEPENDS ON   step 8: THE FACT — the composed statement
-GIVES        contrapositives composed [C557 entailment, C561 retraction], taken up by step 10
+DEPENDS ON   step 8: libertarian choice constitutes free will
+GIVES        free will in the actual world concludes the Free Subject, taken up by step 10
 KILLS        [`R16`](#r16)
 
-> ⚠️ **Price disclosed —** **0 substantive axioms.** Existence *from Γ's primitives alone* is [the Necessity table's free-subject row](#sec-necessity-and-exactly-what-it-costs), priced on one META bridge (`AxTwoSubjects`).
+> ⚠️ **Price disclosed —** 0 substantive axioms (`{CL}`).
 
-*(Detailed technical proof & model analysis: [investigations/grounding.md](investigations/grounding.md))*
+*(Detailed technical proof & model analysis: [investigations/free-will.md](investigations/free-will.md))*
 
-> **The skeptic tries —** "A conditional on an inserted stance is not a conclusion."
-> **The reply —** Then use C556: no stance, and in every model some subject is free and some content is meant. The unconditional existence row is [the Necessity table's free-subject row](#sec-necessity-and-exactly-what-it-costs) — one META bridge, named.
+**Vocabulary of this step** — all defined above
 
-**Vocabulary of this step** — 4 defined here, 5 above
+↳ Already defined above — `FreeWillAt` in the shared vocabulary.
 
-▸ Content Content-ness: `Content p` — p is (a) a propositional content.
-        ∴ Content ≡ True
-        📘 [Agency.lean#Content](formal/Logos/Agency.lean#L72)
+PASSO 9: A escolha libertária no acto de julgar constitui o livre-arbítrio do sujeito.
+
+    JudgmentDeterminationChain C s w p ∧ a = J.judgmentActNode ∨ DeterminesAncestrally J.Determines a J.judgmentActNode ∧ ¬DeterminationReceivedFromPriorState(J, a) → FreeWillAt C s w
+
+✅ · [CompleteLibertarianFreedomArgument.lean#free_will](formal/Logos/CompleteLibertarianFreedomArgument.lean#L712)
+
+<a id="step-10"></a>
+### Step 10 — Free Will Concludes the Free Subject
+
+Free will in the actual world concludes that the subject is a Free Subject (`free_subject`, `complete_libertarian_freedom_argument`).
+
+DEPENDS ON   step 9: free will in the actual world concludes the Free Subject
+GIVES        — this is the last step
+
+> ⚠️ **Price disclosed —** 0 substantive axioms (`{CL}`). If this proof exists, a Free Subject exists.
+
+*(Detailed technical proof & model analysis: [investigations/free-will.md](investigations/free-will.md))*
+
+> **The skeptic tries —** "A proof in logic cannot establish the real existence of a Free Subject."
+> **The reply —** The concrete existence of this proof instance strictly derives an anonymous Free Subject.
+
+**Vocabulary of this step** — 1 defined here, 3 above
 
 ▸ FreeSubject A subject is a free subject iff it possesses free will (definitionally, genuinely chooses).
         ∴ FreeSubject ≡ FreeWill(s)
         📘 [Choice.lean#FreeSubject](formal/Logos/Choice.lean#L196)
 
-▸ Subject Vocabulary: the pure sort of subjects — that which performs acts of reasoning.
-        📘 [Agency.lean#Subject](formal/Logos/Agency.lean#L49)
+↳ Already defined above — `FreeWillAt`, `actualWorld` in the shared vocabulary; `LibertarianFreeChoiceAt` at step 8.
 
-▸ subjectWill Vocabulary: the mapping from each subject to its volitional faculty.
-        📘 [Agency.lean#subjectWill](formal/Logos/Agency.lean#L141)
+Complete libertarian freedom argument: the well-founded constitutive determination chain of judgment directly entails a Free Subject.
 
-↳ Already defined above — `Correct`, `FreeWill`, `Incorrect`, `Means`, `Person` in the shared vocabulary.
+    JudgmentDeterminationChain C s C.actualWorld p → FreeSubject(C) s
 
-**THE FACT.** Nothing can be epistemologically right or wrong without a non-mechanical (Free) being for which meaning can mean.
-
-    ClaimsNormativeCorrectness(s, p) → (∃ w, w = subjectWill(s)) ∧ FreeWill(s) ∧ FreeSubject(s) ∧ Person(s) ∧ Means(s, Correct s p) ∧ Means(s, Incorrect s p)
-
-✅ · [EpistemicNecessity.lean#epistemic_right_wrong_requires_a_free_being_for_which_meaning_can_mean](formal/Logos/EpistemicNecessity.lean#L107)
-
-**Existential form of the FACT.** If the epistemic stance obtains *somewhere* — some subject claims normative correctness of some content — then a non-mechanical personal being exists.
-
-    ∃ s, p, ClaimsNormativeCorrectness(s, p) → ∃ s, FreeWill(s) ∧ FreeSubject(s) ∧ Person(s) ∧ (∃ p, Means(s, Correct s p) ∧ Means(s, Incorrect s p))
-
-✅ · [EpistemicNecessity.lean#epistemic_normativity_somewhere_yields_a_free_being](formal/Logos/EpistemicNecessity.lean#L163)
-
-The FACT on the propositional side, at `{}`: the `T`/`IsFalse` order, once non-vacuous, entails a non-mechanical being for which meaning can mean.
-
-    ∴ ∀ M,.Signature, ∃ s,.Subject, M.Free s ∧ ∃ c,.Content, M.Means(s, c)
-
-✅ · [EpistemicPersonalGround.lean#epistemic_order_requires_a_free_meaning_being](formal/Logos/EpistemicPersonalGround.lean#L276)
-
-<a id="step-10"></a>
-### Step 10 — The Chain, Composed — Both Directions
-
-C561 (no subject who means → no right/wrong anywhere) and C557 (the order *entails* the act). The single TRANS axiom pays for the unconditional `∃ s, Act s p` — a different question. `F1bUncond`: SUPERSEDED.
-
-DEPENDS ON   step 9: contrapositives composed [C557 entailment, C561 retraction]
-GIVES        — this is the last step
-
-> ⚠️ **Price disclosed —** 0 substantive axioms in both directions.
-
-*(Detailed technical proof & model analysis: [investigations/right-and-wrong.md](investigations/right-and-wrong.md))*
-
-> **The skeptic tries —** "A contrapositive about meaning. Nothing here touches physics."
-> **The reply —** It does not need to: the claim is that the meaningless world is not a world with different physics but a world with no such state. The countermodels that could show otherwise are [the One God rows](#exactly_one_universal_modal_ground).
-
-**Vocabulary of this step** — 1 defined here, 2 above
-
-▸ Act `Act s p`: strong act: meaningful initiation of movement.
-        ∴ Act ≡ Means(s, p) ∧ ∃ w, w', Initiates s w w' p
-        📘 [Agency.lean#Act](formal/Logos/Agency.lean#L174)
-
-↳ Already defined above — `Correct`, `Incorrect` in the shared vocabulary.
-
-**No subject who means, no epistemic right/wrong.** If `¬ ∃ s, ∃ p, Means s p`, then `¬ ∃ s, ∃ p, Correct s p` and `¬ ∃ s, ∃ p, Incorrect s p`.
-
-    ¬∃ s, p, Means(s, p) → ¬(∃ s, p, Correct(s, p)) ∧ ¬(∃ s, p, Incorrect(s, p))
-
-✅ · [EpistemicNecessity.lean#no_subject_who_means_no_epistemic_right_wrong](formal/Logos/EpistemicNecessity.lean#L328)
-
-**The act datum is necessary.** If the epistemic order obtains — someone holds the stance that makes right and wrong meaningful — then someone acts, at `{}`.
-
-    ∃ s, p, ClaimsNormativeCorrectness(s, p) → ∃ s, p, Act s p
-
-✅ · [EpistemicNecessity.lean#epistemic_order_makes_the_act_datum_necessary](formal/Logos/EpistemicNecessity.lean#L235)
+✅ · [CompleteLibertarianFreedomArgument.lean#complete_libertarian_freedom_argument](formal/Logos/CompleteLibertarianFreedomArgument.lean#L2352)
 
 ### What the same route also establishes of the person
 
@@ -553,7 +404,7 @@ Attaching each one to a numbered step would have been tidier, and false.
           7. hFreeWill  (conjunction conjunct 2: hFreeWill)
         ∴ Chooses(s, p, q) ∧ FreeWill(s)
         PRICE      ✅ **PROVEN** _(conditional on GenuineNormativity s p q)_ · 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will](formal/Logos/IndubitableNormativeFreeWill.lean#L115) (+2 co-routes at the same price — see ledger)
+        SOURCE  ✅ · [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will](formal/Logos/IndubitableNormativeFreeWill.lean#L114) (+2 co-routes at the same price — see ledger)
         ↑ a personal-scope attribute; reached in parallel with the spine, not by it
 
 <a id="asietic_summary"></a>
@@ -774,7 +625,7 @@ PROOF
     ∴ PrecedesRightWrong Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-SOURCE     ✅ · [DivineTrinitarianAttributes.lean#ofGround_precedes_the_right_wrong_distinction](formal/Logos/DivineTrinitarianAttributes.lean#L655)
+SOURCE     ✅ · [DivineTrinitarianAttributes.lean#ofGround_precedes_the_right_wrong_distinction](formal/Logos/DivineTrinitarianAttributes.lean#L656)
 
 <a id="ofGround_obtains_where_no_atom_is_true"></a>
     ▸ obtains_where_no_atom_is_true  ·  Premises: 0 · 1 step
@@ -782,7 +633,7 @@ SOURCE     ✅ · [DivineTrinitarianAttributes.lean#ofGround_precedes_the_right_
           1. constructor  (conjunction constructor introduction)
         ∴ ∃ w, (∀ n, ¬w ⊨ atom(n)) ∧ ExistsAt(w, Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [DivineTrinitarianAttributes.lean#ofGround_obtains_where_no_atom_is_true](formal/Logos/DivineTrinitarianAttributes.lean#L514)
+        SOURCE  ✅ · [DivineTrinitarianAttributes.lean#ofGround_obtains_where_no_atom_is_true](formal/Logos/DivineTrinitarianAttributes.lean#L515)
         ↑ a component of ofGround_precedes_the_right_wrong_distinction
 
     ▸ conditions_every_bearer  ·  a term of the record (`fun`), not a named theorem — no separate derivation
@@ -793,7 +644,7 @@ SOURCE     ✅ · [DivineTrinitarianAttributes.lean#ofGround_precedes_the_right_
           1. assume h  (hypothesis assumption for conditional/reductio proof)
         ∴ ¬(∀ p, EntityMeans Entity.ofGround p ↔ T(p))
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [DivineTrinitarianAttributes.lean#ground_scope_is_not_the_truth_set](formal/Logos/DivineTrinitarianAttributes.lean#L587)
+        SOURCE  ✅ · [DivineTrinitarianAttributes.lean#ground_scope_is_not_the_truth_set](formal/Logos/DivineTrinitarianAttributes.lean#L588)
         ↑ a component of ofGround_precedes_the_right_wrong_distinction
 
 <a id="the_ground_is_not_the_universe"></a>
@@ -1150,7 +1001,7 @@ PROOF
     ∴ ∃ t,DivineHypostasis Entity, t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** — 3 substantive axioms: AxAgapeEssence, AxProcessionSpirit, AxProcessionWord · `{AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence, AxProcessionSpirit, AxProcessionWord · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L1814)
+SOURCE     ⚠️ AxAgapeEssence, AxProcessionSpirit, AxProcessionWord · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L1815)
 
 ### What is not established about the ground
 
@@ -1225,9 +1076,9 @@ The shared **nature** is still not in the vocabulary of the sort. C519 and C520 
 |---|---|---|
 | **One ground** of reality | C320/C389: `∃! g, UniversalModalGround g`. Existence unconditional; uniqueness on the declared META bound `GroundTranscendence`. | ✅ **PROVEN** · 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}` · [DivineClassicalAttributes.lean#exactly_one_universal_modal_ground](formal/Logos/DivineClassicalAttributes.lean#L2163) {Means, NecessarySubjectKind, Subject} |
 | **One nature** (una natura, *actus purus*) | C440 divine simplicity as the sole bearer; aseity non-derived. 0 substantive axioms. | ✅ **PROVEN** · 0 substantive axioms · `{Means, Subject, CL}` · [DivineClassicalAttributes.lean#divine_simplicity_sole_bearer](formal/Logos/DivineClassicalAttributes.lean#L886) {Means, Subject, CL} · [DivineClassicalAttributes.lean#conditional_canonical_aseity](formal/Logos/DivineClassicalAttributes.lean#L592) {Means, Subject} |
-| **Three distinct Persons** | C510: `t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit`. **Priced on three declared META premises.** | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L1814) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} |
-| All three are **God** (one `divineReality`) | The anti-tritheism half: `is_divine the_father divineReality ∧ is_divine the_beloved divineReality ∧ is_divine the_spirit divineReality`. **Not the price of C510, and cheaper than it** — `the_father_is_divine` and `the_beloved_is_divine` rest on `{Subject, AxAgapeEssence, CL}` (one META), `the_spirit_is_divine` on `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` (two META), so this row's union is two META axioms where C510 needs three. The word *consubstantial* is not used for this row: the `Consubstantial` anchor was deleted because `Consubstantial Entity.ofGround e f` is `True` of arbitrary entities including atoms — a `{}` price on a `True` proposition is a null result, which is why G9 in `test_personal_ground_kind.py` refuses its re-declaration. The one-ness Γ actually carries is `indwells`, and the shared *nature* is still not in the vocabulary of the sort. | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` · [DivineTrinitarianAttributes.lean#the_father_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L1757) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_beloved_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L1762) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L1767) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
-| The Persons are **distinct** (not three gods) | Personal distinctness by personal property, not by essence: `≠` in every pair, and the Spirit is no word. | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineTrinitarianAttributes.lean#the_beloved_distinct](formal/Logos/DivineTrinitarianAttributes.lean#L1634) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_father](formal/Logos/DivineTrinitarianAttributes.lean#L1693) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_beloved](formal/Logos/DivineTrinitarianAttributes.lean#L1701) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_any_word](formal/Logos/DivineTrinitarianAttributes.lean#L1697) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
+| **Three distinct Persons** | C510: `t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit`. **Priced on three declared META premises.** | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L1815) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} |
+| All three are **God** (one `divineReality`) | The anti-tritheism half: `is_divine the_father divineReality ∧ is_divine the_beloved divineReality ∧ is_divine the_spirit divineReality`. **Not the price of C510, and cheaper than it** — `the_father_is_divine` and `the_beloved_is_divine` rest on `{Subject, AxAgapeEssence, CL}` (one META), `the_spirit_is_divine` on `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` (two META), so this row's union is two META axioms where C510 needs three. The word *consubstantial* is not used for this row: the `Consubstantial` anchor was deleted because `Consubstantial Entity.ofGround e f` is `True` of arbitrary entities including atoms — a `{}` price on a `True` proposition is a null result, which is why G9 in `test_personal_ground_kind.py` refuses its re-declaration. The one-ness Γ actually carries is `indwells`, and the shared *nature* is still not in the vocabulary of the sort. | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` · [DivineTrinitarianAttributes.lean#the_father_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L1758) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_beloved_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L1763) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L1768) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
+| The Persons are **distinct** (not three gods) | Personal distinctness by personal property, not by essence: `≠` in every pair, and the Spirit is no word. | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineTrinitarianAttributes.lean#the_beloved_distinct](formal/Logos/DivineTrinitarianAttributes.lean#L1635) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_father](formal/Logos/DivineTrinitarianAttributes.lean#L1694) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_beloved](formal/Logos/DivineTrinitarianAttributes.lean#L1702) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_any_word](formal/Logos/DivineTrinitarianAttributes.lean#L1698) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
 | **A single-Person reading is not entailed** | Separation model, not a refutation: one ground, and a model in which that ground bears two distinct persons. Ground-unicity therefore does not entail a single-Person ground — the person-count is left open by unicity, and the ascription of personhood to the entity is the separate, still-blocked question C228. | 🧱 **COUNTERMODEL | unicity_does_not_force_unitarian_monad ⇏ Independence** · `{}` · [DivineClassicalAttributes.lean#unicity_does_not_force_unitarian_monad](formal/Logos/DivineClassicalAttributes.lean#L2191) {} |
 | The Trinity is **not free** | C109: the preceding theory does not entail three Persons. This is the price, stated as a countermodel. | 🧱 **COUNTERMODEL | preceding_theory ⇏ trinity** · `{}` · [ConditionalTheology.lean#preceding_theory_not_entails_trinity](formal/Logos/ConditionalTheology.lean#L336) {} |
 | The **Incarnation** is open | C112: the preceding theory is consistent with an unincarnate ground. The frontier, named. | 🧱 **COUNTERMODEL | preceding_theory ⇏ incarnation** · `{}` · [ConditionalTheology.lean#preceding_theory_not_entails_incarnation](formal/Logos/ConditionalTheology.lean#L380) {} |
@@ -1269,7 +1120,7 @@ The three-axes reading of each model — attack / model / world-datum, with the 
 
 DEPENDS ON   the denial: `NoRight`
 GIVES        ⊥ — the denial, refuted
-KILLS        [step 1](#step-1) — Satisfaction Is Free
+KILLS        [step 1](#step-1) — Well-Foundedness of Constitutive Determination
 
 PROOF
     Assume ClaimsCorrect(s, NoRight)  ← voicing the denial as correct
@@ -1292,7 +1143,7 @@ SOURCE     ✅ · [DirectNormativeRetorsion.lean#claims_correct_no_right_self_re
 
 DEPENDS ON   the denial: `NoRight`
 GIVES        ⊥ — the denial, refuted
-KILLS        [step 3](#step-3) — Right and Wrong Cannot Obtain Without Meaning
+KILLS        [step 3](#step-3) — The Judgment Act Reaches an Ultimate Internal Source
 
 PROOF
     Assume ClaimsCorrect(s, NoRight)  ← voicing the denial as correct
@@ -1314,7 +1165,7 @@ SOURCE     ✅ · [ProofPresentationRetorsion.lean#proof_criticism_nihilism_self
 
 DEPENDS ON   the denial: `Asserts speaker NoSubject`
 GIVES        ⊥ — the denial, refuted
-KILLS        [step 4](#step-4) — Meaning Requires a Subject
+KILLS        [step 4](#step-4) — Agential Ancestry of Judgment Determination
 
 PROOF
     Assume Asserts speaker NoSubject  ← the denial's own thesis
@@ -1335,7 +1186,7 @@ SOURCE     ✅ · [Agency.lean#noSubject_performative_selfRefutes](formal/Logos/
 
 DEPENDS ON   the denial: `asserts speaker NoAct`
 GIVES        ⊥ — the denial, refuted
-KILLS        [step 6](#step-6) — Co-Meaning Both Poles Is Free Will
+KILLS        [step 6](#step-6) — Accessible Alternative Under Same Complete Prior State
 
 PROOF
     Assume weak_act_implies_strong_act
@@ -1355,7 +1206,7 @@ SOURCE     ✅ · [Agency.lean#noAct_conditional_selfRefutes](formal/Logos/Agenc
 
 DEPENDS ON   the denial: `¬Chooses s p q`
 GIVES        ⊥ — the denial, refuted
-KILLS        [step 6](#step-6) — Co-Meaning Both Poles Is Free Will
+KILLS        [step 6](#step-6) — Accessible Alternative Under Same Complete Prior State
 
 PROOF
     Assume Means(s, p)
@@ -1377,7 +1228,7 @@ SOURCE     ✅ · [UndeniableNormativeDerivation.lean#d7_co_grasp_is_definitiona
 
 DEPENDS ON   the denial: `¬FreeWill s`
 GIVES        ⊥ — the denial, refuted
-KILLS        [step 6](#step-6) — Co-Meaning Both Poles Is Free Will
+KILLS        [step 6](#step-6) — Accessible Alternative Under Same Complete Prior State
 
 PROOF
     Assume Chooses(s, p, q)
@@ -1397,7 +1248,7 @@ SOURCE     ✅ · [UndeniableNormativeDerivation.lean#d8_choice_is_definitionall
 
 DEPENDS ON   the denial: `NoGN`
 GIVES        ⊥ — the denial, refuted
-KILLS        [step 5](#step-5) — The Two Poles Cannot Both Be Correct
+KILLS        [step 5](#step-5) — Ultimate Act Source Is Not Determined by Prior State
 
 PROOF
     Assume ClaimsNormativeCorrectness(s, NoGN)  ← voicing the denial as correct
@@ -1415,7 +1266,7 @@ SOURCE     ✅ · [RetorsiveNormativity.lean#normative_denial_of_normativity_is_
 
 DEPENDS ON   the denial: `NoGN`
 GIVES        the denial is refuted, at the price named below
-KILLS        [step 5](#step-5) — The Two Poles Cannot Both Be Correct
+KILLS        [step 5](#step-5) — Ultimate Act Source Is Not Determined by Prior State
 
 PROOF
     Assume ClaimsCorrect(s, NoGN)
@@ -1438,7 +1289,7 @@ SOURCE     ⚠️ AxJudicativeBipolarity · [RetorsiveNormativity.lean#denial_of
 
 DEPENDS ON   the denial: `Ought s s a`
 GIVES        ⊥ — the denial, refuted
-KILLS        [step 8](#step-8) — That Person Grounds the Poles
+KILLS        [step 8](#step-8) — Verdict Divergence Yields Libertarian Free Choice
 
 PROOF
     Assume Ought(s, s, a)  ← the denial's own thesis
@@ -1457,7 +1308,7 @@ SOURCE     ✅ · [OughtRetorsion.lean#self_grounded_assertion_incoherent](forma
 
 DEPENDS ON   the denial: `∀ r, Ought r s a → r = s`
 GIVES        ⊥ — the denial, refuted
-KILLS        [step 8](#step-8) — That Person Grounds the Poles
+KILLS        [step 8](#step-8) — Verdict Divergence Yields Libertarian Free Choice
 
 PROOF
     Assume SelfLegislation(s)
@@ -1479,7 +1330,7 @@ SOURCE     ✅ · [PersonalNormativeGround.lean#will_identity_collapses_normativ
 
 DEPENDS ON   the denial: `hDescriptiveOnly → ∀ s, ¬AgentialDeonticAddress s p q`
 GIVES        ⊘ — the denial, refuted
-KILLS        [step 2](#step-2) — Being True Is Being True To Someone
+KILLS        [step 2](#step-2) — Existence of an Ultimate Internal Source
 
 PROOF
     Assume hDescriptiveOnly → ∀ s, ¬AgentialDeonticAddress(s, p, q)  ← the denial's own thesis
@@ -1501,7 +1352,7 @@ SOURCE     ✅ · [UndeniableNormativeDerivation.lean#d3_descriptive_truth_lacks
 
 DEPENDS ON   the denial: `∀ s, ¬AgentialDeonticAddress s p q`
 GIVES        ⊥ — the order cannot be kept, and collapses
-KILLS        [step 2](#step-2) — Being True Is Being True To Someone
+KILLS        [step 2](#step-2) — Existence of an Ultimate Internal Source
 
 PROOF
     Assume ∀ s, ¬AgentialDeonticAddress(s, p, q)  ← the denial's own thesis
@@ -1520,7 +1371,7 @@ SOURCE     ✅ · [UndeniableNormativeDerivation.lean#d4_impersonal_normativity_
 
 DEPENDS ON   the denial: `∀ q, ¬Incompatible p q`
 GIVES        ⊥ — the order cannot be kept, and collapses
-KILLS        [step 5](#step-5) — The Two Poles Cannot Both Be Correct
+KILLS        [step 5](#step-5) — Ultimate Act Source Is Not Determined by Prior State
 
 PROOF
     Assume ∀ q, ¬Incompatible(p, q)  ← the denial's own thesis
@@ -1539,7 +1390,7 @@ SOURCE     ✅ · [UndeniableNormativeDerivation.lean#d5_monolithic_command_lack
 
 DEPENDS ON   the denial: `¬(Means s p ∧ Means s q)`
 GIVES        ⊥ — the order cannot be kept, and collapses
-KILLS        [step 6](#step-6) — Co-Meaning Both Poles Is Free Will
+KILLS        [step 6](#step-6) — Accessible Alternative Under Same Complete Prior State
 
 PROOF
     Assume ¬(Means(s, p) ∧ Means(s, q))  ← the denial's own thesis
@@ -1627,12 +1478,26 @@ SOURCE     ✅ · [BoundedMeaning.lean#unrestricted_meaning_thesis_is_refuted](f
 
 **💥 DERIVATION** — “No one has shown a free subject exists.” **Pillar 4** of the Seven.
 
-> **⚠️ PRICED — the objection answered, at a price** — the objection is **answered**, not merely bounded: the claim it doubts obtains, and the price of that is named below. This row is a **result at a price**, not a gap in the deduction.
+> **🪞 INSTANTIATION — not a death** — this row **instantiates** a case rather than refuting anything: the compiled witness below is a world in which the two properties coexist, which is enough to show the objection's inference does not go through. It is not counted as a death, and nothing here says a step is impossible.
+
+<a id="proof_exists_implies_existence_of_free_subject"></a>
+DEPENDS ON   — the modelled denial
+GIVES        🧱 a bound on the reading, not a death
+KILLS        [step 9](#step-9) — Libertarian Choice Constitutes Free Will
+
+PROOF
+    ⚙️ DERIVATION — discharged directly, with no intermediate step
+    Assume ProofExists.{u_s, u_w, u_o} C
+    ∴ ∃ s, FreeSubject(C) s
+
+PRICE            ✅ **PROVEN** — 0 substantive axioms · `{choice, propext, sound}`
+SOURCE     ✅ · [CompleteLibertarianFreedomArgument.lean#proof_exists_implies_existence_of_free_subject](formal/Logos/CompleteLibertarianFreedomArgument.lean#L2441)
+
 
 <a id="a_genuine_free_person_exists"></a>
 DEPENDS ON   — the modelled denial
 GIVES        💰 the objection answered — the claim it doubts obtains, at the price below
-KILLS        [step 9](#step-9) — The Fact
+KILLS        [step 9](#step-9) — Libertarian Choice Constitutes Free Will
 
 PROOF
     💰 PRICED — 3 steps, on a declared axiom
@@ -1648,7 +1513,7 @@ SOURCE     ⚠️ AxActPolarity · [NoMeanerNoFalsity.lean#a_genuine_free_person
 <a id="freeWill_exists"></a>
 DEPENDS ON   — the modelled denial
 GIVES        💰 the objection answered — the claim it doubts obtains, at the price below
-KILLS        [step 9](#step-9) — The Fact
+KILLS        [step 9](#step-9) — Libertarian Choice Constitutes Free Will
 
 PROOF
     💰 PRICED — 3 steps, on a declared axiom
@@ -1663,8 +1528,8 @@ SOURCE     ⚠️ AxTwoNecessaryPersonalCentres · [AsieticChoice.lean#freeWill_
 
 <a id="epistemic_order_makes_the_act_datum_necessary"></a>
 DEPENDS ON   — the modelled denial
-GIVES        ✅ this half of the objection is answered **free** — 0 substantive axioms
-KILLS        [step 9](#step-9) — The Fact
+GIVES        🧱 a bound on the reading, not a death
+KILLS        [step 9](#step-9) — Libertarian Choice Constitutes Free Will
 
 PROOF
     ⚙️ DERIVATION — 4 compiled steps
@@ -1679,7 +1544,7 @@ PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Initiates, Means, 
 SOURCE     ✅ · [EpistemicNecessity.lean#epistemic_order_makes_the_act_datum_necessary](formal/Logos/EpistemicNecessity.lean#L235)
 
 
-> CLEARER.md §8. Renamed from “A free subject’s existence is open”, which was the one branch label that could be read as a *finding* rather than a *denial*: every sibling names a position that is killed, this one named a gap, and in a one-line index row with no gloss the gap was the only thing on the page. The label now states the objection in denial form. Role `derivation`: the target proves `∃ s, FreeWill(s)` outright at one META axiom, so the objection is answered rather than bounded, and the price is shown, never laundered into a ✅. The second target is the necessity half and is free. Row SUPERSEDED in GAPMAP (`F1bUncond`): C278 already proved it, and the corollary `freeSubject_exists` extends it to the `FreeSubject` name at the same price.
+> CLEARER.md §8. The objection doubts the existence of a free subject. Pillar 4 of the Seven. The objection is answered conclusively with 0 substantive axioms by the master proof of the Free Subject (`proof_exists_implies_existence_of_free_subject`), demonstrating that the concrete occurrence of this proof instance strictly derives the existence of an anonymous Free Subject.
 
 <a id="r17"></a>
 ### R17. The critic who presents the objection is himself a person
@@ -1714,7 +1579,7 @@ SOURCE     ✅ · [ProofPresentationRetorsion.lean#critic_presenting_objection_i
 
 DEPENDS ON   the denial: `∃ f, o, ∃ s, SelfDonation(f, o) ∧ o.deiformEntity = EntityOf(s)`
 GIVES        ⊥ — the denial, refuted
-KILLS        [step 8](#step-8) — That Person Grounds the Poles
+KILLS        [step 8](#step-8) — Verdict Divergence Yields Libertarian Free Choice
 
 PROOF
     Assume ∃ f, o, ∃ s, SelfDonation(f, o) ∧ o.deiformEntity = EntityOf(s)  ← the denial's own thesis
@@ -1723,7 +1588,7 @@ PROOF
     ⊥
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Subject}`
-SOURCE     ✅ · [DivineTrinitarianAttributes.lean#self_gift_cannot_depend_on_a_contingent_person](formal/Logos/DivineTrinitarianAttributes.lean#L3302)
+SOURCE     ✅ · [DivineTrinitarianAttributes.lean#self_gift_cannot_depend_on_a_contingent_person](formal/Logos/DivineTrinitarianAttributes.lean#L3303)
 
 > **The hinge, and the row the previous batch never had.** The objection is a four-step chain — (1) one Person, (2) therefore only contingent recipients, (3) therefore the self-giving *depends on* the contingent, (4) therefore contingent — against a Ground already determined Eternal, Necessary, Free and Immutable. **Step 3 is where it dies**, and it dies free: `SelfDonation` puts the recipient at `divineReality := Entity.ofGround`, so no `Subject` can be the recipient of a donation. The hypothesis here is that dependence as a proposition and the compiled derivation is C579 (`{Subject}`), whose primary is the premise step itself (`single_person_denial_is_refuted`, also `{Subject}`): assume the author's step 1 and `False` follows, because `Entity.ofGround` is no `Subject`'s entity. **No `AxAgapeEssence` appears on this row.** The donation's *existence* is priced on its own row below and is deliberately not used to refute an objection that grants it; a row that refuted the objection by way of the datum it also prices would be the datum. What the free rows say is that the gift's terminus is the necessary ground (`donation_terminus_is_as_necessary_as_the_donor`, `{NecessarySubjectKind, Subject}`), so the contingency conclusion has no premise (`donation_makes_contingency_is_refuted`). “It cannot be only one” is a *separate* paid row — `Plurality.notAlone` (T12) costs `AxTwoSubjects` — and is not folded into this row's price. The terminology the earlier batch collapsed is restored here: the ground **is personal** (C362, `PersonalGround`, whose `indwells` is `OneEssence` for *every* `Subject`), it **is** the nature those Persons are OneEssence in, and it is **no Person among them** (C519). “The ground is not a person” is the third of those, not a denial of the first.
 
@@ -1737,14 +1602,14 @@ SOURCE     ✅ · [DivineTrinitarianAttributes.lean#self_gift_cannot_depend_on_a
 
 DEPENDS ON   the denial: `¬∃ f, o, SelfDonation(f, o)`
 GIVES        the denial is refuted, at the price named below
-KILLS        [step 8](#step-8) — That Person Grounds the Poles
+KILLS        [step 8](#step-8) — Verdict Divergence Yields Libertarian Free Choice
 
 PROOF
     Assume ¬∃ f, o, SelfDonation(f, o)  ← the denial's own thesis
     False  — refuted, at the declared price on the PRICE line
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#denying_self_donation_is_absurd](formal/Logos/DivineTrinitarianAttributes.lean#L1945)
+SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#denying_self_donation_is_absurd](formal/Logos/DivineTrinitarianAttributes.lean#L1946)
 
 > The denial is a **real premise** of the compiled theorem — `denying_self_donation_is_absurd`, C576 — which is what makes this row a derivation and not a badge asserted over it. **Its kind is `⚠️ PRICED`, not `⊥ CONTRADICTION`, and the difference is not cosmetic.** `AxAgapeEssence` is priced, so a world exists in which the denial holds (the Narcissus world, C511, where the source loves only itself): the denial is *available* and is contradicted only by what is **declared**. Γ does not claim the donation is a theorem of logic. This row is mounted for that reason and not as the answer to the author — the answer is the free row above, which does not mention the donation.
 
@@ -1758,7 +1623,7 @@ SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#denying_se
 <a id="denying_shared_location_is_absurd"></a>
 DEPENDS ON   — the modelled denial
 GIVES        💰 a priced result — the objection dies, and the price is named
-KILLS        [step 8](#step-8) — That Person Grounds the Poles
+KILLS        [step 8](#step-8) — Verdict Divergence Yields Libertarian Free Choice
 
 PROOF
     💰 PRICED — one step, a projection
@@ -1766,13 +1631,13 @@ PROOF
     ∴ ¬∀ f, o, Subsists(f) → Subsists(o) → DivineLove f o → f.deiformEntity ≠ o.deiformEntity
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#denying_shared_location_is_absurd](formal/Logos/DivineTrinitarianAttributes.lean#L1956)
+SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#denying_shared_location_is_absurd](formal/Logos/DivineTrinitarianAttributes.lean#L1957)
 
 
 <a id="two_subsisting_share_one_location"></a>
 DEPENDS ON   — the modelled denial
 GIVES        🧱 a bound on the reading, not a death
-KILLS        [step 8](#step-8) — That Person Grounds the Poles
+KILLS        [step 8](#step-8) — Verdict Divergence Yields Libertarian Free Choice
 
 PROOF
     ⚙️ DERIVATION — discharged directly, with no intermediate step
@@ -1782,7 +1647,7 @@ PROOF
     ∴ f.deiformEntity = o.deiformEntity
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Subject}`
-SOURCE     ✅ · [DivineTrinitarianAttributes.lean#two_subsisting_share_one_location](formal/Logos/DivineTrinitarianAttributes.lean#L1556)
+SOURCE     ✅ · [DivineTrinitarianAttributes.lean#two_subsisting_share_one_location](formal/Logos/DivineTrinitarianAttributes.lean#L1557)
 
 
 > The stronger form, and the part that costs nothing extra: grant a donor and a recipient, grant that both subsist, grant that the love holds — and the denial *still* has to deny that they share one location-entity, which is `{}`. So the two-relata objection is refuted by arithmetic, not by a purchase. Same footprint as the row above ({Subject, AxAgapeEssence, Classical.choice}, one META): the price buys the gift, and the gift is not two things. This row has no thesis premise to label because the theorem's whole conclusion is the denial — so it prints the compiled statement and the derived kind rather than transcribing one.
@@ -1797,7 +1662,7 @@ SOURCE     ✅ · [DivineTrinitarianAttributes.lean#two_subsisting_share_one_loc
 <a id="self_donation_needs_no_personhood_of_the_ground"></a>
 DEPENDS ON   — the modelled denial
 GIVES        💰 the objection answered — the claim it doubts obtains, at the price below
-KILLS        [step 8](#step-8) — That Person Grounds the Poles
+KILLS        [step 8](#step-8) — Verdict Divergence Yields Libertarian Free Choice
 
 PROOF
     💰 PRICED — one step, a constructor
@@ -1805,7 +1670,7 @@ PROOF
     ∴ ¬Asiety(Entity).ofGround ∧ (∃ f, o, SelfDonation(f, o))
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Means, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#self_donation_needs_no_personhood_of_the_ground](formal/Logos/DivineTrinitarianAttributes.lean#L2413)
+SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#self_donation_needs_no_personhood_of_the_ground](formal/Logos/DivineTrinitarianAttributes.lean#L2414)
 
 
 <a id="ground_is_not_a_fourth_chooser"></a>
@@ -1819,7 +1684,7 @@ PROOF
     ∴ ¬Asiety(Entity).ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-SOURCE     ✅ · [DivineTrinitarianAttributes.lean#ground_is_not_a_fourth_chooser](formal/Logos/DivineTrinitarianAttributes.lean#L2375)
+SOURCE     ✅ · [DivineTrinitarianAttributes.lean#ground_is_not_a_fourth_chooser](formal/Logos/DivineTrinitarianAttributes.lean#L2376)
 
 
 <a id="agape_is_self_donation"></a>
@@ -1832,7 +1697,7 @@ PROOF
     ∴ ∃ f, o, SelfDonation(f, o)
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#agape_is_self_donation](formal/Logos/DivineTrinitarianAttributes.lean#L1909)
+SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#agape_is_self_donation](formal/Logos/DivineTrinitarianAttributes.lean#L1910)
 
 
 > **The row that restores what a laundering sentence had removed.** The corpus answered this with a label — “the one essence is not a fourth chooser; its freedom is their freedom, shared rather than duplicated” — and commit `4a59173` then claimed the label was an absent predicate presented as an argument, deleted the ground’s freedom from the doctrine, and rebuilt the reading on that. The predicate is **not** absent: `AsietyFreedom.asietyFreedomOfGround` (`AsietyFreedom.lean:141`) is the ◈ `def` that states the sharing, `asietyFreedom_summary` (`:357`) consumes it, and three docstrings in that module say the vacuity of `OneEssence` is *load-bearing* because it marks the ground’s freedom as **transferred** rather than **exercised**. A `def` premise is invisible to `#print axioms`, and from that invisibility the commit inferred that nothing was there. `LOVE-2.md` D1 withdraws that inference. So this row is a **conjunction, both halves machine-checked**, plus a granted premise: the ground is **not** a fourth chooser (free at `{Means, Subject}`, and marked role=premise — it is the *objection’s* premise, so it is printed as granted and kills nothing), **and** the donation of the Self stands anyway (C575, one META axiom). What the price buys is the gift and nothing more: it does not buy a fourth chooser, and it does not buy the ground’s personhood at the entity level, which C228 leaves `BLOCKED`. The ground **is** personal — C362, C140 — and `¬ Asiety Entity.ofGround` is `ofGround_ne_ofSubject`, i.e. C519: the nature is not one of its instances.
@@ -1919,7 +1784,7 @@ Contingent creation *as existence* is a free theorem (C350, `{}`); only the real
 | `C350` | ✅ **PROVEN** · [DivineClassicalAttributes.lean#contingent_realm_obtains](formal/Logos/DivineClassicalAttributes.lean#L4182), footprint {NecessarySubjectKind, Subject, CL} | Contingency-overflow: something obtains, is modal-fragile, and is not the necessary ground — and Γ derives it outright, resting on nothing substantive. |
 | `C367` | ✅ **PROVEN** · [DivineClassicalAttributes.lean#cosmos_obtains](formal/Logos/DivineClassicalAttributes.lean#L4329), footprint {Means, NecessarySubjectKind, Subject, Will, subjectWill, CL} | **The cosmos exists** — a contingent created realm, not the necessary ground, actually obtains and bears content of its own — given a *contingent* person. |
 | `C440` | ✅ **PROVEN** · [DivineClassicalAttributes.lean#divine_simplicity_sole_bearer](formal/Logos/DivineClassicalAttributes.lean#L886), footprint {Means, Subject, CL} | C440 — the attributes-table form: the ground is the sole bearer of Divine Simplicity, stated together with the existence half so a reader-facing row can cite a single declaration. This is the [the Divine Simplicity row in the ledger](#sec-where-the-rest-of-the-ledger-lives) analogue of C |
-| `C510` | ⚠️ **AXIOMATIC** — rests on `AxAgapeEssence`, `AxProcessionSpirit`, `AxProcessionWord` · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L1814), footprint {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} | Agape entails tripersonality (C510, PROVEN↑): under the three disclosed Agape axioms — the datum, the procession of the Word, the procession of the Spirit — there is a `TrinitarianStructure` (C108) on the divine sort who |
+| `C510` | ⚠️ **AXIOMATIC** — rests on `AxAgapeEssence`, `AxProcessionSpirit`, `AxProcessionWord` · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L1815), footprint {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} | Agape entails tripersonality (C510, PROVEN↑): under the three disclosed Agape axioms — the datum, the procession of the Word, the procession of the Spirit — there is a `TrinitarianStructure` (C108) on the divine sort who |
 
 ## The score: what Γ has won, and what is still open
 
@@ -1989,8 +1854,6 @@ Four qualifications, stated rather than hidden:
 2. **The 39 declared axioms are inputs, not wins.** Counting them as results would be the same error as counting a hypothesis as a proof. They are listed so the reader can price Γ exactly, and `VOCAB` is separated from `SEM`/`META` because only the latter are commitments.
 3. **A 🧱 is a win about a boundary, not about the claim.** Γ building a model in which monotheism fails is a real theorem — and a theorem *against* monotheism. The columns keep those apart on purpose.
 4. **The 15 retired routes are counted as neither won nor open.** Their ledger notes say the step was destroyed under hostile semantics; that is a settled negative. Filing them under "still open" would overstate the debt, and filing them as won would overstate the theory, so they get their own line.
-
-<sub>Declaration count excludes 11 parsed names with no `#print axioms` footprint; they are `parse_lean_sources` artefacts and are excluded from the denominator rather than scored axiom-free.</sub>
 
 <a id="sec-where-the-rest-of-the-ledger-lives"></a>
 ## Where the Rest of the Ledger Lives

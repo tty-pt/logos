@@ -838,10 +838,10 @@ theorem demonstration_occurrence_implies_existence_of_free_subject
 def ProofExists (C : Semantics Subject) : Prop :=
   Nonempty (ProofInstance.{u, v, u_out} C)
 
-/-- TEOREMA CONCLUSIVO FINAL: SE ESTA PROVA EXISTE, EXISTE SUJEITO LIVRE.
-    A dedução conecta o Nível 3 ao Nível 2 e ao Nível 1:
+/-- Final conclusive theorem: if this proof exists, a Free Subject exists.
+    The deduction connects Level 3 to Level 2 and Level 1:
     `ProofExists C → ∃ s : Subject, FreeSubject C s`.
-    PREÇO: `[Classical.choice]`. -/
+    Price: `[Classical.choice]`. -/
 theorem proof_exists_implies_existence_of_free_subject
     {C : Semantics Subject}
     (h : ProofExists C) :
@@ -2347,8 +2347,8 @@ theorem constitutive_act_determination_incompatible_with_mechanical_forcing
     False :=
   FinalNonCircularClosure.constitutive_act_determination_incompatible_with_mechanical_forcing J hConst hForced
 
-/-- TEOREMA PÚBLICO MESTRE: ARGUMENTO COMPLETO DA LIBERDADE LIBERTÁRIA:
-    PREÇO: `[Classical.choice]`. -/
+/-- Complete libertarian freedom argument: the well-founded constitutive determination chain of judgment directly entails a Free Subject.
+    Price: `[Classical.choice]`. -/
 theorem complete_libertarian_freedom_argument
     {C : FinalNonCircularClosure.Semantics Subject}
     {s : Subject}
@@ -2428,8 +2428,8 @@ theorem demonstration_occurrence_implies_existence_of_free_subject
 def ProofExists {Subject : Type u_s} (C : FinalNonCircularClosure.Semantics.{u_s, u_w} Subject) : Prop :=
   Nonempty (ProofInstance.{u_s, u_w, u_o} C)
 
-/-- TEOREMA PÚBLICO: SE ESTA PROVA EXISTE, EXISTE SUJEITO LIVRE.
-    existence claim only:
+/-- If this proof exists, a Free Subject exists: the concrete existence of a judgment proof instance entails an anonymous free subject.
+    Existence claim only:
     `ProofExists C → ∃ s : Subject, FreeSubject C s`.
 
     The argument does not identify the witness with the author or reader,
@@ -2437,7 +2437,7 @@ def ProofExists {Subject : Type u_s} (C : FinalNonCircularClosure.Semantics.{u_s
     The sole requirement is the concrete existence of an instance of the
     formalized judgment structure (`ProofExists C`). From that instance, the argument deduces
     an anonymous free subject (`∃ s : Subject, FreeSubject C s`).
-    PREÇO: `[Classical.choice]`. -/
+    Price: `[Classical.choice]`. -/
 theorem proof_exists_implies_existence_of_free_subject
     {Subject : Type u_s}
     {C : FinalNonCircularClosure.Semantics.{u_s, u_w} Subject}

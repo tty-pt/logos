@@ -22,8 +22,7 @@ import Logos.Agency
 import Logos.Order
 import Logos.Choice
 import Logos.Alternatives
-import Logos.NormativeTruth
-import Logos.ConstitutiveNormativeFreeWill
+import Logos.ActionAndNormativeChoice
 
 set_option linter.unusedVariables false
 

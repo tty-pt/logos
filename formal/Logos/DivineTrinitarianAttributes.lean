@@ -1,22 +1,23 @@
 import Logos.Agency
+import Logos.AgencyAuditsAndFrontiers
 import Logos.Alternatives
 import Logos.AsieticChoice
 import Logos.BoundedMeaning
 import Logos.Choice
 import Logos.ConditionalTheology
 import Logos.Core
-import Logos.DefinitiveAgencyFrontier
+-- DefinitiveAgencyFrontier consolidated into AgencyAuditsAndFrontiers
 import Logos.DivineClassicalAttributes
 import Logos.Entity
 import Logos.Modal
-import Logos.ModalPossibilityFrontier
+import Logos.ModalCreationFrontiers
 import Logos.MoralFrontierAudit
 import Logos.Person
 import Logos.PersonalNormativeGround
 import Logos.Plurality
 import Logos.RecoveredOntologicalGround
 import Logos.Semantics
-import Logos.TheologicalModalHardening
+-- TheologicalModalHardening consolidated into ModalCreationFrontiers
 
 /-!
 ================================================================================
