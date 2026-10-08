@@ -82,8 +82,7 @@ import Logos.Entity
 import Logos.Alternatives
 import Logos.Choice
 import Logos.RecoveredOntologicalGround
-import Logos.NecessityEternity
-import Logos.DivinePureActuality
+import Logos.DivineClassicalAttributes
 
 namespace Logos.BoundedMeaning
 

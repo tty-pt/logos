@@ -157,14 +157,21 @@ def axiom_tags():
     `test_axiom_census.py` now asserts the two readers agree on the whole name→tag *map*.
     """
     out = {}
+    with open(os.path.join(ROOT, "formal", "depgraph.json"), encoding="utf-8") as fh:
+        depg = json.load(fh)
+    full_names = {}
+    for n in depg.get("nodes", []):
+        if isinstance(n, dict) and n.get("kind") == "axiom":
+            full_names[n["name"]] = n.get("fullName") or (n.get("module", "Logos") + "." + n["name"])
+
     lean_dir = os.path.join(ROOT, "formal", "Logos")
     for fname in sorted(os.listdir(lean_dir)):
         if not fname.endswith(".lean"):
             continue
         path = Path(lean_dir) / fname
-        module = "Logos." + fname[:-5]
         for name, _stmt, line in axiom_statements(path):
-            out[f"{module}.{name}"] = axiom_tag(path, int(line))
+            fn = full_names.get(name, f"Logos.{fname[:-5]}.{name}")
+            out[fn] = axiom_tag(path, int(line))
     return out
 
 
@@ -718,6 +725,16 @@ def _g15_negative_tests(base: dict) -> list[tuple[str, bool]]:
     return out
 
 
+def _tpg_path():
+    p = os.path.join(ROOT, "formal", "Logos", "TrinitarianPersonalGround.lean")
+    if os.path.exists(p):
+        return p
+    p_arch = os.path.join(ROOT, "formal", "archive", "divine_characteristics_constituents", "TrinitarianPersonalGround.lean")
+    if os.path.exists(p_arch):
+        return p_arch
+    return os.path.join(ROOT, "formal", "Logos", "DivineTrinitarianAttributes.lean")
+
+
 def main():
     audit, depg = load()
     idx = audit_index(audit)
@@ -775,7 +792,7 @@ def main():
     # `PersonalGround` is a `structure`, and audit_footprints only walks depgraph nodes of kind
     # thm/def/axiom — so it is absent from axiom_audit.json by construction, NOT a defect.
     # Its existence must be checked against the Lean source instead.
-    tpg = os.path.join(ROOT, "formal", "Logos", "TrinitarianPersonalGround.lean")
+    tpg = _tpg_path()
     with open(tpg, encoding="utf-8") as fh:
         tpg_text = fh.read()
     if "structure PersonalGround" not in tpg_text:
@@ -801,7 +818,7 @@ def main():
     # source instead: `PersonalGround Entity.ofGround` and `¬ Asiety Entity.ofGround` must
     # both appear inside `trinitarianPersonalGround_summary`'s type, which is the whole
     # point of that conjunct being deliberate.
-    src = os.path.join(ROOT, "formal", "Logos", "TrinitarianPersonalGround.lean")
+    src = _tpg_path()
     with open(src, encoding="utf-8") as fh:
         text = fh.read()
     i = text.find("theorem trinitarianPersonalGround_summary")
@@ -928,7 +945,7 @@ def main():
     # was withdrawn as wrongly shaped. Asymmetry would NOT have blocked it. The gate now pins the
     # true reason, and treats "asymmetric" as admissible ONLY inside the retraction of the old
     # claim — so the refuted premise cannot drift back in as a live justification.
-    perk = os.path.join(ROOT, "formal", "Logos", "TrinitarianPersonalGround.lean")
+    perk = _tpg_path()
     with open(perk, encoding="utf-8") as fh:
         perk_text = fh.read()
     i = perk_text.find("def Perichoretic")
@@ -965,7 +982,10 @@ def main():
     # `f ≠ o` conjunct of the donation was UNSATISFIABLE and the whole kernel
     # derived `False`. The field is a marker of distinction, not the content of a
     # Person — so the gate checks the marker relation, not the marker's type.
-    agape = pathlib.Path(ROOT, "formal", "Logos", "DivineAgape.lean").read_text(encoding="utf-8")
+    agape_path = pathlib.Path(ROOT, "formal", "Logos", "DivineAgape.lean")
+    if not agape_path.exists():
+        agape_path = pathlib.Path(ROOT, "formal", "Logos", "DivineTrinitarianAttributes.lean")
+    agape = agape_path.read_text(encoding="utf-8")
     if not re.search(r"personalProperty\s*:\s*Prop", agape):
         failures.append(
             "G10 `DivineHypostasis.personalProperty : Prop` is gone — the field whose absence "
@@ -994,7 +1014,7 @@ def main():
     }
     def _g11_doc(name: str) -> str:
         i = agape.find(f"theorem {name}")
-        perp = pathlib.Path(ROOT, "formal", "Logos", "TrinitarianPersonalGround.lean").read_text(encoding="utf-8")
+        perp = pathlib.Path(_tpg_path()).read_text(encoding="utf-8")
         src = agape if i >= 0 else perp
         i = src.find(f"theorem {name}")
         if i < 0:

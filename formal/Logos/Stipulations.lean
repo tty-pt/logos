@@ -103,7 +103,7 @@ Philosophical cost: structural simplicity of the ground (`¬ HasInternalComponen
 Simplicity is therefore stipulated by the match arm, never derived. -/
 def ofGround_noInternalComponents : Stipulation where
   name := "ofGround_noInternalComponents"
-  location := "DivineSimplicity.lean:94"
+  location := "DivineClassicalAttributes.lean:734"
   anchor := "Entity.ofGround => False"
   tag := StipulationTag.VOCAB
   cost := "Indivisibility stipulated by match arm: the simplicity theorem unfolds this False."
@@ -127,7 +127,7 @@ Consistency model: Γ's own classical valuation semantics with `EntityExistsAt`
 consistent. -/
 def operatesAt_presencePlusObtaining : Stipulation where
   name := "operatesAt_presencePlusObtaining"
-  location := "DivineOmnipotence.lean:118"
+  location := "DivineClassicalAttributes.lean:2643"
   anchor := "def OperatesAt"
   tag := StipulationTag.SEM
   cost := "Operation identified with presence-plus-obtaining: foundational omnipotence is proved over the weakened reading; the causal/creative sense was BLOCKED until C493 declared universal production as a META bridge."

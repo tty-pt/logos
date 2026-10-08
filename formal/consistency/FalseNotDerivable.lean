@@ -43,8 +43,8 @@ gates are complementary: the negative compile is precise and position-blind, the
 position-exact and shape-blind. Neither alone is sufficient.
 -/
 
-import Logos.TrinitarianSubjectBridge
-import Logos.FoundationalUnicity
+import Logos.DivineClassicalAttributes
+import Logos.DivineTrinitarianAttributes
 
 open Logos.Entity (Entity EntityOf)
 open Logos.Agency (Subject)

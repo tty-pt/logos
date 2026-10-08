@@ -102,7 +102,11 @@ def census(bodies: bool = False) -> dict:
     for f in FILES:
         path = LEAN / f"{f}.lean"
         if not path.exists():
-            sys.exit(f"missing module: {path}")
+            archive_path = ROOT / "formal" / "archive" / "divine_characteristics_constituents" / f"{f}.lean"
+            if archive_path.exists():
+                path = archive_path
+            else:
+                sys.exit(f"missing module: {path}")
         any_n = fa_n = 0
         for name, text in declarations(path, bodies):
             if not RE_ANY.search(text):

@@ -37,7 +37,7 @@
   {
    "def": "ofGround_noInternalComponents",
    "name": "ofGround_noInternalComponents",
-   "location": "DivineSimplicity.lean:94",
+   "location": "DivineClassicalAttributes.lean:734",
    "anchor": "Entity.ofGround => False",
    "tag": "VOCAB",
    "cost": "Indivisibility stipulated by match arm: the simplicity theorem unfolds this False.",
@@ -48,7 +48,7 @@
   {
    "def": "operatesAt_presencePlusObtaining",
    "name": "operatesAt_presencePlusObtaining",
-   "location": "DivineOmnipotence.lean:118",
+   "location": "DivineClassicalAttributes.lean:2643",
    "anchor": "def OperatesAt",
    "tag": "SEM",
    "cost": "Operation identified with presence-plus-obtaining: foundational omnipotence is proved over the weakened reading; the causal/creative sense was BLOCKED until C493 declared universal production as a META bridge.",

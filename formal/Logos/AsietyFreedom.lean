@@ -88,7 +88,7 @@ import Logos.Agency
 import Logos.Alternatives
 import Logos.Choice
 import Logos.RecoveredOntologicalGround
-import Logos.NecessityEternity
+import Logos.DivineClassicalAttributes
 import Logos.AsieticChoice
 import Logos.IndubitableNormativeFreeWill
 import Logos.Stipulations

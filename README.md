@@ -380,7 +380,7 @@ PROOF
     ∴ ∃ s, Person(s)
 
 PRICE            ⚠️ **AXIOMATIC (AxActPolarity)** — 2 substantive axioms: AxActPolarity, performative_act_datum · `{AxActPolarity, Initiates, Means, State, Subject, Will, performative_act_datum, subjectWill, will_individuation}`
-SOURCE     ⚠️ AxActPolarity · [NoMeanerNoFalsity.lean#a_genuine_free_person_exists](formal/Logos/NoMeanerNoFalsity.lean#L97)
+SOURCE     ⚠️ AxActPolarity · [NoMeanerNoFalsity.lean#a_genuine_free_person_exists](formal/Logos/NoMeanerNoFalsity.lean#L94)
 
 
 <a id="step-8"></a>
@@ -647,7 +647,7 @@ PROOF
     ∴ NecessaryGroundOfReality Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-SOURCE     ✅ · [NecessityEternity.lean#ofGround_necessary_ground_of_reality](formal/Logos/NecessityEternity.lean#L161)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#ofGround_necessary_ground_of_reality](formal/Logos/DivineClassicalAttributes.lean#L183)
 
 <a id="conditional_canonical_aseity"></a>
 ### The ground has aseity — non-derived, non-dependent — and, read conditionally, priced.
@@ -663,7 +663,7 @@ PROOF
     ∴ CanonicalAseity(Entity).ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-SOURCE     ✅ · [CanonicalAseity.lean#conditional_canonical_aseity](formal/Logos/CanonicalAseity.lean#L133)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#conditional_canonical_aseity](formal/Logos/DivineClassicalAttributes.lean#L592)
 
 <a id="ofGround_foundational_unicity"></a>
 ### Foundational unicity — what unicity means before it is read as one God.
@@ -676,7 +676,7 @@ PROOF
     ∴ FoundationalUnicity Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject, choice, propext, sound}`
-SOURCE     ✅ · [FoundationalUnicity.lean#ofGround_foundational_unicity](formal/Logos/FoundationalUnicity.lean#L218)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#ofGround_foundational_unicity](formal/Logos/DivineClassicalAttributes.lean#L2077)
 
 <a id="ofGround_universal_modal_ground"></a>
     ▸ universal_ground  ·  Premises: 0 · 1 step
@@ -684,7 +684,7 @@ SOURCE     ✅ · [FoundationalUnicity.lean#ofGround_foundational_unicity](forma
           1. assume _w _e _hExists  (hypothesis assumption for conditional/reductio proof)
         ∴ UniversalModalGround(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [FoundationalOmnipresence.lean#ofGround_universal_modal_ground](formal/Logos/FoundationalOmnipresence.lean#L89)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_universal_modal_ground](formal/Logos/DivineClassicalAttributes.lean#L1722)
         ↑ a component of ofGround_foundational_unicity
 
     ▸ atom_exclusion  ·  a term of the record (`fun`), not a named theorem — no separate derivation
@@ -705,7 +705,7 @@ PROOF
     ∴ SoleUniversalGrounding Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-SOURCE     ✅ · [FoundationalUnicity.lean#ofGround_sole_universal_grounding](formal/Logos/FoundationalUnicity.lean#L287)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#ofGround_sole_universal_grounding](formal/Logos/DivineClassicalAttributes.lean#L2146)
 
 <a id="ofGround_universal_modal_ground"></a>
     ▸ universal_ground  ·  Premises: 0 · 1 step
@@ -713,7 +713,7 @@ SOURCE     ✅ · [FoundationalUnicity.lean#ofGround_sole_universal_grounding](f
           1. assume _w _e _hExists  (hypothesis assumption for conditional/reductio proof)
         ∴ UniversalModalGround(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [FoundationalOmnipresence.lean#ofGround_universal_modal_ground](formal/Logos/FoundationalOmnipresence.lean#L89)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_universal_modal_ground](formal/Logos/DivineClassicalAttributes.lean#L1722)
         ↑ a component of ofGround_sole_universal_grounding
 
     ▸ atom_exclusion  ·  a term of the record (`fun`), not a named theorem — no separate derivation
@@ -735,7 +735,7 @@ PROOF
     ∴ ∃ g, UniversalModalGround(g) ∧ (∀ g', UniversalModalGround(g') → g' = g)
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-SOURCE     ✅ · [FoundationalUnicity.lean#exactly_one_universal_modal_ground](formal/Logos/FoundationalUnicity.lean#L304)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#exactly_one_universal_modal_ground](formal/Logos/DivineClassicalAttributes.lean#L2163)
 
 <a id="the_ground_everlasting"></a>
 ### The ground is eternal — ever-present — existence outside the whole of time, not merely endless in it.
@@ -748,7 +748,7 @@ PROOF
     ∴ Everlasting(Entity).ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
-SOURCE     ✅ · [NecessityEternity.lean#the_ground_everlasting](formal/Logos/NecessityEternity.lean#L195)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#the_ground_everlasting](formal/Logos/DivineClassicalAttributes.lean#L217)
 
 <a id="the_ground_atemporal"></a>
 ### The ground is atemporal — existence is not time-modulated at all.
@@ -761,7 +761,7 @@ PROOF
     ∴ Atemporal(Entity).ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
-SOURCE     ✅ · [NecessityEternity.lean#the_ground_atemporal](formal/Logos/NecessityEternity.lean#L199)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#the_ground_atemporal](formal/Logos/DivineClassicalAttributes.lean#L221)
 
 <a id="ofGround_precedes_the_right_wrong_distinction"></a>
 ### The ground precedes right and wrong — the ordering claim Part I needs, stated about the ground.
@@ -774,7 +774,7 @@ PROOF
     ∴ PrecedesRightWrong Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-SOURCE     ✅ · [Precedence.lean#ofGround_precedes_the_right_wrong_distinction](formal/Logos/Precedence.lean#L263)
+SOURCE     ✅ · [DivineTrinitarianAttributes.lean#ofGround_precedes_the_right_wrong_distinction](formal/Logos/DivineTrinitarianAttributes.lean#L655)
 
 <a id="ofGround_obtains_where_no_atom_is_true"></a>
     ▸ obtains_where_no_atom_is_true  ·  Premises: 0 · 1 step
@@ -782,7 +782,7 @@ SOURCE     ✅ · [Precedence.lean#ofGround_precedes_the_right_wrong_distinction
           1. constructor  (conjunction constructor introduction)
         ∴ ∃ w, (∀ n, ¬w ⊨ atom(n)) ∧ ExistsAt(w, Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [Precedence.lean#ofGround_obtains_where_no_atom_is_true](formal/Logos/Precedence.lean#L122)
+        SOURCE  ✅ · [DivineTrinitarianAttributes.lean#ofGround_obtains_where_no_atom_is_true](formal/Logos/DivineTrinitarianAttributes.lean#L514)
         ↑ a component of ofGround_precedes_the_right_wrong_distinction
 
     ▸ conditions_every_bearer  ·  a term of the record (`fun`), not a named theorem — no separate derivation
@@ -793,7 +793,7 @@ SOURCE     ✅ · [Precedence.lean#ofGround_precedes_the_right_wrong_distinction
           1. assume h  (hypothesis assumption for conditional/reductio proof)
         ∴ ¬(∀ p, EntityMeans Entity.ofGround p ↔ T(p))
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [Precedence.lean#ground_scope_is_not_the_truth_set](formal/Logos/Precedence.lean#L195)
+        SOURCE  ✅ · [DivineTrinitarianAttributes.lean#ground_scope_is_not_the_truth_set](formal/Logos/DivineTrinitarianAttributes.lean#L587)
         ↑ a component of ofGround_precedes_the_right_wrong_distinction
 
 <a id="the_ground_is_not_the_universe"></a>
@@ -809,7 +809,7 @@ PROOF
     ∴ ¬Universe(Entity).ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
-SOURCE     ✅ · [CosmicExistence.lean#the_ground_is_not_the_universe](formal/Logos/CosmicExistence.lean#L738)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#the_ground_is_not_the_universe](formal/Logos/DivineClassicalAttributes.lean#L4652)
 
 <a id="ofGround_not_a_person_correlate"></a>
 ### The ground is not a person-correlate — exclusion of personhood: not identical with a person-correlated subject.
@@ -822,7 +822,7 @@ PROOF
     ∴ ¬PersonCorrelate(Entity).ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject, Will, subjectWill}`
-SOURCE     ✅ · [CosmicExistence.lean#ofGround_not_a_person_correlate](formal/Logos/CosmicExistence.lean#L672)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#ofGround_not_a_person_correlate](formal/Logos/DivineClassicalAttributes.lean#L4586)
 
 <a id="divine_simplicity_sole_bearer"></a>
 ### The ground is simple — simplicity as the sole bearer of the attribute.
@@ -837,7 +837,7 @@ PROOF
     ∴ DivineSimplicity Entity.ofGround ∧ (∀ e, DivineSimplicity e → e = Entity.ofGround)
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject, propext}`
-SOURCE     ✅ · [DivineSimplicity.lean#divine_simplicity_sole_bearer](formal/Logos/DivineSimplicity.lean#L246)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#divine_simplicity_sole_bearer](formal/Logos/DivineClassicalAttributes.lean#L886)
 
 <a id="ofGround_sole_transcendent_ground"></a>
 ### The ground is transcendent — neither an atom nor a member of the totality.
@@ -852,7 +852,7 @@ PROOF
     ∴ e = Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Subject}`
-SOURCE     ✅ · [DivineTranscendence.lean#ofGround_sole_transcendent_ground](formal/Logos/DivineTranscendence.lean#L317)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#ofGround_sole_transcendent_ground](formal/Logos/DivineClassicalAttributes.lean#L1569)
 
 <a id="ofGround_divine_immutability"></a>
 ### The ground is immutable — four invariances, each its own derivation.
@@ -865,7 +865,7 @@ PROOF
     ∴ DivineImmutability Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Initiates, Means, NecessarySubjectKind, State, Subject}`
-SOURCE     ✅ · [DivineImmutability.lean#ofGround_divine_immutability](formal/Logos/DivineImmutability.lean#L213)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#ofGround_divine_immutability](formal/Logos/DivineClassicalAttributes.lean#L1140)
 
 <a id="ofGround_modal_invariance"></a>
     ▸ modal_invariance  ·  Premises: 0 · 1 step
@@ -873,7 +873,7 @@ SOURCE     ✅ · [DivineImmutability.lean#ofGround_divine_immutability](formal/
           1. assume w₁ w₂  (hypothesis assumption for conditional/reductio proof)
         ∴ ModalInvariance(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [DivineImmutability.lean#ofGround_modal_invariance](formal/Logos/DivineImmutability.lean#L73)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_modal_invariance](formal/Logos/DivineClassicalAttributes.lean#L1000)
         ↑ a component of ofGround_divine_immutability
 
 <a id="ofGround_stage_invariance"></a>
@@ -882,7 +882,7 @@ SOURCE     ✅ · [DivineImmutability.lean#ofGround_divine_immutability](formal/
           1. definitional identity via the_ground_atemporal
         ∴ StageInvariance(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [DivineImmutability.lean#ofGround_stage_invariance](formal/Logos/DivineImmutability.lean#L92)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_stage_invariance](formal/Logos/DivineClassicalAttributes.lean#L1019)
         ↑ a component of ofGround_divine_immutability
 
 <a id="ofGround_transition_invariance"></a>
@@ -891,7 +891,7 @@ SOURCE     ✅ · [DivineImmutability.lean#ofGround_divine_immutability](formal/
           1. definitional identity via the_ground_not_in_succession
         ∴ TransitionInvariance(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Initiates, State, Subject}`
-        SOURCE  ✅ · [DivineImmutability.lean#ofGround_transition_invariance](formal/Logos/DivineImmutability.lean#L119)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_transition_invariance](formal/Logos/DivineClassicalAttributes.lean#L1046)
         ↑ a component of ofGround_divine_immutability
 
 <a id="ofGround_capacity_invariance"></a>
@@ -900,7 +900,7 @@ SOURCE     ✅ · [DivineImmutability.lean#ofGround_divine_immutability](formal/
           1. assume p _w₁ _w₂  (hypothesis assumption for conditional/reductio proof)
         ∴ CapacityInvariance(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [DivineImmutability.lean#ofGround_capacity_invariance](formal/Logos/DivineImmutability.lean#L147)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_capacity_invariance](formal/Logos/DivineClassicalAttributes.lean#L1074)
         ↑ a component of ofGround_divine_immutability
 
 <a id="ofGround_foundational_omnipresence"></a>
@@ -914,7 +914,7 @@ PROOF
     ∴ FoundationalOmnipresence Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-SOURCE     ✅ · [FoundationalOmnipresence.lean#ofGround_foundational_omnipresence](formal/Logos/FoundationalOmnipresence.lean#L173)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#ofGround_foundational_omnipresence](formal/Logos/DivineClassicalAttributes.lean#L1806)
 
 <a id="ofGround_world_rigid_presence"></a>
     ▸ presence  ·  Premises: 0 · 2 steps
@@ -923,7 +923,7 @@ SOURCE     ✅ · [FoundationalOmnipresence.lean#ofGround_foundational_omniprese
           2. definitional identity via trivial
         ∴ WorldRigidPresence(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [FoundationalOmnipresence.lean#ofGround_world_rigid_presence](formal/Logos/FoundationalOmnipresence.lean#L107)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_world_rigid_presence](formal/Logos/DivineClassicalAttributes.lean#L1740)
         ↑ a component of ofGround_foundational_omnipresence
 
 <a id="ofGround_universal_modal_ground"></a>
@@ -932,7 +932,7 @@ SOURCE     ✅ · [FoundationalOmnipresence.lean#ofGround_foundational_omniprese
           1. assume _w _e _hExists  (hypothesis assumption for conditional/reductio proof)
         ∴ UniversalModalGround(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [FoundationalOmnipresence.lean#ofGround_universal_modal_ground](formal/Logos/FoundationalOmnipresence.lean#L89)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_universal_modal_ground](formal/Logos/DivineClassicalAttributes.lean#L1722)
         ↑ a component of ofGround_foundational_omnipresence
 
 <a id="ofGround_non_reciprocal_ground"></a>
@@ -941,7 +941,7 @@ SOURCE     ✅ · [FoundationalOmnipresence.lean#ofGround_foundational_omniprese
           1. constructor  (existential constructor introduction)
         ∴ NonReciprocalGround(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [FoundationalOmnipresence.lean#ofGround_non_reciprocal_ground](formal/Logos/FoundationalOmnipresence.lean#L127)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_non_reciprocal_ground](formal/Logos/DivineClassicalAttributes.lean#L1760)
         ↑ a component of ofGround_foundational_omnipresence
 
 <a id="ofGround_maximal_capacity"></a>
@@ -951,7 +951,7 @@ SOURCE     ✅ · [FoundationalOmnipresence.lean#ofGround_foundational_omniprese
           2. definitional identity via trivial
         ∴ MaximalCapacity(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [FoundationalOmnipresence.lean#ofGround_maximal_capacity](formal/Logos/FoundationalOmnipresence.lean#L144)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_maximal_capacity](formal/Logos/DivineClassicalAttributes.lean#L1777)
         ↑ a component of ofGround_foundational_omnipresence
 
 <a id="ofGround_divine_pure_actuality"></a>
@@ -966,7 +966,7 @@ PROOF
     ∴ DivinePureActuality Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Initiates, Means, NecessarySubjectKind, State, Subject}`
-SOURCE     ✅ · [DivinePureActuality.lean#ofGround_divine_pure_actuality](formal/Logos/DivinePureActuality.lean#L195)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#ofGround_divine_pure_actuality](formal/Logos/DivineClassicalAttributes.lean#L2413)
 
 <a id="ofGround_no_existential_potency"></a>
     ▸ no_existential_potency  ·  Premises: 0 · 1 step
@@ -974,7 +974,7 @@ SOURCE     ✅ · [DivinePureActuality.lean#ofGround_divine_pure_actuality](form
           1. assume ⟨w, hw⟩  (hypothesis assumption for conditional/reductio proof)
         ∴ ¬PassiveExistentialPotency(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [DivinePureActuality.lean#ofGround_no_existential_potency](formal/Logos/DivinePureActuality.lean#L105)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_no_existential_potency](formal/Logos/DivineClassicalAttributes.lean#L2323)
         ↑ a component of ofGround_divine_pure_actuality
 
 <a id="ofGround_no_grounding_potency"></a>
@@ -983,7 +983,7 @@ SOURCE     ✅ · [DivinePureActuality.lean#ofGround_divine_pure_actuality](form
         Assume ∀ s, ∃ p, ¬Means(s, p)
         ∴ ¬PassiveGroundingPotency(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [DivinePureActuality.lean#ofGround_no_grounding_potency](formal/Logos/DivinePureActuality.lean#L119)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_no_grounding_potency](formal/Logos/DivineClassicalAttributes.lean#L2337)
         ↑ a component of ofGround_divine_pure_actuality
 
 <a id="ofGround_no_transition_potency"></a>
@@ -992,7 +992,7 @@ SOURCE     ✅ · [DivinePureActuality.lean#ofGround_divine_pure_actuality](form
           1. assume h  (hypothesis assumption for conditional/reductio proof)
         ∴ ¬PassiveTransitionPotency(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Initiates, State, Subject}`
-        SOURCE  ✅ · [DivinePureActuality.lean#ofGround_no_transition_potency](formal/Logos/DivinePureActuality.lean#L141)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_no_transition_potency](formal/Logos/DivineClassicalAttributes.lean#L2359)
         ↑ a component of ofGround_divine_pure_actuality
 
 <a id="ofGround_no_intentional_potency"></a>
@@ -1001,7 +1001,7 @@ SOURCE     ✅ · [DivinePureActuality.lean#ofGround_divine_pure_actuality](form
           1. assume ⟨p, hp⟩  (hypothesis assumption for conditional/reductio proof)
         ∴ ¬PassiveIntentionalPotency(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [DivinePureActuality.lean#ofGround_no_intentional_potency](formal/Logos/DivinePureActuality.lean#L155)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_no_intentional_potency](formal/Logos/DivineClassicalAttributes.lean#L2373)
         ↑ a component of ofGround_divine_pure_actuality
 
 <a id="ofGround_universal_modal_ground"></a>
@@ -1010,7 +1010,7 @@ SOURCE     ✅ · [DivinePureActuality.lean#ofGround_divine_pure_actuality](form
           1. assume _w _e _hExists  (hypothesis assumption for conditional/reductio proof)
         ∴ UniversalModalGround(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [FoundationalOmnipresence.lean#ofGround_universal_modal_ground](formal/Logos/FoundationalOmnipresence.lean#L89)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_universal_modal_ground](formal/Logos/DivineClassicalAttributes.lean#L1722)
         ↑ a component of ofGround_divine_pure_actuality
 
 <a id="ofGround_foundational_omniscience"></a>
@@ -1024,7 +1024,7 @@ PROOF
     ∴ FoundationalOmniscience Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-SOURCE     ✅ · [DivineOmniscience.lean#ofGround_foundational_omniscience](formal/Logos/DivineOmniscience.lean#L205)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#ofGround_foundational_omniscience](formal/Logos/DivineClassicalAttributes.lean#L3147)
 
 <a id="ofGround_truth_exhaustive"></a>
     ▸ truth_exhaustive  ·  Premises: 0 · 2 steps
@@ -1033,7 +1033,7 @@ SOURCE     ✅ · [DivineOmniscience.lean#ofGround_foundational_omniscience](for
           2. definitional identity via trivial
         ∴ TruthExhaustive(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [DivineOmniscience.lean#ofGround_truth_exhaustive](formal/Logos/DivineOmniscience.lean#L127)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_truth_exhaustive](formal/Logos/DivineClassicalAttributes.lean#L3069)
         ↑ a component of ofGround_foundational_omniscience
 
 <a id="ofGround_world_truth_exhaustive"></a>
@@ -1043,7 +1043,7 @@ SOURCE     ✅ · [DivineOmniscience.lean#ofGround_foundational_omniscience](for
           2. definitional identity via trivial
         ∴ WorldTruthExhaustive(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [DivineOmniscience.lean#ofGround_world_truth_exhaustive](formal/Logos/DivineOmniscience.lean#L134)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_world_truth_exhaustive](formal/Logos/DivineClassicalAttributes.lean#L3076)
         ↑ a component of ofGround_foundational_omniscience
 
 <a id="ofGround_undivided_meaning"></a>
@@ -1052,7 +1052,7 @@ SOURCE     ✅ · [DivineOmniscience.lean#ofGround_foundational_omniscience](for
           1. assume p q  (hypothesis assumption for conditional/reductio proof)
         ∴ UndividedMeaning(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [DivineSimplicity.lean#ofGround_undivided_meaning](formal/Logos/DivineSimplicity.lean#L118)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_undivided_meaning](formal/Logos/DivineClassicalAttributes.lean#L758)
         ↑ a component of ofGround_foundational_omniscience
 
 <a id="ofGround_not_truth_tracking"></a>
@@ -1061,7 +1061,7 @@ SOURCE     ✅ · [DivineOmniscience.lean#ofGround_foundational_omniscience](for
           1. assume h  (hypothesis assumption for conditional/reductio proof)
         ∴ ¬TruthTracking(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [DivineOmniscience.lean#ofGround_not_truth_tracking](formal/Logos/DivineOmniscience.lean#L149)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_not_truth_tracking](formal/Logos/DivineClassicalAttributes.lean#L3091)
         ↑ a component of ofGround_foundational_omniscience
 
 <a id="ofGround_universal_modal_ground"></a>
@@ -1070,7 +1070,7 @@ SOURCE     ✅ · [DivineOmniscience.lean#ofGround_foundational_omniscience](for
           1. assume _w _e _hExists  (hypothesis assumption for conditional/reductio proof)
         ∴ UniversalModalGround(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [FoundationalOmnipresence.lean#ofGround_universal_modal_ground](formal/Logos/FoundationalOmnipresence.lean#L89)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_universal_modal_ground](formal/Logos/DivineClassicalAttributes.lean#L1722)
         ↑ a component of ofGround_foundational_omniscience
 
 <a id="ofGround_foundational_omnipotence"></a>
@@ -1084,7 +1084,7 @@ PROOF
     ∴ FoundationalOmnipotence Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject, propext}`
-SOURCE     ✅ · [DivineOmnipotence.lean#ofGround_foundational_omnipotence](formal/Logos/DivineOmnipotence.lean#L306)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#ofGround_foundational_omnipotence](formal/Logos/DivineClassicalAttributes.lean#L2831)
 
 <a id="ofGround_gapless_operative_scope"></a>
     ▸ gapless_operate  ·  Premises: 0 · 5 steps
@@ -1096,7 +1096,7 @@ SOURCE     ✅ · [DivineOmnipotence.lean#ofGround_foundational_omnipotence](for
           5. hPv  (conjunction conjunct 4: hPv)
         ∴ GaplessOperate(UniversalFrame(World), OperatesAt, Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [DivineOmnipotence.lean#ofGround_gapless_operative_scope](formal/Logos/DivineOmnipotence.lean#L177)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_gapless_operative_scope](formal/Logos/DivineClassicalAttributes.lean#L2702)
         ↑ a component of ofGround_foundational_omnipotence
 
 <a id="ofGround_operates_only_what_obtains"></a>
@@ -1105,7 +1105,7 @@ SOURCE     ✅ · [DivineOmnipotence.lean#ofGround_foundational_omnipotence](for
           1. assume v P h  (hypothesis assumption for conditional/reductio proof)
         ∴ ∀ v, P, OperatesAt v Entity.ofGround P → P(v)
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [DivineOmnipotence.lean#ofGround_operates_only_what_obtains](formal/Logos/DivineOmnipotence.lean#L187)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_operates_only_what_obtains](formal/Logos/DivineClassicalAttributes.lean#L2712)
         ↑ a component of ofGround_foundational_omnipotence
 
 <a id="ofGround_does_not_operate_contradictions"></a>
@@ -1116,7 +1116,7 @@ SOURCE     ✅ · [DivineOmnipotence.lean#ofGround_foundational_omnipotence](for
           3. ¬v ⊨ (φ ∧ ¬φ)
         ∴ ¬OperatesAt v Entity.ofGround (fun u => u ⊨ (φ ∧ ¬φ))
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject, propext}`
-        SOURCE  ✅ · [DivineOmnipotence.lean#ofGround_does_not_operate_contradictions](formal/Logos/DivineOmnipotence.lean#L201)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_does_not_operate_contradictions](formal/Logos/DivineClassicalAttributes.lean#L2726)
         ↑ a component of ofGround_foundational_omnipotence
 
 <a id="ofGround_universal_modal_ground"></a>
@@ -1125,7 +1125,7 @@ SOURCE     ✅ · [DivineOmnipotence.lean#ofGround_foundational_omnipotence](for
           1. assume _w _e _hExists  (hypothesis assumption for conditional/reductio proof)
         ∴ UniversalModalGround(Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [FoundationalOmnipresence.lean#ofGround_universal_modal_ground](formal/Logos/FoundationalOmnipresence.lean#L89)
+        SOURCE  ✅ · [DivineClassicalAttributes.lean#ofGround_universal_modal_ground](formal/Logos/DivineClassicalAttributes.lean#L1722)
         ↑ a component of ofGround_foundational_omnipotence
 
 <a id="ground_produces_every_satisfiable_form"></a>
@@ -1136,7 +1136,7 @@ GIVES        the established attribute; nothing downstream in the corpus consume
 KILLS        —
 
 DECLARED      ⚠️ **AXIOMATIC (ground_produces_every_satisfiable_form)** — 1 substantive axiom: ground_produces_every_satisfiable_form · `{Produces, Subject, ground_produces_every_satisfiable_form}`
-SOURCE     ⚠️ ground_produces_every_satisfiable_form · [ThomisticAct.lean#ground_produces_every_satisfiable_form](formal/Logos/ThomisticAct.lean#L247)
+SOURCE     ⚠️ ground_produces_every_satisfiable_form · [DivineThomisticProduction.lean#ground_produces_every_satisfiable_form](formal/Logos/DivineThomisticProduction.lean#L268)
 
 <a id="agape_entails_tripersonality"></a>
 ### One God in three Persons — Trinity, from the ground's love of the contingent.
@@ -1150,7 +1150,7 @@ PROOF
     ∴ ∃ t,DivineHypostasis Entity, t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** — 3 substantive axioms: AxAgapeEssence, AxProcessionSpirit, AxProcessionWord · `{AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence, AxProcessionSpirit, AxProcessionWord · [DivineAgape.lean#agape_entails_tripersonality](formal/Logos/DivineAgape.lean#L376)
+SOURCE     ⚠️ AxAgapeEssence, AxProcessionSpirit, AxProcessionWord · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L1814)
 
 ### What is not established about the ground
 
@@ -1188,19 +1188,19 @@ So "the Free Subject is necessarily true" is true of the *order* and of the *sub
 | What it costs | What it settles | Derived status · footprint · source |
 |---|---|---|
 | The normative order is **necessary** | ∀ w, NormativeOrderAt w — at every world, unconditionally. | ✅ **PROVEN** · 0 substantive axioms · `{Initiates, Means, State, Subject}` · [NecessaryPersonalGround.lean#necessary_normative_order](formal/Logos/NecessaryPersonalGround.lean#L126) {Initiates, Means, State, Subject} |
-| The ground is **necessary** | `Entity.ofGround` is modal-fragile-free; a `def` bridge (`NecessarySubjectKind`) is disclosed in [the declared-`def` census in the ledger](#sec-where-the-rest-of-the-ledger-lives) | ✅ **PROVEN** · 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}` · [NecessityEternity.lean#ofGround_necessary_ground_of_reality](formal/Logos/NecessityEternity.lean#L161) {Means, NecessarySubjectKind, Subject} |
-| A **free subject exists** | Unconditional existence, via `freeWill_exists`. The one META bridge is `AxTwoSubjects` — plural personal reality. | ⚠️ **AXIOMATIC (AxTwoNecessaryPersonalCentres)** · `{Means, NecessarySubjectKind, Subject, Will, subjectWill, AxTwoNecessaryPersonalCentres}` · [AsieticChoice.lean#freeSubject_exists](formal/Logos/AsieticChoice.lean#L618) {AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill} |
-| **Free will** exists | The same predicate under the other name; identical footprint by construction, not by coincidence. | ⚠️ **AXIOMATIC (AxTwoNecessaryPersonalCentres)** · `{Means, NecessarySubjectKind, Subject, Will, subjectWill, AxTwoNecessaryPersonalCentres}` · [AsieticChoice.lean#freeWill_exists](formal/Logos/AsieticChoice.lean#L601) {AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill} |
+| The ground is **necessary** | `Entity.ofGround` is modal-fragile-free; a `def` bridge (`NecessarySubjectKind`) is disclosed in [the declared-`def` census in the ledger](#sec-where-the-rest-of-the-ledger-lives) | ✅ **PROVEN** · 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}` · [DivineClassicalAttributes.lean#ofGround_necessary_ground_of_reality](formal/Logos/DivineClassicalAttributes.lean#L183) {Means, NecessarySubjectKind, Subject} |
+| A **free subject exists** | Unconditional existence, via `freeWill_exists`. The one META bridge is `AxTwoSubjects` — plural personal reality. | ⚠️ **AXIOMATIC (AxTwoNecessaryPersonalCentres)** · `{Means, NecessarySubjectKind, Subject, Will, subjectWill, AxTwoNecessaryPersonalCentres}` · [AsieticChoice.lean#freeSubject_exists](formal/Logos/AsieticChoice.lean#L616) {AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill} |
+| **Free will** exists | The same predicate under the other name; identical footprint by construction, not by coincidence. | ⚠️ **AXIOMATIC (AxTwoNecessaryPersonalCentres)** · `{Means, NecessarySubjectKind, Subject, Will, subjectWill, AxTwoNecessaryPersonalCentres}` · [AsieticChoice.lean#freeWill_exists](formal/Logos/AsieticChoice.lean#L599) {AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill} |
 | A **person** has free will | `Person s → FreeWill s`: 0 substantive axioms. Dominion over acts *is* free will (`Person.lean:56`). | ✅ **PROVEN** · 0 substantive axioms · `{Means, Subject, Will, subjectWill}` · [Person.lean#person_has_free_will](formal/Logos/Person.lean#L157) {Means, Subject, Will, subjectWill} |
 | A **necessary person** exists | C404/C407: the second META bridge (`necessaryPersonalSubjectExists`). This is the row that would have to be paid for a necessary Free Subject. | ⚠️ **AXIOMATIC (necessaryPersonalSubjectExists)** · `{Means, NecessarySubjectKind, Subject, Will, subjectWill, necessaryPersonalSubjectExists}` · [Plurality.lean#necessarySubject_exists](formal/Logos/Plurality.lean#L192) {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} |
-| The ground is **not** a subject-correlate | `Entity.ofGround ≠ EntityOf s` for every `s`. The two necessities above are not identified. | ✅ **PROVEN** · 0 substantive axioms · `{Subject}` · [NecessityEternity.lean#ofGround_ne_ofSubject](formal/Logos/NecessityEternity.lean#L168) {Subject} |
+| The ground is **not** a subject-correlate | `Entity.ofGround ≠ EntityOf s` for every `s`. The two necessities above are not identified. | ✅ **PROVEN** · 0 substantive axioms · `{Subject}` · [DivineClassicalAttributes.lean#ofGround_ne_ofSubject](formal/Logos/DivineClassicalAttributes.lean#L190) {Subject} |
 
 | Claim | Derived status | What it settles |
 |---|---|---|
 | `C404` | ◆ **AXIOM** — rests on `necessaryPersonalSubjectExists` · [Plurality.lean#necessaryPersonalSubjectExists](formal/Logos/Plurality.lean#L188), footprint {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} | Metaphysical bridge: the necessary kind of subject is inhabited by a person. |
 | `C407` | ⚠️ **AXIOMATIC** — rests on `necessaryPersonalSubjectExists` · [Plurality.lean#necessarySubject_exists](formal/Logos/Plurality.lean#L192), footprint {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} | A necessary subject exists, from the bridge. Footprint: `{Means, NecessarySubjectKind, Subject, Will, necessaryPersonalSubjectExists, subjectWill}`. |
-| `C494` | ⚠️ **AXIOMATIC** — rests on `necessaryPersonalSubjectExists` · [NecessaryKindAudit.lean#the_ground_is_not_the_only_necessary_being](formal/Logos/NecessaryKindAudit.lean#L139), footprint {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} | **The ground is not the only necessary being (C494)** — the refutation of *ST* I q.19 a.4 in its extensional reading. The claim that every property of God is shared by every necessary being is false: taking `Q := fun e = |
-| `C495` | ⚠️ **AXIOMATIC** — rests on `necessaryPersonalSubjectExists` · [NecessaryKindAudit.lean#necessity_is_not_sole_bearer_of_the_ground](formal/Logos/NecessaryKindAudit.lean#L121), footprint {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} | **Necessity is not sole-bearer of the ground (C495).** No other characteristic in the corpus has this shape: `∀ e, NecessaryEntity e → e = Entity.ofGround` is **false**, because the META bridge `necessaryPersonalSubjectE |
+| `C494` | ⚠️ **AXIOMATIC** — rests on `necessaryPersonalSubjectExists` · [DivineThomisticProduction.lean#the_ground_is_not_the_only_necessary_being](formal/Logos/DivineThomisticProduction.lean#L561), footprint {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} | **The ground is not the only necessary being (C494)** — the refutation of *ST* I q.19 a.4 in its extensional reading. The claim that every property of God is shared by every necessary being is false: taking `Q := fun e = |
+| `C495` | ⚠️ **AXIOMATIC** — rests on `necessaryPersonalSubjectExists` · [DivineThomisticProduction.lean#necessity_is_not_sole_bearer_of_the_ground](formal/Logos/DivineThomisticProduction.lean#L543), footprint {necessaryPersonalSubjectExists, Means, NecessarySubjectKind, Subject, Will, subjectWill} | **Necessity is not sole-bearer of the ground (C495).** No other characteristic in the corpus has this shape: `∀ e, NecessaryEntity e → e = Entity.ofGround` is **false**, because the META bridge `necessaryPersonalSubjectE |
 
 <a id="sec-one-god-in-three-persons"></a>
 ### One God, in Three Persons
@@ -1223,12 +1223,12 @@ The shared **nature** is still not in the vocabulary of the sort. C519 and C520 
 
 | What it costs | What it settles | Derived status · footprint · source |
 |---|---|---|
-| **One ground** of reality | C320/C389: `∃! g, UniversalModalGround g`. Existence unconditional; uniqueness on the declared META bound `GroundTranscendence`. | ✅ **PROVEN** · 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}` · [FoundationalUnicity.lean#exactly_one_universal_modal_ground](formal/Logos/FoundationalUnicity.lean#L304) {Means, NecessarySubjectKind, Subject} |
-| **One nature** (una natura, *actus purus*) | C440 divine simplicity as the sole bearer; aseity non-derived. 0 substantive axioms. | ✅ **PROVEN** · 0 substantive axioms · `{Means, Subject, CL}` · [DivineSimplicity.lean#divine_simplicity_sole_bearer](formal/Logos/DivineSimplicity.lean#L246) {Means, Subject, CL} · [CanonicalAseity.lean#conditional_canonical_aseity](formal/Logos/CanonicalAseity.lean#L133) {Means, Subject} |
-| **Three distinct Persons** | C510: `t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit`. **Priced on three declared META premises.** | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineAgape.lean#agape_entails_tripersonality](formal/Logos/DivineAgape.lean#L376) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} |
-| All three are **God** (one `divineReality`) | The anti-tritheism half: `is_divine the_father divineReality ∧ is_divine the_beloved divineReality ∧ is_divine the_spirit divineReality`. **Not the price of C510, and cheaper than it** — `the_father_is_divine` and `the_beloved_is_divine` rest on `{Subject, AxAgapeEssence, CL}` (one META), `the_spirit_is_divine` on `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` (two META), so this row's union is two META axioms where C510 needs three. The word *consubstantial* is not used for this row: the `Consubstantial` anchor was deleted because `Consubstantial Entity.ofGround e f` is `True` of arbitrary entities including atoms — a `{}` price on a `True` proposition is a null result, which is why G9 in `test_personal_ground_kind.py` refuses its re-declaration. The one-ness Γ actually carries is `indwells`, and the shared *nature* is still not in the vocabulary of the sort. | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` · [DivineAgape.lean#the_father_is_divine](formal/Logos/DivineAgape.lean#L319) {AxAgapeEssence, Subject, CL} · [DivineAgape.lean#the_beloved_is_divine](formal/Logos/DivineAgape.lean#L324) {AxAgapeEssence, Subject, CL} · [DivineAgape.lean#the_spirit_is_divine](formal/Logos/DivineAgape.lean#L329) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
-| The Persons are **distinct** (not three gods) | Personal distinctness by personal property, not by essence: `≠` in every pair, and the Spirit is no word. | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineAgape.lean#the_beloved_distinct](formal/Logos/DivineAgape.lean#L196) {AxAgapeEssence, Subject, CL} · [DivineAgape.lean#the_spirit_ne_father](formal/Logos/DivineAgape.lean#L255) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} · [DivineAgape.lean#the_spirit_ne_beloved](formal/Logos/DivineAgape.lean#L263) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} · [DivineAgape.lean#the_spirit_ne_any_word](formal/Logos/DivineAgape.lean#L259) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
-| **A single-Person reading is not entailed** | Separation model, not a refutation: one ground, and a model in which that ground bears two distinct persons. Ground-unicity therefore does not entail a single-Person ground — the person-count is left open by unicity, and the ascription of personhood to the entity is the separate, still-blocked question C228. | 🧱 **COUNTERMODEL | unicity_does_not_force_unitarian_monad ⇏ Independence** · `{}` · [FoundationalUnicity.lean#unicity_does_not_force_unitarian_monad](formal/Logos/FoundationalUnicity.lean#L332) {} |
+| **One ground** of reality | C320/C389: `∃! g, UniversalModalGround g`. Existence unconditional; uniqueness on the declared META bound `GroundTranscendence`. | ✅ **PROVEN** · 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}` · [DivineClassicalAttributes.lean#exactly_one_universal_modal_ground](formal/Logos/DivineClassicalAttributes.lean#L2163) {Means, NecessarySubjectKind, Subject} |
+| **One nature** (una natura, *actus purus*) | C440 divine simplicity as the sole bearer; aseity non-derived. 0 substantive axioms. | ✅ **PROVEN** · 0 substantive axioms · `{Means, Subject, CL}` · [DivineClassicalAttributes.lean#divine_simplicity_sole_bearer](formal/Logos/DivineClassicalAttributes.lean#L886) {Means, Subject, CL} · [DivineClassicalAttributes.lean#conditional_canonical_aseity](formal/Logos/DivineClassicalAttributes.lean#L592) {Means, Subject} |
+| **Three distinct Persons** | C510: `t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit`. **Priced on three declared META premises.** | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L1814) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} |
+| All three are **God** (one `divineReality`) | The anti-tritheism half: `is_divine the_father divineReality ∧ is_divine the_beloved divineReality ∧ is_divine the_spirit divineReality`. **Not the price of C510, and cheaper than it** — `the_father_is_divine` and `the_beloved_is_divine` rest on `{Subject, AxAgapeEssence, CL}` (one META), `the_spirit_is_divine` on `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` (two META), so this row's union is two META axioms where C510 needs three. The word *consubstantial* is not used for this row: the `Consubstantial` anchor was deleted because `Consubstantial Entity.ofGround e f` is `True` of arbitrary entities including atoms — a `{}` price on a `True` proposition is a null result, which is why G9 in `test_personal_ground_kind.py` refuses its re-declaration. The one-ness Γ actually carries is `indwells`, and the shared *nature* is still not in the vocabulary of the sort. | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` · [DivineTrinitarianAttributes.lean#the_father_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L1757) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_beloved_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L1762) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L1767) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
+| The Persons are **distinct** (not three gods) | Personal distinctness by personal property, not by essence: `≠` in every pair, and the Spirit is no word. | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineTrinitarianAttributes.lean#the_beloved_distinct](formal/Logos/DivineTrinitarianAttributes.lean#L1634) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_father](formal/Logos/DivineTrinitarianAttributes.lean#L1693) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_beloved](formal/Logos/DivineTrinitarianAttributes.lean#L1701) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_any_word](formal/Logos/DivineTrinitarianAttributes.lean#L1697) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
+| **A single-Person reading is not entailed** | Separation model, not a refutation: one ground, and a model in which that ground bears two distinct persons. Ground-unicity therefore does not entail a single-Person ground — the person-count is left open by unicity, and the ascription of personhood to the entity is the separate, still-blocked question C228. | 🧱 **COUNTERMODEL | unicity_does_not_force_unitarian_monad ⇏ Independence** · `{}` · [DivineClassicalAttributes.lean#unicity_does_not_force_unitarian_monad](formal/Logos/DivineClassicalAttributes.lean#L2191) {} |
 | The Trinity is **not free** | C109: the preceding theory does not entail three Persons. This is the price, stated as a countermodel. | 🧱 **COUNTERMODEL | preceding_theory ⇏ trinity** · `{}` · [ConditionalTheology.lean#preceding_theory_not_entails_trinity](formal/Logos/ConditionalTheology.lean#L336) {} |
 | The **Incarnation** is open | C112: the preceding theory is consistent with an unincarnate ground. The frontier, named. | 🧱 **COUNTERMODEL | preceding_theory ⇏ incarnation** · `{}` · [ConditionalTheology.lean#preceding_theory_not_entails_incarnation](formal/Logos/ConditionalTheology.lean#L380) {} |
 
@@ -1568,7 +1568,7 @@ PROOF
     ∴ ¬OneEssence(Entity.ofAtom n, Entity).ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-SOURCE     ✅ · [CanonicalAseity.lean#atom_cannot_ground_the_ground](formal/Logos/CanonicalAseity.lean#L96)
+SOURCE     ✅ · [DivineClassicalAttributes.lean#atom_cannot_ground_the_ground](formal/Logos/DivineClassicalAttributes.lean#L555)
 
 
 > An entity with no meaning capacity cannot ground one that has: `EntityMeans Entity.ofGround False` against `EntityMeans (ofAtom n) False`.
@@ -1594,7 +1594,7 @@ PROOF
 PRICE            🧱 **COUNTERMODEL** — a hostile model, not a price
 PRICE            refutes: unicity_does_not_force_unitarian_monad ⇏ Independence
 PRICE            0 substantive axioms · `{}`
-SOURCE     🧱 unicity_does_not_force_unitarian_monad ⇏ Independence · [FoundationalUnicity.lean#unicity_does_not_force_unitarian_monad](formal/Logos/FoundationalUnicity.lean#L332)
+SOURCE     🧱 unicity_does_not_force_unitarian_monad ⇏ Independence · [DivineClassicalAttributes.lean#unicity_does_not_force_unitarian_monad](formal/Logos/DivineClassicalAttributes.lean#L2191)
 
 
 > Not entailed **by unicity**: `unicity_does_not_force_unitarian_monad` (`{}`) is a separation model — one ground, and a model in which that ground bears two distinct persons. Unicity alone leaves the person-count open; the positive plural reading is the priced META datum `AxAgapeEssence` (C504), not this countermodel ([Part IV](#sec-part-iv-the-seam-where-the-deduction-stops)).
@@ -1617,7 +1617,7 @@ PROOF
     ∴ ¬(∀ e, p, EntityMeans(e, p) → ∃ s, e = EntityOf(s) ∧ FreeWill(s))
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-SOURCE     ✅ · [BoundedMeaning.lean#unrestricted_meaning_thesis_is_refuted](formal/Logos/BoundedMeaning.lean#L180)
+SOURCE     ✅ · [BoundedMeaning.lean#unrestricted_meaning_thesis_is_refuted](formal/Logos/BoundedMeaning.lean#L179)
 
 
 > Not an incoherence to repair, but a thesis that **overclaims**: without the `PassiveIntentionalPotency` guard the antecedent holds of the ground itself (`EntityMeans Entity.ofGround p := True`), and injectivity kills it. What a free subject is required for is therefore **bounded** meaning, not meaning as such (plan step S3, D-3, `Tag: TRANS`). The guarded form is consistent on a signature that *instantiates* signification — `boundedMeaningModel` grants a subject two incompatible contents, so `boundedMeaningRequiresFreeSubject_is_consistent_and_nonVacuous` (`{}`) proves the axiom holds there with the guard's antecedent witnessed, and the consistency is not an artefact of an inert meaning field (`AGENTS.md`, 2026-09-29).
@@ -1642,7 +1642,7 @@ PROOF
     ∴ ∃ s, Person(s)
 
 PRICE            ⚠️ **AXIOMATIC (AxActPolarity)** — 2 substantive axioms: AxActPolarity, performative_act_datum · `{AxActPolarity, Initiates, Means, State, Subject, Will, performative_act_datum, subjectWill, will_individuation}`
-SOURCE     ⚠️ AxActPolarity · [NoMeanerNoFalsity.lean#a_genuine_free_person_exists](formal/Logos/NoMeanerNoFalsity.lean#L97)
+SOURCE     ⚠️ AxActPolarity · [NoMeanerNoFalsity.lean#a_genuine_free_person_exists](formal/Logos/NoMeanerNoFalsity.lean#L94)
 
 
 <a id="freeWill_exists"></a>
@@ -1658,7 +1658,7 @@ PROOF
     ∴ ∃ s, FreeWill(s)
 
 PRICE            ⚠️ **AXIOMATIC (AxTwoNecessaryPersonalCentres)** — 1 substantive axiom: AxTwoNecessaryPersonalCentres · `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}`
-SOURCE     ⚠️ AxTwoNecessaryPersonalCentres · [AsieticChoice.lean#freeWill_exists](formal/Logos/AsieticChoice.lean#L601)
+SOURCE     ⚠️ AxTwoNecessaryPersonalCentres · [AsieticChoice.lean#freeWill_exists](formal/Logos/AsieticChoice.lean#L599)
 
 
 <a id="epistemic_order_makes_the_act_datum_necessary"></a>
@@ -1723,7 +1723,7 @@ PROOF
     ⊥
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Subject}`
-SOURCE     ✅ · [SinglePersonDenial.lean#self_gift_cannot_depend_on_a_contingent_person](formal/Logos/SinglePersonDenial.lean#L194)
+SOURCE     ✅ · [DivineTrinitarianAttributes.lean#self_gift_cannot_depend_on_a_contingent_person](formal/Logos/DivineTrinitarianAttributes.lean#L3302)
 
 > **The hinge, and the row the previous batch never had.** The objection is a four-step chain — (1) one Person, (2) therefore only contingent recipients, (3) therefore the self-giving *depends on* the contingent, (4) therefore contingent — against a Ground already determined Eternal, Necessary, Free and Immutable. **Step 3 is where it dies**, and it dies free: `SelfDonation` puts the recipient at `divineReality := Entity.ofGround`, so no `Subject` can be the recipient of a donation. The hypothesis here is that dependence as a proposition and the compiled derivation is C579 (`{Subject}`), whose primary is the premise step itself (`single_person_denial_is_refuted`, also `{Subject}`): assume the author's step 1 and `False` follows, because `Entity.ofGround` is no `Subject`'s entity. **No `AxAgapeEssence` appears on this row.** The donation's *existence* is priced on its own row below and is deliberately not used to refute an objection that grants it; a row that refuted the objection by way of the datum it also prices would be the datum. What the free rows say is that the gift's terminus is the necessary ground (`donation_terminus_is_as_necessary_as_the_donor`, `{NecessarySubjectKind, Subject}`), so the contingency conclusion has no premise (`donation_makes_contingency_is_refuted`). “It cannot be only one” is a *separate* paid row — `Plurality.notAlone` (T12) costs `AxTwoSubjects` — and is not folded into this row's price. The terminology the earlier batch collapsed is restored here: the ground **is personal** (C362, `PersonalGround`, whose `indwells` is `OneEssence` for *every* `Subject`), it **is** the nature those Persons are OneEssence in, and it is **no Person among them** (C519). “The ground is not a person” is the third of those, not a denial of the first.
 
@@ -1744,7 +1744,7 @@ PROOF
     False  — refuted, at the declared price on the PRICE line
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence · [DivineAgape.lean#denying_self_donation_is_absurd](formal/Logos/DivineAgape.lean#L507)
+SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#denying_self_donation_is_absurd](formal/Logos/DivineTrinitarianAttributes.lean#L1945)
 
 > The denial is a **real premise** of the compiled theorem — `denying_self_donation_is_absurd`, C576 — which is what makes this row a derivation and not a badge asserted over it. **Its kind is `⚠️ PRICED`, not `⊥ CONTRADICTION`, and the difference is not cosmetic.** `AxAgapeEssence` is priced, so a world exists in which the denial holds (the Narcissus world, C511, where the source loves only itself): the denial is *available* and is contradicted only by what is **declared**. Γ does not claim the donation is a theorem of logic. This row is mounted for that reason and not as the answer to the author — the answer is the free row above, which does not mention the donation.
 
@@ -1766,7 +1766,7 @@ PROOF
     ∴ ¬∀ f, o, Subsists(f) → Subsists(o) → DivineLove f o → f.deiformEntity ≠ o.deiformEntity
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence · [DivineAgape.lean#denying_shared_location_is_absurd](formal/Logos/DivineAgape.lean#L518)
+SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#denying_shared_location_is_absurd](formal/Logos/DivineTrinitarianAttributes.lean#L1956)
 
 
 <a id="two_subsisting_share_one_location"></a>
@@ -1782,7 +1782,7 @@ PROOF
     ∴ f.deiformEntity = o.deiformEntity
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Subject}`
-SOURCE     ✅ · [DivineAgape.lean#two_subsisting_share_one_location](formal/Logos/DivineAgape.lean#L118)
+SOURCE     ✅ · [DivineTrinitarianAttributes.lean#two_subsisting_share_one_location](formal/Logos/DivineTrinitarianAttributes.lean#L1556)
 
 
 > The stronger form, and the part that costs nothing extra: grant a donor and a recipient, grant that both subsist, grant that the love holds — and the denial *still* has to deny that they share one location-entity, which is `{}`. So the two-relata objection is refuted by arithmetic, not by a purchase. Same footprint as the row above ({Subject, AxAgapeEssence, Classical.choice}, one META): the price buys the gift, and the gift is not two things. This row has no thesis premise to label because the theorem's whole conclusion is the denial — so it prints the compiled statement and the derived kind rather than transcribing one.
@@ -1805,7 +1805,7 @@ PROOF
     ∴ ¬Asiety(Entity).ofGround ∧ (∃ f, o, SelfDonation(f, o))
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Means, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence · [TrinitarianPersonalGround.lean#self_donation_needs_no_personhood_of_the_ground](formal/Logos/TrinitarianPersonalGround.lean#L264)
+SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#self_donation_needs_no_personhood_of_the_ground](formal/Logos/DivineTrinitarianAttributes.lean#L2413)
 
 
 <a id="ground_is_not_a_fourth_chooser"></a>
@@ -1819,7 +1819,7 @@ PROOF
     ∴ ¬Asiety(Entity).ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-SOURCE     ✅ · [TrinitarianPersonalGround.lean#ground_is_not_a_fourth_chooser](formal/Logos/TrinitarianPersonalGround.lean#L226)
+SOURCE     ✅ · [DivineTrinitarianAttributes.lean#ground_is_not_a_fourth_chooser](formal/Logos/DivineTrinitarianAttributes.lean#L2375)
 
 
 <a id="agape_is_self_donation"></a>
@@ -1832,7 +1832,7 @@ PROOF
     ∴ ∃ f, o, SelfDonation(f, o)
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence · [DivineAgape.lean#agape_is_self_donation](formal/Logos/DivineAgape.lean#L471)
+SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#agape_is_self_donation](formal/Logos/DivineTrinitarianAttributes.lean#L1909)
 
 
 > **The row that restores what a laundering sentence had removed.** The corpus answered this with a label — “the one essence is not a fourth chooser; its freedom is their freedom, shared rather than duplicated” — and commit `4a59173` then claimed the label was an absent predicate presented as an argument, deleted the ground’s freedom from the doctrine, and rebuilt the reading on that. The predicate is **not** absent: `AsietyFreedom.asietyFreedomOfGround` (`AsietyFreedom.lean:141`) is the ◈ `def` that states the sharing, `asietyFreedom_summary` (`:357`) consumes it, and three docstrings in that module say the vacuity of `OneEssence` is *load-bearing* because it marks the ground’s freedom as **transferred** rather than **exercised**. A `def` premise is invisible to `#print axioms`, and from that invisibility the commit inferred that nothing was there. `LOVE-2.md` D1 withdraws that inference. So this row is a **conjunction, both halves machine-checked**, plus a granted premise: the ground is **not** a fourth chooser (free at `{Means, Subject}`, and marked role=premise — it is the *objection’s* premise, so it is printed as granted and kills nothing), **and** the donation of the Self stands anyway (C575, one META axiom). What the price buys is the gift and nothing more: it does not buy a fourth chooser, and it does not buy the ground’s personhood at the entity level, which C228 leaves `BLOCKED`. The ground **is** personal — C362, C140 — and `¬ Asiety Entity.ofGround` is `ofGround_ne_ofSubject`, i.e. C519: the nature is not one of its instances.
@@ -1915,11 +1915,11 @@ Contingent creation *as existence* is a free theorem (C350, `{}`); only the real
 | `C112` | 🧱 **COUNTERMODEL** · [ConditionalTheology.lean#preceding_theory_not_entails_incarnation](formal/Logos/ConditionalTheology.lean#L380), footprint {} | Unincarnate Hostile Model: The existing theory (necessary divine ground, human agency, free will) is completely consistent with God remaining purely transcendent and unincarnate. |
 | `C151` | ✅ **PROVEN** · [PersonalGroundOfReality.lean#the_person_supports_the_reality_of_right](formal/Logos/PersonalGroundOfReality.lean#L153), footprint {Initiates, Means, State, Subject, Will, subjectWill, will_individuation, CL} | HEADLINE — THE PERSON SUPPORTS THE REALITY OF RIGHT. |
 | `C228` | ✖ **BLOCKED** · [PersonalNormativeGround.lean#normative_ground_is_personal](formal/Logos/PersonalNormativeGround.lean#L262), footprint {Means, Subject, Will, subjectWill} | BLOCKED (AC5 unmet, D1′ recorded not executed): any entity that grounds Right/Wrong is a Personal Entity — but the personalness is a THREE-STEP FIELD PROJECTION, not a free-standing theorem: `grounds_normativity` supplie |
-| `C320` | ✅ **PROVEN** · [FoundationalUnicity.lean#exactly_one_universal_modal_ground](formal/Logos/FoundationalUnicity.lean#L304), footprint {Means, NecessarySubjectKind, Subject} | Master Synthesis (existential form): exactly one universal modal ground exists. |
-| `C350` | ✅ **PROVEN** · [CosmicExistence.lean#contingent_realm_obtains](formal/Logos/CosmicExistence.lean#L268), footprint {NecessarySubjectKind, Subject, CL} | Contingency-overflow: something obtains, is modal-fragile, and is not the necessary ground — and Γ derives it outright, resting on nothing substantive. |
-| `C367` | ✅ **PROVEN** · [CosmicExistence.lean#cosmos_obtains](formal/Logos/CosmicExistence.lean#L415), footprint {Means, NecessarySubjectKind, Subject, Will, subjectWill, CL} | **The cosmos exists** — a contingent created realm, not the necessary ground, actually obtains and bears content of its own — given a *contingent* person. |
-| `C440` | ✅ **PROVEN** · [DivineSimplicity.lean#divine_simplicity_sole_bearer](formal/Logos/DivineSimplicity.lean#L246), footprint {Means, Subject, CL} | C440 — the attributes-table form: the ground is the sole bearer of Divine Simplicity, stated together with the existence half so a reader-facing row can cite a single declaration. This is the [the Divine Simplicity row in the ledger](#sec-where-the-rest-of-the-ledger-lives) analogue of C |
-| `C510` | ⚠️ **AXIOMATIC** — rests on `AxAgapeEssence`, `AxProcessionSpirit`, `AxProcessionWord` · [DivineAgape.lean#agape_entails_tripersonality](formal/Logos/DivineAgape.lean#L376), footprint {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} | Agape entails tripersonality (C510, PROVEN↑): under the three disclosed Agape axioms — the datum, the procession of the Word, the procession of the Spirit — there is a `TrinitarianStructure` (C108) on the divine sort who |
+| `C320` | ✅ **PROVEN** · [DivineClassicalAttributes.lean#exactly_one_universal_modal_ground](formal/Logos/DivineClassicalAttributes.lean#L2163), footprint {Means, NecessarySubjectKind, Subject} | Master Synthesis (existential form): exactly one universal modal ground exists. |
+| `C350` | ✅ **PROVEN** · [DivineClassicalAttributes.lean#contingent_realm_obtains](formal/Logos/DivineClassicalAttributes.lean#L4182), footprint {NecessarySubjectKind, Subject, CL} | Contingency-overflow: something obtains, is modal-fragile, and is not the necessary ground — and Γ derives it outright, resting on nothing substantive. |
+| `C367` | ✅ **PROVEN** · [DivineClassicalAttributes.lean#cosmos_obtains](formal/Logos/DivineClassicalAttributes.lean#L4329), footprint {Means, NecessarySubjectKind, Subject, Will, subjectWill, CL} | **The cosmos exists** — a contingent created realm, not the necessary ground, actually obtains and bears content of its own — given a *contingent* person. |
+| `C440` | ✅ **PROVEN** · [DivineClassicalAttributes.lean#divine_simplicity_sole_bearer](formal/Logos/DivineClassicalAttributes.lean#L886), footprint {Means, Subject, CL} | C440 — the attributes-table form: the ground is the sole bearer of Divine Simplicity, stated together with the existence half so a reader-facing row can cite a single declaration. This is the [the Divine Simplicity row in the ledger](#sec-where-the-rest-of-the-ledger-lives) analogue of C |
+| `C510` | ⚠️ **AXIOMATIC** — rests on `AxAgapeEssence`, `AxProcessionSpirit`, `AxProcessionWord` · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L1814), footprint {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} | Agape entails tripersonality (C510, PROVEN↑): under the three disclosed Agape axioms — the datum, the procession of the Word, the procession of the Spirit — there is a `TrinitarianStructure` (C108) on the divine sort who |
 
 ## The score: what Γ has won, and what is still open
 
@@ -1945,7 +1945,7 @@ decision: `scripts/census_stipulated_defs.py`.
 |---|---|
 | **438 affirmative claims derived** out of **581** ledger claims — 341 ✅ kernel-verified, 97 ⚠️ derived under a substantive (`SEM`/`META`) axiom, each ⚠️ row naming the bridge it rests on. | **14 blocked** ✖ — named individually |
 | **61 countermodel boundaries** 🧱 — a hostile model in which the claim *fails*. These are won results about the limit of the theory, not gaps. | &nbsp;&nbsp;· **C228** — any entity that grounds Right/Wrong is a Personal Entity |
-| **1095 of 1985 theorems in `formal/Logos/` rest on no Γ axiom at all** (55%) — counted from `formal/axiom_audit.json`, not claimed. | &nbsp;&nbsp;· **C462** — BLOCKED, with no declaration, and deliberately so: the ground does not initiate is not refutable in Gamma and is not evidence of non-agency either |
+| **1020 of 1908 theorems in `formal/Logos/` rest on no Γ axiom at all** (53%) — counted from `formal/axiom_audit.json`, not claimed. | &nbsp;&nbsp;· **C462** — BLOCKED, with no declaration, and deliberately so: the ground does not initiate is not refutable in Gamma and is not evidence of non-agency either |
 | **The whole price is 39 declared axioms**: 18 are `VOCAB` (the vocabulary the statements need in order to be sayable) and 21 are substantive. Only the 21 are philosophical commitments; the rest are the theory's definitions of its own words, which is a different thing from a premise. | &nbsp;&nbsp;· **C503** — A love-lane step for deriving the Good from a second person is BLOCKED, with no declaration (lote OTHER, 2026-09-29; plan OTHER.md): the step 'the… |
 | **10 attribute corollaries became unconditional theorems** (C389–C398) — they were conditional on a `def` until F15 was declared, so this is a *strengthening*: fewer hidden premises, same conclusions. | &nbsp;&nbsp;· **C580** — The Subject/DivineHypostasis correspondence is BLOCKED, with no declaration (AMOR/2 batch, 2026-10-03; LOVE-2.md D6) |
 |  | &nbsp;&nbsp;· **C73** — Plurality without bridges is blocked: unit countermodel settles that 1 act does not entail plurality; requires AxTwoNecessaryPersonalCentres |

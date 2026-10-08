@@ -69,9 +69,7 @@ import Logos.Alternatives
 import Logos.Choice
 import Logos.TheologicalModalHardening
 import Logos.RecoveredOntologicalGround
-import Logos.NecessityEternity
-import Logos.CanonicalAseity
-import Logos.DivinePureActuality
+import Logos.DivineClassicalAttributes
 import Logos.Plurality
 import Logos.Person
 import Logos.RetorsiveNormativity

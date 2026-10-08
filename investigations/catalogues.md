@@ -7,7 +7,7 @@
 ### Retorsions
 
 <details>
-<summary>Retorsion catalogue — 104 machine-checked retorsion theorems (click to expand)</summary>
+<summary>Retorsion catalogue — 99 machine-checked retorsion theorems (click to expand)</summary>
 
 * **Complete_Retorsion:** `complete_retorsion` (`formal/Logos/DefinitionalMeaningRetorsion.lean`) — Complete result:
 * **Meaning_Cannot_Not_Exist:** `meaning_cannot_not_exist` (`formal/Logos/DefinitionalMeaningRetorsion.lean`) — The retorsive conclusion in existential form:
@@ -29,10 +29,7 @@
 * **Nosubject_Selfrefutes:** `noSubject_selfRefutes` (`formal/Logos/Choice.lean`) — C57: Retorsion — asserting that no actual subject exists refutes itself.
 * **Selfassertedparadox_Not_Assertable:** `selfAssertedParadox_not_assertable` (`formal/Logos/Choice.lean`) — Candidate D performative retorsion under factive assertion: one cannot truthfully assert Candidate D.
 * **Selfdenialofexecutivechoice_Selfrefutes:** `selfDenialOfExecutiveChoice_selfRefutes` (`formal/Logos/Choice.lean`) — The Performative Retorsion Theorem for Executive Choice: Denying executive choice in an assertion is self-refuting.
-* **Diagonal_Negative_Choice_Coherent:** `diagonal_negative_choice_coherent` (`formal/Logos/DeepContrastiveFrontier.lean`) — Candidate Δ2: Negative self-assertion of determinism is strictly true and non-self-refuting.
 * **Retorsion_Denial_Does_Not_Commit_To_Content:** `retorsion_denial_does_not_commit_to_content` (`formal/Logos/DefinitiveAgencyFrontier.lean`) — Retorsion Failure Theorem: Asserting "I do not commit to p" reflexively instantiates an assertion of the negation, but does NOT instantiate commitment to p itself.
-* **Performative_Self_Refutation_Compatible_With_Determinism:** `performative_self_refutation_compatible_with_determinism` (`formal/Logos/DeterministicReductioFrontier.lean`) — Core Independence Result: Performative self-refutation does NOT imply libertarian freedom.
-* **Self_Denial_Of_Reasoning_Self_Refutes:** `self_denial_of_reasoning_self_refutes` (`formal/Logos/DeterministicReductioFrontier.lean`) — Performative Self-Refutation of Denying One's Own Present Act: If an agent asserts "I am not acting", the factive assertion itself refutes the content.
 * **Claims_Correct_No_Right_Self_Refuting:** `claims_correct_no_right_self_refuting` (`formal/Logos/DirectNormativeRetorsion.lean`) — The Fundamental Diagonal Retorsion Theorem: Claiming NoRight as correct while NoRight is true produces a strict, constructive contradiction.
 * **Model_A_Mere_Utterance_Avoids_Claims_Correct:** `model_a_mere_utterance_avoids_claims_correct` (`formal/Logos/DirectNormativeRetorsion.lean`) — Model A Avoidance Lemma: Mere utterance does not satisfy ClaimsCorrect.
 * **Model_B_Mere_Meaning_Avoids_Claims_Correct:** `model_b_mere_meaning_avoids_claims_correct` (`formal/Logos/DirectNormativeRetorsion.lean`) — Model B Avoidance Lemma: Meaning NoRight without acting on it does not instantiate ClaimsCorrect.
@@ -41,11 +38,9 @@
 * **Retorsion_Nofreewill_Consistent:** `retorsion_NoFreeWill_consistent` (`formal/Logos/ExecutiveDeliberativeFrontier.lean`) — Group 2 Theorem: Asserting NoFreeWill is completely consistent and non-self-refuting.
 * **Schema_S4_Satisfiable_And_Non_Self_Refuting:** `schema_S4_satisfiable_and_non_self_refuting` (`formal/Logos/ExecutiveDeliberativeFrontier.lean`) — Schema S4 Theorem: Denying deliberative choice is NOT performatively self-refuting! A deterministic agent can assert with complete truth that it does not deliberate.
 * **Trackb_Selfdenialofexecutivechoice_Selfrefutes:** `trackB_selfDenialOfExecutiveChoice_selfRefutes` (`formal/Logos/ExecutiveDeliberativeFrontier.lean`) — Re-verifying the retorsion theorem for executive choice in this module.
-* **Good_Denial_Is_Free_Logically_Consistent:** `good_denial_is_free_logically_consistent` (`formal/Logos/GoodDenial.lean`) — Denying the existence of the moral Good is consistent with Γ's full normative relying structure, and the denial itself carries no performative self-refutation.
+* **Good_Denial_Is_Free_Logically_Consistent:** `good_denial_is_free_logically_consistent` (`formal/Logos/DivineTrinitarianAttributes.lean`) — Denying the existence of the moral Good is consistent with Γ's full normative relying structure, and the denial itself carries no performative self-refutation.
 * **Contextual_Retorsion_Datum:** `contextual_retorsion_datum` (`formal/Logos/HardenedInvariance.lean`) — Contextual Retorsion: Denying that any deduction is developed in any context refutes itself performatively when that denial is asserted as a step within an inquiry context.
 * **Retorsion_Does_Not_Imply_Doubt:** `retorsion_does_not_imply_doubt` (`formal/Logos/HostileSemantics.lean`) — Transcendental retorsion holds fully in TwoPersons, yet Cartesian doubt is empty.
-* **A6_A7_Synergistic_Forcing:** `A6_A7_synergistic_forcing` (`formal/Logos/JointForcing.lean`) — Synergy Forcing Theorem: A6 (universal_thesis_claims_objectivity) + A7 (transcendental_reflection_intentional) jointly force NonTrivialOntology under the standard retorsive bridges.
-* **Retorsion_Not_Implies_Choice:** `retorsion_not_implies_choice` (`formal/Logos/JointForcing.lean`) — Cross-Frontier Barrier: {A6, A7} (Retorsion) does NOT force AxIntentionalChoice (A1) or FreeWill.
 * **Affirms_Nomeaning_Yields_Meaning:** `affirms_noMeaning_yields_meaning` (`formal/Logos/MeaningRetorsion.lean`) — **The retorsion, positively.** To affirm that there is no meaning is itself a meaning: affirming the thesis produces an instance of exactly what the thesis denies. The conclusion is the `Meaning_I` form with the content *named* — `NoMeaning` itself is the
 * **Nomeaning_Iff_Nointentionalsubject:** `noMeaning_iff_noIntentionalSubject` (`formal/Logos/MeaningRetorsion.lean`) — **The thesis and the audited negation of the retorsive conclusion are the same sentence, re-indexed.** `NoI_canonical := ¬ P_canonical` and `P_canonical := ∃ s, IntentionalSubject s` with `IntentionalSubject s := ∃ p, Means s p`; `NoMeaning` is `¬ ∃ p, ∃ s
 * **Nomeaning_Is_Unassertable:** `noMeaning_is_unassertable` (`formal/Logos/MeaningRetorsion.lean`) — **4/4 — THE RETORSION, unconditional.** Nobody can hold the thesis as correct. No hypothesis, no subject supplied, no bridge, no axiom beyond the declared meaning vocabulary: `Asserts s p` is `Act s p ∧ p`, so an assertion of the thesis is at once an act
@@ -122,12 +117,12 @@
 <details>
 <summary>Countermodel catalogue — 6 independence frontiers (click to expand)</summary>
 
-* **consequence_A_reasoning ⇏ libertarian:** `consequence_A_reasoning_not_entails_libertarian` (`formal/Logos/AgencyDeterminismConsequences.lean:405`) — Consequence A: Reasoning does NOT logically entail libertarian freedom.
-* **consequence_B_first_person ⇏ libertarian:** `consequence_B_first_person_not_entails_libertarian` (`formal/Logos/AgencyDeterminismConsequences.lean:430`) — Consequence B: First-person subjectivity does NOT entail libertarian freedom.
-* **consequence_C_intentionality ⇏ libertarian:** `consequence_C_intentionality_not_entails_libertarian` (`formal/Logos/AgencyDeterminismConsequences.lean:438`) — Consequence C: Intentionality does NOT entail libertarian freedom.
-* **consequence_D_normativity ⇏ libertarian:** `consequence_D_normativity_not_entails_libertarian` (`formal/Logos/AgencyDeterminismConsequences.lean:446`) — Consequence D: Normativity does NOT entail libertarian freedom.
 * **D1_discrimination ⇏ choice:** `D1_discrimination_not_entails_choice` (`formal/Logos/CognitiveDiscrimination.lean:207`) — Property D1 (FAILS): Discrimination does NOT entail Choice! Hostile model: s discriminates p from q, but makes no choice.
 * **D2_discrimination ⇏ meaning:** `D2_discrimination_not_entails_meaning` (`formal/Logos/CognitiveDiscrimination.lean:216`) — Property D2 (FAILS): Discrimination does NOT entail Representation/Meaning of q! Hostile model: s discriminates p from an external contrast boundary q without meaning q.
+* **a14 ⇏ plurality:** `a14_not_entails_plurality` (`formal/Logos/ConditionalTheology.lean:256`) — Solitary Free Agent Model: A14 does NOT entail a plurality of subjects.
+* **a14_plus_ultimate_ground ⇏ personal_ultimate_ground:** `a14_plus_ultimate_ground_not_entails_personal_ultimate_ground` (`formal/Logos/ConditionalTheology.lean:228`) — A14 + Ultimate Ground does NOT entail a personal ultimate ground: Even when free agency exists and an ultimate ground exists, the ultimate ground can be completely impersonal (e.g. an impersonal metaphysical substrate), while the free agent is merely a
+* **free_agency_and_plurality ⇏ love:** `free_agency_and_plurality_not_entails_love` (`formal/Logos/ConditionalTheology.lean:281`) — Free Agency and Plurality do NOT entail Love: A world with multiple distinct free choosing persons can be completely loveless (e.g., mutually indifferent or malicious free agents).
+* **free_agency ⇏ ultimate_ground:** `free_agency_not_entails_ultimate_ground` (`formal/Logos/ConditionalTheology.lean:201`) — Free agency does NOT entail the existence of an ultimate ground: An agent with free will can inhabit a reality with an infinite explanatory regress.
 </details>
 
 * [Complete Catalog of Hostile Models Across Γ](investigations/countermodels.md) — INDEPENDENCE & SEPARATION THEOREMS (Footprint `{}`)
@@ -147,6 +142,7 @@
 
 ### Technical
 
+* [Architectural Audit & Consolidation Roadmap for Logos (Γ)](investigations/consolidation_roadmap.md) — Complete kernel audit, transitive axiom footprints, dependency ledger, and consistency checks.
 * [Issue K — Step 1: the meaning-coherence audit of the two countermodels](investigations/issue-k-meaning-coherence-audit.md) — Complete kernel audit, transitive axiom footprints, dependency ledger, and consistency checks.
 * [Technical Appendix: Kernel Audit, Consistency & Code Annex](investigations/kernel-audit.md) — Complete kernel audit, transitive axiom footprints, dependency ledger, and consistency checks.
 * [Epistemic and Architectural Audit: Definitional Meaning Retorsion vs. Γ's Transcendental Routes to a Free Subject](investigations/meaning_retorsion_audit.md) — Complete kernel audit, transitive axiom footprints, dependency ledger, and consistency checks.

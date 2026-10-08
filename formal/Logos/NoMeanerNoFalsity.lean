@@ -21,17 +21,14 @@ import Logos.Plurality
 import Logos.Entity
 import Logos.Semantics
 import Logos.MeaningRetorsion
+import Logos.DivineClassicalAttributes
+import Logos.DivineTrinitarianAttributes
 import Logos.ActCascade
 import Logos.AsieticChoice
 import Logos.Order
-import Logos.SinglePersonDenial
-import Logos.TrinitarianSubjectBridge
 import Logos.Necessity
-import Logos.NecessityEternity
 import Logos.EpistemicNecessity
 import Logos.Modal
-import Logos.DivineAgape
-import Logos.TrinitarianPersonalGround
 
 namespace Logos.NoMeanerNoFalsity
 
