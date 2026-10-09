@@ -37,3 +37,9 @@ Nota de liberdade (lote LOVE-4 / C587): a existência de uma Pessoa Livre é ago
 independentemente sem axiomas META a partir da polaridade do ato
 (`NoMeanerNoFalsity.a_genuine_free_person_exists`, C587). A pluralidade e a necessidade
 modal permanecem ancoradas na ponte metafísica C584 (`AxTwoNecessaryPersonalCentres`).
+
+Nota de pluralidade de hipóstases (2026-10-09): no nível das hipóstases divinas
+(`DivineHypostasis`), a existência e necessidade de duas Pessoas divinas distintas
+subsistentes e necessárias no chão de realidade é formalmente provada a zero axiomas
+substantivos (`another_divine_person_exists`, C599; `another_divine_person_is_necessary`, C600).
+A pluralidade ao nível do sort primitivo `Subject` permanece paga sob `AxTwoNecessaryPersonalCentres` (C584).

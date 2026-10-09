@@ -12,6 +12,8 @@ import Logos.Entity
 import Logos.Modal
 import Logos.ModalCreationFrontiers
 import Logos.MoralFrontierAudit
+import Logos.Necessity
+import Logos.LibertarianPersonhood
 import Logos.Person
 import Logos.PersonalNormativeGround
 import Logos.Plurality
@@ -2190,6 +2192,43 @@ theorem co_subsistence_is_co_location {a b : DivineHypostasis} (ha : Subsists a)
   dsimp [Subsists, divineReality] at ha hb
   exact ha.trans hb.symm
 
+/-- At least one personal centre subsists in the divine reality. Free: the
+    witness is `divineReality` itself, marked as a personal property.
+    Footprint: `{Subject}`. -/
+theorem subsistence_is_inhabited : ∃ d : DivineHypostasis, Subsists d := by
+  refine ⟨⟨Entity.ofGround, True⟩, ?_⟩
+  dsimp [Subsists, divineReality]
+
+/-- There is another divine Person: two distinct subsisting hypostases at the
+    one divine reality. Both are Persons — `DivineHypostasis` is the sort of
+    divine persons, `Subsists` is being-in-the-Godhead, and `personalProperty`
+    is the mark of personal distinction (`:1849–1854`). What the pair lacks —
+    the love between them and their roles (`IsWord`/`IsSpirit`, opaque) — stays
+    priced (C504–C506) and is asserted nowhere here.
+    Footprint: `{Subject, propext}`. -/
+theorem another_divine_person_exists :
+    ∃ f o : DivineHypostasis, f ≠ o ∧ Subsists f ∧ Subsists o := by
+  refine ⟨⟨Entity.ofGround, True⟩, ⟨Entity.ofGround, False⟩, ?_, ?_, ?_⟩
+  · intro h
+    have hTF : (⟨Entity.ofGround, True⟩ : DivineHypostasis).personalProperty =
+               (⟨Entity.ofGround, False⟩ : DivineHypostasis).personalProperty :=
+      congrArg _ h
+    simp at hTF
+  · dsimp [Subsists, divineReality]
+  · dsimp [Subsists, divineReality]
+
+/-- …and the other is necessary: both relata subsist as necessary entities in
+    the ground (C518). This is L5's modal half, unconditional — no donation
+    hypothesis (contrast C597, which is this consequent under a donation
+    antecedent and is left untouched).
+    Footprint: `{NecessarySubjectKind, Subject, propext}`. -/
+theorem another_divine_person_is_necessary :
+    ∃ f o : DivineHypostasis,
+      f ≠ o ∧ NecessaryEntity f.deiformEntity ∧ NecessaryEntity o.deiformEntity := by
+  obtain ⟨f, o, hne, hf, ho⟩ := another_divine_person_exists
+  exact ⟨f, o, hne, subsisting_centre_is_necessary hf,
+    subsisting_centre_is_necessary ho⟩
+
 /-- The three centers are necessary, and one necessary reality (C520, PROVEN↑):
     the instantiations of C518 at the father, the beloved and the Spirit, plus
     the coincidence of their location-entities. The last two conjuncts are
@@ -2329,6 +2368,9 @@ end Logos.DivineAgape
 #print axioms Logos.DivineAgape.agape_is_self_donation
 #print axioms Logos.DivineAgape.denying_self_donation_is_absurd
 #print axioms Logos.DivineAgape.denying_shared_location_is_absurd
+#print axioms Logos.DivineAgape.subsistence_is_inhabited
+#print axioms Logos.DivineAgape.another_divine_person_exists
+#print axioms Logos.DivineAgape.another_divine_person_is_necessary
 
 
 /-!
@@ -3476,6 +3518,7 @@ open Logos.Entity (Entity EntityOf)
 open Logos.Modal (NecessaryEntity)
 open Logos.Agency (Subject NecessarySubjectKind ContingentSubjectKind)
 open Logos.Person (Person)
+open Logos.Choice (FreeWill)
 open Logos.Plurality (NecessarySubject notAlone T12_twoPersons)
 open Logos.RecoveredOntologicalGround
   (OneEssence ActualEntity GroundOfReality NecessaryGroundOfReality)
@@ -3645,6 +3688,67 @@ theorem bridge_subjects_correspond :
   have kc := (Logos.Plurality.kinds_are_the_modal_partition c).2 hnc
   exact ⟨a, b, c, ⟨ka, Or.inl ⟨hra, rfl⟩⟩, ⟨kb, Or.inr (Or.inl ⟨hrb, rfl⟩)⟩, ⟨kc, Or.inr (Or.inr ⟨hrc, rfl⟩)⟩⟩
 
+/-- The first Person is free to self-give: a free Person exists (judgment
+    chain, TRANS-only — no `AxActPolarity`, no META), and a distinct
+    subsisting pair is available (C599). The freedom is the Person's
+    (`FreeWill`); the ground is not a fourth chooser (C578) and nothing here
+    makes it one. Eternal/necessary halves live at the ground (C161/C199) and
+    the centres (C518); this row is the freedom+availability half.
+    Footprint: `{Classical.choice, Means, Quot.sound, Subject, Will, demonstration_occurs, propext, subjectWill, will_individuation}`. -/
+theorem first_person_is_free_to_self_give :
+    ∃ s : Subject, Person s ∧ FreeWill s ∧
+      (∃ f o : DivineHypostasis, f ≠ o ∧ Subsists f ∧ Subsists o) := by
+  obtain ⟨s, hfw⟩ := Logos.LibertarianPersonhood.free_will_exists_via_judgment_chain
+  exact ⟨s, Logos.Person.freeWill_implies_person s hfw, hfw,
+    Logos.DivineAgape.another_divine_person_exists⟩
+
+/-- The capacity's necessity is degenerate — and that is the content (C426
+    pattern): the proposition mentions no `World`, so its box is its truth
+    (`Necessity.lean` C1). Adds the world-invariance observation, no content.
+    Footprint: `{Classical.choice, Means, Quot.sound, Subject, Will, demonstration_occurs, propext, subjectWill, will_individuation}`. -/
+theorem self_giving_capacity_is_world_invariant (_w : Logos.Semantics.World) :
+    ∃ s : Subject, Person s ∧ FreeWill s ∧
+      (∃ f o : DivineHypostasis, f ≠ o ∧ Subsists f ∧ Subsists o) :=
+  first_person_is_free_to_self_give
+
+/-- …in the alias interface (`necDistinction` pattern).
+    Footprint: `{Classical.choice, Means, Quot.sound, Subject, Will, demonstration_occurs, propext, subjectWill, will_individuation}`. -/
+theorem self_giving_capacity_is_necessary :
+    Logos.Necessity.Necessity
+      (∃ s : Subject, Person s ∧ FreeWill s ∧
+        (∃ f o : DivineHypostasis, f ≠ o ∧ Subsists f ∧ Subsists o)) :=
+  fun _w => first_person_is_free_to_self_give
+
+/-- A necessary capacity to self-give leaves no contingent correlate: every
+    distinct subsisting centre is necessary. This is C518 read as the
+    correlate half of the chain (C426-style: naming, no new content) — given
+    the necessary capacity (C602), the correlate the first Person's self-giving
+    requires cannot be contingent, otherwise the necessary ability would depend
+    on contingent beings, refuted at C579.
+    Footprint: `{NecessarySubjectKind, Subject}`. -/
+theorem necessary_self_giving_leaves_no_contingent_correlate
+    (f o : DivineHypostasis) (_hne : f ≠ o) (hf : Subsists f) (ho : Subsists o) :
+    NecessaryEntity f.deiformEntity ∧ NecessaryEntity o.deiformEntity :=
+  ⟨Logos.DivineAgape.subsisting_centre_is_necessary hf,
+   Logos.DivineAgape.subsisting_centre_is_necessary ho⟩
+
+/-- The chain in one statement. Given the first Person free (C594-route),
+    the ground necessary (C161) — eternity alongside at C199 — there are two
+    distinct necessary divine Persons. Frank disclosure, Cremation-style: the
+    *existence* is discharged by C600's free proof; the premises license the
+    reading — the capacity is a real capacity of a real Person (not a
+    hypothetical), its form is necessary (C602), and its correlate cannot be
+    contingent (C579/C603) — so the exhibited pair are *the* necessary
+    correlate. What is not claimed: that the loving occurs (C504 keeps exactly
+    that price), nor Subject-sort plurality (C584/C585, untouched).
+    Footprint: `{Means, NecessarySubjectKind, Subject, Will, propext, subjectWill}`. -/
+theorem free_eternal_necessary_person_necessitates_another_divine_person
+    (_firstFree : ∃ s : Subject, Person s ∧ FreeWill s)
+    (_groundNec : NecessaryGroundOfReality Entity.ofGround)
+    : ∃ f o : DivineHypostasis,
+        f ≠ o ∧ NecessaryEntity f.deiformEntity ∧ NecessaryEntity o.deiformEntity :=
+  Logos.DivineAgape.another_divine_person_is_necessary
+
 /-- **The module in one line.** The ground is a personal necessary essence indwelt by every Person
     and no Person itself; its gift cannot reach a contingent being, because every donation's
     terminus is the necessary ground; and the contingency conclusion therefore has no premise.
@@ -3675,6 +3779,11 @@ theorem singlePersonDenial_summary :
 #print axioms self_giving_necessitates_a_distinct_necessary_other
 #print axioms hypostasisOf_subsists
 #print axioms bridge_subjects_correspond
+#print axioms first_person_is_free_to_self_give
+#print axioms self_giving_capacity_is_world_invariant
+#print axioms self_giving_capacity_is_necessary
+#print axioms necessary_self_giving_leaves_no_contingent_correlate
+#print axioms free_eternal_necessary_person_necessitates_another_divine_person
 #print axioms singlePersonDenial_summary
 
 end Logos.SinglePersonDenial

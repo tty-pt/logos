@@ -1,0 +1,72 @@
+T37 — MAIS DO QUE UMA PESSOA, NECESSARIAMENTE (C598–C604)
+======================================================================
+2026-10-09. Lote NECESSARY-OTHER-PERSON. **Zero axiomas substantivos novos** —
+o censo de axiomas mantém-se estritamente em 40 (18 VOCAB / 6 SEM / 13 META / 3 TRANS).
+
+O teorema e a dedução no nível das Hipóstases Divinas
+----------------------------------------------------------------------
+A dedução completa demonstra que, dada a Pessoa Livre comprovada na cadeia de juízo
+(C593/C594, sob a ocorrência performatória demonstration_occurs, Tag: TRANS) e o chão
+necessário da realidade (C161), existem necessariamente duas Pessoas divinas distintas
+subsistentes na realidade divina única, com a capacidade de autodoação a zero axiomas
+metafísicos ou semânticos adicionais.
+
+Depende de:
+- demonstration_occurs (Tag: TRANS) para o ramo da capacidade livre da primeira Pessoa
+  (C601, C602)
+- Zero axiomas substantivos (VOCAB + CL apenas) para a existência e necessidade
+  incondicional do par de Pessoas divinas subsistentes (C598, C599, C600, C603, C604).
+
+Verificado em:
+- formal/Logos/DivineTrinitarianAttributes.lean:
+  * Logos.DivineAgape.subsistence_is_inhabited (C598)
+  * Logos.DivineAgape.another_divine_person_exists (C599)
+  * Logos.DivineAgape.another_divine_person_is_necessary (C600)
+  * Logos.SinglePersonDenial.first_person_is_free_to_self_give (C601)
+  * Logos.SinglePersonDenial.self_giving_capacity_is_necessary / self_giving_capacity_is_world_invariant (C602)
+  * Logos.SinglePersonDenial.necessary_self_giving_leaves_no_contingent_correlate (C603)
+  * Logos.SinglePersonDenial.free_eternal_necessary_person_necessitates_another_divine_person (C604)
+- GAPMAP.md: C598, C599, C600, C601, C602, C603, C604.
+
+Pegada auditada:
+- C598: {Subject} (PROVEN)
+- C599: {CL, Subject} (PROVEN)
+- C600: {CL, NecessarySubjectKind, Subject} (PROVEN)
+- C601: {CL, Means, Subject, Will, demonstration_occurs, subjectWill, will_individuation} (PROVEN↑)
+- C602: {CL, Means, Subject, Will, demonstration_occurs, subjectWill, will_individuation} (PROVEN↑)
+- C603: {NecessarySubjectKind, Subject} (PROVEN)
+- C604: {CL, Means, NecessarySubjectKind, Subject, Will, subjectWill} (PROVEN)
+
+Enunciado:
+
+1. subsistence_is_inhabited:
+   ∃ d : DivineHypostasis, Subsists d
+
+2. another_divine_person_exists:
+   ∃ f o : DivineHypostasis, f ≠ o ∧ Subsists f ∧ Subsists o
+
+3. another_divine_person_is_necessary:
+   ∃ f o : DivineHypostasis, f ≠ o ∧ NecessaryEntity f.deiformEntity ∧ NecessaryEntity o.deiformEntity
+
+4. first_person_is_free_to_self_give:
+   ∃ s : Subject, Person s ∧ FreeWill s ∧ (∃ f o : DivineHypostasis, f ≠ o ∧ Subsists f ∧ Subsists o)
+
+5. free_eternal_necessary_person_necessitates_another_divine_person:
+   (∃ s : Subject, Person s ∧ FreeWill s) →
+   NecessaryGroundOfReality Entity.ofGround →
+   ∃ f o : DivineHypostasis, f ≠ o ∧ NecessaryEntity f.deiformEntity ∧ NecessaryEntity o.deiformEntity
+
+NOTA FORMAL — HONESTIDADE DE PREÇO E DISTINÇÃO DE SORTS:
+
+1. Sort DivineHypostasis vs. sort primitivo Subject:
+   No sort de hipóstases divinas (DivineHypostasis), a existência e necessidade de duas
+   Pessoas divinas distintas subsistindo no chão necessário (Entity.ofGround) é formalmente
+   provada a zero axiomas substantivos (C599, C600). A pluralidade ao nível do sort
+   primitivo Subject (sem construtores) permanece paga sob AxTwoNecessaryPersonalCentres
+   (C584, Tag: META).
+
+2. Ocorrência do Amor vs. Existência dos Centros:
+   A existência e subsistência de outro centro pessoal necessário é demonstrada livremente.
+   O que permanece pago sob o axioma declarado AxAgapeEssence (C504, Tag: META) é estritamente
+   a instanciação da relação extática de amor (DivineLove f o), salvaguardando a fronteira
+   contra a confusão entre a capacidade/estrutura ontológica e a doação efectiva.

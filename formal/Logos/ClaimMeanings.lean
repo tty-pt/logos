@@ -371,4 +371,18 @@ def C596 : String := "Anti-determinism of judgment sourcehood: the ultimate inte
 
 def C597 : String := "A self-gift necessarily has a distinct, necessary Other: SinglePersonDenial.self_giving_necessitates_a_distinct_necessary_other proves that any SelfDonation f o entails f ≠ o with both relata subsisting as necessary entities in the ground. Conditional on the existence of a self-donation only, with 0 substantive axioms (footprint {NecessarySubjectKind, Subject}). Displayed PROVEN."
 
+def C598 : String := "Subsistence is inhabited in the divine reality: subsistence_is_inhabited proves that at least one personal centre subsists at divineReality with 0 substantive axioms (footprint {Subject}). Displayed PROVEN."
+
+def C599 : String := "Another Divine Person exists: another_divine_person_exists proves that two distinct subsisting hypostases exist at the one divine reality with 0 substantive axioms (footprint {CL, Subject}). Displayed PROVEN."
+
+def C600 : String := "Another Divine Person is necessary: another_divine_person_is_necessary proves unconditionally that both relata of the distinct subsisting pair are necessary entities in the ground with 0 substantive axioms (footprint {CL, NecessarySubjectKind, Subject}). Displayed PROVEN."
+
+def C601 : String := "The first Person is free to self-give: first_person_is_free_to_self_give establishes a free Person via the judgment chain and a distinct subsisting pair available at 0 SEM/META axioms (footprint {CL, Means, Subject, Will, demonstration_occurs, subjectWill, will_individuation}). Displayed AXIOMATIC (demonstration_occurs)."
+
+def C602 : String := "The self-giving capacity is necessary: self_giving_capacity_is_necessary and self_giving_capacity_is_world_invariant establish the world-invariance and degenerate modal necessity of the capacity with 0 SEM/META axioms (footprint {CL, Means, Subject, Will, demonstration_occurs, subjectWill, will_individuation}). Displayed AXIOMATIC (demonstration_occurs)."
+
+def C603 : String := "A necessary self-giving capacity leaves no contingent correlate: necessary_self_giving_leaves_no_contingent_correlate proves that every distinct subsisting centre in the ground is necessary with 0 substantive axioms (footprint {NecessarySubjectKind, Subject}). Displayed PROVEN."
+
+def C604 : String := "The composed chain in one statement: free_eternal_necessary_person_necessitates_another_divine_person proves that given a free Person and the necessary ground of reality, two distinct necessary divine Persons exist at the one divine reality with 0 substantive axioms (footprint {CL, Means, NecessarySubjectKind, Subject, Will, subjectWill}). Displayed PROVEN."
+
 end Logos.ClaimMeanings

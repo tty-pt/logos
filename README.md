@@ -719,7 +719,7 @@ PROOF
     ∴ PrecedesRightWrong Entity.ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}`
-SOURCE     ✅ · [DivineTrinitarianAttributes.lean#ofGround_precedes_the_right_wrong_distinction](formal/Logos/DivineTrinitarianAttributes.lean#L951)
+SOURCE     ✅ · [DivineTrinitarianAttributes.lean#ofGround_precedes_the_right_wrong_distinction](formal/Logos/DivineTrinitarianAttributes.lean#L953)
 
 <a id="ofGround_obtains_where_no_atom_is_true"></a>
     ▸ obtains_where_no_atom_is_true  ·  Premises: 0 · 1 step
@@ -727,7 +727,7 @@ SOURCE     ✅ · [DivineTrinitarianAttributes.lean#ofGround_precedes_the_right_
           1. constructor  (conjunction constructor introduction)
         ∴ ∃ w, (∀ n, ¬w ⊨ atom(n)) ∧ ExistsAt(w, Entity).ofGround
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{NecessarySubjectKind, Subject}`
-        SOURCE  ✅ · [DivineTrinitarianAttributes.lean#ofGround_obtains_where_no_atom_is_true](formal/Logos/DivineTrinitarianAttributes.lean#L810)
+        SOURCE  ✅ · [DivineTrinitarianAttributes.lean#ofGround_obtains_where_no_atom_is_true](formal/Logos/DivineTrinitarianAttributes.lean#L812)
         ↑ a component of ofGround_precedes_the_right_wrong_distinction
 
     ▸ conditions_every_bearer  ·  a term of the record (`fun`), not a named theorem — no separate derivation
@@ -738,7 +738,7 @@ SOURCE     ✅ · [DivineTrinitarianAttributes.lean#ofGround_precedes_the_right_
           1. assume h  (hypothesis assumption for conditional/reductio proof)
         ∴ ¬(∀ p, EntityMeans Entity.ofGround p ↔ T(p))
         PRICE      ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-        SOURCE  ✅ · [DivineTrinitarianAttributes.lean#ground_scope_is_not_the_truth_set](formal/Logos/DivineTrinitarianAttributes.lean#L883)
+        SOURCE  ✅ · [DivineTrinitarianAttributes.lean#ground_scope_is_not_the_truth_set](formal/Logos/DivineTrinitarianAttributes.lean#L885)
         ↑ a component of ofGround_precedes_the_right_wrong_distinction
 
 <a id="the_ground_is_not_the_universe"></a>
@@ -1095,7 +1095,7 @@ PROOF
     ∴ ∃ t,DivineHypostasis Entity, t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** — 3 substantive axioms: AxAgapeEssence, AxProcessionSpirit, AxProcessionWord · `{AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence, AxProcessionSpirit, AxProcessionWord · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L2156)
+SOURCE     ⚠️ AxAgapeEssence, AxProcessionSpirit, AxProcessionWord · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L2158)
 
 ### What is not established about the ground
 
@@ -1173,9 +1173,9 @@ The shared **nature** is still not in the vocabulary of the sort. C519 and C520 
 |---|---|---|
 | **One ground** of reality | C320/C389: `∃! g, UniversalModalGround g` (conditional form) / unicity modulo the Persons via `TrinitarianPersonalBridge` (META) and creaturely `SemanticFinitude` (VOCAB). | ✅ **PROVEN** · 0 substantive axioms · `{Means, NecessarySubjectKind, Subject}` · [DivineClassicalAttributes.lean#exactly_one_universal_modal_ground](formal/Logos/DivineClassicalAttributes.lean#L2196) {Means, NecessarySubjectKind, Subject} |
 | **One nature** (una natura, *actus purus*) | C440 divine simplicity as the sole bearer; aseity non-derived. 0 substantive axioms. | ✅ **PROVEN** · 0 substantive axioms · `{Means, Subject, CL}` · [DivineClassicalAttributes.lean#divine_simplicity_sole_bearer](formal/Logos/DivineClassicalAttributes.lean#L900) {Means, Subject, CL} · [DivineClassicalAttributes.lean#conditional_canonical_aseity](formal/Logos/DivineClassicalAttributes.lean#L605) {Means, Subject} |
-| **Three distinct Persons** | C510: `t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit`. **Priced on three declared META premises.** | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L2156) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} |
-| All three are **God** (one `divineReality`) | The anti-tritheism half: `is_divine the_father divineReality ∧ is_divine the_beloved divineReality ∧ is_divine the_spirit divineReality`. **Not the price of C510, and cheaper than it** — `the_father_is_divine` and `the_beloved_is_divine` rest on `{Subject, AxAgapeEssence, CL}` (one META), `the_spirit_is_divine` on `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` (two META), so this row's union is two META axioms where C510 needs three. The word *consubstantial* is not used for this row: the `Consubstantial` anchor was deleted because `Consubstantial Entity.ofGround e f` is `True` of arbitrary entities including atoms — a `{}` price on a `True` proposition is a null result, which is why G9 in `test_personal_ground_kind.py` refuses its re-declaration. The one-ness Γ actually carries is `indwells`, and the shared *nature* is still not in the vocabulary of the sort. | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` · [DivineTrinitarianAttributes.lean#the_father_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L2099) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_beloved_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L2104) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L2109) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
-| The Persons are **distinct** (not three gods) | Personal distinctness by personal property, not by essence: `≠` in every pair, and the Spirit is no word. | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineTrinitarianAttributes.lean#the_beloved_distinct](formal/Logos/DivineTrinitarianAttributes.lean#L1976) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_father](formal/Logos/DivineTrinitarianAttributes.lean#L2035) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_beloved](formal/Logos/DivineTrinitarianAttributes.lean#L2043) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_any_word](formal/Logos/DivineTrinitarianAttributes.lean#L2039) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
+| **Three distinct Persons** | C510: `t.P1 = the_father ∧ t.P2 = the_beloved ∧ t.P3 = the_spirit ∧ IsWord the_beloved ∧ IsSpirit the_spirit`. **Priced on three declared META premises.** | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L2158) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} |
+| All three are **God** (one `divineReality`) | The anti-tritheism half: `is_divine the_father divineReality ∧ is_divine the_beloved divineReality ∧ is_divine the_spirit divineReality`. **Not the price of C510, and cheaper than it** — `the_father_is_divine` and `the_beloved_is_divine` rest on `{Subject, AxAgapeEssence, CL}` (one META), `the_spirit_is_divine` on `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` (two META), so this row's union is two META axioms where C510 needs three. The word *consubstantial* is not used for this row: the `Consubstantial` anchor was deleted because `Consubstantial Entity.ofGround e f` is `True` of arbitrary entities including atoms — a `{}` price on a `True` proposition is a null result, which is why G9 in `test_personal_ground_kind.py` refuses its re-declaration. The one-ness Γ actually carries is `indwells`, and the shared *nature* is still not in the vocabulary of the sort. | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, CL}` · [DivineTrinitarianAttributes.lean#the_father_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L2101) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_beloved_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L2106) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_is_divine](formal/Logos/DivineTrinitarianAttributes.lean#L2111) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
+| The Persons are **distinct** (not three gods) | Personal distinctness by personal property, not by essence: `≠` in every pair, and the Spirit is no word. | ⚠️ **AXIOMATIC (AxAgapeEssence, AxProcessionSpirit, AxProcessionWord)** · `{Subject, AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, CL}` · [DivineTrinitarianAttributes.lean#the_beloved_distinct](formal/Logos/DivineTrinitarianAttributes.lean#L1978) {AxAgapeEssence, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_father](formal/Logos/DivineTrinitarianAttributes.lean#L2037) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_beloved](formal/Logos/DivineTrinitarianAttributes.lean#L2045) {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} · [DivineTrinitarianAttributes.lean#the_spirit_ne_any_word](formal/Logos/DivineTrinitarianAttributes.lean#L2041) {AxAgapeEssence, AxProcessionSpirit, Subject, CL} |
 | **A single-Person reading is not entailed** | Separation model, not a refutation: one ground, and a model in which that ground bears two distinct persons. Ground-unicity therefore does not entail a single-Person ground — the person-count is left open by unicity. The Godhead is personal (sustaining being and indwelling every Person), but is not an individual Person-correlate among the three. | 🧱 **COUNTERMODEL | unicity_does_not_force_unitarian_monad ⇏ Independence** · `{}` · [DivineClassicalAttributes.lean#unicity_does_not_force_unitarian_monad](formal/Logos/DivineClassicalAttributes.lean#L2224) {} |
 | The Trinity is **not free** | C109: the preceding theory does not entail three Persons. This is the price, stated as a countermodel. | 🧱 **COUNTERMODEL | preceding_theory ⇏ trinity** · `{}` · [ConditionalTheology.lean#preceding_theory_not_entails_trinity](formal/Logos/ConditionalTheology.lean#L336) {} |
 | The **Incarnation** is open | C112: the preceding theory is consistent with an unincarnate ground. The frontier, named. | 🧱 **COUNTERMODEL | preceding_theory ⇏ incarnation** · `{}` · [ConditionalTheology.lean#preceding_theory_not_entails_incarnation](formal/Logos/ConditionalTheology.lean#L380) {} |
@@ -1682,9 +1682,9 @@ PROOF
     ⊥
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Subject}`
-SOURCE     ✅ · [DivineTrinitarianAttributes.lean#self_gift_cannot_depend_on_a_contingent_person](formal/Logos/DivineTrinitarianAttributes.lean#L3568)
+SOURCE     ✅ · [DivineTrinitarianAttributes.lean#self_gift_cannot_depend_on_a_contingent_person](formal/Logos/DivineTrinitarianAttributes.lean#L3611)
 
-> **The hinge, and the row the previous batch never had.** The objection is a four-step chain — (1) one Person, (2) therefore only contingent recipients, (3) therefore the self-giving *depends on* the contingent, (4) therefore contingent — against a Ground already determined Eternal, Necessary, Free and Immutable. **Step 3 is where it dies**, and it dies free: `SelfDonation` puts the recipient at `divineReality := Entity.ofGround`, so no `Subject` can be the recipient of a donation. The hypothesis here is that dependence as a proposition and the compiled derivation is C579 (`{Subject}`), whose primary is the premise step itself (`single_person_denial_is_refuted`, also `{Subject}`): assume the author's step 1 and `False` follows, because `Entity.ofGround` is no `Subject`'s entity. **No `AxAgapeEssence` appears on this row.** The donation's *existence* is priced on its own row below and is deliberately not used to refute an objection that grants it; a row that refuted the objection by way of the datum it also prices would be the datum. What the free rows say is that the gift's terminus is the necessary ground (`donation_terminus_is_as_necessary_as_the_donor`, `{NecessarySubjectKind, Subject}`), so the contingency conclusion has no premise (`donation_makes_contingency_is_refuted`). “It cannot be only one” is a *separate* paid row — `Plurality.notAlone` (T12) costs `AxTwoSubjects` — and is not folded into this row's price. The terminology the earlier batch collapsed is restored here: the ground **is personal** (C362, `PersonalGround`, whose `indwells` is `OneEssence` for *every* `Subject`), it **is** the nature those Persons are OneEssence in, and it is **no Person among them** (C519). “The ground is not a person” is the third of those, not a denial of the first.
+> **The hinge, and the row the previous batch never had.** The objection is a four-step chain — (1) one Person, (2) therefore only contingent recipients, (3) therefore the self-giving *depends on* the contingent, (4) therefore contingent — against a Ground already determined Eternal, Necessary, Free and Immutable. **Step 3 is where it dies**, and it dies free: `SelfDonation` puts the recipient at `divineReality := Entity.ofGround`, so no `Subject` can be the recipient of a donation. The hypothesis here is that dependence as a proposition and the compiled derivation is C579 (`{Subject}`), whose primary is the premise step itself (`single_person_denial_is_refuted`, also `{Subject}`): assume the author's step 1 and `False` follows, because `Entity.ofGround` is no `Subject`'s entity. **No `AxAgapeEssence` appears on this row.** The donation's *existence* is priced on its own row below and is deliberately not used to refute an objection that grants it; a row that refuted the objection by way of the datum it also prices would be the datum. What the free rows say is that the gift's terminus is the necessary ground (`donation_terminus_is_as_necessary_as_the_donor`, `{NecessarySubjectKind, Subject}`), so the contingency conclusion has no premise (`donation_makes_contingency_is_refuted`). “It cannot be only one” is a *separate* paid row — `Plurality.notAlone` (T12) costs `AxTwoSubjects` — and is not folded into this row's price. The terminology the earlier batch collapsed is restored here: the ground **is personal** (C362, `PersonalGround`, whose `indwells` is `OneEssence` for *every* `Subject`), it **is** the nature those Persons are OneEssence in, and it is **no Person among them** (C519). “The ground is not a person” is the third of those, not a denial of the first. Moreover, that another Divine Person exists necessarily is proved unconditionally without relying on any contingent beings (C600 / C604).
 
 <a id="r19"></a>
 ### R19. Denying the donation of the Self
@@ -1703,7 +1703,7 @@ PROOF
     False  — refuted, at the declared price on the PRICE line
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#denying_self_donation_is_absurd](formal/Logos/DivineTrinitarianAttributes.lean#L2287)
+SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#denying_self_donation_is_absurd](formal/Logos/DivineTrinitarianAttributes.lean#L2326)
 
 > The denial is a **real premise** of the compiled theorem — `denying_self_donation_is_absurd`, C576 — which is what makes this row a derivation and not a badge asserted over it. **Its kind is `⚠️ PRICED`, not `⊥ CONTRADICTION`, and the difference is not cosmetic.** `AxAgapeEssence` is priced, so a world exists in which the denial holds (the Narcissus world, C511, where the source loves only itself): the denial is *available* and is contradicted only by what is **declared**. Γ does not claim the donation is a theorem of logic. This row is mounted for that reason and not as the answer to the author — the answer is the free row above, which does not mention the donation.
 
@@ -1725,7 +1725,7 @@ PROOF
     ∴ ¬∀ f, o, Subsists(f) → Subsists(o) → DivineLove f o → f.deiformEntity ≠ o.deiformEntity
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#denying_shared_location_is_absurd](formal/Logos/DivineTrinitarianAttributes.lean#L2298)
+SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#denying_shared_location_is_absurd](formal/Logos/DivineTrinitarianAttributes.lean#L2337)
 
 
 <a id="two_subsisting_share_one_location"></a>
@@ -1741,7 +1741,7 @@ PROOF
     ∴ f.deiformEntity = o.deiformEntity
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Subject}`
-SOURCE     ✅ · [DivineTrinitarianAttributes.lean#two_subsisting_share_one_location](formal/Logos/DivineTrinitarianAttributes.lean#L1876)
+SOURCE     ✅ · [DivineTrinitarianAttributes.lean#two_subsisting_share_one_location](formal/Logos/DivineTrinitarianAttributes.lean#L1878)
 
 
 > The stronger form, and the part that costs nothing extra: grant a donor and a recipient, grant that both subsist, grant that the love holds — and the denial *still* has to deny that they share one location-entity, which is `{}`. So the two-relata objection is refuted by arithmetic, not by a purchase. Same footprint as the row above ({Subject, AxAgapeEssence, Classical.choice}, one META): the price buys the gift, and the gift is not two things. This row has no thesis premise to label because the theorem's whole conclusion is the denial — so it prints the compiled statement and the derived kind rather than transcribing one.
@@ -1764,7 +1764,7 @@ PROOF
     ∴ ¬Asiety(Entity).ofGround ∧ (∃ f, o, SelfDonation(f, o))
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Means, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#self_donation_needs_no_personhood_of_the_ground](formal/Logos/DivineTrinitarianAttributes.lean#L2755)
+SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#self_donation_needs_no_personhood_of_the_ground](formal/Logos/DivineTrinitarianAttributes.lean#L2797)
 
 
 <a id="ground_is_not_a_fourth_chooser"></a>
@@ -1778,7 +1778,7 @@ PROOF
     ∴ ¬Asiety(Entity).ofGround
 
 PRICE            ✅ **PROVEN** — 0 substantive axioms · `{Means, Subject}`
-SOURCE     ✅ · [DivineTrinitarianAttributes.lean#ground_is_not_a_fourth_chooser](formal/Logos/DivineTrinitarianAttributes.lean#L2717)
+SOURCE     ✅ · [DivineTrinitarianAttributes.lean#ground_is_not_a_fourth_chooser](formal/Logos/DivineTrinitarianAttributes.lean#L2759)
 
 
 <a id="agape_is_self_donation"></a>
@@ -1791,7 +1791,7 @@ PROOF
     ∴ ∃ f, o, SelfDonation(f, o)
 
 PRICE            ⚠️ **AXIOMATIC (AxAgapeEssence)** — 1 substantive axiom: AxAgapeEssence · `{AxAgapeEssence, Subject, choice}`
-SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#agape_is_self_donation](formal/Logos/DivineTrinitarianAttributes.lean#L2251)
+SOURCE     ⚠️ AxAgapeEssence · [DivineTrinitarianAttributes.lean#agape_is_self_donation](formal/Logos/DivineTrinitarianAttributes.lean#L2290)
 
 
 > **The row that restores what a laundering sentence had removed.** The corpus answered this with a label — “the one essence is not a fourth chooser; its freedom is their freedom, shared rather than duplicated” — and commit `4a59173` then claimed the label was an absent predicate presented as an argument, deleted the ground’s freedom from the doctrine, and rebuilt the reading on that. The predicate is **not** absent: `AsietyFreedom.asietyFreedomOfGround` (`AsietyFreedom.lean:141`) is the ◈ `def` that states the sharing, `asietyFreedom_summary` (`:357`) consumes it, and three docstrings in that module say the vacuity of `OneEssence` is *load-bearing* because it marks the ground’s freedom as **transferred** rather than **exercised**. A `def` premise is invisible to `#print axioms`, and from that invisibility the commit inferred that nothing was there. `LOVE-2.md` D1 withdraws that inference. So this row is a **conjunction, both halves machine-checked**, plus a granted premise: the ground is **not** a fourth chooser (free at `{Means, Subject}`, and marked role=premise — it is the *objection’s* premise, so it is printed as granted and kills nothing), **and** the donation of the Self stands anyway (C575, one META axiom). What the price buys is the gift and nothing more: it does not buy a fourth chooser, while the ground's personhood is confirmed by C228 and C590 without making the ground a fourth chooser. The ground **is** personal — C362, C140 — and `¬ Asiety Entity.ofGround` is `ofGround_ne_ofSubject`, i.e. C519: the nature is not one of its instances.
@@ -1878,7 +1878,7 @@ Contingent creation *as existence* is a free theorem (C350, `{}`); only the real
 | `C350` | ✅ **PROVEN** · [DivineClassicalAttributes.lean#contingent_realm_obtains](formal/Logos/DivineClassicalAttributes.lean#L4280), footprint {NecessarySubjectKind, Subject, CL} | Contingency-overflow: something obtains, is modal-fragile, and is not the necessary ground — and Γ derives it outright, resting on nothing substantive. |
 | `C367` | ✅ **PROVEN** · [DivineClassicalAttributes.lean#cosmos_obtains](formal/Logos/DivineClassicalAttributes.lean#L4427), footprint {Means, NecessarySubjectKind, Subject, Will, subjectWill, CL} | **The cosmos exists** — a contingent created realm, not the necessary ground, actually obtains and bears content of its own — given a *contingent* person. |
 | `C440` | ✅ **PROVEN** · [DivineClassicalAttributes.lean#divine_simplicity_sole_bearer](formal/Logos/DivineClassicalAttributes.lean#L900), footprint {Means, Subject, CL} | C440 — the attributes-table form: the ground is the sole bearer of Divine Simplicity, stated together with the existence half so a reader-facing row can cite a single declaration. This is the [the Divine Simplicity row in the ledger](#sec-where-the-rest-of-the-ledger-lives) analogue of C |
-| `C510` | ⚠️ **AXIOMATIC** — rests on `AxAgapeEssence`, `AxProcessionSpirit`, `AxProcessionWord` · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L2156), footprint {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} | Agape entails tripersonality (C510, PROVEN↑): under the three disclosed Agape axioms — the datum, the procession of the Word, the procession of the Spirit — there is a `TrinitarianStructure` (C108) on the divine sort who |
+| `C510` | ⚠️ **AXIOMATIC** — rests on `AxAgapeEssence`, `AxProcessionSpirit`, `AxProcessionWord` · [DivineTrinitarianAttributes.lean#agape_entails_tripersonality](formal/Logos/DivineTrinitarianAttributes.lean#L2158), footprint {AxAgapeEssence, AxProcessionSpirit, AxProcessionWord, Subject, CL} | Agape entails tripersonality (C510, PROVEN↑): under the three disclosed Agape axioms — the datum, the procession of the Word, the procession of the Spirit — there is a `TrinitarianStructure` (C108) on the divine sort who |
 
 ## The score: what Γ has won, and what is still open
 
@@ -1902,9 +1902,9 @@ decision: `scripts/census_stipulated_defs.py`.
 
 | **Won** | **Still open** |
 |---|---|
-| **446 affirmative claims derived** out of **588** ledger claims — 345 ✅ kernel-verified, 101 ⚠️ derived under a substantive (`SEM`/`META`) axiom, each ⚠️ row naming the bridge it rests on. | **12 blocked** ✖ — named individually |
+| **453 affirmative claims derived** out of **595** ledger claims — 350 ✅ kernel-verified, 103 ⚠️ derived under a substantive (`SEM`/`META`) axiom, each ⚠️ row naming the bridge it rests on. | **12 blocked** ✖ — named individually |
 | **61 countermodel boundaries** 🧱 — a hostile model in which the claim *fails*. These are won results about the limit of the theory, not gaps. | &nbsp;&nbsp;· **C462** — BLOCKED, with no declaration, and deliberately so: the ground does not initiate is not refutable in Gamma and is not evidence of non-agency either |
-| **1020 of 1931 theorems in `formal/Logos/` rest on no Γ axiom at all** (53%) — counted from `formal/axiom_audit.json`, not claimed. | &nbsp;&nbsp;· **C503** — A love-lane step for deriving the Good from a second person is BLOCKED, with no declaration (lote OTHER, 2026-09-29; plan OTHER.md): the step 'the… |
+| **1020 of 1939 theorems in `formal/Logos/` rest on no Γ axiom at all** (53%) — counted from `formal/axiom_audit.json`, not claimed. | &nbsp;&nbsp;· **C503** — A love-lane step for deriving the Good from a second person is BLOCKED, with no declaration (lote OTHER, 2026-09-29; plan OTHER.md): the step 'the… |
 | **The whole price is 40 declared axioms**: 18 are `VOCAB` (the vocabulary the statements need in order to be sayable) and 22 are substantive. Only the 22 are philosophical commitments; the rest are the theory's definitions of its own words, which is a different thing from a premise. | &nbsp;&nbsp;· **C73** — Plurality without bridges is blocked: unit countermodel settles that 1 act does not entail plurality; requires AxTwoNecessaryPersonalCentres |
 | **10 attribute corollaries became unconditional theorems** (C389–C398) — they were conditional on a `def` until F15 was declared, so this is a *strengthening*: fewer hidden premises, same conclusions. | &nbsp;&nbsp;· **C75** — Propositional personhood is blocked: content existence does not entail personhood |
 |  | &nbsp;&nbsp;· **C79** — Ultimate ground existence is blocked: infinite descending chains have no ultimate element without a well-foundedness axiom |

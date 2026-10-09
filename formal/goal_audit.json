@@ -108807,6 +108807,113 @@
    "Logos.DivineAgape.SelfDonation"
   ]
  },
+ "Logos.DivineAgape.another_divine_person_exists": {
+  "kind": "thm",
+  "goal": "∃ f o, f ≠ o ∧ Logos.DivineAgape.Subsists f ∧ Logos.DivineAgape.Subsists o",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Ne",
+    "spine": "Ne/3(Logos.DivineAgape.DivineHypostasis, f, o)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Logos.DivineAgape.Subsists",
+    "spine": "Logos.DivineAgape.Subsists/1(f)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Logos.DivineAgape.Subsists",
+    "spine": "Logos.DivineAgape.Subsists/1(o)"
+   }
+  ],
+  "headSyms": [
+   "Ne",
+   "Logos.DivineAgape.Subsists",
+   "Logos.DivineAgape.Subsists"
+  ],
+  "headShorts": [
+   "Ne",
+   "Subsists"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.Subsists"
+  ]
+ },
+ "Logos.DivineAgape.another_divine_person_is_necessary": {
+  "kind": "thm",
+  "goal": "∃ f o, f ≠ o ∧ Logos.TheologicalModalHardening.NecessaryEntity f.deiformEntity ∧ Logos.TheologicalModalHardening.NecessaryEntity o.deiformEntity",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Ne",
+    "spine": "Ne/3(Logos.DivineAgape.DivineHypostasis, f, o)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Logos.TheologicalModalHardening.NecessaryEntity",
+    "spine": "Logos.TheologicalModalHardening.NecessaryEntity/1(Logos.DivineAgape.DivineHypostasis.deiformEntity/1(f))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Logos.TheologicalModalHardening.NecessaryEntity",
+    "spine": "Logos.TheologicalModalHardening.NecessaryEntity/1(Logos.DivineAgape.DivineHypostasis.deiformEntity/1(o))"
+   }
+  ],
+  "headSyms": [
+   "Ne",
+   "Logos.TheologicalModalHardening.NecessaryEntity",
+   "Logos.TheologicalModalHardening.NecessaryEntity"
+  ],
+  "headShorts": [
+   "Ne",
+   "NecessaryEntity"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.DivineHypostasis.deiformEntity",
+   "Logos.TheologicalModalHardening.NecessaryEntity"
+  ]
+ },
  "Logos.DivineAgape.co_subsistence_is_co_location": {
   "kind": "thm",
   "goal": "a.deiformEntity = b.deiformEntity",
@@ -109167,6 +109274,37 @@
    "Logos.DivineAgape.DivineHypostasis",
    "Logos.DivineAgape.DivineHypostasis.deiformEntity",
    "Logos.Entity.Entity"
+  ]
+ },
+ "Logos.DivineAgape.subsistence_is_inhabited": {
+  "kind": "thm",
+  "goal": "∃ d, Logos.DivineAgape.Subsists d",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Logos.DivineAgape.Subsists",
+    "spine": "Logos.DivineAgape.Subsists/1(d)"
+   }
+  ],
+  "headSyms": [
+   "Logos.DivineAgape.Subsists"
+  ],
+  "headShorts": [
+   "Subsists"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.Subsists"
   ]
  },
  "Logos.DivineAgape.subsisting_centre_is_necessary": {
@@ -268247,6 +268385,158 @@
    "Logos.Modal.NecessaryEntity"
   ]
  },
+ "Logos.SinglePersonDenial.first_person_is_free_to_self_give": {
+  "kind": "thm",
+  "goal": "∃ s, Logos.Person.Person s ∧ Logos.Choice.FreeWill s ∧ ∃ f o, f ≠ o ∧ Logos.DivineAgape.Subsists f ∧ Logos.DivineAgape.Subsists o",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.Person.Person",
+    "spine": "Logos.Person.Person/1(s)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.Choice.FreeWill",
+    "spine": "Logos.Choice.FreeWill/1(s)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Ne",
+    "spine": "Ne/3(Logos.DivineAgape.DivineHypostasis, f, o)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Logos.DivineAgape.Subsists",
+    "spine": "Logos.DivineAgape.Subsists/1(f)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Logos.DivineAgape.Subsists",
+    "spine": "Logos.DivineAgape.Subsists/1(o)"
+   }
+  ],
+  "headSyms": [
+   "Logos.Person.Person",
+   "Logos.Choice.FreeWill",
+   "Ne",
+   "Logos.DivineAgape.Subsists",
+   "Logos.DivineAgape.Subsists"
+  ],
+  "headShorts": [
+   "FreeWill",
+   "Ne",
+   "Person",
+   "Subsists"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Choice.FreeWill",
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.Subsists",
+   "Logos.Person.Person"
+  ]
+ },
+ "Logos.SinglePersonDenial.free_eternal_necessary_person_necessitates_another_divine_person": {
+  "kind": "thm",
+  "goal": "∃ f o, f ≠ o ∧ Logos.Modal.NecessaryEntity f.deiformEntity ∧ Logos.Modal.NecessaryEntity o.deiformEntity",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Ne",
+    "spine": "Ne/3(Logos.DivineAgape.DivineHypostasis, f, o)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Logos.Modal.NecessaryEntity",
+    "spine": "Logos.Modal.NecessaryEntity/1(Logos.DivineAgape.DivineHypostasis.deiformEntity/1(f))"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Logos.Modal.NecessaryEntity",
+    "spine": "Logos.Modal.NecessaryEntity/1(Logos.DivineAgape.DivineHypostasis.deiformEntity/1(o))"
+   }
+  ],
+  "headSyms": [
+   "Ne",
+   "Logos.Modal.NecessaryEntity",
+   "Logos.Modal.NecessaryEntity"
+  ],
+  "headShorts": [
+   "Ne",
+   "NecessaryEntity"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [
+   "_firstFree",
+   "_groundNec"
+  ],
+  "hypothesis": [
+   {
+    "binder": "_firstFree",
+    "head": "Exists",
+    "spine": "?(Logos.Agency.Subject).&(… , …)"
+   },
+   {
+    "binder": "_groundNec",
+    "head": "Logos.RecoveredOntologicalGround.NecessaryGroundOfReality",
+    "spine": "Logos.RecoveredOntologicalGround.NecessaryGroundOfReality/1(Logos.Entity.Entity.ofGround)"
+   }
+  ],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Choice.FreeWill",
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.DivineHypostasis.deiformEntity",
+   "Logos.Entity.Entity.ofGround",
+   "Logos.Modal.NecessaryEntity",
+   "Logos.Person.Person",
+   "Logos.RecoveredOntologicalGround.NecessaryGroundOfReality"
+  ]
+ },
  "Logos.SinglePersonDenial.hypostasisOf_subsists": {
   "kind": "thm",
   "goal": "Logos.DivineAgape.Subsists d",
@@ -268289,6 +268579,69 @@
    "Logos.DivineAgape.DivineHypostasis",
    "Logos.DivineAgape.Subsists",
    "Logos.SinglePersonDenial.HypostasisOf"
+  ]
+ },
+ "Logos.SinglePersonDenial.necessary_self_giving_leaves_no_contingent_correlate": {
+  "kind": "thm",
+  "goal": "Logos.Modal.NecessaryEntity f.deiformEntity ∧ Logos.Modal.NecessaryEntity o.deiformEntity",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.Modal.NecessaryEntity",
+    "spine": "Logos.Modal.NecessaryEntity/1(Logos.DivineAgape.DivineHypostasis.deiformEntity/1(f))"
+   },
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.Modal.NecessaryEntity",
+    "spine": "Logos.Modal.NecessaryEntity/1(Logos.DivineAgape.DivineHypostasis.deiformEntity/1(o))"
+   }
+  ],
+  "headSyms": [
+   "Logos.Modal.NecessaryEntity",
+   "Logos.Modal.NecessaryEntity"
+  ],
+  "headShorts": [
+   "NecessaryEntity"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.DivineHypostasis"
+  ],
+  "binderFree": [
+   "f",
+   "o",
+   "_hne",
+   "hf",
+   "ho"
+  ],
+  "hypothesis": [
+   {
+    "binder": "_hne",
+    "head": "Ne",
+    "spine": "Ne/3(Logos.DivineAgape.DivineHypostasis, f, o)"
+   },
+   {
+    "binder": "hf",
+    "head": "Logos.DivineAgape.Subsists",
+    "spine": "Logos.DivineAgape.Subsists/1(f)"
+   },
+   {
+    "binder": "ho",
+    "head": "Logos.DivineAgape.Subsists",
+    "spine": "Logos.DivineAgape.Subsists/1(o)"
+   }
+  ],
+  "refs": [
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.DivineHypostasis.deiformEntity",
+   "Logos.DivineAgape.Subsists",
+   "Logos.Modal.NecessaryEntity"
   ]
  },
  "Logos.SinglePersonDenial.not_a_single_person": {
@@ -268362,6 +268715,123 @@
    "Logos.DivineAgape.SelfDonation",
    "Logos.Entity.Entity",
    "Logos.Entity.EntityOf"
+  ]
+ },
+ "Logos.SinglePersonDenial.self_giving_capacity_is_necessary": {
+  "kind": "thm",
+  "goal": "Logos.Necessity.Necessity (∃ s, Logos.Person.Person s ∧ Logos.Choice.FreeWill s ∧ ∃ f o, f ≠ o ∧ Logos.DivineAgape.Subsists f ∧ Logos.DivineAgape.Subsists o)",
+  "goalTag": "app",
+  "quant": "plain",
+  "conjuncts": [
+   {
+    "quant": "plain",
+    "sorts": [],
+    "head": "Logos.Necessity.Necessity",
+    "spine": "Logos.Necessity.Necessity/1(?(Logos.Agency.Subject).&(Logos.Person.Person/1(…) , &(… , …)))"
+   }
+  ],
+  "headSyms": [
+   "Logos.Necessity.Necessity"
+  ],
+  "headShorts": [
+   "Necessity"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [],
+  "binderFree": [],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Choice.FreeWill",
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.Subsists",
+   "Logos.Necessity.Necessity",
+   "Logos.Person.Person"
+  ]
+ },
+ "Logos.SinglePersonDenial.self_giving_capacity_is_world_invariant": {
+  "kind": "thm",
+  "goal": "∃ s, Logos.Person.Person s ∧ Logos.Choice.FreeWill s ∧ ∃ f o, f ≠ o ∧ Logos.DivineAgape.Subsists f ∧ Logos.DivineAgape.Subsists o",
+  "goalTag": "exists",
+  "quant": "exists",
+  "conjuncts": [
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.Person.Person",
+    "spine": "Logos.Person.Person/1(s)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject"
+    ],
+    "head": "Logos.Choice.FreeWill",
+    "spine": "Logos.Choice.FreeWill/1(s)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Ne",
+    "spine": "Ne/3(Logos.DivineAgape.DivineHypostasis, f, o)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Logos.DivineAgape.Subsists",
+    "spine": "Logos.DivineAgape.Subsists/1(f)"
+   },
+   {
+    "quant": "exists",
+    "sorts": [
+     "Logos.Agency.Subject",
+     "Logos.DivineAgape.DivineHypostasis",
+     "Logos.DivineAgape.DivineHypostasis"
+    ],
+    "head": "Logos.DivineAgape.Subsists",
+    "spine": "Logos.DivineAgape.Subsists/1(o)"
+   }
+  ],
+  "headSyms": [
+   "Logos.Person.Person",
+   "Logos.Choice.FreeWill",
+   "Ne",
+   "Logos.DivineAgape.Subsists",
+   "Logos.DivineAgape.Subsists"
+  ],
+  "headShorts": [
+   "FreeWill",
+   "Ne",
+   "Person",
+   "Subsists"
+  ],
+  "valueConjuncts": [],
+  "valueHeads": [],
+  "boundSorts": [
+   "Logos.Semantics.World"
+  ],
+  "binderFree": [
+   "_w"
+  ],
+  "hypothesis": [],
+  "refs": [
+   "Logos.Agency.Subject",
+   "Logos.Choice.FreeWill",
+   "Logos.DivineAgape.DivineHypostasis",
+   "Logos.DivineAgape.Subsists",
+   "Logos.Person.Person",
+   "Logos.Semantics.World"
   ]
  },
  "Logos.SinglePersonDenial.self_giving_necessitates_a_distinct_necessary_other": {

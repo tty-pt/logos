@@ -4371,6 +4371,15 @@
   "Logos.Agency.Subject",
   "Logos.DivineAgape.AxAgapeEssence"
  ],
+ "Logos.DivineAgape.another_divine_person_exists": [
+  "propext",
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.another_divine_person_is_necessary": [
+  "propext",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
  "Logos.DivineAgape.co_subsistence_is_co_location": [
   "Logos.Agency.Subject"
  ],
@@ -4399,6 +4408,9 @@
   "Logos.DivineAgape.AxAgapeEssence"
  ],
  "Logos.DivineAgape.is_divine": [
+  "Logos.Agency.Subject"
+ ],
+ "Logos.DivineAgape.subsistence_is_inhabited": [
   "Logos.Agency.Subject"
  ],
  "Logos.DivineAgape.subsisting_centre_is_necessary": [
@@ -11913,6 +11925,25 @@
   "Logos.Agency.NecessarySubjectKind",
   "Logos.Agency.Subject"
  ],
+ "Logos.SinglePersonDenial.first_person_is_free_to_self_give": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation",
+  "Logos.LibertarianPersonhood.demonstration_occurs"
+ ],
+ "Logos.SinglePersonDenial.free_eternal_necessary_person_necessitates_another_divine_person": [
+  "propext",
+  "Logos.Agency.Means",
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill"
+ ],
  "Logos.SinglePersonDenial.hypostasisOf_subsists": [
   "Classical.choice",
   "Logos.Agency.NecessarySubjectKind",
@@ -11921,11 +11952,37 @@
   "Logos.DivineAgape.AxProcessionSpirit",
   "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
  ],
+ "Logos.SinglePersonDenial.necessary_self_giving_leaves_no_contingent_correlate": [
+  "Logos.Agency.NecessarySubjectKind",
+  "Logos.Agency.Subject"
+ ],
  "Logos.SinglePersonDenial.not_a_single_person": [
   "Logos.Agency.Subject"
  ],
  "Logos.SinglePersonDenial.self_gift_cannot_depend_on_a_contingent_person": [
   "Logos.Agency.Subject"
+ ],
+ "Logos.SinglePersonDenial.self_giving_capacity_is_necessary": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation",
+  "Logos.LibertarianPersonhood.demonstration_occurs"
+ ],
+ "Logos.SinglePersonDenial.self_giving_capacity_is_world_invariant": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound",
+  "Logos.Agency.Means",
+  "Logos.Agency.Subject",
+  "Logos.Agency.Will",
+  "Logos.Agency.subjectWill",
+  "Logos.Agency.will_individuation",
+  "Logos.LibertarianPersonhood.demonstration_occurs"
  ],
  "Logos.SinglePersonDenial.self_giving_necessitates_a_distinct_necessary_other": [
   "Logos.Agency.NecessarySubjectKind",

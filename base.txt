@@ -2917,6 +2917,17 @@ os três sujeitos necessários da ponte ao Pai, ao Amado e ao Espírito sem qual
 entidade (`ofGround_ne_ofSubject` permanece intacto). Juntamente com `self_giving_necessitates_a_distinct_necessary_other`
 (C597, `{NecessarySubjectKind, Subject}`, 0 axiomas substantivos), o Outro distinto e necessário é provado.
 
+**A outra Pessoa divina, necessariamente (2026-10-09, C598–C604).** A dedução incondicional de que
+existem necessariamente duas Pessoas divinas distintas subsistentes no chão da realidade está
+provada a zero axiomas substantivos (`another_divine_person_exists`, C599; `another_divine_person_is_necessary`,
+C600). A capacidade da primeira Pessoa se autodoar (`first_person_is_free_to_self_give`, C601;
+`self_giving_capacity_is_necessary`, C602) consome apenas o axioma performatório-transcendental
+`demonstration_occurs` (Tag: TRANS) da cadeia de juízo, sem qualquer axioma semântico ou metafísico.
+O corolário de que essa capacidade não deixa correlato contingente (`necessary_self_giving_leaves_no_contingent_correlate`,
+C603) e a composição da cadeia completa (`free_eternal_necessary_person_necessitates_another_divine_person`,
+C604) fecham o argumento sem exigir o axioma META `AxAgapeEssence`, cujo preço fica estritamente restrito
+à instanciação da relação amorosa extática.
+
 **O que sai do caminho de leitura.** `necessary_nature_not_entails_necessary_act` (linha R20) é um
 `{}` sobre uma **assinatura fresca** e localement quantificada (`∃ World Entity Subject …`, com
 `ExistsAt := fun _ _ => True`), sem chão, sem pessoas, sem doação, e que concede
