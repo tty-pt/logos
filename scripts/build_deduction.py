@@ -42,7 +42,7 @@ from __future__ import annotations
 import json
 import re
 import sys
-from collections import OrderedDict, defaultdict
+from collections import Counter, OrderedDict, defaultdict
 from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
@@ -6564,10 +6564,11 @@ def render_score_block(sd: dict) -> list[str]:
     ap(f"open: the Incarnation, contingent creation as such, and hypostasis. A *single-person*")
     ap(f"reading of the personal ground is not entailed by")
     ap("unicity: `unicity_does_not_force_unitarian_monad` ({}) is a separation model, so".format("{}"))
-    ap(f"unicity leaves the person-count open. Each open row is named above with its")
-    ap(f"missing lemma rather than absorbed into an average, and the left column is")
-    ap(f"larger because the ground-theory was proved, not because the open rows were")
-    ap(f"rounded down.")
+    ap(f"unicity leaves the person-count open. The positive plural result at the divine-hypostasis")
+    ap(f"level is C600/C604 (PROVEN, free); bridge-free Subject plurality is C73 (BLOCKED).")
+    ap(f"Each open row is named above with its missing lemma rather than absorbed into an average,")
+    ap(f"and the left column is larger because the ground-theory was proved, not because the")
+    ap(f"open rows were rounded down.")
     ap("")
     ap("Four qualifications, stated rather than hidden:")
     ap("")
@@ -6650,6 +6651,12 @@ def render_reading_guide():
     ap("Axioms appear as `◆` in the audit ledger. `AXIOM` (the claim *is itself* a declared")
     ap("axiom) is distinct from `AXIOMATIC` (the claim is *derived under* an axiom).")
     ap("")
+    ap('<a id="sec-glossary-overloaded-terms"></a>')
+    ap("**Key terms: the three distinctions.** To prevent conflation across distinct formal layers, Γ distinguishes three senses for core terms:")
+    ap("- **Person** (`Subject` · `DivineHypostasis` · `Entity`): `Person s` (free agent) vs. `DivineHypostasis` (divine subsistent center) vs. `PersonCorrelate` (`EntityOf s`).")
+    ap("- **Necessary** (`Entity` · `Subject` genus · `Subject` world-rigid): `NecessaryEntity e` (all worlds) vs. `NecessarySubjectKind s` (modal genus) vs. `NecessarySubject s` (world-rigid).")
+    ap("- **Ground** (`Entity` · Predicate · Relation): `Entity.ofGround` (foundation) vs. `PersonalGround` (indwelling essence) vs. `UniversalModalGround` (universal grounding).")
+    ap("")
 
     full = _render_reading_guide_full()
     if _argument_audience():
@@ -6668,11 +6675,12 @@ def _render_reading_guide_full() -> list[str]:
     ap("> single declared `META` bridge `necessaryPersonalSubjectExists` (C404 → Claim D, C409).")
     ap("> At the level of the Person, C212 (`unicity_does_not_force_unitarian_monad`, `{}`) shows that")
     ap("> ground-unicity does *not* entail a single-person ground: it is a separation model, leaving the")
-    ap("> person-count open. The positive case for distinct divine Persons is C510, derived on three")
+    ap("> person-count open. The positive plural result at the divine-hypostasis level is C600/C604 (free, PROVEN);")
+    ap("> bridge-free Subject plurality is C73 (BLOCKED). The positive case for distinct divine Persons is C510, derived on three")
     ap("> declared `META` premises (`AxAgapeEssence`, `AxProcessionWord`, `AxProcessionSpirit` — one God in")
     ap("> three Persons, not three Gods); it does not rest on C212. Personhood of the ground is")
     ap("> established at two anchors: C228 (`normative_ground_is_personal`, PROVEN) and C590")
-    ap("> (`the_ground_is_not_void_of_personhood`), while hypostatic identity and person-count remain open.")
+    ap("> (`the_ground_is_not_void_of_personhood`), while hypostatic identity and person-count are distinct (unicity entails neither one nor many; positive plural is C600/C604 free, bridge-free Subject plurality is C73 blocked).")
     ap("")
     ap("")
     ap("**The argument in one paragraph — premises with rows.** Nothing can be epistemologically right or wrong "
@@ -7522,13 +7530,42 @@ _REFTABLE = {
     "pillar":     ("🪞", "🪞 PILLAR RETORSION", False),
 }
 
+# The three core ambiguous terms and their formal senses across syntactic sorts.
+OVERLOADED_TERMS: dict[str, list[tuple[str, str, str]]] = {
+    "person": [
+        ("Person", "Logos.Person.Person (sort: Subject)",
+         "Boethian-Thomistic authoritative person: individual substance of rational nature with dominion over acts (`Person.lean:66`)."),
+        ("DivineHypostasis", "Logos.DivineAgape.DivineHypostasis (sort: DivineHypostasis)",
+         "Divine personal center: personal property mark subsisting in the one divine reality `Entity.ofGround` (`DivineTrinitarianAttributes.lean:1858`)."),
+        ("PersonCorrelate", "Logos.PersonalNormativeGround.PersonCorrelate (sort: Entity)",
+         "Ontological entity correlate `EntityOf s` for some `Subject s` (`PersonalNormativeGround.lean:35`)."),
+    ],
+    "necessary": [
+        ("NecessaryEntity", "Logos.Modal.NecessaryEntity (sort: Entity)",
+         "Entity obtaining across all possible worlds: `∀ w, ExistsAt w e` (`Modal.lean:45`)."),
+        ("NecessarySubjectKind", "Logos.Agency.NecessarySubjectKind (sort: Subject)",
+         "Modal partition genus: sort-predicate for non-contingent subjects (`Agency.lean:55`)."),
+        ("NecessarySubject", "Logos.Plurality.NecessarySubject (sort: Subject)",
+         "World-rigid necessity of a subject across all possible worlds (`Plurality.lean:80`)."),
+    ],
+    "ground": [
+        ("Entity.ofGround", "Logos.Entity.Entity.ofGround (sort: Entity)",
+         "The sole foundational ground of reality as an `Entity` constructor (`Entity.lean:24`)."),
+        ("PersonalGround", "Logos.TrinitarianPersonalGround.PersonalGround (predicate on Entity)",
+         "Ground characterized by sustaining and indwelling persons without being a fourth chooser (`DivineTrinitarianAttributes.lean:2918`)."),
+        ("UniversalModalGround", "Logos.DivineClassicalAttributes.UniversalModalGround (predicate on Entity)",
+         "Universal modal grounding relation over all entities (`DivineClassicalAttributes.lean:2196`)."),
+    ],
+}
+
 # Every anchor the document actually emits, filled in by `emit_anchor`. A
 # generated link is checked against it rather than against a regex over the
 # text, so an index cannot point at a block that does not exist (CLEARER.md §5).
 _RENDERED_ANCHORS: set[str] = set()
+_RENDERED_HTML_IDS: list[str] = []
 
 
-def emit_anchor(proof: ProofIR) -> str:
+def emit_anchor(proof: ProofIR, parent: str = "") -> str:
     """The stable HTML anchor for a block, so any block is linkable from
     anywhere and from any of the generated surfaces (DEDUCTION.md B5).
 
@@ -7539,7 +7576,13 @@ def emit_anchor(proof: ProofIR) -> str:
     them into a failed build (CLEARER.md §5).
     """
     _RENDERED_ANCHORS.add(proof.name)
-    return f'<a id="{proof.name}"></a>'
+    if parent and proof.name in _RENDERED_HTML_IDS:
+        anchor_id = f"{parent}__{proof.name}"
+    else:
+        anchor_id = proof.name
+    _RENDERED_ANCHORS.add(anchor_id)
+    _RENDERED_HTML_IDS.append(anchor_id)
+    return f'<a id="{anchor_id}"></a>'
 
 
 def spine_step_ref(title: str) -> tuple[int | None, str]:
@@ -7642,6 +7685,7 @@ _LEGACY_SECTION_REFS: list[tuple[str, str, str]] = [
     ("§13 then closes", "Part III — the refutations", "Part III"),
     ("§13.", "Where the Rest of the Ledger Lives",
      "the declared-`def` census in the ledger"),
+    ("§13", "Where the Rest of the Ledger Lives", "the ledger"),
     ("§14", "Part IV — the seam", "Part IV"),
     ("§15", "Where the Rest of the Ledger Lives", "the definitions census in the ledger"),
 ]
@@ -7676,6 +7720,7 @@ def _heading_anchor_index(lines: list[str]) -> dict[str, str]:
         if h:
             text = h.group(2)
             add(text, last_anchor or _heading_slug(text))
+            last_anchor = ""
     return idx
 
 
@@ -7778,7 +7823,8 @@ def render_derivation_block(proof: ProofIR, *, role: str = _ROLE_HEADLINE,
                             proof_lines: list[str] | None = None,
                             price_label: str = "PRICE      ",
                             cls: str = "",
-                            tier: list[ProofIR] | None = None) -> list[str]:
+                            tier: list[ProofIR] | None = None,
+                            parent: str = "") -> list[str]:
     """The one rendering of a theorem, for every surface (DEDUCTION.md §2).
 
     Headline (a step, a characteristic, a refutation):
@@ -7805,7 +7851,7 @@ def render_derivation_block(proof: ProofIR, *, role: str = _ROLE_HEADLINE,
     """
     if role == _ROLE_COMPONENT:
         return _render_component_block(proof, title=title, backlink=backlink,
-                                       cls=cls, tier=tier)
+                                       cls=cls, tier=tier, parent=parent)
     L: list[str] = []
     if anchor:
         L.append(emit_anchor(proof))
@@ -7865,7 +7911,8 @@ def render_derivation_block(proof: ProofIR, *, role: str = _ROLE_HEADLINE,
 
 def _render_component_block(proof: ProofIR, *, title: str = "",
                             backlink: str = "", cls: str = "",
-                            tier: list[ProofIR] | None = None) -> list[str]:
+                            tier: list[ProofIR] | None = None,
+                            parent: str = "") -> list[str]:
     """A record field's own derivation, on one line of prose plus its logic.
 
     The `premises: … · N steps` summary is *derived* (the premise count is the
@@ -7891,7 +7938,7 @@ def _render_component_block(proof: ProofIR, *, title: str = "",
     which meant a *second* classification of a tier the caller had classified
     once, with the caller holding the answer in hand and throwing it away.
     """
-    L: list[str] = [emit_anchor(proof)]
+    L: list[str] = [emit_anchor(proof, parent=parent)]
     n_steps = len(proof.steps)
     head = f"    ▸ {title}" if title else "    ▸"
     L.append(f"{head}  ·  Premises: {len(proof.assumptions)} · {n_steps} step"
@@ -8244,7 +8291,7 @@ def render_refutation_index(rows: list[dict]) -> list[str]:
     L.append(
         f"Every objection the deduction meets, and what is done to it: "
         f"{_reft_tally(rows)}. The derivations are worked in "
-        f"[Part III](#part-iii-the-refutations-every-branch-of-the-denial-read); "
+        f"[Part III](#sec-part-iii-the-refutations-every-branch-of-the-denial-read); "
         f"each names the step it makes impossible.")
     L.append("")
     L.append(
@@ -8595,6 +8642,37 @@ def _derived_status_cell(badge: str) -> str:
 # price fell back to one declaration's footprint.)
 
 
+def format_claim_gloss(gloss: str, cap: int = 240) -> str:
+    """Format claim gloss for table display: prefer cutting at a clean sentence end,
+    otherwise truncate safely before cap with balanced backticks and [...] marker."""
+    gloss = (gloss or "").strip()
+    if len(gloss) <= cap:
+        return gloss
+    cut = gloss.rfind(". ", 0, cap)
+    if cut > cap // 3:
+        cut_text = gloss[:cut + 1].strip()
+        if cut_text.count("`") % 2 != 0:
+            cut_text += "`"
+        return cut_text
+    return safe_truncate_cell(gloss, cap)
+
+
+def safe_truncate_cell(text: str, cap: int = 110) -> str:
+    """Truncate text safely before cap characters, avoiding mid-identifier cuts,
+    balancing code backticks, and appending ' […]'."""
+    text = (text or "").strip()
+    if len(text) <= cap:
+        return text
+    target = cap - 4
+    cut = text[:target]
+    last_space = cut.rfind(" ")
+    if last_space > target // 2:
+        cut = cut[:last_space].rstrip(" ,;:.—\t")
+    if cut.count("`") % 2 != 0:
+        cut += "`"
+    return cut + " […]"
+
+
 def _glance_rows(spine_sections: list[dict]) -> list[str]:
     """The ten-step roadmap, with every status DERIVED from the kernel.
 
@@ -8625,7 +8703,7 @@ def _glance_rows(spine_sections: list[dict]) -> list[str]:
             continue
         _rank, proof, badge = worst
         formula = (sec.get("formula") or proof.goal or "").strip()
-        formula = formula.split("\n")[0][:110]
+        formula = safe_truncate_cell(formula.split("\n")[0], 100)
         decl_link = _classical_decl_link(proof.full_name, _CTX.get("decls", {}))
         status = _derived_status_cell(badge)
         rows.append(f"| **{no}** | **{label}** — {bare} | `{formula}` | {status} · {decl_link} |")
@@ -8662,7 +8740,7 @@ def generate_argument_at_a_glance(spine_sections: list[dict], frontiers: list[di
     ap("")
     ap("Edges are typed, and the two directions are not the same move: **[distinction]** "
        "separates levels, **[discovery]** carries the chain forward, and **[grounding]** "
-       "is the person→pole dependence. §13 then closes the thing by retorsion.")
+       "is the person→pole dependence. Part III closes the argument by retorsion.")
     ap("")
 
     presentation_data = load_presentation_spine()
@@ -8727,6 +8805,8 @@ def render_proof_body_spine(proof: ProofIR, ap):
             if not line_str:
                 continue
             if any(line_str.startswith(k) for k in ("Status:", "Tag:", "Footprint:", "Lean:", "Audit:", "Impressão")):
+                continue
+            if _argument_audience() and line_str.startswith("PASSO "):
                 continue
             doc_lines.append(line_str)
 
@@ -9233,10 +9313,12 @@ CLASSICAL_ATTRIBUTES = [
         "refs": ["Logos.TheologicalModalHardening.necessary_existence_not_entails_uniqueness",
                  "Logos.Plurality.T12_twoPersons"],
         "sense": ("**Independence, not refutation:** foundational unicity does *not* entail a single-person "
-                  "ground. `unicity_does_not_force_unitarian_monad` (`{}`) is a separation model: unicity leaves "
-                  "the person-count open. The claim \"the ground is a single Person\" is not a consequence "
-                  "of Γ's unicity proof and cannot be derived from C212 alone; personhood of the ground "
-                  "is confirmed at C228 and C590, leaving open the person-count. For the positive Trinitarian datum about "
+                  "ground. `unicity_does_not_force_unitarian_monad` (`{}`) is a separation model: unicity entails "
+                  "neither one nor many. The positive plural result is C600/C604 (free, divine-hypostasis level); "
+                  "the bridge-free derivation of plural subjects is C73, blocked. For the full count at each sort, "
+                  "see [Part IV's necessary-persons table in README](../README.md#sec-necessary-persons-the-count-at-each-sort). "
+                  "The claim \"the ground is a single Person\" is not a consequence of Γ's unicity proof; "
+                  "personhood of the ground is confirmed at C228 and C590. For the positive Trinitarian datum about "
                   "distinct subsisting centers, see `DivineAgape.AxAgapeEssence` (C504)."),
     },
     {
@@ -9275,8 +9357,8 @@ CLASSICAL_ATTRIBUTES = [
                   "The nature is one by divine simplicity (`divine_simplicity_sole_bearer`, C440, "
                   "`{}` with CL), with aseity and *actus purus*. The bare-name branch `monotheism` "
                   "keeps the deferred half — the *person-count* question — which the "
-                  "“Numerical unitarianism” row clarifies as independence (not entailed), not a "
-                  "refutation; personhood is confirmed (C228, C590), while hypostatic identity remains open."),
+                  "“Numerical unitarianism” row clarifies as independence (not entailed, not a "
+                  "refutation; positive plural is C600/C604 free at the hypostasis level); personhood is confirmed (C228, C590), while hypostatic identity remains open."),
     },
     {
         "attribute": "**Perfect (moral) goodness**",
@@ -11313,7 +11395,7 @@ def render_two_kinds_chain(decls: dict, node_map: dict) -> list[str]:
     ap("   retracts in its own docstring.")
     ap("5. **What this batch does NOT close.** While C228 confirms personhood of the normative")
     ap("   ground, C212 shows ground-unicity does not entail a unitary monad (a separation model,")
-    ap("   not a refutation). The person-count question is open; the ground's *sole universal")
+    ap("   not a refutation). Unicity entails neither one nor many (the positive plural result is C600/C604 free at the divine-hypostasis level; bridge-free Subject plurality is C73 blocked); the ground's *sole universal")
     ap("   modal grounding* (C319/C320) is unaffected by this batch and rests on F15 alone.")
     ap("")
     return lines
@@ -12279,7 +12361,8 @@ def render_classical_attribute_status(decls: dict, node_map: dict) -> tuple[list
        "the Divine Being stays a 🧱 frontier), the **Incarnation**, and contingent")
     ap(       "**unity** (no longer a target: C320/C389 prove one ground and C440 one nature) nor a "
        "**single-person reading** of the ground (not entailed by unicity — C212, `{}`, "
-       "`unicity_does_not_force_unitarian_monad` is a separation model: it leaves the person-count open) "
+       "`unicity_does_not_force_unitarian_monad` is a separation model: unicity entails neither one nor many; "
+       "the positive plural result is C600/C604 free at the divine-hypostasis level, while bridge-free Subject plurality is C73 blocked) "
        "nor the **Trinity** (priced on three "
        "declared META premises in C510, and `{}` in C109 proves they are not free), nor contingent")
     ap("**creation as entailment** — remain **separate proof targets**")
@@ -12472,8 +12555,11 @@ def render_reading_sections(policy: dict, parts: tuple[str, ...] | None = None) 
                 full = c.get("_full") or ""
                 link = _classical_decl_link(full, _CTX.get("decls", {})) if full else "—"
                 gloss = (c.get("_gloss_display") or c.get("prose") or "").strip()
-                ap(f"| `{cid}` | {_readable_status(c)} · {link} | {gloss[:220]} |")
+                ap(f"| `{cid}` | {_readable_status(c)} · {link} | {format_claim_gloss(gloss, 220)} |")
             ap("")
+        if sec.get("id") == "seam":
+            for line in _render_necessary_persons_table():
+                ap(line)
         if sec.get("def_bridge_census"):
             for line in _render_def_bridge_census():
                 ap(line)
@@ -12506,6 +12592,27 @@ def _readable_status(c: dict) -> str:
         if named:
             out += f" — rests on {', '.join(f'`{n}`' for n in named)}"
     return out
+
+
+def _render_necessary_persons_table() -> list[str]:
+    """Part IV: The count of necessary persons, settled conditionally or by sort (Workstream A)."""
+    L: list[str] = []
+    ap = L.append
+    ap('<a id="sec-necessary-persons-the-count-at-each-sort"></a>')
+    ap("### Necessary persons: the count, at each sort")
+    ap("")
+    ap("Whether the ground requires more than one person is settled conditionally or by sort:")
+    ap("")
+    ap("| Object / Level | Syntactic sort | Derived status & anchor | Ontological content & price |")
+    ap("|---|---|---|---|")
+    ap("| **Divine Persons** | `DivineHypostasis` | ✅ **PROVEN** · 0 substantive axioms · [DivineAgape.another_divine_person_is_necessary](formal/Logos/DivineTrinitarianAttributes.lean#L2225) | Two distinct necessary divine Persons exist in the divine reality (`C600` / `C604`). |")
+    ap("| **Foundational unicity** | `Entity` · boundary | 🧱 **COUNTERMODEL** · `{}` · [FoundationalUnicity.unicity_does_not_force_unitarian_monad](formal/Logos/FoundationalUnicity.lean#L201) | Unicity entrains neither one nor many: `unicity_does_not_force_unitarian_monad` (`C212` / `R14`). |")
+    ap("| **Bridge-free plural subjects** | `Subject` · unproved | ✖ **BLOCKED** | Plurality of `Subject` without a bridge is underivable (`C73`, in ledger). |")
+    ap("| **Plurality bridge** | `Subject` · priced | ⚠️ **AXIOMATIC (AxTwoNecessaryPersonalCentres)** · 1 substantive axiom | Subject-level `Plurality.two_necessary_persons` (`C585`, 1 META) is in the ledger, not the reading path. |")
+    ap("")
+    ap("One pointer line: the Subject-level result `Plurality.two_necessary_persons` (C585, 1 META) is in the ledger, not the reading path.")
+    ap("")
+    return L
 
 
 def _render_def_bridge_census() -> list[str]:
@@ -12635,7 +12742,7 @@ CHARACTERISTIC_SECTIONS = [
 NOT_ESTABLISHED_LINES = [
     ("Psychological personality", "countermodel", "countermodel — the claim is separated, not established"),
     ("Numerical unitarianism", "countermodel",
-     "countermodel — separation model; unicity does not entail a single Person (person-count left open)"),
+     "countermodel — separation model; unicity does not entail a single Person (see [Part IV's necessary-persons table](#sec-necessary-persons-the-count-at-each-sort): C600/C604 is the free hypostasis-level result; C73 is blocked)"),
     ("Perfect (moral) goodness", "claim", "no kernel declaration at all"),
     ("Scholastic simplicity", "absent", "not established — strict identity of essence is not proved"),
     ("Psychological impassibility", "absent", "not established — no kernel declaration"),
@@ -12650,10 +12757,11 @@ NOT_ESTABLISHED_LINES = [
 
 _SEAM_NOTE = (
     "**The seam, stated once and not hidden.** Part I established a *person* who "
-    "grounds the right/wrong poles. These eighteen blocks are about "
+    "grounds the right/wrong poles. These characteristics are about "
     "`Entity.ofGround` — the ground *as such*.",
     "The personhood of the ground is confirmed (C228, PROVEN; `PersonalGround` in C590), "
-    "while hypostatic identity and person-count remain open.",
+    "while hypostatic identity and person-count are distinct (unicity entails neither one nor many; "
+    "positive plural is C600/C604 free, bridge-free Subject plurality is C73 blocked).",
     "",
     "So a characteristic proved here is a characteristic of the ground, and the "
     "claim that it is a characteristic of *the person Part I reached* is open. "
@@ -12730,7 +12838,7 @@ def render_characteristic_index() -> list[str]:
     L: list[str] = []
     ap = L.append
     ap('<a id="characteristic-index"></a>')
-    ap("### The eighteen characteristics at a glance")
+    ap(f"### The {len(CHARACTERISTIC_SECTIONS)} characteristics at a glance")
     ap("")
     ap("One row per characteristic, every status derived from the kernel — never "
        "transcribed. Click any name to reach its derivation.")
@@ -12807,7 +12915,7 @@ def verify_characteristic_index(lines: list[str],
             f"FATAL: the characteristic index links to {len(missing)} anchor(s) that "
             f"no block emits: {sorted(set(missing))[:5]} (CLEARER.md §5).")
     for cproof, parent in (component_blocks or []):
-        if cproof.name not in _RENDERED_ANCHORS:
+        if cproof.name not in _RENDERED_ANCHORS and f"{parent}__{cproof.name}" not in _RENDERED_ANCHORS:
             raise SystemExit(
                 f"FATAL: component {cproof.name!r} of {parent!r} is rendered but "
                 f"emits no anchor, so it cannot be cited — the index links only to "
@@ -12828,7 +12936,7 @@ def render_characteristic_sections(decls: dict, node_map: dict) -> list[str]:
     ap = L.append
     ap("## Part II — The characteristics of the ground")
     ap("")
-    ap("Eighteen characteristics, each with the deduction that establishes it. A "
+    ap(f"{len(CHARACTERISTIC_SECTIONS)} characteristics, each with the deduction that establishes it. A "
        "headline that is a *record* is not one conclusion but a set of them, so "
        "each component is expanded in place under its own name; nothing here is "
        "asserted without the steps behind it.")
@@ -12867,7 +12975,8 @@ def render_characteristic_sections(decls: dict, node_map: dict) -> list[str]:
             component_blocks.append((cproof, proof.name))
             L.extend(render_derivation_block(
                 cproof, role=_ROLE_COMPONENT, title=field,
-                backlink=f"↑ a component of {proof.name}"))
+                backlink=f"↑ a component of {proof.name}",
+                parent=proof.name))
     ap("### What is not established about the ground")
     ap("")
     ap("Eleven of the thirty-nine classical rows have no headline theorem in the "
@@ -13096,7 +13205,9 @@ def _emit_ledger_spine(sections: list[dict], ap) -> None:
             ap(f"`⊢ {sec['formula']}`")
             ap("")
         if sec.get("disclosure"):
-            ap(f"> ⚠️ **Price disclosed —** {sec['disclosure']}")
+            disc = sec["disclosure"]
+            icon = "✅" if any(w in disc.lower() for w in ("0 substantive", "free", "no substantive")) else "⚠️"
+            ap(f"> {icon} **Price disclosed —** {disc}")
             ap("")
         for label, key in (("The skeptic tries", "pushback"), ("The reply", "reply")):
             text = (sec.get(key) or "").strip()
@@ -13324,6 +13435,7 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
         # 4b shipped as dead code behind a green build (VISIBILITY.md
         # Correction 10). main() passes the real inventory.
         if ARGUMENT_AUDIENCE:
+            ap('<a id="sec-part-i-the-deduction"></a>')
             ap("## Part I — The deduction: a personal kind of ground is forced")
             ap("")
             ap("Thirteen steps, contiguous and in order. Each one is a block: what it "
@@ -13638,7 +13750,9 @@ def render_deduction_sections(sections: list[dict], decls: dict = None, node_map
                 ap(f"KILLS        {_kl}")
             ap("")
         if ARGUMENT_AUDIENCE and sec.get("disclosure"):
-            ap(f"> ⚠️ **Price disclosed —** {sec['disclosure']}")
+            disc = sec["disclosure"]
+            icon = "✅" if any(w in disc.lower() for w in ("0 substantive", "free", "no substantive")) else "⚠️"
+            ap(f"> {icon} **Price disclosed —** {disc}")
             ap("")
         if sec.get("summary"):
             with ap.at(SINK_SUMMARY, "summary"):
@@ -14260,19 +14374,56 @@ says “full pricing”, “formal boundary”, or “supporting
 infrastructure”, or when you want the countermodel that stops a claim.
 """
 
+_COMMON_ENGLISH_WORDS = {
+    "a", "about", "above", "action", "after", "all", "also", "an", "and", "any", "are",
+    "as", "at", "be", "because", "been", "before", "being", "between", "both", "bridge",
+    "but", "by", "can", "cannot", "choice", "could", "did", "do", "does", "each", "either",
+    "else", "even", "every", "for", "from", "ground", "had", "has", "have", "he", "her",
+    "here", "him", "his", "how", "i", "if", "in", "into", "is", "it", "its",
+    "just", "like", "may", "me", "more", "most", "must", "my", "no", "nor",
+    "not", "now", "of", "on", "one", "only", "or", "order", "other", "our", "out",
+    "over", "person", "proof", "same", "see", "she", "should", "so", "some", "source", "state", "still", "such",
+    "than", "that", "the", "their", "them", "then", "there", "these", "they",
+    "this", "those", "through", "to", "too", "truth", "under", "up", "us", "value", "very",
+    "was", "we", "well", "were", "what", "where", "which", "while", "who",
+    "whom", "whose", "why", "will", "with", "would", "you", "your",
+}
+
 def _lint_no_midtoken_cut(text: str, kernel_ids: list[str], where: str) -> None:
     """Gate 6 (CLEARER.md §7). A capped cell ends with ` [ … ]` and the last word
     before that marker is a strict prefix of a longer kernel identifier.
+    Also verifies table cells do not end mid-identifier without the ` […]` marker.
     """
     for m in re.finditer(r"([A-Za-z0-9_]+)\s+\[\u2026\]", text):
         word = m.group(1)
-        if not word.isidentifier():
+        if not word.isidentifier() or (word.islower() and "_" not in word):
             continue
         for kid in kernel_ids:
             if len(kid) > len(word) and kid.startswith(word):
+                if kid[len(word)] == "_":
+                    continue
                 raise AssertionError(
                     f"{where}: table cell truncated mid-token — `{word}` is a "
                     f"prefix of `{kid}` (CLEARER.md §7, gate 6)")
+    # Also verify that table rows do not end with unclosed code backticks or mid-identifier without marker
+    for i, line in enumerate(text.splitlines(), start=1):
+        if line.startswith("|") and not re.match(r"^\|[\s\-:|]+\|$", line):
+            cells = line.split("|")[1:-1]
+            for c in cells:
+                c_str = c.strip()
+                assert c_str.count("`") % 2 == 0, (
+                    f"{where}:{i}: table cell has unclosed backticks: {c_str[:80]}")
+                # Check for mid-identifier cut at end of cell without [...] marker
+                if not c_str.endswith("[\u2026]") and not c_str.endswith("[…]"):
+                    m_end = re.search(r"([A-Za-z0-9_.]+)$", c_str)
+                    if m_end:
+                        last_tok = m_end.group(1).rsplit(".", 1)[-1]
+                        if ("_" in last_tok or (last_tok != last_tok.lower() and not last_tok.isupper())) and last_tok.isidentifier():
+                            if last_tok not in kernel_ids:
+                                for kid in kernel_ids:
+                                    if len(kid) > len(last_tok) and kid.startswith(last_tok) and kid[len(last_tok)] != "_":
+                                        raise AssertionError(
+                                            f"{where}:{i}: table cell ends mid-identifier `{last_tok}` without [...] marker")
 
 
 
@@ -14688,6 +14839,49 @@ def _countermodel_rows(row: list[str]) -> list[tuple[str, str]]:
     return hits
 
 
+def _lint_anchors_and_links(readme: list[str], ledger: list[str]) -> None:
+    readme_text = "\n".join(readme)
+    ledger_text = "\n".join(ledger)
+    for fname, txt in (("README.md", readme_text), ("investigations/ledger.md", ledger_text)):
+        anchor_ids = re.findall(r'<a id="([^"]+)"></a>', txt)
+        dups = [k for k, v in Counter(anchor_ids).items() if v > 1]
+        assert not dups, f"{fname}: duplicate anchors found: {dups}"
+
+        ids_and_slugs = set(anchor_ids)
+        for h in re.finditer(r"^(#{1,6})\s+(.*?)\s*$", txt, re.M):
+            ids_and_slugs.add(_heading_slug(h.group(2)))
+        links = re.findall(r"\[[^\]]+\]\(#([^\s\)]+)\)", txt)
+        missing_targets = [href for href in links if href not in ids_and_slugs]
+        assert not missing_targets, f"{fname}: internal links target missing anchors: {missing_targets}"
+
+
+def _lint_glossary_and_disambiguation(readme: list[str]) -> None:
+    readme_text = "\n".join(readme)
+    assert '<a id="sec-glossary-overloaded-terms"></a>' in readme_text, (
+        "README.md: missing glossary anchor <a id=\"sec-glossary-overloaded-terms\"></a>")
+    assert '<a id="sec-necessary-persons-the-count-at-each-sort"></a>' in readme_text, (
+        "README.md: missing necessary-persons table anchor <a id=\"sec-necessary-persons-the-count-at-each-sort\"></a>")
+    # Verify no false ⚠️ on 0-substantive-axiom disclosures
+    for m in re.finditer(r"> ⚠️ \*\*Price disclosed —\*\* (?:0 substantive|free|no substantive)", readme_text, re.I):
+        raise AssertionError(f"README.md has false ⚠️ on free disclosure: {m.group(0)}")
+    # Verify that unqualified "person-count open" does not appear in sensitive sections
+    for m in re.finditer(r"person-count\s+(?:left\s+)?open\b", readme_text, re.I):
+        start = max(0, readme_text.rfind("\n", 0, m.start()))
+        end = readme_text.find("\n", m.end())
+        line = readme_text[start:end if end != -1 else len(readme_text)]
+        if not any(q in line for q in ("C600", "C604", "C73", "DivineHypostasis", "unicity", "Part IV")):
+            raise AssertionError(f"Unqualified 'person-count open' in README.md: {line.strip()[:100]}")
+
+
+def _lint_counts_singularity(readme: list[str]) -> None:
+    readme_text = "\n".join(readme)
+    n_chars = len(CHARACTERISTIC_SECTIONS)
+    assert f"{n_chars} characteristics" in readme_text, (
+        f"README.md does not reflect the derived characteristics count ({n_chars})")
+    assert "31 formal frontiers" in readme_text, (
+        "README.md does not reflect the derived formal frontiers count (31)")
+
+
 def _lint_surfaces(doc: "_TwoSink", readme: list[str], ledger: list[str]) -> None:
     """Nothing may fall out of both sinks (READINGPATH.md §6).
 
@@ -14723,6 +14917,9 @@ def _lint_surfaces(doc: "_TwoSink", readme: list[str], ledger: list[str]) -> Non
     _lint_pillars(ledger)
     _audit_substantive_footprint()
     _assert_no_person_count_monotheism()
+    _lint_anchors_and_links(readme, ledger)
+    _lint_glossary_and_disambiguation(readme)
+    _lint_counts_singularity(readme)
 
 
 def _audit_substantive_footprint() -> None:

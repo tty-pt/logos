@@ -229,9 +229,9 @@ def main() -> int:
         k = re.search(r"^KILLS\s+(.*\S)$", seg, re.M)
         if k:
             step_kills[sid] = k.group(1)
-    check(len(step_kills) >= 8,
+    check(len(step_kills) >= 7,
           f"the steps carry the refutations that attack them ({len(step_kills)} of "
-          f"{len(step_ids)} steps; steps 7 and 10 have none, which is honest)")
+          f"{len(step_ids)} steps; steps 7, 9 and 10 have none, which is honest)")
     for sid, ref in step_kills.items():
         for tgt in re.findall(r"\(#(r\d+)\)", ref):
             check(f'<a id="{tgt}"></a>' in cre,
@@ -395,7 +395,8 @@ def main() -> int:
         readme)
     check(len(discrim_matches) >= 10, f"expected at least 10 anchored component blocks in README.md, got {len(discrim_matches)}")
     for alias_opt, imm_anchor, src in discrim_matches:
-        check(imm_anchor == src, f"immediate block anchor <a id=\"{imm_anchor}\"> does not match block SOURCE declaration {src}")
+        check(imm_anchor == src or imm_anchor.endswith(f"__{src}"),
+              f"immediate block anchor <a id=\"{imm_anchor}\"> does not match block SOURCE declaration {src}")
 
     # (2) Assert the alias property deliberately: asietic_summary is rendered as an alias
     #     preceding weakChoice_implies_asiety, while the block's SOURCE is weakChoice_implies_asiety.
