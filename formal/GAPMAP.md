@@ -1963,14 +1963,16 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     non-emptiness + contradiction-freedom of the satisfiable scope domain; its `propext`
     cost is inherited from C14, deliberately, so the graph shows the C251 → C14 edge; C589
     is the single-content countermodel C273 reflecting in the LOVE-4 batch.)
-  - **272 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`; was 292
+  - **273 vocabulary-only** (footprint ⊆ the statement's own declared `VOCAB`; was 292
     before the 2026-10-03 FINITUDE-SPLIT, 269 after S5, 270 on 2026-10-08 when C400 became vocabulary-only:
-    `semanticFinitude_excludes_ground_from_subjects`, footprint `{Subject}`, 271 with C228 PROVEN, and 272 with C591): (**C579 added
+    `semanticFinitude_excludes_ground_from_subjects`, footprint `{Subject}`, 271 with C228 PROVEN, 272 with C591, and 273 with C597): (**C579 added
     2026-10-03 (AMOR/2, `LOVE-2.md` D5)** — `SinglePersonDenial.self_gift_cannot_depend_on_a_contingent_person`,
     footprint `{Subject}`, the free refutation of the author's step 3 (the dependence);
     *vocabulary-only* 268 → **269**, the *axiom-free*, *`CL`-only* and `PROVEN↑` tallies do not
     move, and no new `Tag:` is declared — the refutation needs `Subject` and nothing else,
     which is the whole point of putting it above the priced `AxAgapeEssence` route.
+    (**C597 added 2026-10-09** — `SinglePersonDenial.self_giving_necessitates_a_distinct_necessary_other`,
+    footprint `{NecessarySubjectKind, Subject}`, free necessary Other theorem).
     (**C176** was dropped
     from this bucket 2026-09-29 — its status is now COUNTERMODEL, the `{}` value-layer
     countermodel (`BearingOf` re-opened as an `opaque` constant), so like C175/C382/C385
@@ -2153,29 +2155,29 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
     see the BLOCKED/retired blocks and the `## Formal Frontiers` inventory.
     Of that range only C74 (`aloneExcluded`) survives, as PROVEN↑ (below).
 - **PROVEN↑** (fully machine-verified under the flagged SEM/META/TRANS axiom shown —
-  no foundation axiom remains): **98 claims** —
+  no foundation axiom remains): **103 claims** —
   `AxTwoNecessaryPersonalCentres` (18), which RETIRED `AxTwoSubjects` on 2026-10-04
   (batch LOVE-3/S4): C28, C29, C40, C41, C43, C46, C47, C48, C54, C61, C74, C277, C278,
   C279, C286, F4,
   **C401**, **C585** (lote LOVE-3/S4, aditado 2026-10-04 — a frase-alvo do autor,
   `Plurality.two_necessary_persons`, provada sem premissa a preço de uma só ponte);
 
-  `AxAgapeEssence` (7): C507, C510, **C520** (lote TRINITY, 2026-09-29 — o dado do Ágape é a
+  `AxAgapeEssence` (8): C507, C510, **C520** (lote TRINITY, 2026-09-29 — o dado do Ágape é a
    fonte e o amado; C507 é o corredor «o objecto do amor essencial é necessário»,
    C510 o caso completo, ambos `PROVEN↑` e nenhum dos dois `PROVEN` como a previsão
    do plano `TRINITY.md` §3.1 supunha; **C520** (lote NECESSARY) é a leitura modal
    do mesmo dado — os três centros são necessários, com o preço herdado e não novo;
-   **C575–C579** (lote AMOR, 2026-10-03) são a doação de Si próprio (C575), a sua negação
+   **C575–C578, C580** (lote AMOR, 2026-10-03/2026-10-09) são a doação de Si próprio (C575), a sua negação
    refutada (C576), a negação refutada mesmo com as suas premissas concedidas (C577), a
-   conjunção recusa+doação que dispensa a pessoalidade do chão (C578) e a **dependência
-   refutada em `{Subject}`** (C579) — todas ao mesmo
+   conjunção recusa+doação que dispensa a pessoalidade do chão (C578) e a correspondência
+   Sujeito/Hipóstase descarregada (C580) — todas ao mesmo
    preço de um META, herdado e não novo);
   `AxProcessionWord` (1): C510 (o amado do dado **é** o Verbo — a ponte nomeia, não
    cria; sem ela o verso continua sendo apenas «outro amado»);
-  `AxProcessionSpirit` (2): C510, **C520** (o terceiro centro, distinto da fonte e de todo
+  `AxProcessionSpirit` (3): C510, **C520**, C580 (o terceiro centro, distinto da fonte e de todo
    Verbo — **o preço exacto do «três»**: Ágape + Verbo deixam um Deus binitariano
    legal, separation C514 em Stage B; **C520** herda-o do mesmo lote NECESSARY, porque a
-   «realidade necessária única» de C520 tem de ser a do Espírito regresso);
+   «realidade necessária única» de C520 tem de ser a do Espírito regresso; C580 descarregado 2026-10-09);
   `necessaryPersonalSubjectExists` (5): C407, C408, C409 (the necessary-kind inhabitant and its two readings, Batch two-kinds 2026-09-28),
    **C494, C495** (lote NECESSARY-KIND-AUDIT, 2026-09-29 — a não-unicidade do ser necessário
    e a linha de grau: duas novas linhas sob a ponte META C404; a pegada de ambas é a mesma,
@@ -2239,7 +2241,7 @@ Summary counts (lift-necessário, measured 2026-09-18; supersedes the A2-swap-th
   twin of C351, which reaches the love bridge without `AxTwoSubjects`; the primitive that
   makes the bridge non-derivable, `GroundBearsGood`, is `Tag: VOCAB` and so is **not**
   counted here — the whole price of these seven rows is the single META axiom C339);
-  `TrinitarianPersonalBridge` (22): C389–C398, C433, C435, C441–C446, C484–C486, C491 (the Trinitarian bridge under which unicity, aseity, simplicity, and the divine characteristics are proved modulo the three divine Persons);
+  `TrinitarianPersonalBridge` (23): C389–C398, C433, C435, C441–C446, C484–C486, C491, C580 (the Trinitarian bridge under which unicity, aseity, simplicity, and the divine characteristics are proved modulo the three divine Persons; C580 added 2026-10-09);
   `DivinePersonsTotalMeaning` (1): C497 (affirming the divine Persons' total semantic capacity, homoousios, under the 2026-10-08 milestone; `GroundTranscendence` was completely eliminated);
   `AxContingentCreationObtains` — **RETIRED 2026-09-27, 0 rows.** It was a `Tag: SEM`
   datum entering C351, C352 through the target's contingency and content. It is deleted:
@@ -3469,7 +3471,7 @@ The frontier count moves `33 → 32` on this change (the pin in `scripts/ledger_
 | C577 | §28/§7 | `DivineAgape.denying_shared_location_is_absurd : ¬ ∀ f o : DivineHypostasis, Subsists f → Subsists o → DivineLove f o → f.deiformEntity ≠ o.deiformEntity` — **a negação falha mesmo com as suas próprias premissas concedidas (aditado 2026-10-03)**. A forma mais forte: conceda um doador e um destinatário, conceda que ambos subsistem, conceda que o amor se verifica — e a negação ainda tem de negar que estão numa só localização, o que é `{}`. Portanto «não pode ser auto-dação porque o doador e o destinatário são duas coisas» é refutado **sem qualquer preço adicional**. Mesmo preço de C575. | PROVEN↑ | `{AxAgapeEssence, CL, Subject}` |
 | C578 | §21.5, §28/§7 | `TrinitarianPersonalGround.self_donation_needs_no_personhood_of_the_ground : ¬ Asiety Entity.ofGround ∧ (∃ f o : DivineHypostasis, SelfDonation f o)` — **a doação de Si próprio não exige que o chão seja pessoa (aditado 2026-10-03)**. As duas metades da absurdidade numa linha: o chão **não** é uma entidade asiética (não é sujeito, logo não há escolha verdadeira; primeiro conjuncto = `ground_is_not_a_fourth_chooser`, `{}`) **e** o Ágape é uma dádiva entre duas propriedades pessoais distintas de uma só entidade de localização (segundo conjuncto = C575). Esta linha **não substitui** «a essência única não é um quarto que escolhe; a sua liberdade é a deles, partilhada e não duplicada». Uma versão anterior deste row afirmava que essa frase «respondia à objeccção do autor com um rótulo concedendo a sua premissa, e apresentava um **predicado ausente** como argumento». **Isso era falso e está retirado** (2026-10-03, `LOVE-2.md` D1): o predicado não está ausente — `AsietyFreedom.asietyFreedomOfGround` (`AsietyFreedom.lean:141`) é o `def` ◈ que declara o partilhamento, e `asietyFreedom_summary` (`:357`) consome-o. Uma premissa `def` é invisível a `#print axioms`, e o commit `4a59173` inferiu dessa invisibilidade que não havia nada ali; foi removida do untrained a liberdade do chão para conveniência do modelo. O que a linha acrescenta é a segunda metade, que o rótulo não carregava. **Preço:** primeiro conjuncto gratuito; segundo `{Subject, AxAgapeEssence, CL}` — um META, o mesmo que C507/C510, e **não** evitado aqui. O que a linha mostra é que o preço compra a dádiva e nada mais. | PROVEN↑ | `{AxAgapeEssence, CL, Means, Subject}` |
 | C579 | §28/§7, §38 | `SinglePersonDenial.self_gift_cannot_depend_on_a_contingent_person (dependence : ∃ f o : DivineHypostasis, ∃ s : Subject, SelfDonation f o ∧ o.deiformEntity = EntityOf s) : False` — **a autosdoação não pode depender de um ser contingente (aditado 2026-10-03, lote AMOR/2; `LOVE-2.md` D5)**. Esta é a linha onde morre a cadeia do autor, e é a que o lote anterior nunca teve. Reconstruída em quatro passos: (1) *uma só pessoa*; (2) logo só poderia doar a seres contingentes; (3) logo a sua autosdoação seria **dependente dos seres contingentes**; (4) logo seria contingente — contra um Chão já determinado Eterno, Necessário, Livre e Imutável. O passo 3 é a charneira. A hipótese é essa dependência enunciada como proposição — o destinatário da doação é a entidade de algum `Subject` — e é refutada em `{Subject}`, porque `SelfDonation` põe o destinatário em `divineReality := Entity.ofGround` e `Entity.ofGround` não é a entidade de nenhum `Subject`. **A hipótese está enunciada na forma mais forte de propósito:** o autor diz *contingentes (temporais)*, e Γ refuta a afirmação mais forte — que o destinatário é um `Subject` **qualquer** — pelo que a qualificação temporal nunca foi a parte carregada da objeccão. **Sem `AxAgapeEssence`:** a linha vale para qualquer `SelfDonation`, e é isso que a torna refutação e não restatement do dado. | PROVEN | `{Subject}` |
-| C580 | §21.5, §28/§7, §38 | `SinglePersonDenial.bridge_subjects_correspond : ∃ a b c : Subject, HypostasisOf a the_father ∧ HypostasisOf b the_beloved ∧ HypostasisOf c the_spirit` — **correspondência Sujeito/Hipóstase descarregada (2026-10-09)**. A correspondência entre os sujeitos necessários da ponte e os centros subsistentes de `DivineHypostasis` é definida por relação de origem (`SinglePersonDenial.HypostasisOf`, def sem axiomas). `hypostasisOf_subsists` prova que qualquer sujeito correspondente subsiste na realidade divina (`divineReality := Entity.ofGround`), e `bridge_subjects_correspond` conecta as testemunhas de `TrinitarianPersonalBridge` ao Pai, ao Amado e ao Espírito sem identidade de entidade (`ofGround_ne_ofSubject` permanece). Dispara a conexão sem introduzir qualquer novo axioma. | PROVEN↑ | `{Classical.choice, DivineAgape.AxAgapeEssence, DivineAgape.AxProcessionSpirit, DivineSubjectRole, Means, NecessarySubjectKind, Subject, TrinitarianPersonalBridge, Will, subjectWill}` |
+| C580 | §21.5, §28/§7, §38 | `SinglePersonDenial.bridge_subjects_correspond : ∃ a b c : Subject, HypostasisOf a the_father ∧ HypostasisOf b the_beloved ∧ HypostasisOf c the_spirit` — **correspondência Sujeito/Hipóstase descarregada (2026-10-09)**. A correspondência entre os sujeitos necessários da ponte e os centros subsistentes de `DivineHypostasis` é definida por relação de origem (`SinglePersonDenial.HypostasisOf`, def sem axiomas). `hypostasisOf_subsists` prova que qualquer sujeito correspondente subsiste na realidade divina (`divineReality := Entity.ofGround`), e `bridge_subjects_correspond` conecta as testemunhas de `TrinitarianPersonalBridge` ao Pai, ao Amado e ao Espírito sem identidade de entidade (`ofGround_ne_ofSubject` permanece). Dispara a conexão sem introduzir qualquer novo axioma. | PROVEN↑ | `{AxAgapeEssence, AxProcessionSpirit, CL, DivineSubjectRole, Means, NecessarySubjectKind, Subject, TrinitarianPersonalBridge, Will, subjectWill}` |
 | C275 | §30 | `AsieticChoice.doubt_implies_trueChoice {s : Subject} {p : Prop} (h : Doubts s p) : TrueChoice s p (¬ p)` — Cartesian doubt suffices, with no axiom at all: meaning `p` and `¬ p` simultaneously *is* a genuine strong choice between them | PROVEN | `{Means, Subject}` |
 | C276 | §30 | `AsieticChoice.genuineNormativity_implies_trueChoice {s : Subject} {p q : Prop} (h : GenuineNormativity s p q) : TrueChoice s p q` — genuine normativity yields true choice, by `indubitable_normative_free_will` and pure logic | PROVEN | `{Means, Subject}` |
 | C277 | §30 | `AsieticChoice.trueChoice_exists : ∃ s : Subject, ∃ p q : Prop, TrueChoice s p q` — **existence of true choice, unconditional**: a person exists (C14, `T5_personExists_from_plurality`), `Person` bundles `FreeWill` (`DominionOverActs s := FreeWill s`, `Person.lean:56`), so a `Chooses` witness exists and Section 2 promotes it. A second route to an already-`PROVEN↑` result (F1b), and a genuinely derivational one — presented as both | PROVEN↑ | `{AxTwoNecessaryPersonalCentres, Means, NecessarySubjectKind, Subject, Will, subjectWill}` |

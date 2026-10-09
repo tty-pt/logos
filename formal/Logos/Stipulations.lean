@@ -74,7 +74,7 @@ unfolds this `True`. Necessity of the ground is therefore stipulated by the
 constructor's match arm, never derived and never declared as an axiom. -/
 def ofGround_existsAt : Stipulation where
   name := "ofGround_existsAt"
-  location := "Entity.lean:66"
+  location := "Entity.lean:78"
   anchor := "Entity.ofGround => True"
   tag := StipulationTag.VOCAB
   cost := "World-rigidity stipulated by match arm: necessity theorems about ofGround unfold this True."
@@ -103,7 +103,7 @@ Philosophical cost: structural simplicity of the ground (`¬ HasInternalComponen
 Simplicity is therefore stipulated by the match arm, never derived. -/
 def ofGround_noInternalComponents : Stipulation where
   name := "ofGround_noInternalComponents"
-  location := "DivineClassicalAttributes.lean:741"
+  location := "DivineClassicalAttributes.lean:748"
   anchor := "Entity.ofGround => False"
   tag := StipulationTag.VOCAB
   cost := "Indivisibility stipulated by match arm: the simplicity theorem unfolds this False."
@@ -127,7 +127,7 @@ Consistency model: Γ's own classical valuation semantics with `EntityExistsAt`
 consistent. -/
 def operatesAt_presencePlusObtaining : Stipulation where
   name := "operatesAt_presencePlusObtaining"
-  location := "DivineClassicalAttributes.lean:2734"
+  location := "DivineClassicalAttributes.lean:2741"
   anchor := "def OperatesAt"
   tag := StipulationTag.SEM
   cost := "Operation identified with presence-plus-obtaining: foundational omnipotence is proved over the weakened reading; the causal/creative sense was BLOCKED until C493 declared universal production as a META bridge."
@@ -248,7 +248,7 @@ elimination goes; the attack verdicts and the act-datum are untouched.
 Footprint: `{}`. -/
 def contingentWorldDatum : Stipulation where
   name := "contingentWorldDatum"
-  location := "Entity.lean:34"
+  location := "Entity.lean:46"
   anchor := "def actualWorld"
   tag := StipulationTag.TRANS
   cost := "The world-datum (this world exists, and it is contingent), assumed as given rather than derived: the author stipulates the world the proof is written in exists, and only the consequences are in due. Registered so the world-datum is not silently merged with the performative act-datum in the C.1 preamble. Free in axioms, not free in performance. It eliminates the falsity world read as the actual world (WorldStance.falsityWorldAsActual) and settles that the falsity world is the necessary-subjects-only world; it does NOT reach a world of necessary subjects in general, which needs the BLOCKED contingent-inhabitation lemma, and it does NOT touch plurality (AxTwoNecessaryPersonalCentres is a separate META bridge, C584). Reject it and the falsity-world elimination goes; the attack verdicts stand."

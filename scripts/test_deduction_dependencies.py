@@ -1196,7 +1196,145 @@ def test_badge_display_mapping() -> None:
     badge2 = bd.compute_epistemic_badge(
         [meta], {"ax": {"tag": "META", "note": "test"}})
     assert badge2 == "AXIOMATIC (ax)", f"badge = {badge2!r}"
+
+    # Also verify classify_proof_edge directly on SEM and META SimpleNamespace
+    cat_sem, badge_sem = bd.classify_proof_edge(sem, decls={"Logos.Semantics.strongTruthExists": {"tag": "SEM"}})
+    assert cat_sem == "SEMANTIC" and badge_sem == "AXIOMATIC (strongTruthExists)", f"got ({cat_sem}, {badge_sem})"
+    cat_meta, badge_meta = bd.classify_proof_edge(meta, decls={"Logos.NecessaryNormativeOrder.ax": {"tag": "META"}})
+    assert cat_meta == "METAPHYSICAL" and badge_meta == "AXIOMATIC (ax)", f"got ({cat_meta}, {badge_meta})"
     print("  ✓ PROVEN↑ → ⚠️ AXIOMATIC (named axiom); SEM and META routes verified.")
+
+
+def test_no_sem_meta_rendered_as_proven() -> None:
+    print("Testing that no SEM/META dependent declaration is rendered as PROVEN...")
+    # 1. Unit tests for classify_proof_edge and compute_epistemic_badge with SEM/META
+    p_sem = SimpleNamespace(
+        full_name="Synthetic.sem_thm", name="sem_thm", kind="theorem",
+        boundary=None, subst_axioms=["Logos.Choice.AxActPolarity"]
+    )
+    cat, badge = bd.classify_proof_edge(p_sem)
+    assert "SEMANTIC" in cat and "AXIOMATIC" in badge, f"Expected SEMANTIC AXIOMATIC, got ({cat}, {badge})"
+
+    # Priced def must NOT return DEFINITIONAL
+    p_def_meta = SimpleNamespace(
+        full_name="Synthetic.meta_def", name="meta_def", kind="def",
+        boundary=None, subst_axioms=["Logos.DivineAgape.AxAgapeEssence"]
+    )
+    cat_d, badge_d = bd.classify_proof_edge(p_def_meta)
+    assert "METAPHYSICAL" in cat_d and "AXIOMATIC" in badge_d and cat_d != "DEFINITIONAL", \
+        f"Priced def must be AXIOMATIC, got ({cat_d}, {badge_d})"
+
+    # Priced boundary must NOT return COUNTERMODEL
+    p_boundary_sem = SimpleNamespace(
+        full_name="Synthetic.sem_boundary", name="sem_boundary", kind="theorem",
+        boundary=("A", "B", "link", "label"), subst_axioms=["Logos.Choice.AxIntentionalChoice"]
+    )
+    cat_b, badge_b = bd.classify_proof_edge(p_boundary_sem)
+    assert "SEMANTIC" in cat_b and "AXIOMATIC" in badge_b and cat_b != "COUNTERMODEL", \
+        f"Priced boundary must be AXIOMATIC, got ({cat_b}, {badge_b})"
+
+    # 2. Surface scan: scan README.md and investigations/ledger.md
+    registry = bd._REGISTRY
+    sem_meta_tags = {name for name, data in registry.items() if data.get("tag") in ("SEM", "META")}
+    audit = bd._AUDIT
+
+    def scan_surface_lines(lines: list[str], audit_dict: dict, sem_meta_set: set[str], surface_name: str = "surface") -> list[str]:
+        violations = []
+        for lno, line in enumerate(lines, 1):
+            line_str = line.strip()
+            # 1. Table row check:
+            if line_str.startswith("|") and line_str.endswith("|"):
+                parts = [p.strip() for p in line_str.split("|")[1:-1]]
+                for col in parts:
+                    if not any(col.startswith(pfx) for pfx in ("✅", "⚠️", "🧱", "📘", "⚙️", "◆", "⏸")):
+                        continue
+                    if "PROVEN" in col and "AXIOMATIC" not in col and "COUNTERMODEL" not in col:
+                        links = re.findall(r"\[([^\]]+)\]\((?:formal/Logos/)?([^)#]+)\.lean(?:#L\d+)?\)", col)
+                        for anchor_text, file_base in links:
+                            decl_name = anchor_text.split("#")[-1].split("(")[0].strip()
+                            matches = [k for k in audit_dict if k.endswith("." + decl_name) and file_base in k]
+                            if not matches:
+                                matches = [k for k in audit_dict if k.endswith("." + decl_name)]
+                            for m in matches:
+                                fp = audit_dict.get(m, [])
+                                axes = {a.split(".")[-1] for a in fp}
+                                bad = axes & sem_meta_set
+                                if bad:
+                                    violations.append(f"{surface_name}:{lno} {m} has SEM/META {sorted(bad)} in status cell: {col}")
+
+            # 2. Block price line check:
+            if "PRICE" in line_str and "PROVEN" in line_str and "AXIOMATIC" not in line_str:
+                for offset in range(1, 4):
+                    if lno - 1 + offset < len(lines):
+                        sline = lines[lno - 1 + offset]
+                        if "SOURCE" in sline:
+                            links = re.findall(r"\[([^\]]+)\]\((?:formal/Logos/)?([^)#]+)\.lean(?:#L\d+)?\)", sline)
+                            for anchor_text, file_base in links:
+                                decl_name = anchor_text.split("#")[-1].split("(")[0].strip()
+                                matches = [k for k in audit_dict if k.endswith("." + decl_name) and file_base in k]
+                                if not matches:
+                                    matches = [k for k in audit_dict if k.endswith("." + decl_name)]
+                                for m in matches:
+                                    fp = audit_dict.get(m, [])
+                                    axes = {a.split(".")[-1] for a in fp}
+                                    bad = axes & sem_meta_set
+                                    if bad:
+                                        violations.append(f"{surface_name}:{lno} {m} has SEM/META {sorted(bad)} in block: {sline}")
+        return violations
+
+    def scan_surface(filepath: Path) -> list[str]:
+        text = filepath.read_text(encoding="utf-8")
+        return scan_surface_lines(text.splitlines(), audit, sem_meta_tags, filepath.name)
+
+    v_readme = scan_surface(ROOT / "README.md")
+    v_ledger = scan_surface(ROOT / "investigations" / "ledger.md")
+    assert not v_readme, f"Found SEM/META violations in README.md: {v_readme}"
+    assert not v_ledger, f"Found SEM/META violations in ledger.md: {v_ledger}"
+    print("  ✓ Live surfaces contain 0 SEM/META declarations rendered as PROVEN.")
+
+    # 3. Negative Mutation Testing: feed compliant and mutated surfaces to scan_surface_lines
+    compliant_table = [
+        "| Some Claim | ✅ **PROVEN** · 0 substantive axioms · `{Means, Subject}` · [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will](formal/Logos/IndubitableNormativeFreeWill.lean#L114) |"
+    ]
+    mutated_sem_table = [
+        "| Some Claim | ✅ **PROVEN** · 0 substantive axioms · `{AxActPolarity, Means, Subject}` · [Synthetic.lean#synthetic_sem_claim](formal/Logos/Synthetic.lean#L10) |"
+    ]
+    mutated_meta_table = [
+        "| Some Claim | ✅ **PROVEN** · 0 substantive axioms · `{AxAgapeEssence, Subject}` · [Synthetic.lean#synthetic_meta_claim](formal/Logos/Synthetic.lean#L20) |"
+    ]
+    compliant_block = [
+        "PRICE      ✅ PROVEN — 0 substantive axioms · `{Means, Subject}`",
+        "SOURCE     ✅ · [IndubitableNormativeFreeWill.lean#indubitable_normative_free_will](formal/Logos/IndubitableNormativeFreeWill.lean#L114)"
+    ]
+    mutated_meta_block = [
+        "PRICE      ✅ PROVEN — 0 substantive axioms · `{AxAgapeEssence, Subject}`",
+        "SOURCE     ✅ · [Synthetic.lean#synthetic_meta_claim](formal/Logos/Synthetic.lean#L20)"
+    ]
+
+    mock_audit = dict(audit)
+    mock_audit["Logos.Synthetic.synthetic_sem_claim"] = ["Logos.Choice.AxActPolarity", "Logos.Agency.Subject"]
+    mock_audit["Logos.Synthetic.synthetic_meta_claim"] = ["Logos.DivineAgape.AxAgapeEssence", "Logos.Agency.Subject"]
+
+    # Control assertions: compliant inputs pass with 0 violations
+    assert len(scan_surface_lines(compliant_table, mock_audit, sem_meta_tags, "compliant_table")) == 0, \
+        "Control table must pass scan_surface_lines with 0 violations"
+    assert len(scan_surface_lines(compliant_block, mock_audit, sem_meta_tags, "compliant_block")) == 0, \
+        "Control block must pass scan_surface_lines with 0 violations"
+
+    # Mutation assertions: mutated inputs MUST be caught by scan_surface_lines
+    sem_table_violations = scan_surface_lines(mutated_sem_table, mock_audit, sem_meta_tags, "mutated_sem_table")
+    assert len(sem_table_violations) > 0 and "synthetic_sem_claim" in sem_table_violations[0] and "AxActPolarity" in sem_table_violations[0], \
+        f"SEM table mutation must be caught by scan_surface_lines, got: {sem_table_violations}"
+
+    meta_table_violations = scan_surface_lines(mutated_meta_table, mock_audit, sem_meta_tags, "mutated_meta_table")
+    assert len(meta_table_violations) > 0 and "synthetic_meta_claim" in meta_table_violations[0] and "AxAgapeEssence" in meta_table_violations[0], \
+        f"META table mutation must be caught by scan_surface_lines, got: {meta_table_violations}"
+
+    meta_block_violations = scan_surface_lines(mutated_meta_block, mock_audit, sem_meta_tags, "mutated_meta_block")
+    assert len(meta_block_violations) > 0 and "synthetic_meta_claim" in meta_block_violations[0] and "AxAgapeEssence" in meta_block_violations[0], \
+        f"META block mutation must be caught by scan_surface_lines, got: {meta_block_violations}"
+
+    print("  ✓ Negative mutation test verified: scan_surface_lines catches synthetic SEM/META leakage across table rows and block prices.")
 
 
 def main():
@@ -1241,6 +1379,7 @@ def main():
     test_no_unitarian_collapse(decls, node_map)
     test_docstring_footprint_sync()
     test_badge_display_mapping()
+    test_no_sem_meta_rendered_as_proven()
     test_frontier_appendix_renders()
     test_normative_order_ground_independence(decls, node_map)
     test_claim_kernel_existence_walk(decls, node_map, sections)

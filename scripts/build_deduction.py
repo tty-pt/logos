@@ -4687,6 +4687,14 @@ def strength_of(proof: ProofIR, claim: ClaimShape,
     if cls == "PROVEN↑":
         return "AXIOMATIC"
     if cls == "PROVEN":
+        # Defensive assertion (AGENTS.md / LOVE-4): ensure no SEM/META axiom is present in the audited footprint
+        sem_meta = {a.rsplit(".", 1)[-1] for a in _branch_substantive(proof)
+                    if (_REGISTRY.get(a.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META")}
+        if sem_meta:
+            raise SystemExit(
+                f"FATAL: {proof.full_name} is classified as PROVEN but carries SEM/META "
+                f"axiom(s) {sorted(sem_meta)} in its audited footprint. "
+                f"Statuses must be derived, never transcribed (AGENTS.md).")
         return "PROVEN"
     raise SystemExit(
         f"FATAL: {proof.full_name} has claim class {cls!r}, which is outside\n"
@@ -5135,6 +5143,13 @@ def badge_of_route(proofs: list[ProofIR], cls: str) -> str:
     if cls == "DEFINITIONAL":
         return "DEFINITIONAL"
     if cls == "PROVEN":
+        for p in proofs:
+            sem_meta = {a.rsplit(".", 1)[-1] for a in _branch_substantive(p)
+                        if (_REGISTRY.get(a.rsplit(".", 1)[-1]) or {}).get("tag") in ("SEM", "META")}
+            if sem_meta:
+                raise SystemExit(
+                    f"FATAL: badge_of_route given PROVEN class for {p.full_name} which carries "
+                    f"SEM/META axiom(s) {sorted(sem_meta)} in its audited footprint.")
         names = sorted({n for p in proofs for n in route_premises(p)})
         if names:
             joined = ", ".join(names[:3]) + (f" (+{len(names) - 3} more)" if len(names) > 3 else "")
@@ -5196,6 +5211,37 @@ def _derived_price_cell(proofs: list[ProofIR]) -> str:
             + ", ".join(axs))
 
 
+def proof_substantive_axioms(proof: ProofIR, registry: dict | None = None, decls: dict | None = None) -> list[str]:
+    """Derive substantive axioms for a proof object from audited footprint if available,
+    falling back to proof.subst_axioms for synthetic proof objects (unit tests)."""
+    if getattr(proof, "full_name", None) and audit_footprint(proof.full_name):
+        audited = _branch_substantive(proof)
+        if audited:
+            return audited
+    return getattr(proof, "subst_axioms", [])
+
+
+def proof_substantive_partition(proof: ProofIR, registry: dict | None = None, decls: dict | None = None) -> tuple[list[str], list[str], list[str]]:
+    """Partition substantive axioms of a proof into (meta, sem, trans).
+    Uses _REGISTRY by default, with fallback to registry or decls."""
+    reg = registry if registry is not None else _REGISTRY
+    axes = proof_substantive_axioms(proof, reg, decls)
+    meta, sem, trans = [], [], []
+    for ax in axes:
+        base = ax.rsplit(".", 1)[-1]
+        r = (reg.get(base) or reg.get(ax) or {})
+        tag = r.get("tag")
+        if not tag and decls and ax in decls:
+            tag = decls[ax].get("tag")
+        if tag == "META":
+            meta.append(base)
+        elif tag == "SEM":
+            sem.append(base)
+        elif tag == "TRANS":
+            trans.append(base)
+    return sorted(set(meta)), sorted(set(sem)), sorted(set(trans))
+
+
 def classify_proof_edge(proof: ProofIR, graph: dict = None, decls: dict = None) -> tuple[str, str]:
     """Classifies the local deductive status of a proof transition edge into one of:
     - DEFINITIONAL: definitional equality, structure constructor, or identity (Iff.rfl / def)
@@ -5208,24 +5254,29 @@ def classify_proof_edge(proof: ProofIR, graph: dict = None, decls: dict = None) 
     tests stay stable; the reader-facing *display* half says AXIOMATIC. AXIOMATIC never
     means "unproved" — it means machine-verified while resting on the named, priced axiom.
     """
-    if proof.boundary:
+    local_meta, local_sem, _ = proof_substantive_partition(proof, decls=decls)
+
+    if local_meta:
+        req = ", ".join(local_meta)
+        if getattr(proof, "boundary", None):
+            left, right = proof.boundary[0], proof.boundary[1]
+            return "METAPHYSICAL", f"AXIOMATIC ({req}) | {left} ⇏ {right}"
+        return "METAPHYSICAL", f"AXIOMATIC ({req})"
+    elif local_sem:
+        req = ", ".join(local_sem)
+        if getattr(proof, "boundary", None):
+            left, right = proof.boundary[0], proof.boundary[1]
+            return "SEMANTIC", f"AXIOMATIC ({req}) | {left} ⇏ {right}"
+        return "SEMANTIC", f"AXIOMATIC ({req})"
+
+    if getattr(proof, "boundary", None):
         left, right = proof.boundary[0], proof.boundary[1]
         return "COUNTERMODEL", f"COUNTERMODEL | {left} ⇏ {right}"
 
-    if proof.kind in ("def", "structure"):
+    if getattr(proof, "kind", None) in ("def", "structure"):
         return "DEFINITIONAL", "DEFINITIONAL"
 
-    local_meta = [ax.rsplit(".", 1)[-1] for ax in proof.subst_axioms if (_REGISTRY.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") == "META"]
-    local_sem = [ax.rsplit(".", 1)[-1] for ax in proof.subst_axioms if (_REGISTRY.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") == "SEM"]
-
-    if local_meta:
-        req = ", ".join(sorted(set(local_meta)))
-        return "METAPHYSICAL", f"AXIOMATIC ({req})"
-    elif local_sem:
-        req = ", ".join(sorted(set(local_sem)))
-        return "SEMANTIC", f"AXIOMATIC ({req})"
-    else:
-        return "PROVEN", "PROVEN | 0 substantive axioms"
+    return "PROVEN", "PROVEN | 0 substantive axioms"
 
 
 # CLEARER.md §6 (Phase 3): what the compiled proof *is*, as a label on the proof
@@ -6109,25 +6160,22 @@ def pick_primary_milestone_proof(proofs: list[ProofIR]) -> ProofIR | None:
 
 def compute_epistemic_badge(proofs: list[ProofIR], registry: dict = None) -> str:
     """Computes an authoritative epistemic badge for a set of proofs against the axiom registry."""
-    if registry is None:
-        registry = _REGISTRY
     if not proofs:
         return "DEFINITIONAL"
-    meta_axes = sorted(set(
-        ax.rsplit(".", 1)[-1] for p in proofs for ax in p.subst_axioms
-        if (registry.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") == "META"
-    ))
-    sem_axes = sorted(set(
-        ax.rsplit(".", 1)[-1] for p in proofs for ax in p.subst_axioms
-        if (registry.get(ax.rsplit(".", 1)[-1]) or {}).get("tag") == "SEM"
-    ))
-    if any(getattr(p, "boundary", None) or "_not_entails_" in p.name for p in proofs):
+
+    meta_set, sem_set = set(), set()
+    for p in proofs:
+        m, s, _ = proof_substantive_partition(p, registry=registry)
+        meta_set.update(m)
+        sem_set.update(s)
+
+    if meta_set:
+        return f"AXIOMATIC ({', '.join(sorted(meta_set))})"
+    elif sem_set:
+        return f"AXIOMATIC ({', '.join(sorted(sem_set))})"
+    elif any(getattr(p, "boundary", None) or "_not_entails_" in getattr(p, "name", "") for p in proofs):
         return "COUNTERMODEL · ⇏"
-    elif meta_axes:
-        return f"AXIOMATIC ({', '.join(meta_axes)})"
-    elif sem_axes:
-        return f"AXIOMATIC ({', '.join(sem_axes)})"
-    elif all(p.kind in ("def", "structure") for p in proofs):
+    elif all(getattr(p, "kind", None) in ("def", "structure") for p in proofs):
         return "DEFINITIONAL"
     return "PROVEN · 0 substantive axioms"
 
@@ -7039,13 +7087,14 @@ def _row_badge_axioms(proofs: list[ProofIR]) -> str:
     comes from `_worst_badge`, so the internal strings the tests key on are
     untouched.
     """
-    meta = {a.rsplit(".", 1)[-1] for p in proofs for a in _branch_substantive(p)
-            if (_REGISTRY.get(a.rsplit(".", 1)[-1]) or {}).get("tag") == "META"}
-    if meta:
-        return ", ".join(sorted(meta))
-    sem = {a.rsplit(".", 1)[-1] for p in proofs for a in _branch_substantive(p)
-           if (_REGISTRY.get(a.rsplit(".", 1)[-1]) or {}).get("tag") == "SEM"}
-    return ", ".join(sorted(sem))
+    meta_set, sem_set = set(), set()
+    for p in proofs:
+        m, s, _ = proof_substantive_partition(p)
+        meta_set.update(m)
+        sem_set.update(s)
+    if meta_set:
+        return ", ".join(sorted(meta_set))
+    return ", ".join(sorted(sem_set))
 
 
 def _status_cell(proofs: list[ProofIR]) -> str:
