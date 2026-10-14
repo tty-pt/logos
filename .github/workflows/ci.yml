@@ -1,0 +1,44 @@
+name: CI — Logos 4 Kernel Verification
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  verify:
+    name: Verify Deductions & Consistency
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Elan & Lean 4 toolchain
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+
+      - name: Build Lean 4 formalization
+        run: |
+          cd formal
+          lake --version
+          lake build
+
+      - name: Run CLI Auditor
+        run: |
+          cd formal
+          lake exe logos
+
+      - name: Run Kernel Axiom Audit
+        run: |
+          python3 scripts/audit_footprints.py
+
+      - name: Run Consistency Gates (A, B, S)
+        run: |
+          python3 scripts/check_consistency.py
+
+      - name: Verify Documentation Synchronization
+        run: |
+          python3 scripts/build_deduction.py
+          git diff --exit-code README.md

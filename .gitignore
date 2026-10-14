@@ -1,0 +1,18 @@
+# Build artifacts
+.lake/
+formal/.lake/
+*.olean
+*.ilean
+*.c
+*.o
+*.dylib
+*.so
+*.dll
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Editor / temp files
+*~
+.DS_Store
