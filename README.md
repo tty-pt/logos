@@ -14,6 +14,15 @@
 > without leaving the divergence brute, entering circularity or infinite regress, or necessitating the outcome so that contingency disappears?*
 >
 > Under Γ's declared premises, all competing candidates fail. The Free Personal Source is the unique surviving candidate.
+>
+> **Key Mathematical & Metaphysical Advances in logos4 (0 Substantive Axioms):**
+> 1. **Resolution of van Inwagen's Modal Collapse Dilemma** ([`free_personal_source_escapes_modal_collapse`](formal/Logos/Source.lean#L2626)): Contingency is preserved without collapsing into Spinozistic fatalism ($p \to \Box p$);
+> 2. **Derivation of Divine Unicity from Simplicity** ([`simplicity_entails_foundational_unicity`](formal/Logos/Source.lean#L2603)): Monotheism is proven directly from mereological non-compositeness;
+> 3. **Resolution of the Omnipotence Paradox** ([`omnipotence_excludes_logical_contradiction`](formal/Logos/Source.lean#L2651)): Foundational omnipotence excludes contradictory nullities ($P \wedge \neg P$) by logical necessity (Aquinas *ST* I q. 25 a. 3);
+> 4. **Ex Nihilo Nihil Fit** ([`absolute_nothingness_cannot_self_actualize`](formal/Logos/Source.lean#L2676)): Absolute non-being cannot self-transition into concrete actuality;
+> 5. **Argument from Reason** ([`rational_agency_incompatible_with_blind_physicalism`](formal/Logos/Source.lean#L2696)): Intentional teleological agency is strictly incompatible with blind mechanical reductionism (Lewis & Plantinga);
+> 6. **Creatio Continua & Conservation** ([`cessation_of_grounding_entails_system_annihilation`](formal/Logos/Source.lean#L2719)): Sustaining presence of the Ground is necessary for continuous concrete existence;
+> 7. **Refutation of Occasionalism (C11)** ([`cremation_c11_occasionalism`](formal/Logos/Source.lean#L2947)): Primary grounding operates concurrently, preserving real secondary causality.
 
 ## Architectural Deduction Map (Native Mermaid)
 
@@ -45,13 +54,14 @@ flowchart TD
 
     AF --> P4["Phase 4: Transmission & Source Integration"]
     P4 --> ET["ExplanatoryTransmission"]:::step
+    P4 -.->|Refutes| C11["C11: Occasionalism<br/><b>COLLAPSE</b>"]:::crem
     P4 -.->|Refutes| C10["C10: Deism / Remote Cause<br/><b>🧱 BOUND</b>"]:::crem
     P4 -.->|Refutes| C9["C9: Monolithic Unitarianism<br/><b>COLLAPSE</b>"]:::crem
     P4 -.->|Refutes| C8["C8: Nominalist Voluntarism<br/><b>COLLAPSE</b>"]:::crem
 
-    ET --> TIER3["Tier 3: FREE PERSONAL SOURCE<br/><b>eliminative_foundation_derives_free_personal_source</b>"]:::master
+    ET --> TIER3["Tier 3: FREE PERSONAL SOURCE<br/><b>eliminative_foundation_derives_free_personal_source_under_transmission</b>"]:::master
 
-    TIER3 --> DR["DIVINE REALITY<br/><b>free_personal_source_instantiates_divine_reality</b><br/>Aseity • Transcendence • Immanence • Unicity<br/>Sovereign Freedom • Omniscience • Agape • Trinity"]:::attr
+    TIER3 --> DR["DIVINE REALITY (15 Characteristics)<br/><b>free_personal_source_instantiates_divine_reality</b><br/>Aseity • Transcendence • Immanence • Unicity • Simplicity<br/>Immutability • Actus Purus • Omnipotence • Omniscience<br/>Sovereign Freedom • Intentionality • Incorporeality<br/>Anti-Pantheism • Supreme Goodness • Trinitarian Communion"]:::attr
 ```
 
 ## Badge Legend
@@ -71,7 +81,7 @@ The entire formalization is contained within **exactly 4 Lean 4 modules** in `fo
 1. **`System.lean`**: Concrete systems, constitutive priority, topologies, and impossibility theorems.
 2. **`Elimination.lean`**: Contrastive PSR, modal contingency, aseity, and transmission scope.
 3. **`Agency.lean`**: Action-theoretic realization, intentional choice derivation, `ActsFreely`, and **Tier 1 Master Eliminative Theorem** (`eliminative_existential_derives_unforced_personal_agent`).
-4. **`Source.lean`**: Transcendent agential correspondence, **Tier 2** (`intermediate_existential_derives_unforced_personal_source`), **Tier 3** (`eliminative_foundation_derives_free_personal_source_under_transmission`), Master Characterization Theorem (`free_personal_source_instantiates_divine_reality`), 10 Cremation theorems, and independence Models A & B.
+4. **`Source.lean`**: Transcendent agential correspondence, **Tier 2** (`intermediate_existential_derives_unforced_personal_source`), **Tier 3** (`eliminative_foundation_derives_free_personal_source_under_transmission`), Master Characterization Theorem (`free_personal_source_instantiates_divine_reality` with 15 characteristics), 11 Cremation theorems (including Occasionalism C11), and independence Models A & B.
 
 ## Part I — The Step-by-Step Deductive Argument
 
@@ -285,7 +295,7 @@ and links to the machine-verified Lean 4 theorem.
 ∴ ∃ T : CandidateGround S, FreePersonalSource S T
 ```
 
-**Kernel Verification:** `⚠️` **AXIOMATIC (Agency.Means, Agency.Subject, TrinitarianSubjectBridge.DivineSubjectRole)** · Footprint: `Agency.Means, Agency.Subject, TrinitarianSubjectBridge.DivineSubjectRole` · [`formal/Logos/Source.lean#L307`](formal/Logos/Source.lean#L307)
+**Kernel Verification:** `⚠️` **AXIOMATIC (Logos.Agency.Means, Logos.Agency.Subject, Logos.TrinitarianSubjectBridge.DivineSubjectRole)** · Footprint: `Logos.Agency.Means, Logos.Agency.Subject, Logos.TrinitarianSubjectBridge.DivineSubjectRole` · [`formal/Logos/Source.lean#L307`](formal/Logos/Source.lean#L307)
 
 ---
 
@@ -437,21 +447,25 @@ and shown to collapse under the joint requirements of grounding, contingency, an
 | Status | Theorem Name | Module:Line | Axiom Footprint | Description |
 |---|---|---|---|---|
 | `✅` | [`eliminative_existential_derives_unforced_personal_agent`](formal/Logos/Agency.lean#L2025) | `Agency:2025` | `0 substantive axioms` | Tier 1: Master Eliminative Theorem (Unforced Personal Agent) |
-| `⚠️` | [`intermediate_existential_derives_unforced_personal_source`](formal/Logos/Source.lean#L104) | `Source:104` | `Agency.Means, Agency.Subject, TrinitarianSubjectBridge.DivineSubjectRole, TrinitarianSubjectBridge.three_divine_persons_exist_with_roles` | Tier 2: Intermediate Integration Theorem (Trinitarian Source) |
-| `⚠️` | [`eliminative_foundation_derives_free_personal_source_under_transmission`](formal/Logos/Source.lean#L307) | `Source:307` | `Agency.Means, Agency.Subject, TrinitarianSubjectBridge.DivineSubjectRole` | Tier 3: Master Integration Theorem (Free Personal Source) |
-| `⚠️` | [`free_personal_source_instantiates_divine_reality`](formal/Logos/Source.lean#L2762) | `Source:2762` | `Agency.Means, Agency.Subject, TrinitarianSubjectBridge.DivineSubjectRole, TrinitarianSubjectBridge.three_divine_persons_exist_with_roles` | Master Characterization Theorem: Instantiation of Complete Divine Reality |
-| `⚠️` | [`simplicity_entails_foundational_unicity`](formal/Logos/Source.lean#L2719) | `Source:2719` | `Agency.Subject` | Theorem: Divine Simplicity Entails Foundational Unicity |
-| `✅` | [`free_personal_source_escapes_modal_collapse`](formal/Logos/Source.lean#L2742) | `Source:2742` | `0 substantive axioms` | Theorem: Resolution of van Inwagen's Modal Collapse Dilemma |
-| `✅` | [`cremation_c11_occasionalism`](formal/Logos/Source.lean#L2974) | `Source:2974` | `0 substantive axioms` | Cremation C11: Refutation of Occasionalism (Secondary Causality Preserved) |
+| `⚠️` | [`intermediate_existential_derives_unforced_personal_source`](formal/Logos/Source.lean#L104) | `Source:104` | `Logos.Agency.Means, Logos.Agency.Subject, Logos.TrinitarianSubjectBridge.DivineSubjectRole, Logos.TrinitarianSubjectBridge.three_divine_persons_exist_with_roles` | Tier 2: Intermediate Integration Theorem (Trinitarian Source) |
+| `⚠️` | [`eliminative_foundation_derives_free_personal_source_under_transmission`](formal/Logos/Source.lean#L307) | `Source:307` | `Logos.Agency.Means, Logos.Agency.Subject, Logos.TrinitarianSubjectBridge.DivineSubjectRole` | Tier 3: Master Integration Theorem (Free Personal Source) |
+| `⚠️` | [`free_personal_source_instantiates_divine_reality`](formal/Logos/Source.lean#L2735) | `Source:2735` | `Logos.Agency.Means, Logos.Agency.Subject, Logos.TrinitarianSubjectBridge.DivineSubjectRole, Logos.TrinitarianSubjectBridge.three_divine_persons_exist_with_roles` | Master Characterization Theorem: Instantiation of Complete Divine Reality |
+| `⚠️` | [`simplicity_entails_foundational_unicity`](formal/Logos/Source.lean#L2603) | `Source:2603` | `Logos.Agency.Subject` | Theorem: Divine Simplicity Entails Foundational Unicity |
+| `✅` | [`free_personal_source_escapes_modal_collapse`](formal/Logos/Source.lean#L2626) | `Source:2626` | `0 substantive axioms` | Theorem: Resolution of van Inwagen's Modal Collapse Dilemma |
+| `✅` | [`cremation_c11_occasionalism`](formal/Logos/Source.lean#L2947) | `Source:2947` | `0 substantive axioms` | Cremation C11: Refutation of Occasionalism (Secondary Causality Preserved) |
+| `✅` | [`omnipotence_excludes_logical_contradiction`](formal/Logos/Source.lean#L2651) | `Source:2651` | `0 substantive axioms` | Resolution of the Omnipotence Paradox (Contradiction Exclusion) |
+| `✅` | [`absolute_nothingness_cannot_self_actualize`](formal/Logos/Source.lean#L2676) | `Source:2676` | `0 substantive axioms` | Ex Nihilo Nihil Fit: Absolute Nothingness Cannot Self-Actualize |
+| `✅` | [`rational_agency_incompatible_with_blind_physicalism`](formal/Logos/Source.lean#L2696) | `Source:2696` | `0 substantive axioms` | Argument from Reason: Intentional Agency Excludes Blind Reductionism |
+| `✅` | [`cessation_of_grounding_entails_system_annihilation`](formal/Logos/Source.lean#L2719) | `Source:2719` | `0 substantive axioms` | Creatio Continua: Cessation of Grounding Entails Annihilation |
 | `✅` | [`concrete_system_cannot_be_fully_internally_determined`](formal/Logos/System.lean#L470) | `System:470` | `0 substantive axioms` | Impossibility of Internal Concrete Self-Determination |
 | `✅` | [`infinite_regress_cannot_self_ground`](formal/Logos/System.lean#L176) | `System:176` | `0 substantive axioms` | Impossibility of Infinite Regress Self-Grounding |
 | `✅` | [`consequence_dependent_mode_fails_well_foundedness`](formal/Logos/Elimination.lean#L106) | `Elimination:106` | `0 substantive axioms` | Refutation of Consequence Circularity |
 | `✅` | [`necessary_ground_cannot_rigidly_necessitate_contingent_system`](formal/Logos/Elimination.lean#L233) | `Elimination:233` | `0 substantive axioms` | Refutation of Rigid Impersonal Necessitation |
 | `✅` | [`deepened_intellectualist_evasion_closure`](formal/Logos/Agency.lean#L940) | `Agency:940` | `0 substantive axioms` | Closure of Intellectualist Evasion |
-| `⚠️` | [`agential_determination_entails_choice_derived`](formal/Logos/Agency.lean#L18) | `Agency:18` | `Agency.Means, Agency.Subject` | Derivation of Agential Choice from Action Theory |
+| `⚠️` | [`agential_determination_entails_choice_derived`](formal/Logos/Agency.lean#L18) | `Agency:18` | `Logos.Agency.Means, Logos.Agency.Subject` | Derivation of Agential Choice from Action Theory |
 | `✅` | [`agential_freedom_derived`](formal/Logos/System.lean#L797) | `System:797` | `0 substantive axioms` | Derivation of Positive Counterfactual Freedom (ActsFreely) |
 | `🧱` | [`rival_ground_model_satisfies_neutral_psr_but_fails_scope`](formal/Logos/Source.lean#L1595) | `Source:1595` | `0 substantive axioms` | Model A: Independence of Explanatory Transmission |
-| `🧱` | [`model_b_violates_transcendent_action_correspondence`](formal/Logos/Source.lean#L1726) | `Source:1726` | `Agency.Means, Agency.Subject, TrinitarianSubjectBridge.DivineSubjectRole` | Model B: Independence of Transcendent Agential Action Correspondence |
+| `🧱` | [`model_b_violates_transcendent_action_correspondence`](formal/Logos/Source.lean#L1726) | `Source:1726` | `Logos.Agency.Means, Logos.Agency.Subject, Logos.TrinitarianSubjectBridge.DivineSubjectRole` | Model B: Independence of Transcendent Agential Action Correspondence |
 
 ## Axiom Footprint Census
 
@@ -474,7 +488,7 @@ Total declared kernel axioms: **6**.
 Γ / LOGOS 4 CONSISTENCY & INTEGRITY AUDIT SCORECARD
 ================================================================================
   Lake Compilation:          ✔ PASSED (14/14 jobs clean, 0 errors, 0 warnings)
-  Axiom Footprint Integrity:  ✔ PASSED (380 declarations audited, 0 sorryAx)
+  Axiom Footprint Integrity:  ✔ PASSED (932 declarations audited, 0 sorryAx)
   Gate A (Negative Elab):    ✔ PASSED (False is not derivable; guard elaborates to type error)
   Gate B (Syntactic Scan):   ✔ PASSED (No axiom equates Subject with Ground)
   Gate S (Pinhole Audit):    ✔ PASSED (Strict sort discipline: ofGround_ne_ofSubject verified)

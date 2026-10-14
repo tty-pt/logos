@@ -29,6 +29,17 @@ def parse_print_axioms(text: str) -> dict[str, list[str]]:
     cur: str | None = None
     buf: list[str] = []
 
+    def save_cur():
+        nonlocal cur, buf
+        if cur is not None:
+            val = list(dict.fromkeys(buf))
+            footprints[cur] = val
+            short = cur.split(".")[-1]
+            footprints[short] = val
+            footprints[f"Logos.OntologicalIncompleteness.{short}"] = val
+            cur = None
+            buf = []
+
     def ingest(frag: str) -> bool:
         buf.extend([t for t in TOKEN_RE.findall(frag) if t != "Logos"])
         return "]" in frag
@@ -37,28 +48,54 @@ def parse_print_axioms(text: str) -> dict[str, list[str]]:
         line = raw.strip()
         m = DOC_LINE_RE.match(line)
         if m:
-            if cur is not None:
-                footprints[cur] = list(dict.fromkeys(buf))
+            save_cur()
             cur = m.group(1)
             buf = []
             if m.group(2).startswith("does not"):
-                footprints[cur] = []
+                val = []
+                footprints[cur] = val
+                short = cur.split(".")[-1]
+                footprints[short] = val
+                footprints[f"Logos.OntologicalIncompleteness.{short}"] = val
                 cur = None
             else:
                 tail = line[m.end():]
                 if ingest(tail):
-                    footprints[cur] = list(dict.fromkeys(buf))
-                    cur = None
+                    save_cur()
             continue
         if cur is not None:
             if ingest(line):
-                footprints[cur] = list(dict.fromkeys(buf))
-                cur = None
+                save_cur()
 
-    if cur is not None:
-        footprints[cur] = list(dict.fromkeys(buf))
-
+    save_cur()
     return footprints
+
+def extract_decls_with_ns(path: Path) -> list[str]:
+    decls = []
+    ns_stack: list[str] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        m_ns = re.match(r"^namespace\s+([A-Za-z0-9_.]+)", stripped)
+        if m_ns:
+            ns_stack.extend(m_ns.group(1).split("."))
+            continue
+        m_end = re.match(r"^end(?:\s+([A-Za-z0-9_.]+))?", stripped)
+        if m_end:
+            if m_end.group(1):
+                for _ in m_end.group(1).split("."):
+                    if ns_stack:
+                        ns_stack.pop()
+            else:
+                if ns_stack:
+                    ns_stack.pop()
+            continue
+        m_decl = DECL_RE.match(stripped)
+        if m_decl:
+            name = m_decl.group(1)
+            if not name.startswith("_"):
+                full_name = ".".join(ns_stack + [name]) if ns_stack else name
+                decls.append(full_name)
+    return decls
 
 def main():
     modules = ["System", "Elimination", "Agency", "Source"]
@@ -67,16 +104,12 @@ def main():
         path = LEAN_DIR / f"{mod}.lean"
         if not path.exists():
             continue
-        code = path.read_text(encoding="utf-8")
-        for m in DECL_RE.finditer(code):
-            name = m.group(1)
-            if not name.startswith("_"):
-                decls.append(f"Logos.OntologicalIncompleteness.{name}")
+        decls.extend(extract_decls_with_ns(path))
 
     decls = sorted(set(decls))
     print(f"Auditing {len(decls)} declarations across {len(modules)} modules...")
 
-    lines = ["import Logos\n", "open Classical\n", "open Logos\n", "open Logos.OntologicalIncompleteness\n\n"]
+    lines = ["import Logos\n\n"]
     for d in decls:
         lines.append(f"#print axioms {d}\n")
 

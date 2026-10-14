@@ -60,9 +60,7 @@ def check_negative_compilation() -> bool:
         return False
 
     if "error:" in err_output:
-        # Extract the error line
-        err_lines = [l.strip() for l in err_output.splitlines() if "error:" in l]
-        print(f"  PASS: Guard fails to elaborate as required: {err_lines[0] if err_lines else 'type error'}")
+        print("  PASS: Guard fails to elaborate as required (compiler correctly rejects FalseNotDerivable)")
         return True
 
     print(f"  FAILED Gate A: Unexpected failure mode:\n{err_output}")

@@ -1,1359 +1,3091 @@
 {
+  "Logos.Agency.Act": [
+    "Logos.Agency.Initiates",
+    "Logos.Agency.Means",
+    "Logos.Agency.State",
+    "Logos.Agency.Subject"
+  ],
+  "Act": [
+    "Logos.Agency.Initiates",
+    "Logos.Agency.Means",
+    "Logos.Agency.State",
+    "Logos.Agency.Subject"
+  ],
+  "Logos.OntologicalIncompleteness.Act": [
+    "Logos.Agency.Initiates",
+    "Logos.Agency.Means",
+    "Logos.Agency.State",
+    "Logos.Agency.Subject"
+  ],
+  "Logos.Agency.Initiates": [
+    "Logos.Agency.Initiates",
+    "Logos.Agency.State",
+    "Logos.Agency.Subject"
+  ],
+  "Initiates": [
+    "Logos.Agency.Initiates",
+    "Logos.Agency.State",
+    "Logos.Agency.Subject"
+  ],
+  "Logos.OntologicalIncompleteness.Initiates": [
+    "Logos.Agency.Initiates",
+    "Logos.Agency.State",
+    "Logos.Agency.Subject"
+  ],
+  "Logos.Agency.Means": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "Means": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "Logos.OntologicalIncompleteness.Means": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "Logos.Agency.State": [
+    "Logos.Agency.State"
+  ],
+  "State": [
+    "Logos.Agency.State"
+  ],
+  "Logos.OntologicalIncompleteness.State": [
+    "Logos.Agency.State"
+  ],
+  "Logos.Agency.Subject": [
+    "Logos.Agency.Subject"
+  ],
+  "Subject": [
+    "Logos.Agency.Subject"
+  ],
+  "Logos.OntologicalIncompleteness.Subject": [
+    "Logos.Agency.Subject"
+  ],
+  "Logos.Alternatives.Incompatible": [],
+  "Incompatible": [],
+  "Logos.OntologicalIncompleteness.Incompatible": [],
+  "Logos.Choice.Chooses": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "Chooses": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "Logos.OntologicalIncompleteness.Chooses": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "Logos.Choice.incompatible_self_negation": [],
+  "incompatible_self_negation": [],
+  "Logos.OntologicalIncompleteness.incompatible_self_negation": [],
+  "Logos.Entity.Entity": [
+    "Logos.Agency.Subject"
+  ],
+  "Entity": [
+    "Logos.Agency.Subject"
+  ],
+  "Logos.OntologicalIncompleteness.Entity": [
+    "Logos.Agency.Subject"
+  ],
+  "Logos.FoundationalOmnipresence.UniversalModalGround": [
+    "Logos.Agency.Subject"
+  ],
+  "UniversalModalGround": [
+    "Logos.Agency.Subject"
+  ],
+  "Logos.OntologicalIncompleteness.UniversalModalGround": [
+    "Logos.Agency.Subject"
+  ],
+  "Logos.FoundationalUnicity.UniversalModalGround": [
+    "Logos.Agency.Subject"
+  ],
+  "Logos.FoundationalUnicity.exactly_one_universal_modal_ground": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "exactly_one_universal_modal_ground": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "Logos.OntologicalIncompleteness.exactly_one_universal_modal_ground": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "Logos.FoundationalUnicity.ofGround_ne_ofSubject": [
+    "Logos.Agency.Subject"
+  ],
+  "ofGround_ne_ofSubject": [
+    "Logos.Agency.Subject"
+  ],
+  "Logos.OntologicalIncompleteness.ofGround_ne_ofSubject": [
+    "Logos.Agency.Subject"
+  ],
   "Logos.OntologicalIncompleteness.ActsFreely": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "ActsFreely": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.ActualizesOutcomeAt": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "ActualizesOutcomeAt": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.AgentialActionRealization": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "AgentialActionRealization": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.AgentialCounterfactualChoiceBridge": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "AgentialCounterfactualChoiceBridge": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.AgentialDeterminationEntailsChoice": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "AgentialDeterminationEntailsChoice": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.AgentialDeterminationIsChoice": [],
+  "AgentialDeterminationIsChoice": [],
   "Logos.OntologicalIncompleteness.AgentialFreedomBridge": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "AgentialFreedomBridge": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.AgentialSovereigntyOverAlternatives": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "AgentialSovereigntyOverAlternatives": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.BinaryContrastSpace": [],
+  "BinaryContrastSpace": [],
+  "Logos.OntologicalIncompleteness.BlindMechanicalReduction": [],
+  "BlindMechanicalReduction": [],
   "Logos.OntologicalIncompleteness.BruteOutcomeAt": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "BruteOutcomeAt": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.CandidateGround": [],
+  "CandidateGround": [],
   "Logos.OntologicalIncompleteness.CandidateOnticItem": [],
+  "CandidateOnticItem": [],
   "Logos.OntologicalIncompleteness.CausalDeterminationCoherence": [],
+  "CausalDeterminationCoherence": [],
   "Logos.OntologicalIncompleteness.CompleteExplanatoryChain": [],
+  "CompleteExplanatoryChain": [],
   "Logos.OntologicalIncompleteness.CompleteRationalDetermination": [],
+  "CompleteRationalDetermination": [],
   "Logos.OntologicalIncompleteness.CompleteRationalGlobalDetermination": [],
+  "CompleteRationalGlobalDetermination": [],
   "Logos.OntologicalIncompleteness.ConcreteSystem": [],
+  "ConcreteSystem": [],
   "Logos.OntologicalIncompleteness.ConditionalDeterminationTransfer": [],
+  "ConditionalDeterminationTransfer": [],
   "Logos.OntologicalIncompleteness.ConsequenceDependentDetermination": [],
+  "ConsequenceDependentDetermination": [],
   "Logos.OntologicalIncompleteness.ContingentSystem": [],
+  "ContingentSystem": [],
   "Logos.OntologicalIncompleteness.ContrastiveExplanationForTotality": [],
+  "ContrastiveExplanationForTotality": [],
   "Logos.OntologicalIncompleteness.DeepenedMetaphysicallyGroundedWitness": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "DeepenedMetaphysicallyGroundedWitness": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.DeterminationAsOnticCondition": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "DeterminationAsOnticCondition": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.DeterminationSystem": [],
+  "DeterminationSystem": [],
   "Logos.OntologicalIncompleteness.DeterminesAncestrally": [],
+  "DeterminesAncestrally": [],
   "Logos.OntologicalIncompleteness.DirectConsequenceDependence": [],
+  "DirectConsequenceDependence": [],
   "Logos.OntologicalIncompleteness.DivineReality": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject",
-    "TrinitarianSubjectBridge.DivineSubjectRole"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ],
+  "DivineReality": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ],
   "Logos.OntologicalIncompleteness.Essence": [],
+  "Essence": [],
   "Logos.OntologicalIncompleteness.ExplainsOutcomeAt": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "ExplainsOutcomeAt": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.ExplanatoryDeterminationRule": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "ExplanatoryDeterminationRule": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.ExplanatorySymmetryPrinciple": [],
+  "ExplanatorySymmetryPrinciple": [],
   "Logos.OntologicalIncompleteness.ExplanatoryTransmission": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "ExplanatoryTransmission": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.ExplanatoryUltimacyRequirement": [],
+  "ExplanatoryUltimacyRequirement": [],
   "Logos.OntologicalIncompleteness.FoundationalCausalDetermination": [],
+  "FoundationalCausalDetermination": [],
   "Logos.OntologicalIncompleteness.FreePersonalSource": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "FreePersonalSource": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.FullyInternallyDetermined": [],
+  "FullyInternallyDetermined": [],
   "Logos.OntologicalIncompleteness.GeneralContrastivePSR": [],
+  "GeneralContrastivePSR": [],
   "Logos.OntologicalIncompleteness.GroundIdentity": [],
+  "GroundIdentity": [],
   "Logos.OntologicalIncompleteness.GroundingTotalityTerminatesInAseity": [],
+  "GroundingTotalityTerminatesInAseity": [],
   "Logos.OntologicalIncompleteness.GuidedByJustificationMode": [],
+  "GuidedByJustificationMode": [],
   "Logos.OntologicalIncompleteness.HasFoundationalCausalAccess": [],
+  "HasFoundationalCausalAccess": [],
   "Logos.OntologicalIncompleteness.ImpersonalAseityPreservesNature": [],
+  "ImpersonalAseityPreservesNature": [],
   "Logos.OntologicalIncompleteness.ImpersonalExclusionAtAlternatives": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "ImpersonalExclusionAtAlternatives": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.ImpersonalNecessitatingGround": [],
+  "ImpersonalNecessitatingGround": [],
   "Logos.OntologicalIncompleteness.ImpersonallyDeterminedOutcomeAt": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "ImpersonallyDeterminedOutcomeAt": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.IndependentConditionMode": [],
+  "IndependentConditionMode": [],
   "Logos.OntologicalIncompleteness.InfiniteRegressSystem": [],
+  "InfiniteRegressSystem": [],
   "Logos.OntologicalIncompleteness.InternalPriorityEmbedsInConstitutive": [],
+  "InternalPriorityEmbedsInConstitutive": [],
   "Logos.OntologicalIncompleteness.InternalRulesPreserved": [],
+  "InternalRulesPreserved": [],
   "Logos.OntologicalIncompleteness.IsImpersonal": [],
+  "IsImpersonal": [],
   "Logos.OntologicalIncompleteness.IsInternalBruteFact": [],
+  "IsInternalBruteFact": [],
   "Logos.OntologicalIncompleteness.IsInternalTerminalNode": [],
+  "IsInternalTerminalNode": [],
   "Logos.OntologicalIncompleteness.IsNecessary": [],
+  "IsNecessary": [],
   "Logos.OntologicalIncompleteness.IsPersonalAgent": [],
+  "IsPersonalAgent": [],
   "Logos.OntologicalIncompleteness.IsUltimateGround": [],
+  "IsUltimateGround": [],
   "Logos.OntologicalIncompleteness.IsUngroundedInPriority": [],
+  "IsUngroundedInPriority": [],
   "Logos.OntologicalIncompleteness.IsUniversalGroundCandidate": [
-    "Agency.Subject"
+    "Logos.Agency.Subject"
   ],
+  "IsUniversalGroundCandidate": [
+    "Logos.Agency.Subject"
+  ],
+  "Logos.OntologicalIncompleteness.IsVoidState": [],
+  "IsVoidState": [],
   "Logos.OntologicalIncompleteness.MediatedExplanatoryScope": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "MediatedExplanatoryScope": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.MetaphysicallyGroundedWitness": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "MetaphysicallyGroundedWitness": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.ModalCollapse": [],
+  "ModalCollapse": [],
   "Logos.OntologicalIncompleteness.ModalExplanatoryExhaustionAtAlternatives": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "ModalExplanatoryExhaustionAtAlternatives": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.NatureInvariant": [],
+  "NatureInvariant": [],
   "Logos.OntologicalIncompleteness.NecessitatingMode": [],
+  "NecessitatingMode": [],
   "Logos.OntologicalIncompleteness.Occasionalism": [],
+  "Occasionalism": [],
   "Logos.OntologicalIncompleteness.OldExplainsOutcomeAt": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "OldExplainsOutcomeAt": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.OldUniversalOutcomePSR": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound"
   ],
+  "OldUniversalOutcomePSR": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.OntologicalIncompleteness.OperatesContradiction": [],
+  "OperatesContradiction": [],
   "Logos.OntologicalIncompleteness.OutcomeAt": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "OutcomeAt": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.OutcomeFixedByGroundBasis": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "OutcomeFixedByGroundBasis": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.PerfectRationalGoodness": [],
+  "PerfectRationalGoodness": [],
   "Logos.OntologicalIncompleteness.PersonalAseityPreservesNature": [],
+  "PersonalAseityPreservesNature": [],
   "Logos.OntologicalIncompleteness.PriorityGroundingHomomorphism": [
-    "Agency.Subject"
+    "Logos.Agency.Subject"
+  ],
+  "PriorityGroundingHomomorphism": [
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.PriorityPath": [],
+  "PriorityPath": [],
   "Logos.OntologicalIncompleteness.RepresentsAlternativeOutcome": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "RepresentsAlternativeOutcome": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.SecondaryCausalityPreserved": [],
+  "SecondaryCausalityPreserved": [],
   "Logos.OntologicalIncompleteness.SelectsIntentionally": [],
+  "SelectsIntentionally": [],
   "Logos.OntologicalIncompleteness.StrictReasonsFavor": [],
+  "StrictReasonsFavor": [],
   "Logos.OntologicalIncompleteness.SystemFullyInternallyDetermined": [],
+  "SystemFullyInternallyDetermined": [],
+  "Logos.OntologicalIncompleteness.SystemGroundedBy": [],
+  "SystemGroundedBy": [],
   "Logos.OntologicalIncompleteness.SystemOutcomeAt": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "SystemOutcomeAt": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.T_det": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "T_det": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.T_det_causal_access": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "T_det_causal_access": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.T_det_determination_coherence": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "T_det_determination_coherence": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.T_main": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "T_main": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.T_main_causal_access": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "T_main_causal_access": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.T_main_determination_coherence": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "T_main_determination_coherence": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.T_rival": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "T_rival": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.T_rival_causal_access": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "T_rival_causal_access": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.T_rival_determination_coherence": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "T_rival_determination_coherence": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.T_unexplained_absence": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "T_unexplained_absence": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.T_unfounded": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "T_unfounded": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.TeleologicalAgencyPrinciple": [],
+  "TeleologicalAgencyPrinciple": [],
   "Logos.OntologicalIncompleteness.TranscendentAgentialActionCorrespondence": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject",
-    "TrinitarianSubjectBridge.DivineSubjectRole"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ],
+  "TranscendentAgentialActionCorrespondence": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ],
   "Logos.OntologicalIncompleteness.TriModalWorld": [],
+  "TriModalWorld": [],
   "Logos.OntologicalIncompleteness.TriWorld": [],
+  "TriWorld": [],
   "Logos.OntologicalIncompleteness.UltimateGroundExplanatoryScope": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "UltimateGroundExplanatoryScope": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.UnifiedExplanatoryDetermination": [],
+  "UnifiedExplanatoryDetermination": [],
   "Logos.OntologicalIncompleteness.UnifiedRationalActualization": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "UnifiedRationalActualization": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.UniversalExplanatoryGroundingAtAlternatives": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "UniversalExplanatoryGroundingAtAlternatives": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.UniversalGroundGovernanceBridge": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "UniversalGroundGovernanceBridge": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.UniversalGroundModalProfile": [
-    "Agency.Subject"
+    "Logos.Agency.Subject"
+  ],
+  "UniversalGroundModalProfile": [
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.UniversalOutcomePSR": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "UniversalOutcomePSR": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.UnjustifiedContrastiveAlternativeAt": [],
+  "UnjustifiedContrastiveAlternativeAt": [],
+  "Logos.OntologicalIncompleteness.VoidSelfActualization": [],
+  "VoidSelfActualization": [],
+  "Logos.OntologicalIncompleteness.absolute_nothingness_cannot_self_actualize": [],
+  "absolute_nothingness_cannot_self_actualize": [],
   "Logos.OntologicalIncompleteness.agential_action_grounding_derives_actual_choice": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject",
-    "TrinitarianSubjectBridge.DivineSubjectRole"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ],
+  "agential_action_grounding_derives_actual_choice": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ],
   "Logos.OntologicalIncompleteness.agential_action_grounding_derives_selects_intentionally": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject",
-    "TrinitarianSubjectBridge.DivineSubjectRole"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ],
+  "agential_action_grounding_derives_selects_intentionally": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ],
   "Logos.OntologicalIncompleteness.agential_counterfactual_choice_bridge_from_sovereignty": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "agential_counterfactual_choice_bridge_from_sovereignty": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.agential_determination_entails_choice_derived": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "agential_determination_entails_choice_derived": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.agential_determination_entails_choice_derived_from_action_theory": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject",
-    "TrinitarianSubjectBridge.DivineSubjectRole"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ],
+  "agential_determination_entails_choice_derived_from_action_theory": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ],
   "Logos.OntologicalIncompleteness.agential_determination_entails_choice_in_binary_contrast_space": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "agential_determination_entails_choice_in_binary_contrast_space": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.agential_determination_entails_choice_of_biconditional": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "agential_determination_entails_choice_of_biconditional": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.agential_determination_entails_choice_via_intentional_action": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject",
-    "TrinitarianSubjectBridge.DivineSubjectRole"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ],
+  "agential_determination_entails_choice_via_intentional_action": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ],
   "Logos.OntologicalIncompleteness.agential_determination_exhaustive": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "agential_determination_exhaustive": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.agential_election_resolves_contrastive_psr_for_equal_goods": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "agential_election_resolves_contrastive_psr_for_equal_goods": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.agential_freedom_bridge_from_counterfactual_choice": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "agential_freedom_bridge_from_counterfactual_choice": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.agential_freedom_derived": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "agential_freedom_derived": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.agential_justification_mode_yields_free_personal_source": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "agential_justification_mode_yields_free_personal_source": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.agential_sovereignty_derived": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "agential_sovereignty_derived": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.agential_sovereignty_derived_from_biconditional_bridge": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "agential_sovereignty_derived_from_biconditional_bridge": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.agential_sovereignty_derived_from_neutral_psr": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "agential_sovereignty_derived_from_neutral_psr": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.ancestral_respects_priority": [],
+  "ancestral_respects_priority": [],
   "Logos.OntologicalIncompleteness.binary_contrast_space_entails_polarity_alternative": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "binary_contrast_space_entails_polarity_alternative": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.boundaryS": [],
+  "boundaryS": [],
   "Logos.OntologicalIncompleteness.boundary_node_is_terminal": [],
+  "boundary_node_is_terminal": [],
   "Logos.OntologicalIncompleteness.candidate_consequence_circularity_refutation": [],
+  "candidate_consequence_circularity_refutation": [],
   "Logos.OntologicalIncompleteness.candidate_direct_consequence_cycle_refutation": [],
+  "candidate_direct_consequence_cycle_refutation": [],
   "Logos.OntologicalIncompleteness.candidate_ground_must_be_structurally_external": [],
+  "candidate_ground_must_be_structurally_external": [],
   "Logos.OntologicalIncompleteness.candidate_without_causal_access_fails_explanation": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "candidate_without_causal_access_fails_explanation": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.causal_determination_fidelity_implies_grounds_outcome": [],
+  "causal_determination_fidelity_implies_grounds_outcome": [],
+  "Logos.OntologicalIncompleteness.cessation_of_grounding_entails_system_annihilation": [],
+  "cessation_of_grounding_entails_system_annihilation": [],
   "Logos.OntologicalIncompleteness.cfg0_is_maximal": [
     "propext",
     "Quot.sound"
   ],
+  "cfg0_is_maximal": [
+    "propext",
+    "Quot.sound"
+  ],
   "Logos.OntologicalIncompleteness.cfg0_val": [],
+  "cfg0_val": [],
   "Logos.OntologicalIncompleteness.cfg1_is_maximal": [
     "propext",
     "Quot.sound"
   ],
+  "cfg1_is_maximal": [
+    "propext",
+    "Quot.sound"
+  ],
   "Logos.OntologicalIncompleteness.cfg1_val": [],
+  "cfg1_val": [],
   "Logos.OntologicalIncompleteness.cfg2_not_maximal": [],
+  "cfg2_not_maximal": [],
   "Logos.OntologicalIncompleteness.cfg2_val": [],
+  "cfg2_val": [],
   "Logos.OntologicalIncompleteness.chain_cannot_be_exhaustively_forced": [],
+  "chain_cannot_be_exhaustively_forced": [],
   "Logos.OntologicalIncompleteness.chain_non_forcing_compossible_with_rational_determination": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "chain_non_forcing_compossible_with_rational_determination": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.closed_cycle_violates_ontological_priority": [],
+  "closed_cycle_violates_ontological_priority": [],
   "Logos.OntologicalIncompleteness.closed_system_has_unexplained_boundary": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "closed_system_has_unexplained_boundary": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.complete_rational_determination_refutes_libertarian_freedom": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "complete_rational_determination_refutes_libertarian_freedom": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.concrete_system_cannot_be_fully_internally_determined": [],
+  "concrete_system_cannot_be_fully_internally_determined": [],
   "Logos.OntologicalIncompleteness.concrete_system_has_internal_terminal_node": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "concrete_system_has_internal_terminal_node": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.configurationValue": [],
+  "configurationValue": [],
   "Logos.OntologicalIncompleteness.consequence_dependent_mode_fails_well_foundedness": [],
+  "consequence_dependent_mode_fails_well_foundedness": [],
   "Logos.OntologicalIncompleteness.consolidated_ontological_incompleteness_derives_free_personal_source": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "consolidated_ontological_incompleteness_derives_free_personal_source": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.contingent_system_derives_free_personal_source": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "contingent_system_derives_free_personal_source": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.contingent_system_under_invariant_nature_not_fixed": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "contingent_system_under_invariant_nature_not_fixed": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.contingent_system_with_psr_derives_free_personal_source": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "contingent_system_with_psr_derives_free_personal_source": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.contingent_system_yields_divergent_accessible_world_under_invariant_nature": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "contingent_system_yields_divergent_accessible_world_under_invariant_nature": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.corrected_principles_jointly_satisfiable": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "corrected_principles_jointly_satisfiable": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelS": [],
+  "countermodelS": [],
   "Logos.OntologicalIncompleteness.countermodelS_contingent": [],
+  "countermodelS_contingent": [],
   "Logos.OntologicalIncompleteness.countermodelS_psr": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelS_psr": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_aseity": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_aseity": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_crd": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_crd": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_crgd": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_crgd": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_fails_acts_freely": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_fails_acts_freely": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_fails_counterfactual_choice_bridge": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_fails_counterfactual_choice_bridge": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_fails_deepened_primitive_principles": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_fails_deepened_primitive_principles": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_fails_sovereignty": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_fails_sovereignty": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_fails_unified_explanatory_determination": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_fails_unified_explanatory_determination": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_guided": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_guided": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_impersonal_nature": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_impersonal_nature": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_nature_invariant": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_nature_invariant": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_necessary": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_necessary": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_not_necessitating": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_not_necessitating": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_personal_agent": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_personal_agent": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_personal_nature": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_personal_nature": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_selects_intentionally": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_selects_intentionally": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_symmetry": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_symmetry": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_teleology": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_teleology": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_ultimate": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_ultimate": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.countermodelT_unified_actualization": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "countermodelT_unified_actualization": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.cremation_c10_deism": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "cremation_c10_deism": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.cremation_c11_occasionalism": [],
+  "cremation_c11_occasionalism": [],
   "Logos.OntologicalIncompleteness.cremation_c1_normative_nihilism": [],
+  "cremation_c1_normative_nihilism": [],
   "Logos.OntologicalIncompleteness.cremation_c2_physicalist_mechanism": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "cremation_c2_physicalist_mechanism": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.cremation_c3_spinozistic_pantheism": [],
+  "cremation_c3_spinozistic_pantheism": [],
   "Logos.OntologicalIncompleteness.cremation_c4_leibnizian_determinism": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "cremation_c4_leibnizian_determinism": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.cremation_c5_cosmic_brute_fact": [],
+  "cremation_c5_cosmic_brute_fact": [],
   "Logos.OntologicalIncompleteness.cremation_c6_infinite_regress": [],
+  "cremation_c6_infinite_regress": [],
   "Logos.OntologicalIncompleteness.cremation_c7_closed_circularity": [],
+  "cremation_c7_closed_circularity": [],
   "Logos.OntologicalIncompleteness.cremation_c8_nominalist_voluntarism": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "cremation_c8_nominalist_voluntarism": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.cremation_c9_monolithic_unitarianism": [
-    "Agency.Subject"
+    "Logos.Agency.Subject"
+  ],
+  "cremation_c9_monolithic_unitarianism": [
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.deepened_consolidated_free_personal_source": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "deepened_consolidated_free_personal_source": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.deepened_consolidated_free_personal_source_of_entails": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "deepened_consolidated_free_personal_source_of_entails": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.deepened_contingent_system_derives_free_personal_source": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "deepened_contingent_system_derives_free_personal_source": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.deepened_contingent_system_derives_free_personal_source_of_entails": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "deepened_contingent_system_derives_free_personal_source_of_entails": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.deepened_contingent_system_with_psr_derives_free_personal_source": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "deepened_contingent_system_with_psr_derives_free_personal_source": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.deepened_intellectualist_evasion_closure": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "deepened_intellectualist_evasion_closure": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.deepened_neutral_principles_jointly_satisfiable": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "deepened_neutral_principles_jointly_satisfiable": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.direct_consequence_mode_fails_well_foundedness": [],
+  "direct_consequence_mode_fails_well_foundedness": [],
   "Logos.OntologicalIncompleteness.dualChoosesOutcomeAt": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualChoosesOutcomeAt": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualPriority": [],
+  "dualPriority": [],
   "Logos.OntologicalIncompleteness.dualPriority_trans": [],
+  "dualPriority_trans": [],
   "Logos.OntologicalIncompleteness.dualPriority_wf": [],
+  "dualPriority_wf": [],
   "Logos.OntologicalIncompleteness.dualWorldS": [],
+  "dualWorldS": [],
   "Logos.OntologicalIncompleteness.dualWorldS_contingent": [],
+  "dualWorldS_contingent": [],
   "Logos.OntologicalIncompleteness.dualWorldS_eliminative_deduction": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldS_eliminative_deduction": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldS_neutral_psr": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldS_neutral_psr": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldS_psr": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldS_psr": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldS_satisfies_existential_premises": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldS_satisfies_existential_premises": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldS_satisfies_free_personal_source_premises": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldS_satisfies_free_personal_source_premises": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT_acts_freely": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT_acts_freely": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT_agential_bridge": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT_agential_bridge": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT_causal_access": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT_causal_access": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT_determination_coherence": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT_determination_coherence": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT_exhaustion": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT_exhaustion": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT_explains_alt": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT_explains_alt": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT_free_personal_source": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT_free_personal_source": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT_impersonal_exclusion": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT_impersonal_exclusion": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT_nature_invariant": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT_nature_invariant": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT_necessary": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT_necessary": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT_personal": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT_personal": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT_scope": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT_scope": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT_selects_intentionally": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT_selects_intentionally": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dualWorldT_ultimate": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dualWorldT_ultimate": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.dual_node_totality": [],
+  "dual_node_totality": [],
   "Logos.OntologicalIncompleteness.eliminative_deduction_derives_free_personal_source": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject",
-    "TrinitarianSubjectBridge.DivineSubjectRole"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ],
+  "eliminative_deduction_derives_free_personal_source": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ],
   "Logos.OntologicalIncompleteness.eliminative_deduction_derives_free_personal_source_under_transmission": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject",
-    "TrinitarianSubjectBridge.DivineSubjectRole"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ],
+  "eliminative_deduction_derives_free_personal_source_under_transmission": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ],
   "Logos.OntologicalIncompleteness.eliminative_deduction_of_unforced_personal_agent": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "eliminative_deduction_of_unforced_personal_agent": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.eliminative_existential_derives_unforced_personal_agent": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "eliminative_existential_derives_unforced_personal_agent": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.eliminative_foundation_derives_free_personal_source": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject",
-    "TrinitarianSubjectBridge.DivineSubjectRole"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ],
+  "eliminative_foundation_derives_free_personal_source": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ],
   "Logos.OntologicalIncompleteness.eliminative_foundation_derives_free_personal_source_under_transmission": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject",
-    "TrinitarianSubjectBridge.DivineSubjectRole"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ],
+  "eliminative_foundation_derives_free_personal_source_under_transmission": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ],
   "Logos.OntologicalIncompleteness.emptyBoolWf": [],
+  "emptyBoolWf": [],
   "Logos.OntologicalIncompleteness.emptyUnitWf": [],
+  "emptyUnitWf": [],
   "Logos.OntologicalIncompleteness.explanatory_determination_rule_derived": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "explanatory_determination_rule_derived": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.false_not_maximal": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "false_not_maximal": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.first_missing_step_to_libertarian_freedom": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "first_missing_step_to_libertarian_freedom": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.five_levels_of_conclusion_separation": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "five_levels_of_conclusion_separation": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.fortified_rational_intellectualist_control_model": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "fortified_rational_intellectualist_control_model": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.free_personal_source_escapes_modal_collapse": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "free_personal_source_escapes_modal_collapse": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.free_personal_source_instantiates_divine_reality": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject",
-    "TrinitarianSubjectBridge.DivineSubjectRole",
-    "TrinitarianSubjectBridge.three_divine_persons_exist_with_roles"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+    "Logos.TrinitarianSubjectBridge.three_divine_persons_exist_with_roles"
+  ],
+  "free_personal_source_instantiates_divine_reality": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+    "Logos.TrinitarianSubjectBridge.three_divine_persons_exist_with_roles"
   ],
   "Logos.OntologicalIncompleteness.fully_internally_determined_is_impossible": [],
+  "fully_internally_determined_is_impossible": [],
   "Logos.OntologicalIncompleteness.governance_bridge_to_witness": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "governance_bridge_to_witness": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.grounding_modes_exhaustive": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "grounding_modes_exhaustive": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.impersonal_ground_forces_consequence_or_independent_condition": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "impersonal_ground_forces_consequence_or_independent_condition": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.incompatible_outcomes_at_world": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "incompatible_outcomes_at_world": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.independent_condition_contradicts_ultimacy": [],
+  "independent_condition_contradicts_ultimacy": [],
   "Logos.OntologicalIncompleteness.infinite_regress_cannot_self_ground": [],
+  "infinite_regress_cannot_self_ground": [],
   "Logos.OntologicalIncompleteness.infinite_regress_conditional_rules_satisfied_by_vacuity": [],
+  "infinite_regress_conditional_rules_satisfied_by_vacuity": [],
   "Logos.OntologicalIncompleteness.intellectualist_control_model_violates_explanatory_rule": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "intellectualist_control_model_violates_explanatory_rule": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.intellectualist_control_model_violates_ontic_conditioning": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "intellectualist_control_model_violates_ontic_conditioning": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.intellectualist_evasion_closure": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "intellectualist_evasion_closure": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.intellectualist_teleological_decoupling": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "intellectualist_teleological_decoupling": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.intentional_selection_does_not_deduce_libertarian_freedom": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "intentional_selection_does_not_deduce_libertarian_freedom": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.intermediate_existential_derives_unforced_personal_source": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject",
-    "TrinitarianSubjectBridge.DivineSubjectRole",
-    "TrinitarianSubjectBridge.three_divine_persons_exist_with_roles"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+    "Logos.TrinitarianSubjectBridge.three_divine_persons_exist_with_roles"
+  ],
+  "intermediate_existential_derives_unforced_personal_source": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+    "Logos.TrinitarianSubjectBridge.three_divine_persons_exist_with_roles"
   ],
   "Logos.OntologicalIncompleteness.internal_candidate_cannot_ground_totality": [],
+  "internal_candidate_cannot_ground_totality": [],
   "Logos.OntologicalIncompleteness.internal_node_cannot_ground_totality_circularity": [],
+  "internal_node_cannot_ground_totality_circularity": [],
   "Logos.OntologicalIncompleteness.internal_node_cannot_self_determine": [],
+  "internal_node_cannot_self_determine": [],
   "Logos.OntologicalIncompleteness.internal_priority_irrefl_from_constitutive": [],
+  "internal_priority_irrefl_from_constitutive": [],
   "Logos.OntologicalIncompleteness.internal_rules_fail_contrastive_distinction": [],
+  "internal_rules_fail_contrastive_distinction": [],
   "Logos.OntologicalIncompleteness.isEvaluativelyMaximal": [],
+  "isEvaluativelyMaximal": [],
   "Logos.OntologicalIncompleteness.master_premises_consistent_with_contingency": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "master_premises_consistent_with_contingency": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.mediated_scope_to_ultimate_scope_under_transmission": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "mediated_scope_to_ultimate_scope_under_transmission": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.modal_necessitation_distinct_from_rational_actualization": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "modal_necessitation_distinct_from_rational_actualization": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.model_b_violates_action_theory_of_agency": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "model_b_violates_action_theory_of_agency": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.model_b_violates_transcendent_action_correspondence": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject",
-    "TrinitarianSubjectBridge.DivineSubjectRole"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ],
+  "model_b_violates_transcendent_action_correspondence": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
   ],
   "Logos.OntologicalIncompleteness.necessary_ground_cannot_rigidly_necessitate_contingent_system": [],
+  "necessary_ground_cannot_rigidly_necessitate_contingent_system": [],
   "Logos.OntologicalIncompleteness.necessary_impersonal_ground_contradicts_contingency": [],
+  "necessary_impersonal_ground_contradicts_contingency": [],
   "Logos.OntologicalIncompleteness.node_has_ancestral_ultimate_source": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "node_has_ancestral_ultimate_source": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.non_choosing_personal_model_violates_agential_determination_bridge": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "non_choosing_personal_model_violates_agential_determination_bridge": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.non_choosing_personal_model_violates_agential_determination_entailment": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "non_choosing_personal_model_violates_agential_determination_entailment": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.not_fixed_by_basis_iff_exists_divergent_accessible_world": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound"
   ],
+  "not_fixed_by_basis_iff_exists_divergent_accessible_world": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.OntologicalIncompleteness.omnipotence_excludes_logical_contradiction": [],
+  "omnipotence_excludes_logical_contradiction": [],
   "Logos.OntologicalIncompleteness.ontic_conditioning_exhaustive": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "ontic_conditioning_exhaustive": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.ontic_location_exhaustive": [],
+  "ontic_location_exhaustive": [],
   "Logos.OntologicalIncompleteness.ontological_nature_exhaustive": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "ontological_nature_exhaustive": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcomeEvaluativeChoosesOutcomeAt": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcomeEvaluativeChoosesOutcomeAt": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcomeEvaluativeProvidesContrastiveJustification": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcomeEvaluativeProvidesContrastiveJustification": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcomeEvaluativeReasonsFavor": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcomeEvaluativeReasonsFavor": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcomePreference": [],
+  "outcomePreference": [],
   "Logos.OntologicalIncompleteness.outcome_dual_diff": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcome_dual_diff": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcome_dual_false": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcome_dual_false": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcome_dual_true": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcome_dual_true": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcome_false": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcome_false": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcome_rival_false": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcome_rival_false": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcome_rival_true": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcome_rival_true": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcome_tri_actual": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcome_tri_actual": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcome_tri_divergent": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcome_tri_divergent": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcome_tri_uninstantiated": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcome_tri_uninstantiated": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcome_true": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcome_true": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcome_w0": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcome_w0": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcome_w1": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcome_w1": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.outcome_w2": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "outcome_w2": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.perfect_goodness_compossible_with_libertarian_freedom": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "perfect_goodness_compossible_with_libertarian_freedom": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.pre_correction_psr_vacuously_provable_by_synthetic_candidate": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "pre_correction_psr_vacuously_provable_by_synthetic_candidate": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.prior_irrefl": [],
+  "prior_irrefl": [],
   "Logos.OntologicalIncompleteness.priorityWithoutBoundary": [],
+  "priorityWithoutBoundary": [],
   "Logos.OntologicalIncompleteness.priorityWithoutBoundary_wf": [],
+  "priorityWithoutBoundary_wf": [],
   "Logos.OntologicalIncompleteness.rational_actualization_distinct_from_outcome_fixed": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound"
   ],
+  "rational_actualization_distinct_from_outcome_fixed": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.OntologicalIncompleteness.rational_agency_incompatible_with_blind_physicalism": [],
+  "rational_agency_incompatible_with_blind_physicalism": [],
   "Logos.OntologicalIncompleteness.rational_determination_distinct_from_necessitating_mode": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "rational_determination_distinct_from_necessitating_mode": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.rational_determination_does_not_imply_circularity": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "rational_determination_does_not_imply_circularity": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.rational_determination_does_not_imply_necessitating_mode": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "rational_determination_does_not_imply_necessitating_mode": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.rational_determination_does_not_violate_contrastive_psr": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "rational_determination_does_not_violate_contrastive_psr": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.rational_forcing_in_priority_dilemma": [],
+  "rational_forcing_in_priority_dilemma": [],
   "Logos.OntologicalIncompleteness.rational_intellectualist_control_model": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "rational_intellectualist_control_model": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.rivalPriority": [],
+  "rivalPriority": [],
   "Logos.OntologicalIncompleteness.rivalPriority_wf": [],
+  "rivalPriority_wf": [],
   "Logos.OntologicalIncompleteness.rivalS": [],
+  "rivalS": [],
   "Logos.OntologicalIncompleteness.rival_entities_distinct": [],
+  "rival_entities_distinct": [],
   "Logos.OntologicalIncompleteness.rival_ground_model_satisfies_neutral_psr_but_fails_scope": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "rival_ground_model_satisfies_neutral_psr_but_fails_scope": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.rival_node_totality": [],
+  "rival_node_totality": [],
   "Logos.OntologicalIncompleteness.route1_intrinsic_fixing_contradicts_contingency": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "route1_intrinsic_fixing_contradicts_contingency": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.route2_priority_conditioning_dilemma": [],
+  "route2_priority_conditioning_dilemma": [],
   "Logos.OntologicalIncompleteness.route3_teleological_explanation_properties": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "route3_teleological_explanation_properties": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.simplicity_entails_foundational_unicity": [
-    "Agency.Subject"
+    "Logos.Agency.Subject"
+  ],
+  "simplicity_entails_foundational_unicity": [
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.strictOutcomePreference": [],
+  "strictOutcomePreference": [],
   "Logos.OntologicalIncompleteness.strict_evaluative_contrastive_fails_on_equal_goods": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "strict_evaluative_contrastive_fails_on_equal_goods": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.strong_forcing_dilemma_and_role_of_sovereignty": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "strong_forcing_dilemma_and_role_of_sovereignty": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.substantiveCountermodelT": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "substantiveCountermodelT": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.substantive_rational_intellectualist_control_model": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "substantive_rational_intellectualist_control_model": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.synthetic_candidate_without_constitutive_priority_fails_psr": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "synthetic_candidate_without_constitutive_priority_fails_psr": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.system_outcome_diff_iff": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "system_outcome_diff_iff": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.toyConstitutiveOfTotality": [],
+  "toyConstitutiveOfTotality": [],
   "Logos.OntologicalIncompleteness.toyGroundsTotality": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "toyGroundsTotality": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.toyInternalGroundsTotality": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "toyInternalGroundsTotality": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.toyPriority": [],
+  "toyPriority": [],
   "Logos.OntologicalIncompleteness.toyPriority_trans": [],
+  "toyPriority_trans": [],
   "Logos.OntologicalIncompleteness.toyPriority_wf": [],
+  "toyPriority_wf": [],
   "Logos.OntologicalIncompleteness.triCfg0": [],
+  "triCfg0": [],
   "Logos.OntologicalIncompleteness.triCfg0_ne_triCfg1": [],
+  "triCfg0_ne_triCfg1": [],
   "Logos.OntologicalIncompleteness.triCfg0_ne_triCfg2": [],
+  "triCfg0_ne_triCfg2": [],
   "Logos.OntologicalIncompleteness.triCfg1": [],
+  "triCfg1": [],
   "Logos.OntologicalIncompleteness.triCfg1_ne_triCfg2": [],
+  "triCfg1_ne_triCfg2": [],
   "Logos.OntologicalIncompleteness.triCfg2": [],
+  "triCfg2": [],
   "Logos.OntologicalIncompleteness.triChoosesOutcomeAt": [],
+  "triChoosesOutcomeAt": [],
   "Logos.OntologicalIncompleteness.triConfigurationValue": [],
+  "triConfigurationValue": [],
   "Logos.OntologicalIncompleteness.triConfigurationValue_le_one": [],
+  "triConfigurationValue_le_one": [],
   "Logos.OntologicalIncompleteness.triIsEvaluativelyMaximal": [],
+  "triIsEvaluativelyMaximal": [],
   "Logos.OntologicalIncompleteness.triModalCfgActual": [],
+  "triModalCfgActual": [],
   "Logos.OntologicalIncompleteness.triModalCfgDivergent": [],
+  "triModalCfgDivergent": [],
   "Logos.OntologicalIncompleteness.triModalPriority": [],
+  "triModalPriority": [],
   "Logos.OntologicalIncompleteness.triModalPriority_wf": [],
+  "triModalPriority_wf": [],
   "Logos.OntologicalIncompleteness.triModalS": [],
+  "triModalS": [],
   "Logos.OntologicalIncompleteness.triModalS_contingent": [],
+  "triModalS_contingent": [],
   "Logos.OntologicalIncompleteness.triModalS_contingent_divergent_config": [],
+  "triModalS_contingent_divergent_config": [],
   "Logos.OntologicalIncompleteness.triModalS_psr": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triModalS_psr": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triModalT": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triModalT": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triModalT_acts_freely": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triModalT_acts_freely": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triModalT_agential_bridge": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triModalT_agential_bridge": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triModalT_causal_access": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triModalT_causal_access": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triModalT_determination_coherence": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triModalT_determination_coherence": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triModalT_explains_actual": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triModalT_explains_actual": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triModalT_explains_divergent": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triModalT_explains_divergent": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triModalT_explains_uninstantiated": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triModalT_explains_uninstantiated": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triModalT_nature_invariant": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triModalT_nature_invariant": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triModalT_scope": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triModalT_scope": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triOutcomePreference": [],
+  "triOutcomePreference": [],
   "Logos.OntologicalIncompleteness.triOutcomeValue": [],
+  "triOutcomeValue": [],
   "Logos.OntologicalIncompleteness.triOutcomeValue_le_one": [],
+  "triOutcomeValue_le_one": [],
   "Logos.OntologicalIncompleteness.triPriority": [],
+  "triPriority": [],
   "Logos.OntologicalIncompleteness.triPriority_trans": [],
+  "triPriority_trans": [],
   "Logos.OntologicalIncompleteness.triPriority_wf": [],
+  "triPriority_wf": [],
   "Logos.OntologicalIncompleteness.triProvidesContrastiveJustification": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triProvidesContrastiveJustification": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triReasonsFavor": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triReasonsFavor": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triStrictOutcomePreference": [],
+  "triStrictOutcomePreference": [],
   "Logos.OntologicalIncompleteness.triWorldS": [],
+  "triWorldS": [],
   "Logos.OntologicalIncompleteness.triWorldS_contingent": [],
+  "triWorldS_contingent": [],
   "Logos.OntologicalIncompleteness.triWorldS_psr": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triWorldS_psr": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triWorldT": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triWorldT": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triWorldT_acts_freely": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triWorldT_acts_freely": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triWorldT_fails_complete_rational_determination": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triWorldT_fails_complete_rational_determination": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triWorldT_nature_invariant": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triWorldT_nature_invariant": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triWorldT_not_necessitating": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triWorldT_not_necessitating": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triWorldT_perfect_rational_goodness": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triWorldT_perfect_rational_goodness": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.triWorldT_ultimate": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "triWorldT_ultimate": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.tri_modal_principles_jointly_satisfiable": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "tri_modal_principles_jointly_satisfiable": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.true_is_maximal": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "true_is_maximal": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.unexplained_absence_fails_explanation": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "unexplained_absence_fails_explanation": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.unexplained_absence_fails_psr": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "unexplained_absence_fails_psr": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.unfounded_boundary_model_fails_causal_determination": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "unfounded_boundary_model_fails_causal_determination": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.unified_actualization_compossible_with_non_forcing": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "unified_actualization_compossible_with_non_forcing": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.unified_actualization_refutes_libertarian_freedom": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "unified_actualization_refutes_libertarian_freedom": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.universalGroundToCandidate": [
-    "Agency.Subject"
+    "Logos.Agency.Subject"
+  ],
+  "universalGroundToCandidate": [
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.universalGroundToCandidate_ground": [
-    "Agency.Subject"
+    "Logos.Agency.Subject"
+  ],
+  "universalGroundToCandidate_ground": [
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.universal_ground_chain_terminus_unicity": [
-    "Agency.Means",
-    "Agency.Subject"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "universal_ground_chain_terminus_unicity": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.universal_ground_governance_yields_free_personal_source": [
     "propext",
-    "choice",
+    "Classical.choice",
     "Quot.sound",
-    "Agency.Means",
-    "Agency.Subject"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "universal_ground_governance_yields_free_personal_source": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.universal_ground_modal_profile_holds": [
-    "Agency.Means",
-    "Agency.Subject"
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "universal_ground_modal_profile_holds": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.universal_grounding_of_ultimate_ground": [
     "propext",
-    "choice",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "universal_grounding_of_ultimate_ground": [
+    "propext",
+    "Classical.choice",
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.unjustified_alternative_fails_contrastive_at": [],
-  "Logos.OntologicalIncompleteness.well_founded_irrefl": []
+  "unjustified_alternative_fails_contrastive_at": [],
+  "Logos.OntologicalIncompleteness.well_founded_irrefl": [],
+  "well_founded_irrefl": [],
+  "Logos.Person.Person": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "Person": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "Logos.OntologicalIncompleteness.Person": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject"
+  ],
+  "Logos.RetorsiveBridgeInvestigation.ActAncestralDeterminationIsAgential": [],
+  "ActAncestralDeterminationIsAgential": [],
+  "Logos.OntologicalIncompleteness.ActAncestralDeterminationIsAgential": [],
+  "Logos.RetorsiveBridgeInvestigation.DenialOfFreedomAssertion": [],
+  "DenialOfFreedomAssertion": [],
+  "Logos.OntologicalIncompleteness.DenialOfFreedomAssertion": [],
+  "Logos.RetorsiveBridgeInvestigation.DeterminationExhaustive": [],
+  "DeterminationExhaustive": [],
+  "Logos.OntologicalIncompleteness.DeterminationExhaustive": [],
+  "Logos.RetorsiveBridgeInvestigation.DeterminationReceivedFromPriorState": [],
+  "DeterminationReceivedFromPriorState": [],
+  "Logos.OntologicalIncompleteness.DeterminationReceivedFromPriorState": [],
+  "Logos.RetorsiveBridgeInvestigation.EpistemicAssertion": [],
+  "EpistemicAssertion": [],
+  "Logos.OntologicalIncompleteness.EpistemicAssertion": [],
+  "Logos.RetorsiveBridgeInvestigation.EpistemicSubject": [],
+  "EpistemicSubject": [],
+  "Logos.OntologicalIncompleteness.EpistemicSubject": [],
+  "Logos.RetorsiveBridgeInvestigation.ExternalNodeFixedByPriorState": [],
+  "ExternalNodeFixedByPriorState": [],
+  "Logos.OntologicalIncompleteness.ExternalNodeFixedByPriorState": [],
+  "Logos.RetorsiveBridgeInvestigation.HasCounterfactualChoice": [],
+  "HasCounterfactualChoice": [],
+  "Logos.OntologicalIncompleteness.HasCounterfactualChoice": [],
+  "Logos.RetorsiveBridgeInvestigation.IncompatibilistJustificationBridge": [],
+  "IncompatibilistJustificationBridge": [],
+  "Logos.OntologicalIncompleteness.IncompatibilistJustificationBridge": [],
+  "Logos.RetorsiveBridgeInvestigation.IsRationallyJustified": [],
+  "IsRationallyJustified": [],
+  "Logos.OntologicalIncompleteness.IsRationallyJustified": [],
+  "Logos.RetorsiveBridgeInvestigation.JudgmentDeterminationContext": [],
+  "JudgmentDeterminationContext": [],
+  "Logos.OntologicalIncompleteness.JudgmentDeterminationContext": [],
+  "Logos.RetorsiveBridgeInvestigation.JustificationInstantiatesConstitutiveChain": [],
+  "JustificationInstantiatesConstitutiveChain": [],
+  "Logos.OntologicalIncompleteness.JustificationInstantiatesConstitutiveChain": [],
+  "Logos.RetorsiveBridgeInvestigation.LibertarianFreeChoiceAt": [],
+  "LibertarianFreeChoiceAt": [],
+  "Logos.OntologicalIncompleteness.LibertarianFreeChoiceAt": [],
+  "Logos.RetorsiveBridgeInvestigation.MechanicallyForced": [],
+  "MechanicallyForced": [],
+  "Logos.OntologicalIncompleteness.MechanicallyForced": [],
+  "Logos.RetorsiveBridgeInvestigation.ModalEpistemicContext": [],
+  "ModalEpistemicContext": [],
+  "Logos.OntologicalIncompleteness.ModalEpistemicContext": [],
+  "Logos.RetorsiveBridgeInvestigation.NormativelySensitive": [],
+  "NormativelySensitive": [],
+  "Logos.OntologicalIncompleteness.NormativelySensitive": [],
+  "Logos.RetorsiveBridgeInvestigation.RationalJustification": [],
+  "RationalJustification": [],
+  "Logos.OntologicalIncompleteness.RationalJustification": [],
+  "Logos.RetorsiveBridgeInvestigation.UniversalDenialOfFreedom": [],
+  "UniversalDenialOfFreedom": [],
+  "Logos.OntologicalIncompleteness.UniversalDenialOfFreedom": [],
+  "Logos.RetorsiveBridgeInvestigation.VerdictTracksAlternative": [],
+  "VerdictTracksAlternative": [],
+  "Logos.OntologicalIncompleteness.VerdictTracksAlternative": [],
+  "Logos.RetorsiveBridgeInvestigation.alternative_verdict_yields_libertarian_choice": [],
+  "alternative_verdict_yields_libertarian_choice": [],
+  "Logos.OntologicalIncompleteness.alternative_verdict_yields_libertarian_choice": [],
+  "Logos.RetorsiveBridgeInvestigation.constitutive_act_determination_incompatible_with_mechanical_forcing": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "constitutive_act_determination_incompatible_with_mechanical_forcing": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.OntologicalIncompleteness.constitutive_act_determination_incompatible_with_mechanical_forcing": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.RetorsiveBridgeInvestigation.constitutive_determination_excludes_mechanical_forcing_and_yields_choice": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "constitutive_determination_excludes_mechanical_forcing_and_yields_choice": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.OntologicalIncompleteness.constitutive_determination_excludes_mechanical_forcing_and_yields_choice": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.RetorsiveBridgeInvestigation.determination_pipeline_yields_libertarian_choice": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "determination_pipeline_yields_libertarian_choice": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.OntologicalIncompleteness.determination_pipeline_yields_libertarian_choice": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.RetorsiveBridgeInvestigation.divergence_propagates_to_verdict": [],
+  "divergence_propagates_to_verdict": [],
+  "Logos.OntologicalIncompleteness.divergence_propagates_to_verdict": [],
+  "Logos.RetorsiveBridgeInvestigation.non_empty_countermodel_justified_denial_without_freedom": [],
+  "non_empty_countermodel_justified_denial_without_freedom": [],
+  "Logos.OntologicalIncompleteness.non_empty_countermodel_justified_denial_without_freedom": [],
+  "Logos.RetorsiveBridgeInvestigation.non_received_determination_excludes_mechanical_forcing": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "non_received_determination_excludes_mechanical_forcing": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.OntologicalIncompleteness.non_received_determination_excludes_mechanical_forcing": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.RetorsiveBridgeInvestigation.normative_sensitivity_implies_libertarian_choice_direct": [],
+  "normative_sensitivity_implies_libertarian_choice_direct": [],
+  "Logos.OntologicalIncompleteness.normative_sensitivity_implies_libertarian_choice_direct": [],
+  "Logos.RetorsiveBridgeInvestigation.not_received_yields_accessible_divergence": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "not_received_yields_accessible_divergence": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.OntologicalIncompleteness.not_received_yields_accessible_divergence": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.RetorsiveBridgeInvestigation.rational_justification_compossible_with_prior_fixed_verdict": [],
+  "rational_justification_compossible_with_prior_fixed_verdict": [],
+  "Logos.OntologicalIncompleteness.rational_justification_compossible_with_prior_fixed_verdict": [],
+  "Logos.RetorsiveBridgeInvestigation.reaches_judgment_act_implies_reaches_verdict": [],
+  "reaches_judgment_act_implies_reaches_verdict": [],
+  "Logos.OntologicalIncompleteness.reaches_judgment_act_implies_reaches_verdict": [],
+  "Logos.RetorsiveBridgeInvestigation.reaches_propagates_outcome": [],
+  "reaches_propagates_outcome": [],
+  "Logos.OntologicalIncompleteness.reaches_propagates_outcome": [],
+  "Logos.RetorsiveBridgeInvestigation.retorsive_contradiction": [],
+  "retorsive_contradiction": [],
+  "Logos.OntologicalIncompleteness.retorsive_contradiction": [],
+  "Logos.RetorsiveBridgeInvestigation.retorsive_justification_with_chain_excludes_mechanical_forcing": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "retorsive_justification_with_chain_excludes_mechanical_forcing": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.OntologicalIncompleteness.retorsive_justification_with_chain_excludes_mechanical_forcing": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.RetorsiveBridgeInvestigation.subject_source_yields_not_mechanically_forced": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "subject_source_yields_not_mechanically_forced": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.OntologicalIncompleteness.subject_source_yields_not_mechanically_forced": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "Logos.RetorsiveBridgeInvestigation.ultimate_agential_source_not_received_from_prior_state": [],
+  "ultimate_agential_source_not_received_from_prior_state": [],
+  "Logos.OntologicalIncompleteness.ultimate_agential_source_not_received_from_prior_state": [],
+  "Logos.TrinitarianSubjectBridge.DivineRole": [],
+  "DivineRole": [],
+  "Logos.OntologicalIncompleteness.DivineRole": [],
+  "Logos.TrinitarianSubjectBridge.DivineSubjectRole": [
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ],
+  "DivineSubjectRole": [
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ],
+  "Logos.OntologicalIncompleteness.DivineSubjectRole": [
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole"
+  ],
+  "Logos.TrinitarianSubjectBridge.three_divine_persons_exist_with_roles": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+    "Logos.TrinitarianSubjectBridge.three_divine_persons_exist_with_roles"
+  ],
+  "three_divine_persons_exist_with_roles": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+    "Logos.TrinitarianSubjectBridge.three_divine_persons_exist_with_roles"
+  ],
+  "Logos.OntologicalIncompleteness.three_divine_persons_exist_with_roles": [
+    "Logos.Agency.Means",
+    "Logos.Agency.Subject",
+    "Logos.TrinitarianSubjectBridge.DivineSubjectRole",
+    "Logos.TrinitarianSubjectBridge.three_divine_persons_exist_with_roles"
+  ]
 }

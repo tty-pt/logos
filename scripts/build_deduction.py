@@ -50,6 +50,10 @@ HEADLINE_THEOREMS = [
     ("simplicity_entails_foundational_unicity", "Theorem: Divine Simplicity Entails Foundational Unicity"),
     ("free_personal_source_escapes_modal_collapse", "Theorem: Resolution of van Inwagen's Modal Collapse Dilemma"),
     ("cremation_c11_occasionalism", "Cremation C11: Refutation of Occasionalism (Secondary Causality Preserved)"),
+    ("omnipotence_excludes_logical_contradiction", "Resolution of the Omnipotence Paradox (Contradiction Exclusion)"),
+    ("absolute_nothingness_cannot_self_actualize", "Ex Nihilo Nihil Fit: Absolute Nothingness Cannot Self-Actualize"),
+    ("rational_agency_incompatible_with_blind_physicalism", "Argument from Reason: Intentional Agency Excludes Blind Reductionism"),
+    ("cessation_of_grounding_entails_system_annihilation", "Creatio Continua: Cessation of Grounding Entails Annihilation"),
     ("concrete_system_cannot_be_fully_internally_determined", "Impossibility of Internal Concrete Self-Determination"),
     ("infinite_regress_cannot_self_ground", "Impossibility of Infinite Regress Self-Grounding"),
     ("consequence_dependent_mode_fails_well_foundedness", "Refutation of Consequence Circularity"),
@@ -556,11 +560,12 @@ def render_ascii_flowchart() -> str:
                       +-------------------------------------------------------+
                                                   |
                      +----------------------------+----------------------------+
-                     |                                                         |
-                     v                                                         v
-        [DEISM / REMOTE CAUSE (C10)]                              [MONOLITHIC UNITARIANISM (C9)]
-         Lacks concurrent mediated scope                          Solitary person lacks eternal love
-         cremation_c10_deism (Countermodel A)                     cremation_c9_monolithic_unitarianism
+                     |                            |                            |
+                     v                            v                            v
+        [DEISM / REMOTE CAUSE (C10)]   [MONOLITHIC MONAD (C9)]    [OCCASIONALISM (C11)]
+         Lacks mediated scope           Solitary person lacks      Denies secondary causes
+         cremation_c10_deism            eternal love               cremation_c11_occasionalism
+                                        cremation_c9               COLLAPSE
                                                   |
                                                   v
                       +-------------------------------------------------------+
@@ -572,8 +577,11 @@ def render_ascii_flowchart() -> str:
                       +-------------------------------------------------------+
                       |                 DIVINE REALITY                        |
                       |   free_personal_source_instantiates_divine_reality    |
-                      |   [Aseity * Transcendence * Immanence * Unicity       |
-                      |    Sovereign Freedom * Omniscience * Agape * Trinity] |
+                      |   [15 Derived Characteristics: Aseity, Transcendence, |
+                      |    Immanence, Unicity, Simplicity, Immutability,      |
+                      |    Actus Purus, Omnipotence, Omniscience, Freedom,    |
+                      |    Intentionality, Incorporeality, Anti-Pantheism,    |
+                      |    Supreme Goodness, Trinitarian Communion]           |
                       +-------------------------------------------------------+
 ```
 """
@@ -734,13 +742,14 @@ flowchart TD
 
     AF --> P4["Phase 4: Transmission & Source Integration"]
     P4 --> ET["ExplanatoryTransmission"]:::step
+    P4 -.->|Refutes| C11["C11: Occasionalism<br/><b>COLLAPSE</b>"]:::crem
     P4 -.->|Refutes| C10["C10: Deism / Remote Cause<br/><b>🧱 BOUND</b>"]:::crem
     P4 -.->|Refutes| C9["C9: Monolithic Unitarianism<br/><b>COLLAPSE</b>"]:::crem
     P4 -.->|Refutes| C8["C8: Nominalist Voluntarism<br/><b>COLLAPSE</b>"]:::crem
 
-    ET --> TIER3["Tier 3: FREE PERSONAL SOURCE<br/><b>eliminative_foundation_derives_free_personal_source</b>"]:::master
+    ET --> TIER3["Tier 3: FREE PERSONAL SOURCE<br/><b>eliminative_foundation_derives_free_personal_source_under_transmission</b>"]:::master
 
-    TIER3 --> DR["DIVINE REALITY<br/><b>free_personal_source_instantiates_divine_reality</b><br/>Aseity • Transcendence • Immanence • Unicity<br/>Sovereign Freedom • Omniscience • Agape • Trinity"]:::attr
+    TIER3 --> DR["DIVINE REALITY (15 Characteristics)<br/><b>free_personal_source_instantiates_divine_reality</b><br/>Aseity • Transcendence • Immanence • Unicity • Simplicity<br/>Immutability • Actus Purus • Omnipotence • Omniscience<br/>Sovereign Freedom • Intentionality • Incorporeality<br/>Anti-Pantheism • Supreme Goodness • Trinitarian Communion"]:::attr
 ```
 """
 
@@ -777,7 +786,16 @@ def main():
         "> *Which kind of ultimate ground can explain why a contingent concrete reality obtains rather than an accessible alternative,\n",
         "> without leaving the divergence brute, entering circularity or infinite regress, or necessitating the outcome so that contingency disappears?*\n",
         ">\n",
-        "> Under Γ's declared premises, all competing candidates fail. The Free Personal Source is the unique surviving candidate.\n\n",
+        "> Under Γ's declared premises, all competing candidates fail. The Free Personal Source is the unique surviving candidate.\n",
+        ">\n",
+        "> **Key Mathematical & Metaphysical Advances in logos4 (0 Substantive Axioms):**\n",
+        "> 1. **Resolution of van Inwagen's Modal Collapse Dilemma** ([`free_personal_source_escapes_modal_collapse`](formal/Logos/Source.lean#L2626)): Contingency is preserved without collapsing into Spinozistic fatalism ($p \\to \\Box p$);\n",
+        "> 2. **Derivation of Divine Unicity from Simplicity** ([`simplicity_entails_foundational_unicity`](formal/Logos/Source.lean#L2603)): Monotheism is proven directly from mereological non-compositeness;\n",
+        "> 3. **Resolution of the Omnipotence Paradox** ([`omnipotence_excludes_logical_contradiction`](formal/Logos/Source.lean#L2651)): Foundational omnipotence excludes contradictory nullities ($P \\wedge \\neg P$) by logical necessity (Aquinas *ST* I q. 25 a. 3);\n",
+        "> 4. **Ex Nihilo Nihil Fit** ([`absolute_nothingness_cannot_self_actualize`](formal/Logos/Source.lean#L2676)): Absolute non-being cannot self-transition into concrete actuality;\n",
+        "> 5. **Argument from Reason** ([`rational_agency_incompatible_with_blind_physicalism`](formal/Logos/Source.lean#L2696)): Intentional teleological agency is strictly incompatible with blind mechanical reductionism (Lewis & Plantinga);\n",
+        "> 6. **Creatio Continua & Conservation** ([`cessation_of_grounding_entails_system_annihilation`](formal/Logos/Source.lean#L2719)): Sustaining presence of the Ground is necessary for continuous concrete existence;\n",
+        "> 7. **Refutation of Occasionalism (C11)** ([`cremation_c11_occasionalism`](formal/Logos/Source.lean#L2947)): Primary grounding operates concurrently, preserving real secondary causality.\n\n",
         render_mermaid_diagram(),
         "\n",
         "## Badge Legend\n\n",
@@ -793,7 +811,7 @@ def main():
         "1. **`System.lean`**: Concrete systems, constitutive priority, topologies, and impossibility theorems.\n",
         "2. **`Elimination.lean`**: Contrastive PSR, modal contingency, aseity, and transmission scope.\n",
         "3. **`Agency.lean`**: Action-theoretic realization, intentional choice derivation, `ActsFreely`, and **Tier 1 Master Eliminative Theorem** (`eliminative_existential_derives_unforced_personal_agent`).\n",
-        "4. **`Source.lean`**: Transcendent agential correspondence, **Tier 2** (`intermediate_existential_derives_unforced_personal_source`), **Tier 3** (`eliminative_foundation_derives_free_personal_source_under_transmission`), Master Characterization Theorem (`free_personal_source_instantiates_divine_reality`), 10 Cremation theorems, and independence Models A & B.\n\n",
+        "4. **`Source.lean`**: Transcendent agential correspondence, **Tier 2** (`intermediate_existential_derives_unforced_personal_source`), **Tier 3** (`eliminative_foundation_derives_free_personal_source_under_transmission`), Master Characterization Theorem (`free_personal_source_instantiates_divine_reality` with 15 characteristics), 11 Cremation theorems (including Occasionalism C11), and independence Models A & B.\n\n",
         render_step_by_step_argument(all_decls, footprints),
         render_divine_characteristics(),
         render_cremations(is_readme=True),

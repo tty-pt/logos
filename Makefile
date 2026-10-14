@@ -39,6 +39,8 @@ deduction: audit
 
 # Run all verification checks
 test: consistency audit deduction
+	@echo "=== Running automated regression test suite ==="
+	$(PYTHON) scripts/test_pipeline.py
 	@echo "=== All tests passed successfully ==="
 
 # Clean build artifacts

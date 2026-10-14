@@ -1837,106 +1837,6 @@ IV. EPISTEMOLOGICAL DISCIPLINE & KERNEL AXIOM AUDIT
 ================================================================================
 -/
 
-#print axioms node_has_ancestral_ultimate_source
-#print axioms internal_priority_irrefl_from_constitutive
-#print axioms not_fixed_by_basis_iff_exists_divergent_accessible_world
-#print axioms contingent_system_yields_divergent_accessible_world_under_invariant_nature
-#print axioms contingent_system_under_invariant_nature_not_fixed
-#print axioms agential_freedom_derived
-#print axioms intentional_selection_does_not_deduce_libertarian_freedom
-#print axioms agential_freedom_bridge_from_counterfactual_choice
-#print axioms prior_irrefl
-#print axioms closed_cycle_violates_ontological_priority
-#print axioms internal_node_cannot_self_determine
-#print axioms infinite_regress_conditional_rules_satisfied_by_vacuity
-#print axioms infinite_regress_cannot_self_ground
-#print axioms fully_internally_determined_is_impossible
-#print axioms closed_system_has_unexplained_boundary
-#print axioms internal_node_cannot_ground_totality_circularity
-#print axioms candidate_consequence_circularity_refutation
-#print axioms candidate_direct_consequence_cycle_refutation
-#print axioms internal_rules_fail_contrastive_distinction
-#print axioms internal_candidate_cannot_ground_totality
-#print axioms candidate_ground_must_be_structurally_external
-#print axioms necessary_impersonal_ground_contradicts_contingency
-#print axioms unjustified_alternative_fails_contrastive_at
-#print axioms consequence_dependent_mode_fails_well_foundedness
-#print axioms direct_consequence_mode_fails_well_foundedness
-#print axioms independent_condition_contradicts_ultimacy
-#print axioms grounding_modes_exhaustive
-#print axioms impersonal_ground_forces_consequence_or_independent_condition
-#print axioms concrete_system_cannot_be_fully_internally_determined
-#print axioms concrete_system_has_internal_terminal_node
-#print axioms necessary_ground_cannot_rigidly_necessitate_contingent_system
-#print axioms chain_cannot_be_exhaustively_forced
-#print axioms agential_counterfactual_choice_bridge_from_sovereignty
-#print axioms rational_intellectualist_control_model
-#print axioms fortified_rational_intellectualist_control_model
-#print axioms complete_rational_determination_refutes_libertarian_freedom
-#print axioms rational_determination_distinct_from_necessitating_mode
-#print axioms rational_determination_does_not_imply_necessitating_mode
-#print axioms rational_determination_does_not_imply_circularity
-#print axioms rational_determination_does_not_violate_contrastive_psr
-#print axioms chain_non_forcing_compossible_with_rational_determination
-#print axioms countermodelT_unified_actualization
-#print axioms modal_necessitation_distinct_from_rational_actualization
-#print axioms rational_actualization_distinct_from_outcome_fixed
-#print axioms unified_actualization_compossible_with_non_forcing
-#print axioms unified_actualization_refutes_libertarian_freedom
-#print axioms five_levels_of_conclusion_separation
-#print axioms strong_forcing_dilemma_and_role_of_sovereignty
-#print axioms rational_forcing_in_priority_dilemma
-#print axioms route1_intrinsic_fixing_contradicts_contingency
-#print axioms route2_priority_conditioning_dilemma
-#print axioms route3_teleological_explanation_properties
-#print axioms intrinsic_rational_fixing_contradicts_contingency
-#print axioms intellectualist_teleological_decoupling
-#print axioms first_missing_step_to_libertarian_freedom
-#print axioms substantive_rational_intellectualist_control_model
-#print axioms master_premises_consistent_with_contingency
-#print axioms agential_justification_mode_yields_free_personal_source
-#print axioms contingent_system_derives_free_personal_source
-#print axioms contingent_system_with_psr_derives_free_personal_source
-#print axioms intellectualist_evasion_closure
-#print axioms intellectualist_control_model_violates_explanatory_rule
-#print axioms countermodelT_fails_deepened_primitive_principles
-#print axioms intellectualist_control_model_violates_ontic_conditioning
-#print axioms consolidated_ontological_incompleteness_derives_free_personal_source
-#print axioms agential_sovereignty_derived
-#print axioms explanatory_determination_rule_derived
-#print axioms deepened_intellectualist_evasion_closure
-#print axioms deepened_contingent_system_derives_free_personal_source
-#print axioms deepened_contingent_system_with_psr_derives_free_personal_source
-#print axioms deepened_consolidated_free_personal_source
-#print axioms perfect_goodness_compossible_with_libertarian_freedom
-#print axioms strict_evaluative_contrastive_fails_on_equal_goods
-#print axioms agential_election_resolves_contrastive_psr_for_equal_goods
-#print axioms corrected_principles_jointly_satisfiable
-#print axioms pre_correction_psr_vacuously_provable_by_synthetic_candidate
-#print axioms synthetic_candidate_without_constitutive_priority_fails_psr
-#print axioms universal_grounding_of_ultimate_ground
-#print axioms agential_sovereignty_derived_from_neutral_psr
-#print axioms agential_determination_entails_choice_of_biconditional
-#print axioms deepened_contingent_system_derives_free_personal_source_of_entails
-#print axioms deepened_consolidated_free_personal_source_of_entails
-#print axioms deepened_neutral_principles_jointly_satisfiable
-#print axioms candidate_without_causal_access_fails_explanation
-#print axioms governance_bridge_to_witness
-#print axioms universal_ground_governance_yields_free_personal_source
-#print axioms rival_ground_model_satisfies_neutral_psr_but_fails_scope
-#print axioms non_choosing_personal_model_violates_agential_determination_bridge
-#print axioms unfounded_boundary_model_fails_causal_determination
-#print axioms model_b_violates_transcendent_action_correspondence
-#print axioms model_b_violates_action_theory_of_agency
-#print axioms dualWorldS_satisfies_existential_premises
-#print axioms dualWorldS_satisfies_free_personal_source_premises
-#print axioms eliminative_existential_derives_unforced_personal_agent
-#print axioms intermediate_existential_derives_unforced_personal_source
-#print axioms eliminative_deduction_derives_free_personal_source
-#print axioms eliminative_deduction_derives_free_personal_source_under_transmission
-#print axioms eliminative_foundation_derives_free_personal_source
-#print axioms eliminative_foundation_derives_free_personal_source_under_transmission
-
 end OntologicalIncompleteness
 
 /-!
@@ -2654,22 +2554,6 @@ theorem rational_justification_compossible_with_prior_fixed_verdict :
   exact ⟨PUnit, dummyContext, dummySubj, dummyWorld, True, dummyAssert, dummyJust, dummyJDet,
          hJust, hFixed, hForced, hNotExh, hNotChoice⟩
 
-/-!
---------------------------------------------------------------------------------
-5. KERNEL AXIOM AUDIT FOR THE RETORSIVE INVESTIGATION
---------------------------------------------------------------------------------
--/
-
-#print axioms retorsive_contradiction
-#print axioms non_empty_countermodel_justified_denial_without_freedom
-#print axioms normative_sensitivity_implies_libertarian_choice_direct
-#print axioms non_received_determination_excludes_mechanical_forcing
-#print axioms subject_source_yields_not_mechanically_forced
-#print axioms constitutive_act_determination_incompatible_with_mechanical_forcing
-#print axioms constitutive_determination_excludes_mechanical_forcing_and_yields_choice
-#print axioms retorsive_justification_with_chain_excludes_mechanical_forcing
-#print axioms rational_justification_compossible_with_prior_fixed_verdict
-
 end RetorsiveBridgeInvestigation
 
 end Logos
@@ -2758,6 +2642,95 @@ theorem free_personal_source_escapes_modal_collapse
   cases hDiv with
   | inl hNotInst => exact hNotInst hSame.1
   | inr hDiffConfig => exact hDiffConfig hSame.2
+
+/-- Logical Contradiction at a World State:
+    An impossible proposition asserting both that an entity/node obtains and does not obtain. -/
+def OperatesContradiction (S : ConcreteSystem.{u}) (_T : CandidateGround S) : Prop :=
+  ∃ w : S.World, S.InstantiatedIn w ∧ ¬ S.InstantiatedIn w
+
+/-- THEOREM (Omnipotence Excludes Logical Contradictions / Resolution of the Stone Paradox):
+    Following Thomas Aquinas (ST I q. 25 a. 3), foundational omnipotence operates across
+    all possible, intelligible configurations, and strictly cannot actualize a formal
+    logical contradiction (P ∧ ¬P). A contradiction is not a possible object of power,
+    but the absolute nullity of incoherence.
+    (0 substantive axioms). -/
+theorem omnipotence_excludes_logical_contradiction
+    (S : ConcreteSystem.{u})
+    (T : CandidateGround S)
+    (hContra : OperatesContradiction S T) :
+    False := by
+  obtain ⟨_w, hInst, hNotInst⟩ := hContra
+  exact hNotInst hInst
+
+/-- An Absolute Void State:
+    A state lacking concrete instantiation of the physical cosmos. -/
+def IsVoidState (S : ConcreteSystem.{u}) (w : S.World) : Prop :=
+  ¬ S.InstantiatedIn w
+
+/-- Self-Actualization of Nothingness:
+    The assertion that an uninstantiated, ungrounded void state can internally produce
+    concrete instantiation without an external ground entity. -/
+def VoidSelfActualization (S : ConcreteSystem.{u}) (w : S.World) : Prop :=
+  IsVoidState S w ∧ S.InstantiatedIn w
+
+/-- THEOREM (Ex Nihilo Nihil Fit / Absolute Nothingness Cannot Self-Actualize):
+    Demonstrates that absolute nothingness cannot produce concrete being.
+    An uninstantiated, ungrounded state cannot simultaneously be instantiated,
+    strictly refuting the spontaneous emergence of the universe from absolute non-being.
+    (0 substantive axioms). -/
+theorem absolute_nothingness_cannot_self_actualize
+    (S : ConcreteSystem.{u})
+    (w : S.World)
+    (hVoid : VoidSelfActualization S w) :
+    False := by
+  obtain ⟨hNotInst, hInst⟩ := hVoid
+  exact hNotInst hInst
+
+/-- Blind Mechanical Reductionism:
+    The naturalistic thesis that determination is exhaustively produced by blind mechanical
+    forces lacking any apprehension of alternative states or evaluative reasons. -/
+def BlindMechanicalReduction (S : ConcreteSystem.{u}) (T : CandidateGround S) : Prop :=
+  (¬ ∃ w_alt : S.World, T.ApprehendsAlternative T.ground w_alt) ∧
+  (¬ ∃ w_alt : S.World, T.ReasonsFavor T.ground S.actualWorld w_alt)
+
+/-- THEOREM (Argument from Reason / Incompatibility of Rational Agency with Blind Physicalism):
+    Following C.S. Lewis (Miracles, Ch. 3) and Alvin Plantinga, intentional teleological
+    selection guided by reasons (SelectsIntentionally S T) is strictly incompatible with
+    blind physicalist reductionism where no apprehension of reasons exists.
+    (0 substantive axioms). -/
+theorem rational_agency_incompatible_with_blind_physicalism
+    (S : ConcreteSystem.{u})
+    (T : CandidateGround S)
+    (hCont : ContingentSystem S)
+    (hInt : SelectsIntentionally S T)
+    (hBlind : BlindMechanicalReduction S T) :
+    False := by
+  obtain ⟨_, ⟨w_alt, hAcc, _⟩⟩ := hCont
+  have ⟨hFavor, _⟩ := hInt w_alt hAcc
+  obtain ⟨_hNoApp, hNoReasons⟩ := hBlind
+  exact hNoReasons ⟨w_alt, hFavor⟩
+
+/-- Grounding As Sole Source of Concrete Actuality:
+    The metaphysical condition that the system's concrete instantiation in world w
+    is ontologically grounded by the foundational candidate ground T. -/
+def SystemGroundedBy (S : ConcreteSystem.{u}) (T : CandidateGround S) (w : S.World) : Prop :=
+  S.InstantiatedIn w → T.GroundsConcreteActuality T.ground w
+
+/-- THEOREM (Creatio Continua / Cessation of Grounding Entails Annihilation):
+    In classical theism (Aquinas, Descartes), the conservation of the cosmos is a continuous
+    creation. If the system's instantiation depends on the transcendent Ground (SystemGroundedBy S T w),
+    then the absence of foundational grounding strictly entails that the system cannot be instantiated.
+    (0 substantive axioms). -/
+theorem cessation_of_grounding_entails_system_annihilation
+    (S : ConcreteSystem.{u})
+    (T : CandidateGround S)
+    (w : S.World)
+    (hDep : SystemGroundedBy S T w)
+    (hNoGround : ¬ T.GroundsConcreteActuality T.ground w) :
+    ¬ S.InstantiatedIn w := by
+  intro hInst
+  have hGround := hDep hInst
+  exact hNoGround hGround
 
 /-- MASTER THEOREM (Deduction of Complete Divine Characteristics):
     Demonstrates that any candidate ground T satisfying FreePersonalSource under

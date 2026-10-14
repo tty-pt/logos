@@ -19,26 +19,18 @@ jobs:
           curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
           echo "$HOME/.elan/bin" >> $GITHUB_PATH
 
-      - name: Build Lean 4 formalization
+      - name: Build, Audit & Regenerate Surfaces
         run: |
-          cd formal
-          lake --version
-          lake build
+          make all
 
-      - name: Run CLI Auditor
+      - name: Run Automated Regression Tests
         run: |
-          cd formal
-          lake exe logos
+          make test
 
-      - name: Run Kernel Axiom Audit
+      - name: Run CLI Terminal Visualizer
         run: |
-          python3 scripts/audit_footprints.py
-
-      - name: Run Consistency Gates (A, B, S)
-        run: |
-          python3 scripts/check_consistency.py
+          make run
 
       - name: Verify Documentation Synchronization
         run: |
-          python3 scripts/build_deduction.py
-          git diff --exit-code README.md
+          git diff --exit-code README.md investigations/ledger.md
