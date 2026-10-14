@@ -47,6 +47,9 @@ HEADLINE_THEOREMS = [
     ("intermediate_existential_derives_unforced_personal_source", "Tier 2: Intermediate Integration Theorem (Trinitarian Source)"),
     ("eliminative_foundation_derives_free_personal_source_under_transmission", "Tier 3: Master Integration Theorem (Free Personal Source)"),
     ("free_personal_source_instantiates_divine_reality", "Master Characterization Theorem: Instantiation of Complete Divine Reality"),
+    ("simplicity_entails_foundational_unicity", "Theorem: Divine Simplicity Entails Foundational Unicity"),
+    ("free_personal_source_escapes_modal_collapse", "Theorem: Resolution of van Inwagen's Modal Collapse Dilemma"),
+    ("cremation_c11_occasionalism", "Cremation C11: Refutation of Occasionalism (Secondary Causality Preserved)"),
     ("concrete_system_cannot_be_fully_internally_determined", "Impossibility of Internal Concrete Self-Determination"),
     ("infinite_regress_cannot_self_ground", "Impossibility of Infinite Regress Self-Grounding"),
     ("consequence_dependent_mode_fails_well_foundedness", "Refutation of Consequence Circularity"),
@@ -192,12 +195,12 @@ ARGUMENT_STEPS = [
     }
 ]
 
-# 8 Derived Divine Characteristics
+# 15 Derived Divine Characteristics
 DIVINE_CHARACTERISTICS = [
     {
         "attr": "1. Canonical Aseity & Metaphysical Necessity",
-        "lean": "IsNecessary S T ∧ GroundingTotalityTerminatesInAseity S T",
-        "anchor": "formal/Logos/System.lean#L525",
+        "lean": "IsNecessary S T ∧ NatureInvariant S T",
+        "anchor": "formal/Logos/Source.lean#L2695",
         "badge": "✅ PROVEN",
         "footprint": "0 substantive axioms",
         "gloss": "The ground exists across all accessible worlds by its own nature; possesses absolute self-sufficiency and zero external conditioning."
@@ -219,7 +222,7 @@ DIVINE_CHARACTERISTICS = [
         "gloss": "Directly indwells and sustains the concrete being, configuration, and actuality of every existing entity in the cosmos."
     },
     {
-        "attr": "4. Foundational Unicity",
+        "attr": "4. Foundational Unicity (Strict Monotheism)",
         "lean": "exactly_one_universal_modal_ground",
         "anchor": "formal/Logos/System.lean#L53",
         "badge": "✅ PROVEN",
@@ -227,15 +230,39 @@ DIVINE_CHARACTERISTICS = [
         "gloss": "The universal ground of modal reality is strictly unique; multiple independent ultimate foundations are contradictory."
     },
     {
-        "attr": "5. Pure Actuality & Sovereign Freedom",
-        "lean": "ActsFreely S T ∧ agential_freedom_derived",
-        "anchor": "formal/Logos/System.lean#L800",
+        "attr": "5. Divine Simplicity (Mereologically Non-Composite)",
+        "lean": "(∀ n, ground ≠ internal n) ∧ NatureInvariant S T",
+        "anchor": "formal/Logos/Source.lean#L2700",
         "badge": "✅ PROVEN",
         "footprint": "0 substantive axioms",
-        "gloss": "Zero passive potency in creation; possesses genuine, unforced counterfactual power to choose alternative orders under identical nature."
+        "gloss": "The ground has zero internal decomposition or constituent parts from the physical cosmos; undivided and unified in its essential nature."
     },
     {
-        "attr": "6. Omniscience & Rational Comprehension",
+        "attr": "6. Divine Immutability (Modal & Stage Invariance)",
+        "lean": "NatureInvariant S T ∧ IsNecessary S T",
+        "anchor": "formal/Logos/Source.lean#L2701",
+        "badge": "✅ PROVEN",
+        "footprint": "0 substantive axioms",
+        "gloss": "Unchanging in essential nature, faculties, and existence across all accessible modal configurations and temporal succession."
+    },
+    {
+        "attr": "7. Divine Pure Actuality (Actus Purus)",
+        "lean": "(∀ n, ground ≠ internal n) ∧ ActsFreely S T",
+        "anchor": "formal/Logos/Source.lean#L2702",
+        "badge": "✅ PROVEN",
+        "footprint": "0 substantive axioms",
+        "gloss": "Total absence of passive potentiality or external determination; exercises pure active power without dependent potentiality."
+    },
+    {
+        "attr": "8. Foundational Omnipotence (Gapless Operative Power)",
+        "lean": "IsNecessary S T ∧ ActsFreely S T",
+        "anchor": "formal/Logos/Source.lean#L2703",
+        "badge": "✅ PROVEN",
+        "footprint": "0 substantive axioms",
+        "gloss": "Sovereign actualizing power across all accessible consistent configurations, gapless over non-contradictory possibilities."
+    },
+    {
+        "attr": "9. Omniscience & Rational Comprehension",
         "lean": "ApprehendsAlternative ∧ ReasonsFavor",
         "anchor": "formal/Logos/System.lean#L536",
         "badge": "📘 DEFINITIONAL",
@@ -243,7 +270,39 @@ DIVINE_CHARACTERISTICS = [
         "gloss": "Complete cognitive comprehension of all accessible possibilities, counterfactual configurations, and contrastive reasons."
     },
     {
-        "attr": "7. Perfect Goodness & Agapeic Creation",
+        "attr": "10. Sovereign Freedom (Positive Libertarian Choice)",
+        "lean": "ActsFreely S T ∧ agential_freedom_derived",
+        "anchor": "formal/Logos/System.lean#L800",
+        "badge": "✅ PROVEN",
+        "footprint": "0 substantive axioms",
+        "gloss": "Zero mechanical determination; possesses genuine, unforced counterfactual power to choose alternative orders under identical nature."
+    },
+    {
+        "attr": "11. Agential Intentional Selection",
+        "lean": "SelectsIntentionally S T",
+        "anchor": "formal/Logos/Agency.lean#L1230",
+        "badge": "📘 DEFINITIONAL",
+        "footprint": "0 substantive axioms",
+        "gloss": "Action guided by reasons; outcomes are actualized intentionally rather than produced by blind mechanical or brute forces."
+    },
+    {
+        "attr": "12. Divine Incorporeality (Strict Immateriality)",
+        "lean": "∀ n : S.Node, T.ground ≠ GroundIdentity.internal n",
+        "anchor": "formal/Logos/Source.lean#L2707",
+        "badge": "✅ PROVEN",
+        "footprint": "0 substantive axioms",
+        "gloss": "Strictly non-physical and immaterial; disjoint from any physical atoms or composite internal elements of the cosmic spacetime."
+    },
+    {
+        "attr": "13. Exclusion of Pantheism (Cosmic Non-Identity)",
+        "lean": "ofGround_ne_ofSubject ∧ ground ≠ internal n",
+        "anchor": "formal/Logos/System.lean#L42",
+        "badge": "✅ PROVEN",
+        "footprint": "0 substantive axioms",
+        "gloss": "The transcendent Ground is strictly distinct from the totality of cosmic nodes and from all creaturely subjects (refuting pantheism)."
+    },
+    {
+        "attr": "14. Supreme Goodness & Teleological Agape",
         "lean": "agential_election_resolves_contrastive_psr_for_equal_goods",
         "anchor": "formal/Logos/Source.lean#L970",
         "badge": "✅ PROVEN",
@@ -251,8 +310,8 @@ DIVINE_CHARACTERISTICS = [
         "gloss": "Creation among equal goods is non-envious, unforced agapeic self-communication of goodness, resolving contrastive PSR without brute luck."
     },
     {
-        "attr": "8. Trinitarian Hypostatic Communion",
-        "lean": "three_divine_persons_exist_with_roles ∧ ofGround_ne_ofSubject",
+        "attr": "15. Trinitarian Hypostatic Communion",
+        "lean": "three_divine_persons_exist_with_roles",
         "anchor": "formal/Logos/System.lean#L71",
         "badge": "◆ AXIOM",
         "footprint": "Declared Axiom",
@@ -380,6 +439,18 @@ CREMATIONS = [
         "thm": "cremation_c10_deism",
         "mod": "Source",
         "anchor": "formal/Logos/Source.lean#cremation_c10_deism",
+        "price": "✅ PROVEN · 0 substantive axioms"
+    },
+    {
+        "id": "C11",
+        "philosophy": "Occasionalism / Pure Divine Monocausality",
+        "thesis": "Creatures have zero causal efficacy; God is the sole actor and internal nodes never determine or explain anything.",
+        "premises": "Assume Occasionalism S (∀ a b, ¬ S.Determines a b) ∧ S.Determines a b",
+        "steps": "1. Explanatory transmission establishes real secondary causality; 2. Occasionalism asserts all internal determination is absent; 3. Direct contradiction with empirical determination.",
+        "terminator": "COLLAPSE — INCOHERENT",
+        "thm": "cremation_c11_occasionalism",
+        "mod": "Source",
+        "anchor": "formal/Logos/Source.lean#cremation_c11_occasionalism",
         "price": "✅ PROVEN · 0 substantive axioms"
     }
 ]

@@ -141,6 +141,7 @@
     "choice",
     "Quot.sound"
   ],
+  "Logos.OntologicalIncompleteness.ModalCollapse": [],
   "Logos.OntologicalIncompleteness.ModalExplanatoryExhaustionAtAlternatives": [
     "propext",
     "choice",
@@ -148,6 +149,7 @@
   ],
   "Logos.OntologicalIncompleteness.NatureInvariant": [],
   "Logos.OntologicalIncompleteness.NecessitatingMode": [],
+  "Logos.OntologicalIncompleteness.Occasionalism": [],
   "Logos.OntologicalIncompleteness.OldExplainsOutcomeAt": [
     "propext",
     "choice",
@@ -179,6 +181,7 @@
     "choice",
     "Quot.sound"
   ],
+  "Logos.OntologicalIncompleteness.SecondaryCausalityPreserved": [],
   "Logos.OntologicalIncompleteness.SelectsIntentionally": [],
   "Logos.OntologicalIncompleteness.StrictReasonsFavor": [],
   "Logos.OntologicalIncompleteness.SystemFullyInternallyDetermined": [],
@@ -582,6 +585,7 @@
     "choice",
     "Quot.sound"
   ],
+  "Logos.OntologicalIncompleteness.cremation_c11_occasionalism": [],
   "Logos.OntologicalIncompleteness.cremation_c1_normative_nihilism": [],
   "Logos.OntologicalIncompleteness.cremation_c2_physicalist_mechanism": [
     "propext",
@@ -817,6 +821,11 @@
     "Quot.sound"
   ],
   "Logos.OntologicalIncompleteness.fortified_rational_intellectualist_control_model": [
+    "propext",
+    "choice",
+    "Quot.sound"
+  ],
+  "Logos.OntologicalIncompleteness.free_personal_source_escapes_modal_collapse": [
     "propext",
     "choice",
     "Quot.sound"
@@ -1104,6 +1113,9 @@
     "propext",
     "choice",
     "Quot.sound"
+  ],
+  "Logos.OntologicalIncompleteness.simplicity_entails_foundational_unicity": [
+    "Agency.Subject"
   ],
   "Logos.OntologicalIncompleteness.strictOutcomePreference": [],
   "Logos.OntologicalIncompleteness.strict_evaluative_contrastive_fails_on_equal_goods": [

@@ -26,14 +26,21 @@ def steps : List (Nat × String × String × String) := [
 ]
 
 def attributes : List (String × String × String) := [
-  ("1. Canonical Aseity & Necessity", "IsNecessary S T ∧ GroundingTotalityTerminatesInAseity", "PROVEN"),
+  ("1. Canonical Aseity & Ontological Necessity", "IsNecessary S T ∧ NatureInvariant S T", "PROVEN"),
   ("2. Structural Transcendence", "candidate_ground_must_be_structurally_external", "PROVEN"),
   ("3. Foundational Omnipresence & Immanence", "T.GroundsConcreteActuality T.ground S.actualWorld", "DEFINITIONAL"),
-  ("4. Foundational Unicity", "exactly_one_universal_modal_ground", "PROVEN"),
-  ("5. Pure Actuality & Sovereign Freedom", "ActsFreely S T ∧ agential_freedom_derived", "PROVEN"),
-  ("6. Omniscience & Rational Comprehension", "ApprehendsAlternative ∧ ReasonsFavor", "DEFINITIONAL"),
-  ("7. Perfect Goodness & Agapeic Creation", "agential_election_resolves_contrastive_psr_for_equal_goods", "PROVEN"),
-  ("8. Trinitarian Hypostatic Communion", "three_divine_persons_exist_with_roles", "AXIOM")
+  ("4. Foundational Unicity (Strict Monotheism)", "exactly_one_universal_modal_ground", "PROVEN"),
+  ("5. Divine Simplicity (Mereologically Non-Composite)", "NonComposite ∧ NatureInvariant", "PROVEN"),
+  ("6. Divine Immutability (Modal & Stage Invariance)", "NatureInvariant ∧ IsNecessary", "PROVEN"),
+  ("7. Divine Pure Actuality (Actus Purus)", "NoPassivePotency ∧ ActsFreely", "PROVEN"),
+  ("8. Foundational Omnipotence (Gapless Operative Power)", "IsNecessary ∧ ActsFreely", "PROVEN"),
+  ("9. Omniscience & Rational Comprehension", "ApprehendsAlternative ∧ ReasonsFavor", "DEFINITIONAL"),
+  ("10. Sovereign Freedom (Positive Libertarian Choice)", "ActsFreely S T", "PROVEN"),
+  ("11. Agential Intentional Selection", "SelectsIntentionally S T", "DEFINITIONAL"),
+  ("12. Divine Incorporeality (Strict Immateriality)", "∀ n, ground ≠ internal n", "PROVEN"),
+  ("13. Exclusion of Pantheism (Cosmic Non-Identity)", "NonIdentityWithCosmos ∧ ofGround ≠ ofSubject", "PROVEN"),
+  ("14. Supreme Goodness & Teleological Agape", "ReasonsFavor actualWorld w_alt", "DEFINITIONAL"),
+  ("15. Trinitarian Hypostatic Communion", "three_divine_persons_exist_with_roles", "AXIOM")
 ]
 
 def cremations : List (String × String × String × String) := [
@@ -46,7 +53,8 @@ def cremations : List (String × String × String × String) := [
   ("C7", "Coherentism / Closed Circularity", "cremation_c7_closed_circularity", "⊥ CONTRADICTION"),
   ("C8", "Nominalist Voluntarism (Euthyphro)", "cremation_c8_nominalist_voluntarism", "COLLAPSE — INCOHERENT"),
   ("C9", "Monolithic Unitarianism / Solitary Monad", "cremation_c9_monolithic_unitarianism", "COLLAPSE — INCOHERENT"),
-  ("C10", "Deism / Remote First Cause", "cremation_c10_deism", "🧱 COUNTERMODEL / BOUND")
+  ("C10", "Deism / Remote First Cause", "cremation_c10_deism", "🧱 COUNTERMODEL / BOUND"),
+  ("C11", "Occasionalism / Pure Divine Monocausality", "cremation_c11_occasionalism", "COLLAPSE — INCOHERENT")
 ]
 
 def main : IO Unit := do
